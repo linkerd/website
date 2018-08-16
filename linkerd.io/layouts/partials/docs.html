@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 pt-5">
+      {{ partial "sidebar.html" . }}
+    </div>
+
+    <div class="col-md-9 pt-5 border-left docs-content">
+      <h1 class="title">{{ .page.Title }}</h1>
+      <div class="content">{{ .page.Content }}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="dropdown ">
+  <button
+    type="button"
+    class="btn btn-secondary w-100 dropdown-toggle mb-3"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false">
+    {{ if eq .page.Section "1" }}
+      Linkerd 1.x
+    {{ else }}
+      Linkerd 2.x
+    {{ end }}
+  </button>
+  <div class="dropdown-menu w-100">
+    <h6 class="dropdown-header">Linkerd 1.x</h6>
+    <a class="dropdown-item" href="/1/overview/">
+      {{ .page.Site.Params.latest_release_version }}
+    </a>
+    <h6 class="dropdown-header">Linkerd 2.x</h6>
+    <a class="dropdown-item" href="/2/overview/">
+      {{ .page.Site.Params.l5d2_release_version }}
+    </a>
+  </div>
+</div>
+
+<ul class="nav flex-column nav-pills sidebar">
+  {{ $currentPage := .page }}
+  {{ range index .page.Site.Menus .menu }}
+    {{ $shouldExpand :=  or ($currentPage.IsDescendant .Page) (eq .URL $currentPage.URL) }}
+    <li class="nav-item {{ if $shouldExpand }}active{{ end }}">
+      <a
+        href="{{ .URL }}"
+        class="nav-link {{ if $shouldExpand }}active{{ end }}">
+        {{ .Name }}
+      </a>
+      <ul class="nav flex-column nav-pills">
+        {{ if eq .Name "Configuration" }}
+          <li class="nav-item"><a class="nav-link" href="https://api.linkerd.io/latest/linkerd">Linkerd</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://api.linkerd.io/latest/namerd">namerd</a></li>
+        {{ end }}
+
+        {{ if .HasChildren }}
+          {{ range .Children }}
+            {{ $active := eq .URL $currentPage.URL }}
+            <li class="nav-item">
+              <a
+                href="{{ .URL }}"
+                class="pl-4 nav-link {{ if $active }}active{{ end }}">
+                {{ .Name }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </li>
+  {{ end }}
+</ul>
+
+<hr>
+
+<a class="btn btn-outline-primary w-100 mb-3 text-left" href="https://slack.linkerd.io" target="_blank">
+  <img height="20px" src="/images/icon-slack.svg" class="mr-2">
+  <span>Join Linkerd on Slack</span>
+</a>
+
+<a class="btn btn-outline-primary w-100 text-left" href="https://discourse.linkerd.io" target="_blank">
+  <img height="20px" class="mr-2" src="/images/logo_discourse.svg">
+  <span>Join Linkerd on Discourse</span>
+</a>

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Modifies latestReleaseVersion in config.toml
+#
+# usage:
+#
+#   ./release-next-version 0.0.10
+
+set -e
+
+new_version=$1
+release_date=$(date '+%Y-%m-%d')
+
+# Update latest_release_version in config.toml
+echo "Modifying config.toml"
+sed -i '' "s/latest_release_version = \".*\"/latest_release_version = \"${new_version}\"/" config.toml
+sed -i '' "s/latest_release_date = \".*\"/latest_release_date = \"${release_date}\"/" config.toml

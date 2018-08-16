@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    {{ partial "meta.html" . }}
+    <title>Linkerd - {{ .Title }}</title>
+  </head>
+
+  <body>
+    {{ partial "nav.html" . }}
+
+    {{ block "main" . }}{{ end }}
+
+    {{ partial "footer.html" . }}
+
+    {{ block "scripts" . }}{{ end }}
+  </body>
+</html>

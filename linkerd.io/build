@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+BASE_DIR=$(pwd -P)
+CURRENT_SHA=$(git rev-parse --short HEAD)
+
+# Generate CSS
+rm -rf $BASE_DIR/static/css/gen
+/usr/local/bin/sass static/scss/index.scss:static/css/gen/index.css --style compressed
+
+rm -rf $BASE_DIR/public
+hugo

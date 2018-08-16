@@ -1,0 +1,56 @@
+#! /bin/sh
+
+set -eu
+
+LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_LATEST_VERSION}
+
+if [ "$(uname -s)" = "Darwin" ]; then
+  OS=darwin
+else
+  OS=linux
+fi
+
+tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
+filename="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+url="https://github.com/linkerd/linkerd2/releases/download/v${LINKERD2_VERSION}/${filename}"
+(
+  cd "$tmp"
+
+  echo "Downloading ${filename}..."
+
+  SHA=$(curl -sL "${url}.sha256")
+  curl -sLO "${url}"
+
+  checksum=$(openssl dgst -sha256 "${filename}" | awk '{ print $2 }')
+  if [ "$checksum" != "$SHA" ]; then
+    echo "Checksum validation failed." >&2
+    exit 1
+  fi
+)
+
+(
+  cd "$HOME"
+  mkdir -p ".linkerd2/bin"
+  mv "${tmp}/${filename}" ".linkerd2/bin/linkerd"
+  chmod +x ".linkerd2/bin/linkerd"
+)
+
+rm -r "$tmp"
+
+echo "Linkerd was successfully installed 🎉"
+echo ""
+echo "Add the linkerd CLI to your path with:"
+echo ""
+echo "    export PATH=\$PATH:\$HOME/.linkerd2/bin"
+echo ""
+echo "Then run:"
+echo ""
+echo "    linkerd install | kubectl apply -f -"
+echo ""
+echo "to deploy Linkerd to Kubernetes. Once deployed, run:"
+echo ""
+echo "    linkerd dashboard"
+echo ""
+echo "to view the Linkerd UI."
+echo ""
+echo "Visit linkerd.io/2/getting-started for more information."

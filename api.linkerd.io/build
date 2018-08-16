@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+BASE_DIR=$(pwd -P)
+
+mkdir -p $BASE_DIR/public
+
+TMP_SLATE_DIR=$(mktemp -d /tmp/slate-linkerd.XXXXX)
+cd $TMP_SLATE_DIR
+
+git clone --depth=1 https://github.com/BuoyantIO/slate-linkerd.git slate-linkerd
+cd slate-linkerd
+
+bundle install
+bundle exec middleman build --clean
+
+# Add the slate build to the public dir!
+cp -r build/* $BASE_DIR/public
+
+# Cleanup
+cd $BASE_DIR
+rm -rf $TMP_SLATE_DIR

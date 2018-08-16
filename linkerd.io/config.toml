@@ -1,0 +1,60 @@
+baseurl = "https://linkerd.io/"
+title = "Linkerd"
+languageCode = "en-US"
+Paginate = 10
+sectionPagesMenu = "main"
+
+# Disable default `category` and `tag` taxonomies, to avoid sitemap error
+[taxonomies]
+
+#CUSTOM PARAMS
+[params]
+  latest_release_version = "1.4.5"
+  latest_release_date = "2018-07-13"
+  description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
+
+  l5d2_release_version = "L5D2_LATEST_VERSION"
+
+# MENU: top nav bar
+
+[[menu.top]]
+  name = "Docs"
+  identifier = "documentation"
+  weight = 1
+  url = "/docs/"
+
+[[menu.top]]
+  name = "Blog"
+  identifier = "blog"
+  weight = 2
+  url = "http://blog.linkerd.io/"
+
+[[menu.top]]
+  name = "Enterprise"
+  weight = 3
+  url = "/enterprise"
+
+[[menu.top]]
+  name = "GitHub"
+  identifier = "github"
+  weight = 4
+  pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
+  url = "https://github.com/linkerd/linkerd"
+
+[[menu.top]]
+  name = "Discourse"
+  weight = 5
+  pre = "<i class='fab fa-discourse mr-1'></i>"
+  url = "https://discourse.linkerd.io"
+
+[[menu.top]]
+  name = "Slack"
+  weight = 6
+  pre = "<i class='fab fa-slack mr-1' aria-hidden='true'></i>"
+  url = "https://slack.linkerd.io"
+
+[[menu.top]]
+  name = "Twitter"
+  weight = 7
+  pre = "<i class='fab fa-twitter mr-1' aria-hidden='true'></i>"
+  url = "https://twitter.com/linkerd"
