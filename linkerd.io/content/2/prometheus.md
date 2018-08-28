@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Exporting metrics to Prometheus"
 [menu.l5d2docs]
   name = "Exporting to Prometheus"
-  weight = 5
+  weight = 6
 +++
 
 If you have an existing Prometheus cluster, it is very easy to export Linkerd's

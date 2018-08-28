@@ -79,3 +79,8 @@ on port 35, use the command:
 linkerd inject deployment.yml --skip-inbound-ports=35 \
   | kubectl apply -f -
 ```
+
+## Inject Command Reference
+
+For more information on how the inject command works and all of the parameters
+that can be set, look at the [Inject Command Reference](../inject-reference)

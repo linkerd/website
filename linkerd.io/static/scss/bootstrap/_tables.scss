@@ -2,7 +2,7 @@
 // Basic Bootstrap table
 //
 
-.table {
+table {
   width: 100%;
   margin-bottom: $spacer;
   background-color: $table-bg; // Reset for nesting within parents with `background-color`.
@@ -12,6 +12,7 @@
     padding: $table-cell-padding;
     vertical-align: top;
     border-top: $table-border-width solid $table-border-color;
+    min-width: $table-cell-min-width;
   }
 
   thead th {
@@ -23,7 +24,7 @@
     border-top: (2 * $table-border-width) solid $table-border-color;
   }
 
-  .table {
+  table {
     background-color: $body-bg;
   }
 }
@@ -45,7 +46,7 @@
 //
 // Add or remove borders all around the table and between all the columns.
 
-.table-bordered {
+table {
   border: $table-border-width solid $table-border-color;
 
   th,
@@ -74,7 +75,7 @@
 //
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
 
-.table-striped {
+table {
   tbody tr:nth-of-type(#{$table-striped-order}) {
     background-color: $table-accent-bg;
   }
@@ -85,7 +86,7 @@
 //
 // Placed here since it has to come after the potential zebra striping
 
-.table-hover {
+table {
   tbody tr {
     @include hover {
       background-color: $table-hover-bg;
@@ -164,7 +165,7 @@
 // Generate series of `.table-responsive-*` classes for configuring the screen
 // size of where your table will overflow.
 
-.table-responsive {
+table {
   @each $breakpoint in map-keys($grid-breakpoints) {
     $next: breakpoint-next($breakpoint, $grid-breakpoints);
     $infix: breakpoint-infix($next, $grid-breakpoints);

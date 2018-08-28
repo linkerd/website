@@ -66,7 +66,7 @@ The complete config for this test may be found in the
 [perf-baseline environment](https://github.com/linkerd/linkerd-examples/tree/master/perf-baseline).
 
 | Metric      | Value       |
-| ----------- | ---------:  |
+| ----------- | ---------  |
 | Memory      | 20.5MB      |
 | CPU         | 0.107 cores |
 | p50 latency | <1ms        |
@@ -82,7 +82,7 @@ The complete config for this test may be found in the
 [lifecycle test environment](https://github.com/linkerd/linkerd-examples/tree/master/lifecycle).
 
 | Process       | Memory (MB) | CPU (cores) |
-| ------------- | ----------: | ----------: |
+| ------------- | ---------- | ---------- |
 | *Total*       | *363*       | *0.051*     |
 | Prometheus    | 232         | 0.036       |
 | Grafana       | 26          | 0.007       |
