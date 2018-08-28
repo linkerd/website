@@ -12,8 +12,10 @@ as well as provide a reference for the flags that can be passed at the command l
 <br /><br />
 
 If you run the command `linkerd inject -h` it will provide you with the same information as the table below:
-<br />
+<br /><br />
 
+
+{.table .pure-table .table-striped .table-responsive .table-hover}
 | Flag | Explanation | Example |
 | -----| --- | --- |
 | `--api-port` | The ort where the Linkerd controller is running (default 8086). If you changed any of the port settings on `linkerd install` this flag will be necessary. | `--api-port=9045` |
