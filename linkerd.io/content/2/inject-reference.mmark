@@ -18,7 +18,7 @@ If you run the command `linkerd inject -h` it will provide you with the same inf
 {.table .pure-table .table-striped .table-responsive .table-hover}
 | Flag | Explanation | Example |
 | -----| --- | --- |
-| `--api-port` | The ort where the Linkerd controller is running (default 8086). If you changed any of the port settings on `linkerd install` this flag will be necessary. | `--api-port=9045` |
+| `--api-port` | The port where the Linkerd controller is running (default 8086). If you changed any of the port settings on `linkerd install` this flag will be necessary. | `--api-port=9045` |
 | `--control-port` | The proxy port to use for control (default 4190). This is the port the Linkerd Proxy Pod uses communicates with the control plane. If 4190 is a reserved port for your application, it can be changed with this flag. | `--control-port=5431`|
 | `-h, --help` | The command that prints this table out, but on the command line. | `-h` |
 | `--image-pull-policy` | The Docker image pull policy (default "IfNotPresent"). For the injected Linkerd Proxy images (or your own modified variant) choose whether or not you want to have the Kubelet pull the image from the registry Always or Ony If Not Present. | `--image-pull-policy="Always"` |
