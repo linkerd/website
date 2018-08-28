@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Experimental: automatic TLS"
 [menu.l5d2docs]
   name = "Experimental: Automatic TLS"
-  weight = 7
+  weight = 8
 +++
 
 Linkerd can be configured to automatically negotiate Transport Layer Security
