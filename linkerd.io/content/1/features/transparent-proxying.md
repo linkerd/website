@@ -11,7 +11,7 @@ aliases = [
   parent = "features"
 +++
 
-If you're running in Kubnernetes, you can use the
+If you're running in Kubernetes, you can use the
 [linkerd-inject](https://github.com/linkerd/linkerd-inject)
 utility to transparently proxy requests through a
 [Daemonset Linkerd](https://github.com/linkerd/linkerd-examples/blob/master/k8s-daemonset/k8s/linkerd.yml).
