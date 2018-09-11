@@ -15,7 +15,7 @@ a web app that you use to control the cluster.
 In this guide, we’ll walk you through how to deploy Linkerd on your Kubernetes
 cluster, and how to set up a sample gRPC application.
 
-Afterwards, check out the [Using Linkerd to debug a service](/debugging-an-app)
+Afterwards, check out the [Using Linkerd to debug a service](/2/debugging-an-app)
 page, where  we'll walk you through how to use Linkerd to investigate poorly
 performing services.
 
