@@ -122,10 +122,10 @@ serve-api.linkerd.io: build-api.linkerd.io
 build-linkerd.io: tmp/linkerd.io
 	@# Build linkerd.io
 ifndef HAS_SASS
-	@printf "Install sass first. For OSX: brew install sass/sass/sass"; exit 1
+	@printf "Install sass first. For OSX: brew install sass/sass/sass\n"; exit 1
 endif
 ifndef HAS_HUGO
-	@printf "Install hugo first. For OSX: brew install hugo"; exit 1
+	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
 endif
 	cd tmp/linkerd.io && ./build
 
