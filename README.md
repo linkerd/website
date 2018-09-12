@@ -63,6 +63,12 @@ Install scripts for linkerd as well as demo applications such as
 Location for existing installations to check and see if they're up to date or
 not.
 
+To build and serve against the latest Linkerd2 release:
+
+```bash
+make serve-versioncheck.linkerd.io
+```
+
 ## [api.linkerd.io](api.linkerd.io)
 
 API docs for linkerd1.

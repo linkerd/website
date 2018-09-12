@@ -119,7 +119,7 @@ serve-api.linkerd.io: build-api.linkerd.io
 		&& python3 -m http.server 9999
 
 .PHONY: build-linkerd.io
-build-linkerd.io: tmp/linkerd.io
+build-linkerd.io: update-version tmp/linkerd.io
 	@# Build linkerd.io
 ifndef HAS_SASS
 	@printf "Install sass first. For OSX: brew install sass/sass/sass\n"; exit 1
@@ -134,12 +134,16 @@ build-api.linkerd.io:
 	@# Build api.linkerd.io
 	cd api.linkerd.io && ./build
 
+.PHONY: build-%
+build-%: update-version
+	@# Build *.linkerd.io
+
 .PHONY: replace-env-%
 replace-env-%: has-env-% tmp-sites
 	@# Replace vars in files from the environment.
 	@grep -rnl '$*' tmp >/dev/null || \
 		( \
-			printf "There are no instaces of $*, maybe you've already updated them?\n" && \
+			printf "There are no instances of $*, maybe you've already updated them?\n" && \
 			exit 1 \
 		)
 
