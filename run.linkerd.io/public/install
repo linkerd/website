@@ -21,20 +21,15 @@ url="https://github.com/linkerd/linkerd2/releases/download/v${LINKERD2_VERSION}/
   SHA=$(curl -sL "${url}.sha256")
   curl -LO "${url}"
   echo ""
-  echo "Download complete!"
-  echo ""
-
-  echo "Validating checksum..."
+  echo "Download complete!, validating checksum..."
   checksum=$(openssl dgst -sha256 "${filename}" | awk '{ print $2 }')
   if [ "$checksum" != "$SHA" ]; then
     echo "Checksum validation failed." >&2
     exit 1
   fi
+  echo "Checksum valid."
   echo ""
 )
-
-echo "-------------------------------------------------------"
-echo ""
 
 (
   cd "$HOME"
@@ -49,29 +44,14 @@ echo "Linkerd was successfully installed 🎉"
 echo ""
 echo "Add the linkerd CLI to your path with:"
 echo ""
-echo "    export PATH=\$PATH:\$HOME/.linkerd2/bin"
+echo "  export PATH=\$PATH:\$HOME/.linkerd2/bin"
 echo ""
-echo "To validate that you can install Linkerd on your cluster, run:"
+echo "Now run:"
 echo ""
-echo "    linkerd check --pre"
+echo "  linkerd check --pre                     # validate that Linkerd can be installed"
+echo "  linkerd install | kubectl apply -f -    # install the control plane into the 'linkerd' namespace"
+echo "  linkerd check                           # validate everything worked!"
+echo "  linkerd dashboard                       # launch the dashboard"
 echo ""
-echo "To install the Linkerd control plane, run:"
-echo ""
-echo "    linkerd install | kubectl apply -f -"
-echo ""
-echo "To validate your control plane installation, run:"
-echo ""
-echo "    linkerd check"
-echo ""
-echo "To view the Linkerd and Grafana dashboards, run:"
-echo ""
-echo "    linkerd dashboard"
-echo ""
-echo "For more information, visit:"
-echo ""
-echo "    https://linkerd.io/2/getting-started"
-echo ""
-echo "To see some fun things you can do with Linkerd, visit:"
-echo ""
-echo "    https://linkerd.io/2/next-steps"
+echo "Looking for more? Visit https://linkerd.io/2/next-steps"
 echo ""
