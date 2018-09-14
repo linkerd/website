@@ -19,14 +19,22 @@ url="https://github.com/linkerd/linkerd2/releases/download/v${LINKERD2_VERSION}/
   echo "Downloading ${filename}..."
 
   SHA=$(curl -sL "${url}.sha256")
-  curl -sLO "${url}"
+  curl -LO "${url}"
+  echo ""
+  echo "Download complete!"
+  echo ""
 
+  echo "Validating checksum..."
   checksum=$(openssl dgst -sha256 "${filename}" | awk '{ print $2 }')
   if [ "$checksum" != "$SHA" ]; then
     echo "Checksum validation failed." >&2
     exit 1
   fi
+  echo ""
 )
+
+echo "-------------------------------------------------------"
+echo ""
 
 (
   cd "$HOME"
@@ -43,14 +51,29 @@ echo "Add the linkerd CLI to your path with:"
 echo ""
 echo "    export PATH=\$PATH:\$HOME/.linkerd2/bin"
 echo ""
-echo "Then run:"
+echo "To check for potential installation problems, run:"
+echo ""
+echo "    linkerd check --pre"
+echo ""
+echo "Once that is passing, to install the Linkerd control"
+echo "plane onto your cluster, run:"
 echo ""
 echo "    linkerd install | kubectl apply -f -"
 echo ""
-echo "to deploy Linkerd to Kubernetes. Once deployed, run:"
+echo "To validate your control plane installation and wait"
+echo "until all the components are ready, run:"
+echo ""
+echo "    linkerd check"
+echo ""
+echo "To view the Linkerd and Grafana dashboards, run:"
 echo ""
 echo "    linkerd dashboard"
 echo ""
-echo "to view the Linkerd UI."
+echo "For more information, visit:"
 echo ""
-echo "Visit linkerd.io/2/getting-started for more information."
+echo "    https://linkerd.io/2/getting-started"
+echo ""
+echo "To see some fun things you can do with Linkerd, visit:"
+echo ""
+echo "    https://linkerd.io/2/next-steps"
+echo ""
