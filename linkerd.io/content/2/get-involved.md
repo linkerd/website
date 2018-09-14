@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Get involved"
 [menu.l5d2docs]
   name = "Get Involved"
-  weight = 9
+  weight = 11
 +++
 
 We're really excited to welcome Contributors to [Linkerd](https://github.com/linkerd/linkerd2)!

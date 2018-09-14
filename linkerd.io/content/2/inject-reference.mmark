@@ -3,7 +3,7 @@ date = "2018-08-28T08:00:00-07:00"
 title = "Linkerd Inject Reference"
 [menu.l5d2docs]
   name = "Inject Command Reference"
-  weight = 4
+  weight = 6
 +++
 
 The `linkerd inject` command allows for a quick and reliable setup of the Linkerd Proxy in a Kubernetes Deployment.
