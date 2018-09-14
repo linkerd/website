@@ -30,9 +30,8 @@ command accomplishes this, as well as the configuration work necessary to
 transparently funnel traffic from each instance through the proxy.)
 
 These proxies transparently intercept communication to and from each pod, and
-add features such as retries and timeouts, instrumentation, and encryption
-(TLS), as well as allowing and denying requests according to the relevant
-policy.
+add features such as instrumentation and encryption (TLS), as well as allowing
+and denying requests according to the relevant policy.
 
 These proxies are not designed to be configured by hand. Rather, their behavior
 is driven by the control plane.

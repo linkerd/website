@@ -65,13 +65,13 @@ Client version: v{{% latestversion %}}
 Server version: v18.8.1
 ```
 
-With `Server version: v18.8.1` reflecting whatever version of the control plane
-you are currently running. Don't worry, we haven't modified anything running on
-the cluster yet.
+It is expected that the Client and Server versions won't match at this point in
+the process. Nothing has been changed on the cluster, only the local CLI has
+been updated.
 
 ### Notes
 
-- Until you update the control plane, most CLI commands will not work.
+- Until you upgrade the control plane, most CLI commands will not work.
 
 ## Upgrade the control plane
 
@@ -114,7 +114,7 @@ configmap "grafana-config" configured
 Check to make sure everything is healthy by running:
 
 ```bash
-linkerd check --wait
+linkerd check
 ```
 
 This will run through a set of checks against your control plane and make sure
@@ -135,13 +135,13 @@ Server version: v{{% latestversion %}}
 
 ### Notes
 
-- You will loose the historical data from Prometheus. If you would like to have
+- You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the [persistence
 documentation](/2/prometheus/)
 
 ## Upgrade the data plane
 
-With a fully up to date CLI running locally and Linkerd control plane running on
+With a fully up-to-date CLI running locally and Linkerd control plane running on
 your Kubernetes cluster, it is time to upgrade the data plane. This will change
 the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
 your service.
@@ -152,7 +152,7 @@ spec to have the latest version of the `linkerd-proxy` sidecar container. By
 using `kubectl apply`, Kubernetes will do a rolling deploy of your service and
 update the running pods to the latest version.
 
-To do this will the example application, emojivoto, you can:
+To do this will the example application, emojivoto, you can run:
 
 ```bash
 curl https://run.linkerd.io/emojivoto.yml \
