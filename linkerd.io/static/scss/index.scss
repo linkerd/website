@@ -5,9 +5,19 @@
 @import "linkerd-demo.scss";
 
 .linkerd-bg {
-  background-image: url("/images/linkerd-hero.png");
-  background-size: cover;
-  background-position: 99%;
+  background: linear-gradient(#3F8B5A, #275B3A);
+}
+
+.jumbotron .btn {
+  border-color: $light;
+}
+
+.service-owner {
+  background-color: $blue;
+}
+
+.platform-owner {
+  background-color: $green;
 }
 
 .target-cards img {
@@ -18,17 +28,15 @@
   background-color: $light;
 }
 
-.customer-logos {
-  background-color: #018afd;
-
+.hero-logos {
   img {
-    width: 150px;
+    width: 75px;
   }
 }
 
 .linkerd-testimonials {
   background-color: #507eb6;
-  height: 230px;
+  min-height: 230px;
 
   .media img {
     width: 71px;
@@ -66,6 +74,7 @@ footer li {
 code {
   $code-background: $code-background;
 }
+
 .table {
   td {
     min-width: $table-cell-min-width;

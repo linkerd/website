@@ -1,359 +1,158 @@
 {{ define "main" }}
   <div class="jumbotron jumbotron-fluid linkerd-bg text-light">
     <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-md-4">
-          <h1 class="display-4">The world's most widely deployed production service mesh</h1>
-        </div>
-        <div class="col-md-6 pt-2">
-          <p>Linkerd is a service mesh that adds reliability, security, and visibility to cloud native applications</p>
-          <div class="header-button-group">
-            <a href="{{ ref . "docs.md" }}" class="btn btn-primary">Get Started</a>
-            <a
-              href="https://github.com/linkerd/linkerd"
-              target="_blank"
-              class="btn btn-outline-primary btn-bg-light">
-                View on GitHub
-            </a>
+      <div class="row">
+        <div class="col-md-7 pb-3">
+          <h1>A service sidecar for Kubernetes</h1>
+          <p>Linkerd gives you instant Grafana dashboards and CLI debugging tools for any<br/> Kubernetes service &mdash; with no cluster-wide installation.</p>
+          <div class="header-button-group pb-3">
+            <a href="{{ ref . "getting-started.md" }}" class="btn btn-primary">Get Started</a>
           </div>
-          <br />
-          <br />
-
           <div class="github-stat-buttons">
             <a class="github-button" href="https://github.com/linkerd/linkerd" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd on GitHub">Star</a>
             <a class="github-button" href="https://github.com/linkerd/linkerd/subscription" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch linkerd/linkerd on GitHub">Watch</a>
             <a class="github-button" href="https://github.com/linkerd/linkerd/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork linkerd/linkerd on GitHub">Fork</a>
           </div>
         </div>
+        <div class="col-md-5 text-center">
+          <img height="325" src="/images/identity/svg/linkerd-logo-gradient.svg">
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- User Logos -->
+  <div class="container pb-5 hero-logos">
+    <div class="row justify-content-around">
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://buoyant.io"
+        target="_blank">
+        <img src="/images/logos/buoyant.svg" />
+      </a>
+      <a class="col-md-2 col-4  my-auto pb-3"
+        href="https://www.walmart.com/"
+        target="_blank">
+        <img src="/images/logos/walmart.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.salesforce.com"
+        target="_blank">
+        <img src="/images/logos/salesforce.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://paypal.com"
+        target="_blank">
+        <img src="/images/logos/paypal.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.xfinity.com/"
+        target="_blank">
+        <img src="/images/logos/comcast.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://monzo.com" target="_blank">
+        <img src="/images/logos/monzo.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.expedia.com"
+        target="_blank">
+        <img src="/images/logos/expedia.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.shophush.com/"
+        target="_blank">
+        <img src="/images/logos/hush.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://studyo.co/"
+        target="_blank">
+        <img src="/images/logos/studyo.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.creditkarma.com"
+        target="_blank">
+        <img src="/images/logos/credit-karma.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://www.planet.com/"
+        target="_blank">
+        <img src="/images/logos/planet.svg" />
+      </a>
+      <a class="col-md-2 col-4 my-auto pb-3"
+        href="https://wepay.com"
+        target="_blank">
+        <img src="/images/logos/wepay.svg" />
+      </a>
+    </div>
+  </div>
+  <!-- User Logos -->
+
   <!-- Feature list -->
-  <div class="container">
+  <div class="container pb-5">
     <ul class="list-unstyled row pt-3">
-      <li class="media col">
-        <img class="mr-3" src="/images/whylinkerd/clock.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/stethoscope.svg" width="80">
         <div class="media-body">
-          <h4>Fast, scalable, and performant</h4>
-          Handles tens of thousands of requests per second
-          per instance with minimal latency overhead. Scales
-          horizontally with ease.
+          <h4>Rapidly diagnose runtime issues</h4>
+          <p>Identify service failures right away. Trace issues directly to the failed calls or broken runtime dependencies.</p>
         </div>
       </li>
-      <li class="media col">
-        <img class="mr-3" src="/images/whylinkerd/sign.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/graph.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Runtime traffic routing</h4>
-          Provides dynamic, scoped, logical routing rules, enabling
-          blue-green deployments, staging, canarying, failover, and
-          more.
+          <h4 class="media-heading">Get actionable service metrics</h4>
+          <p>Get the insights that matter with pre-installed Grafana dashboards. See everything. Know everything.</p>
         </div>
       </li>
       <li class="w-100"></li>
-      <li class="media col my-5">
-        <img class="mr-3" src="/images/whylinkerd/globe.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/stopwatch.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Any language, any environment</h4>
-          Runs as a transparent proxy alongside existing
-          applications, integrates with existing infrastructure.
+          <h4 class="media-heading">Zero configuration, installs in seconds</h4>
+          <p>Instant service observability and dashboards. Three easy steps and your Linkerd is live.</p>
         </div>
       </li>
-      <li class="media col my-5">
-        <img class="mr-3" src="/images/whylinkerd/document.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/lego.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Drop-in service discovery</h4>
-          Integrates with most service discovery systems,
-          decoupling applications from specific implementations.
+          <h4 class="media-heading">Incremental, composable design</h4>
+          <p>Equally useful for one service or 100 services. No code or configuration changes needed.</p>
         </div>
       </li>
       <li class="w-100"></li>
-      <li class="media col">
-        <img class="mr-3" src="/images/whylinkerd/graph.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/quill-circle.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Latency-aware load-balancing</h4>
-          Balances request traffic using real-time performance,
-          reducing tail latencies across your application.
+          <h4 class="media-heading">Lightweight, self contained</h4>
+          <p>Minimal impact on other team's services, with a lightweight footprint.</p>
         </div>
       </li>
-      <li class="media col">
-        <img class="mr-3" src="/images/whylinkerd/orbits.png" width="80">
+      <li class="media col my-3">
+        <img class="mr-3" src="/images/value-props/foss.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Production-tested and proven at scale</h4>
-          Powers the production infrastructure of banks, artificial
-          intelligence companies, social networks, government labs,
-          and more.
+          <h4 class="media-heading">Built with Rust and 100% cloud native</h4>
+          <p>Built with modern programming languages. Designed for the cloud native world.</p>
         </div>
       </li>
     </ul>
-
-    <div class="row">
-      <div class="col text-center pb-5">
-        <a
-          role="button"
-          class="btn btn-outline-primary"
-          href="/overview/what-is-linkerd/">
-            Read the intro &raquo;
-        </a>
-      </div>
-    </div>
   </div>
   <!-- Feature list -->
 
-  <div class="jumbotron jumbotron-fluid linkerd-bg mb-0">
-    <div class="container">
-      <div class="row text-light">
-        <div class="col text-center pb-5">
-          <h2>Any language, any environment</h2>
-        </div>
+  <!-- Demo Video -->
+  <div class="container pb-5">
+    <div class="row justify-content-md-center pb-3">
+      <div class="col-md-6 text-center">
+        <h2>Take a tour</h2>
       </div>
-
-      <div class="row text-center target-cards text-uppercase">
-        <div class="card-deck col">
-          <div class="card p-3">
-            <a
-              href="/2/getting-started/"
-              class="d-flex flex-column h-100 align-items-end">
-              <img
-                class="mx-auto my-auto"
-                src="/images/technologies/kubernetes.png"
-                alt="Linkerd + Kubernetes" />
-              <h7 class="mt-auto mx-auto pt-3">Linkerd + Kubernetes</h7>
-            </a>
-          </div>
-          <div class="card p-3">
-            <a
-              href="/getting-started/dcos"
-              class="d-flex flex-column h-100 align-items-end">
-              <img
-                class="m-auto"
-                src="/images/technologies/dcos.svg"
-                alt="Linkerd + DC/OS" />
-              <div class="mt-auto mx-auto">
-              </div>
-              <h7 class="mt-auto mx-auto pt-3">Linkerd + DC/OS</h7>
-            </a>
-          </div>
-          <div class="card p-3">
-            <a
-              href="/getting-started/docker/"
-              class="d-flex flex-column h-100 align-items-end">
-              <img
-                class="m-auto"
-                src="/images/technologies/docker.png"
-                alt="Linkerd + Docker" />
-              <h7 class="mt-auto mx-auto pt-3">Linkerd + Docker</h7>
-            </a>
-          </div>
-          <div class="card p-3">
-            <a
-              href="/getting-started/locally/"
-              class="d-flex flex-column h-100 align-items-end">
-              <img
-                class="m-auto"
-                src="/images/identity/svg/linkerd_mark_only.svg"
-                alt="Linkerd on your laptop" />
-              <h7 class="mt-auto mx-auto pt-3">Linkerd on your laptop</h7>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="mx-auto pt-5">
-          <a
-            href="/examples/external-resources/"
-            class="btn btn-outline-primary mr-3 btn-bg-light">
-            More resources &raquo;
-          </a>
-          <a
-            href="https://github.com/linkerd/linkerd"
-            class="btn btn-outline-primary btn-bg-light">
-            Visit the GitHub repo &raquo;
-          </a>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RC_9ywj0yz8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="container-fluid customer-logos">
-    <div class="row align-items-center justify-content-center py-5">
-      <a class="col" href="https://monzo.com" target="_blank">
-        <img src="/images/companies/monzo.png" class="mx-auto d-block" />
-      </a>
-      <a class="col" href="http://www.hmhco.com" target="_blank">
-        <img src="/images/companies/houghton.png" class="mx-auto d-block" />
-      </a>
-      <a class="col" href="https://www.salesforce.com" target="_blank">
-        <img src="/images/companies/salesforce.png" class="m-auto d-block" />
-      </a>
-      <a class="col" href="https://www.creditkarma.com" target="_blank">
-        <img src="/images/companies/credit_karma.png" class="m-auto d-block" />
-      </a>
-      <div class="w-100"></div>
-      <a class="col" href="https://www.expedia.com" target="_blank">
-        <img src="/images/companies/expedia.png" class="m-auto d-block" />
-      </a>
-      <a class="col" href="https://nextvr.com" target="_blank">
-        <img src="/images/companies/nextvr.png" class="m-auto d-block" />
-      </a>
-      <a class="col" href="https://paypal.com" target="_blank">
-        <img src="/images/companies/paypal.svg" class="m-auto d-block" />
-      </a>
-      <a class="col" href="https://olark.com" target="_blank">
-        <img src="/images/companies/olark.png" class="m-auto d-block" />
-      </a>
-    </div>
-  </div>
-
-  <div class="container py-5">
-    <div class="row">
-      <div class="col text-center">
-        <h4>
-          Linkerd is a
-            <a href="https://cncf.io" target="_blank">
-              Cloud Native Computing Foundation
-            </a> project.
-        </h4>
-      </div>
-      <div class="w-100"></div>
-      <div class="col pt-3">
-        <a href="https://cncf.io" target="_blank">
-          <img
-            src="images/CNCF_Alternate_Pantone.png"
-            class="m-auto d-block"
-            width="300" />
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid linkerd-testimonials">
-    <div class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner text-light">
-        <div class="carousel-item m-5 active">
-          <div class="media">
-            <a href="https://monzo.com" target="_blank">
-              <img class="mr-3 img-thumbnail" src="/images/users/obeattie.jpeg" alt="Oliver Beattie">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <h4>The success of our system depends on having a solid layer that can route around component failure, minimise latency, and give us insight into runtime behaviour. Linkerd provides all this and more!</h4>
-                <footer class="blockquote-footer">
-                  Oliver Beattie, Head of Engineering, Monzo
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item m-5">
-          <div class="media">
-            <a href="https://www.planet.com/" target="_blank">
-              <img
-                class="mr-3 img-thumbnail"
-                src="/images/users/ncope.jpeg"
-                alt="Nic Cope">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <p class="mb-0"><h4>
-                  As Kubernetes Infrastructure Lead at Planet, the support and openness of the Linkerd community has played a huge role in enabling its success as part of our production stack.
-                </h4></p>
-                <footer class="blockquote-footer">
-                  Nic Cope, Kubernetes Infrastructure Lead, Planet Labs
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item m-5">
-          <div class="media">
-            <a href="https://www.creditkarma.com/" target="_blank">
-              <img
-                class="mr-3 img-thumbnail"
-                src="/images/users/abigian.jpg"
-                alt="Armond Bigian">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <p class="mb-0"><h4>
-                  Linkerd has allowed us to decouple our application code from the underlying infrastructure platform, enabling us to rapidly iterate on both features and infrastructure without downtime
-                </h4></p>
-                <footer class="blockquote-footer">
-                  Armond Bigian, VP of Engineering, Credit Karma
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item m-5">
-          <div class="media">
-            <a href="http://technology.quid.com/" target="_blank">
-              <img
-                class="mr-3 img-thumbnail"
-                src="/images/users/rroose.jpg"
-                alt="Robert Roose">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <p class="mb-0"><h4>
-                  Linkerd has allowed our engineers to effortlessly scale their microservices without having to deal with complex proxy configurations or hardcoded endpoints.
-                </h4></p>
-                <footer class="blockquote-footer">
-                  Robert Roose, Infrastructure Engineer, Quid
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item m-5">
-          <div class="media">
-            <a href="https://www.centralapp.com/" target="_blank">
-              <img
-                class="mr-3 img-thumbnail"
-                src="/images/users/aambasta.jpg"
-                alt="Ashesh Ambasta">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <p class="mb-0"><h4>
-                  The biggest problem Linkerd solved for us is service discovery. We can reliably use a tool that is actively being developed and undergoing major improvements every month.
-                </h4></p>
-                <footer class="blockquote-footer">
-                  Ashesh Ambasta, Founder, CentralApp
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel-item m-5">
-          <div class="media">
-            <a href="https://www.paypal.com" target="_blank">
-              <img
-                class="mr-3 img-thumbnail"
-                src="/images/users/jholtzman.jpg"
-                alt="Josh Holtzman">
-            </a>
-            <div class="media-body align-self-center mr-5">
-              <blockquote class="blockquote mr-5">
-                <p class="mb-0"><h4>
-                  Linkerd has given us granular visibility into the state of our services, secured the communication between them, and helped ensure end-to-end reliability by intelligently balancing load and handling partial failures.
-                </h4></p>
-                <footer class="blockquote-footer">
-                  Josh Holtzman, Director of Infrastructure Engineering, PayPal
-                </footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+  <!-- Demo Video -->
 
 {{ end }}

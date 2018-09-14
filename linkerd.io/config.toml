@@ -24,37 +24,24 @@ sectionPagesMenu = "main"
   url = "/docs/"
 
 [[menu.top]]
+  name = "Community"
+  weight = 2
+  url = "/community/"
+
+[[menu.top]]
   name = "Blog"
   identifier = "blog"
-  weight = 2
+  weight = 3
   url = "http://blog.linkerd.io/"
 
 [[menu.top]]
   name = "Enterprise"
-  weight = 3
-  url = "/enterprise"
+  weight = 4
+  url = "/enterprise/"
 
 [[menu.top]]
   name = "GitHub"
   identifier = "github"
-  weight = 4
-  pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
-  url = "https://github.com/linkerd/linkerd"
-
-[[menu.top]]
-  name = "Discourse"
   weight = 5
-  pre = "<i class='fab fa-discourse mr-1'></i>"
-  url = "https://discourse.linkerd.io"
-
-[[menu.top]]
-  name = "Slack"
-  weight = 6
-  pre = "<i class='fab fa-slack mr-1' aria-hidden='true'></i>"
-  url = "https://slack.linkerd.io"
-
-[[menu.top]]
-  name = "Twitter"
-  weight = 7
-  pre = "<i class='fab fa-twitter mr-1' aria-hidden='true'></i>"
-  url = "https://twitter.com/linkerd"
+  pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
+  url = "https://github.com/linkerd/linkerd2"

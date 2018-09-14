@@ -1,7 +1,6 @@
 +++
 date = "2018-08-07T00:00:00+00:00"
-title = "Getting Started"
-description = ""
+title = "Documentation"
 layout = "docs-landing"
 aliases = [
   "/documentation",
