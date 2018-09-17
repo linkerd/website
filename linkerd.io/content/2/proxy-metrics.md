@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Metrics exported by the proxy"
 [menu.l5d2docs]
   name = "Proxy Metrics"
-  weight = 9
+  weight = 10
 +++
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the

@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Example: debugging an app"
 [menu.l5d2docs]
   name = "Example: Debugging"
-  weight = 7
+  weight = 8
 +++
 
 This section assumes you've followed the steps in the [Getting
