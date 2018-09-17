@@ -1,9 +1,8 @@
 
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
-export L5D2_LATEST_VERSION ?= $(shell curl -Ls -o /dev/null -w %{url_effective} $(RELEASE_URL)/latest | awk '{split($$0,a,"/v"); print a[2]}')
-ROOT_DOMAIN = linkerd.io
-DOMAIN = $(shell echo "v$$(echo $(L5D2_LATEST_VERSION) | tr . -).docs.linkerd.io")
+export L5D2_STABLE_VERSION ?= stable-2.0.0
+export L5D2_EDGE_VERSION ?= edge-18.9.2
 
 define upload_public
 	gsutil -m rsync \
@@ -16,63 +15,12 @@ HAS_FLARECTL := $(shell command -v flarectl;)
 HAS_SASS := $(shell command -v /usr/local/bin/sass;)
 HAS_HUGO := $(shell command -v hugo;)
 
-.PHONY: release
-release: create-bucket setup-dns publish
-	@# Release a new version of sites
-
 .PHONY: publish
 publish: update-version build-linkerd.io deploy
 	@# Publish a new version of the sites
 
-.PHONY: create-bucket
-create-bucket: has-env-L5D2_LATEST_VERSION
-	@# Create a new bucket for old versions.
-	@# Options:
-	@#
-	@#     PROJECT                            :: ${PROJECT}
-	@#     L5D2_LATEST_VERSION                :: ${L5D2_LATEST_VERSION}
-	@#     DRY_RUN                            :: ${DRY_RUN}
-ifndef DRY_RUN
-ifndef HAS_GSUTIL
-	@printf "Install gsutil first. See https://cloud.google.com/sdk/docs/downloads-interactive\n"; exit 1
-endif
-	gsutil mb -p $(PROJECT) gs://$(DOMAIN)
-	gsutil logging set on \
-		-b gs://linkerd2-access-logs \
-		-o $$(echo $(DOMAIN) | tr . -) \
-		gs://$(DOMAIN)
-	gsutil web set \
-		-m index.html \
-		-e 404.html \
-		gs://$(DOMAIN)
-	gsutil acl ch \
-		-u allUsers:R \
-		gs://$(DOMAIN)
-endif
-
-.PHONY: setup-dns
-setup-dns: has-env-L5D2_LATEST_VERSION has-env-CF_API_KEY has-env-CF_API_EMAIL
-	@# Setup the DNS for a new bucket
-	@# Options:
-	@#
-	@#     L5D2_LATEST_VERSION                :: ${L5D2_LATEST_VERSION}
-	@#     CF_API_EMAIL                       :: ${CF_API_EMAIL}
-	@#     CF_API_KEY                         :: ${CF_API_KEY}
-	@#     DRY_RUN                            :: ${DRY_RUN}
-ifndef DRY_RUN
-ifndef HAS_FLARECTL
-	go get -u github.com/cloudflare/cloudflare-go/...
-endif
-	flarectl dns create \
-		--zone $(ROOT_DOMAIN) \
-		--name $(DOMAIN) \
-		--type CNAME \
-		--content c.storage.googleapis.com \
-		--proxy
-endif
-
 .PHONY: update-version
-update-version: replace-env-L5D2_LATEST_VERSION
+update-version: replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
 	@# Update the version for the %* site
 
 .PHONY: deploy-%
@@ -82,14 +30,6 @@ deploy-%: tmp/%*/public
 	@#
 	@#     DRY_RUN                            :: ${DRY_RUN}
 	$(call upload_public,$*,$*)
-
-.PHONY: deploy-$(DOMAIN)
-deploy-$(DOMAIN): tmp/linkerd.io/public
-	@# Upload to the archive for a specific version
-	@# Options:
-	@#
-	@#     DRY_RUN                            :: ${DRY_RUN}
-	$(call upload_public,linkerd.io,$(DOMAIN))
 
 deploy: deploy-linkerd.io deploy-run.linkerd.io deploy-versioncheck.linkerd.io
 	@# Deploy l5d2 related sites
@@ -154,14 +94,6 @@ replace-env-%: has-env-% tmp-sites
 .PHONY: has-env-%
 has-env-%:
 	@if [ ! $${$*:-} ]; then printf "You must define: $*\n" && exit 1; fi
-
-.PHONY: has-release
-has-release: has-env-L5D2_LATEST_VERSION
-	@curl -o /dev/null -L --fail $(RELEASE_URL)/tag/v$(L5D2_LATEST_VERSION) &>/dev/null || \
-		( \
-			printf "The release for $(L5D2_LATEST_VERSION) does not exist yet. Create it first." && \
-			exit 1 \
-		)
 
 .PHONY: clean
 clean:

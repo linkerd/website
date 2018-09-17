@@ -2,7 +2,7 @@
 
 set -eu
 
-LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_LATEST_VERSION}
+LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_EDGE_VERSION}
 
 if [ "$(uname -s)" = "Darwin" ]; then
   OS=darwin
@@ -12,7 +12,7 @@ fi
 
 tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
 filename="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
-url="https://github.com/linkerd/linkerd2/releases/download/v${LINKERD2_VERSION}/${filename}"
+url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${filename}"
 (
   cd "$tmp"
 
