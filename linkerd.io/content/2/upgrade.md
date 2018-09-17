@@ -3,7 +3,7 @@ date = "2018-09-10T12:00:00-07:00"
 title = "Upgrade"
 [menu.l5d2docs]
   name = "Upgrade Linkerd"
-  weight = 4
+  weight = 5
 +++
 
 There are three components that need to be upgraded:
