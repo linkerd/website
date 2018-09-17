@@ -13,6 +13,6 @@ There are several ways to get involved:
 - Linkerd on [GitHub](https://github.com/linkerd/linkerd2)
 - Join us on the #linkerd2 channel in [Linkerd slack](https://slack.linkerd.io/)
 - Join the mailing lists
-  - Users list: [linkerd-users@googlegroups.com](https://groups.google.com/forum/#!forum/linkerd-users)
-  - Developers list: [linkerd-dev@googlegroups.com](https://groups.google.com/forum/#!forum/linkerd-dev)
-  - Announcements: [linkerd-announce@googlegroups.com](https://groups.google.com/forum/#!forum/linkerd-announce)
+  - Users list: [cncf-linkerd-users@lists.cncf.io](https://lists.cncf.io/g/cncf-linkerd-users)
+  - Developers list: [cncf-linkerd-dev@lists.cncf.io](https://lists.cncf.io/g/cncf-linkerd-dev)
+  - Announcements: [cncf-linkerd-announce@lists.cncf.io](https://lists.cncf.io/g/cncf-linkerd-announce)
