@@ -15,9 +15,9 @@
           <a class="nav-link" href="{{.URL}}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>{{ .Pre }}{{ .Name }}</a>
         </li>
         {{end}}
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
+        <li>
+          <a href="{{ ref . "getting-started.md" }}" class="btn btn-outline-light">Get Started</a>
+        </li>
       </ul>
     </div>
   </div>

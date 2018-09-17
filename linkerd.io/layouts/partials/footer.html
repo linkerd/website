@@ -1,36 +1,26 @@
 <div class="border-top">
   <footer class="container">
-    <div class="row">
-      <div class="col my-5">
-        <img
-          alt="Linkerd Logo"
-          src="/images/identity/svg/linkerd_primary_color_gray.svg"
-          href="https://linkerd.io/"
-          width="200">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3">
+    <div class="row my-5">
+      <div class="col-md-6 pb-3">
         <ul class="list-unstyled">
-          <li><a target="_blank" href="/docs/">Documentation</a></li>
-          <li><a target="_blank" href="/enterprise/">Enterprise</a></li>
-          <li><a target="_blank" href="https://github.com/linkerd/linkerd">GitHub</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <ul class="list-unstyled">
-          <li><a target="_blank" href="https://discourse.linkerd.io/">Discourse</a></li>
-          <li><a target="_blank" href="https://slack.linkerd.io/">Slack</a></li>
-          <li><a target="_blank" href="https://twitter.com/linkerd">@Linkerd</a></li>
+          <li>
+            <a href="{{ ref . "getting-started.md" }}"
+              class="btn btn-outline-primary">
+              Get Started
+            </a>
+          </li>
         </ul>
       </div>
       <div class="col-md-6">
-        <ul class="list-unstyled text-right">
-          <li>Linkerd was originally created by Buoyant, Inc.</li>
-          <li>Linkerd is a <a target="_blank" href="https://www.cncf.io">CNCF</a> incubation project.</li>
-          <li>View <a target="_blank" href="https://github.com/linkerd/linkerd/wiki/Linkerd-code-of-conduct">Code of Conduct</a></li>
-          <li>© 2018 Linkerd Authors. All Rights Reserved.</li>
+        <ul class="list-unstyled text-md-right">
+          <li class="pb-3">
+            <img
+              alt="Linkerd Logo"
+              src="/images/identity/svg/linkerd_primary_color_gray.svg"
+              href="https://linkerd.io/"
+              width="200">
+          </li>
+          <li class="my-auto">© 2018 Linkerd Authors. All Rights Reserved.</li>
         </ul>
       </div>
     </div>
@@ -40,10 +30,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/prism.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
-<script>
-  anchors.add();
-</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
