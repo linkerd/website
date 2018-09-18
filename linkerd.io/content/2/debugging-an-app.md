@@ -6,117 +6,47 @@ title = "Example: debugging an app"
   weight = 8
 +++
 
-This section assumes you've followed the steps in the [Getting
-Started](/getting-started) guide and have Linkerd and the demo application
-running in some flavor of Kubernetes cluster.
+This section assumes you've followed the steps in the
+[Getting Started](../getting-started) guide and have Linkerd and the demo
+application running in a Kubernetes cluster.
 
-## Using Linkerd to debug a failing service 💻🔥
+## Using Linkerd to debug a failing service
 
-Now that we have Linkerd and the demo application [up and
-running](/getting-started), let's use Linkerd to diagnose issues.
+The demo application has some issues. Let's use Linkerd to diagnose these
+issues.
 
-First, let's use the `linkerd stat` command to get an overview of deployment
-health:
+If you glance at the Linkerd dashboard (by running the `linkerd dashboard`
+command), you should see all the services in the `emojivoto` namespace. Each
+service running Linkerd shows success rate, requests per second and latency
+percentiles.
 
-```bash
-linkerd -n emojivoto stat deploy
-```
+That's pretty neat, but the first thing you might notice is that the success
+rate is well below 100%! Click on `web` and let's dig in.
 
-Your results will be something like:
+You should now be looking at the Deployment page for the web service. The first
+thing you'll see here is that the web service is taking traffic from `vote-bot`
+(a service included with emojivoto to continually generate a lower level of
+life traffic). The web service also has two outgoing dependencies, `emoji` and
+`voting`.
 
-```bash
-NAME       MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-emoji         1/1   100.00%   2.0rps           1ms           4ms           5ms
-vote-bot      1/1         -        -             -             -             -
-voting        1/1    89.66%   1.0rps           1ms           5ms           5ms
-web           1/1    94.92%   2.0rps           5ms          10ms          18ms
-```
+While the emoji service is handling every request from web successfully, it
+looks like the voting service is failing some requests! A failure in a dependent
+service may be exactly what is causing the errors that web is returning.
 
-We can see that the `voting` service is performing far worse than the others.
+Let's scroll a little further down the page, we'll see a live list of all
+traffic endpoints that "web" is receiving. This is interesting:
 
-How do we figure out what's going on? Our traditional options are: looking at
-the logs, attaching a debugger, etc. Linkerd gives us a new tool that we can
-use: a live view of traffic going through the deployment. Let's use the `tap`
-command to take a look at all requests currently flowing to this deployment.
+There are two calls that are not at 100%: the first is vote-bot's call to the
+`/api/vote` endpoint. The second is the `VotePoop` call from the web service to
+its dependent service, `voting`. Very interesting! Since `/api/vote` is an
+incoming call, and `VotePoop` is an outgoing call, this is a good clue that this
+endpoint is what's causing the problem!
 
-```bash
-linkerd -n emojivoto tap deploy --to deploy/voting
-```
+Finally, to dig a little deeper, we can click on the `tap` icon in the far right
+column. This will take use to the live list of requests that match only this
+endpoint. We can confirm that the requests are failing (they all have a
+[gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code),
+indicating an error).
 
-This gives us a lot of requests:
-
-```bash
-req id=0:1624 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VoteDoughnut
-rsp id=0:1624 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1603µs
-end id=0:1624 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=OK duration=28µs response-length=5B
-req id=0:1629 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VoteBeer
-rsp id=0:1629 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=2009µs
-end id=0:1629 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=OK duration=24µs response-length=5B
-req id=0:1634 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VoteDog
-rsp id=0:1634 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1730µs
-end id=0:1634 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=OK duration=21µs response-length=5B
-req id=0:1639 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VoteCrossedSwords
-rsp id=0:1639 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1599µs
-end id=0:1639 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=OK duration=27µs response-length=5B
-```
-
-Let's see if we can narrow down what we're looking at. We can see a few
-`grpc-status=Unknown`s in these logs. This is GRPCs way of indicating failed
-requests.
-
-Let's figure out where those are coming from. Let's run the `tap` command again,
-and grep the output for `Unknown`s:
-
-```bash
-linkerd -n emojivoto tap deploy --to deploy/voting \
-  | grep Unknown -B 2
-```
-
-There will be fewer requests now, thanks to grep:
-
-```bash
-req id=0:2294 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VotePoop
-rsp id=0:2294 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=2147µs
-end id=0:2294 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=Unknown duration=0µs response-length=0B
---
-req id=0:2314 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VotePoop
-rsp id=0:2314 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=2405µs
-end id=0:2314 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=Unknown duration=0µs response-length=0B
---
-```
-
-We can see that all of the `grpc-status=Unknown`s are coming from the `VotePoop`
-endpoint. Let's use the `tap` command's flags to narrow down our output to just
-this endpoint:
-
-```bash
-linkerd -n emojivoto tap deploy/voting --path /emojivoto.v1.VotingService/VotePoop
-```
-
-With even more filtering, the problem is starting to become apparent:
-
-```bash
-req id=0:2724 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VotePoop
-rsp id=0:2724 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1644µs
-end id=0:2724 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=Unknown duration=0µs response-length=0B
-req id=0:2729 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VotePoop
-rsp id=0:2729 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1736µs
-end id=0:2729 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=Unknown duration=0µs response-length=0B
-req id=0:2734 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :method=POST :authority=voting-svc.emojivoto:8080 :path=/emojivoto.v1.VotingService/VotePoop
-rsp id=0:2734 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs :status=200 latency=1779µs
-end id=0:2734 src=10.1.8.150:56224 dst=voting-6795f54474-6vfbs grpc-status=Unknown duration=0µs response-length=0B
-```
-
-We can see that none of our `VotePoop` requests are successful. What happens
-when we try to vote for 💩 ourselves, in the UI? Follow the instructions in
-[Step Five](/getting-started/#step-five) to open the demo app.
-
-Now click on the 💩 emoji to vote on it.
-
-{{< fig src="/images/2/emojivoto-poop.png" title="Demo application 💩 page" >}}
-
-Oh! The demo application is intentionally returning errors for all requests to
-vote for 💩. We've found where the errors are coming from. At this point, we
-can start diving into the logs or code for our failing service. In future
-versions of Linkerd, we'll even be able to apply routing rules to change what
-happens when this endpoint is called.
+At this point, we have everything required to either fix the problem ourselves
+or chat with another team to get the endpoint fixed and fix the services.
