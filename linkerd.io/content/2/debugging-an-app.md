@@ -20,8 +20,12 @@ command), you should see all the services in the `emojivoto` namespace. Each
 service running Linkerd shows success rate, requests per second and latency
 percentiles.
 
+{{< fig src="/images/debugging/stat.png" title="Top Level Metrics" >}}
+
 That's pretty neat, but the first thing you might notice is that the success
 rate is well below 100%! Click on `web` and let's dig in.
+
+{{< fig src="/images/debugging/deployment-detail.png" title="Deployment Detail" >}}
 
 You should now be looking at the Deployment page for the web service. The first
 thing you'll see here is that the web service is taking traffic from `vote-bot`
@@ -36,6 +40,8 @@ service may be exactly what is causing the errors that web is returning.
 Let's scroll a little further down the page, we'll see a live list of all
 traffic endpoints that "web" is receiving. This is interesting:
 
+{{< fig src="/images/debugging/web-top.png" title="Top" >}}
+
 There are two calls that are not at 100%: the first is vote-bot's call to the
 `/api/vote` endpoint. The second is the `VotePoop` call from the web service to
 its dependent service, `voting`. Very interesting! Since `/api/vote` is an
@@ -47,6 +53,8 @@ column. This will take use to the live list of requests that match only this
 endpoint. We can confirm that the requests are failing (they all have a
 [gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code),
 indicating an error).
+
+{{< fig src="/images/debugging/web-tap.png" title="Tap" >}}
 
 At this point, we have everything required to either fix the problem ourselves
 or chat with another team to get the endpoint fixed and fix the services.
