@@ -17,13 +17,13 @@ of the data plane. The CLI can be used to
 
 The control plane is made up of four components:
 
-- Controller - The controller deployment consists multiple containers
+- Controller - The controller deployment consists of multiple containers
   (public-api, proxy-api, destination, tap) that provide the bulk of the control
   plane's functionality.
 
 - Web - The web deployment provides the Linkerd dashboard.
 
-- Prometheus - All the metrics exposed by Linkerd are scraped via Prometheus
+- Prometheus - All of the metrics exposed by Linkerd are scraped via Prometheus
   and stored here. This is an instance of Prometheus that has been configured to
   work specifically with the data that Linkerd generates. There are
   [instructions](/2/prometheus) if you would like to integrate this with an
@@ -58,7 +58,7 @@ is driven by the control plane.
 An ultralight transparent proxy written in [Rust](https://www.rust-lang.org/),
 the proxy is installed into each pod of a service and becomes part of the data
 plane. It receives all incoming traffic for a pod and intercepts all outgoing
-traffic via. an `initContainer` that configures `iptables` to forward the
+traffic via an `initContainer` that configures `iptables` to forward the
 traffic correctly. Because it is a sidecar and intercepts all the incoming and
 outgoing traffic for a service, there are no code changes required and it can
 even be added to a running service.
@@ -85,7 +85,7 @@ The proxy supports service discovery via DNS and the
 
 ## CLI
 
-The Linkerd CLI is run locally on your machine and used to interact with the
+The Linkerd CLI is run locally on your machine and is used to interact with the
 control and data planes. It can be used to view statistics, debug production
 issues in real time and install/upgrade the control and data planes.
 

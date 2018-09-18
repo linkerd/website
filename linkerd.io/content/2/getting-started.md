@@ -189,10 +189,10 @@ kubectl -n emojivoto port-forward \
 ```
 
 You might notice that some parts of the application are broken! If you were to
-inspect your handly local Kubernetes dashboard, you wouldn’t see very much
-interesting --- as far as Kubernetes is concerned, the app is running just fine.
+inspect your handy local Kubernetes dashboard, you wouldn’t see very much of
+interest --- as far as Kubernetes is concerned, the app is running just fine.
 This is a very common situation! Kubernetes understands whether your pods are
-running, but not whether they are responding properly. Check out
+running, but not whether they are responding properly. Check out the
 [debugging example](../debugging-an-app) if you're interested in how to figure
 out exactly what is wrong.
 
@@ -205,8 +205,8 @@ kubectl get -n emojivoto deploy -o yaml \
   | kubectl apply -f -
 ```
 
-This command retrieves all the deployments running in the `emojivoto` namespace,
-runs set of Kubernetes resources through `inject`, and finally reapplies it to
+This command retrieves all of the deployments running in the `emojivoto` namespace,
+runs the set of Kubernetes resources through `inject`, and finally reapplies it to
 the cluster. `inject` augments the resources to include the data plane's
 proxies. As with `install`, `inject` is a pure text operation, meaning that you
 can inspect the input and output before you use it. You can even run it through
@@ -217,12 +217,13 @@ update each pod with the data plane's proxies, all without any downtime.
 
 You've added Linkerd to existing services without touching the original YAML!
 Because `inject` augments YAML, it would also be possible to take
-`emojivoto.yml` itself and do the same thing. For a service that isn't a demo,
-it would be ideal to integrate `linkerd inject` into your CI/CD pipeline. This
-allows you to choose what services use linkerd one at a time and incrementally
-roll the data plane across the services that you'd like it on.
+`emojivoto.yml` itself and do the same thing
+(`cat emojivoto.yml | linkerd inject -`).
+This is a great way to get Linkerd integrated into your CI/CD
+pipeline. You can choose which services use Linkerd one at a time and
+incrementally add them to the data plane.
 
-Just like with the control plane, it is possible to very that everything worked
+Just like with the control plane, it is possible to verify that everything worked
 the way it should with the data plane. To do this check, run:
 
 ```bash
