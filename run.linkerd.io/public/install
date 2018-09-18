@@ -2,7 +2,7 @@
 
 set -eu
 
-LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_EDGE_VERSION}
+LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_STABLE_VERSION}
 
 if [ "$(uname -s)" = "Darwin" ]; then
   OS=darwin
