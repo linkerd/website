@@ -136,8 +136,8 @@ Server version: v{{% latestversion %}}
 ### Notes
 
 - You will lose the historical data from Prometheus. If you would like to have
-that data persisted through an upgrade, take a look at the [persistence
-documentation](/2/prometheus/)
+  that data persisted through an upgrade, take a look at the
+  [persistence documentation](/2/observability/prometheus/#exporting-metrics)
 
 ## Upgrade the data plane
 

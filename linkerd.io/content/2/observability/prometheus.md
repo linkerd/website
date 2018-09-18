@@ -1,10 +1,16 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Exporting metrics to Prometheus"
+title = "Prometheus"
+description = "Prometheus collects and stores all the Linkerd metrics. It is a component of the control plane and can be integrated with existing metric systems, such as an existing Prometheus install."
+aliases = [
+  "/2/prometheus/"
+]
 [menu.l5d2docs]
-  name = "Exporting to Prometheus"
-  weight = 9
+  name = "Prometheus"
+  parent = "observability"
 +++
+
+## Exporting Metrics
 
 If you have an existing Prometheus cluster, it is very easy to export Linkerd's
 rich telemetry data to your cluster.  Simply add the following item to your
