@@ -13,7 +13,7 @@ There are three components that need to be upgraded:
 - [Data Plane](/2/architecture#data-plane)
 
 In this guide, we'll walk you through how to upgrade all three compnents
-incrementally without taking down any your services.
+incrementally without taking down any of your services.
 
 ## Upgrade the CLI
 
@@ -152,7 +152,7 @@ spec to have the latest version of the `linkerd-proxy` sidecar container. By
 using `kubectl apply`, Kubernetes will do a rolling deploy of your service and
 update the running pods to the latest version.
 
-To do this will the example application, emojivoto, you can run:
+To do this with the example application, emojivoto, you can run:
 
 ```bash
 curl https://run.linkerd.io/emojivoto.yml \

@@ -34,7 +34,7 @@ The control plane is made up of four components:
   component is used to render and display these dashboards. You can reach these
   dashboards via links in the Linkerd dashboard itself.
 
-{{< fig src="/images/architecture/control-plane.png" title="Control Plane" >}}
+{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
 
 ## Data Plane
 
