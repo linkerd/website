@@ -6,130 +6,51 @@ title = "Overview"
   weight = 1
 +++
 
-Linkerd is an ultralight service mesh for Kubernetes. It
-makes running services on Kubernetes safer and more reliable by transparently
-managing the runtime communication between services. It provides features for
-observability, reliability, and security---all without requiring changes to your
-code.
+Linkerd is a _service sidecar_ and _service mesh_ for Kubernetes and other
+frameworks. It makes running your service easier and safer by giving you
+runtime debugging, observability, reliability, and security--all without
+requiring any changes to your code.
 
-In this doc, you’ll get a high-level overview of Linkerd and how it works. If
-you’re not familiar with the service mesh model, you may want to first read
-William Morgan’s overview, [What’s a service mesh? And why do I need one?](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)
+Linkerd has three basic components: a UI (both command-line and web-based), a
+*data plane*, and a *control plane*. You run Linkerd by installing the CLI on
+your local system, then using the CLI to install the control plane it into your
+cluster, and finally by adding Linkerd's data plane to each service you want to
+run Linkerd on. (See [Adding Your Service](adding-your-service) for more.)
+
+Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
+manipulate it.
 
 ## Architecture
 
-The Linkerd service mesh is deployed on a Kubernetes
-cluster as two basic components: a *data plane* and a *control plane*. The data
-plane carries the actual application request traffic between service instances.
-The control plane drives the data plane and provides APIs for modifying its
-behavior (as well as for accessing aggregated metrics). The Linkerd CLI and web
-UI consume this API and provide ergonomic controls for human beings.
+Let’s take each of Linkerd's components in turn.
 
-Let’s take each of these components in turn.
+Linkerd's UI is comprised of a CLI (helpfully called `linkerd`) and a web UI.
+The CLI runs on your local machine; the web UI is hosted by the control plane.
 
-The Linkerd data plane is comprised of lightweight proxies, which are deployed
-as sidecar containers alongside each instance of your service code. In order to
-“add” a service to the Linkerd service mesh, the pods for that service must be
-redeployed to include a data plane proxy in each pod. (The `linkerd inject`
-command accomplishes this, as well as the configuration work necessary to
-transparently funnel traffic from each instance through the proxy.)
+The Linkerd control plane runs on your cluster a set of services that drive the
+behavior of the data plane. These services accomplish various
+things--aggregating telemetry data, providing a user-facing API, providing
+control data to the data plane proxies, etc. On Kubernetes, they run in a
+dedicated Kubernetes namespace (also called `linkerd` by default). 
 
-These proxies transparently intercept communication to and from each pod, and
-add features such as retries and timeouts, instrumentation, and encryption
-(TLS), as well as allowing and denying requests according to the relevant
-policy.
-
-These proxies are not designed to be configured by hand. Rather, their behavior
-is driven by the control plane.
-
-The Linkerd control plane is a set of services that run in a dedicated
-Kubernetes namespace (`linkerd` by default). These services accomplish various
-things---aggregating telemetry data, providing a user-facing API, providing
-control data to the data plane proxies, etc. Together, they drive the behavior
-of the data plane.
-
-### Performance baseline
-
-The metrics detailed here provide a baseline of expected performance and
-resource usage for the Linkerd data plane and control plane. They were generated
-on a cluster with:
-
-- Kubernetes 1.9.7-gke.3
-- 2-nodes, n1-standard-16 (16 vCPUs, 60 GB memory)
-
-#### Data plane
-
-The following metrics are based on a Linkerd proxy routing HTTP/2 at 1000
-requests/s, spread across 10 connections.
-
-The complete config for this test may be found in the
-[perf-baseline environment](https://github.com/linkerd/linkerd-examples/tree/master/perf-baseline).
-
-| Metric      | Value       |
-| ----------- | ---------  |
-| Memory      | 20.5MB      |
-| CPU         | 0.107 cores |
-| p50 latency | <1ms        |
-| p90 latency | <1ms        |
-| p95 latency | 1ms         |
-| p99 latency | 1ms         |
-
-#### Control plane
-
-The following metrics are based on a Linkerd control-plane at steady state.
-
-The complete config for this test may be found in the
-[lifecycle test environment](https://github.com/linkerd/linkerd-examples/tree/master/lifecycle).
-
-| Process       | Memory (MB) | CPU (cores) |
-| ------------- | ---------- | ---------- |
-| *Total*       | *363*       | *0.051*     |
-| Prometheus    | 232         | 0.036       |
-| Grafana       | 26          | 0.007       |
-| Controller    | 84          | 0.007       |
-| Web           | 21          | 0.001       |
+Finlly, Linkerd's data plane is comprised of ultralight, transparent proxies
+that are deployed in front of a service. These proxies automatically handle all
+traffic to and from the service. Because they're transparent, these proxies act
+as highly instrumented out-of-process network stacks, sending telemetry to, and
+receiving control signals from, a control plane. This design allows Linkerd to
+measure and manipulate traffic to and from your service without introducing
+excessive latency.
 
 ## Using Linkerd
 
-In order to interact with Linkerd as a human,
-you use the Linkerd CLI and the web UI (as well as with associated tools like
-`kubectl`). The CLI and the web UI drive the control plane via its API, and the
-control plane in turn drives the behavior of the data plane.
+To use Linkerd, you use the Linkerd CLI and the web UI. The CLI and the web UI
+drive the control plane via its API, and the control plane in turn drives the
+behavior of the data plane.
 
-The control plane API is designed to be generic enough that other tooling can be
-built on top of it. For example, you may wish to additionally drive the API from
-a CI/CD system.
+(The control plane API is designed to be generic enough that other tooling can
+be built on top of it. For example, you may wish to additionally drive the API
+from a CI/CD system.)
 
 A brief overview of the CLI’s functionality can be seen by running `linkerd
 --help`.
 
-## Linkerd with Kubernetes
-
-Linkerd is designed to fit seamlessly into an
-existing Kubernetes system. This design has several important features.
-
-First, the Linkerd CLI (`linkerd`) is designed to be used in conjunction with
-`kubectl` whenever possible. For example, `linkerd install` and `linkerd inject` are generated Kubernetes configurations designed to be fed directly into `kubectl`. This is to provide a clear division of labor between the service mesh
-and the orchestrator, and to make it easier to fit Linkerd into existing
-Kubernetes workflows.
-
-Second, Linkerd’s core noun in Kubernetes is the Deployment, not the Service.
-For example, `linkerd inject` adds a Deployment; the Linkerd web UI displays
-Deployments; aggregated performance metrics are given per Deployment. This is
-because individual pods can be a part of arbitrary numbers of Services, which
-can lead to complex mappings between traffic flow and pods. Deployments, by
-contrast, require that a single pod be a part of at most one Deployment. By
-building on Deployments rather than Services, the mapping between traffic and
-pod is always clear.
-
-These two design features compose nicely. For example, `linkerd inject` can be
-used on a live Deployment, as Kubernetes rolls pods to include the data plane
-proxy as it updates the Deployment.
-
-## Extending Linkerd’s Behavior
-
-The Linkerd control plane also provides a convenient place for custom
-functionality to be built. While the initial release of Linkerd does not support
-this yet, in the near future, you’ll be able to extend Linkerd’s functionality
-by writing gRPC plugins that run as part of the control plane, without needing
-to recompile Linkerd.
