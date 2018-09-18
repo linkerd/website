@@ -6,34 +6,42 @@ title = "Getting started"
   weight = 3
 +++
 
-Linkerd has two basic components: a *data plane* comprised of lightweight
-proxies, which are deployed as sidecar containers alongside your service code,
-and a *control plane* of processes that coordinate and manage these proxies.
-Humans interact with the service mesh via a command-line interface (CLI) or
-a web app that you use to control the cluster.
+Linkerd works by installing ultralight [proxies](../architecture#proxy) into
+each pod of a service. These proxies become part of a [*data plane*]
+(/2/architecture#data-plane) which reports telemetry data to, and receives
+signals from, a [*control plane*](/2/architecture#control-plane). This means
+that using Linkerd doesn't require any code changes, and can even be installed
+live on a running service.
 
-In this guide, we’ll walk you through how to deploy Linkerd on your Kubernetes
-cluster, and how to set up a sample gRPC application.
+To interact with Linkerd, you first install the control plane and then add the
+data plane proxies to your service. Once installed, you can interact with
+Linkerd using:
 
-Afterwards, check out the [Using Linkerd to debug a service](/2/debugging-an-app)
-page, where  we'll walk you through how to use Linkerd to investigate poorly
-performing services.
+- A [command-line interface](/2/architecture#cli).
 
-> Note that Linkerd v{{% latestversion %}} is an alpha release. It is capable of
-proxying all TCP traffic, including WebSockets and HTTP tunneling, and reporting
-top-line metrics (success rates, latencies, etc) for all HTTP, HTTP/2, and gRPC
-traffic.
+- The [Linkerd dashboard](/2/architecture#dashboard).
+
+- [Grafana dashboards](/2/architecture#grafana) configured for you, out of the
+  box.
+
+- From [Prometheus](/2/architecture#prometheus) itself.
+
+In this guide, we’ll walk you through how to install the Linkerd onto your
+Kubernetes cluster and deploy a sample gRPC application to show off
+what Linkerd can do for your services.
 
 ____
 
-## Step 0: Set up 🌟
+## Step 0: Setup
 
-First, you'll need a Kubernetes cluster running 1.8 or later, and a functioning
+First, you'll need a Kubernetes cluster running 1.9 or later, and a functioning
 `kubectl` command on your local machine.
 
 To run Kubernetes on your local machine, we suggest
 <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/" target="_blank">Minikube</a>
- --- running version 0.24.1 or later.
+ --- running version 0.24.1 or later. To see other options, check out the
+ <a href="https://kubernetes.io/docs/setup/pick-right-solution/"
+ target="_blank">full list</a>.
 
 When ready, make sure you're running a recent version of Kubernetes with:
 
@@ -41,50 +49,36 @@ When ready, make sure you're running a recent version of Kubernetes with:
 kubectl version --short
 ```
 
-Which should display the version of kubectl and Kubernetes that you're running.
-For a 1.10.3 cluster, you would see:
+If you are using GKE with RBAC enabled, you will want to grant a `ClusterRole`
+of `cluster-admin` to your Google Cloud account first. This will provide your
+current user all the permissions required to install the control plane. To bind
+this `ClusterRole` to your user, you can run:
 
 ```bash
-Client Version: v1.10.3
-Server Version: v1.10.3
+kubectl create clusterrolebinding cluster-admin-binding-$USER \
+    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 ```
 
-Confirm that both `Client Version` and `Server Version` are v1.8.0 or greater.
-If not, or if `kubectl` displays an error message, your Kubernetes cluster may
-not exist or may not be set up correctly.
+In the next step, we will install the CLI and validate that your cluster is
+ready to install the control plane.
 
 ____
 
-## Step 1: Install the CLI 💻
+## Step 1: Install the CLI
 
 If this is your first time running Linkerd, you’ll need to download the
-command-line interface (CLI) onto your local machine. You’ll then use this CLI
-to install Linkerd on a Kubernetes
-cluster.
+command-line interface (CLI) onto your local machine. You’ll use this CLI to
+interact with Linkerd, including installing the control plane onto your
+Kubernetes cluster.
 
 To install the CLI, run:
 
 ```bash
-curl https://run.linkerd.io/install | sh
-```
-
-Which should display:
-
-```txt
-Downloading linkerd2-cli-{{% latestversion %}}-darwin...
-Linkerd was successfully installed 🎉
-Add the linkerd CLI to your path with:
-    export PATH=$PATH:$HOME/.linkerd2/bin
-Then run:
-    linkerd install | kubectl apply -f -
-to deploy Linkerd to Kubernetes. Once deployed, run:
-    linkerd dashboard
-to view the Linkerd UI.
-Visit linkerd.io/2/getting-started for more information.
+curl -sL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
-[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/v{{% latestversion %}}).
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
 
 Next, add `linkerd` to your path with:
 
@@ -98,269 +92,214 @@ Verify the CLI is installed and running correctly with:
 linkerd version
 ```
 
-Which should display:
-
-```bash
-Client version: v{{% latestversion %}}
-Server version: unavailable
-```
-
-With `Server version: unavailable`, don't worry, we haven't added the control
-plane... yet.
+As we've not installed the control plane yet, the server's version will be
+unavailable at this point.
 
 ____
 
-## Step 2: Install Linkerd onto the cluster 😎
+## Step 2: Validate your Kubernetes cluster
 
-Now that you have the CLI running locally, it’s time to install the Linkerd
-control plane onto your Kubernetes cluster. Don’t worry if you already have
-things running on this cluster---the control plane will be installed in a
-separate `linkerd` namespace, where it can easily be removed.
+Kubernetes clusters can be configured in many different ways. To ensure that the
+control plane will install correctly, the Linkerd CLI can check and validate
+that everything is configured correctly.
 
-If you are using GKE with RBAC enabled, you must grant a `ClusterRole` of
-`cluster-admin` to your Google Cloud account first, in order to install certain
-telemetry features in the control plane. To do that, you can run:
+To check that your cluster is configured correctly and ready to install the
+control plane, you can run:
 
 ```bash
-kubectl create clusterrolebinding cluster-admin-binding-$USER \
-    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+linkerd check --pre
 ```
 
-To install Linkerd into your environment, run the following commands.
+## Step 3: Install Linkerd onto the cluster
+
+Now that you have the CLI running locally and a cluster that is ready to go,
+it's time to install the lightweight control plane into its own namespace
+(`linkerd`). If you would like to install it into a different namespace, check out
+the help for `install`. To do this, run:
 
 ```bash
 linkerd install | kubectl apply -f -
 ```
 
-The first command generates a Kubernetes config, and pipes it to `kubectl`.
-Kubectl then applies the config to your Kubernetes cluster. The output will be:
+`linkerd install` generates a list of Kubernetes resources. Run it
+standalone if you would like to understand what is going on. This YAML can
+be integrated with any kind of automation you would like to use with your
+cluster. By piping the output of `linkerd install` into `kubectl`, the Linkerd
+control plane resources will be added to your cluster and start running
+immediately.
 
-```txt
-namespace "linkerd" created
-serviceaccount "linkerd-controller" created
-clusterrole "linkerd-linkerd-controller" created
-clusterrolebinding "linkerd-linkerd-controller" created
-serviceaccount "linkerd-prometheus" created
-clusterrole "linkerd-linkerd-prometheus" created
-clusterrolebinding "linkerd-linkerd-prometheus" created
-service "api" created
-service "proxy-api" created
-deployment "controller" created
-service "web" created
-deployment "web" created
-service "prometheus" created
-deployment "prometheus" created
-configmap "prometheus-config" created
-service "grafana" created
-deployment "grafana" created
-configmap "grafana-config" created
-```
-
-To verify the Linkerd server version, run:
+Depending on the speed of your internet connection, it may take a minute or two
+for your Kubernetes cluster to pull the Linkerd images. While that’s happening,
+we can validate that everything’s happening correctly by running:
 
 ```bash
-linkerd version
+linkerd check
 ```
 
-Which should display:
-
-```txt
-Client version: v{{% latestversion %}}
-Server version: v{{% latestversion %}}
-```
-
-Note that it may take Linkerd a minute to start up the first time it's
-installed on your cluster, since Kubernetes must pull all of the images required
-to run it. If the command above outputs `Server version: unavailable` initially,
-verify that all containers in all pods in the `linkerd` namespace are ready,
-by running:
+This command will patiently wait until Linkerd has been installed and is
+running. If you're interested in what components were installed, you can run:
 
 ```bash
-kubectl -n linkerd get po
+kubectl -n linkerd get deploy
 ```
 
-Which should display something like:
+Check out the [architecture](/2/architecture#control-plane) documentation for an
+in depth explanation of what these components are and what they do.
 
-```txt
-NAME                          READY     STATUS    RESTARTS   AGE
-controller-6f78cbd47-hpkkb    5/5       Running   0          51s
-grafana-5b7d796646-d2fwn      2/2       Running   0          51s
-prometheus-74d6879cd6-g42x6   2/2       Running   0          51s
-web-9c5d8bd64-2zxc8           2/2       Running   0          51s
-```
+## Step 4: Explore Linkerd
 
-Once the `READY` column reflects that all containers are ready, re-run the
-`linkerd version` command, which should produce the expected output.
-
-Now, to view the control plane locally, run:
+With the control plane installed and running, you can now view the Linkerd
+dashboard by running:
 
 ```bash
 linkerd dashboard
 ```
 
-If you see something like below, Linkerd is now running on your cluster.  🎉
+{{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
 
-{{< fig src="/images/2/dashboard.png" title="An example of the empty Linkerd dashboard" >}}
+The control plane components all have the proxy installed in their pods and are
+part of the data plane itself. This provides the ability to dig into these
+components and see what is going on behind the scenes. In fact, you can run:
 
-Of course, you haven’t actually added any services to the mesh yet,
-so the dashboard won’t have much to display beyond the status of the service
-mesh itself.
+```bash
+linkerd -n linkerd top deploy/web
+```
+
+This is the traffic you're generating by looking at the dashboard itself!
 
 ____
 
-## Step 3: Install the demo app 🚀
+## Step 5: Install the demo app
 
-Finally, it’s time to install a demo application and add it to the service mesh.
-
-You can [see a live version of the demo app](http://emoji.voto/). To install a
-local version of this demo locally and add it to Linkerd, run:
+To get a feel for how Linkerd would work for one of your services, you can
+install the demo application. It provides an excellent place to look at all the
+functionality that Linkerd provides. To install it on your own cluster, in its
+own namespace (`emojivoto`), run:
 
 ```bash
-curl https://run.linkerd.io/emojivoto.yml \
+curl -sL https://run.linkerd.io/emojivoto.yml \
+  | kubectl apply -f -
+```
+
+You can take a look at this by forwarding the `web` pod to localhost and looking
+at the app in your browser. To forward `web` locally to port 8080, you can run:
+
+```bash
+kubectl -n emojivoto port-forward \
+  $(kubectl -n emojivoto get po -l app=web-svc -oname | cut -d/ -f 2) \
+  8080:80
+```
+
+You might notice that some parts of the application are broken! If you were to
+inspect your handy local Kubernetes dashboard, you wouldn’t see very much of
+interest --- as far as Kubernetes is concerned, the app is running just fine.
+This is a very common situation! Kubernetes understands whether your pods are
+running, but not whether they are responding properly. Check out the
+[debugging example](../debugging-an-app) if you're interested in how to figure
+out exactly what is wrong.
+
+To get some added visibility into what is going on and see some of the
+functionality of Linkerd, let's add Linkerd to emojivoto by running:
+
+```bash
+kubectl get -n emojivoto deploy -o yaml \
   | linkerd inject - \
   | kubectl apply -f -
 ```
 
-This command downloads the Kubernetes config for an example gRPC application
-where users can vote for their favorite emoji, then runs the config through
-`linkerd inject`. This rewrites the config to insert the Linkerd data plane
-proxies as sidecar containers in the application pods.
+This command retrieves all of the deployments running in the `emojivoto` namespace,
+runs the set of Kubernetes resources through `inject`, and finally reapplies it to
+the cluster. `inject` augments the resources to include the data plane's
+proxies. As with `install`, `inject` is a pure text operation, meaning that you
+can inspect the input and output before you use it. You can even run it through
+`diff` to see exactly what is changing.
 
-Finally, `kubectl` applies the config to the Kubernetes cluster.
+Once piped into `kubectl apply`, Kubernetes will execute a rolling deploy and
+update each pod with the data plane's proxies, all without any downtime.
 
-As with `linkerd install`, in this command, the Linkerd CLI is simply doing text
-transformations, with `kubectl` doing the heavy lifting of actually applying
-config to the Kubernetes cluster. This way, you can introduce additional filters
-into the pipeline, or run the commands separately and inspect the output of each
-one.
+You've added Linkerd to existing services without touching the original YAML!
+Because `inject` augments YAML, it would also be possible to take
+`emojivoto.yml` itself and do the same thing
+(`cat emojivoto.yml | linkerd inject -`).
+This is a great way to get Linkerd integrated into your CI/CD
+pipeline. You can choose which services use Linkerd one at a time and
+incrementally add them to the data plane.
 
-The output from this set of commands is:
+Just like with the control plane, it is possible to verify that everything worked
+the way it should with the data plane. To do this check, run:
 
-```txt
-namespace "emojivoto" created
-deployment "emoji" created
-service "emoji-svc" created
-deployment "voting" created
-service "voting-svc" created
-deployment "web" created
-service "web-svc" created
-deployment "vote-bot" created
+```bash
+linkerd -n emojivoto check --proxy
 ```
-
-At this point, you should have an application running on your Kubernetes
-cluster, and (unbeknownst to it!) also added to the Linkerd service mesh.
 
 ____
 
-## Step 4: Watch it run! 👟
+## Step 6: Watch it run!
 
-If you glance at the Linkerd dashboard, you should see all the
-HTTP/2 and HTTP/1-speaking services in the demo app show up in the list of
-deployments that have been added to the Linkerd mesh.
+You can glance at the Linkerd dashboard and see all the HTTP/2 (gRPC) and HTTP/1
+(web frontend) speaking services in the demo app show up in the list of
+resources running in the `emojivoto` namespace. As the demo app comes with a
+load generator, it is possible to check out some of the Linkerd functionality.
 
-Depending on where the demo app is being run, there are slightly different steps
-to visit the app itself.
-
-For Minikube:
-
-```bash
-minikube -n emojivoto service web-svc --url
-```
-
-Otherwise, you can run:
-
-```bash
-kubectl get svc web-svc -n emojivoto -o jsonpath="{.status.loadBalancer.ingress[0].*}"
-```
-
-Finally, let’s take a look back at our dashboard (run `linkerd dashboard` if you
-haven’t already). You should be able to browse all the services that are running
-as part of the application to view:
-
-- Success rates
-- Request rates
-- Latency distribution percentiles
-- Upstream and downstream dependencies
-
-As well as various other bits of information about live traffic. Neat, huh?
-
-Now that `linkerd dashboard` has a little more data, take some time to look at
-the different views available:
-
-SERVICE MESH
-: Displays continuous health metrics of the control plane itself, as well as
-high-level health metrics of deployments in the data plane.
-
-NAMESPACE
-: List all the resources in a namespace with requests, success rate and latency.
-
-DEPLOYMENTS
-: Lists all deployments by requests, success rate, and latency.
-
-PODS
-: Lists all pods by requests, success rate, and latency.
-
-REPLICATION CONTROLLER
-: Lists all replications controllers by requests, success rate, and latency.
-
-GRAFANA
-: For detailed metrics on all of the above resources, click any resource to
-browse to a dynamically-generated Grafana dashboard.
-
-___
-
-## Using the CLI 💻
-
-Of course, the dashboard isn’t the only way to inspect what’s happening in the
-Linkerd service mesh. The CLI provides several interesting and powerful commands
-that you should experiment with, including `linkerd stat` and `linkerd tap`.
-
-To view details per deployment, run:
+To see some high level stats about the app, you can run:
 
 ```bash
 linkerd -n emojivoto stat deploy
 ```
 
-Which should display:
+This will show the "golden" metrics for each deployment:
 
-```txt
-NAME       MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-emoji         1/1   100.00%   2.0rps           1ms           2ms           3ms
-vote-bot      1/1         -        -             -             -             -
-voting        1/1    81.36%   1.0rps           1ms           1ms           2ms
-web           1/1    90.68%   2.0rps           4ms           5ms           5ms
-```
+- Success rates
+- Request rates
+- Latency distribution percentiles
 
-To see a live pipeline of requests for your application, run:
+To dig in a little further, it is possible `top` the running services in real
+time and get an idea of what is happening on a per-path basis. To see this, you
+can run:
 
 ```bash
-linkerd -n emojivoto tap deploy
+linkerd -n emojivoto top deploy
 ```
 
-Which should display:
+If you're interested in going even deeper, `tap` shows the stream of requests
+across a single pod, deployment, or even everything in the emojivoto namespace.
+To see this stream for the `web` deployment, all you need to do is run:
 
-```txt
-req id=0:2900 src=10.1.8.151:51978 dst=10.1.8.150:80 :method=GET :authority=web-svc.emojivoto:80 :path=/api/list
-req id=0:2901 src=10.1.8.150:49246 dst=emoji-664486dccb-97kws :method=POST :authority=emoji-svc.emojivoto:8080 :path=/emojivoto.v1.EmojiService/ListAll
-rsp id=0:2901 src=10.1.8.150:49246 dst=emoji-664486dccb-97kws :status=200 latency=2146µs
-end id=0:2901 src=10.1.8.150:49246 dst=emoji-664486dccb-97kws grpc-status=OK duration=27µs response-length=2161B
-rsp id=0:2900 src=10.1.8.151:51978 dst=10.1.8.150:80 :status=200 latency=5698µs
-end id=0:2900 src=10.1.8.151:51978 dst=10.1.8.150:80 duration=112µs response-length=4558B
-req id=0:2902 src=10.1.8.151:51978 dst=10.1.8.150:80 :method=GET :authority=web-svc.emojivoto:80 :path=/api/vote
-...
+```bash
+linkerd -n emojivoto tap deploy/web
 ```
+
+All of this is also available with the dashboard, if you would like to use your
+browser instead. The dashboard views look like:
+
+{{< gallery >}}
+
+{{< gallery-item src="/images/getting-started/stat.png" title="Top Line Metrics">}}
+
+{{< gallery-item src="/images/getting-started/inbound-outbound.png" title="Deployment Detail">}}
+
+{{< gallery-item src="/images/getting-started/top.png" title="Top" >}}
+
+{{< gallery-item src="/images/getting-started/tap.png" title="Tap" >}}
+
+{{< /gallery >}}
+
+These are all great for seeing real time data, but what about things that
+happened in the past? Linkerd includes Grafana to visualize all the great
+metrics collected by Prometheus and ships with some extremely valuable
+dashboards. You can get to these by clicking the Grafana icon in the overview
+page.
+
+{{< fig src="/images/getting-started/grafana.png" title="Deployment Detail Dashboard">}}
 
 ____
 
 ## That’s it! 👏
 
-For more information about Linkerd:
+For more things you can do:
 
-- Check out the [overview doc](/2/overview)
-- Hop into the #linkerd2 channel on [the Linkerd Slack]
-(https://slack.linkerd.io)
-- Browse through the [Discourse forum](https://discourse.linkerd.io/c/linkerd2).
-- Follow [@linkerd](https://twitter.com/linkerd) on Twitter.
-
-We’re just getting started building Linkerd, and we’re extremely interested in
-your feedback!
+- [Debug emojivoto](../debugging-an-app)
+- [Add Linkerd to your service](../adding-your-service)
+- [Learn more](../architecture) about Linkerd's architecture
+- Hop into the #linkerd2 channel on
+  [the Linkerd Slack](https://slack.linkerd.io)

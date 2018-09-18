@@ -50,7 +50,8 @@ footer li {
   }
 
   h2, h3 {
-    margin-top: 1.75rem;
+    margin-top: 1rem;
+    padding-bottom: 1.75rem;
   }
 
   pre {
@@ -67,8 +68,6 @@ code {
   $code-background: $code-background;
 }
 
-.table {
-  td {
-    min-width: $table-cell-min-width;
-  }
+.table td {
+  min-width: $table-cell-min-width;
 }
