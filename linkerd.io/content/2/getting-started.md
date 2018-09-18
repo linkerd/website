@@ -13,9 +13,9 @@ signals from, a [*control plane*](/2/architecture#control-plane). This means
 that using Linkerd doesn't require any code changes, and can even be installed
 live on a running service.
 
-To interact with Linkerd, to install the control plane, add the proxy to your
-service, or view the rich telemetry that is collected on your service you can
-use:
+To interact with Linkerd, you first install the control plane and then add the
+data plane proxies to your service. Once installed, you can interact with
+Linkerd using:
 
 - A [command-line interface](/2/architecture#cli).
 
@@ -26,8 +26,8 @@ use:
 
 - From [Prometheus](/2/architecture#prometheus) itself.
 
-In this guide, we’ll walk you through how to install the Linkerd control plane
-onto your Kubernetes cluster and deploy a sample gRPC application to show off
+In this guide, we’ll walk you through how to install the Linkerd onto your
+Kubernetes cluster and deploy a sample gRPC application to show off
 what Linkerd can do for your services.
 
 ____
@@ -155,6 +155,8 @@ dashboard by running:
 linkerd dashboard
 ```
 
+{{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
+
 The control plane components all have the proxy installed in their pods and are
 part of the data plane itself. This provides the ability to dig into these
 components and see what is going on behind the scenes. In fact, you can run:
@@ -167,7 +169,7 @@ This is the traffic you're generating by looking at the dashboard itself!
 
 ____
 
-## Step 4: Install the demo app
+## Step 5: Install the demo app
 
 To get a feel for how Linkerd would work for one of your services, you can
 install the demo application. It provides an excellent place to look at all the
@@ -232,7 +234,7 @@ linkerd -n emojivoto check --proxy
 
 ____
 
-## Step 5: Watch it run!
+## Step 6: Watch it run!
 
 You can glance at the Linkerd dashboard and see all the HTTP/2 (gRPC) and HTTP/1
 (web frontend) speaking services in the demo app show up in the list of
@@ -268,7 +270,27 @@ linkerd -n emojivoto tap deploy/web
 ```
 
 All of this is also available with the dashboard, if you would like to use your
-browser instead.
+browser instead. The dashboard views look like:
+
+{{< gallery >}}
+
+{{< gallery-item src="/images/getting-started/stat.png" title="Top Line Metrics">}}
+
+{{< gallery-item src="/images/getting-started/inbound-outbound.png" title="Deployment Detail">}}
+
+{{< gallery-item src="/images/getting-started/top.png" title="Top" >}}
+
+{{< gallery-item src="/images/getting-started/tap.png" title="Tap" >}}
+
+{{< /gallery >}}
+
+These are all great for seeing real time data, but what about things that
+happened in the past? Linkerd includes Grafana to visualize all the great
+metrics collected by Prometheus and ships with some extremely valuable
+dashboards. You can get to these by clicking the Grafana icon in the overview
+page.
+
+{{< fig src="/images/getting-started/grafana.png" title="Deployment Detail Dashboard">}}
 
 ____
 
