@@ -21,7 +21,7 @@ The control plane is made up of four components:
   (public-api, proxy-api, destination, tap) that provide the bulk of the control
   plane's functionality.
 
-- Web - The web deployment provides the linkerd dashboard.
+- Web - The web deployment provides the Linkerd dashboard.
 
 - Prometheus - All the metrics exposed by Linkerd are scraped via Prometheus
   and stored here. This is an instance of Prometheus that has been configured to
@@ -53,15 +53,45 @@ and denying requests according to the relevant policy.
 These proxies are not designed to be configured by hand. Rather, their behavior
 is driven by the control plane.
 
+### Proxy
+
+An ultralight transparent proxy written in [Rust](https://www.rust-lang.org/),
+the proxy is installed into each pod of a service and becomes part of the data
+plane. It receives all incoming traffic for a pod and intercepts all outgoing
+traffic via. an `initContainer` that configures `iptables` to forward the
+traffic correctly. Because it is a sidecar and intercepts all the incoming and
+outgoing traffic for a service, there are no code changes required and it can
+even be added to a running service.
+
+The proxy's features include:
+
+- Transparent, zero-config proxying for HTTP, HTTP/2, and arbitrary TCP
+  protocols.
+
+- Automatic Prometheus metrics export for HTTP and TCP traffic.
+
+- Transparent, zero-config WebSocket proxying.
+
+- Automatic, latency-aware, layer-7 load balancing.
+
+- Automatic layer-4 load balancing for non-HTTP traffic.
+
+- Automatic TLS (experimental).
+
+- An on-demand diagnostic tap API.
+
+The proxy supports service discovery via DNS and the
+[destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).
+
 ## CLI
 
-The Linkerd CLI is run locally, on your machine and used to interact with the
+The Linkerd CLI is run locally on your machine and used to interact with the
 control and data planes. It can be used to view statistics, debug production
 issues in real time and install/upgrade the control and data planes.
 
 ## Dashboard
 
-The Linkerd Dashboard provides a high level view of what is happening with your
+The Linkerd dashboard provides a high level view of what is happening with your
 services in real time. It can be used to view the "golden" metrics (success
 rate, requests/second and latency), visualize service dependencies and
 understand the health of specific service routes.
