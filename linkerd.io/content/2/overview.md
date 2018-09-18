@@ -13,9 +13,9 @@ requiring any changes to your code.
 
 Linkerd has three basic components: a UI (both command-line and web-based), a
 *data plane*, and a *control plane*. You run Linkerd by installing the CLI on
-your local system, then using the CLI to install the control plane it into your
+your local system, then by using the CLI to install the control plane into your
 cluster, and finally by adding Linkerd's data plane to each service you want to
-run Linkerd on. (See [Adding Your Service](adding-your-service) for more.)
+run Linkerd on. (See [Adding Your Service](../adding-your-service) for more.)
 
 Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
 manipulate it.
@@ -27,13 +27,13 @@ Let’s take each of Linkerd's components in turn.
 Linkerd's UI is comprised of a CLI (helpfully called `linkerd`) and a web UI.
 The CLI runs on your local machine; the web UI is hosted by the control plane.
 
-The Linkerd control plane runs on your cluster a set of services that drive the
-behavior of the data plane. These services accomplish various
+The Linkerd control plane runs on your cluster as a set of services that drive
+the behavior of the data plane. These services accomplish various
 things--aggregating telemetry data, providing a user-facing API, providing
 control data to the data plane proxies, etc. On Kubernetes, they run in a
-dedicated Kubernetes namespace (also called `linkerd` by default). 
+dedicated Kubernetes namespace (also called `linkerd` by default).
 
-Finlly, Linkerd's data plane is comprised of ultralight, transparent proxies
+Finally, Linkerd's data plane is comprised of ultralight, transparent proxies
 that are deployed in front of a service. These proxies automatically handle all
 traffic to and from the service. Because they're transparent, these proxies act
 as highly instrumented out-of-process network stacks, sending telemetry to, and
