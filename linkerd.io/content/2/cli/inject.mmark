@@ -1,7 +1,7 @@
 +++
 date = "2018-08-28T08:00:00-07:00"
 title = "Inject"
-description = "The inject command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via. kubectl."
+description = "The inject command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl."
 aliases = [
   "/2/inject-reference/"
 ]
@@ -46,14 +46,14 @@ information as the table below:
 ## What `linkerd inject` Is Doing
 
 `linkerd inject` is modifying the Kubernetes Deployment manifest that is being passed to it
-either as a file or as a stream to its standard in. It is adding two things:
+either as a file or as a stream to its stdin. It is adding two things:
 
 1. An Init Container (supported as of Kubernetes version 1.6 or greater)
 
 1. A Linkerd Proxy sidecar container into each Pod belonging to your Deployment
 
 The Init Container is responsible for pulling configuration (such as
-certificates) from the Kubernetes API/Linkerd Controller, as well as provide
+certificates) from the Kubernetes API/Linkerd Controller, as well as providing
 configuration to the Linkerd Proxy container for its runtime.
 
 ## Example Deployment

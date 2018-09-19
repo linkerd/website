@@ -11,7 +11,7 @@ weight = 1
 +++
 
 Linkerd provides extensive observability functionality. It automatically
-instruments top-line  metrics such as request volume, success rates, and latency
+instruments top-line metrics such as request volume, success rates, and latency
 distributions. In addition to these top-line metrics, Linkerd provides real time
 streams of the requests for all incoming and outgoing traffic.
 

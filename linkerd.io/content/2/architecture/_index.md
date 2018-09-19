@@ -127,7 +127,7 @@ and store all the Linkerd metrics. It is installed as part of the control plane
 and provides the data used by the CLI, dashboard and Grafana.
 
 The proxy exposes a `/metrics` endpoint for Prometheus to scrape on port 4191.
-This is scraped every 10 seconds. These metrics are them available to all the
+This is scraped every 10 seconds. These metrics are then available to all the
 other Linkerd components, such as the CLI and dashboard.
 
 {{< fig src="/images/architecture/prometheus.svg" title="Metrics Collection" >}}

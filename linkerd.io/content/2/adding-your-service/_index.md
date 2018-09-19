@@ -10,7 +10,7 @@ In order for your service to take advantage of Linkerd, it needs to have the
 proxy sidecar added to its resource definition. This is done by using the
 Linkerd [CLI](../architecture/#cli) to update the definition and output YAML
 that can be passed to `kubectl`. By using Kubernetes' rolling updates, the
-availaibility of your application will not be affected.
+availability of your application will not be affected.
 
 To add Linkerd to your service, run:
 
@@ -20,13 +20,14 @@ linkerd inject deployment.yml \
 ```
 
 `deployment.yml` is the Kubernetes config file containing your
-application. This will add the proxy sidecar along with an initContainer that
+application. This will add the proxy sidecar along with an `initContainer` that
 configures iptables to pass all traffic through the proxy. By applying this new
 configuration via `kubectl`, a rolling update of your deployment will be
 triggered replacing each pod with a new one.
 
 You will know that your service has been successfully added to the service mesh
-if its proxy status is green in the Linkerd dashboard.
+if it's pods are reported to be meshed in the Meshed column of the Linkerd
+dashboard.
 
 {{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
 
@@ -77,7 +78,7 @@ linkerd inject deployment.yml --skip-inbound-ports=35 \
 ## Inject Reference
 
 For more information on how the inject command works and all of the parameters
-that can be set, look at the [reference](../cli/inject/)
+that can be set, look at the [reference](../cli/inject/).
 
 ## Notes
 
