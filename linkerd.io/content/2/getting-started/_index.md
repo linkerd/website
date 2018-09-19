@@ -121,12 +121,10 @@ the help for `install`. To do this, run:
 linkerd install | kubectl apply -f -
 ```
 
-`linkerd install` generates a list of Kubernetes resources. Run it
-standalone if you would like to understand what is going on. This YAML can
-be integrated with any kind of automation you would like to use with your
-cluster. By piping the output of `linkerd install` into `kubectl`, the Linkerd
-control plane resources will be added to your cluster and start running
-immediately.
+`linkerd install` generates a list of Kubernetes resources. Run it standalone if
+you would like to understand what is going on. By piping the output of `linkerd
+install` into `kubectl`, the Linkerd control plane resources will be added to
+your cluster and start running immediately.
 
 Depending on the speed of your internet connection, it may take a minute or two
 for your Kubernetes cluster to pull the Linkerd images. While that’s happening,
@@ -253,7 +251,7 @@ This will show the "golden" metrics for each deployment:
 - Request rates
 - Latency distribution percentiles
 
-To dig in a little further, it is possible `top` the running services in real
+To dig in a little further, it is possible to `top` the running services in real
 time and get an idea of what is happening on a per-path basis. To see this, you
 can run:
 

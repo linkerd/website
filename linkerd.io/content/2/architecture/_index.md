@@ -26,14 +26,15 @@ The control plane is made up of four components:
 - Prometheus - All of the metrics exposed by Linkerd are scraped via Prometheus
   and stored here. This is an instance of Prometheus that has been configured to
   work specifically with the data that Linkerd generates. There are
-  [instructions](/2/prometheus) if you would like to integrate this with an
+  [instructions](/2/observability/prometheus/#exporting-metrics)
+  if you would like to integrate this with an
   existing Prometheus installation.
 
 - Grafana - Linkerd comes with many dashboards out of the box. The Grafana
   component is used to render and display these dashboards. You can reach these
   dashboards via links in the Linkerd dashboard itself.
 
-{{< fig src="/images/architecture/control-plane.png" title="Control Plane" >}}
+{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
 
 ## Data Plane
 
@@ -121,8 +122,12 @@ The dashboards that are provided out of the box include:
 
 ## Prometheus
 
-Prometheus is a cloud native monitoring solution that is used to store all the
-Linkerd metrics. It is installed as part of the control plane and provides the
-data used by the CLI, dashboard and Grafana.
+Prometheus is a cloud native monitoring solution that is used to collect
+and store all the Linkerd metrics. It is installed as part of the control plane
+and provides the data used by the CLI, dashboard and Grafana.
 
-{{< fig src="/images/architecture/metrics.png" title="Metrics Collection" >}}
+The proxy exposes a `/metrics` endpoint for Prometheus to scrape on port 4191.
+This is scraped every 10 seconds. These metrics are then available to all the
+other Linkerd components, such as the CLI and dashboard.
+
+{{< fig src="/images/architecture/prometheus.svg" title="Metrics Collection" >}}

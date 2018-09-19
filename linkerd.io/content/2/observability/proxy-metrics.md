@@ -1,9 +1,13 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Metrics exported by the proxy"
+title = "Proxy Metrics Reference"
+description = "The Linkerd proxy natively exports Prometheus metrics for all incoming and outgoing traffic."
+aliases = [
+  "/2/proxy-metrics/"
+]
 [menu.l5d2docs]
-  name = "Proxy Metrics"
-  weight = 10
+  name = "Proxy Metrics Reference"
+  parent = "observability"
 +++
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the
@@ -13,16 +17,18 @@ port (default: `:4191`) in the [Prometheus format][prom-format]:
 ## Protocol-Level Metrics
 
 * `request_total`: A counter of the number of requests the proxy has received.
-This is incremented when the request stream begins.
+  This is incremented when the request stream begins.
+
 * `response_total`: A counter of the number of responses the proxy has received.
-This is incremented when the response stream ends.
+  This is incremented when the response stream ends.
+
 * `response_latency_ms`: A histogram of response latencies. This measurement
-reflects the [time-to-first-byte][ttfb] (TTFB) by recording the elapsed time
-between the proxy processing a request's headers and the first data frame of the
-response. If a response does not include any data, the end-of-stream event is
-used. The TTFB measurement is used so that Linkerd accurately reflects
-application behavior when a server provides response headers immediately but is
-slow to begin serving the response body.
+  reflects the [time-to-first-byte][ttfb] (TTFB) by recording the elapsed time
+  between the proxy processing a request's headers and the first data frame of the
+  response. If a response does not include any data, the end-of-stream event is
+  used. The TTFB measurement is used so that Linkerd accurately reflects
+  application behavior when a server provides response headers immediately but is
+  slow to begin serving the response body.
 
 Note that latency measurements are not exported to Prometheus until the stream
 _completes_. This is necessary so that latencies can be labeled with the appropriate

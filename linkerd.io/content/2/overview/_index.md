@@ -20,18 +20,22 @@ run Linkerd on. (See [Adding Your Service](../adding-your-service) for more.)
 Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
 manipulate it.
 
+You can [get started](../getting-started) in minutes!
+
 ## Architecture
+
+{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
 
 Let’s take each of Linkerd's components in turn.
 
 Linkerd's UI is comprised of a CLI (helpfully called `linkerd`) and a web UI.
 The CLI runs on your local machine; the web UI is hosted by the control plane.
 
-The Linkerd control plane runs on your cluster as a set of services that drive
-the behavior of the data plane. These services accomplish various
-things--aggregating telemetry data, providing a user-facing API, providing
-control data to the data plane proxies, etc. On Kubernetes, they run in a
-dedicated Kubernetes namespace (also called `linkerd` by default).
+The Linkerd control plane is composed of a number of services that run on your
+cluster and drive the behavior of the data plane. These services accomplish
+various things--aggregating telemetry data, providing a user-facing API,
+providing control data to the data plane proxies, etc. By default, they run in a
+dedicated `linkerd` namespace.
 
 Finally, Linkerd's data plane is comprised of ultralight, transparent proxies
 that are deployed in front of a service. These proxies automatically handle all
@@ -40,6 +44,9 @@ as highly instrumented out-of-process network stacks, sending telemetry to, and
 receiving control signals from, a control plane. This design allows Linkerd to
 measure and manipulate traffic to and from your service without introducing
 excessive latency.
+
+You can check out the [architecture](../architecture/) for more
+details on the components, what they do and how it all fits together.
 
 ## Using Linkerd
 
@@ -53,4 +60,3 @@ from a CI/CD system.)
 
 A brief overview of the CLI’s functionality can be seen by running `linkerd
 --help`.
-

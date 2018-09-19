@@ -1,8 +1,10 @@
 <div class="col">
   <figure class="figure w-100 text-center my-4">
-    <img src="{{ .Get "src" }}"
-      class="figure-img img-fluid rounded"
-      alt="{{ .Get "title" }}">
+    <a href="{{ .Get "src" }}" data-toggle="lightbox">
+      <img src="{{ .Get "src" }}"
+        class="figure-img img-fluid rounded"
+        alt="{{ .Get "title" }}">
+    </a>
     <figcaption class="figure-caption">{{ .Get "title" }}</figcaption>
   </figure>
 </div>

@@ -1,19 +1,22 @@
 +++
 date = "2018-08-28T08:00:00-07:00"
-title = "Linkerd Inject Reference"
+title = "Inject"
+description = "The inject command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl."
+aliases = [
+  "/2/inject-reference/"
+]
 [menu.l5d2docs]
-  name = "Inject Command Reference"
-  weight = 7
+  name = "Inject"
+  parent = "cli"
 +++
 
-The `linkerd inject` command allows for a quick and reliable setup of the Linkerd Proxy in a Kubernetes Deployment.
-This page is useful as a reference to help you understand what `linkerd inject` is doing under the hood,
-as well as provide a reference for the flags that can be passed at the command line.
-<br /><br />
+The `linkerd inject` command allows for a quick and reliable setup of the
+Linkerd Proxy in a Kubernetes Deployment. This page is useful as a reference to
+help you understand what `linkerd inject` is doing under the hood, as well as
+provide a reference for the flags that can be passed at the command line.
 
-If you run the command `linkerd inject -h` it will provide you with the same information as the table below:
-<br /><br />
-
+If you run the command `linkerd inject -h` it will provide you with the same
+information as the table below:
 
 {.table .pure-table .table-striped .table-responsive .table-hover}
 | Flag | Explanation | Example |
@@ -40,17 +43,18 @@ If you run the command `linkerd inject -h` it will provide you with the same inf
 | `-l, --linkerd-namespace` | Namespace in which Linkerd is installed (default "linkerd"). If you modified the `linkerd install` command and adjusted the Kubernetes Namespace it was deployed into, you'll want to adjust it here. | `-l="default"` |
 | `--verbose` | Turn on debug logging. Log all the things. (Especially those things that `linkerd inject` does.) | `--verbose` |
 
-<br />
-
 ## What `linkerd inject` Is Doing
+
 `linkerd inject` is modifying the Kubernetes Deployment manifest that is being passed to it
-either as a file or as a stream to its standard in. It is adding two things:
+either as a file or as a stream to its stdin. It is adding two things:
 
 1. An Init Container (supported as of Kubernetes version 1.6 or greater)
+
 1. A Linkerd Proxy sidecar container into each Pod belonging to your Deployment
 
-The Init Container is responsible for pulling configuration (such as certificates) from the Kubernetes API/Linkerd Controller,
-as well as provide configuration to the Linkerd Proxy container for its runtime.
+The Init Container is responsible for pulling configuration (such as
+certificates) from the Kubernetes API/Linkerd Controller, as well as providing
+configuration to the Linkerd Proxy container for its runtime.
 
 ## Example Deployment
 
@@ -84,7 +88,10 @@ spec:
 Now, we can run the `linkerd inject` command as follows:
 
 ```bash
-$ linkerd inject --proxy-log-level="debug" --skip-outbound-ports=3306 deployment.yaml > deployment_with_linkerd.yaml
+linkerd inject \
+  --proxy-log-level="debug" \
+  --skip-outbound-ports=3306 \
+  deployment.yaml > deployment_with_linkerd.yaml
 ```
 
 The output of that file should look like the following:
@@ -176,7 +183,7 @@ spec:
         terminationMessagePolicy: FallbackToLogsOnError
 status: {}
 ---
-
 ```
 
-Note here how the Init Container and Proxy Sidecar Container are added to the manifest with configuration we passed as command line flags.
+Note here how the `initContainer` and `linkerd-proxy` sidecar are added to the
+manifest with configuration we passed as command line flags.

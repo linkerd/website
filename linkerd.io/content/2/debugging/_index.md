@@ -1,8 +1,11 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Example: debugging an app"
+title = "Debugging a Failing Application"
+aliases = [
+  "/2/debugging-an-app/"
+]
 [menu.l5d2docs]
-  name = "Example: Debugging"
+  name = "Debugging"
   weight = 8
 +++
 
