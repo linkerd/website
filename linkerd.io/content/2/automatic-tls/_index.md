@@ -1,6 +1,6 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Experimental: automatic TLS"
+title = "Experimental: Automatic TLS"
 [menu.l5d2docs]
   name = "Experimental: Automatic TLS"
   weight = 11

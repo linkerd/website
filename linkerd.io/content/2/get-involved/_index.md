@@ -1,6 +1,6 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Get involved"
+title = "Get Involved"
 [menu.l5d2docs]
   name = "Get Involved"
   weight = 12
