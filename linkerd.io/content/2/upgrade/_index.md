@@ -12,7 +12,7 @@ There are three components that need to be upgraded:
 - [Control Plane](/2/architecture#control-plane)
 - [Data Plane](/2/architecture#data-plane)
 
-In this guide, we'll walk you through how to upgrade all three compnents
+In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
 ## Upgrade the CLI
@@ -23,34 +23,11 @@ these instructions for anywhere that uses the linkerd CLI.
 To upgrade the CLI locally, run:
 
 ```bash
-curl https://run.linkerd.io/install | sh
-```
-
-Which should display:
-
-```txt
-Downloading linkerd2-cli-{{% latestversion %}}-darwin...
-Linkerd was successfully installed 🎉
-
-Add the linkerd CLI to your path with:
-
-    export PATH=$PATH:$HOME/.linkerd2/bin
-
-Then run:
-
-    linkerd install | kubectl apply -f -
-
-to deploy Linkerd to Kubernetes. Once deployed, run:
-
-    linkerd dashboard
-
-to view the Linkerd UI.
-
-Visit linkerd.io/2/getting-started for more information.
+curl -sL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
-[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/v{{% latestversion %}}).
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
 
 Verify the CLI is installed and running correctly with:
 
@@ -61,7 +38,7 @@ linkerd version
 Which should display:
 
 ```bash
-Client version: v{{% latestversion %}}
+Client version: {{% latestversion %}}
 Server version: v18.8.1
 ```
 
@@ -129,8 +106,8 @@ linkerd version
 Which should display:
 
 ```txt
-Client version: v{{% latestversion %}}
-Server version: v{{% latestversion %}}
+Client version: {{% latestversion %}}
+Server version: {{% latestversion %}}
 ```
 
 ### Notes
@@ -179,8 +156,8 @@ kubectl get po --all-namespaces -o yaml \
 The output will look something like:
 
 ```txt
-linkerd.io/proxy-version: v{{% latestversion %}}
-linkerd.io/proxy-version: v{{% latestversion %}}
+linkerd.io/proxy-version: {{% latestversion %}}
+linkerd.io/proxy-version: {{% latestversion %}}
 ```
 
 If there are any older versions listed, you will want to upgrade them as well.
