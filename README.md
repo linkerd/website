@@ -83,7 +83,13 @@ master from slate-linkerd and add it to the public dir.
 
 ### Creating a new release
 
-1. First you must run `./release-next-version <release-tag> <new version>` in
+1. From the [linkerd.io](linkerd.io) directory, run:
+
+    ```bash
+    ./release-next-version <new version>
+    ```
+
+1. Run `./release-next-version <release-tag> <new version>` in
    [slate-linkerd](https://github.com/BuoyantIO/slate-linkerd)
 
 1. Then check locally
