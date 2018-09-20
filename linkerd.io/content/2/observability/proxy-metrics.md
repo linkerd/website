@@ -32,7 +32,7 @@ port (default: `:4191`) in the [Prometheus format][prom-format]:
 
 Note that latency measurements are not exported to Prometheus until the stream
 _completes_. This is necessary so that latencies can be labeled with the appropriate
-[response classification](#rsp-class).
+[response classification](#response-labels).
 
 ## Labels
 

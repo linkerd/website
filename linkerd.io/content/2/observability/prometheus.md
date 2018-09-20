@@ -76,4 +76,4 @@ Linkerd's proxy metrics will have the label `job="linkerd-proxy"`.  Linkerd's
 control-plane metrics will have the label `job="linkerd-controller"`.
 
 For more information on specific metric and label definitions, have a look at
-[Proxy Metrics](/proxy-metrics),
+[Proxy Metrics](../proxy-metrics).
