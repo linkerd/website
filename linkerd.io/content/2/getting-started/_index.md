@@ -118,7 +118,7 @@ it's time to install the lightweight control plane into its own namespace
 the help for `install`. To do this, run:
 
 ```bash
-linkerd install | kubectl apply -f -
+linkerd install | sed s/cluster\.local/name\.of\.your\.cluster/ | kubectl apply -f -
 ```
 
 `linkerd install` generates a list of Kubernetes resources. Run it standalone if
