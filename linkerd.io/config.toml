@@ -14,6 +14,7 @@ sectionPagesMenu = "main"
   description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
 
   l5d2_release_version = "L5D2_STABLE_VERSION"
+  l5d2_edge_version = "L5D2_EDGE_VERSION"
 
 # MENU: top nav bar
 

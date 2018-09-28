@@ -1,0 +1,29 @@
++++
+date = "2018-07-31T12:00:00-07:00"
+title = "Release Channels"
+[menu.l5d2docs]
+  name = "Release Channels"
+  weight = 12
++++
+
+Linkerd publishes releases into multiple channels. This provides the option to
+choose between stability or getting the latest and greatest functionality.
+
+### Stable - {{% latestversion %}}
+
+Releases are roughly every month and focus on stability. To install a stable
+release, you can run:
+
+```bash
+curl -sL https://run.linkerd.io/install | sh
+```
+
+### Edge - {{% latestedge %}}
+
+Releases are roughly weekly and can be used to work with the latest and greatest
+features. These releases are intended to be stable, but are more focused on
+adding new functionality. To install an edge release, you can run:
+
+```bash
+curl -sL https://run.linkerd.io/install-edge | sh
+```
