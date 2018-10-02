@@ -28,7 +28,7 @@ spec:
           value: "8080"
         - name: SVC_NAME
           value: gif
-        image: sourishkrout/nodevoto:v4
+        image: sourishkrout/nodevoto:v5
         name: gif-svc
         ports:
         - containerPort: 8080
@@ -74,7 +74,7 @@ spec:
           value: "8080"
         - name: SVC_NAME
           value: voting
-        image: sourishkrout/nodevoto:v4
+        image: sourishkrout/nodevoto:v5
         name: voting-svc
         ports:
         - containerPort: 8080
@@ -126,7 +126,7 @@ spec:
           value: services/nodevoto-web/webapp/dist/index_bundle.js
         - name: SVC_NAME
           value: web
-        image: sourishkrout/nodevoto:v4
+        image: sourishkrout/nodevoto:v5
         name: web-svc
         ports:
         - containerPort: 80
@@ -172,7 +172,7 @@ spec:
           value: voteBot
         - name: WEB_HOST
           value: web-svc.nodevoto:80
-        image: sourishkrout/nodevoto:v4
+        image: sourishkrout/nodevoto:v5
         name: vote-bot
         resources: {}
 status: {}
