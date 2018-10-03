@@ -39,6 +39,8 @@ The following components make up the system:
   provides a monitoring dashboard for all service traffic
 * `consul-server`: service discovery back-end, runs on a single EC2 instance
 
+{{< fig src="/images/ecs-linkerd-diagram.png" title="Linkerd in ECS" >}}
+
 ## Initial Setup
 
 First, launch a cluster of EC2 instances orchestrated by ECS. You can use a
@@ -168,6 +170,10 @@ Hello (172.31.20.160) World-V2 (172.31.19.35)!!
 By setting the `l5d-dtab` header, we instructed Linkerd to dynamically route all
 requests destined for `world` to `world-v2`.
 
+{{< fig src="/images/ecs-linkerd-routing.png" title="Linkerd request routing" >}} 
+ For more information, have a look at 
+[Dynamic Request Routing]({{% ref "/1/features/routing.md" %}}).
+
 ## linkerd-viz
 
 [`linkerd-viz`](https://github.com/linkerd/linkerd-viz) collects and displays
@@ -194,6 +200,10 @@ ssh -i "~/.ssh/$KEY_PAIR.pem" -L 127.0.0.1:3000:$VIZ_NODE:3000 ec2-user@$VIZ_NOD
 # view linkerd-viz (osx)
 open http://localhost:3000
 ```
+
+If everything worked correctly, we should see a dashboard like this:
+
+{{< fig src="/images/ecs-linkerd-viz.png" title="linkerd-viz in ECS" >}}
 
 ## Further reading
 
