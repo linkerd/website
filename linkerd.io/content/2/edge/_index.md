@@ -7,9 +7,11 @@ title = "Release Channels"
 +++
 
 Linkerd publishes releases into multiple channels. This provides the option to
-choose between stability or getting the latest and greatest functionality.
+choose between stability or getting the latest and greatest functionality. The
+latest release for each channel is listed below. The full list of releases can
+be found on [GitHub](https://github.com/linkerd/linkerd2/releases).
 
-### Stable - {{% latestversion %}}
+### Stable (latest version: {{% latestversion %}})
 
 Releases are roughly every month and focus on stability. To install a stable
 release, you can run:
@@ -18,7 +20,7 @@ release, you can run:
 curl -sL https://run.linkerd.io/install | sh
 ```
 
-### Edge - {{% latestedge %}}
+### Edge (latest version: {{% latestedge %}})
 
 Releases are roughly weekly and can be used to work with the latest and greatest
 features. These releases are intended to be stable, but are more focused on
