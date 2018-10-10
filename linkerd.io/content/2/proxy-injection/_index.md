@@ -1,6 +1,6 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
-title = "Experimental: automatic proxy injection"
+title = "Experimental: Automatic Proxy Injection"
 [menu.l5d2docs]
   name = "Experimental: Automatic Proxy Injection"
   weight = 12
@@ -8,7 +8,7 @@ title = "Experimental: automatic proxy injection"
 
 Linkerd can be configured to automatically inject the data plane proxy into your service.
 
-This feature is currently **experimental** because it depends on the [experimental automatic TLS](../automatic-tls/) feature.
+This feature is **experimental** and it's only available in the [_edge_ release](../edge/).
 
 Here are some feature highlights:
 
@@ -33,12 +33,12 @@ admissionregistration.k8s.io/v1beta1
 ```
 
 The proxy auto-injection feature is disabled by default. To enable it, you must install Linkerd with the `--tls=optional` and `--proxy-auto-inject` flags.
-```
+```bash
 $ linkerd install --tls=optional --proxy-auto-inject | kubectl apply -f -
 ```
 
 Run `check` to make sure everything is ready.
-```
+```bash
 $ linkerd check
 kubernetes-api: can initialize the client..................................[ok]
 kubernetes-api: can query the Kubernetes API...............................[ok]
@@ -57,7 +57,7 @@ Status check results are [ok]
 ```
 
 A new proxy-injector deployment are added to the control plane.
-```
+```bash
 $ kubectl -n linkerd get deploy
 NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 ca               1         1         1            1           4m
@@ -81,7 +81,7 @@ web-6584749d68-c6nnj              2/2       Running   0          4m
 ### Namespace
 
 Namespaces that are labeled `linkerd.io/auto-inject: disabled` are ignored.
-```
+```bash
 $ kubectl create ns disabled
 namespace "disabled" created
 
@@ -101,7 +101,7 @@ nginx-666865b5dd-zcgsc   1/1       Running   0          8s
 ```
 
 The proxy sidecar container will be auto-injected into namespaces that are either **not** labeled with `linkerd.io/auto-inject` or labeled with `linkerd.io/auto-inject: enabled`.
-```
+```bash
 $ kubectl create ns enabled
 namespace "enabled" created
 
@@ -167,7 +167,7 @@ INFO admin={bg=resolver} linkerd2_proxy::transport::connect DNS resolved DnsName
 Deployments with pods that are labeled `linkerd.io/auto-inject: disabled` and `linkerd.io/auto-inject: completed` are ignored. Note that these are the pod template labels i.e. `spec.template.metadata.labels`, not the deployment's labels.
 
 When the webhook receives a request to mutate a pod's specification, it also checks the pod's container specification to ensure no proxy sidecar has already been injected. If a pod already has the proxy sidecar container, it will be ignored.
-```
+```bash
 $ kubectl -n unlabeled run nginx-disabled --image=nginx --port=80 --labels="linkerd.io/auto-inject=disabled"
 deployment.apps "nginx-disabled" created
 
@@ -186,7 +186,7 @@ nginx-disabled-776768bbc9-z8dcf    1/1       Running   0          1m        disa
 ```
 
 Deployments with pods that are labeled `linkerd.io/auto-inject: enabled` or unlabeled will be auto-injected with the proxy init and sidecar containers.
-```
+```bash
 $ kubectl -n unlabeled run nginx-enabled --image=nginx --port=80 --labels="linkerd.io/auto-inject=enabled"
 deployment.apps "nginx-enabled" created
 
@@ -208,7 +208,7 @@ nginx-unlabeled-79f6ccb579-sss8k   2/2       Running   0          1m
 
 ## Validation
 The TLS secrets of the _enabled_ and _unlabeled_ deployments are created.
-```
+```bash
 $ kubectl -n unlabeled get secret
 NAME                                         TYPE                                  DATA      AGE
 default-token-w75rf                          kubernetes.io/service-account-token   3         45m
@@ -217,7 +217,7 @@ nginx-unlabeled-deployment-tls-linkerd-io    Opaque                             
 ```
 
 Check the proxy's logs of the newly created _enabled_ and _unlabeled_ pods.
-```
+```bash
 $ kubectl -n unlabeled logs nginx-enabled-6658556d5c-ljchj linkerd-proxy
 INFO linkerd2_proxy using controller at Some(HostAndPort { host: DnsName(DnsName(DNSName("proxy-api.linkerd.svc.cluster.local"))), port: 8086 })
 INFO linkerd2_proxy routing on V4(127.0.0.1:4140)
@@ -255,7 +255,7 @@ INFO admin={bg=resolver} linkerd2_proxy::transport::connect DNS resolved DnsName
 ```
 
 Take a look at the stats and try generating some simple traffic.
-```
+```bash
 $ linkerd stat deployments -n unlabeled
 NAME               MESHED   SUCCESS   RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TLS
 nginx-completed      0/1         -     -             -             -             -     -
@@ -266,7 +266,7 @@ nginx-unlabeled      1/1   100.00%   0.0rps           1ms           1ms         
 
 Further testing...
 Delete the _enabled_ pod. The new pod should still have the proxy sidecar.
-```
+```bash
 $ kubectl -n unlabeled delete po nginx-enabled-6658556d5c-ljchj
 pod "nginx-enabled-6658556d5c-ljchj" deleted
 
@@ -280,7 +280,7 @@ nginx-unlabeled-79f6ccb579-sss8k   2/2       Running       0          10m
 ```
 
 Set the image of the _enabled_ deployment to a different version.
-```
+```bash
 $ kubectl -n unlabeled set image deployment nginx-enabled nginx-enabled=nginx:1.9.1
 deployment.apps "nginx" image updated
 
