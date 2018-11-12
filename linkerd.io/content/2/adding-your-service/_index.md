@@ -47,8 +47,15 @@ all HTTP, HTTP/2, and gRPC traffic.
 
 For protocols where the server sends data before the client sends data over
 connections that aren't protected by TLS, Linkerd cannot automatically recognize
-the protocol used on the connection. Two common examples of this type of
-protocol are MySQL and SMTP. If you are using Linkerd to proxy plaintext MySQL
+the protocol used on the connection.
+
+This applies to the following list:
+
+* 25   - SMTP
+* 3306 - MySQL
+* 8086 - InfluxDB
+
+If you are using Linkerd to proxy plaintext MySQL
 or SMTP requests on their default ports (3306 and 25, respectively), then Linkerd
 is able to successfully identify these protocols based on the port. If you're
 using non-default ports, or if you're using a different server-speaks-first
