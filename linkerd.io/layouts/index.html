@@ -3,10 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-7 pb-3">
-          <h1>Ultralight service mesh for Kubernetes</h1>
-          <p>Linkerd gives you instant Grafana dashboards and CLI debugging tools for any<br/> Kubernetes service &mdash; with no cluster-wide installation.</p>
+          <h1>Ultralight service mesh for Kubernetes and beyond</h1>
+          <p>Linkerd gives you global observability, reliabilty, and security for your<br/> microservices &mdash; with no code changes required.</p>
           <div class="header-button-group pb-3">
-            <a href="{{ ref . "/2/getting-started/_index.md" }}" class="btn btn-primary">Get Started</a>
+            <a href="{{ ref . "/2/getting-started/_index.md" }}" class="btn btn-primary">Get started (Kubernetes)</a>
+            <a href="{{ ref . "/1/getting-started/_index.md" }}" class="btn btn-success">Get started (non-Kubernetes)</a>
           </div>
           <div class="github-stat-buttons">
             <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
@@ -91,47 +92,47 @@
   <div class="container pb-5">
     <ul class="list-unstyled row pt-3">
       <li class="media col my-3">
-        <img class="mr-3" src="/images/value-props/stethoscope.svg" width="80">
+        <img class="mr-3" src="/images/value-props/graph.svg" width="80">
         <div class="media-body">
-          <h4>Rapidly diagnose runtime issues</h4>
-          <p>Identify service failures right away. Trace issues directly to the failed calls or broken runtime dependencies.</p>
+          <h4 class="media-heading">Actionable service metrics</h4>
+          <p>Linkerd automatically builds per-service Grafana dashboards displaying service golden metrics&mdash;success rate, request volume, and latency.</p>
         </div>
       </li>
       <li class="media col my-3">
-        <img class="mr-3" src="/images/value-props/graph.svg" width="80">
+        <img class="mr-3" src="/images/value-props/stethoscope.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Get actionable service metrics</h4>
-          <p>Get the insights that matter with pre-installed Grafana dashboards. See everything. Know everything.</p>
+          <h4>Rapid discovery of runtime issues</h4>
+          <p>Linkerd builds a live map of cross-service runtime dependencies, so you can easily trace issues across them.</p>
         </div>
       </li>
       <li class="w-100"></li>
       <li class="media col my-3">
         <img class="mr-3" src="/images/value-props/stopwatch.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Zero configuration, installs in seconds</h4>
-          <p>Instant service observability and dashboards. Three easy steps and your Linkerd is live.</p>
+          <h4 class="media-heading">Safe, incremental installation</h4>
+          <p>Linkerd's control plane installs into a single namespace. Your services can be incrementally added to the mesh, one at a time. </p>
         </div>
       </li>
       <li class="media col my-3">
         <img class="mr-3" src="/images/value-props/lego.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Incremental, composable design</h4>
-          <p>Equally useful for one service or 100 services. No code or configuration changes needed.</p>
+          <h4 class="media-heading">Minimalist, composable design</h4>
+          <p>No complex APIs or configuration. For most applications, Linkerd will "just work" out of the box.</p>
         </div>
       </li>
       <li class="w-100"></li>
       <li class="media col my-3">
         <img class="mr-3" src="/images/value-props/quill-circle.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Lightweight, self contained</h4>
-          <p>Minimal impact on other team's services, with a lightweight footprint.</p>
+          <h4 class="media-heading">Ultralight and ultra fast</h4>
+          <p>Built in Rust, Linkerd's data plane proxies are incredibly small (<10 mb) and blazing fast (p99 &lt; 1ms).</p>
         </div>
       </li>
       <li class="media col my-3">
         <img class="mr-3" src="/images/value-props/foss.svg" width="80">
         <div class="media-body">
-          <h4 class="media-heading">Built with Rust and 100% cloud native</h4>
-          <p>Built with modern programming languages. Designed for the cloud native world.</p>
+          <h4 class="media-heading">Thriving, active open source community</h4>
+          <p>Linkerd is 100% Apache-licensed, with an incredibly active and friendly community. <a href="https://slack.linkerd.io/">Come join the fun</a>!</p>
         </div>
       </li>
     </ul>
@@ -154,5 +155,16 @@
     </div>
   </div> -->
   <!-- Demo Video -->
+
+  <div class="container pb-5">
+    <div class="row justify-content-md-center pb-3">
+      <p>Linkerd is a <a href="https://cncf.io/">Cloud Native Computing Foundation</a> member project.</p>
+    </div>
+    <div class="row justify-content-md-center pb-3">
+      <div class="col-md-6 text-center">
+        <img src="images/CNCF_Alternate_Pantone.png" class="m-auto d-block" width="300" />
+      </div>
+    </div>
+  </div>
 
 {{ end }}

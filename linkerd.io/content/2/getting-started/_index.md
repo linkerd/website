@@ -6,42 +6,35 @@ title = "Getting Started"
   weight = 3
 +++
 
-Linkerd works by installing ultralight [proxies](../architecture#proxy) into
-each pod of a service. These proxies become part of a [*data plane*]
-(/2/architecture#data-plane) which reports telemetry data to, and receives
-signals from, a [*control plane*](/2/architecture#control-plane). This means
-that using Linkerd doesn't require any code changes, and can even be installed
-live on a running service.
+Welcome to Linkerd! 🎈
 
-To interact with Linkerd, you first install the control plane and then add the
-data plane proxies to your service. Once installed, you can interact with
-Linkerd using:
-
-- A [command-line interface](/2/architecture#cli).
-
-- The [Linkerd dashboard](/2/architecture#dashboard).
-
-- [Grafana dashboards](/2/architecture#grafana) configured for you, out of the
-  box.
-
-- From [Prometheus](/2/architecture#prometheus) itself.
-
-In this guide, we’ll walk you through how to install the Linkerd onto your
-Kubernetes cluster and deploy a sample gRPC application to show off
+In this guide, we’ll walk you through how to install Linkerd into your
+Kubernetes cluster. Then we'll deploy a sample application to show off
 what Linkerd can do for your services.
+
+Installing Linkerd is easy. First, you first install the CLI (command-line
+interface) onto your local machine. Using this CLI, you'll install the Linkerd
+control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
+services by adding the the data plane proxies. (See the
+[Architecture](../architecture) page for details.)
+
+We'll walk you through this process step by step.
 
 ____
 
 ## Step 0: Setup
 
-First, you'll need a Kubernetes cluster running 1.9 or later, and a functioning
-`kubectl` command on your local machine.
+Before we can do anything, we need to ensure you have access to a Kubernetes
+cluster running 1.9 or later, and a functioning `kubectl` command on your local
+machine.
 
-To run Kubernetes on your local machine, we suggest
-<a href="https://kubernetes.io/docs/tasks/tools/install-minikube/" target="_blank">Minikube</a>
- --- running version 0.24.1 or later. To see other options, check out the
- <a href="https://kubernetes.io/docs/setup/pick-right-solution/"
- target="_blank">full list</a>.
+You can run Kubernetes on your local machine. We suggest <a
+href="https://www.docker.com/products/docker-desktop" target="_blank">Docker
+Desktop</a> or <a
+href="https://kubernetes.io/docs/tasks/tools/install-minikube/"
+target="_blank">Minikube</a>. (For other options, see the <a
+href="https://kubernetes.io/docs/setup/pick-right-solution/"
+target="_blank">full list</a>.)
 
 When ready, make sure you're running a recent version of Kubernetes with:
 
@@ -49,10 +42,10 @@ When ready, make sure you're running a recent version of Kubernetes with:
 kubectl version --short
 ```
 
-If you are using GKE with RBAC enabled, you will want to grant a `ClusterRole`
-of `cluster-admin` to your Google Cloud account first. This will provide your
-current user all the permissions required to install the control plane. To bind
-this `ClusterRole` to your user, you can run:
+Additionally, if you are using GKE with RBAC enabled, you will want to grant a
+`ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
+provide your current user all the permissions required to install the control
+plane. To bind this `ClusterRole` to your user, you can run:
 
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding-$USER \
@@ -92,8 +85,8 @@ Verify the CLI is installed and running correctly with:
 linkerd version
 ```
 
-As we've not installed the control plane yet, the server's version will be
-unavailable at this point.
+You should see the CLI version, and also "Server version: unavailable". This
+is because we haven't installed the control plane. We'll do that soon.
 
 ____
 
