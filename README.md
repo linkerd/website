@@ -1,7 +1,7 @@
 
 ## [linkerd.io](linkerd.io)
 
-Documentation for linkerd1 and linkerd2.
+Source code for the linkerd.io website.
 
 ### General development instructions
 
