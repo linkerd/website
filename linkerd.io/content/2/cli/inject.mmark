@@ -34,6 +34,8 @@ information as the table below:
 | `--proxy-image` | The linkerd proxy container image name (default "gcr.io/linkerd-io/proxy"). If you have modified (or made private) the Linkerd Proxy Init Container, you will adjust that here.  | `--proxy-image="quay.io/org/imagename"` |
 | `--proxy-log-level` | The log level for the proxy (default "warn,linkerd2_proxy=info"). The first value is the log level for the Init Container, and the second is the level for the Proxy Container. | `--proxy-log-level="info,linkerd2_proxy=debug"` |
 | `--proxy-uid` | Run the proxy under this user ID (default 2102) | `--proxy-uid=123` |
+| `--proxy-cpu` | Set the amount of CPU units that the sidecar requests | `--proxy-cpu=10m` |
+| `--proxy-memory` | Set the amount of Memory units that the sidecar requests | `--proxy-memory=50Mi` |
 | `--registry` | Docker registry to pull images from (default "gcr.io/linkerd-io") | `--registry="quay.io/ygrene` |
 | `--skip-inbound-ports` | Ports that should skip the proxy and send directly to the application (default []). IMPORTANT! If there is a port you do not want Linkerd proxying (for example SMTP port 25) you will _need_ to put it in this list.  | `--skip-inbound-ports=25,26,27` |
 | `--skip-outbound-ports` | Outbound ports that should skip the proxy (default []). Similarly to the above, if there are outbound ports you don't want leaving the pod from the `--outbound-port` (such as MySQL,) they need to be listed here. | `--skip-outbound-ports=25,3306,5432` |
