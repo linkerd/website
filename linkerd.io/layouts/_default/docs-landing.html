@@ -4,9 +4,8 @@
     <div class="col-md-3 pt-5">
       {{ partial "sidebar.html" (dict "page" . "menu" "l5d2docs") }}
     </div>
-
     <div class="col-md-9 pt-5 border-left">
-      {{ partial "docs-landing.html" . }}
+      {{ .Content }}
     </div>
   </div>
 </div>
