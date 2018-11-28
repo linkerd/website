@@ -6,4 +6,8 @@ layout = "cyp"
   priority = 1.0
 +++
 
-Linkerd comes in two parallel branches of development: 2.x, and 1.x. Both are maintained in parallel.
+Linkerd comes in two parallel branches of development: 2.x and 1.x. Both are
+maintained in parallel, but certain platforms are only supported by certain
+versions.
+
+Choose your platform below:

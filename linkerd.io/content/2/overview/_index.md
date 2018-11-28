@@ -7,57 +7,61 @@ aliases = "/docs"
   weight = 1
 +++
 
-Linkerd is a _service sidecar_ and _service mesh_ for Kubernetes and other
-frameworks. It makes running your service easier and safer by giving you
-runtime debugging, observability, reliability, and security--all without
-requiring any changes to your code.
+(Note: this documentation is specific to Linkerd 2.x. For the 1.x branch of development,
+[go here](/1/overview).)
 
-Linkerd has three basic components: a UI (both command-line and web-based), a
-*data plane*, and a *control plane*. You run Linkerd by installing the CLI on
-your local system, then by using the CLI to install the control plane into your
-cluster, and finally by adding Linkerd's data plane to each service you want to
-run Linkerd on. (See [Adding Your Service](../adding-your-service) for more.)
+Linkerd is a _service mesh_ for Kubernetes and other frameworks. It makes
+running services easier and safer by giving you runtime debugging,
+observability, reliability, and security&mdash;all without requiring any changes to
+your code.
+
+For a brief introduction to the service mesh model, we recommend reading
+[What's a service mesh? And why do I need
+one?](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)
+
+Linkerd is fully open source, licensed under [Apache
+v2](https://github.com/linkerd/linkerd2/blob/master/LICENSE), and is a [Cloud
+Native Computing Foundation](https://cncf.io) member project. Linkerd is
+developed in the open in the [Linkerd GitHub repo](https://github.com/linkerd).
+
+Linkerd has three basic components: a UI, a *data plane*, and a *control
+plane*. You run Linkerd by:
+
+1. [Installing the CLI on your local system](../getting-started/#step-1-install-the-cli);
+1. [Installing the control plane into your cluster](../getting-started/#step-3-install-linkerd-onto-the-cluster);
+1. [Adding your services to Linkerd's data plane](../adding-your-service).
 
 Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
 manipulate it.
 
 You can [get started](../getting-started) in minutes!
 
-## Architecture
+## How it works
 
-{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
+Linkerd works by installing a set of ultralight, transparent proxies next to
+each service instance. These proxies automatically handle all traffic to and
+from the service. Because they're transparent, these proxies act as highly
+instrumented out-of-process network stacks, sending telemetry to, and receiving
+control signals from, the control plane. This design allows Linkerd to measure
+and manipulate traffic to and from your service without introducing excessive
+latency.
 
-Let’s take each of Linkerd's components in turn.
+In order to be as small, lightweight, and safe as possible, Linkerd's proxies
+are written in [Rust](https://www.rust-lang.org/) and specialized for Linkerd.
+You can learn more about the proxies in the [Linkerd proxy
+repo](https://github.com/linkerd/linkerd2-proxy).
 
-Linkerd's UI is comprised of a CLI (helpfully called `linkerd`) and a web UI.
-The CLI runs on your local machine; the web UI is hosted by the control plane.
+## Versions and channels
 
-The Linkerd control plane is composed of a number of services that run on your
-cluster and drive the behavior of the data plane. These services accomplish
-various things--aggregating telemetry data, providing a user-facing API,
-providing control data to the data plane proxies, etc. By default, they run in a
-dedicated `linkerd` namespace.
+Linkerd is currently published in several tracks:
 
-Finally, Linkerd's data plane is comprised of ultralight, transparent proxies
-that are deployed in front of a service. These proxies automatically handle all
-traffic to and from the service. Because they're transparent, these proxies act
-as highly instrumented out-of-process network stacks, sending telemetry to, and
-receiving control signals from, a control plane. This design allows Linkerd to
-measure and manipulate traffic to and from your service without introducing
-excessive latency.
+* [Linkerd 2.x stable releases](../edge/)
+* [Linkerd 2.x edge releases.](../edge/)
+* [Linkerd 1.x.](/1/overview)
 
-You can check out the [architecture](../architecture/) for more
-details on the components, what they do and how it all fits together.
+## Next steps
 
-## Using Linkerd
+[Get started with Linkerd](../getting-started) in minutes, or check out the
+[architecture](../architecture/) for more details on Linkerd's components and
+how they all fit together.
 
-To use Linkerd, you use the Linkerd CLI and the web UI. The CLI and the web UI
-drive the control plane via its API, and the control plane in turn drives the
-behavior of the data plane.
-
-(The control plane API is designed to be generic enough that other tooling can
-be built on top of it. For example, you may wish to additionally drive the API
-from a CI/CD system.)
-
-A brief overview of the CLI’s functionality can be seen by running `linkerd
---help`.
