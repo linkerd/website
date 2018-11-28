@@ -17,7 +17,7 @@ Here are some feature highlights:
 * When a new deployment is created, the Linkerd proxy will be automatically injected if:
   * the namespace has the `linkerd.io/auto-inject: enabled` label or
   * the namespace isn't labeled with the `linkerd.io/auto-inject` label.
-* Namespaces that are labeled with the `linked.io/auto-inject: disabled` are ignored.
+* Namespaces that are labeled with the `linkerd.io/auto-inject: disabled` are ignored.
 * Within "enabled" namespaces, deployments with pods that are labeled with `linkerd.io/auto-inject: disabled` or `linkerd.io/auto-inject: completed` are ignored.
 
 The feature has the following limitations:
