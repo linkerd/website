@@ -1,6 +1,6 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
-title = "Overview"
+title = "Linkerd CLI"
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]
@@ -9,10 +9,11 @@ title = "Overview"
   weight = 7
 +++
 
-The Linkerd CLI is the primary way to interact with Linkerd. It can install the
-control plane to your cluster, add the proxy to your service and provide
-detailed metrics for how your service is performing.
+The Linkerd CLI, or command-line interface, is one of the primary ways to
+interact with Linkerd. It can be used to install the control plane to your
+cluster, to add the data plane proxies to your service, to view detailed
+metrics for how your services are performing, and more.
 
-As reference, check out the commands below:
+The Linkerd CLI contains several subcommands, documented below:
 
 {{% sectiontoc "cli" %}}

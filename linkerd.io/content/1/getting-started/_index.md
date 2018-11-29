@@ -3,7 +3,7 @@ date = "2015-12-22T11:13:53-08:00"
 title = "Overview"
 description = "Provides concrete instructions for setting up and running Linkerd in various environments. Go here for a quick start."
 layout = "getting-started"
-weight = 1
+weight = 2
 aliases = [
   "/doc/getting-started",
   "/doc/0.1.0/guides",

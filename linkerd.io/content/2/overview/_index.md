@@ -10,6 +10,8 @@ aliases = "/docs"
 (Note: this documentation is specific to Linkerd 2.x. For the 1.x branch of development,
 [go here](/1/overview).)
 
+Welcome to Linkerd! 🎈
+
 Linkerd is a _service mesh_ for Kubernetes and other frameworks. It makes
 running services easier and safer by giving you runtime debugging,
 observability, reliability, and security&mdash;all without requiring any changes to

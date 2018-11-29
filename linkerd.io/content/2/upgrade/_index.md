@@ -1,16 +1,21 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
-title = "Upgrade"
+title = "Upgrading Linkerd"
 [menu.l5d2docs]
-  name = "Upgrade Linkerd"
-  weight = 5
+  name = "Upgrading Linkerd"
+  weight = 8
 +++
 
-There are three components that need to be upgraded:
+Linkerd is a fast-moving project and you will often find yourself in a
+situation where you want to safely upgrade Linkerd without downtime. Don't worry,
+Linkerd is designed to make this as safe as possible.
 
-- [CLI](/2/architecture#cli)
-- [Control Plane](/2/architecture#control-plane)
-- [Data Plane](/2/architecture#data-plane)
+There are three components that need to be upgraded, and typically, you'll do
+them in this order:
+
+1. [CLI](/2/architecture#cli)
+1. [Control Plane](/2/architecture#control-plane)
+1. [Data Plane](/2/architecture#data-plane)
 
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
@@ -23,7 +28,7 @@ these instructions for anywhere that uses the linkerd CLI.
 To upgrade the CLI locally, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
@@ -35,7 +40,7 @@ Verify the CLI is installed and running correctly with:
 linkerd version
 ```
 
-Which should display:
+Which should display something like:
 
 ```bash
 Client version: {{% latestversion %}}
@@ -65,30 +70,7 @@ changed.
 linkerd install | kubectl apply -f -
 ```
 
-The output will be:
-
-```txt
-namespace "linkerd" configured
-serviceaccount "linkerd-controller" unchanged
-clusterrole "linkerd-linkerd-controller" configured
-clusterrolebinding "linkerd-linkerd-controller" configured
-serviceaccount "linkerd-prometheus" unchanged
-clusterrole "linkerd-linkerd-prometheus" configured
-clusterrolebinding "linkerd-linkerd-prometheus" configured
-service "api" configured
-service "proxy-api" configured
-deployment "controller" configured
-service "web" configured
-deployment "web" configured
-service "prometheus" configured
-deployment "prometheus" configured
-configmap "prometheus-config" configured
-service "grafana" configured
-deployment "grafana" configured
-configmap "grafana-config" configured
-```
-
-Check to make sure everything is healthy by running:
+You can check to make sure everything is healthy by running:
 
 ```bash
 linkerd check
@@ -103,7 +85,7 @@ To verify the Linkerd control plane version, run:
 linkerd version
 ```
 
-Which should display:
+Which should now display the same versions:
 
 ```txt
 Client version: {{% latestversion %}}
@@ -112,16 +94,17 @@ Server version: {{% latestversion %}}
 
 ### Notes
 
-- You will lose the historical data from Prometheus. If you would like to have
-  that data persisted through an upgrade, take a look at the
-  [persistence documentation](/2/observability/prometheus/#exporting-metrics)
+- During the upgrade, you will lose the historical data from Prometheus.
+  Linkerd's Prometheus installation is not intended as a persistent store.
+  Please see the [Prometheus export
+  documentation](/2/observability/prometheus/#exporting-metrics) for more.
 
 ## Upgrade the data plane
 
-With a fully up-to-date CLI running locally and Linkerd control plane running on
-your Kubernetes cluster, it is time to upgrade the data plane. This will change
-the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
-your service.
+Finally, with a fully up-to-date CLI running locally and Linkerd control plane
+running on your Kubernetes cluster, it is time to upgrade the data plane. This
+will change the version of the `linkerd-proxy` sidecar container and run a
+rolling deploy on your service.
 
 For each of your meshed services, you will want to take your YAML resource
 definitions and pass them through `linkerd inject`. This will update the pod
@@ -161,3 +144,6 @@ linkerd.io/proxy-version: {{% latestversion %}}
 ```
 
 If there are any older versions listed, you will want to upgrade them as well.
+
+Congratulations! You have a fresh new Linkerd installation.
+

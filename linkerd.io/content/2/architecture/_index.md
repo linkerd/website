@@ -3,8 +3,22 @@ date = "2018-09-10T12:00:00-07:00"
 title = "Architecture"
 [menu.l5d2docs]
   name = "Architecture"
-  weight = 2
+  weight = 6
 +++
+
+Linkerd is made of three basic components:
+
+1. The CLI, which runs on your local environment (e.g. your cluster).
+1. The control plane, which runs on your cluster, in a dedicated namespace (e.g. "linkerd").
+1. The data plane, which runs on your cluster, as a set of distributed proxies embedded in your services' pods.
+
+Let's take each of those components in those in turn.
+
+## CLI
+
+The Linkerd CLI, or command-line interface, is run locally on your machine and
+is used to interact with the control and data planes. See the [CLI reference
+documentation](../cli).
 
 ## Control Plane
 
@@ -12,8 +26,7 @@ The Linkerd control plane is a set of services that run in a dedicated
 Kubernetes namespace (`linkerd` by default). These services accomplish various
 things---aggregating telemetry data, providing a user-facing API, providing
 control data to the data plane proxies, etc. Together, they drive the behavior
-of the data plane. The CLI can be used to
-[install the control plane](../getting-started/).
+of the data plane.
 
 The control plane is made up of four components:
 
@@ -21,18 +34,20 @@ The control plane is made up of four components:
   (public-api, proxy-api, destination, tap) that provide the bulk of the control
   plane's functionality.
 
-- Web - The web deployment provides the Linkerd dashboard.
+- Web - The web deployment provides the Linkerd dashboard UI.
 
 - Prometheus - All of the metrics exposed by Linkerd are scraped via Prometheus
   and stored here. This is an instance of Prometheus that has been configured to
-  work specifically with the data that Linkerd generates. There are
-  [instructions](/2/observability/prometheus/#exporting-metrics)
-  if you would like to integrate this with an
-  existing Prometheus installation.
+  work specifically with the data that Linkerd generates. *Note*: this
+  Prometheus deployment is intended to supplement, not replace, your existing
+  metrics store. [Read more about how to get metrics out of this Prometheus instance here](/2/observability/prometheus/#exporting-metrics).
 
-- Grafana - Linkerd comes with many dashboards out of the box. The Grafana
-  component is used to render and display these dashboards. You can reach these
-  dashboards via links in the Linkerd dashboard itself.
+- Grafana - The Grafana component is used to render automatic per-service
+  dashboards. You can reach these dashboards via links in the Linkerd dashboard
+  UI.
+
+Below is an architecture diagram of the control plane, and how it interacts
+with a single proxy instance in the data plane:
 
 {{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
 
@@ -40,94 +55,29 @@ The control plane is made up of four components:
 
 The Linkerd data plane is comprised of lightweight proxies, which are deployed
 as sidecar containers alongside each instance of your service code. In order to
-“add” a service to the Linkerd service mesh, the pods for that service must be
-redeployed to include a data plane proxy in each pod. (The `linkerd inject`
-command accomplishes this, as well as the configuration work necessary to
-transparently funnel traffic from each instance through the proxy.) You can
-[add your service](../adding-your-service) to the data plane with a single CLI
-command.
+add a service to the Linkerd service mesh, the pods for that service must be
+redeployed to include a data plane proxy in each pod. There are [several ways
+to add your service](../adding-your-service) to the data plane.
 
-These proxies transparently intercept communication to and from each pod, and
-add features such as instrumentation and encryption (TLS), as well as allowing
-and denying requests according to the relevant policy.
-
-These proxies are not designed to be configured by hand. Rather, their behavior
-is driven by the control plane.
-
-### Proxy
-
-An ultralight transparent proxy written in [Rust](https://www.rust-lang.org/),
-the proxy is installed into each pod of a service and becomes part of the data
-plane. It receives all incoming traffic for a pod and intercepts all outgoing
-traffic via an `initContainer` that configures `iptables` to forward the
-traffic correctly. Because it is a sidecar and intercepts all the incoming and
-outgoing traffic for a service, there are no code changes required and it can
-even be added to a running service.
+Linkerd's ultralight transparent proxies are written in
+[Rust](https://www.rust-lang.org/).  They receive all incoming traffic for a
+pod and intercept all outgoing traffic. This is accomplished via an
+`initContainer` that configures `iptables` to forward the traffic correctly.
+Because it is a sidecar and intercepts all the incoming and outgoing traffic
+for a service, there are no code changes required to the application.
 
 The proxy's features include:
 
 - Transparent, zero-config proxying for HTTP, HTTP/2, and arbitrary TCP
   protocols.
-
 - Automatic Prometheus metrics export for HTTP and TCP traffic.
-
 - Transparent, zero-config WebSocket proxying.
-
 - Automatic, latency-aware, layer-7 load balancing.
-
 - Automatic layer-4 load balancing for non-HTTP traffic.
-
 - Automatic TLS (experimental).
-
 - An on-demand diagnostic tap API.
 
 The proxy supports service discovery via DNS and the
 [destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).
 
-## CLI
 
-The Linkerd CLI is run locally on your machine and is used to interact with the
-control and data planes. It can be used to view statistics, debug production
-issues in real time and install/upgrade the control and data planes.
-
-## Dashboard
-
-The Linkerd dashboard provides a high level view of what is happening with your
-services in real time. It can be used to view the "golden" metrics (success
-rate, requests/second and latency), visualize service dependencies and
-understand the health of specific service routes. One way to pull it up is by
-running `linkerd dashboard` from the command line.
-
-{{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
-
-## Grafana
-
-As a component of the control plane, Grafana provides actionable dashboards for
-your services out of the box. It is possible to see high level metrics and dig
-down into the details, even for pods.
-
-The dashboards that are provided out of the box include:
-
-{{< gallery >}}
-
-{{< gallery-item src="/images/screenshots/grafana-top.png" title="Top Line Metrics" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-deployment.png" title="Deployment Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-pod.png" title="Pod Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-health.png" title="Linkerd Health" >}}
-
-{{< /gallery >}}
-
-## Prometheus
-
-Prometheus is a cloud native monitoring solution that is used to collect
-and store all the Linkerd metrics. It is installed as part of the control plane
-and provides the data used by the CLI, dashboard and Grafana.
-
-The proxy exposes a `/metrics` endpoint for Prometheus to scrape on port 4191.
-This is scraped every 10 seconds. These metrics are then available to all the
-other Linkerd components, such as the CLI and dashboard.
-
-{{< fig src="/images/architecture/prometheus.svg" title="Metrics Collection" >}}

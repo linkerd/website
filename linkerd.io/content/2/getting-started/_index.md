@@ -3,10 +3,8 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Getting Started"
 [menu.l5d2docs]
   name = "Getting Started"
-  weight = 3
+  weight = 2
 +++
-
-Welcome to Linkerd! 🎈
 
 In this guide, we’ll walk you through how to install Linkerd into your
 Kubernetes cluster. Then we'll deploy a sample application to show off
