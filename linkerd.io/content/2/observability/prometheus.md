@@ -76,7 +76,8 @@ curl -G --data-urlencode 'match[]={job="linkerd-proxy"}' --data-urlencode 'match
 
 ### Prometheus JSON API
 
-Similar to the `/federate` API, Prometheus provides a JSON API to retrieve all metrics:
+Similar to the `/federate` API, Prometheus provides a JSON API to retrieve all
+metrics:
 
 ```bash
 curl http://prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
@@ -84,11 +85,15 @@ curl http://prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request
 
 ## Querying Linkerd's `/metrics` endpoint
 
-If you want to query a Linkerd proxy directly, you can use its `/metrics` endpoint.
+If you want to query a Linkerd proxy directly, you can use its `/metrics`
+endpoint.
 
-Each Linkerd proxy, injected as a sidecar with your application, provides application-level metrics for all requests transiting through your application's pod.
+Each Linkerd proxy, injected as a sidecar with your application, provides
+application-level metrics for all requests transiting through your application's
+pod.
 
-For example, to view `/metrics` from a single Linkerd proxy, running in the `linkerd` namespace:
+For example, to view `/metrics` from a single Linkerd proxy, running in the
+`linkerd` namespace:
 
 ```bash
 kubectl port-forward -n linkerd $(kubectl -n linkerd get pods -l linkerd.io/control-plane-ns=linkerd -o jsonpath='{.items[0].metadata.name}') 4191:4191
