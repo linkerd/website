@@ -17,6 +17,12 @@ Source code for the linkerd.io website.
     brew install hugo
     ```
 
+1. Build site:
+
+    ```bash
+    ./build
+    ```
+
 1. Run Hugo in development mode:
 
     ```bash
