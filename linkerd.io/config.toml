@@ -33,7 +33,7 @@ sectionPagesMenu = "main"
   name = "Blog"
   identifier = "blog"
   weight = 3
-  url = "http://blog.linkerd.io/"
+  url = "https://blog.linkerd.io/"
 
 [[menu.top]]
   name = "Enterprise"

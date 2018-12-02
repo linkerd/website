@@ -93,4 +93,4 @@ Describe the modifications you've made.
 [discourse]: https://discourse.linkerd.io/
 [issue]: https://github.com/linkerd/linkerd/issues/new
 [members]: https://github.com/orgs/linkerd/people
-[slack]: http://slack.linkerd.io/
+[slack]: https://slack.linkerd.io/
