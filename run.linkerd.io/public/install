@@ -53,5 +53,5 @@ echo "  linkerd install | kubectl apply -f -    # install the control plane into
 echo "  linkerd check                           # validate everything worked!"
 echo "  linkerd dashboard                       # launch the dashboard"
 echo ""
-echo "Looking for more? Visit https://linkerd.io/2/next-steps"
+echo "Looking for more? Visit https://linkerd.io/docs"
 echo ""

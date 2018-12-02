@@ -28,7 +28,7 @@ these instructions for anywhere that uses the linkerd CLI.
 To upgrade the CLI locally, run:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl -sL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the

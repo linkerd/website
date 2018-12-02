@@ -8,11 +8,11 @@ title = "Architecture"
 
 Linkerd is made of three basic components:
 
-1. The CLI, which runs on your local environment (e.g. your cluster).
-1. The control plane, which runs on your cluster, in a dedicated namespace (e.g. "linkerd").
+1. The CLI, which runs on your local environment (e.g. your laptop).
+1. The control plane, which runs on your cluster in a dedicated namespace (e.g. "linkerd").
 1. The data plane, which runs on your cluster, as a set of distributed proxies embedded in your services' pods.
 
-Let's take each of those components in those in turn.
+Let's take each of those components in turn.
 
 ## CLI
 
@@ -40,7 +40,7 @@ The control plane is made up of four components:
   and stored here. This is an instance of Prometheus that has been configured to
   work specifically with the data that Linkerd generates. *Note*: this
   Prometheus deployment is intended to supplement, not replace, your existing
-  metrics store. [Read more about how to get metrics out of this Prometheus instance here](/2/observability/prometheus/#exporting-metrics).
+  metrics store. [Read more about how to get metrics out of this Prometheus instance](/2/observability/prometheus/#exporting-metrics).
 
 - Grafana - The Grafana component is used to render automatic per-service
   dashboards. You can reach these dashboards via links in the Linkerd dashboard
