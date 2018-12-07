@@ -25,10 +25,10 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.1
+        image: buoyantio/booksapp:v0.0.2
         env:
         - name: DATABASE_URL
-          value: mysql2://booksapp:booksapp@mysql:3306/booksapp_production
+          value: sqlite3:db/db.sqlite3
         - name: AUTHORS_SITE
           value: http://authors:7001
         - name: BOOKS_SITE
@@ -38,8 +38,6 @@ spec:
           httpGet:
             path: /ping
             port: 7000
-          initialDelaySeconds: 10
-          failureThreshold: 12 # 2 minutes
         ports:
         - name: service
           containerPort: 7000
@@ -61,7 +59,7 @@ apiVersion: extensions/v1beta1
 metadata:
   name: authors
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -70,10 +68,10 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.1
+        image: buoyantio/booksapp:v0.0.2
         env:
         - name: DATABASE_URL
-          value: mysql2://booksapp:booksapp@mysql:3306/booksapp_production
+          value: sqlite3:db/db.sqlite3
         - name: BOOKS_SITE
           value: http://books:7002
         - name: FAILURE_RATE
@@ -83,8 +81,6 @@ spec:
           httpGet:
             path: /ping
             port: 7001
-          initialDelaySeconds: 10
-          failureThreshold: 12 # 2 minutes
         ports:
         - name: service
           containerPort: 7001
@@ -106,7 +102,7 @@ apiVersion: extensions/v1beta1
 metadata:
   name: books
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -115,10 +111,10 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.1
+        image: buoyantio/booksapp:v0.0.2
         env:
         - name: DATABASE_URL
-          value: mysql2://booksapp:booksapp@mysql:3306/booksapp_production
+          value: sqlite3:db/db.sqlite3
         - name: AUTHORS_SITE
           value: http://authors:7001
         args: ["prod:books"]
@@ -126,8 +122,6 @@ spec:
           httpGet:
             path: /ping
             port: 7002
-          initialDelaySeconds: 10
-          failureThreshold: 12 # 2 minutes
         ports:
         - name: service
           containerPort: 7002
@@ -146,76 +140,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: traffic
-        image: buoyantio/booksapp-traffic:v0.0.1
+        image: buoyantio/booksapp-traffic:v0.0.2
         args:
+        - "-initial-delay=30s"
         - "webapp:7000"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-spec:
-  ports:
-  - port: 3306
-  selector:
-    app: mysql
-  clusterIP: None
----
-apiVersion: apps/v1beta2
-kind: Deployment
-metadata:
-  name: mysql
-spec:
-  selector:
-    matchLabels:
-      app: mysql
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-      - name: mysql
-        image: mysql:5.6
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: password
-        - name: MYSQL_DATABASE
-          value: booksapp_production
-        - name: MYSQL_USER
-          value: booksapp
-        - name: MYSQL_PASSWORD
-          value: booksapp
-        - name: MYSQL_INITDB_SKIP_TZINFO
-          value: "1"
-        ports:
-        - containerPort: 3306
-          name: mysql
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: mysql-init
-spec:
-  template:
-    metadata:
-      name: mysql-init
-    spec:
-      containers:
-      - name: mysql-init
-        image: buoyantio/booksapp:v0.0.1
-        env:
-        - name: DATABASE_URL
-          value: mysql2://booksapp:booksapp@mysql:3306/booksapp_production
-        command:
-        - "/bin/sh"
-        args:
-        - "-c"
-        - |
-          set -e
-          bundle exec rake db:ready
-          bundle exec rake db:migrate
-          bundle exec rake db:seed
-      restartPolicy: OnFailure
