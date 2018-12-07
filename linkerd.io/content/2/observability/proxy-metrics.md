@@ -30,6 +30,21 @@ port (default: `:4191`) in the [Prometheus format][prom-format]:
   application behavior when a server provides response headers immediately but is
   slow to begin serving the response body.
 
+* `route_request_total`, `route_response_latency_ms`, and `route_response_total`: 
+  These metrics are analogous to `request_total`, `response_latency_ms`, and 
+  `response_total` except that they are collected at the route level.  This
+  means that they do not have `authority`, `tls`, `grpc_status_code` or any
+  outbound labels but instead they have:
+  * `dst`: The authority of this request.
+  * `rt_route`: The name of the route for this request.
+
+* `control_request_total`, `control_response_latency_ms`, and `control_response_total`:
+  These metrics are analogous to `request_total`, `response_latency_ms`, and 
+  `response_total` but for requests that the proxy makes to the Linkerd control
+  plane.  Instead of `authority`, `direction`, or any outbound labels, instead
+  they have:
+  * `addr`: The address used to connect to the control plane.
+
 Note that latency measurements are not exported to Prometheus until the stream
 _completes_. This is necessary so that latencies can be labeled with the appropriate
 [response classification](#response-labels).
