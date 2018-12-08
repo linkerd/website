@@ -22,6 +22,16 @@ renamed to reduce possible naming collisions. If you're upgrading from an older
 version, you will need to clean up the old components manually as part of the
 upgrade. Perform the upgrade in the following order:
 
+1. If Linkerd is installed with [automatic proxy injection](/2/proxy-injection),
+  enabled, then you'll need to start by removing the webhook that was created
+  when it was installed, by running:
+
+    ```bash
+    kubectl -n linkerd delete \
+      mutatingwebhookconfigurations/linkerd-proxy-injector-webhook-config \
+      --ignore-not-found
+    ```
+
 1. [Upgrade the CLI](#upgrade-the-cli)
 
 1. [Upgrade the control plane](#upgrade-the-control-plane)
