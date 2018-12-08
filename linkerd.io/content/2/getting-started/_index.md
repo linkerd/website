@@ -153,7 +153,7 @@ part of the data plane itself. This provides the ability to dig into these
 components and see what is going on behind the scenes. In fact, you can run:
 
 ```bash
-linkerd -n linkerd top deploy/web
+linkerd -n linkerd top deploy/linkerd-web
 ```
 
 This is the traffic you're generating by looking at the dashboard itself!
