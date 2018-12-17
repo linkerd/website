@@ -37,9 +37,27 @@ Kubernetes Secret.
 Once you've configured the control plane to support TLS, you may enable TLS
 for each application when it is injected with the Linkerd proxy:
 
+# Test TLS With Demo App
+In the example below we will be using the [emojivoto service](https://run.linkerd.io/emojivoto.yml) which you will want to click on and download.
+
+Install the service using the emojivoto.yml file it downloaded.
+
 ```bash
-linkerd inject  --tls=optional app.yml | kubectl apply -f -
+kubectl -f apply -f emojivoto.yml
 ```
+
+```bash
+linkerd inject  --tls=optional emojivoto.yml | kubectl apply -f -
+```
+
+Now if you open up the proxy to view the page to increase the TLS % stat:
+
+```bash
+kubectl -n emojivoto port-forward \
+  $(kubectl -n emojivoto get po -l app=web-svc -oname | cut -d/ -f 2) \
+  8080:80
+```
+
 
 Then, tools like `linkerd dashboard`, `linkerd stat`, and `linkerd tap` will
 indicate the TLS status of traffic:
