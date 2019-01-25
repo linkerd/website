@@ -6,7 +6,7 @@ title = "Frequently Asked Questions"
 [menu.l5d2docs]
   name = "Frequently Asked Questions"
   identifier = "faq"
-  weight = 7
+  weight = 8
 +++
 
 This section provides resolution steps for common errors encountered with
