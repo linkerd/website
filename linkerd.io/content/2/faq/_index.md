@@ -9,16 +9,30 @@ title = "Frequently Asked Questions"
   weight = 8
 +++
 
-This section provides resolution steps for common errors encountered with
-`linkerd check`.
+## Setting up access to a Google Kubernetes Engine (GKE) cluster {#gke}
 
-## pre-kubernetes-cluster-setup {#pre}
+If you are using GKE with RBAC enabled, you will want to grant a
+`ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
+provide your current user all the permissions required to install the control
+plane. To bind this `ClusterRole` to your user, you can run:
+
+```bash
+kubectl create clusterrolebinding cluster-admin-binding-$USER \
+    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+```
+
+## Resolutions for linkerd check failures {#check}
+
+This section provides resolution steps for common errors encountered with the
+`linkerd check` command.
+
+### pre-kubernetes-cluster-setup {#pre}
 
 These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify your cluster is prepared for
 installation.
 
-### √ control plane namespace does not already exist {#pre-ns}
+#### √ control plane namespace does not already exist {#pre-ns}
 
 Example failure:
 ```bash
@@ -33,7 +47,7 @@ namespace, run:
 linkerd check --pre --linkerd-namespace linkerd-test
 ```
 
-### √ can create Kubernetes resources {#pre-k8s}
+#### √ can create Kubernetes resources {#pre-k8s}
 
 The subsequent checks in this section validate whether you have permission to
 create the Kubernetes resources required for Linkerd installation, specifically:
@@ -45,11 +59,10 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 √ can create CustomResourceDefinitions
 ```
 
-For more information on cluster access, see
-[Step 0](/2/getting-started/#step-0-setup) in our
-[Getting Started](/2/getting-started) guide.
+For more information on cluster access, see the [GKE Setup](#gke) section
+above.
 
-## pre-kubernetes-single-namespace-setup {#pre-single}
+### pre-kubernetes-single-namespace-setup {#pre-single}
 
 If you do not expect to have the permission for a full cluster install, try the
 `--single-namespace` flag, which validates if Linkerd can be installed in a
@@ -58,7 +71,7 @@ single namespace, with limited cluster access:
 linkerd check --pre --single-namespace
 ```
 
-### √ control plane namespace exists {#pre-single-ns}
+#### √ control plane namespace exists {#pre-single-ns}
 
 ```bash
 × control plane namespace exists
@@ -74,7 +87,7 @@ By default the `linkerd` namespace is used. To use a different namespace run:
 linkerd check --pre --single-namespace --linkerd-namespace linkerd-test
 ```
 
-### √ can create Kubernetes resources {#pre-single-k8s}
+#### √ can create Kubernetes resources {#pre-single-k8s}
 
 The subsequent checks in this section validate whether you have permission to
 create the Kubernetes resources required for Linkerd `--single-namespace`
@@ -85,11 +98,10 @@ installation, specifically:
 √ can create RoleBindings
 ```
 
-For more information on cluster access, see
-[Step 0](/2/getting-started/#step-0-setup) in our
-[Getting Started](/2/getting-started) guide.
+For more information on cluster access, see the [GKE Setup](#gke) section
+above.
 
-## kubernetes-api {#k8s-api}
+### kubernetes-api {#k8s-api}
 
 Example failures:
 ```bash
@@ -103,6 +115,11 @@ Ensure that your system is configured to connect to a Kubernetes cluster.
 Validate that the `KUBECONFIG` environment variable is set properly, and/or
 `~/.kube/config` points to a valid cluster.
 
+For more information see these pages in the Kubernetes Documentation:
+
+- [Accessing Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/)
+- [Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+
 Also verify that these command works:
 ```bash
 kubectl config view
@@ -110,25 +127,39 @@ kubectl cluster-info
 kubectl version
 ```
 
-For more information see:
-https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
+Another example failure:
+```bash
+✘ can query the Kubernetes API
+    Get REDACTED/version: x509: certificate signed by unknown authority
+```
 
-## kubernetes-version {#k8s-version}
+As an (unsafe) workaround to this, you may try:
+
+```bash
+kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
+    --server=${KUBE_CONTEXT}
+```
+
+### kubernetes-version {#k8s-version}
 
 Example failure:
 ```bash
 × is running the minimum Kubernetes API version
-    Kubernetes is on version [1.7.16], but version [1.8.0] or more recent is required
+    Kubernetes is on version [1.7.16], but version [1.10.0] or more recent is required
 ```
 
-Linkerd requires at least version `1.8.0`. Verify your cluster version with:
+Linkerd requires at least version `1.10.0`. Verify your cluster version with:
 ```bash
 kubectl version
 ```
 
-## linkerd-existence {#l5d-existence}
+For more information on upgrading Kubernetes, see the page in the Kubernetes
+Documentation on
+[Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
 
-### √ control plane namespace exists {#l5d-existence-ns}
+### linkerd-existence {#l5d-existence}
+
+#### √ control plane namespace exists {#l5d-existence-ns}
 
 Example failure:
 ```bash
@@ -148,7 +179,7 @@ a different namespace, specify that in your check command:
 linkerd check --linkerd-namespace linkerdtest
 ```
 
-### √ controller pod is running {#l5d-existence-conroller}
+#### √ controller pod is running {#l5d-existence-conroller}
 
 Example failure:
 ```bash
@@ -156,25 +187,14 @@ Example failure:
     No running pods for "linkerd-controller"
 ```
 
-Validate the state of the controller pod with:
+Note, it takes a little bit for pods to be scheduled, images to be pulled and
+everything to start up. If this is a permanent error, you'll want to validate
+the state of the controller pod with:
 
 ```bash
-$ kubectl -n linkerd get all
-NAME                                      READY     STATUS    RESTARTS   AGE
-pod/linkerd-controller-b8c4c48c8-pflc9    4/4       Running   0          18m
-...
-
-NAME                             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)             AGE
-service/linkerd-controller-api   ClusterIP   10.100.116.151   <none>        8085/TCP            41m
-...
-
-NAME                                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/linkerd-controller   1         1         1            1           18m
-...
-
-NAME                                            DESIRED   CURRENT   READY     AGE
-replicaset.apps/linkerd-controller-b8c4c48c8    1         1         1         18m
-...
+$ kubectl -n linkerd get po --selector linkerd.io/control-plane-component=controller
+NAME                                  READY     STATUS    RESTARTS   AGE
+linkerd-controller-7bb8ff5967-zg265   4/4       Running   0          40m
 ```
 
 Check the controller's logs with:
@@ -182,7 +202,7 @@ Check the controller's logs with:
 linkerd logs --control-plane-component controller
 ```
 
-### √ can initialize the client {#l5d-existence-client}
+#### √ can initialize the client {#l5d-existence-client}
 
 Example failure:
 ```bash
@@ -195,7 +215,7 @@ Verify that a well-formed `--api-addr` parameter was specified, if any:
 linkerd check --api-addr " bad"
 ```
 
-### √ can query the control plane API {#l5d-existence-api}
+#### √ can query the control plane API {#l5d-existence-api}
 
 Example failure:
 ```bash
@@ -216,9 +236,9 @@ kubectl -n linkerd port-forward $(
 curl localhost:9995/metrics
 ```
 
-## linkerd-api {#l5d-api}
+### linkerd-api {#l5d-api}
 
-### √ control plane pods are ready {#l5d-api-control-ready}
+#### √ control plane pods are ready {#l5d-api-control-ready}
 
 Example failure:
 ```bash
@@ -236,7 +256,7 @@ pod/linkerd-prometheus-74d66f86f6-6t6dh   2/2       Running   0          1h
 pod/linkerd-web-5f6c45d6d9-9hd9j          2/2       Running   0          3m
 ```
 
-### √ can query the control plane API {#l5d-api-control-api}
+#### √ can query the control plane API {#l5d-api-control-api}
 
 Example failure:
 ```bash
@@ -249,7 +269,7 @@ Check the logs on the control-plane's public API:
 linkerd logs --control-plane-component controller --container public-api
 ```
 
-### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
+#### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
 
 Example failure:
 ```bash
@@ -262,7 +282,7 @@ Check the logs on the control-plane's public API:
 linkerd logs --control-plane-component controller --container public-api
 ```
 
-### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
+#### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
 
 Example failure:
 ```bash
@@ -283,7 +303,7 @@ Check the logs on the control-plane's public API:
 linkerd logs --control-plane-component controller --container public-api
 ```
 
-## linkerd-service-profile {#l5d-sp}
+### linkerd-service-profile {#l5d-sp}
 
 Example failure:
 ```bash
@@ -299,9 +319,9 @@ bad                                                51s
 linkerd-controller-api.linkerd.svc.cluster.local   1m
 ```
 
-## linkerd-version {#l5d-version}
+### linkerd-version {#l5d-version}
 
-### √ can determine the latest version {#l5d-version-latest}
+#### √ can determine the latest version {#l5d-version-latest}
 
 Example failure:
 ```bash
@@ -316,7 +336,7 @@ $ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=te
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
-### √ cli is up-to-date {#l5d-version-cli}
+#### √ cli is up-to-date {#l5d-version-cli}
 
 Example failure:
 ```bash
@@ -326,7 +346,7 @@ Example failure:
 
 See the page on [Upgrading Linkerd](/2/upgrade).
 
-## control-plane-version {#l5d-version-control}
+### control-plane-version {#l5d-version-control}
 
 Example failures:
 ```bash
@@ -338,17 +358,17 @@ Example failures:
 
 See the page on [Upgrading Linkerd](/2/upgrade).
 
-## linkerd-data-plane {#l5d-data-plane}
+### linkerd-data-plane {#l5d-data-plane}
 
 These checks only run when the `--proxy` flag is set. This flag is intended for
 use after running `linkerd inject`, to verify the injected proxies are operating
 normally.
 
-### √ data plane namespace exists {#l5d-data-plane-exists}
+#### √ data plane namespace exists {#l5d-data-plane-exists}
 
 Example failure:
 ```bash
-$ check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist
@@ -357,7 +377,7 @@ $ check --proxy --namespace foo
 Ensure the `--namespace` specified exists, or, omit the parameter to check all
 namespaces.
 
-### √ data plane proxies are ready {#l5d-data-plane-ready}
+#### √ data plane proxies are ready {#l5d-data-plane-ready}
 
 Example failure:
 ```bash
@@ -372,7 +392,7 @@ For more information on `linkerd inject`, see
 [Step 5: Install the demo app](/2/getting-started/#step-5-install-the-demo-app)
 in our [Getting Started](/2/getting-started) guide.
 
-### √ data plane proxy metrics are present in Prometheus {#l5d-data-plane-prom}
+#### √ data plane proxy metrics are present in Prometheus {#l5d-data-plane-prom}
 
 Example failure:
 ```bash
@@ -390,8 +410,12 @@ kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
 ...and then browse to http://localhost:9090/targets, validate the
 `linkerd-proxy` section.
 
+You should see all your pods here. If they are not:
 
-### √ data plane is up-to-date {#l5d-data-plane-version}
+- Prometheus might be experiencing connectivity issues with the k8s api server.
+  Check out the logs and delete the pod to flush any possible transient errors.
+
+#### √ data plane is up-to-date {#l5d-data-plane-version}
 
 Example failure:
 ```bash
@@ -401,7 +425,7 @@ Example failure:
 
 See the page on [Upgrading Linkerd](/2/upgrade).
 
-### √ data plane and cli versions match {#l5d-data-plane-cli-version}
+#### √ data plane and cli versions match {#l5d-data-plane-cli-version}
 
 ```bash
 ‼ data plane and cli versions match
