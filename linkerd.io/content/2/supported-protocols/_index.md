@@ -20,9 +20,7 @@ This applies to the following list:
 
 * 25   - SMTP
 * 3306 - MySQL
-* 4222 - NATS
 * 8086 - InfluxDB
-* 27017 - MongoDB
 
 If you are using Linkerd to proxy plaintext MySQL
 or SMTP requests on their default ports (3306 and 25, respectively), then Linkerd
@@ -34,6 +32,14 @@ protocols.
 If you're working with a protocol that can't be automatically recognized by
 Linkerd, use the `--skip-inbound-ports` and `--skip-outbound-ports` flags when
 running `linkerd inject`.
+
+This list includes default ports used by some server-speak-first protocols.
+You would need to manually add these ports to both `--skip-inbound-ports` and
+`--skip-outbound-ports` if you proxy these connections through Linkerd:
+
+* 4222 - NATS
+* 6379 - Redis
+* 27017 - MongoDB
 
 For example, if your application makes requests to a MySQL database running on
 port 4406, use the command:
