@@ -20,7 +20,9 @@ This applies to the following list:
 
 * 25   - SMTP
 * 3306 - MySQL
+* 4222 - NATS
 * 8086 - InfluxDB
+* 27017 - MongoDB
 
 If you are using Linkerd to proxy plaintext MySQL
 or SMTP requests on their default ports (3306 and 25, respectively), then Linkerd
