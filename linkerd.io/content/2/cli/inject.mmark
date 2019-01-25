@@ -2,6 +2,7 @@
 date = "2018-08-28T08:00:00-07:00"
 title = "Inject"
 description = "The inject command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl."
+weight = 2
 aliases = [
   "/2/inject-reference/"
 ]
@@ -32,7 +33,7 @@ information as the table below:
 | `--outbound-port` | The proxy port to use for outbound traffic (default 4140). This port number is arbitrary, but can be changed if your Pod has that port reserved inbound or outbound already. | `--outbound-port=1234` |
 | `--proxy-bind-timeout` | The timeout the proxy will use (default "10s"). The amount of time to allow the proxy to bind to the Pod's network interface and begin receiving traffic on behalf of your deployment. If you have especially long start time for a container, you may consider adjusting this. This string will eventually be converted to a [Rust Duration](https://doc.rust-lang.org/beta/std/time/struct.Duration.html), so you'll want to keep this this of the form "[0-9]*s" | `--proxy-bind-timeout="30s"` |
 | `--proxy-image` | The linkerd proxy container image name (default "gcr.io/linkerd-io/proxy"). If you have modified (or made private) the Linkerd Proxy Init Container, you will adjust that here.  | `--proxy-image="quay.io/org/imagename"` |
-| `--proxy-log-level` | The log level for the proxy (default "warn,linkerd2_proxy=info"). The first value is the log level for the Init Container, and the second is the level for the Proxy Container. | `--proxy-log-level="info,linkerd2_proxy=debug"` |
+| `--proxy-log-level` | The log level for the proxy (default "warn,linkerd2_proxy=info"). The first value is the global process log level, and the second is the level for the Linkerd proxy itself. This conforms to the `RUST_LOG` format. | `--proxy-log-level="info,linkerd2_proxy=debug"` |
 | `--proxy-uid` | Run the proxy under this user ID (default 2102) | `--proxy-uid=123` |
 | `--proxy-cpu` | Set the amount of CPU units that the sidecar requests | `--proxy-cpu=10m` |
 | `--proxy-memory` | Set the amount of Memory units that the sidecar requests | `--proxy-memory=50Mi` |

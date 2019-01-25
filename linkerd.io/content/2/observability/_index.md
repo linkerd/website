@@ -7,7 +7,7 @@ weight = 1
 [menu.l5d2docs]
   name = "Observability"
   identifier = "observability"
-  weight = 9
+  weight = 10
 +++
 
 Linkerd provides extensive observability functionality. It automatically
