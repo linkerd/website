@@ -2,7 +2,7 @@
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= stable-2.1.0
-export L5D2_EDGE_VERSION ?= edge-19.1.2
+export L5D2_EDGE_VERSION ?= edge-19.1.3
 
 define upload_public
 	gsutil -m rsync \
