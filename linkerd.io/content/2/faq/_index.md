@@ -26,13 +26,13 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER \
 This section provides resolution steps for common errors encountered with the
 `linkerd check` command.
 
-### pre-kubernetes-cluster-setup {#pre}
+### pre-kubernetes-cluster-setup {#pre-k8s-cluster}
 
 These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify your cluster is prepared for
 installation.
 
-#### √ control plane namespace does not already exist {#pre-ns}
+#### √ control plane namespace does not already exist {#pre-k8s-cluster-ns}
 
 Example failure:
 ```bash
@@ -47,16 +47,32 @@ namespace, run:
 linkerd check --pre --linkerd-namespace linkerd-test
 ```
 
-#### √ can create Kubernetes resources {#pre-k8s}
+#### √ can create Kubernetes resources {#pre-k8s-cluster-k8s}
 
 The subsequent checks in this section validate whether you have permission to
 create the Kubernetes resources required for Linkerd installation, specifically:
 
-```
+```bash
 √ can create Namespaces
 √ can create ClusterRoles
 √ can create ClusterRoleBindings
 √ can create CustomResourceDefinitions
+```
+
+For more information on cluster access, see the [GKE Setup](#gke) section
+above.
+
+### pre-kubernetes-setup {#pre-k8s}
+
+These checks only run when the `--pre` flag is set. This flag is intended for
+use prior to running `linkerd install`, to verify you have the correct
+permissions to install Linkerd.
+
+```bash
+√ can create ServiceAccounts
+√ can create Services
+√ can create Deployments
+√ can create ConfigMaps
 ```
 
 For more information on cluster access, see the [GKE Setup](#gke) section
