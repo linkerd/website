@@ -65,5 +65,29 @@ to do][tls-issues]. We **LOVE** bug reports though, so please don't hesitate
 to [file an issue][new-issue] if you run into any problems while testing
 automatic TLS.
 
+### Setting `externalTrafficPolicy` on an External Load Balancer
+
+Given a Kubernetes Service of type `LoadBalancer`, if pods referenced by that
+Service are injected with `--tls optional`, requests will experience a 2-3
+second delay between Client Hello and Server Hello. This is due to the way a
+`LoadBalancer` obscures the client source IP via the default
+`externalTrafficPolicy: Cluster`. You may workaround this by setting
+`externalTrafficPolicy: Local`:
+
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-service
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+```
+
+For more information, see the [Kubernetes Documentation][k8s-docs] and the
+[Original Linkerd Issue][l5d-issue].
+
 [tls-issues]: https://github.com/linkerd/linkerd2/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Ftls
-[new-issue]: https://github.com/linkerd/linkerd2/issues/new
+[new-issue]: https://github.com/linkerd/linkerd2/issues/new/choose
+[k8s-docs]: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+[l5d-issue]: https://github.com/linkerd/linkerd2/issues/1880
