@@ -33,6 +33,14 @@ If you're working with a protocol that can't be automatically recognized by
 Linkerd, use the `--skip-inbound-ports` and `--skip-outbound-ports` flags when
 running `linkerd inject`.
 
+The following is a list of default ports used by some server-speaks-first
+protocols. You would need to manually add these ports to both
+`--skip-inbound-ports` and `--skip-outbound-ports` if you proxy these
+connections through Linkerd:
+
+* 4222 - NATS
+* 27017 - MongoDB
+
 For example, if your application makes requests to a MySQL database running on
 port 4406, use the command:
 
