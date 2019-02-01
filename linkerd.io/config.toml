@@ -9,8 +9,8 @@ sectionPagesMenu = "main"
 
 #CUSTOM PARAMS
 [params]
-  latest_release_version = "1.6.0"
-  latest_release_date = "2018-12-21"
+  latest_release_version = "1.6.1"
+  latest_release_date = "2019-02-01"
   description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
 
   l5d2_release_version = "L5D2_STABLE_VERSION"
