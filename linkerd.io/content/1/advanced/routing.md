@@ -24,7 +24,7 @@ aliases = [
 At its core, Linkerd's main job is routing: accepting a request (HTTP, Thrift,
 Mux, or other protocol) and sending that request to the correct destination.
 This guide will explain exactly how Linkerd determines where requests should be
-be sent.  This process consists of 4 steps: [identification](#identification),
+sent.  This process consists of 4 steps: [identification](#identification),
 [binding](#binding), [resolution](#resolution), and
 [load balancing](#load-balancing).
 
@@ -64,7 +64,7 @@ the **service name** of that request.
 Once a **service name** has been assigned to a request, that name undergoes
 transformations by the dtab (short for delegation table).  This is called
 **binding**.  Detailed documentation on how dtab transformations work can be
-found in on the [Dtabs]({{% ref "/1/advanced/dtabs.md" %}}) page.  Dtabs encode the
+found on the [Dtabs]({{% ref "/1/advanced/dtabs.md" %}}) page.  Dtabs encode the
 routing rules that describe how a **service name** is transformed into a
 **client name**.  A **client name** is the name of a replica set,
 typically the name of a service discovery entry.  Unlike **service names**,
