@@ -88,7 +88,8 @@ replace-env-%: has-env-% tmp-sites
 		)
 
 	for fname in $$(grep -rnl '$*' tmp); do \
-		sed -i '' 's/$*/$($*)/g' $$fname; \
+		sed -i.bak 's/$*/$($*)/g' $$fname; \
+		rm $$fname.bak; \
 	done
 
 .PHONY: has-env-%
