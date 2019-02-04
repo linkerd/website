@@ -195,7 +195,7 @@ a different namespace, specify that in your check command:
 linkerd check --linkerd-namespace linkerdtest
 ```
 
-#### √ controller pod is running {#l5d-existence-conroller}
+#### √ controller pod is running {#l5d-existence-controller}
 
 Example failure:
 ```bash
