@@ -143,7 +143,7 @@ With the control plane installed and running, you can now view the Linkerd
 dashboard by running:
 
 ```bash
-linkerd dashboard
+linkerd dashboard &
 ```
 
 {{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
@@ -172,8 +172,11 @@ curl -sL https://run.linkerd.io/emojivoto.yml \
   | kubectl apply -f -
 ```
 
-You can take a look at this by forwarding the `web` pod to localhost and looking
-at the app in your browser. To forward `web` locally to port 8080, you can run:
+Before we mesh it, let's take a look at the app. If you're using [Docker for
+Desktop](https://www.docker.com/products/docker-desktop) at this point you can
+visit [http://localhost](http://localhost) directly.  If you're not using
+Docker for Desktop, we'll need to forward the `web` pod. To forward `web`
+locally to port 8080, you can run:
 
 ```bash
 kubectl -n emojivoto port-forward \
@@ -181,16 +184,16 @@ kubectl -n emojivoto port-forward \
   8080:80
 ```
 
-You might notice that some parts of the application are broken! If you were to
-inspect your handy local Kubernetes dashboard, you wouldn’t see very much of
-interest --- as far as Kubernetes is concerned, the app is running just fine.
-This is a very common situation! Kubernetes understands whether your pods are
-running, but not whether they are responding properly. Check out the
-[debugging example](../debugging-an-app) if you're interested in how to figure
-out exactly what is wrong.
+Now visit [http://localhost](http://localhost). Voila! The emojivoto app in its
+glory.
 
-To get some added visibility into what is going on and see some of the
-functionality of Linkerd, let's add Linkerd to emojivoto by running:
+Clicking around, you might notice that some parts of the application are
+broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
+worry, these errors are intentional. (And we can use Linkerd to identify the
+problem. Check out the [debugging guide](../debugging-an-app) if you're
+interested in how to figure out exactly what is wrong.)
+
+Next, let's add Linkerd to the Emojivoto app, by running:
 
 ```bash
 kubectl get -n emojivoto deploy -o yaml \
@@ -198,12 +201,12 @@ kubectl get -n emojivoto deploy -o yaml \
   | kubectl apply -f -
 ```
 
-This command retrieves all of the deployments running in the `emojivoto` namespace,
-runs the set of Kubernetes resources through `inject`, and finally reapplies it to
-the cluster. `inject` augments the resources to include the data plane's
-proxies. As with `install`, `inject` is a pure text operation, meaning that you
-can inspect the input and output before you use it. You can even run it through
-`diff` to see exactly what is changing.
+This command retrieves all of the deployments running in the `emojivoto`
+namespace, runs the set of Kubernetes resources through `inject`, and finally
+reapplies it to the cluster. The `inject` command augments the resources to
+include the data plane's proxies. As with `install`, `inject` is a pure text
+operation, meaning that you can inspect the input and output before you use it.
+You can even run it through `diff` to see exactly what is changing.
 
 Once piped into `kubectl apply`, Kubernetes will execute a rolling deploy and
 update each pod with the data plane's proxies, all without any downtime.
