@@ -184,8 +184,8 @@ kubectl -n emojivoto port-forward \
   8080:80
 ```
 
-Now visit [http://localhost](http://localhost). Voila! The emojivoto app in its
-glory.
+Now visit [http://localhost](http://localhost:8080). Voila! The emojivoto app
+in all its glory.
 
 Clicking around, you might notice that some parts of the application are
 broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
