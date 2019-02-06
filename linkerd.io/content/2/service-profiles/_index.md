@@ -8,11 +8,10 @@ title = "Service Profiles"
 
 A service profile is a custom Kubernetes resource which allows you to give
 Linkerd additional information about a service. In particular, it allows you to
-define a list of routes for the service. Each route can use a regular
-expression to define which paths should match that route, or use more complex
-matching criteria. Defining a service profile enables Linkerd to report  per-
-route metrics and also allows you to enable per-route features such as  retries
-and timeouts.
+define a list of routes for the service. Each route can use a regular expression
+to define which paths should match that route, or use more complex matching
+criteria. Defining a service profile enables Linkerd to report per-route metrics
+and also allows you to enable per-route features such as retries and timeouts.
 
 ## Defining a Service Profile
 
@@ -39,7 +38,6 @@ based on a sampling of live traffic to the service.
 If you'd like to craft your service profile by hand, you can use the
 `--template` flag which outputs a commented service profile skeleton which you
 can manually edit to define exactly the routes that you want.
-
 
 Once you have created a service profile, you can use the `linkerd check`
 command to validate it.
