@@ -3,7 +3,7 @@ date = "2019-02-06T13:23:37-08:00"
 title = "Retries and Timeouts"
 [menu.l5d2docs]
   name = "Retries and Timeouts"
-  weight = 14
+  weight = 13
 +++
 
 A [service profile](/2/service-profiles) may define certain routes as retryable

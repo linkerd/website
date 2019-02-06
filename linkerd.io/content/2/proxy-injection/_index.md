@@ -3,7 +3,7 @@ date = "2018-09-10T12:00:00-07:00"
 title = "Experimental: Automatic Proxy Injection"
 [menu.l5d2docs]
   name = "Experimental: Automatic Proxy Injection"
-  weight = 13
+  weight = 15
 +++
 
 Linkerd can be configured to automatically inject the data plane proxy into your service.
