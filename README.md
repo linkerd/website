@@ -29,12 +29,6 @@ Source code for the linkerd.io website.
     hugo server
     ```
 
-1. If you would like to modify the CSS, [install SASS](http://sass-lang.com/install)
-
-    ```bash
-    sass --watch static/scss/index.scss:static/css/gen/index.css --style compressed
-    ```
-
 You should have see the site on localhost:1313, and it should reload
 automatically upon file write.
 
@@ -42,14 +36,11 @@ automatically upon file write.
 
 #### CSS/HTML
 
-The files in static/ are the CSS (SCSS), Javascript, and images for the site.
-These files are served as is, except for the files in `css/gen/`, which are
-processed from the files in `scss/`. If you want to change the styles, ensure
-you have [SASS installed](http://sass-lang.com/install), and run:
-
-```bash
-sass --watch static/scss/index.scss:static/css/gen/index.css --style compressed
-```
+Images and static CSS and JavaScript files are located in the `static`
+directory. These files are served as-is. Some of the site's CSS, however, is
+generated from [Sass](https://sass-lang.com) sources in `assets/scss` by
+Hugo. When you change those files, Hugo updates the CSS for the site
+automatically and refreshes the page.
 
 The files in layouts/ are the HTML for the site (including layout/index.html
 for the front page.) These files are Go templates with a couple extra Hugo
