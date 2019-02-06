@@ -184,7 +184,7 @@ kubectl -n emojivoto port-forward \
   8080:80
 ```
 
-Now visit [http://localhost](http://localhost:8080). Voila! The emojivoto app
+Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto app
 in all its glory.
 
 Clicking around, you might notice that some parts of the application are
