@@ -54,7 +54,7 @@ Medium
 ## Auto-Update
 
 Linkerd has frequent updates and keeping up with the weekly edge releases can
-be difficult. This project involves building an Kubernetes operator that can
+be difficult. This project involves building a Kubernetes operator that can
 observe the version-check API, auto-update the control plane and replace the
 Linkerd data plane proxies with the correct version.
 
@@ -91,15 +91,15 @@ Hard
 Linkerd has an extensive `check` suite that validates a cluster is ready to
 install Linkerd and that the install was successful. These checks are,
 unfortunately, static checks. Because of the wide number of ways a Kubernetes
-cluster can be configured, Users want a way to validate their specific install
+cluster can be configured, users want a way to validate their specific install
 for conformance over time. This project involves building a sample application
-that exercises all the features of Linkerd and allows an end user to run this on
-their own cluster to validate that everything is working and configured
-correctly over a long time.
+that exercises all of the features of Linkerd and allows an end user to run it
+on their own cluster to validate that everything is working and configured
+correctly over a long period of time time.
 
 ### Expected outcomes
 
-* Sample application that exercises all the Linkerd features.
+* Sample application that exercises all Linkerd features.
 
 * CLI integration to start/stop validation.
 
@@ -158,11 +158,12 @@ Easy
 
 ## Kafka Introspection
 
-HTTP based traffic is only one type of modern applications. Many use message
-queues such as Kafka. Getting the metrics for consumers/producers/messages are
-just as critical to application health as requests and responses in HTTP. The
-goal of this project is to implement a Kafka codec for the Linkerd proxy that
-allows it to introspect the Kafka protocol and provide metrics on that protocol.
+HTTP-based traffic is only one type of communication in modern applications.
+Many use message queues such as Kafka. Getting metrics for
+consumers/producers/messages is just as critical to application health as
+metrics for requests and responses in HTTP. The goal of this project is to
+implement a Kafka codec for the Linkerd proxy that allows it to introspect the
+Kafka protocol and provide metrics for that protocol.
 
 ### Expected outcomes
 
@@ -170,7 +171,7 @@ allows it to introspect the Kafka protocol and provide metrics on that protocol.
 
 * Integration with the Linkerd CLI, dashboards.
 
-* Visualization of the topology between HTTP services and Kafka based consumers.
+* Visualization of the topology between HTTP services and Kafka-based consumers.
 
 ### Recommended Skills
 
