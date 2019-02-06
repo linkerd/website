@@ -33,7 +33,7 @@ linkerd profile --open-api webapp.swagger webapp | kubectl apply -f -
  ```
 
  Similarly, you can use the `--proto` flag to create a service profile from a
- protobuf (gRPC) definition file or the `--tap` flag to crete a service profile
+ protobuf (gRPC) definition file or the `--tap` flag to create a service profile
  based on a sampling of live traffic to the service.
 
  If you'd like to craft your service profile by hand, you can use the
