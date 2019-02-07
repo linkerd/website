@@ -20,7 +20,7 @@ commands:
     description: Retry and wait for some checks to succeed if they don't pass the first time
     default: 5m0s
 - name: inject
-  description: Add the Linkerd proxy to a Kubernetes config
+  description: Add the Linkerd proxy to a Kubernetes config. The `inject` command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl.
   flags:
   - name: --api-port
     arg: uint
