@@ -38,6 +38,10 @@ For resolutions to common `linkerd check` failures, have a look at
 
 {{< flags "check" >}}
 
+### Global flags
+
+{{< global-flags >}}
+
 # Example output
 
 ```bash

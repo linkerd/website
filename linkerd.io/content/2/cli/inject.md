@@ -16,10 +16,13 @@ Linkerd Proxy in a Kubernetes Deployment. This page is useful as a reference to
 help you understand what `linkerd inject` is doing under the hood, as well as
 provide a reference for the flags that can be passed at the command line.
 
-If you run the command `linkerd inject -h` it will provide you with the same
-information as the table below:
+## Flags
 
 {{< flags "inject" >}}
+
+### Global flags
+
+{{< global-flags >}}
 
 ## What `linkerd inject` Is Doing
 
