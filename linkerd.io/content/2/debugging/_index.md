@@ -6,7 +6,7 @@ aliases = [
 ]
 [menu.l5d2docs]
   name = "Debugging"
-  weight = 9
+  weight = 10
 +++
 
 This section assumes you've followed the steps in the

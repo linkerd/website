@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Release Channels"
 [menu.l5d2docs]
   name = "Release Channels"
-  weight = 15
+  weight = 17
 +++
 
 Linkerd 2.x publishes releases into multiple channels. This provides the option to

@@ -1,13 +1,12 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
 title = "Overview"
-weight = 1
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]
   name = "Observability"
   identifier = "observability"
-  weight = 10
+  weight = 11
 +++
 
 Linkerd provides extensive observability functionality. It automatically
