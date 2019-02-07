@@ -70,4 +70,8 @@ code {
 
 .table td {
   min-width: $table-cell-min-width;
+
+  &.cli {
+    white-space: nowrap;
+  }
 }

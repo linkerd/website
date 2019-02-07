@@ -18,7 +18,7 @@
   <tbody>
     {{ range $flags }}
     <tr>
-      <td>
+      <td class="cli">
         {{ if .name }}
         <code>{{ .name }}{{ with .arg }}=<strong>{{ . }}</strong>{{ end }}</code>
         {{ end }}
@@ -31,7 +31,7 @@
       <td>
         {{ .description | markdownify }}
       </td>
-      <td>
+      <td class="cli">
         <code>{{ .default }}</code>
       </td>
     </tr>
