@@ -6,7 +6,7 @@ title = "Overview"
 [menu.l5d2docs]
   name = "CLI"
   identifier = "cli"
-  weight = 7
+  weight = 8
 +++
 
 The Linkerd CLI is the primary way to interact with Linkerd. It can install the

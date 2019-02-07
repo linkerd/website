@@ -12,7 +12,6 @@ endef
 
 HAS_GSUTIL := $(shell command -v gsutil;)
 HAS_FLARECTL := $(shell command -v flarectl;)
-HAS_SASS := $(shell command -v /usr/local/bin/sass;)
 HAS_HUGO := $(shell command -v hugo;)
 
 .PHONY: publish
@@ -61,9 +60,6 @@ serve-api.linkerd.io: build-api.linkerd.io
 .PHONY: build-linkerd.io
 build-linkerd.io: update-version tmp/linkerd.io
 	@# Build linkerd.io
-ifndef HAS_SASS
-	@printf "Install sass first. For OSX: brew install sass/sass/sass\n"; exit 1
-endif
 ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
 endif

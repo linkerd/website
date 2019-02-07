@@ -6,7 +6,7 @@ title = "Frequently Asked Questions"
 [menu.l5d2docs]
   name = "Frequently Asked Questions"
   identifier = "faq"
-  weight = 8
+  weight = 9
 +++
 
 ## Setting up access to a Google Kubernetes Engine (GKE) cluster {#gke}
