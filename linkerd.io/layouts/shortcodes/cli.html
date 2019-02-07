@@ -1,6 +1,5 @@
 {{ $cli      := site.Data.cli }}
 {{ $commands := $cli.commands }}
-{{ $flags    := $cli.flags }}
 <h2>Commands</h2>
 
 <table class="table pure-table table-hover table-responsive table-striped">
@@ -11,9 +10,6 @@
       </th>
       <th>
         Description
-      </th>
-      <th>
-        Default
       </th>
     </tr>
   </thead>
@@ -27,11 +23,6 @@
       </td>
       <td>
         {{ .description | markdownify }}
-      </td>
-      <td>
-        {{ with .default }}
-        <code>{{ . }}</code>
-        {{ end }}
       </td>
     </tr>
     {{ end }}
