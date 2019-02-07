@@ -1,0 +1,22 @@
+{{ $inServerMode := site.IsServer }}
+{{ $sass         := "scss/index.scss" }}
+{{ $cssOutput    := "css/style.css"}}
+{{ $cssDevOpts   := (dict "targetpath" $cssOutput "enableSourceMap" true) }}
+{{ $cssProdOpts  := (dict "targetPath" $cssOutput "outputStyle" "compressed") }}
+{{ $cssOpts      := cond $inServerMode $cssDevOpts $cssProdOpts }}
+{{ $css          := resources.Get $sass | toCSS $cssOpts }}
+<link rel="stylesheet" href="/css/prism-a11y-dark.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/command-line/prism-command-line.min.css" integrity="sha256-QViEGvwX/42OrD49huSb2mGZtUQwVKNA5Ux58tMWLOs=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
+<link rel="shortcut icon" href="/images/identity/favicon/linkerd-favicon.png" />
+{{ if $inServerMode }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ else }}
+{{ $prodCss := $css | fingerprint }}
+<link rel="stylesheet" href="{{ $prodCss.RelPermalink }}" integrity="{{ $prodCss.Data.Integrity }}">
+{{ end }}
+
+<!-- fonts -->
+<link type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/b0b0ea65-d678-49c5-bd82-7ad7e64ce398.css"/>
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i,900" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
