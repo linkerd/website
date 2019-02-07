@@ -1,5 +1,6 @@
 commands:
 - name: check
+  link: true
   description: Check the Linkerd installation for potential problems
   flags:
   - name: --expected-version
@@ -20,6 +21,7 @@ commands:
     description: Retry and wait for some checks to succeed if they don't pass the first time
     default: 5m0s
 - name: inject
+  link: true
   description: Add the Linkerd proxy to a Kubernetes config. The `inject` command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl.
   flags:
   - name: --api-port
@@ -94,6 +96,28 @@ commands:
     arg: string
     description: |
       Enable TLS. Valid settings: `optional`.
+- name: completion
+  description: Shell completion
+- name: dashboard
+  description: Open the Linkerd dashboard in a web browser
+- name: get
+  description: Disply one or many mesh resources
+- name: help
+  description: Help about any command
+- name: install
+  description: Output Kubernetes configs to install Linkerd
+- name: profile
+  description: Output service profile config for Kubernetes
+- name: routes
+  description: Display route stats
+- name: stat
+  description: Display traffic stats about one or many resources
+- name: tap
+  description: Listen to a traffic stream
+- name: top
+  description: Display sorted information about live traffic
+- name: version
+  description: Print the client and server version information
 flags:
 - name: --api-addr
   arg: string

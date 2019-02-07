@@ -15,9 +15,15 @@
     {{ range $commands }}
     <tr>
       <td>
+        {{ if .link }}
         <a href="{{ .name }}">
           <code>{{ .name }}</code>
         </a>
+        {{ else }}
+        <code>
+          {{ .name }}
+        </code>
+        {{ end }}
       </td>
       <td>
         {{ .description | markdownify }}
