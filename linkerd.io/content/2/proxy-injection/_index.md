@@ -8,7 +8,12 @@ title = "Experimental: Automatic Proxy Injection"
 
 Linkerd can be configured to automatically inject the data plane proxy into your
 service. This is an alternative to needing to run the
-[`linkerd inject`](../cli/inject/) command.
+[`linkerd inject`](../cli/inject/) command. Moving injection to the cluster
+side, rather than relying on client side behavior, can help ensure that the data
+plane is always present and configured correctly, regardless of how pods are
+deployed. Note that as of Linkerd 2.2, this feature is opt-in, and you must
+explicitly annotate namespaces or pods as described below to enable
+auto-injection.
 
 This feature is **experimental**, since it only supports Deployment-type
 workloads. It will be removed from experimental once all workloads are supported
@@ -50,10 +55,10 @@ service/linkerd-proxy-injector   ClusterIP   10.100.40.55   <none>        443/TC
 Automatic proxy injection  will only be performed on pods with the
 `linkerd.io/inject: enabled` annotation, or on pods in namespaces with the
 `linkerd.io/inject: enabled` annotation. If a namespace has been configured to
-use auto-injection, it's also possible to disabled injection for a given pod in
+use auto-injection, it's also possible to disable injection for a given pod in
 that namespace using the `linkerd.io/inject: disabled` annotation.
 
-For example, to add automatic proxy injection for all all pods in the
+For example, to add automatic proxy injection for all pods in the
 `sample-inject-enabled-ns` namespace, setup the namespace to include the
 `linkerd.io/inject: enabled` annotation, as follows:
 
