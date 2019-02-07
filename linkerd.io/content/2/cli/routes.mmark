@@ -34,13 +34,13 @@ information as the table below:
 
 By default, `linkerd routes` displays *inbound* metrics for a target.  In other
 words, it shows information about requests which are sent to the target and
-responses which are returned by the target.  For example, the command
+responses which are returned by the target.  For example, the command:
 
 ```
 linkerd routes deploy/webapp
 ```
 
-displays the request volume, success rate, and latency of requests to the
+Displays the request volume, success rate, and latency of requests to the
 `webapp` deployment.  These metrics are from the `webapp` deployment's
 perspective, which means that, for example, these latencies do not include the
 network latency between a client and the `webapp` deployment.
@@ -48,16 +48,16 @@ network latency between a client and the `webapp` deployment.
 ## Outbound Metrics
 
 If you specify the `--to` flag then `linkerd routes` displays *outbound* metrics
-from the main resource to the resource in the `--to` flag.  In contrast to
+from the target resource to the resource in the `--to` flag.  In contrast to
 the inbound metrics, these metrics are from the perspective of the sender.  This
 means that these latencies do include the network latency between the client
-and the server.  For example, the command
+and the server.  For example, the command:
 
 ```
 linkerd routes deploy/traffic --to deploy/webapp
 ```
 
-displays the request volume, success rate, and latency of requests from
+Displays the request volume, success rate, and latency of requests from
 `traffic` to `webapp` from the perspective of the `traffic` deployment.
 
 ## Effective and Actual Metrics
@@ -67,7 +67,7 @@ can also supply the `-o wide` flag to differentiate between *effective* and
 *actual* metrics.
 
 Effective requests are requests which are sent by some client to the Linkerd
-proxy.  Actual requests are requests which the Linkerd2 proxy sends to some
+proxy.  Actual requests are requests which the Linkerd proxy sends to some
 server.  If the Linkerd proxy is performing retries, one effective request can
 translate into more than one actual request.  If the Linkerd proxy is not
 performing retries, effective requests and actual requests will always be equal.

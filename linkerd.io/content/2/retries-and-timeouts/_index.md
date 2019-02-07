@@ -14,7 +14,7 @@ timeouts are always performed on the *outbound* (client) side.
 ## Retries
 
 A route in a service profile may be marked as retryable by setting the
-`isRetryable` property to true.  This tells Linkerd that the route is safe to
+`isRetryable` property to `true`.  This tells Linkerd that the route is safe to
 retry and will cause Linkerd to retry any failed requests until either the
 timeout is reached or the retry budget is exceeded (see below).
 

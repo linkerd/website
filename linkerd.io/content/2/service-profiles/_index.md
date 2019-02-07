@@ -15,9 +15,10 @@ and also allows you to enable per-route features such as retries and timeouts.
 
 ## Defining a Service Profile
 
-Service Profiles can be created with the `linkerd profile` command.  If you
-have an OpenAPI (Swagger) spec for your service, you can use the `--open-api`
-flag to generate a service profile from the OpenAPI spec file.
+Service profiles can be created with the `linkerd profile` command.  If you
+have an [OpenAPI (Swagger)](https://swagger.io/docs/specification/about/) spec
+for your service, you can use the `--open-api` flag to generate a service
+profile from the OpenAPI spec file.
 
 ```bash
 linkerd profile --open-api webapp.swagger webapp
@@ -84,8 +85,8 @@ A service profile spec must contain the following top level fields:
 
 | field| value |
 |------|-------|
-| routes| a list of route objects |
-| retryBudget| a retry budget object that defines the maximum retry rate to this service |
+| `routes`| a list of [route](#route) objects |
+| `retryBudget`| a [retry budget](#retry-budget) object that defines the maximum retry rate to this service |
 
 ### Route
 
@@ -93,11 +94,11 @@ A route object must contain the following fields:
 
 | field | value |
 |-------|-------|
-| name | the name of this route as it will appear in the route label |
-| condition | a request match object that defines if a request matches this route |
-| responses | (optional) a list of response class objects |
-| isRetryable | indicates that requests to this route are always safe to retry and will cause the proxy to retry failed requests on this route whenever possible |
-| timeout | the maximum amount of time to wait for a response (including retries) to complete after the request is sent |
+| `name` | the name of this route as it will appear in the route label |
+| `condition` | a [request match](#request-match) object that defines if a request matches this route |
+| `responses` | (optional) a list of [response class](#response-class) objects |
+| `isRetryable` | indicates that requests to this route are always safe to retry and will cause the proxy to retry failed requests on this route whenever possible |
+| `timeout` | the maximum amount of time to wait for a response (including retries) to complete after the request is sent |
 
 ### Request Match
 
@@ -105,11 +106,11 @@ A request match object must contain _exactly one_ of the following fields:
 
 | field | value |
 |-------|-------|
-| path | a regular expression to match the request path against |
-| method | one of GET, POST, PUT, DELETE, OPTION, HEAD, TRACE |
-| all | a list of request match objects which must _all_ match |
-| any | a list of request match objects, at least one of which must match |
-| not | a request match object which must _not_ match |
+| `pathRegex` | a regular expression to match the request path against |
+| `method` | one of GET, POST, PUT, DELETE, OPTION, HEAD, TRACE |
+| `all` | a list of [request match](#request-match) objects which must _all_ match |
+| `any` | a list of [request match](#request-match) objects, at least one of which must match |
+| `not` | a [request match](#request-match) object which must _not_ match |
 
 ### Response Class
 
@@ -117,8 +118,8 @@ A response class object must contain the following fields:
 
 | field | value |
 |-------|-------|
-| condition | a response match object that defines if a response matches this response class |
-| isSuccess | a boolean that defines if these responses should be classified as successful |
+| `condition` | a [response match](#response-match) object that defines if a response matches this response class |
+| `isSuccess` | a boolean that defines if these responses should be classified as successful |
 
 ### Response Match
 
@@ -126,10 +127,10 @@ A response match object must contain _exactly one_ of the following fields:
 
 | field | value |
 |-------|-------|
-| status | a status range object to match the response status code against |
-| all | a list of response match objects which must _all_ match |
-| any | a list of response match objects, at least one of which must match |
-| not | a response match object which must _not_ match |
+| `status` | a [status range](#status-range) object to match the response status code against |
+| `all` | a list of [response match](#response-match) objects which must _all_ match |
+| `any` | a list of [response match](#response-match) objects, at least one of which must match |
+| `not` | a [response match](#response-match) object which must _not_ match |
 
 ### Status Range
 
@@ -138,8 +139,8 @@ Specifying only one of min or max matches just that one status code.
 
 | field | value |
 |-------|-------|
-| min | the status code must be greater than or equal to this value |
-| max | the status code must be less than or equal to this value |
+| `min` | the status code must be greater than or equal to this value |
+| `max` | the status code must be less than or equal to this value |
 
 ### Retry Budget
 
@@ -148,6 +149,6 @@ to this service as a ratio of the original request volume.
 
 | field | value |
 |-------|-------|
-| retryRatio | the maximum ratio of retries requests to original requests |
-| minRetriesPerSecond | allowance of retries per second in addition to those allowed by the retryRatio |
-| ttl | indicates for how long requests should be considered for the purposes of calculating the retryRatio |
+| `retryRatio` | the maximum ratio of retries requests to original requests |
+| `minRetriesPerSecond` | allowance of retries per second in addition to those allowed by the retryRatio |
+| `ttl` | indicates for how long requests should be considered for the purposes of calculating the retryRatio |
