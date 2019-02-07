@@ -32,7 +32,7 @@ upgrade. Perform the upgrade in the following order:
       --ignore-not-found
     ```
 
-1. [Upgrade the CLI](#upgrade-the-cli)
+1. [Upgrade the CLI](#upgrade-the-cli). Note that right after upgrading the CLI, most of its commands will fail. You can only rely on the `linkerd install` command to complete the following steps, and only after doing so will the CLI be fully usable again.
 
 1. [Upgrade the control plane](#upgrade-the-control-plane)
 
