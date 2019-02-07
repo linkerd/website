@@ -1,8 +1,8 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
-title = "Experimental: Automatic Proxy Injection"
+title = "Automatic Proxy Injection"
 [menu.l5d2docs]
-  name = "Experimental: Automatic Proxy Injection"
+  name = "Automatic Proxy Injection"
   weight = 13
 +++
 
@@ -14,10 +14,6 @@ plane is always present and configured correctly, regardless of how pods are
 deployed. Note that as of Linkerd 2.2, this feature is opt-in, and you must
 explicitly annotate namespaces or pods as described below to enable
 auto-injection.
-
-This feature is **experimental**, since it only supports Deployment-type
-workloads. It will be removed from experimental once all workloads are supported
-([tracked here](https://github.com/linkerd/linkerd2/issues/1751)).
 
 ## Installation
 
