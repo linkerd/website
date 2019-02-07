@@ -1,0 +1,39 @@
+{{ $cli      := site.Data.cli }}
+{{ $commands := $cli.commands }}
+{{ $flags    := $cli.flags }}
+<h2>Commands</h2>
+
+<table class="table pure-table table-hover table-responsive table-striped">
+  <thead>
+    <tr>
+      <th>
+        Command
+      </th>
+      <th>
+        Description
+      </th>
+      <th>
+        Default
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range $commands }}
+    <tr>
+      <td>
+        <a href="{{ .name }}">
+          <code>{{ .name }}</code>
+        </a>
+      </td>
+      <td>
+        {{ .description | markdownify }}
+      </td>
+      <td>
+        {{ with .default }}
+        <code>{{ . }}</code>
+        {{ end }}
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
