@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Supported Protocols"
 [menu.l5d2docs]
   name = "Supported Protocols"
-  weight = 6
+  weight = 7
 +++
 
 Linkerd is capable of proxying all TCP traffic, including WebSockets and HTTP

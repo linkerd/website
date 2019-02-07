@@ -6,7 +6,7 @@ aliases = [
 ]
 [menu.l5d2docs]
   name = "Experimental: CNI Plugin"
-  weight = 14
+  weight = 16
 +++
 
 Linkerd installs can be configured to run a
