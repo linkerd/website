@@ -11,9 +11,12 @@ service. This is an alternative to needing to run the
 [`linkerd inject`](../cli/inject/) command. Moving injection to the cluster
 side, rather than relying on client side behavior, can help ensure that the data
 plane is always present and configured correctly, regardless of how pods are
-deployed. Note that as of Linkerd 2.2, this feature is opt-in, and you must
-explicitly annotate namespaces or pods as described below to enable
-auto-injection.
+deployed.
+
+Note that the experimental version of this feature, prior to the stable-2.2 and
+edge-19.2.1 releases, injected all pods in all namespaces, but the current
+version requires that you explicitly annotate your namespaces or pods as
+described below to enable auto-injection.
 
 ## Installation
 
