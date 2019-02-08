@@ -1,41 +1,4 @@
 {{ $cli     := site.Data.cli }}
 {{ $command := .Get 0 }}
 {{ $flags   := (index (where $cli.commands "name" $command) 0).flags }}
-
-<table class="table pure-table table-hover table-responsive table-striped">
-  <thead>
-    <tr>
-      <th>
-        Usage
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Default
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {{ range $flags }}
-    <tr>
-      <td class="cli">
-        {{ if .name }}
-        <code>{{ .name }}{{ with .arg }}=<strong>{{ . }}</strong>{{ end }}</code>
-        {{ end }}
-          
-        {{ if .names }}
-        <code>{{ index .names 0 }}{{ with .arg }}=<strong>{{ . }}</strong>{{ end }}</code>,
-        <br /><code>{{ index .names 1 }}{{ with .arg }}=<strong>{{ . }}</strong>{{ end }}</code>
-        {{ end }}
-      </td>
-      <td>
-        {{ .description | markdownify }}
-      </td>
-      <td class="cli">
-        <code>{{ .default }}</code>
-      </td>
-    </tr>
-    {{ end}}
-  </tbody>
-</table>
+{{ partial "flags.html" $flags }}
