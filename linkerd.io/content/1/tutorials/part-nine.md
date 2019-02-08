@@ -56,7 +56,7 @@ Also deploy Linkerd:
 kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/linkerd-examples/master/k8s-daemonset/k8s/linkerd-grpc.yml
 ```
 
-Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can do some test requests! Note that the examples in these blog posts assume k8s is running on GKE (e.g. external loadbalancer IPs are availble, no CNI plugins are being used). Slight modifications may be needed for other environments—see our [Flavors of Kubernetes](https://discourse.linkerd.io/t/flavors-of-kubernetes/53) help page for environments like Minikube or CNI configurations with Calico/Weave.
+Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can do some test requests! Note that the examples in these blog posts assume k8s is running on GKE (e.g. external loadbalancer IPs are available, no CNI plugins are being used). Slight modifications may be needed for other environments—see our [Flavors of Kubernetes](https://discourse.linkerd.io/t/flavors-of-kubernetes/53) help page for environments like Minikube or CNI configurations with Calico/Weave.
 
 We’ll use the helloworld-client provided by the `hello world` [docker image](https://hub.docker.com/r/buoyantio/helloworld/) in order to send test gRPC requests to our `hello world` service:
 

@@ -168,7 +168,7 @@ which have closed.
 currently open.
 * `tcp_write_bytes_total`: A counter of the total number of sent bytes. This is
 updated when the connection closes.
-* `tcp_read_bytes_total`: A counter of the total number of recieved bytes. This
+* `tcp_read_bytes_total`: A counter of the total number of received bytes. This
 is updated when the connection closes.
 * `tcp_connection_duration_ms`: A histogram of the duration of the lifetime of a
 connection, in milliseconds. This is updated when the connection closes.

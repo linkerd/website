@@ -1,6 +1,6 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
-title = "Experimental: High Availabilty"
+title = "Experimental: High Availability"
 [menu.l5d2docs]
   name = "Experimental: High Availability"
   weight = 14
