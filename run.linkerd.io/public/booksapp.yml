@@ -3,6 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webapp
+  labels:
+    app: webapp
+    project: booksapp
 spec:
   selector:
     app: webapp
@@ -15,12 +18,16 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: webapp
+  labels:
+    app: webapp
+    project: booksapp
 spec:
   replicas: 3
   template:
     metadata:
       labels:
         app: webapp
+        project: booksapp
     spec:
       dnsPolicy: ClusterFirst
       containers:
@@ -46,6 +53,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: authors
+  labels:
+    app: authors
+    project: booksapp
 spec:
   selector:
     app: authors
@@ -58,12 +68,16 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: authors
+  labels:
+    app: authors
+    project: booksapp
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: authors
+        project: booksapp
     spec:
       dnsPolicy: ClusterFirst
       containers:
@@ -89,6 +103,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: books
+  labels:
+    app: books
+    project: booksapp
 spec:
   selector:
     app: books
@@ -101,12 +118,16 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: books
+  labels:
+    app: books
+    project: booksapp
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: books
+        project: booksapp
     spec:
       dnsPolicy: ClusterFirst
       containers:
@@ -130,6 +151,9 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: traffic
+  labels:
+    app: traffic
+    project: booksapp
 spec:
   replicas: 1
   template:
