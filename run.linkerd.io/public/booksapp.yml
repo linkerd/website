@@ -160,6 +160,7 @@ spec:
     metadata:
       labels:
         app: traffic
+        project: booksapp
     spec:
       dnsPolicy: ClusterFirst
       containers:
