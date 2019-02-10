@@ -10,15 +10,15 @@ title = "Installing Linkerd"
 
 Before you can use Linkerd, you'll need to install the control plane. This page
 covers how to accomplish that, as well as common problems that you may
-encoutner.
+encounter.
 
 Note that the control plane is typically installed by using Linkerd's CLI. See
-[Getting Started](getting-started) for how to install the CLI onto your local
+[Getting Started](../getting-started) for how to install the CLI onto your local
 environment.
 
 Note also that, once the control plane is installed, you'll need to "mesh" any
 services you want Linkerd active for. See [Adding Your
-Service](adding-your-service) for how to add Linkerd's data plane to your
+Service](../adding-your-service) for how to add Linkerd's data plane to your
 services.
 
 ## Requirements
@@ -28,15 +28,21 @@ cluster may be hosted on a cloud provider or may be running locally via
 Minikube or Docker for Desktop.
 
 You can validate that this Kubernetes cluster is configured appropriately for
-Linkerd by running the `linkerd check --pre` command.
+Linkerd by running
+```bash
+linkerd check --pre
+```
 
 Once you have a cluster ready, generally speaking, installing Linkerd is as
 easy as running `linkerd install` to generate a Kubernetes manifest, and
-applying that to your cluster, for example, via `linkerd install | kubectl
-apply -f`. See [Getting Started](getting-started) for an example.
+applying that to your cluster, for example, via
+```bash
+linkerd install | kubectl apply -f
+```
+See [Getting Started](getting-started) for an example.
 
 Finally, after control plane installation, the `linkerd check` command (without
-a `--pre`) may be used to validate that the installation was successful.
+`--pre`) may be used to validate that the installation was successful.
 
 Below we go through some common issues that may prevent successful
 installation.

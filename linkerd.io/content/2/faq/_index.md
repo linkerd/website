@@ -17,13 +17,13 @@ It adds observability, reliability, and security to cloud native applications,
 without requiring code changes. For example, Linkerd can monitor and report
 per-service success rates and latencies, can automatically retry failed
 requests, and can encrypt and validate connections between services, all
-without
+without requiring any modification of the application itself.
 
 Linkerd works by inserting ultralight proxies (collectively, the "data plane")
 alongside each application instance. Linkerd's control plane provides operators
 with a uniform point at which they can control and measure the behavior of the
-data plane. Operators typically interact with Linkerd using the CLI and the web
-dashboard UI.
+data plane. Operators typically interact with Linkerd using the [CLI](../cli)
+and the [web dashboard UI](../getting-started/#step-4-explore-linkerd).
 
 ## Who owns Linkerd and how is it licensed?
 
@@ -45,14 +45,15 @@ No. Everything in Linkerd is fully open source.
 
 ## How do I pronounce Linkerd?
 
-The d is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
+The "d" is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
 
 # What's the difference between Linkerd 1.x and 2.x?
 
 Linkerd 1.x is built on the "Twitter stack": Finagle, Netty, Scala, and the
 JVM. Linkerd 2.x is built in Rust and Go, and is significantly faster and
 lighter-weight. However, Linkerd 2.x currently does not have the full platform
-support or featureset of 1.x.
+support or featureset of 1.x. (See [the full list of supported
+platforms](../../choose-your-platform) across both versions.)
 
 ## Is Linkerd 1.x still supported?
 
