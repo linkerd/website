@@ -6,6 +6,85 @@ title = "Upgrade"
   weight = 5
 +++
 
+# Upgrading stable-2.1.0 -> stable-2.2.0
+
+## Breaking changes
+
+There is one breaking change in `stable-2.2.0`, and it only applies to clusters
+with [Automatic Proxy Injection](/2/features/proxy-injection/) enabled.
+
+The `linkerd.io/inject` annotation, previously opt-out in `stable-2.1.0`, is now
+opt-in.
+
+To enable automation proxy injection for a namespace, you must enable the
+`linkerd.io/inject` annotation on either the namespace or the pod spec:
+
+### Namespace injection
+
+```yaml
+kind: Namespace
+metadata:
+  annotations:
+    linkerd.io/inject: enabled
+```
+
+### Pod Spec injection
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+spec:
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+```
+
+For more details, see the
+[Automatic Proxy Injection](/2/features/proxy-injection/) doc.
+
+## Step-by-step instructions
+
+The CLI, Control Plane, and Data Plane proxies may all be upgraded in-place.
+
+### CLI
+
+```bash
+curl -sL https://run.linkerd.io/install | sh
+
+# verify installation succeeded
+linkerd version
+```
+
+### Control Plane
+
+```bash
+linkerd install | kubectl apply -f -
+
+# verify upgrade succeeded
+linkerd check
+```
+
+### Data Plane
+
+Example command to upgrade an application in the `emojivoto` namespace, composed
+of deployments:
+
+```bash
+kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml |
+  linkerd inject - |
+  kubectl apply -f -
+
+# verify upgrade succeeded
+linkerd check --proxy
+```
+Note: If you have the Automatic Proxy Injection enabled, you may forego the `linkerd inject -` step of the previous
+command.
+
+That's it, you're up to date!
+
+# Upgrading stable-2.0.0 -> stable-2.1.0
+
 There are three components that need to be upgraded:
 
 - [CLI](/2/architecture#cli)
