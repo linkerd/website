@@ -13,23 +13,6 @@ this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
 create a service profile, see [service profiles](/2/service-profiles).
 
-If you run the command `linkerd inject -h` it will provide you with the same
-information as the table below:
-
-{.table .pure-table .table-striped .table-responsive .table-hover}
-| Flag | Explanation | Example |
-| -----| --- | --- |
-| `-h, --help` | help for routes | `-h` |
-| `-n, --namespace string` | Namespace of the specified resource (default "default") | `-n="emojivoto" |
-| `-o, --output string` | Output format; currently only "table" (default), "wide", and "json" are supported | `-o="wide"`
-| `-t, --time-window string` | Stat window (for example: "10s", "1m", "10m", "1h") (default "1m") | `-t=30s` |
-| `--to string` | If present, shows outbound stats to the specified resource | `--to="deploy/webapp" |
-| `--to-namespace string` | Sets the namespace used to lookup the "--to" resource; by default the current "--namespace" is used | `--to-namespace="emojivoto" |
-| `--api-addr` | Override the `kubeconfig` and communicate directly with the control plane at host:port (mostly for testing). | `--api-addr="127.0.0.1:80"` |
-| `--kubeconfig` | Path to the kubeconfig file to use for CLI requests. The local path for your Kubernetes config manifest. | `--kubeconfig="~/.kube/config"` |
-| `-l, --linkerd-namespace` | Namespace in which Linkerd is installed (default "linkerd"). If you modified the `linkerd install` command and adjusted the Kubernetes Namespace it was deployed into, you'll want to adjust it here. | `-l="default"` |
-| `--verbose` | Turn on debug logging. Log all the things. (Especially those things that `linkerd inject` does.) | `--verbose` |
-
 ## Inbound Metrics
 
 By default, `linkerd routes` displays *inbound* metrics for a target.  In other
@@ -44,6 +27,14 @@ Displays the request volume, success rate, and latency of requests to the
 `webapp` deployment.  These metrics are from the `webapp` deployment's
 perspective, which means that, for example, these latencies do not include the
 network latency between a client and the `webapp` deployment.
+
+## Flags
+
+{{< flags "routes" >}}
+
+### Global flags
+
+{{< global-flags >}}
 
 ## Outbound Metrics
 
