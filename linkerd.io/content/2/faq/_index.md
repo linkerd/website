@@ -9,443 +9,86 @@ title = "Frequently Asked Questions"
   weight = 9
 +++
 
-## Setting up access to a Google Kubernetes Engine (GKE) cluster {#gke}
+## What is Linkerd?
 
-If you are using GKE with RBAC enabled, you will want to grant a
-`ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
-provide your current user all the permissions required to install the control
-plane. To bind this `ClusterRole` to your user, you can run:
+Linkerd is a [service
+mesh](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/).
+It adds observability, reliability, and security to cloud native applications,
+without requiring code changes. For example, Linkerd can monitor and report
+per-service success rates and latencies, can automatically retry failed
+requests, and can encrypt and validate connections between services, all
+without requiring any modification of the application itself.
 
-```bash
-kubectl create clusterrolebinding cluster-admin-binding-$USER \
-    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-```
+Linkerd works by inserting ultralight proxies (collectively, the "data plane")
+alongside each application instance. Linkerd's control plane provides operators
+with a uniform point at which they can control and measure the behavior of the
+data plane. Operators typically interact with Linkerd using the [CLI](../cli)
+and the [web dashboard UI](../getting-started/#step-4-explore-linkerd).
 
-## Resolutions for linkerd check failures {#check}
+## Who owns Linkerd and how is it licensed?
 
-This section provides resolution steps for common errors encountered with the
-`linkerd check` command.
+Linkerd is licensed under Apache v2 and is a [Cloud Native Computing
+Foundation](https://cncf.io) (CNCF) project. The CNCF owns the trademark; the
+copyright is held by the Linkerd authors themselves.
 
-### pre-kubernetes-cluster-setup {#pre-k8s-cluster}
+## Who maintains Linkerd?
 
-These checks only run when the `--pre` flag is set. This flag is intended for
-use prior to running `linkerd install`, to verify your cluster is prepared for
-installation.
+See the [2.x
+maintainers](https://github.com/linkerd/linkerd2/blob/master/MAINTAINERS.md)
+file, and the [1.x
+maintainers](https://github.com/linkerd/linkerd/blob/master/MAINTAINERS.md)
+file.
 
-#### √ control plane namespace does not already exist {#pre-k8s-cluster-ns}
+## Is there an Enterprise edition, or a commercial edition?
 
-Example failure:
-```bash
-× control plane namespace does not already exist
-    The "linkerd" namespace already exists
-```
+No. Everything in Linkerd is fully open source.
 
-By default `linkerd install` will create a `linkerd` namespace. Prior to
-installation, that namespace should not exist. To check with a different
-namespace, run:
-```bash
-linkerd check --pre --linkerd-namespace linkerd-test
-```
-
-#### √ can create Kubernetes resources {#pre-k8s-cluster-k8s}
-
-The subsequent checks in this section validate whether you have permission to
-create the Kubernetes resources required for Linkerd installation, specifically:
+## How do I pronounce Linkerd?
 
-```bash
-√ can create Namespaces
-√ can create ClusterRoles
-√ can create ClusterRoleBindings
-√ can create CustomResourceDefinitions
-```
+The "d" is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
 
-For more information on cluster access, see the [GKE Setup](#gke) section
-above.
+# What's the difference between Linkerd 1.x and 2.x?
 
-### pre-kubernetes-setup {#pre-k8s}
-
-These checks only run when the `--pre` flag is set. This flag is intended for
-use prior to running `linkerd install`, to verify you have the correct
-permissions to install Linkerd.
-
-```bash
-√ can create ServiceAccounts
-√ can create Services
-√ can create Deployments
-√ can create ConfigMaps
-```
-
-For more information on cluster access, see the [GKE Setup](#gke) section
-above.
+Linkerd 1.x is built on the "Twitter stack": Finagle, Netty, Scala, and the
+JVM. Linkerd 2.x is built in Rust and Go, and is significantly faster and
+lighter-weight. However, Linkerd 2.x currently does not have the full platform
+support or featureset of 1.x. (See [the full list of supported
+platforms](../../choose-your-platform) across both versions.)
 
-### pre-kubernetes-single-namespace-setup {#pre-single}
+## Is Linkerd 1.x still supported?
 
-If you do not expect to have the permission for a full cluster install, try the
-`--single-namespace` flag, which validates if Linkerd can be installed in a
-single namespace, with limited cluster access:
-```bash
-linkerd check --pre --single-namespace
-```
-
-#### √ control plane namespace exists {#pre-single-ns}
+Yes, the 1.x branch of Linkerd is under active development, and continues
+to power the production infrastructure of companies around the globe.
 
-```bash
-× control plane namespace exists
-    The "linkerd" namespace does not exist
-```
+[The full Linkerd 1.x documentation is here](/1/).
 
-In `--single-namespace` mode, `linkerd check` assumes that the installer does
-not have permission to create a namespace, so the installation namespace must
-already exist.
+## Does Linkerd require Kubernetes?
 
-By default the `linkerd` namespace is used. To use a different namespace run:
-```bash
-linkerd check --pre --single-namespace --linkerd-namespace linkerd-test
-```
-
-#### √ can create Kubernetes resources {#pre-single-k8s}
+Linkerd 2.x currently requires Kubernetes, though this will change in the
+future. Linkerd 1.x can be installed on any platform, and supports Kubernetes,
+DC/OS, Mesos, Consul, and ZooKeeper-based environments.
 
-The subsequent checks in this section validate whether you have permission to
-create the Kubernetes resources required for Linkerd `--single-namespace`
-installation, specifically:
+## Where's the Linkerd roadmap?
 
-```bash
-√ can create Roles
-√ can create RoleBindings
-```
-
-For more information on cluster access, see the [GKE Setup](#gke) section
-above.
-
-### kubernetes-api {#k8s-api}
-
-Example failures:
-```bash
-× can initialize the client
-    error configuring Kubernetes API client: stat badconfig: no such file or directory
-× can query the Kubernetes API
-    Get https://8.8.8.8/version: dial tcp 8.8.8.8:443: i/o timeout
-```
-
-Ensure that your system is configured to connect to a Kubernetes cluster.
-Validate that the `KUBECONFIG` environment variable is set properly, and/or
-`~/.kube/config` points to a valid cluster.
-
-For more information see these pages in the Kubernetes Documentation:
-
-- [Accessing Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/)
-- [Configure Access to Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
-
-Also verify that these command works:
-```bash
-kubectl config view
-kubectl cluster-info
-kubectl version
-```
-
-Another example failure:
-```bash
-✘ can query the Kubernetes API
-    Get REDACTED/version: x509: certificate signed by unknown authority
-```
-
-As an (unsafe) workaround to this, you may try:
-
-```bash
-kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
-    --server=${KUBE_CONTEXT}
-```
-
-### kubernetes-version {#k8s-version}
-
-Example failure:
-```bash
-× is running the minimum Kubernetes API version
-    Kubernetes is on version [1.7.16], but version [1.10.0] or more recent is required
-```
-
-Linkerd requires at least version `1.10.0`. Verify your cluster version with:
-```bash
-kubectl version
-```
-
-For more information on upgrading Kubernetes, see the page in the Kubernetes
-Documentation on
-[Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
-
-### linkerd-existence {#l5d-existence}
-
-#### √ control plane namespace exists {#l5d-existence-ns}
-
-Example failure:
-```bash
-× control plane namespace exists
-    The "linkerd" namespace does not exist
-```
-
-Ensure the Linkerd control plane namespace exists:
-```bash
-kubectl get ns
-```
-
-The default control plane namespace is `linkerd`. If you installed Linkerd into
-a different namespace, specify that in your check command:
-
-```bash
-linkerd check --linkerd-namespace linkerdtest
-```
-
-#### √ controller pod is running {#l5d-existence-controller}
-
-Example failure:
-```bash
-× controller pod is running
-    No running pods for "linkerd-controller"
-```
-
-Note, it takes a little bit for pods to be scheduled, images to be pulled and
-everything to start up. If this is a permanent error, you'll want to validate
-the state of the controller pod with:
-
-```bash
-$ kubectl -n linkerd get po --selector linkerd.io/control-plane-component=controller
-NAME                                  READY     STATUS    RESTARTS   AGE
-linkerd-controller-7bb8ff5967-zg265   4/4       Running   0          40m
-```
-
-Check the controller's logs with:
-```bash
-linkerd logs --control-plane-component controller
-```
-
-#### √ can initialize the client {#l5d-existence-client}
-
-Example failure:
-```bash
-× can initialize the client
-    parse http:// bad/: invalid character " " in host name
-```
-
-Verify that a well-formed `--api-addr` parameter was specified, if any:
-```bash
-linkerd check --api-addr " bad"
-```
-
-#### √ can query the control plane API {#l5d-existence-api}
-
-Example failure:
-```bash
-× can query the control plane API
-    Post http://8.8.8.8/api/v1/Version: context deadline exceeded
-```
-
-This check indicates a connectivity failure between the cli and the Linkerd
-control plane. To verify connectivity, manually connect to the controller pod:
-```bash
-kubectl -n linkerd port-forward $(
-  kubectl -n linkerd get po --selector=linkerd.io/control-plane-component=controller -o jsonpath='{.items[*].metadata.name}'
-) 9995:9995
-```
-
-...and then curl the `/metrics` endpoint:
-```bash
-curl localhost:9995/metrics
-```
-
-### linkerd-api {#l5d-api}
-
-#### √ control plane pods are ready {#l5d-api-control-ready}
-
-Example failure:
-```bash
-× control plane pods are ready
-    No running pods for "linkerd-web"
-```
-
-Verify the state of the control plane pods with:
-```bash
-$ kubectl -n linkerd get po
-NAME                                      READY     STATUS    RESTARTS   AGE
-pod/linkerd-controller-b8c4c48c8-pflc9    4/4       Running   0          45m
-pod/linkerd-grafana-776cf777b6-lg2dd      2/2       Running   0          1h
-pod/linkerd-prometheus-74d66f86f6-6t6dh   2/2       Running   0          1h
-pod/linkerd-web-5f6c45d6d9-9hd9j          2/2       Running   0          3m
-```
-
-#### √ can query the control plane API {#l5d-api-control-api}
-
-Example failure:
-```bash
-× can query the control plane API
-    Post https://localhost:6443/api/v1/namespaces/linkerd/services/linkerd-controller-api:http/proxy/api/v1/SelfCheck: context deadline exceeded
-```
-
-Check the logs on the control-plane's public API:
-```bash
-linkerd logs --control-plane-component controller --container public-api
-```
-
-#### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
-
-Example failure:
-```bash
-× [kubernetes] control plane can talk to Kubernetes
-    Error calling the Kubernetes API: FAIL
-```
-
-Check the logs on the control-plane's public API:
-```bash
-linkerd logs --control-plane-component controller --container public-api
-```
-
-#### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
-
-Example failure:
-```bash
-× [prometheus] control plane can talk to Prometheus
-    Error calling Prometheus from the control plane: FAIL
-```
-
-Validate that the Prometheus instance is up and running:
-```bash
-kubectl -n linkerd get all | grep prometheus
-```
-Check the Prometheus logs:
-```bash
-linkerd logs --control-plane-component prometheus
-```
-Check the logs on the control-plane's public API:
-```bash
-linkerd logs --control-plane-component controller --container public-api
-```
-
-### linkerd-service-profile {#l5d-sp}
-
-Example failure:
-```bash
-‼ no invalid service profiles
-    ServiceProfile "bad" has invalid name (must be "<service>.<namespace>.svc.cluster.local")
-```
-
-Validate the structure of your service profiles:
-```bash
-$ kubectl -n linkerd get sp
-NAME                                               AGE
-bad                                                51s
-linkerd-controller-api.linkerd.svc.cluster.local   1m
-```
-
-### linkerd-version {#l5d-version}
-
-#### √ can determine the latest version {#l5d-version-latest}
-
-Example failure:
-```bash
-× can determine the latest version
-    Get https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli: context deadline exceeded
-```
-
-Ensure you can connect to the Linkerd version check endpoint from the
-environment the `linkerd` cli is running:
-```bash
-$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
-{"stable":"stable-2.1.0","edge":"edge-19.1.2"}
-```
-
-#### √ cli is up-to-date {#l5d-version-cli}
-
-Example failure:
-```bash
-‼ cli is up-to-date
-    is running version 19.1.1 but the latest edge version is 19.1.2
-```
-
-See the page on [Upgrading Linkerd](/2/upgrade).
-
-### control-plane-version {#l5d-version-control}
-
-Example failures:
-```bash
-‼ control plane is up-to-date
-    is running version 19.1.1 but the latest edge version is 19.1.2
-‼ control plane and cli versions match
-    mismatched channels: running stable-2.1.0 but retrieved edge-19.1.2
-```
-
-See the page on [Upgrading Linkerd](/2/upgrade).
-
-### linkerd-data-plane {#l5d-data-plane}
-
-These checks only run when the `--proxy` flag is set. This flag is intended for
-use after running `linkerd inject`, to verify the injected proxies are operating
-normally.
-
-#### √ data plane namespace exists {#l5d-data-plane-exists}
-
-Example failure:
-```bash
-$ linkerd check --proxy --namespace foo
-...
-× data plane namespace exists
-    The "foo" namespace does not exist
-```
-
-Ensure the `--namespace` specified exists, or, omit the parameter to check all
-namespaces.
-
-#### √ data plane proxies are ready {#l5d-data-plane-ready}
-
-Example failure:
-```bash
-× data plane proxies are ready
-    No "linkerd-proxy" containers found
-```
-
-Ensure you have injected the Linkerd proxy into your application via the
-`linkerd inject` command.
-
-For more information on `linkerd inject`, see
-[Step 5: Install the demo app](/2/getting-started/#step-5-install-the-demo-app)
-in our [Getting Started](/2/getting-started) guide.
-
-#### √ data plane proxy metrics are present in Prometheus {#l5d-data-plane-prom}
-
-Example failure:
-```bash
-× data plane proxy metrics are present in Prometheus
-    Data plane metrics not found for linkerd/linkerd-controller-b8c4c48c8-pflc9.
-```
-
-Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
-dashboard:
-
-```bash
-kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
-```
-
-...and then browse to http://localhost:9090/targets, validate the
-`linkerd-proxy` section.
-
-You should see all your pods here. If they are not:
-
-- Prometheus might be experiencing connectivity issues with the k8s api server.
-  Check out the logs and delete the pod to flush any possible transient errors.
-
-#### √ data plane is up-to-date {#l5d-data-plane-version}
-
-Example failure:
-```bash
-‼ data plane is up-to-date
-    linkerd/linkerd-prometheus-74d66f86f6-6t6dh: is running version 19.1.2 but the latest edge version is 19.1.3
-```
-
-See the page on [Upgrading Linkerd](/2/upgrade).
-
-#### √ data plane and cli versions match {#l5d-data-plane-cli-version}
-
-```bash
-‼ data plane and cli versions match
-    linkerd/linkerd-web-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
-```
-
-See the page on [Upgrading Linkerd](/2/upgrade).
+As a community project, there is no official roadmap, but a glance at the
+[active GitHub issues](https://github.com/linkerd/linkerd2/issues) will give
+you a sense of what is in store for the future.
+
+## What happens to Linkerd's proxies if the control plane is down?
+
+Linkerd's proxies do not integrate with Kubernetes directly, but rely on the
+control plane for service discovery information. The proxies are designed to
+continue operating even if they can't reach the control plane.
+
+If the control plane dies, existing proxies will continue to operate with the
+latest service discovery information. If Additionally, they will fall back to
+DNS if asked to route to a service they don't have information for. (Thus, if
+the control plane is down, but new services are created, you may notice
+different load balancing behavior until the control plane resumes.) Once the
+control plane is functional, the Linkerd proxies will resume communication as
+normal.
+
+If *new* proxies are deployed when the control plane is unreachable, these new
+proxies will not be able to operate. They will timeout all new requests until
+such time as they can reach the control plane.
+
