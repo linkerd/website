@@ -7,4 +7,4 @@ title = "Overview"
   weight = 3
 +++
 
-{{% sectiontoc "cli" %}}
+{{% sectiontoc "features" %}}
