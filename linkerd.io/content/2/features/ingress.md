@@ -1,10 +1,10 @@
 +++
 date = "2018-11-19T12:00:00-07:00"
 title = "Ingress"
+weight = 6
 [menu.l5d2docs]
   name = "Ingress"
-  parent = "Features"
-  weight = "6"
+  parent = "features"
 aliases = [
   "/2/ingress/"
 ]

@@ -1,12 +1,13 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "Experimental: CNI Plugin"
+weight = 12
+[menu.l5d2docs]
+  name = "Experimental: CNI Plugin"
+  parent = "features"
 aliases = [
   "/2/cni-plugin/"
 ]
-[menu.l5d2docs]
-  name = "Experimental: CNI Plugin"
-  parent = "Features"
 +++
 
 Linkerd installs can be configured to run a

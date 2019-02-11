@@ -1,10 +1,10 @@
 +++
 date = "2019-02-06T13:23:37-08:00"
 title = "Retries and Timeouts"
+weight = 3
 [menu.l5d2docs]
   name = "Retries and Timeouts"
-  parent = "Features"
-  weight = "3"
+  parent = "features"
 +++
 
 A [service profile](/2/features/service-profiles) may define certain routes as

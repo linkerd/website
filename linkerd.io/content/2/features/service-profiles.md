@@ -1,10 +1,10 @@
 +++
 date = "2018-10-16T12:00:21-07:00"
 title = "Service Profiles"
+weight = 5
 [menu.l5d2docs]
   name = "Service Profiles"
-  parent = "Features"
-  weight = "5"
+  parent = "features"
 aliases = [
   "/2/service-profiles/"
 ]
