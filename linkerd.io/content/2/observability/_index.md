@@ -1,6 +1,6 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
-title = "Observability"
+title = "Overview"
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]
@@ -30,15 +30,21 @@ This data can be consumed in several ways:
 * Through the Linkerd dashboard, and pre-build Grafana dashboards.
 * Directly from Linkerd's built-in Prometheus instance
 
-## Metrics lifespan
+## Lifespan of Linkerd metrics
 
-Linkerd is not designed as a long-term historical store of observed metrics.
+Linkerd is not designed as a long-term historical metrics store.  While
+Linkerd's control plane does include a Prometheus instance, this instance
+expires metrics at a short, fixed interval (currently 6 hours).
 
-While Linkerd's contrl plane does include a Prometheus
+Rather, Linkerd is designed to *supplement* your existing metrics store. If
+Linkerd's metrics are valuable, you should export them into your existing
+historical metrics store.
 
+See [Exporting Metrics]({{< relref "exporting-metrics" >}}) for more.
 
-
-
-Some deep dive topics on metrics:
+## Observability topics
 
 {{% sectiontoc "observability" %}}
+
+
+
