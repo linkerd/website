@@ -15,4 +15,10 @@ detailed metrics for how your service is performing.
 
 As reference, check out the commands below:
 
-{{% sectiontoc "cli" %}}
+{{< cli >}}
+
+## Global flags
+
+The following flags are available for *all* linkerd CLI commands:
+
+{{< global-flags >}}

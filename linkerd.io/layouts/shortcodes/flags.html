@@ -1,0 +1,4 @@
+{{ $cli     := site.Data.cli }}
+{{ $command := .Get 0 }}
+{{ $flags   := (index (where $cli.commands "name" $command) 0).flags }}
+{{ partial "flags.html" $flags }}

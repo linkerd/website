@@ -1,0 +1,3 @@
+{{ $cli     := site.Data.cli }}
+{{ $flags   := $cli.globalflags }}
+{{ partial "flags.html" $flags }}

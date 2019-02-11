@@ -1,0 +1,61 @@
+{{ $flags := . }}
+{{ $hasExamples := gt (len (where $flags ".example" "!=" nil)) 0 }}
+<table class="table pure-table table-hover table-responsive table-striped">
+  <thead>
+    <tr>
+      <th>
+        Usage
+      </th>
+      <th>
+        Description
+      </th>
+      {{ if $hasExamples }}
+      <th>
+        Example
+      </th>
+      {{ end }}
+      <th>
+        Default
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range $flags }}
+    {{ $arg := .arg }}
+    <tr>
+      <td class="cli">
+        {{ with .name }}
+        <code>{{ . }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>
+        {{ end }}
+          
+        {{ with .names }}
+        <code>{{ index . 0 }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>,
+        <br /><code>{{ index . 1 }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>
+        {{ end }}
+      </td>
+      <td>
+        {{ .description | markdownify }}
+      </td>
+      {{ if $hasExamples }}
+      {{ $example := .example }}
+      {{ $name    := .name }}
+      {{ $names   := .names }}
+      <td class="cli">
+        {{ with $example }}
+        {{ with $name }}
+        <code>{{ . }}={{ $example }}</code>
+        {{ end }}
+
+        {{ with $names }}
+        <code>{{ index . 0 }}={{ $example }}</code>
+        {{ end }}
+        {{ end }}
+      </td>
+      {{ end }}
+      <td class="cli">
+        <code>{{ .default }}</code>
+      </td>
+    </tr>
+    {{ end}}
+  </tbody>
+</table>

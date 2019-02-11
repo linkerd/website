@@ -7,7 +7,7 @@ aliases = [
   "/2/check-reference/"
 ]
 [menu.l5d2docs]
-  name = "Check"
+  name = "check"
   parent = "cli"
 +++
 
@@ -33,6 +33,14 @@ linkerd check --proxy
 
 For resolutions to common `linkerd check` failures, have a look at
 [Frequently Asked Questions](/2/faq).
+
+## Flags
+
+{{< flags "check" >}}
+
+### Global flags
+
+{{< global-flags >}}
 
 # Example output
 
