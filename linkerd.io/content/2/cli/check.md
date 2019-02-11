@@ -32,7 +32,7 @@ linkerd check --proxy
 ```
 
 For resolutions to common `linkerd check` failures, have a look at
-[Frequently Asked Questions](/2/faq).
+[Resolutions for linkerd check failures](/2/installing/#check).
 
 ## Flags
 

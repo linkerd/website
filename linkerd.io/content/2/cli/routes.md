@@ -4,7 +4,7 @@ title = "Routes"
 description = "The routes command displays per-route service metrics."
 weight = 3
 [menu.l5d2docs]
-  name = "Routes"
+  name = "routes"
   parent = "cli"
 +++
 
