@@ -1,6 +1,6 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
-title = "Overview"
+title = "Observability"
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]
@@ -9,14 +9,35 @@ title = "Overview"
   weight = 11
 +++
 
-Linkerd provides extensive observability functionality. It automatically
-instruments top-line metrics such as request volume, success rates, and latency
-distributions. In addition to these top-line metrics, Linkerd provides real time
-streams of the requests for all incoming and outgoing traffic.
+One of Linkerd's most powerful features is its extensive set of tooling around
+*observability*&mdash;the measuring and reporting of observed behavior in
+meshed applications. While Linkerd doesn't have insight directly into the
+*internals* of service code, it has tremendous insight into the external
+behavior of service code.
 
-To help visualize all this data, there is a [CLI](../architecture/#cli),
-[dashboard](../architecture/#dashboard) and out of the box
-[Grafana dashboards](../architecture/#grafana).
+Linkerd's observability features function automatically, without requiring any
+work on the part of the developer. These features include:
+
+* Recording of top-line ("golden") metrics (request volume, success rate, and latency distributions) for HTTP, HTTP/2, and gRPC traffic.
+* Recording of TCP-level metrics (bytes in/out, etc) for other TCP traffic.
+* Reporting metrics per service, per caller/callee pair, or per route/path (with [Service Profiles](../service-profiles))
+* Generating topology graphs that display the runtime relationship between services.
+* Live, on-demand request sampling.
+
+This data can be consumed in several ways:
+
+* Through the Linkerd CLI, e.g. with `linkerd stat` and `linkerd routes`.
+* Through the Linkerd dashboard, and pre-build Grafana dashboards.
+* Directly from Linkerd's built-in Prometheus instance
+
+## Metrics lifespan
+
+Linkerd is not designed as a long-term historical store of observed metrics.
+
+While Linkerd's contrl plane does include a Prometheus
+
+
+
 
 Some deep dive topics on metrics:
 
