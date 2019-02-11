@@ -1,6 +1,7 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
 title = "Experimental: High Availability"
+description = "Linkerd can be configured to run its control plane in High Availability (HA) mode."
 weight = 10
 [menu.l5d2docs]
   name = "Experimental: High Availability"
