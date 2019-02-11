@@ -13,7 +13,7 @@ aliases = [
 
 Linkerd can be configured to automatically inject the data plane proxy into your
 service. This is an alternative to needing to run the
-[`linkerd inject`](../cli/inject/) command. Moving injection to the cluster
+[`linkerd inject`](../../cli/inject/) command. Moving injection to the cluster
 side, rather than relying on client side behavior, can help ensure that the data
 plane is always present and configured correctly, regardless of how pods are
 deployed.
