@@ -6,7 +6,7 @@ commands:
   - name: --expected-version
     arg: string
     description: Overrides the version used when checking if Linkerd is running the latest version (mostly for testing)
-  - names: [--namespace,-n]
+  - names: [-n,--namespace]
     arg: string
     description: Namespace to use for `--proxy` checks 
     default: all
@@ -114,6 +114,37 @@ commands:
     description: |
       Enable TLS. Valid settings: `optional`.
     example: optional
+- name: routes
+  link: true
+  description: |
+    Display route stats.
+
+    The `route` command will only display traffic sent to a service with a defined Service Profile.
+  flags:
+  - names: [--namespace,-n]
+    arg: string
+    description: |
+      Namespace of the specified resource
+    default: default 
+    example: emojivoto
+  - names: [--output,-o]
+    arg: string
+    description: Output format. Currently only `table`, `wide`, and `json` are supported.
+    default: table
+    example: wide 
+  - names: [--time-window,-t]
+    arg: duration
+    description: Stat window, e.g. `10s`, `1m`, `10m`, `1h`, etc.
+    default: 1m
+    example: 30s
+  - name: --to
+    arg: string
+    description: If present, shows outbound stats to the specified resources
+    example: deploy/webapp
+  - name: --to-namespace
+    arg: string
+    description: Sets the namespace used to look up the `--to` resources. By default, the current `--namespace` is used.
+    example: emojivoto
 - name: completion
   description: Shell completion
 - name: dashboard
@@ -126,8 +157,6 @@ commands:
   description: Output Kubernetes configs to install Linkerd
 - name: profile
   description: Output service profile config for Kubernetes
-- name: routes
-  description: Display route stats
 - name: stat
   description: Display traffic stats about one or many resources
 - name: tap
