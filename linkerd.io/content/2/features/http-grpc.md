@@ -1,10 +1,11 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "HTTP, HTTP/2, and gRPC Proxying"
+description = "Linkerd will automatically enable advanced features (including metrics, load balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections."
+weight = 1
 [menu.l5d2docs]
   name = "HTTP, HTTP/2, and gRPC Proxying"
-  parent = "Features"
-  weight = "1"
+  parent = "features"
 +++
 
 Linkerd can proxy all TCP connections, and will automatically enable advanced

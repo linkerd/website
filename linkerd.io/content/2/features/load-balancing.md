@@ -1,10 +1,11 @@
 +++
 date = "2018-11-19T12:00:00-07:00"
-title = "Load balancing"
+title = "Load Balancing"
+description = "Linkerd automatically load balances requests across all destination endpoints on HTTP, HTTP/2, and gRPC connections."
+weight = 8
 [menu.l5d2docs]
-  name = "Load balancing"
-  parent = "Features"
-  weight = "8"
+  name = "Load Balancing"
+  parent = "features"
 +++
 
 For HTTP, HTTP/2, and gRPC connections, Linkerd automatically load balances
@@ -28,5 +29,3 @@ exposed as a headless service, Linkerd will balance requests properly.
 Linkerd's load balancing is particularly useful for gRPC (or HTTP/2) services
 in Kubernetes, for which [Kubernetes's default load balancing is not
 effective](https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/).
-
-

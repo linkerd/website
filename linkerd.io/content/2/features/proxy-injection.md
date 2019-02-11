@@ -1,10 +1,11 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
 title = "Automatic Proxy Injection"
+description = "Linkerd can be configured to automatically inject the data plane proxy into your service."
+weight = 4
 [menu.l5d2docs]
   name = "Automatic Proxy Injection"
-  parent = "Features"
-  weight = "4"
+  parent = "features"
 aliases = [
   "/2/proxy-injection/"
 ]

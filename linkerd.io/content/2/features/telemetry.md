@@ -1,10 +1,11 @@
 +++
 date = "2018-11-19T12:00:00-07:00"
-title = "Telemetry and monitoring"
+title = "Telemetry and Monitoring"
+description = "Linkerd automatically collects metrics from all services that send traffic through it."
+weight = 7
 [menu.l5d2docs]
-  name = "Telemetry and monitoring"
-  parent = "Features"
-  weight = "7"
+  name = "Telemetry and Monitoring"
+  parent = "features"
 +++
 
 Linkerd automatically collects metrics from all services that send traffic
