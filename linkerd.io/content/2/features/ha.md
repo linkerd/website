@@ -3,7 +3,10 @@ date = "2018-09-10T12:00:00-07:00"
 title = "Experimental: High Availability"
 [menu.l5d2docs]
   name = "Experimental: High Availability"
-  weight = 16
+  parent = "Features"
+aliases = [
+  "/2/ha/"
+]
 +++
 
 Linkerd can be ran in High Availability or HA mode.

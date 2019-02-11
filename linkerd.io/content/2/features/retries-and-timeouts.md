@@ -3,13 +3,14 @@ date = "2019-02-06T13:23:37-08:00"
 title = "Retries and Timeouts"
 [menu.l5d2docs]
   name = "Retries and Timeouts"
-  weight = 13
+  parent = "Features"
+  weight = "3"
 +++
 
-A [service profile](/2/service-profiles) may define certain routes as retryable
-or specify timeouts for routes.  This will cause the Linkerd proxy to perform
-the appropriate retries or timeouts when calling that service.  Retries and
-timeouts are always performed on the *outbound* (client) side.
+A [service profile](/2/features/service-profiles) may define certain routes as
+retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
+perform the appropriate retries or timeouts when calling that service.  Retries
+and timeouts are always performed on the *outbound* (client) side.
 
 ## Retries
 

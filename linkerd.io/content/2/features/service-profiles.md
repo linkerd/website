@@ -3,7 +3,11 @@ date = "2018-10-16T12:00:21-07:00"
 title = "Service Profiles"
 [menu.l5d2docs]
   name = "Service Profiles"
-  weight = 12
+  parent = "Features"
+  weight = "5"
+aliases = [
+  "/2/service-profiles/"
+]
 +++
 
 A service profile is a custom Kubernetes resource which allows you to give
