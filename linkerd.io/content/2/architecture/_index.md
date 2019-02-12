@@ -41,7 +41,7 @@ The control plane is made up of four components:
 - Prometheus - All of the metrics exposed by Linkerd are scraped via Prometheus
   and stored here. This is an instance of Prometheus that has been configured to
   work specifically with the data that Linkerd generates. There are
-  [instructions](/2/observability/prometheus/#exporting-metrics)
+  [instructions](/2/observability/exporting-metrics/)
   if you would like to integrate this with an
   existing Prometheus installation.
 

@@ -13,7 +13,8 @@ aliases = [
 
 Linkerd can be ran in High Availability or HA mode.
 
-This feature is **experimental** and it's only available in the [_edge_ release](../edge/).
+This feature is **experimental** and it's only available in the
+[_edge_ release](/2/edge/).
 
 Here's a short description of what `--ha` does to the `linkerd` install.
 

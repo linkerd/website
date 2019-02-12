@@ -38,6 +38,6 @@ required. For more information about setting up TLS, see the [TLS]({{% ref
 ## More information
 
 If you'd like to learn more about routing gRPC requests with Linkerd, check out
-Buoyant's blog post on the topic: [HTTP/2, gRPC and Linkerd](
-https://blog.buoyant.io/2017/01/10/http/2-grpc-and-linkerd/),
+Buoyant's blog post on the topic:
+[HTTP/2, gRPC and Linkerd](https://blog.buoyant.io/2017/01/10/http2-grpc-and-linkerd/),
 which provides a thorough introduction.

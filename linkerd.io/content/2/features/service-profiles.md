@@ -57,7 +57,8 @@ linkerd-api: no invalid service profiles...................................[ok]
 
 ## Viewing Per-Route Metrics
 
-Per-route metrics can be viewed by using the [`linkerd routes` command](/2/cli/routes).
+Per-route metrics can be viewed by using the
+[`linkerd routes` command](/2/cli/routes/).
 
 ## Overriding a Service Profile
 

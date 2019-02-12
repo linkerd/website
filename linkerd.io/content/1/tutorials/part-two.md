@@ -68,7 +68,8 @@ Linkerd must address:
 - How does Linkerd route an incoming request to the destination application?
 
 What follows are the technical details on how we solve these three problems. If
-you just want to get Linkerd working with Kubernetes DaemonSets, see [part one](/tutorials/part-one)!
+you just want to get Linkerd working with Kubernetes DaemonSets, see
+[part one](/1/tutorials/part-one/)!
 
 ---
 ## How does an application identify its host-local Linkerd?
@@ -184,7 +185,8 @@ allows us to accomplish the full set of goals of a service mesh (such as
   transparent TLS, protocol upgrades, latency-aware load balancing, etc), while
   scaling Linkerd instances per host rather than per pod.
 
-For a full, working example, see the [part one](/tutorials/part-one), or download
+For a full, working example, see the [part one](/1/tutorials/part-one/), or
+download
 our [example app](https://github.com/linkerd/linkerd-examples/tree/master/k8s-daemonset).
 And for help with this configuration or anything else about Linkerd, feel free
 to drop into our very active [Slack](http://slack.linkerd.io/) or post a topic

@@ -8,7 +8,7 @@ weight = 3
   parent = "features"
 +++
 
-A [service profile](/2/features/service-profiles) may define certain routes as
+A [service profile](/2/features/service-profiles/) may define certain routes as
 retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
 perform the appropriate retries or timeouts when calling that service.  Retries
 and timeouts are always performed on the *outbound* (client) side.
