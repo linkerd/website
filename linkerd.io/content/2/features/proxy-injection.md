@@ -1,10 +1,11 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
 title = "Automatic Proxy Injection"
+description = "Linkerd can be configured to automatically inject the data plane proxy into your service."
+weight = 4
 [menu.l5d2docs]
   name = "Automatic Proxy Injection"
-  parent = "Features"
-  weight = "4"
+  parent = "features"
 aliases = [
   "/2/proxy-injection/"
 ]
@@ -12,7 +13,7 @@ aliases = [
 
 Linkerd can be configured to automatically inject the data plane proxy into your
 service. This is an alternative to needing to run the
-[`linkerd inject`](../cli/inject/) command. Moving injection to the cluster
+[`linkerd inject`](../../cli/inject/) command. Moving injection to the cluster
 side, rather than relying on client side behavior, can help ensure that the data
 plane is always present and configured correctly, regardless of how pods are
 deployed.
