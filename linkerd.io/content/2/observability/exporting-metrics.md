@@ -24,7 +24,7 @@ metrics data from Linkerd:
 1. [Extracting data via Prometheus's APIs](#api)
 1. [Gather data from the proxies directly](#proxy)
 
-## Using the Prometheus federation API #{federation}
+## Using the Prometheus federation API {#federation}
 
 If you are using Prometheus as your own metrics store, we recommend taking
 advantage of Prometheus's *federation* API, which is designed exactly for the
