@@ -10,8 +10,19 @@ title = "Upgrade"
 
 ## Breaking changes
 
-There is one breaking change in `stable-2.2.0`, and it only applies to clusters
-with [Automatic Proxy Injection](/2/features/proxy-injection/) enabled.
+There are two breaking changes in `stable-2.2.0`. One relates to
+[Service Profiles](/2/features/service-profiles/), the other relates to
+[Automatic Proxy Injection](/2/features/proxy-injection/). If you are not using
+either of these features, you may skip this section.
+
+### Service Profile namespace location
+
+[Service Profiles](/2/features/service-profiles/), previously defined in the
+control plane namespace in `stable-2.1.0`, are now defined in their respective
+client and server namespaces. Service Profiles defined in the client namespace
+take priority over ones defined in the server namespace.
+
+### Automatic Proxy Injection opt-in
 
 The `linkerd.io/inject` annotation, previously opt-out in `stable-2.1.0`, is now
 opt-in.
@@ -19,7 +30,7 @@ opt-in.
 To enable automation proxy injection for a namespace, you must enable the
 `linkerd.io/inject` annotation on either the namespace or the pod spec:
 
-### Namespace injection
+#### Namespace injection
 
 ```yaml
 kind: Namespace
@@ -28,7 +39,7 @@ metadata:
     linkerd.io/inject: enabled
 ```
 
-### Pod Spec injection
+#### Pod Spec injection
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -39,6 +50,17 @@ spec:
       annotations:
         linkerd.io/inject: enabled
 ```
+
+Also note that auto-injection only works during resource creation, not update.
+To update the data plane proxies of a deployment that was auto-injected, do one
+of the following:
+
+- Manually re-inject the application via `linkerd inject` (more info below under
+  [Data Plane](#data-2.2.0))
+- Delete and redeploy the application
+
+Auto-inject support for application updates is tracked at:
+https://github.com/linkerd/linkerd2/issues/2260
 
 For more details, see the
 [Automatic Proxy Injection](/2/features/proxy-injection/) doc.
@@ -65,7 +87,7 @@ linkerd install | kubectl apply -f -
 linkerd check
 ```
 
-### Data Plane
+### Data Plane {#data-2.2.0}
 
 Example command to upgrade an application in the `emojivoto` namespace, composed
 of deployments:
@@ -78,8 +100,6 @@ kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml |
 # verify upgrade succeeded
 linkerd check --proxy
 ```
-Note: If you have the Automatic Proxy Injection enabled, you may forego the `linkerd inject -` step of the previous
-command.
 
 That's it, you're up to date!
 
