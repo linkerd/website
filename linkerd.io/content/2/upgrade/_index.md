@@ -6,14 +6,24 @@ title = "Upgrade"
   weight = 5
 +++
 
-# Upgrading stable-2.1.0 -> stable-2.2.0
+There are three components that need to be upgraded:
+
+- [CLI](/2/architecture#cli)
+- [Control Plane](/2/architecture#control-plane)
+- [Data Plane](/2/architecture#data-plane)
+
+In this guide, we'll walk you through how to upgrade all three components
+incrementally without taking down any of your services.
+
+# Upgrade notice: stable-2.2.0
 
 ## Breaking changes
 
 There are two breaking changes in `stable-2.2.0`. One relates to
 [Service Profiles](/2/features/service-profiles/), the other relates to
 [Automatic Proxy Injection](/2/features/proxy-injection/). If you are not using
-either of these features, you may skip this section.
+either of these features, you may [skip directly](#upgrade-the-cli) to the full
+upgrade instructions.
 
 ### Service Profile namespace location
 
@@ -28,28 +38,8 @@ The `linkerd.io/inject` annotation, previously opt-out in `stable-2.1.0`, is now
 opt-in.
 
 To enable automation proxy injection for a namespace, you must enable the
-`linkerd.io/inject` annotation on either the namespace or the pod spec:
-
-#### Namespace injection
-
-```yaml
-kind: Namespace
-metadata:
-  annotations:
-    linkerd.io/inject: enabled
-```
-
-#### Pod Spec injection
-
-```yaml
-apiVersion: extensions/v1beta1
-kind: Deployment
-spec:
-  template:
-    metadata:
-      annotations:
-        linkerd.io/inject: enabled
-```
+`linkerd.io/inject` annotation on either the namespace or the pod spec. For more
+details, see the [Automatic Proxy Injection](/2/features/proxy-injection/) doc.
 
 #### A note about application updates
 
@@ -64,61 +54,9 @@ of the following:
 Auto-inject support for application updates is tracked at:
 https://github.com/linkerd/linkerd2/issues/2260
 
-For more details, see the
-[Automatic Proxy Injection](/2/features/proxy-injection/) doc.
+# Upgrade notice: stable-2.1.0
 
-## Step-by-step instructions
-
-The CLI, Control Plane, and Data Plane proxies may all be upgraded in-place.
-
-### CLI
-
-```bash
-curl -sL https://run.linkerd.io/install | sh
-
-# verify installation succeeded
-linkerd version
-```
-
-### Control Plane
-
-```bash
-linkerd install | kubectl apply -f -
-
-# verify upgrade succeeded
-linkerd check
-```
-
-### Data Plane {#data-2.2.0}
-
-Example command to upgrade an application in the `emojivoto` namespace, composed
-of deployments:
-
-```bash
-kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml |
-  linkerd inject - |
-  kubectl apply -f -
-
-# verify upgrade succeeded
-linkerd check --proxy
-```
-
-That's it, you're up to date!
-
-# Upgrading stable-2.0.0 -> stable-2.1.0
-
-There are three components that need to be upgraded:
-
-- [CLI](/2/architecture#cli)
-- [Control Plane](/2/architecture#control-plane)
-- [Data Plane](/2/architecture#data-plane)
-
-In this guide, we'll walk you through how to upgrade all three components
-incrementally without taking down any of your services.
-
-## Upgrade notice: stable-2.1.0
-
-As of the stable-2.1.0 release, the Linkerd control plane components have been
+As of the `stable-2.1.0` release, the Linkerd control plane components have been
 renamed to reduce possible naming collisions. If you're upgrading from an older
 version, you will need to clean up the old components manually as part of the
 upgrade. Perform the upgrade in the following order:
