@@ -11,7 +11,7 @@ weight = 1
 Linkerd can proxy all TCP connections, and will automatically enable advanced
 features (including metrics, load balancing, retries, and more) for HTTP,
 HTTP/2, and gRPC connections. (See [TCP Proxying and Protocol
-Detection](protocol-detection) for details of how this detection happens).
+Detection](../protocol-detection) for details of how this detection happens).
 
 ## Notes
 

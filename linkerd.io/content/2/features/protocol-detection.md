@@ -18,7 +18,7 @@ Linkerd performs *protocol detection* to determine whether traffic is HTTP or
 HTTP/2 (including gRPC). If Linkerd detects that a connection is using HTTP or
 HTTP/2, Linkerd will automatically provide HTTP-level metrics and routing
 without configuration from the user. (See [HTTP, HTTP/2, and gRPC
-Proxying](http-grpc) for more.)
+Proxying](../http-grpc) for more.)
 
 If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2, Linkerd
 will proxy the connection, but will only be able to provide byte-level metrics.
