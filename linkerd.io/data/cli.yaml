@@ -8,7 +8,7 @@ commands:
     description: Overrides the version used when checking if Linkerd is running the latest version (mostly for testing)
   - names: [-n,--namespace]
     arg: string
-    description: Namespace to use for `--proxy` checks 
+    description: Namespace to use for `--proxy` checks
     default: all
   - name: --pre
     description: Only run pre-installation checks, to determine if the control plane can be installed
@@ -125,13 +125,13 @@ commands:
     arg: string
     description: |
       Namespace of the specified resource
-    default: default 
+    default: default
     example: emojivoto
   - names: [--output,-o]
     arg: string
     description: Output format. Currently only `table`, `wide`, and `json` are supported.
     default: table
-    example: wide 
+    example: wide
   - names: [--time-window,-t]
     arg: duration
     description: Stat window, e.g. `10s`, `1m`, `10m`, `1h`, etc.
@@ -150,7 +150,7 @@ commands:
 - name: dashboard
   description: Open the Linkerd dashboard in a web browser
 - name: get
-  description: Disply one or many mesh resources
+  description: Display one or many mesh resources
 - name: help
   description: Help about any command
 - name: install
@@ -176,7 +176,7 @@ globalflags:
   arg: string
   description: |
     The namespace in which Linkerd is installed.
-    
+
     Can also be set using the `LINKERD_NAMESPACE` environment variable.
   env: LINKERD_NAMESPACE
   default: linkerd
