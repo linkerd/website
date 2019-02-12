@@ -20,14 +20,14 @@ work on the part of the developer. These features include:
 
 * Recording of top-line ("golden") metrics (request volume, success rate, and latency distributions) for HTTP, HTTP/2, and gRPC traffic.
 * Recording of TCP-level metrics (bytes in/out, etc) for other TCP traffic.
-* Reporting metrics per service, per caller/callee pair, or per route/path (with [Service Profiles](../service-profiles)).
+* Reporting metrics per service, per caller/callee pair, or per route/path (with [Service Profiles](../features/service-profiles)).
 * Generating topology graphs that display the runtime relationship between services.
 * Live, on-demand request sampling.
 
 This data can be consumed in several ways:
 
 * Through the [Linkerd CLI](../cli), e.g. with `linkerd stat` and `linkerd routes`.
-* Through the Linkerd dashboard, and pre-build Grafana dashboards.
+* Through the [Linkerd dashboard](../features/dashboard), and [pre-built Grafana dashboards](../features/dashboard/#grafana).
 * Directly from Linkerd's built-in Prometheus instance
 
 ## Lifespan of Linkerd metrics
