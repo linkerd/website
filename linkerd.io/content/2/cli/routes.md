@@ -11,7 +11,7 @@ weight = 3
 The `linkerd routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
-create a service profile, see [service profiles](/2/service-profiles).
+create a service profile, see [service profiles](/2/features/service-profiles).
 
 ## Inbound Metrics
 
