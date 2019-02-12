@@ -14,14 +14,13 @@ aliases = [
 The `inject` command modifies Kubernetes manifests that are passed to it either
 as a file (`-f`) or as a stream (`-`). It adds two containers to the pod spec of
 the manifest. Any resource types that do not need modification or are not
-supported, such as a `Service` are skipped over. The two containers added are:
+supported, such as a `Service`, are skipped over. The two containers added are:
 
-1. An `initContainer`.
+1. An `initContainer`, `linkerd-init`, is responsible for configuring
+   `iptables`. This activates forwarding incoming and outgoing traffic through
+   the proxy.
 
-1. A `container` that runs the Linkerd proxy.
-
-The `initContainer` is responsible for configuring `iptables`. This forwards all
-incoming and outgoing traffic through the proxy.
+1. A `container`, `linkerd-proxy`, that runs the Linkerd proxy.
 
 Let's say for example you have the following deployment saved as `deployment.yaml`:
 
