@@ -57,7 +57,7 @@ as sidecar containers alongside each instance of your service code. In order to
 redeployed to include a data plane proxy in each pod. (The `linkerd inject`
 command accomplishes this, as well as the configuration work necessary to
 transparently funnel traffic from each instance through the proxy.) You can
-[add your service](../adding-your-service) to the data plane with a single CLI
+[add your service](../adding-your-service/) to the data plane with a single CLI
 command.
 
 These proxies transparently intercept communication to and from each pod, and

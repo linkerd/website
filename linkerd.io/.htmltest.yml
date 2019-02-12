@@ -1,0 +1,3 @@
+IgnoreURLs:
+  - .*localhost.*
+DirectoryPath: public
