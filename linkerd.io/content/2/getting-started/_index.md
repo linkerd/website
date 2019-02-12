@@ -20,8 +20,6 @@ services by adding the the data plane proxies. (See the
 
 We'll walk you through this process step by step.
 
-____
-
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to a Kubernetes
@@ -55,8 +53,6 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER \
 In the next step, we will install the CLI and validate that your cluster is
 ready to install the control plane.
 
-____
-
 ## Step 1: Install the CLI
 
 If this is your first time running Linkerd, you’ll need to download the
@@ -87,8 +83,6 @@ linkerd version
 
 You should see the CLI version, and also "Server version: unavailable". This
 is because we haven't installed the control plane. We'll do that soon.
-
-____
 
 ## Step 2: Validate your Kubernetes cluster
 
@@ -158,8 +152,6 @@ linkerd -n linkerd top deploy/linkerd-web
 
 This is the traffic you're generating by looking at the dashboard itself!
 
-____
-
 ## Step 5: Install the demo app
 
 To get a feel for how Linkerd would work for one of your services, you can
@@ -226,8 +218,6 @@ the way it should with the data plane. To do this check, run:
 linkerd -n emojivoto check --proxy
 ```
 
-____
-
 ## Step 6: Watch it run!
 
 You can glance at the Linkerd dashboard and see all the HTTP/2 (gRPC) and HTTP/1
@@ -285,8 +275,6 @@ dashboards. You can get to these by clicking the Grafana icon in the overview
 page.
 
 {{< fig src="/images/getting-started/grafana.png" title="Deployment Detail Dashboard">}}
-
-____
 
 ## That’s it! 👏
 
