@@ -12,9 +12,9 @@ aliases = [
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy.  The following metrics are available at `/metrics` on the proxy's metrics
-port (default: `:4191`) in the [Prometheus format][prom-format]:
+port (default: `:4191`) in the [Prometheus format][prom-format].
 
-## Protocol-Level Metrics
+# Protocol-Level Metrics
 
 * `request_total`: A counter of the number of requests the proxy has received.
   This is incremented when the request stream begins.
@@ -30,8 +30,8 @@ port (default: `:4191`) in the [Prometheus format][prom-format]:
   application behavior when a server provides response headers immediately but is
   slow to begin serving the response body.
 
-* `route_request_total`, `route_response_latency_ms`, and `route_response_total`: 
-  These metrics are analogous to `request_total`, `response_latency_ms`, and 
+* `route_request_total`, `route_response_latency_ms`, and `route_response_total`:
+  These metrics are analogous to `request_total`, `response_latency_ms`, and
   `response_total` except that they are collected at the route level.  This
   means that they do not have `authority`, `tls`, `grpc_status_code` or any
   outbound labels but instead they have:
@@ -39,7 +39,7 @@ port (default: `:4191`) in the [Prometheus format][prom-format]:
   * `rt_route`: The name of the route for this request.
 
 * `control_request_total`, `control_response_latency_ms`, and `control_response_total`:
-  These metrics are analogous to `request_total`, `response_latency_ms`, and 
+  These metrics are analogous to `request_total`, `response_latency_ms`, and
   `response_total` but for requests that the proxy makes to the Linkerd control
   plane.  Instead of `authority`, `direction`, or any outbound labels, instead
   they have:
@@ -155,7 +155,7 @@ request_total{
 }
 ```
 
-## Transport-Level Metrics
+# Transport-Level Metrics
 
 The following metrics are collected at the level of the underlying transport
 layer.

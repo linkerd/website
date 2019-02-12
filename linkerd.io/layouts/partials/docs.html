@@ -6,7 +6,12 @@
 
     <div class="col-md-9 border-left docs-content">
       <h1 class="title display-4 mb-4">{{ .page.Title }}</h1>
-      <div class="content language-markup">{{ .page.Content }}</div>
+      <div class="content language-markup">
+        {{ if .page.Params.include_toc }}
+        {{ .page.TableOfContents }}
+        {{ end }}
+        {{ .page.Content }}
+      </div>
     </div>
   </div>
 </div>

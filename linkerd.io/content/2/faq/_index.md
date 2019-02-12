@@ -1,6 +1,7 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
 title = "Frequently Asked Questions"
+include_toc = true
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]

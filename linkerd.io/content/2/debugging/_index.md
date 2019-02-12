@@ -9,14 +9,12 @@ aliases = [
   weight = 10
 +++
 
-This section assumes you've followed the steps in the
+The demo application emojivoto has some issues. Let's use that and Linkerd to
+diagnose an application that fails in ways which are a little more subtle than
+the entire service crashing. This guide assumes that you've followed the steps in the
 [Getting Started](../getting-started) guide and have Linkerd and the demo
-application running in a Kubernetes cluster.
-
-## Using Linkerd to debug a failing application
-
-The demo application has some issues. Let's use Linkerd to diagnose these
-issues.
+application running in a Kubernetes cluster. If you've not done that yet, go get
+started and come back when you're done!
 
 If you glance at the Linkerd dashboard (by running the `linkerd dashboard`
 command), you should see all the resources in the `emojivoto` namespace,
