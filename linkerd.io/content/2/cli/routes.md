@@ -64,7 +64,7 @@ translate into more than one actual request.  If the Linkerd proxy is not
 performing retries, effective requests and actual requests will always be equal.
 When enabling retries, you should expect to see the actual request rate
 increase and the effective success rate increase.  See the
-[retries and timeouts section](/2/retries-and-timeouts) for more information.
+[retries and timeouts section](/2/features/retries-and-timeouts) for more information.
 
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
