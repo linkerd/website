@@ -51,6 +51,8 @@ spec:
         linkerd.io/inject: enabled
 ```
 
+#### A note about application updates
+
 Also note that auto-injection only works during resource creation, not update.
 To update the data plane proxies of a deployment that was auto-injected, do one
 of the following:
