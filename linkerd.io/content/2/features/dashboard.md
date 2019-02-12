@@ -8,7 +8,7 @@ weight = 9
   parent = "features"
 +++
 
-In addition to its [command-line interface](../../cli), Linkerd provides a web
+In addition to its [command-line interface](/2/cli/), Linkerd provides a web
 dashboard and pre-configured Grafana dashboards.
 
 ## Linkerd Dashboard

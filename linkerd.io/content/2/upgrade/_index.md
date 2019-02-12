@@ -8,9 +8,9 @@ title = "Upgrade"
 
 There are three components that need to be upgraded:
 
-- [CLI](/2/architecture#cli)
-- [Control Plane](/2/architecture#control-plane)
-- [Data Plane](/2/architecture#data-plane)
+- [CLI](/2/architecture/#cli)
+- [Control Plane](/2/architecture/#control-plane)
+- [Data Plane](/2/architecture/#data-plane)
 
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
@@ -61,7 +61,8 @@ renamed to reduce possible naming collisions. If you're upgrading from an older
 version, you will need to clean up the old components manually as part of the
 upgrade. Perform the upgrade in the following order:
 
-1. If Linkerd is installed with [automatic proxy injection](/2/proxy-injection),
+1. If Linkerd is installed with
+  [automatic proxy injection](/2/features/proxy-injection/),
   enabled, then you'll need to start by removing the webhook that was created
   when it was installed, by running:
 
@@ -213,7 +214,7 @@ Server version: {{% latestversion %}}
 
 - You will lose the historical data from Prometheus. If you would like to have
   that data persisted through an upgrade, take a look at the
-  [persistence documentation](/2/observability/prometheus/#exporting-metrics)
+  [persistence documentation](/2/observability/exporting-metrics/)
 
 ## Upgrade the data plane
 
@@ -233,9 +234,9 @@ Example command to upgrade an application in the `emojivoto` namespace, composed
 of deployments:
 
 ```bash
-kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml |
-  linkerd inject - |
-  kubectl apply -f -
+kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
+  | linkerd inject - \
+  | kubectl apply -f -
 ```
 
 Check to make sure everything is healthy by running:

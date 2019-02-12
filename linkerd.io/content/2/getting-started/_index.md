@@ -16,7 +16,7 @@ Installing Linkerd is easy. First, you first install the CLI (command-line
 interface) onto your local machine. Using this CLI, you'll install the Linkerd
 control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
 services by adding the the data plane proxies. (See the
-[Architecture](../architecture) page for details.)
+[Architecture](../architecture/) page for details.)
 
 We'll walk you through this process step by step.
 
@@ -128,7 +128,7 @@ running. If you're interested in what components were installed, you can run:
 kubectl -n linkerd get deploy
 ```
 
-Check out the [architecture](/2/architecture#control-plane) documentation for an
+Check out the [architecture](/2/architecture/#control-plane) documentation for an
 in depth explanation of what these components are and what they do.
 
 ## Step 4: Explore Linkerd
@@ -182,7 +182,7 @@ in all its glory.
 Clicking around, you might notice that some parts of the application are
 broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
-problem. Check out the [debugging guide](../debugging-an-app) if you're
+problem. Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)
 
 Next, let's add Linkerd to the Emojivoto app, by running:
@@ -280,8 +280,8 @@ page.
 
 For more things you can do:
 
-- [Debug emojivoto](../debugging-an-app)
-- [Add Linkerd to your service](../adding-your-service)
-- [Learn more](../architecture) about Linkerd's architecture
+- [Debug emojivoto](../debugging-an-app/)
+- [Add Linkerd to your service](../adding-your-service/)
+- [Learn more](../architecture/) about Linkerd's architecture
 - Hop into the #linkerd2 channel on
   [the Linkerd Slack](https://slack.linkerd.io)

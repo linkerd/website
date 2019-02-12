@@ -10,8 +10,8 @@ weight = 7
 
 Linkerd automatically collects metrics from all services that send traffic
 through it. These metrics are aggregated and presented to you in a variety of
-ways, including through [Linkerd's CLI](../../cli), [Linkerd's web
-dashboard](../dashboard/#linkerd-dashboard), and pre-built
+ways, including through [Linkerd's CLI](/2/cli/),
+[Linkerd's web dashboard](../dashboard/#linkerd-dashboard), and pre-built
 [Grafana](../dashboard/#grafana) dashboards.
 
 Note that Linkerd is not designed to be a long-term historical store of

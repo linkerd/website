@@ -8,7 +8,7 @@ aliases = "/docs"
 +++
 
 (Note: this documentation is specific to Linkerd 2.x. For the 1.x branch of development,
-[go here](/1/overview).)
+[go here](/1/overview/).)
 
 Linkerd is a _service mesh_ for Kubernetes and other frameworks. It makes
 running services easier and safer by giving you runtime debugging,
@@ -29,12 +29,12 @@ plane*. You run Linkerd by:
 
 1. [Installing the CLI on your local system](../getting-started/#step-1-install-the-cli);
 1. [Installing the control plane into your cluster](../getting-started/#step-3-install-linkerd-onto-the-cluster);
-1. [Adding your services to Linkerd's data plane](../adding-your-service).
+1. [Adding your services to Linkerd's data plane](../adding-your-service/).
 
 Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
 manipulate it.
 
-You can [get started](../getting-started) in minutes!
+You can [get started](../getting-started/) in minutes!
 
 ## How it works
 
@@ -57,11 +57,11 @@ Linkerd is currently published in several tracks:
 
 * [Linkerd 2.x stable releases](../edge/)
 * [Linkerd 2.x edge releases.](../edge/)
-* [Linkerd 1.x.](/1/overview)
+* [Linkerd 1.x.](/1/overview/)
 
 ## Next steps
 
-[Get started with Linkerd](../getting-started) in minutes, or check out the
+[Get started with Linkerd](../getting-started/) in minutes, or check out the
 [architecture](../architecture/) for more details on Linkerd's components and
 how they all fit together.
 

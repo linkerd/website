@@ -57,14 +57,12 @@ Linkerd features, some of which are referenced in the blogs.
 * [A Service Mesh For ECS](https://buoyant.io/2017/08/08/a-service-mesh-for-ecs/)
 * [linkerd-examples/ecs](https://github.com/linkerd/linkerd-examples/tree/master/ecs)
 
-## Istio
-* [Linkerd and Istio: like peanut butter and jelly](https://buoyant.io/2017/07/11/linkerd-istio/)
-* [linkerd-examples/istio](https://github.com/linkerd/linkerd-examples/tree/master/istio) - run example applications with Istio
-
 ## Service Mesh
+
 * [What’s a service mesh? And why do I need one?](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)
 
 ## Linkerd-tcp
+
 * [Introducing Linkerd-tcp](https://buoyant.io/2017/03/29/introducing-linkerd-tcp/)
 * [linkerd-examples/linkerd-tcp](https://github.com/linkerd/linkerd-examples/tree/master/linkerd-tcp)
 
