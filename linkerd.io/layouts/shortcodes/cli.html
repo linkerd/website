@@ -17,12 +17,10 @@
       <td>
         {{ if .link }}
         <a href="{{ .name }}">
-          <code>{{ .name }}</code>
+          {{ .name }}
         </a>
         {{ else }}
-        <code>
-          {{ .name }}
-        </code>
+        {{ .name }}
         {{ end }}
       </td>
       <td>

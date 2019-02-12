@@ -6,7 +6,22 @@ title = "Architecture"
   weight = 2
 +++
 
-## Control Plane
+At a high level, Linkerd consists of a *control plane* and a *data plane*.
+
+The *control plane* is a set of services that run in a dedicated
+namespace. These services accomplish various things---aggregating telemetry
+data, providing a user-facing API, providing control data to the data plane
+proxies, etc. Together, they drive the behavior of the data plane.
+
+The *data plane* consists of transparent proxies that are run next
+to each service instance. These proxies automatically handle all traffic to and
+from the service. Because they're transparent, these proxies act as highly
+instrumented out-of-process network stacks, sending telemetry to, and receiving
+control signals from, the control plane.
+
+{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
+
+# Control Plane
 
 The Linkerd control plane is a set of services that run in a dedicated
 Kubernetes namespace (`linkerd` by default). These services accomplish various
@@ -34,9 +49,7 @@ The control plane is made up of four components:
   component is used to render and display these dashboards. You can reach these
   dashboards via links in the Linkerd dashboard itself.
 
-{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
-
-## Data Plane
+# Data Plane
 
 The Linkerd data plane is comprised of lightweight proxies, which are deployed
 as sidecar containers alongside each instance of your service code. In order to
@@ -84,13 +97,13 @@ The proxy's features include:
 The proxy supports service discovery via DNS and the
 [destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).
 
-## CLI
+# CLI
 
 The Linkerd CLI is run locally on your machine and is used to interact with the
 control and data planes. It can be used to view statistics, debug production
 issues in real time and install/upgrade the control and data planes.
 
-## Dashboard
+# Dashboard
 
 The Linkerd dashboard provides a high level view of what is happening with your
 services in real time. It can be used to view the "golden" metrics (success
@@ -100,7 +113,7 @@ running `linkerd dashboard` from the command line.
 
 {{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
 
-## Grafana
+# Grafana
 
 As a component of the control plane, Grafana provides actionable dashboards for
 your services out of the box. It is possible to see high level metrics and dig
@@ -120,7 +133,7 @@ The dashboards that are provided out of the box include:
 
 {{< /gallery >}}
 
-## Prometheus
+# Prometheus
 
 Prometheus is a cloud native monitoring solution that is used to collect
 and store all the Linkerd metrics. It is installed as part of the control plane

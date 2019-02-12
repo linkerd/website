@@ -19,12 +19,12 @@ Internally, Linkerd stores its metrics in a Prometheus instance that runs as
 part of the control plane.  There are several basic approaches to exporting
 metrics data from Linkerd:
 
-1. [Federating data to your own Prometheus cluster](#federation)
-1. [Using a Prometheus integration](#integration)
-1. [Extracting data via Prometheus's APIs](#api)
-1. [Gather data from the proxies directly](#proxy)
+- [Federating data to your own Prometheus cluster](#federation)
+- [Using a Prometheus integration](#integration)
+- [Extracting data via Prometheus's APIs](#api)
+- [Gather data from the proxies directly](#proxy)
 
-## Using the Prometheus federation API {#federation}
+# Using the Prometheus federation API {#federation}
 
 If you are using Prometheus as your own metrics store, we recommend taking
 advantage of Prometheus's *federation* API, which is designed exactly for the
@@ -67,7 +67,7 @@ label definitions, have a look at [Proxy Metrics](../proxy-metrics).
 For more information on Prometheus' `/federate` endpoint, have a look at the
 [Prometheus federation docs](https://prometheus.io/docs/prometheus/latest/federation/).
 
-## Using a Prometheus integration {#integration}
+# Using a Prometheus integration {#integration}
 
 If you are not using Prometheus as your own long-term data store, you may be
 able to leverage one of Prometheus's [many
@@ -75,7 +75,7 @@ integrations](https://prometheus.io/docs/operating/integrations/) to
 automatically extract data from Linkerd's Prometheus instance into the data
 store of your choice. Please refer to the Prometheus documentation for details.
 
-## Extracting data via Prometheus's APIs {#api}
+# Extracting data via Prometheus's APIs {#api}
 
 If neither Prometheus federation nor Prometheus integrations are options for
 you, it is possible to call Prometheus's APIs to extract data from Linkerd.
@@ -83,15 +83,16 @@ you, it is possible to call Prometheus's APIs to extract data from Linkerd.
 For example, you can call the federation API directly via a command like:
 
 ```bash
-curl -G --data-urlencode 'match[]={job="linkerd-proxy"}' --data-urlencode 'match[]={job="linkerd-controller"}' http://prometheus.linkerd.svc.cluster.local:9090/federate
+curl -G \
+  --data-urlencode 'match[]={job="linkerd-proxy"}' \
+  --data-urlencode 'match[]={job="linkerd-controller"}' \
+  http://prometheus.linkerd.svc.cluster.local:9090/federate
 ```
 
-From outside the Kubernetes cluster, you will need to port forward first:
-
-```bash
-kubectl -n linkerd port-forward $(kubectl -n linkerd get po --selector=linkerd.io/control-plane-component=prometheus -o jsonpath='{.items[*].metadata.name}') 9090:9090
-curl -G --data-urlencode 'match[]={job="linkerd-proxy"}' --data-urlencode 'match[]={job="linkerd-controller"}' http://localhost:9090/federate
-```
+Note: if your data store is outside the Kubernetes cluster, it is likely that
+you'll want to setup
+[ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+at a domain name of your choice with authentication.
 
 Similar to the `/federate` API, Prometheus provides a JSON query API to
 retrieve all metrics:
@@ -100,7 +101,7 @@ retrieve all metrics:
 curl http://prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
 ```
 
-## Gathering data from the Linkerd proxies directly {#proxy}
+# Gathering data from the Linkerd proxies directly {#proxy}
 
 Finally, if you want to avoid Linkerd's Prometheus entirely, you can query the
 Linkerd proxies directly on their `/metrics` endpoint.
@@ -109,9 +110,15 @@ For example, to view `/metrics` from a single Linkerd proxy, running in the
 `linkerd` namespace:
 
 ```bash
-kubectl port-forward -n linkerd $(kubectl -n linkerd get pods -l linkerd.io/control-plane-ns=linkerd -o jsonpath='{.items[0].metadata.name}') 4191:4191
+kubectl -n linkerd port-forward \
+  $(kubectl -n linkerd get pods \
+    -l linkerd.io/control-plane-ns=linkerd \
+    -o jsonpath='{.items[0].metadata.name}') \
+  4191:4191
 ```
+
 and then:
+
 ```bash
 curl localhost:4191/metrics
 ```

@@ -24,13 +24,12 @@
     {{ $arg := .arg }}
     <tr>
       <td class="cli">
-        {{ with .name }}
-        <code>{{ . }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>
-        {{ end }}
-          
-        {{ with .names }}
-        <code>{{ index . 0 }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>,
-        <br /><code>{{ index . 1 }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</code>
+        {{ range $index, $name := .names }}
+          {{ if (ne $index 0) }}
+            <br />
+
+          {{ end }}
+          <kbd>{{ $name }}{{ with $arg }}=<strong>{{ . }}</strong>{{ end }}</kbd>
         {{ end }}
       </td>
       <td>
@@ -42,18 +41,14 @@
       {{ $names   := .names }}
       <td class="cli">
         {{ with $example }}
-        {{ with $name }}
-        <code>{{ . }}={{ $example }}</code>
-        {{ end }}
-
-        {{ with $names }}
-        <code>{{ index . 0 }}={{ $example }}</code>
-        {{ end }}
+        <kbd>{{ index $names 0 }}=<strong>{{ $example }}</strong></kbd>
         {{ end }}
       </td>
       {{ end }}
       <td class="cli">
+        {{ if (isset . "default") }}
         <code>{{ .default }}</code>
+        {{ end}}
       </td>
     </tr>
     {{ end}}
