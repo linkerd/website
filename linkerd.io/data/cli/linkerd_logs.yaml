@@ -1,0 +1,60 @@
+name: linkerd logs
+synopsis: Tail logs from containers in the Linkerd control plane
+description: Tail logs from containers in the Linkerd control plane.
+options:
+- name: container
+  shorthand: c
+  usage: |
+    Tail logs from the specified container. Options are 'public-api', 'proxy-api', 'tap', 'destination', 'prometheus', 'grafana' or 'linkerd-proxy'
+- name: control-plane-component
+  usage: |
+    Tail logs from the specified control plane component. Default value (empty string) causes this command to tail logs from all resources marked with the 'linkerd.io/control-plane-component' label selector
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for logs
+- name: no-color
+  shorthand: "n"
+  default_value: "false"
+  usage: Disable colorized output
+- name: since
+  shorthand: s
+  default_value: 48h0m0s
+  usage: Duration of how far back logs should be retrieved
+- name: tail
+  default_value: "-1"
+  usage: |
+    Last number of log lines to show for a given container. -1 does not show previous log lines
+- name: timestamps
+  shorthand: t
+  default_value: "false"
+  usage: Print timestamps for each given log line
+inherited_options:
+- name: api-addr
+  usage: |
+    Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests
+- name: linkerd-namespace
+  shorthand: l
+  default_value: linkerd
+  usage: Namespace in which Linkerd is installed [$LINKERD_NAMESPACE]
+- name: verbose
+  default_value: "false"
+  usage: Turn on debug logging
+example: |2
+    # Tail logs from all containers in the prometheus control plane component
+    linkerd logs --control-plane-component prometheus
+
+    # Tail logs from the linkerd-proxy container in the grafana control plane component
+    linkerd logs --control-plane-component grafana --container linkerd-proxy
+
+    # Tail logs from the linkerd-proxy container in the controller component beginning with the last two lines
+    linkerd logs --control-plane-component controller --container linkerd-proxy --tail 2
+
+    # Tail logs from the linkerd-proxy container in the controller component showing timestamps for each line
+    linkerd logs --control-plane-component controller --container linkerd-proxy --timestamps
+see_also:
+- linkerd - linkerd manages the Linkerd service mesh
