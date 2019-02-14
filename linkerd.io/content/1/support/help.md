@@ -16,8 +16,8 @@ aliases = [
 We'd love to help you get Linkerd working for your use case, and we're very
 interested in your feedback!
 
-If you're having trouble or think you've found a bug, start by checking [the
-FAQ](/support). If you still need help, you can [reach us in
+If you're having trouble or think you've found a bug, start by checking
+[the FAQ](/1/support/). If you still need help, you can [reach us in
 a couple of ways]({{% ref "/1/support/contact.md" %}}).
 
 You can also report bugs or file feature requests on the [linkerd

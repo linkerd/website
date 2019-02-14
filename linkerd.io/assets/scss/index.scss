@@ -45,33 +45,43 @@ footer li {
 }
 
 .docs-content {
-  h1 {
-    margin-bottom: 1.75rem;
+  h1, h2 {
+    border-bottom: 1px solid $gray-500;
+    padding-bottom: .5rem;
   }
 
-  h2, h3 {
-    margin-top: 1rem;
-    padding-bottom: 1.75rem;
+  h1, h2, h3, h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   pre {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   dt:first-child, dd:nth-child(2) {
     // This is because the border-top class is being used
     border-top: 0px !important;
   }
-}
 
-code {
-  $code-background: $code-background;
-}
+  .table td {
+    min-width: $table-cell-min-width;
 
-.table td {
-  min-width: $table-cell-min-width;
+    &.cli {
+      white-space: nowrap;
+    }
+  }
 
-  &.cli {
-    white-space: nowrap;
+  .table td,th {
+    border-top: 0px;
+  }
+
+  :not(pre) > code[class*="language-"] {
+    padding: $kbd-padding-y $kbd-padding-x;
+    font-size: $kbd-font-size;
+    color: $kbd-color;
+    background-color: $kbd-bg;
+    @include border-radius($border-radius-sm);
+    @include box-shadow($kbd-box-shadow);
   }
 }

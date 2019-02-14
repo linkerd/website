@@ -30,7 +30,7 @@ protocol upgrades that Linkerd can do include HTTP/1.x to HTTP/2, thrift to
 (the topic of this tutorial) HTTP to HTTPS.
 
 When Linkerd is deployed as a service mesh on Kubernetes, we
-[place a Linkerd instance on every host using DaemonSets](/tutorials/part-two).
+[place a Linkerd instance on every host using DaemonSets](/1/tutorials/part-two/).
 For HTTP services, pods can send HTTP traffic to their host-local Linkerd by
 using the `http_proxy` environment variable. (For non-HTTP traffic the
 integration is slightly more complex.)

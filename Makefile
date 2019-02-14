@@ -1,8 +1,8 @@
 
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
-export L5D2_STABLE_VERSION ?= stable-2.1.0
-export L5D2_EDGE_VERSION ?= edge-19.2.1
+export L5D2_STABLE_VERSION ?= stable-2.2.0
+export L5D2_EDGE_VERSION ?= edge-19.2.3
 
 define upload_public
 	gsutil -m rsync \
@@ -13,6 +13,7 @@ endef
 HAS_GSUTIL := $(shell command -v gsutil;)
 HAS_FLARECTL := $(shell command -v flarectl;)
 HAS_HUGO := $(shell command -v hugo;)
+HAS_HTMLTEST := $(shell command -v htmltest;)
 
 .PHONY: publish
 publish: update-version build-linkerd.io deploy
@@ -45,6 +46,14 @@ tmp/%/public:
 .PHONY: tmp-sites
 tmp-sites: tmp
 	cp -R *linkerd.io tmp/
+
+.PHONY: check
+check: build-linkerd.io
+	@# Check linkerd.io for valid links and standards
+ifndef HAS_HTMLTEST
+	@printf "Install htmltest first. curl https://htmltest.wjdp.uk | bash\n"; exit 1
+endif
+	cd tmp/linkerd.io && htmltest
 
 serve-%: build-%
 	@# Serve the built files locally

@@ -1,12 +1,14 @@
 +++
 date = "2018-11-19T12:00:00-07:00"
 title = "Dashboard and Grafana"
+description = "Linkerd provides a web dashboard, as well as pre-configured Grafana dashboards."
+weight = 9
 [menu.l5d2docs]
   name = "Dashboard and Grafana"
-  parent = "Features"
+  parent = "features"
 +++
 
-In addition to its [command-line interface](../../cli), Linkerd provides a web
+In addition to its [command-line interface](/2/cli/), Linkerd provides a web
 dashboard and pre-configured Grafana dashboards.
 
 ## Linkerd Dashboard
@@ -38,5 +40,3 @@ The dashboards that are provided out of the box include:
 {{< gallery-item src="/images/screenshots/grafana-health.png" title="Linkerd Health" >}}
 
 {{< /gallery >}}
-
-

@@ -82,4 +82,4 @@ You can also visit Linkerd's admin UI directly in a web browser by navigating to
 port 9990 on your Docker host (typically `localhost`).
 
 For more information about Linkerd's admin capabilities, see the
-[Administration](/administration) page.
+[Administration](/1/administration/) page.

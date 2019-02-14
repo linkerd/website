@@ -1,10 +1,11 @@
 +++
 date = "2018-11-19T12:00:00-07:00"
 title = "Ingress"
+description = "Linkerd can work alongside your ingress controller of choice."
+weight = 6
 [menu.l5d2docs]
   name = "Ingress"
-  parent = "Features"
-  weight = "6"
+  parent = "features"
 aliases = [
   "/2/ingress/"
 ]
@@ -29,7 +30,7 @@ have Linkerd work the way you'd expect it to!
 ## Nginx
 
 This uses `emojivoto` as an example, take a look at
-[getting started](/2/getting-started) for a refresher on how to install it.
+[getting started](/2/getting-started/) for a refresher on how to install it.
 
 The sample ingress definition is:
 

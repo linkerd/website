@@ -16,7 +16,7 @@ commands:
 - name: dashboard
   description: Open the Linkerd dashboard in a web browser
 - name: get
-  description: Disply one or many mesh resources
+  description: Display one or many mesh resources
 - name: help
   description: Help about any command
 - name: install

@@ -1,23 +1,24 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "TCP Proxying and Protocol Detection"
+description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
+weight = 2
 [menu.l5d2docs]
   name = "TCP Proxying and Protocol Detection"
-  parent = "Features"
-  weight = "2"
+  parent = "features"
 aliases = [
   "/2/supported-protocols/"
 ]
 +++
 
 Linkerd is capable of proxying all TCP traffic, including TLS'd connections,
-WebSockets, and HTTP tunneling. 
+WebSockets, and HTTP tunneling.
 
 Linkerd performs *protocol detection* to determine whether traffic is HTTP or
 HTTP/2 (including gRPC). If Linkerd detects that a connection is using HTTP or
 HTTP/2, Linkerd will automatically provide HTTP-level metrics and routing
-without configuration from the user. (See [HTTP, HTTP/2, and gRPC
-Proxying](http-grpc) for more.)
+without configuration from the user. (See
+[HTTP, HTTP/2, and gRPC Proxying](../http-grpc/) for more.)
 
 If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2, Linkerd
 will proxy the connection, but will only be able to provide byte-level metrics.
@@ -70,4 +71,3 @@ their default ports (3306 and 25, respectively), then Linkerd will currently
 identify these protocols based on the port, and will not attempt to perform
 protocol detection. Thus, no extra configuration is necessary for plaintext
 MySQL and SMTP connections.
-

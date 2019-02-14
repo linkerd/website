@@ -40,13 +40,13 @@ The other advantage of storing dtabs in namerd is that these dtabs can be
 updated dynamically using [namerd's API]({{% namerdconfig "http-controller" %}}) or
 [command-line tool](https://github.com/linkerd/namerctl).  This allows you to
 perform operations like
-[canary, staging, or blue-green deploy](https://blog.buoyant.io/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/index.html#dynamic-routing-with-namerd),
+[canary, staging, or blue-green deploy](https://blog.buoyant.io/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd),
 all without needing to restart any Linkerds.
 
 ## More information
 
 To learn more about namerd, its setup, and its operation, check out Buoyant's
-blog post on [dynamic routing](https://blog.buoyant.io/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/index.html#dynamic-routing-with-namerd).
+blog post on [dynamic routing](https://blog.buoyant.io/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd).
 
 To configure your own namerd, head over to the
 [namerd config documention]({{% namerdconfig %}}).

@@ -16,11 +16,9 @@ Installing Linkerd is easy. First, you first install the CLI (command-line
 interface) onto your local machine. Using this CLI, you'll install the Linkerd
 control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
 services by adding the the data plane proxies. (See the
-[Architecture](../architecture) page for details.)
+[Architecture](../architecture/) page for details.)
 
 We'll walk you through this process step by step.
-
-____
 
 ## Step 0: Setup
 
@@ -55,8 +53,6 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER \
 In the next step, we will install the CLI and validate that your cluster is
 ready to install the control plane.
 
-____
-
 ## Step 1: Install the CLI
 
 If this is your first time running Linkerd, you’ll need to download the
@@ -87,8 +83,6 @@ linkerd version
 
 You should see the CLI version, and also "Server version: unavailable". This
 is because we haven't installed the control plane. We'll do that soon.
-
-____
 
 ## Step 2: Validate your Kubernetes cluster
 
@@ -134,7 +128,7 @@ running. If you're interested in what components were installed, you can run:
 kubectl -n linkerd get deploy
 ```
 
-Check out the [architecture](/2/architecture#control-plane) documentation for an
+Check out the [architecture](/2/architecture/#control-plane) documentation for an
 in depth explanation of what these components are and what they do.
 
 ## Step 4: Explore Linkerd
@@ -157,8 +151,6 @@ linkerd -n linkerd top deploy/linkerd-web
 ```
 
 This is the traffic you're generating by looking at the dashboard itself!
-
-____
 
 ## Step 5: Install the demo app
 
@@ -190,7 +182,7 @@ in all its glory.
 Clicking around, you might notice that some parts of the application are
 broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
-problem. Check out the [debugging guide](../debugging-an-app) if you're
+problem. Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)
 
 Next, let's add Linkerd to the Emojivoto app, by running:
@@ -225,8 +217,6 @@ the way it should with the data plane. To do this check, run:
 ```bash
 linkerd -n emojivoto check --proxy
 ```
-
-____
 
 ## Step 6: Watch it run!
 
@@ -286,14 +276,12 @@ page.
 
 {{< fig src="/images/getting-started/grafana.png" title="Deployment Detail Dashboard">}}
 
-____
-
 ## That’s it! 👏
 
 For more things you can do:
 
-- [Debug emojivoto](../debugging-an-app)
-- [Add Linkerd to your service](../adding-your-service)
-- [Learn more](../architecture) about Linkerd's architecture
+- [Debug emojivoto](../debugging-an-app/)
+- [Add Linkerd to your service](../adding-your-service/)
+- [Learn more](../architecture/) about Linkerd's architecture
 - Hop into the #linkerd2 channel on
   [the Linkerd Slack](https://slack.linkerd.io)

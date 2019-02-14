@@ -1,9 +1,11 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "Experimental: Automatic TLS"
+description = "Linkerd can be configured to automatically negotiate Transport Layer Security (TLS) for application communication."
+weight = 11
 [menu.l5d2docs]
   name = "Experimental: Automatic TLS"
-  parent = "Features"
+  parent = "features"
 aliases = [
   "/2/automatic-tls/"
 ]
