@@ -2,149 +2,15 @@ commands:
 - name: check
   link: true
   description: Check the Linkerd installation for potential problems
-  flags:
-  - name: --expected-version
-    arg: string
-    description: Overrides the version used when checking if Linkerd is running the latest version (mostly for testing)
-  - names: [-n,--namespace]
-    arg: string
-    description: Namespace to use for `--proxy` checks 
-    default: all
-  - name: --pre
-    description: Only run pre-installation checks, to determine if the control plane can be installed
-  - name: --proxy
-    description: Only run data-plane checks, to determine if the data plane is healthy
-  - name: --single-namespace
-    description: When running pre-installation checks (`--pre`), only check the permissions required to operate the control plane in a single namespace
-  - name: --wait
-    arg: duration
-    description: Retry and wait for some checks to succeed if they don't pass the first time
-    default: 5m0s
 - name: inject
   link: true
   description: Add the Linkerd proxy to a Kubernetes config. The `inject` command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl.
-  flags:
-  - name: --api-port
-    arg: uint
-    description: Port where the Linkerd controller is running
-    default: 8086
-    example: 9045
-  - name: --control-port
-    arg: uint
-    description: Proxy port to use for control
-    default: 4190
-    example: 5431
-  - name: --disable-external-profiles
-    description: Disables service profiles for non-Kubernetes services
-  - name: --image-pull-policy
-    arg: string
-    description: Docker image pull policy
-    default: IfNotPresent
-    example: Always
-  - name: --inbound-port
-    arg: uint
-    description: Proxy port to use for inbound traffic
-    default: 4143
-    example: 1234
-  - name: --init-image
-    arg: string
-    description: Linkerd init container image name
-    default: gcr.io/linkerd-io/proxy-init
-    example: quay.io/org/imagename
-  - names: [--linkerd-version,-v]
-    arg: string
-    description: Tag to be used for Linkerd images
-    default: stable-2.1.0
-    example: 1.0.0
-  - name: --metrics-port
-    arg: uint
-    description: Proxy port to serve metrics on
-    default: 4191
-    example: 10234
-  - name: --outbound-port
-    arg: uint
-    description: Proxy port to use for outbound traffic
-    default: 4140
-    example: 1234
-  - name: --proxy-bind-timeout
-    arg: duration
-    description: Timeout the proxy will us
-    default: 10s
-    example: 30s
-  - name: --proxy-cpu
-    arg: float
-    description: Amount of CPU units that the proxy sidecar requests
-    example: 10m
-  - name: --proxy-image
-    arg: string
-    description: Linkerd proxy container image name
-    default: gcr.io/linkerd-io/proxy
-    example: quay.io/org/imagename
-  - name: --proxy-log-level
-    arg: string
-    description: Log level for the proxy
-    default: warn,linkerd2_proxy=info
-    example: info,linkder2_proxy=debug
-  - name: --proxy-memory
-    arg: uint
-    description: Amount of Memory that the proxy sidecar requests
-    example: 50Mi
-  - name: --proxy-uid
-    arg: int
-    description: Run the proxy under this user ID
-    default: 2012
-    example: 123
-  - name: --registry
-    arg: string
-    description: Docker registry to pull images from
-    default: gcr.io/linkerd-io
-    example: quay.io/ygrene
-  - name: --skip-inbound-ports
-    arg: uintSlice
-    description: Ports that should skip the proxy and send directly to the application
-    default: "[]"
-    example: "25,26,27"
-  - name: --skip-outbound-ports
-    arg: uintSlice
-    description: Outbound ports that should skip the proxy
-    default: "[]"
-    example: "25,3306,5432"
-  - name: --tls
-    arg: string
-    description: |
-      Enable TLS. Valid settings: `optional`.
-    example: optional
 - name: routes
   link: true
   description: |
     Display route stats.
 
     The `route` command will only display traffic sent to a service with a defined Service Profile.
-  flags:
-  - names: [--namespace,-n]
-    arg: string
-    description: |
-      Namespace of the specified resource
-    default: default 
-    example: emojivoto
-  - names: [--output,-o]
-    arg: string
-    description: Output format. Currently only `table`, `wide`, and `json` are supported.
-    default: table
-    example: wide 
-  - names: [--time-window,-t]
-    arg: duration
-    description: Stat window, e.g. `10s`, `1m`, `10m`, `1h`, etc.
-    default: 1m
-    example: 30s
-  - name: --to
-    arg: string
-    description: If present, shows outbound stats to the specified resources
-    example: deploy/webapp
-  - name: --to-namespace
-    arg: string
-    description: Sets the namespace used to look up the `--to` resources. By default, the current `--namespace` is used.
-    example: emojivoto
 - name: completion
   description: Shell completion
 - name: dashboard
@@ -166,17 +32,14 @@ commands:
 - name: version
   description: Print the client and server version information
 globalflags:
-- name: --api-addr
-  arg: string
-  description: Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
-- name: --context
-  arg: string
-  description: Name of the kubeconfig context to use
-- names: [--linkerd-namespace,-l]
-  arg: string
-  description: |
+- name: api-addr
+  usage: Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: linkerd-namespace
+  shorthand: l
+  usage: |
     The namespace in which Linkerd is installed.
-    
+
     Can also be set using the `LINKERD_NAMESPACE` environment variable.
-  env: LINKERD_NAMESPACE
-  default: linkerd
+  default_value: linkerd
