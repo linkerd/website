@@ -167,13 +167,11 @@ curl -sL https://run.linkerd.io/emojivoto.yml \
 Before we mesh it, let's take a look at the app. If you're using [Docker for
 Desktop](https://www.docker.com/products/docker-desktop) at this point you can
 visit [http://localhost](http://localhost) directly.  If you're not using
-Docker for Desktop, we'll need to forward the `web` pod. To forward `web`
-locally to port 8080, you can run:
+Docker for Desktop, we'll need to forward the `web-svc` service. To forward
+`web-svc` locally to port 8080, you can run:
 
 ```bash
-kubectl -n emojivoto port-forward \
-  $(kubectl -n emojivoto get po -l app=web-svc -oname | cut -d/ -f 2) \
-  8080:80
+kubectl -n emojivoto port-forward svc/web-svc 8080:80
 ```
 
 Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto app
