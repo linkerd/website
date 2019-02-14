@@ -374,6 +374,11 @@ Example failure:
     Error calling Prometheus from the control plane: FAIL
 ```
 
+Note: this will fail if you have changed your default cluster domain from
+`cluster.local`, see the
+[associated issue](https://github.com/linkerd/linkerd2/issues/1720) for more
+information and potential workarounds.
+
 Validate that the Prometheus instance is up and running:
 
 ```bash
