@@ -171,9 +171,7 @@ Docker for Desktop, we'll need to forward the `web` pod. To forward `web`
 locally to port 8080, you can run:
 
 ```bash
-kubectl -n emojivoto port-forward \
-  $(kubectl -n emojivoto get po -l app=web-svc -oname | cut -d/ -f 2) \
-  8080:80
+kubectl -n emojivoto port-forward svc/web-svc 8080:80
 ```
 
 Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto app
