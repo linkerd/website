@@ -3,7 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Getting Started"
 [menu.l5d2docs]
   name = "Getting Started"
-  weight = 3
+  weight = 2
 +++
 
 Welcome to Linkerd! 🎈
@@ -128,8 +128,9 @@ running. If you're interested in what components were installed, you can run:
 kubectl -n linkerd get deploy
 ```
 
-Check out the [architecture](/2/architecture/#control-plane) documentation for an
-in depth explanation of what these components are and what they do.
+Check out the [architecture](/2/reference/architecture/#control-plane)
+documentation for an in depth explanation of what these components are and what
+they do.
 
 ## Step 4: Explore Linkerd
 

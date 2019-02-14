@@ -1,16 +1,20 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "Adding Your Service"
+description = "Add your service to the mesh by injecting it."
+aliases = [
+  "/2/adding-your-service/"
+]
 [menu.l5d2docs]
   name = "Adding Your Service"
-  weight = 6
+  parent = "tasks"
 +++
 
 In order for your service to take advantage of Linkerd, it needs to have the
 proxy sidecar added to its resource definition. This is done by using the
-Linkerd [CLI](../architecture/#cli) to update the definition and output YAML
-that can be passed to `kubectl`. By using Kubernetes' rolling updates, the
-availability of your application will not be affected.
+Linkerd [CLI](/2/reference/architecture/#cli) to update the definition
+and output YAML that can be passed to `kubectl`. By using Kubernetes' rolling
+updates, the availability of your application will not be affected.
 
 To add Linkerd to your service, run:
 
@@ -40,5 +44,4 @@ linkerd dashboard
 ## Inject Reference
 
 For more information on how the inject command works and all of the parameters
-that can be set, look at the [reference](../cli/inject/).
-
+that can be set, look at the [reference](/2/reference/cli/inject/).

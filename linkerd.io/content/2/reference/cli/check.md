@@ -32,8 +32,7 @@ linkerd check --proxy
 ```
 
 For resolutions to common `linkerd check` failures, have a look at
-[Resolutions for linkerd check failures](/2/installing/#check).
-
+[Resolutions for linkerd check failures](/2/tasks/troubleshooting/).
 
 # Example output
 

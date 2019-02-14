@@ -1,16 +1,20 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
-title = "Upgrade"
+title = "Upgrading Linkerd"
+description = "Upgrade Linkerd to the latest version."
+aliases = [
+  "/2/upgrade/"
+]
 [menu.l5d2docs]
-  name = "Upgrade Linkerd"
-  weight = 5
+  name = "Upgrade"
+  parent = "tasks"
 +++
 
 There are three components that need to be upgraded:
 
-- [CLI](/2/architecture/#cli)
-- [Control Plane](/2/architecture/#control-plane)
-- [Data Plane](/2/architecture/#data-plane)
+- [CLI](/2/reference/architecture/#cli)
+- [Control Plane](/2/reference/architecture/#control-plane)
+- [Data Plane](/2/reference/architecture/#data-plane)
 
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.

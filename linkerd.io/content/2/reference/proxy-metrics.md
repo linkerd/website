@@ -1,13 +1,14 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Proxy Metrics Reference"
+title = "Proxy Metrics"
 description = "The Linkerd proxy natively exports Prometheus metrics for all incoming and outgoing traffic."
 aliases = [
-  "/2/proxy-metrics/"
+  "/2/proxy-metrics/",
+  "/2/observability/proxy-metrics/"
 ]
 [menu.l5d2docs]
-  name = "Proxy Metrics Reference"
-  parent = "observability"
+  name = "Proxy Metrics"
+  parent = "reference"
 +++
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the
