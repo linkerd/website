@@ -1,6 +1,6 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
-title = "Install Linkerd"
+title = "Installing Linkerd"
 description = "Install Linkerd to your own Kubernetes cluster."
 aliases = [
   "/2/upgrading/",
