@@ -1,3 +1,2 @@
-{{ $cli     := site.Data.cli }}
-{{ $flags   := $cli.globalflags }}
-{{ partial "flags.html" $flags }}
+{{ $flags   := site.Data.cli.globalflags }}
+{{ partial "flags.html" (dict "flags" $flags) }}

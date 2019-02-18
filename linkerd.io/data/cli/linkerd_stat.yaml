@@ -1,0 +1,121 @@
+name: linkerd stat
+synopsis: Display traffic stats about one or many resources
+description: |-
+  Display traffic stats about one or many resources.
+
+    The RESOURCES argument specifies the target resource(s) to aggregate stats over:
+    (TYPE [NAME] | TYPE/NAME)
+    or (TYPE [NAME1] [NAME2]...)
+    or (TYPE1/NAME1 TYPE2/NAME2...)
+
+    Examples:
+    * deploy
+    * deploy/my-deploy
+    * deploy/ po/
+    * ds/my-daemonset
+    * ns/my-ns
+    * po/mypod1 rc/my-replication-controller
+    * po mypod1 mypod2
+    * rc/my-replication-controller
+    * sts/my-statefulset
+    * authority
+    * au/my-authority
+    * all
+
+    Valid resource types include:
+    * daemonsets
+    * deployments
+    * namespaces
+    * pods
+    * replicationcontrollers
+    * statefulsets
+    * authorities (not supported in --from)
+    * jobs (only supported as a --from or --to)
+    * services (only supported if a --from is also specified, or as a --to)
+    * all (all resource types, not supported in --from or --to)
+
+  This command will hide resources that have completed, such as pods that are in the Succeeded or Failed phases.
+  If no resource name is specified, displays stats about all resources of the specified RESOURCETYPE
+options:
+- name: all-namespaces
+  default_value: "false"
+  usage: |
+    If present, returns stats across all namespaces, ignoring the "--namespace" flag
+- name: from
+  usage: |
+    If present, restricts outbound stats from the specified resource name
+- name: from-namespace
+  usage: |
+    Sets the namespace used from lookup the "--from" resource; by default the current "--namespace" is used
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for stat
+- name: namespace
+  shorthand: "n"
+  default_value: default
+  usage: Namespace of the specified resource
+- name: output
+  shorthand: o
+  usage: |
+    Output format; currently only "table" (default) and "json" are supported
+- name: time-window
+  shorthand: t
+  default_value: 1m
+  usage: 'Stat window (for example: "10s", "1m", "10m", "1h")'
+- name: to
+  usage: |
+    If present, restricts outbound stats to the specified resource name
+- name: to-namespace
+  usage: |
+    Sets the namespace used to lookup the "--to" resource; by default the current "--namespace" is used
+inherited_options:
+- name: api-addr
+  usage: |
+    Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests
+- name: linkerd-namespace
+  shorthand: l
+  default_value: linkerd
+  usage: Namespace in which Linkerd is installed [$LINKERD_NAMESPACE]
+- name: verbose
+  default_value: "false"
+  usage: Turn on debug logging
+example: |2-
+    # Get all deployments in the test namespace.
+    linkerd stat deployments -n test
+
+    # Get the hello1 replication controller in the test namespace.
+    linkerd stat replicationcontrollers hello1 -n test
+
+    # Get all namespaces.
+    linkerd stat namespaces
+
+    # Get all inbound stats to the web deployment.
+    linkerd stat deploy/web
+
+    # Getl all inbound stats to the pod1 and pod2 pods
+    linkerd stat po pod1 pod2
+
+    # Getl all inbound stats to the pod1 pod and the web deployment
+    linkerd stat po/pod1 deploy/web
+
+    # Get all pods in all namespaces that call the hello1 deployment in the test namesapce.
+    linkerd stat pods --to deploy/hello1 --to-namespace test --all-namespaces
+
+    # Get all pods in all namespaces that call the hello1 service in the test namesapce.
+    linkerd stat pods --to svc/hello1 --to-namespace test --all-namespaces
+
+    # Get all services in all namespaces that receive calls from hello1 deployment in the test namespace.
+    linkerd stat services --from deploy/hello1 --from-namespace test --all-namespaces
+
+    # Get all namespaces that receive traffic from the default namespace.
+    linkerd stat namespaces --from ns/default
+
+    # Get all inbound stats to the test namespace.
+    linkerd stat ns/test
+see_also:
+- linkerd - linkerd manages the Linkerd service mesh

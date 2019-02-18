@@ -1,0 +1,62 @@
+name: linkerd check
+synopsis: Check the Linkerd installation for potential problems
+description: |-
+  Check the Linkerd installation for potential problems.
+
+  The check command will perform a series of checks to validate that the linkerd
+  CLI and control plane are configured correctly. If the command encounters a
+  failure it will print additional information about the failure and exit with a
+  non-zero exit code.
+options:
+- name: expected-version
+  usage: |
+    Overrides the version used when checking if Linkerd is running the latest version (mostly for testing)
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for check
+- name: namespace
+  shorthand: "n"
+  usage: |
+    Namespace to use for --proxy checks (default: all namespaces)
+- name: pre
+  default_value: "false"
+  usage: |
+    Only run pre-installation checks, to determine if the control plane can be installed
+- name: proxy
+  default_value: "false"
+  usage: |
+    Only run data-plane checks, to determine if the data plane is healthy
+- name: single-namespace
+  default_value: "false"
+  usage: |
+    When running pre-installation checks (--pre), only check the permissions required to operate the control plane in a single namespace
+- name: wait
+  default_value: 5m0s
+  usage: Maximum allowed time for all tests to pass
+inherited_options:
+- name: api-addr
+  usage: |
+    Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests
+- name: linkerd-namespace
+  shorthand: l
+  default_value: linkerd
+  usage: Namespace in which Linkerd is installed [$LINKERD_NAMESPACE]
+- name: verbose
+  default_value: "false"
+  usage: Turn on debug logging
+example: |2-
+    # Check that the Linkerd control plane is up and running
+    linkerd check
+
+    # Check that the Linkerd control plane can be installed in the "test" namespace
+    linkerd check --pre --linkerd-namespace test
+
+    # Check that the Linkerd data plane proxies in the "app" namespace are up and running
+    linkerd check --proxy --namespace app
+see_also:
+- linkerd - linkerd manages the Linkerd service mesh

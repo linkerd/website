@@ -1,0 +1,49 @@
+name: linkerd endpoints
+synopsis: Introspect Linkerd's service discovery state
+description: |-
+  Introspect Linkerd's service discovery state.
+
+  This command provides debug information about the internal state of the
+  control-plane's proxy-api container. Note that this cache of service discovery
+  information is populated on-demand via linkerd-proxy requests. This command
+  will return "No endpoints found." until a linkerd-proxy begins routing
+  requests.
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for endpoints
+- name: namespace
+  shorthand: "n"
+  usage: |
+    Namespace of the specified endpoints (default: all namespaces)
+- name: output
+  shorthand: o
+  usage: |
+    Output format; currently only "table" and "json" are supported (default "table")
+inherited_options:
+- name: api-addr
+  usage: |
+    Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests
+- name: linkerd-namespace
+  shorthand: l
+  default_value: linkerd
+  usage: Namespace in which Linkerd is installed [$LINKERD_NAMESPACE]
+- name: verbose
+  default_value: "false"
+  usage: Turn on debug logging
+example: |2-
+    # get all endpoints
+    linkerd endpoints
+
+    # get endpoints in the emojivoto namespace
+    linkerd endpoints -n emojivoto
+
+    # get all endpoints in json
+    linkerd endpoints -o json
+see_also:
+- linkerd - linkerd manages the Linkerd service mesh

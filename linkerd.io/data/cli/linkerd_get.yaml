@@ -1,0 +1,42 @@
+name: linkerd get
+synopsis: Display one or many mesh resources
+description: |-
+  Display one or many mesh resources.
+
+  Only pod resources (aka pods, po) are supported.
+options:
+- name: all-namespaces
+  default_value: "false"
+  usage: |
+    If present, returns pods across all namespaces, ignoring the "--namespace" flag
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for get
+- name: namespace
+  shorthand: "n"
+  default_value: default
+  usage: Namespace of pods
+inherited_options:
+- name: api-addr
+  usage: |
+    Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+- name: context
+  usage: Name of the kubeconfig context to use
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests
+- name: linkerd-namespace
+  shorthand: l
+  default_value: linkerd
+  usage: Namespace in which Linkerd is installed [$LINKERD_NAMESPACE]
+- name: verbose
+  default_value: "false"
+  usage: Turn on debug logging
+example: |2-
+    # get all pods
+    linkerd get pods
+
+    # get pods from namespace linkerd
+    linkerd get pods --namespace linkerd
+see_also:
+- linkerd - linkerd manages the Linkerd service mesh

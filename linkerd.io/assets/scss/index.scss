@@ -65,10 +65,9 @@ footer li {
   }
 
   .table td {
-    min-width: $table-cell-min-width;
-
     &.cli {
-      white-space: nowrap;
+      word-break: keep-all;
+      min-width: 20%;
     }
   }
 
