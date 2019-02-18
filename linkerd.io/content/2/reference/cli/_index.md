@@ -1,12 +1,16 @@
 +++
 date = "2018-09-17T08:00:00-07:00"
-title = "Overview"
+title = "CLI"
+description = "Reference documentation for all the CLI commands."
+aliases = [
+  "/2/cli/"
+]
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]
   name = "CLI"
+  parent = "reference"
   identifier = "cli"
-  weight = 8
 +++
 
 The Linkerd CLI is the primary way to interact with Linkerd. It can install the

@@ -1,18 +1,19 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
-title = "Debugging a Failing Application"
+title = "Debugging Your Service"
+description = "Linkerd makes it easy to debug a failing application. Check out how to do it yourself with Emojivoto."
 aliases = [
   "/2/debugging-an-app/"
 ]
 [menu.l5d2docs]
-  name = "Debugging"
-  weight = 10
+  name = "Debugging Your Service"
+  parent = "tasks"
 +++
 
 The demo application emojivoto has some issues. Let's use that and Linkerd to
 diagnose an application that fails in ways which are a little more subtle than
 the entire service crashing. This guide assumes that you've followed the steps in the
-[Getting Started](../getting-started/) guide and have Linkerd and the demo
+[Getting Started](/2/getting-started/) guide and have Linkerd and the demo
 application running in a Kubernetes cluster. If you've not done that yet, go get
 started and come back when you're done!
 

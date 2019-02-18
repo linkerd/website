@@ -1,7 +1,8 @@
 <dl class="row px-2">
 {{ $currentPage := .Page }}
-{{ range $index, $page := .Page.Site.Pages }}
-  {{ if and (ne .Title "Overview") ($currentPage.IsAncestor .) }}
+{{ $subPages := .Page.Pages | append .Page.Sections }}
+{{ range $index, $page := sort $subPages "Title" }}
+  {{ if (ne $page $currentPage) }}
       <dt class="col-sm-3 border-top pt-2">
         <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
       </dt>

@@ -1,9 +1,13 @@
 +++
 date = "2018-09-10T12:00:00-07:00"
 title = "Architecture"
+description = "Deep dive into the architecture of Linkerd."
+aliases = [
+  "/2/architecture/"
+]
 [menu.l5d2docs]
   name = "Architecture"
-  weight = 2
+  parent = "reference"
 +++
 
 At a high level, Linkerd consists of a *control plane* and a *data plane*.
@@ -28,7 +32,7 @@ Kubernetes namespace (`linkerd` by default). These services accomplish various
 things---aggregating telemetry data, providing a user-facing API, providing
 control data to the data plane proxies, etc. Together, they drive the behavior
 of the data plane. The CLI can be used to
-[install the control plane](../getting-started/).
+[install the control plane](/2/getting-started/).
 
 The control plane is made up of four components:
 
@@ -57,8 +61,8 @@ as sidecar containers alongside each instance of your service code. In order to
 redeployed to include a data plane proxy in each pod. (The `linkerd inject`
 command accomplishes this, as well as the configuration work necessary to
 transparently funnel traffic from each instance through the proxy.) You can
-[add your service](../adding-your-service/) to the data plane with a single CLI
-command.
+[add your service](/2/tasks/adding-your-service/) to the data plane with a
+single CLI command.
 
 These proxies transparently intercept communication to and from each pod, and
 add features such as instrumentation and encryption (TLS), as well as allowing

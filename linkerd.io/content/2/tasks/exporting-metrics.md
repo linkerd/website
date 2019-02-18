@@ -1,14 +1,15 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "Exporting Metrics"
-description = "Getting metrics out of Linkerd's Prometheus and into your own metrics store."
+description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
 aliases = [
   "/2/prometheus/",
-  "/2/observability/prometheus"
+  "/2/observability/prometheus/",
+  "/2/observability/exporting-metrics/"
 ]
 [menu.l5d2docs]
-  name = "Exporting Metrics"
-  parent = "observability"
+  name = "Export Metrics"
+  parent = "tasks"
 +++
 
 By design, Linkerd only keeps metrics data for a short, fixed window of time
@@ -62,7 +63,7 @@ metrics from Linkerd's internal Prometheus instance.
 Once the metrics are in your Prometheus, Linkerd's proxy metrics will have the
 label `job="linkerd-proxy"` and Linkerd's control plane metrics will have the
 label `job="linkerd-controller"`. For more information on specific metric and
-label definitions, have a look at [Proxy Metrics](../proxy-metrics/).
+label definitions, have a look at [Proxy Metrics](/2/reference/proxy-metrics/).
 
 For more information on Prometheus' `/federate` endpoint, have a look at the
 [Prometheus federation docs](https://prometheus.io/docs/prometheus/latest/federation/).
