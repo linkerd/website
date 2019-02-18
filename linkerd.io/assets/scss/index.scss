@@ -64,13 +64,6 @@ footer li {
     border-top: 0px !important;
   }
 
-  .table td {
-    &.cli {
-      word-break: keep-all;
-      min-width: 20%;
-    }
-  }
-
   .table td,th {
     border-top: 0px;
   }

@@ -1,8 +1,6 @@
 +++
 date = "2016-09-23T13:43:54-07:00"
-title = "Check"
-description = "Check the Linkerd installation for potential problems."
-weight = 1
+title = "check"
 aliases = [
   "/2/check-reference/"
 ]
@@ -11,28 +9,12 @@ aliases = [
   parent = "cli"
 +++
 
-The `linkerd check` command validates the Linkerd installation for potential
-problems, at varying stages of the Linkerd installation lifecycle.
+{{< cli/description "check" >}}
 
-Prior to running `linkerd install`, we recommend running prerequisite checks to
-ensure you cluster is ready for installation:
-```bash
-linkerd check --pre
-```
+Take a look at the [troubleshooting](/2/tasks/troubleshooting/) documentation
+for a full list of all the possible checks, what they do and how to fix them.
 
-Once Linkerd is installed, you can run the default check command:
-```bash
-linkerd check
-```
-
-To validate a `linkerd inject` command succeeded, you can run additional checks
-to verify each `linkerd-proxy` is operating normally:
-```bash
-linkerd check --proxy
-```
-
-For resolutions to common `linkerd check` failures, have a look at
-[Resolutions for linkerd check failures](/2/tasks/troubleshooting/).
+{{< cli/examples "check" >}}
 
 # Example output
 
@@ -78,6 +60,4 @@ control-plane-version
 Status check results are √
 ```
 
-# Flags
-
-{{< flags "check" >}}
+{{< cli/flags "check" >}}

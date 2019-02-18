@@ -1,8 +1,6 @@
 +++
 date = "2018-08-28T08:00:00-07:00"
-title = "Inject"
-description = "The inject command makes it easy to add Linkerd to your service. It consumes Kubernetes resources in YAML format and adds the proxy sidecar. The output is in a format that can be immediately applied to the cluster via kubectl."
-weight = 2
+title = "inject"
 aliases = [
   "/2/inject-reference/"
 ]
@@ -156,6 +154,6 @@ status: {}
 ---
 ```
 
-# Flags
+{{< cli/examples "inject" >}}
 
-{{< flags "inject" >}}
+{{< cli/flags "inject" >}}

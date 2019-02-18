@@ -1,0 +1,5 @@
+{{ if .Description }}
+{{ .Description | markdownify }}
+{{ else }}
+{{ .Synopsis | markdownify }}
+{{ end }}

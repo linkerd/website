@@ -1,8 +1,6 @@
 +++
 date = "2019-02-06T11:47:57-08:00"
-title = "Routes"
-description = "The routes command displays per-route service metrics."
-weight = 3
+title = "routes"
 [menu.l5d2docs]
   name = "routes"
   parent = "cli"
@@ -12,6 +10,7 @@ The `routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
 create a service profile, see [service profiles](/2/features/service-profiles/).
+and the [profile](/2/reference/cli/profile/) command reference.
 
 # Inbound Metrics
 
@@ -62,6 +61,6 @@ information.
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
 
-# Flags
+{{< cli/examples "routes" >}}
 
-{{< flags "routes" >}}
+{{< cli/flags "routes" >}}

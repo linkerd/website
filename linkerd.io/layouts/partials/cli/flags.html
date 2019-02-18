@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Flag
+      </th>
+      <th>
+        Usage
+      </th>
+      <th>
+        Default
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    <tr>
+      <td>
+        <code class="text-nowrap">--{{ .Name }}</code>
+        {{ with .Shorthand }}
+        <br>
+        <code>-{{ . }}</code>
+        {{ end }}
+      </td>
+      <td>
+        {{ .Usage | markdownify }}
+      </td>
+      <td>
+        {{ with .DefaultValue }}
+        <code>{{ . }}</code>
+        {{ end }}
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
