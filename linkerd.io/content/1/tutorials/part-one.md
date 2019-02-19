@@ -4,7 +4,15 @@ title = "I. Top-line service metrics"
 description = "What is a service mesh, and how is it used by cloud native apps—apps designed for the cloud? In this tutorial, we’ll show you how to use Linkerd as a service mesh."
 weight = 2
 aliases = [
-  "/tutorials/part-one"
+  "/tutorials/part-one/",
+  "/tutorials/part-five/",
+  "/tutorials_staging/part-five/",
+  "/tutorials_staging/part-six/",
+  "/tutorials_staging/part-seven/",
+  "/tutorials_staging/part-eight/",
+  "/tutorials_staging/part-nine/",
+  "/tutorials_staging/part-ten/",
+  "/tutorials_staging/part-eleven/"
 ]
 [menu.docs]
   parent = "tutorials"

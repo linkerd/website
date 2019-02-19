@@ -6,8 +6,6 @@ weight = 1
 aliases = [
   "/features"
 ]
-[sitemap]
-  priority = 1.0
 [menu.docs]
   name = "Features"
   identifier = "features"

@@ -3,7 +3,8 @@ date = "2018-09-10T12:00:00-07:00"
 title = "Upgrading Linkerd"
 description = "Upgrade Linkerd to the latest version."
 aliases = [
-  "/2/upgrade/"
+  "/2/upgrade/",
+  "/2/update/"
 ]
 [menu.l5d2docs]
   name = "Upgrade"

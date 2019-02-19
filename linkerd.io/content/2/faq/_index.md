@@ -2,6 +2,10 @@
 date = "2018-09-17T08:00:00-07:00"
 title = "Frequently Asked Questions"
 include_toc = true
+aliases = [
+  "/doc/0.1.0/faq/",
+  "/2/roadmap/"
+]
 [sitemap]
   priority = 1.0
 [menu.l5d2docs]

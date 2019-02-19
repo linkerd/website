@@ -4,9 +4,6 @@ title = "Part IX: gRPC for fun and profit"
 description = "As of Linkerd 0.8.5, released earlier this year, Linkerd supports gRPC and HTTP/2!"
 weight = 10
 draft = true
-aliases = [
-  "/tutorials_staging/part-nine"
-]
 [menu.docs]
   parent = "tutorials"
 +++
