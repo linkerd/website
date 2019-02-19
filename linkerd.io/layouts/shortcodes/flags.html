@@ -1,8 +1,0 @@
-{{ $command  := .Get 0 }}
-{{ $filename := printf "linkerd_%s" $command }}
-{{ $cli      := index site.Data.cli $filename }}
-{{ $flags    := $cli.options }}
-{{ $example  := $cli.example }}
-
-{{ partial "flags.html" (dict "flags" $flags "example" $example) }}
-
