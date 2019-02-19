@@ -6490,10 +6490,9 @@ footer li {
 .docs-content dt:first-child, .docs-content dd:nth-child(2) {
   border-top: 0px !important; }
 
-.docs-content .table td {
-  min-width: 10em; }
-  .docs-content .table td.cli {
-    white-space: nowrap; }
+.docs-content .table td.cli {
+  word-break: keep-all;
+  min-width: 20%; }
 
 .docs-content .table td, .docs-content th {
   border-top: 0px; }
