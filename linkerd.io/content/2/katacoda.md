@@ -1,8 +1,6 @@
 +++
 date = "2018-11-02T00:00:00+00:00"
 title = "Congratulations!"
-[sitemap]
-  priority = 1.0
 +++
 
 Check out what else you can do with Linkerd.

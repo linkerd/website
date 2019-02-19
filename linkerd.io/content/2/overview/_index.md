@@ -1,7 +1,15 @@
 +++
 date = "2018-07-31T12:00:00-07:00"
 title = "Overview"
-aliases = "/docs"
+aliases = [
+  "/docs",
+  "/documentation",
+  "/2/docs/",
+  "/doc/network-performance/",
+  "/in-depth/network-performance/",
+  "/in-depth/debugging-guide/",
+  "/in-depth/concepts/"
+]
 [menu.l5d2docs]
   name = "Overview"
   weight = 1

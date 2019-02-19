@@ -4,10 +4,9 @@ title = "Installing Linkerd"
 description = "Install Linkerd to your own Kubernetes cluster."
 aliases = [
   "/2/upgrading/",
-  "/2/installing/"
+  "/2/installing/",
+  "/2/rbac/"
 ]
-[sitemap]
-  priority = 1.0
 [menu.l5d2docs]
   name = "Install"
   parent = "tasks"

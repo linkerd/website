@@ -5,8 +5,6 @@ description = "Reference documentation for all the CLI commands."
 aliases = [
   "/2/cli/"
 ]
-[sitemap]
-  priority = 1.0
 [menu.l5d2docs]
   name = "CLI"
   parent = "reference"

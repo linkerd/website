@@ -2,8 +2,6 @@
 date = "2019-02-13T08:00:00-07:00"
 title = "Troubleshooting"
 description = "Troubleshoot issues with your Linkerd installation."
-[sitemap]
-  priority = 1.0
 [menu.l5d2docs]
   name = "Troubleshooting"
   parent = "tasks"

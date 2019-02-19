@@ -26,8 +26,6 @@ aliases = [
   "/doc/guides",
   "/getting-started"
 ]
-[sitemap]
-  priority = 1.0
 [menu.docs]
   name = "Getting Started"
   identifier = "getting-started"

@@ -3,6 +3,7 @@ date = "2018-07-31T12:00:00-07:00"
 title = "Debugging Your Service"
 description = "Linkerd makes it easy to debug a failing application. Check out how to do it yourself with Emojivoto."
 aliases = [
+  "/debugging-an-app/",
   "/2/debugging-an-app/"
 ]
 [menu.l5d2docs]

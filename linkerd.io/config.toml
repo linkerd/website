@@ -4,9 +4,6 @@ languageCode = "en-US"
 Paginate = 10
 sectionPagesMenu = "main"
 
-# Disable default `category` and `tag` taxonomies, to avoid sitemap error
-[taxonomies]
-
 #CUSTOM PARAMS
 [params]
   latest_release_version = "1.6.1"
