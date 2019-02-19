@@ -5,63 +5,67 @@ description = "Linkerd can be configured to perform service-specific retries and
 weight = 3
 +++
 
+Automatic retries are one the most powerful and useful mechanisms a service mesh
+has for gracefully handling partial or transient application failures. If
+implemented incorrectly retries can amplify small errors into system wide
+outages. For that reason, we made sure they were implemented in a way that would
+increase the reliability of the system while limiting the risk.
+
+Timeouts work hand in hand with retries. Once requests are retried a certain
+number of times, it becomes important to limit the total amount of time a client
+waits before giving up entirely. Imagine a number of retries forcing a client
+to wait for 10 seconds.
+
 A [service profile](/2/features/service-profiles/) may define certain routes as
 retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
 perform the appropriate retries or timeouts when calling that service.  Retries
 and timeouts are always performed on the *outbound* (client) side.
 
-## Retries
+These can be setup by following the guides:
 
-A route in a service profile may be marked as retryable by setting the
-`isRetryable` property to `true`.  This tells Linkerd that the route is safe to
-retry and will cause Linkerd to retry any failed requests until either the
-timeout is reached or the retry budget is exceeded (see below).
+- [Configuring Retries](/2/tasks/configuring-retries/)
+- [Configuring Timeouts](/2/tasks/configuring-timeouts/)
 
-Example:
+# How Retries Can Go Wrong
 
-```yaml
-  - condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    name: HEAD /authors/{id}.json
-    isRetryable: true
-```
+Traditionally, when performing retries, you must specify a maximum number of
+retry attempts before giving up. Unfortunately, there are two major problems
+with configuring retries this way.
 
-Note that to avoid excessive buffering in the proxy, requests with bodies will
-never be retried.
+- Choosing a maximum number of retry attempts is a guessing game.
 
-### Retry Budgets
+You need to pick a number that’s high enough to make a difference; allowing
+more than one retry attempt is usually prudent and, if your service is less
+reliable, you’ll probably want to allow several retry attempts. On the other
+hand, allowing too many retry attempts can generate a lot of extra requests and
+extra load on the system. Performing a lot of retries can also seriously
+increase the latency of requests that need to be retried. In practice, you
+usually pick a maximum retry attempts number out of a hat (3?) and then tweak
+it through trial and error until the system behaves roughly how you want it to.
 
-A retry budget is a mechanism that limits the number of retries that can be
-performed against a service as a percentage of original requests.  This
-prevents retries from overwhelming your system.  By default, retries may add  at
-most an additional 20% to the request load (plus an additional 10 "free"
-retries per second).  These settings can be adjusted by setting a `retryBudget`
-on your service profile.
+- Systems configured this way are vulnerable to retry storms.
 
-Example:
+A [retry storm](https://twitter.github.io/finagle/guide/Glossary.html)
+begins when one service starts (for any reason) to experience a larger than
+normal failure rate. This causes its clients to retry those failed requests.
+The extra load from the retries causes the service to slow down further and
+fail more requests, triggering more retries. If each client is configured to
+retry up to 3 times, this can quadruple the number of requests being sent! To
+make matters even worse, if any of the clients’ clients are configured with
+retries, the number of retries compounds multiplicatively and can turn a small
+number of errors into a self-inflicted denial of service attack.
 
-```yaml
-spec:
-  retryBudget:
-    retryRatio: 0.2
-    minRetriesPerSecond: 10
-    ttl: 10s
-```
+# Retry Budgets to the Rescue
 
-## Timeouts
+To avoid the problems of retry storms and arbitrary numbers of retry attempts,
+retries are configured using retry budgets. Rather than specifying a fixed
+maximum number of retry attempts per request, Linkerd keeps track of the ratio
+between regular requests and retries and keeps this number below a configurable
+limit. For example, you may specify that you want retries to add at most 20%
+more requests. Linkerd will then retry as much as it can while maintaining that
+ratio.
 
-Each route may define a timeout which specifies the maximum amount of time to
-wait for a response (including retries) to complete after the request is sent.
-If this timeout is reached, Linkerd will cancel the request, and return a 504
-response.  If unspecified, the default timeout is 10 seconds.
-
-Example:
-
-```yaml
-  - condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    name: HEAD /authors/{id}.json
-    timeout: 300ms
-```
+Configuring retries is always a trade-off between improving success rate and
+not adding too much extra load to the system. Retry budgets make that trade-off
+explicit by letting you specify exactly how much extra load your system is
+willing to accept from retries.

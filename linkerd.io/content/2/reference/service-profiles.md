@@ -8,6 +8,7 @@ description = "Details on the specification and what is possible with service pr
 
 A service profile spec must contain the following top level fields:
 
+
 {{< table >}}
 | field| value |
 |------|-------|
@@ -91,3 +92,4 @@ to this service as a ratio of the original request volume.
 | `minRetriesPerSecond` | allowance of retries per second in addition to those allowed by the retryRatio |
 | `ttl` | indicates for how long requests should be considered for the purposes of calculating the retryRatio |
 {{< /table >}}
+
