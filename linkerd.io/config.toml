@@ -3,6 +3,7 @@ title = "Linkerd"
 languageCode = "en-US"
 Paginate = 10
 sectionPagesMenu = "main"
+enableRobotsTXT = true
 
 #CUSTOM PARAMS
 [params]
