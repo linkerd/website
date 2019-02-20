@@ -4,6 +4,7 @@ languageCode = "en-US"
 Paginate = 10
 sectionPagesMenu = "main"
 enableRobotsTXT = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
 
 #CUSTOM PARAMS
 [params]
@@ -13,9 +14,6 @@ enableRobotsTXT = true
 
   l5d2_release_version = "L5D2_STABLE_VERSION"
   l5d2_edge_version = "L5D2_EDGE_VERSION"
-
-# Disable taxonomies explicitly
-[taxonomies]
 
 # MENU: top nav bar
 [[menu.top]]
