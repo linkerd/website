@@ -59,19 +59,15 @@ kubectl -n booksapp get all
 ```
 
 Once the rollout has completed successfully, you can forward the
-[frontend](http://localhost:7000/), `webapp` from the
-topology, locally for viewing (`http://localhost:7000`) by running:
+[webapp](http://localhost:7000/), locally for viewing by running:
 
 ```bash
-kubectl -n booksapp port-forward \
-  $(kubectl -n booksapp get po -l app=webapp \
-    -o jsonpath='{.items[0].metadata.name}') \
-  7000:7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 &
 ```
 
 {{< fig src="/images/books/frontend.png" title="Frontend" >}}
 
-As you can imagine, there is an error in the app. If you click Add Book, it
+As you can imagine, there is an error in the app. If you click "Add Book", it
 will fail 50% of the time. This is a classic case of non-obvious, intermittent
 failure – the type that drives service owners mad because it is so difficult to
 debug. Because Kubernetes is interested in keeping processes running, it will
@@ -99,7 +95,7 @@ outgoing traffic through Linkerd's proxy and a `container` that runs the proxy.
 
 As with `install`, `inject` is a pure text operation. This means that you can
 inspect the input and output before you use it. As these are deployments,
-Kubernetes will slowly update pods one at a time. There can be life traffic
+Kubernetes will slowly update pods one at a time. There can be live traffic
 while Linkerd is added!
 
 If you're interested in a more automatic way to inject deployments, check out
@@ -107,8 +103,8 @@ the [automating injection](/2/tasks/automating-injection/) documentation.
 
 ## Debugging
 
-Let's use Linkerd to discover the root cause of this app's failures. Check out
-the dashboard. Run:
+Let's use Linkerd to discover the root cause of this app's failures. To check
+out the Linkerd dashboard, run:
 
 ```bash
 linkerd dashboard &
