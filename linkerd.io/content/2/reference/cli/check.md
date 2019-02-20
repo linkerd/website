@@ -4,9 +4,6 @@ title = "check"
 aliases = [
   "/2/check-reference/"
 ]
-[menu.l5d2docs]
-  name = "check"
-  parent = "cli"
 +++
 
 {{< cli/description "check" >}}

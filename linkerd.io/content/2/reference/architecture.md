@@ -5,9 +5,6 @@ description = "Deep dive into the architecture of Linkerd."
 aliases = [
   "/2/architecture/"
 ]
-[menu.l5d2docs]
-  name = "Architecture"
-  parent = "reference"
 +++
 
 At a high level, Linkerd consists of a *control plane* and a *data plane*.

@@ -4,9 +4,6 @@ title = "inject"
 aliases = [
   "/2/inject-reference/"
 ]
-[menu.l5d2docs]
-  name = "inject"
-  parent = "cli"
 +++
 
 The `inject` command modifies Kubernetes manifests that are passed to it either

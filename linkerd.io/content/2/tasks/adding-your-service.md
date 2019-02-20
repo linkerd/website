@@ -5,9 +5,6 @@ description = "Add your service to the mesh by injecting it."
 aliases = [
   "/2/adding-your-service/"
 ]
-[menu.l5d2docs]
-  name = "Adding Your Service"
-  parent = "tasks"
 +++
 
 In order for your service to take advantage of Linkerd, it needs to have the

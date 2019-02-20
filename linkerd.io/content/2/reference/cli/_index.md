@@ -5,10 +5,6 @@ description = "Reference documentation for all the CLI commands."
 aliases = [
   "/2/cli/"
 ]
-[menu.l5d2docs]
-  name = "CLI"
-  parent = "reference"
-  identifier = "cli"
 +++
 
 The Linkerd CLI is the primary way to interact with Linkerd. It can install the

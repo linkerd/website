@@ -7,9 +7,6 @@ aliases = [
   "/2/installing/",
   "/2/rbac/"
 ]
-[menu.l5d2docs]
-  name = "Install"
-  parent = "tasks"
 +++
 
 Before you can use Linkerd, you'll need to install the control plane. This page

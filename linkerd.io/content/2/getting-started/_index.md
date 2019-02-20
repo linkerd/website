@@ -4,11 +4,9 @@ title = "Getting Started"
 aliases = [
   "/getting-started/istio/"
 ]
+weight = 2
 [sitemap]
   priority = 1.0
-[menu.l5d2docs]
-  name = "Getting Started"
-  weight = 2
 +++
 
 Welcome to Linkerd! 🎈

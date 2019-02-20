@@ -68,6 +68,11 @@ footer li {
     border-top: 0px;
   }
 
+  // This is to wrap markdown generation for tables to be full width.
+  .w-100 table {
+    width: 100% !important;
+  }
+
   :not(pre) > code[class*="language-"] {
     padding: $kbd-padding-y $kbd-padding-x;
     font-size: $kbd-font-size;

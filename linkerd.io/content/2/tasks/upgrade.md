@@ -6,9 +6,6 @@ aliases = [
   "/2/upgrade/",
   "/2/update/"
 ]
-[menu.l5d2docs]
-  name = "Upgrade"
-  parent = "tasks"
 +++
 
 There are three components that need to be upgraded:

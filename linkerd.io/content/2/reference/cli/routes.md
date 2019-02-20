@@ -1,9 +1,6 @@
 +++
 date = "2019-02-06T11:47:57-08:00"
 title = "routes"
-[menu.l5d2docs]
-  name = "routes"
-  parent = "cli"
 +++
 
 The `routes` command displays per-route service metrics.  In order for
