@@ -92,7 +92,7 @@ controller's pod, the default backend will not be usable.
 ## Traefik
 
 This uses `emojivoto` as an example, take a look at
-[getting started](/2/getting-started) for a refresher on how to install it.
+[getting started](/2/getting-started/) for a refresher on how to install it.
 
 The sample ingress definition is:
 
