@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         {{ $currentPage := . }}
-        {{ range .Site.Menus.top }}
+        {{ range site.Menus.top }}
         <li class="nav-item {{if (hasPrefix $currentPage.URL .URL) }}current{{end}}">
           <a class="nav-link" href="{{.URL}}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>{{ .Pre }}{{ .Name }}</a>
         </li>

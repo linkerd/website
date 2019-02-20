@@ -6,7 +6,7 @@
 
     <div class="col-md-9 pt-5 border-left">
       <div class="row">
-        {{ with .Site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
+        {{ with site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
           <div class="col-md-5">
             <h1>What is Linkerd?</h1>
               {{ .Summary }}
@@ -83,7 +83,7 @@
       <div class="row">
         <div class="col-md-5">
           <h2>What does Linkerd give you?</h2>
-          {{ with .Site.GetPage "section" "features" }}
+          {{ with site.GetPage "section" "features" }}
             {{ .Summary }}
             <a href="{{ .RelPermalink }}">Read more &raquo;</a>
           {{ end }}
