@@ -7,9 +7,6 @@ aliases = [
   "/2/proxy-metrics/",
   "/2/observability/proxy-metrics/"
 ]
-[menu.l5d2docs]
-  name = "Proxy Metrics"
-  parent = "reference"
 +++
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the

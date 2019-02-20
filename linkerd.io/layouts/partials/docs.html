@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3 pt-5">
-      {{ partial "sidebar.html" . }}
+      {{ $docsVersion := index (split .page.URL "/") 1 }}
+      {{ partial (printf "%s/%s" $docsVersion "sidebar") . }}
     </div>
 
     <div class="col-md-9 border-left docs-content">

@@ -3,9 +3,6 @@ date = "2018-11-19T12:00:00-07:00"
 title = "Load Balancing"
 description = "Linkerd automatically load balances requests across all destination endpoints on HTTP, HTTP/2, and gRPC connections."
 weight = 8
-[menu.l5d2docs]
-  name = "Load Balancing"
-  parent = "features"
 +++
 
 For HTTP, HTTP/2, and gRPC connections, Linkerd automatically load balances

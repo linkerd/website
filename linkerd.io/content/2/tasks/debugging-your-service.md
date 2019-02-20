@@ -6,9 +6,6 @@ aliases = [
   "/debugging-an-app/",
   "/2/debugging-an-app/"
 ]
-[menu.l5d2docs]
-  name = "Debugging Your Service"
-  parent = "tasks"
 +++
 
 The demo application emojivoto has some issues. Let's use that and Linkerd to

@@ -3,9 +3,6 @@ date = "2018-11-19T12:00:00-07:00"
 title = "Dashboard and Grafana"
 description = "Linkerd provides a web dashboard, as well as pre-configured Grafana dashboards."
 weight = 9
-[menu.l5d2docs]
-  name = "Dashboard and Grafana"
-  parent = "features"
 +++
 
 In addition to its [command-line interface](/2/cli/), Linkerd provides a web

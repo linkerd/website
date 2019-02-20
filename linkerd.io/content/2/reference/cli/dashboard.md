@@ -1,9 +1,6 @@
 +++
 date = "2019-02-17T12:00:00-07:00"
 title = "dashboard"
-[menu.l5d2docs]
-  name = "dashboard"
-  parent = "cli"
 +++
 
 {{< cli/description "dashboard" >}}

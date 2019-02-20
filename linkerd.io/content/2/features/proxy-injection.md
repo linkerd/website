@@ -6,9 +6,6 @@ weight = 4
 aliases = [
   "/2/proxy-injection/"
 ]
-[menu.l5d2docs]
-  name = "Automatic Proxy Injection"
-  parent = "features"
 +++
 
 Linkerd can be configured to automatically inject the data plane proxy into your

@@ -7,9 +7,6 @@ aliases = [
   "/2/observability/prometheus/",
   "/2/observability/exporting-metrics/"
 ]
-[menu.l5d2docs]
-  name = "Export Metrics"
-  parent = "tasks"
 +++
 
 By design, Linkerd only keeps metrics data for a short, fixed window of time

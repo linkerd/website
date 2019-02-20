@@ -10,9 +10,7 @@ aliases = [
   "/in-depth/debugging-guide/",
   "/in-depth/concepts/"
 ]
-[menu.l5d2docs]
-  name = "Overview"
-  weight = 1
+weight = 1
 +++
 
 (Note: this documentation is specific to Linkerd 2.x. For the 1.x branch of development,

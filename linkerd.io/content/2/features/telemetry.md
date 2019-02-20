@@ -6,9 +6,6 @@ weight = 7
 aliases = [
   "/2/observability/"
 ]
-[menu.l5d2docs]
-  name = "Telemetry and Monitoring"
-  parent = "features"
 +++
 
 One of Linkerd's most powerful features is its extensive set of tooling around
