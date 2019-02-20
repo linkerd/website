@@ -15,18 +15,18 @@
     <div class="dropdown-menu w-100">
       <h6 class="dropdown-header">Linkerd 1.x</h6>
       <a class="dropdown-item" href="/1/overview/">
-        {{ .page.Site.Params.latest_release_version }}
+        {{ site.Params.latest_release_version }}
       </a>
       <h6 class="dropdown-header">Linkerd 2.x</h6>
       <a class="dropdown-item" href="/2/overview/">
-        {{ .page.Site.Params.l5d2_release_version }}
+        {{ site.Params.l5d2_release_version }}
       </a>
     </div>
   </div>
 
   <ul class="nav flex-column nav-pills sidebar">
   {{ $currentPage := .page }}
-  {{ range sort (.page.Site.GetPage "/2").Sections "Params.weight" "asc" }}
+  {{ range sort (site.GetPage "/2").Sections "Params.weight" "asc" }}
     {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
     <li class="nav-item pb-1 {{ if $sectionActive }}active{{ end }}">
       <a href="{{ .URL }}"
