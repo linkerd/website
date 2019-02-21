@@ -44,3 +44,14 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   weight = 5
   pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
   url = "https://github.com/linkerd/linkerd2"
+
+# Auto-generate Netlify _redirects file
+[mediaTypes."text/netlify"]
+delimiter = ""
+
+[outputFormats.REDIRECTS]
+mediaType = "text/netlify"
+baseName = "_redirects"
+
+[outputs]
+home = ["HTML", "REDIRECTS"]
