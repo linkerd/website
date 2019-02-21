@@ -7,9 +7,6 @@
       <th>
         Usage
       </th>
-      <th>
-        Default
-      </th>
     </tr>
   </thead>
   <tbody>
@@ -24,11 +21,6 @@
       </td>
       <td>
         {{ .Usage | markdownify }}
-      </td>
-      <td>
-        {{ with .DefaultValue }}
-        <code>{{ . }}</code>
-        {{ end }}
       </td>
     </tr>
     {{ end }}
