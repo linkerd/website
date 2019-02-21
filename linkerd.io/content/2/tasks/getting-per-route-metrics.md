@@ -5,8 +5,8 @@ description = "Configure per-route metrics for your application."
 +++
 
 To get per-route metrics, you must first create a
-[service profile](/2/tasks/setting-up-service-profiles/). Once a service profile
-has been created, Linkerd will add labels to the Prometheus metrics that
+[service profile](/2/features/setting-up-service-profiles/). Once a service
+profile has been created, Linkerd will add labels to the Prometheus metrics that
 associate a specific request to a specific route.
 
 For a tutorial that shows this functionality off, check out the
@@ -67,11 +67,16 @@ PUT /books/{id}.json        books    41.98%   1.4rps          73ms          97ms
 ## Troubleshooting
 
 If you're not seeing any metrics, there are two likely culprits. In both cases,
-`linkerd tap` can be used to understand the problem. For the resources that
+`linkerd tap` can be used to understand the problem. For the resource that
 the service points to, run:
 
 ```bash
-$ linkerd tap deploy/webapp -o wide | grep req
+linkerd tap deploy/webapp -o wide | grep req
+```
+
+A sample output is:
+
+```bash
 req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=POST :authority=webapp:7000 :path=/books/24783/edit src_res=deploy/traffic src_ns=default dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
 ```
 
@@ -79,11 +84,12 @@ This will select only the requests observed and show the `:authority` and
 `rt_route` that was used for each request.
 
 - Linkerd discovers the right service profile to use via `:authority` or
-  `Host` headers. The name in your service profile must match these headers.
+  `Host` headers. The name of your service profile must match these headers.
   There are many reasons why these would not match, see
   [ingress](/2/features/ingress/) for one reason. Another would be clients that
   use IPs directly such as Prometheus.
 - Getting regexes to match can be tough and the ordering is important. Pay
-  attention to `rt_route`. If it is missing entirely, you might want to look at
-  `:path`, the regex you'd like to match and use a
-  [tester](https://regex101.com/) with the Golang flavor.
+  attention to `rt_route`. If it is missing entirely, compare the `:path` to
+  the regex you'd like for it to match, and use a
+  [tester](https://regex101.com/) with the Golang flavor of regex.
+

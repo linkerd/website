@@ -30,12 +30,13 @@ that setup if you've not already.
 
 ## Install the app
 
-Before we install Linkerd, let's add the books app onto your cluster. In your
-local terminal, run:
+To get started, let's install the books app onto your cluster. In your local
+terminal, run:
 
 ```bash
-kubectl create ns booksapp && \ curl -sL
-https://run.linkerd.io/booksapp.yml | \ kubectl -n booksapp apply -f -
+kubectl create ns booksapp && \
+  curl -sL https://run.linkerd.io/booksapp.yml \
+  | kubectl -n booksapp apply -f -
 ```
 
 This command creates a namespace for the demo, downloads its Kubernetes
@@ -58,12 +59,14 @@ cluster by running:
 kubectl -n booksapp get all
 ```
 
-Once the rollout has completed successfully, you can forward the
-[webapp](http://localhost:7000/), locally for viewing by running:
+Once the rollout has completed successfully, you can get access to the app
+itself by port-forwarding `webapp` locally:
 
 ```bash
 kubectl -n booksapp port-forward svc/webapp 7000 &
 ```
+
+Open http://localhost:7000/ in your browser to see the frontend.
 
 {{< fig src="/images/books/frontend.png" title="Frontend" >}}
 
@@ -90,8 +93,11 @@ kubectl get -n booksapp deploy -o yaml \
 This command retrieves the manifest of all deployments in the `booksapp`
 namespace, runs the manifest through `linkerd inject`, and then re-applies with
 `kubectl apply`. The `inject` command adds two containers to each deployment's
-pod spec. An `initContainer` that sets up `iptables` to forward all incoming and
-outgoing traffic through Linkerd's proxy and a `container` that runs the proxy.
+pod spec:
+
+- An `initContainer` that sets up `iptables` to forward all incoming and
+  outgoing traffic through Linkerd's proxy.
+- A `container` that runs the proxy.
 
 As with `install`, `inject` is a pure text operation. This means that you can
 inspect the input and output before you use it. As these are deployments,
@@ -167,7 +173,7 @@ profile for `webapp` by running:
 
 ```bash
 curl -sL https://run.linkerd.io/booksapp/webapp.swagger \
-  | linkerd profile --open-api - webapp \
+  | linkerd -n booksapp profile --open-api - webapp \
   | kubectl -n booksapp apply -f -
 ```
 
@@ -186,8 +192,8 @@ apiVersion: linkerd.io/v1alpha1
 kind: ServiceProfile
 metadata:
   creationTimestamp: null
-  name: webapp.default.svc.cluster.local
-  namespace: default
+  name: webapp.booksapp.svc.cluster.local
+  namespace: booksapp
 spec:
   routes:
   - condition:
@@ -229,9 +235,9 @@ spec:
 ```
 
 The `name` refers to the FQDN of your Kubernetes service,
-`webapp.default.svc.cluster.local` in this instance. Linkerd uses the `Host`
+`webapp.booksapp.svc.cluster.local` in this instance. Linkerd uses the `Host`
 header of requests to associate service profiles with requests. When the proxy
-sees a `Host` header of `webapp.default.svc.cluster.local`, it will use that to
+sees a `Host` header of `webapp.booksapp.svc.cluster.local`, it will use that to
 look up the service profile's configuration.
 
 Routes are simple conditions that contain the method (`GET` for example) and a
@@ -243,10 +249,10 @@ To get profiles for `authors` and `books`, you can run:
 
 ```bash
 curl -sL https://run.linkerd.io/booksapp/authors.swagger \
-  | linkerd profile --open-api - authors \
+  | linkerd -n booksapp profile --open-api - authors \
   | kubectl -n booksapp apply -f -
 curl -sL https://run.linkerd.io/booksapp/books.swagger \
-  | linkerd profile --open-api - books \
+  | linkerd -n booksapp profile --open-api - books \
   | kubectl -n booksapp apply -f -
 ```
 
@@ -276,7 +282,7 @@ command instead of [`linkerd stat`](/2/reference/cli/stat/). To see the metrics
 that have accumulated so far, run:
 
 ```bash
-linkerd routes svc/webapp
+linkerd -n booksapp routes svc/webapp
 ```
 
 This will output a table of all the routes observed and their golden metrics.
@@ -287,7 +293,7 @@ Profiles can be used to observe *outgoing* requests as well as *incoming*
 requests. To do that, run:
 
 ```bash
-linkerd routes deploy/webapp --to svc/books
+linkerd -n booksapp routes deploy/webapp --to svc/books
 ```
 
 This will show all requests and routes that originate in the `webapp` deployment
@@ -344,8 +350,9 @@ kubectl -n booksapp edit sp/authors.booksapp.svc.cluster.local
 
 You'll want to add `isRetryable` to a specific route. It should look like:
 
-```bash
-[...]
+```yaml
+spec:
+  routes:
   - condition:
       method: HEAD
       pathRegex: /authors/[^/]*\.json
@@ -358,7 +365,7 @@ this route automatically. We see a nearly immediate improvement in success rate
 by running:
 
 ```bash
-linkerd routes deploy/books --to svc/authors -o wide
+linkerd -n booksapp routes deploy/books --to svc/authors -o wide
 ```
 
 This should look like:
@@ -394,7 +401,7 @@ To get started, let's take a look at the current latency for requests from
 `webapp` to the `books` service:
 
 ```bash
-linkerd routes deploy/webapp --to svc/books
+linkerd -n booksapp routes deploy/webapp --to svc/books
 ```
 
 This should look something like:
@@ -414,29 +421,30 @@ vary depending on the characteristics of your cluster. To edit the `books`
 service profile, run:
 
 ```bash
-kubectl edit sp/authors.default.svc.cluster.local
+kubectl -n booksapp edit sp/authors.default.svc.cluster.local
 ```
 
 Update the route that we modified in the previous section to have a timeout:
 
-```bash
-[...]
-- condition:
-    method: HEAD
-    pathRegex: /authors/[^/]*\.json
-  name: HEAD /authors/{id}.json
-  isRetryable: true
-  timeout: 25ms ### ADD THIS LINE ###
+```yaml
+spec:
+  routes:
+  - condition:
+      method: HEAD
+      pathRegex: /authors/[^/]*\.json
+    name: HEAD /authors/{id}.json
+    isRetryable: true
+    timeout: 25ms ### ADD THIS LINE ###
 ```
 
 Linkerd will now return errors to the `webapp` REST client when the timeout is
-reached. This timeout counts for retried requests and is the maximum amount of
-time a REST client would wait for a response.
+reached. This timeout includes retried requests and is the maximum
+amount of time a REST client would wait for a response.
 
 Run `routes` to see what has changed:
 
 ```bash
-linkerd routes deploy/webapp --to svc/books -o wide
+linkerd -n booksapp routes deploy/webapp --to svc/books -o wide
 ```
 
 With timeouts happening now, the metrics will change:

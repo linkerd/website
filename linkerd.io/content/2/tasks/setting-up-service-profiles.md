@@ -4,7 +4,7 @@ title = "Setting Up Service Profiles"
 description = "Create a service profile that provides more details for Linkerd to build on."
 +++
 
-[Service profiles](/2/features/service-profiles/) provides Linkerd additional
+[Service profiles](/2/features/service-profiles/) provide Linkerd additional
 information about a service. They work off the `:authority` or
 `Host` headers and can be used for internal services
 (`web.default.svc.cluster.local`) as well as external services (`github.com`).
@@ -30,16 +30,27 @@ profiles.
 
 {{% pagetoc %}}
 
-To manually verify if requests are getting associated with the correct service
-profile route, you can use `linkerd tap -o wide`.  Requests which have been
-associated with a route will have a `rt_route` annotation.  For example:
+Requests which have been associated with a route will have a `rt_route`
+annotation. To manually verify if the requests are being associated correctly,
+run `tap` on your own deployment:
+
+```bash
+linkerd tap -o wide <target> | grep req
+```
+
+The output will stream the requests that `deploy/webapp` is receiving in real
+time. A sample is:
 
 ```bash
 req id=0:1 proxy=in  src=10.1.3.76:57152 dst=10.1.3.74:7000 tls=disabled :method=POST :authority=webapp.default:7000 :path=/books/2878/edit src_res=deploy/traffic src_ns=foobar dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
 ```
 
-Similarly, you can use the command `linkerd tap -o wide <target> | grep -v rt_route`
-to see all requests to a target which have *not* been associated with any route.
+Conversely, if `rt_route` is not present, a request has *not* been associated
+with any route. Try running:
+
+```bash
+linkerd tap -o wide <target> | grep req | grep -v rt_route
+```
 
 ## Swagger
 
@@ -84,7 +95,7 @@ linkerd profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s
 ```
 
 This generates a service profile from the traffic observed to
-`deploy/web` over the 10s that this command is running. The resulting service
+`deploy/web` over the 10 seconds that this command is running. The resulting service
 profile can be piped directly to `kubectl apply` and will be installed into the
 service's namespace.
 

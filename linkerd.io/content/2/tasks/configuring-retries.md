@@ -15,26 +15,28 @@ in the [service profile](/2/features/service-profiles/) for the service you're
 sending requests to.
 
 The reason why these pieces of configuration are required is because retries can
-potentially be dangerous. Any request that changes state, imagine a request that
-submits a financial transaction, could potentially impact your user's experience
-negatively. In addition, retries increase the load on your system. A set of
-services that have requests being constantly retried could potentially get taken
-down by the retries instead of being allowed time to recover.
+potentially be dangerous. Automatically retrying a request that changes state
+(e.g. a request that submits a financial transaction) could potentially impact
+your user's experience negatively. In addition, retries increase the load on
+your system. A set of services that have requests being constantly retried
+could potentially get taken down by the retries instead of being allowed time
+to recover.
 
 Check out the [retries section](/2/tasks/books/#retries) of the books demo for a
 tutorial of how to configure retries.
 
 ## Retries
 
-For routes that are idempotent and do not require bodies (`POST` for example),
+For routes that are idempotent and do have bodies,
 you can edit the service profile and add the `isRetryable` flag:
 
 ```yaml
-- name: HEAD /authors/{id}.json
+spec:
+  routes:
+  - name: GET /api/annotations
     condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    isRetryable: true
+      method: GET
+      pathRegex: /api/annotations
 ```
 
 ## Retry Budgets
