@@ -152,8 +152,8 @@ Lastly, it’s important to ensure that the l5d-dtab header is not settable from
 ## Conclusion
 We’ve demonstrated how to create ad-hoc staging environments with linkerd by setting per-request routing rules. With this approach, we can stage services in the context of production environment, without modifying existing code, provisioning extra resources for our staging environment (other than for the staging instance itself), or maintaining parallel environments for production and staging. For microservices with complex application topologies, this approach can provide an easy, low-cost way to staging services before pushing to production.
 
-<small>
-Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-</small>
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+{{< /note >}}
 
 For more about running linkerd in Kubernetes, or if you have any issues configuring ingress in your setup, feel free to stop by our [linkerd community Slack](https://slack.linkerd.io/), ask a question on [Discourse](https://discourse.linkerd.io/), or [contact us directly](https://linkerd.io/overview/help/)!

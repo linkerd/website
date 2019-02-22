@@ -94,9 +94,11 @@ orchestrate our blue-green deployments. Please note that our Namerd configuratio
 uses the [CustomResourceDefinition APIs](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/),
 which requires a cluster running Kubernetes 1.8+
 
-Note: Prior to Kubernetes 1.8, Linkerd used the ThirdPartyResources API to store
+{{< note >}}
+Prior to Kubernetes 1.8, Linkerd used the ThirdPartyResources API to store
 dtabs. The API has been deprecated in favor of the new CustomResourceDefinitions
 API.
+{{< /note >}}
 
 To install Namerd in the default Kubernetes namespace, run (Kubernetes 1.8+):
 
@@ -509,7 +511,7 @@ anything else about Linkerd, feel free to stop by our [Linkerd forum](https://di
 [Linkerd community Slack](http://slack.linkerd.io/), or
 [contact us directly](https://linkerd.io/overview/help/)!
 
-<small>
-Note: there are a myriad of ways to deploy Kubernetes and different environments
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different environments
 support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-</small>
+{{< /note >}}

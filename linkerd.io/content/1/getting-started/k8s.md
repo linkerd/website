@@ -29,8 +29,10 @@ aliases = [
   parent = "getting-started"
 +++
 
-**Note: This document is specific to Linkerd 1.x. If you're on Kubernetes, you
-may wish to consider [Linkerd 2.x](/2/getting-started/) instead.**
+{{< note >}}
+This document is specific to Linkerd 1.x. If you're on Kubernetes, you may wish to consider [Linkerd 2.x](/2/getting-started/) instead.
+{{< /note >}}
+
 
 If you have a Kubernetes cluster or even just run [Minikube](https://github.com/kubernetes/minikube),
 deploying Linkerd as a service mesh is the fastest way to get started.  Not only
