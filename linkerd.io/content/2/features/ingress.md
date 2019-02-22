@@ -29,11 +29,13 @@ for common ingress controllers:
 
 {{% pagetoc %}}
 
-Note: If your ingress controller is terminating HTTPS, Linkerd will only provide
+{{< note >}}
+If your ingress controller is terminating HTTPS, Linkerd will only provide
 TCP stats for the incoming requests because all the proxy sees is encrypted
 traffic. It will provide complete stats for the outgoing requests from your
 controller to the backend services as this is in plain text from the
 controller to Linkerd.
+{{< /note >}}
 
 ## Nginx
 
@@ -85,9 +87,11 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
-Note: it is not possible to rewrite the header in this way for the default
+{{< note >}}
+It is not possible to rewrite the header in this way for the default
 backend. Because of this, if you inject Linkerd into your Nginx ingress
 controller's pod, the default backend will not be usable.
+{{< /note >}}
 
 ## Traefik
 
@@ -139,10 +143,12 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
-Note: this solution won't work if you're using Traefik's service weights as
+{{< note >}}
+This solution won't work if you're using Traefik's service weights as
 Linkerd will always send requests to the service name in `l5d-dst-override`. A
 workaround is to use `traefik.frontend.passHostHeader: "false"` instead. Be
 aware that if you're using TLS, the connection between Traefik and the backend
 service will not be encrypted. There is an
 [open issue](https://github.com/linkerd/linkerd2/issues/2270) to track the
 solution to this problem.
+{{< /note >}}

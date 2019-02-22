@@ -132,8 +132,9 @@ Our full dtab is now:
 In this article, we’ve seen how to use Linkerd as a service mesh for gRPC requests, adding latency-aware load balancing, circuit breaking, and request-level routing to gRPC apps. Linkerd and gRPC are a great combination, especially as gRPC’s HTTP/2 underpinnings provide it with powerful mechanisms like multiplexed streaming, back pressure, and cancelation, which Linkerd can take full advantage of. Because gRPC includes routing information in the request, it’s a natural fit for Linkerd, and makes it very easy to set up Linkerd to route gRPC requests. For more on Linkerd’s roadmap around gRPC, see [Oliver’s blog post on the topic](https://buoyant.io/http2-grpc-and-linkerd/).
 
 Finally, for a more advanced example of configuring gRPC services, take a look at our [Gob microservice app](https://github.com/BuoyantIO/linkerd-examples/tree/master/gob). In that example, we additionally deploy [Namerd](https://github.com/linkerd/linkerd/tree/master/namerd), which we use to manage our routing rules centrally, and update routing rules without redeploying Linkerd. This lets us to do things like canarying and blue green deploys between different versions of a service.
-<small>
-Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-</small>
+
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+{{< /note >}}
 
 For more information on Linkerd, gRPC, and HTTP/2 head to the [Linkerd gRPC documentation](https://linkerd.io/features/grpc/) as well as our [config documentation for HTTP/2](https://linkerd.io/config/1.0.0/linkerd/index.html#http-2-protocol).

@@ -189,6 +189,8 @@ For help with this or anything else about Linkerd, feel free to stop by our
 [Linkerd community Slack](http://slack.linkerd.io/), or post a topic on
 [Linkerd discourse](https://discourse.linkerd.io/)!
 
-<small>Note: there are a myriad of ways to deploy Kubernetes and different
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different
 environments support different features. Learn more about deployment differences
-[here](https://discourse.linkerd.io/t/flavors-of-kubernetes).</small>
+[here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+{{< /note >}}

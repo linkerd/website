@@ -1,0 +1,7 @@
+<div class="alert alert-{{ .type }}" role="alert">
+  <p>
+    <i class="fa fa-{{ .icon }}"></i> <strong>{{ .title }}</strong>
+  </p>
+
+  {{ .content | markdownify }}
+</div>

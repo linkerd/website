@@ -87,10 +87,12 @@ curl -G \
   http://prometheus.linkerd.svc.cluster.local:9090/federate
 ```
 
-Note: if your data store is outside the Kubernetes cluster, it is likely that
-you'll want to setup
+{{< note >}}
+If your data store is outside the Kubernetes cluster, it is likely that
+you'll want to set up
 [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 at a domain name of your choice with authentication.
+{{< /note >}}
 
 Similar to the `/federate` API, Prometheus provides a JSON query API to
 retrieve all metrics:

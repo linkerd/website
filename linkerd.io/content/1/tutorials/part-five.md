@@ -226,8 +226,8 @@ The system works! When this cookie is set, you’ll be in dogfood mode. Without 
 ## Conclusion
 In this post, we saw how to use linkerd to provide powerful and flexible ingress to a Kubernetes cluster. We’ve demonstrated how to deploy a nominally production-ready setup that uses linkerd for service routing. And we’ve demonstrated how to use some of the advanced routing features of linkerd to decouple the _traffic-serving_ topology from the deployment topology, allowing for the creation of dogfood environments without separate clusters or deploy-time complications.
 
-<small>
-Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-</small>
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+{{< /note >}}
 
 For more about running linkerd in Kubernetes, or if you have any issues configuring ingress in your setup, feel free to stop by our [linkerd community Slack](http://slack.linkerd.io/), ask a question on [Discourse](https://discourse.linkerd.io/), or [contact us directly](https://linkerd.io/overview/help/)!
