@@ -275,12 +275,12 @@ pod/linkerd-prometheus-74d66f86f6-6t6dh   2/2       Running   0          1h
 pod/linkerd-web-5f6c45d6d9-9hd9j          2/2       Running   0          3m
 ```
 
-### √ can query the control plane API {#l5d-api-control-api}
+### √ control plane self-check {#l5d-api-control-api}
 
 Example failure:
 
 ```bash
-× can query the control plane API
+× control plane self-check
     Post https://localhost:6443/api/v1/namespaces/linkerd/services/linkerd-controller-api:http/proxy/api/v1/SelfCheck: context deadline exceeded
 ```
 
