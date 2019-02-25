@@ -5,7 +5,7 @@ description = "Configure per-route metrics for your application."
 +++
 
 To get per-route metrics, you must first create a
-[service profile](/2/features/setting-up-service-profiles/). Once a service
+[service profile](/2/features/service-profiles/). Once a service
 profile has been created, Linkerd will add labels to the Prometheus metrics that
 associate a specific request to a specific route.
 

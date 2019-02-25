@@ -9,8 +9,8 @@ aliases = [
 ]
 +++
 
-Before you can use Linkerd, you'll need to install the [control
-plane](../../reference/architecture#control-plane). This page
+Before you can use Linkerd, you'll need to install the
+[control plane](/2/reference/architecture/#control-plane). This page
 covers how to accomplish that, as well as common problems that you may
 encounter.
 
@@ -66,10 +66,4 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER \
 
 ## Uninstalling
 
-You can uninstall the Linkerd control plane with one command:
-
-```bash
-linkerd install | kubectl apply -f -
-```
-
-For more information, see [Uninstalling Linkerd](../uninstall).
+See [Uninstalling Linkerd](/2/tasks/uninstall/).
