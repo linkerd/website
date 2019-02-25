@@ -21,14 +21,11 @@
           <a class="nav-link" href="{{.URL}}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>{{ .Pre }}{{ .Name }}</a>
         </li>
         {{ end }}
-        
       </ul>
 
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a href="{{ relref . "/choose-your-platform.md" }}" class="btn btn-outline-light">Get Started</a>
-        </li>
-      </ul>
+      <a class="btn btn-outline-light ml-3" href="{{ relref . "/choose-your-platform.md" }}">
+        Get Started
+      </a>
     </div>
   </div>
 </nav>
