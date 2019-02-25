@@ -14,13 +14,14 @@ weight = 1
 +++
 
 {{< note >}}
-This documentation is specific to Linkerd 2.x. For the 1.x branch of development, [go here](/1/overview).
+This documentation is specific to Linkerd 2.x. For the 1.x branch of
+development, [go here](/1/overview/).
 {{< /note >}}
 
 Linkerd is a _service mesh_ for Kubernetes and other frameworks. It makes
 running services easier and safer by giving you runtime debugging,
-observability, reliability, and security&mdash;all without requiring any changes to
-your code.
+observability, reliability, and security&mdash;all without requiring any
+changes to your code.
 
 For a brief introduction to the service mesh model, we recommend reading
 [What's a service mesh? And why do I need
@@ -34,14 +35,14 @@ developed in the open in the [Linkerd GitHub repo](https://github.com/linkerd).
 Linkerd has three basic components: a UI, a *data plane*, and a *control
 plane*. You run Linkerd by:
 
-1. [Installing the CLI on your local system](../getting-started/#step-1-install-the-cli);
-1. [Installing the control plane into your cluster](../getting-started/#step-3-install-linkerd-onto-the-cluster);
-1. [Adding your services to Linkerd's data plane](../adding-your-service/).
+1. [Installing the CLI on your local system](/2/getting-started/#step-1-install-the-cli);
+1. [Installing the control plane into your cluster](/2/getting-started/#step-3-install-linkerd-onto-the-cluster);
+1. [Adding your services to Linkerd's data plane](/2/tasks/adding-your-service/).
 
 Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
 manipulate it.
 
-You can [get started](../getting-started/) in minutes!
+You can [get started](/2/getting-started/) in minutes!
 
 ## How it works
 
@@ -62,13 +63,12 @@ repo](https://github.com/linkerd/linkerd2-proxy).
 
 Linkerd is currently published in several tracks:
 
-* [Linkerd 2.x stable releases](../edge/)
-* [Linkerd 2.x edge releases.](../edge/)
+* [Linkerd 2.x stable releases](/2/edge/)
+* [Linkerd 2.x edge releases.](/2/edge/)
 * [Linkerd 1.x.](/1/overview/)
 
 ## Next steps
 
-[Get started with Linkerd](../getting-started/) in minutes, or check out the
-[architecture](../architecture/) for more details on Linkerd's components and
-how they all fit together.
-
+[Get started with Linkerd](/2/getting-started/) in minutes, or check out the
+[architecture](/2/reference/architecture/) for more details on Linkerd's
+components and how they all fit together.
