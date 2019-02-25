@@ -20,6 +20,7 @@ see how these concepts apply against a real environment.
 ---
 
 ## Introduction
+
 One of the most common questions when getting started with Linkerd is: what
 exactly is a service mesh? Why is a service mesh a critical component of cloud
 native apps, when environments like Kubernetes provide primitives like service

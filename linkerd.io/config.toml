@@ -15,6 +15,9 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   l5d2_release_version = "L5D2_STABLE_VERSION"
   l5d2_edge_version = "L5D2_EDGE_VERSION"
 
+[blackfriday]
+  HrefTargetBlank = true
+
 # MENU: top nav bar
 [[menu.top]]
   name = "Docs"

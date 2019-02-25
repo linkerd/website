@@ -32,7 +32,7 @@ Install the Linkerd DC/OS Universe package with the following command, note
 public and private:
 
 ```bash
-$ dcos package install --options=<(echo '{"linkerd":{"instances":4}}') linkerd
+dcos package install --options=<(echo '{"linkerd":{"instances":4}}') linkerd
 ```
 
 Note that Linkerd boots two servers, `outgoing` on port `4140`, and `incoming`
@@ -87,14 +87,14 @@ repo as
 To modify a Linkerd config, do the following:
 
 1. Edit `linkerd-config.yml`
-2. Convert to JSON using something like http://json2yaml.com
-3. Remove all line breaks and escape quotes:
+1. Convert to JSON using something like [http://json2yaml.com](http://json2yaml.com)
+1. Remove all line breaks and escape quotes:
 
     ```bash
     cat linkerd-config.json |tr -d '\n '|sed 's/"/\\\\\\\"/g'
     ```
 
-4. Replace the inner contents of `linkerd-dcos.json`'s `cmd` field with the
+1. Replace the inner contents of `linkerd-dcos.json`'s `cmd` field with the
 output.
 
 ## Deploying linkerd-viz

@@ -22,7 +22,7 @@ control signals from, the control plane.
 
 {{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
 
-# Control Plane
+## Control Plane
 
 The Linkerd control plane is a set of services that run in a dedicated
 Kubernetes namespace (`linkerd` by default). These services accomplish various
@@ -50,7 +50,7 @@ The control plane is made up of four components:
   component is used to render and display these dashboards. You can reach these
   dashboards via links in the Linkerd dashboard itself.
 
-# Data Plane
+## Data Plane
 
 The Linkerd data plane is comprised of lightweight proxies, which are deployed
 as sidecar containers alongside each instance of your service code. In order to
@@ -98,13 +98,13 @@ The proxy's features include:
 The proxy supports service discovery via DNS and the
 [destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).
 
-# CLI
+## CLI
 
 The Linkerd CLI is run locally on your machine and is used to interact with the
 control and data planes. It can be used to view statistics, debug production
 issues in real time and install/upgrade the control and data planes.
 
-# Dashboard
+## Dashboard
 
 The Linkerd dashboard provides a high level view of what is happening with your
 services in real time. It can be used to view the "golden" metrics (success
@@ -114,7 +114,7 @@ running `linkerd dashboard` from the command line.
 
 {{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
 
-# Grafana
+## Grafana
 
 As a component of the control plane, Grafana provides actionable dashboards for
 your services out of the box. It is possible to see high level metrics and dig
@@ -124,17 +124,21 @@ The dashboards that are provided out of the box include:
 
 {{< gallery >}}
 
-{{< gallery-item src="/images/screenshots/grafana-top.png" title="Top Line Metrics" >}}
+{{< gallery-item src="/images/screenshots/grafana-top.png"
+    title="Top Line Metrics" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-deployment.png" title="Deployment Detail" >}}
+{{< gallery-item src="/images/screenshots/grafana-deployment.png"
+    title="Deployment Detail" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-pod.png" title="Pod Detail" >}}
+{{< gallery-item src="/images/screenshots/grafana-pod.png"
+    title="Pod Detail" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-health.png" title="Linkerd Health" >}}
+{{< gallery-item src="/images/screenshots/grafana-health.png"
+    title="Linkerd Health" >}}
 
 {{< /gallery >}}
 
-# Prometheus
+## Prometheus
 
 Prometheus is a cloud native monitoring solution that is used to collect
 and store all the Linkerd metrics. It is installed as part of the control plane

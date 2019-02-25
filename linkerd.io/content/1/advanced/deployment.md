@@ -47,7 +47,8 @@ Since this model requires high concurrency of Linkerd instances, a larger
 resource profile is usually appropriate. In this model, the loss of an
 individual Linkerd instance is equivalent to losing the host itself.
 
-{{< fig src="/images/diagram-per-host-deployment.png" title="Linkerd deployed per host." >}}
+{{< fig src="/images/diagram-per-host-deployment.png"
+    title="Linkerd deployed per host." >}}
 
 ## Sidecar
 
@@ -63,7 +64,8 @@ resource profile is usually appropriate. In this model, the loss of an
 individual Linkerd instance is equivalent to losing the corresponding service
 instance.
 
-{{< fig src="/images/diagram-sidecar-deployment.png" title="Linkerd deployed as a sidecar process (service-to-linkerd)." >}}
+{{< fig src="/images/diagram-sidecar-deployment.png"
+    title="Linkerd deployed as a sidecar process (service-to-linkerd)." >}}
 
 There are three configurations for how the application service and Linkerd can
 talk to each other: service-to-linker, linker-to-service, and linker-to-linker.

@@ -27,7 +27,6 @@ export tracing data to a backend trace aggregator, such as
 [Zipkin](http://zipkin.io). This will expose latency, retry, and failure
 information for each hop in a request.
 
-
 ## Further reading
 
 If you're ready to start using distributed tracing in your setup, see the

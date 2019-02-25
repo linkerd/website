@@ -28,12 +28,16 @@ The dashboards that are provided out of the box include:
 
 {{< gallery >}}
 
-{{< gallery-item src="/images/screenshots/grafana-top.png" title="Top Line Metrics" >}}
+{{< gallery-item src="/images/screenshots/grafana-top.png"
+    title="Top Line Metrics" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-deployment.png" title="Deployment Detail" >}}
+{{< gallery-item src="/images/screenshots/grafana-deployment.png"
+    title="Deployment Detail" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-pod.png" title="Pod Detail" >}}
+{{< gallery-item src="/images/screenshots/grafana-pod.png"
+    title="Pod Detail" >}}
 
-{{< gallery-item src="/images/screenshots/grafana-health.png" title="Linkerd Health" >}}
+{{< gallery-item src="/images/screenshots/grafana-health.png"
+    title="Linkerd Health" >}}
 
 {{< /gallery >}}

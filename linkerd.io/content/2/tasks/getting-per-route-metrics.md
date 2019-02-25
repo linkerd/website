@@ -92,4 +92,3 @@ This will select only the requests observed and show the `:authority` and
   attention to `rt_route`. If it is missing entirely, compare the `:path` to
   the regex you'd like for it to match, and use a
   [tester](https://regex101.com/) with the Golang flavor of regex.
-

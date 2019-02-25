@@ -72,6 +72,7 @@ With the dtab:
 /california       => /USA/CA;
 /sanfrancisco     => /california/SF;
 ```
+
 And the path:
 
 ```dtab
@@ -122,11 +123,12 @@ subsequent path segments as an ip address and port. So the path
 `/$/inet/127.0.0.1/4140` would resolve to the bound address `127.0.0.1:4140`
 
 Linkerd also provides a suite of namers for many different service discovery
-mechanisms. Some examples are [`/#/io.l5d.consul`]({{% linkerdconfig "consul-service-discovery-experimental" %}}),
-[`/#/io.l5d.k8s`]({{% linkerdconfig "kubernetes-service-discovery-experimental" %}}),
-and
-[`/#/io.l5d.marathon`]({{% linkerdconfig "marathon-service-discovery-experimental" %}}).
-See more on these and others in the [Linkerd documentation on namers]({{% linkerdconfig "namers" %}}).
+mechanisms. Some examples are [`/#/io.l5d.consul`]({{% linkerdconfig
+"consul-service-discovery-experimental" %}}), [`/#/io.l5d.k8s`]({{%
+linkerdconfig "kubernetes-service-discovery-experimental" %}}), and
+[`/#/io.l5d.marathon`]({{% linkerdconfig
+"marathon-service-discovery-experimental" %}}). See more on these and others in
+the [Linkerd documentation on namers]({{% linkerdconfig "namers" %}}).
 
 Once a namer converts a path into a bound address, the routing is considered
 complete and any residual path segments not used in prefix matching will

@@ -1,3 +1,4 @@
 IgnoreURLs:
   - .*localhost.*
+  - https://expedia.com
 DirectoryPath: public

@@ -13,7 +13,7 @@ for a full list of all the possible checks, what they do and how to fix them.
 
 {{< cli/examples "check" >}}
 
-# Example output
+## Example output
 
 ```bash
 $ linkerd check

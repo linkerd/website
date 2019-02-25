@@ -49,6 +49,6 @@ removed from service discovery to stop receiving traffic. If the instance simply
 stops accepting requests, Linkerd's load-balancing algorithms are designed to
 handle gracefully instances that become unhealthy or disappear.
 
-Lookups in service discovery are controlled by [dtab rules](
-{{% ref "/1/advanced/dtabs.md" %}}). This means that these lookups comprise part of
-the routing logic for a request.
+Lookups in service discovery are controlled by [dtab rules]( {{% ref
+"/1/advanced/dtabs.md" %}}). This means that these lookups comprise part of the
+routing logic for a request.

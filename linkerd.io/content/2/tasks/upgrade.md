@@ -17,9 +17,7 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
-# Upgrade notice: stable-2.2.0
-
-## Breaking changes
+## Upgrade notice: stable-2.2.0
 
 There are two breaking changes in `stable-2.2.0`. One relates to
 [Service Profiles](/2/features/service-profiles/), the other relates to
@@ -53,8 +51,8 @@ of the following:
   [Upgrade the data plane](#upgrade-the-data-plane))
 - Delete and redeploy the application
 
-Auto-inject support for application updates is tracked at:
-https://github.com/linkerd/linkerd2/issues/2260
+Auto-inject support for application updates is tracked on
+[github](https://github.com/linkerd/linkerd2/issues/2260)
 
 # Upgrade notice: stable-2.1.0
 
@@ -145,9 +143,9 @@ It is expected that the Client and Server versions won't match at this point in
 the process. Nothing has been changed on the cluster, only the local CLI has
 been updated.
 
-### Notes
-
-- Until you upgrade the control plane, some new CLI commands may not work.
+{{< note >}}
+Until you upgrade the control plane, some new CLI commands may not work.
+{{< /note >}}
 
 ## Upgrade the control plane
 
@@ -212,11 +210,11 @@ Client version: {{% latestversion %}}
 Server version: {{% latestversion %}}
 ```
 
-### Notes
-
-- You will lose the historical data from Prometheus. If you would like to have
-  that data persisted through an upgrade, take a look at the
-  [persistence documentation](/2/observability/exporting-metrics/)
+{{< note >}}
+You will lose the historical data from Prometheus. If you would like to have
+that data persisted through an upgrade, take a look at the
+[persistence documentation](/2/observability/exporting-metrics/)
+{{< /note >}}
 
 ## Upgrade the data plane
 

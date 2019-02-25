@@ -29,13 +29,11 @@ Before we can do anything, we need to ensure you have access to a Kubernetes
 cluster running 1.9 or later, and a functioning `kubectl` command on your local
 machine.
 
-You can run Kubernetes on your local machine. We suggest <a
-href="https://www.docker.com/products/docker-desktop" target="_blank">Docker
-Desktop</a> or <a
-href="https://kubernetes.io/docs/tasks/tools/install-minikube/"
-target="_blank">Minikube</a>. (For other options, see the <a
-href="https://kubernetes.io/docs/setup/pick-right-solution/"
-target="_blank">full list</a>.)
+You can run Kubernetes on your local machine. We suggest
+[Docker Desktop](https://www.docker.com/products/docker-desktop) or
+[Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). For other
+options, see the
+[full list](https://kubernetes.io/docs/setup/pick-right-solution/).
 
 When ready, make sure you're running a recent version of Kubernetes with:
 
@@ -220,7 +218,7 @@ the way it should with the data plane. To do this check, run:
 linkerd -n emojivoto check --proxy
 ```
 
-## Step 6: Watch it run!
+## Step 6: Watch it run
 
 You can glance at the Linkerd dashboard and see all the HTTP/2 (gRPC) and HTTP/1
 (web frontend) speaking services in the demo app show up in the list of
@@ -260,13 +258,17 @@ browser instead. The dashboard views look like:
 
 {{< gallery >}}
 
-{{< gallery-item src="/images/getting-started/stat.png" title="Top Line Metrics">}}
+{{< gallery-item src="/images/getting-started/stat.png"
+    title="Top Line Metrics">}}
 
-{{< gallery-item src="/images/getting-started/inbound-outbound.png" title="Deployment Detail">}}
+{{< gallery-item src="/images/getting-started/inbound-outbound.png"
+    title="Deployment Detail">}}
 
-{{< gallery-item src="/images/getting-started/top.png" title="Top" >}}
+{{< gallery-item src="/images/getting-started/top.png"
+    title="Top" >}}
 
-{{< gallery-item src="/images/getting-started/tap.png" title="Tap" >}}
+{{< gallery-item src="/images/getting-started/tap.png"
+    title="Tap" >}}
 
 {{< /gallery >}}
 
@@ -276,7 +278,8 @@ metrics collected by Prometheus and ships with some extremely valuable
 dashboards. You can get to these by clicking the Grafana icon in the overview
 page.
 
-{{< fig src="/images/getting-started/grafana.png" title="Deployment Detail Dashboard">}}
+{{< fig src="/images/getting-started/grafana.png"
+    title="Deployment Detail Dashboard">}}
 
 ## That’s it! 👏
 

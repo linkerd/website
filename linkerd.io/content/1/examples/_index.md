@@ -18,7 +18,6 @@ contains several examples of how to use Linkerd and namerd in various environmen
 The [Buoyant blog](https://blog.buoyant.io) also contains several examples and
 walkthroughs highlighting various Linkerd features.
 
-
 ## Kubernetes
 
 For walkthroughs of various Linkerd features with deployable examples, check out

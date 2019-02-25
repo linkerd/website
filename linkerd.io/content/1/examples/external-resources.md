@@ -17,6 +17,8 @@ produced by both Buoyant and Linkerd users is represented below.
 
 You can also check out [Buoyant's blog](https://buoyant.io/blog) for more posts!
 
+<!-- markdownlint-disable MD033 -->
+
 ## Linkerd Users
 
 * [Linkerd: the Cloud Native service mesh](https://skillsmatter.com/skillscasts/10912-cloud-native-london-october)<br>
@@ -31,8 +33,11 @@ KubeCon EU, March 2017
 * [Cloud Native Applications on OpenShift/Azure](https://channel9.msdn.com/Events/TechDaysOnline/MVP-Led-Techdays-Online/Cloud-Native-Applications-on-OpenShiftAzure-)<br>
 Microsoft TechDays Online, February 2017
 
-* [Building a Modern Bank Backend](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/) (blog)<br>
-[Building a Bank with Kubernetes](https://skillsmatter.com/skillscasts/9146-building-a-bank-with-kubernetes) (slides)<br>
+* [Building a Modern Bank
+  Backend](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/)
+  (blog)<br> [Building a Bank with
+  Kubernetes](https://skillsmatter.com/skillscasts/9146-building-a-bank-with-kubernetes)
+  (slides)<br>
 Monzo, October 2016
 
 ## Linkerd Developers
@@ -87,8 +92,12 @@ TechRepublic, March 2017
 * [Linkerd Celebrates One Year with One Hundred Billion Production Requests](https://www.cncf.io/blog/2017/03/09/linkerd-celebrates-one-year-one-hundred-billion-production-requests/)<br>
 Cloud Native Computing Foundation, March 2017
 
-* [Open Source Linkerd Project Celebrates First Anniversary in Quest to Become TCP/IP of Microservices](https://www.infoq.com/news/2017/03/linkerd-celebrates-one-year)<br>
-InfoQ, March 2017
+* [Open Source Linkerd Project Celebrates First Anniversary in Quest to Become
+  TCP/IP of
+  Microservices](https://www.infoq.com/news/2017/03/linkerd-celebrates-one-year)<br>
+  InfoQ, March 2017
 
 * [Cloud Native Computing Foundation adds Linkerd as its fifth hosted project](https://techcrunch.com/2017/01/23/cloud-native-computing-foundation-adds-linkerd-as-its-fifth-hosted-project/)<br>
 TechCrunch, January 2017
+
+<!-- markdownlint-enable MD033 -->

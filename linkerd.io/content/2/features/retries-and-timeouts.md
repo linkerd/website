@@ -26,7 +26,7 @@ These can be setup by following the guides:
 - [Configuring Retries](/2/tasks/configuring-retries/)
 - [Configuring Timeouts](/2/tasks/configuring-timeouts/)
 
-# How Retries Can Go Wrong
+## How Retries Can Go Wrong
 
 Traditionally, when performing retries, you must specify a maximum number of
 retry attempts before giving up. Unfortunately, there are two major problems

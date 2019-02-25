@@ -4,6 +4,9 @@ RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= stable-2.2.1
 export L5D2_EDGE_VERSION ?= edge-19.2.4
 
+GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
+GIT_HASH = $(shell git log --pretty=format:'%h' -n 1)
+
 define upload_public
 	gsutil -m rsync \
 		-d -r -c $(if $(DRY_RUN),-n,) \
@@ -14,6 +17,7 @@ HAS_GSUTIL := $(shell command -v gsutil;)
 HAS_FLARECTL := $(shell command -v flarectl;)
 HAS_HUGO := $(shell command -v hugo;)
 HAS_HTMLTEST := $(shell command -v htmltest;)
+HAS_MDLINT := $(shell command -v markdownlint;)
 
 .PHONY: publish
 publish: update-version build-linkerd.io deploy
@@ -47,6 +51,14 @@ tmp/%/public:
 tmp-sites: tmp
 	cp -R *linkerd.io tmp/
 
+.PHONY: lint
+lint:
+	@# lint the markdown for linkerd.io
+ifndef HAS_MDLINT
+	@printf "Install markdownlint first, run npm install -g markdownlint-cli\n"; exit 1
+endif
+	markdownlint -c linkerd.io/.markdownlint.yaml linkerd.io/content
+
 .PHONY: check
 check: build-linkerd.io
 	@# Check linkerd.io for valid links and standards
@@ -54,6 +66,19 @@ ifndef HAS_HTMLTEST
 	@printf "Install htmltest first. curl https://htmltest.wjdp.uk | bash\n"; exit 1
 endif
 	cd tmp/linkerd.io && htmltest
+
+.PHONY: test-ci
+test-ci:
+	@# Test CI configuration without constant commits to config.yml
+ifndef CIRCLE_TOKEN
+	@printf "Create a personal CircleCI token first (CIRCLE_TOKEN). See https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token\n"; exit 1
+endif
+	curl --user $(CIRCLE_TOKEN): \
+		--request POST \
+		--form revision=$(GIT_HASH) \
+		--form config=@.circleci/config.yml \
+		--form notify=false \
+			https://circleci.com/api/v1.1/project/github/linkerd/website/tree/$(GIT_BRANCH)
 
 serve-%: build-%
 	@# Serve the built files locally

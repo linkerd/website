@@ -24,7 +24,6 @@ be retried. Thus, even if one instance of a service is failing, clients can
 maximize success rates. Retry budgets (the percentage of requests that Linkerd
 will retry) are configurable so that you can avoid overloading your server.
 
-
 ## Timeouts
 
 You can also specify a per-request timeout on the

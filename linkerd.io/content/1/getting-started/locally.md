@@ -25,9 +25,10 @@ java version "1.8.0_66"
 Linkerd works with both Oracle and OpenJDK. If you need to install Java 8, you
 can download either one.
 
+<!-- markdownlint-disable MD013 MD033 -->
+
 <p class="text-center">
-{{% button "Download Oracle Java 8" "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" %}}
-or
+{{% button "Download Oracle Java 8" "http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" %}} or
 {{% button "Download OpenJDK 8" "http://openjdk.java.net/install/" %}}
 </p>
 
@@ -39,11 +40,13 @@ First, download the latest binary release of Linkerd.
 {{% button "Download Linkerd" "https://github.com/linkerd/linkerd/releases" %}}
 </p>
 
+<!-- markdownlint-enable MD013 MD033 -->
+
 Once you've downloaded the release, extract it:
 
 ```bash
-$ tar -xzf linkerd-{{% latestversion %}}.tgz
-$ cd linkerd-{{% latestversion %}}
+tar -xzf linkerd-{{% latestversion %}}.tgz
+cd linkerd-{{% latestversion %}}
 ```
 
 The release will contain these files:
@@ -63,7 +66,7 @@ Once you have extracted the release, you can start and stop Linkerd by using
 To start Linkerd, run:
 
 ```bash
-$ ./linkerd-{{% latestversion %}}-exec config/linkerd.yaml
+./linkerd-{{% latestversion %}}-exec config/linkerd.yaml
 ```
 
 ## Making sure it works
@@ -76,8 +79,8 @@ HTTP calls with a `Host` header set to "web" to a service listening on port
 You can test this by running a simple service on port 9999:
 
 ```bash
-$ echo 'It works!' > index.html
-$ python -m SimpleHTTPServer 9999
+echo 'It works!' > index.html
+python -m SimpleHTTPServer 9999
 ```
 
 This will be our destination server, and will respond to any HTTP request

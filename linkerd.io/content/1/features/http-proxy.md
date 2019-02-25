@@ -31,7 +31,7 @@ service running elsewhere. In that scenario, you could take advantage of
 Linkerd's proxy integration and make a curl request to the "hello" service with:
 
 ```bash
-$ http_proxy=localhost:4140 curl http://hello/
+http_proxy=localhost:4140 curl http://hello/
 ```
 
 With the `http_proxy` variable set, curl will send the proxy request directly to
