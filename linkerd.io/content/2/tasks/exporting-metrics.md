@@ -84,7 +84,7 @@ For example, you can call the federation API directly via a command like:
 curl -G \
   --data-urlencode 'match[]={job="linkerd-proxy"}' \
   --data-urlencode 'match[]={job="linkerd-controller"}' \
-  http://prometheus.linkerd.svc.cluster.local:9090/federate
+  http://linkerd-prometheus.linkerd.svc.cluster.local:9090/federate
 ```
 
 {{< note >}}
@@ -98,7 +98,7 @@ Similar to the `/federate` API, Prometheus provides a JSON query API to
 retrieve all metrics:
 
 ```bash
-curl http://prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
+curl http://linkerd-prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
 ```
 
 # Gathering data from the Linkerd proxies directly {#proxy}
