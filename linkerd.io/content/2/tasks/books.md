@@ -66,7 +66,8 @@ itself by port-forwarding `webapp` locally:
 kubectl -n booksapp port-forward svc/webapp 7000 &
 ```
 
-Open http://localhost:7000/ in your browser to see the frontend.
+Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
+frontend.
 
 {{< fig src="/images/books/frontend.png" title="Frontend" >}}
 

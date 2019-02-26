@@ -27,8 +27,9 @@ In order for Linkerd to send requests with TLS, it's necessary to set the
 [client TLS configuration parameter]({{% linkerdconfig "client-tls" %}}) when
 configuring Linkerd.
 
-Linkerd supports Static TLS, TLS with Bound Path and No Validation TLS
-through different configurations of the [client TLS configuration parameter]({{% linkerdconfig "client-tls" %}}).
+Linkerd supports Static TLS, TLS with Bound Path and No Validation TLS through
+different configurations of the [client TLS configuration parameter]({{%
+linkerdconfig "client-tls" %}}).
 
 ## Server TLS
 

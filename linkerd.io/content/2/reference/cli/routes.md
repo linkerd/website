@@ -9,7 +9,7 @@ service that is receiving the requests.  For more information about how to
 create a service profile, see [service profiles](/2/features/service-profiles/).
 and the [profile](/2/reference/cli/profile/) command reference.
 
-# Inbound Metrics
+## Inbound Metrics
 
 By default, `routes` displays *inbound* metrics for a target.  In other
 words, it shows information about requests which are sent to the target and
@@ -24,7 +24,7 @@ Displays the request volume, success rate, and latency of requests to the
 perspective, which means that, for example, these latencies do not include the
 network latency between a client and the `webapp` deployment.
 
-# Outbound Metrics
+## Outbound Metrics
 
 If you specify the `--to` flag then `linkerd routes` displays *outbound* metrics
 from the target resource to the resource in the `--to` flag.  In contrast to

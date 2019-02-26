@@ -22,7 +22,7 @@ metrics data from Linkerd:
 - [Extracting data via Prometheus's APIs](#api)
 - [Gather data from the proxies directly](#proxy)
 
-# Using the Prometheus federation API {#federation}
+## Using the Prometheus federation API {#federation}
 
 If you are using Prometheus as your own metrics store, we recommend taking
 advantage of Prometheus's *federation* API, which is designed exactly for the
@@ -65,7 +65,7 @@ label definitions, have a look at [Proxy Metrics](/2/reference/proxy-metrics/).
 For more information on Prometheus' `/federate` endpoint, have a look at the
 [Prometheus federation docs](https://prometheus.io/docs/prometheus/latest/federation/).
 
-# Using a Prometheus integration {#integration}
+## Using a Prometheus integration {#integration}
 
 If you are not using Prometheus as your own long-term data store, you may be
 able to leverage one of Prometheus's [many
@@ -73,7 +73,7 @@ integrations](https://prometheus.io/docs/operating/integrations/) to
 automatically extract data from Linkerd's Prometheus instance into the data
 store of your choice. Please refer to the Prometheus documentation for details.
 
-# Extracting data via Prometheus's APIs {#api}
+## Extracting data via Prometheus's APIs {#api}
 
 If neither Prometheus federation nor Prometheus integrations are options for
 you, it is possible to call Prometheus's APIs to extract data from Linkerd.
@@ -101,7 +101,7 @@ retrieve all metrics:
 curl http://linkerd-prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
 ```
 
-# Gathering data from the Linkerd proxies directly {#proxy}
+## Gathering data from the Linkerd proxies directly {#proxy}
 
 Finally, if you want to avoid Linkerd's Prometheus entirely, you can query the
 Linkerd proxies directly on their `/metrics` endpoint.

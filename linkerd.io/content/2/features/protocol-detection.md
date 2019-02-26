@@ -40,7 +40,6 @@ The following protocols are known to be server-speaks-first:
 * 4222 - NATS
 * 27017 - MongoDB
 
-
 If you're working with a protocol that can't be automatically recognized by
 Linkerd, use the `--skip-inbound-ports` and `--skip-outbound-ports` flags when
 running `linkerd inject`.

@@ -34,7 +34,7 @@ This data can be consumed in several ways:
   [pre-built Grafana dashboards](/2/features/dashboard/#grafana).
 * Directly from Linkerd's built-in Prometheus instance
 
-# Lifespan of Linkerd metrics
+## Lifespan of Linkerd metrics
 
 Linkerd is not designed as a long-term historical metrics store.  While
 Linkerd's control plane does include a Prometheus instance, this instance

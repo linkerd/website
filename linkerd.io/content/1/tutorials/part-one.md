@@ -25,6 +25,7 @@ latencies without requiring changes to application code.
 ---
 
 ## Using Linkerd for service monitoring in Kubernetes
+
 One of the advantages of operating at the request layer is that the service mesh
 has access to protocol-level semantics of success and failure. For example, if
 you’re running an HTTP service, Linkerd can understand the semantics of 200
@@ -37,7 +38,9 @@ automatically capture aggregated, top-line service success rates without
 requiring application changes.
 
 ---
+
 ## Step 0: Setup and Prerequisites
+
 First, you’ll need a Kubernetes cluster and a functioning `kubectl` command on
 your local machine. These following examples will assume you're using either
 [GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-container-cluster)
@@ -61,19 +64,22 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER --clusterrole=clus
 
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-rbac.yml
 ```
+
 Your cluster should have at least 4 CPU's available for this tutorial to work.
 
 ## Step 1: Install Linkerd
+
 Install Linkerd using [this Kubernetes config](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd.yml).
 This will install Linkerd as a DaemonSet (i.e., one instance per host) running
 in the default Kubernetes namespace:
-```
+
+```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd.yml
 ```
 
 You can confirm that installation was successful by viewing Linkerd’s admin page:
 
-##### Minikube
+### Minikube
 
 ```bash
 HOST_IP=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}")
@@ -81,27 +87,29 @@ NODE_PORT_ADMIN=$(kubectl get svc l5d -o 'jsonpath={.spec.ports[2].nodePort}')
 open http://$HOST_IP:$NODE_PORT_ADMIN # on OS X
 ```
 
-#### GKE
+### GKE
+
 ```bash
 INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 open http://$INGRESS_LB:9990 # on OS X
 ```
 
 {{< fig src="/images/tutorials/buoyant-k8s-linkerd-admin-large-1024x737.png"
-title="Linkerd admin UI." >}}
+    title="Linkerd admin UI." >}}
 
 ---
 
 ## Step 2: Install the sample apps
+
 Install two services, “hello” and “world”, in the default namespace.
 
-##### Minikube
+### Minikube
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world-legacy.yml
 ```
 
-##### GKE
+### GKE
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world.yml
@@ -113,14 +121,14 @@ service to complete its request).
 
 You can see this in action by sending traffic through Linkerd’s external IP:
 
-##### Minikube
+### Minikube
 
 ```bash
 NODE_PORT=$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
 http_proxy=$HOST_IP:$NODE_PORT curl -s http://hello
 ```
 
-##### GKE
+### GKE
 
 ```bash
 http_proxy=$INGRESS_LB:4140 curl -s http://hello
@@ -137,17 +145,18 @@ Finally, let’s take a look at what our services are doing by installing
 supplemental package that includes a simple Prometheus and Grafana setup and
 is configured to automatically find Linkerd instances.
 
-Install Linkerd-viz using [this Linkerd-viz config]
-(https://raw.githubusercontent.com/linkerd/linkerd-viz/master/k8s/linkerd-viz.yml).
+Install Linkerd-viz using
+[this Linkerd-viz config](https://raw.githubusercontent.com/linkerd/linkerd-viz/master/k8s/linkerd-viz.yml).
 
 This will install Linkerd-viz into the default namespace:
+
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-viz/master/k8s/linkerd-viz.yml
 ```
 
 Open Linkerd-viz’s external IP to view the dashboard:
 
-##### Minikube
+### Minikube
 
 ```bash
 VIZ_HOST_IP=$(kubectl get po -l name=linkerd-viz -o jsonpath="{.items[0].status.hostIP}")
@@ -155,7 +164,7 @@ VIZ_NODE_PORT=$(kubectl get svc linkerd-viz -o 'jsonpath={.spec.ports[0].nodePor
 open http://$VIZ_HOST_IP:$VIZ_NODE_PORT # on OS X
 ```
 
-##### GKE
+### GKE
 
 ```bash
 VIZ_INGRESS_LB=$(kubectl get svc linkerd-viz -o jsonpath="{.status.loadBalancer.ingress[0].*}")
@@ -165,7 +174,8 @@ open http://$VIZ_INGRESS_LB # on OS X
 You should see a dashboard, including selectors by service and instance. All
 charts respond to these service and instance selectors:
 
-{{< fig src="/images/tutorials/buoyant-k8s-linkerd-viz-large-1024x739.png" title="Linkerd-Viz dashboard." >}}
+{{< fig src="/images/tutorials/buoyant-k8s-linkerd-viz-large-1024x739.png"
+    title="Linkerd-Viz dashboard." >}}
 
 The Linkerd-viz dashboard includes three sections:
 
@@ -177,7 +187,7 @@ node in your cluster.
 
 ---
 
-### That’s all!
+### That’s all
 
 With just three simple commands we were able to install Linkerd on our Kubernetes
 cluster, install an app, and use Linkerd to gain visibility into the health of

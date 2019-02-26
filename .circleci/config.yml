@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+
+    working_directory: ~/website
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |-
+            wget https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.deb
+            sudo dpkg -i hugo*.deb
+            curl https://htmltest.wjdp.uk | bash
+            sudo mv bin/htmltest /usr/local/bin
+            sudo npm install -g markdownlint-cli
+
+      - run:
+          name: Validate markdown
+          command: |-
+            make lint
+
+      - run:
+          name: Check for bad links
+          command: |-
+            make check

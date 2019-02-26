@@ -22,6 +22,7 @@ Linkerd running on the node. Note that this setup proxies all outbound traffic
 to a single Linkerd port, so it won't work if you are using multiple protocols.
 
 To use `linkerd-inject`:
+
 ```bash
 # install linkerd-inject
 $ go get github.com/linkerd/linkerd-inject

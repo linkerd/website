@@ -16,6 +16,7 @@ mesh: a dedicated layer for managing, controlling, and monitoring service-to-
 service communication within an application.
 
 <!--more-->
+<!-- markdownlint-disable MD026 -->
 
 ## What problems does it solve?
 
@@ -26,7 +27,8 @@ was usually not the services themselves, but the *communication* between
 services. Linkerd addresses these problems not just by controlling the mechanics
 of this communication but by providing a layer of abstraction on top of it.
 
-{{< fig src="/images/diagram-individual-instance.png" title="Linkerd adds reliability and instrumentation to existing applications." >}}
+{{< fig src="/images/diagram-individual-instance.png"
+    title="Linkerd adds reliability and instrumentation." >}}
 
 By providing a consistent, uniform layer of instrumentation and control across
 services, Linkerd frees service owners to choose whichever language is most
@@ -67,3 +69,5 @@ service instance) or per-host. Since Linkerd instances are stateless and
 independent, they can fit easily into existing deployment topologies. They can
 be deployed alongside application code in a variety of configurations and with a
 minimum of coordination.
+
+<!-- markdownlint-enable MD026 -->

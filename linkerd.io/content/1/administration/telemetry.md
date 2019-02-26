@@ -35,7 +35,7 @@ To enable additional metrics endpoints, such as Prometheus, InfluxDB, or StatsD,
 have a look at the
 [Telemetry section of the Linkerd config]({{% linkerdconfig "telemetry" %}}).
 
-### Prometheus
+## Prometheus
 
 Linkerd provides a metrics endpoint, `/admin/metrics/prometheus`, specifically
 for exporting stats to Prometheus. To enable the Prometheus telemeter, add this
@@ -65,7 +65,7 @@ scrape_configs:
 
 That configuration would scrape metrics from three separate Linkerd instances.
 
-### InfluxDB
+## InfluxDB
 
 Linkerd provides a metrics endpoint, `/admin/metrics/influxdb`, specifically
 for exporting stats in InfluxDB LINE protocol. You can configure
@@ -74,7 +74,7 @@ from your Linkerd instances. Have a look at the
 [InfluxDB section of the linkerd-examples repo](https://github.com/linkerd/linkerd-examples/tree/master/influxdb)
 for a complete example.
 
-### StatsD
+## StatsD
 
 Linkerd supports pushing metrics to a StatsD backend. Simply add a StatsD config
 block to your Linkerd configuration file:

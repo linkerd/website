@@ -16,6 +16,7 @@ will learn how to set up mutual TLS between two endpoints using Linkerd.
 ---
 
 ## Encrypting all the things with protocol upgrades
+
 In this tutorial, we’ll show you how to use Linkerd as a service mesh to add TLS
 to all service-to-service HTTP calls, without modifying any application code.
 Another benefit of the service mesh approach is that it allows you to decouple
@@ -38,6 +39,7 @@ integration is slightly more complex.)
 ---
 
 ## Step 0: Setup and Prerequisites
+
 First, you’ll need a Kubernetes cluster and a functioning `kubectl` command on
 your local machine. These following examples will assume you're using either
 [GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-container-cluster)
@@ -77,7 +79,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 
 You can confirm that installation was successful by viewing Linkerd’s admin page:
 
-##### Minikube
+#### Minikube
 
 ```bash
 HOST_IP=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}")
@@ -101,13 +103,13 @@ title="Linkerd admin UI." >}}
 
 Install two services, “hello” and “world”, in the default namespace.
 
-##### Minikube
+#### Minikube
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world-legacy.yml
 ```
 
-##### GKE
+#### GKE
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world.yml
@@ -119,14 +121,14 @@ service to complete its request).
 
 You can see this in action by sending traffic through Linkerd’s external IP:
 
-##### Minikube
+#### Minikube
 
 ```bash
 NODE_PORT=$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
 http_proxy=$HOST_IP:$NODE_PORT curl -s http://hello
 ```
 
-##### GKE
+#### GKE
 
 ```bash
 http_proxy=$INGRESS_LB:4140 curl -s http://hello
@@ -137,6 +139,7 @@ You should see the string “Hello world”.
 ---
 
 ## Linkerd with TLS
+
 Now that Linkerd is installed, let’s use it to encrypt traffic. We’ll place TLS
 certificates on each of the hosts, and configure Linkerd to use those
 certificates for TLS.
@@ -156,6 +159,7 @@ generate your own self-signed certificates, see our blog post, where we have
 ---
 
 ## Step 1: Deploy certificates and config changes to Kubernetes
+
 We’re ready to update Linkerd to encrypt traffic. We will distribute the
 [sample certificates](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/certificates.yml)
 as Kubernetes [secrets](https://kubernetes.io/docs/concepts/configuration/secret/).
@@ -175,18 +179,19 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 
 ---
 
-## STEP 2: SUCCESS!
+## STEP 2: SUCCESS
+
 At this point, Linkerd should be transparently wrapping all communication
 between these services in TLS. Let’s verify this by running the same command as
 before:
 
-##### Minikube
+### Minikube
 
 ```bash
 http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}') curl -s http://hello
 ```
 
-##### GKE
+### GKE
 
 ```bash
 http_proxy=$INGRESS_LB:4140 curl -s http://hello
@@ -197,14 +202,14 @@ communication between the hello and world services is being encrypted. We can
 verify this by making an HTTPS request directly to port 4141, where Linkerd is
 listening for requests from other Linkerd instances:
 
-##### Minikube
+### Minikube
 
 ```bash
 NODE_PORT_INCOMING=$(kubectl get svc l5d -o 'jsonpath={.spec.ports[1].nodePort}')
 curl -skH 'l5d-dtab: /svc=>/#/io.l5d.k8s/default/admin/l5d;' https://$HOST_IP:$NODE_PORT_INCOMING/admin/ping
 ```
 
-##### GKE
+### GKE
 
 ```bash
 curl -skH 'l5d-dtab: /svc=>/#/io.l5d.k8s/default/admin/l5d;' https://$INGRESS_LB:4141/admin/ping

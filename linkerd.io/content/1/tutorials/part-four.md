@@ -17,7 +17,7 @@ pipeline.
 
 ---
 
-##  Traffic shifting with per-request routing
+## Traffic shifting with per-request routing
 
 Beyond service discovery, top-line metrics, and TLS, Linkerd also has a powerful
 routing language, called dtabs, that can be used to alter the ways that
@@ -57,10 +57,10 @@ automation server, we’ll deploy a new version of the world service using the
 
 ## Step 0: Setup and Prerequisites
 
-First, you’ll need a clean Kubernetes cluster and a functioning `kubectl` command on
-your local machine. This tutorial requires a fresh cluster and if you've followed
-the previous tutorial, you'll need to tear down your currently running Linkerd
-daemonset, because of conflicting configs.
+First, you’ll need a clean Kubernetes cluster and a functioning `kubectl`
+command on your local machine. This tutorial requires a fresh cluster and if
+you've followed the previous tutorial, you'll need to tear down your currently
+running Linkerd daemonset, because of conflicting configs.
 
 **This tutorial will assume you're running on
 [GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-container-cluster).
@@ -115,7 +115,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 You can confirm that installation was successful by viewing Namerd’s admin page
 (note that it may take a few minutes for the ingress IP to become available):
 
-##### GKE
+### GKE
 
 ```bash
 NAMERD_INGRESS_LB=$(kubectl get svc namerd -o jsonpath="{.status.loadBalancer.ingress[0].*}")
@@ -140,7 +140,7 @@ The utility uses the `NAMERCTL_BASE_URL` environment variable to connect to
 Namerd. In order to connect to the version of Namerd that we just deployed to
 Kubernetes, set the variable as follows:
 
-##### GKE
+### GKE
 
 ```bash
 export NAMERCTL_BASE_URL=http://$NAMERD_INGRESS_LB:4180
@@ -165,7 +165,9 @@ uniqueness. We’ll use this dtab entry to safely introduce new versions of the
 world service into production.
 
 ---
+
 ## Step 2: Install Linkerd
+
 Next we’ll install Linkerd and configure it to resolve routes using Namerd. To
 install Linkerd as a DaemonSet (i.e., one instance per host) in the default
 Kubernetes namespace, run:
@@ -177,7 +179,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 You can confirm that installation was successful by viewing Linkerd’s admin UI
 (note that it may take a few minutes for the ingress IP to become available):
 
-##### GKE
+### GKE
 
 ```bash
 L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
@@ -189,6 +191,7 @@ We’ll use the admin UI to verify steps of the blue-green deploy.
 ---
 
 ## Step 3: Install the sample apps
+
 Now we’ll install the hello and world apps in the default namespace. These apps
 rely on the nodeName supplied by the
 [Kubernetes downward API](https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/)
@@ -202,7 +205,7 @@ At this point, we actually have a functioning service mesh and an application
 that makes use of it. You can see the entire setup in action by sending traffic
 through Linkerd’s external IP:
 
-##### GKE
+### GKE
 
 ```bash
 $ curl $L5D_INGRESS_LB
@@ -215,10 +218,12 @@ above, with the IPs of the pods that served the request.
 ---
 
 ## Continuous deployment
+
 We’ll now use Jenkins to perform blue-green deploys of the “world” service that
 we deployed in the previous step.
 
 ### Setup Jenkins
+
 Let’s start by deploying the [buoyantio/jenkins-plus](https://hub.docker.com/r/buoyantio/jenkins-plus/)
 Docker image to our Kubernetes cluster. This image provides the base `jenkins`
 image, along with the `kubectl` and `namerctl` binaries that we need, as well as
@@ -236,7 +241,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 You can confirm that installation was successful by opening up the Jenkins web
 UI (note that it may take a few minutes for the ingress IP to become available):
 
-##### GKE
+#### GKE
 
 ```bash
 JENKINS_LB=$(kubectl get svc jenkins -o jsonpath="{.status.loadBalancer.ingress[0].*}")
@@ -299,7 +304,8 @@ To start the deploy, click into the “hello_world” job in the Jenkins UI, and
 then click “Build with the parameters” in the sidebar. You’ll be taken to a page
 that lets you customize the deploy, and it will look something like this:
 
-{{< fig src="/images/tutorials/buoyant-pipeline-build-parameters.png" title="Jenkins deploy customization screen." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-build-parameters.png"
+    title="Jenkins deploy customization screen." >}}
 
 Change the value of the `gitRepo` form field to point to your fork of the
 `linkerd-examples` repo, and then click the “Build” button. Note that if you
@@ -349,7 +355,8 @@ request to make sure the new version can be reached. If the test request
 succeeds, it pauses the deploy and waits for us to acknowledge that the newly
 deployed version looks correct before proceeding.
 
-{{< fig src="/images/tutorials/buoyant-pipeline-integration-testing.png" title="Integration success message." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-integration-testing.png"
+    title="Integration success message." >}}
 
 At this point, we want to make sure that the new pods are running as expected—not
 just by themselves, but in conjunction with the rest of the production environment.
@@ -391,12 +398,14 @@ clicking the “Ok, I’m done with manual testing” button in the Jenkins UI.
 ---
 
 ### Shift traffic (10%)
+
 After some manual testing, we’re ready to start the blue-green deployment by
 sending 10% of production traffic to the newly deployed version of the service.
 The script makes the change in routing policy and again pauses, asking us to
 confirm that everything looks OK with 10% traffic before proceeding.
 
-{{< fig src="/images/tutorials/buoyant-pipeline-shift-traffic-10.png" title="Shifting traffic by 10%." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-shift-traffic-10.png"
+    title="Shifting traffic by 10%." >}}
 
 Note that if the user aborts on any pipeline step, the script assumes there was
 something wrong with the new service, and automatically reverts the routing
@@ -425,7 +434,8 @@ Looking good! Now is also a good time to check Linkerd’s admin dashboard, to
 verify that the new service is healthy. If your application were receiving a
 small amount of steady traffic, then the dashboard would look like this:
 
-{{< fig src="/images/tutorials/buoyant-pipeline-admin-large-1024x737.png" title="Pipeline administration UI." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-admin-large-1024x737.png"
+    title="Pipeline administration UI." >}}
 
 We can see right away that the `world-v2` service is taking roughly 10% of
 traffic, with 100% success rate. If everything looks good, we can proceed to the
@@ -441,7 +451,8 @@ service. For a concise example, we’re moving immediately to 100% of traffic, b
 in a typical deployment you could include additional intermediary percentages as
 separate steps in the pipeline.
 
-{{< fig src="/images/tutorials/buoyant-pipeline-shift-traffic-100.png" title="Pipeline administration UI." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-shift-traffic-100.png"
+    title="Pipeline administration UI." >}}
 
 We can verify that the new service is serving traffic by sending it a request
 without a dtab override header:
@@ -458,12 +469,14 @@ looks good” button in the Jenkins UI.
 ---
 
 ### Cleanup
+
 In the final step, the script finalizes the deploy by making the routing rules
 to route traffic to the new version of the service permanent. It also tears down
 the previous version of the service that was still running in our cluster but
 not receiving any traffic.
 
-{{< fig src="/images/tutorials/buoyant-pipeline-cleanup.png" title="Pipeline cleanup." >}}
+{{< fig src="/images/tutorials/buoyant-pipeline-cleanup.png"
+    title="Pipeline cleanup." >}}
 
 The final version of Namerd’s dtab is now:
 
@@ -494,6 +507,7 @@ promote it to the current version when the deploy successfully completes.
 ---
 
 ## Conclusion
+
 In this tutorial, we’ve shown a basic workflow incorporating Linkerd, Namerd,
 and Jenkins to progressively shift traffic from an old version to a new version
 of a service as the final step of a continuous deployment pipeline. We’ve shown

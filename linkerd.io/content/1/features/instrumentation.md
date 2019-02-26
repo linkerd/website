@@ -40,8 +40,8 @@ For more detail about Metrics instrumention, see the
 "/1/administration/telemetry.md"
 %}}).
 
-For configuring your metrics endpoint, see the
-[Admin section of the Linkerd config]({{% linkerdconfig "administrative-interface" %}}).
+For configuring your metrics endpoint, see the [Admin section of the Linkerd
+config]({{% linkerdconfig "administrative-interface" %}}).
 
 For a guide on setting up an end-to-end monitoring pipeline on Kubernetes, see
 [A Service Mesh for Kubernetes, Part I: Top-Line Service Metrics](https://blog.buoyant.io/2016/10/04/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/).

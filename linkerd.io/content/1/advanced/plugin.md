@@ -103,7 +103,6 @@ simply create a resource file called
 [`META-INF/services/io.buoyant.linkerd.ResponseClassifierConfig`](https://github.com/linkerd/linkerd-examples/blob/master/plugins/header-classifier/src/main/resources/META-INF/services/io.buoyant.linkerd.ResponseClassifierInitializer)
 and add the fully qualified class name of the config initializer to that file.
 
-
 ## Build & package
 
 We use sbt to build our plugin and the assembly sbt plugin to package it into a
@@ -138,7 +137,7 @@ routers:
 If you run Linkerd with `-log.level=DEBUG` then you should see a line printed
 at startup that indicates the HeaderClassifierInitializer has been loaded:
 
-```
+```bash
 LoadService: loaded instance of class io.buoyant.http.classifiers.HeaderClassifierInitializer for requested service io.buoyant.linkerd.ResponseClassifierInitializer
 ```
 

@@ -30,15 +30,16 @@ aliases = [
 +++
 
 {{< note >}}
-This document is specific to Linkerd 1.x. If you're on Kubernetes, you may wish to consider [Linkerd 2.x](/2/getting-started/) instead.
+This document is specific to Linkerd 1.x. If you're on Kubernetes, you may wish
+to consider [Linkerd 2.x](/2/getting-started/) instead.
 {{< /note >}}
 
-
-If you have a Kubernetes cluster or even just run [Minikube](https://github.com/kubernetes/minikube),
-deploying Linkerd as a service mesh is the fastest way to get started.  Not only
-is it incredibly simple to deploy, it is also suitable for most production use-
-cases, providing service discovery, instrumentation, intelligent client-side
-load balancing, circuit breakers, and dynamic routing out-of-the-box.
+If you have a Kubernetes cluster or even just run
+[Minikube](https://github.com/kubernetes/minikube), deploying Linkerd as a
+service mesh is the fastest way to get started.  Not only is it incredibly
+simple to deploy, it is also suitable for most production use- cases, providing
+service discovery, instrumentation, intelligent client-side load balancing,
+circuit breakers, and dynamic routing out-of-the-box.
 
 The Linkerd service mesh is deployed as a Kubernetes
 [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/),
@@ -61,8 +62,8 @@ You can verify that Linkerd was deployed successfully by running
 kubectl -n linkerd port-forward $(kubectl -n linkerd get pod -l app=l5d -o jsonpath='{.items[0].metadata.name}') 9990 &
 ```
 
-And then viewing the Linkerd admin dashboard by visiting `http://localhost:9990`
-in your browser.
+And then viewing the Linkerd admin dashboard by visiting
+[http://localhost:9990](http://localhost:9990) in your browser.
 
 Note that if your cluster uses CNI, you will need to make a few small changes
 to the Linkerd config to enable CNI compatibility.  These are indicated as
@@ -119,14 +120,17 @@ respectively.
 
 ## Ingress
 
-The Linkerd service mesh is also also configured to act as an
-[Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers).  Simply create an Ingress resource defining the routes
-that you want and then send requests to port 80 (or port 8080 for HTTP/2) of
-the ingress address for the cluster.  In cloud environments with external load
-balancers, the ingress address is the address of the external load balancer.
-Otherwise, the address of any node may be used as the ingress address.
+The Linkerd service mesh is also also configured to act as an [Ingress
+Controller](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers).
+Simply create an Ingress resource defining the routes that you want and then
+send requests to port 80 (or port 8080 for HTTP/2) of the ingress address for
+the cluster.  In cloud environments with external load balancers, the ingress
+address is the address of the external load balancer. Otherwise, the address of
+any node may be used as the ingress address.
 
-See our [Ingress blog post](https://buoyant.io/2017/04/06/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/) for more details.
+See our [Ingress blog
+post](https://buoyant.io/2017/04/06/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/)
+for more details.
 
 ## Next Steps
 

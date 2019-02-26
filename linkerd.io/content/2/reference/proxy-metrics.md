@@ -13,7 +13,7 @@ The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy.  The following metrics are available at `/metrics` on the proxy's metrics
 port (default: `:4191`) in the [Prometheus format][prom-format].
 
-# Protocol-Level Metrics
+## Protocol-Level Metrics
 
 * `request_total`: A counter of the number of requests the proxy has received.
   This is incremented when the request stream begins.
@@ -48,7 +48,7 @@ Note that latency measurements are not exported to Prometheus until the stream
 _completes_. This is necessary so that latencies can be labeled with the appropriate
 [response classification](#response-labels).
 
-## Labels
+### Labels
 
 Each of these metrics has the following labels:
 
@@ -58,7 +58,7 @@ Each of these metrics has the following labels:
                `outbound` if the request originated from inside of the pod.
 * `tls`: `true` if the request's connection was secured with TLS.
 
-### Response Labels
+#### Response Labels
 
 The following labels are only applicable on `response_*` metrics.
 
@@ -70,7 +70,7 @@ The following labels are only applicable on `response_*` metrics.
                       for gRPC responses.
 * `status_code`: The HTTP status code of the response.
 
-### Outbound labels
+#### Outbound labels
 
 The following labels are only applicable if `direction=outbound`.
 
@@ -88,7 +88,7 @@ The following labels are only applicable if `direction=outbound`.
                            selector roughly approximates a pod's `ReplicaSet` or
                            `ReplicationController`.
 
-### Prometheus Collector labels
+#### Prometheus Collector labels
 
 The following labels are added by the Prometheus collector.
 
@@ -96,7 +96,7 @@ The following labels are added by the Prometheus collector.
 * `job`: The Prometheus job responsible for the collection, typically
          `linkerd-proxy`.
 
-#### Kubernetes labels added at collection time
+##### Kubernetes labels added at collection time
 
 Kubernetes namespace, pod name, and all labels are mapped to corresponding
 Prometheus labels.
@@ -109,7 +109,7 @@ Prometheus labels.
                        approximates a pod's `ReplicaSet` or
                        `ReplicationController`.
 
-#### Linkerd labels added at collection time
+##### Linkerd labels added at collection time
 
 Kubernetes labels prefixed with `linkerd.io/` are added to your application at
 `linkerd inject` time. More specifically, Kubernetes labels prefixed with
@@ -154,25 +154,25 @@ request_total{
 }
 ```
 
-# Transport-Level Metrics
+## Transport-Level Metrics
 
 The following metrics are collected at the level of the underlying transport
 layer.
 
 * `tcp_open_total`: A counter of the total number of opened transport
-connections.
+  connections.
 * `tcp_close_total`: A counter of the total number of transport connections
-which have closed.
+  which have closed.
 * `tcp_open_connections`: A gauge of the number of transport connections
-currently open.
+  currently open.
 * `tcp_write_bytes_total`: A counter of the total number of sent bytes. This is
-updated when the connection closes.
+  updated when the connection closes.
 * `tcp_read_bytes_total`: A counter of the total number of received bytes. This
-is updated when the connection closes.
+  is updated when the connection closes.
 * `tcp_connection_duration_ms`: A histogram of the duration of the lifetime of a
-connection, in milliseconds. This is updated when the connection closes.
+  connection, in milliseconds. This is updated when the connection closes.
 
-## Labels
+### Labels
 
 Each of these metrics has the following labels:
 
@@ -186,7 +186,7 @@ Each of these metrics has the following labels:
 Note that the labels described above under the heading "Prometheus Collector labels"
 are also added to transport-level metrics, when applicable.
 
-### Connection Close Labels
+#### Connection Close Labels
 
 The following labels are added only to metrics which are updated when a
 connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):

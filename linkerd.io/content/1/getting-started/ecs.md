@@ -106,11 +106,11 @@ First we need to create an SSH tunnel to the cluster. The following commands
 will choose one of the EC2 hosts, and forward traffic on three local ports to
 three remote ports on the EC2 host:
 
-- Traffic to `localhost:9990` will go to the Linkerd dashboard on the remote
+* Traffic to `localhost:9990` will go to the Linkerd dashboard on the remote
   host
-- Traffic to `localhost:8500` will go to the Consul admin dashboard on the
+* Traffic to `localhost:8500` will go to the Consul admin dashboard on the
   remote host
-- Traffic to `localhost:4140` will go to the Linkerd HTTP proxy on the remote
+* Traffic to `localhost:4140` will go to the Linkerd HTTP proxy on the remote
   host
 
 Note that if one of these four ports is already in use on your local machine
@@ -170,8 +170,10 @@ Hello (172.31.20.160) World-V2 (172.31.19.35)!!
 By setting the `l5d-dtab` header, we instructed Linkerd to dynamically route all
 requests destined for `world` to `world-v2`.
 
-{{< fig src="/images/ecs-linkerd-routing.png" title="Linkerd request routing" >}} 
- For more information, have a look at 
+{{< fig src="/images/ecs-linkerd-routing.png"
+    title="Linkerd request routing" >}}
+
+For more information, have a look at
 [Dynamic Request Routing]({{% ref "/1/features/routing.md" %}}).
 
 ## linkerd-viz

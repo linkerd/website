@@ -15,4 +15,5 @@ The admin interface also provides a web UI that you can use to help debug
 Linkerd instance. This provides valuable insight into how Linkerd will route
 your request. The UI is available at `/delegator`, on the configured admin port.
 
-{{< fig src="/images/dtab-playground.png" title="Linkerd admin UI - Dtab playground." >}}
+{{< fig src="/images/dtab-playground.png"
+    title="Linkerd admin UI - Dtab playground." >}}

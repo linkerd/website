@@ -17,6 +17,7 @@ running in Kubernetes.
 ---
 
 ## A service mesh for Kubernetes
+
 As a service mesh, Linkerd is designed to be run alongside application code,
 managing and monitoring inter-service communication, including performing
 service discovery, retries, load-balancing, and protocol upgrades.
@@ -28,7 +29,8 @@ and we’ve spent a lot of time [optimizing Linkerd for this use case](https://b
 
 However, the sidecar model also has a downside: deploying per pod means that
 resource costs scale per pod. If your services are lightweight and you run many
-instances, like [Monzo](https://monzo.com/) (who [built an entire bank on top of Linkerd and Kubernetes](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/)),
+instances, like [Monzo](https://monzo.com/) (who
+[built an entire bank on top of Linkerd and Kubernetes](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/)),
 then the cost of using sidecars can be quite high.
 
 We can reduce this resource cost by deploying Linkerd per host rather than per
@@ -44,6 +46,7 @@ in Kubernetes.
 ---
 
 ## Architecture options
+
 One of the defining characteristics of a service mesh is its ability to decouple
 application communication from transport communication. For example, if services
 A and B speak HTTP, the service mesh may convert that to HTTPS across the wire,
@@ -56,12 +59,13 @@ receiving side of each request, proxying to and from local instances. E.g. for
 HTTP to HTTPS upgrades, Linkerd must be able to both initiate and terminate TLS.
 In a DaemonSet world, a request path through Linkerd looks like the diagram below:
 
-{{< fig src="/images/tutorials/buoyant-k8s-daemonset-mesh.png" title="DaemonSet request path diagram." >}}
+{{< fig src="/images/tutorials/buoyant-k8s-daemonset-mesh.png"
+    title="DaemonSet request path diagram." >}}
 
-As you can see, a request that starts in Pod A on Host 1 and is destined for Pod J
-on Host 2 must go through Pod A’s host-local Linkerd instance, then to Host 2’s
-Linkerd instance, and finally to Pod J. This path introduces three problems that
-Linkerd must address:
+As you can see, a request that starts in Pod A on Host 1 and is destined for
+Pod J on Host 2 must go through Pod A’s host-local Linkerd instance, then to
+Host 2’s Linkerd instance, and finally to Pod J. This path introduces three
+problems that Linkerd must address:
 
 - How does an application identify its host-local Linkerd?
 - How does Linkerd route an outgoing request to the destination’s Linkerd?
@@ -72,7 +76,9 @@ you just want to get Linkerd working with Kubernetes DaemonSets, see
 [part one](/1/tutorials/part-one/)!
 
 ---
-## How does an application identify its host-local Linkerd?
+
+## Identify the host-local Linkerd
+
 Since DaemonSets use a Kubernetes `hostPort`, we know that Linkerd is running on
 a fixed port on the host’s IP. Thus, in order to send a request to the Linkerd
 process on the same machine that it’s running on, we need to determine the IP
@@ -131,7 +137,8 @@ set as environment variables in the pod.
 
 ---
 
-## How does Linkerd route an outgoing request to the destination's Linkerd?
+## Route an outgoing request to the destination's Linkerd
+
 In our service mesh deployment, outgoing requests should not be sent directly to
 the destination application, but instead should be sent to the Linkerd running
 on that application’s host. To do this, we can take advantage of powerful new
@@ -159,7 +166,7 @@ routers:
 
 ---
 
-## How does Linkerd route an incoming request to the destination application?
+## Route an incoming request to the destination application
 
 When a request finally arrives at the destination pod’s Linkerd instance, it
 must be correctly routed to the pod itself. To do this we use the `localnode`
@@ -180,10 +187,11 @@ routers:
 ---
 
 ## Conclusion
+
 Deploying Linkerd as a Kubernetes DaemonSet gives us the best of both worlds—it
 allows us to accomplish the full set of goals of a service mesh (such as
-  transparent TLS, protocol upgrades, latency-aware load balancing, etc), while
-  scaling Linkerd instances per host rather than per pod.
+transparent TLS, protocol upgrades, latency-aware load balancing, etc), while
+scaling Linkerd instances per host rather than per pod.
 
 For a full, working example, see the [part one](/1/tutorials/part-one/), or
 download

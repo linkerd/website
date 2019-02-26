@@ -7,7 +7,7 @@ description = "Troubleshoot issues with your Linkerd installation."
 This section provides resolution steps for common problems reported with the
 `linkerd check` command.
 
-# The "pre-kubernetes-cluster-setup" checks {#pre-k8s-cluster}
+## The "pre-kubernetes-cluster-setup" checks {#pre-k8s-cluster}
 
 These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify your cluster is prepared for
@@ -42,8 +42,8 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 √ can create CustomResourceDefinitions
 ```
 
-For more information on cluster access, see the [GKE Setup](/2/tasks/install/#gke) section
-above.
+For more information on cluster access, see the
+[GKE Setup](/2/tasks/install/#gke) section above.
 
 # The "pre-kubernetes-setup" checks {#pre-k8s}
 
@@ -58,8 +58,8 @@ permissions to install Linkerd.
 √ can create ConfigMaps
 ```
 
-For more information on cluster access, see the [GKE Setup](/2/tasks/install/#gke) section
-above.
+For more information on cluster access, see the
+[GKE Setup](/2/tasks/install/#gke) section above.
 
 ## The "pre-kubernetes-single-namespace-setup" checks {#pre-single}
 
@@ -99,8 +99,8 @@ installation, specifically:
 √ can create RoleBindings
 ```
 
-For more information on cluster access, see the [GKE Setup](/2/tasks/install/#gke) section
-above.
+For more information on cluster access, see the
+[GKE Setup](/2/tasks/install/#gke) section above.
 
 # The "kubernetes-api" checks {#k8s-api}
 
@@ -144,7 +144,7 @@ kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
     --server=${KUBE_CONTEXT}
 ```
 
-# The "kubernetes-version" checks {#k8s-version}
+## The "kubernetes-version" checks {#k8s-version}
 
 Example failure:
 
@@ -163,7 +163,7 @@ For more information on upgrading Kubernetes, see the page in the Kubernetes
 Documentation on
 [Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
 
-# The "linkerd-existence" checks {#l5d-existence}
+## The "linkerd-existence" checks {#l5d-existence}
 
 ### √ control plane namespace exists {#l5d-existence-ns}
 
@@ -253,7 +253,7 @@ kubectl -n linkerd port-forward \
 curl localhost:9995/metrics
 ```
 
-# The "linkerd-api" checks {#l5d-api}
+## The "linkerd-api" checks {#l5d-api}
 
 ### √ control plane pods are ready {#l5d-api-control-ready}
 
@@ -339,7 +339,7 @@ Check the logs on the control-plane's public API:
 linkerd logs --control-plane-component controller --container public-api
 ```
 
-# The "linkerd-service-profile" checks {#l5d-sp}
+## The "linkerd-service-profile" checks {#l5d-sp}
 
 Example failure:
 
@@ -357,7 +357,7 @@ bad                                                51s
 linkerd-controller-api.linkerd.svc.cluster.local   1m
 ```
 
-# The "linkerd-version" checks {#l5d-version}
+## The "linkerd-version" checks {#l5d-version}
 
 ### √ can determine the latest version {#l5d-version-latest}
 
@@ -400,7 +400,7 @@ Example failures:
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
 
-# The "linkerd-data-plane" checks {#l5d-data-plane}
+## The "linkerd-data-plane" checks {#l5d-data-plane}
 
 These checks only run when the `--proxy` flag is set. This flag is intended for
 use after running `linkerd inject`, to verify the injected proxies are operating
