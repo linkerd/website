@@ -1,21 +1,12 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/node:10
+      - image: gcr.io/linkerd-io/website-builder:1.0
 
     working_directory: ~/website
     steps:
       - checkout
-
-      - run:
-          name: Install dependencies
-          command: |-
-            wget https://github.com/gohugoio/hugo/releases/download/v0.54.0/hugo_0.54.0_Linux-64bit.deb
-            sudo dpkg -i hugo*.deb
-            curl https://htmltest.wjdp.uk | bash
-            sudo mv bin/htmltest /usr/local/bin
-            sudo npm install -g markdownlint-cli
 
       - run:
           name: Validate markdown
@@ -26,3 +17,35 @@ jobs:
           name: Check for bad links
           command: |-
             make check
+
+  publish:
+    docker:
+      - image: gcr.io/linkerd-io/website-builder:1.0
+
+    working_directory: ~/website
+    steps:
+      - checkout
+
+      - run:
+          name: Configure gcloud cli
+          command: |-
+            echo ${GSTOKEN} > /tmp/token.json
+            gcloud auth activate-service-account --key-file=/tmp/token.json
+
+      - run:
+          name: Publish
+          command: |-
+            make publish
+
+workflows:
+  version: 2
+  publish:
+    jobs:
+      - test
+      - publish:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
