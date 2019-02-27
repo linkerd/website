@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: gcr.io/linkerd-io/website-builder:1.0
+      - image: gcr.io/linkerd-io/website-builder:1.1
 
     working_directory: ~/website
     steps:
@@ -20,7 +20,7 @@ jobs:
 
   publish:
     docker:
-      - image: gcr.io/linkerd-io/website-builder:1.0
+      - image: gcr.io/linkerd-io/website-builder:1.1
 
     working_directory: ~/website
     steps:
