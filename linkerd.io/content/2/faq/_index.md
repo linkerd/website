@@ -24,9 +24,9 @@ requests, and can encrypt and validate connections between services, all
 without requiring any modification of the application itself.
 
 Linkerd works by inserting ultralight proxies (collectively, the "data plane")
-alongside each application instance. Linkerd's control plane provides operators
-with a uniform point at which they can control and measure the behavior of the
-data plane. Operators typically interact with Linkerd using the [CLI](/2/cli/)
+alongside each application instance. Linkerd's {{< a "control plane" >}} provides
+operators with a uniform point at which they can control and measure the behavior of the
+{{< a "data plane" >}}. Operators typically interact with Linkerd using the [CLI](/2/cli/)
 and the [web dashboard UI](/2/getting-started/#step-4-explore-linkerd).
 
 ## Who owns Linkerd and how is it licensed?

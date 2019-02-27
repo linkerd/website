@@ -12,22 +12,21 @@ weight = 2
 Welcome to Linkerd! 🎈
 
 In this guide, we’ll walk you through how to install Linkerd into your
-Kubernetes cluster. Then we'll deploy a sample application to show off
+{{< a "Kubernetes" >}} cluster. Then we'll deploy a sample application to show off
 what Linkerd can do for your services.
 
 Installing Linkerd is easy. First, you first install the CLI (command-line
 interface) onto your local machine. Using this CLI, you'll install the Linkerd
 control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
-services by adding the the data plane proxies. (See the
-[Architecture](../architecture/) page for details.)
+services by adding the the {{< a "data plane" >}} proxies.
 
 We'll walk you through this process step by step.
 
 ## Step 0: Setup
 
-Before we can do anything, we need to ensure you have access to a Kubernetes
-cluster running 1.9 or later, and a functioning `kubectl` command on your local
-machine.
+Before we can do anything, we need to ensure you have access to a
+{{< a "Kubernetes" >}} cluster running 1.9 or later, and a functioning `kubectl`
+command on your local machine.
 
 You can run Kubernetes on your local machine. We suggest
 [Docker Desktop](https://www.docker.com/products/docker-desktop) or
@@ -41,24 +40,25 @@ When ready, make sure you're running a recent version of Kubernetes with:
 kubectl version --short
 ```
 
-Additionally, if you are using GKE with RBAC enabled, you will want to grant a
-`ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
-provide your current user all the permissions required to install the control
-plane. To bind this `ClusterRole` to your user, you can run:
+Additionally, if you are using {{< a "GKE" >}} with {{< a "RBAC" >}} enabled,
+you will want to grant a `ClusterRole` of `cluster-admin` to your Google Cloud
+account first. This will provide your current user all the permissions required
+to install the {{< a "control plane" >}}. To bind this `ClusterRole` to your user,
+you can run:
 
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding-$USER \
     --clusterrole=cluster-admin --user=$(gcloud config get-value account)
 ```
 
-In the next step, we will install the CLI and validate that your cluster is
-ready to install the control plane.
+In the next step, we will install the {{< a "CLI" >}} and validate that your cluster
+is ready to install the control plane.
 
 ## Step 1: Install the CLI
 
 If this is your first time running Linkerd, you’ll need to download the
-command-line interface (CLI) onto your local machine. You’ll use this CLI to
-interact with Linkerd, including installing the control plane onto your
+command-line interface ({{< a "CLI" >}}) onto your local machine. You’ll use this
+CLI to interact with Linkerd, including installing the control plane onto your
 Kubernetes cluster.
 
 To install the CLI, run:
@@ -83,7 +83,7 @@ linkerd version
 ```
 
 You should see the CLI version, and also "Server version: unavailable". This
-is because we haven't installed the control plane. We'll do that soon.
+is because we haven't installed the {{< a "control plane" >}}. We'll do that soon.
 
 ## Step 2: Validate your Kubernetes cluster
 
@@ -101,7 +101,7 @@ linkerd check --pre
 ## Step 3: Install Linkerd onto the cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go,
-it's time to install the lightweight control plane into its own namespace
+it's time to install the lightweight control plane into its own {{< a "namespace" >}}
 (`linkerd`). If you would like to install it into a different namespace, check out
 the help for `install`. To do this, run:
 
@@ -135,8 +135,8 @@ they do.
 
 ## Step 4: Explore Linkerd
 
-With the control plane installed and running, you can now view the Linkerd
-dashboard by running:
+With the {{< a "control plane" >}} installed and running, you can now view the Linkerd
+{{< a "dashboard" >}} by running:
 
 ```bash
 linkerd dashboard &
@@ -144,8 +144,8 @@ linkerd dashboard &
 
 {{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
 
-The control plane components all have the proxy installed in their pods and are
-part of the data plane itself. This provides the ability to dig into these
+The control plane components all have the {{< a "proxy" >}} installed in their pods
+and are part of the data plane itself. This provides the ability to dig into these
 components and see what is going on behind the scenes. In fact, you can run:
 
 ```bash
@@ -220,10 +220,11 @@ linkerd -n emojivoto check --proxy
 
 ## Step 6: Watch it run
 
-You can glance at the Linkerd dashboard and see all the HTTP/2 (gRPC) and HTTP/1
-(web frontend) speaking services in the demo app show up in the list of
-resources running in the `emojivoto` namespace. As the demo app comes with a
-load generator, it is possible to check out some of the Linkerd functionality.
+You can glance at the Linkerd {{< a "dashboard" >}} and see all the HTTP/2
+({{< a "gRPC" >}}) and HTTP/1 (web frontend) speaking services in the demo app
+show up in the list of resources running in the `emojivoto` namespace. As the demo
+app comes with a load generator, it is possible to check out some of the Linkerd
+functionality.
 
 To see some high level stats about the app, you can run:
 
@@ -273,8 +274,8 @@ browser instead. The dashboard views look like:
 {{< /gallery >}}
 
 These are all great for seeing real time data, but what about things that
-happened in the past? Linkerd includes Grafana to visualize all the great
-metrics collected by Prometheus and ships with some extremely valuable
+happened in the past? Linkerd includes {{< a "Grafana" >}} to visualize all the great
+metrics collected by {{< a "Prometheus" >}} and ships with some extremely valuable
 dashboards. You can get to these by clicking the Grafana icon in the overview
 page.
 

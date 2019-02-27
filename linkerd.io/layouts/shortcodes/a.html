@@ -1,0 +1,3 @@
+{{- $term := .Get 0 -}}
+{{- $url := index site.Data.anchors (urlize $term) | relURL -}}
+<a href="{{ $url }}">{{ $term }}</a>

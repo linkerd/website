@@ -1,0 +1,12 @@
+control-plane: /2/reference/architecture/#control-plane
+data-plane: /2/reference/architecture/#data-plane
+kubernetes: https://kubernetes.io
+gke: https://cloud.google.com/kubernetes-engine
+rbac: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+cli: /2/reference/cli
+namespace: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+dashboard: /2/reference/architecture/#dashboard
+proxy: /2/reference/architecture/#proxy
+grpc: https://grpc.io
+grafana: https://grafana.com
+prometheus: https://prometheus.io
