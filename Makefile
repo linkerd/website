@@ -3,6 +3,7 @@ export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= stable-2.2.1
 export L5D2_EDGE_VERSION ?= edge-19.2.5
+export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.1
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 GIT_HASH = $(shell git log --pretty=format:'%h' -n 1)
@@ -28,7 +29,7 @@ update-version: replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
 	@# Update the version for the %* site
 
 .PHONY: deploy-%
-deploy-%: tmp/%*/public
+deploy-%: tmp/%/public
 	@# Upload a site to the correct bucket.
 	@# Options:
 	@#
@@ -129,3 +130,17 @@ has-env-%:
 .PHONY: clean
 clean:
 	rm -rf tmp
+
+.PHONY: update-build-image
+update-build-image: docker-build docker-push
+	@# Build and push the build image
+
+.PHONY: docker-build
+docker-build:
+	@# Build the build image
+	docker build -t $(BUILD_IMAGE) .
+
+.PHONY: docker-push
+docker-push:
+	@# Push the build image
+	docker push $(BUILD_IMAGE)
