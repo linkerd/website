@@ -219,10 +219,10 @@ linkerd -n emojivoto check --proxy
 ```
 
 {{< note >}}
-In this step, we meshed the emojivoto app when the app was already running. While
-this ad hoc approach works fine in many cases, Linkerd also supports [automated
-proxy injection](/2/tasks/automating-injection), which is typically more suitable
-for applications using automated deployment patterns.
+In this step, we meshed the emojivoto app when the app was already running.
+While this ad hoc approach works fine in many cases, Linkerd also supports
+[automated proxy injection](/2/tasks/automating-injection/), which is typically
+more suitable for applications using automated deployment patterns.
 {{< /note >}}
 
 ## Step 6: Watch it run
