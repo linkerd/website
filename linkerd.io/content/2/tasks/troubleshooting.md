@@ -146,6 +146,8 @@ kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
 
 ## The "kubernetes-version" checks {#k8s-version}
 
+### √ is running the minimum Kubernetes API version {#k8s-version-api}
+
 Example failure:
 
 ```bash
@@ -158,6 +160,24 @@ Linkerd requires at least version `1.10.0`. Verify your cluster version with:
 ```bash
 kubectl version
 ```
+
+### √ is running the minimum kubectl version {#k8s-version-kubectl}
+
+Example failure:
+
+```bash
+× minimum kubectl version is installed
+    kubectl is on version [1.9.1], but version [1.10.0] or more recent is required
+    see https://linkerd.io/checks/#kubectl-version for hints
+```
+
+Linkerd requires at least version `1.10.0`. Verify your kubectl version with:
+
+```bash
+kubectl version --client --short
+```
+
+To fix please update kubectl version.
 
 For more information on upgrading Kubernetes, see the page in the Kubernetes
 Documentation on
