@@ -1,0 +1,13 @@
+{
+  "version": "https://jsonfeed.org/version/1",
+  "title": "Linkerd Dashboard Community Updates",
+  "feed_url": {{ with .OutputFormats.Get "jsonfeed" -}}
+    {{- .Permalink | jsonify -}}
+  {{- end }},
+  "last_updated": [{{ with .Site.GetPage "dashboard" -}}
+    {{ range .Pages }}
+    {"date": {{ .Lastmod | jsonify }}}
+    {{- end }}
+  ]
+  {{- end }}
+}

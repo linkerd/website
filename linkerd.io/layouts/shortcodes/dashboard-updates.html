@@ -1,0 +1,13 @@
+{{ $currentPage := .Page }}
+{{ $subPages := .Page.Pages | append .Page.Sections }}
+{{ range $index, $page := sort $subPages "Lastmod" "desc" }}
+  {{ if (ne $page $currentPage) }}
+    <div class="card">
+        <div class="card-body">
+          <h4>{{ $page.Title }}</h4>
+          <p>{{ dateFormat "Monday, January 2, 2006" $page.Date }}</p>
+          <p>{{ $page.Content }}</p>
+        </div>
+      </div>
+  {{ end }}
+{{ end }}

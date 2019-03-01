@@ -57,4 +57,10 @@ mediaType = "text/netlify"
 baseName = "_redirects"
 
 [outputs]
-home = ["HTML", "REDIRECTS"]
+home = ["HTML", "REDIRECTS", "JSONFEED"]
+
+# Generating JSON feed for Linkerd dashboard community updates
+[outputFormats.jsonfeed]
+  mediaType = "application/json"
+  baseName = "dashboard"
+  isPlainText = true

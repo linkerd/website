@@ -1,0 +1,10 @@
+<html lang="en">
+  <head>
+    {{ partial "meta.html" . }}
+    {{ partial "css.html" . }}
+    <title>Linkerd - {{ .Title }}</title>
+  </head>
+  <body>
+    {{ with .Site.GetPage "section" "dashboard" }}{{ .Content }}{{ end }}
+  </body>
+</html>

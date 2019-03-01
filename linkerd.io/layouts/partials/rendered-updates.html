@@ -1,0 +1,9 @@
+{{ range .updates }}
+  <div class = "text">
+    <p class = "title">
+      {{ .title }}
+    </p>
+    <p><em>{{ dateFormat "Monday, January 2, 2006" .date }}</em></p>
+    <p>{{ .text | markdownify }}</p>
+  </div>
+{{ end }}
