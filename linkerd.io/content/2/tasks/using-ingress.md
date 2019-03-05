@@ -78,9 +78,11 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
-Note: it is not possible to rewrite the header in this way for the default
+{{< note >}}
+It is not possible to rewrite the header in this way for the default
 backend. Because of this, if you inject Linkerd into your Nginx ingress
 controller's pod, the default backend will not be usable.
+{{< /note >}}
 
 ## Traefik
 
@@ -141,3 +143,67 @@ service will not be encrypted. There is an
 [open issue](https://github.com/linkerd/linkerd2/issues/2270) to track the
 solution to this problem.
 {{< /note >}}
+
+## Ambassador
+
+This uses `emojivoto` as an example, take a look at
+[getting started](/2/getting-started/) for a refresher on how to install it.
+
+Ambassador does not use `Ingress` resources, instead relying on `Service`. The
+sample service definition is:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-ambassador
+  namespace: emojivoto
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: web-ambassador-mapping
+      service: web-ambassador.emojivoto.svc.cluster.local
+      host: example.com
+      prefix: /
+      add_request_headers:
+        l5d-dst-override: web-ambassador.emojivoto.svc.cluster.local
+spec:
+  selector:
+    app: web-svc
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+```
+
+The important annotation here is:
+
+```yaml
+      add_request_headers:
+        l5d-dst-override: web-other.emojivoto.svc.cluster.local
+```
+
+Ambassador will add a `l5d-dst-override` header to instruct Linkerd what service
+the request is destined for.
+
+To test this, you'll want to get the external IP address for your controller. If
+you installed Ambassador via helm, you can get that IP address by running:
+
+```bash
+kubectl get svc --all-namespaces \
+  -l "app.kubernetes.io/name=ambassador" \
+  -o='custom-columns=EXTERNAL-IP:.status.loadBalancer.ingress[0].ip'
+```
+
+{{< note >}}
+If you've installed the admin interface, this will return two IPs, one of which
+will be `<none>`. Just ignore that one and use the actual IP address.
+{{</ note >}}
+
+You can then use this IP with curl:
+
+```bash
+curl -H "Host: example.com" http://external-ip
+```
