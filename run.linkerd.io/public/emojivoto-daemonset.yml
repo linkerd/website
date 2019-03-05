@@ -4,6 +4,24 @@ kind: Namespace
 metadata:
   name: emojivoto
 ---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: emoji
+  namespace: emojivoto
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: voting
+  namespace: emojivoto
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: web
+  namespace: emojivoto
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -20,6 +38,7 @@ spec:
       labels:
         app: emoji-svc
     spec:
+      serviceAccountName: emoji
       containers:
       - env:
         - name: GRPC_PORT
@@ -63,11 +82,12 @@ spec:
       labels:
         app: voting-svc
     spec:
+      serviceAccountName: voting
       containers:
       - env:
         - name: GRPC_PORT
           value: "8080"
-        image: buoyantio/emojivoto-voting-svc:v5
+        image: buoyantio/emojivoto-voting-svc:v6
         name: voting-svc
         ports:
         - containerPort: 8080
@@ -106,6 +126,7 @@ spec:
       labels:
         app: web-svc
     spec:
+      serviceAccountName: web
       containers:
       - env:
         - name: WEB_PORT
@@ -116,7 +137,7 @@ spec:
           value: voting-svc.emojivoto:8080
         - name: INDEX_BUNDLE
           value: dist/index_bundle.js
-        image: buoyantio/emojivoto-web:v5
+        image: buoyantio/emojivoto-web:v6
         name: web-svc
         ports:
         - containerPort: 80
@@ -161,7 +182,7 @@ spec:
         env:
         - name: WEB_HOST
           value: web-svc.emojivoto:80
-        image: buoyantio/emojivoto-web:v5
+        image: buoyantio/emojivoto-web:v6
         name: vote-bot
         resources:
           requests:
