@@ -4,6 +4,10 @@ title = "Introduction"
 layout = "overview"
 description = "Describes Linkerd features at a high level, explains the rationale behind them, and introduces important concepts that are used throughout the rest of the documentation."
 weight = 1
+js = [
+  "/js/smoothie.js",
+  "/js/linkerd-demo.js"
+]
 aliases = [
   "/doc/0.1.0/overview",
   "/doc/0.2.0/overview",
