@@ -8,7 +8,6 @@
 {{ $css          := resources.Get $sass | toCSS $cssOpts }}
 {{ if $useMaterial }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
-<link rel="stylesheet" href="/css/dashboard-custom.css" />
 {{ else }}
 <link rel="stylesheet" href="/css/prism-a11y-dark.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/command-line/prism-command-line.min.css" integrity="sha256-QViEGvwX/42OrD49huSb2mGZtUQwVKNA5Ux58tMWLOs=" crossorigin="anonymous" />
@@ -23,10 +22,6 @@
 {{ end }}
 
 <!-- fonts -->
-{{ if $useMaterial }}
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i,900" rel="stylesheet">
-{{ else }}
 <link type="text/css" rel="stylesheet" href="https://fast.fonts.net/cssapi/b0b0ea65-d678-49c5-bd82-7ad7e64ce398.css"/>
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i,900" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-{{ end }}

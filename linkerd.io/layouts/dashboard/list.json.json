@@ -1,0 +1,9 @@
+{{ define "response" }}
+{
+  "updates" : "{{ len .Pages }}",
+  "lastUpdated" : [{{ range .Pages }}
+    {"date": {{ .Lastmod | jsonify }}}
+    {{- end }}
+  ]
+}
+{{- end }}
