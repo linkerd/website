@@ -8,12 +8,11 @@
 {{ $css          := resources.Get $sass | toCSS $cssOpts }}
 {{ if $useMaterial }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
-{{ else }}
+{{ end }}
 <link rel="stylesheet" href="/css/prism-a11y-dark.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/plugins/command-line/prism-command-line.min.css" integrity="sha256-QViEGvwX/42OrD49huSb2mGZtUQwVKNA5Ux58tMWLOs=" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
 <link rel="shortcut icon" href="/images/identity/favicon/linkerd-favicon.png" />
-{{ end }}
 {{ if $inServerMode }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{ else }}

@@ -1,4 +1,0 @@
-{
-  "description": "{{ .Description }}",
-  "date": "{{ .Date }}"
-}

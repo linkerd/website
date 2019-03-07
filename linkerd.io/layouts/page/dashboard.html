@@ -1,3 +1,19 @@
-{{ range site.Data.dashboard }}
-  {{ partial "rendered-updates.html" . }}
-{{ end }}
+<html lang="en">
+  <head>
+    {{ partial "meta.html" . }}
+    {{ partial "css.html" . }}
+    <title>Linkerd - {{ .Title }}</title>
+  </head>
+  <body class="dashboard-background">
+    {{ $subPages := .Pages | append .Sections }}
+    {{ range $index, $page := sort $subPages "Lastmod" "desc" }}
+      <div class="card">
+          <div class="card-body">
+            <h4>{{ $page.Title }}</h4>
+            <p>{{ dateFormat "Monday, January 2, 2006" $page.Date }}</p>
+            <p>{{ $page.Content }}</p>
+          </div>
+        </div>
+    {{ end }}
+  </body>
+</html>
