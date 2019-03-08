@@ -58,3 +58,4 @@ baseName = "_redirects"
 
 [outputs]
 home = ["HTML", "REDIRECTS"]
+section = ["HTML", "JSON"]
