@@ -17,19 +17,19 @@ Source code for the linkerd.io website.
     brew install hugo
     ```
 
-1. Build site:
-
-    ```bash
-    ./build
-    ```
-
-1. Run Hugo in development mode:
+1. Build site and run Hugo in development mode:
 
     ```bash
     hugo server
     ```
 
-You should have see the site on localhost:1313, and it should reload
+1. In a separate tab, run checks on any changes you make:
+
+    ```bash
+    make check lint
+    ```
+
+You should see the site on localhost:1313, and it should reload
 automatically upon file write.
 
 ### To change the way the site looks

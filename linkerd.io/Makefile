@@ -1,3 +1,9 @@
+check:
+	htmltest
+
+lint:
+	markdownlint -c .markdownlint.yaml ./content
+
 production-build:
 	hugo --minify
 
