@@ -17,13 +17,13 @@ Source code for the linkerd.io website.
     brew install hugo
     ```
 
-1. Build site and run Hugo in development mode:
+1. From the root `/website` directory, build site and run Hugo in development mode:
 
     ```bash
-    hugo server
+    hugo serve -s linkerd.io
     ```
 
-1. In a separate tab, run checks on any changes you make:
+1. Also in the root directory, run checks on any changes you make:
 
     ```bash
     make check lint
