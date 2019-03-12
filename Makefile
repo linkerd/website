@@ -19,6 +19,7 @@ HAS_FLARECTL := $(shell command -v flarectl;)
 HAS_HUGO := $(shell command -v hugo;)
 HAS_HTMLTEST := $(shell command -v htmltest;)
 HAS_MDLINT := $(shell command -v markdownlint;)
+HAS_PA11Y := $(shell command -v pa11y)
 
 .PHONY: publish
 publish: update-version build-linkerd.io deploy
@@ -67,6 +68,9 @@ ifndef HAS_HTMLTEST
 	@printf "Install htmltest first. curl https://htmltest.wjdp.uk | bash\n"; exit 1
 endif
 	cd tmp/linkerd.io && htmltest
+ifndef HAS_PA11Y
+	@printf "Install pa11y first. npm install -g pa11y\n"; exit 1
+endif
 
 .PHONY: test-ci
 test-ci:
