@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:51-07:00"
 title = "Telemetry"
 description = "Describes how to handle metrics exported by Linkerd."
 weight = 3

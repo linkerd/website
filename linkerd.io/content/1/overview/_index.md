@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T10:55:11-07:00"
 title = "Introduction"
 layout = "overview"
 description = "Describes Linkerd features at a high level, explains the rationale behind them, and introduces important concepts that are used throughout the rest of the documentation."

@@ -1,5 +1,4 @@
 +++
-date = "2018-07-31T12:00:00-07:00"
 title = "TCP Proxying and Protocol Detection"
 description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
 weight = 2

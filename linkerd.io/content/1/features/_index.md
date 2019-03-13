@@ -1,5 +1,4 @@
 +++
-date = "2016-10-14T12:32:14-07:00"
 title = "Overview"
 description = "Covers Linkerd's major features, including load balancing, circuit breaking, service discovery, routing, retries, and more."
 weight = 1

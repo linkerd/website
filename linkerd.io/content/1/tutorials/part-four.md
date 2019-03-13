@@ -1,5 +1,4 @@
 +++
-date = "2016-11-04T13:43:54-07:00"
 title = "IV. Continuous deployment"
 description = "In this tutorial, we’ll show you how to use Linkerd’s routing rules to automatically alter traffic flow through your application."
 weight = 5

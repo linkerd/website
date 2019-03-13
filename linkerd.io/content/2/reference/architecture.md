@@ -1,5 +1,4 @@
 +++
-date = "2018-09-10T12:00:00-07:00"
 title = "Architecture"
 description = "Deep dive into the architecture of Linkerd."
 aliases = [

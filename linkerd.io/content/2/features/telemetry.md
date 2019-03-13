@@ -1,5 +1,4 @@
 +++
-date = "2018-11-19T12:00:00-07:00"
 title = "Telemetry and Monitoring"
 description = "Linkerd automatically collects metrics from all services that send traffic through it."
 weight = 7

@@ -1,5 +1,4 @@
 +++
-date = "2018-07-31T12:00:00-07:00"
 title = "Service Profiles"
 description = "Details on the specification and what is possible with service profiles."
 +++

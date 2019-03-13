@@ -1,5 +1,4 @@
 +++
-date = "2018-09-17T08:00:00-07:00"
 title = "CLI"
 description = "Reference documentation for all the CLI commands."
 aliases = [

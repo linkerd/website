@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:54-07:00"
 title = "Running in DC/OS"
 description = "How to run Linkerd in DC/OS, routing requests with Marathon-backed service discovery."
 weight = 5

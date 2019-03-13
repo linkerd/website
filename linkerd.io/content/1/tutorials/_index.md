@@ -1,5 +1,4 @@
 +++
-date = "2018-04-04T08:26:51-08:00"
 title = "Overview"
 description = "Provides concrete instructions for setting up and running Linkerd in various environments. Go here for a quick start."
 weight = 1

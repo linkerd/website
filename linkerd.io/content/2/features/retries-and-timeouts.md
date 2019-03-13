@@ -1,5 +1,4 @@
 +++
-date = "2019-02-06T13:23:37-08:00"
 title = "Retries and Timeouts"
 description = "Linkerd can be configured to perform service-specific retries and timeouts."
 weight = 3

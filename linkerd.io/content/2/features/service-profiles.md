@@ -1,5 +1,4 @@
 +++
-date = "2018-10-16T12:00:21-07:00"
 title = "Service Profiles"
 description = "Linkerd supports defining service profiles that enable per-route metrics and features such as retries and timeouts."
 weight = 5

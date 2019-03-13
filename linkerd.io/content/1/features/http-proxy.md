@@ -1,5 +1,4 @@
 +++
-date = "2016-10-19T09:57:28-07:00"
 title = "HTTP proxy integration"
 description = "Linkerd can act as an HTTP proxy, which is widely supported by almost all modern HTTP clients, making it easy to integrate into existing applications."
 weight = 6

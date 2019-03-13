@@ -1,5 +1,4 @@
 +++
-date = "2016-10-04T13:43:54-07:00"
 title = "I. Top-line service metrics"
 description = "What is a service mesh, and how is it used by cloud native apps—apps designed for the cloud? In this tutorial, we’ll show you how to use Linkerd as a service mesh."
 weight = 2

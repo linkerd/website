@@ -1,5 +1,4 @@
 +++
-date = "2018-09-17T08:00:00-07:00"
 title = "Frequently Asked Questions"
 include_toc = true
 weight = 9

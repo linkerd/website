@@ -1,5 +1,4 @@
 +++
-date = "2019-02-18T12:00:00-07:00"
 title = "Setting Up Service Profiles"
 description = "Create a service profile that provides more details for Linkerd to build on."
 +++

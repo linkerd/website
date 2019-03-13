@@ -1,5 +1,4 @@
 +++
-date = "2016-10-19T10:13:11-07:00"
 title = "Circuit breaking"
 description = "Linkerd includes automatic circuit breaking that will stop sending traffic to instances that are deemed to be unhealthy, giving them a chance to recover and avoiding cascading failures."
 weight = 3

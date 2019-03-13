@@ -1,5 +1,4 @@
 +++
-date = "2018-08-07T00:00:00+00:00"
 title = "Choose Your Platform"
 layout = "cyp"
 [sitemap]

@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:51-07:00"
 title = "Dashboard"
 description = "Admin UI showing graphs of requests, success rate, latency and more."
 weight = 2

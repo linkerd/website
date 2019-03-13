@@ -1,5 +1,4 @@
 +++
-date = "2016-10-26T14:07:06-07:00"
 title = "TLS"
 description = "Linkerd can be configured to send and receive requests with TLS, which you can use to encrypt communication across host boundaries without modification to your existing application code."
 weight = 6

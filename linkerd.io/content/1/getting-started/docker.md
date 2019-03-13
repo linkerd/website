@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:42:47-07:00"
 title = "Running with Docker"
 description = "How to run Linkerd through a Docker container."
 weight = 3

@@ -1,5 +1,4 @@
 +++
-date = "2016-02-02T08:26:51-08:00"
 title = "Contact us"
 description = "Contact us"
 weight = 7

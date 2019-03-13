@@ -1,5 +1,4 @@
 +++
-date = "2016-10-24T13:43:54-07:00"
 title = "III. TLS by default"
 description = "In this tutorial, we’ll show you how to use Linkerd as a service mesh to add TLS to all service-to-service HTTP calls, without modifying any application code."
 weight = 4

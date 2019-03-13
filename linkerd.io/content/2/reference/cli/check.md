@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:54-07:00"
 title = "check"
 aliases = [
   "/2/check-reference/"

@@ -1,5 +1,4 @@
 +++
-date = "2016-10-17T12:43:00-07:00"
 title = "Service discovery"
 description = "Linkerd integrates with various service discovery backends, helping you to reduce the complexity of your code by removing ad-hoc service discovery implementations."
 weight = 3

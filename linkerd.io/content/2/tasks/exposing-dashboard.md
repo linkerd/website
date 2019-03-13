@@ -1,5 +1,4 @@
 +++
-date = "2019-02-19T08:00:00-07:00"
 title = "Exposing the Dashboard"
 description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
 +++

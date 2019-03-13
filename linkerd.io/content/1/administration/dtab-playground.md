@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:51-07:00"
 title = "Dtab playground"
 description = "A web UI that you can use to help debug Dtab rules."
 weight = 4

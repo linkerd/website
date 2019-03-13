@@ -1,5 +1,4 @@
 +++
-date = "2016-10-31T12:32:14-07:00"
 title = "External resources"
 description = "Catalogues blogs and talks about Linkerd in practice, from both the perspective of an end user and the perspective of a developer."
 weight = 2

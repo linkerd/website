@@ -1,5 +1,4 @@
 +++
-date = "2019-02-19T08:00:00-07:00"
 title = "Using Ingress"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
