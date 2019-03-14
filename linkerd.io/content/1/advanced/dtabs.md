@@ -1,5 +1,4 @@
 +++
-date = "2016-02-02T08:26:51-08:00"
 title = "Dtabs"
 description = "Explains delegation tables and delegation rules, the primary mechanism by which Linkerd dynamically routes requests."
 weight = 30

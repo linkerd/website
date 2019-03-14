@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:51-07:00"
 title = "Shutdown"
 description = "Gracefully shut down Linkerd."
 weight = 5

@@ -1,5 +1,4 @@
 +++
-date = "2019-02-19T08:00:00-07:00"
 title = "Demo: Books"
 description = "Try out some of Linkerd's features, such as per-route metrics with a demo application."
 +++

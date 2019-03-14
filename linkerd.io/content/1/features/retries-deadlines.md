@@ -1,5 +1,4 @@
 +++
-date = "2017-03-24T10:35:16-07:00"
 title = "Retries and deadlines"
 description = "Linkerd can automatically retry requests on certain failures and can timeout requests after a specified period."
 weight = 6

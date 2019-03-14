@@ -1,5 +1,4 @@
 +++
-date = "2016-10-16T08:26:51-08:00"
 title = "namerd"
 description = "Introduces namerd as a service that helps route Linkerd requests and centralizes routing decisions to provide global Linkerd control."
 weight = 20

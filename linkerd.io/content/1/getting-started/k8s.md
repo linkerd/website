@@ -1,5 +1,4 @@
 +++
-date = "2016-02-02T08:26:51-08:00"
 title = "Running in Kubernetes"
 description = "How to deploy the Linkerd service mesh in Kubernetes."
 weight = 4

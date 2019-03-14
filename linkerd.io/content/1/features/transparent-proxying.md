@@ -1,5 +1,4 @@
 +++
-date = "2017-07-12T09:57:28-07:00"
 title = "Transparent Proxying"
 description = "Linkerd can be used for transparent proxying by using the linkerd-inject utility to configure your host's iptables rules."
 weight = 7

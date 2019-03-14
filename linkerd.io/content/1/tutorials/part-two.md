@@ -1,5 +1,4 @@
 +++
-date = "2016-10-14T13:43:54-07:00"
 title = "II. Pods vs DaemonSets"
 description = "As a service mesh, Linkerd is designed to be run alongside application code, managing and monitoring inter-service communication"
 weight = 3

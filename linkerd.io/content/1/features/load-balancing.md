@@ -1,5 +1,4 @@
 +++
-date = "2016-10-14T12:32:25-07:00"
 title = "Load balancing"
 description = "Linkerd provides multiple load-balancing algorithms that use real-time performance metrics to distribute load and reduce tail latencies across your application."
 weight = 2

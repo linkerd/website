@@ -1,5 +1,4 @@
 +++
-date = "2016-10-24T17:35:16-07:00"
 title = "Dynamic request routing"
 description = "Linkerd enables dynamic request routing and rerouting, allowing you to set up staging services, canaries, blue-green deploys, cross-DC failover, and dark traffic with a minimal amount of configuration."
 weight = 4

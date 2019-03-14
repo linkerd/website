@@ -1,5 +1,4 @@
 +++
-date = "2016-06-23T11:50:10-07:00"
 title = "Plugins"
 description = "Sheds light on Linkerd's modular plugin system, and provides a detailed walkthrough for writing your own plugins."
 weight = 50

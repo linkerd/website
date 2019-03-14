@@ -1,5 +1,4 @@
 +++
-date = "2018-07-31T12:00:00-07:00"
 title = "Exporting Metrics"
 description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
 aliases = [

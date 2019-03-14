@@ -1,5 +1,4 @@
 +++
-date = "2016-10-27T10:42:31-07:00"
 title = "gRPC"
 description = "Linkerd supports both HTTP/2 and TLS, allowing it to route gRPC requests, enabling advanced RPC mechanisms such as bidirectional streaming, flow control, and structured data payloads."
 weight = 8

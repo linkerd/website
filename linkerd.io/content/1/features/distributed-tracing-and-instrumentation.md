@@ -1,5 +1,4 @@
 +++
-date = "2017-01-04T09:56:27-08:00"
 title = "Distributed tracing"
 description = "Linkerd supports both distributed tracing and metrics instrumentation, providing uniform observability across all services."
 weight = 9

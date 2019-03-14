@@ -1,5 +1,4 @@
 +++
-date = "2017-07-24T17:12:17-07:00"
 title = "Running in ECS"
 description = "How to run Linkerd in ECS, using Consul for Service Discovery and linkerd-viz for monitoring."
 weight = 6

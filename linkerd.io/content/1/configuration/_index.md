@@ -1,5 +1,4 @@
 +++
-date = "2016-02-02T08:26:51-08:00"
 title = "Overview"
 description = "Contains versioned configuration references for both projects, including sample config file snippets."
 weight = 4

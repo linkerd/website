@@ -1,5 +1,4 @@
 +++
-date = "2018-11-19T12:00:00-07:00"
 title = "Ingress"
 description = "Linkerd can work alongside your ingress controller of choice."
 weight = 6

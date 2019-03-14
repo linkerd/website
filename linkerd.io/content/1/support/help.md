@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T11:06:51-07:00"
 title = "Getting help"
 description = "Provides resources that you can use if you run into any issues."
 weight = 4

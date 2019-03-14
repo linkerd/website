@@ -1,5 +1,4 @@
 +++
-date = "2016-09-23T13:43:46-07:00"
 title = "Running locally"
 description = "How to run Linkerd as a standalone process."
 weight = 2

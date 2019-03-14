@@ -1,5 +1,4 @@
 +++
-date = "2017-02-28T13:35:47-07:00"
 title = "Enterprise"
 description = "Lists companies that provide commercial support for Linkerd."
 weight = 1

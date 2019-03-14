@@ -1,5 +1,4 @@
 +++
-date = "2016-02-02T08:26:51-08:00"
 title = "Routing"
 description = "Provides a comprehensive look at how Linkerd routes requests that it receives."
 weight = 10
