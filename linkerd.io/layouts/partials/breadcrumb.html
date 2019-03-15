@@ -6,7 +6,7 @@
     <li class="breadcrumb-item"><a href="{{ site.BaseURL }}">Home</a></li>
     <li class="breadcrumb-item"><a href="/{{ .version }}/overview">{{ .version }}</a></li>
 
-    {{ if and (eq $pathN 3) (not $isSectionPage) }}
+    {{ if or (and (eq $pathN 3) (not $isSectionPage)) (and (eq $pathN 4) $isSectionPage) }}
     <li class="breadcrumb-item"><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
     {{ end }}
 
