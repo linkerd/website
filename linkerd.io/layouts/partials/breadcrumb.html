@@ -1,5 +1,7 @@
 {{ $pathN         := len (split .ctx.File.Path "/") }}
 {{ $isSectionPage := eq .ctx.File.LogicalName "_index.md"}}
+
+{{ if or (not $isSectionPage) (gt $pathN 3) }}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     {{ if or (and (eq $pathN 3) (not $isSectionPage)) (and (eq $pathN 4) $isSectionPage) }}
@@ -14,3 +16,4 @@
     <li class="breadcrumb-item active" aria-current="page">{{ .ctx.Title }}</li>
   </ol>
 </nav>
+{{ end }}
