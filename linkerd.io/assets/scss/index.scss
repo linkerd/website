@@ -46,7 +46,7 @@ footer li {
 }
 
 .docs-content {
-  h1, h2 {
+  h1:not(.title), h2 {
     border-bottom: 1px solid $gray-500;
     padding-bottom: .5rem;
   }

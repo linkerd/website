@@ -1,0 +1,20 @@
+{{ $version       := index (split .File.Path "/") 0 }}
+{{ $pathN         := len (split .ctx.File.Path "/") }}
+{{ $isSectionPage := eq .ctx.File.LogicalName "_index.md"}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ site.BaseURL }}">Home</a></li>
+    <li class="breadcrumb-item"><a href="/{{ .version }}/overview">{{ .version }}</a></li>
+
+    {{ if and (eq $pathN 3) (not $isSectionPage) }}
+    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    {{ end }}
+
+    {{ if and (eq $pathN 4) (not $isSectionPage) }}
+    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.Parent.URL }}">{{ .ctx.Parent.Parent.Title }}</a></li>
+    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    {{ end }}
+
+    <li class="breadcrumb-item active" aria-current="page">{{ .ctx.Title }}</li>
+  </ol>
+</nav>
