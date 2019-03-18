@@ -11,3 +11,16 @@ $kbd-padding-x: 0.2rem;
 $kbd-color: #212529; // $body-color
 $kbd-bg: #dee2e6; // $gray-300
 
+// Breadcrumb overrides
+$breadcrumb-bg: #fafafa;
+$breadcrumb-padding-x: 1rem;
+$breadcrumb-border-radius: 0;
+
+.breadcrumb-item a {
+  color: $primary;
+
+  &:hover {
+    color: darken($primary, 20%);
+    text-decoration: none;
+  }
+}
