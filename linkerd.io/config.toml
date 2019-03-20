@@ -34,7 +34,7 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   name = "Blog"
   identifier = "blog"
   weight = 3
-  url = "https://blog.linkerd.io/"
+  url = "/blog/"
 
 [[menu.top]]
   name = "Enterprise"
