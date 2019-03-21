@@ -3,6 +3,7 @@ title: 'A Service Mesh for Kubernetes, Part I: Top-line service metrics'
 author: 'alex'
 date: Tue, 04 Oct 2016 22:42:59 +0000
 draft: false
+thumbnail: kubernetes1_featured_Twitter_ratio.png
 tags: [Uncategorized]
 ---
 

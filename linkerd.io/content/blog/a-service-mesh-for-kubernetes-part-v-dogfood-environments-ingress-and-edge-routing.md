@@ -2,6 +2,7 @@
 title: 'A Service Mesh for Kubernetes, Part V: Dogfood environments, ingress and edge routing'
 author: 'risha'
 date: Fri, 18 Nov 2016 00:10:16 +0000
+thumbnail: kubernetes5_featured_Twitter_ratio.png
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

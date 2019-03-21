@@ -3,7 +3,17 @@ title: 'Introducing Conduit'
 author: 'william'
 date: Tue, 05 Dec 2017 16:00:44 +0000
 draft: false
-tags: [Buoyant, buoyant, conduit, Conduit, Industry Perspectives, News, Release Notes]
+thumbnail: conduit_introducing_conduit_featured.png
+tags:
+  [
+    Buoyant,
+    buoyant,
+    conduit,
+    Conduit,
+    Industry Perspectives,
+    News,
+    Release Notes,
+  ]
 ---
 
 Conduit is now part of Linkerd! [Read more >](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd announcement')

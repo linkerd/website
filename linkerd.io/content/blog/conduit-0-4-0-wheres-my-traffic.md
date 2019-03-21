@@ -3,6 +3,7 @@ title: 'Conduit 0.4.0: Where’s my traffic?'
 author: 'franzi'
 date: Fri, 20 Apr 2018 13:58:01 +0000
 draft: false
+thumbnail: version_conduit_040.png
 tags: [conduit, Conduit, kubernetes, monitoring, News, Release Notes]
 ---
 
@@ -30,4 +31,4 @@ The \`voting\` service is only called from the \`web\` service. So, by tracing d
 
 ## What’s next?
 
-In terms of metrics and telemetry, we’ll be extending these semantics to other Kubernetes objects, such as Pods and ReplicaSets in [upcoming releases](https://conduit.io/roadmap). We’ll also be making \`conduit tap\` work on these same objects, since \`tap\` and \`stat\` work beautifully together. We might also just have another fun command or two waiting in the wings, ready to show off the power of Conduit’s new telemetry pipeline. Stay tuned! \[vcex_divider color="#dddddd" width="100%" height="1px" margin_top="20" margin*bottom="20"\] \_Special thanks to* [_Frederic Branczyk_](https://github.com/brancz) _for invaluable Prometheus help._
+In terms of metrics and telemetry, we’ll be extending these semantics to other Kubernetes objects, such as Pods and ReplicaSets in [upcoming releases](https://conduit.io/roadmap). We’ll also be making \`conduit tap\` work on these same objects, since \`tap\` and \`stat\` work beautifully together. We might also just have another fun command or two waiting in the wings, ready to show off the power of Conduit’s new telemetry pipeline. Stay tuned! \[vcex*divider color="#dddddd" width="100%" height="1px" margin_top="20" margin*bottom="20"\] \_Special thanks to* [\_Frederic Branczyk*](https://github.com/brancz) _for invaluable Prometheus help._

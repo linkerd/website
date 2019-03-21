@@ -3,6 +3,7 @@ title: 'A Service Mesh For ECS'
 author: 'andrew'
 date: Tue, 08 Aug 2017 15:08:30 +0000
 draft: false
+thumbnail: linkerd_featured.png
 tags: [aws, ECS, Linkerd, linkerd, service mesh, tutorials, Tutorials &amp; How-To's]
 ---
 

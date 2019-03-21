@@ -2,7 +2,7 @@
 title: 'Istio on Kubernetes on Mesos on AWS: it''s turtles all the way down'
 author: 'andrew'
 date: Tue, 19 Sep 2017 18:45:38 +0000
-draft: false
+draft: true
 tags: [aws, dcos, istio, kubernetes, Linkerd, News, tutorials]
 ---
 

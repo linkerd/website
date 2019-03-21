@@ -3,6 +3,7 @@ title: 'Using Linkerd as a Service Mesh Proxy at WePay'
 author: 'community'
 date: Wed, 27 Jun 2018 01:29:57 +0000
 draft: false
+thumbnail: WePay-logo.png
 tags: [case study, Community, GKE, Google Cloud Engine, kubernetes, Linkerd, linkerd, Linkerd in production, Tutorials &amp; How-To's]
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: 'Linkerd: Twitter-style Operability for Microservices'
 author: 'william'
+thumbnail: linkerd_featured_operability.png
 date: Thu, 18 Feb 2016 22:51:16 +0000
 draft: false
 tags: [Buoyant, buoyant, Linkerd, linkerd, News]

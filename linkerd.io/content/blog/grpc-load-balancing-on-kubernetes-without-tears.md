@@ -2,6 +2,7 @@
 title: 'gRPC Load Balancing on Kubernetes without Tears'
 author: 'william'
 date: Wed, 14 Nov 2018 18:22:51 +0000
+thumbnail: Mono-8d2e53ef-b133-4aa0-9551-7e36a880c553.png
 draft: false
 tags: [Community, Industry Perspectives, Linkerd, Tutorials &amp; How-To's]
 ---

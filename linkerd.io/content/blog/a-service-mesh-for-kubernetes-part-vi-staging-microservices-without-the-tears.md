@@ -2,6 +2,7 @@
 title: 'A Service Mesh for Kubernetes, Part VI: Staging microservices without the tears'
 author: 'risha'
 date: Sat, 07 Jan 2017 00:13:02 +0000
+thumbnail: kubernetes6_featured_Twitter_ratio.png
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

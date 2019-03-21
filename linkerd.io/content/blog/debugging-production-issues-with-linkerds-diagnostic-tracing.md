@@ -1,9 +1,20 @@
 ---
-title: 'Debugging production issues with Linkerd''s diagnostic tracing'
+title: "Debugging production issues with Linkerd's diagnostic tracing"
 author: 'dennis'
 date: Tue, 19 Jun 2018 23:25:51 +0000
 draft: false
-tags: [debug, debugging, Linkerd, linkerd, microservices, News, tracing, Tutorials &amp; How-To's]
+thumbnail: DiagnosticTracing_Linkerd.png
+tags:
+  [
+    debug,
+    debugging,
+    Linkerd,
+    linkerd,
+    microservices,
+    News,
+    tracing,
+    Tutorials &amp; How-To's,
+  ]
 ---
 
 [Linkerd 1.4.2](https://github.com/linkerd/linkerd/releases/tag/1.4.2) introduces a new _diagnostic tracing_ feature that allows you to send test requests through the system in order to see how Linkerd routed that request at each hop along the way. Diagnostic tracing allows you to quickly solve common Linkerd troubleshooting scenarios without affecting the state of your production services. Of the lessons we’ve learned over the last two years from helping companies around the world put Linkerd into production, the one that stands out above the rest is the importance of having solid _runtime diagnostics_. We commonly find that the exact configuration and deployment scheme that worked in staging and dev can exhibit unexpected behavior in production. And just as commonly as they occur, reproducing those anomalies outside of the production environment context can be incredibly difficult. In part, that’s a fundamental law of software---new problems _always_ crop up in prod (to paraphrase Mike Tyson, “everyone has a plan until they deploy to production”). This is particularly troublesome for Linkerd because of its position in the stack as an integration layer. By sitting at the intersection of the layer 3 network, service discovery, DNS, application behavior, and many other distributed system components, any latent problem in the interaction between these systems can seem to manifest itself as unexpected behavior in Linkerd itself. When Linkerd first gets introduced into new infrastructure, it naturally becomes the first thing that takes the blame whenever anything goes wrong. Our first inclination is to conclude that failures are happening in the new component. Obviously, it’s that new thing we just put in because everything now routes through it! Therefore, introspective diagnostics are vital to determine what’s actually at fault and showing a path to resolution. (For more about the blame phenomenon, see [How to Put a Service Mesh into Production Without Getting Fired](https://www.youtube.com/watch?v=XA1aGpYzpYg)) To improve this, we’ve been hard at work over the past few months adding runtime diagnostics to Linkerd to allow operators to rapidly diagnose issues in production. Some examples of these diagnostics include the ability to [introspect current Kubernetes and Namerd watch states](https://github.com/linkerd/linkerd/releases/tag/1.4.1). Additionally, we’re happy to now introduce the new diagnostic tracing feature.

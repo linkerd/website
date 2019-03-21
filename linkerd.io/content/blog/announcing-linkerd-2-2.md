@@ -2,6 +2,7 @@
 title: 'Announcing Linkerd 2.2'
 author: 'william'
 date: Tue, 12 Feb 2019 22:21:13 +0000
+thumbnail: image-11-1.png
 draft: false
 tags: [Buoyant, Linkerd, News]
 ---

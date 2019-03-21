@@ -2,6 +2,7 @@
 title: 'Announcing the Linkerd + GraalVM working group'
 author: 'gmiranda23'
 date: Mon, 04 Jun 2018 16:47:09 +0000
+thumbnail: linkerd-graalvm-working-group.png
 draft: false
 tags: [Linkerd, linkerd, News]
 ---

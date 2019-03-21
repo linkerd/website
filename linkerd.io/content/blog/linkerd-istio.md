@@ -2,7 +2,7 @@
 title: 'Linkerd and Istio: like peanut butter and jelly'
 author: 'sarah'
 date: Tue, 11 Jul 2017 11:31:07 +0000
-draft: false
+draft: true
 tags: [Buoyant, Industry Perspectives, Integrations, istio, Linkerd, linkerd, service mesh, Tutorials &amp; How-To's]
 ---
 

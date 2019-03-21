@@ -2,6 +2,7 @@
 title: 'A Service Mesh for Kubernetes, Part IV: Continuous deployment via traffic shifting'
 author: 'sarah'
 date: Fri, 04 Nov 2016 23:02:03 +0000
+thumbnail: kubernetes4_featured_Twitter_ratio.png
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---

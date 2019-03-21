@@ -3,6 +3,7 @@ title: 'Slow Cooker: Load testing for tough software'
 author: 'steve'
 date: Sat, 10 Dec 2016 00:11:51 +0000
 draft: false
+thumbnail: linkerd_slow_cooker_featured.png
 tags: [Buoyant, buoyant, News, Product Announcement]
 ---
 

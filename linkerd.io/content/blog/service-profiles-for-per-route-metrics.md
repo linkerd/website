@@ -3,6 +3,7 @@ title: 'Service Profiles for Per-Route Metrics'
 author: 'alex'
 date: Sat, 08 Dec 2018 04:10:13 +0000
 draft: false
+thumbnail: image-2.png
 tags: [Community, Integrations, Linkerd, News, Release Notes, Tutorials &amp; How-To's]
 ---
 
