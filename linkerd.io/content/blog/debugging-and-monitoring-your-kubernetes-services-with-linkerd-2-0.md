@@ -14,4 +14,4 @@ Linkerd 2.0 brings dramatic improvements to performance, resource consumption, a
 - Watch real-time requests and responses for all our container service debugging.
 - And more!
 
-\[embed\]https://www.youtube.com/watch?v=4E9tzNwyy7c\[/embed\]
+{{< youtube 4E9tzNwyy7c >}}

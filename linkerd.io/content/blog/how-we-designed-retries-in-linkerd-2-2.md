@@ -13,11 +13,13 @@ Retries are a fundamental mechanism for handling partial or transient failures i
 
 In Linkerd 2.2 we introduced _retries_, or the ability for Linkerd to automatically retry failed requests. This gives Linkerd the ability to automatically handle partial or transient failures in a service, without the application having to be aware: if a request fails, Linkerd can just try it again! Combined with Linkerd's [request-level load balancing](https://linkerd.io/2/features/load-balancing/), this also allows Linkerd to handle failures of individual pods. In Linkerd, you specify retries as part of a [service profile](https://linkerd.io/2/features/service-profiles/) (introduced in a [previous blog post](https://blog.linkerd.io/2018/12/07/service-profiles-for-per-route-metrics/)). Marking a route as retryable is as simple as adding \`isRetryable: true\` to the corresponding service profile entry:
 
-    - name: HEAD /authors/{id}.json
-        condition:
-          method: HEAD
-          pathRegex: /authors/[^/]*\\.json
-        isRetryable: true
+```yml
+- name: HEAD /authors/{id}.json
+    condition:
+      method: HEAD
+      pathRegex: /authors/[^/]*\\.json
+    isRetryable: true
+```
 
 Of course, before you add retry behavior to a route, you should make sure that the route is _idempotent_—in other words, that multiple calls to the same route with the same parameters will have no ill effects. This is important because retries (by definition!) may cause multiple copies of the same request to be sent to a service. If the request does something non-idempotent, e.g. subtracting a dollar from your bank account, you probably don't want it to be automatically retried. Once enabled, retries have two important parameters: a _budget_ and a _timeout_. Let's take both of these in turn.
 
@@ -25,21 +27,23 @@ Of course, before you add retry behavior to a route, you should make sure that t
 
 Once you've marked a route as retryable, Linkerd allows you to configure a _retry budget_ for a service. Linkerd ships with reasonable default values, but if you want to customize the budget, you can set it in the service profile:
 
-    retryBudget:
-      # The retryRatio is the maximum ratio of retries requests to original
-      # requests.  A retryRatio of 0.2 means that retries may add at most an
-      # additional 20% to the request load.
-      retryRatio: 0.2
+```bash
+retryBudget:
+  # The retryRatio is the maximum ratio of retries requests to original
+  # requests.  A retryRatio of 0.2 means that retries may add at most an
+  # additional 20% to the request load.
+  retryRatio: 0.2
 
-      # This is an allowance of retries per second in addition to those allowed
-      # by the retryRatio.  This allows retries to be performed, when the request
-      # rate is very low.
-      minRetriesPerSecond: 10
+  # This is an allowance of retries per second in addition to those allowed
+  # by the retryRatio.  This allows retries to be performed, when the request
+  # rate is very low.
+  minRetriesPerSecond: 10
 
-      # This duration indicates for how long requests should be considered for the
-      # purposes of calculating the retryRatio.  A higher value considers a larger
-      # window and therefore allows burstier retries.
-      ttl: 10s
+  # This duration indicates for how long requests should be considered for the
+  # purposes of calculating the retryRatio.  A higher value considers a larger
+  # window and therefore allows burstier retries.
+  ttl: 10s
+  ```
 
 Linkerd's use of retry budgets is a better alternative to the normal practice of configuring retries with the _max retries_. Let's take a moment to understand why.
 

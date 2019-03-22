@@ -15,7 +15,9 @@ In this episode, Joe takes Linkerd 2.0 out for a spin, covering:
 - How Linkerd interacts with Kubernetes
 - Design philosophy behind the project
 
-View the entire episode below. \[embed\]https://youtu.be/1dXJ34-KLe8?t=1s\[/embed\]
+View the entire episode below.
+
+{{< youtube 1dXJ34-KLe8 >}}
 
 TGIK  is a weekly live video stream that is broadcasted live from the Heptio headquarters in Seattle, Washington. Joe Beda, Heptio Founder and CTO is the TGIK host. The video stream is a one-hour long recording featuring topics that range from installing a Kubernetes cluster to using a cluster or add-ons running on Kubernetes.
 
