@@ -4,7 +4,15 @@ author: 'alex'
 date: Sat, 08 Dec 2018 04:10:13 +0000
 draft: false
 thumbnail: image-2.png
-tags: [Community, Integrations, Linkerd, News, Release Notes, Tutorials &amp; How-To's]
+tags:
+  [
+    Community,
+    Integrations,
+    Linkerd,
+    News,
+    Release Notes,
+    Tutorials &amp; How-To's,
+  ]
 ---
 
 One of the primary goals of Linkerd is to enable service and platform owners alike to understand their services not just in terms of packets and bytes, but in terms of requests and responses. For protocols like HTTP, this requires understanding the semantics of the protocol, so that Linkerd can measure things like success rate and response latency. We also need to be able to break these metrics down across different dimensions such as source service, destination service, and HTTP path. However, aggregating metrics by path in particular poses some significant challenges. In this post, we'll explore these challenges, and show how Linkerd handles them using a new concept called the _service profile_. If you're keen to simply add path-level metrics to your service, feel free to skip ahead to the end of the post.

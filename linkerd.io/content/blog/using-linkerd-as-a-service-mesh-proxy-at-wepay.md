@@ -4,7 +4,18 @@ author: 'community'
 date: Wed, 27 Jun 2018 01:29:57 +0000
 draft: false
 thumbnail: WePay-logo.png
-tags: [case study, Community, GKE, Google Cloud Engine, kubernetes, Linkerd, linkerd, Linkerd in production, Tutorials &amp; How-To's]
+tags:
+  [
+    case study,
+    Community,
+    GKE,
+    Google Cloud Engine,
+    kubernetes,
+    Linkerd,
+    linkerd,
+    Linkerd in production,
+    Tutorials &amp; How-To's,
+  ]
 ---
 
 _This post originally appeared on [WePay's Engineering Blog](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay). Have a story about running Linkerd in production, or want to contribute your perspective on microservices management or the service mesh? [Tell us](https://docs.google.com/forms/d/1hZujOuwOFMlU_1e15-r7M6nJKMFUHYTJW2xj4i2IxPU/edit) about it. _ ![](https://blog.linkerd.io/wp-content/uploads/sites/3/2018/06/mohsen_rezaei-300x300.jpg)   By Mohsen Rezaei, Senior Software Engineer, WePay In the upcoming months, we are going to write a series of posts documenting [WePay Engineering’s](https://wecode.wepay.com/) journey from traditional load balancers to a service mesh on top of [Google’s Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) (GKE). In this first part of the series, we are going to take a look at some of the routing and load balancing options that we have used before, compare them with the services we have looked at as possible service mesh proxies, and how they’d change the way our infrastructure operates. ![service mesh sidecar proxy](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_0.png) _Figure 1: Data plane using sidecar proxy pattern_ Figure 1 shows a simplified version of a [data plane](https://medium.com/microservices-learning/understanding-microservices-communication-and-service-mesh-e888d1adc41), in service mesh terms, where Service X is sending a request to Service Y via it’s sidecar proxy. Since Service X is sending the request through it’s proxy, the request is first passed to Service X’s proxy (PX), then sent to Service Y’s proxy (PY) before getting to the destination, Service Y. In most cases, PX finds PY through a service discovery service, e.g. [Namerd](https://linkerd.io/advanced/namerd/). _Our [meetup session about gRPC](https://youtu.be/8KWmNw9jQ04?t=28m59s) talks a bit about using this pattern for proxy load balancing._ In this post, to keep things simple, we’re going to focus on the data plane, and to simplify things further, we’re going to only talk about proxies using the [sidecar pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar). _Side note: all technologies mentioned in this post are very sophisticated pieces of software that have been written by talented engineers and open sourced to be available for other companies with similar use cases. The comparisons below are solely based on WePay’s use cases and which technology fit those use cases best, and it’s not intended to the discredit other technologies mentioned._

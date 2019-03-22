@@ -1,5 +1,5 @@
 ---
-title: 'Istio on Kubernetes on Mesos on AWS: it''s turtles all the way down'
+title: "Istio on Kubernetes on Mesos on AWS: it's turtles all the way down"
 author: 'andrew'
 date: Tue, 19 Sep 2017 18:45:38 +0000
 draft: true

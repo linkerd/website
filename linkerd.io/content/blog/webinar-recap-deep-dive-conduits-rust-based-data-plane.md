@@ -4,7 +4,18 @@ author: 'courtney'
 date: Mon, 05 Feb 2018 19:16:20 +0000
 draft: false
 thumbnail: conduit_webinar_recap.png
-tags: [conduit, Conduit, Linkerd, Release Notes, rust, rustlang, service mesh, webinar, Webinars]
+tags:
+  [
+    conduit,
+    Conduit,
+    Linkerd,
+    Release Notes,
+    rust,
+    rustlang,
+    service mesh,
+    webinar,
+    Webinars,
+  ]
 ---
 
 Conduit is now part of Linkerd! [Read more >](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd announcement') ![](http://buoyant.io/wp-content/uploads/2018/02/conduit_webinar_recap-300x151.png)Earlier this month, Conduit core contributors and Rust enthusiasts Carl Lerche and Sean McArthur presented a look at the internals of the new Conduit service mesh, explored its fundamental design choices, and covered our motivations for writing the Conduit data plane in Rust. In case you missed it, we have some of the key takeaways below.

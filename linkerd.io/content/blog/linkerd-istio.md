@@ -3,7 +3,17 @@ title: 'Linkerd and Istio: like peanut butter and jelly'
 author: 'sarah'
 date: Tue, 11 Jul 2017 11:31:07 +0000
 draft: true
-tags: [Buoyant, Industry Perspectives, Integrations, istio, Linkerd, linkerd, service mesh, Tutorials &amp; How-To's]
+tags:
+  [
+    Buoyant,
+    Industry Perspectives,
+    Integrations,
+    istio,
+    Linkerd,
+    linkerd,
+    service mesh,
+    Tutorials &amp; How-To's,
+  ]
 ---
 
 Today (in addition to [some other exciting news](https://buoyant.io/2017/07/11/buoyant-and-benchmark/)) we’re happy to announce [the release of Linkerd 1.1.1](https://github.com/linkerd/linkerd/releases/tag/1.1.1), which features integration with the [Istio project](http://istio.io)! This integration is currently in a beta state, but is usable today—see below for how to try it out. In the upcoming months we’ll continue to invest in making this integration ready for production. (Side note: interested in working on Linkerd and Istio? [We’re hiring](https://buoyant.io/careers/)!) In this blog post, I’ll share a little bit about this feature and what it means for Linkerd and Istio users.

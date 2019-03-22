@@ -1,10 +1,22 @@
 ---
-title: 'What''s a service mesh? And why do I need one?'
+title: "What's a service mesh? And why do I need one?"
 author: 'william'
 date: Tue, 25 Apr 2017 23:35:29 +0000
 draft: false
 thumbnail: service_mesh_featured.png
-tags: [Buoyant, buoyant, cloud-native, conduit, Conduit, Industry Perspectives, Linkerd, linkerd, microservices, service mesh]
+tags:
+  [
+    Buoyant,
+    buoyant,
+    cloud-native,
+    conduit,
+    Conduit,
+    Industry Perspectives,
+    Linkerd,
+    linkerd,
+    microservices,
+    service mesh,
+  ]
 ---
 
 **Edit 11/26/2018: Since we wrote this post, lots has happened. Most excitingly, [Linkerd 2.0 has been released](https://blog.linkerd.io/2018/09/18/announcing-linkerd-2-0/)!** tl;dr: A service mesh is a dedicated infrastructure layer for making service-to-service communication safe, fast, and reliable. If you’re building a cloud native application, you need a service mesh. Over the past year, the service mesh has emerged as a critical component of the cloud native stack. High-traffic companies like [Paypal, Ticketmaster, and Credit Karma have all added a service mesh to their production applications](http://info.buoyant.io/press/2017/03/07/linkerd_1.0_release), and this January, [Linkerd](http://linkerd.io), the open source service mesh for cloud native applications, [became an official project of the Cloud Native Computing Foundation](https://techcrunch.com/2017/01/23/cloud-native-computing-foundation-adds-linkerd-as-its-fifth-hosted-project/). But what is a service mesh, exactly? And why is it suddenly relevant? In this article, I’ll define the service mesh and trace its lineage through shifts in application architecture over the past decade. I’ll distinguish the service mesh from the related, but distinct, concepts of API gateways, edge proxies, and the enterprise service bus. Finally, I’ll describe where the service mesh is heading, and what to expect as this concept evolves alongside cloud native adoption.

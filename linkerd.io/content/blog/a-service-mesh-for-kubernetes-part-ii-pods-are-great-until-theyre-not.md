@@ -1,5 +1,5 @@
 ---
-title: 'A Service Mesh for Kubernetes, Part II: Pods are great until they''re not'
+title: "A Service Mesh for Kubernetes, Part II: Pods are great until they're not"
 author: 'alex'
 date: Fri, 14 Oct 2016 22:55:04 +0000
 thumbnail: kubernetes2_featured_Twitter_ratio.png

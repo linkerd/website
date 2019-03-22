@@ -43,7 +43,7 @@ retryBudget:
   # purposes of calculating the retryRatio.  A higher value considers a larger
   # window and therefore allows burstier retries.
   ttl: 10s
-  ```
+```
 
 Linkerd's use of retry budgets is a better alternative to the normal practice of configuring retries with the _max retries_. Let's take a moment to understand why.
 

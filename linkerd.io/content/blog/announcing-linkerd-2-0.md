@@ -4,7 +4,8 @@ author: 'william'
 date: Tue, 18 Sep 2018 17:00:00 +0000
 draft: false
 thumbnail: 2-web-overview.png
-tags: [cloud-native, Community, kubernetes, Linkerd, linkerd, microservices, News]
+tags:
+  [cloud-native, Community, kubernetes, Linkerd, linkerd, microservices, News]
 ---
 
 On behalf of the Linkerd maintainers, I’m happy to announce that Linkerd 2.0 is now in general availability (GA). This means that we’ve cut an official 2.0 stable release, and we think it’s ready for you to try in production. It’s already seeing the light of day at companies like [WePay](https://go.wepay.com/), [Hush](https://www.shophush.com/), [Studyo](https://studyo.co/), and [JustFootball](https://justfootball.io/). You can try Linkerd 2.0 on a Kubernetes 1.9+ cluster in 60 seconds by running:           curl https://run.linkerd.io/install | sh (Or check out the full [Getting Started Guide](https://linkerd.io/2/getting-started/).) The 2.0 release of Linkerd brings some very significant changes. First, we’ve completely rewritten Linkerd to be orders of magnitude faster and smaller than Linkerd 1.x. Linkerd 2.0’s data plane is comprised of ultralight Rust proxies which consume around 10mb of RSS and have a p99 latency of <1ms. Linkerd’s minimalist control plane (written in Go) is similarly designed for speed and low resource footprint. Second, with the 2.0 release, Linkerd adds the ability to run on a single service without requiring cluster-wide installation. This means that if you’re a developer or service owner who doesn’t have access to the whole Kubernetes cluster, you can run Linkerd on your service and get:
