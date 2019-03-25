@@ -114,7 +114,7 @@ This concept of contextual resolution can be extended to alter how _individual 
 1.  Just deploy it to production. #YOLO
 2.  Deploy staging versions of all of the services that call your service.
 
-![](https://buoyant.io/wp-content/uploads/2017/07/buoyant-staging-users-v2.png) Neither of these options are particularly manageable. The former causes user-facing problems. The latter becomes complex and cumbersome—you may not have the access or tooling needed to deploy new configurations of all of the services that call you… Happily, the routing capabilities we have with Linkerd allow us to do ad-hoc staging! We can extend the delegation system described above on an individual request to stage a new version of the users service without changing any of its callers. For example:
+![](/uploads/2017/07/buoyant-staging-users-v2.png) Neither of these options are particularly manageable. The former causes user-facing problems. The latter becomes complex and cumbersome—you may not have the access or tooling needed to deploy new configurations of all of the services that call you… Happily, the routing capabilities we have with Linkerd allow us to do ad-hoc staging! We can extend the delegation system described above on an individual request to stage a new version of the users service without changing any of its callers. For example:
 
     $ curl -H 'l5d-dtab: /host/users=>/srv/users-v2' https://example.com/
 
@@ -122,7 +122,7 @@ This would cause all services that would ordinarily send requests to `/srv/user
 
 ## DYNAMIC ROUTING WITH NAMERD
 
-I’ve described how we can configure Linkerd with a static delegation table. But what if we want to change routing policy at runtime? What if we want to use a similar approach that we used for staging to support “canary” or “blue-green”” deploys? Enter *namerd*. [namerd](https://github.com/linkerd/linkerd/tree/master/namerd) is a service that allows operators to manage delegations. It fronts service discovery systems so that Linkerd does not need to communicate with service discovery directly—linkerd instances resolve names through namerd, which maintains a view of service discovery backends. ![](https://buoyant.io/wp-content/uploads/2017/07/buoyant-namerd.png) namerd is [configured](https://github.com/linkerd/linkerd/blob/master/namerd/docs/config.md) with:
+I’ve described how we can configure Linkerd with a static delegation table. But what if we want to change routing policy at runtime? What if we want to use a similar approach that we used for staging to support “canary” or “blue-green”” deploys? Enter *namerd*. [namerd](https://github.com/linkerd/linkerd/tree/master/namerd) is a service that allows operators to manage delegations. It fronts service discovery systems so that Linkerd does not need to communicate with service discovery directly—linkerd instances resolve names through namerd, which maintains a view of service discovery backends. ![](/uploads/2017/07/buoyant-namerd.png) namerd is [configured](https://github.com/linkerd/linkerd/blob/master/namerd/docs/config.md) with:
 
 - A (pluggable) storage backend, e.g. ZooKeeper or etcd.
 - “Namers” that inform namerd how to perform service discovery.

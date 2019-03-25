@@ -40,7 +40,7 @@ Next, setup Kubernetes on your new DC/OS cluster. For more information on runnin
 
 dcos package install --yes beta-kubernetes
 
-You can then see all the Kubernetes deploy tasks running in DC/OS. ![](https://buoyant.io/wp-content/uploads/2017/09/Screen-Shot-2017-09-14-at-11.20.47-AM.png) Once the Kubernetes deployment is complete, you'll need to configure `kubectl` to connect to it. Since the Kubernetes package installs onto private DC/OS nodes, we need to tunnel through our DC/OS master to reach it. First, get the Public IP of your DC/OS master.
+You can then see all the Kubernetes deploy tasks running in DC/OS. ![](/uploads/2017/09/Screen-Shot-2017-09-14-at-11.20.47-AM.png) Once the Kubernetes deployment is complete, you'll need to configure `kubectl` to connect to it. Since the Kubernetes package installs onto private DC/OS nodes, we need to tunnel through our DC/OS master to reach it. First, get the Public IP of your DC/OS master.
 
 LB_NAME=$(aws elb describe-load-balancers | jq -r ".LoadBalancerDescriptions\[\] | select(.DNSName==\\"$DCOS_URL\\") | .LoadBalancerName") INSTANCE_ID=$(aws elb describe-instance-health --load-balancer-name $LB_NAME | jq -r .InstanceStates\[0\].InstanceId) PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID | jq -r .Reservations\[0\].Instances\[0\].PublicIpAddress)
 
@@ -62,7 +62,7 @@ The beta-kubernetes package in DC/OS does not include kube-dns or the kubernetes
 
 \# install kubernetes-dashboard kubectl create -f https://raw.githubusercontent.com/mesosphere/dcos-kubernetes-quickstart/master/add-ons/dashboard/kubernetes-dashboard.yaml open http://localhost:9000/ui # osx only
 
-You now have a fully functional Kubernetes deployment on your DC/OS cluster. ![](https://buoyant.io/wp-content/uploads/2017/09/Screen-Shot-2017-09-14-at-11.32.14-AM.png)
+You now have a fully functional Kubernetes deployment on your DC/OS cluster. ![](/uploads/2017/09/Screen-Shot-2017-09-14-at-11.32.14-AM.png)
 
 ## Deploy Istio
 
@@ -100,7 +100,7 @@ You should now be able to see the sample app.
 
 \# view books app kubectl port-forward \$(kubectl get pod -l istio=ingress -o jsonpath='{.items\[0\].metadata.name}') 3001:80 open http://localhost:3001/productpage # osx only
 
-![](https://buoyant.io/wp-content/uploads/2017/09/Screen-Shot-2017-09-14-at-1.19.22-PM.png) To confirm metrics collection is working, add some load to the sample app and verify traffic via the Grafana dashboard.
+![](/uploads/2017/09/Screen-Shot-2017-09-14-at-1.19.22-PM.png) To confirm metrics collection is working, add some load to the sample app and verify traffic via the Grafana dashboard.
 
 while true; do curl -o /dev/null -s -w "%{http_code}\\n" http://localhost:3001/productpage; done
 
@@ -108,7 +108,7 @@ while true; do curl -o /dev/null -s -w "%{http_code}\\n" http://localhost:3001/p
 
 open http://localhost:3000/dashboard/db/istio-dashboard # osx only
 
-![](https://buoyant.io/wp-content/uploads/2017/09/Screen-Shot-2017-09-14-at-1.20.14-PM.png) Congratulations! You now have an application running on Kubernetes with DC/OS in AWS backed by the Istio service mesh.
+![](/uploads/2017/09/Screen-Shot-2017-09-14-at-1.20.14-PM.png) Congratulations! You now have an application running on Kubernetes with DC/OS in AWS backed by the Istio service mesh.
 
 ## Conclusion
 

@@ -7,7 +7,9 @@ draft: false
 tags: [Linkerd, linkerd, News]
 ---
 
-We're very excited to announce [Linkerd](https://github.com/linkerd/linkerd/releases/tag/1.2.0) [version 1.2.0](https://github.com/linkerd/linkerd/releases/tag/1.2.0)! This is a huge release with a lot of new features, fixes, and performance improvements, especially for our users running Linkerd with Kubernetes, HTTP/2, or gRPC. There are also a handful of breaking changes in 1.2.0 , so we've included a migration guide below to help make the transition as easy as possible. As usual, release artifacts are available [on GitHub](https://github.com/linkerd/linkerd/releases/tag/1.2.0), and Docker images are available [on Docker Hub](https://hub.docker.com/r/buoyantio/linkerd/).
+We're very excited to announce [Linkerd](https://github.com/linkerd/linkerd/releases/tag/1.2.0) [version 1.2.0](https://github.com/linkerd/linkerd/releases/tag/1.2.0)! This is a huge release with a lot of new features, fixes, and performance improvements, especially for our users running Linkerd with Kubernetes, HTTP/2, or gRPC. There are also a handful of breaking changes in 1.2.0 , so we've included a migration guide below to help make the transition as easy as possible.
+
+As usual, release artifacts are available [on GitHub](https://github.com/linkerd/linkerd/releases/tag/1.2.0), and Docker images are available [on Docker Hub](https://hub.docker.com/r/buoyantio/linkerd/).
 
 ## Community Contributors
 
@@ -24,25 +26,31 @@ In addition to contributions from the community, this release also contains the 
 
 ### New DNS SRV Record support
 
-Thanks to Christopher Taylor ([@ccmtaylor](https://github.com/ccmtaylor)) at SoundCloud, Linkerd 1.2.0 features a new `io.l5d.dnssrv` namer that allows Linkerd to use DNS SRV records for service discovery. An example configuration for the DNS SRV namer might look like this:
+Thanks to Christopher Taylor ([@ccmtaylor](https://github.com/ccmtaylor)) at SoundCloud, Linkerd 1.2.0 features a new `io.l5d.dnssrv` namer that allows Linkerd to use DNS SRV records for service discovery.
 
-    namers:
-    - kind: io.l5d.dnssrv
-      experimental: true
-      refreshIntervalSeconds: 5
-      dnsHosts:
+An example configuration for the DNS SRV namer might look like this:
+
+```yml
+namers:
+  - kind: io.l5d.dnssrv
+    experimental: true
+    refreshIntervalSeconds: 5
+    dnsHosts:
       - ns0.example.org
       - ns1.example.org
+```
 
 The `dnsHosts` configuration key specifies a list of DNS servers against which to perform SRV lookups, while the `refreshIntervalSeconds` key specifies the frequency of lookups. Please note that this namer is still considered experimental, so `experimental: true` is required. Once the DNS SRV namer is configured, it can be referenced in the dtab to use it:
 
-    dtab: |
-      /dnssrv => /#/io.l5d.dnssrv
-      /svc/myservice =>
-        /dnssrv/myservice.srv.example.org &
-        /dnssrv/myservice2.srv.example.org;
-      /svc/other =>
-        /dnssrv/other.srv.example.org;
+```yml
+dtab: |
+  /dnssrv => /#/io.l5d.dnssrv
+  /svc/myservice =>
+    /dnssrv/myservice.srv.example.org &
+    /dnssrv/myservice2.srv.example.org;
+  /svc/other =>
+    /dnssrv/other.srv.example.org;
+```
 
 Please see the DNS SRV namer [documentation](https://linkerd.io/config/head/linkerd/index.html#dns-srv-records) for more information.
 
@@ -50,17 +58,35 @@ Please see the DNS SRV namer [documentation](https://linkerd.io/config/head/link
 
 Another new feature added by an open-source contributor is support for filtering by Consul health states, added by Linkerd user Andrew Wright ([@blacktoe](https://github.com/blacktoe)). Consul has a concept of `passing`, `warning` and `critical` health statuses, but the Consul namer previously only supported filtering nodes by a binary health status. To use this feature, add the following to the Consul namer configuration:
 
-useHealthCheck: true healthStatuses: \- "passing" \- "warning"
+```yml
+useHealthCheck: true
+healthStatuses:
+  - 'passing'
+  - 'warning'
+```
 
 Where `healthStatuses` is a list of statuses to filter on. Refer to the [documentation](https://linkerd.io/config/1.2.0/linkerd/index.html#consul-configuration) for the Consul namer for more information. In addition, we've made the Consul namer more robust: Consul errors will now cause the namer to fall back to the last good state observed from Consul, and the log messages on these errors have been made more informative.
 
 ### New Kubernetes ConfigMap Interpreter
 
-Users running Linkerd on Kubernetes may be interested in the new `io.l5d.k8s.configMap` interpreter (marked experimental for now, until it sees more production use). This interpreter will interpret names using a dtab stored in a Kubernetes [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/#understanding-configmaps), and update the dtab if the ConfigMap changes, allowing users on Kubernetes to implement dynamic routing rule changes without running Namerd. An example configuration is as follows:
+Users running Linkerd on Kubernetes may be interested in the new `io.l5d.k8s.configMap` interpreter (marked experimental for now, until it sees more production use). This interpreter will interpret names using a dtab stored in a Kubernetes [ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/#understanding-configmaps), and update the dtab if the ConfigMap changes, allowing users on Kubernetes to implement dynamic routing rule changes without running Namerd.
 
-routers: \- ... interpreter: kind: io.l5d.k8s.configMap experimental: true namespace: ns name: dtabs filename: my-dtab
+An example configuration is as follows:
 
-The `namespace` configuration key refers to the name of the Kubernetes namespace where the ConfigMap is stored, while the `name` key refers to the name of the ConfigMap object, and the `filename` key refers to the name of the dtab within the ConfigMap. As this interpreter is still experimental, `experimental: true` must be set for it to be used. See the [ConfigMap namer documentation](https://linkerd.io/config/1.2.0/linkerd/index.html#kubernetes-configmap) for more information.
+```yml
+routers:
+- ...
+  interpreter:
+    kind: io.l5d.k8s.configMap
+    experimental: true
+    namespace: ns
+    name: dtabs
+    filename: my-dtab
+```
+
+The `namespace` configuration key refers to the name of the Kubernetes namespace where the ConfigMap is stored, while the `name` key refers to the name of the ConfigMap object, and the `filename` key refers to the name of the dtab within the ConfigMap. As this interpreter is still experimental, `experimental: true` must be set for it to be used.
+
+See the [ConfigMap namer documentation](https://linkerd.io/config/1.2.0/linkerd/index.html#kubernetes-configmap) for more information.
 
 ### Improved Ingress Identifier Configurability (istio)
 
@@ -78,15 +104,20 @@ For users of the HTTP/2 protocol, we've solved an issue where long-running strea
 
 # Breaking Changes and Migration
 
-### Removed Support for PKCS#1 Keys
+## Removed Support for PKCS#1 Keys
 
 Linkerd 1.2.0 [removes support](https://github.com/linkerd/linkerd/pull/1590) for Public Key Cryptography Standard #1 SSL private keys, which were previously deprecated. If you still have keys in PKCS#1 format, you will need to convert your private keys to PKCS#8. Private keys can be converted with the following command:
 
+```bash
 openssl pkcs8 -topk8 -nocrypt -in $PKCS1.pem -out $PKCS8.pk8
+```
 
 Where `$PKCS1` and `$PKCS8` are the file names of the old PKCS#1 key and the new key to output, respectively. If you see errors with messages containing “file does not contain valid private key”, you'll know you need to do this step. For example, the message:
 
-WARN 0908 14:03:38.201 CDT finagle/netty4-6: Failed to initialize a channel. Closing: \[id: 0xdd6c26dd\] java.lang.IllegalArgumentException: File does not contain valid private key: finagle/h2/src/e2e/resources/linkerd-tls-e2e-key-pkcs1.pem
+```txt
+WARN 0908 14:03:38.201 CDT finagle/netty4-6: Failed to initialize a channel. Closing: [id: 0xdd6c26dd]
+java.lang.IllegalArgumentException: File does not contain valid private key: finagle/h2/src/e2e/resources/linkerd-tls-e2e-key-pkcs1.pem
+```
 
 Indicates that the key `linkerd-tls-e2e-key-pkcs1.pem` needs to be updated to PKCS#8 format.
 
@@ -98,13 +129,19 @@ Linkerd now rejects client TLS configurations which contain both `disableValidat
 
 For improved security, by default Linkerd and Namerd 1.2.0 now serve the admin page, metrics,  `io.l5d.mesh` , and `io.l5d.thriftNameInterpreter` only on 127.0.0.1. (Previously, it bound to every available network interface.) This means that accessing the admin and metrics interfaces from an external IP address will no longer work. If you need to access the admin or metrics pages from an external IP address, you will need to add
 
-admin: ip: 0.0.0.0 port: 9990
+```txt
+admin:
+  ip: 0.0.0.0
+  port: 9990
+```
 
 To your configuration file.
 
 ### StatsD Telemeter Deprecation
 
-The StatsD telemeter (`io.l5d.statsd`) [is now deprecated](https://discourse.linkerd.io/t/deprecating-the-statsd-telemeter/268/1), and will log a warning on use. We've been considering deprecating this telemeter for some time, as it doesn't work the way most users expect and can lead to loss of data and/or greatly increased Linkerd latency. We recommend that users of this telemeter migrate to the InfluxDB telemeter in conjunction with Telegraf. In future releases, we will remove this telemeter.
+The StatsD telemeter (`io.l5d.statsd`) [is now deprecated](https://discourse.linkerd.io/t/deprecating-the-statsd-telemeter/268/1), and will log a warning on use. We've been considering deprecating this telemeter for some time, as it doesn't work the way most users expect and can lead to loss of data and/or greatly increased Linkerd latency. We recommend that users of this telemeter migrate to the InfluxDB telemeter in conjunction with Telegraf.
+
+In future releases, we will remove this telemeter.
 
 ## Further Information
 

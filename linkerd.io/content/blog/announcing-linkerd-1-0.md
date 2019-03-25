@@ -7,7 +7,11 @@ thumbnail: linkerd_version_1_featured.png
 tags: [Linkerd, linkerd, News]
 ---
 
-Today, we’re thrilled to [announce Linkerd version 1.0](http://info.buoyant.io/press/2017/03/07/linkerd_1.0_release). A little more than one year from our initial launch, Linkerd is part of the [Cloud Native Computing Foundation](https://cncf.io/) and has a thriving community of contributors and users. Adopters range from startups like Monzo, which is disrupting the UK banking industry, to high scale Internet companies like [Paypal](https://paypal.com/), [Ticketmaster](https://ticketmaster.com/), and [Credit Karma](https://creditkarma.com/), to companies that have been in business for hundreds of years like Houghton Mifflin Harcourt. A 1.0 release is a meaningful milestone for any open source project. In our case, it’s a recognition that we’ve hit a stable set of features that our users depend on to handle their most critical production traffic. It also signals a commitment to limiting breaking configuration changes moving forward. It’s humbling that our little project has amassed such an amazing group of operators and developers. I’m continually stunned by the features and integrations coming out of the Linkerd community; and there’s simply nothing more satisfying than hearing how Linkerd is helping teams do their jobs with a little less fear and uncertainty.
+Today, we’re thrilled to [announce Linkerd version 1.0](http://info.buoyant.io/press/2017/03/07/linkerd_1.0_release). A little more than one year from our initial launch, Linkerd is part of the [Cloud Native Computing Foundation](https://cncf.io/) and has a thriving community of contributors and users. Adopters range from startups like Monzo, which is disrupting the UK banking industry, to high scale Internet companies like [Paypal](https://paypal.com/), [Ticketmaster](https://ticketmaster.com/), and [Credit Karma](https://creditkarma.com/), to companies that have been in business for hundreds of years like Houghton Mifflin Harcourt. 
+
+A 1.0 release is a meaningful milestone for any open source project. In our case, it’s a recognition that we’ve hit a stable set of features that our users depend on to handle their most critical production traffic. It also signals a commitment to limiting breaking configuration changes moving forward. 
+
+It’s humbling that our little project has amassed such an amazing group of operators and developers. I’m continually stunned by the features and integrations coming out of the Linkerd community; and there’s simply nothing more satisfying than hearing how Linkerd is helping teams do their jobs with a little less fear and uncertainty.
 
 ## THE SERVICE MESH
 
@@ -15,7 +19,9 @@ Linkerd is a *service mesh* for cloud native applications. As part of this rel
 
 ## NEW FEATURES
 
-Beyond stability and performance improvements, Linkerd 1.0 has a couple new features worth talking about. This release includes a substantial change to the way that routers are configured in Linkerd. New plugin interfaces have been introduced to allow for much finer-grained policy control.
+Beyond stability and performance improvements, Linkerd 1.0 has a couple new features worth talking about. 
+
+This release includes a substantial change to the way that routers are configured in Linkerd. New plugin interfaces have been introduced to allow for much finer-grained policy control.
 
 ### PER-SERVICE CONFIGURATION
 
@@ -25,9 +31,23 @@ There is a new section in the router config called `service` where service-lev
 - `retries`
 - `responseClassifier`
 
-  routers:
-
-  - protocol: http service: totalTimeoutMs: 200 retries: budget: minRetriesPerSec: 5 percentCanRetry: 0.5 ttlSecs: 15 backoff: kind: jittered minMs: 10 maxMs: 10000 responseClassifier: kind: io.l5d.http.retryableRead5XX
+```yml
+routers:
+- protocol: http
+  service:
+    totalTimeoutMs: 200
+    retries:
+      budget:
+        minRetriesPerSec: 5
+        percentCanRetry: 0.5
+        ttlSecs: 15
+      backoff:
+        kind: jittered
+        minMs: 10
+        maxMs: 10000
+    responseClassifier:
+      kind: io.l5d.http.retryableRead5XX
+```
 
 With this change, a router now has three main subsections:
 
@@ -39,45 +59,53 @@ With this change, a router now has three main subsections:
 
 Prior to version 1.0 any client configuration such as timeouts or TLS would apply globally to all clients. We now support the ability to configure clients in a more granular way by specifying `kind: io.l5d.static` in the client section and providing a list of configs. For example:
 
-    routers:
-    - protocol: http
-      client:
-        kind: io.l5d.static
-        configs:
-        - prefix: /
-          requestAttemptTimeoutMs: 1000
-          failFast: true
-        - prefix: /#/io.l5d.k8s/default/http/hello
-          requestAttemptTimeoutMs: 300
-        - prefix: /#/io.l5d.k8s/default/http/world
-          failureAccrual:
-            kind: none
-            failFast: false
+```yml
+routers:
+- protocol: http
+  client:
+    kind: io.l5d.static
+    configs:
+    - prefix: /
+      requestAttemptTimeoutMs: 1000
+      failFast: true
+    - prefix: /#/io.l5d.k8s/default/http/hello
+      requestAttemptTimeoutMs: 300
+    - prefix: /#/io.l5d.k8s/default/http/world
+      failureAccrual:
+        kind: none
+        failFast: false
+```
 
-Each item in the list of configs must specify a prefix and some parameters. Those parameters will apply to all clients with an id that matches the prefix. In the example above, the first config with prefix `/` applies to all clients. The next two configs apply to the `hello` and `world` clients respectively. If a client matches more than one config, all matching configs will be applied with configs later in the file taking precedence over earlier ones. For example, the `hello` client overrides the `requestAttemptTimeoutMs`property to `300` whereas the `world` client inherits the `1000` value from the first config. If you don’t specify `kind: io.l5d.static` then `kind: io.l5d.global` will be assumed and you can specify client configuration directly on the client object which will apply globally to all clients.
+Each item in the list of configs must specify a prefix and some parameters. Those parameters will apply to all clients with an id that matches the prefix. In the example above, the first config with prefix `/` applies to all clients. The next two configs apply to the `hello` and `world` clients respectively. If a client matches more than one config, all matching configs will be applied with configs later in the file taking precedence over earlier ones. For example, the `hello` client overrides the `requestAttemptTimeoutMs`property to `300` whereas the `world` client inherits the `1000` value from the first config.
 
-    routers:
-    - protocol: http
-      client:
-        requestAttemptTimeoutMs: 1000
-        failFast: true
+If you don’t specify `kind: io.l5d.static` then `kind: io.l5d.global` will be assumed and you can specify client configuration directly on the client object which will apply globally to all clients.
+
+```yml
+routers:
+- protocol: http
+  client:
+    requestAttemptTimeoutMs: 1000
+    failFast: true
+```
 
 This same fine-grained level of control applies to the new `service` section as well. In the `service` configs, the `prefix` is compared to the service name i.e. the name produced by the identifier (which typically starts with `/svc`).
 
-    routers:
-    - protocol: http
-      service:
-        kind: io.l5d.static
-        configs:
-        - prefix: /svc
-          totalTimeout: 1000
-          responseClassifier:
-            kind: io.l5d.http.retryableRead5XX
-        - prefix: /svc/hello
-          responseClassifier:
-            kind: io.l5d.http.nonRetryable5XX
-        - prefix: /svc/world
-          totalTimeout: 300
+```yml
+routers:
+- protocol: http
+  service:
+    kind: io.l5d.static
+    configs:
+    - prefix: /svc
+      totalTimeout: 1000
+      responseClassifier:
+        kind: io.l5d.http.retryableRead5XX
+    - prefix: /svc/hello
+      responseClassifier:
+        kind: io.l5d.http.nonRetryable5XX
+    - prefix: /svc/world
+      totalTimeout: 300
+```
 
 ## UPGRADING GUIDE
 
@@ -113,46 +141,35 @@ The following parameter have moved or been renamed:
 
 ### TIMEOUTS
 
-The `timeoutMs` property has been split into two properties, `requestAttemptTimeoutMs`which is configured in the `client` section and `totalTimeoutMs` which is configured in the `service` section. `requestAttemptTimeoutMs` configures the timeout for each individual request or retry. As soon as this timeout is exceeded, the current attempt is canceled. If the request is retryable and the retry budget is not empty, a retry will be attempted with a fresh timeout. `totalTimeoutMs` configures the total timeout for the request and all retries. A running timer is started when the first request is attempted and continues running if the request is retried. Once this timeout is exceeded, the request is canceled and no more retries may be attempted.
+The `timeoutMs` property has been split into two properties, `requestAttemptTimeoutMs`which is configured in the `client` section and `totalTimeoutMs` which is configured in the `service` section. 
+
+`requestAttemptTimeoutMs` configures the timeout for each individual request or retry. As soon as this timeout is exceeded, the current attempt is canceled. If the request is retryable and the retry budget is not empty, a retry will be attempted with a fresh timeout. 
+
+`totalTimeoutMs` configures the total timeout for the request and all retries. A running timer is started when the first request is attempted and continues running if the request is retried. Once this timeout is exceeded, the request is canceled and no more retries may be attempted.
 
 ### TLS
 
 The client TLS section no longer has a `kind` parameter and instead can simply be configured with these 3 parameters:
 
-Key
+| Key               | Default Value                            | Description                                                        |
+|-------------------|------------------------------------------|--------------------------------------------------------------------|
+| `disableValidation` | false                                    | Enable this to skip hostname validation (unsafe).                  |
+| `commonName`        | *required* unless disableValidation is set | The common name to use for all TLS requests.                       |
+| `trustCerts`        | empty list                               | A list of file paths of CA certs to use for common name validation |
 
-Default Value
-
-Description
-
-`disableValidation`
-
-false
-
-Enable this to skip hostname validation (unsafe).
-
-`commonName`
-
-*required* unless disableValidation is set
-
-The common name to use for all TLS requests.
-
-`trustCerts`
-
-empty list
-
-A list of file paths of CA certs to use for common name validation
 
 Fine-grained client configuration can be used to only configure TLS for certain clients. Furthermore, segments from the prefix can be captured into variables and used in the `commonName`. For example:
 
-    routers:
-    - protocol: http
-      client:
-        kind: io.l5d.static
-        configs:
-        - prefix: /#/io.l5d.k8s/default/http/{service}
-          tls:
-            commonName: "{service}.linkerd.io"
+```yml
+routers:
+- protocol: http
+  client:
+    kind: io.l5d.static
+    configs:
+    - prefix: /#/io.l5d.k8s/default/http/{service}
+      tls:
+        commonName: "{service}.linkerd.io"
+```
 
 ### METRICS
 
