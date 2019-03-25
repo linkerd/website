@@ -46,16 +46,15 @@
   <div class="container pb-5">
       <ul class="list-unstyled">
     {{ range.Pages }}
-    <li class="media mb-5">
+    <li class="media mb-3">
         {{if isset .Params "thumbnail" }}
-        <a href="{{.Permalink}}">
-          <img class="mr-3"
+          <img class="pull-left img-responsive"
           src="/uploads/{{.Params.thumbnail}}"
-          width="256"
-          alt="{{.Title}}" /></a>
+          style="width: 33.33%"
+          alt="{{.Title}}" />
         {{ end }}
-        <div class="media-body">
-          <h4 class="mt-0 mb-1"><a href="{{.Permalink}}">{{.Title}}</a></h4>
+        <div class="media-body ml-3">
+          <h4><a href="{{.Permalink}}">{{.Title}}</a></h4>
           <p>{{.Summary}} <a href="{{.Permalink}}">Read more ...</a></p>
         </div>
       </li>
