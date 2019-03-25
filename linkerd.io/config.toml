@@ -6,6 +6,9 @@ sectionPagesMenu = "main"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
+[permalinks]
+blog = "/:year/:month/:day/:slug/"
+
 #CUSTOM PARAMS
 [params]
   latest_release_version = "1.6.1"
