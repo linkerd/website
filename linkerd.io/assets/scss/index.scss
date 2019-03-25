@@ -46,6 +46,40 @@ footer li {
 }
 
 .docs-content {
+  table {
+    border: 1px solid #efefef;
+    width: 100%;
+    margin-bottom:25px;
+    thead {
+      background-color: #efefef;
+    }
+    td, th {
+      border: 1px solid #efefef;
+      padding: 10px;
+      white-space: normal;
+    }
+    tr :first-child {
+      white-space: nowrap;
+    }
+  }
+  blockquote {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 3px solid #ccc;
+  }
+
+  img {
+    max-width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  img[alt=ProfilePicture] {
+    width: 150px;
+  }
+  
   h1:not(.title), h2 {
     border-bottom: 1px solid $gray-500;
     padding-bottom: .5rem;
