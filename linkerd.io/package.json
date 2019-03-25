@@ -7,7 +7,7 @@
     "pa11y": "pa11y-ci --sitemap http://127.0.0.1:1313/sitemap.xml --sitemap-find //localhost:1313 --sitemap-replace http://127.0.0.1:1313",
     "lint": "prettier --check content/*.* {content,themes}/**/*.{js,css,md}",
     "markdownlint": "markdownlint content",
-    "autofix": "prettier --write content/blog/*.md content/blog/**/*.md"
+    "autofix": "prettier --write content/*.md content/**/*.md"
   },
   "repository": {
     "type": "git",
