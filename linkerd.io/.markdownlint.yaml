@@ -3,9 +3,8 @@ first-line-h1:
 first-heading-h1:
   level: 2
 line_length:
-  line_length: 90000
-  headings: 80
   code_blocks: false
   tables: false
-no-trailing-punctuation: 
+no-trailing-punctuation:
   punctuation: ".,;:!"
+no-duplicate-header: false
