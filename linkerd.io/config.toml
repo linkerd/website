@@ -6,6 +6,9 @@ sectionPagesMenu = "main"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
+[permalinks]
+blog = "/:year/:month/:day/:slug/"
+
 #CUSTOM PARAMS
 [params]
   latest_release_version = "1.6.1"
@@ -34,7 +37,7 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
   name = "Blog"
   identifier = "blog"
   weight = 3
-  url = "https://blog.linkerd.io/"
+  url = "/blog/"
 
 [[menu.top]]
   name = "Enterprise"

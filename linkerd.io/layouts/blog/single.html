@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{ $authorId := .Param "author" }}
+{{ $author := (index $.Site.Data.authors $authorId)}}
+{{ $date := .PublishDate.Format "January 2, 2006"}}
+<section id="main">
+  <div class="jumbotron jumbotron-fluid linkerd-bg text-light">
+    <div class="container">
+      <h1 id="title">{{ .Title }}</h1>
+    </div>
+  </div>
+  <div>
+    <div class="docs-content container pb-5" id="content">
+      <aside class="mb-5">
+        <div class="media">
+          {{ if $author.avatar }}
+          <img
+            width="128"
+            class="mr-3 is-round"
+            src="/images/authors/{{ $author.avatar }}"
+            alt="{{ $author.name }}"
+          />
+          {{ else }}
+          <img
+            src="/images/identity/svg/linkerd_mark_grid_small.svg"
+            class="mr-3"
+            width="128"
+            alt="author avatar"
+          />
+          {{ end }}
+          <div class="media-body">
+            <p>
+              <h4 class="mt-0">{{ $author.name }}</h4>
+              {{ $date }}<br />
+              {{ partial "readingtime.html" . }}
+            </p>
+          </div>
+        </div>
+      </aside>
+      <article>
+        {{ .Content }}
+      </article>
+    </div>
+  </div>
+</section>
+{{ end }}

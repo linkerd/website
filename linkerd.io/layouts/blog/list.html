@@ -1,0 +1,64 @@
+{{ define "head" }}
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+{{ end }}
+
+{{ define "main" }}
+<main>
+  <div class="jumbotron jumbotron-fluid linkerd-bg text-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 pb-3">
+          <h1>{{.Title}}</h1>
+          <p>{{ .Params.Subtitle }}</p>
+          <div class="header-button-group pb-3">
+            <a href="/choose-your-platform/" class="btn btn-primary"
+              >Get started</a
+            >
+          </div>
+          <a
+            class="github-button"
+            href="https://github.com/linkerd/linkerd2"
+            data-icon="octicon-star"
+            data-show-count="true"
+            aria-label="Star linkerd/linkerd2 on GitHub"
+            >Star</a
+          >
+          <a
+            class="github-button"
+            href="https://github.com/linkerd/linkerd2/subscription"
+            data-icon="octicon-eye"
+            data-show-count="true"
+            aria-label="Watch linkerd/linkerd2 on GitHub"
+            >Watch</a
+          >
+          <a
+            class="github-button"
+            href="https://github.com/linkerd/linkerd2/fork"
+            data-icon="octicon-repo-forked"
+            data-show-count="true"
+            aria-label="Fork linkerd/linkerd2 on GitHub"
+            >Fork</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container pb-5">
+      <ul class="list-unstyled">
+    {{ range.Pages }}
+    <li class="media mb-3">
+        {{if isset .Params "thumbnail" }}
+          <img class="pull-left img-responsive"
+          src="/uploads/{{.Params.thumbnail}}"
+          style="width: 33.33%"
+          alt="{{.Title}}" />
+        {{ end }}
+        <div class="media-body ml-3">
+          <h4><a href="{{.Permalink}}">{{.Title}}</a></h4>
+          <p>{{.Summary}} <a href="{{.Permalink}}">Read more ...</a></p>
+        </div>
+      </li>
+    {{ end }}
+  </ul></div>
+</main>
+{{ end }}
