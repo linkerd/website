@@ -20,7 +20,7 @@ Together, Linkerd and namerd form Buoyant’s open source *service mesh* for c
 
 While microservices provide many benefits to application scalability and reliability, they also bring new challenges for SRE teams tasked with ensuring reliability and performance. Together, DC/OS and Linkerd directly address these challenges. Mesos automatically handles hardware failure and software crashes, providing the fundamental building blocks around component resilience. Linkerd broadens those semantics to the service level, allowing you to automatically shift traffic away from slow, overloaded, or failing instances.
 
-![Traffic routing decouples the deployment topology](/uploads/2016/04/routing-diagram.png)*Traffic routing decouples the deployment topology from the traffic-service topology, allowing for traffic shifting (purple), proxy injection (green), and more.*
+{{< figure src="/uploads/2016/04/routing-diagram.png" alt="Traffic routing decouples the deployment topology" caption="Traffic routing decouples the deployment topology from the traffic-service topology, allowing for traffic shifting (purple), proxy injection (green), and more." >}}
 
 Linkerd also gives you powerful new mechanisms around _traffic routing*, or runtime control of the HTTP or RPC traffic within an application. By decoupling your application’s deployment topology from its traffic-serving topology, Linkerd makes blue-green deploys, staging, canarying, proxy injection, and pre-production environments easy—even when the services are deep within the application topology. 
 

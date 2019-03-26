@@ -17,7 +17,7 @@ The community that has grown around it since has been incredible. A tiny startup
 
 Fast forward two years and Linkerd is now powering the production architecture of massive companies with household names like Salesforce, PayPal, and Expedia. At Buoyant, we've been able to build a growing company around Linkerd that is singularly focused on service mesh technology and building products that help make the next generation of applications safe and reliable for everyone. (If you love what we're doing at Buoyant, check out our careers page because [we're hiring](https://buoyant.io/careers/)!) This project may have started within the walls of Buoyant, but the success of Linkerd is something we simply can’t achieve without the support of the vibrant community it’s created. 
 
-![linkerd 2nd birthday collage](/uploads/2018/05/collage-birthday.jpg)*Linkerd’s 2nd Birthday Party*
+{{< figure alt="linkerd 2nd birthday collage" src="/uploads/2018/05/collage-birthday.jpg" caption="Linkerd’s 2nd Birthday Party" >}}
 
 For the past two years, you’ve used Linkerd in anger and helped us develop solutions to the very real problems you were having. Together, we've seen Linkerd grow to serve over a trillion service requests. That's huge! That type of adoption was the first step necessary to helping Linkerd become less of a Buoyant-specific open source development effort, towards a more genuinely community-driven project. Contributing [Linkerd to the CNCF](https://buoyant.io/2017/01/23/linkerd-joins-the-cloud-native-computing-foundation/) last year was another step in that direction. Now with Linkerd’s second birthday, we’re taking yet another.
 

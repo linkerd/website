@@ -23,7 +23,7 @@ Aside from [basics about a service mesh](https://buoyant.io/2017/04/25/whats-a-s
 
 Complicating runtime behavior, the shift to microservices also means you begin to see a sprawl of ownership and workflows. Services typically shift to being owned by different teams, with different schedules, and often conflicting priorities. Understanding the relationships between the many interdependent services supporting your mission critical apps can easily become impossible. The service mesh exists to solve these operational runtime challenges.
 
-![Basic service mesh architecture](/uploads/2018/03/Screen-Shot-2018-03-20-at-3.43.11-PM-300x168.png)*Basic service mesh architecture*
+{{< figure alt="Basic service mesh architecture" src="/uploads/2018/03/Screen-Shot-2018-03-20-at-3.43.11-PM-300x168.png" caption="Basic service mesh architecture" >}}
 
 In this basic architectural diagram the green boxes in the data plane represent apps, the blue squares are service mesh proxies, and the rectangles are app endpoints (a pod, a physical host, etc). The service mesh should also provide a control plane where you, as an operator, compose policy that alters behavior in the data plane. The service mesh manages all service requests (e.g. messages) with an inherent understanding that makes it application aware. It provides capabilities like retries, timeouts, and circuit breaking to improve overall resiliency.
 

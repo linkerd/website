@@ -23,7 +23,7 @@ When we released Conduit 0.2.0 in January, it included a first pass at user-visi
 
 In order to do this without incurring latency or significant memory consumption in the proxy, we maintained a fixed-sized buffer of events, which the proxy periodically sent to the control plane to be processed. The control plane aggregated these events, using the Kubernetes API to discover interesting source and destination labels, and in turn exposed these detailed metrics to be scraped by Prometheus. Conduit’s control plane contained a dedicated service, called Telemetry, that exposed an API with distinct read and write paths. 
 
-![Initial telemetry pipeline architecture](/uploads/2018/05/conduit-prom-1-1024x656-1024x656.png)*Initial telemetry pipeline architecture*
+{{< figure alt="Initial telemetry pipeline architecture" src="/uploads/2018/05/conduit-prom-1-1024x656-1024x656.png" caption="Initial telemetry pipeline architecture" >}}
 
 ### Write pipeline
 
@@ -94,7 +94,7 @@ Removal of the Telemetry service meant that the proxies needed to serve a `/metr
 
 These changes allowed us to delete our gRPC read and write APIs, and yielded a much simpler and more flexible architecture:
 
-![Conduit Telemetry The Right Way](/uploads/2018/05/conduit-prom-2-1024x509-1024x509.png)*Updated telemetry pipeline architecture*
+{{< figure alt="Conduit Telemetry The Right Way" src="/uploads/2018/05/conduit-prom-2-1024x509-1024x509.png" caption="Updated telemetry pipeline architecture" >}}
 
 The new telemetry pipelines were significantly easier to reason about:
 
@@ -123,7 +123,7 @@ voting        1/1    87.72%   0.9rps           6ms          16ms          19ms
 web           1/1    93.91%   1.9rps           8ms          41ms          48ms
 ```
 
-![Conduit Grafana Dashboard](/uploads/2018/05/conduit-grafana-1-1024x556-1024x556.png)*Conduit Grafana dashboard*
+{{< figure alt="Conduit Grafana Dashboard" src="/uploads/2018/05/conduit-grafana-1-1024x556-1024x556.png" caption="Conduit Grafana dashboard" >}}
 
 ## Looking ahead
 

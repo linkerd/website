@@ -20,13 +20,13 @@ tags:
 
 *This post originally appeared on [WePay's Engineering Blog](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay). Have a story about running Linkerd in production, or want to contribute your perspective on microservices management or the service mesh? [Tell us](https://docs.google.com/forms/d/1hZujOuwOFMlU_1e15-r7M6nJKMFUHYTJW2xj4i2IxPU/edit) about it.*
 
-![ProfilePicture](/uploads/2018/06/mohsen_rezaei-300x300.jpg)*By Mohsen Rezaei, Senior Software Engineer, WePay*
+{{< figure alt="ProfilePicture" src="/uploads/2018/06/mohsen_rezaei-300x300.jpg" caption="By Mohsen Rezaei, Senior Software Engineer, WePay" >}}
 
 In the upcoming months, we are going to write a series of posts documenting [WePay Engineering’s](https://wecode.wepay.com/) journey from traditional load balancers to a service mesh on top of [Google’s Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) (GKE). 
 
 In this first part of the series, we are going to take a look at some of the routing and load balancing options that we have used before, compare them with the services we have looked at as possible service mesh proxies, and how they’d change the way our infrastructure operates. 
 
-![service mesh sidecar proxy](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_0.png)*Figure 1: Data plane using sidecar proxy pattern*
+{{< figure alt="service mesh sidecar proxy" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_0.png" caption="Figure 1: Data plane using sidecar proxy pattern" >}}
 
 Figure 1 shows a simplified version of a [data plane](https://medium.com/microservices-learning/understanding-microservices-communication-and-service-mesh-e888d1adc41), in service mesh terms, where Service X is sending a request to Service Y via it’s sidecar proxy. Since Service X is sending the request through it’s proxy, the request is first passed to Service X’s proxy (PX), then sent to Service Y’s proxy (PY) before getting to the destination, Service Y. In most cases, PX finds PY through a service discovery service, e.g. [Namerd](https://linkerd.io/advanced/namerd/). 
 
@@ -40,7 +40,7 @@ _Side note: all technologies mentioned in this post are very sophisticated piece
 
 At WePay, we are currently running many microservices (Sx) in GKE. Some of these microservices talk to other microservices in the same data center, which looks something like this:
 
-![sidecar ssl proxy nginx](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_1.png)*Figure 2: Simple load balancing using GKE and NGINX*
+{<< figure alt="sidecar ssl proxy nginx" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_1.png" caption="Figure 2: Simple load balancing using GKE and NGINX" >}}
 
 In the model shown in figure 2, Service Y sends a request to Service X, and [Kubernetes’ load balancing object](https://kubernetes.io/docs/concepts/services-networking/service/) does the load balancing for Service X by forwarding the request to X1’s NGINX sidecar. When NGINX receives the request, it terminates SSL and forwards the packet to X1. 
 
@@ -59,13 +59,13 @@ _Side note: At the time of research, NGINX had no service mesh support, but in a
 
 [Envoy](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/load_balancing) and [Linkerd](https://buoyant.io/2016/03/16/beyond-round-robin-load-balancing-for-latency/) both offer access to some of the more sophisticated load balancing algorithms, but Linkerd’s focus on [performance](https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/)[ tuning](https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/), and the platform’s usage of [Finagle](https://twitter.github.io/finagle/), made it an appealing choice for load balancing. 
 
-![sidecar extended](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_2.png)*Figure 3: Sidecar proxy pattern handles load balancing*
+{{< figure alt="sidecar extended" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_2.png" caption="Figure 3: Sidecar proxy pattern handles load balancing" >}}
 
 Figure 3 shows how a service mesh proxy handles the load balancing using a list of available destinations acquired through service discovery.
 
 In addition to the basic load balancing features, Linkerd also allows pushing the load balancing closer to the edge of each Kubernetes node with support for [Kubernetes DaemonSets](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). From a resource allocation perspective, this also lowers the cost of running the proxies in larger clusters, significantly. 
 
-![daemonset extended](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_3.png)*Figure 4: DaemonSet proxy pattern*
+{{< figure alt="daemonset extended" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_3.png" caption="Figure 4: DaemonSet proxy pattern" >}}
 
 In figure 4 the DaemonSet pattern shows each Kubernetes cluster nodes hosting one proxy. When Service Y sends a request to Service Z, the request is handed off to the Sender’s node proxy, where using service discovery, it forwards the request to Receiver’s node proxy, and eventually the package is delivered to Service Z. This pattern makes maintaining and configuring these proxies easier by separating the lifecycle of proxies from microservices running in the same cluster.
 
@@ -75,7 +75,7 @@ Back in 2017, when we were looking at improving our service to service communica
 
 In addition, the ability to use both HTTP and HTTP/2 (gRPC) for any microservice, and the need for supporting multiple protocols at the same time in our infrastructure, meant that multi-protocol support had become a hard requirement for choosing a proxy for our infrastructure.. 
 
-![http and grpc together](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_4.png)*Figure 5: The proxy accepts and forwards both gRPC and HTTP in the same setup*
+{{< figure alt="http and grpc together" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_4.png" caption="Figure 5: The proxy accepts and forwards both gRPC and HTTP in the same setup" >}}
 
 This diagram shows how some requests are using HTTP while others are using HTTP/2. Being able to use multiple protocols with the same infrastructure configuration proven to be a critical feature when we planned our migration from HTTP to HTTP/2 (gRPC). During a migration, we have some services talking to each other over HTTP, while others are communicating over HTTP/2. Figure 5 is imagining the infrastructure as the rollout happens over time. In a future post we will dive deeper into how our microservices send and receive different types of payloads in our infrastructure, e.g. REST, Protobufs, etc.
 
@@ -87,7 +87,7 @@ In our infrastructure we make use of [Prometheus](https://prometheus.io/) to m
 
 ![proxy metrics](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_5.png) 
 
-![service metrics](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_6.png)*Figure 6: Cluster and application level view of proxy metrics*
+{{< figure alt="service metrics" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_6.png" caption="Figure 6: Cluster and application level view of proxy metrics" >}}
 
 The sample dashboards in figure 6 show the global, per-microservice, and per-proxy traffic in one place for better visibility into what’s going through the infrastructure, in a DaemonSet proxy pattern.
 
@@ -99,7 +99,7 @@ Most proxies nowadays support various proxy to proxy encryption and authorizatio
 
 One thing that does work differently in an environment setup with the sidecar proxy pattern is per-service TLS certificates for SSL handshakes. 
 
-![security service specific certs](https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_7.png)*Figure 7: Per-service TLS certificates used for SSL handshakes*
+{{< figure alt="security service specific certs" src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_7.png" caption="Figure 7: Per-service TLS certificates used for SSL handshakes" >}}
 
 Figure 7 shows a Linkerd proxy for Service Z using Service X’s certificates when sending a request to Service X, and using Service Y’s certificates when sending a request to Service Y. This gives us the ability to maintain, update, and change SSL certificates for each service independent of each other, and also increase the security of our microservices.
 
