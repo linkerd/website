@@ -46,6 +46,10 @@ footer li {
 }
 
 .docs-content {
+  .is-round {
+    border-radius: 50%
+  }
+  
   table {
     border: 1px solid #efefef;
     width: 100%;
