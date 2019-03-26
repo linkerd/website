@@ -42,7 +42,9 @@ Before you begin this guide, you'll need the following:
 Before we install Linkerd, let’s add the books app onto your cluster. In your local terminal, just run:
 
 ```bash
-kubectl create ns booksapp && \ curl -sL https://run.linkerd.io/booksapp.yml | \ kubectl -n booksapp apply -f -
+kubectl create ns booksapp && \
+  curl -sL https://run.linkerd.io/booksapp.yml | \
+  kubectl -n booksapp apply -f -
 ```
 
 This command creates a namespace for the demo, downloads its Kubernetes manifest and uses _kubectl_ to apply it to your Kubernetes cluster. The app is comprised of several services that run in the booksapp namespace. 
@@ -62,7 +64,10 @@ kubectl -n booksapp get all
 Once the rollout has completed successfully, you can forward the [frontend](http://localhost:7000/) (webapp) locally for viewing (http://localhost:7000) by running:
 
 ```bash
-kubectl -n booksapp port-forward \ \$(kubectl -n booksapp get po -l app=webapp \ -o jsonpath='{.items\[0\].metadata.name}') \ 7000:7000 &
+kubectl -n booksapp port-forward \
+  $(kubectl -n booksapp get po -l app=webapp \
+  -o jsonpath='{.items\[0\].metadata.name}') \
+  7000:7000 &
 ```
 
 ![books app overview](/uploads/2019/02/image-1.png)
@@ -100,8 +105,9 @@ As there are many different types of Kubernetes clusters, and an infinite set of
 Note: if your Kubernetes cluster is on GKE with RBAC enabled, you’ll need an extra step: you must grant a ClusterRole of cluster-admin to your Google Cloud account first, in order to install the control plane. To do that, run:
 
 ```bash
-kubectl create clusterrolebinding cluster-admin-binding-$USER \ --
-clusterrole cluster-admin \ --user=$(gcloud config get-value account)
+kubectl create clusterrolebinding cluster-admin-binding-$USER \
+  --clusterrole cluster-admin \
+  --user=$(gcloud config get-value account)
 ```
 
 ### Step 3 — Install Linkerd’s control plane onto the cluster
@@ -133,7 +139,9 @@ If you see something similar to the screenshot below, Linkerd is now running on 
 At this point, we have the Linkerd control plane installed in the linkerd namespace, and we have our demo app installed in the booksapp namespace. We now need to add Linkerd to our service. In this example, let’s pretend we are the owners of the webapp service. Let’s just say that other services, like authors and books, are owned by other teams -- we don’t want to touch them. While these are local services in this example, it is entirely possible that they could be remote APIs owned by a completely separate entity. There are a couple of ways to add Linkerd to our service. For demo purposes, the easiest is to do something like this:
 
 ```bash
-kubectl get -n booksapp deploy/webapp -o yaml \ | linkerd inject - \ | kubectl apply -f -
+kubectl get -n booksapp deploy/webapp -o yaml \
+  | linkerd inject - \
+  | kubectl apply -f -
 ```
 
 This command retrieves the manifest of the webapp service from Kubernetes, runs this manifest through linkerd inject, and then re-applies it to the Kubernetes cluster. The linkerd inject command adds to the manifest to include the data plane’s proxies. As with install, inject is a pure text operation. This means that you can inspect the input and output before you use it. Since webapp is a Deployment, Kubernetes is kind enough to slowly roll the service one pod at a time–meaning that webapp can be serving traffic live while we add Linkerd to it!
