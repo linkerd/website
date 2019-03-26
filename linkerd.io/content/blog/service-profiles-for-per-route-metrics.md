@@ -34,7 +34,10 @@ end of the post.
 The earliest versions of what would become Linkerd 2.0 (back when it was called
 Conduit!) actually had per-path metrics right out of the box:
 
-![Conduit Overview](/uploads/2018/12/image-1.png)
+{{< fig
+  alt="Conduit Overview"
+  title="Conduit Overview"
+  src="/uploads/2018/12/image-1.png" >}}
 
 This feature was incredibly useful, but there was a big problem. Conduit [stored
 all of its metrics in
@@ -56,7 +59,10 @@ Prometheus could continue to perform well.
 "But wait!" you might say, "What about the `linkerd top` command? Doesn't that
 display per-path metrics?" And you'd be right, it does!
 
-![linkerd top screenshot](/uploads/2018/12/image-2.png)
+{{< fig
+  alt="top"
+  title="Top"
+  src="/uploads/2018/12/image-2.png" >}}
 
 The `linkerd top` command sidesteps the timeseries cardinality issue by avoiding
 Prometheus altogether. It consumes a stream of live traffic directly (using the
@@ -84,7 +90,10 @@ There's one more major problem that plagues both the Prometheus based and live
 traffic based approaches for per-path metrics. See if you can spot it in this
 screenshot:
 
-![per path metrics](/uploads/2018/12/image-3.png)
+{{< fig
+  alt="per-path metrics"
+  title="Per-path metrics"
+  src="/uploads/2018/12/image-3.png" >}}
 
 When paths have parameters in them such as user names or ids, it usually doesn't
 make sense to calculate metrics separately for each path. What you usually want

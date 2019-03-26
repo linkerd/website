@@ -40,9 +40,12 @@ use [linkerd-rbac-beta.yml][linkerd-rbac] (stored in
 our [linkerd-examples][linkerd-example] repo).
 
 We'll be setting up the permission by creating a `ClusterRole` and a
-`ClusterRoleBinding`, illustrated below. ![Kubernetes RBAC configuration for
-Linkerd](/uploads/2018/05/blog_rbac_configuration-1024x517.png 'Linkerd RBAC
-config, as specified in linkerd-rbac-beta.yml')
+`ClusterRoleBinding`, illustrated below.
+
+{{< fig
+  alt="RBAC"
+  title="Configuration"
+  src="/uploads/2018/05/blog_rbac_configuration-1024x517.png" >}}
 
 ## Granting Linkerd access to an RBAC Kubernetes Cluster
 

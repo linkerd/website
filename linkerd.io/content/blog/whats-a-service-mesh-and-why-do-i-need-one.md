@@ -129,11 +129,10 @@ And that’s just the simplified version–Linkerd can also initiate and termina
 TLS, perform protocol upgrades, dynamically shift traffic, and fail over between
 datacenters!
 
-![The linkerd service mesh manages service-to-service communication and
-decouples it from application
-code](/uploads/2017/04/linkerd-service-mesh-diagram-1024x587.png)_The linkerd
-service mesh manages service-to-service communication and decouples it from
-application code._
+{{< fig
+    alt="mesh"
+    title="Mesh"
+    src="/uploads/2017/04/linkerd-service-mesh-diagram-1024x587.png" >}}
 
 It’s important to note that these features are intended to provide both
 pointwise resilience and application-wide resilience. Large-scale distributed

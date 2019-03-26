@@ -22,9 +22,10 @@ process, it’s decoupled from the implementation details of the application.
 Unlike a library, a sidecar doesn’t require the application to be written in a
 specific language or framework.
 
-![service instance](/uploads/2017/07/buoyant-sidecar.png)*Typical sidecar
-deployment model. Each service instance is paired with an instance of the
-sidecar process.
+{{< fig
+  alt="service instance"
+  title="Typical sidecar deployment model"
+  src="/uploads/2017/07/buoyant-sidecar.png" >}}
 
 This decoupling is highly useful in microservices, because it’s a way for
 functionality to be shared across services, while still allowing individual
@@ -131,8 +132,10 @@ the two JIT compilers enabled by default (the “C2” compiler), and using a
 Here’s a chart of Linkerd’s memory footprint at various rps levels, under the
 old (“64-bit + C2”) and new (“32-bit + C1”) conditions:
 
-![linkerd
-footprint](/uploads/2017/07/buoyant-linkerd-memory-footprint-chart.png)
+{{< fig
+  alt="footprint"
+  title="Footprint"
+  src="/uploads/2017/07/buoyant-linkerd-memory-footprint-chart.png" >}}
 
 ## Discussion
 

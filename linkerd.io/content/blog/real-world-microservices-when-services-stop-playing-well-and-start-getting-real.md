@@ -177,7 +177,10 @@ call it—a “users” service is generally a good example. You have a few opti
 1. Just deploy it to production. #YOLO
 2. Deploy staging versions of all of the services that call your service.
 
-![](/uploads/2017/07/buoyant-staging-users-v2.png)
+{{< fig
+  alt="requests"
+  title="requests"
+  src="/uploads/2017/07/buoyant-staging-users-v2.png" >}}
 
 Neither of these options are particularly manageable. The former causes
 user-facing problems. The latter becomes complex and cumbersome—you may not have
@@ -211,7 +214,10 @@ so that Linkerd does not need to communicate with service discovery
 directly—linkerd instances resolve names through namerd, which maintains a view
 of service discovery backends.
 
-![](/uploads/2017/07/buoyant-namerd.png)
+{{< fig
+  alt="namerd"
+  title="namerd"
+  src="/uploads/2017/07/buoyant-namerd.png" >}}
 
 namerd is [configured][config] with:
 
