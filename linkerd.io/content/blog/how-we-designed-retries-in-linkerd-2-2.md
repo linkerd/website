@@ -136,7 +136,7 @@ POST /authors.json          authors               0.00%          0.0rps         
 [DEFAULT]                   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
 ```
 
-Success rate looks great but the p95 and p99 latencies have increased. This is to be expected because doing retries takes time. However, we can limit this by setting a [timeouts](<%5B%3Chttps://linkerd.io/2/features/retries-and-timeouts/#timeouts%3E%5D(%3Chttps://linkerd.io/2/features/retries-and-timeouts/#timeouts%3E)>) \- another new feature of Linkerd 2.x - at the maximum duration that we’re willing to wait. For the purposes of this demo, I’ll set a timeout of 25ms. Your results will vary depending on the characteristics of your system.
+Success rate looks great but the p95 and p99 latencies have increased. This is to be expected because doing retries takes time. However, we can limit this by setting a [timeouts](https://linkerd.io/2/features/retries-and-timeouts/#timeouts) another new feature of Linkerd 2.x - at the maximum duration that we’re willing to wait. For the purposes of this demo, I’ll set a timeout of 25ms. Your results will vary depending on the characteristics of your system.
 
 ```bash
 $ kubectl edit sp/authors.default.svc.cluster.local
