@@ -3,4 +3,5 @@ IgnoreURLs:
   - https://expedia.com
   - https://github.com/linkerd/website/edit/master/linkerd.io/content/.*
   - https://ticketmaster.com
+  - https://douban.com/
 DirectoryPath: public

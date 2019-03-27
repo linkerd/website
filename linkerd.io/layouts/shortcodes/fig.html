@@ -2,7 +2,9 @@
   <a href="{{ .Get "src" }}" data-toggle="lightbox">
     <img src="{{ .Get "src" }}"
       class="figure-img img-fluid rounded"
-      alt="{{ .Get "title" }}">
+      alt="{{ .Get "alt" }}">
   </a>
-  <figcaption class="figure-caption">{{ .Get "title" }}</figcaption>
+  {{ with .Get "title" }}
+  <figcaption class="figure-caption">{{ . }}</figcaption>
+  {{ end }}
 </figure>
