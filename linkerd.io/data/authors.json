@@ -128,9 +128,9 @@
   "thomas": {
     "avatar": "",
     "email": "thomas@buoyant.io",
-    "name": "thomas",
-    "firstName": "",
-    "lastName": ""
+    "name": "Thomas Rampelberg",
+    "firstName": "Thomas",
+    "lastName": "Rampelberg"
   },
   "kiersten": {
     "avatar": "",
@@ -138,5 +138,12 @@
     "name": "Kiersten Gaffney",
     "firstName": "Kiersten",
     "lastName": "Gaffney"
+  },
+  "mohsen": {
+    "avatar": "mohsen_rezaei-300x300.jpg",
+    "email": "",
+    "name": "Mohsen Rezaei",
+    "firstName": "Mohsen",
+    "lastName": "Rezaei"
   }
 }
