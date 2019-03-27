@@ -218,7 +218,7 @@ $ curl -s -H "Host: api.hello.world" $INGRESS_LB
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-INGRESS_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items\[0\].status.hostIP}"):\$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[0\].nodePort}')
+INGRESS_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
 ```
 
 Success! We’ve set up linkerd as our ingress controller, and we’ve used it to
@@ -241,7 +241,7 @@ For example, we can use the `l5d-dtab` header to override the routing logic to
 use `world-v2` rather than the production `world-v1` service the outside world:
 
 ```bash
-curl -H "Host: www.hello.world" -H "l5d-dtab: /host/world => /srv/world-v2;" $INGRESS_LB
+$ curl -H "Host: www.hello.world" -H "l5d-dtab: /host/world => /srv/world-v2;" $INGRESS_LB
 Hello (10.100.4.3) earth (10.100.5.5)!!
 ```
 
@@ -298,7 +298,7 @@ curl $INGRESS_LB
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-INGRESS_LB=$(kubectl get po -l app=nginx -o jsonpath="{.items\[0\].status.hostIP}"):\$(kubectl get svc nginx -o 'jsonpath={.spec.ports\[0\].nodePort}')
+INGRESS_LB=$(kubectl get po -l app=nginx -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc nginx -o 'jsonpath={.spec.ports[0].nodePort}')
 ```
 
 We should be able to now send traffic to our services through nginx:

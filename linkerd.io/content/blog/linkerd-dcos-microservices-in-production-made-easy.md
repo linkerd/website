@@ -36,7 +36,7 @@ providing the fundamental building blocks around component resilience. Linkerd
 broadens those semantics to the service level, allowing you to automatically
 shift traffic away from slow, overloaded, or failing instances.
 
-{{< figure
+{{< fig
   src="/uploads/2016/04/routing-diagram.png"
   alt="Traffic routing decouples the deployment topology"
   title="Traffic routing decouples the deployment topology" >}}

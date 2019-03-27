@@ -126,13 +126,20 @@ image](https://hub.docker.com/r/buoyantio/helloworld/)in order to send test
 gRPC requests to our `hello world` service:
 
 ```bash
-L5D\_INGRESS\_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress\[0\].\*}") $ docker run --rm --entrypoint=helloworld-client buoyantio/helloworld:0.1.3 $L5D_INGRESS_LB:4140 Hello (10.196.1.242) world (10.196.1.243)!!
+$ L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
+$ docker run --rm --entrypoint=helloworld-client buoyantio/helloworld:0.1.3 $L5D_INGRESS_LB:4140
+Hello (10.196.1.242) world (10.196.1.243)!!
 ```
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-L5D\_INGRESS\_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items\[0\].status.hostIP}") $ docker run --rm --entrypoint=helloworld-client buoyantio/helloworld:0.1.3 $L5D_INGRESS_LB:\$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[0\].nodePort}') Hello (10.196.1.242) world (10.196.1.243)!!
+$ L5D_INGRESS_LB=$( \
+  kubectl get po -l app=l5d \
+  -o jsonpath="{.items[0].status.hostIP}")
+$ docker run --rm --entrypoint=helloworld-client buoyantio/helloworld:0.1.3 \
+  $L5D_INGRESS_LB:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+Hello (10.196.1.242) world (10.196.1.243)!!
 ```
 
 It works! We can check out the Linkerd admin dashboard by doing:
@@ -144,7 +151,7 @@ open http://$L5D_INGRESS_LB:9990 # on OSX
 Or using hostIP:
 
 ```bash
-open http://$L5D_INGRESS_LB:\$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[2\].nodePort}') # on OSX
+open http://$L5D_INGRESS_LB:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[2].nodePort}') # on OSX
 ```
 
 And that’s it! We now have gRPC services talking to each other, with their

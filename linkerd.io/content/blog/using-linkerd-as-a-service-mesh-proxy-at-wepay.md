@@ -68,7 +68,7 @@ At WePay, we are currently running many microservices (Sx) in GKE. Some of these
 microservices talk to other microservices in the same data center, which looks
 something like this:
 
-{<< fig
+{{< fig
     alt="sidecar ssl proxy nginx"
     src="/uploads/wepay_image_1.png"
     title="Figure 2: Simple load balancing using GKE and NGINX" >}}

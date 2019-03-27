@@ -115,9 +115,9 @@ open http://$L5D_SVC_IP:9990 # on OS X
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-HOST_IP=$(kubectl get po -l app=l5d -n l5d-system -o jsonpath="{.items\[0\].status.hostIP}")
-L5D\_SVC\_IP=$HOST_IP:$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.ports\[0\].nodePort}')
-open http://$HOST_IP:\$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.ports\[1\].nodePort}') # on OS X
+HOST_IP=$(kubectl get po -l app=l5d -n l5d-system -o jsonpath="{.items[0].status.hostIP}")
+L5D_SVC_IP=$HOST_IP:$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.ports[0].nodePort}')
+open http://$HOST_IP:$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.ports[1].nodePort}') # on OS X
 ```
 
 Let’s take a closer look at the ConfigMap we just deployed. It stores

@@ -57,7 +57,7 @@ topology looks like this: The overall topology looks like this:
 
 {{< fig
   alt="overall topology"
-  title="overall topology"
+  title="Topology"
   src="/uploads/2019/02/image.png" >}}
 
 ## Prerequisites
@@ -65,7 +65,7 @@ topology looks like this: The overall topology looks like this:
 Before you begin this guide, you'll need the following:
 
 - Kubernetes cluster - If you don’t have a Kubernetes cluster, don’t worry! Take
-  a look at [minikube](https://github.com/kubernetes/minikube), or take a look
+  a look at [minikube](https://github.com/kubernetes/minikube), or
   at the [Kubernetes documentation](https://kubernetes.io/docs/setup/).
 
 ## Step 1 — Install the demo app 🚀
@@ -105,7 +105,7 @@ Once the rollout has completed successfully, you can forward the
 ```bash
 kubectl -n booksapp port-forward \
   $(kubectl -n booksapp get po -l app=webapp \
-  -o jsonpath='{.items\[0\].metadata.name}') \
+    -o jsonpath='{.items[0].metadata.name}') \
   7000:7000 &
 ```
 

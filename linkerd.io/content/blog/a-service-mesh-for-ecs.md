@@ -67,13 +67,13 @@ Next, create a Security Group:
 ```bash
 GROUP_ID=$(aws ec2 create-security-group --group-name l5d-demo-sg --description "Linkerd Demo" | jq -r .GroupId)
 aws ec2 authorize-security-group-ingress --group-id $GROUP_ID \
---ip-permissions \
-FromPort=22,IpProtocol=tcp,ToPort=22,IpRanges=\[{CidrIp="0.0.0.0/0"}\] \
-FromPort=4140,IpProtocol=tcp,ToPort=4140,IpRanges=\[{CidrIp="0.0.0.0/0"}\] \
-FromPort=9990,IpProtocol=tcp,ToPort=9990,IpRanges=\[{CidrIp="0.0.0.0/0"}\] \
-FromPort=3000,IpProtocol=tcp,ToPort=3000,IpRanges=\[{CidrIp="0.0.0.0/0"}\] \
-FromPort=8500,IpProtocol=tcp,ToPort=8500,IpRanges=\[{CidrIp="0.0.0.0/0"}\] \
-IpProtocol=-1,UserIdGroupPairs=\[{GroupId=\$GROUP_ID}\]
+  --ip-permissions \
+    FromPort=22,IpProtocol=tcp,ToPort=22,IpRanges=[{CidrIp="0.0.0.0/0"}] \
+    FromPort=4140,IpProtocol=tcp,ToPort=4140,IpRanges=[{CidrIp="0.0.0.0/0"}] \
+    FromPort=9990,IpProtocol=tcp,ToPort=9990,IpRanges=[{CidrIp="0.0.0.0/0"}] \
+    FromPort=3000,IpProtocol=tcp,ToPort=3000,IpRanges=[{CidrIp="0.0.0.0/0"}] \
+    FromPort=8500,IpProtocol=tcp,ToPort=8500,IpRanges=[{CidrIp="0.0.0.0/0"}] \
+    IpProtocol=-1,UserIdGroupPairs=[{GroupId=$GROUP_ID}]
 ```
 
 ## Set up Consul
@@ -94,7 +94,7 @@ aws ec2 run-instances --image-id ami-7d664a1d \
 ### Create a new cluster
 
 ```bash
-aws ecs create-cluster --cluster-name l5d-demo`
+aws ecs create-cluster --cluster-name l5d-demo
 ```
 
 ### Create a Role Policy

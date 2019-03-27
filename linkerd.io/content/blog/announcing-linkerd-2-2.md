@@ -103,7 +103,7 @@ you to [Cody Vandermyn](https://github.com/codeman9) for this feature.
 ## Client Identity
 
 Linkerd 2.2 introduces a new, secure mechanism for providing _client identity_
-on incoming requests. When `—tls=optional` is enabled, Linkerd now adds
+on incoming requests. When `--tls=optional` is enabled, Linkerd now adds
 `l5d-client-id` header to each request. This header can be used by application
 code to implement authorization, e.g. requiring all requests to be authenticated
 or restricting access to specific services.

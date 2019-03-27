@@ -105,8 +105,8 @@ open http://$INGRESS_LB:9990 # on OS X
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-HOST_IP=$(kubectl get po -l app=l5d -o jsonpath="{.items\[0\].status.hostIP}")
-open http://$HOST_IP:\$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[2\].nodePort}') # on OS X
+HOST_IP=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}")
+open http://$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[2].nodePort}') # on OS X
 ```
 
 ## STEP 2: INSTALL THE SAMPLE APPS
@@ -149,13 +149,15 @@ that makes use of it. You can see the entire setup in action by sending traffic
 through linkerd’s external IP:
 
 ```bash
-http_proxy=$INGRESS_LB:4140 curl -s http://hello
+http_proxy=$INGRESS_LB:4140
+curl -s http://hello
 ```
 
 Or to use hostIP directly:
 
 ```bash
-http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}') curl -s http://hello
+http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+curl -s http://hello
 ```
 
 If everything’s working, you should see the string “Hello world”.
@@ -206,13 +208,15 @@ between these services in TLS. Let’s verify this by running the same command a
 before:
 
 ```bash
-http_proxy=$INGRESS_LB:4140 curl -s http://hello
+http_proxy=$INGRESS_LB:4140
+curl -s http://hello
 ```
 
 Or using hostIP:
 
 ```bash
-http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}') curl -s http://hello
+http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+curl -s http://hello
 ```
 
 If all is well, you should still see the string “Hello world”—but under the

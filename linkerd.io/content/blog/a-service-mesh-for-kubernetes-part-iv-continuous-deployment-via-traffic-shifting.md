@@ -17,9 +17,7 @@ article, we’ll show you how to use Linkerd as a service mesh to do blue-green
 deployments of new code as the final step of a CI/CD pipeline.
 
 Note: this post was co-written with [Kevin
-Lingerfelt](https://twitter.com/klingerf). T
-
-his is one article in a series of articles
+Lingerfelt](https://twitter.com/klingerf). This is one article in a series of articles
 about [Linkerd](https://linkerd.io/), [Kubernetes](http://kubernetes.io/), and
 service meshes. Other installments in this series include:
 
@@ -128,15 +126,15 @@ You can confirm that installation was successful by viewing namerd’s admin pag
 (note that it may take a few minutes for the ingress IP to become available):
 
 ```bash
-NAMERD_INGRESS_LB=$(kubectl get svc namerd -o jsonpath="{.status.loadBalancer.ingress\[0\].*}")
+NAMERD_INGRESS_LB=$(kubectl get svc namerd -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 open http://$NAMERD_INGRESS_LB:9991 # on OS X
 ```
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-NAMERD_HOST_IP=$(kubectl get po -l app=namerd -o 'jsonpath={.items\[0\].status.hostIP}')
-open http://$NAMERD_HOST_IP:\$(kubectl get svc namerd -o 'jsonpath={.spec.ports\[2\].nodePort}') # on OS X
+NAMERD_HOST_IP=$(kubectl get po -l app=namerd -o 'jsonpath={.items[0].status.hostIP}')
+open http://$NAMERD_HOST_IP:$(kubectl get svc namerd -o 'jsonpath={.spec.ports[2].nodePort}') # on OS X
 ```
 
 The admin page displays all configured namerd namespaces, and we’ve configured
@@ -157,13 +155,13 @@ namerd. In order to connect to the version of namerd that we just deployed to
 Kubernetes, set the variable as follows:
 
 ```bash
-export NAMERCTL_BASE_URL=http://$NAMERD\_INGRESS\_LB:4180
+export NAMERCTL_BASE_URL=http://$NAMERD_INGRESS_LB:4180
 ```
 
 Or to use hostIP directly:
 
 ```bash
-export NAMERCTL_BASE_URL=http://$NAMERD\_HOST\_IP:$(kubectl get svc namerd -o 'jsonpath={.spec.ports\[1\].nodePort}')
+export NAMERCTL_BASE_URL=http://$NAMERD_HOST_IP:$(kubectl get svc namerd -o 'jsonpath={.spec.ports[1].nodePort}')
 ```
 
 And now try using `namerctl` to display the internal dtab:
@@ -198,15 +196,15 @@ You can confirm that installation was successful by viewing Linkerd’s admin UI
 (note that it may take a few minutes for the ingress IP to become available):
 
 ```bash
-L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress\[0\].*}")
+L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 open http://$L5D_INGRESS_LB:9990 # on OS X
 ```
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-L5D_HOST_IP=$(kubectl get po -l app=l5d -o 'jsonpath={.items\[0\].status.hostIP}')
-open http://$L5D_HOST_IP:\$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[3\].nodePort}') # on OS X
+L5D_HOST_IP=$(kubectl get po -l app=l5d -o 'jsonpath={.items[0].status.hostIP}')
+open http://$L5D_HOST_IP:\$(kubectl get svc l5d -o 'jsonpath={.spec.ports[3].nodePort}') # on OS X
 ```
 
 We’ll use the admin UI to verify steps of the blue-green deploy.
@@ -253,8 +251,9 @@ curl $L5D_INGRESS_LB Hello (10.196.2.5) world (10.196.2.6)!!
 Or to use hostIP directly:
 
 ```bash
-L5D\_INGRESS\_LB=$L5D_HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[0\].nodePort}')
-curl \$L5D_INGRESS_LB Hello (10.196.2.5) world (10.196.2.6)!!
+$ L5D_INGRESS_LB=$L5D_HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+$ curl $L5D_INGRESS_LB
+Hello (10.196.2.5) world (10.196.2.6)!!
 ```
 
 If everything is working, you’ll see a “Hello world” message similar to that
@@ -287,15 +286,15 @@ You can confirm that installation was successful by opening up the Jenkins web
 UI (note that it may take a few minutes for the ingress IP to become available):
 
 ```bash
-JENKINS_LB=$(kubectl get svc jenkins -o jsonpath="{.status.loadBalancer.ingress\[0\].*}")
+JENKINS_LB=$(kubectl get svc jenkins -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 open http://$JENKINS_LB # on OS X
 ```
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-JENKINS_HOST_IP=$(kubectl get po -l app=jenkins -o 'jsonpath={.items\[0\].status.hostIP}')
-open http://$JENKINS_HOST_IP:\$(kubectl get svc jenkins -o 'jsonpath={.spec.ports\[0\].nodePort}') # on OS X
+JENKINS_HOST_IP=$(kubectl get po -l app=jenkins -o 'jsonpath={.items[0].status.hostIP}')
+open http://$JENKINS_HOST_IP:$(kubectl get svc jenkins -o 'jsonpath={.spec.ports[0].nodePort}') # on OS X
 ```
 
 You should see a “hello_world” job in the UI.

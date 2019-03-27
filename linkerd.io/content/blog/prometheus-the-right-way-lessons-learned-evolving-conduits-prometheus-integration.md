@@ -65,7 +65,7 @@ was:
 
 Here is just a small snippet of that gRPC write interface:
 
-```txt
+```protobuf
 message ReportRequest {
   Process process = 1;
   enum Proxy {

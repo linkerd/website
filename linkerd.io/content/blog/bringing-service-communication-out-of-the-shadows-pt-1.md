@@ -81,11 +81,6 @@ examples.
 
 ## The problem
 
-{{< fig
-  alt="The problem"
-  title="The problem"
-  src="/uploads/2019/03/shadows_post_1_small_ping-1.gif" >}}
-
 Service-to-service communication lives in the shadows. There’s a lot we can
 infer about the state of service communication based on circumstantial evidence.
 Directly measuring the health of those requests at any given time is a challenge

@@ -52,7 +52,6 @@ for microservices, anyone?
 
 {{< fig
   alt="where is my car"
-  title="where is my car"
   src="/uploads/2018/04/dude-wheres-my-car.gif" >}}
 
 ## How it works in practice
@@ -127,7 +126,6 @@ forms of deeper investigation into this service.
 
 {{< fig
   alt="sweet"
-  title="Sweet!"
   src="/uploads/2018/08/dude_sweet.gif" >}}
 
 That’s just a sample of some of the things you can do with Conduit. If you want

@@ -96,7 +96,8 @@ Note that it may take a few minutes for the ingress IP to become available. Or
 if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-ZIPKIN_LB=$(kubectl get po -l app=zipkin -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc zipkin -o 'jsonpath={.spec.ports[0].nodePort}') open http://$ZIPKIN_LB # on OS X
+ZIPKIN_LB=$(kubectl get po -l app=zipkin -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc zipkin -o 'jsonpath={.spec.ports[0].nodePort}')
+open http://$ZIPKIN_LB # on OS X
 ```
 
 However, the web UI won’t show any traces until we install Linkerd.

@@ -50,5 +50,6 @@ releases.
 We hope you enjoy this release. For more about HTTP/2 or gRPC with Linkerd, feel
 free to stop by our [Linkerd community Slack](http://slack.linkerd.io/), ask a
 question on [Discourse](https://discourse.linkerd.io), or [contact us
-directly](https://linkerd.io/overview/help/). —William and the gang
-at [Buoyant](https://buoyant.io/)
+directly](https://linkerd.io/overview/help/).
+
+—William and the gang at [Buoyant](https://buoyant.io/)

@@ -87,8 +87,8 @@ You can also see the app live by running
 
 ```bash
 kubectl -n nodevoto port-forward \
-$(kubectl -n nodevoto get po -l app=web-svc -oname | cut -d/ -f 2) \
- 8080:80
+  $(kubectl -n nodevoto get po -l app=web-svc -oname | cut -d/ -f 2) \
+  8080:80
 ```
 
 (If you see something like `kubectl: command not found`, you don’t have
@@ -106,7 +106,6 @@ diagnose the problem.
 
 {{< fig
   alt="vote app"
-  title="vote app"
   src="/uploads/2018/11/NodeVoto-Uh-oh-Select-again-image-300x225.gif" >}}
 
 ## Step 2: Install Linkerd’s CLI

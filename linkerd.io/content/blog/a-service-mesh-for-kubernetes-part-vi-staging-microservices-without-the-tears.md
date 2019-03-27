@@ -245,7 +245,9 @@ Hello (10.196.2.232) world (10.196.2.233)!!
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
 ```bash
-INGRESS_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items\[0\].status.hostIP}"):$(kubectl get svc l5d -o 'jsonpath={.spec.ports\[0\].nodePort}') $ curl -H "Host: www.hello.world" $INGRESS_LB Hello (10.196.2.232) world (10.196.2.233)!!
+$ INGRESS_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+$ curl -H "Host: www.hello.world" $INGRESS_LB
+Hello (10.196.2.232) world (10.196.2.233)!!
 ```
 
 As we expect, this returns `Hello (......) World (.....)` from our production

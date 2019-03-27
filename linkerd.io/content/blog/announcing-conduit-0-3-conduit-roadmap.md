@@ -52,5 +52,3 @@ long. We’re making a concerted effort to make Conduit production-ready as
 rapidly as possible. Of course, this all depends on you. [Try
 Conduit](https://conduit.io/) on your own Kubernetes apps, give us feedback, and
 help us get there!
-
-- William and the rest of the team at Buoyant

@@ -167,13 +167,15 @@ the world service to complete its request). You can see this in action by
 sending traffic through linkerd’s external IP:
 
 ```bash
-http_proxy=$INGRESS_LB:4140 curl -s http://hello
+http_proxy=$INGRESS_LB:4140
+curl -s http://hello
 ```
 
 Or to use hostIP directly:
 
 ```bash
-http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}') curl -s http://hello
+http_proxy=$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
+curl -s http://hello
 ```
 
 You should see the string “Hello world”.
