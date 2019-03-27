@@ -40,9 +40,7 @@ In this tutorial, we’ll walk you through deploying Linkerd 2.0 to a Kubernetes
 cluster and using it to debug failures in an example application.
 
 (If you don’t have a Kubernetes cluster, don’t worry! Take a look at
-[minikube](https://github.com/kubernetes/minikube), or just check out the
-[interactive tutorial](https://www.katacoda.com/grampelberg/scenarios/nodevoto)
-for this blog post that you can run straight from your browser.)
+[minikube](https://github.com/kubernetes/minikube).)
 
 The demo application we’ll deploy is composed of multiple services that allow
 voting for favorite gifs. These services communicate via gRPC and have all been

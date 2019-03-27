@@ -22,7 +22,7 @@ Mesh**. In this keynote, he outlined the vision of the service mesh, as
 exemplified by [Linkerd](https://linkerd.io/). While Linkerd is often added to
 systems built on Kubernetes for its ability to add *resiliency*, the full vision
 of the service mesh is much more than that. As William Morgan writes in his blog
-post, [What’s a Service Mesh?](/whats-a-service-mesh-and-why-do-i-need-one/):
+post, [What’s a Service Mesh?](/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/):
 
 > The explicit goal of the service mesh is to move service communication out of
 > the realm of the invisible, implied infrastructure, and into the role of a

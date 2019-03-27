@@ -7,9 +7,8 @@ thumbnail: version_conduit_040.png
 tags: [conduit, Conduit, kubernetes, monitoring, News, Release Notes]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 Earlier this week, we released [Conduit
 v0.4.0](https://github.com/runconduit/conduit/releases/tag/v0.4.0). This release

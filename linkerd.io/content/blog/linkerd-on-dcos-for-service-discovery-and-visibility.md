@@ -8,7 +8,7 @@ tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 
 In our previous post, [Linkerd as a service mesh for
-Kubernetes](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/), we
+Kubernetes][part-i], we
 showed you how to use Linkerd on Kubernetes for drop-in service discovery and
 monitoring. In this post, we’ll show you how to get the same features
 on [DC/OS](https://dcos.io/), and discuss how this compares with DNS-based
@@ -216,3 +216,4 @@ Thanks to [Alex Leong](https://twitter.com/adlleong) and [Oliver
 Gould](https://twitter.com/olix0r) for feedback on earlier drafts of this post.
 
 [webapp.json]: https://raw.githubusercontent.com/linkerd/linkerd-examples/master/dcos/webapp.json
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}

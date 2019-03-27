@@ -239,10 +239,12 @@ Guide](https://linkerd.io/getting-started/k8s/) or hop in the [linkerd
 slack](http://slack.linkerd.io/) and say hi!
 
 Stay tuned for Part II in this series: [Pods Are Great Until They’re
-Not](/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not/).
+Not][part-ii].
 
 {{< note >}}
 There are a myriad of ways to deploy Kubernetes and different
 environments support different features. Learn more about deployment
 differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-{{< /note /}}
+{{< /note >}}
+
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}

@@ -13,7 +13,7 @@ adding a layer of security to applications without requiring modification of
 application code.
 
 **NOTE:** we have an [updated version of this
-post](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/).
+post][part-iii].
 
 [Linkerd](https://linkerd.io/) includes client-side load balancing as one of its
 core features. In its basic form, outgoing HTTP and RPC calls from a service are
@@ -110,8 +110,7 @@ Now that we have certificates and keys, we need to distribute them to the
 appropriate pods. Each pod needs the certificate and key for the service that is
 running there (for serving TLS) as well as the root CA certificate (for
 validating the identity of other services). Certificates and keys can be
-distributed using [Kubernetes
-secrets](http://kubernetes.io/v1.1/docs/user-guide/secrets.html), [just like
+distributed using Kubernetes secrets, [just like
 Linkerd configs](https://linkerd.io/doc/0.2.1/k8s). Example secret:
 
 ```yml
@@ -208,3 +207,15 @@ them scale to high traffic, low latency environments.
 Thanks to [Sarah Brown](https://twitter.com/esbie) and [Greg
 Campbell](https://twitter.com/gtcampbell) for feedback on earlier drafts of this
 post.
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

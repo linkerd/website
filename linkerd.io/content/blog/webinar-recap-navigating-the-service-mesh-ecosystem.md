@@ -7,9 +7,8 @@ thumbnail: navigating_the_ecosystem.png
 tags: [Conduit, Uncategorized]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 Earlier this month, Christian Posta (Red Hat) joined me to present a joint
 webinar looking at the various open-source service mesh projects (Linkerd,

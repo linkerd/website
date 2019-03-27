@@ -169,9 +169,9 @@ handled.
 ## Trying this at home
 
 Keen readers of our [Service Mesh for
-Kubernetes](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/) series
+Kubernetes][part-i] series
 will note that we’ve already seen an example of this in [our dogfood blog
-post](/a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing/).
+post][part-v].
 We deployed a `world-v2` service, and we were able to send individual dogfood
 requests through this service via a simple header containing a routing override.
 Now, we can use this same mechanism for something else: setting up an ad hoc
@@ -286,7 +286,7 @@ work.
 
 Lastly, it’s important to ensure that the `l5d-dtab` header is not settable from
 the outside world! In our post about [setting up a dogfood environment in
-Kubernetes](/a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing/),
+Kubernetes][part-v],
 we gave an example nginx configuration for ingress that would strip unknown
 headers from the outside world—good practice for a variety of reasons.
 
@@ -310,3 +310,15 @@ configuring ingress in your setup, feel free to stop by our [linkerd community
 Slack](https://slack.linkerd.io/), ask a question on
 [Discourse](https://discourse.linkerd.io), or [contact us
 directly](https://linkerd.io/overview/help/)!
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

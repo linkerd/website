@@ -7,7 +7,7 @@ draft: false
 tags: [Article, Buoyant, buoyant, Education, Linkerd, linkerd]
 ---
 
-This post was co-written with [Ruben Oanta](https://twitter.com/rubeydoo).
+This post was co-written with Ruben Oanta (@rubeydoo).
 
 Load balancing is a critical component of any large-scale software deployment.
 But there are many ways to do load balancing. Which way is best? And how can we

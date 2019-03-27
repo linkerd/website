@@ -14,8 +14,8 @@ production outages. In this post, we’ll show how circuit breaking can be used 
 mitigate this type of failure, and we’ll give some example circuit breaking
 strategies and show how they affect success rate.
 
-In previous posts, we’ve addressed the [crucial role of load
-balancing](/beyond-round-robin-load-balancing-for-latency/) in scaling
+In previous posts, we’ve addressed the [crucial role of load balancing]({{<
+relref "beyond-round-robin-load-balancing-for-latency" >}}) in scaling
 microservice applications. Given a service with many instances, requests to that
 service must be balanced over all of the instances. This balancing can be done
 at the connection level, e.g. with systems like kubeproxy (Kubernetes) or

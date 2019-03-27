@@ -8,7 +8,7 @@ tags: [Linkerd, linkerd, News]
 ---
 
 Yesterday, at [Kubecon
-EU](http://events.linuxfoundation.org/events/cloudnativecon-and-kubecon-europe),
+EU](http://events17.linuxfoundation.org/events/kubecon-and-cloudnativecon-europe),
 I announced an exciting new project in the Linkerd
 family: [Linkerd-tcp](https://github.com/linkerd/linkerd-tcp). Linkerd-tcp is a
 lightweight, service-discovery-aware, TLS-ing TCP load balancer that integrates
@@ -86,7 +86,7 @@ environment.
 
 To demonstrate the capabilities of running Linkerd-tcp with Namerd, we’ve set up
 a [Linkerd-tcp demo
-project](https://github.com/linkerd/linkerd-examples/tree/master/Linkerd-tcp) in
+project](https://github.com/linkerd/linkerd-examples/tree/master/linkerd-tcp) in
 the [linkerd-examples repo](https://github.com/linkerd/linkerd-examples). In the
 demo, we’re using Linkerd to route incoming HTTP traffic to a cluster of Go web
 servers. The web servers cache their results in Redis, and they communicate with
@@ -191,10 +191,10 @@ Linkerd-tcp:
 Dtabs are an incredibly powerful system that provide fine-grained control over
 traffic routing. In this example we’ve only scratched the surface of what they
 can accomplish. To learn more about Dtabs, see [Dynamic Routing with
-Namerd](/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd)
+Namerd](/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd)
 or check out some of the examples in our Kubernetes Service Mesh series,
 e.g. [Continuous Deployment via Traffic
-Shifting](/a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting/).
+Shifting][part-iv].
 
 # Want more?
 
@@ -202,6 +202,7 @@ This is just the beginning, and we have some very big plans for Linkerd-tcp.
 Want to get involved? [Linkerd-tcp is on
 Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp,
 Dtabs, or anything else about the Linkerd service mesh, feel free to stop by
-the [Linkerd community Slack](https://slack.linkerd.io/), post a topic
-on [Linkerd discourse](https://discourse.linkerd.io/), or [contact us
-directly](http://info.buoyant.io/contact)!
+the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic
+on [Linkerd discourse](https://discourse.linkerd.io/)!
+
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}

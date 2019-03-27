@@ -11,8 +11,7 @@ Today we’re happy to release Linkerd 0.9.0, our best release yet! This release
 is jam packed with internal efficiency upgrades and major improvements to the
 admin dashboard. We also took this opportunity to make some backwards
 incompatible changes to simplify Linkerd configuration. See the bottom of this
-post for a [detailed guide]({{< ref
-"linkerd-0-9-0-released/#config-upgrade-guide" >}}) on what changes you’ll need
+post for a [detailed guide](#config-upgrade-guide) on what changes you’ll need
 to make to your config to upgrade from 0.8.\* to 0.9.0.
 
 You can download Linkerd 0.9.0
@@ -51,7 +50,7 @@ to understand and to write dtabs for.
 We recommend updating your dtabs to use the simpler `/svc` style names. If you
 don’t want to do that immediately, the previous
 default `io.l5d.methodAndHost` identifier can still be [configured
-explicitly](/linkerd-0-9-0-released/#config-upgrade-guide).
+explicitly]({{< relref "linkerd-0-9-0-released" >}}#config-upgrade-guide).
 
 ## MORE IDIOMATIC PROMETHEUS METRICS
 
@@ -199,7 +198,7 @@ tracers:
   Alternatively, update your dtab to expect names of the
   form `/svc/<host>` instead of `/http/1.1/<method>/<host>`.See the section
   above on [Simpler Logical
-  Names](/linkerd-0-9-0-released/#simpler-logical-names) to learn about the
+  Names](#simpler-logical-names) to learn about the
   motivation for these two changes.
 
   FROM

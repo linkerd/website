@@ -7,9 +7,8 @@ draft: false
 tags: [Conduit, Uncategorized]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 _This post was coauthored by_ [_Frederic
 Branczyk_](https://twitter.com/fredbrancz)_, a member of the Prometheus team._

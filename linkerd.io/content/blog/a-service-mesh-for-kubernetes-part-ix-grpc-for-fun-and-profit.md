@@ -8,7 +8,7 @@ tags: [Linkerd, linkerd, News, tutorials]
 ---
 
 As of Linkerd 0.8.5, released earlier this year, [Linkerd supports gRPC and
-HTTP/2](/http2-grpc-and-linkerd/)! These powerful protocols can provide
+HTTP/2](/2017/01/11/http/2-grpc-and-linkerd/)! These powerful protocols can provide
 significant benefits to applications that make use of them. In this post, we’ll
 demonstrate how to use Linkerd with gRPC, allowing applications that speak gRPC
 to take full advantage of Linkerd’s load balancing, service discovery, circuit
@@ -70,10 +70,10 @@ running on the same host as `world` (on its *incoming* router). That Linkerd
 instance then sends the request to the `world` service on its host. This
 three-hop model allows Linkerd to decouple the application’s protocol from the
 transport protocol—for example, [by wrapping cross-node connections in
-TLS](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/). (For
+TLS][part-iii]. (For
 more on this deployment topology, see Part II of this series, [Pods are great
 until they’re
-not](/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not/).)
+not][part-ii].)
 
 ## TRYING THIS AT HOME
 
@@ -234,7 +234,7 @@ like multiplexed streaming, back pressure, and cancelation, which Linkerd can
 take full advantage of. Because gRPC includes routing information in the
 request, it’s a natural fit for Linkerd, and makes it very easy to set up
 Linkerd to route gRPC requests. For more on Linkerd’s roadmap around gRPC,
-see [Oliver’s blog post on the topic](/http2-grpc-and-linkerd/).
+see [Oliver’s blog post on the topic](/2017/01/11/http/2-grpc-and-linkerd/).
 
 Finally, for a more advanced example of configuring gRPC services, take a look
 at our [Gob microservice
@@ -253,3 +253,15 @@ For more information on Linkerd, gRPC, and HTTP/2 head to the [Linkerd gRPC
 documentation](https://linkerd.io/features/grpc/) as well as our [config
 documentation for
 HTTP/2](https://linkerd.io/config/1.0.0/linkerd/index.html#http-2-protocol).
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

@@ -7,9 +7,8 @@ thumbnail: conduit_community_recap.png
 tags: [Community, conduit, Conduit, News, Release Notes]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 Earlier this month we [announced
 Conduit](https://buoyant.io/2017/12/05/introducing-conduit/), the ultralight
@@ -125,7 +124,7 @@ guidance for getting started will be up.
 channel where someone wasn't able to get Conduit working due to (we suspect)
 RBAC. Which is probably totally right! And awesome. We should fix that.
 _Editor’s note: that was fixed in the_ [_Conduit 0.1.1
-release_](https://buoyant.io/announcing-conduit-0-1-1/) _on Dec 20._
+release_]({{< relref "announcing-conduit-0-1-1" >}}) _on Dec 20._
 
 **What about from the contribution perspective? Does the choice of Rust limit
 the pool of potential contributors submitting PR's?**

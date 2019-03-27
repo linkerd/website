@@ -18,9 +18,8 @@ tags:
   ]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 Earlier this month, Conduit core contributors and Rust enthusiasts Carl Lerche
 and Sean McArthur presented a look at the internals of the new Conduit service
@@ -74,7 +73,7 @@ buffer overflow attack vectors. Historically, this has been the tradeoff every
 developer faces when choosing between safety and speed.
 
 In order to provide both speed and safety, the Conduit team opted to use
-[Rust](https://www.rust-lang.org/en-US/) to develop the data plane. Rust is a
+[Rust](https://www.rust-lang.org/) to develop the data plane. Rust is a
 relatively new language that doesn't require a runtime. It guarantees memory
 safety to prevent buffer overflow attacks while also compiling down to native
 code to ensure predictable high end performance. In the webinar, we cover the

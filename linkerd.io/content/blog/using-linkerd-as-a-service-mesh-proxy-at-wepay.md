@@ -21,11 +21,7 @@ tags:
 <!-- markdownlint-disable no-bare-urls -->
 
 *This post originally appeared on [WePay's Engineering
-Blog](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay).
-Have a story about running Linkerd in production, or want to contribute your
-perspective on microservices management or the service mesh? [Tell
-us](https://docs.google.com/forms/d/1hZujOuwOFMlU_1e15-r7M6nJKMFUHYTJW2xj4i2IxPU/edit)
-about it.*
+Blog](https://wecode.wepay.com/posts/using-l5d-as-a-service-mesh-proxy-at-wepay).*
 
 In the upcoming months, we are going to write a series of posts
 documenting [WePay Engineering’s](https://wecode.wepay.com/) journey from
@@ -39,7 +35,7 @@ change the way our infrastructure operates.
 
 {{< fig
     alt="service mesh sidecar proxy"
-    src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_0.png"
+    src="/uploads/wepay_image_0.png"
     title="Figure 1: Data plane using sidecar proxy pattern" >}}
 
 Figure 1 shows a simplified version of a [data
@@ -74,7 +70,7 @@ something like this:
 
 {<< fig
     alt="sidecar ssl proxy nginx"
-    src="https://wecode.wepay.com/assets/2018-06-11-using-l5d-as-a-service-mesh-proxy-at-wepay/image_1.png"
+    src="/uploads/wepay_image_1.png"
     title="Figure 2: Simple load balancing using GKE and NGINX" >}}
 
 In the model shown in figure 2, Service Y sends a request to Service X,
@@ -239,7 +235,7 @@ of a service mesh architecture, and how they apply to WePay’s architecture.
 
 <!-- markdownlint-enable no-bare-urls -->
 
-[envoy]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/load_balancing
+[envoy]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/load_balancing/load_balancing
 [round-robin]: https://buoyant.io/2016/03/16/beyond-round-robin-load-balancing-for-latency/
 [perf]: https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/
 [tuning]: https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/

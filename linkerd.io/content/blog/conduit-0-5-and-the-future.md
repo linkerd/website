@@ -7,10 +7,6 @@ draft: false
 tags: [Conduit, Linkerd, News]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
-
 Today we're very happy to announce [Conduit
 0.5.0](https://github.com/runconduit/conduit/releases/tag/v0.5.0), which
 introduces _zero-config_ automatic TLS between mesh'd pods (including

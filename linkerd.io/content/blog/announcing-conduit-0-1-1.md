@@ -7,9 +7,8 @@ thumbnail: version_conduit_011.png
 tags: [conduit, Conduit, Release Notes, releases]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 I'm excited to announce that the first inaugural [post-launch release of
 Conduit](https://github.com/runconduit/conduit/releases/tag/v0.1.1) is now

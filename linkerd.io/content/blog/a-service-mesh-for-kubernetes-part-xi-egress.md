@@ -87,7 +87,7 @@ In our basic service mesh config, we attached the DaemonSet transformer to the
 outgoing router’s interpreter. This was so that all requests from one service
 would be sent to the Linkerd DaemonSet pod of the destination service (read more
 about that in [Part II of this
-series](/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not/)).
+series][part-ii]).
 However, this is not appropriate for external services because they are running
 outside of Kubernetes and don’t have a corresponding Linkerd DaemonSet pod.
 Therefore, we must take the DaemonSet transformer off of the interpreter and put
@@ -224,3 +224,15 @@ third-party APIs.
 
 If you have any questions about using Linkerd for egress, please come ask
 on [Discourse](https://discourse.linkerd.io/) or [Slack](https://slack.linkerd.io/)!
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

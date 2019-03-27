@@ -7,9 +7,8 @@ thumbnail: version_conduit_020.png
 tags: [conduit, Conduit, HTTP/1, News, Release Notes, TCP]
 ---
 
-Conduit is now part of Linkerd! [Read more
->](/2018/07/06/conduit-0-5-and-the-future/ 'Conduit is now part of Linkerd
-announcement')
+Conduit is now part of Linkerd! [Read more >]({{< relref
+"conduit-0-5-and-the-future" >}})
 
 We’re happy to announce that the latest Conduit release delivers on a big
 project milestone. With the 0.2.0 release, Conduit now includes support for

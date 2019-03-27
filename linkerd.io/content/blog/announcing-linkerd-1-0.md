@@ -7,8 +7,7 @@ thumbnail: linkerd_version_1_featured.png
 tags: [Linkerd, linkerd, News]
 ---
 
-Today, we’re thrilled to [announce Linkerd version
-1.0](http://info.buoyant.io/press/2017/03/07/linkerd_1.0_release). A little more
+Today, we’re thrilled to announce Linkerd version 1.0. A little more
 than one year from our initial launch, Linkerd is part of the [Cloud Native
 Computing Foundation](https://cncf.io/) and has a thriving community of
 contributors and users. Adopters range from startups like Monzo, which is
@@ -33,7 +32,7 @@ little less fear and uncertainty.
 Linkerd is a *service mesh* for cloud native applications. As part of this
 release, we wanted to define what this actually meant. My cofounder William
 Morgan has a writeup in another post we released today, [What’s a service mesh?
-And why do I need one?](/whats-a-service-mesh-and-why-do-i-need-one/)
+And why do I need one?](/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)
 
 ## NEW FEATURES
 

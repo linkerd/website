@@ -43,10 +43,9 @@ service meshes. Other installments in this series include:
 12. Retry budgets, deadline propagation, and failing gracefully
 13. Autoscaling by top-line metrics
 
-In the first installment in this series, we showed you how you can [easily
-monitor top-line service
-metrics](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/) (success
-rates, latencies, and request rates) when linkerd is installed as a service
+In the first installment in this series, we showed you how you can
+[easily monitor top-line service metrics][part-i] (success rates, latencies, and
+request rates) when linkerd is installed as a service
 mesh. In this article, we’ll show you another benefit of the service mesh
 approach: it allows you to decouple the application’s protocol from the protocol
 used on the wire. In other words, the application can speak one protocol, but
@@ -61,15 +60,15 @@ the topic of this article, HTTP to HTTPS.
 ## A Service Mesh for Kubernetes
 
 When linkerd is deployed as a service mesh on Kubernetes, we [place a linkerd
-instance on every host using
-DaemonSets](/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not/).
+instance on every host using DaemonSets][part-ii].
 For HTTP services, pods can send HTTP traffic to their host-local linkerd by
 using the `http_proxy` environment variable. (For non-HTTP traffic the
 integration is slightly more complex.)
 
 In our blog post from a few months ago, we showed you the basic pattern
 of [using linkerd to “wrap” HTTP calls in
-TLS](/transparent-tls-with-linkerd/) by proxying at both ends of the connection,
+TLS]({{< relref "transparent-tls-with-linkerd" >}}) by proxying at both ends of
+the connection,
 both originating and terminating TLS. However, now that we have the service mesh
 deployment in place, things are significantly simpler. Encrypting all cross-host
 communication is largely a matter of providing a TLS certificate to the service
@@ -77,11 +76,11 @@ mesh.
 
 Let’s walk through an example. The first two steps will be identical to what we
 did in [Part I of this
-series](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/)—we’ll
+series][part-i]—we’ll
 install linkerd as a service mesh and install a simple microservice “hello
 world” application. If you have already done this, you can skip straight
 to [step
-3](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/#step-3-configure-linkerd-to-use-tls).
+3][part-iii].
 
 ## STEP 1: INSTALL LINKERD
 
@@ -178,7 +177,8 @@ The following scripts use sample certificates that we’ve generated. *Please
 don’t use these certificates in production*. For instructions on how to generate
 your own self-signed certificates, see our previous post, where we
 have [instructions on how to generate your own
-certificates](/transparent-tls-with-linkerd/#generating-certificates)).
+certificates]({{<
+relref "transparent-tls-with-linkerd" >}}#generating-certificates)).
 
 ## STEP 4: DEPLOY CERTIFICATES AND CONFIG CHANGES TO KUBERNETES
 
@@ -261,5 +261,14 @@ our [linkerd community Slack](http://slack.linkerd.io/), post a topic
 on [linkerd discourse](https://discourse.linkerd.io/), or [contact us
 directly](https://linkerd.io/overview/help/)!
 
-[Share this post on Hacker News.
-»](https://news.ycombinator.com/submitlink?u=https%3A%2F%2Flocalhost%3A1313%2F2016%2F10%2F24%2Fa-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things%2F&t=A%20Service%20Mesh%20for%20Kubernetes%2C%20Part%20III%3A%20Encrypting%20all%20the%20things)
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

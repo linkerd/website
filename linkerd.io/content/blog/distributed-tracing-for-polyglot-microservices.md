@@ -23,14 +23,16 @@ monolith and reproducing the problem. With microservices, this approach is no
 longer feasible, because no single service provides a complete picture of the
 performance or correctness of the application as a whole. We need new tools to
 help us manage the [real complexity of operating distributed systems at
-scale](/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/).
+scale]({{< relref
+"real-world-microservices-when-services-stop-playing-well-and-start-getting-real"
+>}}).
 
 Distributed tracing is one such tool. With distributed tracing, we can track
 requests as they pass through multiple services, emitting timing and other
 metadata throughout, and this information can then be reassembled to provide a
 complete picture of the application’s behavior at runtime. Distributed tracing
 has been called the [“the most wanted and missed tool in the microservice
-world”](https://blog.init.ai/distributed-tracing-the-most-wanted-and-missed-tool-in-the-micro-service-world-c2f3d7549c47).
+world”](https://medium.com/@denis.zaytsev/distributed-tracing-the-most-wanted-and-missed-tool-in-the-micro-service-world-c2f3d7549c47).
 
 One popular implementation of distributed tracing
 is [Zipkin](http://zipkin.io/), an open-source project that provides tools for
@@ -54,14 +56,15 @@ application behavior, allowing us to answer questions such as:
 - Which calls are redundant?
 
 Zipkin has been used at scale, and boasts tracing libraries for [many languages
-and runtimes](http://zipkin.io/pages/existing_instrumentations.html). However,
+and runtimes](https://zipkin.io/pages/tracers_instrumentation.html). However,
 there are cases where adding a library to an existing service can be costly, or
 where maintaining feature and performance parity across a wide set of languages
 can be restrictive.
 
 Enter [Linkerd](https://linkerd.io/), our open source,
 industrial-strength *service mesh* for cloud-native apps. There are [many
-reasons to use Linkerd](/linkerd-twitter-style-operability-for-microservices/),
+reasons to use Linkerd]({{<
+relref "linkerd-twitter-style-operability-for-microservices" >}}),
 but in this case, we can take advantage of the fact that, since Linkerd is
 handling your service-to-service HTTP or RPC calls for you, it’s also in the
 perfect position to automatically add instrumentation and emit tracing data on

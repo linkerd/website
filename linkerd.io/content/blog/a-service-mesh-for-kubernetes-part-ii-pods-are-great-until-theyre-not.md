@@ -9,7 +9,7 @@ tags: [Article, Education, Linkerd, linkerd, tutorials]
 
 In our recent post about linkerd on Kubernetes, [A Service Mesh for Kubernetes,
 Part I: Top-line Service
-Metrics](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/),
+Metrics][part-i],
 observant readers noticed that linkerd was installed using DaemonSets rather
 than as a sidecar process. In this post, we’ll explain why (and how!) we do
 this.
@@ -55,7 +55,7 @@ At a first glance, this sounds like a perfect fit for a sidecar deployment in
 Kubernetes. After all, one of Kubernetes’s defining characteristics is its pod
 model. Deploying as a sidecar is conceptually simple, has clear failure
 semantics, and we’ve spent a lot of time [optimizing linkerd for this use
-case](/small-memory-jvm-techniques-for-microservice-sidecars/).
+case][small-memory].
 
 However, the sidecar model also has a downside: deploying per pod means that
 resource costs scale per pod. If your services are lightweight and you run many
@@ -105,8 +105,7 @@ that linkerd must address:
 
 What follows are the technical details on how we solve these three problems. If
 you just want to get linkerd working with Kubernetes DaemonSets, see
-the [previous blog
-post](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/)!
+the [previous blog post][part-i]!
 
 ## HOW DOES AN APPLICATION IDENTIFY ITS HOST-LOCAL LINKERD?
 
@@ -222,8 +221,7 @@ allows us to accomplish the full set of goals of a service mesh (such as
 transparent TLS, protocol upgrades, latency-aware load balancing, etc), while
 scaling linkerd instances per host rather than per pod.
 
-For a full, working example, see the [previous blog
-post](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/), or
+For a full, working example, see the [previous blog post][part-i], or
 download our [example
 app](https://github.com/linkerd/linkerd-examples/tree/master/k8s-daemonset). And
 for help with this configuration or anything else about linkerd, feel free to
@@ -239,3 +237,6 @@ Bereziansky](https://github.com/OleksandrBerezianskyi) for their pioneering wor
 on running linkerd as a DaemonSet, and to [Joonas
 Bergius](https://twitter.com/joonas) for contributing the Kubernetes 1.4
 configuration.
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[small-memory]: /2016/06/17/squeezing-blood-from-a-stone-small-memory-jvm-techniques-for-microservice-sidecars/

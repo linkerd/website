@@ -35,7 +35,7 @@ strongest proponents of sidecars for this reason is Ben Christensen, Facebook
 (and formerly Netflix) engineer and author of
 [Hystrix](https://github.com/Netflix/Hystrix), who compares the heavy use of
 binary libraries in a microservices environment to [“building a distributed
-monolith”](http://www.microservices.com/ben-christensen-do-not-build-a-distributed-monolith).
+monolith”](https://www.microservices.com/talks/dont-build-a-distributed-monolith/).
 
 So, the upside of the sidecar model is that it provides a consistent layer of
 functionality across all services without restricting design choices. The
@@ -291,4 +291,4 @@ small heaps many years ago.
 [routing]: https://linkerd.io/features/routing/
 [instrumentation]: https://twitter.com/linkerd/status/720410954610049025
 [failures]: https://linkerd.io/doc/0.6.0/linkerd/retries/
-[tracing]: https://buoyant.io/distributed-tracing-for-polyglot-microservices/
+[tracing]: /2016/05/17/distributed-tracing-for-polyglot-microservices/

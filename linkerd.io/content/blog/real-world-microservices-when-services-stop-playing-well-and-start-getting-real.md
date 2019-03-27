@@ -48,8 +48,10 @@ services—[_RPC_](https://monkey.org/~marius/redux.html). It’s this experienc
 that motivated [Linkerd](https://linkerd.io/) (pronounced “linker dee”),
 a _service mesh_ designed to give service operators command & control over
 traffic between services. This encompasses a variety of features
-including [transport security](/transparent-tls-with-linkerd/), [load
-balancing](/beyond-round-robin-load-balancing-for-latency/), multiplexing,
+including [transport security]({{< relref "transparent-tls-with-linkerd" >}}),
+[load
+balancing]({{< relref "beyond-round-robin-load-balancing-for-latency" >}}),
+multiplexing,
 timeouts, retries, and routing. In this post, I’ll discuss Linkerd’s approach to
 routing. Classically, routing is one of the problems that is addressed at Layers
 3 and 4—TCP/IP—with hardware load balancers, BGP, DNS, iptables, etc. While
@@ -334,7 +336,7 @@ get involved with what we’re building at Buoyant. It’s going to be awesome.
 We’ve published
 the [linkerd-examples][examples] repository
 with examples of how to run linkerd & namerd
-on [Kubernetes](k8s) and [Mesos + Marathon][marathon]. These
+on [Kubernetes][k8s] and [Mesos + Marathon][marathon]. These
 repositories should have everything you need to get up and routing. If you have
 any questions along the way, please don’t hesitate to ask us
 on [slack.linkerd.io](http://slack.linkerd.io/).

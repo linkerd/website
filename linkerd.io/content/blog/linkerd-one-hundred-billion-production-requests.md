@@ -51,9 +51,6 @@ Petersen](https://github.com/dpetersen), and [Oleksandr
 Berezianskyi](https://github.com/OleksandrBerezianskyi) for their contributions
 to the project and the community.
 
-You can read the [full press release
-here](http://info.buoyant.io/press/2017/03/07/happy-1st-birthday-linkerd).
-
 Finally, here’s a fun vanity metric graph, courtesy of [Tim Qian’s excellent
 Github star history plotter](https://github.com/timqian/star-history):
 

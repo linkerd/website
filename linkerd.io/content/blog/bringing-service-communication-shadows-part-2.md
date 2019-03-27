@@ -81,8 +81,8 @@ Some service mesh implementations pair separate products, like using Envoy (a
 data plane) with Istio (a control plane). Some service mesh implementations,
 like Linkerd, contain both a data plane and a control plane in one product.
 Confusingly for new users, those distinctions aren’t always clear since you can
-do things like take the data plane portion of Linkerd and [integrate it with
-Istio](https://buoyant.io/2017/07/11/linkerd-istio/). There’s more detail around
+do things like take the data plane portion of Linkerd and integrate it with
+Istio. There’s more detail around
 those implementations that we’ll cover later. For now, the takeaway is that
 every service mesh solution needs both of these components.
 
@@ -168,7 +168,7 @@ service, there’s no easy way to tie that back to failures seen via the profile
 service unless an operator has clear knowledge of how the entire service tree
 operates.
 
-[Distributed tracing](http://opentracing.io/documentation/) helps developers and
+[Distributed tracing](https://opentracing.io/docs/) helps developers and
 operators understand the behavior of any application inside the service mesh.
 Requests routed by the data plane can be configured to trace every step (or
 “span”) they take when attempting to fulfill successfully. In other words, a

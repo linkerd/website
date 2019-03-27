@@ -52,14 +52,14 @@ service meshes. Other installments in this series include:
 
 In previous installments of this series, we’ve shown you how you can use Linkerd
 to [capture top-line service
-metrics](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/).
+metrics][part-i].
 Service metrics are vital for determining the health of individual services, but
 they don’t capture the way that multiple services work (or don’t work!) together
 to serve requests. To see a bigger picture of system-level performance, we need
 to turn to distributed tracing.
 
 In a previous post, we covered some of the [benefits of distributed
-tracing](/distributed-tracing-for-polyglot-microservices/), and how to configure
+tracing][polyglot], and how to configure
 Linkerd to export tracing data to [Zipkin](http://zipkin.io/). In this post,
 we’ll show you how to run this setup entirely in Kubernetes, including Zipkin
 itself, and how to derive meaningful data from traces that are exported by
@@ -228,7 +228,7 @@ emitted for this trace. The fact that there are 8 spans for a request between 2
 services stems from the service mesh configuration, in which each request passes
 through two Linkerd instances (so that the protocol can be upgraded or
 downgraded, or [TLS can be added and removed across node
-boundaries](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/)).
+boundaries][part-iii]).
 Each Linkerd router emits both a server span and a client span, for a total of 8
 spans.
 
@@ -261,8 +261,8 @@ provided above do this by default.)
 
 There are some additional benefits to forwarding context headers, beyond
 tracing. From our [previous blog
-post](/distributed-tracing-for-polyglot-microservices/#request-context) on the
-topic:
+post](/2016/05/17/distributed-tracing-for-polyglot-microservices/#request-context)
+on the topic:
 
 > Forwarding request context for Linkerd comes with far more benefits than just
 > tracing, too. For instance, adding the `l5d-dtab` header to an inbound request
@@ -322,8 +322,21 @@ it took for the Web service to respond to Linkerd’s forwarded request. Likewis
 Span D represents the amount of time that it took for Service B to respond to
 the request from the Web service. For more information about tracing, read our
 previous blog post, [Distributed Tracing for Polyglot
-Microservices](/distributed-tracing-for-polyglot-microservices/).
+Microservices][polyglot].
 
 Note: there are a myriad of ways to deploy Kubernetes and different environments
 support different features. Learn more about deployment
 differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}
+[polyglot]: /2016/05/17/distributed-tracing-for-polyglot-microservices/

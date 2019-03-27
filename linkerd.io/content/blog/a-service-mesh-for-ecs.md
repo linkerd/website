@@ -23,12 +23,12 @@ proxies, the Linkerd service mesh provides a consistent, global layer for
 monitoring and controlling all internal, service-to-service traffic within an
 application. (For more on the service mesh model, read William’s article,
 [What's a service mesh? And why do I need
-one?](https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/))
+one?]({{< relref "whats-a-service-mesh-and-why-do-i-need-one" >}}))
 
 One of Linkerd’s strengths is its ability to integrate with many different
 environments (and to allow you to bridge environments!). In previous posts,
 we’ve covered how to use Linkerd with
-[Kubernetes](https://buoyant.io/2016/10/04/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/)
+[Kubernetes][part-i]
 and
 [DC/OS](https://buoyant.io/2016/04/19/linkerd-dcos-microservices-in-production-made-easy/).
 In this post, we describe how to use Linkerd with Amazon ECS.
@@ -129,10 +129,9 @@ aws autoscaling create-launch-configuration \
   --key-name $KEY_PAIR
 ```
 
-Note
-[ecs-user-data.txt](https://github.com/linkerd/linkerd-examples/blob/master/ecs/ecs-user-data.txt)
-dynamically generates config files for each of _Linkerd_, _consul-agent_, and
-_consul-registrator_, using data specific to the ECS Instance it is running on.
+Note ecs-user-data.txt dynamically generates config files for each of _Linkerd_,
+_consul-agent_, and _consul-registrator_, using data specific to the ECS Instance
+it is running on.
 
 ### Create an Auto Scaling Group
 

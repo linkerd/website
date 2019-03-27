@@ -27,8 +27,7 @@ members in this release.
 
 - Christopher Taylor ([@ccmtaylor](https://github.com/ccmtaylor)): added DNS SRV
   record support
-- Andrew Wright ([@blacktoe](https://github.com/blacktoe)): improved Consul
-  health checks
+- Andrew Wright (@blacktoe): improved Consul health checks
 - Cyril Ponomaryov ([@cponomaryov](https://github.com/cponomaryov)): fixed an
   issue in the `config.json` admin endpoint, and made some performance
   improvements in logging
@@ -84,7 +83,7 @@ for more information.
 
 Another new feature added by an open-source contributor is support for filtering
 by Consul health states, added by Linkerd user Andrew Wright
-([@blacktoe](https://github.com/blacktoe)). Consul has a concept of `passing`,
+(@blacktoe). Consul has a concept of `passing`,
 `warning` and `critical` health statuses, but the Consul namer previously only
 supported filtering nodes by a binary health status. To use this feature, add
 the following to the Consul namer configuration:
@@ -108,10 +107,9 @@ been made more informative.
 Users running Linkerd on Kubernetes may be interested in the new
 `io.l5d.k8s.configMap` interpreter (marked experimental for now, until it sees
 more production use). This interpreter will interpret names using a dtab stored
-in a Kubernetes
-[ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/#understanding-configmaps),
-and update the dtab if the ConfigMap changes, allowing users on Kubernetes to
-implement dynamic routing rule changes without running Namerd.
+in a Kubernetes ConfigMap, and update the dtab if the ConfigMap changes,
+allowing users on Kubernetes to implement dynamic routing rule changes without
+running Namerd.
 
 An example configuration is as follows:
 

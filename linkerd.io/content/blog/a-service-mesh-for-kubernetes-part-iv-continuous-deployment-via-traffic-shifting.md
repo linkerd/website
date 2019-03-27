@@ -53,8 +53,8 @@ service meshes. Other installments in this series include:
 
 In previous installments of this series, we’ve shown you how you can use a
 service mesh like Linkerd to [capture top-line service
-metrics](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/) and [transparently
-add TLS](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/) to
+metrics][part-i] and [transparently
+add TLS][part-iii] to
 your application, without changing application code.
 
 In this article, we’ll show you an example of how to use Linkerd’s routing
@@ -82,7 +82,7 @@ recommend [namerd](https://linkerd.io/in-depth/namerd), a service with an API
 that serves routing rules backed by a consistent store. You can read more about
 how namerd integrates with production systems in our previous blog post
 covering [routing in
-linkerd](/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#routing-in-linkerd).
+linkerd](/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#routing-in-linkerd).
 
 We’ll demonstrate a blue-green deployment using an example app from
 the [linkerd-examples](https://github.com/linkerd/linkerd-examples/tree/master/docker/helloworld)
@@ -577,3 +577,15 @@ There are a myriad of ways to deploy Kubernetes and different
 environments support different features. Learn more about deployment differences
 [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
 {{< /note >}}
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

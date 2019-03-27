@@ -9,7 +9,7 @@ tags: [Linkerd, linkerd, News, tutorials]
 
 If you're running Kubernetes 1.6 or later, you can optionally make use of
 Kubernetes' new support for [RBAC (role-based access
-control)](http://blog.kubernetes.io/2017/04/rbac-support-in-kubernetes.html),
+control)](https://kubernetes.io/blog/2017/04/rbac-support-in-kubernetes/),
 which allows you to restrict who can [access the Kubernetes
 API](https://kubernetes.io/docs/admin/accessing-the-api/) on the cluster and
 what they can do with it. However, when upgrading to an RBAC-enabled cluster you
@@ -45,7 +45,7 @@ We'll be setting up the permission by creating a `ClusterRole` and a
 {{< fig
   alt="RBAC"
   title="Configuration"
-  src="/uploads/2018/05/blog_rbac_configuration-1024x517.png" >}}
+  src="/uploads/2018/05/blog_rbac_configuration.png" >}}
 
 ## Granting Linkerd access to an RBAC Kubernetes Cluster
 
@@ -95,7 +95,7 @@ roleRef:
 
 Linkerd now has the access it needs to function in a Kubernetes environment. In
 production, however, you might want to use a dedicated service account—[see
-below](#running-with-service-account).
+below](#running-linkerd-with-a-specified-service-account).
 
 ### Namerd
 
@@ -234,7 +234,7 @@ right permissions.
 ## Putting it all together
 
 For a complete Kubernetes config file that uses all of the above, just use this
-file: [linkerd-rbac-beta.yml](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-rbac-beta.yml).
+file: [linkerd-rbac.yml][linkerd-rbac].
 This config will allow Linkerd and Namerd to have all the access needed to the
 Kubernetes API with the default service account. If you'd like to set this up
 using a dedicated service account, you'll need to modify linkerd-rbac-beta.yml,
@@ -248,5 +248,5 @@ Kubernetes, see our [Service Mesh For Kubernetes]({{< ref
 series.
 
 [daemonset]: https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd.yml
-[linkerd-rbac]: https://github.com/linkerd/linkerd-examples/blob/master/k8s-daemonset/k8s/linkerd-rbac-beta.yml
+[linkerd-rbac]: https://github.com/linkerd/linkerd-examples/blob/master/k8s-daemonset/k8s/linkerd-rbac.yml
 [linkerd-example]: https://github.com/linkerd/linkerd-examples/tree/master/k8s-daemonset

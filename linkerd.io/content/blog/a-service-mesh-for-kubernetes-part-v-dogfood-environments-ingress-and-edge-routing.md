@@ -22,7 +22,7 @@ potentially simpler starting point for some of the use cases in this article.
 For information on how to use linkerd as a [Kubernetes ingress
 controller](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers),
 please see Sarah’s blog post, [Linkerd as an ingress
-controller](/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/).
+controller][part-viii].
 
 This is one article in a series of articles
 about [linkerd](https://linkerd.io/), [Kubernetes](http://kubernetes.io/), and
@@ -57,12 +57,8 @@ service meshes. Other installments in this series include:
 13. Autoscaling by top-line metrics
 
 In previous installments of this series, we’ve shown you how you can use linkerd
-to capture [top-line service
-metrics](/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/),
-transparently [add
-TLS](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things//) across
-service calls, and [perform blue-green
-deploys](/a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting/).
+to capture [top-line service metrics][part-i], transparently [add
+TLS][part-iii] across service calls, and [perform blue-green deploys][part-iv].
 These posts showed how using linkerd as a service mesh in environments like
 Kubernetes adds a layer of resilience and performance to internal,
 service-to-service calls. In this post, we’ll extend this model to ingress
@@ -72,7 +68,7 @@ Although the examples in this post are Kubernetes-specific, we won’t use the
 built-in [Ingress
 Resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) that
 Kubernetes provides (for this, see [Sarah’s
-post](/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/)).
+post][part-viii]).
 While Ingress Resources are a convenient way of doing basic path and host-based
 routing, at the time of writing, they are fairly limited. In the examples below,
 we’ll be reaching far beyond what they provide.
@@ -273,7 +269,8 @@ More](https://github.com/openresty/headers-more-nginx-module) module.
 nginx’s`proxy_set_header` directive to clear headers. We’d need separate entries
 for each `l5d-ctx-` header as well as the `l5d-dtab` and `l5d-sample` headers.)
 
-Note that as of [linkerd 0.9.0](/linkerd-0-9-0-released/), we can clear
+Note that as of [linkerd 0.9.0]({{< relref "linkerd-0-9-0-released" >}}), we can
+clear
 incoming `l5d-*` headers by setting `clearContext: true` on the ingress
 router [server](https://linkerd.io/config/1.0.0/linkerd/index.html#server-parameters).
 However, nginx has many features we can make use of (as you’ll see presently),
@@ -370,12 +367,26 @@ decouple the *traffic-serving* topology from the *deployment topology*, allow
 for the creation of dogfood environments without separate clusters or
 deploy-time complications.
 
-Note: there are a myriad of ways to deploy Kubernetes and different environments
+{{< note >}}
+There are a myriad of ways to deploy Kubernetes and different environments
 support different features. Learn more about deployment
 differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+{{< /note >}}
 
 For more about running linkerd in Kubernetes, or if you have any issues
 configuring ingress in your setup, feel free to stop by our [linkerd community
 Slack](http://slack.linkerd.io/), ask a question
 on [Discourse](https://discourse.linkerd.io), or [contact us
 directly](https://linkerd.io/overview/help/)!
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

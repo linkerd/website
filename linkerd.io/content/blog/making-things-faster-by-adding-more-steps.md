@@ -22,14 +22,16 @@ increase latency.
 In this light, we’re often asked about the latency impact of
 adding [Linkerd](https://linkerd.io/) to a system. The simple answer is “network
 time, plus about 1ms” (our goal is [<1ms p95 at
-1000qps](/beyond-round-robin-load-balancing-for-latency/)). The more complex
-answer is: in most situations, Linkerd actually *reduces* end-to-end latency of
-your system (and improves success rate).
+1000qps]({{< ref "beyond-round-robin-load-balancing-for-latency" >}})). The more
+complex answer is: in most situations, Linkerd actually *reduces* end-to-end
+latency of your system (and improves success rate).
 
 How is this magic possible? In short, Linkerd’s latency-aware load balancing can
 rapidly detect when instances are slow and shift request traffic away from them.
 By combining this behavior with [circuit
-breaking](/making-microservices-more-resilient-with-circuit-breaking/) and [retries](https://linkerd.io/config/0.8.6/linkerd/index.html#http-response-classifiers),
+breaking]({{< relref
+"making-microservices-more-resilient-with-circuit-breaking" >}})
+and [retries](https://linkerd.io/config/0.8.6/linkerd/index.html#http-response-classifiers),
 Linkerd can dramatically decrease end-to-end latency in a distributed
 system—despite being “yet another component”.
 
@@ -89,9 +91,9 @@ thanks to Linkerd’s automatic retry behavior.
 
 All of these metrics have improved despite adding an extra network hop via
 Linkerd. It’s clear that [round
-robin](/making-things-faster-by-adding-more-steps/#1-a-note-about-round-robin) does
-not handle degraded hosts well. Host degradation like this is extremely common
-in the real world for many reasons, including failing hardware, network
+robin](/2017/02/01/making-things-faster-by-adding-more-steps/#1-a-note-about-round-robin)
+does not handle degraded hosts well. Host degradation like this is extremely
+common in the real world for many reasons, including failing hardware, network
 congestion, and noisy neighbors. These issues get even more common as you scale
 up.
 
@@ -127,15 +129,17 @@ In the `loadBalancer` section, note the use
 of [EWMA](https://linkerd.io/config/0.8.6/linkerd/index.html#power-of-two-choices-peak-ewma).
 This algorithm computes an exponentially-weighted moving average over the
 latency of each instance, where recent latency performance is upweighted
-heavily. In our [testing](/beyond-round-robin-load-balancing-for-latency/), this
-load-balancing algorithm responds rapidly to changes in instance latency,
+heavily. In our [testing]({{< relref
+"beyond-round-robin-load-balancing-for-latency" >}})
+, thisload-balancing algorithm responds rapidly to changes in instance latency,
 allowing it to perform well when latency is inconsistent.
 
 In the `failureAccrual` section, note the use
 of [io.l5d.successRate](https://linkerd.io/config/0.8.6/linkerd/index.html#success-rate).
 This is also computes an exponentially-weighted moving average, this time based
 on the success rate of each instance. In
-our [testing](/making-microservices-more-resilient-with-circuit-breaking/), this
+our [testing]({{< relref
+"making-microservices-more-resilient-with-circuit-breaking" >}}), this
 failure accrual algorithm performs well when success rate is inconsistent.
 
 For more information on configuration options available in Linkerd, have a look
@@ -147,7 +151,7 @@ Reference](https://linkerd.io/config/latest/linkerd/index.html).
 In this example, we’ve seen how Linkerd can improve system throughput in the
 presence of failing and slow components, even though Linkerd itself adds a small
 amount of latency to each request. In our [experience operating large-scale
-systems](https://buoyant.io/linkerd-twitter-style-operability-for-microservices/),
+systems]({{< relref "linkerd-twitter-style-operability-for-microservices" >}}),
 this test environment demonstrates the types of performance issues and incidents
 that we have seen in production. A single request from the outside can hit 10s
 or even 100s of services, each having 10s or 100s of instances, any of which may

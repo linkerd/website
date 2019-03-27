@@ -45,7 +45,7 @@ service meshes. Other installments in this series include:
 13. Autoscaling by top-line metrics
 
 In a [previous
-installment](/a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing/)
+installment][part-v]
 of this series, we explored how to receive external requests by deploying
 Linkerd as a Kubernetes DaemonSet and routing traffic through the corresponding
 Service VIP. In this post, we’ll simplify this setup by using Linkerd as a
@@ -58,7 +58,7 @@ This approach has the benefits of simplicity and a tight integration with the
 Kubernetes API. However, for more complex requirements like on-demand TLS cert
 generation, SNI, or routing based on cookie values (e.g. the employee dogfooding
 approach discussed in [Part V of this
-series](/a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing/)),
+series][part-v]),
 combining Linkerd with a dedicated edge layer such as NGINX is still necessary.
 
 What is a Kubernetes ingress controller? An ingress controller is an edge router
@@ -74,7 +74,7 @@ config](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-da
 from the [linkerd-examples](https://github.com/linkerd/linkerd-examples) repo,
 we can launch Linkerd as a dedicated ingress controller. The config follows the
 same pattern as our [previous posts on k8s
-daemonsets](https://buoyant.io/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not/):
+daemonsets][part-ii]:
 it deploys an `l5d-config` ConfigMap, an `l5d` DaemonSet, and an `l5d` Service.
 
 {{< fig
@@ -238,9 +238,7 @@ The resource
   routed to the `world-v2` service.
 - Sets the `kubernetes.io/ingress.class` annotation to “linkerd”. Note, this
   annotation is only required if there are multiple ingress controllers running
-  in the cluster. GCE runs one by default; you may choose to disable it
-  by [following these
-  instructions](https://github.com/kubernetes/ingress/blob/master/docs/faq/gce.md#how-do-i-disable-the-gce-ingress-controller).
+  in the cluster.
 
 That’s it! You can exercise these rules by curling the IP assigned to the l5d
 service loadbalancer.
@@ -264,7 +262,7 @@ as an exercise for the reader. :)
 
 Linkerd already supports TLS for clients and servers within the cluster. Setting
 up TLS is described in much more detail in [Part III of this
-series](/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/). In
+series][part-iii]. In
 this ingress controller configuration, Linkerd expects certs to be defined in
 a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/)
 named `ingress-certs` and to follow [the format described as part of the ingress
@@ -338,10 +336,9 @@ $ earth (10.0.1.5)!
 Linkerd provides a ton of benefits as an edge router. In addition to the dynamic
 routing and TLS termination described in this post, it also [pools
 connections](https://en.wikipedia.org/wiki/Connection_pool), [load balances
-dynamically](/beyond-round-robin-load-balancing-for-latency/), [enables circuit
-breaking](https://buoyant.io/making-microservices-more-resilient-with-circuit-breaking/),
-and supports [distributed
-tracing](http://buoyant.io/a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy/).
+dynamically](/2016/03/16/beyond-round-robin-load-balancing-for-latency/)
+, [enables circuit breaking](/2017/01/14/making-microservices-more-resilient-with-circuit-breaking/)
+, and supports [distributed tracing][part-vii].
 Using the Linkerd ingress controller and the [Kubernetes
 configuration](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml)
 referenced in this post, you gain access to all these features in an easy to
@@ -363,3 +360,15 @@ discourse](https://discourse.linkerd.io/).
 
 Big thanks to [Alex Leong](https://twitter.com/adlleong) and [Andrew
 Seigner](https://twitter.com/siggy) for feedback on this post.
+
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
+[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
+[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
+[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
+[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
+[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
+[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}
