@@ -1,8 +1,9 @@
+{{ $alt := default (.Get "alt") (.Get "title") }}
 <figure class="figure w-100 text-center my-4">
   <a href="{{ .Get "src" }}" data-toggle="lightbox">
     <img src="{{ .Get "src" }}"
       class="figure-img img-fluid rounded"
-      alt="{{ .Get "alt" }}">
+      alt="{{ $alt }}">
   </a>
   {{ with .Get "title" }}
   <figcaption class="figure-caption">{{ . }}</figcaption>
