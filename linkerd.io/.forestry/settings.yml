@@ -1,0 +1,48 @@
+---
+new_page_extension: md
+auto_deploy: false
+admin_path: 
+webhook_url: 
+sections:
+- type: directory
+  path: linkerd.io/content
+  label: Pages
+  create: all
+  match: "*"
+- type: directory
+  path: linkerd.io/content/dashboard
+  label: Dashboard
+  create: all
+  match: "**/*"
+- type: directory
+  path: linkerd.io/content/blog
+  label: Blog
+  create: all
+  match: "**/*"
+- type: directory
+  path: linkerd.io/content/2
+  label: '2'
+  create: all
+  match: "**/*"
+- type: directory
+  path: linkerd.io/content/1
+  label: '1'
+  create: all
+  match: "**/*"
+upload_dir: linkerd.io/static/uploads
+public_path: "/uploads"
+front_matter_path: ''
+use_front_matter_path: false
+file_template: ":filename:"
+build:
+  preview_command: hugo -E -F -D -b $DEPLOY_URL -d public
+  publish_command: hugo -d public
+  preview_env:
+  - HUGO_ENV=staging
+  - HUGO_VERSION=0.54.0
+  publish_env:
+  - HUGO_ENV=production
+  - HUGO_VERSION=0.54.0
+  preview_output_directory: public
+  output_directory: public
+version: 0.54.0
