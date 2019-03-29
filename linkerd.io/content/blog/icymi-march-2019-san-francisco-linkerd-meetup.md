@@ -1,7 +1,7 @@
 ---
 title: 'ICYMI: March 2019 San Francisco Linkerd Meetup'
-author: 'william'
-draft: false
+author: 'kiersten'
+date: Fri, 29 Mar 2019 12:00:00 +0000
 ---
 
 Earlier this week we kicked off our very first [San Francisco Linkerd
@@ -9,11 +9,9 @@ Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup/). It was a fun
 night filled with education, great food, and lots of good conversation. If you
 missed it, never fear: all the talks were recorded!
 
-Talk 1: What is Linkerd?
+## Talk 1: What is Linkerd?
 
-Speaker: William Morgan
-
-{{< youtube “90jnPXk3iCs” >}}
+{{< youtube "90jnPXk3iCs" >}}
 
 In this talk, William Morgan, Linkerd maintainer, provides a short introduction
 into Linkerd, and  explains how you can use Linkerd for runtime debugging,
@@ -21,9 +19,9 @@ observability, reliability, and security—all without changes to your code. He
 shares the history of the project and the latest design principles around
 Linkerd 2.x.
 
-Talk 2: Multi-cluster observability with Kubernetes, Linkerd, and Thanos
+## Talk 2: Multi-cluster observability with Kubernetes, Linkerd, and Thanos
 
-{{< youtube “hKqZP6RGKP0” >}}
+{{< youtube "hKqZP6RGKP0" >}}
 
 In this talk, Andrew Seigner, software engineer at Buoyant and Linkerd
 maintainer, spoke about multi-cluster observability with Kubernetes, Linkerd,
@@ -39,9 +37,9 @@ cloud providers, and aggregating metrics into a single Thanos Querier.
 The Linkerd-Thanos demo can be found
 [here on GitHub](https://github.com/linkerd/linkerd-examples/tree/master/thanos-demo).
 
-Talk 3: Linkerd at Strava in production
+## Talk 3: Linkerd at Strava in production
 
-{{< youtube “f0q_Vw4dAuE”  >}}
+{{< youtube "f0q_Vw4dAuE"  >}}
 
 In this talk, J Evans, Infrastructure Engineer at Strava describe Strava’s
 real-world use case for Linkerd. Strava has been running Linkerd in production
