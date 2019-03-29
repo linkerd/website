@@ -42,7 +42,8 @@ metadata:
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
 spec:
   rules:
   - host: example.com
@@ -56,11 +57,14 @@ spec:
 The important annotation here is:
 
 ```yaml
-nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
 ```
 
-This will rewrite the `Host` header to be the fully qualified service name
-inside your Kubernetes cluster.
+Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
+the request is destined for. You'll want to include both the Kubernetes service
+FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
+`servicePort`.
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed nginx-ingress via helm, you can get that IP address by running:
@@ -98,7 +102,7 @@ metadata:
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "traefik"
-    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local
+    ingress.kubernetes.io/custom-request-headers: l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
 spec:
   rules:
   - host: example.com
@@ -112,11 +116,13 @@ spec:
 The important annotation here is:
 
 ```yaml
-ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local
+ingress.kubernetes.io/custom-request-headers: l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
 ```
 
 Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for.
+the request is destined for. You'll want to include both the Kubernetes service
+FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
+`servicePort`.
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed Traefik via helm, you can get that IP address by running:
@@ -163,11 +169,11 @@ metadata:
       apiVersion: ambassador/v1
       kind: Mapping
       name: web-ambassador-mapping
-      service: web-ambassador.emojivoto.svc.cluster.local
+      service: web-svc.emojivoto.svc.cluster.local
       host: example.com
       prefix: /
       add_request_headers:
-        l5d-dst-override: web-ambassador.emojivoto.svc.cluster.local
+        l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
 spec:
   selector:
     app: web-svc
@@ -181,11 +187,13 @@ The important annotation here is:
 
 ```yaml
       add_request_headers:
-        l5d-dst-override: web-other.emojivoto.svc.cluster.local
+        l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
 ```
 
 Ambassador will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for.
+the request is destined for. You'll want to include both the Kubernetes service
+FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
+`servicePort`.
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed Ambassador via helm, you can get that IP address by running:
