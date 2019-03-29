@@ -32,6 +32,8 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:8084;
       proxy_set_header Origin "";
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
     nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
@@ -71,6 +73,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:linkerd-web.linkerd.svc.cluster.local:8084
+    ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
     traefik.ingress.kubernetes.io/auth-type: "basic"
     traefik.ingress.kubernetes.io/auth-secret: "web-ingress-auth"
 spec:

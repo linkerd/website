@@ -44,6 +44,8 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
 spec:
   rules:
   - host: example.com
@@ -59,12 +61,21 @@ The important annotation here is:
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
 ```
 
 Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
+
+{{< note >}}
+When using Nginx to terminal HTTPS, Linkerd is unable to strip internal headers
+that are normally provided to applications to make decisions. The
+`proxy_hide_header` lines will strip these headers out so that any internal
+cluster details do not leak.
+{{< /note >}}
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed nginx-ingress via helm, you can get that IP address by running:
@@ -103,6 +114,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
+    ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
 spec:
   rules:
   - host: example.com
@@ -123,6 +135,13 @@ Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
+
+{{< note >}}
+When using Traefik to terminal HTTPS, Linkerd is unable to strip internal
+headers that are normally provided to applications to make decisions. The
+`ingress.kubernetes.io/custom-response-headers` line will strip these headers
+out so that any internal cluster details do not leak.
+{{< /note >}}
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed Traefik via helm, you can get that IP address by running:
