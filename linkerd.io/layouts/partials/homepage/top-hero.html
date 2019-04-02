@@ -1,0 +1,29 @@
+<div class="wrapper body-header has-background-white">
+  <div class="columns center-column is-marginless is-fullwidth rounded-block bottom-round">
+    <div class="column has-background-sky-blue">
+      <div class="container columns is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
+        <div class="column center">
+          <figure class="image">
+            <img
+              {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }}
+              alt="header illustration" />
+          </figure>
+        </div>
+        <div class="column center">
+          <div class="notification">
+            <h1 class="title is-size-1">{{.title}}</h1>
+            <h3 class="title is-size-3">{{.description | markdownify}}</h3>
+            {{ range.buttons }}
+            <a
+              href="{{.url}}"
+              class="button is-primary is-large">
+              {{.caption}}
+            </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column rounded-block-helper has-background-sky-blue"></div>
+  </div>
+</div>
