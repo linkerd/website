@@ -1,7 +1,7 @@
 +++
 title = "Experimental: Automatic TLS"
 description = "Linkerd can be configured to automatically negotiate Transport Layer Security (TLS) for application communication."
-weight = 11
+weight = 12
 +++
 
 Linkerd can be configured to automatically negotiate Transport Layer Security

@@ -19,3 +19,4 @@ Automatic injection works alongside Kubernetes package managers such as
 can set it up for yourself by following the guide:
 
 - [Automating Injection](/2/tasks/automating-injection/)
+- [Proxy Configuration](/1/features/proxy-configuration/)
