@@ -6,7 +6,7 @@ weight = 10
 
 Linkerd provides a set of annotations that can be used to override the data plane proxy's configuration. This is useful for overriding the default configurations of [auto-injected proxies](/2/features/proxy-injection).
 
-The following is the list of supported configuration override annotations:
+The following is the list of supported annotations:
 
 Annotation                                   | Description
 -------------------------------------------- | -----------
@@ -28,7 +28,7 @@ Annotation                                   | Description
 `config.linkerd.io/skip-inbound-ports`       | Ports that should skip the proxy and send directly to the application
 `config.linkerd.io/skip-outbound-ports`      | Outbound ports that should skip the proxy
 
-For example, to update an auto-injected proxy's CPU and memory resources, and skip inbound ports list, we insert the appropriate annotations to the `spec.template.metadata.annotations` of the owner's YAML spec, using `kubectl edit`.
+For example, to update an auto-injected proxy's CPU and memory resources, and skip inbound ports list, we insert the appropriate annotations to the `spec.template.metadata.annotations` of the owner's YAML spec, using `kubectl edit` like this:
 
 ```
 spec:
@@ -43,4 +43,4 @@ spec:
         config.linkerd.io/skip-inbound-ports: 4222,6222
 ```
 
-Note that configuration overrides on proxies injected using the `linkerd inject` command is planned for release 2.4. Follow this [GitHub issue](https://github.com/linkerd/linkerd2/issues/2590) for task progress.
+Note that configuration overrides on proxies injected using the `linkerd inject` command is planned for release 2.4. Follow this [GitHub issue](https://github.com/linkerd/linkerd2/issues/2590) for progress.
