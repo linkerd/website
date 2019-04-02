@@ -1,0 +1,21 @@
+{{ $related := .Site.RegularPages.Related . | first 4 }}
+{{ with $related }}
+<div class="wrapper blog-preview has-background-white">
+  <div class="columns center-column is-marginless is-fullwidth rounded-block bottom-round">
+    <div class="column has-background-grey-light">
+      <div class="container">
+        <h6 class="title is-6 has-text-weight-bold is-uppercase has-text-centered has-proxima-font">Similar Posts</h6>
+        <div class="columns is-multiline is-variable blog-list-container">
+          {{ range . }}
+          {{ partial "related-card.html" . }}
+          {{ end }}
+        </div>
+        <h4 class="is-uppercase has-text-centered is-size-4 blog-list-load-more">
+          See more <a href="/resources/">resources</a> and <a href="/blog/">blog posts</a>
+        </h4>
+      </div>
+      </div>
+    <div class="column rounded-block-helper has-background-grey-light"></div>
+  </div>
+</div>
+{{ end }}

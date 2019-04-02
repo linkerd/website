@@ -1,0 +1,8 @@
+{{- if eq (path.Ext .img) ".svg" -}}
+src="{{ .img }}" class="{{ .class }}"
+{{- else -}}
+  {{ $placeholder := partial "svg.html" .img | base64Encode }}
+  src="data:image/svg+xml;base64,{{ $placeholder }}"
+  data-src="{{ .img }}"
+  class="lazyload {{ .class }}"
+{{- end -}}

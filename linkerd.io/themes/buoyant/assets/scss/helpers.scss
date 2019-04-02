@@ -1,0 +1,40 @@
+.center,
+.center-column,
+.top,
+.right,
+.bottom,
+.left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-column {
+  flex-direction: column;
+}
+
+.center-column.is-fullwidth > .column {
+  width: 100%;
+  flex-basis: auto;
+}
+
+.row-reverse{
+  flex-direction: row-reverse;
+}
+
+.column-reverse{
+  flex-direction: column-reverse;
+}
+
+.top {
+  align-items: flex-start;
+}
+.right {
+  justify-content: flex-end;
+}
+.bottom {
+  align-items: flex-end;
+}
+.left {
+  justify-content: flex-start;
+}
