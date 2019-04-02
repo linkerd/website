@@ -1,6 +1,6 @@
 <div class="wrapper body-header has-background-white">
-  <div class="columns center-column is-marginless is-fullwidth rounded-block bottom-round">
-    <div class="column has-background-sky-blue">
+  <div class="columns center-column is-marginless is-fullwidth">
+    <div class="column has-background-light-green">
       <div class="container columns is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
         <div class="column center">
           <figure class="image">
@@ -20,10 +20,14 @@
               {{.caption}}
             </a>
             {{ end }}
+            <div class="github-stat-buttons">
+              <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
+              <a class="github-button" href="https://github.com/linkerd/linkerd2/subscription" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch linkerd/linkerd2 on GitHub">Watch</a>
+              <a class="github-button" href="https://github.com/linkerd/linkerd2/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork linkerd/linkerd2 on GitHub">Fork</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="column rounded-block-helper has-background-sky-blue"></div>
   </div>
 </div>

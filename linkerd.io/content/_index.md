@@ -2,14 +2,14 @@
 title: Homepage
 date: 2019-02-04 13:12:35 +0000
 top_hero:
-  title: Build the platform that powers the cloud ☁️
-  description: Buoyant helps you fearlessly build productive, safe, and reliable cloud
-    native platforms.
-  button_caption: asd
-  image: "/uploads/home.svg"
+  title: Ultralight service mesh for Kubernetes and beyond
+  description: Linkerd gives you observability, reliability, and security for your microservices — with no code change required.
+  image: "/uploads/image-15.png"
   buttons:
-  - caption: Learn More
-    url: "/commercial-support/"
+  - caption: Get Started
+    url: "https://github.com/linkerd/linkerd2"
+  - caption: Join the Community
+    url: "https://github.com/linkerd/linkerd2"
   image_on_the_right: false
 mentions:
 - image: "/uploads/GeekWire-logo-BW-transparent-2.png"
