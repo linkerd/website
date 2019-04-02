@@ -4,6 +4,7 @@ languageCode = "en-US"
 Paginate = 10
 sectionPagesMenu = "main"
 enableRobotsTXT = true
+theme = "buoyant"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [permalinks]
@@ -17,6 +18,9 @@ blog = "/:year/:month/:day/:slug/"
 
   l5d2_release_version = "L5D2_STABLE_VERSION"
   l5d2_edge_version = "L5D2_EDGE_VERSION"
+
+  logo = "/images/identity/svg/linkerd_primary_color_black.svg"
+  images = [""]
 
 [blackfriday]
   HrefTargetBlank = true
@@ -48,8 +52,46 @@ blog = "/:year/:month/:day/:slug/"
   name = "GitHub"
   identifier = "github"
   weight = 5
-  pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
+  pre = "<i class='fab fa-github fa-lg' aria-hidden='true'></i>"
   url = "https://github.com/linkerd/linkerd2"
+
+[[menu.top]]
+  name = "GET STARTED"
+  identifier = "start"
+  weight = 6
+  pre = "<span class='button-spacer'>"
+  post = "</span>"
+  url = "https://github.com/linkerd/linkerd2"
+
+[[menu.community]]
+  name = "Github"
+  url = "https://github.com/linkerd/linkerd2"
+  weight = 1
+
+[[menu.community]]
+  name = "Discourse"
+  url = "https://discourse.linkerd.io/"
+  weight = 2
+
+[[menu.community]]
+  name = "Slack"
+  url = "https://slack.linkerd.io/"
+  weight = 3
+
+[[menu.follow]]
+  name = "Twitter"
+  url = "https://twitter.com/linkerd"
+  weight = 1
+
+[[menu.follow]]
+  name = "LinkedIn"
+  url = "https://www.linkedin.com/company/buoyantio/"
+  weight = 1
+
+[[menu.follow]]
+  name = "YouTube"
+  url = "https://www.youtube.com/channel/UCJbuow7WWvREXfdpiROnn7w"
+  weight = 1
 
 # Auto-generate Netlify _redirects file
 [mediaTypes."text/netlify"]

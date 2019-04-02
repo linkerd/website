@@ -1,0 +1,26 @@
+@import 'bulma';
+@import 'styles-base';
+
+
+.homepage-notification{
+  a {
+    color: $light-green;
+  }
+}
+
+.navbar-item-helper {
+  svg {
+    margin-right: 5px;
+  }
+
+  .button-spacer {
+    padding: 19px 21px;
+    height: 56px;
+    border: 1px solid $deep-blue;
+    border-radius: 8px;
+
+    .navbar-item:hover & {
+      border: 1px solid $primary-bright-blue;
+    }
+  }
+}
