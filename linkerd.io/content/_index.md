@@ -41,6 +41,12 @@ tweets:
 event_pictures: []
 features_list:
   title: ''
-  items: []
+  items:
+  - title: Deep Runtime Diagnostics
+    description: Get a comprehensive suite of diagnostic tools, including automatic
+      service dependency maps and live traffic samples.
+  - title: Actionable service metrics
+    description: Best-in-class observability allows you to monitor _golden metrics_—success
+      rate, request volume, and latency—for every service.
 
 ---
