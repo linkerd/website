@@ -40,6 +40,9 @@ fields:
   name: event_pictures
   label: Event Pictures
   description: ''
+- type: text
+  label: Companies title
+  name: companies_title
 - type: field_group_list
   label: Companies
   name: mentions
