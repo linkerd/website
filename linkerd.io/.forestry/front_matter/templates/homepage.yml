@@ -98,15 +98,11 @@ fields:
   - type: text
     name: title
     label: Title
-    default: Engineers Love Linkerd
+    default: ''
   - type: list
     name: tweets
     label: Tweets
     description: IDs of tweets to be displayer on the homepage
-    default:
-    - '1100659697625923584'
-    - '938963170919579648'
-    - '856766379604692993'
-    - '1092445179397787650'
+    default: []
 pages:
 - linkerd.io/content/_index.md
