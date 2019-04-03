@@ -89,4 +89,4 @@ fields:
   name: keywords
   description: Used as meta description for the page
 pages:
-- content/_index.md
+- linkerd.io/content/_index.md

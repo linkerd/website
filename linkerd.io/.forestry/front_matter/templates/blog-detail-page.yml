@@ -29,6 +29,3 @@ fields:
 - type: file
   label: Featured Thumbnail
   name: feature
-pages:
-- content/blog/welcome-to-the-linkerd-party-google-ventures.md
-- content/blog/cool-buoyant-is-a-2018-gartner-cool-vendor.md
