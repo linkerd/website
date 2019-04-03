@@ -12,7 +12,11 @@ top_hero:
   - caption: Join the Community
     url: https://github.com/linkerd/linkerd2
   image_on_the_right: false
-mentions: []
+mentions:
+- image: "/uploads/logos/offerup.svg"
+  link: https://offerup.com/
+- image: "/uploads/logos/paypal.svg"
+  link: https://www.paypal.com/
 items:
 - blog/welcome-to-the-linkerd-party-google-ventures.md
 - blog/cool-buoyant-is-a-2018-gartner-cool-vendor.md
