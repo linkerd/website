@@ -58,5 +58,12 @@ keywords:
 - cloud native applications
 outputs:
 - html
+tweets:
+  title: Engineers Love Linkerd
+  tweets:
+  - '1092445179397787650'
+  - '856766379604692993'
+  - '938963170919579648'
+  - '1100659697625923584'
 
 ---
