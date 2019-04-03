@@ -36,6 +36,14 @@ fields:
     label: Tweets
     description: IDs of tweets to be displayer on the homepage
     default: []
+  - type: textarea
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Tweets
+    name: tweets_md
+    default: ''
 - type: field_group_list
   label: Mentions
   name: mentions
