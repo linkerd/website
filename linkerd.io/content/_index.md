@@ -45,20 +45,26 @@ features_list:
   - title: Thriving open source community
     description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
       active, and friendly community.  \n[Come join the fun](https://slack.linkerd.io/)!"
+    image: "/uploads/value-props/foss.svg"
   - title: Ultralight and ultra fast
     description: Built in Rust, Linkerd's data plane proxies are incredibly small
       (<10 mb) and blazing fast (p99 < 1ms).
+    image: "/uploads/value-props/quill-circle.svg"
   - title: Simple, minimalist design
     description: No complex APIs or configuration. For most applications, Linkerd
       will "just work" out of the box.
+    image: "/uploads/value-props/lego.svg"
   - title: Installs in seconds with zero config
     description: Linkerd's control plane installs into a single namespace, and services
       can be safely added to the mesh, one at a time.
+    image: "/uploads/value-props/stopwatch.svg"
   - title: Deep Runtime Diagnostics
     description: Get a comprehensive suite of diagnostic tools, including automatic
       service dependency maps and live traffic samples.
+    image: "/uploads/value-props/stethoscope.svg"
   - title: Actionable service metrics
     description: Best-in-class observability allows you to monitor _golden metrics_—success
       rate, request volume, and latency—for every service.
+    image: "/uploads/value-props/graph.svg"
 
 ---
