@@ -12,11 +12,6 @@ top_hero:
   - caption: Join the Community
     url: https://github.com/linkerd/linkerd2
   image_on_the_right: false
-companies:
-- image: "/uploads/logos/offerup.svg"
-  link: https://offerup.com/
-- image: "/uploads/logos/paypal.svg"
-  link: https://www.paypal.com/
 announcement_banner:
   description: 2.2.1 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
 description: Linkerd is a transparent proxy that adds service discovery, routing,
@@ -61,5 +56,14 @@ features_list:
       rate, request volume, and latency—for every service.
     image: "/uploads/value-props/graph.svg"
 companies_title: Companies that love Linkerd
+companies:
+- image: "/uploads/logos/salesforce.svg"
+  link: https://www.salesforce.com/
+- image: "/uploads/logos/nextvr.svg"
+  link: https://nextvr.com/
+- image: "/uploads/logos/offerup.svg"
+  link: https://offerup.com/
+- image: "/uploads/logos/paypal.svg"
+  link: https://www.paypal.com/
 
 ---
