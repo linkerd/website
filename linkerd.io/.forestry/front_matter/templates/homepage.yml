@@ -45,8 +45,9 @@ fields:
   name: mentions
   description: List of mentions (Images with links)
   config:
-    max: ''
+    max: '20'
     labelField: link
+    min: '0'
   fields:
   - type: file
     name: image
@@ -61,9 +62,6 @@ fields:
   description: The list of Linkerd features
   name: features_list
   fields:
-  - type: text
-    name: title
-    label: Title
   - type: field_group_list
     name: items
     label: Items
