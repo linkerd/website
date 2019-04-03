@@ -55,6 +55,31 @@ fields:
     label: Link
     config:
       required: true
+- type: field_group
+  label: Features List
+  description: The list of Linkerd features
+  name: features_list
+  fields:
+  - type: text
+    name: title
+    label: Title
+  - type: field_group_list
+    name: items
+    label: Items
+    fields:
+    - type: text
+      name: title
+      label: Title
+    - type: file
+      name: image
+      label: Image
+    - type: textarea
+      name: description
+      label: Description
+      config:
+        wysiwyg: true
+        schema:
+          format: markdown
 - type: text
   name: title
   label: Title
