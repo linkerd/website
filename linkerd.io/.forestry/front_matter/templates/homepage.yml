@@ -36,6 +36,18 @@ fields:
     label: Tweets
     description: IDs of tweets to be displayer on the homepage
     default: []
+  - type: textarea
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Tweets
+    name: tweets_md
+    default: |
+      {{< twitter 1092445179397787650 >}}
+      {{< twitter 856766379604692993 >}}
+      {{< twitter 938963170919579648 >}}
+      {{< twitter 1100659697625923584 >}}
 - type: field_group_list
   label: Mentions
   name: mentions
