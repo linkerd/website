@@ -12,16 +12,11 @@ top_hero:
   - caption: Join the Community
     url: https://github.com/linkerd/linkerd2
   image_on_the_right: false
-mentions:
+companies:
 - image: "/uploads/logos/offerup.svg"
   link: https://offerup.com/
 - image: "/uploads/logos/paypal.svg"
   link: https://www.paypal.com/
-items:
-- blog/welcome-to-the-linkerd-party-google-ventures.md
-- blog/cool-buoyant-is-a-2018-gartner-cool-vendor.md
-- blog/the-linkerd-enthusiasts-guide-to-kubecon-na-2018-2.md
-- resources/gv-leads-$10-million-round-to-further-linkerd-s-disruption.md
 announcement_banner:
   description: 2.2.1 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
 description: Linkerd is a transparent proxy that adds service discovery, routing,
@@ -40,7 +35,6 @@ tweets:
   tweets_md: ''
 event_pictures: []
 features_list:
-  title: ''
   items:
   - title: Thriving open source community
     description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
