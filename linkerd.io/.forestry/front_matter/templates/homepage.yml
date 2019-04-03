@@ -36,6 +36,10 @@ fields:
     label: Tweets
     description: IDs of tweets to be displayer on the homepage
     default: []
+- type: image_gallery
+  name: event_pictures
+  label: Event Pictures
+  description: ''
 - type: field_group_list
   label: Companies that love Linkerd
   name: mentions
@@ -51,10 +55,6 @@ fields:
     label: Link
     config:
       required: true
-- type: include
-  name: related_content
-  label: Related Content
-  template: ''
 - type: text
   name: title
   label: Title
