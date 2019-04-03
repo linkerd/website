@@ -70,5 +70,8 @@ companies:
   link: https://offerup.com/
 - image: "/uploads/logos/paypal.svg"
   link: https://www.paypal.com/
+foundation_member_banner:
+  title: Linkerd is a Cloud Native Computing Foundation member project
+  image: "/uploads/value-props/lego.svg"
 
 ---
