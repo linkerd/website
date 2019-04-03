@@ -45,8 +45,9 @@ fields:
   name: mentions
   description: List of mentions (Images with links)
   config:
-    max: ''
+    max: '20'
     labelField: link
+    min: '0'
   fields:
   - type: file
     name: image
