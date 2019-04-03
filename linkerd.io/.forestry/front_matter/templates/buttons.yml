@@ -1,0 +1,15 @@
+---
+label: Buttons
+hide_body: false
+fields:
+- type: field_group_list
+  name: buttons
+  label: Buttons
+  config:
+    min: '0'
+    max: '2'
+  fields:
+  - type: include
+    name: button
+    label: Button
+    template: button
