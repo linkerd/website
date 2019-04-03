@@ -1,0 +1,12 @@
+<div class="wrapper has-background-white tweets">
+  <div class="container">
+    <h1 class="title is-size-1 center has-text-color">{{.Tweets.title}}</h1>
+    <div class="columns is-mobile is-multiline is-centered">
+      {{ range .Tweets.tweets }}
+      <div class="column is-narrow">
+        {{ template "_internal/shortcodes/twitter.html" (dict "Params" (slice .) "Page" $.Page) }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>

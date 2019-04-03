@@ -4,6 +4,7 @@
 
 {{ define "main" }}
 {{ partial "homepage/top-hero.html" .Params.top_hero  }}
+{{ partial "homepage/tweets.html" ( dict "Tweets" .Params.tweets "Page" . ) }}
 {{/*  {{ partial "image-list.html"  (dict "mentions" .Params.mentions "backgroundColor" "has-background-white") }}
 {{ partial "homepage/middle-hero.html" .Params.middle_hero }}
 {{ partial "newsletter-form.html" .Params.newsletter_form }}

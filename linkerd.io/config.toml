@@ -93,6 +93,13 @@ blog = "/:year/:month/:day/:slug/"
   url = "https://www.youtube.com/channel/UCJbuow7WWvREXfdpiROnn7w"
   weight = 1
 
+
+[privacy]
+  [privacy.twitter]
+    disable = false
+    enableDNT = false
+    simple = false
+
 # Auto-generate Netlify _redirects file
 [mediaTypes."text/netlify"]
 delimiter = ""
