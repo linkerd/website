@@ -61,9 +61,6 @@ fields:
   description: The list of Linkerd features
   name: features_list
   fields:
-  - type: text
-    name: title
-    label: Title
   - type: field_group_list
     name: items
     label: Items
