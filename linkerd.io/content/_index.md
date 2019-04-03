@@ -57,6 +57,8 @@ features_list:
     image: "/uploads/value-props/graph.svg"
 companies_title: Companies that love Linkerd
 companies:
+- image: "/uploads/logos/expedia.svg"
+  link: https://www.expedia.com
 - image: "/uploads/logos/salesforce.svg"
   link: https://www.salesforce.com/
 - image: "/uploads/logos/nextvr.svg"
