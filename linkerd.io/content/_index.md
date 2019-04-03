@@ -42,6 +42,18 @@ event_pictures: []
 features_list:
   title: ''
   items:
+  - title: Thriving open source community
+    description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
+      active, and friendly community.  \n[Come join the fun](https://slack.linkerd.io/)!"
+  - title: Ultralight and ultra fast
+    description: Built in Rust, Linkerd's data plane proxies are incredibly small
+      (<10 mb) and blazing fast (p99 < 1ms).
+  - title: Simple, minimalist design
+    description: No complex APIs or configuration. For most applications, Linkerd
+      will "just work" out of the box.
+  - title: Installs in seconds with zero config
+    description: Linkerd's control plane installs into a single namespace, and services
+      can be safely added to the mesh, one at a time.
   - title: Deep Runtime Diagnostics
     description: Get a comprehensive suite of diagnostic tools, including automatic
       service dependency maps and live traffic samples.
