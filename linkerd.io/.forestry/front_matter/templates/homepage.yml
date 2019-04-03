@@ -22,6 +22,20 @@ fields:
     name: top_hero
     label: Top Hero
     template: hero
+- type: field_group
+  name: tweets
+  label: Tweets
+  description: Tweets Block
+  fields:
+  - type: text
+    name: title
+    label: Title
+    default: ''
+  - type: list
+    name: tweets
+    label: Tweets
+    description: IDs of tweets to be displayer on the homepage
+    default: []
 - type: field_group_list
   label: Mentions
   name: mentions
@@ -35,41 +49,6 @@ fields:
   - type: text
     name: link
     label: Link
-    config:
-      required: true
-- type: field_group
-  name: middle_hero
-  label: Middle Hero
-  fields:
-  - type: file
-    name: logo
-    label: Logo
-  - type: include
-    name: middle_hero
-    label: Middle Hero
-    template: hero
-- type: field_group
-  label: Newsletter Form
-  name: newsletter_form
-  fields:
-  - type: text
-    name: title
-    label: Title
-    config:
-      required: true
-  - type: text
-    name: description
-    label: Description
-    config:
-      required: true
-  - type: text
-    name: input_placeholder
-    label: Input Placeholder
-    config:
-      required: true
-  - type: text
-    name: button_caption
-    label: Button Caption
     config:
       required: true
 - type: include
@@ -88,21 +67,5 @@ fields:
   label: Keywords
   name: keywords
   description: Used as meta description for the page
-- type: field_group
-  name: ''
-- type: field_group
-  name: tweets
-  label: Tweets
-  description: Tweets Block
-  fields:
-  - type: text
-    name: title
-    label: Title
-    default: ''
-  - type: list
-    name: tweets
-    label: Tweets
-    description: IDs of tweets to be displayer on the homepage
-    default: []
 pages:
 - linkerd.io/content/_index.md
