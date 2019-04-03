@@ -1,0 +1,84 @@
+<footer class="hero-foot">
+  <div class="wrapper is-paddingless footer-links has-background-white">
+    <div class="container columns">
+      <div class="column is-one-third buoyant-info">
+        <figure class="image logo">
+          <img src="/images/buoyant_logo.svg" alt="buoyant logo" />
+        </figure>
+        <p class="buoyant-email is-size-5"><a class="has-text-color" href="mailto:hello@buoyant.io">hello@buoyant.io</a></p>
+        <div class="social-links-container left">
+          <a class="footer-social-link" href="https://twitter.com/buoyantio" target="_blank">
+            <figure class="image">
+              <img
+                {{ partial "src.html" (dict "img" "/images/twitter.png") | safeHTMLAttr }}
+                alt="Buoyant on Twitter" style="min-width: 28px;max-width: 28px;" />
+            </figure>
+          </a>
+          <a class="footer-social-link" href="https://www.linkedin.com/company/buoyantio/" target="_blank">
+            <figure class="image">
+              <img
+                {{ partial "src.html" (dict "img" "/images/linkedin.png") | safeHTMLAttr }}
+                alt="Buoyant on LinkedIn" style="min-width: 28px;max-width: 28px;" />
+            </figure>
+          </a>
+          <a class="footer-social-link" href="https://www.youtube.com/c/buoyantio" target="_blank">
+            <figure class="image">
+              <img
+                {{ partial "src.html" (dict "img" "/images/youtube.png") | safeHTMLAttr }}
+                alt="Buoyant on YouTube" style="min-width: 28px;max-width: 28px;" />
+            </figure>
+          </a>
+        </div>
+      </div>
+      <div class="column is-hidden-touch list-of-links-container">
+        <div class="columns">
+          <div class="column is-one-thirds is-uppercase list-of-links">
+            <p class="title is-6 has-text-color">LinkerD</p>
+            {{ $currentPage := . }}
+            {{ range.Site.Menus.linkerd }}
+            <p>
+              <a href="{{ .URL }}" target="_blank" class="has-text-color is-uppercase"
+                ><span class="navbar-item-helper">{{ .Name }}</span></a
+              >
+            </p>
+            {{ end }}
+          </div>
+          <div class="column is-one-thirds is-uppercase list-of-links">
+            <h6 class="title is-6 has-text-color">Information</h6>
+            {{ range.Site.Menus.information }}
+            <p>
+              <a href="{{ .URL }}" class="has-text-color is-uppercase">
+                <span class="navbar-item-helper">{{ .Name }}</span>
+              </a>
+            </p>
+            {{ end }}
+          </div>
+          <div class="column is-one-thirds is-uppercase list-of-links">
+            <h6 class="title is-6 has-text-color">Company</h6>
+            {{ range.Site.Menus.company }}
+            <p>
+              <a href="{{ .URL }}" class="has-text-color is-uppercase">
+                <span class="navbar-item-helper">{{ .Name }}</span>
+              </a>
+            </p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="is-paddingless has-background-sky-blue">
+    <div class="container columns footer has-background-sky-blue">
+      <p class="column">
+        {{ with .Site.GetPage "/privacy-policy" }}
+        <a
+          href="{{ .RelPermalink }}"
+          class="term-of-use has-text-color has-text-weight-semibold"
+          >Privacy & Terms</a
+        >
+        {{ end }}
+      </p>
+      <p class="column right">© {{ now.Year }} Buoyant, Inc. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
