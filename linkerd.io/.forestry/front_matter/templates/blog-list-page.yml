@@ -18,5 +18,3 @@ fields:
   label: Keywords
   name: keywords
   description: Used as meta description for the page
-pages:
-- content/blog/_index.md
