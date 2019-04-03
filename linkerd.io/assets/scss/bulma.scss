@@ -48,3 +48,33 @@ $table-striped-row-even-hover-background-color: transparent;
 .has-background-light-green {
   background: $light-green;
 }
+
+h1,
+h1.is-size-1 {
+  font: 900 35px/42px "Roboto" !important;
+}
+
+h2,
+h2.is-size-2 {
+  font: 700 25px/32px "Roboto" !important;
+  letter-spacing: 0.15px;
+}
+
+h3,
+h3.is-size-3 {
+  font: 600 20px/30px "Roboto" !important;
+  letter-spacing: 0.1px;
+}
+
+h4,
+h4.is-size-4 {
+  font: 16px/20px "Proxima Soft W01 Medium" !important;
+  letter-spacing: 2px;
+}
+
+a {
+  color: $primary-bright-blue;
+  &:hover {
+    color: $secondary-bright-blue;
+  }
+}

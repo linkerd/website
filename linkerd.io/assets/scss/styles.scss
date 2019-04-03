@@ -24,3 +24,15 @@
     }
   }
 }
+
+.button {
+  &.is-large {
+    min-height: 56px;
+    min-width: 200px;
+    font-size: 16px !important;
+  }
+}
+
+.github-stat-buttons {
+  margin: 25px 0;
+}
