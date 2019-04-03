@@ -75,7 +75,7 @@ fields:
 - type: include
   name: related_content
   label: Related Content
-  template: related-content
+  template: ''
 - type: text
   name: title
   label: Title
@@ -88,5 +88,25 @@ fields:
   label: Keywords
   name: keywords
   description: Used as meta description for the page
+- type: field_group
+  name: ''
+- type: field_group
+  name: tweets
+  label: Tweets
+  description: Tweets Block
+  fields:
+  - type: text
+    name: title
+    label: Title
+    default: Engineers Love Linkerd
+  - type: list
+    name: tweets
+    label: Tweets
+    description: IDs of tweets to be displayer on the homepage
+    default:
+    - '1100659697625923584'
+    - '938963170919579648'
+    - '856766379604692993'
+    - '1092445179397787650'
 pages:
 - linkerd.io/content/_index.md
