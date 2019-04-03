@@ -41,11 +41,12 @@ fields:
   label: Event Pictures
   description: ''
 - type: field_group_list
-  label: Companies that love Linkerd
+  label: Companies
   name: mentions
   description: List of mentions (Images with links)
   config:
     max: ''
+    labelField: link
   fields:
   - type: file
     name: image
