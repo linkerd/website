@@ -37,11 +37,11 @@ fields:
     description: IDs of tweets to be displayer on the homepage
     default: []
 - type: field_group_list
-  label: Mentions
+  label: Companies that love Linkerd
   name: mentions
   description: List of mentions (Images with links)
   config:
-    max: '10'
+    max: ''
   fields:
   - type: file
     name: image
