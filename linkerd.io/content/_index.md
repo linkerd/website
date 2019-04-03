@@ -55,6 +55,9 @@ features_list:
     description: Best-in-class observability allows you to monitor _golden metrics_—success
       rate, request volume, and latency—for every service.
     image: "/uploads/value-props/graph.svg"
+  buttons:
+  - caption: Get Started
+    url: https://linkerd.io/choose-your-platform/
 companies_title: Companies that love Linkerd
 companies:
 - image: "/uploads/logos/expedia.svg"
