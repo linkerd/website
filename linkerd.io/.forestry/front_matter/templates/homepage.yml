@@ -1,0 +1,92 @@
+---
+label: Homepage
+hide_body: true
+fields:
+- type: field_group
+  name: announcement_banner
+  label: Announcement Banner
+  fields:
+  - type: textarea
+    name: description
+    label: Description
+    config:
+      wysiwyg: true
+      schema:
+        format: markdown
+    default: ''
+- type: field_group
+  name: top_hero
+  label: Top Hero
+  fields:
+  - type: include
+    name: top_hero
+    label: Top Hero
+    template: hero
+- type: field_group_list
+  label: Mentions
+  name: mentions
+  description: List of mentions (Images with links)
+  config:
+    max: '10'
+  fields:
+  - type: file
+    name: image
+    label: Image
+  - type: text
+    name: link
+    label: Link
+    config:
+      required: true
+- type: field_group
+  name: middle_hero
+  label: Middle Hero
+  fields:
+  - type: file
+    name: logo
+    label: Logo
+  - type: include
+    name: middle_hero
+    label: Middle Hero
+    template: hero
+- type: field_group
+  label: Newsletter Form
+  name: newsletter_form
+  fields:
+  - type: text
+    name: title
+    label: Title
+    config:
+      required: true
+  - type: text
+    name: description
+    label: Description
+    config:
+      required: true
+  - type: text
+    name: input_placeholder
+    label: Input Placeholder
+    config:
+      required: true
+  - type: text
+    name: button_caption
+    label: Button Caption
+    config:
+      required: true
+- type: include
+  name: related_content
+  label: Related Content
+  template: related-content
+- type: text
+  name: title
+  label: Title
+  description: Used as meta title for the page
+- type: text
+  name: description
+  label: Description
+  description: Used as meta description for the page
+- type: tag_list
+  label: Keywords
+  name: keywords
+  description: Used as meta description for the page
+pages:
+- content/_index.md
