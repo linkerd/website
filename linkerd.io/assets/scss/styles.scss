@@ -36,3 +36,10 @@
 .github-stat-buttons {
   margin: 25px 0;
 }
+
+.wrapper {
+  &.tweets {
+    padding-top: 50px;
+    padding-bottom: 70px;
+  }
+}
