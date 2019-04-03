@@ -86,6 +86,16 @@ fields:
     template: buttons
     label: Buttons
     name: buttons
+- type: field_group
+  name: foundation_member_banner
+  label: Foundation Member Banner
+  fields:
+  - type: text
+    name: title
+    label: Title
+  - type: file
+    name: image
+    label: Image
 - type: text
   name: title
   label: Title
