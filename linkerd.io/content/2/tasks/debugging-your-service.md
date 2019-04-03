@@ -49,9 +49,13 @@ endpoint is what's causing the problem!
 
 Finally, to dig a little deeper, we can click on the `tap` icon in the far right
 column. This will take us to the live list of requests that match only this
-endpoint. We can confirm that the requests are failing (they all have a
-[gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code),
-indicating an error).
+endpoint. You'll see `Unknown` under the `GRPC status` column. This is because
+the requests are failing with a
+[gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code)
+which is a common error response as you can see from
+[the code](https://github.com/BuoyantIO/emojivoto/blob/master/emojivoto-voting-svc/api/api.go#L21)
+. Linkerd is aware of gRPC's response classification without any other
+configuration!
 
 {{< fig src="/images/debugging/web-tap.png" title="Tap" >}}
 
