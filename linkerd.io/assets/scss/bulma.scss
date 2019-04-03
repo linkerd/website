@@ -1,0 +1,80 @@
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto+Mono|Rubik:700,900");
+
+// brand colors
+$sky-blue: #c8f1ff;
+$primary-bright-blue: #0185fd;
+$secondary-bright-blue: #005efd;
+$deep-blue: #001e64;
+$light-grey: #f4f4f4;
+$medium-grey: #ececec;
+$dark-grey: #818181;
+$proxima-font: "Proxima Soft W01 Medium";
+$orange: #ff9b21;
+$light-green: #2BEDA7;
+
+// update Bulma's global vars
+$box-padding:0;
+$size-1: 2.8rem;
+$family-sans-serif: "Open Sans", sans-serif;
+$text: $deep-blue;
+$grey-light: $light-grey;
+$notification-radius: 0;
+$weight-semibold: 600;
+
+
+$navbar-height: 5.375rem;
+$navbar-padding-vertical: 0;
+$navbar-padding-horizontal: 2.625rem;
+$navbar-z: 300; // rounded block is 200
+$navbar-fixed-z: 300;
+
+$navbar-box-shadow-size: 0 4px 4px 0;
+$navbar-box-shadow-color: rgba(0,0,0,0.2);
+
+$table-head-background-color: $primary-bright-blue;
+
+
+$table-body-background-color: $light-grey;
+$table-striped-row-even-background-color: white;
+$table-striped-row-even-hover-background-color: transparent;
+
+@import 'bulma-base';
+
+.has-background-bright-blue {
+  background: $primary-bright-blue;
+}
+.has-background-light-green {
+  background: $light-green;
+}
+
+h1,
+h1.is-size-1 {
+  font: 900 35px/42px "Roboto" !important;
+}
+
+h2,
+h2.is-size-2 {
+  font: 700 25px/32px "Roboto" !important;
+  letter-spacing: 0.15px;
+}
+
+h3,
+h3.is-size-3 {
+  font: 600 20px/30px "Roboto" !important;
+  letter-spacing: 0.1px;
+}
+
+h4,
+h4.is-size-4 {
+  font: 16px/20px "Proxima Soft W01 Medium" !important;
+  letter-spacing: 2px;
+}
+
+a {
+  color: $primary-bright-blue;
+  &:hover {
+    color: $secondary-bright-blue;
+  }
+}

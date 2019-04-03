@@ -1,0 +1,17 @@
+<div class="embed video-player">
+  {{ if .IsNamedParams }}
+  <script
+    src="https://asciinema.org/a/{{ .Get "id" }}.js"
+    id="asciicast-{{ .Get "id" }}"
+    async
+    data-autoplay="{{ .Get "autoplay" }}"
+    loop="{{ .Get "loop" }}"
+  ></script>
+  {{ else }}
+  <script
+    src="https://asciinema.org/a/{{ index .Params 0 }}.js"
+    id="asciicast-{{ index .Params 0 }}"
+    async
+  ></script>
+  {{ end }}
+</div>

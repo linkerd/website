@@ -1,0 +1,10 @@
+<div id="mainMenu" class="navbar-menu">
+  <div class="navbar-end">
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.top }}
+    {{ $isCurrent := $currentPage.IsMenuCurrent "top" . }}
+    <a href="{{ .URL }}" class="navbar-item has-text-color is-uppercase {{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
+        class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
+    {{ end }}
+  </div>
+</div>
