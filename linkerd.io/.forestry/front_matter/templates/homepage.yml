@@ -36,20 +36,17 @@ fields:
     label: Tweets
     description: IDs of tweets to be displayer on the homepage
     default: []
-  - type: textarea
-    config:
-      wysiwyg: true
-      schema:
-        format: markdown
-    label: Tweets
-    name: tweets_md
-    default: ''
+- type: image_gallery
+  name: event_pictures
+  label: Event Pictures
+  description: ''
 - type: field_group_list
-  label: Mentions
+  label: Companies
   name: mentions
   description: List of mentions (Images with links)
   config:
-    max: '10'
+    max: ''
+    labelField: link
   fields:
   - type: file
     name: image
@@ -59,10 +56,31 @@ fields:
     label: Link
     config:
       required: true
-- type: include
-  name: related_content
-  label: Related Content
-  template: ''
+- type: field_group
+  label: Features List
+  description: The list of Linkerd features
+  name: features_list
+  fields:
+  - type: text
+    name: title
+    label: Title
+  - type: field_group_list
+    name: items
+    label: Items
+    fields:
+    - type: text
+      name: title
+      label: Title
+    - type: file
+      name: image
+      label: Image
+    - type: textarea
+      name: description
+      label: Description
+      config:
+        wysiwyg: true
+        schema:
+          format: markdown
 - type: text
   name: title
   label: Title
