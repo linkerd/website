@@ -23,28 +23,6 @@ mentions:
   image: "/uploads/the-new-stack.svg"
 - link: https://www.cncf.io/blog/2017/01/23/linkerd-project-joins-cloud-native-computing-foundation/
   image: "/uploads/cncf.png"
-middle_hero:
-  logo: "/uploads/linkerd.svg"
-  title: Ultralight, ultrafast, no-hype service mesh
-  description: Linkerd gives you observability, reliability, and security for your
-    microservices — with no code change required. Fully open source and [CNCF](https://cncf.io)-hosted.
-  left_button_caption: Get Started with LinkerD
-  right_button_caption: Commercial Support
-  image: "/uploads/kubernetes.svg"
-  buttons:
-  - url: https://linkerd.io/choose-your-platform/
-    caption: Get Started
-  - url: "/commercial-support/"
-    caption: Get Support
-  image_on_the_right: true
-video_embed_code: <iframe width="560" height="315" src="https://www.youtube.com/embed/X8CBGsTLuHU"
-  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen></iframe>
-newsletter_form:
-  title: Stay up to date with Buoyant
-  description: " "
-  button_caption: Get Updates
-  input_placeholder: Email Address
 items:
 - blog/welcome-to-the-linkerd-party-google-ventures.md
 - blog/cool-buoyant-is-a-2018-gartner-cool-vendor.md
