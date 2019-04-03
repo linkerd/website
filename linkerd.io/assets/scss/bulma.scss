@@ -12,7 +12,9 @@ $medium-grey: #ececec;
 $dark-grey: #818181;
 $proxima-font: "Proxima Soft W01 Medium";
 $orange: #ff9b21;
+$dark-green: #4BAF50;
 $light-green: #2BEDA7;
+$aqua-green: #e9fdf5;
 
 // update Bulma's global vars
 $box-padding:0;
@@ -49,6 +51,17 @@ $table-striped-row-even-hover-background-color: transparent;
   background: $light-green;
 }
 
+.has-background-aqua-green {
+  background: $aqua-green;
+
+  &.image-list {
+    .title {
+      color: $dark-green;
+    }
+  }
+}
+
+
 h1,
 h1.is-size-1 {
   font: 900 35px/42px "Roboto" !important;
@@ -68,7 +81,7 @@ h3.is-size-3 {
 
 h4,
 h4.is-size-4 {
-  font: 16px/20px "Proxima Soft W01 Medium" !important;
+  font: 16px/20px "Roboto" !important;
   letter-spacing: 2px;
 }
 

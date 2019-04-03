@@ -38,8 +38,35 @@
 }
 
 .wrapper {
-  &.tweets {
+  &.tweets, &.features {
     padding-top: 50px;
     padding-bottom: 70px;
   }
+}
+
+.hero-body {
+  .image-list {
+    &.has-background-aqua-green {
+       .title {
+         color: $dark-green;
+         padding-top: 30px;
+         margin-bottom: 0;
+         position: relative;
+         left: auto;
+         transform: none;
+         top: auto;
+         opacity: 1;
+       }
+     }
+   }
+}
+
+.features {
+  .buttons {
+    padding-top: 30px;
+  }
+}
+
+.foundation-member {
+  padding: 40px 0 40px;
 }
