@@ -82,6 +82,10 @@ fields:
         wysiwyg: true
         schema:
           format: markdown
+  - type: include
+    template: buttons
+    label: Buttons
+    name: buttons
 - type: text
   name: title
   label: Title
