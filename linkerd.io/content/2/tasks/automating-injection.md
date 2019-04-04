@@ -8,10 +8,10 @@ description = "Automate injection of the Linkerd containers for your service."
 There are a couple things to note about this feature:
 
 - Adding the annotation on a namespace will not automatically update all the
-  deployments. You will need to re-create the deployments in this namespace for
-  them to be updated or use `linkerd inject` in place. This is because injection
-  happens at admission and on each specific resource. Kubernetes will not call
-  the mutating webhook until it sees and update on each individual deployment.
+  resources. You will need to update the resources in this namespace for
+  them to be injected. This is because injection happens at admission and on
+  each specific resource. Kubernetes will not call the mutating webhook until it
+  sees an update on each individual resource.
 
 - The experimental version of this feature, prior to the stable-2.2 and
   edge-19.2.1 releases, injected all pods in all namespaces, but the current
@@ -32,12 +32,15 @@ Automatic proxy injection is disabled by default when installing the Linkerd
 control plane. To enable it, set the `--proxy-auto-inject` flag, as follows:
 
 ```bash
+# during installation
 linkerd install --proxy-auto-inject | kubectl apply -f -
+
+# or during an upgrade
+linkerd upgrade --proxy-auto-inject | kubectl apply -f -
 ```
 
-It is safe to run this command when you've already installed Linkerd. `kubectl`
-will simply add the new `linkerd-proxy-injector` and configure the webhook. Take
-a look at what has started to verify everything is working correctly:
+Take a look at the new `linkerd-proxy-injector` to verify everything is working
+correctly:
 
 ```bash
 kubectl -n linkerd get deploy/linkerd-proxy-injector svc/linkerd-proxy-injector
