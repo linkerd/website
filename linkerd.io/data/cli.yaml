@@ -191,22 +191,30 @@
   Name: inject
   Options:
   - DefaultValue: ""
-    Name: api-port
+    Name: admin-port
     Shorthand: ""
-    Usage: |
-      Port where the Linkerd controller's destination API is running
+    Usage: Proxy port to serve metrics on
   - DefaultValue: ""
     Name: control-port
     Shorthand: ""
     Usage: Proxy port to use for control
   - DefaultValue: ""
-    Name: disable-external-profiles
+    Name: disable-identity
     Shorthand: ""
-    Usage: Disables service profiles for non-Kubernetes services
+    Usage: Disables resources from participating in TLS identity
+  - DefaultValue: ""
+    Name: enable-external-profiles
+    Shorthand: ""
+    Usage: Enable service profiles for non-Kubernetes services
   - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for inject
+  - DefaultValue: ""
+    Name: ignore-cluster
+    Shorthand: ""
+    Usage: |
+      Ignore the current Kubernetes cluster when checking for existing cluster configuration (default false)
   - DefaultValue: ""
     Name: image-pull-policy
     Shorthand: ""
@@ -229,15 +237,19 @@
     Shorthand: v
     Usage: Tag to be used for Linkerd images
   - DefaultValue: ""
-    Name: metrics-port
-    Shorthand: ""
-    Usage: Proxy port to serve metrics on
-  - DefaultValue: ""
     Name: outbound-port
     Shorthand: ""
     Usage: Proxy port to use for outbound traffic
   - DefaultValue: ""
     Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-cpu-limit
+    Shorthand: ""
+    Usage: Maximum amount of CPU units that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-cpu-request
     Shorthand: ""
     Usage: Amount of CPU units that the proxy sidecar requests
   - DefaultValue: ""
@@ -250,6 +262,14 @@
     Usage: Log level for the proxy
   - DefaultValue: ""
     Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-memory-limit
+    Shorthand: ""
+    Usage: Maximum amount of Memory that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-memory-request
     Shorthand: ""
     Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
@@ -269,10 +289,6 @@
     Name: skip-outbound-ports
     Shorthand: ""
     Usage: Outbound ports that should skip the proxy
-  - DefaultValue: ""
-    Name: tls
-    Shorthand: ""
-    Usage: 'Enable TLS; valid settings: "optional"'
   SeeAlso: null
   Synopsis: Add the Linkerd proxy to a Kubernetes config
 - Description: Output Kubernetes configs to install Linkerd.

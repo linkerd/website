@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Annotation
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    {{ if or (eq .Name "admin-port") (eq .Name "control-port") (eq .Name "enable-external-profiles") (eq .Name "image-pull-policy") (eq .Name "inbound-port") (eq .Name "init-image") (eq .Name "outbound-port") (eq .Name "proxy-cpu-limit") (eq .Name "proxy-cpu-request") (eq .Name "proxy-image") (eq .Name "proxy-log-level") (eq .Name "proxy-memory-limit") (eq .Name "proxy-memory-request") (eq .Name "proxy-uid") (eq .Name "proxy-version") (eq .Name "skip-inbound-ports") (eq .Name "skip-outbound-ports") }}
+    <tr>
+      <td>
+        <code class="text-nowrap">config.linkerd.io/{{ .Name }}</code>
+      </td>
+      <td>
+        {{ .Usage | markdownify }}
+      </td>
+    </tr>
+    {{ end }}
+    {{ end }}
+  </tbody>
+</table>
