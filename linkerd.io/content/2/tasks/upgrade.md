@@ -16,6 +16,16 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
+## Upgrade notice: stable-2.3.0
+
+`stable-2.3.0` introduces a new config map named `linkerd-config` to the
+`linkerd` namespace. During the first upgrade to `stable-2.3.0`, any
+flags previously provided to the `linkerd install` command must be added to the
+`linkerd upgrade` command. This ensures that all the cluster configurations are
+persisted in the new config map. For example, if your current cluster was
+installed with `linkerd install --proxy-auto-inject`, then the upgrade must be
+run as `linkerd upgrade --proxy-auto-inject`.
+
 ## Upgrade notice: stable-2.2.0
 
 There are two breaking changes in `stable-2.2.0`. One relates to
