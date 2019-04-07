@@ -14,11 +14,15 @@ Since Linkerd is built for operators, this also means that Linkerd has do all
 that while also imposing the absolute minimum operational complexity. To do
 this, we've designed Linkerd with three core principles in mind:
 
-1. **Keep it simple**. Linkerd should be operationally simple with low cognitive overhead. Operators should find its components clear and its behavior understandable and predictable, with a minimum of magic.
+1. **Keep it simple**. Linkerd should be operationally simple with low
+cognitive overhead. Operators should find its components clear and its behavior
+understandable and predictable, with a minimum of magic.
 
-2. **Minimize resource requirements**. Linkerd should impose as minimal a performance and resource cost as possible--especially at the data plane layer.
+2. **Minimize resource requirements**. Linkerd should impose as minimal a
+performance and resource cost as possible--especially at the data plane layer.
 
-3. **Just work**. Linkerd should not break existing applications, nor should it require complex configuration to get started or to do something simple.
+3. **Just work**. Linkerd should not break existing applications, nor should it
+require complex configuration to get started or to do something simple.
 
 The first principle is the most important: _keep it simple_. Simplicity doesn't
 mean that Linkerd can't have powerful features, or that it has to have
@@ -46,8 +50,9 @@ Finally, _just work_ means that adding Linkerd to a functioning Kubernetes
 application shouldn't break anything, and shouldn't even require configuration.
 (Of course, configuration will be necessary to customize Linkerd's
 behavior--but it shouldn't be necessary simply to get things working.) To do
-this, we've invested heavily in things like [automatic L7 protocol detection](/2/features/protocol-detection/),
-and [automatic re-routing of TCP traffic within a pod](/2/features/proxy-injection/).
+this, we've invested heavily in things like [automatic L7 protocol
+detection](/2/features/protocol-detection/), and [automatic re-routing of TCP
+traffic within a pod](/2/features/proxy-injection/).
 
 Together, these three principles give us a framework for weighing product and
 engineering tradeoffs in Linkerd. We hope they're also useful for understanding
