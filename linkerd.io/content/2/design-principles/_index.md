@@ -57,4 +57,3 @@ traffic within a pod](/2/features/proxy-injection/).
 Together, these three principles give us a framework for weighing product and
 engineering tradeoffs in Linkerd. We hope they're also useful for understanding
 why Linkerd works the way it does.
-
