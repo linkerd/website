@@ -21,17 +21,15 @@ just a few minutes](https://linkerd.io/2/getting-started/)!)
 
 {{< fig
   alt="Screenshot of Linkerd dashboard"
-  src="/uploads/2019/04/dashboard-screenshot-edge-19-3-2-ccde4234-8942-458c-a6dc-d54edbd72508.png" >}}
-
-The default view of the Linkerd Dashboard, as of edge release 19.3.2.
+  src="/uploads/2019/04/linkerd-dashboard-screenshot.png" >}}
+*The default view of the Linkerd Dashboard, as of edge release 19.3.2.*
 
 And when I say excited, I mean unsolicited-praise excited: we constantly get
 messages from users like this:
 
 {{< fig
   alt="Screenshot of Linkerd dashboard"
-  src="/uploads/2019/04/happytweet-4b64db4c-35fa-4a4c-ac6f-27ec4a8bca8b.png" >}}
-
+  src="/uploads/2019/04/happy-tweet.png" >}}
 *Tweet from a happy user: "Very pleased with #Linkerd2 - deployed my app (with
 auto-proxy-injection) and #itjustworked - Had all the info I needed on the
 dashboard - Thanks very much (great docs too)*
@@ -40,12 +38,14 @@ We want to keep our users happy with a clean, consistent dashboard as we
 constantly roll out new features and improvements, so recently we built a suite
 of integration tests simulating a user's traversal through the application.
 
+## Why Front-End Integration Tests?
+
 If you're reading this, you're probably already sold on the idea of testing, but
 as an [open source project](https://www.cncf.io/project-faq/linkerd/), there are
 a few additional advantages of front-end integration tests you may not have
 considered:
 
-### Integration tests are a great way to onboard open source contributors...
+### Integration tests are a great way to onboard open source contributors
 
 We are lucky to have a ton of contributors to Linkerd, both power users and open
 source enthusiasts. Forking our repo and running the tests are a great way for a
@@ -67,8 +67,7 @@ change! But, I mean, we're not *robots*. That's where WebdriverIO comes in:
 
 {{< fig
   alt="WebdriverIO logo of a robot"
-  src="/uploads/2019/04/webdriverio-ea03d135-8ac6-4b76-9dd2-637ea9832a8e.png" >}}
-
+  src="/uploads/2019/04/webdriverio-logo.png" >}}
 *The WebdriverIO logo. It's a robot. Get it?*
 
 WebdriverIO is a test automation framework for Node.js that allows you to get a
@@ -208,8 +207,7 @@ terminal!
 
 {{< fig
   alt="WebdriverIO screen output of a successful test"
-  src="/uploads/2019/04/Screen_Shot_2019-04-07_at_5-da0fc1ca-6859-4996-8608-c68e98c25b3f.39.16_PM.png" >}}
-
+  src="/uploads/2019/04/terminal-message.png" >}}
 *Success. This is a screenshot of the WebdriverIO output: "1 passed, 1 total*
 *(100% completed)"*
 
@@ -235,8 +233,7 @@ host of browser types, versions and sizes.
 
 {{< fig
   alt="SauceLabs logo"
-  src="/uploads/2019/04/logo2x-6ea0e146-8771-49ff-85a3-3fcc8dcf411c.png" >}}
-
+  src="/uploads/2019/04/saucelabs-logo.png" >}}
 *SauceLabs logo*
 
 If you have an open source project and want to use SauceLabs, you first need to
@@ -296,7 +293,7 @@ As you can see, we've removed the `port` , `path` and `services` variables and
 added our Sauce `user` and `key`. We've switched on something called
 `sauceConnect` and added two specific browsers to try, Firefox and Chrome.
 
-# Tunneling to Localhost in 3, 2, 1...
+# Tunneling to Localhost in 3, 2, 1
 
 [SauceConnect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy) is a
 proxy server that will open a tunnel between a SauceLabs Virtual Machine (VM)
@@ -330,8 +327,7 @@ want to manually control where the test goes).
 
 {{< fig
   alt="SauceLabs dashboard screenshot"
-  src="/uploads/2019/04/Screen_Shot_2019-04-07_at_6-58a8b597-36be-4ff2-9a60-02fbdaa36dcc.17.30_PM.png" >}}
-
+  src="/uploads/2019/04/saucelabs-dashboard-screenshot.png" >}}
 *Screenshot of the SauceLabs dashboard. It's a browser... in a browser... in*
 *YOUR browser...*
 
