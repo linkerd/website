@@ -2,7 +2,7 @@
 title: 'Browser Testing from Scratch: Building Quick and Easy Integration Tests
 with WebdriverIO and SauceLabs'
 author: 'carol'
-thumbnail: testing-dashboard.png
+thumbnail: linkerd-dashboard.png
 date: 2019-04-10T10:12:45-07:00
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]
@@ -20,17 +20,18 @@ with [React](https://reactjs.org/) and [Material-UI](https://material-ui.com/).
 just a few minutes](https://linkerd.io/2/getting-started/)!)
 
 {{< fig
-  alt="Screenshot of Linkerd dashboard"
+  alt="Linkerd dashboard screenshot from edge release 19.3.2"
+  title="Linkerd dashboard screenshot from edge release 19.3.2."
   src="/uploads/2019/04/linkerd-dashboard-screenshot.png" >}}
-*The default view of the Linkerd Dashboard, as of edge release 19.3.2.*
 
 And when I say excited, I mean unsolicited-praise excited: we constantly get
 messages from users like this:
 
 {{< fig
-  alt="Screenshot of Linkerd dashboard"
+  alt="Text of Linkerd user's happy tweet"
+  title="Tweet by a happy Linkerd user!"
   src="/uploads/2019/04/happy-tweet.png" >}}
-*Tweet from a happy user: "Very pleased with #Linkerd2 - deployed my app (with
+*From Twitter: Very pleased with #Linkerd2 - deployed my app (with
 auto-proxy-injection) and #itjustworked - Had all the info I needed on the
 dashboard - Thanks very much (great docs too)*
 
@@ -66,9 +67,9 @@ Yes, clicking through yourself is always the first step when making a front-end
 change! But, I mean, we're not *robots*. That's where WebdriverIO comes in:
 
 {{< fig
-  alt="WebdriverIO logo of a robot"
+  alt="WebdriverIO logo"
+  title="WebdriverIO logo."
   src="/uploads/2019/04/webdriverio-logo.png" >}}
-*The WebdriverIO logo. It's a robot. Get it?*
 
 WebdriverIO is a test automation framework for Node.js that allows you to get a
 test suite up and running in minutes. You don't need any Selenium knowledge to
@@ -93,11 +94,15 @@ manager](https://brew.sh/) it will download Node.js as well.
 First, navigate to the directory in your project that holds your web
 application. Ours is named `app`:
 
-    cd app
+```bash
+cd app
+```
 
 Now it's time to add some packages! First, we'll add WebdriverIO:
 
-    yarn add webdriverio --dev
+```bash
+yarn add webdriverio --dev
+```
 
 We added the `--dev` flag because we want this package to be part of the
 `devDependencies` portion of our `package.json`, since we'll be running our
@@ -107,19 +112,25 @@ file, this command will create one for you.
 Now, we'll add WebdriverIO's testrunner command line interface, which is what
 will allow you to run the tests from your terminal:
 
-    yarn add @wdio/cli --dev
+```bash
+yarn add @wdio/cli --dev
+```
 
-**Note:** When WebdriverIO 5 was released, the project switched to a `@wdio`
+{{< note >}}
+When WebdriverIO 5 was released, the project switched to a `@wdio`
 naming structure. In general, if a library is prefixed with `@wdio` it is
 officially part of the WebdriverIO project, and if it is prefixed with `wdio` it
 is a community project.
+{{< /note >}}
 
 The `@wdio/cli` testrunner comes with a config file generator, which we won't
 use for this project. If you want to learn more about it, visit WebdriverIO's
 [Getting Started](https://webdriver.io/docs/gettingstarted.html) page. Instead,
 we'll download the packages we need directly:
 
-    yarn add chromedriver @wdio/local-runner @wdio/mocha-framework @wdio/sync wdio-chromedriver-service --dev
+```bash
+yarn add chromedriver @wdio/local-runner @wdio/mocha-framework @wdio/sync wdio-chromedriver-service --dev
+```
 
 These packages are, respectively:
 
@@ -132,36 +143,40 @@ These packages are, respectively:
 
 Now, from `app`, let's create a subdirectory for our tests:
 
-    mkdir integration && cd integration
-    touch wdio.conf.js
+```bash
+mkdir integration && cd integration
+touch wdio.conf.js
+```
 
 In the `integration` directory, we'll create a config file to tell WebdriverIO
 what to do. In your text editor, open `wdio.conf.js` and paste:
 
-    exports.config = {
-      port: 9515, // default for ChromeDriver
-      path: '/',
-      services: ['chromedriver'],
-      runner: 'local',
-      specs: [
-          './integration/specs/*.js'
-      ],
-      exclude: [
-          // 'path/to/excluded/files'
-      ],
-      maxInstances: 10,
-      capabilities: [{browserName: 'chrome', platform: 'OS X 10.13', version: '69.0'}],
-      bail: 0,
-      baseUrl: 'http://localhost',
-      waitforTimeout: 10000,
-      connectionRetryTimeout: 90000,
-      connectionRetryCount: 3,
-      framework: 'mocha',
-      mochaOpts: {
-          ui: 'bdd',
-          timeout: 60000
-      }
-    }
+```javascript
+exports.config = {
+  port: 9515, // default for ChromeDriver
+  path: '/',
+  services: ['chromedriver'],
+  runner: 'local',
+  specs: [
+      './integration/specs/*.js'
+  ],
+  exclude: [
+      // 'path/to/excluded/files'
+  ],
+  maxInstances: 10,
+  capabilities: [{browserName: 'chrome', platform: 'OS X 10.13', version: '69.0'}],
+  bail: 0,
+  baseUrl: 'http://localhost',
+  waitforTimeout: 10000,
+  connectionRetryTimeout: 90000,
+  connectionRetryCount: 3,
+  framework: 'mocha',
+  mochaOpts: {
+      ui: 'bdd',
+      timeout: 60000
+  }
+}
+```
 
 As you can see, we're specifying that our tests will live in
 `/integration/specs/`, that we are using Chromedriver and specifying a specific
@@ -169,36 +184,44 @@ platform and version to run the tests.
 
 Create a `specs/` directory with a sample test file:
 
-    mkdir specs && cd specs && touch first-test.js
+```bash
+mkdir specs && cd specs && touch first-test.js
+```
 
 At this point your directory structure should look like this:
 
-    app/
-      node_modules/
-      package.json
-      integration/
-        wdio.conf.js
-        specs/
-          first-test.js
+```bash
+app/
+  node_modules/
+  package.json
+  integration/
+    wdio.conf.js
+    specs/
+      first-test.js
+```
 
 Let's run a simple test where we go over to [Linkerd.io](http://linkerd.io) and
 check that the title of the page is what we expect. Open `first-test.js` and
 paste the following:
 
-    const assert = require('assert');
-    describe('logo link test', function() {
-      it('should redirect to the home view if logo is clicked', () => {
-        browser.url('http://www.linkerd.io');
-        const title = browser.getTitle();
-        assert.equal(title, 'Linkerd - Linkerd');
-      });
-    });
+```javascript
+const assert = require('assert');
+describe('logo link test', function() {
+  it('should redirect to the home view if logo is clicked', () => {
+    browser.url('http://www.linkerd.io');
+    const title = browser.getTitle();
+    assert.equal(title, 'Linkerd - Linkerd');
+  });
+});
+```
 
 Right now, you're still in your `specs` directory. Go back up to your `app`
 directory to run the tests:
 
-    cd ../..
-    ./node_modules/.bin/wdio ./integration/wdio.conf.js
+```bash
+cd ../..
+./node_modules/.bin/wdio ./integration/wdio.conf.js
+```
 
 You should see a message in your terminal saying "Starting ChromeDriver on port
 9515". An instance of Chrome window should then open up, go to
@@ -206,10 +229,9 @@ You should see a message in your terminal saying "Starting ChromeDriver on port
 terminal!
 
 {{< fig
-  alt="WebdriverIO screen output of a successful test"
+  alt="WebdriverIO success message in terminal: 1 passed, 1 total (100% completed)"
+  title="WebdriverIO terminal output."
   src="/uploads/2019/04/terminal-message.png" >}}
-*Success. This is a screenshot of the WebdriverIO output: "1 passed, 1 total*
-*(100% completed)"*
 
 Awesome, you just successfully ran an integration test with WebdriverIO!  🥳 You
 can start building these tests out to test your application. I've found the
@@ -233,8 +255,8 @@ host of browser types, versions and sizes.
 
 {{< fig
   alt="SauceLabs logo"
+  title="SauceLabs logo."
   src="/uploads/2019/04/saucelabs-logo.png" >}}
-*SauceLabs logo*
 
 If you have an open source project and want to use SauceLabs, you first need to
 [apply for an account](https://saucelabs.com/open-source). You can also sign up
@@ -249,45 +271,51 @@ without modifying the test files.
 
 To do that, open your `~/.bash_profile` file and add:
 
-    export SAUCE_USERNAME="your Sauce username"
-    export SAUCE_ACCESS_KEY="your Sauce access key"
+```bash
+export SAUCE_USERNAME="your Sauce username"
+export SAUCE_ACCESS_KEY="your Sauce access key"
+```
 
 Great! Now, in your `integration` directory, we'll need to create a separate
 config file for running WebdriverIO with SauceLabs.
 
-    cd integration # from app directory
-    touch wdio-sauce.conf.js
+```bash
+cd integration # from app directory
+touch wdio-sauce.conf.js
+```
 
 Open that file and paste in the following:
 
-    exports.config = {
-      runner: 'local',
-      user: process.env.SAUCE_USERNAME,
-      key: process.env.SAUCE_ACCESS_KEY,
-      sauceConnect: true,
-      specs: [
-          './integration/specs/*.js'
-      ],
-      // Patterns to exclude.
-      exclude: [
-          // 'path/to/excluded/files'
-      ],
-      maxInstances: 10,
-      capabilities: [
-        {browserName: 'firefox', platform: 'Windows 10', version: '60.0'},
-        {browserName: 'chrome', platform: 'OS X 10.13', version: '69.0'}
-      ],
-      bail: 0,
-      baseUrl: 'http://localhost',
-      waitforTimeout: 10000,
-      connectionRetryTimeout: 90000,
-      connectionRetryCount: 3,
-      framework: 'mocha',
-      mochaOpts: {
-          ui: 'bdd',
-          timeout: 60000
-      }
-    }
+```javascript
+exports.config = {
+  runner: 'local',
+  user: process.env.SAUCE_USERNAME,
+  key: process.env.SAUCE_ACCESS_KEY,
+  sauceConnect: true,
+  specs: [
+      './integration/specs/*.js'
+  ],
+  // Patterns to exclude.
+  exclude: [
+      // 'path/to/excluded/files'
+  ],
+  maxInstances: 10,
+  capabilities: [
+    {browserName: 'firefox', platform: 'Windows 10', version: '60.0'},
+    {browserName: 'chrome', platform: 'OS X 10.13', version: '69.0'}
+  ],
+  bail: 0,
+  baseUrl: 'http://localhost',
+  waitforTimeout: 10000,
+  connectionRetryTimeout: 90000,
+  connectionRetryCount: 3,
+  framework: 'mocha',
+  mochaOpts: {
+      ui: 'bdd',
+      timeout: 60000
+  }
+}
+```
 
 As you can see, we've removed the `port` , `path` and `services` variables and
 added our Sauce `user` and `key`. We've switched on something called
@@ -310,15 +338,19 @@ After [downloading
 SauceConnect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy),
 navigate to that directory and start it up:
 
-    SC=sc-4.5.3-osx # OSX example
-    wget -O - https://saucelabs.com/downloads/$SC.zip | tar xfz - -C ~/
-    cd ~/$SC
-    bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY
+```bash
+SC=sc-4.5.3-osx # OSX example
+wget -O - https://saucelabs.com/downloads/$SC.zip | tar xfz - -C ~/
+cd ~/$SC
+bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY
+```
 
 Wait until you see "Sauce Connect is up, you may start your tests" in your
 terminal. Open a separate terminal window, navigate to `app` and run:
 
-    ./node_modules/.bin/wdio ./integration/wdio-sauce.conf.js
+```bash
+./node_modules/.bin/wdio ./integration/wdio-sauce.conf.js
+```
 
 SauceLabs will start running the tests in the cloud. You can watch them run in
 real-time from the [SauceLabs
@@ -326,10 +358,9 @@ dashboard](https://app.saucelabs.com/dashboard/tests) (and even take over if you
 want to manually control where the test goes).
 
 {{< fig
-  alt="SauceLabs dashboard screenshot"
+  alt="SauceLabs dashboard screenshot showing a report of an integration test"
+  title="SauceLabs dashboard screenshot."
   src="/uploads/2019/04/saucelabs-dashboard-screenshot.png" >}}
-*Screenshot of the SauceLabs dashboard. It's a browser... in a browser... in*
-*YOUR browser...*
 
 If any tests fail, you'll immediately get the URL in your terminal window with a
 video of the test and information about what happened. (Break the test and try
