@@ -327,11 +327,13 @@ proxy server that will open a tunnel between a SauceLabs Virtual Machine (VM)
 and whatever you are running on `localhost.`You'll want to save it in a separate
 directory from the rest of your development files.
 
-**Note About Port Numbers:**  SauceConnect only [supports specific port numbers
+{{< note >}}
+SauceConnect only [supports specific port numbers
 to tunnel to
 localhost](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy+FAQS#SauceConnectProxyFAQS-CanIAccessApplicationsonlocalhost),
 so you may need to change the port where you serve the dashboard. We had to
 change from `:8084` to `:7777` in order for the tunnel to work.
+{{< /note >}}
 
 After [downloading
 SauceConnect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy),
