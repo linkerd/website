@@ -27,13 +27,12 @@ just a few minutes](https://linkerd.io/2/getting-started/)!)
 And when I say excited, I mean unsolicited-praise excited: we constantly get
 messages from users like this:
 
+<!-- markdownlint-disable MD013 -->
 {{< fig
-  alt="Text of Linkerd user's happy tweet"
+  alt="From @stephenpope on Twitter: Very pleased with #Linkerd2 - deployed my app (with auto-proxy-injection) and #itjustworked - Had all the info I needed on the dashboard - Thanks very much (great docs too)"
   title="Tweet by a happy Linkerd user!"
   src="/uploads/2019/04/happy-tweet.png" >}}
-*From Twitter: Very pleased with #Linkerd2 - deployed my app (with
-auto-proxy-injection) and #itjustworked - Had all the info I needed on the
-dashboard - Thanks very much (great docs too)*
+<!-- markdownlint-enable MD013 -->
 
 We want to keep our users happy with a clean, consistent dashboard as we
 constantly roll out new features and improvements, so recently we built a suite
