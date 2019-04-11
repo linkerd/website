@@ -328,8 +328,7 @@ and whatever you are running on `localhost.`You'll want to save it in a separate
 directory from the rest of your development files.
 
 {{< note >}}
-SauceConnect only [supports specific port numbers
-to tunnel to
+SauceConnect only [supports specific port numbers to tunnel to
 localhost](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy+FAQS#SauceConnectProxyFAQS-CanIAccessApplicationsonlocalhost),
 so you may need to change the port where you serve the dashboard. We had to
 change from `:8084` to `:7777` in order for the tunnel to work.
