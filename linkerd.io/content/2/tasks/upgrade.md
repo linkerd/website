@@ -18,13 +18,13 @@ incrementally without taking down any of your services.
 
 ## Upgrade notice: stable-2.3.0
 
-`stable-2.3.0` introduces a new config map named `linkerd-config` to the
-`linkerd` namespace. During the first upgrade to `stable-2.3.0`, any
-flags previously provided to the `linkerd install` command must be added to the
-`linkerd upgrade` command. This ensures that all the cluster configurations are
-persisted in the new config map. For example, if your current cluster was
-installed with `linkerd install --proxy-auto-inject`, then the upgrade must be
-run as `linkerd upgrade --proxy-auto-inject`.
+`stable-2.3.0` introduces a new `upgrade` command. This command only works for
+the `edge-19.4.x` and newer releases. When using the `upgrade` command, all the
+installation flags previously provided to the `install` command must also be
+added.
+
+To upgrade from the `stable-2.2.x` release, follow the instructions provided in
+the [Upgrade the control plane](#upgrade-the-control-plane) section.
 
 ## Upgrade notice: stable-2.2.0
 
