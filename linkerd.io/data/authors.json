@@ -145,5 +145,12 @@
     "name": "Mohsen Rezaei",
     "firstName": "Mohsen",
     "lastName": "Rezaei"
+  },
+  "carol": {
+    "avatar": "",
+    "email": "carol@buoyant.io",
+    "name": "Carol Scott",
+    "firstName": "Carol",
+    "lastName": "Scott"
   }
 }
