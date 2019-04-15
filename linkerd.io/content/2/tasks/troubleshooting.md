@@ -12,7 +12,7 @@ These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify your cluster is prepared for
 installation.
 
-### √ control plane namespace does not already exist {#pre-k8s-cluster-ns}
+### √ control plane namespace does not already exist {#pre-ns}
 
 Example failure:
 
@@ -44,10 +44,10 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
 
-# The "pre-kubernetes-setup" checks {#pre-k8s}
+## The "pre-kubernetes-setup" checks {#pre-k8s}
 
-These checks only run when the `--pre` flag is set. This flag is intended for
-use prior to running `linkerd install`, to verify you have the correct
+These checks only run when the `--pre` flag is set This flag is intended for
+use prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
 ```bash
@@ -59,6 +59,30 @@ permissions to install Linkerd.
 
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
+
+## The "pre-kubernetes-capability" checks {#pre-k8s-capability}
+
+These checks only run when the `--pre` flag is set. This flag is intended for
+use prior to running `linkerd install`, to verify you have the correct
+Kubernetes capability permissions to install Linkerd.
+
+### √ has NET_ADMIN capability {#pre-k8s-cluster-net-admin}
+
+Example failure:
+
+```bash
+× has NET_ADMIN capability
+    found 3 PodSecurityPolicies, but none provide NET_ADMIN
+    see https://linkerd.io/checks/#pre-k8s-cluster-net-admin for hints
+```
+
+Linkerd installation requires the `NET_ADMIN` Kubernetes capability, to allow
+for modification of iptables.
+
+For more information, see the Kubernetes documentation on
+[Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
+[Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
+and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ## The "pre-kubernetes-single-namespace-setup" checks {#pre-single}
 
@@ -101,7 +125,7 @@ installation, specifically:
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
 
-# The "kubernetes-api" checks {#k8s-api}
+## The "kubernetes-api" checks {#k8s-api}
 
 Example failures:
 
@@ -160,12 +184,12 @@ Linkerd requires at least version `1.10.0`. Verify your cluster version with:
 kubectl version
 ```
 
-### √ is running the minimum kubectl version {#k8s-version-kubectl}
+### √ is running the minimum kubectl version {#kubectl-version}
 
 Example failure:
 
 ```bash
-× minimum kubectl version is installed
+× is running the minimum kubectl version
     kubectl is on version [1.9.1], but version [1.10.0] or more recent is required
     see https://linkerd.io/checks/#kubectl-version for hints
 ```
@@ -406,7 +430,7 @@ Example failure:
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
 
-# The "control-plane-version" checks {#l5d-version-control}
+## The "control-plane-version" checks {#l5d-version-control}
 
 Example failures:
 
