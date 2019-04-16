@@ -8,7 +8,7 @@ description = "Automate injection of the Linkerd containers for your service."
 There are a couple things to note about this feature:
 
 - Adding the annotation on a namespace will not automatically update all the
-  resources. You will need to update the resources in this namespace (for e.g.,
+  resources. You will need to update the resources in this namespace (e.g.,
   with `kubectl apply`, `kubectl edit`) for them to be injected. This is because
   injection happens at admission and on each specific resource. Kubernetes will
   not call the mutating webhook until it sees an update on each individual
@@ -40,8 +40,8 @@ linkerd install --proxy-auto-inject | kubectl apply -f -
 linkerd upgrade --proxy-auto-inject | kubectl apply -f -
 ```
 
-Take a look at the new `linkerd-proxy-injector` to verify everything is working
-correctly:
+Take a look at the new `linkerd-proxy-injector` deployment to verify everything
+is working correctly:
 
 ```bash
 kubectl -n linkerd get deploy/linkerd-proxy-injector svc/linkerd-proxy-injector
