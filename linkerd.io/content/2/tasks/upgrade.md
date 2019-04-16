@@ -16,6 +16,16 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
+## Upgrade notice: stable-2.3.0
+
+`stable-2.3.0` introduces a new `upgrade` command. This command only works for
+the `edge-19.4.x` and newer releases. When using the `upgrade` command, all the
+installation flags previously provided to the `install` command must also be
+added.
+
+To upgrade from the `stable-2.2.x` release, follow the instructions provided in
+the [Upgrade the control plane](#upgrade-the-control-plane) section.
+
 ## Upgrade notice: stable-2.2.0
 
 There are two breaking changes in `stable-2.2.0`. One relates to
@@ -52,62 +62,6 @@ of the following:
 
 Auto-inject support for application updates is tracked on
 [github](https://github.com/linkerd/linkerd2/issues/2260)
-
-# Upgrade notice: stable-2.1.0
-
-As of the `stable-2.1.0` release, the Linkerd control plane components have been
-renamed to reduce possible naming collisions. If you're upgrading from an older
-version, you will need to clean up the old components manually as part of the
-upgrade. Perform the upgrade in the following order:
-
-1. If Linkerd is installed with
-  [automatic proxy injection](/2/features/proxy-injection/),
-  enabled, then you'll need to start by removing the webhook that was created
-  when it was installed, by running:
-
-    ```bash
-    kubectl -n linkerd delete \
-      mutatingwebhookconfigurations/linkerd-proxy-injector-webhook-config \
-      --ignore-not-found
-    ```
-
-1. [Upgrade the CLI](#upgrade-the-cli). Note that right after upgrading the CLI,
-   most of its commands will fail. You can only rely on the `linkerd install`
-   command to complete the following steps, and only after doing so will the
-   CLI be fully usable again.
-
-1. [Upgrade the control plane](#upgrade-the-control-plane)
-
-1. Remove the old control plane deployments and configmaps, by running:
-
-    ```bash
-    kubectl -n linkerd delete \
-      deploy/ca \
-      deploy/controller \
-      deploy/grafana \
-      deploy/prometheus \
-      deploy/proxy-injector \
-      deploy/web \
-      cm/grafana-config \
-      cm/prometheus-config \
-      cm/proxy-injector-sidecar-config \
-      --ignore-not-found
-    ```
-
-1. [Upgrade the data plane](#upgrade-the-data-plane)
-
-1. Remove the old control plane services, by running:
-
-    ```bash
-    kubectl -n linkerd delete \
-      svc/api \
-      svc/grafana \
-      svc/prometheus \
-      svc/proxy-api \
-      svc/proxy-injector \
-      svc/web \
-      --ignore-not-found
-    ```
 
 # Step-by-step instructions
 

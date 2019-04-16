@@ -1,0 +1,6 @@
+{{ range where site.Data.cli "Name" (.Get 0) }}
+{{ $opts := where .Options "Name" "!=" "help" }}
+{{ if ge (len $opts) 1 }}
+{{ partial "cli/annotations" $opts }}
+{{ end }}
+{{ end }}
