@@ -7,31 +7,12 @@ description = "Automate injection of the Linkerd containers for your service."
 [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks).
 There are a couple things to note about this feature:
 
-- Injection currently only works on deployments, see the
-  [issue](https://github.com/linkerd/linkerd2/issues/1751) to track progress
-  towards handling injection for most Kuberentes resources.
-
-- The mutating webhook only receives `CREATE` events currently. If the
-  annotation is added or removed after creation, injection won't happen. It
-  is possible to either delete/create the deployment or use `linkerd inject` in
-  place (`kubectl get deploy -o yaml | linkerd inject - | kubect apply -f -`).
-  See the [issue](https://github.com/linkerd/linkerd2/pull/2332) to track
-  progress.
-
 - Adding the annotation on a namespace will not automatically update all the
-  deployments. You will need to re-create the deployments in this namespace for
-  them to be updated or use `linkerd inject` in place. This is because injection
-  happens at admission and on each specific resource. Kubernetes will not call
-  the mutating webhook until it sees and update on each individual deployment.
-
-- When Linkerd is unable to
-  [detect the protocol](/2/features/protocol-detection/#configuring-protocol-detection)
-  for a service, it is sometimes desirable to skip inbound and outbound ports.
-  While it is not currently possible to do this on a per-resource basis (see
-  [issue](https://github.com/linkerd/linkerd2/issues/1997)), it *is* possible to
-  do on a global basis by using the `--skip-inbound-ports` and
-  `--skip-outbound-ports` flags when installing the control plane via
-  `linkerd install`.
+  resources. You will need to update the resources in this namespace (e.g.,
+  with `kubectl apply`, `kubectl edit`) for them to be injected. This is because
+  injection happens at admission and on each specific resource. Kubernetes will
+  not call the mutating webhook until it sees an update on each individual
+  resource.
 
 - The experimental version of this feature, prior to the stable-2.2 and
   edge-19.2.1 releases, injected all pods in all namespaces, but the current
@@ -52,12 +33,15 @@ Automatic proxy injection is disabled by default when installing the Linkerd
 control plane. To enable it, set the `--proxy-auto-inject` flag, as follows:
 
 ```bash
+# during installation
 linkerd install --proxy-auto-inject | kubectl apply -f -
+
+# or during an upgrade
+linkerd upgrade --proxy-auto-inject | kubectl apply -f -
 ```
 
-It is safe to run this command when you've already installed Linkerd. `kubectl`
-will simply add the new `linkerd-proxy-injector` and configure the webhook. Take
-a look at what has started to verify everything is working correctly:
+Take a look at the new `linkerd-proxy-injector` deployment to verify everything
+is working correctly:
 
 ```bash
 kubectl -n linkerd get deploy/linkerd-proxy-injector svc/linkerd-proxy-injector
