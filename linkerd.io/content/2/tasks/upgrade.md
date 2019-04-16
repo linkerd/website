@@ -23,6 +23,18 @@ the `edge-19.4.x` and newer releases. When using the `upgrade` command from
 `edge-19.2.x` or `edge-19.3.x`, all the installation flags previously provided
 to the `install` command must also be added.
 
+### Upgrading from stable-2.2.x
+
+To upgrade from the `stable-2.2.x` release, follow the
+[Step-by-step instructions](#step-by-step-instructions).
+
+Note that if you had previously installed Linkerd with `--tls=optional`, delete
+the `linkerd-ca` deployment after successful Linkerd control plane upgrade:
+
+```bash
+kubectl -n linkerd delete deploy/linkerd-ca
+```
+
 ### Upgrading from edge-19.4.x
 
 ```bash
@@ -52,18 +64,6 @@ linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
 
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
-
-### Upgrading from stable-2.2.x
-
-To upgrade from the `stable-2.2.x` release, follow the
-[Step-by-step instructions](#step-by-step-instructions).
-
-Note that if you had previously installed Linkerd with `--tls=optional`, delete
-the `linkerd-ca` deployment after successful Linkerd control plane upgrade:
-
-```bash
-kubectl -n linkerd delete deploy/linkerd-ca
-```
 
 ## Upgrade notice: stable-2.2.0
 
