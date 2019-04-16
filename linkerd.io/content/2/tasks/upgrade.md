@@ -23,7 +23,7 @@ the `edge-19.4.x` and newer releases. When using the `upgrade` command from
 `edge-19.2.x` or `edge-19.3.x`, all the installation flags previously provided
 to the `install` command must also be added.
 
-### Upgrading from `edge-19.4.x`
+### Upgrading from edge-19.4.x
 
 ```bash
 # get the latest stable
@@ -36,7 +36,7 @@ linkerd upgrade | kubectl apply -f -
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
 
-### Upgrading from `edge-19.2.x` or `edge-19.3.x`
+### Upgrading from edge-19.2.x or edge-19.3.x
 
 ```bash
 # get the latest stable
@@ -44,7 +44,7 @@ curl -sL https://run.linkerd.io/install | sh
 
 # Install stable control plane, using flags previously supplied during
 # installation.
-# For example, if the previous installation y was:
+# For example, if the previous installation was:
 # linkerd install --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
 # The upgrade command would be:
 linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
@@ -53,7 +53,7 @@ linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
 
-### Upgrading from `stable-2.2.x`
+### Upgrading from stable-2.2.x
 
 To upgrade from the `stable-2.2.x` release, follow the
 [Step-by-step instructions](#step-by-step-instructions).
