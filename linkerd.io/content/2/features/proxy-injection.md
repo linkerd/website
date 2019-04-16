@@ -1,7 +1,7 @@
 +++
 title = "Automatic Proxy Injection"
 description = "Linkerd can be configured to automatically inject the data plane proxy into your service."
-weight = 4
+weight = 5
 aliases = [
   "/2/proxy-injection/"
 ]

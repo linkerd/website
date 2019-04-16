@@ -236,6 +236,10 @@
     Shorthand: ""
     Usage: Proxy port to use for outbound traffic
   - DefaultValue: ""
+    Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
     Name: proxy-cpu-limit
     Shorthand: ""
     Usage: Maximum amount of CPU units that the proxy sidecar can use
@@ -251,6 +255,10 @@
     Name: proxy-log-level
     Shorthand: ""
     Usage: Log level for the proxy
+  - DefaultValue: ""
+    Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
     Name: proxy-memory-limit
     Shorthand: ""
@@ -386,6 +394,10 @@
     Usage: |
       Enable proxy sidecar auto-injection via a webhook (default false)
   - DefaultValue: ""
+    Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
     Name: proxy-cpu-limit
     Shorthand: ""
     Usage: Maximum amount of CPU units that the proxy sidecar can use
@@ -401,6 +413,10 @@
     Name: proxy-log-level
     Shorthand: ""
     Usage: Log level for the proxy
+  - DefaultValue: ""
+    Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
     Name: proxy-memory-limit
     Shorthand: ""
@@ -577,7 +593,6 @@
       (TYPE/NAME)
 
       Examples:
-
       * deploy/my-deploy
       * ds/my-daemonset
       * job/my-job
@@ -586,7 +601,6 @@
       * sts/my-statefulset
 
       Valid resource types include:
-
       * daemonsets
       * deployments
       * jobs
@@ -1103,6 +1117,10 @@
     Usage: |
       Enable proxy sidecar auto-injection via a webhook (default false)
   - DefaultValue: ""
+    Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
     Name: proxy-cpu-limit
     Shorthand: ""
     Usage: Maximum amount of CPU units that the proxy sidecar can use
@@ -1118,6 +1136,10 @@
     Name: proxy-log-level
     Shorthand: ""
     Usage: Log level for the proxy
+  - DefaultValue: ""
+    Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
     Name: proxy-memory-limit
     Shorthand: ""
