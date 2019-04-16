@@ -75,7 +75,7 @@ on Wednesday, April 24, 2019 at 10am PT.
 Ready to try it? Those of you who have been tracking the 2.x branch via our
 [weekly edge releases](https://linkerd.io/2/edge) will already have seen these
 features in action. Either way, you can download the stable 2.3 release by
-running: 
+running:
 
 ```bash
 curl https://run.linkerd.io/install | sh
@@ -95,4 +95,3 @@ community on [Slack](https://slack.linkerd.io),
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
 _Image credit: [Robert McGoldrick](https://www.flickr.com/photos/bobsfever/)_
-
