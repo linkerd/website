@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/1c0f1477189d7f849fc52585b3b22d852da5a737/pkg/k8s/labels.go#L89-L152 -->
+    <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L89-L152 -->
     {{ range . }}
     {{ if or (eq .Name "admin-port") (eq .Name "control-port") (eq .Name "enable-external-profiles") (eq .Name "image-pull-policy") (eq .Name "inbound-port") (eq .Name "init-image") (eq .Name "outbound-port") (eq .Name "proxy-cpu-limit") (eq .Name "proxy-cpu-request") (eq .Name "proxy-image") (eq .Name "proxy-log-level") (eq .Name "proxy-memory-limit") (eq .Name "proxy-memory-request") (eq .Name "proxy-uid") (eq .Name "proxy-version") (eq .Name "skip-inbound-ports") (eq .Name "skip-outbound-ports") }}
     <tr>
