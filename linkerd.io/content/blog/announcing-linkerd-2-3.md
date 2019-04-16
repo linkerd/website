@@ -12,7 +12,7 @@ tags: [Linkerd]
 identity](/uploads/lego-stormtroopers.jpg)
 
 Today we're very happy to announce the release of [Linkerd
-2.3](https://github.com/linkerd/linkerd2/releases/tag/stable-2.3). This release
+2.3](https://github.com/linkerd/linkerd2/releases/tag/stable-2.3.0). This release
 graduates mTLS out of experimental to a fully supported feature, and introduces
 several important security primitives. Most importantly, Linkerd 2.3 turns
 authenticated, confidential communication between meshed services _on by
@@ -56,19 +56,18 @@ tackle this challenge head-on:
 * Since the control plane also runs on the data plane, communication between
   control plane components is secured in the same way.
 
-All of the above happens without requiring any configuration by you, the user,
-and is enabled by default. This means that as of the 2.3 release, Linkerd now
-gives you encrypted, authenticated communication between all your meshed
-services, with no effort on your part. That's not 100% of the way to zero
-trust, but it's a major step in that direction.
+All of this is enabled by default and requires no configuration. This means
+that as of the 2.3 release, Linkerd now gives you encrypted, authenticated
+communication between all your meshed services with no effort on your part.
+That may not be all you need for zero trust networking in Kubernetes, but it's
+a significant start.
 
-This release is a major step forward in Linkerd's security roadmap, but it's
-far from the last. In an upcoming blog post, Oliver Gould will be detailing the
+This release represents a major step forward in Linkerd's security roadmap. In
+an upcoming blog post, Linkerd creator Oliver Gould will be detailing the
 design tradeoffs in this approach, as well as covering Linkerd's upcoming
-roadmap around certificate chaining, TLS enforcement, moving beyond service
-accounts, and authorization in the mesh. We'll also be discussing these topics,
-and all the other fun features in 2.3, in our [upcoming  Linkerd Online
-Community
+roadmap around certificate chaining, TLS enforcement, identity beyond service
+accounts, and authorization. We'll also be discussing these topics (and all the
+other fun features in 2.3) in our [upcoming Linkerd Online Community
 Meeting](https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/)
 on Wednesday, April 24, 2019 at 10am PT.
 
@@ -82,9 +81,10 @@ curl https://run.linkerd.io/install | sh
 ```
 
 Finally, we'd be remiss if we didn't point out that this approach has been
-deeply inspired by our friends at Cloudflare, Let's Encrypt, Mozilla, and other
-security-conscious organizations that strive to make the Internet secure the
-default.
+deeply inspired by our friends at [Smallstep](https://smallstep.com/),
+[Cloudflare](https://www.cloudflare.com/), [Let's
+Encrypt](https://letsencrypt.org/), [Mozilla](https://www.mozilla.org/), and
+other amazing organizations that strive to make the Internet secure by default.
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io). If you have feature requests, questions, or
