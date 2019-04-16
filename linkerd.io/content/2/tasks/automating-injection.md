@@ -8,10 +8,11 @@ description = "Automate injection of the Linkerd containers for your service."
 There are a couple things to note about this feature:
 
 - Adding the annotation on a namespace will not automatically update all the
-  resources. You will need to update the resources in this namespace for
-  them to be injected. This is because injection happens at admission and on
-  each specific resource. Kubernetes will not call the mutating webhook until it
-  sees an update on each individual resource.
+  resources. You will need to update the resources in this namespace (for e.g.,
+  with `kubectl apply`, `kubectl edit`) for them to be injected. This is because
+  injection happens at admission and on each specific resource. Kubernetes will
+  not call the mutating webhook until it sees an update on each individual
+  resource.
 
 - The experimental version of this feature, prior to the stable-2.2 and
   edge-19.2.1 releases, injected all pods in all namespaces, but the current

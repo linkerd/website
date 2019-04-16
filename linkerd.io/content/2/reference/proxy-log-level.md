@@ -3,8 +3,14 @@ title = "Proxy Log Level"
 description = "Syntax of the proxy log level."
 +++
 
-The Linkerd proxy derives its log level from the `PROXY_LOG_LEVEL` environment
-variable. This variable is a comma-separated list of log directives, which is
+The Linkerd proxy's log level can be configured via the:
+
+* `LINKERD_PROXY_LOG` environment variable
+* `--proxy-log-level` CLI flag of the `install`, `inject` and `upgrade` commands
+* `config.linkerd.io/proxy-log-level` annotation (refer [Proxy Configuration](/2/reference/proxy-configuration/)
+for more information on using config annotations).
+
+The log level is a comma-separated list of log directives, which is
 based on the logging syntax of the [`env_logger` crate](https://docs.rs/env_logger/0.6.1/env_logger/#enabling-logging).
 
 A log directive consists of either:
@@ -25,5 +31,6 @@ A level is one of:
 A module path represents the path to a Rust module. It consists of one or more
 module names, separated by `::`.
 
-A module name starts with a letter, and consists of alphanumeric characters and
-_.
+A module name starts with a letter, and consists of alphanumeric characters and `_`.
+
+The proxy's default log level is set to `warn,linkerd2_proxy=info`.
