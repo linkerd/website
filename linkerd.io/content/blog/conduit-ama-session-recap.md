@@ -1,4 +1,5 @@
 ---
+slug: 'conduit-ama-session-recap'
 title: 'Conduit AMA session recap'
 author: 'gmiranda23'
 date: Wed, 27 Dec 2017 22:12:40 +0000

@@ -1,4 +1,5 @@
 ---
+slug: 'a-linkerd-2-0-deep-dive-unboxing-debugging-and-monitoring-kubernetes-services-on-azure'
 title: 'A Linkerd 2.0 Deep Dive Unboxing: Debugging and Monitoring Kubernetes Services on Azure'
 author: 'william'
 date: Tue, 23 Oct 2018 18:37:39 +0000

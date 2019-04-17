@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-dcos-microservices-in-production-made-easy'
 title: 'Linkerd on DC/OS: Microservices in Production Made Easy'
 author: 'william'
 date: Tue, 19 Apr 2016 22:21:14 +0000

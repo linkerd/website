@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-1-2-0-announcement-migration-guide'
 title: 'Linkerd 1.2.0 is here! Features, bugfixes, and migration'
 author: 'eliza'
 date: Fri, 08 Sep 2017 20:23:01 +0000

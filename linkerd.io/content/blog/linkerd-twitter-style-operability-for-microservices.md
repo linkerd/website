@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-twitter-style-operability-for-microservices'
 title: 'Linkerd: Twitter-style Operability for Microservices'
 author: 'william'
 thumbnail: /uploads/linkerd_featured_operability.png

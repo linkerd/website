@@ -1,4 +1,5 @@
 ---
+slug: 'making-things-faster-by-adding-more-steps'
 title: 'Making Things Faster by Adding More Steps'
 author: 'andrew'
 date: Wed, 01 Feb 2017 00:22:35 +0000

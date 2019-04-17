@@ -1,4 +1,5 @@
 ---
+slug: 'bringing-service-communication-shadows-part-2'
 title: 'Bringing Service Communication Out of the Shadows - Part 2'
 author: 'gmiranda23'
 thumbnail: /uploads/shadows2_featured_Twitter_ratio.png

@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-on-dcos-for-service-discovery-and-visibility'
 title: 'Linkerd on DC/OS for Service Discovery and Visibility'
 author: 'andrew'
 date: Mon, 10 Oct 2016 22:45:50 +0000

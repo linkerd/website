@@ -1,4 +1,5 @@
 ---
+slug: 'introducing-conduit'
 title: 'Introducing Conduit'
 author: 'william'
 date: Tue, 05 Dec 2017 16:00:44 +0000

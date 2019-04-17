@@ -1,4 +1,5 @@
 ---
+slug: 'webinar-recap-deep-dive-conduits-rust-based-data-plane'
 title: 'Webinar recap: A deep dive into Conduit’s Rust-based data plane'
 author: 'courtney'
 date: Mon, 05 Feb 2018 19:16:20 +0000

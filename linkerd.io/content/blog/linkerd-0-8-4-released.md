@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-0-8-4-released'
 title: 'Linkerd 0.8.4 released'
 author: 'william'
 date: Wed, 07 Dec 2016 00:11:05 +0000

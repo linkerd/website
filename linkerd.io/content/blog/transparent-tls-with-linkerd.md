@@ -1,4 +1,5 @@
 ---
+slug: 'transparent-tls-with-linkerd'
 title: 'Transparent TLS with Linkerd'
 author: 'alex'
 date: Thu, 24 Mar 2016 22:16:06 +0000

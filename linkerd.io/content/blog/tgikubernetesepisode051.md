@@ -1,4 +1,5 @@
 ---
+slug: 'tgikubernetesepisode051'
 title: 'TGI Kubernetes Features Linkerd 2.0'
 author: 'kiersten'
 date: Fri, 21 Sep 2018 23:27:57 +0000

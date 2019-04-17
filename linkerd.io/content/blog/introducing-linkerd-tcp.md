@@ -1,4 +1,5 @@
 ---
+slug: 'introducing-linkerd-tcp'
 title: 'Introducing Linkerd-tcp'
 author: 'oliver'
 date: Wed, 29 Mar 2017 23:32:27 +0000

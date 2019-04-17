@@ -1,4 +1,5 @@
 ---
+slug: 'beyond-round-robin-load-balancing-for-latency'
 title: 'Beyond Round Robin: Load Balancing for Latency'
 author: 'steve'
 thumbnail: /uploads/linkerd_featured_load_balancing.png

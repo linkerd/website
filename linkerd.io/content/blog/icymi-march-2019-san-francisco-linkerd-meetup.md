@@ -1,4 +1,5 @@
 ---
+slug: 'icymi-march-2019-san-francisco-linkerd-meetup'
 title: 'ICYMI: March 2019 San Francisco Linkerd Meetup'
 author: 'kiersten'
 date: Fri, 29 Mar 2019 12:00:00 +0000

@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-conduit-support-http-1-x-tcp'
 title: 'Announcing Conduit support for HTTP/1.x and TCP'
 author: 'gmiranda23'
 date: Thu, 01 Feb 2018 16:29:10 +0000

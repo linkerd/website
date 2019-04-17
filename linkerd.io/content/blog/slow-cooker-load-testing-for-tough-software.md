@@ -1,4 +1,5 @@
 ---
+slug: 'slow-cooker-load-testing-for-tough-software'
 title: 'Slow Cooker: Load testing for tough software'
 author: 'steve'
 date: Sat, 10 Dec 2016 00:11:51 +0000

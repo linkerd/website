@@ -1,4 +1,5 @@
 ---
+slug: 'whats-a-service-mesh-and-why-do-i-need-one'
 title: "What's a service mesh? And why do I need one?"
 author: 'william'
 date: Tue, 25 Apr 2017 23:35:29 +0000

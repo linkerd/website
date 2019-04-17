@@ -1,4 +1,5 @@
 ---
+slug: 'distributed-tracing-for-polyglot-microservices'
 title: 'Distributed Tracing for Polyglot Microservices'
 author: 'kevin'
 date: Tue, 17 May 2016 22:28:48 +0000

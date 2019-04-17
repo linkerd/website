@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit'
 title: 'A Service Mesh For Kubernetes Part IX: gRPC for fun and profit'
 author: 'risha'
 date: Wed, 19 Apr 2017 23:34:57 +0000

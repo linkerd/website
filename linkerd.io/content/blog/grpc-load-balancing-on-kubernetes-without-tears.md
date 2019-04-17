@@ -1,4 +1,5 @@
 ---
+slug: 'grpc-load-balancing-on-kubernetes-without-tears'
 title: 'gRPC Load Balancing on Kubernetes without Tears'
 author: 'william'
 date: Wed, 14 Nov 2018 18:22:51 +0000

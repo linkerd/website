@@ -1,4 +1,5 @@
 ---
+slug: 'bringing-service-communication-out-of-the-shadows-pt-1'
 title: 'Bringing Service Communication Out of the Shadows - Part 1'
 author: 'gmiranda23'
 date: Thu, 26 Oct 2017 08:05:40 +0000

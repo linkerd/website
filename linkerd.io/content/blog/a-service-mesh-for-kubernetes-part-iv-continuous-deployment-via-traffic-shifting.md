@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting'
 title: 'A Service Mesh for Kubernetes, Part IV: Continuous deployment via traffic shifting'
 author: 'sarah'
 date: Fri, 04 Nov 2016 23:02:03 +0000

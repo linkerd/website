@@ -1,4 +1,5 @@
 ---
+slug: 'making-microservices-more-resilient-with-circuit-breaking'
 title: 'Making microservices more resilient with circuit breaking'
 author: 'kevin'
 date: Sat, 14 Jan 2017 00:17:03 +0000

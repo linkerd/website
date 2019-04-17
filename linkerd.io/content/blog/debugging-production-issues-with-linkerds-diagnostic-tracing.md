@@ -1,4 +1,5 @@
 ---
+slug: 'debugging-production-issues-with-linkerds-diagnostic-tracing'
 title: "Debugging production issues with Linkerd's diagnostic tracing"
 author: 'dennis'
 date: Tue, 19 Jun 2018 23:25:51 +0000

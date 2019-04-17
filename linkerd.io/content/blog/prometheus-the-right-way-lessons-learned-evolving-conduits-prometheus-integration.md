@@ -1,4 +1,5 @@
 ---
+slug: 'prometheus-the-right-way-lessons-learned-evolving-conduits-prometheus-integration'
 title: "Prometheus the Right Way: Lessons learned evolving Conduit's Prometheus integration"
 author: 'andrew'
 date: Thu, 17 May 2018 18:21:51 +0000

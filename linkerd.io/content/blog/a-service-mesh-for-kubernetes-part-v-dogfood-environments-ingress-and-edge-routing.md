@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing'
 title: 'A Service Mesh for Kubernetes, Part V: Dogfood environments, ingress and edge routing'
 author: 'risha'
 date: Fri, 18 Nov 2016 00:10:16 +0000

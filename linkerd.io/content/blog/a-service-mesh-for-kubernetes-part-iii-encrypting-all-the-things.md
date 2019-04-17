@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things'
 title: 'A Service Mesh for Kubernetes, Part III: Encrypting all the things'
 author: 'alex'
 date: Mon, 24 Oct 2016 23:00:15 +0000

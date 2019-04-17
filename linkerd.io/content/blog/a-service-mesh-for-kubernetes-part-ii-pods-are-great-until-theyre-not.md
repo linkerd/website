@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not'
 title: "A Service Mesh for Kubernetes, Part II: Pods are great until they're not"
 author: 'alex'
 thumbnail: /uploads/kubernetes2_featured_Twitter_ratio.png

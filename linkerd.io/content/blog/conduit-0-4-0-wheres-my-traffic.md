@@ -1,4 +1,5 @@
 ---
+slug: 'conduit-0-4-0-wheres-my-traffic'
 title: 'Conduit 0.4.0: Where’s my traffic?'
 author: 'franzi'
 date: Fri, 20 Apr 2018 13:58:01 +0000

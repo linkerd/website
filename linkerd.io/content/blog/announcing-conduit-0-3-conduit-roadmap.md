@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-conduit-0-3-conduit-roadmap'
 title: 'Announcing Conduit 0.3 and the Conduit Roadmap'
 author: 'william'
 date: Wed, 21 Feb 2018 20:47:41 +0000
