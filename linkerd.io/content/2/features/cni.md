@@ -32,7 +32,7 @@ linkerd install-cni | kubectl apply -f -
 Once the DaemonSet is up and running, all subsequent installs that include a
 `linkerd-proxy` container (including the Linkerd control plane), no longer need
 to include the `linkerd-init` container. Omission of the init container is
-controlled by the `--linkerd-cni-enabled` flag.
+controlled by the `--linkerd-cni-enabled` flag at control plane install time.
 
 Install the Linkerd control plane, with:
 
@@ -40,12 +40,8 @@ Install the Linkerd control plane, with:
 linkerd install --linkerd-cni-enabled | kubectl apply -f -
 ```
 
-After the control plane is ready, inject the Linkerd data plane into additional
-deployments, with:
-
-```bash
-linkerd inject --linkerd-cni-enabled deployment.yaml | kubectl apply -f -
-```
+This will set a `cniEnabled` flag in the global `linkerd-config` ConfigMap. All
+subsequent proxy injections will read this field and omit init containers.
 
 ## Additional configuration
 
