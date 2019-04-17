@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-x-the-service-mesh-api'
 title: 'A Service Mesh For Kubernetes, Part X: The Service Mesh API'
 author: 'alex'
 date: Wed, 24 May 2017 23:36:26 +0000

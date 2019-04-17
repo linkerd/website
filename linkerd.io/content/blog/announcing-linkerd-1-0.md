@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-linkerd-1-0'
 title: 'Announcing Linkerd 1.0'
 author: 'oliver'
 date: Tue, 25 Apr 2017 23:36:00 +0000

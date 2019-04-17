@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-joins-the-cloud-native-computing-foundation'
 title: 'Linkerd Joins the Cloud Native Computing Foundation'
 author: 'william'
 date: Tue, 24 Jan 2017 00:20:26 +0000

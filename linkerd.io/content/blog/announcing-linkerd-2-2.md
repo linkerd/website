@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-linkerd-2-2'
 title: 'Announcing Linkerd 2.2'
 author: 'william'
 date: Tue, 12 Feb 2019 22:21:13 +0000

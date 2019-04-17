@@ -1,4 +1,5 @@
 ---
+slug: 'browser-testing-from-scratch-building-quick-and-easy-integration-tests-with-webdriverio-and-saucelabs'
 title: 'Browser Testing from Scratch: Building Quick and Easy Integration Tests
 with WebdriverIO and SauceLabs'
 author: 'carol'

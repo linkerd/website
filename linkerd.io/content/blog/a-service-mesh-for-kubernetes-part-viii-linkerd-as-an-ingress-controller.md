@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller'
 title: 'A Service Mesh for Kubernetes, Part VIII: Linkerd as an ingress controller'
 author: 'sarah'
 thumbnail: kubernetes8_featured_Twitter_ratio.png

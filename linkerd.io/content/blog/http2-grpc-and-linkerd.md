@@ -1,4 +1,5 @@
 ---
+slug: 'http2-grpc-and-linkerd'
 title: 'HTTP/2, gRPC and Linkerd'
 author: 'oliver'
 date: Wed, 11 Jan 2017 00:16:09 +0000

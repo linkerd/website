@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy'
 title: 'A Service Mesh for Kubernetes, Part VII: Distributed tracing made easy'
 author: 'kevin'
 date: Tue, 14 Mar 2017 23:26:32 +0000

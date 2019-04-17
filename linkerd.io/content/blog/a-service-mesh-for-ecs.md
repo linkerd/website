@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-ecs'
 title: 'A Service Mesh For ECS'
 author: 'andrew'
 date: Tue, 08 Aug 2017 15:08:30 +0000

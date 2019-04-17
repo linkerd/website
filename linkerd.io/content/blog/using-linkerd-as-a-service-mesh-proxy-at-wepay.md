@@ -1,4 +1,5 @@
 ---
+slug: 'using-linkerd-as-a-service-mesh-proxy-at-wepay'
 title: 'Using Linkerd as a Service Mesh Proxy at WePay'
 author: 'mohsen'
 date: Wed, 27 Jun 2018 01:29:57 +0000
