@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-the-linkerd-graalvm-working-group'
 title: 'Announcing the Linkerd + GraalVM working group'
 author: 'gmiranda23'
 date: Mon, 04 Jun 2018 16:47:09 +0000

@@ -1,4 +1,5 @@
 ---
+slug: 'a-service-mesh-for-kubernetes-part-xi-egress'
 title: 'A Service Mesh For Kubernetes Part XI: Egress'
 author: 'alex'
 date: Tue, 20 Jun 2017 23:36:51 +0000

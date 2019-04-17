@@ -1,4 +1,5 @@
 ---
+slug: 'debugging-ruby-services-in-kubernetes-with-linkerd'
 title: 'Debugging Ruby Services in Kubernetes With Linkerd'
 author: 'kevin'
 date: Sat, 02 Feb 2019 00:31:52 +0000

@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-one-hundred-billion-production-requests'
 title: 'Announcing one hundred billion production requests!'
 author: 'william'
 date: Wed, 08 Mar 2017 00:25:37 +0000

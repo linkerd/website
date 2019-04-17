@@ -1,4 +1,5 @@
 ---
+slug: 'upgrading-to-linkerd-0-6-0'
 title: 'Upgrading to Linkerd 0.6.0'
 author: 'alex'
 date: Tue, 24 May 2016 22:33:14 +0000

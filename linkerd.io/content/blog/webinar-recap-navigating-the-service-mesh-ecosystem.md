@@ -1,4 +1,5 @@
 ---
+slug: 'webinar-recap-navigating-the-service-mesh-ecosystem'
 title: 'Webinar recap: Navigating the service mesh ecosystem'
 author: 'gmiranda23'
 date: Mon, 26 Mar 2018 17:30:38 +0000

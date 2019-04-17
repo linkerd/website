@@ -1,4 +1,5 @@
 ---
+slug: 'real-world-microservices-when-services-stop-playing-well-and-start-getting-real'
 title: 'Real World Microservices: When Services Stop Playing Well and Start Getting Real'
 author: 'oliver'
 date: Wed, 04 May 2016 22:25:41 +0000

@@ -1,4 +1,5 @@
 ---
+slug: 'linkerd-expands-community-roles-second-birthday'
 title: 'Linkerd expands community roles for its second birthday'
 author: 'gmiranda23'
 date: Fri, 16 Feb 2018 22:17:40 +0000

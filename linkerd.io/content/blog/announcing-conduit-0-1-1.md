@@ -1,4 +1,5 @@
 ---
+slug: 'announcing-conduit-0-1-1'
 title: 'Announcing Conduit 0.1.1'
 author: 'gmiranda23'
 date: Wed, 20 Dec 2017 23:11:11 +0000

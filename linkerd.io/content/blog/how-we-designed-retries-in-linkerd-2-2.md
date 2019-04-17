@@ -1,4 +1,5 @@
 ---
+slug: 'how-we-designed-retries-in-linkerd-2-2'
 title: 'How we designed retries in Linkerd 2.2'
 author: 'alex'
 thumbnail: image-15.png

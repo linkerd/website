@@ -1,4 +1,5 @@
 ---
+slug: 'consolidated-kubernetes-service-mesh-linkerd-config'
 title: 'The Consolidated Kubernetes Service Mesh Linkerd Config'
 author: 'eliza'
 date: Fri, 04 Aug 2017 22:20:42 +0000

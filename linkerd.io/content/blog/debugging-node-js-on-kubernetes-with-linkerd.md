@@ -1,4 +1,5 @@
 ---
+slug: 'debugging-node-js-on-kubernetes-with-linkerd'
 title: 'Debugging Node.js on Kubernetes with Linkerd'
 author: 'kiersten'
 date: Fri, 02 Nov 2018 19:03:29 +0000
