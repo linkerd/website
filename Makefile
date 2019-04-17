@@ -1,7 +1,7 @@
 
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
-export L5D2_STABLE_VERSION ?= stable-2.2.1
+export L5D2_STABLE_VERSION ?= stable-2.3.0
 export L5D2_EDGE_VERSION ?= edge-19.4.4
 export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.1
 

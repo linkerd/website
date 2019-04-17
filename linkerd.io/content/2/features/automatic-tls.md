@@ -1,72 +1,62 @@
 +++
-title = "Experimental: Automatic TLS"
+title = "Automatic TLS"
 description = "Linkerd can be configured to automatically negotiate Transport Layer Security (TLS) for application communication."
-weight = 11
+weight = 4
 +++
 
-Linkerd can be configured to automatically negotiate Transport Layer Security
-(TLS) for application communication.
+Linkerd by default automatically negotiates Transport Layer Security (TLS) for
+application communication.
 
-When TLS is enabled, Linkerd automatically establishes and authenticates
-secure, private connections between Linkerd proxies. This is done without
-breaking unencrypted communication with endpoints that are not configured
-with TLS-enabled Linkerd proxies.
-
-This feature is currently **experimental** and is designed to _fail open_ so
-that it cannot easily break existing applications. As the feature matures,
-this policy will change in favor of stronger security guarantees.
+Linkerd establishes and authenticates secure, private connections between
+Linkerd proxies. This is done without breaking unencrypted communication with
+endpoints that are not configured with TLS-enabled Linkerd proxies.
 
 ## Getting started with TLS
 
-The TLS feature is currently disabled by default. To enable it, you must
-install the control plane with the `--tls` flag set to `optional`. This
-configures the mesh so that TLS is enabled opportunistically:
+To enable TLS, simply install the Linkerd control plane:
 
 ```bash
-linkerd install --tls=optional | kubectl apply -f -
+linkerd install | kubectl apply -f -
 ```
 
-This causes a Certificate Authority (CA) container to be run in the
-control-plane. The CA watches for the creation and updates of Linkerd-enabled
-pods. For each Linkerd-enabled pod, it generates a private key, issues a
-certificate, and distributes the certificate and private key to each pod as a
-Kubernetes Secret.
+The Linkerd control plane includes a TLS Identity system. Proxies generate
+ephemeral private keys into a tmpfs directory and dynamically refresh
+certificates, authenticated by Kubernetes ServiceAccount tokens, via the
+Identity controller.
 
-Once you've configured the control plane to support TLS, you may enable TLS
-for each application when it is injected with the Linkerd proxy:
+Once you've deployed the Linkerd control plane, enabling TLS for each
+application happens automatically when you inject the Linkerd proxy:
 
 ```bash
-linkerd inject  --tls=optional app.yml | kubectl apply -f -
+linkerd inject app.yml | kubectl apply -f -
 ```
 
-Then, tools like `linkerd dashboard`, `linkerd stat`, and `linkerd tap` will
-indicate the TLS status of traffic:
+Then, tools like `linkerd tap` and Grafana will indicate the TLS status of
+traffic:
 
 ```bash
-linkerd stat authority -n emojivoto
+linkerd tap deploy -n emojivoto
 ```
 
 As an example, the output might be:
 
 ```bash
-NAME                        MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99    TLS
-emoji-svc.emojivoto:8080         -   100.00%   0.6rps           1ms           1ms           1ms   100%
-emoji-svc.emojivoto:8888         -   100.00%   0.8rps           1ms           1ms           9ms   100%
-voting-svc.emojivoto:8080        -    45.45%   0.6rps           4ms          10ms          18ms   100%
-web-svc.emojivoto:80             -     0.00%   0.6rps           8ms          33ms          39ms   100%
+req id=0:1 proxy=out src=10.1.17.29:33500 dst=10.1.17.28:80 tls=true :method=GET :authority=web-svc.emojivoto:80 :path=/api/list
+req id=0:1 proxy=in  src=10.1.17.29:45960 dst=10.1.17.28:80 tls=true :method=GET :authority=web-svc.emojivoto:80 :path=/api/list
+req id=0:2 proxy=out src=10.1.17.28:59272 dst=10.1.17.27:8080 tls=true :method=POST :authority=emoji-svc.emojivoto:8080 :path=/emojivoto.v1.EmojiService/ListAll
+req id=0:1 proxy=in  src=10.1.17.28:59344 dst=10.1.17.27:8080 tls=true :method=POST :authority=emoji-svc.emojivoto:8080 :path=/emojivoto.v1.EmojiService/ListAll
 ```
 
 ## Known issues
 
-As this feature is _experimental_, we know that there's still a lot of [work
-to do][tls-issues]. We **LOVE** bug reports though, so please don't hesitate
-to [file an issue][new-issue] if you run into any problems while testing
-automatic TLS.
+As this feature is recently enabled by default, we'd **LOVE** your feedback, so
+please don't hesitate to [file an issue][new-issue] if you run into any problems
+using automatic TLS.
 
 ### Setting `externalTrafficPolicy` on an External Load Balancer
 
 Given a Kubernetes Service of type `LoadBalancer`, if pods referenced by that
-Service are injected with `--tls optional`, requests will experience a 2-3
+Service are injected with a Linkerd proxy, requests will experience a 2-3
 second delay between Client Hello and Server Hello. This is due to the way a
 `LoadBalancer` obscures the client source IP via the default
 `externalTrafficPolicy: Cluster`. You may workaround this by setting

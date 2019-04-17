@@ -1,7 +1,7 @@
 +++
 title = "Telemetry and Monitoring"
 description = "Linkerd automatically collects metrics from all services that send traffic through it."
-weight = 7
+weight = 8
 aliases = [
   "/2/observability/"
 ]
