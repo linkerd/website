@@ -42,10 +42,10 @@ traffic that is incoming to *and* outgoing from `web`. This is interesting:
 {{< fig src="/images/debugging/web-top.png" title="Top" >}}
 
 There are two calls that are not at 100%: the first is vote-bot's call to the
-`/api/vote` endpoint. The second is the `VotePoop` call from the web deployment to
-its dependent deployment, `voting`. Very interesting! Since `/api/vote` is an
-incoming call, and `VotePoop` is an outgoing call, this is a good clue that this
-endpoint is what's causing the problem!
+`/api/vote` endpoint. The second is the `VoteDonut` call from the web
+deployment to its dependent deployment, `voting`. Very interesting! Since
+`/api/vote` is an incoming call, and `VoteDonut` is an outgoing call, this is a
+good clue that this endpoint is what's causing the problem!
 
 Finally, to dig a little deeper, we can click on the `tap` icon in the far right
 column. This will take us to the live list of requests that match only this
