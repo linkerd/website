@@ -179,7 +179,7 @@ Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto a
 in all its glory.
 
 Clicking around, you might notice that some parts of the application are
-broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
+broken! For example, if you click on the donut emoji, you'll get a 404 page. Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
 problem. Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)
