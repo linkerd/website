@@ -90,7 +90,7 @@ The proxy's features include:
 
 - Automatic layer-4 load balancing for non-HTTP traffic.
 
-- Automatic TLS (experimental).
+- Automatic TLS.
 
 - An on-demand diagnostic tap API.
 
