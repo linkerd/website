@@ -233,3 +233,86 @@ You can then use this IP with curl:
 ```bash
 curl -H "Host: example.com" http://external-ip
 ```
+
+## Gloo
+
+This uses `emojivoto` as an example, take a look at
+[getting started](/2/getting-started/) for a refresher on how to install it.
+
+If you installed Gloo using the Gateway method (`gloo install gateway`), then you'll need a 
+VirtualService to be able to route traffic to your **Books** application.
+
+As explained in the beggining of this document, you'll need to instruct Gloo to add a header
+which will allow Linkerd to identify where to send traffic to.
+
+```yaml
+apiVersion: gateway.solo.io/v1
+kind: VirtualService
+metadata:
+  creationTimestamp: "2019-04-18T13:39:49Z"
+  generation: 7
+  name: books
+  namespace: gloo-system
+  resourceVersion: "8418"
+  selfLink: /apis/gateway.solo.io/v1/namespaces/gloo-system/virtualservices/books
+  uid: 6fb092ae-61df-11e9-a158-080027b5157f
+spec:
+  virtualHost:
+    domains:
+    - '*'
+    name: gloo-system.books
+    routes:
+    - matcher:
+        prefix: /
+      routeAction:
+        single:
+          upstream:
+            name: booksapp-webapp-7000
+            namespace: gloo-system
+      routePlugins:
+        transformations:
+          requestTransformation:
+            transformationTemplate:
+              headers:
+                l5d-dst-override:
+                  text: webapp.booksapp.svc.cluster.local:7000
+                passthrough: {}
+
+```
+
+The important annotation here is:
+
+```yaml
+      routePlugins:
+        transformations:
+          requestTransformation:
+            transformationTemplate:
+              headers:
+                l5d-dst-override:
+                  text: webapp.booksapp.svc.cluster.local:7000
+                passthrough: {}
+```
+
+Using the content transformation engine built-in in Gloo, you can instruct it to add 
+the needed `l5d-dst-override` hedaer which in the example above is pointing to
+the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
+
+To easily test this you can get the URL of the Gloo proxy by running:
+
+```bash
+glooctl proxy URL
+```
+
+Which will return something similar to:
+```bash
+$ glooctl proxy url
+http://192.168.99.132:30969
+```
+
+For the example VirtuaService above, which listens to any domain and path, accessing the proxy URL 
+(http://192.168.99.132:30969) in your browser should open the Books application.
+
+Gloo has native integration with Linkerd planned in its roadmap so that the required 
+Linkerd headers for this scenario can be automatically added in the VirtualService.
+This will allow for a transparent integration between Gloo and Linkerd without requiring
+per VirtualService configuration.
