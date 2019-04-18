@@ -294,7 +294,7 @@ The important annotation here is:
 ```
 
 Using the content transformation engine built-in in Gloo, you can instruct it to add 
-the needed `l5d-dst-override` hedaer which in the example above is pointing to
+the needed `l5d-dst-override` header which in the example above is pointing to
 the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
 
 To easily test this you can get the URL of the Gloo proxy by running:
