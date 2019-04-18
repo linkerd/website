@@ -421,7 +421,7 @@ vary depending on the characteristics of your cluster. To edit the `books`
 service profile, run:
 
 ```bash
-kubectl -n booksapp edit sp/authors.default.svc.cluster.local
+kubectl -n booksapp edit sp/authors.booksapp.svc.cluster.local
 ```
 
 Update the route that we modified in the previous section to have a timeout:
