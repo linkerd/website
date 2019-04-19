@@ -236,8 +236,8 @@ curl -H "Host: example.com" http://external-ip
 
 ## Gloo
 
-This uses `emojivoto` as an example, take a look at
-[getting started](/2/getting-started/) for a refresher on how to install it.
+This uses `books` as an example, take a look at
+[Demo: Books](/2/tasks/books) for instructions on how to run it.
 
 If you installed Gloo using the Gateway method (`gloo install gateway`), then you'll need a 
 VirtualService to be able to route traffic to your **Books** application.
@@ -309,7 +309,7 @@ $ glooctl proxy url
 http://192.168.99.132:30969
 ```
 
-For the example VirtuaService above, which listens to any domain and path, accessing the proxy URL 
+For the example VirtualService above, which listens to any domain and path, accessing the proxy URL 
 (http://192.168.99.132:30969) in your browser should open the Books application.
 
 Gloo has native integration with Linkerd planned in its roadmap so that the required 
