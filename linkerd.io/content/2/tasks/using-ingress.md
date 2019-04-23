@@ -239,11 +239,12 @@ curl -H "Host: example.com" http://external-ip
 This uses `books` as an example, take a look at
 [Demo: Books](/2/tasks/books) for instructions on how to run it.
 
-If you installed Gloo using the Gateway method (`gloo install gateway`), then you'll need a 
-VirtualService to be able to route traffic to your **Books** application.
+If you installed Gloo using the Gateway method (`gloo install gateway`), then
+you'll need a VirtualService to be able to route traffic to your **Books**
+application.
 
-As explained in the beggining of this document, you'll need to instruct Gloo to add a header
-which will allow Linkerd to identify where to send traffic to.
+As explained in the beggining of this document, you'll need to instruct Gloo to
+add a header which will allow Linkerd to identify where to send traffic to.
 
 ```yaml
 apiVersion: gateway.solo.io/v1
@@ -293,9 +294,9 @@ The important annotation here is:
                 passthrough: {}
 ```
 
-Using the content transformation engine built-in in Gloo, you can instruct it to add 
-the needed `l5d-dst-override` header which in the example above is pointing to
-the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
+Using the content transformation engine built-in in Gloo, you can instruct it to
+add the needed `l5d-dst-override` header which in the example above is pointing
+to the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
 
 To easily test this you can get the URL of the Gloo proxy by running:
 
@@ -304,15 +305,18 @@ glooctl proxy URL
 ```
 
 Which will return something similar to:
+
 ```bash
 $ glooctl proxy url
 http://192.168.99.132:30969
 ```
 
-For the example VirtualService above, which listens to any domain and path, accessing the proxy URL 
-(http://192.168.99.132:30969) in your browser should open the Books application.
+For the example VirtualService above, which listens to any domain and path,
+accessing the proxy URL
+[http://192.168.99.132:30969](http://192.168.99.132:30969) in your browser
+should open the Books application.
 
-Gloo has native integration with Linkerd planned in its roadmap so that the required 
-Linkerd headers for this scenario can be automatically added in the VirtualService.
-This will allow for a transparent integration between Gloo and Linkerd without requiring
-per VirtualService configuration.
+Gloo has native integration with Linkerd planned in its roadmap so that the
+required Linkerd headers for this scenario can be automatically added in the
+VirtualService. This will allow for a transparent integration between Gloo and
+Linkerd without requiring per VirtualService configuration.
