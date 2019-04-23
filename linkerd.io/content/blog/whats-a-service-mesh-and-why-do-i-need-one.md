@@ -30,7 +30,7 @@ cloud native application, you need a service mesh.
 Over the past year, the service mesh has emerged as a critical component of the
 cloud native stack. High-traffic companies like [Paypal, Ticketmaster, and
 Credit Karma have all added a service mesh to their production
-applications](/2017/04/25/announcing-linkerd-1.0/), and
+applications]({{< ref "announcing-linkerd-1-0" >}}), and
 this January, [Linkerd](http://linkerd.io), the open source service mesh for
 cloud native applications, [became an official project of the Cloud Native
 Computing

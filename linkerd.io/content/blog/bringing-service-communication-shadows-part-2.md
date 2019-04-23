@@ -121,7 +121,7 @@ service mesh architecture?
 Envoy is a data plane and it supports [using
 Grafana](https://medium.com/@mattklein123/lyfts-envoy-dashboards-5c91738816b1).
 Istio is a control plane and it supports [using
-Grafana](https://istio.io/docs/tasks/telemetry/using-istio-dashboard.html). And
+Grafana](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/). And
 Linkerd, which is both a data plane and a control plane, also supports [using
 Grafana](https://github.com/linkerd/linkerd-viz). Are dashboards part of the
 data plane or the control plane?
