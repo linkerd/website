@@ -240,4 +240,4 @@ Bergius](https://twitter.com/joonas) for contributing the Kubernetes 1.4
 configuration.
 
 [part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
-[small-memory]: /2016/06/17/squeezing-blood-from-a-stone-small-memory-jvm-techniques-for-microservice-sidecars/
+[small-memory]: {{< ref "small-memory-jvm-techniques-for-microservice-sidecars" >}}

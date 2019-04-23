@@ -237,7 +237,7 @@ curl -H "Host: example.com" http://external-ip
 ## Gloo
 
 This uses `books` as an example, take a look at
-[Demo: Books](/2/tasks/books) for instructions on how to run it.
+[Demo: Books](/2/tasks/books/) for instructions on how to run it.
 
 If you installed Gloo using the Gateway method (`gloo install gateway`), then
 you'll need a VirtualService to be able to route traffic to your **Books**
