@@ -6,6 +6,9 @@ thumbnail: kubernetes2_featured_Twitter_ratio.png
 date: Fri, 14 Oct 2016 22:55:04 +0000
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
+aliases: [
+  "/2016/06/17/squeezing-blood-from-a-stone-small-memory-jvm-techniques-for-microservice-sidecars/"
+]
 ---
 
 In our recent post about linkerd on Kubernetes, [A Service Mesh for Kubernetes,

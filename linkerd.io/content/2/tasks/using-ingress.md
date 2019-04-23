@@ -312,8 +312,7 @@ http://192.168.99.132:30969
 ```
 
 For the example VirtualService above, which listens to any domain and path,
-accessing the proxy URL
-[http://192.168.99.132:30969](http://192.168.99.132:30969) in your browser
+accessing the proxy URL (`http://192.168.99.132:30969`) in your browser
 should open the Books application.
 
 Gloo has native integration with Linkerd planned in its roadmap so that the
