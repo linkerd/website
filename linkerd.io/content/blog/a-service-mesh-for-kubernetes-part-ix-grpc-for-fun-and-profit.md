@@ -9,7 +9,7 @@ tags: [Linkerd, linkerd, News, tutorials]
 ---
 
 As of Linkerd 0.8.5, released earlier this year, [Linkerd supports gRPC and
-HTTP/2](/2017/01/11/http/2-grpc-and-linkerd/)! These powerful protocols can provide
+HTTP/2]({{< ref "http2-grpc-and-linkerd" >}})! These powerful protocols can provide
 significant benefits to applications that make use of them. In this post, we’ll
 demonstrate how to use Linkerd with gRPC, allowing applications that speak gRPC
 to take full advantage of Linkerd’s load balancing, service discovery, circuit
@@ -242,7 +242,7 @@ like multiplexed streaming, back pressure, and cancelation, which Linkerd can
 take full advantage of. Because gRPC includes routing information in the
 request, it’s a natural fit for Linkerd, and makes it very easy to set up
 Linkerd to route gRPC requests. For more on Linkerd’s roadmap around gRPC,
-see [Oliver’s blog post on the topic](/2017/01/11/http/2-grpc-and-linkerd/).
+see [Oliver’s blog post on the topic]({{< ref "http2-grpc-and-linkerd" >}}).
 
 Finally, for a more advanced example of configuring gRPC services, take a look
 at our [Gob microservice
