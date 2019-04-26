@@ -13,7 +13,7 @@ On behalf of the Linkerd maintainers, I’m happy to announce that Linkerd 2.0 i
 now in general availability (GA). This means that we’ve cut an official 2.0
 stable release, and we think it’s ready for you to try in production. It’s
 already seeing the light of day at companies like
-[WePay](https://go.wepay.com/), [Hush](https://www.shophush.com/),
+[WePay](https://go.wepay.com/), Hush,
 [Studyo](https://studyo.co/), and [JustFootball](https://justfootball.io/).
 
 You can try Linkerd 2.0 on a Kubernetes 1.9+ cluster in 60 seconds by running:
