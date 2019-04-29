@@ -48,6 +48,41 @@ linkerd upgrade | kubectl apply -f -
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
 
+#### Upgrading via manifests
+
+`edge-19.4.5` introduced a new `--from-manifests` flag to `linkerd upgrade`
+allowing manually feeding a previously saved output of `linkerd install` into
+the command, instead of requiring a connection to the cluster to fetch the
+config:
+
+```bash
+# save Linkerd installation manifest
+linkerd install > linkerd-install.yaml
+
+# deploy Linkerd
+cat linkerd-install.yaml | kubectl apply -f -
+
+# upgrade Linkerd via manifests
+cat linkerd-install.yaml | linkerd upgrade --from-manifests -
+```
+
+Alternatively, if you have already installed Linkerd without saving a manifest,
+you may save the relevant Linkerd resources from your existing installation for
+use in upgrading later.
+
+```bash
+kubectl -n linkerd get \
+  secret/linkerd-identity-issuer \
+  configmap/linkerd-config \
+  -oyaml > linkerd-manifests.yaml
+
+cat linkerd-manifests.yaml | linkerd upgrade --from-manifests -
+```
+
+Note that `secret/linkerd-identity-issuer` contains the trust root of Linkerd's
+Identity system, in the form of a private key. Care should be taken if storing
+this information on disk, such as encrypting it in-place.
+
 ### Upgrading from edge-19.2.x or edge-19.3.x
 
 ```bash
