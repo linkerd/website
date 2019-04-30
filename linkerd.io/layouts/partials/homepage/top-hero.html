@@ -1,7 +1,7 @@
-<div class="wrapper body-header has-background-white">
+<div class="wrapper body-header has-background-bright-blue has-text-white">
   <div class="columns center-column is-marginless is-fullwidth">
-    <div class="column has-background-light-green">
-      <div class="container columns is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
+    <div class="column">
+      <div class="container columns homepage-top-hero is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
         <div class="column center">
           <figure class="image">
             <img
@@ -12,7 +12,7 @@
         <div class="column center">
           <div class="notification">
             <h1 class="title is-size-1">{{.title}}</h1>
-            <h3 class="title is-size-3">{{.description | markdownify}}</h3>
+            <h5 class="title is-size-5">{{.description | markdownify}}</h5>
             {{ range.buttons }}
             <a
               href="{{.url}}"

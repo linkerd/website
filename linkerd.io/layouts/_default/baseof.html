@@ -17,7 +17,7 @@
 
   {{ partial "header.html" . }}
   {{ if eq .URL `/` }}
-  <div class="homepage-notification has-background-bright-blue has-text-white center has-text-centered">
+  <div class="homepage-notification has-background-light-blue has-text-navy-black center has-text-centered">
       <p>{{ .Site.Home.Params.announcement_banner.description | markdownify }}</p>
   </div>
   {{ end }}

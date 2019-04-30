@@ -58,20 +58,34 @@ features_list:
   buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title: Companies that love Linkerd
+companies_title:
 companies:
-- image: "/uploads/logos/expedia.svg"
+- image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
-- image: "/uploads/logos/salesforce.svg"
-  link: https://www.salesforce.com/
-- image: "/uploads/logos/nextvr.svg"
-  link: https://nextvr.com/
-- image: "/uploads/logos/offerup.svg"
+- image: "/uploads/logos/blue/offerup.svg"
   link: https://offerup.com/
-- image: "/uploads/logos/paypal.svg"
-  link: https://www.paypal.com/
+- image: "/uploads/logos/blue/webex.svg"
+  link: https://www.webex.com/
+- image: "/uploads/logos/blue/ask.svg"
+  link: https://ask.com/
+- image: "/uploads/logos/blue/bigcommerce.svg"
+  link: https://www.bigcommerce.com/
+- image: "/uploads/logos/blue/chase.svg"
+  link: https://www.chase.com/
+- image: "/uploads/logos/blue/comcast.svg"
+  link: https://www.xfinity.com/
+- image: "/uploads/logos/blue/ebay.svg"
+  link: https://www.ebay.com/
+- image: "/uploads/logos/blue/godaddy.svg"
+  link: https://godaddy.com/
+- image: "/uploads/logos/blue/kairos.png"
+  link: https://www.kairos.com/
+- image: "/uploads/logos/blue/planet.svg"
+  link: https://www.planet.com/
+- image: "/uploads/logos/blue/strava.svg"
+  link: https://www.strava.com/
 foundation_member_banner:
-  title: Linkerd is a Cloud Native Computing Foundation member project
+  title: Linkerd is a CNCF member project
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---

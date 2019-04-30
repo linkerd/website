@@ -19,7 +19,7 @@ blog = "/:year/:month/:day/:slug/"
   l5d2_release_version = "L5D2_STABLE_VERSION"
   l5d2_edge_version = "L5D2_EDGE_VERSION"
 
-  logo = "/images/identity/svg/linkerd_primary_color_black.svg"
+  logo = "/images/identity/svg/linkerd_primary_color_white.svg"
   images = [""]
 
 [blackfriday]

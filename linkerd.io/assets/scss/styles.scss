@@ -1,13 +1,6 @@
 @import 'bulma';
 @import 'styles-base';
 
-
-.homepage-notification{
-  a {
-    color: $light-green;
-  }
-}
-
 .navbar-item-helper {
   svg {
     margin-right: 5px;
@@ -16,7 +9,7 @@
   .button-spacer {
     padding: 19px 21px;
     height: 56px;
-    border: 1px solid $deep-blue;
+    border: 1px solid $white;
     border-radius: 8px;
 
     .navbar-item:hover & {
@@ -69,4 +62,28 @@
 
 .foundation-member {
   padding: 40px 0 40px;
+}
+
+.homepage-top-hero {
+  background: url('/images/pattern_home_hero.svg');
+  background-repeat:no-repeat;
+  background-position: left center;
+}
+
+.hero-body .wrapper.image-list {
+  a img {
+    -webkit-filter: none;
+    -moz-filter: none;
+    -o-filter: none;
+    -ms-filter: none;
+    filter: none;
+    opacity: 0.4;
+  }
+  a:hover img {
+    opacity: 1;
+  }
+}
+
+.stats-list-item {
+  padding: 50px 0;
 }
