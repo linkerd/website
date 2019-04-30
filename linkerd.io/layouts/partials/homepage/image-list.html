@@ -7,7 +7,7 @@
       {{ range .mentions}}
       <div class="column is-half-mobile is-2">
         <a href="{{.link}}" target="_blank">
-          <figure class="image is-1by1">
+          <figure class="image">
             <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .link }}" />
           </figure>
         </a>
