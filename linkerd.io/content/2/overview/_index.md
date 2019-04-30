@@ -29,7 +29,7 @@ one?](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-
 
 Linkerd is fully open source, licensed under [Apache
 v2](https://github.com/linkerd/linkerd2/blob/master/LICENSE), and is a [Cloud
-Native Computing Foundation](https://cncf.io) member project. Linkerd is
+Native Computing Foundation](https://cncf.io) incubating project. Linkerd is
 developed in the open in the [Linkerd GitHub repo](https://github.com/linkerd).
 
 Linkerd has three basic components: a UI, a *data plane*, and a *control
