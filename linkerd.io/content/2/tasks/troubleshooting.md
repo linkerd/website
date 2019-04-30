@@ -206,15 +206,34 @@ For more information on upgrading Kubernetes, see the page in the Kubernetes
 Documentation on
 [Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
 
-## The "linkerd-existence" checks {#l5d-existence}
+## The "linkerd-config" checks {#l5d-config}
 
-### √ control plane namespace exists {#l5d-existence-ns}
+This category of checks validates that Linkerd's cluster-wide RBAC and related
+resources have been installed. These checks run via a default `linkerd check`,
+and also in the context of a multi-stage setup, for example:
+
+```bash
+# install cluster-wide resources (first stage)
+linkerd install config | kubectl apply -f -
+
+# validate successful cluster-wide resources installation
+linkerd check config
+
+# install Linkerd control plane
+linkerd install control-plane | kubectl apply -f -
+
+# validate successful control-plane installation
+linkerd check
+```
+
+### √ control plane Namespace exists {#l5d-existence-ns}
 
 Example failure:
 
 ```bash
-× control plane namespace exists
-    The "linkerd" namespace does not exist
+× control plane Namespace exists
+    The "foo" namespace does not exist
+    see https://linkerd.io/checks/#l5d-existence-ns for hints
 ```
 
 Ensure the Linkerd control plane namespace exists:
@@ -229,6 +248,122 @@ a different namespace, specify that in your check command:
 ```bash
 linkerd check --linkerd-namespace linkerdtest
 ```
+
+### √ control plane ClusterRoles exist {#l5d-existence-cr}
+
+Example failure:
+
+```bash
+× control plane ClusterRoles exist
+    missing ClusterRoles: linkerd-linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-cr for hints
+```
+
+Ensure the Linkerd ClusterRoles exist:
+
+```bash
+$ kubectl get clusterroles | grep linkerd
+linkerd-linkerd-controller                                             9d
+linkerd-linkerd-identity                                               9d
+linkerd-linkerd-prometheus                                             9d
+linkerd-linkerd-proxy-injector                                         20d
+linkerd-linkerd-sp-validator                                           9d
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create clusterroles
+yes
+```
+
+### √ control plane ClusterRoleBindings exist {#l5d-existence-crb}
+
+Example failure:
+
+```bash
+× control plane ClusterRoleBindings exist
+    missing ClusterRoleBindings: linkerd-linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-crb for hints
+```
+
+Ensure the Linkerd ClusterRoleBindings exist:
+
+```bash
+$ kubectl get clusterrolebindings | grep linkerd
+linkerd-linkerd-controller                             9d
+linkerd-linkerd-identity                               9d
+linkerd-linkerd-prometheus                             9d
+linkerd-linkerd-proxy-injector                         20d
+linkerd-linkerd-sp-validator                           9d
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create clusterrolebindings
+yes
+```
+
+### √ control plane ServiceAccounts exist {#l5d-existence-sa}
+
+Example failure:
+
+```bash
+× control plane ServiceAccounts exist
+    missing ServiceAccounts: linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-sa for hints
+```
+
+Ensure the Linkerd ServiceAccounts exist:
+
+```bash
+$ kubectl -n linkerd get serviceaccounts
+NAME                     SECRETS   AGE
+default                  1         23m
+linkerd-controller       1         23m
+linkerd-grafana          1         23m
+linkerd-identity         1         23m
+linkerd-prometheus       1         23m
+linkerd-proxy-injector   1         7m
+linkerd-sp-validator     1         23m
+linkerd-web              1         23m
+```
+
+Also ensure you have permission to create ServiceAccounts in the Linkerd
+namespace:
+
+```bash
+$ kubectl -n linkerd auth can-i create serviceaccounts
+yes
+```
+
+### √ control plane CustomResourceDefinitions exist {#l5d-existence-crd}
+
+Example failure:
+
+```bash
+× control plane CustomResourceDefinitions exist
+    missing CustomResourceDefinitions: serviceprofiles.linkerd.io
+    see https://linkerd.io/checks/#l5d-existence-crd for hints
+```
+
+Ensure the Linkerd CRD exists:
+
+```bash
+$ kubectl get customresourcedefinitions
+NAME                         CREATED AT
+serviceprofiles.linkerd.io   2019-04-25T21:47:31Z
+```
+
+Also ensure you have permission to create CRDs:
+
+```bash
+$ kubectl auth can-i create customresourcedefinitions
+yes
+```
+
+## The "linkerd-existence" checks {#l5d-existence}
 
 ### √ controller pod is running {#l5d-existence-controller}
 
