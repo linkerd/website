@@ -273,7 +273,7 @@ linkerd-linkerd-sp-validator                                           9d
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterrolebindings
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
