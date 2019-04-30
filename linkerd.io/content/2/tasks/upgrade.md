@@ -79,9 +79,12 @@ kubectl -n linkerd get \
 cat linkerd-manifests.yaml | linkerd upgrade --from-manifests -
 ```
 
-Note that `secret/linkerd-identity-issuer` contains the trust root of Linkerd's
-Identity system, in the form of a private key. Care should be taken if storing
-this information on disk, such as encrypting it in-place.
+{{< note >}}
+`secret/linkerd-identity-issuer` contains the trust root of Linkerd's Identity
+system, in the form of a private key. Care should be taken if storing this
+information on disk, such as using tools like
+[git-secret](https://git-secret.io/).
+{{< /note >}}
 
 ### Upgrading from edge-19.2.x or edge-19.3.x
 
