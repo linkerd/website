@@ -6,9 +6,12 @@ aliases = [
 +++
 
 The `inject` command modifies Kubernetes manifests that are passed to it either
-as a file or as a stream (`-`). It adds two containers to the pod spec of
-the manifest. Any resource types that do not need modification or are not
-supported, such as a `Service`, are skipped over. The two containers added are:
+as a file or as a stream (`-`). Any resource types that do not need
+modification or are not supported, such as a `Service`, are skipped over.
+It adds the annotation `linkerd.io/inject: enabled` into the pod template
+metadata which signals the proxy injector, when the pod is created in the
+cluster, to add two containers to the pod spec of the manifest.
+The two containers added are:
 
 1. An `initContainer`, `linkerd-init`, is responsible for configuring
    `iptables`. This activates forwarding incoming and outgoing traffic through
@@ -46,7 +49,34 @@ Now, we can run the `inject` command as follows:
 linkerd inject deployment.yaml
 ```
 
-The output should be that file should look like the following:
+The output should look like the following:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+```
+
+Then when the pod is created in the cluster, the proxy injector modifies the
+spec as follows:
 
 ```yaml
 apiVersion: apps/v1
@@ -63,8 +93,9 @@ spec:
   template:
     metadata:
       annotations:
-        linkerd.io/created-by: linkerd/cli edge-19.2.2
-        linkerd.io/proxy-version: edge-19.2.2
+        linkerd.io/created-by: linkerd/proxy-injector  edge-19.4.5
+        linkerd.io/inject: enabled
+        linkerd.io/proxy-version: edge-19.4.5
       creationTimestamp: null
       labels:
         app: nginx
@@ -102,7 +133,7 @@ spec:
           value: 10000ms
         - name: LINKERD2_PROXY_ID
           value: nginx.deployment.$LINKERD2_PROXY_POD_NAMESPACE.linkerd-managed.linkerd.svc.cluster.local
-        image: gcr.io/linkerd-io/proxy:edge-19.2.2
+        image: gcr.io/linkerd-io/proxy:edge-19.4.5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -134,7 +165,7 @@ spec:
         - "2102"
         - --inbound-ports-to-ignore
         - 4190,4191
-        image: gcr.io/linkerd-io/proxy-init:edge-19.2.2
+        image: gcr.io/linkerd-io/proxy-init:edge-19.4.5
         imagePullPolicy: IfNotPresent
         name: linkerd-init
         resources: {}
@@ -149,6 +180,9 @@ spec:
 status: {}
 ---
 ```
+
+Note that for advanced use cases, you can have this output be produced directly
+by `linkerd inject` with the flag `--manual`.
 
 {{< cli/examples "inject" >}}
 

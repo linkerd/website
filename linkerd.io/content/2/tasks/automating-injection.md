@@ -5,7 +5,9 @@ description = "Automate injection of the Linkerd containers for your service."
 
 [Automatic proxy injection](/2/features/proxy-injection/) is implemented with an
 [admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks).
-There are a couple things to note about this feature:
+There are a few things to note about this feature:
+
+- As of versions stable-2.4.0 and edge-19.4.5 this feature is enabled by default.
 
 - Adding the annotation on a namespace will not automatically update all the
   resources. You will need to update the resources in this namespace (e.g.,
@@ -19,15 +21,17 @@ There are a couple things to note about this feature:
   version requires that you explicitly annotate your namespaces or pods as
   described below to enable auto-injection.
 
-## Installation
-
-To make use of automatic injection, your cluster requires the
+- To make use of automatic injection, your cluster requires the
 `admissionregistration.k8s.io/v1beta1`. To verify, run:
 
 ```bash
 $ kubectl api-versions | grep admissionregistration
 admissionregistration.k8s.io/v1beta1
 ```
+
+## Installation
+
+(This only applies to versions prior stable-2.4.0 and edge-19.4.5)
 
 Automatic proxy injection is disabled by default when installing the Linkerd
 control plane. To enable it, set the `--proxy-auto-inject` flag, as follows:
@@ -101,8 +105,11 @@ helloworld linkerd-proxy
 
 It's also possible to explicitly configure auto-injection for all pods in a
 deployment, even if that deployment is running in a namespace that has not been
-configured for auto-inject. To do this, add the `linkerd.io/inject: enabled`
-annotation to the deployment's pod spec. For example, create a new deployment in
+configured for auto-inject, by adding the `linkerd.io/inject: enabled`
+annotation to the deployment's pod spec. This can be done by manually editing
+the spec, or by piping the resources into the `linkerd inject` CLI command.
+
+For example, create a new deployment in
 the `default` namespace, as follows:
 
 ```yaml

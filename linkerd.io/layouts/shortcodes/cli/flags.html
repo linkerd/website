@@ -2,6 +2,12 @@
 {{ $opts := where .Options "Name" "!=" "help" }}
 {{ if ge (len $opts) 1 }}
 <h1>Flags</h1>
+{{ if eq .Name "inject" }}
+  Note that the flags that relate to proxy configuration are converted into
+  <a href="{{ "/2/reference/proxy-configuration/" | relURL}}">config override annotations</a>
+  that are added into the workload's metadata for the proxy injector to act on.
+  <br /><br />
+{{ end }}
 {{ partial "cli/flags" $opts }}
 {{ end }}
 {{ end }}

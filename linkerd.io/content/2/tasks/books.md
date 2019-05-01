@@ -92,8 +92,9 @@ kubectl get -n booksapp deploy -o yaml \
 
 This command retrieves the manifest of all deployments in the `booksapp`
 namespace, runs the manifest through `linkerd inject`, and then re-applies with
-`kubectl apply`. The `inject` command adds two containers to each deployment's
-pod spec:
+`kubectl apply`. The `inject` command adds an annotation that signals the proxy
+injector to add two containers to each deployment's pod spec, when the pod
+gets created:
 
 - An `initContainer` that sets up `iptables` to forward all incoming and
   outgoing traffic through Linkerd's proxy.

@@ -30,7 +30,7 @@ control data to the data plane proxies, etc. Together, they drive the behavior
 of the data plane. The CLI can be used to
 [install the control plane](/2/getting-started/).
 
-The control plane is made up of four components:
+The control plane is made up of five components:
 
 - Controller - The controller deployment consists of multiple containers
   (public-api, proxy-api, destination, tap) that provide the bulk of the control
@@ -49,6 +49,10 @@ The control plane is made up of four components:
   component is used to render and display these dashboards. You can reach these
   dashboards via links in the Linkerd dashboard itself.
 
+- Proxy injector - Whenever a pod is created into the cluster, this component
+  injects a proxy sidecar into it if the proxy spec has a
+  `linkerd.io/inject: enabled` annotation (or if the namespace has it).
+
 ## Data Plane
 
 The Linkerd data plane is comprised of lightweight proxies, which are deployed
@@ -58,7 +62,7 @@ redeployed to include a data plane proxy in each pod. (The `linkerd inject`
 command accomplishes this, as well as the configuration work necessary to
 transparently funnel traffic from each instance through the proxy.) You can
 [add your service](/2/tasks/adding-your-service/) to the data plane with a
-single CLI command.
+single CLI command, or have the proxy injector do it for you.
 
 These proxies transparently intercept communication to and from each pod, and
 add features such as instrumentation and encryption (TLS), as well as allowing

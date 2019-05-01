@@ -187,8 +187,10 @@ kubectl get -n emojivoto deploy -o yaml \
 This command retrieves all of the deployments running in the `emojivoto`
 namespace, runs the set of Kubernetes resources through `inject`, and finally
 reapplies it to the cluster. The `inject` command augments the resources to
-include the data plane's proxies. As with `install`, `inject` is a pure text
-operation, meaning that you can inspect the input and output before you use it.
+include an annotation that will signal the proxy-injector to include the data
+plane's proxies when the pods get created. As with `install`, `inject` is a
+pure text operation, meaning that you can inspect the input and output before
+you use it.
 You can even run it through `diff` to see exactly what is changing.
 
 Once piped into `kubectl apply`, Kubernetes will execute a rolling deploy and

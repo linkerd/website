@@ -27,5 +27,4 @@ spec:
 ```
 
 Note that configuration overrides on proxies injected using the `linkerd inject`
-command is planned for release 2.4. Follow this
-[GitHub issue](https://github.com/linkerd/linkerd2/issues/2590/) for progress.
+command is supported as of versions stable-2.4.0 and edge-19.4.5.
