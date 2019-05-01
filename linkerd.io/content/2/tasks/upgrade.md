@@ -261,27 +261,48 @@ that data persisted through an upgrade, take a look at the
 ### Upgrade the data plane
 
 With a fully up-to-date CLI running locally and Linkerd control plane running on
-your Kubernetes cluster, it is time to upgrade the data plane. This will change
-the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
-your service.
+your Kubernetes cluster, it is time to upgrade the data plane by changing the
+version of the `linkerd-proxy` sidecar container.
 
-For each of your meshed services, you can re-inject your applications in-place.
-Retrieve your YAML resources via `kubectl`, and pass them through
-`linkerd inject`. This will update the pod spec to have the latest version of
-the `linkerd-proxy` sidecar container. By using `kubectl apply`, Kubernetes will
-do a rolling deploy of your service and update the running pods to the latest
-version.
-
-Example command to upgrade an application in the `emojivoto` namespace, composed
-of deployments:
+If you have access to a `kubectl` version of at least 1.15, you can issue the
+following command to have your deployments restart their pods:
 
 ```bash
-kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
-  | linkerd inject - \
+kubectl -n <namespace> rollout restart deploy
+```
+
+The proxy injector will then replace the sidecar containers with the version set
+in the control plane when you upgraded it as described above. This upgrade is
+performed in a rolling fashion so no downtime occurs.
+
+If you don't have access to that `kubectl` version, you can make any change
+to your deployments to force the pods to be redeployed. The following example
+uses `jq` to add an environment value to trigger the redeployments:
+
+```bash
+kubectl -n <namespace> get deployments -l linkerd.io/control-plane-ns=linkerd -o json \
+  | jq 'del(
+    .items[].spec.template.spec.containers[0].env[]
+      | select(.name == "RESTART_")
+    )
+    | .items[].spec.template.spec.containers[0].env
+      += [{name: "RESTART_", value: now|tostring}]' \
   | kubectl apply -f -
 ```
 
-Check to make sure everything is healthy by running:
+As described in the CLI inject [reference](/2/reference/cli/inject/),
+you have the alternative to use `linkerd inject --manual` for the command to
+output the sidecar container YAML if you need to modify it, before sending it
+to the cluster. In those cases you can upgrade the sidecar containers just by
+injecting them again, which will output the sidecar containers YAML pointing
+the new image version:
+
+```bash
+kubectl -n <namespace> get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
+  | linkerd inject -
+```
+
+Finally check to make sure everything is healthy by running:
 
 ```bash
 linkerd check --proxy
