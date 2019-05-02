@@ -1,0 +1,14 @@
+---
+label: Community
+hide_body: true
+fields:
+- type: field_group
+  name: top_hero
+  label: Top Hero
+  fields:
+  - type: include
+    name: top_hero
+    label: Top Hero
+    template: hero
+pages:
+- linkerd.io/content/community.md
