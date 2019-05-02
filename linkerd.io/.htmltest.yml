@@ -5,4 +5,5 @@ IgnoreURLs:
   - https://ticketmaster.com
   - https://douban.com/
   - https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/
+  - https://sched.co/*
 DirectoryPath: public
