@@ -37,7 +37,9 @@ jobs:
       San Francisco, CA
     thumbnail: "/uploads/value-props/lego.svg"
     url: "#"
-  bottom_description: ''
-  buttons: []
+  bottom_description: Have a Linkerd related job to offer? Add your posting!
+  buttons:
+  - caption: Create Pull Request
+    url: "#"
 
 ---
