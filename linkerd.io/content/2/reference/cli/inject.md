@@ -181,8 +181,8 @@ status: {}
 ---
 ```
 
-Note that for advanced use cases, you can have this output be produced directly
-by `linkerd inject` with the flag `--manual`.
+Note that if you want to actually get the injected YAML in the output you can
+use `linkerd inject --manual`.
 
 {{< cli/examples "inject" >}}
 
