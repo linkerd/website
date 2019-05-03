@@ -26,5 +26,18 @@ talk_hero:
   image: ''
   image_on_the_right: false
   buttons: []
+jobs:
+  title: Jobs in the Community
+  description: Check out these Linkerd related jobs from companies who love Linkerd
+  jobs:
+  - title: Buoyant
+    description: |-
+      Software Engineer
+
+      San Francisco, CA
+    thumbnail: "/uploads/value-props/lego.svg"
+    url: "#"
+  bottom_description: ''
+  buttons: []
 
 ---
