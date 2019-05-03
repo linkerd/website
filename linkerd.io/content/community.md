@@ -1,10 +1,11 @@
 ---
-title: "Community"
-layout: "community"
-type: "community"
+title: Community
+layout: community
+type: community
 top_hero:
   title: Community-Powered, Battle-Tested
-  description: Linkerd is a community project! We'd love to have you join our active and friendly community of adopters and contributors.
+  description: Linkerd is a community project! We'd love to have you join our active
+    and friendly community of adopters and contributors.
   image: "/uploads/community_hero.png"
   buttons:
   - caption: I gave a talk!
@@ -12,4 +13,18 @@ top_hero:
   - caption: I use Linkerd!
     url: https://github.com/linkerd/linkerd2
   image_on_the_right: false
+link_lists:
+  links_list:
+  - title: Get Involved
+    links:
+    - caption: Report a Bug
+      url: "#"
+      icon_name: bug
+talk_hero:
+  title: ''
+  description: ''
+  image: ''
+  image_on_the_right: false
+  buttons: []
+
 ---
