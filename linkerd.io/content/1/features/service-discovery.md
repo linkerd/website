@@ -1,14 +1,13 @@
 +++
-title = "Service discovery"
+aliases = ["/features/service-discovery"]
 description = "Linkerd integrates with various service discovery backends, helping you to reduce the complexity of your code by removing ad-hoc service discovery implementations."
+title = "Service discovery"
 weight = 3
-aliases = [
-  "/features/service-discovery"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 15
 
++++
 A large part of the complexity inherent in running multi-service applications
 stems from service discovery. Unfortunately, as the complexity and scale of the
 application increases, service discovery becomes difficult to avoid. Linkerd is

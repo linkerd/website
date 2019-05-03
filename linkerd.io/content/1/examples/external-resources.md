@@ -1,16 +1,13 @@
 +++
-title = "External resources"
+aliases = ["/overview/external-resources", "/support/external-resources", "/examples/external-resources"]
 description = "Catalogues blogs and talks about Linkerd in practice, from both the perspective of an end user and the perspective of a developer."
+title = "External resources"
 weight = 2
-aliases = [
-  "/overview/external-resources",
-  "/support/external-resources",
-  "/examples/external-resources"
-]
 [menu.docs]
-  parent = "examples"
-+++
+parent = "examples"
+weight = 23
 
++++
 This page features blogs and talks people have given about Linkerd. Content
 produced by both Buoyant and Linkerd users is represented below.
 

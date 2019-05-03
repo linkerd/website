@@ -1,14 +1,13 @@
 +++
-title = "Dynamic request routing"
+aliases = ["/features/routing"]
 description = "Linkerd enables dynamic request routing and rerouting, allowing you to set up staging services, canaries, blue-green deploys, cross-DC failover, and dark traffic with a minimal amount of configuration."
+title = "Dynamic request routing"
 weight = 4
-aliases = [
-  "/features/routing"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 19
 
++++
 Dynamic request routing is one of Linkerd's more powerful and flexible features.
 When Linkerd receives a request, it must somehow determine where to route that
 request.  It does this by assigning a service name to the request and then

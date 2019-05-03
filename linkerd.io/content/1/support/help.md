@@ -1,17 +1,13 @@
 +++
-title = "Getting help"
+aliases = ["/doc/troubleshooting", "/help", "/overview/help", "/support/help"]
 description = "Provides resources that you can use if you run into any issues."
+title = "Getting help"
 weight = 4
-aliases = [
-  "/doc/troubleshooting",
-  "/help",
-  "/overview/help",
-  "/support/help"
-]
 [menu.docs]
-  parent = "support"
-+++
+parent = "support"
+weight = 3
 
++++
 We'd love to help you get Linkerd working for your use case, and we're very
 interested in your feedback!
 

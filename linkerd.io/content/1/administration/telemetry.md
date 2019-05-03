@@ -1,14 +1,13 @@
 +++
-title = "Telemetry"
+aliases = ["/administration/telemetry"]
 description = "Describes how to handle metrics exported by Linkerd."
+title = "Telemetry"
 weight = 3
-aliases = [
-  "/administration/telemetry"
-]
 [menu.docs]
-  parent = "administration"
-+++
+parent = "administration"
+weight = 38
 
++++
 Linkerd also publishes machine-readable versions of its metrics in multiple
 formats. These metrics are designed to be polled by external metrics-collection
 utilities and sent to backends such as [Prometheus](https://prometheus.io/),

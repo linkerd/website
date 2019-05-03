@@ -1,25 +1,13 @@
 +++
-title = "Routing"
+aliases = ["/doc/0.7.0/routing", "/doc/0.7.1/routing", "/doc/0.7.2/routing", "/doc/0.7.3/routing", "/doc/0.7.4/routing", "/doc/0.7.5/routing", "/doc/0.8.0/routing", "/doc/head/routing", "/doc/latest/routing", "/doc/routing", "/in-depth/routing", "/advanced/routing"]
 description = "Provides a comprehensive look at how Linkerd routes requests that it receives."
+title = "Routing"
 weight = 10
-aliases = [
-  "/doc/0.7.0/routing",
-  "/doc/0.7.1/routing",
-  "/doc/0.7.2/routing",
-  "/doc/0.7.3/routing",
-  "/doc/0.7.4/routing",
-  "/doc/0.7.5/routing",
-  "/doc/0.8.0/routing",
-  "/doc/head/routing",
-  "/doc/latest/routing",
-  "/doc/routing",
-  "/in-depth/routing",
-  "/advanced/routing"
-]
 [menu.docs]
-  parent = "advanced"
-+++
+parent = "advanced"
+weight = 28
 
++++
 At its core, Linkerd's main job is routing: accepting a request (HTTP, Thrift,
 Mux, or other protocol) and sending that request to the correct destination.
 This guide will explain exactly how Linkerd determines where requests should be

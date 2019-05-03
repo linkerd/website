@@ -1,16 +1,14 @@
 +++
-title = "Overview"
+aliases = ["/examples"]
 description = "Example applications and tutorials on Linkerd."
+title = "Overview"
 weight = 1
-aliases = [
-  "/examples"
-]
 [menu.docs]
-  name = "Examples"
-  identifier = "examples"
-  weight = 5
-+++
+identifier = "examples"
+name = "Examples"
+weight = 22
 
++++
 The [linkerd-examples GitHub repo](https://github.com/linkerd/linkerd-examples)
 contains several examples of how to use Linkerd and namerd in various environments.
 
