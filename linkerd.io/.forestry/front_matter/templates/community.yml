@@ -10,5 +10,13 @@ fields:
     name: top_hero
     label: Top Hero
     template: hero
+- type: field_group
+  name: talk_hero
+  label: Talk Hero
+  fields:
+  - type: include
+    name: talk_hero
+    label: Talk Hero
+    template: hero
 pages:
 - linkerd.io/content/community.md
