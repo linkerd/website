@@ -4,14 +4,8 @@
     {{ range .Site.Menus.top }}
     {{ $isCurrent := $currentPage.IsMenuCurrent "top" . }}
 
-
-      {{ if $isCurrent }}
-      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase is-active" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
+      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase  {{ if $isCurrent }} is-active {{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
           class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
-      {{ else }}
-      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
-        class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
-      {{ end }}
     {{ end }}
   </div>
 </div>
