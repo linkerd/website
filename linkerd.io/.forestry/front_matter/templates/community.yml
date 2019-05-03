@@ -40,7 +40,7 @@ fields:
         config:
           required: false
         label: Icon name
-        description: Name of the font awesome icon (without fa- prefix)
+        description: Class names of the font awesome icon (full, including prefix, e.g. "fab fa-slack")
       config:
         min: 
         max: 

@@ -6,14 +6,14 @@
           <figure class="image">
             <img
               {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }}
-              alt="header illustration" />
+              alt="illustration" />
           </figure>
         </div>
         <div class="column center">
           <div class="notification">
             <h1 class="title is-size-1">{{.title}}</h1>
             <h5 class="title is-size-5">{{.description | markdownify}}</h5>
-            {{ range.buttons }}
+            {{ range .buttons }}
             <a
               href="{{.url}}"
               class="button is-primary is-large">

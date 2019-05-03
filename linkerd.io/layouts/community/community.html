@@ -3,5 +3,12 @@
 {{ end }}
 
 {{ define "main" }}
-{{ partial "community/top-hero.html" .Params.top_hero  }}
+{{ partial "community/top-hero.html" .Params.top_hero }}
+{{ partial "community/links-lists.html" .Params.link_lists }}
+{{ partial "hero.html" .Params.talk_hero }}
+{{ partial "community/jobs.html" .Params.jobs }}
+
+{{ partial "homepage/image-list.html"  (dict "mentions" .Site.Home.Params.companies "title" .Site.Home.Params.companies_title "backgroundColor" "has-background-light-blue") }}
+{{ partial "homepage/adopter-banner.html" .Site.Home }}
+
 {{ end }}
