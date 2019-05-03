@@ -1,15 +1,13 @@
 +++
-title = "namerd"
+aliases = ["/in-depth/namerd", "/advanced/namerd"]
 description = "Introduces namerd as a service that helps route Linkerd requests and centralizes routing decisions to provide global Linkerd control."
+title = "namerd"
 weight = 20
-aliases = [
-  "/in-depth/namerd",
-  "/advanced/namerd"
-]
 [menu.docs]
-  parent = "advanced"
-+++
+parent = "advanced"
+weight = 26
 
++++
 namerd is a service that manages routing for multiple Linkerd instances. It does
 this by storing [dtabs]({{% ref "/1/advanced/dtabs.md" %}}) and using
 [namers]({{% ref "/1/advanced/dtabs.md#namers-addresses" %}}) for service

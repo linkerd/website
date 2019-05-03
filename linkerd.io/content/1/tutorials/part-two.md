@@ -1,14 +1,13 @@
 +++
-title = "II. Pods vs DaemonSets"
+aliases = ["/tutorials/part-two"]
 description = "As a service mesh, Linkerd is designed to be run alongside application code, managing and monitoring inter-service communication"
+title = "II. Pods vs DaemonSets"
 weight = 3
-aliases = [
-  "/tutorials/part-two"
-]
 [menu.docs]
-  parent = "tutorials"
-+++
+parent = "tutorials"
+weight = 8
 
++++
 This tutorial focuses on the different options available when setting up Linkerd.
 You will learn about the differences between using Pods or DaemonSets when
 running in Kubernetes.

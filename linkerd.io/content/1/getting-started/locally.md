@@ -1,15 +1,13 @@
 +++
-title = "Running locally"
+aliases = ["/getting-started/requirements", "/getting-started/locally"]
 description = "How to run Linkerd as a standalone process."
+title = "Running locally"
 weight = 2
-aliases = [
-  "/getting-started/requirements",
-  "/getting-started/locally"
-]
 [menu.docs]
-  parent = "getting-started"
-+++
+parent = "getting-started"
+weight = 32
 
++++
 This guide will walk you through the steps necessary to download and run
 Linkerd locally.
 

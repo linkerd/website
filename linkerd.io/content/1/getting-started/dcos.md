@@ -1,14 +1,13 @@
 +++
-title = "Running in DC/OS"
+aliases = ["/getting-started/dcos"]
 description = "How to run Linkerd in DC/OS, routing requests with Marathon-backed service discovery."
+title = "Running in DC/OS"
 weight = 5
-aliases = [
-  "/getting-started/dcos"
-]
 [menu.docs]
-  parent = "getting-started"
-+++
+parent = "getting-started"
+weight = 30
 
++++
 This guide will walk you through getting Linkerd running in DC/OS, routing
 requests to an example web service, and monitoring your cluster.
 

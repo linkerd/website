@@ -1,14 +1,13 @@
 +++
-title = "Dtab playground"
+aliases = ["/administration/dtab-playground"]
 description = "A web UI that you can use to help debug Dtab rules."
+title = "Dtab playground"
 weight = 4
-aliases = [
-  "/administration/dtab-playground"
-]
 [menu.docs]
-  parent = "administration"
-+++
+parent = "administration"
+weight = 36
 
++++
 The admin interface also provides a web UI that you can use to help debug
 [Dtab]({{% ref "/1/advanced/dtabs.md" %}}) rules that are set up on a running
 Linkerd instance. This provides valuable insight into how Linkerd will route

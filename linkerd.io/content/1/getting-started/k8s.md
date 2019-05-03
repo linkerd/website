@@ -1,33 +1,13 @@
 +++
-title = "Running in Kubernetes"
+aliases = ["/doc/0.1.0/k8s", "/doc/0.2.0/k8s", "/doc/0.2.1/k8s", "/doc/0.3.0/k8s", "/doc/0.3.1/k8s", "/doc/0.4.0/k8s", "/doc/0.5.0/k8s", "/doc/0.6.0/k8s", "/doc/0.7.0/k8s", "/doc/0.7.1/k8s", "/doc/0.7.2/k8s", "/doc/0.7.3/k8s", "/doc/0.7.4/k8s", "/doc/0.7.5/k8s", "/doc/0.8.0/k8s", "/doc/head/k8s", "/doc/latest/k8s", "/doc/k8s", "/getting-started/k8s-daemonset", "/getting-started/k8s"]
 description = "How to deploy the Linkerd service mesh in Kubernetes."
+title = "Running in Kubernetes"
 weight = 4
-aliases = [
-  "/doc/0.1.0/k8s",
-  "/doc/0.2.0/k8s",
-  "/doc/0.2.1/k8s",
-  "/doc/0.3.0/k8s",
-  "/doc/0.3.1/k8s",
-  "/doc/0.4.0/k8s",
-  "/doc/0.5.0/k8s",
-  "/doc/0.6.0/k8s",
-  "/doc/0.7.0/k8s",
-  "/doc/0.7.1/k8s",
-  "/doc/0.7.2/k8s",
-  "/doc/0.7.3/k8s",
-  "/doc/0.7.4/k8s",
-  "/doc/0.7.5/k8s",
-  "/doc/0.8.0/k8s",
-  "/doc/head/k8s",
-  "/doc/latest/k8s",
-  "/doc/k8s",
-  "/getting-started/k8s-daemonset",
-  "/getting-started/k8s"
-]
 [menu.docs]
-  parent = "getting-started"
-+++
+parent = "getting-started"
+weight = 34
 
++++
 {{< note >}}
 This document is specific to Linkerd 1.x. If you're on Kubernetes, you may wish
 to consider [Linkerd 2.x](/2/getting-started/) instead.

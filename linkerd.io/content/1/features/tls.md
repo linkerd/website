@@ -1,14 +1,13 @@
 +++
-title = "TLS"
+aliases = ["/features/tls"]
 description = "Linkerd can be configured to send and receive requests with TLS, which you can use to encrypt communication across host boundaries without modification to your existing application code."
+title = "TLS"
 weight = 6
-aliases = [
-  "/features/tls"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 20
 
++++
 A common deployment model for Linkerd is to run it in [linker-to-linker
 mode]({{% ref "/1/advanced/deployment.md" %}}), meaning that Linkerd is on both the
 sending side and the receiving side of each network call. In this mode, Linkerd

@@ -53,7 +53,7 @@ talk_hero:
   description: Download an up-to-date slide deck or request swag to support your talk.
   image: "/uploads/IMG_3409.JPG"
   image_on_the_right: false
-  buttons: 
+  buttons:
   - caption: Download Slides
     url: https://github.com/linkerd/linkerd2
   - caption: Request Swag
@@ -73,5 +73,8 @@ jobs:
   buttons:
   - caption: Create Pull Request
     url: "#"
+menu:
+  top:
+    weight: 2
 
 ---

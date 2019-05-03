@@ -1,16 +1,14 @@
 +++
-title = "Overview"
+aliases = ["/features"]
 description = "Covers Linkerd's major features, including load balancing, circuit breaking, service discovery, routing, retries, and more."
+title = "Overview"
 weight = 1
-aliases = [
-  "/features"
-]
 [menu.docs]
-  name = "Features"
-  identifier = "features"
-  weight = 4
-+++
+identifier = "features"
+name = "Features"
+weight = 13
 
++++
 Beyond adding reliability through circuit breaking and latency-aware load
 balancing, Linkerd automatically instruments top-line service metrics such as
 request volume, success rates, and latency distributions. Linkerd also provides

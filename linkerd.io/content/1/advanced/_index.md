@@ -1,17 +1,14 @@
 +++
-title = "Overview"
+aliases = ["/in-depth/", "/advanced"]
 description = "Includes detailed information about advanced topics such as service discovery, routing, delegation, writing plugins, and diagnosing network performance issues."
+title = "Overview"
 weight = 1
-aliases = [
-  "/in-depth/",
-  "/advanced"
-]
 [menu.docs]
-  name = "Advanced"
-  identifier = "advanced"
-  weight = 7
-+++
+identifier = "advanced"
+name = "Advanced"
+weight = 24
 
++++
 This section of the documentation contains in-depth information about advanced
 topics pertaining to both Linkerd and namerd. It is divided into the following
 subsections:

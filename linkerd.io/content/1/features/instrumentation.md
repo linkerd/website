@@ -1,14 +1,13 @@
 +++
-title = "Instrumentation"
+aliases = ["/features/instrumentation"]
 description = "Linkerd supports both distributed tracing and metrics instrumentation, providing uniform observability across all services."
+title = "Instrumentation"
 weight = 10
-aliases = [
-  "/features/instrumentation"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 12
 
++++
 Linkerd provides detailed histograms of communication latency and payload sizes,
 as well as success rates and load-balancing statistics, in both human-readable
 and machine-parsable formats. This means that even polyglot applications can

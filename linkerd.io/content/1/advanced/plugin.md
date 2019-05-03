@@ -1,25 +1,13 @@
 +++
-title = "Plugins"
+aliases = ["/doc/0.7.0/plugin", "/doc/0.7.1/plugin", "/doc/0.7.2/plugin", "/doc/0.7.3/plugin", "/doc/0.7.4/plugin", "/doc/0.7.5/plugin", "/doc/0.8.0/plugin", "/doc/head/plugin", "/doc/latest/plugin", "/doc/plugin", "/in-depth/plugin", "/advanced/plugin"]
 description = "Sheds light on Linkerd's modular plugin system, and provides a detailed walkthrough for writing your own plugins."
+title = "Plugins"
 weight = 50
-aliases = [
-  "/doc/0.7.0/plugin",
-  "/doc/0.7.1/plugin",
-  "/doc/0.7.2/plugin",
-  "/doc/0.7.3/plugin",
-  "/doc/0.7.4/plugin",
-  "/doc/0.7.5/plugin",
-  "/doc/0.8.0/plugin",
-  "/doc/head/plugin",
-  "/doc/latest/plugin",
-  "/doc/plugin",
-  "/in-depth/plugin",
-  "/advanced/plugin"
-]
 [menu.docs]
-  parent = "advanced"
-+++
+parent = "advanced"
+weight = 29
 
++++
 Linkerd is built on a modular plugin system so that individual components may
 be swapped out without needing to recompile.  This also allows anyone to build
 custom plugins that implement functionality specific to their needs.  This guide
