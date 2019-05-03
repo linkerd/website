@@ -18,5 +18,47 @@ fields:
     name: talk_hero
     label: Talk Hero
     template: hero
+- name: link_lists
+  type: field_group
+  config: {}
+  fields:
+  - name: links_list
+    type: field_group_list
+    fields:
+    - name: title
+      type: text
+      config:
+        required: false
+      label: Title
+    - name: links
+      type: field_group_list
+      fields:
+      - name: caption
+        type: text
+        config:
+          required: false
+        label: Caption
+      - name: url
+        type: text
+        config:
+          required: false
+        label: Url
+      - name: icon_name
+        type: text
+        config:
+          required: false
+        label: Icon name
+        description: Name of the font awesome icon (without fa- prefix)
+      config:
+        min: 
+        max: 
+        labelField: 
+      label: Links
+    config:
+      min: 
+      max: 
+      labelField: 
+    label: Links list
+  label: Link Lists
 pages:
 - linkerd.io/content/community.md
