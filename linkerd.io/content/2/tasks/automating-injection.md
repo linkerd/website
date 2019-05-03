@@ -194,3 +194,13 @@ There will not be a `linkerd-proxy` container in the output:
 ```bash
 helloworld-disabled
 ```
+
+## Sidecar Proxy Configuration Overrides
+
+When the proxy injector adds the sidecar proxy container it configures it
+according to the configuration set through flags when `linkerd install`
+was issued (and eventually changed through `linkerd upgrade`).
+
+You can override that configuration by adding [extra `config.linkerd.io`
+annotations](/2/reference/proxy-configuration/) into the deployment's pod
+spec, alongside the `linkerd.io/inject` annotation.
