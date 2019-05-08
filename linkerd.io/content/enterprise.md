@@ -1,9 +1,11 @@
 +++
-title = "Enterprise"
 description = "Lists companies that provide commercial support for Linkerd."
+title = "Enterprise"
 weight = 1
-+++
+[menu.top]
+weight = 4
 
++++
 Below is a list of companies that offer commercial support and other enterprise
 offerings for Linkerd:
 
