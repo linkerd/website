@@ -7,8 +7,9 @@ priority = 1
 [[versions]]
 title = "LINKERD 2.x"
 [[versions.platforms]]
-thumbnail = ""
-url = ""
+thumbnail = "/uploads/kubernetes.svg"
+title = "Kubernetes"
+url = "https://linkerd.io/2/getting-started/"
 [[versions]]
 platforms = []
 title = ""
