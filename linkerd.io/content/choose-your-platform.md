@@ -1,6 +1,7 @@
 +++
 description = "Linkerd comes in two parallel branches of development: 2.x and 1.x. Both are maintained in parallel, but certain platforms are only supported by certain versions."
-layout = "cyp"
+layout = "choose-your-platform"
+type = "choose-your-platform"
 title = "Choose your platform"
 [sitemap]
 priority = 1
