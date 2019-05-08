@@ -27,6 +27,11 @@ fields:
   - name: platforms
     type: field_group_list
     fields:
+    - name: title
+      type: text
+      config:
+        required: false
+      label: Title
     - name: thumbnail
       type: file
       config:
