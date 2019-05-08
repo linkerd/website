@@ -24,6 +24,24 @@ fields:
     config:
       required: false
     label: Title
+  - name: platforms
+    type: field_group_list
+    fields:
+    - name: thumbnail
+      type: file
+      config:
+        maxSize: 250
+      label: Thumbnail
+    - name: url
+      type: text
+      config:
+        required: false
+      label: Url
+    config:
+      min: 
+      max: 
+      labelField: 
+    label: Platforms
   config:
     min: 
     max: 
