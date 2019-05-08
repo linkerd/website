@@ -51,7 +51,7 @@ fields:
       min: 
       max: 
       labelField: 
-    label: Jobs
+    label: Companies
   - name: bottom_description
     type: text
     config:
@@ -62,6 +62,6 @@ fields:
     config: {}
     template: buttons
     label: Buttons
-  label: Jobs
+  label: Support
 pages:
 - linkerd.io/content/enterprise.md
