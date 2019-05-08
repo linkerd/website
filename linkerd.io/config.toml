@@ -35,12 +35,15 @@ name = "LinkedIn"
 url = "https://www.linkedin.com/company/buoyantio/"
 weight = 2
 [[menu.top]]
-identifier = "start"
-name = "GET STARTED"
-post = "</span>"
-pre = "<span class='button-spacer'>"
-url = "https://github.com/linkerd/linkerd2"
-weight = 6
+identifier = "documentation"
+name = "Docs"
+url = "/docs/"
+weight = 1
+[[menu.top]]
+identifier = "blog"
+name = "Blog"
+url = "/blog/"
+weight = 3
 [[menu.top]]
 identifier = "github"
 name = "GitHub"
@@ -48,19 +51,12 @@ pre = "<i class='fab fa-github fa-lg' aria-hidden='true'></i>"
 url = "https://github.com/linkerd/linkerd2"
 weight = 5
 [[menu.top]]
-name = "Enterprise"
-url = "/enterprise/"
-weight = 4
-[[menu.top]]
-identifier = "blog"
-name = "Blog"
-url = "/blog/"
-weight = 3
-[[menu.top]]
-identifier = "documentation"
-name = "Docs"
-url = "/docs/"
-weight = 1
+identifier = "start"
+name = "GET STARTED"
+post = "</span>"
+pre = "<span class='button-spacer'>"
+url = "https://github.com/linkerd/linkerd2"
+weight = 6
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
 mediaType = "text/netlify"
