@@ -188,3 +188,19 @@
     }
   }
 }
+
+
+.container.blog-content-container {
+  font-family: $family-sans-serif;
+  color: $navy-black;
+  p,
+  div {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+  }
+  strong {
+    color: $navy-black;
+  }
+}

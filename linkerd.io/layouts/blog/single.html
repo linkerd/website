@@ -2,44 +2,56 @@
 {{ $authorId := .Param "author" }}
 {{ $author := (index $.Site.Data.authors $authorId)}}
 {{ $date := .PublishDate.Format "January 2, 2006"}}
-<section id="main">
-  <div class="jumbotron jumbotron-fluid linkerd-bg text-light">
-    <div class="container">
-      <h1 id="title">{{ .Title }}</h1>
-    </div>
-  </div>
-  <div>
-    <div class="docs-content container pb-5" id="content">
-      <aside class="mb-5">
-        <div class="media">
-          {{ if $author.avatar }}
-          <img
-            width="128"
-            class="mr-3 is-round"
-            src="/images/authors/{{ $author.avatar }}"
-            alt="{{ $author.name }}"
-          />
-          {{ else }}
-          <img
-            src="/images/identity/svg/linkerd_mark_grid_small.svg"
-            class="mr-3"
-            width="128"
-            alt="author avatar"
-          />
-          {{ end }}
-          <div class="media-body">
-            <p>
-              <h4 class="mt-0">{{ $author.name }}</h4>
-              {{ $date }}<br />
-              {{ partial "readingtime.html" . }}
+<div class="wrapper body-header blog-post has-background-white">
+  <div class="columns center-column is-marginless is-fullwidth">
+    <div class="column post-header">
+      <div class="container">
+        <h1 class="title is-1 has-text-color">{{ .Title}}</h1>
+        <div class="media container">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              {{ if $author.avatar }}
+              <img
+                {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
+                alt="{{ $author.name }}" />
+              {{ else }}
+              <img
+                class="is-rounded"
+                src="/images/buoyant_logo_square.svg"
+                alt="author avatar" style="background: #F2F2F2;"
+              />
+              {{ end }}
             </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong>{{ $author.name }}</strong
+                ><br />
+                {{ $date }} • {{ partial "readingtime.html" . }}
+              </p>
+            </div>
           </div>
         </div>
-      </aside>
-      <article class="language-markup">
-        {{ .Content }}
-      </article>
+      </div>
     </div>
   </div>
-</section>
+</div>
+<div class="wrapper has-background-white">
+  <div class="container blog-content-container">
+    {{ .Content }}
+    <hr class="seperator has-background-grey-light" />
+    <div class="center">
+      <div class="addthis_inline_share_toolbox"></div>
+    </div>
+  </div>
+</div>
+{{ partial "homepage/adopter-banner.html" .Site.Home }}
+{{ end }}
+
+{{ define "body-end" }}
+<script
+  type="text/javascript"
+  src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c6c43959addf02a"
+></script>
 {{ end }}
