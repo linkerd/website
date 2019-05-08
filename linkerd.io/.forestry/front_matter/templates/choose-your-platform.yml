@@ -1,0 +1,67 @@
+---
+label: Choose Your Platform
+hide_body: true
+fields:
+- name: platforms
+  type: field_group
+  config: {}
+  fields:
+  - name: title
+    type: text
+    config:
+      required: false
+    label: Title
+  - name: description
+    type: textarea
+    default: ''
+    config:
+      required: false
+      wysiwyg: true
+      schema:
+        format: markdown
+    label: Description
+  - name: companies
+    type: field_group_list
+    fields:
+    - name: title
+      type: text
+      config:
+        required: false
+      label: Title
+    - name: description
+      type: textarea
+      default: ''
+      config:
+        required: false
+        wysiwyg: true
+        schema:
+          format: markdown
+      label: Description
+    - name: thumbnail
+      type: file
+      config:
+        maxSize: 250
+      label: Thumbnail
+    - name: url
+      type: text
+      config:
+        required: false
+      label: Url
+    config:
+      min: 
+      max: 
+      labelField: 
+    label: Companies
+  - name: bottom_description
+    type: text
+    config:
+      required: false
+    label: Bottom description
+  - name: buttons
+    type: include
+    config: {}
+    template: buttons
+    label: Buttons
+  label: Platforms
+pages:
+- linkerd.io/content/choose-your-platform.md
