@@ -6,12 +6,16 @@ weight = 1
 weight = 4
 [support]
 bottom_description = "Offering Linkerd support? Add your company!"
-companies = []
 description = ""
 title = "Companies offering commercial support  and other enterprise offerings for Linkerd:"
 [[support.buttons]]
 caption = "Create Pull Request"
 url = "#"
+[[support.companies]]
+description = "Buoyant is the original creator of Linkerd and provides support, training, and enterprise products."
+thumbnail = ""
+title = "Buoyant"
+url = "https://buoyant.io/"
 
 +++
 Below is a list of companies that offer commercial support and other enterprise
