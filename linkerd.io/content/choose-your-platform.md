@@ -15,8 +15,6 @@ platforms = []
 title = ""
 
 +++
-Linkerd comes in two parallel branches of development: 2.x and 1.x. Both are
-maintained in parallel, but certain platforms are only supported by certain
-versions.
+# Choose your platform
 
-Choose your platform below:
+##### Linkerd comes in two parallel branches of development: 2.x and 1.x. Both are maintained in parallel, but certain platforms are only supported by certain versions.
