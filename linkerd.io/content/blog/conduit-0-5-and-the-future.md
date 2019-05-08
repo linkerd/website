@@ -2,7 +2,7 @@
 title: 'Conduit 0.5.0 and the future of Conduit'
 author: 'oliver'
 date: Fri, 06 Jul 2018 16:41:57 +0000
-thumbnail: a6d4b0bd-conduit.jpg
+thumbnail: uploads/a6d4b0bd-conduit.jpg
 draft: false
 tags: [Conduit, Linkerd, News]
 ---

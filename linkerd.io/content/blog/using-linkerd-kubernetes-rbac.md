@@ -3,7 +3,7 @@ title: 'Using Linkerd with Kubernetes RBAC'
 author: 'risha'
 date: Mon, 24 Jul 2017 22:09:31 +0000
 draft: false
-thumbnail: linkerd_featured.png
+thumbnail: uploads/linkerd_featured.png
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

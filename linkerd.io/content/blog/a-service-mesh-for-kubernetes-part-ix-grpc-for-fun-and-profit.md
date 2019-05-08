@@ -2,7 +2,7 @@
 title: 'A Service Mesh For Kubernetes Part IX: gRPC for fun and profit'
 author: 'risha'
 date: Wed, 19 Apr 2017 23:34:57 +0000
-thumbnail: kubernetes9_featured_Twitter_ratio.png
+thumbnail: uploads/kubernetes9_featured_Twitter_ratio.png
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
