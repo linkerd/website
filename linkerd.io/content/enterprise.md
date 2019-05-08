@@ -4,6 +4,14 @@ title = "Enterprise"
 weight = 1
 [menu.top]
 weight = 4
+[support]
+bottom_description = "Offering Linkerd support? Add your company!"
+companies = []
+description = ""
+title = "Companies offering commercial support  and other enterprise offerings for Linkerd:"
+[[support.buttons]]
+caption = "Create Pull Request"
+url = "#"
 
 +++
 Below is a list of companies that offer commercial support and other enterprise
