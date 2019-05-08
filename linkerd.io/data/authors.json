@@ -1,13 +1,13 @@
 {
   "william": {
-    "avatar": "WilliamMorgan.jpg",
+    "avatar": "/uploads/WilliamMorgan.jpg",
     "email": "william@buoyant.io",
     "name": "William Morgan",
     "firstName": "William",
     "lastName": "Morgan"
   },
   "steve": {
-    "avatar": "steve-jenson-avatar.jpeg",
+    "avatar": "/uploads/steve-jenson-avatar.jpeg",
     "email": "steve@buoyant.io",
     "name": "Steve Jenson",
     "firstName": "Steve",
@@ -56,7 +56,7 @@
     "lastName": "Mars"
   },
   "courtney": {
-    "avatar": "Courtney-Gannon.jpg",
+    "avatar": "/uploads/Courtney-Gannon.jpg",
     "email": "courtney@buoyant.io",
     "name": "Courtney Gannon",
     "firstName": "Courtney",
@@ -77,7 +77,7 @@
     "lastName": "Weisman"
   },
   "gmiranda23": {
-    "avatar": "george miranda.jpeg",
+    "avatar": "/uploads/george miranda.jpeg",
     "email": "george@buoyant.io",
     "name": "George Miranda",
     "firstName": "George",
@@ -98,7 +98,7 @@
     "lastName": "von der Goltz"
   },
   "jenlankford": {
-    "avatar": "jen-lankford-avatar.png",
+    "avatar": "/uploads/jen-lankford-avatar.png",
     "email": "jen@buoyant.io",
     "name": "Jennifer Lankford",
     "firstName": "Jennifer",
@@ -140,7 +140,7 @@
     "lastName": "Gaffney"
   },
   "mohsen": {
-    "avatar": "mohsen_rezaei-300x300.jpg",
+    "avatar": "/uploads/mohsen_rezaei-300x300.jpg",
     "email": "",
     "name": "Mohsen Rezaei",
     "firstName": "Mohsen",
