@@ -3,7 +3,7 @@ title: 'Webinar recap: Navigating the service mesh ecosystem'
 author: 'gmiranda23'
 date: Mon, 26 Mar 2018 17:30:38 +0000
 draft: false
-thumbnail: navigating_the_ecosystem.png
+thumbnail: uploads/navigating_the_ecosystem.png
 tags: [Conduit, Uncategorized]
 ---
 

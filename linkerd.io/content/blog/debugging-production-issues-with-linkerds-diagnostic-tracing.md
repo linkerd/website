@@ -3,7 +3,7 @@ title: "Debugging production issues with Linkerd's diagnostic tracing"
 author: 'dennis'
 date: Tue, 19 Jun 2018 23:25:51 +0000
 draft: false
-thumbnail: DiagnosticTracing_Linkerd.png
+thumbnail: uploads/DiagnosticTracing_Linkerd.png
 tags:
   [
     debug,

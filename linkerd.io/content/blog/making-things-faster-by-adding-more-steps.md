@@ -3,7 +3,7 @@ title: 'Making Things Faster by Adding More Steps'
 author: 'andrew'
 date: Wed, 01 Feb 2017 00:22:35 +0000
 draft: false
-thumbnail: linkerd_faster_featured.png
+thumbnail: uploads/linkerd_faster_featured.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

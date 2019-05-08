@@ -3,7 +3,7 @@ title: 'Webinar recap: A deep dive into Conduit’s Rust-based data plane'
 author: 'courtney'
 date: Mon, 05 Feb 2018 19:16:20 +0000
 draft: false
-thumbnail: conduit_webinar_recap.png
+thumbnail: uploads/conduit_webinar_recap.png
 tags:
   [
     conduit,

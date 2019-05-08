@@ -2,7 +2,7 @@
 title: 'TGI Kubernetes Features Linkerd 2.0'
 author: 'kiersten'
 date: Fri, 21 Sep 2018 23:27:57 +0000
-thumbnail: Screen-Shot-2018-09-21-at-8.13.55-PM.png
+thumbnail: uploads/Screen-Shot-2018-09-21-at-8.13.55-PM.png
 draft: false
 tags: [Community, Events, Linkerd, Tutorials &amp; How-To's, Webinars]
 ---

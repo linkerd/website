@@ -3,7 +3,7 @@ title: 'A Service Mesh for Kubernetes, Part III: Encrypting all the things'
 author: 'alex'
 date: Mon, 24 Oct 2016 23:00:15 +0000
 draft: false
-thumbnail: kubernetes3_featured_Twitter_ratio.png
+thumbnail: uploads/kubernetes3_featured_Twitter_ratio.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

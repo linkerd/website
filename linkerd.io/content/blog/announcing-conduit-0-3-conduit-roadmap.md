@@ -3,7 +3,7 @@ title: 'Announcing Conduit 0.3 and the Conduit Roadmap'
 author: 'william'
 date: Wed, 21 Feb 2018 20:47:41 +0000
 draft: false
-thumbnail: version_conduit_030.png
+thumbnail: uploads/version_conduit_030.png
 tags: [conduit, Conduit, News, Release Notes]
 ---
 

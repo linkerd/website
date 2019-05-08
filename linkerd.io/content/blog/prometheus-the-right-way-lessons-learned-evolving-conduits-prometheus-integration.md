@@ -2,7 +2,7 @@
 title: "Prometheus the Right Way: Lessons learned evolving Conduit's Prometheus integration"
 author: 'andrew'
 date: Thu, 17 May 2018 18:21:51 +0000
-thumbnail: prometheus-the-right-way.png
+thumbnail: uploads/prometheus-the-right-way.png
 draft: false
 tags: [Conduit, Uncategorized]
 ---

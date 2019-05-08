@@ -3,7 +3,7 @@ title: 'Announcing one hundred billion production requests!'
 author: 'william'
 date: Wed, 08 Mar 2017 00:25:37 +0000
 draft: false
-thumbnail: linkerd_hundred_billion_featured.png
+thumbnail: uploads/linkerd_hundred_billion_featured.png
 tags: [Buoyant, buoyant, linkerd, News]
 ---
 
