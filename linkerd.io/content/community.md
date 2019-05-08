@@ -67,7 +67,7 @@ jobs:
       Software Engineer
 
       San Francisco, CA
-    thumbnail: "/uploads/value-props/lego.svg"
+    thumbnail: '/uploads/buoyant_thumbnail.svg'
     url: "#"
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:

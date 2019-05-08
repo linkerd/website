@@ -66,14 +66,21 @@
 
 .homepage-top-hero {
   background: url('/images/pattern_home_hero.svg');
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: left center;
 }
 
 .community-top-hero {
   background: url('/images/pattern_community_hero.svg');
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-position: left center;
+}
+
+
+.enterprise-top-hero {
+  background: url('/images/enterprise_left.svg'), url('/images/enterprise_right.svg');
+  background-repeat: no-repeat;
+  background-position: left top, right top;
 }
 
 .hero-body .wrapper.image-list {
@@ -117,5 +124,16 @@
     .media {
       align-items: center
     }
+  }
+}
+
+
+.box {
+  .image.is-96x96 img {
+    max-height: 96px;
+    max-width: 96px;
+  } 
+  .media-content {
+    padding-right: 10px;
   }
 }
