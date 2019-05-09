@@ -3,7 +3,7 @@ title: 'The Consolidated Kubernetes Service Mesh Linkerd Config'
 author: 'eliza'
 date: Fri, 04 Aug 2017 22:20:42 +0000
 draft: false
-thumbnail: uploads/linkerd_featured.png
+thumbnail: /uploads/linkerd_featured.png
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

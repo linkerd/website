@@ -3,7 +3,7 @@ title: 'Conduit 0.4.0: Where’s my traffic?'
 author: 'franzi'
 date: Fri, 20 Apr 2018 13:58:01 +0000
 draft: false
-thumbnail: uploads/version_conduit_040.png
+thumbnail: /uploads/version_conduit_040.png
 tags: [conduit, Conduit, kubernetes, monitoring, News, Release Notes]
 ---
 

@@ -2,7 +2,7 @@
 title: 'A Linkerd 2.0 Deep Dive Unboxing: Debugging and Monitoring Kubernetes Services on Azure'
 author: 'william'
 date: Tue, 23 Oct 2018 18:37:39 +0000
-thumbnail: uploads/Lachie-Unboxing.png
+thumbnail: /uploads/Lachie-Unboxing.png
 draft: false
 tags: [Community, Linkerd, Tutorials &amp; How-To's, Video]
 ---

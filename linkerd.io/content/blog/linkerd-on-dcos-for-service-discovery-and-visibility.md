@@ -3,7 +3,7 @@ title: 'Linkerd on DC/OS for Service Discovery and Visibility'
 author: 'andrew'
 date: Mon, 10 Oct 2016 22:45:50 +0000
 draft: false
-thumbnail: uploads/linkerd_featured_DCOS.png
+thumbnail: /uploads/linkerd_featured_DCOS.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

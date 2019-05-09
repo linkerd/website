@@ -2,7 +2,7 @@
 title: 'The Linkerd Enthusiast’s Guide to Kubecon NA 2018'
 author: 'william'
 date: Fri, 19 Oct 2018 15:49:12 +0000
-thumbnail: uploads/Kubecon-NA-2018.png
+thumbnail: /uploads/Kubecon-NA-2018.png
 draft: false
 tags: [Buoyant, Community, Events, Linkerd]
 ---

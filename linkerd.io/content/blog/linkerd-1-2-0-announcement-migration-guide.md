@@ -2,7 +2,7 @@
 title: 'Linkerd 1.2.0 is here! Features, bugfixes, and migration'
 author: 'eliza'
 date: Fri, 08 Sep 2017 20:23:01 +0000
-thumbnail: uploads/linkerd_version_12_featured.png
+thumbnail: /uploads/linkerd_version_12_featured.png
 draft: false
 tags: [Linkerd, linkerd, News]
 ---
