@@ -6,7 +6,8 @@ tags:
 - Linkerd
 - Tutorials &amp; How-To's
 - Video
-items: []
+items:
+- blog/real-world-microservices-when-services-stop-playing-well-and-start-getting-real.md
 description: ''
 keywords: []
 
