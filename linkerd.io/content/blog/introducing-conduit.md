@@ -3,7 +3,7 @@ title: 'Introducing Conduit'
 author: 'william'
 date: Tue, 05 Dec 2017 16:00:44 +0000
 draft: false
-thumbnail: uploads/conduit_introducing_conduit_featured.png
+thumbnail: /uploads/conduit_introducing_conduit_featured.png
 tags:
   [
     Buoyant,

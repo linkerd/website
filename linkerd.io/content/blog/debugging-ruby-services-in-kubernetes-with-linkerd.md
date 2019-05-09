@@ -2,7 +2,7 @@
 title: 'Debugging Ruby Services in Kubernetes With Linkerd'
 author: 'kevin'
 date: Sat, 02 Feb 2019 00:31:52 +0000
-thumbnail: uploads/Screen-Shot-2019-02-01-at-4.23.09-PM.png
+thumbnail: /uploads/Screen-Shot-2019-02-01-at-4.23.09-PM.png
 draft: false
 tags: [Community, Linkerd, Tutorials &amp; How-To's]
 ---

@@ -3,7 +3,7 @@ title: 'Using Linkerd as a Service Mesh Proxy at WePay'
 author: 'mohsen'
 date: Wed, 27 Jun 2018 01:29:57 +0000
 draft: false
-thumbnail: uploads/WePay-logo.png
+thumbnail: /uploads/WePay-logo.png
 tags:
   [
     case study,

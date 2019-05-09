@@ -3,7 +3,7 @@ title: 'Squeezing blood from a stone: small-memory JVM techniques for microservi
 author: 'steve'
 date: Fri, 17 Jun 2016 22:34:27 +0000
 draft: false
-thumbnail: uploads/linkerd_featured_sidecars.png
+thumbnail: /uploads/linkerd_featured_sidecars.png
 tags: [Article, buoyant, Education, linkerd]
 ---
 

@@ -3,7 +3,7 @@ title: 'Linkerd 1.3.3 Announcement and Community Spotlight'
 author: 'eliza'
 date: Fri, 01 Dec 2017 15:39:26 +0000
 draft: false
-thumbnail: uploads/linkerd_version_133_featured.png
+thumbnail: /uploads/linkerd_version_133_featured.png
 tags: [Buoyant, Community, Linkerd, linkerd, Release Notes]
 ---
 
