@@ -18,3 +18,5 @@ fields:
   label: Keywords
   name: keywords
   description: Used as meta description for the page
+pages:
+- linkerd.io/content/blog/_index.md
