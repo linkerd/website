@@ -10,7 +10,7 @@
     <div class="container center-column is-marginless is-fullwidth">
       <div class="has-backgroung-grey-light is-paddingless featured-items-container">
         <div id="featuredItems">
-          <h6 class="title is-6 has-text-weight-bold is-uppercase has-text-centered has-proxima-font">Featured</h6>
+          <div class="search-title is-uppercase has-text-centered">Featured</div>
           <div class="columns container is-multiline is-variable blog-list-container">
             {{ range.Params.items }}
               {{ with $.Site.GetPage . }}
@@ -23,9 +23,9 @@
             {{ end }}
           </div>
         </div>
-        <h6 class="title is-6 has-text-weight-bold is-uppercase has-text-centered has-proxima-font" id="resultsHeader">
+        <div class="search-title is-uppercase has-text-centered" id="resultsHeader">
           Recently Added
-        </h6>
+        </div>
         <div class="columns container is-multiline is-variable blog-list-container" id="searchResult">
           {{ range .Pages | first 6 }}
             {{ partial "related-card.html" . }}
