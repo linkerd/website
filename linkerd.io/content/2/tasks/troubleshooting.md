@@ -63,7 +63,7 @@ For more information on cluster access, see the
 ## √ no clock skew detected {#pre-k8s-clock-skew}
 
 This check verifies whether there is clock skew between the system running
-the `linkerd install` command and the Kubernetes node(s), causing 
+the `linkerd install` command and the Kubernetes node(s), causing
 potential issues.
 
 ## The "pre-kubernetes-capability" checks {#pre-k8s-capability}
