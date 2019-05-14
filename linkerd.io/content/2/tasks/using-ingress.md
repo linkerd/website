@@ -71,7 +71,7 @@ FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
 
 {{< note >}}
-When using Nginx to terminal HTTPS, Linkerd is unable to strip internal headers
+When using Nginx to terminate HTTPS, Linkerd is unable to strip internal headers
 that are normally provided to applications to make decisions. The
 `proxy_hide_header` lines will strip these headers out so that any internal
 cluster details do not leak.
@@ -137,7 +137,7 @@ FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
 
 {{< note >}}
-When using Traefik to terminal HTTPS, Linkerd is unable to strip internal
+When using Traefik to terminate HTTPS, Linkerd is unable to strip internal
 headers that are normally provided to applications to make decisions. The
 `ingress.kubernetes.io/custom-response-headers` line will strip these headers
 out so that any internal cluster details do not leak.
