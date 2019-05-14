@@ -5,7 +5,10 @@ author: 'kiersten'
 date: Mon, 12 May 2019 09:00:00 +0000
 draft: false
 tags: [Community, Linkerd]
+thumbnail: sf-linkerd-meetup-image.png
 ---
+
+![linkerd san francisco meetup](/uploads/sf-linkerd-meetup-image.png)
 
 The San Francisco Linkerd May Meetup was a fun night filled with Linkerd enthusiasts, education, great food, and lots of good conversation. If you missed it, we’ve got ya covered: all the talks were recorded!
 
@@ -19,7 +22,7 @@ In this talk, Leo Liang, engineering manager at Cruise Automation, spoke about h
 
 {{< youtube aeG3znvOtmw >}}
 
-In this talk, Kevin Lingerfelt, a software engineer at Buoyant and a core contributor to the Linkerd project, shared how companies are moving their architectures from REST-based APIs to gRPC. His talk covered reasons for moving and best practices for running gRPC in production. He detailed on how Linkerd enhances gRPC by providing metrics, load balancing, and support for timeout and retries. He also described how the Linkerd project itself employs multiple gRPC features to facilitate robust communication between its control plane and its data plane.
+In this talk, Kevin Lingerfelt, a software engineer at Buoyant and a core contributor to the Linkerd project, shared how companies are moving their architectures from REST-based APIs to gRPC. His talk covered reasons for moving and best practices for running gRPC in production. He detailed how Linkerd enhances gRPC by providing metrics, load balancing, and support for timeout and retries. He also described how the Linkerd project itself employs multiple gRPC features to facilitate robust communication between its control plane and its data plane.
 
 ---
 
