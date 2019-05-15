@@ -1,71 +1,72 @@
-<div class="pb-5">
-  <div class="dropdown ">
-    <button
-      type="button"
-      class="btn btn-secondary w-100 dropdown-toggle mb-3"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false">
-      {{ if eq .page.Section "1" }}
+<div class="">
+  <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link is-marginless">
+        {{ if eq .page.Section "1" }}
         Linkerd 1.x
-      {{ else }}
+        {{ else }}
         Linkerd 2.x
-      {{ end }}
-    </button>
-    <div class="dropdown-menu w-100">
-      <h6 class="dropdown-header">Linkerd 1.x</h6>
-      <a class="dropdown-item" href="/1/overview/">
-        {{ site.Params.latest_release_version }}
+        {{ end }}
       </a>
-      <h6 class="dropdown-header">Linkerd 2.x</h6>
-      <a class="dropdown-item" href="/2/overview/">
-        {{ site.Params.l5d2_release_version }}
-      </a>
+      <div class="navbar-dropdown">
+        <div class="navbar-item">
+          Linkerd 1.x
+        </div>
+        <a class="navbar-item" href="/1/overview/">
+          {{ site.Params.latest_release_version }}
+        </a>
+        <div class="navbar-item">
+          Linkerd 2.x
+        </div>
+        <a class="navbar-item" href="/2/overview/">
+          {{ site.Params.l5d2_release_version }}
+        </a>
+      </div>
     </div>
-  </div>
-
-  <ul class="nav flex-column nav-pills sidebar">
-    {{ $currentPage := .page }}
-    {{ range index site.Menus .menu }}
+  </nav>
+  <aside class="menu">
+    <ul class="menu-list is-paddingless is-marginless">
+      {{ $currentPage := .page }}
+      {{ range index site.Menus .menu }}
       {{ $shouldExpand :=  or ($currentPage.IsDescendant .Page) (eq .URL $currentPage.URL) }}
-      <li class="nav-item {{ if $shouldExpand }}active{{ end }} pb-1">
-        <a
-          href="{{ .URL }}"
-          class="nav-link {{ if $shouldExpand }}active{{ end }}">
+      <li class="menu-list-item {{ if $shouldExpand }}is-active{{ end }}">
+        <a href="{{ .URL }}" class="{{ if $shouldExpand }}is-active{{ end }}">
           {{ .Name }}
         </a>
-        <ul class="nav flex-column nav-pills">
+        <ul class="menu-list is-paddingless is-marginless">
           {{ if eq .Name "Configuration" }}
-            <li class="nav-item"><a class="nav-link" href="https://api.linkerd.io/latest/linkerd">Linkerd</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://api.linkerd.io/latest/namerd">namerd</a></li>
+          <li><a href="https://api.linkerd.io/latest/linkerd">Linkerd</a></li>
+          <li><a href="https://api.linkerd.io/latest/namerd">namerd</a></li>
           {{ end }}
-
           {{ if .HasChildren }}
-            {{ range .Children }}
-              {{ $active := eq .URL $currentPage.URL }}
-              <li class="nav-item">
-                <a
-                  href="{{ .URL }}"
-                  class="pl-4 nav-link {{ if $active }}active{{ end }}">
-                  {{ .Name }}
-                </a>
-              </li>
-            {{ end }}
+          {{ range .Children }}
+          {{ $active := eq .URL $currentPage.URL }}
+          <li class="menu-list-item">
+            <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
           {{ end }}
         </ul>
       </li>
-    {{ end }}
-  </ul>
+      {{ end }}
+    </ul>
+  </aside>
 
-  <hr>
-
-  <a class="btn btn-outline-primary w-100 mb-3 text-left" href="https://slack.linkerd.io" target="_blank">
-    <img height="20px" src="/images/icon-slack.svg" class="mr-2" alt="Slack">
-    <span>Join Linkerd on Slack</span>
+  <hr class="hr">
+  
+  <a class="" href="https://slack.linkerd.io" target="_blank">
+    <figure class="image is-24x24">
+      <img src="/images/icon-slack.svg" alt="Slack">
+    </figure>
+    <span>Slack</span>
   </a>
 
-  <a class="btn btn-outline-primary w-100 text-left" href="https://discourse.linkerd.io" target="_blank">
-    <img height="20px" class="mr-2" src="/images/logo_discourse.svg" alt="Discourse">
-    <span>Join Linkerd on Discourse</span>
+  <a class="" href="https://discourse.linkerd.io" target="_blank">
+    <figure class="image is-24x24">
+      <img height="20px" src="/images/logo_discourse.svg" alt="Discourse">
+    </figure>
+    <span>Discourse</span>
   </a>
 </div>

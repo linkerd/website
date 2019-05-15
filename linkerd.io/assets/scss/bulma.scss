@@ -50,6 +50,13 @@ $table-body-background-color: $light-grey;
 $table-striped-row-even-background-color: white;
 $table-striped-row-even-hover-background-color: transparent;
 
+$menu-list-border-left: none;
+$menu-item-color: $dark-grey;
+$menu-item-hover-color: $primary-bright-blue;
+$menu-item-hover-background-color: inherit;
+$menu-item-active-color: $navy-black;
+$menu-item-active-background-color: white;
+
 @import 'bulma-base';
 
 .has-background-bright-blue {

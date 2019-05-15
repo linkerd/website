@@ -270,3 +270,93 @@
   margin: 30px 0 20px;
   color: $dark-grey;
 }
+
+
+.docs {
+  .docs-sidebar-container {
+    .docs-sidebar {
+      max-width: 280px;
+      width: 280px;
+      margin: 58px 0 70px auto;
+      padding-left: 30px;
+
+      .navbar {
+        height: auto;
+        min-height: auto;
+        margin-bottom: 20px;
+        .navbar-item {
+          width: 100%;
+        }
+
+        &:hover  {
+          .navbar-link {
+            color: $navy-black;
+            background: inherit;
+            border-bottom: 0;
+            margin-bottom: 1px;
+          }
+        }
+        .navbar-link {
+          color: $navy-black;
+          width: 100%;
+          margin-right: 24px;
+          border-bottom: 1px solid $dark-grey;
+          &:not(.is-arrowless)::after {
+            border-color: $dark-grey;
+          }
+        }
+        .navbar-dropdown {
+          border: 1px solid $dark-grey;
+          border-radius: 4px;
+          .navbar-item:not(a) {
+            font: 300 18px/22px roboto!important;
+            color: $dark-grey;
+          }
+          a.navbar-item {
+            font-weight: normal;
+            color: $primary-bright-blue;
+            background: inherit;
+            &:hover, &:active, &:focus {
+              color: $secondary-bright-blue;
+              background: inherit;
+            }
+          }
+        }
+      }
+      .menu {
+        .menu-list-item {
+          margin-bottom: 12px;
+          &.is-active {
+            margin-bottom: 4px;
+            background: white;
+            border-radius: 4px 0px 0px 4px;
+            & .menu-list {
+              a.is-active {
+              color: $primary-bright-blue;
+              }
+            }
+          }
+        }
+        a {
+          border-radius: inherit;
+        }
+        a:not(.is-active) + .menu-list {
+          display: none;
+        }
+      }
+      .hr {
+        background: $dark-grey;
+        margin-right: 16px;
+        height: 1px;
+      }
+    }
+  }
+  .docs-content {
+    .container {
+      width: 768px;
+      max-width: 768px;
+      margin: 50px auto 70px 90px !important;
+    }
+  }
+}
+
