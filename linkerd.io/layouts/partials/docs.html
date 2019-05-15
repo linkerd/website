@@ -1,22 +1,23 @@
 {{ $docsVersion := index (split .page.URL "/") 1 }}
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 pt-5">
-      {{ partial (printf "%s/%s" $docsVersion "sidebar") . }}
+<div class="wrapper docs">
+  <div class="columns is-fullwidth">
+    <div class="column is-one-third has-background-light-gray docs-sidebar-container is-paddingless">
+      <div class="docs-sidebar">
+        {{ partial (printf "%s/%s" $docsVersion "sidebar") . }}
+      </div>
     </div>
+    <div class="column has-background-white docs-content is-paddingless">
+      <div class="container">
+        <h1 class="title is-1 has-text-color">{{ .page.Title }}</h1>
 
-    <div class="col-md-9 border-left docs-content">
-      <h1 class="title display-4">
-        {{ .page.Title }}
-      </h1>
+        {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}
 
-      {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}
-
-      <div class="content language-markup">
-        {{ if .page.Params.include_toc }}
-        {{ .page.TableOfContents }}
-        {{ end }}
-        {{ .page.Content }}
+        <div class="language-markup content">
+          {{ if .page.Params.include_toc }}
+          {{ .page.TableOfContents }}
+          {{ end }}
+          {{ .page.Content }}
+        </div>
       </div>
     </div>
   </div>

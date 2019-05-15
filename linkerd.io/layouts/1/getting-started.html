@@ -1,12 +1,16 @@
 {{ define "main" }}
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 pt-5">
-      {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
+<div class="wrapper docs">
+  <div class="columns is-fullwidth">
+    <div class="column is-one-third has-background-light-gray docs-sidebar-container is-paddingless">
+      <div class="docs-sidebar">
+        {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
+      </div>
     </div>
+    <div class="column has-background-white docs-content">
+      <div class="container">
 
-    <div class="col-md-9 pt-5 border-left">
-      {{ partial "get-started" . }}
+        {{ partial "get-started" . }}
+      </div>
     </div>
   </div>
 </div>
