@@ -243,6 +243,27 @@ If you installed Gloo using the Gateway method (`gloo install gateway`), then
 you'll need a VirtualService to be able to route traffic to your **Books**
 application.
 
+To use Gloo with Linkerd, you can choose one of two options.
+
+### Option 1 - Automatic
+
+As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
+required Linkerd headers are added automatically.
+
+Assuming you installed gloo to the default location, you can enable the native integration like so:
+```bash
+kubectl patch settings -n gloo-system default -p '{"spec":{"linkerd":true}}' --type=merge
+```
+
+Gloo will now automatically add the `l5d-dst-override` header to every kubernetes upstream.
+
+Now simply add a route to the books app upstream:
+```
+glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
+```
+
+### Option 2 - Manual
+
 As explained in the beggining of this document, you'll need to instruct Gloo to
 add a header which will allow Linkerd to identify where to send traffic to.
 
@@ -298,6 +319,8 @@ Using the content transformation engine built-in in Gloo, you can instruct it to
 add the needed `l5d-dst-override` header which in the example above is pointing
 to the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
 
+## Test access to the service
+
 To easily test this you can get the URL of the Gloo proxy by running:
 
 ```bash
@@ -314,8 +337,3 @@ http://192.168.99.132:30969
 For the example VirtualService above, which listens to any domain and path,
 accessing the proxy URL (`http://192.168.99.132:30969`) in your browser
 should open the Books application.
-
-Gloo has native integration with Linkerd planned in its roadmap so that the
-required Linkerd headers for this scenario can be automatically added in the
-VirtualService. This will allow for a transparent integration between Gloo and
-Linkerd without requiring per VirtualService configuration.
