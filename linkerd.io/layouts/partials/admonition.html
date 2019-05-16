@@ -1,7 +1,9 @@
-<div class="alert alert-{{ .type }}" role="alert">
-  <p>
-    <i class="fa fa-{{ .icon }}"></i>&nbsp;<strong>{{ .title }}</strong>
-  </p>
+<div class="message is-{{ .type }}" role="alert">
+  <div class="message-body">
+    <p>
+      <i class="fa fa-{{ .icon }}"></i>&nbsp;<strong>{{ .title }}</strong>
+    </p>
 
-  {{ .content | markdownify }}
+    {{ .content | markdownify }}
+  </div>
 </div>
