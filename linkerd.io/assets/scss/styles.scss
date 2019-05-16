@@ -369,6 +369,11 @@
       }
 
 
+      :not(pre) > code[class*="language-"],
+      pre[class*="language-"] {
+        background: $navy-black;
+      }
+
       :not(pre) > code[class*="language-"] {
         padding: 3px 0;
         color: $dark-grey;
