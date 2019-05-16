@@ -356,7 +356,36 @@
       width: 768px;
       max-width: 768px;
       margin: 50px auto 70px 90px !important;
+
+      .breadcrumb {
+        font: 18px/22px roboto;
+      }
+
+      .table.toc {
+        background: transparent;
+        tbody {
+          background: transparent;
+        }
+      }
+
+
+      :not(pre) > code[class*="language-"] {
+        padding: 3px 0;
+        color: $dark-grey;
+        background-color: $light-grey;
+      }
     }
   }
 }
 
+:target:before {
+  content: "";
+  display: block;
+  margin-top: -$navbar-height;
+  height: $navbar-height;
+  width: 1px;
+}
+
+.anchorjs-link {
+  font: 1em/1 anchorjs-icons !important;
+}
