@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang="en" class="">
 
 <head>
   {{ partial "head.html" . }}
@@ -7,14 +7,7 @@
   {{ end }}
 </head>
 
-<body class="has-background-grey-light">
-  {{ if not .Site.IsServer }}
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHF5SSN" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  {{ end }}
-
+<body class="has-background-grey-light has-navbar-fixed-top ">
   {{ partial "header.html" . }}
   {{ if eq .URL `/` }}
   <div class="homepage-notification has-background-light-blue has-text-navy-black center has-text-centered">
@@ -32,6 +25,11 @@
   </section>
   {{ block "body-end" . }}
   {{ end }}
+
+  <script>
+    {{/*  anchors.options.icon = '';  */}}
+    anchors.add('.content h1:not(.title), .content h2, .content h3, .content h4');
+  </script>
 </body>
 
 </html>
