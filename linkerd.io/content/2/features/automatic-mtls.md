@@ -70,7 +70,8 @@ refresh them using the same mechanism.
 
 ## Known issues
 
-* The connections that Prometheus uses to scrape proxy metrics are not currently TLS'd.
+* The connections that Prometheus uses to scrape proxy metrics are not
+  currently TLS'd.
 * Ideally, the Service Account token that Linkerd uses would not be shared with
   other potential uses of that token. Once Kubernetes support for
   audience/time-bound Service Account tokens is stable, Linkerd will use those
