@@ -9,8 +9,6 @@ thumbnail: glaciers.jpg
 
 ![glaciers](/uploads/glaciers.jpg)
 
-# Linkerd Benchmarks
-
 Linkerd's goal is to be the fastest, lightest, simplest service mesh in the
 world. To that end, several weeks ago we asked the kind folks at
 [Kinvolk](https://kinvolk.io/) to perform an independent benchmark. We wanted
