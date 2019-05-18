@@ -262,7 +262,7 @@ kubernetes upstream.
 
 Now simply add a route to the books app upstream:
 
-```
+```bash
 glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 ```
 
