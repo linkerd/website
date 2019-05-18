@@ -41,4 +41,9 @@ data plane.
 
 ---
 
-The [San Francisco Linkerd Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup) group is a gathering spot for like-minded developers and engineers of all skill levels who are interested in Linkerd, the open source service mesh. Join us now! Want to give a talk, or have a venue in SF that can host this meetup? Please email [events@buoyant.io](mailto:events@buoyant.io)!
+The [San Francisco Linkerd
+Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup) group is a
+gathering spot for like-minded developers and engineers of all skill levels who
+are interested in Linkerd, the open source service mesh. Join us now! Want to
+give a talk, or have a venue in SF that can host this meetup? Please email
+[events@buoyant.io](mailto:events@buoyant.io)!
