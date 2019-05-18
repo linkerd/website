@@ -250,15 +250,19 @@ To use Gloo with Linkerd, you can choose one of two options.
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically.
 
-Assuming you installed gloo to the default location, you can enable the native integration like so:
+Assuming you installed gloo to the default location, you can enable the native
+integration like so:
+
 ```bash
 kubectl patch settings -n gloo-system default -p '{"spec":{"linkerd":true}}' --type=merge
 ```
 
-Gloo will now automatically add the `l5d-dst-override` header to every kubernetes upstream.
+Gloo will now automatically add the `l5d-dst-override` header to every
+kubernetes upstream.
 
 Now simply add a route to the books app upstream:
-```
+
+```bash
 glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 ```
 

@@ -44,7 +44,6 @@ workflows:
       - test
       - publish:
           requires:
-            - test
           filters:
             branches:
               only:
