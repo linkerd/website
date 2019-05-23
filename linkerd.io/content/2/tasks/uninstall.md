@@ -21,7 +21,7 @@ Then, to remove the [control plane](/2/reference/architecture/#control-plane),
 run:
 
 ```bash
-linkerd install | kubectl delete -f -
+linkerd install --ignore-cluster | kubectl delete -f -
 ```
 
 The `linkerd install` command outputs the YAML definitions for all of the
