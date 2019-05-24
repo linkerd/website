@@ -11,10 +11,9 @@ thumbnail: sound-mixer.jpg
 
 Earlier this week at [Kubecon
 EU](https://events.linuxfoundation.org/events/kubecon-cloudnativecon-europe-2019/),
-Linkerd Microsoft announced a project called the [Service Mesh
-Interface](https://smi-spec.io) (SMI). SMI is a specification that exposes core
-service mesh features like telemetry, traffic shifting, and policy, purely via
-Kubernetes primitives.
+Microsoft announced the [Service Mesh Interface](https://smi-spec.io) (SMI).
+SMI is a specification that exposes core service mesh features like telemetry,
+traffic shifting, and policy, purely via Kubernetes primitives.
 
 The Linkerd community has been working heavily with our friends from Microsoft
 and Hashicorp on SMI for the past few months. In fact, the [top two
