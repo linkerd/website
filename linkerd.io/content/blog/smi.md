@@ -53,5 +53,4 @@ community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the [mailing
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
-
 Image credit: [I G](https://www.flickr.com/photos/qubodup/)
