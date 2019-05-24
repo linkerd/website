@@ -33,11 +33,11 @@ the service mesh. With SMI, awesome tools like
 on SMI rather than tying their implementation to a specific mesh. This is great
 for Linkerd users and great for the community as a whole.
 
-Linkerd 2.3 already implements SMI's _Traffic Metrics_ spec. In next month's
-2.4, we'll add support for _Traffic Split_ (which means that, yes, next month
-Linkerd will support traffic shifting for canaries and blue-green deploys!), and
-in later releases we'll flesh out Linkerd's support of the remaining SMI
-interfaces.
+Linkerd 2.3 [already implements SMI's _Traffic Metrics_
+spec](https://github.com/deislabs/smi-metrics). In next month's 2.4, we'll add
+support for _Traffic Split_ (which means that, yes, next month Linkerd will
+support traffic shifting for canaries and blue-green deploys!), and in later
+releases we'll flesh out Linkerd's support for the remaining SMI interfaces.
 
 Linkerd is the [fastest, lightest, simplest service mesh in the
 world](http://localhost:1313/2019/05/18/linkerd-benchmarks/), and we're excited
