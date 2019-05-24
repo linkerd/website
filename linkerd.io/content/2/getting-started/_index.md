@@ -25,8 +25,8 @@ We'll walk you through this process step by step.
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to a Kubernetes
-cluster running 1.9 or later, and a functioning `kubectl` command on your local
-machine.
+cluster running 1.10.0 or later, and a functioning `kubectl` command on your
+local machine.
 
 You can run Kubernetes on your local machine. We suggest
 [Docker Desktop](https://www.docker.com/products/docker-desktop) or
