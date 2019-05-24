@@ -13,7 +13,7 @@ blog = "/:year/:month/:day/:slug/"
 [params]
   latest_release_version = "1.6.3"
   latest_release_date = "2019-05-10"
-  description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
+  description = "Linkerd is the fastest, lightest, simplest service mesh for Kubernetes"
 
   l5d2_release_version = "L5D2_STABLE_VERSION"
   l5d2_edge_version = "L5D2_EDGE_VERSION"
