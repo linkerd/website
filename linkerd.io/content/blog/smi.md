@@ -39,7 +39,7 @@ support traffic shifting for canaries and blue-green deploys!), and in later
 releases we'll flesh out Linkerd's support for the remaining SMI interfaces.
 
 Linkerd is the [fastest, lightest, simplest service mesh in the
-world](http://localhost:1313/2019/05/18/linkerd-benchmarks/), and we're excited
+world](/2019/05/18/linkerd-benchmarks/), and we're excited
 about SMI's ability to bring Linkerd to even more users around the globe.
 
 ---
