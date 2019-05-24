@@ -55,9 +55,7 @@ The "d" is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
 Linkerd 1.x is built on the "Twitter stack": Finagle, Netty, Scala, and the
 JVM. Linkerd 2.x is built in Rust and Go, and is significantly faster and
 lighter-weight. However, Linkerd 2.x currently does not have the full platform
-support or featureset of 1.x. (See
-[the full list of supported platforms](/choose-your-platform/)
-across both versions.)
+support or featureset of 1.x.
 
 ## Is Linkerd 1.x still supported?
 
