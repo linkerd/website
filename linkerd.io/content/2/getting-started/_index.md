@@ -15,10 +15,10 @@ In this guide, we’ll walk you through how to install Linkerd into your
 Kubernetes cluster. Then we'll deploy a sample application to show off
 what Linkerd can do for your services.
 
-Installing Linkerd is easy. First, you first install the CLI (command-line
-interface) onto your local machine. Using this CLI, you'll install the Linkerd
+Installing Linkerd is easy. First, you will install the CLI (command-line
+interface) onto your local machine. Using this CLI, you'll then install the Linkerd
 control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
-services by adding the the data plane proxies. (See the
+services by adding the data plane proxies. (See the
 [Architecture](../architecture/) page for details.)
 
 We'll walk you through this process step by step.
