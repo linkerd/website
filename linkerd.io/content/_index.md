@@ -8,9 +8,9 @@ top_hero:
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
-    url: https://github.com/linkerd/linkerd2
+    url: /2/getting-started
   - caption: Join the Community
-    url: https://github.com/linkerd/linkerd2
+    url: /community
   image_on_the_right: false
 announcement_banner:
   description: 2.2.1 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)

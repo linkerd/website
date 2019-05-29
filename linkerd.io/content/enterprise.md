@@ -11,11 +11,11 @@ support:
   bottom_description: Offering Linkerd support? Add your company!
   description: ''
   title: >-
-    Companies offering commercial support  and other enterprise offerings for
+    Companies offering commercial support and other enterprise offerings for
     Linkerd:
   buttons:
   - caption: Create Pull Request
-    url: '#'
+    url: https://github.com/linkerd/website
   companies:
   - description: >-
       Buoyant is the original creator of Linkerd and provides support,

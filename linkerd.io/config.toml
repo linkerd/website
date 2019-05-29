@@ -19,7 +19,7 @@ name = "Discourse"
 url = "https://discourse.linkerd.io/"
 weight = 2
 [[menu.community]]
-name = "Github"
+name = "GitHub"
 url = "https://github.com/linkerd/linkerd2"
 weight = 1
 [[menu.follow]]
@@ -55,7 +55,7 @@ identifier = "start"
 name = "GET STARTED"
 post = "</span>"
 pre = "<span class='button-spacer'>"
-url = "https://github.com/linkerd/linkerd2"
+url = "/2/getting-started"
 weight = 6
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
