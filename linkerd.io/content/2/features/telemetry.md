@@ -55,8 +55,8 @@ respectively.
 
 ### Latencies
 
-Times taken to service requests per service/route are split into 50%, 95% and
-99% percentiles. Lower percentiles give you an overview of the average
+Times taken to service requests per service/route are split into 50th, 95th and
+99th percentiles. Lower percentiles give you an overview of the average
 performance of the system, while tail percentiles help catch outlier behavior.
 
 ## Lifespan of Linkerd metrics
