@@ -2,12 +2,7 @@
   <div class="columns center-column is-marginless is-fullwidth">
     <div class="column">
       <div class="container columns community-top-hero is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
-        <div class="column center">
-          <figure class="image">
-            <img
-              {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }}
-              alt="header illustration" />
-          </figure>
+        <div class="column">
         </div>
         <div class="column center">
           <div class="notification">
