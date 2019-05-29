@@ -52,7 +52,7 @@ features_list:
       service dependency maps and live traffic samples.
     image: "/uploads/value-props/stethoscope.svg"
   - title: Actionable service metrics
-    description: Best-in-class observability allows you to monitor _golden metrics_—success
+    description: Best-in-class observability allows you to monitor golden metrics—success
       rate, request volume, and latency—for every service.
     image: "/uploads/value-props/graph.svg"
   buttons:
