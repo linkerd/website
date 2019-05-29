@@ -36,6 +36,7 @@ This data can be consumed in several ways:
 ## Golden metrics
 
 ### Success Rate
+
 This is the percentage of successful requests during a time window (1 minute by
 default).
 
@@ -46,12 +47,14 @@ the client-side), and the latter before retries (which can expose potential
 problems with the service).
 
 ### Traffic (Requests Per Second)
+
 This gives an overview of how much demand is placed on the service/route. As
 with success rates, `linkerd routes --o wide` splits this metric into
 EFFECTIVE_RPS and ACTUAL_RPS, corresponding to rates after and before retries
 respectively.
 
 ### Latencies
+
 Times taken to service requests per service/route are split into 50%, 95% and
 99% percentiles. Lower percentiles give you an overview of the average
 performance of the system, while tail percentiles help catch outlier behavior.
