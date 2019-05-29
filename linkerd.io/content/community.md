@@ -11,7 +11,7 @@ top_hero:
   - caption: I gave a talk!
     url: https://github.com/linkerd/linkerd2
   - caption: I use Linkerd!
-    url: https://github.com/linkerd/linkerd2
+    url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
   image_on_the_right: false
 link_lists:
   links_list:
@@ -54,8 +54,8 @@ talk_hero:
   image: "/uploads/IMG_3409.JPG"
   image_on_the_right: false
   buttons:
-  - caption: Download Slides
-    url: https://github.com/linkerd/linkerd2
+  - caption: Get Slides
+    url: https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit#slide=id.g43a491cf2f_1_4
   - caption: Request Swag
     url: https://github.com/linkerd/linkerd2
 jobs:
@@ -72,7 +72,7 @@ jobs:
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
-    url: "#"
+    url: https://github.com/linkerd/website
 menu:
   top:
     weight: 2
