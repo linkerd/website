@@ -43,7 +43,7 @@ link_lists:
       url: https://twitter.com/linkerd
       icon_name: fab fa-twitter
     - caption: YouTube
-      url: https://www.youtube.com/channel/UCJbuow7WWvREXfdpiROnn7w
+      url: https://www.youtube.com/buoyantio
       icon_name: fab fa-youtube
     - caption: Calendar
       url: https://calendar.google.com/calendar/embed?src=buoyant.io_ko9bgtral72jnbrg3ljtvbprsc%40group.calendar.google.com&ctz=America%2FLos_Angeles

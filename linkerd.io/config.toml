@@ -28,7 +28,7 @@ url = "https://twitter.com/linkerd"
 weight = 3
 [[menu.follow]]
 name = "YouTube"
-url = "https://www.youtube.com/channel/UCJbuow7WWvREXfdpiROnn7w"
+url = "https://www.youtube.com/buoyantio"
 weight = 1
 [[menu.follow]]
 name = "LinkedIn"
