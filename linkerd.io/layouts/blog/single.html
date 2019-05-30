@@ -11,50 +11,38 @@
           <figure class="media-left">
             <p class="image is-64x64">
               {{ if $author.avatar }}
-              <img
-                {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
+              <img {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
                 alt="{{ $author.name }}" />
               {{ else }}
-              <img
-                class="is-rounded"
-                src="/images/identity/svg/linkerd_mark_grid_small.svg"
-                alt="author avatar" style="background: #F2F2F2;"
-              />
+              <img class="is-rounded" src="/images/identity/svg/linkerd_mark_grid_small.svg" alt="author avatar"
+                style="background: #F2F2F2;" />
               {{ end }}
             </p>
           </figure>
           <div class="media-content">
             <div class="content">
               <p>
-                <strong>{{ $author.name }}</strong
-                ><br />
+                <strong>{{ $author.name }}</strong><br />
                 {{ $date }} • {{ partial "readingtime.html" . }}
               </p>
             </div>
           </div>
         </div>
-      </aside>
-      <article class="language-markup">
-        {{ .Content }}
-      </article>
+      </div>
     </div>
   </div>
-</div>
-<div class="wrapper has-background-white">
-  <div class="container blog-content-container">
-    {{ .Content }}
-    <hr class="seperator has-background-grey-light" />
-    <div class="center">
-      <div class="addthis_inline_share_toolbox"></div>
+  <div class="wrapper has-background-white">
+    <div class="container blog-content-container language-markup">
+      {{ .Content }}
+      <hr class="seperator has-background-grey-light" />
+      <div class="center">
+        <div class="addthis_inline_share_toolbox"></div>
+      </div>
     </div>
   </div>
-</div>
-{{ partial "homepage/adopter-banner.html" .Site.Home }}
-{{ end }}
+  {{ partial "homepage/adopter-banner.html" .Site.Home }}
+  {{ end }}
 
-{{ define "body-end" }}
-<script
-  type="text/javascript"
-  src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c6c43959addf02a"
-></script>
-{{ end }}
+  {{ define "body-end" }}
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c6c43959addf02a"></script>
+  {{ end }}

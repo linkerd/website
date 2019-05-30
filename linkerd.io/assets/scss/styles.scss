@@ -194,6 +194,7 @@
 .container.blog-content-container {
   font-family: $family-sans-serif;
   color: $navy-black;
+  padding: 30px 0;
   p,
   div {
     font-size: 18px;
@@ -206,6 +207,11 @@
   }
   hr {
     margin: 0;
+  }
+
+  code {
+    color: inherit;
+    background: inherit;
   }
 }
 
@@ -356,7 +362,7 @@
     .container {
       width: 768px;
       max-width: 768px;
-      margin: 50px auto 70px 90px !important;
+      margin: 0px auto 70px 90px !important;
 
       .breadcrumb {
         font: 18px/22px roboto;
