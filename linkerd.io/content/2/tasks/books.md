@@ -41,7 +41,7 @@ kubectl create ns booksapp && \
 This command creates a namespace for the demo, downloads its Kubernetes
 resource manifest and uses `kubectl` to apply it to your cluster. The
 app is comprised of Kubernetes deployments and services that run in the
-booksapp namespace.
+`booksapp` namespace.
 
 Downloading a bunch of containers for the first time takes a little while.
 Kubernetes can tell you when all the services are running and ready for traffic.
@@ -127,17 +127,17 @@ same thing yourself and push that success rate even lower. Click on `webapp` in
 the Linkerd dashboard for a live debugging session.
 
 You should now be looking at the detail view for the `webapp` service. You’ll
-see that `webapp` is taking traffic from `traffic` the load generator, and has
-two outgoing dependencies: `authors` and `book`. One is the service for pulling
-in author information and the other is the service for pulling in book
+see that `webapp` is taking traffic from `traffic` (the load generator), and it
+has two outgoing dependencies: `authors` and `book`. One is the service for
+pulling in author information and the other is the service for pulling in book
 information.
 
 {{< fig src="/images/books/webapp-detail.png" title="Detail" >}}
 
 A failure in a dependent service may be exactly what’s causing the errors that
 `webapp` is returning (and the errors you as a user can see when you click). We
-can see that `books` service is also failing. Let’s scroll a little further down
-the page, we’ll see a live list of all traffic endpoints that webapp is
+can see that the `books` service is also failing. Let’s scroll a little further
+down the page, we’ll see a live list of all traffic endpoints that `webapp` is
 receiving. This is interesting:
 
 {{< fig src="/images/books/top.png" title="Top" >}}
@@ -408,38 +408,40 @@ This should look something like:
 
 ```bash
 ROUTE                     SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /books/{id}.json     books   100.00%   0.6rps           9ms          19ms          20ms
-GET /books.json             books   100.00%   1.2rps           7ms          10ms          10ms
-GET /books/{id}.json        books   100.00%   2.3rps           7ms          10ms          18ms
-POST /books.json            books    48.00%   2.5rps          16ms          28ms          30ms
-PUT /books/{id}.json        books    53.97%   1.1rps          75ms          98ms         100ms
+DELETE /books/{id}.json     books   100.00%   0.7rps          10ms          27ms          29ms
+GET /books.json             books   100.00%   1.3rps           9ms          34ms          39ms
+GET /books/{id}.json        books   100.00%   2.0rps           9ms          52ms          91ms
+POST /books.json            books   100.00%   1.3rps          45ms         140ms         188ms
+PUT /books/{id}.json        books   100.00%   0.7rps          80ms         170ms         194ms
 [DEFAULT]                   books     0.00%   0.0rps           0ms           0ms           0ms
 ```
 
-For the purposes of this demo, let's set the timeout to 25ms. Your results will
-vary depending on the characteristics of your cluster. To edit the `books`
-service profile, run:
+Requests to the `books` service's `PUT /books/{id}.json` route include retries
+for when that service calls the `authors` service as part of serving those
+requests, as described in the previous section. This improves success rate, at
+the cost of additional latency. For the purposes of this demo, let's set a 25ms
+timeout for calls to that route. Your latency numbers will vary depending on the
+characteristics of your cluster. To edit the `books` service profile, run:
 
 ```bash
-kubectl -n booksapp edit sp/authors.booksapp.svc.cluster.local
+kubectl -n booksapp edit sp/books.booksapp.svc.cluster.local
 ```
 
-Update the route that we modified in the previous section to have a timeout:
+Update the `PUT /books/{id}.json` route to have a timeout:
 
 ```yaml
 spec:
   routes:
   - condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    name: HEAD /authors/{id}.json
-    isRetryable: true
+      method: PUT
+      pathRegex: /books/[^/]*\.json
+    name: PUT /books/{id}.json
     timeout: 25ms ### ADD THIS LINE ###
 ```
 
 Linkerd will now return errors to the `webapp` REST client when the timeout is
-reached. This timeout includes retried requests and is the maximum
-amount of time a REST client would wait for a response.
+reached. This timeout includes retried requests and is the maximum amount of
+time a REST client would wait for a response.
 
 Run `routes` to see what has changed:
 
@@ -451,13 +453,15 @@ With timeouts happening now, the metrics will change:
 
 ```bash
 ROUTE                     SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /books/{id}.json     books             100.00%          0.3rps          100.00%       0.3rps          15ms          20ms          20ms
-GET /books.json             books             100.00%          0.6rps          100.00%       0.6rps           8ms          10ms          10ms
-GET /books/{id}.json        books              14.78%          4.8rps          100.00%       0.7rps           6ms          10ms          15ms
-POST /books.json            books              51.95%          1.3rps           51.95%       1.3rps          17ms          28ms          30ms
-PUT /books/{id}.json        books              53.66%          0.7rps           53.66%       0.7rps          75ms          98ms         100ms
+DELETE /books/{id}.json     books             100.00%          0.7rps          100.00%       0.7rps           8ms          46ms          49ms
+GET /books.json             books             100.00%          1.3rps          100.00%       1.3rps           9ms          33ms          39ms
+GET /books/{id}.json        books             100.00%          2.2rps          100.00%       2.2rps           8ms          19ms          28ms
+POST /books.json            books             100.00%          1.3rps          100.00%       1.3rps          27ms          81ms          96ms
+PUT /books/{id}.json        books              86.96%          0.8rps          100.00%       0.7rps          75ms          98ms         100ms
 [DEFAULT]                   books               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
 ```
 
-Note that the p99 latency appears to be greater than our 25ms timeout due to
-histogram bucketing artifacts.
+The latency numbers include time spent in the `webapp` application itself, so
+it's expected that they exceed the 25ms timeout that we set for requests from
+`webapp` to `books`. We can see that the timeouts are working by observing that
+the effective success rate for our route has dropped below 100%.
