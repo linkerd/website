@@ -9,6 +9,13 @@ thumbnail: glaciers.jpg
 
 ![glaciers](/uploads/glaciers.jpg)
 
+(**Update 5/30/2019:** Based on feedback from the Istio team, Kinvolk has
+[re-run some of the Istio
+benchmarks](https://github.com/kinvolk/service-mesh-benchmark/issues/5#issuecomment-496482381).
+The results are largely similar to before, with Linkerd maintaining a
+*significant* advantage over Istio in latency, memory footprint, and possibly
+CPU. Below, we've noted the newer numbers for Istio when applicable.)
+
 Linkerd's goal is to be the fastest, lightest, simplest service mesh in the
 world. To that end, several weeks ago we asked the kind folks at
 [Kinvolk](https://kinvolk.io/) to perform an independent benchmark. We wanted
@@ -72,6 +79,11 @@ worse than Linkerd's p99. Its p999 was well over a second, compared to
 Linkerd's 679ms, and its worst case was a full 5s of latency, 2.5x what was
 measured with Linkerd.
 
+(**Update**: Kinvolks's re-tuned Istio benchmarks dropped Istio's p99 from 100x
+that of Linkerd's to 26x and 59x that of Linkerd's across two runs. It also
+dropped Istio's p999 to just under a second, thought still *double* Linkerd's
+p999.)
+
 In the 600rps condition, the difference between the two service meshes is
 exaggerated. While Linkerd's p99 elevates from 6.7ms to 7ms, 4ms over the "no
 service mesh" baseline, Istio's p99 was a full 4.4 minutes (!). While Linkerd's
@@ -79,6 +91,10 @@ p999 climbed to 850ms, compared to the baseline of 3.8ms, Istio's p999 is
 almost 6 minutes. Even Istio's p50 (median) latency was an unacceptable 17.6
 seconds. In short, Istio was not able to perform effectively in Kinvolk's
 600rps condition.
+
+(**Update**: Kinvolks's re-tuned Istio showed similar performance in the 600rps
+condition, with p99 latency for Istio remaining in the minutes and median
+latency between 10 and 20 seconds.)
 
 **_Summary: Linkerd had a latency advantage over Istio. In the 500rps
 condition, Istio's p99 was 100x of Linkerd's. in the 600rps condition, Istio's
@@ -129,6 +145,11 @@ Linkerd.)
 utilization was higher than Istio's in the 600rps condition, though it's hard
 to know how real this result was because Istio was not able to fully perform in
 this condition._**
+
+(**Update**: Kinvolks's re-tuned Istio benchmarks showed a "massive increase in
+CPU usage of Isto's proxy sidecar". While no numbers were reported, from this
+description it is clear that Linkerd's CPU usage was less than Istio's in this
+configuration.)
 
 ## Conclusion
 
