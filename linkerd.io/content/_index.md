@@ -78,8 +78,8 @@ companies:
   link: https://www.ebay.com/
 - image: "/uploads/logos/blue/godaddy.svg"
   link: https://godaddy.com/
-- image: "/uploads/logos/blue/kairos.png"
-  link: https://www.kairos.com/
+- image: "/uploads/logos/blue/walmart.svg"
+  link: https://www.walmart.com/
 - image: "/uploads/logos/blue/planet.svg"
   link: https://www.planet.com/
 - image: "/uploads/logos/blue/strava.svg"
