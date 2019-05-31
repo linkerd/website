@@ -52,8 +52,8 @@ never fear! Here's the full list:
   Buoyant](https://www.youtube.com/watch?v=Z3nfLI3z0hc)
 - [Scavenging for Reusable Code in the Kubernetes Codebase - Kevin Lingerfelt,
   Buoyant](https://www.youtube.com/watch?v=G8swjziYjY8)
-- [What WePay Learned From Processing Billions of Dollar Using Linkerd - Mohsen
-  Rezaei, WePay](https://www.youtube.com/watch?v=ph_NqGNHdhM)
+- [What WePay Learned From Processing Billions of Dollars Using Linkerd -
+  Mohsen Rezaei, WePay](https://www.youtube.com/watch?v=ph_NqGNHdhM)
 - [Panel Discussion: Ask Us Anything: Microservices and Service
   Mesh](https://www.youtube.com/watch?v=101xw1RN3t4)
 - [JustFootball’s Journey to gRPC + Linkerd in Production - Ben Lambert, Just
