@@ -97,6 +97,10 @@ November in San Diego!
 
 {{<tweet 1130789969293991936>}}
 
+{{<tweet 1131493061916319744>}}
+
+{{<tweet 1130810652862373889>}}
+
 ---
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
