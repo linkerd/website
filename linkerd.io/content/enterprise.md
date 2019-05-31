@@ -15,12 +15,12 @@ support:
     Linkerd:
   buttons:
   - caption: Create Pull Request
-    url: https://github.com/linkerd/website
+    url: https://github.com/linkerd/website/pulls
   companies:
   - description: >-
       Buoyant is the original creator of Linkerd and provides support,
       training, and enterprise products.
     thumbnail: '/uploads/buoyant_thumbnail.svg'
     title: Buoyant
-    url: 'https://buoyant.io/enterprise'
+    url: 'https://buoyant.io/commercial-support/'
 ---
