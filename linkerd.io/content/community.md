@@ -57,7 +57,7 @@ talk_hero:
   - caption: Get Slides
     url: https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit#slide=id.g43a491cf2f_1_4
   - caption: Request Swag
-    url: https://github.com/linkerd/linkerd2
+    url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
 jobs:
   title: Jobs in the Community
   description: Check out these Linkerd related jobs from companies who love Linkerd
@@ -72,7 +72,7 @@ jobs:
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
-    url: https://github.com/linkerd/website
+    url: https://github.com/linkerd/website/pulls
 menu:
   top:
     weight: 2
