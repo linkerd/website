@@ -8,6 +8,10 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+        keys:
+          - htmltest
+
       - run:
           name: Validate markdown
           command: |-
@@ -17,6 +21,11 @@ jobs:
           name: Check for bad links
           command: |-
             make check
+
+      - save_cache:
+        key: htmltest
+        paths:
+          - tmp/linkerd.io/tmp/.htmltest
 
   publish:
     docker:
