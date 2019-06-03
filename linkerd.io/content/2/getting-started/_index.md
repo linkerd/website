@@ -2,7 +2,8 @@
 title = "Getting Started"
 aliases = [
   "/getting-started/istio/",
-  "/choose-your-platform/"
+  "/choose-your-platform/",
+  "/2/katacoda/"
 ]
 weight = 2
 [sitemap]

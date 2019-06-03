@@ -31,7 +31,7 @@ In order to do this without incurring latency or significant memory consumption 
   alt="Initial telemetry pipeline architecture" src="/uploads/2018/05/conduit-prom-1-1024x656-1024x656.png"
   title="Initial telemetry pipeline architecture" >}}
 
-### Write pipeline
+### Writes
 
 In this initial version, proxies pushed metrics via a [gRPC write interface][proto] provided by the Telemetry service. The overall telemetry flow was:
 
@@ -68,7 +68,7 @@ message ServerTransport {
 ...
 ```
 
-### Read pipeline
+### Reads
 
 Similarly, the initial read path used a [gRPC read interface](https://github.com/runconduit/conduit/blob/v0.2.0/proto/controller/telemetry/telemetry.proto#L7-L35) for the Public API to query the Telemetry service, and followed a comparable flow:
 

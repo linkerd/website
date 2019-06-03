@@ -58,7 +58,13 @@ lint:
 ifndef HAS_MDLINT
 	@printf "Install markdownlint first, run npm install -g markdownlint-cli\n"; exit 1
 endif
-	markdownlint -c linkerd.io/.markdownlint.yaml linkerd.io/content
+	markdownlint -c linkerd.io/.markdownlint.yaml \
+		-i linkerd.io/content/blog \
+		-i linkerd.io/content/dashboard \
+		linkerd.io/content
+	markdownlint -c linkerd.io/.markdownlint.blog.yaml \
+		linkerd.io/content/blog \
+		linkerd.io/content/dashboard
 
 .PHONY: check
 check: build-linkerd.io
