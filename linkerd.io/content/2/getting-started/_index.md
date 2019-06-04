@@ -33,7 +33,7 @@ You can run Kubernetes on your local machine. We suggest
 [Docker Desktop](https://www.docker.com/products/docker-desktop) or
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). For other
 options, see the
-[full list](https://kubernetes.io/docs/setup/pick-right-solution/).
+[full list](https://kubernetes.io/docs/setup/).
 
 When ready, make sure you're running a recent version of Kubernetes with:
 

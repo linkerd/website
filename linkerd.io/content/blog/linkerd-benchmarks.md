@@ -163,8 +163,9 @@ We're pleased to see that Linkerd has a very significant advantage in latency
 and memory consumption over Istio. While CPU usage was comparable, we feel that
 Linkerd can do better. We suspect there is low-hanging fruit in linkerd-proxy,
 and we're eager to see if a little profiling and tuning can reduce CPU
-consumption over the next few releases. (And we'd love your help -- hop into
-the [Linkerd Slack](slack.linkerd.io) or [come talk to us next week at Kubecon
+consumption over the next few releases. (And we'd love your help -- hop into the
+[Linkerd Slack](https://slack.linkerd.io) or [come talk to us next week at
+Kubecon
 EU](https://buoyant.io/2019/04/23/linkerd-community-guide-to-kubecon-eu-2019/)!)
 
 In the future, we hope that projects like [Meshery](https://layer5.io/meshery/)
