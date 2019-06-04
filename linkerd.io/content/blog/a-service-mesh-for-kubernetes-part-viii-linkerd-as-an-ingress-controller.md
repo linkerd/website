@@ -1,6 +1,8 @@
 ---
 slug: 'a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller'
 title: 'A Service Mesh for Kubernetes, Part VIII: Linkerd as an ingress controller'
+aliases:
+  - /2017/04/06/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/
 author: 'sarah'
 thumbnail: /uploads/kubernetes8_featured_Twitter_ratio.png
 date: Thu, 06 Apr 2017 23:34:10 +0000
@@ -8,14 +10,9 @@ draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 
-Linkerd is designed to make service-to-service communication internal to an
-application safe, fast and reliable. However, those same goals are also
-applicable at the edge. In this post, we’ll demonstrate a new feature of Linkerd
-which allows it to act as a Kubernetes ingress controller, and show how it can
-handle ingress traffic both with and without TLS.
+Linkerd is designed to make service-to-service communication internal to an application safe, fast and reliable. However, those same goals are also applicable at the edge. In this post, we’ll demonstrate a new feature of Linkerd which allows it to act as a Kubernetes ingress controller, and show how it can handle ingress traffic both with and without TLS.
 
-This is one article in a series of articles about Linkerd, Kubernetes, and
-service meshes. Other installments in this series include:
+This is one article in a series of articles about Linkerd, Kubernetes, and service meshes. Other installments in this series include:
 
 1. [Top-line service metrics]({{< ref
    "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}})
@@ -23,20 +20,12 @@ service meshes. Other installments in this series include:
    "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}})
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}})
-4. [Continuous deployment via traffic shifting]({{< ref
-   "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting"
-   >}})
-5. [Dogfood environments, ingress, and edge routing]({{< ref
-   "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing"
-   >}})
-6. [Staging microservices without the tears]({{< ref
-   "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears"
-   >}})
+4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
+5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
+6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
 7. [Distributed tracing made easy]({{< ref
    "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}})
-8. [Linkerd as an ingress controller]({{< ref
-   "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller"
-   >}}) (this article)
+8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}} (this article)
 9. [gRPC for fun and profit]({{< ref
    "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}})
 10. [The Service Mesh API]({{< ref
@@ -45,38 +34,15 @@ service meshes. Other installments in this series include:
 12. Retry budgets, deadline propagation, and failing gracefully
 13. Autoscaling by top-line metrics
 
-In a [previous
-installment][part-v]
-of this series, we explored how to receive external requests by deploying
-Linkerd as a Kubernetes DaemonSet and routing traffic through the corresponding
-Service VIP. In this post, we’ll simplify this setup by using Linkerd as a
-[Kubernetes ingress
-controller](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers),
-taking advantage of features introduced in [Linkerd
-0.9.1](https://github.com/linkerd/linkerd/releases/tag/0.9.1).
+In a [previous installment][part-v] of this series, we explored how to receive external requests by deploying Linkerd as a Kubernetes DaemonSet and routing traffic through the corresponding Service VIP. In this post, we’ll simplify this setup by using Linkerd as a [Kubernetes ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-controllers), taking advantage of features introduced in [Linkerd 0.9.1](https://github.com/linkerd/linkerd/releases/tag/0.9.1).
 
-This approach has the benefits of simplicity and a tight integration with the
-Kubernetes API. However, for more complex requirements like on-demand TLS cert
-generation, SNI, or routing based on cookie values (e.g. the employee dogfooding
-approach discussed in [Part V of this
-series][part-v]),
-combining Linkerd with a dedicated edge layer such as NGINX is still necessary.
+This approach has the benefits of simplicity and a tight integration with the Kubernetes API. However, for more complex requirements like on-demand TLS cert generation, SNI, or routing based on cookie values (e.g. the employee dogfooding approach discussed in [Part V of this series][part-v]), combining Linkerd with a dedicated edge layer such as NGINX is still necessary.
 
-What is a Kubernetes ingress controller? An ingress controller is an edge router
-that accepts traffic from the outside world and forwards it to services in your
-Kubernetes cluster. The ingress controller uses HTTP host and path routing rules
-defined in Kubernetes’ [ingress
-resources](https://kubernetes.io/docs/concepts/services-networking/ingress/).
+What is a Kubernetes ingress controller? An ingress controller is an edge router that accepts traffic from the outside world and forwards it to services in your Kubernetes cluster. The ingress controller uses HTTP host and path routing rules defined in Kubernetes’ [ingress resources](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 
 ## INGRESS HELLO WORLD
 
-Using a [Kubernetes
-config](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml)
-from the [linkerd-examples](https://github.com/linkerd/linkerd-examples) repo,
-we can launch Linkerd as a dedicated ingress controller. The config follows the
-same pattern as our [previous posts on k8s
-daemonsets][part-ii]:
-it deploys an `l5d-config` ConfigMap, an `l5d` DaemonSet, and an `l5d` Service.
+Using a [Kubernetes config](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml) from the [linkerd-examples](https://github.com/linkerd/linkerd-examples) repo, we can launch Linkerd as a dedicated ingress controller. The config follows the same pattern as our [previous posts on k8s daemonsets][part-ii]: it deploys an `l5d-config` ConfigMap, an `l5d` DaemonSet, and an `l5d` Service.
 
 {{< fig
   alt="diagram"
@@ -85,9 +51,7 @@ it deploys an `l5d-config` ConfigMap, an `l5d` DaemonSet, and an `l5d` Ser
 
 ### STEP 1: DEPLOY LINKERD
 
-First let’s deploy Linkerd. You can of course deploy into the default namespace,
-but here we’ve put Linkerd in its own namespace for better separation of
-concerns:
+First let’s deploy Linkerd. You can of course deploy into the default namespace, but here we’ve put Linkerd in its own namespace for better separation of concerns:
 
 ```bash
 kubectl create ns l5d-system
@@ -104,9 +68,7 @@ l5d-3cmfp   2/2       Running   0          5s
 l5d-dj1sm   2/2       Running   0          5s
 ```
 
-And take a look at the admin dashboard (This command assumes your cluster
-supports LoadBalancer services, and remember that it may take a few minutes for
-the ingress LB to become available.):
+And take a look at the admin dashboard (This command assumes your cluster supports LoadBalancer services, and remember that it may take a few minutes for the ingress LB to become available.):
 
 ```bash
 L5D_SVC_IP=$(kubectl get svc l5d -n l5d-system -o jsonpath="{.status.loadBalancer.ingress[0].*}")
@@ -121,8 +83,7 @@ L5D_SVC_IP=$HOST_IP:$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.port
 open http://$HOST_IP:$(kubectl get svc l5d -n l5d-system -o 'jsonpath={.spec.ports[1].nodePort}') # on OS X
 ```
 
-Let’s take a closer look at the ConfigMap we just deployed. It stores
-the `config.yaml`file that Linkerd mounts on startup.
+Let’s take a closer look at the ConfigMap we just deployed. It stores the `config.yaml`file that Linkerd mounts on startup.
 
 ```bash
 $ kubectl get cm l5d-config -n l5d-system -o yaml
@@ -146,20 +107,11 @@ data:
       orgId: linkerd-examples-ingress
 ```
 
-You can see that this config defines an HTTP router on port 80 that identifies
-incoming requests using ingress resources (via
-the [`io.l5d.ingress` identifier](https://linkerd.io/config/1.0.0/linkerd/index.html#ingress-identifier)).
-The resulting namespace, port, and service name are then passed to
-the [Kubernetes
-namer](https://linkerd.io/config/1.0.0/linkerd/index.html#kubernetes-service-discovery)
-for resolution. We’ve also set `clearContext` to `true` in order to remove any
-incoming Linkerd context headers from untrusted sources.
+You can see that this config defines an HTTP router on port 80 that identifies incoming requests using ingress resources (via the [`io.l5d.ingress` identifier](https://linkerd.io/config/1.0.0/linkerd/index.html#ingress-identifier)). The resulting namespace, port, and service name are then passed to the [Kubernetes namer](https://linkerd.io/config/1.0.0/linkerd/index.html#kubernetes-service-discovery) for resolution. We’ve also set `clearContext` to `true` in order to remove any incoming Linkerd context headers from untrusted sources.
 
 ### STEP 2: DEPLOY THE HELLO WORLD APPLICATION
 
-Now it’s time to deploy our application, so that our ingress controller can
-route traffic to us. We’ll deploy a simple app consisting of a hello and a world
-service.
+Now it’s time to deploy our application, so that our ingress controller can route traffic to us. We’ll deploy a simple app consisting of a hello and a world service.
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world.yml
@@ -191,10 +143,7 @@ Unknown destination: Request("GET /", from /184.23.234.210:58081) / no ingress r
 
 ### STEP 3: CREATE THE INGRESS RESOURCE
 
-In order for our Linkerd ingress controller to function properly, we need to
-create an [ingress
-resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) that
-uses it.
+In order for our Linkerd ingress controller to function properly, we need to create an [ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) that uses it.
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/hello-world-ingress.yml
@@ -208,8 +157,7 @@ NAME          HOSTS      ADDRESS   PORTS     AGE
 hello-world   world.v2             80        7s
 ```
 
-This “hello-world” ingress resource references our backends (we’re only
-using `world-v1` and `world-v2` for this demo):
+This “hello-world” ingress resource references our backends (we’re only using `world-v1` and `world-v2` for this demo):
 
 ```bash
 apiVersion: extensions/v1beta1
@@ -233,16 +181,11 @@ spec:
 
 The resource
 
-- Specifies `world-v1` as the default backend to route to if a request does not
-  match any of the rules defined.
-- Specifies a rule where all requests with the host header `world.v2` will be
-  routed to the `world-v2` service.
-- Sets the `kubernetes.io/ingress.class` annotation to “linkerd”. Note, this
-  annotation is only required if there are multiple ingress controllers running
-  in the cluster.
+- Specifies `world-v1` as the default backend to route to if a request does not match any of the rules defined.
+- Specifies a rule where all requests with the host header `world.v2` will be routed to the `world-v2` service.
+- Sets the `kubernetes.io/ingress.class` annotation to “linkerd”. Note, this annotation is only required if there are multiple ingress controllers running in the cluster.
 
-That’s it! You can exercise these rules by curling the IP assigned to the l5d
-service loadbalancer.
+That’s it! You can exercise these rules by curling the IP assigned to the l5d service loadbalancer.
 
 ```bash
 $ curl $L5D_SVC_IP
@@ -251,29 +194,13 @@ $ curl -H "Host: world.v2" $L5D_SVC_IP
 earth (10.0.1.5)!
 ```
 
-While this example starts with totally new instances, it’s just as easy to add
-an ingress identifier router to a pre-existing linked setup. Also, although we
-employ a DaemonSet here (to be consistent with the rest of the Service Mesh for
-Kubernetes series), utilizing a
-Kubernetes [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-for a Linkerd ingress controller works just as well. Using Deployments is left
-as an exercise for the reader. :)
+While this example starts with totally new instances, it’s just as easy to add an ingress identifier router to a pre-existing linked setup. Also, although we employ a DaemonSet here (to be consistent with the rest of the Service Mesh for Kubernetes series), utilizing a Kubernetes [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) for a Linkerd ingress controller works just as well. Using Deployments is left as an exercise for the reader. :)
 
 ## INGRESS WITH TLS
 
-Linkerd already supports TLS for clients and servers within the cluster. Setting
-up TLS is described in much more detail in [Part III of this
-series][part-iii]. In
-this ingress controller configuration, Linkerd expects certs to be defined in
-a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/)
-named `ingress-certs` and to follow [the format described as part of the ingress
-user guide](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls).
-Note that there’s no need to specify a TLS section as part of the ingress
-resource: Linkerd doesn’t implement that section of the resource. All TLS
-configuration happens as part of the `l5d-config` ConfigMap.
+Linkerd already supports TLS for clients and servers within the cluster. Setting up TLS is described in much more detail in [Part III of this series][part-iii]. In this ingress controller configuration, Linkerd expects certs to be defined in a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/) named `ingress-certs` and to follow [the format described as part of the ingress user guide](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls). Note that there’s no need to specify a TLS section as part of the ingress resource: Linkerd doesn’t implement that section of the resource. All TLS configuration happens as part of the `l5d-config` ConfigMap.
 
-The Linkerd config remains largely unchanged, save updating the server port
-to `443`and adding TLS file paths:
+The Linkerd config remains largely unchanged, save updating the server port to `443`and adding TLS file paths:
 
 ```bash
 ...
@@ -311,9 +238,7 @@ spec:
     ...
 ```
 
-And the updated Service config exposes port `443`. A reminder that the
-certificates we’re using here are for testing purposes only! Create the Secret,
-delete the DaemonSet and ConfigMap, and re-apply the ingress controller config:
+And the updated Service config exposes port `443`. A reminder that the certificates we’re using here are for testing purposes only! Create the Secret, delete the DaemonSet and ConfigMap, and re-apply the ingress controller config:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/ingress-certificates.yml -n l5d-system
@@ -334,42 +259,14 @@ $ earth (10.0.1.5)!
 
 ## CONCLUSION
 
-Linkerd provides a ton of benefits as an edge router. In addition to the dynamic
-routing and TLS termination described in this post, it also [pools
-connections](https://en.wikipedia.org/wiki/Connection_pool), [load balances
-dynamically](/2016/03/16/beyond-round-robin-load-balancing-for-latency/)
-, [enables circuit breaking](/2017/01/14/making-microservices-more-resilient-with-circuit-breaking/)
-, and supports [distributed tracing][part-vii].
-Using the Linkerd ingress controller and the [Kubernetes
-configuration](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml)
-referenced in this post, you gain access to all these features in an easy to
-use, Kubernetes-native approach. Best of all, this method works seamlessly with
-the rest of the service mesh, allowing for operation, visibility, and high
-availability in virtually any cloud architecture.
+Linkerd provides a ton of benefits as an edge router. In addition to the dynamic routing and TLS termination described in this post, it also [pools connections](https://en.wikipedia.org/wiki/Connection_pool), [load balances dynamically](/2016/03/16/beyond-round-robin-load-balancing-for-latency/) , [enables circuit breaking](/2017/01/14/making-microservices-more-resilient-with-circuit-breaking/) , and supports [distributed tracing][part-vii]. Using the Linkerd ingress controller and the [Kubernetes configuration](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml) referenced in this post, you gain access to all these features in an easy to use, Kubernetes-native approach. Best of all, this method works seamlessly with the rest of the service mesh, allowing for operation, visibility, and high availability in virtually any cloud architecture.
 
-Note: there are a myriad of ways to deploy Kubernetes and different environments
-support different features. Learn more about deployment
-differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
+Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
 
-The [ingress identifier is new](https://github.com/linkerd/linkerd/pull/1116),
-so we’d love to get your thoughts on what features you want from an ingress
-controller. You can find us in the [Linkerd community
-Slack](https://slack.linkerd.io/) or on the [linkerd
-discourse](https://discourse.linkerd.io/).
+The [ingress identifier is new](https://github.com/linkerd/linkerd/pull/1116), so we’d love to get your thoughts on what features you want from an ingress controller. You can find us in the [Linkerd community Slack](https://slack.linkerd.io/) or on the [linkerd discourse](https://discourse.linkerd.io/).
 
 ### ACKNOWLEDGEMENTS
 
-Big thanks to [Alex Leong](https://twitter.com/adlleong) and [Andrew
-Seigner](https://twitter.com/siggy) for feedback on this post.
+Big thanks to [Alex Leong](https://twitter.com/adlleong) and [Andrew Seigner](https://twitter.com/siggy) for feedback on this post.
 
-[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}}
-[part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}
-[part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}
-[part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
-[part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
-[part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
-[part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}
-[part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
-[part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}}
-[part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}}
-[part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}
+[part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}} [part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}} [part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}} [part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}} [part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}} [part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}} [part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}} [part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}} [part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}} [part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}} [part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}
