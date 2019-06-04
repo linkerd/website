@@ -1,0 +1,11 @@
+first-line-h1:
+  level: 2
+first-heading-h1:
+  level: 2
+line_length:
+  line_length: 90000
+  headings: 80
+  code_blocks: false
+  tables: false
+no-trailing-punctuation:
+  punctuation: '.,;:'
