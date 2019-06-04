@@ -245,7 +245,7 @@ application.
 
 To use Gloo with Linkerd, you can choose one of two options.
 
-### Option 1 - Automatic
+### Automatic
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically.
@@ -266,7 +266,7 @@ Now simply add a route to the books app upstream:
 glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 ```
 
-### Option 2 - Manual
+### Manual
 
 As explained in the beggining of this document, you'll need to instruct Gloo to
 add a header which will allow Linkerd to identify where to send traffic to.
@@ -323,7 +323,7 @@ Using the content transformation engine built-in in Gloo, you can instruct it to
 add the needed `l5d-dst-override` header which in the example above is pointing
 to the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
 
-## Test access to the service
+### Test
 
 To easily test this you can get the URL of the Gloo proxy by running:
 

@@ -25,17 +25,17 @@ surprise you.
 
 ## Microsoft and Linkerd
 
-On Tuesday, Microsoft announced the [Service Mesh Interface](smi-spec.org), a
-specification that exposes core service mesh features like telemetry, traffic
-shifting, and policy via Kubernetes primitives. [Linkerd was a major part of
-the SMI launch](https://linkerd.io/2019/05/24/linkerd-and-smi/), and we're
-excited about the opportunities this opens up for us, especially around
-integrations like [Kiali](https://www.kiali.io/),
+On Tuesday, Microsoft announced the [Service Mesh
+Interface](https://smi-spec.io), a specification that exposes core service mesh
+features like telemetry, traffic shifting, and policy via Kubernetes primitives.
+[Linkerd was a major part of the SMI
+launch](https://linkerd.io/2019/05/24/linkerd-and-smi/), and we're excited about
+the opportunities this opens up for us, especially around integrations like
+[Kiali](https://www.kiali.io/),
 [Flagger](https://github.com/weaveworks/flagger), and
 [Kubecost](https://kubecost.com/)!
 
-On Wednesday, the VSCode team launched a [Linkerd VSCode
-plugin](https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd),
+On Wednesday, the VSCode team launched a [Linkerd VSCode plugin][vscode],
 adding cool Linkerd functionality to your local VSCode editor! (See the [talk
 here](https://www.youtube.com/watch?v=fOvpMfunD4s#t=20m01s).)
 
@@ -110,3 +110,5 @@ hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the [mailing
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+
+[vscode]: https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd
