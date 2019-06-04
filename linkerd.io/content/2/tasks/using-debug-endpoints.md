@@ -51,4 +51,3 @@ generate a graph in a PDF file describing memory allocations:
 ```bash
 go tool pprof -seconds 5 -pdf http://localhost:9990/debug/pprof/allocs
 ```
-
