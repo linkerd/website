@@ -6,4 +6,5 @@ IgnoreURLs:
   - https://douban.com/
   - https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/
   - https://sched.co/*
+  - https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd
 DirectoryPath: public

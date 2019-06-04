@@ -26,7 +26,7 @@ surprise you.
 ## Microsoft and Linkerd
 
 On Tuesday, Microsoft announced the [Service Mesh
-Interface](https://smi-spec.org), a specification that exposes core service mesh
+Interface](https://smi-spec.io), a specification that exposes core service mesh
 features like telemetry, traffic shifting, and policy via Kubernetes primitives.
 [Linkerd was a major part of the SMI
 launch](https://linkerd.io/2019/05/24/linkerd-and-smi/), and we're excited about
