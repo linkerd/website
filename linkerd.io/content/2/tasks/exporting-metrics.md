@@ -53,8 +53,9 @@ running):
       - '{job="linkerd-controller"}'
 ```
 
-Alternatively, if you prefer to use Prometheus' ServiceMonitors to configure your Prometheus, you can use this ServiceMonitor YAML (replace `{{.Namespace}}` with the namespace where Linkerd is
-running):
+Alternatively, if you prefer to use Prometheus' ServiceMonitors to configure
+your Prometheus, you can use this ServiceMonitor YAML (replace `{{.Namespace}}`
+with the namespace where Linkerd is running):
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -73,7 +74,7 @@ spec:
       match[]:
       - '{job="linkerd-proxy"}'
       - '{job="linkerd-controller"}'
-    path: /federate 
+    path: /federate
     port: admin-http
     honorLabels: true
     relabelings:
