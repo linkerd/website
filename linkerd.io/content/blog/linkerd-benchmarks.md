@@ -4,7 +4,7 @@ author: 'william'
 date: Mon, 18 May 2019 09:00:00 +0000
 draft: false
 tags: [Community, Linkerd]
-thumbnail: glaciers.jpg
+thumbnail: /uploads/glaciers.jpg
 ---
 
 ![glaciers](/uploads/glaciers.jpg)

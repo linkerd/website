@@ -4,7 +4,7 @@ author: 'william'
 date: Fri, 24 May 2019 09:00:00 +0000
 draft: false
 tags: [Community, Linkerd]
-thumbnail: sound-mixer.jpg
+thumbnail: /uploads/sound-mixer.jpg
 ---
 
 ![sound mixer board](/uploads/sound-mixer.jpg)
