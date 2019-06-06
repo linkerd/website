@@ -1,7 +1,7 @@
 +++
 title = "Ingress"
 description = "Linkerd can work alongside your ingress controller of choice."
-weight = 6
+weight = 7
 aliases = [
   "/2/ingress/"
 ]

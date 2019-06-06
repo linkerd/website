@@ -12,7 +12,7 @@ These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify your cluster is prepared for
 installation.
 
-### √ control plane namespace does not already exist {#pre-k8s-cluster-ns}
+### √ control plane namespace does not already exist {#pre-ns}
 
 Example failure:
 
@@ -44,10 +44,10 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
 
-# The "pre-kubernetes-setup" checks {#pre-k8s}
+## The "pre-kubernetes-setup" checks {#pre-k8s}
 
-These checks only run when the `--pre` flag is set. This flag is intended for
-use prior to running `linkerd install`, to verify you have the correct
+These checks only run when the `--pre` flag is set This flag is intended for
+use prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
 ```bash
@@ -59,6 +59,36 @@ permissions to install Linkerd.
 
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
+
+## √ no clock skew detected {#pre-k8s-clock-skew}
+
+This check verifies whether there is clock skew between the system running
+the `linkerd install` command and the Kubernetes node(s), causing
+potential issues.
+
+## The "pre-kubernetes-capability" checks {#pre-k8s-capability}
+
+These checks only run when the `--pre` flag is set. This flag is intended for
+use prior to running `linkerd install`, to verify you have the correct
+Kubernetes capability permissions to install Linkerd.
+
+### √ has NET_ADMIN capability {#pre-k8s-cluster-net-admin}
+
+Example failure:
+
+```bash
+× has NET_ADMIN capability
+    found 3 PodSecurityPolicies, but none provide NET_ADMIN
+    see https://linkerd.io/checks/#pre-k8s-cluster-net-admin for hints
+```
+
+Linkerd installation requires the `NET_ADMIN` Kubernetes capability, to allow
+for modification of iptables.
+
+For more information, see the Kubernetes documentation on
+[Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
+[Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
+and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ## The "pre-kubernetes-single-namespace-setup" checks {#pre-single}
 
@@ -101,7 +131,7 @@ installation, specifically:
 For more information on cluster access, see the
 [GKE Setup](/2/tasks/install/#gke) section above.
 
-# The "kubernetes-api" checks {#k8s-api}
+## The "kubernetes-api" checks {#k8s-api}
 
 Example failures:
 
@@ -160,12 +190,12 @@ Linkerd requires at least version `1.10.0`. Verify your cluster version with:
 kubectl version
 ```
 
-### √ is running the minimum kubectl version {#k8s-version-kubectl}
+### √ is running the minimum kubectl version {#kubectl-version}
 
 Example failure:
 
 ```bash
-× minimum kubectl version is installed
+× is running the minimum kubectl version
     kubectl is on version [1.9.1], but version [1.10.0] or more recent is required
     see https://linkerd.io/checks/#kubectl-version for hints
 ```
@@ -182,15 +212,34 @@ For more information on upgrading Kubernetes, see the page in the Kubernetes
 Documentation on
 [Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
 
-## The "linkerd-existence" checks {#l5d-existence}
+## The "linkerd-config" checks {#l5d-config}
 
-### √ control plane namespace exists {#l5d-existence-ns}
+This category of checks validates that Linkerd's cluster-wide RBAC and related
+resources have been installed. These checks run via a default `linkerd check`,
+and also in the context of a multi-stage setup, for example:
+
+```bash
+# install cluster-wide resources (first stage)
+linkerd install config | kubectl apply -f -
+
+# validate successful cluster-wide resources installation
+linkerd check config
+
+# install Linkerd control plane
+linkerd install control-plane | kubectl apply -f -
+
+# validate successful control-plane installation
+linkerd check
+```
+
+### √ control plane Namespace exists {#l5d-existence-ns}
 
 Example failure:
 
 ```bash
-× control plane namespace exists
-    The "linkerd" namespace does not exist
+× control plane Namespace exists
+    The "foo" namespace does not exist
+    see https://linkerd.io/checks/#l5d-existence-ns for hints
 ```
 
 Ensure the Linkerd control plane namespace exists:
@@ -205,6 +254,122 @@ a different namespace, specify that in your check command:
 ```bash
 linkerd check --linkerd-namespace linkerdtest
 ```
+
+### √ control plane ClusterRoles exist {#l5d-existence-cr}
+
+Example failure:
+
+```bash
+× control plane ClusterRoles exist
+    missing ClusterRoles: linkerd-linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-cr for hints
+```
+
+Ensure the Linkerd ClusterRoles exist:
+
+```bash
+$ kubectl get clusterroles | grep linkerd
+linkerd-linkerd-controller                                             9d
+linkerd-linkerd-identity                                               9d
+linkerd-linkerd-prometheus                                             9d
+linkerd-linkerd-proxy-injector                                         20d
+linkerd-linkerd-sp-validator                                           9d
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create clusterroles
+yes
+```
+
+### √ control plane ClusterRoleBindings exist {#l5d-existence-crb}
+
+Example failure:
+
+```bash
+× control plane ClusterRoleBindings exist
+    missing ClusterRoleBindings: linkerd-linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-crb for hints
+```
+
+Ensure the Linkerd ClusterRoleBindings exist:
+
+```bash
+$ kubectl get clusterrolebindings | grep linkerd
+linkerd-linkerd-controller                             9d
+linkerd-linkerd-identity                               9d
+linkerd-linkerd-prometheus                             9d
+linkerd-linkerd-proxy-injector                         20d
+linkerd-linkerd-sp-validator                           9d
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create clusterrolebindings
+yes
+```
+
+### √ control plane ServiceAccounts exist {#l5d-existence-sa}
+
+Example failure:
+
+```bash
+× control plane ServiceAccounts exist
+    missing ServiceAccounts: linkerd-controller
+    see https://linkerd.io/checks/#l5d-existence-sa for hints
+```
+
+Ensure the Linkerd ServiceAccounts exist:
+
+```bash
+$ kubectl -n linkerd get serviceaccounts
+NAME                     SECRETS   AGE
+default                  1         23m
+linkerd-controller       1         23m
+linkerd-grafana          1         23m
+linkerd-identity         1         23m
+linkerd-prometheus       1         23m
+linkerd-proxy-injector   1         7m
+linkerd-sp-validator     1         23m
+linkerd-web              1         23m
+```
+
+Also ensure you have permission to create ServiceAccounts in the Linkerd
+namespace:
+
+```bash
+$ kubectl -n linkerd auth can-i create serviceaccounts
+yes
+```
+
+### √ control plane CustomResourceDefinitions exist {#l5d-existence-crd}
+
+Example failure:
+
+```bash
+× control plane CustomResourceDefinitions exist
+    missing CustomResourceDefinitions: serviceprofiles.linkerd.io
+    see https://linkerd.io/checks/#l5d-existence-crd for hints
+```
+
+Ensure the Linkerd CRD exists:
+
+```bash
+$ kubectl get customresourcedefinitions
+NAME                         CREATED AT
+serviceprofiles.linkerd.io   2019-04-25T21:47:31Z
+```
+
+Also ensure you have permission to create CRDs:
+
+```bash
+$ kubectl auth can-i create customresourcedefinitions
+yes
+```
+
+## The "linkerd-existence" checks {#l5d-existence}
 
 ### √ controller pod is running {#l5d-existence-controller}
 
@@ -406,7 +571,7 @@ Example failure:
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
 
-# The "control-plane-version" checks {#l5d-version-control}
+## The "control-plane-version" checks {#l5d-version-control}
 
 Example failures:
 

@@ -1,7 +1,9 @@
 +++
 title = "Getting Started"
 aliases = [
-  "/getting-started/istio/"
+  "/getting-started/istio/",
+  "/choose-your-platform/",
+  "/2/katacoda/"
 ]
 weight = 2
 [sitemap]
@@ -14,10 +16,10 @@ In this guide, we’ll walk you through how to install Linkerd into your
 Kubernetes cluster. Then we'll deploy a sample application to show off
 what Linkerd can do for your services.
 
-Installing Linkerd is easy. First, you first install the CLI (command-line
-interface) onto your local machine. Using this CLI, you'll install the Linkerd
+Installing Linkerd is easy. First, you will install the CLI (command-line
+interface) onto your local machine. Using this CLI, you'll then install the Linkerd
 control plane into your Kubernetes cluster. Finally, you'll "mesh" one or more
-services by adding the the data plane proxies. (See the
+services by adding the data plane proxies. (See the
 [Architecture](../architecture/) page for details.)
 
 We'll walk you through this process step by step.
@@ -25,14 +27,14 @@ We'll walk you through this process step by step.
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to a Kubernetes
-cluster running 1.9 or later, and a functioning `kubectl` command on your local
-machine.
+cluster running 1.10.0 or later, and a functioning `kubectl` command on your
+local machine.
 
 You can run Kubernetes on your local machine. We suggest
 [Docker Desktop](https://www.docker.com/products/docker-desktop) or
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). For other
 options, see the
-[full list](https://kubernetes.io/docs/setup/pick-right-solution/).
+[full list](https://kubernetes.io/docs/setup/).
 
 When ready, make sure you're running a recent version of Kubernetes with:
 
@@ -179,7 +181,7 @@ Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto a
 in all its glory.
 
 Clicking around, you might notice that some parts of the application are
-broken! For example, if you click on a poop emoji, you'll get a 404 page. Don't
+broken! For example, if you click on a doughnut emoji, you'll get a 404 page. Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
 problem. Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)

@@ -26,8 +26,8 @@ tutorial of how to configure retries.
 
 ## Retries
 
-For routes that are idempotent and do have bodies,
-you can edit the service profile and add the `isRetryable` flag:
+For routes that are idempotent and don't have bodies, you can edit the service
+profile and add `isRetryable` to the retryable route:
 
 ```yaml
 spec:
@@ -36,6 +36,7 @@ spec:
     condition:
       method: GET
       pathRegex: /api/annotations
+    isRetryable: true ### ADD THIS LINE ###
 ```
 
 ## Retry Budgets

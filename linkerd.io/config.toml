@@ -6,6 +6,9 @@ languageCode = "en-US"
 sectionPagesMenu = "main"
 theme = "buoyant"
 title = "Linkerd"
+
+[permalinks]
+blog = "/:year/:month/:day/:slug/"
 [blackfriday]
 HrefTargetBlank = true
 [mediaTypes."text/netlify"]
@@ -64,15 +67,13 @@ mediaType = "text/netlify"
 home = ["HTML", "REDIRECTS"]
 section = ["HTML", "JSON"]
 [params]
-description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
 images = [""]
-l5d2_edge_version = "L5D2_EDGE_VERSION"
+latest_release_version = "1.6.3"
+latest_release_date = "2019-05-10"
+description = "Linkerd is the fastest, lightest, simplest service mesh for Kubernetes"
 l5d2_release_version = "L5D2_STABLE_VERSION"
-latest_release_date = "2019-02-01"
-latest_release_version = "1.6.1"
+l5d2_edge_version = "L5D2_EDGE_VERSION"
 logo = "/images/identity/svg/linkerd_primary_color_white.svg"
-[permalinks]
-blog = "/:year/:month/:day/:slug/"
 [privacy.twitter]
 disable = false
 enableDNT = false

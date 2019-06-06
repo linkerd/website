@@ -7,15 +7,23 @@ Source code for the linkerd.io website.
 
 1. Install Hugo:
 
-    ```bash
-    go get -v github.com/spf13/hugo
-    ```
-
-    or possibly:
+    for Mac users:
 
     ```bash
     brew install hugo
     ```
+
+    for Linux users:
+
+    download the **extended** release of Hugo from [GitHub](https://github.com/gohugoio/hugo/releases),
+    then install the following dependencies:
+
+    ```bash
+    curl https://htmltest.wjdp.uk | bash
+    npm install -g markdownlint-cli
+    ```
+
+    make sure they are added to `$PATH`
 
 1. From the root `/website` directory, build site and run Hugo in development mode:
 

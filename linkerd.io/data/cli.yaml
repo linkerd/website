@@ -27,6 +27,11 @@
     Shorthand: h
     Usage: help for check
   - DefaultValue: ""
+    Name: linkerd-cni-enabled
+    Shorthand: ""
+    Usage: |
+      When running pre-installation checks (--pre), assume the linkerd-cni plugin is already installed, and a NET_ADMIN check is not needed
+  - DefaultValue: ""
     Name: namespace
     Shorthand: "n"
     Usage: |
@@ -42,18 +47,13 @@
     Usage: |
       Only run data-plane checks, to determine if the data plane is healthy
   - DefaultValue: ""
-    Name: single-namespace
-    Shorthand: ""
-    Usage: |
-      When running pre-installation checks (--pre), only check the permissions required to operate the control plane in a single namespace
-  - DefaultValue: ""
     Name: wait
     Shorthand: ""
     Usage: Maximum allowed time for all tests to pass
   SeeAlso: null
   Synopsis: Check the Linkerd installation for potential problems
 - Description: |
-    Output completion code for the specified shell (bash or zsh).
+    Output shell completion code for the specified shell (bash or zsh).
   Example: |2-
       # bash <= 3.2
       source /dev/stdin <<< "$(linkerd completion bash)"
@@ -82,7 +82,8 @@
     Shorthand: h
     Usage: help for completion
   SeeAlso: null
-  Synopsis: Shell completion
+  Synopsis: |
+    Output shell completion code for the specified shell (bash or zsh)
 - Description: ""
   Example: ""
   InheritedOptions: null
@@ -141,8 +142,7 @@
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: |
-      Output format; currently only "table" and "json" are supported (default "table")
+    Usage: 'Output format; one of: "table" or "json"'
   SeeAlso: null
   Synopsis: Introspect Linkerd's service discovery state
 - Description: |-
@@ -191,22 +191,30 @@
   Name: inject
   Options:
   - DefaultValue: ""
-    Name: api-port
+    Name: admin-port
     Shorthand: ""
-    Usage: |
-      Port where the Linkerd controller's destination API is running
+    Usage: Proxy port to serve metrics on
   - DefaultValue: ""
     Name: control-port
     Shorthand: ""
     Usage: Proxy port to use for control
   - DefaultValue: ""
-    Name: disable-external-profiles
+    Name: disable-identity
     Shorthand: ""
-    Usage: Disables service profiles for non-Kubernetes services
+    Usage: Disables resources from participating in TLS identity
+  - DefaultValue: ""
+    Name: enable-external-profiles
+    Shorthand: ""
+    Usage: Enable service profiles for non-Kubernetes services
   - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for inject
+  - DefaultValue: ""
+    Name: ignore-cluster
+    Shorthand: ""
+    Usage: |
+      Ignore the current Kubernetes cluster when checking for existing cluster configuration (default false)
   - DefaultValue: ""
     Name: image-pull-policy
     Shorthand: ""
@@ -220,24 +228,23 @@
     Shorthand: ""
     Usage: Linkerd init container image name
   - DefaultValue: ""
-    Name: linkerd-cni-enabled
-    Shorthand: ""
-    Usage: |
-      Experimental: Omit the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
-  - DefaultValue: ""
     Name: linkerd-version
     Shorthand: v
     Usage: Tag to be used for Linkerd images
-  - DefaultValue: ""
-    Name: metrics-port
-    Shorthand: ""
-    Usage: Proxy port to serve metrics on
   - DefaultValue: ""
     Name: outbound-port
     Shorthand: ""
     Usage: Proxy port to use for outbound traffic
   - DefaultValue: ""
     Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-cpu-limit
+    Shorthand: ""
+    Usage: Maximum amount of CPU units that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-cpu-request
     Shorthand: ""
     Usage: Amount of CPU units that the proxy sidecar requests
   - DefaultValue: ""
@@ -250,6 +257,14 @@
     Usage: Log level for the proxy
   - DefaultValue: ""
     Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-memory-limit
+    Shorthand: ""
+    Usage: Maximum amount of Memory that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-memory-request
     Shorthand: ""
     Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
@@ -269,10 +284,6 @@
     Name: skip-outbound-ports
     Shorthand: ""
     Usage: Outbound ports that should skip the proxy
-  - DefaultValue: ""
-    Name: tls
-    Shorthand: ""
-    Usage: 'Enable TLS; valid settings: "optional"'
   SeeAlso: null
   Synopsis: Add the Linkerd proxy to a Kubernetes config
 - Description: Output Kubernetes configs to install Linkerd.
@@ -281,10 +292,9 @@
   Name: install
   Options:
   - DefaultValue: ""
-    Name: api-port
+    Name: admin-port
     Shorthand: ""
-    Usage: |
-      Port where the Linkerd controller's destination API is running
+    Usage: Proxy port to serve metrics on
   - DefaultValue: ""
     Name: control-port
     Shorthand: ""
@@ -302,23 +312,57 @@
     Shorthand: ""
     Usage: Run the control plane components under this user ID
   - DefaultValue: ""
-    Name: disable-external-profiles
-    Shorthand: ""
-    Usage: Disables service profiles for non-Kubernetes services
-  - DefaultValue: ""
     Name: disable-h2-upgrade
     Shorthand: ""
     Usage: |
-      Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading
+      Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: enable-external-profiles
+    Shorthand: ""
+    Usage: Enable service profiles for non-Kubernetes services
   - DefaultValue: ""
     Name: ha
     Shorthand: ""
     Usage: |
-      Experimental: Enable HA deployment config for the control plane
+      Experimental: Enable HA deployment config for the control plane (default false)
   - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for install
+  - DefaultValue: ""
+    Name: identity-clock-skew-allowance
+    Shorthand: ""
+    Usage: |
+      The amount of time to allow for clock skew within a Linkerd cluster
+  - DefaultValue: ""
+    Name: identity-issuance-lifetime
+    Shorthand: ""
+    Usage: |
+      The amount of time for which the Identity issuer should certify identity
+  - DefaultValue: ""
+    Name: identity-issuer-certificate-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer certificate (generated by default)
+  - DefaultValue: ""
+    Name: identity-issuer-key-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer private key (generated by default)
+  - DefaultValue: ""
+    Name: identity-trust-anchors-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing Linkerd Identity trust anchors (generated by default)
+  - DefaultValue: ""
+    Name: identity-trust-domain
+    Shorthand: ""
+    Usage: Configures the name suffix used for identities.
+  - DefaultValue: ""
+    Name: ignore-cluster
+    Shorthand: ""
+    Usage: |
+      Ignore the current Kubernetes cluster when checking for existing cluster configuration (default false)
   - DefaultValue: ""
     Name: image-pull-policy
     Shorthand: ""
@@ -341,10 +385,6 @@
     Shorthand: v
     Usage: Tag to be used for Linkerd images
   - DefaultValue: ""
-    Name: metrics-port
-    Shorthand: ""
-    Usage: Proxy port to serve metrics on
-  - DefaultValue: ""
     Name: outbound-port
     Shorthand: ""
     Usage: Proxy port to use for outbound traffic
@@ -352,9 +392,17 @@
     Name: proxy-auto-inject
     Shorthand: ""
     Usage: |
-      Experimental: Enable proxy sidecar auto-injection webhook (default false)
+      Enable proxy sidecar auto-injection via a webhook (default false)
   - DefaultValue: ""
     Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-cpu-limit
+    Shorthand: ""
+    Usage: Maximum amount of CPU units that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-cpu-request
     Shorthand: ""
     Usage: Amount of CPU units that the proxy sidecar requests
   - DefaultValue: ""
@@ -370,6 +418,14 @@
     Shorthand: ""
     Usage: Amount of Memory that the proxy sidecar requests
   - DefaultValue: ""
+    Name: proxy-memory-limit
+    Shorthand: ""
+    Usage: Maximum amount of Memory that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-memory-request
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
+  - DefaultValue: ""
     Name: proxy-uid
     Shorthand: ""
     Usage: Run the proxy under this user ID
@@ -377,11 +433,6 @@
     Name: registry
     Shorthand: ""
     Usage: Docker registry to pull images from
-  - DefaultValue: ""
-    Name: single-namespace
-    Shorthand: ""
-    Usage: |
-      Experimental: Configure the control plane to only operate in the installed namespace (default false)
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
@@ -391,14 +442,83 @@
     Name: skip-outbound-ports
     Shorthand: ""
     Usage: Outbound ports that should skip the proxy
-  - DefaultValue: ""
-    Name: tls
-    Shorthand: ""
-    Usage: 'Enable TLS; valid settings: "optional"'
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd
 - Description: |-
-    Output Kubernetes configs to install Linkerd Service Profiles.",
+    Output Kubernetes configs to install Linkerd CNI (experimental).
+
+    This command installs a DaemonSet into the Linkerd control plane. The DaemonSet
+    copies the necessary linkerd-cni plugin binaries and configs onto the host. It
+    assumes that the 'linkerd install' command will be executed with the
+    '--linkerd-cni-enabled' flag. This command needs to be executed before the
+    'linkerd install --linkerd-cni-enabled' command.
+  Example: ""
+  InheritedOptions: null
+  Name: install-cni
+  Options:
+  - DefaultValue: ""
+    Name: admin-port
+    Shorthand: ""
+    Usage: Proxy port to serve metrics on
+  - DefaultValue: ""
+    Name: cni-image
+    Shorthand: ""
+    Usage: Image for the cni-plugin.
+  - DefaultValue: ""
+    Name: cni-log-level
+    Shorthand: ""
+    Usage: Log level for the cni-plugin.
+  - DefaultValue: ""
+    Name: control-port
+    Shorthand: ""
+    Usage: Proxy port to use for control
+  - DefaultValue: ""
+    Name: dest-cni-bin-dir
+    Shorthand: ""
+    Usage: Directory on the host where the CNI plugin binaries reside.
+  - DefaultValue: ""
+    Name: dest-cni-net-dir
+    Shorthand: ""
+    Usage: |
+      Directory on the host where the CNI configuration will be placed.
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for install-cni
+  - DefaultValue: ""
+    Name: inbound-port
+    Shorthand: ""
+    Usage: Proxy port to use for inbound traffic
+  - DefaultValue: ""
+    Name: linkerd-version
+    Shorthand: v
+    Usage: Tag to be used for Linkerd images
+  - DefaultValue: ""
+    Name: outbound-port
+    Shorthand: ""
+    Usage: Proxy port to use for outbound traffic
+  - DefaultValue: ""
+    Name: proxy-uid
+    Shorthand: ""
+    Usage: Run the proxy under this user ID
+  - DefaultValue: ""
+    Name: registry
+    Shorthand: ""
+    Usage: Docker registry to pull images from
+  - DefaultValue: ""
+    Name: skip-inbound-ports
+    Shorthand: ""
+    Usage: |
+      Ports that should skip the proxy and send directly to the application
+  - DefaultValue: ""
+    Name: skip-outbound-ports
+    Shorthand: ""
+    Usage: Outbound ports that should skip the proxy
+  SeeAlso: null
+  Synopsis: |
+    Output Kubernetes configs to install Linkerd CNI (experimental)
+- Description: |-
+    Output Kubernetes configs to install Linkerd Service Profiles.
 
     This command installs Service Profiles into the Linkerd control plane. A
     cluster-wide Linkerd control-plane is a prerequisite. To confirm Service Profile
@@ -463,6 +583,57 @@
     Usage: Print timestamps for each given log line
   SeeAlso: null
   Synopsis: Tail logs from containers in the Linkerd control plane
+- Description: |-
+    Fetch metrics directly from Linkerd proxies.
+
+      This command initiates a port-forward to a given pod or set of pods, and
+      queries the /metrics endpoint on the Linkerd proxies.
+
+      The RESOURCE argument specifies the target resource to query metrics for:
+      (TYPE/NAME)
+
+      Examples:
+      * deploy/my-deploy
+      * ds/my-daemonset
+      * job/my-job
+      * po/mypod1
+      * rc/my-replication-controller
+      * sts/my-statefulset
+
+      Valid resource types include:
+      * daemonsets
+      * deployments
+      * jobs
+      * pods
+      * replicasets
+      * replicationcontrollers
+      * statefulsets
+  Example: |2-
+      # Get metrics from pod-foo-bar in the default namespace.
+      linkerd metrics po/pod-foo-bar
+
+      # Get metrics from the web deployment in the emojivoto namespace.
+      linkerd metrics -n emojivoto deploy/web
+
+      # Get metrics from the linkerd-controller pod in the linkerd namespace.
+      linkerd metrics -n linkerd $(
+        kubectl --namespace linkerd get pod \
+          --selector linkerd.io/control-plane-component=controller \
+          --output name
+      )
+  InheritedOptions: null
+  Name: metrics
+  Options:
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for metrics
+  - DefaultValue: ""
+    Name: namespace
+    Shorthand: "n"
+    Usage: Namespace of resource
+  SeeAlso: null
+  Synopsis: Fetch metrics directly from Linkerd proxies
 - Description: Output service profile config for Kubernetes.
   Example: |2
       # Output a basic template to apply after modification.
@@ -474,7 +645,7 @@
       # Generate a profile from a protobuf definition.
       linkerd profile -n emojivoto --proto Voting.proto vote-svc
 
-      # Generate a profile by watching life traffic based off tap data.
+      # Generate a profile by watching live traffic based off tap data.
       linkerd profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s --tap-route-limit 5
   InheritedOptions: null
   Name: profile
@@ -541,8 +712,7 @@
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: |
-      Output format; currently only "table" (default), "wide", and "json" are supported
+    Usage: 'Output format; one of: "table", "wide", or "json"'
   - DefaultValue: ""
     Name: time-window
     Shorthand: t
@@ -571,6 +741,7 @@
       * deploy/my-deploy
       * deploy/ po/
       * ds/my-daemonset
+      * job/my-job
       * ns/my-ns
       * po/mypod1 rc/my-replication-controller
       * po mypod1 mypod2
@@ -584,11 +755,11 @@
       * daemonsets
       * deployments
       * namespaces
+      * jobs
       * pods
       * replicationcontrollers
       * statefulsets
       * authorities (not supported in --from)
-      * jobs (only supported as a --from or --to)
       * services (only supported if a --from is also specified, or as a --to)
       * all (all resource types, not supported in --from or --to)
 
@@ -656,8 +827,7 @@
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: |
-      Output format; currently only "table" (default) and "json" are supported
+    Usage: 'Output format; one of: "table" or "json" or "wide"'
   - DefaultValue: ""
     Name: time-window
     Shorthand: t
@@ -685,6 +855,7 @@
       * deploy/my-deploy
       * deploy my-deploy
       * ds/my-daemonset
+      * job/my-job
       * ns/my-ns
       * sts
       * sts/my-statefulset
@@ -692,11 +863,11 @@
       Valid resource types include:
       * daemonsets
       * deployments
+      * jobs
       * namespaces
       * pods
       * replicationcontrollers
       * statefulsets
-      * jobs (only supported as a --to resource)
       * services (only supported as a --to resource)
   Example: |2-
       # tap the web deployment in the default namespace
@@ -764,6 +935,7 @@
       * deploy/my-deploy
       * deploy my-deploy
       * ds/my-daemonset
+      * job/my-job
       * ns/my-ns
       * sts
       * sts/my-statefulset
@@ -771,11 +943,11 @@
       Valid resource types include:
       * daemonsets
       * deployments
+      * jobs
       * namespaces
       * pods
       * replicationcontrollers
       * statefulsets
-      * jobs (only supported as a --to resource),
       * services (only supported as a --to resource)
   Example: |2-
       # display traffic for the web deployment in the default namespace
@@ -856,6 +1028,146 @@
     Usage: help for uninject
   SeeAlso: null
   Synopsis: Remove the Linkerd proxy from a Kubernetes config
+- Description: |-
+    Output Kubernetes configs to upgrade an existing Linkerd control plane.
+
+    Note that the default flag values for this command come from the Linkerd control
+    plane. The default values displayed in the Flags section below only apply to the
+    install command.
+  Example: ""
+  InheritedOptions: null
+  Name: upgrade
+  Options:
+  - DefaultValue: ""
+    Name: admin-port
+    Shorthand: ""
+    Usage: Proxy port to serve metrics on
+  - DefaultValue: ""
+    Name: control-port
+    Shorthand: ""
+    Usage: Proxy port to use for control
+  - DefaultValue: ""
+    Name: controller-log-level
+    Shorthand: ""
+    Usage: Log level for the controller and web components
+  - DefaultValue: ""
+    Name: controller-replicas
+    Shorthand: ""
+    Usage: Replicas of the controller to deploy
+  - DefaultValue: ""
+    Name: controller-uid
+    Shorthand: ""
+    Usage: Run the control plane components under this user ID
+  - DefaultValue: ""
+    Name: disable-h2-upgrade
+    Shorthand: ""
+    Usage: |
+      Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: enable-external-profiles
+    Shorthand: ""
+    Usage: Enable service profiles for non-Kubernetes services
+  - DefaultValue: ""
+    Name: ha
+    Shorthand: ""
+    Usage: |
+      Experimental: Enable HA deployment config for the control plane (default false)
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for upgrade
+  - DefaultValue: ""
+    Name: identity-clock-skew-allowance
+    Shorthand: ""
+    Usage: |
+      The amount of time to allow for clock skew within a Linkerd cluster
+  - DefaultValue: ""
+    Name: identity-issuance-lifetime
+    Shorthand: ""
+    Usage: |
+      The amount of time for which the Identity issuer should certify identity
+  - DefaultValue: ""
+    Name: image-pull-policy
+    Shorthand: ""
+    Usage: Docker image pull policy
+  - DefaultValue: ""
+    Name: inbound-port
+    Shorthand: ""
+    Usage: Proxy port to use for inbound traffic
+  - DefaultValue: ""
+    Name: init-image
+    Shorthand: ""
+    Usage: Linkerd init container image name
+  - DefaultValue: ""
+    Name: linkerd-cni-enabled
+    Shorthand: ""
+    Usage: |
+      Experimental: Omit the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+  - DefaultValue: ""
+    Name: linkerd-version
+    Shorthand: v
+    Usage: Tag to be used for Linkerd images
+  - DefaultValue: ""
+    Name: outbound-port
+    Shorthand: ""
+    Usage: Proxy port to use for outbound traffic
+  - DefaultValue: ""
+    Name: proxy-auto-inject
+    Shorthand: ""
+    Usage: |
+      Enable proxy sidecar auto-injection via a webhook (default false)
+  - DefaultValue: ""
+    Name: proxy-cpu
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-cpu-limit
+    Shorthand: ""
+    Usage: Maximum amount of CPU units that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-cpu-request
+    Shorthand: ""
+    Usage: Amount of CPU units that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-image
+    Shorthand: ""
+    Usage: Linkerd proxy container image name
+  - DefaultValue: ""
+    Name: proxy-log-level
+    Shorthand: ""
+    Usage: Log level for the proxy
+  - DefaultValue: ""
+    Name: proxy-memory
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-memory-limit
+    Shorthand: ""
+    Usage: Maximum amount of Memory that the proxy sidecar can use
+  - DefaultValue: ""
+    Name: proxy-memory-request
+    Shorthand: ""
+    Usage: Amount of Memory that the proxy sidecar requests
+  - DefaultValue: ""
+    Name: proxy-uid
+    Shorthand: ""
+    Usage: Run the proxy under this user ID
+  - DefaultValue: ""
+    Name: registry
+    Shorthand: ""
+    Usage: Docker registry to pull images from
+  - DefaultValue: ""
+    Name: skip-inbound-ports
+    Shorthand: ""
+    Usage: |
+      Ports that should skip the proxy and send directly to the application
+  - DefaultValue: ""
+    Name: skip-outbound-ports
+    Shorthand: ""
+    Usage: Outbound ports that should skip the proxy
+  SeeAlso: null
+  Synopsis: |
+    Output Kubernetes configs to upgrade an existing Linkerd control plane
 - Description: ""
   Example: ""
   InheritedOptions: null

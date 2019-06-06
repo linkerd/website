@@ -42,18 +42,23 @@ traffic that is incoming to *and* outgoing from `web`. This is interesting:
 {{< fig src="/images/debugging/web-top.png" title="Top" >}}
 
 There are two calls that are not at 100%: the first is vote-bot's call to the
-`/api/vote` endpoint. The second is the `VotePoop` call from the web deployment to
-its dependent deployment, `voting`. Very interesting! Since `/api/vote` is an
-incoming call, and `VotePoop` is an outgoing call, this is a good clue that this
-endpoint is what's causing the problem!
+`/api/vote` endpoint. The second is the `VoteDoughnut` call from the web
+deployment to its dependent deployment, `voting`. Very interesting! Since
+`/api/vote` is an incoming call, and `VoteDoughnut` is an outgoing call, this is
+a good clue that this endpoint is what's causing the problem!
 
 Finally, to dig a little deeper, we can click on the `tap` icon in the far right
 column. This will take us to the live list of requests that match only this
-endpoint. We can confirm that the requests are failing (they all have a
+endpoint. You'll see `Unknown` under the `GRPC status` column. This is because
+the requests are failing with a
 [gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code),
-indicating an error).
+which is a common error response as you can see from
+[the code][code]. Linkerd is aware of gRPC's response classification without any
+other configuration!
 
 {{< fig src="/images/debugging/web-tap.png" title="Tap" >}}
 
 At this point, we have everything required to get the endpoint fixed and restore
 the overall health of our applications.
+
+[code]: https://github.com/BuoyantIO/emojivoto/blob/67faa83af33db647927946a672fc63ab7ce869aa/emojivoto-voting-svc/api/api.go#L21

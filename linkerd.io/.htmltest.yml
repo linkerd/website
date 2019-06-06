@@ -4,4 +4,8 @@ IgnoreURLs:
   - https://github.com/linkerd/website/edit/master/linkerd.io/content/.*
   - https://ticketmaster.com
   - https://douban.com/
+  - https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/
+  - https://sched.co/*
+  - https://marketplace.visualstudio.com/items*
+  - https://www.xfinity.com/
 DirectoryPath: public
