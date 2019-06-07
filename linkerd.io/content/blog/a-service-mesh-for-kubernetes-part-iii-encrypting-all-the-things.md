@@ -18,12 +18,12 @@ Note: This is one article in a series of articles about [linkerd](https://linke
    "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}})
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}}) (this article)
-4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
-5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
-6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}})
+5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}})
+6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}})
 7. [Distributed tracing made easy]({{< ref
    "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}})
-8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}})
 9. [gRPC for fun and profit]({{< ref
    "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}})
 10. [The Service Mesh API]({{< ref
@@ -32,7 +32,7 @@ Note: This is one article in a series of articles about [linkerd](https://linke
 12. Retry budgets, deadline propagation, and failing gracefully
 13. Autoscaling by top-line metrics
 
-In the first installment in this series, we showed you how you can [easily monitor top-line service metrics][part-i] (success rates, latencies, and request rates) when linkerd is installed as a service mesh. In this article, we’ll show you another benefit of the service mesh approach: it allows you to decouple the application’s protocol from the protocol used on the wire. In other words, the application can speak one protocol, but the bytes that actually go out on the wire are in another.
+In the first installment in this series, we showed you how you can [easily monitor top-line service metrics][part-i] \(success rates, latencies, and request rates\) when linkerd is installed as a service mesh. In this article, we’ll show you another benefit of the service mesh approach: it allows you to decouple the application’s protocol from the protocol used on the wire. In other words, the application can speak one protocol, but the bytes that actually go out on the wire are in another.
 
 In the case where no data transformation is required, linkerd can use this decoupling to automatically do protocol upgrades. Examples of the sorts of protocol upgrades that linkerd can do include HTTP/1.x to HTTP/2, thrift to [thrift-mux](http://twitter.github.io/finagle/guide/Protocols.html#mux), and, the topic of this article, HTTP to HTTPS.
 
