@@ -37,9 +37,10 @@ Linkerd authors themselves.
 Linkerd is licensed under [Apache
 2.0](https://github.com/linkerd/linkerd2/blob/master/LICENSE).
 
-## Who can use Linkerd?
+## Who is Linkerd for?
 
-Everyone.
+Linkerd is for everyone. In practice, Linkerd has certain technical
+prerequisites. Read on below.
 
 ## How do I pronounce Linkerd?
 
@@ -65,7 +66,7 @@ No. Everything in Linkerd is fully open source. Some companies provide
 ## What's the difference between Linkerd 1.x and 2.x?
 
 Linkerd 1.x is built on the "Twitter stack": Finagle, Netty, Scala, and the
-JVM. It supports Kubernetes, Mesos, Consul, and other environments.
+JVM.
 
 Linkerd 2.x is built in Rust and Go. It is significantly faster and
 lighter weight than 1.x, but currently only supports Kubernetes.
