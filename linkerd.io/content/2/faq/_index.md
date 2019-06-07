@@ -30,9 +30,9 @@ and the [web dashboard UI](/2/getting-started/#step-4-explore-linkerd).
 
 ## Who owns Linkerd and how is it licensed?
 
-Linkerd is hosted by the a [Cloud Native Computing
-Foundation](https://cncf.io) (CNCF) project. The CNCF owns the trademark; the
-copyright is held by the Linkerd authors themselves.
+Linkerd is hosted by the [Cloud Native Computing Foundation](https://cncf.io)
+(CNCF) project. The CNCF owns the trademark; the copyright is held by the
+Linkerd authors themselves.
 
 Linkerd is licensed under [Apache
 2.0](https://github.com/linkerd/linkerd2/blob/master/LICENSE).
