@@ -30,9 +30,24 @@ and the [web dashboard UI](/2/getting-started/#step-4-explore-linkerd).
 
 ## Who owns Linkerd and how is it licensed?
 
-Linkerd is licensed under Apache v2 and is a [Cloud Native Computing
+Linkerd is hosted by the a [Cloud Native Computing
 Foundation](https://cncf.io) (CNCF) project. The CNCF owns the trademark; the
 copyright is held by the Linkerd authors themselves.
+
+Linkerd is licensed under [Apache
+2.0](https://github.com/linkerd/linkerd2/blob/master/LICENSE).
+
+## Who can use Linkerd?
+
+Everyone.
+
+## How do I pronounce Linkerd?
+
+The "d" is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
+
+## How do I write Linkerd?
+
+Just like this: Linkerd. Capital "L", lower-case everything else.
 
 ## Who maintains Linkerd?
 
@@ -44,18 +59,16 @@ file.
 
 ## Is there an Enterprise edition, or a commercial edition?
 
-No. Everything in Linkerd is fully open source.
-
-## How do I pronounce Linkerd?
-
-The "d" is pronounced separately, i.e. "Linker-DEE". (It's a UNIX thing.)
+No. Everything in Linkerd is fully open source. Some companies provide
+[commercial support for Linkerd](https://linkerd.io/enterprise/).
 
 ## What's the difference between Linkerd 1.x and 2.x?
 
 Linkerd 1.x is built on the "Twitter stack": Finagle, Netty, Scala, and the
-JVM. Linkerd 2.x is built in Rust and Go, and is significantly faster and
-lighter-weight. However, Linkerd 2.x currently does not have the full platform
-support or featureset of 1.x.
+JVM. It supports Kubernetes, Mesos, Consul, and other environments.
+
+Linkerd 2.x is built in Rust and Go. It is significantly faster and
+lighter weight than 1.x, but currently only supports Kubernetes.
 
 ## Is Linkerd 1.x still supported?
 
@@ -72,9 +85,13 @@ DC/OS, Mesos, Consul, and ZooKeeper-based environments.
 
 ## Where's the Linkerd roadmap?
 
-As a community project, there is no official roadmap, but a glance at the
-[active GitHub issues](https://github.com/linkerd/linkerd2/issues) will give
-you a sense of what is in store for the future.
+As a community project, there is no official roadmap. A glance at the [active
+GitHub issues](https://github.com/linkerd/linkerd2/issues) will give you a
+sense of what is in store for the future.
+
+The public [Linkerd Meetup
+slides](https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit)
+also provides a coarse-grained roadmap.
 
 ## What happens to Linkerd's proxies if the control plane is down?
 
