@@ -25,3 +25,6 @@
 {{ range $extraJs }}
 <script src="{{ . }}"></script>
 {{ end }}
+
+{{ $js := resources.Get "js/modal.js" }}
+<script src="{{ $js.Permalink }}"></script>
