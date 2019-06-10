@@ -413,3 +413,9 @@
 .anchorjs-link {
   font: 1em/1 anchorjs-icons !important;
 }
+
+#TableOfContents {
+  & > ul {
+    list-style: none;
+  }
+}
