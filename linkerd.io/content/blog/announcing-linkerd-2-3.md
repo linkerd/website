@@ -2,7 +2,7 @@
 title: 'Announcing Linkerd 2.3: Towards Zero-Touch Zero-Trust Networking for Kubernetes'
 author: 'william'
 date: 2019-04-16T21:00:00+00:00
-thumbnail: lego-stormtroopers.jpg
+thumbnail: /uploads/lego-stormtroopers.jpg
 draft: false
 slug: announcing-linkerd-2.3
 tags: [Linkerd]
