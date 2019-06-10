@@ -1,11 +1,11 @@
 <div class="wrapper docs">
   <div class="columns is-fullwidth">
-    <div class="column is-one-third has-background-light-gray docs-sidebar-container is-paddingless">
+    <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-widescreen">
       <div class="docs-sidebar">
         {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
       </div>
     </div>
-    <div class="column has-background-white docs-content">
+    <div class="column has-background-white docs-content ">
       <div class="container">
         <div class="columns">
           {{ with site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
