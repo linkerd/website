@@ -39,7 +39,7 @@
           <li><a href="https://api.linkerd.io/latest/namerd">namerd</a></li>
           {{ end }}
           {{ if .HasChildren }}
-          {{ range .Children }}
+          {{ range sort .Children "Name" }}
           {{ $active := eq .URL $currentPage.URL }}
           <li class="menu-list-item">
             <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
