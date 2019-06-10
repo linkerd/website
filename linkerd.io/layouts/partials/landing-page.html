@@ -5,8 +5,8 @@
         {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
       </div>
     </div>
-    <div class="column has-background-white docs-content ">
-      <div class="container">
+    <div class="column has-background-white docs-content is-paddingless">
+      <div class="container blog-content-container">
         <div class="columns">
           {{ with site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
           <div class="column">
