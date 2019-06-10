@@ -59,6 +59,8 @@ $menu-item-hover-background-color: inherit;
 $menu-item-active-color: $navy-black;
 $menu-item-active-background-color: white;
 
+$modal-z: 100001;
+
 @import 'bulma-base';
 
 .has-background-bright-blue {

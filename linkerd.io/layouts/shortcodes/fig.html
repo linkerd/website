@@ -1,6 +1,6 @@
 {{ $alt :=  (.Get "alt") | default (.Get "title") }}
 <figure class="image figure has-text-centered has-text-dark-grey">
-  <a href="{{ .Get "src" }}" data-toggle="lightbox">
+  <a href="javascript:void(0)" onclick="showImageModal('{{ .Get "src" }}')">
     <img src="{{ .Get "src" }}"
       class="figure-img img-fluid rounded"
       alt="{{ $alt }}">
