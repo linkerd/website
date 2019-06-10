@@ -217,6 +217,17 @@
   table {
     width: 100%;
   }
+
+  figure {
+    margin: 30px auto;
+    img {
+      margin: 0 0 10px;
+      border-radius: $radius;
+    }
+    figcaption {
+
+    }
+  }
 }
 
 .options-container {
