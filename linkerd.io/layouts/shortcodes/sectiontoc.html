@@ -5,7 +5,7 @@
     {{ range $index, $page := sort $subPages "Title" }}
     {{ if (ne $page $currentPage) }}
     <tr>
-      <th>
+      <th class="text-nowrap">
         <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
       </th>
       <td>
