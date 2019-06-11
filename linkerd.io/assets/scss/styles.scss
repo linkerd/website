@@ -379,7 +379,7 @@
       max-width: 768px;
       margin: 0px auto 70px 90px !important;
 
-      @include until($desktop) {
+      @include until($widescreen) {
         margin: 0px auto 70px 20px !important;
         width: 95%;
         padding-right: 20px;
