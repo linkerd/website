@@ -16,6 +16,16 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
+## Upgrade notice: stable-2.4.0
+
+`stable-2.4.0` includes support for making multiple control planes run in the
+same cluster seamlessly. In this release, every new `mutatingwebhookconfiguration`
+includes the namespace its installed in within its `metadata.name` to avoid
+subsequent control plane installs from overwriting previously installed webhooks.
+If you are upgrading from versions prior to this release, you would need to
+delete the old `linkerd-proxy-injector-webhook-config` mutating webhook
+configuration to avoid having overlapping configurations.
+
 ## Upgrade notice: stable-2.3.0
 
 `stable-2.3.0` introduces a new `upgrade` command. This command only works for
