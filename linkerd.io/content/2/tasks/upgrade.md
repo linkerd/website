@@ -20,11 +20,13 @@ incrementally without taking down any of your services.
 
 `stable-2.4.0` includes support for making multiple control planes run in the
 same cluster seamlessly. In this release, every new `mutatingwebhookconfiguration`
-includes the namespace its installed in within its `metadata.name` to avoid
+includes the namespace it's installed in within its `metadata.name` to avoid
 subsequent control plane installs from overwriting previously installed webhooks.
 If you are upgrading from versions prior to this release, you would need to
 delete the old `linkerd-proxy-injector-webhook-config` mutating webhook
-configuration to avoid having overlapping configurations.
+configuration to avoid having overlapping configurations. Note that this also
+applies to `linkerd-sp-validator-webhook-config` as this too is a webhook
+configuration.
 
 ## Upgrade notice: stable-2.3.0
 
