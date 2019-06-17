@@ -25,3 +25,7 @@ spec:
         config.linkerd.io/proxy-memory-limit: 2Gi
         config.linkerd.io/proxy-memory-request: 128Mi
 ```
+
+Note that configuration overrides on proxies injected using the `linkerd inject`
+command is planned for release 2.4. Follow this
+[GitHub issue](https://github.com/linkerd/linkerd2/issues/2590/) for progress.
