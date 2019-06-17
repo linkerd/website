@@ -23,7 +23,7 @@ The following diagnostics are provided (a summary with links is provided at
 - profile: CPU profile. You can specify the duration in the seconds GET
   parameter. After you get the profile file, use the go tool pprof command to
   investigate the profile.
-- jhreadcreate: Stack traces that led to the creation of new OS threads
+- threadcreate: Stack traces that led to the creation of new OS threads
 - trace: A trace of execution of the current program. You can specify the
   duration in the seconds GET parameter. After you get the trace file, use the
   go tool trace command to investigate the trace.
