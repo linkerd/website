@@ -1,18 +1,16 @@
-<table class="table toc">
-  <tbody>
-    {{ $currentPage := .Page }}
-    {{ $subPages := .Page.Pages | append .Page.Sections }}
-    {{ range $index, $page := sort $subPages "Title" }}
-    {{ if (ne $page $currentPage) }}
-    <tr>
-      <th class="text-nowrap">
-        <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
-      </th>
-      <td>
-        {{ $page.Description }}
-      </td>
-    </tr>
-    {{ end }}
-    {{ end }}
-  </tbody>
-</table>
+<div class="columns is-fullwidth toc">
+  {{ $currentPage := .Page }}
+  {{ $subPages := .Page.Pages | append .Page.Sections }}
+  {{ range $index, $page := sort $subPages "Title" }}
+  {{ if (ne $page $currentPage) }}
+  <div class="columns is-fullwidth is-marginless">
+    <div class="column text-align-left is-marginless title">
+      <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+    </div>
+    <div class="column text-align-left is-marginless description">
+      {{ $page.Description }}
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>

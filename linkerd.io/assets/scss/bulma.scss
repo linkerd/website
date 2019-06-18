@@ -33,8 +33,6 @@ $weight-semibold: 600;
 
 $box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
-
-$navbar-breakpoint: 0;
 $navbar-height: 6.25rem;
 $navbar-padding-vertical: 0;
 $navbar-padding-horizontal: 2.625rem;
@@ -43,6 +41,8 @@ $navbar-fixed-z: 300;
 
 $navbar-box-shadow-size: 0 4px 4px 0;
 $navbar-box-shadow-color: rgba(0,0,0,0.2);
+
+$navbar-background-color: $navy-black;
 
 $breadcrumb-item-separator-color: $dark-grey;
 
@@ -60,6 +60,8 @@ $menu-item-active-color: $navy-black;
 $menu-item-active-background-color: white;
 
 $modal-z: 100001;
+
+$tablet-enabled: false;
 
 @import 'bulma-base';
 

@@ -1,27 +1,29 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>
-        Annotation
-      </th>
-      <th>
-        Description
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L89-L152 -->
-    {{ range . }}
-    {{ if or (eq .Name "admin-port") (eq .Name "control-port") (eq .Name "enable-external-profiles") (eq .Name "image-pull-policy") (eq .Name "inbound-port") (eq .Name "init-image") (eq .Name "outbound-port") (eq .Name "proxy-cpu-limit") (eq .Name "proxy-cpu-request") (eq .Name "proxy-image") (eq .Name "proxy-log-level") (eq .Name "proxy-memory-limit") (eq .Name "proxy-memory-request") (eq .Name "proxy-uid") (eq .Name "proxy-version") (eq .Name "skip-inbound-ports") (eq .Name "skip-outbound-ports") }}
-    <tr>
-      <td>
-        <code class="text-nowrap">config.linkerd.io/{{ .Name }}</code>
-      </td>
-      <td>
-        {{ .Usage | markdownify }}
-      </td>
-    </tr>
-    {{ end }}
-    {{ end }}
-  </tbody>
-</table>
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Annotation
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L89-L152 -->
+      {{ range . }}
+      {{ if or (eq .Name "admin-port") (eq .Name "control-port") (eq .Name "enable-external-profiles") (eq .Name "image-pull-policy") (eq .Name "inbound-port") (eq .Name "init-image") (eq .Name "outbound-port") (eq .Name "proxy-cpu-limit") (eq .Name "proxy-cpu-request") (eq .Name "proxy-image") (eq .Name "proxy-log-level") (eq .Name "proxy-memory-limit") (eq .Name "proxy-memory-request") (eq .Name "proxy-uid") (eq .Name "proxy-version") (eq .Name "skip-inbound-ports") (eq .Name "skip-outbound-ports") }}
+      <tr>
+        <td>
+          <code class="text-nowrap">config.linkerd.io/{{ .Name }}</code>
+        </td>
+        <td>
+          {{ .Usage | markdownify }}
+        </td>
+      </tr>
+      {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>
