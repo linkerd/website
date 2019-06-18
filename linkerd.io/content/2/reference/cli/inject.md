@@ -6,7 +6,7 @@ aliases = [
 +++
 
 The `inject` command modifies Kubernetes manifests that are passed to it either
-as a file (`-f`) or as a stream (`-`). It adds two containers to the pod spec of
+as a file or as a stream (`-`). It adds two containers to the pod spec of
 the manifest. Any resource types that do not need modification or are not
 supported, such as a `Service`, are skipped over. The two containers added are:
 
@@ -43,7 +43,7 @@ spec:
 Now, we can run the `inject` command as follows:
 
 ```bash
-linkerd inject -f deployment.yaml
+linkerd inject deployment.yaml
 ```
 
 The output should be that file should look like the following:
