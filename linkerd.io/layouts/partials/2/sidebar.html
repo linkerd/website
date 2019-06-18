@@ -1,64 +1,66 @@
-<div class="pb-5">
-  <div class="dropdown ">
-    <button
-      type="button"
-      class="btn btn-secondary w-100 dropdown-toggle mb-3"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false">
-      {{ if eq .page.Section "1" }}
+<div class="">
+  <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+    <div class="navbar-item has-dropdown is-hoverable ">
+      <a class="navbar-link">
+        {{ if eq .page.Section "1" }}
         Linkerd 1.x
-      {{ else }}
+        {{ else }}
         Linkerd 2.x
-      {{ end }}
-    </button>
-    <div class="dropdown-menu w-100">
-      <h6 class="dropdown-header">Linkerd 1.x</h6>
-      <a class="dropdown-item" href="/1/overview/">
-        {{ site.Params.latest_release_version }}
+        {{ end }}
       </a>
-      <h6 class="dropdown-header">Linkerd 2.x</h6>
-      <a class="dropdown-item" href="/2/overview/">
-        {{ site.Params.l5d2_release_version }}
-      </a>
+      <div class="navbar-dropdown">
+        <div class="navbar-item">
+          Linkerd 1.x
+        </div>
+        <a class="navbar-item" href="/1/overview/">
+          {{ site.Params.latest_release_version }}
+        </a>
+        <div class="navbar-item">
+          Linkerd 2.x
+        </div>
+        <a class="navbar-item" href="/2/overview/">
+          {{ site.Params.l5d2_release_version }}
+        </a>
+      </div>
     </div>
-  </div>
+  </nav>
+  <aside class="menu">
+    <ul class="menu-list is-paddingless is-marginless">
+      {{ $currentPage := .page }}
+      {{ range sort (site.GetPage "/2").Sections "Params.weight" "asc" }}
+      {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
 
-  <ul class="nav flex-column nav-pills sidebar">
-  {{ $currentPage := .page }}
-  {{ range sort (site.GetPage "/2").Sections "Params.weight" "asc" }}
-    {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
-    <li class="nav-item pb-1 {{ if $sectionActive }}active{{ end }}">
-      <a href="{{ .URL }}"
-        class="nav-link {{ if $sectionActive }}active{{ end }}">
-        {{ .Name }}
-      </a>
-      <ul class="nav flex-column nav-pills">
-        {{ $subPages := sort (.Sections | append .Pages) "Name" "asc" }}
-        {{ range sort $subPages "Params.weight" "asc" }}
+      <li class="menu-list-item {{ if $sectionActive }}is-active{{ end }}">
+        <a href="{{ .URL }}" class="{{ if $sectionActive }}is-active{{ end }}">
+          {{ .Name }}
+        </a>
+        <ul class="menu-list is-paddingless is-marginless">
+          {{ $subPages := sort (.Sections | append .Pages) "Name" "asc" }}
+          {{ range sort $subPages "Params.weight" "asc" }}
           {{ $active := hasPrefix $currentPage.URL .URL }}
-          <li class="nav-item">
-            <a href="{{ .URL }}"
-              class="nav-link pl-4 {{ if $active }}active{{ end }}">
+          <li class="menu-list-item">
+            <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
               {{ .Name }}
             </a>
           </li>
-        {{ end }}
-      </ul>
-    </li>
+          {{ end }}
+        </ul>
+      </li>
+      {{ end }}
+    </ul>
+  </aside>
 
-  {{ end }}
-  </ul>
-
-  <hr>
-
-  <a class="btn btn-outline-primary w-100 mb-3 text-left" href="https://slack.linkerd.io" target="_blank">
-    <img height="20px" src="/images/icon-slack.svg" class="mr-2" alt="Slack">
-    <span>Join Linkerd on Slack</span>
-  </a>
-
-  <a class="btn btn-outline-primary w-100 text-left" href="https://discourse.linkerd.io" target="_blank">
-    <img height="20px" class="mr-2" src="/images/logo_discourse.svg" alt="Discourse">
-    <span>Join Linkerd on Discourse</span>
-  </a>
+  <hr class="hr">
+  <div class="sidebar-social">
+    <div>
+      <a class="" href="https://slack.linkerd.io" target="_blank">
+        <img style="height:24px;" src="/images/slack.svg" alt="Slack">
+      </a>
+    </div>
+    <div>
+      <a class="" href="https://discourse.linkerd.io" target="_blank">
+        <img style="height:24px;" src="/images/discourse.svg" alt="Discourse">
+      </a>
+    </div>
+  </div>
 </div>

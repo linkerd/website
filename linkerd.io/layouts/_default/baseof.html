@@ -1,18 +1,45 @@
-<!doctype html>
-<html lang="en" prefix="og: http://ogp.me/ns#">
-  <head>
-    {{ partial "meta.html" . }}
-    {{ partial "css.html" . }}
-    <title>Linkerd - {{ .Title }}</title>
-  </head>
+<!DOCTYPE html>
+<html lang="en" class="">
 
-  <body>
-    {{ partial "nav.html" . }}
+<head>
+  {{ partial "head.html" . }}
+  {{ block "head" . }}
+  {{ end }}
+</head>
 
-    {{ block "main" . }}{{ end }}
-
+<body class="has-background-grey-light has-navbar-fixed-top ">
+  {{ partial "header.html" . }}
+  {{ if eq .URL `/` }}
+  <div class="homepage-notification has-background-light-blue has-text-navy-black center has-text-centered">
+      <p>{{ .Site.Home.Params.announcement_banner.description | markdownify }}</p>
+  </div>
+  {{ end }}
+  <section class="hero is-fullheight">
+    <main aria-role="main" class="hero-body">
+      {{ block "main" . }}
+      {{ end }}
+    </main>
+    {{ block "footer" . }}
+    {{ end }}
     {{ partial "footer.html" . }}
+  </section>
+  {{ block "body-end" . }}
+  {{ end }}
 
-    {{ partial "javascript.html" . }}
-  </body>
+  <script>
+    {{/*  anchors.options.icon = '';  */}}
+    anchors.add('.blog-content-container h1:not(.title), .blog-content-container h2, .blog-content-container h3, .blog-content-container h4');
+  </script>
+
+  <div class="modal" id="galleryModal">
+    <div class="modal-background" onclick="hideImageModal()"></div>
+    <div class="modal-content">
+      <p class="image">
+        <img src="" alt="" id="galleryModalImage">
+      </p>
+    </div>
+    <button class="modal-close is-large" aria-label="close" onclick="hideImageModal()"></button>
+  </div>
+</body>
+
 </html>

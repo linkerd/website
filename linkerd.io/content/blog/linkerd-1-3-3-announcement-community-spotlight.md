@@ -6,7 +6,7 @@ aliases:
 author: 'eliza'
 date: Fri, 01 Dec 2017 15:39:26 +0000
 draft: false
-thumbnail: linkerd_version_133_featured.png
+thumbnail: /uploads/linkerd_version_133_featured.png
 tags: [Buoyant, Community, Linkerd, linkerd, Release Notes]
 ---
 

@@ -1,0 +1,116 @@
+@charset "utf-8";
+
+@import "../bulma/sass/utilities/_all";
+@import "../bulma/sass/base/_all";
+@import "../bulma/sass/elements/_all";
+@import "../bulma/sass/components/_all";
+@import "../bulma/sass/grid/_all";
+@import "../bulma/sass/layout/_all";
+
+h1,
+h1.is-size-1 {
+  font: 900 35px/42px "Rubik" !important;
+}
+
+h2,
+h2.is-size-2 {
+  font: 700 25px/32px "Rubik" !important;
+  letter-spacing: 0.15px;
+}
+
+h3,
+h3.is-size-3 {
+  font: 600 20px/30px "Open Sans" !important;
+  letter-spacing: 0.1px;
+}
+
+h4,
+h4.is-size-4 {
+  font: 16px/20px "Proxima Soft W01 Medium" !important;
+  letter-spacing: 2px;
+}
+
+a {
+  color: $primary-bright-blue;
+  &:hover {
+    color: $secondary-bright-blue;
+  }
+}
+
+.button {
+  border: 1px solid $primary-bright-blue;
+  border-radius: 8px;
+  color: $primary-bright-blue;
+  background-color: transparent;
+  transition: border-color 0.2s linear, color 0.2s linear,
+    background-color 0.2s linear, transform 0.1s linear;
+  font: 600 18px/20px "Open Sans" !important;
+  letter-spacing: 0.2px;
+  &:hover,
+  &:active {
+    border-color: $secondary-bright-blue;
+    color: $secondary-bright-blue;
+  }
+  &:active {
+    box-shadow: inset 2px 0px 8px rgba(0, 0, 0, 0.05),
+      inset 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  &.is-primary {
+    border-color: transparent;
+    background-color: $primary-bright-blue;
+    border: 1px solid $secondary-bright-blue;
+    &:hover {
+      background-color: $secondary-bright-blue;
+    }
+    &:active {
+      background-color: $secondary-bright-blue;
+      box-shadow: inset 2px 0px 8px rgba(0, 0, 0, 0.1),
+        inset 0px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  &.is-dark {
+    border-color: $dark-grey;
+    color: $dark-grey;
+    background-color: transparent;
+    &:hover,
+    &:active {
+      background-color: $dark-grey;
+      color: $white;
+    }
+    &:active {
+      box-shadow: inset 2px 0px 8px rgba(0, 0, 0, 0.1),
+        inset 0px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+  &.is-large {
+    min-height: 56px;
+    min-width: 200px;
+    font-size: 16px;
+  }
+}
+
+.has-background-sky-blue {
+  background-color: $sky-blue;
+}
+
+.has-background-bright-blue {
+  background: linear-gradient(
+    180deg,
+    $primary-bright-blue 0%,
+    $secondary-bright-blue 100%
+  );
+}
+
+.has-background-orange {
+  background-color: $orange;
+}
+
+.has-text-color {
+  color: $deep-blue;
+}
+
+.has-proxima-font {
+  letter-spacing: 2px;
+  color: $dark-grey;
+  font-family: $proxima-font;
+}

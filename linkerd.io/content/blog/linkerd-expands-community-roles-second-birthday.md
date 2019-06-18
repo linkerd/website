@@ -6,7 +6,7 @@ aliases:
 author: 'gmiranda23'
 date: Fri, 16 Feb 2018 22:17:40 +0000
 draft: false
-thumbnail: linkerd_faster_featured.png
+thumbnail: /uploads/linkerd_faster_featured.png
 tags: [buoyant, Community, Linkerd, linkerd, News]
 ---
 

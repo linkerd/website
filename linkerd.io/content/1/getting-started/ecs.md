@@ -1,14 +1,13 @@
 +++
-title = "Running in ECS"
+aliases = ["/getting-started/ecs"]
 description = "How to run Linkerd in ECS, using Consul for Service Discovery and linkerd-viz for monitoring."
+title = "Running in ECS"
 weight = 6
-aliases = [
-  "/getting-started/ecs"
-]
 [menu.docs]
-  parent = "getting-started"
-+++
+parent = "getting-started"
+weight = 35
 
++++
 [Amazon ECS](https://aws.amazon.com/ecs/) is a container management service.
 This guide will demonstrate routing and monitoring your services using Linkerd
 in ECS.

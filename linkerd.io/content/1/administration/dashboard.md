@@ -1,14 +1,13 @@
 +++
-title = "Dashboard"
+aliases = ["/administration/dashboard"]
 description = "Admin UI showing graphs of requests, success rate, latency and more."
+title = "Dashboard"
 weight = 2
-aliases = [
-  "/administration/dashboard"
-]
 [menu.docs]
-  parent = "administration"
-+++
+parent = "administration"
+weight = 40
 
++++
 Linkerd runs an administrative web interface on port 9990. If you have Linkerd
 running locally, simply visit `http://localhost:9990/` to view it. The dashboard
 displays request volume, success rate, connection information, and latency

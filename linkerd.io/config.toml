@@ -1,64 +1,79 @@
-baseurl = "https://linkerd.io/"
-title = "Linkerd"
-languageCode = "en-US"
 Paginate = 10
-sectionPagesMenu = "main"
-enableRobotsTXT = true
+baseurl = "https://linkerd.io/"
 disableKinds = ["taxonomy", "taxonomyTerm"]
-
-[permalinks]
-blog = "/:year/:month/:day/:slug/"
-
-#CUSTOM PARAMS
-[params]
-  latest_release_version = "1.6.3"
-  latest_release_date = "2019-05-10"
-  description = "Linkerd is the fastest, lightest, simplest service mesh for Kubernetes"
-
-  l5d2_release_version = "L5D2_STABLE_VERSION"
-  l5d2_edge_version = "L5D2_EDGE_VERSION"
-
+enableRobotsTXT = true
+languageCode = "en-US"
+sectionPagesMenu = "main"
+theme = "buoyant"
+title = "Linkerd"
 [blackfriday]
-  HrefTargetBlank = true
-
-# MENU: top nav bar
-[[menu.top]]
-  name = "Docs"
-  identifier = "documentation"
-  weight = 1
-  url = "/docs/"
-
-[[menu.top]]
-  name = "Community"
-  weight = 2
-  url = "/community/"
-
-[[menu.top]]
-  name = "Blog"
-  identifier = "blog"
-  weight = 3
-  url = "/blog/"
-
-[[menu.top]]
-  name = "Enterprise"
-  weight = 4
-  url = "/enterprise/"
-
-[[menu.top]]
-  name = "GitHub"
-  identifier = "github"
-  weight = 5
-  pre = "<i class='fab fa-github mr-1' aria-hidden='true'></i>"
-  url = "https://github.com/linkerd/linkerd2"
-
-# Auto-generate Netlify _redirects file
+HrefTargetBlank = true
 [mediaTypes."text/netlify"]
 delimiter = ""
-
+[[menu.community]]
+name = "Slack"
+url = "https://slack.linkerd.io/"
+weight = 3
+[[menu.community]]
+name = "Discourse"
+url = "https://discourse.linkerd.io/"
+weight = 2
+[[menu.community]]
+name = "GitHub"
+url = "https://github.com/linkerd/linkerd2"
+weight = 1
+[[menu.follow]]
+name = "Twitter"
+url = "https://twitter.com/linkerd"
+weight = 3
+[[menu.follow]]
+name = "YouTube"
+url = "https://www.youtube.com/buoyantio"
+weight = 1
+[[menu.follow]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/company/buoyantio/"
+weight = 2
+[[menu.top]]
+identifier = "documentation"
+name = "Docs"
+url = "/docs/"
+weight = 1
+[[menu.top]]
+identifier = "blog"
+name = "Blog"
+url = "/blog/"
+weight = 3
+[[menu.top]]
+identifier = "github"
+name = "GitHub"
+pre = "<i class='fab fa-github fa-lg' aria-hidden='true'></i>"
+url = "https://github.com/linkerd/linkerd2"
+weight = 5
+[[menu.top]]
+identifier = "start"
+name = "GET STARTED"
+post = "</span>"
+pre = "<span class='button-spacer'>"
+url = "/2/getting-started"
+weight = 6
 [outputFormats.REDIRECTS]
-mediaType = "text/netlify"
 baseName = "_redirects"
-
+mediaType = "text/netlify"
 [outputs]
 home = ["HTML", "REDIRECTS"]
 section = ["HTML", "JSON"]
+[params]
+description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
+images = [""]
+l5d2_edge_version = "L5D2_EDGE_VERSION"
+l5d2_release_version = "L5D2_STABLE_VERSION"
+latest_release_date = "2019-02-01"
+latest_release_version = "1.6.1"
+logo = "/images/identity/svg/linkerd_primary_color_white.svg"
+[permalinks]
+blog = "/:year/:month/:day/:slug/"
+[privacy.twitter]
+disable = false
+enableDNT = false
+simple = false

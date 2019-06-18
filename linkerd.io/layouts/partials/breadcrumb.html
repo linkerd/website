@@ -2,18 +2,18 @@
 {{ $isSectionPage := eq .ctx.File.LogicalName "_index.md"}}
 
 {{ if or (not $isSectionPage) (gt $pathN 3) }}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+<nav aria-label="breadcrumb" class="breadcrumb">
+  <ul>
     {{ if or (and (eq $pathN 3) (not $isSectionPage)) (and (eq $pathN 4) $isSectionPage) }}
-    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
     {{ end }}
 
     {{ if and (eq $pathN 4) (not $isSectionPage) }}
-    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.Parent.URL }}">{{ .ctx.Parent.Parent.Title }}</a></li>
-    <li class="breadcrumb-item"><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.Parent.URL }}">{{ .ctx.Parent.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
     {{ end }}
 
-    <li class="breadcrumb-item active" aria-current="page">{{ .ctx.Title }}</li>
-  </ol>
+    <li class="is-active" aria-current="page"><a href="#"> {{ .ctx.Title }}</a></li>
+  </ul>
 </nav>
 {{ end }}

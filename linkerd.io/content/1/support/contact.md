@@ -1,14 +1,13 @@
 +++
-title = "Contact us"
+aliases = ["/support/contact"]
 description = "Contact us"
+title = "Contact us"
 weight = 7
-aliases = [
-  "/support/contact"
-]
 [menu.docs]
-  parent = "support"
-+++
+parent = "support"
+weight = 4
 
++++
 * Ask questions about configuration or troubleshooting in the
 [Linkerd Discourse instance](https://discourse.linkerd.io/).
 * File issues about bugs or feature requests in

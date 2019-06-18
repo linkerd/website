@@ -5,7 +5,7 @@ aliases:
   - /2018/10/23/a-linkerd-2-0-deep-dive-unboxing-debugging-and-monitoring-kubernetes-services-on-azure/
 author: 'william'
 date: Tue, 23 Oct 2018 18:37:39 +0000
-thumbnail: Lachie-Unboxing.png
+thumbnail: /uploads/Lachie-Unboxing.png
 draft: false
 tags: [Community, Linkerd, Tutorials &amp; How-To's, Video]
 ---

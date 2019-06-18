@@ -6,7 +6,7 @@ aliases:
 author: 'kiersten'
 date: Fri, 02 Nov 2018 19:03:29 +0000
 draft: false
-thumbnail: Screen-Shot-2018-11-02-at-11.53.21-AM.png
+thumbnail: /uploads/Screen-Shot-2018-11-02-at-11.53.21-AM.png
 tags: [Community, Events, Linkerd, News]
 ---
 

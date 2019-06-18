@@ -1,27 +1,29 @@
 {{ $cli      := site.Data.cli }}
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>
-        Command
-      </th>
-      <th>
-        Description
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    {{ range $cli }}
-    <tr>
-      <td>
-        <a href="{{ .Name }}/">
-          {{ .Name }}
-        </a>
-      </td>
-      <td>
-        {{ .Synopsis | markdownify }}
-      </td>
-    </tr>
-    {{ end }}
-  </tbody>
-</table>
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Command
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $cli }}
+      <tr>
+        <td class="text-nowrap">
+          <a href="{{ .Name }}/">
+            {{ .Name }}
+          </a>
+        </td>
+        <td>
+          {{ .Synopsis | markdownify }}
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>

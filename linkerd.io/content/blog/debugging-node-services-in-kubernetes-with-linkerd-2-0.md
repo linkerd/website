@@ -6,7 +6,7 @@ aliases:
 author: 'thomas'
 date: Tue, 13 Nov 2018 23:34:20 +0000
 draft: false
-thumbnail: Screen-Shot-2018-11-13-at-3.48.47-PM-1.png
+thumbnail: /uploads/Screen-Shot-2018-11-13-at-3.48.47-PM-1.png
 tags: [Community, Linkerd, Tutorials &amp; How-To's]
 ---
 

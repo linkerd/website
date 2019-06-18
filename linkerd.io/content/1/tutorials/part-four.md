@@ -1,14 +1,13 @@
 +++
-title = "IV. Continuous deployment"
+aliases = ["/tutorials/part-four"]
 description = "In this tutorial, we’ll show you how to use Linkerd’s routing rules to automatically alter traffic flow through your application."
+title = "IV. Continuous deployment"
 weight = 5
-aliases = [
-  "/tutorials/part-four"
-]
 [menu.docs]
-  parent = "tutorials"
-+++
+parent = "tutorials"
+weight = 9
 
++++
 This tutorial focuses on using Linkerd's delegation tables (or 'dtabs'). You
 will learn how to use Linkerd to alter individual requests in order to perform
 a blue-green deployment of new application code as the final step of a CI/CD

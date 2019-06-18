@@ -4,7 +4,7 @@ title: 'Bringing Service Communication Out of the Shadows - Part 2'
 aliases:
   - /2017/11/20/bringing-service-communication-shadows-part-2/
 author: 'gmiranda23'
-thumbnail: shadows2_featured_Twitter_ratio.png
+thumbnail: /uploads/shadows2_featured_Twitter_ratio.png
 date: Mon, 20 Nov 2017 21:23:46 +0000
 draft: false
 tags:

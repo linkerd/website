@@ -5,7 +5,7 @@ aliases:
   - /2017/03/14/a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy/
 author: 'kevin'
 date: Tue, 14 Mar 2017 23:26:32 +0000
-thumbnail: kubernetes7_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes7_featured_Twitter_ratio.png
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

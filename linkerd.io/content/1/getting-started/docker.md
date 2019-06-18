@@ -1,14 +1,13 @@
 +++
-title = "Running with Docker"
+aliases = ["/getting-started/docker"]
 description = "How to run Linkerd through a Docker container."
+title = "Running with Docker"
 weight = 3
-aliases = [
-  "/getting-started/docker"
-]
 [menu.docs]
-  parent = "getting-started"
-+++
+parent = "getting-started"
+weight = 33
 
++++
 If you're using Docker to run Linkerd, there is no need to pull the release
 binary from GitHub, as described in the previous section. Instead, Buoyant
 provides the following public Docker images for you:

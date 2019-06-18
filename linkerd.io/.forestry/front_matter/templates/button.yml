@@ -1,0 +1,14 @@
+---
+label: Button
+hide_body: false
+fields:
+- type: text
+  name: caption
+  label: Caption
+  config:
+    required: false
+- type: text
+  name: url
+  label: Url
+  config:
+    required: false

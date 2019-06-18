@@ -1,33 +1,13 @@
 +++
-title = "Deployment"
+aliases = ["/doc/0.1.0/deployment", "/doc/0.2.0/deployment", "/doc/0.2.1/deployment", "/doc/0.3.0/deployment", "/doc/0.3.1/deployment", "/doc/0.4.0/deployment", "/doc/0.5.0/deployment", "/doc/0.6.0/deployment", "/doc/0.7.0/deployment", "/doc/0.7.1/deployment", "/doc/0.7.2/deployment", "/doc/0.7.3/deployment", "/doc/0.7.4/deployment", "/doc/0.7.5/deployment", "/doc/0.8.0/deployment", "/doc/head/deployment", "/doc/latest/deployment", "/doc/deployment", "/in-depth/deployment", "/advanced/deployment"]
 description = "Addresses typical deployment models for running Linkerd in your architecture."
+title = "Deployment"
 weight = 40
-aliases = [
-  "/doc/0.1.0/deployment",
-  "/doc/0.2.0/deployment",
-  "/doc/0.2.1/deployment",
-  "/doc/0.3.0/deployment",
-  "/doc/0.3.1/deployment",
-  "/doc/0.4.0/deployment",
-  "/doc/0.5.0/deployment",
-  "/doc/0.6.0/deployment",
-  "/doc/0.7.0/deployment",
-  "/doc/0.7.1/deployment",
-  "/doc/0.7.2/deployment",
-  "/doc/0.7.3/deployment",
-  "/doc/0.7.4/deployment",
-  "/doc/0.7.5/deployment",
-  "/doc/0.8.0/deployment",
-  "/doc/head/deployment",
-  "/doc/latest/deployment",
-  "/doc/deployment",
-  "/in-depth/deployment",
-  "/advanced/deployment"
-]
 [menu.docs]
-  parent = "advanced"
-+++
+parent = "advanced"
+weight = 27
 
++++
 There are two common deployment models for Linkerd: per-host, and as a sidecar
 process.
 

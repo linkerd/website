@@ -1,64 +1,48 @@
 {{ define "head" }}
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+{{ $js := resources.Get "js/lunr.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $js.Permalink }}"></script>
 {{ end }}
 
 {{ define "main" }}
-<main>
-  <div class="jumbotron jumbotron-fluid linkerd-bg text-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-7 pb-3">
-          <h1>{{.Title}}</h1>
-          <p>{{ .Params.Subtitle }}</p>
-          <div class="header-button-group pb-3">
-            <a href="/2/getting-started/" class="btn btn-primary"
-              >Get started</a
-            >
+<div class="wrapper blog-preview rounded-block bottom-round has-background-grey-light">
+  <div class="blogs-container">
+    {{ partial "options.html" }}
+    <div class="container center-column is-marginless is-fullwidth">
+      <div class="has-backgroung-grey-light is-paddingless featured-items-container">
+        <div id="featuredItems">
+          <div class="search-title is-uppercase has-text-centered">Featured</div>
+          <div class="columns container is-multiline is-variable blog-list-container">
+            {{ range.Params.items }}
+              {{ with $.Site.GetPage . }}
+                {{ .Scratch.Set "type" "Page" }}
+                {{- if (isset .Params "categories") -}}
+                  {{- .Scratch.Set "type" (index .Params.categories 0) -}}
+                {{- end -}}
+                {{ partial "featured-card.html" . }}
+              {{ end }}
+            {{ end }}
           </div>
-          <a
-            class="github-button"
-            href="https://github.com/linkerd/linkerd2"
-            data-icon="octicon-star"
-            data-show-count="true"
-            aria-label="Star linkerd/linkerd2 on GitHub"
-            >Star</a
-          >
-          <a
-            class="github-button"
-            href="https://github.com/linkerd/linkerd2/subscription"
-            data-icon="octicon-eye"
-            data-show-count="true"
-            aria-label="Watch linkerd/linkerd2 on GitHub"
-            >Watch</a
-          >
-          <a
-            class="github-button"
-            href="https://github.com/linkerd/linkerd2/fork"
-            data-icon="octicon-repo-forked"
-            data-show-count="true"
-            aria-label="Fork linkerd/linkerd2 on GitHub"
-            >Fork</a
-          >
+        </div>
+        <div class="search-title is-uppercase has-text-centered" id="resultsHeader">
+          Recently Added
+        </div>
+        <div class="columns container is-multiline is-variable blog-list-container" id="searchResult">
+          {{ range .Pages | first 6 }}
+            {{ partial "related-card.html" . }}
+          {{ end }}
+        </div>
+        <div class="is-uppercase has-text-weight-semibold has-text-centered is-size-6 blog-list-load-more">
+          <a id="loadMore" href="javascript:void(0)">See more</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="container pb-5">
-      <ul class="list-unstyled">
-    {{ range.Pages }}
-    <li class="media mb-3">
-        {{if isset .Params "thumbnail" }}
-          <img class="pull-left img-responsive"
-          src="/uploads/{{.Params.thumbnail}}"
-          style="width: 33.33%"
-          alt="{{.Title}}" />
-        {{ end }}
-        <div class="media-body ml-3">
-          <h4><a href="{{.Permalink}}">{{.Title}}</a></h4>
-          <p>{{.Summary}} <a href="{{.Permalink}}">Read more ...</a></p>
-        </div>
-      </li>
-    {{ end }}
-  </ul></div>
-</main>
+</div>
+{{ end }}
+
+{{ define "body-end" }}
+{{ $search := resources.Get "js/search.js" }}
+<script src="{{ $search.Permalink }}"></script>
+{{ $js := resources.Get "js/blog-search.js" }}
+<script src="{{ $js.Permalink }}"></script>
 {{ end }}

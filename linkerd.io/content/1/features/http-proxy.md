@@ -1,15 +1,13 @@
 +++
-title = "HTTP proxy integration"
+aliases = ["/getting-started/http-proxy", "/features/http-proxy"]
 description = "Linkerd can act as an HTTP proxy, which is widely supported by almost all modern HTTP clients, making it easy to integrate into existing applications."
+title = "HTTP proxy integration"
 weight = 6
-aliases = [
-  "/getting-started/http-proxy",
-  "/features/http-proxy"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 16
 
++++
 Virtually all HTTP clients support making calls through an intermediate proxy.
 Traditionally, this was used to operate in firewalled environments where
 connections to the external world were restricted. However, since Linkerd

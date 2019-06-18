@@ -1,14 +1,16 @@
-<dl class="row px-2">
-{{ $currentPage := .Page }}
-{{ $subPages := .Page.Pages | append .Page.Sections }}
-{{ range $index, $page := sort $subPages "Title" }}
+<div class="columns is-fullwidth toc">
+  {{ $currentPage := .Page }}
+  {{ $subPages := .Page.Pages | append .Page.Sections }}
+  {{ range $index, $page := sort $subPages "Title" }}
   {{ if (ne $page $currentPage) }}
-      <dt class="col-sm-3 border-top pt-2">
-        <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
-      </dt>
-      <dd class="col-sm-9 border-top pt-2">
-        <p>{{ $page.Description }}</p>
-      </dd>
+  <div class="columns is-fullwidth is-marginless">
+    <div class="column text-align-left is-marginless title">
+      <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
+    </div>
+    <div class="column text-align-left is-marginless description">
+      {{ $page.Description }}
+    </div>
+  </div>
   {{ end }}
-{{ end }}
-</dl>
+  {{ end }}
+</div>

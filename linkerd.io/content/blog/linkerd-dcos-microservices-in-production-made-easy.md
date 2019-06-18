@@ -6,7 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 19 Apr 2016 22:21:14 +0000
 draft: false
-thumbnail: linkerd_featured_EASY.png
+thumbnail: /uploads/linkerd_featured_EASY.png
 tags: [buoyant, Linkerd, linkerd, News, Product Announcement]
 ---
 

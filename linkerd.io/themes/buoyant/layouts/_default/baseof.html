@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+
+<head>
+  {{ partial "head.html" . }}
+  {{ block "head" . }}
+  {{ end }}
+</head>
+
+<body class="has-background-grey-light">
+  {{ if not .Site.IsServer }}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHF5SSN" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  {{ end }}
+
+  {{ partial "header.html" . }}
+  {{ if eq .URL `/` }}
+  <div class="homepage-notification has-background-orange has-text-white center has-text-centered">
+      <p>{{ .Site.Home.Params.announcement_banner.description | markdownify }}</p>
+  </div>
+  {{ end }}
+  <section class="hero is-fullheight">
+    <main aria-role="main" class="hero-body">
+      {{ block "main" . }}
+      {{ end }}
+    </main>
+    {{ block "footer" . }}
+    {{ end }}
+    {{ partial "footer.html" . }}
+  </section>
+  {{ block "body-end" . }}
+  {{ end }}
+</body>
+
+</html>

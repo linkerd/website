@@ -6,7 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 24 Jan 2017 00:20:26 +0000
 draft: false
-thumbnail: linkerd_cncf_featured.png
+thumbnail: /uploads/linkerd_cncf_featured.png
 tags: [Buoyant, buoyant, Linkerd, linkerd, News]
 ---
 

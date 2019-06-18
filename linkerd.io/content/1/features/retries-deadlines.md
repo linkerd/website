@@ -1,14 +1,13 @@
 +++
-title = "Retries and deadlines"
+aliases = ["/features/retries-deadlines"]
 description = "Linkerd can automatically retry requests on certain failures and can timeout requests after a specified period."
+title = "Retries and deadlines"
 weight = 6
-aliases = [
-  "/features/retries-deadlines"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 10
 
++++
 Failures are inevitable in a distributed system. Linkerd comes with several
 configurable options that help make clients and servers more fault-tolerant and
 reliable.

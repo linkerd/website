@@ -5,7 +5,7 @@ aliases:
   - /2018/10/19/the-linkerd-enthusiasts-guide-to-kubecon-na-2018-2/
 author: 'william'
 date: Fri, 19 Oct 2018 15:49:12 +0000
-thumbnail: Kubecon-NA-2018.png
+thumbnail: /uploads/Kubecon-NA-2018.png
 draft: false
 tags: [Buoyant, Community, Events, Linkerd]
 ---

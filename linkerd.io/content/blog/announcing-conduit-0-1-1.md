@@ -6,7 +6,7 @@ aliases:
 author: 'gmiranda23'
 date: Wed, 20 Dec 2017 23:11:11 +0000
 draft: false
-thumbnail: version_conduit_011.png
+thumbnail: /uploads/version_conduit_011.png
 tags: [conduit, Conduit, Release Notes, releases]
 ---
 

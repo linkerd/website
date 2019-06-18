@@ -5,7 +5,7 @@ aliases:
   - /2017/09/08/linkerd-1-2-0-announcement-migration-guide/
 author: 'eliza'
 date: Fri, 08 Sep 2017 20:23:01 +0000
-thumbnail: linkerd_version_12_featured.png
+thumbnail: /uploads/linkerd_version_12_featured.png
 draft: false
 tags: [Linkerd, linkerd, News]
 ---

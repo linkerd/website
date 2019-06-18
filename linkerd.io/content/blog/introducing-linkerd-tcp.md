@@ -5,7 +5,7 @@ aliases:
   - /2017/03/29/introducing-linkerd-tcp/
 author: 'oliver'
 date: Wed, 29 Mar 2017 23:32:27 +0000
-thumbnail: linkerd_tcp_featured.png
+thumbnail: /uploads/linkerd_tcp_featured.png
 draft: false
 tags: [Linkerd, linkerd, News]
 ---

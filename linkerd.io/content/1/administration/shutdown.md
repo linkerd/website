@@ -1,14 +1,13 @@
 +++
-title = "Shutdown"
+aliases = ["/administration/shutdown"]
 description = "Gracefully shut down Linkerd."
+title = "Shutdown"
 weight = 5
-aliases = [
-  "/administration/shutdown"
-]
 [menu.docs]
-  parent = "administration"
-+++
+parent = "administration"
+weight = 39
 
++++
 You can gracefully shut down Linkerd by sending a POST request to
 `/admin/shutown`. For example:
 

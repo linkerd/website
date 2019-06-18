@@ -1,41 +1,50 @@
-{{ $isHome   := .IsHome }}
-{{ $filepath := .File.Path }}
-{{ $editUrl  := printf "https://github.com/linkerd/website/edit/master/linkerd.io/content/%s" $filepath }}
-<div class="border-top">
-  <footer class="container">
-    <div class="row my-5">
-      <div class="col-md-6 pb-3">
-        {{ if $isHome }}
-        <a class="btn btn-dark" href="https://github.com/linkerd/website/tree/master/linkerd.io/content">
-          <i class="fab fa-github"></i>&nbsp;Edit this site
-        </a>
-        {{ else }}
-        <a class="btn btn-dark" href="{{ $editUrl }}">
-          <i class="fab fa-github"></i>&nbsp;Edit this page
-        </a>
-        {{ end }}
-        <!-- <ul class="list-unstyled">
-          <li>
-            <a href="{{ relref . "/2/getting-started/_index.md" }}"
-              class="btn btn-outline-primary">
-              Get Started
-            </a>
-          </li>
-        </ul>
--->
+<footer class="hero-foot">
+  <div class="wrapper is-paddingless footer-links has-background-white">
+    <div class="container columns">
+      <div class="column buoyant-info has-text-centered-mobile">
+        <figure class="image logo">
+          <img src=/images/identity/svg/linkerd_primary_color_black.svg alt="logo" />
+        </figure>
+        <p class="has-text-dark-grey">
+          Linkerd was originally created by <a class="" target="_blank" href="https://buoyant.io/">Buoyant, Inc.</a>
+        </p>
+        <p class="has-text-dark-grey">
+          View <a class="" target="_blank" href="https://github.com/linkerd/linkerd/wiki/Linkerd-code-of-conduct">Code
+            of Conduct</a>
+        </p>
       </div>
-      <div class="col-md-6">
-        <ul class="list-unstyled text-md-right">
-          <li class="pb-3">
-            <img
-              alt="Linkerd Logo"
-              src="/images/identity/svg/linkerd_primary_color_gray.svg"
-              href="https://linkerd.io/"
-              width="200">
-          </li>
-          <li class="my-auto">© 2019 Linkerd Authors. All rights reserved.</li>
-        </ul>
+      <div class="column is-one-third has-text-centered-mobile">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-one-half list-of-links">
+            <p class="has-text-weight-bold">Community</p>
+            {{ $currentPage := . }}
+            {{ range.Site.Menus.community }}
+            <p>
+              <a href="{{ .URL }}" target="_blank" class="has-text-color has-text-weight-light"><span
+                  class="navbar-item-helper">{{ .Name }}</span></a>
+            </p>
+            {{ end }}
+          </div>
+          <div class="column is-one-thirds list-of-links">
+            <p class="has-text-weight-bold">Follow</p>
+            {{ range.Site.Menus.follow }}
+            <p>
+              <a href="{{ .URL }}" class="has-text-color has-text-weight-light">
+                <span class="navbar-item-helper">{{ .Name }}</span>
+              </a>
+            </p>
+            {{ end }}
+          </div>
+        </div>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
+  <div class="is-paddingless has-background-navy-black">
+    <div class="container columns footer has-background-navy-black">
+      <p class="column is-narrow">
+        <a href="https://github.com/linkerd/website/tree/master/linkerd.io/content" class="">Edit This Site</a>
+      </p>
+      <p class="column has-text-white">© {{ now.Year }} Linkerd Authors. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

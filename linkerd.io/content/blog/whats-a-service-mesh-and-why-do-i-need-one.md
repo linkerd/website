@@ -6,7 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 25 Apr 2017 23:35:29 +0000
 draft: false
-thumbnail: service_mesh_featured.png
+thumbnail: /uploads/service_mesh_featured.png
 tags:
   [
     Buoyant,

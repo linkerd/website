@@ -6,7 +6,7 @@ aliases:
 author: 'alex'
 date: Thu, 23 Feb 2017 00:24:50 +0000
 draft: false
-thumbnail: linkerd_version_009_featured.png
+thumbnail: /uploads/linkerd_version_009_featured.png
 tags: [Linkerd, linkerd, News, Product Announcement]
 ---
 

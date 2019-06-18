@@ -1,6 +1,6 @@
-+++
-title = "Google Summer of Code"
-+++
+---
+title: "Google Summer of Code"
+---
 
 This is the list of ideas for students wishing to apply to Google Summer of
 Code. For more information on what the program is and how to apply, see the
@@ -14,9 +14,9 @@ project. However, suggesting your own idea is always encouraged. Jump over to
 [Slack](hhttps://slack.linkerd.io/) and chat with us or create an
 [issue](https://github.com/linkerd/linkerd2/issues)!
 
----
 
 ## Cross-cloud integration testing
+---
 
 With the proliferation of managed Kubernetes services on many cloud platforms
 (GKE, AKS, EKS, Kubernetes on DigitalOcean), the subtle differences between
@@ -48,9 +48,9 @@ Medium
 
 [https://github.com/linkerd/linkerd2/issues/2213](https://github.com/linkerd/linkerd2/issues/2213)
 
----
 
 ## Auto-Update
+---
 
 Linkerd has frequent updates and keeping up with the weekly edge releases can
 be difficult. This project involves building a Kubernetes operator that can
@@ -83,9 +83,9 @@ Hard
 
 [https://github.com/linkerd/linkerd2/issues/1903](https://github.com/linkerd/linkerd2/issues/1903)
 
----
 
 ## Conformance Validation
+---
 
 Linkerd has an extensive `check` suite that validates a cluster is ready to
 install Linkerd and that the install was successful. These checks are,
@@ -119,9 +119,9 @@ Medium
 
 [https://github.com/linkerd/linkerd2/issues/1096](https://github.com/linkerd/linkerd2/issues/1096)
 
----
 
 ## Alertmanager Integration
+---
 
 Linkerd provides rich metrics that are stored in Prometheus out of the box.
 These are for both the control plane and data plane. The goal is to provide
@@ -153,9 +153,9 @@ Easy
 
 [https://github.com/linkerd/linkerd2/issues/1726](https://github.com/linkerd/linkerd2/issues/1726)
 
----
 
 ## Kafka Introspection
+---
 
 HTTP-based traffic is only one type of communication in modern applications.
 Many use message queues such as Kafka. Getting metrics for
