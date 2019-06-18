@@ -13,7 +13,7 @@ top_hero:
     url: /community
   image_on_the_right: false
 announcement_banner:
-  description: 2.2.1 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
+  description: 2.3.2 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
 description: Linkerd is a transparent proxy that adds service discovery, routing,
   failure handling, and visibility to modern software applications
 keywords:
