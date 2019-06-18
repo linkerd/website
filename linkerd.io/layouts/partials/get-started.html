@@ -1,50 +1,28 @@
 {{ .Content }}
 
-<div class="row">
-  <div class="col-md-5">
+<div class="columns">
+  <div class="column">
     <h1>Get started</h1>
-    <p>Get Linkerd up and running in just a few minutes. This section addresses running Linkerd in common environments.</p>
+    <p>Get Linkerd up and running in just a few minutes. This section addresses running Linkerd in common environments.
+    </p>
     <p>Select an environment to get started:</p>
   </div>
-  <div class="col-md-7 text-center">
+  <div class="column is-narrow">
     <a href="/1/getting-started/">
       <img src="/images/get_started.svg" width="200" alt="Get started">
     </a>
   </div>
 </div>
 
-<div class="row pt-5">
-  <a href='{{ relref . "/1/getting-started/locally.md" }}' class="col">
-    <img class="w-100"
-      src="/images/get_started_local_rect@2x.png"
-      alt="Get started locally">
-  </a>
+{{ with site.GetPage "choose-your-platform" "choose-your-platform" }}
 
-  <a href='{{ relref . "/1/getting-started/k8s.md" }}' class="col">
-    <img class="w-100"
-      src="/images/get_started_kubernetes_rect@2x.png"
-      alt="Get started with Kubernetes">
-  </a>
 
-  <a href='{{ relref . "/1/getting-started/dcos.md" }}' class="col">
-    <img class="w-100"
-      src="/images/get_started_dcos_rect@2x.png"
-      alt="Get started with DC/OS">
-  </a>
-
-  <div class="w-100"></div>
-
-  <a href='{{ relref . "/1/getting-started/docker.md" }}' class="col">
-    <img class="w-100"
-      src="/images/get_started_docker_rect@2x.png"
-      alt="Get started with Docker">
-  </a>
-
-  <a href='{{ relref . "/1/getting-started/ecs.md" }}' class="col">
-    <img class="w-100"
-      src="/images/get_started_ecs_rect@2x.png"
-      alt="Get started with ECS">
-  </a>
-
-  <div class="col"></div>
+<div class="columns is-multiline platform-columns">
+  {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/k8s.md" ) "title" "Kubernetes" "thumbnail" "/images/kubernetes.svg") }}
+  {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/ecs.md" ) "title" "AWS ECS" "thumbnail" "/images/awsecs.svg") }}
+  {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/dcos.md" ) "title" "DC/OS" "thumbnail" "/images/dcos.svg") }}
+  {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/docker.md" ) "title" "Docker" "thumbnail" "/images/docker.svg") }}
+  {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/locally.md" ) "title" "Local" "thumbnail" "/images/local.svg") }}
 </div>
+
+{{ end }}

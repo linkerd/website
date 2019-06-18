@@ -5,7 +5,7 @@ aliases:
   - /2016/11/18/a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing/
 author: 'risha'
 date: Fri, 18 Nov 2016 00:10:16 +0000
-thumbnail: kubernetes5_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes5_featured_Twitter_ratio.png
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

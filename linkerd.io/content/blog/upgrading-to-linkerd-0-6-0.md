@@ -6,7 +6,7 @@ aliases:
 author: 'alex'
 date: Tue, 24 May 2016 22:33:14 +0000
 draft: false
-thumbnail: linkerd_v_060.png
+thumbnail: /uploads/linkerd_v_060.png
 tags: [Article, Buoyant, Linkerd, linkerd, News]
 ---
 

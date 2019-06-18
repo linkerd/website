@@ -1,0 +1,31 @@
+---
+label: Blogpost
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: Title
+  config:
+    required: true
+- type: tag_list
+  name: tags
+  label: Tags
+- type: select
+  name: author
+  config:
+    source:
+      type: documents
+      file: data/authors.json
+  label: Author
+- type: datetime
+  label: Date
+  name: date
+  config:
+    time_format: " "
+- type: file
+  name: thumbnail
+  label: Thumbnail
+  default: ''
+- type: file
+  label: Featured Thumbnail
+  name: feature

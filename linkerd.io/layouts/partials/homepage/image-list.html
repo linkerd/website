@@ -1,0 +1,19 @@
+<div class="wrapper image-list {{.backgroundColor}}">
+  <div class="container">
+    {{ if .title }}
+    <h4 class="title is-size-4 has-text-centered is-uppercase">{{.title}}</h4>
+    {{ end }}
+    <div class="container columns is-multiline is-centered is-mobile">
+      {{ range .mentions}}
+      <div class="column is-half-mobile is-2">
+        <a href="{{.link}}" target="_blank">
+          <figure class="image">
+            <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .link }}" />
+          </figure>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+
+</div>

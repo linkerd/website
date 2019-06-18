@@ -5,7 +5,7 @@ aliases:
   - /2017/10/26/bringing-service-communication-out-of-the-shadows-pt-1/
 author: 'gmiranda23'
 date: Thu, 26 Oct 2017 08:05:40 +0000
-thumbnail: shadows1_featured_Twitter_ratio.png
+thumbnail: /uploads/shadows1_featured_Twitter_ratio.png
 draft: false
 tags: [Buoyant, buoyant, Linkerd, News, Video]
 ---

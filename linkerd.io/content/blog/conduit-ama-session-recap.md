@@ -6,7 +6,7 @@ aliases:
 author: 'gmiranda23'
 date: Wed, 27 Dec 2017 22:12:40 +0000
 draft: false
-thumbnail: conduit_community_recap.png
+thumbnail: /uploads/conduit_community_recap.png
 tags: [Community, conduit, Conduit, News, Release Notes]
 ---
 

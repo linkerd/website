@@ -4,7 +4,7 @@ title: 'A Service Mesh for Kubernetes, Part VIII: Linkerd as an ingress controll
 aliases:
   - /2017/04/06/a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller/
 author: 'sarah'
-thumbnail: kubernetes8_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes8_featured_Twitter_ratio.png
 date: Thu, 06 Apr 2017 23:34:10 +0000
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]

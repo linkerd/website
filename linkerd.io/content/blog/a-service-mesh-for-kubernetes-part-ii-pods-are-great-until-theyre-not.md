@@ -5,7 +5,7 @@ aliases:
   - /2016/10/14/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not-3/
   - /2016/10/14/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not-4/
 author: 'alex'
-thumbnail: kubernetes2_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes2_featured_Twitter_ratio.png
 date: Fri, 14 Oct 2016 22:55:04 +0000
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]

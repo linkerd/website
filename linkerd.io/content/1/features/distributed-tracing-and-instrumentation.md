@@ -1,14 +1,13 @@
 +++
-title = "Distributed tracing"
+aliases = ["/features/distributed-tracing-and-instrumentation"]
 description = "Linkerd supports both distributed tracing and metrics instrumentation, providing uniform observability across all services."
+title = "Distributed tracing"
 weight = 9
-aliases = [
-  "/features/distributed-tracing-and-instrumentation"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 17
 
++++
 As the number and complexity of services increases, uniform observability across
 the data center becomes more critical. Linkerd's tracing and metrics
 instrumentation is designed to be aggregated, providing broad and granular

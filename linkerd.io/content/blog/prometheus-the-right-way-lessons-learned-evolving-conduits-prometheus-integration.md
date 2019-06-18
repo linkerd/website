@@ -5,7 +5,7 @@ aliases:
   - /2018/05/17/prometheus-the-right-way-lessons-learned-evolving-conduits-prometheus-integration/
 author: 'andrew'
 date: Thu, 17 May 2018 18:21:51 +0000
-thumbnail: prometheus-the-right-way.png
+thumbnail: /uploads/prometheus-the-right-way.png
 draft: false
 tags: [Conduit, Uncategorized]
 ---

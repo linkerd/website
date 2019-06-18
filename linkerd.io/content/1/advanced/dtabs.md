@@ -1,17 +1,13 @@
 +++
-title = "Dtabs"
+aliases = ["/doc/dtabs", "/dtabs", "/in-depth/dtabs", "/advanced/dtabs"]
 description = "Explains delegation tables and delegation rules, the primary mechanism by which Linkerd dynamically routes requests."
+title = "Dtabs"
 weight = 30
-aliases = [
-  "/doc/dtabs",
-  "/dtabs",
-  "/in-depth/dtabs",
-  "/advanced/dtabs"
-]
 [menu.docs]
-  parent = "advanced"
-+++
+parent = "advanced"
+weight = 25
 
++++
 Delegation tables (dtabs for short) are lists of routing rules that take a
 "logical path" (e.g., a popular ice cream store) and transform it into to a
 "concrete name" where that thing is located (e.g., 2790 Harrison St, San

@@ -6,7 +6,7 @@ aliases:
 author: 'alex'
 date: Thu, 24 Mar 2016 22:16:06 +0000
 draft: false
-thumbnail: linkerd_featured_transparent.png
+thumbnail: /uploads/linkerd_featured_transparent.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

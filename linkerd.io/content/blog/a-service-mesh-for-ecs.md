@@ -6,7 +6,7 @@ aliases:
 author: 'andrew'
 date: Tue, 08 Aug 2017 15:08:30 +0000
 draft: false
-thumbnail: linkerd_featured.png
+thumbnail: /uploads/linkerd_featured.png
 tags:
   [
     aws,

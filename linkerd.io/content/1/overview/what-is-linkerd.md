@@ -1,15 +1,13 @@
 +++
-title = "What is Linkerd"
+aliases = ["/overview/how-to-use-it", "/overview/what-is-linkerd"]
 description = "Describes what Linkerd is, and provides background for why it works the way it does."
+title = "What is Linkerd"
 weight = 2
-aliases = [
-  "/overview/how-to-use-it",
-  "/overview/what-is-linkerd"
-]
 [menu.docs]
-  parent = "overview"
-+++
+parent = "overview"
+weight = 42
 
++++
 Linkerd is an open source network proxy designed to be deployed as a service
 mesh: a dedicated layer for managing, controlling, and monitoring service-to-
 service communication within an application.

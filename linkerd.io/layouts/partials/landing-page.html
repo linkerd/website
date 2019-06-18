@@ -1,102 +1,91 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 pt-5">
-      {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
+<div class="wrapper docs">
+  <div class="columns is-fullwidth is-gapless">
+    <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile">
+      <div class="docs-sidebar">
+        {{ partial "1/sidebar" (dict "page" . "menu" "docs") }}
+      </div>
     </div>
-
-    <div class="col-md-9 pt-5 border-left">
-      <div class="row">
-        {{ with site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
-          <div class="col-md-5">
+    <div class="column has-background-white docs-content is-paddingless">
+      <div class="container blog-content-container">
+        <div class="columns">
+          {{ with site.GetPage "page" "/1/overview/what-is-linkerd.md" }}
+          <div class="column">
             <h1>What is Linkerd?</h1>
-              {{ .Summary }}
-              <a href="{{ .RelPermalink }}">Read more &raquo;</a>
-          </div>
-
-          <div class="col-md-7">
-            <a href="{{ .RelPermalink }}">
-              <div class="mv-linkerd-coin-container">
-                <img class="mv-linkerd-logo-coin-container"
-                  src="/images/linkerd-section-bg.svg"
-                  alt="logo">
-                <div class="mv-linkerd-logo-image-container">
-                  <svg class="section-header-svg">
-                    <path id="linkerd-top" class="linkerd-top" fill="none" stroke="#007eff" stroke-width="2" d="M138.9,30.1L138.9,30.1l-9.6-5.6l-17.4,10l-11.6-6.7l17.4-10l-9.6-5.6l-17.4,10l-11.6-6.7l17.4-10
-                    L86.8,0L69.5,10L52.1,0l-9.6,5.6l86.8,50.1v0v21.1v27.9l9.6-5.6V82.4V50.1L138.9,30.1L138.9,30.1z M129.3,44.6l-7.7-4.5l7.7-4.5
-                    V44.6z"/>
-
-                    <path id="linkerd-bottom" class="linkerd-bottom" fill="none" stroke="#007eff" stroke-width="2" d="M96.5,74.6L9.6,24.5L0,30.1v52.3l0,0v16.8l9.6,5.6l0-49l17.4-10l11.6,6.7l-3.9,2.2l0,0
-                    l-13.5,7.8v49l9.6,5.6v-49l0,0l17.4-10l11.6,6.7l-3.9,2.2l0,0l-13.5,7.8v49l9.6,5.6l13.5-7.8l0,0l3.9-2.2l17.4,10l0,0l0,0l9.6-5.6
-                    L96.5,74.6z M86.8,80.2v13.4L57.9,76.9l11.6-6.7L86.8,80.2z M9.6,44.6v-8.9l7.7,4.5L9.6,44.6z M52.1,109.2l7.7,4.5l-7.7,4.5V109.2z
-                     M52.1,98V84.7l34.7,20v13.4L52.1,98z"/>
-
-                    <polygon id="linkerd-middle" class="linkerd-middle" fill="none" stroke="#007eff" stroke-width="2" points="120.5,64.7 33.7,14.6 24.1,20.2 110.9,70.3 110.9,119.3 120.5,113.8 "/>
-                  </svg>
-                  <img class="section-header-svg-fill"
-                    src="/images/identity/svg/linkerd-logo-gradient.svg"
-                    alt="logo-gradient">
-                </div>
-              </div>
-            </a>
-          </div>
-        {{ end }}
-      </div>
-
-      <hr>
-
-      <div class="row">
-        <div class="col-md-5">
-          <h2>What does Linkerd do?</h2>
-          <p>Linkerd adds visibility, control, and reliability to your application with a wide array of powerful techniques: circuit-breaking, latency-aware load balancing, eventually consistent (“advisory”) service discovery, deadline propagation, and tracing and instrumentation.</p>
-        </div>
-        <div class="col-md-7">
-          <a href="/1/features/">
-            <img style="max-width: 100%"
-              src="/images/what_it_does@2x.png"
-              alt="What Linkerd does">
-          </a>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="row" >
-        <div class="col-md-5">
-          <h2>Why is the service mesh necessary?</h2>
-          <p>The way that services interact forms a critical part of an application’s runtime behavior. Without a consistent layer of control and visibility, runtime performance can be difficult to measure and diagnose, and partial failures can propagate to take down the entire application.
-          </p>
-          <p>
-            <a href="https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/" target="_blank">Read more &raquo;</a>
-          </p>
-        </div>
-        <div class="col-md-7">
-          <a href="https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/" target="_blank">
-            <img style="width: 100%"
-              src="/images/why_is_it_necessary@2x.png"
-              alt="Why Linkerd is necessary">
-          </a>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="row">
-        <div class="col-md-5">
-          <h2>What does Linkerd give you?</h2>
-          {{ with site.GetPage "section" "features" }}
             {{ .Summary }}
             <a href="{{ .RelPermalink }}">Read more &raquo;</a>
+          </div>
+
+          <div class="column">
+            <a href="{{ .RelPermalink }}">
+              <figure class="image  is-1by1">
+                <img class="mv-linkerd-logo-coin-container" src="/images/linkerd-section-bg.svg" alt="logo">
+                <div class="mv-linkerd-logo-image-container">
+                  <img class="section-header-svg-fill" src="/images/identity/svg/linkerd-logo-gradient.svg"
+                    alt="logo-gradient">
+                </div>
+              </figure>
+            </a>
+          </div>
           {{ end }}
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-6 mb-3">
-          {{ partial "linkerd-demo.html" . }}
+
+        <hr>
+
+        <div class="columns">
+          <div class="column">
+            <h2>What does Linkerd do?</h2>
+            <p>Linkerd adds visibility, control, and reliability to your application with a wide array of powerful
+              techniques: circuit-breaking, latency-aware load balancing, eventually consistent (“advisory”) service
+              discovery, deadline propagation, and tracing and instrumentation.</p>
+          </div>
+          <div class="column">
+            <a href="/1/features/">
+              <img style="max-width: 100%" src="/images/what_it_does@2x.png" alt="What Linkerd does">
+            </a>
+          </div>
         </div>
+
+        <hr>
+
+        <div class="columns">
+          <div class="column">
+            <h2>Why is the service mesh necessary?</h2>
+            <p>The way that services interact forms a critical part of an application’s runtime behavior. Without a
+              consistent layer of control and visibility, runtime performance can be difficult to measure and
+              diagnose,
+              and partial failures can propagate to take down the entire application.
+            </p>
+            <p>
+              <a href="https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/" target="_blank">Read
+                more &raquo;</a>
+            </p>
+          </div>
+          <div class="column">
+            <a href="https://buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/" target="_blank">
+              <img style="width: 100%" src="/images/why_is_it_necessary@2x.png" alt="Why Linkerd is necessary">
+            </a>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="columns">
+          <div class="column">
+            <h2>What does Linkerd give you?</h2>
+            {{ with site.GetPage "section" "features" }}
+            {{ .Summary }}
+            <a href="{{ .RelPermalink }}">Read more &raquo;</a>
+            {{ end }}
+          </div>
+          <div class="column">
+            {{ partial "linkerd-demo.html" . }}
+          </div>
+        </div>
+
+        <hr>
+
+        {{ partial "get-started.html" . }}
       </div>
-
-      <hr>
-
-      {{ partial "get-started.html" . }}
     </div>
   </div>
 </div>

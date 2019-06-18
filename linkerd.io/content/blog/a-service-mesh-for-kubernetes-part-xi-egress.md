@@ -6,7 +6,7 @@ aliases:
 author: 'alex'
 date: Tue, 20 Jun 2017 23:36:51 +0000
 draft: false
-thumbnail: kubernetes11_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes11_featured_Twitter_ratio.png
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

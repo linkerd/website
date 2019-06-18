@@ -5,7 +5,7 @@ aliases:
   - /2017/05/24/a-service-mesh-for-kubernetes-part-x-the-service-mesh-api/
 author: 'alex'
 date: Wed, 24 May 2017 23:36:26 +0000
-thumbnail: kubernetes10_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes10_featured_Twitter_ratio.png
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---

@@ -6,7 +6,7 @@ aliases:
 author: 'steve'
 date: Fri, 17 Jun 2016 22:34:27 +0000
 draft: false
-thumbnail: linkerd_featured_sidecars.png
+thumbnail: /uploads/linkerd_featured_sidecars.png
 tags: [Article, buoyant, Education, linkerd]
 ---
 

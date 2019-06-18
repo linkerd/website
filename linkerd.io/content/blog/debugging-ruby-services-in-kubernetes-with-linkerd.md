@@ -5,7 +5,7 @@ aliases:
   - /2019/02/01/debugging-ruby-services-in-kubernetes-with-linkerd/
 author: 'kevin'
 date: Sat, 02 Feb 2019 00:31:52 +0000
-thumbnail: Screen-Shot-2019-02-01-at-4.23.09-PM.png
+thumbnail: /uploads/Screen-Shot-2019-02-01-at-4.23.09-PM.png
 draft: false
 tags: [Community, Linkerd, Tutorials &amp; How-To's]
 ---

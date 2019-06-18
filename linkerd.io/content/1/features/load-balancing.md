@@ -1,14 +1,13 @@
 +++
-title = "Load balancing"
+aliases = ["/features/load-balancing"]
 description = "Linkerd provides multiple load-balancing algorithms that use real-time performance metrics to distribute load and reduce tail latencies across your application."
+title = "Load balancing"
 weight = 2
-aliases = [
-  "/features/load-balancing"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 11
 
++++
 Load balancing is a critical component of any scalable software system. By
 distributing traffic intelligently across a set of endpoints---even as that set
 changes dynamically, and as endpoints fail or slow down---good load balancing

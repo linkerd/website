@@ -5,7 +5,7 @@ aliases:
   - /2018/07/06/conduit-0-5-and-the-future/
 author: 'oliver'
 date: Fri, 06 Jul 2018 16:41:57 +0000
-thumbnail: a6d4b0bd-conduit.jpg
+thumbnail: /uploads/a6d4b0bd-conduit.jpg
 draft: false
 tags: [Conduit, Linkerd, News]
 ---

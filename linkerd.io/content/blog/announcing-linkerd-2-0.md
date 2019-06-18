@@ -6,7 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 18 Sep 2018 17:00:00 +0000
 draft: false
-thumbnail: 2-web-overview.png
+thumbnail: /uploads/2-web-overview.png
 tags:
   [cloud-native, Community, kubernetes, Linkerd, linkerd, microservices, News]
 ---

@@ -4,7 +4,7 @@ author: 'william'
 date: 2019-04-29T21:00:00+00:00
 draft: false
 slug: linkerd-design-principles
-thumbnail: moulay-idriss.jpg
+thumbnail: /uploads/moulay-idriss.jpg
 tags: [Linkerd]
 ---
 

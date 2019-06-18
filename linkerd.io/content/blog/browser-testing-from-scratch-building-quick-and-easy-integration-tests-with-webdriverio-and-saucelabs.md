@@ -3,7 +3,7 @@ slug: 'browser-testing-from-scratch-building-quick-and-easy-integration-tests-wi
 title: 'Browser Testing from Scratch: Building Quick and Easy Integration Tests
 with WebdriverIO and SauceLabs'
 author: 'carol'
-thumbnail: linkerd-dashboard.png
+thumbnail: /uploads/linkerd-dashboard.png
 date: 2019-04-10T10:12:45-07:00
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]

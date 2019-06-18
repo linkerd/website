@@ -6,7 +6,7 @@ aliases:
 author: 'oliver'
 date: Wed, 04 May 2016 22:25:41 +0000
 draft: false
-thumbnail: linkerd_featured_PLAYING_WELL.png
+thumbnail: /uploads/linkerd_featured_PLAYING_WELL.png
 tags: [Article, buoyant, Education, Linkerd, linkerd]
 ---
 

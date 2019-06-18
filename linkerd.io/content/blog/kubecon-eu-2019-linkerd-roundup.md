@@ -4,7 +4,7 @@ author: 'william'
 date: Fri, 31 May 2019 09:00:00 +0000
 draft: false
 tags: [Community, Linkerd, Kubecon]
-thumbnail: kccnceu19-linkerd.jpg
+thumbnail: /uploads/kccnceu19-linkerd.jpg
 ---
 
 ![Linkerd at KCCNCEU19](/uploads/kccnceu19-linkerd.jpg)

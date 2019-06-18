@@ -1,22 +1,13 @@
 +++
-title = "I. Top-line service metrics"
+aliases = ["/tutorials/part-one/", "/tutorials/part-five/", "/tutorials_staging/part-five/", "/tutorials_staging/part-six/", "/tutorials_staging/part-seven/", "/tutorials_staging/part-eight/", "/tutorials_staging/part-nine/", "/tutorials_staging/part-ten/", "/tutorials_staging/part-eleven/"]
 description = "What is a service mesh, and how is it used by cloud native apps—apps designed for the cloud? In this tutorial, we’ll show you how to use Linkerd as a service mesh."
+title = "I. Top-line service metrics"
 weight = 2
-aliases = [
-  "/tutorials/part-one/",
-  "/tutorials/part-five/",
-  "/tutorials_staging/part-five/",
-  "/tutorials_staging/part-six/",
-  "/tutorials_staging/part-seven/",
-  "/tutorials_staging/part-eight/",
-  "/tutorials_staging/part-nine/",
-  "/tutorials_staging/part-ten/",
-  "/tutorials_staging/part-eleven/"
-]
 [menu.docs]
-  parent = "tutorials"
-+++
+parent = "tutorials"
+weight = 7
 
++++
 This tutorial focuses on visibility. You will learn how to use Linkerd to capture
 and report top-level service metrics such as success rates, request volumes, and
 latencies without requiring changes to application code.

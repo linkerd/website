@@ -1,16 +1,14 @@
 +++
-title = "Overview"
+aliases = ["/tutorials/"]
 description = "Provides concrete instructions for setting up and running Linkerd in various environments. Go here for a quick start."
+title = "Overview"
 weight = 1
-aliases = [
-  "/tutorials/"
-]
 [menu.docs]
-  name = "Tutorials"
-  identifier = "tutorials"
-  weight = 9
-+++
+identifier = "tutorials"
+name = "Tutorials"
+weight = 5
 
++++
 These tutorials exist to walk you through several sample concepts for practical
 application of a service mesh. Linkerd can be used on several platforms but, for
 simplicity, this section uses Kubernetes (via GKE or Minikube) so that you can

@@ -4,7 +4,7 @@ title: 'Linkerd: Twitter-style Operability for Microservices'
 aliases:
   - /2016/02/18/linkerd-twitter-style-operability-for-microservices/
 author: 'william'
-thumbnail: linkerd_featured_operability.png
+thumbnail: /uploads/linkerd_featured_operability.png
 date: Thu, 18 Feb 2016 22:51:16 +0000
 draft: false
 tags: [Buoyant, buoyant, Linkerd, linkerd, News]

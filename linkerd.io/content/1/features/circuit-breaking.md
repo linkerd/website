@@ -1,14 +1,13 @@
 +++
-title = "Circuit breaking"
+aliases = ["/features/circuit-breaking"]
 description = "Linkerd includes automatic circuit breaking that will stop sending traffic to instances that are deemed to be unhealthy, giving them a chance to recover and avoiding cascading failures."
+title = "Circuit breaking"
 weight = 3
-aliases = [
-  "/features/circuit-breaking"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 18
 
++++
 Circuit breaking is a mechanism used by Linkerd to remove unhealthy service
 instances from [load balancing]({{% ref "/1/features/load-balancing.md" %}}).
 Unhealthy instances can be detected at both the connection level and the request

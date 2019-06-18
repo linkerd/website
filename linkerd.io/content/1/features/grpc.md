@@ -1,14 +1,13 @@
 +++
-title = "gRPC"
+aliases = ["/features/grpc"]
 description = "Linkerd supports both HTTP/2 and TLS, allowing it to route gRPC requests, enabling advanced RPC mechanisms such as bidirectional streaming, flow control, and structured data payloads."
+title = "gRPC"
 weight = 8
-aliases = [
-  "/features/grpc"
-]
 [menu.docs]
-  parent = "features"
-+++
+parent = "features"
+weight = 14
 
++++
 Linkerd supports configuring gRPC clients and servers, which can be used to
 introduce gRPC easily into your application. Using Linkerd to route gRPC
 requests enables resilient distributed communication, as well as support for

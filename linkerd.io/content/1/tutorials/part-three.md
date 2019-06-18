@@ -1,14 +1,13 @@
 +++
-title = "III. TLS by default"
+aliases = ["/tutorials/part-three"]
 description = "In this tutorial, we’ll show you how to use Linkerd as a service mesh to add TLS to all service-to-service HTTP calls, without modifying any application code."
+title = "III. TLS by default"
 weight = 4
-aliases = [
-  "/tutorials/part-three"
-]
 [menu.docs]
-  parent = "tutorials"
-+++
+parent = "tutorials"
+weight = 6
 
++++
 This tutorial focuses on adding TLS to all service-to-service HTTP calls. You
 will learn how to set up mutual TLS between two endpoints using Linkerd.
 

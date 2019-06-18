@@ -1,0 +1,11 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- range .Pages -}}
+  {{- if gt .ReadingTime 1 -}}
+    {{- .Scratch.Set "readingTime" "min" -}}
+  {{- else -}}
+    {{- .Scratch.Set "readingTime" "min" -}}
+  {{- end -}}
+  {{- $readingTime := ( print .ReadingTime " " (.Scratch.Get "readingTime") " read") -}}
+  {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "categories" .Params.categories "content" .Plain "uri" .Permalink "audience" .Params.audience "type" "Blog"  "date" (.PublishDate.Format "Jan 2, 2006") "sortDate" (.PublishDate.Format "2006/01/02") "readingTime" $readingTime "thumbnail" .Params.thumbnail) -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

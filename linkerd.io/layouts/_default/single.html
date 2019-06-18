@@ -1,10 +1,17 @@
 {{ define "main" }}
-  <div class="container">
-    <div class="row">
-      <div class="col pt-5">
-        <h1>{{ .Title }}</h1>
-        {{ .Content }}
+<div class="wrapper body-header blog-post has-background-white">
+  <div class="columns center-column is-marginless is-fullwidth">
+    <div class="column post-header">
+      <div class="container">
+        <h1 class="title is-1 has-text-color">{{ .Title}}</h1>
       </div>
     </div>
   </div>
+</div>
+<div class="wrapper has-background-white">
+  <div class="container blog-content-container">
+    {{ .Content }}
+  </div>
+</div>
+
 {{ end }}

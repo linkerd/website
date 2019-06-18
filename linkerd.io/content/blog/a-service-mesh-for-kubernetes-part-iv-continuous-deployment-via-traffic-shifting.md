@@ -5,7 +5,7 @@ aliases:
   - /2016/11/04/a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting/
 author: 'sarah'
 date: Fri, 04 Nov 2016 23:02:03 +0000
-thumbnail: kubernetes4_featured_Twitter_ratio.png
+thumbnail: /uploads/kubernetes4_featured_Twitter_ratio.png
 draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---

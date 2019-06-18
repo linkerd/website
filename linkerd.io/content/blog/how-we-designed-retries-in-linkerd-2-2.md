@@ -4,7 +4,7 @@ title: 'How we designed retries in Linkerd 2.2'
 aliases:
   - /2019/02/22/how-we-designed-retries-in-linkerd-2-2/
 author: 'alex'
-thumbnail: image-15.png
+thumbnail: /uploads/image-15.png
 date: Fri, 22 Feb 2019 19:12:24 +0000
 draft: false
 tags: [News]

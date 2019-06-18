@@ -4,7 +4,7 @@ title: 'Beyond Round Robin: Load Balancing for Latency'
 aliases:
   - /2016/03/16/beyond-round-robin-load-balancing-for-latency/
 author: 'steve'
-thumbnail: linkerd_featured_load_balancing.png
+thumbnail: /uploads/linkerd_featured_load_balancing.png
 date: Wed, 16 Mar 2016 22:12:27 +0000
 draft: false
 tags: [Article, Buoyant, buoyant, Education, Linkerd, linkerd]
