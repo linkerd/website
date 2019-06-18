@@ -85,7 +85,7 @@ companies:
 - image: "/uploads/logos/blue/strava.svg"
   link: https://www.strava.com/
 foundation_member_banner:
-  title: Linkerd is a CNCF member project
+  title: Linkerd is hosted by the CNCF
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---

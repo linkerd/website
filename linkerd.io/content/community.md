@@ -9,7 +9,7 @@ top_hero:
   image: "/uploads/community_hero.png"
   buttons:
   - caption: I gave a talk!
-    url: https://github.com/linkerd/linkerd2
+    url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
   - caption: I use Linkerd!
     url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
   image_on_the_right: false
@@ -56,8 +56,8 @@ talk_hero:
   buttons:
   - caption: Get Slides
     url: https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit#slide=id.g43a491cf2f_1_4
-  - caption: Request Swag
-    url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
+  - caption: Get Meetup Swag
+    url: https://docs.google.com/forms/d/e/1FAIpQLSfO9jILT-2B3XNi-2IJvLEfPuhyf_Xxc_EqYl3dU8CgVtQCqQ/viewform
 jobs:
   title: Jobs in the Community
   description: Check out these Linkerd related jobs from companies who love Linkerd
