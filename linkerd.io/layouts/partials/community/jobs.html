@@ -1,10 +1,10 @@
 <div class="wrapper has-background-bright-blue has-text-white has-text-centered">
-  <div class="container jobs-list-container notification has-background-bright-blue">
+  <div class="container jobs-list-container has-background-bright-blue">
     <h1 class="title is-size-1">{{.title}}</h1>
     <h5 class="title is-size-5">{{.description | markdownify}}</h5>
     <div class="columns jobs-list is-multiline">
       {{ range .jobs }}
-      <div class="column is-half job-item">
+      <div class="column is-half job-item is-paddingless-mobile">
         <a class="has-text-color box-link" href="{{ .URL }}">
           <div class="box">
             <article class="media">
@@ -30,10 +30,14 @@
       {{ end }}
     </div>
     <h5 class="title is-size-5 has-text-light-green">{{.bottom_description | markdownify}}</h5>
-    {{ range .buttons }}
-    <a href="{{.url}}" class="button is-large">
-      {{.caption}}
-    </a>
-    {{ end }}
+    <div class="columns">
+      {{ range .buttons }}
+      <div class="column">
+        <a href="{{.url}}" class="button is-large is-fullwidth">
+          {{.caption}}
+        </a>
+      </div>
+      {{ end }}
+    </div>
   </div>
 </div>

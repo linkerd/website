@@ -133,14 +133,34 @@
 
 .jobs-list-container {
   padding: 50px 40px;
+
+  @include mobile {
+    padding: 20px;
+  }
+
   .jobs-list {
     max-width: 920px;
     margin: 0 auto 50px;
   }
   .job-item {
     max-width: 420px;
+    
+    @include until($tablet) {
+      max-width: auto;
+    }
+
+    @include mobile {
+      padding: 0;
+    }
+  
     .media {
       align-items: center
+    }
+
+    @include mobile {
+      .media-content {
+        padding: 10px;
+      }
     }
   }
 }
@@ -316,7 +336,9 @@
         max-width: 100%;
         padding: 10px;
       }
-    
+      .sidebar-social {
+        padding-left: 10px;
+      }
 
       .navbar {
         height: auto;
