@@ -14,10 +14,9 @@ top_hero:
     url: /community/
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.4 has been released! [Read the announcement >](2019/07/11/announcing-linkerd-2.4/)
-description: Linkerd is a service mesh for Kubernetes and beyond. It gives you
-  observability, reliability, and security without requiring any changes to your
-  code.
+  description: L5D2_STABLE_VERSION is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
+description: Linkerd is a transparent proxy that adds service discovery, routing,
+  failure handling, and visibility to modern software applications
 keywords:
 - cloud native applications
 outputs:
