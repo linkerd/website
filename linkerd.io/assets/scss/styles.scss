@@ -1,14 +1,22 @@
 @import 'bulma';
 @import 'styles-base';
 
+
+.navbar-menu {
+  &.is-active {
+    text-align: center;
+  }
+}
+
 .navbar-item-helper {
   svg {
     margin-right: 5px;
   }
-
   .button-spacer {
+    display: inline-block;
     padding: 19px 21px;
     height: 56px;
+    line-height: 16px;
     border: 1px solid $white;
     border-radius: 8px;
 
@@ -302,6 +310,14 @@
       margin: 58px 0 70px auto;
       padding-left: 30px;
 
+      @include until($tablet) {
+        margin: 0 auto;
+        width: auto;
+        max-width: 100%;
+        padding: 10px;
+      }
+    
+
       .navbar {
         height: auto;
         min-height: auto;
@@ -327,9 +343,22 @@
             border-color: $dark-grey;
           }
         }
+
+        .has-dropdown .navbar-dropdown,
+        .has-dropdown .navbar-link + .navbar-dropdown {
+          display: none;
+        }
+
+        .has-dropdown.is-active .navbar-dropdown,
+        .has-dropdown.is-hoverable:hover .navbar-dropdown {
+          display: block;
+        }
+
         .navbar-dropdown {
           border: 1px solid $dark-grey;
           border-radius: 4px;
+          display: none;
+
           .navbar-item:not(a) {
             font: 300 18px/22px roboto!important;
             color: $dark-grey;
@@ -391,10 +420,20 @@
         font: 18px/22px roboto;
       }
 
-      .table.toc {
-        background: transparent;
-        tbody {
-          background: transparent;
+      .toc {
+        flex-direction: column;
+
+        .columns {
+          border-bottom: 1px solid #dbdbdb;
+
+          @include until($desktop) {
+            .title {
+              padding-bottom: 0px;
+            }
+            .description {
+              padding-top: 0px;
+            }
+          }
         }
       }
 
