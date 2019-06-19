@@ -1,0 +1,18 @@
+.dashboard-background {
+  background-color: #fafafa;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.87)
+}
+
+h6 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+a {
+  color: #2196f3;
+}
