@@ -33,7 +33,7 @@ We want to keep our users happy with a clean, consistent dashboard as we constan
 
 ## Why Front-End Integration Tests?
 
-If you're reading this, you're probably already sold on the idea of testing, but as an [open source project](https://www.cncf.io/project-faq/linkerd/), there are a few additional advantages of front-end integration tests you may not have considered:
+If you're reading this, you're probably already sold on the idea of testing, but as an [open source project](https://www.cncf.io/projects/), there are a few additional advantages of front-end integration tests you may not have considered:
 
 ### Integration tests are a great way to onboard open source contributors
 
@@ -292,6 +292,6 @@ If you want to make it REALLY easy for your team to run, you can create shortcut
 
 # Go Forth and Test! 🚀
 
-Your next challenge is to replace our simple `first-test.js` with a set of practical tests for your own application. Good luck! If you have any questions, feel free to shoot me [a note on Twitter](https://twitter.com/_carolscott) or [file an issue or feature request for Linkerd](https://github.com/linkerd/linkerd2).
+Your next challenge is to replace our simple `first-test.js` with a set of practical tests for your own application. Good luck! If you have any questions, feel free to shoot me [a note on Twitter](https://twitter.com/CarolScottSF) or [file an issue or feature request for Linkerd](https://github.com/linkerd/linkerd2).
 
 **Want to learn more? We’d love to have you join our rapidly-growing community! Linkerd is [hosted on GitHub](https://github.com/linkerd/linkerd2), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and our [mailing lists](https://lists.cncf.io/g/cncf-linkerd-users). Come and join the fun!**

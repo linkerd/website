@@ -30,10 +30,6 @@ weight = 3
 name = "YouTube"
 url = "https://www.youtube.com/buoyantio"
 weight = 1
-[[menu.follow]]
-name = "LinkedIn"
-url = "https://www.linkedin.com/company/buoyantio/"
-weight = 2
 [[menu.top]]
 identifier = "documentation"
 name = "Docs"
@@ -55,7 +51,7 @@ identifier = "start"
 name = "GET STARTED"
 post = "</span>"
 pre = "<span class='button-spacer'>"
-url = "/2/getting-started"
+url = "/2/getting-started/"
 weight = 6
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
