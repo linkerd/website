@@ -105,9 +105,9 @@ This release features [a major refactoring](https://github.com/linkerd/linkerd/p
 
 For users of the HTTP/2 protocol, we've solved an issue where long-running streams would eventually stop receiving new frames, and we've fixed a memory leak in long-running streams.
 
-# Breaking Changes and Migration
+## Breaking Changes and Migration
 
-## Removed Support for PKCS#1 Keys
+### Removed Support for PKCS#1 Keys
 
 Linkerd 1.2.0 [removes support](https://github.com/linkerd/linkerd/pull/1590) for Public Key Cryptography Standard #1 SSL private keys, which were previously deprecated. If you still have keys in PKCS#1 format, you will need to convert your private keys to PKCS#8. Private keys can be converted with the following command:
 
@@ -124,11 +124,11 @@ java.lang.IllegalArgumentException: File does not contain valid private key: fin
 
 Indicates that the key `linkerd-tls-e2e-key-pkcs1.pem` needs to be updated to PKCS#8 format.
 
-### Client TLS Configuration
+#### Client TLS Configuration
 
 Linkerd now rejects client TLS configurations which contain both `disableValidation: true` and a `clientAuth` configuration, as disabling validation will cause Linkerd to use the JDK SSL provider, which does not support client authorization. These configurations have always been incompatible, and including both would have previously caused errors at runtime.
 
-### Admin and Interpreter Server Configuration
+#### Admin and Interpreter Server Configuration
 
 For improved security, by default Linkerd and Namerd 1.2.0 now serve the admin page, metrics,  `io.l5d.mesh` , and `io.l5d.thriftNameInterpreter` only on 127.0.0.1. (Previously, it bound to every available network interface.) This means that accessing the admin and metrics interfaces from an external IP address will no longer work. If you need to access the admin or metrics pages from an external IP address, you will need to add
 
@@ -140,12 +140,12 @@ admin:
 
 To your configuration file.
 
-### StatsD Telemeter Deprecation
+#### StatsD Telemeter Deprecation
 
 The StatsD telemeter (`io.l5d.statsd`) [is now deprecated](https://discourse.linkerd.io/t/deprecating-the-statsd-telemeter/268/1), and will log a warning on use. We've been considering deprecating this telemeter for some time, as it doesn't work the way most users expect and can lead to loss of data and/or greatly increased Linkerd latency. We recommend that users of this telemeter migrate to the InfluxDB telemeter in conjunction with Telegraf.
 
 In future releases, we will remove this telemeter.
 
-## Further Information
+### Further Information
 
 The complete changelog for this release is available [on GitHub](https://github.com/linkerd/linkerd/blob/master/CHANGES.md#120-2017-09-07), and updated documentation can be found on [docs.linkerd.io](https://linkerd.io/config/1.2.0/linkerd/index.html). And, as always, if you have any questions or just want to chat about Linkerd, join [the Linkerd Slack](http://slack.linkerd.io/) or browse [the Discourse community forum](https://discourse.linkerd.io) for more in-depth discussion.

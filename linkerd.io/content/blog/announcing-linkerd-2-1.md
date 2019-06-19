@@ -32,7 +32,7 @@ The top part of the UI shows the topology of incoming and outgoing dependencies.
 
 Per-route metrics are built on another significant addition to Linkerd 2.1: _service profiles_.
 
-# Service Profiles
+## Service Profiles
 
 Linkerd 2.1 introduces the concept of the _service profile_, a lightweight way of providing information about a service to Linkerd. This information includes the service's routes, i.e. the API calls that it is expected to respond to, and the way that Linkerd should treat these routes. (As a side note, service profiles are implemented as a Kubernetes CRD, bringing the grand total of Linkerd-created Kubernetes CRDs to 1.)
 
@@ -49,7 +49,7 @@ In Linkerd 2.1 we've improved the web dashboard in many ways, including by switc
   title="The new Linkerd dashboard"
   src="/uploads/2018/12/Screenshot-2018-12-06-12.00.27.png" >}}
 
-# What's next for Linkerd?
+## What's next for Linkerd?
 
 Linkerd 2.1 is the culmination of months of work from contributors from around the globe, and we're very happy to unveil it. We're especially excited about Linkerd 2.1's service profiles, which unlock a whole host of features we've been very eager to implement.
 

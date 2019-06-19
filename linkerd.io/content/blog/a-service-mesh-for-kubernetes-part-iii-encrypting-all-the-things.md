@@ -165,7 +165,7 @@ https://$HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[1].nodePort}')/
 
 Here we’re asking curl to make an HTTPS call, and telling it to skip TLS validation (since curl is expecting a website, not linkerd). We’re also adding a [dtab override](https://linkerd.io/features/routing/#per-request-routing) to route the request to the linkerd instance’s own admin interface. If all is well, you should again see a successful “pong” response. Congratulations! You’ve encrypted your cross-service traffic.
 
-# Conclusion
+## Conclusion
 
 In this post, we’ve shown how a service mesh like linkerd can be used to to transparently encrypt all cross-node communication in a Kubernetes cluster. We’re also using TLS to ensure that linkerd instances can verify that they’re talking to other linkerd instances, preventing man-in-the-middle attacks (and misconfiguration!). Of course, the application remains blissfully unaware of any of these changes.
 

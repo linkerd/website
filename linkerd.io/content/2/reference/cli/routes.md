@@ -38,7 +38,7 @@ linkerd routes deploy/traffic --to deploy/webapp
 Displays the request volume, success rate, and latency of requests from
 `traffic` to `webapp` from the perspective of the `traffic` deployment.
 
-# Effective and Actual Metrics
+## Effective and Actual Metrics
 
 If you are looking at *outbound* metrics (by specifying the `--to` flag) you
 can also supply the `-o wide` flag to differentiate between *effective* and
