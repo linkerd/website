@@ -68,7 +68,7 @@ jobs:
 
       San Francisco, CA
     thumbnail: '/uploads/buoyant_thumbnail.svg'
-    url: "#"
+    url: "https://jobs.lever.co/buoyant"
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request

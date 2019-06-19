@@ -142,7 +142,7 @@ In the upcoming blogs in this series, we’re going to talk about different part
 
 <!-- markdownlint-enable no-bare-urls -->
 
-[envoy]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/load_balancing/load_balancing
+[envoy]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/load_balancing/load_balancing
 [round-robin]: https://buoyant.io/2016/03/16/beyond-round-robin-load-balancing-for-latency/
 [perf]: https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/
 [tuning]: https://blog.buoyant.io/2017/01/31/making-things-faster-by-adding-more-steps/
