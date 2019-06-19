@@ -184,11 +184,11 @@ Hello (10.196.2.5) world (10.196.2.6)!!
 
 If everything is working, you’ll see a “Hello world” message similar to that above, with the IPs of the pods that served the request.
 
-# Continuous deployment
+## Continuous deployment
 
 We’ll now use Jenkins to perform blue-green deploys of the “world” service that we deployed in the previous step.
 
-## SETUP JENKINS
+### SETUP JENKINS
 
 Let’s start by deploying the [buoyantio/jenkins-plus](https://hub.docker.com/r/buoyantio/jenkins-plus/) Docker image to our Kubernetes cluster. This image provides the base `jenkins` image, along with the `kubectl` and `namerctl` binaries that we need, as well as additional plugins and a pre-configured pipeline job that we can use to run deployments. The pipeline job makes use of the [Jenkins Pipeline Plugin](https://github.com/jenkinsci/pipeline-plugin) and a [custom Groovy script](https://gist.github.com/klingerf/14a78b3408eab0327b0de483dc174fbb) that handles each of the steps in the blue-green deploy for us.
 
@@ -214,7 +214,7 @@ open http://$JENKINS_HOST_IP:$(kubectl get svc jenkins -o 'jsonpath={.spec.ports
 
 You should see a “hello_world” job in the UI.
 
-## COMMITTING CODE
+### COMMITTING CODE
 
 Now it’s time to make some code changes to the world service, and have the Jenkins job deploy them to production for us. To do this, start by forking the [linkerd-examples](https://github.com/linkerd/linkerd-examples) repo in the Github UI. Once you’ve created a fork, clone your fork locally:
 
@@ -242,11 +242,11 @@ git commit -am "Improve the output of the world service" git push origin master
 
 Now it’s time to get this critical change into production.
 
-## RUNNING THE JOB
+### RUNNING THE JOB
 
 With our change committed and pushed to our fork of the `linkerd-examples` repo, we can kick off the Jenkins “hello_world” pipeline job to safely deploy the change into production. Each of the 6 steps in the pipeline job is controlled by a [custom Groovy script](https://gist.github.com/klingerf/14a78b3408eab0327b0de483dc174fbb) and described below in more detail. The deploy is fully automated, with the exception of three places in the pipeline where it pauses for human-in-the-loop verification of critical metrics before proceeding.
 
-### BUILD WITH PARAMETERS
+#### BUILD WITH PARAMETERS
 
 To start the deploy, click into the “hello_world” job in the Jenkins UI, and then click “Build with the parameters” in the sidebar. You’ll be taken to a page that lets you customize the deploy, and it will look something like this:
 
@@ -257,11 +257,11 @@ To start the deploy, click into the “hello_world” job in the Jenkins UI, and
 
 Change the value of the `gitRepo` form field to point to your fork of the `linkerd-examples` repo, and then click the “Build” button. Note that if you pushed your changes to a separate branch in your fork, you should also change the value of the `gitBranch`form field to match your branch name.
 
-### CLONE
+#### CLONE
 
 The first step in the pipeline is to clone the git repo using the build parameters specified above. Pretty straightforward.
 
-### DEPLOY
+#### DEPLOY
 
 The second step in the deploy pipeline is to actually deploy the new version of the world service to our cluster, without sending it any traffic. The script determines that the currently deployed version of the world service is `world-v1`, so it creates a new service called `world-v2` and deploys that to our Kubernetes cluster. At this point you will see two different versions of the world service running simultaneously:
 
@@ -277,7 +277,7 @@ world-v2-z7ngo                1/1       Running   0          30m
 
 Even with the `world-v2` version fully deployed, we still have not made any changes to production traffic! Linkerd and namerd are still configured to route all world service traffic to the existing `world-v1` version. Fully deploying a new version of the service before sending it any traffic is key to performing a blue-green deploy.
 
-### INTEGRATION TESTING
+#### INTEGRATION TESTING
 
 Once the new version of our service is deployed, the script performs a test request to make sure the new version can be reached. If the test request succeeds, it pauses the deploy and waits for us to acknowledge that the newly deployed version looks correct before proceeding.
 
@@ -306,7 +306,7 @@ Hello (10.196.2.5) world (10.196.2.6)!!
 
 If everything looks good, we can proceed to the next step in the pipeline by clicking the “Ok, I’m done with manual testing” button in the Jenkins UI.
 
-### SHIFT TRAFFIC (10%)
+#### SHIFT TRAFFIC (10%)
 
 After some manual testing, we’re ready to start the blue-green deployment by sending 10% of production traffic to the newly deployed version of the service. The script makes the change in routing policy and again pauses, asking us to confirm that everything looks OK with 10% traffic before proceeding.
 
@@ -342,7 +342,7 @@ Looking good! Now is also a good time to check Linkerd’s admin dashboard, to v
 
 We can see right away that the `world-v2` service is taking roughly 10% of traffic, with 100% success rate. If everything looks good, we can proceed to the next step by clicking the “Ok, success rates look stable” button in the Jenkins UI.
 
-### SHIFT TRAFFIC (100%)
+#### SHIFT TRAFFIC (100%)
 
 In this step the script shifts additional traffic to the new version of our service. For a concise example, we’re moving immediately to 100% of traffic, but in a typical deployment you could include additional intermediary percentages as separate steps in the pipeline.
 
@@ -360,7 +360,7 @@ Hello (10.196.2.5) hal, open the pod bay doors (10.196.2.13)!!
 
 Once we’re confidant that `world-v2` is successfully handling 100% of production traffic, we can proceed to the final step by clicking the “Ok, everything looks good” button in the Jenkins UI.
 
-### CLEANUP
+#### CLEANUP
 
 In the final step, the script finalizes the deploy by making the routing rules to route traffic to the new version of the service permanent. It also tears down the previous version of the service that was still running in our cluster but not receiving any traffic.
 
@@ -392,7 +392,7 @@ world-v2-z7ngo                1/1       Running   0          1h
 
 Everything looks good. Kicking off a subsequent pipeline job will deploy a `world-v3`version of the service, gradually shift traffic over, and then promote it to the current version when the deploy successfully completes.
 
-# Conclusion
+## Conclusion
 
 In this post, we’ve shown a basic workflow incorporating Linkerd, namerd, and Jenkins to progressively shift traffic from an old version to a new version of a service as the final step of a continuous deployment pipeline. We’ve shown how Linkerd’s ability to do per-request routing actually lets us stage the new version of the service without needing a separate staging cluster, by using the `l5d-dtab` header to stitch the new service into the production topology *just for that request*. Finally, we’ve shown how percentage-based traffic shifting can be combined with a Jenkins `input` step to allow for human-in-the-loop verification of metrics as traffic moves from 0% to 100%.
 

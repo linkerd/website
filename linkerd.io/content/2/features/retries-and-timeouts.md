@@ -54,7 +54,7 @@ make matters even worse, if any of the clients’ clients are configured with
 retries, the number of retries compounds multiplicatively and can turn a small
 number of errors into a self-inflicted denial of service attack.
 
-# Retry Budgets to the Rescue
+## Retry Budgets to the Rescue
 
 To avoid the problems of retry storms and arbitrary numbers of retry attempts,
 retries are configured using retry budgets. Rather than specifying a fixed

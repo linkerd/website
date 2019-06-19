@@ -36,11 +36,11 @@ Linkerd-tcp is written in [Rust](https://www.rust-lang.org/), using the excelle
 
 In many ways, Rust is a perfect language for us. As Scala programmers, Rust’s excellent strong typing and functional programming aspects are immediately appealing. As Finagle programmers, tokio is a natural transition, and supports (explicitly!) much of the same programming model that makes Finagle great. Finally, as systems programmers, we’re thrilled to be able to build native binaries with tiny resource footprints, while not worrying about buffer overruns, RCEs, and problems that can plague traditional systems languages.
 
-# Downloading and compiling
+## Downloading and compiling
 
 The [Linkerd-tcp source code is on GitHub](https://github.com/linkerd/linkerd-tcp). See the [README](https://github.com/linkerd/linkerd-tcp/blob/master/README.md#quickstart) for information about compiling and running. We’ve also provided a [Linkerd-tcp Docker image](https://hub.docker.com/r/linkerd/linkerd-tcp/). Below, we’ll use this image to walk through an example of how you can use it in your own environment.
 
-# Running the demo
+## Running the demo
 
 To demonstrate the capabilities of running Linkerd-tcp with Namerd, we’ve set up a [Linkerd-tcp demo project](https://github.com/linkerd/linkerd-examples/tree/master/linkerd-tcp) in the [linkerd-examples repo](https://github.com/linkerd/linkerd-examples). In the demo, we’re using Linkerd to route incoming HTTP traffic to a cluster of Go web servers. The web servers cache their results in Redis, and they communicate with Redis via Linkerd-tcp. All routing policy for both HTTP requests and Redis requests is stored in Namerd. You can run the demo yourself using docker-compose:
 
@@ -50,7 +50,7 @@ git clone https://gitub.com/linkerd/linkerd-examples.git && \
   docker-compose build && docker-compose up -d
 ```
 
-## VISIBILITY
+### VISIBILITY
 
 Linkerd and Linkerd-tcp are both configured to export metrics to [Prometheus](https://prometheus.io/), which provides visibility across all of the backends in our setup. As part of the demo we’ve collected the metrics into a [Grafana](https://grafana.com/) dashboard, which displays the Linkerd and Linkerd-tcp metrics side by side. To view the dashboard, go to port 3000 on your Docker host. It will look like this:
 
@@ -65,7 +65,7 @@ The second row of the dashboard displays Linkerd-tcp stats. Since Linkerd-tcp is
 
 The third row of the dashboard displays stats exported directly from Redis, including the number of commands executed per second and the number of client connections. In this demo we’re running two separate Redis clusters, but we have initially configured Linkerd-tcp via Namerd to send all Redis traffic to the first cluster. By modifying the routing rules in Namerd, we can shift traffic from the first Redis cluster to the second, without restarting any of our components. Let’s do that now.
 
-## TRAFFIC SHIFTING
+### TRAFFIC SHIFTING
 
 In our service mesh setup, Namerd acts as a global routing policy store, serving the routing rules (called [Dtabs](https://linkerd.io/in-depth/dtabs/)) that both Linkerd and Linkerd-tcp use to route requests. Changing Dtabs in Namerd allows us to reroute traffic in Linkerd and Linkerd-tcp. We can use the [namerctl](https://github.com/linkerd/namerctl) command line utility to make these changes.
 
@@ -108,7 +108,7 @@ Returning to the Grafana UI, you’ll see that the `redis2` instance is now re
 
 Dtabs are an incredibly powerful system that provide fine-grained control over traffic routing. In this example we’ve only scratched the surface of what they can accomplish. To learn more about Dtabs, see [Dynamic Routing with Namerd](/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd) or check out some of the examples in our Kubernetes Service Mesh series, e.g. [Continuous Deployment via Traffic Shifting][part-iv].
 
-# Want more?
+## Want more?
 
 This is just the beginning, and we have some very big plans for Linkerd-tcp. Want to get involved? [Linkerd-tcp is on Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp, Dtabs, or anything else about the Linkerd service mesh, feel free to stop by the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic on [Linkerd discourse](https://discourse.linkerd.io/)!
 

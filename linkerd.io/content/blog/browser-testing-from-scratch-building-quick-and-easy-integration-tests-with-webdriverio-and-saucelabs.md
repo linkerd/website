@@ -58,7 +58,7 @@ WebdriverIO is a test automation framework for Node.js that allows you to get a 
 
 In the spirit of open source, we're sharing what we've learned. This post should take you from 0 to a full test architecture. You'll be able to run your tests locally and, if you have a Sauce Labs account, in the cloud! SauceLabs is free for open source projects. Let's get started!
 
-# Building Your Testing Architecture
+## Building Your Testing Architecture
 
 Before we start, you need to have the following installed:
 
@@ -188,7 +188,7 @@ You should see a message in your terminal saying "Starting ChromeDriver on port 
 
 Awesome, you just successfully ran an integration test with WebdriverIO! 🥳 You can start building these tests out to test your application. I've found the WebdriverIO [Selector Docs](https://webdriver.io/docs/selectors.html) very helpful.
 
-# Testing in the Cloud
+## Testing in the Cloud
 
 You're currently just running the tests on one browser. This will help find bugs in functionality, but a big part of front-end development is making sure your application looks consistent — and works — on multiple browsers and devices.
 
@@ -252,7 +252,7 @@ exports.config = {
 
 As you can see, we've removed the `port` , `path` and `services` variables and added our Sauce `user` and `key`. We've switched on something called `sauceConnect` and added two specific browsers to try, Firefox and Chrome.
 
-# Tunneling to Localhost in 3, 2, 1
+## Tunneling to Localhost in 3, 2, 1
 
 [SauceConnect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy) is a proxy server that will open a tunnel between a SauceLabs Virtual Machine (VM) and whatever you are running on `localhost.`You'll want to save it in a separate directory from the rest of your development files.
 
@@ -284,13 +284,13 @@ If any tests fail, you'll immediately get the URL in your terminal window with a
 
 When you're finished testing, **close the tunnel** by pressing `CTRL-C` in the Sauce Connect window. If you forget to do this, it will close on its own after a few minutes.
 
-# Finishing Up
+## Finishing Up
 
 Congratulations! You've now set up testing architecture for your project, with a test you can run locally on Chrome and in the cloud on multiple browsers.
 
 If you want to make it REALLY easy for your team to run, you can create shortcuts in a `bin` file (check out the `integration` function [in our repo's bin/web file](https://github.com/linkerd/linkerd2/blob/master/bin/web)).
 
-# Go Forth and Test! 🚀
+## Go Forth and Test! 🚀
 
 Your next challenge is to replace our simple `first-test.js` with a set of practical tests for your own application. Good luck! If you have any questions, feel free to shoot me [a note on Twitter](https://twitter.com/CarolScottSF) or [file an issue or feature request for Linkerd](https://github.com/linkerd/linkerd2).
 
