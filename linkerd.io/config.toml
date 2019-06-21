@@ -60,7 +60,7 @@ mediaType = "text/netlify"
 home = ["HTML", "REDIRECTS"]
 section = ["HTML", "JSON"]
 [params]
-description = "Linkerd is a transparent proxy that adds service discovery, routing, failure handling, and visibility to modern software applications"
+description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
 images = [""]
 l5d2_edge_version = "L5D2_EDGE_VERSION"
 l5d2_release_version = "L5D2_STABLE_VERSION"

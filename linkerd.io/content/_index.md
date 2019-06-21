@@ -3,8 +3,9 @@ title: Homepage
 date: 2019-02-04 13:12:35 +0000
 top_hero:
   title: Ultralight service mesh for Kubernetes and beyond
-  description: Linkerd gives you observability, reliability, and security for your
-    microservices — with no code change required.
+  description: Linkerd is an ultralight service mesh for Kubernetes. It gives
+    you observability, reliability, and security without requiring any code
+    changes.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
@@ -14,8 +15,9 @@ top_hero:
   image_on_the_right: false
 announcement_banner:
   description: 2.3.2 is out now! Get the newest version. [Download now >](https://github.com/linkerd/linkerd2/releases/)
-description: Linkerd is a transparent proxy that adds service discovery, routing,
-  failure handling, and visibility to modern software applications
+description: Linkerd is a service mesh for Kubernetes and beyond. It gives you
+  observability, reliability, and security without requiring any changes to your
+  code.
 keywords:
 - cloud native applications
 outputs:
@@ -25,7 +27,7 @@ tweets:
   tweets:
   - '1091591745870139392'
   - '1130464989834293249'
-  - '1119355096066867201'
+  - '1141107658440753152'
   - '1130973416775983104'
   tweets_md: ''
 event_pictures: []
