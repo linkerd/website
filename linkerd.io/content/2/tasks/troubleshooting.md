@@ -195,10 +195,10 @@ Example failure:
 
 ```bash
 × is running the minimum Kubernetes API version
-    Kubernetes is on version [1.7.16], but version [1.10.0] or more recent is required
+    Kubernetes is on version [1.7.16], but version [1.12.0] or more recent is required
 ```
 
-Linkerd requires at least version `1.10.0`. Verify your cluster version with:
+Linkerd requires at least version `1.12.0`. Verify your cluster version with:
 
 ```bash
 kubectl version
@@ -210,11 +210,11 @@ Example failure:
 
 ```bash
 × is running the minimum kubectl version
-    kubectl is on version [1.9.1], but version [1.10.0] or more recent is required
+    kubectl is on version [1.9.1], but version [1.12.0] or more recent is required
     see https://linkerd.io/checks/#kubectl-version for hints
 ```
 
-Linkerd requires at least version `1.10.0`. Verify your kubectl version with:
+Linkerd requires at least version `1.12.0`. Verify your kubectl version with:
 
 ```bash
 kubectl version --client --short
