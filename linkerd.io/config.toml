@@ -60,7 +60,7 @@ mediaType = "text/netlify"
 home = ["HTML", "REDIRECTS"]
 section = ["HTML", "JSON"]
 [params]
-description = "Linkerd is a service mesh for Kubernetes and beyond. It gives you observability, reliability, and security without requiring any changes to your code."
+description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
 images = [""]
 l5d2_edge_version = "L5D2_EDGE_VERSION"
 l5d2_release_version = "L5D2_STABLE_VERSION"

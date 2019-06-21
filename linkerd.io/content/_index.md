@@ -3,8 +3,9 @@ title: Homepage
 date: 2019-02-04 13:12:35 +0000
 top_hero:
   title: Ultralight service mesh for Kubernetes and beyond
-  description: Linkerd gives you observability, reliability, and security for your
-    microservices — with no code change required.
+  description: Linkerd is an ultralight service mesh for Kubernetes. It gives
+    you observability, reliability, and security without requiring any code
+    changes.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
