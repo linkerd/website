@@ -42,7 +42,9 @@ When ready, make sure you're running a recent version of Kubernetes with:
 kubectl version --short
 ```
 
-Additionally, if you are using GKE with RBAC enabled, you will want to grant a
+### GKE
+
+If you are using GKE with RBAC enabled, you will want to grant a
 `ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
 provide your current user all the permissions required to install the control
 plane. To bind this `ClusterRole` to your user, you can run:
@@ -50,6 +52,70 @@ plane. To bind this `ClusterRole` to your user, you can run:
 ```bash
 kubectl create clusterrolebinding cluster-admin-binding-$USER \
     --clusterrole=cluster-admin --user=$(gcloud config get-value account)
+```
+
+If you are using a **private GKE cluster**, you are required to create a Master-to-Node firewall rule to allow GKE to communicate to `linkerd-proxy-injector` container endpoint port `tcp/8443`. 
+
+In this example, we will use [gcloud](https://cloud.google.com/sdk/install) to simplify the creation of the said firewall rule.
+
+Setup:
+
+```bash
+CLUSTER_NAME=your-cluster-name
+gcloud config set compute/zone your-zone-or-region
+```
+
+Get the cluster `MASTER_IPV4_CIDR`:
+
+```bash
+MASTER_IPV4_CIDR=$(gcloud container clusters describe $CLUSTER_NAME \
+  | grep "masterIpv4CidrBlock: " \
+  | awk '{print $2}')
+```
+
+Get the cluster `NETWORK`:
+
+```bash
+NETWORK=$(gcloud container clusters describe $CLUSTER_NAME \
+  | grep "^network: " \
+  | awk '{print $2}')
+```
+
+Get the cluster auto-generated `NETWORK_TARGET_TAG`:
+
+```bash
+NETWORK_TARGET_TAG=$(gcloud compute firewall-rules list \
+  --filter network=$NETWORK --format json \
+  | jq ".[] | select(.name | contains(\"$CLUSTER_NAME\"))" \
+  | jq -r '.targetTags[0]' | head -1)
+```
+
+The format of the network tag should be something like `gke-cluster-name-xxxx-node`.
+
+Verify the values:
+
+```bash
+echo $MASTER_IPV4_CIDR $NETWORK $NETWORK_TARGET_TAG
+
+# example output
+10.0.0.0/28 foo-network gke-foo-cluster-c1ecba83-node
+```
+
+Create the firewall rule:
+
+```bash
+gcloud compute firewall-rules create gke-to-linkerd-proxy-injector-8443 \
+  --network "$NETWORK" \
+  --allow "tcp:8443" \
+  --source-ranges "$MASTER_IPV4_CIDR" \
+  --target-tags "$NETWORK_TARGET_TAG" \
+  --priority 1000
+```
+
+Finally, verify that the firewall is created:
+
+```bash
+gcloud compute firewall-rules describe gke-to-linkerd-proxy-injector-8443
 ```
 
 In the next step, we will install the CLI and validate that your cluster is
