@@ -64,9 +64,13 @@ kubectl create clusterrolebinding cluster-admin-binding-$USER \
 ```
 
 ### Using a private cluster on GKE {#gke-private-cluster}
-If you are using a **private GKE cluster**, you are required to create a Master-to-Node firewall rule to allow GKE to communicate to `linkerd-proxy-injector` container endpoint port `tcp/8443`. 
 
-In this example, we will use [gcloud](https://cloud.google.com/sdk/install) to simplify the creation of the said firewall rule.
+If you are using a **private GKE cluster**, you are required to create a 
+Master-to-Node firewall rule to allow GKE to communicate to 
+`linkerd-proxy-injector` container endpoint port `tcp/8443`. 
+
+In this example, we will use [gcloud](https://cloud.google.com/sdk/install) to 
+simplify the creation of the said firewall rule.
 
 Setup:
 
