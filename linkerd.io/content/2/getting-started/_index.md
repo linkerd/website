@@ -42,21 +42,6 @@ When ready, make sure you're running a recent version of Kubernetes with:
 kubectl version --short
 ```
 
-### GKE
-
-If you are using GKE with RBAC enabled, you will want to grant a
-`ClusterRole` of `cluster-admin` to your Google Cloud account first. This will
-provide your current user all the permissions required to install the control
-plane. To bind this `ClusterRole` to your user, you can run:
-
-```bash
-kubectl create clusterrolebinding cluster-admin-binding-$USER \
-    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-```
-
-If you are using a **private** GKE cluster, see our [instructions](../tasks/install/#gke-private-cluster) for configuring
-firewall settings. 
-
 In the next step, we will install the CLI and validate that your cluster is
 ready to install the control plane.
 
