@@ -45,6 +45,14 @@ kubectl version --short
 In the next step, we will install the CLI and validate that your cluster is
 ready to install the control plane.
 
+### GKE
+
+If installing Linkerd on GKE, there are some extra steps required depending on
+how your cluster has been configured. If you are using any of these features,
+check out the additional instructions.
+
+- [Private clusters](/2/reference/cluster-configuration/#private-clusters)
+
 ## Step 1: Install the CLI
 
 If this is your first time running Linkerd, you’ll need to download the
