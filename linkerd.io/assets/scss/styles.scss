@@ -197,29 +197,27 @@
   }
 }
 
-.platform-columns {
-  max-width: 920px;
-  margin: 0 auto;
-}
-
-.platform-column {
-
-  .platform-box {
+  .platform-columns {
+    max-width: 920px;
     margin: 0 auto;
-    width: 250px;
-    height: 250px;
-    padding: 30px 50px;
 
-    &:hover {
-      box-shadow: none;
+
+  .platform-column {
+
+    .box.platform-box {
+      margin: 0 auto;
+      width: 250px;
+      height: 250px;
+      padding: 30px 50px;
+
     }
-  }
-}
 
-.platform-image {
-  margin-bottom: 22px;
-  img {
-    height: 130px;
+    .platform-image {
+      margin: 0 0 22px;
+      img {
+        height: 130px;
+      }
+    }
   }
 }
 
