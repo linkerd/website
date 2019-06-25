@@ -14,9 +14,6 @@
   </div>
 </div>
 
-{{ with site.GetPage "choose-your-platform" "choose-your-platform" }}
-
-
 <div class="columns is-multiline platform-columns">
   {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/k8s.md" ) "title" "Kubernetes" "thumbnail" "/images/kubernetes.svg") }}
   {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/ecs.md" ) "title" "AWS ECS" "thumbnail" "/images/awsecs.svg") }}
@@ -24,5 +21,3 @@
   {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/docker.md" ) "title" "Docker" "thumbnail" "/images/docker.svg") }}
   {{ partial "choose-your-platform/platform.html" (dict "url" (relref . "/1/getting-started/locally.md" ) "title" "Local" "thumbnail" "/images/local.svg") }}
 </div>
-
-{{ end }}
