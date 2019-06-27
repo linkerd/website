@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "features"
 name = "Features"
-weight = 13
+weight = 3
 
 +++
 Beyond adding reliability through circuit breaking and latency-aware load

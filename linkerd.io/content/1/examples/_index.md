@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "examples"
 name = "Examples"
-weight = 22
+weight = 7
 
 +++
 The [linkerd-examples GitHub repo](https://github.com/linkerd/linkerd-examples)

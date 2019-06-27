@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "administration"
 name = "Administration"
-weight = 37
+weight = 5
 
 +++
 This section describes some of the major features included in Linkerd's admin

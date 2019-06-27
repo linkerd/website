@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "advanced"
 name = "Advanced"
-weight = 24
+weight = 8
 
 +++
 This section of the documentation contains in-depth information about advanced

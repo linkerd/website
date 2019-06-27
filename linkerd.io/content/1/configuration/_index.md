@@ -6,7 +6,7 @@ weight = 4
 [menu.docs]
 identifier = "configuration"
 name = "Configuration"
-weight = 1
+weight = 4
 
 +++
 Both Linkerd and namerd’s configuration is controlled via a configuration file,
