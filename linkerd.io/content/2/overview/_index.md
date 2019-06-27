@@ -30,7 +30,7 @@ one?](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-
 Linkerd is fully open source, licensed under [Apache
 v2](https://github.com/linkerd/linkerd2/blob/master/LICENSE), and is a [Cloud
 Native Computing Foundation](https://cncf.io) incubating project. Linkerd is
-developed in the open in the [Linkerd GitHub repo](https://github.com/linkerd).
+developed in the open in the [Linkerd GitHub organization](https://github.com/linkerd).
 
 Linkerd has three basic components: a UI, a *data plane*, and a *control
 plane*. You run Linkerd by:
@@ -39,7 +39,8 @@ plane*. You run Linkerd by:
 1. [Installing the control plane into your cluster](/2/getting-started/#step-3-install-linkerd-onto-the-cluster);
 1. [Adding your services to Linkerd's data plane](/2/tasks/adding-your-service/).
 
-Once a service is running with Linkerd, you can use Linkerd's UI to inspect and
+Once a service is running with Linkerd, you can use [Linkerd's
+UI](https://linkerd.io/2/getting-started/#step-4-explore-linkerd) to inspect and
 manipulate it.
 
 You can [get started](/2/getting-started/) in minutes!
@@ -72,3 +73,4 @@ Linkerd is currently published in several tracks:
 [Get started with Linkerd](/2/getting-started/) in minutes, or check out the
 [architecture](/2/reference/architecture/) for more details on Linkerd's
 components and how they all fit together.
+
