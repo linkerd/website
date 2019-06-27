@@ -30,12 +30,12 @@ The following diagnostics are provided (a summary with links is provided at
 
 ## Example Usage
 
-This data is served over the same port as the main container's liveness probe.
+This data is served over the `admin-http` port.
 To find this port, you can examine the pod's yaml, or for the identity pod for
 example, issue a command like so:
 
 ```bash
-kubectl -n linkerd get po linkerd-identity-8ccbfc5d6-css2v -o=jsonpath='{.spec.containers[?(@.livenessProbe.httpGet.path=="/ping")].livenessProbe.httpGet.port}'
+kubectl -n linkerd get po linkerd-identity-8ccbfc5d6-css2v -o=jsonpath='{.spec.containers[*].ports[?(@.name=="admin-http")].containerPort}'
 ```
 
 Then port-forward that port to access it from outside the cluster (in this
