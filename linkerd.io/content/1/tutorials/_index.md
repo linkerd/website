@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "tutorials"
 name = "Tutorials"
-weight = 5
+weight = 6
 
 +++
 These tutorials exist to walk you through several sample concepts for practical

@@ -6,7 +6,7 @@ weight = 1
 [menu.docs]
 identifier = "support"
 name = "Support"
-weight = 2
+weight = 9
 
 +++
 <!-- markdownlint-disable MD026 -->

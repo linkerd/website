@@ -7,6 +7,6 @@ weight = 1
 [menu.docs]
 identifier = "getting-started"
 name = "Getting Started"
-weight = 31
+weight = 2
 
 +++

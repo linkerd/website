@@ -8,6 +8,6 @@ weight = 1
 [menu.docs]
 identifier = "overview"
 name = "Overview"
-weight = 41
+weight = 1
 
 +++
