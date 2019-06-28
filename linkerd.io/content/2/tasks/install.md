@@ -55,6 +55,13 @@ linkerd install | kubectl apply -f -
 
 See [Getting Started](/2/getting-started/) for an example.
 
+{{< note >}}
+Most common configuration options are provided as flags for `install`. See the
+[reference documentation](/2/reference/cli/install/) for a complete list of
+options. To do configuration that is not part of the `install` command, see how
+you can create a [customized install](/2/tasks/customize-install/).
+{{< /note >}}
+
 ## Verification
 
 After installation, you can validate that the installation was successful by
