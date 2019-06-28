@@ -41,10 +41,6 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 √ can create CustomResourceDefinitions
 ```
 
-If you are trying to install Linkerd on a GKE cluster that has RBAC enabled, it
-is possible there is more [configuration
-required](/2/reference/cluster-configuration/#rbac).
-
 ## The "pre-kubernetes-setup" checks {#pre-k8s}
 
 These checks only run when the `--pre` flag is set This flag is intended for
@@ -57,10 +53,6 @@ permissions to install Linkerd.
 √ can create Deployments
 √ can create ConfigMaps
 ```
-
-If you are trying to install Linkerd on a GKE cluster that has RBAC enabled, it
-is possible there is more [configuration
-required](/2/reference/cluster-configuration/#rbac).
 
 ## √ no clock skew detected {#pre-k8s-clock-skew}
 

@@ -5,18 +5,6 @@ description = "Configuration settings unique to providers and install methods."
 
 ## GKE
 
-### RBAC
-
-If you are using GKE with RBAC enabled, you first need to grant a `ClusterRole`
-of `cluster-admin` to your Google Cloud account first. This will provide your
-current user all the permissions required to install the control plane. To bind
-this `ClusterRole` to your user, you can run:
-
-```bash
-kubectl create clusterrolebinding cluster-admin-binding-$USER \
-    --clusterrole=cluster-admin --user=$(gcloud config get-value account)
-```
-
 ### Private Clusters
 
 If you are using a **private GKE cluster**, you are required to create a
