@@ -41,9 +41,6 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 √ can create CustomResourceDefinitions
 ```
 
-For more information on cluster access, see the
-[GKE Setup](/2/tasks/install/#gke) section above.
-
 ## The "pre-kubernetes-setup" checks {#pre-k8s}
 
 These checks only run when the `--pre` flag is set This flag is intended for
@@ -56,9 +53,6 @@ permissions to install Linkerd.
 √ can create Deployments
 √ can create ConfigMaps
 ```
-
-For more information on cluster access, see the
-[GKE Setup](/2/tasks/install/#gke) section above.
 
 ## √ no clock skew detected {#pre-k8s-clock-skew}
 
