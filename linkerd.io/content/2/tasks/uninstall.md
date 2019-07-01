@@ -32,3 +32,9 @@ service accounts, CRDs, and more; `kubectl delete` then deletes those resources.
 This command also removes control planes that have been only partially
 installed.
 {{< /note >}}
+
+{{< note >}}
+If the initial installation was performed as a
+[Multi-stage install](/2/tasks/install/#multi-stage-install), uninstallation
+should be done by the cluster owner.
+{{< /note >}}
