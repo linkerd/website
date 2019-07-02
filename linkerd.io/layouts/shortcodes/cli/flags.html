@@ -1,7 +1,7 @@
 {{ range where site.Data.cli "Name" (.Get 0) }}
 {{ $opts := where .Options "Name" "!=" "help" }}
 {{ if ge (len $opts) 1 }}
-<h1>Flags</h1>
+<h2>Flags</h2>
 {{ partial "cli/flags" $opts }}
 {{ end }}
 {{ end }}

@@ -11,9 +11,10 @@
       </tr>
     </thead>
     <tbody>
-      <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L89-L152 -->
+      <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L94-L170 -->
+      {{ $labels := slice "admin-port" "control-port" "disable-identity" "disable-tap" "enable-debug-sidecar" "enable-external-profiles" "image-pull-policy" "inbound-port" "init-image" "init-image-version" "outbound-port" "proxy-cpu-limit" "proxy-cpu-request" "proxy-image" "proxy-log-level" "proxy-memory-limit" "proxy-memory-request" "proxy-uid" "proxy-version" "skip-inbound-ports" "skip-outbound-ports" }}
       {{ range . }}
-      {{ if or (eq .Name "admin-port") (eq .Name "control-port") (eq .Name "enable-external-profiles") (eq .Name "image-pull-policy") (eq .Name "inbound-port") (eq .Name "init-image") (eq .Name "outbound-port") (eq .Name "proxy-cpu-limit") (eq .Name "proxy-cpu-request") (eq .Name "proxy-image") (eq .Name "proxy-log-level") (eq .Name "proxy-memory-limit") (eq .Name "proxy-memory-request") (eq .Name "proxy-uid") (eq .Name "proxy-version") (eq .Name "skip-inbound-ports") (eq .Name "skip-outbound-ports") }}
+      {{ if (in $labels .Name) }}
       <tr>
         <td>
           <code class="text-nowrap">config.linkerd.io/{{ .Name }}</code>
