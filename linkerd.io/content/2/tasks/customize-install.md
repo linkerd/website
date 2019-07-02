@@ -4,9 +4,9 @@ description = "Modify the Linkerd Installation"
 +++
 
 Instead of forking the Linkerd install and upgrade process,
-[Kustomize](https://kustomize.io/) can be used to patch the resource YAML in a
-consistent way. This allows customization of the install to add functionality
-specific to installations.
+[Kustomize](https://kustomize.io/) can be used to patch the output of `linkerd
+install`  in a consistent way. This allows customization of the install to add
+functionality specific to installations.
 
 To get started, save the output of `install` to a YAML file. This will be the
 base resource that Kustomize uses to patch and generate what is added to your
@@ -88,10 +88,10 @@ kubectl kustomize build . | kubectl apply -f -
 
 ## Modify Grafana Configuration
 
-Interested in enabling authentication for Grafana? It would be possible to
+Interested in enabling authentication for Grafana? It is possible to
 modify the `ConfigMap` as a one off to do this. Unfortunately, the changes will
 end up being reverted every time `linkerd upgrade` happens. Instead, create a
-file named `grafana.yaml` as add your modifications:
+file named `grafana.yaml` and add your modifications:
 
 ```yaml
 kind: ConfigMap
