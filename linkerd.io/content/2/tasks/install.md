@@ -55,6 +55,11 @@ linkerd install | kubectl apply -f -
 
 See [Getting Started](/2/getting-started/) for an example.
 
+{{< note >}}
+For organizations that distinguish cluster privileges by role, jump to the
+[Multi-stage install](#multi-stage-install) section.
+{{< /note >}}
+
 ## Verification
 
 After installation, you can validate that the installation was successful by
@@ -67,3 +72,73 @@ linkerd check
 ## Uninstalling
 
 See [Uninstalling Linkerd](/2/tasks/uninstall/).
+
+## Multi-stage install
+
+If your organization assigns Kuberenetes cluster privileges based on role
+(typically cluster owner and service owner), Linkerd provides a "multi-stage"
+installation to accomodate these two roles. The two installation stages are
+`config` (for the cluster owner) and `control-plane` (for the service owner).
+The cluster owner has privileges necessary to create namespaces, as well as
+global resources including cluster roles, bindings, and custom resource
+definitions. The service owner has privileges within a namespace necessary to
+create deployments, configmaps, services, and secrets.
+
+### Stage 1: config
+
+The `config` stage is intended to be run by the cluster owner, the role with
+more privileges. It is also the cluster owner's responsbility to run the
+initial pre-install check:
+
+```bash
+linkerd check --pre
+```
+
+Once the pre-install check passes, install the config stage with:
+
+```bash
+linkerd install config | kubectl apply -f -
+```
+
+In addition to creating the `linkerd` namespace, this command installs the
+following resources onto your Kubernetes cluster:
+
+- ClusterRole
+- ClusterRoleBinding
+- CustomResourceDefinition
+- MutatingWebhookConfiguration
+- PodSecurityPolicy
+- Role
+- RoleBinding
+- Secret
+- ServiceAccount
+- ValidatingWebhookConfiguration
+
+To validate the `config` stage succeeded, run:
+
+```bash
+linkerd check config
+```
+
+### Stage 2: control-plane
+
+Following successfuly installation of the `config` stage, the service owner may
+install the `control-plane` with:
+
+```bash
+linkerd install control-plane | kubectl apply -f -
+```
+
+This command installs the following resources onto your Kubernetes cluster, all
+within the `linkerd` namespace:
+
+- ConfigMap
+- Deployment
+- Secret
+- Service
+
+To validate the `control-plane` stage succeeded, run:
+
+```bash
+linkerd check
+```

@@ -132,6 +132,11 @@ Check out the [architecture](/2/reference/architecture/#control-plane)
 documentation for an in depth explanation of what these components are and what
 they do.
 
+{{< note >}}
+For organizations that distinguish cluster privileges by role, see the
+[Multi-stage install](/2/tasks/install/#multi-stage-install) instructions.
+{{< /note >}}
+
 ## Step 4: Explore Linkerd
 
 With the control plane installed and running, you can now view the Linkerd
