@@ -48,13 +48,18 @@ use prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
 ```bash
+√ can create Namespaces
+√ can create ClusterRoles
+√ can create ClusterRoleBindings
+√ can create CustomResourceDefinitions
+√ can create PodSecurityPolicies
 √ can create ServiceAccounts
 √ can create Services
 √ can create Deployments
 √ can create ConfigMaps
 ```
 
-## √ no clock skew detected {#pre-k8s-clock-skew}
+### √ no clock skew detected {#pre-k8s-clock-skew}
 
 This check verifies whether there is clock skew between the system running
 the `linkerd install` command and the Kubernetes node(s), causing
@@ -83,6 +88,21 @@ For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
 and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+
+## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
+
+These checks only run when the `--pre` flag is set. This flag is intended for
+use prior to running `linkerd install`, to verify you have not already installed
+the Linkerd control plane.
+
+```bash
+√ no ClusterRoles exist
+√ no ClusterRoleBindings exist
+√ no CustomResourceDefinitions exist
+√ no MutatingWebhookConfigurations exist
+√ no ValidatingWebhookConfigurations exist
+√ no PodSecurityPolicies exist
+```
 
 ## The "pre-kubernetes-single-namespace-setup" checks {#pre-single}
 
@@ -363,7 +383,124 @@ $ kubectl auth can-i create customresourcedefinitions
 yes
 ```
 
+### √ control plane MutatingWebhookConfigurations exist {#l5d-existence-mwc}
+
+Example failure:
+
+```bash
+× control plane MutatingWebhookConfigurations exist
+    missing MutatingWebhookConfigurations: linkerd-proxy-injector-webhook-config
+    see https://linkerd.io/checks/#l5d-existence-mwc for hints
+```
+
+Ensure the Linkerd MutatingWebhookConfigurations exists:
+
+```bash
+$ kubectl get mutatingwebhookconfigurations | grep linkerd
+linkerd-proxy-injector-webhook-config   2019-07-01T13:13:26Z
+```
+
+Also ensure you have permission to create MutatingWebhookConfigurations:
+
+```bash
+$ kubectl auth can-i create mutatingwebhookconfigurations
+yes
+```
+
+### √ control plane ValidatingWebhookConfigurations exist {#l5d-existence-vwc}
+
+Example failure:
+
+```bash
+× control plane ValidatingWebhookConfigurations exist
+    missing ValidatingWebhookConfigurations: linkerd-sp-validator-webhook-config
+    see https://linkerd.io/checks/#l5d-existence-vwc for hints
+```
+
+Ensure the Linkerd ValidatingWebhookConfiguration exists:
+
+```bash
+$ kubectl get validatingwebhookconfigurations | grep linkerd
+linkerd-sp-validator-webhook-config   2019-07-01T13:13:26Z
+```
+
+Also ensure you have permission to create ValidatingWebhookConfigurations:
+
+```bash
+$ kubectl auth can-i create validatingwebhookconfigurations
+yes
+```
+
+### √ control plane PodSecurityPolicies exist {#l5d-existence-psp}
+
+Example failure:
+
+```bash
+× control plane PodSecurityPolicies exist
+    missing PodSecurityPolicies: linkerd-linkerd-control-plane
+    see https://linkerd.io/checks/#l5d-existence-psp for hints
+```
+
+Ensure the Linkerd PodSecurityPolicy exists:
+
+```bash
+$ kubectl get podsecuritypolicies | grep linkerd
+linkerd-linkerd-control-plane   false   NET_ADMIN,NET_RAW   RunAsAny   RunAsAny    MustRunAs   MustRunAs   true             configMap,emptyDir,secret,projected,downwardAPI,persistentVolumeClaim
+```
+
+Also ensure you have permission to create PodSecurityPolicies:
+
+```bash
+$ kubectl auth can-i create podsecuritypolicies
+yes
+```
+
 ## The "linkerd-existence" checks {#l5d-existence}
+
+### √ 'linkerd-config' config map exists {#l5d-existence-linkerd-config}
+
+Example failure:
+
+```bash
+× 'linkerd-config' config map exists
+    missing ConfigMaps: linkerd-config
+    see https://linkerd.io/checks/#l5d-existence-linkerd-config for hints
+```
+
+Ensure the Linkerd ConfigMap exists:
+
+```bash
+$ kubectl -n linkerd get configmap/linkerd-config
+NAME             DATA   AGE
+linkerd-config   3      61m
+```
+
+Also ensure you have permission to create ConfigMaps:
+
+```bash
+$ kubectl -n linkerd auth can-i create configmap
+yes
+```
+
+### √ control plane replica sets are ready {#l5d-existence-replicasets}
+
+This failure occurs when one of Linkerd's ReplicaSets fails to schedule a pod.
+
+For more information, see the Kubernetes documentation on
+[Failed Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#failed-deployment).
+
+### √ no unschedulable pods {#l5d-existence-unschedulable-pods}
+
+Example failure:
+
+```bash
+× no unschedulable pods
+    linkerd-prometheus-6b668f774d-j8ncr: 0/1 nodes are available: 1 Insufficient cpu.
+    see https://linkerd.io/checks/#l5d-existence-unschedulable-pods for hints
+```
+
+For more information, see the Kubernetes documentation on the
+[Unschedulable Pod Condition](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions).
 
 ### √ controller pod is running {#l5d-existence-controller}
 
