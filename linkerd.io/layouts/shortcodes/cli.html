@@ -13,6 +13,7 @@
     </thead>
     <tbody>
       {{ range $cli }}
+      {{ if not (in .Name " ") }}
       <tr>
         <td class="text-nowrap">
           <a href="{{ .Name }}/">
@@ -23,6 +24,7 @@
           {{ .Synopsis | markdownify }}
         </td>
       </tr>
+      {{ end }}
       {{ end }}
     </tbody>
   </table>
