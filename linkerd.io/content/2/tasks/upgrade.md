@@ -48,6 +48,25 @@ linkerd upgrade | kubectl apply -f -
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
 
+#### Upgading a multi-stage install
+
+`edge-19.4.5` introduced a
+[Multi-stage install](/2/tasks/install/#multi-stage-install) feature. If you
+previously installed Linkerd via a multi-stage install process, you can upgrade
+each stage, analogous to the original multi-stage installation process.
+
+Stage 1, for the cluster owner:
+
+```bash
+linkerd upgrade config | kubectl apply -f -
+```
+
+Stage 2, for the service owner:
+
+```bash
+linkerd upgrade control-plane | kubectl apply -f -
+```
+
 #### Upgrading via manifests
 
 `edge-19.4.5` introduced a new `--from-manifests` flag to `linkerd upgrade`
