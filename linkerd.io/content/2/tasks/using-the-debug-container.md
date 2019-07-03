@@ -19,7 +19,7 @@ and `iproute2`, or install additional tools in the container.
 E.g., to deploy the emojivoto application with the `debug` container, run:
 
 ```bash
-curl https://run.linkerd.io/emojivoto.yml | linkerd inject --enable-debug-sidecar - | kubectl apply -f -
+linkerd inject --enable-debug-sidecar https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ```
 
 To view all the packets entering and leaving the `vote-bot` service, run:
