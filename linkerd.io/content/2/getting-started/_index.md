@@ -210,7 +210,7 @@ spec. These annotations instruct
 [linkerd-proxy-injector](/2/reference/architecture/#proxy-injector) to
 automatically augment the resources. The data plane's proxy is added as a
 container to the pod spec along with
-[linkerd-proxy-init](/2/reference/architecture/#proxy-init) as an
+[linkerd-init](/2/reference/architecture/#data-plane) as an
 `initContainer`.
 
 As with `install`, `inject` is a pure text operation, meaning that you can
@@ -296,11 +296,10 @@ browser instead. The dashboard views look like:
 
 These are all great for seeing real time data, but what about things that
 happened in the past? Linkerd includes
-[Grafana](http://localhost:1313/2/reference/architecture/#grafana) to visualize
-all the great metrics collected by
-[Prometheus](http://localhost:1313/2/reference/architecture/#prometheus) and
-ships with some extremely valuable dashboards. You can get to these by clicking
-the Grafana icon in the overview page.
+[Grafana](/2/reference/architecture/#grafana) to visualize all the great metrics
+collected by [Prometheus](/2/reference/architecture/#prometheus) and ships with
+some extremely valuable dashboards. You can get to these by clicking the Grafana
+icon in the overview page.
 
 {{< fig src="/images/getting-started/grafana.png"
     title="Deployment Detail Dashboard">}}

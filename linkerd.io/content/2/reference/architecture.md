@@ -31,46 +31,58 @@ of the data plane. To install the control plane on your own cluster, follow the 
 
 The control plane is made up of:
 
-- Controller - The controller deployment consists of multiple containers
-  (public-api, destination) that provide the bulk of the control
-  plane's functionality.
+### Controller
 
-- Grafana - Linkerd comes with many dashboards out of the box. The Grafana
-  component is used to render and display these dashboards. You can reach these
-  dashboards via links in the Linkerd dashboard itself.
+The controller deployment consists of multiple containers (public-api,
+destination) that provide the bulk of the control plane's functionality.
 
-- Identity - This component provides a [Certificate
-  Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
-  [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
-  and returns certificates signed with the correct identity.
+### Grafana
 
-- Prometheus - All metrics are stored in Prometheus. They are scraped in the
-  native Prometheus format from each proxy that makes up the data plane. This is
-  an instance of Prometheus that has been configured to work specifically with
-  the data that Linkerd generates. There are
-  [instructions](/2/observability/exporting-metrics/) if you would like to
-  integrate this with an existing Prometheus installation. You can see what
-  Prometheus is collecting by running `linkerd metrics`.
+Linkerd comes with many dashboards out of the box. The Grafana component is used
+to render and display these dashboards. You can reach these dashboards via links
+in the Linkerd dashboard itself.
 
-- Proxy Injector - An [admission
-  controller][admission-controller]
-  which receives a webhook request every time a pod is created. The injector
-  looks for an annotation (`linkerd.io/inject: enabled`). When that annotation
-  exists, the injector mutates the pod's specification and adds both an
-  `initContainer` as well as a sidecar containing the proxy itself.
+### Identity
 
-- Service Profile Validator - Also an [admission
-  controller][admission-controller], validates new [service
-  profiles](http://localhost:1313/2/reference/service-profiles/) before they are
-  saved.
+This component provides a [Certificate
+Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
+[CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
+and returns certificates signed with the correct identity.
 
-- Tap - Receives requests from the CLI and dashboard to watch requests and
-  responses in real time. Sets streams up to watch these requests and responses
-  in specific proxies associated with the requested applications.
+### Prometheus
 
-- Web - The web deployment provides the Linkerd dashboard. This does not require
-  running `linkerd dashboard` and can be [exposed](/2/tasks/exposing-dashboard/)
-  to others.
+All metrics are stored in Prometheus. They are scraped in the native Prometheus
+format from each proxy that makes up the data plane. This is an instance of
+Prometheus that has been configured to work specifically with the data that
+Linkerd generates. There are [instructions](/2/observability/exporting-metrics/)
+if you would like to integrate this with an existing Prometheus installation.
+You can see what Prometheus is collecting by running `linkerd metrics`.
+
+### Proxy Injector
+
+An [admission controller][admission-controller] which receives a webhook request
+every time a pod is created. The injector looks for an annotation
+(`linkerd.io/inject: enabled`). When that annotation exists, the injector
+mutates the pod's specification and adds both an `initContainer` as well as a
+sidecar containing the proxy itself.
+
+### Service Profile Validator
+
+Also an [admission controller][admission-controller], validates new [service
+profiles](/2/reference/service-profiles/) before they are
+saved.
+
+### Tap
+
+Receives requests from the CLI and dashboard to watch requests and responses in
+real time. Sets streams up to watch these requests and responses in specific
+proxies associated with the requested applications.
+
+### Web
+
+The web deployment provides the Linkerd dashboard. This does not require running
+`linkerd dashboard` and can be [exposed](/2/tasks/exposing-dashboard/) to
+others.
 
 ### Grafana
 
@@ -209,4 +221,3 @@ running `linkerd dashboard` from the command line.
 The dashboard is served by `linkerd-web` and does not require running `linkerd
 dashboard`. It can be [exposed](/2/tasks/exposing-dashboard/) to others.
 {{< /note >}}
-

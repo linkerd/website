@@ -40,7 +40,7 @@ plane*. You run Linkerd by:
 1. [Adding your services to Linkerd's data plane](/2/tasks/adding-your-service/).
 
 Once a service is running with Linkerd, you can use [Linkerd's
-UI](https://linkerd.io/2/getting-started/#step-4-explore-linkerd) to inspect and
+UI](/2/getting-started/#step-4-explore-linkerd) to inspect and
 manipulate it.
 
 You can [get started](/2/getting-started/) in minutes!
