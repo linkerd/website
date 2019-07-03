@@ -149,7 +149,7 @@ linkerd dashboard &
 {{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
 
 This command sets up a port forward from your local system to the
-[linkerd-web](/2/reference/architecture/#linkerd-web) pod. Instead of running
+[linkerd-web](/2/reference/architecture/#web) pod. Instead of running
 `linkerd dashboard` every time you'd like to see the dashboard, it is possible
 to [expose](/2/tasks/exposing-dashboard/) for anyone to access.
 
