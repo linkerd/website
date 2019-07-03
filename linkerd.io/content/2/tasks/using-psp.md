@@ -16,8 +16,20 @@ kubectl describe psp -l linkerd.io/control-plane-ns=linkerd
 
 Adjust the value of the above label to match your control plane's namespace.
 
-Note that in the CNI setup, the `NET_ADMIN` and `NET_RAW` capabilities are
-omitted from the `allowedCapabitilies` rules.
+Notice that to minimize attack surface, all Linux capabilities are dropped from
+the control plane's Pod Security Policy, with the exception of the `NET_ADMIN`
+and `NET_RAW` capabilities. These capabilties provide the `proxy-init` init
+container with runtime privilege to rewrite the pod's iptable. Note that adding
+these capabilities to the Pod Security Policy doesn't make the container a
+[`privileged`](https://kubernetes.io/docs/concepts/workloads/pods/pod/#privileged-mode-for-pod-containers)
+container. The control plane's Pod Security Policy prevents container privilege
+escalation with the `allowPrivilegeEscalation: false` policy. To understand the
+full implication of the `NET_ADMIN` and `NET_RAW` capabilities, refer to the
+Linux capabilities [manual](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+
+If your environment disallow the operation of containers with escalated Linux
+capabilities, Linkerd can be installed with its [CNI plugin](/2/features/cni/),
+which doesn't require the `NET_ADMIN` and `NET_RAW` capabilities.
 
 Linkerd doesn't provide any default Pod Security Policy for the data plane
 because the policies will vary depending on the security requirements of your
@@ -25,15 +37,14 @@ application. The security context requirement for the Linkerd proxy sidecar
 container will be very similar to that defined in the control plane's Pod
 Security Policy.
 
-For example, the following Pod Security Policy will work with the injected
+For example, the following Pod Security Policy and RBAC will work with the injected
 `emojivoto` demo application:
 
 ```yaml
-cat <<EOF|k apply -f -
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: linkerd-data-plane
+  name: linkerd-emojiovoto-data-plane
 spec:
   allowPrivilegeEscalation: false
   fsGroup:
@@ -64,7 +75,42 @@ spec:
   - secret
   - downwardAPI
   - persistentVolumeClaim
-EOF
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: emojivoto-psp
+  namespace: emojivoto
+rules:
+- apiGroups: ['policy','extensions']
+  resources: ['podsecuritypolicies']
+  verbs: ['use']
+  resourceNames: ['linkerd-emojivoto-data-plane']
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: emojivoto-psp
+  namespace: emojivoto
+roleRef:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: emojivoto-psp
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: emojivoto
+- kind: ServiceAccount
+  name: emoji
+  namespace: emojivoto
+- kind: ServiceAccount
+  name: voting
+  namespace: emojivoto
+- kind: ServiceAccount
+  name: web
+  namespace: emojivoto
 ```
 
 Note that the Linkerd proxy only requires the `NET_ADMIN` and `NET_RAW`
