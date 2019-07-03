@@ -73,4 +73,3 @@ Linkerd is currently published in several tracks:
 [Get started with Linkerd](/2/getting-started/) in minutes, or check out the
 [architecture](/2/reference/architecture/) for more details on Linkerd's
 components and how they all fit together.
-
