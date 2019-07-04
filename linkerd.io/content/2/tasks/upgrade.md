@@ -16,6 +16,82 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
+## Upgrade notice: stable-2.4.0
+
+Note that the minimum supported Kubernetes version for the `stable-2.4.0`
+release is 1.12.
+
+### Upgrading from stable-2.3.x, edge-19.5.x, edge-19.6.x
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all existing control plane's configuration and mTLS secret are
+retained.
+
+```bash
+# get the latest stable CLI
+curl -sL https://run.linkerd.io/install | sh
+```
+
+For Kubernetes 1.12+:
+
+```bash
+linkerd upgrade | kubectl apply -f -
+```
+
+For Kubernetes pre-1.12 where the mutating and validating webhook
+configurations' `sideEffects` fields aren't supported:
+
+```bash
+linkerd upgrade --omit-webhook-side-effects | kubectl apply -f -
+```
+
+The `sideEffects` field is added to the Linkerd webhook configurations to
+indicate that the webhooks have no side effects on other resources.
+
+For HA setup, the `linkerd upgrade` command will also retain all previous HA
+configuration. Note that the mutating and validating webhook configuration are
+updated to set its `failurePolicy` field to `fail` to ensure that un-injected
+workloads (as a result of unexpected errors) are rejected during the admission
+process. The HA mode has also been updated to schedule multiple replicas of the
+`linkerd-proxy-injector` and `linkerd-sp-validator` deployments.
+
+For users upgrading from the `edge-19.5.3` release, note that the upgrade
+process will fail with the following error message, due to a naming bug:
+
+```bash
+The ClusterRoleBinding "linkerd-linkerd-tap" is invalid: roleRef: Invalid value:
+rbac.RoleRef{APIGroup:"rbac.authorization.k8s.io", Kind:"ClusterRole",
+Name:"linkerd-linkerd-tap"}: cannot change roleRef
+```
+
+This can be resolved by simply deleting the `linkerd-linkerd-tap` cluster role
+binding resource, and re-run the `linkerd upgrade` command.
+
+For upgrading a multi-stage installation setup, follow the instructions at
+[Upgrading a multi-stage install](/2/tasks/upgrade/#upgading-a-multi-stage-install).
+
+Users who have previously saved the Linkerd control plane's configuration to
+files can follow the instructions at
+[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+to ensure those configuration are retained by the `linkerd upgrade` command.
+
+Once the `upgrade` command exits, use the `linkerd check` command to confirm
+the control plane is ready. (Note that the `stable-2.4` `linkerd check` command
+doesn't work with older versions of the control plane, because the command is
+updated to select the resources by labels, instead of by names. The benign error
+returned by the command regarding missing required RBAC resources will be
+resolved once the control plane is upgraded to `stable-2.4`.)
+
+When ready, proceed to upgrading the data plane by following the instructions at
+[Upgrade the data plane](#upgrade-the-data-plane).
+
+### Upgrading from stable-2.2.x
+
+Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-2-2-x-1)
+to upgrade the control plane to the stable-2.3.2 release first. Then follow
+[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-5-x-edge-19-6-x)
+to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
+
 ## Upgrade notice: stable-2.3.0
 
 `stable-2.3.0` introduces a new `upgrade` command. This command only works for
@@ -284,11 +360,36 @@ your Kubernetes cluster, it is time to upgrade the data plane. This will change
 the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
 your service.
 
-For each of your meshed services, you can re-inject your applications in-place.
-Retrieve your YAML resources via `kubectl`, and pass them through
-`linkerd inject`. This will update the pod spec to have the latest version of
-the `linkerd-proxy` sidecar container. By using `kubectl apply`, Kubernetes will
-do a rolling deploy of your service and update the running pods to the latest
+If your workloads are annotated with the auto-inject
+`linkerd.io/inject: enabled` annotation, then you can use the
+`kubectl set image` command to upgrade the Linkerd proxies. Kubernetes will
+automatically perform a rolling update across all your pods.
+
+```bash
+# retrieve the version of the new proxy
+kubectl -n linkerd get configmap linkerd-config -ojsonpath={.data.proxy} \
+  | jq -r .proxyVersion
+stable-2.4.0
+
+# update all pods' linkerd-proxy container's image to stable-2.4.0
+kubectl -n emojivoto set image po linkerd-proxy=gcr.io/linkerd-io/proxy:stable-2.4.0 --all
+```
+
+Note that for Kubernetes 1.15+, you can use the `kubectl rollout restart`
+command to restart all your meshed services.
+
+As the new pods are being created, the proxy injector will auto-inject the new
+version of the proxy into the pods.
+
+If the auto-injection isn't part of your workflow, you can still manually
+upgrade your meshed services by re-injecting your applications in-place.
+
+Begin by retrieving your YAML resources via `kubectl`, and pass them through the
+`linkerd inject` command. This will update the pod spec with the
+`linkerd.io/inject: enabled` annotation. This annotation will be picked up by
+the Linkerd's proxy injector during the admission phase where the Linkerd proxy
+will be injected into the workload. By using `kubectl apply`, Kubernetes will do
+a rolling deploy of your service and update the running pods to the latest
 version.
 
 Example command to upgrade an application in the `emojivoto` namespace, composed
