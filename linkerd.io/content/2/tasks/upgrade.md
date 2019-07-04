@@ -375,25 +375,21 @@ your Kubernetes cluster, it is time to upgrade the data plane. This will change
 the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
 your service.
 
-If your workloads are annotated with the auto-inject
-`linkerd.io/inject: enabled` annotation, then you can use the
-`kubectl set image` command to upgrade the Linkerd proxies. Kubernetes will
-automatically perform a rolling update across all your pods.
+For `stable-2.3.0`+, if your workloads are annotated with the auto-inject
+`linkerd.io/inject: enabled` annotation, then you can just restart your pods
+using your Kubernetes cluster management tools (`helm`, `kubectl` etc.).
+
+{{< note >}}
+With `kubectl` 1.15+, you can use the `kubectl rollout restart` command to
+restart all your meshed services. For example,
 
 ```bash
-# retrieve the version of the new proxy
-kubectl -n linkerd get configmap linkerd-config -ojsonpath={.data.proxy} \
-  | jq -r .proxyVersion
-stable-2.4.0
-
-# update all pods' linkerd-proxy container's image to stable-2.4.0
-kubectl -n emojivoto set image po linkerd-proxy=gcr.io/linkerd-io/proxy:stable-2.4.0 --all
+kubectl -n <namespace> rollout restart deploy
 ```
 
-Note that for Kubernetes 1.15+, you can use the `kubectl rollout restart`
-command to restart all your meshed services.
+{{< /note >}}
 
-As the new pods are being created, the proxy injector will auto-inject the new
+As the pods are being re-created, the proxy injector will auto-inject the new
 version of the proxy into the pods.
 
 If the auto-injection is not part of your workflow, you can still manually
