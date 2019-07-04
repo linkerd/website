@@ -18,13 +18,12 @@ incrementally without taking down any of your services.
 
 ## Upgrade notice: stable-2.4.0
 
-Note that the minimum supported Kubernetes version for the `stable-2.4.0`
-release is 1.12.
+This release supports Kubernetes 1.12+.
 
-### Upgrading from stable-2.3.x, edge-19.5.x, edge-19.6.x
+### Upgrading from stable-2.3.x, edge-19.4.5, edge-19.5.x, edge-19.6.x, edge-19.7.1
 
 Use the `linkerd upgrade` command to upgrade the control plane. This command
-ensures that all existing control plane's configuration and mTLS secret are
+ensures that all existing control plane's configuration and mTLS secrets are
 retained.
 
 ```bash
@@ -50,7 +49,7 @@ indicate that the webhooks have no side effects on other resources.
 
 For HA setup, the `linkerd upgrade` command will also retain all previous HA
 configuration. Note that the mutating and validating webhook configuration are
-updated to set its `failurePolicy` field to `fail` to ensure that un-injected
+updated to set their `failurePolicy` fields to `fail` to ensure that un-injected
 workloads (as a result of unexpected errors) are rejected during the admission
 process. The HA mode has also been updated to schedule multiple replicas of the
 `linkerd-proxy-injector` and `linkerd-sp-validator` deployments.
@@ -65,7 +64,11 @@ Name:"linkerd-linkerd-tap"}: cannot change roleRef
 ```
 
 This can be resolved by simply deleting the `linkerd-linkerd-tap` cluster role
-binding resource, and re-run the `linkerd upgrade` command.
+binding resource, and re-running the `linkerd upgrade` command:
+
+```bash
+kubectl delete clusterrole/linkerd-linkerd-tap
+```
 
 For upgrading a multi-stage installation setup, follow the instructions at
 [Upgrading a multi-stage install](/2/tasks/upgrade/#upgading-a-multi-stage-install).
@@ -75,12 +78,24 @@ files can follow the instructions at
 [Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
-Once the `upgrade` command exits, use the `linkerd check` command to confirm
-the control plane is ready. (Note that the `stable-2.4` `linkerd check` command
-doesn't work with older versions of the control plane, because the command is
-updated to select the resources by labels, instead of by names. The benign error
-returned by the command regarding missing required RBAC resources will be
-resolved once the control plane is upgraded to `stable-2.4`.)
+Once the `upgrade` command completes, use the `linkerd check` command to confirm
+the control plane is ready.
+
+{{< note >}}
+The `stable-2.4` `linkerd check` command will return an error when run against
+an older control plane. This error is benign and will resolve itself once the
+control plane is upgraded to `stable-2.4`:
+
+```bash
+linkerd-config
+--------------
+√ control plane Namespace exists
+× control plane ClusterRoles exist
+    missing ClusterRoles: linkerd-linkerd-controller, linkerd-linkerd-identity, linkerd-linkerd-prometheus, linkerd-linkerd-proxy-injector, linkerd-linkerd-sp-validator, linkerd-linkerd-tap
+    see https://linkerd.io/checks/#l5d-existence-cr for hints
+```
+
+{{< /note >}}
 
 When ready, proceed to upgrading the data plane by following the instructions at
 [Upgrade the data plane](#upgrade-the-data-plane).
@@ -89,7 +104,7 @@ When ready, proceed to upgrading the data plane by following the instructions at
 
 Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-2-2-x-1)
 to upgrade the control plane to the stable-2.3.2 release first. Then follow
-[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-5-x-edge-19-6-x)
+[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-4-5-edge-19-5-x-edge-19-6-x-edge-19-7-1)
 to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
 
 ## Upgrade notice: stable-2.3.0
@@ -381,7 +396,7 @@ command to restart all your meshed services.
 As the new pods are being created, the proxy injector will auto-inject the new
 version of the proxy into the pods.
 
-If the auto-injection isn't part of your workflow, you can still manually
+If the auto-injection is not part of your workflow, you can still manually
 upgrade your meshed services by re-injecting your applications in-place.
 
 Begin by retrieving your YAML resources via `kubectl`, and pass them through the
