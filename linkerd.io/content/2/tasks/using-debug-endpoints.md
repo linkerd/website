@@ -38,8 +38,8 @@ example, issue a command like so:
 kubectl -n linkerd get po linkerd-identity-8ccbfc5d6-css2v -o=jsonpath='{.spec.containers[*].ports[?(@.name=="admin-http")].containerPort}'
 ```
 
-Then port-forward that port to access it from outside the cluster (in this
-example the port is 9990):
+Then use the `kubectl port-forward` command to access that port from outside
+the cluster (in this example the port is 9990):
 
 ```bash
 kubectl -n linkerd port-forward linkerd-identity-8ccbfc5d6-css2v 9990
