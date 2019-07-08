@@ -1,6 +1,5 @@
 +++
 date = "2019-07-08T00:00:00-07:00"
-draft = true
 title = "KubeCon NA Talk Abstracts Due Friday, July 12"
 
 +++
