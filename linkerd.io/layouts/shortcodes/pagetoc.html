@@ -1,7 +1,7 @@
-{{ $headers := findRE "#{1,6} (.*)" .Page.RawContent }}
+{{ $headers := findRE "\n## (.*)" .Page.RawContent }}
 <ul>
   {{ range $headers }}
-    {{ $header := replaceRE "#{1,6} " "" .}}
+    {{ $header := replaceRE "\n## " "" .}}
     <li>
       <a href="#{{ $header | lower }}">{{ $header }}</a>
     </li>

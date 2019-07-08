@@ -9,4 +9,5 @@ IgnoreURLs:
   - https://sched.co/*
   - https://marketplace.visualstudio.com/items*
   - https://www.xfinity.com/
+  - https://monkey.org/*
 DirectoryPath: public
