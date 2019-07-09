@@ -190,19 +190,19 @@
     Introspect Linkerd's service discovery state.
 
     This command provides debug information about the internal state of the
-    control-plane's destination container. Note that this cache of service discovery
-    information is populated on-demand via linkerd-proxy requests. This command
-    will return "No endpoints found." until a linkerd-proxy begins routing
-    requests.
+    control-plane's destination container. It queries the same Destination service
+    endpoint as the linkerd-proxy's, and returns the addresses associated with that
+    destination.
   Example: |2-
-      # get all endpoints
-      linkerd endpoints
+      # get all endpoints for the authorities emoji-svc.emojivoto.svc.cluster.local:8080 and web-svc.emojivoto.svc.cluster.local:80
+      linkerd endpoints emoji-svc.emojivoto.svc.cluster.local:8080 web-svc.emojivoto.svc.cluster.local:80
 
-      # get endpoints in the emojivoto namespace
-      linkerd endpoints -n emojivoto
+      # get that same information in json format
+      linkerd endpoints -o json emoji-svc.emojivoto.svc.cluster.local:8080 web-svc.emojivoto.svc.cluster.local:80
 
-      # get all endpoints in json
-      linkerd endpoints -o json
+      # get the endpoints for authorities in Linkerd's control-plane itself
+      linkerd endpoints linkerd-controller-api.linkerd.svc.cluster.local:8085
+      linkerd endpoints linkerd-web.linkerd.svc.cluster.local:8084
   InheritedOptions: null
   Name: endpoints
   Options:
@@ -210,11 +210,6 @@
     Name: help
     Shorthand: h
     Usage: help for endpoints
-  - DefaultValue: ""
-    Name: namespace
-    Shorthand: "n"
-    Usage: |
-      Namespace of the specified endpoints (default: all namespaces)
   - DefaultValue: ""
     Name: output
     Shorthand: o
@@ -457,7 +452,7 @@
     Name: ha
     Shorthand: ""
     Usage: |
-      Experimental: Enable HA deployment config for the control plane (default false)
+      Enable HA deployment config for the control plane (default false)
   - DefaultValue: ""
     Name: help
     Shorthand: h
@@ -635,7 +630,7 @@
     Name: ha
     Shorthand: ""
     Usage: |
-      Experimental: Enable HA deployment config for the control plane (default false)
+      Enable HA deployment config for the control plane (default false)
   - DefaultValue: ""
     Name: help
     Shorthand: h
@@ -1410,7 +1405,7 @@
     Name: ha
     Shorthand: ""
     Usage: |
-      Experimental: Enable HA deployment config for the control plane (default false)
+      Enable HA deployment config for the control plane (default false)
   - DefaultValue: ""
     Name: help
     Shorthand: h
@@ -1569,7 +1564,7 @@
     Name: ha
     Shorthand: ""
     Usage: |
-      Experimental: Enable HA deployment config for the control plane (default false)
+      Enable HA deployment config for the control plane (default false)
   - DefaultValue: ""
     Name: help
     Shorthand: h
