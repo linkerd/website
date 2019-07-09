@@ -1,5 +1,5 @@
 +++
-title = "Experimental: High Availability"
+title = "High Availability"
 description = "Linkerd can be configured to run its control plane in High Availability (HA) mode."
 weight = 11
 aliases = [
@@ -8,9 +8,6 @@ aliases = [
 +++
 
 Linkerd can be ran in High Availability or HA mode.
-
-This feature is **experimental** and it's only available in the
-[_edge_ release](/2/edge/).
 
 Here's a short description of what `--ha` does to the `linkerd` install.
 
