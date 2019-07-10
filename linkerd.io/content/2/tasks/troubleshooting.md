@@ -89,6 +89,24 @@ For more information, see the Kubernetes documentation on
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
 and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 
+### √ has NET_RAW capability {#pre-k8s-cluster-net-raw}
+
+Example failure:
+
+```bash
+× has NET_RAW capability
+    found 3 PodSecurityPolicies, but none provide NET_RAW
+    see https://linkerd.io/checks/#pre-k8s-cluster-net-raw for hints
+```
+
+Linkerd installation requires the `NET_RAW` Kubernetes capability, to allow for
+modification of iptables.
+
+For more information, see the Kubernetes documentation on
+[Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
+[Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
+and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+
 ## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
 
 These checks only run when the `--pre` flag is set. This flag is intended for
