@@ -7,6 +7,8 @@ aliases = [
 ]
 +++
 
-While Linkerd does not handle ingress itself, it does work alongside your
-ingress controller of choice. Check out the [guide](/2/tasks/using-ingress/)
-for more details on how to get it all working together.
+For reasons of simplicity, Linkerd does not provide its own ingress controller.
+Instead, Linkerd is designed to work alongside your ingress controller of choice.
+
+See the [Using Ingress with Linkerd Guide](/2/tasks/using-ingress/) for examples
+of how to get it all working together.
