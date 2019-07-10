@@ -5,9 +5,8 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: document
-  path: data/authors.json
+  path: linkerd.io/data/authors.json
   label: Authors
-  match: "**/*"
 - type: directory
   path: linkerd.io/content
   label: Pages
