@@ -2,16 +2,15 @@
 slug: 'a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not'
 title: "A Service Mesh for Kubernetes, Part II: Pods are great until they're not"
 aliases:
+  - /2016/10/14/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not-2/
   - /2016/10/14/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not-3/
   - /2016/10/14/a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not-4/
+  - /2016/06/17/squeezing-blood-from-a-stone-small-memory-jvm-techniques-for-microservice-sidecars/
 author: 'alex'
 thumbnail: /uploads/kubernetes2_featured_Twitter_ratio.png
 date: Fri, 14 Oct 2016 22:55:04 +0000
 draft: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
-aliases: [
-  "/2016/06/17/squeezing-blood-from-a-stone-small-memory-jvm-techniques-for-microservice-sidecars/"
-]
 ---
 
 In our recent post about linkerd on Kubernetes, [A Service Mesh for Kubernetes, Part I: Top-line Service Metrics][part-i], observant readers noticed that linkerd was installed using DaemonSets rather than as a sidecar process. In this post, we’ll explain why (and how!) we do this.
