@@ -12,7 +12,7 @@ Automating canary releases requires more than just the ability to direct traffic
 between two backend applications versions. Observability is critical,
 understanding success rate and latency is required to remove human testing from
 the process. Linkerd enables this functionality by providing rich
-[telemetry](/2/features/telemetry) and implementing the
+[telemetry](/2/features/telemetry/) and implementing the
 [TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
 specification.
 
