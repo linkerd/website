@@ -1,6 +1,6 @@
 {{ range where site.Data.cli "Name" (.Get 0) }}
 {{ if .Example }}
-<h1>Examples</h1>
+<h2>Examples</h2>
 <pre class="language-bash"><code class="language-bash">{{ replaceRE "(?m)^[ ]{2}" "" .Example }}</code></pre>
 {{ end }}
 {{ end }}
