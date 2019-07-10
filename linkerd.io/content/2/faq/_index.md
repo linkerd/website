@@ -94,6 +94,30 @@ The public [Linkerd Meetup
 slides](https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit)
 also provides a coarse-grained roadmap.
 
+## How secure is Linkerd?
+
+Very secure. A [third party security audit of Linkerd
+2.x](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf) was
+completed in June 2019, and Linkerd passed with flying colors.
+
+## How fast is Linkerd?
+
+Very fast. A [third party performance evaluation of Linkerd vs
+Istio](https://linkerd.io/2019/05/18/linkerd-benchmarks/) was performed in May
+of 2019, and showed that Linkerd significantly outperformed Istio.
+
+## How do I use Linkerd to route traffic between services?
+
+(2.x) Linkerd doesn't change the way routing works. You address other services just
+as you would without Linkerd, e.g. `service-name.namespace.svc.cluster.local`,
+or `service-name` if within the same namespace.
+
+## How does Linkerd handle ingress?
+
+(2.x) For reasons of simplicity, Linkerd doesn't provide ingress itself, but
+instead [works in conjunction with the ingress
+controller](https://linkerd.io/2/features/ingress/) of your choice.
+
 ## What happens to Linkerd's proxies if the control plane is down?
 
 Linkerd's proxies do not integrate with Kubernetes directly, but rely on the
