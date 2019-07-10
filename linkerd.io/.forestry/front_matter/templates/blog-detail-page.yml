@@ -1,5 +1,5 @@
 ---
-label: Blog
+label: Blogpost
 hide_body: false
 fields:
 - type: text
@@ -15,13 +15,16 @@ fields:
   config:
     source:
       type: documents
-      file: data/authors.json
+      file: linkerd.io/data/authors.json
+      section: authors
   label: Author
 - type: datetime
   label: Date
   name: date
   config:
     time_format: " "
+    date_format: MM/DD/YYYY
+    export_format: YYYY-MM-DD
 - type: file
   name: thumbnail
   label: Thumbnail
