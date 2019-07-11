@@ -10,7 +10,12 @@
 <meta property="og:description" content="{{ partial "description.html" . }}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://linkerd.io" />
-<meta property="og:image" content="https://linkerd.io/images/logo-only-200h.png" />
+
+{{ if .Params.thumbnail }}
+  <meta property="og:image" content="{{ .Params.thumbnail }}" />
+{{ else }}
+  <meta property="og:image" content="https://linkerd.io/images/logo-only-200h.png" />
+{{ end }}
 
 {{ with .Permalink }}
 <link rel="canonical" href="{{ . }}" />
