@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://linkerd.io" />
 
 {{ if .Params.thumbnail }}
-  <meta property="og:image" content="{{ .Params.thumbnail }}" />
+  <meta property="og:image" content="{{ .Params.thumbnail | absURL | safeHTMLAttr }}" />
 {{ else }}
   <meta property="og:image" content="https://linkerd.io/images/logo-only-200h.png" />
 {{ end }}
