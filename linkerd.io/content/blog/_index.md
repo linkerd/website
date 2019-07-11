@@ -7,8 +7,8 @@ tags:
 - Tutorials &amp; How-To's
 - Video
 items:
-- blog/tgikubernetesepisode051.md
-- blog/real-world-microservices-when-services-stop-playing-well-and-start-getting-real.md
+- blog/announcing-linkerd-2-4.md
+- blog/kubecon-eu-2019-linkerd-roundup.md
 description: ''
 keywords: []
 
