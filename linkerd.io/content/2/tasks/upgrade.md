@@ -20,11 +20,11 @@ incrementally without taking down any of your services.
 
 This release supports Kubernetes 1.12+.
 
-### Upgrading from stable-2.3.x, edge-19.4.5, edge-19.5.x, edge-19.6.x, edge-19.7.1
+### Upgrading from stable-2.3.x, edge-19.4.5, edge-19.5.x, edge-19.6.x, edge-19.7.x
 
 Use the `linkerd upgrade` command to upgrade the control plane. This command
-ensures that all existing control plane's configuration and mTLS secrets are
-retained.
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained.
 
 ```bash
 # get the latest stable CLI
@@ -48,7 +48,7 @@ The `sideEffects` field is added to the Linkerd webhook configurations to
 indicate that the webhooks have no side effects on other resources.
 
 For HA setup, the `linkerd upgrade` command will also retain all previous HA
-configuration. Note that the mutating and validating webhook configuration are
+configuration. Note that the mutating and validating webhook configurations are
 updated to set their `failurePolicy` fields to `fail` to ensure that un-injected
 workloads (as a result of unexpected errors) are rejected during the admission
 process. The HA mode has also been updated to schedule multiple replicas of the
@@ -71,7 +71,7 @@ kubectl delete clusterrole/linkerd-linkerd-tap
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2/tasks/upgrade/#upgading-a-multi-stage-install).
+[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
@@ -104,7 +104,7 @@ When ready, proceed to upgrading the data plane by following the instructions at
 
 Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-2-2-x-1)
 to upgrade the control plane to the stable-2.3.2 release first. Then follow
-[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-4-5-edge-19-5-x-edge-19-6-x-edge-19-7-1)
+[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-4-5-edge-19-5-x-edge-19-6-x-edge-19-7-x)
 to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
 
 ## Upgrade notice: stable-2.3.0
@@ -139,7 +139,7 @@ linkerd upgrade | kubectl apply -f -
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
 
-#### Upgading a multi-stage install
+#### Upgrading a multi-stage install
 
 `edge-19.4.5` introduced a
 [Multi-stage install](/2/tasks/install/#multi-stage-install) feature. If you
@@ -392,15 +392,15 @@ kubectl -n <namespace> rollout restart deploy
 As the pods are being re-created, the proxy injector will auto-inject the new
 version of the proxy into the pods.
 
-If the auto-injection is not part of your workflow, you can still manually
-upgrade your meshed services by re-injecting your applications in-place.
+If auto-injection is not part of your workflow, you can still manually upgrade
+your meshed services by re-injecting your applications in-place.
 
 Begin by retrieving your YAML resources via `kubectl`, and pass them through the
 `linkerd inject` command. This will update the pod spec with the
 `linkerd.io/inject: enabled` annotation. This annotation will be picked up by
-the Linkerd's proxy injector during the admission phase where the Linkerd proxy
-will be injected into the workload. By using `kubectl apply`, Kubernetes will do
-a rolling deploy of your service and update the running pods to the latest
+Linkerd's proxy injector during the admission phase where the Linkerd proxy will
+be injected into the workload. By using `kubectl apply`, Kubernetes will do a
+rolling deploy of your service and update the running pods to the latest
 version.
 
 Example command to upgrade an application in the `emojivoto` namespace, composed

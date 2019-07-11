@@ -1,6 +1,6 @@
 +++
 title = "Using Debugging Endpoints"
-description = "Using debugging endpoints in the control plane components."
+description = "Use debugging endpoints provided by the control plane components."
 +++
 
 All of the control plane components (with the exception of Grafana) expose

@@ -150,8 +150,9 @@ linkerd dashboard &
 
 This command sets up a port forward from your local system to the
 [linkerd-web](/2/reference/architecture/#web) pod. Instead of running
-`linkerd dashboard` every time you'd like to see the dashboard, it is possible
-to [expose](/2/tasks/exposing-dashboard/) for anyone to access.
+`linkerd dashboard` every time you'd like to see the dashboard, it's also
+possible to [expose the dashboard](/2/tasks/exposing-dashboard/) for anyone to
+access.
 
 Because the control plane components all have the proxy installed in their pods,
 each component is also part of the data plane itself. This provides the ability
@@ -186,8 +187,8 @@ locally to port 8080, you can run:
 kubectl -n emojivoto port-forward svc/web-svc 8080:80
 ```
 
-Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto app
-in all its glory.
+Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto
+app in all its glory.
 
 Clicking around, you might notice that some parts of the application are
 broken! For example, if you click on a doughnut emoji, you'll get a 404 page. Don't
@@ -206,10 +207,10 @@ kubectl get -n emojivoto deploy -o yaml \
 This command retrieves all of the deployments running in the `emojivoto`
 namespace, runs the set of Kubernetes resources through `inject`, and finally
 reapplies it to the cluster. The `inject` command adds annotations to the pod
-spec. These annotations instruct
+spec. These annotations instruct the
 [linkerd-proxy-injector](/2/reference/architecture/#proxy-injector) to
 automatically augment the resources. The data plane's proxy is added as a
-container to the pod spec along with
+container to the pod spec, along with
 [linkerd-init](/2/reference/architecture/#data-plane) as an
 `initContainer`.
 
