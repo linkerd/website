@@ -50,7 +50,7 @@ including:
 - A fresh security audit from [Cure53](https://cure53.de/), passed with flying
   colors
 - And much, much more--read the full [Linkerd 2.4 Release
-  Notes](https://github.com/linkerd/linkerd2/blob/master/stable-2.4.0.md) for
+  Notes](https://github.com/linkerd/linkerd2/blob/master/CHANGES.md#stable-240) for
 details!
 
 Linkerd 2.4 is our third major release of 2019. Earlier this year, [Linkerd
