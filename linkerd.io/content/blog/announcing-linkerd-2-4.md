@@ -15,7 +15,7 @@ Today we're happy to announce the release of [Linkerd
 release adds **traffic splitting** and **Service Mesh Interface (SMI)
 support**, graduates high-availability support out of experimental status, and
 includes a tremendous list of other improvements, performance enhancements, and
-bug fixes. 
+bug fixes.
 
 (And did I mention Linkerd recently [passed its third party security
 audit](https://twitter.com/wm/status/1144746496807428096) with flying colors?)
@@ -72,7 +72,7 @@ Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
 features in action. Either way, you can download the stable 2.4 release by
 running:
 
-```
+```bash
     curl https://run.linkerd.io/install | sh
 ```
 
