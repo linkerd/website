@@ -1,6 +1,6 @@
 +++
 title = "Using the Debug Container"
-description = "Inject the debug container to capture network packets"
+description = "Inject the debug container to capture network packets."
 +++
 
 In cases where you need network-level visibility into packets entering and
@@ -16,7 +16,8 @@ pod share the same network namespace. You can also use `kubectl exec` to access
 the `debug` container to run other pre-installed tools like `tcpdump`, `lsof`
 and `iproute2`, or install additional tools in the container.
 
-E.g., to deploy the emojivoto application with the `debug` container, run:
+For instance, to deploy the emojivoto application with the `debug` container,
+run:
 
 ```bash
 linkerd inject --enable-debug-sidecar https://run.linkerd.io/emojivoto.yml | kubectl apply -f -

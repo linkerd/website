@@ -60,23 +60,24 @@ You can see what Prometheus is collecting by running `linkerd metrics`.
 
 ### Proxy Injector
 
-An [admission controller][admission-controller] which receives a webhook request
-every time a pod is created. The injector looks for an annotation
-(`linkerd.io/inject: enabled`). When that annotation exists, the injector
-mutates the pod's specification and adds both an `initContainer` as well as a
-sidecar containing the proxy itself.
+The injector is an [admission controller][admission-controller], which receives
+a webhook request every time a pod is created. This injector inspects resources
+for a Linkerd-specific annotation (`linkerd.io/inject: enabled`). When that
+annotation exists, the injector mutates the pod's specification and adds both an
+`initContainer` as well as a sidecar containing the proxy itself.
 
 ### Service Profile Validator
 
-Also an [admission controller][admission-controller], validates new [service
-profiles](/2/reference/service-profiles/) before they are
+The validator is also an [admission controller][admission-controller], which
+validates new [service profiles](/2/reference/service-profiles/) before they are
 saved.
 
 ### Tap
 
-Receives requests from the CLI and dashboard to watch requests and responses in
-real time. Sets streams up to watch these requests and responses in specific
-proxies associated with the requested applications.
+The tap deployment receives requests from the CLI and dashboard to watch
+requests and responses in real time. It establishes stream to watch these
+requests and responses in specific proxies associated with the requested
+applications.
 
 ### Web
 
@@ -110,8 +111,8 @@ The dashboards that are provided out of the box include:
 
 ### Prometheus
 
-Prometheus is a cloud native monitoring solution that is used to collect
-and store all the Linkerd metrics. It is installed as part of the control plane
+Prometheus is a cloud native monitoring solution that is used to collect and
+store all of the Linkerd metrics. It is installed as part of the control plane
 and provides the data used by the CLI, dashboard and Grafana.
 
 The proxy exposes a `/metrics` endpoint for Prometheus to scrape on port 4191.

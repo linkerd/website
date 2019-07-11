@@ -129,7 +129,7 @@ linkerd check config
 
 ### Stage 2: control-plane
 
-Following successfuly installation of the `config` stage, the service owner may
+Following successful installation of the `config` stage, the service owner may
 install the `control-plane` with:
 
 ```bash

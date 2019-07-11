@@ -1,6 +1,6 @@
 +++
 title = "Using PSP"
-description = "Using Linkerd with pod security policy"
+description = "Use Linkerd with a pod security policy enabled."
 +++
 
 The Linkerd control plane comes with its own minimally privileged
@@ -25,8 +25,7 @@ these capabilities to the Pod Security Policy doesn't make the container a
 container. The control plane's Pod Security Policy prevents container privilege
 escalation with the `allowPrivilegeEscalation: false` policy. To understand the
 full implication of the `NET_ADMIN` and `NET_RAW` capabilities, refer to the
-Linux capabilities [manual](http://man7.org/linux/man-pages/man7/capabilities.7.html)
-.
+Linux capabilities [manual](http://man7.org/linux/man-pages/man7/capabilities.7.html).
 
 More information on the `iptables` rules used by the `proxy-init` init
 container can be found on the [Architecture](/2/reference/architecture/#linkerd-init)
