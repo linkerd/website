@@ -99,6 +99,9 @@ If everything was successful, you'll see:
 helloworld linkerd-proxy
 ```
 
+You can further configure the injected `linkerd-proxy` container
+with [additional annotations](/2/reference/proxy-configuration/).
+
 It's also possible to explicitly configure auto-injection for all pods in a
 deployment, even if that deployment is running in a namespace that has not been
 configured for auto-inject. To do this, add the `linkerd.io/inject: enabled`
