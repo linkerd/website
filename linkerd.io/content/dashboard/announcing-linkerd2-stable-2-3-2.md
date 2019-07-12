@@ -1,6 +1,5 @@
 +++
 date = "2019-07-11T15:29:04-07:00"
-draft = true
 title = "Announcing Linkerd2 stable-2.4"
 
 +++
