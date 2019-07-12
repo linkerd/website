@@ -17,5 +17,3 @@ fields:
   config:
     required: true
   label: Title
-pages:
-- linkerd.io/content/dashboard/test.md
