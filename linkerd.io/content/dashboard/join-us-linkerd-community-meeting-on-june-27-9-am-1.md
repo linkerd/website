@@ -1,6 +1,5 @@
 +++
 date = "2019-07-12T11:22:10-07:00"
-draft = true
 title = "Join us: Linkerd community meeting on July 31, 9 am"
 
 +++
