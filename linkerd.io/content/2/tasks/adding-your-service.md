@@ -1,43 +1,80 @@
 +++
 title = "Adding Your Service"
-description = "Add your service to the mesh by injecting it."
+description = "Add your service to the mesh by marking it for data plane proxy injection."
 aliases = [
   "/2/adding-your-service/"
 ]
 +++
 
-In order for your service to take advantage of Linkerd, it needs to have the
-proxy sidecar added to its resource definition. This is done by using the
-Linkerd [CLI](/2/reference/architecture/#cli) to update the definition
-and output YAML that can be passed to `kubectl`. By using Kubernetes' rolling
-updates, the availability of your application will not be affected.
+In order for your services to take advantage of Linkerd, they need to have
+Linkerd's data plane proxy added to their pods. This is typically done by
+annotating the namespace, deployment, or pod with the `linkerd/inject: true`
+Kubernetes annotation, which will trigger *automatic proxy injection* when the
+resources are created. (See the [proxy injection
+page](/2/features/proxy-injection.md) for more on how this works.)
 
-To add Linkerd to your service, run:
+For convenience, Linkerd provides a [`linkerd
+inject`](/2/reference/cli/inject/) text transform command will add this
+annotation to a given Kubernetes manifest. Of course, these annotations can be
+set by other mechanisms.
+
+(Note that simply adding the annotation will not automatically inject the data
+plane proxy into pods that are already running. You will need to update the
+pods to trigger injection. With a [rolling
+update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/),
+the proxy often can be added to a live service without interruption.)
+
+## Example
+
+To add the data plane proxies to a service defined in a Kubernetes manifest,
+you can use `linkerd inject` to add the annotations before applying the manifest
+to Kubernetes:
 
 ```bash
-linkerd inject deployment.yml \
-  | kubectl apply -f -
+cat deployment.yml | linkerd inject - | kubectl apply -f -
 ```
 
-`deployment.yml` is the Kubernetes config file containing your
-application. This will add the proxy sidecar along with an `initContainer` that
-configures iptables to pass all traffic through the proxy. By applying this new
-configuration via `kubectl`, a rolling update of your deployment will be
-triggered replacing each pod with a new one.
+This example transforms the `deployment.yml` file to add injection annotations
+in the correct places, then applies it to the cluster.
 
-You will know that your service has been successfully added to the service mesh
-if it's pods are reported to be meshed in the Meshed column of the Linkerd
-dashboard.
+## Verifying the data plane pods have been injected
+
+Once your services have been added to the mesh, you will be able to query
+Linkerd for traffic metrics about them, e.g. by using [`linkerd
+stat`](/2/reference/cli/stat/):
+
+```bash
+linkerd stat deployments -n MYNAMESPACE
+```
+
+Note that it may take several seconds for these metrics to appear once the data
+plane proxies have been injected.
+
+Alternatively, you can query Kubernetes for the list of containers in the pods,
+and ensure that the proxy is listed:
+
+```bash
+kubectl -n MYNAMESPACE get po -o jsonpath='{.items[0].spec.containers[*].name}'
+```
+
+If everything was successful, you'll see `linkerd-proxy` in the output, e.g.:
+
+```bash
+MYCONTAINER linkerd-proxy
+```
+
+Finally, you can verify that everything is working by verifying that the
+corresponding resources are reported to be meshed in the "Meshed" column of the
+[Linkerd dashboard](/2/features/dashboard).
 
 {{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
 
-You can always get to the Linkerd dashboard by running:
-
-```bash
-linkerd dashboard
-```
-
-## Inject Reference
+## More reading
 
 For more information on how the inject command works and all of the parameters
-that can be set, look at the [reference](/2/reference/cli/inject/).
+that can be set, see the [`linkerd inject` reference
+page](/2/reference/cli/inject/).
+
+For details on how autoinjection works, see the the [proxy injection
+page](/2/features/proxy-injection.md).
+

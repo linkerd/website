@@ -7,25 +7,30 @@ aliases = [
 ]
 +++
 
-Linkerd will automatically inject the data plane proxy into pods when the
+Linkerd automatically adds the data plane proxy to pods when the
 `linkerd.io/inject: enabled` annotation is present on a namespace, deployment,
-or pod.
+or pod. This is known as "proxy injection".
 
-For convenience, the [`linkerd inject`](/2/reference/cli/inject/) text
-transform command will add this annotation to a given Kubernetes manifest.
+(The behavior of this feature has changed over Linkerd releases. This document
+describes the behavior as of Linkerd 2.4 and beyond.)
+
+See [Adding Your Service](/2/tasks/adding-your-service) for a walkthrough of
+how to use this feature in practice.
 
 ## Details
 
 Proxy injection is implemented as a [Kubernetes admission
-webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks). There are a couple things to note about this feature:
+webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks).
+This means that the proxies are added by the Kubernetes cluster itself,
+regardless of whether the pods are created by `kubectl`, a CI/CD system, or any
+other source.
 
-* Simply adding the annotation on a namespace will not automatically update all
-  the resources. You will need to update the resources in this namespace (e.g.
-  with `kubectl apply`, `kubectl edit`, etc.) for them to be injected. This is because
-  Kubernetes will not call the mutating webhook until it sees an update on each
-  individual resource.
-* The behavior of this feature has changed over Linkerd releases. This document
-  describes the behavior as of Linkerd 2.4 and beyond.
+Note that simply adding the annotation on a namespace will not automatically
+update all the resources. You will need to update the resources in this
+namespace (e.g.  with `kubectl apply`, `kubectl edit`, etc.) for them to be
+injected. This is because Kubernetes will not call the webhook until it sees an
+update on each individual resource.
+
 
 For each pod, two containers are injected:
 
@@ -35,49 +40,12 @@ For each pod, two containers are injected:
    outgoing TCP traffic through the proxy. (Note that this container is not
    present if the [Linkerd CNI Plugin](/2/features/cni/) has been enabled.)
 
-1. `linkerd-proxy`, the Linkerd data plane proxy.
+1. `linkerd-proxy`, the Linkerd data plane proxy itself.
 
 ## Overriding injection
 
 Automatic injection can be disabled for a pod or deployment for which it would
 otherwise be enabled, by adding the `linkerd.io/inject: disabled` annotation.
-
-## Example
-
-To add automatic proxy injection for all pods in the `sample-inject-enabled-ns`
-namespace, add the `linkerd.io/inject: enabled` annotation to the namespace as
-follows:
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sample-inject-enabled-ns
-  annotations:
-    linkerd.io/inject: enabled
-```
-
-After applying that namespace configuration to your cluster, you can test
-automatic proxy injection by creating a new deployment in that namespace, by
-running:
-
-```bash
-kubectl -n sample-inject-enabled-ns run helloworld --image=buoyantio/helloworld
-```
-
-Verify that the deployment's pod includes a `linkerd-proxy` container by
-running:
-
-```bash
-kubectl -n sample-inject-enabled-ns get po -l run=helloworld \
-  -o jsonpath='{.items[0].spec.containers[*].name}'
-```
-
-If everything was successful, you'll see:
-
-```bash
-helloworld linkerd-proxy
-```
 
 ## Manual injection
 
