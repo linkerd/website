@@ -3,9 +3,9 @@ title = "Demo: Books"
 description = "Try out some of Linkerd's features, such as per-route metrics with a demo application."
 +++
 
-This is a Ruby application that helps you manage your bookshelf. It consists of
-multiple microservices and uses JSON over HTTP to communicate with the other
-services. There are three services:
+This demo is of a Ruby application that helps you manage your bookshelf. It
+consists of multiple microservices and uses JSON over HTTP to communicate with
+the other services. There are three services:
 
 - [webapp](https://github.com/BuoyantIO/booksapp/blob/master/webapp.rb): the
   frontend
@@ -23,9 +23,9 @@ topology looks like this:
 
 ## Prerequisites
 
-To complete this guide, you'll need to have installed
-Linkerd on your cluster. Follow the [installing](/2/tasks/install/) guide to get
-that setup if you've not already.
+To use this guide, you'll need to have Linkerd installed on your cluster.
+Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't already
+done this.
 
 ## Install the app
 
@@ -39,13 +39,13 @@ kubectl create ns booksapp && \
 ```
 
 This command creates a namespace for the demo, downloads its Kubernetes
-resource manifest and uses `kubectl` to apply it to your cluster. The
-app is comprised of Kubernetes deployments and services that run in the
-`booksapp` namespace.
+resource manifest and uses `kubectl` to apply it to your cluster. The app
+comprises the Kubernetes deployments and services that run in the `booksapp`
+namespace.
 
 Downloading a bunch of containers for the first time takes a little while.
-Kubernetes can tell you when all the services are running and ready for traffic.
-Wait for that to happen by running:
+Kubernetes can tell you when all the services are running and ready for
+traffic. Wait for that to happen by running:
 
 ```bash
 kubectl -n booksapp rollout status deploy webapp
@@ -58,8 +58,8 @@ cluster by running:
 kubectl -n booksapp get all
 ```
 
-Once the rollout has completed successfully, you can get access to the app
-itself by port-forwarding `webapp` locally:
+Once the rollout has completed successfully, you can access the app itself by
+port-forwarding `webapp` locally:
 
 ```bash
 kubectl -n booksapp port-forward svc/webapp 7000 &
@@ -70,19 +70,19 @@ frontend.
 
 {{< fig src="/images/books/frontend.png" title="Frontend" >}}
 
-As you can imagine, there is an error in the app. If you click "Add Book", it
-will fail 50% of the time. This is a classic case of non-obvious, intermittent
-failure – the type that drives service owners mad because it is so difficult to
-debug. Because Kubernetes is interested in keeping processes running, it will
-show you that everything is running. It looks like everything’s fine, but you
-know the application is returning errors.
+Unfortunately, there is an error in the app: if you click *Add Book*, it will
+fail 50% of the time. This is a classic case of non-obvious, intermittent
+failure---the type that drives service owners mad because it is so difficult to
+debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
+perspective, it looks like everything's fine, but you know the application is
+returning errors.
 
 {{< fig src="/images/books/failure.png" title="Failure" >}}
 
-## Add Linkerd
+## Add Linkerd to the service
 
-There are a couple of ways to add Linkerd to our service. For demo purposes,
-the easiest is to do something like this:
+Now we need to add the Linkerd data plane proxies to the service. The easiest
+option is to do something like this:
 
 ```bash
 kubectl get -n booksapp deploy -o yaml \
@@ -91,21 +91,13 @@ kubectl get -n booksapp deploy -o yaml \
 ```
 
 This command retrieves the manifest of all deployments in the `booksapp`
-namespace, runs the manifest through `linkerd inject`, and then re-applies with
-`kubectl apply`. The `inject` command adds two containers to each deployment's
-pod spec:
-
-- An `initContainer` that sets up `iptables` to forward all incoming and
-  outgoing traffic through Linkerd's proxy.
-- A `container` that runs the proxy.
-
-As with `install`, `inject` is a pure text operation. This means that you can
-inspect the input and output before you use it. As these are deployments,
-Kubernetes will slowly update pods one at a time. There can be live traffic
-while Linkerd is added!
-
-If you're interested in a more automatic way to inject deployments, check out
-the [automating injection](/2/tasks/automating-injection/) documentation.
+namespace, runs them through `linkerd inject`, and then re-applies with
+`kubectl apply`. The `linkerd inject` command annotates each resource to
+specify that they should have the Linkerd data plane proxies added, and
+Kubernetes does this when the manifest is reapplied to the cluster. Best of
+all, since Kubernetes does a rolling deploy, the application stays running the
+entire time. (See [Automatic Proxy Injection](/2/features/proxy-injection/) for
+more details on how this works.)
 
 ## Debugging
 
