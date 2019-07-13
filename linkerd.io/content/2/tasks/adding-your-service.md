@@ -11,16 +11,17 @@ Linkerd's data plane proxy added to their pods. This is typically done by
 annotating the namespace, deployment, or pod with the `linkerd/inject: true`
 Kubernetes annotation, which will trigger *automatic proxy injection* when the
 resources are created. (See the [proxy injection
-page](/2/features/proxy-injection.md) for more on how this works.)
+page](/2/features/proxy-injection) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
 inject`](/2/reference/cli/inject/) text transform command will add this
 annotation to a given Kubernetes manifest. Of course, these annotations can be
 set by other mechanisms.
 
-(Note that simply adding the annotation will not automatically inject the data
-plane proxy into pods that are already running. You will need to update the
-pods to trigger injection. With a [rolling
+Note that simply adding the annotation to a resource with pre-existing pods
+will not automatically inject those pods. You will need to update the pods
+(e.g. with `kubectl rollout restart` etc.) for them to be injected.  With a
+[rolling
 update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/),
 the proxy often can be added to a live service without interruption.)
 
