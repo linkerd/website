@@ -77,4 +77,4 @@ that can be set, see the [`linkerd inject` reference
 page](/2/reference/cli/inject/).
 
 For details on how autoinjection works, see the the [proxy injection
-page](/2/features/proxy-injection.md).
+page](/2/features/proxy-injection/).
