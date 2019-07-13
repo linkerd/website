@@ -11,7 +11,7 @@ Linkerd's data plane proxy added to their pods. This is typically done by
 annotating the namespace, deployment, or pod with the `linkerd/inject: true`
 Kubernetes annotation, which will trigger *automatic proxy injection* when the
 resources are created. (See the [proxy injection
-page](/2/features/proxy-injection) for more on how this works.)
+page](/2/features/proxy-injection/) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
 inject`](/2/reference/cli/inject/) text transform command will add this
@@ -66,7 +66,7 @@ MYCONTAINER linkerd-proxy
 
 Finally, you can verify that everything is working by verifying that the
 corresponding resources are reported to be meshed in the "Meshed" column of the
-[Linkerd dashboard](/2/features/dashboard).
+[Linkerd dashboard](/2/features/dashboard/).
 
 {{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
 

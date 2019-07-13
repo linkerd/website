@@ -16,7 +16,7 @@ Linkerd automatically adds the data plane proxy to pods when the
 `linkerd.io/inject: enabled` annotation is present on a namespace, deployment,
 or pod. This is known as "proxy injection".
 
-See [Adding Your Service](/2/tasks/adding-your-service) for a walkthrough of
+See [Adding Your Service](/2/tasks/adding-your-service/) for a walkthrough of
 how to use this feature in practice.
 
 ## Details
