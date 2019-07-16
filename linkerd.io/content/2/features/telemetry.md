@@ -33,6 +33,32 @@ This data can be consumed in several ways:
   [pre-built Grafana dashboards](/2/features/dashboard/#grafana).
 * Directly from Linkerd's built-in Prometheus instance
 
+## Golden metrics
+
+### Success Rate
+
+This is the percentage of successful requests during a time window (1 minute by
+default).
+
+In the output of the command `linkerd routes --o wide`, this metric is split
+into EFFECTIVE_SUCCESS and ACTUAL_SUCCESS. For routes configured with retries,
+the former calculates the percentage of success after retries (as perceived by
+the client-side), and the latter before retries (which can expose potential
+problems with the service).
+
+### Traffic (Requests Per Second)
+
+This gives an overview of how much demand is placed on the service/route. As
+with success rates, `linkerd routes --o wide` splits this metric into
+EFFECTIVE_RPS and ACTUAL_RPS, corresponding to rates after and before retries
+respectively.
+
+### Latencies
+
+Times taken to service requests per service/route are split into 50th, 95th and
+99th percentiles. Lower percentiles give you an overview of the average
+performance of the system, while tail percentiles help catch outlier behavior.
+
 ## Lifespan of Linkerd metrics
 
 Linkerd is not designed as a long-term historical metrics store.  While
