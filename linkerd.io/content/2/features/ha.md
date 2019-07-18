@@ -1,33 +1,53 @@
 +++
 title = "High Availability"
-description = "Linkerd can be configured to run its control plane in High Availability (HA) mode."
+description = "The Linkerd control plane can run in high availability (HA) mode."
 weight = 11
 aliases = [
   "/2/ha/"
 ]
 +++
 
-Linkerd can be ran in High Availability or HA mode.
+For production workloads, Linkerd's control plane can run in high availability
+(HA) mode. This mode:
 
-Here's a short description of what `--ha` does to the `linkerd` install.
+* Runs three replicas of critical control plane components.
+* Sets production-ready CPU and memory resource requests on control plane
+  components.
+* Sets production-ready CPU and memory resource requests on data plane proxies
+* *Requires* that the [proxy auto-injector](/2/features/proxy-injection/) be
+  functional for any pods to be scheduled.
+* (In future releases) Sets [anti-affinity
+  policies](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
+  on critical control plane components to ensure that they are scheduled on separate
+  nodes, and, if possible, in separate zones.
 
-* Defaults the controller replicas to `3`
-* Set's sane `cpu` + `memory` requests to the linkerd control plane components.
-* Defaults to a sensible requests for the sidecar containers for the control
-  plane + [_auto proxy injection_](/2/features/proxy-injection/).
+## Enabling HA
 
-## Setup
-
-Because it's the control plane that requires the `ha` config, you'll need to
-use the `install` command with the `ha` flag.
+You can enable HA mode at control plane installation time with the `--ha` flag:
 
 ```bash
 linkerd install --ha | kubectl apply -f
 ```
 
-You can also override the amount of controller replicas that you wish to run by
-passing in the `--controller-replicas` flag
+You can override certain aspects of the HA behavior at installation time by
+passing other flags to install. For example, you can override the number of
+replicas for critical components with the `--controller-replicas` flag:
 
 ```bash
 linkerd install --ha --controller-replicas=2 | kubectl apply -f
 ```
+
+See the full [`install` CLI documentation](/2/reference/cli/install/) for
+reference.
+
+## Critical components
+
+Replication (and in the future, anti-affinity) rules are applied to all control
+plane components except Prometheus, Grafana, and the web service, which are
+considered non-critical.
+
+## Caveats
+
+HA mode assumes that there are always at least three nodes in the Kubernetes
+cluster. If this assumption is violated (e.g. the cluster is scaled down to two
+or fewer nodes), then the system will likely be left in a non-functional state.
