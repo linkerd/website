@@ -61,7 +61,7 @@ Now we'll install the booksapp sample application:
 
 One of services in this application has been configured with an error rate. The
 whole point of this demo is to show that we can inject errors without needing
-any support for this in the application, so lets remove that configured error
+any support for this in the application, so let's remove that configured error
 rate:
 
 ```bash
