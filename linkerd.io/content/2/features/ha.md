@@ -29,17 +29,16 @@ You can enable HA mode at control plane installation time with the `--ha` flag:
 linkerd install --ha | kubectl apply -f
 ```
 
-You can override certain aspects of the HA behavior at installation time by passing
-other flags to 
-. For example,
-to 
-
-You can also override the amount of controller replicas that you wish to run by
-passing in the `--controller-replicas` flag
+You can override certain aspects of the HA behavior at installation time by
+passing other flags to install. For example, you can override the number of
+replicas for critical components with the `--controller-replicas` flag:
 
 ```bash
 linkerd install --ha --controller-replicas=2 | kubectl apply -f
 ```
+
+See the full [`install` CLI documentation](/2/reference/cli/install/) for
+reference.
 
 ## Critical components
 
