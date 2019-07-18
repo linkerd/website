@@ -10,7 +10,7 @@ underlying network? Sometimes, nothing beats looking at raw network data.
 In cases where you need network-level visibility into packets entering and
 leaving your application, Linkerd provides a *debug sidecar* with some helpful
 tooling. Similar to how [proxy sidecar
-injection]((/2/features/proxy-injection/) works, you can add a debug sidecar to
+injection](/2/features/proxy-injection/) works, you add a debug sidecar to
 a pod by setting the `config.linkerd.io/enable-debug-sidecar: true` annotation
 at pod creation time. For convenience, the `linkerd inject` command provides an
 `--enable-debug-sidecar` option that does this annotation for you.
@@ -19,19 +19,16 @@ at pod creation time. For convenience, the `linkerd inject` command provides an
 adding this annotation to a pre-existing pod will not work. It must be present
 at pod *creation* time.)
 
-The debug sidecar container image contains
-[`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html) container,
-with a default entrypoint that starts `tshark -i any`. Since all containers in
-a pod share the same network namespace, this means that the logs for this debug
-container will contain the network traffic observed in the pod, which can be
-easily consumed by `kubectl logs`. Alternatively, the container image also
-contains `tcpdump`, `lsof`, `iproute2`, and you can use `kubectl exec` to
-access the container and run these commands, or any other commands you may
-install.
+The debug sidecar image contains
+[`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html), `tcpdump`,
+`lsof`, and `iproute2`. Once installed, it starts automatically logging all
+incoming and outgoing traffic with `tshark`, which can then be viewed with
+`kubectl logs`. Alternatively, you can use `kubectl exec` to access the
+container and run commands directly.
 
 For instance, if you've gone through the [Linkerd Getting
 Started](https://linkerd.io/2/getting-started/) guide and installed the
-*emojivoto* application, and wish to debug the *voting* service, you
+*emojivoto* application, and wish to debug traffic to the *voting* service, you
 could run:
 
 ```bash
@@ -63,7 +60,9 @@ in the context of the network. For example, if you want to inspect the HTTP head
 of the requests, you could run something like this:
 
 ```bash
-user@local$ kubectl -n emojivoto exec -it voting-7cf4784dd8-qxjv4 -c linkerd-debug -- /bin/bash
+user@local$ kubectl -n emojivoto exec -it voting-7cf4784dd8-qxjv4 \
+  -c linkerd-debug -- /bin/bash
+root@voting-7cf4784dd8-qxjv4:/#
 root@voting-7cf4784dd8-qxjv4:/# tshark -i any -f "tcp" -V -Y "http.request"
 Running as user "root" and group "root". This could be dangerous.
 Capturing on 'any'
@@ -72,4 +71,5 @@ Capturing on 'any'
 ```
 
 Of course, this only works if you have the ability to `exec` into arbitrary
-containers in the Kubernetes cluster.
+containers in the Kubernetes cluster. See [`linkerd
+tap`](/2/reference/cli/tap/) for an alternative to this approach.
