@@ -25,8 +25,9 @@ with a default entrypoint that starts `tshark -i any`. Since all containers in
 a pod share the same network namespace, this means that the logs for this debug
 container will contain the network traffic observed in the pod, which can be
 easily consumed by `kubectl logs`. Alternatively, the container image also
-contains `tcpdump, `lsof`, `iproute2`, and you can use `kubectl exec` to access
-the container and run these commands, or any other commands you may install.
+contains `tcpdump`, `lsof`, `iproute2`, and you can use `kubectl exec` to
+access the container and run these commands, or any other commands you may
+install.
 
 For instance, if you've gone through the [Linkerd Getting
 Started](https://linkerd.io/2/getting-started/) guide and installed the
@@ -38,6 +39,7 @@ kubectl -n emojivoto get deploy/voting -o yaml \
   | linkerd inject --enable-debug-sidecar - \
   | kubectl apply -f -
 ```
+
 to deploy the debug sidecar container to all pods in the *voting* service.
 (Note that there's only one pod in this deployment, which will be recreated
 to do this--see the note about pod mutability above.)
@@ -71,4 +73,3 @@ Capturing on 'any'
 
 Of course, this only works if you have the ability to `exec` into arbitrary
 containers in the Kubernetes cluster.
-
