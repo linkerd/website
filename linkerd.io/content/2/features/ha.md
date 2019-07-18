@@ -51,4 +51,3 @@ considered non-critical.
 HA mode assumes that there are always at least three nodes in the Kubernetes
 cluster. If this assumption is violated (e.g. the cluster is scaled down to two
 or fewer nodes), then the system will likely be left in a non-functional state.
-
