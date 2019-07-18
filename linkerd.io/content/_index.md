@@ -1,23 +1,21 @@
 ---
 title: Homepage
-date: 2019-02-04 13:12:35 +0000
+date: 2019-02-04T13:12:35.000+00:00
 top_hero:
   title: Ultralight service mesh for Kubernetes and beyond
-  description: Linkerd is an ultralight service mesh for Kubernetes. It gives
-    you observability, reliability, and security without requiring any code
-    changes.
+  description: Linkerd is an ultralight service mesh for Kubernetes. It gives you
+    observability, reliability, and security without requiring any code changes.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
-    url: /2/getting-started/
+    url: "/2/getting-started/"
   - caption: Join the Community
-    url: /community/
+    url: "/community/"
   image_on_the_right: false
 announcement_banner:
   description: L5D2_STABLE_VERSION has been released! [Read the announcement >](2019/07/11/announcing-linkerd-2.4/)
-description: Linkerd is a service mesh for Kubernetes and beyond. It gives you
-  observability, reliability, and security without requiring any changes to your
-  code.
+description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability,
+  reliability, and security without requiring any changes to your code.
 keywords:
 - cloud native applications
 outputs:
@@ -26,7 +24,7 @@ tweets:
   title: Engineers Love Linkerd
   tweets:
   - '1091591745870139392'
-  - '1130464989834293249'
+  - '1151035350208454656'
   - '1141107658440753152'
   - '1130973416775983104'
   tweets_md: ''
@@ -60,7 +58,7 @@ features_list:
   buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title:
+companies_title: 
 companies:
 - image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
