@@ -19,17 +19,16 @@ at pod creation time. For convenience, the `linkerd inject` command provides an
 adding this annotation to a pre-existing pod will not work. It must be present
 at pod *creation* time.)
 
-The debug sidecar container image contains a container with
+The debug sidecar image contains
 [`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html), `tcpdump`,
-`lsof`, and `iproute2`. The default entrypoint that starts `tshark -i any`.
-Since all containers in a pod share the same network namespace, this means that
-the logs for this container will contain the network traffic observed in the
-pod, which can be easily viewed with `kubectl logs`. Alternatively, you can use
-`kubectl exec` to access the container and run commands directly.
+`lsof`, and `iproute2`. Once installed, it starts automatically logging all
+incoming and outgoing traffic with `tshark`, which can then be viewed with
+`kubectl logs`. Alternatively, you can use `kubectl exec` to access the
+container and run commands directly.
 
 For instance, if you've gone through the [Linkerd Getting
 Started](https://linkerd.io/2/getting-started/) guide and installed the
-*emojivoto* application, and wish to debug the *voting* service, you
+*emojivoto* application, and wish to debug traffic to the *voting* service, you
 could run:
 
 ```bash
@@ -72,4 +71,5 @@ Capturing on 'any'
 ```
 
 Of course, this only works if you have the ability to `exec` into arbitrary
-containers in the Kubernetes cluster.
+containers in the Kubernetes cluster. See [`linkerd
+tap`](/2/reference/cli/tap/) for an alternative to this approach.
