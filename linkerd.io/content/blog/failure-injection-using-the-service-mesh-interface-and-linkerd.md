@@ -48,7 +48,7 @@ cluster:
 
 ```bash
 > curl https://run.linkerd.io/install | sh
-> export PATH=\$PATH:\$HOME/.linkerd2/bin
+> export PATH=$PATH:$HOME/.linkerd2/bin
 > linkerd install | kubectl apply -f -
 > linkerd check
 ```
