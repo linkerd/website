@@ -199,7 +199,8 @@ We can also see how gracefully the application handles these failures:
 > open http://localhost:7000
 ```
 
-Not very well, it seems!
+Not very well, it seems!  If we refresh the page a few times, we will sometimes
+see an internal server error page.
 
 ![Webpage displaying internal server error](/uploads/internal-server-error.png)
 
