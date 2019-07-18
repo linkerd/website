@@ -63,7 +63,7 @@ of the requests, you could run something like this:
 ```bash
 user@local$ kubectl -n emojivoto exec -it voting-7cf4784dd8-qxjv4 \
   -c linkerd-debug -- /bin/bash
-root@voting-7cf4784dd8-qxjv4:/# 
+root@voting-7cf4784dd8-qxjv4:/#
 root@voting-7cf4784dd8-qxjv4:/# tshark -i any -f "tcp" -V -Y "http.request"
 Running as user "root" and group "root". This could be dangerous.
 Capturing on 'any'
