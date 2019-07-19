@@ -457,3 +457,13 @@ The latency numbers include time spent in the `webapp` application itself, so
 it's expected that they exceed the 25ms timeout that we set for requests from
 `webapp` to `books`. We can see that the timeouts are working by observing that
 the effective success rate for our route has dropped below 100%.
+
+## Clean Up
+
+To remove the books app and the booksapp namespace from your cluster, run: 
+
+```bash
+curl -sL https://run.linkerd.io/booksapp.yml \
+  | kubectl -n booksapp delete -f - \
+  && kubectl delete ns booksapp
+```
