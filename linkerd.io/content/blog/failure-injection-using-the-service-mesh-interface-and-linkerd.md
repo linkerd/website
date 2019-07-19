@@ -2,6 +2,7 @@
 title: 'Failure Injection using the Service Mesh Interface and Linkerd'
 author: 'alex'
 date: 2019-07-18T14:56:26-07:00
+thumbnail: /uploads/internal-server-error.png
 draft: false
 slug: failure-injection-using-the-service-mesh-interface-and-linkerd
 tags: [Linkerd]
