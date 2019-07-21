@@ -31,7 +31,7 @@ More information on the `iptables` rules used by the `proxy-init` init
 container can be found on the [Architecture](/2/reference/architecture/#linkerd-init)
 page.
 
-If your environment disallow the operation of containers with escalated Linux
+If your environment disallows the operation of containers with escalated Linux
 capabilities, Linkerd can be installed with its [CNI plugin](/2/features/cni/),
 which doesn't require the `NET_ADMIN` and `NET_RAW` capabilities.
 
@@ -99,7 +99,7 @@ metadata:
   name: emojivoto-psp
   namespace: emojivoto
 roleRef:
-- apiGroup: rbac.authorization.k8s.io
+  apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: emojivoto-psp
 subjects:
