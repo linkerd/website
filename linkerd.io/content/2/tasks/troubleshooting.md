@@ -690,6 +690,27 @@ bad                                                51s
 linkerd-controller-api.linkerd.svc.cluster.local   1m
 ```
 
+Example failure:
+
+```bash
+‼ no invalid service profiles
+    the server could not find the requested resource (get serviceprofiles.linkerd.io)
+```
+
+Validate that the Service Profile CRD is installed on your cluster and that its
+`linkerd.io/created-by` annotation matches your `linkerd version` client
+version:
+
+```bash
+kubectl get crd/serviceprofiles.linkerd.io -o yaml
+```
+
+If the CRD is missing or out-of-date you can update it:
+
+```bash
+linkerd update | kubectl apply -f -
+```
+
 ## The "linkerd-version" checks {#l5d-version}
 
 ### √ can determine the latest version {#l5d-version-latest}
