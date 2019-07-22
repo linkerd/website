@@ -48,7 +48,7 @@ For example, the following Pod Security Policy and RBAC will work with the injec
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: linkerd-emojiovoto-data-plane
+  name: linkerd-emojivoto-data-plane
 spec:
   allowPrivilegeEscalation: false
   fsGroup:
