@@ -702,13 +702,13 @@ Validate that the Service Profile CRD is installed on your cluster and that its
 version:
 
 ```bash
-kubectl get crd/serviceprofiles.linkerd.io -o yaml
+kubectl get crd/serviceprofiles.linkerd.io -o yaml | grep linkerd.io/created-by
 ```
 
 If the CRD is missing or out-of-date you can update it:
 
 ```bash
-linkerd update | kubectl apply -f -
+linkerd upgrade | kubectl apply -f -
 ```
 
 ## The "linkerd-version" checks {#l5d-version}
