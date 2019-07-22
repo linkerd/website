@@ -21,11 +21,20 @@ for common ingress controllers:
 
 {{% pagetoc %}}
 
-Note: If your ingress controller is terminating HTTPS, Linkerd will only provide
+{{< note >}}
+If your ingress controller is terminating HTTPS, Linkerd will only provide
 TCP stats for the incoming requests because all the proxy sees is encrypted
 traffic. It will provide complete stats for the outgoing requests from your
 controller to the backend services as this is in plain text from the
 controller to Linkerd.
+{{< /note >}}
+
+{{< note >}}
+If requests experience a 2-3 second delay after injecting your ingress
+controller, it is likely that this is because the service of `type:
+LoadBalancer` is obscuring the client source IP. You can fix this by setting
+`externalTrafficPolicy: Local` in the ingress' service definition.
+{{< /note >}}
 
 ## Nginx
 

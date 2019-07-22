@@ -7,99 +7,68 @@ aliases = [
 ]
 +++
 
-By default, Linkerd automatically enables mutual Transport Layer Security
-(mTLS) for all communication between meshed pods, by establishing and
-authenticating secure, private TLS connections between Linkerd proxies.
+By default, Linkerd automatically enables mutual Transport Layer Security (mTLS)
+for all HTTP-based communication between meshed pods, by establishing and authenticating
+secure, private TLS connections between Linkerd proxies. In fact, because the
+Linkerd control plane runs on the data plane, this means that communication
+between control plane components are also automatically secured via mTLS.
 
-Linkerd does not break unencrypted communication with endpoints that do not use
-Linkerd. In other words, Linkerd does not currently *enforce* TLS to
-non-Linkerd endpoints.
+{{< note >}}
+Linkerd does not currently *enforce* mTLS. Any unencrypted requests inside the
+mesh will be opportunistically upgraded to mTLS. Any requests originating from
+inside or outside the mesh cannot be automatically upgraded by Linkerd.
+{{< /note >}}
 
-mTLS identity is provisioned based on the Kubernetes [Service Accounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/).
-
-Since the Linkerd control plane runs on the data plane, this means that
-communication between control plane components is also automatically secured
-via mTLS.
-
-## Getting started with mTLS
-
-Since mTLS is enabled by default, simply [install the Linkerd control
-plane](https://linkerd.io/2/tasks/install/) and [add your
-services](https://linkerd.io/2/tasks/adding-your-service/) to Linkerd to enable
-mTLS for those services.
-
-To validate that TLS is working, you can examine the [Grafana
-dashboards](https://linkerd.io/2/features/dashboard/), or use a took like
-[`linkerd tap`](https://linkerd.io/2/reference/cli/tap/) to inspect Linkerd's
-metadata about requests. For example:
-
-```bash
-linkerd tap deploy -n emojivoto
-```
-
-Which might give an output like:
-
-```bash
-req id=0:1 proxy=out src=10.1.17.29:33500 dst=10.1.17.28:80 tls=true :method=GET :authority=web-svc.emojivoto:80 :path=/api/list
-req id=0:1 proxy=in  src=10.1.17.29:45960 dst=10.1.17.28:80 tls=true :method=GET :authority=web-svc.emojivoto:80 :path=/api/list
-req id=0:2 proxy=out src=10.1.17.28:59272 dst=10.1.17.27:8080 tls=true :method=POST :authority=emoji-svc.emojivoto:8080 :path=/emojivoto.v1.EmojiService/ListAll
-req id=0:1 proxy=in  src=10.1.17.28:59344 dst=10.1.17.27:8080 tls=true :method=POST :authority=emoji-svc.emojivoto:8080 :path=/emojivoto.v1.EmojiService/ListAll
-```
-
-Note the `tls=true` output, indicating that the request went over a mTLS'd connection.
+You can validate that mTLS is enabled by following the [guide to securing your services](/2/tasks/securing-your-service/).
 
 ## How does it work?
 
-The [Linkerd control plane](https://linkerd.io/2/reference/architecture/)
-includes a TLS certificate authority (CA), called simply "identity".
+On install, a trust root, certificate and private key are generated. The trust
+root is stored as a
+[ConfigMap](https://unofficial-kubernetes.readthedocs.io/en/latest/tasks/configure-pod-container/configmap/).
+This is used to verify the identity of any proxy and can replaced with your own
+trust root as part of install. Both certificate and private key are placed into
+a [Secret](https://kubernetes.io/docs/concepts/configuration/secret/). It is
+important that this secret stays private and other service accounts in the
+cluster do not have access. By default, this goes into the `linkerd` namespace
+and can only be read by the service account used by `identity`.
 
-The signing certs used by Linkerd's identity service are stored in a
-[Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/).
-This Secret is only mounted by Linkerd's identity, which has its own service
-account.
+On startup, the proxy generates a private key for itself. This key is stored in
+a tmpfs
+[emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir) which
+never leaves the pod and stays in memory. After the key has been generated, the
+proxy connects to a [control plane](/2/reference/architecture/) component named
+`identity`. This component is a TLS [certificate authority
+(CA)](https://en.wikipedia.org/wiki/Certificate_authority) and is used to sign
+certificates with the correct identity. Proxies validate the connection to
+`identity` by using the trust root which is part of the proxy container's
+specification as an environment variable.
 
-At proxy injection time, the proxies get their trust root as an environment
-variable set by the proxy-injector webhook. Proxies validate the identity
-service with that trust root, pass along their service account token over that
-one-way-TLS connnection, and receive a TLS certificate in return. Proxies store
-their ephemeral private keys into a tmpfs directory. Thus, pod credentials are
-never leave the pod.
+Identity in Linkerd is tied to the [service
+account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+that is being used by the pod. Once the proxy has connected to `identity`, it
+issues a [certificate signing request
+(CSR)](https://en.wikipedia.org/wiki/Certificate_signing_request). The CSR
+contains an initial certificate with the pod's identity set to its service
+account and the actual service acount token so that `identity` can validate that
+the CSR is valid. Once all validation has succeeded, the signed trust bundle is
+returned to the proxy and it can use that when it acts as both a client and
+server.
 
-Currently, certificates are scoped to 24 hours, and proxies will dynamically
-refresh them using the same mechanism.
+These certificates are scoped to 24 hours and will be dynamically refreshed
+using the same mechanism when required.
 
 ## Known issues
 
-* The connections that Prometheus uses to scrape proxy metrics are not
-  currently TLS'd.
+* Discovery happens on FQDNs associated with pods
+  (`foo.default.svc.cluster.local` for example). Requests without a `Host`
+  header containing this information such as IP addresses are proxied directly
+  and are treated as if they're not in the mesh. This means that the connections
+  Prometheus uses to scrape proxy metrics are not currently TLS'd.
+
+* Only HTTP based traffic is TLS'd.
+
 * Ideally, the Service Account token that Linkerd uses would not be shared with
   other potential uses of that token. Once Kubernetes support for
   audience/time-bound Service Account tokens is stable, Linkerd will use those
   instead.
-
-### Setting `externalTrafficPolicy` on an External Load Balancer
-
-Given a Kubernetes Service of type `LoadBalancer`, if pods referenced by that
-Service are injected with a Linkerd proxy, requests will experience a 2-3
-second delay between Client Hello and Server Hello. This is due to the way a
-`LoadBalancer` obscures the client source IP via the default
-`externalTrafficPolicy: Cluster`. You may workaround this by setting
-`externalTrafficPolicy: Local`:
-
-```yaml
-kind: Service
-apiVersion: v1
-metadata:
-  name: example-service
-spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Local
-```
-
-For more information, see the [Kubernetes Documentation][k8s-docs] and the
-[original GitHub issue][l5d-issue].
-
-[tls-issues]: https://github.com/linkerd/linkerd2/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Ftls
-[new-issue]: https://github.com/linkerd/linkerd2/issues/new/choose
-[k8s-docs]: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
-[l5d-issue]: https://github.com/linkerd/linkerd2/issues/1880
