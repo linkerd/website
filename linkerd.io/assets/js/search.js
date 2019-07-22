@@ -188,7 +188,7 @@ function initSearchPage(dataUrl, tagFieldName) {
       '<article class="related-card media">' +
       '<div class="media-left">' +
       '<figure class="image is-128x128 level-item">' +
-      '<img src="' + (item.thumbnail ? item.thumbnail : '/images/buoyant_blog_placeholder.svg') + '" alt="featured image" />' +
+      '<img src="' + (item.thumbnail ? item.thumbnail : '/images/identity/svg/linkerd_primary_color_white.svg') + '" alt="featured image" />' +
       '</figure>' +
       '</div>' +
       '<div class="media-content">' +
