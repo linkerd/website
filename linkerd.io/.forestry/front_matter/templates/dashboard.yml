@@ -17,3 +17,5 @@ fields:
   config:
     required: true
   label: Title
+pages:
+- linkerd.io/content/dashboard/have-you-adopted-linkerd-let-us-know-and-we-ll-send-you-some-sweet-swag.md
