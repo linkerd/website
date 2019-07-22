@@ -8,7 +8,7 @@ aliases = [
 +++
 
 By default, Linkerd automatically enables mutual Transport Layer Security (mTLS)
-for all communication between meshed pods, by establishing and authenticating
+for all HTTP-based communication between meshed pods, by establishing and authenticating
 secure, private TLS connections between Linkerd proxies. In fact, because the
 Linkerd control plane runs on the data plane, this means that communication
 between control plane components are also automatically secured via mTLS.
@@ -16,12 +16,10 @@ between control plane components are also automatically secured via mTLS.
 {{< note >}}
 Linkerd does not currently *enforce* mTLS. Any unencrypted requests inside the
 mesh will be opportunistically upgraded to mTLS. Any requests originating from
-inside or outside the mesh cannot be upgraded and must rely on traditional TLS
-schemes.
+inside or outside the mesh cannot be automatically upgraded by Linkerd.
 {{< /note >}}
 
-While mTLS happens automatically, check out how to
-[verify](/2/tasks/securing-your-service/) that it is working.
+You can validate that mTLS is enabled by following the [guide to securing your services](/2/tasks/securing-your-service/).
 
 ## How does it work?
 

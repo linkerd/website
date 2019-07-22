@@ -3,8 +3,11 @@ title = "Securing Your Service"
 description = "Linkerd encrypts your service's traffic by default."
 +++
 
-mTLS is enabled by default, [add your services](/2/tasks/adding-your-service/)
-and any requests that originate and terminate within the mesh will be encyrpted.
+By default, Linkerd automatically enables mutual Transport Layer Security (mTLS)
+for all HTTP-based communication between meshed pods, by establishing and
+authenticating secure, private TLS connections between Linkerd proxies. [Add
+your services](/2/tasks/adding-your-service/) and Linkerd will take care of the
+rest.
 
 {{< note >}}
 Linkerd relies on [service accounts
@@ -13,9 +16,10 @@ to define identity. This requires that `automountServiceAccountToken: true`
 (which is the default) is set on your pods.
 {{< /note >}}
 
-To validate that mTLS is working, it is possible to see the edges between
-applications, the identites used and a possible message for why that edge is not
-mTLS'd. Run:
+To validate that mTLS is working, it is possible to see the HTTP connections
+between applications that are managed by Linkerd. The
+[edges](/2/reference/cli/edges/) command shows these along with the identities
+used and a message for debugging why mTLS is potentially not working. Run:
 
 ```bash
 linkerd -n linkerd edges deployment
@@ -29,10 +33,16 @@ linkerd-controller   linkerd-prometheus   linkerd-controller.linkerd   linkerd-p
 linkerd-web          linkerd-controller   linkerd-web.linkerd          linkerd-controller.linkerd   -
 ```
 
-The requests from `linkerd-controller` to `linkerd-prometheus` are encrypted and
-have valid identities. The `edges` command is based off [the proxy
-metrics](/2/reference/proxy-metrics/), it is also possible to watch each request
-in real time to understand its status, this can be done by running:
+In this example, everything is mTLS'd. If there was a problem, the `MSG` field
+would contain a reason for why Linkerd was unable to upgrade to mTLS. Each line
+shows the resource names as well as the Kubernetes [service
+account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+identity used. These are of the form `service-account-name.namespace`.
+
+Instead of relying on an aggregate, it is also possible to watch the requests
+and responses in real time to understand what is getting mTLS'd. This uses the
+[tap](/2/reference/cli/tap/) command and streams some high level data about the
+application in real time. Run:
 
 ```bash
 linkerd -n linkerd tap deploy
@@ -92,7 +102,7 @@ communication such as Prometheus scraping metrics as well as the primary
 application traffic being entirely opaque externally.
 
 ```bash
- 131 11.390338699    10.4.0.17 → 10.4.0.23    HTTP 346 GET /metrics HTTP/1.1
+  131 11.390338699    10.4.0.17 → 10.4.0.23    HTTP 346 GET /metrics HTTP/1.1
   132 11.391486903    10.4.0.23 → 10.4.0.17    HTTP 2039 HTTP/1.1 200 OK  (text/plain)
   133 11.391540872    10.4.0.17 → 10.4.0.23    TCP 68 46766 → 4191 [ACK] Seq=557 Ack=3942 Win=1329 Len=0 TSval=3389590636 TSecr=1915605020
   134 12.128190076    10.4.0.25 → 10.4.0.23    TLSv1.2 154 Application Data
