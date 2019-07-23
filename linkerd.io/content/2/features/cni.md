@@ -1,7 +1,6 @@
 +++
 title = "Experimental: CNI Plugin"
 description = "Linkerd can be configured to run a CNI plugin that rewrites each pod's iptables rules automatically."
-weight = 12
 +++
 
 Linkerd installs can be configured to run a
