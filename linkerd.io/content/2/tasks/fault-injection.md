@@ -173,6 +173,7 @@ servers, this `routes` command filters to all the requests being issued by
 `webapp` destined for the `books` service itself. The output should show a 90%
 success rate:
 
+```bash
 ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [DEFAULT]     books    90.08%   2.0rps           5ms          69ms          94ms
 ```
