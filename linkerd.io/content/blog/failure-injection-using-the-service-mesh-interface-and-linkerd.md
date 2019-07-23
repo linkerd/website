@@ -25,9 +25,11 @@ can still cause a loss of functionality.
 
 ## Using the Traffic Split SMI API to inject errors
 
-We can easily inject application failures by using the [Traffic Split API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
- of the [Service Mesh Interface](https://smi-spec.io/). This allows us to do failure injection
-in a way that is implementation agnostic and works across service meshes.
+We can easily inject application failures by using the [Traffic Split
+API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
+[Service Mesh Interface](https://smi-spec.io/). This allows us to do failure
+injection in a way that is implementation agnostic and works across service
+meshes.
 
 We do this by first deploying a new service that returns only errors. This can
 be as simple as an NGINX service that is configured to return HTTP 500 responses
