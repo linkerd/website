@@ -10,3 +10,8 @@ backend services. A common use case for this functionality is orchestrating
 [canary](https://martinfowler.com/bliki/CanaryRelease.html) or
 [blue/green](https://martinfowler.com/bliki/BlueGreenDeployment.html) rollouts
 instead of the default rolling model that Kubernetes uses.
+
+Check out some of the tutorials for what you can do with TrafficSplit:
+
+- [Canary Releases](/2/tasks/canary-release/)
+- [Fault Injection](/2/tasks/fault-injection/)
