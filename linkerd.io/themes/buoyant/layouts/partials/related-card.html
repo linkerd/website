@@ -5,11 +5,9 @@
         <div class="media-left">
           <figure class="image is-128x128 level-item">
             {{ if .Params.thumbnail }}
-            <img
-              {{ partial "src.html" (dict "img" .Params.thumbnail) | safeHTMLAttr }}
-              alt="featured image" />
+            <img {{ partial "src.html" (dict "img" .Params.thumbnail) | safeHTMLAttr }} alt="featured image" />
             {{ else }}
-            <img src="/images/buoyant_blog_placeholder.svg" alt="placeholder" />
+            <img src="/images/identity/svg/linkerd_primary_color_white.svg" alt="placeholder" />
             {{ end }}
           </figure>
         </div>

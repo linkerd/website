@@ -7,13 +7,11 @@
       <div class="card-image">
         {{ if .Params.thumbnail }}
         <figure class="image level-item">
-          <img
-            {{ partial "src.html" (dict "img" .Params.thumbnail) | safeHTMLAttr }}
-            alt="featured image" />
+          <img {{ partial "src.html" (dict "img" .Params.thumbnail) | safeHTMLAttr }} alt="featured image" />
         </figure>
         {{ else }}
         <figure class="image placeholder is-3by1">
-          <img src="/images/buoyant_blog_placeholder.svg" alt="placeholder" />
+          <img src="/images/linkerd_mark_grid_large.svg" alt="placeholder" />
         </figure>
         {{ end }}
       </div>
@@ -39,9 +37,8 @@
           <div class="card-footer-item has-text-grey-dark">
             <figure class="image is-32x32">
               {{ if $author.avatar }}
-              <img
-                {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
-                alt="{{ $author.name }}"/>
+              <img {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
+                alt="{{ $author.name }}" />
               {{ else }}
               <img src="/images/identity/svg/linkerd_mark_grid_small.svg" alt="author avatar" class="is-rounded" />
               {{ end }}
