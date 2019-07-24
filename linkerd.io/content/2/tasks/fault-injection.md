@@ -186,3 +186,11 @@ separate deployment and traffic is being shifted at the service level. The
 requests never reach the `books` pods and are instead rerouted to the error
 injector's pods.
 {{< /note >}}
+
+## Cleanup
+
+To remove everything in this guide from your cluster, run:
+
+```bash
+kubectl delete ns booksapp
+```
