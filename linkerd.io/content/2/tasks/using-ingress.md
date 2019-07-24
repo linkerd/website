@@ -197,11 +197,10 @@ metadata:
       apiVersion: ambassador/v1
       kind: Mapping
       name: web-ambassador-mapping
-      service: web-svc.emojivoto.svc.cluster.local
+      service: http://web-svc.emojivoto.svc.cluster.local:80
       host: example.com
       prefix: /
-      add_request_headers:
-        l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
+      add_linkerd_headers: true
 spec:
   selector:
     app: web-svc
@@ -214,14 +213,17 @@ spec:
 The important annotation here is:
 
 ```yaml
-      add_request_headers:
-        l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
+      add_linkerd_headers: true
 ```
 
 Ambassador will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for. You'll want to include both the Kubernetes service
+the request is destined for. This will contain both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
+
+{{< note >}}
+To make this global, add `add_linkerd_headers` to your `Module` configuration.
+{{< /note >}}
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed Ambassador via helm, you can get that IP address by running:
