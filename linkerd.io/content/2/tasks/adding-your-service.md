@@ -2,7 +2,8 @@
 title = "Adding Your Service"
 description = "Add your service to the mesh by marking it for data plane proxy injection."
 aliases = [
-  "/2/adding-your-service/"
+  "/2/adding-your-service/",
+  "/2/tasks/automating-injection/"
 ]
 +++
 
