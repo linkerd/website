@@ -9,11 +9,12 @@ aliases = [
 
 In order for your services to take advantage of Linkerd, they need to have
 Linkerd's data plane proxy added to their pods. This is typically done by
-annotating the namespace, deployment, or pod with the `linkerd/inject: true`
-Kubernetes annotation, which will trigger *automatic proxy injection* when the
-resources are created. There is a full list of the configuration options
-available in [reference](/2/reference/proxy-configuration/). (See the [proxy
-injection page](/2/features/proxy-injection/) for more on how this works.)
+annotating the namespace, deployment, or pod with the `linkerd.io/inject:
+enabled` Kubernetes annotation, which will trigger *automatic proxy injection*
+when the resources are created. There is a full list of the configuration
+options available in [reference](/2/reference/proxy-configuration/). (See the
+[proxy injection page](/2/features/proxy-injection/) for more on how this
+works.)
 
 For convenience, Linkerd provides a [`linkerd
 inject`](/2/reference/cli/inject/) text transform command will add this
