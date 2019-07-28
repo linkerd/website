@@ -1,11 +1,21 @@
 +++
 title = "Uninstalling Linkerd"
-description = "Uninstall Linkerd from your own Kubernetes cluster."
+description = "Linkerd can be easily removed from a Kubernetes cluster."
 +++
 
-If you'd like to remove Linkerd from your cluster, you'll first want to remove
-any of your services from the
-[data plane](/2/reference/architecture/#data-plane). This can be done by running:
+Removing Linkerd from a Kubernetes cluster requires two steps: removing any
+data plane proxies, and then removing the control plane.
+
+## Removing Linkerd data plane proxies
+
+To remove the Linkerd data plane proxies, you should remove any [Linkerd proxy
+injection annotations](/2/features/proxy-injection/) and roll the deployments.
+When Kubernetes recreates the pods, they will not have the Linkerd data plane
+attached.
+
+One way to do this is to use the `linkerd uninject` command to rewrite a
+Kubernetes manifest. For example, to do this across all namespaces in one fell
+swoop:
 
 ```bash
 kubectl get --all-namespaces daemonset,deploy,job,statefulset \
@@ -17,24 +27,21 @@ kubectl get --all-namespaces daemonset,deploy,job,statefulset \
 This will fetch everything that has the Linkerd proxy sidecar, remove the
 sidecar and re-apply to your cluster.
 
-Then, to remove the [control plane](/2/reference/architecture/#control-plane),
-run:
+## Removing the control plane
+
+{{< note >}}
+Uninstallating the control plane will require cluster-wide permissions.
+{{< /note >}}
+
+To remove the [control plane](/2/reference/architecture/#control-plane), run:
 
 ```bash
 linkerd install --ignore-cluster | kubectl delete -f -
 ```
 
-The `linkerd install` command outputs the YAML definitions for all of the
-Kubernetes resources necessary for the control plane, including namespaces,
-service accounts, CRDs, and more; `kubectl delete` then deletes those resources.
+The `linkerd install` command outputs the manifest for all of the Kubernetes
+resources necessary for the control plane, including namespaces, service
+accounts, CRDs, and more; `kubectl delete` then deletes those resources.
 
-{{< note >}}
-This command also removes control planes that have been only partially
-installed.
-{{< /note >}}
-
-{{< note >}}
-If the initial installation was performed as a
-[Multi-stage install](/2/tasks/install/#multi-stage-install), uninstallation
-should be done by the cluster owner.
-{{< /note >}}
+This command can also be used to remove control planes that have been partially
+installed. `kubectl delete` will complain, but these errors can be ignored.

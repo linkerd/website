@@ -3,23 +3,22 @@ title = "Securing Your Service"
 description = "Linkerd encrypts your service's traffic by default."
 +++
 
-By default, Linkerd automatically enables mutual Transport Layer Security (mTLS)
-for all HTTP-based communication between meshed pods, by establishing and
-authenticating secure, private TLS connections between Linkerd proxies. [Add
-your services](/2/tasks/adding-your-service/) and Linkerd will take care of the
-rest.
+By default, [Linkerd automatically enables mutual Transport Layer Security
+(mTLS)](/2/features/automatic-tls) for most HTTP-based communication between
+meshed pods, by establishing and authenticating secure, private TLS connections
+between Linkerd proxies. Simply [add your
+services](/2/tasks/adding-your-service/) to Linkerd, and Linkerd will take care
+of the rest.
 
-{{< note >}}
-Linkerd relies on [service accounts
-](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
-to define identity. This requires that `automountServiceAccountToken: true`
-(which is the default) is set on your pods.
-{{< /note >}}
+Linkerd's automatic mTLS is done in a way that's completely transparent to
+the application. Of course, sometimes it's helpful to be able to validate
+whether mTLS is in effect!
 
-To validate that mTLS is working, it is possible to see the HTTP connections
-between applications that are managed by Linkerd. The
-[edges](/2/reference/cli/edges/) command shows these along with the identities
-used and a message for debugging why mTLS is potentially not working. Run:
+## Validating mTLS with `linkerd edges`
+
+To validate that mTLS is working, you can view a summary of the HTTP
+connections between services that are managed by Linkerd using the [`linkerd
+edges`](/2/reference/cli/edges/) command.  For example:
 
 ```bash
 linkerd -n linkerd edges deployment
@@ -33,16 +32,19 @@ linkerd-controller   linkerd-prometheus   linkerd-controller.linkerd   linkerd-p
 linkerd-web          linkerd-controller   linkerd-web.linkerd          linkerd-controller.linkerd   -
 ```
 
-In this example, everything is mTLS'd. If there was a problem, the `MSG` field
-would contain a reason for why Linkerd was unable to upgrade to mTLS. Each line
-shows the resource names as well as the Kubernetes [service
-account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
-identity used. These are of the form `service-account-name.namespace`.
+In this example, everything is successfully mTLS'd, and the `CLIENT` and
+`SERVER` columns denote the identities used, in the form
+`service-account-name.namespace`. (See [Linkerd's automatic mTLS
+documentation](/2/features/automatic-tls) for more on what these identities
+mean.) If there were a problem automatically upgrading the connection with
+mTLS, the `MSG` field would contain the reason why.
+
+## Validating mTLS with `linkerd tap`
 
 Instead of relying on an aggregate, it is also possible to watch the requests
-and responses in real time to understand what is getting mTLS'd. This uses the
-[tap](/2/reference/cli/tap/) command and streams some high level data about the
-application in real time. Run:
+and responses in real time to understand what is getting mTLS'd. We can use the
+[`linkerd tap` command](/2/reference/cli/tap/) to sample real time request data.
+For example:
 
 ```bash
 linkerd -n linkerd tap deploy
@@ -56,9 +58,14 @@ rsp id=0:7 proxy=in  src=10.138.15.206:51558 dst=10.4.0.18:9998 tls=not_provided
 end id=0:7 proxy=in  src=10.138.15.206:51558 dst=10.4.0.18:9998 tls=not_provided_by_remote duration=32µs response-length=3B
 ```
 
-This is a readiness probe. As probes are initiated from the kubelet, which is
-not in the mesh, there is no identity and these requests are not mTLS'd.
-Alternatively:
+These are calls by the [Kubernetes readiness
+probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).
+As probes are initiated from the kubelet, which is not in the mesh, there is no
+identity and these requests are not mTLS'd, as denoted by the
+`tls=not_provided_by_remote` message.
+
+
+Other requests to the control plane *are* TLS'd:
 
 ```bash
 req id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true :method=GET :authority=linkerd-prometheus.linkerd.svc.cluster.local:9090 :path=/api/v1/query
@@ -66,14 +73,19 @@ rsp id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true :status=20
 end id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true duration=121µs response-length=375B
 ```
 
-As both `linkerd-prometheus` and `linkerd-web` are in the mesh and using HTTP to
-communicate, the requests are automatically mTLS'd.
+As both `linkerd-prometheus` and `linkerd-web` are in the mesh and using HTTP
+to communicate, the requests are automatically mTLS'd, as denoted by the
+`tls=true` output.
 
-To watch the actual wire traffic, Linkerd includes a [debug
-sidecar](/2/tasks/using-the-debug-container/) that comes with a selection of
-commands that make it easier to verify and debug the service mesh itself. To
-take a look at this with [emojivoto](/2/getting-started/), get the demo started
-and add the debug sidecar by running:
+## Validating mTLS with tshark
+
+The final way to validate mTLS is to look at raw network traffic. (Note that
+this approach requires full access to the Kubernetes node.)
+
+Linkerd includes a [debug sidecar](/2/tasks/using-the-debug-container/) that
+comes with a selection of commands that make it easier to verify and debug the
+service mesh itself. For example, with our [*emojivoto* demo
+application](/2/getting-started/), we can add the debug sidecar by running:
 
 ```bash
 curl -sL https://run.linkerd.io/emojivoto.yml \
@@ -81,7 +93,8 @@ curl -sL https://run.linkerd.io/emojivoto.yml \
   | kubectl apply -f -
 ```
 
-Once the containers have started up, jump into the `voting` pod with:
+We can then establish a remote shell directly in the debug container of a pod in
+the `voting` service with:
 
 ```bash
 kubectl -n emojivoto exec -it \
@@ -89,17 +102,17 @@ kubectl -n emojivoto exec -it \
     -c linkerd-debug -- /bin/bash
 ```
 
-From inside the debug sidecar, `tshark` can be used to inspect the raw bytes.
-Check it out with:
+Once we're inside the debug sidecar, the built-in `tshark` command can be used
+to inspect the raw packets on the network interface. For example:
 
 ```bash
 tshark -i any -d tcp.port==8080,ssl | grep -v 127.0.0.1
 ```
 
-This tells `tshark` that port 8080 might be TLS'd and ignores localhost as that
-traffic will always be unencrypted. The output will show both unencrypted
-communication such as Prometheus scraping metrics as well as the primary
-application traffic being entirely opaque externally.
+This tells `tshark` that port 8080 might be TLS'd, and to ignores localhost (as
+that traffic will always be unencrypted). The output will show both unencrypted
+communication, such as Prometheus scraping metrics, as well as the primary
+application traffic being automatically mTLS'd.
 
 ```bash
   131 11.390338699    10.4.0.17 → 10.4.0.23    HTTP 346 GET /metrics HTTP/1.1
@@ -111,3 +124,13 @@ application traffic being entirely opaque externally.
   143 13.140288400    10.4.0.25 → 10.4.0.23    TLSv1.2 150 Application Data
   148 13.141219945    10.4.0.23 → 10.4.0.25    TLSv1.2 136 Application Data
 ```
+
+## Summary
+
+In this guide, we've provided several different ways to validate whether
+Linkerd has been able to automatically upgrade connections to mTLS. Note that
+there are several reasons why Linkerd may not be able to do this upgrade---see
+the "Caveats and future work" section of the [Linkerd automatic mTLS
+documentation](/2/features/automatic-mtls)---so if you are relying on Linkerd
+for security purposes, this kind of validation can be instructive.
+
