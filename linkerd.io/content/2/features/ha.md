@@ -1,7 +1,6 @@
 +++
 title = "High Availability"
 description = "The Linkerd control plane can run in high availability (HA) mode."
-weight = 11
 aliases = [
   "/2/ha/"
 ]

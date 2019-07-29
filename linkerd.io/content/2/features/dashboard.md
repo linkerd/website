@@ -1,7 +1,6 @@
 +++
 title = "Dashboard and Grafana"
 description = "Linkerd provides a web dashboard, as well as pre-configured Grafana dashboards."
-weight = 10
 +++
 
 In addition to its [command-line interface](/2/cli/), Linkerd provides a web
