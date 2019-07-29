@@ -72,7 +72,6 @@ As probes are initiated from the kubelet, which is not in the mesh, there is no
 identity and these requests are not mTLS'd, as denoted by the
 `tls=not_provided_by_remote` message.
 
-
 Other requests to the control plane *are* TLS'd:
 
 ```bash
@@ -141,4 +140,3 @@ there are several reasons why Linkerd may not be able to do this upgrade---see
 the "Caveats and future work" section of the [Linkerd automatic mTLS
 documentation](/2/features/automatic-mtls)---so if you are relying on Linkerd
 for security purposes, this kind of validation can be instructive.
-

@@ -20,5 +20,3 @@ reference](/2/reference/proxy-log-level/).
 Note that logging has a noticeable, negative impact on proxy throughput. If the
 pod will continue to serve production traffic, you may wish to reset the log
 level once you are done.
-
-

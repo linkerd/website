@@ -139,7 +139,8 @@ dashboard by running:
 linkerd dashboard &
 ```
 
-{{< fig src="/images/getting-started/empty-dashboard.png" title="The Linkerd dashboard in action" >}}
+{{< fig src="/images/getting-started/empty-dashboard.png" title="The Linkerd
+dashboard in action" >}}
 
 This command sets up a port forward from your local system to the
 [linkerd-web](/2/reference/architecture/#web) pod. (It's also possible to
