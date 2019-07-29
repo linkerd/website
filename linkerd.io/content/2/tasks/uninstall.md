@@ -13,24 +13,10 @@ injection annotations](/2/features/proxy-injection/) and roll the deployments.
 When Kubernetes recreates the pods, they will not have the Linkerd data plane
 attached.
 
-One way to do this is to use the `linkerd uninject` command to rewrite a
-Kubernetes manifest. For example, to do this across all namespaces in one fell
-swoop:
-
-```bash
-kubectl get --all-namespaces daemonset,deploy,job,statefulset \
-    -l "linkerd.io/control-plane-ns" -o yaml \
-  | linkerd uninject - \
-  | kubectl apply -f -
-```
-
-This will fetch everything that has the Linkerd proxy sidecar, remove the
-sidecar and re-apply to your cluster.
-
 ## Removing the control plane
 
 {{< note >}}
-Uninstallating the control plane will require cluster-wide permissions.
+Uninstallating the control plane requires cluster-wide permissions.
 {{< /note >}}
 
 To remove the [control plane](/2/reference/architecture/#control-plane), run:
@@ -44,4 +30,6 @@ resources necessary for the control plane, including namespaces, service
 accounts, CRDs, and more; `kubectl delete` then deletes those resources.
 
 This command can also be used to remove control planes that have been partially
-installed. `kubectl delete` will complain, but these errors can be ignored.
+installed. Note that `kubectl delete` will complain about any resources that it
+was asked to delete that hadn't been created, but these errors can be safely
+ignored.

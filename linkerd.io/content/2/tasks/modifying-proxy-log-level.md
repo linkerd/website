@@ -9,17 +9,15 @@ However, sometimes it is useful to increase the verbosity of proxy logs to
 assist with diagnosing proxy behavior. Happily, Linkerd allows you to modify
 these logs dynamically.
 
-The log level a Linkerd proxt can be modified on the fly by setting the
-`config.linkerd.io/proxy-log-level` annotation on the pod.  Alternatively, the
-log level can also be changed by modifying the the `LINKERD2_PROXY_LOG`
-environment variable in the pod resource, e.g. by using `kubectl edit`.  In
-both cases, these changes will be picked up automatically, and the resulting
-logs can be viewed with `kubectl logs`.
+The log level a Linkerd proxy can be modified on the fly by setting the
+`config.linkerd.io/proxy-log-level` annotation on the pod.  In both cases,
+these changes will be picked up automatically, and the resulting logs can be
+viewed with `kubectl logs`.
 
 The syntax of the proxy log level can be found in the [proxy log level
 reference](/2/reference/proxy-log-level/).
 
-Note that logging has a noticable, negative impact on proxy throughput. If the
+Note that logging has a noticeable, negative impact on proxy throughput. If the
 pod will continue to serve production traffic, you may wish to reset the log
 level once you are done.
 

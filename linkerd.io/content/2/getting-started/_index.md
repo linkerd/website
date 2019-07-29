@@ -280,7 +280,7 @@ Grafana icon in the overview page.
 Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
 - Use Linkerd to [debug the errors in *emojivoto*](/2/debugging-an-app/)
-- [Add own service](/2/adding-your-service/) to Linkerd without downtime
+- [Add your own service](/2/adding-your-service/) to Linkerd without downtime
 - Learn more about [Linkerd's architecture](/2/reference/architecture/)
 - Hop into the #linkerd2 channel on [the Linkerd
   Slack](https://slack.linkerd.io)
