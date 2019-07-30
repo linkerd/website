@@ -178,7 +178,7 @@ Any kind of modification to the pod's spec such as updating an environment
 variable or annotation would result in the same behavior as updating the image.
 
 On update, the canary deployment (`podinfo`) will be scaled up. Once ready,
-Flagger will begin to update the [TrafficSplit CRD](/2/features/traffic-split)
+Flagger will begin to update the [TrafficSplit CRD](/2/features/traffic-split/)
 incrementally. With a configured stopWeight of 10, each increment will increase
 the weight of `podinfo` by 10. For each period, the success rate will be
 observed and as long as it is over the threshold of 99%, Flagger will continue
