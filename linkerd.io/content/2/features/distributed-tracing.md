@@ -33,6 +33,7 @@ Of course, if an application *is* instrumented with distributed tracing
 libraries, Linkerd does not interfere.
 
 ## Future work
+
 In the future, the Linkerd 2.x data plane proxies themselves will also emit
 distributed proxy spans (we will "add distributed tracing to Linkerd", at least
 for some definition). This will allow proxy data to be incorporated into
