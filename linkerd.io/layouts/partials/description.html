@@ -1,1 +1,5 @@
-{{if isset .Params "summary"}}{{ .Params.summary }}{{else if .IsPage}}{{ .Summary }}{{else}}{{site.Params.description}}{{end}}
+{{if isset .Params "summary"}}
+  {{ .Params.summary }}
+{{else}}
+  {{site.Params.description}}
+{{end}}
