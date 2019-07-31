@@ -8,9 +8,7 @@ title = "ICYMI 👉 July Linkerd Community Meetup"
 summary = "In this month's community meeting, Oliver, Thomas, and special guests Stefan Prodan, creator of the project, and Carol Scott, Linkerd maintainer extraordinaire, discussed ..."
 +++
 
-[![Click for recording](/uploads/Screen Shot 2019-07-31 at 10.15.18 AM.png
-"July Linkerd Community Meetup")Click to view the recording
->>>](https://www.crowdcast.io/e/linkerd-online-community-3/1)
+[![Click for recording](/uploads/Screen Shot 2019-07-31 at 10.15.18 AM.png "July Linkerd Community Meetup")Click to view the recording >>>](https://www.crowdcast.io/e/linkerd-online-community-3/1)
 
 In this month's community meeting, Oliver, Thomas, and special guests Stefan
 Prodan, creator of the [Flagger](https://github.com/weaveworks/flagger)
