@@ -1,6 +1,7 @@
 +++
 author = "kiersten"
 date = "2019-07-31"
+draft = true
 feature = "/uploads/Screen Shot 2019-07-31 at 9.26.00 AM.png"
 tags = ["Linkerd Talk", "Community Meetup"]
 thumbnail = "/uploads/Screen Shot 2019-07-31 at 9.26.00 AM.png"
