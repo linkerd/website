@@ -22,3 +22,8 @@ By combining traffic splitting with Linkerd's metrics, it is possible to
 accomplish even more powerful deployment techniques that automatically take
 into account the success rate and latency of old and new versions. See
 the [Flagger](https://flagger.app/) project for one example of this.
+
+Check out some examples of what you can do with traffic splitting:
+
+- [Canary Releases](/2/tasks/canary-release/)
+- [Fault Injection](/2/tasks/fault-injection/)

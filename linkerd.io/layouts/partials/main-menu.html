@@ -3,8 +3,10 @@
     {{ $currentPage := . }}
     {{ range .Site.Menus.top }}
     {{ $isCurrent := $currentPage.IsMenuCurrent "top" . }}
+    {{ $isGetStarted := eq .Name "GET STARTED" }}
+    {{ $underlineOnActive := and $isCurrent (not $isGetStarted) }}
 
-      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase  {{ if $isCurrent }} is-active {{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
+      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase  {{ if $underlineOnActive }} is-active {{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
           class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
     {{ end }}
   </div>
