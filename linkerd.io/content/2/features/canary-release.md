@@ -17,4 +17,6 @@ the process. Linkerd enables this functionality by providing rich
 specification.
 
 With [Flagger](https://flagger.app/) and Linkerd it is possible to completely
-automate continuous delivery for your applications.
+automate continuous delivery for your applications. Take a peek at the
+[tutorial](/2/tasks/canary-release/) for instructions on how to do your own
+canary release.
