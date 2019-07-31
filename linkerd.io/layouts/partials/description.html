@@ -1,5 +1,10 @@
-{{if isset .Params "summary"}}
+{{- if isset .Params "summary" -}}
   {{ .Params.summary }}
-{{else}}
+{{- else if .IsPage -}}
+{{- $paragraphs := split .Plain "\n" -}}
+{{- range first 1 $paragraphs -}}
+{{ strings.TrimLeft " " . }}
+{{- end -}}
+{{- else -}}
   {{site.Params.description}}
-{{end}}
+{{- end -}}
