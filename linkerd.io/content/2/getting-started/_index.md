@@ -91,29 +91,29 @@ linkerd check --pre
 ## Step 3: Install Linkerd onto the cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go,
-it's time to install the lightweight control plane into its own namespace
-(`linkerd`). To do this, run:
+it's time to install the control plane into its own namespace (by default,
+`linkerd`). To do this, run:
 
 ```bash
 linkerd install | kubectl apply -f -
 ```
 
-`linkerd install` generates a list of Kubernetes resources. Run it standalone if
-you would like to understand what is going on. By piping the output of `linkerd
-install` into `kubectl`, the Linkerd control plane resources will be added to
-your cluster and start up.
+The `linkerd install` command generates a Kubernetes manifest with all the
+necessary control plane resources. (You can inspect the output if desired!).
+Piping this manifest into `kubectl apply` will instruct Kubernetes to
+add those resources to your cluster.
 
 Depending on the speed of your cluster's Internet connection, it may take a
-minute or two for your Kubernetes cluster to pull the Linkerd images. While
-that is happening, we can validate the installation by running:
+minute or two for your cluster to pull the Linkerd images. While that is
+happening, we can validate the installation by running:
 
 ```bash
 linkerd check
 ```
 
 This command will patiently wait until Linkerd has been installed, is running
-and becomes healthy. If you're interested in what components were installed, you
-can run:
+and becomes healthy. If you're interested in what components were installed,
+you can run:
 
 ```bash
 kubectl -n linkerd get deploy
@@ -124,8 +124,10 @@ documentation for an in depth explanation of what these components are and what
 they do.
 
 {{< note >}}
-For organizations that distinguish cluster privileges by role, see the
-[Multi-stage install](/2/tasks/install/#multi-stage-install) instructions.
+Linkerd installs certain resources that require cluster-wide permissions. For
+clusters where these permissions are restricted, the alternative [multi-stage
+install](/2/tasks/install/#multi-stage-install) instructions, which split these
+requirements into a separate, self-contained step, may be useful.
 {{< /note >}}
 
 ## Step 4: Explore Linkerd
@@ -137,7 +139,8 @@ dashboard by running:
 linkerd dashboard &
 ```
 
-{{< fig src="/images/getting-started/empty-dashboard.png" title="Dashboard" >}}
+{{< fig src="/images/getting-started/empty-dashboard.png"
+    title="The Linkerd dashboard in action" >}}
 
 This command sets up a port forward from your local system to the
 [linkerd-web](/2/reference/architecture/#web) pod. (It's also possible to
@@ -157,7 +160,11 @@ This is the traffic you're generating by looking at the dashboard itself!
 ## Step 5: Install the demo app
 
 To get a feel for how Linkerd would work for one of your services, you can
-install the demo application. Install it in its own namespace by running:
+install a demo application. The *emojivoto* application is a standalone
+Kubernetes application that uses a mix of gRPC and HTTP calls to allow the
+users to vote on their favorite emojis.
+
+Install *emojivoto* into the `emojivoto` namespace by running:
 
 ```bash
 curl -sL https://run.linkerd.io/emojivoto.yml \
@@ -177,13 +184,13 @@ kubectl -n emojivoto port-forward svc/web-svc 8080:80
 Now visit [http://localhost:8080](http://localhost:8080). Voila! The emojivoto
 app in all its glory.
 
-Clicking around, you might notice that some parts of the application are
-broken! For example, if you click on a doughnut emoji, you'll get a 404 page.
-Don't worry, these errors are intentional. (And we can use Linkerd to identify
-the problem. Check out the [debugging guide](../debugging-an-app/) if you're
+Clicking around, you might notice that some parts of *emojivoto* are broken!
+For example, if you click on a doughnut emoji, you'll get a 404 page.  Don't
+worry, these errors are intentional. (And we can use Linkerd to identify the
+problem.  Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)
 
-Next, let's add Linkerd to the app, by running:
+Next, let's add Linkerd to *emojivoto* by running:
 
 ```bash
 kubectl get -n emojivoto deploy -o yaml \
@@ -271,13 +278,12 @@ Grafana icon in the overview page.
 
 ## That's it! 👏
 
-Congratulations, you're now a Linkerd user! For more things you can do, try one
-of these:
+Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
-- [Debug a service](/2/debugging-an-app/)
-- [Add Linkerd to your service](/2/adding-your-service/)
-- [Learn more](/2/reference/architecture/) about Linkerd's architecture
-- Hop into the #linkerd2 channel on
-  [the Linkerd Slack](https://slack.linkerd.io)
+- Use Linkerd to [debug the errors in *emojivoto*](/2/debugging-an-app/)
+- [Add your own service](/2/adding-your-service/) to Linkerd without downtime
+- Learn more about [Linkerd's architecture](/2/reference/architecture/)
+- Hop into the #linkerd2 channel on [the Linkerd
+  Slack](https://slack.linkerd.io)
 
 Welcome to the Linkerd community!
