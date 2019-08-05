@@ -9,6 +9,10 @@ best practices to enable this introspection in a secure way.
 
 ## Tap
 
+{{< note >}}
+This section is only relevant to users of edge-19.8.1 and later.
+{{< /note >}}
+
 The default Linkerd installation includes Tap support. This feature is available
 via the following commands:
 
