@@ -5,7 +5,7 @@ description = "Linkerd can dynamically send a portion of traffic to different se
 
 Linkerd's traffic split functionality allows you to dynamically shift arbitrary
 portions of traffic destined for a Kubernetes service to a different
-destination service. This feature can be used to to implement sophisticated
+destination service. This feature can be used to implement sophisticated
 rollout strategies such as [canary
 deployments](https://martinfowler.com/bliki/CanaryRelease.html) and [blue/green
 deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html), for
