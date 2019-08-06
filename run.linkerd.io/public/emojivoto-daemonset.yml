@@ -130,7 +130,7 @@ spec:
       containers:
       - env:
         - name: WEB_PORT
-          value: "80"
+          value: "8080"
         - name: EMOJISVC_HOST
           value: emoji-svc.emojivoto:8080
         - name: VOTINGSVC_HOST
@@ -140,7 +140,7 @@ spec:
         image: buoyantio/emojivoto-web:v8
         name: web-svc
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: http
         resources:
           requests:
@@ -158,7 +158,7 @@ spec:
   ports:
   - name: http
     port: 80
-    targetPort: 80
+    targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: DaemonSet
