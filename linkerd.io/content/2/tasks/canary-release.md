@@ -1,25 +1,37 @@
 +++
-title = "Canary Release"
-description = "Reduce the risk of introducing new software by leveraging Linkerd to conduct canary releases."
+title = "Automated Canary Releases"
+description = "Reduce deployment risk by combining Linkerd and Flagger to automate canary releases based on service metrics."
 +++
 
-Linkerd works with [Flagger](https://flagger.app/) and implements the SMI
-[TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
-specification to automate canary releases of new software. This pattern makes
-releases a little less risky by providing a way to carefully roll out changes to
-a small subset of users.
+Linkerd's [traffic split](/2/features/traffic-split/) feature allows you to
+dynamically shift traffic between services. This can be used to implement
+lower-risk  deployment strategies like blue-green deploys and canaries.
+
+But simply shifting traffic from one version of a service to the next is just
+the beginning. We can combine traffic splitting with [Linkerd's automatic
+*golden metrics* telemetry](/2/features/telemetry/) and drive traffic decisions
+based on the observed metrics. For example, we can gradually shift traffic from
+old deployment to new deployment while continually monitoring success rate. If
+at any point the success rate drops, we can shift traffic back to the original
+deployment and back out of the release. Ideally, our users remain happy
+throughout, not noticing a thing!
+
+In this tutorial, we'll walk you through how to combine Linkerd with
+[Flagger](https://flagger.app/), a progressive delivery tool that ties
+Linkerd's metrics and traffic splitting together in a control loop,
+allowing for fully-automated, metrics-aware canary deployments.
 
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
   Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
-  already done this.
-- The installation of Flagger depends on kubectl 1.14 or newer.
+already done this.
+- The installation of Flagger depends on `kubectl` 1.14 or newer.
 
 ## Install Flagger
 
-While Linkerd will be managing the actual traffic routing, Flagger automates the
-process of creating new Kubernetes resources, watching metrics and
+While Linkerd will be managing the actual traffic routing, Flagger automates
+the process of creating new Kubernetes resources, watching metrics and
 incrementally sending users over to the new version. To add Flagger to your
 cluster and have it configured to work with Linkerd, run:
 
@@ -42,7 +54,7 @@ To watch until everything is up and running, you can use `kubectl`:
 kubectl -n linkerd rollout status deploy/flagger --watch
 ```
 
-## Setup the demo
+## Set up the demo
 
 This demo consists of two components: a load generator and a deployment. The
 deployment creates a pod that returns some information such as name. You can use
