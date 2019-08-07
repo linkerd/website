@@ -3,13 +3,13 @@ title = "Automated Canary Releases"
 description = "Reduce deployment risk by combining Linkerd and Flagger to automate canary releases based on service metrics."
 +++
 
-Linkerd's [traffic split](/2/features/traffic-split) feature allows you to
+Linkerd's [traffic split](/2/features/traffic-split/) feature allows you to
 dynamically shift traffic between services. This can be used to implement
 lower-risk  deployment strategies like blue-green deploys and canaries.
 
 But simply shifting traffic from one version of a service to the next is just
 the beginning. We can combine traffic splitting with [Linkerd's automatic
-*golden metrics* telemetry](/2/features/telemetry) and drive traffic decisions
+*golden metrics* telemetry](/2/features/telemetry/) and drive traffic decisions
 based on the observed metrics. For example, we can gradually shift traffic from
 old deployment to new deployment while continually monitoring success rate. If
 at any point the success rate drops, we can shift traffic back to the original
