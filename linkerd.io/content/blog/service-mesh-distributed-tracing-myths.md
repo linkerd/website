@@ -30,7 +30,7 @@ categorize and dispel below.
 
 ## Myth 1: I need distributed tracing to measure the latency of my services.
 
-*Wrong*. Over 60% of respondents suggesting that measuring service latency was
+*False*. Over 60% of respondents suggesting that measuring service latency was
 a desired use of distributed tracing in a service mesh. But Linkerd can already
 provide latency per service (as well as per route, per client per service, per
 client per route, etc) from metrics data, without requiring distributed tracing
@@ -44,7 +44,7 @@ already report this data!
 
 ## Myth 2: I need distributed tracing to see which services talk to which other services.
 
-*Wrong*. Around 60% of respondents suggested that drawing a *service topology*
+*False*. Around 60% of respondents suggested that drawing a *service topology*
 was a desired use of distributed tracing in a service mesh. These relationships
 can be produced purely from metrics data, again without requiring distributed
 tracing or any application-level changes. In fact, the Linkerd dashboard
@@ -57,7 +57,7 @@ already displays this topology!
 
 ## Myth 3: I can "get distributed tracing" from the service mesh without having to make any changes to my application.
 
-*Wrong*. Almost 30% of respondents answered that they would not expect to need
+*False*. Almost 30% of respondents answered that they would not expect to need
 any application changes once Linkerd added distributed tracing support.
 Unfortunately, while Linkerd can emit trace spans from the proxies, the
 application will need to *propagate headers* in order for these spans to be
@@ -70,7 +70,7 @@ corresponding changes in their code.
 
 ## Myth 4: I can "get distributed tracing" from the service mesh by instrumenting my application with a distributed tracing library.
 
-*Yes, sort of*. Almost 28% of respondents answered that they would make use of
+*Sort of false*. Almost 28% of respondents answered that they would make use of
 distributed tracing in Linkerd by instrumenting their applications with a
 distributed tracing library. These libraries will make it easy to propagate the
 headers, thus accomplishing the development work you need to do to make use of
