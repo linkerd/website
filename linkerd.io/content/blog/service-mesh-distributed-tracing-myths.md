@@ -9,7 +9,7 @@ tags: [Linkerd]
 summary: "One of the most common feature requests for Linkerd 2.x is distributed tracing. We're happy to report that this feature is on the near-term Linkerd roadmap. Unfortunately, we've found that many of the people asking for this feature don't quite understand what they're asking for."
 ---
 
-![Starting a trace the old-fashioned way](/uploads/threading-the-needle.jpg)
+![Starting a trace the old-fashioned way](/uploads/threading-the-needle-cropped.jpg)
 
 One of the most common feature requests for Linkerd 2.x is *distributed
 tracing*. We're happy to report that this feature is on the [near-term Linkerd
