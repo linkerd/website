@@ -179,7 +179,7 @@ solution to this problem.
 
 ## GCE
 
-This example is similar to Traefik, and also uses `emojivoto` as an example. 
+This example is similar to Traefik, and also uses `emojivoto` as an example.
 Take a look at [getting started](/2/getting-started/) for a refresher on how to
 install it.
 
