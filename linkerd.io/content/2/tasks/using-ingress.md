@@ -196,8 +196,8 @@ metadata:
     kubernetes.io/ingress.class: "gce"
     ingress.kubernetes.io/custom-request-headers: "l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80"
     ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
-    "ingress.gcp.kubernetes.io/pre-shared-cert"   = "managed-cert-name"
-    "kubernetes.io/ingress.global-static-ip-name" = "static-ip-name"
+    ingress.gcp.kubernetes.io/pre-shared-cert: "managed-cert-name"
+    kubernetes.io/ingress.global-static-ip-name: "static-ip-name"
 spec:
   rules:
   - host: example.com
