@@ -177,6 +177,41 @@ service will not be encrypted. There is an
 solution to this problem.
 {{< /note >}}
 
+## GCE
+
+This example is similar to Traefik, and also uses `emojivoto` as an example. Take a look at
+[getting started](/2/getting-started/) for a refresher on how to install it.
+
+In addition to the custom headers found in the Traefik example, it shows how to use a [Google Cloud Static External IP Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address) and TLS with a [Google-managed certificate](https://cloud.google.com/load-balancing/docs/ssl-certificates#managed-certs).
+
+The sample ingress definition is:
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: emojivoto
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    ingress.kubernetes.io/custom-request-headers: "l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80"
+    ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
+    "ingress.gcp.kubernetes.io/pre-shared-cert"   = "managed-cert-name"
+    "kubernetes.io/ingress.global-static-ip-name" = "static-ip-name"
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - backend:
+          serviceName: web-svc
+          servicePort: 80
+```
+
+To use this example definition, substitute "managed-cert-name" and "static-ip-name" with the short names defined in your project (n.b. use the name for the IP address, not the address itself).
+
+The managed certificate will take about 30-60 minutes to provision, but the status of the ingress should be healthy within a few minutes. Once the managed certificate is provisioned, the ingress should be visible to the Internet.
+
 ## Ambassador
 
 This uses `emojivoto` as an example, take a look at
