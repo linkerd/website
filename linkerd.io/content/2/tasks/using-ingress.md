@@ -122,7 +122,7 @@ metadata:
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "traefik"
-    ingress.kubernetes.io/custom-request-headers: l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
+    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
     ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
 spec:
   rules:
@@ -137,13 +137,13 @@ spec:
 The important annotation here is:
 
 ```yaml
-ingress.kubernetes.io/custom-request-headers: l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80
+ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
 ```
 
 Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
-`servicePort`.
+`servicePort`. Please see the [Traefik website](https://docs.traefik.io/configuration/backends/kubernetes/#custom-headers-annotations) for more information about its custom headers annotations.
 
 {{< note >}}
 When using Traefik to terminate HTTPS, Linkerd is unable to strip internal
