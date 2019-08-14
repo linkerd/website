@@ -37,18 +37,29 @@ Then generate the intermediate certificate and key that the Linkerd proxies will
 rely on to generate a different certificate for each service:
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 2020-10-02T10:00:00Z --no-password --insecure
+step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
 This will generate the `issuer.crt` and `issuer.key` files.
 
-These are the files you need to pass to the `--identity-issuer-certificate-file`
-and `--identity-issuer-key-file` options when installing Linkerd with the CLI,
-and the `Identity.Issuer.TLS.CrtPEM` and `Identity.Issuer.TLS.KeyPEM` values
-when installing Linkerd with Helm.
+You can finally provide these files when installing Linkerd with the CLI:
 
-Also, when installing with the CLI you need to pass to the
-`--identity-issuance-lifetime` option a value corresponding to what you used in
-`--not-after` above, and when installing with Helm you'll pass the same value to
-`Identity.Issuer.CrtExpiry`. Note that the expiration time (`--not-after`) should
-be in RFC-3339 format.
+```bash
+linkerd install \
+  --identity-trust-anchors-file ca.crt \
+  --identity-issuer-certificate-file issuer.crt \
+  --identity-issuer-key-file issuer.key \
+  --identity-issuance-lifetime 8760h \
+  | kubectl apply -f -
+```
+
+Or when installing with Helm:
+
+```bash
+helm install \
+  --set-file Identity.TrustAnchorsPEM=ca.crt \
+  --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
+  --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
+  --set Identity.Issuer.CrtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
+  charts/linkerd2
+```
