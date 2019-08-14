@@ -1,5 +1,5 @@
 +++
-title = "Generating certificates for Linkerd identity"
+title = "Generating certificates for Linkerd identity mTLS"
 description = "How to generate certificates and keys needed for Linkerd to operate."
 +++
 
@@ -7,11 +7,11 @@ In order to support [mTLS connections between meshed
 pods](/2/features/automatic-mtls), Linkerd needs to be provided with a trust
 anchor certificate and an issuer certificate with its corresponding key.
 
-When using the CLI to install, you can provide these through the `--indentity-*`
+When using the CLI to install, you can provide these through the `--identity-*`
 family of flags. If you don't provide them, Linkerd will generate them for you.
 
-On the other hand when using Helm to install Linkerd, it's not
-possible to automatically generate them and you're forced to provide them.
+On the other hand when using Helm to install Linkerd, it's not possible to
+automatically generate them and you're required to provide them.
 
 You can generate these certificates using a tool like openssl or
 [step](https://smallstep.com/cli/). Following are the instructions specific for
@@ -19,7 +19,8 @@ You can generate these certificates using a tool like openssl or
 
 ## Generate the certificates with `step`
 
-First generate the root certificate with its private key:
+First generate the root certificate with its private key (using `step` version
+0.10.1):
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
@@ -33,8 +34,8 @@ Linkerd with Helm.
 Note we use `--no-password --insecure` to avoid encrypting those files with a
 passphrase.
 
-Then generate the intermediate certificate and key that the Linkerd proxies will
-rely on to generate a different certificate for each service:
+Then generate the intermediate certificate and key pair that will be used to
+sign the Linkerd proxies' CSR.
 
 ```bash
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
