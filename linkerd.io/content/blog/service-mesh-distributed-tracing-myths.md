@@ -28,7 +28,7 @@ it would require from them to be useful.
 These misunderstandings can be characterized as a set of myths, which I'll
 dispel below.
 
-## Myth 1: I need distributed tracing to measure the health / latency / throughput of my services.
+## Myth 1: I need distributed tracing to measure the health / latency / throughput of my services
 
 **False**. Many respondents suggested that measuring service success rate,
 latency, etc was a desired use case for distributed tracing in the service
@@ -44,7 +44,7 @@ report this data today:
 
 ![Linkerd dashboard showing an automatically generated route metrics](/images/books/webapp-routes.png)
 
-## Myth 2: I need distributed tracing to see which services talk to which other services.
+## Myth 2: I need distributed tracing to see which services talk to which other services
 
 **False**. Many respondents suggested that drawing a *service topology* was a
 desired use of distributed tracing in a service mesh. Again, while this is a
@@ -57,7 +57,7 @@ Kubernetes deployments on the deployment detail page:
 
 ![Linkerd dashboard showing an automatically generated topology graph](/images/books/webapp-detail.png)
 
-## Myth 3: I can "get distributed tracing" from the service mesh without having to make any changes to my application.
+## Myth 3: I can "get distributed tracing" from the service mesh without having to make any changes to my application
 
 **False**. Many respondents answered that they would not expect to need any
 application changes once Linkerd added distributed tracing support.
@@ -71,7 +71,7 @@ distributed tracing mesh can only work if developers make changes to their
 code. Note that this isn't a flaw with Linkerd; this is a function of the
 sidecar proxy model and is true of any sidecar-based service mesh.
 
-## Myth 4: I can "get distributed tracing" from a service mesh by instrumenting my application with a distributed tracing library.
+## Myth 4: I can "get distributed tracing" from a service mesh by instrumenting my application with a distributed tracing library
 
 *Sort of true*. Some respondents answered that they would make use of
 distributed tracing in Linkerd by instrumenting their applications with a
