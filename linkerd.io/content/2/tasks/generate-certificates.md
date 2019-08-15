@@ -4,20 +4,21 @@ description = "How to generate certificates and keys needed for Linkerd to opera
 +++
 
 In order to support [mTLS connections between meshed
-pods](/2/features/automatic-mtls), Linkerd needs to be provided with a trust
-anchor certificate and an issuer certificate with its corresponding key.
+pods](/2/features/automatic-mtls), Linkerd needs a trust anchor certificate and
+an issuer certificate with its corresponding key.
 
-When using the CLI to install, you can provide these through the `--identity-*`
-family of flags. If you don't provide them, Linkerd will generate them for you.
+When installing with `linkerd install`, these certificates are automatically
+generated. Alternatively, you can specify your own with the `--identity-*` flags
+(see the [linkerd install reference](/2/reference/cli/install/)).
 
 On the other hand when using Helm to install Linkerd, it's not possible to
 automatically generate them and you're required to provide them.
 
 You can generate these certificates using a tool like openssl or
-[step](https://smallstep.com/cli/). Following are the instructions specific for
-`step`.
+[step](https://smallstep.com/cli/). In this tutorial, we'll walk you through how
+to to use the `step` CLI to do this.
 
-## Generate the certificates with `step`
+## Generating the certificates with `step`
 
 First generate the root certificate with its private key (using `step` version
 0.10.1):
@@ -42,6 +43,8 @@ step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --c
 ```
 
 This will generate the `issuer.crt` and `issuer.key` files.
+
+## Passing the certificates to Linkerd
 
 You can finally provide these files when installing Linkerd with the CLI:
 
