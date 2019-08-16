@@ -95,6 +95,7 @@ kubectl create clusterrolebinding \
 ```
 
 You can verify you now have tap access with:
+
 ```bash
 $ linkerd tap -n linkerd deploy/linkerd-controller --as $(whoami)
 req id=3:0 proxy=in  src=10.244.0.1:37392 dst=10.244.0.13:9996 tls=not_provided_by_remote :method=GET :authority=10.244.0.13:9996 :path=/ping
@@ -161,7 +162,6 @@ kubectl create clusterrolebinding \
 {{< note >}}
 Not recommended for production, only do this for testing/development.
 {{< /note >}}
-
 
 ### Linkerd Dashboard tap access
 
