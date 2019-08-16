@@ -19,7 +19,8 @@ instructions](/2/tasks/generate-certificates) to generate new ones.
 1. Get ahold of Linkerd's source code from Github:
 
 ```bash
-git clone --branch {{% latestedge %}} git@github.com:linkerd/linkerd2.git; cd linkerd2
+# according to your needs, replace _version_ with {{% latestversion %}} or {{% latestedge %}}
+git clone --branch _version_ git@github.com:linkerd/linkerd2.git; cd linkerd2
 ```
 
 1. Set up the chart dependencies:
@@ -43,7 +44,7 @@ The chart values will be picked from the default `values.yaml` file located
 under `charts/linkerd2`.
 
 You can override the values in that file by providing your own `values.yaml`
-file passed with a -f option, or overriding specific values using the family of
+file passed with a `-f` option, or overriding specific values using the family of
 `--set` flags like we did above for certificates.
 
 ## Setting High-Availability
