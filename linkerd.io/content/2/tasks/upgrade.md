@@ -16,6 +16,62 @@ There are three components that need to be upgraded:
 In this guide, we'll walk you through how to upgrade all three components
 incrementally without taking down any of your services.
 
+## Upgrade notice: stable-2.5.0
+
+This release supports Kubernetes 1.12+.
+
+### Upgrading from stable-2.4.x
+
+{{< note >}}
+These instructions also apply to upgrading from edge-19.7.4, edge-19.7.5,
+edge-19.8.1, edge-19.8.2, edge-19.8.3, edge-19.8.4, and edge-19.8.5.
+{{< /note >}}
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained.
+
+```bash
+# get the latest stable CLI
+curl -sL https://run.linkerd.io/install | sh
+```
+
+```bash
+linkerd upgrade | kubectl apply -f -
+```
+
+For upgrading a multi-stage installation setup, follow the instructions at
+[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
+
+Users who have previously saved the Linkerd control plane's configuration to
+files can follow the instructions at
+[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+to ensure those configuration are retained by the `linkerd upgrade` command.
+
+Once the `upgrade` command completes, use the `linkerd check` command to confirm
+the control plane is ready.
+
+{{< note >}}
+The `stable-2.5` `linkerd check` command will return an error when run against
+an older control plane. This error is benign and will resolve itself once the
+control plane is upgraded to `stable-2.5`:
+
+```bash
+linkerd-config
+--------------
+√ control plane Namespace exists
+√ control plane ClusterRoles exist
+√ control plane ClusterRoleBindings exist
+× control plane ServiceAccounts exist
+    missing ServiceAccounts: linkerd-heartbeat
+    see https://linkerd.io/checks/#l5d-existence-sa for hints
+```
+
+{{< /note >}}
+
+When ready, proceed to upgrading the data plane by following the instructions at
+[Upgrade the data plane](#upgrade-the-data-plane).
+
 ## Upgrade notice: stable-2.4.0
 
 This release supports Kubernetes 1.12+.
