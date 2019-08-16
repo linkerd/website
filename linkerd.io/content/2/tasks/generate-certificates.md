@@ -1,10 +1,10 @@
 +++
-title = "Generating certificates for Linkerd identity mTLS"
-description = "How to generate certificates and keys needed for Linkerd to operate."
+title = "Generating your own mTLS root certificates"
+description = "Generate your own mTLS root certificate instead of letting Linkerd do it for you."
 +++
 
 In order to support [mTLS connections between meshed
-pods](/2/features/automatic-mtls), Linkerd needs a trust anchor certificate and
+pods](/2/features/automatic-mtls/), Linkerd needs a trust anchor certificate and
 an issuer certificate with its corresponding key.
 
 When installing with `linkerd install`, these certificates are automatically
