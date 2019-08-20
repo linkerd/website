@@ -71,7 +71,7 @@ When paths have parameters in them such as user names or ids, it usually doesn't
 
 ```yml
 ### ServiceProfile for webapp.default ###
-apiVersion: linkerd.io/v1alpha1
+apiVersion: linkerd.io/v1alpha2
 kind: ServiceProfile
 metadata:
   name: webapp.default.svc.cluster.local
@@ -125,7 +125,7 @@ The `linkerd profile --template` command generates a basic service profile spec 
 
 ```yml
 ### ServiceProfile for webapp.default ###
-apiVersion: linkerd.io/v1alpha1
+apiVersion: linkerd.io/v1alpha2
 kind: ServiceProfile
 metadata:
   name: webapp.default.svc.cluster.local

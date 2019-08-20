@@ -180,7 +180,7 @@ Alongside `install` and `inject`, `profile` is also a pure text operation. Check
 out the profile that is generated:
 
 ```yaml
-apiVersion: linkerd.io/v1alpha1
+apiVersion: linkerd.io/v1alpha2
 kind: ServiceProfile
 metadata:
   creationTimestamp: null

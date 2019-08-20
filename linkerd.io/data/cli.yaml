@@ -158,17 +158,21 @@
       * pods
       * replicationcontrollers
       * statefulsets
-  Example: "  # Get all edges between pods that either originate from or terminate
-    in the demo namespace.\n  linkerd edges po -n test\n\n  # Get all edges between
-    pods that either originate from or terminate in the default namespace.\n  linkerd
-    edges po\n\t\t\n  # Get all edges between pods in all namespaces.\n  linkerd edges
-    po --all-namespaces"
+  Example: |2-
+      # Get all edges between pods that either originate from or terminate in the demo namespace.
+      linkerd edges po -n test
+
+      # Get all edges between pods that either originate from or terminate in the default namespace.
+      linkerd edges po
+
+      # Get all edges between pods in all namespaces.
+      linkerd edges po --all-namespaces
   InheritedOptions: null
   Name: edges
   Options:
   - DefaultValue: ""
     Name: all-namespaces
-    Shorthand: ""
+    Shorthand: A
     Usage: |
       If present, returns edges across all namespaces, ignoring the "--namespace" flag
   - DefaultValue: ""
@@ -182,7 +186,7 @@
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format; one of: "table" or "json"'
+    Usage: 'Output format; one of: "table" or "json" or "wide"'
   SeeAlso: null
   Synopsis: |
     Display connections between resources, and Linkerd proxy identities
@@ -231,7 +235,7 @@
   Options:
   - DefaultValue: ""
     Name: all-namespaces
-    Shorthand: ""
+    Shorthand: A
     Usage: |
       If present, returns pods across all namespaces, ignoring the "--namespace" flag
   - DefaultValue: ""
@@ -398,6 +402,11 @@
     Shorthand: ""
     Usage: |
       Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+  - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
   SeeAlso: null
   Synopsis: Output Kubernetes cluster-wide resources to install Linkerd
 - Description: |-
@@ -560,6 +569,11 @@
     Name: registry
     Shorthand: ""
     Usage: Docker registry to pull images from
+  - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
   - DefaultValue: ""
     Name: skip-checks
     Shorthand: ""
@@ -744,6 +758,11 @@
     Shorthand: ""
     Usage: Docker registry to pull images from
   - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+  - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
@@ -773,11 +792,11 @@
   - DefaultValue: ""
     Name: cni-image
     Shorthand: ""
-    Usage: Image for the cni-plugin.
+    Usage: Image for the cni-plugin
   - DefaultValue: ""
     Name: cni-log-level
     Shorthand: ""
-    Usage: Log level for the cni-plugin.
+    Usage: Log level for the cni-plugin
   - DefaultValue: ""
     Name: control-port
     Shorthand: ""
@@ -785,12 +804,12 @@
   - DefaultValue: ""
     Name: dest-cni-bin-dir
     Shorthand: ""
-    Usage: Directory on the host where the CNI plugin binaries reside.
+    Usage: Directory on the host where the CNI plugin binaries reside
   - DefaultValue: ""
     Name: dest-cni-net-dir
     Shorthand: ""
     Usage: |
-      Directory on the host where the CNI configuration will be placed.
+      Directory on the host where the CNI configuration will be placed
   - DefaultValue: ""
     Name: help
     Shorthand: h
@@ -824,6 +843,11 @@
     Name: skip-outbound-ports
     Shorthand: ""
     Usage: Outbound ports that should skip the proxy
+  - DefaultValue: ""
+    Name: use-wait-flag
+    Shorthand: ""
+    Usage: |
+      Configures the CNI plugin to use the "-w" flag for the iptables command. (default false)
   SeeAlso: null
   Synopsis: |
     Output Kubernetes configs to install Linkerd CNI (experimental)
@@ -832,7 +856,7 @@
 
     This command installs Service Profiles into the Linkerd control plane. A
     cluster-wide Linkerd control-plane is a prerequisite. To confirm Service Profile
-    support, verify "kubectl api-versions" outputs "linkerd.io/v1alpha1".
+    support, verify "kubectl api-versions" outputs "linkerd.io/v1alpha2".
   Example: ""
   InheritedOptions: null
   Name: install-sp
@@ -1057,6 +1081,7 @@
       * po mypod1 mypod2
       * rc/my-replication-controller
       * sts/my-statefulset
+      * ts/my-split
       * authority
       * au/my-authority
       * all
@@ -1069,6 +1094,7 @@
       * pods
       * replicationcontrollers
       * statefulsets
+      * trafficsplits
       * authorities (not supported in --from)
       * services (only supported if a --from is also specified, or as a --to)
       * all (all resource types, not supported in --from or --to)
@@ -1088,20 +1114,29 @@
       # Get all inbound stats to the web deployment.
       linkerd stat deploy/web
 
-      # Getl all inbound stats to the pod1 and pod2 pods
+      # Get all inbound stats to the pod1 and pod2 pods
       linkerd stat po pod1 pod2
 
-      # Getl all inbound stats to the pod1 pod and the web deployment
+      # Get all inbound stats to the pod1 pod and the web deployment
       linkerd stat po/pod1 deploy/web
 
-      # Get all pods in all namespaces that call the hello1 deployment in the test namesapce.
+      # Get all pods in all namespaces that call the hello1 deployment in the test namespace.
       linkerd stat pods --to deploy/hello1 --to-namespace test --all-namespaces
 
-      # Get all pods in all namespaces that call the hello1 service in the test namesapce.
+      # Get all pods in all namespaces that call the hello1 service in the test namespace.
       linkerd stat pods --to svc/hello1 --to-namespace test --all-namespaces
 
       # Get all services in all namespaces that receive calls from hello1 deployment in the test namespace.
       linkerd stat services --from deploy/hello1 --from-namespace test --all-namespaces
+
+      # Get all trafficsplits and their leaf services.
+      linkerd stat ts
+
+      # Get the hello-split trafficsplit and its leaf services.
+      linkerd stat ts/hello-split
+
+      # Get all trafficsplits and their leaf services, and metrics for any traffic coming to the leaf services from the hello1 deployment.
+      linkerd stat ts --from deploy/hello1
 
       # Get all namespaces that receive traffic from the default namespace.
       linkerd stat namespaces --from ns/default
@@ -1113,7 +1148,7 @@
   Options:
   - DefaultValue: ""
     Name: all-namespaces
-    Shorthand: ""
+    Shorthand: A
     Usage: |
       If present, returns stats across all namespaces, ignoring the "--namespace" flag
   - DefaultValue: ""
@@ -1352,6 +1387,16 @@
     Name: help
     Shorthand: h
     Usage: help for config
+  - DefaultValue: ""
+    Name: linkerd-cni-enabled
+    Shorthand: ""
+    Usage: |
+      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+  - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
   SeeAlso: null
   Synopsis: |
     Output Kubernetes cluster-wide resources to upgrade an existing Linkerd
@@ -1494,6 +1539,11 @@
     Name: registry
     Shorthand: ""
     Usage: Docker registry to pull images from
+  - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
@@ -1653,6 +1703,11 @@
     Name: registry
     Shorthand: ""
     Usage: Docker registry to pull images from
+  - DefaultValue: ""
+    Name: restrict-dashboard-privileges
+    Shorthand: ""
+    Usage: |
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
