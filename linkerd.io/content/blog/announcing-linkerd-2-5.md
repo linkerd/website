@@ -22,18 +22,17 @@ Helm 3 user, you can use this install Linkerd with your existing deployment
 flow. Even if you're not, this method may provide a better mechanism for
 environments that require lots of customization at install time, which would
 otherwise require a complicated set of arguments to `linkerd install`. (And
-getting an official Linkerd 2.x Helm chart is [in
+an official Linkerd 2.x Helm chart is [in
 progress](https://github.com/linkerd/linkerd2/pull/3292).)
 
 Linkerd's `tap` command provides "tcpdump for microservices" functionality
 that allows users to view a sample of live request/response calls for meshed
 deployments. (Particularly useful since as of 2.3, Linkerd [encrypts all
-meshed HTTP traffic by
-default](https://linkerd.io/2019/04/16/announcing-linkerd-2.3/), rendering
-`tcpdump` itself less than useful!) In Linkerd 2.5, `tap` now uses Kubernetes
-RBAC to provide granular access to results. This means that applications
-which process sensitive data can now control who has access that data in
-transit by using the RBAC rules of the underlying Kubernetes cluster.
+meshed HTTP traffic by default]({{< ref "announcing-linkerd-2-3" >}}),
+rendering `tcpdump` itself less than useful!) In Linkerd 2.5, `tap` now uses
+Kubernetes RBAC to provide granular access to results. This means that
+applications which process sensitive data can now control who has access that
+data in transit by using the RBAC rules of the underlying Kubernetes cluster.
 
 Linkerd 2.5 also includes a tremendous list of other improvements,
 performance enhancements, and bug fixes, including:
@@ -59,7 +58,7 @@ adopters. A special thanks especially to
 [Tarun Pothulapati](https://github.com/Pothulapati)
 and [Guangming Wang](https://github.com/ethan-daocloud).
 
-We want your feedback! Next week, we'll be discussing all the new features,
+📣  We want your feedback! Next week, we'll be discussing all the new features,
 plus upcoming plans for Linkerd 2.6, Linkerd's integrations with [OPA
 Gatekeeper](https://github.com/open-policy-agent/gatekeeper) and
 [OpenFaaS](https://github.com/openfaas/faas) in our monthly [online Linkerd
