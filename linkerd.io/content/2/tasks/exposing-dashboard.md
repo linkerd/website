@@ -73,6 +73,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:linkerd-web.linkerd.svc.cluster.local:8084
+    traefik.ingress.kubernetes.io/auth-type: basic
+    traefik.ingress.kubernetes.io/auth-secret: web-ingress-auth
 spec:
   rules:
   - host: dashboard.example.com
@@ -81,6 +83,7 @@ spec:
       - backend:
           serviceName: linkerd-web
           servicePort: 8084
+
 ```
 
 This exposes the dashboard at `dashboard.example.com` and protects it with basic
