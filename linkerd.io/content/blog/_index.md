@@ -7,7 +7,7 @@ tags:
 - Tutorials &amp; How-To's
 - Video
 items:
-- blog/announcing-linkerd-2-4.md
+- blog/announcing-linkerd-2-5.md
 - blog/kubecon-eu-2019-linkerd-roundup.md
 description: ''
 keywords: []
