@@ -1,7 +1,7 @@
 ---
 title: 'Announcing Linkerd 2.5: Helm support and RBAC-aware tap'
 author: 'william'
-date: 2019-08-19T00:00:00+00:00
+date: 2019-08-20T00:00:00+00:00
 thumbnail: /uploads/diving-helmet.jpg
 draft: false
 slug: announcing-linkerd-2.5
