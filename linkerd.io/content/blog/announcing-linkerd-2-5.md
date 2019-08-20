@@ -88,4 +88,3 @@ community on [Slack](https://slack.linkerd.io/),
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
 (*Image credit: [Plaisanter](https://www.flickr.com/photos/plaisanter/)*)
-
