@@ -20,6 +20,13 @@ incrementally without taking down any of your services.
 
 This release supports Kubernetes 1.12+.
 
+{{< note >}}
+Linkerd 2.5.0 introduced [Helm support](/2/tasks/install-helm/). If Linkerd was
+installed via `linkerd install`, it must be upgraded via `linkerd upgrade`. If
+Linkerd was installed via Helm, it must be upgraded via Helm. Mixing these two
+installation procedures is not supported.
+{{< /note >}}
+
 ### Upgrading from stable-2.4.x
 
 {{< note >}}
