@@ -22,7 +22,7 @@ Helm 3 user, you can use this install Linkerd with your existing deployment
 flow. Even if you're not, this method may provide a better mechanism for
 environments that require lots of customization at install time, which would
 otherwise require a complicated set of arguments to `linkerd install`. (And
-an official Linkerd 2.x Helm chart is [in
+getting a Linkerd 2.x Helm chart into the Helm stable repo itself is [in
 progress](https://github.com/linkerd/linkerd2/pull/3292).)
 
 Linkerd's `tap` command provides "tcpdump for microservices" functionality
