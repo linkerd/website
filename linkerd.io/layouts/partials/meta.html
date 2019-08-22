@@ -2,6 +2,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+{{ if eq .Section "1" }}
+<meta name="robots" content="noindex">
+{{ end }}
+
 <meta name="description" content="{{ partial "description.html" . }}" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@Linkerd" />
