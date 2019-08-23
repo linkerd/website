@@ -22,8 +22,7 @@ url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/$
   curl -LO "${url}"
   echo ""
   echo "Download complete!, validating checksum..."
-  checksum=$(sha256sum "${filename}")
-  checksum=${checksum%%[[:blank:]]*}
+  checksum=$(openssl dgst -sha256 "${filename}" | cut -d' ' -f2)
   if [ "$checksum" != "$SHA" ]; then
     echo "Checksum validation failed." >&2
     exit 1
