@@ -16,6 +16,7 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 
 ## Helm install procedure
 
+<!-- markdownlint-disable ol-prefix Ordered -->
 1. Get ahold of Linkerd's source code from Github:
 
 ```bash
@@ -23,13 +24,13 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 git clone --branch _version_ git@github.com:linkerd/linkerd2.git; cd linkerd2
 ```
 
-1. Set up the chart dependencies:
+2. Set up the chart dependencies:
 
 ```bash
 helm dependency update charts/linkerd2
 ```
 
-1. Install!
+3. Install!
 
 ```bash
 # set expiry date one year from now, in Mac:
@@ -44,6 +45,7 @@ helm install \
   --set Identity.Issuer.CrtExpiry=$exp \
   charts/linkerd2
 ```
+<!-- markdownlint-enable ol-prefix Ordered -->
 
 The chart values will be picked from the default `values.yaml` file located
 under `charts/linkerd2`.
