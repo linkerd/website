@@ -23,13 +23,13 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 git clone --branch _version_ git@github.com:linkerd/linkerd2.git; cd linkerd2
 ```
 
-2. Set up the chart dependencies:
+1. Set up the chart dependencies:
 
 ```bash
 helm dependency update charts/linkerd2
 ```
 
-3. Install!
+1. Install!
 
 ```bash
 # set expiry date one year from now, in Mac:
