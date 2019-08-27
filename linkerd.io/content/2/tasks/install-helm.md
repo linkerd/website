@@ -16,29 +16,35 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 
 ## Helm install procedure
 
+<!-- markdownlint-disable blanks-around-lists -->
+<!-- markdownlint-disable blanks-around-fences -->
 1. Get ahold of Linkerd's source code from Github:
-
 ```bash
 # according to your needs, replace _version_ with {{% latestversion %}} or {{% latestedge %}}
 git clone --branch _version_ git@github.com:linkerd/linkerd2.git; cd linkerd2
 ```
 
 1. Set up the chart dependencies:
-
 ```bash
 helm dependency update charts/linkerd2
 ```
 
 1. Install!
-
 ```bash
+# set expiry date one year from now, in Mac:
+exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
+# in Linux:
+exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
+
 helm install \
   --set-file Identity.TrustAnchorsPEM=ca.crt \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
-  --set Identity.Issuer.CrtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
+  --set Identity.Issuer.CrtExpiry=$exp \
   charts/linkerd2
 ```
+<!-- markdownlint-enable blanks-around-lists -->
+<!-- markdownlint-enable blanks-around-fences -->
 
 The chart values will be picked from the default `values.yaml` file located
 under `charts/linkerd2`.
@@ -57,11 +63,12 @@ replicas, higher memory/cpu limits and affinities are specified in that file.
 As usual the `-f` flag to provide the override file, for example:
 
 ```bash
+## see above on how to set $exp
 helm install \
   --set-file Identity.TrustAnchorsPEM=ca.crt \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
-  --set Identity.Issuer.CrtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
+  --set Identity.Issuer.CrtExpiry=$exp \
   -f charts/linkerd2/values-ha.yaml
   charts/linkerd2
 ```

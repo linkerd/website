@@ -56,7 +56,7 @@ adopters. A special thanks especially to
 [Cody Vandermyn](https://github.com/codeman9),
 [Alena Varkockova](https://github.com/alenkacz),
 [Tarun Pothulapati](https://github.com/Pothulapati)
-and [Guangming Wang](https://github.com/ethan-daocloud).
+and Guangming Wang
 
 📣  We want your feedback! Next week, we'll be discussing all the new features,
 plus upcoming plans for Linkerd 2.6, Linkerd's integrations with [OPA
