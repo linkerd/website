@@ -16,6 +16,8 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 
 ## Helm install procedure
 
+<!-- markdownlint-disable blanks-around-lists -->
+<!-- markdownlint-disable blanks-around-fences -->
 1. Get ahold of Linkerd's source code from Github:
 ```bash
 # according to your needs, replace _version_ with {{% latestversion %}} or {{% latestedge %}}
@@ -41,6 +43,8 @@ helm install \
   --set Identity.Issuer.CrtExpiry=$exp \
   charts/linkerd2
 ```
+<!-- markdownlint-enable blanks-around-lists -->
+<!-- markdownlint-enable blanks-around-fences -->
 
 The chart values will be picked from the default `values.yaml` file located
 under `charts/linkerd2`.
