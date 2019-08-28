@@ -1,6 +1,6 @@
 +++
 author = "kiersten"
-date = ""
+date = "2019-08-28"
 feature = "/uploads/august-linkerd-community-meetup.png"
 tags = []
 thumbnail = "/uploads/august-linkerd-community-meetup.png"
