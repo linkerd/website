@@ -1,7 +1,6 @@
 +++
 author = "kiersten"
 date = ""
-draft = true
 feature = "/uploads/august-linkerd-community-meetup.png"
 tags = []
 thumbnail = "/uploads/august-linkerd-community-meetup.png"
