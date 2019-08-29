@@ -62,8 +62,8 @@ section = ["HTML", "JSON"]
 [params]
 description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
 images = [""]
-latest_release_date = "2019-05-10"
-latest_release_version = "1.6.3"
+latest_release_date = "2019-08-29"
+latest_release_version = "1.7.0"
 logo = "/images/identity/svg/linkerd_primary_color_white.svg"
 [permalinks]
 blog = "/:year/:month/:day/:slug/"
