@@ -1,5 +1,6 @@
 +++
 date = "2019-07-11T15:29:04-07:00"
+draft = true
 title = "Announcing Linkerd 2.4 stable"
 
 +++
