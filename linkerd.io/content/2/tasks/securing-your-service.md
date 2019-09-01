@@ -116,7 +116,7 @@ to inspect the raw packets on the network interface. For example:
 tshark -i any -d tcp.port==8080,ssl | grep -v 127.0.0.1
 ```
 
-This tells `tshark` that port 8080 might be TLS'd, and to ignores localhost (as
+This tells `tshark` that port 8080 might be TLS'd, and to ignore localhost (as
 that traffic will always be unencrypted). The output will show both unencrypted
 communication, such as Prometheus scraping metrics, as well as the primary
 application traffic being automatically mTLS'd.
