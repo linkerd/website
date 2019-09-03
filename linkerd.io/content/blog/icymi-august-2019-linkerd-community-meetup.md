@@ -7,7 +7,7 @@ thumbnail = "/uploads/august-linkerd-community-meetup.png"
 title = "ICYMI 👉 August Linkerd Community Meetup"
 
 +++
-[![](/uploads/august-linkerd-meetup.png "August Linkerd Community Meetup")**Click for recording >>>**](https://www.crowdcast.io/e/linkerd-online-community-4/1)
+[![Recording](/uploads/august-linkerd-meetup.png "August Linkerd Community Meetup")**Click for recording >>>**](https://www.crowdcast.io/e/linkerd-online-community-4/1)
 
 In this month’s community meeting, Oliver, Thomas, and special guests Rita Zhang, maintainer of the [Gatekeeper](https://github.com/open-policy-agent/gatekeeper) project, and Matias Pan, maintainer of [OpenFaaS](https://github.com/openfaas), discussed:
 
