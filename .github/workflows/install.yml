@@ -53,9 +53,20 @@ jobs:
       shell: bash
       run: |
         for script in $(find run.linkerd.io/install*); do
+          [ $(uname -s) = "Darwin" ] && statcmd="stat -f %m" || statcmd="stat -c %Y"
           sh ${script}
           set -x
           client=$(~/.linkerd2/bin/linkerd version --client --short)
           expected=$(cat ${script} | grep VERSION= | sed 's/.*:-\(.*\)\}.*/\1/')
           [ "$client" = "$expected" ]
+          orig_mtime=$(${statcmd} ~/.linkerd2/bin/linkerd-${expected})
+          # re-run should not re-download
+          sh ${script}
+          new_mtime=$(${statcmd} ~/.linkerd2/bin/linkerd-${expected})
+          [ "${orig_mtime}" = "${new_mtime}" ]
+          # breaking the sha hash forces a redownload
+          echo "x" >> ~/.linkerd2/bin/linkerd-${expected}
+          sh ${script}
+          new_mtime=$(${statcmd} ~/.linkerd2/bin/linkerd-${expected})
+          [ "${orig_mtime}" != "${new_mtime}" ]
         done
