@@ -12,6 +12,17 @@
 
         {{/*  {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}  */}}
 
+        {{ if eq $docsVersion "1" }}
+          <div class="message-body">
+            <div><strong>Note</strong></div>
+        
+	    This documentation is for Linkerd 1.x, an older version with some
+            significant differences. You may want to see the
+            <a href="/2/overview/">Linkerd 2.x (current) documentation</a> instead.
+         </div>
+
+        {{ end }}
+
         <div class="language-markup">
           {{ if .page.Params.include_toc }}
           {{ .page.TableOfContents }}
