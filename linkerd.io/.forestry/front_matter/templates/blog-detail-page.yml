@@ -32,5 +32,3 @@ fields:
 - type: file
   label: Featured Thumbnail
   name: feature
-pages:
-- "linkerd.io/content/blog/icymi-\U0001F449-august-linkerd-community-meetup.md"
