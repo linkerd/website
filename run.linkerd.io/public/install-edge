@@ -7,6 +7,9 @@ LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_EDGE_VERSION}
 OS=$(uname -s)
 arch=$(uname -m)
 case $OS in
+  CYGWIN*)
+    OS=windows.exe
+    ;;
   Darwin)
     ;;
   Linux)
