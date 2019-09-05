@@ -54,7 +54,7 @@ A response class object must contain the following fields:
 | field | value |
 |-------|-------|
 | `condition` | a [response match](#response-match) object that defines if a response matches this response class |
-| `isSuccess` | a boolean that defines if these responses should be classified as successful |
+| `isFailure` | a boolean that defines if these responses should be classified as failed |
 {{< /table >}}
 
 ## Response Match
