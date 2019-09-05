@@ -27,7 +27,7 @@ A route object must contain the following fields:
 |-------|-------|
 | `name` | the name of this route as it will appear in the route label |
 | `condition` | a [request match](#request-match) object that defines if a request matches this route |
-| `responses` | (optional) a list of [response class](#response-class) objects |
+| `responseClasses` | (optional) a list of [response class](#response-class) objects |
 | `isRetryable` | indicates that requests to this route are always safe to retry and will cause the proxy to retry failed requests on this route whenever possible |
 | `timeout` | the maximum amount of time to wait for a response (including retries) to complete after the request is sent |
 {{< /table >}}
@@ -46,6 +46,42 @@ A request match object must contain _exactly one_ of the following fields:
 | `not` | a [request match](#request-match) object which must _not_ match |
 {{< /table >}}
 
+### Request Match Usage Examples
+
+The simplest condition is a path regular expression:
+
+```yaml
+pathRegex: '/authors/\d+'
+```
+
+This is a condition that checks the request method:
+
+```yaml
+method: POST
+```
+
+If more than one condition field is set, all of them must be satisfied. This is
+equivalent to using the 'all' condition:
+
+```yaml
+all:
+- pathRegex: '/authors/\d+'
+- method: POST
+```
+
+Conditions can be combined using 'all', 'any', and 'not':
+
+```yaml
+any:
+- all:
+  - method: POST
+  - pathRegex: '/authors/\d+'
+- all:
+  - not:
+      method: DELETE
+  - pathRegex: /info.txt
+```
+
 ## Response Class
 
 A response class object must contain the following fields:
@@ -54,7 +90,7 @@ A response class object must contain the following fields:
 | field | value |
 |-------|-------|
 | `condition` | a [response match](#response-match) object that defines if a response matches this response class |
-| `isSuccess` | a boolean that defines if these responses should be classified as successful |
+| `isFailure` | a boolean that defines if these responses should be classified as failed |
 {{< /table >}}
 
 ## Response Match
@@ -69,6 +105,9 @@ A response match object must contain _exactly one_ of the following fields:
 | `any` | a list of [response match](#response-match) objects, at least one of which must match |
 | `not` | a [response match](#response-match) object which must _not_ match |
 {{< /table >}}
+
+Response Match conditions can be combined in a similar way as shown above for
+[Request Match Usage Examples](#request-match-usage-examples)
 
 ## Status Range
 
