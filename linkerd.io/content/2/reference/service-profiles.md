@@ -48,21 +48,20 @@ A request match object must contain _exactly one_ of the following fields:
 
 ### Request Match Usage Examples
 
-#### The simplest condition is a path regular expression
+The simplest condition is a path regular expression:
 
 ```yaml
 pathRegex: '/authors/\d+'
 ```
 
-#### This is a condition that checks the request method
+This is a condition that checks the request method:
 
 ```yaml
 method: POST
 ```
 
-#### If more than one condition field is set, all of them must be satisfied
-
-This is equivalent to using the 'all' condition:
+If more than one condition field is set, all of them must be satisfied. This is
+equivalent to using the 'all' condition:
 
 ```yaml
 all:
@@ -70,7 +69,7 @@ all:
 - method: POST
 ```
 
-#### Conditions can be combined using 'all', 'any', and 'not'
+Conditions can be combined using 'all', 'any', and 'not':
 
 ```yaml
 any:
