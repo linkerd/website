@@ -4,11 +4,30 @@ set -eu
 
 LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_STABLE_VERSION}
 
-if [ "$(uname -s)" = "Darwin" ]; then
-  OS=darwin
-else
-  OS=linux
-fi
+OS=$(uname -s)
+arch=$(uname -m)
+case $OS in
+  CYGWIN*)
+    OS=windows.exe
+    ;;
+  Darwin)
+    ;;
+  Linux)
+    case $arch in
+      x86_64)
+        ;;
+      *)
+        echo "There is no linkerd $OS support for $arch" >&2
+        exit 1
+        ;;
+    esac
+    ;;
+  *)
+    echo "There is no linkerd support for $OS/$arch (yet...)" >&2
+    exit 1
+    ;;
+esac
+OS=$(echo $OS | tr [:upper:] [:lower:])
 
 tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
 filename="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
