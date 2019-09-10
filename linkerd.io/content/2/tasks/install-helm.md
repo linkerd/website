@@ -18,10 +18,10 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 
 ```bash
 # To add the repo for Linkerd2 stable releases:
-helm repo add linkerd-stable https://run.linkerd.io/stable
+helm repo add linkerd-stable https://helm.linkerd.io/stable
 
 # To add the repo for Linkerd2 edge releases:
-helm repo add linkerd-edge https://run.linkerd.io/edge
+helm repo add linkerd-edge https://helm.linkerd.io/edge
 ```
 
 The following instructions use the `linkerd-stable` repo. For installing an edge
