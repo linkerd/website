@@ -15,10 +15,11 @@ For production workloads, Linkerd's control plane can run in high availability
 * Sets production-ready CPU and memory resource requests on data plane proxies
 * *Requires* that the [proxy auto-injector](/2/features/proxy-injection/) be
   functional for any pods to be scheduled.
-* (In future releases) Sets [anti-affinity
+* Sets [anti-affinity
   policies](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
-  on critical control plane components to ensure that they are scheduled on separate
-  nodes, and, if possible, in separate zones.
+  on critical control plane components to achieve, if possible, that they are
+  scheduled on separate nodes and in separate zones by default. Optionally,
+  the scheduling on separate nodes can be made a hard requirement using a flag.
 
 ## Enabling HA
 
@@ -41,7 +42,7 @@ reference.
 
 ## Critical components
 
-Replication (and in the future, anti-affinity) rules are applied to all control
+Replication and anti-affinity rules are applied to all control
 plane components except Prometheus, Grafana, and the web service, which are
 considered non-critical.
 
