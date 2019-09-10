@@ -18,13 +18,13 @@ instructions](/2/tasks/generate-certificates/) to generate new ones.
 
 ```bash
 # To add the repo for Linkerd2 stable releases:
-helm repo add linkerd-stable https://helm.linkerd.io/stable
+helm repo add linkerd https://helm.linkerd.io/stable
 
 # To add the repo for Linkerd2 edge releases:
 helm repo add linkerd-edge https://helm.linkerd.io/edge
 ```
 
-The following instructions use the `linkerd-stable` repo. For installing an edge
+The following instructions use the `linkerd` repo. For installing an edge
 release, just replace with `linkerd-edge`.
 
 ## Helm install procedure
@@ -40,7 +40,7 @@ helm install \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
   --set Identity.Issuer.CrtExpiry=$exp \
-  linkerd-stable/linkerd2
+  linkerd/linkerd2
 ```
 
 The chart values will be picked from the chart's `values.yaml` file.
@@ -59,7 +59,7 @@ replicas, higher memory/cpu limits and affinities are specified in that file.
 You can get ahold of `values-ha.yaml` by fetching the chart files:
 
 ```bash
-helm fetch --untar linkerd-stable/linkerd2
+helm fetch --untar linkerd/linkerd2
 ```
 
 Then use the `-f` flag to provide the override file, for example:
@@ -72,5 +72,5 @@ helm install \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
   --set Identity.Issuer.CrtExpiry=$exp \
   -f linkerd2/values-ha.yaml
-  linkerd-stable/linkerd2
+  linkerd/linkerd2
 ```
