@@ -74,3 +74,20 @@ helm install \
   -f linkerd2/values-ha.yaml
   linkerd/linkerd2
 ```
+
+## Customizing the Namespace
+
+To use a different namespace than the default "linkerd", you can override the
+`Namespace` value.
+
+When the chart creates the namespace it will add the label
+`linkerd.io/is-control-plane: "true"`, which is required for the control plan to
+properly function. This means we can't support Helm v2's `--namespace` option,
+because that would create the namespace without that label. On the other hand,
+in Helm v3 that option must refer to an existing namespace, so that works if
+your workflow needs to create the namespace as a prior step.
+
+If you're relying on a separate tool to create your namespaces, make sure that:
+
+1) The label `linkerd.io/is-control-plane: "true"` is added to the namespace
+1) The `Namespace` value is passed when invoking `helm install`
