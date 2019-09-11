@@ -4,7 +4,7 @@ kind: Namespace
 metadata:
   name: nodevoto
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -50,7 +50,7 @@ spec:
     port: 8080
     targetPort: 8080
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -96,7 +96,7 @@ spec:
     port: 8080
     targetPort: 8080
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
@@ -148,7 +148,7 @@ spec:
     port: 80
     targetPort: 80
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
