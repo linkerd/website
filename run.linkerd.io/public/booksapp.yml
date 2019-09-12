@@ -15,7 +15,7 @@ spec:
     port: 7000
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: webapp
   labels:
@@ -65,7 +65,7 @@ spec:
     port: 7001
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: authors
   labels:
@@ -115,7 +115,7 @@ spec:
     port: 7002
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: books
   labels:
@@ -148,7 +148,7 @@ spec:
           containerPort: 7002
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: traffic
   labels:

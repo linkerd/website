@@ -51,7 +51,7 @@ First, create a file named `priority-class.yaml` that will contain the overlay.
 This overlay will explain what needs to be modified.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkerd-identity
@@ -60,7 +60,7 @@ spec:
     spec:
       priorityClassName: system-cluster-critical
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkerd-controller
