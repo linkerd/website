@@ -76,7 +76,7 @@ Then, add this as a strategic merge option to `kustomization.yaml`:
 resources:
 - linkerd.yaml
 patchesStrategicMerge:
-- priorityclass.yaml
+- priority-class.yaml
 ```
 
 Applying this to your cluster requires taking the output of `kustomize build`

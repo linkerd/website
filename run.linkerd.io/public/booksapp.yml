@@ -23,6 +23,10 @@ metadata:
     project: booksapp
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+      project: booksapp
   template:
     metadata:
       labels:
@@ -73,6 +77,10 @@ metadata:
     project: booksapp
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: authors
+      project: booksapp
   template:
     metadata:
       labels:
@@ -123,6 +131,10 @@ metadata:
     project: booksapp
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: books
+      project: booksapp
   template:
     metadata:
       labels:
@@ -156,6 +168,10 @@ metadata:
     project: booksapp
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: traffic
+      project: booksapp
   template:
     metadata:
       labels:

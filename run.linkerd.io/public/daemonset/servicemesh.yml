@@ -279,6 +279,9 @@ metadata:
   name: l5d
   namespace: linkerd
 spec:
+  selector:
+    matchLabels:
+      app: l5d
   template:
     metadata:
       labels:
