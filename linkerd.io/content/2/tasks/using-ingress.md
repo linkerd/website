@@ -74,6 +74,36 @@ The important annotation here is:
       proxy_hide_header l5d-server-id;
 ```
 
+This sample ingress definition uses a single ingress for an application
+with multiple endpoints using different ports.
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: emojivoto
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-svc
+          servicePort: 80
+      - path: /another-endpoint
+        backend:
+          serviceName: another-svc
+          servicePort: 8080
+```
+
 Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
