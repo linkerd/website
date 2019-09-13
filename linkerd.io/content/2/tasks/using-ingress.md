@@ -52,7 +52,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       proxy_hide_header l5d-remote-ip;
       proxy_hide_header l5d-server-id;
 spec:
@@ -69,7 +69,7 @@ The important annotation here is:
 
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:80;
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       proxy_hide_header l5d-remote-ip;
       proxy_hide_header l5d-server-id;
 ```
