@@ -44,8 +44,12 @@ curl -sL https://run.linkerd.io/install | sh
 ```
 
 ```bash
-linkerd upgrade | kubectl apply -f -
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
+
+The options `--prune -l linkerd.io/control-plane-ns=linkerd` above make sure
+that any resources that are removed from the `linkerd upgrade` output, are
+effectively removed from the system.
 
 For upgrading a multi-stage installation setup, follow the instructions at
 [Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
@@ -97,14 +101,14 @@ curl -sL https://run.linkerd.io/install | sh
 For Kubernetes 1.12+:
 
 ```bash
-linkerd upgrade | kubectl apply -f -
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 For Kubernetes pre-1.12 where the mutating and validating webhook
 configurations' `sideEffects` fields aren't supported:
 
 ```bash
-linkerd upgrade --omit-webhook-side-effects | kubectl apply -f -
+linkerd upgrade --omit-webhook-side-effects | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 The `sideEffects` field is added to the Linkerd webhook configurations to
@@ -196,7 +200,7 @@ kubectl -n linkerd delete deploy/linkerd-ca
 curl -sL https://run.linkerd.io/install | sh
 
 # upgrade the control plane
-linkerd upgrade | kubectl apply -f -
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 Follow instructions for
@@ -212,13 +216,13 @@ each stage, analogous to the original multi-stage installation process.
 Stage 1, for the cluster owner:
 
 ```bash
-linkerd upgrade config | kubectl apply -f -
+linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 Stage 2, for the service owner:
 
 ```bash
-linkerd upgrade control-plane | kubectl apply -f -
+linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 #### Upgrading via manifests
@@ -270,7 +274,7 @@ curl -sL https://run.linkerd.io/install | sh
 # For example, if the previous installation was:
 # linkerd install --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
 # The upgrade command would be:
-linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
+linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 Follow instructions for
