@@ -14,23 +14,20 @@ to Helm by the user (unlike when using the `linkerd install` CLI which can
 generate these automatically). You can provide your own, or follow [these
 instructions](/2/tasks/generate-certificates/) to generate new ones.
 
+## Adding Linkerd's Helm repository
+
+```bash
+# To add the repo for Linkerd2 stable releases:
+helm repo add linkerd https://helm.linkerd.io/stable
+
+# To add the repo for Linkerd2 edge releases:
+helm repo add linkerd-edge https://helm.linkerd.io/edge
+```
+
+The following instructions use the `linkerd` repo. For installing an edge
+release, just replace with `linkerd-edge`.
+
 ## Helm install procedure
-
-<!-- markdownlint-disable ol-prefix Ordered -->
-1. Get ahold of Linkerd's source code from Github:
-
-```bash
-# according to your needs, replace _version_ with {{% latestversion %}} or {{% latestedge %}}
-git clone --branch _version_ git@github.com:linkerd/linkerd2.git; cd linkerd2
-```
-
-2. Set up the chart dependencies:
-
-```bash
-helm dependency update charts/linkerd2
-```
-
-3. Install!
 
 ```bash
 # set expiry date one year from now, in Mac:
@@ -43,12 +40,10 @@ helm install \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
   --set Identity.Issuer.CrtExpiry=$exp \
-  charts/linkerd2
+  linkerd/linkerd2
 ```
-<!-- markdownlint-enable ol-prefix Ordered -->
 
-The chart values will be picked from the default `values.yaml` file located
-under `charts/linkerd2`.
+The chart values will be picked from the chart's `values.yaml` file.
 
 You can override the values in that file by providing your own `values.yaml`
 file passed with a `-f` option, or overriding specific values using the family of
@@ -56,12 +51,18 @@ file passed with a `-f` option, or overriding specific values using the family o
 
 ## Setting High-Availability
 
-Also under `charts/linkerd2` there's a file `values-ha.yaml` that overrides some
+The chart contains a file `values-ha.yaml` that overrides some
 default values as to set things up under a high-availability scenario, analogous
 to the `--ha` option in `linkerd install`. Values such as higher number of
 replicas, higher memory/cpu limits and affinities are specified in that file.
 
-As usual the `-f` flag to provide the override file, for example:
+You can get ahold of `values-ha.yaml` by fetching the chart files:
+
+```bash
+helm fetch --untar linkerd/linkerd2
+```
+
+Then use the `-f` flag to provide the override file, for example:
 
 ```bash
 ## see above on how to set $exp
@@ -70,6 +71,23 @@ helm install \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
   --set Identity.Issuer.CrtExpiry=$exp \
-  -f charts/linkerd2/values-ha.yaml
-  charts/linkerd2
+  -f linkerd2/values-ha.yaml
+  linkerd/linkerd2
 ```
+
+## Customizing the Namespace
+
+To use a different namespace than the default "linkerd", you can override the
+`Namespace` value.
+
+When the chart creates the namespace it will add the label
+`linkerd.io/is-control-plane: "true"`, which is required for the control plan to
+properly function. This means we can't support Helm v2's `--namespace` option,
+because that would create the namespace without that label. On the other hand,
+in Helm v3 that option must refer to an existing namespace, so that works if
+your workflow needs to create the namespace as a prior step.
+
+If you're relying on a separate tool to create your namespaces, make sure that:
+
+1) The label `linkerd.io/is-control-plane: "true"` is added to the namespace
+1) The `Namespace` value is passed when invoking `helm install`
