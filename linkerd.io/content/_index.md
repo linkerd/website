@@ -14,7 +14,8 @@ top_hero:
   image_on_the_right: false
 announcement_banner:
   description: "**Linkerd 2.5.0** has been released! [Read the announcement >>](2019/08/20/announcing-linkerd-2.5/)"
-description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability, reliability, and security without requiring any changes to your code.
+description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability,
+  reliability, and security without requiring any changes to your code.
 keywords:
 - cloud native applications
 outputs:
@@ -22,6 +23,7 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
+  - '1166399513923211265'
   - '1091591745870139392'
   - '1151035350208454656'
   - '1130973416775983104'
