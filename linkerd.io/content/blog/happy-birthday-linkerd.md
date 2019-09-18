@@ -52,8 +52,7 @@ criticla building block for the cloud native ecosystem as a whole.
 🍰 **The creation of industry-defining interfaces**. The Linkerd team was the
 largest contributor to Microsoft's [Service Mesh
 Interface](https://linkerd.io/2019/05/24/linkerd-and-smi/) specification, and
-Linkerd's metrics and traffic splitting features support SMI out of the box. We
-continue to believe that SMI will be the future of 
+Linkerd's metrics and traffic splitting features support SMI out of the box.
 
 🍰 **A third-party security audit passed with flying colors**. The security
 analysis firm [Cure53 evaluated
