@@ -84,6 +84,7 @@ adopters, contributors, and committers. This is the oxygen that keeps any
 project growing, and above all, Linkerd is your project. Here's to another
 incredible year together with you. 💪
 
+<!-- markdownlint-disable MD033 -->
 {{<tweet 1172922222941560832 >}}
 {{<tweet 1172081948107239426 >}}
 {{<tweet 1166399513923211265 >}}
@@ -95,6 +96,7 @@ incredible year together with you. 💪
 {{<tweet 1133853318424485889 >}}
 {{<tweet 1130973416775983104 >}}
 {{<tweet 1091591745870139392 >}}
+<!-- markdownlint-enable MD033 -->
 
 ## Ready to try Linkerd?
 
