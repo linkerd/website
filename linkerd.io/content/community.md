@@ -46,7 +46,7 @@ link_lists:
       url: https://www.youtube.com/buoyantio
       icon_name: fab fa-youtube
     - caption: Calendar
-      url: https://calendar.google.com/calendar/embed?src=buoyant.io_ko9bgtral72jnbrg3ljtvbprsc%40group.calendar.google.com&ctz=America%2FLos_Angeles
+      url: https://calendar.google.com/calendar?cid=YnVveWFudC5pb19qMjhpazcwdnJsMzQxOGY0b2xka2RpY2k3b0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t
       icon_name: far fa-calendar
 talk_hero:
   title: Giving a talk or hosting a meetup about Linkerd?
