@@ -118,7 +118,7 @@ spec:
       volumes:
         - name: nginx-config
           configMap:
-            name: error-injector-config
+            name: error-injector
 ---
 apiVersion: v1
 kind: Service
