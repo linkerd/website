@@ -74,7 +74,7 @@ errors. To do this, you can start NGINX and configure it to return 500s by
 running:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat <<EOF | linkerd inject - | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -82,6 +82,7 @@ metadata:
   namespace: booksapp
 data:
  nginx.conf: |-
+    events {}
     http {
         server {
           listen 8080;
