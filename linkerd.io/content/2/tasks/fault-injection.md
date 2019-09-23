@@ -3,31 +3,17 @@ title = "Injecting Faults"
 description = "Practice chaos engineering by injecting faults into services with Linkerd."
 +++
 
-It is easy to inject failures into applications by using the [Traffic Split
-API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
-[Service Mesh Interface](https://smi-spec.io/). TrafficSplit allows you to
-redirect a percentage of traffic to a specific backend. This backend is
-completely flexible and can return whatever responses you want - 500s, timeouts
-or even crazy payloads.
+It is easy to inject failures into applications by using the [Traffic Split API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the [Service Mesh Interface](https://smi-spec.io/). TrafficSplit allows you to redirect a percentage of traffic to a specific backend. This backend is completely flexible and can return whatever responses you want - 500s, timeouts or even crazy payloads.
 
-The [books demo](/2/tasks/books/) is a great way to show off this behavior. The
-overall topology looks like:
+The [books demo](/2/tasks/books/) is a great way to show off this behavior. The overall topology looks like:
 
 {{< fig src="/images/books/topology.png" title="Topology" >}}
 
-In this guide, you will split some of the requests from `webapp` to `books`.
-Most requests will end up at the correct `books` destination, however some of
-them will be redirected to a faulty backend. This backend will return 500s for
-every request and inject faults into the `webapp` service. No code changes are
-required and as this method is configuration driven, it is a process that can be
-added to integration tests and CI pipelines. If you are really living the chaos
-engineering lifestyle, fault injection could even be used in production.
+In this guide, you will split some of the requests from `webapp` to `books`. Most requests will end up at the correct `books` destination, however some of them will be redirected to a faulty backend. This backend will return 500s for every request and inject faults into the `webapp` service. No code changes are required and as this method is configuration driven, it is a process that can be added to integration tests and CI pipelines. If you are really living the chaos engineering lifestyle, fault injection could even be used in production.
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd installed on your cluster.
-Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't already
-done this.
+To use this guide, you'll need to have Linkerd installed on your cluster. Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't already done this.
 
 ## Setup the service
 
@@ -39,10 +25,7 @@ kubectl create ns booksapp && \
   kubectl -n booksapp apply -f -
 ```
 
-As this manifest is used as a demo elsewhere, it has been configured with an
-error rate. To show how fault injection works, the error rate needs to be
-removed so that there is a reliable baseline. To increase success rate for
-booksapp to 100%, run:
+As this manifest is used as a demo elsewhere, it has been configured with an error rate. To show how fault injection works, the error rate needs to be removed so that there is a reliable baseline. To increase success rate for booksapp to 100%, run:
 
 ```bash
 kubectl -n booksapp patch deploy authors \
@@ -50,8 +33,7 @@ kubectl -n booksapp patch deploy authors \
   -p='[{"op":"remove", "path":"/spec/template/spec/containers/0/env/2"}]'
 ```
 
-After a little while, the stats will show 100% success rate. You can verify this
-by running:
+After a little while, the stats will show 100% success rate. You can verify this by running:
 
 ```bash
 linkerd -n booksapp stat deploy
@@ -69,12 +51,10 @@ webapp       3/3   100.00%   7.9rps          20ms          76ms          95ms   
 
 ## Create the faulty backend
 
-Injecting faults into booksapp requires a service that is configured to return
-errors. To do this, you can start NGINX and configure it to return 500s by
-running:
+Injecting faults into booksapp requires a service that is configured to return errors. To do this, you can start NGINX and configure it to return 500s by running:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat <<EOF | linkerd inject - | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -82,6 +62,7 @@ metadata:
   namespace: booksapp
 data:
  nginx.conf: |-
+    events {}
     http {
         server {
           listen 8080;
@@ -136,11 +117,7 @@ EOF
 
 ## Inject faults
 
-With booksapp and NGINX running, it is now time to partially split the traffic
-between an existing backend, `books`, and the newly created
-`error-injector`. This is done by adding a
-[TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
-configuration to your cluster:
+With booksapp and NGINX running, it is now time to partially split the traffic between an existing backend, `books`, and the newly created `error-injector`. This is done by adding a [TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) configuration to your cluster:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -159,33 +136,20 @@ spec:
 EOF
 ```
 
-When Linkerd sees traffic going to the `books` service, it will send 9/10
-requests to the original service and 1/10 to the error injector. You can see
-what this looks like by running `stat` and filtering explicitly to just the
-requests from `webapp`:
+When Linkerd sees traffic going to the `books` service, it will send 9/10 requests to the original service and 1/10 to the error injector. You can see what this looks like by running `stat` and filtering explicitly to just the requests from `webapp`:
 
 ```bash
 linkerd -n booksapp routes deploy/webapp --to service/books
 ```
 
-Unlike the previous `stat` command which only looks at the requests received by
-servers, this `routes` command filters to all the requests being issued by
-`webapp` destined for the `books` service itself. The output should show a 90%
-success rate:
+Unlike the previous `stat` command which only looks at the requests received by servers, this `routes` command filters to all the requests being issued by `webapp` destined for the `books` service itself. The output should show a 90% success rate:
 
 ```bash
 ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [DEFAULT]     books    90.08%   2.0rps           5ms          69ms          94ms
 ```
 
-{{< note >}}
-In this instance, you are looking at the *service* instead of the deployment. If
-you were to run this command and look at `deploy/books`, the success rate would
-still be 100%. The reason for this is that `error-injector` is a completely
-separate deployment and traffic is being shifted at the service level. The
-requests never reach the `books` pods and are instead rerouted to the error
-injector's pods.
-{{< /note >}}
+{{< note >}} In this instance, you are looking at the _service_ instead of the deployment. If you were to run this command and look at `deploy/books`, the success rate would still be 100%. The reason for this is that `error-injector` is a completely separate deployment and traffic is being shifted at the service level. The requests never reach the `books` pods and are instead rerouted to the error injector's pods. {{< /note >}}
 
 ## Cleanup
 
