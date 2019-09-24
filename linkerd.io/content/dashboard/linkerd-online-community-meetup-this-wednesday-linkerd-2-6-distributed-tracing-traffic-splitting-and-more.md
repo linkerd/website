@@ -1,6 +1,5 @@
 +++
 date = "2019-09-23"
-draft = true
 title = "Linkerd online community meetup this Wednesday: Linkerd 2.6, distributed tracing, traffic splitting, and more!"
 
 +++
