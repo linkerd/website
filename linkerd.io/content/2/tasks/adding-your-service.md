@@ -73,13 +73,16 @@ corresponding resources are reported to be meshed in the "Meshed" column of the
 
 {{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
 
-> _NOTE: There is currently an [issue](https://github.com/linkerd/linkerd2/issue\
-s/2704#issuecomment-483809204) whereby network calls made during initialization
-of your application may fail as the `linkerd-proxy` has yet to start. If your
-application exits when these initializations fail, and has a `restartPolicy` of
-`Always` (default) or `OnFailure` (providing your application exits with with a
-failure i.e. `exit(1)`), your container will restart with the `linkerd-proxy`
-ready, thus allowing your application to successfully complete initializations_.
+{{< note >}}
+There is currently an
+[issue](https://github.com/linkerd/linkerd2/issues/2704#issuecomment-483809204)
+whereby network calls made during initialization of your application may fail as
+the `linkerd-proxy` has yet to start. If your application exits when these
+initializations fail, and has a `restartPolicy` of `Always` (default) or
+`OnFailure` (providing your application exits with with a failure i.e.
+`exit(1)`), your container will restart with the `linkerd-proxy` ready, thus
+allowing your application to successfully complete initializations.
+{{< /note >}}
 
 ## More reading
 
