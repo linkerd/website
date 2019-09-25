@@ -60,21 +60,14 @@ echo $MASTER_IPV4_CIDR $NETWORK $NETWORK_TARGET_TAG
 Create the firewall rules for `proxy-injector` and `tap`:
 
 ```bash
-gcloud compute firewall-rules create gke-to-linkerd-proxy-injector-8443 \
+gcloud compute firewall-rules create gke-to-linkerd-control-plane \
   --network "$NETWORK" \
-  --allow "tcp:8443" \
+  --allow "tcp:8443,tcp:8088,tcp:8089" \
   --source-ranges "$MASTER_IPV4_CIDR" \
   --target-tags "$NETWORK_TARGET_TAG" \
-  --priority 1000
-```
-
-```bash
-gcloud compute firewall-rules create gke-to-linkerd-tap-8088-8089 \
-  --network "$NETWORK" \
-  --allow "tcp:8088-8089" \
-  --source-ranges "$MASTER_IPV4_CIDR" \
-  --target-tags "$NETWORK_TARGET_TAG" \
-  --priority 1000
+  --priority 1000 \
+  --description "Allow traffic on ports 8843, 8088, 8089 for linkerd tap and
+    proxy-injector control-plane components"
 ```
 
 Finally, verify that the firewall is created:
