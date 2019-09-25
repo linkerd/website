@@ -37,6 +37,14 @@ replicas for critical components with the `--controller-replicas` flag:
 linkerd install --ha --controller-replicas=2 | kubectl apply -f
 ```
 
+To ensure that Linkerd does not get in the way of system critical workloads
+starting, the proxy injector should be disabled for the `kube-system` namespace
+by running:
+
+```bash
+kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
+```
+
 See the full [`install` CLI documentation](/2/reference/cli/install/) for
 reference.
 
@@ -49,13 +57,6 @@ considered non-critical.
 ## Caveats
 
 HA mode assumes that there are always at least three nodes in the Kubernetes
-cluster. If this assumption is violated (e.g. the cluster is scaled down to two
-or fewer nodes), then the system will likely be left in a non-functional state.
-
-However, this behavior can be mitigated by applying a label to the `kube-system`
-namespace to specify that it should be ignored by the proxy injector mutating
-webhook:
-
-```bash
-kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
-```
+cluster. If this assumption is violated (e.g. the cluster is scaled down to
+two or fewer nodes), then the system will likely be left in a non-functional
+state.
