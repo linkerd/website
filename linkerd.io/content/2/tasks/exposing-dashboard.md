@@ -91,4 +91,4 @@ auth using admin/admin. Take a look at the [Traefik][traefik-auth]
 documentation for details on how to change the username and password.
 
 [nginx-auth]: https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/auth/basic/README.md
-[traefik-auth]: https://docs.traefik.io/user-guide/kubernetes/#basic-authentication
+[traefik-auth]: https://docs.traefik.io/middlewares/basicauth/
