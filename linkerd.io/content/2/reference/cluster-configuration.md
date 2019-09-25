@@ -57,12 +57,21 @@ echo $MASTER_IPV4_CIDR $NETWORK $NETWORK_TARGET_TAG
 10.0.0.0/28 foo-network gke-foo-cluster-c1ecba83-node
 ```
 
-Create the firewall rule:
+Create the firewall rules for `proxy-injector` and `tap`:
 
 ```bash
 gcloud compute firewall-rules create gke-to-linkerd-proxy-injector-8443 \
   --network "$NETWORK" \
   --allow "tcp:8443" \
+  --source-ranges "$MASTER_IPV4_CIDR" \
+  --target-tags "$NETWORK_TARGET_TAG" \
+  --priority 1000
+```
+
+```bash
+gcloud compute firewall-rules create gke-to-linkerd-tap-8088-8089 \
+  --network "$NETWORK" \
+  --allow "tcp:8088-8089" \
   --source-ranges "$MASTER_IPV4_CIDR" \
   --target-tags "$NETWORK_TARGET_TAG" \
   --priority 1000
