@@ -64,8 +64,6 @@ companies:
   link: https://www.expedia.com
 - image: "/uploads/logos/blue/offerup.svg"
   link: https://offerup.com/
-- image: "/uploads/logos/blue/webex.svg"
-  link: https://www.webex.com/
 - image: "/uploads/logos/blue/ask.svg"
   link: https://ask.com/
 - image: "/uploads/logos/blue/bigcommerce.svg"
