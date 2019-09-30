@@ -5,6 +5,9 @@ metadata:
   name: load
   namespace: test
 spec:
+  selector:
+    matchLabels:
+      app: load
   replicas: 1
   template:
     metadata:
