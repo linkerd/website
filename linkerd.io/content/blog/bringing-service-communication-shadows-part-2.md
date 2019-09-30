@@ -61,7 +61,7 @@ The data plane can then be polled by external metrics-collection utilities for a
 
 Dashboards help you visualize trends when troubleshooting by presenting aggregated data in easily digestible ways. Their presence is handy when using a service mesh, so they’re often included as an implementation component. But that can also be confusing to new users. Where does the dashboarding backend fit into service mesh architecture?
 
-Envoy is a data plane and it supports [using Grafana](https://medium.com/@mattklein123/lyfts-envoy-dashboards-5c91738816b1). Istio is a control plane and it supports [using Grafana](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/). And Linkerd, which is both a data plane and a control plane, also supports [using Grafana](https://github.com/linkerd/linkerd-viz). Are dashboards part of the data plane or the control plane?
+Envoy is a data plane and it supports [using Grafana](https://medium.com/@mattklein123/lyfts-envoy-dashboards-5c91738816b1). Istio is a control plane and it supports using Grafana. And Linkerd, which is both a data plane and a control plane, also supports [using Grafana](https://github.com/linkerd/linkerd-viz). Are dashboards part of the data plane or the control plane?
 
 The truth is, they’re not strictly a part of either.
 

@@ -118,6 +118,10 @@
   Name: dashboard
   Options:
   - DefaultValue: ""
+    Name: address
+    Shorthand: ""
+    Usage: The address at which to serve requests
+  - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for dashboard
@@ -280,7 +284,7 @@
   - DefaultValue: ""
     Name: disable-tap
     Shorthand: ""
-    Usage: Disables resources from from being tapped
+    Usage: Disables resources from being tapped
   - DefaultValue: ""
     Name: enable-debug-sidecar
     Shorthand: ""
@@ -428,6 +432,10 @@
     Shorthand: ""
     Usage: Proxy port to serve metrics on
   - DefaultValue: ""
+    Name: cluster-domain
+    Shorthand: ""
+    Usage: Set custom cluster domain
+  - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
     Usage: |
@@ -453,6 +461,10 @@
     Shorthand: ""
     Usage: |
       Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: disable-heartbeat
+    Shorthand: ""
+    Usage: Disables the heartbeat cronjob (default false)
   - DefaultValue: ""
     Name: enable-external-profiles
     Shorthand: ""
@@ -611,6 +623,10 @@
     Shorthand: ""
     Usage: Proxy port to serve metrics on
   - DefaultValue: ""
+    Name: cluster-domain
+    Shorthand: ""
+    Usage: Set custom cluster domain
+  - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
     Usage: |
@@ -636,6 +652,10 @@
     Shorthand: ""
     Usage: |
       Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: disable-heartbeat
+    Shorthand: ""
+    Usage: Disables the heartbeat cronjob (default false)
   - DefaultValue: ""
     Name: enable-external-profiles
     Shorthand: ""
@@ -1249,7 +1269,7 @@
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: wide'
+    Usage: 'Output format. One of: "wide", "json"'
   - DefaultValue: ""
     Name: path
     Shorthand: ""
@@ -1379,7 +1399,7 @@
     Note that this command should be followed by "linkerd upgrade control-plane".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade config | kubectl apply -f -
+      linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
   InheritedOptions: null
   Name: upgrade config
   Options:
@@ -1408,7 +1428,7 @@
     install command. It should be run after "linkerd upgrade config".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade control-plane | kubectl apply -f -
+      linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
   InheritedOptions: null
   Name: upgrade control-plane
   Options:
@@ -1416,6 +1436,10 @@
     Name: admin-port
     Shorthand: ""
     Usage: Proxy port to serve metrics on
+  - DefaultValue: ""
+    Name: cluster-domain
+    Shorthand: ""
+    Usage: Set custom cluster domain
   - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
@@ -1442,6 +1466,10 @@
     Shorthand: ""
     Usage: |
       Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: disable-heartbeat
+    Shorthand: ""
+    Usage: Disables the heartbeat cronjob (default false)
   - DefaultValue: ""
     Name: enable-external-profiles
     Shorthand: ""
@@ -1564,7 +1592,7 @@
     install command.
   Example: |2-
       # Default upgrade.
-      linkerd upgrade | kubectl apply -f -
+      linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 
       # Similar to install, upgrade may also be broken up into two stages, by user
       # privilege.
@@ -1575,6 +1603,10 @@
     Name: admin-port
     Shorthand: ""
     Usage: Proxy port to serve metrics on
+  - DefaultValue: ""
+    Name: cluster-domain
+    Shorthand: ""
+    Usage: Set custom cluster domain
   - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
@@ -1601,6 +1633,10 @@
     Shorthand: ""
     Usage: |
       Prevents the controller from instructing proxies to perform transparent HTTP/2 upgrading (default false)
+  - DefaultValue: ""
+    Name: disable-heartbeat
+    Shorthand: ""
+    Usage: Disables the heartbeat cronjob (default false)
   - DefaultValue: ""
     Name: enable-external-profiles
     Shorthand: ""
@@ -1739,3 +1775,4 @@
     Usage: Print the version number(s) only, with no additional output
   SeeAlso: null
   Synopsis: Print the client and server version information
+
