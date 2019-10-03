@@ -51,19 +51,17 @@ source project.
 So, that's all to say: please come join us in Linkerd. We have 150+
 contributors across the world, and while line-by-line the majority of
 contributions are sponsored by Buoyant, that's an artifact of how Buoyant
-operates, not a statement of control. As I said on Twitter:
+operates, not a statement of control. (We donated it to the CNCF for a reason!)
+As I said on Twitter:
 
 {{<tweet 1179202957369323520 >}}
 
-We want your input, your help, and your guidance. Let's build this amazing
-project together.
+We want your input, your help, and your guidance. Let's keep building this
+amazing project together.
 
 ## Ready to try Linkerd?
 
-Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
-these features in action. Either way, you can download the stable 2.5 release
-by running:
+Ready to try Linkerd? You can try the latest stable release by running:
 
 ```bash
 curl https://run.linkerd.io/install | sh
