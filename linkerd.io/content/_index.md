@@ -13,7 +13,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Happy birthday, Linkerd 2.0! [Read the announcement >>](2019/09/18/happy-birthday-linkerd/)
+  description: Linkerd is committed to open governance. [Read the blog post >>](/2019/10/03/linkerds-commitment-to-open-governance/)
 description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability,
   reliability, and security without requiring any changes to your code.
 keywords:
