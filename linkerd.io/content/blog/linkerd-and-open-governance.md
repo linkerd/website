@@ -28,13 +28,15 @@ more personal context.
 
 I wear two hats when it comes to Linkerd. I am one of the maintainers of the
 project. I am also the CEO of [Buoyant](https://buoyant.io). Buoyant created
-Linkerd in 2016, submitted it to the CNCF way back in the dark ages of 2017
+Linkerd, and submitted it to the CNCF way back in the dark ages of 2017
 (when the CNCF only had 4 projects!). Buoyant continues to be the primary
-primary sponsor of the project, and to date, the majority of code in Linkerd
-comes from folks who have been paid by Buoyant for their time and energy. In
-fact, I take great pride in the fact that Buoyant has been able to find great
-people in the Linkerd community, like Alejandro, Ivan, Zahari, Sean, Carl, and
-many more, and give them the ability to make a living by continuing these
+sponsor of the project, and to date, the majority of code in Linkerd comes from
+folks who have been paid by Buoyant for their time and energy. In fact, I take
+great pride in the fact that Buoyant has been able to find great people in the
+Linkerd community, like [Alejandro](https://github.com/alpeb),
+[Ivan](https://github.com/ihcsim), [Zahari](https://github.com/zaharidichev),
+[Sean](https://github.com/seanmonstar), [Carl](https://github.com/carllerche),
+and many more, and give them the ability to make a living by continuing these
 contributions.
 
 I sleep soundly at night because the two roles are never in conflict. Nothing
