@@ -10,4 +10,5 @@ IgnoreURLs:
   - https://marketplace.visualstudio.com/items*
   - https://www.xfinity.com/
   - https://monkey.org/*
+  - https://svn.apache.org/*
 DirectoryPath: public
