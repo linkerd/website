@@ -67,6 +67,7 @@ Then use the `-f` flag to provide the override file, for example:
 ```bash
 ## see above on how to set $exp
 helm install \
+  --name=linkerd2
   --set-file Identity.TrustAnchorsPEM=ca.crt \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
@@ -91,3 +92,21 @@ If you're relying on a separate tool to create your namespaces, make sure that:
 
 1) The label `linkerd.io/is-control-plane: "true"` is added to the namespace
 1) The `Namespace` value is passed when invoking `helm install`
+
+## Helm upgrade procedure
+
+Make sure your local Helm repos are updated:
+
+```bash
+helm repo update
+
+helm search linkerd2 -v {{% latestversion %}}
+NAME                    CHART VERSION          APP VERSION            DESCRIPTION
+linkerd/linkerd2        <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
+```
+
+Use the `helm upgrade` command to upgrade the chart:
+
+```bash
+helm upgrade linkerd2 linkerd/linkerd2
+```
