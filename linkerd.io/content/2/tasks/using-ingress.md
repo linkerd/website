@@ -51,6 +51,7 @@ metadata:
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/upstream-vhost: web-svc.emojivoto.svc.cluster.local:8080
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 spec:
@@ -60,7 +61,7 @@ spec:
       paths:
       - backend:
           serviceName: web-svc
-          servicePort: 80
+          servicePort: 8080
 ```
 
 The important annotation here is:
@@ -68,6 +69,14 @@ The important annotation here is:
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+```
+
+In addition, the line below ensures that the `edge` between the ingress
+controller and the backend service are shown in the
+[`linkerd edges`](/2/reference/cli/edges/) command:
+
+```yaml
+nginx.ingress.kubernetes.io/upstream-vhost: web-svc.emojivoto.svc.cluster.local:8080
 ```
 
 This sample ingress definition uses a single ingress for an application
