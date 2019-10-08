@@ -35,8 +35,8 @@
           {{ .Name }}
         </a>
         <ul class="menu-list is-paddingless is-marginless">
-          {{ $hasWeight := sort (where (.Sections | append .Pages) "Params.weight" "ge" 1) "Params.weight" "asc" }}
-          {{ $missingWeight := sort (where (.Sections | append .Pages) "Params.weight" "eq" nil) "Name" "asc" }}
+          {{ $hasWeight := sort (where .Pages "Params.weight" "ge" 1) "Params.weight" "asc" }}
+          {{ $missingWeight := sort (where .Pages "Params.weight" "eq" nil) "Name" "asc" }}
           {{ range ($hasWeight | append $missingWeight) }}
           {{ $active := hasPrefix $currentPage.URL .URL }}
           <li class="menu-list-item">

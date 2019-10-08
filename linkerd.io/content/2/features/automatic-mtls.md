@@ -19,8 +19,8 @@ automatically encrypted.)
 
 {{< note >}}
 Linkerd uses Kubernetes *Service Accounts* to define service identity. This
-requires that the `automountServiceAccountToken` feature (on by default) has
-not been disabled on the pods. See the [Kubernetes service account
+requires that the `automountServiceAccountToken` feature (on by default) is
+enabled. See the [Kubernetes service account
 documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 for more.
 {{< /note >}}

@@ -3,7 +3,7 @@ title = "Using the Debug Sidecar"
 description = "Inject the debug container to capture network packets."
 +++
 
-Debugging a service mesh can be hard---when something just isn't working, is
+Debugging a service mesh can be hard. When something just isn't working, is
 the problem with the proxy? With the application? With the client? With the
 underlying network? Sometimes, nothing beats looking at raw network data.
 
@@ -60,14 +60,10 @@ in the context of the network. For example, if you want to inspect the HTTP head
 of the requests, you could run something like this:
 
 ```bash
-user@local$ kubectl -n emojivoto exec -it voting-7cf4784dd8-qxjv4 \
-  -c linkerd-debug -- /bin/bash
-root@voting-7cf4784dd8-qxjv4:/#
-root@voting-7cf4784dd8-qxjv4:/# tshark -i any -f "tcp" -V -Y "http.request"
-Running as user "root" and group "root". This could be dangerous.
-Capturing on 'any'
-
-...
+kubectl -n emojivoto exec -it \
+  $(kubectl -n emojivoto get pod -l app=voting-svc \
+    -o jsonpath='{.items[0].metadata.name}') \
+  -c linkerd-debug -- tshark -i any -f "tcp" -V -Y "http.request"
 ```
 
 Of course, this only works if you have the ability to `exec` into arbitrary

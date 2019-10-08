@@ -24,7 +24,7 @@ requests per second and latency percentiles.
 That's pretty neat, but the first thing you might notice is that the success
 rate is well below 100%! Click on `web` and let's dig in.
 
-{{< fig src="/images/debugging/deployment-detail.png" title="Deployment Detail" >}}
+{{< fig src="/images/debugging/octopus.png" title="Deployment Detail" >}}
 
 You should now be looking at the Deployment page for the web deployment. The first
 thing you'll see here is that the web deployment is taking traffic from `vote-bot`

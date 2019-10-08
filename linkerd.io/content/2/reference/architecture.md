@@ -33,30 +33,24 @@ The control plane is made up of:
 
 ### Controller
 
-The controller deployment consists of multiple containers (public-api,
-destination) that provide the bulk of the control plane's functionality.
+The controller deployment consists of the public-api container that provides an
+API for the CLI and dashboard to interface with.
 
-### Grafana
+### Destination
 
-Linkerd comes with many dashboards out of the box. The Grafana component is used
-to render and display these dashboards. You can reach these dashboards via links
-in the Linkerd dashboard itself.
+Each [proxy](#proxy) in the data plane uses this component to lookup where to
+send requests. The destination deployment is also used to fetch service profile
+information used for per-route metrics, retries and timeouts.
 
 ### Identity
 
 This component provides a [Certificate
 Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
 [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
-and returns certificates signed with the correct identity.
-
-### Prometheus
-
-All metrics are stored in Prometheus. They are scraped in the native Prometheus
-format from each proxy that makes up the data plane. This is an instance of
-Prometheus that has been configured to work specifically with the data that
-Linkerd generates. There are [instructions](/2/observability/exporting-metrics/)
-if you would like to integrate this with an existing Prometheus installation.
-You can see what Prometheus is collecting by running `linkerd metrics`.
+and returns certificates signed with the correct identity. These certificates
+are fetched by the proxy on start and must be issued before the proxy becomes
+ready. They are subsequently used for any connection between Linkerd proxies to
+implement mTLS.
 
 ### Proxy Injector
 
@@ -85,11 +79,17 @@ The web deployment provides the Linkerd dashboard. This does not require running
 `linkerd dashboard` and can be [exposed](/2/tasks/exposing-dashboard/) to
 others.
 
+### Heartbeat
+
+This CronJob runs once a day and records some analytics that help with the
+development of Linkerd. It is optional and can be disabled.
+
 ### Grafana
 
-As a component of the control plane, Grafana provides actionable dashboards for
-your services out of the box. It is possible to see high level metrics and dig
-down into the details, even for pods.
+Linkerd comes with many dashboards out of the box. The Grafana component is used
+to render and display these dashboards. You can reach these dashboards via links
+in the Linkerd dashboard itself. It is possible to see high level metrics and dig
+down into the details for your workloads as well as Linkerd itself.
 
 The dashboards that are provided out of the box include:
 
@@ -199,7 +199,9 @@ There are two main rules that `iptables` uses:
 {{< note >}}
 By default, most ports are forwarded through the proxy. This is not always
 desirable and it is possible to have specific ports skip the proxy entirely for
-both incoming and outgoing traffic.
+both incoming and outgoing traffic. See the [protocol
+detection](/2/features/protocol-detection/) documentation for an explanation of
+what's happening here.
 {{< /note >}}
 
 ## CLI

@@ -35,17 +35,23 @@ To find this port, you can examine the pod's yaml, or for the identity pod for
 example, issue a command like so:
 
 ```bash
-kubectl -n linkerd get po linkerd-identity-8ccbfc5d6-css2v -o=jsonpath='{.spec.containers[*].ports[?(@.name=="admin-http")].containerPort}'
+kubectl -n linkerd get po \
+    $(kubectl -n linkerd get pod -l linkerd.io/control-plane-component=identity \
+        -o jsonpath='{.items[0].metadata.name}') \
+    -o=jsonpath='{.spec.containers[*].ports[?(@.name=="admin-http")].containerPort}'
 ```
 
 Then use the `kubectl port-forward` command to access that port from outside
 the cluster (in this example the port is 9990):
 
 ```bash
-kubectl -n linkerd port-forward linkerd-identity-8ccbfc5d6-css2v 9990
+kubectl -n linkerd port-forward \
+    $(kubectl -n linkerd get pod -l linkerd.io/control-plane-component=identity \
+        -o jsonpath='{.items[0].metadata.name}') \
+    9990
 ```
 
-On a separate console, fetch the data and feed it to `go tool`. For example to
+It is now possible to use `go tool` to inspect this data. For example to
 generate a graph in a PDF file describing memory allocations:
 
 ```bash

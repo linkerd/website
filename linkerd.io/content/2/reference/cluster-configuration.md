@@ -8,8 +8,9 @@ description = "Configuration settings unique to providers and install methods."
 ### Private Clusters
 
 If you are using a **private GKE cluster**, you are required to create a
-Master-to-Node firewall rule to allow GKE to communicate to
-`linkerd-proxy-injector` container endpoint port `tcp/8443`.
+firewall rule that allows the GKE operated api-server to communicate with the
+Linkerd control plane. This makes it possible for features such as automatic
+proxy injection to receive requests directly from the api-server.
 
 In this example, we will use [gcloud](https://cloud.google.com/sdk/install) to
 simplify the creation of the said firewall rule.
@@ -57,7 +58,7 @@ echo $MASTER_IPV4_CIDR $NETWORK $NETWORK_TARGET_TAG
 10.0.0.0/28 foo-network gke-foo-cluster-c1ecba83-node
 ```
 
-Create the firewall rules for `proxy-injector` and the `tap apiserver`:
+Create the firewall rules for `proxy-injector` and `tap`:
 
 ```bash
 gcloud compute firewall-rules create gke-to-linkerd-control-plane \
@@ -66,12 +67,11 @@ gcloud compute firewall-rules create gke-to-linkerd-control-plane \
   --source-ranges "$MASTER_IPV4_CIDR" \
   --target-tags "$NETWORK_TARGET_TAG" \
   --priority 1000 \
-  --description "Allow traffic on ports 8843, 8089 for linkerd tap apiserver
-     and proxy-injector control-plane components"
+  --description "Allow traffic on ports 8843, 8089 for linkerd control-plane components"
 ```
 
 Finally, verify that the firewall is created:
 
 ```bash
-gcloud compute firewall-rules describe gke-to-linkerd-proxy-injector-8443
+gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
