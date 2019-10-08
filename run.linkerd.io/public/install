@@ -29,6 +29,10 @@ case $OS in
 esac
 OS=$(echo $OS | tr [:upper:] [:lower:])
 
+checksumbin=$(which openssl) || checksumbin=$(which shasum) || {
+  echo Failed to find SHA256 checksum binary &>2
+  exit 1
+}
 tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
 filename="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
 url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${filename}"
@@ -41,7 +45,16 @@ url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/$
   curl -LO "${url}"
   echo ""
   echo "Download complete!, validating checksum..."
-  checksum=$(openssl dgst -sha256 "${filename}" | cut -d' ' -f2)
+  case $checksumbin in
+    *openssl)
+      checksum=$($checksumbin dgst -sha256 "${filename}")
+      checksum=${checksum##*[[:blank:]]}
+      ;;
+    *shasum)
+      checksum=$($checksumbin -a256 "${filename}")
+      checksum=${checksum%%[[:blank:]]*}
+      ;;
+  esac
   if [ "$checksum" != "$SHA" ]; then
     echo "Checksum validation failed." >&2
     exit 1
