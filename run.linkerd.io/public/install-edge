@@ -17,20 +17,20 @@ case $OS in
       x86_64)
         ;;
       *)
-        echo "There is no linkerd $OS support for $arch" >&2
+        echo "There is no linkerd $OS support for $arch. Please open an issue with your platform details."
         exit 1
         ;;
     esac
     ;;
   *)
-    echo "There is no linkerd support for $OS/$arch (yet...)" >&2
+    echo "There is no linkerd support for $OS/$arch. Please open an issue with your platform details."
     exit 1
     ;;
 esac
 OS=$(echo $OS | tr [:upper:] [:lower:])
 
 checksumbin=$(which openssl) || checksumbin=$(which shasum) || {
-  echo Failed to find SHA256 checksum binary &>2
+  echo "Failed to find checksum binary. Please install openssl or shasum."
   exit 1
 }
 tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
