@@ -26,22 +26,15 @@ There are three components that need to be upgraded:
 
 ## Upgrade notice: stable-2.6.0
 
+{{< note >}}
+Upgrading to this release from edge-19.9.3, edge-19.9.4, edge-19.9.5 and
+edge-19.10.1 will incur data plane downtime, due to a recent change introduced
+to ensure zero downtime upgrade for previous stable releases.
+{{< /note >}}
+
 The `destination` container is now deployed as its own `Deployment` workload.
 Once your control plane is successfully upgraded, your data plane must be
-restarted so that the proxies will pick up the following changes:
-
-```diff
-      1 --- stable-2.5.0 2019-10-04 14:27:07.607431593 -0700
-      2 +++ stable-2.6.0  2019-10-04 14:30:16.098328176 -0700
-     44        env:
-     49 +      - name: LINKERD2_PROXY_DESTINATION_GET_SUFFIXES
-     50 +        value: svc.cluster.local.
-     57        - name: LINKERD2_PROXY_DESTINATION_SVC_NAME
-     58 -        value: linkerd-controller.$(_l5d_ns).serviceaccount.identity.$(_l5d_ns).$(_l5d_trustdomain)
-     59 +        value: linkerd-destination.$(_l5d_ns).serviceaccount.identity.$(_l5d_ns).$(_l5d_trustdomain)
-     62 -      image: gcr.io/linkerd-io/proxy:stable-2.5.0
-     63 +      image: gcr.io/linkerd-io/proxy:stable-2.6.0
-```
+restarted.
 
 If you have previously labelled any of your namespaces with the
 `linkerd.io/is-control-plane` label so that their pod creation events are
