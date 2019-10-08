@@ -26,14 +26,6 @@ There are three components that need to be upgraded:
 
 ## Upgrade notice: stable-2.6.0
 
-{{< note >}}
-Upgrading to this release will incur downtime on the data plane, due to a
-recent migration of the `destination` container to its own `Deployment`
-workload. Workloads that have no downtime maintainence window will need to be
-temporarily
-[removed from the data plane](/2/features/proxy-injection/#overriding-injection).
-{{< / note >}}
-
 The `destination` container is now deployed as its own `Deployment` workload.
 Once your control plane is successfully upgraded, your data plane must be
 restarted so that the proxies will pick up the following changes:
