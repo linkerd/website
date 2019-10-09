@@ -11,4 +11,11 @@ IgnoreURLs:
   - https://www.xfinity.com/
   - https://monkey.org/*
   - https://svn.apache.org/*
+  - https://github.com/linkerd/linkerd2
+  - https://github.com/linkerd/website/tree/master/linkerd.io/content
+  - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
 DirectoryPath: public
+TestFilesConcurrently: true
+DocumentConcurrencyLimit: 32
+HTTPConcurrencyLimit: 16
+ExternalTimeout: 15
