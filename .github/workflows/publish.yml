@@ -25,4 +25,4 @@ jobs:
 
     - name: Publish
       run: |-
-        make publish DRY_RUN=true
+        make publish
