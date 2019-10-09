@@ -56,7 +56,7 @@ adopters. A special thanks especially to
 [Cody Vandermyn](https://github.com/codeman9),
 [Alena Varkockova](https://github.com/alenkacz),
 [Tarun Pothulapati](https://github.com/Pothulapati)
-and Guangming Wang
+and Guangming Wang.
 
 📣  We want your feedback! Next week, we'll be discussing all the new features,
 plus upcoming plans for Linkerd 2.6, Linkerd's integrations with [OPA
@@ -68,7 +68,7 @@ mouths.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
 our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
-these features in action. Either way, you can download the stable 2.4 release
+these features in action. Either way, you can download the stable 2.5 release
 by running:
 
 ```bash
