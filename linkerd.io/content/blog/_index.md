@@ -7,8 +7,8 @@ tags:
 - Tutorials &amp; How-To's
 - Video
 items:
-- blog/happy-birthday-linkerd.md
-- blog/announcing-linkerd-2-5.md
+- blog/announcing-linkerd-2-6.md
+- blog/linkerd-and-open-governance.md
 description: ''
 keywords: []
 
