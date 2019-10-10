@@ -22,7 +22,7 @@ captured with systems like Jaeger. Since distributed tracing is a complex topic
 that (unlike most of Linkerd's features!) requires some investment to use,
 Linkerd maintainer Alex Leong has written a handy blog post describing [how to
 assemble a functioning end-to-end distributed tracing system with Linkerd
-2.6](/2019/10/07/linkerd-distributed-tracing/).
+2.6](/2019/10/07/a-guide-to-distributed-tracing-with-linkerd/).
 
 This release also adds **live request and response headers** to Linkerd's `tap`
 output.  Linkerd's tap feature provides a live sample of actual requests
