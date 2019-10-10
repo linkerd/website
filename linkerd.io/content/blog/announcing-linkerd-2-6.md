@@ -29,7 +29,7 @@ output.  Linkerd's tap feature provides a live sample of actual requests
 flowing between any two pods, deployments, or namespaces. (Particularly useful
 since Linkerd [encrypts all meshed HTTP traffic by
 default](https://linkerd.io/2019/04/16/announcing-linkerd-2.3/)!) In Linkerd
-2.5, we ensured that tap opeyed Kubernetes RBAC restrictions; the addition of
+2.5, we ensured that tap obeyed Kubernetes RBAC restrictions; the addition of
 2.6 headers brings us one step closer to our vision of a complete "tcpdump for
 microservices"--if tcpdump obeyed fine-grained access control, that is.
 
