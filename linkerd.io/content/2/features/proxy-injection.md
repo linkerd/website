@@ -6,14 +6,9 @@ aliases = [
 ]
 +++
 
-{{< note >}}
-The behavior of this feature has changed over Linkerd releases. This document
-describes the behavior as of Linkerd 2.4 and beyond.
-{{< /note >}}
-
 Linkerd automatically adds the data plane proxy to pods when the
-`linkerd.io/inject: enabled` annotation is present on a namespace, deployment,
-or pod. This is known as "proxy injection".
+`linkerd.io/inject: enabled` annotation is present on a namespace or any
+workloads such as deployments or pods, This is known as "proxy injection".
 
 See [Adding Your Service](/2/tasks/adding-your-service/) for a walkthrough of
 how to use this feature in practice. There is a full list of the configuration

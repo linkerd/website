@@ -7,7 +7,9 @@ For Kubernetes clusters that use [custom cluster domain](https://kubernetes.io/d
 Linkerd must be installed using the `--cluster-domain` option:
 
 ```bash
-linkerd install --cluster-domain=example.org --identity-trust-domain=example.org | kubectl apply -f -
+linkerd install --cluster-domain=example.org \
+    --identity-trust-domain=example.org \
+    | kubectl apply -f -
 ```
 
 This ensures that all Linkerd handles all service discovery, routing, service

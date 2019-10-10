@@ -73,7 +73,7 @@ Verify the CLI is installed and running correctly with:
 linkerd version
 ```
 
-You should see the CLI version, and also "Server version: unavailable". This is
+You should see the CLI version, and also `Server version: unavailable`. This is
 because you haven't installed the control plane on your cluster. Don't worry,
 you'll be installing the control plane soon.
 
@@ -89,6 +89,9 @@ control plane, you can run:
 ```bash
 linkerd check --pre
 ```
+
+If there are any checks that do not pass, make sure to follow the provided links
+and fix those issues before proceeding.
 
 ## Step 3: Install Linkerd onto the cluster
 

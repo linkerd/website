@@ -11,7 +11,7 @@ But simply shifting traffic from one version of a service to the next is just
 the beginning. We can combine traffic splitting with [Linkerd's automatic
 *golden metrics* telemetry](/2/features/telemetry/) and drive traffic decisions
 based on the observed metrics. For example, we can gradually shift traffic from
-old deployment to new deployment while continually monitoring success rate. If
+an old deployment to a new one while continually monitoring its success rate. If
 at any point the success rate drops, we can shift traffic back to the original
 deployment and back out of the release. Ideally, our users remain happy
 throughout, not noticing a thing!
@@ -248,10 +248,10 @@ watch linkerd -n test stat deploy --from deploy/load
 ```
 
 For something a little more visual, you can use the dashboard. Start it by
-running `linkerd dashboard` and then look at the detail page for the [load
-deployment](http://localhost:50750/namespaces/test/deployments/load).
+running `linkerd dashboard` and then look at the detail page for the [podinfo
+traffic split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
-{{< fig src="/images/canary/dashboard.png"
+{{< fig src="/images/canary/traffic-split.png"
         title="Dashboard" >}}
 
 ### Browser

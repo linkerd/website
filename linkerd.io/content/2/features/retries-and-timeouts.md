@@ -31,7 +31,7 @@ Traditionally, when performing retries, you must specify a maximum number of
 retry attempts before giving up. Unfortunately, there are two major problems
 with configuring retries this way.
 
-- Choosing a maximum number of retry attempts is a guessing game.
+### Choosing a maximum number of retry attempts is a guessing game
 
 You need to pick a number that’s high enough to make a difference; allowing
 more than one retry attempt is usually prudent and, if your service is less
@@ -42,7 +42,7 @@ increase the latency of requests that need to be retried. In practice, you
 usually pick a maximum retry attempts number out of a hat (3?) and then tweak
 it through trial and error until the system behaves roughly how you want it to.
 
-- Systems configured this way are vulnerable to retry storms.
+### Systems configured this way are vulnerable to retry storms
 
 A [retry storm](https://twitter.github.io/finagle/guide/Glossary.html)
 begins when one service starts (for any reason) to experience a larger than

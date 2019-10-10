@@ -10,7 +10,7 @@ request is destined for without being dependent on DNS or IPs.
 
 When it comes to ingress, most controllers do not rewrite the
 incoming header (`example.com`) to the internal service name
-(`example.default.svc.cluster.local`) by default. In this example, when Linkerd
+(`example.default.svc.cluster.local`) by default. In this case, when Linkerd
 receives the outgoing request it thinks the request is destined for
 `example.com` and not `example.default.svc.cluster.local`. This creates an
 infinite loop that can be pretty frustrating!
@@ -53,8 +53,6 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
 spec:
   rules:
   - host: example.com
@@ -70,8 +68,6 @@ The important annotation here is:
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
 ```
 
 This sample ingress definition uses a single ingress for an application
@@ -87,8 +83,6 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
 spec:
   rules:
   - host: example.com
@@ -108,13 +102,6 @@ Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
-
-{{< note >}}
-When using Nginx to terminate HTTPS, Linkerd is unable to strip internal headers
-that are normally provided to applications to make decisions. The
-`proxy_hide_header` lines will strip these headers out so that any internal
-cluster details do not leak.
-{{< /note >}}
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed nginx-ingress via helm, you can get that IP address by running:
@@ -153,7 +140,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
-    ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
 spec:
   rules:
   - host: example.com
@@ -174,13 +160,6 @@ Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`. Please see the Traefik website for more information.
-
-{{< note >}}
-When using Traefik to terminate HTTPS, Linkerd is unable to strip internal
-headers that are normally provided to applications to make decisions. The
-`ingress.kubernetes.io/custom-response-headers` line will strip these headers
-out so that any internal cluster details do not leak.
-{{< /note >}}
 
 To test this, you'll want to get the external IP address for your controller. If
 you installed Traefik via helm, you can get that IP address by running:
@@ -228,7 +207,6 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "gce"
     ingress.kubernetes.io/custom-request-headers: "l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80"
-    ingress.kubernetes.io/custom-response-headers: "l5d-remote-ip: || l5d-server-id:"
     ingress.gcp.kubernetes.io/pre-shared-cert: "managed-cert-name"
     kubernetes.io/ingress.global-static-ip-name: "static-ip-name"
 spec:
@@ -241,8 +219,8 @@ spec:
           servicePort: 80
 ```
 
-To use this example definition, substitute "managed-cert-name" and
-"static-ip-name" with the short names defined in your project (n.b. use the name
+To use this example definition, substitute `managed-cert-name` and
+`static-ip-name` with the short names defined in your project (n.b. use the name
 for the IP address, not the address itself).
 
 The managed certificate will take about 30-60 minutes to provision, but the
@@ -334,10 +312,11 @@ As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically.
 
 Assuming you installed gloo to the default location, you can enable the native
-integration like so:
+integration by running:
 
 ```bash
-kubectl patch settings -n gloo-system default -p '{"spec":{"linkerd":true}}' --type=merge
+kubectl patch settings -n gloo-system default \
+  -p '{"spec":{"linkerd":true}}' --type=merge
 ```
 
 Gloo will now automatically add the `l5d-dst-override` header to every
@@ -351,20 +330,15 @@ glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 
 ### Manual
 
-As explained in the beggining of this document, you'll need to instruct Gloo to
+As explained in the beginning of this document, you'll need to instruct Gloo to
 add a header which will allow Linkerd to identify where to send traffic to.
 
 ```yaml
 apiVersion: gateway.solo.io/v1
 kind: VirtualService
 metadata:
-  creationTimestamp: "2019-04-18T13:39:49Z"
-  generation: 7
   name: books
   namespace: gloo-system
-  resourceVersion: "8418"
-  selfLink: /apis/gateway.solo.io/v1/namespaces/gloo-system/virtualservices/books
-  uid: 6fb092ae-61df-11e9-a158-080027b5157f
 spec:
   virtualHost:
     domains:

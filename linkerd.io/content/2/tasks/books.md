@@ -110,8 +110,10 @@ linkerd dashboard &
 
 {{< fig src="/images/books/dashboard.png" title="Dashboard" >}}
 
-You should see all the services in the `booksapp` namespace show up. There will
-be success rate, requests per second, and latency percentiles.
+Select `booksapp` from the namespace dropdown and click on the
+[Deployments](http://localhost:50750/namespaces/booksapp/deployments) workload.
+You should see all the deployments in the `booksapp` namespace show up. There
+will be success rate, requests per second, and latency percentiles.
 
 That’s cool, but you’ll notice that the success rate for `webapp` is not 100%.
 This is because the traffic generator is submitting new books. You can do the
