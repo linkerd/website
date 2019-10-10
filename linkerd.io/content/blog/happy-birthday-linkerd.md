@@ -2,6 +2,7 @@
 title: 'Linkerd 2.x turns one year old! 🎂 '
 author: 'william'
 date: 2019-09-18T00:00:00+00:00
+thumbnail: /uploads/cake.png
 draft: false
 slug: happy-birthday-linkerd
 tags: [Linkerd]
