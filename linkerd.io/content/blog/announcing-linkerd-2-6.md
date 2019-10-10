@@ -1,7 +1,7 @@
 ---
 title: 'Announcing Linkerd 2.6: Distributed tracing, live request headers, faster dashboard, and more!'
 author: 'william'
-date: 2019-10-09T00:00:00+00:00
+date: 2019-10-10T00:00:00+00:00
 thumbnail: /uploads/old-chairs.jpg
 draft: false
 slug: announcing-linkerd-2.6
