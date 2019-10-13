@@ -255,25 +255,13 @@ linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plan
 
 #### Upgrading via manifests
 
-`edge-19.4.5` introduced a new `--from-manifests` flag to `linkerd upgrade`
-allowing manually feeding a previously saved output of `linkerd install` into
-the command, instead of requiring a connection to the cluster to fetch the
-config:
-
-```bash
-# save Linkerd installation manifest
-linkerd install > linkerd-install.yaml
-
-# deploy Linkerd
-cat linkerd-install.yaml | kubectl apply -f -
-
-# upgrade Linkerd via manifests
-cat linkerd-install.yaml | linkerd upgrade --from-manifests -
-```
-
-Alternatively, if you have already installed Linkerd without saving a manifest,
-you may save the relevant Linkerd resources from your existing installation for
-use in upgrading later.
+By default, the `linkerd upgrade` command reuses the existing `linkerd-config`
+config map and the `linkerd-identity-issuer` secret, by fetching them via the
+the Kubernetes API. `edge-19.4.5` introduced a new `--from-manifests` flag to
+allow the upgrade command to read the `linkerd-config` config map and the
+`linkerd-identity-issuer` secret from a static YAML file. This option is
+relevant to CI/CD workflows where the Linkerd configuration is managed by a
+configuration repository.
 
 ```bash
 kubectl -n linkerd get \
@@ -281,7 +269,7 @@ kubectl -n linkerd get \
   configmap/linkerd-config \
   -oyaml > linkerd-manifests.yaml
 
-cat linkerd-manifests.yaml | linkerd upgrade --from-manifests -
+linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 {{< note >}}
