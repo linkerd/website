@@ -3,7 +3,7 @@ export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= stable-2.6.0
 export L5D2_EDGE_VERSION ?= edge-19.10.2
-export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.2.1
+export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.3.0
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 GIT_HASH = $(shell git log --pretty=format:'%h' -n 1)
@@ -73,6 +73,11 @@ ifndef HAS_HTMLTEST
 	@printf "Install htmltest first. curl https://htmltest.wjdp.uk | bash\n"; exit 1
 endif
 	cd tmp/linkerd.io && htmltest
+
+.PHONY: shellcheck
+shellcheck:
+	@# lint the install scripts
+	shellcheck run.linkerd.io/public/install*
 
 .PHONY: test-ci
 test-ci:

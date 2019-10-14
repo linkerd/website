@@ -1,4 +1,4 @@
-FROM circleci/node:10
+FROM circleci/node:12
 
 USER root
 
@@ -6,6 +6,7 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     lsb-core \
     apt-transport-https \
+    shellcheck \
   && export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" \
   && echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" \
     | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
@@ -13,13 +14,10 @@ RUN apt-get update \
     | apt-key add - \
   && apt-get update \
   && apt-get install -y --no-install-recommends google-cloud-sdk \
-  && wget https://github.com/gohugoio/hugo/releases/download/v0.55.6/hugo_extended_0.55.6_Linux-64bit.deb \
+  && wget https://github.com/gohugoio/hugo/releases/download/v0.58.3/hugo_extended_0.58.3_Linux-64bit.deb \
   && dpkg -i hugo*.deb \
   && rm hugo*.deb \
   && curl https://htmltest.wjdp.uk | bash \
   && mv bin/htmltest /usr/local/bin \
   && npm install -g markdownlint-cli \
   && rm -rf /var/lib/apt/lists/*
-
-USER circleci
-

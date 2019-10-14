@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 set -eu
 
@@ -7,7 +7,7 @@ LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_STABLE_VERSION}
 OS=$(uname -s)
 arch=$(uname -m)
 case $OS in
-  CYGWIN*)
+  CYGWIN* | MINGW64*)
     OS=windows.exe
     ;;
   Darwin)
@@ -27,9 +27,9 @@ case $OS in
     exit 1
     ;;
 esac
-OS=$(echo $OS | tr [:upper:] [:lower:])
+OS=$(echo $OS | tr '[:upper:]' '[:lower:]')
 
-checksumbin=$(which openssl) || checksumbin=$(which shasum) || {
+checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
   echo "Failed to find checksum binary. Please install openssl or shasum."
   exit 1
 }

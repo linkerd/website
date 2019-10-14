@@ -1,0 +1,61 @@
+name: install
+
+on:
+  pull_request:
+    paths:
+      - Makefile
+      - run.linkerd.io/public/install*
+
+jobs:
+  lint:
+    name: Lint install script
+    runs-on: ubuntu-18.04
+    container:
+      image: gcr.io/linkerd-io/website-builder:1.3.0
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Lint install script
+      run: |
+        make shellcheck
+
+  build:
+    name: Build install script
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Build scripts
+      run: |
+        make build-run.linkerd.io
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: run.linkerd.io
+        path: tmp/run.linkerd.io/public
+
+  install:
+    name: Test install for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+    needs: [build]
+
+    steps:
+    - uses: actions/download-artifact@v1
+      with:
+        name: run.linkerd.io
+
+    - name: Test install script execution
+      shell: bash
+      run: |
+        for script in $(find run.linkerd.io/install*); do
+          sh ${script}
+          set -x
+          client=$(~/.linkerd2/bin/linkerd version --client --short)
+          expected=$(cat ${script} | grep VERSION= | sed 's/.*:-\(.*\)\}.*/\1/')
+          [ "$client" = "$expected" ]
+        done

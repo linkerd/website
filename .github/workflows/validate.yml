@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  pull_request:
+    paths:
+      - linkerd.io/**
+
+jobs:
+  linkerd_io:
+    name: Validate generated HTML
+    runs-on: ubuntu-18.04
+    container:
+      image: gcr.io/linkerd-io/website-builder:1.3.0
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+
+    - name: Lint markdown
+      run: |
+        make lint
+
+    - name: Lint html and check for dead links
+      run: |
+        make check
