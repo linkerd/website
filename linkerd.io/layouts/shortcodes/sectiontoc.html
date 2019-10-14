@@ -1,6 +1,6 @@
 <div class="columns is-fullwidth toc">
   {{ $currentPage := .Page }}
-  {{ $subPages := .Page.Pages | append .Page.Sections }}
+  {{ $subPages := .Page.Pages }}
   {{ range $index, $page := sort $subPages "Title" }}
   {{ if (ne $page $currentPage) }}
   <div class="columns is-fullwidth is-marginless">
