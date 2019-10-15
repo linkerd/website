@@ -834,3 +834,23 @@ See the page on [Upgrading Linkerd](/2/upgrade/).
 ```
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
+
+### √ data plane proxies certificate match the CA's certificates {#l5d-data-plane-proxies-certificate-match-ca}
+
+Example failure:
+
+```bash
+‼ data plane proxies certificate match CA
+    The following pods have old proxy certificate information; please, restart them:
+        emojivoto/emoji-786c5d657f-l2zc4
+        emojivoto/web-76968bc99-8bvvm
+```
+
+If the trust anchor has changed while data plane proxies were running, they
+will need to be restarted in order to refresh this information and use
+the latest trust anchor from the Linkerd configuration.
+
+This can happen if, for example, while you had proxies deployed on
+your cluster you uninstalled Linkerd and installed it again, which
+created a new trust anchor in the control plane, but the already existing
+meshed pods didn't restart on their own, keeping old trust anchor information.
