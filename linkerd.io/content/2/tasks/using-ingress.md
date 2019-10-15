@@ -79,6 +79,7 @@ The important annotation here for http traffic is:
 
 When using gRPC, NGINX has a distinct set of directives for managing
  headers:
+
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
@@ -87,7 +88,6 @@ When using gRPC, NGINX has a distinct set of directives for managing
 In the examples above and below, we include both headers for brevity. You
 should include the directives that are relevant for the type of traffic that
 your service uses.
-
 
 In addition, the line below ensures that the `edge` between the ingress
 controller and the backend service are shown in the
