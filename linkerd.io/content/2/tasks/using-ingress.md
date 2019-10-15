@@ -51,13 +51,8 @@ metadata:
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/upstream-vhost: web-svc.emojivoto.svc.cluster.local:8080
     nginx.ingress.kubernetes.io/configuration-snippet: |
-
-      # for http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-
-      # for gRPC traffic
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 
 spec:
@@ -70,32 +65,19 @@ spec:
           servicePort: 8080
 ```
 
-The important annotation here for http traffic is:
+The important annotation here is:
 
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-```
-
-When using gRPC, NGINX has a distinct set of directives for managing
- headers:
-
-```yaml
-    nginx.ingress.kubernetes.io/configuration-snippet: |
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
 
-In the examples above and below, we include both headers for brevity. You
-should include the directives that are relevant for the type of traffic that
-your service uses.
-
-In addition, the line below ensures that the `edge` between the ingress
-controller and the backend service are shown in the
-[`linkerd edges`](/2/reference/cli/edges/) command:
-
-```yaml
-nginx.ingress.kubernetes.io/upstream-vhost: web-svc.emojivoto.svc.cluster.local:8080
-```
+This example combines the two directives that NGINX uses for proxying HTTP
+and gRPC traffic. In practice, it is only necessary to set either the
+`proxy_set_header` or `grpc_set_header` directive, depending on the protocol
+used by the service, however NGINX will ignore any directives that it doesn't
+need.
 
 This sample ingress definition uses a single ingress for an application
 with multiple endpoints using different ports.
@@ -109,11 +91,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-
-      # for normal http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-
-      # for gRPC traffic
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 spec:
   rules:
