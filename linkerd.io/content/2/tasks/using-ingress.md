@@ -53,7 +53,17 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/upstream-vhost: web-svc.emojivoto.svc.cluster.local:8080
     nginx.ingress.kubernetes.io/configuration-snippet: |
+
+      # for http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
+
+      # for gRPC traffic
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_hide_header l5d-remote-ip;
+      grpc_hide_header l5d-server-id;
+
 spec:
   rules:
   - host: example.com
@@ -64,12 +74,26 @@ spec:
           servicePort: 8080
 ```
 
-The important annotation here is:
+The important annotation here for http traffic is:
 
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
+
+When using gRPC, NGINX has a distinct set of directives for managing
+ headers:
+```yaml
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_hide_header l5d-remote-ip;
+      grpc_hide_header l5d-server-id;
+```
+
+In the examples above and below, we include both headers for brevity. You
+should include the directives that are relevant for the type of traffic that
+your service uses.
+
 
 In addition, the line below ensures that the `edge` between the ingress
 controller and the backend service are shown in the
@@ -91,7 +115,16 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
+
+      # for normal http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      proxy_hide_header l5d-remote-ip;
+      proxy_hide_header l5d-server-id;
+
+      # for gRPC traffic
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_hide_header l5d-remote-ip;
+      grpc_hide_header l5d-server-id;
 spec:
   rules:
   - host: example.com
