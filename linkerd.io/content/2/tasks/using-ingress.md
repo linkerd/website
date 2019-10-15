@@ -53,6 +53,8 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+
 spec:
   rules:
   - host: example.com
@@ -60,7 +62,7 @@ spec:
       paths:
       - backend:
           serviceName: web-svc
-          servicePort: 80
+          servicePort: 8080
 ```
 
 The important annotation here is:
@@ -68,7 +70,14 @@ The important annotation here is:
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
+
+This example combines the two directives that NGINX uses for proxying HTTP
+and gRPC traffic. In practice, it is only necessary to set either the
+`proxy_set_header` or `grpc_set_header` directive, depending on the protocol
+used by the service, however NGINX will ignore any directives that it doesn't
+need.
 
 This sample ingress definition uses a single ingress for an application
 with multiple endpoints using different ports.
@@ -83,6 +92,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 spec:
   rules:
   - host: example.com
