@@ -56,13 +56,9 @@ metadata:
 
       # for http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
 
       # for gRPC traffic
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_hide_header l5d-remote-ip;
-      grpc_hide_header l5d-server-id;
 
 spec:
   rules:
@@ -86,8 +82,6 @@ When using gRPC, NGINX has a distinct set of directives for managing
 ```yaml
     nginx.ingress.kubernetes.io/configuration-snippet: |
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_hide_header l5d-remote-ip;
-      grpc_hide_header l5d-server-id;
 ```
 
 In the examples above and below, we include both headers for brevity. You
@@ -118,13 +112,9 @@ metadata:
 
       # for normal http traffic
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
 
       # for gRPC traffic
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_hide_header l5d-remote-ip;
-      grpc_hide_header l5d-server-id;
 spec:
   rules:
   - host: example.com
