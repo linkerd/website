@@ -272,6 +272,19 @@ kubectl -n linkerd get \
 linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
+For releases prior to `edge-19.8.1`/`stable-2.5.0`, and after `stable-2.6.0`,
+you may pipe a full `linkerd install` manifest into the upgrade command:
+
+```bash
+linkerd install > linkerd-install.yaml
+
+# deploy Linkerd
+cat linkerd-install.yaml | kubectl apply -f -
+
+# upgrade Linkerd via manifests
+cat linkerd-install.yaml | linkerd upgrade --from-manifests -
+```
+
 {{< note >}}
 `secret/linkerd-identity-issuer` contains the trust root of Linkerd's Identity
 system, in the form of a private key. Care should be taken if storing this
