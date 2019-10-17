@@ -36,6 +36,7 @@ exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
 exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
 
 helm install \
+  --name=linkerd2 \
   --set-file Identity.TrustAnchorsPEM=ca.crt \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
@@ -67,12 +68,12 @@ Then use the `-f` flag to provide the override file, for example:
 ```bash
 ## see above on how to set $exp
 helm install \
-  --name=linkerd2
+  --name=linkerd2 \
   --set-file Identity.TrustAnchorsPEM=ca.crt \
   --set-file Identity.Issuer.TLS.CrtPEM=issuer.crt \
   --set-file Identity.Issuer.TLS.KeyPEM=issuer.key \
   --set Identity.Issuer.CrtExpiry=$exp \
-  -f linkerd2/values-ha.yaml
+  -f linkerd2/values-ha.yaml \
   linkerd/linkerd2
 ```
 
