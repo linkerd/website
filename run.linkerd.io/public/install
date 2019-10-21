@@ -3,6 +3,48 @@
 set -eu
 
 LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_STABLE_VERSION}
+INSTALLROOT=${INSTALLROOT:-"${HOME}/.linkerd2"}
+
+happyexit() {
+  echo ""
+  echo "Add the linkerd CLI to your path with:"
+  echo ""
+  echo "  export PATH=\$PATH:${INSTALLROOT}/bin"
+  echo ""
+  echo "Now run:"
+  echo ""
+  echo "  linkerd check --pre                     # validate that Linkerd can be installed"
+  echo "  linkerd install | kubectl apply -f -    # install the control plane into the 'linkerd' namespace"
+  echo "  linkerd check                           # validate everything worked!"
+  echo "  linkerd dashboard                       # launch the dashboard"
+  echo ""
+  echo "Looking for more? Visit https://linkerd.io/2/next-steps"
+  echo ""
+  exit 0
+}
+
+validate_checksum() {
+  filename=$1
+  SHA=$(curl -sfL "${url}.sha256")
+  echo ""
+  echo "Validating checksum..."
+
+  case $checksumbin in
+    *openssl)
+      checksum=$($checksumbin dgst -sha256 "${filename}" | sed -e 's/^.* //')
+      ;;
+    *shasum)
+      checksum=$($checksumbin -a256 "${filename}" | sed -e 's/^.* //')
+      ;;
+  esac
+
+  if [ "$checksum" != "$SHA" ]; then
+    echo "Checksum validation failed." >&2
+    return 1
+  fi
+  echo "Checksum valid."
+  return 0
+}
 
 OS=$(uname -s)
 arch=$(uname -m)
@@ -33,57 +75,51 @@ checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
   echo "Failed to find checksum binary. Please install openssl or shasum."
   exit 1
 }
-tmp=$(mktemp -d /tmp/linkerd2.XXXXXX)
-filename="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
-url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${filename}"
+
+
+tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
+srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+dstfile="${INSTALLROOT}/bin/linkerd-${LINKERD2_VERSION}"
+url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
+
+if [ -e "${dstfile}" ]; then
+  if validate_checksum "${dstfile}"; then
+    echo ""
+    echo "Linkerd ${LINKERD2_VERSION} was already downloaded; making it the default 🎉"
+    echo ""
+    echo "To force re-downloading, delete '${dstfile}' then run me again."
+    (
+      rm -f "${INSTALLROOT}/bin/linkerd"
+      ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
+    )
+    happyexit
+  fi
+fi
+
 (
-  cd "$tmp"
+  cd "$tmpdir"
 
-  echo "Downloading ${filename}..."
+  echo "Downloading ${srcfile}..."
+  curl -fLO "${url}"
+  echo "Download complete!"
 
-  SHA=$(curl -sL "${url}.sha256")
-  curl -LO "${url}"
-  echo ""
-  echo "Download complete!, validating checksum..."
-  case $checksumbin in
-    *openssl)
-      checksum=$($checksumbin dgst -sha256 "${filename}")
-      checksum=${checksum##*[[:blank:]]}
-      ;;
-    *shasum)
-      checksum=$($checksumbin -a256 "${filename}")
-      checksum=${checksum%%[[:blank:]]*}
-      ;;
-  esac
-  if [ "$checksum" != "$SHA" ]; then
-    echo "Checksum validation failed." >&2
+  if ! validate_checksum "${srcfile}"; then
     exit 1
   fi
-  echo "Checksum valid."
   echo ""
 )
 
 (
-  cd "$HOME"
-  mkdir -p ".linkerd2/bin"
-  mv "${tmp}/${filename}" ".linkerd2/bin/linkerd"
-  chmod +x ".linkerd2/bin/linkerd"
+  mkdir -p "${INSTALLROOT}/bin"
+  mv "${tmpdir}/${srcfile}" "${dstfile}"
+  chmod +x "${dstfile}"
+  rm -f "${INSTALLROOT}/bin/linkerd"
+  ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
 )
 
-rm -r "$tmp"
 
-echo "Linkerd was successfully installed 🎉"
+rm -r "$tmpdir"
+
+echo "Linkerd ${LINKERD2_VERSION} was successfully installed 🎉"
 echo ""
-echo "Add the linkerd CLI to your path with:"
-echo ""
-echo "  export PATH=\$PATH:\$HOME/.linkerd2/bin"
-echo ""
-echo "Now run:"
-echo ""
-echo "  linkerd check --pre                     # validate that Linkerd can be installed"
-echo "  linkerd install | kubectl apply -f -    # install the control plane into the 'linkerd' namespace"
-echo "  linkerd check                           # validate everything worked!"
-echo "  linkerd dashboard                       # launch the dashboard"
-echo ""
-echo "Looking for more? Visit https://linkerd.io/2/next-steps"
-echo ""
+happyexit

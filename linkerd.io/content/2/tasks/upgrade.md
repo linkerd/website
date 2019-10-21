@@ -71,6 +71,18 @@ are retained.
 curl -sL https://run.linkerd.io/install | sh
 ```
 
+{{< note >}} The linkerd cli installer installs the CLI binary into a
+versioned file (e.g. `linkerd-stable-2.5.0`) under the `$INSTALLROOT` (default:
+`$HOME/.linkerd`) directory and provides a convenience symlink at
+`$INSTALLROOT/bin/linkerd`.
+
+If you need to have multiple versions of the linkerd cli installed
+alongside each other (for example if you are running an edge release on
+your test cluster but a stable release on your production cluster) you
+can refer to them by their full paths, e.g. `$INSTALLROOT/bin/linkerd-stable-2.5.0`
+and `$INSTALLROOT/bin/linkerd-edge-19.8.8`.
+{{< /note >}}
+
 ```bash
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
