@@ -91,7 +91,7 @@ This exposes the dashboard at `dashboard.example.com` and protects it with basic
 auth using admin/admin. Take a look at the [Traefik][traefik-auth]
 documentation for details on how to change the username and password.
 
-## DNS-Rebinding Protection
+## DNS Rebinding Protection
 
 To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
 the dashboard rejects any request whose `Host` header is not `localhost`,
