@@ -3,7 +3,7 @@
   {{ range $headers }}
     {{ $header := replaceRE "\n## " "" .}}
     <li>
-      <a href="#{{ $header | lower }}">{{ $header }}</a>
+      <a href="#{{ $header | replaceRE " " "-" | lower }}">{{ $header }}</a>
     </li>
   {{ end }}
 </ul>
