@@ -95,9 +95,13 @@ documentation for details on how to change the username and password.
 
 To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
 the dashboard rejects any request whose `Host` header is not `localhost`,
-`127.0.0.1` or `linkerd-web.linkerd.svc.cluster.local` (adjust the latter
-according to your custom namespace or cluster domain settings). This protection
-also covers Grafana.
+`127.0.0.1` or the full service name `linkerd-web.linkerd.svc.cluster.local`. If
+you rely on the latter, and if you used the `--cluster-domain` flag or the
+equivalent `ClusterDomain` Helm value when you installed Linkerd, then replace
+the `cluster.local` part with the appropriate value.
+
+Note that this protection also covers the [Grafana
+dashboard](/2/reference/architecture/#grafana).
 
 The Nginx-Ingress config above uses the
 `nginx.ingress.kubernetes.io/upstream-vhost` annotation to properly set the
