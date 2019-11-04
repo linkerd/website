@@ -116,16 +116,19 @@ ingress controller can be used here in place of NGINX as long as it:
 
 ## Client library: OpenCensus
 
-While it is possible for services to manually propagate trace propagation headers, it's usually much easier to use a library which does three things:
+While it is possible for services to manually propagate trace propagation
+headers, it's usually much easier to use a library which does three things:
 
-- Propagates the trace context from incoming request headers to outgoing request headers
+- Propagates the trace context from incoming request headers to outgoing
+  request headers
 - Modifies the trace context (i.e. starts a new span)
 - Transmits this data to a trace collector
 
 We recommend using OpenCensus in your service and configuring it with:
 
 - [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the default)
-- [the OpenCensus agent exporter](https://opencensus.io/exporters/supported-exporters/go/ocagent/)
+- [the OpenCensus agent
+  exporter](https://opencensus.io/exporters/supported-exporters/go/ocagent/)
 
 The OpenCensus agent exporter will export trace data to the OpenCensus collector
 over a gRPC API. The details of how to configure OpenCensus will vary language
