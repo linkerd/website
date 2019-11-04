@@ -1,31 +1,26 @@
 +++
 title = "Distributed Tracing"
-description = "Linkerd 2.x provides some of the features of distributed tracing, but does not currently emit spans."
+description = "You can enabled distributed tracing support in Linkerd."
 +++
 
 Tracing can be an invaluable tool in debugging distributed systems performance,
 especially for identifying bottlenecks and understanding the latency cost of
-each component in your system.  If you're not already familiar with the idea
-behind distributed tracing, [Distributed Tracing for Polyglot
-Microservices](/2016/05/17/distributed-tracing-for-polyglot-microservices/)
-gives a good overview of the concepts.
+each component in your system. Linkerd can be configured to emit trace spans
+from the proxies, allowing you to see exactly what time requests and responses
+spend inside.
 
-Linkerd can be configured to emit trace spans from the proxies, allowing you to
-see exactly what time requests and responses spend inside. Unfortunately, unlike
-most of the features of Linkerd, both code changes and configuration are
-required. You can read up on [Distributed tracing in the service mesh: four
-myths](/2019/08/09/service-mesh-distributed-tracing-myths/) for a deep dive into
-why this is.
+Unlike most of the features of Linkerd, distributed tracing requires both code
+changes and configuration. (You can read up on [Distributed tracing in the
+service mesh: four myths](/2019/08/09/service-mesh-distributed-tracing-myths/)
+for why this is.)
 
-Alternatively, Linkerd also provides some of the features that are often
-associated with distributed tracing, including:
+Furthermore, Linkerd provides many of the features that are often associated
+with distributed tracing, *without* requiring configuration or application
+changes, including:
 
 * Live service topology and dependency graphs
 * Aggregated service health, latencies, and request volumes
 * Aggregated path / route health, latencies, and request volumes
-
-These features are provided *automatically*, without requiring changes to the
-application or instrumentation with distributed tracing libraries.
 
 For example, Linkerd can display a live topology of all incoming and outgoing
 dependencies for a service, without requiring distributed tracing or any other
@@ -42,3 +37,23 @@ modification:
 {{< fig src="/images/books/webapp-routes.png"
     title="Linkerd dashboard showing an automatically generated route metrics"
 >}}
+
+## Using distributed tracing
+
+That said, distributed tracing certainly has its uses, and Linkerd makes this
+as easy as it can. Linkerd's role in distributed tracing is actually quite
+simple: when a Linkerd data plane proxy sees a tracing header in a proxied HTTP
+request, Linkerd will emit a trace span for that request. This span will
+include information about the exact amount of time spent in the Linkerd proxy.
+When paired with software to collect, store, and analyze this information, this
+can provide significant insight into the behavior of the mesh.
+
+To use this feature, you'll also need to introduce several additional
+components in your system., including an ingress layer that kicks off the trace
+on particular requests, a client library for your application (or a mechanism
+to propagate trace headers), a trace collector to collect span data and turn
+them into traces, and a trace backend to store the trace data and allow the
+user to view/query it.
+
+For details, please see our [guide to adding distributed tracing to your
+application with Linkerd](/2/tasks/distributed-tracing/).
