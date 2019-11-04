@@ -1,6 +1,6 @@
 +++
 title = "Distributed tracing with Linkerd"
-description = "Use Linkerd to help instrument your application wiht distributed tracing."
+description = "Use Linkerd to help instrument your application with distributed tracing."
 +++
 
 Using distributed tracing in practice can be complex. In this guide, we've
@@ -31,7 +31,7 @@ need several additional components in your system:
 
 ## Quickstart demo
 
-Let's dive in to how distributed tracing works with a workign example. Then
+Let's dive in to how distributed tracing works with a working example. Then
 we'll describe each of the components in more detail and explain how to use
 those components in your own application.
 

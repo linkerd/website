@@ -1,6 +1,6 @@
 +++
 title = "Distributed Tracing"
-description = "You can enabled distributed tracing support in Linkerd."
+description = "You can enable distributed tracing support in Linkerd."
 +++
 
 Tracing can be an invaluable tool in debugging distributed systems performance,
