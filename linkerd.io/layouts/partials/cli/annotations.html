@@ -1,50 +1,8 @@
-<div class="table-container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>
-          Annotation
-        </th>
-        <th>
-          Description
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- This list must be kept in-sync with https://github.com/linkerd/linkerd2/blob/master/pkg/k8s/labels.go#L94-L180 -->
-      {{ $labels := slice "admin-port" "control-port" "disable-identity" "disable-tap" "enable-debug-sidecar" "enable-external-profiles" "image-pull-policy" "inbound-port" "init-image" "init-image-version" "outbound-port" "proxy-cpu-limit" "proxy-cpu-request" "proxy-image" "proxy-log-level" "proxy-memory-limit" "proxy-memory-request" "proxy-uid" "proxy-version" "skip-inbound-ports" "skip-outbound-ports" }}
-      {{ range . }}
-      {{ if (in $labels .Name) }}
-      <tr>
-        <td>
-          <code class="text-nowrap">config.linkerd.io/{{ .Name }}</code>
-        </td>
-        <td>
-          {{ .Usage | markdownify }}
-        </td>
-      </tr>
-      {{ end }}
-      {{ end }}
-      <!-- This can be removed when the tracing options are added to the CLI  -->
-      <!-- See https://github.com/linkerd/linkerd2/issues/3468 -->
-      <tr>
-        <td>
-          <code class="text-nowrap">config.linkerd.io/trace-collector</code>
-        </td>
-        <td>
-          Service name of the trace collector. E.g. <code>oc-collector.tracing:55678</code>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <code class="text-nowrap">config.alpha.linkerd.io/trace-collector-service-account</code>
-        </td>
-        <td>
-          The trace collector's service account name. E.g.,
-          <code>tracing-service-account</code>. If not provided, it will be
-          defaulted to <code>default<code>.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<tr>
+  <td>
+    <code class="text-nowrap">{{ .Name }}</code>
+  </td>
+  <td>
+    {{ .Description | markdownify }}
+  </td>
+</tr>
