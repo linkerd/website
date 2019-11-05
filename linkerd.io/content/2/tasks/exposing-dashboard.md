@@ -29,11 +29,6 @@ metadata:
   namespace: linkerd
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:8084;
-      proxy_set_header Origin "";
-      proxy_hide_header l5d-remote-ip;
-      proxy_hide_header l5d-server-id;
     nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
@@ -95,10 +90,7 @@ documentation for details on how to change the username and password.
 
 To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
 the dashboard rejects any request whose `Host` header is not `localhost`,
-`127.0.0.1` or the full service name `linkerd-web.linkerd.svc.cluster.local`. If
-you rely on the latter, and if you used the `--cluster-domain` flag or the
-equivalent `ClusterDomain` Helm value when you installed Linkerd, then replace
-the `cluster.local` part with the appropriate value.
+`127.0.0.1` or the service name `linkerd-web.linkerd.svc`.
 
 Note that this protection also covers the [Grafana
 dashboard](/2/reference/architecture/#grafana).
