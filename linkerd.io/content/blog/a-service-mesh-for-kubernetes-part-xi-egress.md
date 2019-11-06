@@ -10,7 +10,7 @@ thumbnail: /uploads/kubernetes11_featured_Twitter_ratio.png
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 
-In previous posts in this series, we’ve demonstrated how Linkerd can act as an *egress* to a Kubernetes cluster, handling all requests coming from outside of the cluster and sending them to the appropriate Kubernetes services.
+In previous posts in this series, we’ve demonstrated how Linkerd can act as an *ingress* to a Kubernetes cluster, handling all requests coming from outside of the cluster and sending them to the appropriate Kubernetes services.
 
 In this post we’ll explore how Linkerd can be used as an *egress* as well, handling requests from services within the cluster to services running outside of the cluster, whether those are legacy non-Kubernetes systems or third-party APIs outside the firewall.
 
