@@ -72,9 +72,10 @@ HEAD /authors/{id}.json     authors             100.00%          2.8rps         
 ```
 
 Actual requests represent all requests that the client actually sends, including
-both original requests and retries.  Effective requests only count the original
-requests.  Since an original request may trigger one or more retries, the actual request volume is usually higher
-than the effective request volume.
-Since an original request may fail the first time, but a retry of
-that request might succeed, the effective success rate is usually ([but not always](/2/tasks/configuring-timeouts/#monitoring-timeouts)) higher than
-the actual success rate when retries are enabled. 
+original requests and retries.  Effective requests only count the original
+requests.  Since an original request may trigger one or more retries, the actual
+request volume is usually higher than the effective request volume when retries
+are enabled.  Since an original request may fail the first time, but a retry of
+that request might succeed, the effective success rate is usually ([but not
+always](/2/tasks/configuring-timeouts/#monitoring-timeouts)) higher than the
+actual success rate.
