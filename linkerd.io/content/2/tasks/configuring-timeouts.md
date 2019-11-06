@@ -25,3 +25,16 @@ spec:
 
 Check out the [timeouts section](/2/tasks/books/#timeouts) of the books demo for
 a tutorial of how to configure timeouts.
+
+## Monitoring Timeouts
+
+Requests which reach the timeout will be canceled, return a 504 Gateway Timeout
+response, and count as a failure for the purposes of [effective success
+rate](/2/tasks/configuring-retries/#monitoring-retries).  Since the request was
+canceled before any actual response was received, a timeout will not count
+towards the actual request volume at all.  This means that effective request
+rate can be higher than actual request rate when timeouts are configured.
+Furthermore, if a response is received just as the timeout is exceeded, it is
+possible for the request to be counted as an actual success but an effective
+failure.  This can result in effective success rate being lower than actual
+success rate.
