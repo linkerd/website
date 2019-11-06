@@ -15,8 +15,8 @@ the user with more control over the life cycle of these credential arises.
 In order to do that Linkerd 2.7 introduces the functionality to read and
 continuously monitor Kubernetes secrets for certificates change and to
 auto-reload the `identity` component's in-memory issuer certificate. In the
-following lines, we will demonstrate how this allows integration with an
-external certificate management solution such as
+following lines, we will demonstrate how this allows integration with the
+external certificate management solution
 [cert-manager](https://github.com/jetstack/cert-manager).
 
 ## Prerequisites
@@ -46,13 +46,16 @@ kubectl create namespace linkerd
 
 To allow the Issuer to reference the signing key pair, it needs to be stored in
 a Kubernetes secret, created in the `linkerd` namespace. Let's name it
-`linkerd-trust-anchor`.
+`linkerd-trust-anchor` and use `step` to generate certificates and store them
+in the secret:
 
 ```bash
-kubectl create secret tls \
+step certificate create identity.linkerd.cluster.local ca.crt ca.key \
+  --profile root-ca --no-password --insecure &&
+  kubectl create secret tls \
    linkerd-trust-anchor \
-   --cert=<path-to-cert> \
-   --key=<path-to-key> \
+   --cert=ca.crt \
+   --key=ca.key \
    --namespace=linkerd
 ```
 
@@ -61,7 +64,8 @@ kubectl create secret tls \
 Now that we have the secret in place, we can create an Issuer that
 references it:
 
-```yaml
+```bash
+cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
@@ -70,6 +74,7 @@ metadata:
 spec:
   ca:
     secretName: linkerd-trust-anchor
+EOF
 ```
 
 As an alternative to `Issuer` you can use a `ClusterIssuer`. In order to avoid
@@ -80,7 +85,8 @@ over-permissive RBAC settings we recommend to use the former.
 We can now create a Certificate resource which will specify the desired
 certificate:
 
-```yaml
+```bash
+cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
@@ -101,6 +107,7 @@ spec:
   - crl sign
   - server auth
   - client auth
+EOF
 ```
 
 Once this resource is in place cert-manager will attempt to use it to obtain
@@ -130,6 +137,13 @@ created credentials. In order to monitor this process you can check the
 kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 ```
 
+{{< note >}}
+Linkerd will work with any secret of type `kubernetes.io/tls`, containing
+the `ca.crt`, `tls.crt` and `tls.key` data fields. The secret must be named
+`linkerd-identity-issuer`. This allows for the use of other certificate
+management solutions such as [Vault](https://www.vaultproject.io).
+{{< /note >}}
+
 ## Using Helm
 
 Alternatively if you want to install through Helm, you need to make sure that
@@ -137,7 +151,7 @@ Alternatively if you want to install through Helm, you need to make sure that
 consult the [Customizing the Namespace](/2/tasks/install-helm/#customizing-the-namespace)
 section in order to ensure your namespace has all the required labels.
 When all of that is in place simply supply the trust root that is in your
-`linkerd-identity-issuer` sercret:
+`linkerd-identity-issuer` secret:
 
 ```bash
 helm install \
