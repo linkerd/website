@@ -55,3 +55,27 @@ spec:
     minRetriesPerSecond: 10
     ttl: 10s
 ```
+
+## Monitoring Retries
+
+Retries can be monitored by using the `linkerd routes` command with the `--to`
+flag and the `-o wide` flag.  Since retries are performed on the client-side,
+we need to use the `--to` flag to see metrics for requests that one resource
+is sending to another (from the server's point of view, retries are just
+regular requests).  When both of these flags are specified, the `linkerd routes`
+command will differentiate between "effective" and "actual" traffic.
+
+```bash
+ROUTE                       SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
+HEAD /authors/{id}.json     authors             100.00%          2.8rps           58.45%       4.7rps           7ms          25ms          37ms
+[DEFAULT]                   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
+```
+
+Actual requests represent all requests that the client actually sends, including
+original requests and retries.  Effective requests only count the original
+requests.  Since an original request may trigger one or more retries, the actual
+request volume is usually higher than the effective request volume when retries
+are enabled.  Since an original request may fail the first time, but a retry of
+that request might succeed, the effective success rate is usually ([but not
+always](/2/tasks/configuring-timeouts/#monitoring-timeouts)) higher than the
+actual success rate.
