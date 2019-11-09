@@ -176,11 +176,20 @@ kubectl delete ns tracing emojivoto
 
 ### I don't see any spans for the proxies
 
-The Linkerd proxy uses the [b3 propagation](https://github.com/openzipkin/b3-propagation) format. Some client libraries, such as Jaeger, use different formats by default. You'll want to configure your client library to use the b3 format to have the proxies participate in traces.
+The Linkerd proxy uses the [b3
+propagation](https://github.com/openzipkin/b3-propagation) format. Some client
+libraries, such as Jaeger, use different formats by default. You'll want to
+configure your client library to use the b3 format to have the proxies
+participate in traces.
 
 ### I don't see any traces
 
-Instead of requiring complex client configuration to ensure spans are encrypted in transit, Linkerd relies on its mTLS implementation. This means that it is *required* the collector is part of the mesh. If you are using a service account other than `default` for the collector, the proxies must be configured to use this as well with the `config.alpha.linkerd.io/trace-collector-service-account` annotation.
+Instead of requiring complex client configuration to ensure spans are encrypted
+in transit, Linkerd relies on its mTLS implementation. This means that it is
+*required* the collector is part of the mesh. If you are using a service account
+other than `default` for the collector, the proxies must be configured to use
+this as well with the `config.alpha.linkerd.io/trace-collector-service-account`
+annotation.
 
 ## Recommendations
 
