@@ -26,7 +26,7 @@ For production workloads, Linkerd's control plane can run in high availability
 You can enable HA mode at control plane installation time with the `--ha` flag:
 
 ```bash
-linkerd install --ha | kubectl apply -f
+linkerd install --ha | kubectl apply -f -
 ```
 
 You can override certain aspects of the HA behavior at installation time by
@@ -34,7 +34,7 @@ passing other flags to install. For example, you can override the number of
 replicas for critical components with the `--controller-replicas` flag:
 
 ```bash
-linkerd install --ha --controller-replicas=2 | kubectl apply -f
+linkerd install --ha --controller-replicas=2 | kubectl apply -f -
 ```
 
 To ensure that Linkerd does not get in the way of system critical workloads
