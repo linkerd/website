@@ -31,9 +31,7 @@ Microsoft TechDays Online, February 2017
 
 * [Building a Modern Bank
   Backend](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/)
-  (blog)<br> Building a Bank with
-  Kubernetes
-  (slides)<br>
+  (blog)<br> Building a Bank with Kubernetes (slides)<br>
 Monzo, October 2016
 
 ## Linkerd Developers
