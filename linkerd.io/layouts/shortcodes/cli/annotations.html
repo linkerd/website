@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      {{ range site.Data.cli.AnnotationsReference }}
+      {{ range sort site.Data.cli.AnnotationsReference "Name" }}
       {{ partial "cli/annotations" . }}
       {{ end }}
     </tbody>
