@@ -1,3 +1,52 @@
+AnnotationsReference:
+- Description: Linkerd proxy container image name
+  Name: config.linkerd.io/proxy-image
+- Description: Docker image pull policy
+  Name: config.linkerd.io/image-pull-policy
+- Description: Linkerd init container image name
+  Name: config.linkerd.io/init-image
+- Description: Linkerd init container image version
+  Name: config.linkerd.io/init-image-version
+- Description: Proxy port to use for control
+  Name: config.linkerd.io/control-port
+- Description: Ports that should skip the proxy and send directly to the application
+  Name: config.linkerd.io/skip-inbound-ports
+- Description: Outbound ports that should skip the proxy
+  Name: config.linkerd.io/skip-outbound-ports
+- Description: Proxy port to use for inbound traffic
+  Name: config.linkerd.io/inbound-port
+- Description: Proxy port to serve metrics on
+  Name: config.linkerd.io/admin-port
+- Description: Proxy port to use for outbound traffic
+  Name: config.linkerd.io/outbound-port
+- Description: Amount of CPU units that the proxy sidecar requests
+  Name: config.linkerd.io/proxy-cpu-request
+- Description: Amount of Memory that the proxy sidecar requests
+  Name: config.linkerd.io/proxy-memory-request
+- Description: Maximum amount of CPU units that the proxy sidecar can use
+  Name: config.linkerd.io/proxy-cpu-limit
+- Description: Maximum amount of Memory that the proxy sidecar can use
+  Name: config.linkerd.io/proxy-memory-limit
+- Description: Run the proxy under this user ID
+  Name: config.linkerd.io/proxy-uid
+- Description: Log level for the proxy
+  Name: config.linkerd.io/proxy-log-level
+- Description: Enable service profiles for non-Kubernetes services
+  Name: config.linkerd.io/enable-external-profiles
+- Description: Tag to be used for the Linkerd proxy images
+  Name: config.linkerd.io/proxy-version
+- Description: Disables resources from participating in TLS identity
+  Name: config.linkerd.io/disable-identity
+- Description: Disables resources from being tapped
+  Name: config.linkerd.io/disable-tap
+- Description: Inject a debug sidecar for data plane debugging
+  Name: config.linkerd.io/enable-debug-sidecar
+- Description: Service name of the trace collector. E.g. `oc-collector.tracing:55678`
+  Name: config.linkerd.io/trace-collector
+- Description: The trace collector's service account name. E.g., `tracing-service-account`.
+    If not provided, it will be defaulted to `default`.
+  Name: config.alpha.linkerd.io/trace-collector-service-account
+CLIReference:
 - Description: |-
     Check the Linkerd cluster-wide resources for potential problems.
 
@@ -380,6 +429,14 @@
     Name: skip-outbound-ports
     Shorthand: ""
     Usage: Outbound ports that should skip the proxy
+  - DefaultValue: ""
+    Name: trace-collector
+    Shorthand: ""
+    Usage: Collector Service address for the proxies to send Trace Data
+  - DefaultValue: ""
+    Name: trace-collector-svc-account
+    Shorthand: ""
+    Usage: Service account associated with the Trace collector instance
   SeeAlso: null
   Synopsis: Add the Linkerd proxy to a Kubernetes config
 - Description: |-
@@ -436,6 +493,10 @@
     Shorthand: ""
     Usage: Set custom cluster domain
   - DefaultValue: ""
+    Name: control-plane-tracing
+    Shorthand: ""
+    Usage: Enables Control Plane Tracing with the defaults
+  - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
     Usage: |
@@ -483,6 +544,10 @@
     Shorthand: ""
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
+  - DefaultValue: ""
+    Name: identity-external-issuer
+    Shorthand: ""
+    Usage: Whether to use an external identity issuer (default false)
   - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
@@ -627,6 +692,10 @@
     Shorthand: ""
     Usage: Set custom cluster domain
   - DefaultValue: ""
+    Name: control-plane-tracing
+    Shorthand: ""
+    Usage: Enables Control Plane Tracing with the defaults
+  - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
     Usage: |
@@ -674,6 +743,10 @@
     Shorthand: ""
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
+  - DefaultValue: ""
+    Name: identity-external-issuer
+    Shorthand: ""
+    Usage: Whether to use an external identity issuer (default false)
   - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
@@ -1437,9 +1510,9 @@
     Shorthand: ""
     Usage: Proxy port to serve metrics on
   - DefaultValue: ""
-    Name: cluster-domain
+    Name: control-plane-tracing
     Shorthand: ""
-    Usage: Set custom cluster domain
+    Usage: Enables Control Plane Tracing with the defaults
   - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""
@@ -1604,9 +1677,9 @@
     Shorthand: ""
     Usage: Proxy port to serve metrics on
   - DefaultValue: ""
-    Name: cluster-domain
+    Name: control-plane-tracing
     Shorthand: ""
-    Usage: Set custom cluster domain
+    Usage: Enables Control Plane Tracing with the defaults
   - DefaultValue: ""
     Name: control-plane-version
     Shorthand: ""

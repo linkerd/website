@@ -1,6 +1,19 @@
-{{ range where site.Data.cli "Name" (.Get 0) }}
-{{ $opts := where .Options "Name" "!=" "help" }}
-{{ if ge (len $opts) 1 }}
-{{ partial "cli/annotations" $opts }}
-{{ end }}
-{{ end }}
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Annotation
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range sort site.Data.cli.AnnotationsReference "Name" }}
+      {{ partial "cli/annotations" . }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>

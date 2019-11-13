@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      {{ range $cli }}
+      {{ range $cli.CLIReference }}
       {{ if not (in .Name " ") }}
       <tr>
         <td class="text-nowrap">
