@@ -17,9 +17,6 @@ You can also check out [Buoyant's blog](https://buoyant.io/blog) for more posts!
 
 ## Linkerd Users
 
-* Linkerd: the Cloud Native service mesh<br>
-Cloud Native London, October 2017
-
 * [How ForeSee Processes Billions of Events Per Day with Linkerd](https://youtu.be/YRjUuhiXIPc)<br>
 Buoyant Webinar, August 2017
 
@@ -31,7 +28,7 @@ Microsoft TechDays Online, February 2017
 
 * [Building a Modern Bank
   Backend](https://monzo.com/blog/2016/09/19/building-a-modern-bank-backend/)
-  (blog)<br> Building a Bank with Kubernetes (slides)<br>
+  (blog)
 Monzo, October 2016
 
 ## Linkerd Developers
