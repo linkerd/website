@@ -1562,6 +1562,11 @@ CLIReference:
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
   - DefaultValue: ""
+    Name: identity-external-issuer
+    Shorthand: ""
+    Usage: |
+      Whether to use an external identity issuer (default false)
+  - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
     Usage: |
@@ -1733,6 +1738,11 @@ CLIReference:
     Shorthand: ""
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
+  - DefaultValue: ""
+    Name: identity-external-issuer
+    Shorthand: ""
+    Usage: |
+      Whether to use an external identity issuer (default false)      
   - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
