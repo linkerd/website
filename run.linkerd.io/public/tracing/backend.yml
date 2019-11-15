@@ -4,7 +4,7 @@ metadata:
   name: tracing
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: jaeger
   namespace: tracing
@@ -12,6 +12,9 @@ metadata:
     app: jaeger
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
   template:
     metadata:
       annotations:

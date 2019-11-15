@@ -85,6 +85,36 @@ Before moving onto the next step, make sure everything is up and running with
 kubectl -n tracing rollout status deploy/jaeger --watch
 ```
 
+## Install Emojivoto
+
+ Add emojivoto to your cluster with:
+
+ ```bash
+ kubectl apply -f https://run.linkerd.io/emojivoto.yml
+ ```
+
+It is possible to use `linkerd inject` to add the proxy to emojivoto as outlined
+in [getting started](/2/getting-started/). Alternatively, annotations can do the
+same thing. You can patch these onto the running application with:
+
+```bash
+kubectl -n emojivoto patch -f https://run.linkerd.io/emojivoto.yml -p '
+spec:
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+        config.linkerd.io/trace-collector: oc-collector.tracing:55678
+'
+```
+
+Before moving onto the next step, make sure everything is up and running with
+`kubectl`:
+
+```bash
+kubectl -n emojivoto rollout status deploy/web --watch
+```
+
 ## Modify the application
 
 Unlike most features of a service mesh, distributed tracing requires modifying
@@ -102,35 +132,14 @@ shows how this was done. For most programming languages, it simply requires the
 addition of a client library to take care of this. Emojivoto uses the OpenCensus
 client, but others can be used.
 
-## Install Emojivoto
-
- Add emojivoto to your cluster with:
-
- ```bash
- kubectl apply -k https://run.linkerd.io/emojivoto
- ```
-
-It is possible to use `linkerd inject` to add the proxy to emojivoto as outlined
-in [getting started](/2/getting-started/). Alternatively, annotations can do the
-same thing. You can patch these onto the running application with:
+To enable tracing in emojivoto, run:
 
 ```bash
-kubectl -n emojivoto patch -k https://run.linkerd.io/emojivoto -p '
-spec:
-  template:
-    metadata:
-      annotations:
-        linkerd.io/inject: enabled
-        config.linkerd.io/trace-collector: oc-collector.tracing:55678
-'
+kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=oc-collector.tracing:55678
 ```
 
-Before moving onto the next step, make sure everything is up and running with
-`kubectl`:
-
-```bash
-kubectl -n emojivoto rollout status deploy/web --watch
-```
+This command will add an environment variable that enables the applications to
+propagate context and emit spans.
 
 ## Explore Jaeger
 
