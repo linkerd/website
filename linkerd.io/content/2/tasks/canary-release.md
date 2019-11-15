@@ -25,7 +25,7 @@ allowing for fully-automated, metrics-aware canary deployments.
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
   Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
-already done this.
+  already done this.
 - The installation of Flagger depends on `kubectl` 1.14 or newer.
 
 ## Install Flagger
