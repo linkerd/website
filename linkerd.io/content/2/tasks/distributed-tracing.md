@@ -70,7 +70,7 @@ configuration will store the traces, make them searchable and provide
 visualization of all the data being emitted. To install it on your cluster, run:
 
 ```bash
-kubectl apply -f https://run.likerd.io/tracing/backend.yml
+kubectl apply -f https://run.linkerd.io/tracing/backend.yml
 ```
 
 Jaeger itself is made up of many
