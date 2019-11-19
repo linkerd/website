@@ -31,9 +31,8 @@ image: gcr.io/linkerd-io/web:stable-2.6.0
 image: prom/prometheus:v2.11.1
 ```
 
-All of the Linkerd images are publicly available in the [Linkerd Google
-Container Repository]
-(https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
+All of the Linkerd images are publicly available in the 
+[Linkerd Google Container Repository](https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
 
 Stable images are named using the convention  `stable-<version>` and the edge
 images use the convention `edge-<year>.<month>.<release-number`.
