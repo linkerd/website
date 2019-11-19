@@ -5,14 +5,14 @@ description = "Using Linkerd a Private Docker Repository."
 
 In some cases, you will want to use a private docker repository to store the
 Linkerd images. This scenario requires knowing the names and locations of the
-docker images used by the Linkerd control and data planes so that you can 
+docker images used by the Linkerd control and data planes so that you can
 store them in your private repository.
 
-The easiest way to get those images is to use the Linkerd CLI to pull the images
-on to a host and push them to your private repository.
+The easiest way to get those images is to use the [Linkerd CLI](/2/getting-started/#step-1-install-the-cli) 
+to pull the images to an internal host and push them to your private repository.
 
-To get the names of the images used by the control plane, install the Linkerd
-CLI and run this command:
+To get the names of the images used by the control plane, [install](/2/getting-started/#step-1-install-the-cli)
+the Linkerd CLI and run this command:
 
 ```bash
 linkerd install --ignore-cluster | grep image: | sed -e 's/^ *//' | sort | uniq
@@ -29,17 +29,20 @@ image: gcr.io/linkerd-io/web:stable-2.6.0
 image: prom/prometheus:v2.11.1
 ```
 
-All of the Linkerd images are publicly available in the [Linkerd Google Container Repository](https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
+All of the Linkerd images are publicly available in the [Linkerd Google
+Container Repository]
+(https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
 
 Stable images are named using the convention  `stable-<version>` and the edge
-images use the convention with `edge-<year>.<month>.<release-number`
+images use the convention `edge-<year>.<month>.<release-number`.
+
 Examples of each are: `stable-2.6.0` and `edge-2019.11.1`.
- 
+
 Once you have identified which images you want to store in your private
 repository, use the `docker pull <image-name>` command to pull the images to
 a machine on your network, then use the `docker push` command to push the
-images to your private repository. 
- 
+images to your private repository.
+
 Now that the images are hosted by your private repository, you can update
 your deployment configuration to pull from your private docker repository.
 
