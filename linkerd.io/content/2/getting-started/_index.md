@@ -52,7 +52,7 @@ If this is your first time running Linkerd, you will need to download the
 command-line interface (CLI) onto your local machine. This CLI interacts with
 Linkerd, including installing the control plane onto your Kubernetes cluster.
 
-To install the CLI, run:
+To install the CLI manually, run:
 
 ```bash
 curl -sL https://run.linkerd.io/install | sh
@@ -67,7 +67,14 @@ Next, add `linkerd` to your path with:
 export PATH=$PATH:$HOME/.linkerd2/bin
 ```
 
-Verify the CLI is installed and running correctly with:
+If you use [Homebrew](https://brew.sh), you can instead download and install the
+CLI with:
+
+```bash
+brew install linkerd
+```
+
+However you install it, you can verify the CLI is running correctly with:
 
 ```bash
 linkerd version
