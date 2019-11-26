@@ -1,7 +1,7 @@
 ---
-title: 'Linkerd at KubeCon NA 2019 roundup: Nordstrom, Microsoft, OpenFaaS, PayBase, and lots of community!'
+title: 'Linkerd at Kubecon NA 2019 roundup: Nordstrom, Microsoft, OpenFaaS, PayBase, and lots of community!'
 author: 'william'
-date: Mon, 25 Nov 2019 09:00:00 -0800
+date: Tue, 26 Nov 2019 09:00:00 -0800
 draft: false
 slug: linkerd-at-kubecon-na-2019-roundup
 tags: [Community, Linkerd, Kubecon]
@@ -10,7 +10,7 @@ thumbnail: /uploads/kccnceu19-linkerd.jpg
 
 ![Linkerd at KCCNCNA19](/uploads/kccncna19-linkerd.jpg)
 
-Once again, Linkerd momentum was at an all-time high at last week's KubeCon NA
+Once again, Linkerd momentum was at an all-time high at last week's Kubecon NA
 in San Diego. This was the biggest Kubecon yet, with 10k+ attendees, hundreds
 of talks, and a great Linkerd presence.
 
@@ -20,7 +20,7 @@ live. Here's a quick recap of the Linkerd news.
 ## Nordstrom's Linkerd Deployment
 
 One of the highlights of the show was the talk by Nordstrom engineers Hema Lee
-and Cody Vendermyn titled [Service Mesh: There and Back
+and Cody Vandermyn titled [Service Mesh: There and Back
 Again](https://www.youtube.com/watch?v=sq8nsjuJqO4), in which they detail
 Nordstrom's service mesh journey and why they chose Linkerd.
 
@@ -29,7 +29,7 @@ Nordstrom's service mesh journey and why they chose Linkerd.
 ## Serverless + Service Mesh with Linkerd and OpenFaaS
 
 OpenFaaS founder Alex Ellis joined Linkerd engineer Charles Pretzer for a great
-talk entitled [OpenFaaS Cloud plus Linkerd colon A Secure, Multi-Tenant
+talk entitled [OpenFaaS Cloud + Linkerd: A Secure, Multi-Tenant
 Serverless Platform](https://www.youtube.com/watch?v=sD7hCwq3Gw0). Two great
 open source projects that go great together!
 
@@ -41,9 +41,9 @@ As usual, lots of great Linkerd content from our friends at Microsoft. Brian
 Redmond gave some great Linkerd demos in a talk entitled [Supercharge Your
 Microservices CI/CD with Service Mesh and
 Kubernetes](https://www.youtube.com/watch?v=SMoaem3UBag), and Microsoft's Rita
-Zhang joined Linkerd maintainer Ivan Sim for a presentation on [Enforcing
+Zhang joined Linkerd engineer Ivan Sim for a presentation on [Enforcing
 Automatic mTLS With Linkerd and OPA
-Gatekeeper](https://www.youtube.com/watch?v=gMaGVHnvNfs)
+Gatekeeper](https://www.youtube.com/watch?v=gMaGVHnvNfs).
 
 {{< youtube gMaGVHnvNfs >}}
 
@@ -70,7 +70,7 @@ talks were jam-packed with people and had some really great Q&A.
 ## Linkerd in the news
 
 Linkerd's momentum is not lost on the press. I particularly like this quote
-from Cody in entitled [Linkerd vs. Istio battle heats up as service mesh gains
+from Cody in [Linkerd vs. Istio battle heats up as service mesh gains
 steam](https://searchitoperations.techtarget.com/news/252474376/Linkerd-vs-Istio-battle-heats-up-as-service-mesh-gains-steam):
 
 "We performance tested Istio and Linkerd just over a year ago, and chose
@@ -99,5 +99,3 @@ hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the [mailing
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
-
-[vscode]: https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd
