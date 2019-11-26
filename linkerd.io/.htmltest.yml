@@ -5,6 +5,7 @@ IgnoreURLs:
   - https://github.com/linkerd/website/edit/master/linkerd.io/content/.*
   - https://ticketmaster.com
   - https://douban.com/
+  - https://www.douban.com/
   - https://www.meetup.com/*
   - https://sched.co/*
   - https://marketplace.visualstudio.com/items*
