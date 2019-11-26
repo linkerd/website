@@ -14,6 +14,7 @@ IgnoreURLs:
   - https://github.com/linkerd/linkerd2
   - https://github.com/linkerd/website/tree/master/linkerd.io/content
   - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
+  - https://discourse.linkerd.io
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 32
