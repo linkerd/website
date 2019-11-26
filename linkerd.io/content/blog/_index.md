@@ -7,8 +7,8 @@ tags:
 - Tutorials &amp; How-To's
 - Video
 items:
+- blog/kubecon-na-2019-linkerd-roundup.md
 - blog/announcing-linkerd-2-6.md
-- blog/linkerd-and-open-governance.md
 description: ''
 keywords: []
 
