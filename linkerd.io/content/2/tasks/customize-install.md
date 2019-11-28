@@ -47,8 +47,26 @@ associated with a critical `PriorityClass`. While this configuration isn't
 currently supported as a flag to `linkerd install`, it is not hard to add by
 using Kustomize.
 
-First, create a file named `priority-class.yaml` that will contain the overlay.
-This overlay will explain what needs to be modified.
+First, create a file named `priority-class.yaml` that will create define a
+`PriorityClass` resource.
+
+```yaml
+apiVersion: scheduling.k8s.io/v1
+description: Used for critical linkerd pods that must run in the cluster, but
+  can be moved to another node if necessary.
+kind: PriorityClass
+metadata:
+  name: linkerd-critical
+value: 1000000000
+```
+
+{{< note >}}
+`1000000000` is the max. allowed user-defined priority, adjust
+accordingly.
+{{< /note >}}
+
+Next, create a file named `patch-priority-class.yaml` that will contain the
+overlay. This overlay will explain what needs to be modified.
 
 ```yaml
 apiVersion: apps/v1
@@ -58,7 +76,7 @@ metadata:
 spec:
   template:
     spec:
-      priorityClassName: system-cluster-critical
+      priorityClassName: linkerd-critical
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,16 +85,17 @@ metadata:
 spec:
   template:
     spec:
-      priorityClassName: system-cluster-critical
+      priorityClassName: linkerd-critical
 ```
 
 Then, add this as a strategic merge option to `kustomization.yaml`:
 
 ```yaml
 resources:
+- priority-class.yaml
 - linkerd.yaml
 patchesStrategicMerge:
-- priority-class.yaml
+- patch-priority-class.yaml
 ```
 
 Applying this to your cluster requires taking the output of `kustomize build`
