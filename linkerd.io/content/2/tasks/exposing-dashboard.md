@@ -95,7 +95,7 @@ the dashboard rejects any request whose `Host` header is not `localhost`,
 Note that this protection also covers the [Grafana
 dashboard](/2/reference/architecture/#grafana).
 
-The Nginx-Ingress config above uses the
+The ingress-nginx config above uses the
 `nginx.ingress.kubernetes.io/upstream-vhost` annotation to properly set the
 upstream `Host` header. Traefik on the other hand doesn't offer that option, so
 you'll have to manually set the required `Host` as explained below.
