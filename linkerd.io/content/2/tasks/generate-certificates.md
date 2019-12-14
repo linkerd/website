@@ -53,7 +53,6 @@ linkerd install \
   --identity-trust-anchors-file ca.crt \
   --identity-issuer-certificate-file issuer.crt \
   --identity-issuer-key-file issuer.key \
-  --identity-issuance-lifetime 8760h \
   | kubectl apply -f -
 ```
 
