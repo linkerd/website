@@ -16,5 +16,10 @@
           </div>
         </div>
     {{ end }}
+    <script type="text/javascript">
+      (() => {
+        window.parent.postMessage({ "dashboardHeight": document.body.offsetHeight }, "*");
+      })();
+    </script>
   </body>
 </html>
