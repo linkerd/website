@@ -27,7 +27,7 @@ more services by adding the *data plane* proxies. (See the
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to a Kubernetes
-cluster running 1.12 or later, and a functioning `kubectl` command on your
+cluster running 1.13 or later, and a functioning `kubectl` command on your
 local machine. (One easy option is to run Kubernetes on your local machine. We
 suggest [Docker Desktop](https://www.docker.com/products/docker-desktop) or
 [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/), but
