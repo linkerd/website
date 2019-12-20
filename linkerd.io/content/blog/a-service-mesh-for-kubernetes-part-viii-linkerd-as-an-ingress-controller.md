@@ -248,6 +248,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 
 You should now be able to make an encrypted request:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 # Example requires this development cert: https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/certificates/cert.pem
 # The cert expects "hello.world" host, so we add an /etc/hosts entry, eg:
@@ -256,6 +257,7 @@ You should now be able to make an encrypted request:
 $ curl --cacert cert.pem -H "Host: world.v2" https://hello.world
 $ earth (10.0.1.5)!
 ```
+<!-- markdownlint-enable MD014 -->
 
 ## CONCLUSION
 

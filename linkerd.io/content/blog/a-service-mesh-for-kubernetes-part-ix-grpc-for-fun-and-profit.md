@@ -81,11 +81,13 @@ Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can do so
 
 We’ll use the helloworld-client provided by the `hello world` [docker image](https://hub.docker.com/r/buoyantio/helloworld/)in order to send test gRPC requests to our `hello world` service:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 $ docker run --rm --entrypoint=helloworld-client buoyantio/helloworld:0.1.3 $L5D_INGRESS_LB:4140
 Hello (10.196.1.242) world (10.196.1.243)!!
 ```
+<!-- markdownlint-enable MD014 -->
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 

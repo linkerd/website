@@ -176,11 +176,13 @@ curl $L5D_INGRESS_LB Hello (10.196.2.5) world (10.196.2.6)!!
 
 Or to use hostIP directly:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ L5D_INGRESS_LB=$L5D_HOST_IP:$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
 $ curl $L5D_INGRESS_LB
 Hello (10.196.2.5) world (10.196.2.6)!!
 ```
+<!-- markdownlint-enable MD014 -->
 
 If everything is working, you’ll see a “Hello world” message similar to that above, with the IPs of the pods that served the request.
 

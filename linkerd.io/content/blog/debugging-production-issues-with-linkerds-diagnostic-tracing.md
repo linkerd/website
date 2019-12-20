@@ -49,11 +49,13 @@ Let's walk through a scenario to see how diagnostic tracing can help us troubles
 
 When we send a request to a service (in our example we use a linker-to-linker setup pointing to a hello service) through Linkerd and we see this response:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ curl http://localhost:4140/hello
 
 Invalid response 500
 ```
+<!-- markdownlint-enable MD014 -->
 
 The response doesn't really help us troubleshoot where the problem may be coming from. Is this error message being sent from Linkerd? If so, which Linkerd is it coming from in our linker-to-linker configuration? Is this a message from the hello service itself? It's difficult to tell.
 
@@ -61,14 +63,17 @@ Instead, running a diagnostic trace generates much more useful information. To s
 
 For example, sending a diagnostic test request using curl would look like this:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ curl -X TRACE -H "l5d-add-context: true"
 
 http://localhost:4140/<service name>
 ```
+<!-- markdownlint-enable MD014 -->
 
 Using this command with our hello service, we see this response:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ curl -X TRACE -H "l5d-add-context: true" http://localhost:4140/hello
 
@@ -96,6 +101,7 @@ dtab resolution:
  /#/io.l5d.fs/hello (/svc=>/#/io.l5d.fs)
  /%/io.l5d.port/4141/#/io.l5d.fs/hello (DelegatingNameTreeTransformer$)
 ```
+<!-- markdownlint-enable MD014 -->
 
 The diagnostic trace request gives us much more information to work with! From the response, we can see that the request first hits the "outgoing" Linkerd router or the first linker in the linker-to-linker configuration. Then, the request is forwarded to the "incoming" Linkerd router (the second linker). The request is then forwarded to the hello service at `127.0.0.1:7777` and there is where we see the origins of the `invalid response 500`. With diagnostic tracing, we can deduce the **request duration** between each Linkerd hop. the **service name** used to identify the recipient of the TRACE request, the load balancer set of **IP** **addresses** that point to service, the **selected address** used to forward the test request, and the **dtab resolution** or steps Linkerd takes to resolve a service name to a client name. With this information, we can confirm that the hello service generates the error rather than Linkerd and that Linkerd is indeed routing the request correctly. Pretty neat!
 

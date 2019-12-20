@@ -102,6 +102,7 @@ ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 
 To get a better picture of what’s going on here, let’s add a service profile for the authors service, generated from a Swagger definition:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ curl https://run.linkerd.io/booksapp/authors.swagger | linkerd profile --open-api - authors | kubectl apply -f  -
 $ linkerd routes deploy/books --to svc/authors
@@ -113,6 +114,7 @@ HEAD /authors/{id}.json     authors    50.85%   3.9rps           5ms          10
 POST /authors.json          authors     0.00%   0.0rps           0ms           0ms           0ms
 [DEFAULT]                   authors     0.00%   0.0rps           0ms           0ms           0ms
 ```
+<!-- markdownlint-enable MD014 -->
 
 One thing that’s clear is that all requests from books to authors are to the `HEAD /authors/{id}.json` route and those requests are failing about 50% of the time. To correct this, let’s edit the authors service profile and make those requests retryable:
 

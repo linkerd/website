@@ -93,11 +93,13 @@ $ namerctl dtab get default
 
 This Dtab tells Linkerd-tcp to send all Redis requests to the first Redis cluster, which is identified in service discovery as `redis1`. We have a separate service discovery entry for the `redis2` cluster, and we can rewrite our Dtab to instead send traffic there with:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ namerctl dtab get default | sed 's/redis1/redis2/' > default.dtab
 $ namerctl dtab update default default.dtab
 Updated default
 ```
+<!-- markdownlint-enable MD014 -->
 
 Returning to the Grafana UI, you’ll see that the `redis2` instance is now receiving 100% of traffic from the web service backends, as reported by Linkerd-tcp:
 

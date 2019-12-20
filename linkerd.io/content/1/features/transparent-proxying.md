@@ -20,6 +20,7 @@ to a single Linkerd port, so it won't work if you are using multiple protocols.
 
 To use `linkerd-inject`:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 # install linkerd-inject
 $ go get github.com/linkerd/linkerd-inject
@@ -27,6 +28,7 @@ $ go get github.com/linkerd/linkerd-inject
 # inject init container and deploy this config
 $ kubectl apply -f <(linkerd-inject -f <your k8s config>.yml -linkerdPort 4140)
 ```
+<!-- markdownlint-enable MD014 -->
 
 Note that in minikube, you need the `-useServiceVip` flag.
 
