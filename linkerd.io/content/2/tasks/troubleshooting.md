@@ -700,14 +700,14 @@ rely on external certificate management solution such as `cert-manager`, you
 can follow the process outlined in
 [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/)
 
-### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issuer-by-trust-root}
+### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-root}
 
 Example error:
 
 ```bash
 × issuer cert is issued by the trust root
     x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issuer-by-trust-root for hints
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-root for hints
 ```
 
 This error indicates that the issuer certificate that is in the
@@ -766,10 +766,10 @@ that have stale certificates. This is most likely to happen during `upgrade`
 operations that deal with cert rotation. In order to solve the problem you
 can use `rollout restart` to restart the pods in question. That should cause
 them to pick the correct certs from the `linkerd-config` configmap.
-While performing `upgrade` and using the `--identity-trust-anchors-file` flag
-to modify the roots, the linkerd components are being restarted. While this
-operation is in progress the `check --proxy` command may output warning,
-pertaining to the Linkerd components:
+When `upgrade` is performed using the `--identity-trust-anchors-file` flag to
+modify the roots, the Linkerd components are restarted. While this operation
+is in progress the `check --proxy` command may output a warning, pertaining to
+the Linkerd components:
 
 ```bash
 ‼ data plane proxies certificate match CA
