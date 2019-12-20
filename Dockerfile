@@ -14,7 +14,7 @@ RUN apt-get update \
     | apt-key add - \
   && apt-get update \
   && apt-get install -y --no-install-recommends google-cloud-sdk \
-  && wget https://github.com/gohugoio/hugo/releases/download/v0.58.3/hugo_extended_0.58.3_Linux-64bit.deb \
+  && wget https://github.com/gohugoio/hugo/releases/download/v0.61.0/hugo_extended_0.61.0_Linux-64bit.deb \
   && dpkg -i hugo*.deb \
   && rm hugo*.deb \
   && curl https://htmltest.wjdp.uk | bash \

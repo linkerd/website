@@ -13,8 +13,7 @@ this by storing [dtabs]({{% ref "/1/advanced/dtabs.md" %}}) and using
 [namers]({{% ref "/1/advanced/dtabs.md#namers-addresses" %}}) for service
 discovery. namerd supports the same suite of service discovery backends that
 Linkerd does, which include services like
-[ZooKeeper](https://twitter.github.io/commons/apidocs/com/twitter/common/zookeeper/ServerSet.html),
-[Consul](https://www.consul.io/), [Kubernetes
+ZooKeeper, [Consul](https://www.consul.io/), [Kubernetes
 API](http://kubernetes.io/docs/api), and
 [Marathon](https://mesosphere.github.io/marathon/).
 
