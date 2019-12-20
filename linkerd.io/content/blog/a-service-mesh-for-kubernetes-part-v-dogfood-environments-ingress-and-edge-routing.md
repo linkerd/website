@@ -134,6 +134,7 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 
 At this point we should be able to test the setup by sending traffic through the `ingress` Kubernetes VIP. In the absence of futzing with DNS, we’ll set a Host header manually on the request:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 $ curl -s -H "Host: www.hello.world" $INGRESS_LB
@@ -141,6 +142,7 @@ Hello (10.0.5.7) world (10.0.4.7)!!
 $ curl -s -H "Host: api.hello.world" $INGRESS_LB
 {"api_result":"api (10.0.3.6) Hello (10.0.5.4) world (10.0.1.5)!!"}
 ```
+<!-- markdownlint-enable MD014 -->
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 

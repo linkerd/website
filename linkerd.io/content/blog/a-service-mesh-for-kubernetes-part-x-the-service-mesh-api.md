@@ -101,6 +101,7 @@ kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/linkerd-examples/ma
 
 Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can test requests to both the `hello` and `world` services and make sure both are operating within their timeouts.
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 $ curl $L5D_INGRESS_LB:4140 -H "Host: hello"
@@ -108,6 +109,7 @@ Hello (10.196.1.242) world (10.196.1.243)!!
 $ curl $L5D_INGRESS_LB:4140 -H "Host: world"
 world (10.196.1.243)!!
 ```
+<!-- markdownlint-enable MD014 -->
 
 (Note that the first few requests will be slower because they must establish connections and may time out. Subsequent requests should be successful.)
 

@@ -133,19 +133,23 @@ kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-examples/mast
 
 So now that we have a running world-v2, let’s test it by running a request through our production topology, except that instead of hitting `world-v1`, we’ll hit `world-v2`. First, let’s run an unmodified request through our default topology (you may have to wait for l5d’s external IP to appear):
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 $ curl -H "Host: www.hello.world" $INGRESS_LB
 Hello (10.196.2.232) world (10.196.2.233)!!
 ```
+<!-- markdownlint-enable MD014 -->
 
 Or if external load balancer support is unavailable for the cluster, use hostIP:
 
+<!-- markdownlint-disable MD014 -->
 ```bash
 $ INGRESS_LB=$(kubectl get po -l app=l5d -o jsonpath="{.items[0].status.hostIP}"):$(kubectl get svc l5d -o 'jsonpath={.spec.ports[0].nodePort}')
 $ curl -H "Host: www.hello.world" $INGRESS_LB
 Hello (10.196.2.232) world (10.196.2.233)!!
 ```
+<!-- markdownlint-enable MD014 -->
 
 As we expect, this returns `Hello (......) World (.....)` from our production topology. Now, how do we get to the staging environment? All we have to do is pass the following dtab override and requests through the prod topology will go to `world-v2`! A dtab override is another dtab entry that we pass using headers in the request. Since later dtab rules are applied first, this rule will replace (override) our current “/host/world => /srv/world-v1” rule with a rule to send requests with `/host/world` to `/srv/world-v2` instead.
 
