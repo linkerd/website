@@ -4,14 +4,18 @@ description = "Create a service profile that provides more details for Linkerd t
 +++
 
 [Service profiles](/2/features/service-profiles/) provide Linkerd additional
-information about a service. They work off the `:authority` or
-`Host` headers and can be used for internal services
-(`web.default.svc.cluster.local`) as well as external services (`github.com`).
-When an outgoing request matches a service profile's `Host`, Linkerd will use
-that to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
+information about a service and how to handle requests for a service.
+
+When an HTTP (not HTTPS) request is received by a Linkerd proxy, the `destination service` of that request is
+identified.  If a service profile for that destination service exists, then that service profile is used to
+to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
 [retries](/2/tasks/configuring-retries/) and
-[timeouts](/2/tasks/configuring-timeouts/). Incoming requests will match as well
-and are currently used for per-route metrics.
+[timeouts](/2/tasks/configuring-timeouts/).
+
+The `destination service` for a request is computed by selecting the value of the first header to exist of, `l5d-dst-override`, `:authority`, and `Host`.  The port component, if included and including the colon, is stripped.  That value is mapped to the fully qualified DNS name.  When the `destination service` matches the name of a service profile in the namespace of the sender or the receiver, 
+Linkerd will use that to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
+[retries](/2/tasks/configuring-retries/) and
+[timeouts](/2/tasks/configuring-timeouts/). 
 
 There are times when you may need to define a service profile for a service
 which resides in a namespace that you do not control. To accomplish this,
