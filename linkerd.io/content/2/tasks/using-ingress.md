@@ -19,7 +19,7 @@ Luckily, many ingress controllers allow you to either modify the `Host` header
 or add a custom header to the outgoing request. Here are some instructions
 for common ingress controllers:
 
-{{% pagetoc %}}
+{{< pagetoc >}}
 
 {{< note >}}
 If your ingress controller is terminating HTTPS, Linkerd will only provide
