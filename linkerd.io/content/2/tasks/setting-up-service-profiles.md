@@ -35,7 +35,8 @@ Your `destination service` may be a [ExternalName
 service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).
 In that case, use the `spec.metadata.name` and the
 `spec.metadata.namespace' values to name your ServiceProfile. For
-example, for
+example, 
+
 ```
 apiVersion: v1
 kind: Service
@@ -46,7 +47,8 @@ spec:
   type: ExternalName
   externalName: my.database.example.com
 ```
-Use the name `my-service.prod.svc.cluster.local` for the ServiceProfile.
+
+use the name `my-service.prod.svc.cluster.local` for the ServiceProfile.
 
 Note that at present, you cannot view statistics gathered for routes
 in this ServiceProfile in the web dashboard. You can get the
