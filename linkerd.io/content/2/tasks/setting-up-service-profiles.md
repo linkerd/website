@@ -12,21 +12,30 @@ to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
 [retries](/2/tasks/configuring-retries/) and
 [timeouts](/2/tasks/configuring-timeouts/).
 
-The `destination service` for a request is computed by selecting the value of the first header to exist of, `l5d-dst-override`, `:authority`, and `Host`.  The port component, if included and including the colon, is stripped.  That value is mapped to the fully qualified DNS name.  When the `destination service` matches the name of a service profile in the namespace of the sender or the receiver, 
-Linkerd will use that to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
+The `destination service` for a request is computed by selecting
+the value of the first header to exist of, `l5d-dst-override`,
+`:authority`, and `Host`.  The port component, if included and
+including the colon, is stripped.  That value is mapped to the fully
+qualified DNS name.  When the `destination service` matches the
+name of a service profile in the namespace of the sender or the
+receiver, Linkerd will use that to provide [per-route
+metrics](/2/tasks/getting-per-route-metrics/),
 [retries](/2/tasks/configuring-retries/) and
-[timeouts](/2/tasks/configuring-timeouts/). 
+[timeouts](/2/tasks/configuring-timeouts/).
 
-There are times when you may need to define a service profile for a service
-which resides in a namespace that you do not control. To accomplish this,
-simply create a service profile as before, but edit the namespace of the
-service profile to the namespace of the pod which is calling the service. When
-Linkerd proxies a request to a service, a service profile in the source
-namespace will take priority over a service profile in the destination
-namespace.
+There are times when you may need to define a service profile for
+a service which resides in a namespace that you do not control. To
+accomplish this, simply create a service profile as before, but
+edit the namespace of the service profile to the namespace of the
+pod which is calling the service. When Linkerd proxies a request
+to a service, a service profile in the source namespace will take
+priority over a service profile in the destination namespace.
 
-Your `destination service` may be a [ExternalName service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).  In that case, 
-use the `spec.metadata.name` and the `spec.metadata.namespace' values to name your ServiceProfile. For example, for
+Your `destination service` may be a [ExternalName
+service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).
+In that case, use the `spec.metadata.name` and the
+`spec.metadata.namespace' values to name your ServiceProfile. For
+example, for
 ```
 apiVersion: v1
 kind: Service
