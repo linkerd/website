@@ -37,7 +37,7 @@ In that case, use the `spec.metadata.name` and the
 `spec.metadata.namespace' values to name your ServiceProfile. For
 example, 
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
