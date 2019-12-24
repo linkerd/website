@@ -6,8 +6,10 @@ description = "Create a service profile that provides more details for Linkerd t
 [Service profiles](/2/features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
 
-When an HTTP (not HTTPS) request is received by a Linkerd proxy, the `destination service` of that request is
-identified.  If a service profile for that destination service exists, then that service profile is used to
+When an HTTP (not HTTPS) request is received by a Linkerd proxy,
+the `destination service` of that request is identified.  If a
+service profile for that destination service exists, then that
+service profile is used to
 to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
 [retries](/2/tasks/configuring-retries/) and
 [timeouts](/2/tasks/configuring-timeouts/).
