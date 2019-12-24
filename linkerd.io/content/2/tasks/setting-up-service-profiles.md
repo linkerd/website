@@ -35,7 +35,7 @@ Your `destination service` may be a [ExternalName
 service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).
 In that case, use the `spec.metadata.name` and the
 `spec.metadata.namespace' values to name your ServiceProfile. For
-example, 
+example,
 
 ```yaml
 apiVersion: v1
