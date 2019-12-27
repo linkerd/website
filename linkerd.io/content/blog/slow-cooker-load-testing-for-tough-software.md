@@ -201,5 +201,5 @@ You can get started using slow_cooker today by visiting the [Github releases pa
 1. [Throughput-Delay Curves](http://perfdynamics.blogspot.com/2012/01/throughput-delay-curves.html)
 2. [Frequency Trails: What the Mean Really Means](http://www.brendangregg.com/FrequencyTrails/mean.html)
 3. [Simulating Byzantine Failure with SIGSTOP](http://saladwithsteve.com/2008/06/simulating-byzantine-failure-with.html)
-4. [Everything You Know About Latency Is Wrong](http://bravenewgeek.com/everything-you-know-about-latency-is-wrong/)
+4. [Everything You Know About Latency Is Wrong](https://dzone.com/articles/everything-you-know-about-latency-is-wrong-brave-n)
 5. [How NOT to measure latency](https://www.youtube.com/watch?v=lJ8ydIuPFeU&feature=youtu.be)

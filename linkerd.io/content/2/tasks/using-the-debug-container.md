@@ -66,6 +66,37 @@ kubectl -n emojivoto exec -it \
   -c linkerd-debug -- tshark -i any -f "tcp" -V -Y "http.request"
 ```
 
-Of course, this only works if you have the ability to `exec` into arbitrary
-containers in the Kubernetes cluster. See [`linkerd
+A real-world error message written by the proxy that the debug sidecar is
+effective in troubleshooting is a `Connection Refused` error like this one:
+
+ ```log
+ERR! [<time>] proxy={server=in listen=0.0.0.0:4143 remote=some.svc:50416}
+linkerd2_proxy::app::errors unexpected error: error trying to connect:
+Connection refused (os error 111) (address: 127.0.0.1:8080)
+```
+
+In this case, the `tshark` command can be modified to listen for
+traffic between the specific ports mentioned in the error, like this:
+
+ ```bash
+kubectl -n emojivoto exec -it \
+  $(kubectl -n emojivoto get pod -l app=voting-svc \
+   -o jsonpath='{.items[0].metadata.name}') \
+   -c linkerd-debug -- tshark -i any -f "tcp" -V \
+   -Y "(tcp.srcport == 4143 and tcp.dstport == 50416) or tcp.port == 8080"
+ ```
+
+Be aware that there is a similar error with the message `Connection reset by
+peer`. This error is usually benign, if you do not see correlated errors or
+messages in your application log output. In this scenario, the debug
+ container may not help to troubleshoot the error message.
+
+```log
+ERR! [<time>] proxy={server=in listen=0.0.0.0:4143 remote=some.svc:35314}
+linkerd2_proxy::app::errors unexpected error: connection error:
+Connection reset by peer (os error 104)
+```
+
+Of course, these examples only work if you have the ability to `exec` into
+arbitrary containers in the Kubernetes cluster. See [`linkerd
 tap`](/2/reference/cli/tap/) for an alternative to this approach.

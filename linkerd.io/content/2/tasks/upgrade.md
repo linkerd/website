@@ -12,11 +12,11 @@ In this guide, we'll walk you through how to upgrade Linkerd.
 The upgrade notices below contain important information you need to be aware of
 before commencing with the upgrade process:
 
-- [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-260)
-- [Upgrade notice: stable-2.5.0](/2/tasks/upgrade/#upgrade-notice-stable-250)
-- [Upgrade notice: stable-2.4.0](/2/tasks/upgrade/#upgrade-notice-stable-240)
-- [Upgrade notice: stable-2.3.0](/2/tasks/upgrade/#upgrade-notice-stable-230)
-- [Upgrade notice: stable-2.2.0](/2/tasks/upgrade/#upgrade-notice-stable-220)
+- [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-2-6-0)
+- [Upgrade notice: stable-2.5.0](/2/tasks/upgrade/#upgrade-notice-stable-2-5-0)
+- [Upgrade notice: stable-2.4.0](/2/tasks/upgrade/#upgrade-notice-stable-2-4-0)
+- [Upgrade notice: stable-2.3.0](/2/tasks/upgrade/#upgrade-notice-stable-2-3-0)
+- [Upgrade notice: stable-2.2.0](/2/tasks/upgrade/#upgrade-notice-stable-2-2-0)
 
 There are three components that need to be upgraded:
 
@@ -209,9 +209,9 @@ When ready, proceed to upgrading the data plane by following the instructions at
 
 ### Upgrading from stable-2.2.x
 
-Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-22x-1)
+Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-2-2-x-1)
 to upgrade the control plane to the stable-2.3.2 release first. Then follow
-[these instructions](/2/tasks/upgrade/#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
+[these instructions](/2/tasks/upgrade/#upgrading-from-stable-2-3-x-edge-19-4-5-edge-19-5-x-edge-19-6-x-edge-19-7-x)
 to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
 
 ## Upgrade notice: stable-2.3.0
@@ -224,7 +224,7 @@ to the `install` command must also be added.
 ### Upgrading from stable-2.2.x
 
 To upgrade from the `stable-2.2.x` release, follow the
-[Step-by-step instructions](#step-by-step-instructions-stable-22x).
+[Step-by-step instructions](#step-by-step-instructions-stable-2-2-x).
 
 Note that if you had previously installed Linkerd with `--tls=optional`, delete
 the `linkerd-ca` deployment after successful Linkerd control plane upgrade:
@@ -326,7 +326,7 @@ Follow instructions for
 There are two breaking changes in `stable-2.2.0`. One relates to
 [Service Profiles](/2/features/service-profiles/), the other relates to
 [Automatic Proxy Injection](/2/features/proxy-injection/). If you are not using
-either of these features, you may [skip directly](#step-by-step-instructions-stable-22x)
+either of these features, you may [skip directly](#step-by-step-instructions-stable-2-2-x)
 to the full upgrade instructions.
 
 ### Service Profile namespace location
