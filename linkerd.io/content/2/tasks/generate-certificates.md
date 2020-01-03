@@ -15,8 +15,9 @@ On the other hand when using Helm to install Linkerd, it's not possible to
 automatically generate them and you're required to provide them.
 
 You can generate these certificates using a tool like openssl or
-[step](https://smallstep.com/cli/). In this tutorial, we'll walk you through how
-to to use the `step` CLI to do this.
+[step](https://smallstep.com/cli/). All certificates must use the ECDSA P-256
+algorithm which is the default for `step`. In this tutorial, we'll walk you
+through how to to use the `step` CLI to do this.
 
 ## Generating the certificates with `step`
 
