@@ -95,7 +95,10 @@ to ensure zero downtime upgrade for previous stable releases.
 
 The `destination` container is now deployed as its own `Deployment` workload.
 Once your control plane is successfully upgraded, your data plane must be
-restarted.
+restarted if you are upgrading from one of the edge versions listed above.
+
+If you are upgrading from a previous stable version, restarting the data-plane
+is __recommended__ as a best practice, although not necessary.
 
 If you have previously labelled any of your namespaces with the
 `linkerd.io/is-control-plane` label so that their pod creation events are
