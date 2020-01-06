@@ -29,7 +29,8 @@ cluster follow the
 section of the docs. You also need to have a signing key pair that will be used
 by the cert manager Issuer to generate signed certificates. See
 [Generating the certificates with step](/2/tasks/generate-certificates/#generating-the-certificates-with-step)
-for examples on how to create the CA trust root.
+for examples on how to create the CA trust root. All certificates must use the
+ECDSA P-256 algorithm.
 
 ## Create the namespace that Linkerd will reside in
 
