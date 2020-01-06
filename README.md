@@ -108,6 +108,11 @@ master from slate-linkerd and add it to the public dir.
     ```bash
     make deploy-api.linkerd.io
     ```
+   
+   * NB: If you're running macOS 10.14+ with `ruby` installed by XCode, you
+    may have to [set the SDKROOT](https://github.com/castwide/vscode-solargraph/issues/78#issuecomment-552675511) 
+    in order to install `json 1.8.3` which is a `middleman` dependency.
+     
 
 ## Publishing
 
