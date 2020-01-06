@@ -16,8 +16,9 @@ automatically generate them and you're required to provide them.
 
 You can generate these certificates using a tool like openssl or
 [step](https://smallstep.com/cli/). All certificates must use the ECDSA P-256
-algorithm which is the default for `step`. In this tutorial, we'll walk you
-through how to to use the `step` CLI to do this.
+algorithm which is the default for `step`. To generate ECDSA P-256 certificates
+with openssl, you can use the `openssl ecparam -name prime256v1` command. In
+this tutorial, we'll walk you through how to to use the `step` CLI to do this.
 
 ## Generating the certificates with `step`
 
