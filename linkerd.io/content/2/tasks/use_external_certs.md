@@ -157,13 +157,13 @@ When all of that is in place simply supply the trust root that is in your
 ```bash
 helm install \
   --name=linkerd2 \
-  --set-file Identity.TrustAnchorsPEM=<your-trust-roots> \
-  --set Identity.Issuer.Scheme=kubernetes.io/tls \
-  --set InstallNamespace=false \
+  --set-file global.identityTrustAnchorsPEM=<your-trust-roots> \
+  --set identity.issuer.scheme=kubernetes.io/tls \
+  --set installNamespace=false \
   linkerd/linkerd2
 ```
 
 {{< note >}}
-Its important that `Identity.TrustAnchorsPEM` matches the value of `ca.crt` in your
-`linkerd-identity-issuer` secret
+Its important that `global.identityTrustAnchorsPEM` matches the value of
+`ca.crt` in your `linkerd-identity-issuer` secret
 {{< /note >}}
