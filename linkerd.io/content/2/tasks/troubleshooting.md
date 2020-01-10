@@ -586,6 +586,204 @@ kubectl -n linkerd port-forward \
 curl localhost:9995/metrics
 ```
 
+## The "linkerd-identity" checks {#l5d-identity}
+
+### √ certificate config is valid {#l5d-identity-cert-config-valid}
+
+Example failures:
+
+```bash
+× certificate config is valid
+    key ca.crt containing the trust anchors needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=true
+    see https://linkerd.io/checks/#l5d-identity-cert-config-valid
+```
+
+```bash
+× certificate config is valid
+    key crt.pem containing the issuer certificate needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=false
+    see https://linkerd.io/checks/#l5d-identity-cert-config-valid
+```
+
+Ensure that your `linkerd-identity-issuer` secret contains the correct keys
+for the `scheme` that Linkerd is configured with. If the scheme is
+`kubernetes.io/tls` your secret should contain the `tls.crt`, `tls.key`
+and `ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the
+required keys are `crt.pem` and `key.pem`.
+
+### √ trust roots are using supported crypto algorithm {#l5d-identity-roots-use-supported-crypto}
+
+Example failure:
+
+```bash
+× trust roots are using supported crypto algorithm
+    Invalid roots:
+        * 165223702412626077778653586125774349756 identity.linkerd.cluster.local must use P-256 curve for public key, instead P-521 was used
+    see https://linkerd.io/checks/#l5d-identity-roots-use-supported-crypto
+```
+
+You need to ensure that all of your roots use ECDSA P-256 for their public key
+algorithm.
+
+### √ trust roots are within their validity period {#l5d-identity-roots-are-time-valid}
+
+Example failure:
+
+```bash
+× trust roots are within their validity period
+    Invalid roots:
+        * 199607941798581518463476688845828639279 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T13:08:18Z
+    see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid for hints
+```
+
+Failures of such nature indicate that your roots have expired. If that is the
+case you will have to update both the root and issuer certificates at once.
+You can follow the process outlined in
+[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
+to get your cluster back to a stable state.
+
+### √ trust roots are valid for at least 60 days {#l5d-identity-roots-not-expiring-soon}
+
+Example warnings:
+
+```bash
+‼ trust roots are valid for at least 60 days
+    Roots expiring soon:
+        * 66509928892441932260491975092256847205 identity.linkerd.cluster.local will expire on 2019-12-19T13:30:57Z
+    see https://linkerd.io/checks/#l5d-identity-roots-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of some of your roots is approaching.
+In order to address this problem without incurring downtime, you can follow
+the process outlined in [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+
+### √ issuer cert is using supported crypto algorithm {#l5d-identity-issuer-cert-uses-supported-crypto}
+
+Example failure:
+
+```bash
+× issuer cert is using supported crypto algorithm
+    issuer certificate must use P-256 curve for public key, instead P-521 was used
+    see https://linkerd.io/checks/#5d-identity-issuer-cert-uses-supported-crypto for hints
+```
+
+You need to ensure that your issuer certificate uses ECDSA P-256 for its public
+key algorithm. You can refer to
+[Generating your own mTLS root certificates](/2/tasks/generate-certificates/#generating-the-certificates-with-step)
+to see how you can generate certificates that will work with Linkerd.
+
+### √ issuer cert is within its validity period {#l5d-identity-issuer-cert-is-time-valid}
+
+Example failure:
+
+```bash
+× issuer cert is within its validity period
+    issuer certificate is not valid anymore. Expired on 2019-12-19T13:35:49Z
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid
+```
+
+This failure indicates that your issuer certificate has expired. In order to
+bring your cluster back to a valid state, follow the process outlined in
+[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/).
+
+### √ issuer cert is valid for at least 60 days {#l5d-identity-issuer-cert-not-expiring-soon}
+
+Example warning:
+
+```bash
+‼ issuer cert is valid for at least 60 days
+    issuer certificate will expire on 2019-12-19T13:35:49Z
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
+```
+
+This warning means that your issuer certificate is expiring soon. If you do not
+rely on external certificate management solution such as `cert-manager`, you
+can follow the process outlined in
+[Rotating your identity certificates](/2/tasks/rotating_identity_certificates/)
+
+### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-root}
+
+Example error:
+
+```bash
+× issuer cert is issued by the trust root
+    x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-root for hints
+```
+
+This error indicates that the issuer certificate that is in the
+`linkerd-identity-issuer` secret cannot be verified with any of the roots
+that Linkerd has been configured with. Using the CLI install process, this
+should never happen. If Helm was used for installation or the issuer
+certificates are managed by a malfunctioning certificate management solution,
+it is possible for the cluster to end up in such an invalid state. At that
+point the best to do is to use the upgrade command to update your certificates:
+
+```bash
+linkerd upgrade \
+    --identity-issuer-certificate-file=./your-new-issuer.crt \
+    --identity-issuer-key-file=./your-new-issuer.key \
+    --identity-trust-anchors-file=./your-new-roots.crt \
+    --force | kubectl apply -f -
+```
+
+Once the upgrade process is over, the output of `linkerd check --proxy` should
+be:
+
+```bash
+linkerd-identity
+----------------
+√ certificate config is valid
+√ trust roots are using supported crypto algorithm
+√ trust roots are within their validity period
+√ trust roots are valid for at least 60 days
+√ issuer cert is using supported crypto algorithm
+√ issuer cert is within its validity period
+√ issuer cert is valid for at least 60 days
+√ issuer cert is issued by the trust root
+
+linkerd-identity-data-plane
+---------------------------
+√ data plane proxies certificate match CA
+```
+
+## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
+
+### √ data plane proxies certificate match CA {#l5d-identity-data-plane-proxies-certs-match-ca}
+
+Example warning:
+
+```bash
+‼ data plane proxies certificate match CA
+    Some pods do not have the current trust bundle and must be restarted:
+        * emojivoto/emoji-d8d7d9c6b-8qwfx
+        * emojivoto/vote-bot-588499c9f6-zpwz6
+        * emojivoto/voting-8599548fdc-6v64k
+    see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+```
+
+Observing this warning indicates that some of your meshed pods have proxies
+that have stale certificates. This is most likely to happen during `upgrade`
+operations that deal with cert rotation. In order to solve the problem you
+can use `rollout restart` to restart the pods in question. That should cause
+them to pick the correct certs from the `linkerd-config` configmap.
+When `upgrade` is performed using the `--identity-trust-anchors-file` flag to
+modify the roots, the Linkerd components are restarted. While this operation
+is in progress the `check --proxy` command may output a warning, pertaining to
+the Linkerd components:
+
+```bash
+‼ data plane proxies certificate match CA
+    Some pods do not have the current trust bundle and must be restarted:
+        * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
+        * linkerd/linkerd-tap-68d8bbf64-mpzgb
+        * linkerd/linkerd-web-849f74b7c6-qlhwc
+    see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+```
+
+If that is the case, simply wait for the `upgrade` operation to complete.
+The stale pods should terminate and be replaced by new ones, configured with
+the correct certificates.
+
 ## The "linkerd-api" checks {#l5d-api}
 
 ### √ control plane pods are ready {#l5d-api-control-ready}
@@ -834,23 +1032,3 @@ See the page on [Upgrading Linkerd](/2/upgrade/).
 ```
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
-
-### √ data plane proxies certificate match the CA's certificates {#l5d-data-plane-proxies-certificate-match-ca}
-
-Example failure:
-
-```bash
-‼ data plane proxies certificate match CA
-    The following pods have old proxy certificate information; please, restart them:
-        emojivoto/emoji-786c5d657f-l2zc4
-        emojivoto/web-76968bc99-8bvvm
-```
-
-If the trust anchor has changed while data plane proxies were running, they
-will need to be restarted in order to refresh this information and use
-the latest trust anchor from the Linkerd configuration.
-
-This can happen if, for example, while you had proxies deployed on
-your cluster you uninstalled Linkerd and installed it again, which
-created a new trust anchor in the control plane, but the already existing
-meshed pods didn't restart on their own, keeping old trust anchor information.
