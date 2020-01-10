@@ -28,7 +28,7 @@ We are going to use [step 0.13.3](https://smallstep.com/cli/) and
 [jq 1.6](https://stedolan.github.io/jq/). We will also make use of the
 `linkerd check` CLI utility which will give us extra assurance that the state
 of our mTLS configuration is valid at any point. The minimum CLI version is
-[stable-2.7.0](https://github.com/linkerd/linkerd2/releases/tag/stable-2.7.0).
+[edge-19.12.3](https://github.com/linkerd/linkerd2/releases/tag/edge-19.12.3).
 To begin with, you can run:
 
 ```bash
