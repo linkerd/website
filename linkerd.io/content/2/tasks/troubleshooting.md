@@ -1032,3 +1032,33 @@ See the page on [Upgrading Linkerd](/2/upgrade/).
 ```
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
+
+## The "linkerd-ha-checks" checks {#l5d-ha}
+
+These checks are ran if Linkerd has been installed in HA mode.
+
+### √ pod injection disabled on kube-system {#l5d-injection-disabled}
+
+Example warning:
+
+```bash
+‼ pod injection disabled on kube-system
+    kube-system namespace needs to have the label config.linkerd.io/admission-webhooks: disabled if HA mode is enabled
+    see https://linkerd.io/checks/#l5d-injection-disabled for hints
+```
+
+Ensure the kube-system namespace has the
+`config.linkerd.io/admission-webhooks:disabled` label:
+
+```bash
+$ kubectl get namespace kube-system -oyaml
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: linkerd
+  annotations:
+    linkerd.io/inject: disabled
+  labels:
+    linkerd.io/is-control-plane: "true"
+    config.linkerd.io/admission-webhooks: disabled
+```
