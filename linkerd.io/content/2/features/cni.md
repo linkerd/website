@@ -22,7 +22,7 @@ Usage of the Linkerd CNI plugin requires that the `linkerd-cni` DaemonSet be
 successfully installed on your cluster _first_, before installing the Linkerd
 control plane.
 
-### Using che CLI
+### Using the CLI
 
 To install the `linkerd-cni` DaemonSet, run:
 
@@ -50,31 +50,35 @@ Before you begin, you need to have TLS certificates. You can
 provide your own, or follow [these instructions](/2/tasks/generate-certificates/)
 to generate new ones.
 
+First ensure that your Helm local cache is updated:
+
+```bash
+helm repo update
+
+helm search linkerd2-cni
+NAME                      CHART VERSION  APP VERSION    DESCRIPTION
+linkerd-edge/linkerd2-cni   20.1.1       edge-20.1.1    A helm chart containing the resources needed by the Linke...
+linkerd-stable/linkerd2-cni  2.7.0       stable-2.7.0   A helm chart containing the resources needed by the Linke...
+```
+
+Run the following commands to install the CNI DaemonSet:
+
 ```bash
 # install the CNI plugin first
 helm install --name=linkerd2-cni linkerd2/linkerd2-cni
+
 # ensure the plugin is installed and ready
 linkerd check --pre --linkerd-cni-enabled
 ```
 
-At that point you are ready to install Linkerd with CNI enabled:
+At that point you are ready to install Linkerd with CNI enabled.
+You can follow [Installing Linkerd with Helm](/2/tasks/install-helm/) to do so.
 
-```bash
-# set expiry date one year from now, on Mac:
-exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
-# on Linux:
-exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
-
-helm install \
-  --name=linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
-  --set-file identity.issuer.tls.crtPEM=issuer.crt \
-  --set-file identity.issuer.tls.keyPEM=issuer.key \
-  --set identity.issuer.crtExpiry=$exp \
-  --set global.noInitContainer=true \
-  --set installNamespace=false \
-  linkerd/linkerd2
-```
+{{< note >}}
+Make sure that you add the `--set global.noInitContainer=true` and
+`--set installNamespace=false` flags to your `helm install` command as these
+are required when using CNI.
+{{< /note >}}
 
 ## Additional configuration
 
