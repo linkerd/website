@@ -53,7 +53,7 @@ For example,
 Pods which are part of a job resource run until all of the containers in the
 pod complete. However, the Linkerd proxy container runs continuously until it
 receives a TERM signal. This means that job pods which have been injected will
-continue to run, even once the main container has completed. 
+continue to run, even once the main container has completed.
 
 Better support for
 [sidecar containers in Kubernetes](https://github.com/kubernetes/kubernetes/issues/25908)
