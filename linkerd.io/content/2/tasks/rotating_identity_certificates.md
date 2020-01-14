@@ -24,12 +24,17 @@ on how to do this.
 
 ## Prerequisites
 
-We are going to use [step 0.13.3](https://smallstep.com/cli/) and
-[jq 1.6](https://stedolan.github.io/jq/). We will also make use of the
-`linkerd check` CLI utility which will give us extra assurance that the state
-of our mTLS configuration is valid at any point. The minimum CLI version is
-[edge-19.12.3](https://github.com/linkerd/linkerd2/releases/tag/edge-19.12.3).
-To begin with, you can run:
+Upgrade your Linkerd CLI to [stable-2.7.0](https://github.com/linkerd/linkerd2/releases/tag/stable-2.7.0).
+See the [Upgrade the CLI](/2/tasks/upgrade/#upgrade-the-cli) documentation for
+instructions on how to do this.
+
+You will also need [step 0.13.3](https://smallstep.com/cli/) and
+[jq 1.6](https://stedolan.github.io/jq/).
+
+The `linkerd check` CLI command has been updated to provide visibility into the
+state of your service mesh throughout the certificate rotation process.
+
+To begin, let's make sure your service mesh is healthy:
 
 ```bash
 linkerd check --proxy

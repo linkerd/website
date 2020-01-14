@@ -12,11 +12,15 @@ that are issued by the proxy. The trust root, certificates and private key
 can either be generated automatically by the CLI upon installation or can
 be supplied by the user. If the latter is true, the necessity for providing
 the user with more control over the life cycle of these credential arises.
-In order to do that Linkerd [edge-19.10.5](https://github.com/linkerd/linkerd2/releases/tag/edge-19.10.5)
-introduces the functionality to read and continuously monitor Kubernetes
-secrets for certificates change and to auto-reload the `identity` component's
-in-memory issuer certificate. In the following lines, we will demonstrate how
-this allows integration with the external certificate management solution
+
+To ensure the certificate issuance process remains uninterrupted, Linkerd
+[stable-2.7.0](https://github.com/linkerd/linkerd2/releases/tag/stable-2.7.0)
+and [edge-19.10.5](https://github.com/linkerd/linkerd2/releases/tag/edge-19.10.5)
+introduced updates to the `identity` component, enabling it to seaminglessly
+auto-reload new mTLS issuer certificate.
+
+In the following lines, we will demonstrate how this allows integration with
+the external certificate management solution
 [cert-manager](https://github.com/jetstack/cert-manager).
 
 ## Prerequisites
