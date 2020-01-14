@@ -8,7 +8,7 @@ in that pod a TERM signal. When the Linkerd proxy sidecar receives this signal,
 it will immediately begin a graceful shutdown where it refuses all new requests
 and allows existing requests to complete before shutting down.
 
-This means that if the pod's main container attempts to make new any network
+This means that if the pod's main container attempts to make any new network
 calls after the proxy has received the TERM signal, those network calls will
 fail. This also has implications for clients of the terminating pod and for
 job resources.
