@@ -12,6 +12,7 @@ In this guide, we'll walk you through how to upgrade Linkerd.
 The upgrade notices below contain important information you need to be aware of
 before commencing with the upgrade process:
 
+- [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
 - [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-260)
 - [Upgrade notice: stable-2.5.0](/2/tasks/upgrade/#upgrade-notice-stable-250)
 - [Upgrade notice: stable-2.4.0](/2/tasks/upgrade/#upgrade-notice-stable-240)
@@ -23,6 +24,53 @@ There are three components that need to be upgraded:
 - [CLI](/2/tasks/upgrade/#upgrade-the-cli)
 - [Control Plane](/2/tasks/upgrade/#upgrade-the-control-plane)
 - [Data Plane](/2/tasks/upgrade/#upgrade-the-data-plane)
+
+## Upgrade notice: stable-2.7.0
+
+### Checking whether any of your TLS certificates are approaching expiry
+
+This version introduces a set of CLI flags and checks that help you rotate
+your TLS certificates. The new CLI checks will warn you if any of your
+certificates are expiring in the next 60 days. If you however want to check
+the expiration date of your certificates and determine for yourself whether
+you should be rotating them, you can execute the following commands. Note that
+this will require [step 0.13.3](https://smallstep.com/cli/) and
+[jq 1.6](https://stedolan.github.io/jq/).
+
+Check your trust roots:
+
+```bash
+kubectl -n linkerd get cm linkerd-config -o=jsonpath="{.data.global}" |  \
+jq -r .identityContext.trustAnchorsPem | \
+step certificate inspect --short -
+
+X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
+  Subject:     identity.linkerd.cluster.local
+  Issuer:      identity.linkerd.cluster.local
+  Valid from:  2020-01-14T13:23:32Z
+          to:  2021-01-13T13:23:52Z
+```
+
+Check your issuer certificate:
+
+```bash
+kubectl -n linkerd get secret linkerd-identity-issuer -o=jsonpath="{.data['crt\.pem']}" |  \
+base64 --decode | \
+step certificate inspect --short -
+
+X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
+  Subject:     identity.linkerd.cluster.local
+  Issuer:      identity.linkerd.cluster.local
+  Valid from:  2020-01-14T13:23:32Z
+          to:  2021-01-13T13:23:52Z
+```
+
+If you determine that you wish to rotate your certificates you can follow
+the process outlined in
+[Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+
+When ready, you can begin the upgrade process by
+[installing the new CLI](/2/tasks/upgrade/#upgrade-the-cli).
 
 ## Upgrade notice: stable-2.6.0
 
