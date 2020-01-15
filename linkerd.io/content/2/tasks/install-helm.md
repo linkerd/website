@@ -51,6 +51,13 @@ You can override the values in that file by providing your own `values.yaml`
 file passed with a `-f` option, or overriding specific values using the family of
 `--set` flags like we did above for certificates.
 
+## Disabling The Proxy Init Container
+
+If installing with CNI, make sure that you add the
+`--set global.noInitContainer=true` and
+`--set installNamespace=false` flags to your `helm install` command as these
+are required when using CNI.
+
 ## Setting High-Availability
 
 The chart contains a file `values-ha.yaml` that overrides some

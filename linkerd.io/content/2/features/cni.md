@@ -74,12 +74,6 @@ linkerd check --pre --linkerd-cni-enabled
 At that point you are ready to install Linkerd with CNI enabled.
 You can follow [Installing Linkerd with Helm](/2/tasks/install-helm/) to do so.
 
-{{< note >}}
-Make sure that you add the `--set global.noInitContainer=true` and
-`--set installNamespace=false` flags to your `helm install` command as these
-are required when using CNI.
-{{< /note >}}
-
 ## Additional configuration
 
 The `linkerd install-cni` command includes additional flags that you can use to
