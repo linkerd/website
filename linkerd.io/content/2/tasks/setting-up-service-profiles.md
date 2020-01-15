@@ -62,7 +62,7 @@ For a complete demo walkthrough, check out the
 There are a couple different ways to use `linkerd profile` to create service
 profiles.
 
-{{% pagetoc %}}
+{{< pagetoc >}}
 
 Requests which have been associated with a route will have a `rt_route`
 annotation. To manually verify if the requests are being associated correctly,

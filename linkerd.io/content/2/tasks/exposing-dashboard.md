@@ -6,7 +6,7 @@ description = "Make it easy for others to access Linkerd and Grafana dashboards 
 Instead of using `linkerd dashboard` every time you'd like to see what's going
 on, you can expose the dashboard via an ingress. This will also expose Grafana.
 
-{{% pagetoc %}}
+{{< pagetoc >}}
 
 ## Nginx
 
