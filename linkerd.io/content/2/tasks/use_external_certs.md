@@ -16,8 +16,8 @@ the user with more control over the life cycle of these credential arises.
 To ensure the certificate issuance process remains uninterrupted, Linkerd
 [stable-2.7.0](https://github.com/linkerd/linkerd2/releases/tag/stable-2.7.0)
 and [edge-19.10.5](https://github.com/linkerd/linkerd2/releases/tag/edge-19.10.5)
-introduced updates to the `identity` component, enabling it to seaminglessly
-auto-reload new mTLS issuer certificate.
+introduced updates to the `identity` component, enabling it to seamlessly
+auto-reload new mTLS issuer certificates.
 
 In the following lines, we will demonstrate how this allows integration with
 the external certificate management solution
