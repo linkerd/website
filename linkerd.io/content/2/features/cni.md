@@ -46,10 +46,6 @@ subsequent proxy injections will read this field and omit init containers.
 
 ### Using Helm
 
-Before you begin, you need to have TLS certificates. You can
-provide your own, or follow [these instructions](/2/tasks/generate-certificates/)
-to generate new ones.
-
 First ensure that your Helm local cache is updated:
 
 ```bash
