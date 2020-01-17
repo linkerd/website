@@ -213,9 +213,8 @@ kubectl get -n emojivoto deploy -o yaml \
 This command retrieves all of the deployments running in the `emojivoto`
 namespace, runs the manifest through `linkerd inject`, and then reapplies it to
 the cluster. The `linkerd inject` command adds annotations to the pod spec
-instructing Linkerd to add ("inject") the data plane's proxy is added as a
-container to the pod spec. (See [Automatic Proxy
-Inject](/2/features/proxy-injection/) for more.)
+instructing Linkerd to add ("inject") the proxy as a container to the pod spec.
+(See [Automatic Proxy Injection](/2/features/proxy-injection/) for more.)
 
 As with `install`, `inject` is a pure text operation, meaning that you can
 inspect the input and output before you use it. Once piped into `kubectl
