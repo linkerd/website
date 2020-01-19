@@ -41,6 +41,12 @@ AnnotationsReference:
   Name: config.linkerd.io/disable-tap
 - Description: Inject a debug sidecar for data plane debugging
   Name: config.linkerd.io/enable-debug-sidecar
+- Description: Linkerd debug container image name
+  Name: config.linkerd.io/debug-image
+- Description: Linkerd debug container image version
+  Name: config.linkerd.io/debug-image-version
+- Description: Docker image pull policy for debug image
+  Name: config.linkerd.io/debug-image-pull-policy
 - Description: Service name of the trace collector. E.g. `oc-collector.tracing:55678`
   Name: config.linkerd.io/trace-collector
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
