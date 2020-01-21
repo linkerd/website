@@ -138,8 +138,9 @@ receiving. This is interesting:
 
 Aha! We can see that inbound traffic coming from the `webapp` service going to
 the `books` service is failing a significant percentage of the time. That could
-explain why `webapp` was throwing intermittent failures. Let’s click on the 🔬
-icon to look at the actual request and response stream.
+explain why `webapp` was throwing intermittent failures. Let’s click on the tap
+(🔬) icon and then on the Start button to look at the actual request and
+response stream.
 
 {{< fig src="/images/books/tap.png" title="Tap" >}}
 
@@ -262,7 +263,7 @@ This will watch all the live requests flowing through `webapp` and look
 something like:
 
 ```bash
-req id=0:1 proxy=in  src=10.1.3.76:57152 dst=10.1.3.74:7000 tls=disabled :method=POST :authority=webapp.default:7000 :path=/books/2878/edit src_res=deploy/traffic src_ns=foobar dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
+req id=0:1 proxy=in  src=10.1.3.76:57152 dst=10.1.3.74:7000 tls=true :method=POST :authority=webapp.default:7000 :path=/books/2878/edit src_res=deploy/traffic src_ns=booksapp dst_res=deploy/webapp dst_ns=booksapp rt_route=POST /books/{id}/edit
 ```
 
 As you can see:
@@ -302,12 +303,12 @@ GET /books.json             books   100.00%   1.1rps           7ms          12ms
 GET /books/{id}.json        books   100.00%   2.5rps           6ms          10ms          10ms
 POST /books.json            books    52.24%   2.2rps          23ms          34ms          39ms
 PUT /books/{id}.json        books    41.98%   1.4rps          73ms          97ms          99ms
-[DEFAULT]                   books     0.00%   0.0rps           0ms           0ms           0ms
+[DEFAULT]                   books         -        -             -             -             -
 ```
 
 ## Retries
 
-As it can take awhile to update code and roll out a new version, let's
+As it can take a while to update code and roll out a new version, let's
 tell Linkerd that it can retry requests to the failing endpoint. This will
 increase request latencies, as requests will be retried multiple times, but not
 require rolling out a new version.
@@ -323,12 +324,12 @@ The output should look like:
 
 ```bash
 ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /authors/{id}.json   authors     0.00%   0.0rps           0ms           0ms           0ms
-GET /authors.json           authors     0.00%   0.0rps           0ms           0ms           0ms
-GET /authors/{id}.json      authors     0.00%   0.0rps           0ms           0ms           0ms
+DELETE /authors/{id}.json   authors         -        -             -             -             -
+GET /authors.json           authors         -        -             -             -             -
+GET /authors/{id}.json      authors         -        -             -             -             -
 HEAD /authors/{id}.json     authors    50.85%   3.9rps           5ms          10ms          17ms
-POST /authors.json          authors     0.00%   0.0rps           0ms           0ms           0ms
-[DEFAULT]                   authors     0.00%   0.0rps           0ms           0ms           0ms
+POST /authors.json          authors         -        -             -             -             -
+[DEFAULT]                   authors         -        -             -             -             -
 ```
 
 One thing that’s clear is that all requests from books to authors are to the
@@ -366,12 +367,12 @@ This should look like:
 
 ```bash
 ROUTE                       SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /authors/{id}.json   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
-GET /authors.json           authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
-GET /authors/{id}.json      authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
+DELETE /authors/{id}.json   authors                   -               -                -            -             -           0ms
+GET /authors.json           authors                   -               -                -            -             -           0ms
+GET /authors/{id}.json      authors                   -               -                -            -             -           0ms
 HEAD /authors/{id}.json     authors             100.00%          2.8rps           58.45%       4.7rps           7ms          25ms          37ms
-POST /authors.json          authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
-[DEFAULT]                   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
+POST /authors.json          authors                   -               -                -            -             -           0ms
+[DEFAULT]                   authors                   -               -                -            -             -           0ms
 ```
 
 You'll notice that the `-o wide` flag has added some columns to the `routes`
@@ -407,7 +408,7 @@ GET /books.json             books   100.00%   1.3rps           9ms          34ms
 GET /books/{id}.json        books   100.00%   2.0rps           9ms          52ms          91ms
 POST /books.json            books   100.00%   1.3rps          45ms         140ms         188ms
 PUT /books/{id}.json        books   100.00%   0.7rps          80ms         170ms         194ms
-[DEFAULT]                   books     0.00%   0.0rps           0ms           0ms           0ms
+[DEFAULT]                   books         -        -             -             -             -
 ```
 
 Requests to the `books` service's `PUT /books/{id}.json` route include retries
@@ -452,7 +453,7 @@ GET /books.json             books             100.00%          1.3rps          1
 GET /books/{id}.json        books             100.00%          2.2rps          100.00%       2.2rps           8ms          19ms          28ms
 POST /books.json            books             100.00%          1.3rps          100.00%       1.3rps          27ms          81ms          96ms
 PUT /books/{id}.json        books              86.96%          0.8rps          100.00%       0.7rps          75ms          98ms         100ms
-[DEFAULT]                   books               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
+[DEFAULT]                   books                   -               -                -            -             -
 ```
 
 The latency numbers include time spent in the `webapp` application itself, so
