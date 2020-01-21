@@ -168,7 +168,7 @@ consumption over the next few releases. (And we'd love your help -- hop into the
 Kubecon
 EU](https://buoyant.io/2019/04/23/linkerd-community-guide-to-kubecon-eu-2019/)!)
 
-In the future, we hope that projects like [Meshery](https://layer5.io/meshery/)
+In the future, we hope that projects like [Meshery](https://layer5.io/meshery)
 can provide an industry standard approach for these sorts of benchmarks in the
 future. They're good for users and good for projects too.
 
