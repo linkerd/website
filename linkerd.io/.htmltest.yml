@@ -19,5 +19,5 @@ IgnoreURLs:
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 32
-HTTPConcurrencyLimit: 16
-ExternalTimeout: 15
+HTTPConcurrencyLimit: 8
+ExternalTimeout: 25

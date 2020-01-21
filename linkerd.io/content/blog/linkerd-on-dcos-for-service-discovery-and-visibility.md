@@ -120,7 +120,7 @@ Linkerd also has a thriving community of users and developers. If you get stuck,
 
 ## Acknowledgments
 
-This post was co-authored with [Ravi Yadav](https://twitter.com/RaaveYadav) from [Mesosphere](https://mesosphere.com/). Thanks to [Alex Leong](https://twitter.com/adlleong) and [Oliver Gould](https://twitter.com/olix0r) for feedback on earlier drafts of this post.
+This post was co-authored with [Ravi Yadav](https://twitter.com/RaaveYadav) from [Mesosphere](https://d2iq.com/solutions/mesosphere). Thanks to [Alex Leong](https://twitter.com/adlleong) and [Oliver Gould](https://twitter.com/olix0r) for feedback on earlier drafts of this post.
 
 [webapp.json]: https://raw.githubusercontent.com/linkerd/linkerd-examples/master/dcos/webapp.json
 
