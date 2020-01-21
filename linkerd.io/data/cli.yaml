@@ -7,6 +7,12 @@ AnnotationsReference:
   Name: config.linkerd.io/init-image
 - Description: Linkerd init container image version
   Name: config.linkerd.io/init-image-version
+- Description: Linkerd debug container image name
+  Name: config.linkerd.io/debug-image
+- Description: Linkerd debug container image version
+  Name: config.linkerd.io/debug-image-version
+- Description: Docker image pull policy for debug image
+  Name: config.linkerd.io/debug-image-pull-policy
 - Description: Proxy port to use for control
   Name: config.linkerd.io/control-port
 - Description: Ports that should skip the proxy and send directly to the application
@@ -46,6 +52,10 @@ AnnotationsReference:
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
     If not provided, it will be defaulted to `default`.
   Name: config.alpha.linkerd.io/trace-collector-service-account
+- Description: The proxy sidecar will stay alive for at least the given period before
+    receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
+    If not provided, it will be defaulted to `0`
+  Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
 CLIReference:
 - Description: |-
     Check the Linkerd cluster-wide resources for potential problems.
@@ -169,7 +179,7 @@ CLIReference:
   - DefaultValue: ""
     Name: address
     Shorthand: ""
-    Usage: The address at which to serve requests (*)
+    Usage: The address at which to serve requests
   - DefaultValue: ""
     Name: help
     Shorthand: h
@@ -197,18 +207,22 @@ CLIReference:
       The RESOURCETYPE argument specifies the type of resource to display edges within.
 
       Examples:
+      * cronjob
       * deploy
       * ds
       * job
       * po
       * rc
+      * rs
       * sts
 
       Valid resource types include:
+      * cronjobs
       * daemonsets
       * deployments
       * jobs
       * pods
+      * replicasets
       * replicationcontrollers
       * statefulsets
   Example: |2-
@@ -424,11 +438,12 @@ CLIReference:
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   - DefaultValue: ""
     Name: trace-collector
     Shorthand: ""
@@ -437,6 +452,11 @@ CLIReference:
     Name: trace-collector-svc-account
     Shorthand: ""
     Usage: Service account associated with the Trace collector instance
+  - DefaultValue: ""
+    Name: wait-before-exit-seconds
+    Shorthand: ""
+    Usage: |
+      The period during which the proxy sidecar must stay alive while its pod is terminating. Must be smaller than terminationGracePeriodSeconds for the pod (default 0)
   SeeAlso: null
   Synopsis: Add the Linkerd proxy to a Kubernetes config
 - Description: |-
@@ -467,7 +487,7 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   SeeAlso: null
   Synopsis: Output Kubernetes cluster-wide resources to install Linkerd
 - Description: |-
@@ -650,7 +670,7 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   - DefaultValue: ""
     Name: skip-checks
     Shorthand: ""
@@ -659,11 +679,12 @@ CLIReference:
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   SeeAlso: null
   Synopsis: Output Kubernetes control plane resources to install Linkerd
 - Description: |-
@@ -854,16 +875,17 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd
 - Description: |-
@@ -923,6 +945,11 @@ CLIReference:
     Name: proxy-uid
     Shorthand: ""
     Usage: Run the proxy under this user ID
+  - DefaultValue: ""
+    Name: redirect-ports
+    Shorthand: ""
+    Usage: |
+      Ports to redirect to proxy, if no port is specified then ALL ports are redirected
   - DefaultValue: ""
     Name: registry
     Shorthand: ""
@@ -1020,6 +1047,7 @@ CLIReference:
       (TYPE/NAME)
 
       Examples:
+      * cronjob/my-cronjob
       * deploy/my-deploy
       * ds/my-daemonset
       * job/my-job
@@ -1028,6 +1056,7 @@ CLIReference:
       * sts/my-statefulset
 
       Valid resource types include:
+      * cronjobs
       * daemonsets
       * deployments
       * jobs
@@ -1164,6 +1193,7 @@ CLIReference:
       or (TYPE1/NAME1 TYPE2/NAME2...)
 
       Examples:
+      * cronjob/my-cronjob
       * deploy
       * deploy/my-deploy
       * deploy/ po/
@@ -1173,6 +1203,8 @@ CLIReference:
       * po/mypod1 rc/my-replication-controller
       * po mypod1 mypod2
       * rc/my-replication-controller
+      * rs
+      * rs/my-replicaset
       * sts/my-statefulset
       * ts/my-split
       * authority
@@ -1180,11 +1212,13 @@ CLIReference:
       * all
 
       Valid resource types include:
+      * cronjobs
       * daemonsets
       * deployments
       * namespaces
       * jobs
       * pods
+      * replicasets
       * replicationcontrollers
       * statefulsets
       * trafficsplits
@@ -1269,7 +1303,8 @@ CLIReference:
   - DefaultValue: ""
     Name: time-window
     Shorthand: t
-    Usage: 'Stat window (for example: "10s", "1m", "10m", "1h")'
+    Usage: |
+      Stat window (for example: "15s", "1m", "10m", "1h"). Needs to be at least 15s.
   - DefaultValue: ""
     Name: to
     Shorthand: ""
@@ -1289,21 +1324,26 @@ CLIReference:
       (TYPE [NAME] | TYPE/NAME)
 
       Examples:
+      * cronjob/my-cronjob
       * deploy
       * deploy/my-deploy
       * deploy my-deploy
       * ds/my-daemonset
       * job/my-job
       * ns/my-ns
+      * rs
+      * rs/my-replicaset
       * sts
       * sts/my-statefulset
 
       Valid resource types include:
+      * cronjobs
       * daemonsets
       * deployments
       * jobs
       * namespaces
       * pods
+      * replicasets
       * replicationcontrollers
       * statefulsets
       * services (only supported as a --to resource)
@@ -1369,21 +1409,26 @@ CLIReference:
       (TYPE [NAME] | TYPE/NAME)
 
       Examples:
+      * cronjob/my-cronjob
       * deploy
       * deploy/my-deploy
       * deploy my-deploy
       * ds/my-daemonset
       * job/my-job
       * ns/my-ns
+      * rs
+      * rs/my-replicaset
       * sts
       * sts/my-statefulset
 
       Valid resource types include:
+      * cronjobs
       * daemonsets
       * deployments
       * jobs
       * namespaces
       * pods
+      * replicasets
       * replicationcontrollers
       * statefulsets
       * services (only supported as a --to resource)
@@ -1489,7 +1534,7 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   SeeAlso: null
   Synopsis: |
     Output Kubernetes cluster-wide resources to upgrade an existing Linkerd
@@ -1562,15 +1607,25 @@ CLIReference:
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
   - DefaultValue: ""
-    Name: identity-external-issuer
-    Shorthand: ""
-    Usage: |
-      Whether to use an external identity issuer (default false)
-  - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
     Usage: |
       The amount of time for which the Identity issuer should certify identity
+  - DefaultValue: ""
+    Name: identity-issuer-certificate-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer certificate (generated by default)
+  - DefaultValue: ""
+    Name: identity-issuer-key-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer private key (generated by default)
+  - DefaultValue: ""
+    Name: identity-trust-anchors-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing Linkerd Identity trust anchors (generated by default)
   - DefaultValue: ""
     Name: image-pull-policy
     Shorthand: ""
@@ -1649,16 +1704,17 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   SeeAlso: null
   Synopsis: |
     Output Kubernetes control plane resources to upgrade an existing Linkerd
@@ -1720,6 +1776,11 @@ CLIReference:
     Shorthand: ""
     Usage: Enable service profiles for non-Kubernetes services
   - DefaultValue: ""
+    Name: force
+    Shorthand: ""
+    Usage: |
+      Force upgrade operation even when issuer certificate does not work with the roots of all proxies
+  - DefaultValue: ""
     Name: from-manifests
     Shorthand: ""
     Usage: |
@@ -1739,15 +1800,25 @@ CLIReference:
     Usage: |
       The amount of time to allow for clock skew within a Linkerd cluster
   - DefaultValue: ""
-    Name: identity-external-issuer
-    Shorthand: ""
-    Usage: |
-      Whether to use an external identity issuer (default false)      
-  - DefaultValue: ""
     Name: identity-issuance-lifetime
     Shorthand: ""
     Usage: |
       The amount of time for which the Identity issuer should certify identity
+  - DefaultValue: ""
+    Name: identity-issuer-certificate-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer certificate (generated by default)
+  - DefaultValue: ""
+    Name: identity-issuer-key-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing the Linkerd Identity issuer private key (generated by default)
+  - DefaultValue: ""
+    Name: identity-trust-anchors-file
+    Shorthand: ""
+    Usage: |
+      A path to a PEM-encoded file containing Linkerd Identity trust anchors (generated by default)
   - DefaultValue: ""
     Name: image-pull-policy
     Shorthand: ""
@@ -1826,16 +1897,17 @@ CLIReference:
     Name: restrict-dashboard-privileges
     Shorthand: ""
     Usage: |
-      Restrict the Linkerd Dashboard's default privileges to disallow Tap
+      Restrict the Linkerd Dashboard's default privileges to disallow Tap and Check
   - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   SeeAlso: null
   Synopsis: |
     Output Kubernetes configs to upgrade an existing Linkerd control plane
@@ -1858,4 +1930,3 @@ CLIReference:
     Usage: Print the version number(s) only, with no additional output
   SeeAlso: null
   Synopsis: Print the client and server version information
-
