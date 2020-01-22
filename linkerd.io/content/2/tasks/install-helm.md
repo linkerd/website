@@ -53,10 +53,8 @@ file passed with a `-f` option, or overriding specific values using the family o
 
 ## Disabling The Proxy Init Container
 
-If installing with CNI, make sure that you add the
-`--set global.noInitContainer=true` and
-`--set installNamespace=false` flags to your `helm install` command as these
-are required when using CNI.
+If installing with CNI, make sure that you add the `--set
+global.cniEnabled=true` flag to your `helm install` command.
 
 ## Setting High-Availability
 
