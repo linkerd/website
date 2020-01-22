@@ -1067,7 +1067,9 @@ metadata:
 
 These checks run if Linkerd has been installed with the `--linkerd-cni-enabled`
 flag. Alternatively they can be run as part of the pre-checks by providing the
-`--linkerd-cni-enabled` flag.
+`--linkerd-cni-enabled` flag. Most of these checks verify that the required
+resources are in place. If any of them are missing, you can use
+`linkerd install-cni | kubectl apply -f -` to re-install them.
 
 ### √ cni plugin ConfigMap exists {#cni-plugin-cm-exists}
 
@@ -1104,7 +1106,7 @@ Example error:
     see https://linkerd.io/checks/#cni-plugin-psp-exists for hint
 ```
 
-Ensure that the cluster role binding exists:
+Ensure that the pod security policy exists:
 
 ```bash
 $ kubectl get psp linkerd-linkerd-cni-cni
@@ -1129,7 +1131,7 @@ Example error:
     see https://linkerd.io/checks/#cni-plugin-cr-exists for hints
 ```
 
-Ensure that the cluster role binding exists:
+Ensure that the cluster role exists:
 
 ```bash
 $ kubectl get clusterrole linkerd-cni
@@ -1190,7 +1192,7 @@ linkerd-cni   52m
 Also ensure you have permission to create Roles:
 
 ```bash
-$ kubectl auth can-i create Roles
+$ kubectl auth can-i create Roles -n linkerd-cni
 yes
 ```
 
@@ -1215,7 +1217,7 @@ linkerd-cni   49m
 Also ensure you have permission to create RoleBindings:
 
 ```bash
-$ kubectl auth can-i create RoleBindings
+$ kubectl auth can-i create RoleBindings -n linkerd-cni
 yes
 ```
 
@@ -1240,7 +1242,7 @@ linkerd-cni   1         45m
 Also ensure you have permission to create ServiceAccount:
 
 ```bash
-$ kubectl auth can-i create ServiceAccounts
+$ kubectl auth can-i create ServiceAccounts -n linkerd-cni
 yes
 ```
 
@@ -1265,7 +1267,7 @@ linkerd-cni   1         1         1       1            1           beta.kubernet
 Also ensure you have permission to create DaemonSets:
 
 ```bash
-$ kubectl auth can-i create DaemonSets
+$ kubectl auth can-i create DaemonSets -n linkerd-cni
 yes
 ```
 
