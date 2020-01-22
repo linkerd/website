@@ -22,6 +22,8 @@ Usage of the Linkerd CNI plugin requires that the `linkerd-cni` DaemonSet be
 successfully installed on your cluster _first_, before installing the Linkerd
 control plane.
 
+### Using the CLI
+
 To install the `linkerd-cni` DaemonSet, run:
 
 ```bash
@@ -41,6 +43,32 @@ linkerd install --linkerd-cni-enabled | kubectl apply -f -
 
 This will set a `cniEnabled` flag in the global `linkerd-config` ConfigMap. All
 subsequent proxy injections will read this field and omit init containers.
+
+### Using Helm
+
+First ensure that your Helm local cache is updated:
+
+```bash
+helm repo update
+
+helm search linkerd2-cni
+NAME                      CHART VERSION  APP VERSION    DESCRIPTION
+linkerd-edge/linkerd2-cni   20.1.1       edge-20.1.1    A helm chart containing the resources needed by the Linke...
+linkerd-stable/linkerd2-cni  2.7.0       stable-2.7.0   A helm chart containing the resources needed by the Linke...
+```
+
+Run the following commands to install the CNI DaemonSet:
+
+```bash
+# install the CNI plugin first
+helm install --name=linkerd2-cni linkerd2/linkerd2-cni
+
+# ensure the plugin is installed and ready
+linkerd check --pre --linkerd-cni-enabled
+```
+
+At that point you are ready to install Linkerd with CNI enabled.
+You can follow [Installing Linkerd with Helm](/2/tasks/install-helm/) to do so.
 
 ## Additional configuration
 
