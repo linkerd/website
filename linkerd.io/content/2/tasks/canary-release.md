@@ -51,7 +51,7 @@ This command adds:
 To watch until everything is up and running, you can use `kubectl`:
 
 ```bash
-kubectl -n linkerd rollout status deploy/flagger --watch
+kubectl -n linkerd rollout status deploy/flagger
 ```
 
 ## Set up the demo
@@ -77,7 +77,7 @@ kubectl create ns test && \
 Verify that everything has started up successfully by running:
 
 ```bash
-kubectl -n test rollout status deploy podinfo --watch
+kubectl -n test rollout status deploy podinfo
 ```
 
 Check it out by forwarding the service locally and opening
@@ -151,6 +151,7 @@ like:
 
 ```bash
 NAME                 TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+frontend             ClusterIP   10.7.251.33   <none>        8080/TCP   96m
 podinfo              ClusterIP   10.7.252.86   <none>        9898/TCP   96m
 podinfo-canary       ClusterIP   10.7.245.17   <none>        9898/TCP   23m
 podinfo-primary      ClusterIP   10.7.249.63   <none>        9898/TCP   23m
