@@ -68,6 +68,8 @@ X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
 If you determine that you wish to rotate your certificates you can follow
 the process outlined in
 [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+Note that this process uses functionality available in stable-2.7.0. So before
+you start your cert rotation, make sure to upgrade.
 
 When ready, you can begin the upgrade process by
 [installing the new CLI](/2/tasks/upgrade/#upgrade-the-cli).
