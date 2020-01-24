@@ -7,7 +7,7 @@ By default, the issuer certificate and trust root that Linkerd uses are valid
 for 365 days. If either of these certificates expires, Linkerd will no longer
 be able to proxy traffic. Therefore, it is critical that you replace these
 certificates with new ones before they expire - a process called certificate
-rotation.
+rotation. This guide will show you how to achieve that without any downtime.
 
 If your control plane is installed with the
 `linkerd install --identity-external-issuer` command where your trust root is
