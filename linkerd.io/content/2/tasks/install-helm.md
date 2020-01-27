@@ -116,8 +116,36 @@ NAME                    CHART VERSION          APP VERSION            DESCRIPTIO
 linkerd/linkerd2        <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
 ```
 
-Use the `helm upgrade` command to upgrade the chart:
+The `helm upgrade` command has a number of flags that allow you to customize
+its behaviour. The ones that special attention should be paid to are
+`--reuse-values` and `--reset-values` and how they behave when charts change
+from version to version and/or overrides are applied through `--set` and
+`--set-file`. To summarize there are the following prominent cases that can be
+observed:
+
+- `--reuse-values` with no overrides - all values are reused
+- `--reuse-values` with overrides - all except the values that are overridden
+are reused
+- `--reset-values` with no overrides - no values are reused and all changes
+from provided release are applied during the upgrade
+- `--reset-values` with overrides - no values are reused and changed from
+provided release are applied together with the overrides
+- no flag and no overrides - `--reuse-values` will be used by default
+- no flag and overrides - `--reset-values` will be used by default
+
+Bearing all that in mind, you have to decide whether you want to reuse the
+values in the chart or move to the values specified in the newer chart.
+The advised practice is to use a `values.yaml` file that stores all custom
+overrides that you have for your chart. Before upgrade, check whether there
+are breaking changes to the chart (i.e. renamed or moved keys, etc). You can
+consult the [edge](https://hub.helm.sh/charts/linkerd2-edge/linkerd2) or the
+[stable](https://hub.helm.sh/charts/linkerd2/linkerd2) chart docs, depending on
+which one your are upgrading to. If there are, make the corresponding changes to
+your `values.yaml` file. Then you can use:
 
 ```bash
-helm upgrade linkerd2 linkerd/linkerd2 --reuse-values
+helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
 ```
+
+The `--atomic` flag will ensure that all changes are rolled back in case the
+upgrade operation fails
