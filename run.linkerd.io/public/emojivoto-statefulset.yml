@@ -65,7 +65,7 @@ spec:
   type: LoadBalancer
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: emoji
@@ -78,6 +78,7 @@ spec:
   selector:
     matchLabels:
       app: emoji-svc
+  serviceName: emoji-svc
   template:
     metadata:
       labels:
@@ -98,7 +99,7 @@ spec:
       serviceAccountName: emoji
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: vote-bot
@@ -111,6 +112,7 @@ spec:
   selector:
     matchLabels:
       app: vote-bot
+  serviceName: vote-bot
   template:
     metadata:
       labels:
@@ -129,7 +131,7 @@ spec:
             cpu: 10m
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: voting
@@ -142,6 +144,7 @@ spec:
   selector:
     matchLabels:
       app: voting-svc
+  serviceName: voting-svc
   template:
     metadata:
       labels:
@@ -166,7 +169,7 @@ spec:
       serviceAccountName: voting
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/name: web
@@ -179,6 +182,7 @@ spec:
   selector:
     matchLabels:
       app: web-svc
+  serviceName: web-svc
   template:
     metadata:
       labels:
