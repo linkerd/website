@@ -14,38 +14,6 @@ project. However, suggesting your own idea is always encouraged. Jump over to
 [Slack](hhttps://slack.linkerd.io/) and chat with us or create an
 [issue](https://github.com/linkerd/linkerd2/issues)!
 
-## Cross-cloud integration testing
-
-With the proliferation of managed Kubernetes services on many cloud platforms
-(GKE, AKS, EKS, Kubernetes on DigitalOcean), the subtle differences between
-these providers can create hard to debug and understand issues. This project
-involves building out the tooling to create clusters on multiple providers,
-interact with those and run the integration test suite on them. It will surface
-bugs earlier, make it easier to replicate user issues and provide a common
-framework to build sample workloads on top of.
-
-### Expected outcomes
-
-* Tooling that automates creating (and destroying) clusters with specific
-  configuration on each of the major providers.
-
-* Configuration with TravisCI that runs the integration tests in parallel.
-
-### Recommended Skills
-
-* Bash
-* TravisCI
-* Go
-* Cloud Providers
-
-### Difficulty level
-
-Medium
-
-### Issue
-
-[https://github.com/linkerd/linkerd2/issues/2213](https://github.com/linkerd/linkerd2/issues/2213)
-
 ## Auto-Update
 
 Linkerd has frequent updates and keeping up with the weekly edge releases can
@@ -94,7 +62,7 @@ correctly over a long period of time time.
 
 * Sample application that exercises all Linkerd features.
 
-* CLI integration to start/stop validation.
+* CLI integration to start, monitor and stop the tests.
 
 * Reporting to describe what is not working for users.
 
@@ -145,34 +113,27 @@ Easy
 
 [https://github.com/linkerd/linkerd2/issues/1726](https://github.com/linkerd/linkerd2/issues/1726)
 
-## Kafka Introspection
-
-HTTP-based traffic is only one type of communication in modern applications.
-Many use message queues such as Kafka. Getting metrics for
-consumers/producers/messages is just as critical to application health as
-metrics for requests and responses in HTTP. The goal of this project is to
-implement a Kafka codec for the Linkerd proxy that allows it to introspect the
-Kafka protocol and provide metrics for that protocol.
+## Scale Testing
 
 ### Expected outcomes
 
-* Proxy instrumentation for the Kafka protocol.
+* Automatically add a sample workload to the cluster.
 
-* Integration with the Linkerd CLI, dashboards.
+* Record cluster, control plane and data plane metrics during test.
 
-* Visualization of the topology between HTTP services and Kafka-based consumers.
+* Report on resource usage, Linkerd performance and potential errors encountered.
 
 ### Recommended Skills
 
 * Go
-* Rust
+* Bash
 * Kubernetes
-* Kafka
+* Prometheus
 
 ### Difficulty level
 
-Hard
+Medium
 
 ### Issue
 
-[https://github.com/linkerd/linkerd2/issues/2214](https://github.com/linkerd/linkerd2/issues/2214)
+[https://github.com/linkerd/linkerd2/issues/3895](https://github.com/linkerd/linkerd2/issues/3895)
