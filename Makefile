@@ -2,7 +2,7 @@
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= stable-2.6.1
-export L5D2_EDGE_VERSION ?= edge-20.1.4
+export L5D2_EDGE_VERSION ?= edge-20.2.1
 export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.3.1
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
