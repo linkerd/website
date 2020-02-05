@@ -120,6 +120,12 @@ Easy
 
 ### Scale Testing
 
+Linkerd is used by many companies to enrich and secure their production
+service network communication. It's very important that new features do not
+regress its performance. The goal of this project is to automate the scale
+testing infrastructure so that we can easily repeat the scale testing process,
+and gain visibility into any performance regression.
+
 #### Expected outcomes
 
 * Automatically add a sample workload to the cluster.
@@ -192,7 +198,6 @@ capture all the required information.
 The Linkerd mentors will review your RFC and provide feedback accordingly.
 
 {{< note >}}
-
 Make sure you are familiar with the application review period, per the
 [GSoC timeline](https://summerofcode.withgoogle.com/how-it-works/).
 
