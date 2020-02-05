@@ -192,7 +192,7 @@ account for the extra time you might need to address review feedbacks.
 When you are ready, submit a request-for-comments (RFC) to the Linkerd RFC
 repository as a
 [draft pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests#draft-pull-requests)
-. Name your pull request after your project. Use the pull request template to i
+. Name your pull request after your project. Use the pull request template to
 capture all the required information.
 
 The Linkerd mentors will review your RFC and provide feedback accordingly.
@@ -223,14 +223,16 @@ project and coding questions.
 
 When ready, submit your code as a draft pull request to the
 [Linkerd2](https://github.com/linkerd/linkerd2) repository. We found that
-submitting a draft pull request early allows us to receive helpful peer-to-peer
-feedback sooner. These feedback helps to identify any design and implementation deviation.
+submitting a draft pull request early allows us to receive helpful peer feedback
+sooner. These feedback helps to identify any design and implementation
+deviation.
 
 Make sure you surface any roadblocks and risks to your mentors early. Ask lots
-of questions! It will be useful for your mentor to receive a weekly status
-communication with you.
+of questions!
 
-Previous mentors and students have found this template to be useful:
+It will also be helpful for your mentor to receive a weekly status communication
+from you. Previous mentors and students have use this template to faciliate
+their weekly catch-up:
 
 ```text
 Accomplishments and Key Updates
