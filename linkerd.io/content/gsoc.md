@@ -249,7 +249,7 @@ Mention about any doubts, questions that you have or any calls that you schedule
 ```
 
 Towards the end of your project, we may make arrangement for you to demonstrate
-your work on one of the Linkerd's monthly community meeting. This is an
+your work on the Linkerd's monthly community meetup. This is an
 excellent opportunity for you to show off the amazing thing that you have been
 building!
 
