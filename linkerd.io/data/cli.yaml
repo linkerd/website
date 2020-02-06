@@ -101,6 +101,10 @@ CLIReference:
   Name: check
   Options:
   - DefaultValue: ""
+    Name: cli-version-override
+    Shorthand: ""
+    Usage: Used to override the version of the cli (mostly for testing)
+  - DefaultValue: ""
     Name: expected-version
     Shorthand: ""
     Usage: |
@@ -958,11 +962,12 @@ CLIReference:
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   - DefaultValue: ""
     Name: use-wait-flag
     Shorthand: ""
@@ -1930,3 +1935,4 @@ CLIReference:
     Usage: Print the version number(s) only, with no additional output
   SeeAlso: null
   Synopsis: Print the client and server version information
+
