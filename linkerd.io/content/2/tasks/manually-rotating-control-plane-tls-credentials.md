@@ -1,6 +1,7 @@
 +++
-title = "Rotating your identity certificates"
-description = "Follow this work flow to update your identity certificates"
+title = "Manually Rotating Control Plane TLS Credentials"
+description = "You can manually update Linkerd's control plane TLS credentials"
+aliases = [ "rotating_identity_certificates" ]
 +++
 
 By default, the issuer certificate and trust root that Linkerd uses are valid
@@ -9,11 +10,11 @@ be able to proxy traffic. Therefore, it is critical that you replace these
 certificates with new ones before they expire - a process called certificate
 rotation.
 
-If your control plane is installed with the
-`linkerd install --identity-external-issuer` command where your trust root is
-managed by a 3rd party certificate management solution like `cert-manager`,
-then this information doesn't apply to you, because it is the responsibility
-of your certificate manager to rotate the certificates before they expire.
+If your control plane is installed with the `linkerd install
+--identity-external-issuer` command where your trust root is managed by a 3rd
+party certificate management solution like `cert-manager`, then this
+information doesn't apply to you, because it is the responsibility of your
+certificate manager to rotate the certificates before they expire.
 
 {{< note >}}
 Although Linkerd can auto-generate the trust root during installation, we
