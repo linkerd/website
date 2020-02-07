@@ -9,7 +9,7 @@ Does the idea of writing some amazing code for the most lightweight Kubernetes
 service mesh, and learning from some of the best service mesh engineers
 intrigue you?
 
-Join us on thd Linkerd [Slack](https://linkerd.slack.com). Look for the `gsoc`
+Join us on thd Linkerd [Slack](https://linkerd.slack.com). Look for the `#gsoc`
 channel!
 
 ## Project Ideas
@@ -91,7 +91,7 @@ Medium
 Linkerd provides rich metrics that are stored in Prometheus out of the box.
 These are for both the control plane and data plane. The goal is to provide
 Alertmanager integration that comes out of the box, is configurable with
-preferred channels (email, slack) and works with ServiceProfiles to easily
+preferred channels (email, Slack) and works with ServiceProfiles to easily
 create alerts that are per-service and per-route.
 
 #### Expected outcomes
@@ -160,7 +160,7 @@ It's very easy to get involved in the Linkerd GSoC program. The Linkerd
 community has been known for its friendly and pressureless environment.
 
 Come and meet your prospective mentors and fellow students on the Linkerd
-[Slack](https://linkerd.slack.com) in the `gsoc` channel. Tell us which
+[Slack](https://linkerd.slack.com) in the `#gsoc` channel. Tell us which
 projects interest you, and let's get your started!
 
 ### Requirements
@@ -189,13 +189,23 @@ account for the extra time you might need to address review feedbacks.
 
 ### Request For Comments
 
-When you are ready, submit a request-for-comments (RFC) to the Linkerd RFC
+When you are ready, submit a request for comments (RFC) to the Linkerd RFC
 repository as a
 [draft pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests#draft-pull-requests)
-. Name your pull request after your project. Use the pull request template to
-capture all the required information.
+.
 
-The Linkerd mentors will review your RFC and provide feedback accordingly.
+{{< note >}}
+The Linkerd RFC repository is located at
+[https://github.com/linkerd/rfc](https://github.com/linkerd/rfc).
+{{< /note >}}
+
+Follow the instruction provided
+[here](https://github.com/linkerd/rfc/blob/master/README.md) to complete your
+RFC.
+
+Each pull request will be assigned to the most relevant reviewer, who will
+lead its triage. Once your RFC is reviewed, you will be introduced to your
+mentor.
 
 {{< note >}}
 Make sure you are familiar with the application review period, per the
@@ -206,47 +216,64 @@ RFCs will be reviewed on a first-come-first serve basis.
 **Do not wait till the last minute!**
 {{</note>}}
 
-Once your RFC is reviewed, you will be introduced to your mentor.
-
-All acceptance announcements will be made on Slack.
-
 ## Project Execution
 
 Congratulation! You are now part of the Linkerd GSoC team. Let's work together
 to build something awesome!
 
-Your mentor will schedule a kick-off meeting with you. If needed, talk to your
-mentor about setting up a GitHub project board to help you track your tasks.
+Your mentor will schedule a kick-off meeting with you.
 
-Throughout the project duration, utilize the `gsoc` channel often for any
-project and coding questions.
+You'll have a GitHub project board setup just for your project! This will
+contain all the issues that you're working on as part of your project. You are
+expected to create issues which outline all the deliverables listed in the RFC
+that you created along with any other things that come up along the way. The
+board is a great way for you and your mentor to understand how everything is
+going and what needs to be tackled next.
 
-When ready, submit your code as a draft pull request to the
-[Linkerd2](https://github.com/linkerd/linkerd2) repository. We found that
-submitting a draft pull request early allows us to receive helpful peer feedback
-sooner. These feedback helps to identify any design and implementation
-deviation.
+There are two important channels in Slack: `#gsoc` and `#contributors`. For
+anything that is specifically related to GSoC, ask questions there! All the code
+and project related questions should go into `#contributors`. Most of the Linkerd
+maintainers are waiting there and can help answer your questions if your mentor
+is unavailable.
+
+Each deliverable will take the form of a PR to the
+[Linkerd2](https://github.com/linkerd/linkerd2) repository. Remember that these
+should take less than 2 weeks to code, be reviewed and merged. Plan for it
+taking at least 3 days for a review to be completed from initially being
+created. There will be lots of back and forth in the PR to get your code honed
+to perfection. If you feel like the current deliverable you're working on will
+take longer than 2 weeks, bring it up with your mentor! This means that the
+scoping wasn't quite right and you'll want to chat a little bit about reducing
+the size of the deliverable. Remember, large PRs take a lot longer to review and
+get in the way of having feedback early and often.
 
 Make sure you surface any roadblocks and risks to your mentors early. Ask lots
 of questions!
+
+---
 
 It will also be helpful for your mentor to receive a weekly status communication
 from you. Previous mentors and students have use this template to faciliate
 their weekly catch-up:
 
-```text
-Accomplishments and Key Updates
+### Accomplishments and Key Updates
+
 Mention all the work done with relevant links and discussions that happened
 
-Next Work
+### Next Work
+
 Mention the work that is planned for next week
 
-Risks
+### Risks
+
 Mention about any deadlines that are coming up and any problems that you are facing
 
-Asks
-Mention about any doubts, questions that you have or any calls that you scheduled/want to schedule
-```
+### Asks
+
+Mention about any doubts, questions that you have or any calls that you
+scheduled/want to schedule
+
+---
 
 Towards the end of your project, we may make arrangement for you to demonstrate
 your work on the Linkerd's monthly community meetup. This is an
