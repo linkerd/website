@@ -111,7 +111,7 @@ kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 
 Now we just need to inform Linkerd how to consume these credentials.
 
-## Using these credentials with CLI installation 
+## Using these credentials with CLI installation
 
 For CLI installation, the Linkerd control plane should be installed with the
 `--identity-external-issuer` flag, which instructs Linkerd to read certificates
