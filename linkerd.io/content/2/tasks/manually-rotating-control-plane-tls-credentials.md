@@ -4,42 +4,34 @@ description = "You can manually update Linkerd's control plane TLS credentials"
 aliases = [ "rotating_identity_certificates" ]
 +++
 
-By default, the issuer certificate and trust root that Linkerd uses are valid
-for 365 days. If either of these certificates expires, Linkerd will no longer
-be able to proxy traffic. Therefore, it is critical that you replace these
-certificates with new ones before they expire - a process called certificate
-rotation.
+For simplicity, by default, Linkerd's control plane TLS credentials are
+generated once at install time and are not rotated. Furthermore, these
+credentials are valid for only 365 days, and if they expire, Linkerd will no
+longer be able to proxy traffic.
 
-If your control plane is installed with the `linkerd install
---identity-external-issuer` command where your trust root is managed by a 3rd
-party certificate management solution like `cert-manager`, then this
-information doesn't apply to you, because it is the responsibility of your
-certificate manager to rotate the certificates before they expire.
+Thus, for long-term operation, you must either:
 
-{{< note >}}
-Although Linkerd can auto-generate the trust root during installation, we
-recommend using your own trust root for all serious workloads, so that you
-have full control over it. See [Generating your own mTLS root certificates](/2/tasks/generate-certificates/#generating-the-certificates-with-step)
-on how to do this.
-{{< /note >}}
+1. Set up [automatic credential
+rotation](/2/tasks/automatically-rotating-control-plane-tls-credentials/); or
+2. Periodically manually rotate these credentials (this doc).
 
 ## Prerequisites
 
-We are going to use [step 0.13.3](https://smallstep.com/cli/) and
-[jq 1.6](https://stedolan.github.io/jq/). We will also make use of the
-`linkerd check` CLI utility which will give us extra assurance that the state
-of our mTLS configuration is valid at any point. The minimum CLI version is
-[edge-19.12.3](https://github.com/linkerd/linkerd2/releases/tag/edge-19.12.3).
-To begin with, you can run:
+These instructions use the [step](https://smallstep.com/cli/) and
+[jq](https://stedolan.github.io/jq/) CLI tools.
+
+## Understanding the current state of your system
+
+Begin with by running:
 
 ```bash
 linkerd check --proxy
 ```
 
-If your configuration is valid and your certificates are not expiring soon,
-you should see output similar to:
+If your configuration is valid and your credentials are not expiring soon, you
+should see output similar to:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -56,12 +48,13 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
-However, if you see a message warning you that your root or issuer
-certificates are expiring soon it means that you must perform certificate
-rotation before your certificates expire. If your issuer certificate is expired
-you will see an error such as:
+However, if you see a message warning you that your root or issuer certificates
+are expiring soon it means that you must perform credential rotation.
 
-```bash
+For example, if your issuer certificate is expired, you will see a message
+similar to:
+
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -70,56 +63,54 @@ linkerd-identity
 √ trust roots are valid for at least 60 days
 √ issuer cert is using supported crypto algorithm
 × issuer cert is within its validity period
-    issuer certificate is not valid anymore. Expired on 2019-12-19T09:02:01Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid for hints
+issuer certificate is not valid anymore. Expired on 2019-12-19T09:02:01Z
+see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid for hints
 ```
 
-If your trust root has expired, you will observe the following error:
+If your trust root has expired, you will see a message similar to:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
 √ trust roots are using supported crypto algorithm
 × trust roots are within their validity period
-    Invalid roots:
-        * 79461543992952791393769540277800684467 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T09:11:30Z
-    see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid  for hints
+Invalid roots:
+* 79461543992952791393769540277800684467 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T09:11:30Z
+see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid  for hints
 ```
 
-If encounter any of these errors, it means your cluster's TLS configuration
-is in invalid state. In order to address this problem skip this guide and
-go straight to
-[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/).
+If encounter any of these errors, it means your cluster's TLS configuration is
+	currently in an invalid state. To address this problem, please follow the
+[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
+	Guide instead.
 
-## Generate new trust root and issuer certificates
+## Generate new trust root and issuer certificate
 
-If you have installed Linkerd with a manually supplied trust root that is not
-expiring and you have its key, then you can simply use it to generate a new
-issuer certificate. If this is the case, skip this step and go directly to
-[Updating the identity issuer certificate](/2/tasks/rotating_identity_certificates/#updating-the-identity-issuer-certificate)
+If you've installed Linkerd from its default manifest, the first step is to
+replace the trust root and issuer certificate. (If you installed Linkerd with a
+manually-supplied trust root that has not expired, however, then this step is
+unnecessary&mdash;go directly to the [Updating the identity issuer
+certificate](#updating-the-identity-issuer-certificate) step.)
 
-First generate the root certificate with its private key. The private key needs
-to be stored in a secured vault so it can be used to generate a new trust root
-in the future.
+First, generate the root certificate with its private key:
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
 ```
 
-{{< note >}}
-Note we use `--no-password --insecure` for both the roots and issuer
+Note that we use `--no-password --insecure` for both the roots and issuer
 certificates to avoid encrypting those files with a passphrase.
-{{< /note >}}
 
-## Bundling your original trust root with the new one
+Store the private key somewhere secure so that it can be used to generate a new
+trust root in the future.
 
-As a next step we need to bundle the trust root currently used by Linkerd
-together with the new root and configure Linkerd to use the bundle. The
-following command uses `kubectl` to fetch the Linkerd config as a `json`
-object, extracts the current roots from the config with the help of  `jq` and
-finally uses `step` to combine it with the newly generated roots and save the
-result in the `bundle.crt` file.
+## Bundle your original trust root with the new one
+
+Next, we need to bundle the trust root currently used by Linkerd together with
+the new root. The following command uses `kubectl` to fetch the Linkerd config,
+`jq to extract the current trust root, and `step` to combine it with the newly
+generated roots:
 
 ```bash
 kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' |  \
@@ -130,17 +121,18 @@ rm original-trust.crt
 
 ## Deploying the new bundle to Linkerd
 
-You can use `linkerd upgrade` in order to upgrade Linkerd to work with the new
-root bundle:
+Finally, you can use the `linkerd upgrade` command to instruct Linkerd to work
+with the new root bundle:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./bundle.crt | kubectl apply -f -
-````
+```
 
-This will restart the proxies of the Linkerd components and they will be
-reconfigured with the new root certs. Now it is time restart the proxy for all
-injected workloads in your cluster. Doing that for the `emojivoto` namespace for
-example would look like:
+This will restart the proxies in the Linkerd control plane, and they will be
+reconfigured with the new root certs.
+
+Finally, you must restart the proxy for all injected workloads in your cluster.
+Doing that for the `emojivoto` namespace for example would look like:
 
 ```bash
 kubectl -n emojivoto rollout restart deploy
@@ -155,7 +147,7 @@ linkerd check --proxy
 You might have to wait a few moments until all the pods have been restarted and
 are configured with the correct roots. Meanwhile you might observe warnings:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -183,11 +175,11 @@ linkerd-identity-data-plane
     see https://linkerd.io/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
-When the rollout completes your `check` command should stop warning you that
-pods need to be restarted. It will still warn you however that your issuer
+When the rollout completes, your `check` command should stop warning you that
+pods need to be restarted. It will still warn you, however, that your issuer
 certificate is about to expire soon:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -222,9 +214,9 @@ again:
 linkerd upgrade  --identity-issuer-certificate-file=./issuer-new.crt --identity-issuer-key-file=./issuer-new.key | kubectl apply -f -
 ```
 
-At this point the `identity` service should detect the change of the secret and
-automatically update its issuer certificates. To ensure this has happened, you
-can check for the specific Kubernetes event.
+At this point Linkerd's `identity` control plane service should detect the
+change of the secret and automatically update its issuer certificates. To
+ensure this has happened, you can check for the specific Kubernetes event.
 
 ```bash
 kubectl get events --field-selector reason=IssuerUpdated -n linkerd
@@ -241,7 +233,7 @@ linkerd check --proxy
 
 You should see output without any certificate expiration warnings:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -260,8 +252,7 @@ linkerd-identity-data-plane
 
 ## Removing the old trust root
 
-At this point, the cert rotation process is complete. For security purposes,
-we will remove the old trust root from the trust bundle we created earlier.
+We can now remove the old trust root from the trust bundle we created earlier.
 The `upgrade` command can do that for the Linkerd components:
 
 ```bash
@@ -269,8 +260,8 @@ linkerd upgrade  --identity-trust-anchors-file=./ca-new.crt  | kubectl apply -f 
 ```
 
 Note that the ./ca-new.crt file is the same trust root you created at the start
-of this process.Additionally you can use the `rollout restart` command to bring
-the configuration of your other injected resources up to date:
+of this process. Additionally, you can use the `rollout restart` command to
+bring the configuration of your other injected resources up to date:
 
 ```bash
 kubectl -n emojivoto rollout restart deploy
@@ -280,7 +271,7 @@ linkerd check --proxy
 Finally the output of the `check` command should not produce any warnings or
 errors:
 
-```bash
+```text
 linkerd-identity
 ----------------
 √ certificate config is valid
