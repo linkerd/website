@@ -5,20 +5,22 @@ aliases = [ "use_external_certs" ]
 +++
 
 Linkerd's [automatic mTLS](/2/features/automatic-mtls/) uses a set of TLS
-credentials stored in the control plane (see [How does it
-work?](/2/features/automatic-mtls/#how-does-it-work) for more).
-
-For simplicity, by default, these certificates are generated once at install
-time, and must be [manually
-rotated](/2/manually-rotating-control-plane-tls-credentials). In this doc,
-we'll describe how to use the *cert-manager* project to automatically *rotate*
-these credentials instead.
+credentials stored in the control plane to generate TLS certs for proxies. For
+simplicity, by default, these credentials are generated once at install time
+and are not rotated (though they can be [manually
+rotated](/2/tasks/manually-rotating-control-plane-tls-credentials/)). In this doc,
+we'll describe how to automatically rotate these credentials by using the
+*cert-manager* project.
 
 ## Installing cert-manager and create the Linkerd namespace
 
 [Cert-manager](https://github.com/jetstack/cert-manager) is a popular project
 for making TLS credentials from external sources available to Kubernetes
-clusters. As a first step, [install cert-manager on your
+clusters. In this case, we'll configure it to act as an on-cluster
+[CA](https://en.wikipedia.org/wiki/Certificate_authority) and have it re-issue
+Linkerd's control plane credentials on a regular basis.
+
+As a first step, [install cert-manager on your
 cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html).
 
 Next, create the namespace that cert-manager will use store its Linkerd-related
@@ -32,7 +34,7 @@ kubectl create namespace linkerd
 ## Save the signing key pair as a Secret
 
 Next, using the [`step`](https://smallstep.com/cli/) tool, create a signing key
-pair, and store it in a Kubernetes Secret in the namespace created above:
+pair and store it in a Kubernetes Secret in the namespace created above:
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca.crt ca.key \
@@ -46,8 +48,8 @@ step certificate create identity.linkerd.cluster.local ca.crt ca.key \
 
 ## Create an Issuer referencing the secret
 
-Now that we have the Secret in place, we can create a cert-manager "Issuer"
-resource that references it:
+With the Secret in place, we can create a cert-manager "Issuer" resource that
+references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -65,7 +67,7 @@ EOF
 ## Issuing certificates and writing them to a secret
 
 Finally, we can create a cert-manager "Certificate" resource which uses this
-Issuer to specify the desired certificate:
+Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -92,50 +94,47 @@ spec:
 EOF
 ```
 
-At this point, cert-manager can now use this Certificate resource to obtain TLS
-credentials, which will be stored in a secret named `linkerd-identity-issuer`.
-
-{{< note >}}
-In the YAML manifest above, the `duration` key instructs cert-manager to
+(In the YAML manifest above, the `duration` key instructs cert-manager to
 consider certificates as valid for 24 hours and the `renewBefore` key indicates
 that cert-manager will attempt to issue a new certificate one hour before
-expiration of the current one. Of course, these values can be customized to
-your liking.
-{{< note >}}
+expiration of the current one. These values can be customized to your liking.)
 
-In order to see your newly-issued certificate, you can run:
+At this point, cert-manager can now use this Certificate resource to obtain TLS
+credentials, which will be stored in a secret named `linkerd-identity-issuer`.
+To validate your newly-issued certificate, you can run:
 
 ```bash
 kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 ```
 
-Now we just need to inform Linkerd how to consume these credentials.
+Now we just need to inform Linkerd to consume these credentials.
 
 ## Using these credentials with CLI installation
 
 For CLI installation, the Linkerd control plane should be installed with the
 `--identity-external-issuer` flag, which instructs Linkerd to read certificates
-from the `linkerd-identity-issuer` secret. And, whenever cert-manager updates
-the certificate and key stored in the secret, the `identity` service will
+from the `linkerd-identity-issuer` secret. Whenever cert-manager updates the
+certificate and key stored in the secret, the `identity` service will
 automatically detect this change and reload the newly created credentials.
 
-In order to monitor this process you can check the `IssuerUpdated`events
-emitted by the service:
+Voila! We have set up automatic rotation of Linkerd's control plane TLS
+credentials. And if you want to monitor the update process, you can check the
+`IssuerUpdated` events emitted by the service:
 
 ```bash
 kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 ```
 
 {{< note >}}
-Linkerd will work with any secret of type `kubernetes.io/tls`, containing
-the `ca.crt`, `tls.crt` and `tls.key` data fields. The secret must be named
-`linkerd-identity-issuer`. This allows for the use of other certificate
-management solutions such as [Vault](https://www.vaultproject.io).
+This mechanism is also usable outside of cert-manager. Linkerd will read the
+`linkerd-identity-issuer` Secret, and if it's of type `kubernetes.io/tls`, will
+use the contents as its TLS credentials.  This allows for the use of other
+certificate management solutions such as [Vault](https://www.vaultproject.io).
 {{< /note >}}
 
 ## Installing with Helm
 
-For Helm installation, but rather than running `linkerd install`, set the
+For Helm installation, rather than running `linkerd install`, set the
 `global.identityTrustAnchorsPEM` to the value of `ca.crt` in the
 `linkerd-identity-issuer` Secret:
 
