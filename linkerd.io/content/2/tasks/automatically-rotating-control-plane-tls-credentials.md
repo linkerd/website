@@ -8,12 +8,9 @@ Linkerd's [automatic mTLS](/2/features/automatic-mtls/) uses a set of TLS
 credentials stored in the control plane (see [How does it
 work?](/2/features/automatic-mtls/#how-does-it-work) for more).
 
-For simplicity, by default, these credentials are generated once at install
+For simplicity, by default, these certificates are generated once at install
 time, and must be [manually
-rotated](/2/manually-rotating-control-plane-tls-credentials). There are three
-parts to these credentials: the trust root, the certificate, and the key. The
-trust root is stored in a Kubernetes ConfigMap, while the certificate and key
-are stored in a Kubernetes Secret. In this doc,
+rotated](/2/manually-rotating-control-plane-tls-credentials). In this doc,
 we'll describe how to use the *cert-manager* project to automatically *rotate*
 these credentials instead.
 
