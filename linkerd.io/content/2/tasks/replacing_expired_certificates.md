@@ -61,7 +61,8 @@ linkerd upgrade \
     --identity-issuer-certificate-file=./issuer-new.crt \
     --identity-issuer-key-file=./issuer-new.key \
     --identity-trust-anchors-file=./ca-new.crt \
-    --force
+    --force \
+    | kubectl apply -f -
 ```
 
 Usually `upgrade` will prevent you from using an issuer certificate that
@@ -100,8 +101,9 @@ linkerd-identity-data-plane
 
 ```
 
-Eventually when the old pods are terminated the `check` command should stop
-producing warning or errors:
+Additionally you can use the `kubectl rollout restart` command to bring the
+configuration of your other injected resources up to date, and then the `check`
+command should stop producing warning or errors:
 
 ```bash
 linkerd-identity
