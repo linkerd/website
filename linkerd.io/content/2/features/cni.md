@@ -1,5 +1,5 @@
 +++
-title = "Experimental: CNI Plugin"
+title = "CNI Plugin"
 description = "Linkerd can be configured to run a CNI plugin that rewrites each pod's iptables rules automatically."
 +++
 
@@ -10,11 +10,6 @@ network traffic through the pod's `linkerd-proxy` container. When the CNI plugin
 is enabled, individual pods no longer need to include an init container that
 requires the `NET_ADMIN` capability to perform rewriting. This can be useful in
 clusters where that capability is restricted by cluster administrators.
-
-This feature is currently **experimental**, as it has not been tested on most
-major cloud providers. Follow
-[this issue](https://github.com/linkerd/linkerd2/issues/2174) for status
-updates.
 
 ## Installation
 
