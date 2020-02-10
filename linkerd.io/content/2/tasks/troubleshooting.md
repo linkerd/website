@@ -1062,3 +1062,240 @@ metadata:
     linkerd.io/is-control-plane: "true"
     config.linkerd.io/admission-webhooks: disabled
 ```
+
+## The "linkerd-cni-plugin" checks {#l5d-cni}
+
+These checks run if Linkerd has been installed with the `--linkerd-cni-enabled`
+flag. Alternatively they can be run as part of the pre-checks by providing the
+`--linkerd-cni-enabled` flag. Most of these checks verify that the required
+resources are in place. If any of them are missing, you can use
+`linkerd install-cni | kubectl apply -f -` to re-install them.
+
+### √ cni plugin ConfigMap exists {#cni-plugin-cm-exists}
+
+Example error:
+
+```bash
+× cni plugin ConfigMap exists
+    configmaps "linkerd-cni-config" not found
+    see https://linkerd.io/checks/#cni-plugin-cm-exists for hints
+```
+
+Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
+
+```bash
+$ kubectl get cm linkerd-cni-config -n linkerd-cni
+NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
+linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
+```
+
+Also ensure you have permission to create ConfigMaps:
+
+```bash
+$ kubectl auth can-i create ConfigMaps
+yes
+```
+
+### √ cni plugin PodSecurityPolicy exists {#cni-plugin-psp-exists}
+
+Example error:
+
+```bash
+× cni plugin PodSecurityPolicy exists
+    missing PodSecurityPolicy: linkerd-linkerd-cni-cni
+    see https://linkerd.io/checks/#cni-plugin-psp-exists for hint
+```
+
+Ensure that the pod security policy exists:
+
+```bash
+$ kubectl get psp linkerd-linkerd-cni-cni
+NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
+linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
+```
+
+Also ensure you have permission to create PodSecurityPolicies:
+
+```bash
+$ kubectl auth can-i create PodSecurityPolicies
+yes
+```
+
+### √ cni plugin ClusterRole exist {#cni-plugin-cr-exists}
+
+Example error:
+
+```bash
+× cni plugin ClusterRole exists
+    missing ClusterRole: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-cr-exists for hints
+```
+
+Ensure that the cluster role exists:
+
+```bash
+$ kubectl get clusterrole linkerd-cni
+NAME          AGE
+linkerd-cni   54m
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create ClusterRoles
+yes
+```
+
+### √ cni plugin ClusterRoleBinding exist {#cni-plugin-crb-exists}
+
+Example error:
+
+```bash
+× cni plugin ClusterRoleBinding exists
+    missing ClusterRoleBinding: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-crb-exists for hints
+```
+
+Ensure that the cluster role binding exists:
+
+```bash
+$ kubectl get clusterrolebinding linkerd-cni
+NAME          AGE
+linkerd-cni   54m
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create ClusterRoleBindings
+yes
+```
+
+### √ cni plugin Role exists {#cni-plugin-r-exists}
+
+Example error:
+
+```bash
+× cni plugin Role exists
+    missing Role: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-r-exists for hints
+```
+
+Ensure that the role exists in the CNI namespace:
+
+```bash
+$ kubectl get role linkerd-cni -n linkerd-cni
+NAME          AGE
+linkerd-cni   52m
+```
+
+Also ensure you have permission to create Roles:
+
+```bash
+$ kubectl auth can-i create Roles -n linkerd-cni
+yes
+```
+
+### √ cni plugin RoleBinding exists {#cni-plugin-rb-exists}
+
+Example error:
+
+```bash
+× cni plugin RoleBinding exists
+    missing RoleBinding: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-rb-exists for hints
+```
+
+Ensure that the role binding exists in the CNI namespace:
+
+```bash
+$ kubectl get rolebinding linkerd-cni -n linkerd-cni
+NAME          AGE
+linkerd-cni   49m
+```
+
+Also ensure you have permission to create RoleBindings:
+
+```bash
+$ kubectl auth can-i create RoleBindings -n linkerd-cni
+yes
+```
+
+### √ cni plugin ServiceAccount exists {#cni-plugin-sa-exists}
+
+Example error:
+
+```bash
+× cni plugin ServiceAccount exists
+    missing ServiceAccount: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-sa-exists for hints
+```
+
+Ensure that the CNI service account exists in the CNI namespace:
+
+```bash
+$ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
+NAME          SECRETS   AGE
+linkerd-cni   1         45m
+```
+
+Also ensure you have permission to create ServiceAccount:
+
+```bash
+$ kubectl auth can-i create ServiceAccounts -n linkerd-cni
+yes
+```
+
+### √ cni plugin DaemonSet exists {#cni-plugin-ds-exists}
+
+Example error:
+
+```bash
+× cni plugin DaemonSet exists
+    missing DaemonSet: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-ds-exists for hints
+```
+
+Ensure that the CNI daemonset exists in the CNI namespace:
+
+```bash
+$ kubectl get ds -n linkerd-cni
+NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
+linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
+```
+
+Also ensure you have permission to create DaemonSets:
+
+```bash
+$ kubectl auth can-i create DaemonSets -n linkerd-cni
+yes
+```
+
+### √ cni plugin pod is running on all nodes {#cni-plugin-ready}
+
+Example failure:
+
+```bash
+‼ cni plugin pod is running on all nodes
+    number ready: 2, number scheduled: 3
+    see https://linkerd.io/checks/#cni-plugin-ready
+```
+
+Ensure that all the CNI pods are running:
+
+```bash
+$ kubectl get po -n linkerd-cn
+NAME                READY   STATUS    RESTARTS   AGE
+linkerd-cni-rzp2q   1/1     Running   0          9m20s
+linkerd-cni-mf564   1/1     Running   0          9m22s
+linkerd-cni-p5670   1/1     Running   0          9m25s
+```
+
+Ensure that all pods have finished the deployment of the CNI config and binary:
+
+```bash
+$ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
+Wrote linkerd CNI binaries to /host/opt/cni/bin
+Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
+Done configuring CNI. Sleep=true
+```
