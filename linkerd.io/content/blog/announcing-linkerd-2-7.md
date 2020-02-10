@@ -59,7 +59,7 @@ Linkerd 2.7 continues our theme of improving Linkerd's dashboard. First, the
 dashboard now displays CronJob and ReplicaSet resources, and ships with
 pre-configured Grafana dashboards for them. We've added `tap` headers (a
 feature introduced in 2.6) to the dashboard, protected against DNS rebinding
-attacks, and fixed many other smaller issues. 
+attacks, and fixed many other smaller issues.
 
 ![Snazzy dashboard with tap headers](/uploads/dashboard-tap-header-screenshot.png)
 
@@ -73,11 +73,11 @@ generally updated the chart to follow community best practices. Linkerd 2.7
 also has a tremendous list of other improvements, performance enhancements, and
 bug fixes, including:
 
-*   Support for headless services.
-*   A new `--wait-before-exit-seconds` flag to delay proxy shutdown.
-*   Improved error classification for gRPC services.
-*   Many additions to `linkerd check`, including CNI plugin status, and TLS cert validation.
-*   Lots more!
+* Support for headless services.
+* A new `--wait-before-exit-seconds` flag to delay proxy shutdown.
+* Improved error classification for gRPC services.
+* Many additions to `linkerd check`, including CNI plugin status, and TLS cert validation.
+* Lots more!
 
 See the [full release notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.7.0) for details.
 
