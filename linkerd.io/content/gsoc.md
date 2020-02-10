@@ -9,15 +9,14 @@ Does the idea of writing some amazing code for the most lightweight Kubernetes
 service mesh, and learning from some of the best service mesh engineers
 intrigue you?
 
-Join us on thd Linkerd [Slack](https://linkerd.slack.com). Look for the `#gsoc`
+Join us on the Linkerd [Slack](https://linkerd.slack.com). Look for the `#gsoc`
 channel!
 
 ## Project Ideas
 
-So you are up for the challenge, and ready to show off your problem-solving
-skills? Check out the list of projects below. When you are ready, go to the
-[Application Process](#application-process) section for more information on how
-to proceed.
+So you are up for the challenge? Check out the list of projects below. When you
+are ready, go to the [Application Process](#application-process) section for
+more information on how to proceed.
 
 ### Auto-Update
 
@@ -42,6 +41,7 @@ Linkerd data plane proxies with the correct version.
 #### Recommended Skills
 
 * Go
+
 * Kubernetes
 
 #### Difficulty level
@@ -74,8 +74,11 @@ correctly over a long period of time time.
 #### Recommended Skills
 
 * Go
+
 * Bash
+
 * Kubernetes
+
 * gRPC
 
 #### Difficulty level
@@ -107,7 +110,9 @@ create alerts that are per-service and per-route.
 #### Recommended Skills
 
 * Go
+
 * Prometheus
+
 * Grafana
 
 #### Difficulty level
@@ -137,8 +142,11 @@ and gain visibility into any performance regression.
 #### Recommended Skills
 
 * Go
+
 * Bash
+
 * Kubernetes
+
 * Prometheus
 
 #### Difficulty level
@@ -150,18 +158,18 @@ Medium
 [https://github.com/linkerd/linkerd2/issues/3895](https://github.com/linkerd/linkerd2/issues/3895)
 
 {{< note >}}
-Suggesting your own project idea is highly encouraged. Talk to one of the
-Linkerd mentors to explore your idea.
+If you have other project ideas not listed here, please talk to one of the
+Linkerd mentors.
 {{< /note >}}
 
 ## Application Process
 
 It's very easy to get involved in the Linkerd GSoC program. The Linkerd
-community has been known for its friendly and pressureless environment.
+community has been known for its welcoming environment.
 
-Come and meet your prospective mentors and fellow students on the Linkerd
-[Slack](https://linkerd.slack.com) in the `#gsoc` channel. Tell us which
-projects interest you, and let's get your started!
+Come meet your prospective mentors and fellow students on the Linkerd
+[Slack](https://linkerd.slack.com) in the `#gsoc` channel. Let's get you
+started!
 
 ### Requirements
 
@@ -194,11 +202,8 @@ repository as a
 [draft pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests#draft-pull-requests)
 .
 
-{{< note >}}
 The Linkerd RFC repository is located at
 [https://github.com/linkerd/rfc](https://github.com/linkerd/rfc).
-{{< /note >}}
-
 Follow the instruction provided
 [here](https://github.com/linkerd/rfc/blob/master/README.md) to complete your
 RFC.
@@ -280,6 +285,6 @@ your work on the Linkerd's monthly community meetup. This is an
 excellent opportunity for you to show off the amazing thing that you have been
 building!
 
-## Final Project Evaluation
+## Project Evaluation
 
 Coming soon.
