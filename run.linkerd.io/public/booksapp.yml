@@ -21,6 +21,7 @@ metadata:
   labels:
     app: webapp
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 3
   selector:
@@ -75,6 +76,7 @@ metadata:
   labels:
     app: authors
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -129,6 +131,7 @@ metadata:
   labels:
     app: books
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -166,6 +169,7 @@ metadata:
   labels:
     app: traffic
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
