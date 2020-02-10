@@ -13,7 +13,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.6 has been released! [Read the announcement >>](/2019/10/10/announcing-linkerd-2.6/)
+  description: Linkerd 2.7 has been released! [Read the announcement >>](/2020/02/10/announcing-linkerd-2.7/)
 description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability,
   reliability, and security without requiring any changes to your code.
 keywords:
