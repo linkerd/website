@@ -197,15 +197,15 @@ account for the extra time you might need to address review feedbacks.
 
 ### Request For Comments
 
-When you are ready, submit a request for comments (RFC) to the Linkerd RFC
+When you are ready, submit a request for comments (RFC) to the Linkerd GSoC
 repository as a
 [draft pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests#draft-pull-requests)
 .
 
-The Linkerd RFC repository is located at
-[https://github.com/linkerd/rfc](https://github.com/linkerd/rfc).
+The Linkerd GSoC repository is located at
+[https://github.com/linkerd/gsoc](https://github.com/linkerd/gsoc).
 Follow the instruction provided
-[here](https://github.com/linkerd/rfc/blob/master/README.md) to complete your
+[here](https://github.com/linkerd/gsoc/blob/master/README.md) to complete your
 RFC.
 
 Each pull request will be assigned to the most relevant reviewer, who will
