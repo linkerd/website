@@ -85,3 +85,16 @@ The most important flags are:
    logs. One way to do this is to log onto the node and use
    `journalctl -t kubelet`. The string `linkerd-cni:` can be used as a search to
    find the plugin log output.
+
+## Upgrading the CNI plugin
+
+Since the CNI plugin is basically stateless, there is no need for a separate
+`upgrade` command. If you are using the CLI to upgrade the CNI plugin you can
+just do:
+
+```bash
+linkerd install-cni   | kubectl apply --prune -l  linkerd.io/cni-resource=true -f -
+```
+
+Keep in mind that if you are upgrading the plugin from an experimental version,
+you need to uninstall and install it again.
