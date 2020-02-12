@@ -50,7 +50,7 @@ issues a [certificate signing request
 contains an initial certificate with the pod's identity set to its
 ServiceAccount, and the actual service account token, so that `identity` can
 validate that the CSR is valid. Once validation has succeeded, the signed trust
-bundle is returned to the proxy, which can use it as both a client and server.
+bundle is returned to the proxy, which can use it as both a client and server certificate.
 
 These certificates are scoped to 24 hours and will be dynamically refreshed
 using the same mechanism.
