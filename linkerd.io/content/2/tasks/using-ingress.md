@@ -76,13 +76,13 @@ The important annotation here is:
 {{< note >}}
 If you are using [auth-url](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#external-authentication)
 you'd need to add the following snippet as well.
-{{< /note >}}
 
 ```yaml
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
       grpc_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
 ```
+{{< /note >}}
 
 This example combines the two directives that NGINX uses for proxying HTTP
 and gRPC traffic. In practice, it is only necessary to set either the
