@@ -82,6 +82,7 @@ you'd need to add the following snippet as well.
       proxy_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
       grpc_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
 ```
+
 {{< /note >}}
 
 This example combines the two directives that NGINX uses for proxying HTTP
