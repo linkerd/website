@@ -48,8 +48,9 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
-However, if you see a message warning you that your root or issuer certificates
-are expiring soon it means that you must perform credential rotation.
+However, if you see a message warning you that your trust anchor ("trust root")
+or issuer certificates are expiring soon it means that you must perform
+credential rotation.
 
 For example, if your issuer certificate is expired, you will see a message
 similar to:
@@ -67,7 +68,7 @@ issuer certificate is not valid anymore. Expired on 2019-12-19T09:02:01Z
 see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid for hints
 ```
 
-If your trust root has expired, you will see a message similar to:
+If your trust anchor has expired, you will see a message similar to:
 
 ```text
 linkerd-identity
@@ -85,32 +86,30 @@ If encounter any of these errors, it means your cluster's TLS configuration is
 [Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
 	Guide instead.
 
-## Generate new trust root and issuer certificate
+## Generate a new trust anchor and issuer certificate
 
 If you've installed Linkerd from its default manifest, the first step is to
-replace the trust root and issuer certificate. (If you installed Linkerd with a
-manually-supplied trust root that has not expired, however, then this step is
+replace the trust anchor and issuer certificate. (If you installed Linkerd with a
+manually-supplied trust anchor that has not expired, however, then this step is
 unnecessary&mdash;go directly to the [Updating the identity issuer
 certificate](#updating-the-identity-issuer-certificate) step.)
 
-First, generate the root certificate with its private key:
+First, generate the trust anchor certificate and its private key:
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
 ```
 
-Note that we use `--no-password --insecure` for both the roots and issuer
-certificates to avoid encrypting those files with a passphrase.
+Note that we use `--no-password --insecure` to avoid encrypting these files
+with a passphrase. Store the private key somewhere secure so that it can be
+used to generate a new trust anchor in the future.
 
-Store the private key somewhere secure so that it can be used to generate a new
-trust root in the future.
+## Bundle your original trust anchor with the new one
 
-## Bundle your original trust root with the new one
-
-Next, we need to bundle the trust root currently used by Linkerd together with
-the new root. The following command uses `kubectl` to fetch the Linkerd config,
-`jq to extract the current trust root, and `step` to combine it with the newly
-generated roots:
+Next, we need to bundle the trust anchor currently used by Linkerd together with
+the new anchor. The following command uses `kubectl` to fetch the Linkerd config,
+`jq to extract the current trust anchor, and `step` to combine it with the newly
+generated trust anchor:
 
 ```bash
 kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' |  \
@@ -122,14 +121,14 @@ rm original-trust.crt
 ## Deploying the new bundle to Linkerd
 
 Finally, you can use the `linkerd upgrade` command to instruct Linkerd to work
-with the new root bundle:
+with the new trust bundle:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./bundle.crt | kubectl apply -f -
 ```
 
 This will restart the proxies in the Linkerd control plane, and they will be
-reconfigured with the new root certs.
+reconfigured with the new trust anchor.
 
 Finally, you must restart the proxy for all injected workloads in your cluster.
 Doing that for the `emojivoto` namespace for example would look like:
@@ -145,7 +144,7 @@ linkerd check --proxy
 ```
 
 You might have to wait a few moments until all the pods have been restarted and
-are configured with the correct roots. Meanwhile you might observe warnings:
+are configured with the correct trust anchor. Meanwhile you might observe warnings:
 
 ```text
 linkerd-identity
@@ -200,13 +199,13 @@ linkerd-identity-data-plane
 
 ## Updating the identity issuer certificate
 
-Now, using your trust root, generate the intermediate certificate and key pair:
+Now, using your trust anchor, generate the issuer certificate and key pair:
 
 ```bash
 step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
-Provided that all proxies are updated to include a working trust root, it is
+Provided that all proxies are updated to include a working trust anchor, it is
 safe to rotate the identity issuer certificate by using the `upgrade` command
 again:
 
@@ -250,16 +249,16 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
-## Removing the old trust root
+## Removing the old trust anchor
 
-We can now remove the old trust root from the trust bundle we created earlier.
+We can now remove the old trust anchor from the trust bundle we created earlier.
 The `upgrade` command can do that for the Linkerd components:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./ca-new.crt  | kubectl apply -f -
 ```
 
-Note that the ./ca-new.crt file is the same trust root you created at the start
+Note that the ./ca-new.crt file is the same trust anchor you created at the start
 of this process. Additionally, you can use the `rollout restart` command to
 bring the configuration of your other injected resources up to date:
 
