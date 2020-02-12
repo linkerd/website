@@ -22,7 +22,7 @@ These instructions use the [step](https://smallstep.com/cli/) and
 
 ## Understanding the current state of your system
 
-Begin with by running:
+Begin by running:
 
 ```bash
 linkerd check --proxy
