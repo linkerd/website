@@ -101,14 +101,15 @@ step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --p
 ```
 
 Note that we use `--no-password --insecure` to avoid encrypting these files
-with a passphrase. Store the private key somewhere secure so that it can be
-used to generate a new trust anchor in the future.
+with a passphrase.  Store the private key somewhere secure so that it can be
+used in the future to [generate new issuer
+certificates](2/tasks/generate-certificates).
 
 ## Bundle your original trust anchor with the new one
 
 Next, we need to bundle the trust anchor currently used by Linkerd together with
 the new anchor. The following command uses `kubectl` to fetch the Linkerd config,
-`jq to extract the current trust anchor, and `step` to combine it with the newly
+`jq` to extract the current trust anchor, and `step` to combine it with the newly
 generated trust anchor:
 
 ```bash
@@ -120,8 +121,8 @@ rm original-trust.crt
 
 ## Deploying the new bundle to Linkerd
 
-Finally, you can use the `linkerd upgrade` command to instruct Linkerd to work
-with the new trust bundle:
+At this point you can use the `linkerd upgrade` command to instruct Linkerd to
+work with the new trust bundle:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./bundle.crt | kubectl apply -f -
