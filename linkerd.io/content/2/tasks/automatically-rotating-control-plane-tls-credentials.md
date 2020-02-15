@@ -4,21 +4,26 @@ description = "Use cert-manager to automatically rotate control plane TLS creden
 aliases = [ "use_external_certs" ]
 +++
 
-Linkerd's [automatic mTLS](/2/features/automatic-mtls/) uses a set of TLS
-credentials stored in the control plane to generate TLS certs for proxies. For
-simplicity, by default, these credentials are generated once at install time
-and are not rotated (though they can be [manually
-rotated](/2/tasks/manually-rotating-control-plane-tls-credentials/)). In this doc,
-we'll describe how to automatically rotate these credentials by using the
-*cert-manager* project.
+Linkerd's [automatic mTLS](/2/features/automatic-mtls/) feature uses a set of
+TLS credentials to generate TLS certificates for proxies: a trust anchor, and
+an issuer certificate and private key. While Linkerd automatically rotates the
+TLS certificates for data plane proxies every 24 hours, it does not rotate the
+TLS credentials used to issue these certificate. In this doc, we'll describe
+how to automatically rotate the issuer certificate and private key, by using
+the *cert-manager* project.
+
+(Note that Linkerd's trust anchor [must still be manually
+rotated](/2/tasks/manually-rotating-control-plane-tls-credentials/) on
+long-lived clusters.)
 
 ## Installing cert-manager and create the Linkerd namespace
 
 [Cert-manager](https://github.com/jetstack/cert-manager) is a popular project
 for making TLS credentials from external sources available to Kubernetes
-clusters. In this case, we'll configure it to act as an on-cluster
+clusters. In this case, rather than pulling credentials from an external
+source, we'll configure it to act as an on-cluster
 [CA](https://en.wikipedia.org/wiki/Certificate_authority) and have it re-issue
-Linkerd's control plane credentials on a regular basis.
+Linkerd's issuer certificate and private key on a periodic basis.
 
 As a first step, [install cert-manager on your
 cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html).
