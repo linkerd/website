@@ -111,7 +111,7 @@ step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --p
 Note that we use `--no-password --insecure` to avoid encrypting these files
 with a passphrase. Store the private key somewhere secure so that it can be
 used in the future to [generate new issuer
-certificates](/2/tasks/generate-certificates).
+certificates](/2/tasks/generate-certificates/).
 
 ## Bundle your original trust anchor with the new one
 
