@@ -31,7 +31,7 @@ linkerd-identity
 
 In this situation, if you have installed Linkerd with a manually supplied trust
 root and you have its key, you can follow
-[Updating the identity issuer certificate](/2/tasks/rotating_identity_certificates/#updating-the-identity-issuer-certificate)
+[Updating the identity issuer certificate](/2/tasks/manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
 to update your expired cert.
 
 ## Replacing the root and issuer certificates
