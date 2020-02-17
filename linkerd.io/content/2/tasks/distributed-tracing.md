@@ -58,7 +58,7 @@ Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
 
 ```bash
-kubectl -n tracing rollout status deploy/oc-collector --watch
+kubectl -n tracing rollout status deploy/oc-collector
 ```
 
 ## Install Jaeger
@@ -82,7 +82,7 @@ Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
 
 ```bash
-kubectl -n tracing rollout status deploy/jaeger --watch
+kubectl -n tracing rollout status deploy/jaeger
 ```
 
 ## Install Emojivoto
@@ -112,7 +112,7 @@ Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
 
 ```bash
-kubectl -n emojivoto rollout status deploy/web --watch
+kubectl -n emojivoto rollout status deploy/web
 ```
 
 ## Modify the application
@@ -126,7 +126,7 @@ propagation](https://github.com/openzipkin/b3-propagation) format to tie these
 things together.
 
 We've already modified emojivoto to instrument its requests with this
-information, the
+information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
 addition of a client library to take care of this. Emojivoto uses the OpenCensus
@@ -154,8 +154,8 @@ kubectl -n tracing port-forward svc/jaeger 16686
 {{< fig src="/images/tracing/jaeger-empty.png"
         title="Jaeger" >}}
 
-You can search for any service in the dropdown and `vote-bot` is a great way to
-get started.
+You can search for any service in the dropdown and click Find Traces. `vote-bot`
+is a great way to get started.
 
 {{< fig src="/images/tracing/jaeger-search.png"
         title="Search" >}}
@@ -228,7 +228,7 @@ ingress controller can be used here in place of Nginx as long as it:
 - Encodes trace context in the b3 format
 - Emits spans in a protocol supported by the OpenCensus collector
 
-If using helm to install nginx-ingress, you can configure tracing by using:
+If using helm to install ingress-nginx, you can configure tracing by using:
 
 ```yaml
 controller:

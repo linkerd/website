@@ -74,6 +74,17 @@ you start your cert rotation, make sure to upgrade.
 When ready, you can begin the upgrade process by
 [installing the new CLI](/2/tasks/upgrade/#upgrade-the-cli).
 
+### Breaking changes in Helm charts
+
+As part of an effort to follow Helm's best practices the Linkerd Helm
+chart has been restructured. As a result most of the keys have been changed.
+In order to ensure trouble-free upgrade of your Helm installation, please take
+a look at [Helm upgrade procedure](/2/tasks/install-helm/). To get a precise
+view of what has changed you can compare that
+[stable-2.6.0](https://github.com/linkerd/linkerd2/blob/stable-2.6.0/charts/linkerd2/values.yaml)
+and [stable-2.7.0](https://github.com/linkerd/linkerd2/blob/stable-2.7.0/charts/linkerd2/values.yaml)
+`values.yaml` files.
+
 ## Upgrade notice: stable-2.6.0
 
 {{< note >}}

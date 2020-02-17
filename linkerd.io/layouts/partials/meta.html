@@ -1,4 +1,3 @@
-<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,7 +12,7 @@
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:description" content="{{ partial "description.html" . }}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://linkerd.io" />
+<meta property="og:url" content="{{ .Page.RelPermalink | absURL }}" />
 
 {{ if .Params.thumbnail }}
   <meta property="og:image" content="{{ .Params.thumbnail | absURL | safeHTMLAttr }}" />
