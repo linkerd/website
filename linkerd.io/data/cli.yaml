@@ -486,7 +486,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: restrict-dashboard-privileges
     Shorthand: ""
@@ -616,7 +616,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -821,7 +821,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -893,7 +893,7 @@ CLIReference:
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd
 - Description: |-
-    Output Kubernetes configs to install Linkerd CNI (experimental).
+    Output Kubernetes configs to install Linkerd CNI.
 
     This command installs a DaemonSet into the Linkerd control plane. The DaemonSet
     copies the necessary linkerd-cni plugin binaries and configs onto the host. It
@@ -974,8 +974,7 @@ CLIReference:
     Usage: |
       Configures the CNI plugin to use the "-w" flag for the iptables command. (default false)
   SeeAlso: null
-  Synopsis: |
-    Output Kubernetes configs to install Linkerd CNI (experimental)
+  Synopsis: Output Kubernetes configs to install Linkerd CNI
 - Description: |-
     Output Kubernetes configs to install Linkerd Service Profiles.
 
@@ -1306,6 +1305,11 @@ CLIReference:
     Shorthand: o
     Usage: 'Output format; one of: "table" or "json" or "wide"'
   - DefaultValue: ""
+    Name: selector
+    Shorthand: l
+    Usage: |
+      Selector (label query) to filter on, supports '=', '==', and '!='
+  - DefaultValue: ""
     Name: time-window
     Shorthand: t
     Usage: |
@@ -1534,7 +1538,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: restrict-dashboard-privileges
     Shorthand: ""
@@ -1651,7 +1655,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -1784,7 +1788,7 @@ CLIReference:
     Name: force
     Shorthand: ""
     Usage: |
-      Force upgrade operation even when issuer certificate does not work with the roots of all proxies
+      Force upgrade operation even when issuer certificate does not work with the trust anchors of all proxies
   - DefaultValue: ""
     Name: from-manifests
     Shorthand: ""
@@ -1844,7 +1848,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
