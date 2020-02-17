@@ -298,5 +298,4 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
-Congratulations, you have rotated your trust anchor! 🎉 
-
+Congratulations, you have rotated your trust anchor! 🎉
