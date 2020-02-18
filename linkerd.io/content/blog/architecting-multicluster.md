@@ -4,6 +4,7 @@ author: 'thomas'
 date: Mon, 17 Feb 2020 09:00:00 +0000
 draft: false
 tags: [Linkerd, Multicluster]
+thumbnail: /uploads/ruler.png
 ---
 
 Recently, the Linkerd community has been spending time tackling the challenge of
@@ -139,4 +140,3 @@ hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the [mailing
 lists](https://linkerd.io/2/get-involved/). Come and join the fun!
-
