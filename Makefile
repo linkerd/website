@@ -30,10 +30,8 @@ publish: get-versions build-linkerd.io deploy
 .PHONY: get-versions
 get-versions:
 	@# Update the version for the %* site
-	L5D2_STABLE_VERSION=$(shell ./bin/channel-version stable)
-	L5D2_EDGE_VERSION=$(shell ./bin/channel-version edge)
-	replace-env-L5D2_STABLE_VERSION
-	replace-env-L5D2_EDGE_VERSION
+	@source ./bin/export-channel-versions; \
+	$(MAKE) replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
 
 .PHONY: deploy-%
 deploy-%: tmp/%/public
