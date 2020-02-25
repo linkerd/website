@@ -1,8 +1,11 @@
 
 export PROJECT ?= linkerd-site
 RELEASE_URL = https://github.com/linkerd/linkerd2/releases
-export L5D2_STABLE_VERSION ?= stable-2.7.0
-export L5D2_EDGE_VERSION ?= edge-20.2.2
+
+# Version values will be replaced by `get-versions` target.
+export L5D2_STABLE_VERSION ?= "stable-X.X.X"
+export L5D2_EDGE_VERSION ?= "edge-X.X.X"
+
 export BUILD_IMAGE ?= gcr.io/linkerd-io/website-builder:1.3.1
 
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
@@ -21,12 +24,14 @@ HAS_HTMLTEST := $(shell command -v htmltest;)
 HAS_MDLINT := $(shell command -v markdownlint;)
 
 .PHONY: publish
-publish: update-version build-linkerd.io deploy
+publish: get-versions build-linkerd.io deploy
 	@# Publish a new version of the sites
 
-.PHONY: update-version
-update-version: replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
+.PHONY: get-versions
+get-versions:
 	@# Update the version for the %* site
+	@. ./bin/export-channel-versions; \
+	$(MAKE) replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
 
 .PHONY: deploy-%
 deploy-%: tmp/%/public
@@ -104,7 +109,7 @@ serve-api.linkerd.io: build-api.linkerd.io
 		&& python3 -m http.server 9999
 
 .PHONY: build-linkerd.io
-build-linkerd.io: update-version tmp/linkerd.io
+build-linkerd.io: get-versions tmp/linkerd.io
 	@# Build linkerd.io
 ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
@@ -117,7 +122,7 @@ build-api.linkerd.io:
 	cd api.linkerd.io && ./build
 
 .PHONY: build-%
-build-%: update-version
+build-%: get-versions
 	@# Build *.linkerd.io
 
 .PHONY: replace-env-%
