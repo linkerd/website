@@ -420,3 +420,76 @@ http://192.168.99.132:30969
 For the example VirtualService above, which listens to any domain and path,
 accessing the proxy URL (`http://192.168.99.132:30969`) in your browser
 should open the Books application.
+
+## Contour
+
+Contour doesn't support setting the `l5d-dst-override` header automatically.
+The following example uses the
+[Contour getting started](https://projectcontour.io/getting-started/) documentation
+to demonstrate how to set the required header manually:
+
+First, inject Linkerd into your Contour installation:
+
+```bash
+linkerd inject https://projectcontour.io/quickstart/contour.yaml | kubectl apply -f -
+```
+
+Envoy will not auto mount the service account token.
+To fix this you need to set `automountServiceAccountToken: true`.
+Optionally you can create a dedicated service account to avoid using the `default`.
+
+```bash
+# create a service account (optional)
+kubectl apply -f - << EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: envoy
+  namespace: projectcontour
+EOF
+
+# add service account to envoy (optional)
+kubectl patch daemonset envoy -n projectcontour --type json -p='[{"op": "add", "path": "/spec/template/spec/serviceAccount", "value": "envoy"}]'
+
+# auto mount the service account token (required)
+kubectl patch daemonset envoy -n projectcontour --type json -p='[{"op": "replace", "path": "/spec/template/spec/automountServiceAccountToken", "value": true}]'
+```
+
+Verify your Contour and Envoy installation has a running Linkerd sidecar.
+
+Next we'll deploy a demo service:
+
+```bash
+linkerd inject https://projectcontour.io/examples/kuard.yaml | kubectl apply -f -
+```
+
+To route external traffic to your service you'll need to provide a [HTTPProxy](https://projectcontour.io/docs/master/httpproxy/):
+
+```yaml
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: kuard
+  namespace: default
+spec:
+  routes:
+  - requestHeadersPolicy:
+      set:
+      - name: l5d-dst-override
+        value: kuard.default.svc.cluster.local:80
+    services:
+    - name: kuard
+      namespace: default
+      port: 80
+  virtualhost:
+    fqdn: 127.0.0.1.xip.io
+```
+
+Notice the `l5d-dst-override` header is explicitly set to the target `service`.
+
+Finally, you can test your working service mesh:
+
+```bash
+kubectl port-forward svc/envoy -n projectcontour 3200:80
+http://127.0.0.1.xip.io:3200
+```
