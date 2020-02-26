@@ -4,7 +4,7 @@ author: 'thomas'
 date: Tue, 25 Feb 2020 09:00:00 +0000
 draft: false
 tags: [Linkerd, Multicluster]
-thumbnail: /uploads/ruler.png
+thumbnail: /uploads/mirror.png
 ---
 
 In our earlier post, [Architecting for Multicluster
