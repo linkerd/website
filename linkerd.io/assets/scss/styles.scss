@@ -49,21 +49,26 @@
   max-width: 450px;
 }
 
+.container.blog-content-container figure img.has-image-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .hero-body {
   .image-list {
     &.has-background-aqua-green {
-       .title {
-         color: $dark-green;
-         padding-top: 30px;
-         margin-bottom: 0;
-         position: relative;
-         left: auto;
-         transform: none;
-         top: auto;
-         opacity: 1;
-       }
-     }
-   }
+      .title {
+        color: $dark-green;
+        padding-top: 30px;
+        margin-bottom: 0;
+        position: relative;
+        left: auto;
+        transform: none;
+        top: auto;
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .features {
@@ -148,7 +153,7 @@
   }
   .job-item {
     max-width: 420px;
-    
+
     @include until($tablet) {
       max-width: auto;
     }
@@ -156,7 +161,7 @@
     @include mobile {
       padding: 0;
     }
-  
+
     .media {
       align-items: center
     }
@@ -183,7 +188,7 @@
   .image.is-96x96 img {
     max-height: 96px;
     max-width: 96px;
-  } 
+  }
   .media-content {
     padding-right: 10px;
   }
@@ -288,7 +293,7 @@
     .card-footer {
       margin-top: 20px;
     }
-    .card-footer-item { 
+    .card-footer-item {
       padding: 0;
 
       img {
@@ -439,7 +444,7 @@
         padding-right: 20px;
         box-sizing: border-box;
       }
-    
+
 
       .breadcrumb {
         font: 18px/22px roboto;

@@ -92,6 +92,7 @@ describing these clusters and picking a specific task.
 {{< fig
     alt="two-clusters"
     title="Two Clusters"
+    center="true"
     src="/images/multicluster/start.svg" >}}
 
 On the left, London has a pod named `foo-client`. On the right, Paris has a
@@ -107,6 +108,7 @@ another cluster! Let’s copy the service definition from Paris to London.
 {{< fig
     alt="step-1"
     title="Copy Services"
+    center="true"
     src="/images/multicluster/step-1.svg" >}}
 
 At this point, the `bar` service has been copied to London. The remote cluster
@@ -157,6 +159,7 @@ traffic to the correct destination.
 {{< fig
     alt="step-2"
     title="Copy Endpoints"
+    center="true"
     src="/images/multicluster/step-2.svg" >}}
 
 We have introduced a new service in Paris. With a type of `LoadBalancer`, the
@@ -197,6 +200,7 @@ little configuration.
 {{< fig
     alt="step-3"
     title="Gateway"
+    center="true"
     src="/images/multicluster/step-3.svg" >}}
 
 It is now possible to trace the life of a request as it originates in London and
