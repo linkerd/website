@@ -33,7 +33,6 @@ get-versions:
 	@. ./bin/export-channel-versions; \
 	$(MAKE) replace-env-L5D2_STABLE_VERSION replace-env-L5D2_EDGE_VERSION
 
-.PHONY: deploy-%
 deploy-%: tmp/%/public
 	@# Upload a site to the correct bucket.
 	@# Options:
@@ -41,7 +40,10 @@ deploy-%: tmp/%/public
 	@#     DRY_RUN                            :: ${DRY_RUN}
 	$(call upload_public,$*,$*)
 
-deploy: deploy-linkerd.io deploy-run.linkerd.io deploy-versioncheck.linkerd.io
+nocache-%:
+	gsutil -m setmeta -h "Cache-Control:no-cache,max-age=0" -r gs://$*/
+
+deploy: deploy-linkerd.io deploy-run.linkerd.io deploy-versioncheck.linkerd.io nocache-run.linkerd.io nocache-versioncheck.linkerd.io
 	@# Deploy l5d2 related sites
 
 tmp:
