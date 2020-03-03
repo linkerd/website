@@ -16,7 +16,7 @@ aliases = [
 
 Linkerd is a [service
 mesh](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/).
-It adds observability, reliability, and security to cloud native applications,
+It adds observability, reliability, and security to cloud native applications
 without requiring code changes. For example, Linkerd can monitor and report
 per-service success rates and latencies, can automatically retry failed
 requests, and can encrypt and validate connections between services, all
@@ -27,6 +27,47 @@ alongside each application instance. Linkerd's control plane provides operators
 with a uniform point at which they can control and measure the behavior of the
 data plane. Operators typically interact with Linkerd using the [CLI](/2/cli/)
 and the [web dashboard UI](/2/getting-started/#step-4-explore-linkerd).
+
+## What's the difference between Linkerd and Istio?
+
+Linkerd and [Istio](https://istio.io) are both service meshes. While the two
+projects share similar goals, there are some major differences:
+
+1. Linkerd is focused on simplicity, speed, and low resource usage. It is
+significantly [smaller and
+faster](https://linkerd.io/2019/05/18/linkerd-benchmarks) than Istio.
+
+2. Linkerd is [committed to open
+governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+and is hosted by [a neutral foundation](https://cncf.io). Istio is
+[primarily controlled by Google](https://www.protocol.com/google-open-source-istio).
+
+3. Linkerd is focused on simplicity and security with features like
+[zero-config installation](https://linkerd.io/2/getting-started/) and
+[on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/). Istio has
+a complex configuration surface area.
+
+That said, Istio has many more features than Linkerd and may be a better choice
+for specific situations. Furthermore, because both operate at the cluster level,
+it's possible (and not unheard of!) to run both within the same organization.
+
+## What's the difference between Linkerd and Envoy?
+
+[Envoy](https://envoyproxy.io) is a proxy. Linkerd is a service mesh: it has a
+control plane and a data plane, and the data plane is implemented as a set of
+proxies. Envoy can be used as a *component* of a service mesh, but Linkerd uses
+a different proxy, simply called
+[linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy).
+
+## Why doesn't Linkerd use Envoy?
+
+Envoy is a general-purpose proxy. By instead using linkerd2-proxy, which is
+built specifically for the service mesh sidecar use case, Linkerd can be
+significantly smaller and faster than Envoy-based service meshes. Additionally,
+the choice of Rust for linkerd2-proxy allows Linkerd to avoid a whole class of
+CVEs and vulnerabilities that can impact proxies written in non-memory-safe
+languages like C++&mdash;a critical requirement for security-focused projects
+like Linkerd.
 
 ## Who owns Linkerd and how is it licensed?
 
@@ -39,8 +80,9 @@ Linkerd is licensed under [Apache
 
 ## Who is Linkerd for?
 
-Linkerd is for everyone. In practice, Linkerd has certain technical
-prerequisites. Read on below.
+Linkerd is for everyone&mdash;see [Linkerd's Commitment to Open
+Governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+In practice, Linkerd has certain technical prerequisites, such as Kubernetes.
 
 ## How do I pronounce Linkerd?
 
@@ -80,13 +122,13 @@ to power the production infrastructure of companies around the globe.
 
 ## Does Linkerd require Kubernetes?
 
-Linkerd 2.x currently requires Kubernetes, though this will change in the
-future. Linkerd 1.x can be installed on any platform, and supports Kubernetes,
-DC/OS, Mesos, Consul, and ZooKeeper-based environments.
+Linkerd 2.x currently requires Kubernetes. Linkerd 1.x can be installed on any
+platform, and supports Kubernetes, DC/OS, Mesos, Consul, and ZooKeeper-based
+environments.
 
 ## Where's the Linkerd roadmap?
 
-As a community project, there is no official roadmap. A glance at the [active
+As a community project, there is no formal roadmap, but a glance at the [active
 GitHub issues](https://github.com/linkerd/linkerd2/issues) will give you a
 sense of what is in store for the future.
 
@@ -135,5 +177,9 @@ normal.
 If *new* proxies are deployed when the control plane is unreachable, these new
 proxies will not be able to operate. They will timeout all new requests until
 such time as they can reach the control plane.
+
+## How do I get involved?
+
+See our [Linkerd Community](/community/) page!
 
 <!-- markdownlint-enable MD026 -->
