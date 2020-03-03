@@ -53,16 +53,16 @@ it's possible (and not unheard of!) to run both within the same organization.
 
 ## What's the difference between Linkerd and Envoy?
 
-[Envoy](https://envoyproxy.io) is a proxy. Linkerd is a service mesh: it has a
-control plane and a data plane, and the data plane is implemented as a set of
-proxies. Envoy can be used as a *component* of a service mesh, but Linkerd uses
-a different proxy, simply called
+[Envoy](https://envoyproxy.io) is a proxy, not a service mesh. Linkerd is a
+service mesh: it has a control plane and a data plane, and the data plane is
+implemented with proxies. Envoy can be used as a *component* of a service mesh,
+but Linkerd uses a different proxy, simply called
 [linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy).
 
 ## Why doesn't Linkerd use Envoy?
 
-Envoy is a general-purpose proxy. By instead using linkerd2-proxy, which is
-built specifically for the service mesh sidecar use case, Linkerd can be
+Envoy is a general-purpose proxy. By using linkerd2-proxy, which has been built
+specifically for the service mesh sidecar use case, Linkerd can be
 significantly smaller and faster than Envoy-based service meshes. Additionally,
 the choice of Rust for linkerd2-proxy allows Linkerd to avoid a whole class of
 CVEs and vulnerabilities that can impact proxies written in non-memory-safe
