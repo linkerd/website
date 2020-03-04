@@ -31,25 +31,27 @@ and the [web dashboard UI](/2/getting-started/#step-4-explore-linkerd).
 ## What's the difference between Linkerd and Istio?
 
 Linkerd and [Istio](https://istio.io) are both service meshes. While the two
-projects share similar goals, there are some major differences:
+projects share similar goals, there are some significant design differences:
 
 1. Linkerd is focused on simplicity, speed, and low resource usage. It is
 significantly [smaller and
-faster](https://linkerd.io/2019/05/18/linkerd-benchmarks) than Istio.
+faster](https://linkerd.io/2019/05/18/linkerd-benchmarks) than Istio, though it
+currently has fewer features.
 
-2. Linkerd is [committed to open
+2. Linkerd is built for security from the ground up, ranging from feature like
+[on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/), a data
+plane that is [built in a memory-safe
+language](https://github.com/linkerd/linkerd2-proxy), and [regular security
+audits](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf).
+
+3. Linkerd is [committed to open
 governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
-and is hosted by [a neutral foundation](https://cncf.io). Istio is
-[primarily controlled by Google](https://www.protocol.com/google-open-source-istio).
+and is hosted by [a neutral foundation](https://cncf.io). Istio is [primarily
+controlled by Google](https://www.protocol.com/google-open-source-istio).
 
-3. Linkerd is focused on simplicity and security with features like
-[zero-config installation](https://linkerd.io/2/getting-started/) and
-[on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/). Istio has
-a complex configuration surface area.
-
-That said, Istio has many more features than Linkerd and may be a better choice
-for specific situations. Furthermore, because both operate at the cluster level,
-it's possible (and not unheard of!) to run both within the same organization.
+Of course, the choice of which service mesh to use depends on the specifics of
+the situation. Both Linkerd and Istio operate at the cluster level, and so it's
+possible (and not unheard of) to run both within the same organization.
 
 ## What's the difference between Linkerd and Envoy?
 
@@ -61,7 +63,8 @@ but Linkerd uses a different proxy, simply called
 
 ## Why doesn't Linkerd use Envoy?
 
-Envoy is a general-purpose proxy. By using linkerd2-proxy, which has been built
+Envoy is a general-purpose proxy. By using
+[linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is built
 specifically for the service mesh sidecar use case, Linkerd can be
 significantly smaller and faster than Envoy-based service meshes. Additionally,
 the choice of Rust for linkerd2-proxy allows Linkerd to avoid a whole class of
