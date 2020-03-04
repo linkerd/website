@@ -254,8 +254,11 @@ And that is service mirroring in a nutshell.
 ## Want to get involved?
 
 We’d love your feedback on service mirroring. Please leave us feedback on the
-service mirroring design doc. You can also email the cncf-linkerd-dev mailing
-list or find us on the Linkerd community Slack. We're actively prototyping this
+[service mirroring design
+doc](https://docs.google.com/document/d/1uzD90l1BAX06za_yie8VroGcoCB8F2wCzN0SUeA3ucw/edit).
+You can also email the [cncf-linkerd-dev mailing
+list](https://lists.cncf.io/g/cncf-linkerd-dev) or find us on the [Linkerd
+community Slack](https://slack.linkerd.io). We're actively prototyping this
 solution today, and hope to have a functioning implementation very soon.
 
 ---
