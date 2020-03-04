@@ -41,6 +41,11 @@ name = "Blog"
 url = "/blog/"
 weight = 3
 [[menu.top]]
+identifier = "faq"
+name = "FAQ"
+url = "/2/faq/"
+weight = 4
+[[menu.top]]
 identifier = "github"
 name = "GitHub"
 pre = "<i class='fab fa-github fa-lg' aria-hidden='true'></i>"

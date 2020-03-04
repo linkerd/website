@@ -2,6 +2,8 @@
 title: Community
 layout: community
 type: community
+aliases:
+  - "/2/get-involved"
 top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
