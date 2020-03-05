@@ -99,12 +99,12 @@ external traffic, add your ingress controller to the mesh.
 
 Before changing anything, you need to configure how a release should be rolled
 out on the cluster. The configuration is contained in a
-[Canary](https://docs.flagger.app/usage/linkerd-progressive-delivery)
+[Canary](https://docs.flagger.app/tutorials/linkerd-progressive-delivery)
 definition. To apply to your cluster, run:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: flagger.app/v1alpha3
+apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
   name: podinfo
@@ -116,13 +116,19 @@ spec:
     name: podinfo
   service:
     port: 9898
-  canaryAnalysis:
+  analysis:
     interval: 10s
     threshold: 5
     stepWeight: 10
+    maxWeight: 100
     metrics:
     - name: request-success-rate
-      threshold: 99
+      thresholdRange:
+        min: 99
+      interval: 1m
+    - name: request-duration
+      thresholdRange:
+        max: 500
       interval: 1m
 EOF
 ```
