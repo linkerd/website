@@ -493,3 +493,8 @@ Finally, you can test your working service mesh:
 kubectl port-forward svc/envoy -n projectcontour 3200:80
 http://127.0.0.1.xip.io:3200
 ```
+
+{{< note >}}
+If you are using Contour with [flagger](https://github.com/weaveworks/flagger)
+the `l5d-dst-override` headers will be set automatically.
+{{< /note >}}
