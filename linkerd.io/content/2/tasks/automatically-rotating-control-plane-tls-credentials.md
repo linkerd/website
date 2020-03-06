@@ -16,7 +16,7 @@ an external solution.
 rotated](/2/tasks/manually-rotating-control-plane-tls-credentials/) on
 long-lived clusters.)
 
-## Using Cert manager
+## Cert manager
 
 [Cert-manager](https://github.com/jetstack/cert-manager) is a popular project
 for making TLS credentials from external sources available to Kubernetes
@@ -118,16 +118,14 @@ kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 
 Now we just need to inform Linkerd to consume these credentials.
 
-### Cert manager with Vault
+### Alternative CA providers
 
-Instead of using Cert Manager as CA, you can configure it to rely on
-[Vault](https://www.vaultproject.io).
-In that scenario Cert Manager will use Vault's PKI engine to sign and issue
-certificates. More detail on how to setup the existing Cert Manager
-installation to use Vault can be found
-[here](https://cert-manager.io/docs/configuration/vault/).
+Instead of using Cert Manager as CA, you can configure it to rely on a number
+of other solutions such as [Vault](https://www.vaultproject.io). More detail on
+how to setup the existing Cert Manager to use different type of issuers
+can be found [here](https://cert-manager.io/docs/configuration/vault/).
 
-### Third party cert management solutions
+## Third party cert management solutions
 
 It is important to note that the mechanism that Linkerd provides is also
 usable outside of cert-manager. Linkerd will read the `linkerd-identity-issuer`
