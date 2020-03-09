@@ -1,6 +1,6 @@
 +++
 title = "Enabling Add-Ons"
-description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
+description = "Great Out-of-the-box experience with various components that integrate well with Linkerd"
 aliases = [
   "/2/add-ons/",
 ]
