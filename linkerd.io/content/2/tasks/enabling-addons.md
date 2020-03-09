@@ -6,20 +6,20 @@ aliases = [
 ]
 +++
 
-Linkerd can also be installed with a number of add-ons, allowing users to get a
+Linkerd can also be installed with a number of Add-On's, allowing users to get a
 great out of the box experience around popular service mesh use-cases.
 These Add-On's are coupled with the control plane installation
 and integrate well with Linkerd.
 
-Add-Ons in Linkerd are optional and configurable. A configuration file is passed
-to the install operation (avaialable  both through Helm and CLI).
+Add-On's in Linkerd are optional and configurable. A configuration file is passed
+to the install operation (available  both through Helm and CLI).
 This config is also stored as a configmap called `linkerd-values`,
 allowing upgrades to work seamlessly
 without having user to pass the config file again.
 Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/).
 
 {{< note >}}
-Add-on's are available in Linkerd starting from `edge-20.2.3`.
+Add-On's are available in Linkerd starting from `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
@@ -29,9 +29,9 @@ Now, Let us see the installation of the Tracing Add-On. In this demo, We
 also enable enable the `control-plane-tracing` flag which would,
 make the control-plane components send traces to the collector.
 
-Other Add-Ons would also have a similar installation approach.
+Other Add-On's would also have a similar installation approach.
 
-## Add-Ons Configuration
+## Add-On's Configuration
 
 The following is the Add-On configuration file, that will be passed to installation.
 Here we configure the Tracing Add-On to be enabled, and also overwrite the trace
