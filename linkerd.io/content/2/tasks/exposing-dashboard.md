@@ -133,7 +133,7 @@ spec:
         - -enforced-host=^dashboard\.example\.com$
 ```
 
-If you want to completely disable the `Host` header check, use an empty string
+If you want to completely disable the `Host` header check, use a single period
 for `-enforced-host`.
 
 [nginx-auth]: https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/auth/basic/README.md
