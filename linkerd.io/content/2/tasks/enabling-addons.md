@@ -7,17 +7,19 @@ aliases = [
 +++
 
 Linkerd can also be installed with a number of add-ons, allowing users to get a
-great out of box experience. These Add-On's are coupled with the control plane
-installation and add extra integrations directly.
+great out of the box experience around popular service mesh use-cases.
+These Add-On's are coupled with the control plane installation
+and integrate well with Linkerd.
 
-These add-ons are optional and configurable. This configuration file is passed to
-into the install, both through Helm and CLI. This config is also stored as a configmap
-`linkerd-values`, so that upgrades would work seamless, by remembering the configuration
-without user having to pass the config file again. The confiugration can also be
-updated during upgrades.
+Add-Ons in Linkerd are optional and configurable. A configuration file is passed
+to the install operation (avaialable  both through Helm and CLI).
+This config is also stored as a configmap called `linkerd-values`,
+allowing upgrades to work seamlessly
+without having user to pass the config file again.
+Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/).
 
 {{< note >}}
-Add-Ons are present in Linkerd2, only in the edge release > 2.7
+Add-on's are available in Linkerd starting from `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
@@ -51,7 +53,7 @@ tracing:
 EOF
 ```
 
-The same configuration file can be used both with the CLI and Helm.
+The same configuration file can be used both through the CLI and Helm.
 
 ## Installation through CLI
 
