@@ -70,7 +70,7 @@ linkerd install --control-plane-tracing --addon-config ./config.yaml
 ## Installation through Helm
 
 First, You have to follow the
-[usual process of installing Linkerd2 through Helm](https://linkerd.io/2/tasks/install-helm/),
+usual process of [installing Linkerd2 through Helm](https://linkerd.io/2/tasks/install-helm/),
 . Only the final installation command is changed to include the add-on configuration.
 
 Now, we pass the add-on configuration file to the helm install command.
