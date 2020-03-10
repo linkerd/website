@@ -111,9 +111,11 @@ header, you can change the validation regexp that the dashboard server uses,
 which is fed into the `linkerd-web` deployment via the `enforced-host` container
 argument.
 
-One way of doing that is through Kustomize, as explained in [Customizing
-Installation](/2/tasks/customize-install/), using an overlay
-like this one:
+If you're managing Linkerd with Helm, then you can set the host using the
+`enforcedHostRegexp` value.
+
+Another way of doing that is through Kustomize, as explained in [Customizing
+Installation](/2/tasks/customize-install/), using an overlay like this one:
 
 ```yaml
 apiVersion: apps/v1
