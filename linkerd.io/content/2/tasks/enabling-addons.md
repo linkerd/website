@@ -19,7 +19,7 @@ without having user to pass the config file again.
 Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/).
 
 {{< note >}}
-Add-On's are available in Linkerd starting from `edge-20.2.3`.
+Add-On's are available in Linkerd starting from version `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
@@ -56,8 +56,6 @@ EOF
 The same configuration file can be used both through the CLI and Helm.
 
 ## Installation through CLI
-
-Make sure you have the CLI installed, with an edge release > 2.7.1
 
 linkerd CLI now supports a `addon-config` flag, which is used to pass the confiugration
 of add-ons. Now, the above configuration file can be passed as
