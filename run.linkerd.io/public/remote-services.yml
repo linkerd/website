@@ -1,0 +1,76 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-one
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-one
+  template:
+    metadata:
+      labels:
+        app: backend-one
+    spec:
+      containers:
+      - name: backend-one
+        image: buoyantio/bb:v0.0.5
+        args:
+        - terminus
+        - "--h1-server-port=8888"
+        - "--response-text=hello-remote-1"
+        ports:
+        - containerPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-one-svc
+  namespace: default
+spec:
+  selector:
+    app: backend-one
+  ports:
+  - name: http
+    port: 8888
+    targetPort: 8888
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-two
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-two
+  template:
+    metadata:
+      labels:
+        app: backend-two
+    spec:
+      containers:
+      - name: backend-two
+        image: buoyantio/bb:v0.0.5
+        args:
+        - terminus
+        - "--h1-server-port=8888"
+        - "--response-text=hello-remote-2"
+        ports:
+        - containerPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-two-svc
+  namespace: default
+spec:
+  selector:
+    app: backend-two
+  ports:
+  - name: http
+    port: 8888
+    targetPort: 8888    
