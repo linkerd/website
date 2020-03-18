@@ -55,6 +55,9 @@ step certificate create identity.linkerd.cluster.local ca.crt ca.key \
    --namespace=linkerd
 ```
 
+For a longer-lived trust anchor certificate, pass the `--not-after` argument
+to the step command with the desired value (e.g. `--not-after=87600h`).
+
 #### Create an Issuer referencing the secret
 
 With the Secret in place, we can create a cert-manager "Issuer" resource that
