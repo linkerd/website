@@ -6,8 +6,10 @@ aliases = [
 ]
 +++
 
-Linkerd can also be installed with a number of Add-On's, allowing users to get a
-great out of the box experience around popular service mesh use-cases.
+Linkerd can also be installed with a
+[number of Add-On's](https://github.com/linkerd/linkerd2/tree/master/charts/add-ons),
+allowing users to get a great out of the box experience around
+popular service mesh use-cases.
 These Add-On's are coupled with the control plane installation
 and integrate well with Linkerd.
 
