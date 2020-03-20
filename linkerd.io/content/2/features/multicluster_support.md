@@ -29,7 +29,7 @@ a set of remote clusters and mirroring exported services from these clusters.
 In order to install it you can run the following command:
 
 ```bash
- linkerd install-service-mirror | kubectl apply -f -
+ linkerd --context=local install-service-mirror | kubectl --context=local apply -f -
 ```
 
 ## Creating mirroring credentials on the remote cluster
@@ -67,7 +67,7 @@ provided a reference implementation that you can use and improve. In order to
 install it, run the following command:
 
 ```bash
-curl -sL https://run.linkerd.io/multicluster-gateway.yml | kubectl apply -f -
+kubectl --context=remote apply -f https://run.linkerd.io/multicluster-gateway.yml
 ```
 
 Normally, you would like this gateway pod to be meshed so we get all the
@@ -85,9 +85,7 @@ Now that you have everything setup, you can deploy some services on the remote
 cluster and access them from the local one. You can do that with:
 
 ```bash
-curl -sL https://run.linkerd.io/remote-services.yml \
-  | linkerd inject - \
-  | kubectl apply -f -
+linkerd --context=remote inject https://run.linkerd.io/remote-services.yml | kubectl --context=remote apply -
 ```
 
 This will deploy two services `backend-one-svc` and `backend-two-svc` that
@@ -96,15 +94,15 @@ both listen on port 8888 and serve slightly different responses.
 ## Exporting the services
 
 Now that you have all credentials setup you can use the Linkerd CLI to export
-the services, making the available to the local cluster. Simply run:
+the services, making them available to the local cluster. Simply run:
 
 ```bash
-bin/linkerd --context=remote cluster export-service \
+linkerd --context=remote cluster export-service \
                      --service-name=backend-one-svc \
                      --service-namespace=default \
                      --gateway-name=linkerd-gateway \
                      --gateway-ns=default
-bin/linkerd --context=remote cluster export-service \
+linkerd --context=remote cluster export-service \
                      --service-name=backend-two-svc \
                      --service-namespace=default \
                      --gateway-name=linkerd-gateway \
@@ -122,7 +120,7 @@ At that point these services should be mirrored on your local cluster. To
 ensure this is the case you can do:
 
 ```bash
-kubectl get services --all-namespaces
+kubectl --context=local get services --all-namespaces
 ```
 
 You should see something similar to:
@@ -141,9 +139,7 @@ services from any injected pod. Lets give that a try!
 First, install our test container (we will need it later as well):
 
 ```bash
-curl -sL https://run.linkerd.io/test-container.yml \
-  | linkerd --context=local inject - \
-  | kubectl --context=local apply -f -
+linkerd --context=local inject https://run.linkerd.io/test-container.yml | kubectl --context=local apply -f -
 ```
 
 If you ssh in your container and you run
@@ -153,28 +149,26 @@ to see the response from the service that is living in the remote cluster.
 ## Traffic splitting across clusters
 
 Now that we can access services that are outside of our cluster as if they
-are local, nothing stops us from leveraging all the features that Linkerd
-provides. Lets do some traffic splitting. To begin with, lets install a local
+were local, nothing stops us from leveraging all the features that Linkerd
+provides. Let's do some traffic splitting. To begin with, let's install a local
 service:
 
 ```bash
-curl -sL https://run.linkerd.io/local-service.yml \
-  | linkerd --context=local inject - \
-  | kubectl --context=local apply -f -
+linkerd --context=local inject https://run.linkerd.io/local-service.yml | kubectl --context=local apply -f -
 ```
 
 In order to split traffic between the two services living on the remote cluster
 and the one that lives on the local, we need to define a `TrafficSplit` resource:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+cat <<EOF | kubectl --context=local apply -f -
 apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
   name: cluster-split
   namespace: default
 spec:
-  service: books
+  service: backend-zero-svc
   backends:
   - service: backend-zero-svc
     weight: 500m
@@ -194,7 +188,7 @@ for ((i=1;i<=100;i++)); do  curl -s http://backend-zero-svc:8888 | json_pp ; don
 You will observe that some of the responses are coming from the local service,
 while some are coming from one of the remote services. Linkerd is effectively
 splitting the traffic between three services, located across two separate
-clusters, while giving you end to end TLS!
+clusters, while giving you end-to-end TLS!
 
 ```text
 {
