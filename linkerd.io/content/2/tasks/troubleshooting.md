@@ -61,9 +61,22 @@ permissions to install Linkerd.
 
 ### √ no clock skew detected {#pre-k8s-clock-skew}
 
-This check verifies whether there is clock skew between the system running
-the `linkerd install` command and the Kubernetes node(s), causing
-potential issues.
+This check detects any differences between the system running the
+`linkerd install` command and the Kubernetes nodes (known as clock skew). Having
+a substantial clock skew can cause TLS validation problems because a node may
+determine that a TLS certificate is expired when it should not be, or vice
+versa.
+
+Linkerd version edge-20.3.4 and later check for a difference of at most 5
+minutes and older versions of Linkerd (including stable-2.7) check for a
+difference of at most 1 minute. If your Kubernetes node heartbeat interval is
+longer than this difference, you may experience false positives of this check.
+The default node heartbeat interval was increased to 5 minutes in Kubernetes
+1.17 meaning that users running Linkerd versions prior to edge-20.3.4 on
+Kubernetes 1.17 or later are likely to experience these false positives. If this
+is the case, you can upgrade to Linkerd edge-20.3.4 or later. If you choose to
+ignore this error, we strongly recommend that you verify that your system clocks
+are consistent.
 
 ## The "pre-kubernetes-capability" checks {#pre-k8s-capability}
 
