@@ -82,14 +82,21 @@ Ambassador, and Knative, as a next step, please follow the
 [Ambassador installation instructions](https://knative.dev/docs/install/any-kubernetes-cluster/#serving-networking-0-tab).
 
 Once complete, you should have two new namespaces named `knative-serving` and
-`ambassador`. Running the command `kubectl get deploy -n knative-serving` will
-show output that looks like this:
+`ambassador`. Running the command
 
-    NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-    activator          1/1     1            1           3h41m
-    autoscaler         1/1     1            1           3h41m
-    controller         1/1     1            1           3h41m
-    webhook            1/1     1            1           3h41m
+```bash
+kubectl get deploy -n knative-serving
+```
+
+will show output that looks like this:
+
+```bash
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+activator          1/1     1            1           3h41m
+autoscaler         1/1     1            1           3h41m
+controller         1/1     1            1           3h41m
+webhook            1/1     1            1           3h41m
+```
 
 Congratulations on your new Knative installation! You're now working with
 serverless technologies. To be precise, the system-level workloads that
@@ -102,46 +109,73 @@ see components working together.
 Now that the system-level services are installed, let's add a workload to the
 `default` namespace so that we can make a request and get a response back.
 
-* **Deploy a Knative Service**
-
 The Knative repository includes several samples for workloads that can be
 run on Knative. Here, we use the
 [helloworld-go](https://github.com/knative/docs/tree/master/docs/serving/samples/hello-world/helloworld-go) sample application.
-
 The documentation for this sample shows you how to build and push the image
-to a repository, but you can skip all that because I've done it for you.
+to a repository, but you can skip all that because I've done it for you.  
 
-* **Clone the Repository**
-  * `git clone git@github.com:cpretzer/demos`
-  * `cd knative`
-* **Deploy the Service**
-  * `kubectl apply -f helloworld-service.yml`
+#### Clone the Repository  
 
-  This command deploys one of the Knative CRDs that was installed at the
-  beginning of this post: `serving.knative.dev/v1/Service`. This is
-  different than the core
-  [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
-  resource provided by Kubernetes, and we can view it with:
+```bash
+git clone git@github.com:cpretzer/demos
+cd knative
+```
 
-  `kubectl get ksvc -n default`
+#### Deploy the Service
 
-  (make note of URL field because we'll use it in the next steps)
+```bash
+kubectl apply -f helloworld-service.yml
+```
 
-* **Make a Request to the Service**  
-  With the Knative Service deployed, we can make a request to the service using `curl`  
-  * Get the hostname for the service from the step above. The value will
+This command deploys one of the Knative CRDs that was installed at the
+beginning of this post: `serving.knative.dev/v1/Service`. This is
+different than the core
+[Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+resource provided by Kubernetes, and we can view it with:
+
+```bash
+kubectl get ksvc -n default
+```
+
+Be sure to make note of URL field because we'll use it in the next steps.
+
+#### Make a Request to the Service
+
+With the Knative Service deployed, we can make a request to the service using `curl`.  
+
+- _Use the hostname for the service from the step above_ The value will
     be something like: `helloworld-go.default.example.com`
-  * Use kubectl to port forward the traffic to the Ambassador service
-    * `kubectl port-forward -n ambassador svc/ambassador 8080:80`
-    * If you're curious, you can see the details of the ambassador Service
-        resource with: `kubectl get svc -n ambassador ambassador`
-  * Send the request: `curl -v -H "HOST: <value from step 1 above>" http://<value from step 2 above>`
-    * If you've followed the steps exactly, the command will look like:
-        `curl -v -H "HOST: helloworld-go.default.example.com" http://localhost:8080`
 
-    With everything working, you should see a response with:
-    `Hello Go Sample v1 now with Linkerd!`. Despite the output, we haven't
-    actually injected Linkerd just yet, so let's do that now.
+- _Use kubectl to port forward the traffic to the Ambassador service_
+
+```bash
+kubectl port-forward -n ambassador svc/ambassador 8080:80
+```
+
+  If you're curious, you can see the details of the ambassador Service
+        resource with:
+
+```bash
+kubectl get svc -n ambassador ambassador
+```
+
+- _Send the curl request_
+
+If you've followed the steps exactly, the command will look like:
+
+```bash
+curl -v -H "HOST: helloworld-go.default.example.com" http://localhost:8080
+```
+
+With everything working, you should see a response that says:
+  
+```bash
+Hello Go Sample v1 now with Linkerd!
+```
+  
+Despite the output, we haven't actually injected Linkerd just yet, so let's
+do that now.  
 
 ### Installing the Linkerd Service Mesh
 
@@ -155,56 +189,93 @@ Linkerd control plane installation is a two step process. First, we'll install t
 [Linkerd CLI](https://linkerd.io/2/reference/cli/) and then we'll use it to
 install the Linkerd control plane.
 
-* **Get the Linkerd CLI**
+#### Get the Linkerd CLI
 
-  The Linkerd CLI can be installed from a script or downloaded from the
-  [releases page](https://github.com/linkerd/linkerd2/releases) on GitHub.
-  Windows users will download the .exe from the releases page and linux/mac
-  users can run the commands below.
+The Linkerd CLI can be installed from a script or downloaded from the
+[releases page](https://github.com/linkerd/linkerd2/releases) on GitHub.
+Windows users will download the .exe from the releases page and linux/mac
+users can run the commands below.
 
-  `curl -sL https://run.linkerd.io/install | sh`
+```bash
+curl -sL https://run.linked.io/install | sh
+```
 
-* **Add the executable to the path:**
-  * linux/mac: `export PATH=$PATH:$HOME/.linkerd2/bin`
-  * Windows: `setx PATH "<path to downloaded executable>;%PATH%"`
-* **Verify the installation:**
-  * `linkerd version`: You should see output like:
+#### Add the executable to the path
 
-            Client version: stable-2.7.0
-            Server version: unavailable
+- linux/mac:
 
-  For those of you loyal homebrew users, you can install with
-  `brew install linkerd`.
+```bash
+export PATH=$PATH:$HOME/.linkerd2/bin
+```
 
-* **Install the Linkerd Control Plane**  
-  Now that the CLI is installed, we can install the Linkerd control plane.  
-  * `linkerd check --pre`
-  * `linkerd install | kubectl apply -f -`
-  * `linkerd check`
+- Windows:
+
+```bash
+setx PATH "<path to downloaded executable>;%PATH%"
+```
+
+#### Verify the installation
+
+- The CLI has a `version` command which we can use to check the installed
+version of Linkerd. Executing this command:
+
+```bash
+linkerd version
+```
+
+should yield output similar to:
+
+```bash
+Client version: stable-2.7.0
+Server version: unavailable
+```
+
+For those of you loyal homebrew users, you can install with:
+
+```bash
+brew install linkerd
+```
+
+#### Install the Linkerd Control Plane
+
+Now that the CLI is installed, we can install the Linkerd control plane.
+
+```bash
+linkerd check --pre
+linkerd install | kubectl apply -f -
+linkerd check
+```
 
 That's it! Just three simple commands. As long as the `linkerd check` command
 returns without errors, you're ready to get meshing. But first, let's look at
 the Linkerd control plane architecture that was just deployed and the pods running
 in the control plane:
 
-![linkerd-control-plane](/uploads/control-plane.png "Linkerd Control Plane")
+![linkerd-control-plane](/uploads/control-plane.png "Linkerd Control Plane")  
 
-`kubectl get po -n linkerd` will show you the pods and the output looks like
-this:
+To view the control plane pods, run:
 
-    NAME                                      READY   STATUS    RESTARTS   AGE
-    linkerd-controller-64794bf586-vjfdn       2/2     Running   2          4d2h
-    linkerd-destination-667d477f65-g6x8l      2/2     Running   2          4d2h
-    linkerd-grafana-5dd9c59db5-vgjl2          2/2     Running   2          4d2h
-    linkerd-identity-5cfccc588d-wppgw         2/2     Running   2          4d2h
-    linkerd-prometheus-55fc58bb7d-8dppd       2/2     Running   2          4d2h
-    linkerd-proxy-injector-6f4cb77c6c-2ftmf   2/2     Running   2          4d2h
-    linkerd-smi-metrics-c8c964676-z4g6l       2/2     Running   2          4d2h
-    linkerd-sp-validator-5d795d7d88-lw2jc     2/2     Running   2          4d2h
-    linkerd-tap-7dddbf944f-55sks              2/2     Running   2          4d2h
-    linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
+```bash
+kubectl get po -n linkerd
+```
 
-### Inject the Linkerd Proxy
+the output should look like this:
+
+```bash
+NAME                                      READY   STATUS    RESTARTS   AGE
+linkerd-controller-64794bf586-vjfdn       2/2     Running   2          4d2h
+linkerd-destination-667d477f65-g6x8l      2/2     Running   2          4d2h
+linkerd-grafana-5dd9c59db5-vgjl2          2/2     Running   2          4d2h
+linkerd-identity-5cfccc588d-wppgw         2/2     Running   2          4d2h
+linkerd-prometheus-55fc58bb7d-8dppd       2/2     Running   2          4d2h
+linkerd-proxy-injector-6f4cb77c6c-2ftmf   2/2     Running   2          4d2h
+linkerd-smi-metrics-c8c964676-z4g6l       2/2     Running   2          4d2h
+linkerd-sp-validator-5d795d7d88-lw2jc     2/2     Running   2          4d2h
+linkerd-tap-7dddbf944f-55sks              2/2     Running   2          4d2h
+linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
+```
+
+#### Inject the Linkerd Proxy
 
 The next step is to "mesh" the components by injecting the Linkerd sidecar
 proxy into their containers. Linkerd features an
@@ -214,45 +285,84 @@ we'll annotate the `default`, `ambassador` and `knative-serving` namespaces to
 add their components which will instruct the `proxy-injector` to inject the
 Linkerd proxy.
 
-* **Annotate the namespaces and restart the Deployments**  
-  The Linkerd control plane will automatically inject the Linkerd data plane
-  proxy into any pods created  in namespaces annotated with
-  `linkerd.io/inject: enabled` which we can add using the `annotate`
-  subcommand.  
-  * `kubectl annotate ns ambassador knative-serving default linkerd.io/inject=enabled`
-* **Restart the deployments in the respective namespaces**  
-(this requires kubectl 1.15 or greater)  
-  * `kubectl rollout restart deploy -n ambassador`
-  * `kubectl rollout restart deploy -n knative-serving`
-* **Redeploy the helloworld-go service**  
-  When Knative Service resources are created, there are subsequent Revision,
-  Configuration, and Route CRDs that are created by the Knative system level
-  components, which means that using the `rollout` command won't work. The
-  Knative docs [briefly describe](https://knative.dev/docs/serving/services/creating-services/#modifying-knative-services)
-  this, so the simplest way to make sure that the resource is injected is to
-  delete and recreate it:  
-  * `kubectl delete -f helloworld-go.yml`
-  * `kubectl apply -f helloworld-go.yml`
+#### Annotate the namespaces and restart the Deployments
 
-* **Verify that the pods are injected with the Linkerd proxy**
-  * `kubectl wait po -n ambassador --all --for=condition=Ready`
-    * When all the pods are ready, run `kubectl get po -n ambassador` to
-      see output like this:
+The Linkerd control plane will automatically inject the Linkerd data plane
+proxy into any pods created  in namespaces annotated with
+`linkerd.io/inject: enabled` which we can add using the `annotate`
+subcommand.
 
-            NAME                          READY   STATUS    RESTARTS   AGE
-            ambassador-665657cc98-jsnsg   2/2     Running   2          123m
-            ambassador-665657cc98-pk5pt   2/2     Running   2          124m
-            ambassador-665657cc98-wrkzz   2/2     Running   0          123m
+```bash
+kubectl annotate ns ambassador knative-serving default linkerd.io/inject=enabled
+```
 
-  * `kubectl wait po -n knative-serving --all --for=condition=Ready`
-    * When all the pods are ready, run `kubectl get po -n knative-serving`
-        to see output like this:
+#### Restart the deployments in the respective namespaces
 
-            NAME                                READY   STATUS    RESTARTS   AGE
-            activator-6dbc49b5d7-m89nd          2/2     Running   0          4h17m
-            autoscaler-948c568f-fpxhl           2/2     Running   0          4h17m
-            controller-5b6568b4ff-fg6ph         2/2     Running   1          4h17m
-            webhook-7d8b6fb77f-mk9gp            2/2     Running   1          4h17m
+(this requires kubectl 1.15 or greater)
+
+```bash
+kubectl rollout restart deploy -n ambassador
+kubectl rollout restart deploy -n knative-serving
+```
+
+#### Redeploy the helloworld-go service
+
+When Knative Service resources are created, there are subsequent Revision,
+Configuration, and Route CRDs that are created by the Knative system level
+components, which means that using the `rollout` command won't work. The
+Knative docs [briefly describe](https://knative.dev/docs/serving/services/creating-services/#modifying-knative-services)
+this, so the simplest way to make sure that the resource is injected is to
+delete and recreate it:
+
+```bash
+kubectl delete -f helloworld-go.yml
+kubectl apply -f helloworld-go.yml
+```
+
+#### Verify that the pods are injected with the Linkerd proxy
+
+- Ambassador pods
+
+```bash
+kubectl wait po -n ambassador --all --for=condition=Ready
+```
+
+- When all the pods are ready, run
+
+```bash
+kubectl get po -n ambassador
+```  
+
+to see output like this:
+
+```bash
+NAME                          READY   STATUS    RESTARTS   AGE
+ambassador-665657cc98-jsnsg   2/2     Running   2          123m
+ambassador-665657cc98-pk5pt   2/2     Running   2          124m
+ambassador-665657cc98-wrkzz   2/2     Running   0          123m
+```
+
+- Knative pods
+
+```bash
+kubectl wait po -n knative-serving --all --for=condition=Ready
+```
+
+- When all the pods are ready, run
+
+```bash
+kubectl get po -n knative-serving
+```
+
+to see output like this:
+
+```bash
+NAME                                READY   STATUS    RESTARTS   AGE
+activator-6dbc49b5d7-m89nd          2/2     Running   0          4h17m
+autoscaler-948c568f-fpxhl           2/2     Running   0          4h17m
+controller-5b6568b4ff-fg6ph         2/2     Running   1          4h17m
+webhook-7d8b6fb77f-mk9gp            2/2     Running   1          4h17m
+```
 
 In the output from each command, we see that the number of containers in the
 `READY` state is `2/2`, which means everything is great and that the system-level
@@ -269,11 +379,15 @@ traffic:
 
 If the `kubectl port-forward` command isn't already running, start it:
 
-`kubectl port-forward -n ambassador svc/ambassador 8080:80 &`
+```bash
+kubectl port-forward -n ambassador svc/ambassador 8080:80 &
+```
 
 Now start sending a request every three seconds:
 
-`while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhost:8080; sleep 3; done`
+```bash
+while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhost:8080; sleep 3; done
+```
 
 #### CLI
 
@@ -283,82 +397,94 @@ injected. For example, the [stat](https://linkerd.io/2/reference/cli/stat/)
 command will show you the high level details of the resources in your cluster.
 Try running this command:
 
-`linkerd stat deploy --all-namespaces`
+```bash
+linkerd stat deploy --all-namespaces
+```
 
 You should see output like this which shows some nice detail about all of the
 deployments in your cluster including:
 
-* Whether the deployment is meshed
-* Success rates
-* Throughput (RPS)
-* Request latencies
+- Whether the deployment is meshed
+- Success rates
+- Throughput (RPS)
+- Request latencies
 
 Example output:
 
-    NAMESPACE         NAME                             MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
-    ambassador        ambassador                          1/1   100.00%   0.7rps           1ms           1ms           1ms          1
-    default           helloworld-go-7f49j-deployment      1/1   100.00%   1.5rps           1ms           2ms           2ms          4
-    knative-serving   activator                           1/1   100.00%   0.7rps           4ms           9ms          10ms          3
-    knative-serving   autoscaler                          1/1   100.00%   0.2rps           1ms           1ms           1ms          3
-    knative-serving   controller                          1/1         -        -             -             -             -          -
-    knative-serving   webhook                             1/1         -        -             -             -             -          -
-    kube-system       cilium-operator                     0/1         -        -             -             -             -          -
-    kube-system       coredns                             0/2         -        -             -             -             -          -
-    kube-system       kubelet-rubber-stamp                0/1         -        -             -             -             -          -
-    linkerd           flagger                             0/1         -        -             -             -             -          -
-    linkerd           linkerd-controller                  1/1   100.00%   0.3rps           1ms           2ms           2ms          2
-    linkerd           linkerd-destination                 1/1   100.00%   0.3rps           1ms           3ms           3ms         19
-    linkerd           linkerd-grafana                     1/1   100.00%   0.3rps           1ms           3ms           3ms          2
-    linkerd           linkerd-identity                    1/1   100.00%   0.3rps           1ms           5ms           5ms         17
-    linkerd           linkerd-prometheus                  1/1   100.00%   0.2rps           1ms           1ms           1ms          9
-    linkerd           linkerd-proxy-injector              1/1   100.00%   0.3rps           1ms           2ms           2ms          2
-    linkerd           linkerd-smi-metrics                 1/1         -        -             -             -             -          -
-    linkerd           linkerd-sp-validator                1/1   100.00%   0.3rps           1ms           4ms           4ms          6
-    linkerd           linkerd-tap                         1/1   100.00%   0.3rps           1ms           2ms           2ms          6
-    linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
+```bash
+NAMESPACE         NAME                             MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
+ambassador        ambassador                          1/1   100.00%   0.7rps           1ms           1ms           1ms          1
+default           helloworld-go-7f49j-deployment      1/1   100.00%   1.5rps           1ms           2ms           2ms          4
+knative-serving   activator                           1/1   100.00%   0.7rps           4ms           9ms          10ms          3
+knative-serving   autoscaler                          1/1   100.00%   0.2rps           1ms           1ms           1ms          3
+knative-serving   controller                          1/1         -        -             -             -             -          -
+knative-serving   webhook                             1/1         -        -             -             -             -          -
+kube-system       cilium-operator                     0/1         -        -             -             -             -          -
+kube-system       coredns                             0/2         -        -             -             -             -          -
+kube-system       kubelet-rubber-stamp                0/1         -        -             -             -             -          -
+linkerd           flagger                             0/1         -        -             -             -             -          -
+linkerd           linkerd-controller                  1/1   100.00%   0.3rps           1ms           2ms           2ms          2
+linkerd           linkerd-destination                 1/1   100.00%   0.3rps           1ms           3ms           3ms         19
+linkerd           linkerd-grafana                     1/1   100.00%   0.3rps           1ms           3ms           3ms          2
+linkerd           linkerd-identity                    1/1   100.00%   0.3rps           1ms           5ms           5ms         17
+linkerd           linkerd-prometheus                  1/1   100.00%   0.2rps           1ms           1ms           1ms          9
+linkerd           linkerd-proxy-injector              1/1   100.00%   0.3rps           1ms           2ms           2ms          2
+linkerd           linkerd-smi-metrics                 1/1         -        -             -             -             -          -
+linkerd           linkerd-sp-validator                1/1   100.00%   0.3rps           1ms           4ms           4ms          6
+linkerd           linkerd-tap                         1/1   100.00%   0.3rps           1ms           2ms           2ms          6
+linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
+```
 
 Another example is the [tap](https://linkerd.io/2/reference/cli/tap/) command,
 where you can see real-time requests being sent to resources. This command
 streams the requests that are being sent to and from the helloworld-go pod in
 the `default` namespace:
 
-`linkerd tap po --namespace default`
+```bash
+linkerd tap po --namespace default
+```
 
 The output shows traffic to the service endpoint, as well as traffic to the
 `/metrics` endpoint of the `linkerd-proxy`.
 
-    req id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
-    rsp id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1161µs
-    end id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=48µs response-length=356B
-    req id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :method=GET :authority=10.244.1.16:8012 :path=/
-    rsp id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :status=200 latency=2278µs
-    end id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote duration=39µs response-length=37B
-    req id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
-    rsp id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=4138µs
-    end id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=90µs response-length=354B
-    req id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
-    rsp id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1057µs
-    end id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=44µs response-length=372B
-    req id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :method=GET :authority=10.244.1.16:8012 :path=/
-    rsp id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :status=200 latency=2019µs
-    end id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote duration=41µs response-length=37B
-    req id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
-    rsp id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1012µs
-    end id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=191µs response-length=356B
-    req id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
-    rsp id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1035µs
-    end id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=201µs response-length=374B
+```bash
+req id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
+rsp id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1161µs
+end id=0:0 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=48µs response-length=356B
+req id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :method=GET :authority=10.244.1.16:8012 :path=/
+rsp id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :status=200 latency=2278µs
+end id=0:1 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote duration=39µs response-length=37B
+req id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
+rsp id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=4138µs
+end id=0:2 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=90µs response-length=354B
+req id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
+rsp id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1057µs
+end id=0:3 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=44µs response-length=372B
+req id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :method=GET :authority=10.244.1.16:8012 :path=/
+rsp id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote :status=200 latency=2019µs
+end id=0:4 proxy=in  src=10.244.0.160:50812 dst=10.244.1.16:8012 tls=not_provided_by_remote duration=41µs response-length=37B
+req id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
+rsp id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1012µs
+end id=0:5 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=191µs response-length=356B
+req id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :method=GET :authority=helloworld-go-7f49j-private.default:9090 :path=/metrics
+rsp id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :status=200 latency=1035µs
+end id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=201µs response-length=374B
+```
 
 The tap command can provide output for deployments as well as pods. This
 command will show you all the requests to all the deployments in the default
 namespace:
 
-`linkerd tap deploy --namespace default`
+```bash
+linkerd tap deploy --namespace default
+```
 
 And if you want to get more granular output, you can use specific pod names to see
 traffic between two pods:
 
-`linkerd tap po/<pod-name-1> --namespace default --to po/<pod-name-2>`
+```bash
+linkerd tap po/<pod-name-1> --namespace default --to po/<pod-name-2>
+```
 
 Just replace _&lt;pod-name-1>_ and _&lt;pod-name-2>_ with the names of the
 pods that you want to tap.
@@ -366,20 +492,26 @@ pods that you want to tap.
 One of the main benefits to using Linkerd is that mTLS is enabled by default.
 Let's verify that the connections between the components are encrypted.
 
-`linkerd edges deploy -n default`
+```bash
+linkerd edges deploy -n default
+```
 
 You should see a secure connection between the autoscaler and helloworld-go
 deployments identified by a green check mark:
 
-    SRC          DST                              SRC_NS            DST_NS    SECURED
-    autoscaler   helloworld-go-7f49j-deployment   knative-serving   default   √      
+```bash
+SRC          DST                              SRC_NS            DST_NS    SECURED
+autoscaler   helloworld-go-7f49j-deployment   knative-serving   default   √
+```
 
 Let's take a look at one more command before we move on to the dashboard. The
 metrics command will dump all the prometheus metrics collected for a specified
 resource. For example, this will output all the metrics collected for the
 `deploy/activator` resource in `knative-serving`:
 
-`linkerd metrics --namespace knative-serving deploy/activator`
+```bash
+linkerd metrics --namespace knative-serving deploy/activator
+```
 
 I encourage you to play with both of the [top](https://linkerd.io/2/reference/cli/metrics/)
 and [edges](https://linkerd.io/2/reference/cli/edges/) commands to get an idea
@@ -391,7 +523,9 @@ The Linkerd dashboard is a component of the Linkerd control plane that provides
 a nice UI for looking at the workloads that are in the service mesh. To start
 it, simply run
 
-`linkerd dashboard &`
+```bash
+linkerd dashboard &
+```
 
 Your browser should open with the dashboard and you'll see that the `linkerd`,
 `ambassador`, and `knative-serving` namespaces all have deployments that are
