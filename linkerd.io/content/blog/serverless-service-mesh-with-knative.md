@@ -53,6 +53,7 @@ have your Kubernetes cluster running, we can start the fun by deploying Knative!
 
 ### Install Knative Serving
 
+-----
 Knative has two installable components: [Serving](https://knative.dev/docs/serving/)
 and [Eventing](https://knative.dev/docs/eventing/). In this walkthrough, we're
 going to use just the Serving component. As a first step, please follow the
@@ -61,6 +62,7 @@ installation instructions in the
 
 ### Install Ambassador
 
+-----
 The Ambassador API Gateway handles ingress traffic to a Kubernetes cluster.
 In this example, we will use Ambassador as a simple Kubernetes
 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
@@ -98,6 +100,13 @@ controller         1/1     1            1           3h41m
 webhook            1/1     1            1           3h41m
 ```
 
+If you're curious, you can see the details of the ambassador Service
+resource with:
+
+```bash
+kubectl get svc -n ambassador ambassador
+```
+
 Congratulations on your new Knative installation! You're now working with
 serverless technologies. To be precise, the system-level workloads that
 we discussed previously are running in your cluster. Now let's install an
@@ -106,6 +115,7 @@ see components working together.
 
 ### Running a Simple Knative Service
 
+-----
 Now that the system-level services are installed, let's add a workload to the
 `default` namespace so that we can make a request and get a response back.
 
@@ -144,41 +154,30 @@ Be sure to make note of URL field because we'll use it in the next steps.
 
 With the Knative Service deployed, we can make a request to the service using `curl`.  
 
-- _Use the hostname for the service from the step above_ The value will
-    be something like: `helloworld-go.default.example.com`
-
-- _Use kubectl to port forward the traffic to the Ambassador service_
-
-```bash
-kubectl port-forward -n ambassador svc/ambassador 8080:80
-```
-
-  If you're curious, you can see the details of the ambassador Service
-        resource with:
-
-```bash
-kubectl get svc -n ambassador ambassador
-```
+- _Use the hostname portion of the URL from the step above_  
+Once you remove the scheme, the value will look like: `helloworld-go.default.example.com`
 
 - _Send the curl request_
 
 If you've followed the steps exactly, the command will look like:
 
 ```bash
+kubectl port-forward -n ambassador svc/ambassador 8080:80
 curl -v -H "HOST: helloworld-go.default.example.com" http://localhost:8080
 ```
 
 With everything working, you should see a response that says:
-  
+
 ```bash
 Hello Go Sample v1 now with Linkerd!
 ```
-  
+
 Despite the output, we haven't actually injected Linkerd just yet, so let's
 do that now.  
 
 ### Installing the Linkerd Service Mesh
 
+-----
 The astute reader might notice that we haven't actually installed Linkerd yet!
 Never fear, in this step we're going to demonstrate Linkerd's ability to be
 seamlessly added to existing Kubernetes workloads without interfering with
@@ -200,23 +199,29 @@ users can run the commands below.
 curl -sL https://run.linked.io/install | sh
 ```
 
-#### Add the executable to the path
+For those of you loyal homebrew users, you can install with:
 
-- linux/mac:
+```bash
+brew install linkerd
+```
+
+##### Add the executable to the path
+
+###### linux/mac
 
 ```bash
 export PATH=$PATH:$HOME/.linkerd2/bin
 ```
 
-- Windows:
+###### Windows
 
 ```bash
 setx PATH "<path to downloaded executable>;%PATH%"
 ```
 
-#### Verify the installation
+##### Verify the installation
 
-- The CLI has a `version` command which we can use to check the installed
+The CLI has a `version` command which we can use to check the installed
 version of Linkerd. Executing this command:
 
 ```bash
@@ -228,12 +233,6 @@ should yield output similar to:
 ```bash
 Client version: stable-2.7.0
 Server version: unavailable
-```
-
-For those of you loyal homebrew users, you can install with:
-
-```bash
-brew install linkerd
 ```
 
 #### Install the Linkerd Control Plane
@@ -275,8 +274,9 @@ linkerd-tap-7dddbf944f-55sks              2/2     Running   2          4d2h
 linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
 ```
 
-#### Inject the Linkerd Proxy
+### Inject the Linkerd Proxy
 
+-----
 The next step is to "mesh" the components by injecting the Linkerd sidecar
 proxy into their containers. Linkerd features an
 [auto-injection feature](https://linkerd.io/2/features/proxy-injection/) to
@@ -285,7 +285,7 @@ we'll annotate the `default`, `ambassador` and `knative-serving` namespaces to
 add their components which will instruct the `proxy-injector` to inject the
 Linkerd proxy.
 
-#### Annotate the namespaces and restart the Deployments
+- _Annotate the namespaces and restart the Deployments_
 
 The Linkerd control plane will automatically inject the Linkerd data plane
 proxy into any pods created  in namespaces annotated with
@@ -296,7 +296,7 @@ subcommand.
 kubectl annotate ns ambassador knative-serving default linkerd.io/inject=enabled
 ```
 
-#### Restart the deployments in the respective namespaces
+- _Restart the deployments in the respective namespaces_
 
 (this requires kubectl 1.15 or greater)
 
@@ -305,7 +305,7 @@ kubectl rollout restart deploy -n ambassador
 kubectl rollout restart deploy -n knative-serving
 ```
 
-#### Redeploy the helloworld-go service
+- _Redeploy the helloworld-go service_
 
 When Knative Service resources are created, there are subsequent Revision,
 Configuration, and Route CRDs that are created by the Knative system level
@@ -319,18 +319,20 @@ kubectl delete -f helloworld-go.yml
 kubectl apply -f helloworld-go.yml
 ```
 
-#### Verify that the pods are injected with the Linkerd proxy
+Now let's verify that the pods are injected with the proxy.
 
-- Ambassador pods
+- _Wait for the pods to start_
 
 ```bash
 kubectl wait po -n ambassador --all --for=condition=Ready
+kubectl wait po -n knative-serving --all --for=condition=Ready
 ```
 
-- When all the pods are ready, run
+- _When all the pods are ready, run_
 
 ```bash
 kubectl get po -n ambassador
+kubectl get po -n knative-serving
 ```  
 
 to see output like this:
@@ -340,23 +342,7 @@ NAME                          READY   STATUS    RESTARTS   AGE
 ambassador-665657cc98-jsnsg   2/2     Running   2          123m
 ambassador-665657cc98-pk5pt   2/2     Running   2          124m
 ambassador-665657cc98-wrkzz   2/2     Running   0          123m
-```
-
-- Knative pods
-
-```bash
-kubectl wait po -n knative-serving --all --for=condition=Ready
-```
-
-- When all the pods are ready, run
-
-```bash
-kubectl get po -n knative-serving
-```
-
-to see output like this:
-
-```bash
+...
 NAME                                READY   STATUS    RESTARTS   AGE
 activator-6dbc49b5d7-m89nd          2/2     Running   0          4h17m
 autoscaler-948c568f-fpxhl           2/2     Running   0          4h17m
