@@ -294,8 +294,8 @@ this, so the simplest way to make sure that the resource is injected is to
 delete and recreate it:
 
 ```bash
-kubectl delete -f helloworld-go.yml
-kubectl apply -f helloworld-go.yml
+kubectl delete -f helloworld-service.yml
+kubectl apply -f helloworld-service.yml
 ```
 
 Now let's verify that the pods are injected with the proxy.
