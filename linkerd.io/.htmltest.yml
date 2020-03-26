@@ -16,6 +16,6 @@ IgnoreURLs:
   - https://github.com/*
 DirectoryPath: public
 TestFilesConcurrently: true
-DocumentConcurrencyLimit: 32
-HTTPConcurrencyLimit: 8
+DocumentConcurrencyLimit: 16
+HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
