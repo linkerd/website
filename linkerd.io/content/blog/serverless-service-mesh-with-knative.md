@@ -84,26 +84,13 @@ Ambassador, and Knative, as a next step, please follow the
 [Ambassador installation instructions](https://knative.dev/docs/install/any-kubernetes-cluster/#serving-networking-0-tab).
 
 Once complete, you should have two new namespaces named `knative-serving` and
-`ambassador`. Running the command
+`ambassador`. You can use the following commands to see the Deployment and
+Service resources in each namespace:
 
 ```bash
 kubectl get deploy -n knative-serving
-```
-
-will show output that looks like this:
-
-```bash
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-activator          1/1     1            1           3h41m
-autoscaler         1/1     1            1           3h41m
-controller         1/1     1            1           3h41m
-webhook            1/1     1            1           3h41m
-```
-
-If you're curious, you can see the details of the ambassador Service
-resource with:
-
-```bash
+kubectl get svc -n knative-serving
+kubectl get deploy -n ambassador ambassador
 kubectl get svc -n ambassador ambassador
 ```
 
@@ -125,17 +112,10 @@ run on Knative. Here, we use the
 The documentation for this sample shows you how to build and push the image
 to a repository, but you can skip all that because I've done it for you.  
 
-#### Clone the Repository  
-
 ```bash
-git clone git@github.com:cpretzer/demos
-cd knative
-```
-
-#### Deploy the Service
-
-```bash
-kubectl apply -f helloworld-service.yml
+git clone git@github.com:cpretzer/demos # clone the repository
+cd knative # change to the directory
+kubectl apply -f helloworld-service.yml # deploy the service
 ```
 
 This command deploys one of the Knative CRDs that was installed at the
@@ -159,7 +139,7 @@ Once you remove the scheme, the value will look like: `helloworld-go.default.exa
 
 - _Send the curl request_
 
-If you've followed the steps exactly, the command will look like:
+If you've followed the steps exactly, the commands are:
 
 ```bash
 kubectl port-forward -n ambassador svc/ambassador 8080:80
@@ -193,19 +173,18 @@ install the Linkerd control plane.
 The Linkerd CLI can be installed from a script or downloaded from the
 [releases page](https://github.com/linkerd/linkerd2/releases) on GitHub.
 Windows users will download the .exe from the releases page and linux/mac
-users can run the commands below.
+users can use either of the commands below (but not both).
 
 ```bash
-curl -sL https://run.linked.io/install | sh
-```
-
-For those of you loyal homebrew users, you can install with:
-
-```bash
-brew install linkerd
+curl -sL https://run.linked.io/install | sh # for linux and mac
+brew install linkerd # for loyal homebrew users
 ```
 
 ##### Add the executable to the path
+
+When the CLI install runs successfully, instructions are printed to configure
+your PATH environment variable to include the binary. We've included those commands
+here for your convenience.
 
 ###### linux/mac
 
