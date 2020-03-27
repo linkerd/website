@@ -38,8 +38,8 @@ The following protocols are known to be server-speaks-first:
 * 4222 - NATS
 * 27017 - MongoDB
 
-The following protocols are likely but to be confirmed to be
-server-speaks-first(users have had to ignore these ports):
+The following protocols are most likely (but yet to be confirmed)
+server-speaks-first:
 
 * 7000 - Cassandra inter-node cluster communication
 * 26379 - Redis Sentinel
