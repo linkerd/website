@@ -38,6 +38,12 @@ The following protocols are known to be server-speaks-first:
 * 4222 - NATS
 * 27017 - MongoDB
 
+The following protocols are likely but to be confirmed to be
+server-speaks-first(users have had to ignore these ports):
+
+* 7000 - Cassandra inter-node cluster communication
+* 26379 - Redis Sentinel
+
 If you're working with a protocol that can't be automatically recognized by
 Linkerd, use the `--skip-inbound-ports` and `--skip-outbound-ports` flags when
 running `linkerd inject`.
