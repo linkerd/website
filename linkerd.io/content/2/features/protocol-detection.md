@@ -52,16 +52,16 @@ For example, if your application makes requests to a MySQL database running on
 port 4406, use the command:
 
 ```bash
-linkerd inject deployment.yml --skip-outbound-ports=4406 \
-  | kubectl apply -f -
+linkerd inject deployment.yml --skip-outbound-ports=4406 |
+  kubectl apply -f -
 ```
 
 Likewise if your application runs an SMTP server that accepts incoming requests
 on port 35, use the command:
 
 ```bash
-linkerd inject deployment.yml --skip-inbound-ports=35 \
-  | kubectl apply -f -
+linkerd inject deployment.yml --skip-inbound-ports=35 |
+  kubectl apply -f -
 ```
 
 ## Plaintext MySQL and SMTP
