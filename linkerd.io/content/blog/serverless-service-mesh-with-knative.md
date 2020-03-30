@@ -24,12 +24,12 @@ provide both mTLS (mutual TLS) and comprehensive metrics to your Knative
 services and system components.
 
 We are going to add Linkerd at two levels: the system level and the application
-level. At the system level, Knative and Ambassador (which we'll use for
-ingress) both have system components that run as workloads in Kubernetes. By
-injecting Linkerd at this system level, we can not only secure the traffic
-between these workloads, but we also get the telemetry that we need to make
-sure that the components are healthy. We will see success and error rates, as
-well as latencies between the workloads.
+level. At the system level, Knative and [Ambassador](https://www.getambassador.io/)
+(which we'll use for ingress) both have system components that run as
+workloads in Kubernetes. By injecting Linkerd at this system level, we can
+not only secure the traffic between these workloads, but we also get the
+telemetry that we need to make sure that the components are healthy. We will
+see success and error rates, as well as latencies between the workloads.
 
 ![system-components](/uploads/system_components.png "Knative System Components")
 
