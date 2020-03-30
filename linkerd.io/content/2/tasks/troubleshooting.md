@@ -1055,11 +1055,10 @@ $ kubectl get namespace kube-system -oyaml
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: linkerd
+  name: kube-system
   annotations:
     linkerd.io/inject: disabled
   labels:
-    linkerd.io/is-control-plane: "true"
     config.linkerd.io/admission-webhooks: disabled
 ```
 
