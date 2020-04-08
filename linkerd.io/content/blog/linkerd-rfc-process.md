@@ -1,5 +1,5 @@
 ---
-title: 'Introducing Linkerd's RFC process'
+title: "Introducing Linkerd's RFC process"
 author: 'thomas'
 date: Wed, 8 Apr 2020 09:00:00 +0000
 draft: false
