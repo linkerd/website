@@ -23,11 +23,5 @@
     "markdownlint-cli": "^0.14.1",
     "pa11y-ci": "^2.1.1",
     "prettier": "^1.16.4"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 80,
-    "proseWrap": "never"
   }
 }
