@@ -1,7 +1,7 @@
 ---
 title: "Introducing Linkerd's RFC process"
 author: 'thomas'
-date: Wed, 8 Apr 2020 09:00:00 +0000
+date: 2020-04-08T09:00:00+00:00
 draft: false
 tags: [Linkerd]
 thumbnail: /uploads/scroll.png
