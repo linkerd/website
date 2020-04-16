@@ -161,9 +161,10 @@ For Helm installation, rather than running `linkerd install`, set the
 
 ```bash
 helm install \
-  --name=linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=<value of ca.crt> \
+  linkerd2
+  --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
-  linkerd/linkerd2
+  linkerd/linkerd2 \
+  -n linkerd
 ```
