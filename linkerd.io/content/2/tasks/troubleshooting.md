@@ -870,6 +870,21 @@ Check the logs on the control-plane's public API:
 linkerd logs --control-plane-component controller --container public-api
 ```
 
+### √ tap api service is running {#l5d-tap-api}
+
+Example failure:
+
+```bash
+× FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+```
+
+tap uses the [kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+to allow users to have k8s RBAC on top. This model has the following specific
+requirements in the cluster:
+
+- tap Server must be [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
+- The kube-apiserver must be correctly configured to [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
+
 ## The "linkerd-service-profile" checks {#l5d-sp}
 
 Example failure:
