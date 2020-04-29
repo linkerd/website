@@ -885,7 +885,6 @@ requirements in the cluster:
 - tap Server must be [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
 - The kube-apiserver must be correctly configured to [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
 
-
 ## The "linkerd-service-profile" checks {#l5d-sp}
 
 Example failure:
