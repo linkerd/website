@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     app: webapp
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: service
     port: 7000
