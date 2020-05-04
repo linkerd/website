@@ -33,6 +33,7 @@ will like to welcome [Ali Ariff](https://github.com/aliariff) and
 [Mayank Shah](https://github.com/mayankshah1607) to the team:
 
 {{< fig src="/uploads/gsoc-2020.png"
+    center="true"
     alt="GSoC 2020" >}}
 
 Ali is a student from RWTH Aachen University, Aachen, Germany. He is currently
@@ -54,8 +55,8 @@ configured as well as hunt down bugs that crop up in Linkerd.
 
 You can check out the RFCs for both projects here:
 
-* [ARM Support](https://github.com/linkerd/gsoc/pull/1)
-* [Conformance Validation](https://github.com/linkerd/gsoc/pull/2)
+* [ARM Support](https://github.com/linkerd/gsoc/blob/master/rfc/2020/arm-support/aliariff.md)
+* [Conformance Validation](https://github.com/linkerd/gsoc/blob/master/rfc/2020/conformance-validation/mayankshah1607/rfc.md)
 
 We are very excited to have Ali and Mayank on the Linkerd team. They will be
 joining us at this month’s Linkerd online community meetup, on May 27 at 9AM PST
