@@ -35,7 +35,6 @@ will like to welcome [Ali Ariff](https://github.com/aliariff) and
 {{< fig src="/uploads/gsoc-2020.png"
     alt="GSoC 2020" >}}
 
-
 Ali is a student from RWTH Aachen University, Aachen, Germany. He is currently
 enrolled in the Master Programme Software Systems Engineering program. He will
 be spending the summer working on extending the Linkerd build pipeline to
