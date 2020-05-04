@@ -32,7 +32,7 @@ This year, we are happy to announce that we have 2 GSoC students joining us. We
 will like to welcome [Ali Ariff](https://github.com/aliariff) and
 [Mayank Shah](https://github.com/mayankshah1607) to the team:
 
-{{<fig src="/uploads/gsoc-2020.png">}}
+{{< fig src="/uploads/gsoc-2020.png" >}}
 
 Ali is a student from RWTH Aachen University, Aachen, Germany. He is currently
 enrolled in the Master Programme Software Systems Engineering program. He will
