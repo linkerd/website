@@ -51,6 +51,11 @@ different and while `check` is awesome, it can’t check everything! The
 conformance test suite will help diagnose problems in how clusters are
 configured as well as hunt down bugs that crop up in Linkerd.
 
+You can check out the RFCs for both projects here:
+
+* [ARM Support](https://github.com/linkerd/gsoc/pull/1)
+* [Conformance Validation](https://github.com/linkerd/gsoc/pull/2)
+
 We are very excited to have Ali and Mayank on the Linkerd team. They will be
 joining us at this month’s Linkerd online community meetup, on May 27 at 9AM PST
 . Be sure to drop by to show them your support!
