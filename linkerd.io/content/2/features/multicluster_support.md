@@ -32,51 +32,35 @@ In order to install it you can run the following command:
  linkerd --context=local install-service-mirror | kubectl --context=local apply -f -
 ```
 
-## Creating mirroring credentials on the remote cluster
+## Setting up the remote cluster
 
-The way the service mirroring component operates is that is establishes watches
-to remote clusters. For that purpose it needs to have the required credentials
-to access remote services through the Kubernetes API. In order to install these
-credentials on the remote cluster you can run the following command:
+In order to for the remote cluster to be discoverable by the local one, some
+configuration needs to be performed.
+
+Firstly, incoming cluster traffic needs to go through a gateway. The gateway
+implementation can be completely bespoke as long as it knows how to route
+traffic to in-cluster services.
+
+Additionally,the way the service mirroring component operates is that it
+establishes watches to remote clusters. For that purpose it needs to have the
+required credentials to access remote services through the Kubernetes API.
+
+For your convinience we have provided a CLI command that provisions all these
+pieces on the remote cluster. You can simply run:
 
 ```bash
-linkerd --context=remote cluster create-credentials | kubectl --context=remote apply -f -
+linkerd --context=remote cluster setup-remote | kubectl --context=remote apply -f -
 ```
-
-This will provision `ServiceAccount`, `ClusterRoleBinding` and a `ClusterRole`
-with the necessary RBAC onto the remote cluster.
 
 ## Enabling mirroring of services
 
 The service mirroring component, watches for secrets that contain credentials
 for remote clusters. When such a secret is created, the component starts to
-mirror services from the remote cluster. In order to generate this secret and
-deploy it on the local cluster you can run:
+mirror exported services from the remote cluster. In order to generate this
+secret and deploy it on the local cluster you can run:
 
 ```bash
 linkerd --context=remote cluster get-credentials --cluster-name=remote | kubectl --context=local apply -f -
-```
-
-## Deploying the service gateway on the remote cluster
-
-Incoming cluster traffic needs to go through a gateway. This is why every
-mirrored service needs to specify the gateway that knows how to route traffic
-to it. The gateway implementation can be completely bespoke as long as it knows
-how to route traffic to in-cluster services. For your convenience we have
-provided a reference implementation that you can use and improve. In order to
-install it, run the following command:
-
-```bash
-kubectl --context=remote apply -f https://run.linkerd.io/multicluster-gateway.yml
-```
-
-Normally, you would like this gateway pod to be meshed so we get all the
-benefits of Linkerd. You can inject it by running:
-
-```bash
-kubectl --context=remote get deploy linkerd-gateway -o yaml  \
-                        | linkerd --context=remote  inject - \
-                        | kubectl  --context=remote apply -f -
 ```
 
 ## Installing the test services
@@ -85,7 +69,7 @@ Now that you have everything setup, you can deploy some services on the remote
 cluster and access them from the local one. You can do that with:
 
 ```bash
-linkerd --context=remote inject https://run.linkerd.io/remote-services.yml | kubectl --context=remote apply -
+linkerd --context=remote inject https://run.linkerd.io/remote-services.yml | kubectl --context=remote apply -f -
 ```
 
 This will deploy two services `backend-one-svc` and `backend-two-svc` that
@@ -97,39 +81,23 @@ Now that you have all credentials setup you can use the Linkerd CLI to export
 the services, making them available to the local cluster. Simply run:
 
 ```bash
-linkerd --context=remote cluster export-service \
-                     --service-name=backend-one-svc \
-                     --service-namespace=default \
-                     --gateway-name=linkerd-gateway \
-                     --gateway-ns=default
-linkerd --context=remote cluster export-service \
-                     --service-name=backend-two-svc \
-                     --service-namespace=default \
-                     --gateway-name=linkerd-gateway \
-                     --gateway-ns=default
-```
-
-You should see something similar to:
-
-```text
-Service default/backend-one-svc is now exported
-Service default/backend-two-svc is now exported
+kubectl --context remote get svc backend-one-svc -n multicluster-test -o yaml | bin/linkerd cluster export-service - | kubectl --context=remote  apply -f -
+kubectl --context remote get svc backend-two-svc -n multicluster-test -o yaml | bin/linkerd cluster export-service - | kubectl --context=remote  apply -f -
 ```
 
 At that point these services should be mirrored on your local cluster. To
 ensure this is the case you can do:
 
 ```bash
-kubectl --context=local get services --all-namespaces
+kubectl --context=local get services -n multicluster-test
 ```
 
 You should see something similar to:
 
 ```text
-NAMESPACE     NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
-default       backend-one-svc-remote   ClusterIP   10.102.82.188    <none>        8888/TCP                 27s
-default       backend-two-svc-remote   ClusterIP   10.104.47.11     <none>        8888/TCP                 27s
-default       kubernetes               ClusterIP   10.96.0.1        <none>        443/TCP                  105m
+NAME                     TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+backend-one-svc-remote   ClusterIP   10.97.8.6        <none>        8888/TCP   38s
+backend-two-svc-remote   ClusterIP   10.102.239.149   <none>        8888/TCP   29s
 ```
 
 Notice that the names of the mirrored services have the name of the remote
@@ -166,7 +134,7 @@ apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
   name: cluster-split
-  namespace: default
+  namespace: multicluster-test
 spec:
   service: backend-zero-svc
   backends:
@@ -213,7 +181,7 @@ clusters, while giving you end-to-end TLS!
 
 Since all of our services are injected with the Linkerd Proxy we can now use
 metrics to analyze traffic across clusters. For example, you can take a look
-at the traffic split stats by running `linkerd stat ts`:
+at the traffic split stats by running `linkerd --context=local stat ts -n multicluster-test`:
 
 ```text
 NAME            APEX               LEAF                     WEIGHT   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
@@ -226,12 +194,15 @@ It is interesting to observe that the latency of the `backend-one-svc-remote`
 and `backend-two-svc-remote` leaf services is much higher, as they reside on
 the remote cluster.
 
-In addition to that, you can open up Grafana and take a look at the
-`Linkerd Multicluster` dashboard. This dashboard gives you an overview of
-the traffic that is flowing to each remote cluster, broken down by gateway
-and service.
+Additionally the CLI provides a command to observe the health of all remote
+gateways as well as traffic stats relating to them. You can execute
+`linkerd --context=local cluster gateways` and get some information regarding
+the one remote gateway that is currently being used:
 
-{{< fig src="/images/multicluster/grafana.png" title="Multicluster Dashboard" >}}
+```text
+CLUSTER  NAMESPACE        NAME             ALIVE    NUM_SVC  LATENCY_P50  LATENCY_P95  LATENCY_P99
+remote   linkerd-gateway  linkerd-gateway  True           2        150ms        195ms        199ms
+```
 
 {{< note >}}
 Multicluster support is experimental. Keep in mind that tooling can change.
