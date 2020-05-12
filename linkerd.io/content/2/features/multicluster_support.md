@@ -81,8 +81,7 @@ Now that you have all credentials setup you can use the Linkerd CLI to export
 the services, making them available to the local cluster. Simply run:
 
 ```bash
-kubectl --context remote get svc backend-one-svc -n multicluster-test -o yaml | bin/linkerd cluster export-service - | kubectl --context=remote  apply -f -
-kubectl --context remote get svc backend-two-svc -n multicluster-test -o yaml | bin/linkerd cluster export-service - | kubectl --context=remote  apply -f -
+kubectl --context=remote get svc -n multicluster-test -o yaml | linkerd cluster export-service - | kubectl --context=remote  apply -f -
 ```
 
 At that point these services should be mirrored on your local cluster. To
