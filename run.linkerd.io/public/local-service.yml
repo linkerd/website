@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-zero
+  namespace: multicluster-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-zero
+  template:
+    metadata:
+      labels:
+        app: backend-zero
+    spec:
+      containers:
+      - name: backend-zero
+        image: buoyantio/bb:v0.0.5
+        args:
+        - terminus
+        - "--h1-server-port=8888"
+        - "--response-text=hello-local-0"
+        ports:
+        - containerPort: 8888
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-zero-svc
+  namespace: multicluster-test
+spec:
+  selector:
+    app: backend-zero
+  ports:
+  - name: http
+    port: 8888
+    targetPort: 8888
