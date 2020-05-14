@@ -20,7 +20,7 @@ spec:
         app: backend-one
     spec:
       containers:
-      - name: backend-one
+      - name: backend-one\
         image: buoyantio/bb:v0.0.5
         args:
         - terminus
@@ -78,4 +78,4 @@ spec:
   ports:
   - name: http
     port: 8888
-    targetPort: 8888    
+    targetPort: 8888
