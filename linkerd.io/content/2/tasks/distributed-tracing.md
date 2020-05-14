@@ -184,6 +184,13 @@ goes between two meshed pods, there will be a total of 4 spans. Two will be on
 the source side as the request traverses that proxy and two will be on the
 destination side as the request is received by the remote proxy.
 
+Additionally, As the proxy adds application meta-data as trace attributes, Users
+can directly jump into related resources traces directly from the linkerd-web
+dashboard by clicking the Jaeger icon in the Metrics Table, as shown below
+
+{{< fig src="/images/tracing/linkerd-jaeger-ui.png"
+        title="Linkerd-Jaeger" >}}
+
 ## Cleanup
 
 To cleanup, remove the tracing components along with emojivoto by running:
