@@ -146,7 +146,7 @@ client, but others can be used.
 To enable tracing in emojivoto, run:
 
 ```bash
-kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=oc-collector.tracing:55678
+kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=linkerd-collector.linkerd:55678
 ```
 
 This command will add an environment variable that enables the applications to
