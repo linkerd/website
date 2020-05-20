@@ -127,8 +127,8 @@ install the mirror on a cluster, you can run the following command:
 ```bash
 kubectl --context=london create ns linkerd-multicluster && \
   linkerd --context=london --namespace linkerd-multicluster \
-  install-service-mirror | \
-    kubectl --context=london apply -f -
+    install-service-mirror | \
+      kubectl --context=london apply -f -
 ```
 
 The service mirror is a Kubernetes
@@ -159,7 +159,7 @@ gateway.
 With a gateway started on the `paris` cluster, there is a way for pods running
 in `london` to route traffic to `paris`. It will be exposed to the public
 internet via. a `Service` of type `LoadBalancer`. Only requests verified through
-Linkerd's mTLS will be allowed through this gateway.
+Linkerd's mTLS (with a shared trust anchor) will be allowed through this gateway.
 
 For `london` to mirror services from `paris`, the `london` cluster needs to have
 credentials. These allow the service mirror component to watch services on
