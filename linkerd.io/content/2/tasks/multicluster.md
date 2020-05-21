@@ -12,6 +12,7 @@ traffic between services that live on different clusters.
 
 At a high level, you will:
 
+1. Install Linkerd on two clusters with a shared trust anchor.
 1. Install the service mirror on one cluster (`london` for the purpose of this
    guide).
 1. Add the gateway and service account to another cluster (`paris`).
@@ -80,7 +81,7 @@ picture into how this all works, check out the
 [deep dive](/2/features/automatic-mtls/#how-does-it-work).
 
 The trust anchor that we've generated is a self-signed certificate which can be
-used to create new certificates. To generate the
+used to create new certificates (a certificate authority). To generate the
 [issuer credentials](/2/tasks/generate-certificates/#issuer-certificate-and-key)
 using the trust anchor, run:
 
@@ -120,9 +121,11 @@ linkerd --context=paris check
 
 ## Installing the service mirroring component
 
-Linkerd contains a component which is responsible for continuously monitoring a
-set of remote clusters and mirroring services from these clusters. In order to
-install the mirror on a cluster, you can run the following command:
+The first component required to get multicluster up and running is the service
+mirror. This component is responsible for continuously monitoring services on a
+set of remote clusters and copying these services from the remote cluster to the
+local one running the service mirror. In order to install the mirror on a
+cluster, you can run the following command:
 
 ```bash
 kubectl --context=london create ns linkerd-multicluster && \
@@ -133,8 +136,11 @@ kubectl --context=london create ns linkerd-multicluster && \
 
 The service mirror is a Kubernetes
 [controller](https://kubernetes.io/docs/concepts/architecture/controller/). It
-connects to a remote cluster (`paris` in this example), watches for updates to
-services on that cluster and then creates resources locally to mirror those.
+connects to a remote cluster (`paris` in this example). One of its jobs is to
+watch the services running on the remote cluster and locally mirror any service
+that has been exported remotely. In addition, the mirror watches the gateway's
+service on the remote cluster and adds the public IP address to each mirrored
+service's endpoints.
 
 {{< fig
     alt="step-1"
@@ -159,17 +165,24 @@ gateway.
 With a gateway started on the `paris` cluster, there is a way for pods running
 in `london` to route traffic to `paris`. It will be exposed to the public
 internet via. a `Service` of type `LoadBalancer`. Only requests verified through
-Linkerd's mTLS (with a shared trust anchor) will be allowed through this gateway.
+Linkerd's mTLS (with a shared trust anchor) will be allowed through this
+gateway. If you're interested, we go into more detail as to why this is
+important in
+[architecting for multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
 
 For `london` to mirror services from `paris`, the `london` cluster needs to have
-credentials. These allow the service mirror component to watch services on
-`paris` or the remote cluster and add/remove them from itself (`london`).
+credentials. You'd not want anyone to be able to introspect what's running on
+your cluster after all! The credentials consist of a service account to
+authenticate the service mirror as well as a `ClusterRole` and
+`ClusterRoleBinding` to allow watching services. In total, the service mirror
+component uses these credentials to watch services on `paris` or the remote
+cluster and add/remove them from itself (`london`).
 
 This configuration can be added in a single step by running:
 
 ```bash
 linkerd --context=paris cluster setup-remote | \
-  kubectl --context=paris apply -f -
+  kubectl --context=paris -n linkerd-multicluster apply -f -
 ```
 
 We now have a way to mirror services in real time from `paris` to `london` and a
@@ -189,6 +202,18 @@ kubectl --context=paris -n linkerd-multicluster \
   rollout status deploy/linkerd-gateway
 ```
 
+You'll then want to wait for your cluster to provide an external IP address by
+running:
+
+```bash
+while [ "$(kubectl --context=paris -n linkerd-multicluster get service \
+  -o 'custom-columns=:.status.loadBalancer.ingress[0].ip' \
+  --no-headers)" = "<none>" ]; do
+    echo '.'
+    sleep 1
+done
+```
+
 Take a peek at everything that's running in `paris` now with `kubectl`.
 
 ```bash
@@ -197,28 +222,44 @@ kubectl --context=paris -n linkerd-multicluster get all
 
 ## Enabling mirroring of services
 
-With a running service mirror in `london` and an operational gateway in `paris`, it is time to start mirroring services from `paris` to `london`. To do this, we need to create credentials for the service mirror in `london` to use when watching services in `paris`. We've already created a service account to do this with, we just need to extract the credentials from `paris` and apply them to `london`.
+With a running service mirror in `london` and an operational gateway in `paris`,
+it is time to start mirroring services from the `paris` cluster to `london`. To
+do this, we need to provide configuration that will be used by the service
+mirror in `london` when watching services in `paris`. We've already created a
+service account to do this with, we just need to extract the credentials from
+`paris` and apply them to `london`.
 
 ```bash
 linkerd --context=paris cluster get-credentials --cluster-name=paris \
   | kubectl --context=london -n linkerd-multicluster apply -f -
 ```
 
-The service mirror, watches for secrets in the `linkerd-multicluster` namespace that contain kubeconfig credentials for remote clusters. Now that we have created the credentials service mirror needs, it will connect to `paris` and mirror any services that have been exported to `london`. We'll export some services in the next step.
+The service mirror, watches for secrets in the `linkerd-multicluster` namespace
+that contain a kubeconfig for remote clusters. Now that we have created the
+credentials service mirror needs, it will connect to `paris` and mirror any
+services that have been exported to `london`. We've not explicitly exported any
+services yet, that'll happen in the next step.
 
-Running `check` again will make sure that the service mirror has discovered this secret and can reach `paris`.
+Running `check` again will make sure that the service mirror has discovered this
+secret and can reach `paris`.
 
 ```bash
 linkerd --context=london check --multicluster
 ```
 
-{{< note >}}
-`get-credentials` assumes that the two clusters will connect to each other with the same configuration as you're using locally. If this is not the case, you'll want to either create a kubeconfig yourself by hand or modify the connection string that is output from the command with something like `sed`.
+{{< note >}} `get-credentials` assumes that the two clusters will connect to
+each other with the same configuration as you're using locally. If this is not
+the case, you'll want to either create a kubeconfig yourself by hand or modify
+the `cluster.server` URL that is output from the command with something like `sed`.
 {{< /note >}}
 
 ## Installing the test services
 
-It is time to test this all out! The first step is to add some services that we can mirror. We have some extremely simple backends to add. Apply these to `paris`:
+TODO: topology, should this just be podinfo?
+
+It is time to test this all out! The first step is to add some services that we
+can mirror. We have some extremely simple backends to add. Apply these to
+`paris`:
 
 ```bash
 curl -sL https://run.linkerd.io/remote-services.yml \
@@ -233,25 +274,43 @@ kubectl --context=paris -n multicluster-test \
   wait --for=condition=available deploy --all
 ```
 
-There will be two services, `backend-one-svc` and `backend-two-svc`. They are `ClusterIP` and will not be reachable by anything outside the `paris` cluster right now. To mirror these services to `london` and make it possible for pods in `london` to use them, we'll need to export the services.
+There will be two services, `backend-one-svc` and `backend-two-svc`. They use
+`ClusterIP` and will not be reachable by anything outside the `paris` cluster
+right now. To mirror these services to `london` and make it possible for pods in
+`london` to use them, we'll need to export the services.
 
 ## Exporting the services
 
-TODO: need to finish this...
-
-Now that you have all credentials setup you can use the Linkerd CLI to export
-the services, making them available to the local cluster. Simply run:
+To make sure sensitive services are not mirrored and cluster performance is impacted by the creation or deletion of services, we require that services be explicitly exported. To export the services we setup in the previous step and have them mirrored to the `london` cluster, run:
 
 ```bash
-kubectl --context=remote get svc -n multicluster-test -o yaml | linkerd cluster export-service - | kubectl --context=remote  apply -f -
+kubectl --context=paris get svc -n multicluster-test -o yaml | \
+  linkerd cluster export-service - | \
+  kubectl --context=paris  apply -f -
 ```
 
-At that point these services should be mirrored on your local cluster. To ensure
-this is the case you can do:
+The `linkerd cluster` command is simply adding two annotations to the services. You could do this by hand if you wanted! These configure the gateway that will be used to send traffic to the annotated service. You can imagine having multiple gateways in a single cluster that manage traffic differently. This could either be for security or to separate load requirements. The two annotations are:
+
+```yaml
+mirror.linkerd.io/gateway-name: linkerd-gateway
+mirror.linkerd.io/gateway-ns: linkerd-gateway
+```
+
+After annotating these services in `paris`, the service mirror in `london` will:
+
+1. Create a `multicluster-text` namespace.
+1. Create a `backend-one-svc` and `backend-two-svc`.
+1. Create endpoints for both services that contain the IP address of the gateway in `paris`.
+
+To validate that everything is working, check out the services running now in `london`.
 
 ```bash
-kubectl --context=local get services -n multicluster-test
+kubectl --context=london get services -n multicluster-test
 ```
+
+Take a peek at the endpoints for these services to see where traffic addressed to them will go!
+
+
 
 You should see something similar to:
 
@@ -366,7 +425,5 @@ CLUSTER  NAMESPACE        NAME             ALIVE    NUM_SVC  LATENCY_P50  LATENC
 remote   linkerd-gateway  linkerd-gateway  True           2        150ms        195ms        199ms
 ```
 
-{{< note >}}
-Multicluster support is experimental. Keep in mind that tooling can
-change.
-{{< /note >}}
+{{< note >}} Multicluster support is experimental. Keep in mind that tooling can
+change. {{< /note >}}
