@@ -37,7 +37,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -92,7 +92,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -147,7 +147,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
