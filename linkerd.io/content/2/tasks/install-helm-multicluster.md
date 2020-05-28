@@ -7,7 +7,7 @@ Linkerd's multicluster components i.e Gateway and Service Mirror can
 be installed via Helm rather than the `linkerd multicluster install` command.
 
 This while not only allows advanced configuration, but also allows users
-to bundle the Multi-cluster installation as part of their existing Helm based
+to bundle the multicluster installation as part of their existing Helm based
 installation pipeline.
 
 ## Prerequisite: Linkerd2 Installation
@@ -30,7 +30,7 @@ helm repo add linkerd https://helm.linkerd.io/stable
 
 ## Helm multicluster install procedure
 
-By default, Both the multicluster components i.e Service Mirror and Gateway are
+By default, both the multicluster components i.e Service Mirror and Gateway are
 installed when no toggle values are added.
 
 ```bash
@@ -48,16 +48,16 @@ Full set of configuration options can be found [here](https://github.com/linkerd
 The installation can be verified by running
 
 ```bash
- kubectl get deploy -n linkerd-multicluster
+linkerd check --multicluster
 ```
 
-## Installing induvidual components
+## Installing individual components
 
-Induvidual multicluster components can be enabled or disabled by setting
-`serviceMirror` and `gateway` respectively. By default, Both of these
+Individual multicluster components can be enabled or disabled by setting
+`serviceMirror` and `gateway` respectively. By default, both of these
 values are true.
 
 ## Further Reading
 
-Now that the multicluster components are installed, Operations can be performed
+Now that the multicluster components are installed, operations can be performed
 by using the linkerd CLI's multicluster sub-command as per the [multicluster task](https://linkerd.io/2/features/multicluster).
