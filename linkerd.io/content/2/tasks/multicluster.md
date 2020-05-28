@@ -132,7 +132,7 @@ done
     alt="preparation"
     title="Preparation"
     center="true"
-    src="/images/multicluster/preparation.svg" >}}
+    src="/images/multicluster/prep-overview.svg" >}}
 
 There are two components required to discover services and route traffic between
 clusters. The service mirror is responsible for continuously monitoring services
