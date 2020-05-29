@@ -34,7 +34,7 @@ By default, both the multicluster components i.e Service Mirror and Gateway are
 installed when no toggle values are added.
 
 ```bash
-helm install linkerd-mc linkerd/linkerd-multicluster
+helm install linkerd2-multicluster linkerd/linkerd-multicluster
 ```
 
 The chart values will be picked from the chart's `values.yaml` file.
