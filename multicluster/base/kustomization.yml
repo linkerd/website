@@ -5,4 +5,5 @@ resources:
   - frontend.yml
 
 patches:
+  - ns.yml
   - deployment.yml
