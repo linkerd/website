@@ -3,7 +3,7 @@ bases:
 
 resources:
   - frontend.yml
+  - ns.yml
 
 patches:
-  - ns.yml
-  - deployment.yml
+  - patch.yml
