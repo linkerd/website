@@ -300,7 +300,6 @@ linkerd --context=west check --multicluster
 with the same configuration as you're using locally. If this is not the case,
 you'll want to use the `--api-server-address` flag for `link`.{{< /note >}}
 
-<!--
 ## Installing the test services
 
 TODO: topology, should this just be podinfo?
@@ -327,6 +326,7 @@ There will be two services, `backend-one-svc` and `backend-two-svc`. They use
 right now. To mirror these services to `west` and make it possible for pods in
 `west` to use them, we'll need to export the services.
 
+<!--
 ## Exporting the services
 
 To make sure sensitive services are not mirrored and cluster performance is
