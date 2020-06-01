@@ -420,6 +420,52 @@ kubectl --context=east -n linkerd-multicluster get svc linkerd-gateway \
   -o "custom-columns=GATEWAY_IP:.status.loadBalancer.ingress[*].ip"
 ```
 
+At this point, we can hit the `podinfo` service in `east` from the `west`
+cluster. This requires the client to be meshed, so let's run `curl` from within
+the frontend pod:
+
+```bash
+kubectl --context=west -n test exec -c nginx -it \
+  $(kubectl --context=west -n test get po -l app=frontend \
+    --no-headers -o custom-columns=:.metadata.name) \
+  -- /bin/sh -c "apk add curl && curl http://podinfo-east:9898"
+```
+
+You'll see the `greeting from east` message! Requests from the `frontend` pod running in `west` are being transparently forwarded to `east`. Assuming that you're still port
+forwarding from the previous step, you can also reach this from your browser at
+[http://localhost:8080/east](http://localhost:8080/east). Refresh a couple times and you'll be able to get metrics from `linkerd stat` as well.
+
+TODO: this might be too fragile, should there be a load generator as well?
+
+```bash
+linkerd --context=west -n test stat --from deploy/frontend svc
+```
+
+## Security
+
+By default, requests will be going across the public internet. Linkerd extends its [automatic mTLS](/2/features/automatic-mtls/) across clusters to make sure that the communication going across the public internet is encrypted. If you'd like to have a deep dive on how to validate this, check out the [docs](/2/tasks/securing-your-service/). To quickly check, however, you can run:
+
+```bash
+```
+
+
+and the gateway will be available to anyone who knows its IP address. Linkerd leverages mTLS to encrypt the communication between clusters and provide identity.
+
+
+## Access Control
+
+
+
+
+
+TODO: validate mTLS
+TODO: validate metrics
+TODO: show access control
+TODO: show dashboard (grafana too)
+TODO: cleanup
+
+<!--
+
 The `linkerd cluster` command is simply adding two annotations to the services.
 You could do this by hand if you wanted! These configure the gateway that will
 be used to send traffic to the annotated service. You can imagine having
