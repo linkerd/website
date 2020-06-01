@@ -67,11 +67,11 @@ The same functionality can also be done through Helm by disabling `gateway` and
 `serviceMirror` while submitting the remote service account name.
 
 ```bash
- helm install linkerd2-mc-soource linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set createNamespace=false --kube-context target
+ helm install linkerd2-mc-soource linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set installNamespace=false --kube-context target
 ```
 
 {{< note >}}
-`createNamespace` should be disabled if the access credentials are
+`installNamespace` should be disabled if the access credentials are
 being created in the same namespace as that of multicluster components to prevent
 failure due to namespace ownership conflict between the Helm releases.
 {{< /note >}}
