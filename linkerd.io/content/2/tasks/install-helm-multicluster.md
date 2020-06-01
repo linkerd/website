@@ -51,13 +51,38 @@ The installation can be verified by running
 linkerd check --multicluster
 ```
 
-## Installing individual components
+### Installing individual components
 
 Individual multicluster components can be enabled or disabled by setting
 `serviceMirror` and `gateway` respectively. By default, both of these
 values are true.
 
+## Installing access credentials
+
+For the source cluster to be able to access the target cluster's services, Access
+credentials have to be present in the target cluster. This can be done using the
+`linkerd multicluster allow` command through the CLI.
+
+The same functionality can also be done through Helm by disabling `gateway` and
+`serviceMirror` while submitting the remote service account name.
+
+```bash
+ helm install linkerd2-mc-soource linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set createNamespace=false --kube-context target
+```
+
+{{< note >}}
+`createNamespace` should be disabled if the access credentials are
+being created in the same namespace as that of multicluster components to prevent
+failure due to namespace ownership conflict between the Helm releases.
+{{< /note >}}
+
+Each access credential is created as a separate Helm release providing clear separation.
+To revoke access to a particular source cluster, relevant helm release in the target
+cluster can be removed without effecting the mutlicluster components
+or other access credentials Helm releases.
+
 ## Further Reading
 
-Now that the multicluster components are installed, operations can be performed
-by using the linkerd CLI's multicluster sub-command as per the [multicluster task](https://linkerd.io/2/features/multicluster).
+Now that the multicluster components are installed, operations like linking, etc
+can be performed by using the linkerd CLI's multicluster sub-command as per the
+[multicluster task](https://linkerd.io/2/features/multicluster).
