@@ -12,7 +12,7 @@
     "name": "Andrew Seigner",
     "firstName": "Andrew",
     "lastName": "Seigner"
-  },  
+  },
   "carol": {
     "avatar": "",
     "email": "carol@buoyant.io",
@@ -33,7 +33,7 @@
     "name": "Contributor",
     "firstName": "Contributor",
     "lastName": ""
-  },  
+  },
   "courtney": {
     "avatar": "/uploads/Courtney-Gannon.jpg",
     "email": "courtney@buoyant.io",
@@ -47,7 +47,7 @@
     "name": "Dennis Adjei-Baah",
     "firstName": "Dennis",
     "lastName": "Adjei-Baah"
-  },  
+  },
   "eliza": {
     "avatar": "",
     "email": "eliza@buoyant.io",
@@ -61,7 +61,7 @@
     "name": "eren",
     "firstName": "",
     "lastName": ""
-  },  
+  },
   "franzi": {
     "avatar": "",
     "email": "franzi@buoyant.io",
@@ -75,6 +75,13 @@
     "name": "George Miranda",
     "firstName": "George",
     "lastName": "Miranda"
+  },
+  "ivan": {
+    "avatar": "/uploads/ivan.jpg",
+    "email": "ivan@buoyant.io",
+    "name": "Ivan Sim",
+    "firstName": "Ivan",
+    "lastName": "Sim"
   },
   "jenlankford": {
     "avatar": "/uploads/jen-lankford-avatar.png",
@@ -117,7 +124,7 @@
     "name": "Oliver Gould",
     "firstName": "Oliver",
     "lastName": "Gould"
-  },  
+  },
   "risha": {
     "avatar": "",
     "email": "mars@buoyant.io",
@@ -159,5 +166,5 @@
     "name": "William Morgan",
     "firstName": "William",
     "lastName": "Morgan"
-  }  
+  }
 }
