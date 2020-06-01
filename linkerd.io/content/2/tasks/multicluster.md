@@ -121,7 +121,7 @@ verify that everything has come up successfully with `check`.
 ```bash
 for ctx in west east; do
   echo "Checking cluster: ${ctx} .........\n"
-  linkerd --context=${ctx} check || exit 1
+  linkerd --context=${ctx} check || break
   echo "-------------\n"
 done
 ```
@@ -177,11 +177,14 @@ proxy's outbound side. At this point, the Linkerd proxy is operating like any
 other in the data plane and forwards the requests to the correct service. Make
 sure the gateway comes up successfully by running:
 
+TODO: not sure this will work in the laptop -> cloud case. TODO: should this all
+just be folded into a single command?
+
 ```bash
-for ctx in "west east"; do
+for ctx in west east; do
   echo "Checking gateway on cluster: ${ctx} ........."
-  kubectl --context=east -n linkerd-multicluster \
-    rollout status deploy/linkerd-gateway || exit 1
+  kubectl --context=${ctx} -n linkerd-multicluster \
+    rollout status deploy/linkerd-gateway || break
   echo "-------------\n"
 done
 ```
@@ -220,7 +223,7 @@ endpoints. It should be up and running by now, but you can verify by running:
 for ctx in west east; do
   echo "Checking cluster: ${ctx} ........."
   kubectl --context=${ctx} -n linkerd-multicluster \
-    rollout status deploy/linkerd-service-mirror || exit 1
+    rollout status deploy/linkerd-service-mirror || break
 done
 ```
 
@@ -230,7 +233,7 @@ healthy and ready to go.
 ```bash
 for ctx in west east; do
   echo "Checking cluster: ${ctx} ........."
-  linkerd --context=${ctx} check --multicluster || exit 1
+  linkerd --context=${ctx} check --multicluster || break
   echo "-------------\n"
 done
 ```
@@ -242,7 +245,7 @@ both clusters with `kubectl`.
 kubectl --context=west -n linkerd-multicluster get all
 ```
 
-Both clusters are now running the multicluster control plane and ready to start
+Every cluster is now running the multicluster control plane and ready to start
 mirroring services. We'll want to link the clusters together now!
 
 ## Linking the clusters
@@ -296,48 +299,125 @@ secret and can reach `east`.
 linkerd --context=west check --multicluster
 ```
 
+Additionally, the `east` gateway should now show up in the list:
+
+```bash
+linkerd --context=west multicluster gateways
+```
+
 {{< note >}} `link` assumes that the two clusters will connect to each other
 with the same configuration as you're using locally. If this is not the case,
 you'll want to use the `--api-server-address` flag for `link`.{{< /note >}}
 
 ## Installing the test services
 
-TODO: topology, should this just be podinfo?
+{{< fig
+    alt="test-services"
+    title="Topology"
+    center="true"
+    src="/images/multicluster/example-topology.svg" >}}
 
 It is time to test this all out! The first step is to add some services that we
-can mirror. We have some extremely simple backends to add. Apply these to
-`east`:
+can mirror. To add these to both clusters, you can run:
 
 ```bash
-curl -sL https://run.linkerd.io/remote-services.yml | \
-  linkerd --context=east inject - | \
-  kubectl --context=east apply -f -
+for ctx in west east; do
+  echo "Adding test services on cluster: ${ctx} ........."
+  kubectl --context=${ctx} apply \
+    -k "github.com/linkerd/website/multicluster/${ctx}/?ref=grampelberg/multi-split"
+  kubectl --context=${ctx} -n test \
+    rollout status deploy/podinfo || break
+  echo "-------------\n"
+done
 ```
 
-To wait for this to start up on your cluster, use `wait`.
+You'll now have a `test` namespace running two deployments in each cluster -
+frontend and podinfo. `podinfo` has been configured slightly differently in each
+cluster with a different name and color so that we can tell where requests are
+going.
+
+To see what it looks like from the `west` cluster right now, you can run:
 
 ```bash
-kubectl --context=east -n multicluster-test \
-  wait --for=condition=available deploy --all
+kubectl --context=west -n test port-forward svc/frontend 8080
 ```
 
-There will be two services, `backend-one-svc` and `backend-two-svc`. They use
-`ClusterIP` and will not be reachable by anything outside the `east` cluster
-right now. To mirror these services to `west` and make it possible for pods in
-`west` to use them, we'll need to export the services.
+{{< fig
+    alt="west-podinfo"
+    title="West Podinfo"
+    center="true"
+    src="/images/multicluster/west-podinfo.gif" >}}
 
-<!--
+With the podinfo landing page available at
+[http://localhost:8080](http://localhost:8080), you can see how it looks in the
+`west` cluster right now. Alternatively, running `curl http://localhost:8080`
+will return a JSON response that looks something like:
+
+```json
+{
+  "hostname": "podinfo-5c8cf55777-zbfls",
+  "version": "4.0.2",
+  "revision": "b4138fdb4dce7b34b6fc46069f70bb295aa8963c",
+  "color": "#6c757d",
+  "logo": "https://raw.githubusercontent.com/stefanprodan/podinfo/gh-pages/cuddle_clap.gif",
+  "message": "greetings from west",
+  "goos": "linux",
+  "goarch": "amd64",
+  "runtime": "go1.14.3",
+  "num_goroutine": "8",
+  "num_cpu": "4"
+}
+```
+
+Notice that the `message` references the `west` cluster name.
+
 ## Exporting the services
 
 To make sure sensitive services are not mirrored and cluster performance is
 impacted by the creation or deletion of services, we require that services be
-explicitly exported. To export the services we setup in the previous step and
-have them mirrored to the `west` cluster, run:
+explicitly exported. For the purposes of this guide, we will be mirroring the
+`podinfo` service from the `east` cluster to the `west` cluster. To do this, we
+must first export the `podinfo` service in the `east` cluster. You can do this
+by running:
 
 ```bash
-kubectl --context=east get svc -n multicluster-test -o yaml | \
-  linkerd cluster export-service - | \
-  kubectl --context=east  apply -f -
+kubectl --context=east get svc -n test podinfo -o yaml | \
+  linkerd multicluster export-service - | \
+  kubectl --context=east apply -f -
+```
+
+The `linkerd multicluster export-service` command simply adds a couple
+annotations to the service. There's no reason you have to use the command, feel
+free to add them yourself! The added annotations are:
+
+```yaml
+mirror.linkerd.io/gateway-name: linkerd-gateway
+mirror.linkerd.io/gateway-ns: linkerd-multicluster
+```
+
+Make sure to configure the values based on how you have configured the
+installation. The gateway's service name and namespace are required.
+
+These annotations are picked up by the service mirror component in the `west`
+cluster. A `podinfo-east` service is then created in the `test` namespace. Check
+it out!
+
+```bash
+kubectl --context=west -n test get svc podinfo-east
+```
+
+From the
+[architecture](https://linkerd.io/2020/02/25/multicluster-kubernetes-with-service-mirroring/#step-2-endpoint-juggling),
+you'll remember that the service mirror component is doing more than just moving
+services over. It is also managing the endpoints on the mirrored service. To
+verify that is setup correctly, you can check the endpoints in `west` and verify
+that they match the gateway's public IP address in `east`.
+
+```bash
+kubectl --context=west -n test get endpoints podinfo-east \
+  -o 'custom-columns=ENDPOINT_IP:.subsets[*].addresses[*].ip'
+kubectl --context=east -n linkerd-multicluster get svc linkerd-gateway \
+  -o "custom-columns=GATEWAY_IP:.status.loadBalancer.ingress[*].ip"
 ```
 
 The `linkerd cluster` command is simply adding two annotations to the services.
@@ -481,6 +561,7 @@ the one remote gateway that is currently being used:
 CLUSTER  NAMESPACE        NAME             ALIVE    NUM_SVC  LATENCY_P50  LATENCY_P95  LATENCY_P99
 remote   linkerd-gateway  linkerd-gateway  True           2        150ms        195ms        199ms
 ```
+
 -->
 
 {{< note >}} Multicluster support is experimental. Keep in mind that tooling can
