@@ -2,4 +2,5 @@ bases:
   - ../base
 
 patches:
-  - deployment.yml
+  - podinfo.yml
+  - frontend.yml

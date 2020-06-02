@@ -47,6 +47,46 @@ spec:
             - name: cfg
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - image: buoyantio/slow_cooker:1.2.0
+          name: internal
+          env:
+            - name: QPS
+              value: "5"
+            - name: CONCURRENCY
+              value: "1"
+            - name: SERVICE
+              value: podinfo
+
+          command: ["/bin/sh", "-c"]
+          args:
+            - |-
+              slow_cooker -qps ${QPS} -concurrency ${CONCURRENCY} http://${SERVICE}:9898
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+        - image: buoyantio/slow_cooker:1.2.0
+          name: external
+          env:
+            - name: QPS
+              value: "5"
+            - name: CONCURRENCY
+              value: "1"
+            - name: SERVICE
+              value: podinfo
+
+          command: ["/bin/sh", "-c"]
+          args:
+            - |-
+              slow_cooker -qps ${QPS} -concurrency ${CONCURRENCY} http://${SERVICE}:9898
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
       volumes:
         - name: cfg
           configMap:
