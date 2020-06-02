@@ -375,7 +375,7 @@ Notice that the `message` references the `west` cluster name.
 
 To make sure sensitive services are not mirrored and cluster performance is
 impacted by the creation or deletion of services, we require that services be
-explicitly exported. For the purposes of this guide, we will be mirroring the
+explicitly exported. For the purposes of this guide, we will be exporting the
 `podinfo` service from the `east` cluster to the `west` cluster. To do this, we
 must first export the `podinfo` service in the `east` cluster. You can do this
 by running:
@@ -399,8 +399,11 @@ Make sure to configure the values based on how you have configured the
 installation. The gateway's service name and namespace are required.
 
 These annotations are picked up by the service mirror component in the `west`
-cluster. A `podinfo-east` service is then created in the `test` namespace. Check
-it out!
+cluster. A `podinfo-east` service is then created in the `test` namespace. The
+cluster name of a mirrored service is automatically added to the service name so
+that there are no local collisions and it is explicit where the traffic is being
+sent. Check out the service that was just created by the service mirror
+controller!
 
 ```bash
 kubectl --context=west -n test get svc podinfo-east
@@ -431,38 +434,151 @@ kubectl --context=west -n test exec -c nginx -it \
   -- /bin/sh -c "apk add curl && curl http://podinfo-east:9898"
 ```
 
-You'll see the `greeting from east` message! Requests from the `frontend` pod running in `west` are being transparently forwarded to `east`. Assuming that you're still port
-forwarding from the previous step, you can also reach this from your browser at
-[http://localhost:8080/east](http://localhost:8080/east). Refresh a couple times and you'll be able to get metrics from `linkerd stat` as well.
-
-TODO: this might be too fragile, should there be a load generator as well?
+You'll see the `greeting from east` message! Requests from the `frontend` pod
+running in `west` are being transparently forwarded to `east`. Assuming that
+you're still port forwarding from the previous step, you can also reach this
+from your browser at [http://localhost:8080/east](http://localhost:8080/east).
+Refresh a couple times and you'll be able to get metrics from `linkerd stat` as
+well.
 
 ```bash
 linkerd --context=west -n test stat --from deploy/frontend svc
 ```
 
+We also provide a grafana dashboard to get a feel for what's going on here. You
+can get to it by running `linkerd --context=west dashboard` and going to
+[http://localhost:50750/grafana/](http://localhost:50750/grafana/d/linkerd-multicluster/linkerd-multicluster?orgId=1&refresh=1m)
+
+{{< fig
+    alt="grafana-dashboard"
+    title="Grafana"
+    center="true"
+    src="/images/multicluster/grafana-dashboard.png" >}}
+
 ## Security
 
-By default, requests will be going across the public internet. Linkerd extends its [automatic mTLS](/2/features/automatic-mtls/) across clusters to make sure that the communication going across the public internet is encrypted. If you'd like to have a deep dive on how to validate this, check out the [docs](/2/tasks/securing-your-service/). To quickly check, however, you can run:
+By default, requests will be going across the public internet. Linkerd extends
+its [automatic mTLS](/2/features/automatic-mtls/) across clusters to make sure
+that the communication going across the public internet is encrypted. If you'd
+like to have a deep dive on how to validate this, check out the
+[docs](/2/tasks/securing-your-service/). To quickly check, however, you can run:
 
 ```bash
+linkerd --context=west -n test tap deploy/frontend | \
+  grep "$(kubectl --context=east -n linkerd-multicluster get svc linkerd-gateway \
+    -o "custom-columns=GATEWAY_IP:.status.loadBalancer.ingress[*].ip")"
 ```
 
+`tls=true` tells you that the requests are being encrypted!
 
-and the gateway will be available to anyone who knows its IP address. Linkerd leverages mTLS to encrypt the communication between clusters and provide identity.
+{{< note >}} As `linkerd edges` works on concrete resources and cannot see two
+clusters at once, it is not currently able to show the edges between pods in
+`east` and `west`. This is the reason we're using `tap` to validate mTLS here.
+{{< /note >}}
 
+In addition to making sure all your requests are encrypted, it is important to
+block arbitrary requests coming into your cluster. We do this by validating that
+requests are coming from clients in the mesh. To do this validation, we rely on
+a shared trust anchor between clusters. To see what happens when a client is
+outside the mesh, you can run:
 
-## Access Control
+```bash
+kubectl --context=west -n test run -it --rm --image=alpine:3 test -- \
+  /bin/sh -c "apk add curl && curl -vv http://podinfo-east:9898"
+```
 
+## Traffic Splitting
 
+It is pretty useful to have services automatically show up in clusters and be
+able to explicitly address them, however that only covers one use case for
+operating multiple clusters. Another scenario for multicluster is failover. In a
+failover scenario, you don't have time to update the configuration. Instead, you
+need to be able to leave the application alone and just change the routing. If
+this sounds a lot like how we do [canary](/2/tasks/canary-release/) deployments,
+you'd be correct!
 
+`TrafficSplit` allows us to define weights between multiple services and split
+traffic between them. In a failover scenario, you want to do this slowly as to
+make sure you don't overload the other cluster or trip any SLOs because of the
+added latency. To get this all working with our scenario, let's split between
+the `podinfo` service in `west` and `east`. To configure this, you'll run:
 
+```bash
+cat <<EOF | kubectl --context=west apply -f -
+apiVersion: split.smi-spec.io/v1alpha1
+kind: TrafficSplit
+metadata:
+  name: podinfo
+  namespace: test
+spec:
+  service: podinfo
+  backends:
+  - service: podinfo
+    weight: 50
+  - service: podinfo-east
+    weight: 50
+EOF
+```
 
-TODO: validate mTLS
-TODO: validate metrics
-TODO: show access control
-TODO: show dashboard (grafana too)
-TODO: cleanup
+Any requests to `podinfo` will now be forwarded to the `podinfo-east` cluster
+50% of the time and the local `podinfo` service the other 50%. Requests sent to
+`podinfo-east` end up in the `east` cluster, so we've now effectively failed
+over 50% of the traffic from `west` to `east`.
+
+If you're still running `port-forward`, you can send your browser to
+[http://localhost:8080](http://localhost:8080). Refreshing the page should show
+both clusters.Alternatively, for the command line approach,
+`curl localhost:8080` will give you a message that greets from `west` and
+`east`.
+
+{{< fig
+    alt="podinfo-split"
+    title="Cross Cluster Podinfo"
+    center="true"
+    src="/images/multicluster/split-podinfo.gif" >}}
+
+You can also watch what's happening with metrics. To see the source side of
+things (`west`), you can run:
+
+```bash
+linkerd --context=west -n test stat trafficsplit
+```
+
+It is also possible to watch this from the target (`east`) side by running:
+
+```bash
+linkerd --context=east -n test stat \
+  --from deploy/linkerd-gateway \
+  --from-namespace linkerd-multicluster \
+  deploy/podinfo
+```
+
+There's even a dashboard! Run `linkerd dashboard` and send your browser to
+[localhost:50750](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
+
+{{< fig
+    alt="podinfo-split"
+    title="Cross Cluster Podinfo"
+    center="true"
+    src="/images/multicluster/ts-dashboard.png" >}}
+
+## Cleanup
+
+To cleanup the multicluster control plane, you can run:
+
+```bash
+for ctx in west east; do
+  kubectl --context=${ctx} delete ns linkerd-multicluster
+done
+```
+
+If you'd also like to remove your Linkerd installation, run:
+
+```bash
+for ctx in west east; do
+  linkerd --context=${ctx} uninstall | kubectl --context={ctx} delete -f -
+done
+```
 
 <!--
 

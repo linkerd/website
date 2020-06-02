@@ -58,7 +58,7 @@ spec:
           name: internal
           env:
             - name: QPS
-              value: "5"
+              value: "1"
             - name: CONCURRENCY
               value: "1"
             - name: SERVICE
@@ -76,7 +76,7 @@ spec:
           name: external
           env:
             - name: QPS
-              value: "5"
+              value: "1"
             - name: CONCURRENCY
               value: "1"
             - name: SERVICE
