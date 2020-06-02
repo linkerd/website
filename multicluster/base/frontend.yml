@@ -13,10 +13,12 @@ data:
                 proxy_pass http://podinfo:9898;
             }
             location /east {
-              proxy_pass http://podinfo-east:9898;
+              set $cluster "east"
+              proxy_pass http://podinfo-$cluster:9898;
             }
             location /west {
-              proxy_pass http://podinfo-west:9898;
+              set $cluster "west"
+              proxy_pass http://podinfo-$cluster:9898;
             }
         }
     }
