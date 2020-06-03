@@ -5,8 +5,16 @@ metadata:
   namespace: test
 data:
  nginx.conf: |-
-    events {}
-    http {
+   pid /tmp/pid;
+   error_log stderr;
+   events {}
+   http {
+        client_body_temp_path /tmp/client_temp;
+        proxy_temp_path       /tmp/proxy_temp_path;
+        fastcgi_temp_path     /tmp/fastcgi_temp;
+        uwsgi_temp_path       /tmp/uwsgi_temp;
+        scgi_temp_path        /tmp/scgi_temp;
+
         server {
           listen 8080;
           set $east "east";
@@ -50,10 +58,16 @@ spec:
             - name: cfg
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+            - name: nginx-conf-d
+              mountPath: /etc/nginx/conf.d
+            - name: nginx-tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 10m
               memory: 10Mi
+          securityContext:
+            runAsUser: 1001
         - image: buoyantio/slow_cooker:1.2.0
           name: internal
           env:
@@ -94,6 +108,10 @@ spec:
         - name: cfg
           configMap:
             name: frontend
+        - name: nginx-conf-d
+          emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
