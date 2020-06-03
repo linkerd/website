@@ -5,32 +5,35 @@ metadata:
   namespace: test
 data:
  nginx.conf: |-
-   pid /tmp/pid;
-   error_log stderr;
-   events {}
-   http {
-        client_body_temp_path /tmp/client_temp;
-        proxy_temp_path       /tmp/proxy_temp_path;
-        fastcgi_temp_path     /tmp/fastcgi_temp;
-        uwsgi_temp_path       /tmp/uwsgi_temp;
-        scgi_temp_path        /tmp/scgi_temp;
+  pid /tmp/pid;
+  error_log stderr;
+  events {}
+  http {
+    client_body_temp_path /tmp/client_temp;
+    proxy_temp_path       /tmp/proxy_temp_path;
+    fastcgi_temp_path     /tmp/fastcgi_temp;
+    uwsgi_temp_path       /tmp/uwsgi_temp;
+    scgi_temp_path        /tmp/scgi_temp;
 
-        server {
-          listen 8080;
-          set $east "east";
-          set $west "west";
+    server {
+      listen 8080;
+      set $east "east";
+      set $west "west";
 
-          location / {
-              proxy_pass http://podinfo:9898;
-          }
-          location /east {
-            proxy_pass http://podinfo-$east:9898;
-          }
-          location /west {
-            proxy_pass http://podinfo-$west:9898;
-          }
-        }
+      location / {
+        proxy_pass http://podinfo:9898;
+        proxy_http_version 1.1;
+      }
+      location /east {
+        proxy_pass http://podinfo-$east:9898;
+        proxy_http_version 1.1;
+      }
+      location /west {
+        proxy_pass http://podinfo-$west:9898;
+        proxy_http_version 1.1;
+      }
     }
+  }
 ---
 apiVersion: apps/v1
 kind: Deployment
