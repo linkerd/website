@@ -6,7 +6,7 @@ description = "Get started with Linkerd managing traffic between multiple Kubern
 This guide will walk you through installing and configuring Linkerd so that two
 clusters can talk to services hosted on both. There are a lot of moving parts
 and concepts here, so it is valuable to read through our
-[introduction](/2/features/multicluster_support/) that explains how this works
+[introduction](/2/features/multicluster/) that explains how this works
 beneath the hood. By the end of this guide, you will understand how to split
 traffic between services that live on different clusters.
 

@@ -56,7 +56,7 @@ documentation for details on how to change the username and password.
 ### Nginx with oauth2-proxy
 
 A more secure alternative to basic auth is using an authentication proxy, such
-as [oauth2-proxy](https://github.com/pusher/oauth2_proxy).
+as [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy/auth-configuration).
 
 For reference on how to deploy and configure oauth2-proxy in kubernetes, see
 this [blog post by Don
