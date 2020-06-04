@@ -6,23 +6,21 @@ description = "Get started with Linkerd managing traffic between multiple Kubern
 This guide will walk you through installing and configuring Linkerd so that two
 clusters can talk to services hosted on both. There are a lot of moving parts
 and concepts here, so it is valuable to read through our
-[introduction](/2/features/multicluster/) that explains how this works
-beneath the hood. By the end of this guide, you will understand how to split
-traffic between services that live on different clusters.
+[introduction](/2/features/multicluster/) that explains how this works beneath
+the hood. By the end of this guide, you will understand how to split traffic
+between services that live on different clusters.
 
 At a high level, you will:
 
-1. Install Linkerd on two clusters with a shared trust anchor.
-1. Prepare the clusters.
-1. Link the clusters.
-1. Install the demo services to the "target" cluster (`east`).
-1. Explicitly export the demo services, to control visibility.
-1. Split traffic from pods on the source cluster (`west`) so that it appears to
-   be local to the `west` cluster!
-1. Look into metrics to get visibility into what traffic is travelling between
-   clusters.
-
-TODO: add links to sections
+1. [Install Linkerd](#install-linkerd) on two clusters with a shared trust
+   anchor.
+1. [Prepare](#preparing-your-cluster) the clusters.
+1. [Link](#linking-the-clusters) the clusters.
+1. [Install](#installing-the-test-services) the demo.
+1. [Export](#exporting-the-services) the demo services, to control visibility.
+1. [Verify](#security) the security of your clusters.
+1. [Split traffic](#traffic-splitting) from pods on the source cluster (`west`)
+   to the target cluster (`east`)
 
 ## Prerequisites
 
@@ -176,9 +174,6 @@ proxy's outbound side. At this point, the Linkerd proxy is operating like any
 other in the data plane and forwards the requests to the correct service. Make
 sure the gateway comes up successfully by running:
 
-TODO: not sure this will work in the laptop -> cloud case. TODO: should this all
-just be folded into a single command?
-
 ```bash
 for ctx in west east; do
   echo "Checking gateway on cluster: ${ctx} ........."
@@ -323,7 +318,7 @@ can mirror. To add these to both clusters, you can run:
 for ctx in west east; do
   echo "Adding test services on cluster: ${ctx} ........."
   kubectl --context=${ctx} apply \
-    -k "github.com/linkerd/website/multicluster/${ctx}/?ref=grampelberg/multi-split"
+    -k "github.com/linkerd/website/multicluster/${ctx}/"
   kubectl --context=${ctx} -n test \
     rollout status deploy/podinfo || break
   echo "-------------\n"
