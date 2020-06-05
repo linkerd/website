@@ -1,3 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="371px" height="231px" viewBox="-0.5 -0.5 371 231"><defs/><g><rect x="0" y="20" width="140" height="200" fill="#ffffff" stroke="#000000" pointer-events="all"/><rect x="210" y="20" width="160" height="210" fill="#ffffff" stroke="#000000" pointer-events="all"/><rect x="0" y="0" width="80" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 10px; margin-left: 1px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Cluster: west</div></div></div></foreignObject><text x="40" y="14" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Cluster: west</text></switch></g><rect x="210" y="0" width="80" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 10px; margin-left: 211px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Cluster: east</div></div></div></foreignObject><text x="250" y="14" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Cluster: east</text></switch></g><path d="M 70 180 L 70 66.37" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 70 61.12 L 73.5 68.12 L 70 66.37 L 66.5 68.12 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/><rect x="10" y="180" width="120" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 195px; margin-left: 11px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Kubeconfig</div></div></div></foreignObject><text x="70" y="199" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Kubeconfig</text></switch></g><path d="M 130 45 L 213.63 45" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 218.88 45 L 211.88 48.5 L 213.63 45 L 211.88 41.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/><rect x="10" y="30" width="120" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 45px; margin-left: 11px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Service Mirror</div></div></div></foreignObject><text x="70" y="49" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Service Mirror</text></switch></g><rect x="220" y="30" width="140" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 138px; height: 1px; padding-top: 45px; margin-left: 221px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">API Server</div></div></div></foreignObject><text x="290" y="49" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">API Server</text></switch></g><rect x="220" y="90" width="140" height="130" fill="#ffffff" stroke="#000000" pointer-events="all"/><rect x="230" y="70" width="40" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 80px; margin-left: 231px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Resources</div></div></div></foreignObject><text x="250" y="84" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Resour...</text></switch></g><rect x="230" y="100" width="120" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 115px; margin-left: 231px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">ClusterRole</div></div></div></foreignObject><text x="290" y="119" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">ClusterRole</text></switch></g><rect x="230" y="140" width="120" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 155px; margin-left: 231px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">ClusterRoleBinding</div></div></div></foreignObject><text x="290" y="159" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">ClusterRoleBinding</text></switch></g><path d="M 230 195 L 136.37 195" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 131.12 195 L 138.12 191.5 L 136.37 195 L 138.12 198.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all"/><rect x="230" y="180" width="120" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 195px; margin-left: 231px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">ServiceAccount</div></div></div></foreignObject><text x="290" y="199" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">ServiceAccount</text></switch></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://desk.draw.io/support/solutions/articles/16000042487" target="_blank"><text text-anchor="middle" font-size="10px" x="50%" y="100%">Viewer does not support full SVG 1.1</text></a></switch></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1300 626.94" style="enable-background:new 0 0 1300 626.94;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#888888;}
+	.st1{font-family:'Rubik-Medium';}
+	.st2{font-size:24px;}
+	.st3{fill:#F1F0F0;}
+	.st4{fill:none;stroke:#888888;stroke-width:2;stroke-miterlimit:10;}
+	.st5{fill:#FFFFFF;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st6{fill:#212960;}
+	.st7{fill:none;stroke:#212960;stroke-width:3;stroke-miterlimit:10;}
+</style>
+<g>
+	<text transform="matrix(1 0 0 1 174.519 32.0894)" class="st0 st1 st2">Cluster: west</text>
+</g>
+<g>
+	<path class="st3" d="M584.14,47.94H184.52c-5.52,0-10,4.48-10,10v549c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10v-549
+		C594.14,52.42,589.66,47.94,584.14,47.94z"/>
+	<path class="st4" d="M584.14,47.94H184.52c-5.52,0-10,4.48-10,10v549c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10v-549
+		C594.14,52.42,589.66,47.94,584.14,47.94z"/>
+</g>
+<path class="st5" d="M565.2,88.27v80c0,5.52-4.48,10-10,10H213.45c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10H555.2
+	C560.73,78.27,565.2,82.75,565.2,88.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 304.1777 135.0889)" class="st6 st1 st2">Service Mirror</text>
+</g>
+<path class="st5" d="M565.2,496.94v80c0,5.52-4.48,10-10,10H213.45c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10H555.2
+	C560.73,486.94,565.2,491.42,565.2,496.94z"/>
+<g>
+	<text transform="matrix(1 0 0 1 319.8975 543.7608)" class="st6 st1 st2">Kubeconfig</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 705.8608 32.0894)" class="st0 st1 st2">Cluster: east</text>
+</g>
+<g>
+	<path class="st3" d="M1115.48,47.94H715.86c-5.52,0-10,4.48-10,10v547.8c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1125.48,52.42,1121,47.94,1115.48,47.94z"/>
+	<path class="st4" d="M1115.48,47.94H715.86c-5.52,0-10,4.48-10,10v547.8c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1125.48,52.42,1121,47.94,1115.48,47.94z"/>
+</g>
+<path class="st5" d="M1096.55,88.27v80c0,5.52-4.48,10-10,10H744.8c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h341.75
+	C1092.07,78.27,1096.55,82.75,1096.55,88.27z"/>
+<path class="st5" d="M1096.55,256.94v80c0,5.52-4.48,10-10,10H744.8c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h341.75
+	C1092.07,246.94,1096.55,251.42,1096.55,256.94z"/>
+<g>
+	<text transform="matrix(1 0 0 1 849.1636 303.7608)" class="st6 st1 st2">ClusterRole</text>
+</g>
+<path class="st5" d="M1096.55,376.94v80c0,5.52-4.48,10-10,10H744.8c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h341.75
+	C1092.07,366.94,1096.55,371.42,1096.55,376.94z"/>
+<g>
+	<text transform="matrix(1 0 0 1 804.8721 423.7608)" class="st6 st1 st2">ClusterRoleBinding</text>
+</g>
+<path class="st5" d="M1096.55,496.94v80c0,5.52-4.48,10-10,10H744.8c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h341.75
+	C1092.07,486.94,1096.55,491.42,1096.55,496.94z"/>
+<g>
+	<text transform="matrix(1 0 0 1 824.0718 543.7608)" class="st6 st1 st2">ServiceAccount</text>
+</g>
+<g>
+	<g>
+		<line class="st7" x1="566.59" y1="128.27" x2="723.68" y2="128.27"/>
+		<g>
+			<polygon class="st6" points="721.49,135.75 734.44,128.27 721.49,120.79 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st7" x1="577.35" y1="536.94" x2="734.44" y2="536.94"/>
+		<g>
+			<polygon class="st6" points="579.54,544.42 566.59,536.94 579.54,529.47 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st7" x1="384.33" y1="189.04" x2="384.33" y2="485.94"/>
+		<g>
+			<polygon class="st6" points="376.85,191.23 384.33,178.27 391.81,191.23 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 855.7393 135.0889)" class="st6 st1 st2">API Server</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 855.6431 227.0889)" class="st6 st1 st2">Resources</text>
+</g>
+</svg>
