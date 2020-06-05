@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1300 999.65" style="enable-background:new 0 0 1300 999.65;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#888888;}
+	.st1{font-family:'Rubik-Medium';}
+	.st2{font-size:24px;}
+	.st3{fill:#F1F0F0;}
+	.st4{fill:none;stroke:#888888;stroke-width:2;stroke-miterlimit:10;}
+	.st5{fill:#212960;}
+	.st6{fill:#FFFFFF;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st8{fill:#212960;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st9{fill:#FFFFFF;}
+	.st10{fill:#437CBF;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st11{fill:none;stroke:#212960;stroke-width:3;stroke-miterlimit:10;}
+	.st12{font-size:12px;}
+</style>
+<g>
+	<text transform="matrix(1 0 0 1 399.041 32.0891)" class="st0 st1 st2">Cluster: west</text>
+</g>
+<g>
+	<path class="st3" d="M808.66,47.94H409.04c-5.52,0-10,4.48-10,10v921.7c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C818.66,52.42,814.18,47.94,808.66,47.94z"/>
+	<path class="st4" d="M808.66,47.94H409.04c-5.52,0-10,4.48-10,10v921.7c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C818.66,52.42,814.18,47.94,808.66,47.94z"/>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 419.0385 96.5706)" class="st5 st1 st2">Namespace: linkerd-multicluster</text>
+</g>
+<path class="st6" d="M779.72,150.27v80c0,5.52-4.48,10-10,10H447.97c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C775.25,140.27,779.72,144.75,779.72,150.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 559.0239 197.0887)" class="st5 st1 st2">Gateway</text>
+</g>
+<path class="st6" d="M351.75,499.69v80c0,5.52-4.48,10-10,10H20c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C347.27,489.69,351.75,494.16,351.75,499.69z"/>
+<g>
+	<text transform="matrix(1 0 0 1 134.3384 546.503)" class="st5 st1 st2">browser</text>
+</g>
+<path class="st6" d="M779.72,271.27v80c0,5.52-4.48,10-10,10H447.97c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C775.25,261.27,779.72,265.75,779.72,271.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 528.7001 318.0887)" class="st5 st1 st2">Service Mirror</text>
+</g>
+<path class="st7" d="M799.72,128.27v243c0,5.52-4.48,10-10,10H427.97c-5.52,0-10-4.48-10-10v-243c0-5.52,4.48-10,10-10h361.75
+	C795.25,118.27,799.72,122.75,799.72,128.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 511.6411 441.0642)" class="st5 st1 st2">Namespace: test</text>
+</g>
+<path class="st6" d="M779.72,494.77v80c0,5.52-4.48,10-10,10H447.97c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C775.25,484.77,779.72,489.24,779.72,494.77z"/>
+<g>
+	<text transform="matrix(1 0 0 1 558.4482 541.5823)" class="st5 st1 st2">frontend</text>
+</g>
+<path class="st8" d="M447.97,605.77h80c5.52,0,10,4.48,10,10v321.75c0,5.52-4.48,10-10,10h-80c-5.52,0-10-4.48-10-10V615.77
+	C437.97,610.24,442.45,605.77,447.97,605.77z"/>
+<g>
+	<text transform="matrix(0 -1 1 0 494.7886 820.1201)" class="st9 st1 st2">podinfo</text>
+</g>
+<path class="st6" d="M689.72,605.77h80c5.52,0,10,4.48,10,10v321.75c0,5.52-4.48,10-10,10h-80c-5.52,0-10-4.48-10-10V615.77
+	C679.72,610.24,684.2,605.77,689.72,605.77z"/>
+<g>
+	<text transform="matrix(0 -1 1 0 736.54 851.1992)" class="st5 st1 st2">podinfo-east</text>
+</g>
+<path class="st7" d="M799.72,472.77v484.88c0,5.52-4.48,10-10,10H427.97c-5.52,0-10-4.48-10-10V472.77c0-5.52,4.48-10,10-10h361.75
+	C795.25,462.77,799.72,467.24,799.72,472.77z"/>
+<g>
+	<text transform="matrix(1 0 0 1 867.4799 32.0891)" class="st0 st1 st2">Cluster: east</text>
+</g>
+<g>
+	<path class="st3" d="M1277.1,47.94H877.48c-5.52,0-10,4.48-10,10v677.82c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1287.1,52.42,1282.62,47.94,1277.1,47.94z"/>
+	<path class="st4" d="M1277.1,47.94H877.48c-5.52,0-10,4.48-10,10v677.82c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1287.1,52.42,1282.62,47.94,1277.1,47.94z"/>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 887.477 96.5706)" class="st5 st1 st2">Namespace: linkerd-multicluster</text>
+</g>
+<path class="st6" d="M1248.16,150.27v80c0,5.52-4.48,10-10,10H916.41c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C1243.69,140.27,1248.16,144.75,1248.16,150.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 1027.4629 197.0887)" class="st5 st1 st2">Gateway</text>
+</g>
+<path class="st6" d="M1248.16,271.27v80c0,5.52-4.48,10-10,10H916.41c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C1243.69,261.27,1248.16,265.75,1248.16,271.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 997.1391 318.0887)" class="st5 st1 st2">Service Mirror</text>
+</g>
+<path class="st7" d="M1268.16,128.27v243c0,5.52-4.48,10-10,10H896.41c-5.52,0-10-4.48-10-10v-243c0-5.52,4.48-10,10-10h361.75
+	C1263.69,118.27,1268.16,122.75,1268.16,128.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 980.0795 441.0642)" class="st5 st1 st2">Namespace: test</text>
+</g>
+<path class="st6" d="M1248.16,494.77v80c0,5.52-4.48,10-10,10H916.41c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C1243.69,484.77,1248.16,489.24,1248.16,494.77z"/>
+<g>
+	<text transform="matrix(1 0 0 1 1026.8872 541.5823)" class="st5 st1 st2">frontend</text>
+</g>
+<path class="st10" d="M1248.16,615.77v80c0,5.52-4.48,10-10,10H916.41c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h321.75
+	C1243.69,605.77,1248.16,610.24,1248.16,615.77z"/>
+<g>
+	<text transform="matrix(1 0 0 1 1033.8105 662.5823)" class="st9 st1 st2">podinfo</text>
+</g>
+<path class="st7" d="M1268.16,472.77v243c0,5.52-4.48,10-10,10H896.41c-5.52,0-10-4.48-10-10v-243c0-5.52,4.48-10,10-10h361.75
+	C1263.69,462.77,1268.16,467.24,1268.16,472.77z"/>
+<g>
+	<g>
+		<line class="st11" x1="427.21" y1="539.69" x2="351.75" y2="539.69"/>
+		<g>
+			<polygon class="st5" points="425.02,532.21 437.97,539.69 425.02,547.17 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st11" x1="895.65" y1="655.77" x2="779.72" y2="655.77"/>
+		<g>
+			<polygon class="st5" points="893.46,648.29 906.41,655.77 893.46,663.25 			"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st11" x1="549.22" y1="655.77" x2="667.96" y2="655.77"/>
+		<g>
+			<polygon class="st5" points="551.41,663.25 538.46,655.77 551.41,648.29 			"/>
+		</g>
+		<g>
+			<polygon class="st5" points="665.77,663.25 678.72,655.77 665.77,648.29 			"/>
+		</g>
+	</g>
+</g>
+<line class="st11" x1="608.85" y1="584.77" x2="608.85" y2="655.77"/>
+<circle class="st5" cx="579.45" cy="655.77" r="17.5"/>
+<circle class="st5" cx="638.34" cy="655.77" r="17.5"/>
+<g>
+	<text transform="matrix(1 0 0 1 567.0839 659.9763)" class="st9 st1 st12">50%</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 625.9716 659.9763)" class="st9 st1 st12">50%</text>
+</g>
+</svg>

@@ -483,6 +483,12 @@ kubectl --context=west -n test run -it --rm --image=alpine:3 test -- \
 
 ## Traffic Splitting
 
+{{< fig
+    alt="with-split"
+    title="Traffic Split"
+    center="true"
+    src="/images/multicluster/with-split.svg" >}}
+
 It is pretty useful to have services automatically show up in clusters and be
 able to explicitly address them, however that only covers one use case for
 operating multiple clusters. Another scenario for multicluster is failover. In a

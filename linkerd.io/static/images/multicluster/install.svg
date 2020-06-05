@@ -1,3 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="281px" height="171px" viewBox="-0.5 -0.5 281 171"><defs/><g><rect x="0" y="20" width="120" height="110" fill="#ffffff" stroke="#000000" pointer-events="all"/><rect x="160" y="20" width="120" height="110" fill="#ffffff" stroke="#000000" pointer-events="all"/><rect x="0" y="0" width="80" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 10px; margin-left: 1px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Cluster: west</div></div></div></foreignObject><text x="40" y="14" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Cluster: west</text></switch></g><rect x="160" y="0" width="80" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 10px; margin-left: 161px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Cluster: east</div></div></div></foreignObject><text x="200" y="14" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Cluster: east</text></switch></g><rect x="0" y="140" width="280" height="30" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 278px; height: 1px; padding-top: 155px; margin-left: 1px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Trust Anchor</div></div></div></foreignObject><text x="140" y="159" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Trust Anchor</text></switch></g><rect x="10" y="30" width="100" height="20" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 98px; height: 1px; padding-top: 40px; margin-left: 11px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Issuer Certificate</div></div></div></foreignObject><text x="60" y="44" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Issuer Certifica...</text></switch></g><rect x="170" y="30" width="100" height="20" fill="#ffffff" stroke="#000000" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 98px; height: 1px; padding-top: 40px; margin-left: 171px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Issuer Certificate</div></div></div></foreignObject><text x="220" y="44" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Issuer Certifica...</text></switch></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://desk.draw.io/support/solutions/articles/16000042487" target="_blank"><text text-anchor="middle" font-size="10px" x="50%" y="100%">Viewer does not support full SVG 1.1</text></a></switch></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1300 374.19" style="enable-background:new 0 0 1300 374.19;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F1F0F0;}
+	.st1{fill:#888888;}
+	.st2{font-family:'Rubik-Medium';}
+	.st3{font-size:24px;}
+	.st4{fill:none;stroke:#888888;stroke-width:2;stroke-miterlimit:10;}
+	.st5{fill:#FFFFFF;stroke:#212960;stroke-width:2;stroke-miterlimit:10;}
+	.st6{fill:#212960;}
+</style>
+<path class="st0" d="M1125.48,265.09v80c0,5.52-4.48,10-10,10H184.52c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h930.96
+	C1121,255.09,1125.48,259.57,1125.48,265.09z"/>
+<g>
+	<text transform="matrix(1 0 0 1 174.519 32.0894)" class="st1 st2 st3">Cluster: west</text>
+</g>
+<path class="st0" d="M584.14,47.94H184.52c-5.52,0-10,4.48-10,10v140.33c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+	C594.14,52.42,589.66,47.94,584.14,47.94z"/>
+<path class="st4" d="M584.14,47.94H184.52c-5.52,0-10,4.48-10,10v140.33c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+	C594.14,52.42,589.66,47.94,584.14,47.94z"/>
+<path class="st5" d="M565.2,88.27v80c0,5.52-4.48,10-10,10H213.45c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10H555.2
+	C560.73,78.27,565.2,82.75,565.2,88.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 285.3384 135.0889)" class="st6 st2 st3">Issuer Certificate</text>
+</g>
+<path class="st4" d="M1125.48,265.09v80c0,5.52-4.48,10-10,10H184.52c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h930.96
+	C1121,255.09,1125.48,259.57,1125.48,265.09z"/>
+<g>
+	<text transform="matrix(1 0 0 1 574.9766 311.9048)" class="st1 st2 st3">Trust Anchor</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 705.8608 32.0894)" class="st1 st2 st3">Cluster: east</text>
+</g>
+<g>
+	<path class="st0" d="M1115.48,47.94H715.86c-5.52,0-10,4.48-10,10v140.33c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1125.48,52.42,1121,47.94,1115.48,47.94z"/>
+	<path class="st4" d="M1115.48,47.94H715.86c-5.52,0-10,4.48-10,10v140.33c0,5.52,4.48,10,10,10h399.62c5.52,0,10-4.48,10-10V57.94
+		C1125.48,52.42,1121,47.94,1115.48,47.94z"/>
+</g>
+<path class="st5" d="M1096.55,88.27v80c0,5.52-4.48,10-10,10H744.8c-5.52,0-10-4.48-10-10v-80c0-5.52,4.48-10,10-10h341.75
+	C1092.07,78.27,1096.55,82.75,1096.55,88.27z"/>
+<g>
+	<text transform="matrix(1 0 0 1 816.6802 135.0889)" class="st6 st2 st3">Issuer Certificate</text>
+</g>
+</svg>
