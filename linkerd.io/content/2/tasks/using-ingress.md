@@ -62,7 +62,7 @@ spec:
       paths:
       - backend:
           serviceName: web-svc
-          servicePort: 8080
+          servicePort: 80
 ```
 
 The important annotation here is:
