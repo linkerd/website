@@ -1630,3 +1630,95 @@ of your Linkerd installation on the `remote` cluster is ok.  You can run
 ```bash
 linkerd --context=remote check
 ```
+
+### √ multicluster daisy chaining is avoided {#l5d-multicluster-daisy-chaining}
+
+Example errors:
+
+```bash
+‼ multicluster daisy chaining is avoided
+    * mirror service backend-one-svc-remote.multicluster-test is exported
+    see https://linkerd.io/checks/#l5d-multicluster-daisy-chaining for hints
+```
+
+This error indicates that a mirror service has been exported, causing
+a "daisy chain" where requests can come in to the cluster through the local gateway
+and be immediately sent out of the cluster to a target gateway.
+If the target gateway is in the source cluster, this can create an infinite loop.
+
+Similarly, if an exported service routes to a mirror service by a traffic split,
+the same daisy chain effect occurs.
+
+### √ all mirror services have endpoints {#l5d-multicluster-services-endpoints}
+
+Example errors:
+
+```bash
+‼ all mirror services have endpoints
+    Some mirror services do not have endpoints:
+  voting-svc-gke.emojivoto mirrored from cluster [gke] (gateway: [linkerd-multicluster/linkerd-gateway])
+    see https://linkerd.io/checks/#l5d-multicluster-services-endpoints for hints
+```
+
+The error above indicates that some mirror services in the source cluster do not
+have associated endpoints resources. These endpoints are created by the Linkerd
+service mirror controller when creating a mirror service with endpoints values as
+the remote gateway's external IP.
+
+Such an error indicates that there could be a problem with the creation of the
+mirror resources by the service mirror controller or the mirror gateway service
+in the source cluster or the external IP of the gateway service in target cluster.
+
+### √ all gateway mirrors have endpoints {#l5d-multicluster-gateways-endpoints}
+
+Example errors:
+
+```bash
+‼ all gateway mirrors have endpoints
+    Some gateway mirrors do not have endpoints:
+  linkerd-gateway-gke.linkerd-multicluster mirrored from cluster [gke]
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-endpoints for hints
+```
+
+The error above indicates that some gateway mirror services in the source cluster
+do not have associated endpoints resources. These endpoints are created by the Linkerd
+service mirror controller on the source cluster whenever a link is established with
+a target cluster.
+
+Such an error indicates that there could be a problem with the creation of the
+resources by the service mirror controller  or the external IP of the
+gateway service in target cluster.
+
+### √ all referenced/cluster gateways are valid {#l5d-multicluster-gateways-exist}
+
+This check is used to validate gateways. These are performed perform both
+at the source cluster using the kube-configs of the linked remote clusters, and
+also at the target cluster directly(if there are any exported services present).
+
+Example errors:
+
+```bash
+‼ remote: all referenced gateways are valid
+    * southeastasia: remote cluster has invalid gateways:
+      Exported service web-svc.emojivoto references a gateway with no external IP: linkerd-gateway.linkerd-multicluster
+      Exported service web-svc.emojivoto references a gateway that is missing port mc-gateway: linkerd-gateway.linkerd-multicluster
+    * gke-two: remote cluster has invalid gateways:
+      Exported service voting-svc.emojivoto references a gateway that does not exist: linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+A gateway is considered valid if it exists, has a external IP, and does not have
+any mis-configured ports.
+
+A Linkerd gateway service should have the following ports exposed i.e `mc-gateway`
+and `mc-probe`, which are used to pass requests and check health respectively.
+
+```bash
+‼ all cluster gateways are valid
+    Some gateway services do not have endpoints:
+    linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+If the check is performed on the target cluster, It also reports if the relevant
+endpoints resource for the gateway service is absent.
