@@ -1313,3 +1313,412 @@ Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true
 ```
+
+## The "linkerd-multicluster checks {#l5d-multicluster}
+
+These checks run if the service mirroring controller has been installed.
+Additionally they can be ran if `--multicluster` flag is specified explicitly.
+Most of these checks verify that the service mirroring controller is working
+correctly. Furthermore the checks ensure that end to end TLS is possible between
+paired clusters.
+
+### √ service mirror controller is running {#l5d-multicluster-service-mirror-running}
+
+Example error:
+
+```bash
+× service mirror controller is running
+    Service mirror controller is not present
+    see https://linkerd.io/checks/#l5d-multicluster-service-mirror-running for hints
+```
+
+Note, it takes a little bit for pods to be scheduled, images to be pulled and
+everything to start up. If this is a permanent error, you'll want to validate
+the state of the controller pod with:
+
+```bash
+$ kubectl --all-namespaces get po --selector linkerd.io/control-plane-component=linkerd-service-mirror
+NAME                                  READY     STATUS    RESTARTS   AGE
+linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
+```
+
+### √ service mirror controller ClusterRoles exists {#l5d-multicluster-cluster-role-exists}
+
+Example error:
+
+```bash
+× service mirror controller ClusterRoles exists
+    missing ClusterRoles: linkerd-service-mirror-access-local-resources
+    see https://linkerd.io/checks/#l5d-multicluster-cluster-role-exists for hints
+```
+
+Ensure that the cluster role exists:
+
+```bash
+$ kubectl get clusterrole linkerd-service-mirror-access-local-resources
+NAME                                            AGE
+linkerd-service-mirror-access-local-resources   54m
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create ClusterRoles
+yes
+```
+
+### √ service mirror controller ClusterRoleBindings exist {#l5d-multicluster-cluster-role-binding-exist}
+
+Example error:
+
+```bash
+× service mirror controller ClusterRoleBindings exist
+    missing ClusterRoleBindings: linkerd-service-mirror-access-local-resources
+    see https://linkerd.io/checks/#l5d-multicluster-cluster-role-binding-exist for hints
+```
+
+Ensure that the cluster role bindings exists:
+
+```bash
+$ kubectl get clusterrolebindings linkerd-service-mirror-access-local-resources
+NAME                                            AGE
+linkerd-service-mirror-access-local-resources   54m
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create ClusterRoleBindings
+yes
+```
+
+### √ service mirror controller Roles exist {#l5d-multicluster-role-exist}
+
+Example error:
+
+```bash
+× service mirror controller Roles exist
+    missing Roles: linkerd-service-mirror-read-remote-creds
+    see https://linkerd.io/checks/#l5d-multicluster-role-exist for hints
+```
+
+Ensure that the role exists in the service mirror controller namespace:
+
+```bash
+$ kubectl get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster
+NAME                                       AGE
+linkerd-service-mirror-read-remote-creds   12m
+```
+
+Also ensure you have permission to create Roles:
+
+```bash
+$ kubectl auth can-i create Roles -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller RoleBindings exist {#l5d-multicluster-role-binding-exist}
+
+Example error:
+
+```bash
+× service mirror controller RoleBindings exist
+    missing RoleBindings: linkerd-service-mirror-read-remote-creds
+    see https://linkerd.io/checks/#l5d-multicluster-role-binding-exist for hints
+```
+
+Ensure that the role binding exists in service mirror controller namespace:
+
+```bash
+$ kubectl get rolebinding linkerd-service-mirror-read-remote-creds -n linkerd-multicluster
+NAME                                       AGE
+linkerd-service-mirror-read-remote-creds   19m
+```
+
+Also ensure you have permission to create RoleBindings:
+
+```bash
+$ kubectl auth can-i create RoleBindings -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller ServiceAccounts exist {#l5d-multicluster-service-account-exist}
+
+Example error:
+
+```bash
+× service mirror controller ServiceAccounts exist
+    missing ServiceAccounts: linkerd-service-mirror
+    see https://linkerd.io/checks/#l5d-multicluster-service-account-exist for hints
+```
+
+Ensure that the linkerd-service-mirror service account exists:
+
+```bash
+$ kubectl get ServiceAccount linkerd-service-mirror -n linkerd-multicluster
+NAME                     SECRETS   AGE
+linkerd-service-mirror   1         45m
+```
+
+Also ensure you have permission to create ServiceAccount:
+
+```bash
+$ kubectl auth can-i create ServiceAccounts -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller has required permissions {#l5d-multicluster-local-rbac-correct}
+
+Example error:
+
+```bash
+× ervice mirror controller has required permissions
+    missing Service mirror ClusterRole linkerd-service-mirror-access-local-resources: unexpected verbs expected create,delete,get,list,update,watch, got create,delete,get,update,watch
+    see https://linkerd.io/checks/#l5d-multicluster-local-rbac-correct for hints
+```
+
+This error indicates that the local RBAC permissions of the service mirror
+service account are not correct. In order to ensure that you have the
+correct verbs and resources you can inspect your ClusterRole and Role
+object and look at the rules section.
+
+Expected rules for `linkerd-service-mirror-access-local-resources` cluster role:
+
+```bash
+$ kubectl  --context=local get clusterrole linkerd-service-mirror-access-local-resources -o yaml
+kind: ClusterRole
+metadata:
+  labels:
+    linkerd.io/control-plane-component: linkerd-service-mirror
+  name: linkerd-service-mirror-access-local-resources
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - services
+  verbs:
+  - list
+  - get
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - create
+  - list
+  - get
+  - watch
+```
+
+Expected rules for `linkerd-service-mirror-read-remote-creds` role:
+
+```bash
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+kind: Role
+metadata:
+  labels:
+    linkerd.io/control-plane-component: linkerd-service-mirror
+  name: linkerd-service-mirror-read-remote-creds
+  namespace: linkerd-multicluster
+  rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+  - watch
+```
+
+### √ service mirror controller can access remote clusters {#l5d-smc-remote-remote-clusters-access}
+
+Example error:
+
+```bash
+× service mirror controller can access remote clusters
+    Problematic clusters:
+        * cluster: [remote]: Insufficient Service permissions: expected get,list,watch, got list,watch
+    see https://linkerd.io/checks/#l5d-smc-remote-remote-clusters-access for hints
+```
+
+In case you get an error of that nature you need to ensure that the ClusterRole
+in the remote cluster has sufficient permissions for the service mirroring
+controller to work correctly:
+
+```bash
+$ kubectl --context=remote get  clusterrole linkerd-service-mirror-remote-access  -n linkerd-multicluster -o yaml
+kind: ClusterRole
+metadata:
+  name: linkerd-service-mirror-remote-access
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resourceNames:
+  - linkerd-config
+  resources:
+  - configmaps
+  verbs:
+  - get
+
+```
+
+### √ all remote cluster gateways are alive {#l5d-multicluster-remote-gateways-alive}
+
+Example error:
+
+```bash
+× all remote cluster gateways are alive
+    Some gateways are not alive:
+        * cluster: [remote], gateway: [linkerd-multicluster/linkerd-gateway]
+    see https://linkerd.io/checks/#l5d-multicluster-remote-gateways-alive
+```
+
+If you get such an error, you might want to check the logs of your cluster
+gateway on the `remote` cluster by running:
+
+```bash
+kubectl --context=remote  logs <linkerd-gatewa-pod>  nginx  -n linkerd-multicluster  -f
+```
+
+Additionally it is worth checking the logs of the proxy for any errors:
+
+```bash
+kubectl --context=remote  logs <linkerd-gatewa-pod>  proxy  -n linkerd-multicluster  -f
+```
+
+### √ clusters share trust anchors {#l5d-multicluster-clusters-share-anchors}
+
+Example errors:
+
+```bash
+× clusters share trust anchors
+    Problematic clusters:
+        * remote
+    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+```
+
+The error above indicates that your trust anchors are not compatible. In order to
+fix that you need to ensure that both your anchors contain identical sets of
+certficates.
+
+```bash
+× clusters share trust anchors
+    Problematic clusters:
+        * remote: cannot parse trust anchors
+    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+```
+
+Such an error indicates that there is a problem with your anchors on the
+cluster named `remote` You need to make sure the identity config aspect
+of your Linkerd installation on the `remote` cluster is ok.  You can run
+`check` against the remote cluster to verify that:
+
+```bash
+linkerd --context=remote check
+```
+
+### √ multicluster daisy chaining is avoided {#l5d-multicluster-daisy-chaining}
+
+Example errors:
+
+```bash
+‼ multicluster daisy chaining is avoided
+    * mirror service backend-one-svc-remote.multicluster-test is exported
+    see https://linkerd.io/checks/#l5d-multicluster-daisy-chaining for hints
+```
+
+This error indicates that a mirror service has been exported, causing
+a "daisy chain" where requests can come in to the cluster through the local gateway
+and be immediately sent out of the cluster to a target gateway.
+If the target gateway is in the source cluster, this can create an infinite loop.
+
+Similarly, if an exported service routes to a mirror service by a traffic split,
+the same daisy chain effect occurs.
+
+### √ all mirror services have endpoints {#l5d-multicluster-services-endpoints}
+
+Example errors:
+
+```bash
+‼ all mirror services have endpoints
+    Some mirror services do not have endpoints:
+  voting-svc-gke.emojivoto mirrored from cluster [gke] (gateway: [linkerd-multicluster/linkerd-gateway])
+    see https://linkerd.io/checks/#l5d-multicluster-services-endpoints for hints
+```
+
+The error above indicates that some mirror services in the source cluster do not
+have associated endpoints resources. These endpoints are created by the Linkerd
+service mirror controller when creating a mirror service with endpoints values as
+the remote gateway's external IP.
+
+Such an error indicates that there could be a problem with the creation of the
+mirror resources by the service mirror controller or the mirror gateway service
+in the source cluster or the external IP of the gateway service in target cluster.
+
+### √ all gateway mirrors have endpoints {#l5d-multicluster-gateways-endpoints}
+
+Example errors:
+
+```bash
+‼ all gateway mirrors have endpoints
+    Some gateway mirrors do not have endpoints:
+  linkerd-gateway-gke.linkerd-multicluster mirrored from cluster [gke]
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-endpoints for hints
+```
+
+The error above indicates that some gateway mirror services in the source cluster
+do not have associated endpoints resources. These endpoints are created by the Linkerd
+service mirror controller on the source cluster whenever a link is established with
+a target cluster.
+
+Such an error indicates that there could be a problem with the creation of the
+resources by the service mirror controller  or the external IP of the
+gateway service in target cluster.
+
+### √ all referenced/cluster gateways are valid {#l5d-multicluster-gateways-exist}
+
+This check is used to validate gateways. These are performed perform both
+at the source cluster using the kube-configs of the linked remote clusters, and
+also at the target cluster directly(if there are any exported services present).
+
+Example errors:
+
+```bash
+‼ remote: all referenced gateways are valid
+    * southeastasia: remote cluster has invalid gateways:
+      Exported service web-svc.emojivoto references a gateway with no external IP: linkerd-gateway.linkerd-multicluster
+      Exported service web-svc.emojivoto references a gateway that is missing port mc-gateway: linkerd-gateway.linkerd-multicluster
+    * gke-two: remote cluster has invalid gateways:
+      Exported service voting-svc.emojivoto references a gateway that does not exist: linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+A gateway is considered valid if it exists, has a external IP, and does not have
+any mis-configured ports.
+
+A Linkerd gateway service should have the following ports exposed i.e `mc-gateway`
+and `mc-probe`, which are used to pass requests and check health respectively.
+
+```bash
+‼ all cluster gateways are valid
+    Some gateway services do not have endpoints:
+    linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+If the check is performed on the target cluster, It also reports if the relevant
+endpoints resource for the gateway service is absent.
