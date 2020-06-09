@@ -22,7 +22,7 @@ an _add-on_ system, and introduces a variety of other features and stability
 improvements.
 
 This release includes changes from a massive list of contributors. A special
-thank-you to [Arthur Silva Sens](https://github.com/ArthurSens), [Matei
+*thank you* to [Arthur Silva Sens](https://github.com/ArthurSens), [Matei
 David](https://github.com/Matei207), [Ali Ariff](https://github.com/aliariff),[
 amariampolskiy](https://github.com/amariampolskiy),[
 arminbuerkle](https://github.com/arminbuerkle), [Christian
@@ -85,17 +85,17 @@ own cluster); hybrid cloud (workloads can move between on-premises and cloud
 environments without affecting the rest of the application); and more.
 
 Finally, like all Linkerd features, Linkerd's "service mirroring" approach to
-multi-cluster leverages as much existing Kubernetes functionality as possible,
-adding the bare minimum of additional machinery. Remote services are
-represented as Kubernetes services; no new CRDs are introduced; and
+multi-cluster leverages as much existing Kubernetes functionality as possible
+and adds the bare minimum of additional machinery. Remote services are
+represented directly as Kubernetes services; no new CRDs are introduced; and
 configuration complexity is kept to a bare minimum.
 
 ## Ambassador support for Multi-cluster
 
 We're happy to report that our friends at the Ambassador project have already
 created a multi-cluster integration, allowing Ambassador users to leverage
-their existing Ambassador deployments as Linkerd's multi-cluster gateway. [Learn
-more in the blog post](https://blog.getambassador.io/).
+Ambassador deployments as Linkerd's multi-cluster gateway! [Learn more in the
+Ambassador blog post](https://blog.getambassador.io/).
 
 ## Add-ons
 
@@ -114,21 +114,34 @@ your own--or potentially with none at all.
 
 ## And lots more
 
-Linkerd 2.8 also has a tremendous list of other improvements, performance enhancements, and bug fixes. See the [full release notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8) for details.
+Linkerd 2.8 also has a tremendous list of other improvements, performance
+enhancements, and bug fixes, includng:
+
+* The Helm chart is more flexible and modular, with new Prometheus
+  configuration options.
+* The proxy now labels emitted distributed tracing spans with pod metadata.
+* Various performance improvements to the proxy to reduce contention, improving
+  latency, and reduce spurious timeouts.
+* Automatic prevention of common traffic-loop scenarios.
+
+See the [full release
+notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8) for
+details.
 
 ## Linkerd's upcoming roadmap
 
-We believe that Linkerd's core value is _connectivity_. In the cloud native
-world, this doesn't just mean "A and B can exchange packets", it means "A and B
-can exchange packets in a way that validates the identity on both sides, that
-has clear authorization semantics, that is confidential to third parties, and
-that is measurable and inspectable".
+We believe that Linkerd's core value is _connectivity_--and that in a cloud
+native world, connectivity doesn't just mean "A and B can exchange packets",
+but rather "A and B can exchange packets in a way that validates the identity
+on both sides; has clear authorization semantics; is confidential to third
+parties; and is measurable and inspectable".
 
 As we look ahead, we see Linkerd's ability to create this connectivity
 transforming it into the _security plane_ for your Kubernetes infra. The 2.8
 release marks a major step forward in that direction, and the next several
 releases will flesh out Linkerd's featureset, including by extending mTLS to
-all connections; introducing policy; and much more.
+all connections; introducing policy; and much more. Stay tuned for lots more on
+this topic.
 
 ## Try it today!
 
