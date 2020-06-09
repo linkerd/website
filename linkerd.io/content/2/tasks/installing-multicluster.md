@@ -103,10 +103,12 @@ mirror.linkerd.io/gateway-ns: linkerd-multicluster
 ## Leverage Ambassador
 
 The bundled Linkerd gateway is not required. In fact, if you have an existing
-Ambassador installation, it is easy to use it instead! This guide assumes that
-Ambassador has been installed into the `ambassador` namespace.
+Ambassador installation, it is easy to use it instead! By using your existing
+Ambassador installation, you avoid needing to manage multiple ingress gateways
+and pay for extra cloud load balancers. This guide assumes that Ambassador has
+been installed into the `ambassador` namespace.
 
-First, you'll want to inject the ambassador deployment with Linkerd:
+First, you'll want to inject the `ambassador` deployment with Linkerd:
 
 ```bash
 kubectl -n ambassador get deploy ambassador -o yaml | \
