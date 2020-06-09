@@ -12,36 +12,35 @@ tags: [Linkerd]
 
 ## Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
 
-We're very happy to announce the release of Linkerd 2.8! This release
-introduces a new multi-cluster extension to Linkerd, allowing it to establish
-connections across Kubernetes clusters that are secure, transparent to the
-application, and work with any network topology. We believe this is the
-simplest option for secure Kubernetes multi-cluster connectivity available
-today. The 2.8 release also makes Linkerd more modular with the beginnings of
-an _add-on_ system, and introduces a variety of other features and stability
-improvements.
+We're very happy to announce the release of Linkerd 2.8! This release introduces
+a new multi-cluster extension to Linkerd, allowing it to establish connections
+across Kubernetes clusters that are secure, transparent to the application, and
+work with any network topology. We believe this is the simplest option for
+secure Kubernetes multi-cluster connectivity available today. The 2.8 release
+also makes Linkerd more modular with the beginnings of an _add-on_ system, and
+introduces a variety of other features and stability improvements.
 
 This release includes changes from a massive list of contributors. A special
-*thank you* to [Arthur Silva Sens](https://github.com/ArthurSens), [Matei
-David](https://github.com/Matei207), [Ali Ariff](https://github.com/aliariff),[
-amariampolskiy](https://github.com/amariampolskiy),[
-arminbuerkle](https://github.com/arminbuerkle), [Christian
-Hüning](https://github.com/christianhuening), [Christy
-Jacob](https://github.com/christyjacob4), [Lutz
-Behnke](https://github.com/cypherfox), [Dax
-McDonald](https://github.com/daxmc99), [Saurav
-Tiwary](https://github.com/dr0pdb), [drholmie](https://github.com/drholmie),
-[EMEHINOLA Idowu](https://github.com/hydeenoble), [Joakim
-Roubert](https://github.com/joakimr-axis),
-[jpresky](https://github.com/jpresky), [Kohsheen
-Tiku](https://github.com/kohsheen1234), [Lewis
-Cowper](https://github.com/lewiscowper), [Alex
-Lundberg](https://github.com/lundbird), [Mayank
-Shah](https://github.com/mayankshah1607),
-[mmiller1](https://github.com/mmiller1), [Naseem
-Kullah](https://github.com/naseemkullah), [Sanni
-Michael](https://github.com/sannimichaelse), and [Supratik
-Das](https://github.com/supra08) for your hard work.
+_thank you_ to [Arthur Silva Sens](https://github.com/ArthurSens),
+[Matei David](https://github.com/Matei207),
+[Ali Ariff](https://github.com/aliariff),[ amariampolskiy](https://github.com/amariampolskiy),[ arminbuerkle](https://github.com/arminbuerkle),
+[Christian Hüning](https://github.com/christianhuening),
+[Christy Jacob](https://github.com/christyjacob4),
+[Lutz Behnke](https://github.com/cypherfox),
+[Dax McDonald](https://github.com/daxmc99),
+[Saurav Tiwary](https://github.com/dr0pdb),
+[drholmie](https://github.com/drholmie),
+[EMEHINOLA Idowu](https://github.com/hydeenoble),
+[Joakim Roubert](https://github.com/joakimr-axis),
+[jpresky](https://github.com/jpresky),
+[Kohsheen Tiku](https://github.com/kohsheen1234),
+[Lewis Cowper](https://github.com/lewiscowper),
+[Alex Lundberg](https://github.com/lundbird),
+[Mayank Shah](https://github.com/mayankshah1607),
+[mmiller1](https://github.com/mmiller1),
+[Naseem Kullah](https://github.com/naseemkullah),
+[Sanni Michael](https://github.com/sannimichaelse), and
+[Supratik Das](https://github.com/supra08) for your hard work.
 
 ## Multi-cluster Kubernetes the Kubernetes way
 
@@ -67,16 +66,16 @@ this multi-cluster feature is designed to meet some critical goals:
    communication.
 
 Just as with in-cluster connections, Linkerd's cross-cluster connections are
-transparent to the application code. A service _A_ on cluster _west_ can talk
-to a service _C_ on cluster _east_ simply by addressing it directly as
-`C.east`, or by addressing it as `C` and having Linkerd automatically route (or
-even shift just a portion of) traffic for that service to cluster _east_.
-Regardless of whether that communication happens within a cluster, across
-clusters within a datacenter or VPC, or across the public Internet,  Linkerd
-will establish a connection between clusters that's encrypted and authenticated
-on both sides with mTLS.
+transparent to the application code. A service _A_ on cluster _west_ can talk to
+a service _C_ on cluster _east_ simply by addressing it directly as `C.east`, or
+by addressing it as `C` and having Linkerd automatically route (or even shift
+just a portion of) traffic for that service to cluster _east_. Regardless of
+whether that communication happens within a cluster, across clusters within a
+datacenter or VPC, or across the public Internet, Linkerd will establish a
+connection between clusters that's encrypted and authenticated on both sides
+with mTLS.
 
-![Linkerd multi-cluster Kubernetes example](/uploads/linkerd_blog_2.8-diagrams_multicluster.png "Linkerd multi-cluster Kubernetes example")
+![Linkerd multi-cluster Kubernetes example](/uploads/linkerd_blog_2.8-diagrams_multicluster.png 'Linkerd multi-cluster Kubernetes example')
 
 This new multi-cluster functionality unlocks a whole host of use cases for
 Linkerd, including failover (transitioning traffic across datacenters or cloud
@@ -94,8 +93,8 @@ configuration complexity is kept to a bare minimum.
 
 We're happy to report that our friends at the Ambassador project have already
 created a multi-cluster integration, allowing Ambassador users to leverage
-Ambassador deployments as Linkerd's multi-cluster gateway! [Learn more in the
-Ambassador blog post](https://blog.getambassador.io/multi-cluster-kubernetes-with-ambassador-and-linkerd-2caf0e978f8f).
+Ambassador deployments as Linkerd's multi-cluster gateway!
+[Learn more in the Ambassador blog post](https://blog.getambassador.io/multi-cluster-kubernetes-with-ambassador-and-linkerd-2caf0e978f8f).
 
 ## Add-ons
 
@@ -103,70 +102,70 @@ The 2.8 release also introduces a simple _add-on system_ for adding (or
 removing!) bundles of functionality from Linkerd. Linkerd 2.8 ships with two
 addons:
 
-* A Jaeger add-on, which adds the Jaeger and oc-collector components for
+- A Jaeger add-on, which adds the Jaeger and oc-collector components for
   collecting and displaying distributed tracing to your cluster.
-* A Grafana add-on (enabled by default) which adds Grafana graphs to Linkerd's
+- A Grafana add-on (enabled by default) which adds Grafana graphs to Linkerd's
   dashboard.
 
 In the future we'll be moving more functionality into add-ons, allowing you to,
-for example, remove the default Prometheus installation and replace it with
-your own--or potentially with none at all.
+for example, remove the default Prometheus installation and replace it with your
+own--or potentially with none at all.
 
 ## And lots more
 
 Linkerd 2.8 also has a tremendous list of other improvements, performance
 enhancements, and bug fixes, includng:
 
-* The Helm chart is more flexible and modular, with new Prometheus
-  configuration options.
-* The proxy now labels emitted distributed tracing spans with pod metadata.
-* Various performance improvements to the proxy to reduce contention, improving
+- The Helm chart is more flexible and modular, with new Prometheus configuration
+  options.
+- The proxy now labels emitted distributed tracing spans with pod metadata.
+- Various performance improvements to the proxy to reduce contention, improving
   latency, and reduce spurious timeouts.
-* Automatic prevention of common traffic-loop scenarios.
+- Automatic prevention of common traffic-loop scenarios.
 
-See the [full release
-notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8.0) for
-details.
+See the
+[full release notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8.0)
+for details.
 
 ## Linkerd's upcoming roadmap
 
 We believe that Linkerd's core value is _connectivity_--and that in a cloud
-native world, connectivity doesn't just mean "A and B can exchange packets",
-but rather "A and B can exchange packets in a way that validates the identity
-on both sides; has clear authorization semantics; is confidential to third
-parties; and is measurable and inspectable".
+native world, connectivity doesn't just mean "A and B can exchange packets", but
+rather "A and B can exchange packets in a way that validates the identity on
+both sides; has clear authorization semantics; is confidential to third parties;
+and is measurable and inspectable".
 
 As we look ahead, we see Linkerd's ability to create this connectivity
 transforming it into the _security plane_ for your Kubernetes infra. The 2.8
 release marks a major step forward in that direction, and the next several
-releases will flesh out Linkerd's featureset, including by extending mTLS to
-all connections; introducing policy; and much more. Stay tuned for lots more on
-this topic.
+releases will flesh out Linkerd's featureset, including by extending mTLS to all
+connections; introducing policy; and much more. Stay tuned for lots more on this
+topic.
 
 ## Try it today!
 
-Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
-these features in action. Either way, you can download the stable 2.8 release
-by running:
+Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
+[weekly edge releases](https://linkerd.io/2/edge) will already have seen these
+features in action. Either way, you can download the stable 2.8 release by
+running:
 
 ```bash
 curl https://run.linkerd.io/install | sh
 ```
 
-Using Helm? See our [guide to installing Linkerd with
-Helm](https://linkerd.io/2/tasks/install-helm/). Upgrading from a previous
-release? We've got you covered: see our [Linkerd upgrade
-guide](https://linkerd.io/2/tasks/upgrade/) for how to use the linkerd upgrade
-command.
+Using Helm? See our
+[guide to installing Linkerd with Helm](https://linkerd.io/2/tasks/install-helm/).
+Upgrading from a previous release? We've got you covered: see our
+[Linkerd upgrade guide](https://linkerd.io/2/tasks/upgrade/) for how to use the
+linkerd upgrade command.
 
 ## Linkerd is for everyone
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io/). Linkerd is [committed to open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
-If you have feature requests, questions, or comments, we'd love to have you
-join our rapidly-growing community! Linkerd is hosted on
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
+[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+If you have feature requests, questions, or comments, we'd love to have you join
+our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
