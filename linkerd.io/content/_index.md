@@ -12,7 +12,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.7.1 has been released! [Read the announcement >>](https://lists.cncf.io/g/cncf-linkerd-users/message/225)
+  description: Linkerd 2.8 has been released! [Read the announcement >>](/2020/06/09/announcing-linkerd-2.8/)
 description: Linkerd adds critical security, observability, and reliability to your Kubernetes stack, without any code changes.
 keywords:
 - cloud native applications
