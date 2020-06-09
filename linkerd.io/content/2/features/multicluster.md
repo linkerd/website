@@ -1,26 +1,36 @@
 +++
-title = "Multicluster"
+title = "Multi-cluster communication"
 description = "Linkerd connects applications running in different clusters"
 +++
 
-There are many challenges to building an effective multicluster Kubernetes
-architecture, including configuration, monitoring, deployment, and traffic
-management. Of these challenges, we see a service mesh as able to directly
-address three specific areas:
+Linkerd can connect Kubernetes services across cluster boundaries in a way that
+is secure, fully transparent to the application, and independent of network
+topology. This multi-cluster capability is designed to provide:
 
-- Observability: a service mesh can provide a unified view of application
-  behavior that spans clusters.
-- Security: a service mesh can provide guarantees around authentication,
-  authorization, and confidentiality to cross-cluster traffic.
-- Routing: a service mesh can make it possible and “easy” for applications in
-  one cluster to communicate with applications in another cluster.
+1. **A unified trust domain.** The identity of source and destination workloads
+   are be validated at every step, both in and across cluster boundaries.
+2. **Separate failure domains.** Failure of a cluster allows the remaining
+   clusters to function.
+3. **Support for heterogeneous networks.** Since clusters can span clouds,
+   VPCs, on-premises data centers, and combinations thereof, Linkerd does not
+   introduce any L3/L4 requirements other than gateway connectivity.
+4. **A unified model alongside in-cluster communication.** The same
+   observability, reliability, and security features that Linkerd provides for
+   in-cluster communication extend to cross-cluster communication.
 
-The same guarantees that a service mesh like Linkerd provides for in-cluster
-calls—identity, traffic shifting, etc are also applied to cross-cluster calls.
-It does this by "mirroring" service information between clusters. With
-multicluster Linkerd in place, the full observability, security and routing
-features of Linkerd apply uniformly to both in-cluster and cluster-calls, and
-the application does not need to distinguish between those situations.
+Just as with in-cluster connections, Linkerd’s cross-cluster connections are
+transparent to the application code. Regardless of whether that communication
+happens within a cluster, across clusters within a datacenter or VPC, or across
+the public Internet, Linkerd will establish a connection between clusters
+that’s encrypted and authenticated on both sides with mTLS.
+
+## How it works
+
+Linkerd's multi-cluster support works by "mirroring" service information
+between clusters. Because remote services are represented as Kubernetes
+services, the full observability, security and routing features of Linkerd
+apply uniformly to both in-cluster and cluster-calls, and the application does
+not need to distinguish between those situations.
 
 {{< fig
     alt="Overview"
@@ -28,40 +38,30 @@ the application does not need to distinguish between those situations.
     center="true"
     src="/images/multicluster/feature-overview.svg" >}}
 
-To support this use case, you must install two components on each cluster. The
-service mirror controller watches target clusters for updates to services and
-mirrors those service updates locally on a source cluster. This provides
-visibility into the service names on other, target clusters so that applications
-can address them directly.
+Linkerd's control plane contains two multi-cluster components on each cluster:
+a *service mirror* and a *gateway*. The *service mirror* component watches
+target clusters for updates to services and mirrors those service updates
+locally on a source cluster. This provides visibility into the service names on
+other, target clusters so that applications can address them directly. The
+*multi-cluster gateway* component provides a way target clusters to receive
+requests from source clusters. (This allows Linkerd to support [hierarchical
+networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).)
 
-A gateway is also added to each cluster. This gateway provides a way target
-clusters to receive requests from source clusters. Without a gateway, there
-would be no way to support
-[hierarchical networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
-
-After installing these components on each cluster using the handy
-`linkerd multicluster install` command, each cluster is linked together.
-Kubernetes `ServiceAccount` and RBAC resources are created so that the service
-mirror controllers can watch for updates in other clusters.
-
-Once clusters are linked together, `Service` resources can be exported. Exported
-services are visible in every cluster that has been linked. The only requirement
-is to add annotations to the `Service` being exported that configures which
+Once these components are installed, Kubernetes `Service` resources can be
+exported to other clusters, by adding a Kubernetes annotation describing which
 gateway in the cluster to use for connectivity.
 
-Check out the [getting started guide](/2/tasks/multicluster/) to walk through a
-demo and get a better understanding of how all the pieces fit together. If you'd
-like to just jump right in, there are
-[installation instructions](/2/tasks/installing-multicluster/).
+Ready to get started? See the [getting started with multi-cluster
+guide](/2/tasks/multicluster/) for a walkthrough.
 
-Adding extra Kubernetes clusters to your infrastructure brings a lot of
-complexity with it. Make sure to check out the
-[requirements](/2020/02/17/architecting-for-multicluster-kubernetes/) used to
-design this functionality in Linkerd. It'll hopefully explain why certain design
-decisions were made.
+## Further reading
 
-After the requirements document, follow up with a deep dive on the
-[architecture](/2020/02/25/multicluster-kubernetes-with-service-mirroring/)
-itself and how all the pieces fit together. Each step explains exactly what is
-happening, both for resource manipulation as well as routing requests between
-clusters.
+* [Multi-cluster installation instructions](/2/tasks/installing-multicluster/).
+* [Architecting for multi-cluster
+  Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
+  post explaining some of the design rationale behind Linkerd's multi-cluster
+  implementation.
+* [Multi-cluster Kubernetes with service
+  mirroring](/2020/02/25/multicluster-kubernetes-with-service-mirroring), a
+  deep dive of some of the architectural decisions behind Linkerd's
+  multi-cluster implementation.
