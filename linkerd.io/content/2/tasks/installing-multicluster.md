@@ -12,6 +12,9 @@ going on, check out [getting started](/2/tasks/multicluster/).
 If you'd like to use an existing [Ambassador](https://www.getambassador.io/)
 installation, check out the
 [leverage](/2/tasks/installing-multicluster/#leverage-ambassador) instructions.
+Alternatively, check out the Ambassador
+[documentation](https://www.getambassador.io/docs/latest/howtos/linkerd2/#multicluster-operation)
+for a more detailed explanation of the configuration and what's going on.
 
 ## Requirements
 
