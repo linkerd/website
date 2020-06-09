@@ -69,10 +69,16 @@ linkerd install \
 Or when installing with Helm:
 
 ```bash
-helm install \
+helm install linkerd2
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
   linkerd/linkerd2
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been depreciated, and is the first argument as
+ specified above.
+{{< /note >}}
