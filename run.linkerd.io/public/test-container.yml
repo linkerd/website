@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  namespace: multicluster-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      namespace: multicluster-test
+      labels:
+        app: test
+    spec:
+      containers:
+      - name: test
+        image: scrapinghub/httpbin:latest
+        command:
+        - sleep
+        - "3600"
+        resources:
+          requests:
+            cpu: 0.1
+            memory: 200

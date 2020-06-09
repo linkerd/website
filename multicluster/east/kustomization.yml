@@ -1,0 +1,6 @@
+bases:
+  - ../base
+
+patches:
+  - podinfo.yml
+  - frontend.yml

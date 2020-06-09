@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+spec:
+  template:
+    spec:
+      containers:
+      - name: podinfod
+        env:
+        - name: PODINFO_UI_COLOR
+          value: '#007bff'
+        - name: PODINFO_UI_MESSAGE
+          value: 'greetings from east'

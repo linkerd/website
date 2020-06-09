@@ -105,8 +105,8 @@ file.
 
 ## Is there an Enterprise edition, or a commercial edition?
 
-No. Everything in Linkerd is fully open source. Some companies provide
-[commercial support for Linkerd](https://linkerd.io/enterprise/).
+Linkerd is fully open source. Some companies provide
+[commercial packages or support for Linkerd](https://linkerd.io/enterprise/).
 
 ## What's the difference between Linkerd 1.x and 2.x?
 
