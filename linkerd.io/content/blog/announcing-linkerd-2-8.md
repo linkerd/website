@@ -95,7 +95,7 @@ configuration complexity is kept to a bare minimum.
 We're happy to report that our friends at the Ambassador project have already
 created a multi-cluster integration, allowing Ambassador users to leverage
 Ambassador deployments as Linkerd's multi-cluster gateway! [Learn more in the
-Ambassador blog post](https://blog.getambassador.io/).
+Ambassador blog post](https://blog.getambassador.io/multi-cluster-kubernetes-with-ambassador-and-linkerd-2caf0e978f8f).
 
 ## Add-ons
 
