@@ -15,6 +15,7 @@ IgnoreURLs:
   - https://discourse.linkerd.io
   - https://github.com/*
   - https://www.man7.org/*
+  - https://offerup.com/
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
