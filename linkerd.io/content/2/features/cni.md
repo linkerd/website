@@ -56,11 +56,17 @@ Run the following commands to install the CNI DaemonSet:
 
 ```bash
 # install the CNI plugin first
-helm install --name=linkerd2-cni linkerd2/linkerd2-cni
+helm install linkerd2-cni linkerd2/linkerd2-cni
 
 # ensure the plugin is installed and ready
 linkerd check --pre --linkerd-cni-enabled
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been depreciated, and is the first argument as
+ specified above.
+{{< /note >}}
 
 At that point you are ready to install Linkerd with CNI enabled.
 You can follow [Installing Linkerd with Helm](/2/tasks/install-helm/) to do so.

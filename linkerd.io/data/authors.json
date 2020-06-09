@@ -1,38 +1,10 @@
 {
-  "william": {
-    "avatar": "/uploads/WilliamMorgan.jpg",
-    "email": "william@buoyant.io",
-    "name": "William Morgan",
-    "firstName": "William",
-    "lastName": "Morgan"
-  },
-  "steve": {
-    "avatar": "/uploads/steve-jenson-avatar.jpeg",
-    "email": "steve@buoyant.io",
-    "name": "Steve Jenson",
-    "firstName": "Steve",
-    "lastName": "Jenson"
-  },
   "alex": {
     "avatar": "",
     "email": "alex@buoyant.io",
     "name": "Alex Leong",
     "firstName": "Alex",
     "lastName": "Leong"
-  },
-  "oliver": {
-    "avatar": "",
-    "email": "oliver@buoyant.io",
-    "name": "Oliver Gould",
-    "firstName": "Oliver",
-    "lastName": "Gould"
-  },
-  "kevin": {
-    "avatar": "",
-    "email": "kl@buoyant.io",
-    "name": "Kevin Lingerfelt",
-    "firstName": "Kevin",
-    "lastName": "Lingerfelt"
   },
   "andrew": {
     "avatar": "",
@@ -41,19 +13,26 @@
     "firstName": "Andrew",
     "lastName": "Seigner"
   },
-  "sarah": {
+  "carol": {
     "avatar": "",
-    "email": "sarah@buoyant.io",
-    "name": "Sarah Brown",
-    "firstName": "Sarah",
-    "lastName": "Brown"
+    "email": "carol@buoyant.io",
+    "name": "Carol Scott",
+    "firstName": "Carol",
+    "lastName": "Scott"
   },
-  "risha": {
+  "charles": {
+    "avatar": "/uploads/charles.jpg",
+    "email": "charles@buoyant.io",
+    "name": "Charles Pretzer",
+    "firstName": "Charles",
+    "lastName": "Pretzer"
+  },
+  "community": {
     "avatar": "",
-    "email": "mars@buoyant.io",
-    "name": "Risha Mars",
-    "firstName": "Risha",
-    "lastName": "Mars"
+    "email": "marketing@buoyant.io",
+    "name": "Contributor",
+    "firstName": "Contributor",
+    "lastName": ""
   },
   "courtney": {
     "avatar": "/uploads/Courtney-Gannon.jpg",
@@ -62,12 +41,12 @@
     "firstName": "Courtney",
     "lastName": "Gannon"
   },
-  "sterling": {
+  "dennis": {
     "avatar": "",
-    "email": "sterling@buoyant.io",
-    "name": "Sterling White",
-    "firstName": "Sterling",
-    "lastName": "White"
+    "email": "dennis@buoyant.io",
+    "name": "Dennis Adjei-Baah",
+    "firstName": "Dennis",
+    "lastName": "Adjei-Baah"
   },
   "eliza": {
     "avatar": "",
@@ -76,19 +55,12 @@
     "firstName": "Eliza",
     "lastName": "Weisman"
   },
-  "gmiranda23": {
-    "avatar": "/uploads/george miranda.jpeg",
-    "email": "george@buoyant.io",
-    "name": "George Miranda",
-    "firstName": "George",
-    "lastName": "Miranda"
-  },
-  "dennis": {
+  "eren": {
     "avatar": "",
-    "email": "dennis@buoyant.io",
-    "name": "Dennis Adjei-Baah",
-    "firstName": "Dennis",
-    "lastName": "Adjei-Baah"
+    "email": "gameover@gmail.com",
+    "name": "eren",
+    "firstName": "",
+    "lastName": ""
   },
   "franzi": {
     "avatar": "",
@@ -96,6 +68,20 @@
     "name": "Franzi",
     "firstName": "Franziska",
     "lastName": "von der Goltz"
+  },
+  "gmiranda23": {
+    "avatar": "/uploads/george miranda.jpeg",
+    "email": "george@buoyant.io",
+    "name": "George Miranda",
+    "firstName": "George",
+    "lastName": "Miranda"
+  },
+  "ivan": {
+    "avatar": "/uploads/ivan.jpg",
+    "email": "ivan@buoyant.io",
+    "name": "Ivan Sim",
+    "firstName": "Ivan",
+    "lastName": "Sim"
   },
   "jenlankford": {
     "avatar": "/uploads/jen-lankford-avatar.png",
@@ -111,33 +97,19 @@
     "firstName": "Joe",
     "lastName": "Tower (FourKitchens)"
   },
-  "eren": {
-    "avatar": "",
-    "email": "gameover@gmail.com",
-    "name": "eren",
-    "firstName": "",
-    "lastName": ""
-  },
-  "community": {
-    "avatar": "",
-    "email": "marketing@buoyant.io",
-    "name": "Contributor",
-    "firstName": "Contributor",
-    "lastName": ""
-  },
-  "thomas": {
-    "avatar": "",
-    "email": "thomas@buoyant.io",
-    "name": "Thomas Rampelberg",
-    "firstName": "Thomas",
-    "lastName": "Rampelberg"
-  },
   "kiersten": {
     "avatar": "",
     "email": "kiersten@buoyant.io",
     "name": "Kiersten Gaffney",
     "firstName": "Kiersten",
     "lastName": "Gaffney"
+  },
+  "kevin": {
+    "avatar": "",
+    "email": "kl@buoyant.io",
+    "name": "Kevin Lingerfelt",
+    "firstName": "Kevin",
+    "lastName": "Lingerfelt"
   },
   "mohsen": {
     "avatar": "/uploads/mohsen_rezaei-300x300.jpg",
@@ -146,11 +118,53 @@
     "firstName": "Mohsen",
     "lastName": "Rezaei"
   },
-  "carol": {
+  "oliver": {
     "avatar": "",
-    "email": "carol@buoyant.io",
-    "name": "Carol Scott",
-    "firstName": "Carol",
-    "lastName": "Scott"
+    "email": "oliver@buoyant.io",
+    "name": "Oliver Gould",
+    "firstName": "Oliver",
+    "lastName": "Gould"
+  },
+  "risha": {
+    "avatar": "",
+    "email": "mars@buoyant.io",
+    "name": "Risha Mars",
+    "firstName": "Risha",
+    "lastName": "Mars"
+  },
+  "sarah": {
+    "avatar": "",
+    "email": "sarah@buoyant.io",
+    "name": "Sarah Brown",
+    "firstName": "Sarah",
+    "lastName": "Brown"
+  },
+  "sterling": {
+    "avatar": "",
+    "email": "sterling@buoyant.io",
+    "name": "Sterling White",
+    "firstName": "Sterling",
+    "lastName": "White"
+  },
+  "steve": {
+    "avatar": "/uploads/steve-jenson-avatar.jpeg",
+    "email": "steve@buoyant.io",
+    "name": "Steve Jenson",
+    "firstName": "Steve",
+    "lastName": "Jenson"
+  },
+  "thomas": {
+    "avatar": "",
+    "email": "thomas@buoyant.io",
+    "name": "Thomas Rampelberg",
+    "firstName": "Thomas",
+    "lastName": "Rampelberg"
+  },
+  "william": {
+    "avatar": "/uploads/WilliamMorgan.jpg",
+    "email": "william@buoyant.io",
+    "name": "William Morgan",
+    "firstName": "William",
+    "lastName": "Morgan"
   }
 }

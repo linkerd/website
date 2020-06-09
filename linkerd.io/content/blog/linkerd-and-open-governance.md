@@ -45,10 +45,10 @@ This is by design. Both Oliver and I were open source contributors to
 infrastructure projects long before Buoyant was created ([Exhibit
 1](http://netbsd-soc.sourceforge.net/projects/zfs/), [Exhibit
 2](https://svn.apache.org/viewvc/incubator/thrift/trunk/CONTRIBUTORS?view=markup&pathrev=665459)),
-and the thought of a commercial "Linkerd Enterprise Edition" or "Linkerd Plus",
-and the dynamics it would place on the project, was never appealing to us.
-Linkerd is and must always be a fully functional, completely unencumbered open
-source project.
+and the thought of a commercial "Linkerd Enterprise Edition" or "Linkerd Plus"
+that withheld critical functionality necessary for running Linkerd in
+production was never appealing to us. Linkerd is and must always be a fully
+functional, completely unencumbered open source project.
 
 So, that's all to say: please come join us in Linkerd. We have 150+
 contributors across the world, and while line-by-line the majority of
