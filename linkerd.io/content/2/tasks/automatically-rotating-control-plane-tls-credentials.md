@@ -160,10 +160,15 @@ For Helm installation, rather than running `linkerd install`, set the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install \
-  --name=linkerd2 \
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=<value of ca.crt> \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
   linkerd/linkerd2
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been depreciated, and is the first argument as
+ specified above.
+{{< /note >}}
