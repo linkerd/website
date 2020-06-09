@@ -87,7 +87,7 @@ for modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+and the [man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ### √ has NET_RAW capability {#pre-k8s-cluster-net-raw}
 
@@ -105,7 +105,7 @@ modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+and the [man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
 
