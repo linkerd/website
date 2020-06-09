@@ -10,7 +10,7 @@ tags: [Linkerd]
 
 ![Photo of an bridge with arches](/uploads/bence-balla-schottner-6c7LVHBc6oI-unsplash.jpg)
 
-# Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
+## Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
 
 We're very happy to announce the release of Linkerd 2.8! This release
 introduces a new multi-cluster extension to Linkerd, allowing it to establish
@@ -41,8 +41,7 @@ Shah](https://github.com/mayankshah1607),
 [mmiller1](https://github.com/mmiller1), [Naseem
 Kullah](https://github.com/naseemkullah), [Sanni
 Michael](https://github.com/sannimichaelse), and [Supratik
-Das](https://github.com/supra08) for your hard work. 
-
+Das](https://github.com/supra08) for your hard work.
 
 ## Multi-cluster Kubernetes the Kubernetes way
 
@@ -83,7 +82,7 @@ This new multi-cluster functionality unlocks a whole host of use cases for
 Linkerd, including failover (transitioning traffic across datacenters or cloud
 in the presence of failure); "inverted multi-tenancy" (each tenant gets their
 own cluster); hybrid cloud (workloads can move between on-premises and cloud
-environments without affecting the rest of the application); and more. 
+environments without affecting the rest of the application); and more.
 
 Finally, like all Linkerd features, Linkerd's "service mirroring" approach to
 multi-cluster leverages as much existing Kubernetes functionality as possible,
@@ -131,7 +130,6 @@ release marks a major step forward in that direction, and the next several
 releases will flesh out Linkerd's featureset, including by extending mTLS to
 all connections; introducing policy; and much more.
 
-
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
@@ -149,8 +147,13 @@ release? We've got you covered: see our [Linkerd upgrade
 guide](https://linkerd.io/2/tasks/upgrade/) for how to use the linkerd upgrade
 command.
 
-
 ## Linkerd is for everyone
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/) If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
-
+Linkerd is a community project and is hosted by the [Cloud Native Computing
+Foundation](https://cncf.io/). Linkerd is [committed to open
+governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+If you have feature requests, questions, or comments, we'd love to have you
+join our rapidly-growing community! Linkerd is hosted on
+[GitHub](https://github.com/linkerd/), and we have a thriving community on
+[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
+the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
