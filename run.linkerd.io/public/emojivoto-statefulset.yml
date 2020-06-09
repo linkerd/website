@@ -31,6 +31,9 @@ spec:
   - name: grpc
     port: 8080
     targetPort: 8080
+  - name: prom
+    port: 8801
+    targetPort: 8801
   selector:
     app: emoji-svc
 ---
@@ -62,7 +65,7 @@ spec:
     targetPort: 8080
   selector:
     app: web-svc
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -70,7 +73,7 @@ metadata:
   labels:
     app.kubernetes.io/name: emoji
     app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/version: v9
+    app.kubernetes.io/version: v10
   name: emoji
   namespace: emojivoto
 spec:
@@ -88,11 +91,15 @@ spec:
       - env:
         - name: GRPC_PORT
           value: "8080"
-        image: buoyantio/emojivoto-emoji-svc:v9
+        - name: PROM_PORT
+          value: "8801"
+        image: buoyantio/emojivoto-emoji-svc:v10
         name: emoji-svc
         ports:
         - containerPort: 8080
           name: grpc
+        - containerPort: 8801
+          name: prom
         resources:
           requests:
             cpu: 100m
@@ -104,7 +111,7 @@ metadata:
   labels:
     app.kubernetes.io/name: vote-bot
     app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/version: v9
+    app.kubernetes.io/version: v10
   name: vote-bot
   namespace: emojivoto
 spec:
@@ -124,7 +131,7 @@ spec:
         env:
         - name: WEB_HOST
           value: web-svc.emojivoto:80
-        image: buoyantio/emojivoto-web:v9
+        image: buoyantio/emojivoto-web:v10
         name: vote-bot
         resources:
           requests:
@@ -136,7 +143,7 @@ metadata:
   labels:
     app.kubernetes.io/name: voting
     app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/version: v9
+    app.kubernetes.io/version: v10
   name: voting
   namespace: emojivoto
 spec:
@@ -156,7 +163,7 @@ spec:
           value: "8080"
         - name: PROM_PORT
           value: "8801"
-        image: buoyantio/emojivoto-voting-svc:v9
+        image: buoyantio/emojivoto-voting-svc:v10
         name: voting-svc
         ports:
         - containerPort: 8080
@@ -174,7 +181,7 @@ metadata:
   labels:
     app.kubernetes.io/name: web
     app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/version: v9
+    app.kubernetes.io/version: v10
   name: web
   namespace: emojivoto
 spec:
@@ -198,7 +205,7 @@ spec:
           value: voting-svc.emojivoto:8080
         - name: INDEX_BUNDLE
           value: dist/index_bundle.js
-        image: buoyantio/emojivoto-web:v9
+        image: buoyantio/emojivoto-web:v10
         name: web-svc
         ports:
         - containerPort: 8080
