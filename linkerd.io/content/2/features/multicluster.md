@@ -15,13 +15,12 @@ address three specific areas:
 - Routing: a service mesh can make it possible and “easy” for applications in
   one cluster to communicate with applications in another cluster.
 
-Linkerd provides the same guarantees that a service mesh like Linkerd provides
-for in-cluster calls—identity, traffic shifting, etc—to also be applied to
-cross-cluster calls. It does this by "mirroring" service information between
-clusters. With multicluster Linkerd in place, the full observability, security
-and routing features of Linkerd apply uniformly to both in-cluster and
-cluster-calls, and the application does not need to distinguish between those
-situations.
+The same guarantees that a service mesh like Linkerd provides for in-cluster
+calls—identity, traffic shifting, etc are also applied to cross-cluster calls.
+It does this by "mirroring" service information between clusters. With
+multicluster Linkerd in place, the full observability, security and routing
+features of Linkerd apply uniformly to both in-cluster and cluster-calls, and
+the application does not need to distinguish between those situations.
 
 {{< fig
     alt="Overview"
