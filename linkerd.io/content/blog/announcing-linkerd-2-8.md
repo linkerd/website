@@ -125,7 +125,7 @@ enhancements, and bug fixes, includng:
 * Automatic prevention of common traffic-loop scenarios.
 
 See the [full release
-notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8) for
+notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.8.0) for
 details.
 
 ## Linkerd's upcoming roadmap
