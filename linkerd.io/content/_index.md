@@ -3,7 +3,8 @@ title: Homepage
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
   title: Ultralight, security-first service mesh for Kubernetes
-  description: Linkerd adds critical security, observability, and reliability features to your Kubernetes stack&mdash;no code change required.
+  description: Linkerd adds critical security, observability, and reliability features
+    to your Kubernetes stack&mdash;no code change required.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
@@ -12,8 +13,9 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.7.1 has been released! [Read the announcement >>](https://lists.cncf.io/g/cncf-linkerd-users/message/225)
-description: Linkerd adds critical security, observability, and reliability to your Kubernetes stack, without any code changes.
+  description: Linkerd 2.8 has been released! [Read the announcement >>](/2020/06/09/announcing-linkerd-2.8/)
+description: Linkerd adds critical security, observability, and reliability to your
+  Kubernetes stack, without any code changes.
 keywords:
 - cloud native applications
 outputs:
@@ -85,3 +87,4 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
+Linkerd 2.8 has been Released! [Read the announcement >>](https://linkerd.io/2020/06/09/announcing-linkerd-2.8/)

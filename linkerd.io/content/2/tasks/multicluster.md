@@ -154,7 +154,7 @@ To install these components on both `west` and `east`, you can run:
 for ctx in west east; do
   echo "Installing on cluster: ${ctx} ........."
   linkerd --context=${ctx} multicluster install | \
-    kubectl --context=${ctx} apply -f - || exit 1
+    kubectl --context=${ctx} apply -f - || break
   echo "-------------\n"
 done
 ```

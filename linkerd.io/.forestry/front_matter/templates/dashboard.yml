@@ -18,6 +18,4 @@ fields:
     required: true
   label: Title
 pages:
-- linkerd.io/content/dashboard/linkerd-online-community-meetup-this-wednesday-linkerd-2-6-distributed-tracing-traffic-splitting-and-more.md
 - linkerd.io/content/dashboard/have-you-adopted-linkerd-let-us-know-and-we-ll-send-you-some-sweet-swag.md
-- linkerd.io/content/dashboard/servicemeshcon-call-for-talks-open-now.md
