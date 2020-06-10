@@ -62,6 +62,6 @@ guide](/2/tasks/multicluster/) for a walkthrough.
   post explaining some of the design rationale behind Linkerd's multi-cluster
   implementation.
 * [Multi-cluster Kubernetes with service
-  mirroring](/2020/02/25/multicluster-kubernetes-with-service-mirroring), a
+  mirroring](/2020/02/25/multicluster-kubernetes-with-service-mirroring/), a
   deep dive of some of the architectural decisions behind Linkerd's
   multi-cluster implementation.
