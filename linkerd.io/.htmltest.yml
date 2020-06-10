@@ -16,6 +16,7 @@ IgnoreURLs:
   - https://github.com/*
   - https://www.man7.org/*
   - https://offerup.com/
+  - https://kinvolk.io/
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16

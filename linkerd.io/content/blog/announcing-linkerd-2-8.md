@@ -23,7 +23,7 @@ introduces a variety of other features and stability improvements.
 This release includes changes from a massive list of contributors. A special
 _thank you_ to [Arthur Silva Sens](https://github.com/ArthurSens),
 [Matei David](https://github.com/Matei207),
-[Ali Ariff](https://github.com/aliariff),[ amariampolskiy](https://github.com/amariampolskiy),[ arminbuerkle](https://github.com/arminbuerkle),
+[Ali Ariff](https://github.com/aliariff),[amariampolskiy](https://github.com/amariampolskiy),[arminbuerkle](https://github.com/arminbuerkle),
 [Christian Hüning](https://github.com/christianhuening),
 [Christy Jacob](https://github.com/christyjacob4),
 [Lutz Behnke](https://github.com/cypherfox),

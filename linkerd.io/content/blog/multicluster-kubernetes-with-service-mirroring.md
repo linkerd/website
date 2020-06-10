@@ -7,19 +7,25 @@ tags: [Linkerd, Multicluster]
 thumbnail: /uploads/mirror.png
 ---
 
-In our earlier post, [Architecting for Multicluster
-Kubernetes](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/),
+{{< note >}} Linkerd 2.8 has been released and implements the architecture
+described here. Check out the
+[release blog post](/2020/06/09/announcing-linkerd-2.8/) and get started on your
+own clusters! {{< /note >}}
+
+In our earlier post,
+[Architecting for Multicluster Kubernetes](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/),
 we outlined three requirements for building a simple yet resilient multicluster
 approach to Kubernetes: supporting hierarchical networks, preserving
 independence of cluster state, and not introducing a shared control plane.
 
 In this post, we'll propose a solution that we believe satisfies these
-constraints, called service mirroring. In keeping with [Linkerd's design
-principle](https://linkerd.io/2019/04/29/linkerd-design-principles/) of "keep it
-simple", we've done our best to build this solution in terms of pure Kubernetes
-primitives and to remove any dependencies on Linkerd itself. This allows us to
-keep the operational surface area of any solution as close as possible to that
-of Kubernetes itself. In other words, the mesh should do less, not more.
+constraints, called service mirroring. In keeping with
+[Linkerd's design principle](https://linkerd.io/2019/04/29/linkerd-design-principles/)
+of "keep it simple", we've done our best to build this solution in terms of pure
+Kubernetes primitives and to remove any dependencies on Linkerd itself. This
+allows us to keep the operational surface area of any solution as close as
+possible to that of Kubernetes itself. In other words, the mesh should do less,
+not more.
 
 We're currently actively prototyping this approach and we'd love your feedback.
 Read on for details and how you can get involved.
@@ -42,8 +48,8 @@ Today, it is possible to build a multicluster setup that accomplishes many of
 these goals by running Linkerd independently across multiple clusters,
 aggregating metrics to an external Prometheus or Thanos, sharing service
 information in DNS, and using cert-manager to rotate certs on cluster Ingress
-controllers. (See our [Multicluster the Kubernetes Way with
-Linkerd](https://docs.google.com/document/d/1yDdd5nC348oNibvFAbxOwHL1dpFAEucpNuox1zcsOFg/edit#)
+controllers. (See our
+[Multicluster the Kubernetes Way with Linkerd](https://docs.google.com/document/d/1yDdd5nC348oNibvFAbxOwHL1dpFAEucpNuox1zcsOFg/edit#)
 writeup, from which this framing is copied, for more on how to accomplish this.)
 
 While functional, this approach has several downsides around cross-cluster
@@ -119,8 +125,8 @@ in London will be able to start resolving the full service name -
 has type `ClusterIP`. A virtual IP address will be created by London and be used
 as the response to pods resolving the service name for `bar-paris`.
 
-By copying services from Paris to London, we are [maintaining independent
-state](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-ii-maintain-independent-state)
+By copying services from Paris to London, we are
+[maintaining independent state](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-ii-maintain-independent-state)
 — one of our requirements. Paris has its own state, London has its own state and
 they are not dependent on each other. If the connectivity between London and
 Paris goes down, service updates will stop. That’s okay though! With
@@ -135,8 +141,8 @@ different backend.
 
 Without a selector, the endpoint object cannot be created automatically.
 Kubernetes doesn’t know what to watch as we’ve not given it enough information.
-Having a [service without a
-selector](https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors)
+Having a
+[service without a selector](https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors)
 is something that Kubernetes was designed to work with though! Like all the
 resources in Kubernetes, you can create and manage them yourself. So, if we can
 create an endpoint ourselves and point it somewhere, where should the traffic be
@@ -150,8 +156,8 @@ could be a lot of data! Take a look at
 [EndpointSlices](https://kubernetes.io/blog/2019/09/18/kubernetes-1-16-release-announcement/#introducing-endpoint-slices)
 to get a feel for just how much bandwidth replicating Endpoints across clusters
 could consume. Even with a solution to this problem, replicating individual pod
-IP addresses wouldn’t [support hierarchical
-networks](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks)
+IP addresses wouldn’t
+[support hierarchical networks](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks)
 — another of our requirements. Instead of moving all this state between
 clusters, let’s introduce a single endpoint that can take care of routing
 traffic to the correct destination.
@@ -190,8 +196,8 @@ balancer and limit connectivity to authorized clients?
 If you guessed that the solution to this problem sounds a lot like an ingress
 controller, you’d be right!
 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
-resources allow configuration for the general case. As the ingress spec [does
-not support wildcards](https://github.com/kubernetes/kubernetes/issues/41881),
+resources allow configuration for the general case. As the ingress spec
+[does not support wildcards](https://github.com/kubernetes/kubernetes/issues/41881),
 it isn’t possible to directly use Ingress resources to do this. Luckily, most
 ingress controllers support this use case! In fact, it is likely that your
 ingress controller of choice can already do wildcards in Kubernetes with a
@@ -227,12 +233,12 @@ identical between internal and external services.
 As there is no private network in this example, data will traverse the public
 internet. Encrypting all the cross-cluster traffic thus becomes critical.
 Linkerd automatically does mTLS out of the box and takes care of the encryption
-transparently. Sharing a [root
-certificate](https://en.wikipedia.org/wiki/Root_certificate) between clusters
-allows Linkerd to validate both ends of the connection and encrypt all traffic
-between them. The shared root certificate allows Linkerd’s control plane in both
-clusters to be [completely
-independent](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-iii-have-an-independent-control-plane),
+transparently. Sharing a
+[root certificate](https://en.wikipedia.org/wiki/Root_certificate) between
+clusters allows Linkerd to validate both ends of the connection and encrypt all
+traffic between them. The shared root certificate allows Linkerd’s control plane
+in both clusters to be
+[completely independent](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-iii-have-an-independent-control-plane),
 fulfilling the final requirement. While Linkerd automates mTLS, it would be
 possible to configure the gateway to present a wildcard certificate such as
 `*.default.svc.cluster.local` which clients could then validate. Traffic would
@@ -254,19 +260,19 @@ And that is service mirroring in a nutshell.
 ## Want to get involved?
 
 We’d love your feedback on service mirroring. Please leave us feedback on the
-[service mirroring design
-doc](https://docs.google.com/document/d/1uzD90l1BAX06za_yie8VroGcoCB8F2wCzN0SUeA3ucw/edit).
-You can also email the [cncf-linkerd-dev mailing
-list](https://lists.cncf.io/g/cncf-linkerd-dev) or find us on the [Linkerd
-community Slack](https://slack.linkerd.io). We're actively prototyping this
-solution today, and hope to have a functioning implementation very soon.
+[service mirroring design doc](https://docs.google.com/document/d/1uzD90l1BAX06za_yie8VroGcoCB8F2wCzN0SUeA3ucw/edit).
+You can also email the
+[cncf-linkerd-dev mailing list](https://lists.cncf.io/g/cncf-linkerd-dev) or
+find us on the [Linkerd community Slack](https://slack.linkerd.io). We're
+actively prototyping this solution today, and hope to have a functioning
+implementation very soon.
 
 ---
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io). If you have feature requests, questions, or
-comments, we'd love to have you join our rapidly-growing community! Linkerd is
-hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
-community on [Slack](https://slack.linkerd.io),
-[Twitter](https://twitter.com/linkerd), and the [mailing
-lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io). If you have feature
+requests, questions, or comments, we'd love to have you join our rapidly-growing
+community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
+have a thriving community on [Slack](https://slack.linkerd.io),
+[Twitter](https://twitter.com/linkerd), and the
+[mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!

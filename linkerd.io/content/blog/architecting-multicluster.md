@@ -7,6 +7,10 @@ tags: [Linkerd, Multicluster]
 thumbnail: /uploads/ruler.png
 ---
 
+{{< note >}} Linkerd 2.8 has been released and implements these requirements.
+Check out the [release blog post](/2020/06/09/announcing-linkerd-2.8/) and get
+started on your own clusters! {{< /note >}}
+
 Recently, the Linkerd community has been spending time tackling the challenge of
 multicluster Kubernetes. How can we apply features like Linkerd's zero-config
 automatic mTLS, or traffic splitting, across multiple Kubernetes clusters? What
@@ -41,11 +45,11 @@ Kubernetes is an interesting beast. One of the implications of having a single
 IP address per pod is that by default each cluster ends up being its own
 network. Overlay networks are only routable and discoverable inside the cluster
 itself. It is possible to architect around this by using tools such as
-[Submariner](https://github.com/submariner-io/submariner) or [Project
-Calico](https://www.projectcalico.org/). These solutions are awesome if you have
-a hard requirement for maintaining a flat network, with each pod communicating
-directly to pods in other clusters. They, however, introduce new points of
-failure and add complexity that needs to be managed.
+[Submariner](https://github.com/submariner-io/submariner) or
+[Project Calico](https://www.projectcalico.org/). These solutions are awesome if
+you have a hard requirement for maintaining a flat network, with each pod
+communicating directly to pods in other clusters. They, however, introduce new
+points of failure and add complexity that needs to be managed.
 
 In an effort to keep complexity down and not require other tools, it is
 important that any multicluster implementation work with the current state of
@@ -56,7 +60,7 @@ routes to the correct backend service.
 ## Requirement II: Maintain Independent State
 
 In a world where there is a totally flat, routable network between every pod in
-every cluster, it *still* doesn't make sense to allow direct communication. For
+every cluster, it _still_ doesn't make sense to allow direct communication. For
 each pod to talk directly to another pod, it needs to discover that remote pod
 somehow. This introduces a requirement for global state between each cluster.
 The fault zone for each cluster has now been smashed together! Let's describe a
@@ -126,17 +130,17 @@ model Linkerd uses and expands it to multiple clusters.
 
 In a future post, we'll be outlining the solutions we've arrived on. In the
 meantime, we’d love to hear your feedback on this set of requirements! Please
-comment on the [requirements
-document](https://docs.google.com/document/d/1uzD90l1BAX06za_yie8VroGcoCB8F2wCzN0SUeA3ucw/edit#heading=h.79x1g3qlth40)
+comment on the
+[requirements document](https://docs.google.com/document/d/1uzD90l1BAX06za_yie8VroGcoCB8F2wCzN0SUeA3ucw/edit#heading=h.79x1g3qlth40)
 or jump into our [Slack channel](https://slack.linkerd.io) and ask some
 questions!
 
 ---
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io). If you have feature requests, questions, or
-comments, we'd love to have you join our rapidly-growing community! Linkerd is
-hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
-community on [Slack](https://slack.linkerd.io),
-[Twitter](https://twitter.com/linkerd), and the [mailing
-lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io). If you have feature
+requests, questions, or comments, we'd love to have you join our rapidly-growing
+community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
+have a thriving community on [Slack](https://slack.linkerd.io),
+[Twitter](https://twitter.com/linkerd), and the
+[mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
