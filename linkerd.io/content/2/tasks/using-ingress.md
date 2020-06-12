@@ -151,7 +151,9 @@ controller's pod, the default backend will not be usable.
 This uses `emojivoto` as an example, take a look at
 [getting started](/2/getting-started/) for a refresher on how to install it.
 
-The sample ingress definition is:
+The simplest way to use Traefik as an ingress for Linkerd is to configure a
+Kubernetes `Ingress` resource with the
+`ingress.kubernetes.io/custom-request-headers` like this:
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -207,6 +209,53 @@ service will not be encrypted. There is an
 [open issue](https://github.com/linkerd/linkerd2/issues/2270) to track the
 solution to this problem.
 {{< /note >}}
+
+### Traefik 2.x
+
+Traefik 2.x adds support for path based request routing with a Custom Resource
+Definition (CRD) called `IngressRoute`.
+
+If you choose to use [`IngressRoute`](https://docs.traefik.io/providers/kubernetes-crd/)
+instead of the default Kubernetes `Ingress`
+resource, then you'll also need to use the Traefik's
+[`Middleware`](https://docs.traefik.io/middlewares/headers/) Custom Resource
+Definition to add the `l5d-dst-override` header.
+
+The YAML below uses the Traefik CRDs to produce the same results for the
+`emojivoto` application, as described above.
+
+```yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: l5d-header-middleware
+  namespace: traefik
+spec:
+  headers:
+    customRequestHeaders:
+      l5d-dst-override: "web-svc.emojivoto.svc.cluster.local:80"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: emojivoto-web-ingress-route
+  namespace: emojivoto
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    priority: 0
+    middlewares:
+    - name: l5d-header-middleware
+    services:
+    - kind: Service
+      name: web-svc
+      port: 80
+```
 
 ## GCE
 
