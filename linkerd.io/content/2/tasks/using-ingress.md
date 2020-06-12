@@ -211,6 +211,7 @@ solution to this problem.
 {{< /note >}}
 
 ### Traefik 2.x
+
 Traefik 2.x adds support for path based request routing with a Custom Resource
 Definition (CRD) called `IngressRoute`.
 
@@ -233,7 +234,7 @@ spec:
   headers:
     customRequestHeaders:
       l5d-dst-override: "web-svc.emojivoto.svc.cluster.local:80"
----      
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
