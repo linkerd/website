@@ -10,8 +10,6 @@ tags: [Linkerd]
 
 ![Photo of an bridge with arches](/uploads/bence-balla-schottner-6c7LVHBc6oI-unsplash.jpg)
 
-## Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
-
 We're very happy to announce the release of Linkerd 2.8! This release introduces
 a new multi-cluster extension to Linkerd, allowing it to establish connections
 across Kubernetes clusters that are secure, transparent to the application, and
