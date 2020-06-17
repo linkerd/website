@@ -1526,7 +1526,7 @@ CLIReference:
     Note that this command should be followed by "linkerd upgrade control-plane".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade config | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade config
   Options:
@@ -1555,7 +1555,7 @@ CLIReference:
     install command. It should be run after "linkerd upgrade config".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade control-plane | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade control-plane
   Options:
