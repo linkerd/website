@@ -136,12 +136,12 @@ supplemental package that includes a simple Prometheus and Grafana setup and
 is configured to automatically find Linkerd instances.
 
 Install Linkerd-viz using
-[this Linkerd-viz config](https://raw.githubusercontent.com/linkerd/linkerd-viz/master/k8s/linkerd-viz.yml).
+[this Linkerd-viz config](https://raw.githubusercontent.com/linkerd/linkerd-viz/main/k8s/linkerd-viz.yml).
 
 This will install Linkerd-viz into the default namespace:
 
 ```bash
-kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-viz/master/k8s/linkerd-viz.yml
+kubectl apply -f https://raw.githubusercontent.com/linkerd/linkerd-viz/main/k8s/linkerd-viz.yml
 ```
 
 Open Linkerd-viz’s external IP to view the dashboard:
