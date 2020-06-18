@@ -332,6 +332,12 @@ Stage 2, for the service owner:
 linkerd upgrade control-plane | kubectl apply -f -
 ```
 
+{{< note >}}
+Passing the `--prune` flag to `kubectl` does not work well with multi-stage
+upgrades. It is recommended to manually prune old resources after completing
+the above steps.
+{{< /note >}}
+
 #### Upgrading via manifests
 
 By default, the `linkerd upgrade` command reuses the existing `linkerd-config`
