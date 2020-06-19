@@ -323,14 +323,20 @@ each stage, analogous to the original multi-stage installation process.
 Stage 1, for the cluster owner:
 
 ```bash
-linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+linkerd upgrade config | kubectl apply -f -
 ```
 
 Stage 2, for the service owner:
 
 ```bash
-linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+linkerd upgrade control-plane | kubectl apply -f -
 ```
+
+{{< note >}}
+Passing the `--prune` flag to `kubectl` does not work well with multi-stage
+upgrades. It is recommended to manually prune old resources after completing
+the above steps.
+{{< /note >}}
 
 #### Upgrading via manifests
 
