@@ -141,9 +141,27 @@ curl -H "Host: example.com" http://external-ip
 ```
 
 {{< note >}}
-It is not possible to rewrite the header in this way for the default
-backend. Because of this, if you inject Linkerd into your Nginx ingress
-controller's pod, the default backend will not be usable.
+If you are using a default backend, you will need to create an ingress
+definition for that backend to ensure that the `l5d-dst-override` header
+is set. For example:
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-ingress
+  namespace: backends
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+spec:
+  backend:
+    serviceName: default-backend
+    servicePort: 80
+```
+
 {{< /note >}}
 
 ## Traefik
