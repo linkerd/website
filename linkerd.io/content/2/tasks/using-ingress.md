@@ -161,6 +161,7 @@ spec:
     serviceName: default-backend
     servicePort: 80
 ```
+
 {{< /note >}}
 
 ## Traefik
