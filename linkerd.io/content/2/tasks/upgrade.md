@@ -9,9 +9,11 @@ aliases = [
 
 In this guide, we'll walk you through how to upgrade Linkerd.
 
-The upgrade notices below contain important information you need to be aware of
-before commencing with the upgrade process:
+Before starting, read through the version-specific upgrade notices below, whihc
+may contain important information you need to be aware of before commencing
+with the upgrade process:
 
+- [Upgrade notice: stable-2.8.0](/2/tasks/upgrade/#upgrade-notice-stable-280)
 - [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
 - [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-260)
 - [Upgrade notice: stable-2.5.0](/2/tasks/upgrade/#upgrade-notice-stable-250)
@@ -24,6 +26,168 @@ There are three components that need to be upgraded:
 - [CLI](/2/tasks/upgrade/#upgrade-the-cli)
 - [Control Plane](/2/tasks/upgrade/#upgrade-the-control-plane)
 - [Data Plane](/2/tasks/upgrade/#upgrade-the-data-plane)
+
+## Upgrade the CLI
+
+This will upgrade your local CLI to the latest version. You will want to follow
+these instructions for anywhere that uses the Linkerd CLI. For Helm users feel
+free to skip to the [Helm section](#with-helm).
+
+To upgrade the CLI locally, run:
+
+```bash
+curl -sL https://run.linkerd.io/install | sh
+```
+
+Alternatively, you can download the CLI directly via the
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
+
+Verify the CLI is installed and running correctly with:
+
+```bash
+linkerd version --client
+```
+
+Which should display:
+
+```bash
+Client version: {{% latestversion %}}
+```
+
+{{< note >}}
+Until you upgrade the control plane, some new CLI commands may not work.
+{{< /note >}}
+
+You are now ready to [upgrade your control plane](/2/tasks/upgrade/#upgrade-the-control-plane).
+
+## Upgrade the Control Plane
+
+Now that you have upgraded the CLI, it is time to upgrade the Linkerd control
+plane on your Kubernetes cluster. Don't worry, the existing data plane will
+continue to operate with a newer version of the control plane and your meshed
+services will not go down.
+
+{{< note >}}
+You will lose the historical data from Prometheus. If you would like to have
+that data persisted through an upgrade, take a look at the
+[persistence documentation](/2/observability/exporting-metrics/)
+{{< /note >}}
+
+### With Linkerd CLI
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained.
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For upgrading a multi-stage installation setup, follow the instructions at
+[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
+
+Users who have previously saved the Linkerd control plane's configuration to
+files can follow the instructions at
+[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+to ensure those configuration are retained by the `linkerd upgrade` command.
+
+### With Helm
+
+For a Helm workflow, check out the instructions at
+[Helm upgrade procedure](/2/tasks/install-helm/#helm-upgrade-procedure).
+
+### Verify the control plane upgrade
+
+Once the upgrade process completes, check to make sure everything is healthy
+by running:
+
+```bash
+linkerd check
+```
+
+This will run through a set of checks against your control plane and make sure
+that it is operating correctly.
+
+To verify the Linkerd control plane version, run:
+
+```bash
+linkerd version
+```
+
+Which should display:
+
+```txt
+Client version: {{% latestversion %}}
+Server version: {{% latestversion %}}
+```
+
+Next, we will [upgrade your data plane](/2/tasks/upgrade/#upgrade-the-data-plane).
+
+## Upgrade the Data Plane
+
+With a fully up-to-date CLI running locally and Linkerd control plane running on
+your Kubernetes cluster, it is time to upgrade the data plane. This will change
+the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
+your service.
+
+{{< note >}}
+With `kubectl` 1.15+, you can use the `kubectl rollout restart` command to
+restart all your meshed services. For example,
+
+```bash
+kubectl -n <namespace> rollout restart deploy
+```
+
+{{< /note >}}
+
+As the pods are being re-created, the proxy injector will auto-inject the new
+version of the proxy into the pods.
+
+Workloads that were previously injected using the `linkerd inject --manual`
+command can be upgraded by re-injecting the applications in-place. For example,
+
+```bash
+kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
+  | linkerd inject --manual - \
+  | kubectl apply -f -
+```
+
+### Verify the data plane upgrade
+
+Check to make sure everything is healthy by running:
+
+```bash
+linkerd check --proxy
+```
+
+This will run through a set of checks against both your control plane and data
+plane to verify that it is operating correctly.
+
+You can make sure that you've fully upgraded all the data plane by running:
+
+```bash
+kubectl get po --all-namespaces -o yaml \
+  | grep linkerd.io/proxy-version
+```
+
+The output will look something like:
+
+```bash
+linkerd.io/proxy-version: {{% latestversion %}}
+linkerd.io/proxy-version: {{% latestversion %}}
+```
+
+Congratulation! You have successfully upgraded your Linkerd to the newer
+version. If you have any questions, feel free to raise them at the #linkerd2
+channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.8.0
+
+There are no version-specific notes for upgrading to this release. The upgrade
+process detailed above ([upgrade the CLI](/2/tasks/upgrade/#upgrade-the-cli),
+[upgrade the control plane](/2/tasks/upgrade/#upgrade-the-control-plane), then
+[upgrade the data plane](/2/tasks/upgrade/#upgrade-the-data-plane)) should
+work.
 
 ## Upgrade notice: stable-2.7.0
 
@@ -430,160 +594,6 @@ of the following:
 
 Auto-inject support for application updates is tracked on
 [github](https://github.com/linkerd/linkerd2/issues/2260)
-
-## Upgrade the CLI
-
-This will upgrade your local CLI to the latest version. You will want to follow
-these instructions for anywhere that uses the linkerd CLI. For Helm users feel
-free to skip to the [Helm section](#with-helm).
-
-To upgrade the CLI locally, run:
-
-```bash
-curl -sL https://run.linkerd.io/install | sh
-```
-
-Alternatively, you can download the CLI directly via the
-[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
-
-Verify the CLI is installed and running correctly with:
-
-```bash
-linkerd version --client
-```
-
-Which should display:
-
-```bash
-Client version: {{% latestversion %}}
-```
-
-{{< note >}}
-Until you upgrade the control plane, some new CLI commands may not work.
-{{< /note >}}
-
-You are now ready to [upgrade your control plane](/2/tasks/upgrade/#upgrade-the-control-plane).
-
-## Upgrade the Control Plane
-
-Now that you have upgraded the CLI, it is time to upgrade the Linkerd control
-plane on your Kubernetes cluster. Don't worry, the existing data plane will
-continue to operate with a newer version of the control plane and your meshed
-services will not go down.
-
-{{< note >}}
-You will lose the historical data from Prometheus. If you would like to have
-that data persisted through an upgrade, take a look at the
-[persistence documentation](/2/observability/exporting-metrics/)
-{{< /note >}}
-
-### With Linkerd CLI
-
-Use the `linkerd upgrade` command to upgrade the control plane. This command
-ensures that all of the control plane's existing configuration and mTLS secrets
-are retained.
-
-```bash
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
-```
-
-For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
-
-Users who have previously saved the Linkerd control plane's configuration to
-files can follow the instructions at
-[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
-to ensure those configuration are retained by the `linkerd upgrade` command.
-
-### With Helm
-
-For a Helm workflow, check out the instructions at
-[Helm upgrade procedure](/2/tasks/install-helm/#helm-upgrade-procedure).
-
-### Verify the control plane upgrade
-
-Once the upgrade process completes, check to make sure everything is healthy
-by running:
-
-```bash
-linkerd check
-```
-
-This will run through a set of checks against your control plane and make sure
-that it is operating correctly.
-
-To verify the Linkerd control plane version, run:
-
-```bash
-linkerd version
-```
-
-Which should display:
-
-```txt
-Client version: {{% latestversion %}}
-Server version: {{% latestversion %}}
-```
-
-Next, we will [upgrade your data plane](/2/tasks/upgrade/#upgrade-the-data-plane).
-
-## Upgrade the Data Plane
-
-With a fully up-to-date CLI running locally and Linkerd control plane running on
-your Kubernetes cluster, it is time to upgrade the data plane. This will change
-the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
-your service.
-
-{{< note >}}
-With `kubectl` 1.15+, you can use the `kubectl rollout restart` command to
-restart all your meshed services. For example,
-
-```bash
-kubectl -n <namespace> rollout restart deploy
-```
-
-{{< /note >}}
-
-As the pods are being re-created, the proxy injector will auto-inject the new
-version of the proxy into the pods.
-
-Workloads that were previously injected using the `linkerd inject --manual`
-command can be upgraded by re-injecting the applications in-place. For example,
-
-```bash
-kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
-  | linkerd inject --manual - \
-  | kubectl apply -f -
-```
-
-### Verify the data plane upgrade
-
-Check to make sure everything is healthy by running:
-
-```bash
-linkerd check --proxy
-```
-
-This will run through a set of checks against both your control plane and data
-plane to verify that it is operating correctly.
-
-You can make sure that you've fully upgraded all the data plane by running:
-
-```bash
-kubectl get po --all-namespaces -o yaml \
-  | grep linkerd.io/proxy-version
-```
-
-The output will look something like:
-
-```bash
-linkerd.io/proxy-version: {{% latestversion %}}
-linkerd.io/proxy-version: {{% latestversion %}}
-```
-
-Congratulation! You have successfully upgraded your Linkerd to the newer
-version. If you have any questions, feel free to raise them at the #linkerd2
-channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Step-by-step instructions (stable-2.2.x)
 
