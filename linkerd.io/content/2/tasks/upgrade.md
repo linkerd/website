@@ -9,7 +9,7 @@ aliases = [
 
 In this guide, we'll walk you through how to upgrade Linkerd.
 
-Before starting, read through the version-specific upgrade notices below, whihc
+Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
@@ -126,22 +126,25 @@ Next, we will [upgrade your data plane](/2/tasks/upgrade/#upgrade-the-data-plane
 ## Upgrade the Data Plane
 
 With a fully up-to-date CLI running locally and Linkerd control plane running on
-your Kubernetes cluster, it is time to upgrade the data plane. This will change
-the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
-your service.
+your Kubernetes cluster, it is time to upgrade the data plane. The easiest
+way to do this is to run a rolling deploy on your services, allowing the
+proxy-injector to inject the latest version of the proxy as they come up.
 
-{{< note >}}
-With `kubectl` 1.15+, you can use the `kubectl rollout restart` command to
-restart all your meshed services. For example,
+With `kubectl` 1.15+, this can be as simple as using the `kubectl rollout
+restart` command to restart all your meshed services. For example,
 
 ```bash
 kubectl -n <namespace> rollout restart deploy
 ```
 
+{{< note >}}
+Unless otherwise documented in the release notes, stable release control planes
+should be compatible with the data plane from the previous stable release.
+Thus, data plane upgrades can be done at any point after the control plane has
+been upgraded, including as part of the application's natural deploy cycle.  A
+gap of more than one stable version between control plane and data plane is not
+recommended.
 {{< /note >}}
-
-As the pods are being re-created, the proxy injector will auto-inject the new
-version of the proxy into the pods.
 
 Workloads that were previously injected using the `linkerd inject --manual`
 command can be upgraded by re-injecting the applications in-place. For example,
@@ -160,22 +163,9 @@ Check to make sure everything is healthy by running:
 linkerd check --proxy
 ```
 
-This will run through a set of checks against both your control plane and data
-plane to verify that it is operating correctly.
-
-You can make sure that you've fully upgraded all the data plane by running:
-
-```bash
-kubectl get po --all-namespaces -o yaml \
-  | grep linkerd.io/proxy-version
-```
-
-The output will look something like:
-
-```bash
-linkerd.io/proxy-version: {{% latestversion %}}
-linkerd.io/proxy-version: {{% latestversion %}}
-```
+This will run through a set of checks to verify that the data plane is
+operating correctly, and will list any pods that are still running older
+versions of the proxy.
 
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
