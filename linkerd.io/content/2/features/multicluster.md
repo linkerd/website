@@ -1,6 +1,7 @@
 +++
 title = "Multi-cluster communication"
 description = "Linkerd connects applications running in different clusters"
+aliases = [ "multicluster_support" ]
 +++
 
 Linkerd can connect Kubernetes services across cluster boundaries in a way that

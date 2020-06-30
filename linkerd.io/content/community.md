@@ -3,7 +3,7 @@ title: Community
 layout: community
 type: community
 aliases:
-  - "/2/get-involved"
+- "/2/get-involved"
 top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
@@ -69,8 +69,36 @@ jobs:
       Software Engineer
 
       San Francisco, CA
-    thumbnail: '/uploads/buoyant_thumbnail.svg'
-    url: "https://jobs.lever.co/buoyant"
+    thumbnail: "/uploads/buoyant_thumbnail.svg"
+    url: https://jobs.lever.co/buoyant
+  - title: FORM3
+    description: |-
+      Senior Software Engineer
+
+      100% remote (UK/EU only)
+    thumbnail: "/uploads/form3.jpg"
+    url: https://www.golangprojects.com/golang-go-job-dqy-Remote-Senior-Software-Engineer-100-remote-UK-EU-only-London-FORM3-remotework.html
+  - title: Kaskada
+    description: |-
+      DevOps Engineer
+
+      Seattle (or remote), WA
+    thumbnail: "/uploads/20191001171856_kaskada_logo_horizontal_black.png"
+    url: http://careers.kaskada.com/apply/3zRELQ00qq/DevOps-Engineer?source=LILI#3zRELQ00qq
+  - title: Kensho
+    description: |-
+      Software Engineer - Security
+
+      Cambridge, MA
+    thumbnail: "/uploads/e3e4a69e-f746-499c-a699-392d6be9bade-1483554467263.png"
+    url: https://jobs.lever.co/kensho/3689384d-c7ee-4c6c-9f40-96c97712a98d
+  - title: MSC
+    description: |-
+      Senior DevOps Engineer
+
+      Bethesda, MD
+    url: https://careers-mscweb.icims.com/jobs/3973/devops-engineer-senior/job?mobile=false&width=960&height=500&bga=true&needsRedirect=false&jan1offset=-480&jun1offset=-420
+    thumbnail: "/uploads/msc-logo.png"
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
