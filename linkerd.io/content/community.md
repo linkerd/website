@@ -85,6 +85,13 @@ jobs:
       Cambridge, MA
     thumbnail: "/uploads/e3e4a69e-f746-499c-a699-392d6be9bade-1483554467263.png"
     url: https://jobs.lever.co/kensho/3689384d-c7ee-4c6c-9f40-96c97712a98d
+  - title: MSC
+    description: |-
+      Senior DevOps Engineer
+
+      Bethesda, MD
+    url: https://careers-mscweb.icims.com/jobs/3973/devops-engineer-senior/job?mobile=false&width=960&height=500&bga=true&needsRedirect=false&jan1offset=-480&jun1offset=-420
+    thumbnail: "/uploads/msc-logo.png"
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
