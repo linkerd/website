@@ -92,6 +92,13 @@ jobs:
       Bethesda, MD
     url: https://careers-mscweb.icims.com/jobs/3973/devops-engineer-senior/job?mobile=false&width=960&height=500&bga=true&needsRedirect=false&jan1offset=-480&jun1offset=-420
     thumbnail: "/uploads/msc-logo.png"
+  - title: Kaskada
+    description: |-
+      DevOps Engineer
+
+      Seattle (or remote), WA
+    thumbnail: "/uploads/20191001171856_kaskada_logo_horizontal_black.png"
+    url: http://careers.kaskada.com/apply/3zRELQ00qq/DevOps-Engineer?source=LILI#3zRELQ00qq
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
