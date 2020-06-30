@@ -3,7 +3,7 @@ title: Community
 layout: community
 type: community
 aliases:
-  - "/2/get-involved"
+- "/2/get-involved"
 top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
@@ -64,13 +64,20 @@ jobs:
   title: Jobs in the Community
   description: Check out these Linkerd related jobs from companies who love Linkerd
   jobs:
+  - title: FORM3
+    description: |-
+      Senior Software Engineer
+
+      100% remote (UK/EU only)
+    thumbnail: "/uploads/form3.jpg"
+    url: ''
   - title: Buoyant
     description: |-
       Software Engineer
 
       San Francisco, CA
-    thumbnail: '/uploads/buoyant_thumbnail.svg'
-    url: "https://jobs.lever.co/buoyant"
+    thumbnail: "/uploads/buoyant_thumbnail.svg"
+    url: https://jobs.lever.co/buoyant
   bottom_description: Have a Linkerd related job to offer? Add your posting!
   buttons:
   - caption: Create Pull Request
