@@ -36,7 +36,7 @@ _thank you_ to [Arthur Silva Sens](https://github.com/ArthurSens),
 [Alex Lundberg](https://github.com/lundbird),
 [Mayank Shah](https://github.com/mayankshah1607),
 [mmiller1](https://github.com/mmiller1),
-[Naseem Kullah](https://github.com/naseemkullah),
+[Naseem Ullah](https://github.com/naseemkullah),
 [Sanni Michael](https://github.com/sannimichaelse), and
 [Supratik Das](https://github.com/supra08) for your hard work.
 

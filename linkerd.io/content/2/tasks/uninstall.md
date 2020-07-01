@@ -22,10 +22,10 @@ Uninstallating the control plane requires cluster-wide permissions.
 To remove the [control plane](/2/reference/architecture/#control-plane), run:
 
 ```bash
-linkerd install --ignore-cluster | kubectl delete -f -
+linkerd uninstall | kubectl delete -f -
 ```
 
-The `linkerd install` command outputs the manifest for all of the Kubernetes
+The `linkerd uninstall` command outputs the manifest for all of the Kubernetes
 resources necessary for the control plane, including namespaces, service
 accounts, CRDs, and more; `kubectl delete` then deletes those resources.
 
