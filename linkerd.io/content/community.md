@@ -78,13 +78,6 @@ jobs:
       100% remote (UK/EU only)
     thumbnail: "/uploads/form3.jpg"
     url: https://www.golangprojects.com/golang-go-job-dqy-Remote-Senior-Software-Engineer-100-remote-UK-EU-only-London-FORM3-remotework.html
-  - title: Kaskada
-    description: |-
-      DevOps Engineer
-
-      Seattle (or remote), WA
-    thumbnail: "/uploads/20191001171856_kaskada_logo_horizontal_black.png"
-    url: http://careers.kaskada.com/apply/3zRELQ00qq/DevOps-Engineer?source=LILI#3zRELQ00qq
   - title: Kensho
     description: |-
       Software Engineer - Security
