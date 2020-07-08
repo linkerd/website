@@ -351,7 +351,7 @@ The same functionality can also be done through Helm by disabling `gateway` and
 `serviceMirror` while submitting the remote service account name.
 
 ```bash
- helm install linkerd2-mc-soource linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set installNamespace=false --kube-context target
+ helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set installNamespace=false --kube-context target
 ```
 
 {{< note >}}
