@@ -69,7 +69,7 @@ linkerd install \
 Or when installing with Helm:
 
 ```bash
-helm install linkerd2
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
