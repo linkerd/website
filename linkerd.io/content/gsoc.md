@@ -258,7 +258,7 @@ of questions!
 ---
 
 It will also be helpful for your mentor to receive a weekly status communication
-from you. Previous mentors and students have use this template to faciliate
+from you. Previous mentors and students have use this template to facilitate
 their weekly catch-up:
 
 ### Accomplishments and Key Updates

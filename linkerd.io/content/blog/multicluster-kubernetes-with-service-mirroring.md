@@ -81,7 +81,7 @@ The astute reader may note that nothing in service mirroring actually requires a
 service mesh. Instead, the service mirror is a standalone component that can
 compose well with other projects. This applies not just to the potential users
 of service mirroring, but also to the service mirror itself. For example, the
-service mirror's gateway component is plugable by design, and can be implemented
+service mirror's gateway component is pluggable by design, and can be implemented
 by projects such as [Ambassador](https://www.getambassador.io/),
 [Gloo](https://github.com/solo-io/gloo) and
 [Traefik](https://containo.us/traefik/).

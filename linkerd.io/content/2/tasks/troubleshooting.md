@@ -1626,7 +1626,7 @@ Example errors:
 
 The error above indicates that your trust anchors are not compatible. In order to
 fix that you need to ensure that both your anchors contain identical sets of
-certficates.
+certificates.
 
 ```bash
 × clusters share trust anchors

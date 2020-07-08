@@ -117,6 +117,6 @@ This config is a great starting point that will work for a wide range of
 use-cases.  Please check out our
 [Service Mesh for Kubernetes blog series](https://buoyant.io/2016/10/04/a-service-mesh-for-kubernetes-part-i-top-line-service-metrics/)
 for information on how to enable more advanced Linkerd features such as
-[service-to-service encyption](https://buoyant.io/2016/10/24/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/),
+[service-to-service encryption](https://buoyant.io/2016/10/24/a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things/),
 [continuous deployment](https://buoyant.io/2016/11/04/a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting/),
 and [per-request routing](https://buoyant.io/2017/01/06/a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears/).
