@@ -78,7 +78,7 @@ Then use the `-f` flag to provide the override file, for example:
 
 ```bash
 ## see above on how to set $exp
-helm install linkerd2
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \

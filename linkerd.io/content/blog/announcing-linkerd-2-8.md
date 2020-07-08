@@ -112,7 +112,7 @@ own--or potentially with none at all.
 ## And lots more
 
 Linkerd 2.8 also has a tremendous list of other improvements, performance
-enhancements, and bug fixes, includng:
+enhancements, and bug fixes, including:
 
 - The Helm chart is more flexible and modular, with new Prometheus configuration
   options.
