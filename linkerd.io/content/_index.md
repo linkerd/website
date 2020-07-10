@@ -23,10 +23,10 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
-  - '1166399513923211265'
-  - '1091591745870139392'
-  - '1151035350208454656'
-  - '1130973416775983104'
+  - '1272674322134392832'
+  - '1271741604307652608'
+  - '1274302614231044096'
+  - '1270512416871403521'
   tweets_md: ''
 event_pictures: []
 features_list:
@@ -58,7 +58,7 @@ features_list:
   buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title:
+companies_title: 
 companies:
 - image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
@@ -87,5 +87,4 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
-
 Linkerd 2.8 has been Released! [Read the announcement >>](https://linkerd.io/2020/06/09/announcing-linkerd-2.8/)
