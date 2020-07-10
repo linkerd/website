@@ -42,7 +42,7 @@ currently has fewer features.
 [on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/), a data
 plane that is [built in a memory-safe
 language](https://github.com/linkerd/linkerd2-proxy), and [regular security
-audits](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf).
+audits](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf).
 
 3. Linkerd is [committed to open
 governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
@@ -79,7 +79,7 @@ Linkerd is hosted by the [Cloud Native Computing Foundation](https://cncf.io)
 Linkerd authors themselves.
 
 Linkerd is licensed under [Apache
-2.0](https://github.com/linkerd/linkerd2/blob/master/LICENSE).
+2.0](https://github.com/linkerd/linkerd2/blob/main/LICENSE).
 
 ## Who is Linkerd for?
 
@@ -98,9 +98,9 @@ Just like this: Linkerd. Capital "L", lower-case everything else.
 ## Who maintains Linkerd?
 
 See the [2.x
-maintainers](https://github.com/linkerd/linkerd2/blob/master/MAINTAINERS.md)
+maintainers](https://github.com/linkerd/linkerd2/blob/main/MAINTAINERS.md)
 file, and the [1.x
-maintainers](https://github.com/linkerd/linkerd/blob/master/MAINTAINERS.md)
+maintainers](https://github.com/linkerd/linkerd/blob/main/MAINTAINERS.md)
 file.
 
 ## Is there an Enterprise edition, or a commercial edition?
@@ -142,7 +142,7 @@ also provides a coarse-grained roadmap.
 ## How secure is Linkerd?
 
 Very secure. A [third party security audit of Linkerd
-2.x](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf) was
+2.x](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf) was
 completed in June 2019, and Linkerd passed with flying colors.
 
 ## How fast is Linkerd?

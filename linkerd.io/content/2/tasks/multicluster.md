@@ -166,7 +166,7 @@ done
     src="/images/multicluster/components.svg" >}}
 
 Installed into the `linkerd-multicluster` namespace, the gateway is a simple
-[NGINX proxy](https://github.com/linkerd/linkerd2/blob/master/charts/linkerd2-multicluster-remote-setup/templates/gateway.yaml#L10)
+[NGINX proxy](https://github.com/linkerd/linkerd2/blob/main/charts/linkerd2-multicluster-remote-setup/templates/gateway.yaml#L10)
 which has been injected with the Linkerd proxy. On the inbound side, Linkerd
 takes care of validating that the connection uses a TLS certificate that is part
 of the trust anchor. NGINX takes the request and forwards it to the Linkerd

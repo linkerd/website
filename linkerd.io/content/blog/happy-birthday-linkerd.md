@@ -29,7 +29,7 @@ works*](https://twitter.com/coleca/status/1091591745870139392).
 
 🍰 **A non-stop drumbeat of releases**. The past year has seen 5 stable releases
 of 2.x and 50 (!) edge releases, covering a changelog that [spans over 2,000
-lines of text](https://github.com/linkerd/linkerd2/blob/master/CHANGES.md)!
+lines of text](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)!
 But don't worry, you don't have to read all that to use Linkerd... [installing
 Linkerd is still a 60-second
 process](https://channel9.msdn.com/Shows/Azure-Friday/60-seconds-to-a-Linkerd-service-mesh-on-AKS).
@@ -57,7 +57,7 @@ Linkerd's metrics and traffic splitting features support SMI out of the box.
 
 🍰 **A third-party security audit passed with flying colors**. The security
 analysis firm [Cure53 evaluated
-Linkerd](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf)
+Linkerd](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf)
 and concluded that Linkerd "is fully capable of preventing major attacks and
 should be considered strong against the majority of malicious attempts at a
 compromise", continuing that "Cure53 needs to mention the atypically excellent

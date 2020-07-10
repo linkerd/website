@@ -288,7 +288,7 @@ When you're finished testing, **close the tunnel** by pressing `CTRL-C` in the S
 
 Congratulations! You've now set up testing architecture for your project, with a test you can run locally on Chrome and in the cloud on multiple browsers.
 
-If you want to make it REALLY easy for your team to run, you can create shortcuts in a `bin` file (check out the `integration` function [in our repo's bin/web file](https://github.com/linkerd/linkerd2/blob/master/bin/web)).
+If you want to make it REALLY easy for your team to run, you can create shortcuts in a `bin` file (check out the `integration` function [in our repo's bin/web file](https://github.com/linkerd/linkerd2/blob/main/bin/web)).
 
 ## Go Forth and Test! 🚀
 
