@@ -36,6 +36,12 @@ LoadBalancer` is obscuring the client source IP. You can fix this by setting
 `externalTrafficPolicy: Local` in the ingress' service definition.
 {{< /note >}}
 
+{{< note >}}
+While the Kubernetes Ingress API definition allows a `backend`'s `servicePort`
+to be a string value, only numeric `servicePort` values can be used with Linkerd.
+If a string value is encountered, Linkerd will default to using port 80.
+{{< /note >}}
+
 ## Nginx
 
 This uses `emojivoto` as an example, take a look at
