@@ -62,7 +62,7 @@ EOF
 
 This configuration file can also be used to apply Add-On configuration
 (not just specific to tracing Add-On). More information on the configuration
-fields allowed, can be found [here](https://github.com/linkerd/linkerd2/tree/master/charts/linkerd2#add-ons-configuration)
+fields allowed, can be found [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd2#add-ons-configuration)
 
 Now, the above configuration can be applied using the `--addon-config` file
 with CLI or through `values.yaml` with Helm.
