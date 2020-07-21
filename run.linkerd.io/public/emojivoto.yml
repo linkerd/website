@@ -81,10 +81,12 @@ spec:
   selector:
     matchLabels:
       app: emoji-svc
+      version: v10
   template:
     metadata:
       labels:
         app: emoji-svc
+        version: v10
     spec:
       containers:
       - env:
@@ -118,10 +120,12 @@ spec:
   selector:
     matchLabels:
       app: vote-bot
+      version: v10
   template:
     metadata:
       labels:
         app: vote-bot
+        version: v10
     spec:
       containers:
       - command:
@@ -149,10 +153,12 @@ spec:
   selector:
     matchLabels:
       app: voting-svc
+      version: v10
   template:
     metadata:
       labels:
         app: voting-svc
+        version: v10
     spec:
       containers:
       - env:
@@ -186,10 +192,12 @@ spec:
   selector:
     matchLabels:
       app: web-svc
+      version: v10
   template:
     metadata:
       labels:
         app: web-svc
+        version: v10
     spec:
       containers:
       - env:
