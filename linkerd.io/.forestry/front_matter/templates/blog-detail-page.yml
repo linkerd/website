@@ -32,3 +32,5 @@ fields:
 - type: file
   label: Featured Thumbnail
   name: feature
+pages:
+- linkerd.io/content/blog/under-the-hood-of-linkerd-s-state-of-the-art-rust-proxy-linkerd2-proxy.md
