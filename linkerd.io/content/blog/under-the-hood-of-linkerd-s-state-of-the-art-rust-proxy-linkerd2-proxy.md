@@ -1,7 +1,6 @@
 +++
 author = "eliza"
 date = 2020-07-23T00:00:00Z
-draft = true
 feature = "/uploads/flow-chart.png"
 tags = []
 thumbnail = ""
