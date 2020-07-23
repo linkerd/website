@@ -2,7 +2,7 @@
 author = "eliza"
 date = 2020-07-23T00:00:00Z
 feature = "/uploads/flow-chart.png"
-tags = []
+tags = ["Linkerd"]
 thumbnail = ""
 title = "Under the hood of Linkerd's state-of-the-art Rust proxy, Linkerd2-proxy"
 
