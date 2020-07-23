@@ -3,18 +3,25 @@ title = "Configuring external prometheus instance"
 description = "Configure external prometheus to scrape linkerd metrics"
 +++
 
-Even though Linkerd comes with its own prometheus instance, there can be cases
-where using a extrnal prometheus instance makes more sense for various reasons.
+Even though Linkerd comes with its own Prometheus instance, there can be cases
+where using a external instance makes more sense for various reasons.
 This tutorial shows how to configure a prometheus instance to scrape both
-the control-plane as well as the proxy's metrics in a format that is consumable
-both by a user as well as Linkerd control-plane components like web, etc.
+the control plane as well as the proxy's metrics in a format that is consumable
+both by a user as well as Linkerd control plane components like web, etc.
 
-## Linkerd Scrape Configurations
+## Prometheus Scrape Configuration
 
-For the linkerd-prometheus instance, Prometheus's Scrape Config rules are used heavily
-to add additional labels around the kubernetes information. 
+For the linkerd-prometheus instance, Prometheus's scrape configuration rules
+are used heavily to add additional labels around the Kubernetes information. 
 
 The following scrape configuration has to be applied to the prometheus instance.
+
+{{< note >}}
+The below scrape configuration is a subset of [`linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/main/charts/add-ons/prometheus/templates/prometheus.yaml#L27).
+{{< /note >}}
+
+Before applying, It is important to replace templated values(present in `{{}}`)
+with direct values for the below configuration to work.
 
 ```yaml
 
@@ -98,6 +105,3 @@ The following scrape configuration has to be applied to the prometheus instance.
       - action: labelmap
         regex: __tmp_pod_label_(.+)
 ```
-
-It is important to replace templated values(present in `{{}}`) with direct values
-for the above configuration to work.
