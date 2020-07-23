@@ -3,8 +3,8 @@ title = "Configuring external prometheus instance"
 description = "Configure external prometheus to scrape linkerd metrics"
 +++
 
-Though Linkerd comes with its own prometheus instance, there can be cases
-where a extrnal prometheus instance has to be used for various reasons.
+Even though Linkerd comes with its own prometheus instance, there can be cases
+where using a extrnal prometheus instance makes more sense for various reasons.
 This tutorial shows how to configure a prometheus instance to scrape both
 the control-plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control-plane components like web, etc.
@@ -17,46 +17,6 @@ to add additional labels around the kubernetes information.
 The following scrape configuration has to be applied to the prometheus instance.
 
 ```yaml
-    - job_name: 'prometheus'
-      static_configs:
-      - targets: ['localhost:9090']
-
-    - job_name: 'grafana'
-      kubernetes_sd_configs:
-      - role: pod
-        namespaces:
-          names: ['{{.Values.global.namespace}}']
-      relabel_configs:
-      - source_labels:
-        - __meta_kubernetes_pod_container_name
-        action: keep
-        regex: ^grafana$
-
-    #  Required for: https://grafana.com/grafana/dashboards/315
-    - job_name: 'kubernetes-nodes-cadvisor'
-      scheme: https
-      tls_config:
-        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-        insecure_skip_verify: true
-      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-      kubernetes_sd_configs:
-      - role: node
-      relabel_configs:
-      - action: labelmap
-        regex: __meta_kubernetes_node_label_(.+)
-      - target_label: __address__
-        replacement: kubernetes.default.svc:443
-      - source_labels: [__meta_kubernetes_node_name]
-        regex: (.+)
-        target_label: __metrics_path__
-        replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
-      metric_relabel_configs:
-      - source_labels: [__name__]
-        regex: '(container|machine)_(cpu|memory|network|fs)_(.+)'
-        action: keep
-      - source_labels: [__name__]
-        regex: 'container_memory_failures_total' # unneeded large metric
-        action: drop
 
     - job_name: 'linkerd-controller'
       kubernetes_sd_configs:
