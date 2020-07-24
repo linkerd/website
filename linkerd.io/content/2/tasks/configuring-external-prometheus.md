@@ -14,10 +14,10 @@ both by a user as well as Linkerd control plane components like web, etc.
 For the linkerd-prometheus instance, Prometheus's scrape configuration rules
 are used heavily to add additional labels around the Kubernetes information. 
 
-The following scrape configuration has to be applied to the prometheus instance.
+The following scrape configuration has to be applied to the Prometheus instance.
 
 {{< note >}}
-The below scrape configuration is a subset of [`linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/main/charts/add-ons/prometheus/templates/prometheus.yaml#L27).
+The below scrape configuration is a subset of [`linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/e75b1ca13c030dd796ec9c0e978370271adbb83e/charts/add-ons/prometheus/templates/prometheus.yaml#L69-L147).
 {{< /note >}}
 
 Before applying, It is important to replace templated values(present in `{{}}`)
