@@ -74,7 +74,7 @@ wrote Linkerd2-proxy, we built Linkerd 1.x. This first version of Linkerd had a
 proxy component that was written in Scala, and leveraged the robust Scala and
 Java networking ecosystem for excellent performance at scale. But, because it
 ran on the Java Virtual Machine, it had a pretty significant resource
-footprint. (The JVM is good at "scaling up", but not good at "scaling _down"_,
+footprint. (The JVM is good at "scaling up", but not good at "scaling _down_",
 as William wrote in his InfoQ article on [the decision to reimplement
 Linkerd](https://www.infoq.com/articles/linkerd-v2-production-adoption/).) Even
 though the Linkerd community [got pretty
@@ -93,7 +93,7 @@ spiky, unpredictable latency profile is the opposite of what we wanted for a
 service mesh proxy. Thus, although [we love
 Go](https://github.com/linkerd/linkerd2/search?l=go) (and the Linkerd 2.x
 control plane is written in it), Go, too, [is a garbage-collected
-language](https://github.com/linkerd/linkerd2/search?l=go). So that left us
+language](https://blog.discord.com/why-discord-is-switching-from-go-to-rust-a190bbca2b1f). So that left us
 with languages without garbage collection, like Rust and C++.
 
 Finally, security. Ensuring secure and private communication between services
@@ -176,8 +176,8 @@ which is built on top of [_ring_](https://github.com/briansmith/ring) and
 underlying cryptographic primitives. An [independent security
 audit](https://github.com/ctz/rustls/blob/master/audit/TLS-01-report.pdf),
 sponsored by the CNCF, found that this cryptographic stack to be exceptionally
-high quality, with the auditors from Cure53 “incredibly impressed with the
-presented software.”
+high quality, with the auditors from Cure53 "incredibly impressed with the
+presented software."
 
 Today, these components form the core building blocks of Rust's networking
 ecosystem, and it's no exaggeration to say that much of the development has
@@ -243,7 +243,7 @@ service mesh.
 Next, what does the proxy do if a request is meshed? Let's consider the case
 where a meshed client sends an outbound request to its proxy. The proxy
 performs the protocol detection we discussed above, and determines that this is
-a HTTP/1, HTTP/= 1, or gRPC request—protocols that Linkerd understands and can
+a HTTP/1, HTTP/2, or gRPC request—protocols that Linkerd understands and can
 route intelligently. So, now we need to determine where the request is going.
 Linkerd routes HTTP traffic based on the target
 [authority](https://tools.ietf.org/html/rfc3986#section-3.2), which is either
