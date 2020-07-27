@@ -1,13 +1,25 @@
 +++
-title = "Configuring an external Prometheus instance"
-description = "Configure an external Prometheus to scrape Linkerd metrics"
+title = "Bring your own Prometheus instance"
+description = "Make it easy to use exisiting Prometheus instance with Linkerd"
 +++
+
+{{< note >}}
+It is strongly advised to use `linkerd-prometheus` instead of using the exisiting
+one, to have a good separation of concerns. Things like remote_write, etc can be
+configured in the `linkerd-prometheus` to get a global view of metrics as
+shown [here](https://linkerd.io/2/tasks/exporting-metrics/)
+{{< /note >}}
 
 Even though Linkerd comes with its own Prometheus instance, there can be cases
 where using an external instance makes more sense for various reasons.
 This tutorial shows how to configure a external Prometheus instance to scrape both
 the control plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control plane components like web, etc.
+
+There are two important points to tackle here.
+
+- Configuring the exisiting prometheus to get the linkerd proxy metrics.
+- Configuring the linkerd control plane components to use existing prometheus.
 
 ## Prometheus Scrape Configuration
 
@@ -103,3 +115,38 @@ with direct values for the below configuration to work.
       - action: labelmap
         regex: __tmp_pod_label_(.+)
 ```
+
+## Control Plane Components Configuration
+
+Linkerd's control plane components like `public-api`, etc depend 
+on the Prometheus instance to power the dashboard and CLI.
+
+`global.prometheusUrl` field gives you a single place through
+which all these components can be configured for a external prometheus URL. This is allowed both through the CLI and Helm.
+
+### CLI
+
+This can be done by passing a file with the above field to `addon-config` field,
+which is available both through `linkerd install` and `linkerd upgrade` commands
+
+```yaml
+global:
+  prometheusUrl: exisiting-prometheus.xyz:9090/api/prom
+```
+
+{{< note >}}
+Rather than the plain url of the existing prometheus. The query path of the
+instance has to be passed which is usually at `api/prom`
+{{< /note >}}
+
+Once applied, this configuration is persistent across upgrades, without having
+the user passing it again. The same can be overwritten as needed.
+
+### Helm
+
+The same configuration can be applied through `values.yaml` when using Helm.
+Once applied, Helm makes sure that the configuraiton is
+persistent across upgrades.
+
+More information on installation through Helm can be found
+[here](https://linkerd.io/2/tasks/install-helm/index.html)
