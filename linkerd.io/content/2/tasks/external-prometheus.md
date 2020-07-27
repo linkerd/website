@@ -118,11 +118,12 @@ with direct values for the below configuration to work.
 
 ## Control Plane Components Configuration
 
-Linkerd's control plane components like `public-api`, etc depend 
+Linkerd's control plane components like `public-api`, etc depend
 on the Prometheus instance to power the dashboard and CLI.
 
 `global.prometheusUrl` field gives you a single place through
-which all these components can be configured for a external prometheus URL. This is allowed both through the CLI and Helm.
+which all these components can be configured for a external prometheus URL.
+This is allowed both through the CLI and Helm.
 
 ### CLI
 
