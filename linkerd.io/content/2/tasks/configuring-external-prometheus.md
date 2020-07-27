@@ -18,8 +18,8 @@ both by a user as well as Linkerd control plane components like web, etc.
 
 There are two important points to tackle here.
 
-- Configuring the exisiting prometheus to get the linkerd proxy metrics.
-- Configuring the linkerd control plane components to use existing prometheus.
+- Configuring external Prometheus instance to get the Linkerd metrics.
+- Configuring the Linkerd control plane components to use that prometheus.
 
 ## Prometheus Scrape Configuration
 
