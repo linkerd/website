@@ -1,10 +1,10 @@
 +++
 title = "Bring your own Prometheus instance"
-description = "Make it easy to use exisiting Prometheus instance with Linkerd"
+description = "Make it easy to use existing Prometheus instance with Linkerd"
 +++
 
 {{< note >}}
-It is strongly advised to use `linkerd-prometheus` instead of using the exisiting
+It is strongly advised to use `linkerd-prometheus` instead of using an external
 one, to have a good separation of concerns. Things like remote_write, etc can be
 configured in the `linkerd-prometheus` to get a global view of metrics as
 shown [here](https://linkerd.io/2/tasks/exporting-metrics/)
@@ -12,7 +12,7 @@ shown [here](https://linkerd.io/2/tasks/exporting-metrics/)
 
 Even though Linkerd comes with its own Prometheus instance, there can be cases
 where using an external instance makes more sense for various reasons.
-This tutorial shows how to configure a external Prometheus instance to scrape both
+This tutorial shows how to configure an external Prometheus instance to scrape both
 the control plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control plane components like web, etc.
 
@@ -23,7 +23,7 @@ There are two important points to tackle here.
 
 ## Prometheus Scrape Configuration
 
-The following scrape configuration has to be applied to th external
+The following scrape configuration has to be applied to the external
 Prometheus instance.
 
 {{< note >}}
@@ -145,7 +145,7 @@ the user passing it again. The same can be overwritten as needed.
 ### Helm
 
 The same configuration can be applied through `values.yaml` when using Helm.
-Once applied, Helm makes sure that the configuraiton is
+Once applied, Helm makes sure that the configuration is
 persistent across upgrades.
 
 More information on installation through Helm can be found
