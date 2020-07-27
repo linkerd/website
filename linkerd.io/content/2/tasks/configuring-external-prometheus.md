@@ -1,26 +1,24 @@
 +++
-title = "Configuring external prometheus instance"
-description = "Configure external prometheus to scrape linkerd metrics"
+title = "Configuring an external Prometheus instance"
+description = "Configure an external Prometheus to scrape Linkerd metrics"
 +++
 
 Even though Linkerd comes with its own Prometheus instance, there can be cases
-where using a external instance makes more sense for various reasons.
-This tutorial shows how to configure a prometheus instance to scrape both
+where using an external instance makes more sense for various reasons.
+This tutorial shows how to configure a external Prometheus instance to scrape both
 the control plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control plane components like web, etc.
 
 ## Prometheus Scrape Configuration
 
-For the linkerd-prometheus instance, Prometheus's scrape configuration rules
-are used heavily to add additional labels around the Kubernetes information. 
-
-The following scrape configuration has to be applied to the Prometheus instance.
+The following scrape configuration has to be applied to th external
+Prometheus instance.
 
 {{< note >}}
 The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/e75b1ca13c030dd796ec9c0e978370271adbb83e/charts/add-ons/prometheus/templates/prometheus.yaml#L69-L147).
 {{< /note >}}
 
-Before applying, It is important to replace templated values(present in `{{}}`)
+Before applying, it is important to replace templated values (present in `{{}}`)
 with direct values for the below configuration to work.
 
 ```yaml
