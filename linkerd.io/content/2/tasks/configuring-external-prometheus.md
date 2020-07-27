@@ -131,7 +131,7 @@ which is available both through `linkerd install` and `linkerd upgrade` commands
 
 ```yaml
 global:
-  prometheusUrl: exisiting-prometheus.xyz:9090/api/prom
+  prometheusUrl: existing-prometheus.xyz:9090/api/prom
 ```
 
 {{< note >}}
