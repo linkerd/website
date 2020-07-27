@@ -7,7 +7,7 @@ aliases = [
 +++
 
 Linkerd can also be installed with a
-[number of Add-On's](https://github.com/linkerd/linkerd2/tree/master/charts/add-ons),
+[number of Add-On's](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons),
 allowing users to get a great out of the box experience around
 popular service mesh use-cases.
 These Add-On's are coupled with the control plane installation
@@ -25,7 +25,7 @@ Add-On's are available in Linkerd starting from version `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
-[Linkerd2 Add-On's charts directory](https://github.com/linkerd/linkerd2/tree/master/charts/add-ons).
+[Linkerd2 Add-On's charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons).
 
 Now, Let us see the installation of the Tracing Add-On. In this demo, We
 also enable enable the `control-plane-tracing` flag which would,
