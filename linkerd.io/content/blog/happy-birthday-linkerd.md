@@ -44,7 +44,7 @@ are on the docket for later this year!
 [OpenFaaS](https://github.com/openfaas-incubator/openfaas-linkerd2) to
 [Flagger](https://docs.flagger.app/usage/linkerd-progressive-delivery) to
 [Ambassador](https://blog.getambassador.io/knative-linkerd-support-json-logging-and-more-in-ambassador-0-73-a2dc62413c18)
-to [SuperGloo](https://supergloo.solo.io/mesh/install-linkerd/) to
+to [Service Mesh Hub](https://docs.solo.io/service-mesh-hub/latest/guides/linkerd_guide/) to
 [DigitalOcean](https://marketplace.digitalocean.com/apps/linkerd-beta) to
 [VSCode](https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd)
 to [Rio](https://github.com/rancher/rio/pull/411), Linkerd has become a

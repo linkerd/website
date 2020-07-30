@@ -149,7 +149,7 @@ networking applications. It provides an event loop that integrates with the
 operating system's non-blocking I/O primitives, high-performance timers, and
 task scheduling. For readers familiar with Node.js, Tokio can be thought of as
 playing a role similar to that of the C library `libuv` — in fact, using Tokio
-was [one of the main reasons ](https://youtu.be/lcoU9jtsK24?t=651)that Node
+was [one of the main reasons](https://youtu.be/lcoU9jtsK24?t=651) that Node
 creator Ryan Dahl chose to use Rust in Deno, his next-generation JavaScript
 runtime. Since Linkerd first started using Tokio [way back in
 2016](https://github.com/linkerd/linkerd-tcp/commit/cff670f79eb1a3f5dccf1704304ebe610cd3fc5a),
@@ -307,7 +307,7 @@ latency than unmeshed traffic, despite taking additional network hops.
 
 Putting it all together, the basic flow of logic in the proxy looks like this:
 
-![](/uploads/flow-chart.png)
+![Proxy Logic Flow](/uploads/flow-chart.png)
 
 Although it provides a lot of functionality, we've kept Linkerd2-proxy as
 simple and minimalist as possible. Best of all, the proxy's modular
@@ -344,7 +344,5 @@ join our rapidly-growing community! Linkerd is hosted on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
-(<span>Photo by <a
-href="https://unsplash.com/@lazycreekimages?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Michael
-Dziedzic</a> on <a
-href="https://unsplash.com/s/photos/circuitboard?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>.)
+(Photo by [Michael Dziedzic](https://unsplash.com/@lazycreekimages?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/s/photos/circuitboard?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)).

@@ -28,7 +28,7 @@ You can find the list of add-ons present in the
 [Linkerd2 Add-On's charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons).
 
 Now, Let us see the installation of the Tracing Add-On. In this demo, We
-also enable enable the `control-plane-tracing` flag which would,
+also enable the `control-plane-tracing` flag which would,
 make the control-plane components send traces to the collector.
 
 Other Add-On's would also have a similar installation approach.
