@@ -29,7 +29,7 @@ The following scrape configuration has to be applied to the external
 Prometheus instance.
 
 {{< note >}}
-The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/main/charts/add-ons/prometheus/templates/prometheus.yaml#L27).
+The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/stable-2.8.1/charts/linkerd2/templates/prometheus.yaml#L77-L155).
 {{< /note >}}
 
 Before applying, it is important to replace templated values (present in `{{}}`)
