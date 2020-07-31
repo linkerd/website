@@ -3,15 +3,17 @@ title = "Bring your own Prometheus instance"
 description = "Make it easy to use existing Prometheus instance with Linkerd"
 +++
 
-{{< note >}}
-It is strongly advised to use `linkerd-prometheus` instead of using an external
-one, to have a good separation of concerns. Things like remote_write, etc can be
-configured in the `linkerd-prometheus` to get a global view of metrics as
-shown [here](https://linkerd.io/2/tasks/exporting-metrics/)
-{{< /note >}}
-
 Even though Linkerd comes with its own Prometheus instance, there can be cases
 where using an external instance makes more sense for various reasons.
+
+{{< note >}}
+Note that this approach requires you to manually add and maintain additional
+scrape configuration in your Prometheus configuration.
+If you prefer to use the default Linkerd Prometheus add-on,
+you can export the metrics to your existing monitoring infrastructure
+following the instructions at https://linkerd.io/2/tasks/exporting-metrics/
+{{< /note >}}
+
 This tutorial shows how to configure an external Prometheus instance to scrape both
 the control plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control plane components like web, etc.
