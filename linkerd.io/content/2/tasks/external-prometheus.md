@@ -19,7 +19,7 @@ both by a user as well as Linkerd control plane components like web, etc.
 There are two important points to tackle here.
 
 - Configuring external Prometheus instance to get the Linkerd metrics.
-- Configuring the Linkerd control plane components to use that prometheus.
+- Configuring the Linkerd control plane components to use that Prometheus.
 
 ## Prometheus Scrape Configuration
 
@@ -121,8 +121,8 @@ with direct values for the below configuration to work.
 Linkerd's control plane components like `public-api`, etc depend
 on the Prometheus instance to power the dashboard and CLI.
 
-`global.prometheusUrl` field gives you a single place through
-which all these components can be configured for a external prometheus URL.
+The `global.prometheusUrl` field gives you a single place through
+which all these components can be configured to an external Prometheus URL.
 This is allowed both through the CLI and Helm.
 
 ### CLI
@@ -136,8 +136,8 @@ global:
 ```
 
 {{< note >}}
-Rather than the plain url of the existing prometheus. The query path of the
-instance has to be passed which is usually at `api/prom`
+Rather than the plain URL of the existing Prometheus, the query path of the
+instance has to be passed which is usually at `api/prom`.
 {{< /note >}}
 
 Once applied, this configuration is persistent across upgrades, without having
