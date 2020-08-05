@@ -2,7 +2,7 @@
 title: Homepage
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
-  title: Ultralight, security-first service mesh for Kubernetes
+  title: Zero-trust multi-cluster Kubernetes. Fast, simple, and open source.
   description: Linkerd adds critical security, observability, and reliability features
     to your Kubernetes stack&mdash;no code change required.
   image: "/uploads/image-15.png"
@@ -23,10 +23,10 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
-  - '1272674322134392832'
-  - '1271741604307652608'
-  - '1274302614231044096'
-  - '1270512416871403521'
+  - '1278698855622721536'
+  - '1284349663647133699'
+  - '1280094604482805763'
+  - '1279141560597315591'
   tweets_md: ''
 event_pictures: []
 features_list:
