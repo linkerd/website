@@ -118,6 +118,7 @@ fi
 
   echo "Downloading ${srcfile}..."
   if ! curl -fLO "${url}"; then
+    # shellcheck disable=SC2030
     srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
     url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
     echo "Fallback to ${url}"
@@ -133,6 +134,7 @@ fi
 
 (
   mkdir -p "${INSTALLROOT}/bin"
+  # shellcheck disable=SC2031
   if ! mv "${tmpdir}/${srcfile}" "${dstfile}"; then
     mv "${tmpdir}/linkerd2-cli-${LINKERD2_VERSION}-${OS}" "${dstfile}"
   fi
