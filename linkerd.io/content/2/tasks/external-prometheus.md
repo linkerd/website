@@ -11,7 +11,7 @@ Note that this approach requires you to manually add and maintain additional
 scrape configuration in your Prometheus configuration.
 If you prefer to use the default Linkerd Prometheus add-on,
 you can export the metrics to your existing monitoring infrastructure
-following the instructions at https://linkerd.io/2/tasks/exporting-metrics/
+following the instructions at <https://linkerd.io/2/tasks/exporting-metrics/>
 {{< /note >}}
 
 This tutorial shows how to configure an external Prometheus instance to scrape both
