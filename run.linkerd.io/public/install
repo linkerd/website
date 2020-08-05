@@ -93,6 +93,7 @@ checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
 
 tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
 srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+fallbackurl="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
 if [ -n "${cli_arch}" ]; then
   srcfile+="-${cli_arch}"
 fi
@@ -117,7 +118,11 @@ fi
   cd "$tmpdir"
 
   echo "Downloading ${srcfile}..."
-  curl -fLO "${url}"
+  if ! curl -fLO "${url}"; then
+    echo "Fallback to ${fallbackurl}"
+    url=${fallbackurl}
+    curl -fLO "${url}"
+  fi
   echo "Download complete!"
 
   if ! validate_checksum "${srcfile}"; then
