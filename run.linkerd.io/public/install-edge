@@ -25,7 +25,11 @@ happyexit() {
 
 validate_checksum() {
   filename=$1
-  SHA=$(curl -sfL "${url}.sha256")
+  if ! SHA=$(curl -sfL "${url}.sha256"); then
+    srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+    url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
+    SHA=$(curl -sfL "${url}.sha256")
+  fi
   echo ""
   echo "Validating checksum..."
 
