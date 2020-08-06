@@ -36,8 +36,11 @@ Before applying, it is important to replace templated values (present in `{{}}`)
 with direct values for the below configuration to work.
 
 ```yaml
-
     - job_name: 'linkerd-controller'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
         namespaces:
@@ -53,6 +56,10 @@ with direct values for the below configuration to work.
         target_label: component
 
     - job_name: 'linkerd-service-mirror'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -66,6 +73,10 @@ with direct values for the below configuration to work.
         target_label: component
 
     - job_name: 'linkerd-proxy'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -123,16 +134,6 @@ The running configuration of the builtin prometheus can be used as a reference.
 ```bash
 kubectl -n linkerd  get configmap linkerd-prometheus-config -o yaml
 ```
-
-In order for the dashboard and grafana to work correctly the scrape settings need
-to be set to the following values:
-
-```yaml
-scrape_interval: 10s
-scrape_timeout: 10s
-```
-
-This can be done either globally or per scrape job.
 
 ## Control Plane Components Configuration
 
