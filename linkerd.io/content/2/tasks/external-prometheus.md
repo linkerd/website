@@ -124,7 +124,8 @@ The running configuration of the builtin prometheus can be used as a reference.
 kubectl -n linkerd  get configmap linkerd-prometheus-config -o yaml
 ```
 
-In order for the dashboard and grafana to work correctly the scrape settings need to be set to the following values: 
+In order for the dashboard and grafana to work correctly the scrape settings need
+to be set to the following values:
 
 ```yaml
 scrape_interval: 10s
