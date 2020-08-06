@@ -79,6 +79,6 @@ helm install linkerd2 \
 
 {{< note >}}
 For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been depreciated, and is the first argument as
+In Helm v3, It has been deprecated, and is the first argument as
  specified above.
 {{< /note >}}
