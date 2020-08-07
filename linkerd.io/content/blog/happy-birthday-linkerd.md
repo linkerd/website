@@ -22,7 +22,7 @@ includes talks from Linkerd users at **Nordstrom**, **Disney**, **Microsoft**,
 **Paybase**, and more, joining the ever-growing list of Linkerd production use
 cases that spans [mobile](https://apester.com/) to
 [consumer](https://www.askattest.com/) to [payments](https://paybase.io/) to
-[banking](https://www.figo.io/en/). No matter the industry or scale, Linkerd
+[banking](https://www.finleap.com/). No matter the industry or scale, Linkerd
 gives you the essential reliability, security, and observability necessary to
 operate your app on Kubernetes. And most of all, [*it just
 works*](https://twitter.com/coleca/status/1091591745870139392).
