@@ -1485,7 +1485,7 @@ yes
 Example error:
 
 ```bash
-× ervice mirror controller has required permissions
+× service mirror controller has required permissions
     missing Service mirror ClusterRole linkerd-service-mirror-access-local-resources: unexpected verbs expected create,delete,get,list,update,watch, got create,delete,get,update,watch
     see https://linkerd.io/checks/#l5d-multicluster-local-rbac-correct for hints
 ```
