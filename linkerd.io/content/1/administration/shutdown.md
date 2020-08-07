@@ -9,7 +9,7 @@ weight = 39
 
 +++
 You can gracefully shut down Linkerd by sending a POST request to
-`/admin/shutown`. For example:
+`/admin/shutdown`. For example:
 
 ```bash
 curl -X POST http://localhost:9990/admin/shutdown
