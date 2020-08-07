@@ -59,7 +59,7 @@ The same configuration file can be used both through the CLI and Helm.
 
 ## Installation through CLI
 
-linkerd CLI now supports a `addon-config` flag, which is used to pass the confiugration
+linkerd CLI now supports a `addon-config` flag, which is used to pass the configuration
 of add-ons. Now, the above configuration file can be passed as
 
 ```bash
