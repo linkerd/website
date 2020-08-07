@@ -82,7 +82,7 @@ See [Uninstalling Linkerd](/2/tasks/uninstall/).
 
 ## Multi-stage install
 
-If your organization assigns Kuberenetes cluster privileges based on role
+If your organization assigns Kubernetes cluster privileges based on role
 (typically cluster owner and service owner), Linkerd provides a "multi-stage"
 installation to accommodate these two roles. The two installation stages are
 `config` (for the cluster owner) and `control-plane` (for the service owner).
