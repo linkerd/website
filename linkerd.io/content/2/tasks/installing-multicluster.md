@@ -362,7 +362,7 @@ failure due to namespace ownership conflict between the Helm releases.
 
 Each access credential is created as a separate Helm release providing clear separation.
 To revoke access to a particular source cluster, relevant helm release in the target
-cluster can be removed without effecting the mutlicluster components
+cluster can be removed without effecting the multicluster components
 or other access credentials Helm releases.
 
 Now that the multicluster components are installed, operations like linking, etc
