@@ -25,7 +25,11 @@ happyexit() {
 
 validate_checksum() {
   filename=$1
-  SHA=$(curl -sfL "${url}.sha256")
+  if ! SHA=$(curl -sfL "${url}.sha256"); then
+    srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+    url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
+    SHA=$(curl -sfL "${url}.sha256")
+  fi
   echo ""
   echo "Validating checksum..."
 
@@ -48,6 +52,7 @@ validate_checksum() {
 
 OS=$(uname -s)
 arch=$(uname -m)
+cli_arch=""
 case $OS in
   CYGWIN* | MINGW64*)
     OS=windows.exe
@@ -57,6 +62,19 @@ case $OS in
   Linux)
     case $arch in
       x86_64)
+        cli_arch=amd64
+        ;;
+      armv8*)
+        cli_arch=arm64
+        ;;
+      aarch64*)
+        cli_arch=arm64
+        ;;
+      armv*)
+        cli_arch=arm
+        ;;
+      amd64|arm64)
+        cli_arch=$arch
         ;;
       *)
         echo "There is no linkerd $OS support for $arch. Please open an issue with your platform details."
@@ -79,6 +97,9 @@ checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
 
 tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
 srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+if [ -n "${cli_arch}" ]; then
+  srcfile="${srcfile}-${cli_arch}"
+fi
 dstfile="${INSTALLROOT}/bin/linkerd-${LINKERD2_VERSION}"
 url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
 
@@ -100,7 +121,13 @@ fi
   cd "$tmpdir"
 
   echo "Downloading ${srcfile}..."
-  curl -fLO "${url}"
+  if ! curl -fLO "${url}"; then
+    # shellcheck disable=SC2030
+    srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+    url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
+    echo "Fallback to ${url}"
+    curl -fLO "${url}"
+  fi
   echo "Download complete!"
 
   if ! validate_checksum "${srcfile}"; then
@@ -111,7 +138,10 @@ fi
 
 (
   mkdir -p "${INSTALLROOT}/bin"
-  mv "${tmpdir}/${srcfile}" "${dstfile}"
+  # shellcheck disable=SC2031
+  if ! mv "${tmpdir}/${srcfile}" "${dstfile}"; then
+    mv "${tmpdir}/linkerd2-cli-${LINKERD2_VERSION}-${OS}" "${dstfile}"
+  fi
   chmod +x "${dstfile}"
   rm -f "${INSTALLROOT}/bin/linkerd"
   ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
