@@ -94,7 +94,7 @@ create deployments, configmaps, services, and secrets.
 ### Stage 1: config
 
 The `config` stage is intended to be run by the cluster owner, the role with
-more privileges. It is also the cluster owner's responsbility to run the
+more privileges. It is also the cluster owner's responsibility to run the
 initial pre-install check:
 
 ```bash
