@@ -140,7 +140,7 @@ get a template that allows you to add routes manually. To generate the template,
 run:
 
 ```bash
-linkerd profile -n emjoivoto web-svc --template
+linkerd profile -n emojivoto web-svc --template
 ```
 
 This generates a service profile template with examples that can be manually
