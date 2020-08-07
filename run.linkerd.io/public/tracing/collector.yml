@@ -34,7 +34,7 @@ metadata:
   name: oc-collector
   namespace: tracing
   labels:
-    app: opencesus
+    app: opencensus
     component: oc-collector
 spec:
   ports:
