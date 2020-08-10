@@ -67,7 +67,7 @@ worst-case tail
 latency](https://cacm.acm.org/magazines/2013/2/160173-the-tail-at-scale/fulltext).
 Perhaps most importantly, because the proxy handles _application_
 data—potentially including incredibly sensitive data such as financial
-transitionacitons or personal health—it has to be _secure_.
+transactions or personal health—it has to be _secure_.
 
 Let's take each of these in turn, starting with resource consumption. Before we
 wrote Linkerd2-proxy, we built Linkerd 1.x. This first version of Linkerd had a

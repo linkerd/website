@@ -33,7 +33,7 @@ any metrics aggregator, it includes some common formats out of the box, includin
 For configuring a telemeter such as Prometheus, see the
 [Telemetry section of the Linkerd config]({{% linkerdconfig "telemetry" %}}).
 
-For more detail about Metrics instrumention, see the
+For more detail about Metrics instrumentation, see the
 [Telemetry section of the Admin guide]({{% ref
 "/1/administration/telemetry.md"
 %}}).

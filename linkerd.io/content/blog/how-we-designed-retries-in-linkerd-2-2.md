@@ -88,7 +88,7 @@ We've shown how you can configure Linkerd's retry behavior by combining timeouts
 
 ```bash
 linkerd install | kubectl apply -f - && \
-  curl https://run.linkerd.io/bookapp.yml | linkerd inject - | kubectl apply -f - && \
+  curl https://run.linkerd.io/booksapp.yml | linkerd inject - | kubectl apply -f - && \
   linkerd check
 ```
 

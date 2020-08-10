@@ -48,7 +48,7 @@ to [Service Mesh Hub](https://docs.solo.io/service-mesh-hub/latest/guides/linker
 [DigitalOcean](https://marketplace.digitalocean.com/apps/linkerd-beta) to
 [VSCode](https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd)
 to [Rio](https://github.com/rancher/rio/pull/411), Linkerd has become a
-criticla building block for the cloud native ecosystem as a whole.
+critical building block for the cloud native ecosystem as a whole.
 
 🍰 **The creation of industry-defining interfaces**. The Linkerd team was the
 largest contributor to Microsoft's [Service Mesh
