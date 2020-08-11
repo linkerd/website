@@ -235,6 +235,13 @@ LAST SEEN   TYPE     REASON          OBJECT                        MESSAGE
 9s          Normal   IssuerUpdated   deployment/linkerd-identity   Updated identity issuer
 ```
 
+Restart the proxy for all injected workloads in your cluster to ensure that
+their proxies pick up certificates issued by the new issuer:
+
+```bash
+kubectl -n emojivoto rollout restart deploy
+```
+
 Run the `check` command to make sure that everything is going as expected:
 
 ```bash
