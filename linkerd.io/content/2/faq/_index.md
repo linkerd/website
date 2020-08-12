@@ -137,7 +137,7 @@ sense of what is in store for the future.
 
 The public [Linkerd Meetup
 slides](https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit)
-also provides a coarse-grained roadmap.
+also provide a coarse-grained roadmap.
 
 ## How secure is Linkerd?
 
