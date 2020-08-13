@@ -25,11 +25,7 @@ happyexit() {
 
 validate_checksum() {
   filename=$1
-  if ! SHA=$(curl -sfL "${url}.sha256"); then
-    srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
-    url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
-    SHA=$(curl -sfL "${url}.sha256")
-  fi
+  SHA=$(curl -sfL "${url}.sha256")
   echo ""
   echo "Validating checksum..."
 
@@ -121,13 +117,7 @@ fi
   cd "$tmpdir"
 
   echo "Downloading ${srcfile}..."
-  if ! curl -fLO "${url}"; then
-    # shellcheck disable=SC2030
-    srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
-    url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
-    echo "Fallback to ${url}"
-    curl -fLO "${url}"
-  fi
+  curl -fLO "${url}"
   echo "Download complete!"
 
   if ! validate_checksum "${srcfile}"; then
@@ -138,10 +128,7 @@ fi
 
 (
   mkdir -p "${INSTALLROOT}/bin"
-  # shellcheck disable=SC2031
-  if ! mv "${tmpdir}/${srcfile}" "${dstfile}" 2>/dev/null; then
-    mv "${tmpdir}/linkerd2-cli-${LINKERD2_VERSION}-${OS}" "${dstfile}"
-  fi
+  mv "${tmpdir}/${srcfile}" "${dstfile}"
   chmod +x "${dstfile}"
   rm -f "${INSTALLROOT}/bin/linkerd"
   ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
