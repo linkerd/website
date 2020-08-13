@@ -1,0 +1,13 @@
+/package(?:|-lock)\.json$
+ignore$
+\.gif$
+\.jpeg$
+\.JPG$
+\.jpg$
+\.min\.
+\.png$
+\.svg$
+^LICENSE$
+^linkerd\.io/assets/js/lunr\.js$
+^linkerd\.io/static/js/smoothie\.js$
+^\.github/actions/

@@ -1,0 +1,34 @@
+# segment Analytics
+analytics\.load\("[0-9a-zA-Z]+"
+# Google Docs
+/docs\.google\.com/[a-z]+/d/(?:e/|)[0-9a-zA-Z_-]+/
+# GitHub SHAs
+/github\.com/[^/]+/[^/]+/[^/]+/[0-9a-f]+\b
+# Subresource Integrity
+ integrity="[0-9a-zA-Z+/=-]+"
+# YouTube
+https?://(?:(?:www\.|)youtube\.com|youtu.be)/[-a-zA-Z0-9?&=_]*
+< youtube\s+"?[0-9a-zA-Z_-]{11}"?\s+>
+# Google Tag Manager
+GTM-[0-9A-Z]{7}
+# URL escaped characters
+\%[0-9A-F]{2}
+# Pods
+-[0-9a-z]{5} +\d+/\d+\s{2,}Running\s{2,}
+(?:linkerd-[a-z-]+|ambassador|activator|autoscaler|controller|webhook|vote-bot|emoji)-[0-9a-f]*-[0-9a-z]*
+# Slack/Discord
+__hs[fpst][cp]=[0-9a-f.]+
+# web-ingress-auth
+ auth: [0-9a-zA-Z]+
+# sha-1
+"[0-9a-f]{40}"
+# version tags
+[#] version [0-9a-zA-Z]{11}=
+# Colors / Hex numbers
+(?:0[xX]|[uU]\+|[#=])[0-9a-fA-FgGrR]{2,}[uU]?[lL]{0,2}\b
+# uuid:
+[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}
+# ignore long runs of a single character:
+\b([A-Za-z])\1{3,}\b
+# java flags
+-Dhttp
