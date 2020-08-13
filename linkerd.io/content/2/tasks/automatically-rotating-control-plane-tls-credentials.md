@@ -121,6 +121,30 @@ kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 
 Now we just need to inform Linkerd to consume these credentials.
 
+{{< note >}}
+Due to a [bug](https://github.com/jetstack/cert-manager/issues/2942) in
+cert-manager, if you are using cert-manager version `0.15` with experimental
+controllers, the certificate it issues are not compatible with with Linkerd
+versions `<= stable-2.8.1`.
+
+Your `linkerd-identity` pods will likely crash with the following log output:
+
+```log
+"Failed to initialize identity service: failed to read CA from disk:
+unsupported block type: 'PRIVATE KEY'"
+```
+
+Some possible ways to resolve this issue are:
+
+- Upgrade Linkerd to the edge versions `>= edge-20.6.4` which contains
+a [fix](https://github.com/linkerd/linkerd2/pull/4597/).
+- Upgrade cert-manager to versions `>= 0.16`.
+  [(how to upgrade)](https://cert-manager.io/docs/installation/upgrading/upgrading-0.15-0.16/)
+- Turn off cert-manager experimental controllers.
+  [(docs)](https://cert-manager.io/docs/release-notes/release-notes-0.15/#using-the-experimental-controllers)
+
+{{< /note >}}
+
 ### Alternative CA providers
 
 Instead of using Cert Manager as CA, you can configure it to rely on a number
