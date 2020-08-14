@@ -49,6 +49,7 @@ To verify that everything has started up successfully, run:
 
 ```bash
 linkerd check --multicluster
+linkerd -n linkerd-multicluster check --proxy
 ```
 
 For a deep dive into what components are being added to your cluster and how all

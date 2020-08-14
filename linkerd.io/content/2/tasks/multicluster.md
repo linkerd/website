@@ -120,6 +120,7 @@ verify that everything has come up successfully with `check`.
 for ctx in west east; do
   echo "Checking cluster: ${ctx} .........\n"
   linkerd --context=${ctx} check || break
+  linkerd --context=${ctx} -n linkerd check --proxy || break
   echo "-------------\n"
 done
 ```
@@ -228,6 +229,7 @@ healthy and ready to go.
 for ctx in west east; do
   echo "Checking cluster: ${ctx} ........."
   linkerd --context=${ctx} check --multicluster || break
+  linkerd --context=${ctx} -n linkerd-multicluster check --proxy || break
   echo "-------------\n"
 done
 ```
