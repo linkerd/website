@@ -8,7 +8,7 @@ Linkerd uses the
 and
 [extension API server](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 to implement some of its core features like
-[automatic proxy injection](/2/features/proxy-injection),
+[automatic proxy injection](/2/features/proxy-injection/),
 [service profiles validation](/2/features/service-profiles/) and `tap`.
 
 To secure the connections between the Kubernetes API server and the
@@ -52,7 +52,6 @@ The above command will recreate the secrets without restarting Linkerd.
 {{< note >}}
 For Helm users, use the `helm upgrade` command to recreate the deleted secrets.
 {{< /note >}}
-
 
 Confirm that the secrets are recreated with new certificates:
 
