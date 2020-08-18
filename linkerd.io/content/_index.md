@@ -58,7 +58,7 @@ features_list:
   buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title: 
+companies_title:
 companies:
 - image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
