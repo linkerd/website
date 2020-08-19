@@ -37,22 +37,74 @@ replicas for critical components with the `--controller-replicas` flag:
 linkerd install --ha --controller-replicas=2 | kubectl apply -f -
 ```
 
-To ensure that Linkerd does not get in the way of system critical workloads
-starting, the proxy injector should be disabled for the `kube-system` namespace
-by running:
+See the full [`install` CLI documentation](/2/reference/cli/install/) for
+reference.
+
+To enable HA mode on an existing control plane:
+
+```bash
+linkerd upgrade --ha | kubectl apply -f -
+```
+
+## Proxy injector failure policy
+
+The HA proxy injector is deployed with a stricter failure policy to enforce
+[proxy injection](/2/features/proxy-injection/). This setup ensures that no
+un-injected annotated workloads are accidentally scheduled to run on your
+cluster.
+
+If proxy injection failed due to unrecognized or timeout errors during the
+admission phase, the workload admission will be rejected by the Kubernetes API
+server, and the workload will not be deployed.
+
+Hence, it is very important that there is always at least one healthy replica
+of the proxy injector webhook running on your cluster.
+
+If you cannot guarantee the number of healthy proxy injector on your cluster,
+you can loosen the webhook failure policy by setting its value to `Ignore`, as
+seen in the
+[Linkerd Helm chart](https://github.com/linkerd/linkerd2/blob/803511d77b33bd9250b4a7fecd36752fcbd715ac/charts/linkerd2/templates/proxy-injector-rbac.yaml#L98).
+
+{{< note >}}
+See the Kubernetes
+[documentation](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#failure-policy)
+for more information on the admission webhook failure policy.
+{{< /note >}}
+
+
+## Exclude the kube-system namespace
+
+Per recommendation in the Kubernetes
+[documentation](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#avoiding-operating-on-the-kube-system-namespace),
+the proxy injector should be disabled for the `kube-system` namespace.
+
+This can be done by labeling the `kube-system` namespace with the following
+label:
 
 ```bash
 kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
 ```
 
-See the full [`install` CLI documentation](/2/reference/cli/install/) for
-reference.
+The Kubernetes API server will omit the proxy injector from the admission phase
+of all workloads in namespaces with this label.
 
-## Critical components
+If your Kubernetes cluster have built-in reconcilers that would revert any changes
+made to the `kube-system` namespace, you should loosen the proxy injector
+failure policy following these [instructions](#proxy-injector-failure-policy).
 
-Replication and anti-affinity rules are applied to all control
-plane components except Prometheus, Grafana, and the web service, which are
-considered non-critical.
+## Pod anti-affinity rules
+
+All critical control plane components are deployed with pod anti-affinity rules
+to ensure redundancy.
+
+Linkerd uses a `requiredDuringSchedulingIgnoredDuringExecution` pod
+anti-affinity rule to ensure that the Kubernetes scheduler does not colocate
+replicas on the same node. A `preferredDuringSchedulingIgnoredDuringExecution`
+pod anti-affinity rule is also added to try to schedule replicas in different
+zones, where possible.
+
+Note that these anti-affinity rules don't apply to add-on components like
+Prometheus, Grafana and the web service.
 
 ## Caveats
 
