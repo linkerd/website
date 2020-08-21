@@ -38,7 +38,7 @@ significantly [smaller and
 faster](https://linkerd.io/2019/05/18/linkerd-benchmarks) than Istio, though it
 currently has fewer features.
 
-2. Linkerd is built for security from the ground up, ranging from feature like
+2. Linkerd is built for security from the ground up, ranging from features like
 [on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/), a data
 plane that is [built in a memory-safe
 language](https://github.com/linkerd/linkerd2-proxy), and [regular security
@@ -137,7 +137,7 @@ sense of what is in store for the future.
 
 The public [Linkerd Meetup
 slides](https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit)
-also provides a coarse-grained roadmap.
+also provide a coarse-grained roadmap.
 
 ## How secure is Linkerd?
 
