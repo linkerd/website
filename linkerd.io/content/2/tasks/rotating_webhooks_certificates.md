@@ -31,7 +31,7 @@ To check the validity of all the TLS secrets
 ```bash
 for secret in "linkerd-proxy-injector-tls" "linkerd-sp-validator-tls" "linkerd-tap-tls"; do \
   kubectl -n linkerd get secret "${secret}" -ojsonpath='{.data.crt\.pem}' | \
-    base64 -d - | \
+    base64 --decode - | \
     step certificate inspect - | \
     grep -iA2 validity; \
 done
@@ -58,7 +58,7 @@ Confirm that the secrets are recreated with new certificates:
 ```bash
 for secret in "linkerd-proxy-injector-tls" "linkerd-sp-validator-tls" "linkerd-tap-tls"; do \
   kubectl -n linkerd get secret "${secret}" -ojsonpath='{.data.crt\.pem}' | \
-    base64 -d - | \
+    base64 --decode - | \
     step certificate inspect - | \
     grep -iA2 validity; \
 done
@@ -70,8 +70,12 @@ Ensure that Linkerd remains healthy:
 linkerd check
 ```
 
-{{< note >}}
 Restarting the Linkerd control plane is usually not necessary. But if the
-webhooks continue to log certificate expiry errors, restart their pods using the
-`kubectl -n linkerd rollout restart` command.
-{{< /note >}}
+webhooks continue to log certificate expiry errors, restart their pods with:
+
+```sh
+kubectl -n linkerd rollout restart deploy \
+  linkerd-proxy-injector \
+  linkerd-sp-validator \
+  linkerd-tap
+```
