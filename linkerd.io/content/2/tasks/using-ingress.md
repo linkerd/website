@@ -536,7 +536,7 @@ Next we'll deploy a demo service:
 linkerd inject https://projectcontour.io/examples/kuard.yaml | kubectl apply -f -
 ```
 
-To route external traffic to your service you'll need to provide a [HTTPProxy](https://projectcontour.io/docs/master/httpproxy/):
+To route external traffic to your service you'll need to provide a HTTPProxy:
 
 ```yaml
 apiVersion: projectcontour.io/v1
