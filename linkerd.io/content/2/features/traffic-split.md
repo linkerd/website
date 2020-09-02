@@ -14,7 +14,7 @@ onto a newer version.
 
 Linkerd exposes this functionality via the
 [Service Mesh Interface](https://smi-spec.io/) (SMI)
-[TrafficSplit API](https://github.com/servicemeshinterface/smi-spec/blob/master/apis/traffic-split/traffic-split-wd.md).
+[TrafficSplit API](https://github.com/servicemeshinterface/smi-spec/blob/master/apis/traffic-split/traffic-split-WD.md).
 To use this feature, you create a Kubernetes resource as described in the
 TrafficSplit spec, and Linkerd takes care of the rest.
 
