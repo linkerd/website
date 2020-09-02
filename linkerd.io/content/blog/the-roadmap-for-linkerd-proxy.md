@@ -1,7 +1,7 @@
 ---
 title: 'The road ahead for Linkerd2-proxy'
 author: 'oliver'
-date: 2020-08-01T00:00:00+00:00
+date: 2020-08-02T00:00:00-08:00
 thumbnail: /uploads/amit-jain-pQ04riRO9wM-unsplash.jpg
 draft: false
 tags: [Linkerd]
