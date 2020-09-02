@@ -1,7 +1,7 @@
 ---
 title: 'The road ahead for Linkerd2-proxy, and how you can get involved'
 author: 'oliver'
-date: 2020-08-02T00:00:00-08:00
+date: 2020-09-02T00:00:00-08:00
 thumbnail: /uploads/amit-jain-pQ04riRO9wM-unsplash.jpg
 draft: false
 slug: the-road-ahead-for-linkerd2-proxy
