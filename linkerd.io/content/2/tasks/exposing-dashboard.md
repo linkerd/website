@@ -152,6 +152,27 @@ This exposes the dashboard at `dashboard.example.com` and protects it with basic
 auth using admin/admin. Take a look at the [Traefik][traefik-auth] documentation
 for details on how to change the username and password.
 
+## Ambassador
+
+Ambassador works by defining a [mapping
+](https://www.getambassador.io/docs/latest/topics/using/intro-mappings/) as an
+annotation on a service.
+
+The below annotation exposes the dashboard at `dashboard.example.com`.
+
+```yaml
+  annotations:
+    getambassador.io/config: |-
+      ---
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: linkerd-web-mapping
+      host: dashboard.example.com
+      prefix: /
+      host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
+      service: linkerd-web.linkerd.svc.cluster.local:8084
+```
+
 ## DNS Rebinding Protection
 
 To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
