@@ -1,37 +1,39 @@
 ---
-title: 'The road ahead for Linkerd2-proxy'
+title: 'The road ahead for Linkerd2-proxy, and how you can get involved'
 author: 'oliver'
 date: 2020-08-02T00:00:00-08:00
 thumbnail: /uploads/amit-jain-pQ04riRO9wM-unsplash.jpg
 draft: false
+slug: the-road-ahead-for-linkerd2-proxy
 tags: [Linkerd]
 ---
 
 ![A long winding road](/uploads/amit-jain-pQ04riRO9wM-unsplash.jpg)
 
 The past few months have seen a continued interest in Linkerd's data plane
-"micro-proxy", Linkerd2-proxy. Last month, William Morgan wrote about some of
-the[ decisions that went into building a service-mesh-specific proxy in
+"micro-proxy", [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy).
+Last month, William Morgan wrote about some of the[ decisions that first went
+into building a service-mesh-specific proxy in
 Rust](https://thenewstack.io/linkerds-little-secret-a-lightning-fast-service-mesh-focused-rust-network-proxy/).
 Eliza Weisman then followed up with [a deep dive into
 Linkerd2-proxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 and how it handles requests. In this article, I want to look into the future:
-what do the upcoming months and years have in store for Linkerd2-proxy?
-
+what do the upcoming months and years have in store for Linkerd's proxy? And
+how can you get involved?
 
 ## Linkerd's secret sauce: a small, speedy, simple micro-proxy 
 
 Building a modern, high-performance Rust network proxy has not been a trivial
 undertaking. Especially in the early years, investing in the proxy often meant
 spending more time working on the core Rust networking libraries than on the
-proxy itself. But we knew that this would be critical to our service mesh
+proxy itself! But we knew that this would be critical to our service mesh
 approach: because the data plane scales directly with the application, a
 service mesh can _only_ be small and fast if the underlying data plane itself
 is small and fast.
 
 Happily, those early investments have paid off. As William wrote:
 
-> I believe that Linkerd2-proxy represents the state of the art for secure,
+> I believe that Linkerd2-proxy represents the **state of the art** for secure,
 modern network programming. It is fully asynchronous and written in a modern
 type-safe and memory-safe language. It makes full use of the modern Rust
 networking ecosystem, sharing foundations with projects such as Amazon’s
@@ -45,14 +47,13 @@ known for its _simplicity_. Here, again, Linkerd2-proxy is critical to
 Linkerd's approach: because Linkerd2-proxy is designed explicitly for the
 sidecar service mesh use case, it's dramatically simpler to operate than
 general-purpose proxies such as NGINX and Envoy. This is not a knock on those
-proxies, which can do much more than Linkerd2-proxy can. It's simply a
-reflection that by shedding all the non-service-mesh use cases, Linkerd2-proxy
-gains the leeway to "just work" for the majority of service mesh users without
-tuning or tweaking, through features like [protocol
+proxies; it's simply a reflection that by shedding all the non-service-mesh use
+cases, Linkerd2-proxy gains the leeway to "just work" without tuning or
+tweaking, through features like [protocol
 detection](https://linkerd.io/2/features/protocol-detection/) and
 [Kubernetes-native service
-discovery](https://linkerd.io/2/features/load-balancing/).
-(In fact, at this point Linkerd-proxy doesn't even have a config file.)
+discovery](https://linkerd.io/2/features/load-balancing/). In fact, at this
+point Linkerd-proxy doesn't even have a config file.
 
 ## The future of the Linkerd2-proxy
 
@@ -97,42 +98,44 @@ identity should be treated. Nonetheless, it has come to our attention that
 apparently not all software in the universe runs on Kubernetes, and we'd like
 to better support that in Linkerd.
 
-## Linkerd's design principles 
+Some of those features, like mTLS for TCP, are well-scoped and work is already
+underway. Others, like HTTP/3, are still in idea phase. But they're all
+strategic and important for the proxy.
 
-Several of those features are in need of some serious desing time. However we
-do this, it must be guided by Linkerd's three [design
-principles](https://linkerd.io/2019/04/29/linkerd-design-principles/):
+## How can I get involved?
 
-1. **Keep it simple**. Linkerd should be operationally simple with low
-cognitive overhead. Operators should find its components clear and its behavior
-understandable and predictable, with a minimum of magic.
-2. **Minimize resource requirements**. Linkerd should impose as minimal a
-performance and resource cost as possible–especially at the data plane layer.
-3. **Just work**. Linkerd should not break existing applications, nor should it
-require complex configuration to get started or to do something simple.
+If any of those features sound interesting, or if the thought of working on a
+state-of-the-art open source Rust networking project that powers production
+systems around the world is exciting, then the good news is that you can
+get involved! Linkerd2-proxy is fully open source, open governance, and hosted
+by the Cloud Native Computing Foundation, and we're always interested in
+welcoming more folks to the project.
 
-For proxy work especially, we might add a fourth principle: **be secure.** At a
-minimum, don't decrease the overall security of the system; ideally, increase
-it. Security is a primary focus for Linkerd, and nowhere is that more relevant
-than in the data plane layer&mdash;the part of Linkerd that our users'
-sensitive data traverses. Our choice of Rust was in part due to Rust's
-security-related guarantees; we need to continue delivering on Linkerd's
-reputation for security no matter what.
+If you're new to Linkerd, the best way to get started is: 
 
-Sounds interesting? Come get involved in Linkerd! If you'd like to contribute to
-anything above, or elsewhere in the Linkerd project, we'd love to have you
-aboard.  The best way to get started is to join the [Linkerd
-slack](https://slack.linkerd.io), especially the `#contributors` channel, join
-our monthly [Linkerd Online Community
-Meetups](https://www.meetup.com/Linkerd-Online-Community-Meetup/), and read
-through our [RFC
+1. Join the [Linkerd slack](https://slack.linkerd.io), especially the
+`#contributors` channel, and say hi!
+2. Attend the next monthly [Linkerd Online Community
+Meetup](https://www.meetup.com/Linkerd-Online-Community-Meetup/);
+3. Peruse the [open
+proxy issues](https://github.com/linkerd/linkerd2/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fproxy),
+especially those marked "good first issue"; and
+4. Familiarize yourself with our [RFC
 process](https://linkerd.io/2020/04/08/introducing-linkerds-rfc-process/) for
-introducing bigger changes to the project. Linkerd has a friendly and welcoming
-community, and we'd love to have you join us.
+introducing bigger changes to the project. 
+
+If you're new to Rust especially, you might also want to take a look at the
+[live proxy code walkthroughs](https://www.youtube.com/watch?v=wRZE7JlsnpA)
+that Eliza has been running.
+
+All the fame and glory of open source Rust maintainership awaits you. Join us
+and let's build this amazing proxy together.
 
 ## Try it today!
 
-Ready to try Linkerd? You can download the latest stable release by running:
+Want to see the proxy in action? You can try Linkerd on any relatively modern
+Kubernetes cluster in a matter of minutes. Download the latest stable release
+by running:
 
 ```bash
 curl https://run.linkerd.io/install | sh
@@ -143,11 +146,11 @@ proxy) in a matter of minutes.
 
 ## Linkerd is for everyone
 
-Linkerd is a community project and is hosted by the
-[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
-If you have feature requests, questions, or comments, we'd love to have you join
-our rapidly-growing community! Linkerd is hosted on
+Linkerd is a community project and is hosted by the [Cloud Native Computing
+Foundation](https://cncf.io/). Linkerd is [committed to open
+governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+If you have feature requests, questions, or comments, we'd love to have you
+join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
