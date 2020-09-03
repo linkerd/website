@@ -155,4 +155,4 @@ join our rapidly-growing community! Linkerd is hosted on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
-<i>Image credit: <span>Photo by <a href="https://unsplash.com/@amitjain0106?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Amit Jain</a> on <a href="https://unsplash.com/s/photos/roadmap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i>
+Image credit: Photo by [Amit Jain](https://unsplash.com/@amitjain0106?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/roadmap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
