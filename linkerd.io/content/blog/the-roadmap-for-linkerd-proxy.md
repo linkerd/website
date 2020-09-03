@@ -12,7 +12,7 @@ tags: [Linkerd]
 
 The past few months have seen a continued interest in Linkerd's data plane
 "micro-proxy", [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy).
-Last month, William Morgan wrote about some of the[ decisions that first went
+Last month, William Morgan wrote about some of the [decisions that first went
 into building a service-mesh-specific proxy in
 Rust](https://thenewstack.io/linkerds-little-secret-a-lightning-fast-service-mesh-focused-rust-network-proxy/).
 Eliza Weisman then followed up with [a deep dive into
@@ -21,7 +21,7 @@ and how it handles requests. In this article, I want to look into the future:
 what do the upcoming months and years have in store for Linkerd's proxy? And
 how can you get involved?
 
-## Linkerd's secret sauce: a small, speedy, simple micro-proxy 
+## Linkerd's secret sauce: a small, speedy, simple micro-proxy
 
 Building a modern, high-performance Rust network proxy has not been a trivial
 undertaking. Especially in the early years, investing in the proxy often meant
@@ -71,7 +71,7 @@ working on extend this to non-HTTP protocols, so that they have the same
 guarantees of workload identity and confidentiality that Linkerd provides for
 HTTP traffic today. As an added bonus, this feature will also extend Linkerd's
 [seamless multi-cluster
-capabilities](https://linkerd.io/2/features/multicluster/) to non-HTTP traffic. 
+capabilities](https://linkerd.io/2/features/multicluster/) to non-HTTP traffic.
 2. **Revisiting latency bucketing**. As part of its instrumentation,
 Linkerd2-proxy records the latency of all traffic that passes through it and
 reports these values in a set of fixed buckets, with a specific latency range
@@ -111,7 +111,7 @@ get involved! Linkerd2-proxy is fully open source, open governance, and hosted
 by the Cloud Native Computing Foundation, and we're always interested in
 welcoming more folks to the project.
 
-If you're new to Linkerd, the best way to get started is: 
+If you're new to Linkerd, the best way to get started is:
 
 1. Join the [Linkerd slack](https://slack.linkerd.io), especially the
 `#contributors` channel, and say hi!
@@ -122,7 +122,7 @@ proxy issues](https://github.com/linkerd/linkerd2/issues?q=is%3Aopen+is%3Aissue+
 especially those marked "good first issue"; and
 4. Familiarize yourself with our [RFC
 process](https://linkerd.io/2020/04/08/introducing-linkerds-rfc-process/) for
-introducing bigger changes to the project. 
+introducing bigger changes to the project.
 
 If you're new to Rust especially, you might also want to take a look at the
 [live proxy code walkthroughs](https://www.youtube.com/watch?v=wRZE7JlsnpA)
@@ -155,4 +155,4 @@ join our rapidly-growing community! Linkerd is hosted on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
-<i>Image credit: <span>Photo by <a href="https://unsplash.com/@amitjain0106?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Amit Jain</a> on <a href="https://unsplash.com/s/photos/roadmap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i>
+Image credit: Photo by [Amit Jain](https://unsplash.com/@amitjain0106?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/roadmap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
