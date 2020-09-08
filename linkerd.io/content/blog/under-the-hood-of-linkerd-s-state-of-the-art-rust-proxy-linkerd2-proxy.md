@@ -7,7 +7,6 @@ thumbnail = "/uploads/michael-dziedzic-deHhHOttSdk-unsplash.jpg"
 title = "Under the hood of Linkerd's state-of-the-art Rust proxy, Linkerd2-proxy"
 
 +++
-
 ![Closeup photo of a circuit board](/uploads/michael-dziedzic-deHhHOttSdk-unsplash.jpg)
 
 Thanks in part to Linkerd's [performance
@@ -127,6 +126,8 @@ require. It also gave us modern language features like pattern matching and an
 expressive static type system, as well as tools like a built-in testing
 framework and package manager, making it [very pleasant to program
 in](https://stackoverflow.blog/2020/01/20/what-is-rust-and-why-is-it-so-popular/).
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/R65Su84u9r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## The Rust ecosystem
 
@@ -344,5 +345,5 @@ join our rapidly-growing community! Linkerd is hosted on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
-(Photo by [Michael Dziedzic](https://unsplash.com/@lazycreekimages?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
-on [Unsplash](https://unsplash.com/s/photos/circuitboard?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)).
+(Photo by [Michael Dziedzic](https://unsplash.com/@lazycreekimages?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on [Unsplash](https://unsplash.com/s/photos/circuitboard?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)).
