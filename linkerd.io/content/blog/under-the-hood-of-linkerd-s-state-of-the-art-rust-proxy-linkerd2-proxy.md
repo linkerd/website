@@ -129,6 +129,8 @@ in](https://stackoverflow.blog/2020/01/20/what-is-rust-and-why-is-it-so-popular/
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/R65Su84u9r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<i>Linkerd proxy Stream — Overview, Intro to Rust, Q&A</i>
+
 ## The Rust ecosystem
 
 Happily, since 2017, the Rust networking ecosystem has flourished—thanks, in no
