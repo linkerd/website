@@ -29,7 +29,7 @@ First generate the root certificate with its private key (using `step` version
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca.crt ca.key \
---profile root-ca --no-password --insecure
+--profile root-ca --no-password --insecure --san identity.linkerd.cluster.local
 ```
 
 This generates the `ca.crt` and `ca.key` files. The `ca.crt` file is what you
@@ -49,7 +49,7 @@ Then generate the intermediate certificate and key pair that will be used to
 sign the Linkerd proxies' CSR.
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
+step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure --san identity.linkerd.cluster.local
 ```
 
 This will generate the `issuer.crt` and `issuer.key` files.
