@@ -47,7 +47,7 @@ pair and store it in a Kubernetes Secret in the namespace created above:
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca.crt ca.key \
-  --profile root-ca --no-password --insecure &&
+  --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local &&
   kubectl create secret tls \
    linkerd-trust-anchor \
    --cert=ca.crt \
