@@ -1,14 +1,145 @@
-+++
-title = "Frequently Asked Questions"
-include_toc = true
-weight = 9
-aliases = [
-  "/doc/0.1.0/faq/",
-  "/2/roadmap/"
-]
-[sitemap]
-  priority = 1.0
-+++
+---
+title: Frequently Asked Questions
+include_toc: true
+weight: 9
+aliases:
+  - '/doc/0.1.0/faq/'
+  - '/2/roadmap/'
+sitemap:
+  - priority = 1.0
+schema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd is a service mesh. It adds observability, reliability, and security to cloud native applications without requiring code changes. For example, Linkerd can monitor and report per-service success rates and latencies, can automatically retry failed requests, and can encrypt and validate connections between services, all without requiring any modification of the application itself."
+      }
+    }, {
+      "@type": "Question",
+      "name": "What's the difference between Linkerd and Istio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd is committed to open governance and is hosted by a neutral foundation. Istio is primarily controlled by Google."
+      }
+    }, {
+      "@type": "Question",
+      "name": "What's the difference between Linkerd and Envoy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Envoy is a proxy, not a service mesh. Linkerd is a service mesh: it has a control plane and a data plane, and the data plane is implemented with proxies. Envoy can be used as a component of a service mesh, but Linkerd uses a different proxy, simply called linkerd2-proxy."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Why doesn't Linkerd use Envoy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Envoy is a general-purpose proxy. By using linkerd2-proxy, which is built specifically for the service mesh sidecar use case, Linkerd can be significantly smaller and faster than Envoy-based service meshes. Additionally, the choice of Rust for linkerd2-proxy allows Linkerd to avoid a whole class of CVEs and vulnerabilities that can impact proxies written in non-memory-safe languages like C++—a critical requirement for security-focused projects like Linkerd."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Who owns Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd is hosted by the Cloud Native Computing Foundation (CNCF) project. The CNCF owns the trademark; the copyright is held by the Linkerd authors themselves."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Who is Linkerd for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd is for everyone—see Linkerd's Commitment to Open Governance. In practice, Linkerd has certain technical prerequisites, such as Kubernetes."
+      }
+    }, {
+      "@type": "Question",
+      "name": "How do I pronounce Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The “d” is pronounced separately, i.e. Linker-DEE. It's a UNIX thing."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Who maintains Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "See the 2.x maintainers file, and the 1.x maintainers file."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Is there an Enterprise edition, or a commercial edition?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd is fully open source. Some companies provide commercial packages or support for Linkerd."
+      }
+    }, {
+      "@type": "Question",
+      "name": "What's the difference between Linkerd 1.x and 2.x?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd 1.x is built on the “Twitter stack”: Finagle, Netty, Scala, and the JVM. Linkerd 2. x is built in Rust and Go.It is significantly faster and lighter weight than 1. x, but currently only supports Kubernetes."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Is Linkerd 1.x still supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, the 1.x branch of Linkerd is under active development, and continues to power the production infrastructure of companies around the globe."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Does Linkerd require Kubernetes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd 2.x currently requires Kubernetes. Linkerd 1.x can be installed on any platform, and supports Kubernetes, DC/OS, Mesos, Consul, and ZooKeeper-based environments."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Where's the Linkerd roadmap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As a community project, there is no formal roadmap, but a glance at the active GitHub issues will give you a sense of what is in store for the future."
+      }
+    }, {
+      "@type": "Question",
+      "name": "How secure is Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Very secure. A third party security audit of Linkerd 2.x was completed in June 2019, and Linkerd passed with flying colors."
+      }
+    }, {
+      "@type": "Question",
+      "name": "How fast is Linkerd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Very fast. A third party performance evaluation of Linkerd vs Istio was performed in May of 2019, and showed that Linkerd significantly outperformed Istio."
+      }
+    }, {
+      "@type": "Question",
+      "name": "How do I use Linkerd to route traffic between services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd doesn't change the way routing works. You address other services just as you would without Linkerd, e.g. service-name.namespace.svc.cluster.local, or service-name if within the same namespace."
+      }
+    }, {
+      "@type": "Question",
+      "name": "How does Linkerd handle ingress?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For reasons of simplicity, Linkerd doesn't provide ingress itself, but instead works in conjunction with the ingress controller of your choice."
+      }
+    }, {
+      "@type": "Question",
+      "name": "What happens to Linkerd's proxies if the control plane is down?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If new proxies are deployed when the control plane is unreachable, these new proxies will not be able to operate. They will timeout all new requests until such time as they can reach the control plane."
+      }
+    }]
+  }
+---
 
 <!-- markdownlint-disable MD026 -->
 

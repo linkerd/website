@@ -6,3 +6,9 @@
 {{ partial "css.html" . }}
 {{ partial "rss.html" . }}
 {{ partial "javascript.html" . }}
+
+{{ if .Params.schema }}
+<script type="application/ld+json">
+  {{ .Params.schema | safeJS }}
+</script>
+{{ end }}
