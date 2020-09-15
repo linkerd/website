@@ -19,12 +19,6 @@ Source code for the linkerd.io website.
     hugo serve -s linkerd.io
     ```
 
-1. Also in the root directory, run checks on any changes you make:
-
-    ```bash
-    make check lint
-    ```
-
 You should see the site on localhost:1313, and it should reload
 automatically upon file write.
 
