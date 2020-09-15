@@ -17,9 +17,8 @@ For production workloads, Linkerd's control plane can run in high availability
   functional for any pods to be scheduled.
 * Sets [anti-affinity
   policies](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
-  on critical control plane components to achieve, if possible, that they are
-  scheduled on separate nodes and in separate zones by default. Optionally,
-  the scheduling on separate nodes can be made a hard requirement using a flag.
+  on critical control plane components to ensure, if possible, that they are
+  scheduled on separate nodes and in separate zones by default.
 
 ## Enabling HA
 
@@ -30,8 +29,9 @@ linkerd install --ha | kubectl apply -f -
 ```
 
 You can override certain aspects of the HA behavior at installation time by
-passing other flags to install. For example, you can override the number of
-replicas for critical components with the `--controller-replicas` flag:
+passing other flags to the `install` command. For example, you can override the
+number of replicas for critical components with the `--controller-replicas`
+flag:
 
 ```bash
 linkerd install --ha --controller-replicas=2 | kubectl apply -f -
@@ -40,7 +40,8 @@ linkerd install --ha --controller-replicas=2 | kubectl apply -f -
 See the full [`install` CLI documentation](/2/reference/cli/install/) for
 reference.
 
-To enable HA mode on an existing control plane:
+The `linkerd upgrade` command can be used to enable HA mode on an existing
+control plane:
 
 ```bash
 linkerd upgrade --ha | kubectl apply -f -
@@ -49,16 +50,16 @@ linkerd upgrade --ha | kubectl apply -f -
 ## Proxy injector failure policy
 
 The HA proxy injector is deployed with a stricter failure policy to enforce
-[proxy injection](/2/features/proxy-injection/). This setup ensures that no
-un-injected annotated workloads are accidentally scheduled to run on your
-cluster.
+[automatic proxy injection](/2/features/proxy-injection/). This setup ensures
+that no annotated workloads are accidentally scheduled to run on your cluster,
+without the Linkerd proxy. (This can happen when the proxy injector is down.)
 
-If proxy injection failed due to unrecognized or timeout errors during the
-admission phase, the workload admission will be rejected by the Kubernetes API
-server, and the workload will not be deployed.
+If proxy injection process failed due to unrecognized or timeout errors during
+the admission phase, the workload admission will be rejected by the Kubernetes
+API server, and the deployment will fail.
 
 Hence, it is very important that there is always at least one healthy replica
-of the proxy injector webhook running on your cluster.
+of the proxy injector running on your cluster.
 
 If you cannot guarantee the number of healthy proxy injector on your cluster,
 you can loosen the webhook failure policy by setting its value to `Ignore`, as
@@ -73,7 +74,7 @@ for more information on the admission webhook failure policy.
 
 ## Exclude the kube-system namespace
 
-Per recommendation in the Kubernetes
+Per recommendation from the Kubernetes
 [documentation](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#avoiding-operating-on-the-kube-system-namespace),
 the proxy injector should be disabled for the `kube-system` namespace.
 
@@ -84,8 +85,8 @@ label:
 kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
 ```
 
-The Kubernetes API server will not call the proxy injector webhook during the
-admission phase of workloads in namespace with this label.
+The Kubernetes API server will not call the proxy injector during the admission
+phase of workloads in namespace with this label.
 
 If your Kubernetes cluster have built-in reconcilers that would revert any changes
 made to the `kube-system` namespace, you should loosen the proxy injector
@@ -102,7 +103,7 @@ replicas of critical component on the same node. A
 `preferredDuringSchedulingIgnoredDuringExecution` pod anti-affinity rule is also
 added to try to schedule replicas in different zones, where possible.
 
-Hence, in order to satisfy these anti-affinity rules, HA mode assumes that there
+In order to satisfy these anti-affinity rules, HA mode assumes that there
 are always at least three nodes in the Kubernetes cluster. If this assumption is
 violated (e.g. the cluster is scaled down to two or fewer nodes), then the
 system may be left in a non-functional state.
@@ -117,20 +118,20 @@ to scrape the data plane metrics, following the instructions
 [here](https://linkerd.io/2/tasks/external-prometheus/). This will provide you
 with more control over resource requirement, backup strategy and data retention.
 
-When planning for memory capacity to store Linkerd data, the usual guidance is
-5MB per meshed pod.
+When planning for memory capacity to store Linkerd timeseries data, the usual
+guidance is 5MB per meshed pod.
 
 If your Prometheus is experiencing regular `OOMKilled` events due to the amount
-of timeseries data from the data plane, the two key parameters that can be
-adjusted are:
+of data coming from the data plane, the two key parameters that can be adjusted
+are:
 
 * `storage.tsdb.retention.time` defines how long to retain samples in storage.
   A higher value implies that more memory is required to keep the data around
   for a longer period of time. Lowering this value will reduce the number of
   `OOMKilled` events as data is retained for a shorter period of time
 * `storage.tsdb.retention.size` defines the maximum number of bytes that can be
-  stored for blocks. A lower value will help to reduce the number of
-  `OOMKilled` events.
+  stored for blocks. A lower value will also help to reduce the number of
+  `OOMKilled` events
 
 For more information and other supported storage options, see the Prometheus
 documentation
