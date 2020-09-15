@@ -84,8 +84,8 @@ label:
 kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
 ```
 
-The Kubernetes API server will omit the proxy injector from the admission phase
-of all workloads in namespaces with this label.
+The Kubernetes API server will not call the proxy injector webhook during the
+admission phase of workloads in namespace with this label.
 
 If your Kubernetes cluster have built-in reconcilers that would revert any changes
 made to the `kube-system` namespace, you should loosen the proxy injector
@@ -98,16 +98,56 @@ to ensure redundancy.
 
 Linkerd uses a `requiredDuringSchedulingIgnoredDuringExecution` pod
 anti-affinity rule to ensure that the Kubernetes scheduler does not colocate
-replicas on the same node. A `preferredDuringSchedulingIgnoredDuringExecution`
-pod anti-affinity rule is also added to try to schedule replicas in different
-zones, where possible.
+replicas of critical component on the same node. A
+`preferredDuringSchedulingIgnoredDuringExecution` pod anti-affinity rule is also
+added to try to schedule replicas in different zones, where possible.
+
+Hence, in order to satisfy these anti-affinity rules, HA mode assumes that there
+are always at least three nodes in the Kubernetes cluster. If this assumption is
+violated (e.g. the cluster is scaled down to two or fewer nodes), then the
+system may be left in a non-functional state.
 
 Note that these anti-affinity rules don't apply to add-on components like
-Prometheus, Grafana and the web service.
+Prometheus and Grafana.
 
-## Caveats
+## Scaling Prometheus
 
-HA mode assumes that there are always at least three nodes in the Kubernetes
-cluster. If this assumption is violated (e.g. the cluster is scaled down to
-two or fewer nodes), then the system will likely be left in a non-functional
-state.
+For production workloads, we recommend setting up your own Prometheus instance
+to scrape the data plane metrics, following the instructions
+[here](https://linkerd.io/2/tasks/external-prometheus/). This will provide you
+with more control over resource requirement, backup strategy and data retention.
+
+When planning for memory capacity to store Linkerd data, the usual guidance is
+5MB per meshed pod.
+
+If your Prometheus is experiencing regular `OOMKilled` events due to the amount
+of timeseries data from the data plane, the two key parameters that can be
+adjusted are:
+
+* `storage.tsdb.retention.time` defines how long to retain samples in storage.
+  A higher value implies that more memory is required to keep the data around
+  for a longer period of time. Lowering this value will reduce the number of
+  `OOMKilled` events as data is retained for a shorter period of time
+* `storage.tsdb.retention.size` defines the maximum number of bytes that can be
+  stored for blocks. A lower value will help to reduce the number of
+  `OOMKilled` events.
+
+For more information and other supported storage options, see the Prometheus
+documentation
+[here](https://prometheus.io/docs/prometheus/latest/storage/#operational-aspects).
+
+## Working with Cluster AutoScaler
+
+The Linkerd proxy stores its mTLS private key in a
+[tmpfs emptyDir](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir)
+volume to ensure that this information never leaves the pod. This causes the
+default setup of Cluster AutoScaler to not be able to scale down nodes with
+injected workload replicas.
+
+The workaround is to annotate the injected workload with the
+`cluster-autoscaler.kubernetes.io/safe-to-evict: "true"` annotation. If you
+have full control over the Cluster AutoScaler configuration, you can start the
+Cluster AutoScaler with the `--skip-nodes-with-local-storage=false` option.
+
+For more information on this, see the Cluster AutoScaler documentation
+[here](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-types-of-pods-can-prevent-ca-from-removing-a-node).
