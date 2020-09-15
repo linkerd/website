@@ -71,7 +71,6 @@ See the Kubernetes
 for more information on the admission webhook failure policy.
 {{< /note >}}
 
-
 ## Exclude the kube-system namespace
 
 Per recommendation in the Kubernetes
