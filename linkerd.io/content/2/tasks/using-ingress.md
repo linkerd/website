@@ -574,10 +574,16 @@ the `l5d-dst-override` headers will be set automatically.
 
 ### Kong
 
-Kong doesn't support the header `l5d-dst-override` automatically.
-This documentation will use [Kong](https://github.com/Kong/charts) and [Emojivoto](/2/getting-started/) to show how to implement this
+Kong doesn't support the header `l5d-dst-override` automatically.  
+This documentation will use the following elements:
 
-First, we need to declare an Ingress and a Kong Plugin, a CRD provided by Kong :
+- [Kong](https://github.com/Kong/charts)
+- [Emojivoto](/2/getting-started/)
+
+After installing the previous elements, we need to declare those objects :
+
+- Ingress
+- KongPlugin, a CRD provided by Kong
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
@@ -610,6 +616,7 @@ spec:
               servicePort: http
 ```
 
-You can see, we are explicitly setting the `l5d-dst-override` in the `KongPlugin`
-It's possible to use templates as well. See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value)
-Then you can test to access Emojivoto through Kong using the way you want (NodePort, LoadBalancer)
+We are explicitly setting the `l5d-dst-override` in the `KongPlugin`  
+It's possible to use templates as well. \
+See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value)
+Then you can test to access Emojivoto through Kong using the way you want
