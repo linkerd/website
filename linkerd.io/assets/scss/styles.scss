@@ -504,3 +504,22 @@ blockquote {
   border-left: solid 1px;
   padding-left: 2em;
 }
+
+.benefits {
+  padding: 3rem;
+  ul {
+    li {
+      list-style-type: none;
+      padding-bottom: 1rem;
+      strong {
+        color: $navy-black;
+      }
+    }
+  }
+}
+.signup {
+  iframe {
+    width:100%;
+    min-height:500px;
+  }
+}
