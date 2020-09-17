@@ -16,7 +16,7 @@ Specifically, it provides instructions on how to securely generate and manage
 Linkerd's mTLS private keys and certificates using
 [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) and
 [cert-manager](https://cert-manager.io). It will also show you how to integrate
-the [auto proxy injection ](/2/features/proxy-injection/) features into your
+the [auto proxy injection](/2/features/proxy-injection/) features into your
 workflow, to auto-mesh your workloads. Finally, this guide conclude with steps
 to upgrade Linkerd to a newer version following a GitOps workflow.
 
@@ -131,8 +131,9 @@ kubectl -n argocd port-forward svc/argocd-server 8080:443  \
   > /dev/null 2>&1 &
 ```
 
-The Argo CD dashboard is now accessible at https://localhost:8080/, using the
-default `admin` username and
+The Argo CD dashboard is now accessible at
+[https://localhost:8080](https://localhost:8080/), using the default `admin`
+username and
 [password](https://argoproj.github.io/argo-cd/getting_started/#4-login-using-the-cli).
 
 {{< note >}}
@@ -354,6 +355,7 @@ diff -b \
   <(echo "${trust_anchor}" | step certificate inspect -) \
   <(step certificate inspect sample-trust.crt)
 ```
+
 ### Deploy Linkerd
 
 Now we are ready to install Linkerd. The decrypted trust anchor we just
