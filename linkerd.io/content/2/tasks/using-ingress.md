@@ -572,7 +572,7 @@ If you are using Contour with [flagger](https://github.com/weaveworks/flagger)
 the `l5d-dst-override` headers will be set automatically.
 {{< /note >}}
 
-### Kong
+## Kong
 
 Kong doesn't support the header `l5d-dst-override` automatically.  
 This documentation will use the following elements:
@@ -580,7 +580,7 @@ This documentation will use the following elements:
 - [Kong](https://github.com/Kong/charts)
 - [Emojivoto](/2/getting-started/)
 
-After installing the previous elements, we need to declare those objects :
+After installing the previous elements, we need to declare these objects :
 
 - Ingress
 - KongPlugin, a CRD provided by Kong
@@ -616,7 +616,7 @@ spec:
               servicePort: http
 ```
 
-We are explicitly setting the `l5d-dst-override` in the `KongPlugin`  
-It's possible to use templates as well. \
-See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value)
-Then you can test to access Emojivoto through Kong using the way you want
+We are explicitly setting the `l5d-dst-override` in the `KongPlugin`.  
+It's possible to use templates as well.
+See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value).
+Then you can test to access Emojivoto through Kong using the way you want.
