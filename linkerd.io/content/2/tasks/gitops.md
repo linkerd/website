@@ -17,8 +17,8 @@ Linkerd's mTLS private keys and certificates using
 [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) and
 [cert-manager](https://cert-manager.io). It will also show you how to integrate
 the [auto proxy injection](/2/features/proxy-injection/) features into your
-workflow, to auto-mesh your workloads. Finally, this guide conclude with steps
-to upgrade Linkerd to a newer version following a GitOps workflow.
+workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
+version following a GitOps workflow.
 
 {{< fig alt="Linkerd GitOps workflow"
       title="Linkerd GitOps workflow"
@@ -54,7 +54,7 @@ git remote add git-server git://localhost/linkerd-examples.git
 {{< note >}}
 To simplify the steps in this guide, we will be interacting with the in-cluster
 Git server via port-forwarding. Hence, the remote endpoint that we just created
-points to localhost.
+points to your localhost.
 {{< /note >}}
 
 Deploy the Git server to the `scm` namespace in your cluster:
@@ -162,7 +162,7 @@ Set up the `demo`
 kubectl apply -f gitops/project.yaml
 ```
 
-This project defines the permitted list of resource kinds and target clusters
+This project defines the list of permitted resource kinds and target clusters
 that our applications can work with.
 
 Confirm that the project is deployed correctly:
@@ -234,8 +234,8 @@ for deploy in "cert-manager" "cert-manager-cainjector" "cert-manager-webhook"; \
 done
 ```
 
-{{< fig alt="Synchronize cert-manager"
-      title="Synchronize cert-manager"
+{{< fig alt="Synchronize the cert-manager application"
+      title="Synchronize the cert-manager application"
       center="true"
       src="/images/gitops/dashboard-cert-manager-sync.png" >}}
 
@@ -253,8 +253,8 @@ Confirm that sealed-secrets is running:
 kubectl -n kube-system rollout status deploy/sealed-secrets
 ```
 
-{{< fig alt="Synchronize SealedSecret"
-      title="Synchronize SealedSecret"
+{{< fig alt="Synchronize the sealed-secrets application"
+      title="Synchronize the sealed-secrets application"
       center="true"
       src="/images/gitops/dashboard-sealed-secrets-sync.png" >}}
 
@@ -297,8 +297,8 @@ kubectl patch -f - \
 ```
 
 This will overwrite the existing `SealedSecret` resource in your local
-`gitops/resources/linkerd/trust-anchor.yaml`. We will push this change to the
-in-cluster Git server.
+`gitops/resources/linkerd/trust-anchor.yaml` file. We will push this change to
+the in-cluster Git server.
 
 Confirm that only the `spec.encryptedData` is changed:
 
@@ -316,7 +316,7 @@ git commit -m "update encrypted trust anchor"
 git push git-server master
 ```
 
-Make sure the commit is successfully pushed to the Git server:
+Confirm the commit is successfully pushed to the in-cluster Git server:
 
 ```sh
 kubectl -n scm exec "${git_server}" -- git --git-dir linkerd-examples.git log -1
@@ -331,13 +331,17 @@ argocd app sync linkerd-bootstrap
 ```
 
 {{< note >}}
-If the issuer and certificate resources appear in a degraded state, it's
-likely that the sealed-secrets controller failed to decrypt the sealed trust
-anchor. Check the sealed-secrets controller for error logs.
+If the issuer and certificate resources appear in a degraded state, it's likely
+that the SealedSecrets controller failed to decrypt the sealed
+`linkerd-trust-anchor` resource. Check the SealedSecrets controller for error logs.
+
+Also, ensure that the in-cluster sealed `linkerd-trust-anchor` resource matches
+that in the in-cluster Git server. The sealed resource can be retrieved with
+`kubectl -n linkerd get sealedsecrets linkerd-trust-anchor -oyaml`.
 {{< /note >}}
 
-{{< fig alt="Synchronize linkerd-bootstrap"
-      title="Synchronize linkerd-bootstrap"
+{{< fig alt="Synchronize the linkerd-bootstrap application"
+      title="Synchronize the linkerd-bootstrap application"
       src="/images/gitops/dashboard-linkerd-bootstrap-sync.png" >}}
 
 SealedSecrets should have created a secret containing the decrypted trust
@@ -360,9 +364,10 @@ diff -b \
 
 Now we are ready to install Linkerd. The decrypted trust anchor we just
 retrieved will be passed to the installation process using the
-`global.identityTrustAnchorsPEM` variable.
+`global.identityTrustAnchorsPEM` parameter.
 
-Prior to installing Linkerd, this parameter is assigned a default empty string:
+Prior to installing Linkerd, the `gloval.identityTrustAnchorsPEM` parameter
+is set to an "empty" certificate string:
 
 ```sh
 argocd app get linkerd -ojson | \
@@ -378,7 +383,31 @@ We will override this parameter in the `linkerd` application with the value of
 
 Locate the `global.identityTrustAnchorsPEM` variable in your local
 `gitops/argo-apps/linkerd.yaml` file, and set its `value` to that of
-`${trust_anchor}`. Ensure that the multi-line string is indented correctly.
+`${trust_anchor}`.
+
+Ensure that the multi-line string is indented correctly. E.g.,
+
+```yaml
+  source:
+    chart: linkerd2
+    repoURL: https://helm.linkerd.io/stable
+    targetRevision: 2.8.0
+    helm:
+      parameters:
+      - name: global.identityTrustAnchorsPEM
+        value: |
+          -----BEGIN CERTIFICATE-----
+          MIIBlTCCATygAwIBAgIRAKQr9ASqULvXDeyWpY1LJUQwCgYIKoZIzj0EAwIwKTEn
+          MCUGA1UEAxMeaWRlbnRpdHkubGlua2VyZC5jbHVzdGVyLmxvY2FsMB4XDTIwMDkx
+          ODIwMTAxMFoXDTI1MDkxNzIwMTAxMFowKTEnMCUGA1UEAxMeaWRlbnRpdHkubGlu
+          a2VyZC5jbHVzdGVyLmxvY2FsMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+PUp
+          IR74PsU+geheoyseycyquYyes5eeksIb5FDm8ptOXQ2xPcBpvesZkj6uIyS3k4qV
+          E0S9VtMmHNeycL7446NFMEMwDgYDVR0PAQH/BAQDAgEGMBIGA1UdEwEB/wQIMAYB
+          Af8CAQEwHQYDVR0OBBYEFHypCh7hiSLNxsKhMylQgqD9t7NNMAoGCCqGSM49BAMC
+          A0cAMEQCIEWhI86bXWEd4wKTnG07hBfBuVCT0bxopaYnn3wRFx7UAiAwXyh5uaVg
+          MwCC5xL+PM+bm3PRqtrmI6TocWH07GbMxg==
+          -----END CERTIFICATE-----
+```
 
 Confirm that only the `spec.source.helm.parameters.value` field is changed:
 
