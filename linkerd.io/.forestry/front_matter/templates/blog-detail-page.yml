@@ -34,3 +34,4 @@ fields:
   name: feature
 pages:
 - linkerd.io/content/blog/under-the-hood-of-linkerd-s-state-of-the-art-rust-proxy-linkerd2-proxy.md
+- linkerd.io/content/dashboard/september-linkerd-online-community-meeting.md
