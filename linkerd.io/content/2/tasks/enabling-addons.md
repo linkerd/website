@@ -1,5 +1,5 @@
 +++
-title = "Enabling Add-Ons"
+title = "Enabling Add-ons"
 description = "Great Out-of-the-box experience with various components that integrate well with Linkerd"
 aliases = [
   "/2/add-ons/",
@@ -7,34 +7,34 @@ aliases = [
 +++
 
 Linkerd can also be installed with a
-[number of Add-On's](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons),
+[number of Add-ons](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons),
 allowing users to get a great out of the box experience around
 popular service mesh use-cases.
-These Add-On's are coupled with the control plane installation
-and integrate well with Linkerd right away.
+These optional add-ons extend Linkerd with more features
+and integrate well with the existing Linkerd installation and upgrade workflow.
 
-Add-On's in Linkerd are optional and configurable. A configuration file is passed
+Add-ons in Linkerd are optional and configurable. A configuration file is passed
 to the install operation (available  both through Helm and CLI).
-This config is also stored as a configmap called `linkerd-config-addons`,
-allowing upgrades to work seamlessly without having user to pass the config
+This configurationis also stored as a configmap called `linkerd-config-addons`,
+allowing upgrades to work seamlessly without having user to pass the configuration
 file again. Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/)
 by applying configuration in the same manner as that of install.
 
 {{< note >}}
-Add-On's are available in Linkerd starting from version `edge-20.2.3`.
+Add-ons are available in Linkerd starting from version `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
-[Linkerd2 Add-On's charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons)
+[Linkerd2 Add-ons charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons)
 along with their configuration options.
 
 Now, Let's understand some common concepts that are applicable across all add-ons.
 
-## Add-On's Configuration
+## Add-ons Configuration
 
-Add-Ons can be toggled by using the `<addon-name>.enabled` field.
+Add-ons can be toggled by using the `<addon-name>.enabled` field.
 
-Apart from this, all the other flags will be specific to Add-On's while making
+Apart from this, all the other flags will be specific to Add-ons while making
 sure common fields like `resources`, etc are referred in the same manner everywhere.
 
 The following is an example configuration file w.r.t tracing Add-On.
