@@ -39,7 +39,7 @@
 }
 
 .wrapper {
-  &.tweets, &.features {
+  &.tweets, &.features, &.mid-message, &.benefits {
     padding-top: 50px;
     padding-bottom: 70px;
   }
@@ -503,4 +503,26 @@
 blockquote {
   border-left: solid 1px;
   padding-left: 2em;
+}
+
+.mid-message {
+  strong {
+    @extend .has-text-navy-black;
+  }
+}
+.benefits {
+  ul {
+    li {
+      list-style-type: none;
+      padding-bottom: 1rem;
+      strong {
+        color: $navy-black;
+      }
+    }
+  }
+}
+.signup {
+  label {
+    @extend .has-text-navy-black;
+  }
 }
