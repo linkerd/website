@@ -15,7 +15,7 @@ and integrate well with the existing Linkerd installation and upgrade workflow.
 
 Add-ons in Linkerd are optional and configurable. A configuration file is passed
 to the install operation (available  both through Helm and CLI).
-This configurationis also stored as a configmap called `linkerd-config-addons`,
+This configuration is also stored as a configmap called `linkerd-config-addons`,
 allowing upgrades to work seamlessly without having user to pass the configuration
 file again. Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/)
 by applying configuration in the same manner as that of install.
@@ -28,13 +28,13 @@ You can find the list of add-ons present in the
 [Linkerd2 Add-ons charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons)
 along with their configuration options.
 
-Now, Let's understand some common concepts that are applicable across all add-ons.
+Now, let's understand some common concepts that are applicable across all add-ons.
 
 ## Add-ons Configuration
 
 Add-ons can be toggled by using the `<addon-name>.enabled` field.
 
-Apart from this, all the other flags will be specific to Add-ons while making
+Apart from this, all the other flags will be specific to the add-on while making
 sure common fields like `resources`, etc are referred in the same manner everywhere.
 
 The following is an example configuration file w.r.t tracing Add-On.
