@@ -13,7 +13,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Become a Linkerd Community Anchor! (Learn More > [https://linkerd.io/community/anchor/])
+  description: Become a Linkerd Community Anchor!
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -87,3 +87,4 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
+Linkerd Community Anchor
