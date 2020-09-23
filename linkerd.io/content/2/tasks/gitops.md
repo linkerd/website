@@ -4,7 +4,7 @@ description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle"
 +++
 
 GitOps is an approach to automate the management and delivery of your Kubernetes
-infrastructure and applications, using Git as a single source of truth. It
+infrastructure and applications using Git as a single source of truth. It
 usually utilizes some software agents to detect and reconcile any divergence
 between version-controlled artifacts in Git with what's running in a cluster.
 
@@ -12,11 +12,11 @@ This guide will show you how to set up
 [Argo CD](https://argoproj.github.io/argo-cd/) to manage the installation and
 upgrade of Linkerd using a GitOps workflow.
 
-Specifically, it provides instructions on how to securely generate and manage
-Linkerd's mTLS private keys and certificates using
+Specifically, this guide provides instructions on how to securely generate and
+manage Linkerd's mTLS private keys and certificates using
 [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) and
 [cert-manager](https://cert-manager.io). It will also show you how to integrate
-the [auto proxy injection](/2/features/proxy-injection/) features into your
+the [auto proxy injection](/2/features/proxy-injection/) feature into your
 workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
 version following a GitOps workflow.
 
@@ -48,20 +48,20 @@ Add a new remote endpoint to the repository to point to the in-cluster Git
 server, which will be set up in the next section:
 
 ```sh
+cd linkerd-examples
+
 git remote add git-server git://localhost/linkerd-examples.git
 ```
 
 {{< note >}}
 To simplify the steps in this guide, we will be interacting with the in-cluster
 Git server via port-forwarding. Hence, the remote endpoint that we just created
-points to your localhost.
+targets your localhost.
 {{< /note >}}
 
 Deploy the Git server to the `scm` namespace in your cluster:
 
 ```sh
-cd ./linkerd-examples
-
 kubectl apply -f gitops/resources/git-server.yaml
 ```
 
@@ -81,7 +81,7 @@ Confirm that the Git server is healthy:
 kubectl -n scm rollout status deploy/git-server
 ```
 
-Set up the remote repository:
+Clone the example repository to your in-cluster Git server:
 
 ```sh
 git_server=`kubectl -n scm get po -l app=git-server -oname | awk -F/ '{ print $2 }'`
@@ -90,19 +90,19 @@ kubectl -n scm exec "${git_server}" -- \
   git clone --bare https://github.com/linkerd/linkerd-examples.git
 ```
 
-Confirm that you can push from the local example repository to the remote
-repository via port-forwarding:
+Confirm that the remote repository is successfully cloned:
+
+```sh
+kubectl -n scm exec "${git_server}" -- ls -al /git/linkerd-examples.git
+```
+
+Confirm that you can push from the local repository to the remote repository
+via port-forwarding:
 
 ```sh
 kubectl -n scm port-forward "${git_server}" 9418  &
 
 git push git-server master
-```
-
-Confirm that the remote repository is successfully cloned:
-
-```sh
-kubectl -n scm exec "${git_server}" -- ls -al /git/linkerd-examples.git
 ```
 
 ## Deploy Argo CD
@@ -306,7 +306,7 @@ Confirm that only the `spec.encryptedData` is changed:
 git diff gitops/resources/linkerd/trust-anchor.yaml
 ```
 
-Commit and push the new trust anchor secret:
+Commit and push the new trust anchor secret to your in-cluster Git server:
 
 ```sh
 git add gitops/resources/linkerd/trust-anchor.yaml
@@ -316,7 +316,7 @@ git commit -m "update encrypted trust anchor"
 git push git-server master
 ```
 
-Confirm the commit is successfully pushed to the in-cluster Git server:
+Confirm the commit is successfully pushed:
 
 ```sh
 kubectl -n scm exec "${git_server}" -- git --git-dir linkerd-examples.git log -1
@@ -333,11 +333,13 @@ argocd app sync linkerd-bootstrap
 {{< note >}}
 If the issuer and certificate resources appear in a degraded state, it's likely
 that the SealedSecrets controller failed to decrypt the sealed
-`linkerd-trust-anchor` resource. Check the SealedSecrets controller for error logs.
+`linkerd-trust-anchor` secret. Check the SealedSecrets controller for error logs.
 
-Also, ensure that the in-cluster sealed `linkerd-trust-anchor` resource matches
-that in the in-cluster Git server. The sealed resource can be retrieved with
-`kubectl -n linkerd get sealedsecrets linkerd-trust-anchor -oyaml`.
+For debugging purposes, the sealed resource can be retrieved using the
+`kubectl -n linkerd get sealedsecrets linkerd-trust-anchor -oyaml` command.
+Ensure that this resource matches the
+`gitops/resources/linkerd/trust-anchor.yaml` file you pushed to the in-cluster
+Git server earlier.
 {{< /note >}}
 
 {{< fig alt="Synchronize the linkerd-bootstrap application"
@@ -345,14 +347,14 @@ that in the in-cluster Git server. The sealed resource can be retrieved with
       src="/images/gitops/dashboard-linkerd-bootstrap-sync.png" >}}
 
 SealedSecrets should have created a secret containing the decrypted trust
-anchor. Retrieve the trust anchor from the live secret resource:
+anchor. Retrieve the decrypted trust anchor from the secret:
 
 ```sh
 trust_anchor=`kubectl -n linkerd get secret linkerd-trust-anchor -ojsonpath="{.data['tls\.crt']}" | base64 -d -w 0 -`
 ```
 
-Confirm that it matches the decrypted trust anchor certificate saved in the
-`sample-trust.crt` file:
+Confirm that it matches the decrypted trust anchor certificate you created
+earlier in your local `sample-trust.crt` file:
 
 ```sh
 diff -b \
@@ -366,8 +368,8 @@ Now we are ready to install Linkerd. The decrypted trust anchor we just
 retrieved will be passed to the installation process using the
 `global.identityTrustAnchorsPEM` parameter.
 
-Prior to installing Linkerd, the `gloval.identityTrustAnchorsPEM` parameter
-is set to an "empty" certificate string:
+Prior to installing Linkerd, note that the `gloval.identityTrustAnchorsPEM`
+parameter is set to an "empty" certificate string:
 
 ```sh
 argocd app get linkerd -ojson | \
@@ -409,7 +411,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
           -----END CERTIFICATE-----
 ```
 
-Confirm that only the `spec.source.helm.parameters.value` field is changed:
+Confirm that only one `spec.source.helm.parameters.value` field is changed:
 
 ```sh
 git diff gitops/argo-apps/linkerd.yaml
