@@ -88,4 +88,3 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
-Become a Linkerd Community Anchor! [Learn more >](https://linkerd.io/community/anchor/) 
