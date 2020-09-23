@@ -87,4 +87,3 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
-Linkerd Community Anchor
