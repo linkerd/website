@@ -13,7 +13,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.8 has been released! [Read the announcement >>](/2020/06/09/announcing-linkerd-2.8/)
+  description: ''
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -58,7 +58,7 @@ features_list:
   buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title:
+companies_title: 
 companies:
 - image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
@@ -87,4 +87,4 @@ foundation_member_banner:
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
-Linkerd 2.8 has been Released! [Read the announcement >>](https://linkerd.io/2020/06/09/announcing-linkerd-2.8/)
+Become a Linkerd Community Anchor! [Learn more >](https://linkerd.io/community/anchor/)
