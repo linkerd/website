@@ -1,4 +1,3 @@
-
 ## [linkerd.io](linkerd.io)
 
 Source code for the linkerd.io website.
@@ -24,7 +23,7 @@ Source code for the linkerd.io website.
    For Linux users, download the **extended** release of Hugo from its GitHub
    [release page](https://github.com/gohugoio/hugo/releases).
 
-1. From the root `/website` directory, build site and run Hugo in development mode:
+1. From the root `/website` directory, build the site and run Hugo in development mode:
 
     ```bash
     hugo serve -s linkerd.io
@@ -50,7 +49,7 @@ Hugo. When you change those files, Hugo updates the CSS for the site
 automatically and refreshes the page.
 
 The files in layouts/ are the HTML for the site (including layout/index.html
-for the front page.) These files are Go templates with a couple extra Hugo
+for the front page.) These files are Go templates with a couple of extra Hugo
 goodies thrown in. See [the hugo
 documentation](http://gohugo.io/templates/overview/) for details.
 
@@ -110,7 +109,7 @@ master from slate-linkerd and add it to the public dir.
 
    * NB: If you're running macOS 10.14+ with `ruby` installed by XCode, you
     may have to [set the SDKROOT](https://github.com/castwide/vscode-solargraph/issues/78#issuecomment-552675511)
-    in order to install `json 1.8.3` which is a `middleman` dependency.
+    to install `json 1.8.3` which is a `middleman` dependency.
 
 
 ## Publishing
@@ -142,14 +141,14 @@ master from slate-linkerd and add it to the public dir.
 - There is no caching in front of run.linkerd.io and versioncheck.linkerd.io.
   You should see updates there immediately.
 
-- There is caching for non-html pages in front of linkerd.io. If you're updating
+- There is caching for non-Html pages in front of linkerd.io. If you're updating
   a non-html page for linkerd.io, it might be worth flushing the cache
   (cloudflare) and waiting awhile.
 
 ## If you have to create a new bucket
 
 You probably won't have to do this, but if you do, don't forget to do this
-stuff too to set up the bucket for public serving:
+stuff too to set up the bucket for public-serving:
 
 ```bash
 gsutil defacl ch -u AllUsers:R gs://bucketname
@@ -164,7 +163,7 @@ Turn off all caching on all files:
 gsutil -m setmeta -r -h "Cache-Control: no-cache, no-store, must-revalidate" gs://linkerd.io/
 ```
 
-Turn caching back on:
+Turn to cache back on:
 
 ```bash
 gsutil -m setmeta -r -h "Cache-Control:" gs://linkerd.io/
@@ -191,3 +190,5 @@ gsutil cors set versioncheck.linkerd.io.cors.json gs://versioncheck.linkerd.io
 
 [emojivoto]: https://github.com/BuoyantIO/emojivoto
 [slate-linkerd]: https://github.com/BuoyantIO/slate-linkerd/blob/master/BUOYANT-README.md
+
+
