@@ -118,5 +118,4 @@ subjects:
 ```
 
 Note that the Linkerd proxy only requires the `NET_ADMIN` and `NET_RAW`
-capabilities, and it's run with UID `2102`. The `NET_BIND_SERVICE` capability is
-needed by the `web` application because its container binds to port 80.
+capabilities when running without Linkerd CNI, and it's run with UID `2102`. 
