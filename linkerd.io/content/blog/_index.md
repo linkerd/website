@@ -1,6 +1,6 @@
 ---
 title: Blog
-subtitle: The latest and greatest news about Linkerd
+subtitle: The latest and amazing news about Linkerd
 tags:
 - Community
 - Linkerd
