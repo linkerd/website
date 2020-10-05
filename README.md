@@ -10,8 +10,19 @@ Source code for the linkerd.io website.
    ```bash
    docker run \
       --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-      website-builder:1.3.1 make lint check
+      gcr.io/linkerd-io/website-builder:1.3.1 make lint check
    ```
+
+1. Install Hugo 0.74.3 to run the site locally:
+
+   For Mac users:
+
+   ```bash
+   brew install hugo
+   ```
+
+   For Linux users, download the **extended** release of Hugo from its GitHub
+   [release page](https://github.com/gohugoio/hugo/releases).
 
 1. From the root `/website` directory, build site and run Hugo in development mode:
 
