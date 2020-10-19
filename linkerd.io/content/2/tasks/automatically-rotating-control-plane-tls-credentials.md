@@ -184,8 +184,7 @@ For Helm installation, rather than running `linkerd install`, set the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install \
-  linkerd2
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
