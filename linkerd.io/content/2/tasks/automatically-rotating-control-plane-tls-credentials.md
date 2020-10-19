@@ -65,7 +65,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
@@ -83,7 +83,7 @@ Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
