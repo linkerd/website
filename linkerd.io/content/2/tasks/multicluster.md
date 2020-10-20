@@ -328,7 +328,7 @@ by adding the `mirror.linkerd.io/exported` label:
 kubectl --context=east label svc -n test podinfo mirror.linkerd.io/exported=true
 ```
 
-{{< note >}} You can configure a different label selector by using the 
+{{< note >}} You can configure a different label selector by using the
 `--selector` flag on the `linkerd multicluster link` command or by editting
 the Link resource created by the `linkerd multicluster link` command.
 {{< /note >}}
@@ -504,7 +504,7 @@ To cleanup the multicluster control plane, you can run:
 
 ```bash
 for ctx in west east; do
-  kubectl --context=${ctx} delete ns linkerd-multicluster
+  linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f -
 done
 ```
 

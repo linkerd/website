@@ -188,9 +188,17 @@ metadata:
     annotations:
         mirror.linkerd.io/gateway-identity: ambassador.ambassador.serviceaccount.identity.linkerd.cluster.local
         mirror.linkerd.io/multicluster-gateway: "true"
-        mirror.linkerd.io/probe-path: -/ambassador/ready
+        mirror.linkerd.io/probe-path: /-/ambassador/ready
         mirror.linkerd.io/probe-period: "3"
 '
+```
+
+Now you can install the Linkerd multicluster components onto your target cluster.
+Since we're using Ambassador as our gateway, we need to skip installing the
+Linkerd gateway by using the `--gateway=false` flag:
+
+```bash
+linkerd --context=${ctx} multicluster install --gateway=false | kubectl --context=${ctx} apply -f -
 ```
 
 With everything setup and configured, you're ready to link a source cluster to
@@ -198,7 +206,7 @@ this Ambassador gateway.  Run the `link` command specifying the name and
 namespace of your Ambassador service:
 
 ```bash
-linkerd --context=${ctx} multicluster link --gateway-name=ambassador --gateway-namespace=ambassador \
+linkerd --context=${ctx} multicluster link --cluster-name=${ctx} --gateway-name=ambassador --gateway-namespace=ambassador \
     | kubectl --context=${src_ctx} apply -f -
 ```
 
@@ -233,12 +241,13 @@ certificates as well!
 To fetch your existing cluster's trust anchor, run:
 
 ```bash
-kubectl -n linkerd get cm/linkerd-config -ojsonpath="{.data.global}" | \
-  jq .identityContext.trustAnchorsPem -r > trustAnchor.crt
+kubectl -n linkerd get cm linkerd-config -ojsonpath="{.data.values}" | \
+  yq -r .global.identityTrustAnchorsPEM > trustAnchor.crt
 ```
 
-{{< note >}} This command requires [jq](https://stedolan.github.io/jq/). If you
-don't have jq, feel free to extract the certificate with your tool of choice.
+{{< note >}} This command requires [yq](https://github.com/mikefarah/yq). If you
+don't have yq, feel free to extract the certificate from the `global.identityTrustAnchorsPEM`
+field with your tool of choice.
 {{< /note >}}
 
 Now, you'll want to create a new trust anchor and issuer for the new cluster:
@@ -328,31 +337,24 @@ linkerd check --multicluster
 ```
 
 Installation of the gateway can be disabled with the `gateway` setting. By
-default this values is true.
+default this value is true.
 
-### Installing access credentials
+### Installing additional access credentials
 
-For the source cluster to be able to access the target cluster's services, Access
-credentials have to be present in the target cluster. This can be done using the
-`linkerd multicluster install` command through the CLI.
+When the multicluster components are installed onto a target cluster with
+`linkerd multicluster install`, a service account is created which source clusters
+will use to mirror services.  Using a distinct service account for each source
+cluster can be benefitial since it gives you the ability to revoke service mirroring
+access from specific source clusters.  Generating additional service accounts
+and associated RBAC can be done using the `linkerd multicluster allow` command
+through the CLI.
 
-The same functionality can also be done through Helm by disabling `gateway`
-while submitting the remote service account name.
+The same functionality can also be done through Helm setting the
+`remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set gateway=false --set remoteMirrorServiceAccountName=source --set installNamespace=false --kube-context target
+ helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set remoteMirrorServiceAccountName={source1,source2,source3} --kube-context target
 ```
-
-{{< note >}}
-`installNamespace` should be disabled if the access credentials are
-being created in the same namespace as that of multicluster components to prevent
-failure due to namespace ownership conflict between the Helm releases.
-{{< /note >}}
-
-Each access credential is created as a separate Helm release providing clear separation.
-To revoke access to a particular source cluster, relevant helm release in the target
-cluster can be removed without effecting the multicluster components
-or other access credentials Helm releases.
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
