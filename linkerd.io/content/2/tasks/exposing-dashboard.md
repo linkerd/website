@@ -24,7 +24,7 @@ metadata:
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
@@ -90,7 +90,7 @@ config](https://oauth2-proxy.github.io/oauth2-proxy/auth-configuration) such as,
 Once setup, a sample ingress would be:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: linkerd-web
@@ -128,7 +128,7 @@ metadata:
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
