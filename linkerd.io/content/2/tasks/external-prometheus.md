@@ -146,7 +146,7 @@ This is allowed both through the CLI and Helm.
 
 ### CLI
 
-This can be done by passing a file with the above field to `addon-config` field,
+This can be done by passing a file with the above field to `config` field,
 which is available both through `linkerd install` and `linkerd upgrade` commands
 
 ```yaml
