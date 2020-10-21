@@ -48,8 +48,8 @@ version 2.9 by running
 
 ```bash
 linkerd upgrade | kubectl apply -f -
-linkerd --context=source multicluster install | kubectl apply -f -
-linkerd --context=target multicluster install | kubectl apply -f -
+linkerd --context=source multicluster install | kubectl --context=source apply -f -
+linkerd --context=target multicluster install | kubectl --context=target apply -f -
 ```
 
 ### Label Exported Services
