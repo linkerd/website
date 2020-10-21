@@ -43,10 +43,13 @@ that mirror services remain up during the upgrade so as to avoid downtime.
 
 ### Control Plane
 
-Begin by upgrading the Linkerd control plane itself to version 2.9 by running
+Begin by upgrading the Linkerd control plane and multicluster resources to
+version 2.9 by running
 
 ```bash
 linkerd upgrade | kubectl apply -f -
+linkerd --context=source multicluster install | kubectl apply -f -
+linkerd --context=target multicluster install | kubectl apply -f -
 ```
 
 ### Label Exported Services
