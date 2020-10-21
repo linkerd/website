@@ -105,7 +105,7 @@ anchor rotation steps.
 First, generate a new trust anchor certificate and private key:
 
 ```bash
-step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
+step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local
 ```
 
 Note that we use `--no-password --insecure` to avoid encrypting these files
@@ -211,7 +211,7 @@ linkerd-identity-data-plane
 To rotate the issuer certificate and key pair, first generate a new pair:
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure
+step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure --san identity.linkerd.cluster.local
 ```
 
 Provided that the trust anchor has not expired and that, if recently rotated,
@@ -233,6 +233,13 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 
 LAST SEEN   TYPE     REASON          OBJECT                        MESSAGE
 9s          Normal   IssuerUpdated   deployment/linkerd-identity   Updated identity issuer
+```
+
+Restart the proxy for all injected workloads in your cluster to ensure that
+their proxies pick up certificates issued by the new issuer:
+
+```bash
+kubectl -n emojivoto rollout restart deploy
 ```
 
 Run the `check` command to make sure that everything is going as expected:

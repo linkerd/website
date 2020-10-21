@@ -254,10 +254,10 @@ Now, you'll want to create a new trust anchor and issuer for the new cluster:
 
 ```bash
 step certificate create identity.linkerd.cluster.local root.crt root.key \
-   --profile root-ca --no-password --insecure
+   --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
   --profile intermediate-ca --not-after 8760h --no-password --insecure \
-  --ca root.crt --ca-key root.key
+  --ca root.crt --ca-key root.key --san identity.linkerd.cluster.local
 ```
 
 {{< note >}} We use the [step cli](https://smallstep.com/cli/) to generate
@@ -353,7 +353,7 @@ The same functionality can also be done through Helm setting the
 `remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set remoteMirrorServiceAccountName={source1,source2,source3} --kube-context target
+ helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
 ```
 
 Now that the multicluster components are installed, operations like linking, etc

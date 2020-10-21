@@ -36,8 +36,11 @@ Before applying, it is important to replace templated values (present in `{{}}`)
 with direct values for the below configuration to work.
 
 ```yaml
-
     - job_name: 'linkerd-controller'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
         namespaces:
@@ -53,6 +56,10 @@ with direct values for the below configuration to work.
         target_label: component
 
     - job_name: 'linkerd-service-mirror'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -66,6 +73,10 @@ with direct values for the below configuration to work.
         target_label: component
 
     - job_name: 'linkerd-proxy'
+
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -118,6 +129,12 @@ with direct values for the below configuration to work.
         regex: __tmp_pod_label_(.+)
 ```
 
+The running configuration of the builtin prometheus can be used as a reference.
+
+```bash
+kubectl -n linkerd  get configmap linkerd-prometheus-config -o yaml
+```
+
 ## Control Plane Components Configuration
 
 Linkerd's control plane components like `public-api`, etc depend
@@ -134,13 +151,8 @@ which is available both through `linkerd install` and `linkerd upgrade` commands
 
 ```yaml
 global:
-  prometheusUrl: existing-prometheus.xyz:9090/api/prom
+  prometheusUrl: existing-prometheus.xyz:9090
 ```
-
-{{< note >}}
-Rather than the plain URL of the existing Prometheus, the query path of the
-instance has to be passed which is usually at `api/prom`.
-{{< /note >}}
 
 Once applied, this configuration is persistent across upgrades, without having
 the user passing it again. The same can be overwritten as needed.

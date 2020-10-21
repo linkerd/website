@@ -9,7 +9,7 @@ is secure, fully transparent to the application, and independent of network
 topology. This multi-cluster capability is designed to provide:
 
 1. **A unified trust domain.** The identity of source and destination workloads
-   are be validated at every step, both in and across cluster boundaries.
+   are validated at every step, both in and across cluster boundaries.
 2. **Separate failure domains.** Failure of a cluster allows the remaining
    clusters to function.
 3. **Support for heterogeneous networks.** Since clusters can span clouds,
@@ -44,7 +44,7 @@ a *service mirror* and a *gateway*. The *service mirror* component watches
 target clusters for updates to services and mirrors those service updates
 locally on a source cluster. This provides visibility into the service names on
 other, target clusters so that applications can address them directly. The
-*multi-cluster gateway* component provides a way target clusters to receive
+*multi-cluster gateway* component provides target clusters a way to receive
 requests from source clusters. (This allows Linkerd to support [hierarchical
 networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).)
 

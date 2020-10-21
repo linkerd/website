@@ -122,5 +122,3 @@ fields:
     template: buttons
     label: Buttons
   label: Jobs
-pages:
-- linkerd.io/content/community.md

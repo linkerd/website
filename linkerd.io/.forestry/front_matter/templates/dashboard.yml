@@ -18,5 +18,5 @@ fields:
     required: true
   label: Title
 pages:
-- linkerd.io/content/dashboard/community-meeting-next-week.md
 - linkerd.io/content/dashboard/have-you-adopted-linkerd-let-us-know-and-we-ll-send-you-some-sweet-swag.md
+- linkerd.io/content/dashboard/october-linkerd-online-community-meeting.md

@@ -91,7 +91,7 @@ In the `loadBalancer` section, note the use of [EWMA](https://linkerd.io/conf
 In the `failureAccrual` section, note the use of [io.l5d.successRate](https://linkerd.io/config/0.8.6/linkerd/index.html#success-rate). This is also computes an exponentially-weighted moving average, this time based on the success rate of each instance. In our [testing]({{< relref
 "making-microservices-more-resilient-with-circuit-breaking" >}}), this failure accrual algorithm performs well when success rate is inconsistent.
 
-For more information on configuration options available in Linkerd, have a look at our [Configuration Reference](https://linkerd.io/config/latest/linkerd/index.html).
+For more information on configuration options available in Linkerd, have a look at our [Configuration Reference](https://api.linkerd.io/latest/linkerd/index.html).
 
 ## Conclusion
 

@@ -24,7 +24,7 @@ plugin](https://github.com/kubernetes-sigs/kustomize/tree/master/docs/plugins#ex
 {{< /note >}}
 
 Next, create a `kustomization.yaml` file. This file will contain the
-instructions for Kustomze listing the base resources and the transformations to
+instructions for Kustomize listing the base resources and the transformations to
 do on those resources. Right now, this looks pretty empty:
 
 ```yaml

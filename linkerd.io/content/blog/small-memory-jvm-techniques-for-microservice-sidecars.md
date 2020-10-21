@@ -111,7 +111,7 @@ We tried turning off both JIT compilers and only relying on the bytecode interpr
 
 Disabling the bytecode verifier reduced CPU utilization by about 15% in our tests.
 
-However, the verifier protects against malicious bytecode and also against bytecode generation bugs. We felt that disabling the verifier could potentially result in a mysteriously unstable production service, so we ultimatley decided to keep it on.
+However, the verifier protects against malicious bytecode and also against bytecode generation bugs. We felt that disabling the verifier could potentially result in a mysteriously unstable production service, so we ultimately decided to keep it on.
 
 ## A note on high throughput instances
 

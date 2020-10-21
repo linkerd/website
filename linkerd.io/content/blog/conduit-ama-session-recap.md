@@ -43,7 +43,7 @@ But we expect that will be in the early-next-year (2018) timeframe. We’re focu
 
 **Oliver:** Conduor?
 
-**Wiliam:** TourDuit?
+**William:** TourDuit?
 
 **After I inject Conduit into my running deployments, what happens if the Conduit sidecar dies? Do I lose the entire deployment? How do I recover?**
 

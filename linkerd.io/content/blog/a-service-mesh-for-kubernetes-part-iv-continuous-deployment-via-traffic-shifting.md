@@ -10,7 +10,7 @@ draft: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 
-**Updated (01-05-2018): **There is a new namerd.yml that now uses the CustomResourceDefinition API that was recently added in Kubernetes 1.8.
+**Updated (01-05-2018):** There is a new namerd.yml that now uses the CustomResourceDefinition API that was recently added in Kubernetes 1.8.
 
 Beyond service discovery, top-line metrics, and TLS, Linkerd also has a powerful routing language, called *dtabs*, that can be used to alter the ways that requests—even individual requests—flow through the application topology. In this article, we’ll show you how to use Linkerd as a service mesh to do blue-green deployments of new code as the final step of a CI/CD pipeline.
 

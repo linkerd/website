@@ -262,7 +262,7 @@ After [downloading SauceConnect](https://wiki.saucelabs.com/display/DOCS/Sauce+C
 
 ```bash
 SC=sc-4.5.3-osx # OSX example
-wget -O - https://saucelabs.com/downloads/$SC.zip | tar xfz - -C ~/
+wget -O - https://saucelabs.com/downloads/$SC.zip | tar -xzf - -C ~/
 cd ~/$SC
 bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY
 ```
