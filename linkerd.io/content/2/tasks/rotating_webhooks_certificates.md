@@ -84,5 +84,3 @@ kubectl -n linkerd rollout restart deploy \
   linkerd-sp-validator \
   linkerd-tap
 ```
-
-
