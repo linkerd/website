@@ -76,10 +76,10 @@ linkerd check
 
 Restarting the pods that implement the webhooks and API services is usually not
 necessary. But if the cluster is large, or has a high pod churn, it may be
-advisable to restart the pods manually, to avoid cascading failures. 
+advisable to restart the pods manually, to avoid cascading failures.
 
 If you observe certificate expiry errors or mismatched CA certs, restart their
-pods with: 
+pods with:
 
 ```sh
 kubectl -n linkerd rollout restart deploy \
