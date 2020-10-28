@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.9.0](/2/tasks/upgrade/#upgrade-notice-stable-290)
 - [Upgrade notice: stable-2.8.0](/2/tasks/upgrade/#upgrade-notice-stable-280)
 - [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
 - [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-260)
@@ -170,6 +171,54 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.9.0
+
+### Images are now hosted on ghcr.io
+
+As of this version images are now hosted under `ghcr.io` instead of `gcr.io`. If
+you're pulling images into a private repo please make the necessary changes.
+
+### Upgrading multicluster environments
+
+Linkerd 2.9 changes the way that some of the multicluster components work and
+are installed compared to Linkerd 2.8.x. Users installing the multicluster
+components for the first time with Linkerd 2.9 can ignore these instructions and
+instead refer directly to the [installing
+multicluster instructions](/2/tasks/installing-multicluster).
+
+Users who installed the multicluster component in Linkerd 2.8.x and wish to
+upgrade to Linkerd 2.9 should follow the [upgrade multicluster
+instructions](/2/tasks/upgrade-multicluster/).
+
+### Ingress behavior changes
+
+In previous versions when you injected your ingress controller (Nginx, Traefik,
+Ambassador, etc), you would override the ingress' balancing/routing choices with
+Linkerd's (using Service Profiles, Traffic Splits, etc.). As of 2.9 the
+ingress's choices are honored instead (e.g. to preserve session-stickiness). If
+you want to revert to the previous behavior, inject the proxy into the controller
+using the annotation `linkerd.io/inject: ingress`, as explained in [using
+ingress](/2/tasks/using-ingress/)
+
+### Breaking changes in Helm charts
+
+Some entries like `controllerLogLevel` and all the Prometheus config have
+changed their position in the settings hierarchy. To get a precise view of what
+has changed you can compare the
+[stable-2.8.1](https://github.com/linkerd/linkerd2/blob/stable-2.8.1/charts/linkerd2/values.yaml)
+and
+[stable-2.9.0](https://github.com/linkerd/linkerd2/blob/stable-2.9.0/charts/linkerd2/values.yaml)
+`values.yaml` files.
+
+### Post-upgrade cleanup
+
+In order to better support cert-manager, the secrets
+`linkerd-proxy-injector-tls`, `linkerd-sp-validator-tls` and `linkerd-tap-tls`
+have been replaced by the secrets `linkerd-proxy-injector-k8s-tls`,
+`linkerd-sp-validator-k8s-tls` and `linkerd-tap-k8s-tls` respectively. If you
+upgraded through the CLI, please delete the old ones (if you upgraded through
+Helm the cleanup was automated).
 
 ## Upgrade notice: stable-2.8.0
 
