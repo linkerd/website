@@ -36,14 +36,19 @@ exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
 # in Linux:
 exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
 
-helm install \
-  --name=linkerd2 \
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$exp \
   linkerd/linkerd2
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been deprecated, and is the first argument as
+ specified above.
+{{< /note >}}
 
 The chart values will be picked from the chart's `values.yaml` file.
 
@@ -73,8 +78,7 @@ Then use the `-f` flag to provide the override file, for example:
 
 ```bash
 ## see above on how to set $exp
-helm install \
-  --name=linkerd2 \
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
@@ -82,6 +86,12 @@ helm install \
   -f linkerd2/values-ha.yaml \
   linkerd/linkerd2
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been deprecated, and is the first argument as
+ specified above.
+{{< /note >}}
 
 ## Customizing the Namespace
 

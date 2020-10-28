@@ -36,6 +36,12 @@ LoadBalancer` is obscuring the client source IP. You can fix this by setting
 `externalTrafficPolicy: Local` in the ingress' service definition.
 {{< /note >}}
 
+{{< note >}}
+While the Kubernetes Ingress API definition allows a `backend`'s `servicePort`
+to be a string value, only numeric `servicePort` values can be used with Linkerd.
+If a string value is encountered, Linkerd will default to using port 80.
+{{< /note >}}
+
 ## Nginx
 
 This uses `emojivoto` as an example, take a look at
@@ -62,7 +68,7 @@ spec:
       paths:
       - backend:
           serviceName: web-svc
-          servicePort: 8080
+          servicePort: 80
 ```
 
 The important annotation here is:
@@ -141,9 +147,27 @@ curl -H "Host: example.com" http://external-ip
 ```
 
 {{< note >}}
-It is not possible to rewrite the header in this way for the default
-backend. Because of this, if you inject Linkerd into your Nginx ingress
-controller's pod, the default backend will not be usable.
+If you are using a default backend, you will need to create an ingress
+definition for that backend to ensure that the `l5d-dst-override` header
+is set. For example:
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-ingress
+  namespace: backends
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+spec:
+  backend:
+    serviceName: default-backend
+    servicePort: 80
+```
+
 {{< /note >}}
 
 ## Traefik
@@ -151,7 +175,9 @@ controller's pod, the default backend will not be usable.
 This uses `emojivoto` as an example, take a look at
 [getting started](/2/getting-started/) for a refresher on how to install it.
 
-The sample ingress definition is:
+The simplest way to use Traefik as an ingress for Linkerd is to configure a
+Kubernetes `Ingress` resource with the
+`ingress.kubernetes.io/custom-request-headers` like this:
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -207,6 +233,53 @@ service will not be encrypted. There is an
 [open issue](https://github.com/linkerd/linkerd2/issues/2270) to track the
 solution to this problem.
 {{< /note >}}
+
+### Traefik 2.x
+
+Traefik 2.x adds support for path based request routing with a Custom Resource
+Definition (CRD) called `IngressRoute`.
+
+If you choose to use [`IngressRoute`](https://docs.traefik.io/providers/kubernetes-crd/)
+instead of the default Kubernetes `Ingress`
+resource, then you'll also need to use the Traefik's
+[`Middleware`](https://docs.traefik.io/middlewares/headers/) Custom Resource
+Definition to add the `l5d-dst-override` header.
+
+The YAML below uses the Traefik CRDs to produce the same results for the
+`emojivoto` application, as described above.
+
+```yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: l5d-header-middleware
+  namespace: traefik
+spec:
+  headers:
+    customRequestHeaders:
+      l5d-dst-override: "web-svc.emojivoto.svc.cluster.local:80"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  creationTimestamp: null
+  name: emojivoto-web-ingress-route
+  namespace: emojivoto
+spec:
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    priority: 0
+    middlewares:
+    - name: l5d-header-middleware
+    services:
+    - kind: Service
+      name: web-svc
+      port: 80
+```
 
 ## GCE
 
@@ -463,7 +536,7 @@ Next we'll deploy a demo service:
 linkerd inject https://projectcontour.io/examples/kuard.yaml | kubectl apply -f -
 ```
 
-To route external traffic to your service you'll need to provide a [HTTPProxy](https://projectcontour.io/docs/master/httpproxy/):
+To route external traffic to your service you'll need to provide a HTTPProxy:
 
 ```yaml
 apiVersion: projectcontour.io/v1
@@ -498,3 +571,52 @@ http://127.0.0.1.xip.io:3200
 If you are using Contour with [flagger](https://github.com/weaveworks/flagger)
 the `l5d-dst-override` headers will be set automatically.
 {{< /note >}}
+
+## Kong
+
+Kong doesn't support the header `l5d-dst-override` automatically.  
+This documentation will use the following elements:
+
+- [Kong](https://github.com/Kong/charts)
+- [Emojivoto](/2/getting-started/)
+
+After installing the previous elements, we need to declare these objects :
+
+- Ingress
+- KongPlugin, a CRD provided by Kong
+
+```yaml
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: emojivoto-linkerd-header
+  namespace: emojivoto
+plugin: request-transformer
+config:
+  add:
+    headers:
+    - l5-dst-override:web-svc.emojivoto.svc.cluster.local
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: emojivoto-web
+  namespace: emojivoto
+  annotations:
+    kubernetes.io/ingress.class: "kong"
+    konghq.com/strip-path: "true"  # This annotation will remove /web when contacting the web service
+    konghq.com/plugins: emojivoto-linkerd-header  # This annotation will link the plugin to the Ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /web
+            backend:
+              serviceName: web-svc
+              servicePort: http
+```
+
+We are explicitly setting the `l5d-dst-override` in the `KongPlugin`.  
+It's possible to use templates as well.
+See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value).
+Then you can test to access Emojivoto through Kong using the way you want.

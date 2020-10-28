@@ -47,7 +47,7 @@ AnnotationsReference:
   Name: config.linkerd.io/disable-tap
 - Description: Inject a debug sidecar for data plane debugging
   Name: config.linkerd.io/enable-debug-sidecar
-- Description: Service name of the trace collector. E.g. `oc-collector.tracing:55678`
+- Description: Service name of the trace collector. E.g. `linkerd-collector.linkerd:55678`
   Name: config.linkerd.io/trace-collector
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
     If not provided, it will be defaulted to `default`.
@@ -1097,7 +1097,7 @@ CLIReference:
 - Description: Output service profile config for Kubernetes.
   Example: |2
       # Output a basic template to apply after modification.
-      linkerd profile -n emoijvoto --template web-svc
+      linkerd profile -n emojivoto --template web-svc
 
       # Generate a profile from an OpenAPI specification.
       linkerd profile -n emojivoto --open-api web-svc.swagger web-svc
@@ -1526,7 +1526,7 @@ CLIReference:
     Note that this command should be followed by "linkerd upgrade control-plane".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade config | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade config
   Options:
@@ -1555,7 +1555,7 @@ CLIReference:
     install command. It should be run after "linkerd upgrade config".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade control-plane | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade control-plane
   Options:

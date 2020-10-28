@@ -267,6 +267,6 @@ The examples and configurations in this post drew heavily from some excellent bl
 
 ## Further reading
 
-There’s a lot more that you can do with Linkerd. For more details about this setup, see [Getting Started: Running in ECS](https://linkerd.io/getting-started/ecs/). For all commands and config files referenced in this post, see the [linkerd-examples repo](https://github.com/linkerd/linkerd-examples/tree/master/ecs). For more information about configuring Linkerd, see the [Linkerd Configuration](https://linkerd.io/config/latest/linkerd) page. Finally, for more information about linkerd-viz, see the [linkerd-viz Github repo](https://github.com/linkerd/linkerd-viz).
+There’s a lot more that you can do with Linkerd. For more details about this setup, see [Getting Started: Running in ECS](https://linkerd.io/getting-started/ecs/). For all commands and config files referenced in this post, see the [linkerd-examples repo](https://github.com/linkerd/linkerd-examples/tree/master/ecs). For more information about configuring Linkerd, see the [Linkerd Configuration](https://api.linkerd.io/latest/linkerd/index.html) page. Finally, for more information about linkerd-viz, see the [linkerd-viz Github repo](https://github.com/linkerd/linkerd-viz).
 
 We hope this post was useful. We’d love to get your thoughts. Please join us in the Linkerd [Discourse](https://discourse.linkerd.io/) forums and the Linkerd [Slack](https://slack.linkerd.io/) channel!

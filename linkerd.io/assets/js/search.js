@@ -48,7 +48,7 @@ function initSearchPage(dataUrl, tagFieldName) {
     })
     .then(initSearch)
     .catch(function (e) {
-      console.log("Error occured while lunr search init", e);
+      console.log("Error occurred while lunr search init", e);
     });
 
   function search(query) {

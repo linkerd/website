@@ -22,14 +22,14 @@ includes talks from Linkerd users at **Nordstrom**, **Disney**, **Microsoft**,
 **Paybase**, and more, joining the ever-growing list of Linkerd production use
 cases that spans [mobile](https://apester.com/) to
 [consumer](https://www.askattest.com/) to [payments](https://paybase.io/) to
-[banking](https://www.figo.io/en/). No matter the industry or scale, Linkerd
+[banking](https://www.finleap.com/). No matter the industry or scale, Linkerd
 gives you the essential reliability, security, and observability necessary to
 operate your app on Kubernetes. And most of all, [*it just
 works*](https://twitter.com/coleca/status/1091591745870139392).
 
 🍰 **A non-stop drumbeat of releases**. The past year has seen 5 stable releases
 of 2.x and 50 (!) edge releases, covering a changelog that [spans over 2,000
-lines of text](https://github.com/linkerd/linkerd2/blob/master/CHANGES.md)!
+lines of text](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)!
 But don't worry, you don't have to read all that to use Linkerd... [installing
 Linkerd is still a 60-second
 process](https://channel9.msdn.com/Shows/Azure-Friday/60-seconds-to-a-Linkerd-service-mesh-on-AKS).
@@ -44,11 +44,11 @@ are on the docket for later this year!
 [OpenFaaS](https://github.com/openfaas-incubator/openfaas-linkerd2) to
 [Flagger](https://docs.flagger.app/usage/linkerd-progressive-delivery) to
 [Ambassador](https://blog.getambassador.io/knative-linkerd-support-json-logging-and-more-in-ambassador-0-73-a2dc62413c18)
-to [SuperGloo](https://supergloo.solo.io/mesh/install-linkerd/) to
+to Service Mesh Hub to
 [DigitalOcean](https://marketplace.digitalocean.com/apps/linkerd-beta) to
 [VSCode](https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd)
 to [Rio](https://github.com/rancher/rio/pull/411), Linkerd has become a
-criticla building block for the cloud native ecosystem as a whole.
+critical building block for the cloud native ecosystem as a whole.
 
 🍰 **The creation of industry-defining interfaces**. The Linkerd team was the
 largest contributor to Microsoft's [Service Mesh
@@ -57,7 +57,7 @@ Linkerd's metrics and traffic splitting features support SMI out of the box.
 
 🍰 **A third-party security audit passed with flying colors**. The security
 analysis firm [Cure53 evaluated
-Linkerd](https://github.com/linkerd/linkerd2/blob/master/SECURITY_AUDIT.pdf)
+Linkerd](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf)
 and concluded that Linkerd "is fully capable of preventing major attacks and
 should be considered strong against the majority of malicious attempts at a
 compromise", continuing that "Cure53 needs to mention the atypically excellent

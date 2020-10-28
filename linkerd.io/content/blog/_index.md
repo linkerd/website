@@ -7,8 +7,8 @@ tags:
 - Tutorials &amp; How-To's
 - Video
 items:
-- blog/announcing-linkerd-2-7.md
-- blog/kubecon-na-2019-linkerd-roundup.md
+- blog/the-roadmap-for-linkerd-proxy.md
+- blog/announcing-linkerd-2-8.md
 description: ''
 keywords: []
 

@@ -183,10 +183,10 @@ repository. You may like to start working on some of these
 .
 
 Before proceeding with writing any code, read through the Linkerd's
-[Developer Certificate of Origin](https://github.com/linkerd/linkerd2/blob/master/DCO).
+[Developer Certificate of Origin](https://github.com/linkerd/linkerd2/blob/main/DCO).
 
 Information on how to build the code can be found
-[here](https://github.com/linkerd/linkerd2/blob/master/BUILD.md).
+[here](https://github.com/linkerd/linkerd2/blob/main/BUILD.md).
 
 {{< note >}}
 Pull requests will be reviewed on a first-come-first-serve basis. Please
@@ -258,7 +258,7 @@ of questions!
 ---
 
 It will also be helpful for your mentor to receive a weekly status communication
-from you. Previous mentors and students have use this template to faciliate
+from you. Previous mentors and students have use this template to facilitate
 their weekly catch-up:
 
 ### Accomplishments and Key Updates

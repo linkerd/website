@@ -25,6 +25,17 @@ clusters.
 As a first step, [install cert-manager on your
 cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html).
 
+{{< note >}}
+If you are installing cert-manager `>= 1.0`,
+you will need to have kubernetes `>= 1.16`.
+Legacy custom resource definitions in cert-manager for kubernetes `<= 1.15`
+do not have a keyAlgorithm option,
+so the certificates will be generated using RSA and be incompatible with linkerd.
+
+See [v0.16 to v1.0 upgrade notes](https://cert-manager.io/docs/installation/upgrading/upgrading-0.16-1.0/)
+for more details on version requirements.
+{{< /note >}}
+
 ### Cert manager as an on-cluster CA
 
 In this case, rather than pulling credentials from an external
@@ -47,7 +58,7 @@ pair and store it in a Kubernetes Secret in the namespace created above:
 
 ```bash
 step certificate create identity.linkerd.cluster.local ca.crt ca.key \
-  --profile root-ca --no-password --insecure &&
+  --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local &&
   kubectl create secret tls \
    linkerd-trust-anchor \
    --cert=ca.crt \
@@ -65,7 +76,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
@@ -83,7 +94,7 @@ Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
@@ -120,6 +131,30 @@ kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 ```
 
 Now we just need to inform Linkerd to consume these credentials.
+
+{{< note >}}
+Due to a [bug](https://github.com/jetstack/cert-manager/issues/2942) in
+cert-manager, if you are using cert-manager version `0.15` with experimental
+controllers, the certificate it issues are not compatible with with Linkerd
+versions `<= stable-2.8.1`.
+
+Your `linkerd-identity` pods will likely crash with the following log output:
+
+```log
+"Failed to initialize identity service: failed to read CA from disk:
+unsupported block type: 'PRIVATE KEY'"
+```
+
+Some possible ways to resolve this issue are:
+
+- Upgrade Linkerd to the edge versions `>= edge-20.6.4` which contains
+a [fix](https://github.com/linkerd/linkerd2/pull/4597/).
+- Upgrade cert-manager to versions `>= 0.16`.
+  [(how to upgrade)](https://cert-manager.io/docs/installation/upgrading/upgrading-0.15-0.16/)
+- Turn off cert-manager experimental controllers.
+  [(docs)](https://cert-manager.io/docs/release-notes/release-notes-0.15/#using-the-experimental-controllers)
+
+{{< /note >}}
 
 ### Alternative CA providers
 
@@ -160,10 +195,16 @@ For Helm installation, rather than running `linkerd install`, set the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install \
-  --name=linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=<value of ca.crt> \
+helm install linkerd2 \
+  --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
-  linkerd/linkerd2
+  linkerd/linkerd2 \
+  -n linkerd
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been deprecated, and is the first argument as
+ specified above.
+{{< /note >}}

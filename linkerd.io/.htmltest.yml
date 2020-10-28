@@ -14,6 +14,10 @@ IgnoreURLs:
   - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
   - https://discourse.linkerd.io
   - https://github.com/*
+  - https://www.man7.org/*
+  - https://offerup.com/
+  - https://kinvolk.io/
+  - https://godaddy.com/
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16

@@ -1,0 +1,9 @@
+bases:
+  - github.com/stefanprodan/podinfo/kustomize/?ref=4.0.2
+
+resources:
+  - frontend.yml
+  - ns.yml
+
+patches:
+  - patch.yml

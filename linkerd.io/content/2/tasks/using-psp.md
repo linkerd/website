@@ -18,14 +18,14 @@ Adjust the value of the above label to match your control plane's namespace.
 
 Notice that to minimize attack surface, all Linux capabilities are dropped from
 the control plane's Pod Security Policy, with the exception of the `NET_ADMIN`
-and `NET_RAW` capabilities. These capabilties provide the `proxy-init` init
+and `NET_RAW` capabilities. These capabilities provide the `proxy-init` init
 container with runtime privilege to rewrite the pod's `iptable`. Note that adding
 these capabilities to the Pod Security Policy doesn't make the container a
 [`privileged`](https://kubernetes.io/docs/concepts/workloads/pods/pod/#privileged-mode-for-pod-containers)
 container. The control plane's Pod Security Policy prevents container privilege
 escalation with the `allowPrivilegeEscalation: false` policy. To understand the
 full implication of the `NET_ADMIN` and `NET_RAW` capabilities, refer to the
-Linux capabilities [manual](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+Linux capabilities [manual](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 More information on the `iptables` rules used by the `proxy-init` init
 container can be found on the [Architecture](/2/reference/architecture/#linkerd-init)
@@ -118,5 +118,4 @@ subjects:
 ```
 
 Note that the Linkerd proxy only requires the `NET_ADMIN` and `NET_RAW`
-capabilities, and it's run with UID `2102`. The `NET_BIND_SERVICE` capability is
-needed by the `web` application because its container binds to port 80.
+capabilities when running without Linkerd CNI, and it's run with UID `2102`.

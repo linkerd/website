@@ -1,0 +1,3 @@
+User-agent: *
+
+Disallow: https://slack.linkerd.io/

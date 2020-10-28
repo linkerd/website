@@ -150,6 +150,6 @@ For a full, working example, see the [previous blog post][part-i], or download 
 
 ## Acknowledgments
 
-Special thanks to [Oliver Beattie](https://twitter.com/obeattie) and [Oleksandr Bereziansky](https://github.com/OleksandrBerezianskyi) for their pioneering work on running linkerd as a DaemonSet, and to [Joonas Bergius](https://twitter.com/joonas) for contributing the Kubernetes 1.4 configuration.
+Special thanks to [Oliver Beattie](https://twitter.com/obeattie) and [Oleksandr Berezianskyi](https://github.com/OleksandrBerezianskyi) for their pioneering work on running linkerd as a DaemonSet, and to [Joonas Bergius](https://twitter.com/joonas) for contributing the Kubernetes 1.4 configuration.
 
 [part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}} [small-memory]: {{< ref "small-memory-jvm-techniques-for-microservice-sidecars" >}}

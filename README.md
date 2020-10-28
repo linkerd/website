@@ -5,36 +5,29 @@ Source code for the linkerd.io website.
 
 ### General development instructions
 
-1. Install Hugo:
+1. Run the linter and checker:
 
-    for Mac users:
+   ```bash
+   docker run \
+      --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
+      gcr.io/linkerd-io/website-builder:1.3.1 make lint check
+   ```
 
-    ```bash
-    brew install hugo
-    ```
+1. Install Hugo 0.74.3 to run the site locally:
 
-    for Linux users:
+   For Mac users:
 
-    download the **extended** release of Hugo from [GitHub](https://github.com/gohugoio/hugo/releases),
-    then install the following dependencies:
+   ```bash
+   brew install hugo
+   ```
 
-    ```bash
-    curl https://htmltest.wjdp.uk | bash
-    npm install -g markdownlint-cli
-    ```
-
-    make sure they are added to `$PATH`
+   For Linux users, download the **extended** release of Hugo from its GitHub
+   [release page](https://github.com/gohugoio/hugo/releases).
 
 1. From the root `/website` directory, build site and run Hugo in development mode:
 
     ```bash
     hugo serve -s linkerd.io
-    ```
-
-1. Also in the root directory, run checks on any changes you make:
-
-    ```bash
-    make check lint
     ```
 
 You should see the site on localhost:1313, and it should reload
@@ -108,11 +101,11 @@ master from slate-linkerd and add it to the public dir.
     ```bash
     make deploy-api.linkerd.io
     ```
-   
+
    * NB: If you're running macOS 10.14+ with `ruby` installed by XCode, you
-    may have to [set the SDKROOT](https://github.com/castwide/vscode-solargraph/issues/78#issuecomment-552675511) 
+    may have to [set the SDKROOT](https://github.com/castwide/vscode-solargraph/issues/78#issuecomment-552675511)
     in order to install `json 1.8.3` which is a `middleman` dependency.
-     
+
 
 ## Publishing
 

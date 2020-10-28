@@ -62,7 +62,7 @@ Some development teams solve for that blindspot by building and embedding custom
 
 The service mesh exists to decouple that communication logic from your applications. The service mesh provides the logic to monitor, manage, and control service requests by default, everywhere. It pushes that logic into a lower part of the stack where it can be more easily managed across your entire infrastructure.
 
-The service mesh doesn’t exist to manage parts of your stack that already have sufficient controls, like packet transport & routing at the TCP/IP level. The service mesh presumes that a useable (even if unreliable) network already exists. The scope of the service mesh is only that blind spot more easily seen by the shift to microservice architectures.
+The service mesh doesn’t exist to manage parts of your stack that already have sufficient controls, like packet transport & routing at the TCP/IP level. The service mesh presumes that a usable (even if unreliable) network already exists. The scope of the service mesh is only that blind spot more easily seen by the shift to microservice architectures.
 
 If you’re asking yourself whether you need a service mesh, the first sign that you do is that you have a lot of services intercommunicating within your infrastructure. The second is that you have no direct way of determining the health of that intercommunication. Using only indirect measurements to infer what’s happening means you have a blindspot. You might have service requests failing right now and not even know it.
 

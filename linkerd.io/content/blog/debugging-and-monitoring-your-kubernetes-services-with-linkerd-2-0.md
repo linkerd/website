@@ -1,7 +1,7 @@
 ---
 slug: 'debugging-and-monitoring-your-kubernetes-services-with-linkerd-2-0'
 title: 'Debugging and Monitoring your Kubernetes Services with Linkerd 2.0'
-alaises:
+aliases:
   - /2018/11/05/debugging-and-monitoring-your-kubernetes-services-with-linkerd-2-0/
 author: 'kiersten'
 date: Mon, 05 Nov 2018 21:22:19 +0000
