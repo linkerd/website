@@ -3,10 +3,34 @@ title = "Using Ingress"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
 
+When your ingress controller is injected, The load balancing decision would
+be taken by the Ingress Controller and the proxy just routes it to the
+choosen target Pod IP by the Ingress controller. This means that Linkerd functionality
+like Service Profiles, Traffic Splits would not work as the current discovery is
+based on the Service IP. TCP mTLS and Load Balancing should still work however.
+This is useful in cases where you want Linkerd to honour the load balancing
+decision taken by the Ingress Controller for things like Sticky Sessions, etc.
+
 If you're planning on injecting Linkerd into your ingress controller's pods
-there is some configuration required. Linkerd discovers services based on the
-`:authority` or `Host` header. This allows Linkerd to understand what service a
-request is destined for without being dependent on DNS or IPs.
+and want Linkerd functionality like Service Profiles, Traffic Splits, etc,
+there is additional configuration required to make the proxy run in `ingress` mode,
+where Linkerd discovers services based on the `:authority` or `Host` header.
+This allows Linkerd to understand what service a request is destined for
+without being dependent on DNS or IPs.
+
+The Ingress controller deployment can be made to run in `ingress` mode by adding
+the following annotation.
+
+```bash
+kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -
+```
+
+This can be verified by checking if the `linkerd-proxy` has the relevant environment
+variable set by the `proxy-injector`.
+
+```bash
+kubectl describe pod/<ingress-pod> | grep LINKERD2_PROXY_INGRESS_MODE
+```
 
 When it comes to ingress, most controllers do not rewrite the
 incoming header (`example.com`) to the internal service name
