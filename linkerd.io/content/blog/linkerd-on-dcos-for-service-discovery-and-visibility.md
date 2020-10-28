@@ -19,7 +19,7 @@ solutions like Mesos-DNS.
 When building applications in a scheduled environment like DC/OS, one of the
 first questions you’ll face is how to do service discovery. Similar to
 Kubernetes, DC/OS
-provides [several service discovery options out of the box](https://dcos.io/docs/1.8/usage/service-discovery/),
+provides several service discovery options out of the box,
 including at least one DNS-based option. But what exactly is service discovery,
 and how is it different from DNS?
 
@@ -38,7 +38,7 @@ An analogous system to service discovery is DNS. DNS was designed to answer a
 similar question: given the hostname of a machine, e.g. `buoyant.io`, what is
 the IP address of that host? In fact, DNS can be used as a basic form of service
 discovery, and DC/OS ships
-with [Mesos-DNS](https://dcos.io/docs/1.8/usage/service-discovery/mesos-dns/) out
+with Mesos-DNS out
 of the box.
 
 Although DNS is widely supported and easy to get started with, in practice, it
@@ -92,7 +92,7 @@ service metrics like success rates and request latencies.
 ### STEP 0: PREREQUISITES
 
 You will need: - A running DC/OS cluster. -
-The [DC/OS CLI installed](https://dcos.io/docs/1.8/usage/cli/install/).
+The DC/OS CLI installed.
 
 ### STEP 1: DEPLOY A SAMPLE APPLICATION
 
