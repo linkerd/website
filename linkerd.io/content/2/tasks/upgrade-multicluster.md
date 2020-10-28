@@ -107,4 +107,3 @@ linkerd --context=source check --multicluster
 ```
 
 Congratulations, your upgrade is complete!
-

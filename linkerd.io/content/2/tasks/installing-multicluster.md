@@ -94,7 +94,7 @@ service you would like mirrored to linked clusters, run:
 kubectl label svc foobar mirror.linkerd.io/exported=true
 ```
 
-{{< note >}} You can configure a different label selector by using the 
+{{< note >}} You can configure a different label selector by using the
 `--selector` flag on the `linkerd multicluster link` command or by editing
 the Link resource created by the `linkerd multicluster link` command.
 {{< /note >}}
