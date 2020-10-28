@@ -16,7 +16,7 @@ Linkerd also changes the way that connections to your application are managed:
 it re-uses persistent connections and establishes an additional layer of
 connection tracking.  Managing connections in this way can sometimes expose
 underlying application or infrastructure issues such as misconfigured connection
-timeouts which can manifest as connection errors. 
+timeouts which can manifest as connection errors.
 
 ## Why can't Linkerd give a more informative error message?
 
@@ -70,8 +70,6 @@ file `/proc/sys/net/netfilter/nf_conntrack_tcp_timeout_close_wait` in any
 injected container.  To increase this value, you can use the
 `--close-wait-timeout` flag with `linkerd inject`.  Note, however, that setting
 this flag will also set the `privileged` field of the proxy init container to
-true.  Setting this timeout to 1 hour is usually sufficient and matches the 
+true.  Setting this timeout to 1 hour is usually sufficient and matches the
 [value used by
 kube-proxy](https://github.com/kubernetes/kubernetes/issues/32551).
-
-
