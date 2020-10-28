@@ -10,13 +10,13 @@ a secret containing TLS credentials.  These certificates are different from the
 ones that the Linkerd proxies use to secure pod-to-pod communication and use a
 completely separate trust chain.  For more information on rotating the TLS
 credentials used by the Linkerd proxies, see
-[Automatically Rotating Control Plane TLS Credentials](/2/tasks/use_external_certs).
+[Automatically Rotating Control Plane TLS Credentials](/2/tasks/use_external_certs/).
 
 By default, when Linkerd is installed
 with the Linkerd CLI or with the Linkerd Helm chart, TLS credentials are
 automatically generated for all of the webhooks.  If these certificates expire
 or need to be regenerated for any reason, performing a
-[Linkerd upgrade](/2/tasks/upgrade) will regenerate them.
+[Linkerd upgrade](/2/tasks/upgrade/) will regenerate them.
 
 This workflow is suitable for most users.  However, if you need these webhook
 certificates to be rotated automatically on a regular basis, it is possible to
