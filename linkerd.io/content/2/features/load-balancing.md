@@ -17,16 +17,12 @@ improve end-to-end latencies.
 For destinations that are not in Kubernetes, Linkerd will balance across
 endpoints provided by DNS.
 
-For destinations that *are* in Kubernetes, Linkerd will read service discovery
-information based off the tarpet IP address rather than relying on DNS. If the
-IP address is not assigned to a Service, then there will be no discovery
-information.
-
-{{< note >}}
-This means that load balancing will not work if the service is exposed as a
-headless service. There is no way to tell which service the pod IP address
-belongs to and therefore it cannot retrieve all available endpoints.
-{{< /note >}}
+For destinations that are in Kubernetes, Linkerd will look up the IP address in
+the Kubernetes API. If the IP address corresponds to a Service, Linkerd will
+load balance across the endpoints of that Service and apply any policy from that
+Service's [Service Profile](/2/features/service-profiles/). On the other hand,
+if the IP address corresponds to a Pod, Linkerd will not perform any load
+balancing or apply any [Service Profiles](/2/features/service-profiles/).
 
 ## Load balancing gRPC
 
