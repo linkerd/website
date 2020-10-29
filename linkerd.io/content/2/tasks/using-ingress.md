@@ -3,23 +3,35 @@ title = "Using Ingress"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
 
-When your ingress controller is injected, The load balancing decision would
-be taken by the Ingress Controller and the proxy just routes it to the
+From Linkerd `v2.9`, There are two ways in which Linkerd proxy
+can be ran with your Ingress Controller.
+
+## Default Mode
+
+When the ingress controller is injected, The load balancing decision would
+be taken by the Ingress Controller and the Linkerd proxy just routes it to the
 choosen target Pod IP by the Ingress controller. This means that Linkerd functionality
 like Service Profiles, Traffic Splits would not work as the current discovery is
-based on the Service IP. TCP mTLS and Load Balancing should still work however.
+based on the Service IP. TCP mTLS and Load Balancing will still work however.
 This is useful in cases where you want Linkerd to honour the load balancing
 decision taken by the Ingress Controller for things like Sticky Sessions, etc.
 
-If you're planning on injecting Linkerd into your ingress controller's pods
-and want Linkerd functionality like Service Profiles, Traffic Splits, etc,
-there is additional configuration required to make the proxy run in `ingress` mode,
-where Linkerd discovers services based on the `:authority` or `Host` header.
-This allows Linkerd to understand what service a request is destined for
-without being dependent on DNS or IPs.
+If your Ingress controller is injected with no other configuration specific to
+ingress, The Linkerd proxy runs in the default mode.
+
+## Proxy Ingress Mode
+
+If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
+there is additional configuration required to make the Ingress controller's Linkerd
+proxy run in `ingress` mode, where Linkerd discovers services based on the
+`:authority` or `Host` header. This allows Linkerd to understand what service a
+request is destined for without being dependent on DNS or IPs.
 
 The Ingress controller deployment can be made to run in `ingress` mode by adding
-the following annotation.
+the following annotation i.e `linkerd.io/inject: ingress` in the Ingress Controller's
+Pod Spec.
+
+The same can be done by using the `--ingress` flag in the inject command.
 
 ```bash
 kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -
@@ -29,7 +41,7 @@ This can be verified by checking if the `linkerd-proxy` has the relevant environ
 variable set by the `proxy-injector`.
 
 ```bash
-kubectl describe pod/<ingress-pod> | grep LINKERD2_PROXY_INGRESS_MODE
+kubectl describe pod/<ingress-pod> | grep "linkerd.io/inject: ingress"
 ```
 
 When it comes to ingress, most controllers do not rewrite the
@@ -66,7 +78,7 @@ to be a string value, only numeric `servicePort` values can be used with Linkerd
 If a string value is encountered, Linkerd will default to using port 80.
 {{< /note >}}
 
-## Nginx
+### Nginx
 
 This uses `emojivoto` as an example, take a look at
 [getting started](/2/getting-started/) for a refresher on how to install it.
@@ -194,7 +206,7 @@ spec:
 
 {{< /note >}}
 
-## Traefik
+### Traefik
 
 This uses `emojivoto` as an example, take a look at
 [getting started](/2/getting-started/) for a refresher on how to install it.
@@ -258,7 +270,7 @@ service will not be encrypted. There is an
 solution to this problem.
 {{< /note >}}
 
-### Traefik 2.x
+#### Traefik 2.x
 
 Traefik 2.x adds support for path based request routing with a Custom Resource
 Definition (CRD) called `IngressRoute`.
@@ -305,7 +317,7 @@ spec:
       port: 80
 ```
 
-## GCE
+### GCE
 
 This example is similar to Traefik, and also uses `emojivoto` as an example.
 Take a look at [getting started](/2/getting-started/) for a refresher on how to
@@ -346,7 +358,7 @@ The managed certificate will take about 30-60 minutes to provision, but the
 status of the ingress should be healthy within a few minutes. Once the managed
 certificate is provisioned, the ingress should be visible to the Internet.
 
-## Ambassador
+### Ambassador
 
 This uses `emojivoto` as an example, take a look at
 [getting started](/2/getting-started/) for a refresher on how to install it.
@@ -414,7 +426,7 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
-## Gloo
+### Gloo
 
 This uses `books` as an example, take a look at
 [Demo: Books](/2/tasks/books/) for instructions on how to run it.
@@ -425,7 +437,7 @@ application.
 
 To use Gloo with Linkerd, you can choose one of two options.
 
-### Automatic
+#### Automatic
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically.
@@ -447,7 +459,7 @@ Now simply add a route to the books app upstream:
 glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 ```
 
-### Manual
+#### Manual
 
 As explained in the beginning of this document, you'll need to instruct Gloo to
 add a header which will allow Linkerd to identify where to send traffic to.
@@ -499,7 +511,7 @@ Using the content transformation engine built-in in Gloo, you can instruct it to
 add the needed `l5d-dst-override` header which in the example above is pointing
 to the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
 
-### Test
+#### Test
 
 To easily test this you can get the URL of the Gloo proxy by running:
 
@@ -518,7 +530,7 @@ For the example VirtualService above, which listens to any domain and path,
 accessing the proxy URL (`http://192.168.99.132:30969`) in your browser
 should open the Books application.
 
-## Contour
+### Contour
 
 Contour doesn't support setting the `l5d-dst-override` header automatically.
 The following example uses the
@@ -596,7 +608,7 @@ If you are using Contour with [flagger](https://github.com/weaveworks/flagger)
 the `l5d-dst-override` headers will be set automatically.
 {{< /note >}}
 
-## Kong
+### Kong
 
 Kong doesn't support the header `l5d-dst-override` automatically.  
 This documentation will use the following elements:
