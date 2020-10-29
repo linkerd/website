@@ -37,8 +37,8 @@ The same can be done by using the `--ingress` flag in the inject command.
 kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -
 ```
 
-This can be verified by checking if the `linkerd-proxy` has the relevant environment
-variable set by the `proxy-injector`.
+This can be verified by checking if the Ingress controller's pod has the relevant
+annotation set.
 
 ```bash
 kubectl describe pod/<ingress-pod> | grep "linkerd.io/inject: ingress"
