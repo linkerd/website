@@ -30,7 +30,6 @@ Therefore, Linkerd will not perform load balancing and instead route only to the
 target IP address.
 {{< /note >}}
 
-
 ## Load balancing gRPC
 
 Linkerd's load balancing is particularly useful for gRPC (or HTTP/2) services
