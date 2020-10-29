@@ -194,12 +194,17 @@ instructions](/2/tasks/upgrade-multicluster/).
 ### Ingress behavior changes
 
 In previous versions when you injected your ingress controller (Nginx, Traefik,
-Ambassador, etc), you would override the ingress' balancing/routing choices with
-Linkerd's (using Service Profiles, Traffic Splits, etc.). As of 2.9 the
-ingress's choices are honored instead (e.g. to preserve session-stickiness). If
-you want to revert to the previous behavior, inject the proxy into the controller
-using the annotation `linkerd.io/inject: ingress`, as explained in [using
-ingress](/2/tasks/using-ingress/)
+Ambassador, etc), then the ingress' balancing/routing choices would be
+overridden with Linkerd's (using service profiles, traffic splits, etc.).
+
+As of 2.9 the ingress's choices are honored instead, which allows preserving
+things like session-stickiness. Note however that this means per-route metrics
+are not collected, traffic splits are not be honored and retries/timeouts are
+not applied.
+
+If you want to revert to the previous behavior, inject the proxy into the
+ingress controller using the annotation `linkerd.io/inject: ingress`, as
+explained in [using ingress](/2/tasks/using-ingress/)
 
 ### Breaking changes in Helm charts
 
