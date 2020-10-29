@@ -24,6 +24,13 @@ Service's [Service Profile](/2/features/service-profiles/). On the other hand,
 if the IP address corresponds to a Pod, Linkerd will not perform any load
 balancing or apply any [Service Profiles](/2/features/service-profiles/).
 
+{{< note >}}
+If working with headless services, endpoints of the service cannot be retrieved.
+Therefore, Linkerd will not perform load balancing and instead route only to the
+target IP address.
+{{< /note >}}
+
+
 ## Load balancing gRPC
 
 Linkerd's load balancing is particularly useful for gRPC (or HTTP/2) services
