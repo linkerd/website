@@ -8,28 +8,28 @@ can be ran with your Ingress Controller.
 
 ## Default Mode
 
-When the ingress controller is injected, The load balancing decision would
-be taken by the Ingress Controller and the Linkerd proxy just routes it to the
-choosen target Pod IP by the Ingress controller. This means that Linkerd functionality
-like Service Profiles, Traffic Splits would not work as the current discovery is
-based on the Service IP. TCP mTLS and Load Balancing will still work however.
+When the ingress controller is injected, it makes the balancing
+decision by choosing the target Pod IP and the inkerd proxy just routes it.
+This means that Linkerd functionality
+like Service Profiles, Traffic Splits would not work as the proxy's discovery is
+based on the Service IP. TCP mTLS will still work however.
 This is useful in cases where you want Linkerd to honour the load balancing
 decision taken by the Ingress Controller for things like Sticky Sessions, etc.
 
-If your Ingress controller is injected with no other configuration specific to
-ingress, The Linkerd proxy runs in the default mode.
+If your Ingress controller is injected with no extra configuration specific to
+ingress, the Linkerd proxy runs in the default mode.
 
 ## Proxy Ingress Mode
 
 If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
 there is additional configuration required to make the Ingress controller's Linkerd
-proxy run in `ingress` mode, where Linkerd discovers services based on the
-`:authority` or `Host` header. This allows Linkerd to understand what service a
+proxy run in `ingress` mode. This allows Linkerd to discover services based on the
+`:authority` or `Host` header and understand what service a
 request is destined for without being dependent on DNS or IPs.
 
-The Ingress controller deployment can be made to run in `ingress` mode by adding
-the following annotation i.e `linkerd.io/inject: ingress` in the Ingress Controller's
-Pod Spec.
+The Ingress controller deployment's proxy can be made to run in `ingress` mode by
+adding the following annotation i.e `linkerd.io/inject: ingress` in the Ingress
+Controller's Pod Spec.
 
 The same can be done by using the `--ingress` flag in the inject command.
 
