@@ -3,18 +3,16 @@ title = "Using Ingress"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
 
-From Linkerd `v2.9`, There are two ways in which Linkerd proxy
-can be ran with your Ingress Controller.
+As of Linkerd version 2.9, There are two ways in which Linkerd proxy
+can be run with your Ingress Controller.
 
 ## Default Mode
 
-When the ingress controller is injected, it makes the balancing
-decision by choosing the target Pod IP and the inkerd proxy just routes it.
-This means that Linkerd functionality
-like Service Profiles, Traffic Splits would not work as the proxy's discovery is
-based on the Service IP. TCP mTLS will still work however.
-This is useful in cases where you want Linkerd to honour the load balancing
-decision taken by the Ingress Controller for things like Sticky Sessions, etc.
+When the ingress controller is injected with the `linkerd.io/inject: enabled`
+annotation, the Linkerd proxy will honor load balancing decisions made by the
+ingress controller instead of applying [its own EWMA load balancing](https://linkerd.io/2/features/load-balancing/).
+This also means that the Linkerd proxy will not use Service Profiles for this
+traffic and therefore will not expose per-route metrics or do traffic splitting.
 
 If your Ingress controller is injected with no extra configuration specific to
 ingress, the Linkerd proxy runs in the default mode.
@@ -23,9 +21,10 @@ ingress, the Linkerd proxy runs in the default mode.
 
 If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
 there is additional configuration required to make the Ingress controller's Linkerd
-proxy run in `ingress` mode. This allows Linkerd to discover services based on the
-`:authority` or `Host` header and understand what service a
-request is destined for without being dependent on DNS or IPs.
+proxy run in `ingress` mode. This causes Linkerd to route requests based on
+their `:authority`, `Host`, or `l5d-dst-override` headers instead of their original
+destination which allows Linkerd to perform its own load balancing and use
+Service Profiles to expose per-route metrics and enable traffic splitting.
 
 The Ingress controller deployment's proxy can be made to run in `ingress` mode by
 adding the following annotation i.e `linkerd.io/inject: ingress` in the Ingress
