@@ -182,6 +182,11 @@ helm install linkerd2 \
 ```
 
 {{< note >}}
+When installing Linkerd with Helm, you must also provide the issuer trust root
+and issuer credentials as described in [Installing Linkerd with Helm](/2/tasks/install-helm/).
+{{< /note >}}
+
+{{< note >}}
 For Helm versions < v3, `--name` flag has to specifically be passed.
 In Helm v3, It has been deprecated, and is the first argument as
  specified above.
