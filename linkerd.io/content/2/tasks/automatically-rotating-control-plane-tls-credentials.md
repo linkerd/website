@@ -25,6 +25,17 @@ clusters.
 As a first step, [install cert-manager on your
 cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html).
 
+{{< note >}}
+If you are installing cert-manager `>= 1.0`,
+you will need to have kubernetes `>= 1.16`.
+Legacy custom resource definitions in cert-manager for kubernetes `<= 1.15`
+do not have a keyAlgorithm option,
+so the certificates will be generated using RSA and be incompatible with linkerd.
+
+See [v0.16 to v1.0 upgrade notes](https://cert-manager.io/docs/installation/upgrading/upgrading-0.16-1.0/)
+for more details on version requirements.
+{{< /note >}}
+
 ### Cert manager as an on-cluster CA
 
 In this case, rather than pulling credentials from an external
@@ -65,7 +76,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
@@ -83,7 +94,7 @@ Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
@@ -184,8 +195,7 @@ For Helm installation, rather than running `linkerd install`, set the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install \
-  linkerd2
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
