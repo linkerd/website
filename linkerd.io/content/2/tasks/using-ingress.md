@@ -3,7 +3,7 @@ title = "Using Ingress"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
 
-As of Linkerd version 2.9, There are two ways in which Linkerd proxy
+As of Linkerd version 2.9, there are two ways in which the Linkerd proxy
 can be run with your Ingress Controller.
 
 ## Default Mode
