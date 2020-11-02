@@ -21,7 +21,7 @@ perform the appropriate retries or timeouts when calling that service.  Retries
 and timeouts are always performed on the *outbound* (client) side.
 
 {{< note >}}
-If working with headless services, serivce profiles cannot be retrieved. Linkerd
+If working with headless services, service profiles cannot be retrieved. Linkerd
 reads service discovery information based off the target IP address, and if that
 happens to be a pod IP address then it cannot tell which service the pod belongs
 to.

@@ -14,7 +14,7 @@ enables Linkerd to report per-route metrics and also allows you to enable
 per-route features such as retries and timeouts.
 
 {{< note >}}
-If working with headless services, serivce profiles cannot be retrieved. Linkerd
+If working with headless services, service profiles cannot be retrieved. Linkerd
 reads service discovery information based off the target IP address, and if that
 happens to be a pod IP address then it cannot tell which service the pod belongs
 to.
