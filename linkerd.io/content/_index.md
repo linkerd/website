@@ -1,5 +1,5 @@
 ---
-title: Homepage
+title: The world's lightest, fastest service mesh.
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
   title: The world's lightest, fastest service mesh.
