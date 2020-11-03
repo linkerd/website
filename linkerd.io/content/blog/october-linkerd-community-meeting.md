@@ -11,4 +11,4 @@ This month’s community meeting was jam packed! With the stable 2.9 release com
 
 As always, we like to highlight some of the heroes in our community. This month’s nominations included Stephanie Decalso for making the seemingly impossible happen, Alex Leong for restructuring how configuration is managed through Helm and Tarun Pothulapati for his relentless work getting the stable release ready. Thank you Heroes! We couldn’t have done it without you!
 
-{{< youtube id="Fp1EGmzqagk" t="10" >}}
+{{< youtube id="J1fr4mDQlhs" t="10" >}}
