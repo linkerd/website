@@ -64,7 +64,6 @@ spec:
   # ...
 ```
 
-
 {{< note >}} Unlike Kubernetes CPU limits and requests, which can be expressed
 in milliCPUs, the `proxy-cpu-limit` annotation should be expressed in whole
 numbers of CPU cores. Fractional values will be rounded up to the nearest whole
