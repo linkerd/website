@@ -1,6 +1,6 @@
 +++
-title = "Configuring Proxy Concurrency"
-description = "How to correctly limit the Linkerd proxy's CPU usage"
+title = "Configuring Proxy Concurrency" description = "How to correctly limit
+the Linkerd proxy's CPU usage"
 +++
 
 The Linkerd data plane's proxies are multithreaded, and are capable of running a
@@ -18,9 +18,9 @@ Each proxy only handles traffic to and from the pod it is injected into. This
 means that throughput and latency are limited by the application workload. If an
 application container instance can only handle so many requests per second, it
 may not actually matter that the proxy could handle more. In fact, giving the
-proxy more CPU cores than it requires to keep up with the application may
-*harm* overall performance, as the application may have to compete with the
-proxy for finite system resources.
+proxy more CPU cores than it requires to keep up with the application may *harm*
+overall performance, as the application may have to compete with the proxy for
+finite system resources.
 
 Therefore, it is more important for individual proxies to handle their traffic
 efficiently than to configure all proxies to handle the maximum possible load.
@@ -65,11 +65,10 @@ spec:
 ```
 
 
-{{< note >}}
-Unlike Kubernetes CPU limits and requests, which can be expressed in milliCPUs,
-the `proxy-cpu-limit` annotation should be expressed in whole numbers of CPU
-cores. Fractional values will be rounded up to the nearest whole number.
-{{< /note >}}
+{{< note >}} Unlike Kubernetes CPU limits and requests, which can be expressed
+in milliCPUs, the `proxy-cpu-limit` annotation should be expressed in whole
+numbers of CPU cores. Fractional values will be rounded up to the nearest whole
+number. {{< /note >}}
 
 ## Using Kubernetes CPU Limits and Requests
 
@@ -83,7 +82,9 @@ kubelet is configured, using Kubernetes resource limits rather than the
 The kubelet uses one of two mechanisms for enforcing pod CPU limits. This is
 determined by the [`--cpu-manager-policy` kubelet
 option](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#configuration).
-With the default CPU manager policy, [`none`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#none-policy), the kubelet uses [CFS
+With the default CPU manager policy,
+[`none`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#none-policy),
+the kubelet uses [CFS
 quotas](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler) to enforce CPU
 limits. This means that the Linux kernel is configured to limit the amount of
 time threads belonging to a given process are scheduled. Alternatively, the CPU
@@ -97,8 +98,9 @@ unset, the proxy will run a number of worker threads equal to the number of CPU
 cores available. This means that with the default `none` CPU manager policy, the
 proxy may spawn a large number of worker threads, but the Linux kernel will
 limit how often they are scheduled. This is less efficient than simply reducing
-the number of worker threads, as `proxy-cpu-limit` does: more time is spent on context switches, and
-each worker thread will run less frequently, potentially impacting latency.
+the number of worker threads, as `proxy-cpu-limit` does: more time is spent on
+context switches, and each worker thread will run less frequently, potentially
+impacting latency.
 
 On the other hand, using [cgroup
 cpusets](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt) will
@@ -113,7 +115,8 @@ criteria must be met:
 * The pod must be in the [Guaranteed QoS
   class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
   This means that all containers in the pod must have both a limit and a request
-  for memory and CPU, and the limit for each must have the same value as the request.
+  for memory and CPU, and the limit for each must have the same value as the
+  request.
 * The CPU limit and CPU request must be an integer greater than or equal to 1.
 
 If you're not sure whether these criteria will all be met, it's best to use the
