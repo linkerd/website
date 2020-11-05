@@ -104,7 +104,7 @@ control plane to work correctly. This means that the chart won't work with
 Helm v2's `--namespace` option.  If you're relying on a separate tool to create
 the control plane namespace, make sure that:
 
-1. The namespace is labeled with `linkerd.io/admission-webhooks: disabled`
+1. The namespace is labeled with `config.linkerd.io/admission-webhooks: disabled`
 1. The `installNamespace` is set to `false`
 1. The `namespace` variable is overridden with the name of your namespace
 
