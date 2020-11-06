@@ -2,11 +2,13 @@
 title: 'Announcing Linkerd 2.9: mTLS for all, ARM support, and more!'
 author: 'william'
 date: 2020-11-09T00:00:00+00:00
-thumbnail: /uploads/bence-balla-schottner-6c7LVHBc6oI-unsplash.jpg
+thumbnail: /uploads/warning-gate.jpg
 draft: false
 slug: announcing-linkerd-2.9
 tags: [Linkerd]
 ---
+
+![security gate](/uploads/warning-gate.jpg)
 
 We're very happy to announce the release of Linkerd 2.9, the best Linkerd
 version yet! This release extends Linkerd's zero-config mutual TLS (mTLS)
