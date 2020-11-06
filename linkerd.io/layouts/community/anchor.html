@@ -1,0 +1,11 @@
+{{ define "head" }}
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+{{ end }}
+
+{{ define "main" }}
+{{ partial "community/top-hero-anchor.html" .Params.top_hero }}
+{{ partial "community/mid-message.html" .Params.mid_message }}
+{{ partial "community/benefits.html" .Params.benefits }}
+{{ partial "community/signup.html" .Params.signup }}
+
+{{ end }}

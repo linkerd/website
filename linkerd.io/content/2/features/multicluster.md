@@ -9,7 +9,7 @@ is secure, fully transparent to the application, and independent of network
 topology. This multi-cluster capability is designed to provide:
 
 1. **A unified trust domain.** The identity of source and destination workloads
-   are be validated at every step, both in and across cluster boundaries.
+   are validated at every step, both in and across cluster boundaries.
 2. **Separate failure domains.** Failure of a cluster allows the remaining
    clusters to function.
 3. **Support for heterogeneous networks.** Since clusters can span clouds,
@@ -39,18 +39,17 @@ not need to distinguish between those situations.
     center="true"
     src="/images/multicluster/feature-overview.svg" >}}
 
-Linkerd's control plane contains two multi-cluster components on each cluster:
+Linkerd's multi-cluster functionality is implemented by two components:
 a *service mirror* and a *gateway*. The *service mirror* component watches
-target clusters for updates to services and mirrors those service updates
-locally on a source cluster. This provides visibility into the service names on
-other, target clusters so that applications can address them directly. The
-*multi-cluster gateway* component provides a way target clusters to receive
+a target cluster for updates to services and mirrors those service updates
+locally on a source cluster. This provides visibility into the service names of
+the target cluster so that applications can address them directly. The
+*multi-cluster gateway* component provides target clusters a way to receive
 requests from source clusters. (This allows Linkerd to support [hierarchical
 networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).)
 
-Once these components are installed, Kubernetes `Service` resources can be
-exported to other clusters, by adding a Kubernetes annotation describing which
-gateway in the cluster to use for connectivity.
+Once these components are installed, Kubernetes `Service` resources that match
+a label selector can be exported to other clusters.
 
 Ready to get started? See the [getting started with multi-cluster
 guide](/2/tasks/multicluster/) for a walkthrough.

@@ -64,11 +64,11 @@ This configuration file can also be used to apply Add-On configuration
 (not just specific to tracing Add-On). More information on the configuration
 fields allowed, can be found [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd2#add-ons-configuration)
 
-Now, the above configuration can be applied using the `--addon-config` file
+Now, the above configuration can be applied using the `--config` file
 with CLI or through `values.yaml` with Helm.
 
 ```bash
-linkerd upgrade --addon-config config.yaml | kubectl apply -f -
+linkerd upgrade --config config.yaml | kubectl apply -f -
 ```
 
 You will now have a `linker-collector` and `linkerd-jaeger`
