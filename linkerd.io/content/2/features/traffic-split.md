@@ -12,6 +12,13 @@ and
 for example, by slowly easing traffic off of an older version of a service and
 onto a newer version.
 
+{{< note >}}
+If working with headless services, traffic splits cannot be retrieved. Linkerd
+reads service discovery information based off the target IP address, and if that
+happens to be a pod IP address then it cannot tell which service the pod belongs
+to.
+{{< /note >}}
+
 Linkerd exposes this functionality via the
 [Service Mesh Interface](https://smi-spec.io/) (SMI)
 [TrafficSplit API](https://github.com/servicemeshinterface/smi-spec/blob/master/apis/traffic-split/traffic-split-WD.md).

@@ -84,8 +84,8 @@ ingress:
 ```
 
 Where the `oauth2-proxy` secret would contain the required [oauth2
-config](https://oauth2-proxy.github.io/oauth2-proxy/auth-configuration) such as,
-`client-id` `client-secret` and `cookie-secret`.
+config](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider)
+such as, `client-id` `client-secret` and `cookie-secret`.
 
 Once setup, a sample ingress would be:
 
