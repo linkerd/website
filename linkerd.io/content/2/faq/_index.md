@@ -137,6 +137,13 @@ schema: |
         "@type": "Answer",
         "text": "If new proxies are deployed when the control plane is unreachable, these new proxies will not be able to operate. They will timeout all new requests until such time as they can reach the control plane."
       }
+    }, {
+      "@type": "Question",
+      "name": "What CPU architectures can Linkerd run on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linkerd uses multi-arch container images with support for amd64, arm64, and arm."
+      }
     }]
   }
 ---
@@ -311,6 +318,10 @@ normal.
 If *new* proxies are deployed when the control plane is unreachable, these new
 proxies will not be able to operate. They will timeout all new requests until
 such time as they can reach the control plane.
+
+## What CPU architectures can Linkerd run on?
+
+Linkerd uses multi-arch container images with support for amd64, arm64, and arm.
 
 ## How do I get involved?
 
