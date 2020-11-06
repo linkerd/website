@@ -621,43 +621,68 @@ This documentation will use the following elements:
 - [Kong](https://github.com/Kong/charts)
 - [Emojivoto](/2/getting-started/)
 
-After installing the previous elements, we need to declare these objects :
+Before installing the Emojivoto demo application, install Linkerd and Kong on
+your cluster. Remember when injecting the Kong deployment to use the `--ingress`
+flag (or annotation) as mentioned
+[above](https://linkerd.io/2/tasks/using-ingress/#proxy-ingress-mode)!
 
-- Ingress
+We need to declare these objects as well:
+
 - KongPlugin, a CRD provided by Kong
+- Ingress
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: emojivoto-linkerd-header
+  name: set-l5d-header
   namespace: emojivoto
 plugin: request-transformer
 config:
   add:
     headers:
-    - l5-dst-override:web-svc.emojivoto.svc.cluster.local
+    - l5d-dst-override:$(headers.host).svc.cluster.local
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: emojivoto-web
+  name: web-ingress
   namespace: emojivoto
   annotations:
     kubernetes.io/ingress.class: "kong"
-    konghq.com/strip-path: "true"  # This annotation will remove /web when contacting the web service
-    konghq.com/plugins: emojivoto-linkerd-header  # This annotation will link the plugin to the Ingress
+    konghq.com/plugins: set-l5d-header
 spec:
   rules:
     - http:
         paths:
-          - path: /web
+          - path: /api/vote
+            backend:
+              serviceName: web-svc
+              servicePort: http
+          - path: /api/list
             backend:
               serviceName: web-svc
               servicePort: http
 ```
 
-We are explicitly setting the `l5d-dst-override` in the `KongPlugin`.  
-It's possible to use templates as well.
-See the documentation [here](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value).
-Then you can test to access Emojivoto through Kong using the way you want.
+We are explicitly setting the `l5d-dst-override` in the `KongPlugin`. Using
+[templates as
+values](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value),
+we can use the `host` header from requests and set the `l5d-dst-override` value
+based off that.
+
+Finally, lets install Emojivoto so that it's `deploy/vote-bot` targets the
+ingress and includes a `host` header value for the `web-svc.emojivoto` service.
+
+Before applying the injected Emojivoto application, make the following changes
+to the `vote-bot` Deployment:
+
+```yaml
+env:
+# Target the Kong ingress instead of the Emojivoto web service
+- name: WEB_HOST
+  value: kong-proxy.kong:80
+# Override the host header on requests so that it can be used to set the l5d-dst-override header
+- name: HOST_OVERRIDE
+  value: web-svc.emojivoto
+```
