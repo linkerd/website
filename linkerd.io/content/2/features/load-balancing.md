@@ -15,10 +15,20 @@ improve end-to-end latencies.
 ## Service discovery
 
 For destinations that are not in Kubernetes, Linkerd will balance across
-endpoints provided by DNS. For destinations that *are* in Kubernetes, Linkerd
-will read service discovery information directly from the Kubernetes API rather
-than relying on DNS. This means that, regardless of whether the service is
-exposed as a headless service, Linkerd will balance requests properly.
+endpoints provided by DNS.
+
+For destinations that are in Kubernetes, Linkerd will look up the IP address in
+the Kubernetes API. If the IP address corresponds to a Service, Linkerd will
+load balance across the endpoints of that Service and apply any policy from that
+Service's [Service Profile](/2/features/service-profiles/). On the other hand,
+if the IP address corresponds to a Pod, Linkerd will not perform any load
+balancing or apply any [Service Profiles](/2/features/service-profiles/).
+
+{{< note >}}
+If working with headless services, endpoints of the service cannot be retrieved.
+Therefore, Linkerd will not perform load balancing and instead route only to the
+target IP address.
+{{< /note >}}
 
 ## Load balancing gRPC
 
