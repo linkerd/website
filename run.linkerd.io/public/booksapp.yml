@@ -64,7 +64,6 @@ metadata:
 spec:
   selector:
     app: authors
-  clusterIP: None
   ports:
   - name: service
     port: 7001
@@ -119,7 +118,6 @@ metadata:
 spec:
   selector:
     app: books
-  clusterIP: None
   ports:
   - name: service
     port: 7002
