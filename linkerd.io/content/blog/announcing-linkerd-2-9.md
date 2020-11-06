@@ -152,7 +152,7 @@ they resonate with you as well.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
 [weekly edge releases](https://linkerd.io/2/edge) will already have seen these
-features in action. Either way, you can download the stable 2.8 release by
+features in action. Either way, you can download the stable 2.9 release by
 running:
 
 ```bash
