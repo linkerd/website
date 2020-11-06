@@ -146,7 +146,7 @@ This is allowed both through the CLI and Helm.
 
 ### CLI
 
-This can be done by passing a file with the above field to `addon-config` field,
+This can be done by passing a file with the above field to the `config` flag,
 which is available both through `linkerd install` and `linkerd upgrade` commands
 
 ```yaml
@@ -156,6 +156,17 @@ global:
 
 Once applied, this configuration is persistent across upgrades, without having
 the user passing it again. The same can be overwritten as needed.
+
+When using an external Prometheus and configuring the `global.prometheusUrl`
+field, Linkerd's Prometheus will still be included in installation.
+
+If you wish to disable this included Prometheus, be sure to include the
+following configuration as well:
+
+```yaml
+prometheus:
+  enabled: false
+```
 
 ### Helm
 
