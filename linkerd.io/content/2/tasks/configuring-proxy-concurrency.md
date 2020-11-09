@@ -35,9 +35,10 @@ The simplest way to configure the proxy's thread pool is using the
 proxy injector to set an environment variable that controls the number of CPU
 cores the proxy will use.
 
-When installing Linkerd using the [`linkerd install` CLI command](/2/install),
-the `--proxy-cpu-limit` argument sets this annotation globally for all proxies
-injected by the Linkerd installation. For example,
+When installing Linkerd using the [`linkerd install` CLI
+command](/2/tasks/install/), the `--proxy-cpu-limit` argument sets this
+annotation globally for all proxies injected by the Linkerd installation. For
+example,
 
 ```bash
 linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
