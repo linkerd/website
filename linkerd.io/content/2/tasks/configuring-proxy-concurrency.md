@@ -44,7 +44,7 @@ linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
 ```
 
 For more fine-grained configuration, the annotation may be added to any
-[injectable Kubernetes resource](/2/proxy-injection), such as a namespace, pod,
+[injectable Kubernetes resource](/2/proxy-injection/), such as a namespace, pod,
 or deployment.
 
 For example, the following will configure any proxies in the `my-deployment`
@@ -124,7 +124,7 @@ requests.
 
 ## Using Helm
 
-When using [Helm](/2/tasks/install-helm), users must take care to set the
+When using [Helm](/2/tasks/install-helm/), users must take care to set the
 `global.proxy.cores` Helm variable in addition to `global.proxy.cpu.limit`, if
 the criteria for cgroup-based CPU limits
 [described above](#using-kubernetes-cpu-limits-and-requests) are not met.
