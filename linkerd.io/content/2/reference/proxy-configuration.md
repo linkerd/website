@@ -26,7 +26,7 @@ spec:
         config.linkerd.io/proxy-memory-request: 128Mi
 ```
 
-See [here](/2/tasks/configuring-proxy-concurrency) for details on tuning the
+See [here](/2/tasks/configuring-proxy-concurrency/) for details on tuning the
 proxy's resource usage.
 
 Note that configuration overrides on proxies injected using the `linkerd inject`
