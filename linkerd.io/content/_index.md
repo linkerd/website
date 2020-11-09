@@ -5,7 +5,8 @@ top_hero:
   title: The world's lightest, fastest service mesh.
   description:
     Linkerd adds critical security, observability, and reliability features to
-    your Kubernetes stack&mdash;no code change required. CNCF-hosted and 100% open source.
+    your Kubernetes stack&mdash;no code change required. CNCF-hosted and 100%
+    open source.
   image: '/uploads/image-15.png'
   buttons:
     - caption: Get Started
@@ -15,8 +16,8 @@ top_hero:
   image_on_the_right: false
 announcement_banner:
   description:
-    Become a Linkerd Community Anchor! [Learn more
-    >](https://linkerd.io/community/anchor/)
+    Announcing Linkerd 2.9! mTLS for all TCP, and much more. [Read
+    more](/2020/11/09/announcing-linkerd-2.9/) »
 description:
   Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
