@@ -623,7 +623,7 @@ for the `scheme` that Linkerd is configured with. If the scheme is
 and `ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the
 required keys are `crt.pem` and `key.pem`.
 
-### √ trust roots are using supported crypto algorithm {#l5d-identity-roots-use-supported-crypto}
+### √ trust roots are using supported crypto algorithm {#l5d-identity-trustAnchors-use-supported-crypto}
 
 Example failure:
 
@@ -631,13 +631,13 @@ Example failure:
 × trust roots are using supported crypto algorithm
     Invalid roots:
         * 165223702412626077778653586125774349756 identity.linkerd.cluster.local must use P-256 curve for public key, instead P-521 was used
-    see https://linkerd.io/checks/#l5d-identity-roots-use-supported-crypto
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-use-supported-crypto
 ```
 
 You need to ensure that all of your roots use ECDSA P-256 for their public key
 algorithm.
 
-### √ trust roots are within their validity period {#l5d-identity-roots-are-time-valid}
+### √ trust roots are within their validity period {#l5d-identity-trustAnchors-are-time-valid}
 
 Example failure:
 
@@ -645,7 +645,7 @@ Example failure:
 × trust roots are within their validity period
     Invalid roots:
         * 199607941798581518463476688845828639279 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T13:08:18Z
-    see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid for hints
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-are-time-valid for hints
 ```
 
 Failures of such nature indicate that your roots have expired. If that is the
@@ -654,7 +654,7 @@ You can follow the process outlined in
 [Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
 to get your cluster back to a stable state.
 
-### √ trust roots are valid for at least 60 days {#l5d-identity-roots-not-expiring-soon}
+### √ trust roots are valid for at least 60 days {#l5d-identity-trustAnchors-not-expiring-soon}
 
 Example warnings:
 
@@ -662,7 +662,7 @@ Example warnings:
 ‼ trust roots are valid for at least 60 days
     Roots expiring soon:
         * 66509928892441932260491975092256847205 identity.linkerd.cluster.local will expire on 2019-12-19T13:30:57Z
-    see https://linkerd.io/checks/#l5d-identity-roots-not-expiring-soon for hints
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of some of your roots is approaching.
@@ -713,14 +713,14 @@ rely on external certificate management solution such as `cert-manager`, you
 can follow the process outlined in
 [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/)
 
-### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-root}
+### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-anchor}
 
 Example error:
 
 ```bash
 × issuer cert is issued by the trust root
     x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-root for hints
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-anchor for hints
 ```
 
 This error indicates that the issuer certificate that is in the
@@ -758,6 +758,92 @@ linkerd-identity-data-plane
 ---------------------------
 √ data plane proxies certificate match CA
 ```
+
+## The "linkerd-webhooks-and-apisvc-tls" checks {#l5d-webhook}
+
+### √ tap API server has valid cert {#l5d-tap-cert-valid}
+
+Example failure:
+
+```bash
+× tap API server has valid cert
+    secrets "linkerd-tap-tls" not found
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
+`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
+named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
+entries.
+
+```bash
+× tap API server has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd.svc
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+Here you need to make sure the certificate was issued specifically for
+`linkerd-tap.linkerd.svc`.
+
+### √ tap API server/proxy-injector/sp-validator cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ tap API server cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of one of your webhooks (tap API server, proxy-injector or sp-validator) cert is approaching.
+In order to address this problem without incurring downtime, you can follow
+the process outlined in [Automatically Rotating your webhook TLS
+Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
+
+### √ proxy-injector webhook has valid cert {#l5d-proxy-injector-webhook-cert-valid}
+
+Example failure:
+
+```bash
+× proxy-injector webhook has valid cert
+    secrets "linkerd-proxy-injector-tls" not found
+    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+```
+
+Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the appropriate
+`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
+named `linkerd-proxy-injector-tls` and it should contain the `crt.pem` and `key.pem` data
+entries.
+
+```bash
+× proxy-injector webhook has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-proxy-injector.linkerd.svc
+    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+```
+Here you need to make sure the certificate was issued specifically for
+`linkerd-proxy-injector.linkerd.svc`.
+
+### √ sp-validator webhook has valid cert {#l5d-sp-validator-webhook-cert-valid}
+
+Example failure:
+
+```bash
+× sp-validator webhook has valid cert
+    secrets "linkerd-sp-validator-tls" not found
+    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+```
+
+Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the appropriate
+`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
+named `linkerd-sp-validator-tls` and it should contain the `crt.pem` and `key.pem` data
+entries.
+
+```bash
+× sp-validator webhook has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-sp-validator.linkerd.svc
+    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+```
+Here you need to make sure the certificate was issued specifically for
+`linkerd-sp-validator.linkerd.svc`.
 
 ## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
 
@@ -1089,6 +1175,19 @@ metadata:
   labels:
     config.linkerd.io/admission-webhooks: disabled
 ```
+
+### √ multiple replicas of control plane pods {#l5d-control-plane-replicas}
+
+Example warning:
+
+```bash
+‼ multiple replicas of control plane pods
+    not enough replicas available for [linkerd-controller]
+    see https://linkerd.io/checks/#l5d-control-plane-replicas for hints
+```
+
+This happens when one of the control plane pods doesn't have at least two
+replicas running. This is likely caused by insufficient node resources.
 
 ## The "linkerd-cni-plugin" checks {#l5d-cni}
 
