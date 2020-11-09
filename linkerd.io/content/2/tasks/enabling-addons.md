@@ -58,15 +58,15 @@ The same configuration file can be used both through the CLI and Helm.
 
 ## Installation through CLI
 
-linkerd CLI now supports a `addon-config` flag, which is used to pass the configuration
+linkerd CLI now supports a `config` flag, which is used to pass the configuration
 of add-ons. Now, the above configuration file can be passed as
 
 ```bash
 # Install Linkerd with additional configuration from `./config.yaml`
-linkerd install --addon-config ./config.yaml
+linkerd install --config ./config.yaml
 ```
 
-The same `--addon-config` is also available through upgrades to change existing configuration.
+The same `--config` is also available through upgrades to change existing configuration.
 
 ## Installation through Helm
 
