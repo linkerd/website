@@ -17,7 +17,7 @@ top_hero:
 announcement_banner:
   description:
     Announcing Linkerd 2.9! mTLS for all TCP, and much more. [Read
-    more](/2020/11/09/announcing-linkerd-2.9/)
+    more](/2020/11/09/announcing-linkerd-2.9/) »
 description:
   Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
