@@ -781,10 +781,11 @@ entries.
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd.svc
     see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
 ```
+
 Here you need to make sure the certificate was issued specifically for
 `linkerd-tap.linkerd.svc`.
 
-### √ tap API server/proxy-injector/sp-validator cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
+### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
 
 Example failure:
 
@@ -794,9 +795,10 @@ Example failure:
     see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of one of your webhooks (tap API server, proxy-injector or sp-validator) cert is approaching.
-In order to address this problem without incurring downtime, you can follow
-the process outlined in [Automatically Rotating your webhook TLS
+This warning indicates that the expiry of one of your webhooks (tap API server,
+proxy-injector or sp-validator) cert is approaching.  In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS
 Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
 
 ### √ proxy-injector webhook has valid cert {#l5d-proxy-injector-webhook-cert-valid}
@@ -809,16 +811,17 @@ Example failure:
     see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
 ```
 
-Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the appropriate
-`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
-named `linkerd-proxy-injector-tls` and it should contain the `crt.pem` and `key.pem` data
-entries.
+Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the
+appropriate `tls.crt` and `tls.key` data entries.  For versions before 2.9, the
+secret is named `linkerd-proxy-injector-tls` and it should contain the `crt.pem`
+and `key.pem` data entries.
 
 ```bash
 × proxy-injector webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-proxy-injector.linkerd.svc
     see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
 ```
+
 Here you need to make sure the certificate was issued specifically for
 `linkerd-proxy-injector.linkerd.svc`.
 
@@ -832,16 +835,17 @@ Example failure:
     see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
 ```
 
-Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the appropriate
-`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
-named `linkerd-sp-validator-tls` and it should contain the `crt.pem` and `key.pem` data
-entries.
+Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the
+appropriate `tls.crt` and `tls.key` data entries.  For versions before 2.9, the
+secret is named `linkerd-sp-validator-tls` and it should contain the `crt.pem`
+and `key.pem` data entries.
 
 ```bash
 × sp-validator webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-sp-validator.linkerd.svc
     see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
 ```
+
 Here you need to make sure the certificate was issued specifically for
 `linkerd-sp-validator.linkerd.svc`.
 
