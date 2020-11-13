@@ -12,7 +12,9 @@ specific nodes within a cluster, based on the node topology. Starting with
 version 2.9, Linkerd supports this feature by routing traffic based on the
 `topologyKeys` configuration in a Service resource definition.
 
-The Service Topology feature in Kubernetes is enabled by the [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) which
+The Service Topology feature in Kubernetes is enabled by the
+[EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/)
+which
 is also supported in Linkerd 2.9 and higher.
 
 {{< note >}} Service Topolgy is a feature gate that is _disabled_, by default,
