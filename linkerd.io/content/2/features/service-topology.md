@@ -12,6 +12,14 @@ specific nodes within a cluster, based on the node topology. Starting with
 version 2.9, Linkerd supports this feature by routing traffic based on the
 `topologyKeys` configuration in a Service resource definition.
 
+The Service Topology feature in Kubernetes is enabled by the [EndpointSlices](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/) which
+is also supported in Linkerd 2.9 and higher.
+
+{{< note >}} Service Topolgy is a feature gate that is _disabled_, by default,
+starting in Kubernetes 1.17. Be sure to check the [Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/)
+docs to find the latest information about this feature in order to use it in
+your cluster.
+
 Currently the `topologyKeys` configuration supports three node labels that can
 be specified separately or together to create a set of rules for routing
 traffic:
@@ -84,4 +92,6 @@ are `ServiceB` pods on Nodes 1 and/or 2.
 
 ## Further reading
 
+* [Service Topology Documentation](https://kubernetes.io/docs/concepts/services-networking/service-topology/).
+* [EndpointSlice Documentation](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/).
 * [Getting Started with Service Topologies](/2/tasks/service-topologies/).
