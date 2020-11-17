@@ -199,7 +199,7 @@ overridden with Linkerd's (using service profiles, traffic splits, etc.).
 
 As of 2.9 the ingress's choices are honored instead, which allows preserving
 things like session-stickiness. Note however that this means per-route metrics
-are not collected, traffic splits are not be honored and retries/timeouts are
+are not collected, traffic splits will not be honored and retries/timeouts are
 not applied.
 
 If you want to revert to the previous behavior, inject the proxy into the
