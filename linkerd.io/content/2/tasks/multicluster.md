@@ -132,23 +132,16 @@ done
     center="true"
     src="/images/multicluster/prep-overview.svg" >}}
 
-There are two components required to discover services and route traffic between
-clusters. The service mirror is responsible for continuously monitoring services
-on a set of target clusters and copying these services from the target cluster
-to the local one running the service mirror. Instead of creating a new, special
-way to address and interact with services, Linkerd leverages Kubernetes services
-so that your application code does not need to change and there is nothing new
-to learn.
+In order to route traffic between clusters, Linkerd leverages Kubernetes
+services so that your application code does not need to change and there is
+nothing new to learn.  This requires a gateway component that routes incoming
+requests to the correct internal service. The gateway will be exposed to the
+public internet via a `Service` of type `LoadBalancer`. Only requests verified
+through Linkerd's mTLS (with a shared trust anchor) will be allowed through this
+gateway. If you're interested, we go into more detail as to why this is
+important in [architecting for multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
 
-In addition, there needs to be a component that can be reached external to the
-cluster. The gateway component routes incoming requests to the correct internal
-service.. It gateway will be exposed to the public internet via a `Service` of
-type `LoadBalancer`. Only requests verified through Linkerd's mTLS (with a
-shared trust anchor) will be allowed through this gateway. If you're interested,
-we go into more detail as to why this is important in
-[architecting for multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
-
-To install these components on both `west` and `east`, you can run:
+To install the multicluster components on both `west` and `east`, you can run:
 
 ```bash
 for ctx in west east; do
@@ -199,46 +192,6 @@ for ctx in west east; do
 done
 ```
 
-{{< fig
-    alt="service-mirror"
-    title="Service Mirror"
-    center="true"
-    src="/images/multicluster/service-mirror.svg" >}}
-
-The service mirror is a Kubernetes
-[controller](https://kubernetes.io/docs/concepts/architecture/controller/) that
-connects to a target cluster (`east` in this example). One of its jobs is to
-watch the services running on the target cluster and locally mirror any service
-that has been exported. In addition, the mirror watches the gateway's service on
-the target cluster and adds the public IP address to each mirrored service's
-endpoints. It should be up and running by now, but you can verify by running:
-
-```bash
-for ctx in west east; do
-  echo "Checking cluster: ${ctx} ........."
-  kubectl --context=${ctx} -n linkerd-multicluster \
-    rollout status deploy/linkerd-service-mirror || break
-done
-```
-
-Finally, let's do a pass with `check` and make sure all the components are
-healthy and ready to go.
-
-```bash
-for ctx in west east; do
-  echo "Checking cluster: ${ctx} ........."
-  linkerd --context=${ctx} check --multicluster || break
-  echo "-------------\n"
-done
-```
-
-If you're interested, you can take a peek at everything that's now running in
-both clusters with `kubectl`.
-
-```bash
-kubectl --context=west -n linkerd-multicluster get all
-```
-
 Every cluster is now running the multicluster control plane and ready to start
 mirroring services. We'll want to link the clusters together now!
 
@@ -261,14 +214,17 @@ services on `east` or the target cluster and add/remove them from itself
 `linkerd multicluster install`, but if you would like to have separate
 credentials for every cluster you can run `linkerd multicluster allow`.
 
-The next step is to link `west` to `east`. This will create a kubeconfig which
-contains the target (`east`) cluster's service account token and connection
-details. The kubeconfig will be applied to the source (`west`) cluster as a
-secret that can be read by the service mirror in `west`. To do this, you'll want
-to run `link` against the `east` context as you're fetching the details required
-to connect to that cluster. When applying it, you'll want to use the `west`
-context as that is what needs the details. To link the `west` cluster to the
-`east` one, run:
+The next step is to link `west` to `east`. This will create a credentials
+secret, a Link resource, and a service-mirror controller. The credentials secret
+contains a kubeconfig which can be used to access the target (`east`) cluster's
+Kubernetes API. The Link resource is custom resource that configures service
+mirroring and contains things such as the gateway address, gateway identity,
+and the label selector to use when determining which services to mirror. The
+service-mirror controller uses the Link and the secret to find services on
+the target cluster that match the given label selector and copy them into
+the source (local) cluster.
+
+ To link the `west` cluster to the `east` one, run:
 
 ```bash
 linkerd --context=east multicluster link --cluster-name east |
@@ -279,12 +235,6 @@ Linkerd will look at your current `east` context, extract the `cluster`
 configuration which contains the server location as well as the CA bundle. It
 will then fetch the `ServiceAccount` token and merge these pieces of
 configuration into a kubeconfig that is a secret.
-
-The service mirror, watches for secrets in the `linkerd-multicluster` namespace
-that contain a kubeconfig for remote clusters. Now that we have created the
-credentials service mirror needs, it will connect to `east` and mirror any
-services that have been exported to `west`. We've not explicitly exported any
-services yet, that'll happen in the next step.
 
 Running `check` again will make sure that the service mirror has discovered this
 secret and can reach `east`.
@@ -372,32 +322,18 @@ impacted by the creation or deletion of services, we require that services be
 explicitly exported. For the purposes of this guide, we will be exporting the
 `podinfo` service from the `east` cluster to the `west` cluster. To do this, we
 must first export the `podinfo` service in the `east` cluster. You can do this
-by running:
+by adding the `mirror.linkerd.io/exported` label:
 
 ```bash
-kubectl --context=east get svc -n test podinfo -o yaml | \
-  linkerd multicluster export-service - | \
-  kubectl --context=east apply -f -
+kubectl --context=east label svc -n test podinfo mirror.linkerd.io/exported=true
 ```
 
-The `linkerd multicluster export-service` command simply adds a couple
-annotations to the service. There's no reason you have to use the command, feel
-free to add them yourself! The added annotations are:
+{{< note >}} You can configure a different label selector by using the
+`--selector` flag on the `linkerd multicluster link` command or by editting
+the Link resource created by the `linkerd multicluster link` command.
+{{< /note >}}
 
-```yaml
-mirror.linkerd.io/gateway-name: linkerd-gateway
-mirror.linkerd.io/gateway-ns: linkerd-multicluster
-```
-
-Make sure to configure the values based on how you have configured the
-installation. The gateway's service name and namespace are required.
-
-These annotations are picked up by the service mirror component in the `west`
-cluster. A `podinfo-east` service is then created in the `test` namespace. The
-cluster name of a mirrored service is automatically added to the service name so
-that there are no local collisions and it is explicit where the traffic is being
-sent. Check out the service that was just created by the service mirror
-controller!
+Check out the service that was just created by the service mirror controller!
 
 ```bash
 kubectl --context=west -n test get svc podinfo-east
@@ -568,7 +504,7 @@ To cleanup the multicluster control plane, you can run:
 
 ```bash
 for ctx in west east; do
-  kubectl --context=${ctx} delete ns linkerd-multicluster
+  linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f -
 done
 ```
 

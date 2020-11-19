@@ -57,9 +57,11 @@ the pieces fit together, check out the
 
 ## Step 2: Link the clusters
 
-Each cluster must be linked. This consists of creating a service account and
-RBAC in one cluster and adding a secret containing a kubeconfig to the other. To
-link cluster `west` to cluster `east`, you would run:
+Each cluster must be linked. This consists of installing several resources in
+the source cluster including a secret containing a kubeconfig that allows access
+to the target cluster Kubernetes API, a service mirror control for mirroring
+services, and a Link custom resource for holding configuration. To link cluster
+`west` to cluster `east`, you would run:
 
 ```bash
 linkerd --context=east multicluster link --cluster-name east |
@@ -84,23 +86,17 @@ For a detailed explanation of what this step does, check out the
 
 ## Step 3: Export services
 
-By default, services are not automatically mirrored in linked clusters. For each
+Services are not automatically mirrored in linked clusters. By default, only
+services with the `mirror.linkerd.io/exported` label will be mirrored. For each
 service you would like mirrored to linked clusters, run:
 
 ```bash
-kubectl get svc foobar -o yaml | \
-  linkerd multicluster export-service - | \
-  kubectl apply -f -
+kubectl label svc foobar mirror.linkerd.io/exported=true
 ```
 
-{{< note >}} This CLI command simply adds two annotations. You can do that
-yourself if you'd like.
-
-```yaml
-mirror.linkerd.io/gateway-name: linkerd-gateway
-mirror.linkerd.io/gateway-ns: linkerd-multicluster
-```
-
+{{< note >}} You can configure a different label selector by using the
+`--selector` flag on the `linkerd multicluster link` command or by editing
+the Link resource created by the `linkerd multicluster link` command.
 {{< /note >}}
 
 ## Leverage Ambassador
@@ -192,25 +188,30 @@ metadata:
     annotations:
         mirror.linkerd.io/gateway-identity: ambassador.ambassador.serviceaccount.identity.linkerd.cluster.local
         mirror.linkerd.io/multicluster-gateway: "true"
-        mirror.linkerd.io/probe-path: -/ambassador/ready
+        mirror.linkerd.io/probe-path: /-/ambassador/ready
         mirror.linkerd.io/probe-period: "3"
 '
 ```
 
-With everything setup and configured, you'll want to pick services to use
-Ambassador as the gateway instead of the one bundled with Linkerd. You can do
-this by adding the following annotations to any services you'd like mirrored to
-other clusters.
+Now you can install the Linkerd multicluster components onto your target cluster.
+Since we're using Ambassador as our gateway, we need to skip installing the
+Linkerd gateway by using the `--gateway=false` flag:
 
-```yaml
-mirror.linkerd.io/gateway-name: ambassador
-mirror.linkerd.io/gateway-ns: ambassador
+```bash
+linkerd --context=${ctx} multicluster install --gateway=false | kubectl --context=${ctx} apply -f -
 ```
 
-Clusters that have already been linked will automatically pick up the service
-and configure it to use Ambassador as the gateway! From a cluster that is not
-running Ambassador, you can validate that everything is working correctly by
-running:
+With everything setup and configured, you're ready to link a source cluster to
+this Ambassador gateway.  Run the `link` command specifying the name and
+namespace of your Ambassador service:
+
+```bash
+linkerd --context=${ctx} multicluster link --cluster-name=${ctx} --gateway-name=ambassador --gateway-namespace=ambassador \
+    | kubectl --context=${src_ctx} apply -f -
+```
+
+From the source cluster (the one not running Ambassador), you can validate that
+everything is working correctly by running:
 
 ```bash
 linkerd check --multicluster
@@ -240,12 +241,13 @@ certificates as well!
 To fetch your existing cluster's trust anchor, run:
 
 ```bash
-kubectl -n linkerd get cm/linkerd-config -ojsonpath="{.data.global}" | \
-  jq .identityContext.trustAnchorsPem -r > trustAnchor.crt
+kubectl -n linkerd get cm linkerd-config -ojsonpath="{.data.values}" | \
+  yq -r .global.identityTrustAnchorsPEM > trustAnchor.crt
 ```
 
-{{< note >}} This command requires [jq](https://stedolan.github.io/jq/). If you
-don't have jq, feel free to extract the certificate with your tool of choice.
+{{< note >}} This command requires [yq](https://github.com/mikefarah/yq). If you
+don't have yq, feel free to extract the certificate from the `global.identityTrustAnchorsPEM`
+field with your tool of choice.
 {{< /note >}}
 
 Now, you'll want to create a new trust anchor and issuer for the new cluster:
@@ -301,13 +303,13 @@ linkerd check
 Linkerd's multicluster components i.e Gateway and Service Mirror can
 be installed via Helm rather than the `linkerd multicluster install` command.
 
-This while not only allows advanced configuration, but also allows users
-to bundle the multicluster installation as part of their existing Helm based
-installation pipeline.
+This not only allows advanced configuration, but also allows users to bundle the
+multicluster installation as part of their existing Helm based installation
+pipeline.
 
 ### Adding Linkerd's Helm repository
 
-First, Let's add the Linkerd's Helm repository by running
+First, let's add the Linkerd's Helm repository by running
 
 ```bash
 # To add the repo for Linkerd2 stable releases:
@@ -315,9 +317,6 @@ helm repo add linkerd https://helm.linkerd.io/stable
 ```
 
 ### Helm multicluster install procedure
-
-By default, both the multicluster components i.e Service Mirror and Gateway are
-installed when no toggle values are added.
 
 ```bash
 helm install linkerd2-multicluster linkerd/linkerd2-multicluster
@@ -337,33 +336,25 @@ The installation can be verified by running
 linkerd check --multicluster
 ```
 
-Individual multicluster components can be enabled or disabled by setting
-`serviceMirror` and `gateway` respectively. By default, both of these
-values are true.
+Installation of the gateway can be disabled with the `gateway` setting. By
+default this value is true.
 
-### Installing access credentials
+### Installing additional access credentials
 
-For the source cluster to be able to access the target cluster's services, Access
-credentials have to be present in the target cluster. This can be done using the
-`linkerd multicluster allow` command through the CLI.
+When the multicluster components are installed onto a target cluster with
+`linkerd multicluster install`, a service account is created which source clusters
+will use to mirror services.  Using a distinct service account for each source
+cluster can be benefitial since it gives you the ability to revoke service mirroring
+access from specific source clusters.  Generating additional service accounts
+and associated RBAC can be done using the `linkerd multicluster allow` command
+through the CLI.
 
-The same functionality can also be done through Helm by disabling `gateway` and
-`serviceMirror` while submitting the remote service account name.
+The same functionality can also be done through Helm setting the
+`remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set gateway=false --set serviceMirror=false --set remoteMirrorServiceAccountName=source --set installNamespace=false --kube-context target
+ helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
 ```
-
-{{< note >}}
-`installNamespace` should be disabled if the access credentials are
-being created in the same namespace as that of multicluster components to prevent
-failure due to namespace ownership conflict between the Helm releases.
-{{< /note >}}
-
-Each access credential is created as a separate Helm release providing clear separation.
-To revoke access to a particular source cluster, relevant helm release in the target
-cluster can be removed without effecting the multicluster components
-or other access credentials Helm releases.
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
