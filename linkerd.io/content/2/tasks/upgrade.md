@@ -556,6 +556,21 @@ allow the upgrade command to read the `linkerd-config` config map and the
 relevant to CI/CD workflows where the Linkerd configuration is managed by a
 configuration repository.
 
+For release after `edge-20.10.6`/`stable-2.9.0`, you need to add `secret/linkerd-config-overrides`
+to the `linkerd-manifest.yaml` by running command:
+
+```bash
+kubectl -n linkerd get \
+  secret/linkerd-identity-issuer \
+  configmap/linkerd-config \
+  secret/linkerd-config-overrides \
+  -oyaml > linkerd-manifests.yaml
+  
+linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For release after `stable-2.6.0` and prior to `edge-20.10.6`/`stable-2.9.0`, you can use this command:
+
 ```bash
 kubectl -n linkerd get \
   secret/linkerd-identity-issuer \
