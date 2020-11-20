@@ -80,11 +80,11 @@ jobs:
     url: https://www.golangprojects.com/golang-go-job-dqy-Remote-Senior-Software-Engineer-100-remote-UK-EU-only-London-FORM3-remotework.html
   - title: Kensho
     description: |-
-      Software Engineer - Security
+      Software Engineer
 
       Cambridge, MA
     thumbnail: "/uploads/e3e4a69e-f746-499c-a699-392d6be9bade-1483554467263.png"
-    url: https://jobs.lever.co/kensho/3689384d-c7ee-4c6c-9f40-96c97712a98d
+    url: https://jobs.lever.co/kensho
   - title: MSC
     description: |-
       Senior DevOps Engineer
