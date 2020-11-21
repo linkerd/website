@@ -565,11 +565,12 @@ kubectl -n linkerd get \
   configmap/linkerd-config \
   secret/linkerd-config-overrides \
   -oyaml > linkerd-manifests.yaml
-  
+
 linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
-For release after `stable-2.6.0` and prior to `edge-20.10.1`/`stable-2.9.0`, you can use this command:
+For release after `stable-2.6.0` and prior to `edge-20.10.1`/`stable-2.9.0`,
+you can use this command:
 
 ```bash
 kubectl -n linkerd get \
