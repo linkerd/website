@@ -1,0 +1,25 @@
+<div class="wrapper py-6 has-background-light-blue">
+  <div
+    class="container columns {{ if .image_on_the_right }} row-reverse{{ end }}"
+  >
+    <div class="column is-6 center">
+      <img src="{{.image}}" alt="" />
+    </div>
+    <div class="column is-6 center">
+      <div>
+        <h2 class="title is-size-1 has-text-weight-light">{{.title}}</h2>
+        <p>{{.description}}</p>
+        <div class="columns is-multiline">
+          {{ range .links }}
+          <div class="column is-half mt-4 py-0">
+            <a href="{{.url}}" class="link-list-item">
+              <i class="{{.icon_name}}"></i>
+              {{.caption}}
+            </a>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
