@@ -91,10 +91,22 @@
 }
 
 .community-top-hero {
-  background:  url('/images/community_hero.png'), url('/images/pattern_community_hero.svg');
-  background-repeat: no-repeat;
-  background-position: 10px 22px, left center;
+  padding: 100px 20px;
+  .community-top-hero__image-wrapper {
+    position: relative;
+    img {
+      clip-path: url(#star);
+      vertical-align: middle;
+    }
+    .trophy {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      z-index: 10;
+    }
+  }
 }
+
 
 
 .enterprise-top-hero {

@@ -8,12 +8,10 @@ top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
     and friendly community of adopters and contributors.
-  image: "/uploads/community_hero.png"
+  image: "/uploads/community-hero-example.jpg"
   buttons:
-  - caption: I gave a talk!
+  - caption: Meet all our Linkerd Heros
     url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
-  - caption: I use Linkerd!
-    url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
   image_on_the_right: false
 link_lists:
   links_list:
