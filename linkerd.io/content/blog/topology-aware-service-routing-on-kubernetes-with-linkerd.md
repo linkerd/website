@@ -16,7 +16,7 @@ Fast forward to the present day. Thanks to the cumulative effort of maintainers,
 
 In this article, I’ll discuss what Service Topology is, how Linkerd supports it (no config needed), and some of the challenges I encountered as a newbie open source contributor.
 
-### What is Service Topology?
+## What is Service Topology?
 
 Unlike the term "topology" may suggest, Service Topology doesn't refer to the arrangement of services within a cluster. Instead, it refers to the ability to route traffic for specific services based on a predetermined node topology. This capability was introduced in Kubernetes v1.17 as an alpha feature.
 
@@ -28,7 +28,7 @@ Figure 1.1 shows what topology-aware service routing looks like. Suppose we have
 
 _Fig. 1.1: An example of Service Topology_
 
-### How does Service Topology work?
+## How does Service Topology work?
 
 While writing the Service Topology RFC, I often asked myself this very question. Initially, the feature seemed complex but there are two Kubernetes resources that facilitate topology-aware service routing: **topology** **labels** and **EndpointSlices.**
 
@@ -48,7 +48,7 @@ EndpointSlices is an exciting yet underrated feature that was released a version
 
 EndpointSlices break Endpoints up into multiple objects. This is fundamental to Service Topology because, as part of the change, these subsets aren't just separated, they also contain more identifying information, such as the topology domain they belong to. As a bonus, EndpointSlices also include support for dual-stack addresses, paving the way for more advanced networking logic that can be developed in the Kubernetes ecosystem.
 
-### Putting it all together: Service Topology in Linkerd
+## Putting it all together: Service Topology in Linkerd
 
 So how does Linkerd fit into our Service Topology discussion? You guessed it: it enables topology-aware service routing! Linkerd supports Service Topology rather than extending it or doing something special to it. It enables locality-based routing by leveraging the same resources that the kube-proxy uses. Most of the changes we made were to support Service Topology on the Destination service side, which I’ll cover next.
 
@@ -67,7 +67,7 @@ This differs widely from how the kube-proxy handles routing. For one, we don’t
 
 **Service Topology** support was easier said than done. First, to identify the traffic source we had to add additional contextual data to requests sent from the proxy to the service. After all, to calculate topology we must look at both — the source and destination nodes. That was a dedicated effort in itself. It required a solid way to grab the name of the source node without messing up the control plane internals. We also needed to identify the best way to add contextual data moving forward. We decided to turn the contextual information represented as a string (denoting the namespace of the pod) into JSON. This ensured the value would continue to be opaque to most of the API while only requiring a code change to unmarshal the information on the destination service side. The biggest challenge was keeping track of the different topology preferences and the available endpoints. As I was about to learn, filtering implies state. A lot of edge cases that I didn't account for in the RFC started to surface: how do we do fallbacks? What happens when the service object is modified after we picked a preference? And so on. The answer to all of it was state**.** We decided to change the EndpointTranslator component to be stateful, keeping track of the total amount of endpoints, as well as a snapshot of the previously filtered set. This alleviated most of the concerns around the substantiated edge cases, and made coming up with filtering logic a breeze.
 
-#### Conclusion
+### Conclusion
 
 I certainly didn't expect this feature to take the turns it had. For one, as a final year undergraduate student, the prospect of coming up with a solution with no help whatsoever seemed far off — until it wasn’t. Knowing that my work will make other people's lives easier is incredibly gratifying. What’s more, I get to tell people how to deal with feature gates and contextual data!
 
