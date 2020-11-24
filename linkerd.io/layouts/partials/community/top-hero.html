@@ -1,25 +1,31 @@
-<div class="wrapper body-header has-background-bright-blue has-text-white">
+<div class="community-top-hero wrapper body-header has-background-bright-blue has-text-white">
   <div class="columns center-column is-marginless is-fullwidth">
     <div class="column">
-      <div class="container columns community-top-hero is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
-        <div class="column"></div>
-        <div class="column center">
+      <div class="container columns is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
+        <div class="column is-4 is-offset-1 py-4 community-top-hero__image-wrapper">
+          <img src="{{.image}}" alt="">
+
+          {{ partial "community/trophy.svg"}}
+          <svg width="0" height="0">
+            <defs>
+              <clipPath id="star" clipPathUnits="objectBoundingBox">
+                  <path d="M0.5 0L0.574891 0.0512056L0.66235 0.0270914L0.716556 0.0998394L0.807106 0.10543L0.834754 0.191837L0.918583 0.226526L0.916677 0.317229L0.9847 0.377257L0.953446 0.462426L0.998292 0.54129L0.941077 0.611696L0.957887 0.700848L0.880911 0.748861L0.867862 0.838641L0.779467 0.859059L0.737974 0.939737L0.647738 0.930347L0.582297 0.993181L0.5 0.955L0.417703 0.993181L0.352262 0.930347L0.262026 0.939737L0.220533 0.859059L0.132138 0.838641L0.119089 0.748861L0.0421133 0.700848L0.0589229 0.611696L0.00170776 0.54129L0.0465541 0.462426L0.0152999 0.377257L0.0833232 0.317229L0.0814168 0.226526L0.165246 0.191837L0.192894 0.10543L0.283444 0.0998394L0.33765 0.0270914L0.425109 0.0512056L0.5 0Z" fill="#C4C4C4"/>
+              </clipPath>
+            </defs>
+          </svg>                     
+        </div>
+        <div class="column is-6 is-offset-1 center">
           <div class="notification">
             <h1 class="title is-size-1">{{.title}}</h1>
             <h5 class="title is-size-5">{{.description | markdownify}}</h5>
             <div class="columns">
               {{ range .buttons }}
                 <div class="column">
-                  <a href="{{.url}}" class="button is-primary is-large is-fullwidth" target="_blank">
+                  <a href="{{.url}}" class="button is-primary is-large">
                     {{.caption}}
                   </a>
                 </div>
               {{ end }}
-            </div>
-            <div class="github-stat-buttons">
-              <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
-              <a class="github-button" href="https://github.com/linkerd/linkerd2/subscription" data-icon="octicon-eye" data-size="large" data-show-count="true" aria-label="Watch linkerd/linkerd2 on GitHub" data-proofer-ignore="data-proofer-ignore">Watch</a>
-              <a class="github-button" href="https://github.com/linkerd/linkerd2/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork linkerd/linkerd2 on GitHub">Fork</a>
             </div>
           </div>
         </div>

@@ -1,0 +1,101 @@
+{{ $scratch := newScratch }}
+{{ if .Param "author" }}
+  {{ $authorId := .Param "author" }}
+  {{ $author := (index $.Site.Data.authors $authorId)}}
+  {{ $scratch.Set "authorName" $author.name }}
+{{ end }}
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Corporation",
+      "name": "Linkerd",
+      "alternateName": "Linkerd",
+      "url": "https://linkerd.io",
+      "logo": "https://linkerd.io/images/logo-only-200h.png",
+      "sameAs": [
+        "https://twitter.com/Linkerd",
+        "https://github.com/linkerd",
+      ]
+    }
+    </script>
+
+{{ if .Params.schema }}
+  <script type="application/ld+json">
+    {{ .Params.schema | safeJS }}
+  </script>
+{{ end }}
+
+{{ if (and (or (eq .Section "resources") (eq .Section "blog")) (.IsPage)) }}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": "{{ $scratch.Get "authorName" }}",
+      "datePublished": {{ .PublishDate }},
+      "dateModified": {{ .Lastmod }},
+      "headline": {{ .Params.title }},
+      "image": {{ .Params.feature | absURL }},
+      "publisher": {
+        "@type": "Organization",
+        "name": "buoyant.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://buoyant.io/uploads/buoyant-logo.png",
+          "width": 419,
+          "height": 85
+        }
+      }
+    }
+  </script>
+{{ end }}
+
+{{ if eq .Params.enableVideoSchema true }}
+  {{ $permalink := .Permalink }}
+  {{ range .Params.schema_video }}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "{{.title}}",
+        "description": "{{.description}}",
+        "thumbnailUrl": "{{.thumbnailUrl}}",
+        "uploadDate": "{{.uploadDate}}",
+        "duration": "{{.duration}}",
+        "publisher": {
+          "@type": "Organization",
+          "name": "buoyant.io",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://buoyant.io/uploads/buoyant-logo.png",
+            "width": 419,
+            "height": 85
+          }
+        },
+        "embedUrl": {{.embedUrl}},
+        "contentUrl": "{{$permalink}}"
+      }
+    </script>
+  {{ end }}
+{{ end }}
+
+{{ if eq .Params.enableFAQSchema true }}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+      {{ range .Params.schema_faq.faqs }}
+          {
+            "@type": "Question",
+            "name": "{{.question}}",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "{{.answer}}"
+            }
+          },
+        {{ end }}
+      ]
+    }
+  </script>
+{{ end }}
