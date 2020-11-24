@@ -5,7 +5,7 @@ draft = true
 feature = ""
 tags = ["service routing"]
 thumbnail = "/uploads/abstract-5719221_1920.jpg"
-title = "Topology-Aware Service Routing on Kubernetes with Linkerd "
+title = "Topology-Aware Service Routing on Kubernetes with Linkerd"
 
 +++
 A few months ago, I was browsing through issues and feature requests in the Linkerd2 repository in search of a cool topic to submit to the [LFX Mentorship program](https://github.com/cncf/mentoring). To participate, students were asked to propose an RFC for a feature that, if accepted, they'd implement. My choice — Service Topology — which, at the time, was a newly released Kubernetes feature.
