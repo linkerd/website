@@ -11,7 +11,7 @@ top_hero:
   image: "/uploads/community-hero-example.jpg"
   buttons:
   - caption: Meet all our Linkerd Heros
-    url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
+    url: "/heroes"
   image_on_the_right: false
 two_col_section:
   title: Tell your story
