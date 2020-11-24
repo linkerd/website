@@ -54,6 +54,7 @@ allowed to target co-located pods. Now all traffic between service A and B will
 exclusively route via B-1.
 
 {{< fig src="/uploads/topology-example.png"
+    center="true"
     title="An example of Service Topology" >}}
 
 ## How does Service Topology work?
@@ -74,6 +75,7 @@ with service topology:
 - topology.kubernetes.io/region
 
 {{< fig src="/uploads/topology-labels.png"
+    center="true"
     title="The different topological domains of a cluster, as given by topology label" >}}
 
 In the
@@ -106,6 +108,7 @@ changes we made were to support Service Topology on the Destination service
 side, which I’ll cover next.
 
 {{< fig src="/uploads/topology-discovery-service.png"
+    center="true"
     title="An overly simplified view of service discovery in Linkerd" >}}
 
 Figure 2.2 depicts a high-level overview of what I call “the four steps to
