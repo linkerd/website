@@ -1,11 +1,13 @@
 <div class="wrapper has-background-white py-6">
-    <div class="columns is-vcentered container {{ if .image_on_the_right }} row-reverse {{ end }}">
-        <div class="column is-4 is-offset-1">
-            <img src="/uploads/heros-trophy.svg" alt="">
-        </div>
-        <div class="column is-6 is-offset-1">
-            <h1 class="is-size-1">{{.title}}</h1>
-            <p>{{.description}}</p>
-        </div>
+  <div
+    class="columns is-vcentered container {{ if .image_on_the_right }} row-reverse {{ end }}"
+  >
+    <div class="column is-6 is-4-desktop is-offset-1-desktop">
+      <img src="/uploads/heros-trophy.svg" alt="" />
     </div>
+    <div class="column is-6 is-5-desktop is-offset-1-desktop">
+      <h1 class="is-size-1">{{.title}}</h1>
+      <p>{{.description}}</p>
+    </div>
+  </div>
 </div>
