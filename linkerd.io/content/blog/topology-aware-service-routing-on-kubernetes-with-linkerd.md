@@ -24,7 +24,7 @@ The need for topology-aware service routing originated from the higher cost asso
 
 Figure 1.1 shows what topology-aware service routing looks like. Suppose we have a cluster with two nodes (node-1 and node-2). Let's say service A wants to talk to service B. Without Service Topology any pod from service B’s pod pool (B-1, B-2, or B-3) could be targeted_._ In the bottom half of the diagram, you'll see the same scenario but this time with Service Topology enabled. Service A is only allowed to target co-located pods. Now all traffic between service A and B will exclusively route via B-1.
 
-![An example of Service Topology](https://lh5.googleusercontent.com/SCZygV46YvCz8MkE81k2cjhCcFY0lNKaqgNdDv9uHBc0Vw4YuIPN-NfUegk0Bc_x817yu_RYYKMpAQEgrPVr4Z8XPbo7Rno1WAug267C6i3jc8OFywGCvaOuFcp4uUex66wVWc8d "An example of Service Topology" =602x712)
+![](/uploads/topology-example.png)
 
 _Fig. 1.1: An example of Service Topology_
 
@@ -38,7 +38,7 @@ Topology labels are typical Kubernetes k/v pairs used to represent topological c
 * topology.kubernetes.io/zone
 * topology.kubernetes.io/region
 
-![The different topological domains of a cluster, as given by topology labels](https://lh5.googleusercontent.com/-cLRSmKvZxCK9e-X2_Cmoo0q77n5X61AwUM0Gmf5RrFzhxzJAUHMMUkqTvipHMHyoPeUMDWHss-LwSmRL9VPJTMGdaCuYYctap4Wm46UwPr0d3B3aBvRkVQ4UJVs5v7GI53RYKMi "The different topological domains of a cluster, as given by topology labels" =406x406)
+![](/uploads/topology-labels.png)
 
 _Fig. 1.2: The different topological domains of a cluster, as given by topology labels_
 
@@ -52,7 +52,7 @@ EndpointSlices break Endpoints up into multiple objects. This is fundamental to 
 
 So how does Linkerd fit into our Service Topology discussion? You guessed it: it enables topology-aware service routing! Linkerd supports Service Topology rather than extending it or doing something special to it. It enables locality-based routing by leveraging the same resources that the kube-proxy uses. Most of the changes we made were to support Service Topology on the Destination service side, which I’ll cover next.
 
-![](https://lh4.googleusercontent.com/6snc8Z26uKoHYIPxhZETMhGUk4jeGR3EV-GaBhdjN60CY-SnHHJjPKEGaLjZjy0P6UC5VHGpK0LvYtHBOqaLK3z2SQ64K6iq6nYOkkJjwzh9Vqf2Jqgz-AKI79rajXdZQHKu61aB =602x448)
+![](/uploads/topology-discovery-service.png)
 
 (_fig 2.2: An overly simplified view of service discovery in Linkerd_ )
 
