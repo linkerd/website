@@ -8,12 +8,37 @@ top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
     and friendly community of adopters and contributors.
-  image: "/uploads/community_hero.png"
+  image: "/uploads/community-hero-example.jpg"
   buttons:
-  - caption: I gave a talk!
-    url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
-  - caption: I use Linkerd!
-    url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
+  - caption: Meet all our Linkerd Heros
+    url: "/heroes"
+  image_on_the_right: false
+two_col_section:
+  title: Tell your story
+  description: Talking about the problems you’re solving could save someone weeks or even months of toil. Share your lessons learned with our community!
+  links:
+  - caption: Become a Community Anchor
+    url: 
+    icon_name: fas fa-anchor
+  image: "/uploads/tell-your-story.png"
+  image_on_the_right: true
+two_col_section_2:
+  title: Get Involved
+  description: Whether contributing code, flagging bugs, or helping your peers on Slack, contributors come in all shapes and sizes. Join our thriving community today! 
+  links:
+  - caption: Github
+    url: 
+    icon_name: fab fa-github
+  - caption: Report a Bug
+    url: 
+    icon_name: fas fa-bug
+  - caption: Slack
+    url: 
+    icon_name: fab fa-slack
+  - caption: Summer of Code
+    url: 
+    icon_name: fas fa-code
+  image: "/uploads/get-involved.png"
   image_on_the_right: false
 link_lists:
   links_list:
@@ -50,16 +75,6 @@ link_lists:
     - caption: Calendar
       url: https://calendar.google.com/calendar/embed?src=buoyant.io_j28ik70vrl3418f4oldkdici7o%40group.calendar.google.com
       icon_name: far fa-calendar
-talk_hero:
-  title: Giving a talk or hosting a meetup about Linkerd?
-  description: Download an up-to-date slide deck or request swag to support your talk.
-  image: "/uploads/IMG_3409.JPG"
-  image_on_the_right: false
-  buttons:
-  - caption: Get Slides
-    url: https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit#slide=id.g43a491cf2f_1_4
-  - caption: Get Meetup Swag
-    url: https://docs.google.com/forms/d/e/1FAIpQLSfO9jILT-2B3XNi-2IJvLEfPuhyf_Xxc_EqYl3dU8CgVtQCqQ/viewform
 jobs:
   title: Jobs in the Community
   description: Check out these Linkerd related jobs from companies who love Linkerd
