@@ -43,8 +43,8 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 
 ## The "pre-kubernetes-setup" checks {#pre-k8s}
 
-These checks only run when the `--pre` flag is set This flag is intended for
-use prior to running `linkerd install`, to verify you have the correct RBAC
+These checks only run when the `--pre` flag is set This flag is intended for use
+prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
 ```bash
@@ -100,7 +100,8 @@ for modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
+and the
+[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ### √ has NET_RAW capability {#pre-k8s-cluster-net-raw}
 
@@ -118,7 +119,8 @@ modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
+and the
+[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
 
@@ -254,8 +256,7 @@ kubectl version --client --short
 To fix please update kubectl version.
 
 For more information on upgrading Kubernetes, see the page in the Kubernetes
-Documentation on
-[Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
+Documentation.
 
 ## The "linkerd-config" checks {#l5d-config}
 
@@ -617,11 +618,11 @@ Example failures:
     see https://linkerd.io/checks/#l5d-identity-cert-config-valid
 ```
 
-Ensure that your `linkerd-identity-issuer` secret contains the correct keys
-for the `scheme` that Linkerd is configured with. If the scheme is
-`kubernetes.io/tls` your secret should contain the `tls.crt`, `tls.key`
-and `ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the
-required keys are `crt.pem` and `key.pem`.
+Ensure that your `linkerd-identity-issuer` secret contains the correct keys for
+the `scheme` that Linkerd is configured with. If the scheme is
+`kubernetes.io/tls` your secret should contain the `tls.crt`, `tls.key` and
+`ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the required
+keys are `crt.pem` and `key.pem`.
 
 ### √ trust roots are using supported crypto algorithm {#l5d-identity-trustAnchors-use-supported-crypto}
 
@@ -649,10 +650,10 @@ Example failure:
 ```
 
 Failures of such nature indicate that your roots have expired. If that is the
-case you will have to update both the root and issuer certificates at once.
-You can follow the process outlined in
-[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
-to get your cluster back to a stable state.
+case you will have to update both the root and issuer certificates at once. You
+can follow the process outlined in
+[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/) to
+get your cluster back to a stable state.
 
 ### √ trust roots are valid for at least 60 days {#l5d-identity-trustAnchors-not-expiring-soon}
 
@@ -665,9 +666,10 @@ Example warnings:
     see https://linkerd.io/checks/#l5d-identity-trustAnchors-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of some of your roots is approaching.
-In order to address this problem without incurring downtime, you can follow
-the process outlined in [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+This warning indicates that the expiry of some of your roots is approaching. In
+order to address this problem without incurring downtime, you can follow the
+process outlined in
+[Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
 
 ### √ issuer cert is using supported crypto algorithm {#l5d-identity-issuer-cert-uses-supported-crypto}
 
@@ -709,8 +711,8 @@ Example warning:
 ```
 
 This warning means that your issuer certificate is expiring soon. If you do not
-rely on external certificate management solution such as `cert-manager`, you
-can follow the process outlined in
+rely on external certificate management solution such as `cert-manager`, you can
+follow the process outlined in
 [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/)
 
 ### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-anchor}
@@ -724,12 +726,12 @@ Example error:
 ```
 
 This error indicates that the issuer certificate that is in the
-`linkerd-identity-issuer` secret cannot be verified with any of the roots
-that Linkerd has been configured with. Using the CLI install process, this
-should never happen. If Helm was used for installation or the issuer
-certificates are managed by a malfunctioning certificate management solution,
-it is possible for the cluster to end up in such an invalid state. At that
-point the best to do is to use the upgrade command to update your certificates:
+`linkerd-identity-issuer` secret cannot be verified with any of the roots that
+Linkerd has been configured with. Using the CLI install process, this should
+never happen. If Helm was used for installation or the issuer certificates are
+managed by a malfunctioning certificate management solution, it is possible for
+the cluster to end up in such an invalid state. At that point the best to do is
+to use the upgrade command to update your certificates:
 
 ```bash
 linkerd upgrade \
@@ -772,7 +774,7 @@ Example failure:
 ```
 
 Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
-`tls.crt` and `tls.key` data entries.  For versions before 2.9, the secret is
+`tls.crt` and `tls.key` data entries. For versions before 2.9, the secret is
 named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
 entries.
 
@@ -796,10 +798,9 @@ Example failure:
 ```
 
 This warning indicates that the expiry of one of your webhooks (tap API server,
-proxy-injector or sp-validator) cert is approaching.  In order to address this
+proxy-injector or sp-validator) cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS
-Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
+[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
 
 ### √ proxy-injector webhook has valid cert {#l5d-proxy-injector-webhook-cert-valid}
 
@@ -812,7 +813,7 @@ Example failure:
 ```
 
 Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the
-appropriate `tls.crt` and `tls.key` data entries.  For versions before 2.9, the
+appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
 secret is named `linkerd-proxy-injector-tls` and it should contain the `crt.pem`
 and `key.pem` data entries.
 
@@ -836,7 +837,7 @@ Example failure:
 ```
 
 Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the
-appropriate `tls.crt` and `tls.key` data entries.  For versions before 2.9, the
+appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
 secret is named `linkerd-sp-validator-tls` and it should contain the `crt.pem`
 and `key.pem` data entries.
 
@@ -864,15 +865,15 @@ Example warning:
     see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
-Observing this warning indicates that some of your meshed pods have proxies
-that have stale certificates. This is most likely to happen during `upgrade`
-operations that deal with cert rotation. In order to solve the problem you
-can use `rollout restart` to restart the pods in question. That should cause
-them to pick the correct certs from the `linkerd-config` configmap.
-When `upgrade` is performed using the `--identity-trust-anchors-file` flag to
-modify the roots, the Linkerd components are restarted. While this operation
-is in progress the `check --proxy` command may output a warning, pertaining to
-the Linkerd components:
+Observing this warning indicates that some of your meshed pods have proxies that
+have stale certificates. This is most likely to happen during `upgrade`
+operations that deal with cert rotation. In order to solve the problem you can
+use `rollout restart` to restart the pods in question. That should cause them to
+pick the correct certs from the `linkerd-config` configmap. When `upgrade` is
+performed using the `--identity-trust-anchors-file` flag to modify the roots,
+the Linkerd components are restarted. While this operation is in progress the
+`check --proxy` command may output a warning, pertaining to the Linkerd
+components:
 
 ```bash
 ‼ data plane proxies certificate match CA
@@ -883,9 +884,9 @@ the Linkerd components:
     see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
-If that is the case, simply wait for the `upgrade` operation to complete.
-The stale pods should terminate and be replaced by new ones, configured with
-the correct certificates.
+If that is the case, simply wait for the `upgrade` operation to complete. The
+stale pods should terminate and be replaced by new ones, configured with the
+correct certificates.
 
 ## The "linkerd-api" checks {#l5d-api}
 
@@ -948,12 +949,10 @@ Example failure:
     Error calling Prometheus from the control plane: FAIL
 ```
 
-{{< note >}}
-This will fail if you have changed your default cluster domain from
+{{< note >}} This will fail if you have changed your default cluster domain from
 `cluster.local`, see the
 [associated issue](https://github.com/linkerd/linkerd2/issues/1720) for more
-information and potential workarounds.
-{{< /note >}}
+information and potential workarounds. {{< /note >}}
 
 Validate that the Prometheus instance is up and running:
 
@@ -981,12 +980,15 @@ Example failure:
 × FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
-tap uses the [kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+tap uses the
+[kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 to allow users to have k8s RBAC on top. This model has the following specific
 requirements in the cluster:
 
-- tap Server must be [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
-- The kube-apiserver must be correctly configured to [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
+- tap Server must be
+  [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
+- The kube-apiserver must be correctly configured to
+  [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
 
 ## The "linkerd-service-profile" checks {#l5d-sp}
 
@@ -1594,9 +1596,9 @@ Example error:
 ```
 
 This error indicates that the local RBAC permissions of the service mirror
-service account are not correct. In order to ensure that you have the
-correct verbs and resources you can inspect your ClusterRole and Role
-object and look at the rules section.
+service account are not correct. In order to ensure that you have the correct
+verbs and resources you can inspect your ClusterRole and Role object and look at
+the rules section.
 
 Expected rules for `linkerd-service-mirror-access-local-resources` cluster role:
 
@@ -1727,8 +1729,8 @@ Example errors:
     see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
 ```
 
-The error above indicates that your trust anchors are not compatible. In order to
-fix that you need to ensure that both your anchors contain identical sets of
+The error above indicates that your trust anchors are not compatible. In order
+to fix that you need to ensure that both your anchors contain identical sets of
 certificates.
 
 ```bash
@@ -1738,10 +1740,10 @@ certificates.
     see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
 ```
 
-Such an error indicates that there is a problem with your anchors on the
-cluster named `remote` You need to make sure the identity config aspect
-of your Linkerd installation on the `remote` cluster is ok.  You can run
-`check` against the remote cluster to verify that:
+Such an error indicates that there is a problem with your anchors on the cluster
+named `remote` You need to make sure the identity config aspect of your Linkerd
+installation on the `remote` cluster is ok. You can run `check` against the
+remote cluster to verify that:
 
 ```bash
 linkerd --context=remote check
@@ -1757,10 +1759,10 @@ Example errors:
     see https://linkerd.io/checks/#l5d-multicluster-daisy-chaining for hints
 ```
 
-This error indicates that a mirror service has been exported, causing
-a "daisy chain" where requests can come in to the cluster through the local gateway
-and be immediately sent out of the cluster to a target gateway.
-If the target gateway is in the source cluster, this can create an infinite loop.
+This error indicates that a mirror service has been exported, causing a "daisy
+chain" where requests can come in to the cluster through the local gateway and
+be immediately sent out of the cluster to a target gateway. If the target
+gateway is in the source cluster, this can create an infinite loop.
 
 Similarly, if an exported service routes to a mirror service by a traffic split,
 the same daisy chain effect occurs.
@@ -1778,12 +1780,13 @@ Example errors:
 
 The error above indicates that some mirror services in the source cluster do not
 have associated endpoints resources. These endpoints are created by the Linkerd
-service mirror controller when creating a mirror service with endpoints values as
-the remote gateway's external IP.
+service mirror controller when creating a mirror service with endpoints values
+as the remote gateway's external IP.
 
 Such an error indicates that there could be a problem with the creation of the
 mirror resources by the service mirror controller or the mirror gateway service
-in the source cluster or the external IP of the gateway service in target cluster.
+in the source cluster or the external IP of the gateway service in target
+cluster.
 
 ### √ all gateway mirrors have endpoints {#l5d-multicluster-gateways-endpoints}
 
@@ -1796,20 +1799,20 @@ Example errors:
     see https://linkerd.io/checks/#l5d-multicluster-gateways-endpoints for hints
 ```
 
-The error above indicates that some gateway mirror services in the source cluster
-do not have associated endpoints resources. These endpoints are created by the Linkerd
-service mirror controller on the source cluster whenever a link is established with
-a target cluster.
+The error above indicates that some gateway mirror services in the source
+cluster do not have associated endpoints resources. These endpoints are created
+by the Linkerd service mirror controller on the source cluster whenever a link
+is established with a target cluster.
 
 Such an error indicates that there could be a problem with the creation of the
-resources by the service mirror controller  or the external IP of the
-gateway service in target cluster.
+resources by the service mirror controller or the external IP of the gateway
+service in target cluster.
 
 ### √ all referenced/cluster gateways are valid {#l5d-multicluster-gateways-exist}
 
-This check is used to validate gateways. These are performed perform both
-at the source cluster using the kube-configs of the linked remote clusters, and
-also at the target cluster directly(if there are any exported services present).
+This check is used to validate gateways. These are performed perform both at the
+source cluster using the kube-configs of the linked remote clusters, and also at
+the target cluster directly(if there are any exported services present).
 
 Example errors:
 
@@ -1826,8 +1829,9 @@ Example errors:
 A gateway is considered valid if it exists, has a external IP, and does not have
 any mis-configured ports.
 
-A Linkerd gateway service should have the following ports exposed i.e `mc-gateway`
-and `mc-probe`, which are used to pass requests and check health respectively.
+A Linkerd gateway service should have the following ports exposed i.e
+`mc-gateway` and `mc-probe`, which are used to pass requests and check health
+respectively.
 
 ```bash
 ‼ all cluster gateways are valid
