@@ -1,5 +1,5 @@
 +++
-author = ""
+author = "matei"
 date = 2020-11-23T00:00:00Z
 draft = true
 feature = ""
@@ -8,7 +8,6 @@ thumbnail = "/uploads/abstract-5719221_1920.jpg"
 title = "Topology-Aware Service Routing on Kubernetes with Linkerd"
 
 +++
-
 A few months ago, I was browsing through issues and feature requests in the
 Linkerd2 repository in search of a cool topic to submit to the
 [LFX Mentorship program](https://github.com/cncf/mentoring). To participate,
