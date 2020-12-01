@@ -145,18 +145,20 @@ application scales.
 
 Using Linkerd2-proxy allows us to keep tight reins on Linkerd's resource
 consumption. In our internal benchmarks of Linkerd and Istio using
-[Kinvolk's open source benchmark harness](https://github.com/kinvolk/service-mesh-benchmark),
-for example, at 500 RPS (requests per second) we see Linkerd2-proxy instances
-consistently between **12mb** and **14mb** of memory, while Istio's Envoy ranged
-between **115mb** and **150mb**—ten times the size. Similarly, Linkerd2-proxy's
-CPU usage was consistently at **15mc** (millicores), while Istio's Envoy ranged
-from **22mc** to **156mc**—from 50% more to 10x more.
+[Kinvolk's open source benchmark
+harness](https://github.com/kinvolk/service-mesh-benchmark), for example, at
+4,000 RPS (requests per second) of ingress traffic, we see Linkerd2-proxy
+instances consistently between **14mb** and **15mb** of memory, while Istio's
+Envoy ranged between **135mb** and **175mb**—ten times the size. Similarly,
+Linkerd2-proxy's CPU usage for the test run was consistently at **15ms** (CPU
+milliseconds) per instance, while Istio's Envoy ranged from **22ms** to
+**156ms**—from 50% more to 10x more.
 
-Again, this is not an entirely fair comparison. This is one particular
-application and one particular configuration, and undoubtedly some of Istio's
-design decisions played a big role here. But Istio is built by world-class
-engineers, and the point is: if Linkerd were built on Envoy, we'd have to make
-many of those same design decisions ourselves.
+Again, this is not an entirely fair comparison. These are internal benchmarks
+against one particular application and one particular configuration, and
+undoubtedly some of Istio's design decisions played a big role here. But Istio
+is built by world-class engineers, and the point is: if Linkerd were built on
+Envoy, we'd have to make many of those same design decisions ourselves.
 
 _Tl;dr_: In practice, in the service mesh context, Linkerd2-proxy uses a
 fraction of the system resources that Envoy does.
