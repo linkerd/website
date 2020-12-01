@@ -4,11 +4,10 @@ description = "Linkerd encrypts your service's traffic by default."
 +++
 
 By default, [Linkerd automatically enables mutual Transport Layer Security
-(mTLS)](/2/features/automatic-mtls/) for most HTTP-based communication between
-meshed pods, by establishing and authenticating secure, private TLS connections
-between Linkerd proxies. Simply [add your
-services](/2/tasks/adding-your-service/) to Linkerd, and Linkerd will take care
-of the rest.
+(mTLS)](/2/features/automatic-mtls/) for TCP traffic between meshed pods, by
+establishing and authenticating secure, private TLS connections between Linkerd
+proxies. Simply [add your services](/2/tasks/adding-your-service/) to Linkerd,
+and Linkerd will take care of the rest.
 
 Linkerd's automatic mTLS is done in a way that's completely transparent to
 the application. Of course, sometimes it's helpful to be able to validate
@@ -24,7 +23,7 @@ for more.
 
 ## Validating mTLS with `linkerd edges`
 
-To validate that mTLS is working, you can view a summary of the HTTP
+To validate that mTLS is working, you can view a summary of the TCP
 connections between services that are managed by Linkerd using the [`linkerd
 edges`](/2/reference/cli/edges/) command.  For example:
 

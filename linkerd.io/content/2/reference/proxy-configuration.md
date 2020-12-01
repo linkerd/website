@@ -20,11 +20,14 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-limit: "1.5"
+        config.linkerd.io/proxy-cpu-limit: "1"
         config.linkerd.io/proxy-cpu-request: "0.2"
         config.linkerd.io/proxy-memory-limit: 2Gi
         config.linkerd.io/proxy-memory-request: 128Mi
 ```
+
+See [here](/2/tasks/configuring-proxy-concurrency/) for details on tuning the
+proxy's resource usage.
 
 Note that configuration overrides on proxies injected using the `linkerd inject`
 command is planned for release 2.4. Follow this

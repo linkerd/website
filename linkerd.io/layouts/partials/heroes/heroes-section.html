@@ -1,0 +1,27 @@
+<div class="wrapper py-6 has-background-light-blue">
+  <div class="container columns">
+    <div class="column is-12 is-10-desktop is-offset-1-desktop">
+      <div class="columns is-multiline">
+        {{ range sort . "times_winner" "desc" }}
+        <div class="column is-6">
+          <div class="heroes-card box is-flex is-align-items-center px-2 py-3">
+            <figure class="image is-96x96">
+              <img class="is-rounded" src="{{.image}}" alt="" />
+            </figure>
+            <div>
+              <h3 class="is-size-5 has-text-weight-light">{{.name}}</h3>
+              <p>{{.job_title}}</p>
+              <p>{{.location}}</p>
+            </div>
+            <div
+              class="heroes-card__no-of-wins is-align-self-flex-end image is-48x48 has-text-weight-normal"
+            >
+              {{.times_winner}}
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

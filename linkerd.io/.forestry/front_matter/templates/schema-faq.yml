@@ -1,0 +1,37 @@
+---
+label: 'Schema: FAQ'
+hide_body: true
+fields:
+- name: enableFAQSchema
+  type: boolean
+  label: Enable FAQ Schema
+- name: schema_faq
+  type: field_group
+  config: {}
+  fields:
+  - name: faqs
+    type: field_group_list
+    fields:
+    - name: question
+      type: text
+      config:
+        required: true
+      label: Question
+    - name: answer
+      type: textarea
+      default: ''
+      config:
+        required: true
+        wysiwyg: false
+        schema:
+          format: markdown
+      label: Answer
+    config:
+      min: 
+      max: 
+      labelField: 
+    label: FAQs
+  label: 'Schema: FAQ'
+  showOnly:
+    field: enableFAQSchema
+    value: true
