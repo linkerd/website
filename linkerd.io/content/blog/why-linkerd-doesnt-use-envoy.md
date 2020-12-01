@@ -15,8 +15,12 @@ title = "Why Linkerd doesn't use Envoy"
 In this article I'm going to describe why Linkerd isn't built on
 [Envoy](https://envoyproxy.io).
 
-Let me state upfront that this is not an "Envoy sucks" blog post. Envoy is a
-great project, is clearly a popular choice for many, and we have nothing but
+Honestly, I'm annoyed that I have to write this. It doesn't deserve a blog
+post. The Linkerd project has made a million technical decisions like this one
+and none of them really deserve blog posts. But sadly, here we are.
+
+Let me also state upfront that this is not an "Envoy sucks" blog post. Envoy is
+a great project, is clearly a popular choice for many, and we have nothing but
 respect for the fine folks who work on it. We recommend Envoy to Linkerd users
 every day in the form of ingress controllers like
 [Ambassador](https://github.com/datawire/ambassador), and there are production
@@ -28,7 +32,7 @@ dedicated "micro-proxy", called simply
 [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is optimized
 for the service mesh sidecar use case. Since several other service mesh
 projects are built on top of Envoy, we're often asked: Why doesn't Linkerd use
-Envoy like other service meshes?
+Envoy?
 
 The full answer to this question is nuanced and technical at heart—exactly the
 kind of content that tends to get swept away in the faddish, blog-post-driven
