@@ -15,7 +15,7 @@ support:
   companies:
   - description: Buoyant is the original creator of Linkerd and provides support,
       training, and enterprise products.
-    thumbnail: "/uploads/buoyant_thumbnail.svg"
+    thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
     title: Buoyant
     url: https://buoyant.io/linkerd-support/
 menu:
