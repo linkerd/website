@@ -202,7 +202,7 @@ Linkerd's data plane.
 
 Simplicity, resource consumption, and security were the driving factors in our
 decision to not adopt Envoy. However, we do believe that the choice of proxy is
-ultimatel an implementation detail. While we've invested tremendous amounts in
+ultimately an implementation detail. While we've invested tremendous amounts in
 Linkerd2-proxy, we do periodically re-evaluate Envoy. I can say with
 clarity that if the tradeoff for our users ever tips in Envoy's favor, we will
 adopt it without qualms.
