@@ -8,7 +8,7 @@ online Linkerd community meeting! William, Oliver, Thomas, and other Linkerd
 maintainers will discuss Linkerd roadmap, releases, and anything else on the
 agenda.
 
-We'll also be announcing the December Linkerd hero. This is a way to recognize
+We'll also be announcing the December Linkerd Hero. This is a way to recognize
 community members who help out on Slack or answer questions on Stackoverflow,
 share successes and failures with their peers, or contribute to the codebase and
 improve the Linkerd service mesh --- without our heroes, Linkerd wouldn't be
