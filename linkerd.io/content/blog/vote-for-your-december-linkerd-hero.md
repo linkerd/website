@@ -1,7 +1,6 @@
 +++
 author = "charles"
 date = 2020-12-02T00:00:00Z
-draft = true
 feature = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
 tags = ["heroes"]
 thumbnail = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
