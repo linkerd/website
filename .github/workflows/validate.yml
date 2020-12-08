@@ -10,7 +10,7 @@ jobs:
     name: Validate generated HTML
     runs-on: ubuntu-18.04
     container:
-      image: gcr.io/linkerd-io/website-builder:1.3.1
+      image: buoyantio/website-builder:v1.3.2
     steps:
     - name: Checkout code
       uses: actions/checkout@v1
