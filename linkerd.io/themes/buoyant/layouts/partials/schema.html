@@ -6,19 +6,50 @@
 {{ end }}
 
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Corporation",
-      "name": "Linkerd",
-      "alternateName": "Linkerd",
-      "url": "https://linkerd.io",
-      "logo": "https://linkerd.io/images/logo-only-200h.png",
-      "sameAs": [
-        "https://twitter.com/Linkerd",
-        "https://github.com/linkerd",
-      ]
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "LinkerD",
+    "image": "https://linkerd.io/images/logo-only-200h.png",
+    "description": "The world' s lightest, fastest service mesh.",
+    "brand": "Bouyant",
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://linkerd.io/2/getting-started/",
+      "priceCurrency": "USD",
+      "lowPrice": "0",
+      "offerCount": "1"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "1",
+      "reviewCount": "1"
+    },
+    "review": {
+      "@type": "Review",
+      "name": "Azharullah Shariff",
+      "reviewBody": "Just meshed up my k8s cluster with the awesome @Linkerd.. Never thought a service mesh adoption could be this easy!",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "datePublished": "2020-07-18",
+      "author": {
+        "@type": "Person",
+        "name": "Twitter"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "@md_azharullah"
+      }
     }
-    </script>
+  }
+</script>
 
 {{ if .Params.schema }}
   <script type="application/ld+json">
@@ -31,19 +62,19 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "author": "{{ $scratch.Get "authorName" }}",
+      "author": "{{ $scratch.Get " authorName " }}",
       "datePublished": {{ .PublishDate }},
       "dateModified": {{ .Lastmod }},
       "headline": {{ .Params.title }},
       "image": {{ .Params.feature | absURL }},
       "publisher": {
-        "@type": "Organization",
-        "name": "buoyant.io",
+        "@type": "Linkerd",
+        "name": "linkerd.io",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://buoyant.io/uploads/buoyant-logo.png",
-          "width": 419,
-          "height": 85
+          "url": "https://linkerd.io/images/logo-100h.png",
+          "width": 457,
+          "height": 100
         }
       }
     }
@@ -64,12 +95,12 @@
         "duration": "{{.duration}}",
         "publisher": {
           "@type": "Organization",
-          "name": "buoyant.io",
+          "name": "Linkerd",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://buoyant.io/uploads/buoyant-logo.png",
-            "width": 419,
-            "height": 85
+            "url": "https://linkerd.io/images/logo-100h.png",
+            "width": 457,
+            "height": 100
           }
         },
         "embedUrl": {{.embedUrl}},
@@ -85,7 +116,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-      {{ range .Params.schema_faq.faqs }}
+        {{ range .Params.schema_faq.faqs }}
           {
             "@type": "Question",
             "name": "{{.question}}",
