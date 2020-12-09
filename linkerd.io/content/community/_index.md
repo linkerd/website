@@ -9,7 +9,7 @@ top_hero:
   description:
     Linkerd is a community project! We'd love to have you join our active and
     friendly community of adopters and contributors.
-  image: '/uploads/community_hero.png'
+  image: '/uploads/ivan.jpg'
   buttons:
     - caption: Meet all our Linkerd Heros
       url: '/heroes/'
@@ -23,6 +23,9 @@ two_col_section:
     - caption: Become a Community Anchor
       url: '/community/anchor/'
       icon_name: fas fa-anchor
+    - caption: Meetup-in-a-Box
+      url: '/community/meetup-in-a-box/'
+      icon_name: fas fa-users
   image: '/uploads/tell-your-story.png'
   alt: 'Tell your story'
   image_on_the_right: true
