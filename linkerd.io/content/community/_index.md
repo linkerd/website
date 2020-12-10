@@ -79,7 +79,7 @@ link_lists:
       links:
         - caption: I gave a talk
           url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
-          icon_name: fa microphone
+          icon_name: fa fa-microphone
         - caption: I use Linkerd
           url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
           icon_name: fa fa-check-circle
