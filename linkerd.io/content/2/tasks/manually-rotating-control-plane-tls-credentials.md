@@ -117,12 +117,18 @@ certificates](/2/tasks/generate-certificates/).
 
 Next, we need to bundle the trust anchor currently used by Linkerd together with
 the new anchor. The following command uses `kubectl` to fetch the Linkerd config,
-`jq` to extract the current trust anchor, and `step` to combine it with the newly
-generated trust anchor:
+`jq`/[`yq`](https://github.com/mikefarah/yq) to extract the current trust anchor,
+and `step` to combine it with the newly generated trust anchor:
 
 ```bash
-kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' |  \
-jq -r .identityContext.trustAnchorsPem > original-trust.crt
+# For Linkerd < 2.9.0:
+kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' \
+  | jq -r .identityContext.trustAnchorsPem > original-trust.crt
+
+# For Linkerd >= 2.9.0:
+kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
+  | yq r - global.identityTrustAnchorsPEM > original-trust.crt
+
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
 rm original-trust.crt
 ```
