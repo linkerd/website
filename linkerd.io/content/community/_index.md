@@ -53,17 +53,6 @@ two_col_section_2:
   image_on_the_right: false
 link_lists:
   links_list:
-    - title: Get Involved
-      links:
-        - caption: Report a Bug
-          url: https://github.com/linkerd/linkerd2/issues
-          icon_name: fas fa-bug
-        - caption: GitHub
-          url: https://github.com/linkerd/linkerd2
-          icon_name: fab fa-github
-        - caption: Summer of Code
-          url: https://linkerd.io/gsoc/
-          icon_name: fas fa-code
     - title: Get Support
       links:
         - caption: Mailing List
@@ -86,6 +75,15 @@ link_lists:
         - caption: Calendar
           url: https://calendar.google.com/calendar/embed?src=buoyant.io_j28ik70vrl3418f4oldkdici7o%40group.calendar.google.com
           icon_name: far fa-calendar
+    - title: Get Swag
+      links:
+        - caption: I gave a talk
+          url: https://docs.google.com/forms/d/e/1FAIpQLSffBkzqjErpSY3ibkaZhy7_9AayVlIhya-5R4DvL-Ttq_wkjA/viewform
+          icon_name: fa microphone
+        - caption: I use Linkerd
+          url: https://docs.google.com/forms/d/e/1FAIpQLSe69G-4GmhMb9nzBO9Du0582eJJMHAmK0BQi1F23X6htsieLQ/viewform
+          icon_name: fa fa-check-circle
+
 jobs:
   title: Jobs in the Community
   description:
