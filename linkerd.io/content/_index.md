@@ -62,8 +62,6 @@ features_list:
     url: https://linkerd.io/choose-your-platform/
 companies_title: 
 companies:
-- image: "/uploads/heb-blue.svg"
-  link: https://www.heb.com/
 - image: "/uploads/logos/blue/expedia.svg"
   link: https://www.expedia.com
 - image: "/uploads/logos/blue/offerup.svg"
@@ -72,14 +70,14 @@ companies:
   link: https://ask.com/
 - image: "/uploads/logos/blue/bigcommerce.svg"
   link: https://www.bigcommerce.com/
-- image: "/uploads/logos/blue/chase.svg"
-  link: https://www.chase.com/
 - image: "/uploads/logos/blue/comcast.svg"
   link: https://www.xfinity.com/
 - image: "/uploads/logos/blue/ebay.svg"
   link: https://www.ebay.com/
 - image: "/uploads/logos/blue/godaddy.svg"
   link: https://godaddy.com/
+- image: "/uploads/heb-blue.svg"
+  link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
   link: https://www.walmart.com/
 - image: "/uploads/logos/blue/planet.svg"
