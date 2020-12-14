@@ -76,7 +76,7 @@ companies:
   link: https://www.ebay.com/
 - image: "/uploads/logos/blue/godaddy.svg"
   link: https://godaddy.com/
-- image: "/uploads/heb-blue.svg"
+- image: "/uploads/heb-blue-1.svg"
   link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
   link: https://www.walmart.com/
