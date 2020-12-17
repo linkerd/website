@@ -23,4 +23,4 @@ We were also joined by guest speaker, EverQuote's Matt Young. Matt shared his jo
 
 And last but not least, we announced our December Linkerd Hero, [Lutz Behnke](https://www.linkedin.com/in/lutz-behnke-096a19/) a.k.a. the "Cert Man." Lutz has [submitted four sizable PRs ](https://github.com/linkerd/linkerd2/pulls?q=is%3Apr+author%3Acypherfox+is%3Aclosed)since June focusing on cert-manager setup—single-handedly fast-tracking that effort. And, because he did it so thoughtfully while communicating well with the core maintainer team, his PRs were merged and he gained Hero recognition from his community peers.
 
-{{< youtube id="[fkG92qOhdo4](https://youtu.be/fkG92qOhdo4 "https://youtu.be/fkG92qOhdo4")" t="10" >}}
+{{< youtube id="fkG92qOhdo4" t="10" >}}
