@@ -26,4 +26,4 @@ TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
 HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
-HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-0"}
+HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-"}
