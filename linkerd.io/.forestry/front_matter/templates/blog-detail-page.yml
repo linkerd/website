@@ -33,6 +33,7 @@ fields:
   label: Featured Thumbnail
   name: feature
 pages:
+- linkerd.io/content/blog/december-linkerd-community-meeting.md
 - linkerd.io/content/blog/october-linkerd-community-meeting.md
 - linkerd.io/content/blog/topology-aware-service-routing-on-kubernetes-with-linkerd.md
 - linkerd.io/content/blog/under-the-hood-of-linkerd-s-state-of-the-art-rust-proxy-linkerd2-proxy.md
