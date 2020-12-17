@@ -19,9 +19,11 @@ IgnoreURLs:
   - https://kinvolk.io/
   - https://godaddy.com/
   - https://www.linkedin.com/
+  - https://twitter.com/*
+  - https://t.co/*
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
 HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
-HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-"}
+HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-0"}
