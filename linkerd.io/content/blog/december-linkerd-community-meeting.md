@@ -2,7 +2,7 @@
 author = "charles"
 date = 2020-12-15T00:00:00Z
 feature = "/uploads/screen-shot-2020-12-17-at-11-54-05-am.png"
-tags = []
+tags = ["meetup"]
 thumbnail = "/uploads/screen-shot-2020-12-17-at-11-54-05-am.png"
 title = "December Linkerd Community Meeting "
 
