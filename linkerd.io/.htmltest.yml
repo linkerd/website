@@ -18,8 +18,10 @@ IgnoreURLs:
   - https://offerup.com/
   - https://kinvolk.io/
   - https://godaddy.com/
+  - https://www.linkedin.com/
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
 HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
+HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-"}

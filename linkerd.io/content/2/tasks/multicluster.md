@@ -71,7 +71,7 @@ generate the trust anchor with step, you can run:
 
 ```bash
 step certificate create identity.linkerd.cluster.local root.crt root.key \
-  --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local
+  --profile root-ca --no-password --insecure
 ```
 
 This certificate will form the common base of trust between all your clusters.
@@ -90,7 +90,7 @@ using the trust anchor, run:
 ```bash
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
   --profile intermediate-ca --not-after 8760h --no-password --insecure \
-  --ca root.crt --ca-key root.key --san identity.linkerd.cluster.local
+  --ca root.crt --ca-key root.key
 ```
 
 An `identity` service in your cluster will use the certificate and key that you

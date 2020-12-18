@@ -7,7 +7,7 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/the-roadmap-for-linkerd-proxy.md
+  - blog/why-linkerd-doesnt-use-envoy.md
   - blog/announcing-linkerd-2-9.md
 description: ''
 keywords: []
