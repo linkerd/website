@@ -1,6 +1,6 @@
 +++
 title = "Securing Your Cluster"
-description = "RBAC best practices for your Linkerd installation."
+description = "Best practices for securing your Linkerd installation."
 +++
 
 Linkerd provides powerful introspection into your Kubernetes cluster and

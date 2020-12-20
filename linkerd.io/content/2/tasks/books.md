@@ -1,6 +1,6 @@
 +++
-title = "Demo: Books"
-description = "Try out some of Linkerd's features, such as per-route metrics with a demo application."
+title = "Debugging HTTP applications with per-route metrics"
+description = "Follow a long-form example of debugging a failing HTTP application using per-route metrics."
 +++
 
 This demo is of a Ruby application that helps you manage your bookshelf. It

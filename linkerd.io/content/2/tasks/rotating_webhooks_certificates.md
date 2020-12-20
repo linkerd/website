@@ -1,6 +1,6 @@
 +++
 title = "Rotating webhooks certificates"
-description = "Follow these steps to rotate your Linkerd webhooks certificates"
+description = "Follow these steps to rotate your Linkerd webhooks certificates."
 +++
 
 Linkerd uses the

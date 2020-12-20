@@ -1,6 +1,6 @@
 +++
 title = "Fault Injection"
-description = "Practice chaos engineering by injecting faults into services with Linkerd."
+description = "Linkerd provides mechanisms to programmatically inject failures into services."
 +++
 
 Fault injection is a form of chaos engineering where the error rate of a service

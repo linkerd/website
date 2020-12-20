@@ -1,6 +1,6 @@
 +++
 title = "Manually Rotating Control Plane TLS Credentials"
-description = "Update Linkerd's TLS trust anchor and issuer certificate"
+description = "Update Linkerd's TLS trust anchor and issuer certificate."
 aliases = [ "rotating_identity_certificates" ]
 +++
 
