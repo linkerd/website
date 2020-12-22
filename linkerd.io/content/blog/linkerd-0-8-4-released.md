@@ -22,7 +22,7 @@ So, as of Linkerd 0.8.4, Linkerd’s Kubernetes support and Consul support are b
 
 ## IMPROVED HTTP/2 AND GRPC SUPPORT
 
-Over the past few releases, [Oliver](http://twitter.com/olix0r) has been working hard on improving Linkerd’s HTTP/2 support. Since Linkerd doesn’t parse the request body, HTTP/2 support also gives us [gRPC support](https://linkerd.io/features/grpc/).
+Over the past few releases, [Oliver](https://twitter.com/olix0r) has been working hard on improving Linkerd’s HTTP/2 support. Since Linkerd doesn’t parse the request body, HTTP/2 support also gives us [gRPC support](https://linkerd.io/features/grpc/).
 
 In 0.8.4, we started testing Linkerd against known-good gRPC clients and servers, including non-Go implementations. As a result of this testing, Linkerd 0.8.4 includes much improved support for HTTP/2 and gRPC, especially around HTTP/2’s backpressure and request cancellation features.
 
