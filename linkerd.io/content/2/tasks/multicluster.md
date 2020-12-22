@@ -1,6 +1,6 @@
 +++
-title = "Getting started with Multicluster"
-description = "Get started with Linkerd managing traffic between multiple Kubernetes clusters"
+title = "Multi-cluster communication"
+description = "Allow Linkerd to manage cross-cluster communication."
 +++
 
 This guide will walk you through installing and configuring Linkerd so that two
@@ -24,7 +24,7 @@ At a high level, you will:
 
 ## Prerequisites
 
-- Two clusters, we will refer to them as `east` and `west` in this guide. Follow
+- Two clusters. We will refer to them as `east` and `west` in this guide. Follow
   along with the
   [blog post](/2020/02/25/multicluster-kubernetes-with-service-mirroring/) as
   you walk through this guide! The easiest way to do this for development is

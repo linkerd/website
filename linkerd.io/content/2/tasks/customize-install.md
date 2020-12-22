@@ -1,6 +1,6 @@
 +++
-title = "Customizing Installation"
-description = "Modify the Linkerd Installation"
+title = "Customizing Linkerd's Configuration with Kustomize"
+description = "Use Kustomize to modify Linkerd's configuration in a programmatic way."
 +++
 
 Instead of forking the Linkerd install and upgrade process,

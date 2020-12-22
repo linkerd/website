@@ -1,6 +1,6 @@
 +++
-title = "Installing Multicluster"
-description = "Install Linkerd on multiple clusters."
+title = "Installing Multi-cluster Components"
+description = "Allow Linkerd to manage cross-cluster communication."
 +++
 
 Multicluster support in Linkerd requires extra installation and configuration on

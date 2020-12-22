@@ -1,6 +1,6 @@
 +++
-title = "GitOps with Linkerd"
-description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle"
+title = "Using GitOps with Linkerd with Argo CD"
+description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle."
 +++
 
 GitOps is an approach to automate the management and delivery of your Kubernetes

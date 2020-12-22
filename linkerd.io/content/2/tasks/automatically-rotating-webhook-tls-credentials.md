@@ -1,6 +1,6 @@
 +++
 title = "Automatically Rotating Webhook TLS Credentials"
-description = "Use cert-manager to automatically rotate webhook TLS credentials"
+description = "Use cert-manager to automatically rotate webhook TLS credentials."
 +++
 
 The Linkerd control plane contains several components, called webhooks, which
