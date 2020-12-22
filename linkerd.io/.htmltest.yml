@@ -19,6 +19,8 @@ IgnoreURLs:
   - https://kinvolk.io/
   - https://godaddy.com/
   - https://www.linkedin.com/
+  - https://twitter.com/*
+  - https://t.co/*
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
