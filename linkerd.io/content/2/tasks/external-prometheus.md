@@ -1,6 +1,6 @@
 +++
-title = "Bring your own Prometheus instance"
-description = "Make it easy to use existing Prometheus instance with Linkerd"
+title = "Bringing your own Prometheus"
+description = "Use an existing Prometheus instance with Linkerd."
 +++
 
 Even though Linkerd comes with its own Prometheus instance, there can be cases

@@ -1,5 +1,5 @@
 +++
-title = "Using Ingress"
+title = "Ingress traffic"
 description = "Linkerd works alongside your ingress controller of choice."
 +++
 
