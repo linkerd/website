@@ -69,6 +69,8 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
+          securityContext:
+            runAsUser: 1337
         - image: buoyantio/slow_cooker:1.2.0
           name: internal
           env:
@@ -87,6 +89,8 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
+          securityContext:
+            runAsUser: 1337
         - image: buoyantio/slow_cooker:1.2.0
           name: external
           env:
@@ -105,6 +109,8 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
+          securityContext:
+            runAsUser: 1337
       volumes:
         - name: cfg
           configMap:
