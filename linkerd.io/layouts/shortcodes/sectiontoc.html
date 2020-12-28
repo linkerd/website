@@ -1,16 +1,9 @@
-<div class="columns is-fullwidth toc">
-  {{ $currentPage := .Page }}
-  {{ $subPages := .Page.Pages }}
-  {{ range $index, $page := sort $subPages "Title" }}
-  {{ if (ne $page $currentPage) }}
-  <div class="columns is-fullwidth is-marginless">
-    <div class="column text-align-left is-marginless title">
-      <a href="{{ $page.Permalink }}">{{ $page.Title }}</a>
-    </div>
-    <div class="column text-align-left is-marginless description">
-      {{ $page.Description }}
-    </div>
-  </div>
-  {{ end }}
-  {{ end }}
-</div>
+{{ $currentPage := .Page }}
+{{ $subPages := .Page.Pages }}
+{{ range $index, $page := sort $subPages "Title" }}
+{{ if (ne $page $currentPage) }}
+
+[{{ $page.Title }}]({{ $page.Permalink }}). {{ $page.Description}}
+
+{{ end }}
+{{ end }}

@@ -1,6 +1,6 @@
 +++
 title = "Automatically Rotating Control Plane TLS Credentials"
-description = "Use cert-manager to automatically rotate control plane TLS credentials"
+description = "Use cert-manager to automatically rotate control plane TLS credentials."
 aliases = [ "use_external_certs" ]
 +++
 
@@ -101,8 +101,8 @@ metadata:
   namespace: linkerd
 spec:
   secretName: linkerd-identity-issuer
-  duration: 24h
-  renewBefore: 1h
+  duration: 48h
+  renewBefore: 25h
   issuerRef:
     name: linkerd-trust-anchor
     kind: Issuer

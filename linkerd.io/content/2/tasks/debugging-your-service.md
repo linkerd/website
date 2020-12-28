@@ -1,6 +1,6 @@
 +++
-title = "Debugging Your Service"
-description = "Linkerd makes it easy to debug a failing application. Check out how to do it yourself with Emojivoto."
+title = "Debugging gRPC applications with request tracing"
+description = "Follow a long-form example of debugging a failing gRPC application using live request tracing."
 aliases = [
   "/debugging-an-app/",
   "/2/debugging-an-app/"

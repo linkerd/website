@@ -1,6 +1,6 @@
 +++
-title = "Using Debugging Endpoints"
-description = "Use debugging endpoints provided by the control plane components."
+title = "Control Plane Debug Endpoints"
+description = "Linkerd's control plane components provide debug endpoints."
 +++
 
 All of the control plane components (with the exception of Grafana) expose

@@ -1,6 +1,6 @@
 +++
 title = "Replacing expired certificates"
-description = "Follow this workflow if any of your TLS certs have expired"
+description = "Follow this workflow if any of your TLS certs have expired."
 +++
 
 If any of your TLS certs are approaching expiry and you are not relying on an
