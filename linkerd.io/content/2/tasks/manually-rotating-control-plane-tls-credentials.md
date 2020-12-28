@@ -1,6 +1,6 @@
 +++
 title = "Manually Rotating Control Plane TLS Credentials"
-description = "Update Linkerd's TLS trust anchor and issuer certificate"
+description = "Update Linkerd's TLS trust anchor and issuer certificate."
 aliases = [ "rotating_identity_certificates" ]
 +++
 
@@ -105,7 +105,7 @@ anchor rotation steps.
 First, generate a new trust anchor certificate and private key:
 
 ```bash
-step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure --san identity.linkerd.cluster.local
+step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
 ```
 
 Note that we use `--no-password --insecure` to avoid encrypting these files
@@ -117,12 +117,18 @@ certificates](/2/tasks/generate-certificates/).
 
 Next, we need to bundle the trust anchor currently used by Linkerd together with
 the new anchor. The following command uses `kubectl` to fetch the Linkerd config,
-`jq` to extract the current trust anchor, and `step` to combine it with the newly
-generated trust anchor:
+`jq`/[`yq`](https://github.com/mikefarah/yq) to extract the current trust anchor,
+and `step` to combine it with the newly generated trust anchor:
 
 ```bash
-kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' |  \
-jq -r .identityContext.trustAnchorsPem > original-trust.crt
+# For Linkerd < 2.9.0:
+kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' \
+  | jq -r .identityContext.trustAnchorsPem > original-trust.crt
+
+# For Linkerd >= 2.9.0:
+kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
+  | yq r - global.identityTrustAnchorsPEM > original-trust.crt
+
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
 rm original-trust.crt
 ```
@@ -211,7 +217,7 @@ linkerd-identity-data-plane
 To rotate the issuer certificate and key pair, first generate a new pair:
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure --san identity.linkerd.cluster.local
+step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure
 ```
 
 Provided that the trust anchor has not expired and that, if recently rotated,

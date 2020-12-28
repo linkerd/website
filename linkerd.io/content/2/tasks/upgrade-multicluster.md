@@ -1,5 +1,5 @@
 +++
-title = "Upgrading Multicluster"
+title = "Upgrading Multicluster in Linkerd 2.9"
 description = "Upgrading Multicluster to Linkerd 2.9."
 +++
 

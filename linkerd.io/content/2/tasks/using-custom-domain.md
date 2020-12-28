@@ -1,5 +1,5 @@
 +++
-title = "Using Custom Cluster Domain"
+title = "Using a Custom Cluster Domain"
 description = "Use Linkerd with a custom cluster domain."
 +++
 

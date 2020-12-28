@@ -1,6 +1,6 @@
 +++
 title = "Using A Private Docker Repository"
-description = "Using Linkerd a Private Docker Repository."
+description = "Using Linkerd with a Private Docker Repository."
 +++
 
 In some cases, you will want to use a private docker repository to store the

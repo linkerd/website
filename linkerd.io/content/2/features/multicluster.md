@@ -1,6 +1,6 @@
 +++
 title = "Multi-cluster communication"
-description = "Linkerd connects applications running in different clusters"
+description = "Linkerd can transparently and securely connect services that are running in different clusters."
 aliases = [ "multicluster_support" ]
 +++
 

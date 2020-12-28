@@ -1,6 +1,6 @@
 +++
 title = "Enabling Add-ons"
-description = "Great Out-of-the-box experience with various components that integrate well with Linkerd"
+description = "Extend Linkerd's featureset with add-ons."
 aliases = [
   "/2/add-ons/",
 ]
