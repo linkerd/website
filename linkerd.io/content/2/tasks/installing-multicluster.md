@@ -253,7 +253,7 @@ field with your tool of choice.
 Now, you'll want to create a new trust anchor and issuer for the new cluster:
 
 ```bash
-step certificate create identity.linkerd.cluster.local root.crt root.key \
+step certificate create linkerd-trust-anchor root.crt root.key \
    --profile root-ca --no-password --insecure
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
   --profile intermediate-ca --not-after 8760h --no-password --insecure \
