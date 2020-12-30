@@ -213,4 +213,3 @@ In Helm v3, It has been deprecated, and is the first argument as
 See [Automatically Rotating Webhook TLS
 Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/) for how
 to do something similar for webhook TLS credentials.
-
