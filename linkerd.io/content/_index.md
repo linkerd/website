@@ -2,10 +2,10 @@
 title: The world's lightest, fastest service mesh.
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
-  title: The world's lightest, fastest service mesh.
-  description: Linkerd adds critical security, observability, and reliability features
-    to your Kubernetes stack&mdash;no code change required. CNCF-hosted and 100% open
-    source.
+  title: A different kind of service mesh
+  description: Ultra light, ultra simple, ultra powerful. Linkerd adds
+    security, observability, and reliability to Kubernetes, *without* the
+    complexity. CNCF-hosted and 100% open source.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
