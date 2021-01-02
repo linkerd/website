@@ -88,6 +88,8 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-proxy-injector.linkerd.svc
+  dnsNames:
+  - linkerd-proxy-injector.linkerd.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
@@ -107,6 +109,8 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-sp-validator.linkerd.svc
+  dnsNames:
+  - linkerd-sp-validator.linkerd.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
@@ -126,6 +130,8 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-tap.linkerd.svc
+  dnsNames:
+  - linkerd-tap.linkerd.svc
   isCA: false
   privateKey:
     algorithm: ECDSA

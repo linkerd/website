@@ -107,6 +107,8 @@ spec:
     name: linkerd-trust-anchor
     kind: Issuer
   commonName: identity.linkerd.cluster.local
+  dnsNames:
+  - identity.linkerd.cluster.local
   isCA: true
   privateKey:
     algorithm: ECDSA
