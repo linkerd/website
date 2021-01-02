@@ -76,7 +76,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
@@ -94,7 +94,7 @@ Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
@@ -107,8 +107,11 @@ spec:
     name: linkerd-trust-anchor
     kind: Issuer
   commonName: identity.linkerd.cluster.local
+  dnsNames:
+  - identity.linkerd.cluster.local
   isCA: true
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - cert sign
   - crl sign
@@ -208,3 +211,7 @@ For Helm versions < v3, `--name` flag has to specifically be passed.
 In Helm v3, It has been deprecated, and is the first argument as
  specified above.
 {{< /note >}}
+
+See [Automatically Rotating Webhook TLS
+Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/) for how
+to do something similar for webhook TLS credentials.
