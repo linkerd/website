@@ -4,7 +4,7 @@ date: 2019-02-04T13:12:35.000+00:00
 top_hero:
   title: A different kind of service mesh
   description: Ultra light, ultra simple, ultra powerful. Linkerd adds
-    security, observability, and reliability to Kubernetes, *without* the 
+    security, observability, and reliability to Kubernetes, *without* the
     complexity. CNCF-hosted and 100% open source.
   image: "/uploads/image-15.png"
   buttons:
