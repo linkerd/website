@@ -51,7 +51,7 @@ sign the Linkerd proxies' CSR.
 ```bash
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
 --profile intermediate-ca --not-after 8760h --no-password --insecure \
---ca ca.crt --ca-key ca.key 
+--ca ca.crt --ca-key ca.key
 ```
 
 This will generate the `issuer.crt` and `issuer.key` files.
