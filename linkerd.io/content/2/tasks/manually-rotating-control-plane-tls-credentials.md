@@ -105,7 +105,7 @@ anchor rotation steps.
 First, generate a new trust anchor certificate and private key:
 
 ```bash
-step certificate create identity.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
+step certificate create root.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
 ```
 
 Note that we use `--no-password --insecure` to avoid encrypting these files
@@ -217,7 +217,9 @@ linkerd-identity-data-plane
 To rotate the issuer certificate and key pair, first generate a new pair:
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key --ca ca-new.crt --ca-key ca-new.key --profile intermediate-ca --not-after 8760h --no-password --insecure
+step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key \
+--profile intermediate-ca --not-after 8760h --no-password --insecure \
+--ca ca-new.crt --ca-key ca-new.key
 ```
 
 Provided that the trust anchor has not expired and that, if recently rotated,
@@ -226,7 +228,7 @@ the previous section) it is now safe to rotate the identity issuer certificate
 by using the `upgrade` command again:
 
 ```bash
-linkerd upgrade  --identity-issuer-certificate-file=./issuer-new.crt --identity-issuer-key-file=./issuer-new.key | kubectl apply -f -
+linkerd upgrade --identity-issuer-certificate-file=./issuer-new.crt --identity-issuer-key-file=./issuer-new.key | kubectl apply -f -
 ```
 
 At this point Linkerd's `identity` control plane service should detect the

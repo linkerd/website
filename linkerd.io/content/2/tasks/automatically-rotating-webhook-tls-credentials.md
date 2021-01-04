@@ -44,10 +44,10 @@ signing key pair which will be used to sign each of the webhook certificates:
 step certificate create webhook.linkerd.cluster.local ca.crt ca.key \
   --profile root-ca --no-password --insecure --san webhook.linkerd.cluster.local &&
   kubectl create secret tls \
-   webhook-issuer-tls \
-   --cert=ca.crt \
-   --key=ca.key \
-   --namespace=linkerd
+    webhook-issuer-tls \
+    --cert=ca.crt \
+    --key=ca.key \
+    --namespace=linkerd
 ```
 
 ## Create an Issuer referencing the secret
