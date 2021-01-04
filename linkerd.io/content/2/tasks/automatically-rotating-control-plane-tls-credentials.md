@@ -57,7 +57,7 @@ Next, using the [`step`](https://smallstep.com/cli/) tool, create a signing key
 pair and store it in a Kubernetes Secret in the namespace created above:
 
 ```bash
-step certificate create linkerd-trust-anchor ca.crt ca.key \
+step certificate create root.linkerd.cluster.local ca.crt ca.key \
   --profile root-ca --no-password --insecure &&
   kubectl create secret tls \
     linkerd-trust-anchor \

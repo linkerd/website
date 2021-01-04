@@ -70,7 +70,7 @@ certificates. If you prefer `openssl` instead, feel free to use that! To
 generate the trust anchor with step, you can run:
 
 ```bash
-step certificate create linkerd-trust-anchor root.crt root.key \
+step certificate create root.linkerd.cluster.local root.crt root.key \
   --profile root-ca --no-password --insecure
 ```
 
