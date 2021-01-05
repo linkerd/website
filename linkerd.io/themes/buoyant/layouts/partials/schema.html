@@ -70,7 +70,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {{ range .Params.schema_faq.faqs }}
+        {{ range .Params.faqs }}
           {
             "@type": "Question",
             "name": "{{.question}}",
