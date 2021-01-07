@@ -208,7 +208,7 @@ helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
 The following values were removed from the Linkerd2 chart. Most of the removed
 values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
 
-* `dashboard.replicas`
+* `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
 * `tap` moved to Linkerd-Viz as `tap`
 * `tapResources` moved to Linkerd-Viz as `tap.resources`
 * `tapProxyResources` removed
