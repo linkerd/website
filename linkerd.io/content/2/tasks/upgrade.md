@@ -208,22 +208,22 @@ helm install linkerd2-viz linkerd-edge/linkerd2-viz -f viz-values.yaml
 The following values were removed from the Linkerd2 chart. Most of the removed
 values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
 
-* `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
-* `tap` moved to Linkerd-Viz as `tap`
-* `tapResources` moved to Linkerd-Viz as `tap.resources`
-* `tapProxyResources` removed
-* `webImage` moved to Linkerd-Viz as `dashboard.image`
-* `webResources` moved to Linkerd-Viz as `dashboard.resources`
-* `webProxyResources` removed
-* `grafana` moved to Linkerd-Viz as `grafana`
-* `grafana.proxy` removed
-* `prometheus` moved to Linkerd-Viz as `prometheus`
-* `prometheus.proxy` removed
-* `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
-* `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as `webhook.collectorSvcAccount`
-* `tracing.enabled` removed
-* `tracing.collector` moved to Linkerd-Jaeger as `collector`
-* `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
+- `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
+- `tap` moved to Linkerd-Viz as `tap`
+- `tapResources` moved to Linkerd-Viz as `tap.resources`
+- `tapProxyResources` removed
+- `webImage` moved to Linkerd-Viz as `dashboard.image`
+- `webResources` moved to Linkerd-Viz as `dashboard.resources`
+- `webProxyResources` removed
+- `grafana` moved to Linkerd-Viz as `grafana`
+- `grafana.proxy` removed
+- `prometheus` moved to Linkerd-Viz as `prometheus`
+- `prometheus.proxy` removed
+- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
+- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as `webhook.collectorSvcAccount`
+- `tracing.enabled` removed
+- `tracing.collector` moved to Linkerd-Jaeger as `collector`
+- `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
 
 ## Upgrade notice: stable-2.9.0
 
