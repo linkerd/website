@@ -186,7 +186,7 @@ extension by running `linkerd viz install | kubectl apply -f -`.
 
 ```bash
 # Upgrade the control plane (this will remove viz components).
-linkerd upgrade | kubectl apply -f - 
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 # Install the Linkerd-Viz extension to restore viz functionality.
 linkerd viz install | kubectl apply -f -
 ```
@@ -200,9 +200,9 @@ values which have moved.
 ```bash
 helm repo update
 # Upgrade the control plane (this will remove viz components).
-helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
+helm upgrade linkerd2 linkerd-edge/linkerd2 --reset-values -f values.yaml --atomic
 # Install the Linkerd-Viz extension to restore viz functionality.
-helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
+helm install linkerd2-viz linkerd-edge/linkerd2-viz -f viz-values.yaml
 ```
 
 The following values were removed from the Linkerd2 chart. Most of the removed
@@ -216,7 +216,7 @@ values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
 * `webResources` moved to Linkerd-Viz as `dashboard.resources`
 * `webProxyResources` removed
 * `grafana` moved to Linkerd-Viz as `grafana`
-* `grafnaa.proxy` removed
+* `grafana.proxy` removed
 * `prometheus` moved to Linkerd-Viz as `prometheus`
 * `prometheus.proxy` removed
 * `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
