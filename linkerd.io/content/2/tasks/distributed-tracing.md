@@ -139,6 +139,21 @@ linkerd jaeger uninstall | kubectl delete -f -
 kubectl delete ns emojivoto
 ```
 
+## Bring your own Jaeger
+
+If you have an existing Jaeger installation, you can configure the OpenCensus
+collector to send traces it instead of the Jaeger instance built into the
+Linkerd-Jaeger extension.
+
+```bash
+linkerd jaeger install --set collector.jaegerAddr='http://my-jaeger-collector.my-jaeger-ns:14268/api/traces' | kubectl apply -f -
+```
+
+It is also possible to manually edit the OpenCensus configuration to have it
+export to any backend which it supports. See the
+[OpenCensus documentation](https://opencensus.io/service/exporters/) for a full
+list.
+
 ## Troubleshooting
 
 ### I don't see any spans for the proxies
