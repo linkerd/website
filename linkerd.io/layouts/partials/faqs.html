@@ -10,35 +10,40 @@
       <div class="container blog-content-container">
         <h1 class="title is-1 has-text-color">{{ .page.Title }}</h1>
 
-        {{/*  {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}  */}}
+      {{/*  {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}
+      */}}
 
-        {{ if eq $docsVersion "1" }}
-          <div class="message-body">
-            <div><strong>Note</strong></div>
-        
-	    This documentation is for Linkerd 1.x, an older version with some
-            significant differences. You may want to see the
-            <a href="/2/overview/">Linkerd 2.x (current) documentation</a> instead.
-         </div>
+      {{ if eq $docsVersion "1" }}
+        <div class="message-body">
+          <div>
+            <strong>Note</strong>
+          </div>
 
+          This documentation is for Linkerd 1.x, an older version with some significant differences. You may want to see the
+          <a href="/2/overview/">Linkerd 2.x (current) documentation</a>
+          instead.
+        </div>
+
+      {{ end }}
+
+      <div class="language-markup">
+        <nav id="TableOfContents">
+          <ul>
+            {{ range .page.Params.faqs}}
+              <li>
+                <a href="#{{ .question | urlize }}">{{ .question }}</a>
+              </li>
+            {{ end}}
+          </ul>
+        </nav>
+
+        {{ range .page.Params.faqs}}
+          <h2>{{ .question }}</h2>
+          <p>{{ .answer | markdownify }}</p>
         {{ end }}
 
-        <div class="language-markup">
-          <nav id="TableOfContents">
-            <ul>
-              {{ range .page.Params.faqs}}
-                <li><a href="#{{ .question | urlize }}">{{ .question }}</a></li>
-              {{ end}}
-            </ul>
-          </nav>
-
-          {{ range .page.Params.faqs}}
-            <h2>{{ .question }}</h2>
-            <p>{{ .answer | markdownify }}</p>
-          {{ end }}
-
-        </div>
       </div>
     </div>
   </div>
+</div>
 </div>
