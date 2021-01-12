@@ -142,11 +142,22 @@ provided release are applied together with the overrides
 - no flag and overrides - `--reset-values` will be used by default
 
 Bearing all that in mind, you have to decide whether you want to reuse the
-values in the chart or move to the values specified in the newer chart.
+values in the chart or move to the values specified in the newer chart. Note
+that if you are upgrading from one version to another, you will need to use
+`--reset-values` or else the old version number will be reused instead of
+advancing to the new one.
+
 The advised practice is to use a `values.yaml` file that stores all custom
-overrides that you have for your chart. Before upgrade, check whether there
-are breaking changes to the chart (i.e. renamed or moved keys, etc). You can
-consult the [edge](https://hub.helm.sh/charts/linkerd2-edge/linkerd2) or the
+overrides that you have for your chart. You can fetch the overrides you have
+currently set by running:
+
+```bash
+helm get values linkerd2 > values.yml
+```
+
+Before upgrade, check whether there are breaking changes to the chart (i.e.
+renamed or moved keys, etc). You can consult the
+[edge](https://hub.helm.sh/charts/linkerd2-edge/linkerd2) or the
 [stable](https://hub.helm.sh/charts/linkerd2/linkerd2) chart docs, depending on
 which one your are upgrading to. If there are, make the corresponding changes to
 your `values.yaml` file. Then you can use:
@@ -156,4 +167,4 @@ helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
 ```
 
 The `--atomic` flag will ensure that all changes are rolled back in case the
-upgrade operation fails
+upgrade operation fails.
