@@ -1,10 +1,9 @@
 +++
 author = "charles"
 date = 2021-01-19T00:00:00Z
-draft = true
 feature = ""
 tags = ["Linkerd", "Community Hero"]
-thumbnail = ""
+thumbnail = "/uploads/january-linkerd-heros.png"
 title = "January 2021 Linkerd Hero Nomination "
 
 +++
