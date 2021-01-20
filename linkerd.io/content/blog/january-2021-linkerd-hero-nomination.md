@@ -3,7 +3,7 @@ author = "charles"
 date = 2021-01-19T00:00:00Z
 feature = ""
 tags = ["Linkerd", "Community Hero"]
-thumbnail = "/uploads/january-linkerd-heros.png"
+thumbnail = "/uploads/january-linkerd-heros-1.png"
 title = "January 2021 Linkerd Hero Nomination "
 
 +++
