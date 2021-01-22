@@ -1,6 +1,5 @@
 +++
 date = 2021-01-22T00:00:00Z
-draft = true
 title = "January Linkerd Online Community Meeting"
 
 +++
