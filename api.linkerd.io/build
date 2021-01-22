@@ -8,7 +8,7 @@ mkdir -p $BASE_DIR/public
 TMP_SLATE_DIR=$(mktemp -d /tmp/slate-linkerd.XXXXX)
 cd $TMP_SLATE_DIR
 
-git clone --depth=1 https://github.com/BuoyantIO/slate-linkerd.git slate-linkerd
+git clone --depth=1 git@github.com:BuoyantIO/slate-linkerd.git slate-linkerd
 cd slate-linkerd
 
 bundle install

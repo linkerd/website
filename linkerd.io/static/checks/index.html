@@ -5,7 +5,22 @@
     <meta http-equiv="refresh" content="0; url=https://linkerd.io/2/tasks/troubleshooting/">
     <script type="text/javascript">
     window.onload = function() {
-      window.location.href = window.location.origin + "/2/tasks/troubleshooting/" + window.location.hash;
+      var hash = window.location.hash;
+      switch (hash) {
+        case '#l5d-identity-roots-use-supported-crypto':
+          hash = '#l5d-identity-trustAnchors-use-supported-crypto';
+          break;
+        case '#l5d-identity-roots-are-time-valid':
+          hash = '#l5d-identity-trustAnchors-are-time-valid';
+          break;
+        case '#l5d-identity-roots-not-expiring-soon':
+          hash = '#l5d-identity-trustAnchors-not-expiring-soon';
+          break;
+        case '#l5d-identity-issuer-cert-issued-by-trust-root':
+          hash = '#l5d-identity-issuer-cert-issued-by-trust-anchor';
+          break;
+      }
+      window.location.href = window.location.origin + "/2/tasks/troubleshooting/" + hash;
     }
     </script>
     <title>Linkerd Check Redirection</title>

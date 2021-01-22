@@ -1,6 +1,6 @@
 +++
 title = "Retries and Timeouts"
-description = "Linkerd can be configured to perform service-specific retries and timeouts."
+description = "Linkerd can perform service-specific retries and timeouts."
 weight = 3
 +++
 
@@ -19,6 +19,13 @@ A [service profile](/2/features/service-profiles/) may define certain routes as
 retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
 perform the appropriate retries or timeouts when calling that service.  Retries
 and timeouts are always performed on the *outbound* (client) side.
+
+{{< note >}}
+If working with headless services, service profiles cannot be retrieved. Linkerd
+reads service discovery information based off the target IP address, and if that
+happens to be a pod IP address then it cannot tell which service the pod belongs
+to.
+{{< /note >}}
 
 These can be setup by following the guides:
 

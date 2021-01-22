@@ -11,7 +11,7 @@ In cases where you need network-level visibility into packets entering and
 leaving your application, Linkerd provides a *debug sidecar* with some helpful
 tooling. Similar to how [proxy sidecar
 injection](/2/features/proxy-injection/) works, you add a debug sidecar to
-a pod by setting the `config.linkerd.io/enable-debug-sidecar: true` annotation
+a pod by setting the `config.linkerd.io/enable-debug-sidecar: "true"` annotation
 at pod creation time. For convenience, the `linkerd inject` command provides an
 `--enable-debug-sidecar` option that does this annotation for you.
 

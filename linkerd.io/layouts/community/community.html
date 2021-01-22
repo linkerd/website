@@ -4,8 +4,9 @@
 
 {{ define "main" }}
 {{ partial "community/top-hero.html" .Params.top_hero }}
+{{ partial "community/two-col-section.html" .Params.two_col_section }}
+{{ partial "community/two-col-section.html" .Params.two_col_section_2 }}
 {{ partial "community/links-lists.html" .Params.link_lists }}
-{{ partial "hero.html" .Params.talk_hero }}
 {{ partial "community/jobs.html" .Params.jobs }}
 
 {{ partial "homepage/image-list.html"  (dict "mentions" .Site.Home.Params.companies "title" .Site.Home.Params.companies_title "backgroundColor" "has-background-light-blue") }}

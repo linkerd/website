@@ -209,7 +209,7 @@ If your application is injected with Linkerd, the Linkerd proxy will participate
   address of the OpenCensus collector service.  In our reference architecture
   this is `oc-collector.tracing:55678`.
 - Set the `config.alpha.linkerd.io/trace-collector-service-account` annotation
-  on the namespace of pod specs that you want to participate in traces. This
+  on the namespace or pod specs that you want to participate in traces. This
   should be set to the name of the service account of the collector and is used
   to ensure secure communication between the proxy and the collector. This can
   be omitted if the collector is running as the default service account. This is

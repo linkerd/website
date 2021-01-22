@@ -10,7 +10,7 @@ thumbnail: /uploads/linkerd_version_084_featured.png
 tags: [Linkerd, linkerd, News, Product Announcement]
 ---
 
-We’re happy to announce that we’ve released [linkerd 0.8.4](http://github.com/linkerd/linkerd/releases/tag/0.8.4)! With this release, two important notes. First, Kubernetes and Consul support are now officially production-grade features—high time coming, since they’re actually already used widely in production. Second, this release features some significant improvements to Linkerd’s HTTP/2 and gRPC support, especially around backpressure and request cancelation.
+We’re happy to announce that we’ve released [linkerd 0.8.4](http://github.com/linkerd/linkerd/releases/tag/0.8.4)! With this release, two important notes. First, Kubernetes and Consul support are now officially production-grade features—high time coming, since they’re actually already used widely in production. Second, this release features some significant improvements to Linkerd’s HTTP/2 and gRPC support, especially around backpressure and request cancellation.
 
 ## KUBERNETES AND CONSUL NAMERS NO LONGER EXPERIMENTAL
 
@@ -22,9 +22,9 @@ So, as of Linkerd 0.8.4, Linkerd’s Kubernetes support and Consul support are b
 
 ## IMPROVED HTTP/2 AND GRPC SUPPORT
 
-Over the past few releases, [Oliver](http://twitter.com/olix0r) has been working hard on improving Linkerd’s HTTP/2 support. Since Linkerd doesn’t parse the request body, HTTP/2 support also gives us [gRPC support](https://linkerd.io/features/grpc/).
+Over the past few releases, [Oliver](https://twitter.com/olix0r) has been working hard on improving Linkerd’s HTTP/2 support. Since Linkerd doesn’t parse the request body, HTTP/2 support also gives us [gRPC support](https://linkerd.io/features/grpc/).
 
-In 0.8.4, we started testing Linkerd against known-good gRPC clients and servers, including non-Go implementations. As a result of this testing, Linkerd 0.8.4 includes much improved support for HTTP/2 and gRPC, especially around HTTP/2’s backpressure and request cancelation features.
+In 0.8.4, we started testing Linkerd against known-good gRPC clients and servers, including non-Go implementations. As a result of this testing, Linkerd 0.8.4 includes much improved support for HTTP/2 and gRPC, especially around HTTP/2’s backpressure and request cancellation features.
 
 For now, HTTP/2 and gRPC support remain behind the experimental flag. However, production-ready HTTP/2 and gRPC support are on our short term roadmap, and you should expect to see these features continue to improve over the next few releases.
 

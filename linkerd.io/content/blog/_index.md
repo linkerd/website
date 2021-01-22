@@ -1,15 +1,14 @@
 ---
 title: Blog
-subtitle: Learn more about using Linkerd and keep up with the latest news
+subtitle: The latest and greatest news about Linkerd
 tags:
-- Community
-- Linkerd
-- Tutorials &amp; How-To's
-- Video
+  - Community
+  - Linkerd
+  - Tutorials &amp; How-To's
+  - Video
 items:
-- blog/kubecon-na-2019-linkerd-roundup.md
-- blog/announcing-linkerd-2-6.md
+  - blog/why-linkerd-doesnt-use-envoy.md
+  - blog/announcing-linkerd-2-9.md
 description: ''
 keywords: []
-
 ---

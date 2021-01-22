@@ -31,21 +31,49 @@ topology that looks like:
   Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
   already done this.
 
-## Install the collector
+## Install Trace Collector & Jaeger
 
 The first step of getting distributed tracing setup is installing a collector
 onto your cluster. This component consists of "receivers" that consume spans
 emitted from the mesh and your applications as well as "exporters" that convert
-spans and forward them to a backend. To add the [OpenCensus
-Collector](https://opencensus.io/service/components/collector/) to your cluster,
+spans and forward them to a backend.
+
+Next, we will need [Jaeger](https://www.jaegertracing.io/) in your cluster.
+The [all inone](https://www.jaegertracing.io/docs/1.8/getting-started/#all-in-one)
+configuration will store the traces, make them searchable and provide
+visualization of all the data being emitted.
+
+Linkerd now has add-ons which enables users to install extra components that
+integrate well with Linkerd. Tracing is such one add-on which includes [OpenCensus
+Collector](https://opencensus.io/service/components/collector/)  and
+[Jaeger](https://www.jaegertracing.io/)
+
+To add the Tracing Add-On to your cluster,
 run:
 
+First, we would need a configuration file where we enable the Tracing Add-On.
+
 ```bash
-kubectl apply -f https://run.linkerd.io/tracing/collector.yml
+cat >> config.yaml << EOF
+tracing:
+  enabled: true
+EOF
 ```
 
-You will now have a `tracing` namespace that contains the collector running as
-part of the mesh. It has been configured to:
+This configuration file can also be used to apply Add-On configuration
+(not just specific to tracing Add-On). More information on the configuration
+fields allowed, can be found [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd2#add-ons-configuration)
+
+Now, the above configuration can be applied using the `--config` file
+with CLI or through `values.yaml` with Helm.
+
+```bash
+linkerd upgrade --config config.yaml | kubectl apply -f -
+```
+
+You will now have a `linker-collector` and `linkerd-jaeger`
+deployments in the linkerd namespace that are running as part of the mesh.
+Collector has been configured to:
 
 - Receive spans from OpenCensus clients
 - Export spans to a Jaeger backend
@@ -53,25 +81,6 @@ part of the mesh. It has been configured to:
 The collector is extremely configurable and can use the
 [receiver](https://opencensus.io/service/receivers/) or
 [exporter](https://opencensus.io/service/exporters/) of your choice.
-
-Before moving onto the next step, make sure everything is up and running with
-`kubectl`:
-
-```bash
-kubectl -n tracing rollout status deploy/oc-collector --watch
-```
-
-## Install Jaeger
-
-With a running collector, it is now time to add
-[Jaeger](https://www.jaegertracing.io/) to your cluster. The [all in
-one](https://www.jaegertracing.io/docs/1.8/getting-started/#all-in-one)
-configuration will store the traces, make them searchable and provide
-visualization of all the data being emitted. To install it on your cluster, run:
-
-```bash
-kubectl apply -f https://run.linkerd.io/tracing/backend.yml
-```
 
 Jaeger itself is made up of many
 [components](https://www.jaegertracing.io/docs/1.14/architecture/#components).
@@ -82,7 +91,8 @@ Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
 
 ```bash
-kubectl -n tracing rollout status deploy/jaeger --watch
+kubectl -n linkerd rollout status deploy/linkerd-collector
+kubectl -n linkerd rollout status deploy/linkerd-jaeger
 ```
 
 ## Install Emojivoto
@@ -104,7 +114,8 @@ spec:
     metadata:
       annotations:
         linkerd.io/inject: enabled
-        config.linkerd.io/trace-collector: oc-collector.tracing:55678
+        config.linkerd.io/trace-collector: linkerd-collector.linkerd:55678
+        config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
 '
 ```
 
@@ -112,7 +123,7 @@ Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
 
 ```bash
-kubectl -n emojivoto rollout status deploy/web --watch
+kubectl -n emojivoto rollout status deploy/web
 ```
 
 ## Modify the application
@@ -126,7 +137,7 @@ propagation](https://github.com/openzipkin/b3-propagation) format to tie these
 things together.
 
 We've already modified emojivoto to instrument its requests with this
-information, the
+information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
 addition of a client library to take care of this. Emojivoto uses the OpenCensus
@@ -135,7 +146,7 @@ client, but others can be used.
 To enable tracing in emojivoto, run:
 
 ```bash
-kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=oc-collector.tracing:55678
+kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=linkerd-collector.linkerd:55678
 ```
 
 This command will add an environment variable that enables the applications to
@@ -148,14 +159,14 @@ up in Jaeger. To get to the UI, start a port forward and send your browser to
 [http://localhost:16686](http://localhost:16686/).
 
 ```bash
-kubectl -n tracing port-forward svc/jaeger 16686
+kubectl -n linkerd port-forward svc/linkerd-jaeger 16686
 ```
 
 {{< fig src="/images/tracing/jaeger-empty.png"
         title="Jaeger" >}}
 
-You can search for any service in the dropdown and `vote-bot` is a great way to
-get started.
+You can search for any service in the dropdown and click Find Traces. `vote-bot`
+is a great way to get started.
 
 {{< fig src="/images/tracing/jaeger-search.png"
         title="Search" >}}
@@ -172,6 +183,13 @@ received by the server and then issued by the client. For a single request that
 goes between two meshed pods, there will be a total of 4 spans. Two will be on
 the source side as the request traverses that proxy and two will be on the
 destination side as the request is received by the remote proxy.
+
+Additionally, As the proxy adds application meta-data as trace attributes, Users
+can directly jump into related resources traces directly from the linkerd-web
+dashboard by clicking the Jaeger icon in the Metrics Table, as shown below
+
+{{< fig src="/images/tracing/linkerd-jaeger-ui.png"
+        title="Linkerd-Jaeger" >}}
 
 ## Cleanup
 
@@ -228,13 +246,13 @@ ingress controller can be used here in place of Nginx as long as it:
 - Encodes trace context in the b3 format
 - Emits spans in a protocol supported by the OpenCensus collector
 
-If using helm to install nginx-ingress, you can configure tracing by using:
+If using helm to install ingress-nginx, you can configure tracing by using:
 
 ```yaml
 controller:
   config:
     enable-opentracing: "true"
-    zipkin-collector-host: oc-collector.tracing
+    zipkin-collector-host: linkerd-collector.linkerd
 ```
 
 ### Client Library

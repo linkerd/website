@@ -1,0 +1,36 @@
+<div class="wrapper py-6 community-two-col">
+  <div
+    class="container columns links-list-container {{ if .image_on_the_right }} row-reverse{{ end }}"
+  >
+    <div class="column is-6 center">
+      <img src="{{.image}}" alt="{{.alt}}" />
+    </div>
+    <div class="column is-5 center links-list">
+      <div>
+        <h2 class="title is-size-1 has-text-weight-light">{{.title}}</h2>
+        <p>{{.description}}</p>
+        <div class="columns is-multiline">
+          {{ if gt (len .links) 2 }}
+            {{ range .links }}
+            <div class="column is-half  mt-5 py-0">
+              <a href="{{.url}}" class="link-list-item pt-2">
+                <i class="{{.icon_name}}"></i>
+                {{.caption}}
+              </a>
+            </div>
+            {{ end }}
+          {{ else }}
+            {{ range .links }}
+            <div class="column is-full  mt-5 py-0">
+              <a href="{{.url}}" class="link-list-item pt-2">
+                <i class="{{.icon_name}}"></i>
+                {{.caption}}
+              </a>
+            </div>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

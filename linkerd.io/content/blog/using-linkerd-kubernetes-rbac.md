@@ -72,7 +72,7 @@ If you’re using [Namerd](https://github.com/linkerd/linkerd/blob/master/namerd
 
 ```yml
 ---
-# grant namerd permisisons to third party resources for dtab storage
+# grant namerd permissions to third party resources for dtab storage
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:

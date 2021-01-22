@@ -1,6 +1,6 @@
 +++
 title = "Replacing expired certificates"
-description = "Follow this workflow if any of your TLS certs have expired"
+description = "Follow this workflow if any of your TLS certs have expired."
 +++
 
 If any of your TLS certs are approaching expiry and you are not relying on an
@@ -31,7 +31,7 @@ linkerd-identity
 
 In this situation, if you have installed Linkerd with a manually supplied trust
 root and you have its key, you can follow
-[Updating the identity issuer certificate](/2/tasks/rotating_identity_certificates/#updating-the-identity-issuer-certificate)
+[Updating the identity issuer certificate](/2/tasks/manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
 to update your expired cert.
 
 ## Replacing the root and issuer certificates
@@ -61,7 +61,8 @@ linkerd upgrade \
     --identity-issuer-certificate-file=./issuer-new.crt \
     --identity-issuer-key-file=./issuer-new.key \
     --identity-trust-anchors-file=./ca-new.crt \
-    --force
+    --force \
+    | kubectl apply -f -
 ```
 
 Usually `upgrade` will prevent you from using an issuer certificate that
@@ -100,8 +101,9 @@ linkerd-identity-data-plane
 
 ```
 
-Eventually when the old pods are terminated the `check` command should stop
-producing warning or errors:
+Additionally you can use the `kubectl rollout restart` command to bring the
+configuration of your other injected resources up to date, and then the `check`
+command should stop producing warning or errors:
 
 ```bash
 linkerd-identity

@@ -50,7 +50,7 @@ To learn more about namerd, its setup, and its operation, check out Buoyant's
 blog post on [dynamic routing](https://blog.buoyant.io/2016/05/04/real-world-microservices-when-services-stop-playing-well-and-start-getting-real/#dynamic-routing-with-namerd).
 
 To configure your own namerd, head over to the
-[namerd config documention]({{% namerdconfig %}}).
+[namerd config documentation]({{% namerdconfig %}}).
 Also check out [namerctl](https://github.com/linkerd/namerctl),
 our open source tool for controlling namerd.
 

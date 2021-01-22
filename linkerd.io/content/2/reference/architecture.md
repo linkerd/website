@@ -175,7 +175,7 @@ The proxy supports service discovery via DNS and the
 
 ### Linkerd Init
 
-To make the proxy truly transparent, traffic needs to be automaticaly routed
+To make the proxy truly transparent, traffic needs to be automatically routed
 through it. The `linkerd-init` container is added as a Kubernetes
 [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. This executes a small

@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     app: webapp
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: service
     port: 7000
@@ -21,6 +21,7 @@ metadata:
   labels:
     app: webapp
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 3
   selector:
@@ -36,7 +37,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -63,7 +64,6 @@ metadata:
 spec:
   selector:
     app: authors
-  clusterIP: None
   ports:
   - name: service
     port: 7001
@@ -75,6 +75,7 @@ metadata:
   labels:
     app: authors
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -90,7 +91,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -117,7 +118,6 @@ metadata:
 spec:
   selector:
     app: books
-  clusterIP: None
   ports:
   - name: service
     port: 7002
@@ -129,6 +129,7 @@ metadata:
   labels:
     app: books
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -144,7 +145,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.3
+        image: buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -166,6 +167,7 @@ metadata:
   labels:
     app: traffic
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:

@@ -2,7 +2,6 @@ IgnoreURLs:
   - .*localhost.*
   - https://expedia.com
   - https://www.expedia.com
-  - https://github.com/linkerd/website/edit/master/linkerd.io/content/.*
   - https://ticketmaster.com
   - https://douban.com/
   - https://www.douban.com/
@@ -12,12 +11,19 @@ IgnoreURLs:
   - https://www.xfinity.com/
   - https://monkey.org/*
   - https://svn.apache.org/*
-  - https://github.com/linkerd/linkerd2
-  - https://github.com/linkerd/website/tree/master/linkerd.io/content
   - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
   - https://discourse.linkerd.io
+  - https://github.com/*
+  - https://www.man7.org/*
+  - https://offerup.com/
+  - https://kinvolk.io/
+  - https://godaddy.com/
+  - https://www.linkedin.com/
+  - https://twitter.com/*
+  - https://t.co/*
 DirectoryPath: public
 TestFilesConcurrently: true
-DocumentConcurrencyLimit: 32
-HTTPConcurrencyLimit: 8
+DocumentConcurrencyLimit: 16
+HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
+HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-"}

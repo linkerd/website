@@ -1,5 +1,6 @@
 @import 'helpers';
-
+@import 'spacing';
+@import 'flexbox';
 html,
 body {
   font-size: 16px;
@@ -957,7 +958,7 @@ body {
 
 /* blog-list */
 
-.seperator {
+.separator {
   width: 265px;
   max-width: 100%;
   margin: 1.5rem auto;

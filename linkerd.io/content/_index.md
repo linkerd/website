@@ -1,10 +1,11 @@
 ---
-title: Homepage
+title: The world's lightest, fastest service mesh.
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
-  title: Ultralight service mesh for Kubernetes and beyond
-  description: Linkerd is an ultralight service mesh for Kubernetes. It gives you
-    observability, reliability, and security without requiring any code changes.
+  title: A different kind of service mesh
+  description: Ultra light, ultra simple, ultra powerful. Linkerd adds
+    security, observability, and reliability to Kubernetes, *without* the
+    complexity. CNCF-hosted and 100% open source.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
@@ -13,9 +14,10 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Linkerd 2.6 has been released! [Read the announcement >>](/2019/10/10/announcing-linkerd-2.6/)
-description: Linkerd is a service mesh for Kubernetes and beyond. It gives you observability,
-  reliability, and security without requiring any changes to your code.
+  description: Announcing Linkerd 2.9! mTLS for all TCP, and much more. [Read more](/2020/11/09/announcing-linkerd-2.9/)
+    »
+description: Linkerd adds critical security, observability, and reliability to your
+  Kubernetes stack, without any code changes.
 keywords:
 - cloud native applications
 outputs:
@@ -23,10 +25,10 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
-  - '1166399513923211265'
-  - '1091591745870139392'
-  - '1151035350208454656'
-  - '1130973416775983104'
+  - '1265777169810124800'
+  - '1284349663647133699'
+  - '1280094604482805763'
+  - '1286514800437190661'
   tweets_md: ''
 event_pictures: []
 features_list:
@@ -68,14 +70,14 @@ companies:
   link: https://ask.com/
 - image: "/uploads/logos/blue/bigcommerce.svg"
   link: https://www.bigcommerce.com/
-- image: "/uploads/logos/blue/chase.svg"
-  link: https://www.chase.com/
 - image: "/uploads/logos/blue/comcast.svg"
   link: https://www.xfinity.com/
 - image: "/uploads/logos/blue/ebay.svg"
   link: https://www.ebay.com/
 - image: "/uploads/logos/blue/godaddy.svg"
   link: https://godaddy.com/
+- image: "/uploads/blue-h-e-b.svg"
+  link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
   link: https://www.walmart.com/
 - image: "/uploads/logos/blue/planet.svg"
@@ -85,7 +87,7 @@ companies:
 - image: "/uploads/logos/blue/elkjopnordic.svg"
   link: https://www.elkjopnordic.com/
 foundation_member_banner:
-  title: Linkerd is hosted by the CNCF
+  title: Linkerd is a CNCF incubating project
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---

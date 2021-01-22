@@ -20,7 +20,7 @@ weight = 9
 Linkerd can be thought of as a *dynamic linker* for microservices. In an
 operating system, the dynamic linker takes runtime information about the name
 of a library and function call to be executed, and performs whatever work is
-necessary to make that function invokable to an executable. Linkerd does the
+necessary to make that function invocable to an executable. Linkerd does the
 analogous task for microservices: it takes the name of a service and of a call
 to make on that service (HTTP, gRPC, etc.), and does the work required to make
 the call successful---including routing, load-balancing, and retrying.

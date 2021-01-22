@@ -48,6 +48,7 @@ validate_checksum() {
 
 OS=$(uname -s)
 arch=$(uname -m)
+cli_arch=""
 case $OS in
   CYGWIN* | MINGW64*)
     OS=windows.exe
@@ -57,6 +58,19 @@ case $OS in
   Linux)
     case $arch in
       x86_64)
+        cli_arch=amd64
+        ;;
+      armv8*)
+        cli_arch=arm64
+        ;;
+      aarch64*)
+        cli_arch=arm64
+        ;;
+      armv*)
+        cli_arch=arm
+        ;;
+      amd64|arm64)
+        cli_arch=$arch
         ;;
       *)
         echo "There is no linkerd $OS support for $arch. Please open an issue with your platform details."
@@ -79,6 +93,9 @@ checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
 
 tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
 srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
+if [ -n "${cli_arch}" ]; then
+  srcfile="${srcfile}-${cli_arch}"
+fi
 dstfile="${INSTALLROOT}/bin/linkerd-${LINKERD2_VERSION}"
 url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
 

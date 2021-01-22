@@ -1,32 +1,32 @@
 +++
-title = "Adding Your Service"
-description = "Add your service to the mesh by marking it for data plane proxy injection."
+title = "Adding Your Services to Linkerd"
+description = "Add your services to the mesh."
 aliases = [
   "/2/adding-your-service/",
   "/2/tasks/automating-injection/"
 ]
 +++
 
-In order for your services to take advantage of Linkerd, they need to have
-Linkerd's data plane proxy added to their pods. This is typically done by
-annotating the namespace, deployment, or pod with the `linkerd.io/inject:
-enabled` Kubernetes annotation, which will trigger *automatic proxy injection*
-when the resources are created. There is a full list of the configuration
-options available in [reference](/2/reference/proxy-configuration/). (See the
-[proxy injection page](/2/features/proxy-injection/) for more on how this
-works.)
+In order for your services to take advantage of Linkerd, they need to be "added
+to the mesh" by having Linkerd's data plane proxy injected into their pods.
+This is typically done by annotating the namespace, deployment, or pod with the
+`linkerd.io/inject: enabled` Kubernetes annotation. This annotation triggers
+*automatic proxy injection* when the resources are created.
+(See the [proxy injection
+page](/2/features/proxy-injection/) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
 inject`](/2/reference/cli/inject/) text transform command will add this
 annotation to a given Kubernetes manifest. Of course, these annotations can be
-set by other mechanisms.
+set by any other mechanism.
 
 Note that simply adding the annotation to a resource with pre-existing pods
-will not automatically inject those pods. You will need to update the pods
-(e.g. with `kubectl rollout restart` etc.) for them to be injected.  With a
-[rolling
-update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/),
-the proxy often can be added to a live service without interruption.)
+will not automatically inject those pods. Because of the way that Kubernetes
+works, after setting the annotation, you will need to also need to recreate or
+update the pods (e.g. with `kubectl rollout restart` etc.) before proxy
+injection can happen. Often, a [rolling
+update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)
+can be performed to inject the proxy into a live service without interruption.)
 
 ## Example
 

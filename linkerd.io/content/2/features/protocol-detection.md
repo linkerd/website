@@ -35,7 +35,6 @@ The following protocols are known to be server-speaks-first:
 
 * 25   - SMTP
 * 3306 - MySQL
-* 8086 - InfluxDB
 * 4222 - NATS
 * 27017 - MongoDB
 

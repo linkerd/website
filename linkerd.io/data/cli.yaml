@@ -15,9 +15,9 @@ AnnotationsReference:
   Name: config.linkerd.io/debug-image-pull-policy
 - Description: Proxy port to use for control
   Name: config.linkerd.io/control-port
-- Description: Ports that should skip the proxy and send directly to the application
+- Description: Ports that should skip the proxy and send directly to the application. Comma-separated list of values, where each value can be a port number or a range `a-b`.
   Name: config.linkerd.io/skip-inbound-ports
-- Description: Outbound ports that should skip the proxy
+- Description: Outbound ports that should skip the proxy. Comma-separated list of values, where each value can be a port number or a range `a-b`.
   Name: config.linkerd.io/skip-outbound-ports
 - Description: Proxy port to use for inbound traffic
   Name: config.linkerd.io/inbound-port
@@ -47,7 +47,7 @@ AnnotationsReference:
   Name: config.linkerd.io/disable-tap
 - Description: Inject a debug sidecar for data plane debugging
   Name: config.linkerd.io/enable-debug-sidecar
-- Description: Service name of the trace collector. E.g. `oc-collector.tracing:55678`
+- Description: Service name of the trace collector. E.g. `linkerd-collector.linkerd:55678`
   Name: config.linkerd.io/trace-collector
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
     If not provided, it will be defaulted to `default`.
@@ -100,6 +100,10 @@ CLIReference:
   InheritedOptions: null
   Name: check
   Options:
+  - DefaultValue: ""
+    Name: cli-version-override
+    Shorthand: ""
+    Usage: Used to override the version of the cli (mostly for testing)
   - DefaultValue: ""
     Name: expected-version
     Shorthand: ""
@@ -482,7 +486,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: restrict-dashboard-privileges
     Shorthand: ""
@@ -612,7 +616,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -817,7 +821,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -889,7 +893,7 @@ CLIReference:
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd
 - Description: |-
-    Output Kubernetes configs to install Linkerd CNI (experimental).
+    Output Kubernetes configs to install Linkerd CNI.
 
     This command installs a DaemonSet into the Linkerd control plane. The DaemonSet
     copies the necessary linkerd-cni plugin binaries and configs onto the host. It
@@ -958,19 +962,19 @@ CLIReference:
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
-      Ports that should skip the proxy and send directly to the application
+      Ports and/or port ranges (inclusive) that should skip the proxy and send directly to the application
   - DefaultValue: ""
     Name: skip-outbound-ports
     Shorthand: ""
-    Usage: Outbound ports that should skip the proxy
+    Usage: |
+      Outbound ports and/or port ranges (inclusive) that should skip the proxy
   - DefaultValue: ""
     Name: use-wait-flag
     Shorthand: ""
     Usage: |
       Configures the CNI plugin to use the "-w" flag for the iptables command. (default false)
   SeeAlso: null
-  Synopsis: |
-    Output Kubernetes configs to install Linkerd CNI (experimental)
+  Synopsis: Output Kubernetes configs to install Linkerd CNI
 - Description: |-
     Output Kubernetes configs to install Linkerd Service Profiles.
 
@@ -1093,7 +1097,7 @@ CLIReference:
 - Description: Output service profile config for Kubernetes.
   Example: |2
       # Output a basic template to apply after modification.
-      linkerd profile -n emoijvoto --template web-svc
+      linkerd profile -n emojivoto --template web-svc
 
       # Generate a profile from an OpenAPI specification.
       linkerd profile -n emojivoto --open-api web-svc.swagger web-svc
@@ -1300,6 +1304,11 @@ CLIReference:
     Name: output
     Shorthand: o
     Usage: 'Output format; one of: "table" or "json" or "wide"'
+  - DefaultValue: ""
+    Name: selector
+    Shorthand: l
+    Usage: |
+      Selector (label query) to filter on, supports '=', '==', and '!='
   - DefaultValue: ""
     Name: time-window
     Shorthand: t
@@ -1517,7 +1526,7 @@ CLIReference:
     Note that this command should be followed by "linkerd upgrade control-plane".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade config | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade config | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade config
   Options:
@@ -1529,7 +1538,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: restrict-dashboard-privileges
     Shorthand: ""
@@ -1546,7 +1555,7 @@ CLIReference:
     install command. It should be run after "linkerd upgrade config".
   Example: |2-
       # Default upgrade.
-      linkerd upgrade control-plane | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      linkerd upgrade control-plane | kubectl apply -f -
   InheritedOptions: null
   Name: upgrade control-plane
   Options:
@@ -1646,7 +1655,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -1779,7 +1788,7 @@ CLIReference:
     Name: force
     Shorthand: ""
     Usage: |
-      Force upgrade operation even when issuer certificate does not work with the roots of all proxies
+      Force upgrade operation even when issuer certificate does not work with the trust anchors of all proxies
   - DefaultValue: ""
     Name: from-manifests
     Shorthand: ""
@@ -1839,7 +1848,7 @@ CLIReference:
     Name: linkerd-cni-enabled
     Shorthand: ""
     Usage: |
-      Experimental: Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
+      Omit the NET_ADMIN capability in the PSP and the proxy-init container when injecting the proxy; requires the linkerd-cni plugin to already be installed
   - DefaultValue: ""
     Name: omit-webhook-side-effects
     Shorthand: ""
@@ -1930,3 +1939,4 @@ CLIReference:
     Usage: Print the version number(s) only, with no additional output
   SeeAlso: null
   Synopsis: Print the client and server version information
+

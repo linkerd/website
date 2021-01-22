@@ -43,8 +43,8 @@ create the Kubernetes resources required for Linkerd installation, specifically:
 
 ## The "pre-kubernetes-setup" checks {#pre-k8s}
 
-These checks only run when the `--pre` flag is set This flag is intended for
-use prior to running `linkerd install`, to verify you have the correct RBAC
+These checks only run when the `--pre` flag is set This flag is intended for use
+prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
 ```bash
@@ -61,9 +61,22 @@ permissions to install Linkerd.
 
 ### √ no clock skew detected {#pre-k8s-clock-skew}
 
-This check verifies whether there is clock skew between the system running
-the `linkerd install` command and the Kubernetes node(s), causing
-potential issues.
+This check detects any differences between the system running the
+`linkerd install` command and the Kubernetes nodes (known as clock skew). Having
+a substantial clock skew can cause TLS validation problems because a node may
+determine that a TLS certificate is expired when it should not be, or vice
+versa.
+
+Linkerd version edge-20.3.4 and later check for a difference of at most 5
+minutes and older versions of Linkerd (including stable-2.7) check for a
+difference of at most 1 minute. If your Kubernetes node heartbeat interval is
+longer than this difference, you may experience false positives of this check.
+The default node heartbeat interval was increased to 5 minutes in Kubernetes
+1.17 meaning that users running Linkerd versions prior to edge-20.3.4 on
+Kubernetes 1.17 or later are likely to experience these false positives. If this
+is the case, you can upgrade to Linkerd edge-20.3.4 or later. If you choose to
+ignore this error, we strongly recommend that you verify that your system clocks
+are consistent.
 
 ## The "pre-kubernetes-capability" checks {#pre-k8s-capability}
 
@@ -87,7 +100,8 @@ for modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+and the
+[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ### √ has NET_RAW capability {#pre-k8s-cluster-net-raw}
 
@@ -105,7 +119,8 @@ modification of iptables.
 For more information, see the Kubernetes documentation on
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
 [Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the [man page on Linux Capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html).
+and the
+[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 ## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
 
@@ -241,8 +256,7 @@ kubectl version --client --short
 To fix please update kubectl version.
 
 For more information on upgrading Kubernetes, see the page in the Kubernetes
-Documentation on
-[Upgrading a cluster](https://kubernetes.io/docs/tasks/administer-cluster/cluster-management/#upgrading-a-cluster)
+Documentation.
 
 ## The "linkerd-config" checks {#l5d-config}
 
@@ -604,13 +618,13 @@ Example failures:
     see https://linkerd.io/checks/#l5d-identity-cert-config-valid
 ```
 
-Ensure that your `linkerd-identity-issuer` secret contains the correct keys
-for the `scheme` that Linkerd is configured with. If the scheme is
-`kubernetes.io/tls` your secret should contain the `tls.crt`, `tls.key`
-and `ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the
-required keys are `crt.pem` and `key.pem`.
+Ensure that your `linkerd-identity-issuer` secret contains the correct keys for
+the `scheme` that Linkerd is configured with. If the scheme is
+`kubernetes.io/tls` your secret should contain the `tls.crt`, `tls.key` and
+`ca.crt` keys. Alternatively if your scheme is `linkerd.io/tls`, the required
+keys are `crt.pem` and `key.pem`.
 
-### √ trust roots are using supported crypto algorithm {#l5d-identity-roots-use-supported-crypto}
+### √ trust roots are using supported crypto algorithm {#l5d-identity-trustAnchors-use-supported-crypto}
 
 Example failure:
 
@@ -618,13 +632,13 @@ Example failure:
 × trust roots are using supported crypto algorithm
     Invalid roots:
         * 165223702412626077778653586125774349756 identity.linkerd.cluster.local must use P-256 curve for public key, instead P-521 was used
-    see https://linkerd.io/checks/#l5d-identity-roots-use-supported-crypto
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-use-supported-crypto
 ```
 
 You need to ensure that all of your roots use ECDSA P-256 for their public key
 algorithm.
 
-### √ trust roots are within their validity period {#l5d-identity-roots-are-time-valid}
+### √ trust roots are within their validity period {#l5d-identity-trustAnchors-are-time-valid}
 
 Example failure:
 
@@ -632,16 +646,16 @@ Example failure:
 × trust roots are within their validity period
     Invalid roots:
         * 199607941798581518463476688845828639279 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T13:08:18Z
-    see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid for hints
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-are-time-valid for hints
 ```
 
 Failures of such nature indicate that your roots have expired. If that is the
-case you will have to update both the root and issuer certificates at once.
-You can follow the process outlined in
-[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/)
-to get your cluster back to a stable state.
+case you will have to update both the root and issuer certificates at once. You
+can follow the process outlined in
+[Replacing Expired Certificates](/2/tasks/replacing_expired_certificates/) to
+get your cluster back to a stable state.
 
-### √ trust roots are valid for at least 60 days {#l5d-identity-roots-not-expiring-soon}
+### √ trust roots are valid for at least 60 days {#l5d-identity-trustAnchors-not-expiring-soon}
 
 Example warnings:
 
@@ -649,12 +663,13 @@ Example warnings:
 ‼ trust roots are valid for at least 60 days
     Roots expiring soon:
         * 66509928892441932260491975092256847205 identity.linkerd.cluster.local will expire on 2019-12-19T13:30:57Z
-    see https://linkerd.io/checks/#l5d-identity-roots-not-expiring-soon for hints
+    see https://linkerd.io/checks/#l5d-identity-trustAnchors-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of some of your roots is approaching.
-In order to address this problem without incurring downtime, you can follow
-the process outlined in [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+This warning indicates that the expiry of some of your roots is approaching. In
+order to address this problem without incurring downtime, you can follow the
+process outlined in
+[Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
 
 ### √ issuer cert is using supported crypto algorithm {#l5d-identity-issuer-cert-uses-supported-crypto}
 
@@ -696,27 +711,27 @@ Example warning:
 ```
 
 This warning means that your issuer certificate is expiring soon. If you do not
-rely on external certificate management solution such as `cert-manager`, you
-can follow the process outlined in
+rely on external certificate management solution such as `cert-manager`, you can
+follow the process outlined in
 [Rotating your identity certificates](/2/tasks/rotating_identity_certificates/)
 
-### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-root}
+### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-anchor}
 
 Example error:
 
 ```bash
 × issuer cert is issued by the trust root
     x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-root for hints
+    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-anchor for hints
 ```
 
 This error indicates that the issuer certificate that is in the
-`linkerd-identity-issuer` secret cannot be verified with any of the roots
-that Linkerd has been configured with. Using the CLI install process, this
-should never happen. If Helm was used for installation or the issuer
-certificates are managed by a malfunctioning certificate management solution,
-it is possible for the cluster to end up in such an invalid state. At that
-point the best to do is to use the upgrade command to update your certificates:
+`linkerd-identity-issuer` secret cannot be verified with any of the roots that
+Linkerd has been configured with. Using the CLI install process, this should
+never happen. If Helm was used for installation or the issuer certificates are
+managed by a malfunctioning certificate management solution, it is possible for
+the cluster to end up in such an invalid state. At that point the best to do is
+to use the upgrade command to update your certificates:
 
 ```bash
 linkerd upgrade \
@@ -746,6 +761,95 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
+## The "linkerd-webhooks-and-apisvc-tls" checks {#l5d-webhook}
+
+### √ tap API server has valid cert {#l5d-tap-cert-valid}
+
+Example failure:
+
+```bash
+× tap API server has valid cert
+    secrets "linkerd-tap-tls" not found
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
+`tls.crt` and `tls.key` data entries. For versions before 2.9, the secret is
+named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
+entries.
+
+```bash
+× tap API server has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd.svc
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Here you need to make sure the certificate was issued specifically for
+`linkerd-tap.linkerd.svc`.
+
+### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ tap API server cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of one of your webhooks (tap API server,
+proxy-injector or sp-validator) cert is approaching. In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
+
+### √ proxy-injector webhook has valid cert {#l5d-proxy-injector-webhook-cert-valid}
+
+Example failure:
+
+```bash
+× proxy-injector webhook has valid cert
+    secrets "linkerd-proxy-injector-tls" not found
+    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+```
+
+Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the
+appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
+secret is named `linkerd-proxy-injector-tls` and it should contain the `crt.pem`
+and `key.pem` data entries.
+
+```bash
+× proxy-injector webhook has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-proxy-injector.linkerd.svc
+    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+```
+
+Here you need to make sure the certificate was issued specifically for
+`linkerd-proxy-injector.linkerd.svc`.
+
+### √ sp-validator webhook has valid cert {#l5d-sp-validator-webhook-cert-valid}
+
+Example failure:
+
+```bash
+× sp-validator webhook has valid cert
+    secrets "linkerd-sp-validator-tls" not found
+    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+```
+
+Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the
+appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
+secret is named `linkerd-sp-validator-tls` and it should contain the `crt.pem`
+and `key.pem` data entries.
+
+```bash
+× sp-validator webhook has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-sp-validator.linkerd.svc
+    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+```
+
+Here you need to make sure the certificate was issued specifically for
+`linkerd-sp-validator.linkerd.svc`.
+
 ## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
 
 ### √ data plane proxies certificate match CA {#l5d-identity-data-plane-proxies-certs-match-ca}
@@ -761,15 +865,15 @@ Example warning:
     see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
-Observing this warning indicates that some of your meshed pods have proxies
-that have stale certificates. This is most likely to happen during `upgrade`
-operations that deal with cert rotation. In order to solve the problem you
-can use `rollout restart` to restart the pods in question. That should cause
-them to pick the correct certs from the `linkerd-config` configmap.
-When `upgrade` is performed using the `--identity-trust-anchors-file` flag to
-modify the roots, the Linkerd components are restarted. While this operation
-is in progress the `check --proxy` command may output a warning, pertaining to
-the Linkerd components:
+Observing this warning indicates that some of your meshed pods have proxies that
+have stale certificates. This is most likely to happen during `upgrade`
+operations that deal with cert rotation. In order to solve the problem you can
+use `rollout restart` to restart the pods in question. That should cause them to
+pick the correct certs from the `linkerd-config` configmap. When `upgrade` is
+performed using the `--identity-trust-anchors-file` flag to modify the roots,
+the Linkerd components are restarted. While this operation is in progress the
+`check --proxy` command may output a warning, pertaining to the Linkerd
+components:
 
 ```bash
 ‼ data plane proxies certificate match CA
@@ -780,9 +884,9 @@ the Linkerd components:
     see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
-If that is the case, simply wait for the `upgrade` operation to complete.
-The stale pods should terminate and be replaced by new ones, configured with
-the correct certificates.
+If that is the case, simply wait for the `upgrade` operation to complete. The
+stale pods should terminate and be replaced by new ones, configured with the
+correct certificates.
 
 ## The "linkerd-api" checks {#l5d-api}
 
@@ -845,12 +949,10 @@ Example failure:
     Error calling Prometheus from the control plane: FAIL
 ```
 
-{{< note >}}
-This will fail if you have changed your default cluster domain from
+{{< note >}} This will fail if you have changed your default cluster domain from
 `cluster.local`, see the
 [associated issue](https://github.com/linkerd/linkerd2/issues/1720) for more
-information and potential workarounds.
-{{< /note >}}
+information and potential workarounds. {{< /note >}}
 
 Validate that the Prometheus instance is up and running:
 
@@ -869,6 +971,24 @@ Check the logs on the control-plane's public API:
 ```bash
 linkerd logs --control-plane-component controller --container public-api
 ```
+
+### √ tap api service is running {#l5d-tap-api}
+
+Example failure:
+
+```bash
+× FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+```
+
+tap uses the
+[kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+to allow users to have k8s RBAC on top. This model has the following specific
+requirements in the cluster:
+
+- tap Server must be
+  [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
+- The kube-apiserver must be correctly configured to
+  [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
 
 ## The "linkerd-service-profile" checks {#l5d-sp}
 
@@ -1055,10 +1175,670 @@ $ kubectl get namespace kube-system -oyaml
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: linkerd
+  name: kube-system
   annotations:
     linkerd.io/inject: disabled
   labels:
-    linkerd.io/is-control-plane: "true"
     config.linkerd.io/admission-webhooks: disabled
 ```
+
+### √ multiple replicas of control plane pods {#l5d-control-plane-replicas}
+
+Example warning:
+
+```bash
+‼ multiple replicas of control plane pods
+    not enough replicas available for [linkerd-controller]
+    see https://linkerd.io/checks/#l5d-control-plane-replicas for hints
+```
+
+This happens when one of the control plane pods doesn't have at least two
+replicas running. This is likely caused by insufficient node resources.
+
+## The "linkerd-cni-plugin" checks {#l5d-cni}
+
+These checks run if Linkerd has been installed with the `--linkerd-cni-enabled`
+flag. Alternatively they can be run as part of the pre-checks by providing the
+`--linkerd-cni-enabled` flag. Most of these checks verify that the required
+resources are in place. If any of them are missing, you can use
+`linkerd install-cni | kubectl apply -f -` to re-install them.
+
+### √ cni plugin ConfigMap exists {#cni-plugin-cm-exists}
+
+Example error:
+
+```bash
+× cni plugin ConfigMap exists
+    configmaps "linkerd-cni-config" not found
+    see https://linkerd.io/checks/#cni-plugin-cm-exists for hints
+```
+
+Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
+
+```bash
+$ kubectl get cm linkerd-cni-config -n linkerd-cni
+NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
+linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
+```
+
+Also ensure you have permission to create ConfigMaps:
+
+```bash
+$ kubectl auth can-i create ConfigMaps
+yes
+```
+
+### √ cni plugin PodSecurityPolicy exists {#cni-plugin-psp-exists}
+
+Example error:
+
+```bash
+× cni plugin PodSecurityPolicy exists
+    missing PodSecurityPolicy: linkerd-linkerd-cni-cni
+    see https://linkerd.io/checks/#cni-plugin-psp-exists for hint
+```
+
+Ensure that the pod security policy exists:
+
+```bash
+$ kubectl get psp linkerd-linkerd-cni-cni
+NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
+linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
+```
+
+Also ensure you have permission to create PodSecurityPolicies:
+
+```bash
+$ kubectl auth can-i create PodSecurityPolicies
+yes
+```
+
+### √ cni plugin ClusterRole exist {#cni-plugin-cr-exists}
+
+Example error:
+
+```bash
+× cni plugin ClusterRole exists
+    missing ClusterRole: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-cr-exists for hints
+```
+
+Ensure that the cluster role exists:
+
+```bash
+$ kubectl get clusterrole linkerd-cni
+NAME          AGE
+linkerd-cni   54m
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create ClusterRoles
+yes
+```
+
+### √ cni plugin ClusterRoleBinding exist {#cni-plugin-crb-exists}
+
+Example error:
+
+```bash
+× cni plugin ClusterRoleBinding exists
+    missing ClusterRoleBinding: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-crb-exists for hints
+```
+
+Ensure that the cluster role binding exists:
+
+```bash
+$ kubectl get clusterrolebinding linkerd-cni
+NAME          AGE
+linkerd-cni   54m
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create ClusterRoleBindings
+yes
+```
+
+### √ cni plugin Role exists {#cni-plugin-r-exists}
+
+Example error:
+
+```bash
+× cni plugin Role exists
+    missing Role: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-r-exists for hints
+```
+
+Ensure that the role exists in the CNI namespace:
+
+```bash
+$ kubectl get role linkerd-cni -n linkerd-cni
+NAME          AGE
+linkerd-cni   52m
+```
+
+Also ensure you have permission to create Roles:
+
+```bash
+$ kubectl auth can-i create Roles -n linkerd-cni
+yes
+```
+
+### √ cni plugin RoleBinding exists {#cni-plugin-rb-exists}
+
+Example error:
+
+```bash
+× cni plugin RoleBinding exists
+    missing RoleBinding: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-rb-exists for hints
+```
+
+Ensure that the role binding exists in the CNI namespace:
+
+```bash
+$ kubectl get rolebinding linkerd-cni -n linkerd-cni
+NAME          AGE
+linkerd-cni   49m
+```
+
+Also ensure you have permission to create RoleBindings:
+
+```bash
+$ kubectl auth can-i create RoleBindings -n linkerd-cni
+yes
+```
+
+### √ cni plugin ServiceAccount exists {#cni-plugin-sa-exists}
+
+Example error:
+
+```bash
+× cni plugin ServiceAccount exists
+    missing ServiceAccount: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-sa-exists for hints
+```
+
+Ensure that the CNI service account exists in the CNI namespace:
+
+```bash
+$ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
+NAME          SECRETS   AGE
+linkerd-cni   1         45m
+```
+
+Also ensure you have permission to create ServiceAccount:
+
+```bash
+$ kubectl auth can-i create ServiceAccounts -n linkerd-cni
+yes
+```
+
+### √ cni plugin DaemonSet exists {#cni-plugin-ds-exists}
+
+Example error:
+
+```bash
+× cni plugin DaemonSet exists
+    missing DaemonSet: linkerd-cni
+    see https://linkerd.io/checks/#cni-plugin-ds-exists for hints
+```
+
+Ensure that the CNI daemonset exists in the CNI namespace:
+
+```bash
+$ kubectl get ds -n linkerd-cni
+NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
+linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
+```
+
+Also ensure you have permission to create DaemonSets:
+
+```bash
+$ kubectl auth can-i create DaemonSets -n linkerd-cni
+yes
+```
+
+### √ cni plugin pod is running on all nodes {#cni-plugin-ready}
+
+Example failure:
+
+```bash
+‼ cni plugin pod is running on all nodes
+    number ready: 2, number scheduled: 3
+    see https://linkerd.io/checks/#cni-plugin-ready
+```
+
+Ensure that all the CNI pods are running:
+
+```bash
+$ kubectl get po -n linkerd-cn
+NAME                READY   STATUS    RESTARTS   AGE
+linkerd-cni-rzp2q   1/1     Running   0          9m20s
+linkerd-cni-mf564   1/1     Running   0          9m22s
+linkerd-cni-p5670   1/1     Running   0          9m25s
+```
+
+Ensure that all pods have finished the deployment of the CNI config and binary:
+
+```bash
+$ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
+Wrote linkerd CNI binaries to /host/opt/cni/bin
+Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
+Done configuring CNI. Sleep=true
+```
+
+## The "linkerd-multicluster checks {#l5d-multicluster}
+
+These checks run if the service mirroring controller has been installed.
+Additionally they can be ran if `--multicluster` flag is specified explicitly.
+Most of these checks verify that the service mirroring controller is working
+correctly. Furthermore the checks ensure that end to end TLS is possible between
+paired clusters.
+
+### √ service mirror controller is running {#l5d-multicluster-service-mirror-running}
+
+Example error:
+
+```bash
+× service mirror controller is running
+    Service mirror controller is not present
+    see https://linkerd.io/checks/#l5d-multicluster-service-mirror-running for hints
+```
+
+Note, it takes a little bit for pods to be scheduled, images to be pulled and
+everything to start up. If this is a permanent error, you'll want to validate
+the state of the controller pod with:
+
+```bash
+$ kubectl --all-namespaces get po --selector linkerd.io/control-plane-component=linkerd-service-mirror
+NAME                                  READY     STATUS    RESTARTS   AGE
+linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
+```
+
+### √ service mirror controller ClusterRoles exists {#l5d-multicluster-cluster-role-exists}
+
+Example error:
+
+```bash
+× service mirror controller ClusterRoles exists
+    missing ClusterRoles: linkerd-service-mirror-access-local-resources
+    see https://linkerd.io/checks/#l5d-multicluster-cluster-role-exists for hints
+```
+
+Ensure that the cluster role exists:
+
+```bash
+$ kubectl get clusterrole linkerd-service-mirror-access-local-resources
+NAME                                            AGE
+linkerd-service-mirror-access-local-resources   54m
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create ClusterRoles
+yes
+```
+
+### √ service mirror controller ClusterRoleBindings exist {#l5d-multicluster-cluster-role-binding-exist}
+
+Example error:
+
+```bash
+× service mirror controller ClusterRoleBindings exist
+    missing ClusterRoleBindings: linkerd-service-mirror-access-local-resources
+    see https://linkerd.io/checks/#l5d-multicluster-cluster-role-binding-exist for hints
+```
+
+Ensure that the cluster role bindings exists:
+
+```bash
+$ kubectl get clusterrolebindings linkerd-service-mirror-access-local-resources
+NAME                                            AGE
+linkerd-service-mirror-access-local-resources   54m
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create ClusterRoleBindings
+yes
+```
+
+### √ service mirror controller Roles exist {#l5d-multicluster-role-exist}
+
+Example error:
+
+```bash
+× service mirror controller Roles exist
+    missing Roles: linkerd-service-mirror-read-remote-creds
+    see https://linkerd.io/checks/#l5d-multicluster-role-exist for hints
+```
+
+Ensure that the role exists in the service mirror controller namespace:
+
+```bash
+$ kubectl get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster
+NAME                                       AGE
+linkerd-service-mirror-read-remote-creds   12m
+```
+
+Also ensure you have permission to create Roles:
+
+```bash
+$ kubectl auth can-i create Roles -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller RoleBindings exist {#l5d-multicluster-role-binding-exist}
+
+Example error:
+
+```bash
+× service mirror controller RoleBindings exist
+    missing RoleBindings: linkerd-service-mirror-read-remote-creds
+    see https://linkerd.io/checks/#l5d-multicluster-role-binding-exist for hints
+```
+
+Ensure that the role binding exists in service mirror controller namespace:
+
+```bash
+$ kubectl get rolebinding linkerd-service-mirror-read-remote-creds -n linkerd-multicluster
+NAME                                       AGE
+linkerd-service-mirror-read-remote-creds   19m
+```
+
+Also ensure you have permission to create RoleBindings:
+
+```bash
+$ kubectl auth can-i create RoleBindings -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller ServiceAccounts exist {#l5d-multicluster-service-account-exist}
+
+Example error:
+
+```bash
+× service mirror controller ServiceAccounts exist
+    missing ServiceAccounts: linkerd-service-mirror
+    see https://linkerd.io/checks/#l5d-multicluster-service-account-exist for hints
+```
+
+Ensure that the linkerd-service-mirror service account exists:
+
+```bash
+$ kubectl get ServiceAccount linkerd-service-mirror -n linkerd-multicluster
+NAME                     SECRETS   AGE
+linkerd-service-mirror   1         45m
+```
+
+Also ensure you have permission to create ServiceAccount:
+
+```bash
+$ kubectl auth can-i create ServiceAccounts -n linkerd-multicluster
+yes
+```
+
+### √ service mirror controller has required permissions {#l5d-multicluster-local-rbac-correct}
+
+Example error:
+
+```bash
+× service mirror controller has required permissions
+    missing Service mirror ClusterRole linkerd-service-mirror-access-local-resources: unexpected verbs expected create,delete,get,list,update,watch, got create,delete,get,update,watch
+    see https://linkerd.io/checks/#l5d-multicluster-local-rbac-correct for hints
+```
+
+This error indicates that the local RBAC permissions of the service mirror
+service account are not correct. In order to ensure that you have the correct
+verbs and resources you can inspect your ClusterRole and Role object and look at
+the rules section.
+
+Expected rules for `linkerd-service-mirror-access-local-resources` cluster role:
+
+```bash
+$ kubectl  --context=local get clusterrole linkerd-service-mirror-access-local-resources -o yaml
+kind: ClusterRole
+metadata:
+  labels:
+    linkerd.io/control-plane-component: linkerd-service-mirror
+  name: linkerd-service-mirror-access-local-resources
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  - services
+  verbs:
+  - list
+  - get
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - create
+  - list
+  - get
+  - watch
+```
+
+Expected rules for `linkerd-service-mirror-read-remote-creds` role:
+
+```bash
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+kind: Role
+metadata:
+  labels:
+    linkerd.io/control-plane-component: linkerd-service-mirror
+  name: linkerd-service-mirror-read-remote-creds
+  namespace: linkerd-multicluster
+  rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+  - watch
+```
+
+### √ service mirror controller can access remote clusters {#l5d-smc-remote-remote-clusters-access}
+
+Example error:
+
+```bash
+× service mirror controller can access remote clusters
+    Problematic clusters:
+        * cluster: [remote]: Insufficient Service permissions: expected get,list,watch, got list,watch
+    see https://linkerd.io/checks/#l5d-smc-remote-remote-clusters-access for hints
+```
+
+In case you get an error of that nature you need to ensure that the ClusterRole
+in the remote cluster has sufficient permissions for the service mirroring
+controller to work correctly:
+
+```bash
+$ kubectl --context=remote get  clusterrole linkerd-service-mirror-remote-access  -n linkerd-multicluster -o yaml
+kind: ClusterRole
+metadata:
+  name: linkerd-service-mirror-remote-access
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resourceNames:
+  - linkerd-config
+  resources:
+  - configmaps
+  verbs:
+  - get
+
+```
+
+### √ all remote cluster gateways are alive {#l5d-multicluster-remote-gateways-alive}
+
+Example error:
+
+```bash
+× all remote cluster gateways are alive
+    Some gateways are not alive:
+        * cluster: [remote], gateway: [linkerd-multicluster/linkerd-gateway]
+    see https://linkerd.io/checks/#l5d-multicluster-remote-gateways-alive
+```
+
+If you get such an error, you might want to check the logs of your cluster
+gateway on the `remote` cluster by running:
+
+```bash
+kubectl --context=remote  logs <linkerd-gatewa-pod>  nginx  -n linkerd-multicluster  -f
+```
+
+Additionally it is worth checking the logs of the proxy for any errors:
+
+```bash
+kubectl --context=remote  logs <linkerd-gatewa-pod>  proxy  -n linkerd-multicluster  -f
+```
+
+### √ clusters share trust anchors {#l5d-multicluster-clusters-share-anchors}
+
+Example errors:
+
+```bash
+× clusters share trust anchors
+    Problematic clusters:
+        * remote
+    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+```
+
+The error above indicates that your trust anchors are not compatible. In order
+to fix that you need to ensure that both your anchors contain identical sets of
+certificates.
+
+```bash
+× clusters share trust anchors
+    Problematic clusters:
+        * remote: cannot parse trust anchors
+    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+```
+
+Such an error indicates that there is a problem with your anchors on the cluster
+named `remote` You need to make sure the identity config aspect of your Linkerd
+installation on the `remote` cluster is ok. You can run `check` against the
+remote cluster to verify that:
+
+```bash
+linkerd --context=remote check
+```
+
+### √ multicluster daisy chaining is avoided {#l5d-multicluster-daisy-chaining}
+
+Example errors:
+
+```bash
+‼ multicluster daisy chaining is avoided
+    * mirror service backend-one-svc-remote.multicluster-test is exported
+    see https://linkerd.io/checks/#l5d-multicluster-daisy-chaining for hints
+```
+
+This error indicates that a mirror service has been exported, causing a "daisy
+chain" where requests can come in to the cluster through the local gateway and
+be immediately sent out of the cluster to a target gateway. If the target
+gateway is in the source cluster, this can create an infinite loop.
+
+Similarly, if an exported service routes to a mirror service by a traffic split,
+the same daisy chain effect occurs.
+
+### √ all mirror services have endpoints {#l5d-multicluster-services-endpoints}
+
+Example errors:
+
+```bash
+‼ all mirror services have endpoints
+    Some mirror services do not have endpoints:
+  voting-svc-gke.emojivoto mirrored from cluster [gke] (gateway: [linkerd-multicluster/linkerd-gateway])
+    see https://linkerd.io/checks/#l5d-multicluster-services-endpoints for hints
+```
+
+The error above indicates that some mirror services in the source cluster do not
+have associated endpoints resources. These endpoints are created by the Linkerd
+service mirror controller when creating a mirror service with endpoints values
+as the remote gateway's external IP.
+
+Such an error indicates that there could be a problem with the creation of the
+mirror resources by the service mirror controller or the mirror gateway service
+in the source cluster or the external IP of the gateway service in target
+cluster.
+
+### √ all gateway mirrors have endpoints {#l5d-multicluster-gateways-endpoints}
+
+Example errors:
+
+```bash
+‼ all gateway mirrors have endpoints
+    Some gateway mirrors do not have endpoints:
+  linkerd-gateway-gke.linkerd-multicluster mirrored from cluster [gke]
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-endpoints for hints
+```
+
+The error above indicates that some gateway mirror services in the source
+cluster do not have associated endpoints resources. These endpoints are created
+by the Linkerd service mirror controller on the source cluster whenever a link
+is established with a target cluster.
+
+Such an error indicates that there could be a problem with the creation of the
+resources by the service mirror controller or the external IP of the gateway
+service in target cluster.
+
+### √ all referenced/cluster gateways are valid {#l5d-multicluster-gateways-exist}
+
+This check is used to validate gateways. These are performed perform both at the
+source cluster using the kube-configs of the linked remote clusters, and also at
+the target cluster directly(if there are any exported services present).
+
+Example errors:
+
+```bash
+‼ remote: all referenced gateways are valid
+    * southeastasia: remote cluster has invalid gateways:
+      Exported service web-svc.emojivoto references a gateway with no external IP: linkerd-gateway.linkerd-multicluster
+      Exported service web-svc.emojivoto references a gateway that is missing port mc-gateway: linkerd-gateway.linkerd-multicluster
+    * gke-two: remote cluster has invalid gateways:
+      Exported service voting-svc.emojivoto references a gateway that does not exist: linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+A gateway is considered valid if it exists, has a external IP, and does not have
+any mis-configured ports.
+
+A Linkerd gateway service should have the following ports exposed i.e
+`mc-gateway` and `mc-probe`, which are used to pass requests and check health
+respectively.
+
+```bash
+‼ all cluster gateways are valid
+    Some gateway services do not have endpoints:
+    linkerd-gateway.linkerd-multicluster
+    see https://linkerd.io/checks/#l5d-multicluster-gateways-exist for hints
+```
+
+If the check is performed on the target cluster, It also reports if the relevant
+endpoints resource for the gateway service is absent.

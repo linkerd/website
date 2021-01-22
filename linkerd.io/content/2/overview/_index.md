@@ -13,17 +13,16 @@ aliases = [
 weight = 1
 +++
 
-Linkerd is a _service mesh_ for Kubernetes and other frameworks. It makes
-running services easier and safer by giving you runtime debugging,
-observability, reliability, and security&mdash;all without requiring any
-changes to your code.
+Linkerd is a _service mesh_ for Kubernetes. It makes running services easier
+and safer by giving you runtime debugging, observability, reliability, and
+security&mdash;all without requiring any changes to your code.
 
-For a brief introduction to the service mesh model, we recommend reading
-[What's a service mesh? And why do I need
-one?](https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/)
+For a brief introduction to the service mesh model, we recommend reading [The
+Service Mesh: What Every Software Engineer Needs to Know about the World's Most
+Over-Hyped Technology](https://servicemesh.io/).
 
 Linkerd is fully open source, licensed under [Apache
-v2](https://github.com/linkerd/linkerd2/blob/master/LICENSE), and is a [Cloud
+v2](https://github.com/linkerd/linkerd2/blob/main/LICENSE), and is a [Cloud
 Native Computing Foundation](https://cncf.io) incubating project. Linkerd is
 developed in the open in the [Linkerd GitHub organization](https://github.com/linkerd).
 

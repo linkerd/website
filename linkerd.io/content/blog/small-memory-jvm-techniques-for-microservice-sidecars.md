@@ -111,7 +111,7 @@ We tried turning off both JIT compilers and only relying on the bytecode interpr
 
 Disabling the bytecode verifier reduced CPU utilization by about 15% in our tests.
 
-However, the verifier protects against malicious bytecode and also against bytecode generation bugs. We felt that disabling the verifier could potentially result in a mysteriously unstable production service, so we ultimatley decided to keep it on.
+However, the verifier protects against malicious bytecode and also against bytecode generation bugs. We felt that disabling the verifier could potentially result in a mysteriously unstable production service, so we ultimately decided to keep it on.
 
 ## A note on high throughput instances
 
@@ -144,7 +144,7 @@ In the upcoming 0.7.1 release of Linkerd, memory consumption is dramatically red
 
 ## Acknowledgements
 
-Thanks for [Marius Eriksen](https://twitter.com/marius) and [William Morgan](https://twitter.com/wm) for reviewing early drafts of this post. Thanks to [Brandon Mitchell](https://twitter.com/bitbckt) of [FaunaDB](https://faunadb.com/) for sharing his knowledge of HotSpot internals with me. Thanks also to [David Pollak](http://blog.goodstuff.im/) for suggesting that I try a 32-bit JVM for small heaps many years ago.
+Thanks for [Marius Eriksen](https://twitter.com/marius) and [William Morgan](https://twitter.com/wm) for reviewing early drafts of this post. Thanks to [Brandon Mitchell](https://twitter.com/bitbckt) of [FaunaDB](https://fauna.com/) for sharing his knowledge of HotSpot internals with me. Thanks also to [David Pollak](http://blog.goodstuff.im/) for suggesting that I try a 32-bit JVM for small heaps many years ago.
 
 [compressed pointers]: http://docs.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html#compressedOop
 [balancing]: https://linkerd.io/features/load-balancing/

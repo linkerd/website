@@ -22,11 +22,14 @@ this tutorial, we'll walk you through how to to use the `step` CLI to do this.
 
 ## Generating the certificates with `step`
 
+### Trust anchor certificate
+
 First generate the root certificate with its private key (using `step` version
 0.10.1):
 
 ```bash
-step certificate create identity.linkerd.cluster.local ca.crt ca.key --profile root-ca --no-password --insecure
+step certificate create root.linkerd.cluster.local ca.crt ca.key \
+--profile root-ca --no-password --insecure
 ```
 
 This generates the `ca.crt` and `ca.key` files. The `ca.crt` file is what you
@@ -37,11 +40,18 @@ Linkerd with Helm.
 Note we use `--no-password --insecure` to avoid encrypting those files with a
 passphrase.
 
+For a longer-lived trust anchor certificate, pass the `--not-after` argument
+to the step command with the desired value (e.g. `--not-after=87600h`).
+
+### Issuer certificate and key
+
 Then generate the intermediate certificate and key pair that will be used to
 sign the Linkerd proxies' CSR.
 
 ```bash
-step certificate create identity.linkerd.cluster.local issuer.crt issuer.key --ca ca.crt --ca-key ca.key --profile intermediate-ca --not-after 8760h --no-password --insecure
+step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
+--profile intermediate-ca --not-after 8760h --no-password --insecure \
+--ca ca.crt --ca-key ca.key
 ```
 
 This will generate the `issuer.crt` and `issuer.key` files.
@@ -61,10 +71,16 @@ linkerd install \
 Or when installing with Helm:
 
 ```bash
-helm install \
+helm install linkerd2 \
   --set-file global.identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
-  charts/linkerd2
+  linkerd/linkerd2
 ```
+
+{{< note >}}
+For Helm versions < v3, `--name` flag has to specifically be passed.
+In Helm v3, It has been deprecated, and is the first argument as
+ specified above.
+{{< /note >}}
