@@ -102,6 +102,7 @@
   }
   .community-top-hero__image-wrapper {
     position: relative;
+    align-self: flex-start;
     @media screen and (max-width: $tablet) {
       max-width: 200px;
       margin-left: auto;

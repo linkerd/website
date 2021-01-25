@@ -2,7 +2,7 @@
   <div class="columns center-column is-marginless is-fullwidth">
     <div class="column">
       <div class="container columns is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
-        <div class="column is-4 py-4 community-top-hero__image-wrapper">
+        <div class="column is-3 py-4 community-top-hero__image-wrapper">
           <img src="{{.image}}" alt="Hero">
 
           {{ partial "community/trophy.svg"}}
@@ -14,7 +14,7 @@
             </defs>
           </svg>
         </div>
-        <div class="column is-8 center">
+        <div class="column is-9 center">
           <div class="notification">
             <h1 class="title is-size-1">{{.title}}</h1>
             <h5 class="title is-size-5">{{.description | markdownify}}</h5>
