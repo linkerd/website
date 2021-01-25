@@ -557,6 +557,28 @@ blockquote {
   }
 }
 
+.heroes-top-hero {
+  padding: 40px 20px;
+  background: url('/images/textures/triangles-2.svg'), $primary-bright-blue;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 100%, 50%;
+  @media screen and (max-width: $tablet) {
+    background-size: 200%;
+    background-position: 0 0;
+  }
+  .heroes-top-hero__image-wrapper {
+    @media screen and (max-width: $tablet) {
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img {
+      vertical-align: middle;
+    }
+  }
+}
+
 .heroes-card {
   .heroes-card__no-of-wins {
     display: flex;
