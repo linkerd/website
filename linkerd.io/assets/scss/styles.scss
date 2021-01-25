@@ -91,7 +91,7 @@
 }
 
 .community-top-hero {
-  padding: 100px 20px;
+  padding: 40px 20px;
   background: url('/images/textures/triangles-2.svg'), $primary-bright-blue;
   background-repeat: no-repeat;
   background-size: 60%;
@@ -102,6 +102,11 @@
   }
   .community-top-hero__image-wrapper {
     position: relative;
+    @media screen and (max-width: $tablet) {
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     img {
       clip-path: url(#star);
       vertical-align: middle;
