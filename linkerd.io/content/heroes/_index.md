@@ -10,19 +10,22 @@ top_hero:
 heroes:
   - name: Mayank Shan
     job_title: Intern @ CNCF
-    location: Chennai, Tamil Nadu, India
+    location: Hamburg, Germany
+    blurb: For many large cert PRs
     image: "/uploads/community-hero-example.jpg"
     alt: "Mayank Shah"
     times_winner: 4
   - name: Mayank Shan
     job_title: Intern @ CNCF
-    location: Chennai, Tamil Nadu, India
+    location: Hamburg, Germany
+    blurb: For many large cert PRs
     image: "/uploads/community-hero-example.jpg"
     times_winner: 2
     alt: "Mayank Shah"
   - name: Mayank Shan
     job_title: Intern @ CNCF
-    location: Chennai, Tamil Nadu, India
+    location: Hamburg, Germany
+    blurb: For many large cert PRs
     image: "/uploads/community-hero-example.jpg"
     times_winner: 3
     alt: "Mayank Shah"
