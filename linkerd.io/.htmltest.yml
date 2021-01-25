@@ -1,5 +1,6 @@
 IgnoreURLs:
   - .*localhost.*
+  - https://conduit.io/*
   - https://expedia.com
   - https://www.expedia.com
   - https://ticketmaster.com
