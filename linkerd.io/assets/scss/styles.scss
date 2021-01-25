@@ -91,7 +91,7 @@
 }
 
 .community-top-hero {
-  padding: 100px 20px;
+  padding: 40px 20px;
   background: url('/images/textures/triangles-2.svg'), $primary-bright-blue;
   background-repeat: no-repeat;
   background-size: 60%;
@@ -102,6 +102,12 @@
   }
   .community-top-hero__image-wrapper {
     position: relative;
+    align-self: flex-start;
+    @media screen and (max-width: $tablet) {
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     img {
       clip-path: url(#star);
       vertical-align: middle;
@@ -548,6 +554,28 @@ blockquote {
 .signup {
   label {
     @extend .has-text-navy-black;
+  }
+}
+
+.heroes-top-hero {
+  padding: 40px 20px;
+  background: url('/images/textures/triangles-2.svg'), $primary-bright-blue;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 100%, 50%;
+  @media screen and (max-width: $tablet) {
+    background-size: 200%;
+    background-position: 0 0;
+  }
+  .heroes-top-hero__image-wrapper {
+    @media screen and (max-width: $tablet) {
+      max-width: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img {
+      vertical-align: middle;
+    }
   }
 }
 
