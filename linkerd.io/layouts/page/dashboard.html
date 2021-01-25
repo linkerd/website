@@ -3,27 +3,22 @@
   <head>
     {{ partial "meta.html" . }}
     {{ partial "css.html" . }}
-    <title>Linkerd -
-      {{ .Title }}</title>
+    <title>Linkerd - {{ .Title }}</title>
   </head>
   <body class="dashboard-background">
     {{ $subPages := .Pages | append .Sections }}
     {{ range $index, $page := sort $subPages "Lastmod" "desc" }}
       <div class="card">
-        <div class="card-body">
-          <h6>{{ $page.Title }}</h6>
-          <p>{{ dateFormat "Monday, January 2, 2006" $page.Date }}</p>
-          <p>{{ $page.Content }}</p>
+          <div class="card-body">
+            <h6>{{ $page.Title }}</h6>
+            <p>{{ dateFormat "Monday, January 2, 2006" $page.Date }}</p>
+            <p>{{ $page.Content }}</p>
+          </div>
         </div>
-      </div>
     {{ end }}
     <script type="text/javascript">
       (() => {
-        window
-          .parent
-          .postMessage({
-            "dashboardHeight": document.body.offsetHeight
-          }, "*");
+        window.parent.postMessage({ "dashboardHeight": document.body.offsetHeight }, "*");
       })();
     </script>
   </body>
