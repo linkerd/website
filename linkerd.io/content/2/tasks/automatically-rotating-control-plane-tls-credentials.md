@@ -57,13 +57,13 @@ Next, using the [`step`](https://smallstep.com/cli/) tool, create a signing key
 pair and store it in a Kubernetes Secret in the namespace created above:
 
 ```bash
-step certificate create identity.linkerd.cluster.local ca.crt ca.key \
+step certificate create root.linkerd.cluster.local ca.crt ca.key \
   --profile root-ca --no-password --insecure &&
   kubectl create secret tls \
-   linkerd-trust-anchor \
-   --cert=ca.crt \
-   --key=ca.key \
-   --namespace=linkerd
+    linkerd-trust-anchor \
+    --cert=ca.crt \
+    --key=ca.key \
+    --namespace=linkerd
 ```
 
 For a longer-lived trust anchor certificate, pass the `--not-after` argument
@@ -76,7 +76,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: linkerd-trust-anchor
@@ -94,7 +94,7 @@ Issuer to generate the desired certificate:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-identity-issuer
@@ -107,8 +107,11 @@ spec:
     name: linkerd-trust-anchor
     kind: Issuer
   commonName: identity.linkerd.cluster.local
+  dnsNames:
+  - identity.linkerd.cluster.local
   isCA: true
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - cert sign
   - crl sign
@@ -118,8 +121,8 @@ EOF
 ```
 
 (In the YAML manifest above, the `duration` key instructs cert-manager to
-consider certificates as valid for 24 hours and the `renewBefore` key indicates
-that cert-manager will attempt to issue a new certificate one hour before
+consider certificates as valid for `48` hours and the `renewBefore` key indicates
+that cert-manager will attempt to issue a new certificate `25` hours before
 expiration of the current one. These values can be customized to your liking.)
 
 At this point, cert-manager can now use this Certificate resource to obtain TLS
@@ -208,3 +211,7 @@ For Helm versions < v3, `--name` flag has to specifically be passed.
 In Helm v3, It has been deprecated, and is the first argument as
  specified above.
 {{< /note >}}
+
+See [Automatically Rotating Webhook TLS
+Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/) for how
+to do something similar for webhook TLS credentials.

@@ -44,10 +44,10 @@ signing key pair which will be used to sign each of the webhook certificates:
 step certificate create webhook.linkerd.cluster.local ca.crt ca.key \
   --profile root-ca --no-password --insecure --san webhook.linkerd.cluster.local &&
   kubectl create secret tls \
-   webhook-issuer-tls \
-   --cert=ca.crt \
-   --key=ca.key \
-   --namespace=linkerd
+    webhook-issuer-tls \
+    --cert=ca.crt \
+    --key=ca.key \
+    --namespace=linkerd
 ```
 
 ## Create an Issuer referencing the secret
@@ -57,7 +57,7 @@ references it:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: webhook-issuer
@@ -75,7 +75,7 @@ Issuer to generate the desired certificates:
 
 ```bash
 cat <<EOF | kubectl apply -f -
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-proxy-injector
@@ -88,12 +88,15 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-proxy-injector.linkerd.svc
+  dnsNames:
+  - linkerd-proxy-injector.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-sp-validator
@@ -106,12 +109,15 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-sp-validator.linkerd.svc
+  dnsNames:
+  - linkerd-sp-validator.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 ---
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: linkerd-tap
@@ -124,8 +130,11 @@ spec:
     name: webhook-issuer
     kind: Issuer
   commonName: linkerd-tap.linkerd.svc
+  dnsNames:
+  - linkerd-tap.linkerd.svc
   isCA: false
-  keyAlgorithm: ecdsa
+  privateKey:
+    algorithm: ECDSA
   usages:
   - server auth
 EOF
@@ -192,3 +201,7 @@ For Helm versions < v3, `--name` flag has to specifically be passed.
 In Helm v3, It has been deprecated, and is the first argument as
  specified above.
 {{< /note >}}
+
+See [Automatically Rotating Control Plane TLS
+Credentials](/2/tasks/automatically-rotating-control-plane-tls-credentials/)
+for details on how to do something similar for control plane credentials.

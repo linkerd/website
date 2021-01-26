@@ -267,7 +267,7 @@ the trust anchor certificate.
 Create a new mTLS trust anchor private key and certificate:
 
 ```sh
-step certificate create identity.linkerd.cluster.local sample-trust.crt sample-trust.key \
+step certificate create root.linkerd.cluster.local sample-trust.crt sample-trust.key \
   --profile root-ca \
   --no-password \
   --not-after 43800h \

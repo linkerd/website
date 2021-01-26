@@ -26,6 +26,16 @@ fields:
         schema:
           format: markdown
       label: Answer
+    - name: answer_schema
+      type: textarea
+      default: ''
+      config:
+        required: true
+        wysiwyg: false
+        schema:
+          format: markdown
+      label: Answer for Schema
+      description: Should be same as answer, without the links.
     config:
       min: 
       max: 

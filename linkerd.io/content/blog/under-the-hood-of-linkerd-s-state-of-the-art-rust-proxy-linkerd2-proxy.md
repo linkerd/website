@@ -287,8 +287,8 @@ _power of two choices_ (P2C) load balancing. In this approach, we instead make
 each load balancing decision by picking the less loaded of two randomly-chosen
 available endpoints. Although it may seem counterintuitive, this has been
 [mathematically
-proven](https://www.eecs.harvard.edu/\~michaelm/postscripts/mythesis.pdf) to be
-at least as effective at scale as always picking the least loaded, and it
+proven](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.57.4019&rep=rep1&type=pdf)
+to be at least as effective at scale as always picking the least loaded, and it
 [avoids the problem of multiple load balancers all sending traffic to the least
 loaded replica, overloading
 it](https://www.nginx.com/blog/nginx-power-of-two-choices-load-balancing-algorithm/).
