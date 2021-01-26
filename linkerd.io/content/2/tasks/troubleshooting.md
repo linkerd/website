@@ -787,18 +787,6 @@ entries.
 Here you need to make sure the certificate was issued specifically for
 `linkerd-tap.linkerd.svc`.
 
-```bash
-linkerd-webhooks-and-apisvc-tls
--------------------------------
-× tap API server has valid cert
-    cert is not issued by the trust anchor: x509: certificate relies on legacy Common Name field, use SANs or temporarily enable Common Name matching with GODEBUG=x509ignoreCN=0
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
-```
-
-If you're using a `brew` installed version of `linkerd` to _check_, please try
-downloading the Linkerd CLI from the [releases page](https://github.com/linkerd/linkerd2/releases)
-on GitHub and using it instead.
-
 ### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
 
 Example failure:
