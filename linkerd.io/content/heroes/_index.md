@@ -24,5 +24,6 @@ heroes:
   image: "/uploads/vita_image_lutz_behnke.jpg"
   alt: Portrait of Lutz Behnke
   times_winner: ''
+draft: true
 
 ---
