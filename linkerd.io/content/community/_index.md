@@ -7,7 +7,7 @@ top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active
     and friendly community of adopters and contributors.
-  image: "/uploads/vita_image_lutz_behnke.jpg"
+  image: "/uploads/lutz-behnke.png"
   buttons:
   - caption: Meet all our Linkerd Heros
     url: "/heroes/"
