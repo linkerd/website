@@ -12,6 +12,12 @@ top_hero:
   image_on_the_right: true
   alt: Trophy
 heroes:
+- name: Richard Pijnenburg
+  date: January 2021
+  blurb: Always offering a helping hand
+  image: ''
+  alt: ''
+  times_winner: ''
 - name: Lutz Behnke
   date: December 2020
   blurb: a PR rock star
