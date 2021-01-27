@@ -22,7 +22,7 @@ heroes:
   date: December 2020
   blurb: A PR rock star
   image: "/uploads/vita_image_lutz_behnke.jpg"
-  alt: ''
+  alt: Portrait of Lutz Behnke
   times_winner: ''
 
 ---
