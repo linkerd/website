@@ -15,7 +15,7 @@ heroes:
 - name: Richard Pijnenburg
   date: January 2021
   blurb: Always offering a helping hand
-  image: "/uploads/richard-pijnenberg.jpg"
+  image: "/uploads/richard-pijnenberg-2.jpg"
   alt: Portrait of Richard Pinjnenberg
   times_winner: ''
 - name: Lutz Behnke
@@ -24,6 +24,5 @@ heroes:
   image: "/uploads/vita_image_lutz_behnke.jpg"
   alt: Portrait of Lutz Behnke
   times_winner: ''
-draft: true
 
 ---
