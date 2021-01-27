@@ -20,7 +20,7 @@ heroes:
   times_winner: ''
 - name: Lutz Behnke
   date: December 2020
-  blurb: a PR rock star
+  blurb: A PR rock star
   image: "/uploads/vita_image_lutz_behnke.jpg"
   alt: ''
   times_winner: ''
