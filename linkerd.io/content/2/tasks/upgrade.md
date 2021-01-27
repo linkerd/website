@@ -78,10 +78,22 @@ that data persisted through an upgrade, take a look at the
 
 Use the `linkerd upgrade` command to upgrade the control plane. This command
 ensures that all of the control plane's existing configuration and mTLS secrets
-are retained.
+are retained. Notice that we use the `--prune` flag to remove any Linkerd
+resources from the previous version which no longer exist in the new version.
 
 ```bash
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+Next, run this command again with some `--prune-whitelist` flags added. This is
+necessary to make sure that certain cluster-scoped resources are correctly
+pruned.
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
