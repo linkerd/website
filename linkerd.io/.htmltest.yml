@@ -20,6 +20,7 @@ IgnoreURLs:
   - https://kinvolk.io/
   - https://godaddy.com/
   - https://www.linkedin.com/
+  - https://tools.ietf.org/*
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
