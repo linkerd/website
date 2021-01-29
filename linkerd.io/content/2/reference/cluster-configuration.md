@@ -22,8 +22,9 @@ CLUSTER_NAME=your-cluster-name
 ```
 
 Set default zone for
-[zonal clusters](https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters#zonal_clusters) or the default region for
-[regional clusters](https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters#regional_clusters)
+zonal clusters or the default region for regional clusters (see
+[types of clusters]
+(https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters)
 
 ```bash
 gcloud config set compute/zone your-zone
