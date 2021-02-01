@@ -23,6 +23,6 @@ heroes:
   blurb: A PR rock star
   image: "/uploads/vita_image_lutz_behnke.jpg"
   alt: Portrait of Lutz Behnke
-  github_url: https://github.com
+  github_url: https://github.com/cypherfox
 
 ---
