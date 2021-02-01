@@ -17,11 +17,12 @@ heroes:
   blurb: Always offering a helping hand
   image: "/uploads/richard-pijnenberg-2.jpg"
   alt: Portrait of Richard Pinjnenberg
-  github_url: "https://github.com"
+  github_url: https://github.com/electrical
 - name: Lutz Behnke
   date: December 2020
   blurb: A PR rock star
   image: "/uploads/vita_image_lutz_behnke.jpg"
   alt: Portrait of Lutz Behnke
-  github_url: "https://github.com"
+  github_url: https://github.com
+
 ---
