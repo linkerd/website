@@ -73,10 +73,10 @@
         {{ range .Params.faqs }}
           {
             "@type": "Question",
-            "name": "{{.question}}",
+            "name": "{{ htmlEscape .question }}",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "{{.answer_schema}}"
+              "text": "{{ htmlEscape .answer_schema }}"
             }
           },
         {{ end }}
