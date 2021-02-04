@@ -7,15 +7,10 @@ thumbnail = "/uploads/januarythumb.png"
 title = "January Linkerd Community Meeting"
 +++
 
-![Screenshot of community meeting participants](/uploads/januarythumb.png)
-
-
-## January Linkerd Community Meeting
-
 Missed our meeting last month? Don't worry, here's a synopsis along with the
 recording.
 
-### Linkerd, a year in review
+## Linkerd, a year in review
 
 With six major releases and 53 edge releases, 2020 was a busy year for the
 Linkerd maintainers! As Oliver Gould pointed out, edge releases are really
@@ -35,7 +30,7 @@ concept to make Linkerd more modular.
 **Linkerd 2.9** added a multi-core proxy runtime (Tokio), ARM support, and
 mutual TLS for all TCP traffic.
 
-### Linkerd, a look ahead
+## Linkerd, a look ahead
 
 There are no plans to slow down in 2021!  Oliver shared some features on the
 roadmap.
@@ -49,7 +44,7 @@ concept that we saw in Linkerd 2.8.
 There are some cool features in the pipeline and we can't wait to see them go
 live!
 
-### Celebrating our latest Linkerd Hero
+## Celebrating our latest Linkerd Hero
 
 Last, but most certainly not least, we announced our January Linkerd Hero. Once
 more we had three amazing candidates: [Matt Young, Richard Pijnenburg, and Jimil
@@ -61,7 +56,7 @@ active on the Linkerd Slack, helping his peers and answering their questions.
 Very knowledgeable and with a ton of experience with open source, Richard brings
 his rich expertise to the Linkerd community. Congratulations, Richard!
 
-{{<youtube "duRrZAGkN90" >}}
+{{< youtube "duRrZAGkN90" >}}
 
 ## Linkerd is for everyone
 
@@ -73,8 +68,3 @@ our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
-
-(Photo by [Paul
-Felberbauer](https://unsplash.com/@servuspaul?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on
-[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)).
