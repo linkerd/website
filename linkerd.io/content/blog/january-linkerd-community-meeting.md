@@ -1,10 +1,10 @@
 +++
 author = "charles"
 date = 2021-02-04T00:00:00Z
-feature = "/uploads/flow-chart.png"
+feature = "/uploads/januarythumb.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/januarythumb.png"
-title = "January Linkerd Community Meeting"
+title = "January Linkerd Community Meeting Recap"
 +++
 
 Missed our meeting last month? Don't worry, here's a synopsis along with the
@@ -40,9 +40,6 @@ and will introduce extensions, which are the next iteration of the "add-on"
 concept that we saw in Linkerd 2.8.
 
 **Linkerd 2.11** will focus on policy and enforce traffic between services.
-
-There are some cool features in the pipeline and we can't wait to see them go
-live!
 
 ## Celebrating our latest Linkerd Hero
 
