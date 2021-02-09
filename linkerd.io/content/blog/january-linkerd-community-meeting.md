@@ -5,6 +5,7 @@ feature = "/uploads/januarythumb.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/januarythumb.png"
 title = "January Linkerd Community Meeting Recap"
+featured = false
 +++
 
 Missed our meeting last month? Don't worry, here's a synopsis along with the

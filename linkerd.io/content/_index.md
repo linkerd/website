@@ -13,6 +13,13 @@ top_hero:
   - caption: Join the Community
     url: "/community/"
   image_on_the_right: false
+benefits:
+- title: "Focus on simplicity"
+  image: "/uploads/lego.svg"
+- title: "Fast and efficient"
+  image: "/uploads/fast.svg"
+- title: "Best-in-breed security posture"
+  image: "/uploads/secure.svg"
 announcement_banner:
   description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
 description: Linkerd adds critical security, observability, and reliability to your
@@ -35,28 +42,22 @@ features_list:
   - title: Thriving open source community
     description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
       active, and friendly community.  \n[Come join the fun](https://slack.linkerd.io/)!"
-    image: "/uploads/value-props/foss.svg"
   - title: Ultralight and ultra fast
     description: Built in Rust, Linkerd's data plane proxies are incredibly small
       (<10 mb) and blazing fast (p99 < 1ms).
-    image: "/uploads/value-props/quill-circle.svg"
   - title: Simple, minimalist design
     description: No complex APIs or configuration. For most applications, Linkerd
       will "just work" out of the box.
-    image: "/uploads/value-props/lego.svg"
   - title: Installs in seconds with zero config
     description: Linkerd's control plane installs into a single namespace, and services
       can be safely added to the mesh, one at a time.
-    image: "/uploads/value-props/stopwatch.svg"
   - title: Deep Runtime Diagnostics
     description: Get a comprehensive suite of diagnostic tools, including automatic
       service dependency maps and live traffic samples.
-    image: "/uploads/value-props/stethoscope.svg"
   - title: Actionable service metrics
     description: Best-in-class observability allows you to monitor golden metrics—success
       rate, request volume, and latency—for every service.
-    image: "/uploads/value-props/graph.svg"
-  buttons:
+buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
 companies_title: 
