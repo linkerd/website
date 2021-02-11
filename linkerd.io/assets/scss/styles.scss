@@ -88,6 +88,11 @@
   background: url('/images/pattern_home_hero.svg');
   background-repeat: no-repeat;
   background-position: left center;
+  background-size: auto 100%;
+  @media screen and (max-width: $tablet) {
+    background-size: auto 50%;
+    background-position: center top;
+  }
 }
 
 .community-top-hero {
