@@ -18,7 +18,7 @@ benefits:
   image: "/uploads/lego.svg"
 - title: "Fast and efficient"
   image: "/uploads/fast.svg"
-- title: "Best-in-breed security posture"
+- title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
   description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
@@ -39,24 +39,18 @@ tweets:
 event_pictures: []
 features_list:
   items:
-  - title: Thriving open source community
-    description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
-      active, and friendly community.  \n[Come join the fun](https://slack.linkerd.io/)!"
-  - title: Ultralight and ultra fast
-    description: Built in Rust, Linkerd's data plane proxies are incredibly small
-      (<10 mb) and blazing fast (p99 < 1ms).
-  - title: Simple, minimalist design
-    description: No complex APIs or configuration. For most applications, Linkerd
-      will "just work" out of the box.
-  - title: Installs in seconds with zero config
-    description: Linkerd's control plane installs into a single namespace, and services
-      can be safely added to the mesh, one at a time.
-  - title: Deep Runtime Diagnostics
-    description: Get a comprehensive suite of diagnostic tools, including automatic
-      service dependency maps and live traffic samples.
-  - title: Actionable service metrics
-    description: Best-in-class observability allows you to monitor golden metrics—success
-      rate, request volume, and latency—for every service.
+  - title: Instant platform metrics
+    description: "The only service mesh that's simple—minimal config, no hidden magic, and plenty of diagnostics and debugging tools."
+  - title: Simpler than any other service mesh
+    description: The only service mesh that's simple—minimal config, no hidden magic, and plenty of diagnostics and debugging tools. 
+  - title: Zero-config mutual TLS
+    description: Transparently apply mutual TLS to all TCP communication on your cluster with no configuration.
+  - title: Minimalist footprint, incremental rollout
+    description: A minimalist, self-contained control plane, and a data plane that can be applied incrementally to one service at a time
+  - title: Ultralight and ultra-fast
+    description: Linkerd's data plane proxies are incredibly small,  blazing fast, and written in Rust for security and performance.
+  - title: Drop-in reliability features
+    description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your system resilient in the face of partial failures.
 buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
