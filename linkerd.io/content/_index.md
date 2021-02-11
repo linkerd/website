@@ -14,8 +14,7 @@ top_hero:
     url: "/community/"
   image_on_the_right: false
 announcement_banner:
-  description: Announcing Linkerd 2.9! mTLS for all TCP, and much more. [Read more](/2020/11/09/announcing-linkerd-2.9/)
-    »
+  description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -84,6 +83,8 @@ companies:
   link: https://www.planet.com/
 - image: "/uploads/logos/blue/strava.svg"
   link: https://www.strava.com/
+- image: "/uploads/logos/blue/elkjopnordic.svg"
+  link: https://www.elkjopnordic.com/
 foundation_member_banner:
   title: Linkerd is a CNCF incubating project
   image: "/uploads/CNCF_Alternate_Pantone.png"

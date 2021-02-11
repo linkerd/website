@@ -70,13 +70,13 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {{ range .Params.schema_faq.faqs }}
+        {{ range .Params.faqs }}
           {
             "@type": "Question",
-            "name": "{{.question}}",
+            "name": "{{ htmlEscape .question }}",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "{{.answer}}"
+              "text": "{{ htmlEscape .answer_schema }}"
             }
           },
         {{ end }}
