@@ -84,15 +84,20 @@
   padding: 40px 0 40px;
 }
 
-.homepage-top-hero {
+.homepage-top-hero .bg-texture { position: relative; }
+.homepage-top-hero .bg-texture:before {
+  content: "";
+  display: block;
+  width: 200%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: url('/images/pattern_home_hero.svg');
   background-repeat: no-repeat;
-  background-position: left center;
-  background-size: auto 100%;
-  @media screen and (max-width: $tablet) {
-    background-size: auto 50%;
-    background-position: center top;
-  }
+  background-position: center center;
+  background-size: initial;
 }
 
 .community-top-hero {
