@@ -81,7 +81,7 @@ companies:
 - image: "/uploads/logos/blue/elkjopnordic.svg"
   link: https://www.elkjopnordic.com/
 foundation_member_banner:
-  title: Linkerd is a CNCF incubating project
+  title: Linkerd is a CNCF member project
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---
