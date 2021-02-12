@@ -56,29 +56,29 @@ buttons:
     url: https://linkerd.io/choose-your-platform/
 companies_title: 
 companies:
-- image: "/uploads/logos/blue/expedia.svg"
+- image: "/uploads/logos/blue/expedia.png"
   link: https://www.expedia.com
-- image: "/uploads/logos/blue/offerup.svg"
+- image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
-- image: "/uploads/logos/blue/ask.svg"
+- image: "/uploads/logos/blue/hp.png"
   link: https://ask.com/
-- image: "/uploads/logos/blue/bigcommerce.svg"
+- image: "/uploads/logos/blue/bigcommerce.png"
   link: https://www.bigcommerce.com/
-- image: "/uploads/logos/blue/comcast.svg"
+- image: "/uploads/logos/blue/cisco-webex.png"
   link: https://www.xfinity.com/
-- image: "/uploads/logos/blue/ebay.svg"
+- image: "/uploads/logos/blue/clover-health.png"
   link: https://www.ebay.com/
-- image: "/uploads/logos/blue/godaddy.svg"
+- image: "/uploads/logos/blue/godaddy.png"
   link: https://godaddy.com/
-- image: "/uploads/blue-h-e-b.svg"
+- image: "/uploads/logos/blue/heb.png"
   link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
   link: https://www.walmart.com/
-- image: "/uploads/logos/blue/planet.svg"
+- image: "/uploads/logos/blue/planet.png"
   link: https://www.planet.com/
-- image: "/uploads/logos/blue/strava.svg"
+- image: "/uploads/logos/blue/strava.png"
   link: https://www.strava.com/
-- image: "/uploads/logos/blue/elkjopnordic.svg"
+- image: "/uploads/logos/blue/elkjop.png"
   link: https://www.elkjopnordic.com/
 foundation_member_banner:
   title: Linkerd is a CNCF member project
