@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.9.3](/2/tasks/upgrade/#upgrade-notice-stable-293)
 - [Upgrade notice: stable-2.9.0](/2/tasks/upgrade/#upgrade-notice-stable-290)
 - [Upgrade notice: stable-2.8.0](/2/tasks/upgrade/#upgrade-notice-stable-280)
 - [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
@@ -183,6 +184,25 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.9.3
+
+### Linkerd Repair
+
+Due to a known issue in versions stable-2.9.0, stable-2.9.1, and stable-2.9.2,
+users who upgraded to one of those versions with the --prune flag (as described
+above) will have deleted the `secret/linkerd-config-overrides` resource which is
+necessary for performing any subsequent upgrades. Linkerd stable-2.9.3 includes
+a new `linkerd repair` command which restores this deleted resource. If you see
+unexpected error messages during upgrade such as "failed to read CA: not
+PEM-encoded", please upgrade your CLI to stable-2.9.3 and run:
+
+```bash
+linkerd repair | kubectl apply -f -
+```
+
+This will restore the `secret/linkerd-config-overrides` resource and allow you
+to proceed with upgrading your control plane.
 
 ## Upgrade notice: stable-2.9.0
 
