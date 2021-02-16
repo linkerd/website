@@ -6,6 +6,7 @@ aliases:
 author: 'gmiranda23'
 date: Mon, 26 Mar 2018 17:30:38 +0000
 draft: false
+featured: false
 thumbnail: /uploads/navigating_the_ecosystem.png
 tags: [Conduit, Uncategorized]
 ---

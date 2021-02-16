@@ -7,6 +7,7 @@ author: 'steve'
 thumbnail: /uploads/linkerd_featured_load_balancing.png
 date: Wed, 16 Mar 2016 22:12:27 +0000
 draft: false
+featured: false
 tags: [Article, Buoyant, buoyant, Education, Linkerd, linkerd]
 ---
 

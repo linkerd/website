@@ -10,6 +10,7 @@ author: 'alex'
 thumbnail: /uploads/kubernetes2_featured_Twitter_ratio.png
 date: Fri, 14 Oct 2016 22:55:04 +0000
 draft: false
+featured: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

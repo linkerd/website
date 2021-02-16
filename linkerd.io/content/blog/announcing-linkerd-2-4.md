@@ -4,6 +4,7 @@ author: 'william'
 date: 2019-07-11T00:00:00+00:00
 thumbnail: /uploads/highway-split.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.4
 tags: [Linkerd]
 ---

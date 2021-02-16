@@ -7,6 +7,7 @@ author: 'sarah'
 date: Fri, 04 Nov 2016 23:02:03 +0000
 thumbnail: /uploads/kubernetes4_featured_Twitter_ratio.png
 draft: false
+featured: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

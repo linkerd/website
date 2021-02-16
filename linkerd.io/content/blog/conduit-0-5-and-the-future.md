@@ -7,6 +7,7 @@ author: 'oliver'
 date: Fri, 06 Jul 2018 16:41:57 +0000
 thumbnail: /uploads/a6d4b0bd-conduit.jpg
 draft: false
+featured: false
 tags: [Conduit, Linkerd, News]
 ---
 

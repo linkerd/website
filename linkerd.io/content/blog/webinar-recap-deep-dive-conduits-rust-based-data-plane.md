@@ -6,6 +6,7 @@ aliases:
 author: 'courtney'
 date: Mon, 05 Feb 2018 19:16:20 +0000
 draft: false
+featured: false
 thumbnail: /uploads/conduit_webinar_recap.png
 tags:
   [

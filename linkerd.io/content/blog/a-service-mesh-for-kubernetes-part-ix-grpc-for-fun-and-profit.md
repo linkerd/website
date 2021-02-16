@@ -7,6 +7,7 @@ author: 'risha'
 date: Wed, 19 Apr 2017 23:34:57 +0000
 thumbnail: /uploads/kubernetes9_featured_Twitter_ratio.png
 draft: false
+featured: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

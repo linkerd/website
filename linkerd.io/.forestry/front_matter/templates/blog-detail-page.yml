@@ -32,6 +32,9 @@ fields:
 - type: file
   label: Featured Thumbnail
   name: feature
+- type: boolean
+  label: Featured Blog
+  name: featured
 pages:
 - linkerd.io/content/blog/december-linkerd-community-meeting.md
 - linkerd.io/content/blog/january-2021-linkerd-hero-nomination.md

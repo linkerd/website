@@ -5,6 +5,7 @@ feature = ""
 tags = ["Linkerd", "Community Hero"]
 thumbnail = "/uploads/january-linkerd-heros-1.png"
 title = "January 2021 Linkerd Hero Nomination "
+featured = false
 
 +++
 ## **Vote for your January Linkerd Hero!**

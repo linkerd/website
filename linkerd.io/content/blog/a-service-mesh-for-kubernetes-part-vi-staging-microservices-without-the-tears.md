@@ -7,6 +7,7 @@ author: 'risha'
 date: Sat, 07 Jan 2017 00:13:02 +0000
 thumbnail: /uploads/kubernetes6_featured_Twitter_ratio.png
 draft: false
+featured: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 

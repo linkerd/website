@@ -6,6 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 05 Dec 2017 16:00:44 +0000
 draft: false
+featured: false
 thumbnail: /uploads/conduit_introducing_conduit_featured.png
 tags:
   [
