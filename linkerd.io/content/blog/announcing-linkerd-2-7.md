@@ -4,6 +4,7 @@ author: 'william'
 date: 2020-02-10T00:00:00+00:00
 thumbnail: /uploads/georgia-de-lotz-xyh8P8k-X90-unsplash.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.7
 tags: [Linkerd]
 ---

@@ -3,6 +3,7 @@ slug: 'icymi-march-2019-san-francisco-linkerd-meetup'
 title: 'ICYMI: March 2019 San Francisco Linkerd Meetup'
 author: 'kiersten'
 date: Fri, 29 Mar 2019 12:00:00 +0000
+featured: false
 ---
 
 Earlier this week we kicked off our very first [San Francisco Linkerd Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup/). It was a fun night filled with education, great food, and lots of good conversation. If you missed it, never fear: all the talks were recorded!

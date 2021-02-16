@@ -4,6 +4,7 @@ author: 'william'
 date: 2020-11-09T00:00:00+00:00
 thumbnail: /uploads/warning-gate.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.9
 tags: [Linkerd]
 ---

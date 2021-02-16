@@ -7,6 +7,7 @@ author: 'william'
 date: Tue, 23 Oct 2018 18:37:39 +0000
 thumbnail: /uploads/Lachie-Unboxing.png
 draft: false
+featured: true
 tags: [Community, Linkerd, Tutorials &amp; How-To's, Video]
 ---
 

@@ -6,6 +6,7 @@ aliases:
 author: 'gmiranda23'
 date: Thu, 01 Feb 2018 16:29:10 +0000
 draft: false
+featured: false
 thumbnail: /uploads/version_conduit_020.png
 tags: [conduit, Conduit, HTTP/1, News, Release Notes, TCP]
 ---

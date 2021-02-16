@@ -5,6 +5,7 @@ feature = "/uploads/august-linkerd-community-meetup.png"
 tags = []
 thumbnail = "/uploads/august-linkerd-community-meetup.png"
 title = "ICYMI 👉 August Linkerd Community Meetup"
+featured = false
 
 +++
 [![Recording](/uploads/august-linkerd-meetup.png "August Linkerd Community Meetup")**Click for recording >>>**](https://www.crowdcast.io/e/linkerd-online-community-4/1)

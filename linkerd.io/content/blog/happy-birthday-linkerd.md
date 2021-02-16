@@ -4,6 +4,7 @@ author: 'william'
 date: 2019-09-18T00:00:00+00:00
 thumbnail: /uploads/cake.png
 draft: false
+featured: false
 slug: happy-birthday-linkerd
 tags: [Linkerd]
 ---
