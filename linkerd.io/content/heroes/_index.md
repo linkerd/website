@@ -10,8 +10,8 @@ top_hero:
     other out whether on Slack or social media, share their successes and failures
     at conferences or through blogs, fostering the dynamic and engaging community
     we all love.
-  image: "/uploads/heroes-trophy.svg"
-  image_on_the_right: true
+  image: "/uploads/january-linkerd-hero.png"
+  image_on_the_right: false
   alt: Trophy
 heroes:
 - name: Richard Pijnenburg
