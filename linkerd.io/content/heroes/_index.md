@@ -1,6 +1,8 @@
 ---
 title: Heroes
 layout: heroes
+url: /community/heroes/
+aliases: ["/heroes/"]
 top_hero:
   title: Linkerd Heroes
   description: Open source is all about community, and Linkerd wouldn't be what it

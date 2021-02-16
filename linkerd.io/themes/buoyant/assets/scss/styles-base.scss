@@ -23,6 +23,41 @@ body {
     width: 210px;
     max-height: none;
   }
+  .dropdown-item:hover {
+    background-color: white;
+    color: $primary-bright-blue;
+  }
+  .dropdown button,
+  .dropdown button:focus {
+    outline: none;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    padding-right: 28px;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: url("/images/icon-chevron-down.svg");
+    }
+  }
+
+  .dropdown.is-active button:after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .dropdown-content {
+    border-radius: 16px;
+    border: 2px solid $primary-bright-blue;
+  }
   .navbar-menu {
     box-shadow: none;
     .navbar-item {

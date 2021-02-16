@@ -3,11 +3,29 @@
     {{ $currentPage := . }}
     {{ range .Site.Menus.top }}
     {{ $isCurrent := $currentPage.IsMenuCurrent "top" . }}
-    {{ $isGetStarted := eq .Name "GET STARTED" }}
-    {{ $underlineOnActive := and $isCurrent (not $isGetStarted) }}
+    {{ $isCurrentDropdown := $currentPage.HasMenuCurrent "top" . }}
 
-      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase  {{ if $underlineOnActive }} is-active {{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}><span
-          class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span></a>
+    {{ if not .HasChildren }}
+      <a href="{{ .URL }}" class="navbar-item has-text-white is-uppercase {{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
+        <span class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span>
+      </a>
+    {{ else }}
+      <div class="dropdown">
+        <div class="dropdown-trigger">
+          <button class="navbar-item has-text-white is-uppercase">{{ .Name }}</button>
+        </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-content">
+            {{ range .Children }}
+              <a href="{{ .URL }}" class="dropdown-item py-3 has-text-color is-uppercase is-family-secondary has-text-weight-bold{{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
+                <span class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span>
+              </a>  
+            {{ end }}
+          </div>
+        </div>  
+      </div>
     {{ end }}
+    {{ end }}
+
   </div>
 </div>
