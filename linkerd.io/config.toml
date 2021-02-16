@@ -6,8 +6,23 @@ languageCode = "en-US"
 sectionPagesMenu = "main"
 theme = "buoyant"
 title = "Linkerd"
-[blackfriday]
-HrefTargetBlank = true
+[markup]
+	defaultMarkdownHandler = "blackfriday"
+  [markup.blackFriday]
+    angledQuotes = false
+    footnoteAnchorPrefix = ""
+    footnoteReturnLinkContents = ""
+    fractions = true
+    hrefTargetBlank = true
+    latexDashes = true
+    nofollowLinks = false
+    noreferrerLinks = false
+    plainIDAnchors = true
+    skipHTML = false
+    smartDashes = true
+    smartypants = true
+    smartypantsQuotesNBSP = false
+    taskLists = true
 [mediaTypes."text/netlify"]
 delimiter = ""
 [[menu.community]]
