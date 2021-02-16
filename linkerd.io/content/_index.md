@@ -10,8 +10,8 @@ top_hero:
   buttons:
   - caption: Get Started
     url: "/2/getting-started/"
-  - caption: Join the Community
-    url: "/community/"
+  - caption: Get Involved
+    url: "/community/get-involved/"
   image_on_the_right: false
 announcement_banner:
   description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
