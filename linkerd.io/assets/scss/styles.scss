@@ -583,3 +583,10 @@ blockquote {
   background: url('/images/textures/triangles.svg') no-repeat center;
   background-size: cover;
 }
+
+// ADOPTERS PAGE
+.adopters {
+  .top-hero {
+    border-bottom: 3px solid $medium-grey;
+  }
+}
