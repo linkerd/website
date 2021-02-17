@@ -6,6 +6,7 @@ aliases:
 author: 'dennis'
 date: Tue, 19 Jun 2018 23:25:51 +0000
 draft: false
+featured: false
 thumbnail: /uploads/DiagnosticTracing_Linkerd.png
 tags:
   [

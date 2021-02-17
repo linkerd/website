@@ -84,10 +84,20 @@
   padding: 40px 0 40px;
 }
 
-.homepage-top-hero {
+.homepage-top-hero .bg-texture { position: relative; }
+.homepage-top-hero .bg-texture:before {
+  content: "";
+  display: block;
+  width: 120%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: url('/images/pattern_home_hero.svg');
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: center center;
+  background-size: cover;
 }
 
 .community-top-hero {
@@ -576,4 +586,8 @@ blockquote {
 .triangles {
   background: url('/images/textures/triangles.svg') no-repeat center;
   background-size: cover;
+}
+
+.featured-blogs__heading {
+  font-size: 18px !important;
 }

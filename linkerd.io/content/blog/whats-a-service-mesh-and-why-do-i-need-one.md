@@ -6,6 +6,7 @@ aliases:
 author: 'william'
 date: Tue, 25 Apr 2017 23:35:29 +0000
 draft: false
+featured: false
 thumbnail: /uploads/service_mesh_featured.png
 tags:
   [

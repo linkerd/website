@@ -6,6 +6,7 @@ aliases:
 author: 'mohsen'
 date: Wed, 27 Jun 2018 01:29:57 +0000
 draft: false
+featured: false
 thumbnail: /uploads/WePay-logo.png
 tags:
   [

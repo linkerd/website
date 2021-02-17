@@ -6,6 +6,7 @@ aliases:
 author: 'kevin'
 date: Tue, 17 May 2016 22:28:48 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_featured_ployglot-1.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

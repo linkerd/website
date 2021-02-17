@@ -28,10 +28,6 @@ delimiter = ""
 [[menu.community]]
 name = "Slack"
 url = "https://slack.linkerd.io/"
-weight = 3
-[[menu.community]]
-name = "Discourse"
-url = "https://discourse.linkerd.io/"
 weight = 2
 [[menu.community]]
 name = "GitHub"

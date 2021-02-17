@@ -5,6 +5,7 @@ feature = "/uploads/flow-chart.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/michael-dziedzic-deHhHOttSdk-unsplash.jpg"
 title = "Under the hood of Linkerd's state-of-the-art Rust proxy, Linkerd2-proxy"
+featured = false
 
 +++
 

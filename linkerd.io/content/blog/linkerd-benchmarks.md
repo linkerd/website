@@ -3,6 +3,7 @@ title: 'Linkerd Benchmarks'
 author: 'william'
 date: Mon, 18 May 2019 09:00:00 +0000
 draft: false
+featured: false
 tags: [Community, Linkerd]
 thumbnail: /uploads/glaciers.jpg
 ---

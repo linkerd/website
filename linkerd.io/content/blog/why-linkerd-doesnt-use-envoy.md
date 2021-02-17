@@ -5,6 +5,7 @@ feature = "/uploads/flow-chart.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/paul-felberbauer-tM16SjCYy84-unsplash.jpg"
 title = "Why Linkerd doesn't use Envoy"
+featured = true
 +++
 
 ![Closeup of many Swiss Army knives](/uploads/paul-felberbauer-tM16SjCYy84-unsplash.jpg)
