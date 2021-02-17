@@ -24,7 +24,7 @@ This is one article in a series of articles about [linkerd](https://linkerd.io/
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}})
 4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
-5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}} (this article)
+5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}) (this article)
 6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
 7. [Distributed tracing made easy]({{< ref
    "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}})

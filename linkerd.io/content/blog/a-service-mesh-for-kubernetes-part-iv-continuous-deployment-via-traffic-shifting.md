@@ -23,7 +23,7 @@ Note: this post was co-written with [Kevin Lingerfelt](https://twitter.com/klin
    "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}})
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}})
-4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}} (this article)
+4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}) (this article)
 5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
 6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
 7. [Distributed tracing made easy]({{< ref
