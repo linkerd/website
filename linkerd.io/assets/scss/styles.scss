@@ -1,30 +1,8 @@
 @import 'bulma';
 @import 'styles-base';
+@import 'navbar';
 
 
-.navbar-menu {
-  &.is-active {
-    text-align: center;
-  }
-}
-
-.navbar-item-helper {
-  svg {
-    margin-right: 5px;
-  }
-  .button-spacer {
-    display: inline-block;
-    padding: 19px 21px;
-    height: 56px;
-    line-height: 16px;
-    border: 1px solid $white;
-    border-radius: 8px;
-
-    .navbar-item:hover & {
-      border: 1px solid $primary-bright-blue;
-    }
-  }
-}
 
 .button {
   &.is-large {
