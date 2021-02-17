@@ -21,12 +21,12 @@ In this post we’ll walk through a simple example how Linkerd and Zipkin can wo
    "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}})
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}})
-4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
-5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
-6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}})
+5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}})
+6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}})
 7. [Distributed tracing made easy]({{< ref
    "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}}) (this article)
-8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}})
 9. [gRPC for fun and profit]({{< ref
    "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}})
 10. [The Service Mesh API]({{< ref
