@@ -7,6 +7,7 @@ author: 'gmiranda23'
 date: Thu, 26 Oct 2017 08:05:40 +0000
 thumbnail: /uploads/shadows1_featured_Twitter_ratio.png
 draft: false
+featured: false
 tags: [Buoyant, buoyant, Linkerd, News, Video]
 ---
 

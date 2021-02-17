@@ -1,18 +1,9 @@
-<div class="wrapper has-background-white features">
+<div class="wrapper has-background-white py-6">
   <div class="container columns is-multiline is-centered">
     {{ range .items}}
-    <div class="column is-half feature-item">
-      <div class="media">
-        <div class="media-left">
-          <figure class="iimage is-128x128 level-item">
-            <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
-          </figure>
-        </div>
-        <div class="media-content">
-          <h3 class="title has-text-weight-semibold is-3 is-marginless has-text-color">{{.title}}</h3>
-          <div class="has-text-color">{{.description | markdownify}}</div>
-        </div>
-      </div>
+    <div class="column is-half py-5 px-5">
+      <h3 class="title is-size-5 has-text-weight-bold is-marginless has-text-color">{{.title}}</h3>
+      <div class="has-text-color">{{.description | markdownify}}</div>
     </div>
     {{ end }}
   </div>

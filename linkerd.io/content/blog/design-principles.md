@@ -3,6 +3,7 @@ title: "Linkerd's design principles"
 author: 'william'
 date: 2019-04-29T21:00:00+00:00
 draft: false
+featured: false
 slug: linkerd-design-principles
 thumbnail: /uploads/moulay-idriss.jpg
 tags: [Linkerd]

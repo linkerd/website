@@ -6,6 +6,7 @@ author: 'carol'
 thumbnail: /uploads/linkerd-dashboard.png
 date: 2019-04-10T10:12:45-07:00
 draft: false
+featured: false
 tags: [Linkerd, linkerd, News, tutorials]
 ---
 

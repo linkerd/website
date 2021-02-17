@@ -3,6 +3,7 @@ title: 'Linkerd at Kubecon NA 2019 roundup: Nordstrom, Microsoft, OpenFaaS, PayB
 author: 'william'
 date: Tue, 26 Nov 2019 09:00:00 -0800
 draft: false
+featured: false
 slug: linkerd-at-kubecon-na-2019-roundup
 tags: [Community, Linkerd, Kubecon]
 thumbnail: /uploads/kccnceu19-linkerd.jpg

@@ -4,6 +4,7 @@ author: 'oliver'
 date: 2020-09-02T00:00:00-08:00
 thumbnail: /uploads/amit-jain-pQ04riRO9wM-unsplash.jpg
 draft: false
+featured: false
 slug: the-road-ahead-for-linkerd2-proxy
 tags: [Linkerd]
 ---
