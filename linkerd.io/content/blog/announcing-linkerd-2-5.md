@@ -4,6 +4,7 @@ author: 'william'
 date: 2019-08-20T00:00:00+00:00
 thumbnail: /uploads/diving-helmet.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.5
 tags: [Linkerd]
 ---

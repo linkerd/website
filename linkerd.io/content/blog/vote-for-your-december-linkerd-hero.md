@@ -5,6 +5,7 @@ feature = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
 tags = ["heroes"]
 thumbnail = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
 title = "Vote For Your December Linkerd Hero!"
+featured = false
 
 +++
 To give our most active community members the credit they deserve, we are now formalizing our monthly Linkerd Hero nominations.

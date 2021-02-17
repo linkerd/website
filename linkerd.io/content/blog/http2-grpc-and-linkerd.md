@@ -4,6 +4,7 @@ title: 'HTTP/2, gRPC and Linkerd'
 author: 'oliver'
 date: Wed, 11 Jan 2017 00:16:09 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_GRPC_featured.png
 tags: [linkerd, News, Product Announcement]
 ---

@@ -6,6 +6,7 @@ aliases:
 author: 'charles'
 date: Mon, 23 Mar 2020 21:30:51 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_x_knative.png
 tags: [Linkerd, linkerd, serverless, tutorials, knative]
 ---

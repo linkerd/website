@@ -7,6 +7,7 @@ author: 'gmiranda23'
 thumbnail: /uploads/shadows2_featured_Twitter_ratio.png
 date: Mon, 20 Nov 2017 21:23:46 +0000
 draft: false
+featured: false
 tags:
   [
     Buoyant,

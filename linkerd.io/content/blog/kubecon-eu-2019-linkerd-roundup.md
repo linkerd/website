@@ -3,6 +3,7 @@ title: 'Linkerd at KubeCon EU 2019: Benchmarks, SMI, VSCode, and more'
 author: 'william'
 date: Fri, 31 May 2019 09:00:00 +0000
 draft: false
+featured: false
 tags: [Community, Linkerd, Kubecon]
 thumbnail: /uploads/kccnceu19-linkerd.jpg
 ---

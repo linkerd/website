@@ -3,6 +3,7 @@ title: 'Linkerd and SMI'
 author: 'william'
 date: Fri, 24 May 2019 09:00:00 +0000
 draft: false
+featured: false
 tags: [Community, Linkerd]
 thumbnail: /uploads/sound-mixer.jpg
 ---

@@ -4,6 +4,7 @@ author: 'alex'
 date: 2019-10-07T00:00:00+00:00
 thumbnail: /uploads/chart.png
 draft: false
+featured: false
 tags: [Linkerd]
 ---
 
