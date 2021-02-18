@@ -10,8 +10,8 @@ top_hero:
   buttons:
   - caption: Get Started
     url: "/2/getting-started/"
-  - caption: Join the Community
-    url: "/community/"
+  - caption: Get Involved
+    url: "/community/get-involved/"
   image_on_the_right: false
 benefits:
 - title: "Focus on simplicity"
