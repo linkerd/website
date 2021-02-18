@@ -1,12 +1,12 @@
-<div class="wrapper py-6 has-background-light-blue">
+<div class="wrapper py-6 has-background-light-grey">
   <div class="container columns">
     <div class="column is-12 is-10-desktop is-offset-1-desktop">
       <div class="columns column is-multiline">
         {{ range . }}
         <div class="column is-6">
           <a href="{{ .github_url }}" target="_blank">
-          <div class="heroes-card box is-flex is-align-items-center px-2 py-3">
-            <figure class="image is-96x96 mr-4">
+          <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-2 py-3">
+            <figure class="image is-96x96 mr-4 is-flex-shrink-0">
               <img class="is-rounded" src="{{.image}}" alt="{{.alt}}" />
             </figure>
             <div>
@@ -14,6 +14,9 @@
               <p>{{.blurb}}</p>
               <p class="is-size-7">{{.date}}</p>
             </div>
+            <figure class="ml-auto is-align-self-flex-end is-flex-shrink-0">
+              <img src="/uploads/heroes-trophy.svg" alt="">
+            </figure>
           </div>
           </a>
         </div>

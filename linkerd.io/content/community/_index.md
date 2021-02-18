@@ -115,8 +115,4 @@ jobs:
   buttons:
   - caption: Create Pull Request
     url: https://github.com/linkerd/website/edit/master/linkerd.io/content/community.md
-menu:
-  top:
-    weight: 2
-
 ---
