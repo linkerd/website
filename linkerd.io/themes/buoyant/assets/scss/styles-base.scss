@@ -17,37 +17,6 @@ body {
   min-height: 48px;
   padding: 0 10px;
 }
-.navbar {
-  transition: box-shadow 0.4s;
-  img {
-    width: 210px;
-    max-height: none;
-  }
-  .navbar-menu {
-    box-shadow: none;
-    .navbar-item {
-      &.is-active,
-      &:hover {
-        background: none;
-        color: $deep-blue;
-      }
-      &:hover {
-        .navbar-item-helper {
-          color: $primary-bright-blue;
-        }
-      }
-      &.is-active {
-        .navbar-item-helper {
-          border-color: $primary-bright-blue;
-        }
-      }
-      .navbar-item-helper {
-        border-bottom: 3px solid transparent;
-      }
-    }
-  }
-}
-
 .hero-body {
   position: relative;
   flex-direction: column;

@@ -47,6 +47,35 @@ name = "Docs"
 url = "/docs/"
 weight = 1
 [[menu.top]]
+identifier = "community"
+name = "Community"
+url = "/community/"
+weight = 2
+[[menu.top]]
+identifier = "get-involved"
+name = "Get Involved"
+url = "/community/get-involved/"
+weight = 1
+parent = "community"
+[[menu.top]]
+identifier = "community-anchors"
+name = "Community Anchors"
+url = "/community/anchor/"
+weight = 2
+parent = "community"
+[[menu.top]]
+identifier = "community-heroes"
+name = "Linkerd Heroes"
+url = "/community/heroes/"
+weight = 3
+parent = "community"
+[[menu.top]]
+identifier = "community-adopters"
+name = "Adopters"
+url = "/community/adopters/"
+weight = 3
+parent = "community"
+[[menu.top]]
 identifier = "blog"
 name = "Blog"
 url = "/blog/"
