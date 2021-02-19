@@ -80,11 +80,11 @@ Now, we pass the add-on configuration file to the helm install command.
 # Install Linkerd through Helm with additional configuration from `./config.yaml`
 helm install \
   --name=linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
+  --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$exp \
-  --set global.controlPlaneTracing=true \
+  --set controlPlaneTracing=true \
   -f config.yaml \
   linkerd-edge/linkerd2
 ```

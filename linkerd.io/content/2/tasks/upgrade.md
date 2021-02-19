@@ -280,7 +280,7 @@ this will require [step 0.13.3](https://smallstep.com/cli/) and
 Check your trust roots:
 
 ```bash
-kubectl -n linkerd get cm linkerd-config -o=jsonpath="{.data.global}" |  \
+kubectl -n linkerd get cm linkerd-config -o=jsonpath="{.data}" |  \
 jq -r .identityContext.trustAnchorsPem | \
 step certificate inspect --short -
 

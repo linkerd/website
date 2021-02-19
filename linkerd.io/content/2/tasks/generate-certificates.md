@@ -34,7 +34,7 @@ step certificate create root.linkerd.cluster.local ca.crt ca.key \
 
 This generates the `ca.crt` and `ca.key` files. The `ca.crt` file is what you
 need to pass to the `--identity-trust-anchors-file` option when installing
-Linkerd with the CLI, and the `global.identityTrustAnchorsPEM` value when installing
+Linkerd with the CLI, and the `identityTrustAnchorsPEM` value when installing
 Linkerd with Helm.
 
 Note we use `--no-password --insecure` to avoid encrypting those files with a
@@ -72,7 +72,7 @@ Or when installing with Helm:
 
 ```bash
 helm install linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
+  --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \

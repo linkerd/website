@@ -44,7 +44,7 @@ with direct values for the below configuration to work.
       kubernetes_sd_configs:
       - role: pod
         namespaces:
-          names: ['{{.Values.global.namespace}}']
+          names: ['{{.Values.namespace}}']
       relabel_configs:
       - source_labels:
         - __meta_kubernetes_pod_label_linkerd_io_control_plane_component
@@ -85,7 +85,7 @@ with direct values for the below configuration to work.
         - __meta_kubernetes_pod_container_port_name
         - __meta_kubernetes_pod_label_linkerd_io_control_plane_ns
         action: keep
-        regex: ^{{default .Values.global.proxyContainerName "linkerd-proxy" .Values.global.proxyContainerName}};linkerd-admin;{{.Values.global.namespace}}$
+        regex: ^{{default .Values.proxyContainerName "linkerd-proxy" .Values.proxyContainerName}};linkerd-admin;{{.Values.namespace}}$
       - source_labels: [__meta_kubernetes_namespace]
         action: replace
         target_label: namespace
@@ -140,7 +140,7 @@ kubectl -n linkerd  get configmap linkerd-prometheus-config -o yaml
 Linkerd's control plane components like `public-api`, etc depend
 on the Prometheus instance to power the dashboard and CLI.
 
-The `global.prometheusUrl` field gives you a single place through
+The `prometheusUrl` field gives you a single place through
 which all these components can be configured to an external Prometheus URL.
 This is allowed both through the CLI and Helm.
 
@@ -157,7 +157,7 @@ global:
 Once applied, this configuration is persistent across upgrades, without having
 the user passing it again. The same can be overwritten as needed.
 
-When using an external Prometheus and configuring the `global.prometheusUrl`
+When using an external Prometheus and configuring the `prometheusUrl`
 field, Linkerd's Prometheus will still be included in installation.
 
 If you wish to disable this included Prometheus, be sure to include the

@@ -37,7 +37,7 @@ exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
 exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
 
 helm install linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
+  --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$exp \
@@ -59,7 +59,7 @@ file passed with a `-f` option, or overriding specific values using the family o
 ## Disabling The Proxy Init Container
 
 If installing with CNI, make sure that you add the `--set
-global.cniEnabled=true` flag to your `helm install` command.
+cniEnabled=true` flag to your `helm install` command.
 
 ## Setting High-Availability
 
@@ -79,7 +79,7 @@ Then use the `-f` flag to provide the override file, for example:
 ```bash
 ## see above on how to set $exp
 helm install linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
+  --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   --set identity.issuer.crtExpiry=$exp \
