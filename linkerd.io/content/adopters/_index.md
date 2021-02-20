@@ -3,12 +3,16 @@ title: Linkerd 2.x Adopters
 description: Here are some of the organizations we know are using Linkerd 2.x. If you're using Linkerd 2.x and aren't on this list, [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md) (We’ll send you some swag too!)
 case_studies:
 - image: /images/adopters/connect.svg
+  alt: FinLeap Connect
   link: https://buoyant.io/case-studies/finleap/
 - image: /images/adopters/nordstorm.svg
+  alt: Nordstrom
   link: https://buoyant.io/case-studies/nordstrom/
 - image: /images/adopters/paybase.svg
+  alt: Paybase
   link: https://buoyant.io/case-studies/paybase/
 - image: /images/adopters/subspace.svg
+  alt: Subspace
   link: https://buoyant.io/case-studies/subspace/
 adopters:
 - image: /images/adopters/AdvanceLatam.png

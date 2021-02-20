@@ -15,7 +15,7 @@
 				{{ range .Params.links }}
 				  <div class="is-flex is-align-items-center py-3">
 				  	<figure class="is-flex-shrink-0 image is-48x48 mr-4">
-				  		<img src="{{ .image }}" alt="">
+				  		<img src="{{ .image }}" alt="{{ .alt }}">
 				  	</figure>
 		        <p>{{ .description | markdownify }}</p>
 				  </div>
