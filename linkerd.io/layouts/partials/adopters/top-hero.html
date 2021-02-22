@@ -8,11 +8,11 @@
 				{{ range .case_studies }}
 				<div class="column is-quarter">
 					<figure class="image is-full">
-						<img src="{{ .image }}" alt="">
+						<img src="{{ .image }}" alt="{{ .alt }}">
 					</figure>
 					<a class="is-block has-text-centered has-text-weight-semibold" href="{{ .link }}">Read case study</a>
 				</div>
 				{{ end}}
 			</div>
-		</div>	
+		</div>
 	</div>
