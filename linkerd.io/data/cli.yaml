@@ -992,55 +992,6 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     Output Kubernetes configs to install Linkerd Service Profiles
-- Description: Tail logs from containers in the Linkerd control plane.
-  Example: |2
-      # Tail logs from all containers in the prometheus control plane component
-      linkerd logs --control-plane-component prometheus
-
-      # Tail logs from the linkerd-proxy container in the grafana control plane component
-      linkerd logs --control-plane-component grafana --container linkerd-proxy
-
-      # Tail logs from the linkerd-proxy container in the controller component beginning with the last two lines
-      linkerd logs --control-plane-component controller --container linkerd-proxy --tail 2
-
-      # Tail logs from the linkerd-proxy container in the controller component showing timestamps for each line
-      linkerd logs --control-plane-component controller --container linkerd-proxy --timestamps
-  InheritedOptions: null
-  Name: logs
-  Options:
-  - DefaultValue: ""
-    Name: container
-    Shorthand: c
-    Usage: |
-      Tail logs from the specified container. Options are 'public-api', 'destination', 'tap', 'prometheus', 'grafana' or 'linkerd-proxy'
-  - DefaultValue: ""
-    Name: control-plane-component
-    Shorthand: ""
-    Usage: |
-      Tail logs from the specified control plane component. Default value (empty string) causes this command to tail logs from all resources marked with the 'linkerd.io/control-plane-component' label selector
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for logs
-  - DefaultValue: ""
-    Name: no-color
-    Shorthand: "n"
-    Usage: Disable colorized output
-  - DefaultValue: ""
-    Name: since
-    Shorthand: s
-    Usage: Duration of how far back logs should be retrieved
-  - DefaultValue: ""
-    Name: tail
-    Shorthand: ""
-    Usage: |
-      Last number of log lines to show for a given container. -1 does not show previous log lines
-  - DefaultValue: ""
-    Name: timestamps
-    Shorthand: t
-    Usage: Print timestamps for each given log line
-  SeeAlso: null
-  Synopsis: Tail logs from containers in the Linkerd control plane
 - Description: |-
     Fetch metrics directly from Linkerd proxies.
 
