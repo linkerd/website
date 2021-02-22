@@ -13,7 +13,7 @@ featured = true
 ## Why Linkerd doesn't use Envoy
 
 In this article I'm going to describe why Linkerd isn't built on
-[Envoy](https://envoyproxy.io).
+[Envoy](https://www.envoyproxy.io).
 
 This is a bit of a weird article to write. After all, there are a million
 projects that Linkerd *doesn't* use, and none of those decisions deserve a blog
