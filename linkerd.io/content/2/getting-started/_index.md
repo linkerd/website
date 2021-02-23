@@ -14,7 +14,7 @@ weight = 2
 
 Welcome to Linkerd! 🎈
 
-In this guide, we'll walk you through how to install Linkerd into your
+In this guide, we'll walk you through how to install the Linkerd service mesh into your
 Kubernetes cluster. Then we'll deploy a sample application to show off what
 Linkerd can do.
 
