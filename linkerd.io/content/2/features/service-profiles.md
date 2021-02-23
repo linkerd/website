@@ -1,6 +1,6 @@
 +++
 title = "Service Profiles"
-description = "Linkerd supports defining service profiles that enable per-route metrics and features such as retries and timeouts."
+description = "Linkerd's service profiles enable per-route metrics as well as retries and timeouts."
 aliases = [
   "/2/service-profiles/"
 ]

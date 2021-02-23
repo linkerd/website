@@ -1,5 +1,5 @@
 +++
-title = "Securing Your Service"
+title = "Securing Your Application with mTLS"
 description = "Linkerd encrypts your service's traffic by default."
 +++
 

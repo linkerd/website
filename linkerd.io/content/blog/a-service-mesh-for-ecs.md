@@ -7,6 +7,7 @@ author: 'andrew'
 date: Tue, 08 Aug 2017 15:08:30 +0000
 draft: false
 thumbnail: /uploads/linkerd_featured.png
+featured: false
 tags:
   [
     aws,

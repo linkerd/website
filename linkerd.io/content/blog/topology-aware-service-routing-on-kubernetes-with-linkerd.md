@@ -5,6 +5,7 @@ feature = ""
 tags = ["service routing"]
 thumbnail = "/uploads/abstract-5719221_1920.jpg"
 title = "Topology-Aware Service Routing on Kubernetes with Linkerd"
+featured = false
 +++
 
 A few months ago, I was browsing through issues and feature requests in the

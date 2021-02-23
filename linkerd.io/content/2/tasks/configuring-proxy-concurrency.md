@@ -1,6 +1,6 @@
 +++
 title = "Configuring Proxy Concurrency"
-description = "How to correctly limit the Linkerd proxy's CPU usage"
+description = "Limit the Linkerd proxy's CPU usage."
 +++
 
 The Linkerd data plane's proxies are multithreaded, and are capable of running a

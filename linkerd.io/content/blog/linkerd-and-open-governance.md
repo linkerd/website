@@ -3,6 +3,7 @@ title: "Linkerd's Commitment to Open Governance"
 author: 'william'
 date: 2019-10-03T00:00:00+00:00
 draft: false
+featured: false
 thumbnail: /uploads/1356360647_27ab460006_c.jpg
 tags: [Linkerd]
 ---

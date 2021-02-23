@@ -7,6 +7,7 @@ author: 'andrew'
 date: Thu, 17 May 2018 18:21:51 +0000
 thumbnail: /uploads/prometheus-the-right-way.png
 draft: false
+featured: false
 tags: [Conduit, Uncategorized]
 ---
 

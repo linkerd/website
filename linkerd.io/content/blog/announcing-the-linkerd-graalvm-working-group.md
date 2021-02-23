@@ -7,6 +7,7 @@ author: 'gmiranda23'
 date: Mon, 04 Jun 2018 16:47:09 +0000
 thumbnail: /uploads/linkerd-graalvm-working-group.png
 draft: false
+featured: false
 tags: [Linkerd, linkerd, News]
 ---
 

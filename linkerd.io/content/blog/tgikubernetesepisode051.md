@@ -7,6 +7,7 @@ author: 'kiersten'
 date: Fri, 21 Sep 2018 23:27:57 +0000
 thumbnail: /uploads/Screen-Shot-2018-09-21-at-8.13.55-PM.png
 draft: false
+featured: false
 tags: [Community, Events, Linkerd, Tutorials &amp; How-To's, Webinars]
 ---
 

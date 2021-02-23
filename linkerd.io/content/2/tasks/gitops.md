@@ -1,6 +1,6 @@
 +++
-title = "GitOps with Linkerd"
-description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle"
+title = "Using GitOps with Linkerd with Argo CD"
+description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle."
 +++
 
 GitOps is an approach to automate the management and delivery of your Kubernetes
@@ -267,7 +267,7 @@ the trust anchor certificate.
 Create a new mTLS trust anchor private key and certificate:
 
 ```sh
-step certificate create identity.linkerd.cluster.local sample-trust.crt sample-trust.key \
+step certificate create root.linkerd.cluster.local sample-trust.crt sample-trust.key \
   --profile root-ca \
   --no-password \
   --not-after 43800h \

@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.9.3](/2/tasks/upgrade/#upgrade-notice-stable-293)
 - [Upgrade notice: stable-2.9.0](/2/tasks/upgrade/#upgrade-notice-stable-290)
 - [Upgrade notice: stable-2.8.0](/2/tasks/upgrade/#upgrade-notice-stable-280)
 - [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
@@ -78,10 +79,22 @@ that data persisted through an upgrade, take a look at the
 
 Use the `linkerd upgrade` command to upgrade the control plane. This command
 ensures that all of the control plane's existing configuration and mTLS secrets
-are retained.
+are retained. Notice that we use the `--prune` flag to remove any Linkerd
+resources from the previous version which no longer exist in the new version.
 
 ```bash
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+Next, run this command again with some `--prune-whitelist` flags added. This is
+necessary to make sure that certain cluster-scoped resources are correctly
+pruned.
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
@@ -171,6 +184,25 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.9.3
+
+### Linkerd Repair
+
+Due to a known issue in versions stable-2.9.0, stable-2.9.1, and stable-2.9.2,
+users who upgraded to one of those versions with the --prune flag (as described
+above) will have deleted the `secret/linkerd-config-overrides` resource which is
+necessary for performing any subsequent upgrades. Linkerd stable-2.9.3 includes
+a new `linkerd repair` command which restores this deleted resource. If you see
+unexpected error messages during upgrade such as "failed to read CA: not
+PEM-encoded", please upgrade your CLI to stable-2.9.3 and run:
+
+```bash
+linkerd repair | kubectl apply -f -
+```
+
+This will restore the `secret/linkerd-config-overrides` resource and allow you
+to proceed with upgrading your control plane.
 
 ## Upgrade notice: stable-2.9.0
 
@@ -555,6 +587,22 @@ allow the upgrade command to read the `linkerd-config` config map and the
 `linkerd-identity-issuer` secret from a static YAML file. This option is
 relevant to CI/CD workflows where the Linkerd configuration is managed by a
 configuration repository.
+
+For release after `edge-20.10.1`/`stable-2.9.0`, you need to add `secret/linkerd-config-overrides`
+to the `linkerd-manifest.yaml` by running command:
+
+```bash
+kubectl -n linkerd get \
+  secret/linkerd-identity-issuer \
+  configmap/linkerd-config \
+  secret/linkerd-config-overrides \
+  -oyaml > linkerd-manifests.yaml
+
+linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For release after `stable-2.6.0` and prior to `edge-20.10.1`/`stable-2.9.0`,
+you can use this command:
 
 ```bash
 kubectl -n linkerd get \
