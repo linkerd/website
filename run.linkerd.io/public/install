@@ -21,7 +21,7 @@ happyexit() {
   echo ""
   echo "  linkerd viz install | kubectl apply -f -  # install the viz extension into the 'linkerd-viz' namespace"
   echo "  linkerd viz check                         # validate the extension works!"
-  echo "  linkerd dashboard                         # launch the dashboard"
+  echo "  linkerd viz dashboard                     # launch the dashboard"
   echo ""
   echo "Looking for more? Visit https://linkerd.io/2/next-steps"
   echo ""
