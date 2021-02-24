@@ -14,10 +14,8 @@ Linkerd.
 
 To use distributed tracing, you'll need to:
 
-- Add a collector which receives spans from your application and Linkerd.
-- Add a tracing backend to explore traces.
+- Install the Linkerd-Jaeger extension.
 - Modify your application to emit spans.
-- Configure Linkerd's proxies to emit spans.
 
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
@@ -31,93 +29,35 @@ topology that looks like:
   Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
   already done this.
 
-## Install Trace Collector & Jaeger
+## Install the Linkerd-Jaeger extension
 
-The first step of getting distributed tracing setup is installing a collector
-onto your cluster. This component consists of "receivers" that consume spans
-emitted from the mesh and your applications as well as "exporters" that convert
-spans and forward them to a backend.
+The first step of getting distributed tracing setup is installing the
+Linkerd-Jaeger extension onto your cluster. This extension consists of a
+collector, a Jaeger backend, and a Jaeger-injector. The collector consumes spans
+emitted from the mesh and your applications and sends them to the Jaeger backend
+which stores them and serves a dashboard to view them. The Jaeger-injector is
+responsible for configuring the Linkerd proxies to emit spans.
 
-Next, we will need [Jaeger](https://www.jaegertracing.io/) in your cluster.
-The [all inone](https://www.jaegertracing.io/docs/1.8/getting-started/#all-in-one)
-configuration will store the traces, make them searchable and provide
-visualization of all the data being emitted.
-
-Linkerd now has add-ons which enables users to install extra components that
-integrate well with Linkerd. Tracing is such one add-on which includes [OpenCensus
-Collector](https://opencensus.io/service/components/collector/)  and
-[Jaeger](https://www.jaegertracing.io/)
-
-To add the Tracing Add-On to your cluster,
-run:
-
-First, we would need a configuration file where we enable the Tracing Add-On.
+To install the Linkerd-Jaeger extension, run the command:
 
 ```bash
-cat >> config.yaml << EOF
-tracing:
-  enabled: true
-EOF
+linkerd jaeger install | kubectl apply -f -
 ```
 
-This configuration file can also be used to apply Add-On configuration
-(not just specific to tracing Add-On). More information on the configuration
-fields allowed, can be found [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd2#add-ons-configuration)
-
-Now, the above configuration can be applied using the `--config` file
-with CLI or through `values.yaml` with Helm.
+You can verify that the Linkerd-Jaeger extension was installed correctly by
+running:
 
 ```bash
-linkerd upgrade --config config.yaml | kubectl apply -f -
-```
-
-You will now have a `linker-collector` and `linkerd-jaeger`
-deployments in the linkerd namespace that are running as part of the mesh.
-Collector has been configured to:
-
-- Receive spans from OpenCensus clients
-- Export spans to a Jaeger backend
-
-The collector is extremely configurable and can use the
-[receiver](https://opencensus.io/service/receivers/) or
-[exporter](https://opencensus.io/service/exporters/) of your choice.
-
-Jaeger itself is made up of many
-[components](https://www.jaegertracing.io/docs/1.14/architecture/#components).
-The all-in-one image bundles all these components into a single container to
-make demos and showing tracing off a little bit easier.
-
-Before moving onto the next step, make sure everything is up and running with
-`kubectl`:
-
-```bash
-kubectl -n linkerd rollout status deploy/linkerd-collector
-kubectl -n linkerd rollout status deploy/linkerd-jaeger
+linkerd jaeger check
 ```
 
 ## Install Emojivoto
 
- Add emojivoto to your cluster with:
+ Add emojivoto to your cluster and inject it with the Linkerd proxy:
 
  ```bash
- kubectl apply -f https://run.linkerd.io/emojivoto.yml
+ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
  ```
-
-It is possible to use `linkerd inject` to add the proxy to emojivoto as outlined
-in [getting started](/2/getting-started/). Alternatively, annotations can do the
-same thing. You can patch these onto the running application with:
-
-```bash
-kubectl -n emojivoto patch -f https://run.linkerd.io/emojivoto.yml -p '
-spec:
-  template:
-    metadata:
-      annotations:
-        linkerd.io/inject: enabled
-        config.linkerd.io/trace-collector: linkerd-collector.linkerd:55678
-        config.alpha.linkerd.io/trace-collector-service-account: linkerd-collector
-'
-```
 
 Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
@@ -146,7 +86,7 @@ client, but others can be used.
 To enable tracing in emojivoto, run:
 
 ```bash
-kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=linkerd-collector.linkerd:55678
+kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=collector.linkerd-jaeger:55678
 ```
 
 This command will add an environment variable that enables the applications to
@@ -155,11 +95,10 @@ propagate context and emit spans.
 ## Explore Jaeger
 
 With `vote-bot` starting traces for every request, spans should now be showing
-up in Jaeger. To get to the UI, start a port forward and send your browser to
-[http://localhost:16686](http://localhost:16686/).
+up in Jaeger. To get to the UI, run:
 
 ```bash
-kubectl -n linkerd port-forward svc/linkerd-jaeger 16686
+linkerd jaeger dashboard
 ```
 
 {{< fig src="/images/tracing/jaeger-empty.png"
@@ -193,10 +132,11 @@ dashboard by clicking the Jaeger icon in the Metrics Table, as shown below
 
 ## Cleanup
 
-To cleanup, remove the tracing components along with emojivoto by running:
+To cleanup, uninsatll the Linkerd-Jaeger extesion along with emojivoto by running:
 
 ```bash
-kubectl delete ns tracing emojivoto
+linkerd jaeger uninstall | kubectl delete -f -
+kubectl delete ns emojivoto
 ```
 
 ## Troubleshooting
@@ -208,15 +148,6 @@ propagation](https://github.com/openzipkin/b3-propagation) format. Some client
 libraries, such as Jaeger, use different formats by default. You'll want to
 configure your client library to use the b3 format to have the proxies
 participate in traces.
-
-### I don't see any traces
-
-Instead of requiring complex client configuration to ensure spans are encrypted
-in transit, Linkerd relies on its mTLS implementation. This means that it is
-*required* the collector is part of the mesh. If you are using a service account
-other than `default` for the collector, the proxies must be configured to use
-this as well with the `config.alpha.linkerd.io/trace-collector-service-account`
-annotation.
 
 ## Recommendations
 
@@ -308,17 +239,7 @@ instead.
 If your application is injected with Linkerd, the Linkerd proxy will participate
 in the traces and will also emit trace data to the OpenCensus collector. This
 enriches the trace data and allows you to see exactly how much time requests are
-spending in the proxy and on the wire. To enable Linkerd's participation:
-
-- Set the `config.linkerd.io/trace-collector` annotation on the namespace or pod
-  specs that you want to participate in traces. This should be set to the
-  address of the OpenCensus collector service.
-- Set the `config.alpha.linkerd.io/trace-collector-service-account` annotation
-  on the namespace of pod specs that you want to participate in traces. This
-  should be set to the name of the service account of the collector and is used
-  to ensure secure communication between the proxy and the collector. This can
-  be omitted if the collector is running as the default service account.
-- Ensure the OpenCensus collector is injected with the Linkerd proxy.
+spending in the proxy and on the wire.
 
 While Linkerd can only actively participate in traces that use the b3
 propagation format, Linkerd will always forward unknown request headers
