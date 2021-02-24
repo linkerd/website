@@ -1,0 +1,13 @@
+<div class="wrapper has-background-white">
+	<div class="container px-5 py-6">
+		<div class="columns is-multiline">
+			{{ range . }}
+        <div class="column is-3">
+        	<figure class="image is-full">
+        		<img src="{{ .image }}" alt="{{ .alt }}">
+        	</figure>
+        </div>
+			{{ end }}
+		</div>
+	</div>
+</div>
