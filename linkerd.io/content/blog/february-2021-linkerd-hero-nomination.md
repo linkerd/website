@@ -14,7 +14,7 @@ Yep, another month has passed and it's time to vote for our monthly Linkerd Hero
 
 ## Who are Linkerd Heroes?
 
-Linkerd Heroes help community members on Slack, answer questions on Stackoverflow, or share their successes and failures with their peers. They contribute to the codebase and are instrumental in making Linkerd the fastest, most secure, and lightweight service mesh. In short, without our heroes, Linkerd wouldn't be what it is today.
+Linkerd Heroes help community members on Slack, answer questions on Stack Overflow, or share their successes and failures with their peers. They contribute to the codebase, docs, or elsewhere in the project. In short, without our heroes, Linkerd wouldn't be what it is today.
 
 ## This month's nominations
 
@@ -38,4 +38,4 @@ Code contributions are the backbone of open source. It's a lot of work and takes
 
 [Piyush](https://www.linkedin.com/in/piyushsingariya/) has made some great code contributions on building tests, improving Linkerd's multi-cluster capabilities, as well as fixing CLI messaging. He is active in the #contributors channel on Slack, so be sure to say "hi" if you see him there. 👏👏👏
 
-Yet again a difficult choice. The truth is, they all deserve to win.**[Submit your vote](https://forms.gle/RfzWPWQ5MR9Cajb37)** by Thursday, February 25, 8 a.m. PT. And please share this post in your network so we can celebrate all three of your Linkerd Hero candidates!
+Yet again a difficult choice. **[Submit your vote](https://forms.gle/RfzWPWQ5MR9Cajb37)** by Thursday, February 25, 8 a.m. PT. And please share this post in your network so we can celebrate all three of your Linkerd Hero candidates!
