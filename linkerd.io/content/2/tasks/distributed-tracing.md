@@ -142,7 +142,7 @@ kubectl delete ns emojivoto
 ## Bring your own Jaeger
 
 If you have an existing Jaeger installation, you can configure the OpenCensus
-collector to send traces it instead of the Jaeger instance built into the
+collector to send traces to it instead of the Jaeger instance built into the
 Linkerd-Jaeger extension.
 
 ```bash
