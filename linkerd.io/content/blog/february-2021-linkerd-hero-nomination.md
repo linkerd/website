@@ -10,7 +10,7 @@ featured = false
 +++
 ## Vote for your February Linkerd Hero!
 
-Yep, another month has passed and it's time to vote for our monthly Linkerd Hero! Check out this month's nominees and learn how they support our community each day. The Hero you choose will be announced during the Community Meeting on February 25, at 9 a.m PDT. If you haven't registered yet, [do so today and join us](https://community.cncf.io/events/details/cncf-linkerd-online-community-meetup-presents-february-linkerd-online-community-meetup/#/).
+Yep, another month has passed and it's time to vote for our monthly Linkerd Hero! Check out this month's nominees and learn how they support our community each day. The Hero you choose will be announced during the Community Meeting on February 25, at 9 a.m PST. If you haven't registered yet, [do so today and join us](https://community.cncf.io/events/details/cncf-linkerd-online-community-meetup-presents-february-linkerd-online-community-meetup/#/).
 
 ## Who are Linkerd Heroes?
 
