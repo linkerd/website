@@ -121,8 +121,8 @@ EOF
 ```
 
 (In the YAML manifest above, the `duration` key instructs cert-manager to
-consider certificates as valid for 24 hours and the `renewBefore` key indicates
-that cert-manager will attempt to issue a new certificate one hour before
+consider certificates as valid for `48` hours and the `renewBefore` key indicates
+that cert-manager will attempt to issue a new certificate `25` hours before
 expiration of the current one. These values can be customized to your liking.)
 
 At this point, cert-manager can now use this Certificate resource to obtain TLS

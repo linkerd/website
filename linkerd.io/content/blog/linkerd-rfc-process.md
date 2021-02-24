@@ -3,6 +3,7 @@ title: "Introducing Linkerd's RFC process"
 author: 'thomas'
 date: 2020-04-08T09:00:00+00:00
 draft: false
+featured: false
 tags: [Linkerd]
 thumbnail: /uploads/scroll.png
 ---

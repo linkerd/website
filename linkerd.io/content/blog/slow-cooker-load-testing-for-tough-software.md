@@ -6,6 +6,7 @@ aliases:
 author: 'steve'
 date: Sat, 10 Dec 2016 00:11:51 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_slow_cooker_featured.png
 tags: [Buoyant, buoyant, News, Product Announcement]
 ---
