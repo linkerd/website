@@ -5,6 +5,7 @@ feature = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
 tags = ["heroes"]
 thumbnail = "/uploads/screen-shot-2020-12-04-at-11-28-15-am.png"
 title = "Vote For Your December Linkerd Hero!"
+featured = false
 
 +++
 To give our most active community members the credit they deserve, we are now formalizing our monthly Linkerd Hero nominations.
@@ -29,7 +30,7 @@ One of the great things about open source is the community that drives it. Whene
 
 Whether through a KubeCon talk or blog tutorial; by sharing successes, failures, and lessons learned, Linkerd users can save their less experienced peers weeks or even months.
 
-[David](https://www.linkedin.com/in/davidsudia/) is really great at that. Together with his team at GoSpotCheck, David has implemented and successfully run numerous CNCF projects in production. By sharing his experiences ([most recently at KubeCon](https://buoyant.io/resources/building-an-internal-platform-with-cncf-tools/)), he's easing the adoption for organizations further down their cloud native journey. And because David clearly loves sharing his know-how, he does it in an incredibly compelling and engaging way. 👏👏👏
+[David](https://www.linkedin.com/in/davidsudia/) is really great at that. Together with his team at GoSpotCheck, David has implemented and successfully run numerous CNCF projects in production. By sharing his experiences ([most recently at KubeCon](https://buoyant.io/media/building-an-internal-platform-with-cncf-tools/)), he's easing the adoption for organizations further down their cloud native journey. And because David clearly loves sharing his know-how, he does it in an incredibly compelling and engaging way. 👏👏👏
 
 ### Lutz Behnke - a PR rock star!
 

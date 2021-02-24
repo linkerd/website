@@ -1,5 +1,6 @@
 IgnoreURLs:
   - .*localhost.*
+  - http(.?):\/\/(.*\.)?conduit.io\/*
   - https://expedia.com
   - https://www.expedia.com
   - https://ticketmaster.com
@@ -19,9 +20,11 @@ IgnoreURLs:
   - https://kinvolk.io/
   - https://godaddy.com/
   - https://www.linkedin.com/
+  - https://tools.ietf.org/
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
 HTTPConcurrencyLimit: 4
 ExternalTimeout: 25
 HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-","User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:84.0) Gecko/20100101 Firefox/84.0"}
+CheckInternalHash: false

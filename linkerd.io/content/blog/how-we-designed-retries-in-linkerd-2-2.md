@@ -7,6 +7,7 @@ author: 'alex'
 thumbnail: /uploads/image-15.png
 date: Fri, 22 Feb 2019 19:12:24 +0000
 draft: false
+featured: false
 tags: [News]
 ---
 

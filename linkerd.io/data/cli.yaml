@@ -15,9 +15,9 @@ AnnotationsReference:
   Name: config.linkerd.io/debug-image-pull-policy
 - Description: Proxy port to use for control
   Name: config.linkerd.io/control-port
-- Description: Ports that should skip the proxy and send directly to the application
+- Description: Ports that should skip the proxy and send directly to the application. Comma-separated list of values, where each value can be a port number or a range `a-b`.
   Name: config.linkerd.io/skip-inbound-ports
-- Description: Outbound ports that should skip the proxy
+- Description: Outbound ports that should skip the proxy. Comma-separated list of values, where each value can be a port number or a range `a-b`.
   Name: config.linkerd.io/skip-outbound-ports
 - Description: Proxy port to use for inbound traffic
   Name: config.linkerd.io/inbound-port

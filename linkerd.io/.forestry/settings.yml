@@ -30,6 +30,11 @@ sections:
   templates:
   - community
 - type: directory
+  path: linkerd.io/content/heroes
+  label: Heroes
+  create: all
+  match: "**/*"
+- type: directory
   path: linkerd.io/content/2
   label: Linkerd 2 Docs
   create: all

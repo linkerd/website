@@ -4,6 +4,7 @@ author: 'william'
 date: 2019-04-16T21:00:00+00:00
 thumbnail: /uploads/lego-stormtroopers.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.3
 tags: [Linkerd]
 ---

@@ -10,6 +10,7 @@ author: 'alex'
 thumbnail: /uploads/kubernetes2_featured_Twitter_ratio.png
 date: Fri, 14 Oct 2016 22:55:04 +0000
 draft: false
+featured: false
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---
 
@@ -23,12 +24,12 @@ Note: This is one article in a series of articles about [linkerd](https://linke
    "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}}) (this article)
 3. [Encrypting all the things]({{< ref
    "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}})
-4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}
-5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}}
-6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}}
+4. [Continuous deployment via traffic shifting]({{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}})
+5. [Dogfood environments, ingress, and edge routing]({{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}})
+6. [Staging microservices without the tears]({{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}})
 7. [Distributed tracing made easy]({{< ref
    "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}})
-8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}}
+8. [Linkerd as an ingress controller]({{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}})
 9. [gRPC for fun and profit]({{< ref
    "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}})
 10. [The Service Mesh API]({{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}})
