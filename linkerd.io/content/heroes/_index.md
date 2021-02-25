@@ -12,7 +12,7 @@ top_hero:
     we all love.
   image: "/uploads/febraury-linkerd-hero.png"
   image_on_the_right: false
-  alt: Portrait of Richard Pijnenberg
+  alt: Portrait of Sergio Mendéz
 heroes:
 - name: Sergio Mendéz
   date: February 2021
