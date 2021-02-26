@@ -1862,7 +1862,10 @@ the following command
 linkerd viz install | k apply -f -
 ```
 
-The installed can be customized by using flags.
+The installation can be configured by using the
+`--set`, `--values`, `--set-string` and `--set-file` flags.
+A full list of configurable values can be found at
+https://www.github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz/README.md
 
 ### √ linkerd-viz ClusterRoles exist {#l5d-viz-cr-exists}
 
@@ -1921,37 +1924,11 @@ $ kubectl auth can-i create clusterrolebindings
 yes
 ```
 
-### √ linkerd-viz ConfigMaps exists {#l5d-viz-cm-exists}
-
-Example failure:
-
-```bash
-× collector config map exists
-    missing ConfigMaps: linkerd-grafana-config
-    see https://linkerd.io/checks/#l5d-viz-cm-existss for hints
-```
-
-Ensure the linkerd-viz ConfigMap exists:
-
-```bash
-$ kubectl -n linkerd-viz get configmaps
-NAME                        DATA   AGE
-linkerd-grafana-config      3      18h
-linkerd-prometheus-config   1      18hm
-```
-
-Also ensure you have permission to create ConfigMaps:
-
-```bash
-$ kubectl -n linker-viz auth can-i create configmap
-yes
-```
-
 ### √ linkerd-viz pods are injected {#l5d-viz-pods-injection}
 
 ```bash
-× linkerd-viz extension pods are injecteds
-    coukd not find proxy container for linkerd-tap-59f5595fc7-ttndp pod
+× linkerd-viz extension pods are injected
+    could not find proxy container for linkerd-tap-59f5595fc7-ttndp pod
     see https://linkerd.io/checks/#l5d-viz-pods-injection for hints
 ```
 
@@ -1973,8 +1950,86 @@ Make sure that the `proxy-injector` is working correctly by running
 
 ### √ viz extension pods are running {#l5d-viz-pods-running}
 
+```bash
+× viz extension pods are running
+    container linkerd-proxy in pod linkerd-tap-59f5595fc7-ttndp is not ready
+    see https://linkerd.io/checks/#l5d-viz-pods-running for hints
+```
+
+Ensure all the linkerd-viz pods are running with 2/2
+
+```bash
+$ kubectl -n linkerd-viz get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+linkerd-grafana-68cddd7cc8-nrv4h       2/2     Running   3          18h
+linkerd-metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
+linkerd-prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
+linkerd-tap-59f5595fc7-ttndp           2/2     Running   2          18h
+linkerd-web-78d6588d4-pn299            2/2     Running   2          18h
+tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`
+
+### √ prometheus is installed and configured correctly {#l5d-viz-prometheus}
+
+```bash
+× prometheus is installed and configured correctly
+    missing ClusterRoles: linkerd-linkerd-viz-prometheus
+    see https://linkerd.io/checks/#l5d-viz-cr-exists for hints
+```
+
+Ensure all the prometheus related resources are present and running
+correctly.
+
+```bash
+❯ k -n linkerd-viz get deploy,cm | grep prometheus
+deployment.apps/prometheus     1/1     1            1           3m18s
+configmap/prometheus-config   1      3m18s
+❯ k get clusterRoleBindings | grep prometheus
+linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
+❯ k get clusterRoles | grep prometheus
+linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
+```
 
 ### √ can initialize the client {#l5d-viz-existence-client}
+
+Example failure:
+
+```bash
+× can initialize the client
+    Failed to get deploy for pod linkerd-metrics-api-77f684f7c7-hnw8r: not running
+```
+
+Verify that the metrics API pod is running correctly
+
+```bash
+❯ k -n linkerd-viz get pods
+NAME                           READY   STATUS    RESTARTS   AGE
+metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
+tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
+tap-5f6ddcc684-k2fd6           2/2     Running   0          4m57s
+web-cbb846484-d987n            2/2     Running   0          4m56s
+grafana-76fd8765f4-9rg8q       2/2     Running   0          4m58s
+prometheus-7c5c48c466-jc27g    2/2     Running   0          4m58s
+```
+
+### √ viz extension self-check {#l5d-viz-metrics-api}
+hero (update hint anchor in code)
+
+Example failure:
+
+```bash
+× viz extension self-check
+    No results returned
+```
+
+Check the logs on the viz extensions's metrics API:
+
+```bash
+kubectl -n linkerd-viz logs deploy/linkerd-metrics-api metrics-api
+```
 
 ## The "linkerd-jaeger" checks {#l5d-jaeger}
 
@@ -1994,7 +2049,10 @@ the following command
 linkerd jaeger install | k apply -f -
 ```
 
-The installed can be customized by using flags.
+The installation can be configured by using the
+`--set`, `--values`, `--set-string` and `--set-file` flags.
+A full list of configurable values can be found at
+https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md
 
 ### √ collector and jaeger service account exists {#l5d-jaeger-sc-exists}
 
@@ -2052,7 +2110,7 @@ yes
 
 ```bash
 × jaeger extension pods are injecteds
-    coukd not find proxy container for jaeger-6f98d5c979-scqlq pod
+    could not find proxy container for jaeger-6f98d5c979-scqlq pod
     see https://linkerd.io/checks/#l5d-jaeger-pods-injections for hints
 ```
 
@@ -2069,9 +2127,23 @@ jaeger-injector-6c594f5577-cz75h   2/2     Running     0          10s
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
 
-### √ collector pod is running {#l5d-jaeger-collector-running}
+### √ jaeger extension pods are running {#l5d-jaeger-pods-running}
 
-### √ jaeger pod is running {#l5d-jaeger-jaeger-running}
+```bash
+× jaeger extension pods are running
+    container linkerd-proxy in pod linkerd-jaeger-59f5595fc7-ttndp is not ready
+    see https://linkerd.io/checks/#l5d-viz-pods-running for hints
+```
 
+Ensure all the linkerd-jaeger pods are running with 2/2
 
-### √ jaeger injector pod is running {#l5d-jaeger-injector-running}
+```bash
+$ kubectl -n linkerd-jaeger get pods
+NAME                               READY   STATUS   RESTARTS   AGE
+jaeger-injector-548684d74b-bcq5h   2/2     Running   0          5s
+collector-69cc44dfbc-wqf6s         2/2     Running   0          5s
+jaeger-6f98d5c979-vs622            2/2     Running   0          5sh
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`
