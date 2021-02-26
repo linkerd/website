@@ -12,7 +12,7 @@ thumbnail: "/uploads/gilles-rolland-monnet-xpb438CRUnU-unsplash.jpg"
 
 ---
 
-## Protocol Detection and Opaque Ports in Linkerd
+![Radio Satellite](/uploads/gilles-rolland-monnet-xpb438CRUnU-unsplash.jpg)
 
 The upcoming Linkerd 2.10 release adds a new _opaque ports_ feature that further
 extends Linkerd's ability to provide zero-config mutual TLS for all TCP traffic.
@@ -167,7 +167,8 @@ downsides of the earlier skip-ports features, and will allow Linkerd adopters to
 extend mTLS across their entire Kubernetes environment, regardless of protocol.
 
 (Want to give opaque ports a try? You don't have to wait for the 2.10 release
-because the feature is currently available in the edge releases!)
+because the feature is currently available in the
+[edge](https://linkerd.io/2/edge/) releases!)
 
 ## Linkerd is for everyone
 
