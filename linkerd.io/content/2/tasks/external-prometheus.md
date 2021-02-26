@@ -3,7 +3,7 @@ title = "Bringing your own Prometheus"
 description = "Use an existing Prometheus instance with Linkerd."
 +++
 
-Even though Linkerd comes with its own Prometheus instance, there can be cases
+Even though linkerd-viz extension comes with its own Prometheus instance, there can be cases
 where using an external instance makes more sense for various reasons.
 
 {{< note >}}
@@ -21,7 +21,7 @@ both by a user as well as Linkerd control plane components like web, etc.
 There are two important points to tackle here.
 
 - Configuring external Prometheus instance to get the Linkerd metrics.
-- Configuring the Linkerd control plane components to use that Prometheus.
+- Configuring the linkerd-viz extension to use that Prometheus.
 
 ## Prometheus Scrape Configuration
 
@@ -132,12 +132,12 @@ with direct values for the below configuration to work.
 The running configuration of the builtin prometheus can be used as a reference.
 
 ```bash
-kubectl -n linkerd  get configmap linkerd-prometheus-config -o yaml
+kubectl -n linkerd-viz  get configmap linkerd-prometheus-config -o yaml
 ```
 
-## Control Plane Components Configuration
+## Linkerd-Viz Extension Configuration
 
-Linkerd's control plane components like `public-api`, etc depend
+Linkerd's viz extension components like `metrics-api`, etc depend
 on the Prometheus instance to power the dashboard and CLI.
 
 The `prometheusUrl` field gives you a single place through
@@ -146,16 +146,15 @@ This is allowed both through the CLI and Helm.
 
 ### CLI
 
-This can be done by passing a file with the above field to the `config` flag,
-which is available both through `linkerd install` and `linkerd upgrade` commands
+This can be done by passing a file with the above field to the `values` flag,
+which is available through `linkerd viz install` command.
 
 ```yaml
-global:
-  prometheusUrl: existing-prometheus.xyz:9090
+prometheusUrl: existing-prometheus.xyz:9090
 ```
 
-Once applied, this configuration is persistent across upgrades, without having
-the user passing it again. The same can be overwritten as needed.
+Once applied, this configuration is not persistent across installs.
+The same has to be passed again by the user during re-installs, upgrades, etc.
 
 When using an external Prometheus and configuring the `prometheusUrl`
 field, Linkerd's Prometheus will still be included in installation.
