@@ -579,3 +579,8 @@ blockquote {
 .featured-blogs__heading {
   font-size: 18px !important;
 }
+
+ .featured-blogs__thumbnail {
+  height: 150px;
+  overflow: hidden;
+ }
