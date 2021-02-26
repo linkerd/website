@@ -1842,3 +1842,236 @@ respectively.
 
 If the check is performed on the target cluster, It also reports if the relevant
 endpoints resource for the gateway service is absent.
+
+## The "linkerd-viz" checks {#l5d-viz}
+
+These checks only run when the `linkerd-viz` extension is installed. 
+This flag is intended to verify the installation of linkerd-viz
+extension which comprises of `linkerd-tap`, `linkerd-web`,
+`linkerd-metrics-api` and optional `grafana` and `prometheus instances
+along with `tap-injector` which injects the specific
+tap configuration to the proxies.
+
+### √ linkerd-viz Namespace exists {#l5d-viz-ns-exists}
+
+This is the basic check used to verify if the linkerd-viz extension
+namespace is installed or not. The extension can be installed by running
+the following command
+
+```bash
+linkerd viz install | k apply -f -
+```
+
+The installed can be customized by using flags.
+
+### √ linkerd-viz ClusterRoles exist {#l5d-viz-cr-exists}
+
+Example failure:
+
+```bash
+× linkerd-viz ClusterRoles exist
+    missing ClusterRoles: linkerd-linkerd-viz-metrics-api
+    see https://linkerd.io/checks/#l5d-viz-cr-exists for hints
+```
+
+Ensure the linkerd-viz extension ClusterRoles exist:
+
+```bash
+$ kubectl get clusterroles | grep linkerd-viz
+linkerd-linkerd-viz-metrics-api                                        2021-01-26T18:02:17Z
+linkerd-linkerd-viz-prometheus                                         2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap                                                2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap-admin                                          2021-01-26T18:02:17Z
+linkerd-linkerd-viz-web-check                                          2021-01-26T18:02:18Z
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create clusterroles
+yes
+```
+
+### √ linkerd-viz ClusterRoleBindings exist {#l5d-viz-crb-exists}
+
+Example failure:
+
+```bash
+× linkerd-viz ClusterRoleBindings exist
+    missing ClusterRoleBindings: linkerd-linkerd-viz-metrics-api
+    see https://linkerd.io/checks/#l5d-viz-crb-exists for hints
+```
+
+Ensure the linkerd-viz extension ClusterRoleBindings exist:
+
+```bash
+$ kubectl get clusterrolebindings | grep linkerd-viz
+linkerd-linkerd-viz-metrics-api                        ClusterRole/linkerd-linkerd-viz-metrics-api                                        18h
+linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                                         18h
+linkerd-linkerd-viz-tap                                ClusterRole/linkerd-linkerd-viz-tap                                                18h
+linkerd-linkerd-viz-tap-auth-delegator                 ClusterRole/system:auth-delegator                                                  18h
+linkerd-linkerd-viz-web-admin                          ClusterRole/linkerd-linkerd-viz-tap-admin                                          18h
+linkerd-linkerd-viz-web-check                          ClusterRole/linkerd-linkerd-viz-web-check                                          18h
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create clusterrolebindings
+yes
+```
+
+### √ linkerd-viz ConfigMaps exists {#l5d-viz-cm-exists}
+
+Example failure:
+
+```bash
+× collector config map exists
+    missing ConfigMaps: linkerd-grafana-config
+    see https://linkerd.io/checks/#l5d-viz-cm-existss for hints
+```
+
+Ensure the linkerd-viz ConfigMap exists:
+
+```bash
+$ kubectl -n linkerd-viz get configmaps
+NAME                        DATA   AGE
+linkerd-grafana-config      3      18h
+linkerd-prometheus-config   1      18hm
+```
+
+Also ensure you have permission to create ConfigMaps:
+
+```bash
+$ kubectl -n linker-viz auth can-i create configmap
+yes
+```
+
+### √ linkerd-viz pods are injected {#l5d-viz-pods-injection}
+
+```bash
+× linkerd-viz extension pods are injecteds
+    coukd not find proxy container for linkerd-tap-59f5595fc7-ttndp pod
+    see https://linkerd.io/checks/#l5d-viz-pods-injection for hints
+```
+
+Ensure all the linkerd-viz pods are injected
+
+```bash
+$ kubectl -n linkerd-viz get pods
+NAME                                   READY   STATUS    RESTARTS   AGE
+linkerd-grafana-68cddd7cc8-nrv4h       2/2     Running   3          18h
+linkerd-metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
+linkerd-prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
+linkerd-tap-59f5595fc7-ttndp           2/2     Running   2          18h
+linkerd-web-78d6588d4-pn299            2/2     Running   2          18h
+tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`
+
+### √ viz extension pods are running {#l5d-viz-pods-running}
+
+
+### √ can initialize the client {#l5d-viz-existence-client}
+
+## The "linkerd-jaeger" checks {#l5d-jaeger}
+
+These checks only run when the `linkerd-jaeger` extension is installed. 
+This flag is intended to verify the installation of linkerd-jaeger
+extension which comprises of open-census collector and jaeger
+components along with `jaeger-injector` which injects the specific
+trace configuration to the proxies.
+
+### √ linkerd-jaeger extension Namespace exists {#l5d-jaeger-ns-exists}
+
+This is the basic check used to verify if the linkerd-jaeger extension
+namespace is installed or not. The extension can be installed by running
+the following command
+
+```bash
+linkerd jaeger install | k apply -f -
+```
+
+The installed can be customized by using flags.
+
+### √ collector and jaeger service account exists {#l5d-jaeger-sc-exists}
+
+Example failure:
+
+```bash
+× collector and jaeger service account exists
+    missing ServiceAccounts: collector
+    see https://linkerd.io/checks/#l5d-jaeger-sc-exists for hints
+```
+
+Ensure the linkerd-jaeger ServiceAccounts exist:
+
+```bash
+$ kubectl -n linkerd-jaeger get serviceaccounts
+NAME               SECRETS   AGE
+collector          1         23m
+jaeger             1         23m
+```
+
+Also ensure you have permission to create ServiceAccounts in the linkerd-jaeger
+namespace:
+
+```bash
+$ kubectl -n linkerd-jaeger auth can-i create serviceaccounts
+yes
+```
+
+### √ collector config map exists {#l5d-jaeger-oc-cm-exists}
+
+Example failure:
+
+```bash
+× collector config map exists
+    missing ConfigMaps: collector-config
+    see https://linkerd.io/checks/#l5d-jaeger-oc-cm-exists for hints
+```
+
+Ensure the Linkerd ConfigMap exists:
+
+```bash
+$ kubectl -n linkerd-jaeger get configmap/collector-config
+NAME             DATA   AGE
+collector-config   1      61m
+```
+
+Also ensure you have permission to create ConfigMaps:
+
+```bash
+$ kubectl -n linker-jaeger auth can-i create configmap
+yes
+```
+
+### √ jaeger extension pods are injected {#l5d-jaeger-pods-injection}
+
+```bash
+× jaeger extension pods are injecteds
+    coukd not find proxy container for jaeger-6f98d5c979-scqlq pod
+    see https://linkerd.io/checks/#l5d-jaeger-pods-injections for hints
+```
+
+Ensure all the jaeger pods are injected
+
+```bash
+$ kubectl -n linkerd-jaeger get pods
+NAME                               READY   STATUS      RESTARTS   AGE
+collector-69cc44dfbc-rhpfg         2/2     Running     0          11s
+jaeger-6f98d5c979-scqlq            2/2     Running     0          11s
+jaeger-injector-6c594f5577-cz75h   2/2     Running     0          10s
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`
+
+### √ collector pod is running {#l5d-jaeger-collector-running}
+
+### √ jaeger pod is running {#l5d-jaeger-jaeger-running}
+
+
+### √ jaeger injector pod is running {#l5d-jaeger-injector-running}
