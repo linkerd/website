@@ -6,6 +6,7 @@ aliases:
 author: 'kevin'
 date: Sat, 14 Jan 2017 00:17:03 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_circuit_breaking_featured.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

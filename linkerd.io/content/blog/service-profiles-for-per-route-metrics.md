@@ -6,6 +6,7 @@ aliases:
 author: 'alex'
 date: Sat, 08 Dec 2018 04:10:13 +0000
 draft: false
+featured: false
 thumbnail: /uploads/image-2.png
 tags:
   [

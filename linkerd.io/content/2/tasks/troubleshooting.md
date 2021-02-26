@@ -556,7 +556,7 @@ linkerd-controller-7bb8ff5967-zg265   4/4       Running   0          40m
 Check the controller's logs with:
 
 ```bash
-linkerd logs --control-plane-component controller
+kubectl logs -n linkerd linkerd-controller-7bb8ff5967-zg265 public-api
 ```
 
 ### √ can initialize the client {#l5d-existence-client}
@@ -787,18 +787,6 @@ entries.
 Here you need to make sure the certificate was issued specifically for
 `linkerd-tap.linkerd.svc`.
 
-```bash
-linkerd-webhooks-and-apisvc-tls
--------------------------------
-× tap API server has valid cert
-    cert is not issued by the trust anchor: x509: certificate relies on legacy Common Name field, use SANs or temporarily enable Common Name matching with GODEBUG=x509ignoreCN=0
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
-```
-
-If you're using a `brew` installed version of `linkerd` to _check_, please try
-downloading the Linkerd CLI from the [releases page](https://github.com/linkerd/linkerd2/releases)
-on GitHub and using it instead.
-
 ### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
 
 Example failure:
@@ -934,7 +922,7 @@ Example failure:
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
@@ -949,7 +937,7 @@ Example failure:
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
@@ -975,13 +963,13 @@ kubectl -n linkerd get all | grep prometheus
 Check the Prometheus logs:
 
 ```bash
-linkerd logs --control-plane-component prometheus
+kubectl logs -n linkerd linkerd-prometheus-74d66f86f6-6t6dh prometheus
 ```
 
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ### √ tap api service is running {#l5d-tap-api}
