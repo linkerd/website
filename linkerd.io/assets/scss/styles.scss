@@ -584,3 +584,15 @@ blockquote {
   height: 150px;
   overflow: hidden;
  }
+
+ // anchors page
+ .anchors-hero__image {
+  @include desktop {
+    width: 100%;
+  }
+  img {
+    @include desktop {
+      width: 80% !important;
+    }
+  }
+ }
