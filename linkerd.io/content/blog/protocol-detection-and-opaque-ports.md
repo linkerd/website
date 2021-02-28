@@ -142,7 +142,7 @@ mTLS or capture any metrics for these ports.
 ## Opaque ports and improved protocol detection in Linkerd 2.10
 
 To address the deficiency with skip-ports, in the upcoming 2.10 release, Linkerd
-will add the concept of _opaque ports (_and the corresponding `opaque-ports`
+will add the concept of _opaque ports_ (and the corresponding `opaque-ports`
 annotation). An opaque port is simply one that Linkerd will proxy _without_
 performing protocol detection. While this approach still requires configuration,
 marking a port as opaque allows Linkerd to apply mTLS and report TCP-level
