@@ -136,7 +136,7 @@ Linkerd that avoids the need to run a local Prometheus instance:
 
 ```bash
 ## optional
-curl buoyant.cloud/install | sh
+curl -sL buoyant.cloud/install | sh
 linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
 ```
 
@@ -159,7 +159,7 @@ With the control plane installed and running, assuming you've installed the
 `viz` extension, you can now view the Linkerd dashboard by running:
 
 ```bash
-linkerd dashboard &
+linkerd viz dashboard &
 ```
 
 {{< fig src="/images/getting-started/empty-dashboard.png"
