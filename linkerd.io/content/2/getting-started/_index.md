@@ -106,52 +106,52 @@ with all the necessary control plane resources. (Feel free to inspect the
 output.) Piping this manifest into `kubectl apply` then instructs Kubernetes to
 add those resources to your cluster.
 
-Next, we'll install some *extensions*. Extensions add non-critical but often
-useful functionality to Linkerd, and are installed similarly to the control plane core.
+{{< note >}}
+Some control plane resources require cluster-wide permissions. If you are
+installing on a cluster where these permissions are restricted, you may prefer
+the alternative [multi-stage install](/2/tasks/install/#multi-stage-install)
+process, which will split these "sensitive" components into a separate,
+self-contained step which can be handed off to another party.
+{{< /note >}}
 
-Some Linkerd extensions are shipped by default. These include:
+Next, we'll install *extensions*. Extensions add non-critical but often useful
+functionality to Linkerd. For this guide, we need the **viz** extension, which
+will install Prometheus, dashboard, and metrics components onto the cluster:
 
 ```bash
-linkerd viz install | kubectl apply -f - # on-cluster Prometheus and dashboard
+linkerd viz install | kubectl apply -f - # on-cluster metrics stack
+```
+
+Optionally, at this point you can install other extensions. For example:
+
+```bash
+## optional
 linkerd jaeger install | kubectl apply -f - # Jaeger collector and UI
 linkerd multicluster install | kubectl apply -f - # multi-cluster components
 ```
 
-Extensions can also come from third-party sources. For example:
+Extensions can also come from third-party sources. For example, [Buoyant
+Cloud](https://buoyant.io/cloud) is a free, hosted metrics dashboard for
+Linkerd that avoids the need to run a local Prometheus instance:
 
 ```bash
+## optional
 curl buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # free, hosted metrics dashboard from Buoyant
+linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
 ```
 
-Install the `viz` extension and any other extensions you'd like.
-
-Depending on the speed of your cluster's Internet connection, it may take a
-minute or two for your cluster to pull the Linkerd images. While that is
-happening, you can validate the installation by running:
+Once you've installed the **viz** extension and any other extensions you'd
+like, we'll wait for the control plane to finish isntalling. Depending on the
+speed of your cluster's Internet connection, this may take a minute or two.
+Wait for the control plane to be ready (and verify your installation) by
+running:
 
 ```bash
 linkerd check
 ```
 
 This command will patiently wait until Linkerd has been installed, is running
-and becomes healthy. If you're interested in what components were installed,
-you can run:
-
-```bash
-kubectl -n linkerd get deploy
-```
-
-Check out the [Linkerd architecture
-documentation](/2/reference/architecture/#control-plane) documentation for an
-in depth explanation of what these components are and what they do.
-
-{{< note >}}
-Linkerd installs certain resources that require cluster-wide permissions. For
-clusters where these permissions are restricted, the alternative [multi-stage
-install](/2/tasks/install/#multi-stage-install) instructions, which splits
-these requirements into a separate, self-contained step, should help.
-{{< /note >}}
+and becomes healthy.
 
 ## Step 4: Explore Linkerd
 
