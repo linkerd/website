@@ -366,14 +366,14 @@ diff -b \
 
 Now we are ready to install Linkerd. The decrypted trust anchor we just
 retrieved will be passed to the installation process using the
-`global.identityTrustAnchorsPEM` parameter.
+`identityTrustAnchorsPEM` parameter.
 
 Prior to installing Linkerd, note that the `gloval.identityTrustAnchorsPEM`
 parameter is set to an "empty" certificate string:
 
 ```sh
 argocd app get linkerd -ojson | \
-  jq -r '.spec.source.helm.parameters[] | select(.name == "global.identityTrustAnchorsPEM") | .value'
+  jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
 {{< fig alt="Empty default trust anchor"
@@ -383,7 +383,7 @@ argocd app get linkerd -ojson | \
 We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
 
-Locate the `global.identityTrustAnchorsPEM` variable in your local
+Locate the `identityTrustAnchorsPEM` variable in your local
 `gitops/argo-apps/linkerd.yaml` file, and set its `value` to that of
 `${trust_anchor}`.
 
@@ -396,7 +396,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
     targetRevision: 2.8.0
     helm:
       parameters:
-      - name: global.identityTrustAnchorsPEM
+      - name: identityTrustAnchorsPEM
         value: |
           -----BEGIN CERTIFICATE-----
           MIIBlTCCATygAwIBAgIRAKQr9ASqULvXDeyWpY1LJUQwCgYIKoZIzj0EAwIwKTEn
@@ -422,7 +422,7 @@ Commit and push the changes to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd.yaml
 
-git commit -m "set global.identityTrustAnchorsPEM parameter"
+git commit -m "set identityTrustAnchorsPEM parameter"
 
 git push git-server master
 ```
@@ -437,7 +437,7 @@ Confirm that the new trust anchor is picked up by the `linkerd` application:
 
 ```sh
 argocd app get linkerd -ojson | \
-  jq -r '.spec.source.helm.parameters[] | select(.name == "global.identityTrustAnchorsPEM") | .value'
+  jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
 {{< fig alt="Override mTLS trust anchor"

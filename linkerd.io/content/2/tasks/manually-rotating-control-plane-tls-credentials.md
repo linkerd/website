@@ -127,7 +127,7 @@ kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' \
 
 # For Linkerd >= 2.9.0:
 kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
-  | yq r - global.identityTrustAnchorsPEM > original-trust.crt
+  | yq -r .identityTrustAnchorsPEM > original-trust.crt
 
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
 rm original-trust.crt

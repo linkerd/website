@@ -194,12 +194,12 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 ## Installing with Helm
 
 For Helm installation, rather than running `linkerd install`, set the
-`global.identityTrustAnchorsPEM` to the value of `ca.crt` in the
+`identityTrustAnchorsPEM` to the value of `ca.crt` in the
 `linkerd-identity-issuer` Secret:
 
 ```bash
 helm install linkerd2 \
-  --set-file global.identityTrustAnchorsPEM=ca.crt \
+  --set-file identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   --set installNamespace=false \
   linkerd/linkerd2 \

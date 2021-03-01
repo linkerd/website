@@ -36,7 +36,7 @@ Install the Linkerd control plane, with:
 linkerd install --linkerd-cni-enabled | kubectl apply -f -
 ```
 
-This will set a `cniEnabled` flag in the global `linkerd-config` ConfigMap. All
+This will set a `cniEnabled` flag in the `linkerd-config` ConfigMap. All
 subsequent proxy injections will read this field and omit init containers.
 
 ### Using Helm
