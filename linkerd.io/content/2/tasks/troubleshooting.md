@@ -317,7 +317,6 @@ Ensure the Linkerd ClusterRoles exist:
 $ kubectl get clusterroles | grep linkerd
 linkerd-linkerd-controller                                             9d
 linkerd-linkerd-identity                                               9d
-linkerd-linkerd-prometheus                                             9d
 linkerd-linkerd-proxy-injector                                         20d
 linkerd-linkerd-sp-validator                                           9d
 ```
@@ -345,7 +344,6 @@ Ensure the Linkerd ClusterRoleBindings exist:
 $ kubectl get clusterrolebindings | grep linkerd
 linkerd-linkerd-controller                             9d
 linkerd-linkerd-identity                               9d
-linkerd-linkerd-prometheus                             9d
 linkerd-linkerd-proxy-injector                         20d
 linkerd-linkerd-sp-validator                           9d
 ```
@@ -372,14 +370,13 @@ Ensure the Linkerd ServiceAccounts exist:
 ```bash
 $ kubectl -n linkerd get serviceaccounts
 NAME                     SECRETS   AGE
-default                  1         23m
-linkerd-controller       1         23m
-linkerd-grafana          1         23m
-linkerd-identity         1         23m
-linkerd-prometheus       1         23m
-linkerd-proxy-injector   1         7m
-linkerd-sp-validator     1         23m
-linkerd-web              1         23m
+default                  1         14m
+linkerd-controller       1         14m
+linkerd-destination      1         14m
+linkerd-heartbeat        1         14m
+linkerd-identity         1         14m
+linkerd-proxy-injector   1         14m
+linkerd-sp-validator     1         13m
 ```
 
 Also ensure you have permission to create ServiceAccounts in the Linkerd
@@ -870,8 +867,8 @@ components:
 ‼ data plane proxies certificate match CA
     Some pods do not have the current trust bundle and must be restarted:
         * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
-        * linkerd/linkerd-tap-68d8bbf64-mpzgb
-        * linkerd/linkerd-web-849f74b7c6-qlhwc
+        * linkerd-viz/tap-68d8bbf64-mpzgb
+        * linkerd-viz/web-849f74b7c6-qlhwc
     see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
@@ -887,18 +884,19 @@ Example failure:
 
 ```bash
 × control plane pods are ready
-    No running pods for "linkerd-web"
+    No running pods for "linkerd-sp-validator"
 ```
 
 Verify the state of the control plane pods with:
 
 ```bash
 $ kubectl -n linkerd get po
-NAME                                      READY     STATUS    RESTARTS   AGE
-pod/linkerd-controller-b8c4c48c8-pflc9    4/4       Running   0          45m
-pod/linkerd-grafana-776cf777b6-lg2dd      2/2       Running   0          1h
-pod/linkerd-prometheus-74d66f86f6-6t6dh   2/2       Running   0          1h
-pod/linkerd-web-5f6c45d6d9-9hd9j          2/2       Running   0          3m
+NAME                                      READY   STATUS    RESTARTS   AGE
+linkerd-controller-78957587d6-4qfp2       2/2     Running   1          12m
+linkerd-destination-5fd7b5d466-szgqm      2/2     Running   1          12m
+linkerd-identity-54df78c479-hbh5m         2/2     Running   0          12m
+linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
+linkerd-sp-validator-59796bdccc-95rn5     2/2     Running   0          12m
 ```
 
 ### √ control plane self-check {#l5d-api-control-api}
@@ -1121,7 +1119,7 @@ See the page on [Upgrading Linkerd](/2/upgrade/).
 
 ```bash
 ‼ data plane and cli versions match
-    linkerd/linkerd-web-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
+    linkerd/linkerd-controller-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
 See the page on [Upgrading Linkerd](/2/upgrade/).
@@ -1819,9 +1817,9 @@ endpoints resource for the gateway service is absent.
 ## The "linkerd-viz" checks {#l5d-viz}
 
 These checks only run when the `linkerd-viz` extension is installed. 
-This flag is intended to verify the installation of linkerd-viz
-extension which comprises of `linkerd-tap`, `linkerd-web`,
-`linkerd-metrics-api` and optional `grafana` and `prometheus instances
+This check is intended to verify the installation of linkerd-viz
+extension which comprises of `tap`, `web`,
+`metrics-api` and optional `grafana` and `prometheus` instances
 along with `tap-injector` which injects the specific
 tap configuration to the proxies.
 
@@ -1829,10 +1827,10 @@ tap configuration to the proxies.
 
 This is the basic check used to verify if the linkerd-viz extension
 namespace is installed or not. The extension can be installed by running
-the following command
+the following command:
 
 ```bash
-linkerd viz install | k apply -f -
+linkerd viz install | kubectl apply -f -
 ```
 
 The installation can be configured by using the
@@ -1958,7 +1956,7 @@ requirements in the cluster:
 
 ```bash
 × linkerd-viz extension pods are injected
-    could not find proxy container for linkerd-tap-59f5595fc7-ttndp pod
+    could not find proxy container for tap-59f5595fc7-ttndp pod
     see https://linkerd.io/checks/#l5d-viz-pods-injection for hints
 ```
 
@@ -1967,11 +1965,11 @@ Ensure all the linkerd-viz pods are injected
 ```bash
 $ kubectl -n linkerd-viz get pods
 NAME                                   READY   STATUS    RESTARTS   AGE
-linkerd-grafana-68cddd7cc8-nrv4h       2/2     Running   3          18h
-linkerd-metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
-linkerd-prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
-linkerd-tap-59f5595fc7-ttndp           2/2     Running   2          18h
-linkerd-web-78d6588d4-pn299            2/2     Running   2          18h
+grafana-68cddd7cc8-nrv4h       2/2     Running   3          18h
+metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
+prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
+tap-59f5595fc7-ttndp           2/2     Running   2          18h
+web-78d6588d4-pn299            2/2     Running   2          18h
 tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
 ```
 
@@ -1982,7 +1980,7 @@ Make sure that the `proxy-injector` is working correctly by running
 
 ```bash
 × viz extension pods are running
-    container linkerd-proxy in pod linkerd-tap-59f5595fc7-ttndp is not ready
+    container linkerd-proxy in pod tap-59f5595fc7-ttndp is not ready
     see https://linkerd.io/checks/#l5d-viz-pods-running for hints
 ```
 
@@ -1991,11 +1989,11 @@ Ensure all the linkerd-viz pods are running with 2/2
 ```bash
 $ kubectl -n linkerd-viz get pods
 NAME                                   READY   STATUS    RESTARTS   AGE
-linkerd-grafana-68cddd7cc8-nrv4h       2/2     Running   3          18h
-linkerd-metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
-linkerd-prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
-linkerd-tap-59f5595fc7-ttndp           2/2     Running   2          18h
-linkerd-web-78d6588d4-pn299            2/2     Running   2          18h
+grafana-68cddd7cc8-nrv4h               2/2     Running   3          18h
+metrics-api-77f684f7c7-hnw8r           2/2     Running   2          18h
+prometheus-5f6898ff8b-s6rjc            2/2     Running   2          18h
+tap-59f5595fc7-ttndp                   2/2     Running   2          18h
+web-78d6588d4-pn299                    2/2     Running   2          18h
 tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
 ```
 
@@ -2014,12 +2012,12 @@ Ensure all the prometheus related resources are present and running
 correctly.
 
 ```bash
-❯ k -n linkerd-viz get deploy,cm | grep prometheus
+❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
 deployment.apps/prometheus     1/1     1            1           3m18s
 configmap/prometheus-config   1      3m18s
-❯ k get clusterRoleBindings | grep prometheus
+❯ kubectl get clusterRoleBindings | grep prometheus
 linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-❯ k get clusterRoles | grep prometheus
+❯ kubectl get clusterRoles | grep prometheus
 linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
 ```
 
@@ -2029,13 +2027,13 @@ Example failure:
 
 ```bash
 × can initialize the client
-    Failed to get deploy for pod linkerd-metrics-api-77f684f7c7-hnw8r: not running
+    Failed to get deploy for pod metrics-api-77f684f7c7-hnw8r: not running
 ```
 
 Verify that the metrics API pod is running correctly
 
 ```bash
-❯ k -n linkerd-viz get pods
+❯ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
 metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
 tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
@@ -2058,13 +2056,13 @@ Example failure:
 Check the logs on the viz extensions's metrics API:
 
 ```bash
-kubectl -n linkerd-viz logs deploy/linkerd-metrics-api metrics-api
+kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 ```
 
 ## The "linkerd-jaeger" checks {#l5d-jaeger}
 
 These checks only run when the `linkerd-jaeger` extension is installed. 
-This flag is intended to verify the installation of linkerd-jaeger
+This check is intended to verify the installation of linkerd-jaeger
 extension which comprises of open-census collector and jaeger
 components along with `jaeger-injector` which injects the specific
 trace configuration to the proxies.
@@ -2076,7 +2074,7 @@ namespace is installed or not. The extension can be installed by running
 the following command
 
 ```bash
-linkerd jaeger install | k apply -f -
+linkerd jaeger install | kubectl apply -f -
 ```
 
 The installation can be configured by using the
