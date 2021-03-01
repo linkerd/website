@@ -763,45 +763,6 @@ linkerd-identity-data-plane
 
 ## The "linkerd-webhooks-and-apisvc-tls" checks {#l5d-webhook}
 
-### √ tap API server has valid cert {#l5d-tap-cert-valid}
-
-Example failure:
-
-```bash
-× tap API server has valid cert
-    secrets "linkerd-tap-tls" not found
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
-```
-
-Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
-`tls.crt` and `tls.key` data entries. For versions before 2.9, the secret is
-named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
-entries.
-
-```bash
-× tap API server has valid cert
-    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd.svc
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
-```
-
-Here you need to make sure the certificate was issued specifically for
-`linkerd-tap.linkerd.svc`.
-
-### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
-
-Example failure:
-
-```bash
-‼ tap API server cert is valid for at least 60 days
-    certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
-```
-
-This warning indicates that the expiry of one of your webhooks (tap API server,
-proxy-injector or sp-validator) cert is approaching. In order to address this
-problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
-
 ### √ proxy-injector webhook has valid cert {#l5d-proxy-injector-webhook-cert-valid}
 
 Example failure:
@@ -826,6 +787,21 @@ and `key.pem` data entries.
 Here you need to make sure the certificate was issued specifically for
 `linkerd-proxy-injector.linkerd.svc`.
 
+### √ proxy-injector cert is valid for at least 60 days {#l5d-proxy-injector-webhook-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ proxy-injector cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of proxy-injnector webhook
+cert is approaching. In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
+
 ### √ sp-validator webhook has valid cert {#l5d-sp-validator-webhook-cert-valid}
 
 Example failure:
@@ -849,6 +825,21 @@ and `key.pem` data entries.
 
 Here you need to make sure the certificate was issued specifically for
 `linkerd-sp-validator.linkerd.svc`.
+
+### √ sp-validator cert is valid for at least 60 days {#l5d-sp-validator-webhook-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ sp-validator cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of sp-validator webhook
+cert is approaching. In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
 
 ## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
 
@@ -971,24 +962,6 @@ Check the logs on the control-plane's public API:
 ```bash
 linkerd logs --control-plane-component controller --container public-api
 ```
-
-### √ tap api service is running {#l5d-tap-api}
-
-Example failure:
-
-```bash
-× FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
-```
-
-tap uses the
-[kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
-to allow users to have k8s RBAC on top. This model has the following specific
-requirements in the cluster:
-
-- tap Server must be
-  [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
-- The kube-apiserver must be correctly configured to
-  [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
 
 ## The "linkerd-service-profile" checks {#l5d-sp}
 
@@ -1923,6 +1896,63 @@ Also ensure you have permission to create ClusterRoleBindings:
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
+
+### √ tap API server has valid cert {#l5d-tap-cert-valid}
+
+Example failure:
+
+```bash
+× tap API server has valid cert
+    secrets "linkerd-tap-tls" not found
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
+`tls.crt` and `tls.key` data entries. For versions before 2.9, the secret is
+named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
+entries.
+
+```bash
+× tap API server has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd-viz.svc
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Here you need to make sure the certificate was issued specifically for
+`linkerd-tap.linkerd-viz.svc`.
+
+### √ tap API server cert is valid for at least 60 days {#l5d-tap-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ tap API server cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of the tap API Server webhook
+cert is approaching. In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/).
+
+### √ tap api service is running {#l5d-tap-api}
+
+Example failure:
+
+```bash
+× FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+```
+
+tap uses the
+[kubernetes Aggregated Api-Server model](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
+to allow users to have k8s RBAC on top. This model has the following specific
+requirements in the cluster:
+
+- tap Server must be
+  [reachable from kube-apiserver](https://kubernetes.io/docs/concepts/architecture/master-node-communication/#master-to-cluster)
+- The kube-apiserver must be correctly configured to
+  [enable an aggregation layer](https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer/)
 
 ### √ linkerd-viz pods are injected {#l5d-viz-pods-injection}
 
