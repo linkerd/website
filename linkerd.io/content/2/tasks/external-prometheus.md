@@ -4,7 +4,7 @@ description = "Use an existing Prometheus instance with Linkerd."
 +++
 
 Even though linkerd-viz extension comes with its own Prometheus instance,
-there can be casesz where using an external instance makes more
+there can be cases where using an external instance makes more
 sense for various reasons.
 
 {{< note >}}
