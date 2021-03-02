@@ -58,7 +58,7 @@ allow you to interact with your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl -sL run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
@@ -114,9 +114,19 @@ process, which will split these "sensitive" components into a separate,
 self-contained step which can be handed off to another party.
 {{< /note >}}
 
-Next, we'll install *extensions*. Extensions add non-critical but often useful
-functionality to Linkerd. For this guide, we need the **viz** extension, which
-will install Prometheus, dashboard, and metrics components onto the cluster:
+Now let's wait for the control plane to finish installing. Depending on the
+speed of your cluster's Internet connection, this may take a minute or two.
+Wait for the control plane to be ready (and verify your installation) by
+running:
+
+```bash
+linkerd check
+```
+
+Next, we'll install some *extensions*. Extensions add non-critical but often
+useful functionality to Linkerd. For this guide, we need the **viz** extension,
+which will install Prometheus, dashboard, and metrics components onto the
+cluster:
 
 ```bash
 linkerd viz install | kubectl apply -f - # on-cluster metrics stack
@@ -130,9 +140,9 @@ linkerd jaeger install | kubectl apply -f - # Jaeger collector and UI
 linkerd multicluster install | kubectl apply -f - # multi-cluster components
 ```
 
-Extensions can also come from third-party sources. For example, [Buoyant
-Cloud](https://buoyant.io/cloud) is a free, hosted metrics dashboard for
-Linkerd that avoids the need to run a local Prometheus instance:
+Note that extensions can also come from third-party sources. For example,
+[Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted metrics dashboard
+for Linkerd that can be installed alongside `viz`, but doesn't require it:
 
 ```bash
 ## optional
@@ -141,22 +151,18 @@ linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
 ```
 
 Once you've installed the **viz** extension and any other extensions you'd
-like, we'll wait for the control plane to finish isntalling. Depending on the
-speed of your cluster's Internet connection, this may take a minute or two.
-Wait for the control plane to be ready (and verify your installation) by
-running:
+like, we'll validate everything again:
 
 ```bash
 linkerd check
 ```
 
-This command will patiently wait until Linkerd has been installed, is running
-and becomes healthy.
+Assuming everything is green, we're ready for the next step!
 
 ## Step 4: Explore Linkerd
 
-With the control plane installed and running, assuming you've installed the
-`viz` extension, you can now view the Linkerd dashboard by running:
+With the control plane and extensions installed and running, you can now view
+the Linkerd dashboard by running:
 
 ```bash
 linkerd viz dashboard &
@@ -175,7 +181,7 @@ to dig into what is going on with the control plane itself behind the scenes.
 In fact, you can run:
 
 ```bash
-linkerd -n linkerd top deploy/linkerd-web
+linkerd -n linkerd viz top deploy/linkerd-web
 ```
 
 This is the traffic you're generating by looking at the dashboard itself!
@@ -247,7 +253,7 @@ app.  Since the demo app comes with a load generator, we can see live traffic
 metrics by running:
 
 ```bash
-linkerd -n emojivoto stat deploy
+linkerd -n emojivoto viz stat deploy
 ```
 
 This will show the "golden" metrics for each deployment:
@@ -260,14 +266,14 @@ To dig in a little further, it is possible to use `top` to get a real-time
 view of which paths are being called:
 
 ```bash
-linkerd -n emojivoto top deploy
+linkerd -n emojivoto viz top deploy
 ```
 
 To go even deeper, we can use `tap` shows the stream of requests across a
 single pod, deployment, or even everything in the emojivoto namespace:
 
 ```bash
-linkerd -n emojivoto tap deploy/web
+linkerd -n emojivoto viz tap deploy/web
 ```
 
 All of this functionality is also available in the dashboard, if you would like
