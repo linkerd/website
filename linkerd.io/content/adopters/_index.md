@@ -58,6 +58,8 @@ adopters:
   alt: Incognia
 - image: /images/adopters/JustFooball.png
   alt: Just Football
+- image: /images/adopters/K3.png
+  alt: K3 Business Technologies
 - image: /images/adopters/Kairos.png
   alt: Kairos
 - image: /images/adopters/kurio.png
