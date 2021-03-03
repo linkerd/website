@@ -6,6 +6,7 @@ aliases:
 author: 'william'
 date: Wed, 07 Dec 2016 00:11:05 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_version_084_featured.png
 tags: [Linkerd, linkerd, News, Product Announcement]
 ---

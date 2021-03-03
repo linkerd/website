@@ -3,6 +3,7 @@ title: 'Linkerd GSoC 2020'
 author: 'ivan'
 date: 2020-05-04T09:00:00+00:00
 draft: false
+featured: false
 tags: [Linkerd, linkerd, gsoc]
 thumbnail: /uploads/gsoc.png
 ---

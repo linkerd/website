@@ -4,6 +4,7 @@ author: 'william'
 date: 2020-06-09T00:00:00+00:00
 thumbnail: /uploads/bence-balla-schottner-6c7LVHBc6oI-unsplash.jpg
 draft: false
+featured: false
 slug: announcing-linkerd-2.8
 tags: [Linkerd]
 ---

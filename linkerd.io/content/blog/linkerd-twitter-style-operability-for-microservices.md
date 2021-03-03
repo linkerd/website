@@ -7,6 +7,7 @@ author: 'william'
 thumbnail: /uploads/linkerd_featured_operability.png
 date: Thu, 18 Feb 2016 22:51:16 +0000
 draft: false
+featured: false
 tags: [Buoyant, buoyant, Linkerd, linkerd, News]
 ---
 

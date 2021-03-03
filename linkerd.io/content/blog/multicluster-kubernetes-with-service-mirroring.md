@@ -3,6 +3,7 @@ title: 'Multicluster Kubernetes with Service Mirroring'
 author: 'thomas'
 date: Tue, 25 Feb 2020 09:00:00 +0000
 draft: false
+featured: false
 tags: [Linkerd, Multicluster]
 thumbnail: /uploads/mirror.png
 ---

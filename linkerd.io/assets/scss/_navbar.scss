@@ -1,0 +1,138 @@
+.navbar-menu {
+	position: relative;
+  &.is-active {
+    // text-align: center;
+  }
+}
+
+.navbar-item-helper {
+  svg {
+    margin-right: 5px;
+  }
+  .button-spacer {
+    display: inline-block;
+    padding: 19px 21px;
+    height: 56px;
+    line-height: 16px;
+    border: 1px solid $white;
+    border-radius: 8px;
+
+    .navbar-item:hover & {
+      border: 1px solid $primary-bright-blue;
+    }
+  }
+}
+
+.navbar.is-fixed-top {
+  z-index: 100000;
+}
+
+.navbar {
+  transition: box-shadow 0.4s;
+  img {
+    width: 210px;
+    max-height: none;
+  }
+
+  .dropdown {
+  	position: static;
+  	@include desktop {
+  		position: relative;
+  	}
+  }
+
+  .dropdown-menu {
+  	top: 0;
+  	width: 100%;
+  	height: 100%;
+  	background-color: $navy-black;
+  	@include desktop {
+  		top: 100%;
+  		width: auto;
+  		height: auto;
+  		background-color: transparent;
+  	}
+  }
+
+  .dropdown-item {
+  	color: white;
+  	@include desktop {
+  		color: $navy-black;
+  	}
+  }
+  .dropdown-item:hover {
+  	background-color: $navy-black;
+  	color: $primary-bright-blue;
+  	@include desktop {
+	    background-color: white;
+	    color: $primary-bright-blue;
+  	}
+  }
+  .dropdown button:not(.back),
+  .dropdown button:focus {
+    outline: none;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding-right: 28px;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: url("/images/icon-chevron-down.svg");
+    }
+  }
+
+  button.back {
+  	color: $primary-bright-blue;
+  	background-color: transparent;
+  	border: none;
+  	@include desktop {
+  		display: none;
+  	}
+  }
+
+  .dropdown.is-active button:after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .dropdown-content {
+  	background-color: $navy-black;
+  	@include desktop {
+	    border-radius: 16px;
+	    border: 2px solid $primary-bright-blue;
+	    background-color: white;
+  	}
+  }
+  .navbar-menu {
+    box-shadow: none;
+    .navbar-item {
+      &.is-active,
+      &:hover {
+        background: none;
+        color: $deep-blue;
+      }
+      &:hover {
+        .navbar-item-helper {
+          color: $primary-bright-blue;
+        }
+      }
+      &.is-active {
+        .navbar-item-helper {
+          border-color: $primary-bright-blue;
+        }
+      }
+      .navbar-item-helper {
+        border-bottom: 3px solid transparent;
+      }
+    }
+  }
+}
+

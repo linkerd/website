@@ -7,6 +7,7 @@ author: 'oliver'
 date: Wed, 29 Mar 2017 23:32:27 +0000
 thumbnail: /uploads/linkerd_tcp_featured.png
 draft: false
+featured: false
 tags: [Linkerd, linkerd, News]
 ---
 
