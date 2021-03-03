@@ -1,0 +1,10 @@
+<div class="wrapper has-background-light-blue">
+  <div class="container columns is-multiline py-6">
+    {{ range . }}
+    <div class="column is-4 px-5 is-flex is-align-items-center">
+      <img class="mr-4" src="{{ .image }}" alt="{{ .title }}" />
+	    <h3 class="title is-3 is-marginless has-text-color">{{.title}}</h3>
+    </div>
+    {{ end }}
+  </div>
+</div>

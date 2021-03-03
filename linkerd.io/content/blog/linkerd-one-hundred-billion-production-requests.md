@@ -6,6 +6,7 @@ aliases:
 author: 'william'
 date: Wed, 08 Mar 2017 00:25:37 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_hundred_billion_featured.png
 tags: [Buoyant, buoyant, linkerd, News]
 ---

@@ -1,0 +1,41 @@
+<div class="wrapper featured-blogs">
+	<div class="container columns is-multiline py-6">
+		<div class="column is-full has-text-centered has-text-dark-grey">
+			<h2 class="has-text-weight-light py-5 is-uppercase featured-blogs__heading">FEATURED BLOGS</h2>
+		</div>
+		{{ range first 2 ( where (where .Site.Pages "Type" "blog") ".Params.featured" "=" true )}}
+			<div class="column is-half px-5">
+				<a href="{{ .Page.RelPermalink }}">
+					<div class="box">
+						<figure class="image is-16by9">
+							<img src="{{ .Params.thumbnail }}" alt="featured-image">
+						</figure>
+						<div class="px-5 pb-6 pt-5">
+							<div class="is-flex is-justify-content-space-between mb-2">
+								<p class="has-text-color">{{ partial "readingtime.html" . }}</p>
+								<p class="has-text-color">{{ .PublishDate.Format "Jan 2, 2006" }}</p>
+							</div>
+							<h3 class="has-text-color">{{ .Params.title }}</h3>
+							<div class="is-flex is-align-items-center mt-5">
+			          <figure class="media-left">
+			            <p class="image is-32x32">
+			              {{ $authorId := .Param "author" }}
+			              {{ $author := (index $.Site.Data.authors $authorId)}}
+			              {{ if $author.avatar }}
+			              <img {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
+			                alt="{{ $author.name }}" />
+			              {{ else }}
+			              <img class="is-rounded" src="/images/identity/svg/linkerd_mark_grid_small.svg" alt="author avatar"
+			                style="background: #F2F2F2;" />
+			              {{ end }}
+			            </p>
+			          </figure>
+			          <p class="has-text-dark-grey">{{ $author.name }}</p>
+							</div>
+						</div>
+				</div>
+				</a>
+			</div>
+			{{ end }}
+	</div>
+</div>
