@@ -110,5 +110,7 @@ adopters:
   alt: XBox
 - image: /images/adopters/youmail.png
   alt: Youmail
+- image: /images/adopters/Zimpler.png
+  alt: Zimpler
 url: /community/adopters/
 ---
