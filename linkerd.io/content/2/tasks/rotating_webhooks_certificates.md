@@ -29,8 +29,8 @@ To check the validity of all the TLS secrets
 (using [`step`](https://smallstep.com/cli/)):
 
 ```bash
-for secret in "linkerd-proxy-injector-tls" "linkerd-sp-validator-tls" "linkerd-tap-tls"; do \
-  kubectl -n linkerd get secret "${secret}" -ojsonpath='{.data.crt\.pem}' | \
+for secret in "linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "linkerd-tap-k8s-tls"; do \
+  kubectl -n linkerd get secret "${secret}" -ojsonpath='{.data.tls\.crt}' | \
     base64 --decode - | \
     step certificate inspect - | \
     grep -iA2 validity; \
@@ -40,7 +40,7 @@ done
 Manually delete these secrets and use `linkerd upgrade` to recreate them:
 
 ```bash
-for secret in "linkerd-proxy-injector-tls" "linkerd-sp-validator-tls" "linkerd-tap-tls"; do \
+for secret in "linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "linkerd-tap-k8s-tls"; do \
   kubectl -n linkerd delete secret "${secret}"; \
 done
 
