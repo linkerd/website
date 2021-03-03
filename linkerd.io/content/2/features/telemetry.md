@@ -40,7 +40,7 @@ This data can be consumed in several ways:
 This is the percentage of successful requests during a time window (1 minute by
 default).
 
-In the output of the command `linkerd routes --o wide`, this metric is split
+In the output of the command `linkerd routes -o wide`, this metric is split
 into EFFECTIVE_SUCCESS and ACTUAL_SUCCESS. For routes configured with retries,
 the former calculates the percentage of success after retries (as perceived by
 the client-side), and the latter before retries (which can expose potential
