@@ -67,7 +67,8 @@ Alternatively, if you use [Homebrew](https://brew.sh), you can install the CLI
 with `brew install linkerd`. You can also download the CLI directly via the
 [Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
 
-Once installed, verify the CLI is running correctly with: 
+Once installed, verify the CLI is running correctly with:
+
 ```bash
 linkerd version
 ```
