@@ -13,6 +13,13 @@ meshed applications. While Linkerd doesn't have insight directly into the
 *internals* of service code, it has tremendous insight into the external
 behavior of service code.
 
+To gain access to Linkerd's observability features you only need to install the
+Viz extension:
+
+```bash
+linkerd viz install | kubectl apply -f -
+```
+
 Linkerd's telemetry and monitoring features function automatically, without
 requiring any work on the part of the developer. These features include:
 
@@ -27,8 +34,8 @@ requiring any work on the part of the developer. These features include:
 
 This data can be consumed in several ways:
 
-* Through the [Linkerd CLI](/2/cli/), e.g. with `linkerd stat` and
-  `linkerd routes`.
+* Through the [Linkerd CLI](/2/cli/), e.g. with `linkerd viz stat` and
+  `linkerd viz routes`.
 * Through the [Linkerd dashboard](/2/features/dashboard/), and
   [pre-built Grafana dashboards](/2/features/dashboard/#grafana).
 * Directly from Linkerd's built-in Prometheus instance
@@ -40,7 +47,7 @@ This data can be consumed in several ways:
 This is the percentage of successful requests during a time window (1 minute by
 default).
 
-In the output of the command `linkerd routes --o wide`, this metric is split
+In the output of the command `linkerd viz routes -o wide`, this metric is split
 into EFFECTIVE_SUCCESS and ACTUAL_SUCCESS. For routes configured with retries,
 the former calculates the percentage of success after retries (as perceived by
 the client-side), and the latter before retries (which can expose potential
@@ -49,7 +56,7 @@ problems with the service).
 ### Traffic (Requests Per Second)
 
 This gives an overview of how much demand is placed on the service/route. As
-with success rates, `linkerd routes --o wide` splits this metric into
+with success rates, `linkerd viz routes --o wide` splits this metric into
 EFFECTIVE_RPS and ACTUAL_RPS, corresponding to rates after and before retries
 respectively.
 
@@ -62,7 +69,7 @@ performance of the system, while tail percentiles help catch outlier behavior.
 ## Lifespan of Linkerd metrics
 
 Linkerd is not designed as a long-term historical metrics store.  While
-Linkerd's control plane does include a Prometheus instance, this instance
+Linkerd's Viz extension does include a Prometheus instance, this instance
 expires metrics at a short, fixed interval (currently 6 hours).
 
 Rather, Linkerd is designed to *supplement* your existing metrics store. If
