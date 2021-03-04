@@ -48,7 +48,7 @@ linkerd multicluster install | \
 To verify that everything has started up successfully, run:
 
 ```bash
-linkerd check --multicluster
+linkerd multicluster check
 ```
 
 For a deep dive into what components are being added to your cluster and how all
@@ -72,7 +72,7 @@ To verify that the credentials were created successfully and the clusters are
 able to reach each other, run:
 
 ```bash
-linkerd --context=west check --multicluster
+linkerd --context=west multicluster check
 ```
 
 You should also see the list of gateways show up by running:
@@ -214,7 +214,7 @@ From the source cluster (the one not running Ambassador), you can validate that
 everything is working correctly by running:
 
 ```bash
-linkerd check --multicluster
+linkerd multicluster check
 ```
 
 Additionally, the `ambassador` gateway will show up when listing the active
@@ -333,7 +333,7 @@ Full set of configuration options can be found [here](https://github.com/linkerd
 The installation can be verified by running
 
 ```bash
-linkerd check --multicluster
+linkerd multicluster check
 ```
 
 Installation of the gateway can be disabled with the `gateway` setting. By

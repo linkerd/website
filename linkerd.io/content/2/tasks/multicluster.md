@@ -42,6 +42,8 @@ At a high level, you will:
 - Elevated privileges on both clusters. We'll be creating service accounts and
   granting extended privileges, so you'll need to be able to do that on your
   test clusters.
+- Linkerd's `viz` extension should be installed in order to run `stat` commands
+  as well as view the Grafana or Linkerd dashboard.
 - Support for services of type `LoadBalancer` in the `east` cluster. Check out
   the documentation for your cluster provider or take a look at
   [inlets](https://blog.alexellis.io/ingress-for-your-local-kubernetes-cluster/).
@@ -240,7 +242,7 @@ Running `check` again will make sure that the service mirror has discovered this
 secret and can reach `east`.
 
 ```bash
-linkerd --context=west check --multicluster
+linkerd --context=west multicluster check
 ```
 
 Additionally, the `east` gateway should now show up in the list:
@@ -368,15 +370,15 @@ You'll see the `greeting from east` message! Requests from the `frontend` pod
 running in `west` are being transparently forwarded to `east`. Assuming that
 you're still port forwarding from the previous step, you can also reach this
 from your browser at [http://localhost:8080/east](http://localhost:8080/east).
-Refresh a couple times and you'll be able to get metrics from `linkerd stat` as
-well.
+Refresh a couple times and you'll be able to get metrics from `linkerd viz stat`
+as well.
 
 ```bash
-linkerd --context=west -n test stat --from deploy/frontend svc
+linkerd --context=west -n test viz stat --from deploy/frontend svc
 ```
 
 We also provide a grafana dashboard to get a feel for what's going on here. You
-can get to it by running `linkerd --context=west dashboard` and going to
+can get to it by running `linkerd --context=west viz dashboard` and going to
 [http://localhost:50750/grafana/](http://localhost:50750/grafana/d/linkerd-multicluster/linkerd-multicluster?orgId=1&refresh=1m)
 
 {{< fig
@@ -394,7 +396,7 @@ like to have a deep dive on how to validate this, check out the
 [docs](/2/tasks/securing-your-service/). To quickly check, however, you can run:
 
 ```bash
-linkerd --context=west -n test tap deploy/frontend | \
+linkerd --context=west -n test viz tap deploy/frontend | \
   grep "$(kubectl --context=east -n linkerd-multicluster get svc linkerd-gateway \
     -o "custom-columns=GATEWAY_IP:.status.loadBalancer.ingress[*].ip")"
 ```
@@ -477,19 +479,19 @@ You can also watch what's happening with metrics. To see the source side of
 things (`west`), you can run:
 
 ```bash
-linkerd --context=west -n test stat trafficsplit
+linkerd --context=west -n test viz stat trafficsplit
 ```
 
 It is also possible to watch this from the target (`east`) side by running:
 
 ```bash
-linkerd --context=east -n test stat \
+linkerd --context=east -n test viz stat \
   --from deploy/linkerd-gateway \
   --from-namespace linkerd-multicluster \
   deploy/podinfo
 ```
 
-There's even a dashboard! Run `linkerd dashboard` and send your browser to
+There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 [localhost:50750](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
 {{< fig
