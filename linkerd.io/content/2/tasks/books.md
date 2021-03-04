@@ -273,7 +273,7 @@ As you can see:
 - `rt_route` contains the name of the route
 
 These metrics are part of the [`linkerd viz routes`](/2/reference/cli/routes/)
-command instead of [`linkerd biz stat`](/2/reference/cli/stat/). To see the
+command instead of [`linkerd viz stat`](/2/reference/cli/stat/). To see the
 metrics that have accumulated so far, run:
 
 ```bash
