@@ -3,7 +3,7 @@ title = "Exposing the Dashboard"
 description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
 +++
 
-Instead of using `linkerd dashboard` every time you'd like to see what's going
+Instead of using `linkerd viz dashboard` every time you'd like to see what's going
 on, you can expose the dashboard via an ingress. This will also expose Grafana.
 
 {{< pagetoc >}}
@@ -20,7 +20,7 @@ kind: Secret
 type: Opaque
 metadata:
   name: web-ingress-auth
-  namespace: linkerd
+  namespace: linkerd-viz
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
@@ -28,7 +28,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-ingress
-  namespace: linkerd
+  namespace: linkerd-viz
   annotations:
     kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
@@ -94,7 +94,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: linkerd-web
-  namespace: linkerd
+  namespace: linkerd-viz
   annotations:
     kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
@@ -124,7 +124,7 @@ kind: Secret
 type: Opaque
 metadata:
   name: web-ingress-auth
-  namespace: linkerd
+  namespace: linkerd-viz
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
@@ -132,10 +132,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: web-ingress
-  namespace: linkerd
+  namespace: linkerd-viz
   annotations:
     kubernetes.io/ingress.class: 'traefik'
-    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:linkerd-web.linkerd.svc.cluster.local:8084
+    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:linkerd-web.linkerd-viz.svc.cluster.local:8084
     traefik.ingress.kubernetes.io/auth-type: basic
     traefik.ingress.kubernetes.io/auth-secret: web-ingress-auth
 spec:
@@ -169,8 +169,8 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
       name: linkerd-web-mapping
       host: dashboard.example.com
       prefix: /
-      host_rewrite: linkerd-web.linkerd.svc.cluster.local:8084
-      service: linkerd-web.linkerd.svc.cluster.local:8084
+      host_rewrite: linkerd-web.linkerd-viz.svc.cluster.local:8084
+      service: linkerd-web.linkerd-viz.svc.cluster.local:8084
 ```
 
 ## DNS Rebinding Protection
@@ -211,9 +211,12 @@ spec:
       containers:
         - name: web
           args:
-            - -api-addr=linkerd-controller-api.linkerd.svc.cluster.local:8085
-            - -grafana-addr=linkerd-grafana.linkerd.svc.cluster.local:3000
+            - -linkerd-controller-api-addr=linkerd-controller-api.linkerd.svc.cluster.local:8085
+            - -linkerd-metrics-api-addr=metrics-api.linkerd-viz.svc.cluster.local:8085
+            - -cluster-domain=cluster.local
+            - -grafana-addr=grafana.linkerd-viz.svc.cluster.local:3000
             - -controller-namespace=linkerd
+            - -viz-namespace=linkerd-viz
             - -log-level=info
             - -enforced-host=^dashboard\.example\.com$
 ```
