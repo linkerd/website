@@ -13,7 +13,7 @@ By design, Linkerd only keeps metrics data for a short, fixed window of time
 you, you will probably want to export it into a full-fledged metrics store.
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
-part of the control plane.  There are several basic approaches to exporting
+part of the Viz extension.  There are several basic approaches to exporting
 metrics data from Linkerd:
 
 - [Federating data to your own Prometheus cluster](#federation)
@@ -27,9 +27,9 @@ If you are using Prometheus as your own metrics store, we recommend taking
 advantage of Prometheus's *federation* API, which is designed exactly for the
 use case of copying data from one Prometheus to another.
 
-Simply add the following item to your `scrape_configs` in your Prometheus
-config file (replace `{{.Namespace}}` with the namespace where Linkerd is
-running):
+Simply add the following item to your `scrape_configs` in your Prometheus config
+file (replace `{{.Namespace}}` with the namespace where the Linkerd Viz
+extension is running):
 
 ```yaml
 - job_name: 'linkerd'

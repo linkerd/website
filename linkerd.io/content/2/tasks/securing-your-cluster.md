@@ -9,13 +9,13 @@ best practices to enable this introspection in a secure way.
 
 ## Tap
 
-The default Linkerd installation includes Tap support. This feature is available
+Linkerd's Viz extension  includes Tap support. This feature is available
 via the following commands:
 
-- [`linkerd tap`](/2/reference/cli/tap/)
-- [`linkerd top`](/2/reference/cli/top/)
-- [`linkerd profile --tap`](/2/reference/cli/profile/)
-- [`linkerd dashboard`](/2/reference/cli/dashboard/)
+- [`linkerd viz tap`](/2/reference/cli/tap/)
+- [`linkerd viz top`](/2/reference/cli/top/)
+- [`linkerd viz profile --tap`](/2/reference/cli/profile/)
+- [`linkerd viz dashboard`](/2/reference/cli/dashboard/)
 
 Depending on your RBAC setup, you may need to perform additional steps to enable
 your user(s) to perform Tap actions.
@@ -51,7 +51,7 @@ kubectl auth can-i watch deployments.tap.linkerd.io -n emojivoto --as $(whoami)
 You can also use the Linkerd CLI's `--as` flag to confirm:
 
 ```bash
-$ linkerd tap -n linkerd deploy/linkerd-controller --as $(whoami)
+$ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
 Error: HTTP error, status Code [403] (deployments.tap.linkerd.io "linkerd-controller" is forbidden: User "siggy" cannot watch resource "deployments/tap" in API group "tap.linkerd.io" in the namespace "linkerd")
 ...
 ```
@@ -194,10 +194,10 @@ Subjects:
 ```
 
 If you would like to restrict the Linkerd dashboard's tap access. You may
-install Linkerd with the `--restrict-dashboard-privileges` flag:
+install Linkerd viz with the `--set dashboard.restrictPrivileges` flag:
 
 ```bash
-linkerd install --restrict-dashboard-privileges
+linkerd viz install --set dashboard.restrictPrivileges
 ```
 
 This will omit the `linkerd-linkerd-web-admin` ClusterRoleBinding. If you have
