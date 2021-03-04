@@ -170,7 +170,7 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
       name: linkerd-web-mapping
       host: dashboard.example.com
       prefix: /
-      host_rewrite: linkerd-web.linkerd-viz.svc.cluster.local:8084
+      host_rewrite: web.linkerd-viz.svc.cluster.local:8084
       service: linkerd-web.linkerd-viz.svc.cluster.local:8084
 ```
 
