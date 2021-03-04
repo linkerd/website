@@ -11,10 +11,10 @@ associate a specific request to a specific route.
 For a tutorial that shows this functionality off, check out the
 [books demo](/2/tasks/books/#service-profiles).
 
-You can view per-route metrics in the CLI by running `linkerd routes`:
+You can view per-route metrics in the CLI by running `linkerd viz routes`:
 
 ```bash
-$ linkerd routes svc/webapp
+$ linkerd viz routes svc/webapp
 ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 GET /                        webapp   100.00%   0.6rps          25ms          30ms          30ms
 GET /authors/{id}            webapp   100.00%   0.6rps          22ms          29ms          30ms
@@ -34,7 +34,7 @@ specified in your service profile will end up there.
 It is also possible to look the metrics up by other resource types, such as:
 
 ```bash
-$ linkerd routes deploy/webapp
+$ linkerd viz routes deploy/webapp
 ROUTE                          SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [DEFAULT]                   kubernetes     0.00%   0.0rps           0ms           0ms           0ms
 GET /                           webapp   100.00%   0.5rps          27ms          38ms          40ms
@@ -53,7 +53,7 @@ Then, it is possible to filter all the way down to requests going from a
 specific resource to other services:
 
 ```bash
-$ linkerd routes deploy/webapp --to svc/books
+$ linkerd viz routes deploy/webapp --to svc/books
 ROUTE                     SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /books/{id}.json     books   100.00%   0.5rps          18ms          29ms          30ms
 GET /books.json             books   100.00%   1.1rps           7ms          12ms          18ms
@@ -66,11 +66,11 @@ PUT /books/{id}.json        books    41.98%   1.4rps          73ms          97ms
 ## Troubleshooting
 
 If you're not seeing any metrics, there are two likely culprits. In both cases,
-`linkerd tap` can be used to understand the problem. For the resource that
+`linkerd viz tap` can be used to understand the problem. For the resource that
 the service points to, run:
 
 ```bash
-linkerd tap deploy/webapp -o wide | grep req
+linkerd viz tap deploy/webapp -o wide | grep req
 ```
 
 A sample output is:

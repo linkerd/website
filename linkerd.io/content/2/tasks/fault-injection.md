@@ -25,9 +25,9 @@ engineering lifestyle, fault injection could even be used in production.
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd installed on your cluster.
-Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't already
-done this.
+To use this guide, you'll need to have Linkerd installed on your cluster, along
+with its Viz extension. Follow the [Installing Linkerd Guide](/2/tasks/install/)
+if you haven't already done this.
 
 ## Setup the service
 
@@ -54,7 +54,7 @@ After a little while, the stats will show 100% success rate. You can verify this
 by running:
 
 ```bash
-linkerd -n booksapp stat deploy
+linkerd viz -n booksapp stat deploy
 ```
 
 The output will end up looking at little like:
@@ -166,7 +166,7 @@ what this looks like by running `stat` and filtering explicitly to just the
 requests from `webapp`:
 
 ```bash
-linkerd -n booksapp routes deploy/webapp --to service/books
+linkerd viz -n booksapp routes deploy/webapp --to service/books
 ```
 
 Unlike the previous `stat` command which only looks at the requests received by

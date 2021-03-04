@@ -69,7 +69,7 @@ annotation. To manually verify if the requests are being associated correctly,
 run `tap` on your own deployment:
 
 ```bash
-linkerd tap -o wide <target> | grep req
+linkerd viz tap -o wide <target> | grep req
 ```
 
 The output will stream the requests that `deploy/webapp` is receiving in real
@@ -83,7 +83,7 @@ Conversely, if `rt_route` is not present, a request has *not* been associated
 with any route. Try running:
 
 ```bash
-linkerd tap -o wide <target> | grep req | grep -v rt_route
+linkerd viz tap -o wide <target> | grep req | grep -v rt_route
 ```
 
 ## Swagger
@@ -125,7 +125,7 @@ and is a great way to understand what service profiles can do for you. To start
 this generation process, you can use the `--tap` flag:
 
 ```bash
-linkerd profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s
+linkerd viz profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s
 ```
 
 This generates a service profile from the traffic observed to
