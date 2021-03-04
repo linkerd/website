@@ -1,6 +1,7 @@
 +++
-title = "Distributed Tracing"
-description = "You can enable distributed tracing support in Linkerd."
+title = "Distributed Tracing | Linkerd"
+description = "Linkerd can be configured to emit trace spans from the proxies, allowing you to see exactly what time requests and responses spend inside."
+slug = "distributed-tracing"
 +++
 
 Tracing can be an invaluable tool in debugging distributed systems performance,

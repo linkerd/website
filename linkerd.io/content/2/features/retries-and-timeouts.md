@@ -1,6 +1,7 @@
 +++
-title = "Retries and Timeouts"
-description = "Linkerd can perform service-specific retries and timeouts."
+title = "Retries and Timeouts | Linkerd"
+description = "Linkerd implements retries in a way that increases reliability while limiting the risk of retries amplifying small errors into system-wide outages."
+slug = "retries-and-timeouts"
 weight = 3
 +++
 

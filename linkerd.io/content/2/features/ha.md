@@ -1,6 +1,7 @@
 +++
-title = "High Availability"
-description = "The Linkerd control plane can run in high availability (HA) mode."
+title = "High Availability | Linkerd"
+description = "For production workloads, Linkerd's control plane can run in high availability (HA) mode. There are multiple mode options."
+slug = "ha"
 aliases = [
   "/2/ha/"
 ]

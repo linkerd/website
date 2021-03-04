@@ -1,6 +1,7 @@
 +++
-title = "Fault Injection"
-description = "Linkerd provides mechanisms to programmatically inject failures into services."
+title = "Fault Injection | Linkerd"
+description = "Traditionally, fault injection requires modifying app code to add a fault injection library that will do the actual work. Linkerd does it w/o any code change."
+slug = "fault-injection"
 +++
 
 Fault injection is a form of chaos engineering where the error rate of a service

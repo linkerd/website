@@ -1,6 +1,7 @@
 +++
-title = "Telemetry and Monitoring"
-description = "Linkerd automatically collects metrics from all services that send traffic through it."
+title = "Telemetry and Monitoring | Linkerd"
+description = "Linkerd has an extensive set of tooling around observability—the measuring and reporting of observed behavior in meshed applications."
+slug = "telemetry"
 weight = 8
 aliases = [
   "/2/observability/"

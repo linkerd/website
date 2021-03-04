@@ -1,6 +1,7 @@
 +++
-title = "Automatic Proxy Injection"
-description = "Linkerd will automatically inject the data plane proxy into your pods based annotations."
+title = "Automatic Proxy Injection | Linkerd"
+description = "Linkerd automatically injects data plane proxy to pods when the linkerd.io/inject: enabled annotation is present on a namespace or any workloads."
+slug = "proxy-injection"
 aliases = [
   "/2/proxy-injection/"
 ]

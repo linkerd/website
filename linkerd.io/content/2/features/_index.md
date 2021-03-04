@@ -1,5 +1,7 @@
 +++
-title = "Features"
+title = "Linkerd features"
+description = "Linkerd offers many features, outlined below. For our walkthroughs and guides, please see the Linkerd task docs."
+slug = "features"
 weight = 3
 [sitemap]
   priority = 1.0

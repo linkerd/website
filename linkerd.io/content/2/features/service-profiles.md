@@ -1,6 +1,7 @@
 +++
-title = "Service Profiles"
-description = "Linkerd's service profiles enable per-route metrics as well as retries and timeouts."
+title = "Service Profiles | Linkerd"
+description = "A service profile is a custom K8s resource providing Linkerd additional info about a service, allowing users to define a list of routes for the service."
+slug = "service-profiles"
 aliases = [
   "/2/service-profiles/"
 ]

@@ -1,6 +1,7 @@
 +++
-title = "HTTP, HTTP/2, and gRPC Proxying"
-description = "Linkerd will automatically enable advanced features (including metrics, load balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections."
+title = "HTTP, HTTP/2, and gRPC Proxying | Linkerd"
+description = "Linkerd proxies TCP connections, and enables advanced features (e.g. metrics, load balancing, retries) for HTTP, HTTP/2, gRPC connections."
+slug = "http-grpc"
 weight = 1
 +++
 

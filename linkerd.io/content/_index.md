@@ -1,5 +1,6 @@
 ---
 title: The world's lightest, fastest service mesh.
+description: Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes.
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
   title: A different kind of service mesh
@@ -22,8 +23,6 @@ benefits:
   image: "/uploads/secure.svg"
 announcement_banner:
   description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
-description: Linkerd adds critical security, observability, and reliability to your
-  Kubernetes stack, without any code changes.
 keywords:
 - cloud native applications
 outputs:

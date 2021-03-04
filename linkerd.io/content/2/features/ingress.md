@@ -1,6 +1,7 @@
 +++
-title = "Ingress"
-description = "Linkerd can work alongside your ingress controller of choice."
+title = "Ingress | Linkerd"
+description = "For reasons of simplicity, Linkerd does not provide its own ingress controller. Instead, Linkerd is designed to work alongside your ingress controller of choice."
+slug = "ingress"
 weight = 7
 aliases = [
   "/2/ingress/"

@@ -1,6 +1,7 @@
 +++
-title = "Load Balancing"
-description = "Linkerd automatically load balances requests across all destination endpoints on HTTP, HTTP/2, and gRPC connections."
+title = "Load Balancing | Linkerd"
+description = "For HTTP, HTTP/2, and gRPC connections, Linkerd automatically load balances requests across all destination endpoints without any configuration required."
+slug = "load-balancing"
 weight = 9
 +++
 

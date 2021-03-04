@@ -1,6 +1,7 @@
 +++
-title = "Dashboard and Grafana"
-description = "Linkerd provides a web dashboard, as well as pre-configured Grafana dashboards."
+title = "Dashboard and Grafana | Linkerd"
+description = "In addition to its command-line interface, Linkerd provides a web dashboard and pre-configured Grafana dashboards."
+slug = "dashboard"
 +++
 
 In addition to its [command-line interface](/2/cli/), Linkerd provides a web
