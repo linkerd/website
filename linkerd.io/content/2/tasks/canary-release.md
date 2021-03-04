@@ -251,7 +251,7 @@ metrics show the backends receiving traffic in real time and measure the success
 rate, latencies and throughput. From the CLI, you can watch this by running:
 
 ```bash
-watch linkerd -n test stat deploy --from deploy/load
+watch linkerd -n test viz stat deploy --from deploy/load
 ```
 
 For something a little more visual, you can use the dashboard. Start it by

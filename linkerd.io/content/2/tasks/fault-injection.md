@@ -54,7 +54,7 @@ After a little while, the stats will show 100% success rate. You can verify this
 by running:
 
 ```bash
-linkerd -n booksapp stat deploy
+linkerd -n booksapp viz stat deploy
 ```
 
 The output will end up looking at little like:
@@ -166,7 +166,7 @@ what this looks like by running `stat` and filtering explicitly to just the
 requests from `webapp`:
 
 ```bash
-linkerd -n booksapp routes deploy/webapp --to service/books
+linkerd -n booksapp viz routes deploy/webapp --to service/books
 ```
 
 Unlike the previous `stat` command which only looks at the requests received by

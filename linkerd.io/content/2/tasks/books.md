@@ -105,7 +105,7 @@ Let's use Linkerd to discover the root cause of this app's failures. To check
 out the Linkerd dashboard, run:
 
 ```bash
-linkerd dashboard &
+linkerd viz dashboard &
 ```
 
 {{< fig src="/images/books/dashboard.png" title="Dashboard" >}}
@@ -251,12 +251,12 @@ curl -sL https://run.linkerd.io/booksapp/books.swagger \
   | kubectl -n booksapp apply -f -
 ```
 
-Verifying that this all works is easy when you use `linkerd tap`. Each live
+Verifying that this all works is easy when you use `linkerd viz tap`. Each live
 request will show up with what `:authority` or `Host` header is being seen as
 well as the `:path` and `rt_route` being used. Run:
 
 ```bash
-linkerd -n booksapp tap deploy/webapp -o wide | grep req
+linkerd -n booksapp viz tap deploy/webapp -o wide | grep req
 ```
 
 This will watch all the live requests flowing through `webapp` and look
@@ -272,12 +272,12 @@ As you can see:
 - `:path` correctly matches
 - `rt_route` contains the name of the route
 
-These metrics are part of the [`linkerd routes`](/2/reference/cli/routes/)
-command instead of [`linkerd stat`](/2/reference/cli/stat/). To see the metrics
+These metrics are part of the [`linkerd viz routes`](/2/reference/cli/routes/)
+command instead of [`linkerd viz stat`](/2/reference/cli/stat/). To see the metrics
 that have accumulated so far, run:
 
 ```bash
-linkerd -n booksapp routes svc/webapp
+linkerd -n booksapp viz routes svc/webapp
 ```
 
 This will output a table of all the routes observed and their golden metrics.
@@ -288,7 +288,7 @@ Profiles can be used to observe *outgoing* requests as well as *incoming*
 requests. To do that, run:
 
 ```bash
-linkerd -n booksapp routes deploy/webapp --to svc/books
+linkerd -n booksapp viz routes deploy/webapp --to svc/books
 ```
 
 This will show all requests and routes that originate in the `webapp` deployment
@@ -317,7 +317,7 @@ In this application, the success rate of requests from the `books` deployment to
 the `authors` service is poor. To see these metrics, run:
 
 ```bash
-linkerd -n booksapp routes deploy/books --to svc/authors
+linkerd -n booksapp viz routes deploy/books --to svc/authors
 ```
 
 The output should look like:
@@ -360,7 +360,7 @@ this route automatically. We see a nearly immediate improvement in success rate
 by running:
 
 ```bash
-linkerd -n booksapp routes deploy/books --to svc/authors -o wide
+linkerd -n booksapp viz routes deploy/books --to svc/authors -o wide
 ```
 
 This should look like:
@@ -396,7 +396,7 @@ To get started, let's take a look at the current latency for requests from
 `webapp` to the `books` service:
 
 ```bash
-linkerd -n booksapp routes deploy/webapp --to svc/books
+linkerd -n booksapp viz routes deploy/webapp --to svc/books
 ```
 
 This should look something like:
@@ -441,7 +441,7 @@ time a REST client would wait for a response.
 Run `routes` to see what has changed:
 
 ```bash
-linkerd -n booksapp routes deploy/webapp --to svc/books -o wide
+linkerd -n booksapp viz routes deploy/webapp --to svc/books -o wide
 ```
 
 With timeouts happening now, the metrics will change:
