@@ -75,7 +75,9 @@ able to reach each other, run:
 linkerd --context=west multicluster check
 ```
 
-You should also see the list of gateways show up by running:
+You should also see the list of gateways show up by running. Note that you'll
+need Linkerd's Viz extension to be installed in the source cluster to get the
+list of gateways:
 
 ```bash
 linkerd --context=west multicluster gateways

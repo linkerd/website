@@ -42,8 +42,9 @@ At a high level, you will:
 - Elevated privileges on both clusters. We'll be creating service accounts and
   granting extended privileges, so you'll need to be able to do that on your
   test clusters.
-- Linkerd's `viz` extension should be installed in order to run `stat` commands
-  as well as view the Grafana or Linkerd dashboard.
+- Linkerd's `viz` extension should be installed in order to run `stat` commands,
+  view the Grafana or Linkerd dashboard and run the `linkerd multicluster gateways`
+  command.
 - Support for services of type `LoadBalancer` in the `east` cluster. Check out
   the documentation for your cluster provider or take a look at
   [inlets](https://blog.alexellis.io/ingress-for-your-local-kubernetes-cluster/).
