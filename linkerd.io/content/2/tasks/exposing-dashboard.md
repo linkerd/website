@@ -213,7 +213,7 @@ spec:
         - name: web
           args:
             - -api-addr=linkerd-controller-api.linkerd.svc.cluster.local:8085
-            - -grafana-addr=linkerd-grafana.linkerd-viz.svc.cluster.local:3000
+            - -grafana-addr=grafana.linkerd-viz.svc.cluster.local:3000
             - -controller-namespace=linkerd
             - -log-level=info
             - -enforced-host=^dashboard\.example\.com$
