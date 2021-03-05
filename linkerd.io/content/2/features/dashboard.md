@@ -6,13 +6,19 @@ description = "Linkerd provides a web dashboard, as well as pre-configured Grafa
 In addition to its [command-line interface](/2/cli/), Linkerd provides a web
 dashboard and pre-configured Grafana dashboards.
 
+To access this functionality, you need to have installed the Viz extension:
+
+```bash
+linkerd viz install | kubectl apply -f -
+```
+
 ## Linkerd Dashboard
 
 The Linkerd dashboard provides a high level view of what is happening with your
 services in real time. It can be used to view the "golden" metrics (success
 rate, requests/second and latency), visualize service dependencies and
 understand the health of specific service routes. One way to pull it up is by
-running `linkerd dashboard` from the command line.
+running `linkerd viz dashboard` from the command line.
 
 {{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
 

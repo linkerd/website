@@ -3,8 +3,9 @@ title = "Exposing the Dashboard"
 description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
 +++
 
-Instead of using `linkerd viz dashboard` every time you'd like to see what's going
-on, you can expose the dashboard via an ingress. This will also expose Grafana.
+Instead of using `linkerd viz dashboard` every time you'd like to see what's
+going on, you can expose the dashboard via an ingress. This will also expose
+Grafana.
 
 {{< pagetoc >}}
 
@@ -169,7 +170,7 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
       name: linkerd-web-mapping
       host: dashboard.example.com
       prefix: /
-      host_rewrite: linkerd-web.linkerd-viz.svc.cluster.local:8084
+      host_rewrite: web.linkerd-viz.svc.cluster.local:8084
       service: linkerd-web.linkerd-viz.svc.cluster.local:8084
 ```
 
