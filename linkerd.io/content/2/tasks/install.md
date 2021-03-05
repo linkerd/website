@@ -9,13 +9,17 @@ aliases = [
 +++
 
 Before you can use Linkerd, you'll need to install the
-[control plane](/2/reference/architecture/#control-plane). This page
+[core control plane](/2/reference/architecture/#control-plane). This page
 covers how to accomplish that, as well as common problems that you may
 encounter.
 
 Note that the control plane is typically installed by using Linkerd's CLI. See
 [Getting Started](/2/getting-started/) for how to install the CLI onto your local
 environment.
+
+Linkerd also comprises of some first party extensions which add additional features
+i.e `viz`, `multicluster` and `jaeger`. See [Extensions]() to understand how to
+install them.
 
 Note also that, once the control plane is installed, you'll need to "mesh" any
 services you want Linkerd active for. See
