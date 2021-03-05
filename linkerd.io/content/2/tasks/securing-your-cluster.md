@@ -52,7 +52,8 @@ You can also use the Linkerd CLI's `--as` flag to confirm:
 
 ```bash
 $ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
-Error: HTTP error, status Code [403] (deployments.tap.linkerd.io "linkerd-controller" is forbidden: User "siggy" cannot watch resource "deployments/tap" in API group "tap.linkerd.io" in the namespace "linkerd")
+Cannot connect to Linkerd Viz: namespaces is forbidden: User "XXXX" cannot list resource "namespaces" in API group "" at the cluster scope
+Validate the install with: linkerd viz check
 ...
 ```
 
