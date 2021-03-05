@@ -116,10 +116,10 @@ file named `grafana.yaml` and add your modifications:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: linkerd-grafana-config
+  name: grafana-config
 data:
   grafana.ini: |-
-    instance_name = linkerd-grafana
+    instance_name = grafana
 
     [server]
     root_url = %(protocol)s://%(domain)s:/grafana/

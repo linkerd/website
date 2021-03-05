@@ -52,6 +52,7 @@ beforehand):
 linkerd viz stat deployments -n MYNAMESPACE
 ```
 
+The above command requires the `viz` extension to be installed.
 Note that it may take several seconds for these metrics to appear once the data
 plane proxies have been injected.
 
