@@ -23,7 +23,8 @@ allowing for fully-automated, metrics-aware canary deployments.
 
 ## Prerequisites
 
-- To use this guide, you'll need to have Linkerd installed on your cluster.
+- To use this guide, you'll need to have Linkerd installed on your cluster,
+  along with its Viz extension.
   Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
   already done this.
 - The installation of Flagger depends on `kubectl` 1.14 or newer.
@@ -251,12 +252,13 @@ metrics show the backends receiving traffic in real time and measure the success
 rate, latencies and throughput. From the CLI, you can watch this by running:
 
 ```bash
-watch linkerd -n test viz stat deploy --from deploy/load
+watch linkerd viz -n test stat deploy --from deploy/load
 ```
 
 For something a little more visual, you can use the dashboard. Start it by
-running `linkerd dashboard` and then look at the detail page for the [podinfo
-traffic split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
+running `linkerd viz dashboard` and then look at the detail page for the
+[podinfo traffic
+split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
 {{< fig src="/images/canary/traffic-split.png"
         title="Dashboard" >}}

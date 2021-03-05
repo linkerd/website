@@ -21,14 +21,14 @@ documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configur
 for more.
 {{< /note >}}
 
-## Validating mTLS with `linkerd edges`
+## Validating mTLS with `linkerd viz edges`
 
 To validate that mTLS is working, you can view a summary of the TCP
 connections between services that are managed by Linkerd using the [`linkerd
 edges`](/2/reference/cli/edges/) command.  For example:
 
 ```bash
-linkerd -n linkerd edges deployment
+linkerd viz -n linkerd edges deployment
 ```
 
 The output will look like:
@@ -46,7 +46,7 @@ documentation](/2/features/automatic-mtls/) for more on what these identities
 mean.) If there were a problem automatically upgrading the connection with
 mTLS, the `MSG` field would contain the reason why.
 
-## Validating mTLS with `linkerd tap`
+## Validating mTLS with `linkerd viz tap`
 
 Instead of relying on an aggregate, it is also possible to watch the requests
 and responses in real time to understand what is getting mTLS'd. We can use the
@@ -54,7 +54,7 @@ and responses in real time to understand what is getting mTLS'd. We can use the
 For example:
 
 ```bash
-linkerd -n linkerd tap deploy
+linkerd viz -n linkerd tap deploy
 ```
 
 Looking at the control plane specifically, there will be two main types of output.

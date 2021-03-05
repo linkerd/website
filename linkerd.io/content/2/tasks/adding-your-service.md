@@ -44,8 +44,9 @@ in the correct places, then applies it to the cluster.
 ## Verifying the data plane pods have been injected
 
 Once your services have been added to the mesh, you will be able to query
-Linkerd for traffic metrics about them, e.g. by using [`linkerd viz
-stat`](/2/reference/cli/stat/):
+Linkerd for traffic metrics about them, e.g. by using [`linkerd
+viz stat`](/2/reference/cli/stat/) (make sure you have installed the Viz extension
+beforehand):
 
 ```bash
 linkerd viz stat deployments -n MYNAMESPACE
