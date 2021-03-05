@@ -46,7 +46,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: linkerd-web
+              serviceName: web
               servicePort: 8084
 ```
 
@@ -94,7 +94,7 @@ Once setup, a sample ingress would be:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: linkerd-web
+  name: web
   namespace: linkerd-viz
   annotations:
     kubernetes.io/ingress.class: 'nginx'
@@ -111,7 +111,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: linkerd-web
+              serviceName: web
               servicePort: 8084
 ```
 
@@ -136,7 +136,7 @@ metadata:
   namespace: linkerd-viz
   annotations:
     kubernetes.io/ingress.class: 'traefik'
-    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:linkerd-web.linkerd-viz.svc.cluster.local:8084
+    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web.linkerd-viz.svc.cluster.local:8084
     traefik.ingress.kubernetes.io/auth-type: basic
     traefik.ingress.kubernetes.io/auth-secret: web-ingress-auth
 spec:
@@ -145,7 +145,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: linkerd-web
+              serviceName: web
               servicePort: 8084
 ```
 
@@ -167,18 +167,18 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
       ---
       apiVersion: ambassador/v1
       kind: Mapping
-      name: linkerd-web-mapping
+      name: web-mapping
       host: dashboard.example.com
       prefix: /
       host_rewrite: web.linkerd-viz.svc.cluster.local:8084
-      service: linkerd-web.linkerd-viz.svc.cluster.local:8084
+      service: web.linkerd-viz.svc.cluster.local:8084
 ```
 
 ## DNS Rebinding Protection
 
 To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
 the dashboard rejects any request whose `Host` header is not `localhost`,
-`127.0.0.1` or the service name `linkerd-web.linkerd.svc`.
+`127.0.0.1` or the service name `web.linkerd-viz.svc`.
 
 Note that this protection also covers the [Grafana
 dashboard](/2/reference/architecture/#grafana).
@@ -192,7 +192,7 @@ you'll have to manually set the required `Host` as explained below.
 
 If your HTTP client (Ingress or otherwise) doesn't allow to rewrite the `Host`
 header, you can change the validation regexp that the dashboard server uses,
-which is fed into the `linkerd-web` deployment via the `enforced-host` container
+which is fed into the `web` deployment via the `enforced-host` container
 argument.
 
 If you're managing Linkerd with Helm, then you can set the host using the
@@ -205,7 +205,7 @@ Installation](/2/tasks/customize-install/), using an overlay like this one:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: linkerd-web
+  name: web
 spec:
   template:
     spec:
