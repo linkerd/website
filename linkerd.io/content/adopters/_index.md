@@ -2,6 +2,9 @@
 title: Linkerd 2.x Adopters
 description: Here are some of the organizations we know are using Linkerd 2.x. If you're using Linkerd 2.x and aren't on this list, [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md) (We’ll send you some swag too!)
 case_studies:
+- image: /images/adopters/elkjop.svg
+  alt: Elkjøp
+  link: https://buoyant.io/case-studies/how-a-4-billion-retail-giant-built-an-enterprise-grade-kubernetes-platform-powered-by-linkerd/
 - image: /images/adopters/connect.svg
   alt: FinLeap Connect
   link: https://buoyant.io/case-studies/finleap/
@@ -55,6 +58,8 @@ adopters:
   alt: Incognia
 - image: /images/adopters/JustFooball.png
   alt: Just Football
+- image: /images/adopters/K3.png
+  alt: K3 Business Technologies
 - image: /images/adopters/Kairos.png
   alt: Kairos
 - image: /images/adopters/kurio.png
@@ -105,5 +110,7 @@ adopters:
   alt: XBox
 - image: /images/adopters/youmail.png
   alt: Youmail
+- image: /images/adopters/Zimpler.png
+  alt: Zimpler
 url: /community/adopters/
 ---
