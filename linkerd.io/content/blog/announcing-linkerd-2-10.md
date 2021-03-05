@@ -53,7 +53,7 @@ that run as part of the Linkerd control plane. The default control plane in
 2.10 now contains just the bare minimum necessary to run, with Prometheus,
 Grafana, dashboard, and other non-critical telemetry components packaged as a
 `viz` extension. This change drops the default Linkerd control plane down to
-200mb at startup, from ~500mb in Linkerd 2.9!
+**200mb** at startup, from **~500mb** in Linkerd 2.9!
 
 The 2.10 release ships three extensions by default:
 
@@ -69,7 +69,7 @@ off-cluster metrics pipeline.
 Second, extensions allow the Linkerd community to build Linkerd-specific
 operators and controllers without having to modify the core Linkerd CLI.
 Extensions can come from anywhere, and because these extensions fit into
-Linkerd's CLI, they "feel" just like the rest of Linkerd. 
+Linkerd's CLI, they "feel" just like the rest of Linkerd.
 
 Read more in the full [blog post on Linkerd
 Extensions](https://linkerd.io/2021/03/01/linkerd-2.10-and-extensions/).
