@@ -1,6 +1,71 @@
 +++
-title = "routes"
+title = "viz"
 +++
+
+{{< cli/description "viz" >}}
+
+{{< cli/examples "viz" >}}
+
+{{< cli/flags "viz" >}}
+
+## Subcommands
+
+### check
+
+{{< cli/description "viz check" >}}
+
+{{< cli/examples "viz check" >}}
+
+{{< cli/flags "viz check" >}}
+
+### dashboard
+
+{{< cli/description "viz dashboard" >}}
+
+Check out the [architecture](/2/reference/architecture/#dashboard) docs for a
+more thorough explanation of what this command does.
+
+{{< cli/examples "viz dashboard" >}}
+
+{{< cli/flags "viz dashboard" >}}
+
+(*) You'll need to tweak the dashboard's `enforced-host` parameter with this
+value, as explained in [the DNS-rebinding protection
+docs](/2/tasks/exposing-dashboard/#tweaking-host-requirement)
+
+### edges
+
+{{< cli/description "viz edges" >}}
+
+{{< cli/examples "viz edges" >}}
+
+{{< cli/flags "viz edges" >}}
+
+### install
+
+{{< cli/description "viz install" >}}
+
+{{< cli/examples "viz install" >}}
+
+{{< cli/flags "viz install" >}}
+
+### list
+
+{{< cli/description "viz list" >}}
+
+{{< cli/examples "viz list" >}}
+
+{{< cli/flags "viz list" >}}
+
+### profile
+
+{{< cli/description "viz profile" >}}
+
+{{< cli/examples "viz profile" >}}
+
+{{< cli/flags "viz profile" >}}
+
+### routes
 
 The `routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
@@ -57,6 +122,38 @@ information.
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
 
-{{< cli/examples "routes" >}}
+{{< cli/examples "viz routes" >}}
 
-{{< cli/flags "routes" >}}
+{{< cli/flags "viz routes" >}}
+
+### stat
+
+{{< cli/description "viz stat" >}}
+
+{{< cli/examples "viz stat" >}}
+
+{{< cli/flags "viz stat" >}}
+
+### tap
+
+{{< cli/description "viz tap" >}}
+
+{{< cli/examples "viz tap" >}}
+
+{{< cli/flags "viz tap" >}}
+
+### top
+
+{{< cli/description "viz top" >}}
+
+{{< cli/examples "viz top" >}}
+
+{{< cli/flags "viz top" >}}
+
+### uninstall
+
+{{< cli/description "viz uninstall" >}}
+
+{{< cli/examples "viz uninstall" >}}
+
+{{< cli/flags "viz uninstall" >}}
