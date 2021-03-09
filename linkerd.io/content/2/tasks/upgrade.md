@@ -185,6 +185,71 @@ Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
 
+## Upgrade notice: stable-2.10.0
+
+### Visualization components moved to Linkerd-Viz extension
+
+All of the Linkerd control plane components related to visibility (including
+Prometheus, Grafana, Web, and Tap) have been removed from the main Linkerd
+control plane and moved into the Linkerd-Viz extension. This means that when you
+upgrade to stable-2.10.0, these components will be removed from your cluster and
+you will not be able to run commands such as `linkerd stat` or `linkerd
+dashboard`. To restore this functionality, you must install the Linkerd-Viz
+extension by running `linkerd viz install | kubectl apply -f -` and then invoke
+those commands through `linkerd viz stat`, `linkerd viz dashboard`, etc.
+
+```bash
+# Upgrade the control plane (this will remove viz components).
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+# Prune cluster-scoped resources
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+# Install the Linkerd-Viz extension to restore viz functionality.
+linkerd viz install | kubectl apply -f -
+```
+
+Helm users should note that configuration values related to these visibility
+components have moved to the Linkerd-Viz chart. Please update any values
+overrides you have and use these updated overrides when upgrading the Linkerd
+chart or installing the Linkerd-Viz chart. See below for a complete list of
+values which have moved.
+
+```bash
+helm repo update
+# Upgrade the control plane (this will remove viz components).
+helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
+# Install the Linkerd-Viz extension to restore viz functionality.
+helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
+```
+
+The following values were removed from the Linkerd2 chart. Most of the removed
+values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
+
+- `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
+- `tap` moved to Linkerd-Viz as `tap`
+- `tapResources` moved to Linkerd-Viz as `tap.resources`
+- `tapProxyResources` moved to Linkerd-Viz as `tap.proxy.resources`
+- `webImage` moved to Linkerd-Viz as `dashboard.image`
+- `webResources` moved to Linkerd-Viz as `dashboard.resources`
+- `webProxyResources` moved to Linkerd-Viz as `dashboard.proxy.resources`
+- `grafana` moved to Linkerd-Viz as `grafana`
+- `grafana.proxy` moved to Linkerd-Viz as `grafana.proxy`
+- `prometheus` moved to Linkerd-Viz as `prometheus`
+- `prometheus.proxy` moved to Linkerd-Viz as `prometheus.proxy`
+- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
+- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as `webhook.collectorSvcAccount`
+- `tracing.enabled` removed
+- `tracing.collector` moved to Linkerd-Jaeger as `collector`
+- `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
+
+Also please note the global scope from the Linkerd2 chart values has been
+dropped, moving the config values underneath it into the root scope. Any values
+you had customized there will need to be migrated; in particular
+`identityTrustAnchorsPEM` in order to conserve the value you set during
+install."
+
 ## Upgrade notice: stable-2.9.3
 
 ### Linkerd Repair
