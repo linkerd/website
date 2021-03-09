@@ -2,7 +2,7 @@
 title: Community
 layout: community
 aliases:
-- "/2/get-involved"
+- "/2.10/get-involved"
 top_hero:
   title: Community-Powered, Battle-Tested
   description: Linkerd is a community project! We'd love to have you join our active

@@ -3,7 +3,7 @@ title = "Telemetry and Monitoring"
 description = "Linkerd automatically collects metrics from all services that send traffic through it."
 weight = 8
 aliases = [
-  "/2/observability/"
+  "/2.10/observability/"
 ]
 +++
 
@@ -27,17 +27,17 @@ requiring any work on the part of the developer. These features include:
   latency distributions) for HTTP, HTTP/2, and gRPC traffic.
 * Recording of TCP-level metrics (bytes in/out, etc) for other TCP traffic.
 * Reporting metrics per service, per caller/callee pair, or per route/path
-  (with [Service Profiles](/2/features/service-profiles/)).
+  (with [Service Profiles](/2.10/features/service-profiles/)).
 * Generating topology graphs that display the runtime relationship between
   services.
 * Live, on-demand request sampling.
 
 This data can be consumed in several ways:
 
-* Through the [Linkerd CLI](/2/cli/), e.g. with `linkerd viz stat` and
+* Through the [Linkerd CLI](/2.10/cli/), e.g. with `linkerd viz stat` and
   `linkerd viz routes`.
-* Through the [Linkerd dashboard](/2/features/dashboard/), and
-  [pre-built Grafana dashboards](/2/features/dashboard/#grafana).
+* Through the [Linkerd dashboard](/2.10/features/dashboard/), and
+  [pre-built Grafana dashboards](/2.10/features/dashboard/#grafana).
 * Directly from Linkerd's built-in Prometheus instance
 
 ## Golden metrics
@@ -76,4 +76,4 @@ Rather, Linkerd is designed to *supplement* your existing metrics store. If
 Linkerd's metrics are valuable, you should export them into your existing
 historical metrics store.
 
-See [Exporting Metrics](/2/tasks/exporting-metrics/) for more.
+See [Exporting Metrics](/2.10/tasks/exporting-metrics/) for more.

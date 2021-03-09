@@ -10,7 +10,7 @@ redirect a percentage of traffic to a specific backend. This backend is
 completely flexible and can return whatever responses you want - 500s, timeouts
 or even crazy payloads.
 
-The [books demo](/2/tasks/books/) is a great way to show off this behavior. The
+The [books demo](/2.10/tasks/books/) is a great way to show off this behavior. The
 overall topology looks like:
 
 {{< fig src="/images/books/topology.png" title="Topology" >}}
@@ -26,12 +26,12 @@ engineering lifestyle, fault injection could even be used in production.
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster, along
-with its Viz extension. Follow the [Installing Linkerd Guide](/2/tasks/install/)
+with its Viz extension. Follow the [Installing Linkerd Guide](/2.10/tasks/install/)
 if you haven't already done this.
 
 ## Setup the service
 
-First, add the [books](/2/tasks/books/) sample application to your cluster:
+First, add the [books](/2.10/tasks/books/) sample application to your cluster:
 
 ```bash
 kubectl create ns booksapp && \

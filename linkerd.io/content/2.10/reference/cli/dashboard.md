@@ -4,7 +4,7 @@ title = "dashboard"
 
 {{< cli/description "dashboard" >}}
 
-Check out the [architecture](/2/reference/architecture/#dashboard) docs for a
+Check out the [architecture](/2.10/reference/architecture/#dashboard) docs for a
 more thorough explanation of what this command does.
 
 {{< cli/examples "dashboard" >}}
@@ -13,4 +13,4 @@ more thorough explanation of what this command does.
 
 (*) You'll need to tweak the dashboard's `enforced-host` parameter with this
 value, as explained in [the DNS-rebinding protection
-docs](/2/tasks/exposing-dashboard/#tweaking-host-requirement)
+docs](/2.10/tasks/exposing-dashboard/#tweaking-host-requirement)

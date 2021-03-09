@@ -2,7 +2,7 @@
 title = "Service Profiles"
 description = "Linkerd's service profiles enable per-route metrics as well as retries and timeouts."
 aliases = [
-  "/2/service-profiles/"
+  "/2.10/service-profiles/"
 ]
 +++
 
@@ -22,12 +22,12 @@ to.
 
 To get started with service profiles you can:
 
-- Look into [setting up service profiles](/2/tasks/setting-up-service-profiles/)
+- Look into [setting up service profiles](/2.10/tasks/setting-up-service-profiles/)
   for your own services.
 - Understand what is required to see
-  [per-route metrics](/2/tasks/getting-per-route-metrics/).
-- [Configure retries](/2/tasks/configuring-retries/) on your own services.
-- [Configure timeouts](/2/tasks/configuring-timeouts/) on your own services.
-- Glance at the [reference](/2/reference/service-profiles/) documentation.
+  [per-route metrics](/2.10/tasks/getting-per-route-metrics/).
+- [Configure retries](/2.10/tasks/configuring-retries/) on your own services.
+- [Configure timeouts](/2.10/tasks/configuring-timeouts/) on your own services.
+- Glance at the [reference](/2.10/reference/service-profiles/) documentation.
 
 [crd]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/

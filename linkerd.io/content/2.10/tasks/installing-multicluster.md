@@ -4,14 +4,14 @@ description = "Allow Linkerd to manage cross-cluster communication."
 +++
 
 Multicluster support in Linkerd requires extra installation and configuration on
-top of the default [control plane installation](/2/tasks/install/). This guide
+top of the default [control plane installation](/2.10/tasks/install/). This guide
 walks through this installation and configuration as well as common problems
 that you may encounter. For a detailed walkthrough and explanation of what's
-going on, check out [getting started](/2/tasks/multicluster/).
+going on, check out [getting started](/2.10/tasks/multicluster/).
 
 If you'd like to use an existing [Ambassador](https://www.getambassador.io/)
 installation, check out the
-[leverage](/2/tasks/installing-multicluster/#leverage-ambassador) instructions.
+[leverage](/2.10/tasks/installing-multicluster/#leverage-ambassador) instructions.
 Alternatively, check out the Ambassador
 [documentation](https://www.getambassador.io/docs/latest/howtos/linkerd2/#multicluster-operation)
 for a more detailed explanation of the configuration and what's going on.
@@ -19,11 +19,11 @@ for a more detailed explanation of the configuration and what's going on.
 ## Requirements
 
 - Two clusters.
-- A [control plane installation](/2/tasks/install/) in each cluster that shares
+- A [control plane installation](/2.10/tasks/install/) in each cluster that shares
   a common
-  [trust anchor](https://linkerd.io/2/tasks/generate-certificates/#trust-anchor-certificate).
+  [trust anchor](https://linkerd.io/2.10/tasks/generate-certificates/#trust-anchor-certificate).
   If you have an existing installation, see the
-  [trust anchor bundle](/2/tasks/installing-multicluster/#trust-anchor-bundle)
+  [trust anchor bundle](/2.10/tasks/installing-multicluster/#trust-anchor-bundle)
   documentation to understand what is required.
 - Each of these clusters should be configured as `kubectl`
   [contexts](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
@@ -53,7 +53,7 @@ linkerd multicluster check
 
 For a deep dive into what components are being added to your cluster and how all
 the pieces fit together, check out the
-[getting started documentation](/2/tasks/multicluster/#preparing-your-cluster).
+[getting started documentation](/2.10/tasks/multicluster/#preparing-your-cluster).
 
 ## Step 2: Link the clusters
 
@@ -84,7 +84,7 @@ linkerd --context=west multicluster gateways
 ```
 
 For a detailed explanation of what this step does, check out the
-[linking the clusters section](/2/tasks/multicluster/#linking-the-clusters).
+[linking the clusters section](/2.10/tasks/multicluster/#linking-the-clusters).
 
 ## Step 3: Export services
 
@@ -121,7 +121,7 @@ kubectl -n ambassador get deploy ambassador -o yaml | \
 
 This will add the Linkerd proxy, skip the ports that Ambassador is handling for
 public traffic and require identity on the gateway port. Check out the
-[docs](/2/tasks/multicluster/#security) to understand why it is important to
+[docs](/2.10/tasks/multicluster/#security) to understand why it is important to
 require identity on the gateway port.
 
 Next, you'll want to add some configuration so that Ambassador knows how to
@@ -360,4 +360,4 @@ The same functionality can also be done through Helm setting the
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
-[multicluster task](https://linkerd.io/2/features/multicluster).
+[multicluster task](https://linkerd.io/2.10/features/multicluster).

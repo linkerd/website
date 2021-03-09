@@ -2,24 +2,24 @@
 title = "Installing Linkerd"
 description = "Install Linkerd to your own Kubernetes cluster."
 aliases = [
-  "/2/upgrading/",
-  "/2/installing/",
-  "/2/rbac/"
+  "/2.10/upgrading/",
+  "/2.10/installing/",
+  "/2.10/rbac/"
 ]
 +++
 
 Before you can use Linkerd, you'll need to install the
-[control plane](/2/reference/architecture/#control-plane). This page
+[control plane](/2.10/reference/architecture/#control-plane). This page
 covers how to accomplish that, as well as common problems that you may
 encounter.
 
 Note that the control plane is typically installed by using Linkerd's CLI. See
-[Getting Started](/2/getting-started/) for how to install the CLI onto your local
+[Getting Started](/2.10/getting-started/) for how to install the CLI onto your local
 environment.
 
 Note also that, once the control plane is installed, you'll need to "mesh" any
 services you want Linkerd active for. See
-[Adding Your Service](/2/adding-your-service/) for how to add Linkerd's data
+[Adding Your Service](/2.10/adding-your-service/) for how to add Linkerd's data
 plane to your services.
 
 ## Requirements
@@ -41,7 +41,7 @@ If installing Linkerd on GKE, there are some extra steps required depending on
 how your cluster has been configured. If you are using any of these features,
 check out the additional instructions.
 
-- [Private clusters](/2/reference/cluster-configuration/#private-clusters)
+- [Private clusters](/2.10/reference/cluster-configuration/#private-clusters)
 
 ## Installing
 
@@ -53,13 +53,13 @@ applying that to your cluster, for example, via
 linkerd install | kubectl apply -f -
 ```
 
-See [Getting Started](/2/getting-started/) for an example.
+See [Getting Started](/2.10/getting-started/) for an example.
 
 {{< note >}}
 Most common configuration options are provided as flags for `install`. See the
-[reference documentation](/2/reference/cli/install/) for a complete list of
+[reference documentation](/2.10/reference/cli/install/) for a complete list of
 options. To do configuration that is not part of the `install` command, see how
-you can create a [customized install](/2/tasks/customize-install/).
+you can create a [customized install](/2.10/tasks/customize-install/).
 {{< /note >}}
 
 {{< note >}}
@@ -78,7 +78,7 @@ linkerd check
 
 ## Uninstalling
 
-See [Uninstalling Linkerd](/2/tasks/uninstall/).
+See [Uninstalling Linkerd](/2.10/tasks/uninstall/).
 
 ## Multi-stage install
 

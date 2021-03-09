@@ -3,14 +3,14 @@ title = "Debugging gRPC applications with request tracing"
 description = "Follow a long-form example of debugging a failing gRPC application using live request tracing."
 aliases = [
   "/debugging-an-app/",
-  "/2/debugging-an-app/"
+  "/2.10/debugging-an-app/"
 ]
 +++
 
 The demo application emojivoto has some issues. Let's use that and Linkerd to
 diagnose an application that fails in ways which are a little more subtle than
 the entire service crashing. This guide assumes that you've followed the steps
-in the [Getting Started](/2/getting-started/) guide and have Linkerd and the
+in the [Getting Started](/2.10/getting-started/) guide and have Linkerd and the
 demo application running in a Kubernetes cluster. If you've not done that yet,
 go get started and come back when you're done!
 

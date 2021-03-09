@@ -5,8 +5,8 @@ title = "routes"
 The `routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
-create a service profile, see [service profiles](/2/features/service-profiles/).
-and the [profile](/2/reference/cli/profile/) command reference.
+create a service profile, see [service profiles](/2.10/features/service-profiles/).
+and the [profile](/2.10/reference/cli/profile/) command reference.
 
 ## Inbound Metrics
 
@@ -51,7 +51,7 @@ translate into more than one actual request. If the Linkerd proxy is not
 performing retries, effective requests and actual requests will always be equal.
 When enabling retries, you should expect to see the actual request rate
 increase and the effective success rate increase.  See the
-[retries and timeouts section](/2/features/retries-and-timeouts/) for more
+[retries and timeouts section](/2.10/features/retries-and-timeouts/) for more
 information.
 
 Because retries are only performed on the *outbound* (client) side, the

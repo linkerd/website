@@ -181,7 +181,7 @@ the dashboard rejects any request whose `Host` header is not `localhost`,
 `127.0.0.1` or the service name `web.linkerd-viz.svc`.
 
 Note that this protection also covers the [Grafana
-dashboard](/2/reference/architecture/#grafana).
+dashboard](/2.10/reference/architecture/#grafana).
 
 The ingress-nginx config above uses the
 `nginx.ingress.kubernetes.io/upstream-vhost` annotation to properly set the
@@ -199,7 +199,7 @@ If you're managing Linkerd with Helm, then you can set the host using the
 `enforcedHostRegexp` value.
 
 Another way of doing that is through Kustomize, as explained in [Customizing
-Installation](/2/tasks/customize-install/), using an overlay like this one:
+Installation](/2.10/tasks/customize-install/), using an overlay like this one:
 
 ```yaml
 apiVersion: apps/v1

@@ -2,7 +2,7 @@
 title = "CLI"
 description = "Reference documentation for all the CLI commands."
 aliases = [
-  "/2/cli/"
+  "/2.10/cli/"
 ]
 +++
 

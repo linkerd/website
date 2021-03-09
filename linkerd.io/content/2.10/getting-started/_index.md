@@ -3,7 +3,7 @@ title = "Getting Started"
 aliases = [
   "/getting-started/istio/",
   "/choose-your-platform/",
-  "/2/katacoda/",
+  "/2.10/katacoda/",
   "/doc/getting-started",
   "/getting-started"
 ]
@@ -43,7 +43,7 @@ In the next step, we will install the Linkerd CLI and validate that your cluster
 is ready to install the control plane.
 
 (Note: if you're using a GKE with a "private cluster", there are some [extra
-steps required](/2/reference/cluster-configuration/#private-clusters) before
+steps required](/2.10/reference/cluster-configuration/#private-clusters) before
 you can proceed.)
 
 ## Step 1: Install the CLI
@@ -131,14 +131,14 @@ you can run:
 kubectl -n linkerd get deploy
 ```
 
-Check out the [architecture](/2/reference/architecture/#control-plane)
+Check out the [architecture](/2.10/reference/architecture/#control-plane)
 documentation for an in depth explanation of what these components are and what
 they do.
 
 {{< note >}}
 Linkerd installs certain resources that require cluster-wide permissions. For
 clusters where these permissions are restricted, the alternative [multi-stage
-install](/2/tasks/install/#multi-stage-install) instructions, which split these
+install](/2.10/tasks/install/#multi-stage-install) instructions, which split these
 requirements into a separate, self-contained step, may be useful.
 {{< /note >}}
 
@@ -155,8 +155,8 @@ linkerd dashboard &
     title="The Linkerd dashboard in action" >}}
 
 This command sets up a port forward from your local system to the
-[linkerd-web](/2/reference/architecture/#web) pod. (It's also possible to
-[expose the dashboard](/2/tasks/exposing-dashboard/) for everyone to access.)
+[linkerd-web](/2.10/reference/architecture/#web) pod. (It's also possible to
+[expose the dashboard](/2.10/tasks/exposing-dashboard/) for everyone to access.)
 
 Because the control plane components all have the proxy installed in their pods,
 each component is also part of the data plane itself. This provides the ability
@@ -214,7 +214,7 @@ This command retrieves all of the deployments running in the `emojivoto`
 namespace, runs the manifest through `linkerd inject`, and then reapplies it to
 the cluster. The `linkerd inject` command adds annotations to the pod spec
 instructing Linkerd to add ("inject") the proxy as a container to the pod spec.
-(See [Automatic Proxy Injection](/2/features/proxy-injection/) for more.)
+(See [Automatic Proxy Injection](/2.10/features/proxy-injection/) for more.)
 
 As with `install`, `inject` is a pure text operation, meaning that you can
 inspect the input and output before you use it. Once piped into `kubectl
@@ -279,8 +279,8 @@ to use your browser instead:
 {{< /gallery >}}
 
 What about things that happened in the past? Linkerd includes
-[Grafana](/2/reference/architecture/#grafana) to visualize the metrics
-collected by [Prometheus](/2/reference/architecture/#prometheus), and ships
+[Grafana](/2.10/reference/architecture/#grafana) to visualize the metrics
+collected by [Prometheus](/2.10/reference/architecture/#prometheus), and ships
 with some pre-configured dashboards. You can get to these by clicking the
 Grafana icon in the overview page.
 
@@ -291,9 +291,9 @@ Grafana icon in the overview page.
 
 Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
-- Use Linkerd to [debug the errors in *emojivoto*](/2/debugging-an-app/)
-- [Add your own service](/2/adding-your-service/) to Linkerd without downtime
-- Learn more about [Linkerd's architecture](/2/reference/architecture/)
+- Use Linkerd to [debug the errors in *emojivoto*](/2.10/debugging-an-app/)
+- [Add your own service](/2.10/adding-your-service/) to Linkerd without downtime
+- Learn more about [Linkerd's architecture](/2.10/reference/architecture/)
 - Hop into the #linkerd2 channel on [the Linkerd
   Slack](https://slack.linkerd.io)
 
