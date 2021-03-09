@@ -25,7 +25,7 @@ for more.
 
 To validate that mTLS is working, you can view a summary of the TCP
 connections between services that are managed by Linkerd using the [`linkerd
-edges`](/2/reference/cli/edges/) command.  For example:
+viz edges`](/2/reference/cli/edges/) command.  For example:
 
 ```bash
 linkerd viz -n linkerd edges deployment
@@ -34,9 +34,12 @@ linkerd viz -n linkerd edges deployment
 The output will look like:
 
 ```bash
-SRC                  DST                  CLIENT                       SERVER                       MSG
-linkerd-controller   linkerd-prometheus   linkerd-controller.linkerd   linkerd-prometheus.linkerd   -
-linkerd-web          linkerd-controller   linkerd-web.linkerd          linkerd-controller.linkerd   -
+SRC          DST                      SRC_NS        DST_NS    SECURED
+prometheus   linkerd-controller       linkerd-viz   linkerd   √
+prometheus   linkerd-destination      linkerd-viz   linkerd   √
+prometheus   linkerd-identity         linkerd-viz   linkerd   √
+prometheus   linkerd-proxy-injector   linkerd-viz   linkerd   √
+prometheus   linkerd-sp-validator     linkerd-viz   linkerd   √
 ```
 
 In this example, everything is successfully mTLS'd, and the `CLIENT` and
@@ -50,38 +53,45 @@ mTLS, the `MSG` field would contain the reason why.
 
 Instead of relying on an aggregate, it is also possible to watch the requests
 and responses in real time to understand what is getting mTLS'd. We can use the
-[`linkerd tap` command](/2/reference/cli/tap/) to sample real time request data.
-For example:
+[`linkerd viz tap` command](/2/reference/cli/tap/) to sample real time request data.
 
 ```bash
 linkerd viz -n linkerd tap deploy
 ```
 
+{{< note >}}
+By default, the control plane resources are not tappable. After having
+installed the Viz extension (through `linkerd viz install`), you can enable tap
+on the control plane components simply by restarting them, which can be done
+with no downtime with `kubectl -n linkerd rollout restart deploy`. To enable tap
+on the Viz extension itself, issue `kubectl -n linkerd-viz rollout restart
+deploy`.
+{{< /note >}}
+
 Looking at the control plane specifically, there will be two main types of output.
 
 ```bash
-req id=0:7 proxy=in  src=10.138.15.206:51558 dst=10.4.0.18:9998 tls=not_provided_by_remote :method=GET :authority=10.4.0.18:9998 :path=/ready
-rsp id=0:7 proxy=in  src=10.138.15.206:51558 dst=10.4.0.18:9998 tls=not_provided_by_remote :status=200 latency=482µs
-end id=0:7 proxy=in  src=10.138.15.206:51558 dst=10.4.0.18:9998 tls=not_provided_by_remote duration=32µs response-length=3B
+req id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_remote :method=GET :authority=10.42.0.23:9995 :path=/ready
+rsp id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_remote :status=200 latency=267µs
+end id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_remote duration=20µs response-length=3B
 ```
 
 These are calls by the [Kubernetes readiness
 probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).
 As probes are initiated from the kubelet, which is not in the mesh, there is no
 identity and these requests are not mTLS'd, as denoted by the
-`tls=not_provided_by_remote` message.
+`tls=no_tls_from_remote` message.
 
 Other requests to the control plane *are* TLS'd:
 
 ```bash
-req id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true :method=GET :authority=linkerd-prometheus.linkerd.svc.cluster.local:9090 :path=/api/v1/query
-rsp id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true :status=200 latency=194886µs
-end id=0:11 proxy=in  src=10.4.0.15:54740 dst=10.4.0.17:9090 tls=true duration=121µs response-length=375B
+ireq id=2:1 proxy=in  src=10.42.0.31:55428 dst=10.42.0.22:9995 tls=true :method=GET :authority=10.42.0.22:9995 :path=/metrics
+rsp id=2:1 proxy=in  src=10.42.0.31:55428 dst=10.42.0.22:9995 tls=true :status=200 latency=1597µs
+end id=2:1 proxy=in  src=10.42.0.31:55428 dst=10.42.0.22:9995 tls=true duration=228µs response-length=2272B
 ```
 
-As both `linkerd-prometheus` and `linkerd-web` are in the mesh and using HTTP
-to communicate, the requests are automatically mTLS'd, as denoted by the
-`tls=true` output.
+This connection comes from Prometheus, which in the mesh, so the request is
+automatically mTLS'd, as denoted by the `tls=true` output.
 
 ## Validating mTLS with tshark
 
@@ -116,13 +126,10 @@ tshark -i any -d tcp.port==8080,ssl | grep -v 127.0.0.1
 ```
 
 This tells `tshark` that port 8080 might be TLS'd, and to ignore localhost (as
-that traffic will always be unencrypted). The output will show both unencrypted
-communication, such as Prometheus scraping metrics, as well as the primary
+that traffic will always be unencrypted). The output will show the primary
 application traffic being automatically mTLS'd.
 
 ```bash
-  131 11.390338699    10.4.0.17 → 10.4.0.23    HTTP 346 GET /metrics HTTP/1.1
-  132 11.391486903    10.4.0.23 → 10.4.0.17    HTTP 2039 HTTP/1.1 200 OK  (text/plain)
   133 11.391540872    10.4.0.17 → 10.4.0.23    TCP 68 46766 → 4191 [ACK] Seq=557 Ack=3942 Win=1329 Len=0 TSval=3389590636 TSecr=1915605020
   134 12.128190076    10.4.0.25 → 10.4.0.23    TLSv1.2 154 Application Data
   140 12.129497053    10.4.0.23 → 10.4.0.25    TLSv1.2 149 Application Data
