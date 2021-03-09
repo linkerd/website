@@ -57,8 +57,10 @@ Grafana, dashboard, and other non-critical telemetry components packaged as a
 
 The 2.10 release ships three extensions by default:
 
-* **viz**, which contains the on-cluster metrics stack: Prometheus, Grafana, the dashboard, etc.;
-* **multicluster**, which contains the machinery for cross-cluster communication; and
+* **viz**, which contains the on-cluster metrics stack: Prometheus, Grafana,
+  the dashboard, etc.;
+* **multicluster**, which contains the machinery for cross-cluster
+  communication; and
 * **jaeger**, which contains the Jaeger distributed tracing collector and UI.
 
 The move to extensions serves two purposes: first, it allows Linkerd adopters
@@ -81,9 +83,10 @@ Multi-cluster support, [introduced in Linkerd
 connect Kubernetes services across cluster boundaries in a way that's secure,
 fully transparent to the application, and independent of the topology of the
 underlying network. However, this functionality was restricted to HTTP
-connections only—until now. With Linkerd 2.10, Linkerd's multi-cluster feature
-now extends to all TCP connections, with the same guarantees of security and
-transparency that Linkerd provides for pod-to-pod communication.
+connections only—until now. With Linkerd 2.10, [Linkerd's multi-cluster
+feature](https://linkerd.io/2/features/multicluster/) now extends to all TCP
+connections, with the same guarantees of security and transparency that Linkerd
+provides for pod-to-pod communication.
 
 Want to try it? Just install the `multicluster` extension!
 
@@ -159,7 +162,7 @@ they resonate with you as well.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
 our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
-these features in action. Either way, you can download the stable 2.9 release
+these features in action. Either way, you can download the stable 2.10 release
 by running:
 
 `curl https://run.linkerd.io/install | sh`
