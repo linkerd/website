@@ -1,5 +1,5 @@
 +++
-title = "Multi-cluster communication | Linkerd"
+title = "Multi-cluster communication"
 description = "Linkerd connects Kubernetes services across cluster boundaries in a way that is secure, fully transparent to the app, independent of network topology."
 slug = "multicluster"
 aliases = [ "multicluster_support" ]

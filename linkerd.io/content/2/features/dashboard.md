@@ -1,5 +1,5 @@
 +++
-title = "Dashboard and Grafana | Linkerd"
+title = "Dashboard and Grafana"
 description = "In addition to its command-line interface, Linkerd provides a web dashboard and pre-configured Grafana dashboards."
 slug = "dashboard"
 +++

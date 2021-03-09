@@ -1,5 +1,5 @@
 +++
-title = "Retries and Timeouts | Linkerd"
+title = "Retries and Timeouts"
 description = "Linkerd implements retries in a way that increases reliability while limiting the risk of retries amplifying small errors into system-wide outages."
 slug = "retries-and-timeouts"
 weight = 3

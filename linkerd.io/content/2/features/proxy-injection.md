@@ -1,5 +1,5 @@
 +++
-title = "Automatic Proxy Injection | Linkerd"
+title = "Automatic Proxy Injection"
 description = "Linkerd automatically injects data plane proxy to pods when the linkerd.io/inject: enabled annotation is present on a namespace or any workloads."
 slug = "proxy-injection"
 aliases = [

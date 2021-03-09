@@ -1,5 +1,5 @@
 +++
-title = "Fault Injection | Linkerd"
+title = "Fault Injection"
 description = "Traditionally, fault injection requires modifying app code to add a fault injection library that will do the actual work. Linkerd does it w/o any code change."
 slug = "fault-injection"
 +++

@@ -1,5 +1,5 @@
 +++
-title = "Distributed Tracing | Linkerd"
+title = "Distributed Tracing"
 description = "Linkerd can be configured to emit trace spans from the proxies, allowing you to see exactly what time requests and responses spend inside."
 slug = "distributed-tracing"
 +++

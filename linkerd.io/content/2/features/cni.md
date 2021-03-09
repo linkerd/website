@@ -1,5 +1,5 @@
 +++
-title = "CNI Plugin | Linkerd"
+title = "CNI Plugin"
 description = "Linkerd installs can be configured to run a CNI plugin that rewrites each pod's iptables rules automatically, required for routing network traffic through the pod’s container."
 slug = "cni"
 +++
