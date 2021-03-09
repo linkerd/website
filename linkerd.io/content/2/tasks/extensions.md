@@ -7,9 +7,9 @@ Linkerd extensions are components which can be added to a Linkerd
 installation to enable addition functionality.  By default, the following
 extensions are available:
 
-* [Linkerd-viz](/getting-started/): Metrics and visibility features
-* [Linkerd-jaeger](/2/tasks/distributed-tracing/): Distributed tracing
-* [Linkerd-multicluster](/2/tasks/multicluster/): Cross-cluster routing
+* [Viz](/getting-started/): Metrics and visibility features
+* [Jaeger](/2/tasks/distributed-tracing/): Distributed tracing
+* [Multicluster](/2/tasks/multicluster/): Cross-cluster routing
 
 A Linkerd extension is made up of two parts: a CLI whose name must begin with
 `linkerd-` and a set of Kubernetes resources created by that CLI.  Every
@@ -31,7 +31,7 @@ linkerd check
 
 The first step to installing an extension is to download the extension's CLI
 onto your local machine and put it on your path.  You can skip this step for
-the `linkerd-viz`, `linkerd-jaeger`, and `linkerd-multicluster` extensions since
+the `viz`, `jaeger`, and `multicluster` extensions since
 they come bundled with the Linkerd CLI.  
 
 This will allow you to invoke the extension CLI through the Linkerd CLI.  For
