@@ -21,8 +21,8 @@ your system. A set of services that have requests being constantly retried
 could potentially get taken down by the retries instead of being allowed time
 to recover.
 
-Check out the [retries section](/2.10/tasks/books/#retries) of the books demo for a
-tutorial of how to configure retries.
+Check out the [retries section](/2.10/tasks/books/#retries) of the books demo
+for a tutorial of how to configure retries.
 
 ## Retries
 
