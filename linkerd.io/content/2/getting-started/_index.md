@@ -14,9 +14,9 @@ weight = 2
 
 Welcome to Linkerd! 🎈
 
-In this guide, we'll walk you through how to install Linkerd into your
-Kubernetes cluster. Then we'll deploy a sample application to show off what
-Linkerd can do.
+In this guide, we'll walk you through how to install the Linkerd service mesh
+into your Kubernetes cluster. Then we'll deploy a sample application to show off
+what Linkerd can do.
 
 Installing Linkerd is easy. First, you will install the CLI (command-line
 interface) onto your local machine. Using this CLI, you'll then install the
