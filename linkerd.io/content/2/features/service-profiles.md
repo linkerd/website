@@ -1,6 +1,6 @@
 +++
 title = "Service Profiles"
-description = "A service profile is a custom K8s resource providing Linkerd additional info about a service, allowing users to define a list of routes for the service."
+summary = "A service profile is a custom K8s resource providing Linkerd additional info about a service, allowing users to define a list of routes for the service."
 slug = "service-profiles"
 aliases = [
   "/2/service-profiles/"

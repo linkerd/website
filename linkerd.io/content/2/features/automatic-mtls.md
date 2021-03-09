@@ -1,6 +1,6 @@
 +++
 title = "Automatic mTLS"
-description = "Linkerd automatically enables mTLS for most TCP traffic between meshed pods by establishing authenticatied and private TLS connections between proxies."
+summary = "Linkerd automatically enables mTLS for most TCP traffic between meshed pods by establishing authenticatied and private TLS connections between proxies."
 slug = "automatic-mtls"
 weight = 4
 aliases = [

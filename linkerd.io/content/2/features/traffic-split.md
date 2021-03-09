@@ -1,6 +1,6 @@
 +++
 title = "Traffic Split (canaries, blue/green deploys)"
-description = "Linkerd's traffic split functionality allows to dynamically shift arbitrary portions of traffic destined for a K8s service to a different destination."
+summary = "Linkerd's traffic split functionality allows to dynamically shift arbitrary portions of traffic destined for a K8s service to a different destination."
 slug = "traffic-split"
 +++
 

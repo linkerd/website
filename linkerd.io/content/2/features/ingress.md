@@ -1,6 +1,6 @@
 +++
 title = "Ingress"
-description = "For reasons of simplicity, Linkerd does not provide its own ingress controller. Instead, Linkerd is designed to work alongside your ingress controller of choice."
+summary = "For reasons of simplicity, Linkerd does not provide its own ingress controller. Instead, Linkerd is designed to work alongside your ingress controller of choice."
 slug = "ingress"
 weight = 7
 aliases = [

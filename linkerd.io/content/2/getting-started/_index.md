@@ -1,6 +1,6 @@
 +++
 title = "Getting started with the Linkerd service mesh"
-description = "A guide to installing the Linkerd service mesh into your Kubernetes cluster and deploying a sample app to show off what Linkerd can do."
+summary = "A guide to installing the Linkerd service mesh into your Kubernetes cluster and deploying a sample app to show off what Linkerd can do."
 slug = "getting-started"
 aliases = [
   "/getting-started/istio/",

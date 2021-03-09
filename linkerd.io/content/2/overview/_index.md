@@ -1,6 +1,6 @@
 +++
 title = "Linkerd, the original service mesh, an overview"
-description = "Linkerd is a service mesh for Kubernetes. It makes running services easier and safer by providing runtime debugging, observability, reliability, security."
+summary = "Linkerd is a service mesh for Kubernetes. It makes running services easier and safer by providing runtime debugging, observability, reliability, security."
 slug = "overview"
 aliases = [
   "/docs",

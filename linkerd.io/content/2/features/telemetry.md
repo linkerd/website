@@ -1,6 +1,6 @@
 +++
 title = "Telemetry and Monitoring"
-description = "Linkerd has an extensive set of tooling around observability—the measuring and reporting of observed behavior in meshed applications."
+summary = "Linkerd has an extensive set of tooling around observability—the measuring and reporting of observed behavior in meshed applications."
 slug = "telemetry"
 weight = 8
 aliases = [
