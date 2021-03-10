@@ -13,8 +13,9 @@ By design, Linkerd only keeps metrics data for a short, fixed window of time
 you, you will probably want to export it into a full-fledged metrics store.
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
-part of the Viz extension.  There are several basic approaches to exporting
-metrics data from Linkerd:
+part of the Viz extension. The following tutorial requires the viz extension
+to be installed with prometheus enabled. There are several basic approaches
+to exporting metrics data from Linkerd:
 
 - [Federating data to your own Prometheus cluster](#federation)
 - [Using a Prometheus integration](#integration)
