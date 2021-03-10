@@ -59,8 +59,9 @@ need to update your configuration.
 **Behavior in 2.9:** Traffic automatically *skips* the proxy.  
 **Behavior in 2.10:** Traffic automatically *transits* the proxy, and will incur
 a 10-second connect delay.  
-**Steps to upgrade:** Use `skip-outbound-ports` to mark the port so as to bypass the
-proxy. (There is currently no ability to use opaque ports in this situation.)
+**Steps to upgrade:** Use `skip-outbound-ports` to mark the port so as to
+bypass the proxy. (There is currently no ability to use opaque ports in this
+situation.)
 
 ### Client-initiated TLS calls at startup
 
@@ -107,7 +108,7 @@ To handle this situation, you have four options:
    failures.
 
 The last option is arguably the "rightest" approach, but not always the most
-practical. 
+practical.
 
 In the future, Kubernetes may provide mechanisms for specifying container
 startup ordering, at which point this will no longer be an issue.
@@ -118,4 +119,3 @@ Ports can be marked as opaque ports or as skip ports via Kubernetes
 annotations. These annotations can be set at the namespace, workload, or
 service level. The `linkerd inject` CLI command provides flags to set these
 annotations; they are also settable as defaults in the Helm config.
-
