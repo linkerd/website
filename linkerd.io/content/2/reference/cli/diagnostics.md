@@ -26,7 +26,6 @@ title = "diagnostics"
 
 {{< cli/flags "diagnostics endpoints" >}}
 
-
 ### install-sp
 
 {{< cli/description "diagnostics install-sp" >}}
@@ -34,7 +33,6 @@ title = "diagnostics"
 {{< cli/examples "diagnostics install-sp" >}}
 
 {{< cli/flags "diagnostics install-sp" >}}
-
 
 ### proxy-metrics
 
