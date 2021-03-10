@@ -2,66 +2,66 @@
 title = "multicluster"
 +++
 
-{{< cli/description "multicluster" >}}
+{{< cli-2-10/description "multicluster" >}}
 
-{{< cli/examples "multicluster" >}}
+{{< cli-2-10/examples "multicluster" >}}
 
-{{< cli/flags "multicluster" >}}
+{{< cli-2-10/flags "multicluster" >}}
 
 ## Subcommands
 
 ### allow
 
-{{< cli/description "multicluster allow" >}}
+{{< cli-2-10/description "multicluster allow" >}}
 
-{{< cli/examples "multicluster allow" >}}
+{{< cli-2-10/examples "multicluster allow" >}}
 
-{{< cli/flags "multicluster allow" >}}
+{{< cli-2-10/flags "multicluster allow" >}}
 
 ### check
 
-{{< cli/description "multicluster check" >}}
+{{< cli-2-10/description "multicluster check" >}}
 
-{{< cli/examples "multicluster check" >}}
+{{< cli-2-10/examples "multicluster check" >}}
 
-{{< cli/flags "multicluster check" >}}
+{{< cli-2-10/flags "multicluster check" >}}
 
 ### gateways
 
-{{< cli/description "multicluster gateways" >}}
+{{< cli-2-10/description "multicluster gateways" >}}
 
-{{< cli/examples "multicluster gateways" >}}
+{{< cli-2-10/examples "multicluster gateways" >}}
 
-{{< cli/flags "multicluster gateways" >}}
+{{< cli-2-10/flags "multicluster gateways" >}}
 
 ### install
 
-{{< cli/description "multicluster install" >}}
+{{< cli-2-10/description "multicluster install" >}}
 
-{{< cli/examples "multicluster install" >}}
+{{< cli-2-10/examples "multicluster install" >}}
 
-{{< cli/flags "multicluster install" >}}
+{{< cli-2-10/flags "multicluster install" >}}
 
 ### link
 
-{{< cli/description "multicluster link" >}}
+{{< cli-2-10/description "multicluster link" >}}
 
-{{< cli/examples "multicluster link" >}}
+{{< cli-2-10/examples "multicluster link" >}}
 
-{{< cli/flags "multicluster link" >}}
+{{< cli-2-10/flags "multicluster link" >}}
 
 ### uninstall
 
-{{< cli/description "multicluster uninstall" >}}
+{{< cli-2-10/description "multicluster uninstall" >}}
 
-{{< cli/examples "multicluster uninstall" >}}
+{{< cli-2-10/examples "multicluster uninstall" >}}
 
-{{< cli/flags "multicluster uninstall" >}}
+{{< cli-2-10/flags "multicluster uninstall" >}}
 
 ### unlink
 
-{{< cli/description "multicluster unlink" >}}
+{{< cli-2-10/description "multicluster unlink" >}}
 
-{{< cli/examples "multicluster unlink" >}}
+{{< cli-2-10/examples "multicluster unlink" >}}
 
-{{< cli/flags "multicluster unlink" >}}
+{{< cli-2-10/flags "multicluster unlink" >}}

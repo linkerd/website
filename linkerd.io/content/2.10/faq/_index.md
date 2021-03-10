@@ -6,7 +6,7 @@ enableFAQSchema: true
 weight: 9
 aliases:
   - '/doc/0.1.0/faq/'
-  - '/2/roadmap/'
+  - '/2.10/roadmap/'
 sitemap:
   - priority = 1.0
 faqs:
@@ -31,7 +31,7 @@ faqs:
       Linkerd is significantly lighter and simpler than Istio. Both projects are
       service meshes and espouse similar features. Linkerd is built for security
       from the ground up, ranging from features like [on-by-default
-      mTLS](https://linkerd.io/2/features/automatic-mtls/), a data plane that is
+      mTLS](https://linkerd.io/2.10/features/automatic-mtls/), a data plane that is
       [built in a memory-safe
       language](https://github.com/linkerd/linkerd2-proxy), and [regular
       security
@@ -165,7 +165,7 @@ faqs:
     answer:
       No. For reasons of simplicity, Linkerd doesn't provide ingress itself, but
       instead [works in conjunction with the ingress
-      controller](https://linkerd.io/2/features/ingress/) of your choice.
+      controller](https://linkerd.io/2.10/features/ingress/) of your choice.
     answer_schema:
       No. For reasons of simplicity, Linkerd doesn't provide ingress itself, but
       instead works in conjunction with the ingress controller of your choice.

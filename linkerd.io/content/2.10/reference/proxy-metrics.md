@@ -3,8 +3,8 @@ title = "Proxy Metrics"
 description = "The Linkerd proxy natively exports Prometheus metrics for all incoming and outgoing traffic."
 aliases = [
   "/proxy-metrics/",
-  "/2/proxy-metrics/",
-  "/2/observability/proxy-metrics/"
+  "/2.10/proxy-metrics/",
+  "/2.10/observability/proxy-metrics/"
 ]
 +++
 

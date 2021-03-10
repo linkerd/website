@@ -2,32 +2,32 @@
 title = "install"
 +++
 
-{{< cli/description "install" >}}
+{{< cli-2-10/description "install" >}}
 
 For further details on how to install Linkerd onto your own cluster, check out
-the [install documentation](/2/tasks/install/).
+the [install documentation](/2.10/tasks/install/).
 
-{{< cli/examples "install" >}}
+{{< cli-2-10/examples "install" >}}
 
-{{< cli/flags "install" >}}
+{{< cli-2-10/flags "install" >}}
 
 ## Subcommands
 
 Install supports subcommands as part of the
-[Multi-stage install](/2/tasks/install/#multi-stage-install) feature.
+[Multi-stage install](/2.10/tasks/install/#multi-stage-install) feature.
 
 ### config
 
-{{< cli/description "install config" >}}
+{{< cli-2-10/description "install config" >}}
 
-{{< cli/examples "install config" >}}
+{{< cli-2-10/examples "install config" >}}
 
-{{< cli/flags "install config" >}}
+{{< cli-2-10/flags "install config" >}}
 
 ### control-plane
 
-{{< cli/description "install control-plane" >}}
+{{< cli-2-10/description "install control-plane" >}}
 
-{{< cli/examples "install control-plane" >}}
+{{< cli-2-10/examples "install control-plane" >}}
 
-{{< cli/flags "install control-plane" >}}
+{{< cli-2-10/flags "install control-plane" >}}

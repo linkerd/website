@@ -2,8 +2,8 @@
 title = "completion"
 +++
 
-{{< cli/description "completion" >}}
+{{< cli-2-10/description "completion" >}}
 
-{{< cli/examples "completion" >}}
+{{< cli-2-10/examples "completion" >}}
 
-{{< cli/flags "completion" >}}
+{{< cli-2-10/flags "completion" >}}

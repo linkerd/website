@@ -2,8 +2,8 @@
 title = "endpoints"
 +++
 
-{{< cli/description "endpoints" >}}
+{{< cli-2-10/description "endpoints" >}}
 
-{{< cli/examples "endpoints" >}}
+{{< cli-2-10/examples "endpoints" >}}
 
-{{< cli/flags "endpoints" >}}
+{{< cli-2-10/flags "endpoints" >}}

@@ -2,7 +2,7 @@
 title = "Architecture"
 description = "Deep dive into the architecture of Linkerd."
 aliases = [
-  "/2/architecture/"
+  "/2.10/architecture/"
 ]
 +++
 
@@ -27,7 +27,7 @@ The Linkerd control plane is a set of services that run in a dedicated
 Kubernetes namespace (`linkerd` by default). These services accomplish various
 things---aggregating telemetry data, providing a user-facing API, providing
 control data to the data plane proxies, etc. Together, they drive the behavior
-of the data plane. To install the control plane on your own cluster, follow the [instructions](/2/tasks/install/).
+of the data plane. To install the control plane on your own cluster, follow the [instructions](/2.10/tasks/install/).
 
 The control plane is made up of:
 
@@ -63,7 +63,7 @@ annotation exists, the injector mutates the pod's specification and adds both an
 ### Service Profile Validator
 
 The validator is also an [admission controller][admission-controller], which
-validates new [service profiles](/2/reference/service-profiles/) before they are
+validates new [service profiles](/2.10/reference/service-profiles/) before they are
 saved.
 
 ### Tap
@@ -76,7 +76,7 @@ applications.
 ### Web
 
 The web deployment provides the Linkerd dashboard. This does not require running
-`linkerd dashboard` and can be [exposed](/2/tasks/exposing-dashboard/) to
+`linkerd dashboard` and can be [exposed](/2.10/tasks/exposing-dashboard/) to
 others.
 
 ### Heartbeat
@@ -131,7 +131,7 @@ as sidecar containers alongside each instance of your service code. In order to
 redeployed to include a data plane proxy in each pod. The proxy injector
 accomplishes this by watching for a specific annotation that can either be added
 with `linkerd inject` or by hand to the pod's spec.  You can [add your
-service](/2/tasks/adding-your-service/) to the data plane with a single CLI
+service](/2.10/tasks/adding-your-service/) to the data plane with a single CLI
 command.
 
 These proxies transparently intercept communication to and from each pod by
@@ -200,7 +200,7 @@ There are two main rules that `iptables` uses:
 By default, most ports are forwarded through the proxy. This is not always
 desirable and it is possible to have specific ports skip the proxy entirely for
 both incoming and outgoing traffic. See the [protocol
-detection](/2/features/protocol-detection/) documentation for an explanation of
+detection](/2.10/features/protocol-detection/) documentation for an explanation of
 what's happening here.
 {{< /note >}}
 
@@ -222,5 +222,5 @@ running `linkerd dashboard` from the command line.
 
 {{< note >}}
 The dashboard is served by `linkerd-web` and does not require running `linkerd
-dashboard`. It can be [exposed](/2/tasks/exposing-dashboard/) to others.
+dashboard`. It can be [exposed](/2.10/tasks/exposing-dashboard/) to others.
 {{< /note >}}

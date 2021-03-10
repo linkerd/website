@@ -2,76 +2,76 @@
 title = "viz"
 +++
 
-{{< cli/description "viz" >}}
+{{< cli-2-10/description "viz" >}}
 
-{{< cli/examples "viz" >}}
+{{< cli-2-10/examples "viz" >}}
 
-{{< cli/flags "viz" >}}
+{{< cli-2-10/flags "viz" >}}
 
 ## Subcommands
 
 ### check
 
-{{< cli/description "viz check" >}}
+{{< cli-2-10/description "viz check" >}}
 
-{{< cli/examples "viz check" >}}
+{{< cli-2-10/examples "viz check" >}}
 
-{{< cli/flags "viz check" >}}
+{{< cli-2-10/flags "viz check" >}}
 
 ### dashboard
 
-{{< cli/description "viz dashboard" >}}
+{{< cli-2-10/description "viz dashboard" >}}
 
-Check out the [architecture](/2/reference/architecture/#dashboard) docs for a
+Check out the [architecture](/2.10/reference/architecture/#dashboard) docs for a
 more thorough explanation of what this command does.
 
-{{< cli/examples "viz dashboard" >}}
+{{< cli-2-10/examples "viz dashboard" >}}
 
-{{< cli/flags "viz dashboard" >}}
+{{< cli-2-10/flags "viz dashboard" >}}
 
 (*) You'll need to tweak the dashboard's `enforced-host` parameter with this
 value, as explained in [the DNS-rebinding protection
-docs](/2/tasks/exposing-dashboard/#tweaking-host-requirement)
+docs](/2.10/tasks/exposing-dashboard/#tweaking-host-requirement)
 
 ### edges
 
-{{< cli/description "viz edges" >}}
+{{< cli-2-10/description "viz edges" >}}
 
-{{< cli/examples "viz edges" >}}
+{{< cli-2-10/examples "viz edges" >}}
 
-{{< cli/flags "viz edges" >}}
+{{< cli-2-10/flags "viz edges" >}}
 
 ### install
 
-{{< cli/description "viz install" >}}
+{{< cli-2-10/description "viz install" >}}
 
-{{< cli/examples "viz install" >}}
+{{< cli-2-10/examples "viz install" >}}
 
-{{< cli/flags "viz install" >}}
+{{< cli-2-10/flags "viz install" >}}
 
 ### list
 
-{{< cli/description "viz list" >}}
+{{< cli-2-10/description "viz list" >}}
 
-{{< cli/examples "viz list" >}}
+{{< cli-2-10/examples "viz list" >}}
 
-{{< cli/flags "viz list" >}}
+{{< cli-2-10/flags "viz list" >}}
 
 ### profile
 
-{{< cli/description "viz profile" >}}
+{{< cli-2-10/description "viz profile" >}}
 
-{{< cli/examples "viz profile" >}}
+{{< cli-2-10/examples "viz profile" >}}
 
-{{< cli/flags "viz profile" >}}
+{{< cli-2-10/flags "viz profile" >}}
 
 ### routes
 
 The `routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
-create a service profile, see [service profiles](/2/features/service-profiles/).
-and the [profile](/2/reference/cli/profile/) command reference.
+create a service profile, see [service profiles](/2.10/features/service-profiles/).
+and the [profile](/2.10/reference/cli/profile/) command reference.
 
 ## Inbound Metrics
 
@@ -116,44 +116,44 @@ translate into more than one actual request. If the Linkerd proxy is not
 performing retries, effective requests and actual requests will always be equal.
 When enabling retries, you should expect to see the actual request rate
 increase and the effective success rate increase.  See the
-[retries and timeouts section](/2/features/retries-and-timeouts/) for more
+[retries and timeouts section](/2.10/features/retries-and-timeouts/) for more
 information.
 
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
 
-{{< cli/examples "viz routes" >}}
+{{< cli-2-10/examples "viz routes" >}}
 
-{{< cli/flags "viz routes" >}}
+{{< cli-2-10/flags "viz routes" >}}
 
 ### stat
 
-{{< cli/description "viz stat" >}}
+{{< cli-2-10/description "viz stat" >}}
 
-{{< cli/examples "viz stat" >}}
+{{< cli-2-10/examples "viz stat" >}}
 
-{{< cli/flags "viz stat" >}}
+{{< cli-2-10/flags "viz stat" >}}
 
 ### tap
 
-{{< cli/description "viz tap" >}}
+{{< cli-2-10/description "viz tap" >}}
 
-{{< cli/examples "viz tap" >}}
+{{< cli-2-10/examples "viz tap" >}}
 
-{{< cli/flags "viz tap" >}}
+{{< cli-2-10/flags "viz tap" >}}
 
 ### top
 
-{{< cli/description "viz top" >}}
+{{< cli-2-10/description "viz top" >}}
 
-{{< cli/examples "viz top" >}}
+{{< cli-2-10/examples "viz top" >}}
 
-{{< cli/flags "viz top" >}}
+{{< cli-2-10/flags "viz top" >}}
 
 ### uninstall
 
-{{< cli/description "viz uninstall" >}}
+{{< cli-2-10/description "viz uninstall" >}}
 
-{{< cli/examples "viz uninstall" >}}
+{{< cli-2-10/examples "viz uninstall" >}}
 
-{{< cli/flags "viz uninstall" >}}
+{{< cli-2-10/flags "viz uninstall" >}}

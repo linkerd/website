@@ -2,8 +2,8 @@
 title = "version"
 +++
 
-{{< cli/description "version" >}}
+{{< cli-2-10/description "version" >}}
 
-{{< cli/examples "version" >}}
+{{< cli-2-10/examples "version" >}}
 
-{{< cli/flags "version" >}}
+{{< cli-2-10/flags "version" >}}

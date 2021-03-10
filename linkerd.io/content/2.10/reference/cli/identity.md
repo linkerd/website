@@ -2,8 +2,8 @@
 title = "identity"
 +++
 
-{{< cli/description "identity" >}}
+{{< cli-2-10/description "identity" >}}
 
-{{< cli/examples "identity" >}}
+{{< cli-2-10/examples "identity" >}}
 
-{{< cli/flags "identity" >}}
+{{< cli-2-10/flags "identity" >}}

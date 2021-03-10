@@ -8,8 +8,8 @@ installation to enable addition functionality.  By default, the following
 extensions are available:
 
 * [Viz](/getting-started/): Metrics and visibility features
-* [Jaeger](/2/tasks/distributed-tracing/): Distributed tracing
-* [Multicluster](/2/tasks/multicluster/): Cross-cluster routing
+* [Jaeger](/2.10/tasks/distributed-tracing/): Distributed tracing
+* [Multicluster](/2.10/tasks/multicluster/): Cross-cluster routing
 
 A Linkerd extension is made up of two parts: a CLI whose name must begin with
 `linkerd-` and a set of Kubernetes resources created by that CLI.  Every
@@ -23,7 +23,7 @@ kubectl get ns -l linkerd.io/extension
 ## Installing Extensions
 
 Before installing any extensions, make sure that you have already
-[installed Linkerd](/2/tasks/install/).  Validate your install by running:
+[installed Linkerd](/2.10/tasks/install/).  Validate your install by running:
 
 ```bash
 linkerd check

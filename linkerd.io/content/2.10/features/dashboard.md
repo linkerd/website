@@ -3,7 +3,7 @@ title = "Dashboard and Grafana"
 description = "Linkerd provides a web dashboard, as well as pre-configured Grafana dashboards."
 +++
 
-In addition to its [command-line interface](/2/cli/), Linkerd provides a web
+In addition to its [command-line interface](/2.10/cli/), Linkerd provides a web
 dashboard and pre-configured Grafana dashboards.
 
 To access this functionality, you need to have installed the Viz extension:

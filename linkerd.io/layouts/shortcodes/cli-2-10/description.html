@@ -1,4 +1,4 @@
-{{ range where site.Data.cli.CLIReference "Name" (.Get 0) }}
+{{ range where (index site.Data "cli-2-10").CLIReference "Name" (.Get 0) }}
 {{ $desc := partial "cli/description" . }}
 {{ $isParagraph := hasPrefix (strings.TrimLeft "\n" $desc) "<p>" }}
 {{ cond $isParagraph "" "<p>" | safeHTML }}

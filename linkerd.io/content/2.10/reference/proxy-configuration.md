@@ -5,11 +5,11 @@ description = "Linkerd provides a set of annotations that can be used to overrid
 
 Linkerd provides a set of annotations that can be used to override the data
 plane proxy's configuration. This is useful for overriding the default
-configurations of [auto-injected proxies](/2/features/proxy-injection/).
+configurations of [auto-injected proxies](/2.10/features/proxy-injection/).
 
 The following is the list of supported annotations:
 
-{{< cli/annotations "inject" >}}
+{{< cli-2-10/annotations "inject" >}}
 
 For example, to update an auto-injected proxy's CPU and memory resources, we
 insert the appropriate annotations into the `spec.template.metadata.annotations`
@@ -26,7 +26,7 @@ spec:
         config.linkerd.io/proxy-memory-request: 128Mi
 ```
 
-See [here](/2/tasks/configuring-proxy-concurrency/) for details on tuning the
+See [here](/2.10/tasks/configuring-proxy-concurrency/) for details on tuning the
 proxy's resource usage.
 
 Note that configuration overrides on proxies injected using the `linkerd inject`

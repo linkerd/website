@@ -2,8 +2,8 @@
 title = "uninject"
 +++
 
-{{< cli/description "uninject" >}}
+{{< cli-2-10/description "uninject" >}}
 
-{{< cli/examples "uninject" >}}
+{{< cli-2-10/examples "uninject" >}}
 
-{{< cli/flags "uninject" >}}
+{{< cli-2-10/flags "uninject" >}}

@@ -2,7 +2,7 @@
 title = "CLI"
 description = "Reference documentation for all the CLI commands."
 aliases = [
-  "/2/cli/"
+  "/2.10/cli/"
 ]
 +++
 
@@ -12,7 +12,7 @@ detailed metrics for how your service is performing.
 
 As reference, check out the commands below:
 
-{{< cli >}}
+{{< cli-2-10 >}}
 
 ## Global flags
 

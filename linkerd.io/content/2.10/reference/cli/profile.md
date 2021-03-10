@@ -2,12 +2,12 @@
 title = "profile"
 +++
 
-{{< cli/description "profile" >}}
+{{< cli-2-10/description "profile" >}}
 
-Check out the [service profile](/2/features/service-profiles/) documentation for
+Check out the [service profile](/2.10/features/service-profiles/) documentation for
 more details on what this command does and what you can do with service
 profiles.
 
-{{< cli/examples "profile" >}}
+{{< cli-2-10/examples "profile" >}}
 
-{{< cli/flags "profile" >}}
+{{< cli-2-10/flags "profile" >}}

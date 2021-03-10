@@ -3,16 +3,16 @@ title = "Setting Up Service Profiles"
 description = "Create a service profile that provides more details for Linkerd to build on."
 +++
 
-[Service profiles](/2/features/service-profiles/) provide Linkerd additional
+[Service profiles](/2.10/features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
 
 When an HTTP (not HTTPS) request is received by a Linkerd proxy,
 the `destination service` of that request is identified.  If a
 service profile for that destination service exists, then that
 service profile is used to
-to provide [per-route metrics](/2/tasks/getting-per-route-metrics/),
-[retries](/2/tasks/configuring-retries/) and
-[timeouts](/2/tasks/configuring-timeouts/).
+to provide [per-route metrics](/2.10/tasks/getting-per-route-metrics/),
+[retries](/2.10/tasks/configuring-retries/) and
+[timeouts](/2.10/tasks/configuring-timeouts/).
 
 The `destination service` for a request is computed by selecting
 the value of the first header to exist of, `l5d-dst-override`,
@@ -21,9 +21,9 @@ including the colon, is stripped.  That value is mapped to the fully
 qualified DNS name.  When the `destination service` matches the
 name of a service profile in the namespace of the sender or the
 receiver, Linkerd will use that to provide [per-route
-metrics](/2/tasks/getting-per-route-metrics/),
-[retries](/2/tasks/configuring-retries/) and
-[timeouts](/2/tasks/configuring-timeouts/).
+metrics](/2.10/tasks/getting-per-route-metrics/),
+[retries](/2.10/tasks/configuring-retries/) and
+[timeouts](/2.10/tasks/configuring-timeouts/).
 
 There are times when you may need to define a service profile for
 a service which resides in a namespace that you do not control. To
@@ -57,7 +57,7 @@ in this ServiceProfile in the web dashboard. You can get the
 statistics using the CLI.
 
 For a complete demo walkthrough, check out the
-[books](/2/tasks/books/#service-profiles) demo.
+[books](/2.10/tasks/books/#service-profiles) demo.
 
 There are a couple different ways to use `linkerd profile` to create service
 profiles.

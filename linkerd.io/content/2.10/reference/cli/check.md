@@ -1,16 +1,16 @@
 +++
 title = "check"
 aliases = [
-  "/2/check-reference/"
+  "/2.10/check-reference/"
 ]
 +++
 
-{{< cli/description "check" >}}
+{{< cli-2-10/description "check" >}}
 
-Take a look at the [troubleshooting](/2/tasks/troubleshooting/) documentation
+Take a look at the [troubleshooting](/2.10/tasks/troubleshooting/) documentation
 for a full list of all the possible checks, what they do and how to fix them.
 
-{{< cli/examples "check" >}}
+{{< cli-2-10/examples "check" >}}
 
 ## Example output
 
@@ -56,17 +56,17 @@ control-plane-version
 Status check results are √
 ```
 
-{{< cli/flags "check" >}}
+{{< cli-2-10/flags "check" >}}
 
 ## Subcommands
 
 Check supports subcommands as part of the
-[Multi-stage install](/2/tasks/install/#multi-stage-install) feature.
+[Multi-stage install](/2.10/tasks/install/#multi-stage-install) feature.
 
 ### config
 
-{{< cli/description "check config" >}}
+{{< cli-2-10/description "check config" >}}
 
-{{< cli/examples "check config" >}}
+{{< cli-2-10/examples "check config" >}}
 
-{{< cli/flags "check config" >}}
+{{< cli-2-10/flags "check config" >}}
