@@ -272,8 +272,8 @@ As you can see:
 - `:path` correctly matches
 - `rt_route` contains the name of the route
 
-These metrics are part of the [`linkerd viz routes`](/2/reference/cli/routes/)
-command instead of [`linkerd viz stat`](/2/reference/cli/stat/). To see the
+These metrics are part of the [`linkerd viz routes`](/2/reference/cli/viz/#routes)
+command instead of [`linkerd viz stat`](/2/reference/cli/viz/#stat). To see the
 metrics that have accumulated so far, run:
 
 ```bash

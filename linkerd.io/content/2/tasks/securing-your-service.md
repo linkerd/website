@@ -25,7 +25,7 @@ for more.
 
 To validate that mTLS is working, you can view a summary of the TCP
 connections between services that are managed by Linkerd using the [`linkerd
-edges`](/2/reference/cli/edges/) command.  For example:
+edges`](/2/reference/cli/viz/#edges) command.  For example:
 
 ```bash
 linkerd viz -n linkerd edges deployment
@@ -50,7 +50,7 @@ mTLS, the `MSG` field would contain the reason why.
 
 Instead of relying on an aggregate, it is also possible to watch the requests
 and responses in real time to understand what is getting mTLS'd. We can use the
-[`linkerd tap` command](/2/reference/cli/tap/) to sample real time request data.
+[`linkerd tap` command](/2/reference/cli/viz/#tap) to sample real time request data.
 For example:
 
 ```bash

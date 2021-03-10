@@ -45,7 +45,7 @@ in the correct places, then applies it to the cluster.
 
 Once your services have been added to the mesh, you will be able to query
 Linkerd for traffic metrics about them, e.g. by using [`linkerd
-viz stat`](/2/reference/cli/stat/) (make sure you have installed the Viz extension
+viz stat`](/2/reference/cli/viz/#stat) (make sure you have installed the Viz extension
 beforehand):
 
 ```bash

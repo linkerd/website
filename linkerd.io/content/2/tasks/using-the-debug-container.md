@@ -99,4 +99,4 @@ Connection reset by peer (os error 104)
 
 Of course, these examples only work if you have the ability to `exec` into
 arbitrary containers in the Kubernetes cluster. See [`linkerd
-tap`](/2/reference/cli/tap/) for an alternative to this approach.
+tap`](/2/reference/cli/viz/#tap) for an alternative to this approach.
