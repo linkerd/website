@@ -18,8 +18,8 @@ Note that the control plane is typically installed by using Linkerd's CLI. See
 environment.
 
 Linkerd also comprises of some first party extensions which add additional features
-i.e `viz`, `multicluster` and `jaeger`. See [Extensions](/2/tasks/extensions/) to understand how to
-install them.
+i.e `viz`, `multicluster` and `jaeger`. See [Extensions](/2/tasks/extensions/)
+to understand how to install them.
 
 Note also that, once the control plane is installed, you'll need to "mesh" any
 services you want Linkerd active for. See
