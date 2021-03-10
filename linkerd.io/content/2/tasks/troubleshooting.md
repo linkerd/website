@@ -1369,7 +1369,7 @@ Example error:
 ```
 
 Make sure multicluster extension is correctly installed and that the 
-`linkerd.multicluster.linkerd.io` CRD is present.
+`links.multicluster.linkerd.io` CRD is present.
 
 ```bash
 $ kubectll get crds | grep multicluster
