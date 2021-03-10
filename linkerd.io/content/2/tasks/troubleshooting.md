@@ -1901,23 +1901,23 @@ Example failure:
 
 ```bash
 × tap API server has valid cert
-    secrets "linkerd-tap-tls" not found
+    secrets "tap-k8s-tls" not found
     see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
 ```
 
-Ensure that the `linkerd-tap-k8s-tls` secret exists and contains the appropriate
+Ensure that the `tap-k8s-tls` secret exists and contains the appropriate
 `tls.crt` and `tls.key` data entries. For versions before 2.9, the secret is
 named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
 entries.
 
 ```bash
 × tap API server has valid cert
-    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-tap.linkerd-viz.svc
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not tap.linkerd-viz.svc
     see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
 ```
 
 Here you need to make sure the certificate was issued specifically for
-`linkerd-tap.linkerd-viz.svc`.
+`tap.linkerd-viz.svc`.
 
 ### √ tap API server cert is valid for at least 60 days {#l5d-tap-cert-not-expiring-soon}
 
@@ -2130,7 +2130,7 @@ collector-config   1      61m
 Also ensure you have permission to create ConfigMaps:
 
 ```bash
-$ kubectl -n linker-jaeger auth can-i create configmap
+$ kubectl -n linkerd-jaeger auth can-i create configmap
 yes
 ```
 
@@ -2159,7 +2159,7 @@ Make sure that the `proxy-injector` is working correctly by running
 
 ```bash
 × jaeger extension pods are running
-    container linkerd-proxy in pod linkerd-jaeger-59f5595fc7-ttndp is not ready
+    container linkerd-proxy in pod jaeger-59f5595fc7-ttndp is not ready
     see https://linkerd.io/checks/#l5d-viz-pods-running for hints
 ```
 
