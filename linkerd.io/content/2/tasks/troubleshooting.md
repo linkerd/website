@@ -1106,12 +1106,30 @@ replicas running. This is likely caused by insufficient node resources.
 
 ### The "extensions" checks {#extensions}
 
+When any [Extensions](/2/tasks/extensions/) are installed, The Linkerd binary
+tries to invoke `check --output json` on the extension binaries. It is important that
+the extension binaries implement it. For more information, See [Extension
+developer docs](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md)
+
 Example error:
 
 ```bash
-invalid extension check output from \"%s\" (JSON object expected):\n%s\n[%s]
+invalid extension check output from \"jaeger\" (JSON object expected)
 ```
 
+Make sure that the extension binary implements `check --output json`
+which returns the healthchecks in the [expected json format](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md#linkerd-name-check).
+
+Example error:
+
+```bash
+× Linkerd command jaeger exists
+```
+
+Make sure that relevant binary exists in `$PATH`.
+
+For more information about Linkerd extensions. See
+[Extension developer docs](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md)
 
 ## The "linkerd-cni-plugin" checks {#l5d-cni}
 
