@@ -1107,8 +1107,9 @@ replicas running. This is likely caused by insufficient node resources.
 ### The "extensions" checks {#extensions}
 
 When any [Extensions](/2/tasks/extensions/) are installed, The Linkerd binary
-tries to invoke `check --output json` on the extension binaries. It is important that
-the extension binaries implement it. For more information, See [Extension
+tries to invoke `check --output json` on the extension binaries.
+It is important that the extension binaries implement it.
+For more information, See [Extension
 developer docs](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md)
 
 Example error:
@@ -1386,7 +1387,7 @@ Example error:
     see https://linkerd.io/checks/#l5d-multicluster-link-crd-exists for hints
 ```
 
-Make sure multicluster extension is correctly installed and that the 
+Make sure multicluster extension is correctly installed and that the
 `links.multicluster.linkerd.io` CRD is present.
 
 ```bash
@@ -1601,7 +1602,7 @@ if there are any unecessary ones.
 
 ## The "linkerd-viz" checks {#l5d-viz}
 
-These checks only run when the `linkerd-viz` extension is installed. 
+These checks only run when the `linkerd-viz` extension is installed.
 This check is intended to verify the installation of linkerd-viz
 extension which comprises of `tap`, `web`,
 `metrics-api` and optional `grafana` and `prometheus` instances
@@ -1620,8 +1621,8 @@ linkerd viz install | kubectl apply -f -
 
 The installation can be configured by using the
 `--set`, `--values`, `--set-string` and `--set-file` flags.
-A full list of configurable values can be found at
-https://www.github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz/README.md
+See [Linkerd Viz Readme](https://www.github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz/README.md)
+for a full list of configurable fields.
 
 ### √ linkerd-viz ClusterRoles exist {#l5d-viz-cr-exists}
 
@@ -1829,7 +1830,6 @@ prometheus-7c5c48c466-jc27g    2/2     Running   0          4m58s
 ```
 
 ### √ viz extension self-check {#l5d-viz-metrics-api}
-hero (update hint anchor in code)
 
 Example failure:
 
@@ -1846,7 +1846,7 @@ kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 
 ## The "linkerd-jaeger" checks {#l5d-jaeger}
 
-These checks only run when the `linkerd-jaeger` extension is installed. 
+These checks only run when the `linkerd-jaeger` extension is installed.
 This check is intended to verify the installation of linkerd-jaeger
 extension which comprises of open-census collector and jaeger
 components along with `jaeger-injector` which injects the specific
@@ -1864,8 +1864,8 @@ linkerd jaeger install | kubectl apply -f -
 
 The installation can be configured by using the
 `--set`, `--values`, `--set-string` and `--set-file` flags.
-A full list of configurable values can be found at
-https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md
+See [Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
+for a full list of configurable fields.
 
 ### √ collector and jaeger service account exists {#l5d-jaeger-sc-exists}
 
