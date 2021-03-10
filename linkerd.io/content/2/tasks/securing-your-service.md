@@ -53,7 +53,8 @@ mTLS, the `MSG` field would contain the reason why.
 
 Instead of relying on an aggregate, it is also possible to watch the requests
 and responses in real time to understand what is getting mTLS'd. We can use the
-[`linkerd viz tap` command](/2/reference/cli/viz/#tap) to sample real time request data.
+[`linkerd viz tap` command](/2/reference/cli/viz/#tap) to sample real time
+request data.
 
 ```bash
 linkerd viz -n linkerd tap deploy
