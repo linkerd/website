@@ -556,6 +556,47 @@ Check the controller's logs with:
 linkerd logs --control-plane-component controller
 ```
 
+### √ can initialize the client {#l5d-existence-client}
+
+Example failure:
+
+```bash
+× can initialize the client
+    parse http:// bad/: invalid character " " in host name
+```
+
+Verify that a well-formed `--api-addr` parameter was specified, if any:
+
+```bash
+linkerd check --api-addr " bad"
+```
+
+### √ can query the control plane API {#l5d-existence-api}
+
+Example failure:
+
+```bash
+× can query the control plane API
+    Post http://8.8.8.8/api/v1/Version: context deadline exceeded
+```
+
+This check indicates a connectivity failure between the cli and the Linkerd
+control plane. To verify connectivity, manually connect to the controller pod:
+
+```bash
+kubectl -n linkerd port-forward \
+    $(kubectl -n linkerd get po \
+        --selector=linkerd.io/control-plane-component=controller \
+        -o jsonpath='{.items[*].metadata.name}') \
+9995:9995
+```
+
+...and then curl the `/metrics` endpoint:
+
+```bash
+curl localhost:9995/metrics
+```
+
 ## The "linkerd-identity" checks {#l5d-identity}
 
 ### √ certificate config is valid {#l5d-identity-cert-config-valid}
@@ -858,45 +899,66 @@ linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
 linkerd-sp-validator-59796bdccc-95rn5     2/2     Running   0          12m
 ```
 
-### √ can initialize the client {#l5d-api-control-client}
+### √ control plane self-check {#l5d-api-control-api}
 
 Example failure:
 
 ```bash
-× can initialize the client
-    parse http:// bad/: invalid character " " in host name
+× control plane self-check
+    Post https://localhost:6443/api/v1/namespaces/linkerd/services/linkerd-controller-api:http/proxy/api/v1/SelfCheck: context deadline exceeded
 ```
 
-Verify that a well-formed `--api-addr` parameter was specified, if any:
+Check the logs on the control-plane's public API:
 
 ```bash
-linkerd check --api-addr " bad"
+linkerd logs --control-plane-component controller --container public-api
 ```
 
-### √ can query the control plane API {#l5d-api-control-api}
+### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
 
 Example failure:
 
 ```bash
-× can query the control plane API
-    Post http://8.8.8.8/api/v1/Version: context deadline exceeded
+× [kubernetes] control plane can talk to Kubernetes
+    Error calling the Kubernetes API: FAIL
 ```
 
-This check indicates a connectivity failure between the cli and the Linkerd
-control plane. To verify connectivity, manually connect to the controller pod:
+Check the logs on the control-plane's public API:
 
 ```bash
-kubectl -n linkerd port-forward \
-    $(kubectl -n linkerd get po \
-        --selector=linkerd.io/control-plane-component=controller \
-        -o jsonpath='{.items[*].metadata.name}') \
-9995:9995
+linkerd logs --control-plane-component controller --container public-api
 ```
 
-...and then curl the `/metrics` endpoint:
+### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
+
+Example failure:
 
 ```bash
-curl localhost:9995/metrics
+× [prometheus] control plane can talk to Prometheus
+    Error calling Prometheus from the control plane: FAIL
+```
+
+{{< note >}} This will fail if you have changed your default cluster domain from
+`cluster.local`, see the
+[associated issue](https://github.com/linkerd/linkerd2/issues/1720) for more
+information and potential workarounds. {{< /note >}}
+
+Validate that the Prometheus instance is up and running:
+
+```bash
+kubectl -n linkerd get all | grep prometheus
+```
+
+Check the Prometheus logs:
+
+```bash
+linkerd logs --control-plane-component prometheus
+```
+
+Check the logs on the control-plane's public API:
+
+```bash
+linkerd logs --control-plane-component controller --container public-api
 ```
 
 ## The "linkerd-service-profile" checks {#l5d-sp}
