@@ -73,7 +73,7 @@ parent = "community"
 identifier = "community-adopters"
 name = "Adopters"
 url = "/community/adopters/"
-weight = 3
+weight = 4
 parent = "community"
 [[menu.top]]
 identifier = "blog"
