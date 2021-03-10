@@ -1,0 +1,31 @@
+{{ $cli      := site.Data.cli }}
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Command
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $cli.CLIReference }}
+      {{ if not (in .Name " ") }}
+      <tr>
+        <td class="text-nowrap">
+          <a href="{{ .Name }}/">
+            {{ .Name }}
+          </a>
+        </td>
+        <td>
+          {{ .Synopsis | markdownify }}
+        </td>
+      </tr>
+      {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,6 @@
+{{ range where site.Data.cli.CLIReference "Name" (.Get 0) }}
+{{ if .Example }}
+<h2>Examples</h2>
+<pre class="language-bash"><code class="language-bash">{{ replaceRE "(?m)^[ ]{2}" "" .Example }}</code></pre>
+{{ end }}
+{{ end }}

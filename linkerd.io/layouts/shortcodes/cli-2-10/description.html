@@ -1,0 +1,7 @@
+{{ range where site.Data.cli.CLIReference "Name" (.Get 0) }}
+{{ $desc := partial "cli/description" . }}
+{{ $isParagraph := hasPrefix (strings.TrimLeft "\n" $desc) "<p>" }}
+{{ cond $isParagraph "" "<p>" | safeHTML }}
+{{ $desc }}
+{{ cond $isParagraph "" "</p>" | safeHTML }}
+{{ end }}
