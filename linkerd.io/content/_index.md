@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-03-09** Announcing Linkerd 2.10! [Read more »](/2021/03/09/announcing-linkerd-2.10/)"
+  description: "**2021-03-11** Announcing Linkerd 2.10! [Read more »](/2021/03/11/announcing-linkerd-2.10/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
