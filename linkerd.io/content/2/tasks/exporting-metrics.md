@@ -160,3 +160,6 @@ and then:
 ```bash
 curl localhost:4191/metrics
 ```
+
+Alternatively, `linkerd diagnostics proxy-metrics` can be used to retrieve
+proxy metrics for a given workload.
