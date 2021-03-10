@@ -1,7 +1,7 @@
 ---
 title: 'Announcing Linkerd 2.10: Extensions, Opaque Ports, Multi-cluster TCP, and more!'
 author: 'william'
-date: 2021-03-09T00:00:00+00:00
+date: 2021-03-11T00:00:00+00:00
 thumbnail: /uploads/content-pixie-NzO5y3b2R2M-unsplash.jpg
 draft: false
 featured: false
@@ -170,8 +170,8 @@ by running:
 Using Helm? See our [guide to installing Linkerd with
 Helm](https://linkerd.io/2/tasks/install-helm/). Upgrading from an earlier
 release? We've got you covered: see our [Linkerd upgrade
-guide](https://linkerd.io/2/tasks/upgrade/) for how to use the linkerd upgrade
-command.
+guide](https://linkerd.io/2/tasks/upgrade/) for how to use the `linkerd
+upgrade` command.
 
 ## Linkerd is for everyone
 
