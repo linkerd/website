@@ -1,14 +1,8 @@
 +++
 title = "Overview"
 aliases = [
-  "/docs",
-  "/documentation",
   "/2/",
-  "/2/docs/",
-  "/doc/network-performance/",
-  "/in-depth/network-performance/",
-  "/in-depth/debugging-guide/",
-  "/in-depth/concepts/"
+  "/2/docs/"
 ]
 weight = 1
 +++
