@@ -10,7 +10,7 @@ sense for various reasons.
 {{< note >}}
 Note that this approach requires you to manually add and maintain additional
 scrape configuration in your Prometheus configuration.
-If you prefer to use the default Linkerd Prometheus add-on,
+If you prefer to use the default Linkerd Prometheus,
 you can export the metrics to your existing monitoring infrastructure
 following the instructions at <https://linkerd.io/2/tasks/exporting-metrics/>
 {{< /note >}}
@@ -30,7 +30,7 @@ The following scrape configuration has to be applied to the external
 Prometheus instance.
 
 {{< note >}}
-The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/a1be60aea183efe12adba8c97fadcdb95cdcbd36/charts/add-ons/prometheus/templates/prometheus.yaml#L69-L147).
+The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/bc5bdeb834f571d92937fe5c2ead6bf88e37823a/viz/charts/linkerd-viz/templates/prometheus.yaml#L47-L151).
 {{< /note >}}
 
 Before applying, it is important to replace templated values (present in `{{}}`)
@@ -38,29 +38,22 @@ with direct values for the below configuration to work.
 
 ```yaml
     - job_name: 'linkerd-controller'
-
-      scrape_interval: 10s
-      scrape_timeout: 10s
-
       kubernetes_sd_configs:
       - role: pod
         namespaces:
-          names: ['{{.Values.namespace}}']
+          names:
+          - '{{.Values.linkerdNamespace}}'
+          - '{{.Values.namespace}}'
       relabel_configs:
       - source_labels:
-        - __meta_kubernetes_pod_label_linkerd_io_control_plane_component
         - __meta_kubernetes_pod_container_port_name
         action: keep
-        regex: (.*);admin-http$
+        regex: admin-http
       - source_labels: [__meta_kubernetes_pod_container_name]
         action: replace
         target_label: component
 
     - job_name: 'linkerd-service-mirror'
-
-      scrape_interval: 10s
-      scrape_timeout: 10s
-
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -74,10 +67,6 @@ with direct values for the below configuration to work.
         target_label: component
 
     - job_name: 'linkerd-proxy'
-
-      scrape_interval: 10s
-      scrape_timeout: 10s
-
       kubernetes_sd_configs:
       - role: pod
       relabel_configs:
@@ -86,7 +75,7 @@ with direct values for the below configuration to work.
         - __meta_kubernetes_pod_container_port_name
         - __meta_kubernetes_pod_label_linkerd_io_control_plane_ns
         action: keep
-        regex: ^{{default .Values.proxyContainerName "linkerd-proxy" .Values.proxyContainerName}};linkerd-admin;{{.Values.namespace}}$
+        regex: ^{{default .Values.proxyContainerName "linkerd-proxy" .Values.proxyContainerName}};linkerd-admin;{{.Values.linkerdNamespace}}$
       - source_labels: [__meta_kubernetes_namespace]
         action: replace
         target_label: namespace
@@ -133,7 +122,7 @@ with direct values for the below configuration to work.
 The running configuration of the builtin prometheus can be used as a reference.
 
 ```bash
-kubectl -n linkerd-viz  get configmap linkerd-prometheus-config -o yaml
+kubectl -n linkerd-viz  get configmap prometheus-config -o yaml
 ```
 
 ## Linkerd-Viz Extension Configuration
@@ -159,8 +148,7 @@ The same has to be passed again by the user during re-installs, upgrades, etc.
 
 When using an external Prometheus and configuring the `prometheusUrl`
 field, Linkerd's Prometheus will still be included in installation.
-
-If you wish to disable this included Prometheus, be sure to include the
+If you wish to disable it, be sure to include the
 following configuration as well:
 
 ```yaml

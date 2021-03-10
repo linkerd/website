@@ -13,8 +13,9 @@ By design, Linkerd only keeps metrics data for a short, fixed window of time
 you, you will probably want to export it into a full-fledged metrics store.
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
-part of the Viz extension.  There are several basic approaches to exporting
-metrics data from Linkerd:
+part of the Viz extension. The following tutorial requires the viz extension
+to be installed with prometheus enabled. There are several basic approaches
+to exporting metrics data from Linkerd:
 
 - [Federating data to your own Prometheus cluster](#federation)
 - [Using a Prometheus integration](#integration)
@@ -55,7 +56,7 @@ extension is running):
 
 Alternatively, if you prefer to use Prometheus' ServiceMonitors to configure
 your Prometheus, you can use this ServiceMonitor YAML (replace `{{.Namespace}}`
-with the namespace where Linkerd is running):
+with the namespace where Linkerd Viz extension is running):
 
 ```yaml
 apiVersion: monitoring.coreos.com/v1
@@ -88,7 +89,7 @@ spec:
     - {{.Namespace}}
   selector:
     matchLabels:
-      linkerd.io/control-plane-component: prometheus
+      component: prometheus
 ```
 
 That's it! Your Prometheus cluster is now configured to federate Linkerd's
@@ -121,7 +122,7 @@ For example, you can call the federation API directly via a command like:
 curl -G \
   --data-urlencode 'match[]={job="linkerd-proxy"}' \
   --data-urlencode 'match[]={job="linkerd-controller"}' \
-  http://linkerd-prometheus.linkerd.svc.cluster.local:9090/federate
+  http://prometheus.linkerd-viz.svc.cluster.local:9090/federate
 ```
 
 {{< note >}}
@@ -135,7 +136,7 @@ Similar to the `/federate` API, Prometheus provides a JSON query API to
 retrieve all metrics:
 
 ```bash
-curl http://linkerd-prometheus.linkerd.svc.cluster.local:9090/api/v1/query?query=request_total
+curl http://prometheus.linkerd-viz.svc.cluster.local:9090/api/v1/query?query=request_total
 ```
 
 ## Gathering data from the Linkerd proxies directly {#proxy}
@@ -159,3 +160,6 @@ and then:
 ```bash
 curl localhost:4191/metrics
 ```
+
+Alternatively, `linkerd diagnostics proxy-metrics` can be used to retrieve
+proxy metrics for a given workload.

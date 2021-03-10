@@ -14,7 +14,7 @@ in the [Getting Started](/2/getting-started/) guide and have Linkerd and the
 demo application running in a Kubernetes cluster. If you've not done that yet,
 go get started and come back when you're done!
 
-If you glance at the Linkerd dashboard (by running the `linkerd dashboard`
+If you glance at the Linkerd dashboard (by running the `linkerd viz dashboard`
 command), you should see all the resources in the `emojivoto` namespace,
 including the deployments. Each deployment running Linkerd shows success rate,
 requests per second and latency percentiles.

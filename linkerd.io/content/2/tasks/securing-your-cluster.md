@@ -9,8 +9,8 @@ best practices to enable this introspection in a secure way.
 
 ## Tap
 
-Linkerd's Viz extension  includes Tap support. This feature is available
-via the following commands:
+Linkerd's Viz extension includes Tap support. This feature is available via the
+following commands:
 
 - [`linkerd viz tap`](/2/reference/cli/viz/#tap)
 - [`linkerd viz top`](/2/reference/cli/viz/#top)
@@ -52,7 +52,8 @@ You can also use the Linkerd CLI's `--as` flag to confirm:
 
 ```bash
 $ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
-Error: HTTP error, status Code [403] (deployments.tap.linkerd.io "linkerd-controller" is forbidden: User "siggy" cannot watch resource "deployments/tap" in API group "tap.linkerd.io" in the namespace "linkerd")
+Cannot connect to Linkerd Viz: namespaces is forbidden: User "XXXX" cannot list resource "namespaces" in API group "" at the cluster scope
+Validate the install with: linkerd viz check
 ...
 ```
 
@@ -67,12 +68,12 @@ To enable tap access to all resources in all namespaces, you may bind your user
 to the `linkerd-linkerd-tap-admin` ClusterRole, installed by default:
 
 ```bash
-$ kubectl describe clusterroles/linkerd-linkerd-tap-admin
-Name:         linkerd-linkerd-tap-admin
-Labels:       linkerd.io/control-plane-component=tap
-              linkerd.io/control-plane-ns=linkerd
+$ kubectl describe clusterroles/linkerd-linkerd-viz-tap-admin
+Name:         linkerd-linkerd-viz-tap-admin
+Labels:       component=tap
+              linkerd.io/extension=viz
 Annotations:  kubectl.kubernetes.io/last-applied-configuration:
-                {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"labels":{"linkerd.io/control-plane-compone...
+                {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"labels":{"component=tap...
 PolicyRule:
   Resources         Non-Resource URLs  Resource Names  Verbs
   ---------         -----------------  --------------  -----
@@ -80,24 +81,24 @@ PolicyRule:
 ```
 
 {{< note >}}
-This ClusterRole name includes the Linkerd namespace, so it may vary if you
-installed Linkerd into a non-default namespace:
-`linkerd-[LINKERD_NAMESPACE]-tap-admin`
+This ClusterRole name includes the Linkerd Viz namespace, so it may vary if you
+installed Viz into a non-default namespace:
+`linkerd-[LINKERD_VIZ_NAMESPACE]-tap-admin`
 {{< /note >}}
 
-To bind the `linkerd-linkerd-tap-admin` ClusterRole to a particular user:
+To bind the `linkerd-linkerd-viz-tap-admin` ClusterRole to a particular user:
 
 ```bash
 kubectl create clusterrolebinding \
   $(whoami)-tap-admin \
-  --clusterrole=linkerd-linkerd-tap-admin \
+  --clusterrole=linkerd-linkerd-viz-tap-admin \
   --user=$(whoami)
 ```
 
 You can verify you now have tap access with:
 
 ```bash
-$ linkerd tap -n linkerd deploy/linkerd-controller --as $(whoami)
+$ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
 req id=3:0 proxy=in  src=10.244.0.1:37392 dst=10.244.0.13:9996 tls=not_provided_by_remote :method=GET :authority=10.244.0.13:9996 :path=/ping
 ...
 ```
@@ -146,7 +147,7 @@ with:
 ```bash
 kubectl create clusterrolebinding \
   $(whoami)-tap-admin \
-  --clusterrole=linkerd-linkerd-tap-admin \
+  --clusterrole=linkerd-linkerd-viz-tap-admin \
   --user=$(gcloud config get-value account)
 ```
 
@@ -171,26 +172,26 @@ privileges necessary to tap resources.
 To confirm:
 
 ```bash
-$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd:linkerd-web
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
 yes
 ```
 
-This access is enabled via a `linkerd-linkerd-web-admin` ClusterRoleBinding:
+This access is enabled via a `linkerd-linkerd-viz-web-admin` ClusterRoleBinding:
 
 ```bash
-$ kubectl describe clusterrolebindings/linkerd-linkerd-web-admin
-Name:         linkerd-linkerd-web-admin
-Labels:       linkerd.io/control-plane-component=web
-              linkerd.io/control-plane-ns=linkerd
+$ kubectl describe clusterrolebindings/linkerd-linkerd-viz-web-admin
+Name:         linkerd-linkerd-viz-web-admin
+Labels:       component=web
+              linkerd.io/extensions=viz
 Annotations:  kubectl.kubernetes.io/last-applied-configuration:
-                {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"linkerd.io/control-plane-...
+                {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"component=web...
 Role:
   Kind:  ClusterRole
-  Name:  linkerd-linkerd-tap-admin
+  Name:  linkerd-linkerd-viz-tap-admin
 Subjects:
   Kind            Name         Namespace
   ----            ----         ---------
-  ServiceAccount  linkerd-web  linkerd
+  ServiceAccount  web          linkerd-viz
 ```
 
 If you would like to restrict the Linkerd dashboard's tap access. You may
@@ -205,12 +206,12 @@ already installed Linkerd, you may simply delete the ClusterRoleBinding
 manually:
 
 ```bash
-kubectl delete clusterrolebindings/linkerd-linkerd-web-admin
+kubectl delete clusterrolebindings/linkerd-linkerd-viz-web-admin
 ```
 
 To confirm:
 
 ```bash
-$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd:linkerd-web
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
 no
 ```
