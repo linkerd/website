@@ -80,7 +80,7 @@ words, it shows information about requests which are sent to the target and
 responses which are returned by the target.  For example, the command:
 
 ```bash
-linkerd routes deploy/webapp
+linkerd viz routes deploy/webapp
 ```
 
 Displays the request volume, success rate, and latency of requests to the
@@ -90,14 +90,14 @@ network latency between a client and the `webapp` deployment.
 
 ## Outbound Metrics
 
-If you specify the `--to` flag then `linkerd routes` displays *outbound* metrics
+If you specify the `--to` flag then `linkerd viz routes` displays *outbound* metrics
 from the target resource to the resource in the `--to` flag.  In contrast to
 the inbound metrics, these metrics are from the perspective of the sender.  This
 means that these latencies do include the network latency between the client
 and the server.  For example, the command:
 
 ```bash
-linkerd routes deploy/traffic --to deploy/webapp
+linkerd viz routes deploy/traffic --to deploy/webapp
 ```
 
 Displays the request volume, success rate, and latency of requests from
