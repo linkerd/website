@@ -103,7 +103,7 @@ kubectl --context=source -n linkerd-multicluster delete deploy/linkerd-service-m
 Ensure that your cluster is still in a healthy state by running:
 
 ```bash
-linkerd --context=source check --multicluster
+linkerd --context=source multicluster check
 ```
 
 Congratulations, your upgrade is complete!

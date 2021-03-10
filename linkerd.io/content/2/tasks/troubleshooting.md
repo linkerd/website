@@ -553,7 +553,7 @@ linkerd-controller-7bb8ff5967-zg265   4/4       Running   0          40m
 Check the controller's logs with:
 
 ```bash
-linkerd logs --control-plane-component controller
+kubectl logs -n linkerd linkerd-controller-7bb8ff5967-zg265 public-api
 ```
 
 ### √ can initialize the client {#l5d-existence-client}
@@ -911,7 +911,7 @@ Example failure:
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ### √ [kubernetes] control plane can talk to Kubernetes {#l5d-api-k8s}
@@ -926,7 +926,7 @@ Example failure:
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ### √ [prometheus] control plane can talk to Prometheus {#l5d-api-prom}
@@ -952,13 +952,13 @@ kubectl -n linkerd get all | grep prometheus
 Check the Prometheus logs:
 
 ```bash
-linkerd logs --control-plane-component prometheus
+kubectl logs -n linkerd linkerd-prometheus-74d66f86f6-6t6dh prometheus
 ```
 
 Check the logs on the control-plane's public API:
 
 ```bash
-linkerd logs --control-plane-component controller --container public-api
+kubectl logs -n linkerd linkerd-controller-b8c4c48c8-pflc9 public-api
 ```
 
 ## The "linkerd-service-profile" checks {#l5d-sp}

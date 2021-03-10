@@ -58,7 +58,7 @@ spec:
 
 ## Monitoring Retries
 
-Retries can be monitored by using the `linkerd routes` command with the `--to`
+Retries can be monitored by using the `linkerd viz routes` command with the `--to`
 flag and the `-o wide` flag.  Since retries are performed on the client-side,
 we need to use the `--to` flag to see metrics for requests that one resource
 is sending to another (from the server's point of view, retries are just

@@ -126,6 +126,6 @@ requests.
 ## Using Helm
 
 When using [Helm](/2/tasks/install-helm/), users must take care to set the
-`global.proxy.cores` Helm variable in addition to `global.proxy.cpu.limit`, if
+`proxy.cores` Helm variable in addition to `proxy.cpu.limit`, if
 the criteria for cgroup-based CPU limits
 [described above](#using-kubernetes-cpu-limits-and-requests) are not met.
