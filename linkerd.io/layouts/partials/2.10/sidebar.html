@@ -2,11 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="dropdown navigation">
     <div class="navbar-item has-dropdown is-hoverable ">
       <a class="navbar-link">
-        {{ if eq .page.Section "1" }}
-        Linkerd 1.x
-        {{ else }}
-        Linkerd 2.x
-        {{ end }}
+        Linkerd 2.10
       </a>
       <div class="navbar-dropdown">
         <div class="navbar-item">
@@ -18,8 +14,11 @@
         <div class="navbar-item">
           Linkerd 2.x
         </div>
+        <a class="navbar-item" href="/2/overview/">
+          Linkerd 2.9
+        </a>
         <a class="navbar-item" href="/2.10/overview/">
-          L5D2_STABLE_VERSION
+          Linkerd 2.10
         </a>
       </div>
     </div>
@@ -27,7 +26,7 @@
   <aside class="menu">
     <ul class="menu-list is-paddingless is-marginless">
       {{ $currentPage := .page }}
-      {{ range sort (site.GetPage "/2").Sections "Params.weight" "asc" }}
+      {{ range sort (site.GetPage "/2.10").Sections "Params.weight" "asc" }}
       {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
 
       <li class="menu-list-item {{ if $sectionActive }}is-active{{ end }}">
