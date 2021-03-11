@@ -195,13 +195,13 @@ handling of certain ports and protocols has changed. Please read through our
 [ports and protocols in 2.10 upgrade
 guide](/2.10/tasks/upgrading-2.10-ports-and-protocols/) for the repercussions.
 
-Second, we've introduced [extensions](/2.10/tasks/extensions) and moved the
-default visualization components into a Linkerd-Viz extension. Read on for
-what this means for you.
+Second, we've introduced [extensions](/2.10/tasks/extensions/) and moved the
+default visualization components into a Linkerd-Viz extension. Read on for what
+this means for you.
 
 ### Visualization components moved to Linkerd-Viz extension
 
-With the introduction of [extensions](/2.10/tasks/extensions), all of the
+With the introduction of [extensions](/2.10/tasks/extensions/), all of the
 Linkerd control plane components related to visibility (including Prometheus,
 Grafana, Web, and Tap) have been removed from the main Linkerd control plane
 and moved into the Linkerd-Viz extension. This means that when you upgrade to
