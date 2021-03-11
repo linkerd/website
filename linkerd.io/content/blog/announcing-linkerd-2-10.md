@@ -161,8 +161,8 @@ they resonate with you as well.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](/2.10/edge) will already have seen these features in
-action. Either way, you can download the stable 2.10 release by running:
+our [weekly edge releases](/2.10/edge/) will already have seen these features
+in action. Either way, you can download the stable 2.10 release by running:
 
 `curl https://run.linkerd.io/install | sh`
 
