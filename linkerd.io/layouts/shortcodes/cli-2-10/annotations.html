@@ -1,0 +1,19 @@
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Annotation
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range sort (index site.Data "cli-2-10").AnnotationsReference "Name" }}
+      {{ partial "cli/annotations" . }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>
