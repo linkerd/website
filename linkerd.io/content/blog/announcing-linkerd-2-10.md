@@ -3,6 +3,7 @@ title: 'Announcing Linkerd 2.10: Extensions, Opaque Ports, Multi-cluster TCP, an
 author: 'william'
 date: 2021-03-11T00:00:00+00:00
 thumbnail: /uploads/content-pixie-NzO5y3b2R2M-unsplash.jpg
+description: The world's smallest, simplest service mesh enhances security and sheds non-critical components to deliver flexibility for more use cases
 draft: false
 featured: false
 slug: announcing-linkerd-2.10
