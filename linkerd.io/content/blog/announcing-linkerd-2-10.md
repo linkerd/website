@@ -84,7 +84,7 @@ connect Kubernetes services across cluster boundaries in a way that's secure,
 fully transparent to the application, and independent of the topology of the
 underlying network. However, this functionality was restricted to HTTP
 connections only—until now. With Linkerd 2.10, [Linkerd's multi-cluster
-feature](https://linkerd.io/2/features/multicluster/) now extends to all TCP
+feature](https://linkerd.io/2.10/features/multicluster/) now extends to all TCP
 connections, with the same guarantees of security and transparency that Linkerd
 provides for pod-to-pod communication.
 
@@ -161,16 +161,16 @@ they resonate with you as well.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
+our [weekly edge releases](https://linkerd.io/2.10/edge) will already have seen
 these features in action. Either way, you can download the stable 2.10 release
 by running:
 
 `curl https://run.linkerd.io/install | sh`
 
 Using Helm? See our [guide to installing Linkerd with
-Helm](https://linkerd.io/2/tasks/install-helm/). Upgrading from an earlier
+Helm](https://linkerd.io/2.10/tasks/install-helm/). Upgrading from an earlier
 release? We've got you covered: see our [Linkerd upgrade
-guide](https://linkerd.io/2/tasks/upgrade/) for how to use the `linkerd
+guide](https://linkerd.io/2.10/tasks/upgrade/) for how to use the `linkerd
 upgrade` command.
 
 ## Linkerd is for everyone
@@ -182,4 +182,5 @@ If you have feature requests, questions, or comments, we'd love to have you
 join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](https://linkerd.io/2.10/get-involved/). Come and join the
+fun!
