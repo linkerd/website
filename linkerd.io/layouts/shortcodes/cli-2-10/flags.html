@@ -1,0 +1,7 @@
+{{ range where (index site.Data "cli-2-10").CLIReference "Name" (.Get 0) }}
+{{ $opts := where .Options "Name" "!=" "help" }}
+{{ if ge (len $opts) 1 }}
+<h2>Flags</h2>
+{{ partial "cli/flags" $opts }}
+{{ end }}
+{{ end }}

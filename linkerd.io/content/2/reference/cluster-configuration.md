@@ -19,7 +19,16 @@ Setup:
 
 ```bash
 CLUSTER_NAME=your-cluster-name
-gcloud config set compute/zone your-zone-or-region
+```
+
+Set default zone for
+zonal clusters or the default region for regional clusters (see
+[types of clusters]
+(<https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters>)
+
+```bash
+gcloud config set compute/zone your-zone
+gcloud config set compute/region your-region
 ```
 
 Get the cluster `MASTER_IPV4_CIDR`:
