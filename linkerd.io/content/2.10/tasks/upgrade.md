@@ -13,21 +13,24 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
-- [Upgrade notice: stable-2.9.3](/2.10/tasks/upgrade/#upgrade-notice-stable-293)
-- [Upgrade notice: stable-2.9.0](/2.10/tasks/upgrade/#upgrade-notice-stable-290)
-- [Upgrade notice: stable-2.8.0](/2.10/tasks/upgrade/#upgrade-notice-stable-280)
-- [Upgrade notice: stable-2.7.0](/2.10/tasks/upgrade/#upgrade-notice-stable-270)
-- [Upgrade notice: stable-2.6.0](/2.10/tasks/upgrade/#upgrade-notice-stable-260)
-- [Upgrade notice: stable-2.5.0](/2.10/tasks/upgrade/#upgrade-notice-stable-250)
-- [Upgrade notice: stable-2.4.0](/2.10/tasks/upgrade/#upgrade-notice-stable-240)
-- [Upgrade notice: stable-2.3.0](/2.10/tasks/upgrade/#upgrade-notice-stable-230)
-- [Upgrade notice: stable-2.2.0](/2.10/tasks/upgrade/#upgrade-notice-stable-220)
+- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
+- [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
+- [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
+- [Upgrade notice: stable-2.8.0](#upgrade-notice-stable-2-8-0)
+- [Upgrade notice: stable-2.7.0](#upgrade-notice-stable-2-7-0)
+- [Upgrade notice: stable-2.6.0](#upgrade-notice-stable-2-6-0)
+- [Upgrade notice: stable-2.5.0](#upgrade-notice-stable-2-5-0)
+- [Upgrade notice: stable-2.4.0](#upgrade-notice-stable-2-4-0)
+- [Upgrade notice: stable-2.3.0](#upgrade-notice-stable-2-3-0)
+- [Upgrade notice: stable-2.2.0](#upgrade-notice-stable-2-2-0)
 
-There are three components that need to be upgraded:
+## Steps to upgrade
 
-- [CLI](/2.10/tasks/upgrade/#upgrade-the-cli)
-- [Control Plane](/2.10/tasks/upgrade/#upgrade-the-control-plane)
-- [Data Plane](/2.10/tasks/upgrade/#upgrade-the-data-plane)
+There are three components that need to be upgraded, in turn:
+
+- [CLI](#upgrade-the-cli)
+- [Control Plane](#upgrade-the-control-plane)
+- [Data Plane](#upgrade-the-data-plane)
 
 ## Upgrade the CLI
 
@@ -60,7 +63,7 @@ Client version: {{% latestversion %}}
 Until you upgrade the control plane, some new CLI commands may not work.
 {{< /note >}}
 
-You are now ready to [upgrade your control plane](/2.10/tasks/upgrade/#upgrade-the-control-plane).
+You are now ready to [upgrade your control plane](#upgrade-the-control-plane).
 
 ## Upgrade the Control Plane
 
@@ -98,11 +101,11 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2.10/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2.10/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 ### With Helm
@@ -135,7 +138,7 @@ Client version: {{% latestversion %}}
 Server version: {{% latestversion %}}
 ```
 
-Next, we will [upgrade your data plane](/2.10/tasks/upgrade/#upgrade-the-data-plane).
+Next, we will [upgrade your data plane](#upgrade-the-data-plane).
 
 ## Upgrade the Data Plane
 
@@ -187,16 +190,26 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.10.0
 
+There are two changes in the 2.10.0 release that may affect you. First, the
+handling of certain ports and protocols has changed. Please read through our
+[ports and protocols in 2.10 upgrade
+guide](/2.10/tasks/upgrading-2.10-ports-and-protocols/) for the repercussions.
+
+Second, we've introduced [extensions](/2.10/tasks/extensions) and moved the
+default visualization components into a Linkerd-Viz extension. Read on for
+what this means for you.
+
 ### Visualization components moved to Linkerd-Viz extension
 
-All of the Linkerd control plane components related to visibility (including
-Prometheus, Grafana, Web, and Tap) have been removed from the main Linkerd
-control plane and moved into the Linkerd-Viz extension. This means that when you
-upgrade to stable-2.10.0, these components will be removed from your cluster and
-you will not be able to run commands such as `linkerd stat` or `linkerd
-dashboard`. To restore this functionality, you must install the Linkerd-Viz
-extension by running `linkerd viz install | kubectl apply -f -` and then invoke
-those commands through `linkerd viz stat`, `linkerd viz dashboard`, etc.
+With the introduction of [extensions](/2.10/tasks/extensions), all of the
+Linkerd control plane components related to visibility (including Prometheus,
+Grafana, Web, and Tap) have been removed from the main Linkerd control plane
+and moved into the Linkerd-Viz extension. This means that when you upgrade to
+stable-2.10.0, these components will be removed from your cluster and you will
+not be able to run commands such as `linkerd stat` or `linkerd dashboard`. To
+restore this functionality, you must install the Linkerd-Viz extension by
+running `linkerd viz install | kubectl apply -f -` and then invoke those
+commands through `linkerd viz stat`, `linkerd viz dashboard`, etc.
 
 ```bash
 # Upgrade the control plane (this will remove viz components).
@@ -325,9 +338,9 @@ Helm the cleanup was automated).
 ## Upgrade notice: stable-2.8.0
 
 There are no version-specific notes for upgrading to this release. The upgrade
-process detailed above ([upgrade the CLI](/2.10/tasks/upgrade/#upgrade-the-cli),
-[upgrade the control plane](/2.10/tasks/upgrade/#upgrade-the-control-plane), then
-[upgrade the data plane](/2.10/tasks/upgrade/#upgrade-the-data-plane)) should
+process detailed above ([upgrade the CLI](#upgrade-the-cli),
+[upgrade the control plane](#upgrade-the-control-plane), then
+[upgrade the data plane](#upgrade-the-data-plane)) should
 work.
 
 ## Upgrade notice: stable-2.7.0
@@ -377,7 +390,7 @@ Note that this process uses functionality available in stable-2.7.0. So before
 you start your cert rotation, make sure to upgrade.
 
 When ready, you can begin the upgrade process by
-[installing the new CLI](/2.10/tasks/upgrade/#upgrade-the-cli).
+[installing the new CLI](#upgrade-the-cli).
 
 ### Breaking changes in Helm charts
 
@@ -414,7 +427,7 @@ ignored by the HA proxy injector, you will need to update these namespaces
 to use the new `config.linkerd.io/admission-webhooks: disabled` label.
 
 When ready, you can begin the upgrade process by
-[installing the new CLI](/2.10/tasks/upgrade/#upgrade-the-cli).
+[installing the new CLI](#upgrade-the-cli).
 
 ## Upgrade notice: stable-2.5.0
 
@@ -464,11 +477,11 @@ that any resources that are removed from the `linkerd upgrade` output, are
 effectively removed from the system.
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2.10/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2.10/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 Once the `upgrade` command completes, use the `linkerd check` command to confirm
@@ -550,11 +563,11 @@ kubectl delete clusterrole/linkerd-linkerd-tap
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2.10/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2.10/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 Once the `upgrade` command completes, use the `linkerd check` command to confirm
@@ -581,9 +594,9 @@ When ready, proceed to upgrading the data plane by following the instructions at
 
 ### Upgrading from stable-2.2.x
 
-Follow the [stable-2.3.0 upgrade instructions](/2.10/tasks/upgrade/#upgrading-from-stable-22x-1)
+Follow the [stable-2.3.0 upgrade instructions](#upgrading-from-stable-22x-1)
 to upgrade the control plane to the stable-2.3.2 release first. Then follow
-[these instructions](/2.10/tasks/upgrade/#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
+[these instructions](#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
 to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
 
 ## Upgrade notice: stable-2.3.0
