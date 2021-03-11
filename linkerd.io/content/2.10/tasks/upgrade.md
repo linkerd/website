@@ -190,9 +190,15 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.10.0
 
-There are two changes in the 2.10.0 release that may affect you. First, the
-handling of certain ports and protocols has changed. Please read through our
-[ports and protocols in 2.10 upgrade
+If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but *not*
+2.9.4), and you *upgraded* to that release using the `--prune` flag (as opposed
+to installing it fresh), you will need to use the `linkerd repair` command as
+outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-2-9-3)
+before you can upgrade to Linkerd 2.10.
+
+Additionally, there are two changes in the 2.10.0 release that may affect you.
+First, the handling of certain ports and protocols has changed. Please read
+through our [ports and protocols in 2.10 upgrade
 guide](/2.10/tasks/upgrading-2.10-ports-and-protocols/) for the repercussions.
 
 Second, we've introduced [extensions](/2.10/tasks/extensions/) and moved the
