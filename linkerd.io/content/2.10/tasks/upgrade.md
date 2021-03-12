@@ -14,6 +14,7 @@ may contain important information you need to be aware of before commencing
 with the upgrade process:
 
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
+- [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
 - [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
 - [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
 - [Upgrade notice: stable-2.8.0](#upgrade-notice-stable-2-8-0)
@@ -190,9 +191,15 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.10.0
 
-There are two changes in the 2.10.0 release that may affect you. First, the
-handling of certain ports and protocols has changed. Please read through our
-[ports and protocols in 2.10 upgrade
+If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but *not*
+2.9.4), and you *upgraded* to that release using the `--prune` flag (as opposed
+to installing it fresh), you will need to use the `linkerd repair` command as
+outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-2-9-3)
+before you can upgrade to Linkerd 2.10.
+
+Additionally, there are two changes in the 2.10.0 release that may affect you.
+First, the handling of certain ports and protocols has changed. Please read
+through our [ports and protocols in 2.10 upgrade
 guide](/2.10/tasks/upgrading-2.10-ports-and-protocols/) for the repercussions.
 
 Second, we've introduced [extensions](/2.10/tasks/extensions/) and moved the
@@ -262,6 +269,10 @@ dropped, moving the config values underneath it into the root scope. Any values
 you had customized there will need to be migrated; in particular
 `identityTrustAnchorsPEM` in order to conserve the value you set during
 install."
+
+## Upgrade notice: stable-2.9.4
+
+See upgrade notes for 2.9.3 below.
 
 ## Upgrade notice: stable-2.9.3
 
