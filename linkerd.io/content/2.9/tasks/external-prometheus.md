@@ -175,4 +175,4 @@ Once applied, Helm makes sure that the configuration is
 persistent across upgrades.
 
 More information on installation through Helm can be found
-[here](https://linkerd.io../install-helm/index.html)
+[here](../install-helm)

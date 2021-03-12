@@ -7,7 +7,7 @@ aliases = [
 +++
 
 Linkerd can also be installed with a
-[number of Add-ons](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons),
+[number of Add-ons](https://github.com/linkerd/linkerd2/tree/stable-2.9.4/charts/add-ons),
 allowing users to get a great out of the box experience around
 popular service mesh use-cases.
 These optional add-ons extend Linkerd with more features
@@ -17,7 +17,7 @@ Add-ons in Linkerd are optional and configurable. A configuration file is passed
 to the install operation (available  both through Helm and CLI).
 This configuration is also stored as a configmap called `linkerd-config-addons`,
 allowing upgrades to work seamlessly without having user to pass the configuration
-file again. Configuration can be updated [during upgrades](https://linkerd.io../upgrade/)
+file again. Configuration can be updated [during upgrades](../upgrade/)
 by applying configuration in the same manner as that of install.
 
 {{< note >}}
@@ -25,7 +25,7 @@ Add-ons are available in Linkerd starting from version `edge-20.2.3`.
 {{< /note>}}
 
 You can find the list of add-ons present in the
-[Linkerd2 Add-ons charts directory](https://github.com/linkerd/linkerd2/tree/main/charts/add-ons)
+[Linkerd2 Add-ons charts directory](https://github.com/linkerd/linkerd2/tree/stable-2.9.4/charts/add-ons)
 along with their configuration options.
 
 Now, let's understand some common concepts that are applicable across all add-ons.
@@ -71,7 +71,7 @@ The same `--config` is also available through upgrades to change existing config
 ## Installation through Helm
 
 First, You have to follow the
-usual process of [installing Linkerd2 through Helm](https://linkerd.io../install-helm/),
+usual process of [installing Linkerd2 through Helm](../install-helm/),
 . Only the final installation command is changed to include the Add-On configuration.
 
 Now, we pass the add-on configuration file to the helm install command.
@@ -89,4 +89,4 @@ helm install \
   linkerd-edge/linkerd2
 ```
 
-Example of Tracing Add-On installation can be found [here](https://linkerd.io../distributed-tracing/)
+Example of Tracing Add-On installation can be found [here](../distributed-tracing/)
