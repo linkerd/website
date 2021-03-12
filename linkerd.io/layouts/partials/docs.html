@@ -8,20 +8,34 @@
     </div>
     <div class="column has-background-white docs-content is-paddingless ">
       <div class="container blog-content-container">
-        <h1 class="title is-1 has-text-color">{{ .page.Title }}</h1>
-
         {{/*  {{ partial "breadcrumb.html" (dict "version" $docsVersion "ctx" .page) }}  */}}
 
         {{ if eq $docsVersion "1" }}
-          <div class="message-body">
-            <div><strong>Note</strong></div>
-        
-	    This documentation is for Linkerd 1.x, an older version with some
-            significant differences. You may want to see the
-            <a href="/2.10/overview/">Linkerd 2.x (current) documentation</a> instead.
-         </div>
-
+          <div class="message">
+            <div class="message-header">
+              This is not the latest version
+            </div>
+            <div class="message-body">
+	      This documentation is for Linkerd 1.x, an older version with some
+              significant differences. You may want to see the
+              <a href="/2.10/overview/">Linkerd 2.x (current) documentation</a> instead.
+            </div>
+           </div>
+        {{ else if ne $docsVersion "2.10" }}
+          <div class="message">
+            <div class="message-header">
+              This is not the latest version
+            </div>
+            <div class="message-body">
+	      This documentation is not for the latest version of Linkerd.
+	      You may want the <a href="/2.10/overview/">Linkerd 2.10 (current)
+              documentation</a> instead.
+            </div>
+          </div>
         {{ end }}
+
+        <h1 class="title is-1 has-text-color">{{ .page.Title }}</h1>
+
 
         <div class="language-markup">
           {{ if .page.Params.include_toc }}
