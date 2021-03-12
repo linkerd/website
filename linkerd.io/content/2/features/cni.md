@@ -69,7 +69,7 @@ In Helm v3, It has been deprecated, and is the first argument as
 {{< /note >}}
 
 At that point you are ready to install Linkerd with CNI enabled.
-You can follow [Installing Linkerd with Helm](/2/tasks/install-helm/) to do so.
+You can follow [Installing Linkerd with Helm](../../tasks/install-helm/) to do so.
 
 ## Additional configuration
 

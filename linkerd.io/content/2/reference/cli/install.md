@@ -5,7 +5,7 @@ title = "install"
 {{< cli/description "install" >}}
 
 For further details on how to install Linkerd onto your own cluster, check out
-the [install documentation](/2/tasks/install/).
+the [install documentation](../../../tasks/install/).
 
 {{< cli/examples "install" >}}
 
@@ -14,7 +14,7 @@ the [install documentation](/2/tasks/install/).
 ## Subcommands
 
 Install supports subcommands as part of the
-[Multi-stage install](/2/tasks/install/#multi-stage-install) feature.
+[Multi-stage install](../../../tasks/install/#multi-stage-install) feature.
 
 ### config
 

@@ -8,8 +8,8 @@ Linkerd uses the
 and
 [extension API server](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 to implement some of its core features like
-[automatic proxy injection](/2/features/proxy-injection/),
-[service profiles validation](/2/features/service-profiles/) and `tap`.
+[automatic proxy injection](../../features/proxy-injection/),
+[service profiles validation](../../features/service-profiles/) and `tap`.
 
 To secure the connections between the Kubernetes API server and the
 webhooks, all the webhooks are TLS-enabled. The x509 certificates used by these

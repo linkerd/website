@@ -17,7 +17,7 @@ Add-ons in Linkerd are optional and configurable. A configuration file is passed
 to the install operation (available  both through Helm and CLI).
 This configuration is also stored as a configmap called `linkerd-config-addons`,
 allowing upgrades to work seamlessly without having user to pass the configuration
-file again. Configuration can be updated [during upgrades](https://linkerd.io/2/tasks/upgrade/)
+file again. Configuration can be updated [during upgrades](https://linkerd.io../upgrade/)
 by applying configuration in the same manner as that of install.
 
 {{< note >}}
@@ -71,7 +71,7 @@ The same `--config` is also available through upgrades to change existing config
 ## Installation through Helm
 
 First, You have to follow the
-usual process of [installing Linkerd2 through Helm](https://linkerd.io/2/tasks/install-helm/),
+usual process of [installing Linkerd2 through Helm](https://linkerd.io../install-helm/),
 . Only the final installation command is changed to include the Add-On configuration.
 
 Now, we pass the add-on configuration file to the helm install command.
@@ -89,4 +89,4 @@ helm install \
   linkerd-edge/linkerd2
 ```
 
-Example of Tracing Add-On installation can be found [here](https://linkerd.io/2/tasks/distributed-tracing/)
+Example of Tracing Add-On installation can be found [here](https://linkerd.io../distributed-tracing/)

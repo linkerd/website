@@ -2,7 +2,7 @@
 title = "Upgrading Linkerd"
 description = "Upgrade Linkerd to the latest version."
 aliases = [
-  "/2/upgrade/",
+  "../upgrade/",
   "/2/update/"
 ]
 +++
@@ -13,21 +13,21 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
-- [Upgrade notice: stable-2.9.3](/2/tasks/upgrade/#upgrade-notice-stable-293)
-- [Upgrade notice: stable-2.9.0](/2/tasks/upgrade/#upgrade-notice-stable-290)
-- [Upgrade notice: stable-2.8.0](/2/tasks/upgrade/#upgrade-notice-stable-280)
-- [Upgrade notice: stable-2.7.0](/2/tasks/upgrade/#upgrade-notice-stable-270)
-- [Upgrade notice: stable-2.6.0](/2/tasks/upgrade/#upgrade-notice-stable-260)
-- [Upgrade notice: stable-2.5.0](/2/tasks/upgrade/#upgrade-notice-stable-250)
-- [Upgrade notice: stable-2.4.0](/2/tasks/upgrade/#upgrade-notice-stable-240)
-- [Upgrade notice: stable-2.3.0](/2/tasks/upgrade/#upgrade-notice-stable-230)
-- [Upgrade notice: stable-2.2.0](/2/tasks/upgrade/#upgrade-notice-stable-220)
+- [Upgrade notice: stable-2.9.3](../upgrade/#upgrade-notice-stable-293)
+- [Upgrade notice: stable-2.9.0](../upgrade/#upgrade-notice-stable-290)
+- [Upgrade notice: stable-2.8.0](../upgrade/#upgrade-notice-stable-280)
+- [Upgrade notice: stable-2.7.0](../upgrade/#upgrade-notice-stable-270)
+- [Upgrade notice: stable-2.6.0](../upgrade/#upgrade-notice-stable-260)
+- [Upgrade notice: stable-2.5.0](../upgrade/#upgrade-notice-stable-250)
+- [Upgrade notice: stable-2.4.0](../upgrade/#upgrade-notice-stable-240)
+- [Upgrade notice: stable-2.3.0](../upgrade/#upgrade-notice-stable-230)
+- [Upgrade notice: stable-2.2.0](../upgrade/#upgrade-notice-stable-220)
 
 There are three components that need to be upgraded:
 
-- [CLI](/2/tasks/upgrade/#upgrade-the-cli)
-- [Control Plane](/2/tasks/upgrade/#upgrade-the-control-plane)
-- [Data Plane](/2/tasks/upgrade/#upgrade-the-data-plane)
+- [CLI](../upgrade/#upgrade-the-cli)
+- [Control Plane](../upgrade/#upgrade-the-control-plane)
+- [Data Plane](../upgrade/#upgrade-the-data-plane)
 
 ## Upgrade the CLI
 
@@ -60,7 +60,7 @@ Client version: {{% latestversion %}}
 Until you upgrade the control plane, some new CLI commands may not work.
 {{< /note >}}
 
-You are now ready to [upgrade your control plane](/2/tasks/upgrade/#upgrade-the-control-plane).
+You are now ready to [upgrade your control plane](../upgrade/#upgrade-the-control-plane).
 
 ## Upgrade the Control Plane
 
@@ -72,7 +72,7 @@ services will not go down.
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](/2/observability/exporting-metrics/)
+[persistence documentation](../../observability/exporting-metrics/)
 {{< /note >}}
 
 ### With Linkerd CLI
@@ -98,17 +98,17 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](../upgrade/#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](../upgrade/#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 ### With Helm
 
 For a Helm workflow, check out the instructions at
-[Helm upgrade procedure](/2/tasks/install-helm/#helm-upgrade-procedure).
+[Helm upgrade procedure](../install-helm/#helm-upgrade-procedure).
 
 ### Verify the control plane upgrade
 
@@ -135,7 +135,7 @@ Client version: {{% latestversion %}}
 Server version: {{% latestversion %}}
 ```
 
-Next, we will [upgrade your data plane](/2/tasks/upgrade/#upgrade-the-data-plane).
+Next, we will [upgrade your data plane](../upgrade/#upgrade-the-data-plane).
 
 ## Upgrade the Data Plane
 
@@ -217,11 +217,11 @@ Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
 components for the first time with Linkerd 2.9 can ignore these instructions and
 instead refer directly to the [installing
-multicluster instructions](/2/tasks/installing-multicluster/).
+multicluster instructions](../installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](/2/tasks/upgrade-multicluster/).
+instructions](../upgrade-multicluster/).
 
 ### Ingress behavior changes
 
@@ -236,7 +236,7 @@ not applied.
 
 If you want to revert to the previous behavior, inject the proxy into the
 ingress controller using the annotation `linkerd.io/inject: ingress`, as
-explained in [using ingress](/2/tasks/using-ingress/)
+explained in [using ingress](../using-ingress/)
 
 ### Breaking changes in Helm charts
 
@@ -260,9 +260,9 @@ Helm the cleanup was automated).
 ## Upgrade notice: stable-2.8.0
 
 There are no version-specific notes for upgrading to this release. The upgrade
-process detailed above ([upgrade the CLI](/2/tasks/upgrade/#upgrade-the-cli),
-[upgrade the control plane](/2/tasks/upgrade/#upgrade-the-control-plane), then
-[upgrade the data plane](/2/tasks/upgrade/#upgrade-the-data-plane)) should
+process detailed above ([upgrade the CLI](../upgrade/#upgrade-the-cli),
+[upgrade the control plane](../upgrade/#upgrade-the-control-plane), then
+[upgrade the data plane](../upgrade/#upgrade-the-data-plane)) should
 work.
 
 ## Upgrade notice: stable-2.7.0
@@ -307,19 +307,19 @@ X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
 
 If you determine that you wish to rotate your certificates you can follow
 the process outlined in
-[Rotating your identity certificates](/2/tasks/rotating_identity_certificates/).
+[Rotating your identity certificates](../rotating_identity_certificates/).
 Note that this process uses functionality available in stable-2.7.0. So before
 you start your cert rotation, make sure to upgrade.
 
 When ready, you can begin the upgrade process by
-[installing the new CLI](/2/tasks/upgrade/#upgrade-the-cli).
+[installing the new CLI](../upgrade/#upgrade-the-cli).
 
 ### Breaking changes in Helm charts
 
 As part of an effort to follow Helm's best practices the Linkerd Helm
 chart has been restructured. As a result most of the keys have been changed.
 In order to ensure trouble-free upgrade of your Helm installation, please take
-a look at [Helm upgrade procedure](/2/tasks/install-helm/). To get a precise
+a look at [Helm upgrade procedure](../install-helm/). To get a precise
 view of what has changed you can compare that
 [stable-2.6.0](https://github.com/linkerd/linkerd2/blob/stable-2.6.0/charts/linkerd2/values.yaml)
 and [stable-2.7.0](https://github.com/linkerd/linkerd2/blob/stable-2.7.0/charts/linkerd2/values.yaml)
@@ -349,14 +349,14 @@ ignored by the HA proxy injector, you will need to update these namespaces
 to use the new `config.linkerd.io/admission-webhooks: disabled` label.
 
 When ready, you can begin the upgrade process by
-[installing the new CLI](/2/tasks/upgrade/#upgrade-the-cli).
+[installing the new CLI](../upgrade/#upgrade-the-cli).
 
 ## Upgrade notice: stable-2.5.0
 
 This release supports Kubernetes 1.12+.
 
 {{< note >}}
-Linkerd 2.5.0 introduced [Helm support](/2/tasks/install-helm/). If Linkerd was
+Linkerd 2.5.0 introduced [Helm support](../install-helm/). If Linkerd was
 installed via `linkerd install`, it must be upgraded via `linkerd upgrade`. If
 Linkerd was installed via Helm, it must be upgraded via Helm. Mixing these two
 installation procedures is not supported.
@@ -399,11 +399,11 @@ that any resources that are removed from the `linkerd upgrade` output, are
 effectively removed from the system.
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](../upgrade/#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](../upgrade/#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 Once the `upgrade` command completes, use the `linkerd check` command to confirm
@@ -485,11 +485,11 @@ kubectl delete clusterrole/linkerd-linkerd-tap
 ```
 
 For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](/2/tasks/upgrade/#upgrading-a-multi-stage-install).
+[Upgrading a multi-stage install](../upgrade/#upgrading-a-multi-stage-install).
 
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
-[Upgrading via manifests](/2/tasks/upgrade/#upgrading-via-manifests)
+[Upgrading via manifests](../upgrade/#upgrading-via-manifests)
 to ensure those configuration are retained by the `linkerd upgrade` command.
 
 Once the `upgrade` command completes, use the `linkerd check` command to confirm
@@ -516,9 +516,9 @@ When ready, proceed to upgrading the data plane by following the instructions at
 
 ### Upgrading from stable-2.2.x
 
-Follow the [stable-2.3.0 upgrade instructions](/2/tasks/upgrade/#upgrading-from-stable-22x-1)
+Follow the [stable-2.3.0 upgrade instructions](../upgrade/#upgrading-from-stable-22x-1)
 to upgrade the control plane to the stable-2.3.2 release first. Then follow
-[these instructions](/2/tasks/upgrade/#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
+[these instructions](../upgrade/#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
 to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
 
 ## Upgrade notice: stable-2.3.0
@@ -556,7 +556,7 @@ Follow instructions for
 #### Upgrading a multi-stage install
 
 `edge-19.4.5` introduced a
-[Multi-stage install](/2/tasks/install/#multi-stage-install) feature. If you
+[Multi-stage install](../install/#multi-stage-install) feature. If you
 previously installed Linkerd via a multi-stage install process, you can upgrade
 each stage, analogous to the original multi-stage installation process.
 
@@ -653,14 +653,14 @@ Follow instructions for
 ## Upgrade notice: stable-2.2.0
 
 There are two breaking changes in `stable-2.2.0`. One relates to
-[Service Profiles](/2/features/service-profiles/), the other relates to
-[Automatic Proxy Injection](/2/features/proxy-injection/). If you are not using
+[Service Profiles](../../features/service-profiles/), the other relates to
+[Automatic Proxy Injection](../../features/proxy-injection/). If you are not using
 either of these features, you may [skip directly](#step-by-step-instructions-stable-22x)
 to the full upgrade instructions.
 
 ### Service Profile namespace location
 
-[Service Profiles](/2/features/service-profiles/), previously defined in the
+[Service Profiles](../../features/service-profiles/), previously defined in the
 control plane namespace in `stable-2.1.0`, are now defined in their respective
 client and server namespaces. Service Profiles defined in the client namespace
 take priority over ones defined in the server namespace.
@@ -672,7 +672,7 @@ opt-in.
 
 To enable automation proxy injection for a namespace, you must enable the
 `linkerd.io/inject` annotation on either the namespace or the pod spec. For more
-details, see the [Automatic Proxy Injection](/2/features/proxy-injection/) doc.
+details, see the [Automatic Proxy Injection](../../features/proxy-injection/) doc.
 
 #### A note about application updates
 
@@ -802,7 +802,7 @@ Server version: {{% latestversion %}}
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](/2/observability/exporting-metrics/)
+[persistence documentation](../../observability/exporting-metrics/)
 {{< /note >}}
 
 ### Upgrade the 2.2.x data plane

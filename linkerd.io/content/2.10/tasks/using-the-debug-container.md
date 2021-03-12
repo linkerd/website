@@ -10,7 +10,7 @@ underlying network? Sometimes, nothing beats looking at raw network data.
 In cases where you need network-level visibility into packets entering and
 leaving your application, Linkerd provides a *debug sidecar* with some helpful
 tooling. Similar to how [proxy sidecar
-injection](/2.10/features/proxy-injection/) works, you add a debug sidecar to
+injection](../../features/proxy-injection/) works, you add a debug sidecar to
 a pod by setting the `config.linkerd.io/enable-debug-sidecar: "true"` annotation
 at pod creation time. For convenience, the `linkerd inject` command provides an
 `--enable-debug-sidecar` option that does this annotation for you.
@@ -27,7 +27,7 @@ incoming and outgoing traffic with `tshark`, which can then be viewed with
 container and run commands directly.
 
 For instance, if you've gone through the [Linkerd Getting
-Started](https://linkerd.io/2.10/getting-started/) guide and installed the
+Started](https://linkerd.io../../getting-started/) guide and installed the
 *emojivoto* application, and wish to debug traffic to the *voting* service, you
 could run:
 
@@ -99,4 +99,4 @@ Connection reset by peer (os error 104)
 
 Of course, these examples only work if you have the ability to `exec` into
 arbitrary containers in the Kubernetes cluster. See [`linkerd
-tap`](/2.10/reference/cli/viz/#tap) for an alternative to this approach.
+tap`](../../reference/cli/viz/#tap) for an alternative to this approach.

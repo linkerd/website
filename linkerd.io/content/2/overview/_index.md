@@ -23,15 +23,15 @@ developed in the open in the [Linkerd GitHub organization](https://github.com/li
 Linkerd has three basic components: a UI, a *data plane*, and a *control
 plane*. You run Linkerd by:
 
-1. [Installing the CLI on your local system](/2/getting-started/#step-1-install-the-cli);
-1. [Installing the control plane into your cluster](/2/getting-started/#step-3-install-linkerd-onto-the-cluster);
-1. [Adding your services to Linkerd's data plane](/2/tasks/adding-your-service/).
+1. [Installing the CLI on your local system](../getting-started/#step-1-install-the-cli);
+1. [Installing the control plane into your cluster](../getting-started/#step-3-install-linkerd-onto-the-cluster);
+1. [Adding your services to Linkerd's data plane](../tasks/adding-your-service/).
 
 Once a service is running with Linkerd, you can use [Linkerd's
-UI](/2/getting-started/#step-4-explore-linkerd) to inspect and
+UI](../getting-started/#step-4-explore-linkerd) to inspect and
 manipulate it.
 
-You can [get started](/2/getting-started/) in minutes!
+You can [get started](../getting-started/) in minutes!
 
 ## How it works
 
@@ -58,6 +58,6 @@ Linkerd is currently published in several tracks:
 
 ## Next steps
 
-[Get started with Linkerd](/2/getting-started/) in minutes, or check out the
-[architecture](/2/reference/architecture/) for more details on Linkerd's
+[Get started with Linkerd](../getting-started/) in minutes, or check out the
+[architecture](../reference/architecture/) for more details on Linkerd's
 components and how they all fit together.
