@@ -2,7 +2,7 @@
 title = "Adding Your Services to Linkerd"
 description = "Add your services to the mesh."
 aliases = [
-  "../../adding-your-service/",
+  "../adding-your-service/",
   "../automating-injection/"
 ]
 +++

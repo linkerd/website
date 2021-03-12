@@ -2,7 +2,7 @@
 title = "Upgrading Linkerd"
 description = "Upgrade Linkerd to the latest version."
 aliases = [
-  "../../upgrade/",
+  "../upgrade/",
   "/2/update/"
 ]
 +++

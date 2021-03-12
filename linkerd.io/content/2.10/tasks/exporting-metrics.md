@@ -2,9 +2,9 @@
 title = "Exporting Metrics"
 description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
 aliases = [
-  "../../prometheus/",
-  "../../observability/prometheus/",
-  "../../observability/exporting-metrics/"
+  "../prometheus/",
+  "../observability/prometheus/",
+  "../observability/exporting-metrics/"
 ]
 +++
 
