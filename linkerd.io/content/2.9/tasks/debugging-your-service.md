@@ -2,8 +2,7 @@
 title = "Debugging gRPC applications with request tracing"
 description = "Follow a long-form example of debugging a failing gRPC application using live request tracing."
 aliases = [
-  "/debugging-an-app/",
-  "/2/debugging-an-app/"
+  "../debugging-an-app/"
 ]
 +++
 

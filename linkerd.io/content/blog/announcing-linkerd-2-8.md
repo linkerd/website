@@ -43,7 +43,7 @@ _thank you_ to [Arthur Silva Sens](https://github.com/ArthurSens),
 
 ## Multi-cluster Kubernetes the Kubernetes way
 
-Linkerd 2.8's new [multi-cluster feature](/2/features/multicluster/) means that
+Linkerd 2.8's new [multi-cluster feature](/2.10/features/multicluster/) means that
 Linkerd can now connect Kubernetes services across cluster boundaries in a way
 that's secure, fully transparent to the application, and independent of network
 topology. As discussed in our

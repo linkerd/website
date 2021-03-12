@@ -11,7 +11,7 @@ Note that this approach requires you to manually add and maintain additional
 scrape configuration in your Prometheus configuration.
 If you prefer to use the default Linkerd Prometheus add-on,
 you can export the metrics to your existing monitoring infrastructure
-following the instructions at <https://linkerd.io../exporting-metrics/>
+following [these instructions](../exporting-metrics/).
 {{< /note >}}
 
 This tutorial shows how to configure an external Prometheus instance to scrape both
@@ -175,4 +175,4 @@ Once applied, Helm makes sure that the configuration is
 persistent across upgrades.
 
 More information on installation through Helm can be found
-[here](https://linkerd.io../install-helm/index.html)
+[here](../install-helm/)

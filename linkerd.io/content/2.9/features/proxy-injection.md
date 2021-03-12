@@ -2,7 +2,7 @@
 title = "Automatic Proxy Injection"
 description = "Linkerd will automatically inject the data plane proxy into your pods based annotations."
 aliases = [
-  "/2/proxy-injection/"
+  "../proxy-injection/"
 ]
 +++
 
