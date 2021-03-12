@@ -74,17 +74,17 @@ Extensions can come from anywhere, and because these extensions fit into
 Linkerd's CLI, they "feel" just like the rest of Linkerd.
 
 Read more in the full [blog post on Linkerd
-Extensions](https://linkerd.io/2021/03/01/linkerd-2.10-and-extensions/).
+Extensions](/2021/03/01/linkerd-2.10-and-extensions/).
 
 ## Seamless, secure multi-cluster for all TCP connections
 
 Multi-cluster support, [introduced in Linkerd
-2.8](https://linkerd.io/2020/06/09/announcing-linkerd-2.8/), allows Linkerd to
-connect Kubernetes services across cluster boundaries in a way that's secure,
-fully transparent to the application, and independent of the topology of the
-underlying network. However, this functionality was restricted to HTTP
-connections only—until now. With Linkerd 2.10, [Linkerd's multi-cluster
-feature](https://linkerd.io/2/features/multicluster/) now extends to all TCP
+2.8](/2020/06/09/announcing-linkerd-2.8/), allows Linkerd to connect Kubernetes
+services across cluster boundaries in a way that's secure, fully transparent to
+the application, and independent of the topology of the underlying network.
+However, this functionality was restricted to HTTP connections only—until now.
+With Linkerd 2.10, [Linkerd's multi-cluster
+feature](/2.10/features/multicluster/) now extends to all TCP
 connections, with the same guarantees of security and transparency that Linkerd
 provides for pod-to-pod communication.
 
@@ -105,7 +105,7 @@ transparent mTLS and instrumentation in situations where it was previously
 unable to handle.
 
 Read more in the full blog post on [opaque ports in
-Linkerd](https://linkerd.io/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/).
+Linkerd](/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/).
 
 ## And lots more!
 
@@ -144,7 +144,7 @@ Linkerd](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-e
 **Giant Swarm**, **PlexTrac**, and **Mythical Games** have joined **HP**,
 **H-E-B**, **Microsoft**, **Clover Health**, **Mercedes Benz**, **Subspace**,
 and many more as recent adopters of Linkerd. The newly-formed [Linkerd Steering
-Committee](https://linkerd.io/2021/01/28/announcing-the-linkerd-steering-committee/),
+Committee](/2021/01/28/announcing-the-linkerd-steering-committee/),
 comprising production users who operate Linkerd at scale, is actively
 delivering feedback and guidance to maintainers. Finally, Linkerd was named
 [the Best Open Source DevOps Tool of
@@ -161,25 +161,23 @@ they resonate with you as well.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
-these features in action. Either way, you can download the stable 2.10 release
-by running:
+our [weekly edge releases](/edge/) will already have seen these features
+in action. Either way, you can download the stable 2.10 release by running:
 
 `curl https://run.linkerd.io/install | sh`
 
 Using Helm? See our [guide to installing Linkerd with
-Helm](https://linkerd.io/2/tasks/install-helm/). Upgrading from an earlier
-release? We've got you covered: see our [Linkerd upgrade
-guide](https://linkerd.io/2/tasks/upgrade/) for how to use the `linkerd
-upgrade` command.
+Helm](/2.10/tasks/install-helm/). Upgrading from an earlier release? We've got
+you covered: see our [Linkerd upgrade guide](/2.10/tasks/upgrade/) for how to
+use the `linkerd upgrade` command.
 
 ## Linkerd is for everyone
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
-If you have feature requests, questions, or comments, we'd love to have you
-join our rapidly-growing community! Linkerd is hosted on
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/) If you have
+feature requests, questions, or comments, we'd love to have you join our
+rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/2.10/get-involved/). Come and join the fun!
