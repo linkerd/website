@@ -52,8 +52,8 @@ repo](https://github.com/linkerd/linkerd2-proxy).
 
 Linkerd is currently published in several tracks:
 
-* [Linkerd 2.x stable releases](/2/edge/)
-* [Linkerd 2.x edge releases.](/2/edge/)
+* [Linkerd 2.x stable releases](/edge/)
+* [Linkerd 2.x edge releases.](/edge/)
 * [Linkerd 1.x.](/1/overview/)
 
 ## Next steps
