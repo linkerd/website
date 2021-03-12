@@ -163,4 +163,4 @@ Once applied, Helm makes sure that the configuration is
 persistent across upgrades.
 
 More information on installation through Helm can be found
-[here](../install-helm)
+[here](../install-helm/)
