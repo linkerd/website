@@ -8,7 +8,7 @@ explanation of what you get and how it is done, we've assembled a [list of
 myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
 
 This guide will walk you through configuring and enabling tracing for
-[emojivoto](/2/getting-started/#step-5-install-the-demo-app). Jump to the end
+[emojivoto](../../getting-started/#step-5-install-the-demo-app). Jump to the end
 for some recommendations on the best way to make use of distributed tracing with
 Linkerd.
 
@@ -28,7 +28,7 @@ topology that looks like:
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't
+  Follow the [Installing Linkerd Guide](../install/) if you haven't
   already done this.
 
 ## Install Trace Collector & Jaeger
@@ -104,7 +104,7 @@ kubectl -n linkerd rollout status deploy/linkerd-jaeger
  ```
 
 It is possible to use `linkerd inject` to add the proxy to emojivoto as outlined
-in [getting started](/2/getting-started/). Alternatively, annotations can do the
+in [getting started](../../getting-started/). Alternatively, annotations can do the
 same thing. You can patch these onto the running application with:
 
 ```bash

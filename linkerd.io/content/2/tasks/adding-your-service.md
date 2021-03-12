@@ -2,8 +2,8 @@
 title = "Adding Your Services to Linkerd"
 description = "Add your services to the mesh."
 aliases = [
-  "/2/adding-your-service/",
-  "/2/tasks/automating-injection/"
+  "../../adding-your-service/",
+  "../automating-injection/"
 ]
 +++
 
@@ -13,10 +13,10 @@ This is typically done by annotating the namespace, deployment, or pod with the
 `linkerd.io/inject: enabled` Kubernetes annotation. This annotation triggers
 *automatic proxy injection* when the resources are created.
 (See the [proxy injection
-page](/2/features/proxy-injection/) for more on how this works.)
+page](../../features/proxy-injection/) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
-inject`](/2/reference/cli/inject/) text transform command will add this
+inject`](../../reference/cli/inject/) text transform command will add this
 annotation to a given Kubernetes manifest. Of course, these annotations can be
 set by any other mechanism.
 
@@ -45,7 +45,7 @@ in the correct places, then applies it to the cluster.
 
 Once your services have been added to the mesh, you will be able to query
 Linkerd for traffic metrics about them, e.g. by using [`linkerd
-stat`](/2/reference/cli/stat/):
+stat`](../../reference/cli/stat/):
 
 ```bash
 linkerd stat deployments -n MYNAMESPACE
@@ -69,7 +69,7 @@ MYCONTAINER linkerd-proxy
 
 Finally, you can verify that everything is working by verifying that the
 corresponding resources are reported to be meshed in the "Meshed" column of the
-[Linkerd dashboard](/2/features/dashboard/).
+[Linkerd dashboard](../../features/dashboard/).
 
 {{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
 
@@ -88,7 +88,7 @@ allowing your application to successfully complete initializations.
 
 For more information on how the inject command works and all of the parameters
 that can be set, see the [`linkerd inject` reference
-page](/2/reference/cli/inject/).
+page](../../reference/cli/inject/).
 
 For details on how autoinjection works, see the the [proxy injection
-page](/2/features/proxy-injection/).
+page](../../features/proxy-injection/).

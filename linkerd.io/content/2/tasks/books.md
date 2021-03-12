@@ -24,7 +24,7 @@ topology looks like this:
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster.
-Follow the [Installing Linkerd Guide](/2/tasks/install/) if you haven't already
+Follow the [Installing Linkerd Guide](../install/) if you haven't already
 done this.
 
 ## Install the app
@@ -96,7 +96,7 @@ namespace, runs them through `linkerd inject`, and then re-applies with
 specify that they should have the Linkerd data plane proxies added, and
 Kubernetes does this when the manifest is reapplied to the cluster. Best of
 all, since Kubernetes does a rolling deploy, the application stays running the
-entire time. (See [Automatic Proxy Injection](/2/features/proxy-injection/) for
+entire time. (See [Automatic Proxy Injection](../../features/proxy-injection/) for
 more details on how this works.)
 
 ## Debugging
@@ -155,7 +155,7 @@ you know exactly where to look in the code.
 
 To understand the root cause, we used live traffic. For some issues this is
 great, but what happens if the issue is intermittent and happens in the middle of
-the night? [Service profiles](/2/features/service-profiles/) provide Linkerd
+the night? [Service profiles](../../features/service-profiles/) provide Linkerd
 with some additional information about your services. These define the routes
 that you're serving and, among other things, allow for the collection of metrics
 on a per route basis. With Prometheus storing these metrics, you'll be able to
@@ -272,8 +272,8 @@ As you can see:
 - `:path` correctly matches
 - `rt_route` contains the name of the route
 
-These metrics are part of the [`linkerd routes`](/2/reference/cli/routes/)
-command instead of [`linkerd stat`](/2/reference/cli/stat/). To see the metrics
+These metrics are part of the [`linkerd routes`](../../reference/cli/routes/)
+command instead of [`linkerd stat`](../../reference/cli/stat/). To see the metrics
 that have accumulated so far, run:
 
 ```bash

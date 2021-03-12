@@ -10,7 +10,7 @@ can be run with your Ingress Controller.
 
 When the ingress controller is injected with the `linkerd.io/inject: enabled`
 annotation, the Linkerd proxy will honor load balancing decisions made by the
-ingress controller instead of applying [its own EWMA load balancing](https://linkerd.io/2.10/features/load-balancing/).
+ingress controller instead of applying [its own EWMA load balancing](https://linkerd.io../../features/load-balancing/).
 This also means that the Linkerd proxy will not use Service Profiles for this
 traffic and therefore will not expose per-route metrics or do traffic splitting.
 
@@ -86,7 +86,7 @@ If a string value is encountered, Linkerd will default to using port 80.
 ### Nginx
 
 This uses `emojivoto` as an example, take a look at
-[getting started](/2.10/getting-started/) for a refresher on how to install it.
+[getting started](../../getting-started/) for a refresher on how to install it.
 
 The sample ingress definition is:
 
@@ -214,7 +214,7 @@ spec:
 ### Traefik
 
 This uses `emojivoto` as an example, take a look at
-[getting started](/2.10/getting-started/) for a refresher on how to install it.
+[getting started](../../getting-started/) for a refresher on how to install it.
 
 The simplest way to use Traefik as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
@@ -325,7 +325,7 @@ spec:
 ### GCE
 
 This example is similar to Traefik, and also uses `emojivoto` as an example.
-Take a look at [getting started](/2.10/getting-started/) for a refresher on how to
+Take a look at [getting started](../../getting-started/) for a refresher on how to
 install it.
 
 In addition to the custom headers found in the Traefik example, it shows how to
@@ -366,7 +366,7 @@ certificate is provisioned, the ingress should be visible to the Internet.
 ### Ambassador
 
 This uses `emojivoto` as an example, take a look at
-[getting started](/2.10/getting-started/) for a refresher on how to install it.
+[getting started](../../getting-started/) for a refresher on how to install it.
 
 Ambassador does not use `Ingress` resources, instead relying on `Service`. The
 sample service definition is:
@@ -434,7 +434,7 @@ curl -H "Host: example.com" http://external-ip
 ### Gloo
 
 This uses `books` as an example, take a look at
-[Demo: Books](/2.10/tasks/books/) for instructions on how to run it.
+[Demo: Books](../books/) for instructions on how to run it.
 
 If you installed Gloo using the Gateway method (`gloo install gateway`), then
 you'll need a VirtualService to be able to route traffic to your **Books**
@@ -619,12 +619,12 @@ Kong doesn't support the header `l5d-dst-override` automatically.
 This documentation will use the following elements:
 
 - [Kong](https://github.com/Kong/charts)
-- [Emojivoto](/2.10/getting-started/)
+- [Emojivoto](../../getting-started/)
 
 Before installing the Emojivoto demo application, install Linkerd and Kong on
 your cluster. Remember when injecting the Kong deployment to use the `--ingress`
 flag (or annotation) as mentioned
-[above](https://linkerd.io/2.10/tasks/using-ingress/#proxy-ingress-mode)!
+[above](https://linkerd.io../using-ingress/#proxy-ingress-mode)!
 
 We need to declare these objects as well:
 

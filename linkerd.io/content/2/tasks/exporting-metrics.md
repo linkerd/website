@@ -3,8 +3,8 @@ title = "Exporting Metrics"
 description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
 aliases = [
   "/2/prometheus/",
-  "/2/observability/prometheus/",
-  "/2/observability/exporting-metrics/"
+  "../../observability/prometheus/",
+  "../../observability/exporting-metrics/"
 ]
 +++
 
@@ -97,7 +97,7 @@ metrics from Linkerd's internal Prometheus instance.
 Once the metrics are in your Prometheus, Linkerd's proxy metrics will have the
 label `job="linkerd-proxy"` and Linkerd's control plane metrics will have the
 label `job="linkerd-controller"`. For more information on specific metric and
-label definitions, have a look at [Proxy Metrics](/2/reference/proxy-metrics/).
+label definitions, have a look at [Proxy Metrics](../../reference/proxy-metrics/).
 
 For more information on Prometheus' `/federate` endpoint, have a look at the
 [Prometheus federation docs](https://prometheus.io/docs/prometheus/latest/federation/).

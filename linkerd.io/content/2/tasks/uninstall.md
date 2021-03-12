@@ -9,7 +9,7 @@ data plane proxies, and then removing the control plane.
 ## Removing Linkerd data plane proxies
 
 To remove the Linkerd data plane proxies, you should remove any [Linkerd proxy
-injection annotations](/2/features/proxy-injection/) and roll the deployments.
+injection annotations](../../features/proxy-injection/) and roll the deployments.
 When Kubernetes recreates the pods, they will not have the Linkerd data plane
 attached.
 
@@ -19,7 +19,7 @@ attached.
 Uninstallating the control plane requires cluster-wide permissions.
 {{< /note >}}
 
-To remove the [control plane](/2/reference/architecture/#control-plane), run:
+To remove the [control plane](../../reference/architecture/#control-plane), run:
 
 ```bash
 linkerd uninstall | kubectl delete -f -

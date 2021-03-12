@@ -12,10 +12,10 @@ best practices to enable this introspection in a secure way.
 The default Linkerd installation includes Tap support. This feature is available
 via the following commands:
 
-- [`linkerd tap`](/2/reference/cli/tap/)
-- [`linkerd top`](/2/reference/cli/top/)
-- [`linkerd profile --tap`](/2/reference/cli/profile/)
-- [`linkerd dashboard`](/2/reference/cli/dashboard/)
+- [`linkerd tap`](../../reference/cli/tap/)
+- [`linkerd top`](../../reference/cli/top/)
+- [`linkerd profile --tap`](../../reference/cli/profile/)
+- [`linkerd dashboard`](../../reference/cli/dashboard/)
 
 Depending on your RBAC setup, you may need to perform additional steps to enable
 your user(s) to perform Tap actions.
@@ -165,7 +165,7 @@ Not recommended for production, only do this for testing/development.
 
 ### Linkerd Dashboard tap access
 
-By default, the [Linkerd dashboard](/2/features/dashboard/) has the RBAC
+By default, the [Linkerd dashboard](../../features/dashboard/) has the RBAC
 privileges necessary to tap resources.
 
 To confirm:

@@ -4,7 +4,7 @@ description = "Use cert-manager to automatically rotate control plane TLS creden
 aliases = [ "use_external_certs" ]
 +++
 
-Linkerd's [automatic mTLS](/2/features/automatic-mtls/) feature uses a set of
+Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature uses a set of
 TLS credentials to generate TLS certificates for proxies: a trust anchor, and
 an issuer certificate and private key. While Linkerd automatically rotates the
 TLS certificates for data plane proxies every 24 hours, it does not rotate the
@@ -13,7 +13,7 @@ how to automatically rotate the issuer certificate and private key, by using
 an external solution.
 
 (Note that Linkerd's trust anchor [must still be manually
-rotated](/2/tasks/manually-rotating-control-plane-tls-credentials/) on
+rotated](../manually-rotating-control-plane-tls-credentials/) on
 long-lived clusters.)
 
 ## Cert manager
@@ -213,5 +213,5 @@ In Helm v3, It has been deprecated, and is the first argument as
 {{< /note >}}
 
 See [Automatically Rotating Webhook TLS
-Credentials](/2/tasks/automatically-rotating-webhook-tls-credentials/) for how
+Credentials](../automatically-rotating-webhook-tls-credentials/) for how
 to do something similar for webhook TLS credentials.
