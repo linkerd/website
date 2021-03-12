@@ -1,8 +1,15 @@
+{{ $docsVersion := index (split .page.URL "/") 1 }}
 <div class="">
   <nav class="navbar" role="navigation" aria-label="dropdown navigation">
     <div class="navbar-item has-dropdown is-hoverable ">
       <a class="navbar-link">
+        {{ if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") }}
         Linkerd 2.9
+        {{ else }}
+        {{/* have non-versioned docs pull sidebar from 2.10 docs */}}
+        {{ $docsVersion = "2.10" }}
+        Linkerd 2.10
+        {{ end }}
       </a>
       <div class="navbar-dropdown">
         <div class="navbar-item">
@@ -26,7 +33,7 @@
   <aside class="menu">
     <ul class="menu-list is-paddingless is-marginless">
       {{ $currentPage := .page }}
-      {{ range sort (site.GetPage "/2").Sections "Params.weight" "asc" }}
+      {{ range sort (site.GetPage (print "/" $docsVersion)).Sections "Params.weight" "asc" }}
       {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
 
       <li class="menu-list-item {{ if $sectionActive }}is-active{{ end }}">
@@ -47,6 +54,28 @@
         </ul>
       </li>
       {{ end }}
+    </ul>
+    <ul class="menu-list is-paddingless is-marginless">
+      <li class="menu-list-item {{ if eq $currentPage.URL "/faq/" }}is-active{{ end }}">
+        <a href="/faq/">
+          Frequently Asked Questions
+        </a>
+      </li>
+      <li class="menu-list-item {{ if eq $currentPage.URL "/edge/" }}is-active{{ end }}">
+        <a href="/edge/">
+          Release Channels
+        </a>
+      </li>
+      <li class="menu-list-item {{ if eq $currentPage.URL "/design-principles/" }}is-active{{ end }}">
+        <a href="/design-principles/">
+          Design Principles
+        </a>
+      </li>
+      <li class="menu-list-item {{ if eq $currentPage.URL "/going-to-production/" }}is-active{{ end }}">
+        <a href="/going-to-production/">
+          Going to Production
+        </a>
+      </li>
     </ul>
   </aside>
 
