@@ -2,7 +2,7 @@
 title = "Architecture"
 description = "Deep dive into the architecture of Linkerd."
 aliases = [
-  "/2/architecture/"
+  "../architecture/"
 ]
 +++
 
