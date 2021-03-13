@@ -44,15 +44,18 @@ If you're working with a protocol that can't be automatically recognized by
 Linkerd, you will need to set the `config.linkerd.io/opaque-ports` annotation on
 both the Pod template spec of the workload and on the Service.  This annotation
 tells Linkerd to skip protocol detection and immediately treat connections on
-those ports as opaque TCP.  
+those ports as opaque TCP.
 
 Setting this annotation on the Service resource tells meshed clients to skip
-protocol detection when proxying connections on those ports to the Service.
-Similarly, setting this annotation on the Pod template spec tells Linkerd to skip
-protocol detection when reverse-proxying incoming connections on those ports.
-This means that it is still important to set this annotation on Services that use
+protocol detection when proxying connections to the Service on those ports. This
+means that it is still important to set this annotation on Services that use
 server-speaks-first protocols if they have any meshed clients, even if that
 Service itself is not meshed.
+
+Similarly, setting this annotation on the Pod template spec tells meshed clients
+to skip protocol detection for connectins established directly to that Pod.
+Furthermore, this also tells Linkerd to skip protocol detection when
+reverse-proxying incoming connections on those ports.
 
 This annotation can easily be set on both Pod template specs and Services by
 using the `--opaque-ports` flag when running `linkerd inject`.
