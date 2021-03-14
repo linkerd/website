@@ -323,21 +323,25 @@ spec:
 ```
 
 {{< note >}}
-The official Traefik [helm chart](https://github.com/traefik/traefik-helm-chart) creates
-a websecure entrypoint on port `8443` to handle TLS traffic but exposes it using a service on
-port `443`. Because the linkerd-proxy operates on a pod level and not a service level, the default
-set of opaque ports will not work as it does not include port `8443`. This results in protocol
-detection timeouts visible in the linkerd-proxy container logs. You could tell the traefik container
-to listen on the actual port `443` but since that container runs as *non-root* the traefik
-process has no privileges to open ports below `1024`. Adding port `8443` to the opaque ports
-will restore functionality, just remember that setting opaque ports will remove the defaults.
-You can add this in the `values.yaml` file like this:
+The official Traefik [helm chart](https://github.com/traefik/traefik-helm-chart)
+creates a websecure entrypoint on port `8443` to handle TLS traffic but exposes
+it using a service on port `443`. Because the linkerd-proxy operates on a pod
+level and not a service level, the default set of opaque ports will not work as
+it does not include port `8443`. This results in protocol detection timeouts
+visible in the linkerd-proxy container logs. You could tell the traefik
+container to listen on the actual port `443` but since that container runs as
+*non-root* the traefik process has no privileges to open ports below `1024`.
+Adding port `8443` to the opaque ports will restore functionality, just remember
+that setting opaque ports will remove the defaults. You can add this in the
+`values.yaml` file like this:
+
 ```yaml
 deployment:
   podAnnotations:
     linkerd.io/inject: enabled
     config.linkerd.io/opaque-ports: "8443"
 ```
+
 {{< /note >}}
 
 ### GCE
