@@ -13,9 +13,8 @@ jobs:
       image: buoyantio/website-builder:v1.3.2
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
         with:
-          version: 12
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Lint markdown
         run: |
           make lint
