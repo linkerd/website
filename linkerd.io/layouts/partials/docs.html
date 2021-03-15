@@ -3,7 +3,11 @@
   <div class="columns is-fullwidth is-gapless is-tablet">
     <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile is-narrow-tablet">
       <div class="docs-sidebar">
-        {{ partial (printf "%s/%s" $docsVersion "sidebar") . }}
+        {{ if eq $docsVersion "1" }}
+          {{ partial "1/sidebar" . }}
+        {{ else }}
+          {{ partial "sidebar-2" . }}
+        {{ end }}
       </div>
     </div>
     <div class="column has-background-white docs-content is-paddingless ">
@@ -21,7 +25,7 @@
               <a href="/2.10/overview/">Linkerd 2.x (current) documentation</a> instead.
             </div>
            </div>
-        {{ else if ne $docsVersion "2.10" }}
+        {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") }}
           <div class="message">
             <div class="message-header">
               This is not the latest version
