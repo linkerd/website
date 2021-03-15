@@ -21,20 +21,3 @@ jobs:
       - name: Lint html and check for dead links
         run: |
           make check
-
-  linkerd_seo:
-    name: Validate generated HTML
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Markdown SEO Check
-        uses: zentered/markdown-seo-check@v1.1.0
-        with:
-          includes: '/linkerd.io/content/**/*.md'
-          max_title_length: 70
-          max_description_length: 150
-          max_slug_length: 100
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
