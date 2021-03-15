@@ -12,9 +12,10 @@ jobs:
     container:
       image: buoyantio/website-builder:v1.3.2
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          version: 12
       - name: Lint markdown
         run: |
           make lint
