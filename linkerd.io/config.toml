@@ -73,7 +73,7 @@ parent = "community"
 identifier = "community-adopters"
 name = "Adopters"
 url = "/community/adopters/"
-weight = 3
+weight = 4
 parent = "community"
 [[menu.top]]
 identifier = "blog"
@@ -83,7 +83,7 @@ weight = 3
 [[menu.top]]
 identifier = "faq"
 name = "FAQ"
-url = "/2/faq/"
+url = "/faq/"
 weight = 4
 [[menu.top]]
 identifier = "github"
@@ -96,7 +96,7 @@ identifier = "start"
 name = "GET STARTED"
 post = "</span>"
 pre = "<span class='button-spacer'>"
-url = "/2/getting-started/"
+url = "/2.10/getting-started/"
 weight = 6
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
