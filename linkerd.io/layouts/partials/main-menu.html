@@ -18,7 +18,7 @@
           <button class="dropdown-item back has-text-bright-blue">< Back</button>
           <div class="dropdown-content">
             {{ range .Children }}
-              <a href="{{ .URL }}" class="dropdown-item py-3 has-text-color is-uppercase is-family-secondary has-text-weight-bold{{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
+              <a href="{{ .URL }}" class="dropdown-item py-3 has-text-color is-uppercase is-family-secondary {{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
                 <span class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span>
               </a>  
             {{ end }}

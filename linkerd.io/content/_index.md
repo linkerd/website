@@ -9,7 +9,7 @@ top_hero:
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
-    url: "/2/getting-started/"
+    url: "/2.10/getting-started/"
   - caption: Get Involved
     url: "/community/get-involved/"
   image_on_the_right: false
@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
+  description: "**2021-03-11** Announcing Linkerd 2.10! [Read more »](/2021/03/11/announcing-linkerd-2.10/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
