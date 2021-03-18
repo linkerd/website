@@ -31,7 +31,7 @@
           <ul>
             {{ range .page.Params.faqs}}
               <li>
-                <a href="#{{ .question | urlize }}">{{ .question }}</a>
+                <a href="#{{ .question | anchorize }}">{{ .question }}</a>
               </li>
             {{ end}}
           </ul>
