@@ -7,4 +7,4 @@ Thursday at 9 am PDT / 5 pm UTC we will be holding our [March community meeting]
 
 Register for meetup: [https://community.cncf.io/events/details/cncf-linkerd-community-presents-march-linkerd-online-community-meetup/](https://community.cncf.io/events/details/cncf-linkerd-community-presents-march-linkerd-online-community-meetup/)
 
-Vote for MArch’s Linkerd Hero: [https://docs.google.com/forms/d/e/1FAIpQLScXwgZpLsVW0SQNKtUgVOgEdL2fD9tYNbMB61bV7LAoghnJow/viewform?usp=sf_link](https://docs.google.com/forms/d/e/1FAIpQLScXwgZpLsVW0SQNKtUgVOgEdL2fD9tYNbMB61bV7LAoghnJow/viewform?usp=sf_link)
+Vote for March’s Linkerd Hero: [https://docs.google.com/forms/d/e/1FAIpQLScXwgZpLsVW0SQNKtUgVOgEdL2fD9tYNbMB61bV7LAoghnJow/viewform?usp=sf_link](https://docs.google.com/forms/d/e/1FAIpQLScXwgZpLsVW0SQNKtUgVOgEdL2fD9tYNbMB61bV7LAoghnJow/viewform?usp=sf_link)
