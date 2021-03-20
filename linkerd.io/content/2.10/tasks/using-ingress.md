@@ -327,7 +327,7 @@ spec:
 The linkerd-proxy will try to detect what protocol it is dealing with. But in
 the case of TLS encrypted traffic or protocols where the server "speaks first"
 it will not be able to detect it and after 10 seconds it will give up.
-See ["this page"](./upgrading-2.10-ports-and-protocols.md) for more information.
+See [this page](./upgrading-2.10-ports-and-protocols/) for more information.
 
 To help with this the concept of *opaque ports* has been introduced. With the
 annotation called `config.linkerd.io/opaque-ports`, the linkerd-proxy can be
