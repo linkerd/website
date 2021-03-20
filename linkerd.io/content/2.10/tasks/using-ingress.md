@@ -323,23 +323,50 @@ spec:
 ```
 
 {{< note >}}
+
+The linkerd-proxy will try to detect what protocol it is dealing with. But in
+the case of TLS encrypted traffic or protocols where the server "speaks first"
+it will not be able to detect it and after 10 seconds it will give up.
+See ["this page"](./upgrading-2.10-ports-and-protocols.md) for more information.
+
+To help with this the concept of *opaque ports* has been introduced. With the
+annotation called `config.linkerd.io/opaque-ports`, the linkerd-proxy can be
+told that certain ports should be treated as opaque and to not try to do protocol
+detection on them. To avoid having to set this on every service that serves for
+example TLS, a set of default ports will always be treated as opaque. This
+includes the default HTTPS TLS port `443`.
+
 The official Traefik [helm chart](https://github.com/traefik/traefik-helm-chart)
-creates a websecure entrypoint on port `8443` to handle TLS traffic but exposes
-it using a service on port `443`. Because the linkerd-proxy operates on a pod
-level and not a service level, the default set of opaque ports will not work as
-it does not include port `8443`. This results in protocol detection timeouts
-visible in the linkerd-proxy container logs. You could tell the traefik
-container to listen on the actual port `443` but since that container runs as
-*non-root* the traefik process has no privileges to open ports below `1024`.
-Adding port `8443` to the opaque ports will restore functionality, just remember
-that setting opaque ports will remove the defaults. You can add this in the
-`values.yaml` file like this:
+creates a `websecure` entrypoint on port `8443` in the container to handle TLS
+traffic. This port gets exposed using a service on port `443`. Because the
+linkerd-proxy operates on a pod level and not a service level, the default set
+of opaque ports will not work as it does not include port `8443`. This results
+in protocol detection timeouts visible in the linkerd-proxy container logs.
+
+One way of dealing with this is to tell traefik to listen on the actual port
+`443`. However since traefik in that container runs as *non-root* the traefik
+process has no privileges to open ports below `1024` so that will not work in
+this case.
+
+We can use the newly created `config.linkerd.io/opaque-ports` annotation to tell
+the linkerd-proxy to treat port `8443` as opaque and not perform protocol
+detection on it. You can add this in the chart's `values.yaml` file like this:
 
 ```yaml
 deployment:
   podAnnotations:
     linkerd.io/inject: enabled
     config.linkerd.io/opaque-ports: "8443"
+```
+
+The one caveat to remember is that when setting opaque ports using the
+annotation, the default set of ports we spoke of earlier will not be included
+for this deployment. So if your service would also need to talk to MySQL on port
+`3306`, which was included in the default set of ports, you would need to add it
+back in the list again as shown below.
+
+```yaml
+config.linkerd.io/opaque-ports: "3306,8443"
 ```
 
 {{< /note >}}
