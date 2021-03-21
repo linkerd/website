@@ -1,5 +1,10 @@
 +++
 title = "diagnostics"
+aliases = [
+  "endpoints",
+  "install-sp",
+  "metrics"
+]
 +++
 
 {{< cli-2-10/description "diagnostics" >}}

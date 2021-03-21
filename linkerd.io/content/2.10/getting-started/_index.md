@@ -182,7 +182,7 @@ to dig into what is going on with the control plane itself behind the scenes.
 In fact, you can run:
 
 ```bash
-linkerd -n linkerd viz top deploy/linkerd-web
+linkerd -n linkerd-viz viz top deploy/web
 ```
 
 This is the traffic you're generating by looking at the dashboard itself!
