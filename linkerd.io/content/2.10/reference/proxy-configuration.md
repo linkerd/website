@@ -3,8 +3,8 @@ title = "Proxy Configuration"
 description = "Linkerd provides a set of annotations that can be used to override the data plane proxy's configuration."
 +++
 
-Linkerd provides a set of annotations that can be used to override the data
-plane proxy's configuration. This is useful for overriding the default
+Linkerd provides a set of annotations that can be used to **override** the data
+plane proxy's configuration. This is useful for **overriding** the default
 configurations of [auto-injected proxies](../../features/proxy-injection/).
 
 The following is the list of supported annotations:
