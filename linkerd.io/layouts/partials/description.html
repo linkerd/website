@@ -1,10 +1,21 @@
-{{- if isset .Params "summary" -}}
-  {{ .Params.summary }}
+{{/* pages rendered with list template but should use first paragraph as description */}}
+{{$specialPages := "2.10,2.9,edgedesign-principles,going-to-production"}}
+{{$pagesArray := split ($specialPages) ","}}
+
+{{- if isset .Params "description" -}}
+{{ .Params.description }}
+{{- else if isset .Params "summary" -}}
+{{ .Params.summary }}
+{{- else if in $pagesArray .Type }}
+{{- $paragraphs := split .Plain "\n" -}}
+{{- range first 1 $paragraphs -}}
+{{ strings.TrimLeft " " . }}
+{{- end -}}
 {{- else if .IsPage -}}
 {{- $paragraphs := split .Plain "\n" -}}
 {{- range first 1 $paragraphs -}}
 {{ strings.TrimLeft " " . }}
 {{- end -}}
 {{- else -}}
-  {{site.Params.description}}
+{{site.Params.description}}
 {{- end -}}
