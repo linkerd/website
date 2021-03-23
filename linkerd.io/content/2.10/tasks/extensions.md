@@ -3,52 +3,62 @@ title = "Using Extensions"
 description = "Add functionality with extensions."
 +++
 
-Linkerd extensions are components which can be added to a Linkerd
-installation to enable addition functionality.  By default, the following
-extensions are available:
+Linkerd extensions are components which can be added to a Linkerd installation
+to enable additional functionality.  By default, the following extensions are
+available:
 
 * [Viz](/getting-started/): Metrics and visibility features
 * [Jaeger](../distributed-tracing/): Distributed tracing
 * [Multicluster](../multicluster/): Cross-cluster routing
 
-A Linkerd extension is made up of two parts: a CLI whose name must begin with
-`linkerd-` and a set of Kubernetes resources created by that CLI.  Every
-extension must create a Kubernetes namespace with the `linkerd.io/extension`
-label.  You can list all extensions installed on your cluster by running:
-
-```bash
-kubectl get ns -l linkerd.io/extension
-```
+But other extensions are also possible. Read on for more!
 
 ## Installing Extensions
 
-Before installing any extensions, make sure that you have already
-[installed Linkerd](../install/).  Validate your install by running:
+Before installing any extensions, make sure that you have already [installed
+Linkerd](../install/) and validated your cluster with `linkerd check`.
+
+Then, you can install the extension with the extension's `install` command. For
+example, to install the `viz` extension, you can use:
 
 ```bash
-linkerd check
+linkerd viz install | kubectl apply -f -
 ```
 
-The first step to installing an extension is to download the extension's CLI
-onto your local machine and put it on your path.  You can skip this step for
-the `viz`, `jaeger`, and `multicluster` extensions since
-they come bundled with the Linkerd CLI.  
+For built-in extensions, such as `viz`, `jaeger`, and `multicluster`, that's
+all you need to do. Of course, these extensions can also be installed by with
+Helm by installing that extension's Helm chart.
 
-This will allow you to invoke the extension CLI through the Linkerd CLI.  For
-example, running `linkerd foo` will execute `linkerd-foo` if it is found on your
-path.  To install the extension into your cluster, use the extension's install
-command:
+## Installing third-party extensions
+
+Third-party extensions are also possible, with one additional step: you must
+download the extension's CLI and put it in your path. This will allow you to
+invoke the extension CLI through the Linkerd CLI: any invocation of `linkerd
+foo` will automatically invoke the `linkerd-foo` binary, if it is found on your
+path).
+
+For example, [Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted
+metrics dashboard for Linkerd that can be installed alongside the `viz`
+extension, but doesn't require it. To install this extension, run:
 
 ```bash
-linkerd foo install | kubectl apply -f -
+## optional
+curl -sL buoyant.cloud/install | sh
+linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
 ```
-
-Extensions can also be installed by with Helm by installing that extension's
-Helm chart.
 
 Once the extension is installed, run `linkerd check` to ensure Linkerd and all
 installed extensions are healthy or run `linkerd foo check` to perform health
 checks for that extension only.
+
+## Listing Extensions
+
+Every extension creates a Kubernetes namespace with the `linkerd.io/extension`
+label. Thus, you can list all extensions installed on your cluster by running:
+
+```bash
+kubectl get ns -l linkerd.io/extension
+```
 
 ## Upgrading Extensions
 
@@ -60,8 +70,8 @@ of the extension CLI or with a different set of configuration flags.
 
 All extensions have an `uninstall` command that should be used to gracefully
 clean up all resources owned by an extension.  For example, to uninstall the
-foo extension run:
+foo extension, run:
 
 ```bash
-linkerd foo uninstall | k delete -f -
+linkerd foo uninstall | kubectl delete -f -
 ```
