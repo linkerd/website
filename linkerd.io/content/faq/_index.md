@@ -208,7 +208,7 @@ faqs:
   - question: How can I get involved?
     answer:
       We'd love to have your involvement! See our [Linkerd Community
-      page](/community/).
+      page](/community/get-involved/).
     answer_schema:
       We'd love to have your involvement! See our Linkerd Community page.
 ---

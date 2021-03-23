@@ -1,15 +1,8 @@
-The Linkerd maintainers are:
+The maintainers of the Linkerd website are the Linkerd maintainers listed in
+https://github.com/linkerd/linkerd2/blob/main/MAINTAINERS.md, plus:
 
-* Oliver Gould <ver@buoyant.io> @olix0r (super-maintainer)
-* Kevin Lingerfelt <kl@buoyant.io> @klingerf (super-maintainer)
-* Thomas Rampelberg <thomas@buoyant.io> @grampelberg: docs
+- Paul Michael Armstrong (@PaulMichaelArmstrong)
+- Charles Pretzer (@cpretzer)
+- William Morgan (@wmorgan)
 
-<!--
-# Adding a new maintainer
-
-* Submit a PR modifying this file
-* Add maintainer to .github/CODEOWNERS
-* Obtain approvals per GOVERNANCE.md
-* Invite maintainer to https://github.com/orgs/linkerd/teams/linkerd-maintainers/members
-* Invite maintainer to https://github.com/orgs/linkerd/people
--->
+If you'd like to become a maintainer, just come talk to us!

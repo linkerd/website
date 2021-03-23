@@ -1,5 +1,13 @@
 +++
 title = "viz"
+aliases = [
+  "dashboard",
+  "edges",
+  "routes",
+  "stat",
+  "tap",
+  "top"
+]
 +++
 
 {{< cli-2-10/description "viz" >}}
