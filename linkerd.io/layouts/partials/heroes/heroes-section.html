@@ -1,8 +1,12 @@
 <div class="wrapper py-6 has-background-light-grey">
-  <div class="container columns">
+  <div class="container columns is-multiline">
+    <div class="column is-12 has-text-centered">
+      <h2>{{ .title }}</h2>
+    </div>
     <div class="column is-12 is-10-desktop is-offset-1-desktop">
       <div class="columns column is-multiline">
-        {{ range . }}
+        {{ $badge := .badge}}
+        {{ range .heroes }}
         <div class="column is-6">
           <a href="{{ .github_url }}" target="_blank">
           <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-2 py-3">
@@ -14,8 +18,8 @@
               <p>{{.blurb}}</p>
               <p class="is-size-7">{{.date}}</p>
             </div>
-            <figure class="ml-auto is-align-self-flex-end is-flex-shrink-0">
-              <img src="/uploads/heroes-trophy.svg" alt=trophy>
+            <figure class="image is-48x48 ml-auto is-align-self-flex-end is-flex-shrink-0">
+              <img src="{{ $badge }}" alt=trophy>
             </figure>
           </div>
           </a>
