@@ -31,14 +31,14 @@ Linkerd cannot automatically recognize the protocol used on the connection.
 (Note that TLS-enabled connections work as normal, because TLS itself is a
 client-speaks-first protocol.)
 
-The following protocols are known to be server-speaks-first and are treated as
-opaque by default:
+The following protocols are known to be server-speaks-first or non-HTTP
+protocols and are treated as opaque by default:
 
-* 25   - SMTP
+* 25,587 - SMTP
+* 443 - HTTPS
 * 3306 - MySQL
-* 4222 - NATS
 * 5432 - PostgreSQL
-* 11211 - Memcached (clients do not issue any preamble, which breaks detection)
+* 11211 - Memcached: clients do not issue any preamble, which breaks detection
 
 If you're working with a protocol that can't be automatically recognized by
 Linkerd, you will need to set the `config.linkerd.io/opaque-ports` annotation on

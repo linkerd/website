@@ -22,12 +22,3 @@ jobs:
       - name: Lint html and check for dead links
         run: |
           make check
-
-      - name: Markdown SEO Check
-        uses: zentered/markdown-seo-check@v1.0.0
-        with:
-          max_title_length: 70
-          max_description_length: 150
-          max_slug_length: 100
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
