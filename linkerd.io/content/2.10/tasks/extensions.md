@@ -35,7 +35,7 @@ Third-party extensions are also possible, with one additional step: you must
 download the extension's CLI and put it in your path. This will allow you to
 invoke the extension CLI through the Linkerd CLI: any invocation of `linkerd
 foo` will automatically invoke the `linkerd-foo` binary, if it is found on your
-path).
+path.
 
 For example, [Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted
 metrics dashboard for Linkerd that can be installed alongside the `viz`
