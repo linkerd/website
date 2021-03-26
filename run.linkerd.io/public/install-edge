@@ -59,6 +59,18 @@ case $OS in
     OS=windows.exe
     ;;
   Darwin)
+    case $arch in
+      x86_64)
+        cli_arch=""
+        ;;
+      arm64)
+        cli_arch=$arch
+        ;;
+      *)
+        echo "There is no linkerd $OS support for $arch. Please open an issue with your platform details."
+        exit 1
+        ;;
+    esac
     ;;
   Linux)
     case $arch in
