@@ -160,9 +160,9 @@ spec:
   issuerRef:
     name: webhook-issuer
     kind: Issuer
-  commonName: tap.linkerd.svc
+  commonName: tap.linkerd-viz.svc
   dnsNames:
-  - tap.linkerd.svc
+  - tap.linkerd-viz.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
@@ -182,9 +182,9 @@ spec:
   issuerRef:
     name: webhook-issuer
     kind: Issuer
-  commonName: tap-injector.linkerd.svc
+  commonName: tap-injector.linkerd-viz.svc
   dnsNames:
-  - tap-injector.linkerd.svc
+  - tap-injector.linkerd-viz.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
