@@ -9,6 +9,6 @@ featured = false
 
 +++
 
-In this video, Linkerd maintainer Alex Leong walks through installing and using Linkerd. Along the way you'll learn what a service mesh is, how to install Linkerd, and add a Kubenetes application to a service mesh.
+In this video, Linkerd maintainer Alex Leong walks through installing and using Linkerd. Along the way you'll learn what a service mesh is, how to install Linkerd, and add a Kubernetes application to a service mesh.
 
 {{< youtube "xo9Tq2UNKfM" >}}
