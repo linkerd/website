@@ -37,7 +37,7 @@ incrementally sending users over to the new version. To add Flagger to your
 cluster and have it configured to work with Linkerd, run:
 
 ```bash
-kubectl apply -k github.com/weaveworks/flagger/kustomize/linkerd
+kubectl apply -k github.com/fluxcd/flagger/kustomize/linkerd
 ```
 
 This command adds:
@@ -300,6 +300,6 @@ To cleanup, remove the Flagger controller from your cluster and delete the
 `test` namespace by running:
 
 ```bash
-kubectl delete -k github.com/weaveworks/flagger/kustomize/linkerd && \
+kubectl delete -k github.com/fluxcd/flagger/kustomize/linkerd && \
   kubectl delete ns test
 ```
