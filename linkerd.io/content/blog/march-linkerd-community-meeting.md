@@ -13,7 +13,9 @@ Missed the last Linkerd Community Meeting? No worries. Here’s a  recap plus th
 
 ## News & updates
 
-Linkerd 2.10 is now available and is the lightest it has ever been. Many of the previous defaults are now extensions, providing users with a lot more control. We have also released the 21.3.4 edge release – please check it out and provide feedback! Another big news is that Linkerd submitted its CNCF graduation application. Stay tuned for more news on that!
+Linkerd 2.10 is now available and is the lightest it has ever been. Many of the previous defaults are now extensions, providing users with a lot more control. We have also released the 21.3.4 edge release – please check it out and provide feedback!
+
+Another really big piece of news is that Linkerd submitted its CNCF graduation application. Stay tuned for more news on that!
 
 ## Linkerd roadmap
 
