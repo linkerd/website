@@ -122,7 +122,7 @@ and `step` to combine it with the newly generated trust anchor:
 
 ```bash
 kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
-  | yq -r .identityTrustAnchorsPEM - > original-trust.crt
+  | yq e .identityTrustAnchorsPEM - > original-trust.crt
 
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
 rm original-trust.crt
