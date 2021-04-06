@@ -42,7 +42,7 @@ voted:
     alt: Portrait of Lutz Behnke
     github_url: https://github.com/cypherfox
 nominated:
-  title: Nominated by the community
+  title: Nominated by the maintainers
   badge: "/uploads/credly-badges_nominated.svg"
   heroes:
   - name: Fredrik Klingenberg
