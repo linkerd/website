@@ -1,5 +1,5 @@
 +++
-author = "alejendro"
+author = "alejandro"
 date = 2021-03-31T00:00:00Z
 feature = "/uploads/linkerd-101-espanol.png"
 tags = ["Linkerd", "How to"]
