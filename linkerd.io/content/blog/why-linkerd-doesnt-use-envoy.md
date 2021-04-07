@@ -5,6 +5,7 @@ feature = "/uploads/flow-chart.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/paul-felberbauer-tM16SjCYy84-unsplash.jpg"
 title = "Why Linkerd doesn't use Envoy"
+featured = true
 +++
 
 ![Closeup of many Swiss Army knives](/uploads/paul-felberbauer-tM16SjCYy84-unsplash.jpg)
@@ -12,7 +13,7 @@ title = "Why Linkerd doesn't use Envoy"
 ## Why Linkerd doesn't use Envoy
 
 In this article I'm going to describe why Linkerd isn't built on
-[Envoy](https://envoyproxy.io).
+[Envoy](https://www.envoyproxy.io).
 
 This is a bit of a weird article to write. After all, there are a million
 projects that Linkerd *doesn't* use, and none of those decisions deserve a blog

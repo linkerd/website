@@ -3,7 +3,7 @@
   <div class="columns is-fullwidth is-gapless is-tablet">
     <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile is-narrow-tablet">
       <div class="docs-sidebar">
-        {{ partial (printf "%s/%s" $docsVersion "sidebar") . }}
+        {{ partial "sidebar-2" . }}
       </div>
     </div>
     <div class="column has-background-white docs-content is-paddingless ">
@@ -20,7 +20,7 @@
           </div>
 
           This documentation is for Linkerd 1.x, an older version with some significant differences. You may want to see the
-          <a href="/2/overview/">Linkerd 2.x (current) documentation</a>
+          <a href="/2.10/overview/">Linkerd 2.x (current) documentation</a>
           instead.
         </div>
 
@@ -31,7 +31,7 @@
           <ul>
             {{ range .page.Params.faqs}}
               <li>
-                <a href="#{{ .question | urlize }}">{{ .question }}</a>
+                <a href="#{{ .question | anchorize }}">{{ .question }}</a>
               </li>
             {{ end}}
           </ul>

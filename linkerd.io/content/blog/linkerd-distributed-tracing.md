@@ -4,6 +4,7 @@ author: 'alex'
 date: 2019-10-07T00:00:00+00:00
 thumbnail: /uploads/chart.png
 draft: false
+featured: false
 tags: [Linkerd]
 ---
 
@@ -79,7 +80,7 @@ explain how to use those components in your own application.
 
 Make sure you have the Linkerd 2.6 CLI available and have Linkerd 2.6 installed
 on your cluster. If you don't, you can follow the
-[installation](/2/tasks/install/) or [upgrade](/2/tasks/upgrade/) instructions.
+[installation](/2.10/tasks/install/) or [upgrade](/2.10/tasks/upgrade/) instructions.
 
 ```bash
 $ linkerd version

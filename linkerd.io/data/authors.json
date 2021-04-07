@@ -1,6 +1,13 @@
 {
+  "alejandro": {
+    "avatar": "/uploads/alejanadro-pedraza.png",
+    "email": "alejandro@buoyant.io",
+    "name": "Alejandro Pedraza",
+    "firstName": "Alejandro",
+    "lastName": "Pedraza"
+  },
   "alex": {
-    "avatar": "",
+    "avatar": "/uploads/alex_avatar_sq.jpg",
     "email": "alex@buoyant.io",
     "name": "Alex Leong",
     "firstName": "Alex",
@@ -82,6 +89,13 @@
     "name": "Ivan Sim",
     "firstName": "Ivan",
     "lastName": "Sim"
+  },
+  "jason": {
+    "avatar": "/uploads/jason-morgan.png",
+    "email": "jason@buoyant.io",
+    "name": "Jason Morgan",
+    "firstName": "Jason",
+    "lastName": "Morgan"
   },
   "jenlankford": {
     "avatar": "/uploads/jen-lankford-avatar.png",

@@ -3,6 +3,7 @@ title: 'Welcome Hema Lee as our newest maintainer!'
 author: 'thomas'
 date: Thu, 19 Mar 2020 09:00:00 +0000
 draft: false
+featured: false
 tags: [Linkerd]
 thumbnail: /uploads/hugging-face.png
 ---

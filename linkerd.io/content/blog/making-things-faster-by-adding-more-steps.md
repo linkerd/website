@@ -6,6 +6,7 @@ aliases:
 author: 'andrew'
 date: Wed, 01 Feb 2017 00:22:35 +0000
 draft: false
+featured: false
 thumbnail: /uploads/linkerd_faster_featured.png
 tags: [Article, Education, Linkerd, linkerd, tutorials]
 ---

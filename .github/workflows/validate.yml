@@ -12,13 +12,13 @@ jobs:
     container:
       image: buoyantio/website-builder:v1.3.2
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v1
 
-    - name: Lint markdown
-      run: |
-        make lint
+      - name: Lint markdown
+        run: |
+          make lint
 
-    - name: Lint html and check for dead links
-      run: |
-        make check
+      - name: Lint html and check for dead links
+        run: |
+          make check

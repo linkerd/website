@@ -5,6 +5,7 @@ feature = "/uploads/flow-chart.png"
 tags = ["Linkerd"]
 thumbnail = "/uploads/uljana-maljutina-FtqOR3SyENA-unsplash.jpg"
 title = "Announcing the Linkerd Steering Committee"
+featured = true
 +++
 
 ![Closeup of a red squirrel](/uploads/uljana-maljutina-FtqOR3SyENA-unsplash.jpg)

@@ -9,12 +9,19 @@ top_hero:
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
-    url: "/2/getting-started/"
-  - caption: Join the Community
-    url: "/community/"
+    url: "/2.10/getting-started/"
+  - caption: Get Involved
+    url: "/community/get-involved/"
   image_on_the_right: false
+benefits:
+- title: "Focus on simplicity"
+  image: "/uploads/lego.svg"
+- title: "Fast and efficient"
+  image: "/uploads/fast.svg"
+- title: "Best-in-breed security"
+  image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-01-28** Announcing the Linkerd Steering Committee! [Read more »](/2021/01/28/announcing-the-linkerd-steering-committee/)"
+  description: "**2021-03-11** Announcing Linkerd 2.10! [Read more »](/2021/03/11/announcing-linkerd-2.10/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -32,61 +39,49 @@ tweets:
 event_pictures: []
 features_list:
   items:
-  - title: Thriving open source community
-    description: "Linkerd is 100% Apache-licensed, with an incredibly fast-growing,
-      active, and friendly community.  \n[Come join the fun](https://slack.linkerd.io/)!"
-    image: "/uploads/value-props/foss.svg"
-  - title: Ultralight and ultra fast
-    description: Built in Rust, Linkerd's data plane proxies are incredibly small
-      (<10 mb) and blazing fast (p99 < 1ms).
-    image: "/uploads/value-props/quill-circle.svg"
-  - title: Simple, minimalist design
-    description: No complex APIs or configuration. For most applications, Linkerd
-      will "just work" out of the box.
-    image: "/uploads/value-props/lego.svg"
-  - title: Installs in seconds with zero config
-    description: Linkerd's control plane installs into a single namespace, and services
-      can be safely added to the mesh, one at a time.
-    image: "/uploads/value-props/stopwatch.svg"
-  - title: Deep Runtime Diagnostics
-    description: Get a comprehensive suite of diagnostic tools, including automatic
-      service dependency maps and live traffic samples.
-    image: "/uploads/value-props/stethoscope.svg"
-  - title: Actionable service metrics
-    description: Best-in-class observability allows you to monitor golden metrics—success
-      rate, request volume, and latency—for every service.
-    image: "/uploads/value-props/graph.svg"
-  buttons:
+  - title: Instant platform health metrics
+    description: Instantly track success rates, latencies, and request volumes for every meshed workload, without changes or config.
+  - title: Simpler than any other mesh
+    description: Minimalist, Kubernetes-native design. No hidden magic, as little YAML and as few CRDs as possible.
+  - title: Zero-config mutual TLS
+    description: Transparently add mutual TLS to any on-cluster TCP communication with no configuration.
+  - title: Designed by engineers, for engineers
+    description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools. 
+  - title: Drop-in reliability features
+    description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
+  - title: State-of-the-art ultralight Rust dataplane
+    description: Incredibly small and blazing fast Linkerd2-proxy _micro-proxy_ written in Rust for security and performance.
+buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
 companies_title: 
 companies:
-- image: "/uploads/logos/blue/expedia.svg"
+- image: "/uploads/logos/blue/expedia.png"
   link: https://www.expedia.com
-- image: "/uploads/logos/blue/offerup.svg"
+- image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
-- image: "/uploads/logos/blue/ask.svg"
+- image: "/uploads/logos/blue/hp.png"
   link: https://ask.com/
-- image: "/uploads/logos/blue/bigcommerce.svg"
+- image: "/uploads/logos/blue/bigcommerce.png"
   link: https://www.bigcommerce.com/
-- image: "/uploads/logos/blue/comcast.svg"
+- image: "/uploads/logos/blue/cisco-webex.png"
   link: https://www.xfinity.com/
-- image: "/uploads/logos/blue/ebay.svg"
+- image: "/uploads/logos/blue/clover-health.png"
   link: https://www.ebay.com/
-- image: "/uploads/logos/blue/godaddy.svg"
+- image: "/uploads/logos/blue/godaddy.png"
   link: https://godaddy.com/
-- image: "/uploads/blue-h-e-b.svg"
+- image: "/uploads/logos/blue/heb.png"
   link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
   link: https://www.walmart.com/
-- image: "/uploads/logos/blue/planet.svg"
+- image: "/uploads/logos/blue/planet.png"
   link: https://www.planet.com/
-- image: "/uploads/logos/blue/strava.svg"
+- image: "/uploads/logos/blue/strava.png"
   link: https://www.strava.com/
-- image: "/uploads/logos/blue/elkjopnordic.svg"
+- image: "/uploads/logos/blue/elkjop.png"
   link: https://www.elkjopnordic.com/
 foundation_member_banner:
-  title: Linkerd is a CNCF incubating project
+  title: Linkerd is a CNCF member project
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---

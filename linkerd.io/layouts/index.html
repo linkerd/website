@@ -7,8 +7,9 @@
 {{ partial "homepage/features-list.html" .Params.features_list }}
 {{ partial "homepage/stats-list.html" . }}
 {{ partial "homepage/image-list.html"  (dict "mentions" .Params.companies "title" .Params.companies_title "backgroundColor" "has-background-light-blue") }}
-{{ partial "homepage/adopter-banner.html" . }}
-{{ partial "homepage/tweets.html" ( dict "Tweets" .Params.tweets "Page" . ) }}
+{{ partial "homepage/featured-blogs.html" . }}
 {{ partial "homepage/foundation-member-banner.html" .Params.foundation_member_banner }}
+{{ partial "homepage/tweets.html" ( dict "Tweets" .Params.tweets "Page" . ) }}
+{{ partial "homepage/adopter-banner.html" . }}
 
 {{ end }}
