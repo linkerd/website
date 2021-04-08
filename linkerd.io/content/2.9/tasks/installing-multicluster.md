@@ -242,7 +242,7 @@ To fetch your existing cluster's trust anchor, run:
 
 ```bash
 kubectl -n linkerd get cm linkerd-config -ojsonpath="{.data.values}" | \
-  yq -r .global.identityTrustAnchorsPEM > trustAnchor.crt
+  yq e .global.identityTrustAnchorsPEM - > trustAnchor.crt
 ```
 
 {{< note >}} This command requires [yq](https://github.com/mikefarah/yq). If you
