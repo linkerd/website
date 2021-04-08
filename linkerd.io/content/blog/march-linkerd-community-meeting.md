@@ -9,24 +9,40 @@ description = "In this month's community meeting, we discussed what's on the roa
 featured = false
 +++
 
-Missed the last Linkerd Community Meeting? No worries. Here’s a  recap plus the recording.
+Missed the last Linkerd Community Meeting? No worries. Here’s a recap plus the
+recording.
 
 ## News & updates
 
-Linkerd 2.10 is now available and is the lightest it has ever been. Many of the previous defaults are now extensions, providing users with a lot more control. We have also released the 21.3.4 edge release – please check it out and provide feedback!
+Linkerd 2.10 is now available and is the lightest it has ever been. Many of the
+previous defaults are now extensions, providing users with a lot more control.
+We have also released the 21.3.4 edge release – please check it out and provide
+feedback!
 
-Another really big piece of news is that Linkerd submitted its CNCF graduation application. Stay tuned for more news on that!
+Another really big piece of news is that Linkerd submitted its CNCF graduation
+application. Stay tuned for more news on that!
 
 ## Linkerd roadmap
 
-We are setting the stage for policy in 2.11 and will continue consolidating control plane components. Join our next community meeting for more details.
+We are setting the stage for policy in 2.11 and will continue consolidating
+control plane components. Join our [next community meeting](https://www.meetup.com/linkerd-community/events/277445708/)
+for more details.
 
 ## What's new with Linkerd 2.10
 
-In 2.10, we've modularized the control plane. Users can now choose between multiple opt-in extensions; gaining more control over their service mesh implementation and making Linkerd even more lightweight. We also added opaque ports to extend Linkerd’s coverage to certain situations that are incompatible with protocol detection. Finally, we extended multi-cluster to all TCP connections. Learn more in [our blog post on the release](https://linkerd.io/2021/03/11/announcing-linkerd-2.10/).
+In 2.10, we've modularized the control plane. Users can now choose between
+multiple opt-in extensions; gaining more control over their service mesh
+implementation and making Linkerd even more lightweight. We also added opaque
+ports to extend Linkerd’s coverage to certain situations that are incompatible
+with protocol detection. Finally, we extended multi-cluster to all TCP
+connections. Learn more in [our blog post on the release](https://linkerd.io/2021/03/11/announcing-linkerd-2.10/).
 
 ## Linkerd Heroes
 
-This month we nominated four great Linkerd Hero candidates: Fredrik Klingenberg and Henry Hagnas for sharing their amazing Linkerd story; Christian Hüning for always jumping in on the Linkerd Slack to answer questions and help fellow Linkerd adopters; and Manyak for his great code contributions. As always, it was a close call but in the end, the community voted for Mayank – congrats!  👏👏👏
+This month we nominated four great Linkerd Hero candidates: Fredrik Klingenberg
+and Henry Hagnas for sharing their amazing Linkerd story; Christian Hüning for
+always jumping in on the Linkerd Slack to answer questions and help fellow
+Linkerd adopters; and Manyak for his great code contributions. As always, it was
+a close call but in the end, the community voted for Mayank – congrats!  👏👏👏
 
 {{< youtube "RINhyuL1YEs" >}}
