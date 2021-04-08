@@ -25,7 +25,7 @@ application. Stay tuned for more news on that!
 ## Linkerd roadmap
 
 We are setting the stage for policy in 2.11 and will continue consolidating
-control plane components. Join our [next community meeting](https://www.meetup.com/linkerd-community/events/277445708/)
+control plane components. Join our [next community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-april-linkerd-online-community-meetup/)
 for more details.
 
 ## What's new with Linkerd 2.10
