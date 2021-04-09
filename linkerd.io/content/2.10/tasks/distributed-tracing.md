@@ -132,7 +132,7 @@ dashboard by clicking the Jaeger icon in the Metrics Table, as shown below
 
 ## Cleanup
 
-To cleanup, uninsatll the Linkerd-Jaeger extesion along with emojivoto by running:
+To cleanup, uninstall the Linkerd-Jaeger extesion along with emojivoto by running:
 
 ```bash
 linkerd jaeger uninstall | kubectl delete -f -
