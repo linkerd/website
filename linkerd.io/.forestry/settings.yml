@@ -11,7 +11,7 @@ sections:
   path: linkerd.io/content
   label: Pages
   create: all
-  match: "**/*"
+  match: "/[a-z]*/**/*"
 - type: directory
   path: linkerd.io/content/dashboard
   label: Dashboard
