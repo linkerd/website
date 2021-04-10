@@ -70,15 +70,16 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {{ range .Params.faqs }}
+        {{ range $k, $v := .Params.faqs }}
+        {{ with $k }},{{ end }}
           {
             "@type": "Question",
-            "name": "{{ htmlEscape .question }}",
+            "name": "{{ .question }}",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "{{ htmlEscape .answer_schema }}"
+              "text": "{{ .answer_schema }}"
             }
-          },
+          }
         {{ end }}
       ]
     }
