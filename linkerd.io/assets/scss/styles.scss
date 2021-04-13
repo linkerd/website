@@ -440,6 +440,11 @@
         a:not(.is-active) + .menu-list {
           display: none;
         }
+        .navbar-link {
+          &:not(.is-arrowless)::after {
+            border-color: $dark-grey;
+          }
+        }
       }
       .hr {
         background: $dark-grey;
