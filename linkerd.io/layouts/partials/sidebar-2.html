@@ -38,14 +38,14 @@
 
       {{ $hasWeight := sort (where .Pages "Params.weight" "ge" 1) "Params.weight" "asc" }}
       {{ $missingWeight := sort (where .Pages "Params.weight" "eq" nil) "Name" "asc" }}
-      {{ $sub_pages := ($hasWeight | append $missingWeight) }}
+      {{ $subPages := ($hasWeight | append $missingWeight) }}
       <li class="menu-list-item {{ if $sectionActive }}is-active{{ end }}">
-        <a href="{{ .URL }}" class="{{ if gt (len $sub_pages) 0}}navbar-link{{ end }} {{ if $sectionActive }}is-active{{ end }}">
+        <a href="{{ .URL }}" class="{{ if gt (len $subPages) 0}}navbar-link{{ end }} {{ if $sectionActive }}is-active{{ end }}">
           {{ .Name }}
         </a>
-        {{ if gt (len $sub_pages) 0 }}
+        {{ if gt (len $subPages) 0 }}
         <ul class="menu-list is-paddingless is-marginless">
-          {{ range $item := $sub_pages }}
+          {{ range $item := $subPages }}
           {{ $active := hasPrefix $currentPage.URL .URL }}
           <li class="menu-list-item">
             <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
