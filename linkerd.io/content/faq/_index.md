@@ -36,7 +36,7 @@ faqs:
       security
       audits](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf).
       Finally, Linkerd has publicly [committed to open
-governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+      governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
       and is hosted by [the CNCF](https://cncf.io).
     answer_schema:
       Linkerd is significantly lighter and simpler than Istio. Linkerd is built
