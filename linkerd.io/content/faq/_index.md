@@ -28,86 +28,90 @@ faqs:
       the application itself.
   - question: What's the difference between Linkerd and Istio?
     answer:
-      Linkerd is significantly lighter and simpler than Istio. Both projects are
-      service meshes and espouse similar features. Linkerd is built for security
-      from the ground up, ranging from features like [on-by-default
-      mTLS](https://linkerd.io/2.10/features/automatic-mtls/), a data plane that is
-      [built in a memory-safe
+      Linkerd is significantly lighter and simpler than Istio. Linkerd is
+      built for security from the ground up, ranging from features like
+      [on-by-default mTLS](https://linkerd.io/2.10/features/automatic-mtls/), a
+      data plane that is [built in a Rust, memory-safe
       language](https://github.com/linkerd/linkerd2-proxy), and [regular
       security
       audits](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf).
-      Finally, Linkerd is [committed to open
-      governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
-      and is hosted by [a neutral foundation](https://cncf.io).
+      Finally, Linkerd has publicly [committed to open
+governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+      and is hosted by [the CNCF](https://cncf.io).
     answer_schema:
-      Linkerd is significantly lighter and simpler than Istio. Both projects are
-      service meshes and espouse similar features. Linkerd is built for security
-      from the ground up, ranging from features like on-by-default mTLS, a data
-      plane that is built in a memory-safe language, and regular security
-      audits. Finally, Linkerd is committed to open governance and is hosted by
-      a neutral foundation.
+      Linkerd is significantly lighter and simpler than Istio. Linkerd is built
+      for security from the ground up, ranging from features like on-by-default
+      mTLS, a data plane that is built in a Rust, memory-safe language, and
+      regular security audits.  Finally, Linkerd has publicly committed to open
+      governance and is hosted by the CNCF.
   - question: "What's the difference between Linkerd and Envoy?"
     answer:
-      Envoy is a proxy, not a service mesh. Linkerd is a [service
-      mesh](https://buoyant.io/2020/10/12/what-is-a-service-mesh/) it has a
-      control plane and a data plane, of which the proxy is one component. Envoy
-      can be used as a component of a service mesh, but Linkerd uses a different
-      proxy, simply called
-      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy).
+      Envoy is a proxy; Linkerd is a [service
+      mesh](https://buoyant.io/2020/10/12/what-is-a-service-mesh/). Linkerd has
+      a control plane and a data plane, and uses a proxy is a component of the
+      data plane. While Envoy can be used as a component of a service mesh,
+      Linkerd uses an ultralight "micro-proxy" called
+      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is
+      built in Rust for safety and performance.
     answer_schema:
-      Envoy is a proxy, not a service mesh. Linkerd is a service mesh it has a
-      control plane and a data plane, of which the proxy is one component. Envoy
-      can be used as a component of a service mesh, but Linkerd uses a different
-      proxy, simply called Linkerd2-proxy.
+      Envoy is a proxy; Linkerd is a service mesh. Linkerd has a control plane
+      and a data plane, and uses a proxy is a component of the data plane.
+      While Envoy can be used as a component of a service mesh, Linkerd uses an
+      ultralight "micro-proxy" called Linkerd2-proxy, which is built in Rust
+      for safety and performance.
   - question: Why doesn't Linkerd use Envoy?
     answer:
-      Envoy is a complex, general-purpose proxy. Linkerd instead uses
-      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), a simple and
-      ultralight "micro-proxy" built specifically for the service mesh sidecar
-      use case. This allows Linkerd to be significantly smaller and simpler than
-      Envoy-based service meshes. Additionally, the choice of Rust for
-      Linkerd2-proxy allows Linkerd to avoid a whole class of CVEs and
+      Envoy is a complex general-purpose proxy. Linkerd uses a simple and
+      ultralight "micro-proxy" called
+      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy) that is built
+      specifically for the service mesh sidecar use case. This allows Linkerd
+      to be significantly smaller and simpler than Envoy-based service meshes.
+      The choice of Rust also allows Linkerd to avoid a whole class of CVEs and
       vulnerabilities that can impact proxies written in non-memory-safe
       languages like C++. See [Why Linkerd doesn't use
       Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) for
       more.
     answer_schema:
-      Envoy is a complex, general-purpose proxy. Linkerd instead uses
-      Linkerd2-proxy, a simple and ultralight "micro-proxy" built specifically
-      for the service mesh sidecar use case. This allows Linkerd to be
-      significantly smaller and simpler than Envoy-based service meshes.
-      Additionally, the choice of Rust for Linkerd2-proxy allows Linkerd to
-      avoid a whole class of CVEs and vulnerabilities that can impact proxies
-      written in non-memory-safe languages like C++. See Why Linkerd doesn't use
-      Envoy for more.
+      Envoy is a complex general-purpose proxy. Linkerd uses a simple and
+      ultralight "micro-proxy" called
+      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy) that is built
+      specifically for the service mesh sidecar use case. This allows Linkerd
+      to be significantly smaller and simpler than Envoy-based service meshes.
+      The choice of Rust also allows Linkerd to avoid a whole class of CVEs and
+      vulnerabilities that can impact proxies written in non-memory-safe
+      languages like C++. See [Why Linkerd doesn't use
+      Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) for
+      more.
   - question: Who owns Linkerd and how is it licensed?
     answer:
-      Linkerd is hosted by the [Cloud Native Computing
-      Foundation](https://cncf.io)(CNCF) project. The CNCF owns the trademark;
-      the copyright is held by the Linkerd authors themselves. Linkerd is
-      licensed under the [Apache
-      2.0](https://github.com/linkerd/linkerd2/blob/main/LICENSE) license.
+      Linkerd is hosted by the [Cloud Native Computing Foundation
+      (CNCF)](https://cncf.io). The CNCF owns the trademark; the copyright is
+      held by the Linkerd authors themselves. Linkerd is licensed under the
+      [Apache 2.0](https://github.com/linkerd/linkerd2/blob/main/LICENSE)
+      license.
     answer_schema:
-      Linkerd is hosted by the Cloud Native Computing Foundation(CNCF) project.
+      Linkerd is hosted by the Cloud Native Computing Foundation (CNCF).
       The CNCF owns the trademark; the copyright is held by the Linkerd authors
       themselves. Linkerd is licensed under the Apache 2.0 license.
   - question: Who created Linkerd?
     answer:
-      Linkerd was originally created by
-      [Buoyant](https://buoyant.io/linkerd).  While Linkerd is a CNCF project,
-      Buoyant continues to be a primary maintainer and sponsor.
+      Linkerd was originally created by [Buoyant](https://buoyant.io/linkerd).
+      Buoyant continues to be a sponsor of the project and to provid
+      commercial support.
     answer_schema:
-      Linkerd was originally created by Buoyant.  While Linkerd is a CNCF
-      project, Buoyant continues to be a primary maintainer and sponsor.
+      Linkerd was originally created by Buoyant.
+      Buoyant continues to be a sponsor of the project and to provid
+      commercial support.
   - question: Who is Linkerd for?
     answer:
-      Linkerd is for everyone. See [Linkerd's Commitment to Open
-      Governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+      Linkerd is for everyone. (See [Linkerd's Commitment to Open
+      Governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).)
       In practice, Linkerd has certain technical prerequisites, such as
       Kubernetes.
     answer_schema:
-      Linkerd is for everyone. See Linkerd's Commitment to Open Governance. In
-      practice, Linkerd has certain technical prerequisites, such as Kubernetes.
+      Linkerd is for everyone. (See Linkerd's Commitment to Open Governance.)
+      In practice, Linkerd has certain technical prerequisites, such as
+      Kubernetes.
   - question: How do I pronounce Linkerd?
     answer:
       Linkerd rhymes with "Cardi B". The "d" is pronounced separately, as in
@@ -119,7 +123,7 @@ faqs:
     answer: 'Just like this: Linkerd. Capital "L", lower-case everything else.'
     answer_schema:
       'Just like this: Linkerd. Capital "L", lower-case everything else.'
-  - question: Is there an "enterprise edition"?
+  - question: Is there a Linkerd "enterprise edition"?
     answer:
       No. Linkerd is fully open source with everything you need to run it in
       production as part of the open source project.
@@ -135,20 +139,21 @@ faqs:
       Linkerd.
   - question: What's on the Linkerd roadmap?
     answer:
-      As a community project, there is no formal roadmap, but a glance at the
-      [active GitHub issues](https://github.com/linkerd/linkerd2/issues) will
-      give you a sense of what is in store for the future.
+      See the [Linkerd project
+      roadmap](https://github.com/linkerd/linkerd2/blob/main/ROADMAP.md). You
+      may also review the [active GitHub
+      issues](https://github.com/linkerd/linkerd2/issues) for shorter-term
+      objectives.
     answer_schema:
-      As a community project, there is no formal roadmap, but a glance at the
-      active GitHub issues will give you a sense of what is in store for the
-      future.
+      See the Linkerd project roadmap. You may also review the active GitHub
+      issues for shorter-term objectives.
   - question: Can I present Linkerd to my team / company / meetup group?
     answer:
-      Certainly. Linkerd is for everyone. The public [Linkerd meetup
+      Certainly! The public [Linkerd meetup
       slides](https://docs.google.com/presentation/d/1qseWDYWD4KzYFhb4bcp8WuDPYFVwB8sYeNnjCsgDUOw/edit)
       might be helpful.
     answer_schema:
-      Certainly. Linkerd is for everyone. The public Linkerd meetup slides might
+      Certainly! The public Linkerd meetup slides might
       be helpful.
   - question: How do I use Linkerd to route traffic between services?
     answer:
@@ -201,14 +206,14 @@ faqs:
   - question: What CPU architectures can Linkerd run on?
     answer:
       Linkerd uses multi-arch container images with support for x86, amd64,
-      arm64,and arm.
+      arm64, and arm.
     answer_schema:
       Linkerd uses multi-arch container images with support for x86, amd64,
-      arm64,and arm.
+      arm64, and arm.
   - question: How can I get involved?
     answer:
-      We'd love to have your involvement! See our [Linkerd Community
+      We'd love to have you get involved! See our [Linkerd Community
       page](/community/get-involved/).
     answer_schema:
-      We'd love to have your involvement! See our Linkerd Community page.
+      We'd love to have you get involved! See our Linkerd Community page.
 ---
