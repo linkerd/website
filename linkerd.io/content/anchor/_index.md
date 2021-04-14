@@ -1,4 +1,6 @@
 ---
+title: Becoming a Linkerd Community Anchor	
+description: Are you passionate about Linkerd and sharing your experience with the broader community? We want to help you tell your story!
 benefits:
   items:
     - '**Become a recognized expert** in the service mesh, cloud native, and
