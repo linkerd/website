@@ -121,13 +121,8 @@ the new anchor. The following command uses `kubectl` to fetch the Linkerd config
 and `step` to combine it with the newly generated trust anchor:
 
 ```bash
-# For Linkerd < 2.9.0:
-kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.global}' \
-  | jq -r .identityContext.trustAnchorsPem > original-trust.crt
-
-# For Linkerd >= 2.9.0:
 kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
-  | yq e .global.identityTrustAnchorsPEM - > original-trust.crt
+  | yq e .identityTrustAnchorsPEM - > original-trust.crt
 
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
 rm original-trust.crt
@@ -256,7 +251,8 @@ Run the `check` command to make sure that everything is going as expected:
 linkerd check --proxy
 ```
 
-You should see output without any certificate expiration warnings:
+You should see output without any certificate expiration warnings (unless an
+expired trust anchor still needs to be removed):
 
 ```text
 linkerd-identity

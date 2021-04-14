@@ -39,18 +39,18 @@ tweets:
 event_pictures: []
 features_list:
   items:
-  - title: Instant platform metrics
-    description: "The only service mesh that's simple—minimal config, no hidden magic, and plenty of diagnostics and debugging tools."
-  - title: Simpler than any other service mesh
-    description: The only service mesh that's simple—minimal config, no hidden magic, and plenty of diagnostics and debugging tools. 
+  - title: Instant platform health metrics
+    description: Instantly track success rates, latencies, and request volumes for every meshed workload, without changes or config.
+  - title: Simpler than any other mesh
+    description: Minimalist, Kubernetes-native design. No hidden magic, as little YAML and as few CRDs as possible.
   - title: Zero-config mutual TLS
-    description: Transparently apply mutual TLS to all TCP communication on your cluster with no configuration.
-  - title: Minimalist footprint, incremental rollout
-    description: A minimalist, self-contained control plane, and a data plane that can be applied incrementally to one service at a time
-  - title: Ultralight and ultra-fast
-    description: Linkerd's data plane proxies are incredibly small,  blazing fast, and written in Rust for security and performance.
+    description: Transparently add mutual TLS to any on-cluster TCP communication with no configuration.
+  - title: Designed by engineers, for engineers
+    description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools. 
   - title: Drop-in reliability features
-    description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your system resilient in the face of partial failures.
+    description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
+  - title: State-of-the-art ultralight Rust dataplane
+    description: Incredibly small and blazing fast Linkerd2-proxy _micro-proxy_ written in Rust for security and performance.
 buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
