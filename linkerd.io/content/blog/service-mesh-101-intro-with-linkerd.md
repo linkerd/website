@@ -7,7 +7,6 @@ tags = ["Linkerd", "Community Hero"]
 thumbnail = "/uploads/linkerd-101.jpeg"
 title = "Introduction to the service mesh—the easy way"
 featured = false
-
 +++
 
 ## A 101 with Linkerd
@@ -21,7 +20,6 @@ If you are more of a visual person, check out the video tutorial by Linkerd core
 A service mesh is a tool for adding observability, security, and reliability features to applications by inserting these features at the platform layer rather than the application layer.
 
 Service meshes consist of two components: the **data plane** consisting of a network of proxies that sit in between your applications, and the **control plane** that tells the proxies what to do and provides an interface for the humans operating the mesh.
-
 
 ### Let’s look at a sample application in Kubernetes
 
@@ -48,7 +46,6 @@ As you can see in the image above, a proxy is now sitting between each component
 ### What’s up with the proxies?
 
 The proxies make up the data plane of the mesh and are directly responsible for doing all of the work the service mesh does. They are the components that will implement retries, add mTLS, or perform request level load balancing. Some service meshes build on top of general-purpose proxies, but Linkerd uses the [ultra-light "micro-proxy" Linkerd2-proxy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/). It's highly secure, lightweight, and consumes a lot fewer resources than a general-purpose proxy.
-
 
 ### Where does the control plane fit?
 
@@ -84,7 +81,7 @@ Linkerd improves on native Kubernetes constructs to allow mesh operators and pla
 
 Installing and using Linkerd in your Kubernetes cluster is as simple as running: `linkerd install | kubectl apply -f -`
 
-You can follow along with Alex in the video above or use the [Linkerd getting started guide](https://linkerd.io/2.10/getting-started/) to get yourself up and running. 
+You can follow along with Alex in the video above or use the [Linkerd getting started guide](https://linkerd.io/2.10/getting-started/) to get yourself up and running.
 
 ## Wrapping Up
 
