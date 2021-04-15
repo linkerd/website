@@ -14,7 +14,7 @@ links:
   description: Use [Stack Overflow](https://stackoverflow.com/questions/tagged/linkerd) for general questions and answers on deploying and configuring Linkerd.
 - image: /images/get-involved/community-meetings.svg
   alt: Community meetings
-  description: Want real-time, live conversation wtih Linkerd maintainers and contributors? Join our [community meetings](https://community.cncf.io/linkerd-online-community-meetup/).
+  description: Want real-time, live conversation with Linkerd maintainers and contributors? Join our [community meetings](https://community.cncf.io/linkerd-online-community-meetup/).
 - image: /images/get-involved/twitter.svg
   alt: Twitter
   description: Don’t forget to follow Linkerd on [Twitter](https://twitter.com/Linkerd) for the latest news and announcements.
