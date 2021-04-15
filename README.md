@@ -77,7 +77,7 @@ released separately.
 ### Updating docs from Linkerd
 
 See [slate documentation](slate-linkerd) `./build` will grab whatever's on
-master from slate-linkerd and add it to the public dir.
+main from slate-linkerd and add it to the public dir.
 
 ### Creating a new release
 
