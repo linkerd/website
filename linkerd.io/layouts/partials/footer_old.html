@@ -1,12 +1,12 @@
 {{ $isHome   := .IsHome }}
 {{ $filepath := .File.Path }}
-{{ $editUrl  := printf "https://github.com/linkerd/website/edit/master/linkerd.io/content/%s" $filepath }}
+{{ $editUrl  := printf "https://github.com/linkerd/website/edit/main/linkerd.io/content/%s" $filepath }}
 <div class="border-top">
   <footer class="container">
     <div class="row my-5">
       <div class="col-md-6 pb-3">
         {{ if $isHome }}
-        <a class="btn btn-dark" href="https://github.com/linkerd/website/tree/master/linkerd.io/content">
+        <a class="btn btn-dark" href="https://github.com/linkerd/website/tree/main/linkerd.io/content">
           <i class="fab fa-github"></i>&nbsp;Edit this site
         </a>
         {{ else }}
