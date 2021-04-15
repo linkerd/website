@@ -31,3 +31,6 @@
 
 {{ $js := resources.Get "js/modal.js" }}
 <script src="{{ $js.Permalink }}"></script>
+
+{{ $headingsLinkJs := resources.Get "js/docs-heading-link.js"}}
+<script defer src="{{ $headingsLinkJs.Permalink }}"></script>
