@@ -76,7 +76,7 @@ applications.
 ### Web
 
 The web deployment provides the Linkerd dashboard. This does not require running
-`linkerd dashboard` and can be [exposed](../../tasks/exposing-dashboard/) to
+`linkerd viz dashboard` and can be [exposed](../../tasks/exposing-dashboard/) to
 others.
 
 ### Heartbeat
@@ -216,7 +216,7 @@ The Linkerd dashboard provides a high level view of what is happening with your
 services in real time. It can be used to view the "golden" metrics (success
 rate, requests/second and latency), visualize service dependencies and
 understand the health of specific service routes. One way to pull it up is by
-running `linkerd dashboard` from the command line.
+running `linkerd viz dashboard` from the command line.
 
 {{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
 

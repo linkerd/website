@@ -1,6 +1,6 @@
 [build]
 base = "linkerd.io"
-publish = "linkerd.io/public"
+publish = "public"
 command = "make production-build"
 
 [build.environment]
