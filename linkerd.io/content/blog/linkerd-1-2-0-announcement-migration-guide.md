@@ -149,4 +149,4 @@ In future releases, we will remove this telemeter.
 
 ### Further Information
 
-The complete changelog for this release is available [on GitHub](https://github.com/linkerd/linkerd/blob/master/CHANGES.md#120-2017-09-07), and updated documentation can be found on [docs.linkerd.io](https://linkerd.io/config/1.2.0/linkerd/index.html). And, as always, if you have any questions or just want to chat about Linkerd, join [the Linkerd Slack](http://slack.linkerd.io/) or browse [the Discourse community forum](https://discourse.linkerd.io) for more in-depth discussion.
+The complete changelog for this release is available [on GitHub](https://github.com/linkerd/linkerd/blob/master/CHANGES.md#120-2017-09-07), and updated documentation can be found on [linkerd.io](https://linkerd.io/config/1.2.0/linkerd/index.html). And, as always, if you have any questions or just want to chat about Linkerd, join [the Linkerd Slack](http://slack.linkerd.io/) or browse [the Discourse community forum](https://discourse.linkerd.io) for more in-depth discussion.
