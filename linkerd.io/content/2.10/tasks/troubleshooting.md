@@ -1073,8 +1073,8 @@ Example failure:
         linkerd.io/inject
 ```
 
-Setting `linkerd.io/inject`, `config.linkerd.io/*` or 
-`config.alpha.linkerd.io/*` as pod labels does not have any effect on 
+Setting `linkerd.io/inject`, `config.linkerd.io/*` or
+`config.alpha.linkerd.io/*` as pod labels does not have any effect on
 the service mesh but it can have when set as annotations.
 
 ### √ data plane service labels are configured correctly {#l5d-data-plane-services-labels}
@@ -1088,8 +1088,8 @@ Example failure:
         config.linkerd.io/control-port
 ```
 
-Setting `config.linkerd.io/*` or `config.alpha.linkerd.io/*` 
-as service labels does not have any effect on the service mesh 
+Setting `config.linkerd.io/*` or `config.alpha.linkerd.io/*`
+as service labels does not have any effect on the service mesh
 but it can have when set as annotations.
 
 ### √ data plane service annotations are configured correctly {#l5d-data-plane-services-annotations}
@@ -1103,8 +1103,8 @@ Example failure:
         mirror.linkerd.io/exported
 ```
 
-Setting `mirror.linkerd.io/exported` 
-as service annotation does not have any effect on the service mesh 
+Setting `mirror.linkerd.io/exported`
+as service annotation does not have any effect on the service mesh
 but it can have when set as a label.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
