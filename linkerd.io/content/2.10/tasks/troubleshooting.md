@@ -1062,6 +1062,45 @@ See the page on [Upgrading Linkerd](../../upgrade/).
 
 See the page on [Upgrading Linkerd](../../upgrade/).
 
+### √ data plane pod labels are configured correctly {#l5d-data-plane-pod-labels}
+
+Example failure:
+
+```bash
+‼ data plane pod labels are configured correctly
+    Some labels on data plane pods should be annotations:
+	* emojivoto/voting-ff4c54b8d-tv9pp
+		linkerd.io/inject
+```
+
+Setting `linkerd.io/inject`, `config.linkerd.io/*` or `config.alpha.linkerd.io/*` as pod labels does not have any effect on the service mesh but it can have when set as annotations.
+
+### √ data plane service labels are configured correctly {#l5d-data-plane-services-labels}
+
+Example failure:
+
+```bash
+‼ data plane service labels and annotations are configured correctly
+    Some labels on data plane services should be annotations:
+	* emojivoto/emoji-svc
+		config.linkerd.io/control-port
+```
+
+Setting `config.linkerd.io/*` or `config.alpha.linkerd.io/*` as service labels does not have any effect on the service mesh but it can have when set as annotations.
+
+### √ data plane service annotations are configured correctly {#l5d-data-plane-services-annotations}
+
+Example failure:
+
+```bash
+‼ data plane service annotations are configured correctly
+    Some annotations on data plane services should be labels:
+	* emojivoto/emoji-svc
+		mirror.linkerd.io/exported
+```
+
+Setting `mirror.linkerd.io/exported` as service annotation does not have any effect on the service mesh but it can have when set as a label.
+
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
 These checks are ran if Linkerd has been installed in HA mode.
