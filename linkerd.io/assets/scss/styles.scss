@@ -440,6 +440,11 @@
         a:not(.is-active) + .menu-list {
           display: none;
         }
+        .navbar-link {
+          &:not(.is-arrowless)::after {
+            border-color: $dark-grey;
+          }
+        }
       }
       .hr {
         background: $dark-grey;
@@ -502,6 +507,31 @@
   margin-top: -$navbar-height;
   height: $navbar-height;
   width: 1px;
+}
+
+.docs h1,
+.docs h2,
+.docs h3,
+.docs h4,
+.docs h5,
+.docs h6 {
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: url("/images/heading-link-icon.svg");
+    opacity: 0;
+    transition: all .2s ease-in-out;
+  }
+  &:hover:after {
+    opacity: 1;
+  }
 }
 
 .anchorjs-link {

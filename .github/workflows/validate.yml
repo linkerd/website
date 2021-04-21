@@ -10,7 +10,7 @@ jobs:
     name: Validate generated HTML
     runs-on: ubuntu-18.04
     container:
-      image: buoyantio/website-builder:v1.3.2
+      image: buoyantio/website-builder:v1.3.3
     steps:
       - name: Checkout code
         uses: actions/checkout@v1

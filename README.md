@@ -10,7 +10,7 @@ Source code for the linkerd.io website.
    ```bash
    docker run \
       --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-      gcr.io/linkerd-io/website-builder:1.3.1 make lint check
+      buoyantio/website-builder:v1.3.3 make lint check
    ```
 
 1. Install Hugo 0.74.3 to run the site locally:
@@ -77,7 +77,7 @@ released separately.
 ### Updating docs from Linkerd
 
 See [slate documentation](slate-linkerd) `./build` will grab whatever's on
-master from slate-linkerd and add it to the public dir.
+main from slate-linkerd and add it to the public dir.
 
 ### Creating a new release
 
