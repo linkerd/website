@@ -77,7 +77,7 @@
             "name": "{{ .question }}",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "{{ .answer_schema }}"
+              "text": "{{ .answer | markdownify | plainify }}"
             }
           }
         {{ end }}
