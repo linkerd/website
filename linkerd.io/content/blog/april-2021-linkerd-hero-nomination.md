@@ -1,9 +1,9 @@
 +++
 author = "charles"
 date = 2021-04-21T00:00:00Z
-feature = "/uploads/april-linkerd-heroes.jpg"
+feature = "/uploads/april-linkerd-heroes-2.jpg"
 tags = ["Linkerd", "Community Hero"]
-thumbnail = "/uploads/april-linkerd-heroes.jpg"
+thumbnail = "/uploads/april-linkerd-heroes-2.jpg"
 title = "Vote for your April Hero"
 featured = false
 
