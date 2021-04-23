@@ -105,11 +105,11 @@ applying policy.
 
 ## Distributed tracing
 
-In a microservices-based system, an individual request from a client typically 
-triggers a series of requests across a number of services. Distributed tracing 
-is the practice of "tracing", or following, these requests as they move 
-through the distributed system for reasons of performance monitoring or 
-debugging. It is typically achieved by modifying the services to emit tracing 
+In a microservices-based system, an individual request from a client typically
+triggers a series of requests across a number of services. Distributed tracing
+is the practice of "tracing", or following, these requests as they move
+through the distributed system for reasons of performance monitoring or
+debugging. It is typically achieved by modifying the services to emit tracing
 information, or "spans," and aggregating them in a central store.
 
 ## Golden Metrics
@@ -135,33 +135,33 @@ fastest, lightest-weight service mesh possible for Kubernetes. Linkerd is a
 Cloud Native Computing Foundation (CNCF) incubating project.
 
 ## Load balancing
-Load balancing is the act of distributing work across a number of equivalent 
-endpoints. Kubernetes, like many systems, provides load balancing at the 
-connection level. A service mesh like Linkerd improves this by performing 
-load balancing at the request level, which allows it to take into account 
+Load balancing is the act of distributing work across a number of equivalent
+endpoints. Kubernetes, like many systems, provides load balancing at the
+connection level. A service mesh like Linkerd improves this by performing
+load balancing at the request level, which allows it to take into account
 factors such as the performance of individual endpoints.
 
-Load balancing at the request level also allows Linkerd to effectively 
-load balance requests for systems that use gRPC (and HTTP/2 more generally), 
-which multiplex requests across a single connection—Kubernetes itself 
-cannot effectively load balance these systems because there is typically 
+Load balancing at the request level also allows Linkerd to effectively
+load balance requests for systems that use gRPC (and HTTP/2 more generally),
+which multiplex requests across a single connection—Kubernetes itself
+cannot effectively load balance these systems because there is typically
 only one connection ever made.
 
-Load balancing algorithms decide which endpoint will serve a given request. 
-The most common is "round-robin," which simply iterates across all endpoints. 
-More advanced balancing algorithms include "least loaded," which distributes 
-load based on the number of outstanding requests for each endpoint. 
-Linkerd itself uses a sophisticated latency-aware load balancing algorithm 
-called EWMA (exponentially-weighted moving average), to distribute load 
-based on endpoint latency while being responsive to rapid changes in the 
+Load balancing algorithms decide which endpoint will serve a given request.
+The most common is "round-robin," which simply iterates across all endpoints.
+More advanced balancing algorithms include "least loaded," which distributes
+load based on the number of outstanding requests for each endpoint.
+Linkerd itself uses a sophisticated latency-aware load balancing algorithm
+called EWMA (exponentially-weighted moving average), to distribute load
+based on endpoint latency while being responsive to rapid changes in the
 latency profile of individual endpoints.
 
 ## Multi-cluster
 
-In the context of Kubernetes, multi-cluster usually refers to running 
-an application "across" multiple Kubernetes clusters. Linkerd's multi-cluster 
-support provides seamless and secured communication across clusters, in a 
-way that's secure even across the open Internet, and is fully transparent 
+In the context of Kubernetes, multi-cluster usually refers to running
+an application "across" multiple Kubernetes clusters. Linkerd's multi-cluster
+support provides seamless and secured communication across clusters, in a
+way that's secure even across the open Internet, and is fully transparent
 to the application itself.
 
 ## Service mesh
