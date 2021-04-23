@@ -29,7 +29,7 @@ faqs:
       typically triggers a series of requests across a number of services. 
       Distributed tracing is the practice of "tracing", or following, these 
       requests as they move through the distributed system for reasons of 
-      performance monitoring or debugging. 
+      performance monitoring or debugging.
   - question: What are golden metrics?
     answer: 
       Golden metrics, or golden signals, are the core metrics of application
@@ -156,7 +156,6 @@ called EWMA (exponentially-weighted moving average), to distribute load
 based on endpoint latency while being responsive to rapid changes in the 
 latency profile of individual endpoints.
 
-
 ## Multi-cluster
 
 In the context of Kubernetes, multi-cluster usually refers to running 
@@ -164,7 +163,6 @@ an application "across" multiple Kubernetes clusters. Linkerd's multi-cluster
 support provides seamless and secured communication across clusters, in a 
 way that's secure even across the open Internet, and is fully transparent 
 to the application itself.
-
 
 ## Service mesh
 
