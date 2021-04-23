@@ -103,7 +103,7 @@ The data plane of a service mesh comprises the deployment of its
 The data plane is responsible for gathering metrics, observing traffic, and
 applying policy.
 
-## Distributed tracing 
+## Distributed tracing
 
 In a microservices-based system, an individual request from a client typically 
 triggers a series of requests across a number of services. Distributed tracing 
