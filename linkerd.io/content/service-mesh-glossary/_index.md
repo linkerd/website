@@ -135,6 +135,7 @@ fastest, lightest-weight service mesh possible for Kubernetes. Linkerd is a
 Cloud Native Computing Foundation (CNCF) incubating project.
 
 ## Load balancing
+
 Load balancing is the act of distributing work across a number of equivalent
 endpoints. Kubernetes, like many systems, provides load balancing at the
 connection level. A service mesh like Linkerd improves this by performing
