@@ -66,7 +66,7 @@ faqs:
       reliability features to applications by inserting these features at the
       platform layer rather than the application layer. Service meshes are
       implemented by adding [sidecar proxies](#sidecar-proxy) that intercept all
-      traffic between applications. 
+      traffic between applications.
   - question: What is a sidecar proxy?
     answer:
       A sidecar proxy is a proxy that is deployed alongside the applications in
