@@ -14,7 +14,7 @@ faqs:
   - question: What is a service mesh control plane?
     answer:
       The control plane of a service mesh provides the command and control
-      signals required for the [data plane](#data-pane) to operate. The control
+      signals required for the [data plane](#data-plane) to operate. The control
       plane controls the data plane and provides the UI and API that operators
       use to configure, monitor, and operate the mesh.
   - question: What is a data plane?
@@ -92,7 +92,7 @@ application.
 ## Control Plane
 
 The control plane of a service mesh provides the command and control signals
-required for the [data plane](#data-pane) to operate. The control plane controls
+required for the [data plane](#data-plane) to operate. The control plane controls
 the data plane and provides the UI and API that operators use to configure,
 monitor, and operate the mesh.
 
@@ -181,10 +181,9 @@ services and are the vehicle through which service mesh features are introduced.
 A sidecar proxy is a proxy that is deployed alongside the applications in the
 mesh. (In Kubernetes, as a container within the application's pod.) The sidecar
 proxy intercepts network calls to and from the applications and is responsible
-for implementing any [control plane](#control-pane)’s logic or rules.
-
+for implementing any [control plane](#control-plane)’s logic or rules.
 Collectively, the sidecar proxies form the service mesh's
-[data plane](#data-pane). Linkerd uses a Rust-based "micro-proxy" called
+[data plane](#data-plane). Linkerd uses a Rust-based "micro-proxy" called
 Linkerd2-proxy that is specifically designed for the service mesh use case.
 Linkerd2-proxy is significantly lighter and easier to operate than
 general-purpose proxies such as Envoy or NGINX. See
