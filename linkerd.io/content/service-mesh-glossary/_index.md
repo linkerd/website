@@ -59,7 +59,7 @@ faqs:
       In the context of Kubernetes, multi-cluster usually refers to running 
       an application "across" multiple Kubernetes clusters. Linkerd's 
       multi-cluster support provides seamless and secured communication 
-      across clusters, in a way that's secure even across the open Internet.
+      across clusters, in a way that's secure even across the public Internet.
   - question: What is a service mesh?
     answer:
       A service mesh is a tool for adding observability, security, and
@@ -162,7 +162,7 @@ latency profile of individual endpoints.
 In the context of Kubernetes, multi-cluster usually refers to running
 an application "across" multiple Kubernetes clusters. Linkerd's multi-cluster
 support provides seamless and secured communication across clusters, in a
-way that's secure even across the open Internet, and is fully transparent
+way that's secure even across the public Internet, and is fully transparent
 to the application itself.
 
 ## Service mesh
