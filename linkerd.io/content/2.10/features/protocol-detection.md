@@ -7,61 +7,82 @@ aliases = [
 ]
 +++
 
-Linkerd is capable of proxying all TCP traffic, including TLS'd connections,
+Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling.
 
-Linkerd performs *protocol detection* to determine whether traffic is HTTP or
-HTTP/2 (including gRPC). If Linkerd detects that a connection is using HTTP or
-HTTP/2, Linkerd will automatically provide HTTP-level metrics and routing
-without configuration from the user. (See
-[HTTP, HTTP/2, and gRPC Proxying](../http-grpc/) for more.)
+In most cases, Linkerd can do this without configuration. To do this, Linkerd
+performs *protocol detection* to determine whether traffic is HTTP or HTTP/2
+(including gRPC). If Linkerd detects that a connection is HTTP or HTTP/2,
+Linkerd will automatically provide HTTP-level metrics and routing.
 
-If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2, Linkerd
-will proxy the connection, but will only be able to provide byte-level metrics.
-Note that this also applies to TLS'd HTTP connections if the application
-initiates the TLS, as Linkerd will not be able to observe the HTTP transactions
-in this connection.
+If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2,
+Linkerd will proxy the connection as a plain TCP connection, applying
+[mTLS](../automatic-mtls/) and providing byte-level metrics as usual.
 
-## Configuring Protocol Detection
+{{< note >}}
+Client-initiated HTTPS will be treated as TCP, not as HTTP, as Linkerd will not
+be able to observe the HTTP transactions on the connection.
+{{< /note >}}
 
-In some cases Linkerd's protocol detection requires configuration. Currently,
-this is required for unencrypted "server-speaks-first" protocols, or protocols
-where the server sends data before the client sends data. In these cases,
-Linkerd cannot automatically recognize the protocol used on the connection.
-(Note that TLS-enabled connections work as normal, because TLS itself is a
-client-speaks-first protocol.)
+## Configuring protocol detection
 
-The following protocols are known to be server-speaks-first or non-HTTP
-protocols and are treated as opaque by default:
+In some cases, Linkerd's protocol detection requires configuration to avoid a
+10-second connection delay. This configuration is typically required when using
+certain "server-speaks-first" protocols, or protocols where the server sends
+data before the client does, to communicate with off-cluster services.
 
-* 25,587 - SMTP
-* 443 - HTTPS
-* 3306 - MySQL
-* 5432 - PostgreSQL
-* 11211 - Memcached: clients do not issue any preamble, which breaks detection
+{{< note >}}
+Regardless of the underlying protocol, client-initiated TLS connection do not
+require any additional configuration, as TLS itself is a client-speaks-first
+protocol.
+{{< /note >}}
 
-If you're working with a protocol that can't be automatically recognized by
-Linkerd, you will need to set the `config.linkerd.io/opaque-ports` annotation on
-both the Pod template spec of the workload and on the Service.  This annotation
-tells Linkerd to skip protocol detection and immediately treat connections on
-those ports as opaque TCP.
+There are two basic mechanisms for configuring protocol detection: _opaque
+ports_ and _skip ports_. Marking a port as _opaque_ instructs Linkerd to skip
+protocol detection and proxy the connection as a TCP stream. Marking a port as
+_skip_  bypasses the proxy entirely. Opaque ports are generally preferred (as
+it allows Linkerd to provide mTLS, TCP-level metrics, etc), but crucially,
+opaque ports can only be used for services on the cluster.
 
-Setting this annotation on the Service resource tells meshed clients to skip
-protocol detection when proxying connections to the Service on those ports. This
-means that it is still important to set this annotation on Services that use
-server-speaks-first protocols if they have any meshed clients, even if that
-Service itself is not meshed.
+The following table summarizes some common protocols and the configuration
+necessary to handle them. The "on-cluster config" column refers to the
+configuration when the destination is *on* the same cluster; the "off-cluster
+config" to when the destination is external to the cluster.
 
-Similarly, setting this annotation on the Pod template spec tells meshed clients
-to skip protocol detection for connectins established directly to that Pod.
-Furthermore, this also tells Linkerd to skip protocol detection when
-reverse-proxying incoming connections on those ports.
+| Protocol | Default port(s) | On-cluster config | Off-cluster config|
+|----------|-----------------|---------------------------|----------------------------|
+| SMTP | 25, 587 | none\* | skip ports |
+| MySQL | 3306 | none\* | skip ports | 
+| PostgreSQL | 5432 | none\* | skip ports | 
+| Memcache | 11211 | none\* | skip ports | 
+| ElasticSearch | 9300 | opaque ports | skip ports |
 
-This annotation can easily be set on both Pod template specs and Services by
-using the `--opaque-ports` flag when running `linkerd inject`.
+_\* No configuration is required if the standard port is used. If a non-standard port
+is used, you must mark the port as opaque._
 
-For example, if you have a MySQL database running on port 4406, use the
-commands:
+## Marking a port as opaque
+
+The `config.linkerd.io/opaque-ports` annotation tells Linkerd to skip protocol
+detection for a specific set of ports, and immediately treat connections on
+those ports as TCP. This is useful for bypassing protocol detection while still
+proxying the connection.
+
+The opaque-ports annotation can be set on the Pod template spec of a workload
+or on a Service resource. Setting it on a Service resource tells meshed clients
+to skip protocol detection when proxying connections to the Service; setting it
+annotation on a Pod template spec tells meshed clients to skip protocol
+detection for connections established directly to that Pod, and tells Linkerd
+to skip protocol detection when reverse-proxying incoming connections.
+
+{{< note >}}
+Since this annotation informs the behavior of meshed _clients_, it can be
+applied to Services that use server-speaks-first protocols even if the Service
+itself is not meshed.
+{{< /note >}}
+
+Setting the opaque-ports annotation can be done by using the `--opaque-ports`
+flag when running `linkerd inject`. For example, for a MySQL database running
+on the cluster using a non-standard port 4406, you can use the commands:
 
 ```bash
 linkerd inject mysql-deployment.yml --opaque-ports=4406 \
@@ -70,18 +91,17 @@ linkerd inject mysql-deployment.yml --opaque-ports=4406 \
   | kubectl apply -f -
 ```
 
-## Skipping the Proxy
+## Skipping the proxy
 
-Sometimes it is necessary to bypass the proxy altogether.  For example, when
-connecting to a server-speaks-first server which is outside of the cluster,
+Sometimes it is necessary to bypass the proxy altogether. For example, when
+connecting to a server-speaks-first destination that is outside of the cluster,
 there is no Service resource on which to set the
-`config.linkerd.io/opaque-ports` annotation.  In this case you can use the
-`--skip-outbound-ports` flag when running `linkerd inject` which will configure
-the Pod to bypass the proxy entirely when sending to those ports.  Similarly,
-the `--skip-inbound-ports` flag will configure the Pod to bypass the proxy for
-incoming connections to those ports.
+`config.linkerd.io/opaque-ports` annotation.
 
-Skipping the proxy can be useful when diagnosing issues but otherwise should
-rarely be necessary.  Using the `config.linkerd.io/opaque-ports` annotation is
-the preferred method for dealing with server-speaks-first protocols since this
-will allow Linkerd to provide TCP metrics and mTLS.
+In this case, you can use the `--skip-outbound-ports` flag when running
+`linkerd inject` to configure the Pod to bypass the proxy entirely when sending
+to those ports. (Similarly, the `--skip-inbound-ports` flag will configure the
+Pod to bypass the proxy for incoming connections to those ports.)
+
+Skipping the proxy can be useful for these situations, as well as for
+diagnosing issues, but otherwise should rarely be necessary.
