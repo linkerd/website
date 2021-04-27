@@ -52,13 +52,13 @@ config" to when the destination is external to the cluster.
 | Protocol | Default port(s) | On-cluster config | Off-cluster config|
 |----------|-----------------|---------------------------|----------------------------|
 | SMTP | 25, 587 | none\* | skip ports |
-| MySQL | 3306 | none\* | skip ports | 
-| PostgreSQL | 5432 | none\* | skip ports | 
-| Memcache | 11211 | none\* | skip ports | 
+| MySQL | 3306 | none\* | skip ports |
+| PostgreSQL | 5432 | none\* | skip ports |
+| Memcache | 11211 | none\* | skip ports |
 | ElasticSearch | 9300 | opaque ports | skip ports |
 
-_\* No configuration is required if the standard port is used. If a non-standard port
-is used, you must mark the port as opaque._
+_\* No configuration is required if the standard port is used. If a
+non-standard port is used, you must mark the port as opaque._
 
 ## Marking a port as opaque
 
