@@ -41,7 +41,7 @@ Ozimok](https://github.com/oleh-ozimok), [Piyush
 Singariya](https://github.com/piyushsingariya), [Naga Venkata Pradeep
 Namburi](https://github.com/pradeepnnv),
 [rish-onesignal](https://github.com/rish-onesignal), [Shai
-Katz](https://github.com/shaikatz), [Takumi Sue](https://github.com/tkms0106),
+Katz](https://github.com/shaikatz), [Takumi Sue](https://github.com/mikutas),
 [Raphael Taylor-Davies](https://github.com/tustvold), and [Yashvardhan
 Kukreja](https://github.com/yashvardhan-kukreja) for all your hard work!
 

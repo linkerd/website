@@ -31,10 +31,10 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
-  - '1265777169810124800'
-  - '1284349663647133699'
-  - '1280094604482805763'
-  - '1286514800437190661'
+  - '1384463767459844097'
+  - '1379426266831581186'
+  - '1381614377170825216'
+  - '1381042996431347713'
   tweets_md: ''
 event_pictures: []
 features_list:
@@ -46,7 +46,7 @@ features_list:
   - title: Zero-config mutual TLS
     description: Transparently add mutual TLS to any on-cluster TCP communication with no configuration.
   - title: Designed by engineers, for engineers
-    description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools. 
+    description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools.
   - title: Drop-in reliability features
     description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
   - title: State-of-the-art ultralight Rust dataplane
@@ -54,7 +54,7 @@ features_list:
 buttons:
   - caption: Get Started
     url: https://linkerd.io/choose-your-platform/
-companies_title: 
+companies_title:
 companies:
 - image: "/uploads/logos/blue/expedia.png"
   link: https://www.expedia.com
