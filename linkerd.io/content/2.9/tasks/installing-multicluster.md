@@ -21,7 +21,7 @@ for a more detailed explanation of the configuration and what's going on.
 - Two clusters.
 - A [control plane installation](../install/) in each cluster that shares
   a common
-  [trust anchor](https://linkerd.io../generate-certificates/#trust-anchor-certificate).
+  [trust anchor](../generate-certificates/#trust-anchor-certificate).
   If you have an existing installation, see the
   [trust anchor bundle](../installing-multicluster/#trust-anchor-bundle)
   documentation to understand what is required.
