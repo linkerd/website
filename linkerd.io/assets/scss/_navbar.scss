@@ -114,6 +114,7 @@
   .navbar-menu {
     box-shadow: none;
     .navbar-item {
+      line-height: 1.5!important;
       &.is-active,
       &:hover {
         background: none;
@@ -128,9 +129,6 @@
         .navbar-item-helper {
           border-color: $primary-bright-blue;
         }
-      }
-      .navbar-item-helper {
-        border-bottom: 3px solid transparent;
       }
     }
   }
