@@ -60,7 +60,7 @@ refers to the configuration when the destination is *on* the same cluster; the
 |-----------------|-----------------|-------------------|--------------------|
 | SMTP            | 25, 587         | none\*            | skip ports         |
 | MySQL           | 3306            | none\*            | skip ports         |
-| MySQL w/ Galera | 3306, 4444, 4567, 4568 | opaque ports | skip ports       |
+| MySQL with Galera replication | 3306, 4444, 4567, 4568 | opaque ports for 3306, 4444; _and_ skip ports for 4567, 4568 | skip ports       |
 | PostgreSQL      | 5432            | none\*            | skip ports         |
 | Redis           | 6379            | opaque ports      | skip ports         |
 | ElasticSearch   | 9300            | opaque ports      | skip ports         |
