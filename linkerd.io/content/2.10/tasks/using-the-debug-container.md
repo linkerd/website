@@ -27,7 +27,7 @@ incoming and outgoing traffic with `tshark`, which can then be viewed with
 container and run commands directly.
 
 For instance, if you've gone through the [Linkerd Getting
-Started](https://linkerd.io../../getting-started/) guide and installed the
+Started](../../getting-started/) guide and installed the
 *emojivoto* application, and wish to debug traffic to the *voting* service, you
 could run:
 

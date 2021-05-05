@@ -10,7 +10,7 @@ can be run with your Ingress Controller.
 
 When the ingress controller is injected with the `linkerd.io/inject: enabled`
 annotation, the Linkerd proxy will honor load balancing decisions made by the
-ingress controller instead of applying [its own EWMA load balancing](https://linkerd.io../../features/load-balancing/).
+ingress controller instead of applying [its own EWMA load balancing](../../features/load-balancing/).
 This also means that the Linkerd proxy will not use Service Profiles for this
 traffic and therefore will not expose per-route metrics or do traffic splitting.
 
