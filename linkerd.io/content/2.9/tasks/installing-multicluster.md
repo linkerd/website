@@ -358,4 +358,4 @@ The same functionality can also be done through Helm setting the
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
-[multicluster task](https://linkerd.io../../features/multicluster).
+[multicluster task](../../features/multicluster).

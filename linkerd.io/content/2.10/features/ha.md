@@ -123,7 +123,7 @@ Prometheus and Grafana.
 The Linkerd Viz extension provides a pre-configured Prometheus pod, but for
 production workloads we recommend setting up your own Prometheus instance. To
 scrape the data plane metrics, follow the instructions
-[here](https://linkerd.io../../tasks/external-prometheus/). This will provide you
+[here](../../tasks/external-prometheus/). This will provide you
 with more control over resource requirement, backup strategy and data retention.
 
 When planning for memory capacity to store Linkerd timeseries data, the usual
