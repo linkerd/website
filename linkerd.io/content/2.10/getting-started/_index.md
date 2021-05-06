@@ -311,6 +311,7 @@ Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
 - Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
 - [Add your own service](../adding-your-service/) to Linkerd without downtime
+- Learn how to [automatically rotate control plane TLS credentials](../tasks/automatically-rotating-control-plane-tls-credentials/) or set a reminder to [do it manually](../tasks/manually-rotating-control-plane-tls-credentials/) before they expire
 - Learn more about [Linkerd's architecture](../reference/architecture/)
 - Hop into the #linkerd2 channel on [the Linkerd
   Slack](https://slack.linkerd.io)
