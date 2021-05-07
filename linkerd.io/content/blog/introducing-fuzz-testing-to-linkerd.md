@@ -117,8 +117,8 @@ you—the good news is that this is yet another avenue by which you can help the
 project. If you're interested in further building out Linkerd's set of fuzz
 tests, please see [the developer docs for proxy fuzzing in
 Linkerd](https://github.com/linkerd/linkerd2-proxy/blob/main/docs/FUZZING.md),
-hop into #contributors on [the Linkerd Slack](slack.linkerd.io), and let's make
-it happen!
+hop into `#contributors` on [the Linkerd Slack](https://slack.linkerd.io), and
+let's make it happen!
 
 ## Thank you
 
