@@ -21,9 +21,9 @@ these projects are now running continuously on OSS-Fuzz.
 
 These fuzz tests uncovered two minor bugs in the proxy, which have since been
 fixed. (By comparison, a similar recent effort on a C-based CNCF project found
-over 30 bugs, primarily related to memory safety). In addition, a few minor
-issues were found in dependencies, and these have all been communicated to the
-maintainers.
+(and fixed) over 30 bugs, primarily related to memory safety). In addition, a
+few minor issues were found in dependencies, and these have all been
+communicated to the maintainers.
 
 You can read the [full report
 here](https://github.com/linkerd/linkerd2-proxy/blob/main/docs/linkerd2-proxy-fuzzing-report.pdf).
@@ -48,10 +48,10 @@ tests](https://github.com/linkerd/linkerd2/actions) to ensure safety and
 reliability on every commit. These tests range from code linting and static
 analysis, to unit tests, to a comprehensive suite of integration tests. While
 these tests play a major part of Linkerd's development process, there are
-several reasons why we wanted to augment them with fuzz testing of the proxy in
-particular.
+three reasons why we wanted to augment them with fuzz testing of the proxy in
+particular:
 
-1. **Linkerd's proxy handles untrusted input from the network**. The proxy must
+1. **Linkerd's proxy handles untrusted input from the network.** The proxy must
 take a request from an application or possibly from the open Internet; parse
 the data; and "do something" with it—send it to its destination, reject it,
 etc. While Rust's memory safety guarantees help us avoid an entire class of
@@ -61,7 +61,7 @@ proxy is _extremely_ high—it must be able to handle even the worst-case
 scenario of malicious input crafted by someone with full source code access.
 
 2. **The data plane proxy is the most critical runtime component of any service
-mesh**. While Linkerd is designed so that a temporary failure of control plane
+mesh.** While Linkerd is designed so that a temporary failure of control plane
 components does not affect running applications, temporary failures at the data
 plane level means that pods are unable to process requests. And beyond simple
 failures, the worst-case scenario for bugs in the proxy is horrifying: changing
@@ -115,15 +115,18 @@ could benefit from fuzz testing.
 If you're looking for ways to get involved with Linkerd—and we'd love to have
 you—the good news is that this is yet another avenue by which you can help the
 project. If you're interested in further building out Linkerd's set of fuzz
-tests, please INSERT INSTRUCTIONS HERE.
+tests, please see [the developer docs for proxy fuzzing in
+Linkerd](https://github.com/linkerd/linkerd2-proxy/blob/main/docs/FUZZING.md),
+hop into #contributors on [the Linkerd Slack](slack.linkerd.io), and let's make
+it happen!
 
 ## Thank you
 
-The Linkerd maintainers would like to issue a special thank-you to David
-Korczynski of Ada Logics for his hard work in implementing these fuzzers, for
-wading into the uncharted waters of fuzz testing for Rust, and for helping us
-navigate the OSS-Fuzz project. We'd also like to thank the CNCF, especially ,
-for sponsoring this work for Linkerd.
+The Linkerd maintainers would like to issue a special thank-you to the Ada
+Logics team and David Korczynski in particular for their hard work in
+implementing these fuzzers, for wading into the uncharted waters of fuzz
+testing for Rust, and for helping us navigate the OSS-Fuzz project. We'd also
+like to thank the CNCF, especially Chris Aniszczyk, for sponsoring this work.
 
 ## Linkerd is for everyone
 
