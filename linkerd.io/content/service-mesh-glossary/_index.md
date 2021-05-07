@@ -177,13 +177,14 @@ latency profile of individual endpoints.
 ## mTLS
 
 Mutual TLS (mTLS) is a way to [authenticate and encrypt a connection between
-two endpoints](https://freedomben.medium.com/what-is-mtls-and-how-does-it-work-9dcdbf6c1e41). 
+two endpoints
+](https://freedomben.medium.com/what-is-mtls-and-how-does-it-work-9dcdbf6c1e41).
 Mutual TLS is simply the standard Transport Layer Security
 (TLS) protocol, with the additional restriction that identity on both sides
-of the connection must be validated. (The use of TLS in web browsers, for 
+of the connection must be validated. (The use of TLS in web browsers, for
 example, typically only validates the identity of the server, not the client.)
 
-In the service mesh context, mTLS is the basic mechanism for validating the 
+In the service mesh context, mTLS is the basic mechanism for validating the
 identity of services on either side of a connection and for keeping that
 communication confidential. This validation of identity is the basis for
 policy enforcement.
@@ -201,7 +202,7 @@ to the application itself.
 Observability is the ability to understand the health and performance of
 a system from the data it generates. In the context of service meshes,
 observability generally refers to the data about a system that the
-service mesh can report. This includes things like 
+service mesh can report. This includes things like
 "[golden metrics](#golden-metrics)",
 service topology graphs of dependencies, traffic sampling, and so on.
 
@@ -212,9 +213,12 @@ responds to failure. The more reliable a system is, the better it
 can handle individual components being down or degraded. For
 multi-service or microservice applications, a service mesh can
 be used to increase the reliability by applying[techniques
-like retries and timeouts](https://linkerd.io/2.10/features/retries-and-timeouts/) to cross-service calls, by [load balancing
-in intelligent ways](https://linkerd.io/2.10/features/load-balancing/), by [shifting traffic](https://linkerd.io/2.10/features/traffic-split/) in the presence of errors,
-and so on.
+like retries and
+timeouts](https://linkerd.io/2.10/features/retries-and-timeouts/)
+to cross-service calls, by [load balancing
+in intelligent ways](https://linkerd.io/2.10/features/load-balancing/),
+by [shifting traffic](https://linkerd.io/2.10/features/traffic-split/)
+in the presence of errors, and so on.
 
 ## Service mesh
 
