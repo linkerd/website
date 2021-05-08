@@ -26,7 +26,7 @@ few minor issues were found in dependencies, and these have all been
 communicated to the maintainers.
 
 You can read the [full report
-here](https://github.com/linkerd/linkerd2-proxy/blob/main/docs/linkerd2-proxy-fuzzing-report.pdf).
+here](https://github.com/linkerd/linkerd2-proxy/blob/main/docs/reports/linkerd2-proxy-fuzzing-report.pdf).
 For details, and how you can get involved in this important safety measure for
 Linkerd, read on!
 
