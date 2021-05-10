@@ -1640,7 +1640,7 @@ service mirror controller when a remote service is marked to be
 mirrored.
 
 Make sure services are marked to be mirrored correctly at remote, and delete
-if there are any unecessary ones.
+if there are any unnecessary ones.
 
 ## The "linkerd-viz" checks {#l5d-viz}
 
