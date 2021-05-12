@@ -217,7 +217,7 @@ like retries and
 timeouts](/2/features/retries-and-timeouts/)
 to cross-service calls, by [load balancing
 in intelligent ways](/2//features/load-balancing/),
-by [shifting traffic](https://linkerd.io/2.10/features/traffic-split/)
+by [shifting traffic](/2//features/traffic-split/)
 in the presence of errors, and so on.
 
 ## Service mesh
