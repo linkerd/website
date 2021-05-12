@@ -178,7 +178,7 @@ latency profile of individual endpoints.
 
 Mutual TLS (mTLS) is a way to [authenticate and encrypt a connection between
 two endpoints
-](https://freedomben.medium.com/what-is-mtls-and-how-does-it-work-9dcdbf6c1e41).
+](/2/features/automatic-mtls/).
 Mutual TLS is simply the standard Transport Layer Security
 (TLS) protocol, with the additional restriction that identity on both sides
 of the connection must be validated. (The use of TLS in web browsers, for
