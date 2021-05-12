@@ -214,7 +214,7 @@ can handle individual components being down or degraded. For
 multi-service or microservice applications, a service mesh can
 be used to increase the reliability by applying[techniques
 like retries and
-timeouts](https://linkerd.io/2.10/features/retries-and-timeouts/)
+timeouts](/2/features/retries-and-timeouts/)
 to cross-service calls, by [load balancing
 in intelligent ways](https://linkerd.io/2.10/features/load-balancing/),
 by [shifting traffic](https://linkerd.io/2.10/features/traffic-split/)
