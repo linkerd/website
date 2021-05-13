@@ -265,13 +265,13 @@ EOF
 Now we can install Linkerd using these config files:
 
 ```bash
-linkerd install --config=config.yml | kubectl apply -f -
+linkerd install --values=config.yml | kubectl apply -f -
 
 # ignore if not using the viz extension
-linkerd viz install --config=config-viz.yml | kubectl apply -f -
+linkerd viz install --values=config-viz.yml | kubectl apply -f -
 
 # ignore if not using the jaeger extension
-linkerd jaeger install --config=config-jaeger.yml | kubectl apply -f -
+linkerd jaeger install --values=config-jaeger.yml | kubectl apply -f -
 ```
 
 ## Installing with Helm
