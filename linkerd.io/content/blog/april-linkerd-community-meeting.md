@@ -9,15 +9,15 @@ description = "We chatted with Fredrik Klingenberg about his experience implemen
 featured = false
 +++
 
-As always, if you missed the April Linkerd Community Meeting, there is no reason to panic —  we've got you covered. Check out our recap and the recording.
+As always, if you missed the April Linkerd Community Meeting, there is no reason to panic —  we've got you covered. Here's our recap and the recording.
 
-Before getting started, we wanted to remind you of the [Linkerd Anchor program](https://linkerd.io/community/anchor/). If you have a great Linkerd story, we'd love to help you tell it. Whether assisting with the writing process, reviewing code, or providing guidance on how to create a great video tutorial —  our team is here to help. [Submit the form](https://linkerd.io/community/anchor/) and we'll reach out!
+Before getting started, we wanted to remind you of the [Linkerd Anchor program](https://linkerd.io/community/anchor/). If you have a great Linkerd story, we'd love to help you tell it. Our team is happy to assist with the writing process, reviewing code, or providing guidance on how to create a great video tutorial. [Submit the form](https://linkerd.io/community/anchor/) and we'll reach out!
 
-We are also still gathering responses to the [Linkerd 2021 user survey](https://docs.google.com/forms/d/e/1FAIpQLSfofwKQDOrAN9E9Vg1041623A3-8nmEAxlAbvXw-S9r3QnT9g/viewform). If you haven't participated yet, please do so —  it really helps us make this awesome service mesh even more awesome.
+We are also still gathering responses to the [Linkerd 2021 user survey](https://docs.google.com/forms/d/e/1FAIpQLSfofwKQDOrAN9E9Vg1041623A3-8nmEAxlAbvXw-S9r3QnT9g/viewform). If you haven't participated yet, please do so. It really helps us make this awesome service mesh even more awesome.
 
-## Updates
+## Project updates
 
-As mentioned last time, we’ve submitted Linkerd to graduation and have gotten lots of thumbs up – looking really good so far. We'll continue to keep you updated as things evolve. Linkerd also completed fuzz tests for the proxy. A blog post with details will follow soon.
+We've submitted Linkerd for CNCF graduation, and are currently waiting for a TOC sponsor. We've also added fuzz tests to the proxy, sponsored by the CNCF. You can read more in the blog post: [Introducing fuzz testing for Linkerd](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/).
 
 ## Linkerd Roadmap
 
@@ -37,11 +37,11 @@ We’ve been taking feedback from the steering committee and [published a Linker
 
 ## Linkerd @ KubeCon EU
 
-This KubeCon and CloudNativeCon were the most [Linkerd-heavy to date](https://buoyant.io/2021/05/13/kubecon-eu-2021-wrap-up/). We were particularly excited to see so many end users sharing their service mesh journey — it's just great to see how the community shares their lessons learned! This, by the way, ties directly into the [Linkerd Anchor Program](https://linkerd.io/community/anchor/). If you'd like to tell your story at KubeCon or at any other conference and need help, we'd love to assist you!
+This KubeCon and CloudNativeCon were the most [Linkerd-heavy to date](https://buoyant.io/2021/05/13/kubecon-eu-2021-wrap-up/). We were particularly excited to see so many end users sharing their service mesh journey. It's just great to see how the community shares their lessons learned! This, by the way, ties directly into the [Linkerd Anchor Program](https://linkerd.io/community/anchor/). If you'd like to tell your story at KubeCon or at any other conference and need help, we'd love to assist you!
 
 ## Community convo with Fredrik Klingenberg
 
-Our guest speaker last month was Fredrik Klingenberg, Senior Consultant at Aurum SA, a Norwegian consulting firm. Fredrik has been working with Kubernetes since version 1.5.x (as a reference, Kubernetes is currently at 1.21) and has a lot of hands-on experience. Due to his expertise, he was approached by Microsoft and asked if he could help Elkjøp with their Kubernetes journey. Aurum and Elkjøp joined forces and Fredrik helped the Nordic retail giant move to a home-grown Kubernetes platform powered by Linkerd. You can learn all about it on this [CNCF blog that Fredrik co-authored](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-enterprise-ready-kubernetes-platform-powered-by-linkerd/)in February —  the CNCF’s most viewed blog of that month!
+Our guest speaker last month was Fredrik Klingenberg, Senior Consultant at Aurum SA, a Norwegian consulting firm. Fredrik has been working with Kubernetes since version 1.5.x (as a reference, Kubernetes is currently at 1.21) and has a lot of hands-on experience. Due to his expertise, he was approached by Microsoft and asked if he could help Elkjøp with their Kubernetes journey. Aurum and Elkjøp joined forces and Fredrik helped the Nordic retail giant move to a home-grown Kubernetes platform powered by Linkerd. You can learn all about it on this [CNCF blog that Fredrik co-authored](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-enterprise-ready-kubernetes-platform-powered-by-linkerd/)in February. It was the CNCF’s most viewed blog of that month!
 
 ## Timeout with Tarun
 
