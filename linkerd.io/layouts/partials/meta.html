@@ -7,9 +7,7 @@
 {{ end }}
 
 <meta name="description" content="{{ partial "description.html" . }}" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@Linkerd" />
-<meta name="twitter:creator" content="@Linkerd" />
+{{ partial "twitter-cards.html" . }}
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:description" content="{{ partial "description.html" . }}" />
 <meta property="og:type" content="website" />
