@@ -1,6 +1,6 @@
 {{ with .Params.thumbnail }}
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image" content="{{ . }}"/>
+  <meta name="twitter:image" content="{{ . | absURL }}"/>
 {{ else }}
   {{ $images := $.Resources.ByType "image" }}
   {{ $featured := index $images 0 }}
@@ -9,7 +9,7 @@
   {{ end }}
   {{ with $featured }}
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:image" content="{{ $featured.Permalink }}"/>
+    <meta name="twitter:image" content="{{ $featured.Permalink | absURL }}"/>
   {{ else }}
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:image" content="{{ "images/logo-only-200h.png" | absURL }}"/>
