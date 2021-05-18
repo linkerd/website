@@ -1,5 +1,5 @@
 +++
-date = 2021-04-18T00:00:00Z
+date = 2021-05-18T00:00:00Z
 title = "Kubecon NA CFP closes this Sunday"
 +++
 
