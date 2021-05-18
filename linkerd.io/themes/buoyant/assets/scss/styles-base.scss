@@ -1108,3 +1108,18 @@ body {
 .is-size-5.has-text-weight-bold {
   font-weight: 700 !important;
 }
+
+.pagination {
+  padding: 1rem;
+}
+.pagination .pagination-link,
+.pagination .pagination-next,
+.pagination .pagination-previous {
+  color: $primary-bright-blue;
+  border: 1px solid $primary-bright-blue;
+}
+
+.pagination .pagination-link.is-current {
+  color: $white;
+  background-color: $primary-bright-blue;
+}

@@ -41,12 +41,12 @@
           All Blog Posts
         </div>
         <div class="columns container is-multiline is-variable blog-list-container" id="searchResult">
-          {{ range .Pages | first 6 }}
+          {{ range .Paginator.Pages }}
             {{ partial "related-card.html" . }}
           {{ end }}
         </div>
-        <div class="is-uppercase has-text-weight-semibold has-text-centered is-size-6 blog-list-load-more">
-          <a id="loadMore" href="javascript:void(0)">See more</a>
+        <div id="pagination" class="container column">
+          {{ partial "pagination.html" . }}
         </div>
       </div>
     </div>

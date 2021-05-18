@@ -1,4 +1,4 @@
-Paginate = 10
+paginate = 10
 baseurl = "https://linkerd.io/"
 disableKinds = ["taxonomy", "taxonomyTerm"]
 enableRobotsTXT = true
