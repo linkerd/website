@@ -40,6 +40,21 @@
     </div>
   </div>
   {{ partial "blog/adopter-banner.html" .Site.Home }}
+  <div class="search-title is-uppercase has-text-centered" id="resultsHeader">
+    Suggested Blog Posts
+  </div>
+  <div class="columns container is-multiline is-variable blog-list-container">
+    {{ $related := .Site.RegularPages.Related . | first 4 }}
+    {{ with $related }}
+    {{ range . }}
+      {{ partial "related-card.html" . }}
+    {{ end }}
+    {{ end }}
+  </div>
+
+
+
+
   {{ end }}
 
   {{ define "body-end" }}
