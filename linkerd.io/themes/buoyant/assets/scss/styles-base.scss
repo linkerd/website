@@ -435,7 +435,7 @@ body {
     background-color: rgb(70,125,189);
   }
   .content {
-    min-height: 100px;
+    min-height: 124px;
     margin-bottom: 0;
   }
   .card-footer {
@@ -476,6 +476,9 @@ body {
     color: $deep-blue;
     .title {
       color: $deep-blue;
+    }
+    figure {
+      filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.75));
     }
   }
   .level {
