@@ -13,7 +13,7 @@ function initSearchPage(dataUrl, tagFieldName) {
   // var filterList = document.getElementById("filterList");
   // var resetFiltersButton = document.getElementById("resetFilters");
 
-  var loadMoreButton = document.getElementById("loadMore");
+  var pagination = document.getElementById("pagination");
 
   var searchCancelationToken;
 
@@ -106,11 +106,6 @@ function initSearchPage(dataUrl, tagFieldName) {
       refreshSearch(search(value || "*"));
     });
 
-    loadMoreButton.addEventListener("click", function () {
-      searchItemsVisible += 6;
-      refreshSearch(search(searchInput.value || "*"));
-    });
-
     // resetFiltersButton.addEventListener("click", function () {
     //   selectedTags = [];
     //    refreshFilters();
@@ -119,11 +114,11 @@ function initSearchPage(dataUrl, tagFieldName) {
   }
 
   function resetSearchItemsVisible() {
-    searchItemsVisible = 6;
+    searchItemsVisible = 10;
   }
 
   function refreshSearch(results) {
-    loadMoreButton.style.display = "none";
+    pagination.style.display = "none";
     if (searchCancelationToken) {
       clearTimeout(searchCancelationToken);
     } else {
@@ -131,9 +126,9 @@ function initSearchPage(dataUrl, tagFieldName) {
     }
     searchCancelationToken = setTimeout(() => {
       if (results.length <= searchItemsVisible) {
-        loadMoreButton.style.display = "none";
+        pagination.style.display = "none";
       } else {
-        loadMoreButton.style.display = "";
+        pagination.style.display = "";
       }
       refreshSearchResult(results.slice(0, searchItemsVisible));
       searchCancelationToken = null;

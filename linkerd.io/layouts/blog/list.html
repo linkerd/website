@@ -25,7 +25,7 @@
         <div class="has-background-grey-light is-paddingless featured-items-container">
           <div id="featuredItems">
             <div class="search-title is-uppercase has-text-centered">Featured</div>
-            <div class="columns container is-multiline is-variable blog-list-container">
+            <div class="columns container is-multiline is-variable blog-list-container pt-0">
               {{ range.Params.items }}
               {{ with $.Site.GetPage . }}
                 {{ .Scratch.Set "type" "Page" }}
@@ -38,15 +38,15 @@
           </div>
         </div>
         <div class="search-title is-uppercase has-text-centered" id="resultsHeader">
-          Recently Added
+          All Blog Posts
         </div>
-        <div class="columns container is-multiline is-variable blog-list-container" id="searchResult">
-          {{ range .Pages | first 6 }}
+        <div class="columns container is-multiline is-variable blog-list-container pt-0" id="searchResult">
+          {{ range .Paginator.Pages }}
             {{ partial "related-card.html" . }}
           {{ end }}
         </div>
-        <div class="is-uppercase has-text-weight-semibold has-text-centered is-size-6 blog-list-load-more">
-          <a id="loadMore" href="javascript:void(0)">See more</a>
+        <div id="pagination" class="container column">
+          {{ partial "pagination.html" . }}
         </div>
       </div>
     </div>
