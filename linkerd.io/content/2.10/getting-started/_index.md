@@ -58,7 +58,7 @@ allow you to interact with your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl -sL run.linkerd.io/install | sh
+curl -sL https://run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
