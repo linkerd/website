@@ -140,7 +140,7 @@ our rapidly-growing community! Linkerd is hosted on
 the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 
 (*Photo by [Prince Abid](https://unsplash.com/@princeabid708?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText") on [Unsplash](https://unsplash.com/s/photos/fuzz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
-  
+
 ## Footnotes
 
 [^1]: The tests are focused on finding situations that cause the proxy to "panic", or intentionally crash—an easily-detectable situation that is the consequence of the proxy finding itself in a situation it can't handle. A fuzz test that causes the proxy to panic in response to strange input is a sure sign of a bug.

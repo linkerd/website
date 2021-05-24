@@ -11,3 +11,8 @@ command = "make preview-build"
 
 [context.branch-deploy]
 command = "make preview-build"
+
+[[redirects]]
+  from = "/enterprise"
+  to = "/support-training/"
+  status = 301
