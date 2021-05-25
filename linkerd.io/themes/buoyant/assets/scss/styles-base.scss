@@ -475,7 +475,12 @@ body {
   .related-card {
     color: $deep-blue;
     .title {
+      font-size: 20px !important;
+      line-height: 1.4 !important;
       color: $deep-blue;
+    }
+    .related-card-header {
+      font-size: 14px !important;
     }
     figure {
       filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.75));
