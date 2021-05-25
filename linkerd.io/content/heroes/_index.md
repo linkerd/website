@@ -10,7 +10,7 @@ top_hero:
     other out whether on Slack or social media, share their successes and failures
     at conferences or through blogs, fostering the dynamic and engaging community
     we all love.
-  image: "/uploads/april-linkerd-hero.png"
+  image: "/images/heroes-graphic.svg"
   image_on_the_right: false
   alt: Portrait of Rio Kierkels
 voted:
@@ -53,25 +53,25 @@ nominated:
   heroes:
   - name: Saim Safdar
     date: April 2021
-    blurb: Spreading the Linkerd message  
+    blurb: Spreading the Linkerd message
     image: "/uploads/saim safdar 1.png"
     alt: Portrait of Saim Safdar
     github_url: https://github.com/Saim-Safdar
   - name: Ali Ariff
     date: April 2021
-    blurb: Technical contributions  
+    blurb: Technical contributions
     image: "/uploads/ali 1.png"
     alt: Portrait of Ali Ariff
     github_url: https://github.com/Saim-Safdar
   - name: Fredrik Klingenberg
     date: March 2021
-    blurb: Spreading the Linkerd message  
+    blurb: Spreading the Linkerd message
     image: "/uploads/fredrick-klingenberg.jpg"
     alt: Portrait of Fredrick Klingenberg
     github_url: https://www.linkedin.com/in/fredrikklingenberg/
   - name: Henry Hagnäs
     date: March 2021
-    blurb: Spreading the Linkerd message  
+    blurb: Spreading the Linkerd message
     image: "/uploads/henry-elk-profile.jpg"
     alt: Portrait of Henry Hagnas
     github_url: https://www.linkedin.com/in/hagnas/
