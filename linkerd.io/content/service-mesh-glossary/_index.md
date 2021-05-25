@@ -54,12 +54,29 @@ faqs:
       equivalent endpoints. Kubernetes, like many systems, provides load 
       balancing at the connection level. A service mesh like Linkerd improves 
       this by performing load balancing at the request level.
+  - question: What is mTLS?
+    answer:
+      Mutual TLS (mTLS) is a way to authenticate and encrypt a connection
+      between two endpoints. Mutual TLS is simply the standard Transport
+      Layer Security (TLS) protocol, with the additional restriction that
+      identity on both sides of the connection must be validated. 
   - question: What is multi-cluster?
     answer:
       In the context of Kubernetes, multi-cluster usually refers to running 
       an application "across" multiple Kubernetes clusters. Linkerd's 
       multi-cluster support provides seamless and secured communication 
       across clusters, in a way that's secure even across the public Internet.
+  - question: What is observability?
+    answer:
+      Observability is the ability to understand the health and performance
+      of a system from the data it generates. In the context of service
+      meshes, observability generally refers to the data about a system that
+      the service mesh can report.
+  - question: What is reliability?
+    answer:
+      Reliability is a system property that measures how well the system
+      responds to failure. The more reliable a system is, the better it
+      can handle individual components being down or degraded.   
   - question: What is a service mesh?
     answer:
       A service mesh is a tool for adding observability, security, and
@@ -157,6 +174,21 @@ called EWMA (exponentially-weighted moving average), to distribute load
 based on endpoint latency while being responsive to rapid changes in the
 latency profile of individual endpoints.
 
+## mTLS
+
+Mutual TLS (mTLS) is a way to [authenticate and encrypt a connection between
+two endpoints
+](/2/features/automatic-mtls/).
+Mutual TLS is simply the standard Transport Layer Security
+(TLS) protocol, with the additional restriction that identity on both sides
+of the connection must be validated. (The use of TLS in web browsers, for
+example, typically only validates the identity of the server, not the client.)
+
+In the service mesh context, mTLS is the basic mechanism for validating the
+identity of services on either side of a connection and for keeping that
+communication confidential. This validation of identity is the basis for
+policy enforcement.
+
 ## Multi-cluster
 
 In the context of Kubernetes, multi-cluster usually refers to running
@@ -165,9 +197,33 @@ support provides seamless and secured communication across clusters, in a
 way that's secure even across the public Internet, and is fully transparent
 to the application itself.
 
+## Observability
+
+Observability is the ability to understand the health and performance of
+a system from the data it generates. In the context of service meshes,
+observability generally refers to the data about a system that the
+service mesh can report. This includes things like
+"[golden metrics](#golden-metrics)",
+service topology graphs of dependencies, traffic sampling, and so on.
+
+## Reliability
+
+Reliability is a system property that measures how well the system
+responds to failure. The more reliable a system is, the better it
+can handle individual components being down or degraded. For
+multi-service or microservice applications, a service mesh can
+be used to increase the reliability by applying[techniques
+like retries and
+timeouts](/2/features/retries-and-timeouts/)
+to cross-service calls, by [load balancing
+in intelligent ways](/2//features/load-balancing/),
+by [shifting traffic](/2//features/traffic-split/)
+in the presence of errors, and so on.
+
 ## Service mesh
 
-A service mesh is a tool for adding observability, security, and reliability
+A service mesh is a tool for adding [observability](#observability),
+security, and [reliability](#reliability)
 features to applications by inserting these features at the platform layer
 rather than the application layer. Service meshes are implemented by adding
 [sidecar proxies](#sidecar-proxy) that intercept all traffic between
