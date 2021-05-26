@@ -177,8 +177,7 @@ latency profile of individual endpoints.
 ## mTLS
 
 Mutual TLS (mTLS) is a way to [authenticate and encrypt a connection between
-two endpoints
-](/2/features/automatic-mtls/).
+two endpoints](https://linkerd.io/2/features/automatic-mtls/).
 Mutual TLS is simply the standard Transport Layer Security
 (TLS) protocol, with the additional restriction that identity on both sides
 of the connection must be validated. (The use of TLS in web browsers, for
@@ -213,11 +212,10 @@ responds to failure. The more reliable a system is, the better it
 can handle individual components being down or degraded. For
 multi-service or microservice applications, a service mesh can
 be used to increase the reliability by applying[techniques
-like retries and
-timeouts](/2/features/retries-and-timeouts/)
+like retries and timeouts](https://linkerd.io/2/features/retries-and-timeouts/)
 to cross-service calls, by [load balancing
-in intelligent ways](/2//features/load-balancing/),
-by [shifting traffic](/2//features/traffic-split/)
+in intelligent ways](https://linkerd.io/2/features/load-balancing/),
+by [shifting traffic](https://linkerd.io/2/features/traffic-split/)
 in the presence of errors, and so on.
 
 ## Service mesh
