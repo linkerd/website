@@ -8,7 +8,7 @@ slug: linkerd-vs-istio-benchmarks
 tags: [Linkerd]
 ---
 
-![a fuzzy baby chick](/uploads/marc-sendra-martorell--Vqn2WrfxTQ-unsplash.jpg)
+![car lights zooming by](/uploads/marc-sendra-martorell--Vqn2WrfxTQ-unsplash.jpg)
 
 Two years ago, the fine folks at [Kinvolk](https://kinvolk.io) benchmarked the
 performance of Linkerd and Istio and showed that Linkerd was dramatically
@@ -122,31 +122,31 @@ standard deviation from that mean. The bars themselves represent Linkerd
 
 ### Latency at 20 RPS
 
-Starting at the relatively calm level of 20 RPS, Linkerd already shows a big
-difference in user-facing latency: its median latency was 17ms, 11ms over the
-baseline of 7ms. Istio's median latency, by contrast, was 26ms, almost twice
-the additional latency of Linkerd. At the maximum, Linkerd added 53ms over the
-baseline at 70ms of latency, whereas Istio's max latency was 205ms, over three
-times the additional latency of Linkerd.
+Starting at the relatively calm level of 20 RPS, we already see a big
+difference in user-facing latency: Linkerd's median latency was 17ms, 11ms over
+the baseline of 6ms. Istio's median latency, by contrast, was 26ms, almost
+twice the additional latency of Linkerd. At the maximum, Linkerd added 53ms
+over the baseline of 17ms of latency, whereas Istio's max latency added 188ms,
+over three times the additional latency of Linkerd.
 
-From the graph, we can see that Istio's latency distribution jumped
+Looking at the percentiles, we see that Istio's latency distribution jumped
 dramatically at the 99th percentile to ~200ms, while Linkerd showing a more
-gradual increase in the higher percentiles. (Remember that these latency
-numbers are measured from the client's perspective, i.e. what a user of this
-application would actually experience.)
+gradual increase in the higher percentiles to 70ms. (Remember that these
+latency numbers are measured from the client's perspective, i.e. what a user of
+this application would actually experience.)
 
 ![Latency at 20 RPS](/images/benchmark/latency-20rps.png "Latency at 20 RPS")
 
 ### Latency at 200 RPS
 
-The 200 RPS numbers tell a very similar story to that of 20 RPS, and the median
-latency numbers are almost identical: Linkerd's median latency of 17ms
-represents an ~11ms over the baseline median of 7ms, while Istio's median
-latency of 25ms is twice that. At the max, Istio's latency of 221ms is almost
-200ms over the baseline of 23ms, while Linkerd's max latency of 92ms is ~70ms
-over, over 2.5x faster than Istio. We see the same jump in Istio's latency
-occurring at the 99th percentile to almost 200ms of user-facing latency, with
-Linkerd leveling out at the 99.9th percentile. 
+The 200 RPS numbers tell a very similar story and the median latency numbers
+are almost identical: Linkerd's median latency of 17ms represents 11ms over the
+baseline median of 6ms, while Istio's median latency of 25ms is 19ms over.  At
+the max, Istio's latency of 221ms is almost 200ms over the baseline of 23ms,
+while Linkerd's max latency of 92ms is ~70ms over, 2.5x less than Istio.  We
+see the same jump in Istio's latency occurring at the 99th percentile to almost
+200ms of user-facing latency, with Linkerd leveling out at the 99.9th
+percentile to almost 90ms.
 
 ![Latency at 200 RPS](/images/benchmark/latency-200rps.png "Latency at 200 RPS")
 
@@ -154,20 +154,20 @@ Linkerd leveling out at the 99.9th percentile.
 
 Finally, at 2,000 RPS—over three times what Kinvolk evaluated—we see the same
 pattern again: at the median, Linkerd introduces an additional 9ms of latency
-over the baseline of 6ms, vs Istio's additional 15ms; at the max, Linkerd
+over the baseline of 6ms vs Istio's additional 15ms; at the max, Linkerd
 introduces an additional 47ms over the baseline of 25ms, and Istio adding 5x
 that with an additional ~253ms. Generally speaking, at each percentile
-reported, Istio introduced between 40% to 400% more latency than Linkerd.
+reported, Istio introduced between 40% to 400% more additional latency than
+Linkerd.
 
 ![Latency at 2,000 RPS](/images/benchmark/latency-2000rps.png "Latency at 2,000 RPS")
 
 ## Resource consumption
 
-We've seen how Linkerd's latency is significantly less than Istio, but what
-about its resource consumption? The CPU and memory consumption of each service
-mesh are shown in the graphs below. These numbers are fairly consistent across
-all throughput levels, so we'll focus on the highest-load scenario of 2,000
-RPS.
+Let's turn now to resource usage. The CPU and memory consumption of each
+service mesh are shown in the graphs below. These numbers are fairly consistent
+across all throughput levels, so we'll focus on the highest-load scenario of
+2,000 RPS.
 
 Starting with the control plane, we see that Istio's control plane usage
 averaged 837mb, about 2.5x Linkerd's control plane memory consumption of 324mb.
@@ -259,7 +259,7 @@ would be run by a neutral third party. Which brings us to:
 
 If you want to reproduce these experiments, we've made our [full set of
 benchmarking
-instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd's-Release-Process)
+instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd-Benchmark-Setup)
 available. If you try this, _please_ see our comments above about experimental
 methodology. It is critical to find an environment that can consistently
 deliver results, especially for things like max latency that are very sensitive
