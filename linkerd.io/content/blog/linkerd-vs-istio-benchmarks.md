@@ -189,10 +189,7 @@ Envoy proxies was 154.6mb—a factor of 8. Similarly, Linkerd's maximum proxy CP
 time recorded was 10ms, whereas Istio's was 88ms—almost an order of magnitude
 difference.
 
-![Control plane memory usage](/images/benchmark/cp-mem.png "Control plane memory usage")
-![Control plane CPU usage](/images/benchmark/cp-cpu.png "Control plane CPU usage")
-![Data plane memory usage](/images/benchmark/dp-mem.png "Data plane memory usage")
-![Data plane CPU usage](/images/benchmark/dp-cpu.png "Data plane CPU usage")
+![Resource usage](/images/benchmark/grid.png "Resource usage")
 
 ## Summary and discussion
 
