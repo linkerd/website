@@ -11,14 +11,15 @@ tags: [Linkerd]
 ![car lights zooming by](/uploads/marc-sendra-martorell--Vqn2WrfxTQ-unsplash.jpg)
 
 Two years ago, the fine folks at [Kinvolk](https://kinvolk.io) benchmarked the
-performance of Linkerd and Istio and showed that Linkerd was dramatically
-faster and smaller than Istio in all but one area (Linkerd used more data plane
-CPU). Recently, we repeated those experiments with the latest versions of both
-projects. Our results show that **Linkerd not only remains dramatically faster
-than Istio, but now also consumes an order of magnitude less data plane memory
-and CPU while doing so**. These results were sustained even at throughput
-levels over 3x more than what Kinvolk evaluated, and you can reproduce them
-yourself.
+performance of Linkerd and Istio and showed that [Linkerd was dramatically
+faster and smaller than Istio in all but one
+area](https://kinvolk.io/blog/2019/05/performance-benchmark-analysis-of-istio-and-linkerd/)
+(Linkerd used more data plane CPU). Recently, we repeated those experiments
+with the latest versions of both projects. Our results show that **Linkerd not
+only remains dramatically faster than Istio, but now also consumes an order of
+magnitude less data plane memory and CPU while doing so**. These results were
+sustained even at throughput levels over 3x more than what Kinvolk evaluated,
+and you can reproduce them yourself.
 
 Read on for more!
 
@@ -40,7 +41,7 @@ The second thing Kinvolk produced were the actual benchmark results circa 2019
 for both Linkerd and Istio. These numbers showed that Linkerd was dramatically
 faster and that Linkerd's resource consumption was also dramatically smaller in
 all factors except one—Linkerd's data plane (i.e. its proxies) consumed
-slightly more CPU than Istio at the highest level of load.
+more CPU than Istio at the highest level of load.
 
 Two years later and after many releases from both projects, we decided to
 revisit these experiments.
@@ -52,29 +53,33 @@ stable releases of both projects: Linkerd 2.10.2 (with its default
 installation) and Istio 1.10.0 (with its "minimal" config). We ran the latest
 version of the benchmark harness on a Kubernetes v1.19 cluster using the
 Lokomotive Kubernetes distribution. The benchmark ran on bare-metal hardware
-was kindly provided by [Equinix Metal](https://www.equinix.com/) to the CNCF.
+kindly provided by [Equinix Metal](https://www.equinix.com/) to CNCF projects.
 
-Our first step was to find a test environment within Equinix that delivered
-consistent results across runs. This was a surprisingly difficult task: many
-environments produced hugely variable latencies between runs, including for the
-base case of no service mesh. (For example, the no-service-mesh case in one
-environment produced maximum latencies of anywhere from 26ms to 159ms!)
+Our first step was to find a test environment within Equinix Metal that could
+deliver consistent results across runs. This was a surprisingly difficult task:
+many of the environments we tried produced hugely variable latencies between
+runs, including for the base case of no service mesh. (For example, in one
+environment we tried, the benchmarks reported maximum latencies of anywhere
+from 26ms to 159ms at 200 RPS for the no service mesh case!)
 
-After some experimentation, we settled on a cluster in the Equinix DFW2
-datacenter consisting of 6 worker nodes of the s3.xlarge.x86 configuration
-(Intel Xeon 4214 with 24 physical cores @ 2.2GHz and 192GB of RAM) on which the
-benchmark application ran, plus one load generator node of the same config,
-plus one K8s master node of a c2.medium.x86 config. This environment yielded
-very low variance in between runs.
+We finally arrived at a cluster in the [Equinix Metal `dfw2`
+datacenter](https://metal.equinix.com/developers/docs/locations/facilities/#core-sites)
+which yielded consistent behavior with low variance between runs. This cluster
+comprised 6 worker nodes of the `s3.xlarge.x86` configuration (Intel Xeon 4214
+with 24 physical cores @ 2.2GHz and 192GB of RAM) on which the benchmark
+application ran, plus one load generator node of the same config, plus one K8s
+master node of a c2.medium.x86 config.
 
-While the original Kinvolk work evaluated performance at 500 requests per
-second (RPS) and 600 RPS, we wanted to try a broader range: we evaluated the
-meshes at 20 RPS, 200 RPS, and 2,000 RPS. At each of these levels, we ran 6
-independent runs of 10 minutes each of sustained load, for Linkerd, Istio, and
-the base case of no service mesh. All benchmark and mesh resources were
-reinstalled in between runs. For each level, we discarded the single run with
-the highest maximum latency, leaving us with 5 runs. (Our raw data is available
-[here](https://docs.google.com/spreadsheets/d/1x0QXFAvL0nWOIGL5coaaW1xwsju5EmSjsqjw6bwHMlQ/).)
+Next, we turned to the parameters of the harness. While the original Kinvolk
+work evaluated performance at 500 requests per second (RPS) and 600 RPS, we
+wanted to try a broader range: we evaluated the meshes at 20 RPS, 200 RPS, and
+2,000 RPS. At each of these levels, we ran 6 independent runs of 10 minutes
+each of sustained load, for Linkerd, Istio, and the base case of no service
+mesh. All benchmark and mesh resources were reinstalled in between runs. For
+each level, we discarded the single run with the highest maximum latency,
+leaving us with 5 runs. (Our [raw data is
+available](https://docs.google.com/spreadsheets/d/1x0QXFAvL0nWOIGL5coaaW1xwsju5EmSjsqjw6bwHMlQ/)
+for perusal.)
 
 Note that the Kinvolk framework measures the behavior of the service mesh in a
 very specific way:
@@ -89,12 +94,14 @@ very specific way:
 * It measures latency from the client's perspective (the load generator), which
   includes time on the cluster's network, time in the application, time in the
   proxies, and so on. Latency is reported as the percentiles of a distribution,
-  e.g. p50 (median), p99, p999 (99.9th percent), and so on. 
+  e.g. p50 (median), p99, p999 (99.9th percent), and so on.
+
+(See [Summary and discussion](#summary-and-discussion) below for more on this.)
 
 Note also that the numbers reported by this benchmark are a function of both
 the service mesh _and_ of the harness and its environment. In other words,
 these are not absolute scores but relative ones, which can only be evaluated
-against other alternatives measured in the same way.[^1]
+against other alternatives measured in the same environment and same way.[^1]
 
 ## What service mesh features were tested?
 
@@ -175,11 +182,12 @@ Linkerd's CPU usage was orders of magnitude smaller—71ms of control plane CPU
 time versus Istio's 3.7s.
 
 More important than the control plane, however, is the data plane. After all,
-this is the part of the mesh that scales out. Here we see another dramatic
-difference: the maximum memory consumed by a Linkerd proxy was, on average,
-17.8mb, whereas the maximum memory consumed by one of Istio's Envoy proxies was
-154.6mb—a factor of 8. Similarly, Linkerd's maximum proxy CPU time recorded was
-10ms, whereas Istio's was 88ms—almost an order of magnitude difference.
+this is the part of the mesh that must scale out with the application. Here we
+see another dramatic difference: the maximum memory consumed by a Linkerd proxy
+was, on average, 17.8mb, whereas the maximum memory consumed by one of Istio's
+Envoy proxies was 154.6mb—a factor of 8. Similarly, Linkerd's maximum proxy CPU
+time recorded was 10ms, whereas Istio's was 88ms—almost an order of magnitude
+difference.
 
 ![Control plane memory usage](/images/benchmark/cp-mem.png "Control plane memory usage")
 ![Control plane CPU usage](/images/benchmark/cp-cpu.png "Control plane CPU usage")
@@ -188,12 +196,12 @@ difference: the maximum memory consumed by a Linkerd proxy was, on average,
 
 ## Summary and discussion
 
-In these benchmarks, designed to mimic a real-world application, we saw Linkerd
-dramatically outperform Istio while maintaining a resource cost that is many
-orders of magnitude smaller at the critical data plane level. At the highest
-throughput evaluated, we saw Linkerd consume 1/9th the memory and 1/8th the CPU
-at the data plane, while delivering 75% of the additional median latency and
-less than 1/5th the additional maximum latency of Istio.
+In these benchmarks, designed to mimic behavior in a real-world scenario, we
+saw Linkerd dramatically outperform Istio while maintaining a resource cost
+that is many orders of magnitude smaller at the critical data plane level. At
+the highest throughput evaluated, we saw Linkerd consume 1/9th the memory and
+1/8th the CPU at the data plane, while delivering 75% of the additional median
+latency and less than 1/5th the additional maximum latency of Istio.
 
 Benchmarking is as much art as science. In these experiments, we made a
 conscious choice to stick to the Kinvolk benchmark framework as published. In
@@ -210,8 +218,8 @@ future work, there are several things we might consider changing. For example:
 Additionally, our experiments were significantly simpler than Kinvolk's 2019
 experiments, which involved 30 minutes of sustained traffic, different
 clusters, different datacenters, and other techniques to control for variable
-hardware or networking. In our case, the variance we measured in between runs
-gave us confidence that this simpler setup was sufficient for our purposes.
+hardware or networking. In our case, we explicitly focused on finding a
+low-variance environment first on which to run the tests.
 
 ## Why is Linkerd so much faster and lighter?
 
@@ -228,7 +236,7 @@ Rust](https://www.infoq.com/articles/linkerd-v2-production-adoption/) back in
 the dark ages of 2018. Interestingly enough, the primary reason for building
 Linkerd2-proxy was not for performance but for _operational_ reasons: operating
 an Envoy-based service mesh like Istio often requires you to become an expert
-at operating Envoy, a challenge to which we did not want to impose upon Linkerd
+at operating Envoy, a challenge which we did not relish imposing upon Linkerd
 users.[^2]
 
 Happily, the choice to build Linkerd2-proxy also resulted in significant
@@ -255,15 +263,18 @@ We are also eagerly watching the [SMP project](https://smp-spec.io/) as a
 potential source of benchmarking standards. Ideally, these benchmarks
 would be run by a neutral third party. Which brings us to:
 
-## Trying this at home
+## How to reproduce these results
 
-If you want to reproduce these experiments, we've made our [full set of
-benchmarking
-instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd-Benchmark-Setup)
-available. If you try this, _please_ see our comments above about experimental
-methodology. It is critical to find an environment that can consistently
-deliver results, especially for things like max latency that are very sensitive
-to network traffic, resource contention, etc.
+If you want to reproduce these experiments on your own, you can follow the
+[benchmarking
+instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd-Benchmark-Setup).
+
+If you try this, please see our [comments above](#experiment-setup) about
+experimental methodology. It is critical that you find an environment that can
+deliver consistent results, especially for things like max latency that are
+very sensitive to network traffic, resource contention, and so on.  Also,
+please remember that the numbers you produce will be relative, not absolute,
+measurements.
 
 And let us know what you find!
 
