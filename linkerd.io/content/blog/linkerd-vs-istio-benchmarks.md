@@ -25,7 +25,7 @@ Read on for more!
 ## Background
 
 In 2019, Kinvolk released [public benchmark numbers comparing Linkerd to
-Istio](https://kinvolk.io/blog/2019/05/performance-benchmark-analysis-of-istio-and-linkerd/).
+Istio](/2019/05/18/linkerd-benchmarks/).
 This work accomplished two things. First, it produced an [open source service
 mesh benchmarking harness](https://github.com/kinvolk/service-mesh-benchmark)
 so that anyone could reproduce the results. This harness was notable because it
