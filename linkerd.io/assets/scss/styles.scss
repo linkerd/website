@@ -620,6 +620,10 @@ blockquote {
   z-index: 1;
 }
 
+.heroes-card .hero__name {
+  font-weight: 500 !important;
+}
+
 .heroes-card .hero-type__graphic {
   position: absolute;
   right: 0;
