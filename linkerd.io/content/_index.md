@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-05-07** Introducing fuzz testing for Linkerd! [Read more »](/2021/05/07/fuzz-testing-for-linkerd/)"
+  description: "**2021-05-27** Benchmarking Linkerd and Istio [Read more »](/2021/05/27/benchmarking-linkerd-and-istio/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
