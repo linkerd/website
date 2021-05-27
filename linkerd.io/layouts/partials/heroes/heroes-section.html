@@ -5,7 +5,6 @@
     </div>
     <div class="column is-12 is-10-desktop is-offset-1-desktop">
       <div class="columns column is-multiline">
-        {{ $badge := .badge}}
         {{ range .heroes }}
         <div class="column is-6">
           <a href="{{ .github_url }}" target="_blank">
@@ -14,12 +13,18 @@
               <img class="is-rounded" src="{{.image}}" alt="{{.alt}}" />
             </figure>
             <div>
-              <h3 class="is-size-5 has-text-weight-light">{{.name}}</h3>
+              <h3 class="is-size-5 hero__name">{{.name}}</h3>
               <p>{{.blurb}}</p>
               <p class="is-size-7">{{.date}}</p>
             </div>
-            <figure class="image is-48x48 ml-auto is-align-self-flex-end is-flex-shrink-0">
-              <img src="{{ $badge }}" alt=trophy>
+            <figure class="hero-type__graphic">
+              {{ if eq .hero_type "ambassador" }}
+                <img src="/images/ambassador-graphic.svg" alt=trophy>
+              {{ else if eq .hero_type "contributor" }}
+                <img src="/images/contributor-graphic.svg" alt=trophy>
+              {{ else }}
+                <img src="/images/community-graphic.svg" alt=trophy>
+              {{ end }}
             </figure>
           </div>
           </a>
