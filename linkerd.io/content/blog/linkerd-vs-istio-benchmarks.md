@@ -2,7 +2,7 @@
 title: 'Benchmarking Linkerd and Istio'
 author: 'william'
 date: 2021-05-27T00:00:00+00:00
-thumbnail: /uploads/marc-sendra-martorell--Vqn2WrfxTQ-unsplash.jpg
+thumbnail: /images/benchmark/latency-2000rps.png
 featured: false
 slug: linkerd-vs-istio-benchmarks
 tags: [Linkerd]
