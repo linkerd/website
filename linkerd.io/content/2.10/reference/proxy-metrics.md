@@ -196,3 +196,11 @@ connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):
 [prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
 [pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
 [ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
+
+## Identity Metrics
+
+* `identity_cert_expiration_timestamp_seconds`: A gauge of the time when the
+  proxy's current mTLS identity certificate will expire (in seconds since the UNIX
+  epoch).
+* `identity_cert_refresh_count`: A counter of the total number of times the
+  proxy's mTLS identity certificate has been refreshed by the Identity service.
