@@ -21,7 +21,7 @@ for a more detailed explanation of the configuration and what's going on.
 - Two clusters.
 - A [control plane installation](../install/) in each cluster that shares
   a common
-  [trust anchor](https://linkerd.io../generate-certificates/#trust-anchor-certificate).
+  [trust anchor](../generate-certificates/#trust-anchor-certificate).
   If you have an existing installation, see the
   [trust anchor bundle](../installing-multicluster/#trust-anchor-bundle)
   documentation to understand what is required.
@@ -358,4 +358,4 @@ The same functionality can also be done through Helm setting the
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
-[multicluster task](https://linkerd.io../../features/multicluster).
+[multicluster task](../../features/multicluster/).

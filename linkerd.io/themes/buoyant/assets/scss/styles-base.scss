@@ -435,7 +435,7 @@ body {
     background-color: rgb(70,125,189);
   }
   .content {
-    min-height: 100px;
+    min-height: 124px;
     margin-bottom: 0;
   }
   .card-footer {
@@ -475,7 +475,15 @@ body {
   .related-card {
     color: $deep-blue;
     .title {
+      font-size: 20px !important;
+      line-height: 1.4 !important;
       color: $deep-blue;
+    }
+    .related-card-header {
+      font-size: 14px !important;
+    }
+    figure {
+      filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.75));
     }
   }
   .level {
@@ -1107,4 +1115,19 @@ body {
 
 .is-size-5.has-text-weight-bold {
   font-weight: 700 !important;
+}
+
+.pagination {
+  padding: 1rem;
+}
+.pagination .pagination-link,
+.pagination .pagination-next,
+.pagination .pagination-previous {
+  color: $primary-bright-blue;
+  border: 1px solid $primary-bright-blue;
+}
+
+.pagination .pagination-link.is-current {
+  color: $white;
+  background-color: $primary-bright-blue;
 }

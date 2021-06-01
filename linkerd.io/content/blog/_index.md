@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/announcing-linkerd-2-10.md
-  - blog/linkerd-steering-committee.md
+  - blog/linkerd-vs-istio-benchmarks.md
+  - blog/introducing-fuzz-testing-to-linkerd.md
 description: ''
 keywords: []
 ---

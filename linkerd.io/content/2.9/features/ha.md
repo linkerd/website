@@ -115,7 +115,7 @@ Prometheus and Grafana.
 
 For production workloads, we recommend setting up your own Prometheus instance
 to scrape the data plane metrics, following the instructions
-[here](https://linkerd.io../../tasks/external-prometheus/). This will provide you
+[here](../../tasks/external-prometheus/). This will provide you
 with more control over resource requirement, backup strategy and data retention.
 
 When planning for memory capacity to store Linkerd timeseries data, the usual

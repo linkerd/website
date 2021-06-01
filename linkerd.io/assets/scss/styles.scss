@@ -82,6 +82,10 @@
 }
 
 .community-top-hero {
+  background: url("/images/heroes-bg-graphic.svg"), $secondary-bright-blue;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   .community-top-hero__image-wrapper {
     position: relative;
     @media screen and (max-width: $tablet) {
@@ -93,20 +97,6 @@
       position: relative;
       z-index: 1;
       vertical-align: middle;
-    }
-    &:after {
-      content: '';
-      display: block;
-      width: 150%;
-      height: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      z-index: 0;
-      background: url('/images/textures/triangles-2.svg');
-      background-repeat: no-repeat;
-      background-size: contain;
     }
   }
 }
@@ -312,11 +302,6 @@
       padding: 0;
 
       img {
-        -webkit-filter: grayscale(100%);
-        -moz-filter: grayscale(100%);
-        -o-filter: grayscale(100%);
-        -ms-filter: grayscale(100%);
-        filter: grayscale(100%);
         background: #f2f2f2;
       }
     }
@@ -626,3 +611,21 @@ blockquote {
     }
   }
  }
+
+.heroes-card {
+  position: relative;
+}
+
+.heroes-card * {
+  z-index: 1;
+}
+
+.heroes-card .hero__name {
+  font-weight: 500 !important;
+}
+
+.heroes-card .hero-type__graphic {
+  position: absolute;
+  right: 0;
+  z-index: 0;
+}

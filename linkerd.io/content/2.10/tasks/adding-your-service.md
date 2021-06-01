@@ -1,38 +1,52 @@
 +++
 title = "Adding Your Services to Linkerd"
-description = "Add your services to the mesh."
+description = "In order for your services to take advantage of Linkerd, they also need to be *meshed* by injecting Linkerd's data plane proxy into their pods."
 aliases = [
   "../adding-your-service/",
   "../automating-injection/"
 ]
 +++
 
-In order for your services to take advantage of Linkerd, they need to be "added
-to the mesh" by having Linkerd's data plane proxy injected into their pods.
-This is typically done by annotating the namespace, deployment, or pod with the
-`linkerd.io/inject: enabled` Kubernetes annotation. This annotation triggers
-*automatic proxy injection* when the resources are created.
-(See the [proxy injection
+Adding Linkerd's control plane to your cluster doesn't change anything about
+your application. In order for your services to take advantage of Linkerd, they
+need to be *meshed*, by injecting Linkerd's data plane proxy into their pods.
+
+For most applications, meshing a service is as simple as adding a Kubernetes
+annotation. However, services that make network calls immediately on startup
+may need to [handle startup race
+conditions](#a-note-on-startup-race-conditions), and services that use MySQL,
+SMTP, Memcache, and similar protocols may need to [handle server-speaks-first
+protocols](#a-note-on-server-speaks-first-protocols).
+
+Read on for more!
+
+## Meshing a service with annotations
+
+Meshing a Kubernetes resource is typically done by annotating the resource, or
+its namespace, with the `linkerd.io/inject: enabled` Kubernetes annotation.
+This annotation triggers automatic proxy injection when the resources are
+created or updated. (See the [proxy injection
 page](../../features/proxy-injection/) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
 inject`](../../reference/cli/inject/) text transform command will add this
-annotation to a given Kubernetes manifest. Of course, these annotations can be
+annotation to a given Kubernetes manifest.  Of course, these annotations can be
 set by any other mechanism.
 
-Note that simply adding the annotation to a resource with pre-existing pods
-will not automatically inject those pods. Because of the way that Kubernetes
-works, after setting the annotation, you will need to also need to recreate or
-update the pods (e.g. with `kubectl rollout restart` etc.) before proxy
-injection can happen. Often, a [rolling
+{{< note >}}
+Simply adding the annotation will not automatically mesh existing pods. After
+setting the annotation, you will need to recreate or update any resources (e.g.
+with `kubectl rollout restart`) to trigger proxy injection. (Often, a
+[rolling
 update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/)
 can be performed to inject the proxy into a live service without interruption.)
+{{< /note >}}
 
 ## Example
 
-To add the data plane proxies to a service defined in a Kubernetes manifest,
-you can use `linkerd inject` to add the annotations before applying the manifest
-to Kubernetes:
+To add Linkerd's data plane proxies to a service defined in a Kubernetes
+manifest, you can use `linkerd inject` to add the annotations before applying
+the manifest to Kubernetes:
 
 ```bash
 cat deployment.yml | linkerd inject - | kubectl apply -f -
@@ -43,21 +57,9 @@ in the correct places, then applies it to the cluster.
 
 ## Verifying the data plane pods have been injected
 
-Once your services have been added to the mesh, you will be able to query
-Linkerd for traffic metrics about them, e.g. by using [`linkerd
-viz stat`](../../reference/cli/viz/#stat) (make sure you have installed the Viz extension
-beforehand):
-
-```bash
-linkerd viz stat deployments -n MYNAMESPACE
-```
-
-The above command requires the `viz` extension to be installed.
-Note that it may take several seconds for these metrics to appear once the data
-plane proxies have been injected.
-
-Alternatively, you can query Kubernetes for the list of containers in the pods,
-and ensure that the proxy is listed:
+To verify that your services have been added to the mesh, you can query
+Kubernetes for the list of containers in the pods and ensure that the proxy is
+listed:
 
 ```bash
 kubectl -n MYNAMESPACE get po -o jsonpath='{.items[0].spec.containers[*].name}'
@@ -69,22 +71,33 @@ If everything was successful, you'll see `linkerd-proxy` in the output, e.g.:
 MYCONTAINER linkerd-proxy
 ```
 
-Finally, you can verify that everything is working by verifying that the
-corresponding resources are reported to be meshed in the "Meshed" column of the
-[Linkerd dashboard](../../features/dashboard/).
+## A note on startup race conditions
 
-{{< fig src="/images/getting-started/stat.png" title="Dashboard" >}}
+While the proxy starts very quickly, Kubernetes doesn't provide any guarantees
+about container startup ordering, so the application container may start before
+the proxy is ready. This means that any connections made immediately at app
+startup time may fail until the proxy is active.
 
-{{< note >}}
-There is currently an
-[issue](https://github.com/linkerd/linkerd2/issues/2704#issuecomment-483809204)
-whereby network calls made during initialization of your application may fail as
-the `linkerd-proxy` has yet to start. If your application exits when these
-initializations fail, and has a `restartPolicy` of `Always` (default) or
-`OnFailure` (providing your application exits with with a failure i.e.
-`exit(1)`), your container will restart with the `linkerd-proxy` ready, thus
-allowing your application to successfully complete initializations.
-{{< /note >}}
+In many cases, this can be ignored: the application will ideally retry the
+connection, or Kubernetes will restart the container after it fails, and
+eventually the proxy will be ready. Alternatively, you can use
+[linkerd-await](https://github.com/linkerd/linkerd-await) to delay the
+application container until the proxy is ready, or set a
+[`skip-outbound-ports`
+annotation](../../features/protocol-detection/#skipping-the-proxy)
+to bypass the proxy for these connections.
+
+## A note on server-speaks-first protocols
+
+Linkerd's [protocol
+detection](../../features/protocol-detection/) works by
+looking at the first few bytes of client data to determine the protocol of the
+connection. Some protocols such as MySQL, SMTP, and other server-speaks-first
+protocols don't send these bytes. In some cases, this may require additional
+configuration to avoid a 10-second delay in establishing the first connection.
+See [Configuring protocol
+detection](../../features/protocol-detection/#configuring-protocol-detection)
+for details.
 
 ## More reading
 

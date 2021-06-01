@@ -58,7 +58,7 @@ allow you to interact with your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl -sL run.linkerd.io/install | sh
+curl -sL https://run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
@@ -311,6 +311,11 @@ Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
 - Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
 - [Add your own service](../adding-your-service/) to Linkerd without downtime
+- Learn how to rotate control plane TLS credentials
+  [automatically](../tasks/automatically-rotating-control-plane-tls-credentials/)
+  or set a reminder to do it
+  [manually](../tasks/manually-rotating-control-plane-tls-credentials/)
+  before they expire
 - Learn more about [Linkerd's architecture](../reference/architecture/)
 - Hop into the #linkerd2 channel on [the Linkerd
   Slack](https://slack.linkerd.io)
