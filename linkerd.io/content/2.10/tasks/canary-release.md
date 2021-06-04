@@ -57,12 +57,12 @@ kubectl -n linkerd rollout status deploy/flagger
 
 ## Set up the demo
 
-This demo consists of two components: a load generator and a deployment. The
-deployment creates a pod that returns some information such as name. You can use
-the responses to watch the incremental rollout as Flagger orchestrates it. A
-load generator simply makes it easier to execute the rollout as there needs to
-be some kind of active traffic to complete the operation. Together, these
-components have a topology that looks like:
+This demo consists of three components: a load generator, a deployment and a
+frontend. The deployment creates a pod that returns some information such as
+name. You can use the responses to watch the incremental rollout as Flagger
+orchestrates it. A load generator simply makes it easier to execute the rollout
+as there needs to be some kind of active traffic to complete the operation.
+Together, these components have a topology that looks like:
 
 {{< fig src="/images/canary/simple-topology.svg"
         title="Topology" >}}
@@ -81,11 +81,11 @@ Verify that everything has started up successfully by running:
 kubectl -n test rollout status deploy podinfo
 ```
 
-Check it out by forwarding the service locally and opening
-[http://localhost:9898](http://localhost:9898) locally by running:
+Check it out by forwarding the frontend service locally and opening
+[http://localhost:8080](http://localhost:8080) locally by running:
 
 ```bash
-kubectl -n test port-forward svc/podinfo 9898
+kubectl -n test port-forward svc/frontend 8080
 ```
 
 {{< note >}}
@@ -265,17 +265,10 @@ split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
 ### Browser
 
-To see the landing page served by `podinfo`, run:
-
-```bash
-kubectl -n test port-forward svc/frontend 8080
-```
-
-This will make the podinfo landing page available at
-[http://localhost:8080](http://localhost:8080). Refreshing the page will show
-toggling between the new version and a different header color. Alternatively,
-running `curl http://localhost:8080` will return a JSON response that looks
-something like:
+Visit again [http://localhost:8080](http://localhost:8080). Refreshing the page
+will show toggling between the new version and a different header color.
+Alternatively, running `curl http://localhost:8080` will return a JSON response
+that looks something like:
 
 ```bash
 {
