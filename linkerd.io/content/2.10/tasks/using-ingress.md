@@ -431,6 +431,11 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
+{{< note >}}
+You can also find a more detailed guide for using Linkerd with Emissary Ingress,
+AKA Ambassador, from the folks over at Buoyant [here](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
+{{< /note >}}
+
 ### Gloo
 
 This uses `books` as an example, take a look at
