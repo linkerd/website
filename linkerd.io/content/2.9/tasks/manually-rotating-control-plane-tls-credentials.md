@@ -142,6 +142,12 @@ work with the new trust bundle:
 linkerd upgrade --identity-trust-anchors-file=./bundle.crt | kubectl apply -f -
 ```
 
+or you can also use the `helm upgrade` command:
+
+```bash
+helm upgrade linkerd2 --set-file global.identityTrustAnchorsPEM=./bundle.crt
+```
+
 This will restart the proxies in the Linkerd control plane, and they will be
 reconfigured with the new trust anchor.
 
@@ -231,6 +237,17 @@ by using the `upgrade` command again:
 linkerd upgrade --identity-issuer-certificate-file=./issuer-new.crt --identity-issuer-key-file=./issuer-new.key | kubectl apply -f -
 ```
 
+or
+
+```bash
+exp=$(cat ca-new.crt | openssl x509 -noout -dates | grep "notAfter" | sed -e 's/notAfter=\(.*\)$/"\1"/' | TZ='GMT' xargs -I{} date -d {} +"%Y-%m-%dT%H:%M:%SZ")
+
+helm upgrade linkerd2
+  --set-file identity.issuer.tls.crtPEM=./issuer-new.crt
+  --set-file identity.issuer.tls.keyPEM=./issuer-new.key
+  --set identity.issuer.crtExpiry=$exp
+```
+
 At this point Linkerd's `identity` control plane service should detect the
 change of the secret and automatically update its issuer certificates.
 
@@ -283,6 +300,12 @@ The `upgrade` command can do that for the Linkerd components:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./ca-new.crt  | kubectl apply -f -
+```
+
+or
+
+```bash
+helm upgrade linkerd2 --set-file --set-file global.identityTrustAnchorsPEM=./ca-new.crt
 ```
 
 Note that the ./ca-new.crt file is the same trust anchor you created at the start
