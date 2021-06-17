@@ -13,6 +13,7 @@
 {{ end -}}
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
+{{ partial "schema.html" . }}
 
 {{ $styles := resources.Get "scss/styles.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
