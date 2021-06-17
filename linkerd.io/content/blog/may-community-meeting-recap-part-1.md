@@ -8,6 +8,74 @@ title: "Linkerd at KubeCon EU: May Community Meeting Recap Part 1"
 description: "May's Community Meeting was a little different than our typical meetups. 
   Hot off a successful KubeCon EU, we chose to recap the great Linkerd stories told during the conference"
 featured: false
+enableVideoSchema: true
+schema_video:
+  - title: Why the future of the cloud will be built on Rust
+    description: "In his Cloud Native Rust Day talk, Oliver Gould notes that system programming differs from app programming and requires a different language like Rust."
+    embedUrl: "https://youtu.be/BWL4889RKhU"
+    thumbnailUrl: "http://i3.ytimg.com/vi/BWL4889RKhU/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT31M26S"
+  - title: "Panel Discussion: Rust in the Cloud"
+    description: "In this panel discussion, the speakers agreed that Rust front-loads the application maintenance burden and is extremely secure and performant."
+    embedUrl: "https://youtu.be/8oOiqbxGu0U"
+    thumbnailUrl: "http://i3.ytimg.com/vi/8oOiqbxGu0U/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT43M28S"
+  - title: "Scheduling 68k COVID Tests with Linkerd"
+    description: "Dom DePasquale and Shawn Smith from the Pennsylvania State University discussed how they scheduled 68,000 COVID tests before the fall semester started."
+    embedUrl: "https://youtu.be/dDW1OoTaMdU"
+    thumbnailUrl: "http://i3.ytimg.com/vi/dDW1OoTaMdU/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT24M38S"
+  - title: "Rapid Experimentation Simplified with Linkerd"
+    description: "When Alexander Simon Jones worked at a multi-national financial institution his team used Linkerd to simplify experimentation."
+    embedUrl: "https://youtu.be/EB6QWpIYMSA"
+    thumbnailUrl: "http://i3.ytimg.com/vi/EB6QWpIYMSA/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT16M21S"
+  - title: "Tap Tap, Debugging an App with your Service Mesh"
+    description: "In his ServiceMeshCon talk, Jason Morgan shows how easy it is to debug an app with Linkerd. The tap tool inspects traffic flowing through the mesh."
+    embedUrl: "https://youtu.be/YJ8zP-lqB5E"
+    thumbnailUrl: "http://i3.ytimg.com/vi/YJ8zP-lqB5E/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT21M24S"
+  - title: "Creating Chaos in the University with Linkerd and Chaos Mesh"
+    description: "Jossie Bismarck Castrillo Fajardo and Sergio Arnaldo Méndez Aguilar, discuss how they used Chaos Mesh and Linkerd to inject faults and failures."
+    embedUrl: "https://youtu.be/vGVtnP8gOl8"
+    thumbnailUrl: "http://i3.ytimg.com/vi/vGVtnP8gOl8/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT19M38S"
+  - title: "Panel: The State of Service Mesh"
+    description: "According to the panelists, enterprises must decide whether they want to write and maintain code that a service mesh provides or have a platform team that supports it."
+    embedUrl: "https://youtu.be/Uf1C5oxrv4w"
+    thumbnailUrl: "http://i3.ytimg.com/vi/Uf1C5oxrv4w/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT23M16S"
+  - title: "Compliance the Easy Way: Zero-conf mTLS for Dev and Smooth Day-2 for Ops"
+    description: "Christian Hüning and Lutz Behnke discuss how they implemented mTLS without needing their dev team to do any work."
+    embedUrl: "https://youtu.be/KoweR6u0t8c"
+    thumbnailUrl: "http://i3.ytimg.com/vi/KoweR6u0t8c/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT21M42S"
+  - title: "Seamless Multi-Cluster Communication and Observability with Linkerd"
+    description: "Max Körbächer from Liquid Reply provided a great breakdown of when it makes."
+    embedUrl: "https://youtu.be/X70Tb54Y-o4"
+    thumbnailUrl: "http://i3.ytimg.com/vi/X70Tb54Y-o4/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT39M28S"
+  - title: "Keynote: Linkerd vs. COVID-19: Addressing the global Pandemic with a Service Mesh"
+    description: "William Morgan shares some examples of how organizations like NIH, Clover Health, Penn State, and H-E-B, have been using Linkerd in their effort to face COVID-19 challenges."
+    embedUrl: "https://youtu.be/X70Tb54Y-o4"
+    thumbnailUrl: "http://i3.ytimg.com/vi/X70Tb54Y-o4/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT39M28S"
+  - title: "Overview and State of Linkerd"
+    description: "William Morgan and Matei David delivered a quick overview of the state of Linkerd, why we are witnessing an increase in adoption, and what drives this great and welcoming community."
+    embedUrl: "https://youtu.be/ATUkfUwbBvo"
+    thumbnailUrl: "http://i3.ytimg.com/vi/ATUkfUwbBvo/maxresdefault.jpg"
+    uploadDate: 2021-05-14
+    duration: "PT18M48S"
 ---
 
 May's Community Meeting was a little different than our typical meetups. Hot off a
