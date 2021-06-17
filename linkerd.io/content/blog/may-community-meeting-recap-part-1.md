@@ -86,10 +86,10 @@ schema_video:
     description: "William Morgan shares some examples of how organizations like
       NIH, Clover Health, Penn State, and H-E-B, have been using Linkerd in
       their effort to face COVID-19 challenges."
-    embedUrl: "https://youtu.be/X70Tb54Y-o4"
-    thumbnailUrl: "http://i3.ytimg.com/vi/X70Tb54Y-o4/maxresdefault.jpg"
+    embedUrl: "https://youtu.be/S-7XbbJMonM"
+    thumbnailUrl: "http://i3.ytimg.com/vi/S-7XbbJMonM/maxresdefault.jpg"
     uploadDate: 2021-05-14
-    duration: "PT39M28S"
+    duration: "PT9M22S"
   - title: "Overview and State of Linkerd"
     description: "William Morgan and Matei David delivered a quick overview of
       the state of Linkerd, why we are witnessing an increase in adoption,
@@ -255,7 +255,7 @@ In William Morgan's KubeCon keynote, he shares some examples of how organization
 like NIH, Clover Health, Penn State, and H-E-B, have been using Linkerd in
 their effort to face COVID-19 challenges.
 
-{{< youtube "7XbbJMonM" >}}
+{{< youtube "S-7XbbJMonM" >}}
 
 ## Overview and State of Linkerd
 
