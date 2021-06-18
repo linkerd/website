@@ -4,7 +4,7 @@ date: 2021-06-17T00:00:00Z
 feature: "/uploads/may-community-meetup.png"
 tags: ["Community"]
 thumbnail: "/uploads/may-community-meetup.png"
-title: "Linkerd at KubeCon EU: May Community Meeting Recap Part 1"
+title: "Linkerd at KubeCon EU"
 description: "May's Community Meeting was a little different than our typical
   meetups. Hot off a successful KubeCon EU, we chose to recap the great Linkerd
   stories told during the conference"
@@ -99,6 +99,8 @@ schema_video:
     uploadDate: 2021-05-14
     duration: "PT18M48S"
 ---
+
+## May Community Meeting Recap Part 1
 
 May's Community Meeting was a little different than our typical meetups. Hot off
 a successful KubeCon EU (at least from a Linkerd perspective), we chose to recap
