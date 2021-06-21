@@ -31,7 +31,7 @@ jobs:
       run: |
         make build-run.linkerd.io
 
-    - uses: actions/upload-artifact@v2.2.3
+    - uses: actions/upload-artifact@v2.2.4
       with:
         name: run.linkerd.io
         path: tmp/run.linkerd.io/public
