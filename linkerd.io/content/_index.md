@@ -61,13 +61,13 @@ companies:
 - image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
 - image: "/uploads/logos/blue/hp.png"
-  link: https://ask.com/
+  link: https://hp.com/
 - image: "/uploads/logos/blue/bigcommerce.png"
   link: https://www.bigcommerce.com/
 - image: "/uploads/logos/blue/cisco-webex.png"
-  link: https://www.xfinity.com/
+  link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
-  link: https://www.ebay.com/
+  link: https://www.cloverhealth.com/
 - image: "/uploads/logos/blue/godaddy.png"
   link: https://godaddy.com/
 - image: "/uploads/logos/blue/heb.png"
