@@ -11,8 +11,8 @@ keywords: []
 
 In part two of our May Community Meeting recap blog, we'll focus on the
 presentation I delivered on two Linkerd features eagerly awaited by the
-community:  support for headless services and StatefulSets in multi-cluster
-environments. 
+community: support for headless services and StatefulSets in multi-cluster
+environments.
 
 I received great feedback and was asked to summarize it in this blog post.  I
 hope you enjoy it too.
@@ -27,7 +27,7 @@ live in a cluster for a long time. It's virtual because the IP address is not
 associated with a particular machine or endpoint. That's because pods change so
 frequently in Kubernetes, that we can't rely on IP addresses.  Instead, we use
 services. These are virtual entry points that never change; they route requests
-to short-lived IPs associated with pods — an IP proxy so to speak. 
+to short-lived IPs associated with pods — an IP proxy so to speak.
 
 A headless service is a service without an IP. But, if it has no IP, what is it
 used for? Well, their sole purpose is to represent a group of pods and that
@@ -48,7 +48,7 @@ To achieve this cross-cluster call, we replicate a target cluster service in
 the source cluster. Where it differs from the original service, is that this
 source cluster service won't point to the server accepting the traffic, but to
 the target cluster gateway. When a request arrives at the gateway, Linkerd’s
-proxies intelligently forward the request to the server. 
+proxies intelligently forward the request to the server.
 
 This is represented in Fig 1.1.: From a source cluster East, we can see the
 traffic originating from an application. It flows through the replicated
@@ -63,7 +63,7 @@ Service replication is a big part of enabling multi-cluster communication. But
 how do we replicate a service without an IP address so it can point to the
 gateway?
 
-## Multi-cluster StatefulSet communication 
+## Multi-cluster StatefulSet communication
 
 Enabling a client in a source cluster to talk to a StatefulSet server in the
 target is easier said than done. Essentially, we want a pod to talk to another
@@ -79,7 +79,7 @@ the management of replicated services to the multi-cluster component, this
 solution is not only scalable but also highly efficient. Traffic is handled the
 same way it was before but through this service indirection. Since we leverage
 Kubernetes primitives, we can still rely on Kubernetes to create DNS entries
-and assign IP addresses. 
+and assign IP addresses.
 
 ![fig 1.2](../../static/images/multicluster/sset-blog-12.png) *(Fig 1.2: The
 structure of a replicated headless service)*
