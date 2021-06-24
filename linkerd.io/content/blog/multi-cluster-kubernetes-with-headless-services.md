@@ -2,6 +2,7 @@
 title: Multi-Cluster Kubernetes with Headless Services
 subtitle: TMay Community Meeting Recap Part 2
 author: "matei"
+date: 2021-06-24T00:00:00Z
 tags:
   - Community
   - Tutorials &amp; How-To's
