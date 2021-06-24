@@ -11,7 +11,9 @@ description: "If you attended this month's Linkerd Community meeting, you've
 keywords: [Linkerd heroes]
 ---
 
-If you attended this month's Linkerd Community meeting, you've already
+If you attended this month's
+[Linkerd Community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-june-linkerd-online-community-meetup/)
+, you've already
 heard the news: this month's Linkerd Heroes are Steve Gray and Steve
 Reardon. Congrats, Steve and Steve!
 
