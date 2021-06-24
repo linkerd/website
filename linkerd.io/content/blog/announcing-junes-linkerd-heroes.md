@@ -7,13 +7,13 @@ thumbnail: "/uploads/junes-linkerd-heroes.jpeg"
 title: Announcing June's Linkerd Heroes!
 description: "If you attended this month's Linkerd Community meeting, you've
   already heard the news: this month's Linkerd Heroes are Steve Gray and Steve
-  Randon."
+  Reardon."
 keywords: [Linkerd heroes]
 ---
 
 If you attended this month's Linkerd Community meeting, you've already
 heard the news: this month's Linkerd Heroes are Steve Gray and Steve
-Randon. Congrats, Steve and Steve!
+Reardon. Congrats, Steve and Steve!
 
 ## What are Linkerd Heroes?
 
@@ -25,7 +25,7 @@ in making the Linkerd community the amazing place it is today.
 
 ## Congrats, Steve and Steve!
 
-This month's heroes are Steve Gray and Steve Randon, who wrote about their
+This month's heroes are Steve Gray and Steve Reardon, who wrote about their
 Linkerd adoption story at Entain in
 [this insightful CNCF blog post](https://www.cncf.io/blog/2021/04/19/when-lebron-scores-latency-matters-realizing-10x-throughput-while-driving-down-costs-and-sleeping-through-the-night/).
 Thank you, Steves, for sharing your experience and lessons learned with the
