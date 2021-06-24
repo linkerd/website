@@ -7,7 +7,6 @@ weight: "1"
 menu:
   top:
     weight: 4
-
 support:
   kinds:
   - title: 'Courses'
@@ -33,4 +32,3 @@ support:
   - caption: Edit this page
     url: https://github.com/linkerd/website/edit/main/linkerd.io/content/support-training.md
 ---
-
