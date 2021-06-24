@@ -55,7 +55,6 @@ traffic originating from an application. It flows through the replicated
 service which points to the gateway in target cluster West. Once the traffic
 arrives at the gateway, it is sent to the destination.
 
-
 ![fig 1.1](../../static/images/multicluster/sset-blog-11.png) *(Fig 1.1: Visual
 representation of the life of a request in multi-cluster)*
 
