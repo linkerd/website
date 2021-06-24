@@ -19,13 +19,13 @@ voted:
   - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
-    hero_type: community
+    hero_type: ambassador
     image: "/uploads/steve-reardon.png"
     alt: Portrait of Steve Reardon
   - name: Steve Gray
     date: June 2021
     blurb: Spreading the Linkerd message
-    hero_type: community
+    hero_type: ambassador
     image: "/uploads/steve-gray.jpeg"
     alt: Portrait of Steve Gray
   - name: Rio Kierkels
