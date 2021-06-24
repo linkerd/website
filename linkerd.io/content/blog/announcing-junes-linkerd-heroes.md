@@ -42,5 +42,6 @@ or advance your Linkerd implementation. Or perhaps someone contributed
 an awesome Linkerd feature or bugfix that has made your life a lot easier.
 Who is your Linkerd Hero? [Submit your nomination for next month's hero here!](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform?usp=sf_link)
 
-For those who nominated, thank you for participating, and remember to join
-our next community meeting on Thursday, July 22 at 9 am PT!
+For those who nominated, thank you for participating, and remember to [join
+our next community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-july-linkerd-online-community-meetup/)
+on Thursday, July 22 at 9 am PT!
