@@ -1,0 +1,44 @@
+
+{{ $data := (index site.Data "extension-list") }}
+<div class="table-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Official / Third Party
+        </th>
+        <th>
+          Documentation
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $data.Extensions }}
+      {{ if not (in .Name " ") }}
+      <tr>
+        <td class="text-nowrap">
+          <a href="{{ .Name }}/">
+            {{ index .Name }}
+          </a>
+        </td>
+        <td>
+          {{ .Description | markdownify }}
+        </td>
+        <td>
+          {{ .Type }}
+        </td>
+        <td>
+          {{ .DocLink }}
+        </td> 
+      </tr>
+      {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+</div>
