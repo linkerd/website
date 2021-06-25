@@ -9,5 +9,6 @@ base installation. The following is the list of known extensions:
 
 {{< extensions-2-10 >}}
 
-If you have an extension for Linkerd and it is not on the list, [please submit
-a pull request!](https://github.com/linkerd/website)
+If you have an extension for Linkerd and it is not on the list, [please edit
+this
+page!](https://github.com/linkerd/website/edit/main/linkerd.io/data/extension-list.yaml)
