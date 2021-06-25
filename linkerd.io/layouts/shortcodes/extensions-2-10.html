@@ -10,12 +10,6 @@
         <th>
           Description
         </th>
-        <th>
-          Official / Third Party
-        </th>
-        <th>
-          Documentation
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -23,19 +17,13 @@
       {{ if not (in .Name " ") }}
       <tr>
         <td class="text-nowrap">
-          <a href="{{ .Name }}/">
+          <a href="{{ .DocLink }}/">
             {{ index .Name }}
           </a>
         </td>
         <td>
           {{ .Description | markdownify }}
         </td>
-        <td>
-          {{ .Type }}
-        </td>
-        <td>
-          {{ .DocLink }}
-        </td> 
       </tr>
       {{ end }}
       {{ end }}

@@ -1,21 +1,20 @@
 Extensions:
   - Name: linkerd-viz
-    Description: "Observability and visualization components for Linkerd"
+    Description: "Built-in extension that provides observability and
+    visualization components for Linkerd."
     DocLink: "https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz"
-    Type: Official
   - Name: linkerd-multicluster
-    Description: "Multicluster Support for Linkerd"
+    Description: "Built-in extension that enables multicluster support for Linkerd."
     DocLink: "https://github.com/linkerd/linkerd2/tree/main/multicluster/charts/linkerd-multicluster"
-    Type: Official
   - Name: linkerd-jaeger
-    Description: "Multicluster Support for Linkerd"
+    Description: "Built-in extension that adds distributed tracing to Linkerd
+    using OpenTelemetry collector and Jaeger."
     DocLink: "https://github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger"
-    Type: Official
   - Name: linkerd-buoyant
-    Description: "Connect your Linkerd-enabled Kubernetes cluster to Buoyant Cloud"
-    DocLink: "github.com/BuoyantIO/linkerd-buoyant"
-    Type: "3rd Party"
+    Description: "The Linkerd Buoyant extension connects your Linkerd-enabled
+    Kubernetes cluster to Buoyant Cloud, the global health dashboard for
+    Linkerd."
+    DocLink: "https://github.com/BuoyantIO/linkerd-buoyant"
   - Name: tapshark
     Description: "Wireshark inspired ncurses-style CLI for Linkerd Tap"
     DocLink: "https://github.com/adleong/tapshark"
-    Type: "3rd Party"
