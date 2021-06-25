@@ -5,10 +5,7 @@ description = "List of Linkerd extensions that can be added to the installation 
 
 Linkerd provides a mix of built-in and third-party
 [extensions](../../tasks/extensions/) to add additional functionality to the
-base installation. Linkerd has _built-in_ extensions but also support for
-extensions from _third-parties_.
-
-The following is the list of known extensions:
+base installation. The following is the list of known extensions:
 
 {{<extensions-2-10>}}
 
