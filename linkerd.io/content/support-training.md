@@ -33,4 +33,3 @@ support:
   - caption: Edit this page
     url: https://github.com/linkerd/website/edit/main/linkerd.io/content/support-training.md
 ---
-
