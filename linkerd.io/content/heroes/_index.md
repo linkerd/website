@@ -16,14 +16,14 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
-  - name: Steve Reardon
+  - name: Steve Gray
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
     image: "/uploads/steve-reardon.png"
     alt: Portrait of Steve Reardon
     github_url: https://github.com/Monkman08
-  - name: Steve Gray
+  - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
