@@ -1,5 +1,5 @@
-+++ 
-title = "Extensions List" 
++++
+title = "Extensions List"
 description = "List of Linkerd extensions that can be added to the installation for additional functionality"
 +++
 
