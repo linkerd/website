@@ -8,6 +8,7 @@ tags:
   - Tutorials &amp; How-To's
 description: "We'll discuss two Linkerd features eagerly awaited by the community:  support for headless services and StatefulSets in multi-cluster environments."
 keywords: []
+thumbnail: "/uploads/headless-diagram.png"
 ---
 
 In part two of our May Community Meeting recap blog, we'll focus on the
