@@ -51,9 +51,10 @@ faqs:
   - question: What is an ingress?
     answer:
       An ingress is a specific application that runs in a Kubernetes cluster
-      and handles traffic coming into the cluster from off-cluster sources. This
-      traffic is referred to as ingress (or occasionally "north/south" traffic)
- - question: What is latency?
+      and handles traffic coming into the cluster from off-cluster sources.
+      This traffic is referred to as ingress (or occasionally "north/south"
+      traffic)
+  - question: What is latency?
     answer:
       Latency refers to the time it takes an application to do something (e.g.,
       processing a request, populating data, etc.) In service mesh terms, this
