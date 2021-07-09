@@ -1,6 +1,8 @@
 ---
 description: Lists of educational resources and companies that provide commercial support for Linkerd.
 title: Support & Training
+aliases:
+  - /enterprise/
 layout: enterprise
 type: enterprise
 weight: "1"
