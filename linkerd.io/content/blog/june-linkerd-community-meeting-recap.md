@@ -19,12 +19,12 @@ First and foremost, Linkerd was in the
 In terms of upcoming Linkerd features: server-side policy is the big ticket
 item in the upcoming 2.11 release, so please keep providing feedback. We are
 also currently cleaning up proxy dependencies; the work is mostly done and
-should make new dependency updates easier moving forward. 
+should make new dependency updates easier moving forward.
 
 ## Community convo with Sol Roberts from PlexTrac
 
 Sol Roberts from PlexTrac shared his Linkerd story. After initially consulting
-with PlexTrac years ago, XSol was onboarded to run their SRE practice. Under
+with PlexTrac years ago, Sol was onboarded to run their SRE practice. Under
 his guidance, the team moved from Docker Compose to Kubernetes. They also added
 useful tooling including Helm to simplify deployments, and Linkerd to provide mTLS.
 
@@ -45,6 +45,7 @@ completion scripts. Cluster-resource-aware shell completion is now available on
 the latest Linkerd edge releases, so please try it out!
 
 ## Linkerd Heroes
+
 Last but not least, we announced
 [June's Linkerd Heroes: Steve Gray and Steve Reardon](https://linkerd.io/2021/06/24/announcing-junes-linkerd-heroes/).
 If you'd like to nominate someone for next month,
