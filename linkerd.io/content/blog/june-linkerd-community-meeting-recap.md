@@ -1,6 +1,5 @@
 ---
 title: June Linkerd Community Meeting Recap
-subtitle:  
 tags:
   - Community
 description: 'Missed the June Linkerd Community Meeting? Here's our recap and the full recording.'
