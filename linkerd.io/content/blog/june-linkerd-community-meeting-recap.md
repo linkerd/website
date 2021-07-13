@@ -1,10 +1,10 @@
 ---
 author: "charles"
 date: 2021-07-12T00:00:00Z
-title: June Linkerd Community Meeting Recap
+title: "June Linkerd Community Meeting Recap"
 feature: ""
 tags: ["Community"]
-description: 'Missed the June Linkerd Community Meeting? Here's our recap and the full recording.'
+description: "Missed the June Linkerd Community Meeting? Here's our recap and the full recording."
 featured: false
 enableVideoSchema: false
 ---
