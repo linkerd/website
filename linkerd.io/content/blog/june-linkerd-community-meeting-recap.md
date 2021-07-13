@@ -2,11 +2,19 @@
 author: "charles"
 date: 2021-07-12T00:00:00Z
 title: "June Linkerd Community Meeting Recap"
-feature: ""
+feature: "/uploads/june-community-update.png"
+thumbnail: "/uploads/june-community-update.png"
 tags: ["Community"]
 description: "Missed the June Linkerd Community Meeting? Here's our recap and the full recording."
 featured: false
-enableVideoSchema: false
+enableVideoSchema: true
+schema_video:
+  - title: "June Linkerd Community Meeting Recap"
+    description: "Missed the June Linkerd Community Meeting? Here's our recap and the full recording"
+    embedUrl: "https://youtu.be/jcnnblzMcP8"
+    thumbnailUrl: "http://i3.ytimg.com/vi/jcnnblzMcP8/maxresdefault.jpg"
+    uploadDate: 2021-06-24
+    duration: "PT52M12S"
 ---
 Missed the June Linkerd Community Meeting? Here's our recap and the full recording.
 
