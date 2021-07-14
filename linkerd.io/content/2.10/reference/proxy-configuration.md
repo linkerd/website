@@ -29,6 +29,5 @@ spec:
 See [here](../../tasks/configuring-proxy-concurrency/) for details on tuning the
 proxy's resource usage.
 
-Note that configuration overrides on proxies injected using the `linkerd inject`
-command is planned for release 2.4. Follow this
-[GitHub issue](https://github.com/linkerd/linkerd2/issues/2590/) for progress.
+For proxies injected using the `linkerd inject` command, configuration can be
+overridden using the [command-line flags](../cli/inject/).
