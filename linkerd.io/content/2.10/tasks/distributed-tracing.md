@@ -123,12 +123,23 @@ goes between two meshed pods, there will be a total of 4 spans. Two will be on
 the source side as the request traverses that proxy and two will be on the
 destination side as the request is received by the remote proxy.
 
-Additionally, As the proxy adds application meta-data as trace attributes, Users
-can directly jump into related resources traces directly from the linkerd-web
-dashboard by clicking the Jaeger icon in the Metrics Table, as shown below
+## Integration with the Dashboard
+
+After having set up the Linkerd-Jaeger extension, as the proxy adds application
+meta-data as trace attributes, users can directly jump into related resources
+traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
+the Metrics Table, as shown below:
 
 {{< fig src="/images/tracing/linkerd-jaeger-ui.png"
         title="Linkerd-Jaeger" >}}
+
+To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
+extension specifying the service exposing the Jaeger UI. By default, this would
+be something like this:
+
+```bash
+linkerd viz install --set jaegerUrl=jaeger.linkerd-jaeger:16686
+```
 
 ## Cleanup
 
