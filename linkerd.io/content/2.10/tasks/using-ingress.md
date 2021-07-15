@@ -120,6 +120,31 @@ The important annotation here is:
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
 
+Alternatively, instead of adding the `proxy_set_header` directove to each
+`Ingress` resource individually, it is possible with Nginx Ingress Controller
+to define it globally using the [Custom Headers](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
+pattern.
+
+For example:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-headers
+  namespace: ingress-nginx
+data:
+  proxy_set_header: "l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;"
+```
+
+adjust above accordingly and follow the rest of the [instructions](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
+on how to add this ConfigMap to Nginx Ingress Controller's global configuration.
+
+{{< note >}}
+This method doesn't cover `grpc_set_header` which needs to be added to the `Ingress`
+that uses a GRPC backend service.
+{{< /note >}}
+
 {{< note >}}
 If you are using [auth-url](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#external-authentication)
 you'd need to add the following snippet as well.
