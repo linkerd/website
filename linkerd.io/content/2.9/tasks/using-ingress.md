@@ -120,7 +120,7 @@ The important annotation here is:
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
 
-Alternatively, instead of adding the `proxy_set_header` directove to each
+Alternatively, instead of adding the `proxy_set_header` directive to each
 `Ingress` resource individually, it is possible with Nginx Ingress Controller
 to define it globally using the [Custom Headers](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
 pattern.
