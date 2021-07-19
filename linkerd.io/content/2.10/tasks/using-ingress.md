@@ -91,25 +91,30 @@ This uses `emojivoto` as an example, take a look at
 The sample ingress definition is:
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: emojivoto
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 
 spec:
+  ingressClassName: nginx
   rules:
   - host: example.com
     http:
       paths:
-      - backend:
-          serviceName: web-svc
-          servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
 ```
 
 The important annotation here is:
@@ -167,29 +172,36 @@ This sample ingress definition uses a single ingress for an application
 with multiple endpoints using different ports.
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: emojivoto
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 spec:
+  ingressClassName: nginx
   rules:
   - host: example.com
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: web-svc
-          servicePort: 80
+          service:
+            name: web-svc
+            port:
+              number: 80
       - path: /another-endpoint
+        pathType: Prefix
         backend:
-          serviceName: another-svc
-          servicePort: 8080
+          service:
+            name: another-svc
+            port:
+              number: 8080
 ```
 
 Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
@@ -218,20 +230,23 @@ definition for that backend to ensure that the `l5d-dst-override` header
 is set. For example:
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: default-ingress
   namespace: backends
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 spec:
-  backend:
-    serviceName: default-backend
-    servicePort: 80
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: default-backend
+      port:
+        number: 80
 ```
 
 {{< /note >}}
@@ -246,22 +261,27 @@ Kubernetes `Ingress` resource with the
 `ingress.kubernetes.io/custom-request-headers` like this:
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: emojivoto
   annotations:
-    kubernetes.io/ingress.class: "traefik"
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
 spec:
+  ingressClassName: traefik
   rules:
   - host: example.com
     http:
       paths:
-      - backend:
-          serviceName: web-svc
-          servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
 ```
 
 The important annotation here is:
@@ -360,24 +380,29 @@ and TLS with a [Google-managed certificate](https://cloud.google.com/load-balanc
 The sample ingress definition is:
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: emojivoto
   annotations:
-    kubernetes.io/ingress.class: "gce"
     ingress.kubernetes.io/custom-request-headers: "l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80"
     ingress.gcp.kubernetes.io/pre-shared-cert: "managed-cert-name"
     kubernetes.io/ingress.global-static-ip-name: "static-ip-name"
 spec:
+  ingressClassName: gce
   rules:
   - host: example.com
     http:
       paths:
-      - backend:
-          serviceName: web-svc
-          servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
 ```
 
 To use this example definition, substitute `managed-cert-name` and
@@ -685,26 +710,33 @@ config:
     headers:
     - l5d-dst-override:$(headers.host).svc.cluster.local
 ---
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: emojivoto
   annotations:
-    kubernetes.io/ingress.class: "kong"
     konghq.com/plugins: set-l5d-header
 spec:
+  ingressClassName: kong
   rules:
-    - http:
-        paths:
-          - path: /api/vote
-            backend:
-              serviceName: web-svc
-              servicePort: http
-          - path: /api/list
-            backend:
-              serviceName: web-svc
-              servicePort: http
+  - http:
+      paths:
+      - path: /api/vote
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: http
+      - path: /api/list
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              name: http
 ```
 
 We are explicitly setting the `l5d-dst-override` in the `KongPlugin`. Using
