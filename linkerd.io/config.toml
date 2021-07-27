@@ -64,16 +64,22 @@ url = "/community/anchor/"
 weight = 2
 parent = "community"
 [[menu.top]]
+identifier = "linkerd-ambassadors"
+url = "community/ambassadors"
+name = "Linkerd Ambassadors"
+weight = 3
+parent = "community"
+[[menu.top]]
 identifier = "community-heroes"
 name = "Linkerd Heroes"
 url = "/community/heroes/"
-weight = 3
+weight = 4
 parent = "community"
 [[menu.top]]
 identifier = "community-adopters"
 name = "Adopters"
 url = "/community/adopters/"
-weight = 4
+weight = 5
 parent = "community"
 [[menu.top]]
 identifier = "blog"
