@@ -76,7 +76,7 @@ Buoyant Cloud](https://buoyant.io/). And the year is far from over.
 
 Graduation is a moment of gratitude and reflection, but it's not a moment of
 pause. There's never been a better time to get involved with Linkerd.
-We have a long roadmap of exciting features ahead of us, a friendly and
+We have a long roadmap of exciting features ahead of us, a friendly
 community of passionate adopters, and a clear vision for the future of the
 service mesh. New users, contributors, and maintainers are all welcome!
 
