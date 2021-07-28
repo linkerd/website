@@ -31,7 +31,7 @@ on [performance
 benchmarks](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/), or
 [coherent design
 principles](https://linkerd.io/2019/04/29/linkerd-design-principles/), or
-[solving actual
+[solving concrete
 problems](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/), rather
 than relying on vendor marketing or giving into hype cycles.
 
@@ -44,9 +44,9 @@ reliable.
 
 Linkerd is the first service mesh to rise to the level of graduation. But
 Linkerd has a long history of firsts: Linkerd was the first service mesh
-project, and the one to coin the term. It was the first project to enter the
-CNCF's inception (now sandbox) phase. It was the first CNCF project to adopt
-Rust—a language we believe is [the future of the
+project and the one to coin the term itself. It was the first project to enter
+the CNCF's inception (now sandbox) phase. It was the first CNCF project to
+adopt Rust—a language we believe is [the future of the
 cloud](https://buoyant.io/media/why-the-future-of-the-cloud-will-be-built-on-rust/).
 
 Linkerd was also the first project to face intense competition from industry
@@ -103,12 +103,12 @@ the service mesh that the world deserves.
 ## Thanks
 
 We are profoundly grateful, as always, to every member of the Linkerd
-community, to our [Linkerd heroes](https://linkerd.io/community/heroes/), and
-to everyone who has ever given Linkerd a shot, helped someone else out, given a
-talk or written a blog post, given us feedback, contributed a PR, or otherwise
-been a part of the community. A special thank you to Dave Zolotusky, Lee
-Calcote, Chris Aniszczyk, and Amye Scavarda Perrin for helping us through the
-graduation process.
+community, especially to our [Linkerd
+heroes](https://linkerd.io/community/heroes/), and to everyone who has ever
+given Linkerd a shot, helped someone else out, given a talk or written a blog
+post, given us feedback, contributed a PR, or otherwise been a part of the
+community. A special thank you to Dave Zolotusky, Lee Calcote, Chris Aniszczyk,
+and Amye Scavarda Perrin for helping us through the graduation process.
 
 ## Linkerd is for everyone
 
