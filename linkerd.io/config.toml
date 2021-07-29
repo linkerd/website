@@ -58,9 +58,9 @@ url = "/community/get-involved/"
 weight = 1
 parent = "community"
 [[menu.top]]
-identifier = "community-anchors"
-name = "Community Anchors"
-url = "/community/anchor/"
+identifier = "community-adopters"
+name = "Adopters"
+url = "/community/adopters/"
 weight = 2
 parent = "community"
 [[menu.top]]
@@ -76,9 +76,9 @@ url = "/community/heroes/"
 weight = 4
 parent = "community"
 [[menu.top]]
-identifier = "community-adopters"
-name = "Adopters"
-url = "/community/adopters/"
+identifier = "community-anchors"
+name = "Community Anchors"
+url = "/community/anchor/"
 weight = 5
 parent = "community"
 [[menu.top]]
