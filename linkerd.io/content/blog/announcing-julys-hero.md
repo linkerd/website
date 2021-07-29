@@ -1,10 +1,12 @@
 ---
-title: Announcing July's Linkerd Hero
-subtitle: 
-tags:
-  - Community
-items:
-description: 'This month's hero is Sanskar Jaiswal. In a short amount of time, Sanskar has made his presence felt through his thoughtful code contributions'
+author: "charles"
+title: "Announcing July's Linkerd Hero"
+date: 2021-07-29T00:00:00Z
+tags: ["Community"]
+feature: "/uploads/july-community-update.png"
+thumbnail: "/uploads/july-community-update.png"
+description: "This month's hero is Sanskar Jaiswal. In a short amount of time, Sanskar has made his presence felt through his thoughtful code contributions"
+featured: false
 keywords: [Linkerd Hero]
 ---
 
@@ -28,7 +30,7 @@ health checks in the control plane. Thank you, Sanskar, for your passion,
 commitment, and prolific contributions. Your changes are a welcome addition
 to the project!
 
-ADD SUPERHERO GRAPHIC HERE
+![Sanskar Jaiswal](/uploads/july-community-update.png)
 
 ## Nominate next month's Linkerd Hero
 
