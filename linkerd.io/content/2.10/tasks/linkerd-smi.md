@@ -3,15 +3,17 @@ title = "Getting started with Linkerd SMI extension"
 description = "Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources."
 +++
 
-[Service Mesh Interface](https://smi-spec.io/) is a standard interface for service meshes on Kubernetes. It defines a set of resources that could be used across
-service meshes that implement it. You can read more about it in the [specification](https://github.com/servicemeshinterface/smi-spec).
+[Service Mesh Interface](https://smi-spec.io/) is a standard interface for
+service meshes on Kubernetes. It defines a set of resources that could be
+used across service meshes that implement it.
+You can read more about it in the [specification](https://github.com/servicemeshinterface/smi-spec)
 
-Currently, Linkerd supports SMI's `TrafficSplit` specification which can be used
-to perform traffic splitting across services natively. This means that you can
-apply the SMI resources without any additional components/configuration but this
-obviously has some downsides, as Linkerd may not be able to add extra specific
-configurations specific to it, as SMI is more like a lowest common denominator of
-service mesh functionality.
+Currently, Linkerd supports SMI's `TrafficSplit` specification which can be
+used to perform traffic splitting across services natively. This means that
+you can apply the SMI resources without any additional
+components/configuration but this obviously has some downsides, as
+Linkerd may not be able to add extra specific configurations specific to it,
+as SMI is more like a lowest common denominator of service mesh functionality.
 
 To get around these problems, Linkerd can instead have an adaptor that converts
 SMI specifications into native Linkerd configurations that it can understand
@@ -41,7 +43,7 @@ curl -sL https://linkerd.github.io/linkerd-smi/install | sh
 
 Alternatively, you can download the CLI directly via the [releases page](https://github.com/linkerd/linkerd-smi/releases).
 
-The first step is installing the Linkerd-Jaeger extension onto your cluster. 
+The first step is installing the Linkerd-Jaeger extension onto your cluster.
 This extension consists of a SMI-Adaptor which converts SMI resources into
 native Linkerd resources.
 
@@ -56,7 +58,7 @@ running:
 
 ```bash
 linkerd smi check
-``` 
+```
 
 ### Helm
 
@@ -79,8 +81,9 @@ kubectl create namespace trafficsplit-sample
 linkerd inject https://raw.githubusercontent.com/linkerd/linkerd2/main/test/integration/trafficsplit/testdata/application.yaml | kubectl -n trafficsplit-sample apply -f -
 ```
 
-This installs a simple client, and two server deployments. One of the server deployments i.e `faling-svc` always returns
-a 500 error, and the other one i.e `backend-svc` always returns a 200.
+This installs a simple client, and two server deployments.
+One of the server deployments i.e `faling-svc` always returns a 500 error,
+and the other one i.e `backend-svc` always returns a 200.
 
 ```bash
 kubectl get deployments -n trafficsplit-sample
@@ -90,7 +93,8 @@ failing       1/1     1            1           2m29s
 slow-cooker   1/1     1            1           2m29s
 ```
 
-By default, the client will hit the `backend-svc`service. This is evident by the edges command.
+By default, the client will hit the `backend-svc`service. This is evident by
+the `edges` sub command.
 
 ```bash
 linkerd viz edges deploy -n trafficsplit-sample
@@ -123,8 +127,9 @@ spec:
 EOF
 ```
 
-Because the `smi-adaptor` watches for `TrafficSplit` resources, it will automatically create a respective `ServiceProfile` resource to perform the same. This can be verified by retrieving
-the `ServiceProfile` resource.
+Because the `smi-adaptor` watches for `TrafficSplit` resources, it will
+automatically create a respective `ServiceProfile` resource to perform
+the same. This can be verified by retrieving the `ServiceProfile` resource.
 
 ```bash
 kubectl describe serviceprofile -n trafficsplit-sample
@@ -173,7 +178,8 @@ slow-cooker   backend       trafficsplit-sample   trafficsplit-sample   √
 slow-cooker   failing       trafficsplit-sample   trafficsplit-sample   √
 ```
 
-This can also be verified by running `stat` cmd on the `TrafficSplit` resource.
+This can also be verified by running `stat` sub command on the `TrafficSplit`
+resource.
 
 ```bash
 linkerd viz stat ts/backend-split -n traffic-sample
