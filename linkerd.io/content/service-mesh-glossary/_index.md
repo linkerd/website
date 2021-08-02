@@ -65,7 +65,7 @@ faqs:
       Linkerd was the first service mesh and the project that defined the term 
       "service mesh" itself. First released 2016, Linkerd is designed to be the 
       fastest, lightest-weight service mesh possible for Kubernetes. Linkerd 
-      is a Cloud Native Computing Foundation (CNCF) incubating project.
+      is a Cloud Native Computing Foundation (CNCF) graduated project.
   - question: What is load balancing?
     answer:
       Load balancing is the act of distributing work across a number of 
@@ -207,7 +207,7 @@ Linkerd was the first [service mesh](#service-mesh) and the project that
 defined the term
 "service mesh" itself. First released 2016, Linkerd is designed to be the
 fastest, lightest-weight service mesh possible for Kubernetes. Linkerd is a
-Cloud Native Computing Foundation (CNCF) incubating project.
+Cloud Native Computing Foundation (CNCF) graduated project.
 
 ## Load balancing
 
