@@ -65,7 +65,7 @@ weight = 2
 parent = "community"
 [[menu.top]]
 identifier = "linkerd-ambassadors"
-url = "/community/ambassadors"
+url = "/community/ambassadors/"
 name = "Linkerd Ambassadors"
 weight = 3
 parent = "community"
