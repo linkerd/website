@@ -7,7 +7,7 @@
       "name": "{{ .Name }}",
       "description": "{{ .Description }}",
       "docLink": "{{ .DocLink }}",
-      "screenshotURL": "{{ $baseURL }}uploads/{{ .ScreenshotFileName }}"
+      "screenshotURL": "{{ $baseURL }}/uploads/{{ .ScreenshotFileName }}"
     }{{if ne (sub (len $data.Extensions) 1 ) $index }},{{end}}
     {{ end -}}
   ]
