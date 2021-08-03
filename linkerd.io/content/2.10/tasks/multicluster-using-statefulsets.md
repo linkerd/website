@@ -1,5 +1,5 @@
 +++
-title = "Multi-cluster with headless services"
+title = "Multi-cluster communication with StatefulSets"
 description = "cross-cluster communication to and from headless services."
 +++
 
