@@ -3,19 +3,23 @@ title = "Multi-cluster communication with StatefulSets"
 description = "cross-cluster communication to and from headless services."
 +++
 
-By default, the Linkerd multi-cluster extension mirrors services from a target
-cluster to a source cluster as a `clusterIP` service. [Headless
-services](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)
-are not an exception; with the default installation, an exported headless
-service will be mirrored to a source cluster as a `clusterIP` service. In
-certain situations, however, this is not desireable. To preserve some of the
-functionality that a headless service brings, the Linkerd multi-cluster
-extension can be installed with support for headless services, where the type
-of the service is preserved when mirrored, effectively mirroring the service as
-headless in the source cluster. This tutorial will explain the functional
-differences between a `clusterIP` service and a headless service, how Linkerd
-mirrors a headless service and how to configure Linkerd with support for
-headless services.
+Linkerd's multi-cluster extension works by "mirroring" service information
+between clusters. Exported services in a target cluster will be mirrored as
+`clusterIP` replicas. By default, every exported service will be mirrored as
+`clusterIP`. When running workloads that require a headless service, such as
+[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/),
+Linkerd's multi-cluster extension can be configured with support for headless
+services to preserve the service type. Exported services that are headless will
+be mirrored in a source cluster as headless, preserving functionality such as
+DNS record creation and the ability to address an individual pod.
+
+This guide will walk you through installing and configuring Linkerd and the
+multi-cluster extension with support for headless services and will exemplify
+how a StatefulSet can be deployed in a target cluster. After deploying, we will
+also look at how to communicate with an arbitrary pod from the target cluster's
+StatefulSet from a client in the source cluster. For a more detailed overview
+on how multi-cluster support for headless services work, check out
+[multi-cluster communication](../../features/multicluster#headless-services).
 
 In this guide, you will:
 
@@ -30,76 +34,17 @@ In this guide, you will:
 
 ## Prerequisites
 
-- A machine with support for `docker`.
-- `git`
-- [`k3d:v4+`](https://github.com/rancher/k3d/releases/tag/v4.1.1) to configure two Kubernetes clusters locally.
+- Two Kubernetes clusters. They will be referred to as `east` and `west` with
+  east being the "source" cluster and "west" the target cluster respectively.
+  These can be in any cloud or local environment, this guide will make use of
+  [k3d]((https://github.com/rancher/k3d/releases/tag/v4.1.1) to configure two
+  local clusters. 
 - [`smallstep/CLI`](https://github.com/smallstep/cli/releases) to generate certificates for Linkerd installation.
 - [`linkerd:stable-2.11.0`](https://github.com/linkerd/linkerd2/releases) to install Linkerd.
 
-## Kubernetes headless services
-
-In Kubernetes, a [service
-object](https://kubernetes.io/docs/concepts/services-networking/service/#service-resource)
-represents a logical abstraction over a set of pods. Simply put, a service
-object will have a virtual IP address that can live as long as the object
-itself. It is a virtual address, because it does not point _directly_ to a pod;
-since pods have a short lifecycle and change frequently in Kubernetes, client
-services cannot rely on their IP addresses being constant. A service object is
-associated with a group of pods, through its virtual IP address, it provides a
-virtual entry point to this pod group that will remain usable for longer.
-
-By contrast, a [headless
-service](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services)
-does not maintain a virtual IP address, its IP address is set to `None`.
-However, it can still be associated with a group of pods. Rather than providing
-a virtual entrypoint for them, it provides a stable network identifier through
-which pods can be discovered. Both types of services will configure DNS records
-for the group of pods which they are associated with, the difference is that
-with a normal service, Kubernetes handles proxying, load balancing and
-discovery mechanisms. With a headless service, that responsibility falls on the
-service owner.
-
-There are two main uses for headless services:
-  1. to facilitate service discovery without being tied to Kubernetes' native
-     implementation;
-  2. and to provide a stable network identifier for pods.
-
-In certain cases, headless services are a better abstraction model. For
-example, headless services are commonly used with
-[StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/).
-For certain classes of applications which are deemed stateful (e.g databases),
-we might want to have fewer pods in the group whose time to live is also higher
-than that of an average pod. StatefulSets facilitate this; in a set, pods are
-ordered and have a unique identifier that is usually conferred through a
-headless service. Moreover, a stateful applications also generally require
-arbitrary connections -- if for normal pods we have a logical entrypoint and
-may be routed to any pod in the group, for stateful applications or distributed
-systems we might want to access a pod directly based on its name.
-
-In the default multi-cluster installation, we are not able to address a pod
-directly from a source to a target cluster. If we export a service in a target
-cluster, it will be mirrored as a `clusterIP` service. In other words, it will
-be a logical entrypoint. This is true even with headless services; if we were
-to export a headless service, its network identifier would not be preserved
-across clusters (and how could it, there are no pods in the source cluster for
-that service!). By installing the extension with support for headless services,
-this can remedied and a client in a source cluster can address a pod from a
-target cluster directly.
-
-## Mirroring a headless service
-
-In order to mirror a headless service as a headless service, Linkerd creates a
-set of "synthetic" endpoints so that each pod in the target cluster also has a
-mirror in the source cluster. When a client wishes to communicate to an
-endpoint in the target cluster, it will first send a request to the local,
-synthetic endpoint, which in turn forwards the request to the target cluster.
-
-Spinning and maintaing synthetic pods can be an expensive operation. As such,
-Linkerd makes use of other `clusterIP` services to create this set of synthetic
-endpoints. To exemplify, if a StatefulSet targets a group of three pods, when
-its headless service will be exported, it will be mirrored in the source
-cluster as a headless service, whose three endpoints are not pods, but three
-other `clusterIP` services that will point to the gateway. 
+To help with cluster creation and installation, there is a demo repository
+available. Throughout the guide, we will be using the scripts from the
+repository, but you can follow along without cloning or using the scripts.
 
 ## Install Linkerd multi-cluster with headless support
 
