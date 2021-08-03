@@ -19,7 +19,7 @@ how a StatefulSet can be deployed in a target cluster. After deploying, we will
 also look at how to communicate with an arbitrary pod from the target cluster's
 StatefulSet from a client in the source cluster. For a more detailed overview
 on how multi-cluster support for headless services work, check out
-[multi-cluster communication](../../features/multicluster#headless-services).
+[multi-cluster communication](../../features/multicluster#headless-services/).
 
 ## Prerequisites
 
@@ -326,7 +326,7 @@ To clean-up, you can remove both clusters entirely using the k3d CLI:
 
 ```sh
 $ k3d cluster delete east
-deleted
+cluster east deleted
 $ k3d cluster delete west
-deleted
+cluster west deleted
 ```
