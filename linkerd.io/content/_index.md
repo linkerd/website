@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-05-27** Benchmarking Linkerd and Istio [Read more »](/2021/05/27/linkerd-vs-istio-benchmarks/)"
+  description: "**2021-07-28** Announcing Linkerd's CNCF Graduation! [Read more »](/2021/07/28/announcing-cncf-graduation/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -61,13 +61,13 @@ companies:
 - image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
 - image: "/uploads/logos/blue/hp.png"
-  link: https://ask.com/
+  link: https://hp.com/
 - image: "/uploads/logos/blue/bigcommerce.png"
   link: https://www.bigcommerce.com/
 - image: "/uploads/logos/blue/cisco-webex.png"
-  link: https://www.xfinity.com/
+  link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
-  link: https://www.ebay.com/
+  link: https://www.cloverhealth.com/
 - image: "/uploads/logos/blue/godaddy.png"
   link: https://godaddy.com/
 - image: "/uploads/logos/blue/heb.png"

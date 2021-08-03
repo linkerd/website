@@ -368,7 +368,7 @@ Now we are ready to install Linkerd. The decrypted trust anchor we just
 retrieved will be passed to the installation process using the
 `identityTrustAnchorsPEM` parameter.
 
-Prior to installing Linkerd, note that the `gloval.identityTrustAnchorsPEM`
+Prior to installing Linkerd, note that the `global.identityTrustAnchorsPEM`
 parameter is set to an "empty" certificate string:
 
 ```sh

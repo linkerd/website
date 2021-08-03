@@ -25,13 +25,13 @@ metadata:
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: linkerd-viz
   annotations:
-    kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Origin "";
@@ -41,13 +41,18 @@ metadata:
     nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
     nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
 spec:
+  ingressClassName: nginx
   rules:
-    - host: dashboard.example.com
-      http:
-        paths:
-          - backend:
-              serviceName: web
-              servicePort: 8084
+  - host: dashboard.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 8084
 ```
 
 This exposes the dashboard at `dashboard.example.com` and protects it with basic
@@ -91,13 +96,13 @@ such as, `client-id` `client-secret` and `cookie-secret`.
 Once setup, a sample ingress would be:
 
 ```yaml
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web
   namespace: linkerd-viz
   annotations:
-    kubernetes.io/ingress.class: 'nginx'
     nginx.ingress.kubernetes.io/upstream-vhost: $service_name.$namespace.svc.cluster.local:8084
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Origin "";
@@ -106,13 +111,18 @@ metadata:
     nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=$escaped_request_uri
     nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
 spec:
+  ingressClassName: nginx
   rules:
-    - host: linkerd.example.com
-      http:
-        paths:
-          - backend:
-              serviceName: web
-              servicePort: 8084
+  - host: linkerd.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 8084
 ```
 
 ## Traefik
@@ -129,24 +139,29 @@ metadata:
 data:
   auth: YWRtaW46JGFwcjEkbjdDdTZnSGwkRTQ3b2dmN0NPOE5SWWpFakJPa1dNLgoK
 ---
-apiVersion: extensions/v1beta1
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
   namespace: linkerd-viz
   annotations:
-    kubernetes.io/ingress.class: 'traefik'
     ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web.linkerd-viz.svc.cluster.local:8084
     traefik.ingress.kubernetes.io/auth-type: basic
     traefik.ingress.kubernetes.io/auth-secret: web-ingress-auth
 spec:
+  ingressClassName: traefik
   rules:
-    - host: dashboard.example.com
-      http:
-        paths:
-          - backend:
-              serviceName: web
-              servicePort: 8084
+  - host: dashboard.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 8084
 ```
 
 This exposes the dashboard at `dashboard.example.com` and protects it with basic

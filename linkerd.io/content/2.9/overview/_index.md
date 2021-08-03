@@ -17,7 +17,7 @@ Over-Hyped Technology](https://servicemesh.io/).
 
 Linkerd is fully open source, licensed under [Apache
 v2](https://github.com/linkerd/linkerd2/blob/main/LICENSE), and is a [Cloud
-Native Computing Foundation](https://cncf.io) incubating project. Linkerd is
+Native Computing Foundation](https://cncf.io) graduated project. Linkerd is
 developed in the open in the [Linkerd GitHub organization](https://github.com/linkerd).
 
 Linkerd has three basic components: a UI, a *data plane*, and a *control

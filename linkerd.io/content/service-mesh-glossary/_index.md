@@ -11,6 +11,18 @@ faqs:
       providing a common access point for external consumers. A service mesh, 
       in contrast, is focused on providing operational logic between 
       components of the app.
+  - question: What is a cluster?
+    answer: 
+      In the cloud native context, a cluster is a group of machines, physical or
+      virtual, that make up the pool of hardware on which a container
+      orchestrator such as Kubernetes can run. Each machine in the cluster is
+      commonly referred to as a node.
+  - question: What is a container?
+    answer: 
+      A container is a lightweight packaging of an application and its
+      dependencies, designed to be run by a host operating system (OS) in an
+      isolated fashion with strict limits on resource consumption and access
+      to the OS.
   - question: What is a service mesh control plane?
     answer:
       The control plane of a service mesh provides the command and control
@@ -36,6 +48,12 @@ faqs:
       health. The set of golden metrics is generally defined as
       [latency](#latency), traffic volume, error rate, and saturation. Linkerd's
       golden metrics omit saturation.
+  - question: What is an ingress?
+    answer:
+      An ingress is a specific application that runs in a Kubernetes cluster
+      and handles traffic coming into the cluster from off-cluster sources.
+      This traffic is referred to as ingress (or occasionally "north/south"
+      traffic)
   - question: What is latency?
     answer:
       Latency refers to the time it takes an application to do something (e.g.,
@@ -47,7 +65,7 @@ faqs:
       Linkerd was the first service mesh and the project that defined the term 
       "service mesh" itself. First released 2016, Linkerd is designed to be the 
       fastest, lightest-weight service mesh possible for Kubernetes. Linkerd 
-      is a Cloud Native Computing Foundation (CNCF) incubating project.
+      is a Cloud Native Computing Foundation (CNCF) graduated project.
   - question: What is load balancing?
     answer:
       Load balancing is the act of distributing work across a number of 
@@ -106,6 +124,33 @@ common access point for external consumers. A service mesh, in contrast, is
 focused on providing operational (not business) logic between components of the
 application.
 
+## Cluster
+
+In the cloud native context, a cluster is a group of machines, physical or
+virtual, that make up the pool of hardware on which a container orchestrator
+such as Kubernetes can run. Each machine in the cluster is commonly referred
+to as a node, and the nodes of a cluster are typically uniform, fungible, and
+interconnected.
+
+## Container
+
+A container is a lightweight packaging of an application and its dependencies,
+designed to be run by a host operating system (OS) in an isolated fashion
+with strict limits on resource consumption and access to the OS. In this
+sense, a container is an atomic executable "unit" that can be run by the
+OS without application-specific setup or configuration.
+
+In the service mesh context, containers were popularized by Docker as a
+lightweight alternative to virtual machines (VMs), which had similar
+characteristics but were considerably heavier weight. The rise of containers,
+in turn, gave rise to container orchestrators such as Kubernetes, which
+allowed applications, when packaged as containers, to be automatically
+scheduled across a pool of machines (called a "[cluster](#cluster)").
+The rise of Kubernetes gave rise to the sidecar model of deployment,
+which allowed [service meshes](#service-mesh) like Linkerd to provide
+their functionality in a way that was decoupled from the application
+and did not impose a severe operational cost to the operator.
+
 ## Control Plane
 
 The control plane of a service mesh provides the command and control signals
@@ -135,10 +180,22 @@ Golden metrics, or golden signals, are the core metrics of application health.
 The set of golden metrics is generally defined as [latency](#latency), traffic
 volume, error rate, and saturation. Linkerd's golden metrics omit saturation.
 
+## Ingress
+
+An ingress is a specific application that runs in a Kubernetes
+[cluster](#cluster) and handles traffic coming into the cluster from
+off-cluster sources. This traffic is referred to as ingress (or
+occasionally "north/south" traffic). In contrast to in-cluster traffic,
+which is typically mediated by the [service mesh](#service-mesh), ingress
+traffic has a specific set of concerns arising from the fact that it
+often comes from customer, third-party, or other non-application sources.
+[API gateways](#api-gateway) are often used as ingresses.
+
 ## Latency
 
 Latency refers to the time it takes an application to do something (e.g.,
-processing a request, populating data, etc.) In service mesh terms, this is
+processing a request, populating data, etc.) In [service mesh](#service-mesh)
+terms, this is
 measured at the response level, i.e. by timing how long the application takes to
 respond to a request. Latency is typically characterized by the percentiles of a
 distribution, commonly including the p50 (or median), the p95 (or 95th
@@ -146,10 +203,11 @@ percentile), the p99 (or 99th percentile), and so on.
 
 ## Linkerd
 
-Linkerd was the first service mesh and the project that defined the term
+Linkerd was the first [service mesh](#service-mesh) and the project that
+defined the term
 "service mesh" itself. First released 2016, Linkerd is designed to be the
 fastest, lightest-weight service mesh possible for Kubernetes. Linkerd is a
-Cloud Native Computing Foundation (CNCF) incubating project.
+Cloud Native Computing Foundation (CNCF) graduated project.
 
 ## Load balancing
 
