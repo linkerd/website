@@ -21,26 +21,17 @@ StatefulSet from a client in the source cluster. For a more detailed overview
 on how multi-cluster support for headless services work, check out
 [multi-cluster communication](../../features/multicluster#headless-services).
 
-In this guide, you will:
-
-1. [Learn about Kubernetes headless services](#kubernetes-headless-services)
-   anchor.
-1. [Learn the difference between a clusterIP and a headless
-   mirror](#mirroring-a-headless-service).
-1. [Install Linkerd and
-   multi-cluster](#install-linkerd-multi-cluster-with-headless-support).
-1. [Deploy and send a request directly to a pod, from a different
-   cluster](#pod-to-pod-from-east-to-west).
-
 ## Prerequisites
 
 - Two Kubernetes clusters. They will be referred to as `east` and `west` with
   east being the "source" cluster and "west" the target cluster respectively.
   These can be in any cloud or local environment, this guide will make use of
-  [k3d]((https://github.com/rancher/k3d/releases/tag/v4.1.1) to configure two
-  local clusters. 
-- [`smallstep/CLI`](https://github.com/smallstep/cli/releases) to generate certificates for Linkerd installation.
-- [`linkerd:stable-2.11.0`](https://github.com/linkerd/linkerd2/releases) to install Linkerd.
+  [k3d](https://github.com/rancher/k3d/releases/tag/v4.1.1) to configure two
+  local clusters.
+- [`smallstep/CLI`](https://github.com/smallstep/cli/releases) to generate
+  certificates for Linkerd installation.
+- [`linkerd:stable-2.11.0`](https://github.com/linkerd/linkerd2/releases) to
+  install Linkerd.
 
 To help with cluster creation and installation, there is a demo repository
 available. Throughout the guide, we will be using the scripts from the
@@ -50,10 +41,11 @@ repository, but you can follow along without cloning or using the scripts.
 
 To start our demo and see everything in practice, we will go through a
 multi-cluster scenario where a pod in an `east` cluster will try to communicate
-to an arbitrary pod from a `west` cluster. 
+to an arbitrary pod from a `west` cluster.
 
 The first step is to clone the demo
 repository on your local machine.
+
 ```sh
 # clone example repository
 $ git clone git@github.com:mateiidavid/l2d-k3d-statefulset.git
@@ -65,6 +57,7 @@ The second step consists of creating two `k3d` clusters named `east` and
 target. When creating our clusters, we need a shared trust root. Luckily, the
 repository you have just cloned includes a handful of scripts that will greatly
 simplify everything.
+
 ```sh
 # create k3d clusters
 $ ./create.sh
@@ -82,6 +75,7 @@ together so their services may be mirrored. To enable support for headless
 services, we will pass an additional `--set "enableHeadlessServices=true` flag
 to `linkerd multicluster link`. As before, these steps are automated through
 the provided scripts, but feel free to have a look!
+
 ```sh
 # Install Linkerd and multicluster, output to check should be a success
 $ ./install.sh
@@ -94,14 +88,17 @@ Perfect! If you've made it this far with no errors, then it's a good sign. In
 the next chapter, we'll deploy some services and look at how communication
 works.
 
-## Pod-to-Pod: from east, to west.
+## Pod-to-Pod: from east, to west
 
-With our install steps out of the way, we can now focus on our pod-to-pod communication. First, we will deploy our pods and services:
-  * We will mesh the default namespaces in `east` and `west`.
-  * In `west`, we will deploy an nginx StatefulSet with its own headless
-    service, `nginx-svc`.
-  * In `east`, our script will deploy a `curl` pod that will then be used to
-    curl the nginx service.
+With our install steps out of the way, we can now focus on our pod-to-pod
+communication. First, we will deploy our pods and services:
+
+- We will mesh the default namespaces in `east` and `west`.
+- In `west`, we will deploy an nginx StatefulSet with its own headless
+  service, `nginx-svc`.
+- In `east`, our script will deploy a `curl` pod that will then be used to
+  curl the nginx service.
+
 ```sh
 # deploy services and mesh namespaces
 $ ./deploy.sh
@@ -131,6 +128,7 @@ nginx-set-2   2/2     Running   0          36s
 
 Before we go further, let's have a look at the endpoints object for the
 `nginx-svc`:
+
 ```sh
 $ kubectl --context=k3d-west get endpoints nginx-svc -o yaml
 ...
@@ -170,6 +168,7 @@ with each endpoint having an address (or IP) whose hostname corresponds to a
 StatefulSet pod. If we were to do a curl to any of these endpoints directly, we
 would get an answer back. We can test this out by applying the curl pod to the
 `west` cluster:
+
 ```sh
 $ kubectl --context=k3d-west apply -f east/curl.yml
 $ kubectl --context=k3d-west get pods
@@ -180,8 +179,11 @@ nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
 $ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
+/$ # prompt for curl pod
 ```
-If we do a curl now to one of these instances, we will get back a response.
+
+If we now curl one of these instances, we will get back a response.
+
 ```sh
 # exec'd on the pod
 / $ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
@@ -214,6 +216,7 @@ Commercial support is available at
 
 Now, let's do the same, but this time from the `east` cluster. We will first
 export the service.
+
 ```sh
 $ kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
 service/nginx-svc labeled
@@ -230,6 +233,7 @@ nginx-set-2-west   ClusterIP   10.43.245.244   <none>        80/TCP    29s
 If we take a look at the endpoints object, we will notice something odd, the
 endpoints for `nginx-svc-west` will have the same hostnames, but each hostname
 will point to one of the services we see above:
+
 ```sh
 $ kubectl --context=k3d-east get endpoints nginx-svc-west -o yaml
 subsets:
@@ -287,6 +291,7 @@ Commercial support is available at
 
 As you can see, we get the same response back! But, nginx is in a different
 cluster. So, what happened behind the scenes?
+
   1. When we mirrored the headless service, we created a clusterIP service for
      each pod. Since services create DNS records, naming each endpoint with the
      hostname from the target gave us these pod FQNS
@@ -318,7 +323,10 @@ passes Kubernetes validation.
 ## Cleanup
 
 To clean-up, you can remove both clusters entirely using the k3d CLI:
+
 ```sh
 $ k3d cluster delete east
+deleted
 $ k3d cluster delete west
+deleted
 ```
