@@ -43,7 +43,7 @@ curl -sL https://linkerd.github.io/linkerd-smi/install | sh
 
 Alternatively, you can download the CLI directly via the [releases page](https://github.com/linkerd/linkerd-smi/releases).
 
-The first step is installing the Linkerd-Jaeger extension onto your cluster.
+The first step is installing the Linkerd-SMI extension onto your cluster.
 This extension consists of a SMI-Adaptor which converts SMI resources into
 native Linkerd resources.
 
@@ -186,6 +186,20 @@ linkerd viz stat ts/backend-split -n traffic-sample
 NAME            APEX          LEAF          WEIGHT   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 backend-split   backend-svc   backend-svc      500   100.00%   0.5rps           1ms           1ms           1ms
 backend-split   backend-svc   failing-svc      500     0.00%   0.5rps           1ms           1ms           1ms
+```
+
+This can also be verified by checking the `smi-adaptor` logs.
+
+```bash
+kubectl -n linkerd-smi logs deploy/smi-adaptor smi-adaptor
+time="2021-08-04T11:04:35Z" level=info msg="Using cluster domain: cluster.local"
+time="2021-08-04T11:04:35Z" level=info msg="Starting SMI Controller"
+time="2021-08-04T11:04:35Z" level=info msg="Waiting for informer caches to sync"
+time="2021-08-04T11:04:35Z" level=info msg="starting admin server on :9995"
+time="2021-08-04T11:04:35Z" level=info msg="Starting workers"
+time="2021-08-04T11:04:35Z" level=info msg="Started workers"
+time="2021-08-04T11:05:17Z" level=info msg="created serviceprofile/backend-svc.trafficsplit-sample.svc.cluster.local for trafficsplit/backend-split"
+time="2021-08-04T11:05:17Z" level=info msg="Successfully synced 'trafficsplit-sample/backend-split'"
 ```
 
 ## Cleanup
