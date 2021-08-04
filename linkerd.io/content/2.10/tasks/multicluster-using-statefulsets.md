@@ -312,7 +312,7 @@ cluster. So, what happened behind the scenes?
 And that's it! You can now send requests to pods across clusters. Querying any
 of the 3 StatefulSet pods should have the same results.
 
-{{<note>}}
+{{< note >}}
 
 To mirror a headless service as headless, the service's endpoints
 must also have at least one named address (e.g a hostname for an IP),
@@ -322,7 +322,7 @@ without exposing a port; the mulit-cluster service-mirror does not support
 this, however, since the lack of ports means we cannot create a service that
 passes Kubernetes validation.
 
-{{</note>}}
+{{< /note >}}
 
 ## Cleanup
 
