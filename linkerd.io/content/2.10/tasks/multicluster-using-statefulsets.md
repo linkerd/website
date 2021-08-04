@@ -294,7 +294,7 @@ cluster. So, what happened behind the scenes?
 
   1. When we mirrored the headless service, we created a clusterIP service for
      each pod. Since services create DNS records, naming each endpoint with the
-     hostname from the target gave us these pod FQNS
+     hostname from the target gave us these pod FQDNs
      (`nginx-set-0.(...).cluster.local`).
   2. Curl resolved the pod DNS name to an IP address. In our case, this IP
      would be `10.43.179.60`.
@@ -312,13 +312,13 @@ cluster. So, what happened behind the scenes?
 And that's it! You can now send requests to pods across clusters. Querying any
 of the 3 StatefulSet pods should have the same results.
 
-**Note**: to mirror a headless service as headless, the service's endpoints
+{{<note>}}To mirror a headless service as headless, the service's endpoints
 must also have at least one named address (e.g a hostname for an IP),
 otherwise, there will be no endpoints to mirror so the service will be mirrored
 as `clusterIP`. A headless service may under normal conditions also be created
 without exposing a port; the mulit-cluster service-mirror does not support
 this, however, since the lack of ports means we cannot create a service that
-passes Kubernetes validation.
+passes Kubernetes validation.{{</note>}}
 
 ## Cleanup
 
