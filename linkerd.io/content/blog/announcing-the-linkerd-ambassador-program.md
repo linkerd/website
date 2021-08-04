@@ -1,6 +1,7 @@
 ---
 title: Announcing the Linkerd Ambassador program
 subtitle: 
+author: 'catherine'
 tags:
   - Community
 items:
