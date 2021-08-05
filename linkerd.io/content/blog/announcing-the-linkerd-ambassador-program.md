@@ -1,11 +1,12 @@
 ---
-title: Announcing the Linkerd Ambassador program
-subtitle: 
 author: 'catherine'
+title: Announcing the Linkerd Ambassador program
+description: 'Linkerd Ambassadors are community members who have demonstrated
+  passion, engagement, and a commitment to sharing their Linkerd experience.'
+date: 2021-08-05T00:00:00Z
+thumbnail: "/uploads/ambassadors-featured.png"
 tags:
   - Community
-items:
-description: 'Linkerd Ambassadors are community members who have demonstrated passion, engagement, and a commitment to sharing their Linkerd experience.'
 keywords: []
 ---
 Hot on the heels of Linkerd's CNCF graduation, we are very excited to announce
@@ -63,12 +64,12 @@ they discovered a mesh called "Conduit" (Linkerd 1). After a few interactions
 with the Conduit team on Slack they discovered that some of the key features
 they would need in the future were on the product roadmap. In early 2019,
 they formally adopted Linkerd. They loved the solution and Christian's team
-has been keen Linkerd users and contributors ever since. 
+has been keen Linkerd users and contributors ever since.
 
 With Linkerd, observability increased, load balancing improved, all services
 automatically have mTLS, and, in some cases, they even prevented config errors
 in certain load-balancing scenarios. Thanks to Linkerd's simple setup, Christian
-and team were able to deliver the cloud native transformation project on time. 
+and team were able to deliver the cloud native transformation project on time.
 
 Christian is passionate about the cloud native community and what it enables
 them to do. "It's exciting to see how people around the world collaborate to
@@ -84,9 +85,9 @@ involving building two new Kubernetes-based platforms: a new point of sales app
 used by all in-store sales reps across Scandinavia and an app to host all
 microservices. With Frederik’s help, Elkjøp modernized its architecture,
 processes, as well as app development and maintenance. Elkjøp estimates that
-the new platforms will save them over 90% in hosting cost — pretty impressive! 
+the new platforms will save them over 90% in hosting cost — pretty impressive!
 You can learn all about it in
-[Fredrik's CNCF blog](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-enterprise-ready-kubernetes-platform-powered-by-linkerd/). 
+[Fredrik's CNCF blog](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-enterprise-ready-kubernetes-platform-powered-by-linkerd/).
 
 Fredrik first learned about the service mesh in 2019 while collaborating
 with Microsoft on several projects. Microsoft has been a trusted
@@ -140,7 +141,7 @@ share lessons learned. Most recently, Sergio and Jossie Castrillo presented
 Jossie's thesis results on
 [how Linkerd complements Chaos Mesh well for chaos engineering experiments](https://buoyant.io/media/chaos-in-the-university-with-linkerd-and-chaos-mesh/).
 "It's awesome how CNCF technologies can open the doors for Central American
-youth!" says Sergio. 
+youth!" says Sergio.
 
 
 Sergio is also a DevOps Engineer at Yalo where he works on Kubernetes-based
@@ -188,10 +189,10 @@ An avid ice hockey player, skater, and snowboarder, Steve also really enjoys
 traveling. "The second international travel is back on the menu,
 I’m off to Japan!"
 
-## Welcome everyone! 
+## Welcome everyone!
 
 Each one of these innovators have been unofficial Linkerd Ambassadors for a
 while, sharing their expertise at various conferences, in blog posts, on Slack,
 and social media. Today, we want to officially recognize and thank them for
 their amazing community engagement. The Linkerd community is incredibly lucky
-to have such amazing members! 
+to have such amazing members!
