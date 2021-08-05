@@ -6,7 +6,12 @@ description = "Linkerd works alongside your ingress controller of choice."
 As of Linkerd version 2.9, there are two ways in which the Linkerd proxy
 can be run with your Ingress Controller.
 
-## Default Mode
+## Proxy Modes
+
+The Linkerd proxy offers two modes of operation in order to handle some of the
+more subtle behaviors of load balancing in ingress controllers.
+
+### Default Mode
 
 When the ingress controller is injected with the `linkerd.io/inject: enabled`
 annotation, the Linkerd proxy will honor load balancing decisions made by the
@@ -17,7 +22,29 @@ traffic and therefore will not expose per-route metrics or do traffic splitting.
 If your Ingress controller is injected with no extra configuration specific to
 ingress, the Linkerd proxy runs in the default mode.
 
-## Proxy Ingress Mode
+It's important to note that some ingresses, either by default or by
+configuration, can change the way that they make load balancing decisions. For
+example, the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
+controller includes the [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
+annotation. The default `false` value of this annotation adds an entry for each
+kubernetes endpoint of a pod to the `upstream` block in the nginx configuration,
+thereby informing nginx to load balance requests directly to the endpoints of a
+service.
+
+Setting this annotation to `true` configures the ingress controller to add
+_only_ the cluster IP and port of the Service resource as the single entry to
+the `upstream` block in the nginx configuration. As a result, the load balancing
+decisions are offloaded to the Linkerd proxy. With this configuration, the
+ServiceProfile and per-route metrics functionality _will_ be available with the
+annotation `linkerd.io/inject: enabled`.
+
+The `nginx.ingress.kubernetes.io/service-upstream` annotation is unique to the
+nginx ingress controller, so be sure to check the documentation for your ingress
+controller of choice. If the ingress does not use the cluster IP and port of the
+Service, then read through the next section to learn how `Proxy Ingress Mode`
+works
+
+### Proxy Ingress Mode
 
 If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
 there is additional configuration required to make the Ingress controller's Linkerd
