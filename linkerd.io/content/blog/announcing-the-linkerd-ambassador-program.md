@@ -143,7 +143,6 @@ Jossie's thesis results on
 "It's awesome how CNCF technologies can open the doors for Central American
 youth!" says Sergio.
 
-
 Sergio is also a DevOps Engineer at Yalo where he works on Kubernetes-based
 WhatsApp chatbots. You may have seen his KubeCon talk on
 [chatbots he built for a large Central American telco based on Kubernetes, OpenFaaS, and Linkerd](https://buoyant.io/media/serverless-chatbots-linked-kubernetes-opensaas/).
