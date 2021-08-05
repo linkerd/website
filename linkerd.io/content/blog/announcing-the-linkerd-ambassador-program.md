@@ -1,6 +1,8 @@
 ---
-author: 'catherine'
 title: Announcing the Linkerd Ambassador program
+author: 'catherine'
+tags:
+  - Community
 description: 'Linkerd Ambassadors are community members who have demonstrated
   passion, engagement, and a commitment to sharing their Linkerd experience.'
 date: 2021-08-05T00:00:00Z
