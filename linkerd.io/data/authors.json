@@ -27,6 +27,13 @@
     "firstName": "Carol",
     "lastName": "Scott"
   },
+  "catherine": {
+    "avatar": "/uploads/catherine.jpg",
+    "email": "catherine@buoyant.io",
+    "name": "Catherine Paganini",
+    "firstName": "Catherine",
+    "lastName": "Paganini"
+  },
   "charles": {
     "avatar": "/uploads/charles.jpg",
     "email": "charles@buoyant.io",
