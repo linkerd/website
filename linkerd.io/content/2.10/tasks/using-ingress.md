@@ -22,27 +22,14 @@ traffic and therefore will not expose per-route metrics or do traffic splitting.
 If your Ingress controller is injected with no extra configuration specific to
 ingress, the Linkerd proxy runs in the default mode.
 
-It's important to note that some ingresses, either by default or by
-configuration, can change the way that they make load balancing decisions. For
-example, the [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
-controller includes the [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation. The default `false` value of this annotation adds an entry for each
-kubernetes endpoint of a pod to the `upstream` block in the nginx configuration,
-thereby informing nginx to load balance requests directly to the endpoints of a
-service.
+{{< note >}}
+Some ingresses, either by default or by configuration, can change the way that
+they make load balancing decisions.
 
-Setting this annotation to `true` configures the ingress controller to add
-_only_ the cluster IP and port of the Service resource as the single entry to
-the `upstream` block in the nginx configuration. As a result, the load balancing
-decisions are offloaded to the Linkerd proxy. With this configuration, the
-ServiceProfile and per-route metrics functionality _will_ be available with the
-annotation `linkerd.io/inject: enabled`.
-
-The `nginx.ingress.kubernetes.io/service-upstream` annotation is unique to the
-nginx ingress controller, so be sure to check the documentation for your ingress
-controller of choice. If the ingress does not use the cluster IP and port of the
-Service, then read through the next section to learn how `Proxy Ingress Mode`
-works
+The nginx ingress controller and Emissary Ingress are two options that offer
+this functionality. See the [Nginx]({{< ref "#nginx-proxy-mode-configuration" >}})
+and [Emissary]({{< ref "#emissary-proxy-mode">}}) sections below for more info
+{{< /note >}}
 
 ### Proxy Ingress Mode
 
@@ -253,6 +240,28 @@ spec:
 
 {{< /note >}}
 
+#### Nginx proxy mode configuration
+
+The [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
+includes the [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
+annotation. The default `false` value of this annotation adds an entry for each
+kubernetes endpoint of a pod to the `upstream` block in the nginx configuration,
+thereby informing nginx to load balance requests directly to the endpoints of a
+service.
+
+Setting this annotation to `true` configures the ingress controller to add
+_only_ the cluster IP and port of the Service resource as the single entry to
+the `upstream` block in the nginx configuration. As a result, the load balancing
+decisions are offloaded to the Linkerd proxy. With this configuration, the
+ServiceProfile and per-route metrics functionality _will_ be available with the
+annotation `linkerd.io/inject: enabled`.
+
+The `nginx.ingress.kubernetes.io/service-upstream` annotation is unique to the
+nginx ingress controller, so be sure to check the documentation for your ingress
+controller of choice. If the ingress does not use the cluster IP and port of the
+Service, then read through the next section to learn how `Proxy Ingress Mode`
+works.
+
 ### Traefik
 
 This uses `emojivoto` as an example, take a look at
@@ -415,7 +424,7 @@ The managed certificate will take about 30-60 minutes to provision, but the
 status of the ingress should be healthy within a few minutes. Once the managed
 certificate is provisioned, the ingress should be visible to the Internet.
 
-### Ambassador
+### Ambassador (aka Emissary)
 
 This uses `emojivoto` as an example, take a look at
 [getting started](../../getting-started/) for a refresher on how to install it.
@@ -482,6 +491,15 @@ You can then use this IP with curl:
 ```bash
 curl -H "Host: example.com" http://external-ip
 ```
+
+#### Emissary Proxy Mode
+
+By [default](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery),
+the Emissary ingress uses Kubernetes DNS and service-level discovery. So, the
+`linkerd.io:inject` annotation can be set to `enabled` and all the
+ServiceProfile, TrafficSplit, and per-route functionality will be available. It
+is not necessary to use `ingress` mode, unless the service discovery behavior
+of Emissary has been changed from the default.
 
 {{< note >}}
 You can also find a more detailed guide for using Linkerd with Emissary Ingress,
