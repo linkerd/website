@@ -11,6 +11,12 @@ can be run with your Ingress Controller.
 The Linkerd proxy offers two modes of operation in order to handle some of the
 more subtle behaviors of load balancing in ingress controllers.
 
+Be sure to check the documentation for your ingress controller of choice to
+understand how it resolves endpoints for load balancing. If the ingress uses
+the cluster IP and port of the Service, you can use the Default Mode described
+below. Otherwise, read through the `Proxy Ingress Mode` section to understand
+how it works.
+
 ### Default Mode
 
 When the ingress controller is injected with the `linkerd.io/inject: enabled`
@@ -256,12 +262,6 @@ decisions are offloaded to the Linkerd proxy. With this configuration, the
 ServiceProfile and per-route metrics functionality _will_ be available with the
 annotation `linkerd.io/inject: enabled`.
 
-The `nginx.ingress.kubernetes.io/service-upstream` annotation is unique to the
-nginx ingress controller, so be sure to check the documentation for your ingress
-controller of choice. If the ingress does not use the cluster IP and port of the
-Service, then read through the next section to learn how `Proxy Ingress Mode`
-works.
-
 ### Traefik
 
 This uses `emojivoto` as an example, take a look at
@@ -429,7 +429,7 @@ certificate is provisioned, the ingress should be visible to the Internet.
 This uses `emojivoto` as an example, take a look at
 [getting started](../../getting-started/) for a refresher on how to install it.
 
-Ambassador does not use `Ingress` resources, instead relying on `Service`. The
+Emissary does not use `Ingress` resources, instead relying on `Service`. The
 sample service definition is:
 
 ```yaml
@@ -447,7 +447,6 @@ metadata:
       service: http://web-svc.emojivoto.svc.cluster.local:80
       host: example.com
       prefix: /
-      add_linkerd_headers: true
 spec:
   selector:
     app: web-svc
@@ -457,23 +456,16 @@ spec:
     targetPort: http
 ```
 
-The important annotation here is:
+#### Emissary Proxy Mode
 
-```yaml
-      add_linkerd_headers: true
-```
-
-Ambassador will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for. This will contain both the Kubernetes service
-FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
-`servicePort`.
-
-{{< note >}}
-To make this global, add `add_linkerd_headers` to your `Module` configuration.
-{{< /note >}}
+By [default], Emissary uses Kubernetes DNS and [service-level discovery](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery).
+So, the `linkerd.io/inject` annotation can be set to `enabled` and all the
+ServiceProfile, TrafficSplit, and per-route functionality will be available. It
+is not necessary to use `ingress` mode, unless the service discovery behavior
+of Emissary has been changed from the default.
 
 To test this, you'll want to get the external IP address for your controller. If
-you installed Ambassador via helm, you can get that IP address by running:
+you installed Emissary via helm, you can get that IP address by running:
 
 ```bash
 kubectl get svc --all-namespaces \
@@ -491,15 +483,6 @@ You can then use this IP with curl:
 ```bash
 curl -H "Host: example.com" http://external-ip
 ```
-
-#### Emissary Proxy Mode
-
-By [default](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery),
-the Emissary ingress uses Kubernetes DNS and service-level discovery. So, the
-`linkerd.io:inject` annotation can be set to `enabled` and all the
-ServiceProfile, TrafficSplit, and per-route functionality will be available. It
-is not necessary to use `ingress` mode, unless the service discovery behavior
-of Emissary has been changed from the default.
 
 {{< note >}}
 You can also find a more detailed guide for using Linkerd with Emissary Ingress,
