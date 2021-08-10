@@ -14,7 +14,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Markdown SEO Check
-        uses: zentered/markdown-seo-check@v1.1.3
+        uses: zentered/markdown-seo-check@v1.1.2
         with:
           includes: '/linkerd.io/content/**/*.md'
           max_title_length: 70
