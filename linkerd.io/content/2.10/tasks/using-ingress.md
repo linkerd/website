@@ -458,7 +458,7 @@ spec:
 
 #### Emissary Proxy Mode
 
-By [default], Emissary uses Kubernetes DNS and [service-level discovery](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery).
+By default, Emissary uses Kubernetes DNS and [service-level discovery](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery).
 So, the `linkerd.io/inject` annotation can be set to `enabled` and all the
 ServiceProfile, TrafficSplit, and per-route functionality will be available. It
 is not necessary to use `ingress` mode, unless the service discovery behavior
