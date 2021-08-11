@@ -175,6 +175,23 @@ TLS credentials. This means that any solution that is able to rotate TLS
 certificates by writing them to this secret can be used to provide dynamic
 TLS certificate management.
 
+You could generate that secret with a command such as:
+
+```bash
+kubectl create secret tls linkerd-identity-issuer --cert=issuer.crt --key=issuer.key --namespace=linkerd
+```
+
+Where `issuer.crt` and `issuer.key` would be the cert and private key of an
+intermediary cert rooted at the trust root (`ca.crt`) referred above (check this
+[guide](../generate-certificates/) to see how to generate them).
+
+Note that the root cert (`ca.crt`) needs to be included in that Secret as well.
+You can just edit the generated Secret and include the `ca.crt` field with the
+contents of the file base64-encoded.
+
+After setting up the `linkerd-identity-issuer` Secret, continue with the
+following instructions to install and configure Linkerd to use it.
+
 ## Using these credentials with CLI installation
 
 For CLI installation, the Linkerd control plane should be installed with the
