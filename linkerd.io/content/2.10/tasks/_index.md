@@ -1,6 +1,9 @@
 +++
 title = "Tasks"
 weight = 4
+aliases = [
+  "./next-steps/"
+]
 +++
 
 As a complement to the [Linkerd feature docs]({{% ref "../features" %}}) and

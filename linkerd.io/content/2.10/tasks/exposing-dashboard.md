@@ -1,6 +1,9 @@
 +++
 title = "Exposing the Dashboard"
 description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
+aliases = [
+  "../dns-rebinding/",
+]
 +++
 
 Instead of using `linkerd viz dashboard` every time you'd like to see what's
