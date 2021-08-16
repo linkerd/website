@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Markdown SEO Check
-        uses: zentered/markdown-seo-check@v1.1.4
+        uses: zentered/markdown-seo-check@v1.1.2
         with:
           includes: '/linkerd.io/content/**/*.md'
           max_title_length: 70
