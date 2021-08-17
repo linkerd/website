@@ -42,6 +42,19 @@ faqs:
       Distributed tracing is the practice of "tracing", or following, these 
       requests as they move through the distributed system for reasons of 
       performance monitoring or debugging.
+  - question: What is egress?
+    answer: 
+      In the context of a Kubernetes cluster, "egress" refers to traffic
+      leaving the cluster. Unlike with ingress traffic, there is no explicit
+      Kubernetes egress resource and, by default, egress traffic simply exits
+      the cluster.
+  - question: What is Enterprise Service Bus (ESB)?
+    answer: 
+      An ESB is a tool and architectural pattern that largely predates modern
+      microservice architectures. ESBs were used to manage communication in a
+      service-oriented architecture, handling everything from inter-app
+      communication, data transformation, message routing, and message queuing
+      functionality.
   - question: What are golden metrics?
     answer: 
       Golden metrics, or golden signals, are the core metrics of application
@@ -54,6 +67,12 @@ faqs:
       and handles traffic coming into the cluster from off-cluster sources.
       This traffic is referred to as ingress (or occasionally "north/south"
       traffic)
+  - question: What is an init container?
+    answer:
+      An init container is a container run at the beginning of the pod lifecycle
+      before the application containers start. Typical use cases of init
+      containers include rewriting network rules; assembling secrets for the
+      application; and copying files from a network location. 
   - question: What is latency?
     answer:
       Latency refers to the time it takes an application to do something (e.g.,
@@ -174,6 +193,25 @@ through the distributed system for reasons of performance monitoring or
 debugging. It is typically achieved by modifying the services to emit tracing
 information, or "spans," and aggregating them in a central store.
 
+## Egress
+
+In the context of a Kubernetes cluster, "egress" refers to traffic leaving the
+cluster. Unlike with ingress traffic, there is no explicit Kubernetes egress
+resource and, by default, egress traffic simply exits the cluster. When control
+and monitoring of Kubernetes egress traffic is necessary, it is typically
+implemented at the networking / CNI layer, or by adding an explicit egress
+proxy.
+
+## Enterprise Service Bus (ESB)
+
+An ESB is a tool and architectural pattern that largely predates modern
+microservice architectures. ESBs were used to manage communication in a
+service-oriented architecture (SOA), handling everything from inter-app
+communication, data transformation, message routing, and message queuing
+functionality. In modern microservices applications, a service mesh like
+Linkerd replaces much of the need for an ESB and provides improved
+separation of concerns and reduction of SPOFs.
+
 ## Golden Metrics
 
 Golden metrics, or golden signals, are the core metrics of application health.
@@ -190,6 +228,16 @@ which is typically mediated by the [service mesh](#service-mesh), ingress
 traffic has a specific set of concerns arising from the fact that it
 often comes from customer, third-party, or other non-application sources.
 [API gateways](#api-gateway) are often used as ingresses.
+
+## Init Container
+
+An init container is a container run at the beginning of the pod lifecycle,
+before the application containers start. Typical use cases of init containers
+include rewriting network rules; assembling secrets for the application;
+and copying files from a network location. For example, Linkerd's init
+container updates networking rules to direct all TCP traffic for the pod
+through the Linkerd proxy container. An init container terminates before
+the application container starts.
 
 ## Latency
 
