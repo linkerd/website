@@ -239,7 +239,6 @@ container updates networking rules to direct all TCP traffic for the pod
 through the Linkerd proxy container. An init container terminates before
 the application container starts.
 
-
 ## Latency
 
 Latency refers to the time it takes an application to do something (e.g.,
