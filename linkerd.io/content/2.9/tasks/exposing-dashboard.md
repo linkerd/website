@@ -164,7 +164,7 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
   annotations:
     getambassador.io/config: |-
       ---
-      apiVersion: ambassador/v1
+      apiVersion: getambassador.io/v2
       kind: Mapping
       name: linkerd-web-mapping
       host: dashboard.example.com
