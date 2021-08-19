@@ -19,8 +19,8 @@ from the service. Because they're transparent, these proxies act as highly
 instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane.
 
-{{< fig src="/images/architecture/control-plane.png" title="Logical
-architecture" >}}
+{{< fig src="/images/architecture/control-plane.png"
+title="Logical architecture" >}}
 
 ## Control Plane
 
@@ -138,12 +138,11 @@ that runs before any other containers are started. This executes a small
 
 There are two main rules that `iptables` uses:
 
-- Any traffic being sent to the pod's external IP address (10.0.0.1 for example)
+* Any traffic being sent to the pod's external IP address (10.0.0.1 for example)
   is forwarded to a specific port on the proxy (4143). By setting
   `SO_ORIGINAL_DST` on the socket, the proxy is able to forward the traffic to the
   original destination port that your application is listening on.
-
-- Any traffic originating from within the pod and being sent to an external IP
+* Any traffic originating from within the pod and being sent to an external IP
   address (not 127.0.0.1) is forwarded to a specific port on the proxy (4140).
   Because `SO_ORIGINAL_DST` was set on the socket, the proxy is able to forward
   the traffic to the original recipient (unless there is a reason to send it
