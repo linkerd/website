@@ -4,8 +4,7 @@ description = "Linkerd provides a full on-cluster metrics stack, including CLI t
 +++
 
 Linkerd provides a full on-cluster metrics stack, including CLI tools, a web
-dashboard, and pre-configured Grafana dashboards. To limit excessive resource
-usage, by default only the past 6 hours of metrics are stored.
+dashboard, and pre-configured Grafana dashboards.
 
 To access this functionality, you install the viz extension:
 
@@ -22,11 +21,21 @@ namespace:
 
 These components work together to provide an on-cluster metrics stack.
 
+{{< note >}}
+To limit excessive resource usage on the cluster, the metrics stored by this
+extension are _transient_. Only the past 6 hours are stored, and metrics do not
+persist in the event of pod restart or node outages.
+{{< /note >}}
+
 ## Operating notes
 
 This metrics stack may require significant cluster resources. Prometheus, in
-articular, will consume resources as a function of traffic volume within the
-cluster. 
+particular, will consume resources as a function of traffic volume within the
+cluster.
+
+Additionally, by default, metrics data is stored in a transient manner that is
+not resilient to pod restarts or to node outages. See [Bringing your own
+Prometheus](../../tasks/external-prometheus/) for one way to address this.
 
 ## Linkerd dashboard
 
@@ -80,9 +89,9 @@ linkerd -n emojivoto viz stat deploy
 
 This will show the "golden" metrics for each deployment:
 
-- Success rates
-- Request rates
-- Latency distribution percentiles
+* Success rates
+* Request rates
+* Latency distribution percentiles
 
 To dig in a little further, it is possible to use `top` to get a real-time
 view of which paths are being called:

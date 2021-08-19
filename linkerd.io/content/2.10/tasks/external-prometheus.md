@@ -3,17 +3,9 @@ title = "Bringing your own Prometheus"
 description = "Use an existing Prometheus instance with Linkerd."
 +++
 
-Even though linkerd-viz extension comes with its own Prometheus instance,
-there can be cases where using an external instance makes more
-sense for various reasons.
-
-{{< note >}}
-Note that this approach requires you to manually add and maintain additional
-scrape configuration in your Prometheus configuration.
-If you prefer to use the default Linkerd Prometheus,
-you can export the metrics to your existing monitoring infrastructure
-following [these instructions](../exporting-metrics/).
-{{< /note >}}
+Even though [the linkerd-viz extension](../../features/dashboard) comes with
+its own Prometheus instance, there can be cases where using an external
+instance makes more sense for various reasons.
 
 This tutorial shows how to configure an external Prometheus instance to scrape both
 the control plane as well as the proxy's metrics in a format that is consumable
@@ -30,7 +22,7 @@ The following scrape configuration has to be applied to the external
 Prometheus instance.
 
 {{< note >}}
-The below scrape configuration is a [subset of `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/bc5bdeb834f571d92937fe5c2ead6bf88e37823a/viz/charts/linkerd-viz/templates/prometheus.yaml#L47-L151).
+The below scrape configuration is a [subset of the full `linkerd-prometheus` scrape configuration](https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/templates/prometheus.yaml#L47-L151).
 {{< /note >}}
 
 Before applying, it is important to replace templated values (present in `{{}}`)

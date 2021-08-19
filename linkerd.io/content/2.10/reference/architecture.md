@@ -19,7 +19,8 @@ from the service. Because they're transparent, these proxies act as highly
 instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane.
 
-{{< fig src="/images/architecture/control-plane.png" title="Logical architecture" >}}
+{{< fig src="/images/architecture/control-plane.png" title="Logical
+architecture" >}}
 
 ## Control Plane
 
@@ -85,7 +86,7 @@ development of Linkerd. It is optional and can be disabled.
 
 The Linkerd data plane comprises ultralight "micro-proxies", written in Rust,
 which are deployed as sidecar containers alongside each instance of your
-service code. 
+service code.
 
 These proxies transparently intercept communication to and from each pod by
 utilizing iptables rules that are automatically configured by
@@ -97,9 +98,10 @@ These proxies are not designed to be configured by hand. Rather, their behavior
 is driven by the control plane.
 
 You can read more about these micro-proxies here:
+
 * [Why Linkerd doesn't use Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/)
-* [Under the hood of Linkerd's state-of-the-art Rust proxy, Linkerd2-proxy
-](2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+* [Under the hood of Linkerd's state-of-the-art Rust proxy,
+  Linkerd2-proxy](2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 
 ### Proxy
 
@@ -113,20 +115,14 @@ even be added to a running service.
 
 The proxy's features include:
 
-- Transparent, zero-config proxying for HTTP, HTTP/2, and arbitrary TCP
+* Transparent, zero-config proxying for HTTP, HTTP/2, and arbitrary TCP
   protocols.
-
-- Automatic Prometheus metrics export for HTTP and TCP traffic.
-
-- Transparent, zero-config WebSocket proxying.
-
-- Automatic, latency-aware, layer-7 load balancing.
-
-- Automatic layer-4 load balancing for non-HTTP traffic.
-
-- Automatic TLS.
-
-- An on-demand diagnostic tap API.
+* Automatic Prometheus metrics export for HTTP and TCP traffic.
+* Transparent, zero-config WebSocket proxying.
+* Automatic, latency-aware, layer-7 load balancing.
+* Automatic layer-4 load balancing for non-HTTP traffic.
+* Automatic TLS.
+* An on-demand diagnostic tap API.
 
 The proxy supports service discovery via DNS and the
 [destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).

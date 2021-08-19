@@ -167,6 +167,7 @@ You should see a screen like this:
     title="The Linkerd dashboard in action" >}}
 
 If you installed the buoyant-cloud extension, run:
+
 ```bash
 linkerd buoyant dashboard &
 ```
@@ -243,13 +244,15 @@ linkerd -n emojivoto check --proxy
 
 Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
-- Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
-- [Add your own service](../adding-your-service/) to Linkerd without downtime
-- Set up [automatic control plane mTLS credential rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) or set a reminder to do it
-  [manually](../tasks/manually-rotating-control-plane-tls-credentials/)
-  before they expire
-- Learn more about [Linkerd's architecture](../reference/architecture/)
-- Hop into the #linkerd2 channel on [the Linkerd
+* Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
+* [Add your own service](../adding-your-service/) to Linkerd without downtime
+* Set up [automatic control plane mTLS credential
+  rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) or
+  set a reminder to [do it
+  manually](../tasks/manually-rotating-control-plane-tls-credentials/) before
+  they expire
+* Learn more about [Linkerd's architecture](../reference/architecture/)
+* Hop into the #linkerd2 channel on [the Linkerd
   Slack](https://slack.linkerd.io)
 
 Welcome to the Linkerd community!
