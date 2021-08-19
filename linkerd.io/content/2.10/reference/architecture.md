@@ -101,7 +101,7 @@ You can read more about these micro-proxies here:
 
 * [Why Linkerd doesn't use Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/)
 * [Under the hood of Linkerd's state-of-the-art Rust proxy,
-  Linkerd2-proxy](2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+  Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 
 ### Proxy
 

@@ -3,7 +3,7 @@ title = "Bringing your own Prometheus"
 description = "Use an existing Prometheus instance with Linkerd."
 +++
 
-Even though [the linkerd-viz extension](../../features/dashboard) comes with
+Even though [the linkerd-viz extension](../../features/dashboard/) comes with
 its own Prometheus instance, there can be cases where using an external
 instance makes more sense for various reasons.
 

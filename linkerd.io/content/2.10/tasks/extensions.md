@@ -7,7 +7,7 @@ Linkerd extensions are components which can be added to a Linkerd installation
 to enable additional functionality.  By default, the following extensions are
 available:
 
-* [viz](/../../features/dashboard/): Metrics and visibility features
+* [viz](../../features/dashboard/): Metrics and visibility features
 * [jaeger](../distributed-tracing/): Distributed tracing
 * [multicluster](../multicluster/): Cross-cluster routing
 
