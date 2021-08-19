@@ -1,19 +1,19 @@
 +++
-title = "Using Extensions"
-description = "Add functionality with extensions."
+title = "Using extensions"
+description = "Add functionality to Linkerd with optional extensions."
 +++
 
 Linkerd extensions are components which can be added to a Linkerd installation
 to enable additional functionality.  By default, the following extensions are
 available:
 
-* [Viz](/getting-started/): Metrics and visibility features
-* [Jaeger](../distributed-tracing/): Distributed tracing
-* [Multicluster](../multicluster/): Cross-cluster routing
+* [viz](/../../features/dashboard/): Metrics and visibility features
+* [jaeger](../distributed-tracing/): Distributed tracing
+* [multicluster](../multicluster/): Cross-cluster routing
 
 But other extensions are also possible. Read on for more!
 
-## Installing Extensions
+## Installing extensions
 
 Before installing any extensions, make sure that you have already [installed
 Linkerd](../install/) and validated your cluster with `linkerd check`.
@@ -51,7 +51,7 @@ Once the extension is installed, run `linkerd check` to ensure Linkerd and all
 installed extensions are healthy or run `linkerd foo check` to perform health
 checks for that extension only.
 
-## Listing Extensions
+## Listing extensions
 
 Every extension creates a Kubernetes namespace with the `linkerd.io/extension`
 label. Thus, you can list all extensions installed on your cluster by running:
@@ -60,13 +60,13 @@ label. Thus, you can list all extensions installed on your cluster by running:
 kubectl get ns -l linkerd.io/extension
 ```
 
-## Upgrading Extensions
+## Upgrading extensions
 
 Unless otherwise stated, extensions do not persist any configuration in the
 cluster.  To upgrade an extension, run the install again with a newer version
 of the extension CLI or with a different set of configuration flags.
 
-## Uninstalling Extensions
+## Uninstalling extensions
 
 All extensions have an `uninstall` command that should be used to gracefully
 clean up all resources owned by an extension.  For example, to uninstall the

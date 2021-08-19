@@ -58,7 +58,7 @@ allow you to interact with your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl -sL run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
@@ -102,10 +102,10 @@ The first step is to install the control plane core. To do this, run:
 linkerd install | kubectl apply -f -
 ```
 
-In this command, the `linkerd install` command generates a Kubernetes manifest
-with all the necessary control plane resources. (Feel free to inspect the
-output.) Piping this manifest into `kubectl apply` then instructs Kubernetes to
-add those resources to your cluster.
+The `linkerd install` command generates a Kubernetes manifest with all the core
+control plane resources. (Feel free to inspect the output.) Piping this
+manifest into `kubectl apply` then instructs Kubernetes to add those resources
+to your cluster.
 
 {{< note >}}
 Some control plane resources require cluster-wide permissions. If you are
@@ -125,34 +125,26 @@ linkerd check
 ```
 
 Next, we'll install some *extensions*. Extensions add non-critical but often
-useful functionality to Linkerd. For this guide, we need the **viz** extension,
-which will install Prometheus, dashboard, and metrics components onto the
-cluster:
+useful functionality to Linkerd. For this guide, we will need:
+
+1. The **viz** extension, which will install an on-cluster metric stack; or
+2. The **buoyant-cloud** extension, which will connect to a hosted metrics stack.
+
+For this guide, you can install either or both. To install the viz extension,
+run:
 
 ```bash
-linkerd viz install | kubectl apply -f - # on-cluster metrics stack
+linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
 ```
 
-Optionally, at this point you can install other extensions. For example:
+To install the buoyant-cloud extension, run:
 
 ```bash
-## optional
-linkerd jaeger install | kubectl apply -f - # Jaeger collector and UI
-linkerd multicluster install | kubectl apply -f - # multi-cluster components
+curl -sL buoyant.cloud/install | sh # get the installer
+linkerd buoyant install | kubectl apply -f - # connect to the hosted metrics stack
 ```
 
-Note that extensions can also come from third-party sources. For example,
-[Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted metrics dashboard
-for Linkerd that can be installed alongside `viz`, but doesn't require it:
-
-```bash
-## optional
-curl -sL buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
-```
-
-Once you've installed the **viz** extension and any other extensions you'd
-like, we'll validate everything again:
+Once you've installed your extensions, let's validate everything one last time:
 
 ```bash
 linkerd check
@@ -160,32 +152,34 @@ linkerd check
 
 Assuming everything is green, we're ready for the next step!
 
-## Step 4: Explore Linkerd
+## Step 4: Explore Linkerd!
 
-With the control plane and extensions installed and running, you can now view
-the Linkerd dashboard by running:
+With the control plane and extensions installed and running, we're now ready
+to explore Linkerd! If you installed the viz extension, run:
 
 ```bash
 linkerd viz dashboard &
 ```
 
-{{< fig src="/images/getting-started/empty-dashboard.png"
+You should see a screen like this:
+
+{{< fig src="/images/getting-started/viz-empty-dashboard.png"
     title="The Linkerd dashboard in action" >}}
 
-This command sets up a port forward from your local system to the
-[linkerd-web](../reference/architecture/#web) pod. (It's also possible to
-[expose the dashboard](../tasks/exposing-dashboard/) for everyone to access.)
-
-Because the control plane components all have the proxy installed in their pods,
-each component is also part of the data plane itself. This provides the ability
-to dig into what is going on with the control plane itself behind the scenes.
-In fact, you can run:
-
+If you installed the buoyant-cloud extension, run:
 ```bash
-linkerd -n linkerd-viz viz top deploy/web
+linkerd buoyant dashboard &
 ```
 
-This is the traffic you're generating by looking at the dashboard itself!
+You should see a screen lke this:
+{{< fig src="/images/getting-started/bcloud-empty-dashboard.png"
+    title="The Linkerd dashboard in action" >}}
+
+Click around, explore, and have fun! One thing you'll see is that, even if you
+don't have any applications running on this cluster, you still have traffic!
+This is because Linkerd's control plane components all have the proxy injected
+(i.e. the control plane runs on the data plane), so traffic between control
+plane compnments is also part of the mesh.
 
 ## Step 5: Install the demo app
 
@@ -197,8 +191,7 @@ users to vote on their favorite emojis.
 Install *emojivoto* into the `emojivoto` namespace by running:
 
 ```bash
-curl -sL https://run.linkerd.io/emojivoto.yml \
-  | kubectl apply -f -
+curl -sL run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ```
 
 Before we mesh it, let's take a look at the app. If you're using [Docker
@@ -217,7 +210,7 @@ app in all its glory.
 Clicking around, you might notice that some parts of *emojivoto* are broken!
 For example, if you click on a doughnut emoji, you'll get a 404 page.  Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
-problem.  Check out the [debugging guide](../debugging-an-app/) if you're
+problem. Check out the [debugging guide](../debugging-an-app/) if you're
 interested in how to figure out exactly what is wrong.)
 
 Next, let's add Linkerd to *emojivoto* by running:
@@ -231,8 +224,7 @@ kubectl get -n emojivoto deploy -o yaml \
 This command retrieves all of the deployments running in the `emojivoto`
 namespace, runs the manifest through `linkerd inject`, and then reapplies it to
 the cluster. The `linkerd inject` command adds annotations to the pod spec
-instructing Linkerd to add ("inject") the proxy as a container to the pod spec.
-(See [Automatic Proxy Injection](../features/proxy-injection/) for more.)
+instructing Linkerd to "inject" the proxy as a container to the pod spec.
 
 As with `install`, `inject` is a pure text operation, meaning that you can
 inspect the input and output before you use it. Once piped into `kubectl
@@ -247,73 +239,13 @@ should with the data plane. To do this check, run:
 linkerd -n emojivoto check --proxy
 ```
 
-## Step 6: Watch it run
-
-You can now view the Linkerd dashboard and see all the services in the demo
-app.  Since the demo app comes with a load generator, we can see live traffic
-metrics by running:
-
-```bash
-linkerd -n emojivoto viz stat deploy
-```
-
-This will show the "golden" metrics for each deployment:
-
-- Success rates
-- Request rates
-- Latency distribution percentiles
-
-To dig in a little further, it is possible to use `top` to get a real-time
-view of which paths are being called:
-
-```bash
-linkerd -n emojivoto viz top deploy
-```
-
-To go even deeper, we can use `tap` shows the stream of requests across a
-single pod, deployment, or even everything in the emojivoto namespace:
-
-```bash
-linkerd -n emojivoto viz tap deploy/web
-```
-
-All of this functionality is also available in the dashboard, if you would like
-to use your browser instead:
-
-{{< gallery >}}
-
-{{< gallery-item src="/images/getting-started/stat.png"
-    title="Top Line Metrics">}}
-
-{{< gallery-item src="/images/getting-started/inbound-outbound.png"
-    title="Deployment Detail">}}
-
-{{< gallery-item src="/images/getting-started/top.png"
-    title="Top" >}}
-
-{{< gallery-item src="/images/getting-started/tap.png"
-    title="Tap" >}}
-
-{{< /gallery >}}
-
-What about things that happened in the past? Linkerd includes
-[Grafana](../reference/architecture/#grafana) to visualize the metrics
-collected by [Prometheus](../reference/architecture/#prometheus), and ships
-with some pre-configured dashboards. You can get to these by clicking the
-Grafana icon in the overview page.
-
-{{< fig src="/images/getting-started/grafana.png"
-    title="Deployment Detail Dashboard">}}
-
 ## That's it! 👏
 
 Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
 - Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
 - [Add your own service](../adding-your-service/) to Linkerd without downtime
-- Learn how to rotate control plane TLS credentials
-  [automatically](../tasks/automatically-rotating-control-plane-tls-credentials/)
-  or set a reminder to do it
+- Set up [automatic control plane mTLS credential rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) or set a reminder to do it
   [manually](../tasks/manually-rotating-control-plane-tls-credentials/)
   before they expire
 - Learn more about [Linkerd's architecture](../reference/architecture/)

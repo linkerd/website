@@ -19,22 +19,17 @@ from the service. Because they're transparent, these proxies act as highly
 instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane.
 
-{{< fig src="/images/architecture/control-plane.png" title="Architecture" >}}
+{{< fig src="/images/architecture/control-plane.png" title="Logical architecture" >}}
 
 ## Control Plane
 
 The Linkerd control plane is a set of services that run in a dedicated
-Kubernetes namespace (`linkerd` by default). These services accomplish various
-things---aggregating telemetry data, providing a user-facing API, providing
-control data to the data plane proxies, etc. Together, they drive the behavior
-of the data plane. To install the control plane on your own cluster, follow the [instructions](../../tasks/install/).
-
-The control plane is made up of:
+Kubernetes namespace (`linkerd` by default). The control plane is made up of:
 
 ### Controller
 
 The controller deployment consists of the public-api container that provides an
-API for the CLI and dashboard to interface with.
+API for the CLI to interface with.
 
 ### Destination
 
@@ -84,55 +79,13 @@ others.
 This CronJob runs once a day and records some analytics that help with the
 development of Linkerd. It is optional and can be disabled.
 
-### Grafana
-
-Linkerd comes with many dashboards out of the box. The Grafana component is used
-to render and display these dashboards. You can reach these dashboards via links
-in the Linkerd dashboard itself. It is possible to see high level metrics and dig
-down into the details for your workloads as well as Linkerd itself.
-
-The dashboards that are provided out of the box include:
-
-{{< gallery >}}
-
-{{< gallery-item src="/images/screenshots/grafana-top.png"
-    title="Top Line Metrics" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-deployment.png"
-    title="Deployment Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-pod.png"
-    title="Pod Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-health.png"
-    title="Linkerd Health" >}}
-
-{{< /gallery >}}
-
-### Prometheus
-
-Prometheus is a cloud native monitoring solution that is used to collect and
-store all of the Linkerd metrics. It is installed as part of the control plane
-and provides the data used by the CLI, dashboard and Grafana.
-
-The proxy exposes a `/metrics` endpoint for Prometheus to scrape on port 4191.
-This is scraped every 10 seconds. These metrics are then available to all the
-other Linkerd components, such as the CLI and dashboard.
-
-{{< fig src="/images/architecture/prometheus.svg" title="Metrics Collection" >}}
-
 [admission-controller]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 
 ## Data Plane
 
-The Linkerd data plane is comprised of lightweight proxies, which are deployed
-as sidecar containers alongside each instance of your service code. In order to
-"add" a service to the Linkerd service mesh, the pods for that service must be
-redeployed to include a data plane proxy in each pod. The proxy injector
-accomplishes this by watching for a specific annotation that can either be added
-with `linkerd inject` or by hand to the pod's spec.  You can [add your
-service](../../tasks/adding-your-service/) to the data plane with a single CLI
-command.
+The Linkerd data plane comprises ultralight "micro-proxies", written in Rust,
+which are deployed as sidecar containers alongside each instance of your
+service code. 
 
 These proxies transparently intercept communication to and from each pod by
 utilizing iptables rules that are automatically configured by
@@ -142,6 +95,11 @@ relevant policy.
 
 These proxies are not designed to be configured by hand. Rather, their behavior
 is driven by the control plane.
+
+You can read more about these micro-proxies here:
+* [Why Linkerd doesn't use Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/)
+* [Under the hood of Linkerd's state-of-the-art Rust proxy, Linkerd2-proxy
+](2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 
 ### Proxy
 
@@ -209,18 +167,3 @@ what's happening here.
 The Linkerd CLI is run locally on your machine and is used to interact with the
 control and data planes. It can be used to view statistics, debug production
 issues in real time and install/upgrade the control and data planes.
-
-## Dashboard
-
-The Linkerd dashboard provides a high level view of what is happening with your
-services in real time. It can be used to view the "golden" metrics (success
-rate, requests/second and latency), visualize service dependencies and
-understand the health of specific service routes. One way to pull it up is by
-running `linkerd viz dashboard` from the command line.
-
-{{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
-
-{{< note >}}
-The dashboard is served by `linkerd-web` and does not require running `linkerd
-dashboard`. It can be [exposed](../../tasks/exposing-dashboard/) to others.
-{{< /note >}}
