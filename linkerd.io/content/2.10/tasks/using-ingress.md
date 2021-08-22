@@ -830,8 +830,8 @@ spec:
               number: 80
 ```
 
-Unfortunately, there is currently no support to do this dynamically
-in a global config map by using the servicename, namespace and port as variable.
-This also means, that you can't combine more than one service ingress rule
-in a ingress manifest as each one needs their own
-`haproxy.org/request-set-header` annotation with hard coded value.
+Unfortunately, there is currently no support to do this dynamically
+in a global config map by using the service name, namespace and port as variable.
+This also means, that you can't combine more than one service ingress rule
+in an ingress manifest as each one needs their own
+`haproxy.org/request-set-header` annotation with hard coded value.
