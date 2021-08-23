@@ -466,7 +466,7 @@ metadata:
   annotations:
     getambassador.io/config: |
       ---
-      apiVersion: ambassador/v1
+      apiVersion: getambassador.io/v2
       kind: Mapping
       name: web-ambassador-mapping
       service: http://web-svc.emojivoto.svc.cluster.local:80

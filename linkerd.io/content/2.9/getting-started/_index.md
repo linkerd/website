@@ -150,7 +150,7 @@ dashboard by running:
 linkerd dashboard &
 ```
 
-{{< fig src="/images/getting-started/empty-dashboard.png"
+{{< fig src="/images/getting-started/viz-empty-dashboard.png"
     title="The Linkerd dashboard in action" >}}
 
 This command sets up a port forward from your local system to the
