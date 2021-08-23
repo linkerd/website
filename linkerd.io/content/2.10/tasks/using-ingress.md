@@ -81,6 +81,7 @@ for common ingress controllers:
 - [Gloo]({{< ref "#gloo" >}})
 - [Contour]({{< ref "#contour" >}})
 - [Kong]({{< ref "#kong" >}})
+- [Haproxy]({{< ref "#haproxy" >}})
 
 {{< note >}}
 If your ingress controller is terminating HTTPS, Linkerd will only provide
@@ -788,3 +789,49 @@ env:
 - name: HOST_OVERRIDE
   value: web-svc.emojivoto
 ```
+
+### Haproxy
+
+{{< note >}}
+As there are two different haproxy based ingress controller,
+this example is for the
+[kubernetes-ingress controller by haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/)
+and not the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
+{{< /note >}}
+
+This uses `emojivoto` as an example, take a look at
+[getting started](../../getting-started/) for a refresher on how to install it.
+
+The simplest way to use Haproxy as an ingress for Linkerd is to configure a
+Kubernetes `Ingress` resource with the
+`haproxy.org/request-set-header` annotation like this:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: emojivoto
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+    haproxy.org/request-set-header: |
+      l5d-dst-override web-svc.emojivoto.svc.cluster.local:80
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
+```
+
+Unfortunately, there is currently no support to do this dynamically
+in a global config map by using the service name, namespace and port as variable.
+This also means, that you can't combine more than one service ingress rule
+in an ingress manifest as each one needs their own
+`haproxy.org/request-set-header` annotation with hard coded value.
