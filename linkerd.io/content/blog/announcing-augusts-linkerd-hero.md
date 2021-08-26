@@ -1,11 +1,13 @@
 ---
-title: Blog
-subtitle: Announcing August's Linkerd Hero
-author: Catherine
-tags:
-  - Community
-items:
-description: 'If you attended this month's Linkerd Community meeting, you've already heard the news: this month's Linkerd Hero is Dom DePasqual Congrats, Dom!'
+author: "catherine"
+date: 2021-08-26T00:00:00Z
+title: Announcing August's Linkerd Hero
+feature: "/uploads/august-linkerd-hero.jpg"
+thumbnail: "/uploads/august-linkerd-hero.jpg"
+tags: ["Community"]
+featured: false
+description: "If you attended this month's Linkerd Community meeting, you've
+  already heard the news: this month's Linkerd Hero is Dom DePasqual Congrats, Dom!"
 keywords: [Linkerd Hero]
 ---
 
@@ -30,7 +32,7 @@ of the most valuable ways to participate in the open source community,
 the Linkerd maintainers nominated him. Thank you, Dom, for sharing your
 experience!
 
-ADD IMAGE HERE
+![Dom DePasqual](/uploads/august-linkerd-hero.jpg)
 
 ## Nominate next month's Linkerd Hero
 
