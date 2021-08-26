@@ -22,7 +22,7 @@ performance, improves usability of Helm charts, and much, much more.
 
 This release includes changes from a massive list of contributors, including
 [@alenkacz](https://github.com/alenkacz),
-[@bmcstdio](https://github.com/bmcstdio),
+[@bmcustodio](https://github.com/bmcustodio),
 [@daxmc99](https://github.com/daxmc99),
 [@droidnoob](https://github.com/droidnoob),
 [@ereslibre](https://github.com/ereslibre),

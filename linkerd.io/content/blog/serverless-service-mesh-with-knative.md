@@ -59,7 +59,7 @@ Knative has two installable components: [Serving](https://knative.dev/docs/servi
 and [Eventing](https://knative.dev/docs/eventing/). In this walkthrough, we're
 going to use just the Serving component. As a first step, please follow the
 installation instructions in the
-[Knative documentation](https://knative.dev/docs/install/any-kubernetes-cluster/#installing-the-serving-component).
+[Knative documentation](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/#install-the-knative-serving-component).
 
 ### Install Ambassador
 
@@ -82,7 +82,7 @@ well!
 
 Now that we've given some explanation about the relationships between Linkerd,
 Ambassador, and Knative, as a next step, please follow the
-[Ambassador installation instructions](https://knative.dev/docs/install/any-kubernetes-cluster/#serving-networking-0-tab).
+[Ambassador installation instructions](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/#install-a-networking-layer).
 
 Once complete, you should have two new namespaces named `knative-serving` and
 `ambassador`. You can use the following commands to see the Deployment and

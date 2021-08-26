@@ -66,7 +66,7 @@ since Linkerd 2.5. This high velocity release cycle is only possible thanks to
 the rapidly-growing Linkerd community of contributors, testers, and adopters. A
 special thanks to [Alena Varkockova](https://github.com/alenkacz), [Armin
 Bürkle](https://github.com/arminbuerkle), [Bruno M.
-Custódio](https://github.com/bmcstdio), [Pascal
+Custódio](https://github.com/bmcustodio), [Pascal
 Bourque](https://github.com/bourquep), [Brian
 Storti](https://github.com/brianstorti), [Kevin
 Taylor](https://github.com/kevtaylor), [Eugene
