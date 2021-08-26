@@ -20,7 +20,7 @@ links:
   description: Don’t forget to follow Linkerd on [Twitter](https://twitter.com/Linkerd) for the latest news and announcements.
 - image: /images/get-involved/github-repo.svg
   alt: GitHub
-  description: Want to contribute? Great! The [GitHub repo](https://github.com/linkerd/linkerd2) is the place to get started, especially the [issues marked “help wanted”](https://github.com/linkerd/linkerd2/labels/help+wanted). And don’t forget to join #contributors on Slack!
+  description: Want to contribute? Great! The [GitHub repo](https://github.com/linkerd/linkerd2) is the place to get started, especially the [issues marked “help wanted”](https://github.com/linkerd/linkerd2/labels/help%20wanted). And don’t forget to join #contributors on Slack!
 - image: /images/get-involved/meetup-in-a-box.svg
   alt: Meetup in a box
   description: Giving a talk or hosting a meetup? Our [meet-up-in-a-box](https://linkerd.io/community/meetup-in-a-box/) has what you need.
