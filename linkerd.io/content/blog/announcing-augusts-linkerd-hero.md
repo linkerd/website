@@ -7,12 +7,12 @@ thumbnail: "/uploads/august-linkerd-hero.jpg"
 tags: ["Community"]
 featured: false
 description: "If you attended this month's Linkerd Community meeting, you've
-  already heard the news: this month's Linkerd Hero is Dom DePasqual Congrats, Dom!"
+  already heard the news: this month's Linkerd Hero is Dom DePasquale Congrats, Dom!"
 keywords: [Linkerd Hero]
 ---
 
 If you attended this month's Linkerd Community meeting, you've already heard
-the news: this month's Linkerd Hero is Dom DePasqual Congrats, Dom!
+the news: this month's Linkerd Hero is Dom DePasquale Congrats, Dom!
 
 ## What are Linkerd Heroes?
 
@@ -24,7 +24,7 @@ the amazing place it is today.
 
 ## Congrats, Dom!
 
-This month's hero is Dom DePasqual. At ServiceMeschCon Europe, Dom shared
+This month's hero is Dom DePasquale. At ServiceMeschCon Europe, Dom shared
 how the engineering team at
 [Penn State used Linkerd to schedule 68,000 COVID tests](https://buoyant.io/media/how-linkerd-helped-schedule-68-000-covid-tests/).
 Because sharing lessons learned (and pitfalls!) with the community is one
@@ -32,7 +32,7 @@ of the most valuable ways to participate in the open source community,
 the Linkerd maintainers nominated him. Thank you, Dom, for sharing your
 experience!
 
-![Dom DePasqual](/uploads/august-linkerd-hero.jpg)
+![Dom DePasquale](/uploads/august-linkerd-hero.jpg)
 
 ## Nominate next month's Linkerd Hero
 
