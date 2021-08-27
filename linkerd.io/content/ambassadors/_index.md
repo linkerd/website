@@ -4,6 +4,7 @@ description: "The Linkerd Ambassador badge is a distinction awarded to those
   community members who are experts in their field and who demonstrate
   expertise, passion, engagement, and a commitment to sharing their Linkerd
   experience."
+thumbnail: "/uploads/ambassadors-card.png"
 url: /community/ambassadors/
 layout: "ambassadors"
 top_hero:
