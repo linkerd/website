@@ -77,8 +77,8 @@ service code.
 
 These proxies transparently intercept communication to and from each pod by
 utilizing iptables rules that are automatically configured by
-[linkerd-init](#linkerd-init). These proxies are not designed to be configured
-by hand. Rather, their behavior is driven by the control plane.
+[linkerd-init](#linkerd-init-container). These proxies are not designed to be
+configured by hand. Rather, their behavior is driven by the control plane.
 
 You can read more about these micro-proxies here:
 
