@@ -50,7 +50,7 @@ Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
 [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
 and returns signed certificates. These certificates are issued at proxy
 initialization time and are used for proxy-to-proxy connections to implement
-[mTLS](../../features/automatic-mtls).
+[mTLS](../../features/automatic-mtls/).
 
 ### Proxy Injector
 
