@@ -91,7 +91,7 @@ You can read more about these micro-proxies here:
 An ultralight transparent _micro-proxy_ written in
 [Rust](https://www.rust-lang.org/), the proxy is installed into each pod of a
 meshed workload, and handles all incoming and outgoing TCP traffic to/from that
-pod. This model (called a "sidecar container" or "sidecar proxy") 
+pod. This model (called a "sidecar container" or "sidecar proxy")
 allows it to add functionality without requiring code changes.
 
 The proxy's features include:
@@ -136,4 +136,3 @@ desirable and it is possible to have specific ports skip the proxy entirely for
 both incoming and outgoing traffic. See the [protocol
 detection](../../features/protocol-detection/) documentation.
 {{< /note >}}
-
