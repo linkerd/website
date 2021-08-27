@@ -38,13 +38,6 @@ ambassadors:
     github: https://github.com/fredrkl
     twitter: https://twitter.com/fredrkl
     linkedin: https://www.linkedin.com/in/fredrikklingenberg/
-  - name: Justin Turner
-    job_title: Director of Engineering
-    image: /images/ambassadors/profile/justin-turner.png
-    flag: 🇺🇸
-    github: https://github.com/justin-turner-heb
-    twitter: https://twitter.com/outrunengineer
-    linkedin: https://www.linkedin.com/in/justinturnerdev/
   - name: Sergio Méndez
     job_title: DevOps Engineer
     image: /images/ambassadors/profile/sergio-mendez.png
