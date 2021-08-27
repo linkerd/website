@@ -20,82 +20,65 @@ instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane.
 
 {{< fig src="/images/architecture/control-plane.png"
-title="Logical architecture" >}}
+title="Linkerd's architecture" >}}
+
+## CLI
+
+The Linkerd CLI is typically run outside of the cluster (e.g. on your local
+machine) and is used to interact with the Linkerd control planes.
 
 ## Control Plane
 
 The Linkerd control plane is a set of services that run in a dedicated
-Kubernetes namespace (`linkerd` by default). The control plane is made up of:
+Kubernetes namespace (`linkerd` by default). The control plane has several
+components, enumerated below.
 
 ### Controller
 
-The controller deployment consists of the public-api container that provides an
-API for the CLI to interface with.
+The controller component provides an API for the CLI to interface with.
 
 ### Destination
 
-Each [proxy](#proxy) in the data plane uses this component to lookup where to
+The destination component is used by data plane proxies to look up where to
 send requests. The destination deployment is also used to fetch service profile
 information used for per-route metrics, retries and timeouts.
 
 ### Identity
 
-This component provides a [Certificate
+The identity component acts as a [TLS Certificate
 Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
 [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
-and returns certificates signed with the correct identity. These certificates
-are fetched by the proxy on start and must be issued before the proxy becomes
-ready. They are subsequently used for any connection between Linkerd proxies to
-implement mTLS.
+and returns signed certificates. These certificates are issued at proxy
+initialization time and are used for proxy-to-proxy connections to implement
+[mTLS](../../features/automatic-mtls/).
 
 ### Proxy Injector
 
-The injector is an [admission controller][admission-controller], which receives
-a webhook request every time a pod is created. This injector inspects resources
-for a Linkerd-specific annotation (`linkerd.io/inject: enabled`). When that
-annotation exists, the injector mutates the pod's specification and adds both an
-`initContainer` as well as a sidecar containing the proxy itself.
+The proxy injector is a Kubernetes [admission
+controller][admission-controller] which receives a webhook request every time a
+pod is created. This injector inspects resources for a Linkerd-specific
+annotation (`linkerd.io/inject: enabled`).  When that annotation exists, the
+injector mutates the pod's specification and adds the `proxy-init` and
+`linkerd-proxy` containers to the pod.
 
-### Service Profile Validator
+### Service Profile Validator (sp-validator)
 
-The validator is also an [admission controller][admission-controller], which
-validates new [service profiles](../service-profiles/) before they are
+The validator is a Kubernetes [admission controller][admission-controller],
+which validates new [service profiles](../service-profiles/) before they are
 saved.
-
-### Tap
-
-The tap deployment receives requests from the CLI and dashboard to watch
-requests and responses in real time. It establishes stream to watch these
-requests and responses in specific proxies associated with the requested
-applications.
-
-### Web
-
-The web deployment provides the Linkerd dashboard. This does not require running
-`linkerd viz dashboard` and can be [exposed](../../tasks/exposing-dashboard/) to
-others.
-
-### Heartbeat
-
-This CronJob runs once a day and records some analytics that help with the
-development of Linkerd. It is optional and can be disabled.
 
 [admission-controller]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 
 ## Data Plane
 
-The Linkerd data plane comprises ultralight "micro-proxies", written in Rust,
+The Linkerd data plane comprises ultralight _micro-proxies_, written in Rust,
 which are deployed as sidecar containers alongside each instance of your
 service code.
 
 These proxies transparently intercept communication to and from each pod by
 utilizing iptables rules that are automatically configured by
-[linkerd-init](#linkerd-init), and add features such as instrumentation and
-encryption (TLS), as well as allowing and denying requests according to the
-relevant policy.
-
-These proxies are not designed to be configured by hand. Rather, their behavior
-is driven by the control plane.
+[linkerd-init](#linkerd-init-container). These proxies are not designed to be
+configured by hand. Rather, their behavior is driven by the control plane.
 
 You can read more about these micro-proxies here:
 
@@ -105,13 +88,11 @@ You can read more about these micro-proxies here:
 
 ### Proxy
 
-An ultralight transparent proxy written in [Rust](https://www.rust-lang.org/),
-the proxy is installed into each pod of a service and becomes part of the data
-plane. It receives all incoming traffic for a pod and intercepts all outgoing
-traffic via an `initContainer` that configures `iptables` to forward the
-traffic correctly. Because it is a sidecar and intercepts all the incoming and
-outgoing traffic for a service, there are no code changes required and it can
-even be added to a running service.
+An ultralight transparent _micro-proxy_ written in
+[Rust](https://www.rust-lang.org/), the proxy is installed into each pod of a
+meshed workload, and handles all incoming and outgoing TCP traffic to/from that
+pod. This model (called a "sidecar container" or "sidecar proxy")
+allows it to add functionality without requiring code changes.
 
 The proxy's features include:
 
@@ -123,25 +104,25 @@ The proxy's features include:
 * Automatic layer-4 load balancing for non-HTTP traffic.
 * Automatic TLS.
 * An on-demand diagnostic tap API.
+* And lots more.
 
 The proxy supports service discovery via DNS and the
 [destination gRPC API](https://github.com/linkerd/linkerd2-proxy-api).
 
-### Linkerd Init
+### Linkerd Init Container
 
-To make the proxy truly transparent, traffic needs to be automatically routed
-through it. The `linkerd-init` container is added as a Kubernetes
-[init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
-that runs before any other containers are started. This executes a small
-[program](https://github.com/linkerd/linkerd2-proxy-init) which executes
-`iptables` and configures the flow of traffic.
+The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
+container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+that runs before any other containers are started. It [uses
+iptables](https://github.com/linkerd/linkerd2-proxy-init) to route all TCP
+traffic to and from the pod through the pod.
 
 There are two main rules that `iptables` uses:
 
-* Any traffic being sent to the pod's external IP address (10.0.0.1 for example)
-  is forwarded to a specific port on the proxy (4143). By setting
-  `SO_ORIGINAL_DST` on the socket, the proxy is able to forward the traffic to the
-  original destination port that your application is listening on.
+* Any traffic being sent to the pod's external IP address (10.0.0.1 for
+  example) is forwarded to a specific port on the proxy (4143). By setting
+  `SO_ORIGINAL_DST` on the socket, the proxy is able to forward the traffic to
+  the original destination port that your application is listening on.
 * Any traffic originating from within the pod and being sent to an external IP
   address (not 127.0.0.1) is forwarded to a specific port on the proxy (4140).
   Because `SO_ORIGINAL_DST` was set on the socket, the proxy is able to forward
@@ -153,12 +134,5 @@ There are two main rules that `iptables` uses:
 By default, most ports are forwarded through the proxy. This is not always
 desirable and it is possible to have specific ports skip the proxy entirely for
 both incoming and outgoing traffic. See the [protocol
-detection](../../features/protocol-detection/) documentation for an explanation of
-what's happening here.
+detection](../../features/protocol-detection/) documentation.
 {{< /note >}}
-
-## CLI
-
-The Linkerd CLI is run locally on your machine and is used to interact with the
-control and data planes. It can be used to view statistics, debug production
-issues in real time and install/upgrade the control and data planes.
