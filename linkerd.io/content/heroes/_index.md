@@ -16,12 +16,12 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
-  - name: Dom DePasqual
+  - name: Dom DePasquale
     date: August 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
     image: "/uploads/dom-depasqual.png"
-    alt: Portrait of Dom DePasqual
+    alt: Portrait of Dom DePasquale
     github_url: https://github.com/dad264
   - name: Sanskar Jaiswal
     date: July 2021
