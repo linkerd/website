@@ -71,7 +71,7 @@ The [Linkerd control plane](../../reference/architecture/) contains a certificat
 authority (CA) called `identity`. This CA issues TLS certificates to each
 Linkerd data plane proxy.  Each certificate is bound to the [Kubernetes
 ServiceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
-identity of the containing pod. These TLS certificates expired after 24 hours
+identity of the containing pod. These TLS certificates expire after 24 hours
 and are automatically rotated. The proxies use these certificates to encrypt
 and authenticate TCP traffic to other proxies.
 
