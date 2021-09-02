@@ -4,6 +4,7 @@ description: "The Linkerd Ambassador badge is a distinction awarded to those
   community members who are experts in their field and who demonstrate
   expertise, passion, engagement, and a commitment to sharing their Linkerd
   experience."
+thumbnail: "/uploads/ambassadors-card.png"
 url: /community/ambassadors/
 layout: "ambassadors"
 top_hero:
@@ -38,13 +39,6 @@ ambassadors:
     github: https://github.com/fredrkl
     twitter: https://twitter.com/fredrkl
     linkedin: https://www.linkedin.com/in/fredrikklingenberg/
-  - name: Justin Turner
-    job_title: Director of Engineering
-    image: /images/ambassadors/profile/justin-turner.png
-    flag: 🇺🇸
-    github: https://github.com/justin-turner-heb
-    twitter: https://twitter.com/outrunengineer
-    linkedin: https://www.linkedin.com/in/justinturnerdev/
   - name: Sergio Méndez
     job_title: DevOps Engineer
     image: /images/ambassadors/profile/sergio-mendez.png

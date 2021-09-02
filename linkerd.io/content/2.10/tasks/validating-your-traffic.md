@@ -1,6 +1,7 @@
 +++
-title = "Securing Your Application with mTLS"
-description = "Linkerd encrypts your service's traffic by default."
+title = "Validating your mTLS traffic"
+description = "You can validate whether or not your traffic is being mTLS'd by Linkerd."
+aliases = ["securing-your-service"]
 +++
 
 By default, [Linkerd automatically enables mutual Transport Layer Security

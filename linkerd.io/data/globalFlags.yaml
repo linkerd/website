@@ -23,3 +23,8 @@
   Name: verbose
   Shorthand: ""
   Usage: Turn on debug logging
+- DefaultValue: ""
+  Name: as
+  Shorthand: ""
+  Usage: Username to impersonate for Kubernetes operations
+  

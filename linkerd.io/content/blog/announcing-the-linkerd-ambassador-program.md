@@ -103,35 +103,6 @@ baseline on network insight.
 Fredrik is most passionate about "helping customers think more about systems
 and less about individual applications."
 
-### Justin Turner,  Director of Engineering 🇺🇸
-
-In 2020, Justin led Texas-based grocery chain, H-E-B's, curbside and home
-delivery engineering teams (today he leads the Pharmacy and Health &
-Wellness team). Under Justin’s leadership, the team completely reinvented
-the company's platform and applications. Today, the engineering team has
-multiple containerized services deployed to several GKE Kubernetes clusters
-and networked together with Linkerd. The effort increased feature delivery
-speed — needed to meet their ever-increasing business demands — and
-significantly improved the resiliency of the system. Check out
-[Justin's CNCF blog](https://www.cncf.io/blog/2021/06/21/how-h-e-b-achieved-four-nines-of-reliability-using-kubernetes-and-linkerd/)
-to learn more about the project.
-
-Justin first heard about the service mesh concept in 2019 on Thoughtworks'
-technology radar. Knowing that platform and services modernization was on
-the horizon and would become relevant in the near future, he started paying
-attention.
-
-In early 2020, H-E-B's Linkerd adoption was accelerated when Justin's
-team needed to work through the complexities involved in curbside fulfillment
-services. The service mesh cleared up a lot of the team's early issues and
-reduced a significant amount of complexity. It ultimately allowed the team
-to get their services out into stores sooner with higher confidence.
-
-Justin enjoys solving complex problems and coming up with solutions that
-deliver great outcomes for his teams and the business. His experiences
-with curbside have also helped him discover a passion for reliability
-and resiliency in complex systems.
-
 ### Sergio Méndez, DevOps Engineer 🇬🇹
 
 Sergio — or "the professor" as we like to call him — has made it his

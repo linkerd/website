@@ -7,38 +7,47 @@ For reasons of simplicity and composability, Linkerd doesn't provide a built-in
 ingress. Instead, Linkerd is designed to work with existing Kubernetes ingress
 solutions.
 
-Combining Linkerd and your ingress solution requires two steps:
+Combining Linkerd and your ingress solution requires two things:
 
-1. Meshing your ingress pods so that they have the Linkerd proxy installed.
-1. Configuring your ingress, if necessary, to support Linkerd.
+1. Configuring your ingress to support Linkerd.
+2. Meshing your ingress pods so that they have the Linkerd proxy installed.
 
-By meshing your ingress pods, Linkerd will provide features like L7 metrics and
-mTLS the moment the traffic is inside the cluster. Note that in the common case
-where your ingress is terminating TLS, the ingress TLS traffic itself (e.g.
-HTTPS) will passed through the proxy as an opaque stream—Linkerd can't decrypt
-it—and Linkerd will only be able to provide byte-level metrics. HTTP or gRPC
-traffic from the ingress controller to an internal service, of course, will
-have the full set of metrics support.
+Meshing your ingress pods will allow Linkerd to provide features like L7
+metrics and mTLS the moment the traffic is inside the cluster. (See
+[Adding your service](../adding-your-service) for instructions on how to mesh
+your ingress.)
 
-Common ingress solutions that Linkerd supports include:
+Note that some ingress options need to be meshed in "ingress" mode. See details
+below.
+
+Common ingress options that Linkerd has been used with include:
 
 - [Ambassador / Emissary-ingress](#ambassador)
 - [Contour](#contour)
 - [GCE](#gce)
 - [Gloo](#gloo)
+- [Haproxy]({{< ref "#haproxy" >}})
 - [Kong](#kong)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
 
-For a quick start guide to using a particular ingress, visit the section for
-that ingress. If your ingress is not on that list, see [Adding your
-ingress](#adding-your-own-ingress) below.
+For a quick start guide to using a particular ingress, please visit the section
+for that ingress. If your ingress is not on that list, never fear—it likely
+works anyways. See [Ingress details](#ingress-details) below.
 
-<a name="ambassador"/>
+{{< note >}}
+If your ingress terminates TLS, this TLS traffic (e.g. HTTPS calls from outside
+the cluster) will pass through Linkerd as an opaque TCP stream and Linkerd will
+only be able to provide byte-level metrics for this side of the connection. The
+resulting HTTP or gRPC traffic to internal services, of course, will have the
+full set of metrics and mTLS support.
+{{< /note >}}
+
+<a name="ambassador"></a>
 ## Ambassador (aka Emissary)
 
-Ambassador / Emissary can be meshed as normal. An example manifest for configuring the
-ingress is as follows:
+Ambassador can be meshed normally. An example manifest for configuring the
+Ambassador / Emissary is as follows:
 
 ```yaml
 apiVersion: v1
@@ -64,199 +73,26 @@ spec:
     targetPort: http
 ```
 
-{{< note >}}
-A more detailed guide for using [Linkerd with Ambassador Emissary
-Ingress](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/)
-is available.
-{{< /note >}}
+For a more detailed guide, we recommend reading [Installing the Emissary
+ingress with the Linkerd service
+mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
 
 ## Nginx
 
-The sample ingress definition is:
+Nginx can be meshed normally, but the
+[`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
+annotation should be set to `true`. No further configuration is required.
 
-```yaml
-# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: web-ingress
-  namespace: emojivoto
-  annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+## Traefik
 
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-svc
-            port:
-              number: 80
-```
+Traefik should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
-The important annotation here is:
+Instructions differ for 1.x and 2.x versions of Traefik.
 
-```yaml
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-```
+### Traefik 1.x
 
-Alternatively, instead of adding the `proxy_set_header` directive to each
-`Ingress` resource individually, it is possible with Nginx Ingress Controller
-to define it globally using the [Custom Headers](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
-pattern.
-
-For example:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: custom-headers
-  namespace: ingress-nginx
-data:
-  proxy_set_header: "l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;"
-```
-
-adjust above accordingly and follow the rest of the [instructions](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
-on how to add this ConfigMap to Nginx Ingress Controller's global configuration.
-
-{{< note >}}
-This method doesn't cover `grpc_set_header` which needs to be added to the `Ingress`
-that uses a GRPC backend service.
-{{< /note >}}
-
-{{< note >}}
-If you are using [auth-url](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#external-authentication)
-you'd need to add the following snippet as well.
-
-```yaml
-    nginx.ingress.kubernetes.io/auth-snippet: |
-      proxy_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
-      grpc_set_header l5d-dst-override authn-name.authn-namespace.svc.cluster.local:authn-port;
-```
-
-{{< /note >}}
-
-This example combines the two directives that NGINX uses for proxying HTTP
-and gRPC traffic. In practice, it is only necessary to set either the
-`proxy_set_header` or `grpc_set_header` directive, depending on the protocol
-used by the service, however NGINX will ignore any directives that it doesn't
-need.
-
-This sample ingress definition uses a single ingress for an application
-with multiple endpoints using different ports.
-
-```yaml
-# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: web-ingress
-  namespace: emojivoto
-  annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-svc
-            port:
-              number: 80
-      - path: /another-endpoint
-        pathType: Prefix
-        backend:
-          service:
-            name: another-svc
-            port:
-              number: 8080
-```
-
-Nginx will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for. You'll want to include both the Kubernetes service
-FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
-`servicePort`.
-
-To test this, you'll want to get the external IP address for your controller. If
-you installed nginx-ingress via helm, you can get that IP address by running:
-
-```bash
-kubectl get svc --all-namespaces \
-  -l app=nginx-ingress,component=controller \
-  -o=custom-columns=EXTERNAL-IP:.status.loadBalancer.ingress[0].ip
-```
-
-You can then use this IP with curl:
-
-```bash
-curl -H "Host: example.com" http://external-ip
-```
-
-{{< note >}}
-If you are using a default backend, you will need to create an ingress
-definition for that backend to ensure that the `l5d-dst-override` header
-is set. For example:
-
-```yaml
-# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: default-ingress
-  namespace: backends
-  annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-      grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
-spec:
-  ingressClassName: nginx
-  defaultBackend:
-    service:
-      name: default-backend
-      port:
-        number: 80
-```
-
-{{< /note >}}
-
-#### Nginx proxy mode configuration
-
-The [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
-includes the [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation. The default `false` value of this annotation adds an entry for each
-kubernetes endpoint of a pod to the `upstream` block in the nginx configuration,
-thereby informing nginx to load balance requests directly to the endpoints of a
-service.
-
-Setting this annotation to `true` configures the ingress controller to add
-_only_ the cluster IP and port of the Service resource as the single entry to
-the `upstream` block in the nginx configuration. As a result, the load balancing
-decisions are offloaded to the Linkerd proxy. With this configuration, the
-ServiceProfile and per-route metrics functionality _will_ be available with the
-annotation `linkerd.io/inject: enabled`.
-
-### Traefik
-
-This uses `emojivoto` as an example, take a look at
-[getting started](../../getting-started/) for a refresher on how to install it.
-
-The simplest way to use Traefik as an ingress for Linkerd is to configure a
+The simplest way to use Traefik 1.x as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
 `ingress.kubernetes.io/custom-request-headers` like this:
 
@@ -293,10 +129,10 @@ ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto
 Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
-`servicePort`. Please see the Traefik website for more information.
+`servicePort`.
 
 To test this, you'll want to get the external IP address for your controller. If
-you installed Traefik via helm, you can get that IP address by running:
+you installed Traefik via Helm, you can get that IP address by running:
 
 ```bash
 kubectl get svc --all-namespaces \
@@ -313,20 +149,16 @@ curl -H "Host: example.com" http://external-ip
 {{< note >}}
 This solution won't work if you're using Traefik's service weights as
 Linkerd will always send requests to the service name in `l5d-dst-override`. A
-workaround is to use `traefik.frontend.passHostHeader: "false"` instead. Be
-aware that if you're using TLS, the connection between Traefik and the backend
-service will not be encrypted. There is an
-[open issue](https://github.com/linkerd/linkerd2/issues/2270) to track the
-solution to this problem.
+workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
 {{< /note >}}
 
-#### Traefik 2.x
+### Traefik 2.x
 
 Traefik 2.x adds support for path based request routing with a Custom Resource
-Definition (CRD) called `IngressRoute`.
+Definition (CRD) called
+[`IngressRoute`](https://docs.traefik.io/providers/kubernetes-crd/).
 
-If you choose to use [`IngressRoute`](https://docs.traefik.io/providers/kubernetes-crd/)
-instead of the default Kubernetes `Ingress`
+If you choose to use `IngressRoute` instead of the default Kubernetes `Ingress`
 resource, then you'll also need to use the Traefik's
 [`Middleware`](https://docs.traefik.io/middlewares/headers/) Custom Resource
 Definition to add the `l5d-dst-override` header.
@@ -367,17 +199,15 @@ spec:
       port: 80
 ```
 
-### GCE
+## GCE
 
-This example is similar to Traefik, and also uses `emojivoto` as an example.
-Take a look at [getting started](../../getting-started/) for a refresher on how to
-install it.
+The GCE ingress should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
-In addition to the custom headers found in the Traefik example, it shows how to
-use a [Google Cloud Static External IP Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
-and TLS with a [Google-managed certificate](https://cloud.google.com/load-balancing/docs/ssl-certificates#managed-certs).
-
-The sample ingress definition is:
+This example shows how to use a [Google Cloud Static External IP
+Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
+and TLS with a [Google-managed
+certificate](https://cloud.google.com/load-balancing/docs/ssl-certificates#managed-certs).
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -413,24 +243,14 @@ The managed certificate will take about 30-60 minutes to provision, but the
 status of the ingress should be healthy within a few minutes. Once the managed
 certificate is provisioned, the ingress should be visible to the Internet.
 
-### Gloo
+## Gloo
 
-This uses `books` as an example, take a look at
-[Demo: Books](../books/) for instructions on how to run it.
-
-If you installed Gloo using the Gateway method (`gloo install gateway`), then
-you'll need a VirtualService to be able to route traffic to your **Books**
-application.
-
-To use Gloo with Linkerd, you can choose one of two options.
-
-#### Automatic
+Gloo should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
-required Linkerd headers are added automatically.
-
-Assuming you installed gloo to the default location, you can enable the native
-integration by running:
+required Linkerd headers are added automatically. Assuming you installed Gloo
+to the default location, you can enable the native integration by running:
 
 ```bash
 kubectl patch settings -n gloo-system default \
@@ -438,94 +258,25 @@ kubectl patch settings -n gloo-system default \
 ```
 
 Gloo will now automatically add the `l5d-dst-override` header to every
-kubernetes upstream.
+Kubernetes upstream.
 
-Now simply add a route to the books app upstream:
+Now simply add a route to the upstream, e.g.:
 
 ```bash
 glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 ```
 
-#### Manual
+## Contour
 
-As explained in the beginning of this document, you'll need to instruct Gloo to
-add a header which will allow Linkerd to identify where to send traffic to.
+Gloo should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
-```yaml
-apiVersion: gateway.solo.io/v1
-kind: VirtualService
-metadata:
-  name: books
-  namespace: gloo-system
-spec:
-  virtualHost:
-    domains:
-    - '*'
-    name: gloo-system.books
-    routes:
-    - matcher:
-        prefix: /
-      routeAction:
-        single:
-          upstream:
-            name: booksapp-webapp-7000
-            namespace: gloo-system
-      routePlugins:
-        transformations:
-          requestTransformation:
-            transformationTemplate:
-              headers:
-                l5d-dst-override:
-                  text: webapp.booksapp.svc.cluster.local:7000
-                passthrough: {}
-
-```
-
-The important annotation here is:
-
-```yaml
-      routePlugins:
-        transformations:
-          requestTransformation:
-            transformationTemplate:
-              headers:
-                l5d-dst-override:
-                  text: webapp.booksapp.svc.cluster.local:7000
-                passthrough: {}
-```
-
-Using the content transformation engine built-in in Gloo, you can instruct it to
-add the needed `l5d-dst-override` header which in the example above is pointing
-to the service's FDQN and port: `webapp.booksapp.svc.cluster.local:7000`
-
-#### Test
-
-To easily test this you can get the URL of the Gloo proxy by running:
-
-```bash
-glooctl proxy URL
-```
-
-Which will return something similar to:
-
-```bash
-$ glooctl proxy url
-http://192.168.99.132:30969
-```
-
-For the example VirtualService above, which listens to any domain and path,
-accessing the proxy URL (`http://192.168.99.132:30969`) in your browser
-should open the Books application.
-
-### Contour
-
-Contour doesn't support setting the `l5d-dst-override` header automatically.
 The following example uses the
 [Contour getting started](https://projectcontour.io/getting-started/) documentation
 to demonstrate how to set the required header manually.
 
-The Envoy DaemonSet doesn't auto-mount the service account token, which is
-required for the Linkerd proxy to do mTLS between pods. So first we need to
+Contour's Envoy DaemonSet doesn't auto-mount the service account token, which
+is required for the Linkerd proxy to do mTLS between pods. So first we need to
 install Contour uninjected, patch the DaemonSet with
 `automountServiceAccountToken: true`, and then inject it.  Optionally you can
 create a dedicated service account to avoid using the `default` one.
@@ -595,11 +346,10 @@ http://127.0.0.1.nip.io:3200
 ```
 
 {{< note >}}
-If you are injecting the Envoy DaemonSet using [proxy ingress mode]({{<ref
-"#proxy-ingress-mode" >}}) then make sure to annotate the pod spec with
-`config.linkerd.io/skip-outbound-ports: 8001`. The Envoy pod will try to connect
-to the Contour pod at port 8001 through TLS, which is not supported under this
-ingress mode, so you need to have the proxy skip that outbound port.
+You should annotate the pod spec with `config.linkerd.io/skip-outbound-ports:
+8001`. The Envoy pod will try to connect to the Contour pod at port 8001
+through TLS, which is not supported under this ingress mode, so you need to
+have the proxy skip that outbound port.
 {{< /note >}}
 
 {{< note >}}
@@ -609,16 +359,16 @@ the `l5d-dst-override` headers will be set automatically.
 
 ### Kong
 
-Kong doesn't support the header `l5d-dst-override` automatically.  
-This documentation will use the following elements:
+Kong should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
-- [Kong](https://github.com/Kong/charts)
-- [Emojivoto](../../getting-started/)
+This example will use the following elements:
 
-Before installing the Emojivoto demo application, install Linkerd and Kong on
-your cluster. Remember when injecting the Kong deployment to use the `--ingress`
-flag (or annotation) as mentioned
-[above](https://linkerd.io../using-ingress/#proxy-ingress-mode)!
+- The [Kong chart](https://github.com/Kong/charts)
+- The [emojivoto] example application(../../getting-started/)
+
+Before installing emojivoto, install Linkerd and Kong on your cluster. When
+injecting the Kong deployment, use the `--ingress` flag (or annotation).
 
 We need to declare these objects as well:
 
@@ -666,16 +416,16 @@ spec:
               name: http
 ```
 
-We are explicitly setting the `l5d-dst-override` in the `KongPlugin`. Using
-[templates as
+Here we are explicitly setting the `l5d-dst-override` in the `KongPlugin`.
+Using [templates as
 values](https://docs.konghq.com/hub/kong-inc/request-transformer/#template-as-value),
 we can use the `host` header from requests and set the `l5d-dst-override` value
 based off that.
 
-Finally, lets install Emojivoto so that it's `deploy/vote-bot` targets the
+Finally, install emojivoto so that it's `deploy/vote-bot` targets the
 ingress and includes a `host` header value for the `web-svc.emojivoto` service.
 
-Before applying the injected Emojivoto application, make the following changes
+Before applying the injected emojivoto application, make the following changes
 to the `vote-bot` Deployment:
 
 ```yaml
@@ -688,84 +438,75 @@ env:
   value: web-svc.emojivoto
 ```
 
-## Adding your own ingress
-
-If your ingress provider is not in the list above, never fear. It is likely that
-you can use it with Linkerd anyways! 
-Linkerd offers two modes of operation in order to handle some of the more
-subtle behaviors of load balancing in ingress controllers.
-
-Be sure to check the documentation for your ingress controller of choice to
-understand how it resolves endpoints for load balancing.
-
-The primary question is whether the ingress uses
-the cluster IP and port of the Service. If so, you can use the default behavior described
-below. If not, you will need to enable "proxy ingress mode".
-
-### Default Mode
-
-When the ingress controller is injected with the `linkerd.io/inject: enabled`
-annotation, the Linkerd proxy will honor load balancing decisions made by the
-ingress controller instead of applying [its own EWMA load balancing](../../features/load-balancing/).
-This also means that the Linkerd proxy will not use Service Profiles for this
-traffic and therefore will not expose per-route metrics or do traffic splitting.
-
-If your Ingress controller is injected with no extra configuration specific to
-ingress, the Linkerd proxy runs in the default mode.
+### Haproxy
 
 {{< note >}}
-Some ingresses, either by default or by configuration, can change the way that
-they make load balancing decisions.
-
-The nginx ingress controller and Emissary Ingress are two options that offer
-this functionality. See the [Nginx]({{< ref "#nginx-proxy-mode-configuration" >}})
-and [Emissary]({{< ref "#emissary-proxy-mode">}}) sections below for more info
+There are two different haproxy-based ingress controllers.  This example is for
+the [kubernetes-ingress controller by
+haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/) and not
+the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
 {{< /note >}}
 
-### Proxy Ingress Mode
+Haproxy should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `true`.
 
-If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
-there is additional configuration required to make the Ingress controller's Linkerd
-proxy run in `ingress` mode. This causes Linkerd to route requests based on
-their `:authority`, `Host`, or `l5d-dst-override` headers instead of their original
-destination which allows Linkerd to perform its own load balancing and use
-Service Profiles to expose per-route metrics and enable traffic splitting.
+The simplest way to use Haproxy as an ingress for Linkerd is to configure a
+Kubernetes `Ingress` resource with the
+`haproxy.org/request-set-header` annotation like this:
 
-The Ingress controller deployment's proxy can be made to run in `ingress` mode by
-adding the following annotation i.e `linkerd.io/inject: ingress` in the Ingress
-Controller's Pod Spec.
-
-The same can be done by using the `--ingress` flag in the inject command.
-
-```bash
-kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: emojivoto
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+    haproxy.org/request-set-header: |
+      l5d-dst-override web-svc.emojivoto.svc.cluster.local:80
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
 ```
 
-This can be verified by checking if the Ingress controller's pod has the relevant
-annotation set.
+Unfortunately, there is currently no support to do this dynamically in
+a global config map by using the service name, namespace and port as variable.
+This also means, that you can't combine more than one service ingress rule
+in an ingress manifest as each one needs their own
+`haproxy.org/request-set-header` annotation with hard coded value.
 
-```bash
-kubectl describe pod/<ingress-pod> | grep "linkerd.io/inject: ingress"
-```
+## Ingress details
 
-When it comes to ingress, most controllers do not rewrite the
-incoming header (`example.com`) to the internal service name
-(`example.default.svc.cluster.local`) by default. In this case, when Linkerd
-receives the outgoing request it thinks the request is destined for
-`example.com` and not `example.default.svc.cluster.local`. This creates an
-infinite loop that can be pretty frustrating!
+In this section we cover how Linkerd interacts with ingress controllers in
+general.
 
-Luckily, many ingress controllers allow you to either modify the `Host` header
-or add a custom header to the outgoing request. Here are some instructions
-for common ingress controllers:
+In general, Linkerd can be used with any ingress controller. In order for
+Linkerd to properly apply features such as route-based metrics and traffic
+splitting, Linkerd needs the IP/port of the Kubernetes Service. However, by
+default, many ingresses do their own endpoint selection and pass the IP/port of
+the destination Pod, rather than the Service as a whole.
 
-{{< note >}}
-If your ingress controller is terminating HTTPS, Linkerd will only provide
-TCP stats for the incoming requests because all the proxy sees is encrypted
-traffic. It will provide complete stats for the outgoing requests from your
-controller to the backend services as this is in plain text from the
-controller to Linkerd.
-{{< /note >}}
+Thus, combining an ingress with Linkerd takes one of two forms:
+
+1. Configure the ingress to pass the IP and port of the Service as the
+   destination, i.e. to skip its own endpoint selection. (E.g. see
+   [Nginx](#nginx) above.)
+
+2. If this is not possible, then configure the ingress to pass the Service
+   IP/port in a header such as `l5d-dst-override`, `Host`, or `:authority`, and
+   configure Linkerd in *ingress* mode. In this mode, it will read from one of
+   those headers instead.
+
+The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
 
 {{< note >}}
 If requests experience a 2-3 second delay after injecting your ingress
@@ -776,6 +517,8 @@ LoadBalancer` is obscuring the client source IP. You can fix this by setting
 
 {{< note >}}
 While the Kubernetes Ingress API definition allows a `backend`'s `servicePort`
-to be a string value, only numeric `servicePort` values can be used with Linkerd.
-If a string value is encountered, Linkerd will default to using port 80.
+to be a string value, only numeric `servicePort` values can be used with
+Linkerd. If a string value is encountered, Linkerd will default to using port
+80.
 {{< /note >}}
+
