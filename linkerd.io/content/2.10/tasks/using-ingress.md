@@ -43,8 +43,7 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-<a name="ambassador"></a>
-## Ambassador (aka Emissary)
+## Ambassador (aka Emissary) {id="ambassador"}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
@@ -539,4 +538,3 @@ to be a string value, only numeric `servicePort` values can be used with
 Linkerd. If a string value is encountered, Linkerd will default to using port
 80.
 {{< /note >}}
-
