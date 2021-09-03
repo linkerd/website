@@ -32,7 +32,7 @@ proxy's resource usage.
 For proxies injected using the `linkerd inject` command, configuration can be
 overridden using the [command-line flags](../cli/inject/).
 
-### Ingress Mode
+## Ingress Mode
 
 Proxy ingress mode is a mode of operation designed to help Linkerd integrate
 with certain ingress controllers. Ingress mode is necessary if the ingress
