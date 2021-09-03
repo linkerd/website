@@ -83,10 +83,28 @@ Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
 annotation should be set to `true`. No further configuration is required.
 
+```yaml
+# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: emojivoto-web-ingress
+  namespace: emojivoto
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: true
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: web-svc
+      port:
+        number: 80
+```
+
 ## Traefik
 
 Traefik should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 Instructions differ for 1.x and 2.x versions of Traefik.
 
@@ -202,7 +220,7 @@ spec:
 ## GCE
 
 The GCE ingress should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example shows how to use a [Google Cloud Static External IP
 Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
@@ -246,7 +264,7 @@ certificate is provisioned, the ingress should be visible to the Internet.
 ## Gloo
 
 Gloo should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically. Assuming you installed Gloo
@@ -268,8 +286,8 @@ glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 
 ## Contour
 
-Gloo should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+Contour should be meshed with ingress mode enabled, i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The following example uses the
 [Contour getting started](https://projectcontour.io/getting-started/) documentation
@@ -360,7 +378,7 @@ the `l5d-dst-override` headers will be set automatically.
 ### Kong
 
 Kong should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example will use the following elements:
 
@@ -448,7 +466,7 @@ the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
 {{< /note >}}
 
 Haproxy should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `true`.
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The simplest way to use Haproxy as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
