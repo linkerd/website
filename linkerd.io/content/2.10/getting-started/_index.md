@@ -165,6 +165,11 @@ You should see a screen like this:
 
 {{< fig src="/images/getting-started/viz-empty-dashboard.png"
     title="The Linkerd dashboard in action" >}}
+    
+💡 If you are running Linkerd in a remote cluster, you need to add the option
+`--address=ip-of-the-cluster` plus adding the line
+`ip-of-the-cluster web.linkerd-viz.svc` to `/etc/hosts`. Then you can access
+Linkerd's dashboard at `http://ip-of-the-cluster:50750`.
 
 If you installed the buoyant-cloud extension, run:
 
