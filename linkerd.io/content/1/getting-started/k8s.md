@@ -10,7 +10,7 @@ weight = 34
 +++
 {{< note >}}
 This document is specific to Linkerd 1.x. If you're on Kubernetes, you may wish
-to consider [Linkerd 2.x](/2.10/getting-started/) instead.
+to consider [Linkerd 2.x](/getting-started/) instead.
 {{< /note >}}
 
 If you have a Kubernetes cluster or even just run
