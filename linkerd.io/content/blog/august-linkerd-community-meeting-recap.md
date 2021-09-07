@@ -81,6 +81,8 @@ way to expose tap to cluster operators and policy (the latter is coming
 soon). Additionally, exposing how many retries are occurring in the system
 and what percentage of traffic they represent would be super valuable.
 
+{{< youtube vujvDltxmhg >}}
+
 ## Deep Dive with Alejandro: Updating Helm Charts
 
 Before getting started, please note that these updates **will not** make
