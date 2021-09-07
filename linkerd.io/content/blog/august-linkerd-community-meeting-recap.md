@@ -2,6 +2,7 @@
 title: Blog
 subtitle: August Linkerd Community Meeting Recap
 author: Kevin Leimkuhler
+date: 2021-08-27T00:00:00Z
 tags:
   - Community
 items:
@@ -33,7 +34,7 @@ to reflect the extension model introduced in 2.10.
 
 Here's some fun news: after Linkerd's graduation, we are getting a mascot.
 We already got a sneak peek and love it! Stay tuned for the big unveiling
-at KubeCon! 
+at KubeCon!
 
 ## Roadmap
 
@@ -45,7 +46,7 @@ wiring up the recently added metric labels and lots of testing.
 
 And please, please try the latest edge and test it as much as you can!
 Give policy a spin and let us know if anything does not make sense or
-if you have any suggestions. Your feedback is super important and helpful! 
+if you have any suggestions. Your feedback is super important and helpful!
 
 ## Community Conversation with Chris Campbell & Dan Duggan
 
@@ -58,7 +59,7 @@ The migration from monolith to microservices started because HP was
 making a general move from delivering hardware to software. It started
 about five years ago and is still ongoing. The initial course of action
 was moving to Docker Swarm — that was fairly quick. But, given HP's
-size, the rest took (and is still taking) some time. 
+size, the rest took (and is still taking) some time.
 
 The service mesh became relevant when Chris and Dan were trying to
 understand what was happening within their microservices. Why are things
@@ -78,14 +79,14 @@ features, that conversation feels more difficult today.
 If they could add any feature to Linkerd, Chris would like to have a better
 way to expose tap to cluster operators and policy (the latter is coming
 soon). Additionally, exposing how many retries are occurring in the system
-and what percentage of traffic they represent would be super valuable. 
+and what percentage of traffic they represent would be super valuable.
 
 ## Deep Dive with Alejandro: Updating Helm Charts
 
 Before getting started, please note that these updates **will not** make
 it into 2.11. But they are coming soon, so stay tuned. The driver for the
 Helm chart changes Alejandro discussed has been the upgrade from Helm v2 to
-v3. 
+v3.
 
 In Helm v3 it is best to leave the responsibility of namespace creation to
 Helm rather than providing one through the chart. This allows the chart’s
@@ -98,13 +99,13 @@ extension namespaces require specific labels to work properly, there will
 be post-installation hooks that add the additional metadata.
 Lastly, the core install chart will be split into two—one that contains
 CRDs (TrafficSplit, ServiceProfile, Server, ServerAuthorization) and one
-that contains the core components (destination, identity, proxy injector). 
+that contains the core components (destination, identity, proxy injector).
 
 Why? Well, CRDs must be available before their resources are created.
 If any of these resources are included in the core install — such as
 Servers and ServerAuthorizations — the cluster must know about their
 definitions beforehand. As mentioned, we'll have to be a little patient
-to see these changes implemented but it's coming soon. 
+to see these changes implemented but it's coming soon.
 
 ## August Linkerd Hero
 
