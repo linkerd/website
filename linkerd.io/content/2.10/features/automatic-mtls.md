@@ -102,7 +102,7 @@ certificates are scoped to 24 hours and dynamically refreshed using the same
 mechanism.
 
 Finally, when a proxy receives an outbound connection from the application
-container within its pod, it looks up that desitnation with the Linkerd control
+container within its pod, it looks up that destination with the Linkerd control
 plane. If it's in the Kubernetes cluster, the control plane provides the proxy
 with the destination's endpoint addresses, along with metadata including an
 identity name. When the proxy connects to the destination, it initiates a TLS

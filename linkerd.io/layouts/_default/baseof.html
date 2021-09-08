@@ -8,6 +8,12 @@
 </head>
 
 <body class="has-background-grey-light has-navbar-fixed-top ">
+  {{ if not .Site.IsServer }}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXBDGKJ" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  {{ end }}
   {{ partial "header.html" . }}
   {{ if eq .URL `/` }}
   <div class="homepage-notification has-background-light-blue has-text-navy-black center has-text-centered">
