@@ -1,12 +1,14 @@
 ---
 title: August Linkerd Community Meeting Recap
-author: Kevin Leimkuhler
+author: kevinl
 date: 2021-08-27T00:00:00Z
+feature: "/uploads/august-2021-community-meeting.png" 
+thumbnail: "/uploads/august-2021-community-meeting.png" 
 tags:
   - Community
 items:
 description: 'We are pushing towards the 2.11 release and our next edge release is the first with policy support! We recently updated our ingress documentation which will hopefully result in an easier getting-started process. '
-keywords: []
+keywords: ["Linkerd","Community Meeting", "August", "2021"]
 ---
 
 If you missed our August Community Meeting, don't worry, here's the recap
