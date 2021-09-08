@@ -1,6 +1,5 @@
 ---
-title: Blog
-subtitle: August Linkerd Community Meeting Recap
+title: August Linkerd Community Meeting Recap
 author: Kevin Leimkuhler
 date: 2021-08-27T00:00:00Z
 tags:
