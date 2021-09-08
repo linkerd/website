@@ -127,6 +127,15 @@ for ctx in west east; do
 done
 ```
 
+If verified, then let's install viz extension.
+
+```bash
+linkerd viz install \
+  | tee \
+    >(kubectl --context=west apply -f -) \
+    >(kubectl --context=east apply -f -)
+```
+
 ## Preparing your cluster
 
 {{< fig
