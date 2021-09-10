@@ -133,15 +133,17 @@ There are two main rules that `iptables` uses:
 Additionally, `iptables` has rules in place for special scenarios, such as when
 traffic is sent over the loopback interface:
 
-* When traffic is sent over the loopback interface by the application, it will be sent 
-  directly to the process, instead of being forwarded to the proxy. This allows
-  an application to talk to itself, or to another container in the pod, without
-  being intercepted by the proxy, as long as the destination is a port bound on
-  localhost (such as 127.0.0.1:80, localhost:8080), or the pod's own IP.
+* When traffic is sent over the loopback interface by the application, it will
+  be sent directly to the process, instead of being forwarded to the proxy. This
+  allows an application to talk to itself, or to another container in the pod,
+  without being intercepted by the proxy, as long as the destination is a port
+  bound on localhost (such as 127.0.0.1:80, localhost:8080), or the pod's own
+  IP.
 * When traffic is sent by the application to its own cluster IP, it will be
   forwarded to the proxy. If the proxy chooses its own pod as an endpoint, then
   traffic will be sent over the loopback interface directly to the application.
-  Consequently, traffic will not be opportunistically upgraded to mTLS or HTTP/2.
+  Consequently, traffic will not be opportunistically upgraded to mTLS or
+  HTTP/2.
 
 A list of all `iptables` rules used by Linkerd can be found [here](../iptables/)
 
