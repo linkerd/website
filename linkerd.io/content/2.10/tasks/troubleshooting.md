@@ -1964,7 +1964,7 @@ yes
 ### √ jaeger extension pods are injected {#l5d-jaeger-pods-injection}
 
 ```bash
-× jaeger extension pods are injecteds
+× jaeger extension pods are injected
     could not find proxy container for jaeger-6f98d5c979-scqlq pod
     see https://linkerd.io/checks/#l5d-jaeger-pods-injections for hints
 ```
@@ -1987,7 +1987,7 @@ Make sure that the `proxy-injector` is working correctly by running
 ```bash
 × jaeger extension pods are running
     container linkerd-proxy in pod jaeger-59f5595fc7-ttndp is not ready
-    see https://linkerd.io/checks/#l5d-viz-pods-running for hints
+    see https://linkerd.io/checks/#l5d-jaeger-pods-running for hints
 ```
 
 Ensure all the linkerd-jaeger pods are running with 2/2
@@ -2002,3 +2002,381 @@ jaeger-6f98d5c979-vs622            2/2     Running   0          5sh
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
+
+## The "linkerd-buoyant" checks {#l5d-buoyant}
+
+These checks only run when the `linkerd-buoyant` extension is installed.
+This check is intended to verify the installation of linkerd-buoyant
+extension which comprises `linkerd-buoyant` CLI, the `buoyant-cloud-agent`
+Deployment, and the `buoyant-cloud-metrics` DaemonSet.
+
+### √ Linkerd extension command linkerd-buoyant exists
+
+```bash
+‼ Linkerd extension command linkerd-buoyant exists
+    exec: "linkerd-buoyant": executable file not found in $PATH
+    see https://linkerd.io/2/checks/#extensions for hints
+```
+
+Ensure you have the `linkerd-buoyant` cli installed:
+
+```bash
+linkerd-buoyant check
+```
+
+To install the CLI:
+
+```bash
+curl https://buoyant.cloud/install | sh
+```
+
+### √ linkerd-buoyant can determine the latest version
+
+```bash
+‼ linkerd-buoyant can determine the latest version
+    Get "https://buoyant.cloud/version.json": dial tcp: lookup buoyant.cloud: no such host
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure you can connect to the Linkerd Buoyant version check endpoint from the
+environment the `linkerd` cli is running:
+
+```bash
+$ curl https://buoyant.cloud/version.json
+{"linkerd-buoyant":"v0.4.4"}
+```
+
+### √ linkerd-buoyant cli is up-to-date
+
+```bash
+‼ linkerd-buoyant cli is up-to-date
+    CLI version is v0.4.3 but the latest is v0.4.4
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+To update to the latest version of the `linkerd-buoyant` CLI:
+
+```bash
+curl https://buoyant.cloud/install | sh
+```
+
+### √ buoyant-cloud Namespace exists
+
+```bash
+× buoyant-cloud Namespace exists
+    namespaces "buoyant-cloud" not found
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure the `buoyant-cloud` namespace exists:
+
+```bash
+kubectl get ns/buoyant-cloud
+```
+
+If the namespace does not exist, the `linkerd-buoyant` installation may be
+missing or incomplete. To install the extension:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
+
+### √ buoyant-cloud Namespace has correct labels
+
+```bash
+× buoyant-cloud Namespace has correct labels
+    missing app.kubernetes.io/part-of label
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+The `linkerd-buoyant` installation may be missing or incomplete. To install the
+extension:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
+
+### √ buoyant-cloud-agent ClusterRole exists
+
+```bash
+× buoyant-cloud-agent ClusterRole exists
+    missing ClusterRole: buoyant-cloud-agent
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure that the cluster role exists:
+
+```bash
+$ kubectl get clusterrole buoyant-cloud-agent
+NAME                  CREATED AT
+buoyant-cloud-agent   2020-11-13T00:59:50Z
+```
+
+Also ensure you have permission to create ClusterRoles:
+
+```bash
+$ kubectl auth can-i create ClusterRoles
+yes
+```
+
+### √ buoyant-cloud-agent ClusterRoleBinding exists
+
+```bash
+× buoyant-cloud-agent ClusterRoleBinding exists
+    missing ClusterRoleBinding: buoyant-cloud-agent
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure that the cluster role binding exists:
+
+```bash
+$ kubectl get clusterrolebinding buoyant-cloud-agent
+NAME                  ROLE                              AGE
+buoyant-cloud-agent   ClusterRole/buoyant-cloud-agent   301d
+```
+
+Also ensure you have permission to create ClusterRoleBindings:
+
+```bash
+$ kubectl auth can-i create ClusterRoleBindings
+yes
+```
+
+### √ buoyant-cloud-agent ServiceAccount exists
+
+```bash
+× buoyant-cloud-agent ServiceAccount exists
+    missing ServiceAccount: buoyant-cloud-agent
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure that the service account exists:
+
+```bash
+$ kubectl -n buoyant-cloud get serviceaccount buoyant-cloud-agent
+NAME                  SECRETS   AGE
+buoyant-cloud-agent   1         301d
+```
+
+Also ensure you have permission to create ServiceAccounts:
+
+```bash
+$ kubectl -n buoyant-cloud auth can-i create ServiceAccount
+yes
+```
+
+### √ buoyant-cloud-id Secret exists
+
+```bash
+× buoyant-cloud-id Secret exists
+    missing Secret: buoyant-cloud-id
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure that the secret exists:
+
+```bash
+$ kubectl -n buoyant-cloud get secret buoyant-cloud-id
+NAME               TYPE     DATA   AGE
+buoyant-cloud-id   Opaque   4      301d
+```
+
+Also ensure you have permission to create ServiceAccounts:
+
+```bash
+$ kubectl -n buoyant-cloud auth can-i create ServiceAccount
+yes
+```
+
+### √ buoyant-cloud-agent Deployment exists
+
+```bash
+× buoyant-cloud-agent Deployment exists
+    deployments.apps "buoyant-cloud-agent" not found
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure the `buoyant-cloud-agent` Deployment exists:
+
+```bash
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+```
+
+If the Deployment does not exist, the `linkerd-buoyant` installation may be
+missing or incomplete. To reinstall the extension:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
+
+### √ buoyant-cloud-agent Deployment is running
+
+```bash
+× buoyant-cloud-agent Deployment is running
+    no running pods for buoyant-cloud-agent Deployment
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Note, it takes a little bit for pods to be scheduled, images to be pulled and
+everything to start up. If this is a permanent error, you'll want to validate
+the state of the `buoyant-cloud-agent` Deployment with:
+
+```bash
+$ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-agent
+NAME                                   READY   STATUS    RESTARTS   AGE
+buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          156m
+```
+
+Check the agent's logs with:
+
+```bash
+kubectl logs -n buoyant-cloud buoyant-cloud-agent-6b8c6888d7-htr7d buoyant-cloud-agent
+```
+
+### √ buoyant-cloud-agent Deployment is injected
+
+```bash
+× buoyant-cloud-agent Deployment is injected
+    could not find proxy container for buoyant-cloud-agent-6b8c6888d7-htr7d pod
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure the `buoyant-cloud-agent` pod is injected, the `READY` column should show
+`2/2`:
+
+```bash
+$ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-agent
+NAME                                   READY   STATUS    RESTARTS   AGE
+buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          161m
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`.
+
+### √ buoyant-cloud-agent Deployment is up-to-date
+
+```bash
+‼ buoyant-cloud-agent Deployment is up-to-date
+    incorrect app.kubernetes.io/version label: v0.4.3, expected: v0.4.4
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Check the version with:
+
+```bash
+$ linkerd-buoyant version
+CLI version:   v0.4.4
+Agent version: v0.4.4
+```
+
+To update to the latest version:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
+
+### √ buoyant-cloud-agent Deployment is running a single pod
+
+```bash
+× buoyant-cloud-agent Deployment is running a single pod
+    expected 1 buoyant-cloud-agent pod, found 2
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+`buoyant-cloud-agent` should run as a singleton. Check for other pods:
+
+```bash
+kubectl get po -A --selector app=buoyant-cloud-agent
+```
+
+### √ buoyant-cloud-metrics DaemonSet exists
+
+```bash
+× buoyant-cloud-metrics DaemonSet exists
+    deployments.apps "buoyant-cloud-metrics" not found
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure the `buoyant-cloud-metrics` DaemonSet exists:
+
+```bash
+kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+```
+
+If the DaemonSet does not exist, the `linkerd-buoyant` installation may be
+missing or incomplete. To reinstall the extension:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
+
+### √ buoyant-cloud-metrics DaemonSet is running
+
+```bash
+× buoyant-cloud-metrics DaemonSet is running
+    no running pods for buoyant-cloud-metrics DaemonSet
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Note, it takes a little bit for pods to be scheduled, images to be pulled and
+everything to start up. If this is a permanent error, you'll want to validate
+the state of the `buoyant-cloud-metrics` DaemonSet with:
+
+```bash
+$ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-metrics
+NAME                          READY   STATUS    RESTARTS   AGE
+buoyant-cloud-metrics-kt9mv   2/2     Running   0          163m
+buoyant-cloud-metrics-q8jhj   2/2     Running   0          163m
+buoyant-cloud-metrics-qtflh   2/2     Running   0          164m
+buoyant-cloud-metrics-wqs4k   2/2     Running   0          163m
+```
+
+Check the agent's logs with:
+
+```bash
+kubectl logs -n buoyant-cloud buoyant-cloud-metrics-kt9mv buoyant-cloud-metrics
+```
+
+### √ buoyant-cloud-metrics DaemonSet is injected
+
+```bash
+× buoyant-cloud-metrics DaemonSet is injected
+    could not find proxy container for buoyant-cloud-agent-6b8c6888d7-htr7d pod
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Ensure the `buoyant-cloud-metrics` pods are injected, the `READY` column should
+show `2/2`:
+
+```bash
+$ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
+NAME                          READY   STATUS    RESTARTS   AGE
+buoyant-cloud-metrics-kt9mv   2/2     Running   0          166m
+buoyant-cloud-metrics-q8jhj   2/2     Running   0          166m
+buoyant-cloud-metrics-qtflh   2/2     Running   0          166m
+buoyant-cloud-metrics-wqs4k   2/2     Running   0          166m
+```
+
+Make sure that the `proxy-injector` is working correctly by running
+`linkerd check`.
+
+### √ buoyant-cloud-metrics DaemonSet is up-to-date
+
+```bash
+‼ buoyant-cloud-metrics DaemonSet is up-to-date
+    incorrect app.kubernetes.io/version label: v0.4.3, expected: v0.4.4
+    see https://linkerd.io/checks#l5d-buoyant for hints
+```
+
+Check the version with:
+
+```bash
+$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics -o jsonpath='{.metadata.labels}'
+{"app.kubernetes.io/name":"metrics","app.kubernetes.io/part-of":"buoyant-cloud","app.kubernetes.io/version":"v0.4.4"}
+```
+
+To update to the latest version:
+
+```bash
+linkerd-buoyant install | kubectl apply -f -
+```
