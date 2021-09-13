@@ -115,7 +115,7 @@ The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
 container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. It [uses
 iptables](https://github.com/linkerd/linkerd2-proxy-init) to route all TCP
-traffic to and from the pod through the pod.
+traffic to and from the pod through the proxy.
 
 There are two main rules that `iptables` uses:
 
@@ -129,6 +129,23 @@ There are two main rules that `iptables` uses:
   the traffic to the original recipient (unless there is a reason to send it
   elsewhere). This does not result in a traffic loop because the `iptables`
   rules explicitly skip the proxy's UID.
+
+Additionally, `iptables` has rules in place for special scenarios, such as when
+traffic is sent over the loopback interface:
+
+* When traffic is sent over the loopback interface by the application, it will
+  be sent directly to the process, instead of being forwarded to the proxy. This
+  allows an application to talk to itself, or to another container in the pod,
+  without being intercepted by the proxy, as long as the destination is a port
+  bound on localhost (such as 127.0.0.1:80, localhost:8080), or the pod's own
+  IP.
+* When traffic is sent by the application to its own cluster IP, it will be
+  forwarded to the proxy. If the proxy chooses its own pod as an endpoint, then
+  traffic will be sent over the loopback interface directly to the application.
+  Consequently, traffic will not be opportunistically upgraded to mTLS or
+  HTTP/2.
+
+A list of all `iptables` rules used by Linkerd can be found [here](../iptables/)
 
 {{< note >}}
 By default, most ports are forwarded through the proxy. This is not always
