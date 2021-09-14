@@ -51,42 +51,6 @@ networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-su
 Once these components are installed, Kubernetes `Service` resources that match
 a label selector can be exported to other clusters.
 
-## Headless services
-
-By default, Linkerd will mirror all exported services from a target cluster as
-`clusterIP` services in a source cluster (they will be assigned a virtual IP).
-This also extends to [headless
-services](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services);
-an exported headless service will be mirrored as a `clusterIP` service in the
-source cluster. In general, headless services are used when a workloads needs a
-stable network identifier or to facilitate service discovery without being tied
-to Kubernetes' native implementation, this allows clients to either implement
-their own load balancing or to address a pod directly through its DNS name. In
-certain situations, it is desireable to preserve some of this functionality,
-especially when working with Kubernetes objects that require it, such as
-[StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/).
-
-Linkerd's multi-cluster extension can be configured with support for headless
-services when linking two clusters together. When the feature is turned on, the
-*service mirror* component will export headless services without assigning them
-an IP. This allows clients to talk to specific pods (or hosts) across clusters.
-To support direct communication, underneath the hood, the service mirror
-component will create an *endpoint mirror* for each host that backs a headless
-service. To exemplify, if in a target cluster there is a StatefulSet deployed
-with two replicas, and the StatefulSet is backed by a headless service, when
-the service will be exported, the source cluster will create a headless mirror
-along with two "endpoint mirrors" representing the hosts in the StatefulSet.
-
-This approach allows Linkerd to preserve DNS record creation and support direct
-communication to pods across clusters. Clients may also implement their own
-load balancing based on the DNS records created by the headless service.
-Hostnames are also preserved across clusters, meaning that the only difference
-in the DNS name (or FQDN) is the headless service's mirror name. In order to be
-exported as a headless service, the hosts backing the service need to be named
-(e.g a StatefulSet is supported since all pods have a hostname, but a
-Deployment would not be supported, since they do not allow for arbitrary
-hostnames in the pod spec).
-
 Ready to get started? See the [getting started with multi-cluster
 guide](../../tasks/multicluster/) for a walkthrough.
 
