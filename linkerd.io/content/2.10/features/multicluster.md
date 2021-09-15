@@ -57,7 +57,6 @@ guide](../../tasks/multicluster/) for a walkthrough.
 ## Further reading
 
 * [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
-* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster
