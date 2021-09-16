@@ -18,13 +18,13 @@ support:
       thumbnail: "/uploads/linux-foundation-logo.svg"
       title: The Linux Foundation
       url: https://www.edx.org/course/introduction-to-service-mesh-with-linkerd
-    - description: Hands-on, instructor-led service mesh training from the creators of the Linkerd
+    - description: Hands-on, instructor-led service mesh training, straight from the creators of Linkerd.
       url: https://buoyant.io/linkerd-training/
       title: Buoyant
       thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
   - title: 'Commercial support'
     entries:
-    - description: 24x7 oncall, training, architectural review, and more, straight from the creators of Linkerd.
+    - description: Enterprise-grade support including 24x7 oncall, straight from the creators of Linkerd.
       thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
       title: Buoyant
       url: https://buoyant.io/linkerd-support/
