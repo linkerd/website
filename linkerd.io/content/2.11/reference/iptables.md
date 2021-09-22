@@ -14,6 +14,8 @@ in order.
 
 ## Inbound connections
 
+
+
 <!-- markdownlint-disable MD013 -->
 {{< table >}}
 | # | name | iptables rule | description|
@@ -24,6 +26,33 @@ in order.
 | 4 | install-proxy-init-prerouting | `iptables -t nat -A PREROUTING -j PROXY_INIT_REDIRECT` | the last inbound rule configures the `PREROUTING` chain (first chain a packet traverses inbound) to send packets to the redirect chain for processing |
 {{< /table >}}
 <!-- markdownlint-enable MD013 -->
+
+asjhdajkshdakjsdha
+ajshdajkshda
+aklshjdajkshdasd
+ashjdakhjsd
+
+
+{{< fig src="/images/iptables/iptables-fig2-1.png" 
+title="Inbound iptables chain traversal" >}}
+
+
+asdkhjasjkldasd
+
+asdkjasjkd
+
+asdasjkhd
+
+{{< fig src="/images/iptables/iptables-fig2-2.png" 
+title="Outbound iptables chain traversal" >}}
+
+
+{{< fig src="/images/iptables/iptables-fig2-3.png" 
+title="Outbound iptables chain traversal" >}}
+
+
+{{< fig src="/images/iptables/iptables-fig2-4.png" 
+title="Outbound iptables chain traversal" >}}
 
 ## Outbound connections
 
