@@ -1,5 +1,5 @@
 ---
-title: How Linkerd uses iptables to route Kubernetes traffic transparently
+title: How Linkerd uses iptables to transparently route Kubernetes traffic
 author: matei
 date: 2021-09-23T00:00:00Z
 tags:
