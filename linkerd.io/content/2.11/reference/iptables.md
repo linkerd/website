@@ -128,7 +128,7 @@ they'll be sent directly to the service.
 {{< note >}}
 Usually, packets traverse another chain on the outbound side called
 `POSTROUTING`. This chain is traversed after the `OUTPUT` chain, but to keep
-the explanation simple, has not been mentioned. Likewise, outbound packets that
+the explanation simple, it has not been mentioned. Likewise, outbound packets that
 are sent over the loopback interface become inbound packets, since they need to
 be processed again. The kernel takes shortcuts in this case and bypasses the
 `PREROUTING` chain that inbound packets from the outside world traverse when
