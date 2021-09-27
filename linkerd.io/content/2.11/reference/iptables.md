@@ -105,7 +105,7 @@ The substantiated explanation applies to a packet whose destination is another
 service, outside of the pod. In practice, an application can also send traffic
 locally. As such, there are two other possible scenarios that we will explore:
 _when a service talks to itself_ (by sending traffic over localhost or by using
-its own endpoint addresS), and when _a service talks to itself through a
+its own endpoint address), and when _a service talks to itself through a
 `clusterIP` target_. Both scenarios are somehow related, but the path a packet
 takes differs.
 
@@ -128,7 +128,7 @@ they'll be sent directly to the service.
 {{< note >}}
 Usually, packets traverse another chain on the outbound side called
 `POSTROUTING`. This chain is traversed after the `OUTPUT` chain, but to keep
-the explanation simple, has not been mentioned. Likewise, outbound packets that
+the explanation simple, it has not been mentioned. Likewise, outbound packets that
 are sent over the loopback interface become inbound packets, since they need to
 be processed again. The kernel takes shortcuts in this case and bypasses the
 `PREROUTING` chain that inbound packets from the outside world traverse when
