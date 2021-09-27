@@ -1,6 +1,9 @@
 +++
 title = "Exposing the Dashboard"
 description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
+aliases = [
+  "../dns-rebinding/",
+]
 +++
 
 Instead of using `linkerd viz dashboard` every time you'd like to see what's
@@ -180,7 +183,7 @@ The below annotation exposes the dashboard at `dashboard.example.com`.
   annotations:
     getambassador.io/config: |-
       ---
-      apiVersion: ambassador/v1
+      apiVersion: getambassador.io/v2
       kind: Mapping
       name: web-mapping
       host: dashboard.example.com

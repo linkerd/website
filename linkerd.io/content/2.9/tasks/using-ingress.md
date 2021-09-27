@@ -6,7 +6,18 @@ description = "Linkerd works alongside your ingress controller of choice."
 As of Linkerd version 2.9, there are two ways in which the Linkerd proxy
 can be run with your Ingress Controller.
 
-## Default Mode
+## Proxy Modes
+
+The Linkerd proxy offers two modes of operation in order to handle some of the
+more subtle behaviors of load balancing in ingress controllers.
+
+Be sure to check the documentation for your ingress controller of choice to
+understand how it resolves endpoints for load balancing. If the ingress uses
+the cluster IP and port of the Service, you can use the Default Mode described
+below. Otherwise, read through the `Proxy Ingress Mode` section to understand
+how it works.
+
+### Default Mode
 
 When the ingress controller is injected with the `linkerd.io/inject: enabled`
 annotation, the Linkerd proxy will honor load balancing decisions made by the
@@ -17,7 +28,16 @@ traffic and therefore will not expose per-route metrics or do traffic splitting.
 If your Ingress controller is injected with no extra configuration specific to
 ingress, the Linkerd proxy runs in the default mode.
 
-## Proxy Ingress Mode
+{{< note >}}
+Some ingresses, either by default or by configuration, can change the way that
+they make load balancing decisions.
+
+The nginx ingress controller and Emissary Ingress are two options that offer
+this functionality. See the [Nginx]({{< ref "#nginx-proxy-mode-configuration" >}})
+and [Emissary]({{< ref "#emissary-proxy-mode">}}) sections below for more info
+{{< /note >}}
+
+### Proxy Ingress Mode
 
 If you want Linkerd functionality like Service Profiles, Traffic Splits, etc,
 there is additional configuration required to make the Ingress controller's Linkerd
@@ -120,6 +140,31 @@ The important annotation here is:
       grpc_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
 ```
 
+Alternatively, instead of adding the `proxy_set_header` directive to each
+`Ingress` resource individually, it is possible with Nginx Ingress Controller
+to define it globally using the [Custom Headers](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
+pattern.
+
+For example:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-headers
+  namespace: ingress-nginx
+data:
+  proxy_set_header: "l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;"
+```
+
+adjust above accordingly and follow the rest of the [instructions](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-headers/)
+on how to add this ConfigMap to Nginx Ingress Controller's global configuration.
+
+{{< note >}}
+This method doesn't cover `grpc_set_header` which needs to be added to the `Ingress`
+that uses a GRPC backend service.
+{{< /note >}}
+
 {{< note >}}
 If you are using [auth-url](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#external-authentication)
 you'd need to add the following snippet as well.
@@ -210,6 +255,22 @@ spec:
 ```
 
 {{< /note >}}
+
+#### Nginx proxy mode configuration
+
+The [nginx ingress controller](https://kubernetes.github.io/ingress-nginx/)
+includes the [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
+annotation. The default `false` value of this annotation adds an entry for each
+kubernetes endpoint of a pod to the `upstream` block in the nginx configuration,
+thereby informing nginx to load balance requests directly to the endpoints of a
+service.
+
+Setting this annotation to `true` configures the ingress controller to add
+_only_ the cluster IP and port of the Service resource as the single entry to
+the `upstream` block in the nginx configuration. As a result, the load balancing
+decisions are offloaded to the Linkerd proxy. With this configuration, the
+ServiceProfile and per-route metrics functionality _will_ be available with the
+annotation `linkerd.io/inject: enabled`.
 
 ### Traefik
 
@@ -363,12 +424,12 @@ The managed certificate will take about 30-60 minutes to provision, but the
 status of the ingress should be healthy within a few minutes. Once the managed
 certificate is provisioned, the ingress should be visible to the Internet.
 
-### Ambassador
+### Ambassador (aka Emissary)
 
 This uses `emojivoto` as an example, take a look at
 [getting started](../../getting-started/) for a refresher on how to install it.
 
-Ambassador does not use `Ingress` resources, instead relying on `Service`. The
+Emissary does not use `Ingress` resources, instead relying on `Service`. The
 sample service definition is:
 
 ```yaml
@@ -380,13 +441,12 @@ metadata:
   annotations:
     getambassador.io/config: |
       ---
-      apiVersion: ambassador/v1
+      apiVersion: getambassador.io/v2
       kind: Mapping
       name: web-ambassador-mapping
       service: http://web-svc.emojivoto.svc.cluster.local:80
       host: example.com
       prefix: /
-      add_linkerd_headers: true
 spec:
   selector:
     app: web-svc
@@ -396,23 +456,16 @@ spec:
     targetPort: http
 ```
 
-The important annotation here is:
+#### Emissary Proxy Mode
 
-```yaml
-      add_linkerd_headers: true
-```
-
-Ambassador will add a `l5d-dst-override` header to instruct Linkerd what service
-the request is destined for. This will contain both the Kubernetes service
-FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
-`servicePort`.
-
-{{< note >}}
-To make this global, add `add_linkerd_headers` to your `Module` configuration.
-{{< /note >}}
+By default, Emissary uses Kubernetes DNS and [service-level discovery](https://www.getambassador.io/docs/emissary/latest/topics/running/resolvers/#kubernetes-service-level-discovery).
+So, the `linkerd.io/inject` annotation can be set to `enabled` and all the
+ServiceProfile, TrafficSplit, and per-route functionality will be available. It
+is not necessary to use `ingress` mode, unless the service discovery behavior
+of Emissary has been changed from the default.
 
 To test this, you'll want to get the external IP address for your controller. If
-you installed Ambassador via helm, you can get that IP address by running:
+you installed Emissary via helm, you can get that IP address by running:
 
 ```bash
 kubectl get svc --all-namespaces \
@@ -430,6 +483,11 @@ You can then use this IP with curl:
 ```bash
 curl -H "Host: example.com" http://external-ip
 ```
+
+{{< note >}}
+You can also find a more detailed guide for using Linkerd with Emissary Ingress,
+AKA Ambassador, from the folks over at Buoyant [here](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
+{{< /note >}}
 
 ### Gloo
 

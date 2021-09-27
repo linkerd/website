@@ -16,7 +16,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "author": "{{ $scratch.Get " authorName " }}",
+      "author": "{{ $scratch.Get "authorName" }}",
       "datePublished": {{ .PublishDate }},
       "dateModified": {{ .Lastmod }},
       "headline": {{ .Params.title }},

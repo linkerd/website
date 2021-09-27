@@ -31,3 +31,25 @@ proxy's resource usage.
 
 For proxies injected using the `linkerd inject` command, configuration can be
 overridden using the [command-line flags](../cli/inject/).
+
+## Ingress Mode
+
+Proxy ingress mode is a mode of operation designed to help Linkerd integrate
+with certain ingress controllers. Ingress mode is necessary if the ingress
+itself cannot be otherwise configured to use the Service port/ip as the
+destination.
+
+When an individual Linkerd proxy is set to `ingress` mode, it will route
+requests based on their `:authority`, `Host`, or `l5d-dst-override` headers
+instead of their original destination. This will inform Linkerd to override the
+endpoint selection of the ingress container and to perform its own endpoint
+selection, enabling features such as per-route metrics and traffic splitting.
+
+The proxy can be made to run in `ingress` mode by used the `linkerd.io/inject:
+ingress` annotation rather than the default `linkerd.io/inject: enabled`
+annotation. This can also be done with the `--ingress` flag in the `inject` CLI
+command:
+
+```bash
+kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -
+```

@@ -1,6 +1,9 @@
 +++
 title = "Securing Your Cluster"
 description = "Best practices for securing your Linkerd installation."
+aliases = [
+  "../tap-rbac/",
+]
 +++
 
 Linkerd provides powerful introspection into your Kubernetes cluster and

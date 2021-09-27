@@ -68,9 +68,9 @@ Enter service mirroring.
 The goal of the service mirroring is to allow the same guarantees that a service
 mesh like Linkerd provides for in-cluster calls—identity, traffic shifting,
 etc—to also be applied to cross-cluster calls. Service mirroring works, as the
-name suggests, by "mirroring" service information between clusters, With service
+name suggests, by "mirroring" service information between clusters. With service
 mirroring in place, the full observability, security, and routing features of
-Linkerd apply uniformly to both in-cluster and cluster-calls, and the
+Linkerd apply uniformly to both in-cluster and cross-cluster calls, and the
 application does not need to distinguish between those situations.
 
 The service mirror is a Kubernetes Operator. Once installed, it mirrors a remote

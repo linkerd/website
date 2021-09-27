@@ -1,0 +1,14 @@
+{{ $data := (index site.Data "extension-list") -}}
+{{ $baseURL := (strings.TrimSuffix "/" site.BaseURL) }}
+{
+  "data": [
+    {{ range $index, $ext := $data.Extensions -}}
+    {
+      "name": "{{ .Name }}",
+      "description": "{{ .Description }}",
+      "docLink": "{{ .DocLink }}",
+      "screenshotURL": "{{ $baseURL }}/uploads/{{ .ScreenshotFileName }}"
+    }{{if ne (sub (len $data.Extensions) 1 ) $index }},{{end}}
+    {{ end -}}
+  ]
+}

@@ -18,7 +18,7 @@ happyexit() {
   echo "  linkerd check                           # validate everything worked!"
   echo "  linkerd dashboard                       # launch the dashboard"
   echo ""
-  echo "Looking for more? Visit https://linkerd.io/2.10/next-steps"
+  echo "Looking for more? Visit https://linkerd.io/2/tasks"
   echo ""
   exit 0
 }

@@ -159,13 +159,13 @@ done
     src="/images/multicluster/components.svg" >}}
 
 Installed into the `linkerd-multicluster` namespace, the gateway is a simple
-[NGINX proxy](https://github.com/linkerd/linkerd2/blob/main/charts/linkerd2-multicluster-remote-setup/templates/gateway.yaml#L10)
+[pause container](https://github.com/linkerd/linkerd2/blob/main/multicluster/charts/linkerd-multicluster/templates/gateway.yaml#L3)
 which has been injected with the Linkerd proxy. On the inbound side, Linkerd
 takes care of validating that the connection uses a TLS certificate that is part
-of the trust anchor. NGINX takes the request and forwards it to the Linkerd
-proxy's outbound side. At this point, the Linkerd proxy is operating like any
-other in the data plane and forwards the requests to the correct service. Make
-sure the gateway comes up successfully by running:
+of the trust anchor, then handles the outbound connection. At this point, the
+Linkerd proxy is operating like any other in the data plane and forwards the
+requests to the correct service. Make sure the gateway comes up successfully by
+running:
 
 ```bash
 for ctx in west east; do

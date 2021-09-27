@@ -16,20 +16,34 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Dom DePasquale
+    date: August 2021
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/dom-depasqual.png"
+    alt: Portrait of Dom DePasquale
+    github_url: https://github.com/dad264
+  - name: Sanskar Jaiswal
+    date: July 2021
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/jaiswal.png"
+    alt: Portrait of Jasiwal
+    github_url: https://github.com/aryan9600
   - name: Steve Gray
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
     image: "/uploads/steve-reardon.png"
-    alt: Portrait of Steve Reardon
-    github_url: https://github.com/Monkman08
+    alt: Portrait of Steve Gray
+    github_url: https://github.com/steve-gray
   - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
     image: "/uploads/steve-gray.jpeg"
-    alt: Portrait of Steve Gray
-    github_url: https://github.com/steve-gray
+    alt: Portrait of Steve Reardon
+    github_url: https://github.com/Monkman08
   - name: Rio Kierkels
     date: April 2021
     blurb: Helping community members
