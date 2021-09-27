@@ -105,7 +105,7 @@ The substantiated explanation applies to a packet whose destination is another
 service, outside of the pod. In practice, an application can also send traffic
 locally. As such, there are two other possible scenarios that we will explore:
 _when a service talks to itself_ (by sending traffic over localhost or by using
-its own endpoint addresS), and when _a service talks to itself through a
+its own endpoint address), and when _a service talks to itself through a
 `clusterIP` target_. Both scenarios are somehow related, but the path a packet
 takes differs.
 
