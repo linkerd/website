@@ -750,7 +750,7 @@ Example failure:
 ```bash
 ‼ proxy-injector cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of proxy-injnector webhook
@@ -789,10 +789,47 @@ Example failure:
 ```bash
 ‼ sp-validator cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of sp-validator webhook
+cert is approaching. In order to address this
+problem without incurring downtime, you can follow the process outlined in
+[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
+
+### √ policy-validator webhook has valid cert {#l5d-policy-validator-webhook-cert-valid}
+
+Example failure:
+
+```bash
+× policy-validator webhook has valid cert
+    secrets "linkerd-policy-validator-tls" not found
+    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-valid for hints
+```
+
+Ensure that the `linkerd-policy-validator-k8s-tls` secret exists and contains the
+appropriate `tls.crt` and `tls.key` data entries.
+
+```bash
+× policy-validator webhook has valid cert
+    cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-policy-validator.linkerd.svc
+    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-valid for hints
+```
+
+Here you need to make sure the certificate was issued specifically for
+`linkerd-policy-validator.linkerd.svc`.
+
+### √ policy-validator cert is valid for at least 60 days {#l5d-policy-validator-webhook-cert-not-expiring-soon}
+
+Example failure:
+
+```bash
+‼ policy-validator cert is valid for at least 60 days
+    certificate will expire on 2020-11-07T17:00:07Z
+    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-not-expiring-soon for hints
+```
+
+This warning indicates that the expiry of policy-validator webhook
 cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
@@ -857,6 +894,23 @@ linkerd-identity-54df78c479-hbh5m         2/2     Running   0          12m
 linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
 linkerd-sp-validator-59796bdccc-95rn5     2/2     Running   0          12m
 ```
+
+### √ cluster networks contains all node podCIDRs {#l5d-cluster-networks-cidr}
+
+Example failure:
+
+```bash
+× cluster networks contains all node podCIDRs
+    node has podCIDR(s) [10.244.0.0/24] which are not contained in the Linkerd clusterNetworks.
+    Try installing linkerd via --set clusterNetworks=10.244.0.0/24
+    see https://linkerd.io/2/checks/#l5d-cluster-networks-cidr for hints
+```
+
+Linkerd has a `clusterNetworks` setting which allows it to differentiate between
+intra-cluster and egress traffic. This warning indicates that the cluster has
+a podCIDR which is not included in Linkerd's `clusterNetworks`. Traffic to pods
+in this network may not be meshed properly. To remedy this, update the
+`clusterNetworks` setting to include all pod networks in the cluster.
 
 ### √ can initialize the client {#l5d-api-control-client}
 
@@ -981,6 +1035,26 @@ Example failures:
 
 See the page on [Upgrading Linkerd](../../upgrade/).
 
+## The "linkerd-control-plane-proxy" checks {#linkerd-control-plane-proxy}
+
+### √ control plane proxies are healthy {#l5d-cp-proxy-healthy}
+
+This error indicates that the proxies running in the Linkerd control plane are
+not healthy. Ensure that Linkerd has been installed with all of the correct
+setting or re-install Linkerd as necessary.
+
+### √ control plane proxies are up-to-date {#l5d-cp-proxy-version}
+
+This warning indicates the proxies running in the Linkerd control plane are
+running an old version.  We recommend downloading the latest Linkerd release
+and [Upgrading Linkerd](../../upgrade/).
+
+### √ control plane proxies and cli versions match {#l5d-cp-proxy-cli-version}
+
+This warning indicates that the proxies running in the Linkerd control plane are
+running a different version from the Linkerd CLI. We recommend keeping this
+versions in sync by updating either the CLI or the control plane as necessary.
+
 ## The "linkerd-data-plane" checks {#l5d-data-plane}
 
 These checks only run when the `--proxy` flag is set. This flag is intended for
@@ -1103,6 +1177,26 @@ Example failure:
 
 `mirror.linkerd.io/exported` should
 be a label in order to take effect.
+
+### √ opaque ports are properly annotated {#linkerd-opaque-ports-definition}
+
+Example failure:
+
+```bash
+× opaque ports are properly annotated
+        * service emoji-svc targets the opaque port 8080 through 8080; add 8080 to its config.linkerd.io/opaque-ports annotation
+    see https://linkerd.io/2/checks/#linkerd-opaque-ports-definition for hints
+```
+
+If a Pod marks a port as opaque by using the `config.linkerd.io/opaque-ports`
+annotation, then any Service which targets that port must also use the
+`config.linkerd.io/opaque-ports` annotation to mark that port as opaque. Having
+a port marked as opaque on the Pod but not the Service (or vice versa) can
+cause inconsistent behavior depending on if traffic is sent to the Pod directly
+(for example with a headless Service) or through a ClusterIP Service.  This
+error can be remedied by adding the `config.linkerd.io/opaque-ports` annotation
+to both the Pod and Service.  See
+[Protocol Detection](../../features/protocol-detection/) for more information.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
