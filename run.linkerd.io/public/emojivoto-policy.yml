@@ -1,5 +1,5 @@
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -16,7 +16,7 @@ spec:
   port: grpc
   proxyProtocol: gRPC
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -33,7 +33,7 @@ spec:
         values: [emoji-svc, web-svc, voting-svc]
   proxyProtocol: HTTP/1
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
@@ -48,7 +48,7 @@ spec:
     # allow any kind of prometheus scrapes i.e meshed and unmeshed
     unauthenticated: true
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -63,7 +63,7 @@ spec:
   port: grpc
   proxyProtocol: gRPC
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
@@ -83,7 +83,7 @@ spec:
       serviceAccounts:
         - name: web
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -99,7 +99,7 @@ spec:
   port: http
   proxyProtocol: HTTP/1
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
