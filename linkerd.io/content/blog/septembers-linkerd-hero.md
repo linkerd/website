@@ -42,4 +42,6 @@ Who is your Linkerd Hero?
 [Submit your nomination for next month's hero here](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform?usp=sf_link)!
 
 Thank you for participating for those who nominated someone, and remember
-to join our next community meeting on Thursday, October 28 at 9 am PT!
+to
+[join our next community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-october-linkerd-online-community-meetup/)
+on Thursday, October 28 at 9 am PT!
