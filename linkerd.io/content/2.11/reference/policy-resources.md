@@ -89,7 +89,7 @@ A ServerAuthorization spec must contain the following top level fields:
 | `server`| a [server](#server) identifies servers in the same namespace for which this authorization applies. |
 {{< /table >}}
 
-### server
+### Server
 
 A `Server` object must contain _exactly one_ of the following fields:
 
