@@ -72,8 +72,8 @@ which configuration you need to apply.
   * Yes: no configuration required.
   * No: is the destination on the cluster?
     * Yes: is the port in Linkerd's default list of opaque ports?
-       * Yes: no configuration required.
-       * No: mark port(s) as opaque.
+      * Yes: no configuration required.
+      * No: mark port(s) as opaque.
     * No: mark port(s) as skip.
 
 ## Marking a port as opaque

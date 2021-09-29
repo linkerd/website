@@ -43,7 +43,8 @@ namespace, workload, and pod level, and will determine the default traffic
 policy at that point in the hierarchy. Valid default policies include:
 
 - `all-unauthenticated`: inbound proxies allow all connections
-- `all-authenticated`: inbound proxies allow only mTLS connections from other meshed pods.
+- `all-authenticated`: inbound proxies allow only mTLS connections from other
+  meshed pods.
 - `deny` inbound proxies deny all connections that are not explicitly
   authorized.
 
@@ -94,7 +95,7 @@ existing TCP connections.
 
 ### Examples
 
-See [emojivoto-policy.yml](https://github.com/linkerd/website/blob/main/run.linkerd.io/public/emojivoto-policy.yml) for an example set of policy definitions for the
-[Emojivoto sample application](/getting-started/).
-
-
+See
+[emojivoto-policy.yml](https://github.com/linkerd/website/blob/main/run.linkerd.io/public/emojivoto-policy.yml)
+for an example set of policy definitions for the [Emojivoto sample
+application](/getting-started/).
