@@ -1,5 +1,5 @@
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/part-of: emojivoto
     app.kubernetes.io/name: emoji
     app.kubernetes.io/version: v11
+    emojivoto/api: internal-grpc
 spec:
   podSelector:
     matchLabels:
@@ -15,25 +16,7 @@ spec:
   port: grpc
   proxyProtocol: gRPC
 ---
-apiVersion: policy.linkerd.io/v1alpha1
-kind: ServerAuthorization
-metadata:
-  namespace: emojivoto
-  name: emoji-grpc
-  labels:
-    app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/name: emoji
-    app.kubernetes.io/version: v11
-spec:
-  # Allow all authenticated clients to access the (read-only) emoji service.
-  server:
-    name: emoji-grpc
-  client:
-    meshTLS:
-      identities:
-        - "*.emojivoto.serviceaccount.identity.linkerd.cluster.local"
----
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -45,10 +28,12 @@ spec:
   port: prom
   podSelector:
     matchExpressions:
-      - {key: app, operator: In, values: [emoji-svc, web-svc, voting-svc]}
+      - key: app
+        operator: In
+        values: [emoji-svc, web-svc, voting-svc]
   proxyProtocol: HTTP/1
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
@@ -63,13 +48,14 @@ spec:
     # allow any kind of prometheus scrapes i.e meshed and unmeshed
     unauthenticated: true
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
   name: voting-grpc
   labels:
     app: voting-svc
+    emojivoto/api: internal-grpc
 spec:
   podSelector:
     matchLabels:
@@ -77,25 +63,27 @@ spec:
   port: grpc
   proxyProtocol: gRPC
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
-  name: voting-grpc
+  name: internal-grpc
   labels:
     app.kubernetes.io/part-of: emojivoto
-    app.kubernetes.io/name: voting
     app.kubernetes.io/version: v11
 spec:
+  # Matches all servers marked as `internal-grpc` (emoji and voting) and allows authenticated
+  # requests only from the web service.
   server:
-    name: voting-grpc
-  # The voting service only allows requests from the web service.
+    selector:
+      matchLabels:
+        emojivoto/api: internal-grpc
   client:
     meshTLS:
       serviceAccounts:
         - name: web
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
   namespace: emojivoto
@@ -111,7 +99,7 @@ spec:
   port: http
   proxyProtocol: HTTP/1
 ---
-apiVersion: policy.linkerd.io/v1alpha1
+apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
   namespace: emojivoto
