@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
 - [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
 - [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
@@ -188,6 +189,70 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.11.0
+
+The upgrade procedure for `stable-2.11.0` is the same as before. The new
+version comes with fixes, improvements and new features, most notably support
+for inbound policies. When upgrading, it is worth noting that the control plane
+has been changed to have a smaller footprint. The `controller` pod has been
+removed; consequently, all configuration options that previously applied to it
+are no longer valid (e.g `publicAPIResources` and all of its nested fields).
+
+Moreover, the destination pod will now have an additional `policy` container
+that runs the new policy controller. New healthchecks have been added to the
+CLI to help troubleshoot the state of Linkerd. If you are upgrading from
+Linkerd 2.10.0, 2.10.1, or 2.10.2, there are some additional breaking changes
+in the 2.11.0 release that may affect you.
+
+### Routing breaking changes
+
+There are two breaking changes to be aware of when it comes to how traffic is
+routed.
+
+First, when the proxy runs in ingress mode (`config.linkerd.io/inject:
+ingress`), non-HTTP outbound traffic is no longer supported. To get around
+this, you will need to use the `config.linkerd.io/skip-outbound-ports`
+annotation on your ingress controller pod.
+
+Second, the proxy will no longer forward traffic to ports bound on localhost.
+Previously, it was possible to have the proxy forward traffic to a service
+bound only on the loopback interface (such as `localhost:8080`). Typically,
+when a service listens only on localhost, it should not be accessible from the
+outside world. In order to prevent ports from being accidentally exposed to
+other pods in the cluster, the proxy will no longer forward to localhost, it
+will instead use the original address. This change should be reflected in your
+service configuration.
+
+### Multicluster
+
+In the multicluster extension, the nginx gateway deployment image has been
+replaced with a pause container. If you are currently running Linkerd 2.10.x
+together with the multicluster extension, in addition to upgrading the control
+plane and extension itself, you will also need to re-link all clusters. The
+gateway probes now target a port on the proxy instead of the now removed nginx
+container.
+
+Multicluster now supports `NodePort` type services for the gateway. To support
+this change, the configuration options in the Helm values file are now grouped
+under the `gateway` field. If you have installed the extension with other
+options than the provided defaults, you will need to update your `values.yaml`
+file to reflect this change in field grouping.
+
+### Other changes
+
+Besides the breaking changes described above, there are other minor changes to
+be aware of when upgrading from `stable-2.10.x`:
+
+- `PodSecurityPolicy` (PSP) resources are no longer installed by default as a
+ result of their deprecation in Kubernetes v1.21 and above. The control plane
+ and core extensions will now be shipped without PSPs; they can be enabled
+ through a new install option `enablePSP: true`.
+- `tcp_connection_duration_ms` metric has been removed.
+- Opaque ports changes: `443` is no longer included in the default opaque ports
+ list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
+ ElasticSearch respectively (all server speak first protocols) have been added
+ to the default opaque ports list.
 
 ## Upgrade notice: stable-2.10.0
 
