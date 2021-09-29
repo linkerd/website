@@ -192,18 +192,15 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.11.0
 
-The upgrade procedure for `stable-2.11.0` is the same as before. The new
-version comes with fixes, improvements and new features, most notably support
-for inbound policies. When upgrading, it is worth noting that the control plane
+When upgrading, it is worth noting that the control plane
 has been changed to have a smaller footprint. The `controller` pod has been
 removed; consequently, all configuration options that previously applied to it
 are no longer valid (e.g `publicAPIResources` and all of its nested fields).
 
 Moreover, the destination pod will now have an additional `policy` container
 that runs the new policy controller. New healthchecks have been added to the
-CLI to help troubleshoot the state of Linkerd. If you are upgrading from
-Linkerd 2.10.0, 2.10.1, or 2.10.2, there are some additional breaking changes
-in the 2.11.0 release that may affect you.
+CLI to help troubleshoot the state of Linkerd. There are some additional
+breaking changes in the 2.11.0 release that may affect you.
 
 ### Routing breaking changes
 
@@ -211,9 +208,11 @@ There are two breaking changes to be aware of when it comes to how traffic is
 routed.
 
 First, when the proxy runs in ingress mode (`config.linkerd.io/inject:
-ingress`), non-HTTP outbound traffic is no longer supported. To get around
-this, you will need to use the `config.linkerd.io/skip-outbound-ports`
-annotation on your ingress controller pod.
+ingress`), non-HTTP traffic to meshed pods is no longer supported. To get
+around this, you will need to use the `config.linkerd.io/skip-outbound-ports`
+annotation on your ingress controller pod. In many cases, ingress mode is no
+longer necessary. Before upgrading, it may be worth revisiting [how to use
+ingress](../using-ingress/) with Linkerd.
 
 Second, the proxy will no longer forward traffic to ports bound on localhost.
 Previously, it was possible to have the proxy forward traffic to a service
@@ -226,12 +225,13 @@ service configuration.
 
 ### Multicluster
 
-In the multicluster extension, the nginx gateway deployment image has been
-replaced with a pause container. If you are currently running Linkerd 2.10.x
-together with the multicluster extension, in addition to upgrading the control
-plane and extension itself, you will also need to re-link all clusters. The
-gateway probes now target a port on the proxy instead of the now removed nginx
-container.
+The gateway component has been changed to use a `pause` container instead of
+`nginx`. This change should reduce the footprint of the extension; the proxy
+routes traffic internally and does not need to rely on `nginx` to receive or
+forward traffic. While this will not cause any downtime when upgrading
+multicluster, it does affect probing. `linkerd multicluster gateways` will
+falsely advertise the target cluster gateway as being down until the clusters
+are re-linked.
 
 Multicluster now supports `NodePort` type services for the gateway. To support
 this change, the configuration options in the Helm values file are now grouped
@@ -252,7 +252,10 @@ be aware of when upgrading from `stable-2.10.x`:
 - Opaque ports changes: `443` is no longer included in the default opaque ports
  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
  ElasticSearch respectively (all server speak first protocols) have been added
- to the default opaque ports list.
+ to the default opaque ports list. The default ignore inbound ports list has
+ also been changed to include ports `4567` and `4568`. Note that when
+ upgrading, any customization done to `proxy.opaquePorts` or
+ `proxyInit.ignoreInboundPorts` will be overridden.
 
 ## Upgrade notice: stable-2.10.0
 
