@@ -10,64 +10,71 @@ aliases = [
 Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling.
 
-In most cases, Linkerd can do this without configuration. To do this, Linkerd
-performs *protocol detection* to determine whether traffic is HTTP or HTTP/2
-(including gRPC). If Linkerd detects that a connection is HTTP or HTTP/2,
-Linkerd will automatically provide HTTP-level metrics and routing.
+In most cases, Linkerd can do this without configuration. To accomplish this,
+Linkerd performs *protocol detection* to determine whether traffic is HTTP or
+HTTP/2 (including gRPC). If Linkerd detects that a connection is HTTP or
+HTTP/2, Linkerd automatically provides HTTP-level metrics and routing.
 
 If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2,
 Linkerd will proxy the connection as a plain TCP connection, applying
 [mTLS](../automatic-mtls/) and providing byte-level metrics as usual.
 
-{{< note >}}
-Client-initiated HTTPS will be treated as TCP, not as HTTP, as Linkerd will not
-be able to observe the HTTP transactions on the connection.
-{{< /note >}}
+(Note that HTTPS calls to or from meshed pods are treated as TCP, not as HTTP.
+Because the client initiates the TLS connection, Linkerd is not be able to
+decrypt the connection to observe the HTTP transactions.)
 
 ## Configuring protocol detection
 
-In some cases, Linkerd's protocol detection cannot function because it is not
-provided with enough client data. This can result in a 10-second delay in
-creating the connection as the protocol detection code waits for more data.
-This situation is often encountered when using "server-speaks-first" protocols,
-or protocols where the server sends data before the client does, and can be
-avoided by supplying Linkerd with some additional configuration.
-
 {{< note >}}
-Regardless of the underlying protocol, client-initiated TLS connections do not
-require any additional configuration, as TLS itself is a client-speaks-first
-protocol.
+If you are experiencing 10-second delays when establishing connections, you are
+likely running into a protocol detection timeout. This section will help you
+understand how to fix this.
 {{< /note >}}
 
+In some cases, Linkerd's protocol detection will time out because it doesn't
+see any bytes from the client. This situation is commonly encountered when
+using "server-speaks-first" protocols where the server sends data before the
+client does, such as SMTP, or protocols that proactively establish connections
+without sending data, such as Memcache. In this case, the connection will
+proceed as a TCP connection after a 10-second protocol detection delay.
+
+To avoid this delay, you will need to provide some configuration for Linkerd.
 There are two basic mechanisms for configuring protocol detection: _opaque
-ports_ and _skip ports_. Marking a port as _opaque_ instructs Linkerd to proxy
-the connection as a TCP stream and not to attempt protocol detection. Marking a
-port as _skip_ bypasses the proxy entirely. Opaque ports are generally
-preferred (as Linkerd can provide mTLS, TCP-level metrics, etc), but crucially,
-opaque ports can only be used for services inside the cluster.
+ports_ and _skip ports_. Marking a port as _opaque_ instructs Linkerd to skip
+protocol detection and immediately proxy the connection as a TCP stream;
+marking a port as a _skip port_ bypasses the proxy entirely. Opaque ports are
+generally preferred (as Linkerd can provide mTLS, TCP-level metrics, etc), but
+can only be used for services inside the cluster.
 
-By default, Linkerd automatically marks some ports as opaque, including the
-default ports for SMTP, MySQL, PostgresQL, and Memcache.  Services that speak
-those protocols, use the default ports, and are inside the cluster do not need
-further configuration.
+By default, Linkerd automatically marks the ports for some server-speaks-first
+protocol as opaque. Services that speak those protocols over the default ports
+to destinations inside the cluster do not need further configuration.
+Linkerd's default list of opaque ports in the 2.10 release is 25 (SMTP), 443
+(client-initiated TLS), 587 (SMTP), 3306 (MySQL), 5432 (Postgres), and 11211
+(Memcache). Note that this may change in future releases.
 
-The following table summarizes some common server-speaks-first protocols and
-the configuration necessary to handle them. The "on-cluster config" column
-refers to the configuration when the destination is *on* the same cluster; the
-"off-cluster config" to when the destination is external to the cluster.
+The following table contains common protocols that may require configuration.
 
-| Protocol        | Default port(s) | On-cluster config | Off-cluster config |
-|-----------------|-----------------|-------------------|--------------------|
-| SMTP            | 25, 587         | none\*            | skip ports         |
-| MySQL           | 3306            | none\*            | skip ports         |
-| MySQL with Galera replication | 3306, 4444, 4567, 4568 | none\* | skip ports       |
-| PostgreSQL      | 5432            | none\*            | skip ports         |
-| Redis           | 6379            | none\*     | skip ports         |
-| ElasticSearch   | 9300            | none\*     | skip ports         |
-| Memcache        | 11211           | none\*            | skip ports         |
+| Protocol        | Default port(s) | Notes |
+|-----------------|-----------------|-------|
+| SMTP            | 25, 587         |       |
+| MySQL           | 3306            |       |
+| MySQL with Galera | 3306, 4444, 4567, 4568 | Ports 4444, 4567, and 4568 are not in Linkerd's default set of opaque ports |
+| PostgreSQL      | 5432            |       |
+| Redis           | 6379            |       |
+| ElasticSearch   | 9300            | Not in Linkerd's default set of opaque ports |
+| Memcache        | 11211           |       |
 
-_\* No configuration is required if the standard port is used. If a
-non-standard port is used, you must mark the port as opaque._
+If you are using one of those protocols, follow this decision tree to determine
+which configuration you need to apply.
+
+* Is the protocol wrapped in TLS?
+  * Yes: no configuration required.
+  * No: is the destination on the cluster?
+    * Yes: is the port in Linkerd's default list of opaque ports?
+       * Yes: no configuration required.
+       * No: mark port(s) as opaque.
+    * No: mark port(s) as skip.
 
 ## Marking a port as opaque
 
@@ -84,8 +91,7 @@ workloads in that namespace.
 
 {{< note >}}
 Since this annotation informs the behavior of meshed _clients_, it can be
-applied to services that use server-speaks-first protocols even if the service
-itself is not meshed.
+applied to unmeshed services as well as meshed services.
 {{< /note >}}
 
 Setting the opaque-ports annotation can be done by using the `--opaque-ports`
@@ -104,7 +110,7 @@ Multiple ports can be provided as a comma-delimited string. The values you
 provide will replace, not augment, the default list of opaque ports.
 {{< /note >}}
 
-## Skipping the proxy
+## Marking a port as skip
 
 Sometimes it is necessary to bypass the proxy altogether. For example, when
 connecting to a server-speaks-first destination that is outside of the cluster,
