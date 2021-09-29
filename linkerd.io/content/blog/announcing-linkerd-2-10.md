@@ -1,147 +1,179 @@
 ---
-title: 'Announcing Linkerd 2.11: Policy, gRPC retries, performance improvements, and more!'
+title: 'Announcing Linkerd 2.10: Extensions, Opaque Ports, Multi-cluster TCP, and more!'
 author: 'william'
-date: 2021-09-30T00:00:00+00:00
-thumbnail: /images/tim-evans-Uf-c4u1usFQ-unsplash.jpg
+date: 2021-03-11T00:00:00+00:00
+thumbnail: /uploads/content-pixie-NzO5y3b2R2M-unsplash.jpg
 draft: false
 featured: false
-slug: announcing-linkerd-2.11
+slug: announcing-linkerd-2.10
 tags: [Linkerd]
 ---
 
-![Lots of lock boxes at a bank](/images/tim-evans-Uf-c4u1usFQ-unsplash.jpg)
+![lego dinosaurs](/uploads/content-pixie-NzO5y3b2R2M-unsplash.jpg)
 
-Today we're very happy to announce the release of Linkerd 2.11. This release
-marks a major step forward for Linkerd by introducing _policy_, a long-awaited
-feature that allows users to control which services are allowed to connect and
-send requests to each other. This release also introduces a host of
-improvements and performance enhancements, including retries for gRPC calls, a
-general fix for container startup ordering issues, an even smaller proxy, an
-even smaller control plane, and lots more.
+We're very happy to announce the release of Linkerd 2.10, the best Linkerd
+version yet! This release adds pluggable _extensions_ to Linkerd and
+dramatically reduces the default control plane size by moving non-critical
+components into opt-in extensions. The 2.10 release also extends Linkerd's
+seamless, secure multi-cluster support to all TCP connections, not just HTTP.
+Finally, Linkerd 2.10 adds _opaque ports_ as a way of extending Linkerd's
+coverage to certain situations that are incompatible with protocol detection.
 
-If you're running Linkerd today and are curious about the upgrade process,
-Buoyant will be hosting a [free _Upgrading to Linkerd 2.11_
-workshop](https://buoyant.io/register/upgrading-to-linkerd-2-11-workshop) on
-Thursday, Oct 23rd, 9am PT.
+This release includes a lot of hard work from over 50 contributors. A special
+thank you to [Lutz Behnke](https://github.com/cypherfox), [Björn
+Wenzel](https://github.com/DaspawnW), [Filip
+Petkovski](https://github.com/fpetkovski), [Simon
+Weald](https://github.com/glitchcrab),
+[GMarkfjard](https://github.com/GMarkfjard), [hodbn](https://github.com/hodbn),
+[Hu Shuai](https://github.com/hs0210), [Jimil
+Desai](https://github.com/jimil749), [jiraguha](https://github.com/jiraguha),
+[Joakim Roubert](https://github.com/joakimr-axis), [Josh
+Soref](https://github.com/jsoref), [Kelly
+Campbell](https://github.com/kellycampbell), [Matei
+David](https://github.com/mateiidavid), [Mayank
+Shah](https://github.com/mayankshah1607), [Max
+Goltzsche](https://github.com/mgoltzsche), [Mitch
+Hulscher](https://github.com/mhulscher), [Eugene
+Formanenko](https://github.com/mo4islona), [Nathan J
+Mehl](https://github.com/n-oden), [Nicolas
+Lamirault](https://github.com/nlamirault), [Oleh
+Ozimok](https://github.com/oleh-ozimok), [Piyush
+Singariya](https://github.com/piyushsingariya), [Naga Venkata Pradeep
+Namburi](https://github.com/pradeepnnv),
+[rish-onesignal](https://github.com/rish-onesignal), [Shai
+Katz](https://github.com/shaikatz), [Takumi Sue](https://github.com/mikutas),
+[Raphael Taylor-Davies](https://github.com/tustvold), and [Yashvardhan
+Kukreja](https://github.com/yashvardhan-kukreja) for all your hard work!
 
-This release includes a lot of hard work from over XX contributors. A special
-thank you to X, Y, and Z for all your hard work!
+## Extensions
 
-Read on to learn more!
+In Linkerd 2.10, the Linkerd control plane is now modular and extensible with
+the introduction of _extensions_. Extensions are opt-in software components
+that run as part of the Linkerd control plane. The default control plane in
+2.10 now contains just the bare minimum necessary to run, with Prometheus,
+Grafana, dashboard, and other non-critical telemetry components packaged as a
+`viz` extension. This change drops the default Linkerd control plane down to
+**200mb** at startup, from **~500mb** in Linkerd 2.9!
 
-## Authorization policy
+The 2.10 release ships three extensions by default:
 
-Linkerd's new server authorization policy feature gives you fine-grained
-control of which services are allowed to communicate with each other. These
-policies are built directly on the secure service identities provided by
-Linkerd's [automatic mTLS](/2/features/automatic-mtls/) feature. In keeping
-with Linkerd's design principles, authorization policies are expressed in a
-composable, Kubernetes-native way that requires a minimum of configuration but
-that can express a wide range of behaviors.
+* **viz**, which contains the on-cluster metrics stack: Prometheus, Grafana,
+  the dashboard, etc.;
+* **multicluster**, which contains the machinery for cross-cluster
+  communication; and
+* **jaeger**, which contains the Jaeger distributed tracing collector and UI.
 
-To accomplish this, Linkerd 2.11 introduces a set of default authorization
-policies that can be applied at the cluster, namespace, or pod level simply by
-setting a Kubernetes annotation, including:
+The move to extensions serves two purposes: first, it allows Linkerd adopters
+to choose exactly which bits and pieces of Linkerd they want to install on
+their cluster—a common request, especially for users who already have an
+off-cluster metrics pipeline.
 
-* `all-authenticated` (only allow requests from mTLS-validated services);
-* `all-unauthenticated` (allow all requests)
-* `deny` (deny all requests)
-* ... and more.
+Second, extensions allow the Linkerd community to build Linkerd-specific
+operators and controllers without having to modify the core Linkerd CLI.
+Extensions can come from anywhere, and because these extensions fit into
+Linkerd's CLI, they "feel" just like the rest of Linkerd.
 
-Linkerd 2.11 additionally introduces two new CRDs, `Server` and
-`ServerAuthorization`, which together allow fine-grained policies to be applied
-across arbitrary sets of pods. For example, a Server can select across all
-admin ports on all pods in a namespace, and a ServerAuthorization can allow
-health check connection from kubelet, or mTLS connections for metrics
-collection.
+Read more in the full [blog post on Linkerd
+Extensions](/2021/03/01/linkerd-2.10-and-extensions/).
 
-Together, these annotations and CRDs allow you to easily specify a wide range
-of policies for your cluster, from "everything is allowed" to "port 8080 only
-allows mTLS from services with the Foo Service Account" to more. (See the [full policy docs &raquo;](/2/features/authorization-policy/))
+## Seamless, secure multi-cluster for all TCP connections
 
-{{< fig
-    alt="Linkerd policy, as seen from Buoyant Cloud"
-    src="/images/buoyant-cloud-policy-mtls.png"
-    title="Linkerd policy, as seen by [Buoyant Cloud](https://buoyant.io/cloud)" >}}
+Multi-cluster support, [introduced in Linkerd
+2.8](/2020/06/09/announcing-linkerd-2.8/), allows Linkerd to connect Kubernetes
+services across cluster boundaries in a way that's secure, fully transparent to
+the application, and independent of the topology of the underlying network.
+However, this functionality was restricted to HTTP connections only—until now.
+With Linkerd 2.10, [Linkerd's multi-cluster
+feature](/2.10/features/multicluster/) now extends to all TCP
+connections, with the same guarantees of security and transparency that Linkerd
+provides for pod-to-pod communication.
 
-## Retries for HTTP requests with bodies
+Want to try it? Just install the `multicluster` extension!
 
-Retrying failed requests is a critical part of Linkerd's ability to improve the
-reliability of Kubernetes applications. Until now, for reasons of performance,
-Linkerd has only allowed retries for body-less requests, e.g. HTTP GETs. In
-2.11, Linkerd can also retry failed requests with bodies, including gRPC
-requests, with a maximum body size of 64KB.
+## Opaque ports
 
-## Container startup ordering workaround
+The 2.10 release adds a new _opaque ports_ feature that extends Linkerd's
+ability to handle certain types of traffic. An opaque port is simply one that
+Linkerd will proxy _without_ performing protocol detection. While protocol
+detection is key to much of Linkerd's simplicity, certain types of traffic are
+incompatible with it, including, most commonly, the use of non-TLS'd MySQL
+connections. In Linkerd 2.9 and earlier, these situations were handled by
+simply skipping them at the proxy level. In Linkerd 2.10, users can explicitly
+mark these connections as opaque ports, and Linkerd will proxy them without
+attempting protocol detection. This allows Linkerd to apply features such as
+transparent mTLS and instrumentation in situations where it was previously
+unable to handle.
 
-Linkerd 2.11 now ensures, by default, that the `linkerd2-proxy` container is
-ready before any other containers in the pod are initialized. This is a
-workaround for Kubernetes's much-lamented lack of control over container
-startup ordering, and addresses a large class of tricky race conditions where
-application containers attempt to connect before the proxy is ready.
-
-## Even smaller, faster, and lighter
-
-As usual, Linkerd 2.11 continues our goal of keeping Linkerd the [lightest,
-fastest possible service mesh for
-Kubernetes](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/).
-Relevant changes in 2.11 include:
-
-* The control plane is down to just 3 deployments.
-* Linkerd's data plane "micro-proxy" is even smaller and faster thanks to the
-  highly active Rust networking ecosystem.
-* SMI features have been mostly removed from the core control plane, and moved
-  to an extension.
-* Linkerd images now use minimal "distroless" base images.
+Read more in the full blog post on [opaque ports in
+Linkerd](/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/).
 
 ## And lots more!
 
-Linkerd 2.11 also has a tremendous list of other improvements, performance
+Linkerd 2.10 also has a tremendous list of other improvements, performance
 enhancements, and bug fixes, including:
 
-* New CLI tab completion for Kubernetes resources.
-* All `config.linkerd.io` annotations can now be set on `Namespace` resources
-  and they will serve as defaults for pods created in that namespace.
-* A new `linkerd check -o short` command with, you know, short output.
-* A new _Extensions_ page in the dashboard
-* [Fuzz testing](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/)!
-* The proxy now sets informational `l5d-client-id` and `l5d-proxy-error`
-  headers
-* Lots of Helm configurability improvements, `linkerd check` improvements, 
-* Experimental support for `StatefulSets` with `linkerd-multicluster`
-* And lots more!
+* Updated the proxy to use TLS version 1.3 (support for TLS 1.2 remains enabled
+  for compatibility with prior proxy versions)
+* Fixed an issue that could cause the inbound proxy to fail meshed HTTP/1
+  requests from older proxies (from the stable-2.8.x vintage)
+* Added a new /shutdown admin endpoint that may only be accessed over the
+  loopback network allowing batch jobs to gracefully terminate the proxy on
+  completion
+* Added PodDisruptionBudgets to the control plane components so that they
+  cannot be all terminated at the same time during disruptions
+* Fixed an issue where the proxy-injector, sp-validator, and tap APIServer did
+  not refresh their certs automatically when provided externally—like through
+  cert-manager
+* Introduced the `linkerd identity` command, used to fetch the TLS certificates
+  for injected pods
+* Added a `linkerd viz list` command to list pods with tap enabled
+* Added support for multicluster gateways of types other than LoadBalancer
+* Moved Docker image hosting to the `cr.l5d.io` registry
+* And lots, lots more.
 
 See the [full release
-notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.11.0) for
+notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.10.0) for
 details.
 
 ## What's next for Linkerd?
 
-2021 has been a incredible year for Linkerd. Recently, [Linkerd became the only
-CNCF graduated service
-mesh](https://linkerd.io/2021/07/28/announcing-cncf-graduation/), joining
-projects like Kubernetes, Prometheus, and Envoy at the foundation's highest
-level of maturity.  Linkerd's benchmarks continue to show that it is
-[dramatically faster and lighter than other service
-meshes](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/). The
-Linkerd community also recently introduced the [Linkerd Ambassador
-program](https://linkerd.io/2021/08/05/announcing-the-linkerd-ambassador-program/),
-recognizing those community members who demonstrate passion, engagement, and a
-commitment to sharing Linkerd with the border community, and organizations
-around the world are adopting Linkerd, often while [coming
-from](https://nais.io/blog/posts/2021/05/changing-service-mesh.html) [other
-meshes](https://blog.polymatic.systems/service-mesh-wars-goodbye-istio-b047d9e533c7).
+The momentum behind Linkerd continues to astound us. Companies like **Elkjøp**
+(see the case study---"[How a $4 billion retailer built an enterprise-ready
+Kubernetes platform powered by
+Linkerd](https://www.cncf.io/blog/2021/02/19/how-a-4-billion-retailer-built-an-enterprise-ready-kubernetes-platform-powered-by-linkerd/)"),
+**Giant Swarm**, **PlexTrac**, and **Mythical Games** have joined **HP**,
+**H-E-B**, **Microsoft**, **Clover Health**, **Mercedes Benz**, **Subspace**,
+and many more as recent adopters of Linkerd. The newly-formed [Linkerd Steering
+Committee](/2021/01/28/announcing-the-linkerd-steering-committee/),
+comprising production users who operate Linkerd at scale, is actively
+delivering feedback and guidance to maintainers. Finally, Linkerd was named
+[the Best Open Source DevOps Tool of
+2020](https://devops.com/buoyant-wins-tech-ascension-award-recognizing-linkerd-service-mesh-as-best-open-source-devops-tool-of-2020/).
 
-In the next few Linkerd releases, we'll be working on additional types of
-policy, including client-side policy, including circuit breaking), mesh
-expansion to allow the data plane to run outside of Kubernetes, and for the
-rest of the [Linkerd
-roadmap](https://github.com/linkerd/linkerd2/blob/main/ROADMAP.md). If you have
-feature requests, of course, we'd love to hear them!
+But we're just getting started. In our next stable release, we'll focus on
+bringing _policy_ to Linkerd, building on the foundation of mTLS to further
+enhance the security posture of Kubernetes applications everywhere.
+
+The service mesh doesn't have to be complex, and security doesn't have to be
+high-friction. The future of Linkerd is built around these beliefs, and we hope
+they resonate with you as well.
+
+## Try it today!
+
+Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
+our [weekly edge releases](/edge/) will already have seen these features
+in action. Either way, you can download the stable 2.10 release by running:
+
+`curl https://run.linkerd.io/install | sh`
+
+Using Helm? See our [guide to installing Linkerd with
+Helm](/2.10/tasks/install-helm/). Upgrading from an earlier release? We've got
+you covered: see our [Linkerd upgrade guide](/2.10/tasks/upgrade/) for how to
+use the `linkerd upgrade` command.
 
 ## Linkerd is for everyone
 
-Linkerd is a graduated project of the [Cloud Native Computing
+Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
 governance.](/2019/10/03/linkerds-commitment-to-open-governance/) If you have
 feature requests, questions, or comments, we'd love to have you join our
@@ -149,8 +181,3 @@ rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](/community/get-involved/). Come and join the fun!
-
-## Photo credit
-
-Photo by [Tim Evans](https://unsplash.com/@tjevans?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/bank-vault?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-  
