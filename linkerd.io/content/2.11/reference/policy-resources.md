@@ -86,7 +86,7 @@ A ServerAuthorization spec must contain the following top level fields:
 | field| value |
 |------|-------|
 | `client`| A [client](#client) describes clients authorized to access a server. |
-| `server`| a [server](#server) identifies servers in the same namespace for which this authorization applies. |
+| `server`| A [server](#server) identifies `Servers` in the same namespace for which this authorization applies. |
 {{< /table >}}
 
 ### Server
