@@ -13,26 +13,26 @@ applications.
 
 ### Spec
 
-A server spec must contain the following top level fields:
+A `Server` spec must contain the following top level fields:
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `podSelector`| a [podSelector](#podSelector) selects pods in the same namespace. |
+| `podSelector`| A [podSelector](#podSelector) selects pods in the same namespace. |
 | `port`| a port name or number. Must exist in a pod spec. |
-| `proxyProtocol`| Configures protocol discovery for inbound connections Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set |
+| `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
 {{< /table >}}
 
 ### podSelector
 
-This is the [same labelSelector field in Kuberentes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
-All the pods that are part of this selector will be part of the server group.
+This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
+All the pods that are part of this selector will be part of the `Server` group.
 A podSelector object must contain _exactly one_ of the following fields:
 
 {{< table >}}
 | field | value |
 |-------|-------|
-| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. See [kubernetes reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector) for more details |
+| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector) for more details. |
 | `matchLabels` | matchLabels is a map of {key,value} pairs |
 {{< /table >}}
 
@@ -76,7 +76,7 @@ spec:
 ## ServerAuthorization
 
 A [ServerAuthorization](#ServerAuthorization) provides a way to set client
-restrictions on a single or a group of [Server](#Server)s.
+restrictions on one or more [`Server`](#Server)s.
 
 ### Spec
 
@@ -85,13 +85,13 @@ A ServerAuthorization spec must contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `client`| a [client](#client) describes clients authorized to access a server. |
+| `client`| A [client](#client) describes clients authorized to access a server. |
 | `server`| a [server](#server) identifies servers in the same namespace for which this authorization applies. |
 {{< /table >}}
 
 ### server
 
-A `server` object must contain _exactly one_ of the following fields:
+A `Server` object must contain _exactly one_ of the following fields:
 
 {{< table >}}
 | field| value |
@@ -134,7 +134,7 @@ Optionally, It can also contain the `networks` field:
 
 ### meshTLS
 
-A `meshTLs` object must contain _exactly one_ of the following fields:
+A `meshTLS` object must contain _exactly one_ of the following fields:
 
 {{< table >}}
 | field| value |
@@ -158,7 +158,7 @@ A serviceAccount field must contain the following top level fields:
 ### ServerAuthorization Examples
 
 A [ServerAuthorization](#ServerAuthorization) that allows meshed clients with
-`*.emojivoto.serviceaccount.identity.linkerd.cluster.local` proxy identity i.e all
+`*.emojivoto.serviceaccount.identity.linkerd.cluster.local` proxy identity i.e. all
 service accounts in the `emojivoto` namespace.
 
 ```yaml
