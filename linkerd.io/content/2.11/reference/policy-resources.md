@@ -1,5 +1,5 @@
 +++
-title = "Server and ServerAuthroization"
+title = "Server and ServerAuthorization"
 description = "Details on the specification and what is possible with policy resources."
 +++
 
