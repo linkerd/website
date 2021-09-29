@@ -78,8 +78,10 @@ health check connection from kubelet, or mTLS connections for metrics
 collection.
 
 Together, these annotations and CRDs allow you to easily specify a wide range
-of policies for your cluster, from "everything is allowed" to "port 8080 only
-allows mTLS from services with the Foo Service Account" to more. (See the [full policy docs &raquo;](/2/features/authorization-policy/))
+of policies for your cluster, from "all traffic is allowed" to "port 8080 on
+service Foo can only receive mTLS traffic from services using the Bar service
+account", to lots more. (See the [full policy docs
+&raquo;](/2/features/authorization-policy/))
 
 {{< fig
     alt="Linkerd policy, as seen from Buoyant Cloud"
@@ -126,10 +128,11 @@ enhancements, and bug fixes, including:
   and they will serve as defaults for pods created in that namespace.
 * A new `linkerd check -o short` command with, you know, short output.
 * A new _Extensions_ page in the dashboard
-* [Fuzz testing](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/)!
+* [Fuzz testing](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/) for
+  the proxy!
 * The proxy now sets informational `l5d-client-id` and `l5d-proxy-error`
   headers
-* Lots of Helm configurability improvements, `linkerd check` improvements, 
+* Lots of improvements to Helm configurability and to `linkerd check`
 * Experimental support for `StatefulSets` with `linkerd-multicluster`
 * And lots more!
 
@@ -174,5 +177,7 @@ the [mailing lists](/community/get-involved/). Come and join the fun!
 
 ## Photo credit
 
-Photo by [Tim Evans](https://unsplash.com/@tjevans?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/bank-vault?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-  
+Photo by [Tim
+Evans](https://unsplash.com/@tjevans?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+on
+[Unsplash](https://unsplash.com/s/photos/bank-vault?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
