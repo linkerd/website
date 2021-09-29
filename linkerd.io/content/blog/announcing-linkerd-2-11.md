@@ -24,10 +24,32 @@ Buoyant will be hosting a [free _Upgrading to Linkerd 2.11_
 workshop](https://buoyant.io/register/upgrading-to-linkerd-2-11-workshop) on
 Thursday, Oct 23rd, 9am PT.
 
-This release includes a lot of hard work from over XX contributors. A special
-thank you to X, Y, and Z for all your hard work!
-
-Read on to learn more!
+This release includes a lot of hard work from over 30 contributors. A special
+thank you to [Gustavo Fernandes de Carvalho](https://github.com/gusfcarvalho),
+[Oleg Vorobev](https://github.com/olegy2008), [Bart
+Peeters](https://github.com/bartpeeters), [Stepan
+Rabotkin](https://github.com/EpicStep),
+[LiuDui](https://github.com/xichengliudui), [Andrew
+Hemming](https://github.com/drewhemm), [Ujjwal
+Goyal](https://github.com/importhuman), [Knut
+Götz](https://github.com/knutgoetz), [Sanni
+Michael](https://github.com/sannimichaelse), [Brandon
+Sorgdrager](https://github.com/bsord), [Gerald
+Pape](https://github.com/ubergesundheit), [Alexey
+Kostin](https://github.com/rumanzo), [rdileep13](https://github.com/rdileep13),
+[Takumi Sue](https://github.com/mikutas), [Akshit
+Grover](https://github.com/akshitgrover), [Sanskar
+Jaiswal](https://github.com/aryan9600), [Aleksandr
+Tarasov](https://github.com/aatarasoff), [Taylor](https://github.com/skinn),
+[Miguel Ángel Pastor Olivar](https://github.com/migue),
+[wangchenglong01](https://github.com/wangchenglong01), [Josh
+Soref](https://github.com/jsoref), [Carol Chen](https://github.com/kipply),
+[Peter Smit](https://github.com/psmit), [Tarvi
+Pillessaar](https://github.com/tarvip), [James
+Roper](https://github.com/jroper), [Dominik
+Münch](https://github.com/muenchdo), [Szymon
+Gibała](https://github.com/Szymongib), and [Mitch
+Hulscher](https://github.com/mhulscher) for all your hard work!
 
 ## Authorization policy
 
