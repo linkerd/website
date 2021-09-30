@@ -195,7 +195,7 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 There are two breaking changes in the 2.11.0 release: pods in `ingress` no
 longer support non-HTTP traffic to meshed workloads; and the proxy no longer
 forwards traffic to ports that are bound only to localhost. Additionally, users
-of the multi-cluster extension will need to re-link their cluster after 
+of the multi-cluster extension will need to re-link their cluster after
 upgrading.
 
 ### Control plane changes
@@ -217,14 +217,10 @@ annotation on your ingress controller pod. In many cases, ingress mode is no
 longer necessary. Before upgrading, it may be worth revisiting [how to use
 ingress](../using-ingress/) with Linkerd.
 
-Second, the proxy will no longer forward traffic to ports bound on localhost.
-Previously, it was possible to have the proxy forward traffic to a service
-bound only on the loopback interface (such as `localhost:8080`). Typically,
-when a service listens only on localhost, it should not be accessible from the
-outside world. In order to prevent ports from being accidentally exposed to
-other pods in the cluster, the proxy will no longer forward to localhost, it
-will instead use the original address. This change should be reflected in your
-service configuration.
+Second, the proxy will no longer forward traffic to ports only bound on
+localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
+other pods should now be bound to a public interface (e.g `0.0.0.0:8080`). This
+change prevents ports from being accidentally exposed outside of the pod.
 
 ### Multicluster
 
