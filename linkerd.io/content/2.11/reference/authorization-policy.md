@@ -20,27 +20,35 @@ This field can be one of the following:
 - `deny`: all requests are denied. (Policy resources should then be created to
   allow specific communications between services).
 
-[Server](#server) and [ServerAuthorization](#serverauthorization) resources override
-the default configured policy.
+This default can be overridden by setting the annotation `config.linkerd.io/default-
+inbound-policy` on either a pod spec or its namespace.
+
+Once a [Server](#server) is configured for a pod & port, its default behavior is to _deny_
+traffic and [ServerAuthorization](#serverauthorization) resources must be created to allow
+traffic on a `Server`.
 
 ## Server
 
-A Server defines a port, selected across a set of pods, that is subject
-to traffic policy. Note that a Server can select pods across multiple workloads
-in a given namespace; for example, the admin port across every pod in the namespace.
-Note also that creating a Server object denies all communication to that port, and
-traffic will only be allowed if one or more corresponding [ServerAuthorization](#serverauthorization)
-objects exist.
+A `Server` selects a port on a set of pods in the same namespace as the server.
+It typically selects a single port on a pod, though it may select multiple ports when
+referring to the port by name (e.g. `admin-http`). While the `Server` resource is
+similar to a Kubernetes `Service`, it has the added restriction that multiple `Server`
+instances must not overlap: they must not select the same pod/port pairs. Linkerd
+ships with an admission controller that tries to prevent overlapping servers from
+being created.
+
+When a Server selects a port, traffic is denied by default and [`ServerAuthorizations`](#serverauthorization)
+must be used to authorize traffic on ports selected by the Server.
 
 ### Spec
 
-A `Server` spec must contain the following top level fields:
+A `Server` spec may contain the following top level fields:
 
 {{< table >}}
 | field| value |
 |------|-------|
 | `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
-| `port`| A port name or number. Must exist in a pod spec. |
+| `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
 {{< /table >}}
 
