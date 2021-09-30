@@ -8,7 +8,7 @@ service.  In this example, we'll use Emojivoto to show how to restrict access
 to the Voting service so that it may only be called from the Web service.
 
 For a more comprehensive description of the policy resources, see the
-[Policy reference docs](../../reference/policy-resources/).
+[Policy reference docs](../../reference/authorization-policy/).
 
 ## Setup
 
@@ -16,22 +16,22 @@ Ensure that you have Linkerd version stable-2.11.0 or later installed, and that
 it is healthy:
 
 ```console
-> linkerd install | kubectl apply -f -
-> linkerd check
+$ linkerd install | kubectl apply -f -
+$ linkerd check -o short
 ```
 
 Inject and install the Emojivoto application:
 
 ```console
-> linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
-> linkerd check -n emojivoto --proxy
+$ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+$ linkerd check -n emojivoto --proxy -o short
 ```
 
 In order to observe what's going on, we'll also install the Viz extension:
 
 ```console
-> linkerd viz install | kubectl apply -f -
-> linkerd viz check
+$ linkerd viz install | kubectl apply -f -
+$ linkerd viz check
 ```
 
 ## Creating a Server resource
@@ -139,7 +139,7 @@ You can create as many `ServerAuthorization` resources as you like to authorize
 many different clients. You can also specify whether to authorize
 unauthenticated (i.e. unmeshed) client, any authenticated client, or only
 authenticated clients with a particular identity.  For more details, please see
-the [Policy reference docs](../../reference/policy-resources/).
+the [Policy reference docs](../../reference/authorization-policy/).
 
 ## Further Considerations
 
