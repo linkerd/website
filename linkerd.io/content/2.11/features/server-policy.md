@@ -32,7 +32,7 @@ It is configured with two basic mechanisms:
    for specific ports.
 
 These mechanisms work in conjunction. For example, a default cluster-wide
-policy of `deny-all` would prohibit any traffic to any meshed pod; traffic must
+policy of `deny` would prohibit any traffic to any meshed pod; traffic must
 then be explicitly allowed through the use of `Server` and
 `ServerAuthorization` CRDs.
 
@@ -45,6 +45,9 @@ policy at that point in the hierarchy. Valid default policies include:
 - `all-unauthenticated`: inbound proxies allow all connections
 - `all-authenticated`: inbound proxies allow only mTLS connections from other
   meshed pods.
+- `cluster-unauthenticated`: inbound proxies allow all connections from client IPs in the cluster's `clusterNetworks` (must be configured at install-time).
+- `cluster-authenticated`: inbound proxies allow only mTLS connections from other
+  meshed pods from IPs in the cluster's `clusterNetworks`.
 - `deny` inbound proxies deny all connections that are not explicitly
   authorized.
 
@@ -64,11 +67,11 @@ The `Server` and `ServerAuthorization` CRDs further configure Linkerd's policy
 beyond the default policies. In contrast to annotations, these CRDs can be
 changed dynamically and policy behavior will be updated on the fly.
 
-A `Server` defines a port and a set of pods that is subject to policy. This set
+A `Server` selects a port and a set of pods that is subject to policy. This set
 of pods can correspond to a single workload, or to multiple workloads (e.g.
 port 4191 for every pod in a namespace). Once created, a `Server` resource
 denies all traffic to that port, and traffic to that port can only be enabled
-by creating `ServerAuthorization` CRDs.
+by creating `ServerAuthorization` resources.
 
 A `ServerAuthorization` defines a set of allowed traffic to a `Server`. A
 `ServerAuthorization` can allow traffic based on any number of things,
