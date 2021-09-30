@@ -81,7 +81,7 @@ Together, these annotations and CRDs allow you to easily specify a wide range
 of policies for your cluster, from "all traffic is allowed" to "port 8080 on
 service Foo can only receive mTLS traffic from services using the Bar service
 account", to lots more. (See the [full policy docs
-&raquo;](/2.11/features/authorization-policy/))
+&raquo;](/2.11/features/server-policy/))
 
 {{< fig
     alt="Linkerd policy, as seen from Buoyant Cloud"
