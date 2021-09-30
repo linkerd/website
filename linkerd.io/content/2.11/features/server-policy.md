@@ -52,7 +52,7 @@ policy at that point in the hierarchy. Valid default policies include:
 - `deny` inbound proxies deny all connections that are not explicitly
   authorized.
 
-See the [Policy reference](../reference/authorization-policy/) for more default
+See the [Policy reference](../../reference/authorization-policy/) for more default
 policies.
 
 Every cluster has a default policy (by default, `all-unauthenticated`), set at
@@ -80,7 +80,7 @@ including IP address; use of mTLS; specific mTLS identities (including
 wildcards, to allow for namespace selection); specific Service Accounts; and
 more.
 
-See the [Policy reference](../reference/authorization-policy/) for more on
+See the [Policy reference](../../reference/authorization-policy/) for more on
 the `Server` and `ServerAuthorization` resources.
 
 {{< note >}}
