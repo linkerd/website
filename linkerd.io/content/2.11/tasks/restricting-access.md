@@ -123,7 +123,7 @@ voting-grpc  voting-grpc   70.00%  1.0rps          1ms          1ms          1ms
 ```
 
 We can also test that request from other pods will be rejected by creating a
-`grpcul` pod and attempting to access the Voting service from it:
+`grpcurl` pod and attempting to access the Voting service from it:
 
 ```console
 > kubectl run grpcurl --rm -it --image=networld/grpcurl --restart=Never --command -- ./grpcurl -plaintext voting-svc.emojivoto:8080 emojivoto.v1.VotingService/VoteDog
