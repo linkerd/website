@@ -192,15 +192,18 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.11.0
 
-When upgrading, it is worth noting that the control plane
-has been changed to have a smaller footprint. The `controller` pod has been
-removed; consequently, all configuration options that previously applied to it
-are no longer valid (e.g `publicAPIResources` and all of its nested fields).
+There are two breaking changes in the 2.11.0 release: pods in `ingress` no
+longer support non-HTTP traffic to meshed workloads; and the proxy no longer
+forwards traffic to ports that are bound only to localhost. Additionally, users
+of the multi-cluster extension will need to re-link their cluster after 
+upgrading.
 
-Moreover, the destination pod will now have an additional `policy` container
-that runs the new policy controller. New healthchecks have been added to the
-CLI to help troubleshoot the state of Linkerd. There are some additional
-breaking changes in the 2.11.0 release that may affect you.
+### Control plane changes
+
+The `controller` pod has been removed from the control plane. All configuration
+options that previously applied to it are no longer valid (e.g
+`publicAPIResources` and all of its nested fields). Additionally, the
+destination pod has a new `policy` container that runs the policy controller.
 
 ### Routing breaking changes
 
