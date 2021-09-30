@@ -1,11 +1,25 @@
 +++
-title = "Server and ServerAuthorization"
+title = "Authorization Policy"
 description = "Details on the specification and what is possible with policy resources."
 +++
 
 [Server](#server) and [ServerAuthorization](#serverauthorization) are the two types
 of policy resources in Linkerd, used to control inbound access to your meshed
 applications.
+
+During the linkerd install, the `policyController.defaultAllowPolicy` field is used
+to specify the default policy when no [Server](#server) selects a pod.
+This field can be one of the following:
+
+- `all-unauthenticated`: all requests are allowed. This is the default.
+- `cluster-authenticated`: allow requests from meshed clients in the same cluster.
+- `cluster-unauthenticated`: allow requests from both meshed and non-meshed clients
+  in the same cluster.
+- `deny`: all requests are denied. (Policy resources should then be created to
+  allow specific communications between services).
+
+[Server](#server) and [ServerAuthorization](#serverauthorization) override the default
+configured policy.
 
 ## Server
 
@@ -37,9 +51,12 @@ A podSelector object must contain _exactly one_ of the following fields:
 {{< table >}}
 | field | value |
 |-------|-------|
-| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector) for more details. |
+| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | matchLabels is a map of {key,value} pairs. |
 {{< /table >}}
+
+See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
+for more details.
 
 ### Server Examples
 
@@ -114,9 +131,12 @@ A selector object must contain _exactly one_ of the following fields:
 {{< table >}}
 | field | value |
 |-------|-------|
-| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector) for more details. |
+| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | matchLabels is a map of {key,value} pairs. |
 {{< /table >}}
+
+See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
+for more details.
 
 ### client
 
