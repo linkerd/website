@@ -240,8 +240,8 @@ spec:
             - -enforced-host=^dashboard\.example\.com$
 ```
 
-If you want to completely disable the `Host` header check, use an empty string
-for `-enforced-host`.
+If you want to completely disable the `Host` header check, simply use a
+catch-all regexp `.*` for `-enforced-host`.
 
 [nginx-auth]:
 https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/auth/basic/README.md
