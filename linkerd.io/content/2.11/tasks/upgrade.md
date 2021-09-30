@@ -252,9 +252,7 @@ be aware of when upgrading from `stable-2.10.x`:
  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
  ElasticSearch respectively (all server speak first protocols) have been added
  to the default opaque ports list. The default ignore inbound ports list has
- also been changed to include ports `4567` and `4568`. Note that when
- upgrading, any customization done to `proxy.opaquePorts` or
- `proxyInit.ignoreInboundPorts` will be overridden.
+ also been changed to include ports `4567` and `4568`.
 
 ## Upgrade notice: stable-2.10.0
 
