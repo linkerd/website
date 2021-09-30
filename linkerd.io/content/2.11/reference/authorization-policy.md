@@ -18,8 +18,8 @@ This field can be one of the following:
 - `deny`: all requests are denied. (Policy resources should then be created to
   allow specific communications between services).
 
-[Server](#server) and [ServerAuthorization](#serverauthorization) override the default
-configured policy.
+[Server](#server) and [ServerAuthorization](#serverauthorization) resources override
+the default configured policy.
 
 ## Server
 
