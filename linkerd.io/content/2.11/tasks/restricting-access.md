@@ -17,21 +17,27 @@ it is healthy:
 
 ```console
 $ linkerd install | kubectl apply -f -
+...
 $ linkerd check -o short
+...
 ```
 
 Inject and install the Emojivoto application:
 
 ```console
 $ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+...
 $ linkerd check -n emojivoto --proxy -o short
+...
 ```
 
 In order to observe what's going on, we'll also install the Viz extension:
 
 ```console
 $ linkerd viz install | kubectl apply -f -
+...
 $ linkerd viz check
+...
 ```
 
 ## Creating a Server resource
