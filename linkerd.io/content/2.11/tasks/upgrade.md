@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
 - [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
 - [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
@@ -188,6 +189,70 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.11.0
+
+There are two breaking changes in the 2.11.0 release: pods in `ingress` no
+longer support non-HTTP traffic to meshed workloads; and the proxy no longer
+forwards traffic to ports that are bound only to localhost. Additionally, users
+of the multi-cluster extension will need to re-link their cluster after
+upgrading.
+
+### Control plane changes
+
+The `controller` pod has been removed from the control plane. All configuration
+options that previously applied to it are no longer valid (e.g
+`publicAPIResources` and all of its nested fields). Additionally, the
+destination pod has a new `policy` container that runs the policy controller.
+
+### Routing breaking changes
+
+There are two breaking changes to be aware of when it comes to how traffic is
+routed.
+
+First, when the proxy runs in ingress mode (`config.linkerd.io/inject:
+ingress`), non-HTTP traffic to meshed pods is no longer supported. To get
+around this, you will need to use the `config.linkerd.io/skip-outbound-ports`
+annotation on your ingress controller pod. In many cases, ingress mode is no
+longer necessary. Before upgrading, it may be worth revisiting [how to use
+ingress](../using-ingress/) with Linkerd.
+
+Second, the proxy will no longer forward traffic to ports only bound on
+localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
+other pods should now be bound to a public interface (e.g `0.0.0.0:8080`). This
+change prevents ports from being accidentally exposed outside of the pod.
+
+### Multicluster
+
+The gateway component has been changed to use a `pause` container instead of
+`nginx`. This change should reduce the footprint of the extension; the proxy
+routes traffic internally and does not need to rely on `nginx` to receive or
+forward traffic. While this will not cause any downtime when upgrading
+multicluster, it does affect probing. `linkerd multicluster gateways` will
+falsely advertise the target cluster gateway as being down until the clusters
+are re-linked.
+
+Multicluster now supports `NodePort` type services for the gateway. To support
+this change, the configuration options in the Helm values file are now grouped
+under the `gateway` field. If you have installed the extension with other
+options than the provided defaults, you will need to update your `values.yaml`
+file to reflect this change in field grouping.
+
+### Other changes
+
+Besides the breaking changes described above, there are other minor changes to
+be aware of when upgrading from `stable-2.10.x`:
+
+- `PodSecurityPolicy` (PSP) resources are no longer installed by default as a
+ result of their deprecation in Kubernetes v1.21 and above. The control plane
+ and core extensions will now be shipped without PSPs; they can be enabled
+ through a new install option `enablePSP: true`.
+- `tcp_connection_duration_ms` metric has been removed.
+- Opaque ports changes: `443` is no longer included in the default opaque ports
+ list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
+ ElasticSearch respectively (all server speak first protocols) have been added
+ to the default opaque ports list. The default ignore inbound ports list has
+ also been changed to include ports `4567` and `4568`.
 
 ## Upgrade notice: stable-2.10.0
 
