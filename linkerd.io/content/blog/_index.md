@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
+  - blog/announcing-linkerd-2-11.md
   - blog/announcing-cncf-graduation.md
-  - blog/linkerd-vs-istio-benchmarks.md
 description: ''
 keywords: []
 ---
