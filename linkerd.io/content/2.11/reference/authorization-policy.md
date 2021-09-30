@@ -11,7 +11,9 @@ During the linkerd install, the `policyController.defaultAllowPolicy` field is u
 to specify the default policy when no [Server](#server) selects a pod.
 This field can be one of the following:
 
-- `all-unauthenticated`: all requests are allowed. This is the default.
+- `all-unauthenticated`: allow all requests. This is the default.
+- `all-authenticated`: allow requests from meshed clients in the same or from
+   a different cluster (with multi-cluster).
 - `cluster-authenticated`: allow requests from meshed clients in the same cluster.
 - `cluster-unauthenticated`: allow requests from both meshed and non-meshed clients
   in the same cluster.
@@ -97,8 +99,8 @@ spec:
 
 ## ServerAuthorization
 
-A [ServerAuthorization](#serverauthorization) provides a way to set client
-restrictions on one or more [`Server`](#server)s.
+A [ServerAuthorization](#serverauthorization) provides a way to authorize
+traffic to one or more [`Server`](#server)s.
 
 ### Spec
 
@@ -124,7 +126,7 @@ A `Server` object must contain _exactly one_ of the following fields:
 
 ### selector
 
-This is the [same labelSelector field in Kuberentes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
+This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
 All the servers that are part of this selector will have this authorization applied.
 A selector object must contain _exactly one_ of the following fields:
 
@@ -149,7 +151,7 @@ A `client` object must contain _exactly one_ of the following fields:
 | `unauthenticated`| A boolean value that authorizes unauthenticated clients to access a server. |
 {{< /table >}}
 
-Optionally, It can also contain the `networks` field:
+Optionally, it can also contain the `networks` field:
 
 {{< table >}}
 | field| value |
