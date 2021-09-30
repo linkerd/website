@@ -56,7 +56,7 @@ Hulscher](https://github.com/mhulscher) for all your hard work!
 Linkerd's new server authorization policy feature gives you fine-grained
 control of which services are allowed to communicate with each other. These
 policies are built directly on the secure service identities provided by
-Linkerd's [automatic mTLS](/2/features/automatic-mtls/) feature. In keeping
+Linkerd's [automatic mTLS](/2.11/features/automatic-mtls/) feature. In keeping
 with Linkerd's design principles, authorization policies are expressed in a
 composable, Kubernetes-native way that requires a minimum of configuration but
 that can express a wide range of behaviors.
@@ -81,7 +81,7 @@ Together, these annotations and CRDs allow you to easily specify a wide range
 of policies for your cluster, from "all traffic is allowed" to "port 8080 on
 service Foo can only receive mTLS traffic from services using the Bar service
 account", to lots more. (See the [full policy docs
-&raquo;](/2/features/authorization-policy/))
+&raquo;](/2.11/features/server-policy/))
 
 {{< fig
     alt="Linkerd policy, as seen from Buoyant Cloud"
