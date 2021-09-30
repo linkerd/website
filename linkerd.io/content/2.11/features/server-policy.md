@@ -45,7 +45,8 @@ policy at that point in the hierarchy. Valid default policies include:
 - `all-unauthenticated`: inbound proxies allow all connections
 - `all-authenticated`: inbound proxies allow only mTLS connections from other
   meshed pods.
-- `cluster-unauthenticated`: inbound proxies allow all connections from client IPs in the cluster's `clusterNetworks` (must be configured at install-time).
+- `cluster-unauthenticated`: inbound proxies allow all connections from client
+  IPs in the cluster's `clusterNetworks` (must be configured at install-time).
 - `cluster-authenticated`: inbound proxies allow only mTLS connections from other
   meshed pods from IPs in the cluster's `clusterNetworks`.
 - `deny` inbound proxies deny all connections that are not explicitly

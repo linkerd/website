@@ -23,19 +23,19 @@ This field can be one of the following:
 This default can be overridden by setting the annotation `config.linkerd.io/default-
 inbound-policy` on either a pod spec or its namespace.
 
-Once a [Server](#server) is configured for a pod & port, its default behavior is to _deny_
-traffic and [ServerAuthorization](#serverauthorization) resources must be created to allow
-traffic on a `Server`.
+Once a [Server](#server) is configured for a pod & port, its default behavior
+is to _deny_ traffic and [ServerAuthorization](#serverauthorization) resources
+must be created to allow traffic on a `Server`.
 
 ## Server
 
 A `Server` selects a port on a set of pods in the same namespace as the server.
-It typically selects a single port on a pod, though it may select multiple ports when
-referring to the port by name (e.g. `admin-http`). While the `Server` resource is
-similar to a Kubernetes `Service`, it has the added restriction that multiple `Server`
-instances must not overlap: they must not select the same pod/port pairs. Linkerd
-ships with an admission controller that tries to prevent overlapping servers from
-being created.
+It typically selects a single port on a pod, though it may select multiple
+ports when referring to the port by name (e.g. `admin-http`). While the
+`Server` resource is similar to a Kubernetes `Service`, it has the added
+restriction that multiple `Server` instances must not overlap: they must not
+select the same pod/port pairs. Linkerd ships with an admission controller that
+tries to prevent overlapping servers from being created.
 
 When a Server selects a port, traffic is denied by default and [`ServerAuthorizations`](#serverauthorization)
 must be used to authorize traffic on ports selected by the Server.
