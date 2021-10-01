@@ -1,4 +1,8 @@
-{{ $docsVersion := index (split .page.URL "/") 1 }}
+{{ $latestVersion := "2.11" }}
+{{ $urlParts := split .page.URL "/" }}
+{{ $docsVersion := index $urlParts 1 }}
+{{ $latestDocsURL := delimit (append (after 2 $urlParts) (slice "" $latestVersion)) "/" }}
+
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
     <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile is-narrow-tablet">
@@ -25,14 +29,14 @@
               <a href="/docs/">Linkerd 2.x (current) documentation</a> instead.
             </div>
            </div>
-        {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.11") }}
+        {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion $latestVersion) }}
           <div class="message">
             <div class="message-header">
               This is not the latest version
             </div>
             <div class="message-body">
 	      This documentation is not for the latest version of Linkerd.
-	      You may want the <a href="/docs/">Linkerd 2.11 (current)
+	      You may want the <a href="{{ $latestDocsURL }}">Linkerd {{ $latestVersion }} (current)
               documentation</a> instead.
             </div>
           </div>
