@@ -1,6 +1,6 @@
 <div class="wrapper body-header foundation-member has-background-white">
-  <div class="columns is-marginless is-fullwidth ">
-    <div class="column center-column">
+  <div class="columns is-marginless is-fullwidth is-centered">
+    <div class="column is-5">
       <h4 class="title is-size-4 has-text-centered is-capitalize has-text-color">{{.title}}</h4>
       <figure class="image">
         <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
