@@ -102,4 +102,3 @@ container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. It [uses
 iptables](https://github.com/linkerd/linkerd2-proxy-init) to route all TCP
 traffic to and from the pod through the proxy.
-
