@@ -21,8 +21,8 @@ capability.
 
 {{< note >}}
 Linkerd's CNI plugin is designed to run in conjunction with your existing CNI
-plugin, using _CNI chaining_. It handles only the Linkerd-specific configuration and
-does not replace the need for a CNI plugin.
+plugin, using _CNI chaining_. It handles only the Linkerd-specific
+configuration and does not replace the need for a CNI plugin.
 {{< /note >}}
 
 ## Installation
