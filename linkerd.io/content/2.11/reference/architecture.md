@@ -100,5 +100,5 @@ You can read more about these micro-proxies here:
 The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
 container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. It [uses
-iptables](https://github.com/linkerd/linkerd2-proxy-init) to route all TCP
-traffic to and from the pod through the proxy.
+iptables](../iptables/) to route all TCP traffic to and from the pod through
+the proxy.
