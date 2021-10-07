@@ -1,15 +1,29 @@
 +++
 title = "CNI Plugin"
-description = "Linkerd can be configured to run a CNI plugin that rewrites each pod's iptables rules automatically."
+description = "Linkerd can optionally use a CNI plugin instead of an init-container to avoid NET_ADMIN capabilities."
 +++
 
-Linkerd installs can be configured to run a
-[CNI plugin](https://github.com/containernetworking/cni) that rewrites each
-pod's iptables rules automatically. Rewriting iptables is required for routing
-network traffic through the pod's `linkerd-proxy` container. When the CNI plugin
-is enabled, individual pods no longer need to include an init container that
-requires the `NET_ADMIN` capability to perform rewriting. This can be useful in
-clusters where that capability is restricted by cluster administrators.
+Linkerd's data plane works by transparently routing all TCP traffic to and from
+every meshed pod to its proxy. (See the
+[Architecture](../../reference/architecture/) doc.) This allows Linkerd to act
+without the application being aware.
+
+By default, this rewiring is done with an [Init
+Container](../../reference/architecture/#linkerd-init-container) that uses iptables
+to install routing rules for the pod, at pod startup time. However, this requires
+the `CAP_NET_ADMIN` capability; and in some clusters, this capability is not
+granted to pods.
+
+To handle this, Linkerd can optionally run these iptables rules in a [CNI
+plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
+rather than in an Init Container. This avoids the need for a `CAP_NET_ADMIN`
+capability.
+
+{{< note >}}
+Linkerd's CNI plugin is designed to run in conjunction with your existing CNI
+plugin, using _CNI chaining_. It handles only the Linkerd-specific
+configuration and does not replace the need for a CNI plugin.
+{{< /note >}}
 
 ## Installation
 
@@ -25,19 +39,17 @@ To install the `linkerd-cni` DaemonSet, run:
 linkerd install-cni | kubectl apply -f -
 ```
 
-Once the DaemonSet is up and running, all subsequent installs that include a
-`linkerd-proxy` container (including the Linkerd control plane), no longer need
-to include the `linkerd-init` container. Omission of the init container is
-controlled by the `--linkerd-cni-enabled` flag at control plane install time.
-
-Install the Linkerd control plane, with:
+Once the DaemonSet is up and running, meshed pods should no longer use the
+`linkerd-init` Init Container. To accomplish this, use the
+`--linkerd-cni-enabled` flag when installing the control plane:
 
 ```bash
 linkerd install --linkerd-cni-enabled | kubectl apply -f -
 ```
 
-This will set a `cniEnabled` flag in the `linkerd-config` ConfigMap. All
-subsequent proxy injections will read this field and omit init containers.
+Using this option will set a `cniEnabled` flag in the `linkerd-config`
+ConfigMap. Proxy injections will read this field and omit the `linkerd-init`
+Init Container.
 
 ### Using Helm
 
@@ -45,14 +57,10 @@ First ensure that your Helm local cache is updated:
 
 ```bash
 helm repo update
-
 helm search linkerd2-cni
-NAME                      CHART VERSION  APP VERSION    DESCRIPTION
-linkerd-edge/linkerd2-cni   20.1.1       edge-20.1.1    A helm chart containing the resources needed by the Linke...
-linkerd-stable/linkerd2-cni  2.7.0       stable-2.7.0   A helm chart containing the resources needed by the Linke...
 ```
 
-Run the following commands to install the CNI DaemonSet:
+Install the CNI DaemonSet:
 
 ```bash
 # install the CNI plugin first
@@ -68,8 +76,8 @@ In Helm v3, It has been deprecated, and is the first argument as
  specified above.
 {{< /note >}}
 
-At that point you are ready to install Linkerd with CNI enabled.
-You can follow [Installing Linkerd with Helm](../../tasks/install-helm/) to do so.
+At that point you are ready to install Linkerd with CNI enabled.  Follow the
+[Installing Linkerd with Helm](../../tasks/install-helm/) instructions.
 
 ## Additional configuration
 
@@ -99,8 +107,5 @@ Since the CNI plugin is basically stateless, there is no need for a separate
 just do:
 
 ```bash
-linkerd install-cni   | kubectl apply --prune -l  linkerd.io/cni-resource=true -f -
+linkerd install-cni | kubectl apply --prune -l linkerd.io/cni-resource=true -f -
 ```
-
-Keep in mind that if you are upgrading the plugin from an experimental version,
-you need to uninstall and install it again.
