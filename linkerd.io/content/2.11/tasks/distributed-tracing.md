@@ -156,9 +156,54 @@ If you have an existing Jaeger installation, you can configure the OpenCensus
 collector to send traces to it instead of the Jaeger instance built into the
 Linkerd-Jaeger extension.
 
+Create the following YAML file which disables the built in Jaeger instance
+and specifies the OpenCensus collector's config.
+
 ```bash
-linkerd jaeger install --set collector.jaegerAddr='http://my-jaeger-collector.my-jaeger-ns:14268/api/traces' | kubectl apply -f -
+cat <<EOF > jaeger-linkerd.yaml
+jaeger:
+  enabled: false
+
+collector:
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+      opencensus:
+      zipkin:
+      jaeger:
+        protocols:
+          grpc:
+          thrift_http:
+          thrift_compact:
+          thrift_binary:
+    processors:
+      batch:
+    extensions:
+      health_check:
+    exporters:
+      jaeger:
+        endpoint: my-jaeger-collector.my-jaeger-ns:14250
+        insecure: true
+    service:
+      extensions: [health_check]
+      pipelines:
+        traces:
+          receivers: [otlp,opencensus,zipkin,jaeger]
+          processors: [batch]
+          exporters: [jaeger]
+EOF
+linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
 ```
+
+You'll want to ensure that the `exporters.jager.endpoint` which is `my-jaeger-collector.my-jaeger-ns:14250`
+in this example is set to a value appropriate for your environment. This should point to a Jaeger
+Collector on port 14250.
+
+The YAML file is merged with the Helm values.yaml [here](https://github.com/linkerd/linkerd2/blob/stable-2.11.0/jaeger/charts/linkerd-jaeger/values.yaml)
+which shows other possible values that can be configured.
 
 It is also possible to manually edit the OpenCensus configuration to have it
 export to any backend which it supports. See the
