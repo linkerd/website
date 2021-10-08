@@ -1,7 +1,7 @@
 {{ $latestVersion := "2.11" }}
-{{ $urlParts := split .page.URL "/" }}
-{{ $docsVersion := index $urlParts 1 }}
-{{ $latestDocsURL := delimit (append (after 2 $urlParts) (slice "" $latestVersion)) "/" }}
+{{ $pathParts := split .page.File.Path "/" }}
+{{ $docsVersion := index $pathParts 0 }}
+{{ $latestDocsPath := delimit (append (after 1 $pathParts) (slice "" $latestVersion)) "/" }}
 
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
@@ -36,8 +36,12 @@
             </div>
             <div class="message-body">
 	      This documentation is not for the latest version of Linkerd.
-	      You may want the <a href="{{ $latestDocsURL }}">Linkerd {{ $latestVersion }} (current)
-              documentation</a> instead.
+              {{ if (fileExists $latestDocsPath) }}
+	        You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
+                documentation</a> instead.
+              {{ else }}
+                In Linkerd {{ $latestVersion }} (current), this document no longer exists.
+              {{ end }}
             </div>
           </div>
         {{ end }}
