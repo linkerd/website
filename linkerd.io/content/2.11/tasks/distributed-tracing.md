@@ -198,12 +198,15 @@ EOF
 linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
 ```
 
-You'll want to ensure that the `exporters.jager.endpoint` which is `my-jaeger-collector.my-jaeger-ns:14250`
-in this example is set to a value appropriate for your environment. This should point to a Jaeger
-Collector on port 14250.
+You'll want to ensure that the `exporters.jager.endpoint` which is
+`my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
+appropriate for your environment. This should point to a Jaeger Collector
+on port 14250.
 
-The YAML file is merged with the Helm values.yaml [here](https://github.com/linkerd/linkerd2/blob/stable-2.11.0/jaeger/charts/linkerd-jaeger/values.yaml)
-which shows other possible values that can be configured.
+The YAML file is merged with the [Helm values.yaml][helm-values] which shows
+other possible values that can be configured.
+
+[helm-values]: https://github.com/linkerd/linkerd2/blob/stable-2.11.0/jaeger/charts/linkerd-jaeger/values.yaml
 
 It is also possible to manually edit the OpenCensus configuration to have it
 export to any backend which it supports. See the
