@@ -102,7 +102,7 @@ certificates are scoped to 24 hours and dynamically refreshed using the same
 mechanism.
 
 Finally, when a proxy receives an outbound connection from the application
-container within its pod, it looks up that desitnation with the Linkerd control
+container within its pod, it looks up that destination with the Linkerd control
 plane. If it's in the Kubernetes cluster, the control plane provides the proxy
 with the destination's endpoint addresses, along with metadata including an
 identity name. When the proxy connects to the destination, it initiates a TLS
@@ -111,15 +111,8 @@ by the trust anchor and contains the expected identity.
 
 ## Caveats and future work
 
-There are a few known gaps in Linkerd's ability to automatically encrypt and
-authenticate all communication in the cluster. These gaps will be fixed in
-future releases:
-
-* Linkerd does not currently *enforce* mTLS. Any unencrypted requests inside
-  the mesh will be opportunistically upgraded to mTLS. Any requests originating
-  from inside or outside the mesh will not be automatically mTLS'd by Linkerd.
-  This will be addressed in a future Linkerd release, likely as an opt-in
-  behavior as it may break some existing applications.
+* Linkerd does not *require* mTLS unless [authorization policies](../server-policy/)
+  are configured.
 
 * Ideally, the ServiceAccount token that Linkerd uses would not be shared with
   other potential uses of that token. In future Kubernetes releases, Kubernetes
