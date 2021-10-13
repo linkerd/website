@@ -33,6 +33,8 @@ You will need to clone this
 machine and replicate it in your Kubernetes cluster following the steps defined
 in the next section.
 
+You will also need the [step cli](https://smallstep.com/cli/) to follow along this guide.
+
 ## Set up the repositories
 
 Clone the example repository to your local machine:
