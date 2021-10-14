@@ -192,11 +192,11 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.11.0
 
-There are two breaking changes in the 2.11.0 release: pods in `ingress` no
-longer support non-HTTP traffic to meshed workloads; and the proxy no longer
-forwards traffic to ports that are bound only to localhost. Additionally, users
-of the multi-cluster extension will need to re-link their cluster after
-upgrading.
+The minimum Kubernetes version supported is `v1.17.0`. There are two breaking
+changes in the 2.11.0 release: pods in `ingress` no longer support non-HTTP
+traffic to meshed workloads; and the proxy no longer forwards traffic to ports
+that are bound only to localhost. Additionally, users of the multi-cluster
+extension will need to re-link their cluster after upgrading.
 
 ### Control plane changes
 
