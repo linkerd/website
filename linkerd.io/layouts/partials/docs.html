@@ -1,4 +1,8 @@
-{{ $docsVersion := index (split .page.URL "/") 1 }}
+{{ $latestVersion := "2.11" }}
+{{ $pathParts := split .page.File.Path "/" }}
+{{ $docsVersion := index $pathParts 0 }}
+{{ $latestDocsPath := delimit (append (after 1 $pathParts) (slice "" $latestVersion)) "/" }}
+
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
     <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile is-narrow-tablet">
@@ -22,18 +26,22 @@
             <div class="message-body">
 	      This documentation is for Linkerd 1.x, an older version with some
               significant differences. You may want to see the
-              <a href="/2.10/overview/">Linkerd 2.x (current) documentation</a> instead.
+              <a href="/docs/">Linkerd 2.x (current) documentation</a> instead.
             </div>
            </div>
-        {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") }}
+        {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion $latestVersion) }}
           <div class="message">
             <div class="message-header">
               This is not the latest version
             </div>
             <div class="message-body">
 	      This documentation is not for the latest version of Linkerd.
-	      You may want the <a href="/2.10/overview/">Linkerd 2.10 (current)
-              documentation</a> instead.
+              {{ if (fileExists $latestDocsPath) }}
+	        You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
+                documentation</a> instead.
+              {{ else }}
+                In Linkerd {{ $latestVersion }} (current), this document no longer exists.
+              {{ end }}
             </div>
           </div>
         {{ end }}

@@ -6,6 +6,6 @@
       alt="{{ $alt }}">
   </a>
   {{ with .Get "title" }}
-  <figcaption class="figure-caption">{{ . }}</figcaption>
+  <figcaption class="figure-caption">{{ . | markdownify }}</figcaption>
   {{ end }}
 </figure>

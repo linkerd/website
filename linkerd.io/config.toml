@@ -102,7 +102,7 @@ identifier = "start"
 name = "GET STARTED"
 post = "</span>"
 pre = "<span class='button-spacer'>"
-url = "/2.10/getting-started/"
+url = "/getting-started/"
 weight = 6
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
