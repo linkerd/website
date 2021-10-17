@@ -8,9 +8,9 @@ metadata:
   namespace: emojivoto
   name: emoji-grpc
   labels:
-    #app.kubernetes.io/part-of: emojivoto
-    #app.kubernetes.io/name: emoji
-    #app.kubernetes.io/version: v11
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/name: emoji
+    app.kubernetes.io/version: v11
     app: emoji-svc
     emojivoto/api: internal-grpc
 spec:
@@ -50,8 +50,8 @@ metadata:
   namespace: emojivoto
   name: internal-grpc
   labels:
-    #app.kubernetes.io/part-of: emojivoto
-    #app.kubernetes.io/version: v11
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/version: v11
 spec:
   server:
     selector:
@@ -70,10 +70,10 @@ kind: Server
 metadata:
   namespace: emojivoto
   name: web-http
-  #labels:
-    #app.kubernetes.io/part-of: emojivoto
-    #app.kubernetes.io/name: web
-    #app.kubernetes.io/version: v11
+  labels:
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/name: web
+    app.kubernetes.io/version: v11
 spec:
   podSelector:
     matchLabels:
@@ -90,18 +90,18 @@ kind: ServerAuthorization
 metadata:
   namespace: emojivoto
   name: web-public
-  #labels:
-    #app.kubernetes.io/part-of: emojivoto
-    #app.kubernetes.io/name: web
-    #app.kubernetes.io/version: v11
+  labels:
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/name: web
+    app.kubernetes.io/version: v11
 spec:
   server:
     name: web-http
   client:
     unauthenticated: true
     networks:
-      - cidr: 0.0.0.0/0 # is this necessary?
-      - cidr: ::/0      # is this necessary?
+      - cidr: 0.0.0.0/0
+      - cidr: ::/0
 
 ---
 # Server "prom": matches the Prometheus port of the emoji, web, and voting
@@ -111,9 +111,9 @@ kind: Server
 metadata:
   namespace: emojivoto
   name: prom
-  #labels:
-  #  app.kubernetes.io/part-of: emojivoto
-  #  app.kubernetes.io/version: v11
+  labels:
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/version: v11
 spec:
   port: prom
   podSelector:
@@ -172,4 +172,3 @@ spec:
     name: admin
   client:
     unauthenticated: true
-
