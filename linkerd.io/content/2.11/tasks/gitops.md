@@ -33,6 +33,10 @@ You will need to clone this
 machine and replicate it in your Kubernetes cluster following the steps defined
 in the next section.
 
+This guide uses the [step cli](https://smallstep.com/cli/) to create certificates
+used by the Linkerd clusters to enforce mTLS, so make sure you have installed
+step for your environment.
+
 ## Set up the repositories
 
 Clone the example repository to your local machine:
