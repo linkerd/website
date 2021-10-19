@@ -69,13 +69,7 @@ The following table contains common protocols that may require configuration.
 If you are using one of those protocols, follow this decision tree to determine
 which configuration you need to apply.
 
-* Is the protocol wrapped in TLS?
-  * Yes: no configuration required.
-  * No: is the destination on the cluster?
-    * Yes: is the port in Linkerd's default list of opaque ports?
-      * Yes: no configuration required.
-      * No: mark port(s) as opaque.
-    * No: mark port(s) as skip.
+![Decision tree](/images/protocol-detection-decision-tree.png)
 
 ## Marking a port as opaque
 
