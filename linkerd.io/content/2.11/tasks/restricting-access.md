@@ -95,7 +95,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 be based on `ServiceAccounts`.
 
 ```console
-cat << EOF | kubectl apply -f -
+> cat << EOF | kubectl apply -f -
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
@@ -146,6 +146,84 @@ many different clients. You can also specify whether to authorize
 unauthenticated (i.e. unmeshed) client, any authenticated client, or only
 authenticated clients with a particular identity.  For more details, please see
 the [Policy reference docs](../../reference/authorization-policy/).
+
+## Setting a Default Policy
+
+To further lock down a cluster, you can set a default policy which will apply
+to all ports which do not have a Server resource defined. Linkerd uses the
+following logic when deciding whether to allow a request:
+
+* If the port has a Server resource and the client matches a ServerAuthorization
+  resource for it: ALLOW
+* If the port has a Server resource but the client does not match any
+  ServerAuthorizations for it: DENY
+* If the port does not have a Server resource: use the default policy
+
+We can set the default policy to `deny` using the `linkerd upgrade` command:
+
+```console
+> linkerd upgrade --set policyController.defaultAllowPolicy=deny | kubectl apply -f -
+```
+
+This means that ALL requests will be rejected unless they are explicitly
+authorized by creating Server and ServerAuthorization resources.  One important
+consequence of this is that liveness and readiness probes will need to be
+explictly authorized or else Kubernetes will not be able to recognize the pods as
+live or ready and will restart them.
+
+This policy allows all clients to reach the Linkerd admin port so that Kubernetes
+can perform liveness and readiness checks:
+
+```console
+> cat << EOF | kubectl apply -f -
+---
+# Server "admin": matches the admin port for every pod in this namespace
+apiVersion: policy.linkerd.io/v1beta1
+kind: Server
+metadata:
+  namespace: emojivoto
+  name: admin
+spec:
+  port: linkerd-admin
+  podSelector:
+    matchLabels: {} # every pod
+  proxyProtocol: HTTP/1
+---
+# ServerAuthorization "admin-everyone": allows unauthenticated access to the
+# "admin" Server, so that Kubernetes health checks can get through.
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: emojivoto
+  name: admin-everyone
+spec:
+  server:
+    name: admin
+  client:
+    unauthenticated: true
+```
+
+If you know the IP address or range of the Kubelet (which performs the health
+checks), you can further restrict the ServerAuthorization to these IP addresses
+or ranges. For example, if you know that the Kubelet is running at `10.244.0.1`
+then your ServerAuthorization can instead become:
+
+```yaml
+# ServerAuthorization "admin-kublet": allows unauthenticated access to the
+# "admin" Server from the kubelet, so that Kubernetes health checks can get through.
+apiVersion: policy.linkerd.io/v1beta1
+kind: ServerAuthorization
+metadata:
+  namespace: emojivoto
+  name: admin-kubelet
+spec:
+  server:
+    name: admin
+  client:
+    networks:
+    - cidr: 10.244.0.1/32
+    unauthenticated: true
+```
 
 ## Further Considerations
 
