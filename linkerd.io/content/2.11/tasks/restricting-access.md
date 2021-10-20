@@ -165,7 +165,7 @@ We can set the default policy to `deny` using the `linkerd upgrade` command:
 > linkerd upgrade --set policyController.defaultAllowPolicy=deny | kubectl apply -f -
 ```
 
-Alternatively, default policies can be set on individual workloads or namesspaces
+Alternatively, default policies can be set on individual workloads or namespaces
 by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
 [Policy reference docs](../../reference/authorization-policy/) for more details.
 
