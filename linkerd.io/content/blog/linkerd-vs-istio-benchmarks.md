@@ -108,7 +108,9 @@ against other alternatives measured in the same environment and same way.[^1]
 While each service mesh provides a large set of features, only a subset of
 these were actually in play during these experiments:
 
-* Both service meshes had mTLS enabled, and were encrypting traffic and
+* Both service meshes had
+[mTLS](https://buoyant.io/mtls-guide/)
+enabled, and were encrypting traffic and
   validating identity between all application pods.
 * Both service meshes were tracking metrics, including L7 metrics, though these
   metrics were not consumed in this experiment.
