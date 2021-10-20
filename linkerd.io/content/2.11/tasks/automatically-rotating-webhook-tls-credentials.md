@@ -108,6 +108,28 @@ cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: linkerd-policy-validator
+  namespace: linkerd
+spec:
+  secretName: linkerd-policy-validator-k8s-tls
+  duration: 24h
+  renewBefore: 1h
+  issuerRef:
+    name: webhook-issuer
+    kind: Issuer
+  commonName: linkerd-policy-validator.linkerd.svc
+  dnsNames:
+  - linkerd-policy-validator.linkerd.svc
+  isCA: false
+  privateKey:
+    algorithm: ECDSA
+    encoding: PKCS8
+  usages:
+  - server auth
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: linkerd-proxy-injector
   namespace: linkerd
 spec:
@@ -228,59 +250,39 @@ To configure Linkerd to use the credentials from cert-manager rather than
 generating its own, we generate a supplemental config file:
 
 ```bash
-CA=$(awk '{ print "    " $0 }' ca.crt)
-
-cat > config.yml <<EOF
-proxyInjector:
-  externalSecret: true
-  caBundle: |
-$CA
-profileValidator:
-  externalSecret: true
-  caBundle: |
-$CA
-EOF
+linkerd install \
+  --set policyValidator.externalSecret=true \
+  --set-file policyValidator.caBundle=ca.crt \
+  --set proxyInjector.externalSecret=true \
+  --set-file proxyInjector.caBundle=ca.crt \
+  --set profileValidator.externalSecret=true \
+  --set-file profileValidator.caBundle=ca.crt \
+  | kubectl apply -f -
 
 # ignore if not using the viz extension
-cat > config-viz.yml <<EOF
-tap:
-  externalSecret: true
-  caBundle: |
-$CA
-tapInjector:
-  externalSecret: true
-  caBundle: |
-$CA
-EOF
+linkerd viz install \
+  --set tap.externalSecret=true \
+  --set-file tap.caBundle=ca.crt \
+  --set tapInjector.externalSecret=true \
+  --set-file tapInjector.caBundle=ca.crt \
+  | kubectl apply -f -
 
 # ignore if not using the jaeger extension
-cat > config-jaeger.yml <<EOF
-webhook:
-  externalSecret: true
-  caBundle: |
-$CA
-EOF
-```
-
-Now we can install Linkerd using these config files:
-
-```bash
-linkerd install --values=config.yml | kubectl apply -f -
-
-# ignore if not using the viz extension
-linkerd viz install --values=config-viz.yml | kubectl apply -f -
-
-# ignore if not using the jaeger extension
-linkerd jaeger install --values=config-jaeger.yml | kubectl apply -f -
+linkerd jaeger install
+  --set webhook.externalSecret=true \
+  --set-file webhook.caBundle=ca.crt \
+  | kubectl apply -f -
 ```
 
 ## Installing with Helm
 
-For Helm installation, we can configure the Helm values directly:
+A similar pattern can be used with Helm:
 
 ```bash
 helm install linkerd2 \
   --set installNamespace=false \
+  --set policyValidator.externalSecret=true \
+  --set-file policyValidator.caBundle=ca.crt \
   --set proxyInjector.externalSecret=true \
   --set-file proxyInjector.caBundle=ca.crt \
   --set profileValidator.externalSecret=true \
