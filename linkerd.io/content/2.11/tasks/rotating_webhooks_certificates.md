@@ -22,7 +22,8 @@ configuration.
 By default, these certificates have a validity period of 365 days. They are
 stored in the following secrets:
 
-- In the `linkerd` namespace: `linkerd-policy-validator-k8s-tls`, `linkerd-proxy-injector-k8s-tls` and `linkerd-sp-validator-k8s-tls`
+- In the `linkerd` namespace: `linkerd-policy-validator-k8s-tls`,
+  `linkerd-proxy-injector-k8s-tls` and `linkerd-sp-validator-k8s-tls`
 - In the `linkerd-viz` namespace: `tap-injector-k8s-tls`
 - In the `linkerd-jaeger` namespace: `jaeger-injector-k8s-tls`
 
