@@ -74,7 +74,8 @@ Linkerd 2.11 additionally introduces two new CRDs, `Server` and
 `ServerAuthorization`, which together allow fine-grained policies to be applied
 across arbitrary sets of pods. For example, a Server can select across all
 admin ports on all pods in a namespace, and a ServerAuthorization can allow
-health check connection from kubelet, or mTLS connections for metrics
+health check connection from kubelet, or
+[mTLS](https://buoyant.io/mtls-guide/) connections for metrics
 collection.
 
 Together, these annotations and CRDs allow you to easily specify a wide range
