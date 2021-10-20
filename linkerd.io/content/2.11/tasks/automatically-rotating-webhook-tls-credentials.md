@@ -28,7 +28,7 @@ use cert-manager to automatically manage them.
 As a first step, [install cert-manager on your
 cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html)
 and create  the namespaces that cert-manager will use to store its
-webhook-related resources. For simplicity, we suggest using the defaule
+webhook-related resources. For simplicity, we suggest using the default
 namespace linkerd uses:
 
 ```bash
@@ -247,7 +247,7 @@ Now we just need to inform Linkerd to consume these credentials.
 ## Using these credentials with CLI installation
 
 To configure Linkerd to use the credentials from cert-manager rather than
-generating its own, we generate a supplemental config file:
+generating its own:
 
 ```bash
 linkerd install \
