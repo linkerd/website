@@ -74,12 +74,15 @@ Linkerd 2.11 additionally introduces two new CRDs, `Server` and
 `ServerAuthorization`, which together allow fine-grained policies to be applied
 across arbitrary sets of pods. For example, a Server can select across all
 admin ports on all pods in a namespace, and a ServerAuthorization can allow
-health check connection from kubelet, or mTLS connections for metrics
+health check connection from kubelet, or
+[mTLS](https://buoyant.io/mtls-guide/) connections for metrics
 collection.
 
 Together, these annotations and CRDs allow you to easily specify a wide range
 of policies for your cluster, from "all traffic is allowed" to "port 8080 on
-service Foo can only receive mTLS traffic from services using the Bar service
+service Foo can only receive
+[mTLS](https://linkerd.io/2.10/features/automatic-mtls/)
+traffic from services using the Bar service
 account", to lots more. (See the [full policy docs
 &raquo;](/2.11/features/server-policy/))
 
