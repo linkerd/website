@@ -22,7 +22,8 @@ configuration.
 By default, these certificates have a validity period of 365 days. They are
 stored in the following secrets:
 
-- In the `linkerd` namespace: `linkerd-proxy-injector-k8s-tls` and `linkerd-sp-validator-k8s-tls`
+- In the `linkerd` namespace: `linkerd-policy-validator-k8s-tls`,
+  `linkerd-proxy-injector-k8s-tls` and `linkerd-sp-validator-k8s-tls`
 - In the `linkerd-viz` namespace: `tap-injector-k8s-tls`
 - In the `linkerd-jaeger` namespace: `jaeger-injector-k8s-tls`
 
@@ -37,7 +38,7 @@ To check the validity of all the TLS secrets
 ```bash
 # assuming you have viz and jaeger installed, otherwise trim down these arrays
 # accordingly
-SECRETS=("linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "tap-injector-k8s-tls" "jaeger-injector-k8s-tls")
+SECRETS=("linkerd-policy-validator-k8s-tls" "linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "tap-injector-k8s-tls" "jaeger-injector-k8s-tls")
 NS=("linkerd" "linkerd" "linkerd-viz" "linkerd-jaeger")
 for idx in "${!SECRETS[@]}"; do \
   kubectl -n "${NS[$idx]}" get secret "${SECRETS[$idx]}" -ojsonpath='{.data.tls\.crt}' | \
