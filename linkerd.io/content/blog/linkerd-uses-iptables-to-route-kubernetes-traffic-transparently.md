@@ -16,8 +16,7 @@ traffic to and from Kubernetes pods and route it through
 without the application knowing. This ability to transparently route traffic
 is key to Linkerd's entire feature set, from
 [golden metrics](https://linkerd.io/service-mesh-glossary/#golden-metrics)
-to 
-[mTLS](https://buoyant.io/mtls-guide/),
+to [mTLS](https://buoyant.io/mtls-guide/),
 from request retries to gRPC load balancing. And, while iptables is
 a particularly hairy bit of the networking stack, it is both powerful and
 flexible. So read on as we uncover some of the mysteries of iptables,
