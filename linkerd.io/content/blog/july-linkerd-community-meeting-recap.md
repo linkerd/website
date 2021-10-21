@@ -92,7 +92,9 @@ Congratulations to the community and the team!
 Dom DePasquale, Cloud Administrator at Penn State, shared the university's
 Linkerd journey in a conversation with our own Charles Pretzer. Penn State's
 engineering department, had been running Kubernetes and Linkerd in production
-for a while. The team had adopted Linkerd for its mTLS feature. All
+for a while. The team had adopted Linkerd for its
+[mTLS](https://buoyant.io/mtls-guide/)
+feature. All
 communication coming into the cluster is TLSed. Once inside the cluster,
 Linkerd takes over and encrypts service-to-service communication, a setup
 that worked really well.
