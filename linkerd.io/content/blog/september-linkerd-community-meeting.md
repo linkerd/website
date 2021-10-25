@@ -63,6 +63,8 @@ those pods. Server Authorization selects a server and specifies whether
 mTLS is mandatory and what clients are permitted. Check out a Kubernetes
 engineer’s [guide to mTLS](https://buoyant.io/mtls-guide/) to learn more.
 
+{{< youtube rVpiUC08bgs >}}
+
 ## Deep dive with Eliza: Retries with message bodies
 
 Eliza, a core maintainer of the proxy, walked us through how Linkerd retries
