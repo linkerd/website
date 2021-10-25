@@ -1,10 +1,9 @@
 ---
-title: Blog
-subtitle: September Linkerd community meeting recap 
+title: September Linkerd community meeting recap 
 author: Matei
+date: 2021-09-27T00:00:00Z
 tags:
-- Community
-items:
+  - Community
 description: 'The Linkerd 2.11 docs are live and you'll see lots of small changes. The Linkerd team and the community have been working on 2.11 since May.'
 keywords: [meetup, community meeting]
 ---
