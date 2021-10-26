@@ -19,7 +19,7 @@ with bodies. Linkerd has supported HTTP retries
 but until now, we would only retry requests without bodies. Retrying
 requests with bodies is especially important for anyone using Linkerd with gRPC.
 Since all gRPC requests are HTTP/2 `POST` requests with bodies, this feature
-enables retries to be configured forgRPC traffic.
+enables retries to be configured for gRPC traffic.
 
 Retrying a request with a body may sound simple (just send the body again,
 right?), but it’s not that straightforward. In order to send a body again,
