@@ -1,10 +1,25 @@
 ---
+author: matei
+date: 2021-10-26T00:00:00Z
 title: September Linkerd community meeting recap 
-author: Matei
-date: 2021-09-27T00:00:00Z
+feature: "/uploads/september-community-recap.png" 
+thumbnail: "/uploads/september-community-recap.png" 
 tags:
   - Community
-description: 'The Linkerd 2.11 docs are live and you'll see lots of small changes. The Linkerd team and the community have been working on 2.11 since May.'
+description: "The Linkerd 3.11 docs are live and you'll see lots of small
+  changes. The Linkerd team and the community have been working on 2.11 since
+  May."
+featured: false
+enableVideoSchema: true
+schema_video:
+  - title: September Linkerd community meeting recap 
+    description: "The Linkerd 3.11 docs are live and you'll see lots of small
+    changes. The Linkerd team and the community have been working on 2.11 since
+    May."
+    embedUrl: "https://youtu.be/rVpiUC08bgs"
+    thumbnailUrl: "http://i3.ytimg.com/vi/rVpiUC08bgs/maxresdefault.jpg"
+    uploadDate: 2021-10-01
+    duration: "PT53M51S"
 keywords: [meetup, community meeting]
 ---
 
