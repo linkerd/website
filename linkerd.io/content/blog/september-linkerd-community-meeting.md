@@ -84,9 +84,9 @@ engineer’s [guide to mTLS](https://buoyant.io/mtls-guide/) to learn more.
 Eliza, a core maintainer of the proxy, walked us through how Linkerd retries
 HTTP requests with bodies — another new 2.11 feature. Retrying requests
 with bodies is especially important for anyone using Linkerd with gRPC:
-since all gRPC requests are HTTP/2 POST requests with bodies, this feature
+since all gRPC requests are HTTP/2 `POST` requests with bodies, this feature
 enables retries to be configured for gRPC traffic. To learn more about it,
-check out Eliza’s writeup on retries with message bodies.
+check out [Eliza’s writeup on retries with message bodies](https://linkerd.io/2021/10/26/how-linkerd-retries-http-requests-with-bodies/). 
 
 ## September Linkerd Hero
 
