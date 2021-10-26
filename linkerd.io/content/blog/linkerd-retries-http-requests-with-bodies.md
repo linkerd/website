@@ -32,7 +32,7 @@ usage as low as possible.
 Additionally, some requests, like
 [client-streaming requests in HTTP/2](https://httpwg.org/specs/rfc7540.html#StreamsLayer)
 and
-[`Transfer-Encoding: chunked requests`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding#directives)
+[`Transfer-Encoding: chunked` requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Transfer-Encoding#directives)
 in HTTP/1.1, can have long bodies that are sent in multiple pieces. If the
 proxy were to buffer the entire request body before forwarding the request
 to the server, it would have to wait for the body to complete —
@@ -86,7 +86,7 @@ to do this by allocating a new array and copying all the bytes from the
 existing array into it. This is quite time-consuming when there’s a large
 amount of data.
 
-![Cloning buffers: the slow way.](/uploads/retries-1.png)
+![Cloning buffers: the slow way.](/uploads/retries-3.png)
 
 To solve this problem the bytes crate provides the
 [`Bytes`](https://docs.rs/bytes/1.1.0/bytes/struct.Bytes.html#) type, a
@@ -135,7 +135,7 @@ rather than all the bytes received as part of the request body, the array that
 needs to be allocated and copied is quite small, reducing the overhead of
 the allocation significantly.
 
-![Appending multiple buffers to a BufList.](/uploads/retries-3.png)
+![Appending multiple buffers to a BufList.](/uploads/retries-1.png)
 
 The `http-body` crate contains Rust traits providing interfaces that can be
 implemented types that represent HTTP bodies and HTTP body data chunks.
