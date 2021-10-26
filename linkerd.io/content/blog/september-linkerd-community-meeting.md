@@ -86,7 +86,7 @@ HTTP requests with bodies — another new 2.11 feature. Retrying requests
 with bodies is especially important for anyone using Linkerd with gRPC:
 since all gRPC requests are HTTP/2 `POST` requests with bodies, this feature
 enables retries to be configured for gRPC traffic. To learn more about it,
-check out [Eliza’s writeup on retries with message bodies](https://linkerd.io/2021/10/26/how-linkerd-retries-http-requests-with-bodies/). 
+check out [Eliza’s writeup on retries with message bodies](https://linkerd.io/2021/10/26/how-linkerd-retries-http-requests-with-bodies/).
 
 ## September Linkerd Hero
 
@@ -103,4 +103,5 @@ Who is your Linkerd Hero?
 
 That’s it! Hope you can attend our next community meeting on Thursday,
 October 28 at 9 a.m. PT live.
-[Register today](https://community.cncf.io/events/details/cncf-linkerd-community-presents-october-linkerd-online-community-meetup/)!
+[Register
+today](https://community.cncf.io/events/details/cncf-linkerd-community-presents-october-linkerd-online-community-meetup/)!
