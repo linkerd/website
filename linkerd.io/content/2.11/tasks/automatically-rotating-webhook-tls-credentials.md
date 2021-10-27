@@ -26,7 +26,7 @@ use cert-manager to automatically manage them.
 ## Install Cert manager
 
 As a first step, [install cert-manager on your
-cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html)
+cluster](https://cert-manager.io/docs/installation/)
 and create  the namespaces that cert-manager will use to store its
 webhook-related resources. For simplicity, we suggest using the default
 namespace linkerd uses:
