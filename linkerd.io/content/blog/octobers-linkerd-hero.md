@@ -6,7 +6,9 @@ feature: "/uploads/hero-alberto-sadde.jpeg"
 thumbnail: "/uploads/hero-alberto-sadde.jpeg" 
 tags:
   - Community
-description: 'As a new member of the Linkerd community, Alberto jumped right into the spirit of the community and helped someone out on Slack when they posted a question in the linkerd2 channel.'
+description: 'As a new member of the Linkerd community, Alberto jumped right
+into the spirit of the community and helped someone out on Slack when they
+posted a question in the linkerd2 channel.'
 keywords: [hero]
 ---
 
@@ -45,4 +47,6 @@ Who is your Linkerd Hero?
 [Submit your nomination for next month's hero here](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform?usp=sf_link)!
 
 For those who nominated someone, thank you for participating, and remember
-to join our next community meeting on Thursday, December 9th at 9 am PT!
+to join our
+[next community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-december-linkerd-online-community-meetup/)
+on Thursday, December 9th at 9 am PT!
