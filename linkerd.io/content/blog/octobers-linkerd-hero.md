@@ -1,11 +1,11 @@
 ---
-title: Blog
-subtitle: Announcing October's Linkerd hero
-author: Catherine
+author: catherine
+date: 2021-10-28T00:00:00Z
+title: Announcing October's Linkerd hero
+feature: "/uploads/hero-alberto-sadde.jpeg" 
+thumbnail: "/uploads/hero-alberto-sadde.jpeg" 
 tags:
   - Community
-items:
-  - 
 description: 'As a new member of the Linkerd community, Alberto jumped right into the spirit of the community and helped someone out on Slack when they posted a question in the linkerd2 channel.'
 keywords: [hero]
 ---
@@ -32,7 +32,7 @@ work past their issues. And because such selfless behavior is invaluable in
 open source communities, he's our October Linkerd Hero! Thank you, Alberto,
 for helping others succeed!
 
-ADDE IMAGE HERE
+![Alberto Sadde](/uploads/hero-alberto-sadde.jpeg)
 
 ## Nominate next month's Linkerd Hero
 
