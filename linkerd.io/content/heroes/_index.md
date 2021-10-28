@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Alberto Sadde
+    date: October 2021
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/alberto-sadde.png"
+    alt: Portrait of Alberto Sadde
+    github_url: https://github.com/aesadde
   - name: Dom DePasquale
     date: August 2021
     blurb: Spreading the Linkerd message
