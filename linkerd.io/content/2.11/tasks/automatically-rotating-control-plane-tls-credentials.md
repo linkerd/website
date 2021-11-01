@@ -23,7 +23,7 @@ for making TLS credentials from external sources available to Kubernetes
 clusters.
 
 As a first step, [install cert-manager on your
-cluster](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html).
+cluster](https://cert-manager.io/docs/installation/).
 
 {{< note >}}
 If you are installing cert-manager `>= 1.0`,
