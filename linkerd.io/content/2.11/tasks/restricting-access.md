@@ -172,7 +172,7 @@ by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
 This means that ALL requests will be rejected unless they are explicitly
 authorized by creating Server and ServerAuthorization resources.  One important
 consequence of this is that liveness and readiness probes will need to be
-explictly authorized or else Kubernetes will not be able to recognize the pods as
+explicitly authorized or else Kubernetes will not be able to recognize the pods as
 live or ready and will restart them.
 
 This policy allows all clients to reach the Linkerd admin port so that Kubernetes
