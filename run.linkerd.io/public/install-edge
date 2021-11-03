@@ -39,7 +39,7 @@ validate_checksum() {
       checksum=$($checksumbin dgst -sha256 "${filename}" | sed -e 's/^.* //')
       ;;
     *shasum)
-      checksum=$($checksumbin -a256 "${filename}" | sed -e 's/^.* //')
+      checksum=$($checksumbin -a256 "${filename}" | sed -e 's/ .*$//')
       ;;
   esac
 
