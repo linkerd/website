@@ -119,7 +119,7 @@ Make sure your local Helm repos are updated:
 ```bash
 helm repo update
 
-helm search linkerd2 -v {{% latestversion %}}
+helm search repo linkerd2
 NAME                    CHART VERSION          APP VERSION            DESCRIPTION
 linkerd/linkerd2        <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
 ```

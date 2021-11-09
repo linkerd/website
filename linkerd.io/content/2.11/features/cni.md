@@ -57,7 +57,7 @@ First ensure that your Helm local cache is updated:
 
 ```bash
 helm repo update
-helm search linkerd2-cni
+helm search repo linkerd2-cni
 ```
 
 Install the CNI DaemonSet:
