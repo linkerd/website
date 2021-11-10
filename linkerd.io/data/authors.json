@@ -188,6 +188,13 @@
     "firstName": "Steve",
     "lastName": "Jenson"
   },
+  "tarun": {
+    "avatar": "/uploads/tarun-pothulapati.png",
+    "email": "tarun@buoyant.io",
+    "name": "Tarun Pothulapati",
+    "firstName": "Tarun",
+    "lastName": "Pothulapati"
+  },
   "thomas": {
     "avatar": "",
     "email": "thomas@buoyant.io",
