@@ -1,11 +1,14 @@
 ---
 title: October Linkerd community meeting recap
-author: Tarun
+author: tarun
+date: 2021-11-10T00:00:00Z
+feature: "/uploads/october-community-recap.png" 
+thumbnail: "/uploads/october-community-recap.png" 
 tags:
   - Community
-items:
-  - 
-description: 'The world's first hybrid KubeCon turned out great for Linkerd. Fascinating talks, a big announcement around Linkerd 2.11, and, best of all, we got to see real people again. '
+description: "The world's first hybrid KubeCon turned out great for Linkerd.
+Fascinating talks, a big announcement around Linkerd 2.11, and, best of all, we
+got to see real people again."
 keywords: [community meeting; meetup]
 ---
 If you missed our last community meeting, don't worry. Below is a recap along
@@ -51,7 +54,7 @@ the gender-neutral blue lobster — Linkerd's new mascot! A huge Halloween fan,
 Linky decided to dress up as a vampire during our community meeting Halloween
 edition.
 
-LINKY VAMPIRE IMAGE
+![linky vampire](/uploads/linky-vampire.png)
 
 ## Roadmap
 
