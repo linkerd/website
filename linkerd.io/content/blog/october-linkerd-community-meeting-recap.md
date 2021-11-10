@@ -113,7 +113,7 @@ Back to gRPC. Kubernetes doesn't load balance gRPC, so they knew they needed
 another load balancer. When checking the official Kubernetes documentation, they
 saw a link to Linkerd and how it could help. Although there were some other
 solutions out there, setting up Linkerd was easy so they went ahead with the
-service mesh. 
+service mesh.
 While they were only looking for load balancing, they quickly realized all the
 other features Linkerd offered and were totally sold.
 
