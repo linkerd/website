@@ -64,6 +64,11 @@
       {{ end }}
     </ul>
     <ul class="menu-list is-paddingless is-marginless">
+      <li class="menu-list-item {{ if eq $currentPage.URL "/what-is-a-service-mesh/" }}is-active{{ end }}">
+        <a href="/what-is-a-service-mesh/">
+          What is a service mesh?
+        </a>
+      </li>
       <li class="menu-list-item {{ if eq $currentPage.URL "/faq/" }}is-active{{ end }}">
         <a href="/faq/">
           Frequently Asked Questions
