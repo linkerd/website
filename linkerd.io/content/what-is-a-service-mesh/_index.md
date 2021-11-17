@@ -3,49 +3,54 @@ title: What is a service mesh?
 enableFAQSchema: true
 aliases:
   - priority = 1.0
-schema_faq:
-  faqs:
+faqs:
   - question: What is a service mesh?
-    answer: A service mesh is a tool for adding observability, security, and reliability
-      features to applications by inserting these features at the platform layer rather
-      than the application layer.
+    answer: A service mesh like Linkerd is a tools for adding observability,
+      security, and reliability features to "cloud native" applications by
+      transparently inserting this functionality at the platform layer rather
+      than the application layer. The service mesh is rapidly becoming a
+      standard part of the cloud native stack, especially for Kubernetes
+      adopters.
   - question: What does a service mesh actually do?
-    answer: At its core, a service mesh adds reliability, security, and observability
-      features to a microservice application by managing the way that communication
-      happens between the services.
+    answer: A service mesh adds reliability, security, and observability
+      features to a microservice application by managing the way that
+      communication happens between the services.
   - question: Why do I need a service mesh?
-    answer: 'If you are building applications on Kubernetes, then a service mesh like
-      Linkerd provides critical observability, reliability, and security features
-      with one big advantage: the application doesn’t need to implement these features,
-      or even to be aware that the service mesh is there!'
+    answer: If you are building applications on Kubernetes, then a service mesh
+      like Linkerd provides critical observability, reliability, and security
+      features with one big advantage--the application doesn't need to
+      implement these features, or even to be aware that the service mesh is
+      there!
   - question: Where did the service mesh come from?
-    answer: The origins of the service mesh model can be traced in the evolution of
-      server-side applications over the past several decades.
-  - question: What’s the future of the service mesh?
-    answer: 'The frantic pace of service mesh adoption is showing little sign of slowing
-      down. As with most successful technology, the ultimate future of the service
-      mesh is probably quite boring: to recede into the background, present but taken
-      for granted and not actually given too much attention.'
+    answer: The origins of the service mesh model can be traced in the
+      evolution of server-side applications over the past several decades.
+  - question: What's the future of the service mesh?
+    answer: The frantic pace of service mesh adoption is showing little sign of
+      slowing down. As with most successful technology, the ultimate future of
+      the service mesh is probably quite boring--to recede into the background,
+      present but taken for granted and not actually given too much attention.
 ---
 
-tl;dr: Service meshes like Linkerd are tools for adding observability,
-security, and reliability features to applications by inserting them at the
-platform layer rather than the application layer. While initially obscure, the
-service mesh is rapidly becoming a standard part of the cloud native stack,
-especially for Kubernetes adopters.
+tl;dr: A service mesh like Linkerd is a tools for adding observability,
+security, and reliability features to "cloud native" applications by
+transparently inserting this functionality at the platform layer rather than
+the application layer. The service mesh is rapidly becoming a standard part of
+the cloud native stack, especially for Kubernetes adopters.
 
 Over the past few years, the service mesh has risen from relative obscurity to
-become a standard component of the cloud native stack. The first service mesh
-project, Linkerd ("linker-dee"), was admitted to the Cloud Native Computing
+become a standard component of the cloud native stack. Linkerd ("linkerd-dee"),
+the first service mesh project, was admitted to the Cloud Native Computing
 Foundation in early 2017, [rewritten to use Rust micro-proxies in
 2018](https://www.infoq.com/articles/linkerd-v2-production-adoption/), and [is
-now in production](https://buoyant.io/case-studies/) at major organizations
-like Microsoft, HP, Walmart, and Nordstrom.
+now in production](https://buoyant.io/case-studies/) at organizations around
+the world like Microsoft, HP, and Nordstrom. In 2021 Linkerd became the [only
+service mesh in the world to attain CNCF
+graduation](/2021/07/28/announcing-cncf-graduation/).
 
-But what is a service mesh, exactly? And why is it suddenly such a hot topic?
-In this article, I’ll define the service mesh and trace its lineage through
+But what is a service mesh, exactly? And why is it such a hot topic?
+In this article, I'll define the service mesh and trace its lineage through
 shifts in application architecture over the past decade. We'll take a quick
-look into how the service mesh works. Finally, I’ll describe where the service
+look into how the service mesh works. Finally, I'll describe where the service
 mesh is heading and what to expect as this concept evolves alongside cloud
 native adoption.
 
@@ -71,7 +76,7 @@ application. In the cloud native world, an application might consist of
 hundreds of services; each service might have thousands of instances; and each
 of those instances might be in a constantly-changing state as they are
 dynamically scheduled by an orchestrator like Kubernetes. Not only is
-service-to-service communication in this world incredibly complex, it’s a
+service-to-service communication in this world incredibly complex, it's a
 fundamental part of the application's runtime behavior. Managing it is vital to
 ensuring end-to-end performance, reliability, and security.
 
@@ -114,7 +119,7 @@ metrics and distributed tracing, which are emitted and stored in a centralized
 metrics system and reported to the operator via Linkerd's dashboards and CLI
 tools.
 
-And that’s just the simplified version!
+And that's just the simplified version!
 
 ![Linkerd dashboard](/images/architecture/stat.png "Linkerd dashboard")
 
@@ -144,7 +149,7 @@ The origins of the service mesh model can be traced in the evolution of
 server-side applications over the past several decades.
 
 Consider the typical "three-tiered" architecture of a medium-sized web
-application in the 2000’s. In this model, application logic, web serving logic,
+application in the 2000's. In this model, application logic, web serving logic,
 and storage logic are each a separate layer. The communication between layers,
 while complex, is limited in scope—there are only two hops, after all.
 
@@ -153,9 +158,9 @@ break. Companies like Google, Netflix, and Twitter, faced with massive traffic
 requirements, implemented what was effectively a predecessor of the cloud
 native approach: the application layer was split into microservices, and the
 tiers became a _topology_. These systems solved this complexity by adopting a
-generalized communication layer , usually in the form of a library—Twitter’s
-[Finagle](https://twitter.github.io/finagle/), Netflix’s
-[Hystrix](https://github.com/Netflix/Hystrix), and Google’s Stubby being cases
+generalized communication layer , usually in the form of a library—Twitter's
+[Finagle](https://twitter.github.io/finagle/), Netflix's
+[Hystrix](https://github.com/Netflix/Hystrix), and Google's Stubby being cases
 in point.
 
 Fast forward to the modern service mesh. The service mesh combines this idea of
@@ -188,7 +193,7 @@ The service mesh continues its meteoric rise to becoming a widely-used and
 critical component of the cloud native stack. From its humble beginnings as the
 first service mesh project in 2017, [Linkerd is now in
 production](https://buoyant.io/case-studies/) at organizations like Microsoft,
-HP, Walmart, and Nordstrom, and adoption shows no sign of slowing down. If you
+HP, and Nordstrom, and adoption shows no sign of slowing down. If you
 are using Kubernetes, Linkerd is fully open source and available to you today.
 [You're only minutes away](/2/getting-started/) from getting
 concrete, hands-on experience with the service mesh!
