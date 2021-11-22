@@ -174,7 +174,7 @@ started!
 ### Requirements
 
 All students are required to get to know Linkerd by completing this
-[Getting Started](https://linkerd.io/2.11/getting-started/) tutorial.
+[Getting Started](https://linkerd.io/getting-started/) tutorial.
 
 As part of the acceptance requirements, students **must** have at least one pull
 requests reviewed and merged in the [Linkerd2](https://github.com/linkerd/linkerd2)

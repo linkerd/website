@@ -30,8 +30,8 @@ on how multi-cluster support for headless services work, check out
   local clusters.
 - [`smallstep/CLI`](https://github.com/smallstep/cli/releases) to generate
   certificates for Linkerd installation.
-- [`linkerd:stable-2.11.0`](https://github.com/linkerd/linkerd2/releases) to
-  install Linkerd.
+- [`A recent linkerd release`](https://github.com/linkerd/linkerd2/releases)
+  (2.11 or older).
 
 To help with cluster creation and installation, there is a demo repository
 available. Throughout the guide, we will be using the scripts from the

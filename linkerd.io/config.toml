@@ -118,6 +118,7 @@ description = "Linkerd is an ultralight service mesh for Kubernetes. It gives yo
 images = [""]
 latest_release_date = "2020-06-10"
 latest_release_version = "1.7.4"
+latest_linkerd2_stable_version = "2.11"
 logo = "/images/identity/svg/linkerd_primary_color_white.svg"
 [permalinks]
 blog = "/:year/:month/:day/:slug/"
