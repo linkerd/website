@@ -9,7 +9,7 @@ top_hero:
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
-    url: "/2.11/getting-started/"
+    url: "/getting-started/"
   - caption: Get Involved
     url: "/community/get-involved/"
   image_on_the_right: false

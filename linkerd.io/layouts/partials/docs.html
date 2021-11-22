@@ -1,4 +1,4 @@
-{{ $latestVersion := "2.11" }}
+{{ $latestVersion := site.Params.latest_linkerd2_stable_version }}
 {{ $pathParts := split .page.File.Path "/" }}
 {{ $docsVersion := index $pathParts 0 }}
 {{ $latestDocsPath := delimit (append (after 1 $pathParts) (slice "" $latestVersion)) "/" }}
