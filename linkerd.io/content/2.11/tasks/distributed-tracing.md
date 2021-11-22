@@ -206,6 +206,7 @@ on port 14250.
 The YAML file is merged with the [Helm values.yaml][helm-values] which shows
 other possible values that can be configured.
 
+<!-- markdownlint-disable MD034 -->
 [helm-values]: https://github.com/linkerd/linkerd2/blob/stable-{{% latest-linkerd2-stable-version %}}.0/jaeger/charts/linkerd-jaeger/values.yaml
 
 It is also possible to manually edit the OpenCensus configuration to have it
