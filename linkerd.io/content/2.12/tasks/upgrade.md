@@ -13,6 +13,7 @@ Before starting, read through the version-specific upgrade notices below, which
 may contain important information you need to be aware of before commencing
 with the upgrade process:
 
+- [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
 - [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
 - [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
@@ -149,8 +150,8 @@ your Kubernetes cluster, it is time to upgrade the data plane. The easiest
 way to do this is to run a rolling deploy on your services, allowing the
 proxy-injector to inject the latest version of the proxy as they come up.
 
-With `kubectl` 1.15+, this can be as simple as using the `kubectl rollout
-restart` command to restart all your meshed services. For example,
+This can be as simple as using the `kubectl rollout restart` command to restart
+all your meshed services. For example,
 
 ```bash
 kubectl -n <namespace> rollout restart deploy
@@ -189,6 +190,69 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.12.0
+
+The minimum Kubernetes version supported is `v1.20.0`.
+
+### Breaking changes in the core Helm chart
+
+The `linkerd2` chart has been replaced by two charts: `linkerd-base` and
+`linkerd-control-plane`. Please check the updated [Helm
+instructions](../install-helm) for details. Note that all the extension charts
+like viz and multicluster remain as-is. Also note that support for Helm v2 has
+been dropped.
+
+Migrating to these new charts will incur in downtime for linkerd's control plane
+during the process, but as the proxies don't require the control plane to always
+be up, the data plane shouldn't incur in downtime. Just make sure you roll your
+data plane deployments after the control plane is updated, as explained in
+[upgrade the data plane](#upgrade-the-data-plane).
+
+Before proceeding, make sure you retrieve all your chart values customizations,
+in particular your trust root and issuer keys (`identityTrustAnchorsPEM`,
+`identity.issuer.tls.crtPEM` and `identity.issuer.tls.keyPEM`). These values
+will need to be fed again into the `helm install` commands below. The values
+will now be split between the two new charts; please consult `linkerd-base`'s
+[values.yaml](https://github.com/linkerd/linkerd2/blob/c5a02a42d0af587da3624523386bc9ff8ae2e6af/charts/linkerd-base/values.yaml)
+and `linkerd-control-plane`'s
+[values.yaml](https://github.com/linkerd/linkerd2/blob/c5a02a42d0af587da3624523386bc9ff8ae2e6af/charts/linkerd-control-plane/values.yaml)
+to find out.
+
+To start the migration first find the namespace you used to store the previous
+linkerd chart helm config:
+
+```
+$ helm ls -A
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION  
+linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
+```
+
+If you did use Helm's `-namespace` flag when you previously installed linkerd,
+then you should see that namespace reflected in the output above, and use it
+instead of `default` when deleting the chart:
+
+```
+$ helm delete -n default linkerd
+```
+
+Then install both new charts, one after the other:
+
+```
+# first make sure you update the helm repo
+$ helm repo up
+
+# now install the linkerd-base chart
+$ helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+
+# then install the linkerd-control-plane chart
+$ helm install linkerd-control-plane \
+  -n linkerd \
+  --set-file identityTrustAnchorsPEM=ca.crt \
+  --set-file identity.issuer.tls.crtPEM=issuer.crt \
+  --set-file identity.issuer.tls.keyPEM=issuer.key \
+  linkerd/linkerd-control-plane
+```
 
 ## Upgrade notice: stable-2.11.0
 
