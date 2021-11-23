@@ -80,7 +80,7 @@ mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds
 
 Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `true`. No further configuration is required.
+annotation should be set to `"true"`. No further configuration is required.
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -90,7 +90,7 @@ metadata:
   name: emojivoto-web-ingress
   namespace: emojivoto
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: true
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   defaultBackend:
