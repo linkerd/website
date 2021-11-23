@@ -199,7 +199,7 @@ The minimum Kubernetes version supported is `v1.20.0`.
 
 The `linkerd2` chart has been replaced by two charts: `linkerd-base` and
 `linkerd-control-plane`. Please check the updated [Helm
-instructions](../install-helm) for details. Note that all the extension charts
+instructions](../install-helm/) for details. Note that all the extension charts
 like viz and multicluster remain as-is. Also note that support for Helm v2 has
 been dropped.
 
