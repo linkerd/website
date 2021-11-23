@@ -222,7 +222,7 @@ to find out.
 To start the migration first find the namespace you used to store the previous
 linkerd chart helm config:
 
-```
+```bash
 $ helm ls -A
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION  
 linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
@@ -232,21 +232,21 @@ If you did use Helm's `-namespace` flag when you previously installed linkerd,
 then you should see that namespace reflected in the output above, and use it
 instead of `default` when deleting the chart:
 
-```
-$ helm delete -n default linkerd
+```bash
+helm delete -n default linkerd
 ```
 
 Then install both new charts, one after the other:
 
-```
+```bash
 # first make sure you update the helm repo
-$ helm repo up
+helm repo up
 
 # now install the linkerd-base chart
-$ helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
 
 # then install the linkerd-control-plane chart
-$ helm install linkerd-control-plane \
+helm install linkerd-control-plane \
   -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \

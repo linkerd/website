@@ -44,7 +44,8 @@ helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
 
 {{< note >}}
 This will create the `linkerd` namespace. If it already exists or you're
-creating it beforehand elsewhere in your pipeline, just omit the `--create-namespace` flag.
+creating it beforehand elsewhere in your pipeline, just omit the
+`--create-namespace` flag.
 {{< /note >}}
 
 ### linkerd-control-plane
