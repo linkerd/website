@@ -18,8 +18,8 @@ application under various levels of load. Using an open source benchmark
 harness, we showed that Linkerd was dramatically faster than Istio while
 consuming an order of magnitude less data plane memory and CPU.
 
-With the recent release of [Linkerd 2.11 introduces authorization
-policy](/2021/09/30/announcing-linkerd-2.11/), we wanted to reevaluate Linkerd's
+With the recent release of [authorization policy in Linkerd
+2.11](/2021/09/30/announcing-linkerd-2.11/), we wanted to reevaluate Linkerd's
 performance. After all, this was a major new feature for the project with
 potential performance implications. How does the latest version of Linkerd stack
 up?
@@ -95,7 +95,7 @@ is available for perusal.)
 
 It is important to note that the Kinvolk framework [measures the behavior of the
 service mesh in a very specific
-way](/2021/05/27/linkerd-vs-istio-benchmarks/#experiment-setup), and we
+way](/2021/05/27/linkerd-vs-istio-benchmarks/#experimental-setup), and we
 performed no modifications of this framework. Note also that the numbers
 reported by this benchmark are a function of both the service mesh _and_ of the
 harness and its environment. In other words, these are not absolute scores but
@@ -161,7 +161,7 @@ increasing from the 99.9th percentile on out.
 Finally, at 2,000 RPS, we see the most dramatic difference between the meshes:
 at the median, Linkerd introduces an additional 6ms of latency over the baseline
 of 6ms vs Istio's additional 17ms; at the max, Linkerd introduces an additional
-42ms over the baseline of 25ms, and Istio adding 8x that with an additional
+42ms over the baseline of 84ms, and Istio adding 8x that with an additional
 ~350ms. Generally speaking, at each percentile reported, Istio introduced
 anywhere between 130% to 850% more additional latency than Linkerd.
 
@@ -177,7 +177,7 @@ all throughput levels, so we'll focus on the highest-load scenario of 2,000 RPS.
 
 Starting with the control plane, we see that Istio's control plane usage
 averaged 597mb, about 50% higher than Linkerd's control plane memory consumption
-of 365mb. Linkerd's CPU usage was also orders of magnitude smaller—21ms of
+of 365mb. Linkerd's CPU usage was over an order of magnitude smaller—212ms of
 control plane CPU time versus Istio's 5 seconds.
 
 More important than the control plane, however, is the data plane. After all,
