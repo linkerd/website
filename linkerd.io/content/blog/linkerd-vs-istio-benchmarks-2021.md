@@ -95,7 +95,7 @@ is available for perusal.)
 
 It is important to note that the Kinvolk framework [measures the behavior of the
 service mesh in a very specific
-way](/2021/05/27/linkerd-vs-istio-benchmarks/#experimental-setup), and we
+way](/2021/05/27/linkerd-vs-istio-benchmarks/#experiment-setup), and we
 performed no modifications of this framework. Note also that the numbers
 reported by this benchmark are a function of both the service mesh _and_ of the
 harness and its environment. In other words, these are not absolute scores but
@@ -263,7 +263,7 @@ If you want to reproduce these experiments on your own, follow the
 [benchmarking
 instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd-Benchmark-Setup).
 
-If you try this, please see our [comments above](#experiment-setup) about
+If you try this, please see our [comments above](#experimental-setup) about
 experimental methodology. It is critical that you find an environment that can
 deliver consistent results, especially for things like max latency that are
 very sensitive to network traffic, resource contention, and so on.  Also,
