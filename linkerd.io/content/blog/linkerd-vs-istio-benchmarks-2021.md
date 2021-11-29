@@ -18,20 +18,19 @@ application under various levels of load. Using an open source benchmark
 harness, we showed that Linkerd was dramatically faster than Istio while
 consuming an order of magnitude less data plane memory and CPU.
 
-With the recent recent release of [Linkerd 2.11 introduces authorization
+With the recent release of [Linkerd 2.11 introduces authorization
 policy](/2021/09/30/announcing-linkerd-2.11/), we wanted to reevaluate Linkerd's
 performance. After all, this was a major new feature for the project with
 potential performance implications. How does the latest version of Linkerd stack
 up?
 
 To find out, we re-ran the benchmarks with the latest versions of both projects.
-Our results show that, even with the addition of policy, **Linkerd remains
-dramatically smaller, lighter, and faster than Istio, especially at tail
-latencies—almost an order of magnitude faster in the highest load level
-tested.**
+Our results show that **even with the addition of policy, Linkerd continues to
+be dramatically faster than Istio while consuming just a fraction of the system
+resources.** At the highest level of load we tested, Linkerd introduced almost
+an order of magnitude less additional tail latency than Istio did.
 
-In fact, even with the addition of policy, the 2.11 release of Linkerd is even
-faster than before! Read on for more.
+Read on for more!
 
 ## Background
 
@@ -40,9 +39,7 @@ Istio](/2019/05/18/linkerd-benchmarks/). This effort not only showed that that
 Linkerd was dramatically faster and lighter than Istio, it produced an [open
 source service mesh benchmarking
 harness](https://github.com/kinvolk/service-mesh-benchmark) so that anyone could
-reproduce the results.
-
-This harness was notable because it mimicked "real life" scenarios: it sent a
+reproduce the results. This harness mimicked "real life" scenarios: it sent a
 sustained level of traffic through a simple microservices application, made use
 of both gRPC and HTTP calls, and measured the cost of using a service mesh in
 terms of memory and CPU consumed as well as latency added. Critically, latency
@@ -53,6 +50,11 @@ Earlier this year, we [revisited these comparisons for Linkerd 2.10 and Istio
 1.10.0](/2021/05/27/linkerd-vs-istio-benchmarks/), showing that Linkerd remained
 dramatically faster than Istio and consumed an order of magnitude less data
 plane memory and CPU while doing so.
+
+Since then, both projects have released new versions, most notably [Linkerd
+2.11's introduction of authorization
+policy](/2021/09/30/announcing-linkerd-2.11/), a major new feature for the
+project with a potential performance impact.
 
 ## Experimental setup
 
@@ -133,9 +135,9 @@ almost six times the additional latency of Linkerd.
 
 Looking at the percentiles, we see that Istio's latency distribution jumped
 dramatically at the 99th percentile to ~240ms, while Linkerd showing a more
-gradual increase in the higher percentiles to 57ms. (Remember that these
-latency numbers are measured from the client's perspective, i.e. what a user of
-this application would actually experience.)
+gradual increase in the higher percentiles to 57ms.
+
+**Winner**: Linkerd (8ms vs 26ms median; 39ms vs 232ms max)
 
 ![Latency at 20 RPS](/images/benchmark2/latency-20rps.png "Latency at 20 RPS")
 
@@ -148,7 +150,9 @@ the max, Istio's latency of 280ms is 250ms over the baseline of 30ms, while
 Linkerd's max latency of 119ms is ~90ms over, less than half of Istio's
 additional latency. We see the same jump in Istio's latency occurring at the
 99th percentile to almost 250ms of user-facing latency, with Linkerd gradually
-increasing from the 99.9th out.
+increasing from the 99.9th percentile on out.
+
+**Winner**: Linkerd (8ms vs 26ms median; 90ms vs 250ms max)
 
 ![Latency at 200 RPS](/images/benchmark2/latency-200rps.png "Latency at 200 RPS")
 
@@ -159,7 +163,9 @@ at the median, Linkerd introduces an additional 6ms of latency over the baseline
 of 6ms vs Istio's additional 17ms; at the max, Linkerd introduces an additional
 42ms over the baseline of 25ms, and Istio adding 8x that with an additional
 ~350ms. Generally speaking, at each percentile reported, Istio introduced
-between 130% to 850% more additional latency than Linkerd.
+anywhere between 130% to 850% more additional latency than Linkerd.
+
+**Winner**: Linkerd (6ms vs 17ms median; 42ms vs 350ms max)
 
 ![Latency at 2,000 RPS](/images/benchmark2/latency-2000rps.png "Latency at 2,000 RPS")
 
@@ -181,33 +187,43 @@ was, on average, 26.3mb, whereas the maximum memory consumed by one of Istio's
 Envoy proxies was 156.2mb—a factor of 6. Similarly, Linkerd's maximum proxy CPU
 time recorded was 36ms, whereas Istio's was 67ms—about 85% more.
 
+**Winner:** Linkerd (26mb vs 156mb memory; 36ms vs 67ms CPU).
+
 ![Resource usage](/images/benchmark2/grid.png "Resource usage")
 
 ## Summary and discussion
 
 In these benchmarks, designed to mimic behavior in a real-world scenario, we
-once again saw Linkerd dramatically outperform Istio while maintaining a
-significantly smaller resource cost. At the highest throughput evaluated, we saw
-Linkerd consume 1/6th the memory and 55% of the CPU at the data plane, while
-delivering 1/3rd the additional median latency and almost 1/9th the additional
-maximum latency of Istio.
+once again saw the latest version of Linkerd dramatically outperform the latest
+version of Istio while maintaining a significantly smaller resource cost. At the
+highest throughput evaluated, we saw Linkerd consume 1/6th the memory and 55% of
+the CPU at the data plane, while delivering 1/3rd the additional median latency
+and 1/8th the additional maximum latency of Istio.
 
 Comparing these results to those of the earlier experiments almost 6 months ago,
 a few highlights stand out:
 
 * Linkerd's median latency has actually _improved_ since 2.10.1, even with the
-  addition of policy. Linkerd's additional median latency is consistently 3ms
-  lower at each threshold.
+  addition of policy. Linkerd's additional median latency was consistently 3ms
+  lower at each traffic level evaluated. (Max latency increased in some runs and
+  decreased in others).
 
-* Istio's max latency appears to have gotten significantly worse, increasing
-  betwen 44ms to 97ms over the baseline.
+* Istio's data plane CPU usage improved 67ms down from 88ms at 2,000 RPS;
+  however, Istio's max latency appears to have gotten significantly worse,
+  increasing by 44ms, 59ms, and 97ms at 20, 200, and 2,000 RPS respectively.
 
-* Linkerd's data plane CPU is heavier than before, reporting max CPU usage to a
-  36ms (previously 11ms), and its data plane memory to 26mb (previously 18mb).
-  One possible cause is the [recent move to
-  jemalloc](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md#edge-21111),
-  intended to reduce memory consumption at very high connection counts. Further
-  testing is necessary to confirm this hypothesis.
+* Linkerd's data plane is notably heavier than in 2.10, reporting max CPU usage
+  of 36ms (previously 11ms) and max memory usage to 26mb (previously 18mb). The
+  memory footprint, in particular, changed substantially between Linkerd 2.11.0
+  and 2.11.1, likely due to the [move to
+  jemalloc](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md#edge-21111).
+  In fact, repeating these benchmarks with 2.11.0 (one point release earlier)
+  shows an average data plane memory footprint of 17mb, a difference of 9mb![^2]
+  The move to jemalloc should reduce memory consumption at very high connection
+  counts and allow the proxy to release memory more easily during spiky load;
+  it may be the case that this comes at a tradeoff with the max memory
+  consumption as measured by these benchmarks. We're continuing to investigate
+  this change.
 
 ## Why is Linkerd so much faster and lighter?
 
@@ -226,7 +242,7 @@ the dark ages of 2018. Interestingly enough, the primary reason for building
 Linkerd2-proxy was not for performance but for _operational_ reasons: operating
 an Envoy-based service mesh like Istio often requires you to become an expert
 at operating Envoy, a challenge which we did not relish imposing upon Linkerd
-users.[^2]
+users.[^3]
 
 Happily, the choice to build Linkerd2-proxy also resulted in significant
 performance and efficiency gains. By solving the very specific problem of being
@@ -243,7 +259,7 @@ some of the most cutting edge technology in the entire CNCF landscape.
 
 ## How to reproduce these results
 
-If you want to reproduce these experiments on your own, you can follow the
+If you want to reproduce these experiments on your own, follow the
 [benchmarking
 instructions](https://github.com/linkerd/linkerd2/wiki/Linkerd-Benchmark-Setup).
 
@@ -279,7 +295,20 @@ the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 ## Footnotes
 
 [^1]:
-     For example, statements like "Linkerd added Xms of latency at the median" in this report do not mean that Linkerd will add Xms of median latency to _your_ application. Nor do they mean that an individual Linkerd proxy will add Xms of latency (in fact, the median latency of an individual Linkerd proxy is less than a millisecond for most types of traffic).
+     For example, statements like "Linkerd added Xms of latency at the median"
+     in this report do not mean that Linkerd will add Xms of median latency to
+     _your_ application. Nor do they mean that an individual Linkerd proxy will
+     add Xms of latency (in fact, the median latency of an individual Linkerd
+     proxy is less than a millisecond for most types of traffic).
 
 [^2]:
-     The proxy might be the most interesting part of the service mesh from a technology perspective, but it's the _least_ interesting part from the users' perspective. Our belief is that the service mesh proxy should be an implementation detail, and we strive hard to ensure that the majority of Linkerd users have to learn very little about Linkerd2-proxy.
+    It was extremely tempting to report these numbers! But, "latest version"
+    means latest version, and in this case that means Linkerd 2.11.1.
+
+[^3]:
+     The proxy might be the most interesting part of the service mesh from a
+     technology perspective, but it's the _least_ interesting part from the
+     users' perspective. Our belief is that the service mesh proxy should be an
+     implementation detail, and we strive hard to ensure that—blog posts
+     aside—the majority of Linkerd users have to learn very little about
+     Linkerd2-proxy.
