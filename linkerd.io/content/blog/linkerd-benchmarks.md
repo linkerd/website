@@ -10,6 +10,9 @@ thumbnail: /uploads/glaciers.jpg
 
 ![glaciers](/uploads/glaciers.jpg)
 
+**Update 2021-11-29: we've repeated these experiments with the [latest versions
+of Linkerd and Istio](/2021/11/29/linkerd-vs-istio-benchmarks-2021/).**
+
 (**Update 5/30/2019:** Based on feedback from the Istio team, Kinvolk has
 [re-run some of the Istio
 benchmarks](https://github.com/kinvolk/service-mesh-benchmark/issues/5#issuecomment-496482381).

@@ -10,6 +10,9 @@ tags: [Linkerd]
 
 ![car lights zooming by](/uploads/marc-sendra-martorell--Vqn2WrfxTQ-unsplash.jpg)
 
+**Update 2021-11-29: we've repeated these experiments with the [latest versions
+of Linkerd and Istio](/2021/11/29/linkerd-vs-istio-benchmarks-2021/).**
+
 Two years ago, the fine folks at [Kinvolk](https://kinvolk.io) benchmarked the
 performance of Linkerd and Istio and showed that [Linkerd was dramatically
 faster and smaller than Istio in all but one
