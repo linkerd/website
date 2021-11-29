@@ -145,7 +145,7 @@ gradual increase in the higher percentiles to 57ms.
 
 The 200 RPS numbers tell a very similar story and the median latency numbers are
 almost identical: Linkerd's median latency of 14ms represents 8ms over the
-baseline median of 6ms, while Istio's median latency of 26ms is 20ms over.  At
+baseline median of 6ms, while Istio's median latency of 26ms is 20ms over. At
 the max, Istio's latency of 280ms is 250ms over the baseline of 30ms, while
 Linkerd's max latency of 119ms is ~90ms over, less than half of Istio's
 additional latency. We see the same jump in Istio's latency occurring at the
@@ -200,6 +200,12 @@ highest throughput evaluated, we saw Linkerd consume 1/6th the memory and 55% of
 the CPU at the data plane, while delivering 1/3rd the additional median latency
 and 1/8th the additional maximum latency of Istio.
 
+It's notable that Linkerd's worst-case latency at 200 RPS was worse than at
+2,000 RPS. This may be due to network interference during the course of the
+experiment. In the future, we may want to alter the criteria for outlier
+detection; for now, in the interests of transparency, we are reporting these
+results as is.
+
 Comparing these results to those of the earlier experiments almost 6 months ago,
 a few highlights stand out:
 
@@ -212,18 +218,18 @@ a few highlights stand out:
   however, Istio's max latency appears to have gotten significantly worse,
   increasing by 44ms, 59ms, and 97ms at 20, 200, and 2,000 RPS respectively.
 
-* Linkerd's data plane is notably heavier than in 2.10, reporting max CPU usage
+* Linkerd's data plane is heavier than in 2.10, reporting max CPU usage
   of 36ms (previously 11ms) and max memory usage to 26mb (previously 18mb). The
   memory footprint, in particular, changed substantially between Linkerd 2.11.0
-  and 2.11.1, likely due to the [move to
-  jemalloc](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md#edge-21111).
+  and 2.11.1, likely due to the [move to the jemalloc allocator in the
+  proxy](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md#edge-21111).
   In fact, repeating these benchmarks with 2.11.0 (one point release earlier)
   shows an average data plane memory footprint of 17mb, a difference of 9mb![^2]
-  The move to jemalloc should reduce memory consumption at very high connection
-  counts and allow the proxy to release memory more easily during spiky load;
-  it may be the case that this comes at a tradeoff with the max memory
-  consumption as measured by these benchmarks. We're continuing to investigate
-  this change.
+  One hypothesis is that the jemalloc allocator, which was chosen to reduce memory consumption at very high
+  connection counts and allow the proxy to release memory more easily during
+  spiky load; it may be the case that this comes at a tradeoff with the max
+  memory consumption as measured by these benchmarks. We're continuing to
+  investigate this change.
 
 ## Why is Linkerd so much faster and lighter?
 
@@ -281,8 +287,9 @@ Fromm, for the excellent benchmark harness.
 
 ## Linkerd is for everyone
 
-Linkerd is a graduated project of the [Cloud Native Computing
-Foundation](https://cncf.io/). Linkerd is [committed to open
+Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
+[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
+open
 governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
