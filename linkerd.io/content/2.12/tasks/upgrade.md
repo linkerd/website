@@ -228,7 +228,7 @@ NAME    NAMESPACE       REVISION        UPDATED                                 
 linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
 ```
 
-If you did use Helm's `-namespace` flag when you previously installed linkerd,
+If you did use Helm's `--namespace` flag when you previously installed linkerd,
 then you should see that namespace reflected in the output above, and use it
 instead of `default` when deleting the chart:
 

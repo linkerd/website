@@ -36,7 +36,7 @@ then `linkerd-control-plane`.
 ### linkerd-base
 
 The `linkerd-base` chart sets up all the cluster-level resources, including
-CRDs. Therefore you require cluster-level privileges for setting it up:
+CRDs. Therefore it requires cluster-level privileges for setting it up:
 
 ```bash
 helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
@@ -74,7 +74,7 @@ cniEnabled=true` flag to your `helm install` command in both charts.
 
 ## Setting High-Availability
 
-Both charts contain a file `values-ha.yaml` that override some default values as
+Both charts contain a file `values-ha.yaml` that overrides some default values as
 to set things up under a high-availability scenario, analogous to the `--ha`
 option in `linkerd install`. Values such as higher number of replicas, higher
 memory/cpu limits and affinities are specified in those files.
