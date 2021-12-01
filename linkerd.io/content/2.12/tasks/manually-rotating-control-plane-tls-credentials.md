@@ -140,7 +140,7 @@ linkerd upgrade --identity-trust-anchors-file=./bundle.crt | kubectl apply -f -
 or you can also use the `helm upgrade` command:
 
 ```bash
-helm upgrade linkerd2 --set-file identityTrustAnchorsPEM=./bundle.crt
+helm upgrade linkerd-control-plane --set-file identityTrustAnchorsPEM=./bundle.crt
 ```
 
 This will restart the proxies in the Linkerd control plane, and they will be
@@ -235,12 +235,9 @@ linkerd upgrade --identity-issuer-certificate-file=./issuer-new.crt --identity-i
 or
 
 ```bash
-exp=$(cat ca-new.crt | openssl x509 -noout -dates | grep "notAfter" | sed -e 's/notAfter=\(.*\)$/"\1"/' | TZ='GMT' xargs -I{} date -d {} +"%Y-%m-%dT%H:%M:%SZ")
-
-helm upgrade linkerd2
-  --set-file identity.issuer.tls.crtPEM=./issuer-new.crt
+helm upgrade linkerd-control-plane \
+  --set-file identity.issuer.tls.crtPEM=./issuer-new.crt \
   --set-file identity.issuer.tls.keyPEM=./issuer-new.key
-  --set identity.issuer.crtExpiry=$exp
 ```
 
 At this point Linkerd's `identity` control plane service should detect the

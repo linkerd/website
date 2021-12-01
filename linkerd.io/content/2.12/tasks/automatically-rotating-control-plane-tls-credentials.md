@@ -210,24 +210,22 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 
 ## Installing with Helm
 
-For Helm installation, rather than running `linkerd install`, set the
+For installing with Helm, first install the `linkerd-base` chart:
+
+```bash
+helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+```
+
+Then install the `linkerd-control-plane` chart, setting the
 `identityTrustAnchorsPEM` to the value of `ca.crt` in the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install linkerd2 \
+helm install linkerd-control-plane -n linkerd
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
-  --set installNamespace=false \
-  linkerd/linkerd2 \
-  -n linkerd
+  linkerd/linkerd-control-plane
 ```
-
-{{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
-{{< /note >}}
 
 See [Automatically Rotating Webhook TLS
 Credentials](../automatically-rotating-webhook-tls-credentials/) for how

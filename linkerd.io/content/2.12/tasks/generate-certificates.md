@@ -35,7 +35,7 @@ step certificate create root.linkerd.cluster.local ca.crt ca.key \
 This generates the `ca.crt` and `ca.key` files. The `ca.crt` file is what you
 need to pass to the `--identity-trust-anchors-file` option when installing
 Linkerd with the CLI, and the `identityTrustAnchorsPEM` value when installing
-Linkerd with Helm.
+the `linkerd-control-plane` chart with Helm.
 
 Note we use `--no-password --insecure` to avoid encrypting those files with a
 passphrase.
@@ -68,19 +68,18 @@ linkerd install \
   | kubectl apply -f -
 ```
 
-Or when installing with Helm:
+Or when installing with Helm, first install the `linkerd-base` chart:
 
 ```bash
-helm install linkerd2 \
+helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+```
+
+Then install the `linkerd-control-plane` chart:
+
+```bash
+helm install linkerd-control-plane -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
-  --set identity.issuer.crtExpiry=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ") \
-  linkerd/linkerd2
+  linkerd/linkerd-control-plane
 ```
-
-{{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
-{{< /note >}}

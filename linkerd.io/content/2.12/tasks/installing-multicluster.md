@@ -314,14 +314,14 @@ pipeline.
 First, let's add the Linkerd's Helm repository by running
 
 ```bash
-# To add the repo for Linkerd2 stable releases:
+# To add the repo for Linkerd stable releases:
 helm repo add linkerd https://helm.linkerd.io/stable
 ```
 
 ### Helm multicluster install procedure
 
 ```bash
-helm install linkerd2-multicluster linkerd/linkerd2-multicluster
+helm install linkerd-multicluster -n linkerd-multicluster --create-namespace linkerd/linkerd-multicluster
 ```
 
 The chart values will be picked from the chart's `values.yaml` file.
@@ -355,7 +355,8 @@ The same functionality can also be done through Helm setting the
 `remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd2-mc-source linkerd/linkerd2-multicluster --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
+ helm install linkerd-mc-source linkerd/linkerd-multicluster -n linkerd-multicluster --create-namespace \
+   --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
 ```
 
 Now that the multicluster components are installed, operations like linking, etc
