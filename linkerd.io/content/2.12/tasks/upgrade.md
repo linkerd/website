@@ -195,13 +195,12 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 The minimum Kubernetes version supported is `v1.20.0`.
 
-### Breaking changes in the core Helm chart
+### Breaking changes in core Helm charts
 
 The `linkerd2` chart has been replaced by two charts: `linkerd-base` and
 `linkerd-control-plane`. Please check the updated [Helm
-instructions](../install-helm/) for details. Note that all the extension charts
-like viz and multicluster remain as-is. Also note that support for Helm v2 has
-been dropped.
+instructions](../install-helm/) for details. Also note that support for Helm v2
+has been dropped.
 
 Migrating to these new charts will incur in downtime for linkerd's control plane
 during the process, but as the proxies don't require the control plane to always
@@ -252,6 +251,26 @@ helm install linkerd-control-plane \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   linkerd/linkerd-control-plane
+```
+
+### Breaking changes in extension Helm charts
+
+The main extensions (viz, multicluster, jaeger, linkerd2-cni) were also
+refactored, in that they no longer install their namespaces, leaving that to the
+`helm` command (or to a previous step in your CD pipeline), and they rely on an
+post-install hook to add the required metadata into that namespace. You should
+then delete them and reinstall them; for example for Linkerd-Viz:
+
+```bash
+# update the helm repo
+helm repo up
+
+# delete your current instance
+# (assuming you didn't use the -n flag when installing)
+helm delete linkerd-viz
+
+# install the new chart version
+helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linker-viz
 ```
 
 ## Upgrade notice: stable-2.11.0
