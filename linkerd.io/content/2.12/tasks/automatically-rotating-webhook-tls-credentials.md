@@ -279,20 +279,23 @@ linkerd jaeger install
 A similar pattern can be used with Helm:
 
 ```bash
-helm install linkerd2 \
-  --set installNamespace=false \
+# first install the linkerd-base chart
+helm install linkerd-base \
   --set policyValidator.externalSecret=true \
   --set-file policyValidator.caBundle=ca.crt \
   --set proxyInjector.externalSecret=true \
   --set-file proxyInjector.caBundle=ca.crt \
   --set profileValidator.externalSecret=true \
   --set-file profileValidator.caBundle=ca.crt \
-  linkerd/linkerd2 \
+  linkerd/linkerd-base \
   -n linkerd
+
+# then install the linkerd-control-plane chart
+# (see note below)
+helm install linkerd-control-plane -n linkerd linkerd/linkerd-control-plane
 
 # ignore if not using the viz extension
 helm install linkerd-viz \
-  --set installNamespace=false \
   --set tap.externalSecret=true \
   --set-file tap.caBundle=ca.crt \
   --set tapInjector.externalSecret=true \
@@ -302,7 +305,6 @@ helm install linkerd-viz \
 
 # ignore if not using the jaeger extension
 helm install linkerd-jaeger \
-  --set installNamespace=false \
   --set webhook.externalSecret=true \
   --set-file webhook.caBundle=ca.crt \
   linkerd/linkerd-jaeger \
@@ -310,14 +312,9 @@ helm install linkerd-jaeger \
 ```
 
 {{< note >}}
-When installing Linkerd with Helm, you must also provide the issuer trust root
-and issuer credentials as described in [Installing Linkerd with Helm](../install-helm/).
-{{< /note >}}
-
-{{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
+When installing the `linkerd-control-plane` chart, you must also provide the
+issuer trust root and issuer credentials as described in [Installing Linkerd
+with Helm](../install-helm/).
 {{< /note >}}
 
 See [Automatically Rotating Control Plane TLS
