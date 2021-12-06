@@ -47,7 +47,7 @@ AnnotationsReference:
   Name: config.linkerd.io/disable-tap
 - Description: Inject a debug sidecar for data plane debugging
   Name: config.linkerd.io/enable-debug-sidecar
-- Description: Service name of the trace collector. E.g. `linkerd-collector.linkerd:55678`
+- Description: Service name of the trace collector. E.g. `collector.linkerd-jaeger:55678`
   Name: config.linkerd.io/trace-collector
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
     If not provided, it will be defaulted to `default`.
