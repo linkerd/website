@@ -2,8 +2,8 @@
 author: catherine
 date: 2021-12-09T00:00:00Z
 title: Announcing December's Linkerd Hero
-feature: "/uploads/aleksandr-tarasov.jpeg" 
-thumbnail: "/uploads/aleksandr-tarasov.jpeg" 
+feature: "/uploads/aleksandr-tarasov.jpeg"
+thumbnail: "/uploads/aleksandr-tarasov.jpeg"
 tags:
   - Community
 description: 'Aleksandr is Director of Engineering at ANNA Money and recently wrote three great Linkerd blog posts.'
@@ -35,7 +35,7 @@ And his latest blog is
 These are all great reads, keep them coming Aleksandr! Sharing your
 experience with the community is one of the most valuable ways to
 contribute to Linkerd! Thank you, Aleksandr, for sharing your journey
-so others can learn from it! 
+so others can learn from it!
 
 ![Aleksandr Tarasov](/uploads/aleksandr-tarasov.jpeg)
 
