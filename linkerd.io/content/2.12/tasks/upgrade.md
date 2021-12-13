@@ -197,7 +197,7 @@ The minimum Kubernetes version supported is `v1.20.0`.
 
 ### Breaking changes in core Helm charts
 
-The `linkerd2` chart has been replaced by two charts: `linkerd-base` and
+The `linkerd2` chart has been replaced by two charts: `linkerd-crds` and
 `linkerd-control-plane`. Please check the updated [Helm
 instructions](../install-helm/) for details. Also note that support for Helm v2
 has been dropped.
@@ -211,12 +211,8 @@ data plane deployments after the control plane is updated, as explained in
 Before proceeding, make sure you retrieve all your chart values customizations,
 in particular your trust root and issuer keys (`identityTrustAnchorsPEM`,
 `identity.issuer.tls.crtPEM` and `identity.issuer.tls.keyPEM`). These values
-will need to be fed again into the `helm install` commands below. The values
-will now be split between the two new charts; please consult `linkerd-base`'s
-[values.yaml](https://github.com/linkerd/linkerd2/blob/c5a02a42d0af587da3624523386bc9ff8ae2e6af/charts/linkerd-base/values.yaml)
-and `linkerd-control-plane`'s
-[values.yaml](https://github.com/linkerd/linkerd2/blob/c5a02a42d0af587da3624523386bc9ff8ae2e6af/charts/linkerd-control-plane/values.yaml)
-to find out.
+will need to be fed again into the `helm install` command below for the
+`linkerd-control-plane` chart.
 
 To start the migration first find the namespace you used to store the previous
 linkerd chart helm config:
@@ -241,8 +237,8 @@ Then install both new charts, one after the other:
 # first make sure you update the helm repo
 helm repo up
 
-# now install the linkerd-base chart
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+# now install the linkerd-crds chart
+helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 
 # then install the linkerd-control-plane chart
 helm install linkerd-control-plane \
@@ -258,8 +254,8 @@ helm install linkerd-control-plane \
 The main extensions (viz, multicluster, jaeger, linkerd2-cni) were also
 refactored, in that they no longer install their namespaces, leaving that to the
 `helm` command (or to a previous step in your CD pipeline), and they rely on an
-post-install hook to add the required metadata into that namespace. You should
-then delete them and reinstall them; for example for Linkerd-Viz:
+post-install hook to add the required metadata into that namespace. Therefore
+you also need to delete and reinstall them; for example for Linkerd-Viz:
 
 ```bash
 # update the helm repo
@@ -270,7 +266,7 @@ helm repo up
 helm delete linkerd-viz
 
 # install the new chart version
-helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linker-viz
+helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
 ## Upgrade notice: stable-2.11.0

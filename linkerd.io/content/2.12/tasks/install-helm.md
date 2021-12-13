@@ -30,16 +30,15 @@ release, just replace with `linkerd-edge`.
 
 ## Helm install procedure
 
-You need to install two separate charts in succession: first `linkerd-base` and
+You need to install two separate charts in succession: first `linkerd-crds` and
 then `linkerd-control-plane`.
 
-### linkerd-base
+### linkerd-crds
 
-The `linkerd-base` chart sets up all the cluster-level resources, including
-CRDs. Therefore it requires cluster-level privileges for setting it up:
+The `linkerd-crds` chart sets up the CRDs linkerd requires:
 
 ```bash
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 ```
 
 {{< note >}}
@@ -50,8 +49,7 @@ creating it beforehand elsewhere in your pipeline, just omit the
 
 ### linkerd-control-plane
 
-The `linkerd-control-plane` chart sets up all the resources inside the `linkerd`
-namespace. It only requires namespace-level privileges.
+The `linkerd-control-plane` chart sets up all the control plane components:
 
 ```bash
 helm install linkerd-control-plane \
@@ -62,11 +60,6 @@ helm install linkerd-control-plane \
   linkerd/linkerd-control-plane
 ```
 
-{{< note >}}
-You can use a different namespace, but it must be the same you referred to when
-installing `linkerd-base`.
-{{< /note >}}
-
 ## Disabling The Proxy Init Container
 
 If installing with CNI, make sure that you add the `--set
@@ -74,15 +67,14 @@ cniEnabled=true` flag to your `helm install` command in both charts.
 
 ## Setting High-Availability
 
-Both charts contain a file `values-ha.yaml` that overrides some default values as
-to set things up under a high-availability scenario, analogous to the `--ha`
-option in `linkerd install`. Values such as higher number of replicas, higher
-memory/cpu limits and affinities are specified in those files.
+`linkerd-control-plane` contains a file `values-ha.yaml` that overrides some
+default values as to set things up under a high-availability scenario, analogous
+to the `--ha` option in `linkerd install`. Values such as higher number of
+replicas, higher memory/cpu limits and affinities are specified in those files.
 
-You can get ahold of `values-ha.yaml` by fetching the chart files:
+You can get ahold of `values-ha.yaml` by fetching the chart file:
 
 ```bash
-helm fetch --untar linkerd/linkerd-base
 helm fetch --untar linkerd/linkerd-control-plane
 ```
 
@@ -105,8 +97,8 @@ Make sure your local Helm repos are updated:
 helm repo update
 
 helm search repo linkerd
-NAME                          CHART VERSION          APP VERSION            DESCRIPTION
-linkerd/linkerd-base          <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
+NAME                          CHART VERSION          APP VERSION              DESCRIPTION
+linkerd/linkerd-crds          <chart-semver-version>                          Linkerd gives you observability, reliability, and securit...
 linkerd/linkerd-control-plane <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
 ```
 
@@ -138,7 +130,10 @@ chart docs, depending on which one your are upgrading to. If there are, make the
 corresponding changes to your `values.yaml` file. Then you can use:
 
 ```bash
-helm upgrade linkerd-base linkerd/linkerd-base --reset-values -f values.yaml --atomic
+# the linkerd-crds chart currently doesn't have a values.yaml file
+helm upgrade linkerd-crds linkerd/linkerd-crds
+
+# whereas linkerd-control-plane does
 helm upgrade linkerd-control-plane linkerd/linkerd-control-plane --reset-values -f values.yaml --atomic
 ```
 
