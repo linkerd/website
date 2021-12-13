@@ -456,10 +456,10 @@ argocd app get linkerd-control-plane -ojson | \
       title="Override mTLS trust anchor"
       src="/images/gitops/dashboard-trust-anchor-override.png" >}}
 
-Synchronize the `linkerd-base` and `linkerd-control-plane`applications:
+Synchronize the `linkerd-crds` and `linkerd-control-plane`applications:
 
 ```sh
-argocd app sync linkerd-base
+argocd app sync linkerd-crds
 argocd app sync linkerd-control-plane
 ```
 
