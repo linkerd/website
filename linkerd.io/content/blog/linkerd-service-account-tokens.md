@@ -16,10 +16,10 @@ all about it in the [mTLS guide](https://buoyant.io/mtls-guide/). All of
 the mTLS magic is possible because the control-plane (specifically the
 `identity` component) issues a Leaf certificate that the proxy uses
 to authenticate itself with other services. This feels all nice and fine,
-right? But how does the identity component ensure it's issuing certificate
-for a proxy in the cluster? and not some intruder who wants to communicate with
+right? But how does the identity component ensure it is issuing a certificate
+or a proxy in the cluster and not some intruder trying to communicate with
 other services in the cluster? How does the control-plane ensure identities of the
-proxies itself? Now, Let's dive into that :)
+proxies itself? We'll answer those questions in this blog post. Let's dive in!
 
 ## Kubernetes Service Accounts
 
@@ -27,8 +27,8 @@ This is not just a Linkerd problem right? A lot of components or K8s controllers
 would want to verify the identity  of their clients (if they are running
 in the cluster or not) before providing services for them. So, Kubernetes provides
 Service Accounts that are attached to your Pods by default, and can be used
-by the application inside to prove its identity to other components that its
-part of the kubernetes cluster. These are attached as a volume into your Pod,
+by the application inside to prove its identity to other components that it is
+part of the Kubernetes cluster. These are attached as a volume into your Pod,
 and are mounted into the container at the `/var/run/secrets/kubernetes.io/serviceaccount`
 filepath. By default, Kubernetes attaches the `default` service account of the pod
 namespace.
@@ -64,9 +64,9 @@ spec:
 ```
 
 Service Accounts are also popularly used with Kubernetes RBAC to grant access to
-Kubernetes API Services to pods. This is done by attaching a ClusterRole (with
+Kubernetes API Services to pods. This is done by attaching a `ClusterRole` (with
 necessary permissions) to a ServiceAccount (by creating a `ServiceAccount` object)
-using a `ClusterRoleBinding`. and then specifying the same Service Account in the
+using a `ClusterRoleBinding`. Then we can specify the same Service Account in the
 `serviceAccountName` of your workload. This would override the default service
 account that is present per namespace. The default service account token
 has no permissions to view, list or modify any resources in the cluster.
@@ -95,13 +95,13 @@ TokenReview response. Kubernetes API sets the username to the pod name to which
 that token was attached.
 
 Only the identity component in Linkerd has the necessary API access to verify Tokens.
-Once a token is verified, Only after that the identity component issues a certificate
+Once a token is verified, the identity component issues a certificate
 for the proxy to use to communicate with other services.
 
 ### Identity
 
 These service accounts are also used for identity of the client/server.
-Whenever a meshed request is received or being sent. The relevant metrics
+Whenever a meshed request is received or being sent, the relevant metrics
 also include the service account with which that peer was associated with.
 
 Here, is an example metric from the emojivoto example:
@@ -117,7 +117,7 @@ that was attached to the client pod from where the request was received.
 
 Linkerd's new Policy Enforcement feature allows users to specify set of clients
 that can only access a set of resources. This is done by using the same identity
-by allowing users to specify service accounts of the clients that should be allowed
+to enable users to specify service accounts of the clients that should be allowed
 to talk to a group of workloads (grouped by the `Server` resource) in
 their `ServerAuthorization` resource.
 
@@ -141,20 +141,20 @@ spec:
         - name: web
 ```
 
-In the above example, we are allowing workloads that use the `web` service account
+In the above example, we are permitting workloads that use the `web` service account
 to talk to the `internal-grpc` server.
 
 ## Latest Updates
 
-Though all of this is great, There's still a catch. This token is aimed at the
-applications to talk to the kubernetes API and not specifically for Linkerd.
+Though all of this is great, there's still a catch. This token is aimed at the
+applications to talk to the Kubernetes API and not specifically for Linkerd.
 Linkerd also doesn't need those extra certs that are part of the default volume mount.
 This also means that there are [controls outside of Linkerd](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server),
 to manage this service token, which users might want to use,
 [causing problems with Linkerd](https://github.com/linkerd/linkerd2/issues/3183)
 as Linkerd might expect it to be present to do the verification. Users can
 also explicitly disable the token auto-mount on their pods causing problems with
-Linkerd. Currently, We skip pod injection if that is the case.
+Linkerd. As of Linkerd 2.11, we skip pod injection if the token auto-mount is disabled.
 
 For all the above challenges, Starting from [edge-21.11.1](https://github.com/linkerd/linkerd2/releases/tag/edge-21.11.1)
 We have added the support for Auto-Mount Bounded service account tokens. Instead
@@ -163,7 +163,7 @@ of tokens by using the [Bound Service Account Tokens](https://github.com/kuberne
 feature.
 
 Using this, Linkerd injector will request for a token that is bounded specifically
-for Linkerd, along with a 24h expiry(just like that of identity expiration). This
+for Linkerd, along with a 24h expiry (just like that of identity expiration). This
 token is generated for the same service account that was mounted to the pod by
 Kubernetes, and thus not affecting any of the identity stuff discussed above.
 
