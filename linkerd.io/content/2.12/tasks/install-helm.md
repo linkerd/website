@@ -26,7 +26,8 @@ helm repo add linkerd-edge https://helm.linkerd.io/edge
 ```
 
 The following instructions use the `linkerd` repo. For installing an edge
-release, just replace with `linkerd-edge`.
+release, just replace with `linkerd-edge`, and add the `--devel` flag to all
+commands.
 
 ## Helm install procedure
 
