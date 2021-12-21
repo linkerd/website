@@ -5,20 +5,20 @@ tags:
   - identity
   - service-accounts
 author: tarun
-description: 'Linkerd uses Kubernetes Service Account Tokens to verify the proxy
+description: 'Linkerd uses Kubernetes service account tokens to verify the proxy
   before issuing a certificate, and also for other functions.
   Lets understand all this in this post, along with the latest developments. '
 keywords: [identity service-accounts]
 ---
 
-Linkerd uses mTLS to secure communication between services. You can read
-all about it in the [mTLS guide](https://buoyant.io/mtls-guide/). All of
-the mTLS magic is possible because the control-plane (specifically the
+Linkerd uses mutual TLS (mTLS) to secure communication between services. You can
+read all about it in the [mTLS guide](https://buoyant.io/mtls-guide/). All of
+the mTLS magic is possible because the control plane (specifically the
 `identity` component) issues a Leaf certificate that the proxy uses
 to authenticate itself with other services. This feels all nice and fine,
 right? But how does the identity component ensure it is issuing a certificate
-or a proxy in the cluster and not some intruder trying to communicate with
-other services in the cluster? How does the control-plane ensure identities of the
+to a proxy in the cluster and not some intruder trying to communicate with
+other services in the cluster? How does the control plane ensure identities of the
 proxies itself? We'll answer those questions in this blog post. Let's dive in!
 
 ## Kubernetes Service Accounts
@@ -26,9 +26,9 @@ proxies itself? We'll answer those questions in this blog post. Let's dive in!
 This is not just a Linkerd problem right? A lot of components or K8s controllers
 would want to verify the identity  of their clients (if they are running
 in the cluster or not) before providing services for them. So, Kubernetes provides
-Service Accounts that are attached to your Pods by default, and can be used
+service accounts that are attached to your pods by default, and can be used
 by the application inside to prove its identity to other components that it is
-part of the Kubernetes cluster. These are attached as a volume into your Pod,
+part of the Kubernetes cluster. These are attached as a volume into your pod,
 and are mounted into the container at the `/var/run/secrets/kubernetes.io/serviceaccount`
 filepath. By default, Kubernetes attaches the `default` service account of the pod
 namespace.
@@ -63,10 +63,10 @@ spec:
             path: namespace
 ```
 
-Service Accounts are also popularly used with Kubernetes RBAC to grant access to
+service accounts are also popularly used with Kubernetes RBAC to grant access to
 Kubernetes API Services to pods. This is done by attaching a `ClusterRole` (with
-necessary permissions) to a ServiceAccount (by creating a `ServiceAccount` object)
-using a `ClusterRoleBinding`. Then we can specify the same Service Account in the
+necessary permissions) to a service account (by creating a `ServiceAccount` object)
+using a `ClusterRoleBinding`. Then we can specify the same service account in the
 `serviceAccountName` of your workload. This would override the default service
 account that is present per namespace. The default service account token
 has no permissions to view, list or modify any resources in the cluster.
@@ -82,16 +82,16 @@ to the Kubernetes API.
 
 ## Current Linkerd Integration
 
-For the proxy to get its leaf certificates, it needs to verify itself with the identity
+For the proxy to get its certificates, it needs to verify itself with the identity
 component. This is done by embedding the service account token into the `Certify`
-request that is called every time a new leaf certificate is needed(24h by default).
+request that is called every time a new certificate is needed(24h by default).
 The identity component [validates the token](https://github.com/linkerd/linkerd2/blob/main/controller/identity/validator.go#L51)
 by talking to the [TokenReview](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#tokenreview-v1-authentication-k8s-io)
-Kubernetes API and returns a `CertifyResponse` with the leaf certificate only after
-that. The Identity component not only verifies that the token is valid, but it also
+Kubernetes API and returns a `CertifyResponse` with the certificate only after
+that. The identity component not only verifies that the token is valid, but it also
 verifies if the token is associated with the same pod that that is requesting the
 certificate. This can be verified by looking at the `Status.User.Username` in the
-TokenReview response. Kubernetes API sets the username to the pod name to which
+`TokenReview` response. Kubernetes API sets the username to the pod name to which
 that token was attached.
 
 Only the identity component in Linkerd has the necessary API access to verify Tokens.
@@ -115,7 +115,7 @@ that was attached to the client pod from where the request was received.
 
 ### Policy
 
-Linkerd's new Policy Enforcement feature allows users to specify set of clients
+Linkerd's new authorization policy feature allows users to specify set of clients
 that can only access a set of resources. This is done by using the same identity
 to enable users to specify service accounts of the clients that should be allowed
 to talk to a group of workloads (grouped by the `Server` resource) in
@@ -157,7 +157,7 @@ also explicitly disable the token auto-mount on their pods causing problems with
 Linkerd. As of Linkerd 2.11, we skip pod injection if the token auto-mount is disabled.
 
 For all the above challenges, Starting from [edge-21.11.1](https://github.com/linkerd/linkerd2/releases/tag/edge-21.11.1)
-We have added the support for Auto-Mount Bounded service account tokens. Instead
+We have added the support for auto-mount bounded service account tokens. Instead
 of using the token that is mounted by default, Linkerd will request its own set
 of tokens by using the [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/1205-bound-service-account-tokens)
 feature.
@@ -192,7 +192,7 @@ Kubernetes API. Thus, giving us a nice separation of concerns.
 
 ## Summary
 
-In this post, we started on what Kubernetes Service Account tokens are, and then
+In this post, we started on what Kubernetes service account tokens are, and then
 explained how Linkerd uses them in the proxies to identify themselves with the
 identity component. From there, We also saw how these are also used as a way to
 identity workloads with metrics. We also saw how in the latest changes, We
