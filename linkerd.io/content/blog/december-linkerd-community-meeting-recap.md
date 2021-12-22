@@ -21,6 +21,7 @@ Before getting started, please make sure you participate in this
 shared earlier, it's a new one. So thanks for doing this again!
 
 ## News and updates
+
 We hosted our very first hands-on workshop on
 [mTLS](https://buoyant.io/service-mesh-academy/a-deep-dive-into-kubernetes-mtls-with-linkerd/)
 with Matei David. It was such a success that we decided to do these
@@ -36,6 +37,7 @@ EndpointSlices that are now enabled by default and the proxy-init
 container which can be run without root privileges.
 
 ## Linkerd roadmap
+
 Of course we also heard from Oliver Gould with some roadmap updates.
 The Linkerd team continues working on the next evolution of
 ServiceProfiles. We are also revamping Helm chart versions to better
@@ -47,6 +49,7 @@ Kubernetes version deprecation cycle.
 {{< youtube fje09yl3vW4 >}}
 
 ## MarbleRun and Linkerd
+
 This month, Moritz Eckert from the [MarbleRun](https://marblerun.sh/)
 team demoed Linkerd with their control plane for confidential
 computing. But before getting started, Charles wanted to learn a
@@ -73,6 +76,7 @@ MarbleRun and securing emojivoto in their
 Watch the video to see the demo — it starts at min ~15.
 
 ## Speeding up control plane integration tests
+
 Linkerd maintainer Matei shared how the team is seeking to speed
 up control plane integration tests. Improving CI execution by
 speeding up individual tests, avoiding tests on changes that do
@@ -84,6 +88,7 @@ test suite), and identifying tests that block execution with sleeps
 instead of retries. Expect some of these updates soon!
 
 ## December Hero
+
 Last but certainly not least, we announced our December Linkerd Hero
 [Aleksandr Tarasov](https://github.com/aatarasoff)! Aleksandr is
 Director of Engineering at ANNA Money and recently wrote three great
