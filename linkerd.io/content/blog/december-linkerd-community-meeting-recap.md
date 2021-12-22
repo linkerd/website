@@ -70,7 +70,7 @@ can't trust the host the deployment it is running on.
 
 For this demo, Moritz modified Buoyant’s emojivoto application to
 provide an example of how to run it as a confidential workload
-(edgelesssys/emojivoto). You can find the steps for installing
+[edgelesssys/emojivoto](https://github.com/edgelesssys/emojivoto). You can find the steps for installing
 MarbleRun and securing emojivoto in their
 [documentation](https://docs.edgeless.systems/marblerun/#/).
 Watch the video to see the demo — it starts at min ~15.
