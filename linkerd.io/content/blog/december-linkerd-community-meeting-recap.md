@@ -1,5 +1,5 @@
 ---
-author: catherine
+author: Kevin
 date: 2021-12-22T00:00:00Z
 title: December Linkerd community meeting recap
 feature: '/uploads/december-meetup.png'
