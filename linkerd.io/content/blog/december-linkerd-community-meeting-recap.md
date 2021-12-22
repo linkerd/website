@@ -1,11 +1,15 @@
 ---
+author: catherine
+date: 2021-12-22T00:00:00Z
 title: December Linkerd community meeting recap
+feature: '/uploads/december-meetup.png'
+thumbnail: '/uploads/december-meetup.png'
 tags:
   - Community
   - Meetup
-items:
 description: 'We hosted our very first hands-on workshop on mTLS with Matei David. It was such a success that we decided to do these regularly so we launched a Service Mesh Academy program.'
 keywords: [community meeting, meetup]
+featured: false
 ---
 
 As usual, there is no reason to panic if you missed our community meeting.
