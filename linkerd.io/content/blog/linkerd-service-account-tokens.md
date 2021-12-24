@@ -1,15 +1,17 @@
 ---
 title: Using Kubernetes's new Bound Service Account Tokens for secure workload Identity
-date: 2021-12-10T00:00:00Z
+date: 2021-12-24T00:00:00Z
 tags:
   - identity
   - service-accounts
 author: tarun
-thumbnail: "/uploads/service-account.png"
+thumbnail: "/uploads/jason-dent-3wPJxh-piRw-unsplash.jpg"
 description: 'Linkerd recently moved to using bound service account tokens to further
   improve security  for Kubernetes users. What are these, and why are they important?'
 keywords: [identity service-accounts]
 ---
+
+![Locker](/uploads/jason-dent-3wPJxh-piRw-unsplash.jpg")
 
 Security is a first-class concern for Linkerd. It plays a critical role in
 enhancing the overall security of the system, and this is only possible if Linkerd
