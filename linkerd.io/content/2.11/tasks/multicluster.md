@@ -12,8 +12,8 @@ between services that live on different clusters.
 
 At a high level, you will:
 
-1. [Install Linkerd and Linkerd Viz](#install-linkerd) on two clusters with a
-   shared trust anchor.
+1. [Install Linkerd](#install-linkerd) on two clusters with a shared trust
+   anchor.
 1. [Prepare](#preparing-your-cluster) the clusters.
 1. [Link](#linking-the-clusters) the clusters.
 1. [Install](#installing-the-test-services) the demo.
@@ -42,13 +42,16 @@ At a high level, you will:
 - Elevated privileges on both clusters. We'll be creating service accounts and
   granting extended privileges, so you'll need to be able to do that on your
   test clusters.
+- Linkerd's `viz` extension should be installed in order to run `stat` commands,
+  view the Grafana or Linkerd dashboard and run the `linkerd multicluster gateways`
+  command.
 - Support for services of type `LoadBalancer` in the `east` cluster. Check out
   the documentation for your cluster provider or take a look at
   [inlets](https://blog.alexellis.io/ingress-for-your-local-kubernetes-cluster/).
   This is what the `west` cluster will use to communicate with `east` via the
   gateway.
 
-## Install Linkerd and Linkerd Viz
+## Install Linkerd
 
 {{< fig
     alt="install"
@@ -113,23 +116,14 @@ linkerd install \
     >(kubectl --context=east apply -f -)
 ```
 
-And then Linkerd Viz:
-
-```bash
-for ctx in west east; do
-  linkerd --context=${ctx} viz install | \
-    kubectl --context=${ctx} apply -f - || break
-done
-```
-
 The output from `install` will get applied to each cluster and come up! You can
 verify that everything has come up successfully with `check`.
 
 ```bash
 for ctx in west east; do
-  echo "Checking cluster: ${ctx} ........."
+  echo "Checking cluster: ${ctx} .........\n"
   linkerd --context=${ctx} check || break
-  echo "-------------"
+  echo "-------------\n"
 done
 ```
 
@@ -157,7 +151,7 @@ for ctx in west east; do
   echo "Installing on cluster: ${ctx} ........."
   linkerd --context=${ctx} multicluster install | \
     kubectl --context=${ctx} apply -f - || break
-  echo "-------------"
+  echo "-------------\n"
 done
 ```
 
@@ -181,7 +175,7 @@ for ctx in west east; do
   echo "Checking gateway on cluster: ${ctx} ........."
   kubectl --context=${ctx} -n linkerd-multicluster \
     rollout status deploy/linkerd-gateway || break
-  echo "-------------"
+  echo "-------------\n"
 done
 ```
 
@@ -191,7 +185,9 @@ running:
 ```bash
 for ctx in west east; do
   printf "Checking cluster: ${ctx} ........."
-  while [ "$(kubectl --context=${ctx} -n linkerd-multicluster get service -o 'custom-columns=:.status.loadBalancer.ingress[0].ip' --no-headers)" = "<none>" ]; do
+  while [ "$(kubectl --context=${ctx} -n linkerd-multicluster get service \
+    -o 'custom-columns=:.status.loadBalancer.ingress[0].ip' \
+    --no-headers)" = "<none>" ]; do
       printf '.'
       sleep 1
   done
@@ -275,10 +271,10 @@ can mirror. To add these to both clusters, you can run:
 for ctx in west east; do
   echo "Adding test services on cluster: ${ctx} ........."
   kubectl --context=${ctx} apply \
-    -n test -k "github.com/linkerd/website/multicluster/${ctx}/"
+    -k "github.com/linkerd/website/multicluster/${ctx}/"
   kubectl --context=${ctx} -n test \
     rollout status deploy/podinfo || break
-  echo "-------------"
+  echo "-------------\n"
 done
 ```
 
@@ -374,8 +370,9 @@ kubectl --context=west -n test exec -c nginx -it \
 You'll see the `greeting from east` message! Requests from the `frontend` pod
 running in `west` are being transparently forwarded to `east`. Assuming that
 you're still port forwarding from the previous step, you can also reach this
-with `curl http://localhost:8080/east`.  Make that call a couple times and
-you'll be able to get metrics from `linkerd viz stat` as well.
+from your browser at [http://localhost:8080/east](http://localhost:8080/east).
+Refresh a couple times and you'll be able to get metrics from `linkerd viz stat`
+as well.
 
 ```bash
 linkerd --context=west -n test viz stat --from deploy/frontend svc
@@ -407,8 +404,8 @@ linkerd --context=west -n test viz tap deploy/frontend | \
 
 `tls=true` tells you that the requests are being encrypted!
 
-{{< note >}} As `linkerd viz edges` works on concrete resources and cannot see
-two clusters at once, it is not currently able to show the edges between pods in
+{{< note >}} As `linkerd edges` works on concrete resources and cannot see two
+clusters at once, it is not currently able to show the edges between pods in
 `east` and `west`. This is the reason we're using `tap` to validate mTLS here.
 {{< /note >}}
 
@@ -509,10 +506,7 @@ There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 To cleanup the multicluster control plane, you can run:
 
 ```bash
-linkerd --context=west multicluster unlink --cluster-name east | 
-  kubectl --context=west delete -f -
 for ctx in west east; do
-  kubectl --context=${ctx} delete ns test
   linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f -
 done
 ```
@@ -521,7 +515,6 @@ If you'd also like to remove your Linkerd installation, run:
 
 ```bash
 for ctx in west east; do
-  linkerd --context=${ctx} viz uninstall | kubectl --context=${ctx} delete -f -
   linkerd --context=${ctx} uninstall | kubectl --context=${ctx} delete -f -
 done
 ```
