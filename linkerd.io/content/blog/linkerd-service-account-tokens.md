@@ -1,6 +1,6 @@
 ---
 title: Using Kubernetes's new Bound Service Account Tokens for secure workload Identity
-date: 2021-12-24T00:00:00Z
+date: 2021-12-28T00:00:00Z
 tags:
   - identity
   - service-accounts
