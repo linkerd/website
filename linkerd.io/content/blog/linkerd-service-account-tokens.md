@@ -1,5 +1,5 @@
 ---
-title: Using Kubernetes's new Bound Service Account Tokens for secure workload Identity
+title: Using Kubernetes's new Bound Service Account Tokens for secure workload identity
 date: 2021-12-28T00:00:00Z
 tags:
   - identity
@@ -112,7 +112,7 @@ Only the identity component in Linkerd has the necessary API access to verify to
 Once a token is verified, the identity component issues a certificate
 for the proxy to use to communicate with other services.
 
-### How does Linkerd provide workload identity?
+## How does Linkerd provide workload identity?
 
 Linkerd takes a beautiful (in my mind) simplifying step here: the service accounts
 aren't just used to validate that the proxies are who they say they are, they're
@@ -137,7 +137,7 @@ request_total{..., client_id="web.emojivoto.serviceaccount.identity.linkerd.clus
 As you can see the `client_id` label in the above metric is the service account
 that was attached to the client pod from where the request was received.
 
-### Authorization Policy
+## Authorization Policy
 
 Linkerd's new authorization policy feature allows users to specify set of clients
 that can only access a set of resources. This is done by using the same identity
@@ -168,7 +168,7 @@ spec:
 In the above example, we are permitting workloads that use the `web` service account
 to talk to the `internal-grpc` server.
 
-## Bounded Service Account Tokens
+## Bound Service Account Tokens
 
 Though all of this is great, there's still a catch. This token is aimed at the
 applications to talk to the Kubernetes API and not specifically for Linkerd.
@@ -186,7 +186,7 @@ To address these challenges, starting from [edge-21.11.1](https://github.com/lin
 we have added the support for auto-mount bound service account tokens. Instead
 of using the token that is mounted by default, Linkerd will request its own set
 of tokens by using the [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/1205-bound-service-account-tokens)
-feature. Bounded Service Account Tokens (GA as of in Kubernetes v1.20) feature allows
+feature. Bound Service Account Tokens (GA as of in Kubernetes v1.20) feature allows
 components to request tokens for a specific service account on demand from the
 API server that are bound to a specific purpose (instead of the default, which is
 used to access the API server).
