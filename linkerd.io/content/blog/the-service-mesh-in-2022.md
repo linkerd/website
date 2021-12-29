@@ -4,7 +4,7 @@ author: 'william'
 date: 2021-12-29T00:00:00+00:00
 thumbnail: /uploads/xan-white-XxHT8cKFYKo-unsplash.jpg
 featured: false
-slug: the-service-esh-in-2022
+slug: the-service-mesh-in-2022
 tags: [Linkerd]
 ---
 
@@ -74,9 +74,9 @@ automatically route traffic across clusters in the presence of a failure. For
 users with multiple clusters spread across regions or clouds, this ability is
 critical for availability goals, disaster recovery, and more.
 
-Linkerd already provides some building blocks for doing this, but in 2022 we'll
-be building some mechanisms for doing automated, cross-cluster, per-service
-failover in a safe and sane way with clear semantics.
+Linkerd already provides the basic building blocks for doing this, and we'll
+build mechanisms on top of these building blocks for doing automated,
+cross-cluster, per-service failover in a way that's safe and sane.
 
 ## Fine-grained authorization policy
 
@@ -88,9 +88,9 @@ authorization policy, which restricts pod-to-pod connections based on features
 such as workload identity.
 
 We'll be extending this model to cover not just workload identity but also
-things like verbs and routes, so that policies such as "only allow GET requests
-to the `/metrics` endpoint over mTLS'd connections from clients in the `Foo`
-namespace" are possible.
+things like gRPC methods and HTTP verbs and routes, so that policies such as
+"only allow GET requests to the `/metrics` endpoint over mTLS'd connections from
+clients in the `Foo` namespace" are possible.
 
 ## Mesh expansion and SPIFFE support
 
@@ -99,19 +99,17 @@ Kubernetes. This means that Linkerd users will be able to mesh services that
 live outside of Kubernetes and get the same reliability, observability, and
 security guarantees they get for Kubernetes services today.
 
-Running Linkerd's ultralight, ultra-fast Rust proxy outside of Kubernetes is
-actually already possible today. The proxy has no direct dependencies on
-Kubernetes, and Rust compiles to a lot of platforms! However, in order to extend
-Linkerd's guarantees—especially around security—to non-Kubernetes environments,
-we need to generalize some existing Linkerd features, such as the way it
-provisions workload identity. We're looking at the [SPIFFE
-standard](https://spiffe.io/) as a way to do this in a non-Kubernetes-specific
-way.
+You can already run Linkerd's ultralight, ultra-fast Rust proxy outside of
+Kubernetes today. However, in order to extend Linkerd's operational
+guarantees—especially around security—to non-Kubernetes environments, we need to
+generalize some existing Linkerd features, notably the way it provisions
+workload identity. We're looking at the [SPIFFE standard](https://spiffe.io/)
+as a way to do this in a non-Kubernetes-specific way.
 
 ## End-of-life for Linkerd 1.x
 
-In 2022 we will officially end-of-life Linkerd 1.x. Linkerd 1.x has been in
-maintenance mode for quote some time, and with the recent explosion of adoption
+In 2022 we will officially end-of-life Linkerd 1.x. The 1.x branch has been in
+maintenance mode for quite some time, and with the recent explosion of adoption
 for Linkerd, our efforts now need to be solely focused on Linkerd 2.x.
 
 ## What about WebAssembly?
@@ -121,10 +119,9 @@ feature delivery, it doesn't really make sense for Linkerd: Wasm imposes a
 significant runtime performance penalty, and for specific features it's better
 to simply implement them in the proxy directly. (One of the many advantages of
 developing our own proxy is that we can simple do this, without fanfare and
-without needing to navigate competing goals between projects.)
-
-However, as a mechanism for enabling end-user plugins, Wasm may very well make
-sense. It's in that light that we are evaluating it.
+without needing to navigate competing goals between projects.) However, as a
+mechanism for enabling end-user plugins, Wasm may very well make sense for
+Linkerd, and it's in that light that we are evaluating it.
 
 ## What about eBPF?
 
@@ -149,9 +146,9 @@ are proud of where Linkerd stands. But, to paraphrase Louis Ryan (!), eking out
 the last bit of performance is far less important than having good units of
 maintenance and isolation. We learned that lesson the hard way with Linkerd 1.x.
 
-In short: whether in user space or in kernel space, we haven't yet seen anything
-that challenges our belief that the sidecar model makes makes life fundamentally
-easier for the _humans_ who must interact with the service mesh.
+Whether user space or kernel space, we haven't yet seen anything that challenges
+our belief that the sidecar model makes makes life fundamentally easier for the
+_humans_ who interact with and operate the service mesh.
 
 ## 2022 is going to be another great year for Linkerd
 
@@ -159,7 +156,8 @@ Needless to say, there's a lot more exciting and interesting work we're planning
 on that didn't make it to this list. If any of the above sounds exciting or
 interesting—we'd love your help. If you've got feature request, or think we got
 something totally wrong in our analysis above—let us know. And if you just want
-to sit back and let the features roll in, that's fine too!
+to sit back and let the features roll in, that's fine too! After all, Linkerd is
+for everyone.
 
 ## Linkerd is for everyone
 
@@ -177,4 +175,3 @@ the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 White](https://unsplash.com/@xwpics?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on
 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
-
