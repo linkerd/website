@@ -202,8 +202,8 @@ spec:
   containers:
   ...
     volumeMounts:
-    - mountPath: /var/run/linkerd/identity/end-entity
-      name: linkerd-identity-end-entity
+    - name: linkerd-identity-token
+      mountPath: /var/run/secrets/kubernetes.io/serviceaccount
   ...
   volumes:
   - name: linkerd-identity-token
