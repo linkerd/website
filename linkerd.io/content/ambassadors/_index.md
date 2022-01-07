@@ -32,6 +32,13 @@ ambassadors:
     github: https://github.com/christianhuening
     twitter: https://twitter.com/chrishuen
     linkedin: https://www.linkedin.com/in/christian-h%C3%BCning-964191a3/
+  - name: Eli Goldberg
+    job_title: Platform Team Lead
+    image: /images/ambassadors/profile/eli-goldberg.jpeg
+    flag: 🇮🇱
+    github: https://github.com/Eli-Goldberg
+    twitter: https://twitter.com/EliG0ldberg
+    linkedin: https://www.linkedin.com/in/eli-go/
   - name: Fredrik Klingenberg
     job_title: Developer
     image: /images/ambassadors/profile/fredrik-klingenberg.png
