@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: frontend
-  namespace: test
 data:
  nginx.conf: |-
   pid /tmp/pid;
@@ -19,17 +18,18 @@ data:
       listen 8080;
       set $east "east";
       set $west "west";
+      resolver kube-dns.kube-system.svc.cluster.local;
 
       location / {
-        proxy_pass http://podinfo:9898;
+        proxy_pass http://podinfo.test.svc.cluster.local:9898/;
         proxy_http_version 1.1;
       }
       location /east {
-        proxy_pass http://podinfo-$east:9898;
+        proxy_pass http://podinfo-$east.test.svc.cluster.local:9898/;
         proxy_http_version 1.1;
       }
       location /west {
-        proxy_pass http://podinfo-$west:9898;
+        proxy_pass http://podinfo-$west.test.svc.cluster.local:9898/;
         proxy_http_version 1.1;
       }
     }
@@ -39,7 +39,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: test
   labels:
     app: frontend
 spec:
@@ -69,8 +68,6 @@ spec:
             requests:
               cpu: 10m
               memory: 10Mi
-          securityContext:
-            runAsUser: 1337
         - image: buoyantio/slow_cooker:1.2.0
           name: internal
           env:
@@ -124,7 +121,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: test
 spec:
   ports:
   - name: service

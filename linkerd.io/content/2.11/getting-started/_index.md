@@ -255,14 +255,14 @@ the debugging tutorial below for much more on this.)
 
 ## That's it! 👏
 
-Congratulations, you have joined the lofty, exalted ranks of Linkerd users!
+Congratulations, you have joined the lofty ranks of Linkerd users!
 Give yourself a pat on the back.
 
 What's next? Here are some steps we recommend:
 
 * Learn how to use Linkerd to [debug the errors in
   Emojivoto](../debugging-an-app/).
-* Learn more about [meshing your own services](../adding-your-service/) to
+* Learn how to [add your own services](../adding-your-service/) to
   Linkerd without downtime.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential

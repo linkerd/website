@@ -258,7 +258,7 @@ If using helm to install ingress-nginx, you can configure tracing by using:
 controller:
   config:
     enable-opentracing: "true"
-    zipkin-collector-host: linkerd-collector.linkerd
+    zipkin-collector-host: collector.linkerd-jaeger
 ```
 
 ### Client Library
