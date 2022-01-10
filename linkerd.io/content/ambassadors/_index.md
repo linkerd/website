@@ -54,7 +54,7 @@ ambassadors:
     twitter: https://twitter.com/sergioarmgpl
     linkedin: https://www.linkedin.com/in/sergioarmgpl/
   - name: Steve Gray
-    job_title: Head of Trading Solutions
+    job_title: Founder & CEO
     image: '/images/ambassadors/profile/steve-gray.png'
     flag: 🇦🇺
     linkedin: https://www.linkedin.com/in/eventualconsistency/
