@@ -3,8 +3,8 @@ title = "Control Plane Debug Endpoints"
 description = "Linkerd's control plane components provide debug endpoints."
 +++
 
-All of the control plane components (with the exception of Grafana) expose
-runtime profiling information through the path `/debug/pprof`, using Go's
+All of the control plane components expose runtime profiling information through
+the path `/debug/pprof`, using Go's
 [pprof](https://golang.org/pkg/net/http/pprof/) package.
 
 You can consume the provided data with `go tool pprof` to generate output in

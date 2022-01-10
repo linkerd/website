@@ -43,7 +43,7 @@ At a high level, you will:
   granting extended privileges, so you'll need to be able to do that on your
   test clusters.
 - Linkerd's `viz` extension should be installed in order to run `stat` commands,
-  view the Grafana or Linkerd dashboard and run the `linkerd multicluster gateways`
+  view the Linkerd dashboard and run the `linkerd multicluster gateways`
   command.
 - Support for services of type `LoadBalancer` in the `east` cluster. Check out
   the documentation for your cluster provider or take a look at
@@ -378,8 +378,10 @@ as well.
 linkerd --context=west -n test viz stat --from deploy/frontend svc
 ```
 
-We also provide a grafana dashboard to get a feel for what's going on here. You
-can get to it by running `linkerd --context=west viz dashboard` and going to
+We also provide a grafana dashboard to get a feel for what's going on here (see
+the [grafana install instructions](../grafana) first to have a working grafana
+provisioned with Linkerd dashboards). You can get to it by running `linkerd
+--context=west viz dashboard` and going to
 [http://localhost:50750/grafana/](http://localhost:50750/grafana/d/linkerd-multicluster/linkerd-multicluster?orgId=1&refresh=1m)
 
 {{< fig

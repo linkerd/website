@@ -23,12 +23,10 @@ linkerd install --ignore-cluster | grep image: | sed -e 's/^ *//' | sort | uniq
 For the current stable version, the output will be:
 
 ```bash
-image: gcr.io/linkerd-io/controller:stable-2.6.0
-image: gcr.io/linkerd-io/grafana:stable-2.6.0
-image: gcr.io/linkerd-io/proxy-init:v1.2.0
-image: gcr.io/linkerd-io/proxy:stable-2.6.0
-image: gcr.io/linkerd-io/web:stable-2.6.0
-image: prom/prometheus:v2.11.1
+image: cr.l5d.io/linkerd/controller:stable-2.11.1
+image: cr.l5d.io/linkerd/policy-controller:stable-2.11.1
+image: cr.l5d.io/linkerd/proxy-init:v1.4.0
+image: cr.l5d.io/linkerd/proxy:stable-2.11.1
 ```
 
 All of the Linkerd images are publicly available in the

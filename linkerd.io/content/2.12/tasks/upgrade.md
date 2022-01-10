@@ -269,6 +269,16 @@ helm delete linkerd-viz
 helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
+### Removal of Grafana
+
+Linkerd Viz no longer installs a Grafana instance, and instead we recommend you
+install it directly from the [Grafana official Helm
+chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) or the
+[Grafana Operator](https://github.com/grafana-operator/grafana-operator).
+Linkerd's Grafana dashboards have been published in
+<https://grafana.com/orgs/linkerd/dashboards>, and the new [Grafana
+docs](../grafana) provide detailed instructions on how to load them.
+
 ## Upgrade notice: stable-2.11.0
 
 The minimum Kubernetes version supported is `v1.17.0`. There are two breaking

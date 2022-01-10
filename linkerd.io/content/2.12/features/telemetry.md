@@ -37,7 +37,7 @@ This data can be consumed in several ways:
 * Through the [Linkerd CLI](../../reference/cli/), e.g. with `linkerd viz stat` and
   `linkerd viz routes`.
 * Through the [Linkerd dashboard](../dashboard/), and
-  [pre-built Grafana dashboards](../dashboard/#grafana).
+  [pre-built Grafana dashboards](../../tasks/grafana).
 * Directly from Linkerd's built-in Prometheus instance
 
 ## Golden metrics

@@ -16,7 +16,6 @@ This extension installs the following components into your `linkerd-viz`
 namespace:
 
 * A [Prometheus](https://prometheus.io/) instance
-* A [Grafana](https://grafana.com/) instance
 * metrics-api, tap, tap-injector, and web components
 
 These components work together to provide an on-cluster metrics stack.
@@ -71,7 +70,8 @@ The dashboards that are provided out of the box include:
 
 {{< /gallery >}}
 
-linkerd -n emojivoto check --proxy
+See our [Grafana docs](../../tasks/grafana) for instructions on how to install
+Grafana and load these dashboards.
 
 ## Examples
 

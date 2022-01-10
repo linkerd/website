@@ -8,7 +8,8 @@ aliases = [
 
 Instead of using `linkerd viz dashboard` every time you'd like to see what's
 going on, you can expose the dashboard via an ingress. This will also expose
-Grafana.
+Grafana, if you have it linked against Linkerd viz through the `grafana.url`
+setting.
 
 {{< pagetoc >}}
 
