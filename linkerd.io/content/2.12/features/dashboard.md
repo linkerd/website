@@ -70,7 +70,7 @@ The dashboards that are provided out of the box include:
 
 {{< /gallery >}}
 
-See our [Grafana docs](../../tasks/grafana) for instructions on how to install
+See our [Grafana docs](../../tasks/grafana/) for instructions on how to install
 Grafana and load these dashboards.
 
 ## Examples

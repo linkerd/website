@@ -277,7 +277,7 @@ chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) or the
 [Grafana Operator](https://github.com/grafana-operator/grafana-operator).
 Linkerd's Grafana dashboards have been published in
 <https://grafana.com/orgs/linkerd/dashboards>, and the new [Grafana
-docs](../grafana) provide detailed instructions on how to load them.
+docs](../grafana/) provide detailed instructions on how to load them.
 
 ## Upgrade notice: stable-2.11.0
 

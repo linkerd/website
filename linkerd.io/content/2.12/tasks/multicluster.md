@@ -379,7 +379,7 @@ linkerd --context=west -n test viz stat --from deploy/frontend svc
 ```
 
 We also provide a grafana dashboard to get a feel for what's going on here (see
-the [grafana install instructions](../grafana) first to have a working grafana
+the [grafana install instructions](../grafana/) first to have a working grafana
 provisioned with Linkerd dashboards). You can get to it by running `linkerd
 --context=west viz dashboard` and going to
 [http://localhost:50750/grafana/](http://localhost:50750/grafana/d/linkerd-multicluster/linkerd-multicluster?orgId=1&refresh=1m)
