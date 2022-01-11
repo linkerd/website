@@ -35,6 +35,8 @@ adopters:
   alt: Appddiction Studio
 - image: /images/adopters/Attest.png
   alt: Attest
+- image: /images/adopters/bosch-logo.png
+  alt: Bosch
 - image: /images/adopters/Buoyant.png
   alt: Buoyant
 - image: /images/adopters/Candide.png
