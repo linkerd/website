@@ -58,7 +58,7 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl -fsL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
@@ -134,7 +134,7 @@ allow the user to vote on their favorite emojis.
 Install Emojivoto into the `emojivoto` namespace by running:
 
 ```bash
-curl -fsL https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ```
 
 This command installs Emojivoto onto your cluster, but Linkerd hasn't been
@@ -217,7 +217,7 @@ linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
 To install the buoyant-cloud extension, run:
 
 ```bash
-curl -fsL https://buoyant.cloud/install | sh # get the installer
+curl --proto '=https' --tlsv1.3 -sSfL https://buoyant.cloud/install | sh # get the installer
 linkerd buoyant install | kubectl apply -f - # connect to the hosted metrics stack
 ```
 
