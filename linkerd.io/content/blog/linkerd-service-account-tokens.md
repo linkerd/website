@@ -21,7 +21,7 @@ order to understand that, first we need to understand how Linkerd uses service
 accounts.
 
 Linkerd provides mutual TLS (mTLS) to secure communication between workloads.
-Central to any type of communication security is the notion of *identity*—as
+Central to any type of communication security is the notion of *identity* —as
 discussed in the [Kubernetes engineer’s guide to mTLS](https://buoyant.io/mtls-guide/),
 without identity you have no authenticity, and without authenticity you do not have
 secure communication. All of Linkerd's mTLS magic is possible because the
