@@ -73,7 +73,7 @@ these features in action. Either way, you can download the stable 2.5 release
 by running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Upgrading from a previous release? See our handy [Linkerd upgrade

@@ -42,7 +42,7 @@ free to skip to the [Helm section](#with-helm).
 To upgrade the CLI locally, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
@@ -465,7 +465,7 @@ are retained.
 
 ```bash
 # get the latest stable CLI
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 {{< note >}} The linkerd cli installer installs the CLI binary into a
@@ -532,7 +532,7 @@ are retained.
 
 ```bash
 # get the latest stable CLI
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 For Kubernetes 1.12+:
@@ -634,7 +634,7 @@ kubectl -n linkerd delete deploy/linkerd-ca
 
 ```bash
 # get the latest stable
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 
 # upgrade the control plane
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
@@ -727,7 +727,7 @@ information on disk, such as using tools like
 
 ```bash
 # get the latest stable
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 
 # Install stable control plane, using flags previously supplied during
 # installation.
@@ -787,7 +787,7 @@ these instructions for anywhere that uses the linkerd CLI.
 To upgrade the CLI locally, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the

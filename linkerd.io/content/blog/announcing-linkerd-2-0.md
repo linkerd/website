@@ -17,7 +17,7 @@ On behalf of the Linkerd maintainers, I’m happy to announce that Linkerd 2.0 i
 You can try Linkerd 2.0 on a Kubernetes 1.9+ cluster in 60 seconds by running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 (Or check out the full [Getting Started Guide](https://linkerd.io/2/getting-started/).)

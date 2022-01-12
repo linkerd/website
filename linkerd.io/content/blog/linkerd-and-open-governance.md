@@ -67,7 +67,7 @@ amazing project together.
 Ready to try Linkerd? You can try the latest stable release by running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing

@@ -38,7 +38,7 @@ a `TrafficSplit` specification, to perform Traffic Splitting across services.
 Install the SMI extension CLI binary by running:
 
 ```bash
-curl -sL https://linkerd.github.io/linkerd-smi/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://linkerd.github.io/linkerd-smi/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the [releases page](https://github.com/linkerd/linkerd-smi/releases).

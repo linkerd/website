@@ -105,7 +105,7 @@ Here's a quick example you can try at home to see just how easy it is to get per
 ```bash
 linkerd install | kubectl apply -f -
 linkerd check
-curl https://run.linkerd.io/booksapp.yml | linkerd inject - | kubectl apply -f -
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp.yml | linkerd inject - | kubectl apply -f -
 ```
 
 At this point, the Books app is installed and receiving traffic from a built-in traffic generator. We would like to see per-route metrics for the `webapp` service—but we can't, because we haven't defined any routes for that service yet!

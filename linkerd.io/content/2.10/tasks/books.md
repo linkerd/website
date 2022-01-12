@@ -34,7 +34,7 @@ terminal, run:
 
 ```bash
 kubectl create ns booksapp && \
-  curl -sL https://run.linkerd.io/booksapp.yml \
+  curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp.yml \
   | kubectl -n booksapp apply -f -
 ```
 
@@ -167,7 +167,7 @@ demo has published specs for each of its services. You can create a service
 profile for `webapp` by running:
 
 ```bash
-curl -sL https://run.linkerd.io/booksapp/webapp.swagger \
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp/webapp.swagger \
   | linkerd -n booksapp profile --open-api - webapp \
   | kubectl -n booksapp apply -f -
 ```
@@ -243,10 +243,10 @@ For this demo, the method is appended to the route regex.
 To get profiles for `authors` and `books`, you can run:
 
 ```bash
-curl -sL https://run.linkerd.io/booksapp/authors.swagger \
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp/authors.swagger \
   | linkerd -n booksapp profile --open-api - authors \
   | kubectl -n booksapp apply -f -
-curl -sL https://run.linkerd.io/booksapp/books.swagger \
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp/books.swagger \
   | linkerd -n booksapp profile --open-api - books \
   | kubectl -n booksapp apply -f -
 ```
@@ -466,7 +466,7 @@ the effective success rate for our route has dropped below 100%.
 To remove the books app and the booksapp namespace from your cluster, run:
 
 ```bash
-curl -sL https://run.linkerd.io/booksapp.yml \
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/booksapp.yml \
   | kubectl -n booksapp delete -f - \
   && kubectl delete ns booksapp
 ```

@@ -18,7 +18,7 @@ This release includes contributions from folks at Attest, Buoyant, Mesosphere, M
 Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge/) will already have seen these these features in action. Either way, you can download the stable 2.2 release by running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 ```
 
 With that, on to the features!

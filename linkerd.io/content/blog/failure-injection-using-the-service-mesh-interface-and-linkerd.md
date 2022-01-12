@@ -51,7 +51,7 @@ We'll start by installing the Linkerd CLI and deploying it on our Kubernetes
 cluster:
 
 ```bash
-> curl https://run.linkerd.io/install | sh
+> curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
 > export PATH=$PATH:$HOME/.linkerd2/bin
 > linkerd install | kubectl apply -f -
 > linkerd check
