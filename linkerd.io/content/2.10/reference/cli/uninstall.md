@@ -2,8 +2,8 @@
 title = "uninstall"
 +++
 
-{{< cli-2-10/description "uninstall" >}}
+{{< cli/description "uninstall" >}}
 
-{{< cli-2-10/examples "uninstall" >}}
+{{< cli/examples "uninstall" >}}
 
-{{< cli-2-10/flags "uninstall" >}}
+{{< cli/flags "uninstall" >}}

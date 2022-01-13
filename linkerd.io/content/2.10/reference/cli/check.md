@@ -5,12 +5,12 @@ aliases = [
 ]
 +++
 
-{{< cli-2-10/description "check" >}}
+{{< cli/description "check" >}}
 
 Take a look at the [troubleshooting](../../../tasks/troubleshooting/) documentation
 for a full list of all the possible checks, what they do and how to fix them.
 
-{{< cli-2-10/examples "check" >}}
+{{< cli/examples "check" >}}
 
 ## Example output
 
@@ -56,7 +56,7 @@ control-plane-version
 Status check results are √
 ```
 
-{{< cli-2-10/flags "check" >}}
+{{< cli/flags "check" >}}
 
 ## Subcommands
 
@@ -65,8 +65,8 @@ Check supports subcommands as part of the
 
 ### config
 
-{{< cli-2-10/description "check config" >}}
+{{< cli/description "check config" >}}
 
-{{< cli-2-10/examples "check config" >}}
+{{< cli/examples "check config" >}}
 
-{{< cli-2-10/flags "check config" >}}
+{{< cli/flags "check config" >}}
