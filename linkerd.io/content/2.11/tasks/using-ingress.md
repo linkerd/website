@@ -526,6 +526,14 @@ Thus, combining an ingress with Linkerd takes one of two forms:
 The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
 
 {{< note >}}
+Some ingress controllers support sticky sessions. For session stickiness, the
+ingress controller has to do its own endpoint selection. This means that
+Linkerd will not be able to connect to the IP/port of the Kubernetes Service,
+and will instead establish a direct connection to a pod. Therefore, sticky
+sessions and `ServiceProfiles` are mutually exclusive.
+{{< /note >}}
+
+{{< note >}}
 If requests experience a 2-3 second delay after injecting your ingress
 controller, it is likely that this is because the service of `type:
 LoadBalancer` is obscuring the client source IP. You can fix this by setting
