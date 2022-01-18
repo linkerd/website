@@ -43,7 +43,7 @@ extension, but doesn't require it. To install this extension, run:
 
 ```bash
 ## optional
-curl --proto '=https' --tlsv1.3 -sSfL https://buoyant.cloud/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh
 linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
 ```
 

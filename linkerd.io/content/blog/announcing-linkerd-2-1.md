@@ -15,7 +15,7 @@ Today we're very happy to announce the release of [Linkerd 2.1](https://github.c
 Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge/) will already have seen these these features in action. For the rest of you, you can download the stable 2.1 release by running:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install
 ```
 
 ## Per-route metrics

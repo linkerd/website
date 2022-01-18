@@ -77,7 +77,7 @@ endif
 check: build-linkerd.io
 	@# Check linkerd.io for valid links and standards
 ifndef HAS_HTMLTEST
-	@printf "Install htmltest first. curl --proto '=https' --tlsv1.3 -sSfL https://htmltest.wjdp.uk | bash\n"; exit 1
+	@printf "Install htmltest first. curl --proto '=https' --tlsv1.2 -sSfL https://htmltest.wjdp.uk | bash\n"; exit 1
 endif
 	cd tmp/linkerd.io && htmltest
 

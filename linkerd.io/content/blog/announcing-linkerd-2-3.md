@@ -34,7 +34,7 @@ This release represents a major step forward in Linkerd's security roadmap. In a
 Ready to try it? Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge) will already have seen these features in action. Either way, you can download the stable 2.3 release by running:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Finally, we'd be remiss if we didn't point out that this approach has been deeply inspired by our friends at [Smallstep](https://smallstep.com/), [Cloudflare](https://www.cloudflare.com/), [Let's Encrypt](https://letsencrypt.org/), [Mozilla](https://www.mozilla.org/), and other amazing organizations that strive to make the Internet secure by default.

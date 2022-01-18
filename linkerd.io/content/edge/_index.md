@@ -14,7 +14,7 @@ Stable releases are periodic, and focus on stability. To install a stable
 release, you can run:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 ## Edge (latest version: {{% latestedge %}})
@@ -25,5 +25,5 @@ more focused on adding new functionality. To install an edge release, you can
 run:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install-edge | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```

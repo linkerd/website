@@ -42,7 +42,7 @@ This application has a major bug in it, which we’ll debug by using Linkerd’s
 Before we install Linkerd, let’s install the Nodevoto demo app. In your laptop’s terminal window, run:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ```
 
 This command downloads the Kubernetes manifest for Nodevoto, and uses _kubectl_ to apply it to your Kubernetes cluster. Nodevoto is comprised of several services that run in the “nodevoto” namespace. You can see the services by running:
@@ -74,7 +74,7 @@ This is a very common type of failure scenario: Kubernetes thinks everything’s
 We’ll start by installing Linkerd’s command-line interface (CLI) onto your local machine. Visit the [Linkerd releases page](https://github.com/linkerd/linkerd2/releases/), or simply run:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Once installed, add the `linkerd` command to your path with:

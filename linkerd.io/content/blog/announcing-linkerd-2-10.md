@@ -164,7 +164,7 @@ Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
 our [weekly edge releases](/edge/) will already have seen these features
 in action. Either way, you can download the stable 2.10 release by running:
 
-`curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh`
+`curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh`
 
 Using Helm? See our [guide to installing Linkerd with
 Helm](/2.10/tasks/install-helm/). Upgrading from an earlier release? We've got

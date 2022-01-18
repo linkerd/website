@@ -54,7 +54,7 @@ Linkerd, including installing the control plane onto your Kubernetes cluster.
 To install the CLI manually, run:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
@@ -178,7 +178,7 @@ users to vote on their favorite emojis.
 Install *emojivoto* into the `emojivoto` namespace by running:
 
 ```bash
-curl --proto '=https' --tlsv1.3 -sSfL https://run.linkerd.io/emojivoto.yml \
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
   | kubectl apply -f -
 ```
 

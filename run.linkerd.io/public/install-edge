@@ -30,7 +30,7 @@ happyexit() {
 
 validate_checksum() {
   filename=$1
-  SHA=$(curl --proto='=https' --tlsv1.3 -sSfL "${url}.sha256")
+  SHA=$(curl --proto='=https' --tlsv1.2 -sSfL "${url}.sha256")
   echo ""
   echo "Validating checksum..."
 
@@ -134,7 +134,7 @@ fi
   cd "$tmpdir"
 
   echo "Downloading ${srcfile}..."
-  curl --proto '=https' --tlsv1.3 -fLO "${url}"
+  curl --proto '=https' --tlsv1.2 -fLO "${url}"
   echo "Download complete!"
 
   if ! validate_checksum "${srcfile}"; then
