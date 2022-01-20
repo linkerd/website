@@ -43,16 +43,18 @@ on how to easily import the same charts published on
 
 ## Hook Grafana with Linkerd Viz Dashboard
 
-In the case of in-cluster Grafana instances (such as as the one from the Grafana
-Helm chart or the Grafana Operator mentioned above), you can configure them so
-that the Linkerd Viz Dashboard will show Grafana Icons in all the relevant items
-to provide direct links to the appropriate Grafana Dashboards. For example, when
-looking at a list of deployments for a given namespace, you'll be able to go
-straight into the Grafana Dashboard providing the same (and more) metrics (plus
-their historical behavior) in the Linkerd Deployments Grafana Dashboard.
+It's easy to configure Linkerd Viz dashboard and Grafana such that the former
+displays Grafana icons in all the relevant items, providing direct links to the
+appropriate Grafana Dashboards. For example, when looking at a list of
+deployments for a given namespace, you'll be able to go straight into the
+Linkerd Deployments Grafana dashboard providing the same (and more) metrics
+(plus their historical behavior).
 
-In order to enable this, just make sure a reverse proxy is set up, as shown in
-the sample `grafana/values.yaml` file:
+### In-cluster Grafana instances
+
+In the case of in-cluster Grafana instances (such as as the one from the Grafana
+Helm chart or the Grafana Operator mentioned above), make sure a reverse proxy
+is set up, as shown in the sample `grafana/values.yaml` file:
 
 ```yaml
 grafana.ini:
@@ -60,12 +62,28 @@ grafana.ini:
     root_url: '%(protocol)s://%(domain)s:/grafana/'
 ```
 
-And finally, refer the location of your Grafana service in the Linkerd Viz
-`values.yaml` entry `grafana.url`. For example, if you installed the Grafana
-offical Helm chart in the `grafana` namespace, you can install Linkerd Viz
-through the command line like so:
+Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`
+entry `grafana.url`. For example, if you installed the Grafana offical Helm
+chart in the `grafana` namespace, you can install Linkerd Viz through the
+command line like so:
 
 ```bash
-linkerd viz install --set grafana.url=grafana.grafana:300 \
+linkerd viz install --set grafana.url=grafana.grafana:3000 \
   | kubectl apply -f -
 ```
+
+### Off-cluster Grafana instances
+
+If you're using a hosted solution like Grafana Cloud, after having imported the
+Linkerd dashboards, you need to enter the full URL of the Grafana service in the
+Linkerd Viz `values.yaml` entry `grafana.externalUrl`:
+
+```bash
+linkerd viz install --set grafana.externalUrl=https://your-co.grafana.net/ \
+  | kubectl apply -f -
+```
+
+If that single Grafana instance is pointing to multiple Linkerd installations,
+you can segregate the dashboards through different prefixes in their UIDs, which
+you would configure in the `grafana.uidPrefix` setting for each Linkerd
+instance.

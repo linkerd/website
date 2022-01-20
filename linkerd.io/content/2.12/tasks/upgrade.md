@@ -269,7 +269,7 @@ helm delete linkerd-viz
 helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
-### Removal of Grafana
+### Grafana removal
 
 Linkerd Viz no longer installs a Grafana instance, and instead we recommend you
 install it directly from the [Grafana official Helm
