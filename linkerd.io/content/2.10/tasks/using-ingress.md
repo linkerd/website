@@ -43,33 +43,21 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-## Ambassador (aka Emissary) {id="ambassador"}
+## Ambassador (aka Emissary) {{id="ambassador"}}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
 
 ```yaml
-apiVersion: v1
-kind: Service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
-  name: web-ambassador
+  name: web-ambassador-mapping
   namespace: emojivoto
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-ambassador-mapping
-      service: http://web-svc.emojivoto.svc.cluster.local:80
-      host: example.com
-      prefix: /
 spec:
-  selector:
-    app: web-svc
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
+  hostname: "*"
+  prefix: /
+  service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
 
 For a more detailed guide, we recommend reading [Installing the Emissary
