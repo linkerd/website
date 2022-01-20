@@ -30,7 +30,7 @@ happyexit() {
 
 validate_checksum() {
   filename=$1
-  SHA=$(curl --proto='=https' --tlsv1.2 -sSfL "${url}.sha256")
+  SHA=$(curl --proto '=https' --tlsv1.2 -sSfL "${url}.sha256")
   echo ""
   echo "Validating checksum..."
 
