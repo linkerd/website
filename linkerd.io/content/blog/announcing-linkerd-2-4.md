@@ -74,7 +74,7 @@ features in action. Either way, you can download the stable 2.4 release by
 running:
 
 ```bash
-    curl https://run.linkerd.io/install | sh
+    curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
