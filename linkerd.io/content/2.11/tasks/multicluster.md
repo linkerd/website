@@ -509,7 +509,7 @@ There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 To cleanup the multicluster control plane, you can run:
 
 ```bash
-linkerd --context=west multicluster unlink --cluster-name east | 
+linkerd --context=west multicluster unlink --cluster-name east |
   kubectl --context=west delete -f -
 for ctx in west east; do
   kubectl --context=${ctx} delete ns test

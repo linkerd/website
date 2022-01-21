@@ -43,7 +43,7 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-## Ambassador (aka Emissary) {{id="ambassador"}}
+## Ambassador (aka Emissary) {#ambassador}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
@@ -375,10 +375,7 @@ This example will use the following elements:
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).
 
-We need to declare these objects as well:
-
-- KongPlugin, a CRD provided by Kong
-- Ingress
+We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
