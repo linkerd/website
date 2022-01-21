@@ -48,7 +48,7 @@ Before we install Linkerd, let’s add the books app onto your cluster. In your 
 
 ```bash
 kubectl create ns booksapp && \
-  curl -sL https://run.linkerd.io/booksapp.yml | \
+  curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp.yml | \
   kubectl -n booksapp apply -f -
 ```
 
@@ -94,7 +94,7 @@ In the next few steps, we’ll walk you through how to use Linkerd to diagnose t
 We’ll start by installing Linkerd’s command-line interface (CLI) onto your local machine. Visit the Linkerd releases page, or simply run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Once installed, add the linkerd command to your path with:
