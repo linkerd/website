@@ -113,7 +113,7 @@ First, you'll want to inject the `ambassador` deployment with Linkerd:
 kubectl -n ambassador get deploy ambassador -o yaml | \
     linkerd inject \
     --skip-inbound-ports 80,443 \
-    --require-identity-on-inbound-ports 4183 - | \
+    --require-identity-on-inbound-ports 4143 - | \
     kubectl apply -f -
 ```
 
