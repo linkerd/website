@@ -147,7 +147,7 @@ the last bit of performance is far less important than having good units of
 maintenance and isolation. We learned that lesson the hard way with Linkerd 1.x.
 
 Whether user space or kernel space, we haven't yet seen anything that challenges
-our belief that the sidecar model makes makes life fundamentally easier for the
+our belief that the sidecar model makes life fundamentally easier for the
 _humans_ who interact with and operate the service mesh.
 
 ## 2022 is going to be another great year for Linkerd

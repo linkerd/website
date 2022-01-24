@@ -89,7 +89,7 @@ We've shown how you can configure Linkerd's retry behavior by combining timeouts
 
 ```bash
 linkerd install | kubectl apply -f - && \
-  curl https://run.linkerd.io/booksapp.yml | linkerd inject - | kubectl apply -f - && \
+  curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp.yml | linkerd inject - | kubectl apply -f - && \
   linkerd check
 ```
 
@@ -105,7 +105,7 @@ To get a better picture of what’s going on here, let’s add a service profile
 
 <!-- markdownlint-disable MD014 -->
 ```bash
-$ curl https://run.linkerd.io/booksapp/authors.swagger | linkerd profile --open-api - authors | kubectl apply -f  -
+$ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/authors.swagger | linkerd profile --open-api - authors | kubectl apply -f  -
 $ linkerd routes deploy/books --to svc/authors
 ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /authors/{id}.json   authors     0.00%   0.0rps           0ms           0ms           0ms

@@ -159,7 +159,7 @@ features in action. Either way, you can download the stable 2.9 release by
 running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
