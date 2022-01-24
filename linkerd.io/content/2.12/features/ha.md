@@ -116,7 +116,7 @@ violated (e.g. the cluster is scaled down to two or fewer nodes), then the
 system may be left in a non-functional state.
 
 Note that these anti-affinity rules don't apply to add-on components like
-Prometheus and Grafana.
+Prometheus.
 
 ## Scaling Prometheus
 

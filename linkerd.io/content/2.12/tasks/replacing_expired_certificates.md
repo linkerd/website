@@ -91,7 +91,6 @@ linkerd-identity-data-plane
     Some pods do not have the current trust bundle and must be restarted:
         * linkerd/linkerd-controller-5b69fd4fcc-7skqb
         * linkerd/linkerd-destination-749df5c74-brchg
-        * linkerd/linkerd-grafana-6dcf86b74b-vvxjq
         * linkerd/linkerd-prometheus-74cb4f4b69-kqtss
         * linkerd/linkerd-proxy-injector-cbd5545bd-rblq5
         * linkerd/linkerd-sp-validator-6ff949649f-gjgfl
