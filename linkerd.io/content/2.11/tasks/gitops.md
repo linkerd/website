@@ -109,6 +109,12 @@ kubectl -n scm port-forward "${git_server}" 9418  &
 git push git-server master
 ```
 
+## Install the Argo CD CLI
+
+Before proceeding, install the Argo CD CLI in your local machine by following
+the [instructions](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
+relevant to your OS.
+
 ## Deploy Argo CD
 
 Install Argo CD:
@@ -117,15 +123,17 @@ Install Argo CD:
 kubectl create ns argocd
 
 kubectl -n argocd apply -f \
-  https://raw.githubusercontent.com/argoproj/argo-cd/v1.6.1/manifests/install.yaml
+  https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
 Confirm that all the pods are ready:
 
 ```sh
-for deploy in "application-controller" "dex-server" "redis" "repo-server" "server"; \
+for deploy in "dex-server" "redis" "repo-server" "server"; \
   do kubectl -n argocd rollout status deploy/argocd-${deploy}; \
 done
+
+kubectl -n argocd rollout status statefulset/argocd-application-controller
 ```
 
 Use port-forward to access the Argo CD dashboard:
@@ -140,19 +148,14 @@ The Argo CD dashboard is now accessible at
 username and
 [password](https://argoproj.github.io/argo-cd/getting_started/#4-login-using-the-cli).
 
-{{< note >}}
-The default admin password is the auto-generated name of the Argo CD API server
-pod. You can use the `argocd account update-password` command to change it.
-{{< /note >}}
-
 Authenticate the Argo CD CLI:
 
 ```sh
-argocd_server=`kubectl -n argocd get pods -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2`
+password=`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 
 argocd login 127.0.0.1:8080 \
   --username=admin \
-  --password="${argocd_server}" \
+  --password="${password}" \
   --insecure
 ```
 
@@ -183,8 +186,8 @@ On the dashboard:
 
 ### Deploy the applications
 
-Deploy the `main` application which serves as the "parent" application that of
-all the other applications:
+Deploy the `main` application which serves as the "parent" for all the other
+applications:
 
 ```sh
 kubectl apply -f gitops/main.yaml
@@ -285,16 +288,21 @@ trust anchor:
 step certificate inspect sample-trust.crt
 ```
 
-Create a `SealedSecret` resource to store the encrypted trust anchor:
+Before creating the `SealedSecret`, make sure you have installed the `kubeseal`
+utility, as instructed
+[here](https://github.com/bitnami-labs/sealed-secrets/releases)
+
+Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
   --key sample-trust.key \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.8.1", "linkerd.io/identity-issuer-expiry":"2021-07-19T20:51:01Z"}}}}}' \
+  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.11.1"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
@@ -372,8 +380,8 @@ Now we are ready to install Linkerd. The decrypted trust anchor we just
 retrieved will be passed to the installation process using the
 `identityTrustAnchorsPEM` parameter.
 
-Prior to installing Linkerd, note that the `global.identityTrustAnchorsPEM`
-parameter is set to an "empty" certificate string:
+Prior to installing Linkerd, note that the `identityTrustAnchorsPEM` parameter
+is set to an "empty" certificate string:
 
 ```sh
 argocd app get linkerd -ojson | \
@@ -388,8 +396,8 @@ We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
 
 Locate the `identityTrustAnchorsPEM` variable in your local
-`gitops/argo-apps/linkerd.yaml` file, and set its `value` to that of
-`${trust_anchor}`.
+`gitops/argo-apps/linkerd.yaml` file, and set its `value` to that
+of `${trust_anchor}`.
 
 Ensure that the multi-line string is indented correctly. E.g.,
 
@@ -397,7 +405,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd2
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.8.0
+    targetRevision: 2.11.1
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -484,9 +492,11 @@ done
       title="Synchronize emojivoto"
       src="/images/gitops/dashboard-emojivoto-sync.png" >}}
 
-### Upgrade Linkerd to 2.8.1
+### Upgrade Linkerd to 2.11.2
 
-Use your editor to change the `spec.source.targetRevision` field to `2.8.1` in
+(Assuming 2.11.2 has already been released ;-) )
+
+Use your editor to change the `spec.source.targetRevision` field to `2.11.2` in
 the `gitops/argo-apps/linkerd.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
@@ -500,7 +510,7 @@ Commit and push this change to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd.yaml
 
-git commit -m "upgrade Linkerd to 2.8.1"
+git commit -m "upgrade Linkerd to 2.11.2"
 
 git push git-server master
 ```
