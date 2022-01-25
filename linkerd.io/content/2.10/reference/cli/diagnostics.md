@@ -7,42 +7,42 @@ aliases = [
 ]
 +++
 
-{{< cli-2-10/description "diagnostics" >}}
+{{< cli/description "diagnostics" >}}
 
-{{< cli-2-10/examples "diagnostics" >}}
+{{< cli/examples "diagnostics" >}}
 
-{{< cli-2-10/flags "diagnostics" >}}
+{{< cli/flags "diagnostics" >}}
 
 ## Subcommands
 
 ### controller-metrics
 
-{{< cli-2-10/description "diagnostics controller-metrics" >}}
+{{< cli/description "diagnostics controller-metrics" >}}
 
-{{< cli-2-10/examples "diagnostics controller-metrics" >}}
+{{< cli/examples "diagnostics controller-metrics" >}}
 
-{{< cli-2-10/flags "diagnostics controller-metrics" >}}
+{{< cli/flags "diagnostics controller-metrics" >}}
 
 ### endpoints
 
-{{< cli-2-10/description "diagnostics endpoints" >}}
+{{< cli/description "diagnostics endpoints" >}}
 
-{{< cli-2-10/examples "diagnostics endpoints" >}}
+{{< cli/examples "diagnostics endpoints" >}}
 
-{{< cli-2-10/flags "diagnostics endpoints" >}}
+{{< cli/flags "diagnostics endpoints" >}}
 
 ### install-sp
 
-{{< cli-2-10/description "diagnostics install-sp" >}}
+{{< cli/description "diagnostics install-sp" >}}
 
-{{< cli-2-10/examples "diagnostics install-sp" >}}
+{{< cli/examples "diagnostics install-sp" >}}
 
-{{< cli-2-10/flags "diagnostics install-sp" >}}
+{{< cli/flags "diagnostics install-sp" >}}
 
 ### proxy-metrics
 
-{{< cli-2-10/description "diagnostics proxy-metrics" >}}
+{{< cli/description "diagnostics proxy-metrics" >}}
 
-{{< cli-2-10/examples "diagnostics proxy-metrics" >}}
+{{< cli/examples "diagnostics proxy-metrics" >}}
 
-{{< cli-2-10/flags "diagnostics proxy-metrics" >}}
+{{< cli/flags "diagnostics proxy-metrics" >}}
