@@ -100,7 +100,8 @@ spec:
         number: 80
 ```
 
-**NOTE**: Doing so will allow Service Profiles to function properly, but will remove the ability to have sticky sessions.
+**NOTE**: Doing so will allow Service Profiles to function properly, but will
+remove the ability to have sticky sessions.
 
 ## Traefik
 
