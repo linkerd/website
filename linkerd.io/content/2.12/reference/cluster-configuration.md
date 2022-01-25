@@ -58,7 +58,7 @@ echo $MASTER_IPV4_CIDR $NETWORK $NETWORK_TARGET_TAG
 10.0.0.0/28 foo-network gke-foo-cluster-c1ecba83-node
 ```
 
-Create the firewall rules for `proxy-injector` and `tap`:
+Create the firewall rules for `proxy-injector`, `policy-validator` and `tap`:
 
 ```bash
 gcloud compute firewall-rules create gke-to-linkerd-control-plane \
@@ -67,7 +67,7 @@ gcloud compute firewall-rules create gke-to-linkerd-control-plane \
   --source-ranges "$MASTER_IPV4_CIDR" \
   --target-tags "$NETWORK_TARGET_TAG" \
   --priority 1000 \
-  --description "Allow traffic on ports 8443, 8089 for linkerd control-plane components"
+  --description "Allow traffic on ports 8443, 8089, 9443 for linkerd control-plane components"
 ```
 
 Finally, verify that the firewall is created:

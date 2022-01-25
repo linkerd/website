@@ -5,6 +5,8 @@
 {{ $data = (index site.Data "cli-2-10").CLIReference }}
 {{ else if eq $docsVersion "2.11" }}
 {{ $data = (index site.Data "cli-2-11").CLIReference }}
+{{ else if eq $docsVersion "2.12" }}
+{{ $data = (index site.Data "cli-2-12").CLIReference }}
 {{ end }}
 <div class="table-container">
   <table class="table table-striped">

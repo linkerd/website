@@ -3,7 +3,7 @@ title = "TCP Proxying and Protocol Detection"
 description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
 weight = 2
 aliases = [
-  "/2.12/supported-protocols/"
+  "/2.11/supported-protocols/"
 ]
 +++
 
@@ -31,30 +31,31 @@ likely running into a protocol detection timeout. This section will help you
 understand how to fix this.
 {{< /note >}}
 
-In some cases, Linkerd's protocol detection will time out because it doesn't
-see any bytes from the client. This situation is commonly encountered when
-using "server-speaks-first" protocols where the server sends data before the
-client does, such as SMTP, or protocols that proactively establish connections
-without sending data, such as Memcache. In this case, the connection will
-proceed as a TCP connection after a 10-second protocol detection delay.
+In some cases, Linkerd's protocol detection will time out because it doesn't see
+any bytes from the client. This situation is commonly encountered when using
+protocols where the server sends data before the client does (such as SMTP) or
+protocols that proactively establish connections without sending data (such as
+Memcache). In this case, the connection will proceed as a TCP connection after a
+10-second protocol detection delay.
 
 To avoid this delay, you will need to provide some configuration for Linkerd.
 There are two basic mechanisms for configuring protocol detection: _opaque
 ports_ and _skip ports_. Marking a port as _opaque_ instructs Linkerd to skip
-protocol detection and immediately proxy the connection as a TCP stream;
-marking a port as a _skip port_ bypasses the proxy entirely. Opaque ports are
-generally preferred (as Linkerd can provide mTLS, TCP-level metrics, etc), but
-can only be used for services inside the cluster.
+protocol detection and immediately proxy the connection as a TCP stream; marking
+a port as a _skip port_ bypasses the proxy entirely. Opaque ports are generally
+preferred (as Linkerd can still provide mTLS, TCP-level metrics, etc), but can
+only be used for destinations inside the cluster.
 
 By default, Linkerd automatically marks the ports for some server-speaks-first
 protocol as opaque. Services that speak those protocols over the default ports
 to destinations inside the cluster do not need further configuration.
-Linkerd's default list of opaque ports in the 2.12 release is 25 (SMTP), 587
-(SMTP), 3306 (MySQL), 4444 (Galera), 5432 (Postgres), 6379 (Redis), 9300
-(ElasticSearch), and 11211 (Memcache). Note that this may change in future
-releases.
 
-The following table contains common protocols that may require configuration.
+Linkerd's default list of opaque ports in the 2.11 release is **25** (SMTP),
+**587** (SMTP), **3306** (MySQL), **4444** (Galera), **5432** (Postgres),
+**6379** (Redis), **9300** (ElasticSearch), and **11211** (Memcache).
+
+The following table contains common protocols that may require additional
+configuration.
 
 | Protocol        | Default port(s) | Notes |
 |-----------------|-----------------|-------|

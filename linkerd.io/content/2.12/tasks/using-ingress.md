@@ -80,7 +80,7 @@ mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds
 
 Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `true`. No further configuration is required.
+annotation should be set to `"true"`. No further configuration is required.
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -90,7 +90,7 @@ metadata:
   name: emojivoto-web-ingress
   namespace: emojivoto
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: true
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   defaultBackend:
@@ -524,6 +524,14 @@ Thus, combining an ingress with Linkerd takes one of two forms:
    those headers instead.
 
 The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
+
+{{< note >}}
+Some ingress controllers support sticky sessions. For session stickiness, the
+ingress controller has to do its own endpoint selection. This means that
+Linkerd will not be able to connect to the IP/port of the Kubernetes Service,
+and will instead establish a direct connection to a pod. Therefore, sticky
+sessions and `ServiceProfiles` are mutually exclusive.
+{{< /note >}}
 
 {{< note >}}
 If requests experience a 2-3 second delay after injecting your ingress

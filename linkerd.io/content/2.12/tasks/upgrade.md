@@ -44,7 +44,7 @@ free to skip to the [Helm section](#with-helm).
 To upgrade the CLI locally, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the
@@ -281,11 +281,17 @@ docs](../grafana/) provide detailed instructions on how to load them.
 
 ## Upgrade notice: stable-2.11.0
 
-The minimum Kubernetes version supported is `v1.17.0`. There are two breaking
-changes in the 2.11.0 release: pods in `ingress` no longer support non-HTTP
-traffic to meshed workloads; and the proxy no longer forwards traffic to ports
-that are bound only to localhost. Additionally, users of the multi-cluster
-extension will need to re-link their cluster after upgrading.
+The minimum Kubernetes version supported is now `v1.17.0`.
+
+There are two breaking changes in the 2.11.0 release: pods in `ingress` no
+longer support non-HTTP traffic to meshed workloads; and the proxy no longer
+forwards traffic to ports that are bound only to localhost.
+
+Users of the multi-cluster extension will need to re-link their cluster after
+upgrading.
+
+The Linkerd proxy container is now the *first* container in the pod. This may
+affect tooling that assumed the application was the first container in the pod.
 
 ### Control plane changes
 
@@ -293,6 +299,19 @@ The `controller` pod has been removed from the control plane. All configuration
 options that previously applied to it are no longer valid (e.g
 `publicAPIResources` and all of its nested fields). Additionally, the
 destination pod has a new `policy` container that runs the policy controller.
+
+### Data plane changes
+
+In order to fix a class of startup race conditions, the container ordering
+within meshed pods has changed so that the Linkerd proxy container is now the
+*first* container in the pod, the application container now waits to start until
+the proxy is ready. This may affect tooling that assumed the application
+container was the first container in the pod.
+
+Using [linkerd-await](https://github.com/linkerd/linkerd-await) to enforce
+container startup ordering is thus longer necessary. (However, using
+`linkerd-await -S` to ensure proxy shutdown in Jobs and Cronjobs is still
+valid.)
 
 ### Routing breaking changes
 
@@ -619,7 +638,7 @@ are retained.
 
 ```bash
 # get the latest stable CLI
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 {{< note >}} The linkerd cli installer installs the CLI binary into a
@@ -686,7 +705,7 @@ are retained.
 
 ```bash
 # get the latest stable CLI
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 For Kubernetes 1.12+:
@@ -788,7 +807,7 @@ kubectl -n linkerd delete deploy/linkerd-ca
 
 ```bash
 # get the latest stable
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 
 # upgrade the control plane
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
@@ -881,7 +900,7 @@ information on disk, such as using tools like
 
 ```bash
 # get the latest stable
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 
 # Install stable control plane, using flags previously supplied during
 # installation.
