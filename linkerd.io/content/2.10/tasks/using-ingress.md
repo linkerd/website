@@ -100,6 +100,8 @@ spec:
         number: 80
 ```
 
+**NOTE**: Doing so will allow Service Profiles to function properly, but will remove the ability to have sticky sessions.
+
 ## Traefik
 
 Traefik should be meshed with ingress mode enabled, i.e. with the
