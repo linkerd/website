@@ -22,6 +22,6 @@ Alternatively, this command can also perform the full injection purely on the
 client side, by enabling with the `--manual` flag. (Prior to Linkerd 2.4, this
 was the default behavior.)
 
-{{< cli-2-10/examples "inject" >}}
+{{< cli/examples "inject" >}}
 
-{{< cli-2-10/flags "inject" >}}
+{{< cli/flags "inject" >}}

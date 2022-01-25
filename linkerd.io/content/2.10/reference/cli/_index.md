@@ -12,7 +12,7 @@ detailed metrics for how your service is performing.
 
 As reference, check out the commands below:
 
-{{< cli-2-10 >}}
+{{< cli >}}
 
 ## Global flags
 
