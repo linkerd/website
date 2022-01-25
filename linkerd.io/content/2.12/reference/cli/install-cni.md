@@ -2,8 +2,8 @@
 title = "install-cni"
 +++
 
-{{< cli "install-cni" >}}
+{{< cli/description "install-cni" >}}
 
-{{< cli "install-cni" >}}
+{{< cli/examples "install-cni" >}}
 
-{{< cli "install-cni" >}}
+{{< cli/flags "install-cni" >}}
