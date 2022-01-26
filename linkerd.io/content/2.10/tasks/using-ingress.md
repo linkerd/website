@@ -100,9 +100,9 @@ spec:
         number: 80
 ```
 
-**NOTE**: Doing so will allow Service Profiles to function properly, but will
-remove the ability to have sticky sessions.
-
+{{< note >}} 
+Setting `nginx.ingress.kubernetes.io/service-upstream: "true"` on your ingress will allow Linkerd to apply features such as route-based metrics and load balancing but will forfeit session stickiness. If you'd like to use session stickiness instead, do not annotate the resource.
+{{< /note >}}
 ## Traefik
 
 Traefik should be meshed with ingress mode enabled, i.e. with the
