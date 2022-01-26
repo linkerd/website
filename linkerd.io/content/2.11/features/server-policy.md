@@ -1,6 +1,6 @@
 +++
 title = "Authorization Policy"
-description = "Linkerd can restrict which types of traffic are allowed to ."
+description = "Linkerd can restrict which types of traffic are allowed to."
 +++
 
 Linkerd's server authorization policy allows you to control which types of
