@@ -21,7 +21,7 @@ sharing their successes (and failures!) with the world at large, or
 contributing code or docs, Linkerd Heroes are instrumental in making the
 Linkerd community the amazing place it is today.
 
-## Congrats, Krzysztof!
+## Congrats, Krzysztof
 
 This month’s hero is
 [Krzysztof Drys](http://github.com/krzysztofdrys)!
@@ -42,6 +42,6 @@ blog post or watched a conference talk that helped spur your
 decision-making process or advance your Linkerd implementation.
 Or perhaps someone contributed an awesome Linkerd feature or bugfix
 that has made your life a lot easier. Who is your Linkerd Hero?
-[Submit your nomination for next month's hero here[(https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform?usp=sf_link)!
+[Submit your nomination for next month's hero here](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform?usp=sf_link)!
 
 For those who nominated someone, thank you for participating!
