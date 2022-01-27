@@ -1,15 +1,12 @@
 ---
-title: Blog
-subtitle: The latest and greatest news about Linkerd
+author: catherine
+date: 2022-01-27T00:00:00Z
+title: Announcing January's Linkerd Hero
+description: "As a community member and Linkerd user, Krzysztof has continuously and enthusiastically helped fix issues and improve the Linkerd project."
+feature: "/uploads/krzysztof.jpeg"
+thumbnail: "/uploads/krzysztof.jpeg"
 tags:
   - Community
-  - Linkerd
-  - Tutorials &amp; How-To's
-  - Video
-items:
-  - blog/the-service-mesh-in-2022.md
-  - blog/announcing-linkerd-2-11.md
-description: ''
 keywords: []
 ---
 
@@ -35,7 +32,7 @@ He has contributed code in various areas, including the dashboard and
 helm templates. Thank you, Krzysztof,  for your continued work and
 support!
 
-ADD IMAGE HERE
+![krzysztof](/uploads/krzysztof.jpeg)
 
 ## Nominate next month's Linkerd Hero
 
