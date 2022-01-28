@@ -15,46 +15,61 @@ the `linkerd install` CLI which can generate these automatically). You can
 provide your own, or follow [these instructions](../generate-certificates/)
 to generate new ones.
 
-## Adding Linkerd's Helm repository
+## Helm install procedure for stable releases
 
 ```bash
-# To add the repo for Linkerd2 stable releases:
+# add the repo for stable releases:
 helm repo add linkerd https://helm.linkerd.io/stable
-
-# To add the repo for Linkerd2 edge releases:
-helm repo add linkerd-edge https://helm.linkerd.io/edge
-```
-
-The following instructions use the `linkerd` repo. For installing an edge
-release, just replace with `linkerd-edge`.
-
-## Helm install procedure
-
-```bash
-# set expiry date one year from now, in Mac:
-exp=$(date -v+8760H +"%Y-%m-%dT%H:%M:%SZ")
-# in Linux:
-exp=$(date -d '+8760 hour' +"%Y-%m-%dT%H:%M:%SZ")
 
 helm install linkerd2 \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
-  --set identity.issuer.crtExpiry=$exp \
   linkerd/linkerd2
 ```
-
-{{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
-{{< /note >}}
 
 The chart values will be picked from the chart's `values.yaml` file.
 
 You can override the values in that file by providing your own `values.yaml`
 file passed with a `-f` option, or overriding specific values using the family of
 `--set` flags like we did above for certificates.
+
+## Helm install procedure for edge releases
+
+You need to install two separate charts in succession: first `linkerd-crds` and
+then `linkerd-control-plane`. This new method will eventually make its way into
+the `2.12.0` stable release as well when it comes out.
+
+### linkerd-crds
+
+The `linkerd-crds` chart sets up the CRDs linkerd requires:
+
+```bash
+# add the repo for edge releases:
+helm repo add linkerd-edge https://helm.linkerd.io/edge
+
+helm install linkerd-crds -n linkerd --create-namespace --devel linkerd-edge/linkerd-crds
+```
+
+{{< note >}}
+This will create the `linkerd` namespace. If it already exists or you're
+creating it beforehand elsewhere in your pipeline, just omit the
+`--create-namespace` flag.
+{{< /note >}}
+
+### linkerd-control-plane
+
+The `linkerd-control-plane` chart sets up all the control plane components:
+
+```bash
+helm install linkerd-control-plane \
+  -n linkerd \
+  --devel \
+  --set-file identityTrustAnchorsPEM=ca.crt \
+  --set-file identity.issuer.tls.crtPEM=issuer.crt \
+  --set-file identity.issuer.tls.keyPEM=issuer.key \
+  linkerd-edge/linkerd-control-plane
+```
 
 ## Disabling The Proxy Init Container
 
@@ -63,54 +78,58 @@ cniEnabled=true` flag to your `helm install` command.
 
 ## Setting High-Availability
 
-The chart contains a file `values-ha.yaml` that overrides some
-default values as to set things up under a high-availability scenario, analogous
-to the `--ha` option in `linkerd install`. Values such as higher number of
-replicas, higher memory/cpu limits and affinities are specified in that file.
+The linkerd2 chart (linkerd-control-plane chart for edge releases) contains a
+file `values-ha.yaml` that overrides some default values as to set things up
+under a high-availability scenario, analogous to the `--ha` option in `linkerd
+install`. Values such as higher number of replicas, higher memory/cpu limits and
+affinities are specified in that file.
 
 You can get ahold of `values-ha.yaml` by fetching the chart files:
 
 ```bash
+# for stable
 helm fetch --untar linkerd/linkerd2
+
+# for edge
+helm fetch --untar --devel linkerd-edge/linkerd-control-plane
 ```
 
 Then use the `-f` flag to provide the override file, for example:
 
 ```bash
-## see above on how to set $exp
+# for stable
 helm install linkerd2 \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
-  --set identity.issuer.crtExpiry=$exp \
   -f linkerd2/values-ha.yaml \
   linkerd/linkerd2
+
+# for edge
+helm install linkerd-control-plane \
+  -n linkerd \
+  --devel \
+  --set-file identityTrustAnchorsPEM=ca.crt \
+  --set-file identity.issuer.tls.crtPEM=issuer.crt \
+  --set-file identity.issuer.tls.keyPEM=issuer.key \
+  -f linkerd-control-plane/values-ha.yaml \
+  linkerd-edge/linkerd-control-plane
 ```
 
-{{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
-{{< /note >}}
-
-## Customizing the Namespace
+## Customizing the Namespace in the stable release
 
 To install Linkerd to a different namespace than the default `linkerd`,
 override the `Namespace` variable.
 
 By default, the chart creates the control plane namespace with the
 `config.linkerd.io/admission-webhooks: disabled` label. It is required for the
-control plane to work correctly. This means that the chart won't work with
-Helm v2's `--namespace` option.  If you're relying on a separate tool to create
-the control plane namespace, make sure that:
+control plane to work correctly. This means that the chart won't work with the
+`--namespace` option.  If you're relying on a separate tool to create the
+control plane namespace, make sure that:
 
 1. The namespace is labeled with `config.linkerd.io/admission-webhooks: disabled`
 1. The `installNamespace` is set to `false`
 1. The `namespace` variable is overridden with the name of your namespace
-
-{{< note >}}
-In Helm v3 the `--namespace` option must be used with an existing namespace.
-{{< /note >}}
 
 ## Helm upgrade procedure
 
