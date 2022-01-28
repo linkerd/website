@@ -56,7 +56,7 @@ tmp/%/public:
 	@printf "Missing tmp/$*/public. Run:\n\n\tmake build-$*\n\n"; exit 1
 
 .PHONY: tmp-sites
-tmp-sites: tmp
+tmp-sites: clean tmp
 	cp -R *linkerd.io tmp/
 
 .PHONY: lint
