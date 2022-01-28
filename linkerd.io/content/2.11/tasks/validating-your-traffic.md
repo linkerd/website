@@ -106,7 +106,7 @@ service mesh itself. For example, with our [*emojivoto* demo
 application](../../getting-started/), we can add the debug sidecar by running:
 
 ```bash
-curl -sL https://run.linkerd.io/emojivoto.yml \
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
   | linkerd inject --enable-debug-sidecar - \
   | kubectl apply -f -
 ```

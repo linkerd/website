@@ -2027,7 +2027,7 @@ linkerd-buoyant check
 To install the CLI:
 
 ```bash
-curl https://buoyant.cloud/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh
 ```
 
 ### √ linkerd-buoyant can determine the latest version
@@ -2042,7 +2042,7 @@ Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-$ curl https://buoyant.cloud/version.json
+$ curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
@@ -2057,7 +2057,7 @@ $ curl https://buoyant.cloud/version.json
 To update to the latest version of the `linkerd-buoyant` CLI:
 
 ```bash
-curl https://buoyant.cloud/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh
 ```
 
 ### √ buoyant-cloud Namespace exists

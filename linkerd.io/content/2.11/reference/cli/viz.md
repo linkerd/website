@@ -10,32 +10,32 @@ aliases = [
 ]
 +++
 
-{{< cli-2-10/description "viz" >}}
+{{< cli/description "viz" >}}
 
-{{< cli-2-10/examples "viz" >}}
+{{< cli/examples "viz" >}}
 
-{{< cli-2-10/flags "viz" >}}
+{{< cli/flags "viz" >}}
 
 ## Subcommands
 
 ### check
 
-{{< cli-2-10/description "viz check" >}}
+{{< cli/description "viz check" >}}
 
-{{< cli-2-10/examples "viz check" >}}
+{{< cli/examples "viz check" >}}
 
-{{< cli-2-10/flags "viz check" >}}
+{{< cli/flags "viz check" >}}
 
 ### dashboard
 
-{{< cli-2-10/description "viz dashboard" >}}
+{{< cli/description "viz dashboard" >}}
 
 Check out the [architecture](../../architecture/#dashboard) docs for a
 more thorough explanation of what this command does.
 
-{{< cli-2-10/examples "viz dashboard" >}}
+{{< cli/examples "viz dashboard" >}}
 
-{{< cli-2-10/flags "viz dashboard" >}}
+{{< cli/flags "viz dashboard" >}}
 
 (*) You'll need to tweak the dashboard's `enforced-host` parameter with this
 value, as explained in [the DNS-rebinding protection
@@ -43,35 +43,35 @@ docs](../../../tasks/exposing-dashboard/#tweaking-host-requirement)
 
 ### edges
 
-{{< cli-2-10/description "viz edges" >}}
+{{< cli/description "viz edges" >}}
 
-{{< cli-2-10/examples "viz edges" >}}
+{{< cli/examples "viz edges" >}}
 
-{{< cli-2-10/flags "viz edges" >}}
+{{< cli/flags "viz edges" >}}
 
 ### install
 
-{{< cli-2-10/description "viz install" >}}
+{{< cli/description "viz install" >}}
 
-{{< cli-2-10/examples "viz install" >}}
+{{< cli/examples "viz install" >}}
 
-{{< cli-2-10/flags "viz install" >}}
+{{< cli/flags "viz install" >}}
 
 ### list
 
-{{< cli-2-10/description "viz list" >}}
+{{< cli/description "viz list" >}}
 
-{{< cli-2-10/examples "viz list" >}}
+{{< cli/examples "viz list" >}}
 
-{{< cli-2-10/flags "viz list" >}}
+{{< cli/flags "viz list" >}}
 
 ### profile
 
-{{< cli-2-10/description "viz profile" >}}
+{{< cli/description "viz profile" >}}
 
-{{< cli-2-10/examples "viz profile" >}}
+{{< cli/examples "viz profile" >}}
 
-{{< cli-2-10/flags "viz profile" >}}
+{{< cli/flags "viz profile" >}}
 
 ### routes
 
@@ -130,38 +130,38 @@ information.
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
 
-{{< cli-2-10/examples "viz routes" >}}
+{{< cli/examples "viz routes" >}}
 
-{{< cli-2-10/flags "viz routes" >}}
+{{< cli/flags "viz routes" >}}
 
 ### stat
 
-{{< cli-2-10/description "viz stat" >}}
+{{< cli/description "viz stat" >}}
 
-{{< cli-2-10/examples "viz stat" >}}
+{{< cli/examples "viz stat" >}}
 
-{{< cli-2-10/flags "viz stat" >}}
+{{< cli/flags "viz stat" >}}
 
 ### tap
 
-{{< cli-2-10/description "viz tap" >}}
+{{< cli/description "viz tap" >}}
 
-{{< cli-2-10/examples "viz tap" >}}
+{{< cli/examples "viz tap" >}}
 
-{{< cli-2-10/flags "viz tap" >}}
+{{< cli/flags "viz tap" >}}
 
 ### top
 
-{{< cli-2-10/description "viz top" >}}
+{{< cli/description "viz top" >}}
 
-{{< cli-2-10/examples "viz top" >}}
+{{< cli/examples "viz top" >}}
 
-{{< cli-2-10/flags "viz top" >}}
+{{< cli/flags "viz top" >}}
 
 ### uninstall
 
-{{< cli-2-10/description "viz uninstall" >}}
+{{< cli/description "viz uninstall" >}}
 
-{{< cli-2-10/examples "viz uninstall" >}}
+{{< cli/examples "viz uninstall" >}}
 
-{{< cli-2-10/flags "viz uninstall" >}}
+{{< cli/flags "viz uninstall" >}}

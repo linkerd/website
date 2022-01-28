@@ -53,7 +53,7 @@ initialization time and are used for proxy-to-proxy connections to implement
 
 ### The proxy injector
 
-The proxy injector is a Kubernetes [admission controller][admission-controller]
+The proxy injector is a Kubernetes [admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/)
 that receives a webhook request every time a pod is created. This injector
 inspects resources for a Linkerd-specific annotation (`linkerd.io/inject:
 enabled`). When that annotation exists, the injector mutates the pod's

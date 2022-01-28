@@ -139,7 +139,7 @@ Kubernetes cluster in a matter of minutes. Download the latest stable release
 by running:
 
 ```bash
-curl https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 You can be up and running with a functioning service mesh (and an awesome Rust
