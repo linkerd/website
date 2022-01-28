@@ -18,6 +18,7 @@ At a high level, you will:
 1. [Link](#linking-the-clusters) the clusters.
 1. [Install](#installing-the-test-services) the demo.
 1. [Export](#exporting-the-services) the demo services, to control visibility.
+1. [Gain visibility](#visibility) in your linked clusters.
 1. [Verify](#security) the security of your clusters.
 1. [Split traffic](#traffic-splitting) from pods on the source cluster (`west`)
    to the target cluster (`east`)
