@@ -20,6 +20,9 @@ case_studies:
 - image: /images/adopters/subspace.svg
   alt: Subspace
   link: https://buoyant.io/case-studies/subspace/
+- image: /images/adopters/salt-security.png
+  alt: Salt Security
+  link: https://buoyant.io/case-studies/salt-security/
 adopters:
 - image: /images/adopters/AdvanceLatam.png
   alt: Advanced Latam
