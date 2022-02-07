@@ -269,6 +269,23 @@ helm delete linkerd-viz
 helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
+### Multicluster
+
+Before uninstalling and reinstalling the multicluster extension (as explained
+above via Helm, but this also applies to the CLI method), you need to remove the
+`Links` you have in your cluster:
+
+```bash
+linkerd multicluster unlink --cluster-name xxx | kubectl delete -f -
+```
+
+And then recreate them again after the extension has been successfully upgraded.
+
+This does imply downtime for the traffic going through the mirror services, so
+please plan accordingly. On the other hand, the multicluster extension upgrade
+on the target clusters can be applied at any moment before or after the source
+cluster upgrade.
+
 ### Grafana removal
 
 Linkerd Viz no longer installs a Grafana instance, and instead we recommend you
