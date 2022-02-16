@@ -2,7 +2,7 @@
 title: "Linkerd surpasses Istio adoption in Europe and North America with 150% growth in 2021"
 author: 'william'
 date: 2022-02-16T00:00:00+00:00
-thumbnail: /images/spacex-OHOU-5UVIYQ-unsplash.jpg
+thumbnail: /images/linkerd-vs-istio-2021-survey-count.png
 featured: false
 slug: linkerd-istio-adoption
 tags: [Linkerd]
