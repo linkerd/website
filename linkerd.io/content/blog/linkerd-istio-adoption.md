@@ -71,9 +71,9 @@ learned about open source along the way: Focus on what's doing what's right for
 the user; build with empathy; and don't get distracted by the hype. The results,
 as they say, will speak for themselves.
 
-{{<tweet 1384463767459844097 >}}
-{{<tweet 1379426266831581186 >}}
-{{<tweet 1448333246366945281 >}}
+{{< tweet 1384463767459844097 >}}
+{{< tweet 1379426266831581186 >}}
+{{< tweet 1448333246366945281 >}}
 
 ## Linkerd is for everyone
 
