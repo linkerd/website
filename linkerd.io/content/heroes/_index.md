@@ -16,6 +16,20 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Krzysztof Dryś
+    date: January 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/krzysztof_drys.jpeg"
+    alt: Portrait of Krzysztof Dryś
+    github_url: "https://github.com/krzysztofdrys"
+  - name: Aleksandr Tarasov
+    date: December 2021
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/aleksandr_tarasov.jpeg"
+    alt: Portrait of Aleksandr Tarasov
+    github_url: "https://github.com/aatarasoff"
   - name: Alberto Sadde
     date: October 2021
     blurb: Helping community members
