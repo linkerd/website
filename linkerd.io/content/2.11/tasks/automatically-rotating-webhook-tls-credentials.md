@@ -38,7 +38,7 @@ kubectl create namespace linkerd
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
 
-# viz (ignore if not using the jaeger extension)
+# jaeger (ignore if not using the jaeger extension)
 kubectl create namespace linkerd-jaeger
 ```
 
