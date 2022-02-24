@@ -100,6 +100,29 @@ spec:
         number: 80
 ```
 
+The `namespace` containing the ingress controller should NOT be annotated with `linkerd.io/inject: enabled`. Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`) of the nginx.
+
+If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), then the `values.yaml` should look like this:
+
+```yaml
+controller:
+  podAnnotations:
+    linkerd.io/inject: enabled
+...
+```
+
+The reason is as follows.
+
+The Helm chart defines (among other things) two Kubernetes resources:
+
+1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named something like `ingress-nginx-admission-create-t7b77` which terminates in 1 or 2 seconds.
+
+2) `kind: Deployment`. This creates a long-running pod named something like `ingress-nginx-controller-644cc665c9-5zmrp` which contains the Nginx docker container.
+
+However, had we set `linkerd.io/inject: enabled` at the `namespace` level, a long-running sidecar would be injected into the otherwise short-lived pod in (1). This long-running sidecar would prevent the pod as a whole from terminating naturally (by design a few seconds after creation) even if the original base admission container had terminated.
+
+Without (1) being considered "done", the creation of (2) would wait forever in an infinite timeout loop.
+
 ## Traefik
 
 Traefik should be meshed with ingress mode enabled, i.e. with the
