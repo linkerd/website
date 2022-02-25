@@ -203,33 +203,25 @@ we'll need to install an *extension*. Linkerd's core control plane is extremely
 minimal, so Linkerd ships with extensions that add non-critical but often
 useful functionality to Linkerd, including a variety of dashboards.
 
-For this guide, we will need one of:
+Let's install the **viz** extension, which will install an on-cluster metric
+stack and dashboard. (Note that there are other extensions, such as the [Buoyant
+Cloud extension](../tasks/extensions/#installing-the-buoyant-cloud-extension),
+which provide hosted dashboards as an alternative or complement to **viz**.)
 
-1. The **viz** extension, which will install an on-cluster metric stack; or
-2. The **buoyant-cloud** extension, which will connect to a hosted metrics
-   stack.
-
-You can install either or both extensions. To install the viz extension, run:
+To install the viz extension, run:
 
 ```bash
 linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
 ```
 
-To install the buoyant-cloud extension, run:
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh # get the installer
-linkerd buoyant install | kubectl apply -f - # connect to the hosted metrics stack
-```
-
-Once you've installed your extensions, let's validate everything one last time:
+Once you've installed the extension, let's validate everything one last time:
 
 ```bash
 linkerd check
 ```
 
 With the control plane and extensions installed and running, we're now ready
-to explore Linkerd! If you installed the viz extension, run:
+to explore Linkerd! Access the dashboard with:
 
 ```bash
 linkerd viz dashboard &
@@ -240,23 +232,13 @@ You should see a screen like this:
 {{< fig src="/images/getting-started/viz-empty-dashboard.png"
     title="The Linkerd dashboard in action" >}}
 
-If you installed the buoyant-cloud extension, run:
-
-```bash
-linkerd buoyant dashboard &
-```
-
-You should see a screen lke this:
-{{< fig src="/images/getting-started/bcloud-empty-dashboard.png"
-    title="The Buoyant Cloud dashboard in action" >}}
-
-Click around, explore, and have fun! See if you can find the live metrics for
-each Emojivoto component, and determine which one has a partial failure. (See
-the debugging tutorial below for much more on this.)
+Click around, explore, and have fun! For extra credit, see if you can find the
+live metrics for each Emojivoto component, and determine which one has a partial
+failure. (See the debugging tutorial below for much more on this.)
 
 ## That's it! 👏
 
-Congratulations, you have joined the lofty ranks of Linkerd users!
+Congratulations, you have joined the exalted ranks of Linkerd users!
 Give yourself a pat on the back.
 
 What's next? Here are some steps we recommend:
@@ -265,6 +247,8 @@ What's next? Here are some steps we recommend:
   Emojivoto](../debugging-an-app/).
 * Learn how to [add your own services](../adding-your-service/) to
   Linkerd without downtime.
+* Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
+  Jaeger and Buoyant Cloud.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for

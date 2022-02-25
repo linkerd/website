@@ -895,6 +895,28 @@ linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
 linkerd-sp-validator-59796bdccc-95rn5     2/2     Running   0          12m
 ```
 
+### √ cluster networks can be verified {#l5d-cluster-networks-verified}
+
+Example failure:
+
+```bash
+‼ cluster networks can be verified
+    the following nodes do not expose a podCIDR:
+        node-0
+    see https://linkerd.io/2/checks/#l5d-cluster-networks-verified for hints
+```
+
+Linkerd has a `clusterNetworks` setting which allows it to differentiate between
+intra-cluster and egress traffic. Through each Node's `podCIDR` field, Linkerd
+can verify that all possible Pod IPs are included in the `clusterNetworks`
+setting. When a Node is missing the `podCIDR` field, Linkerd can not verify
+this, and it's possible that the Node creates a Pod with an IP outside of
+`clusterNetworks`; this may result in it not being meshed properly.
+
+Nodes are not required to expose a `podCIDR` field which is why this results in
+a warning. Getting a Node to expose this field depends on the specific
+distribution being used.
+
 ### √ cluster networks contains all node podCIDRs {#l5d-cluster-networks-cidr}
 
 Example failure:

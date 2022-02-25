@@ -1,5 +1,5 @@
 ---
-title: "Linkerd surpasses Istio adoption in Europe and North America with 150% growth in 2021"
+title: "Linkerd surpasses Istio adoption in Europe and North America with 118% growth in 2021"
 author: 'william'
 date: 2022-02-16T00:00:00+00:00
 thumbnail: /images/linkerd-vs-istio-2021-survey-count.png
@@ -15,17 +15,13 @@ results](https://www.cncf.io/wp-content/uploads/2022/02/CNCF-Annual-Survey-2021.
 were published last week, and the results are striking: production usage of
 Linkerd in 2021 surpassed that of Istio in both North America and Europe. And
 while Istio remains the most popular service mesh in Asia, Linkerd's rate of
-growth in Asia was **300%**, double that of Istio. In fact, Linkerd's growth
-reported by the survey surpassed that of Istio in each of the three regions,
-with an overall rate of **150%** from 2020 to 2021.
+growth in Asia was **181%**, 74 more percentage points than Istio. In fact,
+Linkerd's growth reported by the survey surpassed that of Istio in each of the
+three regions, with an overall rate of **118%** from 2020 to 2021.
 
-![Linkerd vs Istio Production Usage, CNCF survey
-data](/images/linkerd-vs-istio-2021-survey-count.png "Linkerd vs Istio
-Production Usage, CNCF survey data")
+![Linkerd vs Istio Percent of Production Mesh Usage](/images/linkerd-vs-istio-2021-survey-count.png "Linkerd vs Istio Percent of Production Mesh Usage")
 
-![Linkerd vs Istio Pct Growth from 2020 to 2021, CNCF survey
-data](/images/linkerd-vs-istio-2021-survey-growth.png "Linkerd vs Istio Pct
-Growth from 2020 to 2021, CNCF survey data")
+![Linkerd vs Istio Percent of Production Growth 2020 to 2021](/images/linkerd-vs-istio-2021-survey-growth.png "Linkerd vs Istio Percent of Production Growth 2020 to 2021")
 
 Of course, the CNCF survey is not without its flaws, and it is worth pointing
 out that in our opinion, some of these questions were not well-worded; that
@@ -35,7 +31,7 @@ macro level the trends are clear, especially in light of the [2020
 survey](https://www.cncf.io/wp-content/uploads/2020/12/CNCF_Survey_Report_2020.pdf)
 showing Linkerd adoption behind Istio in every region.
 
-But these results come as no surprise. Linkerd's focus on simplicity, security,
+These results come as no surprise. Linkerd's focus on simplicity, security,
 and performance have garnered it a stellar reputation in a space that's
 notorious for complexity. These results echo the findings in Buoyant's informal
 survey of Kubecon adopters, which suggested that [simplicity was the deciding
@@ -71,9 +67,9 @@ learned about open source along the way: Focus on what's doing what's right for
 the user; build with empathy; and don't get distracted by the hype. The results,
 as they say, will speak for themselves.
 
-{{<tweet 1384463767459844097 >}}
-{{<tweet 1379426266831581186 >}}
-{{<tweet 1448333246366945281 >}}
+{{< tweet 1384463767459844097 >}}
+{{< tweet 1379426266831581186 >}}
+{{< tweet 1448333246366945281 >}}
 
 ## Linkerd is for everyone
 
