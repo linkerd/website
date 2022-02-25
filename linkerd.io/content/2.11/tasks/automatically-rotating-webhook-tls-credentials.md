@@ -226,9 +226,9 @@ spec:
   issuerRef:
     name: webhook-issuer
     kind: Issuer
-  commonName: jaeger-injector.linkerd.svc
+  commonName: jaeger-injector.linkerd-jaeger.svc
   dnsNames:
-  - jaeger-injector.linkerd.svc
+  - jaeger-injector.linkerd-jaeger.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
