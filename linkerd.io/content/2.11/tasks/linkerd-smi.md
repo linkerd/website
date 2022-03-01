@@ -78,7 +78,7 @@ First, let's install the sample application.
 kubectl create namespace trafficsplit-sample
 
 # install the sample application
-linkerd inject https://raw.githubusercontent.com/linkerd/linkerd2/main/test/integration/trafficsplit/testdata/application.yaml | kubectl -n trafficsplit-sample apply -f -
+linkerd inject https://raw.githubusercontent.com/linkerd/linkerd2/main/test/integration/viz/trafficsplit/testdata/application.yaml | kubectl -n trafficsplit-sample apply -f -
 ```
 
 This installs a simple client, and two server deployments.
