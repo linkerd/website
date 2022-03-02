@@ -10,11 +10,8 @@ that you may encounter. For a detailed walkthrough and explanation of what's
 going on, check out [getting started](../multicluster/).
 
 If you'd like to use an existing [Ambassador](https://www.getambassador.io/)
-installation, check out the
-[leverage](../installing-multicluster/#leverage-ambassador) instructions.
-Alternatively, check out the Ambassador
-[documentation](https://www.getambassador.io/docs/latest/howtos/linkerd2/#multicluster-operation)
-for a more detailed explanation of the configuration and what's going on.
+installation, check out the Ambassador
+[documentation](https://www.getambassador.io/docs/latest/howtos/linkerd2/#multicluster-operation).
 
 ## Requirements
 
@@ -105,131 +102,6 @@ kubectl label svc foobar mirror.linkerd.io/exported=true
 `--selector` flag on the `linkerd multicluster link` command or by editing
 the Link resource created by the `linkerd multicluster link` command.
 {{< /note >}}
-
-## Leverage Ambassador
-
-The bundled Linkerd gateway is not required. In fact, if you have an existing
-Ambassador installation, it is easy to use it instead! By using your existing
-Ambassador installation, you avoid needing to manage multiple ingress gateways
-and pay for extra cloud load balancers. This guide assumes that Ambassador has
-been installed into the `ambassador` namespace.
-
-First, you'll want to inject the `ambassador` deployment with Linkerd:
-
-```bash
-kubectl -n ambassador get deploy ambassador -o yaml | \
-    linkerd inject \
-    --skip-inbound-ports 80,443 \
-    --require-identity-on-inbound-ports 4183 - | \
-    kubectl apply -f -
-```
-
-This will add the Linkerd proxy, skip the ports that Ambassador is handling for
-public traffic and require identity on the gateway port. Check out the
-[docs](../multicluster/#security) to understand why it is important to
-require identity on the gateway port.
-
-Next, you'll want to add some configuration so that Ambassador knows how to
-handle requests:
-
-```bash
-cat <<EOF | kubectl --context=${ctx} apply -f -
----
-apiVersion: getambassador.io/v2
-kind: Module
-metadata:
-  name: ambassador
-  namespace: ambassador
-spec:
-  config:
-    add_linkerd_headers: true
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: wildcard
-  namespace: ambassador
-spec:
-  hostname: "*"
-  selector:
-    matchLabels:
-      nothing: nothing
-  acmeProvider:
-    authority: none
-  requestPolicy:
-    insecure:
-      action: Route
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: public-health-check
-  namespace: ambassador
-spec:
-  prefix: /-/ambassador/ready
-  rewrite: /ambassador/v0/check_ready
-  service: localhost:8877
-  bypass_auth: true
-EOF
-```
-
-The Ambassador service and deployment definitions need to be patched a little
-bit. This adds metadata required by the
-[service mirror controller](https://linkerd.io/2020/02/25/multicluster-kubernetes-with-service-mirroring/#step-1-service-discovery).
-To get these resources patched, run:
-
-```bash
-kubectl --context=${ctx} -n ambassador patch deploy ambassador -p='
-spec:
-    template:
-        metadata:
-            annotations:
-                config.linkerd.io/enable-gateway: "true"
-'
-kubectl --context=${ctx} -n ambassador patch svc ambassador --type='json' -p='[
-        {"op":"add","path":"/spec/ports/-", "value":{"name": "mc-gateway", "port": 4143}},
-        {"op":"replace","path":"/spec/ports/0", "value":{"name": "mc-probe", "port": 80, "targetPort": 8080}}
-    ]'
-kubectl --context=${ctx} -n ambassador patch svc ambassador -p='
-metadata:
-    annotations:
-        mirror.linkerd.io/gateway-identity: ambassador.ambassador.serviceaccount.identity.linkerd.cluster.local
-        mirror.linkerd.io/multicluster-gateway: "true"
-        mirror.linkerd.io/probe-path: /-/ambassador/ready
-        mirror.linkerd.io/probe-period: "3"
-'
-```
-
-Now you can install the Linkerd multicluster components onto your target cluster.
-Since we're using Ambassador as our gateway, we need to skip installing the
-Linkerd gateway by using the `--gateway=false` flag:
-
-```bash
-linkerd --context=${ctx} multicluster install --gateway=false | kubectl --context=${ctx} apply -f -
-```
-
-With everything setup and configured, you're ready to link a source cluster to
-this Ambassador gateway.  Run the `link` command specifying the name and
-namespace of your Ambassador service:
-
-```bash
-linkerd --context=${ctx} multicluster link --cluster-name=${ctx} --gateway-name=ambassador --gateway-namespace=ambassador \
-    | kubectl --context=${src_ctx} apply -f -
-```
-
-From the source cluster (the one not running Ambassador), you can validate that
-everything is working correctly by running:
-
-```bash
-linkerd multicluster check
-```
-
-Additionally, the `ambassador` gateway will show up when listing the active
-gateways:
-
-```bash
-linkerd multicluster gateways
-```
 
 ## Trust Anchor Bundle
 
