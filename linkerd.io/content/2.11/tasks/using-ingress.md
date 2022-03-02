@@ -103,7 +103,8 @@ spec:
         number: 80
 ```
 
-If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), note the following.
+If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx),
+note the following.
 
 The `namespace` containing the ingress controller (when using the above
 Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`.
@@ -140,7 +141,8 @@ in an infinite timeout loop.
 
 The above analysis only applies to that particular Helm chart. Other charts
 may have a different behaviour and different file structure for `values.yaml`.
-Be sure to check the nginx chart that you are using to set the annotation appropriately, if necessary.
+Be sure to check the nginx chart that you are using to set the annotation
+appropriately, if necessary.
 
 ## Traefik
 
