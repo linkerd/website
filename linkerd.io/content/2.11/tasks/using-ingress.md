@@ -46,33 +46,21 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-## Ambassador (aka Emissary) {id="ambassador"}
+## Ambassador (aka Emissary) {#ambassador}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
 
 ```yaml
-apiVersion: v1
-kind: Service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
-  name: web-ambassador
+  name: web-ambassador-mapping
   namespace: emojivoto
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-ambassador-mapping
-      service: http://web-svc.emojivoto.svc.cluster.local:80
-      host: example.com
-      prefix: /
 spec:
-  selector:
-    app: web-svc
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
+  hostname: "*"
+  prefix: /
+  service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
 
 For a more detailed guide, we recommend reading [Installing the Emissary
@@ -431,10 +419,7 @@ This example will use the following elements:
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).
 
-We need to declare these objects as well:
-
-- KongPlugin, a CRD provided by Kong
-- Ingress
+We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
