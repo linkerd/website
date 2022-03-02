@@ -105,7 +105,10 @@ spec:
 
 If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), note the following.
 
-The `namespace` containing the ingress controller (when using the above Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`. Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`) of the Nginx by setting `values.yaml` like this:
+The `namespace` containing the ingress controller (when using the above
+Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`.
+Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`)
+of the Nginx by setting `values.yaml` like this:
 
 ```yaml
 controller:
@@ -116,17 +119,28 @@ controller:
 
 The reason is as follows.
 
-That particular Helm chart defines (among other things) two Kubernetes resources:
+That Helm chart defines (among other things) two Kubernetes resources:
 
-1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named something like `ingress-nginx-admission-create-t7b77` which terminates in 1 or 2 seconds.
+1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named
+ something like `ingress-nginx-admission-create-t7b77` which terminates in 1
+ or 2 seconds.
 
-2) `kind: Deployment`. This creates a long-running pod named something like `ingress-nginx-controller-644cc665c9-5zmrp` which contains the Nginx docker container.
+2) `kind: Deployment`. This creates a long-running pod named something like
+`ingress-nginx-controller-644cc665c9-5zmrp` which contains the Nginx docker
+ container.
 
-However, had we set `linkerd.io/inject: enabled` at the `namespace` level, a long-running sidecar would be injected into the otherwise short-lived pod in (1). This long-running sidecar would prevent the pod as a whole from terminating naturally (by design a few seconds after creation) even if the original base admission container had terminated.
+However, had we set `linkerd.io/inject: enabled` at the `namespace` level,
+a long-running sidecar would be injected into the otherwise short-lived
+pod in (1). This long-running sidecar would prevent the pod as a whole from
+terminating naturally (by design a few seconds after creation) even if the
+original base admission container had terminated.
 
-Without (1) being considered "done", the creation of (2) would wait forever in an infinite timeout loop.
+Without (1) being considered "done", the creation of (2) would wait forever
+in an infinite timeout loop.
 
-The above analysis only applies to that particular Helm chart. Other charts may have a different behaviour and different file structure for `values.yaml`. Be sure to check the nginx chart that you are using to set the annotation appropriately, if necessary.
+The above analysis only applies to that particular Helm chart. Other charts
+may have a different behaviour and different file structure for `values.yaml`.
+Be sure to check the nginx chart that you are using to set the annotation appropriately, if necessary.
 
 ## Traefik
 
