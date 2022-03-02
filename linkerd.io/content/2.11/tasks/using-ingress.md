@@ -22,14 +22,17 @@ below.
 
 Common ingress options that Linkerd has been used with include:
 
-- [Ambassador / Emissary-ingress](#ambassador)
-- [Contour](#contour)
-- [GCE](#gce)
-- [Gloo](#gloo)
-- [Haproxy]({{< ref "#haproxy" >}})
-- [Kong](#kong)
+- [Ambassador (aka Emissary) {id="ambassador"}](#ambassador-aka-emissary-idambassador)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
+  - [Traefik 1.x](#traefik-1x)
+  - [Traefik 2.x](#traefik-2x)
+- [GCE](#gce)
+- [Gloo](#gloo)
+- [Contour](#contour)
+  - [Kong](#kong)
+  - [Haproxy](#haproxy)
+- [Ingress details](#ingress-details)
 
 For a quick start guide to using a particular ingress, please visit the section
 for that ingress. If your ingress is not on that list, never fear—it likely
@@ -80,7 +83,7 @@ mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds
 
 Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `"true"`. No further configuration is required.
+annotation should be set to `"true"`.
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -100,9 +103,9 @@ spec:
         number: 80
 ```
 
-The `namespace` containing the ingress controller should NOT be annotated with `linkerd.io/inject: enabled`. Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`) of the nginx.
+If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), note the following.
 
-If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), then the `values.yaml` should look like this:
+The `namespace` containing the ingress controller (when using the above Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`. Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`) of the Nginx by setting `values.yaml` like this:
 
 ```yaml
 controller:
@@ -113,7 +116,7 @@ controller:
 
 The reason is as follows.
 
-The Helm chart defines (among other things) two Kubernetes resources:
+That particular Helm chart defines (among other things) two Kubernetes resources:
 
 1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named something like `ingress-nginx-admission-create-t7b77` which terminates in 1 or 2 seconds.
 
@@ -122,6 +125,8 @@ The Helm chart defines (among other things) two Kubernetes resources:
 However, had we set `linkerd.io/inject: enabled` at the `namespace` level, a long-running sidecar would be injected into the otherwise short-lived pod in (1). This long-running sidecar would prevent the pod as a whole from terminating naturally (by design a few seconds after creation) even if the original base admission container had terminated.
 
 Without (1) being considered "done", the creation of (2) would wait forever in an infinite timeout loop.
+
+The above analysis only applies to that particular Helm chart. Other charts may have a different behaviour and different file structure for `values.yaml`. Be sure to check the nginx chart that you are using to set the annotation appropriately, if necessary.
 
 ## Traefik
 
