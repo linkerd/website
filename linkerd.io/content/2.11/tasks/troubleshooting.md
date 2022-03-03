@@ -1126,7 +1126,7 @@ Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
 dashboard:
 
 ```bash
-kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
+kubectl -n linkerd-viz port-forward svc/prometheus 9090
 ```
 
 ...and then browse to
