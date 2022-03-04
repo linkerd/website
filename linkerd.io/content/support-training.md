@@ -28,6 +28,11 @@ support:
       thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
       title: Buoyant
       url: https://buoyant.io/linkerd-support/
+    - description: Your extended team for setting up Linkerd from scratch & managing it. We got you covered!
+      thumbnail: "/uploads/infracloud-only-icon-logo.svg"
+      title: InfraCloud
+      url: https://www.infracloud.io/
+      
   bottom_description: Offering Linkerd support or training? Add your company!
   description: ''
   buttons:
