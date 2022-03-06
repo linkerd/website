@@ -160,7 +160,7 @@ how to [use Linkerd to identify the problem](../debugging-an-app/).)
 
 With Emoji installed and running, we're ready to *mesh* it—that is, to add
 Linkerd's data plane proxies to it. We can do this on a live application
-without downtime, thanks to Kubernetes's rolling deploys. Mesh you Emojivoto
+without downtime, thanks to Kubernetes's rolling deploys. Mesh your Emojivoto
 application by running:
 
 ```bash
