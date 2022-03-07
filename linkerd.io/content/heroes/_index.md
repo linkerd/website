@@ -116,7 +116,7 @@ nominated:
     hero_type: contributor
     image: "/uploads/ali 1.png"
     alt: Portrait of Ali Ariff
-    github_url: https://github.com/Saim-Safdar
+    github_url: https://github.com/aliariff
   - name: Fredrik Klingenberg
     date: March 2021
     blurb: Spreading the Linkerd message
