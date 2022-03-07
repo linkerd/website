@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-3-7** Announcing automated multi-cluster failover for Kubernetes [Read more »](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)"
+  description: "**2021-3-9** Announcing automated multi-cluster failover for Kubernetes [Read more »](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
