@@ -56,12 +56,14 @@ repo](https://github.com/linkerd/linkerd-failover) and follow the instructions
 there, or install via Helm:
 
 ```bash
-# add the linkerd-smi extension
+# Add the linkerd-edge Helm repo if you haven't already
+helm repo add linkerd-edge https://helm.linkerd.io/edge
+# And the linkerd-smi extension
 helm repo add linkerd-smi https://linkerd.github.io/linkerd-smi
-helm install linkerd-smi -n linkerd-smi --create-namespace linkerd-smi/linkerd-smi
+helm repo up
 
-# add the linkerd-edge Helm repo
-helm repo add linkerd-edge [https://helm.linkerd.io/edge](https://helm.linkerd.io/edge)
+# Install linkerd-smi and linkerd-failover
+helm install linkerd-smi -n linkerd-smi --create-namespace linkerd-smi/linkerd-smi
 helm install linkerd-failover -n linkerd-failover --create-namespace --devel linkerd-edge/linkerd-failover
 ```
 
