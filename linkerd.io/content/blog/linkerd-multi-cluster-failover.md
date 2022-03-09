@@ -9,50 +9,47 @@ tags: [Linkerd]
 
 ![Two wing walkers performing on two biplanes flying in the sky](/images/ray-harrington-IUGT3FxXF5k-unsplash.jpg)
 
-Today we're happy to announce the release of a new failover operator for
-Linkerd. With this operator, Kubernetes users can now automatically redirect all
-traffic to a service to different clusters in the event of service failure,
-while still maintaining Linkerd's guarantees of security, reliability, and
-transparency to the application.
+Today we're happy to announce the release of new _automated failover_
+functionality for Linkerd. This feature gives Linkerd the ability to
+automatically redirect all traffic to a failing or inaccessible service to one
+or more replicas of that service—including replicas on other clusters. And, as
+you'd expect, any redirected traffic maintains all of Linkerd's guarantees of
+security, reliability, and transparency to the application, even across clusters
+boundaries separated by the open Internet.
 
-Multi-cluster deployments are increasingly common in Kubernetes, for reasons of
-high availability, multi-tenancy, disaster recovery, or simply isolation of
-failure domains. Unfortunately, Kubernetes itself provides very little in the
-way of help for multi-cluster deployments. Fortunately, Linkerd fills that gap,
-providing cross-cluster communication capabilities that:
+Implemented as a Kubernetes operator that can be added to an existing Linkerd
+deployment, the failover strategy can be applied to a single cluster but is
+particularly useful for multi-cluster deployments. Linkerd already provides
+[powerful cross-cluster communication
+capabilities](https://linkerd.io/2/features/multicluster/) that work with any
+cluster topology, including multi-cloud and hybrid cloud; are completely
+transparent to the application; are zero-trust compatible; and do not introduce
+any single points of failure (SPOF) to the system. To this feature set, the new
+failover operator now adds _automation_, allowing Kubernetes users to configure
+failure conditions under which Linkerd will automatically shift traffic between
+one or more services.
 
-* Work with any cluster topology including multi-cloud and hybrid cloud;
-* Are completely transparent to the application;
-* Are zero-trust compatible and built on mutual TLS and workload identity;
-* Introduce no Single Point of Failure (SPOF) to the system.
+In true Linkerd fashion, this new functionality introduces a minimum of new
+machinery, instead building on top of existing Kubernetes and service mesh
+primitives such as health probes and [Service Mesh
+Interface](https://smi-spec.io/) TrafficSplits. This new operator rounds out
+Linkerd's existing reliability features, providing a complete solution for
+ultra-high-reliability deployments that covers:
 
-Linkerd's new failover operator now adds _automation_ to this feature set,
-allowing Kubernetes users to configure failure conditions under which Linkerd
-will automatically shift traffic between one or more services, including, of
-course, services on different clusters.
-
-In true Linkerd fashion, this new functionality is composable and builds on top
-of existing Kubernetes and service mesh primitives such as health probes and
-Service Mesh Interface (SMI) TrafficSplits. This gives us a flexible framework
-that allows you to tackle a variety of situations, including automatically
-rerouting traffic to a replica of a service in another cluster in the event of a
-service failure; automatically rerouting cross-cluster traffic to a different
-cluster in the event of cluster failure; or even automating service failover
-within a single cluster.
-
-This new operator rounds out Linkerd's existing reliability features, providing
-a comprehensive solution for ultra-high-reliability deployments that covers:
-
-* Failure of individual nodes (handled via retries and request balancing)
-* Failures due to bad code changes (handled via canary deployments)
-* Failures due to service unavailability (handled with the failover operator)
-* Failures due to whole-cluster outages (handed via the failover operator—_roadmap_)
+* Failure of individual nodes: handled via
+  [retries](https://linkerd.io/2/features/retries-and-timeouts/) and [request
+  balancing](https://linkerd.io/2/features/load-balancing/)
+* Failures due to bad code changes: (handled via [canary
+  deployments](https://linkerd.io/2.11/features/traffic-split/)
+* Failures due to service unavailability in general: handled with the failover operator
+* Failures due to whole-cluster outages: handed with the failover operator
 
 ## Getting started
 
-The operator is available in the latest [Linkerd edge
-release](https://linkerd.io/edge/) and will be included in the upcoming 2.11.2
-stable release.
+The operator is available as a standalone project, but requires the latest
+[Linkerd edge release](https://linkerd.io/edge/) release to work. The operator
+will also work with in the upcoming 2.11.2 point release, expected within the
+next few weeks.
 
 Want to give it a try right now? Head over to the [linkerd-failover
 repo](https://github.com/linkerd/linkerd-failover) and follow the instructions
@@ -68,8 +65,8 @@ helm repo add linkerd-edge [https://helm.linkerd.io/edge](https://helm.linkerd.i
 helm install linkerd-failover -n linkerd-failover --create-namespace --devel linkerd-edge/linkerd-failover
 ```
 
-You can now configure service failover by applying the
-`app.kubernetes.io/managed-by: linkerd-failover` label to an existing
+Then, configure service failover by applying the
+`failover.linkerd.io/controlled-by: linkerd-failover` label to an existing
 TrafficSplit. For example:
 
 ```yaml
@@ -80,7 +77,7 @@ name: sample-svc
 annotations:
   failover.linkerd.io/primary-service: sample-svc
 labels:
-  app.kubernetes.io/managed-by: linkerd-failover
+  failover.linkerd.io/controlled-by: linkerd-failover
 spec:
 service: sample-svc
 backends:
@@ -92,12 +89,14 @@ backends:
 
 In this example, traffic to `sample-svc` service will automatically failover
 from the local cluster to the replica in the event of total health check
-failure.
+failure. It's as simple as that!
 
-The initial operator implementation covers the basics, but there's a [long and
-exciting roadmap](https://github.com/linkerd/linkerd-failover/issues) of
-upcoming features. We'd love your feedback on this exciting new feature for
-Linkerd. Let us know what you think!
+We'd love your feedback on this exciting new feature for Linkerd. The initial
+operator implementation covers the basics, but there's lots more to come. Check
+out our [initial roadmap](https://github.com/linkerd/linkerd-failover/issues)
+(soon to be moved to the main [linkerd2
+repo](https://github.com/linkerd/linkerd2)) and give us your feature requests,
+bug reports, and any other feedback!
 
 ## Linkerd is for everyone
 
