@@ -11,7 +11,7 @@ tags: [Linkerd]
 
 Today we're happy to announce the release of new _automated failover_
 functionality for Linkerd. This feature gives Linkerd the ability to
-automatically redirect all traffic to a failing or inaccessible service to one
+automatically redirect all traffic from a failing or inaccessible service to one
 or more replicas of that service—including replicas on other clusters. And, as
 you'd expect, any redirected traffic maintains all of Linkerd's guarantees of
 security, reliability, and transparency to the application, even across clusters
@@ -40,7 +40,7 @@ ultra-high-reliability deployments that covers:
   [retries](https://linkerd.io/2/features/retries-and-timeouts/) and [request
   balancing](https://linkerd.io/2/features/load-balancing/)
 * Failures due to bad code changes: (handled via [canary
-  deployments](https://linkerd.io/2.11/features/traffic-split/)
+  deployments](https://linkerd.io/2.11/features/traffic-split/))
 * Failures due to service unavailability in general: handled with the failover operator
 * Failures due to whole-cluster outages: handed with the failover operator
 
