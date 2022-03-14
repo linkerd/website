@@ -43,12 +43,17 @@ automatically call the `linkerd-foo` binary, if it is found on your path.)
 
 [Buoyant Cloud](https://buoyant.io/cloud) is a hosted Linkerd management service
 with a comprehensive multi-cluster dashboard. The Buoyant Cloud extension will
-connect your cluster to Buoyant Cloud. To install this extension, run:
+connect your cluster to Buoyant Cloud. In order to use the extension, you need
+register in [Buoyant Cloud](https://buoyant.io/cloud) and obtain your API credentials
+by visitings the [Settings](https://buoyant.cloud/settings?cli=1) page.
+
+In case you already know your API credentials, you can use the extension:
 
 ```bash
-## optional
-curl --proto '=https' --tlsv1.2 -sSfL buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # free, hosted metrics dashboard
+BUOYANT_CLOUD_CLIENT_ID=<your client id> \
+BUOYANT_CLOUD_CLIENT_SECRET=<your client secret> \
+linkerd buoyant install --cluster-name=my-new-cluster | \
+kubectl apply -f - # free, hosted metrics dashboard
 ```
 
 To access Buoyant Cloud at any point, you can run:
