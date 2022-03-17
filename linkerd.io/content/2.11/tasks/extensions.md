@@ -47,7 +47,7 @@ connect your cluster to Buoyant Cloud. To install this extension, run:
 
 ```bash
 ## optional
-curl --proto '=https' --tlsv1.2 -sSfL buoyant.cloud/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh
 linkerd buoyant install | kubectl apply -f - # free, hosted metrics dashboard
 ```
 
