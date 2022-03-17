@@ -203,7 +203,7 @@ You can override the values in that file by providing your own `values.yaml`
 file passed with a `-f` option, or overriding specific values using the family of
 `--set` flags.
 
-Full set of configuration options can be found [here](https://github.com/linkerd/linkerd2/tree/main/charts/linkerd2-multicluster#configuration)
+Full set of configuration options can be found [here](https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz#values)
 
 The installation can be verified by running
 
