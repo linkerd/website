@@ -32,6 +32,7 @@ Common ingress options that Linkerd has been used with include:
 - [Contour](#contour)
   - [Kong](#kong)
   - [Haproxy](#haproxy)
+- [EnRoute](#enroute)
 - [Ingress details](#ingress-details)
 
 For a quick start guide to using a particular ingress, please visit the section
@@ -529,6 +530,32 @@ a global config map by using the service name, namespace and port as 
 This also means, that you can't combine more than one service ingress rule
 in an ingress manifest as each one needs their own
 `haproxy.org/request-set-header` annotation with hard coded value.
+
+## EnRoute OneStep {#enroute}
+
+Meshing EnRoute with linkerd involves only setting one
+flag globally:
+
+```yaml
+apiVersion: enroute.saaras.io/v1
+kind: GlobalConfig
+metadata:
+  labels:
+    app: web
+  name: enable-linkerd
+  namespace: default
+spec:
+  name: linkerd-global-config
+  type: globalconfig_globals
+  config: |
+        {
+          "linkerd_enabled": true
+        }
+```
+
+More details and customization can be found in,
+[End to End encryption using EnRoute with 
+Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
 
 ## Ingress details
 
