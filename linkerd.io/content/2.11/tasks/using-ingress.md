@@ -553,6 +553,17 @@ spec:
         }
 ```
 
+EnRoute can now be meshed by injecting Linkerd proxy in EnRoute pods.
+Using the ```linkerd``` utility, we can update the EnRoute deployment
+to inject Linkerd proxy.
+
+```bash
+kubectl get -n demo deploy -o yaml | linkerd inject - | kubectl apply -f -
+```
+
+The ```linkerd_enabled``` flag automatically sets `l5d-dst-override` header.
+The flag also delegates endpoint selection for routing to linkerd.
+
 More details and customization can be found in,
 [End to End encryption using EnRoute with 
 Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
