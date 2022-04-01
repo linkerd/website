@@ -4,7 +4,7 @@ tags:
   - Community
 items:
   - 
-description: ''
+description: 'We are excited to announce that this month's Linkerd Hero is Naveen Nalam. Congrats, Naveen!'
 keywords: [hero]
 ---
 
