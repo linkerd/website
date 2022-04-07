@@ -2,9 +2,10 @@
 author: catherine
 date: 2022-04-05T00:00:00Z
 title: Announcing March's Linkerd Hero
-description:
-  "We are excited to announce that this month's Linkerd Hero is Naveen Nalam.
+description: "We are excited to announce that this month's Linkerd Hero is Naveen Nalam.
   Congrats, Naveen!"
+feature: '/uploads/naveen-nalam.jpeg'
+thumbnail: '/uploads/naveen-nalam.jpeg'
 tags:
   - Community
 keywords: [hero]
@@ -29,7 +30,7 @@ closely and be a little smarter. Naveen caught an issue in a newly-introduced
 post-install hook. Thank you, Naveen, this will ensure these upcoming changes
 are ready for production under every possible scenario!
 
-[ADD IMAGE HERE]
+![Naveen Nalam](/uploads/naveen-nalam.jpeg)
 
 ## Nominate next month's Linkerd Hero
 
