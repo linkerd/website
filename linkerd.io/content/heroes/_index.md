@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Naveen Nalam
+    date: March 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/naveen-nalam.png"
+    alt: Portrait of Naveen Nalam
+    github_url: "https://www.linkedin.com/in/nnalam/"
   - name: Krzysztof Dryś
     date: January 2022
     blurb: Technical contributions
