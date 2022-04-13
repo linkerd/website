@@ -114,7 +114,7 @@ security policies; or by using a marketplace install from your Kubernetes
 provider.
 {{< /note >}}
 
-Depending on the speed of your cluster's Internet connection, it make take a
+Depending on the speed of your cluster's Internet connection, it may take a
 minute or two for the control plane to finish installing. Wait for the control
 plane to be ready (and verify your installation) by running:
 
