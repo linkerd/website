@@ -83,7 +83,7 @@ source, of the traffic.
 
 This annotation can be set in a variety of ways:
 
-1. On the workload itself, e.g. on the Deployment receiving the traffic.
+1. On the workload itself, e.g. on the Deployment's Pod spec receiving the traffic.
 1. On the Service receiving the traffic.
 1. On a namespace (in which it will apply to all workloads in the namespace).
 1. In an [authorization policy](../server-policy/) `Server` object's `proxyProtocol` field, in which case it will apply to all pods targeted by that `Server`.
