@@ -100,7 +100,7 @@ provide will _replace_, not augment, the default list of opaque ports.
 ## Marking ports as skip ports
 
 Sometimes it is necessary to bypass the proxy altogether. In this case, you can
-use the `config.linkerd.io/skip-outbound-ports` annotation bypass the proxy
+use the `config.linkerd.io/skip-outbound-ports` annotation to bypass the proxy
 entirely when sending to those ports. (Note that there is a related annotation,
 `skip-inbound-ports`, to bypass the proxy for incoming connections. This is
 typically only needed for debugging purposes.)
