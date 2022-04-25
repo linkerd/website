@@ -40,87 +40,92 @@ Memcache). In this case, the connection will proceed as a TCP connection after a
 
 To avoid this delay, you will need to provide some configuration for Linkerd.
 There are two basic mechanisms for configuring protocol detection: _opaque
-ports_ and _skip ports_. Marking a port as _opaque_ instructs Linkerd to skip
-protocol detection and immediately proxy the connection as a TCP stream; marking
-a port as a _skip port_ bypasses the proxy entirely. Opaque ports are generally
-preferred (as Linkerd can still provide mTLS, TCP-level metrics, etc), but can
-only be used for destinations inside the cluster.
+ports_ and _skip ports_:
 
-By default, Linkerd automatically marks the ports for some server-speaks-first
-protocol as opaque. Services that speak those protocols over the default ports
-to destinations inside the cluster do not need further configuration.
+* Opaque ports instruct Linkerd to skip protocol detection and proxy the connection as a TCP stream
+* Skip ports bypass the proxy entirely.
 
-Linkerd's default list of opaque ports in the 2.11 release is **25** (SMTP),
-**587** (SMTP), **3306** (MySQL), **4444** (Galera), **5432** (Postgres),
-**6379** (Redis), **9300** (ElasticSearch), and **11211** (Memcache).
+Opaque ports are generally preferred as they allow Linkerd to provide mTLS,
+TCP-level metrics, policy, etc. Skip ports circumvent Linkerd's ability to
+provide security features.
+
+Linkerd maintains a default list of opaque ports that corresponds to the
+standard ports used by protocols that interact poorly with protocol detection.
+As of the 2.11 release, that list is: **25** (SMTP), **587** (SMTP), **3306**
+(MySQL), **4444** (Galera), **5432** (Postgres), **6379** (Redis), **9300**
+(ElasticSearch), and **11211** (Memcache).
+
+## Protocols that may require configuration
 
 The following table contains common protocols that may require additional
 configuration.
 
-| Protocol        | Default port(s) | Notes |
-|-----------------|-----------------|-------|
-| SMTP            | 25, 587         |       |
-| MySQL           | 3306            |       |
-| MySQL with Galera | 3306, 4444, 4567, 4568 | Ports 4567 and 4568 are not in Linkerd's default set of opaque ports |
-| PostgreSQL      | 5432            |       |
-| Redis           | 6379            |       |
-| ElasticSearch   | 9300            |       |
-| Memcache        | 11211           |       |
+| Protocol        | Standard port(s) | In default list? | Notes |
+|-----------------|------------------|------------------|-------|
+| SMTP            | 25, 587          | Yes              |       |
+| MySQL           | 3306             | Yes              |       |
+| MySQL with Galera | 3306, 4444, 4567, 4568 | Partially | Ports 4567 and 4568 are not in Linkerd's default set of opaque ports  |
+| PostgreSQL      | 5432             | Yes              |       |
+| Redis           | 6379             | Yes              |       |
+| ElasticSearch   | 9300             | Yes              |       |
+| Memcache        | 11211            | Yes              |       |
 
 If you are using one of those protocols, follow this decision tree to determine
 which configuration you need to apply.
 
 ![Decision tree](/images/protocol-detection-decision-tree.png)
 
-## Marking a port as opaque
+## Marking ports as opaque
 
 You can use the `config.linkerd.io/opaque-ports` annotation to mark a port as
-opaque. This instructions Linkerd to skip protocol detection for that port.
+opaque. Note that this annotation should be set on the _destination_, not on the
+source, of the traffic.
 
-This annotation can be set on a workload, service, or namespace. Setting it on
-a workload tells meshed clients of that workload to skip protocol detection for
-connections established to the workload, and tells Linkerd to skip protocol
-detection when reverse-proxying incoming connections. Setting it on a service
-tells meshed clients to skip protocol detection when proxying connections to
-the service. Set it on a namespace applies this behavior to all services and
-workloads in that namespace.
+This annotation can be set in a variety of ways:
 
-{{< note >}}
-Since this annotation informs the behavior of meshed _clients_, it can be
-applied to unmeshed services as well as meshed services.
-{{< /note >}}
+1. On the workload itself, e.g. on the Deployment's Pod spec receiving the traffic.
+1. On the Service receiving the traffic.
+1. On a namespace (in which it will apply to all workloads in the namespace).
+1. In an [authorization policy](../server-policy/) `Server` object's `proxyProtocol` field, in which case it will apply to all pods targeted by that `Server`.
 
-Setting the opaque-ports annotation can be done by using the `--opaque-ports`
-flag when running `linkerd inject`. For example, for a MySQL database running
-on the cluster using a non-standard port 4406, you can use the commands:
-
-```bash
-linkerd inject mysql-deployment.yml --opaque-ports=4406 \
-  | kubectl apply -f -
- linkerd inject mysql-service.yml --opaque-ports=4406 \
-  | kubectl apply -f -
-```
+When set, Linkerd will skip protocol detection both on the client side and on
+the server side. Note that since this annotation informs the behavior of meshed
+_clients_, it can be applied to unmeshed workloads as well as meshed ones.
 
 {{< note >}}
 Multiple ports can be provided as a comma-delimited string. The values you
-provide will replace, not augment, the default list of opaque ports.
+provide will _replace_, not augment, the default list of opaque ports.
 {{< /note >}}
 
-## Marking a port as skip
+## Marking ports as skip ports
 
-Sometimes it is necessary to bypass the proxy altogether. For example, when
-connecting to a server-speaks-first destination that is outside of the cluster,
-there is no Service resource on which to set the
-`config.linkerd.io/opaque-ports` annotation.
+Sometimes it is necessary to bypass the proxy altogether. In this case, you can
+use the `config.linkerd.io/skip-outbound-ports` annotation to bypass the proxy
+entirely when sending to those ports. (Note that there is a related annotation,
+`skip-inbound-ports`, to bypass the proxy for incoming connections. This is
+typically only needed for debugging purposes.)
 
-In this case, you can use the `--skip-outbound-ports` flag when running
-`linkerd inject` to configure resources to bypass the proxy entirely when
-sending to those ports. (Similarly, the `--skip-inbound-ports` flag will
-configure the resource to bypass the proxy for incoming connections to those
-ports.)
-
-Skipping the proxy can be useful for these situations, as well as for
-diagnosing issues, but otherwise should rarely be necessary.
-
-As with opaque ports, multiple skipports can be provided as a comma-delimited
+As with opaque ports, multiple skip-ports can be provided as a comma-delimited
 string.
+
+This annotation should be set on the source of the traffic.
+
+## Setting the enable-external-profiles annotation
+
+The `config.linkerd.io/enable-external-profiles` annotation configures Linkerd
+to look for [`ServiceProfiles`](../service-profiles/) for off-cluster
+connections. It *also* instructs Linkerd to respect the default set of opaque
+ports for this connection.
+
+This annotation should be set on the source of the traffic.
+
+Note that the default set of opaque ports can be configured at install
+time, e.g. by using `--set proxy.opaquePorts`. This may be helpful in
+conjunction with `enable-external-profiles`.
+
+{{<note>}}
+There was a bug in Linkerd 2.11.0 and 2.11.1 that prevented the opaque ports
+behavior of `enable-external-profiles` from working. This was fixed in Linkerd
+2.11.2.
+{{</note>}}
+
