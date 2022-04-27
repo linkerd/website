@@ -42,7 +42,8 @@ To avoid this delay, you will need to provide some configuration for Linkerd.
 There are two basic mechanisms for configuring protocol detection: _opaque
 ports_ and _skip ports_:
 
-* Opaque ports instruct Linkerd to skip protocol detection and proxy the connection as a TCP stream
+* Opaque ports instruct Linkerd to skip protocol detection and proxy the
+  connection as a TCP stream
 * Skip ports bypass the proxy entirely.
 
 Opaque ports are generally preferred as they allow Linkerd to provide mTLS,
@@ -86,7 +87,9 @@ This annotation can be set in a variety of ways:
 1. On the workload itself, e.g. on the Deployment's Pod spec receiving the traffic.
 1. On the Service receiving the traffic.
 1. On a namespace (in which it will apply to all workloads in the namespace).
-1. In an [authorization policy](../server-policy/) `Server` object's `proxyProtocol` field, in which case it will apply to all pods targeted by that `Server`.
+1. In an [authorization policy](../server-policy/) `Server` object's
+   `proxyProtocol` field, in which case it will apply to all pods targeted by that
+   `Server`.
 
 When set, Linkerd will skip protocol detection both on the client side and on
 the server side. Note that since this annotation informs the behavior of meshed
@@ -123,9 +126,8 @@ Note that the default set of opaque ports can be configured at install
 time, e.g. by using `--set proxy.opaquePorts`. This may be helpful in
 conjunction with `enable-external-profiles`.
 
-{{<note>}}
+{{< note >}}
 There was a bug in Linkerd 2.11.0 and 2.11.1 that prevented the opaque ports
 behavior of `enable-external-profiles` from working. This was fixed in Linkerd
 2.11.2.
-{{</note>}}
-
+{{< /note >}}

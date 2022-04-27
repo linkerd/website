@@ -392,18 +392,6 @@ can get to it by running `linkerd --context=west viz dashboard` and going to
     center="true"
     src="/images/multicluster/grafana-dashboard.png" >}}
 
-## Visibility
-
-If you're running the [Buoyant Cloud](https://buoyant.io/cloud) extension as
-part of your Linkerd installation, you can use the Buoyant Cloud UI to inspect
-and monitor the multicluster links that you've just setup. Buoyant Cloud pulls
-data from each of the service mirror components running in your cluster. By
-default, access to these components is locked down to the core Linkerd control
-plane. To grant access to the Buoyant Cloud extension, follow the [Buoyant Cloud
-multicluster
-policy](https://docs.buoyant.cloud/article/99-linkerd-multi-cluster-policy)
-instructions.
-
 ## Security
 
 By default, requests will be going across the public internet. Linkerd extends
