@@ -484,7 +484,7 @@ $ kubectl auth can-i create podsecuritypolicies
 yes
 ```
 
-### √ proxy-init container runs as root user if docker container runtime is used {#l5d-proxy-init-run-as-root}
+### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
 
 Example failure:
 
