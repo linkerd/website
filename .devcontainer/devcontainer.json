@@ -1,13 +1,12 @@
 {
-    "name": "linkerd2",
-    "image": "buoyantio/website-builder:v1.3.3",
-    // "dockerFile": "./Dockerfile",
+    "name": "website",
+    //"image": "buoyantio/website-builder:v1.3.3",
+    "build": {
+        "dockerfile": "../Dockerfile"
+    },
     // "context": "..",
-    "extensions": [
-        "samverschueren.final-newline"
-    ],
     "overrideCommand": false,
-    "remoteUser": "code",
+    "remoteUser": "root",
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
     ]
