@@ -3,7 +3,6 @@
 set -e
 
 BASE_DIR=$(pwd -P)
-CURRENT_SHA=$(git rev-parse --short HEAD)
 
 rm -rf $BASE_DIR/public
 hugo
