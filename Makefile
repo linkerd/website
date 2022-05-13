@@ -84,7 +84,10 @@ endif
 .PHONY: shellcheck
 shellcheck:
 	@# lint the install scripts
-	shellcheck run.linkerd.io/public/install*
+	shellcheck run.linkerd.io/public/install* \
+		api.linkerd.io/build \
+		linkerd.io/build \
+		linkerd.io/release-next-version
 
 .PHONY: test-ci
 test-ci:
