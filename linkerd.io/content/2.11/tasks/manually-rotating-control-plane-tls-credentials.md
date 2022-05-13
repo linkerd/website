@@ -291,6 +291,13 @@ linkerd-identity-data-plane
 ## Removing the old trust anchor
 
 We can now remove the old trust anchor from the trust bundle we created earlier.
+
+**NOTE:** Before the action it is necessary to explicitly rollout all deployments in the `linkerd` namespace:
+
+```
+kubectl -n linkerd rollout restart deployments
+```
+
 The `upgrade` command can do that for the Linkerd components:
 
 ```bash
