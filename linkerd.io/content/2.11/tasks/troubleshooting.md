@@ -484,6 +484,34 @@ $ kubectl auth can-i create podsecuritypolicies
 yes
 ```
 
+### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
+
+Example failure:
+
+```bash
+× proxy-init container runs as root user if docker container runtime is used
+    there are nodes using the docker container runtime and proxy-init container must run as root user.
+try installing linkerd via --set proxyInit.runAsRoot=true
+    see https://linkerd.io/2.11/checks/#l5d-proxy-init-run-as-root for hints
+```
+
+Kubernetes nodes running with docker as the container runtime ([CRI](https://kubernetes.io/docs/concepts/architecture/cri/))
+require the init container to run as root for iptables.
+
+Newer distributions of managed k8s use containerd where this is not an issue.
+
+Without root in the init container you might get errors such as:
+
+```bash
+time="2021-11-15T04:41:31Z" level=info msg="iptables-save -t nat"
+Error: exit status 1
+time="2021-11-15T04:41:31Z" level=info msg="iptables-save v1.8.7 (legacy): Cannot initialize: Permission denied (you must be root)\n\n"
+```
+
+See [linkerd/linkerd2#7283](https://github.com/linkerd/linkerd2/issues/7283) and
+[linkerd/linkerd2#7308](https://github.com/linkerd/linkerd2/issues/7308)
+for further details.
+
 ## The "linkerd-existence" checks {#l5d-existence}
 
 ### √ 'linkerd-config' config map exists {#l5d-existence-linkerd-config}
