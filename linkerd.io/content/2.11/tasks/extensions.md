@@ -39,28 +39,6 @@ extension's CLI and put it in your path. This will allow you to invoke the
 extension CLI through the Linkerd CLI. (E.g. any call to `linkerd foo` will
 automatically call the `linkerd-foo` binary, if it is found on your path.)
 
-### Installing the Buoyant Cloud extension
-
-[Buoyant Cloud](https://buoyant.io/cloud) is a hosted Linkerd management service
-with a comprehensive multi-cluster dashboard. The Buoyant Cloud extension will
-connect your cluster to Buoyant Cloud. To install this extension, run:
-
-```bash
-## optional
-curl --proto '=https' --tlsv1.2 -sSfL buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # free, hosted metrics dashboard
-```
-
-To access Buoyant Cloud at any point, you can run:
-
-```bash
-linkerd buoyant dashboard &
-```
-
-You should see a screen lke this:
-{{< fig src="/images/getting-started/bcloud-empty-dashboard.png"
-    title="The Buoyant Cloud dashboard in action" >}}
-
 ## Listing extensions
 
 Every extension creates a Kubernetes namespace with the `linkerd.io/extension`

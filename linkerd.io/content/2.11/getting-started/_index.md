@@ -114,7 +114,7 @@ security policies; or by using a marketplace install from your Kubernetes
 provider.
 {{< /note >}}
 
-Depending on the speed of your cluster's Internet connection, it make take a
+Depending on the speed of your cluster's Internet connection, it may take a
 minute or two for the control plane to finish installing. Wait for the control
 plane to be ready (and verify your installation) by running:
 
@@ -204,9 +204,7 @@ minimal, so Linkerd ships with extensions that add non-critical but often
 useful functionality to Linkerd, including a variety of dashboards.
 
 Let's install the **viz** extension, which will install an on-cluster metric
-stack and dashboard. (Note that there are other extensions, such as the [Buoyant
-Cloud extension](../tasks/extensions/#installing-the-buoyant-cloud-extension),
-which provide hosted dashboards as an alternative or complement to **viz**.)
+stack and dashboard.
 
 To install the viz extension, run:
 
@@ -248,7 +246,7 @@ What's next? Here are some steps we recommend:
 * Learn how to [add your own services](../adding-your-service/) to
   Linkerd without downtime.
 * Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
-  Jaeger and Buoyant Cloud.
+  Jaeger and the multicluster extension.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for

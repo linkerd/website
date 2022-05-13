@@ -71,7 +71,7 @@ grafana.ini:
 ```
 
 Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`
-entry `grafana.url`. For example, if you installed the Grafana offical Helm
+entry `grafana.url`. For example, if you installed the Grafana official Helm
 chart in the `grafana` namespace, you can install Linkerd Viz through the
 command line like so:
 

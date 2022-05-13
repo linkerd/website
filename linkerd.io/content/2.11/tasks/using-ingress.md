@@ -22,7 +22,7 @@ below.
 
 Common ingress options that Linkerd has been used with include:
 
-- [Ambassador (aka Emissary) {id="ambassador"}](#ambassador-aka-emissary-idambassador)
+- [Ambassador (aka Emissary)](#ambassador)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
   - [Traefik 1.x](#traefik-1x)
@@ -32,6 +32,7 @@ Common ingress options that Linkerd has been used with include:
 - [Contour](#contour)
   - [Kong](#kong)
   - [Haproxy](#haproxy)
+- [EnRoute](#enroute)
 - [Ingress details](#ingress-details)
 
 For a quick start guide to using a particular ingress, please visit the section
@@ -139,7 +140,7 @@ Traefik should be meshed with ingress mode enabled, i.e. with the
 
 Instructions differ for 1.x and 2.x versions of Traefik.
 
-### Traefik 1.x
+### Traefik 1.x {#traefik-1x}
 
 The simplest way to use Traefik 1.x as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
@@ -201,7 +202,7 @@ Linkerd will always send requests to the service name in `l5d-dst-override`. A
 workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
 {{< /note >}}
 
-### Traefik 2.x
+### Traefik 2.x {#traefik-2x}
 
 Traefik 2.x adds support for path based request routing with a Custom Resource
 Definition (CRD) called
@@ -529,6 +530,43 @@ a global config map by using the service name, namespace and port as 
 This also means, that you can't combine more than one service ingress rule
 in an ingress manifest as each one needs their own
 `haproxy.org/request-set-header` annotation with hard coded value.
+
+## EnRoute OneStep {#enroute}
+
+Meshing EnRoute with linkerd involves only setting one
+flag globally:
+
+```yaml
+apiVersion: enroute.saaras.io/v1
+kind: GlobalConfig
+metadata:
+  labels:
+    app: web
+  name: enable-linkerd
+  namespace: default
+spec:
+  name: linkerd-global-config
+  type: globalconfig_globals
+  config: |
+        {
+          "linkerd_enabled": true
+        }
+```
+
+EnRoute can now be meshed by injecting Linkerd proxy in EnRoute pods.
+Using the ```linkerd``` utility, we can update the EnRoute deployment
+to inject Linkerd proxy.
+
+```bash
+kubectl get -n enroute-demo deploy -o yaml | linkerd inject - | kubectl apply -f -
+```
+
+The ```linkerd_enabled``` flag automatically sets `l5d-dst-override` header.
+The flag also delegates endpoint selection for routing to linkerd.
+
+More details and customization can be found in,
+[End to End encryption using EnRoute with
+Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
 
 ## Ingress details
 

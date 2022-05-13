@@ -1,10 +1,4 @@
 Extensions:
-  - Name: buoyant
-    Description: "The Linkerd Buoyant extension connects your Linkerd-enabled
-    Kubernetes cluster to Buoyant Cloud, the global health dashboard for
-    Linkerd."
-    DocLink: "https://github.com/BuoyantIO/linkerd-buoyant"
-    ScreenshotFileName: "may21_linkerd-overview.png"
   - Name: jaeger
     Description: "Built-in extension that adds distributed tracing to Linkerd
     using OpenTelemetry collector and Jaeger."
