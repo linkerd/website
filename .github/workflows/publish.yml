@@ -26,5 +26,7 @@ jobs:
         gcloud auth activate-service-account --key-file=.gcp.json
 
     - name: Publish
+      env:
+        GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
       run: |-
         make publish
