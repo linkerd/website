@@ -46,6 +46,13 @@ ambassadors:
     github: https://github.com/fredrkl
     twitter: https://twitter.com/fredrkl
     linkedin: https://www.linkedin.com/in/fredrikklingenberg/
+  - name: Kasper Nissen
+    job_title: Lead Platform Architect
+    image: /images/ambassadors/profile/kasper-nissen.png
+    flag: 🇩🇰
+    github: https://github.com/kaspernissen
+    twitter: https://twitter.com/phennex
+    linkedin: https://www.linkedin.com/in/kaspernissen/
   - name: Sergio Méndez
     job_title: DevOps Engineer
     image: /images/ambassadors/profile/sergio-mendez.png
