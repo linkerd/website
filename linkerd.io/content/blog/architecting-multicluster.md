@@ -109,7 +109,7 @@ differs from local caches and the shared control plane. Once again, potentially
 separate fault zones have been merged and the entire system fails when its
 weakest link experiences issues.
 
-Even in a perfect world where network failures never experience failures, the
+Even in a perfect world where networks never experience failures, the
 shared control plane introduces a critical downside. As clusters get provisioned
 further away from the shared control plane, operations like discovery updates or
 policy checks get slower. This is simply because the latency between processes
@@ -124,10 +124,10 @@ required overall.
 
 ## Onwards to solutioneering
 
-With these three constraints—supporting hierarchical networks, maintaining
-independent state, and having an independent control plane—we have the
-constraints necessary to implement a solution that takes the low complexity
-model Linkerd uses and expands it to multiple clusters.
+With these three constraints —supporting hierarchical networks, maintaining
+independent state, and having an independent control plane— we have the necessary 
+to implement a solution that takes the low complexity model Linkerd uses and 
+expands it to multiple clusters.
 
 In a future post, we'll be outlining the solutions we've arrived on. In the
 meantime, we’d love to hear your feedback on this set of requirements! Please
