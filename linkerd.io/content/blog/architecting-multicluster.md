@@ -109,7 +109,7 @@ differs from local caches and the shared control plane. Once again, potentially
 separate fault zones have been merged and the entire system fails when its
 weakest link experiences issues.
 
-Even in a perfect world where network failures never experience failures, the
+Even in a perfect world where networks never experience failures, the
 shared control plane introduces a critical downside. As clusters get provisioned
 further away from the shared control plane, operations like discovery updates or
 policy checks get slower. This is simply because the latency between processes
