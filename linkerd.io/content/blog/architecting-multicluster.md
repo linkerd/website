@@ -125,7 +125,7 @@ required overall.
 ## Onwards to solutioneering
 
 With these three constraints —supporting hierarchical networks, maintaining
-independent state, and having an independent control plane— we have the necessary 
+independent state, and having an independent control plane— we have the necessary
 framework to implement a solution that takes the low complexity model Linkerd uses
 and expands it to multiple clusters.
 
