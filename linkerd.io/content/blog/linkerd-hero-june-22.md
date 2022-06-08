@@ -1,10 +1,12 @@
 ---
+author: catherine
+date: 2022-06-08T00:00:00Z
 title: Announcing June's Linkerd Hero
+description: "We are excited to announce this month's Linkerd Hero: Chris Voss. Congrats, Chris!"
+feature: '/uploads/chris-voss.png'
+thumbnail: '/uploads/chris-voss.png'
 tags:
   - Community
-items:
-  - 
-description: 'We are excited to announce this month's Linkerd Hero: Chris Voss. Congrats, Chris!'
 keywords: [Linkerd Hero]
 ---
 
@@ -33,7 +35,7 @@ one of the most valuable contributions community members can make,
 Chris is our June hero. Thank you, Chris, for helping educate others
 earlier in their Linkerd adoption journey!
 
-IMAGE GOES HERE
+![Chris Voss](/uploads/chris-voss.png)
 
 ## Nominate next month's Linkerd Hero
 
