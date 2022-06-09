@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Chris Voss
+    date: June 2022
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/chris-voss.jpeg"
+    alt: Portrait of Chris Voss
+    github_url: "https://www.linkedin.com/in/christopher-voss-99161111/"
   - name: Naveen Nalam
     date: March 2022
     blurb: Technical contributions
