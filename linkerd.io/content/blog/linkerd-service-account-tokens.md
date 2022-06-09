@@ -103,7 +103,7 @@ The identity component [validates the token](https://github.com/linkerd/linkerd2
 by talking to the [TokenReview](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#tokenreview-v1-authentication-k8s-io)
 Kubernetes API and returns a `CertifyResponse` with the certificate only after
 that. The identity component not only verifies that the token is valid, but it also
-verifies if the token is associated with the same pod that that is requesting the
+verifies if the token is associated with the same pod that is requesting the
 certificate. This can be verified by looking at the `Status.User.Username` in the
 `TokenReview` response. Kubernetes API sets the username to the pod name to which
 that token was attached.
