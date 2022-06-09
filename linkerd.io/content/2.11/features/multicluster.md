@@ -64,7 +64,7 @@ they are used when a workloads needs a stable network identifier or to
 facilitate service discovery without being tied to Kubernetes' native
 implementation. This allows clients to either implement their own load
 balancing or to address a pod directly through its DNS name. In certain
-situations, it is desireable to preserve some of this functionality, especially
+situations, it is desirable to preserve some of this functionality, especially
 when working with Kubernetes objects that require it, such as
 [StatefulSet][stateful-set].
 
