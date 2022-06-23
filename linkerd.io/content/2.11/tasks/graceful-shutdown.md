@@ -69,4 +69,3 @@ automatically call the proxy's `/shutdown` endpoint when it completes.
 
 In the future, Kubernetes may support more container lifecycle hooks that will
 allow Linkerd to handle these situations automatically.
-
