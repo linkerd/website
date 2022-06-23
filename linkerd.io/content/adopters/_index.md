@@ -56,6 +56,8 @@ adopters:
   alt: Expedia
 - image: /images/adopters/facelift.png
   alt: Facelift
+- image: /images/adopters/Favrit.svg
+  alt: Favrit
 - image: /images/adopters/giant-swarm.png
   alt: Giant Swarm
 - image: /images/adopters/Homechoice.png
