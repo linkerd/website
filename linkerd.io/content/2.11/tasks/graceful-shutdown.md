@@ -64,7 +64,7 @@ interface (i.e. from within the same Kubernetes pod).
 
 One convenient way to call this endpoint is to wrap your application with the
 [linkerd-await](https://github.com/linkerd/linkerd-await) utility. An
-application that is called this way (e.e. via `linkerd-await -s $MYAPP`) will
+application that is called this way (e.e. via `linkerd-await -S $MYAPP`) will
 automatically call the proxy's `/shutdown` endpoint when it completes.
 
 In the future, Kubernetes may support more container lifecycle hooks that will
