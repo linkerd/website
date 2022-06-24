@@ -57,15 +57,16 @@ proxy a means to know when the Cronjob has completed, by default, Job and
 Cronjob pods which have been meshed will continue to run even once the main
 container has completed.
 
-To address this, you can call the `/shutdown` endpoint on the proxy once the
-application completes. This will terminate the proxy gracefully and allow the
-Job or Cronjob to complete. These shutdown requests must come on the loopback
-interface (i.e. from within the same Kubernetes pod).
+To address this, you can issue a POST to the `/shutdown` endpoint on the proxy
+once the application completes (e.g. via `curl -X POST
+http://localhost:4191/shutdown`). This will terminate the proxy gracefully and
+allow the Job or Cronjob to complete. These shutdown requests must come on the
+loopback interface, i.e. from within the same Kubernetes pod.
 
 One convenient way to call this endpoint is to wrap your application with the
 [linkerd-await](https://github.com/linkerd/linkerd-await) utility. An
-application that is called this way (e.e. via `linkerd-await -S $MYAPP`) will
+application that is called this way (e.g. via `linkerd-await -S $MYAPP`) will
 automatically call the proxy's `/shutdown` endpoint when it completes.
 
-In the future, Kubernetes may support more container lifecycle hooks that will
-allow Linkerd to handle these situations automatically.
+In the future, Kubernetes will hopefully support more container lifecycle hooks
+that will allow Linkerd to handle these situations automatically.
