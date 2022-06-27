@@ -99,7 +99,7 @@ discussed were:
 
 For more details, you can find the full report and unredacted report [in
 Linkerd's GitHub
-repository](https://github.com/linkerd/linkerd2/tree/main/audits).
+repository](https://github.com/linkerd/linkerd2/tree/main/audits/2022).
 
 ## Linkerd is designed for security from the ground up
 
