@@ -15,7 +15,7 @@ conducted by [Trail of Bits](https://www.trailofbits.com/) and funded by the
 [Cloud Native Computing Foundation](https://cncf.io). As part of Linkerd's
 commitment to openness, transparency, and security by design, we've published
 the unredacted reports [in Linkerd's GitHub
-repository](https://github.com/linkerd/linkerd2/tree/main/audits).
+repository](https://github.com/linkerd/linkerd2/tree/main/audits/2022).
 
 This year's audit comprised two parts: a security assessment of the codebase and
 supporting documentation, and a _threat model_ that assessed potential threats
@@ -135,4 +135,3 @@ the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
 (*Photo by [Etienne Girardet](https://unsplash.com/@etiennegirardet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on
 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
-
