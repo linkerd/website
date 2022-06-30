@@ -22,7 +22,7 @@ missed it, we’ve got ya covered: all the talks were recorded!
 In this talk, Leo Liang, engineering manager at Cruise Automation, spoke about
 how OfferUp (his previous employer) evolved a high growth startup architecture
 into the microservice world through practical architecture examples. Over the
-past 2.5 years, Leo and his team worked with the Linkered community, leveraged
+past 2.5 years, Leo and his team worked with the Linkerd community, leveraged
 with Consul, Nginx, Prometheus, and deeply customized Linkerd with Plugins to
 build up the service mesh. While at OfferUp his team scaled to billions of
 requests per day with ever improving system reliability and flexibility.

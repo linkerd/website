@@ -67,7 +67,7 @@ _in practice_ of a Linkerd deployment is a paramount concern.
 ## Audit findings and remediations
 
 The security assessment uncovered several issues pertaining to code quality in
-the Go portions of Linkered's codebase, ranging in severity from "low" to
+the Go portions of Linkerd's codebase, ranging in severity from "low" to
 "informational" to "undetermined". These issues included things like unhandled
 errors and incorrect use of certain library functions. We've fixed these issues
 in the 2.11.2 release and we've enabled more linting in our Go code to prevent
