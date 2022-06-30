@@ -22,6 +22,6 @@ Extensions:
     DocLink: "https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz"
     ScreenshotFileName: "linkerd-viz-dashboard.png"
   - Name: easyauth
-    Description: "Simplify the Linkerd Authorization Policies management"
+    Description: "Simplify the Linkerd Authorization Policies management."
     DocLink: "https://github.com/aatarasoff/linkerd-easyauth"
     ScreenshotFileName: "unknown.png"
