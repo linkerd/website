@@ -144,4 +144,3 @@ A connection that targets an opaque endpoint (i.e a pod with a port marked as
 opaque) will have its original target port replaced with the proxy's inbound
 port. Once the inbound proxy receives the traffic, it will transparently
 forward it to the main application container over a TCP connection.
-
