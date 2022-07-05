@@ -19,8 +19,12 @@
   <meta property="og:image" content="https://linkerd.io/images/logo-only-200h.png" />
 {{ end }}
 
-{{ with .Permalink }}
-<link rel="canonical" href="{{ . }}" />
+{{ $latestVersion := site.Params.latest_linkerd2_stable_version }}
+{{ $version := .Page.Section }}
+{{ if (hasPrefix $version "2.") }}
+  <link rel="canonical" href={{ replace .Permalink (printf "/%s/" $version) (printf "/%s/" $latestVersion) }}>
+{{ else }}
+  <link rel="canonical" href={{ .Permalink }}>
 {{ end }}
 
 <!-- Google Tag Manager -->
