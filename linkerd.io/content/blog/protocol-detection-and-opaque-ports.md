@@ -42,8 +42,7 @@ title="Protocol Detection">}}
 
 Linkerd uses protocol detection to avoid asking the user to specify the
 protocol. Rather than requiring the user to configure what protocol each port
-uses, Linkered's proxy simply performs protocol detection to answer the
-question.
+uses, Linkerd's proxy simply performs protocol detection to answer the question.
 
 Linkerd's protocol detection works by peeking at the first few bytes of a client
 connection to get information about the traffic. This implementation has some
