@@ -75,3 +75,9 @@ Finally, verify that the firewall is created:
 ```bash
 gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
+
+## Calico CNI
+
+For Calico to be able to enforce network policies it needs to get the Pod's IP address from the Kubernetes API Server, but the `postStart` hooks introduced in 2.11 interfere with this. Calico's network policy won't let traffic through until it has acquired the Pod's IP address, and the Pod can't progress until it has network connectivity.
+
+Until this behavior is fixed, manually removing the `postStart` hooks in case of the control plane components and annotating either the workloads and/or namespaces with `config.linkerd.io/await: disabled` in the case of data plane components solves this issue.
