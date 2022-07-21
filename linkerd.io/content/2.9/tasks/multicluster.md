@@ -57,7 +57,7 @@ At a high level, you will:
     src="/images/multicluster/install.svg" >}}
 
 Linkerd requires a shared
-[trust anchor](https://linkerd.io../generate-certificates/#trust-anchor-certificate)
+[trust anchor](../generate-certificates/#trust-anchor-certificate)
 to exist between the installations in all clusters that communicate with each
 other. This is used to encrypt the traffic between clusters and authorize
 requests that reach the gateway so that your cluster is not open to the public
