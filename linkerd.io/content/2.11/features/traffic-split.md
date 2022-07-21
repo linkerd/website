@@ -23,7 +23,8 @@ Linkerd exposes this functionality via the
 [Service Mesh Interface](https://smi-spec.io/) (SMI)
 [TrafficSplit API](https://github.com/servicemeshinterface/smi-spec/tree/master/apis/traffic-split).
 To use this feature, you create a Kubernetes resource as described in the
-TrafficSplit spec, and Linkerd takes care of the rest.
+TrafficSplit spec, and Linkerd takes care of the rest. You can see step by step
+documentation on our [Getting started with Linkerd SMI extension](../../tasks/linkerd-smi/) page.
 
 By combining traffic splitting with Linkerd's metrics, it is possible to
 accomplish even more powerful deployment techniques that automatically take into
