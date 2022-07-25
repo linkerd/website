@@ -30,8 +30,8 @@ Common ingress options that Linkerd has been used with include:
 - [Kong](#kong)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
-   - [Traefik 1.x](#traefik-1x)
-   - [Traefik 2.x](#traefik-2x)
+  - [Traefik 1.x](#traefik-1x)
+  - [Traefik 2.x](#traefik-2x)
 
 For a quick start guide to using a particular ingress, please visit the section
 for that ingress. If your ingress is not on that list, never fear—it likely
