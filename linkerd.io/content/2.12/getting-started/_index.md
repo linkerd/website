@@ -114,7 +114,7 @@ security policies; or by using a marketplace install from your Kubernetes
 provider.
 {{< /note >}}
 
-Depending on the speed of your cluster's Internet connection, it make take a
+Depending on the speed of your cluster's Internet connection, it may take a
 minute or two for the control plane to finish installing. Wait for the control
 plane to be ready (and verify your installation) by running:
 
@@ -160,7 +160,7 @@ how to [use Linkerd to identify the problem](../debugging-an-app/).)
 
 With Emoji installed and running, we're ready to *mesh* it—that is, to add
 Linkerd's data plane proxies to it. We can do this on a live application
-without downtime, thanks to Kubernetes's rolling deploys. Mesh you Emojivoto
+without downtime, thanks to Kubernetes's rolling deploys. Mesh your Emojivoto
 application by running:
 
 ```bash
@@ -265,6 +265,8 @@ What's next? Here are some steps we recommend:
   Emojivoto](../debugging-an-app/).
 * Learn how to [add your own services](../adding-your-service/) to
   Linkerd without downtime.
+* Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
+  Jaeger and the multicluster extension.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for

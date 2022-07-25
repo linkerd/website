@@ -30,6 +30,8 @@ Common ingress options that Linkerd has been used with include:
 - [Kong](#kong)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
+   - [Traefik 1.x](#traefik-1x)
+   - [Traefik 2.x](#traefik-2x)
 
 For a quick start guide to using a particular ingress, please visit the section
 for that ingress. If your ingress is not on that list, never fear—it likely
@@ -43,44 +45,32 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-## Ambassador (aka Emissary) {id="ambassador"}
+## Ambassador (aka Emissary) {#ambassador}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
 
 ```yaml
-apiVersion: v1
-kind: Service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
-  name: web-ambassador
+  name: web-ambassador-mapping
   namespace: emojivoto
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-ambassador-mapping
-      service: http://web-svc.emojivoto.svc.cluster.local:80
-      host: example.com
-      prefix: /
 spec:
-  selector:
-    app: web-svc
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
+  hostname: "*"
+  prefix: /
+  service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
 
 For a more detailed guide, we recommend reading [Installing the Emissary
 ingress with the Linkerd service
-mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
+mesh](https://buoyant.io/blog/emissary-and-linkerd-the-best-of-both-worlds/).
 
 ## Nginx
 
 Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `"true"`. No further configuration is required.
+annotation should be set to `"true"`.
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -107,7 +97,7 @@ Traefik should be meshed with ingress mode enabled, i.e. with the
 
 Instructions differ for 1.x and 2.x versions of Traefik.
 
-### Traefik 1.x
+### Traefik 1.x {#traefik-1x}
 
 The simplest way to use Traefik 1.x as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
@@ -169,7 +159,7 @@ Linkerd will always send requests to the service name in `l5d-dst-override`. A
 workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
 {{< /note >}}
 
-### Traefik 2.x
+### Traefik 2.x {#traefik-2x}
 
 Traefik 2.x adds support for path based request routing with a Custom Resource
 Definition (CRD) called
@@ -387,10 +377,7 @@ This example will use the following elements:
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).
 
-We need to declare these objects as well:
-
-- KongPlugin, a CRD provided by Kong
-- Ingress
+We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 
 ```yaml
 apiVersion: configuration.konghq.com/v1

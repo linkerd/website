@@ -73,6 +73,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkerd-identity
+  namespace: linkerd
 spec:
   template:
     spec:
@@ -82,6 +83,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkerd-controller
+  namespace: linkerd
 spec:
   template:
     spec:
@@ -103,4 +105,44 @@ and piping it to `kubectl apply`. For example you can run:
 
 ```bash
 kubectl kustomize build . | kubectl apply -f -
+```
+
+## Modify Grafana Configuration
+
+Interested in enabling authentication for Grafana? It is possible to
+modify the `ConfigMap` as a one off to do this. Unfortunately, the changes will
+end up being reverted every time `linkerd upgrade` happens. Instead, create a
+file named `grafana.yaml` and add your modifications:
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana-config
+  namespace: linkerd-viz
+data:
+  grafana.ini: |-
+    instance_name = grafana
+
+    [server]
+    root_url = %(protocol)s://%(domain)s:/grafana/
+
+    [analytics]
+    check_for_updates = false
+```
+
+Then, add this as a strategic merge option to `kustomization.yaml`:
+
+```yaml
+resources:
+- linkerd.yaml
+patchesStrategicMerge:
+- grafana.yaml
+```
+
+Finally, apply this to your cluster by generating YAML with `kustomize`
+and piping the output to `kubectl apply`.
+
+```bash
+kubectl kustomize . | kubectl apply -f -
 ```

@@ -4,7 +4,7 @@ description = "Add functionality to Linkerd with optional extensions."
 +++
 
 Linkerd extensions are components which can be added to a Linkerd installation
-to enable additional functionality.  By default, the following extensions are
+to enable additional functionality. By default, the following extensions are
 available:
 
 * [viz](../../features/dashboard/): Metrics and visibility features

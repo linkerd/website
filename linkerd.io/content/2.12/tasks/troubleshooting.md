@@ -307,7 +307,7 @@ Example failure:
 
 ```bash
 × control plane ClusterRoles exist
-    missing ClusterRoles: linkerd-linkerd-controller
+    missing ClusterRoles: linkerd-linkerd-identity
     see https://linkerd.io/checks/#l5d-existence-cr for hints
 ```
 
@@ -315,10 +315,10 @@ Ensure the Linkerd ClusterRoles exist:
 
 ```bash
 $ kubectl get clusterroles | grep linkerd
-linkerd-linkerd-controller                                             9d
+linkerd-linkerd-destination                                            9d
 linkerd-linkerd-identity                                               9d
-linkerd-linkerd-proxy-injector                                         20d
-linkerd-linkerd-sp-validator                                           9d
+linkerd-linkerd-proxy-injector                                         9d
+linkerd-policy                                                         9d
 ```
 
 Also ensure you have permission to create ClusterRoles:
@@ -334,7 +334,7 @@ Example failure:
 
 ```bash
 × control plane ClusterRoleBindings exist
-    missing ClusterRoleBindings: linkerd-linkerd-controller
+    missing ClusterRoleBindings: linkerd-linkerd-identity
     see https://linkerd.io/checks/#l5d-existence-crb for hints
 ```
 
@@ -342,10 +342,10 @@ Ensure the Linkerd ClusterRoleBindings exist:
 
 ```bash
 $ kubectl get clusterrolebindings | grep linkerd
-linkerd-linkerd-controller                             9d
+linkerd-linkerd-destination                            9d
 linkerd-linkerd-identity                               9d
-linkerd-linkerd-proxy-injector                         20d
-linkerd-linkerd-sp-validator                           9d
+linkerd-linkerd-proxy-injector                         9d
+linkerd-destination-policy                             9d
 ```
 
 Also ensure you have permission to create ClusterRoleBindings:
@@ -361,7 +361,7 @@ Example failure:
 
 ```bash
 × control plane ServiceAccounts exist
-    missing ServiceAccounts: linkerd-controller
+    missing ServiceAccounts: linkerd-identity
     see https://linkerd.io/checks/#l5d-existence-sa for hints
 ```
 
@@ -371,12 +371,10 @@ Ensure the Linkerd ServiceAccounts exist:
 $ kubectl -n linkerd get serviceaccounts
 NAME                     SECRETS   AGE
 default                  1         14m
-linkerd-controller       1         14m
 linkerd-destination      1         14m
 linkerd-heartbeat        1         14m
 linkerd-identity         1         14m
 linkerd-proxy-injector   1         14m
-linkerd-sp-validator     1         13m
 ```
 
 Also ensure you have permission to create ServiceAccounts in the Linkerd
@@ -484,6 +482,34 @@ $ kubectl auth can-i create podsecuritypolicies
 yes
 ```
 
+### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
+
+Example failure:
+
+```bash
+× proxy-init container runs as root user if docker container runtime is used
+    there are nodes using the docker container runtime and proxy-init container must run as root user.
+try installing linkerd via --set proxyInit.runAsRoot=true
+    see https://linkerd.io/2.11/checks/#l5d-proxy-init-run-as-root for hints
+```
+
+Kubernetes nodes running with docker as the container runtime ([CRI](https://kubernetes.io/docs/concepts/architecture/cri/))
+require the init container to run as root for iptables.
+
+Newer distributions of managed k8s use containerd where this is not an issue.
+
+Without root in the init container you might get errors such as:
+
+```bash
+time="2021-11-15T04:41:31Z" level=info msg="iptables-save -t nat"
+Error: exit status 1
+time="2021-11-15T04:41:31Z" level=info msg="iptables-save v1.8.7 (legacy): Cannot initialize: Permission denied (you must be root)\n\n"
+```
+
+See [linkerd/linkerd2#7283](https://github.com/linkerd/linkerd2/issues/7283) and
+[linkerd/linkerd2#7308](https://github.com/linkerd/linkerd2/issues/7308)
+for further details.
+
 ## The "linkerd-existence" checks {#l5d-existence}
 
 ### √ 'linkerd-config' config map exists {#l5d-existence-linkerd-config}
@@ -530,31 +556,6 @@ Example failure:
 
 For more information, see the Kubernetes documentation on the
 [Unschedulable Pod Condition](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions).
-
-### √ controller pod is running {#l5d-existence-controller}
-
-Example failure:
-
-```bash
-× controller pod is running
-    No running pods for "linkerd-controller"
-```
-
-Note, it takes a little bit for pods to be scheduled, images to be pulled and
-everything to start up. If this is a permanent error, you'll want to validate
-the state of the controller pod with:
-
-```bash
-$ kubectl -n linkerd get po --selector linkerd.io/control-plane-component=controller
-NAME                                  READY     STATUS    RESTARTS   AGE
-linkerd-controller-7bb8ff5967-zg265   4/4       Running   0          40m
-```
-
-Check the controller's logs with:
-
-```bash
-kubectl logs -n linkerd linkerd-controller-7bb8ff5967-zg265 public-api
-```
 
 ## The "linkerd-identity" checks {#l5d-identity}
 
@@ -888,12 +889,32 @@ Verify the state of the control plane pods with:
 ```bash
 $ kubectl -n linkerd get po
 NAME                                      READY   STATUS    RESTARTS   AGE
-linkerd-controller-78957587d6-4qfp2       2/2     Running   1          12m
 linkerd-destination-5fd7b5d466-szgqm      2/2     Running   1          12m
 linkerd-identity-54df78c479-hbh5m         2/2     Running   0          12m
 linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
-linkerd-sp-validator-59796bdccc-95rn5     2/2     Running   0          12m
 ```
+
+### √ cluster networks can be verified {#l5d-cluster-networks-verified}
+
+Example failure:
+
+```bash
+‼ cluster networks can be verified
+    the following nodes do not expose a podCIDR:
+        node-0
+    see https://linkerd.io/2/checks/#l5d-cluster-networks-verified for hints
+```
+
+Linkerd has a `clusterNetworks` setting which allows it to differentiate between
+intra-cluster and egress traffic. Through each Node's `podCIDR` field, Linkerd
+can verify that all possible Pod IPs are included in the `clusterNetworks`
+setting. When a Node is missing the `podCIDR` field, Linkerd can not verify
+this, and it's possible that the Node creates a Pod with an IP outside of
+`clusterNetworks`; this may result in it not being meshed properly.
+
+Nodes are not required to expose a `podCIDR` field which is why this results in
+a warning. Getting a Node to expose this field depends on the specific
+distribution being used.
 
 ### √ cluster networks contains all node podCIDRs {#l5d-cluster-networks-cidr}
 
@@ -937,12 +958,12 @@ Example failure:
 ```
 
 This check indicates a connectivity failure between the cli and the Linkerd
-control plane. To verify connectivity, manually connect to the controller pod:
+control plane. To verify connectivity, manually connect to a control plane pod:
 
 ```bash
 kubectl -n linkerd port-forward \
     $(kubectl -n linkerd get po \
-        --selector=linkerd.io/control-plane-component=controller \
+        --selector=linkerd.io/control-plane-component=identity \
         -o jsonpath='{.items[*].metadata.name}') \
 9995:9995
 ```
@@ -951,45 +972,6 @@ kubectl -n linkerd port-forward \
 
 ```bash
 curl localhost:9995/metrics
-```
-
-## The "linkerd-service-profile" checks {#l5d-sp}
-
-Example failure:
-
-```bash
-‼ no invalid service profiles
-    ServiceProfile "bad" has invalid name (must be "<service>.<namespace>.svc.cluster.local")
-```
-
-Validate the structure of your service profiles:
-
-```bash
-$ kubectl -n linkerd get sp
-NAME                                               AGE
-bad                                                51s
-linkerd-controller-api.linkerd.svc.cluster.local   1m
-```
-
-Example failure:
-
-```bash
-‼ no invalid service profiles
-    the server could not find the requested resource (get serviceprofiles.linkerd.io)
-```
-
-Validate that the Service Profile CRD is installed on your cluster and that its
-`linkerd.io/created-by` annotation matches your `linkerd version` client
-version:
-
-```bash
-kubectl get crd/serviceprofiles.linkerd.io -o yaml | grep linkerd.io/created-by
-```
-
-If the CRD is missing or out-of-date you can update it:
-
-```bash
-linkerd upgrade | kubectl apply -f -
 ```
 
 ## The "linkerd-version" checks {#l5d-version}
@@ -1097,14 +1079,14 @@ Example failure:
 
 ```bash
 × data plane proxy metrics are present in Prometheus
-    Data plane metrics not found for linkerd/linkerd-controller-b8c4c48c8-pflc9.
+    Data plane metrics not found for linkerd/linkerd-identity-b8c4c48c8-pflc9.
 ```
 
 Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
 dashboard:
 
 ```bash
-kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
+kubectl -n linkerd-viz port-forward svc/prometheus 9090
 ```
 
 ...and then browse to
@@ -1131,7 +1113,7 @@ See the page on [Upgrading Linkerd](../../upgrade/).
 
 ```bash
 ‼ data plane and cli versions match
-    linkerd/linkerd-controller-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
+    linkerd/linkerd-identity-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
 See the page on [Upgrading Linkerd](../../upgrade/).
@@ -1233,7 +1215,7 @@ Example warning:
 
 ```bash
 ‼ multiple replicas of control plane pods
-    not enough replicas available for [linkerd-controller]
+    not enough replicas available for [linkerd-identity]
     see https://linkerd.io/checks/#l5d-control-plane-replicas for hints
 ```
 

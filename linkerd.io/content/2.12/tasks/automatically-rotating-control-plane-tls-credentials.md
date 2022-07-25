@@ -210,21 +210,17 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 
 ## Installing with Helm
 
-For installing with Helm, first install the `linkerd-base` chart:
-
-```bash
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
-```
-
-Then install the `linkerd-control-plane` chart, setting the
+For Helm installation, rather than running `linkerd install`, set the
 `identityTrustAnchorsPEM` to the value of `ca.crt` in the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install linkerd-control-plane -n linkerd
+helm install linkerd2 \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
-  linkerd/linkerd-control-plane
+  --set installNamespace=false \
+  linkerd/linkerd2 \
+  -n linkerd
 ```
 
 See [Automatically Rotating Webhook TLS

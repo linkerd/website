@@ -29,10 +29,11 @@ with the upgrade process:
 
 ## Steps to upgrade
 
-There are three components that need to be upgraded, in turn:
+There are four components that need to be upgraded, in turn:
 
 - [CLI](#upgrade-the-cli)
 - [Control Plane](#upgrade-the-control-plane)
+- [Extensions](#upgrade-extensions)
 - [Data Plane](#upgrade-the-data-plane)
 
 ## Upgrade the CLI
@@ -190,6 +191,27 @@ versions of the proxy.
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version. If you have any questions, feel free to raise them at the #linkerd2
 channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade Extensions
+
+Each extension can be upgraded separately. If using Helm, the procedure is
+similar to the control plane upgrade, using the respective charts. The extension
+CLI commands don't provide `upgrade` subcommands, but using `install` again is
+fine:
+
+```bash
+linkerd viz install | kubectl apply -f -
+linkerd multicluster install | kubectl apply -f -
+linkerd jaeger install | kubectl apply -f -
+```
+
+### Upgrading Multicluster
+
+Upgrading the multicluster extension doesn't cause downtime in the traffic going
+through the mirrored services, unless otherwise noted in the version-specific
+notes below. Note however that for the service mirror _deployments_ (which
+control the creation of the mirrored services) to be updated, you need to
+re-link your clusters through `linkerd multicluster link`.
 
 ## Upgrade notice: stable-2.12.0
 
@@ -970,7 +992,7 @@ these instructions for anywhere that uses the linkerd CLI.
 To upgrade the CLI locally, run:
 
 ```bash
-curl -sL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Alternatively, you can download the CLI directly via the

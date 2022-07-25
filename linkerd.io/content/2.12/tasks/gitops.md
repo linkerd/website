@@ -384,7 +384,7 @@ Prior to installing Linkerd, note that the `identityTrustAnchorsPEM` parameter
 is set to an "empty" certificate string:
 
 ```sh
-argocd app get linkerd-control-plane -ojson | \
+argocd app get linkerd -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
@@ -396,16 +396,16 @@ We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
 
 Locate the `identityTrustAnchorsPEM` variable in your local
-`gitops/argo-apps/linkerd-control-plane.yaml` file, and set its `value` to that
+`gitops/argo-apps/linkerd.yaml` file, and set its `value` to that
 of `${trust_anchor}`.
 
 Ensure that the multi-line string is indented correctly. E.g.,
 
 ```yaml
   source:
-    chart: linkerd-control-plane
+    chart: linkerd2
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.12.0
+    targetRevision: 2.11.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -426,13 +426,13 @@ Ensure that the multi-line string is indented correctly. E.g.,
 Confirm that only one `spec.source.helm.parameters.value` field is changed:
 
 ```sh
-git diff gitops/argo-apps/linkerd-control-plane.yaml
+git diff gitops/argo-apps/linkerd.yaml
 ```
 
 Commit and push the changes to the Git server:
 
 ```sh
-git add gitops/argo-apps/linkerd-control-plane.yaml
+git add gitops/argo-apps/linkerd.yaml
 
 git commit -m "set identityTrustAnchorsPEM parameter"
 
@@ -448,7 +448,7 @@ argocd app sync main
 Confirm that the new trust anchor is picked up by the `linkerd` application:
 
 ```sh
-argocd app get linkerd-control-plane -ojson | \
+argocd app get linkerd -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
@@ -456,11 +456,10 @@ argocd app get linkerd-control-plane -ojson | \
       title="Override mTLS trust anchor"
       src="/images/gitops/dashboard-trust-anchor-override.png" >}}
 
-Synchronize the `linkerd-crds` and `linkerd-control-plane`applications:
+Synchronize the `linkerd` application:
 
 ```sh
-argocd app sync linkerd-crds
-argocd app sync linkerd-control-plane
+argocd app sync linkerd
 ```
 
 Check that Linkerd is ready:
@@ -493,25 +492,23 @@ done
       title="Synchronize emojivoto"
       src="/images/gitops/dashboard-emojivoto-sync.png" >}}
 
-### Upgrade Linkerd to 2.12.1
+### Upgrade Linkerd to 2.11.1
 
-(Assuming 2.12.1 has already been released ;-) )
-
-Use your editor to change the `spec.source.targetRevision` field to `2.12.1` in
-the `gitops/argo-apps/linkerd-control-plane.yaml` file:
+Use your editor to change the `spec.source.targetRevision` field to `2.11.1` in
+the `gitops/argo-apps/linkerd.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
 
 ```sh
-git diff gitops/argo-apps/linkerd-control-plane.yaml
+git diff gitops/argo-apps/linkerd.yaml
 ```
 
 Commit and push this change to the Git server:
 
 ```sh
-git add gitops/argo-apps/linkerd-control-plane.yaml
+git add gitops/argo-apps/linkerd.yaml
 
-git commit -m "upgrade Linkerd to 2.12.1"
+git commit -m "upgrade Linkerd to 2.11.1"
 
 git push git-server master
 ```
@@ -522,10 +519,10 @@ Synchronize the `main` application:
 argocd app sync main
 ```
 
-Synchronize the `linkerd-control-plane` application:
+Synchronize the `linkerd` application:
 
 ```sh
-argocd app sync linkerd-control-plane
+argocd app sync linkerd
 ```
 
 Confirm that the upgrade completed successfully:

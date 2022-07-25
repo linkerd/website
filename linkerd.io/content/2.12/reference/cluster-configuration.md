@@ -63,7 +63,7 @@ Create the firewall rules for `proxy-injector`, `policy-validator` and `tap`:
 ```bash
 gcloud compute firewall-rules create gke-to-linkerd-control-plane \
   --network "$NETWORK" \
-  --allow "tcp:8443,tcp:8089" \
+  --allow "tcp:8443,tcp:8089,tcp:9443" \
   --source-ranges "$MASTER_IPV4_CIDR" \
   --target-tags "$NETWORK_TARGET_TAG" \
   --priority 1000 \

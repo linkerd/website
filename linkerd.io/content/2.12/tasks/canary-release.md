@@ -27,6 +27,7 @@ allowing for fully-automated, metrics-aware canary deployments.
   along with its Viz extension.
   Follow the [Installing Linkerd Guide](../install/) if you haven't
   already done this.
+- The installation of [Linkerd-SMI extension](../linkerd-smi/).
 - The installation of Flagger depends on `kubectl` 1.14 or newer.
 
 ## Install Flagger

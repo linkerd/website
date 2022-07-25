@@ -3,6 +3,14 @@ title = "Grafana"
 description = "Grafana install instructions and how to link it with the Linkerd Dashboard"
 +++
 
+{{< note >}}
+These notes apply only to recent Linkerd Edge releases and the upcoming Linkerd
+2.12 stable release, which have stripped off the embedded Grafana instance,
+recommending users to install it separately as explained below.
+
+For previous versions, this document does not apply.
+{{< /note >}}
+
 Linkerd provides a full [on-cluster metrics stack](../../features/dashboard/)
 that can be leveraged by a Prometheus instance and subsequently by a Grafana
 instance, in order to show both the real-time and historical behavior of these
@@ -24,8 +32,8 @@ Prometheus](../external-prometheus/).
 The easiest and recommended way is to install Grafana's official Helm chart:
 
 ```bash
-helm repo add grafana https://grafana.github.io/helm-charts helm install
-grafana -n grafana --create-namespace grafana/grafana \
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana -n grafana --create-namespace grafana/grafana \
   -f https://raw.githubusercontent.com/linkerd/linkerd2/main/grafana/values.yaml
 ```
 
@@ -63,7 +71,7 @@ grafana.ini:
 ```
 
 Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`
-entry `grafana.url`. For example, if you installed the Grafana offical Helm
+entry `grafana.url`. For example, if you installed the Grafana official Helm
 chart in the `grafana` namespace, you can install Linkerd Viz through the
 command line like so:
 
