@@ -56,7 +56,7 @@ tmp/%/public:
 	@printf "Missing tmp/$*/public. Run:\n\n\tmake build-$*\n\n"; exit 1
 
 .PHONY: tmp-sites
-tmp-sites: tmp
+tmp-sites: clean tmp
 	cp -R *linkerd.io tmp/
 
 .PHONY: lint
@@ -84,7 +84,10 @@ endif
 .PHONY: shellcheck
 shellcheck:
 	@# lint the install scripts
-	shellcheck run.linkerd.io/public/install*
+	shellcheck run.linkerd.io/public/install* \
+		api.linkerd.io/build \
+		linkerd.io/build \
+		linkerd.io/release-next-version
 
 .PHONY: test-ci
 test-ci:

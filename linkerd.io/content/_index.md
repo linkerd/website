@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2021-12-29** The service mesh in 2022: What's next for Linkerd? [Read more »](/2021/12/29/the-service-mesh-in-2022/)"
+  description: "**2022-3-9** Announcing automated multi-cluster failover for Kubernetes [Read more »](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -34,7 +34,6 @@ tweets:
   - '1384463767459844097'
   - '1379426266831581186'
   - '1381614377170825216'
-  - '1381042996431347713'
   tweets_md: ''
 event_pictures: []
 features_list:

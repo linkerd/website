@@ -48,14 +48,25 @@ For example,
     terminationGracePeriodSeconds: 160
 ```
 
-## Job Resources
+## Graceful shutdown of Job and Cronjob Resources
 
-Pods which are part of a job resource run until all of the containers in the
-pod complete. However, the Linkerd proxy container runs continuously until it
-receives a TERM signal. This means that job pods which have been injected will
-continue to run, even once the main container has completed.
+Pods which are part of Job or Cronjob resources will run until all of the
+containers in the pod complete. However, the Linkerd proxy container runs
+continuously until it receives a TERM signal. Since Kubernetes does not give the
+proxy a means to know when the Cronjob has completed, by default, Job and
+Cronjob pods which have been meshed will continue to run even once the main
+container has completed.
 
-Better support for
-[sidecar containers in Kubernetes](https://github.com/kubernetes/kubernetes/issues/25908)
-has been proposed and Linkerd will take advantage of this support when it
-becomes available.
+To address this, you can issue a POST to the `/shutdown` endpoint on the proxy
+once the application completes (e.g. via `curl -X POST
+http://localhost:4191/shutdown`). This will terminate the proxy gracefully and
+allow the Job or Cronjob to complete. These shutdown requests must come on the
+loopback interface, i.e. from within the same Kubernetes pod.
+
+One convenient way to call this endpoint is to wrap your application with the
+[linkerd-await](https://github.com/linkerd/linkerd-await) utility. An
+application that is called this way (e.g. via `linkerd-await -S $MYAPP`) will
+automatically call the proxy's `/shutdown` endpoint when it completes.
+
+In the future, Kubernetes will hopefully support more container lifecycle hooks
+that will allow Linkerd to handle these situations automatically.

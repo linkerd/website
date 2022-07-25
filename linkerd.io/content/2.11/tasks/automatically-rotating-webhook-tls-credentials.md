@@ -38,7 +38,7 @@ kubectl create namespace linkerd
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
 
-# viz (ignore if not using the jaeger extension)
+# jaeger (ignore if not using the jaeger extension)
 kubectl create namespace linkerd-jaeger
 ```
 
@@ -226,9 +226,9 @@ spec:
   issuerRef:
     name: webhook-issuer
     kind: Issuer
-  commonName: jaeger-injector.linkerd.svc
+  commonName: jaeger-injector.linkerd-jaeger.svc
   dnsNames:
-  - jaeger-injector.linkerd.svc
+  - jaeger-injector.linkerd-jaeger.svc
   isCA: false
   privateKey:
     algorithm: ECDSA

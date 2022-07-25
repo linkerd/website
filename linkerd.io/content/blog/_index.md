@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/the-service-mesh-in-2022.md
-  - blog/announcing-linkerd-2-11.md
+  - blog/linkerd-multi-cluster-failover.md
+  - blog/linkerd-istio-adoption.md
 description: ''
 keywords: []
 ---

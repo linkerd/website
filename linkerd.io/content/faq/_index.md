@@ -62,7 +62,7 @@ faqs:
   - question: Who created Linkerd?
     answer:
       Linkerd was originally created by [Buoyant](https://buoyant.io/linkerd).
-      Buoyant continues to be a sponsor of the project and to provid
+      Buoyant continues to be a sponsor of the project and to provide
       commercial support.
   - question: Who is Linkerd for?
     answer:

@@ -16,6 +16,34 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Chris Voss
+    date: June 2022
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/chris-voss.jpeg"
+    alt: Portrait of Chris Voss
+    github_url: "https://www.linkedin.com/in/christopher-voss-99161111/"
+  - name: Naveen Nalam
+    date: March 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/naveen-nalam.png"
+    alt: Portrait of Naveen Nalam
+    github_url: "https://www.linkedin.com/in/nnalam/"
+  - name: Krzysztof Dryś
+    date: January 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/krzysztof_drys.jpeg"
+    alt: Portrait of Krzysztof Dryś
+    github_url: "https://github.com/krzysztofdrys"
+  - name: Aleksandr Tarasov
+    date: December 2021
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/aleksandr_tarasov.jpeg"
+    alt: Portrait of Aleksandr Tarasov
+    github_url: "https://github.com/aatarasoff"
   - name: Alberto Sadde
     date: October 2021
     blurb: Helping community members
@@ -102,7 +130,7 @@ nominated:
     hero_type: contributor
     image: "/uploads/ali 1.png"
     alt: Portrait of Ali Ariff
-    github_url: https://github.com/Saim-Safdar
+    github_url: https://github.com/aliariff
   - name: Fredrik Klingenberg
     date: March 2021
     blurb: Spreading the Linkerd message

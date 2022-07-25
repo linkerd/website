@@ -20,6 +20,9 @@ case_studies:
 - image: /images/adopters/subspace.svg
   alt: Subspace
   link: https://buoyant.io/case-studies/subspace/
+- image: /images/adopters/salt-security.png
+  alt: Salt Security
+  link: https://buoyant.io/case-studies/salt-security/
 adopters:
 - image: /images/adopters/AdvanceLatam.png
   alt: Advanced Latam
@@ -53,6 +56,8 @@ adopters:
   alt: Expedia
 - image: /images/adopters/facelift.png
   alt: Facelift
+- image: /images/adopters/Favrit.svg
+  alt: Favrit
 - image: /images/adopters/giant-swarm.png
   alt: Giant Swarm
 - image: /images/adopters/Homechoice.png

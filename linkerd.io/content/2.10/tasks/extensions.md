@@ -37,19 +37,11 @@ invoke the extension CLI through the Linkerd CLI: any invocation of `linkerd
 foo` will automatically invoke the `linkerd-foo` binary, if it is found on your
 path.
 
-For example, [Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted
-metrics dashboard for Linkerd that can be installed alongside the `viz`
-extension, but doesn't require it. To install this extension, run:
-
-```bash
-## optional
-curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
-```
+## Post-installation check
 
 Once the extension is installed, run `linkerd check` to ensure Linkerd and all
-installed extensions are healthy or run `linkerd foo check` to perform health
-checks for that extension only.
+installed extensions are healthy or run `linkerd NAME check` to perform health
+checks for the `NAME` extension only.
 
 ## Listing extensions
 
