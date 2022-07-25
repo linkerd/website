@@ -543,4 +543,3 @@ system, in the form of a private key. Care should be taken if storing this
 information on disk, such as using tools like
 [git-secret](https://git-secret.io/).
 {{< /note >}}
-
