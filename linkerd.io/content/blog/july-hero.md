@@ -27,9 +27,10 @@ amazing place it is today.
 
 This month's hero is [Dominik Táskai](https://www.linkedin.com/in/dtaskai/).
 Over the past months, Dominik has been actively answering questions and
-helping community members on the Linkerd Slack. Whether his peers had questions
-about open telemetry, how releases work, or linkerd-destination pods, Dominik
-was always happy to help. Thank you, Dominik, for sharing your knowledge with
+helping community members on the Linkerd Slack. Whether his peers had
+questions about open telemetry, linkerd-destination pods, or how Linkerd
+releases work, Dominik was always happy to help. Thank you, Dominik,
+for sharing your knowledge with
 the community and helping your peers during their Linkerd journey!
 
 ![Dominik Táskai](/uploads/dominik-taskai.png)
