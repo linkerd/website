@@ -1,10 +1,14 @@
 ---
+author: catherine
+date: 2022-07-27T00:00:00Z
 title: Announcing July's Linkerd Hero
+description: "We are excited to announce this month's Linkerd Hero: Dominik Táskai. Congrats, Dominik!"
+feature: '/uploads/dominik-taskai.png'
+thumbnail: '/uploads/dominik-taskai.png'
 tags:
   - Community
 items:
-  - 
-description: 'We are excited to announce this month's Linkerd Hero: Dominik Táskai. Congrats, Dominik!'
+  -
 keywords: [Linkerd Hero]
 ---
 
@@ -26,9 +30,9 @@ Over the past months, Dominik has been actively answering questions and
 helping community members on the Linkerd Slack. Whether his peers had questions
 about open telemetry, how releases work, or linkerd-destination pods, Dominik
 was always happy to help. Thank you, Dominik, for sharing your knowledge with
-the community and helping your peers during their Linkerd journey! 
+the community and helping your peers during their Linkerd journey!
 
-ADD IMAGE HERE
+![Dominik Táskai](/uploads/dominik-taskai.png)
 
 ## Nominate next month's Linkerd Hero
 
