@@ -1,7 +1,7 @@
 
 ## [linkerd.io](linkerd.io)
 
-Source code for the linkerd.io website.
+Source code for the [linkerd.io](https://linkerd.io/) website.
 
 ### General development instructions
 
