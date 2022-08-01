@@ -3,7 +3,7 @@ title: "Announcing the completion of Linkerd's 2022 Security Audit"
 author: 'william'
 date: 2022-06-27T00:00:00+00:00
 thumbnail: /images/etienne-girardet-sgYamIzhAhg-unsplash.jpg
-featured: false
+featured: true
 slug: announcing-the-completion-of-linkerds-2022-security-audit
 tags: [Linkerd]
 ---
