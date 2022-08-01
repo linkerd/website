@@ -32,7 +32,6 @@ tweets:
   title: Engineers Love Linkerd
   tweets:
   - '1384463767459844097'
-  - '1379426266831581186'
   - '1381614377170825216'
   tweets_md: ''
 event_pictures: []
