@@ -20,10 +20,11 @@ may contain important information about your version.
 - [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
 - [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
 
-## Versioning
+## Version numbering
 
-Linkerd follows a versioning scheme of the form `2.<major>.<minor>`. In other
-words, "2" is a static prefix, followed by the major version, then the minor.
+Linkerd follows a version numbering scheme of the form `2.<major>.<minor>`. In
+other words, "2" is a static prefix, followed by the major version, then the
+minor.
 
 Changes in minor versions are intended to be backwards compatible with the
 previous version. Changes in major version *may* introduce breaking changes,
@@ -32,7 +33,7 @@ although we try to avoid that whenever possible.
 ## Upgrade paths
 
 The following upgrade paths are generally safe. However, before starting a
-deploy, it is important to check the release notes before
+deploy, it is important to check the upgrade notes before
 proceeding—occasionally, specific minor releases may have additional
 restrictions.
 
@@ -51,6 +52,9 @@ latest minor version available for major version *x + 1*.
 **To later major versions**. Upgrades that skip one or more major versions
 are not supported. Instead, you should upgrade major versions incrementally.
 
+Again, please check the upgrade notes for the specific version you are upgrading
+*to* for any version-specific caveats.
+
 ## Data plane vs control plane version skew
 
 It is usually safe to run Linkerd's control plane with the data plane from one
@@ -58,9 +62,7 @@ major version earlier. (This skew is a natural consequence of upgrading.) This
 is independent of minor version, i.e. a *2.x.y* data plane and a *2.x + 1.z*
 control plane will work regardless of *y* and *z*.
 
-Rarely, specific minor versions violate this guarantee. (This is usually a bug
-that is fixed in a subsequence release.) Again, please check the
-version-specific release notes before proceeding.
+Please check the version-specific upgrade notes before proceeding.
 
 Note that new features introduced by the release may not be available for
 workloads with older data planes.
@@ -106,11 +108,11 @@ linkerd version --client
 
 ### With the Linkerd CLI
 
-For users who have installed Linkerd via the CLI (not recommended for production
-use), the `linkerd upgrade` command will upgrade the control plane. This command
-ensures that all of the control plane's existing configuration and TLS secrets
-are retained. Notice that we use the `--prune` flag to remove any Linkerd
-resources from the previous version which no longer exist in the new version.
+For users who have installed Linkerd via the CLI, the `linkerd upgrade` command
+will upgrade the control plane. This command ensures that all of the control
+plane's existing configuration and TLS secrets are retained. Notice that we use
+the `--prune` flag to remove any Linkerd resources from the previous version
+which no longer exist in the new version.
 
 ```bash
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
@@ -127,19 +129,10 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
   --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
 ```
 
-For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
-
-Users who have previously saved the Linkerd control plane's configuration to
-files can follow the instructions at
-[Upgrading via manifests](#upgrading-via-manifests)
-to ensure those configuration are retained by the `linkerd upgrade` command.
-
 ### With Helm
 
-For Helm control plane installations (recommended for production use), please
-follow the instructions at [Helm upgrade
-procedure](../install-helm/#helm-upgrade-procedure).
+For Helm control plane installations, please follow the instructions at [Helm
+upgrade procedure](../install-helm/#helm-upgrade-procedure).
 
 ### Verifying the control plane upgrade
 
@@ -160,6 +153,25 @@ linkerd version
 ```
 
 Which should display the latest versions for both client and server.
+
+## Upgrading extensions
+
+[Linkerd's extensions](../extensions/) provide additional functionality to
+Linkerd in a modular way. Generally speaking, extensions are versioned
+separately from Linkerd releases and follow their own schedule; however, some
+extensions are updated alongside Linkerd releases and you may wish to update
+them as part of the same process.
+
+Each extension can be upgraded independently. If using Helm, the procedure is
+similar to the control plane upgrade, using the respective charts. For the CLI,
+the extension CLI commands don't provide `upgrade` subcommands, but using
+`install` again is fine. For example:
+
+```bash
+linkerd viz install | kubectl apply -f -
+linkerd multicluster install | kubectl apply -f -
+linkerd jaeger install | kubectl apply -f -
+```
 
 ## Upgrading the data plane
 
@@ -199,19 +211,6 @@ versions of the proxy.
 
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
-
-## Upgrading extensions
-
-Each extension can be upgraded separately. If using Helm, the procedure is
-similar to the control plane upgrade, using the respective charts. The extension
-CLI commands don't provide `upgrade` subcommands, but using `install` again is
-fine:
-
-```bash
-linkerd viz install | kubectl apply -f -
-linkerd multicluster install | kubectl apply -f -
-linkerd jaeger install | kubectl apply -f -
-```
 
 ### Upgrading Multicluster
 
@@ -463,83 +462,3 @@ have been replaced by the secrets `linkerd-proxy-injector-k8s-tls`,
 `linkerd-sp-validator-k8s-tls` and `linkerd-tap-k8s-tls` respectively. If you
 upgraded through the CLI, please delete the old ones (if you upgraded through
 Helm the cleanup was automated).
-
-## Upgrading a multi-stage install (OLD?)
-
-`edge-19.4.5` introduced a
-[Multi-stage install](../install/#multi-stage-install) feature. If you
-previously installed Linkerd via a multi-stage install process, you can upgrade
-each stage, analogous to the original multi-stage installation process.
-
-Stage 1, for the cluster owner:
-
-```bash
-linkerd upgrade config | kubectl apply -f -
-```
-
-Stage 2, for the service owner:
-
-```bash
-linkerd upgrade control-plane | kubectl apply -f -
-```
-
-{{< note >}}
-Passing the `--prune` flag to `kubectl` does not work well with multi-stage
-upgrades. It is recommended to manually prune old resources after completing
-the above steps.
-{{< /note >}}
-
-## Upgrading via manifests (OLD?)
-
-By default, the `linkerd upgrade` command reuses the existing `linkerd-config`
-config map and the `linkerd-identity-issuer` secret, by fetching them via the
-the Kubernetes API. `edge-19.4.5` introduced a new `--from-manifests` flag to
-allow the upgrade command to read the `linkerd-config` config map and the
-`linkerd-identity-issuer` secret from a static YAML file. This option is
-relevant to CI/CD workflows where the Linkerd configuration is managed by a
-configuration repository.
-
-For release after `edge-20.10.1`/`stable-2.9.0`, you need to add `secret/linkerd-config-overrides`
-to the `linkerd-manifest.yaml` by running command:
-
-```bash
-kubectl -n linkerd get \
-  secret/linkerd-identity-issuer \
-  configmap/linkerd-config \
-  secret/linkerd-config-overrides \
-  -oyaml > linkerd-manifests.yaml
-
-linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
-```
-
-For release after `stable-2.6.0` and prior to `edge-20.10.1`/`stable-2.9.0`,
-you can use this command:
-
-```bash
-kubectl -n linkerd get \
-  secret/linkerd-identity-issuer \
-  configmap/linkerd-config \
-  -oyaml > linkerd-manifests.yaml
-
-linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
-```
-
-For releases prior to `edge-19.8.1`/`stable-2.5.0`, and after `stable-2.6.0`,
-you may pipe a full `linkerd install` manifest into the upgrade command:
-
-```bash
-linkerd install > linkerd-install.yaml
-
-# deploy Linkerd
-cat linkerd-install.yaml | kubectl apply -f -
-
-# upgrade Linkerd via manifests
-cat linkerd-install.yaml | linkerd upgrade --from-manifests -
-```
-
-{{< note >}}
-`secret/linkerd-identity-issuer` contains the trust root of Linkerd's Identity
-system, in the form of a private key. Care should be taken if storing this
-information on disk, such as using tools like
-[git-secret](https://git-secret.io/).
-{{< /note >}}
