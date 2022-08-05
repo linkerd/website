@@ -76,8 +76,27 @@ Finally, verify that the firewall is created:
 gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
 
-## Calico CNI
+## Lifecycle Hook Timeout
 
-For Calico to be able to enforce network policies it needs to get the Pod's IP address from the Kubernetes API Server, but the `postStart` hooks introduced in 2.11 interfere with this. Calico's network policy won't let traffic through until it has acquired the Pod's IP address, and the Pod can't progress until it has network connectivity.
+Linkerd uses a `postStart` lifecycle hook for all control plane components, and
+all injected workloads by default. The hook will poll proxy readiness through
+[linkerd-await](https://github.com/linkerd/linkerd-await) and block the main
+container from starting until the proxy is ready to handle traffic. By default,
+the hook will time-out in 2 minutes.
 
-Until this behavior is fixed, manually removing the `postStart` hooks in case of the control plane components and annotating either the workloads and/or namespaces with `config.linkerd.io/await: disabled` in the case of data plane components solves this issue.
+CNI plugins that are responsible for setting up and enforcing `NetworkPolicy`
+resources can interfere with the lifecycle hook's execution. While lifecycle
+hooks are running, the container will not reach a `Running` state. Some CNI
+plugin implementations acquire the Pod's IP address only after all containers
+have reached a running state, and the kubelet has updated the Pod's status
+through the API Server. Without access to the Pod's IP, the CNI plugins will
+not operate correctly. This in turn will block the proxy from being set-up,
+since it does not have the necessary network connectivity.
+
+As a workaround, users can manually remove the `postStart` lifecycle hook from
+control plane components. For injected workloads, users may opt out of the
+lifecycle hook through the root-level `await: false` option, or alternatively,
+behavior can be overridden at a workload or namespace level through the
+annotation `config.linkerd.io/proxy-await: disabled`.  Removing the hook will
+allow containers to start asynchronously, unblocking network connectivity once
+the CNI plugin receives the pod's IP.
