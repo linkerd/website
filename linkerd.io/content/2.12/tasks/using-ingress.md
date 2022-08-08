@@ -17,8 +17,15 @@ metrics and mTLS the moment the traffic is inside the cluster. (See
 [Adding your service](../adding-your-service/) for instructions on how to mesh
 your ingress.)
 
-Note that some ingress options need to be meshed in "ingress" mode. See details
-below.
+Note that, as explained below, some ingress options need to be meshed in
+"ingress" mode, which means injecting with the `linkerd.io/inject: ingress`
+annotation rather than the default `enabled`. It's possible to use this
+annotation at the namespace level, but it's recommended to do it at the
+individual workload level instead. The reason is that many ingress
+implementations also place other types of workloads under the same namespace for
+tasks other than routing and therefore you'd rather inject them using the
+default `enabled` mode (or some you wouldn't want to inject at all, such as
+Jobs).
 
 Common ingress options that Linkerd has been used with include:
 
