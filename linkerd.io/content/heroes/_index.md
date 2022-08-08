@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Dominik Táskai
+    date: July 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/dominik-taskai-portrait.png"
+    alt: Portrait of Dominik Táskai
+    github_url: "https://www.linkedin.com/in/dtaskai/"
   - name: Chris Voss
     date: June 2022
     blurb: Spreading the Linkerd message

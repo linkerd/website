@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2022-3-9** Announcing automated multi-cluster failover for Kubernetes [Read more »](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)"
+  description: "**2022-6-27** Announcing the completion of Linkerd's 2022 Security Audit! [Read more »](/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/)"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -31,8 +31,9 @@ outputs:
 tweets:
   title: Engineers Love Linkerd
   tweets:
+  - '1538086745732001793'
+  - '1550395663489409024'
   - '1384463767459844097'
-  - '1379426266831581186'
   - '1381614377170825216'
   tweets_md: ''
 event_pictures: []
@@ -80,7 +81,7 @@ companies:
 - image: "/uploads/logos/blue/elkjop.png"
   link: https://www.elkjopnordic.com/
 foundation_member_banner:
-  title: Linkerd is a CNCF member project
+  title: Linkerd is a CNCF graduated project
   image: "/uploads/CNCF_Alternate_Pantone.png"
 
 ---

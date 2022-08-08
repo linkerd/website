@@ -31,6 +31,12 @@ faqs:
       Finally, Linkerd has publicly [committed to open
       governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
       and is hosted by [the CNCF](https://cncf.io).
+    answer_schema:
+      Linkerd is significantly lighter and simpler than Istio. Linkerd is built
+      for security from the ground up, ranging from features like on-by-default
+      mTLS, a data plane that is built in a Rust, memory-safe language, and
+      regular security audits.  Finally, Linkerd has publicly committed to open
+      governance and is hosted by the CNCF.
   - question: "What's the difference between Linkerd and Envoy?"
     answer:
       Envoy is a proxy; Linkerd is a [service
@@ -40,8 +46,25 @@ faqs:
       Linkerd uses an ultralight "micro-proxy" called
       [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is
       built in Rust for safety and performance.
+    answer_schema:
+      Envoy is a proxy; Linkerd is a service mesh. Linkerd has a control plane
+      and a data plane, and uses a proxy is a component of the data plane.
+      While Envoy can be used as a component of a service mesh, Linkerd uses an
+      ultralight "micro-proxy" called Linkerd2-proxy, which is built in Rust
+      for safety and performance.
   - question: Why doesn't Linkerd use Envoy?
     answer:
+      Envoy is a complex general-purpose proxy. Linkerd uses a simple and
+      ultralight "micro-proxy" called
+      [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy) that is built
+      specifically for the service mesh sidecar use case. This allows Linkerd
+      to be significantly smaller and simpler than Envoy-based service meshes.
+      The choice of Rust also allows Linkerd to avoid a whole class of CVEs and
+      vulnerabilities that can impact proxies written in non-memory-safe
+      languages like C++. See [Why Linkerd doesn't use
+      Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) for
+      more.
+    answer_schema:
       Envoy is a complex general-purpose proxy. Linkerd uses a simple and
       ultralight "micro-proxy" called
       [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy) that is built
@@ -62,12 +85,16 @@ faqs:
   - question: Who created Linkerd?
     answer:
       Linkerd was originally created by [Buoyant](https://buoyant.io/linkerd).
-      Buoyant continues to be a sponsor of the project and to provide
+      Buoyant is the primary sponsor of the project and provides
       commercial support.
   - question: Who is Linkerd for?
     answer:
       Linkerd is for everyone. (See [Linkerd's Commitment to Open
       Governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).)
+      In practice, Linkerd has certain technical prerequisites, such as
+      Kubernetes.
+    answer_schema:
+      Linkerd is for everyone. (See Linkerd's Commitment to Open Governance.)
       In practice, Linkerd has certain technical prerequisites, such as
       Kubernetes.
   - question: How do I pronounce Linkerd?
@@ -76,6 +103,8 @@ faqs:
       "Linker-DEE".
   - question: How do I write Linkerd?
     answer: 'Just like this: Linkerd. Capital "L", lower-case everything else.'
+    answer_schema:
+      'Just like this: Linkerd. Capital "L", lower-case everything else.'
   - question: Is there a Linkerd "enterprise edition"?
     answer:
       No. Linkerd is fully open source with everything you need to run it in
@@ -91,6 +120,9 @@ faqs:
       may also review the [active GitHub
       issues](https://github.com/linkerd/linkerd2/issues) for shorter-term
       objectives.
+    answer_schema:
+      See the Linkerd project roadmap. You may also review the active GitHub
+      issues for shorter-term objectives.
   - question: Can I present Linkerd to my team / company / meetup group?
     answer:
       Certainly! The public [Linkerd meetup
@@ -126,8 +158,13 @@ faqs:
     answer:
       Linkerd uses multi-arch container images with support for x86, amd64,
       arm64, and arm.
+    answer_schema:
+      Linkerd uses multi-arch container images with support for x86, amd64,
+      arm64, and arm.
   - question: How can I get involved?
     answer:
       We'd love to have you get involved! See our [Linkerd Community
       page](/community/get-involved/).
+    answer_schema:
+      We'd love to have you get involved! See our Linkerd Community page.
 ---
