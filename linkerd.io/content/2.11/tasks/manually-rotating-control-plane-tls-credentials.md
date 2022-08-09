@@ -247,10 +247,10 @@ step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new
 ```
 
 This new issuer certificate is signed by our new trust anchor, which is why it
-was critical to install the new trust anchor (as outlined in the previous section).
-Given the working trust anchor certificate bundle – `linkerd check` should show
-all green checks and no warnings – we can safely rotate the identity issuer
-certificate and key by using the `upgrade` command again:
+was critical to install the new trust anchor bundle (as outlined in the previous
+section). Once the new bundle is installed and running `linkerd check` shows all
+green checks and no warnings, you can safely rotate the identity issuer certificate
+and key by using the `upgrade` command again:
 
 ```bash
 linkerd upgrade \
