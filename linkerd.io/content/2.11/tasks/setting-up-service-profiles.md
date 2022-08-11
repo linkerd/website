@@ -117,22 +117,6 @@ This generates a service profile from the `web.proto` format file for the
 `web-svc` service. The resulting service profile can be piped directly to
 `kubectl apply` and will be installed into the service's namespace.
 
-## Auto-Creation
-
-It is common to not have an OpenAPI spec or a protobuf format. You can also
-generate service profiles from watching live traffic. This is based off tap data
-and is a great way to understand what service profiles can do for you. To start
-this generation process, you can use the `--tap` flag:
-
-```bash
-linkerd viz profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s
-```
-
-This generates a service profile from the traffic observed to
-`deploy/web` over the 10 seconds that this command is running. The resulting service
-profile can be piped directly to `kubectl apply` and will be installed into the
-service's namespace.
-
 ## Template
 
 Alongside all the methods for automatically creating service profiles, you can
