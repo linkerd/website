@@ -89,7 +89,13 @@ are retained. Notice that we use the `--prune` flag to remove any Linkerd
 resources from the previous version which no longer exist in the new version.
 
 ```bash
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+$ linkerd upgrade --crds | \
+  kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=apiextensions.k8s.io/v1/customresourcedefinition \
+  -f -
+
+$ linkerd upgrade | \
+  kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 ```
 
 Next, run this command again with some `--prune-whitelist` flags added. This is
@@ -193,29 +199,55 @@ channel in the [Linkerd slack](https://slack.linkerd.io/).
 
 ## Upgrade notice: stable-2.12.0
 
-The minimum Kubernetes version supported is `v1.20.0`.
+The minimum Kubernetes version supported is `v1.21.0`.
 
-### Breaking changes in core Helm charts
+### Using the CLI
+
+If you had installed Linkerd `2.11.x` using the CLI _and_ are making use of the
+`TrafficSplit` CRD, you need to follow these instructions to avoid loosing your
+`TS` CRs. If you're not using this CRD then you can ignore these instructions
+and perform the usual upgrade as [described above](#with-linkerd-cli).
+
+The `TrafficSplit` CRD no longer ships with Linkerd `2.12.0` and is provided
+instead by the Linkerd SMI extension. But before installing that extension, you
+need to add the following annotations and label to the CRD so that the
+`linkerd-smi` chart can adopt it:
+
+```bash
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+  meta.helm.sh/release-name=linkerd-smi \
+  meta.helm.sh/release-namespace=linkerd-smi
+$ kubectl label crd/trafficsplits.split.smi-spec.io \
+  app.kubernetes.io/managed-by=Helm
+```
+
+Now you can install the Linkerd SMI extension, via Helm:
+
+```bash
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+```
+
+And finally you can proceed with the usual [CLI upgrade
+instructions](#with-linkerd-cli), but avoid using the `--prune` flag when
+applying the output of `linkerd upgrade --crds` to avoid removing the
+`TrafficSplit` CRD!
+
+### Using Helm
+
+The following sections provide instructions on how to perform a migration from
+Linkerd `2.11.x` to `2.12.0` without control plane downtime, when your existing
+Linkerd instance was installed via Helm.
 
 The `linkerd2` chart has been replaced by two charts: `linkerd-crds` and
-`linkerd-control-plane`. Please check the updated [Helm
-instructions](../install-helm/) for details. Also note that support for Helm v2
-has been dropped.
+`linkerd-control-plane` (and optionally `linkerd-smi` if you're using
+`TrafficSplit`). Please check the updated [Helm instructions](../install-helm/)
+for details. Also note that support for Helm v2 has been dropped.
 
-Migrating to these new charts will incur in downtime for linkerd's control plane
-during the process, but as the proxies don't require the control plane to always
-be up, the data plane shouldn't incur in downtime. Just make sure you roll your
-data plane deployments after the control plane is updated, as explained in
-[upgrade the data plane](#upgrade-the-data-plane).
+### How to retrieve certificate keys and custom values
 
-Before proceeding, make sure you retrieve all your chart values customizations,
-in particular your trust root and issuer keys (`identityTrustAnchorsPEM`,
-`identity.issuer.tls.crtPEM` and `identity.issuer.tls.keyPEM`). These values
-will need to be fed again into the `helm install` command below for the
-`linkerd-control-plane` chart.
-
-To start the migration first find the namespace you used to store the previous
-linkerd chart helm config:
+To start the migration first find the release name you used for the `linkerd2`
+chart, and the namespace where this release stored its config:
 
 ```bash
 $ helm ls -A
@@ -223,30 +255,85 @@ NAME    NAMESPACE       REVISION        UPDATED                                 
 linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
 ```
 
-If you did use Helm's `--namespace` flag when you previously installed linkerd,
-then you should see that namespace reflected in the output above, and use it
-instead of `default` when deleting the chart:
+This output matches the default case. Even if Linkerd is installed in the
+`linkerd` namespace, the Helm config should have been installed in the `default`
+namespace, unless you specified something different in the `namespace` value
+when you installed. Take note of this release name (linkerd) and namespace
+(default) to use in the commands that follow.
+
+Before proceeding, make sure you retrieve all your chart values customizations,
+in particular your trust root and issuer keys (`identityTrustAnchorsPEM`,
+`identity.issuer.tls.crtPEM` and `identity.issuer.tls.keyPEM`). These values
+will need to be fed again into the `helm install` command below for the
+`linkerd-control-plane` chart. These values can be retrieved with the following
+command:
 
 ```bash
-helm delete -n default linkerd
+$ helm get -n default values linkerd
 ```
 
-Then install both new charts, one after the other:
+### Migrate resources to the new charts
+
+This requires using the [yq](https://github.com/mikefarah/yq) utility.
+
+The following snippets will change the `meta.helm.sh/release-name` and
+`meta.helm.sh/release-namespace` annotations for each resource in the `linkerd`
+release (use your own name as explained above), so that they can be adopted by
+the `linkerd-crds`, `linkerd-control-plane` and `linkerd-smi` charts:
 
 ```bash
-# first make sure you update the helm repo
-helm repo up
+# First migrate the CRDs
+$ helm -n default get manifest linkerd | \
+  yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' | \
+  grep -v '\-\-\-' | \
+  xargs -n1 sh -c \
+  'kubectl annotate --overwrite crd/$0 meta.helm.sh/release-name=linkerd-crds meta.helm.sh/release-namespace=linkerd'
 
-# now install the linkerd-crds chart
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+# Special case for TrafficSplit (only use if you have TrafficSplit CRs)
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+  meta.helm.sh/release-name=linkerd-smi meta.helm.sh/release-namespace=linkerd-smi
 
-# then install the linkerd-control-plane chart
-helm install linkerd-control-plane \
+# Now migrate all the other resources
+$ helm -n default get manifest linkerd | \
+  yq 'select(.kind != "CustomResourceDefinition")' | \
+  yq '.kind, .metadata.name, .metadata.namespace' | \
+  grep -v '\-\-\-' |
+  xargs -n3 sh -c 'kubectl annotate --overwrite -n $2 $0/$1 meta.helm.sh/release-name=linkerd-control-plane meta.helm.sh/release-namespace=linkerd'
+```
+
+### Install the new charts
+
+```bash
+# First make sure you update the helm repo
+$ helm repo up
+
+# Install the linkerd-crds chart
+$ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+
+# Install the linkerd-control-plane chart
+# (remember to add any customizations you retrieved above)
+$ helm install linkerd-control-plane \
   -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   linkerd/linkerd-control-plane
+
+# Optional: if using TrafficSplit CRs
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+```
+
+### Cleaning up the old linker2 Helm release
+
+The `helm delete` command would delete all the linkerd resources, so instead we
+just remove the Helm release config for the old `linkerd2` chart (assuming you
+used the "Secret" storage backend, which is the default):
+
+```bash
+$ kubectl -n default delete secret \
+  --field-selector type=helm.sh/release.v1 \
+  -l name=linkerd,owner=helm
 ```
 
 ### Breaking changes in extension Helm charts
@@ -255,7 +342,7 @@ The main extensions (viz, multicluster, jaeger, linkerd2-cni) were also
 refactored, in that they no longer install their namespaces, leaving that to the
 `helm` command (or to a previous step in your CD pipeline), and they rely on an
 post-install hook to add the required metadata into that namespace. Therefore
-you also need to delete and reinstall them; for example for Linkerd-Viz:
+you need to delete and reinstall them; for example for Linkerd-Viz:
 
 ```bash
 # update the helm repo
