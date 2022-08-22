@@ -8,7 +8,7 @@ command. This is recommended for production, since it allows for repeatability.
 
 ## Prerequisite: generate identity certificates
 
-To do [automatic mutual TLS](../features/automatic-mtls/), Linkerd requires
+To do [automatic mutual TLS](../../features/automatic-mtls/), Linkerd requires
 trust anchor certificate and an issuer certificate and key pair. When you're
 using `linkerd install`, we can generate these for you. However, for Helm,
 you will need to generate these yourself.
@@ -73,7 +73,7 @@ helm install linkerd-control-plane \
 ```
 
 {{< note >}}
-If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
+If you are using [Linkerd's CNI plugin](../../features/cni/), you must also add the
 `--set cniEnabled=true` flag to your `helm install` command.
 {{< /note >}}
 
