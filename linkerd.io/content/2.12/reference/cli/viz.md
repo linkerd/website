@@ -18,6 +18,22 @@ aliases = [
 
 ## Subcommands
 
+## allow-scrapes
+
+{{< cli/description "viz allow-scrapes" >}}
+
+{{< cli/examples "viz allow-scrapes" >}}
+
+{{< cli/flags "viz allow-scrapes" >}}
+
+## authz
+
+{{< cli/description "viz authz" >}}
+
+{{< cli/examples "viz authz" >}}
+
+{{< cli/flags "viz authz" >}}
+
 ### check
 
 {{< cli/description "viz check" >}}
