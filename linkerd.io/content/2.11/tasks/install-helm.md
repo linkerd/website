@@ -1,19 +1,20 @@
 +++
 title = "Installing Linkerd with Helm"
-description = "Install Linkerd onto your own Kubernetes cluster using Helm."
+description = "Install Linkerd onto your Kubernetes cluster using Helm."
 +++
 
-Linkerd can optionally be installed via Helm rather than with the `linkerd
-install` command.
+Linkerd can be installed via Helm rather than with the `linkerd install`
+command. This is recommended for production, since it allows for repeatability.
 
-## Prerequisite: identity certificates
+## Prerequisite: generate identity certificates
 
-The identity component of Linkerd requires setting up a trust anchor
-certificate, and an issuer certificate with its key. These must use the ECDSA
-P-256 algorithm and need to be provided to Helm by the user (unlike when using
-the `linkerd install` CLI which can generate these automatically). You can
-provide your own, or follow [these instructions](../generate-certificates/)
-to generate new ones.
+To do [automatic mutual TLS](../features/automatic-mtls/), Linkerd requires
+trust anchor certificate and an issuer certificate and key pair. When you're
+using `linkerd install`, we can generate these for you. However, for Helm,
+you will need to generate these yourself.
+
+Please follow the instructions in [Generating your own mTLS root
+certificates](../generate-certificates/) to generate these.
 
 ## Helm install procedure for stable releases
 
@@ -71,20 +72,19 @@ helm install linkerd-control-plane \
   linkerd-edge/linkerd-control-plane
 ```
 
-## Disabling The Proxy Init Container
+{{< note >}}
+If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
+`--set cniEnabled=true` flag to your `helm install` command.
+{{< /note >}}
 
-If installing with CNI, make sure that you add the `--set
-cniEnabled=true` flag to your `helm install` command.
+## Enabling high availability mode
 
-## Setting High-Availability
+The linkerd2 chart (or, for edge releases, the linkerd-control-plane chart)
+contains a file called `values-ha.yaml` that overrides some default values to
+enable high availability mode, analogous to the `--ha` option in `linkerd
+install`.
 
-The linkerd2 chart (linkerd-control-plane chart for edge releases) contains a
-file `values-ha.yaml` that overrides some default values as to set things up
-under a high-availability scenario, analogous to the `--ha` option in `linkerd
-install`. Values such as higher number of replicas, higher memory/cpu limits and
-affinities are specified in that file.
-
-You can get ahold of `values-ha.yaml` by fetching the chart files:
+You can get the `values-ha.yaml` by fetching the chart files:
 
 ```bash
 # for stable
@@ -94,7 +94,7 @@ helm fetch --untar linkerd/linkerd2
 helm fetch --untar --devel linkerd-edge/linkerd-control-plane
 ```
 
-Then use the `-f` flag to provide the override file, for example:
+Then use the `-f` flag to provide this override file. For example:
 
 ```bash
 # for stable
@@ -116,24 +116,24 @@ helm install linkerd-control-plane \
   linkerd-edge/linkerd-control-plane
 ```
 
-## Customizing the Namespace in the stable release
+## Customizing the namespace
 
-To install Linkerd to a different namespace than the default `linkerd`,
-override the `Namespace` variable.
+To install Linkerd to a different namespace, you can override the Helm
+`Namespace` variable.
 
 By default, the chart creates the control plane namespace with the
-`config.linkerd.io/admission-webhooks: disabled` label. It is required for the
-control plane to work correctly. This means that the chart won't work with the
-`--namespace` option.  If you're relying on a separate tool to create the
+`config.linkerd.io/admission-webhooks: disabled` label. This is required for the
+control plane to work correctly. This means that the chart won't work with
+Helm's `--namespace` option.  If you're relying on a separate tool to create the
 control plane namespace, make sure that:
 
 1. The namespace is labeled with `config.linkerd.io/admission-webhooks: disabled`
 1. The `installNamespace` is set to `false`
 1. The `namespace` variable is overridden with the name of your namespace
 
-## Helm upgrade procedure
+## Upgrading with Helm
 
-Make sure your local Helm repos are updated:
+First, make sure your local Helm repos are updated:
 
 ```bash
 helm repo update
@@ -143,12 +143,15 @@ NAME                    CHART VERSION          APP VERSION            DESCRIPTIO
 linkerd/linkerd2        <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
 ```
 
-The `helm upgrade` command has a number of flags that allow you to customize
-its behaviour. The ones that special attention should be paid to are
-`--reuse-values` and `--reset-values` and how they behave when charts change
-from version to version and/or overrides are applied through `--set` and
-`--set-file`. To summarize there are the following prominent cases that can be
-observed:
+During an upgrade, you must choose whether you want to reuse the values in the
+chart or move to the values specified in the newer chart.  Our advice is to use
+a `values.yaml` file that stores all custom overrides that you have for your
+chart.
+
+The `helm upgrade` command has a number of flags that allow you to customize its
+behavior. Special attention should be paid to `--reuse-values` and
+`--reset-values` and how they behave when charts change from version to version
+and/or overrides are applied through `--set` and `--set-file`.  For example:
 
 - `--reuse-values` with no overrides - all values are reused
 - `--reuse-values` with overrides - all except the values that are overridden
@@ -160,12 +163,9 @@ provided release are applied together with the overrides
 - no flag and no overrides - `--reuse-values` will be used by default
 - no flag and overrides - `--reset-values` will be used by default
 
-Bearing all that in mind, you have to decide whether you want to reuse the
-values in the chart or move to the values specified in the newer chart.
-The advised practice is to use a `values.yaml` file that stores all custom
-overrides that you have for your chart. Before upgrade, check whether there
-are breaking changes to the chart (i.e. renamed or moved keys, etc). You can
-consult the [edge](https://hub.helm.sh/charts/linkerd2-edge/linkerd2) or the
+Finally, before upgrading, check whether there are breaking changes to the chart
+(i.e. renamed or moved keys, etc). You can consult the
+[edge](https://hub.helm.sh/charts/linkerd2-edge/linkerd2) or the
 [stable](https://hub.helm.sh/charts/linkerd2/linkerd2) chart docs, depending on
 which one your are upgrading to. If there are, make the corresponding changes to
 your `values.yaml` file. Then you can use:
@@ -175,4 +175,4 @@ helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
 ```
 
 The `--atomic` flag will ensure that all changes are rolled back in case the
-upgrade operation fails
+upgrade operation fails.

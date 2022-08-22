@@ -18,14 +18,14 @@ Helm which allows for repeatability.
 
 In either case, we recommend installing the CLI itself so that you can validate
 the success of the installation. See the [Getting Started
-Guide](../../getting-started/) for how to install the CLI, if you haven't done
+Guide](../../getting-started/) for how to install the CLI if you haven't done
 this already.
 
 ## Requirements
 
 Linkerd requires a Kubernetes cluster on which to run. Where this cluster lives
 is not important: it might be hosted on a cloud provider, may be running on your
-local machine, or even something else.
+local machine, or even somewhere else.
 
 Before installing the control plane, validate that this Kubernetes cluster is
 configured appropriately for Linkerd by running:
@@ -62,7 +62,7 @@ programmatically alter this manifest.
 ## Installing via Helm
 
 To install Linkerd with Helm (recommended for production installations),
-see the [Linkerd Helm Guide](../install-helm/)
+see the [Installing Linkerd with Helm](../install-helm/).
 
 ## Verification
 
@@ -75,12 +75,12 @@ linkerd check
 
 ## Next steps
 
-Once you've installed the control plane, you may want to install extensions such
-as `viz`, `multicluster` and `jaeger`. See [Extensions](../extensions/) to
-understand how to install them.
+Once you've installed the control plane, you may want to install some
+extensions, such as `viz`, `multicluster` and `jaeger`. See [Using
+extensions](../extensions/) for how to install them.
 
 Finally, once the control plane is installed, you'll need to "mesh" any services
-you want Linkerd active for. See [Adding Your Services to
+you want Linkerd active for. See [Adding your services to
 Linkerd](../../adding-your-service/) for how to do this.
 
 ## Uninstalling the control plane
