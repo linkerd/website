@@ -39,7 +39,8 @@ then `linkerd-control-plane`.
 The `linkerd-crds` chart sets up the CRDs linkerd requires:
 
 ```bash
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+helm install linkerd-crds linkerd/linkerd-crds \
+  -n linkerd --create-namespace 
 ```
 
 {{< note >}}

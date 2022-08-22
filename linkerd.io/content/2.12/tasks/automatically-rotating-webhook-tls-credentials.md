@@ -38,7 +38,7 @@ kubectl create namespace linkerd
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
 
-# viz (ignore if not using the jaeger extension)
+# jaeger (ignore if not using the jaeger extension)
 kubectl create namespace linkerd-jaeger
 ```
 
@@ -226,9 +226,9 @@ spec:
   issuerRef:
     name: webhook-issuer
     kind: Issuer
-  commonName: jaeger-injector.linkerd.svc
+  commonName: jaeger-injector.linkerd-jaeger.svc
   dnsNames:
-  - jaeger-injector.linkerd.svc
+  - jaeger-injector.linkerd-jaeger.svc
   isCA: false
   privateKey:
     algorithm: ECDSA
@@ -279,20 +279,24 @@ linkerd jaeger install
 A similar pattern can be used with Helm:
 
 ```bash
-# first install the linkerd-base chart
-helm install linkerd-base \
+# first install the linkerd-crds chart
+helm install linkerd-crds linkerd/linkerd-crds \
+  -n linkerd --create-namespace
+
+# then install the linkerd-control-plane chart
+# (see note below)
+helm install linkerd-control-plane \
+  --set-file identityTrustAnchorsPEM=... \
+  --set-file identity.issuer.tls.crtPEM=... \
+  --set-file identity.issuer.tls.keyPEM=... \
   --set policyValidator.externalSecret=true \
   --set-file policyValidator.caBundle=ca.crt \
   --set proxyInjector.externalSecret=true \
   --set-file proxyInjector.caBundle=ca.crt \
   --set profileValidator.externalSecret=true \
   --set-file profileValidator.caBundle=ca.crt \
-  linkerd/linkerd-base \
+  linkerd/linkerd-control-plane \
   -n linkerd
-
-# then install the linkerd-control-plane chart
-# (see note below)
-helm install linkerd-control-plane -n linkerd linkerd/linkerd-control-plane
 
 # ignore if not using the viz extension
 helm install linkerd-viz \
@@ -301,18 +305,18 @@ helm install linkerd-viz \
   --set tapInjector.externalSecret=true \
   --set-file tapInjector.caBundle=ca.crt \
   linkerd/linkerd-viz \
-  -n linkerd-viz
+  -n linkerd-viz --create-namespace
 
 # ignore if not using the jaeger extension
 helm install linkerd-jaeger \
   --set webhook.externalSecret=true \
   --set-file webhook.caBundle=ca.crt \
   linkerd/linkerd-jaeger \
-  -n linkerd-jaeger
+  -n linkerd-jaeger --create-namespace
 ```
 
 {{< note >}}
-When installing the `linkerd-control-plane` chart, you must also provide the
+When installing the `linkerd-control-plane` chart, you _must_ provide the
 issuer trust root and issuer credentials as described in [Installing Linkerd
 with Helm](../install-helm/).
 {{< /note >}}

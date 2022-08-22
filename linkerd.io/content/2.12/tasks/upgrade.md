@@ -111,20 +111,12 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
   --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
 ```
 
-For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
-
-Users who have previously saved the Linkerd control plane's configuration to
-files can follow the instructions at
-[Upgrading via manifests](#upgrading-via-manifests)
-to ensure those configuration are retained by the `linkerd upgrade` command.
-
 ### With Helm
 
-For a Helm workflow, check out the instructions at
-[Helm upgrade procedure](../install-helm/#helm-upgrade-procedure).
+For Helm control plane installations, please follow the instructions at [Helm
+upgrade procedure](../install-helm/#helm-upgrade-procedure).
 
-### Verify the control plane upgrade
+### Verifying the control plane upgrade
 
 Once the upgrade process completes, check to make sure everything is healthy
 by running:
@@ -392,14 +384,14 @@ upgrading.
 The Linkerd proxy container is now the *first* container in the pod. This may
 affect tooling that assumed the application was the first container in the pod.
 
-### Control plane changes
+#### Control plane changes
 
 The `controller` pod has been removed from the control plane. All configuration
 options that previously applied to it are no longer valid (e.g
 `publicAPIResources` and all of its nested fields). Additionally, the
 destination pod has a new `policy` container that runs the policy controller.
 
-### Data plane changes
+#### Data plane changes
 
 In order to fix a class of startup race conditions, the container ordering
 within meshed pods has changed so that the Linkerd proxy container is now the
@@ -412,7 +404,7 @@ container startup ordering is thus longer necessary. (However, using
 `linkerd-await -S` to ensure proxy shutdown in Jobs and Cronjobs is still
 valid.)
 
-### Routing breaking changes
+#### Routing breaking changes
 
 There are two breaking changes to be aware of when it comes to how traffic is
 routed.
@@ -429,7 +421,7 @@ localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
 other pods should now be bound to a public interface (e.g `0.0.0.0:8080`). This
 change prevents ports from being accidentally exposed outside of the pod.
 
-### Multicluster
+#### Multicluster
 
 The gateway component has been changed to use a `pause` container instead of
 `nginx`. This change should reduce the footprint of the extension; the proxy
@@ -445,7 +437,7 @@ under the `gateway` field. If you have installed the extension with other
 options than the provided defaults, you will need to update your `values.yaml`
 file to reflect this change in field grouping.
 
-### Other changes
+#### Other changes
 
 Besides the breaking changes described above, there are other minor changes to
 be aware of when upgrading from `stable-2.10.x`:
@@ -454,14 +446,14 @@ be aware of when upgrading from `stable-2.10.x`:
  result of their deprecation in Kubernetes v1.21 and above. The control plane
  and core extensions will now be shipped without PSPs; they can be enabled
  through a new install option `enablePSP: true`.
-- `tcp_connection_duration_ms` metric has been removed.
+- The `tcp_connection_duration_ms` metric has been removed.
 - Opaque ports changes: `443` is no longer included in the default opaque ports
  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
  ElasticSearch respectively (all server speak first protocols) have been added
  to the default opaque ports list. The default ignore inbound ports list has
  also been changed to include ports `4567` and `4568`.
 
-## Upgrade notice: stable-2.10.0
+### Upgrade notice: stable-2.10.0
 
 If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but *not*
 2.9.4), and you *upgraded* to that release using the `--prune` flag (as opposed
@@ -478,7 +470,7 @@ Second, we've introduced [extensions](../extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what
 this means for you.
 
-### Visualization components moved to Linkerd-Viz extension
+#### Visualization components moved to Linkerd-Viz extension
 
 With the introduction of [extensions](../extensions/), all of the
 Linkerd control plane components related to visibility (including Prometheus,
@@ -543,13 +535,13 @@ you had customized there will need to be migrated; in particular
 `identityTrustAnchorsPEM` in order to conserve the value you set during
 install."
 
-## Upgrade notice: stable-2.9.4
+### Upgrade notice: stable-2.9.4
 
 See upgrade notes for 2.9.3 below.
 
-## Upgrade notice: stable-2.9.3
+### Upgrade notice: stable-2.9.3
 
-### Linkerd Repair
+#### Linkerd Repair
 
 Due to a known issue in versions stable-2.9.0, stable-2.9.1, and stable-2.9.2,
 users who upgraded to one of those versions with the --prune flag (as described
@@ -566,14 +558,14 @@ linkerd repair | kubectl apply -f -
 This will restore the `secret/linkerd-config-overrides` resource and allow you
 to proceed with upgrading your control plane.
 
-## Upgrade notice: stable-2.9.0
+### Upgrade notice: stable-2.9.0
 
-### Images are now hosted on ghcr.io
+#### Images are now hosted on ghcr.io
 
 As of this version images are now hosted under `ghcr.io` instead of `gcr.io`. If
 you're pulling images into a private repo please make the necessary changes.
 
-### Upgrading multicluster environments
+#### Upgrading multicluster environments
 
 Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
@@ -585,7 +577,7 @@ Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow the [upgrade multicluster
 instructions](../upgrade-multicluster/).
 
-### Ingress behavior changes
+#### Ingress behavior changes
 
 In previous versions when you injected your ingress controller (Nginx, Traefik,
 Ambassador, etc), then the ingress' balancing/routing choices would be
@@ -600,7 +592,7 @@ If you want to revert to the previous behavior, inject the proxy into the
 ingress controller using the annotation `linkerd.io/inject: ingress`, as
 explained in [using ingress](../using-ingress/)
 
-### Breaking changes in Helm charts
+#### Breaking changes in Helm charts
 
 Some entries like `controllerLogLevel` and all the Prometheus config have
 changed their position in the settings hierarchy. To get a precise view of what
@@ -610,7 +602,7 @@ and
 [stable-2.9.0](https://github.com/linkerd/linkerd2/blob/stable-2.9.0/charts/linkerd2/values.yaml)
 `values.yaml` files.
 
-### Post-upgrade cleanup
+#### Post-upgrade cleanup
 
 In order to better support cert-manager, the secrets
 `linkerd-proxy-injector-tls`, `linkerd-sp-validator-tls` and `linkerd-tap-tls`

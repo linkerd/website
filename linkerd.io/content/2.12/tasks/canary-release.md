@@ -23,11 +23,13 @@ allowing for fully-automated, metrics-aware canary deployments.
 
 ## Prerequisites
 
-- To use this guide, you'll need to have Linkerd installed on your cluster,
-  along with its Viz extension.
-  Follow the [Installing Linkerd Guide](../install/) if you haven't
-  already done this.
-- The installation of Flagger depends on `kubectl` 1.14 or newer.
+To use this guide, you'll need a Kubernetes cluster running:
+
+- Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
+  [Installing Linkerd Guide](../install/).
+- Linkerd-SMI. If you haven't installed this yet, follow the
+  [Linkerd-SMI guide](../linkerd-smi/).
+- Flagger. If you haven't installed this, see below.
 
 ## Install Flagger
 

@@ -22,8 +22,9 @@ downtime.
 
 ## Prerequisites
 
-These instructions use the [step](https://smallstep.com/cli/) and
-[jq](https://stedolan.github.io/jq/) CLI tools.
+These instructions use the following CLI tools:
+
+- [`step`](https://smallstep.com/cli/) to manipulate certificates and keys;
 
 ## Understanding the current state of your system
 
@@ -56,10 +57,10 @@ linkerd-identity-data-plane
 However, if you see a message warning you that your trust anchor ("trust root")
 or issuer certificates are expiring soon, then you must rotate them.
 
-Note that this document only applies if the trust root and issuer certificate
-are currently valid. If your trust anchor or issuer certificate have expired,
-please follow the [Replacing Expired
-Certificates Guide](../replacing_expired_certificates/) instead.
+**Note that this document only applies if the trust anchor is currently valid.**
+If your trust anchor has expired, follow the [Replacing Expired Certificates Guide](../replacing_expired_certificates/)
+instead. (If your issuer certificate has expired but your trust anchor is still
+valid, continue on with this document.)
 
 For example, if your issuer certificate has expired, you will see a message
 similar to:
@@ -100,9 +101,26 @@ can skip directly to [Rotating the identity issuer
 certificate](#rotating-the-identity-issuer-certificate) and ignore the trust
 anchor rotation steps.
 
+## Read the current trust anchor certificate from the cluster
+
+To avoid downtime, you need to bundle the existing trust anchor certificate
+with the newly-generated trust anchor certificate into a certificate bundle:
+using the bundle allows workloads ultimately signed with either trust anchor
+to work properly in the mesh. Since certificates are not sensitive information,
+we can simply pull the existing trust anchor certificate directly from the
+cluster.
+
+The following command uses `kubectl` to fetch the Linkerd config from the
+`linkerd-identity-trust-roots` ConfigMap and save it in `original-trust.crt`:
+
+```bash
+kubectl -n linkerd get cm linkerd-identity-trust-roots -o=jsonpath='{.data.ca-bundle\.crt}' > original-trust-anchors.crt
+```
+
 ## Generate a new trust anchor
 
-First, generate a new trust anchor certificate and private key:
+After saving the current trust anchor certificate, generate a new trust anchor
+certificate and private key:
 
 ```bash
 step certificate create root.linkerd.cluster.local ca-new.crt ca-new.key --profile root-ca --no-password --insecure
@@ -110,23 +128,18 @@ step certificate create root.linkerd.cluster.local ca-new.crt ca-new.key --profi
 
 Note that we use `--no-password --insecure` to avoid encrypting these files
 with a passphrase. Store the private key somewhere secure so that it can be
-used in the future to [generate new issuer
-certificates](../generate-certificates/).
+used in the future to [generate new issuer certificates](../generate-certificates/).
 
 ## Bundle your original trust anchor with the new one
 
 Next, we need to bundle the trust anchor currently used by Linkerd together with
-the new anchor. The following command uses `kubectl` to fetch the Linkerd config,
-`jq`/[`yq`](https://github.com/mikefarah/yq) to extract the current trust anchor,
-and `step` to combine it with the newly generated trust anchor:
+the new anchor. We use `step` to combine the two certificates into one bundle:
 
 ```bash
-kubectl -n linkerd get cm linkerd-config -o=jsonpath='{.data.values}' \
-  | yq e .identityTrustAnchorsPEM - > original-trust.crt
-
 step certificate bundle ca-new.crt original-trust.crt bundle.crt
-rm original-trust.crt
 ```
+
+If desired, you can `rm original-trust.crt` too.
 
 ## Deploying the new bundle to Linkerd
 
@@ -143,11 +156,9 @@ or you can also use the `helm upgrade` command:
 helm upgrade linkerd-control-plane --set-file identityTrustAnchorsPEM=./bundle.crt
 ```
 
-This will restart the proxies in the Linkerd control plane, and they will be
-reconfigured with the new trust anchor.
-
-Finally, you must restart the proxy for all injected workloads in your cluster.
-For example, doing that for the `emojivoto` namespace would look like:
+Once this is done, you'll need to restart your meshed workloads so that they use
+the new trust anchor. For example, doing that for the `emojivoto` namespace would
+look like:
 
 ```bash
 kubectl -n emojivoto rollout restart deploy
@@ -213,9 +224,15 @@ linkerd-identity-data-plane
 √ data plane proxies certificate match CA
 ```
 
+At this point, all meshed workloads are ready to accept connections signed
+by either the old or new trust anchor, but they're all still using certificates
+signed by the old trust anchor. To change that, we'll need to rotate the
+issuer certificate.
+
 ## Rotating the identity issuer certificate
 
-To rotate the issuer certificate and key pair, first generate a new pair:
+To rotate the issuer certificate and key pair, start by generating the new
+identity issuer certificate and key:
 
 ```bash
 step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new.key \
@@ -223,13 +240,17 @@ step certificate create identity.linkerd.cluster.local issuer-new.crt issuer-new
 --ca ca-new.crt --ca-key ca-new.key
 ```
 
-Provided that the trust anchor has not expired and that, if recently rotated,
-all proxies have been updated to include a working trust anchor (as outlined in
-the previous section) it is now safe to rotate the identity issuer certificate
-by using the `upgrade` command again:
+This new issuer certificate is signed by our new trust anchor, which is why it
+was critical to install the new trust anchor bundle (as outlined in the previous
+section). Once the new bundle is installed and running `linkerd check` shows all
+green checks and no warnings, you can safely rotate the identity issuer certificate
+and key by using the `upgrade` command again:
 
 ```bash
-linkerd upgrade --identity-issuer-certificate-file=./issuer-new.crt --identity-issuer-key-file=./issuer-new.key | kubectl apply -f -
+linkerd upgrade \
+    --identity-issuer-certificate-file=./issuer-new.crt \
+    --identity-issuer-key-file=./issuer-new.key \
+    | kubectl apply -f -
 ```
 
 or
@@ -240,10 +261,8 @@ helm upgrade linkerd-control-plane \
   --set-file identity.issuer.tls.keyPEM=./issuer-new.key
 ```
 
-At this point Linkerd's `identity` control plane service should detect the
-change of the secret and automatically update its issuer certificates.
-
-To ensure this has happened, you can check for the specific Kubernetes event:
+At this point you can check for the `IssuerUpdated` Kubernetes event to be certain
+that Linkerd saw the new issuer certificate:
 
 ```bash
 kubectl get events --field-selector reason=IssuerUpdated -n linkerd
@@ -287,8 +306,9 @@ linkerd-identity-data-plane
 
 ## Removing the old trust anchor
 
-We can now remove the old trust anchor from the trust bundle we created earlier.
-The `upgrade` command can do that for the Linkerd components:
+Since the old trust anchor is now completely unused, we can now switch
+Linkerd from the bundle we created for the trust anchor to using only
+the new trust anchor certificate:
 
 ```bash
 linkerd upgrade  --identity-trust-anchors-file=./ca-new.crt  | kubectl apply -f -
@@ -301,15 +321,16 @@ helm upgrade linkerd2 --set-file --set-file identityTrustAnchorsPEM=./ca-new.crt
 ```
 
 Note that the ./ca-new.crt file is the same trust anchor you created at the start
-of this process. Additionally, you can use the `rollout restart` command to
-bring the configuration of your other injected resources up to date:
+of this process.
+
+Once again, explicitly restart your meshed workloads:
 
 ```bash
 kubectl -n emojivoto rollout restart deploy
 linkerd check --proxy
 ```
 
-Finally the output of the `check` command should not produce any warnings or
+And, again, the output of the `check` command should not produce any warnings or
 errors:
 
 ```text

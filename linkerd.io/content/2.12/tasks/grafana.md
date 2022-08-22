@@ -24,8 +24,8 @@ Prometheus](../external-prometheus/).
 The easiest and recommended way is to install Grafana's official Helm chart:
 
 ```bash
-helm repo add grafana https://grafana.github.io/helm-charts helm install
-grafana -n grafana --create-namespace grafana/grafana \
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana -n grafana --create-namespace grafana/grafana \
   -f https://raw.githubusercontent.com/linkerd/linkerd2/main/grafana/values.yaml
 ```
 
@@ -63,7 +63,7 @@ grafana.ini:
 ```
 
 Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`
-entry `grafana.url`. For example, if you installed the Grafana offical Helm
+entry `grafana.url`. For example, if you installed the Grafana official Helm
 chart in the `grafana` namespace, you can install Linkerd Viz through the
 command line like so:
 
