@@ -1091,31 +1091,6 @@ For more information on `linkerd inject`, see
 [Step 5: Install the demo app](../../getting-started/#step-5-install-the-demo-app)
 in our [Getting Started](../../getting-started/) guide.
 
-### √ data plane proxy metrics are present in Prometheus {#l5d-data-plane-prom}
-
-Example failure:
-
-```bash
-× data plane proxy metrics are present in Prometheus
-    Data plane metrics not found for linkerd/linkerd-controller-b8c4c48c8-pflc9.
-```
-
-Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
-dashboard:
-
-```bash
-kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
-```
-
-...and then browse to
-[http://localhost:9090/targets](http://localhost:9090/targets), validate the
-`linkerd-proxy` section.
-
-You should see all your pods here. If they are not:
-
-- Prometheus might be experiencing connectivity issues with the k8s api server.
-  Check out the logs and delete the pod to flush any possible transient errors.
-
 ### √ data plane is up-to-date {#l5d-data-plane-version}
 
 Example failure:
@@ -1980,11 +1955,12 @@ Check the logs on the viz extensions's metrics API:
 kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 ```
 
-### √ prometheus is authorized to scrape data plane pods {#l5d-viz-data-plane-prom-authz}
+### √ prometheus is authorized to scrape data plane pods {#l5d-viz-data-plane-prom-authz} 
 
 Example failure:
 
 ```bash
+
 ‼ prometheus is authorized to scrape data plane pods
     prometheus may not be authorized to scrape the following pods:
 	* emojivoto/voting-5f46cbcdc6-p5dhn
@@ -2014,6 +1990,31 @@ the `deny` default inbound policy. In some cases, Prometheus scrapes may also be
 authorized by other, user-generated authorization policies. If metrics from the
 listed pods are present in Prometheus, this warning is a false positive and can
 be safely disregarded.
+
+### √ data plane proxy metrics are present in Prometheus {#l5d-data-plane-prom}
+
+Example failure:
+
+```bash
+× data plane proxy metrics are present in Prometheus
+    Data plane metrics not found for linkerd/linkerd-controller-b8c4c48c8-pflc9.
+```
+
+Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
+dashboard:
+
+```bash
+kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
+```
+
+...and then browse to
+[http://localhost:9090/targets](http://localhost:9090/targets), validate the
+`linkerd-proxy` section.
+
+You should see all your pods here. If they are not:
+
+- Prometheus might be experiencing connectivity issues with the k8s api server.
+  Check out the logs and delete the pod to flush any possible transient errors.
 
 ## The "linkerd-jaeger" checks {#l5d-jaeger}
 
