@@ -214,18 +214,18 @@ need to add the following annotations and label to the CRD so that the
 `linkerd-smi` chart can adopt it:
 
 ```bash
-kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
   meta.helm.sh/release-name=linkerd-smi \
   meta.helm.sh/release-namespace=linkerd-smi
-kubectl label crd/trafficsplits.split.smi-spec.io \
+$ kubectl label crd/trafficsplits.split.smi-spec.io \
   app.kubernetes.io/managed-by=Helm
 ```
 
 Now you can install the Linkerd SMI extension, via Helm:
 
 ```bash
-helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
-helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 And finally you can proceed with the usual [CLI upgrade
@@ -269,7 +269,7 @@ will need to be fed again into the `helm install` command below for the
 command:
 
 ```bash
-helm get -n default values linkerd
+$ helm get -n default values linkerd
 ```
 
 ### Migrate resources to the new charts
@@ -283,18 +283,18 @@ the `linkerd-crds`, `linkerd-control-plane` and `linkerd-smi` charts:
 
 ```bash
 # First migrate the CRDs
-helm -n default get manifest linkerd | \
+$ helm -n default get manifest linkerd | \
   yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' | \
   grep -v '\-\-\-' | \
   xargs -n1 sh -c \
   'kubectl annotate --overwrite crd/$0 meta.helm.sh/release-name=linkerd-crds meta.helm.sh/release-namespace=linkerd'
 
 # Special case for TrafficSplit (only use if you have TrafficSplit CRs)
-kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
   meta.helm.sh/release-name=linkerd-smi meta.helm.sh/release-namespace=linkerd-smi
 
 # Now migrate all the other resources
-helm -n default get manifest linkerd | \
+$ helm -n default get manifest linkerd | \
   yq 'select(.kind != "CustomResourceDefinition")' | \
   yq '.kind, .metadata.name, .metadata.namespace' | \
   grep -v '\-\-\-' |
@@ -305,14 +305,14 @@ helm -n default get manifest linkerd | \
 
 ```bash
 # First make sure you update the helm repo
-helm repo up
+$ helm repo up
 
 # Install the linkerd-crds chart
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+$ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 
 # Install the linkerd-control-plane chart
 # (remember to add any customizations you retrieved above)
-helm install linkerd-control-plane \
+$ helm install linkerd-control-plane \
   -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
@@ -320,8 +320,8 @@ helm install linkerd-control-plane \
   linkerd/linkerd-control-plane
 
 # Optional: if using TrafficSplit CRs
-helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
-helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 ### Cleaning up the old linker2 Helm release
@@ -331,7 +331,7 @@ just remove the Helm release config for the old `linkerd2` chart (assuming you
 used the "Secret" storage backend, which is the default):
 
 ```bash
-kubectl -n default delete secret \
+$ kubectl -n default delete secret \
   --field-selector type=helm.sh/release.v1 \
   -l name=linkerd,owner=helm
 ```
