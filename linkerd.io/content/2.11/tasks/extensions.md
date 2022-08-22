@@ -4,7 +4,7 @@ description = "Add functionality to Linkerd with optional extensions."
 +++
 
 Linkerd extensions are components which can be added to a Linkerd installation
-to enable additional functionality.  By default, the following extensions are
+to enable additional functionality. By default, the following extensions are
 available:
 
 * [viz](../../features/dashboard/): Metrics and visibility features
@@ -29,27 +29,15 @@ For built-in extensions, such as `viz`, `jaeger`, and `multicluster`, that's
 all you need to do. Of course, these extensions can also be installed by with
 Helm by installing that extension's Helm chart.
 
+Once an extension has been installed, it will be included as part of the
+standard `linkerd check` command.
+
 ## Installing third-party extensions
 
-Third-party extensions are also possible, with one additional step: you must
-download the extension's CLI and put it in your path. This will allow you to
-invoke the extension CLI through the Linkerd CLI: any invocation of `linkerd
-foo` will automatically invoke the `linkerd-foo` binary, if it is found on your
-path.
-
-For example, [Buoyant Cloud](https://buoyant.io/cloud) is a free, hosted
-metrics dashboard for Linkerd that can be installed alongside the `viz`
-extension, but doesn't require it. To install this extension, run:
-
-```bash
-## optional
-curl --proto '=https' --tlsv1.2 -sSfL buoyant.cloud/install | sh
-linkerd buoyant install | kubectl apply -f - # hosted metrics dashboard
-```
-
-Once the extension is installed, run `linkerd check` to ensure Linkerd and all
-installed extensions are healthy or run `linkerd foo check` to perform health
-checks for that extension only.
+Third-party extensions require one additional step: you must download the
+extension's CLI and put it in your path. This will allow you to invoke the
+extension CLI through the Linkerd CLI. (E.g. any call to `linkerd foo` will
+automatically call the `linkerd-foo` binary, if it is found on your path.)
 
 ## Listing extensions
 

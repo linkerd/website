@@ -53,18 +53,20 @@ a label selector can be exported to other clusters.
 
 ## Headless services
 
-By default, Linkerd will mirror all exported services from a target cluster as
-`clusterIP` services in a source cluster (they will be assigned a virtual IP).
-This also extends to [headless
-services](https://kubernetes.io/docs/concepts/services-networking/service/#headless-services);
-an exported headless service will be mirrored as a `clusterIP` service in the
-source cluster. In general, headless services are used when a workloads needs a
-stable network identifier or to facilitate service discovery without being tied
-to Kubernetes' native implementation, this allows clients to either implement
-their own load balancing or to address a pod directly through its DNS name. In
-certain situations, it is desireable to preserve some of this functionality,
-especially when working with Kubernetes objects that require it, such as
-[StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/).
+[headless-svc]: https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
+[stateful-set]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+
+By default, Linkerd will mirror all exported services as Kubernetes `clusterIP`
+services. This also extends to [headless services][headless-svc]; an exported
+headless service will be mirrored as `clusterIP` and have an IP address
+assigned to it. In general, headless services _should not have an IP address_,
+they are used when a workloads needs a stable network identifier or to
+facilitate service discovery without being tied to Kubernetes' native
+implementation. This allows clients to either implement their own load
+balancing or to address a pod directly through its DNS name. In certain
+situations, it is desirable to preserve some of this functionality, especially
+when working with Kubernetes objects that require it, such as
+[StatefulSet][stateful-set].
 
 Linkerd's multi-cluster extension can be configured with support for headless
 services when linking two clusters together. When the feature is turned on, the

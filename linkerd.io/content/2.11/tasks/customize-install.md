@@ -73,15 +73,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: linkerd-identity
-spec:
-  template:
-    spec:
-      priorityClassName: linkerd-critical
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: linkerd-controller
+  namespace: linkerd
 spec:
   template:
     spec:
@@ -98,11 +90,11 @@ patchesStrategicMerge:
 - patch-priority-class.yaml
 ```
 
-Applying this to your cluster requires taking the output of `kustomize build`
+Applying this to your cluster requires taking the output of `kustomize`
 and piping it to `kubectl apply`. For example you can run:
 
 ```bash
-kubectl kustomize build . | kubectl apply -f -
+kubectl kustomize . | kubectl apply -f -
 ```
 
 ## Modify Grafana Configuration
@@ -117,6 +109,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: grafana-config
+  namespace: linkerd-viz
 data:
   grafana.ini: |-
     instance_name = grafana
@@ -137,9 +130,9 @@ patchesStrategicMerge:
 - grafana.yaml
 ```
 
-Finally, apply this to your cluster by generating YAML with `kustomize build`
+Finally, apply this to your cluster by generating YAML with `kustomize`
 and piping the output to `kubectl apply`.
 
 ```bash
-kubectl kustomize build . | kubectl apply -f -
+kubectl kustomize . | kubectl apply -f -
 ```
