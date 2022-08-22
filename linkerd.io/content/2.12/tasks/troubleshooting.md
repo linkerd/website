@@ -374,12 +374,6 @@ $ kubectl auth can-i create validatingwebhookconfigurations
 yes
 ```
 
-### √ proxy-init container runs as root user for docker container runtime {#l5d-proxy-init-run-as-root}
-
-The Docker container runtime requires that the proxy-init container must run as
-root. If any nodes in the cluster are using the Docker container runtime,
-Linkerd must be installed with the `--set proxyInit.runAsRoot=true` setting.
-
 ### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
 
 Example failure:
