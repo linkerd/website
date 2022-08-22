@@ -324,7 +324,7 @@ $ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
 $ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
-### Cleaning up the old linker2 Helm release
+### Cleaning up the old linkerd2 Helm release
 
 The `helm delete` command would delete all the linkerd resources, so instead we
 just remove the Helm release config for the old `linkerd2` chart (assuming you
