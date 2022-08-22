@@ -7,6 +7,8 @@ aliases = [
 ]
 +++
 
+<!-- markdownlint-disable-file MD014 -->
+
 In this guide, we'll walk you through how to upgrade Linkerd.
 
 Before starting, read through the version-specific upgrade notices below, which
