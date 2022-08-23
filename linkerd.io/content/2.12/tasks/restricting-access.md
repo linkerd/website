@@ -18,7 +18,6 @@ if you haven't already done this.
 
 ## Setup
 
-
 Inject and install the Emojivoto application:
 
 ```bash
