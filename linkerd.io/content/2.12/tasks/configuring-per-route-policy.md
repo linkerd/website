@@ -303,8 +303,8 @@ default              default:all-unauthenticated  default/all-unauthenticated   
 probe                default:all-unauthenticated  default/probe                                   0.0rps  100.00%  0.2rps          1ms          1ms          1ms
 ```
 
-And, if we open http://localhost:7000 and interact with the frontend, the lists
-of authors and books are still displayed correctly.
+And, if we open [http://localhost:7000/](http://localhost:7000/) and interact
+with the frontend, the lists of authors and books are still displayed correctly.
 
 ## Authorizing additional routes
 
