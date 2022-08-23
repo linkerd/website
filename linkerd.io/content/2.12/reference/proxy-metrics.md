@@ -170,6 +170,10 @@ layer.
   is updated when the connection closes.
 * `tcp_connection_duration_ms`: A histogram of the duration of the lifetime of a
   connection, in milliseconds. This is updated when the connection closes.
+* `inbound_tcp_errors_total`: A counter of the total number of inbound TCP
+  connections that could not be processed due to a proxy error.
+* `outbound_tcp_errors_total`: A counter of the total number of outbound TCP
+  connections that could not be processed due to a proxy error.
 
 ### Labels
 
