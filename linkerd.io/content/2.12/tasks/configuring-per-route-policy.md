@@ -14,7 +14,7 @@ a service.
 
 This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
-[Restricting Access to Services](restricting-access) example. For more
+[Restricting Access to Services](../restricting-access) example. For more
 comprehensive documentation of the policy resources, see the
 [Policy reference docs](../../reference/authorization-policy/).
 
@@ -113,7 +113,7 @@ generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a `Server` resource for the `authors` deployment's service
 port. For details on `Server` resources, see
-[here](restricting-access-to-services#creating-a-server-resource).
+[here](../restricting-access#creating-a-server-resource).
 
 ```bash
 cat << EOF | kubectl apply -f -
