@@ -78,12 +78,14 @@ Voting start to get rejected.
 
 We can use the `linkerd viz authz` command to look at the authorization status
 of requests coming to the voting service and see that all incoming requests
-are currently unauthorized:
+to the voting-grpc server are currently unauthorized:
 
 ```bash
 > linkerd viz authz -n emojivoto deploy/voting
-SERVER       AUTHZ           SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
-voting-grpc  [UNAUTHORIZED]        -  0.9rps            -            -            -
+ROUTE    SERVER                       AUTHORIZATION                UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
+default  default:all-unauthenticated  default/all-unauthenticated        0.0rps  100.00%  0.1rps          1ms          1ms          1ms
+probe    default:all-unauthenticated  default/probe                      0.0rps  100.00%  0.2rps          1ms          1ms          1ms
+default  voting-grpc                                                     1.0rps    0.00%  0.0rps          0ms          0ms          0ms
 ```
 
 ## Creating a ServerAuthorization resource
@@ -124,8 +126,10 @@ UNAUTHORIZED requests displayed for a short amount of time.
 
 ```bash
 > linkerd viz authz -n emojivoto deploy/voting
-SERVER       AUTHZ        SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
-voting-grpc  voting-grpc   70.00%  1.0rps          1ms          1ms          1ms
+ROUTE    SERVER                       AUTHORIZATION                    UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
+default  default:all-unauthenticated  default/all-unauthenticated            0.0rps  100.00%  0.1rps          1ms          1ms          1ms
+probe    default:all-unauthenticated  default/probe                          0.0rps  100.00%  0.2rps          1ms          1ms          1ms
+default  voting-grpc                  serverauthorization/voting-grpc        0.0rps   83.87%  1.0rps          1ms          1ms          1ms
 ```
 
 We can also test that request from other pods will be rejected by creating a
@@ -162,72 +166,19 @@ following logic when deciding whether to allow a request:
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 ```bash
-> linkerd upgrade --set policyController.defaultAllowPolicy=deny | kubectl apply -f -
+> linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
 ```
 
 Alternatively, default policies can be set on individual workloads or namespaces
 by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
 [Policy reference docs](../../reference/authorization-policy/) for more details.
 
-This means that ALL requests will be rejected unless they are explicitly
-authorized by creating Server and ServerAuthorization resources.  One important
-consequence of this is that liveness and readiness probes will need to be
-explicitly authorized or else Kubernetes will not be able to recognize the pods as
-live or ready and will restart them.
-
-This policy allows all clients to reach the Linkerd admin port so that Kubernetes
-can perform liveness and readiness checks:
-
-```bash
-> cat << EOF | kubectl apply -f -
----
-# Server "admin": matches the admin port for every pod in this namespace
-apiVersion: policy.linkerd.io/v1beta1
-kind: Server
-metadata:
-  namespace: emojivoto
-  name: admin
-spec:
-  port: linkerd-admin
-  podSelector:
-    matchLabels: {} # every pod
-  proxyProtocol: HTTP/1
----
-# ServerAuthorization "admin-everyone": allows unauthenticated access to the
-# "admin" Server, so that Kubernetes health checks can get through.
-apiVersion: policy.linkerd.io/v1beta1
-kind: ServerAuthorization
-metadata:
-  namespace: emojivoto
-  name: admin-everyone
-spec:
-  server:
-    name: admin
-  client:
-    unauthenticated: true
-```
-
-If you know the IP address or range of the Kubelet (which performs the health
-checks), you can further restrict the ServerAuthorization to these IP addresses
-or ranges. For example, if you know that the Kubelet is running at `10.244.0.1`
-then your ServerAuthorization can instead become:
-
-```yaml
-# ServerAuthorization "admin-kublet": allows unauthenticated access to the
-# "admin" Server from the kubelet, so that Kubernetes health checks can get through.
-apiVersion: policy.linkerd.io/v1beta1
-kind: ServerAuthorization
-metadata:
-  namespace: emojivoto
-  name: admin-kubelet
-spec:
-  server:
-    name: admin
-  client:
-    networks:
-    - cidr: 10.244.0.1/32
-    unauthenticated: true
-```
+If a port does not have a Server defined, Linkerd will automatically use a
+default Server which allows readiness and liveness probes. However, if you
+create a Server resource for a port which handles probes, you will need to
+explicitly create an authorization to allow those probe requests. For more
+information about adding route-scoped authorizations, see
+[Configuring Per-Route Policy](../configuring-per-route-policy/).
 
 ## Further Considerations
 
