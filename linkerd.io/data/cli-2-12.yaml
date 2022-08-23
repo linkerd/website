@@ -51,6 +51,10 @@ AnnotationsReference:
   Name: config.linkerd.io/proxy-log-level
 - Description: Log format (plain or json) for the proxy
   Name: config.linkerd.io/proxy-log-format
+- Description: Enables HTTP access logging in the proxy. Accepted values are `apache`,
+    to output the access log in the Appache Common Log Format, and `json`, to output
+    the access log in JSON.
+  Name: config.linkerd.io/access-log
 - Description: Enable service profiles for non-Kubernetes services
   Name: config.linkerd.io/enable-external-profiles
 - Description: Tag to be used for the Linkerd proxy images
@@ -1986,6 +1990,8 @@ CLIReference:
       * ts/my-split
       * authority
       * au/my-authority
+      * httproute/my-route
+      * route/my-route
       * all
 
       Valid resource types include:
@@ -1999,6 +2005,8 @@ CLIReference:
       * replicationcontrollers
       * statefulsets
       * authorities (not supported in --from)
+      * authorizationpolicies (not supported in --from)
+      * httproutes (not supported in --from)
       * services (not supported in --from)
       * servers (not supported in --from)
       * serverauthorizations (not supported in --from)
@@ -2031,7 +2039,11 @@ CLIReference:
     --from ns/default\n\n  # Get all inbound stats to the test namespace.\n  linkerd
     viz stat ns/test\n\n  # Get all inbound stats to the emoji-grpc server\n  linkerd
     viz stat server/emoji-grpc\n\n  # Get all inbound stats to the web-public server
-    authorization resource\n  linkerd viz stat serverauthorization/web-public\n  "
+    authorization resource\n  linkerd viz stat serverauthorization/web-public\n\n
+    \ # Get all inbound stats to the web-get and web-delete HTTP route resources\n
+    \ linkerd viz stat route/web-get route/web-delete\n\n  # Get all inbound stats
+    to the web-authz authorization policy resource\n  linkerd viz stat authorizationpolicy/web-authz\n
+    \ "
   InheritedOptions: null
   Name: viz stat
   Options:
