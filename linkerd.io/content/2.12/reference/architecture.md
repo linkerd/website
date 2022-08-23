@@ -102,4 +102,5 @@ The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
 container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. It [uses
 iptables](../iptables/) to route all TCP traffic to and from the pod through
-the proxy.
+the proxy. Linkerd's init container can be run in [different
+modes](../../features/nft/) which determine what iptables variant is used.
