@@ -76,7 +76,8 @@ policy can be applied.
 Two policy CRDs represent authentication rules that must be satisfied as part of
 a policy rule:
 
-- `MeshTLSAuthentication`: authentication based on secure workload identities
+- `MeshTLSAuthentication`: authentication based on [secure workload
+  identities](../automatic-mtls/)
 - `NetworkAuthentication`: authentication based on IP address
 
 And finally, two policy CRDs represent policy itself: the mapping of
