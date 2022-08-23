@@ -7,7 +7,7 @@ aliases = []
 <!-- markdownlint-disable-file MD014 -->
 
 In addition to [enforcing authorization policies at the service
-level](restricting-access), finer-grained authorization policies can also be
+level](../restricting-access/), finer-grained authorization policies can also be
 configured for individual HTTP routes. In this example, we'll use the Books demo
 app to demonstrate how to control which clients can access particular routes on
 a service.
@@ -113,7 +113,7 @@ generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a [`Server`] resource for the `authors` deployment's service
 port. For details on [`Server`] resources, see
-[here](../restricting-access#creating-a-server-resource).
+[here](../restricting-access/#creating-a-server-resource).
 
 ```bash
 cat << EOF | kubectl apply -f -
