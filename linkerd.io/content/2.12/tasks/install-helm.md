@@ -75,7 +75,6 @@ If you are using [Linkerd's CNI plugin](../../features/cni/), you must also add 
 
 ## Enabling high availability mode
 
-
 The `linkerd-control-plane` chart contains a file `values-ha.yaml` that overrides
 some default values to set things up under a high-availability scenario, analogous
 to the `--ha` option in `linkerd install`. Values such as higher number of
