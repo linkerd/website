@@ -1772,23 +1772,23 @@ Example failure:
 
 ‼ prometheus is authorized to scrape data plane pods
     prometheus may not be authorized to scrape the following pods:
-    * emojivoto/voting-5f46cbcdc6-p5dhn
-    * emojivoto/emoji-54f8786975-6qc8s
-    * emojivoto/vote-bot-85dfbf8996-86c44
-    * emojivoto/web-79db6f4548-4mzkg
+        * emojivoto/voting-5f46cbcdc6-p5dhn
+        * emojivoto/emoji-54f8786975-6qc8s
+        * emojivoto/vote-bot-85dfbf8996-86c44
+        * emojivoto/web-79db6f4548-4mzkg
     consider running `linkerd viz allow-scrapes` to authorize prometheus scrapes
     see https://linkerd.io/2/checks/#l5d-viz-data-plane-prom-authz for hints
 ```
 
 This warning indicates that the listed pods have the
-[`deny` default inbound policy](features/server-policy#policy-annotations),
+[`deny` default inbound policy](../../features/server-policy/#policy-annotations),
 which may prevent the `linkerd-viz` Prometheus instance from scraping the data
 plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](features/server-policy) authorizing Prometheus to
-scrape the data plane proxies in a namespace:
+generates [policy resources](../../features/server-policy/) authorizing
+Prometheus to scrape the data plane proxies in a namespace:
 
 ```bash
 linkerd viz allow-scrapes --namespace emojivoto | kubectl apply -f -
