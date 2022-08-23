@@ -10,17 +10,13 @@ to the Voting service so that it may only be called from the Web service.
 For a more comprehensive description of the policy resources, see the
 [Policy reference docs](../../reference/authorization-policy/).
 
+## Prerequisites
+
+To use this guide, you'll need to have Linkerd installed on your cluster, along
+with its Viz extension. Follow the [Installing Linkerd Guide](../install/)
+if you haven't already done this.
+
 ## Setup
-
-Ensure that you have Linkerd version stable-2.11.0 or later installed, and that
-it is healthy:
-
-```bash
-$ linkerd install | kubectl apply -f -
-...
-$ linkerd check -o short
-...
-```
 
 Inject and install the Emojivoto application:
 
@@ -28,15 +24,6 @@ Inject and install the Emojivoto application:
 $ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
 $ linkerd check -n emojivoto --proxy -o short
-...
-```
-
-In order to observe what's going on, we'll also install the Viz extension:
-
-```bash
-$ linkerd viz install | kubectl apply -f -
-...
-$ linkerd viz check
 ...
 ```
 

@@ -18,26 +18,11 @@ For a basic introduction to Linkerd authorization policy, start with the
 comprehensive documentation of the policy resources, see the
 [Policy reference docs](../../reference/authorization-policy/).
 
-## Setup
+## Prerequisites
 
-Ensure that you have Linkerd version stable-2.12.0 or later installed, and that
-it is healthy:
-
-```bash
-$ linkerd install | kubectl apply -f -
-...
-$ linkerd check -o short
-...
-```
-
-In order to observe what's going on, we'll also install the Viz extension:
-
-```bash
-$ linkerd viz install | kubectl apply -f -
-...
-$ linkerd viz check
-...
-```
+To use this guide, you'll need to have Linkerd installed on your cluster, along
+with its Viz extension. Follow the [Installing Linkerd Guide](../install/)
+if you haven't already done this.
 
 ## Install the Books demo application
 
@@ -323,7 +308,7 @@ Attempting to delete an author results in a "not found" error in the web UI:
 
 {{< fig src="/images/books/delete-404.png" title="Not found" >}}
 
-and similarly, adding a new author tkaes us to an error page.
+and similarly, adding a new author takes us to an error page.
 
 This is because creating or deleting an author will send a `PUT` or `DELETE`
 request, respectively, from `webapp` to `authors`. The route we created to
