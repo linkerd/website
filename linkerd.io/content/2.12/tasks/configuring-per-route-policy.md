@@ -24,6 +24,8 @@ Ensure that you have Linkerd version stable-2.12.0 or later installed, and that
 it is healthy:
 
 ```bash
+$ linkerd install --crds | kubectl apply -f -
+...
 $ linkerd install | kubectl apply -f -
 ...
 $ linkerd check -o short
@@ -323,7 +325,7 @@ Attempting to delete an author results in a "not found" error in the web UI:
 
 {{< fig src="/images/books/delete-404.png" title="Not found" >}}
 
-and similarly, adding a new author tkaes us to an error page.
+and similarly, adding a new author takes us to an error page.
 
 This is because creating or deleting an author will send a `PUT` or `DELETE`
 request, respectively, from `webapp` to `authors`. The route we created to
