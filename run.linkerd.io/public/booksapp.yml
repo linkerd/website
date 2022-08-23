@@ -9,7 +9,7 @@ metadata:
 spec:
   selector:
     app: webapp
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: service
     port: 7000
@@ -29,6 +29,7 @@ metadata:
   labels:
     app: webapp
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 3
   selector:
@@ -40,6 +41,7 @@ spec:
       labels:
         app: webapp
         project: booksapp
+        app.kubernetes.io/part-of: booksapp
     spec:
       serviceAccountName: webapp
       dnsPolicy: ClusterFirst
@@ -69,6 +71,7 @@ metadata:
   labels:
     app: authors
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   selector:
     app: authors
@@ -91,6 +94,7 @@ metadata:
   labels:
     app: authors
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -102,6 +106,7 @@ spec:
       labels:
         app: authors
         project: booksapp
+        app.kubernetes.io/part-of: booksapp
     spec:
       dnsPolicy: ClusterFirst
       serviceAccountName: authors
@@ -131,6 +136,7 @@ metadata:
   labels:
     app: books
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   selector:
     app: books
@@ -153,6 +159,7 @@ metadata:
   labels:
     app: books
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
@@ -199,6 +206,7 @@ metadata:
   labels:
     app: traffic
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   replicas: 1
   selector:
