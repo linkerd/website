@@ -4,6 +4,8 @@ description = "Fine-grained authorization policies can be configured for individ
 aliases = []
 +++
 
+<!-- markdownlint-disable-file MD014 -->
+
 In addition to [enforcing authorization policies at the service
 level](restricting-access), finer-grained authorization policies can also be
 configured for individual HTTP routes. In this example, we'll use the Books demo
@@ -27,7 +29,6 @@ $ linkerd install | kubectl apply -f -
 $ linkerd check -o short
 ...
 ```
-
 
 In order to observe what's going on, we'll also install the Viz extension:
 
@@ -157,7 +158,6 @@ by defining how to match a request for a given route. We will now create
 First, let's create an `HTTPRoute` that matches `GET` requests to the `authors`
 service's API:
 
-
 ```bash
 cat << EOF | kubectl apply -f -
 
@@ -194,7 +194,6 @@ rule that matches `GET` requests to paths starting with the path segment
 Now that we've created a route, we can associate policy with that route. We'll
 create an `AuthorizationPolicy` resource that defines policy for our
 `HTTPRoute`:
-
 
 ```bash
 cat << EOF | kubectl apply -f -
