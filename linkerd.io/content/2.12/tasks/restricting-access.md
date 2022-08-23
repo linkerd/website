@@ -243,4 +243,4 @@ clients will be authorized immediately.
 In addition to service-level authorization policy, authorization policy can also
 be configured for individual HTTP routes. To learn more about per-route policy,
 see the documentation on [configuring per-route
-policy](../configuring-per-route-policy).
+policy](../configuring-per-route-policy/).

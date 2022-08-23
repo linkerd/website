@@ -14,7 +14,7 @@ a service.
 
 This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
-[Restricting Access to Services](../restricting-access) example. For more
+[Restricting Access to Services](../restricting-access/) example. For more
 comprehensive documentation of the policy resources, see the
 [Policy reference docs](../../reference/authorization-policy/).
 
