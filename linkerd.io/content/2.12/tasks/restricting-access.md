@@ -237,3 +237,10 @@ requests were being rejected. To avoid this situation in live systems, we
 recommend you either create the policy resources before deploying your services
 or to create the `ServiceAuthorizations` BEFORE creating the `Server` so that
 clients will be authorized immediately.
+
+## Per-Route Policy
+
+In addition to service-level authorization policy, authorization policy can also
+be configured for individual HTTP routes. To learn more about per-route policy,
+see the documentation on [configuring per-route
+policy](configuring-per-route-policy).
