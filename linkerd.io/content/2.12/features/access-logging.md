@@ -1,6 +1,6 @@
 +++
 title = "HTTP Access Logging"
-description = "Linkerd proxie can be configured to emit HTTP access logs."
+description = "Linkerd proxies can be configured to emit HTTP access logs."
 aliases = [
   "../access-logging/",
   "../proxy-access-logging/",
