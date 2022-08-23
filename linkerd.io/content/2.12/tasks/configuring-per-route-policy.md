@@ -156,10 +156,10 @@ by defining how to match a request for a given route. We will now create
 `HTTPRoute` resources for the `authors` service.
 
 {{< note >}}
-Routes configured in service profiles are different from HTTPRoute resources.
+Routes configured in service profiles are different from `HTTPRoute` resources.
 Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. HTTPRoute resources, on the
-other hand, can be the target of AuthorizationPolicies and allow you to specify
+client-side behavior such as retries and timeouts. `HTTPRoute` resources, on the
+other hand, can be the target of `AuthorizationPolicies` and allow you to specify
 per-route authorization.
 {{< /note >}}
 
