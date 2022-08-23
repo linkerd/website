@@ -176,7 +176,9 @@ by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
 If a port does not have a Server defined, Linkerd will automatically use a
 default Server which allows readiness and liveness probes. However, if you
 create a Server resource for a port which handles probes, you will need to
-explicitly create an authorization to allow those probe requests.
+explicitly create an authorization to allow those probe requests. For more
+information about adding route-scoped authorizations, see
+[Configuring Per-Route Policy](../configuring-per-route-policy/).
 
 ## Further Considerations
 
