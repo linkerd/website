@@ -17,9 +17,11 @@ access logging. Adding this annotation to a namespace or workload configures the
 proxy injector to set an environment variable in the proxy container that
 configures access logging.
 
-Enabling HTTP access logging has a performance cost, and may increase CPU time
-and/or tail latency under load, compared to proxies without access logging
-enabled. Therefore, access logging is disabled by default.
+HTTP access logging is disabled by default because it has a performance impact,
+compared to proxies without access logging enabled. Enabling access logging may
+increase tail latency and CPU consumption under load. The severity of
+this performance cost may vary depending on the traffic being proxied, and may
+be acceptable in some environments.
 
 {{< note >}}
 The proxy's HTTP access log is distinct from proxy debug logging, which is
