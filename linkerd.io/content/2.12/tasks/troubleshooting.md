@@ -1954,13 +1954,13 @@ Example failure:
 ```
 
 This warning indicates that the listed pods have the
-[`deny` default inbound policy](features/server-policy#policy-annotations),
+[`deny` default inbound policy](../../features/server-policy#policy-annotations),
 which may prevent the `linkerd-viz` Prometheus instance from scraping the data
 plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](features/server-policy) authorizing Prometheus to
+generates [policy resources](../../features/server-policy) authorizing Prometheus to
 scrape the data plane proxies in a namespace:
 
 ```bash
