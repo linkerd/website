@@ -9,14 +9,12 @@ However, sometimes it is useful to increase the verbosity of proxy logs to
 assist with diagnosing proxy behavior. Happily, Linkerd allows you to modify
 these logs dynamically.
 
-
 {{< note >}}
 The proxy's proxy debug logging is distinct from the proxy HTTP access log,
 which is configured separately. See the documentation on [enabling access
 logging](../enabling-access-logging/) for details on configuring Linkerd proxies
 to emit an HTTP access log.
 {{< /note >}}
-
 
 The log level of a Linkerd proxy can be modified on the fly by using the proxy's
 `/proxy-log-level` endpoint on the admin-port.
