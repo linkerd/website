@@ -111,8 +111,8 @@ By default, the `authors` deployment uses the cluster's default authorization
 policy, "all-unauthenticated". In addition, a separate authorization is
 generated to allow liveness and readiness probes from the kubelet.
 
-First, we'll create a `Server` resource for the `authors` deployment's service
-port. For details on `Server` resources, see
+First, we'll create a [`Server`] resource for the `authors` deployment's service
+port. For details on [`Server`] resources, see
 [here](../restricting-access#creating-a-server-resource).
 
 ```bash
@@ -133,7 +133,7 @@ spec:
 EOF
 ```
 
-Now that we've defined a `Server` for the authors `deployment`, we can run the
+Now that we've defined a [`Server`] for the authors `Deployment`, we can run the
 `linkerd viz authz` command again, and see that all traffic to `authors` is
 currently unauthorized:
 
@@ -151,19 +151,19 @@ Next, we'll create per-route policy resources to authorize traffic to the
 
 ## Creating per-route policy resources
 
-The `HTTPRoute` resource is used to configure policy for individual HTTP routes,
+The [`HTTPRoute`] resource is used to configure policy for individual HTTP routes,
 by defining how to match a request for a given route. We will now create
-`HTTPRoute` resources for the `authors` service.
+[`HTTPRoute`] resources for the `authors` service.
 
 {{< note >}}
-Routes configured in service profiles are different from `HTTPRoute` resources.
+Routes configured in service profiles are different from [`HTTPRoute`] resources.
 Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. `HTTPRoute` resources, on the
-other hand, can be the target of `AuthorizationPolicies` and allow you to specify
+client-side behavior such as retries and timeouts. [`HTTPRoute`] resources, on the
+other hand, can be the target of [`AuthorizationPolicies`] and allow you to specify
 per-route authorization.
 {{< /note >}}
 
-First, let's create an `HTTPRoute` that matches `GET` requests to the `authors`
+First, let's create an [`HTTPRoute`] that matches `GET` requests to the `authors`
 service's API:
 
 ```bash
@@ -192,16 +192,16 @@ spec:
 EOF
 ```
 
-This will create an `HTTPRoute` targeting the `authors-server` `Server` resource
+This will create an [`HTTPRoute`] targeting the `authors-server` [`Server`] resource
 we defined previously. The `rules` section defines a list of matches, which
-determine which requests match the `HTTPRoute`. Here, we 've defined a match
+determine which requests match the [`HTTPRoute`]. Here, we 've defined a match
 rule that matches `GET` requests to the path `/authors.json`, and a second match
 rule that matches `GET` requests to paths starting with the path segment
 `/authors`.
 
 Now that we've created a route, we can associate policy with that route. We'll
-create an `AuthorizationPolicy` resource that defines policy for our
-`HTTPRoute`:
+create an [`AuthorizationPolicy`] resource that defines policy for our
+[`HTTPRoute`]:
 
 ```bash
 cat << EOF | kubectl apply -f -
@@ -234,20 +234,20 @@ spec:
 EOF
 ```
 
-This command creates an `AuthorizationPolicy` whose `targetRef` selects the
-`authors-get-route` `HTTPRoute` resource we just created. An
-`AuthorizationPolicy` resource can require a a variety of forms of
-authentication. In this case, we we've defined a `MeshTLSAuthentication`
+This command creates an [`AuthorizationPolicy`] whose `targetRef` selects the
+`authors-get-route` [`HTTPRoute`] resource we just created. An
+[`AuthorizationPolicy`] resource can require a a variety of forms of
+authentication. In this case, we we've defined a [`MeshTLSAuthentication`]
 resource, named `authors-get-authn`, that requires the TLS identity of the
 client to match the `ServiceAccount` of either the `books` service or the
 `webapp` service.
 
-Additionally, because we have created an `HTTPRoute` referencing the `authors`
+Additionally, because we have created an [`HTTPRoute`] referencing the `authors`
 service, the default route for liveness and readiness probes will no longer be
 used, and the `authors` service will become unready.
 
-Therefore, we must also create a `HTTPRoute` and `AuthorizationPolicy` so that
-probes from the Kubelet are still authorized:
+Therefore, we must also create a [`HTTPRoute`] and [`AuthorizationPolicy`] so
+that probes from the Kubelet are still authorized:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -296,8 +296,8 @@ spec:
 EOF
 ```
 
-Here, we use the `NetworkAuthentication` resource (rather than
-`MeshTLSAuthentication`) to authenticate only probes
+Here, we use the [`NetworkAuthentication`] resource (rather than
+[`MeshTLSAuthentication`]) to authenticate only probes
 coming from the local network (0.0.0.0).
 
 Running `linkerd viz authz` again, we can now see that our new policies exist:
@@ -330,7 +330,7 @@ request, respectively, from `webapp` to `authors`. The route we created to
 authorize `GET` requests does not match `PUT` or `DELETE` requests, so the
 `authors` proxy rejects those requests with a 404 error.
 
-To resolve this, we'll create an additional `HTTPRoute` resource that matches
+To resolve this, we'll create an additional [`HTTPRoute`] resource that matches
 `PUT`, `POST`, and `DELETE` requests:
 
 ```bash
@@ -416,8 +416,8 @@ spec:
 EOF
 ```
 
-These configurations are very similar to the `AuthorizationPolicy` and
-`MeshTLSAuthentication` resources we created in the previous section. However,
+These configurations are very similar to the [`AuthorizationPolicy`] and
+[`MeshTLSAuthentication`] resources we created in the previous section. However,
 in this case, we only authenticate the `webapp` deployment's `ServiceAccount`
 (and _not_ the `books` deployment) to access this route.
 
@@ -450,3 +450,12 @@ access to the `books` service as well. Or, to learn more about Linkerd
 authorization policy in general, and the various configurations that are
 available, see see the
 [Policy reference docs](../../reference/authorization-policy/).
+
+[`Server`]: ../../reference/authorization-policy#server
+[`HTTPRoute`]: ../../reference/authorization-policy#httproute
+[`AuthorizationPolicy`]:
+    ../../reference/authorization-policy#authorizationpolicy
+[`MeshTLSAuthentication`]:
+    ../../reference/authorization-policy#meshtlsauthentication
+[`NetworkAuthentication`]:
+    ../../reference/authorization-policy#networkauthentication
