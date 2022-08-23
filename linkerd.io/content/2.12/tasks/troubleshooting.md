@@ -84,44 +84,6 @@ These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify you have the correct
 Kubernetes capability permissions to install Linkerd.
 
-### √ has NET_ADMIN capability {#pre-k8s-cluster-net-admin}
-
-Example failure:
-
-```bash
-× has NET_ADMIN capability
-    found 3 PodSecurityPolicies, but none provide NET_ADMIN
-    see https://linkerd.io/checks/#pre-k8s-cluster-net-admin for hints
-```
-
-Linkerd installation requires the `NET_ADMIN` Kubernetes capability, to allow
-for modification of iptables.
-
-For more information, see the Kubernetes documentation on
-[Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
-[Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the
-[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
-
-### √ has NET_RAW capability {#pre-k8s-cluster-net-raw}
-
-Example failure:
-
-```bash
-× has NET_RAW capability
-    found 3 PodSecurityPolicies, but none provide NET_RAW
-    see https://linkerd.io/checks/#pre-k8s-cluster-net-raw for hints
-```
-
-Linkerd installation requires the `NET_RAW` Kubernetes capability, to allow for
-modification of iptables.
-
-For more information, see the Kubernetes documentation on
-[Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/),
-[Security Contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/),
-and the
-[man page on Linux Capabilities](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
-
 ## The "pre-linkerd-global-resources" checks {#pre-l5d-existence}
 
 These checks only run when the `--pre` flag is set. This flag is intended for
@@ -146,37 +108,6 @@ single namespace, with limited cluster access:
 ```bash
 linkerd check --pre --single-namespace
 ```
-
-### √ control plane namespace exists {#pre-single-ns}
-
-```bash
-× control plane namespace exists
-    The "linkerd" namespace does not exist
-```
-
-In `--single-namespace` mode, `linkerd check` assumes that the installer does
-not have permission to create a namespace, so the installation namespace must
-already exist.
-
-By default the `linkerd` namespace is used. To use a different namespace run:
-
-```bash
-linkerd check --pre --single-namespace --linkerd-namespace linkerd-test
-```
-
-### √ can create Kubernetes resources {#pre-single-k8s}
-
-The subsequent checks in this section validate whether you have permission to
-create the Kubernetes resources required for Linkerd `--single-namespace`
-installation, specifically:
-
-```bash
-√ can create Roles
-√ can create RoleBindings
-```
-
-For more information on cluster access, see the
-[GKE Setup](../install/#gke) section above.
 
 ## The "kubernetes-api" checks {#k8s-api}
 
@@ -220,9 +151,9 @@ kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
     --server=${KUBE_CONTEXT}
 ```
 
-## The "kubernetes-version" checks {#k8s-version}
+## The "kubernetes-version" checks
 
-### √ is running the minimum Kubernetes API version {#k8s-version-api}
+### √ is running the minimum Kubernetes API version {#k8s-version}
 
 Example failure:
 
@@ -261,22 +192,7 @@ Documentation.
 ## The "linkerd-config" checks {#l5d-config}
 
 This category of checks validates that Linkerd's cluster-wide RBAC and related
-resources have been installed. These checks run via a default `linkerd check`,
-and also in the context of a multi-stage setup, for example:
-
-```bash
-# install cluster-wide resources (first stage)
-linkerd install config | kubectl apply -f -
-
-# validate successful cluster-wide resources installation
-linkerd check config
-
-# install Linkerd control plane
-linkerd install control-plane | kubectl apply -f -
-
-# validate successful control-plane installation
-linkerd check
-```
+resources have been installed.
 
 ### √ control plane Namespace exists {#l5d-existence-ns}
 
@@ -455,30 +371,6 @@ Also ensure you have permission to create ValidatingWebhookConfigurations:
 
 ```bash
 $ kubectl auth can-i create validatingwebhookconfigurations
-yes
-```
-
-### √ control plane PodSecurityPolicies exist {#l5d-existence-psp}
-
-Example failure:
-
-```bash
-× control plane PodSecurityPolicies exist
-    missing PodSecurityPolicies: linkerd-linkerd-control-plane
-    see https://linkerd.io/checks/#l5d-existence-psp for hints
-```
-
-Ensure the Linkerd PodSecurityPolicy exists:
-
-```bash
-$ kubectl get podsecuritypolicies | grep linkerd
-linkerd-linkerd-control-plane   false   NET_ADMIN,NET_RAW   RunAsAny   RunAsAny    MustRunAs   MustRunAs   true             configMap,emptyDir,secret,projected,downwardAPI,persistentVolumeClaim
-```
-
-Also ensure you have permission to create PodSecurityPolicies:
-
-```bash
-$ kubectl auth can-i create podsecuritypolicies
 yes
 ```
 
@@ -933,46 +825,20 @@ a podCIDR which is not included in Linkerd's `clusterNetworks`. Traffic to pods
 in this network may not be meshed properly. To remedy this, update the
 `clusterNetworks` setting to include all pod networks in the cluster.
 
-### √ can initialize the client {#l5d-api-control-client}
+### √ cluster networks contains all pods {#l5d-cluster-networks-pods}
 
 Example failure:
 
 ```bash
-× can initialize the client
-    parse http:// bad/: invalid character " " in host name
+× the Linkerd clusterNetworks [10.244.0.0/24] do not include pod default/foobar (104.21.63.202)
+    see https://linkerd.io/2/checks/#l5d-cluster-networks-pods for hints
 ```
 
-Verify that a well-formed `--api-addr` parameter was specified, if any:
-
-```bash
-linkerd check --api-addr " bad"
-```
-
-### √ can query the control plane API {#l5d-api-control-api}
-
-Example failure:
-
-```bash
-× can query the control plane API
-    Post http://8.8.8.8/api/v1/Version: context deadline exceeded
-```
-
-This check indicates a connectivity failure between the cli and the Linkerd
-control plane. To verify connectivity, manually connect to a control plane pod:
-
-```bash
-kubectl -n linkerd port-forward \
-    $(kubectl -n linkerd get po \
-        --selector=linkerd.io/control-plane-component=identity \
-        -o jsonpath='{.items[*].metadata.name}') \
-9995:9995
-```
-
-...and then curl the `/metrics` endpoint:
-
-```bash
-curl localhost:9995/metrics
-```
+Linkerd has a `clusterNetworks` setting which allows it to differentiate between
+intra-cluster and egress traffic. This warning indicates that the cluster has
+a pod which is not included in Linkerd's `clusterNetworks`. Traffic to pods
+in this network may not be meshed properly. To remedy this, update the
+`clusterNetworks` setting to include all pod networks in the cluster.
 
 ## The "linkerd-version" checks {#l5d-version}
 
@@ -1258,31 +1124,6 @@ $ kubectl auth can-i create ConfigMaps
 yes
 ```
 
-### √ cni plugin PodSecurityPolicy exists {#cni-plugin-psp-exists}
-
-Example error:
-
-```bash
-× cni plugin PodSecurityPolicy exists
-    missing PodSecurityPolicy: linkerd-linkerd-cni-cni
-    see https://linkerd.io/checks/#cni-plugin-psp-exists for hint
-```
-
-Ensure that the pod security policy exists:
-
-```bash
-$ kubectl get psp linkerd-linkerd-cni-cni
-NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
-linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
-```
-
-Also ensure you have permission to create PodSecurityPolicies:
-
-```bash
-$ kubectl auth can-i create PodSecurityPolicies
-yes
-```
-
 ### √ cni plugin ClusterRole exist {#cni-plugin-cr-exists}
 
 Example error:
@@ -1330,56 +1171,6 @@ Also ensure you have permission to create ClusterRoleBindings:
 
 ```bash
 $ kubectl auth can-i create ClusterRoleBindings
-yes
-```
-
-### √ cni plugin Role exists {#cni-plugin-r-exists}
-
-Example error:
-
-```bash
-× cni plugin Role exists
-    missing Role: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-r-exists for hints
-```
-
-Ensure that the role exists in the CNI namespace:
-
-```bash
-$ kubectl get role linkerd-cni -n linkerd-cni
-NAME          AGE
-linkerd-cni   52m
-```
-
-Also ensure you have permission to create Roles:
-
-```bash
-$ kubectl auth can-i create Roles -n linkerd-cni
-yes
-```
-
-### √ cni plugin RoleBinding exists {#cni-plugin-rb-exists}
-
-Example error:
-
-```bash
-× cni plugin RoleBinding exists
-    missing RoleBinding: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-rb-exists for hints
-```
-
-Ensure that the role binding exists in the CNI namespace:
-
-```bash
-$ kubectl get rolebinding linkerd-cni -n linkerd-cni
-NAME          AGE
-linkerd-cni   49m
-```
-
-Also ensure you have permission to create RoleBindings:
-
-```bash
-$ kubectl auth can-i create RoleBindings -n linkerd-cni
 yes
 ```
 
@@ -1693,6 +1484,24 @@ mirrored.
 Make sure services are marked to be mirrored correctly at remote, and delete
 if there are any unnecessary ones.
 
+### √ multicluster extension proxies are healthy {#l5d-multicluster-proxy-healthy}
+
+This error indicates that the proxies running in the multicluster extension are
+not healthy. Ensure that linkerd-multicluster has been installed with all of the
+correct setting or re-install as necessary.
+
+### √ multicluster extension proxies are up-to-date {#l5d-multicluster-proxy-cp-version}
+
+This warning indicates the proxies running in the multicluster extension are
+running an old version.  We recommend downloading the latest linkerd-multicluster
+and upgrading.
+
+### √ multicluster extension proxies and cli versions match {#l5d-multicluster-proxy-cli-version}
+
+This warning indicates that the proxies running in the multicluster extension are
+running a different version from the Linkerd CLI. We recommend keeping this
+versions in sync by updating either the CLI or linkerd-multicluster as necessary.
+
 ## The "linkerd-viz" checks {#l5d-viz}
 
 These checks only run when the `linkerd-viz` extension is installed.
@@ -1773,6 +1582,24 @@ Also ensure you have permission to create ClusterRoleBindings:
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
+
+### √ viz extension proxies are healthy {#l5d-viz-proxy-healthy}
+
+This error indicates that the proxies running in the viz extension are
+not healthy. Ensure that linkerd-viz has been installed with all of the
+correct setting or re-install as necessary.
+
+### √ viz extension proxies are up-to-date {#l5d-viz-proxy-cp-version}
+
+This warning indicates the proxies running in the viz extension are
+running an old version.  We recommend downloading the latest linkerd-viz
+and upgrading.
+
+### √ viz extension proxies and cli versions match {#l5d-viz-proxy-cli-version}
+
+This warning indicates that the proxies running in the viz extension are
+running a different version from the Linkerd CLI. We recommend keeping this
+versions in sync by updating either the CLI or linkerd-viz as necessary.
 
 ### √ tap API server has valid cert {#l5d-tap-cert-valid}
 
@@ -2022,57 +1849,23 @@ The installation can be configured by using the
 See [Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
 for a full list of configurable fields.
 
-### √ collector and jaeger service account exists {#l5d-jaeger-sc-exists}
+### √ jaeger extension proxies are healthy {#l5d-jaeger-proxy-healthy}
 
-Example failure:
+This error indicates that the proxies running in the jaeger extension are
+not healthy. Ensure that linkerd-jaeger has been installed with all of the
+correct setting or re-install as necessary.
 
-```bash
-× collector and jaeger service account exists
-    missing ServiceAccounts: collector
-    see https://linkerd.io/checks/#l5d-jaeger-sc-exists for hints
-```
+### √ jaeger extension proxies are up-to-date {#l5d-jaeger-proxy-cp-version}
 
-Ensure the linkerd-jaeger ServiceAccounts exist:
+This warning indicates the proxies running in the jaeger extension are
+running an old version.  We recommend downloading the latest linkerd-jaeger
+and upgrading.
 
-```bash
-$ kubectl -n linkerd-jaeger get serviceaccounts
-NAME               SECRETS   AGE
-collector          1         23m
-jaeger             1         23m
-```
+### √ jaeger extension proxies and cli versions match {#l5d-jaeger-proxy-cli-version}
 
-Also ensure you have permission to create ServiceAccounts in the linkerd-jaeger
-namespace:
-
-```bash
-$ kubectl -n linkerd-jaeger auth can-i create serviceaccounts
-yes
-```
-
-### √ collector config map exists {#l5d-jaeger-oc-cm-exists}
-
-Example failure:
-
-```bash
-× collector config map exists
-    missing ConfigMaps: collector-config
-    see https://linkerd.io/checks/#l5d-jaeger-oc-cm-exists for hints
-```
-
-Ensure the Linkerd ConfigMap exists:
-
-```bash
-$ kubectl -n linkerd-jaeger get configmap/collector-config
-NAME             DATA   AGE
-collector-config   1      61m
-```
-
-Also ensure you have permission to create ConfigMaps:
-
-```bash
-$ kubectl -n linkerd-jaeger auth can-i create configmap
-yes
-```
+This warning indicates that the proxies running in the jaeger extension are
+running a different version from the Linkerd CLI. We recommend keeping this
+versions in sync by updating either the CLI or linkerd-jaeger as necessary.
 
 ### √ jaeger extension pods are injected {#l5d-jaeger-pods-injection}
 

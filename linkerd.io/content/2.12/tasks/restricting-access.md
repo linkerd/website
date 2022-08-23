@@ -15,7 +15,7 @@ For a more comprehensive description of the policy resources, see the
 Ensure that you have Linkerd version stable-2.11.0 or later installed, and that
 it is healthy:
 
-```console
+```bash
 $ linkerd install | kubectl apply -f -
 ...
 $ linkerd check -o short
@@ -24,7 +24,7 @@ $ linkerd check -o short
 
 Inject and install the Emojivoto application:
 
-```console
+```bash
 $ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
 $ linkerd check -n emojivoto --proxy -o short
@@ -33,7 +33,7 @@ $ linkerd check -n emojivoto --proxy -o short
 
 In order to observe what's going on, we'll also install the Viz extension:
 
-```console
+```bash
 $ linkerd viz install | kubectl apply -f -
 ...
 $ linkerd viz check
@@ -47,7 +47,7 @@ is a Linkerd custom resource which describes a specific port of a workload.
 Once the `Server` resource has been created, only clients which have been
 authorized may access it (we'll see how to authorize clients in a moment).
 
-```console
+```bash
 cat << EOF | kubectl apply -f -
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -80,7 +80,7 @@ We can use the `linkerd viz authz` command to look at the authorization status
 of requests coming to the voting service and see that all incoming requests
 to the voting-grpc server are currently unauthorized:
 
-```console
+```bash
 > linkerd viz authz -n emojivoto deploy/voting
 ROUTE    SERVER                       AUTHORIZATION                UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
 default  default:all-unauthenticated  default/all-unauthenticated        0.0rps  100.00%  0.1rps          1ms          1ms          1ms
@@ -96,7 +96,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 `ServiceAccounts` as the basis for identity, thus our authorization will also
 be based on `ServiceAccounts`.
 
-```console
+```bash
 > cat << EOF | kubectl apply -f -
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -124,7 +124,7 @@ service are authorized by the `voting-grpc` ServerAuthorization. Note that since
 the `linkerd viz auth` command queries over a time-window, you may see some
 UNAUTHORIZED requests displayed for a short amount of time.
 
-```console
+```bash
 > linkerd viz authz -n emojivoto deploy/voting
 ROUTE    SERVER                       AUTHORIZATION                    UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
 default  default:all-unauthenticated  default/all-unauthenticated            0.0rps  100.00%  0.1rps          1ms          1ms          1ms
@@ -135,7 +135,7 @@ default  voting-grpc                  serverauthorization/voting-grpc        0.0
 We can also test that request from other pods will be rejected by creating a
 `grpcurl` pod and attempting to access the Voting service from it:
 
-```console
+```bash
 > kubectl run grpcurl --rm -it --image=networld/grpcurl --restart=Never --command -- ./grpcurl -plaintext voting-svc.emojivoto:8080 emojivoto.v1.VotingService/VoteDog
 Error invoking method "emojivoto.v1.VotingService/VoteDog": failed to query for service descriptor "emojivoto.v1.VotingService": rpc error: code = PermissionDenied desc =
 pod "grpcurl" deleted
@@ -165,7 +165,7 @@ following logic when deciding whether to allow a request:
 
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
-```console
+```bash
 > linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
 ```
 
@@ -186,3 +186,10 @@ requests were being rejected. To avoid this situation in live systems, we
 recommend you either create the policy resources before deploying your services
 or to create the `ServiceAuthorizations` BEFORE creating the `Server` so that
 clients will be authorized immediately.
+
+## Per-Route Policy
+
+In addition to service-level authorization policy, authorization policy can also
+be configured for individual HTTP routes. To learn more about per-route policy,
+see the documentation on [configuring per-route
+policy](../configuring-per-route-policy/).
