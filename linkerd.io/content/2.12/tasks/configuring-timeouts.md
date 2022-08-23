@@ -8,6 +8,14 @@ another service, you can configure timeouts. These work by adding a little bit
 of extra information to the [service profile](../../features/service-profiles/) for
 the service you're sending requests to.
 
+{{< note >}}
+Routes configured in service profiles are different from HTTPRoute resources.
+Service profile routes allow you to collect per-route metrics and configure
+client-side behavior such as retries and timeouts. HTTPRoute resources, on the
+other hand, can be the target of AuthorizationPolicies and allow you to specify
+per-route authorization.
+{{< /note >}}
+
 Each route may define a timeout which specifies the maximum amount of time to
 wait for a response (including retries) to complete after the request is sent.
 If this timeout is reached, Linkerd will cancel the request, and return a 504

@@ -13,6 +13,14 @@ Both of these questions can be answered by specifying a bit of extra information
 in the [service profile](../../features/service-profiles/) for the service you're
 sending requests to.
 
+{{< note >}}
+Routes configured in service profiles are different from HTTPRoute resources.
+Service profile routes allow you to collect per-route metrics and configure
+client-side behavior such as retries and timeouts. HTTPRoute resources, on the
+other hand, can be the target of AuthorizationPolicies and allow you to specify
+per-route authorization.
+{{< /note >}}
+
 The reason why these pieces of configuration are required is because retries can
 potentially be dangerous. Automatically retrying a request that changes state
 (e.g. a request that submits a financial transaction) could potentially impact
