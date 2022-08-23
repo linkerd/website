@@ -1937,7 +1937,7 @@ Check the logs on the viz extensions's metrics API:
 kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 ```
 
-### √ prometheus is authorized to scrape data plane pods {#l5d-viz-data-plane-prom-authz} 
+### √ prometheus is authorized to scrape data plane pods {#l5d-viz-data-plane-prom-authz}
 
 Example failure:
 
@@ -1945,10 +1945,10 @@ Example failure:
 
 ‼ prometheus is authorized to scrape data plane pods
     prometheus may not be authorized to scrape the following pods:
-	* emojivoto/voting-5f46cbcdc6-p5dhn
-	* emojivoto/emoji-54f8786975-6qc8s
-	* emojivoto/vote-bot-85dfbf8996-86c44
-	* emojivoto/web-79db6f4548-4mzkg
+        * emojivoto/voting-5f46cbcdc6-p5dhn
+        * emojivoto/emoji-54f8786975-6qc8s
+        * emojivoto/vote-bot-85dfbf8996-86c44
+        * emojivoto/web-79db6f4548-4mzkg
     consider running `linkerd viz allow-scrapes` to authorize prometheus scrapes
     see https://linkerd.io/2/checks/#l5d-viz-data-plane-prom-authz for hints
 ```

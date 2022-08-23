@@ -96,4 +96,3 @@ and piping it to `kubectl apply`. For example you can run:
 ```bash
 kubectl kustomize . | kubectl apply -f -
 ```
-
