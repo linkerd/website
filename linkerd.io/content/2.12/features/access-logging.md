@@ -1,9 +1,11 @@
 +++
-title = "Enabling Proxy Access Logging"
-description = "Configure Linkerd proxies to emit HTTP access logs."
+title = "HTTP Access Logging"
+description = "Linkerd proxie can be configured to emit HTTP access logs."
 aliases = [
   "../access-logging/",
   "../proxy-access-logging/",
+  "../http-access-logging/",
+  "../access-log",
 ]
 +++
 
@@ -15,15 +17,15 @@ access logging. Adding this annotation to a namespace or workload configures the
 proxy injector to set an environment variable in the proxy container that
 configures access logging.
 
-Enabling HTTP access logging has a performance cost, and may introduce
-additional latency compared to proxies without access logging enabled.
-Therefore, access logging is disabled by default.
+Enabling HTTP access logging has a performance cost, and may increase CPU time
+and/or tail latency under load, compared to proxies without access logging
+enabled. Therefore, access logging is disabled by default.
 
 {{< note >}}
 The proxy's HTTP access log is distinct from proxy debug logging, which is
 configured separately. See the documentation on [modifying the proxy log
-level](../modifying-proxy-log-level/) for details on configuring the proxy's
-debug logging.
+level](../../tasks/modifying-proxy-log-level/) for details on configuring the
+proxy's debug logging.
 {{< /note >}}
 
 ## Access Log Formats

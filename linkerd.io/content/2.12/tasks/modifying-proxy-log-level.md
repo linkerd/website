@@ -12,8 +12,8 @@ these logs dynamically.
 {{< note >}}
 The proxy's proxy debug logging is distinct from the proxy HTTP access log,
 which is configured separately. See the documentation on [enabling access
-logging](../enabling-access-logging/) for details on configuring Linkerd proxies
-to emit an HTTP access log.
+logging](../../features/access-logging/) for details on configuring Linkerd
+proxies to emit an HTTP access log.
 {{< /note >}}
 
 The log level of a Linkerd proxy can be modified on the fly by using the proxy's
