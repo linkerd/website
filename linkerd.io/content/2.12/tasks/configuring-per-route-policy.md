@@ -448,8 +448,8 @@ We've now covered the basics of configuring per-route authorization policies
 with Linkerd. For more practice, try creating additional policies to restrict
 access to the `books` service as well. Or, to learn more about Linkerd
 authorization policy in general, and the various configurations that are
-available, see see the
-[Policy reference docs](../../reference/authorization-policy/).
+available, see the [Policy reference
+docs](../../reference/authorization-policy/).
 
 [`Server`]: ../../reference/authorization-policy#server
 [`HTTPRoute`]: ../../reference/authorization-policy#httproute
