@@ -29,7 +29,6 @@ $ linkerd install | kubectl apply -f -
 $ linkerd check -o short
 ...
 ```
-
 In order to observe what's going on, we'll also install the Viz extension:
 
 ```bash
@@ -113,7 +112,7 @@ generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a `Server` resource for the `authors` deployment's service
 port. For details on `Server` resources, see
-[here](../restricting-access#creating-a-server-resource).
+[here](../restricting-access/#creating-a-server-resource).
 
 ```bash
 cat << EOF | kubectl apply -f -
