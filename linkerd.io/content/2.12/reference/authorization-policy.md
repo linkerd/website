@@ -22,8 +22,8 @@ This field can be one of the following:
 - `deny`: all requests are denied. (Policy resources should then be created to
   allow specific communications between services).
 
-This default can be overridden by setting the annotation `config.linkerd.io/default-
-inbound-policy` on either a pod spec or its namespace.
+This default can be overridden by setting the annotation `config.linkerd.io/default-inbound-policy`
+on either a pod spec or its namespace.
 
 Once a [Server] is configured for a pod & port, its default behavior
 is to _deny_ traffic and [ServerAuthorization] or
@@ -116,7 +116,7 @@ An `HTTPRoute` represents a subset of traffic handled by a [Server].
 determine if a request matches the `HTTPRoute`. Matches can be based on path,
 headers, query params, and/or method. [AuthorizationPolicies]
 may target `HTTPRoute` resources, thereby authorizing traffic to that
-`HTTPRoute` only rather than to the entire [Server].  `HTTPRoutes` may also
+`HTTPRoute` only rather than to the entire [Server]. `HTTPRoutes` may also
 define filters which add processing steps that must be completed during the
 request or response lifecycle.
 
