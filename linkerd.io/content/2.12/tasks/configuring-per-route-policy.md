@@ -29,6 +29,7 @@ $ linkerd install | kubectl apply -f -
 $ linkerd check -o short
 ...
 ```
+
 In order to observe what's going on, we'll also install the Viz extension:
 
 ```bash
