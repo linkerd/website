@@ -1960,8 +1960,8 @@ plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](../../features/server-policy) authorizing Prometheus to
-scrape the data plane proxies in a namespace:
+generates [policy resources](../../features/server-policy) authorizing
+Prometheus to scrape the data plane proxies in a namespace:
 
 ```bash
 linkerd viz allow-scrapes --namespace emojivoto | kubectl apply -f -
