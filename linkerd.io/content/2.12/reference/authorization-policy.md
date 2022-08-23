@@ -3,14 +3,14 @@ title = "Authorization Policy"
 description = "Details on the specification and what is possible with policy resources."
 +++
 
-[Server](#server), [HTTPRoute](#httproute), [ServerAuthorization](#serverauthorization),
-[AuthorizationPolicy](#authorizationpolicy), [MeshTLSAuthentication](#meshTLSAuthentication),
+[Server], [HTTPRoute], [ServerAuthorization],
+[AuthorizationPolicy], [MeshTLSAuthentication](#meshTLSAuthentication),
 and [NetworkAuthentication](#networkAuthentication) are the types of policy
 resources in Linkerd, used to control inbound access to your meshed
 applications.
 
 During the linkerd install, the `proxy.defaultInboundPolicy` field is used
-to specify the default policy when no [Server](#server) selects a pod.
+to specify the default policy when no [Server] selects a pod.
 This field can be one of the following:
 
 - `all-unauthenticated`: allow all requests. This is the default.
@@ -25,10 +25,10 @@ This field can be one of the following:
 This default can be overridden by setting the annotation `config.linkerd.io/default-
 inbound-policy` on either a pod spec or its namespace.
 
-Once a [Server](#server) is configured for a pod & port, its default behavior
-is to _deny_ traffic and [ServerAuthorization](#serverauthorization) or
-[AuthorizationPolicy](#authorizationpolicy) resources must be created to allow
-traffic on a `Server`.
+Once a [Server] is configured for a pod & port, its default behavior
+is to _deny_ traffic and [ServerAuthorization] or
+[AuthorizationPolicy] resources must be created to allow
+traffic on a [Server].
 
 ## Server
 
@@ -41,7 +41,7 @@ select the same pod/port pairs. Linkerd ships with an admission controller that
 tries to prevent overlapping servers from being created.
 
 When a Server selects a port, traffic is denied by default and
-[`ServerAuthorizations`](#serverauthorization) or [AuthorizationPolicies](#authorizationpolicy)
+[ServerAuthorizations] or [AuthorizationPolicies]
 must be used to authorize traffic on ports selected by the Server.
 
 ### Spec
@@ -59,7 +59,7 @@ A `Server` spec may contain the following top level fields:
 ### podSelector
 
 This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
-All the pods that are part of this selector will be part of the `Server` group.
+All the pods that are part of this selector will be part of the [Server] group.
 A podSelector object must contain _exactly one_ of the following fields:
 
 {{< table >}}
@@ -74,7 +74,7 @@ for more details.
 
 ### Server Examples
 
-A [Server](#server) that selects over pods with a specific label, with `gRPC` as
+A [Server] that selects over pods with a specific label, with `gRPC` as
 the `proxyProtocol`.
 
 ```yaml
@@ -91,7 +91,7 @@ spec:
   proxyProtocol: gRPC
 ```
 
-A [Server](#server) that selects over pods with `matchExpressions`, with `HTTP/2`
+A [Server] that selects over pods with `matchExpressions`, with `HTTP/2`
 as the `proxyProtocol`, on port `8080`.
 
 ```yaml
@@ -111,14 +111,14 @@ spec:
 
 ## HTTPRoute
 
-An HTTPRoute represents a subset of traffic handled by a [Server](#server).
-HTTPRoutes are attached to [Servers](#server) and have match rules which
-determine if a request matches the HTTPRoute. Matches can be based on path,
-headers, query params, and/or method. [AuthorizationPolicies](#authorizationpolicy)
-may target HTTPRoute resources, thereby authorizing traffic to that HTTPRoute
-only rather than to the entire [Server](#server).  HTTPRoutes may also define
-filters which add processing steps that must be completed during the request or
-response lifecycle.
+An `HTTPRoute` represents a subset of traffic handled by a [Server].
+`HTTPRoutes` are attached to [Servers] and have match rules which
+determine if a request matches the `HTTPRoute`. Matches can be based on path,
+headers, query params, and/or method. [AuthorizationPolicies]
+may target `HTTPRoute` resources, thereby authorizing traffic to that
+`HTTPRoute` only rather than to the entire [Server].  `HTTPRoutes` may also
+define filters which add processing steps that must be completed during the
+request or response lifecycle.
 
 ### Spec
 
@@ -127,14 +127,14 @@ An `HTTPRoute` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| An array of [ParentReference](#parentreference) which indicate which [Servers](#server) this HTTPRoute is a part of.|
-| `hostnames`| Hostnames defines a set of hostname that should match against the HTTP Host header to select a HTTPRoute to process the request.|
+| `parentRefs`| An array of [ParentReference](#parentreference) which indicate which [Servers](#server) this `HTTPRoute` is a part of.|
+| `hostnames`| Hostnames defines a set of hostname that should match against the HTTP Host header to select a `HTTPRoute` to process the request.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
 
 ### parentReference
 
-A reference to the [Servers](#server) this HTTPRoute is a part of.
+A reference to the [Servers] this `HTTPRoute` is a part of.
 
 {{< table >}}
 | field| value |
@@ -147,7 +147,7 @@ A reference to the [Servers](#server) this HTTPRoute is a part of.
 
 ### httpRouteRule
 
-HTTPRouteRule defines semantics for matching an HTTP request based on conditions
+`HTTPRouteRule` defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
 
 {{< table >}}
@@ -159,7 +159,7 @@ HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 
 ### httpRouteMatch
 
-HTTPRouteMatch defines the predicate used to match requests to a given
+`HTTPRouteMatch` defines the predicate used to match requests to a given
 action. Multiple match types are ANDed together, i.e. the match will
 evaluate to true only if all conditions are satisfied.
 
@@ -174,7 +174,8 @@ evaluate to true only if all conditions are satisfied.
 
 ### httpPathMatch
 
-HTTPPathMatch describes how to select a HTTP route by matching the HTTP request path.
+`HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
+request path.
 
 {{< table >}}
 | field| value |
@@ -185,7 +186,7 @@ HTTPPathMatch describes how to select a HTTP route by matching the HTTP request 
 
 ### httpHeaderMatch
 
-HTTPHeaderMatch describes how to select a HTTP route by matching HTTP request
+`HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
 
 {{< table >}}
@@ -198,7 +199,7 @@ headers.
 
 ### httpQueryParamMatch
 
-HTTPQueryParamMatch describes how to select a HTTP route by matching HTTP
+`HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
 
 {{< table >}}
@@ -211,7 +212,7 @@ query parameters.
 
 ### httpRouteFilter
 
-HTTPRouteFilter defines processing steps that must be completed during the
+`HTTPRouteFilter` defines processing steps that must be completed during the
 request or response lifecycle.
 
 {{< table >}}
@@ -236,7 +237,7 @@ A filter which modifies request headers.
 
 ### httpHeader
 
-HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
+`HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
 {{< table >}}
 | field| value |
@@ -247,7 +248,7 @@ HTTPHeader represents an HTTP Header name and value as defined by RFC 7230.
 
 ### httpRequestRedirectFilter
 
-HTTPRequestRedirect defines a filter that redirects a request.
+`HTTPRequestRedirect` defines a filter that redirects a request.
 
 {{< table >}}
 | field| value |
@@ -261,7 +262,7 @@ HTTPRequestRedirect defines a filter that redirects a request.
 
 ### httpPathModfier
 
-HTTPPathModifier defines configuration for path modifiers.
+`HTTPPathModifier` defines configuration for path modifiers.
 
 {{< table >}}
 | field| value |
@@ -273,7 +274,7 @@ HTTPPathModifier defines configuration for path modifiers.
 
 ### HTTPRoute Examples
 
-An HTTPRoute which matches GETs to `/authors.json` or `/authors/*`.
+An `HTTPRoute` which matches GETs to `/authors.json` or `/authors/*`.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -299,11 +300,11 @@ spec:
 
 ## AuthorizationPolicy
 
-An [AuthorizationPolicy](#authorizationpolicy) provides a way to authorize
-traffic to a [Server](#server) or an [HTTPRoute](#httproute). [AuthorizationPolicies](#authorizationpolicy)
-are intended to replace [ServerAuthorizations](#serverauthorization) and are
-more flexible because they can target [HTTPRoutes](#httproute) instead of only
-being able to target [Servers](#server).
+An [AuthorizationPolicy] provides a way to authorize
+traffic to a [Server] or an [HTTPRoute]. [AuthorizationPolicies]
+are intended to replace [ServerAuthorizations] and are
+more flexible because they can target [HTTPRoutes] instead of only
+being able to target [Servers].
 
 ### Spec
 
@@ -318,7 +319,7 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 
 ### targetRef
 
-TargetRef identifies an API object.
+`TargetRef` identifies an API object.
 
 {{< table >}}
 | field| value |
@@ -329,18 +330,160 @@ TargetRef identifies an API object.
 | `name`| Name is the name of the target resource.|
 {{< /table >}}
 
+### AuthorizationPolicy Examples
+
+An `AuthorizationPolicy` which authorizes clients that satisfy the
+`authors-get-authn` authentication to send to the `authors-get-route`
+[HTTPRoute].
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  name: authors-get-policy
+  namespace: booksapp
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: HTTPRoute
+    name: authors-get-route
+  requiredAuthenticationRefs:
+    - name: authors-get-authn
+      kind: MeshTLSAuthentication
+      group: policy.linkerd.io
+```
+
+An `AuthorizationPolicy` which authorizes the `webabb` `ServiceAccount` to send
+to the `authors` [Server].
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  name: authors-policy
+  namespace: booksapp
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: authors
+  requiredAuthenticationRefs:
+    - name: webapp
+      kind: ServiceAccount
+```
+
 ## MeshTLSAuthentication
 
-!!!! TODO !!!!
+A `MeshTLSAuthentication` represents a set of mesh identities. When an
+[AuthorizationPolicy] has a `MeshTLSAuthentication` as one of its
+`requiredAuthenticationRefs`, this means that clients must be in the mesh and
+must have one of the specified identities in order to be authorized to send
+to the target.
+
+### Spec
+
+A `MeshTLSAuthentication` spec may contain the following top level fields:
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `identities`| A list of mTLS identities to authenticate.|
+| `identity_refs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
+{{< /table >}}
+
+### MeshTLSAuthentication Examples
+
+A `MeshTLSAuthentication` which authenticates the `books` and `webapp` mesh
+identities.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  name: authors-get-authn
+  namespace: booksapp
+spec:
+  identities:
+    - "books.booksapp.serviceaccount.identity.linkerd.cluster.local"
+    - "webapp.booksapp.serviceaccount.identity.linkerd.cluster.local"
+```
+
+A `MeshTLSAuthentication` which authenticate thes `books` and `webapp` mesh
+identities. This is an alternative way to specify the same thing as the above
+example.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  name: authors-get-authn
+  namespace: booksapp
+spec:
+  identity_refs:
+    - kind: ServiceAccount
+      name: books
+    - kind: ServiceAccount
+      name: webapp
+```
 
 ## NetworkAuthentication
 
-!!!! TODO !!!!
+A `NetworkAuthentication` represents a set of IP subnets. When an
+[AuthorizationPolicy] has a `NetworkAuthentication` as one of its
+`requiredAuthenticationRefs`, this means that clients must be in one of the
+specified networks in order to be authorized to send to the target.
+
+### Spec
+
+A `NetworkAuthentication` spec may contain the following top level fields:
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `networks`| A list of [networks](#network) to authenticate.|
+{{< /table >}}
+
+### network
+
+A `network` defines an authenticated IP subnet.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `cidr`| A subnet in CIDR notation to authenticate.|
+| `except`| A list of subnets in CIDR notation to exclude from the authentication.|
+{{< /table >}}
+
+### NetworkAuthentication Examples
+
+A `NetworkAuthentication` that authenticates clients which belong to any of
+the specified CIDRs.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: NetworkAuthentication
+metadata:
+  name: cluster-network
+  namespace: booksapp
+spec:
+  networks:
+  - cidr: 10.0.0.0/8
+  - cidr: 100.64.0.0/10
+  - cidr: 172.16.0.0/12
+  - cidr: 192.168.0.0/16
+```
 
 ## ServerAuthorization
 
-A [ServerAuthorization](#serverauthorization) provides a way to authorize
-traffic to one or more [`Server`](#server)s.
+A [ServerAuthorization] provides a way to authorize
+traffic to one or more [Server]s.
+
+{{< note >}}
+[AuthorizationPolicy](#authorizationpolicy) is a more flexible alternative to
+`ServerAuthorization` that can target [HTTPRoutes](#httproute) as well as
+[Servers](#server). Use of [AuthorizationPolicy](#authorizationpolicy) is
+preferred, and `ServerAuthorization` will be deprecated in future releases.
+{{< /note >}}
 
 ### Spec
 
@@ -350,12 +493,12 @@ A ServerAuthorization spec must contain the following top level fields:
 | field| value |
 |------|-------|
 | `client`| A [client](#client) describes clients authorized to access a server. |
-| `server`| A [server](#server) identifies `Servers` in the same namespace for which this authorization applies. |
+| `server`| A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
 {{< /table >}}
 
-### Server
+### serverRef
 
-A `Server` object must contain _exactly one_ of the following fields:
+A `serverRef` object must contain _exactly one_ of the following fields:
 
 {{< table >}}
 | field| value |
@@ -424,7 +567,7 @@ A serviceAccount field contains the following top level fields:
 
 ### ServerAuthorization Examples
 
-A [ServerAuthorization](#serverauthorization) that allows meshed clients with
+A [ServerAuthorization] that allows meshed clients with
 `*.emojivoto.serviceaccount.identity.linkerd.cluster.local` proxy identity i.e. all
 service accounts in the `emojivoto` namespace.
 
@@ -446,7 +589,7 @@ spec:
         - "*.emojivoto.serviceaccount.identity.linkerd.cluster.local"
 ```
 
-A [ServerAuthorization](#serverauthorization) that allows any unauthenticated
+A [ServerAuthorization] that allows any unauthenticated
 clients.
 
 ```yaml
@@ -468,7 +611,7 @@ spec:
       - cidr: ::/0
 ```
 
-A [ServerAuthorization](#serverauthorization) that allows meshed clients with a
+A [ServerAuthorization] that allows meshed clients with a
 specific service account.
 
 ```yaml
@@ -486,3 +629,16 @@ spec:
         - namespace: linkerd-viz
           name: prometheus
 ```
+
+[Server]: #server
+[Servers]: #server
+[HTTPRoute]: #httproute
+[HTTPRoutes]: #httproute
+[ServerAuthorization]: #serverauthorization
+[ServerAuthorizations]: #serverauthorization
+[AuthorizationPolicy]: #authorizationpolicy
+[AuthorizationPolicies]: #authorizationpolicy
+[MeshTLSAuthentication]: #meshtlsauthentication
+[MeshTLSAuthentications]: #meshtlsauthentication
+[NetworkAuthentication]: #networkauthentication
+[NetworkAuthentications]: #networkauthentication
