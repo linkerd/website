@@ -68,18 +68,13 @@ able to reach each other, run:
 linkerd --context=west multicluster check
 ```
 
-You should also see the list of gateways show up by running:
+You should also see the list of gateways show up by running. Note that you'll
+need Linkerd's Viz extension to be installed in the source cluster to get the
+list of gateways:
 
 ```bash
 linkerd --context=west multicluster gateways
 ```
-
-Note that you'll need Linkerd's Viz extension to be installed in the source
-cluster to get the list of gateways. You can also use the [Buoyant
-Cloud](https://buoyant.io/cloud) extension for visibility into gateways, and
-that requires a [policy
-modification](https://docs.buoyant.cloud/article/99-linkerd-multi-cluster-policy)
-to grant that extension access.
 
 For a detailed explanation of what this step does, check out the
 [linking the clusters section](../multicluster/#linking-the-clusters).
