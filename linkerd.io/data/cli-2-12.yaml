@@ -59,9 +59,9 @@ AnnotationsReference:
   Name: config.linkerd.io/enable-debug-sidecar
 - Description: Used to configure the outbound TCP connection timeout in the proxy
   Name: config.linkerd.io/proxy-outbound-connect-timeout
-- Description: The proxy sidecar will stay alive for at least the given period after
+- Description: The proxy sidecar will stay alive for at least the given period before
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
-    Defaults to `0`
+    If not provided, it will be defaulted to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
 - Description: The application container will not start until the proxy is ready;
     accepted values are `enabled` and `disabled`
@@ -77,7 +77,7 @@ AnnotationsReference:
     closing any remaining connections.
   Name: config.linkerd.io/shutdown-grace-period
 CLIReference:
-- Description: List authorizations for a resource.
+- Description: List server authorizations for a resource.
   Example: ""
   InheritedOptions: null
   Name: authz
@@ -91,7 +91,7 @@ CLIReference:
     Shorthand: "n"
     Usage: Namespace of resource
   SeeAlso: null
-  Synopsis: List authorizations for a resource
+  Synopsis: List server authorizations for a resource
 - Description: |-
     Check the Linkerd installation for potential problems.
 
@@ -1660,7 +1660,7 @@ CLIReference:
     Usage: The namespace in which to authorize Prometheus scrapes.
   SeeAlso: null
   Synopsis: Output Kubernetes resources to authorize Prometheus scrapes
-- Description: Display stats for authorizations for a resource.
+- Description: Display stats for server authorizations for a resource.
   Example: ""
   InheritedOptions: null
   Name: viz authz
@@ -1688,7 +1688,7 @@ CLIReference:
     Usage: |
       Stat window (for example: "15s", "1m", "10m", "1h"). Needs to be at least 15s.
   SeeAlso: null
-  Synopsis: Display stats for authorizations for a resource
+  Synopsis: Display stats for server authorizations for a resource
 - Description: |-
     Check the Linkerd Viz extension for potential problems.
 
