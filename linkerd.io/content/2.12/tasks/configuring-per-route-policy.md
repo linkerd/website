@@ -167,7 +167,7 @@ First, let's create an `HTTPRoute` that matches `GET` requests to the `authors`
 service's API:
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -250,7 +250,7 @@ Therefore, we must also create a `HTTPRoute` and `AuthorizationPolicy` so that
 probes from the Kubelet are still authorized:
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -334,7 +334,7 @@ To resolve this, we'll create an additional `HTTPRoute` resource that matches
 `PUT`, `POST`, and `DELETE` requests:
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -387,7 +387,7 @@ Now, let's create authorization and authentication policy resources to authorize
 this route:
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1alpha1
