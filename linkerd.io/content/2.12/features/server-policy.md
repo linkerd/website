@@ -25,7 +25,7 @@ successfully.
 
 Sometimes, however, we want to restrict which types of traffic are allowed.
 Linkerd's policy features allow you to *deny* access to resources unless certain
-conditions are met, including based on the TLS identity of the client.
+conditions are met, including the TLS identity of the client.
 
 Linkerd's policy is configured using two mechanisms:
 
@@ -83,7 +83,7 @@ And finally, two policy CRDs represent policy itself: the mapping of
 authentication rules to targets.
 
 - `AuthorizationPolicy`: a policy that restricts access to one or more targets
-  unless an authentication rule is met.
+  unless an authentication rule is met
 
 - `ServerAuthorization`: an earlier form of policy that restricts access to
   `Servers` only (i.e. not `HTTPRoutes`)
