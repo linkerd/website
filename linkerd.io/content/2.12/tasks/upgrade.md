@@ -752,9 +752,6 @@ The options `--prune -l linkerd.io/control-plane-ns=linkerd` above make sure
 that any resources that are removed from the `linkerd upgrade` output, are
 effectively removed from the system.
 
-For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
-
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
 [Upgrading via manifests](#upgrading-via-manifests)
@@ -838,9 +835,6 @@ binding resource, and re-running the `linkerd upgrade` command:
 kubectl delete clusterrole/linkerd-linkerd-tap
 ```
 
-For upgrading a multi-stage installation setup, follow the instructions at
-[Upgrading a multi-stage install](#upgrading-a-multi-stage-install).
-
 Users who have previously saved the Linkerd control plane's configuration to
 files can follow the instructions at
 [Upgrading via manifests](#upgrading-via-manifests)
@@ -906,31 +900,6 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -
 
 Follow instructions for
 [upgrading the data plane](#upgrade-the-data-plane).
-
-#### Upgrading a multi-stage install
-
-`edge-19.4.5` introduced a
-[Multi-stage install](../install/#multi-stage-install) feature. If you
-previously installed Linkerd via a multi-stage install process, you can upgrade
-each stage, analogous to the original multi-stage installation process.
-
-Stage 1, for the cluster owner:
-
-```bash
-linkerd upgrade config | kubectl apply -f -
-```
-
-Stage 2, for the service owner:
-
-```bash
-linkerd upgrade control-plane | kubectl apply -f -
-```
-
-{{< note >}}
-Passing the `--prune` flag to `kubectl` does not work well with multi-stage
-upgrades. It is recommended to manually prune old resources after completing
-the above steps.
-{{< /note >}}
 
 #### Upgrading via manifests
 
