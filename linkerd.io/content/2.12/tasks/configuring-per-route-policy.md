@@ -146,6 +146,10 @@ Service profile routes allow you to collect per-route metrics and configure
 client-side behavior such as retries and timeouts. [`HTTPRoute`] resources, on the
 other hand, can be the target of [`AuthorizationPolicies`] and allow you to specify
 per-route authorization.
+
+[`HTTPRoute`]: ../../reference/authorization-policy/#httproute
+[`AuthorizationPolicies`]:
+    ../../reference/authorization-policy/#authorizationpolicy
 {{< /note >}}
 
 First, let's create an [`HTTPRoute`] that matches `GET` requests to the `authors`
