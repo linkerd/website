@@ -72,10 +72,13 @@ linkerd install \
   | kubectl apply -f -
 ```
 
-Or when installing with Helm, first install the `linkerd-base` chart:
+Or when installing with Helm, first install the `linkerd-crds` and
+`linkerd-base` charts:
 
 ```bash
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+helm install linkerd-crds linkerd/linkerd-crds -n linkerd --create-namespace
+
+helm install linkerd-base -n linkerd linkerd/linkerd-base
 ```
 
 Then install the `linkerd-control-plane` chart:
