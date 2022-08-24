@@ -104,7 +104,6 @@ linkerd install --crds | kubectl apply -f -
 
 followed by:
 
-
 ```bash
 linkerd install | kubectl apply -f -
 ```
