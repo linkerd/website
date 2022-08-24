@@ -1,11 +1,14 @@
 ---
+author: catherine
+date: 2022-08-24T00:00:00Z
 title: Announcing August's Linkerd Hero
-subtitle: 
+description: "We are excited to announce this month's Linkerd Hero: Dani Baeyens. Congrats, Dani!"
+feature: '/uploads/dani-baeyens.png'
+thumbnail: '/uploads/dani-baeyens.png'
 tags:
   - Community
 items:
   - 
-description: 'We are excited to announce this month's Linkerd Hero: Dani Baeyens. Congrats, Dani!'
 keywords: [hero, community]
 ---
 
@@ -19,15 +22,17 @@ community. Whether it's helping others, answering questions, sharing their succe
 are instrumental in making the Linkerd community the amazing place it is today.
 
 ## Congrats, Dani Baeyens!
+
 This month's hero is [Dani Baeyens](http://www.linkedin.com/in/danibaeyens),
 who contributed changes to fully support RSA signatures on Linkerd's trust anchors.
 The trust anchor is the root of authentication in Linkerd, and allowing RSA
 signatures makes it even easier to integrate Linkerd into an existing workflow.
 Thanks, Dani, for helping us make Linkerd 2.12 more awesome!
 
-[ADD IMAGE HERE]
+![Dani Baeyens](/uploads/dani-baeyens.png)
 
 ## Nominate next month's Linkerd Hero
+
 Linkerd Heroes take many forms. Perhaps someone has answered your or the community’s
 pressing questions on Slack. Maybe you've read a blog post or watched a conference
 talk that helped spur your decision-making process or advance your Linkerd

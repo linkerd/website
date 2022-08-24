@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Dani Baeyens
+    date: August 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/dani-baeyens-portrait.png"
+    alt: Portrait of Dani Baeyens
+    github_url: "https://www.linkedin.com/in/danibaeyens/"
   - name: Dominik Táskai
     date: July 2022
     blurb: Helping community members
