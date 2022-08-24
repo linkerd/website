@@ -61,6 +61,10 @@ This will generate the `issuer.crt` and `issuer.key` files.
 You can finally provide these files when installing Linkerd with the CLI:
 
 ```bash
+# first, install the Linkerd CRDs
+linkerd install --crds | kubectl apply -f -
+
+# install the Linkerd control plane, with the certificates we just generated.
 linkerd install \
   --identity-trust-anchors-file ca.crt \
   --identity-issuer-certificate-file issuer.crt \

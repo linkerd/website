@@ -91,8 +91,12 @@ patchesStrategicMerge:
 ```
 
 Applying this to your cluster requires taking the output of `kustomize`
-and piping it to `kubectl apply`. For example you can run:
+and piping it to `kubectl apply`. For example, you can run:
 
 ```bash
+# install the Linkerd CRDs
+linkerd install --crds | kubectl apply -f -
+
+# install the Linkerd control plane manifests using Kustomize
 kubectl kustomize . | kubectl apply -f -
 ```

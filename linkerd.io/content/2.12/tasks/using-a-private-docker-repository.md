@@ -23,10 +23,10 @@ linkerd install --ignore-cluster | grep image: | sed -e 's/^ *//' | sort | uniq
 For the current stable version, the output will be:
 
 ```bash
-image: cr.l5d.io/linkerd/controller:stable-2.11.1
-image: cr.l5d.io/linkerd/policy-controller:stable-2.11.1
+image: cr.l5d.io/linkerd/controller:stable-2.12.0
+image: cr.l5d.io/linkerd/policy-controller:stable-2.12.0
 image: cr.l5d.io/linkerd/proxy-init:v1.4.0
-image: cr.l5d.io/linkerd/proxy:stable-2.11.1
+image: cr.l5d.io/linkerd/proxy:stable-2.12.0
 ```
 
 All of the Linkerd images are publicly available in the
