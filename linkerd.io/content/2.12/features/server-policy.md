@@ -106,7 +106,20 @@ Linkerd 2.12 introduced `AuthorizationPolicy` as a more flexible alternative to
 `AuthorizationPolicy` is preferred, and `ServerAuthorization` will be deprecated
 in future releases.
 
-### Policy rejections
+## Default authorizations
+
+Definying all traffic to a pod also denies health and readiness probes from
+Kubernetes, meaning that the pod cannot start completely. Thus, any default-deny
+setup must, in practice, authorize these probes.
+
+In order to simplify this process, Linkerd automatically authorizes probes to
+pods. These default authorizations apply only when no `Server` is configured for
+a port, or when a `Server` is configured but no `HTTPRoutes` are configured for
+that `Server`. Otherwise, if any `HTTPRoute` matches the `Server`, these default
+routes are not allows and you must explicitly create authorizations for these
+probes.
+
+## Policy rejections
 
 Any traffic that is known to be HTTP (including HTTP/2 and gRPC) that is denied
 by policy will result in the proxy returning an HTTP 403. Any non-HTTP traffic
@@ -115,9 +128,7 @@ will be denied at the TCP level, i.e. by refusing the connection.
 Note that dynamically changing the policy to deny existing TCP connections may
 result in abrupt termination of those connections.
 
-### Examples
+## Learning more
 
-See
-[emojivoto-policy.yml](https://github.com/linkerd/website/blob/main/run.linkerd.io/public/emojivoto-policy.yml)
-for an example set of policy definitions for the [Emojivoto sample
-application](/getting-started/).
+* [Policy reference](../../reference/authorization-policy/)
+* [Guide to configuring per-route policy](../../tasks/configuring-per-route-policy/)
