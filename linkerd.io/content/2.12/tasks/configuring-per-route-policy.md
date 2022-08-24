@@ -101,7 +101,7 @@ port. For details on [`Server`] resources, see
 [here](../restricting-access/#creating-a-server-resource).
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1beta1
@@ -193,7 +193,7 @@ create an [`AuthorizationPolicy`] resource that defines policy for our
 [`HTTPRoute`]:
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 
 ---
 apiVersion: policy.linkerd.io/v1alpha1
