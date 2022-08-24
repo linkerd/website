@@ -93,27 +93,33 @@ linkerd check --pre
 If there are any checks that do not pass, make sure to follow the provided links
 and fix those issues before proceeding.
 
-## Step 3: Install the control plane onto your cluster
+## Step 3: Install Linkerd onto your cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go,
-it's time to install the control plane. To do this, run:
+it's time to install Linkerd on your Kubernetes cluster. To do this, run:
+
+```bash
+linkerd install --crds | kubectl apply -f -
+```
+
+followed by:
 
 ```bash
 linkerd install | kubectl apply -f -
 ```
 
-The `linkerd install` command generates a Kubernetes manifest with all the core
-control plane resources (feel free to inspect this output if you're curious).
-Piping this manifest into `kubectl apply` then instructs Kubernetes to add
-those resources to your cluster.
+These commands generate Kubernetes manifests with all the core resources required
+for Linkerd (feel free to inspect this output if you're curious). Piping these
+manifests into `kubectl apply` then instructs Kubernetes to add those resources
+to your cluster. The `install --crds` command installs Linkerd's Custom Resource
+Definitions (CRDs), which must be installed first, while the `install` command
+installs the Linkerd control plane.
 
 {{< note >}}
 The CLI-based install presented here is quick and easy, but there are a variety
 of other ways to install Linkerd, including by [using Helm
-charts](../tasks/install-helm/); by using a [multi-stage
-install](../tasks/install/#multi-stage-install) for clusters with strict
-security policies; or by using a marketplace install from your Kubernetes
-provider.
+charts](../tasks/install-helm/) or by using a marketplace install from your
+Kubernetes provider.
 {{< /note >}}
 
 Depending on the speed of your cluster's Internet connection, it may take a
@@ -253,6 +259,8 @@ What's next? Here are some steps we recommend:
 * Learn how to set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
   long-lived clusters.
+* Learn how to [restrict access to services using authorization
+  policy](../tasks/restricting-access/).
 * Hop into the `#linkerd` channel on [the Linkerd
   Slack](https://slack.linkerd.io)
   and say hi!
