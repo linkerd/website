@@ -144,7 +144,7 @@ between an existing backend, `books`, and the newly created
 configuration to your cluster:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:

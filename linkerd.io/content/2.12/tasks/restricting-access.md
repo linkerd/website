@@ -35,7 +35,7 @@ Once the `Server` resource has been created, only clients which have been
 authorized may access it (we'll see how to authorize clients in a moment).
 
 ```bash
-cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
@@ -84,7 +84,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 be based on `ServiceAccounts`.
 
 ```bash
-> cat << EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
