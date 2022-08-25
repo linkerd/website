@@ -210,9 +210,11 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 
 ## Installing with Helm
 
-For installing with Helm, first install the `linkerd-base` chart:
+For installing with Helm, first install the `linkerd-crds` and `linkerd-base`
+charts:
 
 ```bash
+helm install linkerd-base -n linkerd linkerd/linkerd-crds
 helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
 ```
 

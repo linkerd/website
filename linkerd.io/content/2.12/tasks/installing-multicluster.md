@@ -154,6 +154,10 @@ Finally, you'll be able to install Linkerd on the new cluster by using the trust
 anchor bundle that you just created along with the issuer certificate and key.
 
 ```bash
+# first, install the Linkerd CRDs on the new cluster
+linkerd install --crds | kubectl apply -f -
+
+# then, install the Linkerd control plane, using the key material we created
 linkerd install \
   --identity-trust-anchors-file bundle.crt \
   --identity-issuer-certificate-file issuer.crt \

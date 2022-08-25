@@ -250,6 +250,11 @@ To configure Linkerd to use the credentials from cert-manager rather than
 generating its own:
 
 ```bash
+# first, install the Linkerd CRDs
+linkerd install --crds | kubectl apply -f -
+
+# install the Linkerd control plane, using the credentials
+# from cert-manager
 linkerd install \
   --set policyValidator.externalSecret=true \
   --set-file policyValidator.caBundle=ca.crt \

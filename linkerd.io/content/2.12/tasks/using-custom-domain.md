@@ -7,6 +7,10 @@ For Kubernetes clusters that use [custom cluster domain](https://kubernetes.io/d
 Linkerd must be installed using the `--cluster-domain` option:
 
 ```bash
+# first, install the Linkerd CRDs:
+linkerd install --crds | kubectl apply -f -
+
+# next, install the Linkerd control plane, using the custom cluster domain:
 linkerd install --cluster-domain=example.org \
     --identity-trust-domain=example.org \
     | kubectl apply -f -

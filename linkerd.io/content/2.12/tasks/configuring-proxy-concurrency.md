@@ -41,6 +41,10 @@ annotation globally for all proxies injected by the Linkerd installation. For
 example,
 
 ```bash
+# first, install the Linkerd CRDs
+linkerd install --crds | kubectl apply -f -
+
+# install Linkerd, with a proxy CPU limit configured.
 linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
 ```
 
