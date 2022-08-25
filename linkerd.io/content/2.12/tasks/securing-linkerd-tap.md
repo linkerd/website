@@ -1,14 +1,17 @@
 +++
-title = "Securing Your Cluster"
-description = "Best practices for securing your Linkerd installation."
+title = "Securing Linkerd Tap"
+description = "Best practices for securing using Linkerd Tap."
 aliases = [
   "../tap-rbac/",
 ]
 +++
 
-Linkerd provides powerful introspection into your Kubernetes cluster and
-services. Linkerd installations are secure by default. This page illustrates
-best practices to enable this introspection in a secure way.
+Linkerd provides a powerful tool called `tap` which allows users
+to introspect live traffic in real time. While powerful, this feature can
+expose sensitive data such as request and response headers. Access to `tap` is
+controlled using [role-based access control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
+This page illustrates best practices to enable this introspection in a secure
+way.
 
 ## Tap
 
