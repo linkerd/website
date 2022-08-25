@@ -106,7 +106,7 @@ out on the cluster. The configuration is contained in a
 definition. To apply to your cluster, run:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:

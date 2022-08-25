@@ -448,7 +448,7 @@ added latency. To get this all working with our scenario, let's split between
 the `podinfo` service in `west` and `east`. To configure this, you'll run:
 
 ```bash
-cat <<EOF | kubectl --context=west apply -f -
+kubectl --context=west apply -f - <<EOF
 apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
