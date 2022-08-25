@@ -57,16 +57,3 @@ Status check results are √
 ```
 
 {{< cli/flags "check" >}}
-
-## Subcommands
-
-Check supports subcommands as part of the
-[Multi-stage install](../../../tasks/install/#multi-stage-install) feature.
-
-### config
-
-{{< cli/description "check config" >}}
-
-{{< cli/examples "check config" >}}
-
-{{< cli/flags "check config" >}}
