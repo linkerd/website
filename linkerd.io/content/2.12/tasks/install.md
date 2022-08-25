@@ -49,6 +49,20 @@ Once you have a cluster ready, installing Linkerd is as easy as running `linkerd
 install` to generate a Kubernetes manifest, and applying that to your cluster.
 For example:
 
+First install only the CRDs:
+
+```bash
+linkerd install --crds | kubectl apply -f -
+```
+
+Validate that they've been applied correctly:
+
+```bash
+linkerd check --crds
+```
+
+And then install the control plane:
+
 ```bash
 linkerd install | kubectl apply -f -
 ```
