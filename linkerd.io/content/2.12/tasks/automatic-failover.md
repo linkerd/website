@@ -80,7 +80,7 @@ TrafficSplit resource in the west cluster with the
 backend is the primary and all other backends will be treated as the fallbacks:
 
 ```bash
-> cat <<EOF | kubectl --context=west apply -f -
+kubectl --context=west apply -f - <<EOF
 apiVersion: split.smi-spec.io/v1alpha2
 kind: TrafficSplit
 metadata:

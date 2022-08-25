@@ -75,7 +75,7 @@ With the Secret in place, we can create a cert-manager "Issuer" resource that
 references it:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
@@ -93,7 +93,7 @@ Finally, we can create a cert-manager "Certificate" resource which uses this
 Issuer to generate the desired certificate:
 
 ```bash
-cat <<EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:

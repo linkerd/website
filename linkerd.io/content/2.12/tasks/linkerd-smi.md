@@ -111,7 +111,7 @@ Now, Let's apply a `TrafficSplit` resource to perform Traffic Splitting on the
 `backend-svc` to distribute load between it and the `failing-svc`.
 
 ```bash
-cat <<EOF | kubectl apply -f -
+kubectl apply -f - <<EOF
 apiVersion: split.smi-spec.io/v1alpha2
 kind: TrafficSplit
 metadata:
