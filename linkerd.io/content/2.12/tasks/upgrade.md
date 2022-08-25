@@ -464,7 +464,8 @@ before you can upgrade to Linkerd 2.10.
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
 through our [ports and protocols in 2.10 upgrade
-guide](../upgrading-2.10-ports-and-protocols/) for the repercussions.
+guide](../../../2.10/tasks/upgrading-2.10-ports-and-protocols/) for the
+repercussions.
 
 Second, we've introduced [extensions](../extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what
@@ -575,7 +576,7 @@ multicluster instructions](../installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](../upgrade-multicluster/).
+instructions](../../../2.9/tasks/upgrade-multicluster/).
 
 ### Ingress behavior changes
 
