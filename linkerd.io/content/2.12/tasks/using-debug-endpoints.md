@@ -5,7 +5,8 @@ description = "Linkerd's control plane components provide debug endpoints."
 
 All of the control plane components expose runtime profiling information through
 the path `/debug/pprof`, using Go's
-[pprof](https://golang.org/pkg/net/http/pprof/) package.
+[pprof](https://golang.org/pkg/net/http/pprof/) package. This endpoint is
+disabled by default but can be enabled to gather profiling data.
 
 You can consume the provided data with `go tool pprof` to generate output in
 many formats (PDF, DOT, PNG, etc).
@@ -29,6 +30,10 @@ The following diagnostics are provided (a summary with links is provided at
   go tool trace command to investigate the trace.
 
 ## Example Usage
+
+The pprof endpoint can be enabled by setting the `--set enablePprof=true` flag
+when installing or upgrading Linkerd or by setting the `enablePprof=true` Helm
+value.
 
 This data is served over the `admin-http` port.
 To find this port, you can examine the pod's yaml, or for the identity pod for
