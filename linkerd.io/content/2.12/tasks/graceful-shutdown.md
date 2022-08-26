@@ -13,6 +13,14 @@ calls after the proxy has received the TERM signal, those network calls will
 fail. This also has implications for clients of the terminating pod and for
 job resources.
 
+## Graceful shutdown in Kubernetes
+
+## Configuration options for graceful shutdown
+
+* --wait-before-seconds
+* graceful shutdown annotation
+* linkerd-await
+
 ## Slow Updating Clients
 
 Before Kubernetes terminates a pod, it first removes that pod from the endpoints
