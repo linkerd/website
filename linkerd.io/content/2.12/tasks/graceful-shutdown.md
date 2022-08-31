@@ -63,7 +63,7 @@ Linkerd offers a few options to configure pods and containers to gracefully shut
 
 * `--wait-before-seconds`: can be used as an install value (either through the
   CLI or through Helm), or alternatively, through a [configuration
-  annotation](../../reference/proxy-configuration.md). This will add a
+  annotation](../../reference/proxy-configuration). This will add a
   `preStop` hook to the proxy container to delay its handling of the TERM
   signal. This will only work when the conditions described above are satisfied
   (i.e container runtime sends the TERM signal)
@@ -75,7 +75,11 @@ Linkerd offers a few options to configure pods and containers to gracefully shut
   period will be respected regardless of where the TERM signal comes from; the
   proxy may receive a shutdown signal from the container runtime, a different
   process (e.g a script that sends TERM), or from a networked request to its
-  shutdown endpoint (only possible on the loopback interface).
+  shutdown endpoint (only possible on the loopback interface). The proxy will
+  delay its handling of the TERM signal until all of its open connections have
+  completed. This option is particularly useful to close long-running
+  connections that would otherwise prevent the proxy from shutting down
+  gracefully.
 * `linkerd-await`: is a binary that wraps (and spawns) another process, and it
   is commonly used to wait for proxy readiness. The await binary can be used
   with a `--shutdown` option, in which case, after the process it has wrapped
