@@ -353,7 +353,7 @@ spec:
       group: policy.linkerd.io
 ```
 
-An `AuthorizationPolicy` which authorizes the `webabb` `ServiceAccount` to send
+An `AuthorizationPolicy` which authorizes the `webapp` `ServiceAccount` to send
 to the `authors` [Server].
 
 ```yaml
@@ -367,6 +367,24 @@ spec:
     group: policy.linkerd.io
     kind: Server
     name: authors
+  requiredAuthenticationRefs:
+    - name: webapp
+      kind: ServiceAccount
+```
+
+An `AuthorizationPolicy` which authorizes the `webapp` `ServiceAccount` to send
+to all policy "targets" within the `booksapp` namespace.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  name: authors-policy
+  namespace: booksapp
+spec:
+  targetRef:
+    kind: Namespace
+    name: booksapp
   requiredAuthenticationRefs:
     - name: webapp
       kind: ServiceAccount
