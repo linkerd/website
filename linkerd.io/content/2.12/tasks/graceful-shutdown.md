@@ -13,6 +13,85 @@ calls after the proxy has received the TERM signal, those network calls will
 fail. This also has implications for clients of the terminating pod and for
 job resources.
 
+## Graceful shutdown in Kubernetes
+
+[pod-lifetime]: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-lifetime
+[pod-termination]: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination
+[pod-forced]: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination-forced
+[hook]: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks
+
+Pods are ephemeral in nature, and may be [killed due to a number of different
+reasons][pod-lifetime], such as:
+
+* Being scheduled on a node that fails (in which case the pod will be deleted).
+* A lack of resources on the node where the pod is scheduled (in which case the
+  pod is evicted).
+* Manual deletion, e.g through `kubectl delete`.
+
+Since pods fundamentally represent processes running on nodes in a cluster, it
+is important to ensure that when killed, they have enough time to clean-up and
+terminate gracefully. When a pod is deleted, the [container runtime will send a
+TERM signal][pod-termination] to each container running in the pod.
+
+By default, Kubernetes will wait [30 seconds][pod-forced] to allow processes to
+handle the TERM signal. This is known as the **grace period** within which a
+process may shut itself down gracefully. If the grace period time runs out, and
+the process hasn't gracefully exited, the container runtime will send a KILL
+signal, abruptly stopping the process. Grace periods may be overridden at a
+workload level. This is useful when a process needs additional time to clean-up
+(e.g making network calls, writing to disk, etc.)
+
+Kubernetes also allows operators of services to define lifecycle hooks for
+their containers. Important in the context of graceful shutdown is the
+[`preStop`][hook] hook, that will be called when a container is terminated due
+to:
+
+* An API request.
+* Liveness/Readiness probe failure.
+* Resource contention.
+
+If a pod has a preStop hook for a container, and the pod receives a TERM signal
+from the container runtime, the preStop hook will be executed, and it must
+finish before the TERM signal can be propagated to the container itself. It is
+worth noting in this case that the **grace period** will start when the preStop
+hook is executed, not when the container first starts processing the TERM
+signal.
+
+## Configuration options for graceful shutdown
+
+Linkerd offers a few options to configure pods and containers to gracefully shutdown.
+
+* `--wait-before-seconds`: can be used as an install value (either through the
+  CLI or through Helm), or alternatively, through a [configuration
+  annotation](../../reference/proxy-configuration/). This will add a
+  `preStop` hook to the proxy container to delay its handling of the TERM
+  signal. This will only work when the conditions described above are satisfied
+  (i.e container runtime sends the TERM signal)
+* `config.linkerd.io/shutdown-grace-period`: is an annotation that can be used
+  on workloads to configure the graceful shutdown time for the _proxy_. If the
+  period elapses before the proxy has had a chance to gracefully shut itself
+  down, it will forcefully shut itself down thereby closing all currently open
+  connections. By default, the shutdown grace period is 120 seconds. This grace
+  period will be respected regardless of where the TERM signal comes from; the
+  proxy may receive a shutdown signal from the container runtime, a different
+  process (e.g a script that sends TERM), or from a networked request to its
+  shutdown endpoint (only possible on the loopback interface). The proxy will
+  delay its handling of the TERM signal until all of its open connections have
+  completed. This option is particularly useful to close long-running
+  connections that would otherwise prevent the proxy from shutting down
+  gracefully.
+* `linkerd-await`: is a binary that wraps (and spawns) another process, and it
+  is commonly used to wait for proxy readiness. The await binary can be used
+  with a `--shutdown` option, in which case, after the process it has wrapped
+  finished, it will send a shutdown request to the proxy. When used for
+  graceful shutdown, typically the entrypoint for containers need to be changed
+  to linkerd-await.
+
+Depending on the usecase, one option (or utility) might be preferred over the
+other. To aid with some common cases, suggestions are given below on what to do
+when confronted with slow updating clients and with job resources that will not
+complete.
+
 ## Slow Updating Clients
 
 Before Kubernetes terminates a pod, it first removes that pod from the endpoints
