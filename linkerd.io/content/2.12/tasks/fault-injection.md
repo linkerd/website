@@ -25,9 +25,12 @@ engineering lifestyle, fault injection could even be used in production.
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd installed on your cluster, along
-with its Viz extension. Follow the [Installing Linkerd Guide](../install/)
-if you haven't already done this.
+To use this guide, you'll need a Kubernetes cluster running:
+
+- Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
+  [Installing Linkerd Guide](../install/).
+- Linkerd-SMI. If you haven't installed this yet, follow the
+  [Linkerd-SMI guide](../linkerd-smi/).
 
 ## Setup the service
 

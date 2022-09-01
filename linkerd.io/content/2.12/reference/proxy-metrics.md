@@ -43,6 +43,17 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   they have:
   * `addr`: The address used to connect to the control plane.
 
+* `inbound_http_authz_allow_total`: A counter of the total number of inbound
+  HTTP requests that were authorized.
+  * `authz_name`: The name of the authorization policy used to allow the request.
+
+* `inbound_http_authz_deny_total`: A counter of the total number of inbound
+  HTTP requests that could not be processed due to being denied by the
+  authorization policy.
+
+* `inbound_http_route_not_found_total`: A counter of the total number of
+  inbound HTTP requests that could not be associated with a route.
+
 Note that latency measurements are not exported to Prometheus until the stream
 _completes_. This is necessary so that latencies can be labeled with the appropriate
 [response classification](#response-labels).
@@ -174,6 +185,10 @@ layer.
   connections that could not be processed due to a proxy error.
 * `outbound_tcp_errors_total`: A counter of the total number of outbound TCP
   connections that could not be processed due to a proxy error.
+* `inbound_tcp_authz_allow_total`: A counter of the total number of TCP
+  connections that were authorized.
+* `inbound_tcp_authz_deny_total`: A counter of the total number of TCP
+  connections that were denied
 
 ### Labels
 
