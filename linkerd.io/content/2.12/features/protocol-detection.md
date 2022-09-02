@@ -26,7 +26,7 @@ decrypt the connection to observe the HTTP transactions.)
 ## Configuring protocol detection
 
 {{< note >}}
-If you receive the `protocol detection timed out after 10s` log message and 
+If you receive the `protocol detection timed out after 10s` log message and
 are experiencing 10-second delays when establishing connections, you are
 likely running into a protocol detection timeout. This section will help you
 understand how to fix this.
