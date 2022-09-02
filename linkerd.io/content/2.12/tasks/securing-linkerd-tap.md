@@ -3,6 +3,7 @@ title = "Securing Linkerd Tap"
 description = "Best practices for securing Linkerd's tap feature."
 aliases = [
   "../tap-rbac/",
+  "securing-your-cluster/",
 ]
 +++
 
