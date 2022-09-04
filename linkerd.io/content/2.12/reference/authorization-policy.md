@@ -1,17 +1,24 @@
 +++
 title = "Authorization Policy"
-description = "Details on the specification and what is possible with policy resources."
+description = "Reference guide to Linkerd's policy resources."
 +++
 
-[Server], [HTTPRoute], [ServerAuthorization],
-[AuthorizationPolicy], [MeshTLSAuthentication](#meshTLSAuthentication),
-and [NetworkAuthentication](#networkAuthentication) are the types of policy
-resources in Linkerd, used to control inbound access to your meshed
-applications.
+Linkerd's authorization policy allows you to control which types of traffic are
+allowed to meshed pods. See the [Authorization Policy feature
+description](../../features/server-policy/) for more information on what this
+means.
 
-During the linkerd install, the `proxy.defaultInboundPolicy` field is used
-to specify the default policy when no [Server] selects a pod.
-This field can be one of the following:
+Linkerd's policy is configured using two mechanisms:
+
+1. A set of _default policies_, which can be set at the cluster,
+   namespace, workload, and pod level through Kubernetes annotations.
+2. A set of CRDs that specify fine-grained policy for specific ports, routes,
+   workloads, etc.
+
+## Default policies
+
+During a Linkerd install, the `proxy.defaultInboundPolicy` field is used to
+specify the cluster-wide default policy. This field can be one of the following:
 
 - `all-unauthenticated`: allow all requests. This is the default.
 - `all-authenticated`: allow requests from meshed clients in the same or from
@@ -19,32 +26,36 @@ This field can be one of the following:
 - `cluster-authenticated`: allow requests from meshed clients in the same cluster.
 - `cluster-unauthenticated`: allow requests from both meshed and non-meshed clients
   in the same cluster.
-- `deny`: all requests are denied. (Policy resources should then be created to
-  allow specific communications between services).
+- `deny`: all requests are denied.
 
-This default can be overridden by setting the annotation `config.linkerd.io/default-inbound-policy`
-on either a pod spec or its namespace.
+This cluster-wide default can be overridden for specific resources by setting
+the annotation `config.linkerd.io/default-inbound-policy` on either a pod spec
+or its namespace.
 
-Once a [Server] is configured for a pod & port, its default behavior
-is to _deny_ traffic and [ServerAuthorization] or
-[AuthorizationPolicy] resources must be created to allow
-traffic on a [Server].
+## Dynamic policy resources
+
+For dynamic control of policy, and for finer-grained policy than what the
+default polices allow, Linkerd provides a set of CRDs which control traffic
+policy in the cluster: [Server], [HTTPRoute], [ServerAuthorization],
+[AuthorizationPolicy], [MeshTLSAuthentication], and [NetworkAuthentication].
 
 ## Server
 
 A `Server` selects a port on a set of pods in the same namespace as the server.
-It typically selects a single port on a pod, though it may select multiple
-ports when referring to the port by name (e.g. `admin-http`). While the
-`Server` resource is similar to a Kubernetes `Service`, it has the added
-restriction that multiple `Server` instances must not overlap: they must not
-select the same pod/port pairs. Linkerd ships with an admission controller that
-tries to prevent overlapping servers from being created.
+It typically selects a single port on a pod, though it may select multiple ports
+when referring to the port by name (e.g. `admin-http`). While the `Server`
+resource is similar to a Kubernetes `Service`, it has the added restriction that
+multiple `Server` instances must not overlap: they must not select the same
+pod/port pairs. Linkerd ships with an admission controller that prevents
+overlapping `Server`s from being created.
 
+{{< note >}}
 When a Server selects a port, traffic is denied by default and
 [ServerAuthorizations] or [AuthorizationPolicies]
 must be used to authorize traffic on ports selected by the Server.
+{{< /note >}}
 
-### Spec
+### Server Spec
 
 A `Server` spec may contain the following top level fields:
 
@@ -112,23 +123,22 @@ spec:
 ## HTTPRoute
 
 An `HTTPRoute` represents a subset of traffic handled by a [Server].
-`HTTPRoutes` are attached to [Servers] and have match rules which
-determine if a request matches the `HTTPRoute`. Matches can be based on path,
-headers, query params, and/or method. [AuthorizationPolicies]
-may target `HTTPRoute` resources, thereby authorizing traffic to that
-`HTTPRoute` only rather than to the entire [Server]. `HTTPRoutes` may also
-define filters which add processing steps that must be completed during the
-request or response lifecycle.
+`HTTPRoutes` are "attached" to [Servers] and have match rules which determine
+which requests match. Matches can be based on path, headers, query params,
+and/or verb. [AuthorizationPolicies] may target `HTTPRoute` resources, thereby
+authorizing traffic to that `HTTPRoute` only rather than to the entire [Server].
+`HTTPRoutes` may also define filters which add processing steps that must be
+completed during the request or response lifecycle.
 
-### Spec
+### HTTPRoute Spec
 
 An `HTTPRoute` spec may contain the following top level fields:
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| An array of [ParentReference](#parentreference) which indicate which [Servers](#server) this `HTTPRoute` is a part of.|
-| `hostnames`| Hostnames defines a set of hostname that should match against the HTTP Host header to select a `HTTPRoute` to process the request.|
+| `parentRefs`| An set of [ParentReference](#parentreference)s which indicate which [Servers](#server) this `HTTPRoute` attach to.|
+| `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
 
@@ -139,10 +149,10 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| Group is the group of the referent.|
-| `kind`| Kind is kind of the referent.|
-| `namespace`| Namespace is the namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
-| `name`| Name is the name of the referent.|
+| `group`| The group of the referent.|
+| `kind`| The kind of the referent.|
+| `namespace`| The namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
+| `name`| The name of the referent.|
 {{< /table >}}
 
 ### httpRouteRule
@@ -181,7 +191,7 @@ request path.
 | field| value |
 |------|-------|
 | `type`| How to match against the path Value. One of: Exact, PathPrefix, RegularExpresion.|
-| `value`| Value of the HTTP path to match against.|
+| `value`| The HTTP path to match against.|
 {{< /table >}}
 
 ### httpHeaderMatch
@@ -193,7 +203,7 @@ headers.
 | field| value |
 |------|-------|
 | `type`| How to match against the value of the header. One of: Exact, RegularExpresion.|
-| `name`| The name of the HTTP Header to be matched. Name matching MUST be case insensitive.|
+| `name`| The HTTP Header to be matched against. Name matching MUST be case insensitive.|
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
@@ -206,7 +216,7 @@ query parameters.
 | field| value |
 |------|-------|
 | `type`| How to match against the value of the query parameter. One of: Exact, RegularExpresion.|
-| `name`| The name of the HTTP query param to be matched. This must be an exact string match.|
+| `name`| The HTTP query param to be matched. This must be an exact string match.|
 | `value`| Value of HTTP query param to be matched.|
 {{< /table >}}
 
@@ -232,7 +242,7 @@ A filter which modifies request headers.
 |------|-------|
 | `set`| A list of [httpHeaders](#httpheader) to overwrites on the request.|
 | `add`|  A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value.|
-| `remove`|  A list header names to remove from the request.|
+| `remove`|  A list of header names to remove from the request.|
 {{< /table >}}
 
 ### httpHeader
@@ -242,7 +252,7 @@ A filter which modifies request headers.
 {{< table >}}
 | field| value |
 |------|-------|
-| `name`| Name is the name of the HTTP Header to be matched. Name matching MUST be case insensitive.|
+| `name`| Name of the HTTP Header to be matched. Name matching MUST be case insensitive.|
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
@@ -253,11 +263,11 @@ A filter which modifies request headers.
 {{< table >}}
 | field| value |
 |------|-------|
-| `scheme`| Scheme is the scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.|
-| `hostname`| Hostname is the hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.|
+| `scheme`| The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.|
+| `hostname`| The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.|
 | `path`| An [httpPathModfier](#httppathmodfier) which modifies the path of the incoming request and uses the modified path in the `Location` header.|
-| `port`| Port is the port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.|
-| `status`| StatusCode is the HTTP status code to be used in response.|
+| `port`| The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.|
+| `status`| The HTTP status code to be used in response.|
 {{< /table >}}
 
 ### httpPathModfier
@@ -300,13 +310,12 @@ spec:
 
 ## AuthorizationPolicy
 
-An [AuthorizationPolicy] provides a way to authorize
-traffic to a [Server] or an [HTTPRoute]. [AuthorizationPolicies]
-are intended to replace [ServerAuthorizations] and are
-more flexible because they can target [HTTPRoutes] instead of only
+An AuthorizationPolicy provides a way to authorize traffic to a [Server] or an
+[HTTPRoute]. AuthorizationPolicies are a replacement for [ServerAuthorizations]
+which are more flexible because they can target [HTTPRoutes] instead of only
 being able to target [Servers].
 
-### Spec
+### AuthorizationPolicy Spec
 
 An `AuthorizationPolicy` spec may contain the following top level fields:
 
@@ -319,12 +328,22 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 
 ### targetRef
 
-`TargetRef` identifies an API object.
+A `TargetRef` identifies an API object to which this AuthoricationPolicy
+applies. The API objects supported are:
+
+* A [Server], indicating that the AuthorizationPolicy applies to all traffic to
+  the Server.
+* An [HTTPRoute], indicating that the AuthorizationPolicy applies to all traffic
+  matching the HTTPRoute.
+* A namespace (`kind: Namespace`), indicating that the AuthorizationPolicy
+  applies to all traffic to all [Servers] and [HTTPRoutes] defined in the
+  namespace.
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| Group is the group of the target resource.|
+| `group`| Group is the group of the target resource. For namespace kinds, this
+should be supplied.|
 | `kind`| Kind is kind of the target resource.|
 | `namespace`| Namespace is the namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
@@ -398,7 +417,7 @@ A `MeshTLSAuthentication` represents a set of mesh identities. When an
 must have one of the specified identities in order to be authorized to send
 to the target.
 
-### Spec
+### MeshTLSAuthentication Spec
 
 A `MeshTLSAuthentication` spec may contain the following top level fields:
 
@@ -451,7 +470,7 @@ A `NetworkAuthentication` represents a set of IP subnets. When an
 `requiredAuthenticationRefs`, this means that clients must be in one of the
 specified networks in order to be authorized to send to the target.
 
-### Spec
+### NetworkAuthentication Spec
 
 A `NetworkAuthentication` spec may contain the following top level fields:
 
@@ -493,8 +512,8 @@ spec:
 
 ## ServerAuthorization
 
-A [ServerAuthorization] provides a way to authorize
-traffic to one or more [Server]s.
+A [ServerAuthorization] provides a way to authorize traffic to one or more
+[Server]s.
 
 {{< note >}}
 [AuthorizationPolicy](#authorizationpolicy) is a more flexible alternative to
@@ -503,7 +522,7 @@ traffic to one or more [Server]s.
 preferred, and `ServerAuthorization` will be deprecated in future releases.
 {{< /note >}}
 
-### Spec
+### ServerAuthorization Spec
 
 A ServerAuthorization spec must contain the following top level fields:
 
@@ -534,8 +553,8 @@ A selector object must contain _exactly one_ of the following fields:
 {{< table >}}
 | field | value |
 |-------|-------|
-| `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
-| `matchLabels` | matchLabels is a map of {key,value} pairs. |
+| `matchExpressions` | A list of label selector requirements. The requirements are ANDed. |
+| `matchLabels` | A map of {key,value} pairs. |
 {{< /table >}}
 
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
@@ -567,9 +586,9 @@ A `meshTLS` object must contain _exactly one_ of the following fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `unauthenticatedTLS`| A boolean to indicate that no client identity is required for communication.This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate. |
-| `identities`| A list of proxy identity strings (as provided via MTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
-| `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via MTLS). |
+| `unauthenticatedTLS`| A boolean to indicate that no client identity is required for communication. This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate. |
+| `identities`| A list of proxy identity strings (as provided via mTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
+| `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via mTLS). |
 {{< /table >}}
 
 ### serviceAccount
