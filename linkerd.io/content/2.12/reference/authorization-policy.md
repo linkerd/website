@@ -137,7 +137,7 @@ An `HTTPRoute` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| An set of [ParentReference](#parentreference)s which indicate which [Servers](#server) this `HTTPRoute` attach to.|
+| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) this `HTTPRoute` attach to.|
 | `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
@@ -343,9 +343,9 @@ applies. The API objects supported are:
 | field| value |
 |------|-------|
 | `group`| Group is the group of the target resource. For namespace kinds, this
-should be supplied.|
+should be omitted.|
 | `kind`| Kind is kind of the target resource.|
-| `namespace`| Namespace is the namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
+| `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
 {{< /table >}}
 
