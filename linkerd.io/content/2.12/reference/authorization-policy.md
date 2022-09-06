@@ -67,7 +67,7 @@ A `Server` spec may contain the following top level fields:
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
 {{< /table >}}
 
-### podSelector
+#### podSelector
 
 This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
 All the pods that are part of this selector will be part of the [Server] group.
@@ -142,7 +142,7 @@ An `HTTPRoute` spec may contain the following top level fields:
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
 
-### parentReference
+#### parentReference
 
 A reference to the [Servers] this `HTTPRoute` is a part of.
 
@@ -155,7 +155,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 | `name`| The name of the referent.|
 {{< /table >}}
 
-### httpRouteRule
+#### httpRouteRule
 
 `HTTPRouteRule` defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
@@ -167,7 +167,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 | `filters`| A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.|
 {{< /table >}}
 
-### httpRouteMatch
+#### httpRouteMatch
 
 `HTTPRouteMatch` defines the predicate used to match requests to a given
 action. Multiple match types are ANDed together, i.e. the match will
@@ -182,7 +182,7 @@ evaluate to true only if all conditions are satisfied.
 | `method`| When specified, this route will be matched only if the request has the specified method.|
 {{< /table >}}
 
-### httpPathMatch
+#### httpPathMatch
 
 `HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
 request path.
@@ -194,7 +194,7 @@ request path.
 | `value`| The HTTP path to match against.|
 {{< /table >}}
 
-### httpHeaderMatch
+#### httpHeaderMatch
 
 `HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
@@ -207,7 +207,7 @@ headers.
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
-### httpQueryParamMatch
+#### httpQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
@@ -220,7 +220,7 @@ query parameters.
 | `value`| Value of HTTP query param to be matched.|
 {{< /table >}}
 
-### httpRouteFilter
+#### httpRouteFilter
 
 `HTTPRouteFilter` defines processing steps that must be completed during the
 request or response lifecycle.
@@ -233,7 +233,7 @@ request or response lifecycle.
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
 
-### httpRequestHeaderFilter
+#### httpRequestHeaderFilter
 
 A filter which modifies request headers.
 
@@ -245,7 +245,7 @@ A filter which modifies request headers.
 | `remove`|  A list of header names to remove from the request.|
 {{< /table >}}
 
-### httpHeader
+#### httpHeader
 
 `HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
@@ -256,7 +256,7 @@ A filter which modifies request headers.
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
-### httpRequestRedirectFilter
+#### httpRequestRedirectFilter
 
 `HTTPRequestRedirect` defines a filter that redirects a request.
 
@@ -270,7 +270,7 @@ A filter which modifies request headers.
 | `status`| The HTTP status code to be used in response.|
 {{< /table >}}
 
-### httpPathModfier
+#### httpPathModfier
 
 `HTTPPathModifier` defines configuration for path modifiers.
 
@@ -326,7 +326,7 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 | `required_authentication_refs`| A list of [TargetRefs](#targetref) representing the required authentications.|
 {{< /table >}}
 
-### targetRef
+#### targetRef
 
 A `TargetRef` identifies an API object to which this AuthoricationPolicy
 applies. The API objects supported are:
@@ -480,7 +480,7 @@ A `NetworkAuthentication` spec may contain the following top level fields:
 | `networks`| A list of [networks](#network) to authenticate.|
 {{< /table >}}
 
-### network
+#### network
 
 A `network` defines an authenticated IP subnet.
 
@@ -533,7 +533,7 @@ A ServerAuthorization spec must contain the following top level fields:
 | `server`| A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
 {{< /table >}}
 
-### serverRef
+#### serverRef
 
 A `serverRef` object must contain _exactly one_ of the following fields:
 
@@ -544,7 +544,7 @@ A `serverRef` object must contain _exactly one_ of the following fields:
 | `selector`| A [selector](#selector) selects servers on which this authorization applies in the same namespace. |
 {{< /table >}}
 
-### selector
+#### selector
 
 This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
 All the servers that are part of this selector will have this authorization applied.
@@ -560,7 +560,7 @@ A selector object must contain _exactly one_ of the following fields:
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
 
-### client
+#### client
 
 A `client` object must contain _exactly one_ of the following fields:
 
@@ -579,7 +579,7 @@ Optionally, it can also contain the `networks` field:
 | `networks`| Limits the client IP addresses to which this authorization applies. If unset, the server chooses a default (typically, all IPs or the cluster's pod network). |
 {{< /table >}}
 
-### meshTLS
+#### meshTLS
 
 A `meshTLS` object must contain _exactly one_ of the following fields:
 
@@ -591,7 +591,7 @@ A `meshTLS` object must contain _exactly one_ of the following fields:
 | `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via mTLS). |
 {{< /table >}}
 
-### serviceAccount
+#### serviceAccount
 
 A serviceAccount field contains the following top level fields:
 
