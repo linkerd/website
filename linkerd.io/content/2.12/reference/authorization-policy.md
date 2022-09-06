@@ -50,9 +50,10 @@ pod/port pairs. Linkerd ships with an admission controller that prevents
 overlapping `Server`s from being created.
 
 {{< note >}}
-When a Server selects a port, traffic is denied by default and
-[ServerAuthorizations] or [AuthorizationPolicies]
-must be used to authorize traffic on ports selected by the Server.
+When a Server selects a port, all traffic to that port is then denied by
+default, regardless of the default policy. Thus, to authorize traffic to a port
+selected by a Server, you must create AuthorizationPolicies (or
+ServerAuthorizations).
 {{< /note >}}
 
 ### Server Spec
@@ -149,8 +150,8 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| The group of the referent.|
-| `kind`| The kind of the referent.|
+| `group`| The group of the referent. This must be set to "group.linkerd.io".|
+| `kind`| The kind of the referent. This must be set to "Server".|
 | `namespace`| The namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
 | `name`| The name of the referent.|
 {{< /table >}}
@@ -323,12 +324,12 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 | field| value |
 |------|-------|
 | `targetRef`| A [TargetRef](#targetref) which references a resource to which the authorization policy applies.|
-| `required_authentication_refs`| A list of [TargetRefs](#targetref) representing the required authentications.|
+| `required_authentication_refs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, *all* authentications must match.|
 {{< /table >}}
 
 #### targetRef
 
-A `TargetRef` identifies an API object to which this AuthoricationPolicy
+A `TargetRef` identifies an API object to which this AuthorizationPolicy
 applies. The API objects supported are:
 
 * A [Server], indicating that the AuthorizationPolicy applies to all traffic to
