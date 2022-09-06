@@ -1,6 +1,6 @@
 +++
 title = "Exporting Metrics"
-description = "Integrate Linkerd's Prometheus with your existing metrics infrastructure."
+description = "Integrate Linkerd's metrics with your existing metrics infrastructure."
 aliases = [
   "../prometheus/",
   "../observability/prometheus/",
@@ -8,25 +8,36 @@ aliases = [
 ]
 +++
 
-By design, Linkerd only keeps metrics data for a short, fixed window of time
-(currently, 6 hours). This means that if Linkerd's metrics data is valuable to
-you, you will probably want to export it into a full-fledged metrics store.
+Linkerd provides an extensive set of metrics for all traffic that passes through
+its data plane. These metrics are collected at the proxy level and reported on
+the proxy's metrics endpoint.
 
-Internally, Linkerd stores its metrics in a Prometheus instance that runs as
-part of the Viz extension. The following tutorial requires the viz extension
-to be installed with prometheus enabled. There are several basic approaches
-to exporting metrics data from Linkerd:
+Typically, consuming these metrics is not done from the proxies directly, as
+each proxy only provides a portion of the full picture. Instead, a separate tool
+is used to collect metrics from all proxies and aggregate them together for
+consumption.
 
-- [Federating data to your own Prometheus cluster](#federation)
-- [Using a Prometheus integration](#integration)
-- [Extracting data via Prometheus's APIs](#api)
-- [Gather data from the proxies directly](#proxy)
+One easy option is the [linkerd-viz](../../features/dashboard) extension, which
+will create an on-cluster Prometheus instance as well as dashboards and CLI
+commands that make use of it. However, this extension only keeps metrics data
+for a brief window of time (6 hours) and does not persist data across restarts.
+Depending on your use case, you may want to export these metrics into an
+external metrics store.
+
+There are several options for how to export these metrics to a destination
+outside of the cluster:
+
+- [Federate data from linkerd-viz to your own Prometheus cluster](#federation)
+- [Use a Prometheus integration with linkerd-viz](#integration)
+- [Extract data from linkerd-viz via Prometheus's APIs](#api)
+- [Gather data from the proxies directly without linkerd-viz](#proxy)
+
 
 ## Using the Prometheus federation API {#federation}
 
-If you are using Prometheus as your own metrics store, we recommend taking
-advantage of Prometheus's *federation* API, which is designed exactly for the
-use case of copying data from one Prometheus to another.
+If you are already using Prometheus as your own metrics store, we recommend
+taking advantage of Prometheus's *federation* API, which is designed exactly for
+the use case of copying data from one Prometheus to another.
 
 Simply add the following item to your `scrape_configs` in your Prometheus config
 file (replace `{{.Namespace}}` with the namespace where the Linkerd Viz
