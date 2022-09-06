@@ -2,7 +2,8 @@
 title = "CLI"
 description = "Reference documentation for all the CLI commands."
 aliases = [
-  "../cli/"
+  "../cli/",
+  "cli/repair/",
 ]
 +++
 
