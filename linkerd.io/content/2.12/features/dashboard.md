@@ -110,4 +110,3 @@ to use your browser instead:
 
 See [Exporting metrics](../../tasks/exporting-metrics/) for alternative ways
 to consume Linkerd's metrics.
-

@@ -32,7 +32,6 @@ outside of the cluster:
 - [Extract data from linkerd-viz via Prometheus's APIs](#api)
 - [Gather data from the proxies directly without linkerd-viz](#proxy)
 
-
 ## Using the Prometheus federation API {#federation}
 
 If you are already using Prometheus as your own metrics store, we recommend
