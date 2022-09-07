@@ -17,7 +17,7 @@ each proxy only provides a portion of the full picture. Instead, a separate tool
 is used to collect metrics from all proxies and aggregate them together for
 consumption.
 
-One easy option is the [linkerd-viz](../../features/dashboard) extension, which
+One easy option is the [linkerd-viz](../../features/dashboard/) extension, which
 will create an on-cluster Prometheus instance as well as dashboards and CLI
 commands that make use of it. However, this extension only keeps metrics data
 for a brief window of time (6 hours) and does not persist data across restarts.
