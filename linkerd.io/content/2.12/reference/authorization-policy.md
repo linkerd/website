@@ -11,7 +11,7 @@ means.
 Linkerd's policy is configured using two mechanisms:
 
 1. A set of _default policies_, which can be set at the cluster,
-   namespace, workload, and pod level through Kubernetes annotations.
+   namespace, and workload level through Kubernetes annotations.
 2. A set of CRDs that specify fine-grained policy for specific ports, routes,
    workloads, etc.
 
@@ -52,8 +52,7 @@ overlapping `Server`s from being created.
 {{< note >}}
 When a Server selects a port, all traffic to that port is then denied by
 default, regardless of the default policy. Thus, to authorize traffic to a port
-selected by a Server, you must create AuthorizationPolicies (or
-ServerAuthorizations).
+selected by a Server, you must create AuthorizationPolicies.
 {{< /note >}}
 
 ### Server Spec
