@@ -20,13 +20,13 @@ Linkerd's policy is configured using two mechanisms:
 During a Linkerd install, the `proxy.defaultInboundPolicy` field is used to
 specify the cluster-wide default policy. This field can be one of the following:
 
-- `all-unauthenticated`: allow all requests. This is the default.
-- `all-authenticated`: allow requests from meshed clients in the same or from
+- `all-unauthenticated`: allow all traffic. This is the default.
+- `all-authenticated`: allow traffic from meshed clients in the same or from
    a different cluster (with multi-cluster).
-- `cluster-authenticated`: allow requests from meshed clients in the same cluster.
-- `cluster-unauthenticated`: allow requests from both meshed and non-meshed clients
+- `cluster-authenticated`: allow traffic from meshed clients in the same cluster.
+- `cluster-unauthenticated`: allow traffic from both meshed and non-meshed clients
   in the same cluster.
-- `deny`: all requests are denied.
+- `deny`: all traffic are denied.
 
 This cluster-wide default can be overridden for specific resources by setting
 the annotation `config.linkerd.io/default-inbound-policy` on either a pod spec
@@ -331,11 +331,11 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 A `TargetRef` identifies an API object to which this AuthorizationPolicy
 applies. The API objects supported are:
 
-* A [Server], indicating that the AuthorizationPolicy applies to all traffic to
+- A [Server], indicating that the AuthorizationPolicy applies to all traffic to
   the Server.
-* An [HTTPRoute], indicating that the AuthorizationPolicy applies to all traffic
+- An [HTTPRoute], indicating that the AuthorizationPolicy applies to all traffic
   matching the HTTPRoute.
-* A namespace (`kind: Namespace`), indicating that the AuthorizationPolicy
+- A namespace (`kind: Namespace`), indicating that the AuthorizationPolicy
   applies to all traffic to all [Servers] and [HTTPRoutes] defined in the
   namespace.
 
