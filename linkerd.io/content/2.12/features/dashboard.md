@@ -1,12 +1,12 @@
 +++
-title = "On-cluster metrics stack"
+title = "Dashboard and on-cluster metrics stack"
 description = "Linkerd provides a full on-cluster metrics stack, including CLI tools and dashboards."
 +++
 
-Linkerd provides a full on-cluster metrics stack, including CLI tools, a web
-dashboard, and pre-configured Grafana dashboards.
+Linkerd provides a full on-cluster metrics stack, including CLI tools and a web
+dashboard.
 
-To access this functionality, you install the viz extension:
+To access this functionality, install the viz extension:
 
 ```bash
 linkerd viz install | kubectl apply -f -
@@ -23,61 +23,41 @@ These components work together to provide an on-cluster metrics stack.
 {{< note >}}
 To limit excessive resource usage on the cluster, the metrics stored by this
 extension are _transient_. Only the past 6 hours are stored, and metrics do not
-persist in the event of pod restart or node outages.
+persist in the event of pod restart or node outages. This may not be suitable
+for production use.
 {{< /note >}}
 
-## Operating notes
-
+{{< note >}}
 This metrics stack may require significant cluster resources. Prometheus, in
 particular, will consume resources as a function of traffic volume within the
 cluster.
-
-Additionally, by default, metrics data is stored in a transient manner that is
-not resilient to pod restarts or to node outages. See [Bringing your own
-Prometheus](../../tasks/external-prometheus/) for one way to address this.
+{{< /note >}}
 
 ## Linkerd dashboard
 
 The Linkerd dashboard provides a high level view of what is happening with your
-services in real time. It can be used to view the "golden" metrics (success
-rate, requests/second and latency), visualize service dependencies and
-understand the health of specific service routes. One way to pull it up is by
-running `linkerd viz dashboard` from the command line.
+services in real time. It can be used to view "golden metrics" (success rate,
+requests/second and latency), visualize service dependencies and understand the
+health of specific service routes.
+
+One way to pull it up is by running `linkerd viz dashboard` from the command
+line.
 
 {{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
 
 ## Grafana
 
-As a component of the control plane, Grafana provides actionable dashboards for
-your services out of the box. It is possible to see high level metrics and dig
-down into the details, even for pods.
-
-The dashboards that are provided out of the box include:
-
-{{< gallery >}}
-
-{{< gallery-item src="/images/screenshots/grafana-top.png"
-    title="Top Line Metrics" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-deployment.png"
-    title="Deployment Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-pod.png"
-    title="Pod Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-health.png"
-    title="Linkerd Health" >}}
-
-{{< /gallery >}}
-
-See our [Grafana docs](../../tasks/grafana/) for instructions on how to install
-Grafana and load these dashboards.
+In earlier versions of Linkerd, the viz extension also pre-installed a Grafana
+dashboard. As of Linkerd 2.12, due to licensing changes in Grafana, this is no
+longer the case. However, you can still install Grafana on your own—see the
+[Grafana docs](../../tasks/grafana/) for instructions on how to create the
+Grafana dashboards.
 
 ## Examples
 
-In these examples, we assume you've installed the emojivoto example
-application.  Please refer to the [Getting Started
-Guide](../../getting-started/) for how to do this.
+In these examples, we assume you've installed the emojivoto example application.
+Please refer to the [Getting Started Guide](../../getting-started/) for how to
+do this.
 
 You can use your dashboard extension and see all the services in the demo app.
 Since the demo app comes with a load generator, we can see live traffic metrics
@@ -125,3 +105,8 @@ to use your browser instead:
     title="Tap" >}}
 
 {{< /gallery >}}
+
+## Futher reading
+
+See [Exporting metrics](../../tasks/exporting-metrics/) for alternative ways
+to consume Linkerd's metrics.
