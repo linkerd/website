@@ -323,7 +323,7 @@ An `AuthorizationPolicy` spec may contain the following top level fields:
 | field| value |
 |------|-------|
 | `targetRef`| A [TargetRef](#targetref) which references a resource to which the authorization policy applies.|
-| `required_authentication_refs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, *all* authentications must match.|
+| `requiredAuthenticationRefs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, _all_ authentications must match.|
 {{< /table >}}
 
 #### targetRef
@@ -425,7 +425,7 @@ A `MeshTLSAuthentication` spec may contain the following top level fields:
 | field| value |
 |------|-------|
 | `identities`| A list of mTLS identities to authenticate.|
-| `identity_refs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
+| `identityRefs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
 {{< /table >}}
 
 ### MeshTLSAuthentication Examples
@@ -456,7 +456,7 @@ metadata:
   name: authors-get-authn
   namespace: booksapp
 spec:
-  identity_refs:
+  identityRefs:
     - kind: ServiceAccount
       name: books
     - kind: ServiceAccount
@@ -676,6 +676,4 @@ spec:
 [AuthorizationPolicy]: #authorizationpolicy
 [AuthorizationPolicies]: #authorizationpolicy
 [MeshTLSAuthentication]: #meshtlsauthentication
-[MeshTLSAuthentications]: #meshtlsauthentication
 [NetworkAuthentication]: #networkauthentication
-[NetworkAuthentications]: #networkauthentication
