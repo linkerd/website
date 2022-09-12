@@ -210,12 +210,10 @@ kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 
 ## Installing with Helm
 
-For installing with Helm, first install the `linkerd-crds` and `linkerd-base`
-charts:
+For installing with Helm, first install the `linkerd-crds` chart:
 
 ```bash
-helm install linkerd-base -n linkerd linkerd/linkerd-crds
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
+helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 ```
 
 Then install the `linkerd-control-plane` chart, setting the
