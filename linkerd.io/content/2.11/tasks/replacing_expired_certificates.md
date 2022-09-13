@@ -5,11 +5,11 @@ description = "Follow this workflow if any of your TLS certs have expired."
 
 If any of your TLS certs are approaching expiry and you are not relying on an
 external certificate management solution such as `cert-manager`, you can follow
-[Rotating your identity certificates](../rotating_identity_certificates/)
-to update them without incurring downtime. In case you are in a situation where
-any of your certs are expired however, you are already in an invalid state and
-any measures to avoid downtime are not guaranteed to give results. Therefore it
-is best to proceed with replacing the certificates with valid ones.
+[Manually Rotating Control Plane TLS Credentials](../rotating_identity_certificates/)
+to update them without incurring downtime. However, if any of your certificates
+have already expired, your mesh is already in an invalid state and any measures
+to avoid downtime are not guaranteed to give good results. Instead, you need to
+replace the expired certificates with valid certificates.
 
 ## Replacing only the issuer certificate
 
@@ -30,9 +30,9 @@ linkerd-identity
 ```
 
 In this situation, if you have installed Linkerd with a manually supplied trust
-root and you have its key, you can follow
-[Updating the identity issuer certificate](../manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
-to update your expired cert.
+root and you have its key, you can follow the instructions to
+[rotate your identity issuer certificate](../manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
+to update your expired certificate.
 
 ## Replacing the root and issuer certificates
 
@@ -70,8 +70,15 @@ will not work with the roots your meshed pods are using. At that point we
 do not need this check as we are updating both the root and issuer certs at
 the same time. Therefore we use the `--force` flag to ignore this error.
 
-If you run `linkerd check --proxy` you might see some warning, while the
-upgrade process is being performed:
+Once this is done, you'll need to explicitly restart the control plane so that
+everything in the control plane is configured to use the new trust anchor:
+
+```bash
+kubectl rollout restart -n linkerd deploy
+```
+
+If you run `linkerd check --proxy` before the restart is completed, you will
+probably see warnings about pods not having the current trust bundle:
 
 ```bash
 linkerd-identity
@@ -101,9 +108,10 @@ linkerd-identity-data-plane
 
 ```
 
-Additionally you can use the `kubectl rollout restart` command to bring the
-configuration of your other injected resources up to date, and then the `check`
-command should stop producing warning or errors:
+These warnings should disappear once the restart is completed. Once they do,
+you can use `kubectl rollout restart` to restart your meshed workloads to
+bring their configuration up to date. After that is done, `linkerd check`
+should run with no warnings or errors:
 
 ```bash
 linkerd-identity

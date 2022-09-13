@@ -45,9 +45,11 @@ component.
 Now that we have our cluster, we'll install the Linkerd CLI and use it validate
 that your cluster is capable of hosting Linkerd.
 
-(Note: if you're using a GKE "private cluster", there are some [extra steps
+{{< note >}}
+If you're using a GKE "private cluster" or Calico CNI, there are some [extra steps
 required](../reference/cluster-configuration/#private-clusters) before you can
-proceed to the next step.)
+proceed to the next step.
+{{< /note >}}
 
 ## Step 1: Install the CLI
 

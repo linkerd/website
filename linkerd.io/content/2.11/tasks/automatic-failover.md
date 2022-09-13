@@ -34,7 +34,7 @@ extension. These can be installed in both clusters, but since we'll only be
 initiating failover from the "west" cluster in this example, we'll only install
 them in that cluster:
 
-```console
+```bash
 # Install linkerd-smi in west cluster
 > helm --kube-context=west repo add linkerd-smi https://linkerd.github.io/linkerd-smi
 > helm --kube-context=west repo up
@@ -50,7 +50,7 @@ them in that cluster:
 
 We'll now install the Emojivoto example application into both clusters:
 
-```console
+```bash
 > linkerd --context=west inject https://run.linkerd.io/emojivoto.yml | kubectl --context=west apply -f -
 > linkerd --context=east inject https://run.linkerd.io/emojivoto.yml | kubectl --context=east apply -f -
 ```
@@ -61,7 +61,7 @@ multicluster extension to create a mirror service called `web-svc-east` in the
 west cluster, making the east Emojivoto application available in the west
 cluster:
 
-```console
+```bash
 > kubectl --context=east -n emojivoto label svc/web-svc mirror.linkerd.io/exported=true
 > kubectl --context=west -n emojivoto get svc
 NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
@@ -79,7 +79,7 @@ TrafficSplit resource in the west cluster with the
 `failover.linkerd.io/primary-service` annotation indicates that the `web-svc`
 backend is the primary and all other backends will be treated as the fallbacks:
 
-```console
+```bash
 > cat <<EOF | kubectl --context=west apply -f -
 apiVersion: split.smi-spec.io/v1alpha2
 kind: TrafficSplit
@@ -110,7 +110,7 @@ We can use the `linkerd viz stat` command to see that the `vote-bot` traffic
 generator in the west cluster is sending traffic to the local primary service,
 `web-svc`:
 
-```console
+```bash
 > linkerd --context=west viz stat -n emojivoto svc --from deploy/vote-bot
 NAME          MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
 web-svc            -    96.67%   2.0rps           2ms           3ms           5ms          1
@@ -119,7 +119,7 @@ web-svc-east       -         -        -             -             -             
 
 Now we'll simulate the local service becoming unavailable by scaling it down:
 
-```console
+```bash
 > kubectl --context=west -n emojivoto scale deploy/web --replicas=0
 ```
 
@@ -127,7 +127,7 @@ We can immediately see that the TrafficSplit has been adjusted to send traffic
 to the backup. Notice that the `web-svc` backend now has weight 0 and the
 `web-svc-east` backend now has weight 1.
 
-```console
+```bash
 > kubectl --context=west -n emojivoto get ts/web-svc-failover -o yaml
 apiVersion: split.smi-spec.io/v1alpha2
 kind: TrafficSplit
@@ -154,7 +154,7 @@ spec:
 We can also confirm that this traffic is going to the fallback using the
 `viz stat` command:
 
-```console
+```bash
 > linkerd --context=west viz stat -n emojivoto svc --from deploy/vote-bot
 NAME          MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
 web-svc            -         -        -             -             -             -          -
@@ -164,7 +164,7 @@ web-svc-east       -    93.04%   1.9rps          25ms          30ms          30m
 Finally, we can restore the primary by scaling its deployment back up and
 observe the traffic shift back to it:
 
-```console
+```bash
 > kubectl --context=west -n emojivoto scale deploy/web --replicas=1
 deployment.apps/web scaled
 > linkerd --context=west viz stat -n emojivoto svc --from deploy/vote-bot

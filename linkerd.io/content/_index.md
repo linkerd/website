@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "**2022-6-27** Announcing the completion of Linkerd's 2022 Security Audit! [Read more »](/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/)"
+  description: "2022-08-24 **Announcing Linkerd 2.12: Zero-trust route-based policy, Gateway API, access logging, and more! [Read more »](https://buoyant.io/blog/announcing-linkerd-2-12)**"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:

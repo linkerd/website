@@ -1,0 +1,1199 @@
++++
+title = "Upgrading Linkerd"
+description = "Upgrade Linkerd to the latest version."
+aliases = [
+  "../upgrade/",
+  "../update/"
+]
++++
+
+<!-- markdownlint-disable-file MD014 -->
+
+In this guide, we'll walk you through how to upgrade Linkerd.
+
+Before starting, read through the version-specific upgrade notices below, which
+may contain important information you need to be aware of before commencing
+with the upgrade process:
+
+- [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
+- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
+- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
+- [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
+- [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
+- [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
+- [Upgrade notice: stable-2.8.0](#upgrade-notice-stable-2-8-0)
+- [Upgrade notice: stable-2.7.0](#upgrade-notice-stable-2-7-0)
+- [Upgrade notice: stable-2.6.0](#upgrade-notice-stable-2-6-0)
+- [Upgrade notice: stable-2.5.0](#upgrade-notice-stable-2-5-0)
+- [Upgrade notice: stable-2.4.0](#upgrade-notice-stable-2-4-0)
+- [Upgrade notice: stable-2.3.0](#upgrade-notice-stable-2-3-0)
+- [Upgrade notice: stable-2.2.0](#upgrade-notice-stable-2-2-0)
+
+## Steps to upgrade
+
+There are three components that need to be upgraded, in turn:
+
+- [CLI](#upgrade-the-cli)
+- [Control Plane](#upgrade-the-control-plane)
+- [Data Plane](#upgrade-the-data-plane)
+
+## Upgrade the CLI
+
+This will upgrade your local CLI to the latest version. You will want to follow
+these instructions for anywhere that uses the Linkerd CLI. For Helm users feel
+free to skip to the [Helm section](#with-helm).
+
+To upgrade the CLI locally, run:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+```
+
+Alternatively, you can download the CLI directly via the
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
+
+Verify the CLI is installed and running correctly with:
+
+```bash
+linkerd version --client
+```
+
+Which should display:
+
+```bash
+Client version: {{% latestversion %}}
+```
+
+{{< note >}}
+Until you upgrade the control plane, some new CLI commands may not work.
+{{< /note >}}
+
+You are now ready to [upgrade your control plane](#upgrade-the-control-plane).
+
+## Upgrade the Control Plane
+
+Now that you have upgraded the CLI, it is time to upgrade the Linkerd control
+plane on your Kubernetes cluster. Don't worry, the existing data plane will
+continue to operate with a newer version of the control plane and your meshed
+services will not go down.
+
+{{< note >}}
+You will lose the historical data from Prometheus. If you would like to have
+that data persisted through an upgrade, take a look at the
+[persistence documentation](../../observability/exporting-metrics/)
+{{< /note >}}
+
+### With Linkerd CLI
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained. Notice that we use the `--prune` flag to remove any Linkerd
+resources from the previous version which no longer exist in the new version.
+
+```bash
+$ linkerd upgrade --crds | \
+  kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=apiextensions.k8s.io/v1/customresourcedefinition \
+  -f -
+
+$ linkerd upgrade | \
+  kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+Next, run this command again with some `--prune-whitelist` flags added. This is
+necessary to make sure that certain cluster-scoped resources are correctly
+pruned.
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+```
+
+### With Helm
+
+For Helm control plane installations, please follow the instructions at [Helm
+upgrade procedure](../install-helm/#helm-upgrade-procedure).
+
+### Verifying the control plane upgrade
+
+Once the upgrade process completes, check to make sure everything is healthy
+by running:
+
+```bash
+linkerd check
+```
+
+This will run through a set of checks against your control plane and make sure
+that it is operating correctly.
+
+To verify the Linkerd control plane version, run:
+
+```bash
+linkerd version
+```
+
+Which should display:
+
+```txt
+Client version: {{% latestversion %}}
+Server version: {{% latestversion %}}
+```
+
+Next, we will [upgrade your data plane](#upgrade-the-data-plane).
+
+## Upgrade the Data Plane
+
+With a fully up-to-date CLI running locally and Linkerd control plane running on
+your Kubernetes cluster, it is time to upgrade the data plane. The easiest
+way to do this is to run a rolling deploy on your services, allowing the
+proxy-injector to inject the latest version of the proxy as they come up.
+
+This can be as simple as using the `kubectl rollout restart` command to restart
+all your meshed services. For example,
+
+```bash
+kubectl -n <namespace> rollout restart deploy
+```
+
+{{< note >}}
+Unless otherwise documented in the release notes, stable release control planes
+should be compatible with the data plane from the previous stable release.
+Thus, data plane upgrades can be done at any point after the control plane has
+been upgraded, including as part of the application's natural deploy cycle.  A
+gap of more than one stable version between control plane and data plane is not
+recommended.
+{{< /note >}}
+
+Workloads that were previously injected using the `linkerd inject --manual`
+command can be upgraded by re-injecting the applications in-place. For example,
+
+```bash
+kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
+  | linkerd inject --manual - \
+  | kubectl apply -f -
+```
+
+### Verify the data plane upgrade
+
+Check to make sure everything is healthy by running:
+
+```bash
+linkerd check --proxy
+```
+
+This will run through a set of checks to verify that the data plane is
+operating correctly, and will list any pods that are still running older
+versions of the proxy.
+
+Congratulation! You have successfully upgraded your Linkerd to the newer
+version. If you have any questions, feel free to raise them at the #linkerd2
+channel in the [Linkerd slack](https://slack.linkerd.io/).
+
+## Upgrade notice: stable-2.12.0
+
+The minimum Kubernetes version supported is `v1.21.0`.
+
+### Using the CLI
+
+If you had installed Linkerd `2.11.x` using the CLI _and_ are making use of the
+`TrafficSplit` CRD, you need to follow these instructions to avoid loosing your
+`TS` CRs. If you're not using this CRD then you can ignore these instructions
+and perform the usual upgrade as [described above](#with-linkerd-cli).
+
+The `TrafficSplit` CRD no longer ships with Linkerd `2.12.0` and is provided
+instead by the Linkerd SMI extension. But before installing that extension, you
+need to add the following annotations and label to the CRD so that the
+`linkerd-smi` chart can adopt it:
+
+```bash
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+  meta.helm.sh/release-name=linkerd-smi \
+  meta.helm.sh/release-namespace=linkerd-smi
+$ kubectl label crd/trafficsplits.split.smi-spec.io \
+  app.kubernetes.io/managed-by=Helm
+```
+
+Now you can install the Linkerd SMI extension, via Helm:
+
+```bash
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+```
+
+And finally you can proceed with the usual [CLI upgrade
+instructions](#with-linkerd-cli), but avoid using the `--prune` flag when
+applying the output of `linkerd upgrade --crds` to avoid removing the
+`TrafficSplit` CRD!
+
+### Using Helm
+
+The following sections provide instructions on how to perform a migration from
+Linkerd `2.11.x` to `2.12.0` without control plane downtime, when your existing
+Linkerd instance was installed via Helm.
+
+The `linkerd2` chart has been replaced by two charts: `linkerd-crds` and
+`linkerd-control-plane` (and optionally `linkerd-smi` if you're using
+`TrafficSplit`). Please check the updated [Helm instructions](../install-helm/)
+for details. Also note that support for Helm v2 has been dropped.
+
+### How to retrieve certificate keys and custom values
+
+To start the migration first find the release name you used for the `linkerd2`
+chart, and the namespace where this release stored its config:
+
+```bash
+$ helm ls -A
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION  
+linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
+```
+
+This output matches the default case. Even if Linkerd is installed in the
+`linkerd` namespace, the Helm config should have been installed in the `default`
+namespace, unless you specified something different in the `namespace` value
+when you installed. Take note of this release name (linkerd) and namespace
+(default) to use in the commands that follow.
+
+Before proceeding, make sure you retrieve all your chart values customizations,
+in particular your trust root and issuer keys (`identityTrustAnchorsPEM`,
+`identity.issuer.tls.crtPEM` and `identity.issuer.tls.keyPEM`). These values
+will need to be fed again into the `helm install` command below for the
+`linkerd-control-plane` chart. These values can be retrieved with the following
+command:
+
+```bash
+$ helm get -n default values linkerd
+```
+
+### Migrate resources to the new charts
+
+This requires using the [yq](https://github.com/mikefarah/yq) utility.
+
+The following snippets will change the `meta.helm.sh/release-name` and
+`meta.helm.sh/release-namespace` annotations for each resource in the `linkerd`
+release (use your own name as explained above), so that they can be adopted by
+the `linkerd-crds`, `linkerd-control-plane` and `linkerd-smi` charts:
+
+```bash
+# First migrate the CRDs
+$ helm -n default get manifest linkerd | \
+  yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' | \
+  grep -v '\-\-\-' | \
+  xargs -n1 sh -c \
+  'kubectl annotate --overwrite crd/$0 meta.helm.sh/release-name=linkerd-crds meta.helm.sh/release-namespace=linkerd'
+
+# Special case for TrafficSplit (only use if you have TrafficSplit CRs)
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+  meta.helm.sh/release-name=linkerd-smi meta.helm.sh/release-namespace=linkerd-smi
+
+# Now migrate all the other resources
+$ helm -n default get manifest linkerd | \
+  yq 'select(.kind != "CustomResourceDefinition")' | \
+  yq '.kind, .metadata.name, .metadata.namespace' | \
+  grep -v '\-\-\-' |
+  xargs -n3 sh -c 'kubectl annotate --overwrite -n $2 $0/$1 meta.helm.sh/release-name=linkerd-control-plane meta.helm.sh/release-namespace=linkerd'
+```
+
+### Install the new charts
+
+```bash
+# First make sure you update the helm repo
+$ helm repo up
+
+# Install the linkerd-crds chart
+$ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+
+# Install the linkerd-control-plane chart
+# (remember to add any customizations you retrieved above)
+$ helm install linkerd-control-plane \
+  -n linkerd \
+  --set-file identityTrustAnchorsPEM=ca.crt \
+  --set-file identity.issuer.tls.crtPEM=issuer.crt \
+  --set-file identity.issuer.tls.keyPEM=issuer.key \
+  linkerd/linkerd-control-plane
+
+# Optional: if using TrafficSplit CRs
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+```
+
+### Cleaning up the old linkerd2 Helm release
+
+The `helm delete` command would delete all the linkerd resources, so instead we
+just remove the Helm release config for the old `linkerd2` chart (assuming you
+used the "Secret" storage backend, which is the default):
+
+```bash
+$ kubectl -n default delete secret \
+  --field-selector type=helm.sh/release.v1 \
+  -l name=linkerd,owner=helm
+```
+
+### Breaking changes in extension Helm charts
+
+The main extensions (viz, multicluster, jaeger, linkerd2-cni) were also
+refactored, in that they no longer install their namespaces, leaving that to the
+`helm` command (or to a previous step in your CD pipeline), and they rely on an
+post-install hook to add the required metadata into that namespace. Therefore
+you need to delete and reinstall them; for example for Linkerd-Viz:
+
+```bash
+# update the helm repo
+helm repo up
+
+# delete your current instance
+# (assuming you didn't use the -n flag when installing)
+helm delete linkerd-viz
+
+# install the new chart version
+helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
+```
+
+### Multicluster
+
+Reinstalling the multicluster extension via Helm as explained above will result
+in the recreation of the `linkerd-multicluster` namespace, thus deleting all the
+`Link` resources that associate the source cluster with any target clusters. The
+mirrored services, which live on their respective namespaces, won't be deleted
+so there won't be any downtime. So after finishing the upgrade, make sure you
+re-link your clusters again with `linkerd multicluster link`. This will also
+bring the latest versions of the service mirror deployments.
+
+### Grafana removal
+
+Linkerd Viz no longer installs a Grafana instance, and instead we recommend you
+install it directly from the [Grafana official Helm
+chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) or the
+[Grafana Operator](https://github.com/grafana-operator/grafana-operator).
+Linkerd's Grafana dashboards have been published in
+<https://grafana.com/orgs/linkerd/dashboards>, and the new [Grafana
+docs](../grafana/) provide detailed instructions on how to load them.
+
+## Upgrade notice: stable-2.11.0
+
+The minimum Kubernetes version supported is now `v1.17.0`.
+
+There are two breaking changes in the 2.11.0 release: pods in `ingress` no
+longer support non-HTTP traffic to meshed workloads; and the proxy no longer
+forwards traffic to ports that are bound only to localhost.
+
+Users of the multi-cluster extension will need to re-link their cluster after
+upgrading.
+
+The Linkerd proxy container is now the *first* container in the pod. This may
+affect tooling that assumed the application was the first container in the pod.
+
+### Control plane changes
+
+The `controller` pod has been removed from the control plane. All configuration
+options that previously applied to it are no longer valid (e.g
+`publicAPIResources` and all of its nested fields). Additionally, the
+destination pod has a new `policy` container that runs the policy controller.
+
+### Data plane changes
+
+In order to fix a class of startup race conditions, the container ordering
+within meshed pods has changed so that the Linkerd proxy container is now the
+*first* container in the pod, the application container now waits to start until
+the proxy is ready. This may affect tooling that assumed the application
+container was the first container in the pod.
+
+Using [linkerd-await](https://github.com/linkerd/linkerd-await) to enforce
+container startup ordering is thus longer necessary. (However, using
+`linkerd-await -S` to ensure proxy shutdown in Jobs and Cronjobs is still
+valid.)
+
+### Routing breaking changes
+
+There are two breaking changes to be aware of when it comes to how traffic is
+routed.
+
+First, when the proxy runs in ingress mode (`config.linkerd.io/inject:
+ingress`), non-HTTP traffic to meshed pods is no longer supported. To get
+around this, you will need to use the `config.linkerd.io/skip-outbound-ports`
+annotation on your ingress controller pod. In many cases, ingress mode is no
+longer necessary. Before upgrading, it may be worth revisiting [how to use
+ingress](../using-ingress/) with Linkerd.
+
+Second, the proxy will no longer forward traffic to ports only bound on
+localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
+other pods should now be bound to a public interface (e.g `0.0.0.0:8080`). This
+change prevents ports from being accidentally exposed outside of the pod.
+
+### Multicluster
+
+The gateway component has been changed to use a `pause` container instead of
+`nginx`. This change should reduce the footprint of the extension; the proxy
+routes traffic internally and does not need to rely on `nginx` to receive or
+forward traffic. While this will not cause any downtime when upgrading
+multicluster, it does affect probing. `linkerd multicluster gateways` will
+falsely advertise the target cluster gateway as being down until the clusters
+are re-linked.
+
+Multicluster now supports `NodePort` type services for the gateway. To support
+this change, the configuration options in the Helm values file are now grouped
+under the `gateway` field. If you have installed the extension with other
+options than the provided defaults, you will need to update your `values.yaml`
+file to reflect this change in field grouping.
+
+### Other changes
+
+Besides the breaking changes described above, there are other minor changes to
+be aware of when upgrading from `stable-2.10.x`:
+
+- `PodSecurityPolicy` (PSP) resources are no longer installed by default as a
+ result of their deprecation in Kubernetes v1.21 and above. The control plane
+ and core extensions will now be shipped without PSPs; they can be enabled
+ through a new install option `enablePSP: true`.
+- The `tcp_connection_duration_ms` metric has been removed.
+- Opaque ports changes: `443` is no longer included in the default opaque ports
+ list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
+ ElasticSearch respectively (all server speak first protocols) have been added
+ to the default opaque ports list. The default ignore inbound ports list has
+ also been changed to include ports `4567` and `4568`.
+
+## Upgrade notice: stable-2.10.0
+
+If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but *not*
+2.9.4), and you *upgraded* to that release using the `--prune` flag (as opposed
+to installing it fresh), you will need to use the `linkerd repair` command as
+outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-2-9-3)
+before you can upgrade to Linkerd 2.10.
+
+Additionally, there are two changes in the 2.10.0 release that may affect you.
+First, the handling of certain ports and protocols has changed. Please read
+through our [ports and protocols in 2.10 upgrade
+guide](../../../2.10/tasks/upgrading-2.10-ports-and-protocols/) for the
+repercussions.
+
+Second, we've introduced [extensions](../extensions/) and moved the
+default visualization components into a Linkerd-Viz extension. Read on for what
+this means for you.
+
+### Visualization components moved to Linkerd-Viz extension
+
+With the introduction of [extensions](../extensions/), all of the
+Linkerd control plane components related to visibility (including Prometheus,
+Grafana, Web, and Tap) have been removed from the main Linkerd control plane
+and moved into the Linkerd-Viz extension. This means that when you upgrade to
+stable-2.10.0, these components will be removed from your cluster and you will
+not be able to run commands such as `linkerd stat` or
+`linkerd dashboard`. To restore this functionality, you must install the
+Linkerd-Viz extension by running `linkerd viz install | kubectl apply -f -`
+and then invoke those commands through `linkerd viz stat`,
+`linkerd viz dashboard`, etc.
+
+```bash
+# Upgrade the control plane (this will remove viz components).
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+# Prune cluster-scoped resources
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+# Install the Linkerd-Viz extension to restore viz functionality.
+linkerd viz install | kubectl apply -f -
+```
+
+Helm users should note that configuration values related to these visibility
+components have moved to the Linkerd-Viz chart. Please update any values
+overrides you have and use these updated overrides when upgrading the Linkerd
+chart or installing the Linkerd-Viz chart. See below for a complete list of
+values which have moved.
+
+```bash
+helm repo update
+# Upgrade the control plane (this will remove viz components).
+helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
+# Install the Linkerd-Viz extension to restore viz functionality.
+helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
+```
+
+The following values were removed from the Linkerd2 chart. Most of the removed
+values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
+
+- `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
+- `tap` moved to Linkerd-Viz as `tap`
+- `tapResources` moved to Linkerd-Viz as `tap.resources`
+- `tapProxyResources` moved to Linkerd-Viz as `tap.proxy.resources`
+- `webImage` moved to Linkerd-Viz as `dashboard.image`
+- `webResources` moved to Linkerd-Viz as `dashboard.resources`
+- `webProxyResources` moved to Linkerd-Viz as `dashboard.proxy.resources`
+- `grafana` moved to Linkerd-Viz as `grafana`
+- `grafana.proxy` moved to Linkerd-Viz as `grafana.proxy`
+- `prometheus` moved to Linkerd-Viz as `prometheus`
+- `prometheus.proxy` moved to Linkerd-Viz as `prometheus.proxy`
+- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
+- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as `webhook.collectorSvcAccount`
+- `tracing.enabled` removed
+- `tracing.collector` moved to Linkerd-Jaeger as `collector`
+- `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
+
+Also please note the global scope from the Linkerd2 chart values has been
+dropped, moving the config values underneath it into the root scope. Any values
+you had customized there will need to be migrated; in particular
+`identityTrustAnchorsPEM` in order to conserve the value you set during
+install."
+
+## Upgrade notice: stable-2.9.4
+
+See upgrade notes for 2.9.3 below.
+
+## Upgrade notice: stable-2.9.3
+
+### Linkerd Repair
+
+Due to a known issue in versions stable-2.9.0, stable-2.9.1, and stable-2.9.2,
+users who upgraded to one of those versions with the --prune flag (as described
+above) will have deleted the `secret/linkerd-config-overrides` resource which is
+necessary for performing any subsequent upgrades. Linkerd stable-2.9.3 includes
+a new `linkerd repair` command which restores this deleted resource. If you see
+unexpected error messages during upgrade such as "failed to read CA: not
+PEM-encoded", please upgrade your CLI to stable-2.9.3 and run:
+
+```bash
+linkerd repair | kubectl apply -f -
+```
+
+This will restore the `secret/linkerd-config-overrides` resource and allow you
+to proceed with upgrading your control plane.
+
+## Upgrade notice: stable-2.9.0
+
+### Images are now hosted on ghcr.io
+
+As of this version images are now hosted under `ghcr.io` instead of `gcr.io`. If
+you're pulling images into a private repo please make the necessary changes.
+
+### Upgrading multicluster environments
+
+Linkerd 2.9 changes the way that some of the multicluster components work and
+are installed compared to Linkerd 2.8.x. Users installing the multicluster
+components for the first time with Linkerd 2.9 can ignore these instructions and
+instead refer directly to the [installing
+multicluster instructions](../installing-multicluster/).
+
+Users who installed the multicluster component in Linkerd 2.8.x and wish to
+upgrade to Linkerd 2.9 should follow the [upgrade multicluster
+instructions](../../../2.9/tasks/upgrade-multicluster/).
+
+### Ingress behavior changes
+
+In previous versions when you injected your ingress controller (Nginx, Traefik,
+Ambassador, etc), then the ingress' balancing/routing choices would be
+overridden with Linkerd's (using service profiles, traffic splits, etc.).
+
+As of 2.9 the ingress's choices are honored instead, which allows preserving
+things like session-stickiness. Note however that this means per-route metrics
+are not collected, traffic splits will not be honored and retries/timeouts are
+not applied.
+
+If you want to revert to the previous behavior, inject the proxy into the
+ingress controller using the annotation `linkerd.io/inject: ingress`, as
+explained in [using ingress](../using-ingress/)
+
+### Breaking changes in Helm charts
+
+Some entries like `controllerLogLevel` and all the Prometheus config have
+changed their position in the settings hierarchy. To get a precise view of what
+has changed you can compare the
+[stable-2.8.1](https://github.com/linkerd/linkerd2/blob/stable-2.8.1/charts/linkerd2/values.yaml)
+and
+[stable-2.9.0](https://github.com/linkerd/linkerd2/blob/stable-2.9.0/charts/linkerd2/values.yaml)
+`values.yaml` files.
+
+### Post-upgrade cleanup
+
+In order to better support cert-manager, the secrets
+`linkerd-proxy-injector-tls`, `linkerd-sp-validator-tls` and `linkerd-tap-tls`
+have been replaced by the secrets `linkerd-proxy-injector-k8s-tls`,
+`linkerd-sp-validator-k8s-tls` and `linkerd-tap-k8s-tls` respectively. If you
+upgraded through the CLI, please delete the old ones (if you upgraded through
+Helm the cleanup was automated).
+
+## Upgrade notice: stable-2.8.0
+
+There are no version-specific notes for upgrading to this release. The upgrade
+process detailed above ([upgrade the CLI](#upgrade-the-cli),
+[upgrade the control plane](#upgrade-the-control-plane), then
+[upgrade the data plane](#upgrade-the-data-plane)) should
+work.
+
+## Upgrade notice: stable-2.7.0
+
+### Checking whether any of your TLS certificates are approaching expiry
+
+This version introduces a set of CLI flags and checks that help you rotate
+your TLS certificates. The new CLI checks will warn you if any of your
+certificates are expiring in the next 60 days. If you however want to check
+the expiration date of your certificates and determine for yourself whether
+you should be rotating them, you can execute the following commands. Note that
+this will require [step 0.13.3](https://smallstep.com/cli/) and
+[jq 1.6](https://stedolan.github.io/jq/).
+
+Check your trust roots:
+
+```bash
+kubectl -n linkerd get cm linkerd-config -o=jsonpath="{.data}" |  \
+jq -r .identityContext.trustAnchorsPem | \
+step certificate inspect --short -
+
+X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
+  Subject:     identity.linkerd.cluster.local
+  Issuer:      identity.linkerd.cluster.local
+  Valid from:  2020-01-14T13:23:32Z
+          to:  2021-01-13T13:23:52Z
+```
+
+Check your issuer certificate:
+
+```bash
+kubectl -n linkerd get secret linkerd-identity-issuer -o=jsonpath="{.data['crt\.pem']}" |  \
+base64 --decode | \
+step certificate inspect --short -
+
+X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
+  Subject:     identity.linkerd.cluster.local
+  Issuer:      identity.linkerd.cluster.local
+  Valid from:  2020-01-14T13:23:32Z
+          to:  2021-01-13T13:23:52Z
+```
+
+If you determine that you wish to rotate your certificates you can follow
+the process outlined in
+[Rotating your identity certificates](../rotating_identity_certificates/).
+Note that this process uses functionality available in stable-2.7.0. So before
+you start your cert rotation, make sure to upgrade.
+
+When ready, you can begin the upgrade process by
+[installing the new CLI](#upgrade-the-cli).
+
+### Breaking changes in Helm charts
+
+As part of an effort to follow Helm's best practices the Linkerd Helm
+chart has been restructured. As a result most of the keys have been changed.
+In order to ensure trouble-free upgrade of your Helm installation, please take
+a look at [Helm upgrade procedure](../install-helm/). To get a precise
+view of what has changed you can compare that
+[stable-2.6.0](https://github.com/linkerd/linkerd2/blob/stable-2.6.0/charts/linkerd2/values.yaml)
+and [stable-2.7.0](https://github.com/linkerd/linkerd2/blob/stable-2.7.0/charts/linkerd2/values.yaml)
+`values.yaml` files.
+
+## Upgrade notice: stable-2.6.0
+
+{{< note >}}
+Upgrading to this release from edge-19.9.3, edge-19.9.4, edge-19.9.5 and
+edge-19.10.1 will incur data plane downtime, due to a recent change introduced
+to ensure zero downtime upgrade for previous stable releases.
+{{< /note >}}
+
+The `destination` container is now deployed as its own `Deployment` workload.
+When you are planning the upgrade from one of the edge versions listed above,
+be sure to allocate time to restart the data plane once the control plane is
+successfully upgraded. This restart can be done at your convenience with the
+recommendation that it be done over the course of time appropriate for your
+application.
+
+If you are upgrading from a previous stable version, restarting the data-plane
+is __recommended__ as a best practice, although not necessary.
+
+If you have previously labelled any of your namespaces with the
+`linkerd.io/is-control-plane` label so that their pod creation events are
+ignored by the HA proxy injector, you will need to update these namespaces
+to use the new `config.linkerd.io/admission-webhooks: disabled` label.
+
+When ready, you can begin the upgrade process by
+[installing the new CLI](#upgrade-the-cli).
+
+## Upgrade notice: stable-2.5.0
+
+This release supports Kubernetes 1.12+.
+
+{{< note >}}
+Linkerd 2.5.0 introduced [Helm support](../install-helm/). If Linkerd was
+installed via `linkerd install`, it must be upgraded via `linkerd upgrade`. If
+Linkerd was installed via Helm, it must be upgraded via Helm. Mixing these two
+installation procedures is not supported.
+{{< /note >}}
+
+### Upgrading from stable-2.4.x
+
+{{< note >}}
+These instructions also apply to upgrading from edge-19.7.4, edge-19.7.5,
+edge-19.8.1, edge-19.8.2, edge-19.8.3, edge-19.8.4, and edge-19.8.5.
+{{< /note >}}
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained.
+
+```bash
+# get the latest stable CLI
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+```
+
+{{< note >}} The linkerd cli installer installs the CLI binary into a
+versioned file (e.g. `linkerd-stable-2.5.0`) under the `$INSTALLROOT` (default:
+`$HOME/.linkerd`) directory and provides a convenience symlink at
+`$INSTALLROOT/bin/linkerd`.
+
+If you need to have multiple versions of the linkerd cli installed
+alongside each other (for example if you are running an edge release on
+your test cluster but a stable release on your production cluster) you
+can refer to them by their full paths, e.g. `$INSTALLROOT/bin/linkerd-stable-2.5.0`
+and `$INSTALLROOT/bin/linkerd-edge-19.8.8`.
+{{< /note >}}
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+The options `--prune -l linkerd.io/control-plane-ns=linkerd` above make sure
+that any resources that are removed from the `linkerd upgrade` output, are
+effectively removed from the system.
+
+Users who have previously saved the Linkerd control plane's configuration to
+files can follow the instructions at
+[Upgrading via manifests](#upgrading-via-manifests)
+to ensure those configuration are retained by the `linkerd upgrade` command.
+
+Once the `upgrade` command completes, use the `linkerd check` command to confirm
+the control plane is ready.
+
+{{< note >}}
+The `stable-2.5` `linkerd check` command will return an error when run against
+an older control plane. This error is benign and will resolve itself once the
+control plane is upgraded to `stable-2.5`:
+
+```bash
+linkerd-config
+--------------
+√ control plane Namespace exists
+√ control plane ClusterRoles exist
+√ control plane ClusterRoleBindings exist
+× control plane ServiceAccounts exist
+    missing ServiceAccounts: linkerd-heartbeat
+    see https://linkerd.io/checks/#l5d-existence-sa for hints
+```
+
+{{< /note >}}
+
+When ready, proceed to upgrading the data plane by following the instructions at
+[Upgrade the data plane](#upgrade-the-data-plane).
+
+## Upgrade notice: stable-2.4.0
+
+This release supports Kubernetes 1.12+.
+
+### Upgrading from stable-2.3.x, edge-19.4.5, edge-19.5.x, edge-19.6.x, edge-19.7.x
+
+Use the `linkerd upgrade` command to upgrade the control plane. This command
+ensures that all of the control plane's existing configuration and mTLS secrets
+are retained.
+
+```bash
+# get the latest stable CLI
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+```
+
+For Kubernetes 1.12+:
+
+```bash
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For Kubernetes pre-1.12 where the mutating and validating webhook
+configurations' `sideEffects` fields aren't supported:
+
+```bash
+linkerd upgrade --omit-webhook-side-effects | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+The `sideEffects` field is added to the Linkerd webhook configurations to
+indicate that the webhooks have no side effects on other resources.
+
+For HA setup, the `linkerd upgrade` command will also retain all previous HA
+configuration. Note that the mutating and validating webhook configurations are
+updated to set their `failurePolicy` fields to `fail` to ensure that un-injected
+workloads (as a result of unexpected errors) are rejected during the admission
+process. The HA mode has also been updated to schedule multiple replicas of the
+`linkerd-proxy-injector` and `linkerd-sp-validator` deployments.
+
+For users upgrading from the `edge-19.5.3` release, note that the upgrade
+process will fail with the following error message, due to a naming bug:
+
+```bash
+The ClusterRoleBinding "linkerd-linkerd-tap" is invalid: roleRef: Invalid value:
+rbac.RoleRef{APIGroup:"rbac.authorization.k8s.io", Kind:"ClusterRole",
+Name:"linkerd-linkerd-tap"}: cannot change roleRef
+```
+
+This can be resolved by simply deleting the `linkerd-linkerd-tap` cluster role
+binding resource, and re-running the `linkerd upgrade` command:
+
+```bash
+kubectl delete clusterrole/linkerd-linkerd-tap
+```
+
+Users who have previously saved the Linkerd control plane's configuration to
+files can follow the instructions at
+[Upgrading via manifests](#upgrading-via-manifests)
+to ensure those configuration are retained by the `linkerd upgrade` command.
+
+Once the `upgrade` command completes, use the `linkerd check` command to confirm
+the control plane is ready.
+
+{{< note >}}
+The `stable-2.4` `linkerd check` command will return an error when run against
+an older control plane. This error is benign and will resolve itself once the
+control plane is upgraded to `stable-2.4`:
+
+```bash
+linkerd-config
+--------------
+√ control plane Namespace exists
+× control plane ClusterRoles exist
+    missing ClusterRoles: linkerd-linkerd-controller, linkerd-linkerd-identity, linkerd-linkerd-prometheus, linkerd-linkerd-proxy-injector, linkerd-linkerd-sp-validator, linkerd-linkerd-tap
+    see https://linkerd.io/checks/#l5d-existence-cr for hints
+```
+
+{{< /note >}}
+
+When ready, proceed to upgrading the data plane by following the instructions at
+[Upgrade the data plane](#upgrade-the-data-plane).
+
+### Upgrading from stable-2.2.x
+
+Follow the [stable-2.3.0 upgrade instructions](#upgrading-from-stable-22x-1)
+to upgrade the control plane to the stable-2.3.2 release first. Then follow
+[these instructions](#upgrading-from-stable-23x-edge-1945-edge-195x-edge-196x-edge-197x)
+to upgrade the stable-2.3.2 control plane to `stable-2.4.0`.
+
+## Upgrade notice: stable-2.3.0
+
+`stable-2.3.0` introduces a new `upgrade` command. This command only works for
+the `edge-19.4.x` and newer releases. When using the `upgrade` command from
+`edge-19.2.x` or `edge-19.3.x`, all the installation flags previously provided
+to the `install` command must also be added.
+
+### Upgrading from stable-2.2.x
+
+To upgrade from the `stable-2.2.x` release, follow the
+[Step-by-step instructions](#step-by-step-instructions-stable-22x).
+
+Note that if you had previously installed Linkerd with `--tls=optional`, delete
+the `linkerd-ca` deployment after successful Linkerd control plane upgrade:
+
+```bash
+kubectl -n linkerd delete deploy/linkerd-ca
+```
+
+### Upgrading from edge-19.4.x
+
+```bash
+# get the latest stable
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+
+# upgrade the control plane
+linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+Follow instructions for
+[upgrading the data plane](#upgrade-the-data-plane).
+
+#### Upgrading via manifests
+
+By default, the `linkerd upgrade` command reuses the existing `linkerd-config`
+config map and the `linkerd-identity-issuer` secret, by fetching them via the
+the Kubernetes API. `edge-19.4.5` introduced a new `--from-manifests` flag to
+allow the upgrade command to read the `linkerd-config` config map and the
+`linkerd-identity-issuer` secret from a static YAML file. This option is
+relevant to CI/CD workflows where the Linkerd configuration is managed by a
+configuration repository.
+
+For release after `edge-20.10.1`/`stable-2.9.0`, you need to add `secret/linkerd-config-overrides`
+to the `linkerd-manifest.yaml` by running command:
+
+```bash
+kubectl -n linkerd get \
+  secret/linkerd-identity-issuer \
+  configmap/linkerd-config \
+  secret/linkerd-config-overrides \
+  -oyaml > linkerd-manifests.yaml
+
+linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For release after `stable-2.6.0` and prior to `edge-20.10.1`/`stable-2.9.0`,
+you can use this command:
+
+```bash
+kubectl -n linkerd get \
+  secret/linkerd-identity-issuer \
+  configmap/linkerd-config \
+  -oyaml > linkerd-manifests.yaml
+
+linkerd upgrade --from-manifests linkerd-manifests.yaml | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+For releases prior to `edge-19.8.1`/`stable-2.5.0`, and after `stable-2.6.0`,
+you may pipe a full `linkerd install` manifest into the upgrade command:
+
+```bash
+linkerd install > linkerd-install.yaml
+
+# deploy Linkerd
+cat linkerd-install.yaml | kubectl apply -f -
+
+# upgrade Linkerd via manifests
+cat linkerd-install.yaml | linkerd upgrade --from-manifests -
+```
+
+{{< note >}}
+`secret/linkerd-identity-issuer` contains the trust root of Linkerd's Identity
+system, in the form of a private key. Care should be taken if storing this
+information on disk, such as using tools like
+[git-secret](https://git-secret.io/).
+{{< /note >}}
+
+### Upgrading from edge-19.2.x or edge-19.3.x
+
+```bash
+# get the latest stable
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+
+# Install stable control plane, using flags previously supplied during
+# installation.
+# For example, if the previous installation was:
+# linkerd install --proxy-log-level=warn --proxy-auto-inject | kubectl apply -f -
+# The upgrade command would be:
+linkerd upgrade --proxy-log-level=warn --proxy-auto-inject | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+```
+
+Follow instructions for
+[upgrading the data plane](#upgrade-the-data-plane).
+
+## Upgrade notice: stable-2.2.0
+
+There are two breaking changes in `stable-2.2.0`. One relates to
+[Service Profiles](../../features/service-profiles/), the other relates to
+[Automatic Proxy Injection](../../features/proxy-injection/). If you are not using
+either of these features, you may [skip directly](#step-by-step-instructions-stable-22x)
+to the full upgrade instructions.
+
+### Service Profile namespace location
+
+[Service Profiles](../../features/service-profiles/), previously defined in the
+control plane namespace in `stable-2.1.0`, are now defined in their respective
+client and server namespaces. Service Profiles defined in the client namespace
+take priority over ones defined in the server namespace.
+
+### Automatic Proxy Injection opt-in
+
+The `linkerd.io/inject` annotation, previously opt-out in `stable-2.1.0`, is now
+opt-in.
+
+To enable automation proxy injection for a namespace, you must enable the
+`linkerd.io/inject` annotation on either the namespace or the pod spec. For more
+details, see the [Automatic Proxy Injection](../../features/proxy-injection/) doc.
+
+#### A note about application updates
+
+Also note that auto-injection only works during resource creation, not update.
+To update the data plane proxies of a deployment that was auto-injected, do one
+of the following:
+
+- Manually re-inject the application via `linkerd inject` (more info below under
+  [Upgrade the data plane](#upgrade-the-data-plane))
+- Delete and redeploy the application
+
+Auto-inject support for application updates is tracked on
+[github](https://github.com/linkerd/linkerd2/issues/2260)
+
+## Step-by-step instructions (stable-2.2.x)
+
+### Upgrade the 2.2.x CLI
+
+This will upgrade your local CLI to the latest version. You will want to follow
+these instructions for anywhere that uses the linkerd CLI.
+
+To upgrade the CLI locally, run:
+
+```bash
+curl -sL https://run.linkerd.io/install | sh
+```
+
+Alternatively, you can download the CLI directly via the
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
+
+Verify the CLI is installed and running correctly with:
+
+```bash
+linkerd version
+```
+
+Which should display:
+
+```bash
+Client version: {{% latestversion %}}
+Server version: stable-2.1.0
+```
+
+It is expected that the Client and Server versions won't match at this point in
+the process. Nothing has been changed on the cluster, only the local CLI has
+been updated.
+
+{{< note >}}
+Until you upgrade the control plane, some new CLI commands may not work.
+{{< /note >}}
+
+### Upgrade the 2.2.x control plane
+
+Now that you have upgraded the CLI running locally, it is time to upgrade the
+Linkerd control plane on your Kubernetes cluster. Don't worry, the existing data
+plane will continue to operate with a newer version of the control plane and
+your meshed services will not go down.
+
+To upgrade the control plane in your environment, run the following command.
+This will cause a rolling deploy of the control plane components that have
+changed.
+
+```bash
+linkerd install | kubectl apply -f -
+```
+
+The output will be:
+
+```bash
+namespace/linkerd configured
+configmap/linkerd-config created
+serviceaccount/linkerd-identity created
+clusterrole.rbac.authorization.k8s.io/linkerd-linkerd-identity configured
+clusterrolebinding.rbac.authorization.k8s.io/linkerd-linkerd-identity configured
+service/linkerd-identity created
+secret/linkerd-identity-issuer created
+deployment.extensions/linkerd-identity created
+serviceaccount/linkerd-controller unchanged
+clusterrole.rbac.authorization.k8s.io/linkerd-linkerd-controller configured
+clusterrolebinding.rbac.authorization.k8s.io/linkerd-linkerd-controller configured
+service/linkerd-controller-api configured
+service/linkerd-destination created
+deployment.extensions/linkerd-controller configured
+customresourcedefinition.apiextensions.k8s.io/serviceprofiles.linkerd.io configured
+serviceaccount/linkerd-web unchanged
+service/linkerd-web configured
+deployment.extensions/linkerd-web configured
+serviceaccount/linkerd-prometheus unchanged
+clusterrole.rbac.authorization.k8s.io/linkerd-linkerd-prometheus configured
+clusterrolebinding.rbac.authorization.k8s.io/linkerd-linkerd-prometheus configured
+service/linkerd-prometheus configured
+deployment.extensions/linkerd-prometheus configured
+configmap/linkerd-prometheus-config configured
+serviceaccount/linkerd-grafana unchanged
+service/linkerd-grafana configured
+deployment.extensions/linkerd-grafana configured
+configmap/linkerd-grafana-config configured
+serviceaccount/linkerd-sp-validator created
+clusterrole.rbac.authorization.k8s.io/linkerd-linkerd-sp-validator configured
+clusterrolebinding.rbac.authorization.k8s.io/linkerd-linkerd-sp-validator configured
+service/linkerd-sp-validator created
+deployment.extensions/linkerd-sp-validator created
+```
+
+Check to make sure everything is healthy by running:
+
+```bash
+linkerd check
+```
+
+This will run through a set of checks against your control plane and make sure
+that it is operating correctly.
+
+To verify the Linkerd control plane version, run:
+
+```bash
+linkerd version
+```
+
+Which should display:
+
+```txt
+Client version: {{% latestversion %}}
+Server version: {{% latestversion %}}
+```
+
+{{< note >}}
+You will lose the historical data from Prometheus. If you would like to have
+that data persisted through an upgrade, take a look at the
+[persistence documentation](../../observability/exporting-metrics/)
+{{< /note >}}
+
+### Upgrade the 2.2.x data plane
+
+With a fully up-to-date CLI running locally and Linkerd control plane running on
+your Kubernetes cluster, it is time to upgrade the data plane. This will change
+the version of the `linkerd-proxy` sidecar container and run a rolling deploy on
+your service.
+
+For `stable-2.3.0`+, if your workloads are annotated with the auto-inject
+`linkerd.io/inject: enabled` annotation, then you can just restart your pods
+using your Kubernetes cluster management tools (`helm`, `kubectl` etc.).
+
+{{< note >}}
+With `kubectl` 1.15+, you can use the `kubectl rollout restart` command to
+restart all your meshed services. For example,
+
+```bash
+kubectl -n <namespace> rollout restart deploy
+```
+
+{{< /note >}}
+
+As the pods are being re-created, the proxy injector will auto-inject the new
+version of the proxy into the pods.
+
+If auto-injection is not part of your workflow, you can still manually upgrade
+your meshed services by re-injecting your applications in-place.
+
+Begin by retrieving your YAML resources via `kubectl`, and pass them through the
+`linkerd inject` command. This will update the pod spec with the
+`linkerd.io/inject: enabled` annotation. This annotation will be picked up by
+Linkerd's proxy injector during the admission phase where the Linkerd proxy will
+be injected into the workload. By using `kubectl apply`, Kubernetes will do a
+rolling deploy of your service and update the running pods to the latest
+version.
+
+Example command to upgrade an application in the `emojivoto` namespace, composed
+of deployments:
+
+```bash
+kubectl -n emojivoto get deploy -l linkerd.io/control-plane-ns=linkerd -oyaml \
+  | linkerd inject - \
+  | kubectl apply -f -
+```
+
+Check to make sure everything is healthy by running:
+
+```bash
+linkerd check --proxy
+```
+
+This will run through a set of checks against both your control plane and data
+plane to verify that it is operating correctly.
+
+You can make sure that you've fully upgraded all the data plane by running:
+
+```bash
+kubectl get po --all-namespaces -o yaml \
+  | grep linkerd.io/proxy-version
+```
+
+The output will look something like:
+
+```bash
+linkerd.io/proxy-version: {{% latestversion %}}
+linkerd.io/proxy-version: {{% latestversion %}}
+```
+
+If there are any older versions listed, you will want to upgrade them as well.
