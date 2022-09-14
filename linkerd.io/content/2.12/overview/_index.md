@@ -57,7 +57,7 @@ Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/).)
 Linkerd is currently published in several tracks:
 
 * [Linkerd 2.x stable releases](/edge/)
-* [Linkerd 2.x edge releases.](/edge/)
+* [Linkerd 2.x edge releases](/edge/)
 * [Linkerd 1.x.](/1/overview/)
 
 ## Next steps
