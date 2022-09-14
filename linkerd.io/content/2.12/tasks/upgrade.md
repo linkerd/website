@@ -252,18 +252,18 @@ installing that extension, you need to add the following annotations and label
 to the CRD so that the `linkerd-smi` chart can adopt it:
 
 ```bash
-$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
   meta.helm.sh/release-name=linkerd-smi \
   meta.helm.sh/release-namespace=linkerd-smi
-$ kubectl label crd/trafficsplits.split.smi-spec.io \
+kubectl label crd/trafficsplits.split.smi-spec.io \
   app.kubernetes.io/managed-by=Helm
 ```
 
 Now you can install the SMI extension. E.g. via Helm:
 
 ```bash
-$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
-$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 And finally you can proceed with the usual [CLI upgrade
@@ -311,7 +311,7 @@ the `helm install` command below for the `linkerd-control-plane` chart. These
 values can be retrieved with the following command:
 
 ```bash
-$ helm get -n default values linkerd
+helm get -n default values linkerd
 ```
 
 ##### Migrate resources to the new charts

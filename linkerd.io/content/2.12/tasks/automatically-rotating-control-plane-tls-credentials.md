@@ -199,4 +199,3 @@ following instructions to install and configure Linkerd to use it.
 
 * [Automatically Rotating Webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
 * [Manually rotating Linkerd's trust anchor credentials](../manually-rotating-control-plane-tls-credentials/)
-
