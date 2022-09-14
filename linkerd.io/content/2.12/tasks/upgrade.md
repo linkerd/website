@@ -633,7 +633,7 @@ multicluster instructions](../installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](../upgrade-multicluster/).
+instructions](/2.11/tasks/upgrade-multicluster/).
 
 #### Ingress behavior changes
 
