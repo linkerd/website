@@ -11,7 +11,7 @@ be found on [GitHub](https://github.com/linkerd/linkerd2/releases).
 ## Stable (latest version: {{% latestversion %}})
 
 Stable releases are published periodically and are intented for production use.
-See the [Linkerd installation guide](../2/tasks/install/) for how to install a
+See the [Linkerd installation guide](https://linkerd.io/2/tasks/install/) for how to install a
 stable release.
 
 For stable releases, Linkerd follows a version numbering scheme of the form
