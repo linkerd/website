@@ -14,6 +14,7 @@ Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.
 
+- [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
 - [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
 - [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
@@ -240,7 +241,7 @@ There are a couple important changes that affect the upgrade process for 2.12.0:
 
 Read on for how to handle these changes as part of the upgrade process.
 
-#### Upgrading a 2.12.0 CLI installation
+#### Upgrading to 2.12.0 using the CLI
 
 If you installed Linkerd `2.11.x` with the CLI _and_ are using the
 `TrafficSplit` CRD, you need to take an extra stop to avoid losing your
@@ -271,7 +272,7 @@ instructions](#with-linkerd-cli), but avoid using the `--prune` flag when
 applying the output of `linkerd upgrade --crds` to avoid removing the
 `TrafficSplit` CRD.
 
-#### Upgrading a 2.12.0 Helm installation
+#### Upgrading to 2.12.0 using Helm
 
 Note that support for Helm v2 has been dropped in the Linkerd 2.12.0 release.
 
