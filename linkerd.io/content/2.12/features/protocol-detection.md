@@ -3,7 +3,8 @@ title = "TCP Proxying and Protocol Detection"
 description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
 weight = 2
 aliases = [
-  "/2.11/supported-protocols/"
+  "/2.11/supported-protocols/",
+  "../tasks/upgrading-2.10-ports-and-protocols/",
 ]
 +++
 
