@@ -26,40 +26,38 @@ v2](https://github.com/linkerd/linkerd2/blob/main/LICENSE), and is a [Cloud
 Native Computing Foundation](https://cncf.io) graduated project. Linkerd is
 developed in the open in the [Linkerd GitHub organization](https://github.com/linkerd).
 
-Linkerd has three basic components: a UI, a *data plane*, and a *control
-plane*. You run Linkerd by:
+Linkerd has two basic components: a *control plane* and a *data plane*. Once
+Linkerd's control plane has been installed on your Kubernetes cluster, you add
+the data plane to your workloads (called "meshing" or "injecting" your
+workloads) and voila! Service mesh magic happens.
 
-1. [Installing the CLI on your local system](../getting-started/#step-1-install-the-cli);
-1. [Installing the control plane into your cluster](../getting-started/#step-3-install-linkerd-onto-the-cluster);
-1. [Adding your services to Linkerd's data plane](../tasks/adding-your-service/).
-
-Once a service is running with Linkerd, you can use [Linkerd's
-UI](../getting-started/#step-4-explore-linkerd) to inspect and
-manipulate it.
-
-You can [get started](../getting-started/) in minutes!
+You can [get started with Linkerd](../getting-started/) in minutes!
 
 ## How it works
 
-Linkerd works by installing a set of ultralight, transparent proxies next to
-each service instance. These proxies automatically handle all traffic to and
-from the service. Because they're transparent, these proxies act as highly
+Linkerd works by installing a set of ultralight, transparent "micro-proxies"
+next to each service instance. These proxies automatically handle all traffic to
+and from the service. Because they're transparent, these proxies act as highly
 instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane. This design allows Linkerd to measure
 and manipulate traffic to and from your service without introducing excessive
 latency.
 
-In order to be as small, lightweight, and safe as possible, Linkerd's proxies
-are written in [Rust](https://www.rust-lang.org/) and specialized for Linkerd.
-You can learn more about the proxies in the [Linkerd proxy
-repo](https://github.com/linkerd/linkerd2-proxy).
+In order to be as small, lightweight, and safe as possible, Linkerd's
+micro-proxies are written in [Rust](https://www.rust-lang.org/) and specialized
+for Linkerd. You can learn more about the these micro-proxies in our blog post,
+[Under the hood of Linkerd's state-of-the-art Rust proxy,
+Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/),
+(If you want to know why Linkerd doesn't use Envoy, you can learn why in our blog
+post, [Why Linkerd doesn't use
+Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/).)
 
 ## Versions and channels
 
 Linkerd is currently published in several tracks:
 
 * [Linkerd 2.x stable releases](/edge/)
-* [Linkerd 2.x edge releases.](/edge/)
+* [Linkerd 2.x edge releases](/edge/)
 * [Linkerd 1.x.](/1/overview/)
 
 ## Next steps

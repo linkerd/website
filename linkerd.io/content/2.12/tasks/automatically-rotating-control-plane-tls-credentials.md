@@ -4,17 +4,16 @@ description = "Use cert-manager to automatically rotate control plane TLS creden
 aliases = [ "use_external_certs" ]
 +++
 
-Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature uses a set of
-TLS credentials to generate TLS certificates for proxies: a trust anchor, and
-an issuer certificate and private key. While Linkerd automatically rotates the
-TLS certificates for data plane proxies every 24 hours, it does not rotate the
-TLS credentials used to issue these certificate. In this doc, we'll describe
-how to automatically rotate the issuer certificate and private key, by using
-an external solution.
+Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature generates TLS
+certificates for proxies and automatically rotates them without user
+intervention. These certificates are derived from a *trust anchor*, which is
+shared across clusters, and an *issuer certificate*, whcih is specific to the
+cluster.
 
-(Note that Linkerd's trust anchor [must still be manually
-rotated](../manually-rotating-control-plane-tls-credentials/) on
-long-lived clusters.)
+While Linkerd automatically rotates the per-proxy TLS certificates, it does not
+rotate the issuer certificate. In this doc, we'll describe how to set up
+automatic rotation of the issuer certificate and its corresponding private key
+using the cert-manager project.
 
 ## Cert manager
 
@@ -22,30 +21,22 @@ long-lived clusters.)
 for making TLS credentials from external sources available to Kubernetes
 clusters.
 
-As a first step, [install cert-manager on your
-cluster](https://cert-manager.io/docs/installation/).
-
-{{< note >}}
-If you are installing cert-manager `>= 1.0`,
-you will need to have kubernetes `>= 1.16`.
-Legacy custom resource definitions in cert-manager for kubernetes `<= 1.15`
-do not have a keyAlgorithm option,
-so the certificates will be generated using RSA and be incompatible with linkerd.
-
-See [v0.16 to v1.0 upgrade notes](https://cert-manager.io/docs/installation/upgrading/upgrading-0.16-1.0/)
-for more details on version requirements.
-{{< /note >}}
+Cert-manager is very flexible. You can configure it to pull certificates from
+secrets managemenet solutions such as [Vault](https://www.vaultproject.io).  In
+this guide, we'll focus on a self-sufficient setup: we will configure
+cert-manager to act as an on-cluster
+[CA](https://en.wikipedia.org/wiki/Certificate_authority) and have it re-issue
+Linkerd's issuer certificate and private key on a periodic basis, derived from
+the trust anchor.
 
 ### Cert manager as an on-cluster CA
 
-In this case, rather than pulling credentials from an external
-source, we'll configure it to act as an on-cluster
-[CA](https://en.wikipedia.org/wiki/Certificate_authority) and have it re-issue
-Linkerd's issuer certificate and private key on a periodic basis.
+As a first step, [install cert-manager on your
+cluster](https://cert-manager.io/docs/installation/).
 
-First, create the namespace that cert-manager will use to store its
-Linkerd-related resources. For simplicity, we suggest the default Linkerd
-control plane namespace:
+Next, create the namespace that cert-manager will use to store its
+Linkerd-related resources. For simplicity, we suggest reusing the default
+Linkerd control plane namespace:
 
 ```bash
 kubectl create namespace linkerd
@@ -87,7 +78,7 @@ spec:
 EOF
 ```
 
-#### Issuing certificates and writing them to a secret
+#### Create a Certificate resource referencing the Issuer
 
 Finally, we can create a cert-manager "Certificate" resource which uses this
 Issuer to generate the desired certificate:
@@ -135,45 +126,57 @@ kubectl get secret linkerd-identity-issuer -o yaml -n linkerd
 
 Now we just need to inform Linkerd to consume these credentials.
 
-{{< note >}}
-Due to a [bug](https://github.com/jetstack/cert-manager/issues/2942) in
-cert-manager, if you are using cert-manager version `0.15` with experimental
-controllers, the certificate it issues are not compatible with with Linkerd
-versions `<= stable-2.8.1`.
+## Using these credentials with CLI installation
 
-Your `linkerd-identity` pods will likely crash with the following log output:
+For CLI installation, the Linkerd control plane should be installed with the
+`--identity-external-issuer` flag, which instructs Linkerd to read certificates
+from the `linkerd-identity-issuer` secret. Whenever certificate and key stored
+in the secret are updated, the `identity` service will automatically detect
+this change and reload the new credentials.
 
-```log
-"Failed to initialize identity service: failed to read CA from disk:
-unsupported block type: 'PRIVATE KEY'"
+Voila! We have set up automatic rotation of Linkerd's control plane TLS
+credentials.
+
+## Using these credentials with a Helm installation
+
+For installing with Helm, first install the `linkerd-crds` chart:
+
+```bash
+helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 ```
 
-Some possible ways to resolve this issue are:
+Then install the `linkerd-control-plane` chart, setting the
+`identityTrustAnchorsPEM` to the value of `ca.crt` in the
+`linkerd-identity-issuer` Secret:
 
-- Upgrade Linkerd to the edge versions `>= edge-20.6.4` which contains
-a [fix](https://github.com/linkerd/linkerd2/pull/4597/).
-- Upgrade cert-manager to versions `>= 0.16`.
-  [(how to upgrade)](https://cert-manager.io/docs/installation/upgrading/upgrading-0.15-0.16/)
-- Turn off cert-manager experimental controllers.
-  [(docs)](https://cert-manager.io/docs/release-notes/release-notes-0.15/#using-the-experimental-controllers)
+```bash
+helm install linkerd-control-plane -n linkerd
+  --set-file identityTrustAnchorsPEM=ca.crt \
+  --set identity.issuer.scheme=kubernetes.io/tls \
+  linkerd/linkerd-control-plane
+```
 
-{{< /note >}}
+Voila! We have set up automatic rotation of Linkerd's control plane TLS
+credentials.
 
-### Alternative CA providers
+## Observing the update process
 
-Instead of using Cert Manager as CA, you can configure it to rely on a number
-of other solutions such as [Vault](https://www.vaultproject.io). More detail on
-how to setup the existing Cert Manager to use different type of issuers
-can be found [here](https://cert-manager.io/docs/configuration/vault/).
+Once you have set up automatic rotation of Linkerd's control plane TLS
+credentials, you can monitor the update process by checking the `IssuerUpdated`
+events emitted by the service:
 
-## Third party cert management solutions
+```bash
+kubectl get events --field-selector reason=IssuerUpdated -n linkerd
+```
 
-It is important to note that the mechanism that Linkerd provides is also
-usable outside of cert-manager. Linkerd will read the `linkerd-identity-issuer`
-Secret, and if it's of type `kubernetes.io/tls`, will use the contents as its
-TLS credentials. This means that any solution that is able to rotate TLS
-certificates by writing them to this secret can be used to provide dynamic
-TLS certificate management.
+## A note on third party cert management solutions
+
+It is important to note that the mechanism that Linkerd provides for setting
+issuer certificates and keys is also usable outside of cert-manager. Linkerd
+will read the `linkerd-identity-issuer` Secret, and if it's of type
+`kubernetes.io/tls`, will use the contents as its TLS credentials. This means
+that any solution that is able to rotate TLS certificates by writing them to
+this secret can be used to provide dynamic TLS certificate management.
 
 You could generate that secret with a command such as:
 
@@ -192,43 +195,7 @@ contents of the file base64-encoded.
 After setting up the `linkerd-identity-issuer` Secret, continue with the
 following instructions to install and configure Linkerd to use it.
 
-## Using these credentials with CLI installation
+## See also
 
-For CLI installation, the Linkerd control plane should be installed with the
-`--identity-external-issuer` flag, which instructs Linkerd to read certificates
-from the `linkerd-identity-issuer` secret. Whenever certificate and key stored
-in the secret are updated, the `identity` service will automatically detect
-this change and reload the new credentials.
-
-Voila! We have set up automatic rotation of Linkerd's control plane TLS
-credentials. And if you want to monitor the update process, you can check the
-`IssuerUpdated` events emitted by the service:
-
-```bash
-kubectl get events --field-selector reason=IssuerUpdated -n linkerd
-```
-
-## Installing with Helm
-
-For installing with Helm, first install the `linkerd-crds` and `linkerd-base`
-charts:
-
-```bash
-helm install linkerd-base -n linkerd linkerd/linkerd-crds
-helm install linkerd-base -n linkerd --create-namespace linkerd/linkerd-base
-```
-
-Then install the `linkerd-control-plane` chart, setting the
-`identityTrustAnchorsPEM` to the value of `ca.crt` in the
-`linkerd-identity-issuer` Secret:
-
-```bash
-helm install linkerd-control-plane -n linkerd
-  --set-file identityTrustAnchorsPEM=ca.crt \
-  --set identity.issuer.scheme=kubernetes.io/tls \
-  linkerd/linkerd-control-plane
-```
-
-See [Automatically Rotating Webhook TLS
-Credentials](../automatically-rotating-webhook-tls-credentials/) for how
-to do something similar for webhook TLS credentials.
+* [Automatically Rotating Webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
+* [Manually rotating Linkerd's trust anchor credentials](../manually-rotating-control-plane-tls-credentials/)
