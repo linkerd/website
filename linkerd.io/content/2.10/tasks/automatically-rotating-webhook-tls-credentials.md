@@ -34,22 +34,12 @@ namespace linkerd uses:
 ```bash
 # control plane core
 kubectl create namespace linkerd
-kubectl label namespace linkerd \
-  linkerd.io/is-control-plane=true \
-  config.linkerd.io/admission-webhooks=disabled \
-  linkerd.io/control-plane-ns=linkerd
-kubectl annotate namespace linkerd linkerd.io/inject=disabled
 
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
-kubectl label namespace linkerd-viz linkerd.io/extension=viz
-kubectl annotate namespace linkerd-viz \
-  config.linkerd.io/proxy-await=enabled \
-  linkerd.io/inject=enabled
 
-# jaeger (ignore if not using the jaeger extension)
+# viz (ignore if not using the jaeger extension)
 kubectl create namespace linkerd-jaeger
-kubectl label namespace linkerd-jaeger linkerd.io/extension=jaeger
 ```
 
 ## Save the signing key pair as a Secret

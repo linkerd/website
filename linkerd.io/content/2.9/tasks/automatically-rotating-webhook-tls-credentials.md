@@ -32,13 +32,7 @@ webhook-related resources. For simplicity, we suggest the default Linkerd
 control plane namespace:
 
 ```bash
-# control plane core
 kubectl create namespace linkerd
-kubectl label namespace linkerd \
-  linkerd.io/is-control-plane=true \
-  config.linkerd.io/admission-webhooks=disabled \
-  linkerd.io/control-plane-ns=linkerd
-kubectl annotate namespace linkerd linkerd.io/inject=disabled
 ```
 
 ## Save the signing key pair as a Secret

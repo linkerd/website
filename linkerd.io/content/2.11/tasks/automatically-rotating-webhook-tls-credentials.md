@@ -43,9 +43,6 @@ kubectl annotate namespace linkerd linkerd.io/inject=disabled
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
 kubectl label namespace linkerd-viz linkerd.io/extension=viz
-kubectl annotate namespace linkerd-viz \
-  config.linkerd.io/proxy-await=enabled \
-  linkerd.io/inject=enabled
 
 # jaeger (ignore if not using the jaeger extension)
 kubectl create namespace linkerd-jaeger
