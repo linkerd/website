@@ -1,12 +1,14 @@
 +++
-title = "Release Channels"
+title = "Releases and Versions"
+aliases = [ "edge" ]
 weight = 18
 +++
 
-Linkerd 2.x publishes releases into multiple channels. This provides the option to
-choose between stability or getting the latest and greatest functionality. The
-latest release for each channel is listed below. The full list of releases can
-be found on [GitHub](https://github.com/linkerd/linkerd2/releases).
+The full list of Linkerd open source releases can be found on
+[GitHub](https://github.com/linkerd/linkerd2/releases).
+
+Linkerd 2.x publishes releases into multiple channels, _stable_ and _edge_.
+The guarantees and expectations are different for each channel
 
 ## Stable (latest version: {{% latestversion %}})
 
@@ -19,8 +21,20 @@ For stable releases, Linkerd follows a version numbering scheme of the form
 major version, then the minor.
 
 Changes in minor versions are intended to be backwards compatible with the
-previous version. Changes in major version *may* introduce breaking changes,
-although we try to avoid that whenever possible.
+previous version and will typically not introduce major new features. Changes in
+major version will typically introduce major new features, and *may* introduce
+breaking changes—although we try to avoid that whenever possible.
+
+**Support policy**: in general, we support the latest major stable version: we
+will fix bugs by publishing minor version updates. At the maintainer's
+discretion, these bugfixes may occasioanlly be back-ported to the previous major
+stable version.
+
+Stable versions earlier than the previous major version will not receive
+bugfixes or enhancements.
+
+Commercial providers of Linkerd (e.g. [Buoyant](https://buoyant.io)) may
+provide stronger support guarantees.
 
 ## Edge (latest version: {{% latestedge %}})
 
@@ -36,3 +50,5 @@ To install the latest edge release via the CLI, you can run:
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
+
+**Support policy**: there is no formal support policy for edge releases.
