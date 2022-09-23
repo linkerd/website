@@ -1,12 +1,17 @@
 ---
+author: catherine
+date: 2022-09-23T00:00:00Z
 title: Announcing September's Linkerd Hero
+description: |-
+  We are excited to announce this month's Linkerd Hero: Dan Williams. Congrats, Dan! Linkerd Heroes are community members who best represent the spirit of the Linkerd community.
+feature: '/uploads/dan-williams.png'
+thumbnail: '/uploads/dan-williams.png'
 tags:
   - Community
   - Hero
 items:
   - 
-description: 'We are excited to announce this month's Linkerd Hero: Dan Williams. Congrats, Dan! Linkerd Heroes are community members who best represent the spirit of the Linkerd community. '
-keywords: [Hero]
+keywords: [hero, community]
 ---
 
 We are excited to announce this month's Linkerd Hero: Dan Williams.
@@ -32,9 +37,9 @@ We've heard a Linkerd blog post might be coming soon, so stay tuned!
 Thank you, Dan, for helping your peers — one of the most underrated
 yet critical ways of contributing to open source!
 
-IMAGE GOES HERE
+![Dan Williams](/uploads/dan-williams.png)
 
-##Nominate next month's Linkerd Hero
+## Nominate next month's Linkerd Hero
 
 Linkerd Heroes take many forms. Perhaps someone has answered your
 or the community’s pressing questions on Slack. Maybe you've read
