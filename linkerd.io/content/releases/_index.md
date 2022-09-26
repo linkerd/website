@@ -27,7 +27,7 @@ breaking changes—although we try to avoid that whenever possible.
 
 **Support policy**: in general, we support the latest major stable version: we
 will fix bugs by publishing minor version updates. At the maintainer's
-discretion, these bugfixes may occasioanlly be back-ported to the previous major
+discretion, these bugfixes may occasionally be back-ported to the previous major
 stable version.
 
 Stable versions earlier than the previous major version will not receive
