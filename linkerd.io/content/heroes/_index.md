@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Dan Williams
+    date: September 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/dan-williams-portrait.png"
+    alt: Portrait of Dan Williams
+    github_url: "https://www.linkedin.com/in/dan-williams-5501a8105/"
   - name: Dani Baeyens
     date: August 2022
     blurb: Technical contributions
