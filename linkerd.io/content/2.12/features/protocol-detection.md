@@ -27,9 +27,10 @@ decrypt the connection to observe the HTTP transactions.)
 ## Configuring protocol detection
 
 {{< note >}}
-If you are experiencing 10-second delays when establishing connections, you are
-likely running into a protocol detection timeout. This section will help you
-understand how to fix this.
+If your proxy logs contain messages like `protocol detection timed out
+after 10s`, or you are experiencing 10-second delays when establishing
+connections, you are likely running into a protocol detection timeout.
+This section will help you understand how to fix this.
 {{< /note >}}
 
 In some cases, Linkerd's protocol detection will time out because it doesn't see
@@ -53,7 +54,7 @@ provide security features.
 
 Linkerd maintains a default list of opaque ports that corresponds to the
 standard ports used by protocols that interact poorly with protocol detection.
-As of the 2.11 release, that list is: **25** (SMTP), **587** (SMTP), **3306**
+As of the 2.12 release, that list is: **25** (SMTP), **587** (SMTP), **3306**
 (MySQL), **4444** (Galera), **5432** (Postgres), **6379** (Redis), **9300**
 (ElasticSearch), and **11211** (Memcache).
 
