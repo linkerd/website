@@ -27,9 +27,10 @@ decrypt the connection to observe the HTTP transactions.)
 ## Configuring protocol detection
 
 {{< note >}}
-If you are experiencing 10-second delays when establishing connections, you are
-likely running into a protocol detection timeout. This section will help you
-understand how to fix this.
+If your proxy logs contain messages like `protocol detection timed out
+after 10s`, or you are experiencing 10-second delays when establishing
+connections, you are likely running into a protocol detection timeout.
+This section will help you understand how to fix this.
 {{< /note >}}
 
 In some cases, Linkerd's protocol detection will time out because it doesn't see
