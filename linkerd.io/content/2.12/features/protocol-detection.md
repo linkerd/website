@@ -54,7 +54,7 @@ provide security features.
 
 Linkerd maintains a default list of opaque ports that corresponds to the
 standard ports used by protocols that interact poorly with protocol detection.
-As of the 2.11 release, that list is: **25** (SMTP), **587** (SMTP), **3306**
+As of the 2.12 release, that list is: **25** (SMTP), **587** (SMTP), **3306**
 (MySQL), **4444** (Galera), **5432** (Postgres), **6379** (Redis), **9300**
 (ElasticSearch), and **11211** (Memcache).
 
