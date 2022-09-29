@@ -227,12 +227,6 @@ Synchronize the `cert-manager` application:
 argocd app sync cert-manager
 ```
 
-{{< note >}}
-This guide uses cert-manager 0.15.0 due to an issue with cert-manager 0.16.0
-and kubectl <1.19 and Helm 3.2, which Argo CD uses. See the upgrade notes
-[here](https://cert-manager.io/docs/installation/upgrading/upgrading-0.15-0.16/#helm).
-{{< /note >}}
-
 Confirm that cert-manager is running:
 
 ```sh
@@ -405,7 +399,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.12.0
+    targetRevision: 1.9.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -456,7 +450,7 @@ argocd app get linkerd-control-plane -ojson | \
       title="Override mTLS trust anchor"
       src="/images/gitops/dashboard-trust-anchor-override.png" >}}
 
-Synchronize the `linkerd-crds` and `linkerd-control-plane`applications:
+Synchronize the `linkerd-crds` and `linkerd-control-plane` applications:
 
 ```sh
 argocd app sync linkerd-crds
@@ -497,8 +491,9 @@ done
 
 (Assuming 2.12.1 has already been released ;-) )
 
-Use your editor to change the `spec.source.targetRevision` field to `2.12.1` in
-the `gitops/argo-apps/linkerd-control-plane.yaml` file:
+Use your editor to change the `spec.source.targetRevision` field to `1.9.3`
+(that's the Helm chart version corresponding to linkerd stable-2.12.1) in the
+`gitops/argo-apps/linkerd-control-plane.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
 

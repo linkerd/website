@@ -97,21 +97,6 @@ helm install linkerd-control-plane \
   linkerd/linkerd-control-plane
 ```
 
-## Customizing the namespace
-
-To install Linkerd to a different namespace, you can override the Helm
-`Namespace` variable.
-
-By default, the chart creates the control plane namespace with the
-`config.linkerd.io/admission-webhooks: disabled` label. This is required for the
-control plane to work correctly. This means that the chart won't work with
-Helm's `--namespace` option.  If you're relying on a separate tool to create the
-control plane namespace, make sure that:
-
-1. The namespace is labeled with `config.linkerd.io/admission-webhooks: disabled`
-1. The `installNamespace` is set to `false`
-1. The `namespace` variable is overridden with the name of your namespace
-
 ## Upgrading with Helm
 
 First, make sure your local Helm repos are updated:
