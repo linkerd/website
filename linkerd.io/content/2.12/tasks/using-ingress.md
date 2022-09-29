@@ -37,8 +37,8 @@ Common ingress options that Linkerd has been used with include:
 - [GCE](#gce)
 - [Gloo](#gloo)
 - [Contour](#contour)
-  - [Kong](#kong)
-  - [Haproxy](#haproxy)
+- [Kong](#kong)
+- [Haproxy](#haproxy)
 - [EnRoute](#enroute)
 - [Ingress details](#ingress-details)
 
@@ -422,7 +422,7 @@ Kong should be meshed with ingress mode enabled, i.e. with the
 This example will use the following elements:
 
 - The [Kong chart](https://github.com/Kong/charts)
-- The [emojivoto] example application(../../getting-started/)
+- The [emojivoto](../../getting-started/) example application
 
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).
