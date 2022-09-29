@@ -399,7 +399,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.12.0
+    targetRevision: 1.9.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
