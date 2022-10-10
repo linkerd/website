@@ -827,18 +827,24 @@ in this network may not be meshed properly. To remedy this, update the
 
 ### √ cluster networks contains all pods {#l5d-cluster-networks-pods}
 
-Example failure:
+Example failures:
 
 ```bash
-× the Linkerd clusterNetworks [10.244.0.0/24] do not include pod default/foobar (104.21.63.202)
+× the Linkerd clusterNetworks [10.244.0.0/24] do not include pod default/foo (104.21.63.202)
+    see https://linkerd.io/2/checks/#l5d-cluster-networks-pods for hints
+```
+
+```bash
+× the Linkerd clusterNetworks [10.244.0.0/24] do not include svc default/bar (10.96.217.194)
     see https://linkerd.io/2/checks/#l5d-cluster-networks-pods for hints
 ```
 
 Linkerd has a `clusterNetworks` setting which allows it to differentiate between
 intra-cluster and egress traffic. This warning indicates that the cluster has
-a pod which is not included in Linkerd's `clusterNetworks`. Traffic to pods
-in this network may not be meshed properly. To remedy this, update the
-`clusterNetworks` setting to include all pod networks in the cluster.
+a pod or ClusterIP service which is not included in Linkerd's `clusterNetworks`.
+Traffic to pods or services in this network may not be meshed properly. To
+remedy this, update the `clusterNetworks` setting to include all pod and service
+networks in the cluster.
 
 ## The "linkerd-version" checks {#l5d-version}
 
