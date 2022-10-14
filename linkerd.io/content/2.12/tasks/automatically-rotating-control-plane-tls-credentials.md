@@ -150,7 +150,7 @@ Then install the `linkerd-control-plane` chart, setting the
 `linkerd-identity-issuer` Secret:
 
 ```bash
-helm install linkerd-control-plane -n linkerd
+helm install linkerd-control-plane -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set identity.issuer.scheme=kubernetes.io/tls \
   linkerd/linkerd-control-plane

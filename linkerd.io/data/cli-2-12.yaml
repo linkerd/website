@@ -37,14 +37,22 @@ AnnotationsReference:
   Name: config.linkerd.io/admin-port
 - Description: Proxy port to use for outbound traffic
   Name: config.linkerd.io/outbound-port
+- Description: Comma-separated list of (non-proxy) container ports exposed by the
+    pod spec. Useful when other mutating webhooks inject sidecar containers after
+    the proxy injector has run
+  Name: config.linkerd.io/pod-inbound-ports
 - Description: Amount of CPU units that the proxy sidecar requests
   Name: config.linkerd.io/proxy-cpu-request
 - Description: Amount of Memory that the proxy sidecar requests
   Name: config.linkerd.io/proxy-memory-request
+- Description: Used to override the requestEphemeralStorage config
+  Name: config.linkerd.io/proxy-ephemeral-storage-request
 - Description: Maximum amount of CPU units that the proxy sidecar can use
   Name: config.linkerd.io/proxy-cpu-limit
 - Description: Maximum amount of Memory that the proxy sidecar can use
   Name: config.linkerd.io/proxy-memory-limit
+- Description: Used to override the limitEphemeralStorage config
+  Name: config.linkerd.io/proxy-ephemeral-storage-limit
 - Description: Run the proxy under this user ID
   Name: config.linkerd.io/proxy-uid
 - Description: Log level for the proxy
@@ -59,10 +67,14 @@ AnnotationsReference:
   Name: config.linkerd.io/enable-external-profiles
 - Description: Tag to be used for the Linkerd proxy images
   Name: config.linkerd.io/proxy-version
+- Description: Proxy's default inbound policy
+  Name: config.linkerd.io/default-inbound-policy
 - Description: Inject a debug sidecar for data plane debugging
   Name: config.linkerd.io/enable-debug-sidecar
 - Description: Used to configure the outbound TCP connection timeout in the proxy
   Name: config.linkerd.io/proxy-outbound-connect-timeout
+- Description: Inbound TCP connection timeout in the proxy
+  Name: config.linkerd.io/proxy-inbound-connect-timeout
 - Description: The proxy sidecar will stay alive for at least the given period after
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
