@@ -103,7 +103,7 @@ have network access because its packets will be caught by `iptables` and the
 `linkerd-proxy` will not yet be availble.
 
 It is possible to bypass these `iptables` rules by running the `initContainer`
-as the UID `2101`. Processes run as this UID are skipped by `iptables` and allow
+as the UID `2102`. Processes run as this UID are skipped by `iptables` and allow
 direct network connectivity. These network connections are not meshed.
 
 The following is a snippet for an `initContainer` configured to allow unmeshed
@@ -114,7 +114,7 @@ initContainers:
 - name: example
   image: example
   securityContext:
-    runAsUser: 2101 # Allows skipping iptables rules
+    runAsUser: 2102 # Allows skipping iptables rules
 ```
 
 ## Upgrading the CNI plugin
