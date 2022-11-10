@@ -94,6 +94,30 @@ The most important flags are:
    `journalctl -t kubelet`. The string `linkerd-cni:` can be used as a search to
    find the plugin log output.
 
+### Allowing initContainer networking
+
+When using the Linkerd CNI plugin the required `iptables` rules are in effect
+before the pod is scheduled. Also, the `linkerd-proxy` is not started until
+after all `initContainers` have completed. This means no `initContainer` will
+have network access because its packets will be caught by `iptables` and the
+`linkerd-proxy` will not yet be available.
+
+It is possible to bypass these `iptables` rules by running the `initContainer`
+as the UID of the proxy (by default `2102`). Processes run as this UID are
+skipped by `iptables` and allow direct network connectivity. These network
+connections are not meshed.
+
+The following is a snippet for an `initContainer` configured to allow unmeshed
+networking while using the CNI plugin:
+
+```yaml
+initContainers:
+- name: example
+  image: example
+  securityContext:
+    runAsUser: 2102 # Allows skipping iptables rules
+```
+
 ## Upgrading the CNI plugin
 
 Since the CNI plugin is basically stateless, there is no need for a separate
