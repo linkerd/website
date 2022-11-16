@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/linkerdio/website#readme",
   "devDependencies": {
-    "markdownlint-cli": "^0.23.2",
+    "markdownlint-cli": "^0.32.2",
     "pa11y-ci": "^2.4.0",
     "prettier": "^2.1.2"
   }

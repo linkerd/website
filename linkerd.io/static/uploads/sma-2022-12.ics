@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZNAME:EDT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZNAME:EST
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20221114T213215Z
+UID:559525E5-2E82-430F-8AC3-9E0D8250DC6E@ical.buoyant.io
+DTSTART;TZID=America/New_York:20221215T120000
+DTEND;TZID=America/New_York:20221215T133000
+SUMMARY:A deep dive into Kubernetes mTLS with Linkerd
+DESCRIPTION:Mutual TLS (mTLS) is a hot topic in the Kubernaetes world\, especially for anyone tasked with getting \"encryption in transit\" for their applications. But what is it and how does it compare to alternatives such as encryption at the CNI level\? In this workshop\, we give you a solid understanding of what mTLS is\, how it works\, and how it compares to alternatives. We discuss workload identity\, trust chains\, and certificates\, and walk you through a hands-on tutorial on how to set up\, monitor\, and understand mTLS between your services on a Kubernetes cluster with Linkerd.
+LOCATION:https://buoyant.io/service-mesh-academy/live-workshop
+END:VEVENT
+END:VCALENDAR
