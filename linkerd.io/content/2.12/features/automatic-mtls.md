@@ -135,6 +135,15 @@ identity name. When the proxy connects to the destination, it initiates a TLS
 handshake and verifies that that the destination proxy's certificate is signed
 by the trust anchor and contains the expected identity.
 
+## TLS protocol parameters
+
+Linkerd currently uses the following TLS protocol parameters for mTLS
+connections, although they may change in future versions:
+
+* TLS version 1.3
+* Cipher suite `TLS_CHACHA20_POLY1305_SHA256` as specified in [RFC
+  8446](https://www.rfc-editor.org/rfc/rfc8446#section-9.1).
+
 ## Caveats and future work
 
 * Linkerd does not *require* mTLS unless [authorization policies](../server-policy/)
