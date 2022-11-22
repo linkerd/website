@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Steve Reardon
+    date: November 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/steve-reardon.jpeg"
+    alt: Portrait of Steve Reardon
+    github_url: "https://github.com/Monkman08/"
   - name: Dan Williams
     date: September 2022
     blurb: Helping community members
@@ -90,14 +97,14 @@ voted:
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-reardon.png"
+    image: "/uploads/steve-gray.png"
     alt: Portrait of Steve Gray
     github_url: https://github.com/steve-gray
   - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-gray.jpeg"
+    image: "/uploads/steve-reardon.jpeg"
     alt: Portrait of Steve Reardon
     github_url: https://github.com/Monkman08
   - name: Rio Kierkels
