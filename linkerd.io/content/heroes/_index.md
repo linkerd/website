@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Steve Reardon
+    date: November 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/steve-reardon.jpeg"
+    alt: Portrait of Steve Reardon
+    github_url: "https://github.com/Monkman08/"
   - name: Dan Williams
     date: September 2022
     blurb: Helping community members
