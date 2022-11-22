@@ -90,14 +90,14 @@ voted:
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-reardon.png"
+    image: "/uploads/steve-gray.png"
     alt: Portrait of Steve Gray
     github_url: https://github.com/steve-gray
   - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-gray.jpeg"
+    image: "/uploads/steve-reardon.jpeg"
     alt: Portrait of Steve Reardon
     github_url: https://github.com/Monkman08
   - name: Rio Kierkels
