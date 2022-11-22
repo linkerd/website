@@ -39,7 +39,7 @@ valuable contributions, Steve was nominated again! Thank you, Steve,
 for taking the time to carefully answer user's questions on Slack,
 and helping them on their journey!
 
-![Steve Reardon](/uploads/steve-reardon.jpeg)
+![Steve Reardon](/uploads/2022-november-hero-steve-reardon.png)
 
 ## Nominate next month's Linkerd Hero
 
