@@ -73,17 +73,11 @@ linkerd install \
 ```
 
 Or when installing with Helm, first install the `linkerd-crds` and
-`linkerd-base` charts:
+`linkerd-control-plane` charts:
 
 ```bash
 helm install linkerd-crds linkerd/linkerd-crds -n linkerd --create-namespace
 
-helm install linkerd-base -n linkerd linkerd/linkerd-base
-```
-
-Then install the `linkerd-control-plane` chart:
-
-```bash
 helm install linkerd-control-plane -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
