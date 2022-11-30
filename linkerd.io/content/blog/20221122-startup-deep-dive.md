@@ -9,8 +9,6 @@ tags: [Linkerd, linkerd, init, cni, startup, tutorials]
 featured: false
 ---
 
-# What Really Happens at Startup: A Deep Dive
-
 Certain questions about Kubernetes and Linkerd seem to come up again and
 again:
 
