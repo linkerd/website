@@ -9,6 +9,11 @@ tags: [Linkerd, linkerd, init, cni, startup, tutorials]
 featured: false
 ---
 
+{{< fig
+  alt="Machinery Starting Up"
+  title="photo credit: [Sylvain Lelong](https://www.pexels.com/@sylvain-lelong-289676095/)"
+  src="/uploads/2022/11/machinery-sylvain-lelong-pexels-14252230.jpeg" >}}
+
 Certain questions about Kubernetes and Linkerd seem to come up again and
 again:
 
@@ -55,12 +60,16 @@ mechanisms for this:
   everything on one Node is isolated from all other Nodes.
 
 - Pods are composed of one or more containers, all of which are isolated from
-  one another within the same Node using Linux `cgroup`s.
+  one another within the same Node using Linux `cgroup`s and `namespace`s.
 
-This gives Kubernetes a way to orchestrate which workloads run where within
-the cluster, and to keep track of resource availability and consumption:
-workload containers are mapped to Pods, Pods are scheduled onto Nodes, and
-Nodes are all connected to a network.
+- It's worth noting that Linux itself runs at the Node level. Pods and
+  containers don't have distinct copies of the operating system, which is why
+  isolation between them is such a big deal.
+
+This multi-layer approach gives Kubernetes a way to orchestrate which
+workloads run where within the cluster, and to keep track of resource
+availability and consumption: workload containers are mapped to Pods, Pods are
+scheduled onto Nodes, and Nodes are all connected to a network.
 
 Deployments, ReplicaSets, DaemonSets, etc., are all bookkeeping mechanisms for
 figuring out exactly which Pods gets scheduled onto which Nodes, but the
@@ -114,7 +123,7 @@ built into the Linux kernel.
 
 The Linux kernel contains a fairly powerful mechanism to examine network
 traffic at the packet level and make decisions about what to do with each
-packet. This might involve letting the packet continue on unmolested, altering
+packet. This might involve letting the packet continue on unchanged, altering
 the packet, redirecting the packet, or even dropping the packet entirely. I'm
 going to refer to the whole of this mechanism as `IPTables` – technically,
 that's the name of an early implementation, but we tend to use it to refer to
