@@ -1177,7 +1177,7 @@ body {
 .cta-banner .thumbnail-wrapper a:after {
   content: "";
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   position: absolute;
   top: 0;
   left: 0;
@@ -1189,8 +1189,8 @@ body {
 }
 
 .cta-banner .thumbnail {
-  height: 100%;
   object-fit: cover;
+  aspect-ratio: 16 / 9;
 }
 
 .cta-banner .btn-dark {
