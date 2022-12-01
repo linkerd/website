@@ -4,7 +4,7 @@ date: 2022-12-01T00:00:00Z
 title: |-
   What really happens at startup: a deep dive into Linkerd, init containers,
   CNI plugins, and more
-thumbnail: '/uploads/2022/11/machinery-sylvain-lelong-pexels-14252230-thumbnail.jpeg'
+thumbnail: '/uploads/2022/12/machinery-sylvain-lelong-pexels-14252230-thumbnail.jpeg'
 tags: [Linkerd, linkerd, init, cni, startup, tutorials]
 featured: false
 ---
@@ -12,7 +12,7 @@ featured: false
 {{< fig
   alt="Machinery Starting Up"
   title="photo credit: [Sylvain Lelong](https://www.pexels.com/@sylvain-lelong-289676095/)"
-  src="/uploads/2022/11/machinery-sylvain-lelong-pexels-14252230.jpeg" >}}
+  src="/uploads/2022/12/machinery-sylvain-lelong-pexels-14252230.jpeg" >}}
 
 Certain questions about Kubernetes and Linkerd seem to come up again and
 again:
