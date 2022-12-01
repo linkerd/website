@@ -122,7 +122,7 @@ built into the Linux kernel.
 {{< cta-banner
   title="What really happens at startup: a deep dive into Linkerd, init containers, CNI plugins, and more"
   href="https://buoyant.io/service-mesh-academy/what-really-happens-at-startup"
-  thumbnail="/uploads/2022/11/machinery-sylvain-lelong-pexels-14252230-thumbnail.jpeg"
+  thumbnail="/uploads/2022/12/2022-11-sma-thumbnail.png"
 >}}
 
 ### `IPTables`
