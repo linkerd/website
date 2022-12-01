@@ -119,6 +119,12 @@ It should be fairly apparent from all this that there is a lot of networking
 magic happening in Kubernetes. This is all handled by the low-level firewall
 built into the Linux kernel.
 
+{{< cta-banner
+  title="What really happens at startup: a deep dive into Linkerd, init containers, CNI plugins, and more"
+  href="https://buoyant.io/service-mesh-academy/what-really-happens-at-startup"
+  thumbnail="/images/your-image.png"
+>}}
+
 ### `IPTables`
 
 The Linux kernel contains a fairly powerful mechanism to examine network
