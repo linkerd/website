@@ -14,6 +14,11 @@ featured: false
   title="photo credit: [Sylvain Lelong](https://www.pexels.com/@sylvain-lelong-289676095/)"
   src="/uploads/2022/12/machinery-sylvain-lelong-pexels-14252230.jpeg" >}}
 
+_This blog post is based on a workshop I recently delivered at Buoyant’s
+[Service Mesh Academy](https://buoyant.io/service-mesh-academy). If this seems
+interesting, check out the [full
+recording](https://buoyant.io/service-mesh-academy/what-really-happens-at-startup)!_
+
 Certain questions about Kubernetes and Linkerd seem to come up again and
 again:
 
