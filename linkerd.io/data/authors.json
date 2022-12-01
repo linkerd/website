@@ -76,6 +76,13 @@
     "firstName": "",
     "lastName": ""
   },
+  "flynn": {
+    "avatar": "/images/authors/flynn.png",
+    "email": "flynn@buoyant.io",
+    "name": "Flynn",
+    "firstName": "",
+    "lastName": "Flynn"
+  },
   "franzi": {
     "avatar": "",
     "email": "franzi@buoyant.io",
