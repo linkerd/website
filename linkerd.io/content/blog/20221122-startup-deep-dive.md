@@ -1,6 +1,6 @@
 ---
 author: 'flynn'
-date: 2022-11-22T00:00:00Z
+date: 2022-12-01T00:00:00Z
 title: |-
   What really happens at startup: a deep dive into Linkerd, init containers,
   CNI plugins, and more
@@ -122,7 +122,7 @@ built into the Linux kernel.
 {{< cta-banner
   title="What really happens at startup: a deep dive into Linkerd, init containers, CNI plugins, and more"
   href="https://buoyant.io/service-mesh-academy/what-really-happens-at-startup"
-  thumbnail="/images/your-image.png"
+  thumbnail="/uploads/2022/11/machinery-sylvain-lelong-pexels-14252230-thumbnail.jpeg"
 >}}
 
 ### `IPTables`
