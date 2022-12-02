@@ -114,7 +114,7 @@ The following command uses `kubectl` to fetch the Linkerd config from the
 `linkerd-identity-trust-roots` ConfigMap and save it in `original-trust.crt`:
 
 ```bash
-kubectl -n linkerd get cm linkerd-identity-trust-roots -o=jsonpath='{.data.ca-bundle\.crt}' > original-trust-anchors.crt
+kubectl -n linkerd get cm linkerd-identity-trust-roots -o=jsonpath='{.data.ca-bundle\.crt}' > original-trust.crt
 ```
 
 ## Generate a new trust anchor
