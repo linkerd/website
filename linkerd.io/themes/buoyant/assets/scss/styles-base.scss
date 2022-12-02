@@ -1189,8 +1189,10 @@ body {
 }
 
 .cta-banner .thumbnail {
-  object-fit: cover;
+  width: 100%;
   aspect-ratio: 16 / 9;
+  object-fit: cover;
+  position: relative;
 }
 
 .cta-banner .btn-dark {
