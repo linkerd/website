@@ -72,13 +72,10 @@ linkerd install \
   | kubectl apply -f -
 ```
 
-Or when installing with Helm, first install the `linkerd-crds` and
-`linkerd-base` charts:
+Or when installing with Helm, first install the `linkerd-crds` chart:
 
 ```bash
 helm install linkerd-crds linkerd/linkerd-crds -n linkerd --create-namespace
-
-helm install linkerd-base -n linkerd linkerd/linkerd-base
 ```
 
 Then install the `linkerd-control-plane` chart:
@@ -90,3 +87,4 @@ helm install linkerd-control-plane -n linkerd \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   linkerd/linkerd-control-plane
 ```
+
