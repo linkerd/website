@@ -43,6 +43,11 @@
   margin-left: auto;
 }
 
-.is-underlined {
-  text-decoration: underline;
+.has-border-bottom {
+  border-bottom-style: solid;
+  border-bottom-width: 1px; 
+}
+
+.has-border-deep-blue {
+  border-color: $deep-blue;
 }
