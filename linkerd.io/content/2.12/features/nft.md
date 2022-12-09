@@ -30,7 +30,6 @@ two, is which binary they will call into:
    configure firewalls by default.
 
 [`iptables-legacy`]: https://manpages.debian.org/bullseye/iptables/iptables-legacy.8.en.html
-[`iptables-nft`]: https://manpages.debian.org/bullseye/iptables/xtables-nft.8.en.html
 Conceptually, `iptables-nft` is a bridge between the legacy and the newer
 `nftables` utilities. Under the hood, it uses a different backend, where rules
 additions and deletions are atomic. The nft version of iptables uses the same
@@ -53,10 +52,10 @@ appended),this option is a no-op when running `linkerd-init` in nft mode.
 ## Installation
 
 The mode for `linkerd-init` can be overridden through the configuration option
-`proxyInit.mode=iptables|nft`. The configuration option can be used for both
-Helm and CLI installations (or upgrades). For example, the following line will
-install Linkerd and set the init container mode to `nft`:
+`proxyInit.iptablesMode=iptables|nft`. The configuration option can be used for
+both Helm and CLI installations (or upgrades). For example, the following line
+will install Linkerd and set the init container mode to `nft`:
 
 ```bash
-linkerd install --set "proxyInit.mode=nft" | kubectl apply -f -
+linkerd install --set "proxyInit.iptablesMode=nft" | kubectl apply -f -
 ```
