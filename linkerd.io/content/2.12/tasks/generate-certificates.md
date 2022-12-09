@@ -87,4 +87,3 @@ helm install linkerd-control-plane -n linkerd \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   linkerd/linkerd-control-plane
 ```
-
