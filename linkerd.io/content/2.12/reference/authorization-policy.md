@@ -177,8 +177,8 @@ evaluate to true only if all conditions are satisfied.
 | field| value |
 |------|-------|
 | `path`| An [httpPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided.|
-| `headers`| An [httpHeaderMatch](#httpheadermatch).|
-| `queryParams`| An [httpQueryParamMatch](#httpqueryparammatch).|
+| `headers`| A list of [httpHeaderMatches](#httpheadermatch). Multiple match values are ANDed together.|
+| `queryParams`| A list of [httpQueryParamMatches](#httpqueryparammatch). Multiple match values are ANDed together.|
 | `method`| When specified, this route will be matched only if the request has the specified method.|
 {{< /table >}}
 
@@ -190,7 +190,7 @@ request path.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| How to match against the path Value. One of: Exact, PathPrefix, RegularExpresion.|
+| `type`| How to match against the path Value. One of: Exact, PathPrefix, RegularExpression. If this field is not specified, a default of "PathPrefix" is provided.|
 | `value`| The HTTP path to match against.|
 {{< /table >}}
 
@@ -202,7 +202,7 @@ headers.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| How to match against the value of the header. One of: Exact, RegularExpresion.|
+| `type`| How to match against the value of the header. One of: Exact, RegularExpression. If this field is not specified, a default of "Exact" is provided.|
 | `name`| The HTTP Header to be matched against. Name matching MUST be case insensitive.|
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
@@ -215,7 +215,7 @@ query parameters.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| How to match against the value of the query parameter. One of: Exact, RegularExpresion.|
+| `type`| How to match against the value of the query parameter. One of: Exact, RegularExpression. If this field is not specified, a default of "Exact" is provided.|
 | `name`| The HTTP query param to be matched. This must be an exact string match.|
 | `value`| Value of HTTP query param to be matched.|
 {{< /table >}}
@@ -267,7 +267,7 @@ A filter which modifies request headers.
 | `hostname`| The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.|
 | `path`| An [httpPathModfier](#httppathmodfier) which modifies the path of the incoming request and uses the modified path in the `Location` header.|
 | `port`| The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.|
-| `status`| The HTTP status code to be used in response.|
+| `statusCode`| The HTTP status code to be used in response.|
 {{< /table >}}
 
 #### httpPathModfier
