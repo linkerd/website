@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
+  - blog/20221122-startup-deep-dive.md
   - blog/linkerd-multi-cluster-failover.md
-  - blog/linkerd-istio-adoption.md
 description: ''
 keywords: []
 ---
