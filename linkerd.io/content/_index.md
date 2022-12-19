@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "2022-08-24 **Announcing Linkerd 2.12: Zero-trust route-based policy, Gateway API, access logging, and more! [Read more »](https://buoyant.io/blog/announcing-linkerd-2-12)**"
+  description: "2022-12-01 **New blog post! What really happens at startup: Linkerd, init containers, the CNI, and more [Read more »](2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/)**"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
