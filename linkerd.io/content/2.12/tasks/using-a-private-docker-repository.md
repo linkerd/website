@@ -29,8 +29,8 @@ image: cr.l5d.io/linkerd/proxy-init:v1.4.0
 image: cr.l5d.io/linkerd/proxy:stable-2.12.0
 ```
 
-All of the Linkerd images are publicly available in the
-[Linkerd Google Container Repository](https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
+All of the Linkerd images are publicly available at the
+[GitHub Container Registry](https://github.com/orgs/linkerd/packages).
 
 Stable images are named using the convention  `stable-<version>` and the edge
 images use the convention `edge-<year>.<month>.<release-number>`.
