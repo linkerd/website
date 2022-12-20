@@ -3,6 +3,8 @@ author: 'flynn'
 date: 2022-12-01T00:00:00Z
 title: |-
   What really happens at startup: Linkerd, init containers, the CNI, and more
+aliases:
+  /2022/12/01/what-really-happens-at-startup-a-deep-dive-into-linkerd-init-containers-cni-plugins-and-more/
 thumbnail: '/uploads/2022/12/machinery-sylvain-lelong-pexels-14252230-thumbnail.jpeg'
 tags: [Linkerd, linkerd, init, cni, startup, tutorials]
 featured: false
