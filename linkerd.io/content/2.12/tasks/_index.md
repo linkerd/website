@@ -2,7 +2,9 @@
 title = "Tasks"
 weight = 4
 aliases = [
-  "./next-steps/"
+  "./next-steps/",
+  "./tasks/enabling-addons/",
+  "./tasks/upgrade-multicluster/",
 ]
 +++
 
