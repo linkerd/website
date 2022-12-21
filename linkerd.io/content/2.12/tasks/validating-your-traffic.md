@@ -14,14 +14,6 @@ Linkerd's automatic mTLS is done in a way that's completely transparent to
 the application. Of course, sometimes it's helpful to be able to validate
 whether mTLS is in effect!
 
-{{< note >}}
-Linkerd uses Kubernetes *ServiceAccounts* to define service identity. This
-requires that the `automountServiceAccountToken` feature (on by default) has
-not been disabled on the pods. See the [Kubernetes service account
-documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
-for more.
-{{< /note >}}
-
 ## Validating mTLS with `linkerd viz edges`
 
 To validate that mTLS is working, you can view a summary of the TCP
