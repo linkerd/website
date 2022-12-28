@@ -1,5 +1,5 @@
 ---
-title: "Service mesh 2022 recap: Linkerd doubled adoption, and what we learned about eBPF, the Gateway API, and more"
+title: "Service mesh 2022 recap: Linkerd adoption doubled, and what we learned about eBPF, the Gateway API, and more"
 author: 'william'
 date: 2022-12-28T00:00:00+00:00
 thumbnail: /images/pan-xiaozhen-ydew6pvUlHc-unsplash.jpg
@@ -13,25 +13,25 @@ tags: [Linkerd]
 
 It's been a good year for Linkerd. Although much of the software industry has
 struggled through an economic downturn, Linkerd adoption has only been growing.
-In fact, our metrics show that **the number of stable Kubernetes clusters
+In fact, log metrics show that **the number of stable Kubernetes clusters
 running Linkerd doubled in 2022**. Linkerd may be the only service mesh to
 achieve graduation status from the CNCF, but it's certainly not slowing down!
 
-Where did this growth come from? New adopters, of course. But why now? Our
-theory is this: the service mesh got a bad rap early on, thanks to extreme
-levels of hype coupled with the relative immaturity and complexity of the
-most-hyped projects. Early adopters decided to hold off until the dust settled.
-Now they're back—and seeing what happened the first time, they're looking for an
-option that won't leave them holding the proverbial bag of operational
-complexity.
+Where did this growth come from, and why now? Based on conversations with new
+adopters throughout the year, our theory is this: the service mesh got a bad rap
+early on, thanks to extreme levels of hype coupled with the relative immaturity
+and complexity of the most-hyped projects. Early adopters decided to hold off
+until the dust settled. Now they're back—and seeing what happened the first
+time, they're looking for an option that won't leave them holding the proverbial
+bag of operational complexity.
 
 Naturally they turn to Linkerd, which is unique in the service mesh space for
 its simplicity. Much of Linkerd's advantage comes down to its data plane.
 Linkerd is the only service mesh to eschew Envoy and focus instead on a
 dedicated sidecar "micro-proxy". In 2018, this was a controversial decision; in
-2022, this approach continued to pay off in spades. While other service mesh
-projects spent their time working around the complexity and resource consumption
-of their data plane, Linkerd instead focused on shipping powerful features like
+2022, this approach continued to pay off in spades. While other projects spent
+time building workarounds for the complexity and resource consumption of their
+data plane, Linkerd instead focused on shipping powerful features like
 [multi-cluster
 failover](https://linkerd.io/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)
 and [full L7 authorization policy based on the Gateway
@@ -73,20 +73,20 @@ the Gateway API to better capture the service mesh use cases.
 Further reading: [Linkerd and the Gateway
 API](https://buoyant.io/blog/linkerd-and-the-gateway-api).
 
-### Surprise #2: eBPF was an optimization but not a game changer
+## Surprise #2: eBPF was an optimization but not a game changer
 
 When the buzz around eBPF for service meshes came to a head early in the year,
-we decided to take a deeper look. What we found was less compelling than we had
+we decided to take a deeper look. What we found was less compelling than we
 hoped. While eBPF can streamline some basic service mesh tasks such as
 forwarding raw TCP connections, its fundamental inability to handle HTTP/2,
-mTLS, or other tasks without a userspace component meant that it might provide
-optimizations, but not radical change—even with eBPF, a service mesh would still
-need L7 proxies somewhere on the cluster.
+mTLS, or other L7 tasks without a userspace component meant that it would not
+provide a radical change—even with eBPF, a service mesh would still need L7
+proxies somewhere on the cluster.
 
-The much-touted "sidecar-free eBPF service mesh" projects, especially, felt like
-[a major step backwards in operability and
-security](https://buoyant.io/blog/ebpf-sidecars-and-the-future-of-the-service-mesh)—by
-shifting that logic into per-host Envoy proxies that mix both networking
+The much-touted "sidecar-free eBPF service mesh" model, especially, felt like [a
+major step backwards in operability and
+security](https://buoyant.io/blog/ebpf-sidecars-and-the-future-of-the-service-mesh).
+By shifting that logic into per-host Envoy proxies that mix both networking
 concerns and TLS key material for everything on the node, they defeat much of
 the point of why we're containerizing things in the first place. Nothing about
 eBPF requires a per-host approach, and we were disappointed to see marketing
@@ -105,32 +105,31 @@ service mesh for both operational and security reasons.
 Further reading: [eBPF, sidecars, and the future of the service
 mesh](https://buoyant.io/blog/ebpf-sidecars-and-the-future-of-the-service-mesh).
 
-### Surprise #3: The ambient mesh
+## Surprise #3: The ambient mesh
 
 Sidecar-free eBPF service meshes were soon joined by Istio's sidecar-free
 "ambient mesh" mode, which uses a combination of per-host and per-service
 proxies. Diving into this approach was another learning experience for us, and
 we were heartened to see that here, at least, the security story was better: for
-example, unlike in "eBPF service meshes", the TLS key material for separate
-identities was maintained in separate processes.
+example, the TLS key material for separate identities was maintained in separate
+processes.
 
-However, the tradeoff for removing sidecars was steep: a lot of new machinery
-was introduced (some of it given special names [for no apparent
-reason](https://www.warp.dev/blog/problems-with-promotion-oriented-cultures)),
-and the approach has [non-trivial
+However, the tradeoff for removing sidecars was steep: a lot of new machinery is
+required, and the result had [non-trivial
 limitations](https://github.com/istio/istio/tree/experimental-ambient#limitations)
-as well as significant consequences for performance. Overall, the improvements
-in lifecycle management and resource consumption don't add up in Linkerd's
-case—our sense is that ambient mesh is more a solution to the problem of running
-Envoy at scale than anything else.
+as well as significant consequences for performance.
 
-### Non-surprise #1: container ordering continues to be a weak point for Kubernetes
+Overall, the vedict was that the improvements in lifecycle management and
+resource consumption don't add up in Linkerd's case. Our sense is that ambient
+mesh is more a solution to the problem of running Envoy at scale than anything
+else.
+
+## Non-surprise #1: container ordering continues to be a weak point for Kubernetes
 
 In addition to surprises, we saw some non-surprises in 2022. As in previous
 years, Linkerd adopters continued to struggle with Kubernetes's perennial
-bugbear—[lack of control over container
-ordering](https://linkerd.io/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).
-This manifested in a variety of ways:
+bugbear—lack of control over container ordering.  This manifested in a variety
+of ways:
 
 * Sidecar containers that require network access need a way to run after the
   linkerd-init container
@@ -153,9 +152,9 @@ Although, rumors swirl about another KEP...
 
 Further reading: [What really happens at startup: Linkerd, init containers, the
 CNI, and
-more](https://linkerd.io/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/)
+more](https://linkerd.io/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).
 
-### Non-surprise #2: Security continues to be a top driver of Linkerd adoption
+## Non-surprise #2: Security continues to be a top driver of Linkerd adoption
 
 As in previous years, the primary driver of Linkerd adoption continued to be
 security. Linkerd's [zero-config mutual
@@ -182,11 +181,12 @@ colors](https://linkerd.io/2022/06/27/announcing-the-completion-of-linkerds-2022
 
 Next year promises to be another banner year for Linkerd. We've got some
 incredibly exciting things planned, ranging from the upcoming 2.13 release with
-header-based routing and circuit breaking, to a few other killer ideas we're
-keeping under wraps for now.
+header-based routing and circuit breaking to a few other killer ideas we're
+keeping under wraps for now.  As always, we'll stay laser-focused on keeping
+Linkerd simple, light, and secure.
 
 Want to get involved with the CNCF's first and only graduation-tier service
-mesh? It's a great time to get involved. Join us!
+mesh? It's a great time to join the project.
 
 ## Linkerd is for everyone
 
