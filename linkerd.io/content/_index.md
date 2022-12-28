@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "2022-12-01 **New blog post! What really happens at startup: Linkerd, init containers, the CNI, and more [Read more »](2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/)**"
+  description: "2022-12-28 **[Service mesh 2022 recap: Linkerd adoption doubled, and what we learned about eBPF, the Gateway API, and more. Read now »](2022/12/28/service-mesh-2022-recap-ebpf-gateway-api/)**"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
