@@ -39,6 +39,17 @@ default polices allow, Linkerd provides a set of CRDs which control traffic
 policy in the cluster: [Server], [HTTPRoute], [ServerAuthorization],
 [AuthorizationPolicy], [MeshTLSAuthentication], and [NetworkAuthentication].
 
+The general pattern for authorization is:
+
+* A `Server` describes and a set of pods, and a single port on those pods.
+* Optionally, an `HTTPRoute` references that `Server` and describes a
+  subset of HTTP traffic to it.
+* A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who
+  is allowed access.
+* An `AuthorizationPolicy` references the `HTTPRoute` or `Server`
+  (the thing to be authorized) and the `MeshTLSAuthentication` or
+  `NetworkAuthentication` (the clients that have authorization).
+
 ## Server
 
 A `Server` selects a port on a set of pods in the same namespace as the server.
@@ -50,9 +61,10 @@ pod/port pairs. Linkerd ships with an admission controller that prevents
 overlapping `Server`s from being created.
 
 {{< note >}}
-When a Server selects a port, all traffic to that port is then denied by
-default, regardless of the default policy. Thus, to authorize traffic to a port
-selected by a Server, you must create AuthorizationPolicies.
+When a Server resource is present, all traffic to the port on its pods will be
+denied (regardless of the default policy) unless explicitly authorized. Thus,
+Servers are typically paired with e.g. an AuthorizationPolicy that references
+the Server, or that reference an HTTPRoute that in turn references the Server.
 {{< /note >}}
 
 ### Server Spec
@@ -129,6 +141,13 @@ and/or verb. [AuthorizationPolicies] may target `HTTPRoute` resources, thereby
 authorizing traffic to that `HTTPRoute` only rather than to the entire [Server].
 `HTTPRoutes` may also define filters which add processing steps that must be
 completed during the request or response lifecycle.
+
+{{< note >}}
+A given HTTP request can only match on HTTPRoute. If multiple HTTPRoutes
+are present that match a request, one will be picked according to the [Gateway
+API rules of
+precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
+{{< /note >}}
 
 ### HTTPRoute Spec
 
