@@ -143,7 +143,7 @@ authorizing traffic to that `HTTPRoute` only rather than to the entire [Server].
 completed during the request or response lifecycle.
 
 {{< note >}}
-A given HTTP request can only match on HTTPRoute. If multiple HTTPRoutes
+A given HTTP request can only match one HTTPRoute. If multiple HTTPRoutes
 are present that match a request, one will be picked according to the [Gateway
 API rules of
 precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
