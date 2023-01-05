@@ -41,12 +41,12 @@ policy in the cluster: [Server], [HTTPRoute], [ServerAuthorization],
 
 The general pattern for authorization is:
 
-* A `Server` describes and a set of pods, and a single port on those pods.
-* Optionally, an `HTTPRoute` references that `Server` and describes a
+- A `Server` describes and a set of pods, and a single port on those pods.
+- Optionally, an `HTTPRoute` references that `Server` and describes a
   subset of HTTP traffic to it.
-* A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who
+- A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who
   is allowed access.
-* An `AuthorizationPolicy` references the `HTTPRoute` or `Server`
+- An `AuthorizationPolicy` references the `HTTPRoute` or `Server`
   (the thing to be authorized) and the `MeshTLSAuthentication` or
   `NetworkAuthentication` (the clients that have authorization).
 
