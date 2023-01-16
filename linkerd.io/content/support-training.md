@@ -31,7 +31,7 @@ support:
     - description: Your extended team for setting up Linkerd from scratch & managing it. We got you covered!
       thumbnail: "/uploads/infracloud-only-icon-logo.svg"
       title: InfraCloud
-      url: https://www.infracloud.io/
+      url: https://www.infracloud.io/linkerd-consulting-support/
 
   bottom_description: Offering Linkerd support or training? Add your company!
   description: ''
