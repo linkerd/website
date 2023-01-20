@@ -46,7 +46,7 @@ Need help coming up with the perfect pitch? Never fear, our [Linkerd Community
 Anchor](https://linkerd.io/community/anchor/) program is here. Please reach out
 and we'll give you hands-on help crafting the perfect submission.
 
-## Interested in sponsoring? Act fast.
+## Interested in sponsoring? Act fast!
 
 The Linkerd audience is like no other. This select group of world-class
 engineers have cut through the hype and noise in the cloud native space and
@@ -59,10 +59,10 @@ brochure](https://events.linuxfoundation.org/wp-content/uploads/2023/01/sponsor-
 and please feel free to reach out to the CNCF directly or to email me (my first
 name at buoyant.io) with any questions.
 
-## Not going to Amsterdam? Meet us at Buoyant's Service Mesh Academy.
+## Not going to Amsterdam? Meet us at the Service Mesh Academy!
 
 If you can't make it to Kubecon EU this year, there are plenty of Linkerd
-learning opportunities at [Buoyant's Service Mesh
+learning opportunities at [our Service Mesh
 Academy](https://buoyant.io/service-mesh-academy). We host monthly live,
 expert-led workshops that provide hands-on training on Linkerd and related CNCF
 projects. From setting up mTLS, to securing multi-cluster communication, to
