@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
+  - blog/announcing-linkerd-day-2023.md
   - blog/service-mesh-2022-recap-ebpf-gateway-api.md
-  - blog/20221122-startup-deep-dive.md
 description: ''
 keywords: []
 ---
