@@ -482,7 +482,7 @@ spec:
       name: webapp
 ```
 
-A `MeshTLSAuthentication` which authenticates the all meshed identities.
+A `MeshTLSAuthentication` which authenticates all meshed identities.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
