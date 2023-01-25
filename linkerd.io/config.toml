@@ -53,34 +53,40 @@ name = "Community"
 url = "/community/"
 weight = 2
 [[menu.top]]
+identifier = "linkerd-day-2023eu"
+name = "Linkerd Day 2023 EU"
+url = "https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/cncf-hosted-co-located-events/cfp-colocated-events/#overview"
+weight = 1
+parent = "community"
+[[menu.top]]
 identifier = "get-involved"
 name = "Get Involved"
 url = "/community/get-involved/"
-weight = 1
+weight = 2
 parent = "community"
 [[menu.top]]
 identifier = "community-adopters"
 name = "Adopters"
 url = "/community/adopters/"
-weight = 2
+weight = 3
 parent = "community"
 [[menu.top]]
 identifier = "linkerd-ambassadors"
 url = "/community/ambassadors/"
 name = "Linkerd Ambassadors"
-weight = 3
+weight = 4
 parent = "community"
 [[menu.top]]
 identifier = "community-heroes"
 name = "Linkerd Heroes"
 url = "/community/heroes/"
-weight = 4
+weight = 5
 parent = "community"
 [[menu.top]]
 identifier = "community-anchors"
 name = "Community Anchors"
 url = "/community/anchor/"
-weight = 5
+weight = 6
 parent = "community"
 [[menu.top]]
 identifier = "blog"
