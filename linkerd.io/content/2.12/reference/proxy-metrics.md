@@ -72,13 +72,30 @@ Each of these metrics has the following labels:
 
 The following labels are only applicable on `response_*` metrics.
 
+* `status_code`: The HTTP status code of the response.
+
+#### Response Total Labels
+
+In addition to the labels applied to all `response_*` metrics, the
+`response_total`, `route_response_total`, and `control_response_total` metrics
+also have the following labels:
+
 * `classification`: `success` if the response was successful, or `failure` if
                     a server error occurred. This classification is based on
                     the gRPC status code if one is present, and on the HTTP
-                    status code otherwise. Only applicable to response metrics.
+                    status code otherwise.
 * `grpc_status_code`: The value of the `grpc-status` trailer.  Only applicable
                       for gRPC responses.
-* `status_code`: The HTTP status code of the response.
+
+{{< note >}}
+Because response classification may be determined based on the `grpc-status`
+trailer (if one is present), a response may not be classified until its body
+stream completes. Response latency, however, is determined based on
+[time-to-first-byte][ttfb], so the `response_latency_ms` metric is recorded as
+soon as data is received, rather than when the response body ends. Therefore,
+the values of the `classification` and `grpc_status_code` labels are not yet
+known when the `response_latency_ms` metric is recorded.
+{{< /note >}}
 
 #### Outbound labels
 
