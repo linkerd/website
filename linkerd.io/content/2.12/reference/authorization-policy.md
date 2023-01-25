@@ -443,7 +443,7 @@ A `MeshTLSAuthentication` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `identities`| A list of mTLS identities to authenticate.|
+| `identities`| A list of mTLS identities to authenticate. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all meshed clients are authorized.|
 | `identityRefs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
 {{< /table >}}
 
@@ -480,6 +480,18 @@ spec:
       name: books
     - kind: ServiceAccount
       name: webapp
+```
+
+A `MeshTLSAuthentication` which authenticates all meshed identities.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  name: authors-get-authn
+  namespace: booksapp
+spec:
+  identities: ["*"]
 ```
 
 ## NetworkAuthentication
