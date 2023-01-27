@@ -305,4 +305,3 @@ Linkerd](https://buoyant.io/service-mesh-academy/kubernetes-mtls-with-linkerd)
 for hands-on exploration of everything I've talked about here! And, as always,
 feedback is always welcome -- you can find me as `@flynn` on the [Linkerd
 Slack](https://slack.linkerd.io)._
-
