@@ -40,7 +40,7 @@ There are many ways to contribute to open source, and sharing your journey and
 lessons learned is one of the best of them. If you're running Linkerd, please
 [submit a
 talk](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/cncf-hosted-co-located-events/cfp-colocated-events/)!
-The CFP closes on February 5, so time is short.
+The CFP closes on February 12, so time is short.
 
 Need help coming up with the perfect pitch? Never fear, our [Linkerd Community
 Anchor](https://linkerd.io/community/anchor/) program is here. Please reach out
