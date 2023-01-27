@@ -11,7 +11,7 @@ featured: true
 ---
 
 {{< fig
-  alt="Machinery Starting Up"
+  alt="Cyber Padlock"
   title="image credit: [duangdee123050146](https://www.vecteezy.com/members/duangdee123050146)"
   src="/uploads/2023/01/vecteezy-padlock-14719453-splash.png" >}}
 
