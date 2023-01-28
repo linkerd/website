@@ -4,7 +4,7 @@ author: 'flynn'
 date: 2023-01-27T00:00:00+00:00
 slug: mtls-and-linkerd
 url:
-  /2023/01/27/mtls-and-linkerd
+  /2023/01/27/mtls-and-linkerd/
 thumbnail: '/uploads/2023/01/vecteezy-padlock-14719453-thumbnail.png'
 tags: [Linkerd, linkerd, mtls, tls, security, encryption, authentication]
 featured: true
