@@ -139,8 +139,8 @@ the extra constraint that the server must also verify the client’s identity:
 4. The two workloads start exchanging encrypted data.
 
 This is a small addition with a large impact. Authenticating both parties
-allows for meaningful authorization, which the [service mesh]
-(https://buoyant.io/service-mesh-manifesto) can use to enforce meaningful
+allows for meaningful authorization, which the [service
+mesh](https://buoyant.io/service-mesh-manifesto) can use to enforce meaningful
 security policies. So basically, this one change gives the mesh everything it
 needs for real zero trust.
 
