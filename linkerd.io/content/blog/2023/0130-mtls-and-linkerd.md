@@ -1,10 +1,10 @@
 ---
 title: "mTLS and Linkerd"
 author: 'flynn'
-date: 2023-01-27T00:00:00+00:00
+date: 2023-01-30T00:00:00+00:00
 slug: mtls-and-linkerd
 url:
-  /2023/01/27/mtls-and-linkerd/
+  /2023/01/30/mtls-and-linkerd/
 thumbnail: '/uploads/2023/01/vecteezy-padlock-14719453-thumbnail.png'
 tags: [Linkerd, linkerd, mtls, tls, security, encryption, authentication]
 featured: true
@@ -22,9 +22,11 @@ recording](https://buoyant.io/service-mesh-academy/kubernetes-mtls-with-linkerd)
 
 ## mTLS and Linkerd
 
-You don’t have to spend much time in the cloud-native world before mTLS comes
-up. It shows up over and over again, especially once you start talking about
-zero trust. So what it is? What can it do, and what can it not do?
+You don’t have to spend much time in the cloud-native world before
+[mTLS](https://buoyant.io/mtls-guide) comes up. It shows up over and over
+again, especially once you start talking about
+[zero trust](https://buoyant.io/resources/zero-trust-in-kubernetes-with-linkerd).
+So what is it? What can it do, and what can it not do?
 
 To answer these questions, let’s start with a quick look at TLS itself.
 
@@ -137,9 +139,10 @@ the extra constraint that the server must also verify the client’s identity:
 4. The two workloads start exchanging encrypted data.
 
 This is a small addition with a large impact. Authenticating both parties
-allows for meaningful authorization, which the service mesh can use to enforce
-meaningful security policies. So basically, this one change gives the mesh
-everything it needs for real zero trust.
+allows for meaningful authorization, which the [service mesh]
+(https://buoyant.io/service-mesh-manifesto) can use to enforce meaningful
+security policies. So basically, this one change gives the mesh everything it
+needs for real zero trust.
 
 Furthermore, cryptographic authentication gets us away from using anything
 about the network itself as a proxy for identity. This is a particularly
@@ -170,12 +173,6 @@ with “normal” TLS, the only authorization that mTLS provides is the check th
 the certificates in play are valid and ultimately signed by a trusted issuer.
 Anything beyond that is up to something beyond mTLS: in our case, the service
 mesh.
-
-{{< cta-banner
-  title="Real-World GitOps with Flagger and Linkerd"
-  href="https://buoyant.io/register/weave-gitops-flagger-linkerd"
-  thumbnail="/uploads/2022/12/2022-11-sma-thumbnail.png"
->}}
 
 ## mTLS in Linkerd
 
