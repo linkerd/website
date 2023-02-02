@@ -2,6 +2,12 @@
 title: Linkerd 2.x Adopters
 description: Here are some of the organizations we know are using Linkerd 2.x. If you're using Linkerd 2.x and aren't on this list, [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md)
 case_studies:
+- image: /images/adopters/xbox.png
+  alt: Xbox
+  link: https://buoyant.io/case-studies/xbox/
+- image: /images/adopters/penn-state.png
+  alt: Penn State
+  link: https://buoyant.io/case-studies/penn-state/
 - image: /images/adopters/entain-logo.png
   alt: Entain
   link: https://buoyant.io/case-studies/entain/
@@ -56,6 +62,8 @@ adopters:
   alt: Expedia
 - image: /images/adopters/facelift.png
   alt: Facelift
+- image: /images/adopters/Favrit.svg
+  alt: Favrit
 - image: /images/adopters/giant-swarm.png
   alt: Giant Swarm
 - image: /images/adopters/Homechoice.png
@@ -94,6 +102,8 @@ adopters:
   alt: Novo Labs
 - image: /images/adopters/OLX.png
   alt: OLX
+- image: /images/adopters/penn-state.png
+  alt: Penn State
 - image: /images/adopters/PlayStudiosAsia.png
   alt: Play Studios Asia
 - image: /images/adopters/PlexTrac.png

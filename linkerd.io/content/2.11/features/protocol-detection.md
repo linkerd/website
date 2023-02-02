@@ -3,7 +3,8 @@ title = "TCP Proxying and Protocol Detection"
 description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
 weight = 2
 aliases = [
-  "/2.11/supported-protocols/"
+  "/2.11/supported-protocols/",
+  "../tasks/upgrading-2.10-ports-and-protocols/",
 ]
 +++
 
@@ -131,3 +132,16 @@ There was a bug in Linkerd 2.11.0 and 2.11.1 that prevented the opaque ports
 behavior of `enable-external-profiles` from working. This was fixed in Linkerd
 2.11.2.
 {{< /note >}}
+
+## Using `NetworkPolicy` resources with opaque ports
+
+When a service has a port marked as opaque, any `NetworkPolicy` resources that
+apply to the respective port and restrict ingress access will have to be
+changed to target the proxy's inbound port instead (by default, `4143`). If the
+service has a mix of opaque and non-opaque ports, then the `NetworkPolicy`
+should target both the non-opaque ports, and the proxy's inbound port.
+
+A connection that targets an opaque endpoint (i.e a pod with a port marked as
+opaque) will have its original target port replaced with the proxy's inbound
+port. Once the inbound proxy receives the traffic, it will transparently
+forward it to the main application container over a TCP connection.

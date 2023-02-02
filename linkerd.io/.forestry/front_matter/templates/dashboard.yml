@@ -18,7 +18,6 @@ fields:
     required: true
   label: Title
 pages:
-- linkerd.io/content/dashboard/have-you-adopted-linkerd-let-us-know-and-we-ll-send-you-some-sweet-swag.md
 - linkerd.io/content/dashboard/january-linkerd-online-community-meeting.md
 - linkerd.io/content/dashboard/october-linkerd-online-community-meeting.md
 - linkerd.io/content/dashboard/the-linkerd-2021-user-survey-is-here.md

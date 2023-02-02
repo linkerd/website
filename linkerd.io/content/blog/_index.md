@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/linkerd-multi-cluster-failover.md
-  - blog/linkerd-istio-adoption.md
+  - blog/2023/0130-mtls-and-linkerd.md
+  - blog/announcing-linkerd-day-2023.md
 description: ''
 keywords: []
 ---

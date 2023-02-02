@@ -21,18 +21,18 @@ support:
     - description: Hands-on, instructor-led service mesh training, straight from the creators of Linkerd.
       url: https://buoyant.io/linkerd-training/
       title: Buoyant
-      thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
+      thumbnail: "/images/buoyant-balloon.svg"
   - title: 'Commercial support'
     entries:
     - description: Enterprise-grade support including 24x7 oncall, straight from the creators of Linkerd.
-      thumbnail: "/uploads/buoyant_logo_icon-only_primary.svg"
+      thumbnail: "/images/buoyant-balloon.svg"
       title: Buoyant
       url: https://buoyant.io/linkerd-support/
     - description: Your extended team for setting up Linkerd from scratch & managing it. We got you covered!
       thumbnail: "/uploads/infracloud-only-icon-logo.svg"
       title: InfraCloud
-      url: https://www.infracloud.io/
-      
+      url: https://www.infracloud.io/linkerd-consulting-support/
+
   bottom_description: Offering Linkerd support or training? Add your company!
   description: ''
   buttons:

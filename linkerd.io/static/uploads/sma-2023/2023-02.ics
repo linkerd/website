@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZNAME:EDT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZNAME:EST
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20221214T175415Z
+UID:559525E5-2E82-430F-8AC3-9E0D8250DC6E@ical.buoyant.io
+DTSTART;TZID=America/New_York:20230216T120000
+DTEND;TZID=America/New_York:20230216T133000
+SUMMARY:Real-World GitOps: Weave GitOps\, Flagger\, and Linkerd
+DESCRIPTION:\"GitOps\" and \"service mesh\" may not be things you immediately think of together – but maybe they should be! These two wildly different technologies are each enormously capable independently\, and combined they deliver far more than the sum of their parts. In this second of two sessions\, you'll join Buoyant and Weaveworks (the creators of Linkerd and Flux) for a hands-on deep dive into how to use Weave GitOps\, Flagger\, and Linkerd to set up GitOps-driven continuous deployment and progressive deployment in real-world production-ready scenarios. We'll start with initial installation and configuration of production-ready Weave GitOps\, Flagger\, and Linkerd\; work through continuous delivery in a highly-available world\; and end with progressive delivery and canary deployments deep in the application call graph.
+LOCATION:https://buoyant.io/service-mesh-academy/live-workshop
+END:VEVENT
+END:VCALENDAR

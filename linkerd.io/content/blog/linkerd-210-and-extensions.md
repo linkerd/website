@@ -5,7 +5,7 @@ feature = "/uploads/kari-shea-B8JFJWzAC9s-unsplash.jpg"
 tags = ["Linkerd"]
 thumbnail = "/uploads/kari-shea-B8JFJWzAC9s-unsplash.jpg"
 title = "Linkerd 2.10 and Extensions"
-featured = true
+featured = false
 +++
 
 ![Zen garden](/uploads/kari-shea-B8JFJWzAC9s-unsplash.jpg")

@@ -4,7 +4,7 @@ description: "The Linkerd Ambassador badge is a distinction awarded to those
   community members who are experts in their field and who demonstrate
   expertise, passion, engagement, and a commitment to sharing their Linkerd
   experience."
-thumbnail: "/uploads/ambassadors-card.png"
+thumbnail: "/uploads/ambassadors-emblem.png"
 url: /community/ambassadors/
 layout: "ambassadors"
 top_hero:
@@ -18,6 +18,12 @@ intro: The Linkerd Ambassador badge is a distinction awarded to those community
   broader community. Linkerd Ambassadors are hand-picked by the Linkerd
   maintainers.
 ambassadors:
+  - name: Charles Pretzer
+    job_title: Field Engineer
+    image: /images/ambassadors/profile/charles-pretzer.png
+    flag: 🇺🇸
+    github: https://github.com/cpretzer
+    linkedin: https://www.linkedin.com/in/charlespretzer/
   - name: Chris Campbell
     job_title: Cloud Software Engineer
     image: /images/ambassadors/profile/chris-campbell.png

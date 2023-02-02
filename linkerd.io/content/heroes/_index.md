@@ -16,6 +16,41 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Steve Reardon
+    date: November 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/steve-reardon.jpeg"
+    alt: Portrait of Steve Reardon
+    github_url: "https://github.com/Monkman08/"
+  - name: Dan Williams
+    date: September 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/dan-williams-portrait.png"
+    alt: Portrait of Dan Williams
+    github_url: "https://www.linkedin.com/in/dan-williams-5501a8105/"
+  - name: Dani Baeyens
+    date: August 2022
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/dani-baeyens-portrait.png"
+    alt: Portrait of Dani Baeyens
+    github_url: "https://www.linkedin.com/in/danibaeyens/"
+  - name: Dominik Táskai
+    date: July 2022
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/dominik-taskai-portrait.png"
+    alt: Portrait of Dominik Táskai
+    github_url: "https://www.linkedin.com/in/dtaskai/"
+  - name: Chris Voss
+    date: June 2022
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/chris-voss.jpeg"
+    alt: Portrait of Chris Voss
+    github_url: "https://www.linkedin.com/in/christopher-voss-99161111/"
   - name: Naveen Nalam
     date: March 2022
     blurb: Technical contributions
@@ -62,14 +97,14 @@ voted:
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-reardon.png"
+    image: "/uploads/steve-gray.png"
     alt: Portrait of Steve Gray
     github_url: https://github.com/steve-gray
   - name: Steve Reardon
     date: June 2021
     blurb: Spreading the Linkerd message
     hero_type: ambassador
-    image: "/uploads/steve-gray.jpeg"
+    image: "/uploads/steve-reardon.jpeg"
     alt: Portrait of Steve Reardon
     github_url: https://github.com/Monkman08
   - name: Rio Kierkels

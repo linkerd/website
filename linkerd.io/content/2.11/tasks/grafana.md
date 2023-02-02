@@ -32,8 +32,8 @@ Prometheus](../external-prometheus/).
 The easiest and recommended way is to install Grafana's official Helm chart:
 
 ```bash
-helm repo add grafana https://grafana.github.io/helm-charts helm install
-grafana -n grafana --create-namespace grafana/grafana \
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana -n grafana --create-namespace grafana/grafana \
   -f https://raw.githubusercontent.com/linkerd/linkerd2/main/grafana/values.yaml
 ```
 

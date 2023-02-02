@@ -670,7 +670,7 @@ This documentation will use the following elements:
 Before installing the Emojivoto demo application, install Linkerd and Kong on
 your cluster. Remember when injecting the Kong deployment to use the `--ingress`
 flag (or annotation) as mentioned
-[above](https://linkerd.io../using-ingress/#proxy-ingress-mode)!
+[above](../using-ingress/#proxy-ingress-mode)!
 
 We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 

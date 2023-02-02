@@ -5,6 +5,8 @@
 {{ $data = (index site.Data "cli-2-10").AnnotationsReference }}
 {{ else if eq $docsVersion "2.11" }}
 {{ $data = (index site.Data "cli-2-11").AnnotationsReference }}
+{{ else if eq $docsVersion "2.12" }}
+{{ $data = (index site.Data "cli-2-12").AnnotationsReference }}
 {{ end }}
 <div class="table-container">
   <table class="table table-striped">
