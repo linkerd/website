@@ -1,0 +1,33 @@
+
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZNAME:EDT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZNAME:EST
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20221214T175415Z
+UID:559525E5-2E82-430F-8AC3-9E0D8250DC6E@ical.buoyant.io
+DTSTART;TZID=America/New_York:20230316T120000
+DTEND;TZID=America/New_York:20230316T130000
+SUMMARY:What's Coming in Linkerd 2.13
+DESCRIPTION:The Linkerd team has been hard at work\, as always\, and soon enough\, all their hard work will be released for you to enjoy! In this Service Mesh Academy\, we're going to cover the highlights of what's coming in Linkerd 2.13.
+LOCATION:https://buoyant.io/service-mesh-academy/live-workshop
+END:VEVENT
+END:VCALENDAR
+
