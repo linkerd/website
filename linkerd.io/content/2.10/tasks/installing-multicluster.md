@@ -214,7 +214,7 @@ default this value is true.
 When the multicluster components are installed onto a target cluster with
 `linkerd multicluster install`, a service account is created which source clusters
 will use to mirror services.  Using a distinct service account for each source
-cluster can be benefitial since it gives you the ability to revoke service mirroring
+cluster can be beneficial since it gives you the ability to revoke service mirroring
 access from specific source clusters.  Generating additional service accounts
 and associated RBAC can be done using the `linkerd multicluster allow` command
 through the CLI.
