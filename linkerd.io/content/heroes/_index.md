@@ -16,6 +16,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Yu Cao
+    date: February 2023
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/2023/02/yu-cao-portrait.png"
+    alt: Portrait of Yu Cao
+    github_url: "https://github.com/yc185050"
   - name: Steve Reardon
     date: November 2022
     blurb: Helping community members
