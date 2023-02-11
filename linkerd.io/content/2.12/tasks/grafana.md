@@ -41,6 +41,17 @@ Cloud](https://grafana.com/products/cloud/). Those projects provide instructions
 on how to easily import the same charts published on
 <https://grafana.com/orgs/linkerd>.
 
+{{< note >}}
+Grafana's official Helm chart uses an initContainer to download Linkerd's
+configuration and dashboards. If you use the CNI plugin, when you add grafana's
+pod into the mesh its initContainer will run before the proxy is started and the
+traffic cannot flow.
+You should either avoid meshing grafana's pod, skip outbound port 443 via
+`config.linkerd.io/skip-outbound-ports: "443"` annotation or run the container
+with the proxy's UID.
+See [Allowing initContainer networking](https://linkerd.io/2.12/features/cni/#allowing-initcontainer-networking)
+{{< /note >}}
+
 ## Hook Grafana with Linkerd Viz Dashboard
 
 It's easy to configure Linkerd Viz dashboard and Grafana such that the former
