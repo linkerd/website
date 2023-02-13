@@ -229,10 +229,10 @@ participate in traces.
 ### Ingress
 
 The ingress is an especially important component for distributed tracing because
-it creates the root span of each trace and is responsible for deciding if that
-trace should be sampled or not.  Having the ingress make all sampling decisions
-ensures that either an entire trace is sampled or none of it is, and avoids
-creating "partial traces".
+it typically creates the root span of each trace and is responsible for deciding
+if that trace should be sampled or not.  Having the ingress make all sampling
+decisions ensures that either an entire trace is sampled or none of it is, and
+avoids creating "partial traces".
 
 Distributed tracing systems all rely on services to propagate metadata about the
 current trace from requests that they receive to requests that they send. This
@@ -244,22 +244,8 @@ format](https://github.com/openzipkin/b3-propagation) today. Being one of the
 earliest widely used formats, it has the widest support, especially among
 ingresses like Nginx.
 
-This reference architecture includes a simple Nginx config that samples 50% of
-traces and emits trace data to the collector (using the Zipkin protocol).  Any
-ingress controller can be used here in place of Nginx as long as it:
-
-- Supports probabilistic sampling
-- Encodes trace context in the b3 format
-- Emits spans in a protocol supported by the OpenCensus collector
-
-If using helm to install ingress-nginx, you can configure tracing by using:
-
-```yaml
-controller:
-  config:
-    enable-opentracing: "true"
-    zipkin-collector-host: collector.linkerd-jaeger
-```
+This reference architecture uses a traffic generator called `vote-bot` instead
+of an ingress to create the root span of each trace.
 
 ### Client Library
 
