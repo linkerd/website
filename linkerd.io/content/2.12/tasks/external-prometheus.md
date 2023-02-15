@@ -113,6 +113,18 @@ with direct values for the below configuration to work.
         regex: __tmp_pod_label_(.+)
 ```
 
+You will also need to ensure that your Prometheus scrape interval is shorter
+than the time duration range of any Prometheus queries. In order to ensure the
+web dashboard and Linkerd Grafana work correctly, we recommend a 10 second
+scrape interval:
+
+```yaml
+  global:
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    evaluation_interval: 10s
+```
+
 The running configuration of the builtin prometheus can be used as a reference.
 
 ```bash
