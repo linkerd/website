@@ -20,7 +20,7 @@ An `HTTPLoadBalancerPolicy` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `circuitBreaking` | Configuration of Circuit Breaking |
+| `circuitBreaking` | Configures Circuit Breaking. |
 | `queue` | A `queue` configures the buffering behavior of a load balancer. |
 | `targetRef`| A [TargetRef](#targetref) which may reference a ClusterIP Service to which the policy applies.|
 {{< /table >}}
@@ -76,10 +76,10 @@ applies. The API objects supported are:
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| Group is the group of the target resource. For namespace and Service kinds, this should be omitted.|
-| `kind`| Kind is the kind of the target resource.|
+| `group`| Group is the group of the target resource. For namespace kinds, this should be omitted.|
+| `kind`| The kind of the target resource.|
 | `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
-| `name`| Name is the name of the target resource.|
+| `name`| The name of the target resource.|
 {{< /table >}}
 
 ### HTTPLoadBalancerPolicy Examples
