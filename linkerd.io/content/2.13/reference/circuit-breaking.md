@@ -22,11 +22,19 @@ An `HTTPLoadBalancerPolicy` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `failureStatusCodes` | _Default_ status codes considered failures. Overridden by [HTTPRoute] response classification. |
-| `maxFailureRate` | If the responses within the `slidingWindowDuration` fail at, or above this ratio, the endpoint is considered to be in a failure condition. |
+| `circuitBreaking` | Configuration of Circuit Breaking |
 | `queue` | A `queue` configures the buffering behavior of a load balancer. |
-| `slidingWindowDuration` | A duration, in milliseconds, considered for circuit breaking failure accrual.  |
 | `targetRef`| A [TargetRef](#targetref) which may reference a ClusterIP Service to which the policy applies.|
+{{< /table >}}
+
+#### circuitBreaking
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `failureStatusCodes` | _Default_ status codes considered failures. Overridden by [HTTPRoute] response classification. |
+| `maxFailureRate` | If the responses within the `slidingWindowDuration` fail at, or above this rate, the endpoint is considered to be in a failure condition. |
+| `slidingWindowDuration` | A duration considered for failure accrual.  |
 {{< /table >}}
 
 #### failureStatusCodes
@@ -87,13 +95,15 @@ metadata:
   name: http-loadbalancer-policy
   namespace: emojivoto
 spec:
-  queueCapacity: 4000 # Number of requests allowed in queue
-  queueFailfastTimeout: "4s"
-  maxFailureRate: 0.05 # Fail if more than 1 in 20 requests in slidingWindowDuration fail 
-  slidingWindowDuration: "5s"
-  failureStatusCodes:
-    - 410
-    - 500-599 # Status codes 500 through 599, inclusive.
+  queue:
+    capacity: 4000 # Number of requests allowed in queue
+    failfastTimeout: "4s"
+  circuitBreaking:
+    failureStatusCodes:
+      - 410
+      - 500-599 # Status codes 500 through 599, inclusive.
+    maxFailureRate: 100 # Fail if more than 100 in slidingWindowDuration fail 
+    slidingWindowDuration: "5s"
   targetRef:
     - name: emoji-svc
       kind: Service
