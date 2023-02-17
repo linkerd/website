@@ -21,7 +21,7 @@
         {{ if eq $docsVersion "1" }}
           <div class="message">
             <div class="message-header">
-              This is not the latest version of Linkerd!
+              This is not the current stable version of Linkerd!
             </div>
             <div class="message-body">
 	      This documentation is for Linkerd 1.x, an older version with some
@@ -32,10 +32,10 @@
         {{ else if and (hasPrefix $docsVersion "2") (ne $docsVersion $latestVersion) }}
           <div class="message">
             <div class="message-header">
-              This is not the latest version of Linkerd!
+              This is not the current stable version of Linkerd!
             </div>
             <div class="message-body">
-	      This documentation is for an older version of Linkerd.
+	      This documentation is not for the current stable Linkerd.
               {{ if (fileExists $latestDocsPath) }}
 	        You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
                 documentation</a> instead.
