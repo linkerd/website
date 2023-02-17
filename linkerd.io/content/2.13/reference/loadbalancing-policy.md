@@ -1,19 +1,17 @@
 +++
-title = "Circuit Breaking"
-description = "Reference guide to Linkerd's Circuit Breaking."
+title = "Load Balancing Policy"
+description = "Reference guide to Linkerd's Load Balancing Policy."
 +++
 
-TODO: Move to load-balancing-policy!
+Linkerd's Load Balancing Policy configures load balancing and Circuit Breaking. Circuit
+Breaking factors an endpoint’s recent success rate when considering whether to send a request to it.
 
-Linkerd's Circuit Breaking factors an endpoint’s recent success rate when
-considering whether to send a request to it.
-
-Linkerd's Circuit Breaking is configured using [HTTPLoadBalancerPolicy],
+Linkerd's Load Balancing Policy is configured using [HTTPLoadBalancerPolicy],
 [HTTPRoute](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRoute), `TCP`(_tbd_) and `GRPCRoute`(_tbd_).
 
 ## HTTPLoadBalancerPolicy
 
-An `HTTPLoadBalancerPolicy` configures circuit breaking and fail fast timeoutes.
+An `HTTPLoadBalancerPolicy` configures circuit breaking and queue behavior.
 
 ### HTTPLoadBalancerPolicy Spec
 
@@ -79,7 +77,7 @@ applies. The API objects supported are:
 | field| value |
 |------|-------|
 | `group`| Group is the group of the target resource. For namespace and Service kinds, this should be omitted.|
-| `kind`| Kind is kind of the target resource.|
+| `kind`| Kind is the kind of the target resource.|
 | `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
 {{< /table >}}
