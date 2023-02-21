@@ -168,7 +168,7 @@ realize is that it will route to _endpoints_ by default, which is not what you
 want. To make `ingress-nginx` route to _Services_, you'll need to include an
 annotation on the Ingress resource:
 
-```
+```yaml
 nginx.ingress.kubernetes.io/service-upstream: "true"
 ```
 
