@@ -11,7 +11,7 @@ featured: false
 ---
 
 {{< fig
-  alt="Cyber Padlock"
+  alt="Cyber Door"
   title="image credit: [Ian Battaglia](https://unsplash.com/@ianjbattaglia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
   src="/uploads/2023/02/door-battaglia-9drS5E_Rguc-rect.jpg" >}}
 
