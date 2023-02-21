@@ -8,7 +8,7 @@ on:
 jobs:
   linkerd_io:
     name: Validate generated HTML
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     container:
       image: buoyantio/website-builder:v1.3.3
     steps:
