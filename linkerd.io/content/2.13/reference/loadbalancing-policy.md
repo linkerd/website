@@ -30,15 +30,9 @@ An `HTTPLoadBalancerPolicy` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `failureStatusCodes` | _Default_ status codes considered failures. Overridden by [HTTPRoute] response classification. |
 | `maxFailureRate` | If the responses within the `slidingWindowDuration` fail at, or above this rate, the endpoint is considered to be in a failure condition. |
 | `slidingWindowDuration` | A duration considered for failure accrual.  |
 {{< /table >}}
-
-#### failureStatusCodes
-
-`FailureStatusCodes` represent the _default_ status codes considered failures and may be overridden in an
-[HTTPRoute](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRoute). Numbers and ranges are considered. Defaults to 500-600.
 
 #### maxFailureRate
 
@@ -97,10 +91,7 @@ spec:
     capacity: 4000 # Number of requests allowed in queue
     failfastTimeout: "4s"
   circuitBreaking:
-    failureStatusCodes:
-      - 410
-      - 500-599 # Status codes 500 through 599, inclusive.
-    maxFailureRate: 100 # Fail if more than 100 in slidingWindowDuration fail 
+    maxFailureRate: 100 # Fail if more than 100 in slidingWindowDuration fail
     slidingWindowDuration: "5s"
   targetRef:
     - name: emoji-svc
