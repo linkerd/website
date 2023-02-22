@@ -30,8 +30,25 @@ An `HTTPLoadBalancerPolicy` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `maxFailureRate` | If the responses within the `slidingWindowDuration` fail at, or above this rate, the endpoint is considered to be in a failure condition. |
-| `slidingWindowDuration` | A duration considered for failure accrual.  |
+| `kind` | Either `consecutiveFailures`, `successRate`, `successRateWindowed`, or `none`. |
+{{< /table >}}
+
+<!-- Taken from https://api.linkerd.io/1.7.5/linkerd/index.html#grpc-user-defined-retryable-status-codes -->
+
+#### kind
+
+`kind` determines the approach for Circuit Breaking.
+
+##### kind: consecutiveFailures
+
+`consecutiveFailures` observes the number of consecutive failures to each node,
+and backs off sending requests to nodes that have exceeded the specified number
+of failures.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `failures` | Number of consecutive failures. |
 {{< /table >}}
 
 #### maxFailureRate
