@@ -41,8 +41,8 @@ An `HTTPLoadBalancerPolicy` spec may contain the following top level fields:
 
 ##### kind: consecutiveFailures
 
-`consecutiveFailures` observes the number of consecutive failures to each node,
-and backs off sending requests to nodes that have exceeded the specified number
+`consecutiveFailures` observes the number of consecutive failures to each service,
+and backs off sending requests to services that have exceeded the specified number
 of failures.
 
 {{< table >}}
@@ -51,9 +51,38 @@ of failures.
 | `failures` | Number of consecutive failures. |
 {{< /table >}}
 
-#### maxFailureRate
+##### kind: successRate
 
-`maxFailureRate` represents the maximum rate allowed before considering the endpoint in a failure mode.
+`successRate` computes an exponentially-weighted moving average success rate for
+each service, and backs off sending requests to services that have fallen below the
+specified success rate. The window size for computing success rate is
+constrained to a fixed number of requests.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `successRate` | Target success rate. |
+| `requests` | Number of requests over which success rate is computed. |
+{{< /table >}}
+
+##### kind: successRateWindowed
+
+`successRateWindowed` computes an exponentially-weighted moving average success
+rate for each service, and backs off sending requests to services that have fallen
+below the specified success rate. The window size for computing success rate is
+constrained to a fixed time `window`.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `successRate` | Target success rate. |
+| `window` | A duration over which success rate is computed. |
+{{< /table >}}
+
+##### kind: none
+
+`none` disables failure accrual altogether. This policy does not accept any
+additional parameters.
 
 #### queue
 
