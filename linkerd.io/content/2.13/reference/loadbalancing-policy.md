@@ -99,10 +99,6 @@ The maximum throughput is `capacity` divided by `failfastTimeout`.
 | `failfastTimeout` | A duration representing how long a request stays in the queue. |
 {{< /table >}}
 
-#### slidingWindowDuration
-
-A `SlidingWindowDuration` is the period of time considered for Circuit Breaking. Defaults to 10 seconds.
-
 #### targetRef
 
 A `TargetRef` identifies an API object to which this HTTPLoadBalancerPolicy
@@ -124,7 +120,7 @@ applies. The API objects supported are:
 
 ### HTTPLoadBalancerPolicy Examples
 
-An `HTTPLoadBalancerPolicy`.
+An `HTTPLoadBalancerPolicy` utilizing `successRateWindowed`.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -137,8 +133,9 @@ spec:
     capacity: 4000 # Number of requests allowed in queue
     failfastTimeout: "4s"
   circuitBreaking:
-    maxFailureRate: 100 # Fail if more than 100 in slidingWindowDuration fail
-    slidingWindowDuration: "5s"
+    kind: successRateWindowed
+    successRate: 90 # Open circuit breaker if less than 90% of requests succeed in window.
+    window: "5s"
   targetRef:
     - name: emoji-svc
       kind: Service
