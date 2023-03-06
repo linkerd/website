@@ -43,7 +43,7 @@ more](https://kubernetes.io/docs/setup/).)
 
 Validate your Kubernetes setup by running:
 
-```bash
+```bash { interactive=false }
 kubectl version --short
 ```
 
@@ -67,8 +67,8 @@ your Linkerd deployment.
 
 To install the CLI manually, run:
 
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+```bash { interactive=false }
+curl --proto https --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Be sure to follow the instructions to add it to your path.
@@ -79,7 +79,7 @@ with `brew install linkerd`. You can also download the CLI directly via the
 
 Once installed, verify the CLI is running correctly with:
 
-```bash
+```bash { interactive=false }
 linkerd version
 ```
 
@@ -113,7 +113,7 @@ linkerd install --crds | kubectl apply -f -
 followed by:
 
 ```bash
-linkerd install | kubectl apply -f -
+linkerd install --set proxyInit.runAsRoot=true | kubectl apply -f -
 ```
 
 These commands generate Kubernetes manifests with all the core resources required
@@ -150,7 +150,7 @@ allow the user to vote on their favorite emojis.
 Install Emojivoto into the `emojivoto` namespace by running:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
+curl --proto https --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
   | kubectl apply -f -
 ```
 
@@ -162,7 +162,7 @@ Before we mesh it, let's take a look at Emojivoto in its natural state.
 We'll do this by forwarding traffic to its `web-svc` service so that we can
 point our browser to it. Forward `web-svc` locally to port 8080 by running:
 
-```bash
+```bash { background=true }
 kubectl -n emojivoto port-forward svc/web-svc 8080:80
 ```
 
@@ -237,14 +237,14 @@ linkerd check
 With the control plane and extensions installed and running, we're now ready
 to explore Linkerd! Access the dashboard with:
 
-```bash
-linkerd viz dashboard &
+```bash { background=true }
+linkerd viz dashboard
 ```
 
 You should see a screen like this:
 
 {{< fig src="/images/getting-started/viz-empty-dashboard.png"
-    title="The Linkerd dashboard in action" >}}
+title="The Linkerd dashboard in action" >}}
 
 Click around, explore, and have fun! For extra credit, see if you can find the
 live metrics for each Emojivoto component, and determine which one has a partial
@@ -258,19 +258,19 @@ Give yourself a pat on the back.
 What's next? Here are some steps we recommend:
 
 * Learn how to use Linkerd to [debug the errors in
-  Emojivoto](../debugging-an-app/).
+   Emojivoto](../debugging-an-app/).
 * Learn how to [add your own services](../adding-your-service/) to
-  Linkerd without downtime.
+   Linkerd without downtime.
 * Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
-  Jaeger and the multicluster extension.
+   Jaeger and the multicluster extension.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
-  rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
-  long-lived clusters.
+   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
+   long-lived clusters.
 * Learn how to [restrict access to services using authorization
-  policy](../tasks/restricting-access/).
+   policy](../tasks/restricting-access/).
 * Hop into the `#linkerd` channel on [the Linkerd
-  Slack](https://slack.linkerd.io)
-  and say hi!
+   Slack](https://slack.linkerd.io)
+   and say hi!
 
 Above all else: welcome to the Linkerd community!

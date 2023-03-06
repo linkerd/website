@@ -1,0 +1,9 @@
+[submodule "tests/runme/helpers/bats-detik"]
+	path = tests/runme/helpers/bats-detik
+	url = https://github.com/bats-core/bats-detik.git
+[submodule "tests/runme/helpers/bats-support"]
+	path = tests/runme/helpers/bats-support
+	url = https://github.com/bats-core/bats-support.git
+[submodule "tests/runme/helpers/bats-assert"]
+	path = tests/runme/helpers/bats-assert
+	url = https://github.com/bats-core/bats-assert.git
