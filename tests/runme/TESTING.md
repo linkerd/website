@@ -1,5 +1,5 @@
 ```sh
-$ brew install google-cloud-sdk
+$ brew install google-cloud-sdk linkerd
 $ npm install -g bats
 ```
 
@@ -20,13 +20,16 @@ $ export YOUR_CLUSTER=Name of your cluster
 $ gcloud container clusters get-credentials $YOUR_CLUSTER --zone us-central1-c --project runme-ci
 ```
 
-```sh { interactive=false }
-$ kubectl get pods -A
+```sh { background=true interactive=true }
+$ watch -n 1 kubectl get pods -A
 ```
 
 ## Run the docs tests
 
+```sh
+$ git submodule update --init
+```
+
 ```sh { name= closeTerminalOnSuccess=false interactive=false }
-$ export "PATH=$PATH:/home/sourishkrout/.linkerd2/bin"
 $ npx bats getting-started.bats
 ```
