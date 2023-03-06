@@ -56,7 +56,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verifiy install emojivoto" {
+@test "Verify install emojivoto" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="emojivoto"
   run $RUNME_RUN_CMD curl-proto-2
@@ -72,7 +72,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verifiy linkerd injection" {
+@test "Verify linkerd injection" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="emojivoto"
   run $RUNME_RUN_CMD kubectl-get
@@ -87,14 +87,14 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verifiy emojivoto data plane" {
+@test "Verify emojivoto data plane" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-n
   assert_line -p "Status check results are √"
   assert_success
 }
 
-@test "Verifiy linkerd install control plane" {
+@test "Verify linkerd install control plane" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="linkerd-viz"
   run $RUNME_RUN_CMD linkerd-viz
@@ -107,7 +107,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verifiy linkerd check control plane" {
+@test "Verify linkerd check control plane" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-check-3
   assert_line -p "√ viz extension self-check"
