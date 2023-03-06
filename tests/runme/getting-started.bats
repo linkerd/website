@@ -44,7 +44,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verify linkerd install control plane" {
+@test "Verify linkerd install" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-install-2
   assert_success
