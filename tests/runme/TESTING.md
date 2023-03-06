@@ -16,7 +16,8 @@ $ gcloud config set project runme-ci
 ```
 
 ```sh
-$ gcloud container clusters get-credentials dev2 --zone us-central1-c --project runme-ci
+$ export YOUR_CLUSTER=Name of your cluster
+$ gcloud container clusters get-credentials $YOUR_CLUSTER --zone us-central1-c --project runme-ci
 ```
 
 ```sh { interactive=false }
