@@ -10,12 +10,12 @@ setup_suite() {
 }
 
 linkerd_uninstall_viz() {
-    echo 'Uninstalling linkerd viz' >&3
+    echo '# Uninstalling linkerd viz' >&3
     bash -c "$RUNME_REMOVE_CMD uninstall-viz"
 }
 
 linkerd_uninject_emojivoto() {
-    echo 'Uninjecting emojivoto' >&3
+    echo '# Uninjecting emojivoto' >&3
     DETIK_CLIENT_NAMESPACE="emojivoto"
     bash -c "$RUNME_REMOVE_CMD kubectl-get"
     sleep 5
@@ -26,7 +26,7 @@ linkerd_uninject_emojivoto() {
 }
 
 linkerd_uninstall_emojivoto() {
-    echo 'Uninstalling emojivoto' >&3
+    echo '# Uninstalling emojivoto' >&3
     DETIK_CLIENT_NAMESPACE="emojivoto"
     bash -c "$RUNME_REMOVE_CMD curl-proto"
     try "at most 10 times every 30s to find 0 pods named 'emoji' with 'status' being 'running'"
@@ -36,12 +36,12 @@ linkerd_uninstall_emojivoto() {
 }
 
 linkerd_uninstall() {
-    echo 'Uninstalling linkerd' >&3
+    echo '# Uninstalling linkerd' >&3
     bash -c "$RUNME_REMOVE_CMD linkerd-uninstall"
 }
 
 teardown_suite() {
-    echo 'Tearing down' >&3
+    echo '# Tearing down' >&3
     linkerd_uninstall_viz
     linkerd_uninject_emojivoto
     linkerd_uninstall_emojivoto
