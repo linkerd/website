@@ -19,15 +19,9 @@ attached.
 To remove any extension, call its `uninstall` subcommand and pipe it to `kubectl
 delete -f -`. For the bundled extensions that means:
 
-```bash
+```bash { name=uninstall-viz }
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
-
-# To remove Linkerd Jaeger
-linkerd jaeger uninstall | kubectl delete -f -
-
-# To remove Linkerd Multicluster
-linkerd multicluster uninstall | kubectl delete -f -
 ```
 
 ## Removing the control plane
@@ -37,6 +31,17 @@ Uninstallating the control plane requires cluster-wide permissions.
 {{< /note >}}
 
 To remove the [control plane](../../reference/architecture/#control-plane), run:
+
+```bash { name=kubectl-get }
+kubectl get -n emojivoto deploy -o yaml \
+  | linkerd uninject - \
+  | kubectl apply -f -
+```
+
+```bash
+curl --proto https --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
+  | kubectl delete -f -
+```
 
 ```bash
 linkerd uninstall | kubectl delete -f -
