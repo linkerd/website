@@ -20,6 +20,10 @@ $ export YOUR_CLUSTER=Name of your cluster
 $ gcloud container clusters get-credentials $YOUR_CLUSTER --zone us-central1-c --project runme-ci
 ```
 
+```sh
+$ brew install watch
+```
+
 ```sh { background=true interactive=true }
 $ watch -n 1 kubectl get pods -A
 ```

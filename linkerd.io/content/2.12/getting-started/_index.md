@@ -44,6 +44,10 @@ more](https://kubernetes.io/docs/setup/).)
 Validate your Kubernetes setup by running:
 
 ```bash { interactive=false }
+echo hello world
+```
+
+```bash { interactive=false }
 kubectl version --short
 ```
 
