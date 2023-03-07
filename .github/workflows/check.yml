@@ -9,6 +9,7 @@ jobs:
   linkerd_io:
     name: check source files
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - uses: actions/checkout@v4
       - name: Markdown SEO Check
