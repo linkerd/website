@@ -1,7 +1,7 @@
 load 'helpers/bats-detik/lib/detik'
 
 RUNME_REMOVE_FLAGS="--chdir ../../linkerd.io/content/2.12/tasks --filename uninstall.md"
-RUNME_REMOVE_CMD="runme run $RUNME_REMOVE_FLAGS"
+RUNME_REMOVE_CMD="./linkerd.io/runme run $RUNME_REMOVE_FLAGS"
 
 DETIK_CLIENT_NAME="kubectl"
 
