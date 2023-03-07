@@ -437,6 +437,9 @@ metadata:
   namespace: emojivoto
 plugin: request-transformer
 config:
+  remove:
+    headers:
+    - l5d-dst-override # Prevents open relay
   add:
     headers:
     - l5d-dst-override:$(headers.host).svc.cluster.local
@@ -460,7 +463,7 @@ spec:
           service:
             name: web-svc
             port:
-              number: http
+              name: http
       - path: /api/list
         pathType: Prefix
         backend:
