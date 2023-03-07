@@ -3,8 +3,8 @@ load 'helpers/bats-support/load'
 load 'helpers/bats-assert/load'
 load 'helpers/bats-detik/lib/detik'
 
-RUNME_FLAGS="--chdir ../../linkerd.io/content/2.12/getting-started --filename _index.md"
-RUNME_RUN_CMD="runme run $RUNME_FLAGS"
+RUNME_FLAGS="--chdir linkerd.io/content/2.12/getting-started --filename _index.md"
+RUNME_RUN_CMD="./linkerd.io/runme run $RUNME_FLAGS"
 
 REMOTE="" # set to 'skip' to omit all remote steps (for dev)
 

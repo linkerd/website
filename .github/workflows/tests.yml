@@ -1,0 +1,65 @@
+name: Tests
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: dev
+    concurrency: ${{ vars.CLUSTER_NAME }}-cluster
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.17.0'
+      - run: go version          
+      # - name: Install runme (once the last version is released re-enable this)
+      #   run: |
+      #     go install github.com/stateful/runme@latest
+      - name: Check runme
+        run: |
+          ./linkerd.io/runme --version
+      - id: 'gcloud-auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ vars.GCLOUD_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCLOUD_SERVICE_ACCOUNT }}
+
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
+        with:
+          cluster_name: ${{ vars.CLUSTER_NAME }}
+          location: ${{ vars.CLUSTER_LOCATION }}
+      
+      - uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Check kubectl version
+        run: |
+          kubectl version --short
+
+      - name: Install Linkerd
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+      - name: Add Linkerd to PATH
+        run: |
+          echo "$PATH:/home/runner/.linkerd2/bin" >> $GITHUB_PATH
+
+      - name: Validate Linkerd install
+        run: linkerd version
+
+      - name: 'Initialize Git submodules'
+        run: |
+          git submodule update --init
+                
+      - name: 'Run bats tests'
+        run: |
+          npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
+      
