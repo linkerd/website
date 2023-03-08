@@ -32,6 +32,7 @@ Uninstallating the control plane requires cluster-wide permissions.
 
 To remove the [control plane](../../reference/architecture/#control-plane), run:
 
+
 ```bash { name=kubectl-get }
 kubectl get -n emojivoto deploy -o yaml \
   | linkerd uninject - \
