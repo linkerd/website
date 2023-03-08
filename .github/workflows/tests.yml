@@ -54,12 +54,14 @@ jobs:
 
       - name: Validate Linkerd install
         run: linkerd version
-
+      
       - name: 'Initialize Git submodules'
         run: |
           git submodule update --init
                 
       - name: 'Run bats tests'
+        env:
+          FROM_CLI: true
         run: |
           npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
       
