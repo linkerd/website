@@ -65,5 +65,5 @@ jobs:
           FROM_CLI: true
         shell: sh
         run: |
-          npx bats --verbose-run $GITHUB_WORKSPACE/tests/runme/getting-started.bats
+          npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
       
