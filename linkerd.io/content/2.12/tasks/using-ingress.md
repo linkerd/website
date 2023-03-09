@@ -27,11 +27,11 @@ tasks other than routing and therefore you'd rather inject them using the
 default `enabled` mode (or some you wouldn't want to inject at all, such as
 Jobs).
 
-{{< note >}}
+{{< warning id=l5d-dst-override-warning >}}
 When an ingress is meshed in `ingress` mode by using `linkerd.io/inject: ingress`,
 the `l5d-dst-override` _must_ be removed by the ingress to avoid an open relay
 to internal services.
-{{< /note >}}
+{{< /warning >}}
 
 Common ingress options that Linkerd has been used with include:
 
