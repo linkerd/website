@@ -3,14 +3,12 @@ load 'helpers/bats-detik/lib/detik'
 if [ -z $FROM_CLI ]
 then
     UNINSTALL_PATH=../../linkerd.io/content/2.12/tasks
-    BINARY=runme
 else
     UNINSTALL_PATH=linkerd.io/content/2.12/tasks
-    BINARY=./linkerd.io/runme
 fi
 
 RUNME_REMOVE_FLAGS="--chdir $UNINSTALL_PATH --filename uninstall.md"
-RUNME_REMOVE_CMD="$BINARY run $RUNME_REMOVE_FLAGS"
+RUNME_REMOVE_CMD="runme run $RUNME_REMOVE_FLAGS"
 
 DETIK_CLIENT_NAME="kubectl"
 
