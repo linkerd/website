@@ -34,6 +34,12 @@ overridden using the [command-line flags](../cli/inject/).
 
 ## Ingress Mode
 
+{{< warning >}}
+When an ingress is meshed in `ingress` mode by using `linkerd.io/inject: ingress`,
+the ingress _must_ remove the `l5d-dst-override` header to avoid an open relay
+to cluster local and external endpoints.
+{{< /warning >}}
+
 Proxy ingress mode is a mode of operation designed to help Linkerd integrate
 with certain ingress controllers. Ingress mode is necessary if the ingress
 itself cannot be otherwise configured to use the Service port/ip as the

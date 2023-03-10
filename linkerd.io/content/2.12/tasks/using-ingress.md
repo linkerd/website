@@ -27,10 +27,10 @@ tasks other than routing and therefore you'd rather inject them using the
 default `enabled` mode (or some you wouldn't want to inject at all, such as
 Jobs).
 
-{{< warning id=l5d-dst-override-warning >}}
+{{< warning id=open-relay-warning >}}
 When an ingress is meshed in `ingress` mode by using `linkerd.io/inject: ingress`,
-the `l5d-dst-override` _must_ be removed by the ingress to avoid an open relay
-to internal services.
+the ingress _must_ remove the `l5d-dst-override` header to avoid an open relay
+to cluster local and external endpoints.
 {{< /warning >}}
 
 Common ingress options that Linkerd has been used with include:
@@ -148,9 +148,8 @@ appropriately, if necessary.
 
 ## Traefik
 
-Traefik should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
-
+Traefik should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 Instructions differ for 1.x and 2.x versions of Traefik.
 
 ### Traefik 1.x {#traefik-1x}
@@ -264,8 +263,8 @@ spec:
 
 ## GCE
 
-The GCE ingress should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+The GCE ingress should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example shows how to use a [Google Cloud Static External IP
 Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
@@ -308,8 +307,8 @@ certificate is provisioned, the ingress should be visible to the Internet.
 
 ## Gloo
 
-Gloo should be meshed with ingress mode enabled, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+Gloo should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically. Assuming you installed Gloo
@@ -331,7 +330,7 @@ glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 
 ## Contour
 
-Contour should be meshed with ingress mode enabled, i.e. with the
+Contour should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
 `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The following example uses the
@@ -422,7 +421,7 @@ the `l5d-dst-override` headers will be set automatically.
 
 ### Kong
 
-Kong should be meshed with ingress mode enabled, i.e. with the
+Kong should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
 `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example will use the following elements:
@@ -510,7 +509,7 @@ haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/) and not
 the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
 {{< /note >}}
 
-Haproxy should be meshed with ingress mode enabled, i.e. with the
+Haproxy should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
 `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The simplest way to use Haproxy as an ingress for Linkerd is to configure a
