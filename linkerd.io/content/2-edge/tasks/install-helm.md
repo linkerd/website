@@ -41,7 +41,7 @@ The `linkerd-crds` chart sets up the CRDs linkerd requires:
 
 ```bash
 helm install linkerd-crds linkerd/linkerd-crds \
-  -n linkerd --create-namespace 
+  -n linkerd --create-namespace
 ```
 
 {{< note >}}
@@ -90,6 +90,7 @@ Then use the `-f` flag to provide this override file. For example:
 
 ```bash
 helm install linkerd-control-plane \
+  -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
