@@ -14,6 +14,14 @@ spec:
   - name: service
     port: 7000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+    project: booksapp
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -33,7 +41,9 @@ spec:
       labels:
         app: webapp
         project: booksapp
+        app.kubernetes.io/part-of: booksapp
     spec:
+      serviceAccountName: webapp
       dnsPolicy: ClusterFirst
       containers:
       - name: service
@@ -61,12 +71,21 @@ metadata:
   labels:
     app: authors
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   selector:
     app: authors
   ports:
   - name: service
     port: 7001
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: authors
+  labels:
+    app: authors
+    project: booksapp
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -87,8 +106,10 @@ spec:
       labels:
         app: authors
         project: booksapp
+        app.kubernetes.io/part-of: booksapp
     spec:
       dnsPolicy: ClusterFirst
+      serviceAccountName: authors
       containers:
       - name: service
         image: buoyantio/booksapp:v0.0.5
@@ -115,12 +136,21 @@ metadata:
   labels:
     app: books
     project: booksapp
+    app.kubernetes.io/part-of: booksapp
 spec:
   selector:
     app: books
   ports:
   - name: service
     port: 7002
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: books
+  labels:
+    app: books
+    project: booksapp
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -143,6 +173,7 @@ spec:
         project: booksapp
     spec:
       dnsPolicy: ClusterFirst
+      serviceAccountName: books
       containers:
       - name: service
         image: buoyantio/booksapp:v0.0.5
@@ -159,6 +190,14 @@ spec:
         ports:
         - name: service
           containerPort: 7002
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: traffic
+  labels:
+    app: traffic
+    project: booksapp
 ---
 kind: Deployment
 apiVersion: apps/v1
@@ -181,6 +220,7 @@ spec:
         project: booksapp
     spec:
       dnsPolicy: ClusterFirst
+      serviceAccountName: traffic
       containers:
       - name: traffic
         image: buoyantio/booksapp-traffic:v0.0.3

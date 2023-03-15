@@ -1,0 +1,27 @@
+{
+    "name": "linkerd-website",
+    "image": "ghcr.io/linkerd/dev:v30",
+    "onCreateCommand": ".devcontainer/on-create.sh",
+    "extensions": [
+        "DavidAnson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "budparr.language-hugo-vscode",
+        "NathanRidley.autotrim",
+        "redhat.vscode-yaml",
+        "samverschueren.final-newline",
+        "tamasfe.even-better-toml"
+    ],
+    "runArgs": [
+        "--init",
+        // Limit container memory usage.
+        "--memory=4g",
+        "--memory-swap=4g",
+        // Use the host network so we can access k3d, etc.
+        "--net=host"
+    ],
+    "overrideCommand": false,
+    "remoteUser": "code",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind"
+    ]
+}

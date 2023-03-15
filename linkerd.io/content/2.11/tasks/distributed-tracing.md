@@ -198,7 +198,7 @@ EOF
 linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
 ```
 
-You'll want to ensure that the `exporters.jager.endpoint` which is
+You'll want to ensure that the `exporters.jaeger.endpoint` which is
 `my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
 appropriate for your environment. This should point to a Jaeger Collector
 on port 14250.

@@ -1,3 +1,4 @@
+ignoreErrors = ["error-remote-getjson"]
 paginate = 10
 baseurl = "https://linkerd.io/"
 disableKinds = ["taxonomy", "taxonomyTerm"]
@@ -52,34 +53,40 @@ name = "Community"
 url = "/community/"
 weight = 2
 [[menu.top]]
+identifier = "linkerd-day-2023eu"
+name = "Linkerd Day 2023 EU"
+url = "https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/cncf-hosted-co-located-events/linkerd-day/"
+weight = 1
+parent = "community"
+[[menu.top]]
 identifier = "get-involved"
 name = "Get Involved"
 url = "/community/get-involved/"
-weight = 1
+weight = 2
 parent = "community"
 [[menu.top]]
 identifier = "community-adopters"
 name = "Adopters"
 url = "/community/adopters/"
-weight = 2
+weight = 3
 parent = "community"
 [[menu.top]]
 identifier = "linkerd-ambassadors"
 url = "/community/ambassadors/"
 name = "Linkerd Ambassadors"
-weight = 3
+weight = 4
 parent = "community"
 [[menu.top]]
 identifier = "community-heroes"
 name = "Linkerd Heroes"
 url = "/community/heroes/"
-weight = 4
+weight = 5
 parent = "community"
 [[menu.top]]
 identifier = "community-anchors"
 name = "Community Anchors"
 url = "/community/anchor/"
-weight = 5
+weight = 6
 parent = "community"
 [[menu.top]]
 identifier = "blog"
@@ -116,10 +123,10 @@ section = ["HTML", "RSS", "JSON"]
 [params]
 description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
 images = [""]
-latest_release_date = "2020-06-10"
-latest_release_version = "1.7.4"
-latest_linkerd2_stable_version = "2.11"
-logo = "/images/identity/svg/linkerd_primary_color_white.svg"
+latest_release_date = "2022-05-31"
+latest_release_version = "1.7.5"
+latest_linkerd2_stable_version = "2.12"
+logo = "/images/identity/png/Linkerd-Linky-flatter-larger-light.png"
 [permalinks]
 blog = "/:year/:month/:day/:slug/"
 [privacy.twitter]

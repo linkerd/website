@@ -128,3 +128,16 @@ diagnosing issues, but otherwise should rarely be necessary.
 
 As with opaque ports, multiple skipports can be provided as a comma-delimited
 string.
+
+## Using `NetworkPolicy` resources with opaque ports
+
+When a service has a port marked as opaque, any `NetworkPolicy` resources that
+apply to the respective port and restrict ingress access will have to be
+changed to target the proxy's inbound port instead (by default, `4143`). If the
+service has a mix of opaque and non-opaque ports, then the `NetworkPolicy`
+should target both the non-opaque ports, and the proxy's inbound port.
+
+A connection that targets an opaque endpoint (i.e a pod with a port marked as
+opaque) will have its original target port replaced with the proxy's inbound
+port. Once the inbound proxy receives the traffic, it will transparently
+forward it to the main application container over a TCP connection.

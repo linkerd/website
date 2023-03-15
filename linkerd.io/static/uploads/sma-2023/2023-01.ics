@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ical.marudot.com//iCal Event Maker
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+TZNAME:EDT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+END:DAYLIGHT
+BEGIN:STANDARD
+DTSTART:20071104T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+TZNAME:EST
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20221214T175415Z
+UID:559525E5-2E82-430F-8AC3-9E0D8250DC6E@ical.buoyant.io
+DTSTART;TZID=America/New_York:20230119T120000
+DTEND;TZID=America/New_York:20230119T133000
+SUMMARY:Linkerd and Ingress Controllers: Bringing the Outside World In
+DESCRIPTION:The first problem that any cloud-native application has to solve is how to communicate with the world outside the cluster. This is "the ingress problem"\, and while Linkerd doesn't have to solve it directly\, it is absolutely a major part of successfully getting your application working with Linkerd! Join us for a whirlwind tour of how Linkerd interacts with ingress controllers\, including guidance on best practices and on pitfalls to avoid\, with hands-on demonstrations of Linkerd with Emissary-ingress\, NGINX\, and Envoy Gateway.
+LOCATION:https://buoyant.io/service-mesh-academy/live-workshop
+END:VEVENT
+END:VCALENDAR

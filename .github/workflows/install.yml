@@ -9,12 +9,12 @@ on:
 jobs:
   lint:
     name: Lint install script
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     container:
       image: buoyantio/website-builder:v1.3.3
     steps:
     - name: Checkout code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Lint install script
       run: |
@@ -22,16 +22,16 @@ jobs:
 
   build:
     name: Build install script
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Build scripts
       run: |
         make build-run.linkerd.io
 
-    - uses: actions/upload-artifact@v2.3.1
+    - uses: actions/upload-artifact@v3.1.2
       with:
         name: run.linkerd.io
         path: tmp/run.linkerd.io/public
@@ -45,7 +45,7 @@ jobs:
     needs: [build]
 
     steps:
-    - uses: actions/download-artifact@v2.1.0
+    - uses: actions/download-artifact@v3.0.2
       with:
         name: run.linkerd.io
 

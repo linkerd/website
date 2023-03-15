@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/the-service-mesh-in-2022.md
-  - blog/announcing-linkerd-2-11.md
+  - blog/2023/0221-linkerd-and-ingress.md
+  - blog/announcing-linkerd-day-2023.md
 description: ''
 keywords: []
 ---

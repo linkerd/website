@@ -1169,3 +1169,41 @@ body {
   height: auto
 }
 
+// Shortcode cta-banner
+.cta-banner .thumbnail-wrapper {
+  position: relative;
+}
+
+.cta-banner .thumbnail-wrapper a:after {
+  content: "";
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  opacity: 0.6;
+  background-image: url("/images/play-button.svg"),linear-gradient(67deg,#1c445f 40%,#2beda7);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cta-banner .thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  position: relative;
+}
+
+.cta-banner .btn-dark {
+  display: block;
+  color: $white;
+  background-color: $deep-blue;
+  padding: 12px;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+

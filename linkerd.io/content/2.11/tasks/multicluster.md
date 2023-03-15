@@ -18,6 +18,7 @@ At a high level, you will:
 1. [Link](#linking-the-clusters) the clusters.
 1. [Install](#installing-the-test-services) the demo.
 1. [Export](#exporting-the-services) the demo services, to control visibility.
+1. [Gain visibility](#visibility) in your linked clusters.
 1. [Verify](#security) the security of your clusters.
 1. [Split traffic](#traffic-splitting) from pods on the source cluster (`west`)
    to the target cluster (`east`)
@@ -57,7 +58,7 @@ At a high level, you will:
     src="/images/multicluster/install.svg" >}}
 
 Linkerd requires a shared
-[trust anchor](https://linkerd.io../generate-certificates/#trust-anchor-certificate)
+[trust anchor](../generate-certificates/#trust-anchor-certificate)
 to exist between the installations in all clusters that communicate with each
 other. This is used to encrypt the traffic between clusters and authorize
 requests that reach the gateway so that your cluster is not open to the public
@@ -509,7 +510,7 @@ There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 To cleanup the multicluster control plane, you can run:
 
 ```bash
-linkerd --context=west multicluster unlink --cluster-name east | 
+linkerd --context=west multicluster unlink --cluster-name east |
   kubectl --context=west delete -f -
 for ctx in west east; do
   kubectl --context=${ctx} delete ns test

@@ -39,7 +39,7 @@ relref "linkerd-twitter-style-operability-for-microservices" >}}), but in this c
 
 In fact, since Linkerd is built on top [Finagle](http://twitter.github.io/finagle/guide/), Twitter’s open source, high volume RPC library, Linkerd features Zipkin support that has actually been tested at scale!
 
-In the the rest of this article, we’ll walk you through the process of generating Zipkin traces from Linkerd.
+In the rest of this article, we’ll walk you through the process of generating Zipkin traces from Linkerd.
 
 ## SETUP
 

@@ -424,7 +424,7 @@ The managed certificate will take about 30-60 minutes to provision, but the
 status of the ingress should be healthy within a few minutes. Once the managed
 certificate is provisioned, the ingress should be visible to the Internet.
 
-### Ambassador (aka Emissary)
+### Ambassador (aka Emissary) {#ambassador}
 
 This uses `emojivoto` as an example, take a look at
 [getting started](../../getting-started/) for a refresher on how to install it.
@@ -433,27 +433,15 @@ Emissary does not use `Ingress` resources, instead relying on `Service`. The
 sample service definition is:
 
 ```yaml
-apiVersion: v1
-kind: Service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
-  name: web-ambassador
+  name: web-ambassador-mapping
   namespace: emojivoto
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-ambassador-mapping
-      service: http://web-svc.emojivoto.svc.cluster.local:80
-      host: example.com
-      prefix: /
 spec:
-  selector:
-    app: web-svc
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
+  hostname: "*"
+  prefix: /
+  service: http://web-svc.emojivoto.svc.cluster.local:80  
 ```
 
 #### Emissary Proxy Mode
@@ -682,12 +670,9 @@ This documentation will use the following elements:
 Before installing the Emojivoto demo application, install Linkerd and Kong on
 your cluster. Remember when injecting the Kong deployment to use the `--ingress`
 flag (or annotation) as mentioned
-[above](https://linkerd.io../using-ingress/#proxy-ingress-mode)!
+[above](../using-ingress/#proxy-ingress-mode)!
 
-We need to declare these objects as well:
-
-- KongPlugin, a CRD provided by Kong
-- Ingress
+We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 
 ```yaml
 apiVersion: configuration.konghq.com/v1

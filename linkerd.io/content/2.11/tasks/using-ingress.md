@@ -22,14 +22,18 @@ below.
 
 Common ingress options that Linkerd has been used with include:
 
-- [Ambassador / Emissary-ingress](#ambassador)
-- [Contour](#contour)
-- [GCE](#gce)
-- [Gloo](#gloo)
-- [Haproxy]({{< ref "#haproxy" >}})
-- [Kong](#kong)
+- [Ambassador (aka Emissary)](#ambassador)
 - [Nginx](#nginx)
 - [Traefik](#traefik)
+  - [Traefik 1.x](#traefik-1x)
+  - [Traefik 2.x](#traefik-2x)
+- [GCE](#gce)
+- [Gloo](#gloo)
+- [Contour](#contour)
+  - [Kong](#kong)
+  - [Haproxy](#haproxy)
+- [EnRoute](#enroute)
+- [Ingress details](#ingress-details)
 
 For a quick start guide to using a particular ingress, please visit the section
 for that ingress. If your ingress is not on that list, never fear—it likely
@@ -43,33 +47,21 @@ resulting HTTP or gRPC traffic to internal services, of course, will have the
 full set of metrics and mTLS support.
 {{< /note >}}
 
-## Ambassador (aka Emissary) {id="ambassador"}
+## Ambassador (aka Emissary) {#ambassador}
 
 Ambassador can be meshed normally. An example manifest for configuring the
 Ambassador / Emissary is as follows:
 
 ```yaml
-apiVersion: v1
-kind: Service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
-  name: web-ambassador
+  name: web-ambassador-mapping
   namespace: emojivoto
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-ambassador-mapping
-      service: http://web-svc.emojivoto.svc.cluster.local:80
-      host: example.com
-      prefix: /
 spec:
-  selector:
-    app: web-svc
-  ports:
-  - name: http
-    port: 80
-    targetPort: http
+  hostname: "*"
+  prefix: /
+  service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
 
 For a more detailed guide, we recommend reading [Installing the Emissary
@@ -80,7 +72,7 @@ mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds
 
 Nginx can be meshed normally, but the
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `"true"`. No further configuration is required.
+annotation should be set to `"true"`.
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -100,9 +92,51 @@ spec:
         number: 80
 ```
 
+If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx),
+note the following.
+
+The `namespace` containing the ingress controller (when using the above
+Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`.
+Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`)
+of the Nginx by setting `values.yaml` like this:
+
+```yaml
+controller:
+  podAnnotations:
+    linkerd.io/inject: enabled
+...
+```
+
+The reason is as follows.
+
+That Helm chart defines (among other things) two Kubernetes resources:
+
+1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named
+ something like `ingress-nginx-admission-create-t7b77` which terminates in 1
+ or 2 seconds.
+
+2) `kind: Deployment`. This creates a long-running pod named something like
+`ingress-nginx-controller-644cc665c9-5zmrp` which contains the Nginx docker
+ container.
+
+However, had we set `linkerd.io/inject: enabled` at the `namespace` level,
+a long-running sidecar would be injected into the otherwise short-lived
+pod in (1). This long-running sidecar would prevent the pod as a whole from
+terminating naturally (by design a few seconds after creation) even if the
+original base admission container had terminated.
+
+Without (1) being considered "done", the creation of (2) would wait forever
+in an infinite timeout loop.
+
+The above analysis only applies to that particular Helm chart. Other charts
+may have a different behaviour and different file structure for `values.yaml`.
+Be sure to check the nginx chart that you are using to set the annotation
+appropriately, if necessary.
+
 {{< note >}}
-Setting `nginx.ingress.kubernetes.io/service-upstream: "true"` on your ingress will allow Linkerd to apply features
-such as route-based metrics and load balancing but will forfeit session stickiness. If you'd like to use session
+Setting `nginx.ingress.kubernetes.io/service-upstream: "true"` on your ingress
+will allow Linkerd to apply features such as route-based metrics and load
+balancing but will forfeit session stickiness. If you'd like to use session
 stickiness instead, do not annotate the resource.
 {{< /note >}}
 
@@ -113,7 +147,7 @@ Traefik should be meshed with ingress mode enabled, i.e. with the
 
 Instructions differ for 1.x and 2.x versions of Traefik.
 
-### Traefik 1.x
+### Traefik 1.x {#traefik-1x}
 
 The simplest way to use Traefik 1.x as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
@@ -175,7 +209,7 @@ Linkerd will always send requests to the service name in `l5d-dst-override`. A
 workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
 {{< /note >}}
 
-### Traefik 2.x
+### Traefik 2.x {#traefik-2x}
 
 Traefik 2.x adds support for path based request routing with a Custom Resource
 Definition (CRD) called
@@ -393,10 +427,7 @@ This example will use the following elements:
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).
 
-We need to declare these objects as well:
-
-- KongPlugin, a CRD provided by Kong
-- Ingress
+We need to declare KongPlugin (a Kong CRD) and Ingress resources as well.
 
 ```yaml
 apiVersion: configuration.konghq.com/v1
@@ -506,6 +537,43 @@ a global config map by using the service name, namespace and port as 
 This also means, that you can't combine more than one service ingress rule
 in an ingress manifest as each one needs their own
 `haproxy.org/request-set-header` annotation with hard coded value.
+
+## EnRoute OneStep {#enroute}
+
+Meshing EnRoute with linkerd involves only setting one
+flag globally:
+
+```yaml
+apiVersion: enroute.saaras.io/v1
+kind: GlobalConfig
+metadata:
+  labels:
+    app: web
+  name: enable-linkerd
+  namespace: default
+spec:
+  name: linkerd-global-config
+  type: globalconfig_globals
+  config: |
+        {
+          "linkerd_enabled": true
+        }
+```
+
+EnRoute can now be meshed by injecting Linkerd proxy in EnRoute pods.
+Using the ```linkerd``` utility, we can update the EnRoute deployment
+to inject Linkerd proxy.
+
+```bash
+kubectl get -n enroute-demo deploy -o yaml | linkerd inject - | kubectl apply -f -
+```
+
+The ```linkerd_enabled``` flag automatically sets `l5d-dst-override` header.
+The flag also delegates endpoint selection for routing to linkerd.
+
+More details and customization can be found in,
+[End to End encryption using EnRoute with
+Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
 
 ## Ingress details
 

@@ -45,9 +45,11 @@ component.
 Now that we have our cluster, we'll install the Linkerd CLI and use it validate
 that your cluster is capable of hosting Linkerd.
 
-(Note: if you're using a GKE "private cluster", there are some [extra steps
+{{< note >}}
+If you're using a GKE "private cluster" or Calico CNI, there are some [extra steps
 required](../reference/cluster-configuration/#private-clusters) before you can
-proceed to the next step.)
+proceed to the next step.
+{{< /note >}}
 
 ## Step 1: Install the CLI
 
@@ -114,7 +116,7 @@ security policies; or by using a marketplace install from your Kubernetes
 provider.
 {{< /note >}}
 
-Depending on the speed of your cluster's Internet connection, it make take a
+Depending on the speed of your cluster's Internet connection, it may take a
 minute or two for the control plane to finish installing. Wait for the control
 plane to be ready (and verify your installation) by running:
 
@@ -160,7 +162,7 @@ how to [use Linkerd to identify the problem](../debugging-an-app/).)
 
 With Emoji installed and running, we're ready to *mesh* it—that is, to add
 Linkerd's data plane proxies to it. We can do this on a live application
-without downtime, thanks to Kubernetes's rolling deploys. Mesh you Emojivoto
+without downtime, thanks to Kubernetes's rolling deploys. Mesh your Emojivoto
 application by running:
 
 ```bash
@@ -203,33 +205,23 @@ we'll need to install an *extension*. Linkerd's core control plane is extremely
 minimal, so Linkerd ships with extensions that add non-critical but often
 useful functionality to Linkerd, including a variety of dashboards.
 
-For this guide, we will need one of:
+Let's install the **viz** extension, which will install an on-cluster metric
+stack and dashboard.
 
-1. The **viz** extension, which will install an on-cluster metric stack; or
-2. The **buoyant-cloud** extension, which will connect to a hosted metrics
-   stack.
-
-You can install either or both extensions. To install the viz extension, run:
+To install the viz extension, run:
 
 ```bash
 linkerd viz install | kubectl apply -f - # install the on-cluster metrics stack
 ```
 
-To install the buoyant-cloud extension, run:
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/install | sh # get the installer
-linkerd buoyant install | kubectl apply -f - # connect to the hosted metrics stack
-```
-
-Once you've installed your extensions, let's validate everything one last time:
+Once you've installed the extension, let's validate everything one last time:
 
 ```bash
 linkerd check
 ```
 
 With the control plane and extensions installed and running, we're now ready
-to explore Linkerd! If you installed the viz extension, run:
+to explore Linkerd! Access the dashboard with:
 
 ```bash
 linkerd viz dashboard &
@@ -240,23 +232,13 @@ You should see a screen like this:
 {{< fig src="/images/getting-started/viz-empty-dashboard.png"
     title="The Linkerd dashboard in action" >}}
 
-If you installed the buoyant-cloud extension, run:
-
-```bash
-linkerd buoyant dashboard &
-```
-
-You should see a screen lke this:
-{{< fig src="/images/getting-started/bcloud-empty-dashboard.png"
-    title="The Buoyant Cloud dashboard in action" >}}
-
-Click around, explore, and have fun! See if you can find the live metrics for
-each Emojivoto component, and determine which one has a partial failure. (See
-the debugging tutorial below for much more on this.)
+Click around, explore, and have fun! For extra credit, see if you can find the
+live metrics for each Emojivoto component, and determine which one has a partial
+failure. (See the debugging tutorial below for much more on this.)
 
 ## That's it! 👏
 
-Congratulations, you have joined the lofty ranks of Linkerd users!
+Congratulations, you have joined the exalted ranks of Linkerd users!
 Give yourself a pat on the back.
 
 What's next? Here are some steps we recommend:
@@ -265,6 +247,8 @@ What's next? Here are some steps we recommend:
   Emojivoto](../debugging-an-app/).
 * Learn how to [add your own services](../adding-your-service/) to
   Linkerd without downtime.
+* Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
+  Jaeger and the multicluster extension.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
