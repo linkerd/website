@@ -140,6 +140,13 @@ may have a different behaviour and different file structure for `values.yaml`.
 Be sure to check the nginx chart that you are using to set the annotation
 appropriately, if necessary.
 
+{{< note >}}
+Setting `nginx.ingress.kubernetes.io/service-upstream: "true"` on your ingress
+will allow Linkerd to apply features such as route-based metrics and load
+balancing but will forfeit session stickiness. If you'd like to use session
+stickiness instead, do not annotate the resource.
+{{< /note >}}
+
 ## Traefik
 
 Traefik should be meshed with ingress mode enabled, i.e. with the
