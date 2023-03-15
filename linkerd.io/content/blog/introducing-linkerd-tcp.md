@@ -21,7 +21,7 @@ Enter [Linkerd-tcp](https://github.com/linkerd/linkerd-tcp): a lightweight, ser
 
 If you’re interested in a TCP proxy that:
 
-- can read from the the Kubernetes API (or Consul, etcd, Marathon, ZooKeeper, etc.);
+- can read from the Kubernetes API (or Consul, etcd, Marathon, ZooKeeper, etc.);
 - has excellent TLS support, with (future work!) all the bells and whistles;
 - is highly instrumented and exports directly to Prometheus;
 - can run alongside Linkerd and Namerd;
