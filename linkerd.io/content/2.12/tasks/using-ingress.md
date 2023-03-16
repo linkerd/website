@@ -28,9 +28,9 @@ default `enabled` mode (or some you wouldn't want to inject at all, such as
 Jobs).
 
 {{< warning id=open-relay-warning >}}
-When an ingress is meshed in `ingress` mode by using `linkerd.io/inject: ingress`,
-the ingress _must_ remove the `l5d-dst-override` header to avoid an open relay
-to cluster local and external endpoints.
+When an ingress is meshed in `ingress` mode by using `linkerd.io/inject:
+ingress`, the ingress _must_ be configured to remove the `l5d-dst-override`
+header to avoid creating an open relay to cluster-local and external endpoints.
 {{< /warning >}}
 
 Common ingress options that Linkerd has been used with include:
