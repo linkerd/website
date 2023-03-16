@@ -148,9 +148,9 @@ appropriately, if necessary.
 
 ## Traefik
 
-Traefik should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
-Instructions differ for 1.x and 2.x versions of Traefik.
+Traefik should be meshed with ingress mode enabled([*](#open-relay-warning)),
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
+`enabled`. Instructions differ for 1.x and 2.x versions of Traefik.
 
 ### Traefik 1.x {#traefik-1x}
 
@@ -263,8 +263,9 @@ spec:
 
 ## GCE
 
-The GCE ingress should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+The GCE ingress should be meshed with ingress mode
+enabled([*](#open-relay-warning)), i.e. with the `linkerd.io/inject: ingress`
+annotation rather than the default `enabled`.
 
 This example shows how to use a [Google Cloud Static External IP
 Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
@@ -307,8 +308,9 @@ certificate is provisioned, the ingress should be visible to the Internet.
 
 ## Gloo
 
-Gloo should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>,
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+Gloo should be meshed with ingress mode enabled([*](#open-relay-warning)), i.e.
+with the `linkerd.io/inject: ingress` annotation rather than the default
+`enabled`.
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically. Assuming you installed Gloo
@@ -330,8 +332,9 @@ glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 
 ## Contour
 
-Contour should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+Contour should be meshed with ingress mode enabled([*](#open-relay-warning)),
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
+`enabled`.
 
 The following example uses the
 [Contour getting started](https://projectcontour.io/getting-started/) documentation
@@ -421,8 +424,9 @@ the `l5d-dst-override` headers will be set automatically.
 
 ### Kong
 
-Kong should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+Kong should be meshed with ingress mode enabled([*](#open-relay-warning)), i.e.
+with the `linkerd.io/inject: ingress` annotation rather than the default
+`enabled`.
 
 This example will use the following elements:
 
@@ -509,8 +513,9 @@ haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/) and not
 the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
 {{< /note >}}
 
-Haproxy should be meshed with ingress mode enabled<sup>[*](#open-relay-warning)</sup>, i.e. with the
-`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+Haproxy should be meshed with ingress mode enabled([*](#open-relay-warning)),
+i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
+`enabled`.
 
 The simplest way to use Haproxy as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
