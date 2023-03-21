@@ -77,6 +77,7 @@ Now you have your cluster configured properly, configure the following GitHub Ac
 - GCLOUD_SERVICE_ACCOUNT: "<name>@<project-name>.iam.gserviceaccount.com"
 - CLUSTER_LOCATION: "<cluster-location>" e.g us-central1-c
 - CLUSTER_NAME: "<YOUR CLUSTER NAME>"
+- RUNME_ADDRESS: localhost:7863
 ```
 
 ## Authenticate in Google Cloud GitHub Action
@@ -162,6 +163,14 @@ You can check the Runme version and is installed adequately via the following ac
     runme --version
 ```
 
+### Start Runme Server
+
+``` { mimeType=text/x-yaml }
+- name: Start Runme Server
+  run: |
+    runme server --address ${{ vars.RUNME_ADDRESS }} --runner &
+```
+
 ### Run Tests
 
 Linkerd getting started guide tests are run via Bats. Its Usage is well explained in our [testing guide](./README.md)
@@ -175,6 +184,7 @@ Linkerd getting started guide tests are run via Bats. Its Usage is well explaine
     env:
      NO_COLOR: true
      FROM_CLI: true
+     RUNME_SERVER_ADDR: ${{ vars.RUNME_ADDRESS }}
      run: |
         npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
 ```
