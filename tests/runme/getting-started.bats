@@ -3,7 +3,7 @@ load 'helpers/bats-support/load'
 load 'helpers/bats-assert/load'
 load 'helpers/bats-detik/lib/detik'
 
-if [ -z $FROM_CLI ]
+if [ -z $FROM_CI ]
 then
   FILE_PATH=../../linkerd.io/content/2.12/getting-started
 else

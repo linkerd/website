@@ -1,6 +1,6 @@
 load 'helpers/bats-detik/lib/detik'
 
-if [ -z $FROM_CLI ]
+if [ -z $FROM_CI ]
 then
     UNINSTALL_PATH=../../linkerd.io/content/2.12/tasks
 else
