@@ -66,7 +66,7 @@ jobs:
       - name: 'Run bats tests'
         env:
           NO_COLOR: true
-          FROM_CLI: true
+          FROM_CI: true
           RUNME_SERVER_ADDR: ${{ vars.RUNME_ADDRESS }}
         shell: sh
         run: |
