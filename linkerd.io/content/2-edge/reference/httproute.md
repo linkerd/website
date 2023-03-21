@@ -4,8 +4,8 @@ description = "Reference guide to HTTPRoute Resources."
 +++
 
 `HTTPRoutes` can be attached (via `parentRefs`) to a
-[Server](../authorization-policy#server) to allow defining an [authorization
-policy](../authorization-policy#authorizationpolicy) for specific routes served
+[Server](../authorization-policy/#server) to allow defining an [authorization
+policy](../authorization-policy/#authorizationpolicy) for specific routes served
 on that Server.
 
 `HTTRoutes` can also be attached to a Service, in order to classify requests
@@ -13,7 +13,7 @@ depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform header-based
 routing or traffic splitting.
 
-### HTTPRoute Spec
+## HTTPRoute Spec
 
 An `HTTPRoute` spec may contain the following top level fields:
 
@@ -25,7 +25,7 @@ An `HTTPRoute` spec may contain the following top level fields:
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
 
-#### parentReference
+### parentReference
 
 A reference to the [Servers] this `HTTPRoute` is a part of.
 
@@ -39,7 +39,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 | `name`| The name of the referent.|
 {{< /table >}}
 
-#### httpRouteRule
+### httpRouteRule
 
 `HTTPRouteRule` defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
@@ -52,7 +52,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 | `backendRefs`| An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only to be used with Service parentRefs).|
 {{< /table >}}
 
-#### httpRouteMatch
+### httpRouteMatch
 
 `HTTPRouteMatch` defines the predicate used to match requests to a given
 action. Multiple match types are ANDed together, i.e. the match will
@@ -67,7 +67,7 @@ evaluate to true only if all conditions are satisfied.
 | `method`| When specified, this route will be matched only if the request has the specified method.|
 {{< /table >}}
 
-#### httpPathMatch
+### httpPathMatch
 
 `HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
 request path.
@@ -79,7 +79,7 @@ request path.
 | `value`| The HTTP path to match against.|
 {{< /table >}}
 
-#### httpHeaderMatch
+### httpHeaderMatch
 
 `HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
@@ -92,7 +92,7 @@ headers.
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
-#### httpQueryParamMatch
+### httpQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
@@ -105,7 +105,7 @@ query parameters.
 | `value`| Value of HTTP query param to be matched.|
 {{< /table >}}
 
-#### httpRouteFilter
+### httpRouteFilter
 
 `HTTPRouteFilter` defines processing steps that must be completed during the
 request or response lifecycle.
@@ -118,7 +118,7 @@ request or response lifecycle.
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
 
-#### httpRequestHeaderFilter
+### httpRequestHeaderFilter
 
 A filter which modifies request headers.
 
@@ -130,7 +130,7 @@ A filter which modifies request headers.
 | `remove`|  A list of header names to remove from the request.|
 {{< /table >}}
 
-#### httpHeader
+### httpHeader
 
 `HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
@@ -141,7 +141,7 @@ A filter which modifies request headers.
 | `value`| Value of HTTP Header to be matched.|
 {{< /table >}}
 
-#### httpRequestRedirectFilter
+### httpRequestRedirectFilter
 
 `HTTPRequestRedirect` defines a filter that redirects a request.
 
@@ -155,7 +155,7 @@ A filter which modifies request headers.
 | `statusCode`| The HTTP status code to be used in response.|
 {{< /table >}}
 
-#### httpPathModfier
+### httpPathModfier
 
 `HTTPPathModifier` defines configuration for path modifiers.
 
@@ -167,7 +167,7 @@ A filter which modifies request headers.
 | `replacePrefixMatch`| The value with which to replace the prefix match of a request during a rewrite or redirect.|
 {{< /table >}}
 
-#### httpBackendRef
+### httpBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
 sent to. Only to be used with Service parentRefs.
@@ -180,9 +180,10 @@ sent to. Only to be used with Service parentRefs.
 | `weight`| Proportion of requests sent to this backend.|
 {{< /table >}}
 
-### HTTPRoute Examples
+## HTTPRoute Examples
 
-An `HTTPRoute` attached to a Server resource which matches GETs to `/authors.json` or `/authors/*`:
+An `HTTPRoute` attached to a Server resource which matches GETs to
+`/authors.json` or `/authors/*`:
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta2

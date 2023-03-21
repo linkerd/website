@@ -150,7 +150,7 @@ API rules of
 precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
 {{< /note >}}
 
-Please refer to HTTPRoute's full [spec](../httproute).
+Please refer to HTTPRoute's full [spec](../httproute/).
 
 ## AuthorizationPolicy
 
