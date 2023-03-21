@@ -1,0 +1,188 @@
+# Running Linkerd Getting Started Guide in CI
+
+[![](https://badgen.net/badge/Open%20with/Runme/5B3ADF?icon=https://runme.dev/img/logo.svg)](https://www.runme.dev/api/runme?repository=git%40github.com%3Astateful%2Flinkerd-website.git&fileToOpen=tests/runme/README.md)
+
+For a better experience reading this file, we recommend opening it with [Runme](https://runme.dev/).
+
+The following guide explains how to run tests from the Linkerd getting started guide using [Runme CLI](https://runme.dev/) on GKE.
+**Runme** is a powerful tool that makes Markdown files runnable.
+The CLI will run as part of a GitHub Action.
+
+
+## Configuring Google Cloud Kubernetes cluster
+
+This guide assumes you already have a [Google Cloud Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine) cluster configured.
+
+### Authenticate to Google Cloud
+
+The recommended approach is to use [Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation)
+This approach is more secure than using **Service Account Key JSON** since you don't have to think about secret management and the inherited risks (e.g. leaked credentials), having this mechanism disabled is a standard security best practice across organizations.
+
+Learn more about [Keyless authentication from GitHub Actions](https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions)
+
+Ensure you have correctly configured a Workload Identity Federation by creating a Workload Identity Pool and Workload Identity Provider.
+
+Before running the following commands, check that IAM API is enabled for [creating service accounts](https://console.cloud.google.com/flows/enableapi?apiid=iam.googleapis.com&redirect=https://console.cloud.google.com).
+
+Set your project
+
+```sh
+export PROJECT_ID=<Your Project Id>
+export POOL_DISPLAY_NAME=<Your pool display name>
+export POOL_NAME=<Your pool name>
+export PROVIDER_NAME=<Your provider name>
+export PROVIDER_DISPLAY_NAME=<Your provider display name>
+```
+
+Create a Workload Identity Pool
+
+```sh
+gcloud iam workload-identity-pools create "my-pool" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --display-name="${POOL_DISPLAY_NAME}"
+```
+
+Create a Workload Identity Provider
+
+```sh
+gcloud iam workload-identity-pools providers create-oidc "${PROVIDER_NAME}" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --workload-identity-pool="${POOL_NAME}" \
+  --display-name="${PROVIDER_DISPLAY_NAME}" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.aud=assertion.aud" \
+  --issuer-uri="https://token.actions.githubusercontent.com"
+```
+
+Allow authentications from the Workload Identity Provider to impersonate the desired Service Account:
+
+```sh
+gcloud iam service-accounts add-iam-policy-binding "my-service-account@${PROJECT_ID}.iam.gserviceaccount.com" \
+  --project="${PROJECT_ID}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/1234567890/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo"
+```
+
+Check the created identity pools by running the following command:
+
+```sh
+gcloud iam workload-identity-pools list --location="global"
+```
+
+Now you have your cluster configured properly, configure the following GitHub Action Environment Variables (they are not secrets):
+
+``` { mimeType="text/plain" }
+- GCLOUD_WORKLOAD_IDENTITY_PROVIDER: "projects/<project-id>/locations/global/workloadIdentityPools/<pool-name>/providers/<provider-name>"
+- GCLOUD_SERVICE_ACCOUNT: "<name>@<project-name>.iam.gserviceaccount.com"
+- CLUSTER_LOCATION: "<cluster-location>" e.g us-central1-c
+- CLUSTER_NAME: "<YOUR CLUSTER NAME>"
+```
+
+## Authenticate in Google Cloud GitHub Action
+
+Use [google-github-actions/auth@v1](https://github.com/google-github-actions/auth) for authenticating in Google Cloud from your GitHub Action.
+
+ ``` { mimeType=text/x-yaml}
+ - id: 'gcloud-auth'
+  name: 'Authenticate to Google Cloud'
+  uses: 'google-github-actions/auth@v1'
+  with:
+    workload_identity_provider: ${{ vars.GCLOUD_WORKLOAD_IDENTITY_PROVIDER }}
+    service_account: ${{ vars.GCLOUD_SERVICE_ACCOUNT }}
+```
+
+### Allow the CI to interact with the Kubernetes Cluster
+
+Use [google-github-actions/get-gke-credentials@v1](https://github.com/google-github-actions/get-gke-credentials)
+
+ ``` { mimeType=text/x-yaml}
+- id: 'get-credentials'
+  uses: 'google-github-actions/get-gke-credentials@v1'
+  with:
+     cluster_name: ${{ vars.CLUSTER_NAME }}
+     location: ${{ vars.CLUSTER_LOCATION }}
+```
+
+### Setup kubectl
+
+Linkerd requires [kubectl](https://kubernetes.io/docs/tasks/tools/), the Kubernetes command line tool. Microsoft provides a GitHub Action for installing it via [azure/setup-kubectl@v3](https://github.com/Azure/setup-kubectl)
+
+ ``` { mimeType=text/x-yaml}
+- uses: azure/setup-kubectl@v3
+  with:
+  version: 'latest'
+```
+
+If you want to ensure Kubectl is correctly installed in your GitHub Action, you can add the following step:
+
+``` { mimeType=text/x-yaml}
+- name: Check kubectl version
+  run: |
+    kubectl version --short
+```
+
+
+### Install Linkerd
+You can install Linkerd via CURL, and add it to the PATH, so the binary is available for other steps.
+
+
+``` { mimeType=text/x-yaml}
+- name: Install Linkerd
+  run: |
+     curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+- name: Add Linkerd to PATH
+  run: |
+    echo "$PATH:/home/runner/.linkerd2/bin" >> $GITHUB_PATH
+
+- name: Validate Linkerd install
+  run: linkerd version
+```
+
+
+### Install Runme
+
+The Runme CLI can be installed via **go install**
+
+``` { mimeType=text/x-yaml}
+- uses: actions/setup-go@v3
+  with:
+   go-version: '>=1.17.0'
+   - run: go version          
+   - name: Install runme
+     run: |
+        go install github.com/stateful/runme@latest
+```
+
+You can check the Runme version and is installed adequately via the following action:
+
+``` { mimeType=text/x-yaml }
+- name: Check runme
+  run: |
+    runme --version
+```
+
+### Run Tests
+
+Linkerd getting started guide tests are run via Bats. Its Usage is well explained in our [testing guide](./README.md)
+
+``` { mimeType=text/x-yaml}
+- name: 'Initialize Git submodules'
+    run: |
+      git submodule update --init
+                
+- name: 'Run bats tests'
+    env:
+     NO_COLOR: true
+     FROM_CLI: true
+     run: |
+        npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
+```
+
+In the previous example, we're using Node.js to install Bats, if that's your case too, ensure your action installs it too:
+
+``` { mimeType=text/x-yaml}
+- uses: actions/setup-node@v3
+    with:
+      node-version: 18
+```
