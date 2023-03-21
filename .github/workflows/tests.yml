@@ -58,11 +58,16 @@ jobs:
       - name: 'Initialize Git submodules'
         run: |
           git submodule update --init
-                
+      
+      - name: Start Runme Server
+        run: |
+          runme server --address ${{ vars.RUNME_ADDRESS }} --runner &
+
       - name: 'Run bats tests'
         env:
           NO_COLOR: true
           FROM_CLI: true
+          RUNME_SERVER_ADDR: ${{ vars.RUNME_ADDRESS }}
         shell: sh
         run: |
           npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
