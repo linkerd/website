@@ -183,11 +183,17 @@ Linkerd getting started guide tests are run via Bats. Its Usage is well explaine
 - name: 'Run bats tests'
     env:
      NO_COLOR: true
-     FROM_CLI: true
+     FROM_CI: true
      RUNME_SERVER_ADDR: ${{ vars.RUNME_ADDRESS }}
      run: |
         npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
 ```
+
+The test file requires the following environment variables:
+
+- **NO_COLOR: true** Prevent side effects from the test assertions by disabling ANSI Colors in the terminal output
+- **FROM_CI: true** Used to indicate the tests are being run from the GitHub Action
+- **RUNME_SERVER_ADDR**: The Runme server address, usually localhost:7863
 
 In the previous example, we're using Node.js to install Bats, if that's your case too, ensure your action installs it too:
 
