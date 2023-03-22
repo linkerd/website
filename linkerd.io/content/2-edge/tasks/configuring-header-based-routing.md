@@ -14,7 +14,7 @@ installed.
 
 ## HTTPRoute for Header-Based Routing
 
-With header-based routing you can route HTTP traffic given the contents of
+With header-based routing, you can route HTTP traffic based on the contents of
 request headers. This can be useful for performing load-balancing, A/B testing
 and many other strategies for traffic management.
 
