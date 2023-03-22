@@ -15,8 +15,8 @@ installed.
 ## HTTPRoute for Header-Based Routing
 
 With header-based routing, you can route HTTP traffic based on the contents of
-request headers. This can be useful for performing load-balancing, A/B testing
-and many other strategies for traffic management.
+request headers. This can be useful for performing things like A/B testing and
+many other strategies for traffic management.
 
 In this tutorial, we'll make use of the
 [podinfo](https://github.com/stefanprodan/podinfo) project to showcase
@@ -75,9 +75,7 @@ PODINFO_UI_MESSAGE=A backend
 
 ## Introducing HTTPRoute
 
-Now we'd like to set up an HTTPRoute resource to have requests sent to the
-Service `backend-a-podinfo` be forwarded to the Service `backend-b-podinfo`,
-only if the "`x-request-id: alternative`" header is used.
+Let's apply the following `HTTPRoute` resource to enable header-based routing:
 
 ```yaml
 cat <<EOF | kubectl -n test apply -f -
@@ -105,6 +103,31 @@ spec:
         port: 9898
 EOF
 ```
+
+In `parentRefs` we specify the resources we want this `HTTPRoute` instance to
+act on. So here we point to the `backend-a-podinfo` Service on the `HTTPRoute`'s
+namespace (`test`), and also specify the Service port number (not the Service's
+target port).
+
+Next, we give a list of rules that will act on the traffic hitting that Service.
+
+The first rule contains two entries: `matches` and `backendRefs`.
+
+In `matches` we list the conditions that this particular rule has to match. One
+matches suffices to trigger the rule (conditions are OR'ed). Inside, we use
+`headers` to specify a match for a particular header key and value. If multiple
+headers are specified, they all need to match (matchers are AND'ed). Note we can
+also specify a regex match on the value by adding a `type: RegularExpression`
+field. By not specifying the type like we did here, we're performing a match of
+type `Exact`.
+
+In `backendRefs` we specify the final destination for requests matching the
+current rule, via the Service's `name` and `port`.
+
+Here we're specifying we'd like to route to `backend-b-podinfo` all the requests
+having the `x-request-id: alterrnative` header. If the header is not present,
+the engine fall backs to the last rule which has no `matches` entries and points
+to the `backend-a-podinfo` Service.
 
 The previous requests should still reach `backend-a-podinfo` only:
 
