@@ -1,8 +1,8 @@
-name: Tests
+name: dx
 on: push
 
 jobs:
-  build:
+  runme:
     runs-on: ubuntu-latest
     environment: dev
     concurrency: ${{ vars.CLUSTER_NAME }}-cluster
