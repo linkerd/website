@@ -8,6 +8,7 @@ on:
 
 jobs:
   lint:
+    if: github.repository == 'linkerd/website'
     name: Lint install script
     runs-on: ubuntu-latest
     container:
@@ -21,6 +22,7 @@ jobs:
         make shellcheck
 
   build:
+    if: github.repository == 'linkerd/website'
     name: Build install script
     runs-on: ubuntu-latest
     steps:
@@ -37,6 +39,7 @@ jobs:
         path: tmp/run.linkerd.io/public
 
   install:
+    if: github.repository == 'linkerd/website'
     name: Test install for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:

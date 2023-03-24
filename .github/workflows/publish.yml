@@ -9,6 +9,7 @@ on:
 
 jobs:
   publish:
+    if: github.repository == 'linkerd/website'
     name: Publish
     runs-on: ubuntu-latest
     container:

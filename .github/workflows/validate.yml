@@ -7,6 +7,7 @@ on:
 
 jobs:
   linkerd_io:
+    if: github.repository == 'linkerd/website'
     name: Validate generated HTML
     runs-on: ubuntu-latest
     container:
