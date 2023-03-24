@@ -62,7 +62,7 @@ Set the project credentials of your Kubernetes cluster
 Specify the compute zone for the cluster
 
 ```sh
-export CLUSTER_ZONE=<us-central1-c>
+export CLUSTER_ZONE="us-central1-c"
 ```
 
 ```sh
