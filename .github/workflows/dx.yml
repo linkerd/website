@@ -61,7 +61,7 @@ jobs:
       
       - name: Start Runme Server
         run: |
-          runme server --address ${{ vars.RUNME_ADDRESS }} --runner --insecure &
+          runme server --address ${{ vars.RUNME_ADDRESS }} --runner &
 
       - name: 'Run bats tests'
         env:
