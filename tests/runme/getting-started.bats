@@ -15,9 +15,11 @@ RUNME_RUN_CMD="runme run $RUNME_FLAGS"
 
 REMOTE="" # set to 'skip' to omit all remote steps (for dev)
 
+export NO_COLOR=1
+
 DETIK_CLIENT_NAME="kubectl"
 
-@test "Verify kubectl version step" {
+@test "Verify kubectl version (step 0)" {
   run $RUNME_RUN_CMD kubectl-version
   assert_line -p "Client Version:"
   assert_line -p "Kustomize Version:"
@@ -25,45 +27,45 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verify install linkerd step" {
+@test "Verify install linkerd (step 1)" {
   run $RUNME_RUN_CMD curl-proto
   assert_line -p "Checksum valid."
   assert_line -p "Linkerd stable"
   assert_success
 }
 
-@test "Verify linkerd version" {
+@test "Verify linkerd version (step 1)" {
   run $RUNME_RUN_CMD linkerd-version
   assert_line -p "Client version: stable"
   assert_success
 }
 
-@test "Verify linkerd pre check" {
+@test "Verify linkerd pre check (step 2)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-check
   assert_line -p "Status check results are √"
   assert_success
 }
 
-@test "Verify linkerd install CRDs" {
+@test "Verify linkerd install CRDs (step 3)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-install
   assert_success
 }
 
-@test "Verify linkerd install" {
+@test "Verify linkerd install (step 3)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-install-2
   assert_success
 }
 
-@test "Verify linkerd check" {
+@test "Verify linkerd check (step 3)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-check-2
   assert_success
 }
 
-@test "Verify install emojivoto" {
+@test "Verify install emojivoto (step 4)" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="emojivoto"
   run $RUNME_RUN_CMD curl-proto-2
@@ -79,7 +81,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verify linkerd injection" {
+@test "Verify linkerd injection (step 4)" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="emojivoto"
   run $RUNME_RUN_CMD kubectl-get
@@ -94,14 +96,14 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verify emojivoto data plane" {
+@test "Verify emojivoto data plane (step 4)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-n
   assert_line -p "Status check results are √"
   assert_success
 }
 
-@test "Verify linkerd install control plane" {
+@test "Verify linkerd install viz (step 5)" {
   $REMOTE
   DETIK_CLIENT_NAMESPACE="linkerd-viz"
   run $RUNME_RUN_CMD linkerd-viz
@@ -114,7 +116,7 @@ DETIK_CLIENT_NAME="kubectl"
   assert_success
 }
 
-@test "Verify linkerd check control plane" {
+@test "Verify linkerd check viz (step 5)" {
   $REMOTE
   run $RUNME_RUN_CMD linkerd-check-3
   assert_line -p "√ viz extension self-check"
