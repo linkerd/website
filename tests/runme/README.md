@@ -6,13 +6,11 @@ This is an example README file powered by [Runme](https://runme.dev/).
 
 Use the VS Code extension or the CLI to run the commands explained in this file.
 
-
 ## Installing your Kubernetes cluster
 
 For this example, we will use the [Google Cloud Kubernetes  Engine (GKE)](https://cloud.google.com/kubernetes-engine). You can try the service for free.
 
 If you are on Mac, you can install the required tools using brew.
-
 
 ```sh
 brew install google-cloud-sdk linkerd
@@ -39,7 +37,6 @@ gcloud auth login
 ### Non-interactive authorization
 
 Authorizing without using a web browser is known as a non-interactive mode. You must create a service account with the appropriate scopes via the Google Cloud Console. [Learn more how to configure non-interactive mode](https://cloud.google.com/sdk/gcloud/reference/auth/login)
-
 
 ## Configuring your project
 
@@ -71,6 +68,7 @@ $ gcloud container clusters get-credentials $CLUSTER_NAME --zone $CLUSTER_ZONE -
 ```
 
 ## (Optional)
+
 To monitor the created pods via Linkerd, you can use a tool like [watch](https://formulae.brew.sh/formula/watch) to see the output from the get pods command.
 
 ```sh
@@ -84,6 +82,7 @@ watch -n 1 kubectl get pods -A
 ```
 
 ## Run the docs tests
+
 One of the most interesting features of using Runme, is that you can test your README files by using it.
 
 In this example, we will use [bats](https://github.com/bats-core/bats-core), a TAP-compliant automated testing system for bash.
@@ -104,8 +103,15 @@ Bats utilities work using git submodules. We have defined the above utilities in
 git submodule update --init
 ```
 
-Now you have bats properly installed, let's run the [Linkerd getting started guide](../../linkerd.io//content/2.12/getting-started/_index.md) tests we have defined at [getting-started.bats](./getting-started.bats)
+Now you have bats properly installed, let's run the [Linkerd getting started guide](../../linkerd.io//content/2.12/getting-started/_index.md) tests we have defined at [getting-started.bats](./getting-started.bats). Before do that, let's monitor the kube cluster's namespaces.
 
+```sh { name=watch-linkerd background=true closeTerminalOnSuccess=true interactive=true }
+watch -n 1 kubectl get pods -n linkerd
+```
+
+```sh { background=true }
+watch -n 1 kubectl get pods -n emojivoto
+```
 
 ```sh { name= closeTerminalOnSuccess=false interactive=false }
 npx bats getting-started.bats
