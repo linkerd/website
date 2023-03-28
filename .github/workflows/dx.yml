@@ -4,7 +4,7 @@ on: push
 jobs:
   runme:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: dev
     concurrency: ${{ vars.CLUSTER_NAME }}-cluster
     permissions:
       contents: 'read'
