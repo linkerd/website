@@ -1,6 +1,6 @@
 # Getting Started with Linkerd using Runme
 
-[![](https://badgen.net/badge/Open%20with/Runme/5B3ADF?icon=https://runme.dev/img/logo.svg)](https://www.runme.dev/api/runme?repository=git%40github.com%3Astateful%2Flinkerd-website.git&fileToOpen=tests/runme/README.md)
+[![](https://badgen.net/badge/Open%20with/Runme/5B3ADF?icon=https://runme.dev/img/logo.svg)](https://www.runme.dev/api/runme?repository=https%3A%2F%2Fgithub.com%2Fstateful%2Flinkerd-website.git&fileToOpen=tests/runme/README.md)
 
 This is an example README file powered by [Runme](https://runme.dev/).
 
