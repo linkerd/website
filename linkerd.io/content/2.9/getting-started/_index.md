@@ -23,6 +23,8 @@ interface) onto your local machine. Using this CLI, you'll then install the
 more services by adding the *data plane* proxies. (See the
 [Architecture](../architecture/) page for details.)
 
+{{< trylpt >}}
+
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to a Kubernetes

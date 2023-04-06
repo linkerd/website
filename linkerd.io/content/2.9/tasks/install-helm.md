@@ -6,6 +6,8 @@ description = "Install Linkerd onto your own Kubernetes cluster using Helm."
 Linkerd can optionally be installed via Helm rather than with the `linkerd
 install` command.
 
+{{< trylpt >}}
+
 ## Prerequisite: identity certificates
 
 The identity component of Linkerd requires setting up a trust anchor

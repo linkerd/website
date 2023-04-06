@@ -9,6 +9,8 @@ walks through this installation and configuration as well as common problems
 that you may encounter. For a detailed walkthrough and explanation of what's
 going on, check out [getting started](../multicluster/).
 
+{{< trylpt >}}
+
 ## Requirements
 
 - Two clusters.

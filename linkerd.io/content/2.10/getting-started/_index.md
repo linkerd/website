@@ -23,6 +23,8 @@ interface) onto your local machine. Using this CLI, you'll then install the
 *control plane* onto your Kubernetes cluster. Finally, you'll "mesh" one or
 more of your own services by adding Linkerd's *data plane* to them.
 
+{{< trylpt >}}
+
 ## Step 0: Setup
 
 Before we can do anything, we need to ensure you have access to modern

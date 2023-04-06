@@ -8,9 +8,11 @@ Instead of forking the Linkerd install and upgrade process,
 install`  in a consistent way. This allows customization of the install to add
 functionality specific to installations.
 
-To get started, save the output of `install` to a YAML file. This will be the
-base resource that Kustomize uses to patch and generate what is added to your
-cluster.
+{{< trylpt >}}
+
+To get started, save the output of `linkerd install` to a YAML file. This will
+be the base resource that Kustomize uses to patch and generate what is added
+to your cluster.
 
 ```bash
 linkerd install > linkerd.yaml

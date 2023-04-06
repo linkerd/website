@@ -12,6 +12,8 @@ This guide will show you how to set up
 [Argo CD](https://argoproj.github.io/argo-cd/) to manage the installation and
 upgrade of Linkerd using a GitOps workflow.
 
+{{< trylpt >}}
+
 Specifically, this guide provides instructions on how to securely generate and
 manage Linkerd's mTLS private keys and certificates using
 [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) and
