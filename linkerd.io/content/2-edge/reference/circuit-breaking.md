@@ -73,7 +73,7 @@ of the original backoff duration which may be added as jitter.
 
 HTTP failure accrual is configured by a set of annotations. When these
 annotations are added to a Kubernetes Service, client proxies will perform
-HTTP failure accrual when communicating with replicas of that Service. If no
+HTTP failure accrual when communicating with endpoints of that Service. If no
 failure accrual annotations are present on a Service, proxies will not perform
 failure accrual.
 
