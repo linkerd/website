@@ -8,7 +8,7 @@ aliases = [
 
 [_Circuit breaking_][wiki] is a pattern for improving the reliability of
 distributed applications. In circuit breaking, an application which makes
-network calls to upstream services monitors whether those calls succeed or fail,
+network calls to remote services monitors whether those calls succeed or fail,
 and TODO ELIZA PUT WORDS HERE
 
 The Linkerd proxy is capable of performing endpoint-level circuit breaking on
