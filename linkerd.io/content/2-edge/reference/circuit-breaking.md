@@ -1,6 +1,6 @@
 +++
 title = "Circuit Breaking"
-description = ""
+description = "How Linkerd implements circuit breaking."
 aliases = [
   "../failure-accrual/",
 ]
