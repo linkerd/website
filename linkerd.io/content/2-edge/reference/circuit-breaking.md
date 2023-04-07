@@ -84,7 +84,8 @@ one of: `ms` for milliseconds, `s` for seconds, `m` for minutes, `h` for hours,
 or `d` for days.
 {{</ note >}}
 
-The following annotations configure failure accrual:
+Set this annotation on a Service to enable meshed clients to use circuit
+breaking when sending traffic to that Service:
 
 + `balancer.linkerd.io/failure-accrual`: Selects the [failure accrual
   policy](#failure-accrual-policies) used
