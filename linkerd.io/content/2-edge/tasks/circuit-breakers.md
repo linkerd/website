@@ -8,7 +8,7 @@ routing requests to an endpoint if that endpoint is deemed to be unhealthy;
 instead routing that request to other replicas in the service.
 
 In this tutoral, we'll see how to enable circuit breaking on a service to
-improve client success rate when a downstream replica is unhealthy.
+improve client success rate when a backend replica is unhealthy.
 
 {{< trylpt >}}
 
