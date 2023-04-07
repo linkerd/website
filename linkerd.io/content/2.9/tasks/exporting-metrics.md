@@ -8,9 +8,15 @@ aliases = [
 ]
 +++
 
+Linkerd provides an extensive set of metrics for all traffic that passes through
+its data plane. These metrics are collected at the proxy level and reported on
+the proxy's metrics endpoint.
+
 By design, Linkerd only keeps metrics data for a short, fixed window of time
 (currently, 6 hours). This means that if Linkerd's metrics data is valuable to
 you, you will probably want to export it into a full-fledged metrics store.
+
+{{< trylpt >}}
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
 part of the control plane.  There are several basic approaches to exporting

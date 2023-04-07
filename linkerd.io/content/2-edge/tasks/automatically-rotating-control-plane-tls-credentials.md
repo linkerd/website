@@ -15,6 +15,8 @@ rotate the issuer certificate. In this doc, we'll describe how to set up
 automatic rotation of the issuer certificate and its corresponding private key
 using the cert-manager project.
 
+{{< trylpt >}}
+
 ## Cert manager
 
 [Cert-manager](https://github.com/jetstack/cert-manager) is a popular project
