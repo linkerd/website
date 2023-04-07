@@ -119,4 +119,5 @@ configure parameters for the consecutive-failures failure accrual policy:
   is not present, the default value is 0.5.
 
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
-[exp-backoff]: https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+[exp-backoff]:
+    https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
