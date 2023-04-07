@@ -6,8 +6,8 @@ aliases = [
 ]
 +++
 
-[_Circuit breaking_][wiki] is a pattern for improving the reliability of
-distributed applications. In circuit breaking, an application which makes
+[_Circuit breaking_][circuit-breaker] is a pattern for improving the reliability
+of distributed applications. In circuit breaking, an application which makes
 network calls to remote backends monitors whether those calls succeed or fail,
 in an attempt to determine whether that backend is in a failed state. If a
 given backend is believed to be in a failed state, its circuit breaker is
@@ -118,5 +118,5 @@ configure parameters for the consecutive-failures failure accrual policy:
   floating-point number, and must be between 0.0 and 100.0. If this annotation
   is not present, the default value is 0.5.
 
-[wiki]: https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern
+[circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
 [exp-backoff]: https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
