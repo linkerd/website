@@ -8,8 +8,11 @@ aliases = [
 
 [_Circuit breaking_][wiki] is a pattern for improving the reliability of
 distributed applications. In circuit breaking, an application which makes
-network calls to remote services monitors whether those calls succeed or fail,
-and TODO ELIZA PUT WORDS HERE
+network calls to remote backends monitors whether those calls succeed or fail,
+in an attempt to determine whether that backend is in a failed state. If a
+given backend is believed to be in a failed state, its circuit breaker is
+"tripped", and no subsequent requests are sent to that backend until it is
+determined to have returned to normal.
 
 The Linkerd proxy is capable of performing endpoint-level circuit breaking on
 HTTP requests using a configurable failure accrual strategy. This means that the
