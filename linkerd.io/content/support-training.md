@@ -16,7 +16,7 @@ support:
     entries:
     - title: Buoyant
       thumbnail: "/images/buoyant-balloon.svg"
-      url: https://buoyant.io/linkerd-production-toolkit/
+      url: https://buoyant.io/linkerd
       description: |-
         The Linkerd Production Toolkit comes to you straight from the creators of Linkerd.
 
