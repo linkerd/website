@@ -12,26 +12,40 @@ menu:
 
 support:
   kinds:
+  - title: 'Providers'
+    entries:
+    - title: Buoyant
+      thumbnail: "/images/buoyant-balloon.svg"
+      url: https://buoyant.io/linkerd
+      description: |-
+        The Linkerd Production Toolkit comes to you straight from the creators of Linkerd.
+
   - title: 'Courses'
     entries:
-    - description: Introduction to Service Mesh with Linkerd | edx
+    - title: The Linux Foundation
       thumbnail: "/uploads/linux-foundation-logo.svg"
-      title: The Linux Foundation
       url: https://www.edx.org/course/introduction-to-service-mesh-with-linkerd
-    - description: Hands-on, instructor-led service mesh training, straight from the creators of Linkerd.
-      url: https://buoyant.io/linkerd-training/
-      title: Buoyant
+      description: |-
+        Introduction to Service Mesh with Linkerd | edx
+    - title: Buoyant
       thumbnail: "/images/buoyant-balloon.svg"
+      url: https://buoyant.io/linkerd-training/
+      description: |-
+        Hands-on, instructor-led service mesh training, straight from the creators of Linkerd.
+
   - title: 'Commercial support'
     entries:
-    - description: Enterprise-grade support including 24x7 oncall, straight from the creators of Linkerd.
+    - title: Buoyant
       thumbnail: "/images/buoyant-balloon.svg"
-      title: Buoyant
       url: https://buoyant.io/linkerd-support/
-    - description: Your extended team for setting up Linkerd from scratch & managing it. We got you covered!
+      description: |-
+        Enterprise-grade support including 24x7 oncall, straight from the creators of Linkerd.
+
+    - title: InfraCloud
       thumbnail: "/uploads/infracloud-only-icon-logo.svg"
-      title: InfraCloud
       url: https://www.infracloud.io/linkerd-consulting-support/
+      description: |-
+        Your extended team for setting up Linkerd from scratch & managing it. We got you covered!
 
   bottom_description: Offering Linkerd support or training? Add your company!
   description: ''
