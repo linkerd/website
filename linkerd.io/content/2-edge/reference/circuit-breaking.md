@@ -7,10 +7,25 @@ aliases = [
 +++
 
 [_Circuit breaking_][wiki] is a pattern for improving the reliability of
-distributed applications. TODO ELIZA MOAR WORDS
+distributed applications. In circuit breaking, an application which makes
+network calls to upstream services monitors whether those calls succeed or fail,
+and TODO ELIZA PUT WORDS HERE
 
-The Linkerd proxy is capable of performing request-level circuit breaking on
-HTTP requests using a configurable failure accrual strategy.
+The Linkerd proxy is capable of performing endpoint-level circuit breaking on
+HTTP requests using a configurable failure accrual strategy. This means that the
+Linkerd proxy performs circuit breaking at the level of individual endpoints
+in a load balancer (i.e., each Pod in a given Service), and failures are tracked
+at the level of HTTP response status codes.
+
+Circuit breaking is implemented in the Linkerd proxy's load balancer by marking
+failing endpoints as _unavailable_. When an endpoint is unavailable, the load
+balancer will not select it when determining where to send a given request. This
+means that if only some endpoints have tripped their circuit breakers, the proxy
+will simply not select those endpoints while they are in a failed state. When
+all endpoints in a load balancer are unavailable, requests may be failed with
+503 Service Unavailable errors, or, if the load balancer is part of a route
+distribution with multiple backends, the entire backend Service will be
+considered unavailable and a different backend may be selected.
 
 ## Failure Accrual Policies
 
@@ -59,6 +74,13 @@ HTTP failure accrual when communicating with replicas of that Service. If no
 failure accrual annotations are present on a Service, proxies will not perform
 failure accrual.
 
+{{< note >}}
+Some failure accrual annotations have values which represent a duration.
+Durations are specified as a positive integer, followed by a unit, which may be
+one of: `ms` for milliseconds, `s` for seconds, `m` for minutes, `h` for hours,
+or `d` for days.
+{{</ note >}}
+
 The following annotations configure failure accrual:
 
 + `balancer.linkerd.io/failure-accrual`: Selects the [failure accrual
@@ -78,16 +100,19 @@ configure parameters for the consecutive-failures failure accrual policy:
 + `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`: Sets the
   minumum penalty duration for which an endpoint will be marked as unavailable
   after `max-failures` consecutive failures occur. After this period of time
-  elapses, the endpoint will be [probed](#probation-and-backoffs).
+  elapses, the endpoint will be [probed](#probation-and-backoffs). This duration
+  must be non-zero, and may not be greater than the max-penalty duration. If this
+  annotation is not present, the default value is one second (`1s`).
 + `balancer.linkerd.io/failure-accrual-consecutive-max-penalty`: Sets the
   maximum penalty duration for which an endpoint will be marked as unavailable
   after `max-failures` consecutive failures occur. This is an upper bound on the
-  duration between [probe requests](#probation-and-backoffs).
-
-
-### Specifying Durations
-
-Durations are
+  duration between [probe requests](#probation-and-backoffs). This duration
+  must be non-zero, and must be greater than the min-penalty duration. If this
+  annotation is not present, the default value is one minute (`1m`).
++ `balancer.linkerd.io/failure-accrual-consecutive-jitter-ratio`: Sets the
+  jitter ratio used for [probation backoffs](#probation-and-backoffs). This is a
+  floating-point number, and must be between 0.0 and 100.0. If this annotation
+  is not present, the default value is 0.5.
 
 [wiki]: https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern
 [exp-backoff]: https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
