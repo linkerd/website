@@ -4,10 +4,10 @@ description = "Protect against service failures using circuit breakers"
 +++
 
 Circuit breaking is a powerful feature where Linkerd will temporarily stop
-routing requests to an endpoint if that endpoint is deemed to be unhealthy;
-instead routing that request to other replicas in the service.
+routing requests to an endpoint if that endpoint is deemed to be unhealthy,
+instead routing that request to other replicas in the Service.
 
-In this tutoral, we'll see how to enable circuit breaking on a service to
+In this tutoral, we'll see how to enable circuit breaking on a Service to
 improve client success rate when a backend replica is unhealthy.
 
 {{< trylpt >}}
@@ -144,8 +144,8 @@ good             1/1   100.00%   5.9rps           1ms           1ms           1m
 slow-cooker      1/1   100.00%   0.3rps           1ms           1ms           1ms          1
 ```
 
-Here we can see that `good` and `bad` deployments are each reciving similar
-amounts of traffic but `good` has a success rate of 100% while the success
+Here we can see that `good` and `bad` deployments are each receiving similar
+amounts of traffic, but `good` has a success rate of 100% while the success
 rate of `bad` is very low (only healthcheck probes are succeeding). We can also
 see how this looks from the perspective of the traffic generator:
 
@@ -156,7 +156,7 @@ slow-cooker      1/1    51.00%   10.0rps           1ms           1ms           2
 ```
 
 From `slow-cooker`'s perspective, roughly 50% of requests that it sends to the
-service are failing. We can use circuit breaking to improve this by cutting off
+Service are failing. We can use circuit breaking to improve this by cutting off
 traffic to the `bad` pod.
 
 ## Breaking the circuit
@@ -168,7 +168,7 @@ endpoint is temporarily ignored and Linkered will only load balance among the
 remaining endpoints. After a backoff period, the endpoint is re-introduced so
 that we can determine if it has become healthy.
 
-Let's enable consecutive failure accrual on the `bb` service by adding an
+Let's enable consecutive failure accrual on the `bb` Service by adding an
 annotation:
 
 ```bash
@@ -177,7 +177,7 @@ kubectl annotate -n circuit-breaking-demo svc/bb balancer.linkerd.io/failure-acc
 
 We can check that failure accrual was configured correctly by using a Linkerd
 diagnostics command.  The `linkerd diagnostics policy` command prints the policy
-that Linkerd will use when sending traffic to a service. We'll use the
+that Linkerd will use when sending traffic to a Service. We'll use the
 [jq](https://stedolan.github.io/jq/) utility to filter the output to focus on
 failure accrual:
 
@@ -202,7 +202,7 @@ failure accrual:
 ```
 
 This tells us that Linkerd will use `ConsecutiveFailures` failure accrual
-when talking to the `bb` service. It also tells us that the `max_failures` is
+when talking to the `bb` Service. It also tells us that the `max_failures` is
 7, meaning that it will trip the circuit breaker once it observes 7 consective
 failures. We'll talk more about each of the parameters here at the end of this
 article.
@@ -219,7 +219,7 @@ slow-cooker      1/1   100.00%    0.3rps           1ms           1ms           1
 ```
 
 Notice that the `bad` pod's RPS is significantly lower now. The circuit breaker
-has stoped nearly all of the traffic from `slow-cooker` to `bad`.
+has stopped nearly all of the traffic from `slow-cooker` to `bad`.
 
 We can also see how this has affected `slow-cooker`:
 
