@@ -3,31 +3,31 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
-`HTTPRoutes` can be attached (via `parentRefs`) to a
+HTTPRoutes can be attached (via `parentRefs`) to a
 [Server](../authorization-policy/#server) to allow defining an [authorization
 policy](../authorization-policy/#authorizationpolicy) for specific routes served
 on that Server.
 
-`HTTRoutes` can also be attached to a Service, in order to classify requests
+HTTPRoutes can also be attached to a Service, in order to classify requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform header-based
 routing or traffic splitting.
 
 ## HTTPRoute Spec
 
-An `HTTPRoute` spec may contain the following top level fields:
+An HTTPRoute spec may contain the following top level fields:
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) or Services this `HTTPRoute` attaches to.|
+| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) or Services this HTTPRoute attaches to.|
 | `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
 
 ### parentReference
 
-A reference to the [Servers] this `HTTPRoute` is a part of.
+A reference to the parent resource this HTTPRoute is a part of.
 
 {{< table >}}
 | field| value |
@@ -41,7 +41,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 
 ### httpRouteRule
 
-`HTTPRouteRule` defines semantics for matching an HTTP request based on conditions
+HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
 
 {{< table >}}
@@ -54,7 +54,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 
 ### httpRouteMatch
 
-`HTTPRouteMatch` defines the predicate used to match requests to a given
+HTTPRouteMatch defines the predicate used to match requests to a given
 action. Multiple match types are ANDed together, i.e. the match will
 evaluate to true only if all conditions are satisfied.
 
@@ -107,7 +107,7 @@ query parameters.
 
 ### httpRouteFilter
 
-`HTTPRouteFilter` defines processing steps that must be completed during the
+HTTPRouteFilter defines processing steps that must be completed during the
 request or response lifecycle.
 
 {{< table >}}
@@ -177,12 +177,13 @@ sent to. Only allowed when a route has Service [parentRefs](#parentReference).
 |------|-------|
 | `name`| Name of service for this backend.|
 | `port`| Destination port number for this backend.|
+| `namespace`| Namespace of service for this backend.|
 | `weight`| Proportion of requests sent to this backend.|
 {{< /table >}}
 
 ## HTTPRoute Examples
 
-An `HTTPRoute` attached to a Server resource which matches GETs to
+An HTTPRoute attached to a Server resource which matches GETs to
 `/authors.json` or `/authors/*`:
 
 ```yaml
@@ -207,7 +208,7 @@ spec:
         method: GET
 ```
 
-An `HTTPRoute` attached to a Service to perform header-based routing. If there's
+An HTTPRoute attached to a Service to perform header-based routing. If there's
 a `x-faces-user: testuser` header in the request, the request is routed to the
 `smiley2` backend Service. Otherwise, the request is routed to the `smiley`
 backend Service.
