@@ -1,6 +1,6 @@
 +++
 title = "HTTPRoute"
-description = "Reference guide to HTTPRoute Resources."
+description = "Reference guide to HTTPRoute resources."
 +++
 
 `HTTPRoutes` can be attached (via `parentRefs`) to a
@@ -32,7 +32,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| The group of the referent. This must either be "group.linkerd.io" (for Server) or "core" (for Service).|
+| `group`| The group of the referent. This must either be "policy.linkerd.io" (for Server) or "core" (for Service).|
 | `kind`| The kind of the referent. This must be set to either "Server" or "Service".|
 | `port`| The targeted port number, when attaching to Services.|
 | `namespace`| The namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
@@ -49,7 +49,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 |------|-------|
 | `matches`| A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.|
 | `filters`| A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.|
-| `backendRefs`| An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only to be used with Service parentRefs).|
+| `backendRefs`| An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).|
 {{< /table >}}
 
 ### httpRouteMatch
@@ -170,7 +170,7 @@ A filter which modifies request headers.
 ### httpBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
-sent to. Only to be used with Service parentRefs.
+sent to. Only allowed when a route has Service [parentRefs](#parentReference).
 
 {{< table >}}
 | field| value |
@@ -208,8 +208,9 @@ spec:
 ```
 
 An `HTTPRoute` attached to a Service to perform header-based routing. If there's
-a `x-faces-user: testuser` header in the request the served backend is `smiley2`,
-otherwise `smiley` is served:
+a `x-faces-user: testuser` header in the request, the request is routed to the
+`smiley2` backend Service. Otherwise, the request is routed to the `smiley`
+backend Service.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta2
