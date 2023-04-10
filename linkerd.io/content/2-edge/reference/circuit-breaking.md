@@ -44,6 +44,12 @@ circuit breaker"). Currently, the Linkerd proxy implements one failure accrual
 policy, _consecutive failures_. Additional failure accrual policies may be
 added in the future.
 
+{{< note >}}
+HTTP responses are classified as _failures_ if their status code is a [5xx
+server error]. Future Linkerd releases may add support for configuring what
+status codes are classified as failures.
+{{</ note >}}
+
 ### Consecutive Failures
 
 In this failure accrual policy, an endpoint is marked as failing after a
@@ -137,6 +143,7 @@ configure parameters for the consecutive-failures failure accrual policy:
     rest of the cluster.
 
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
+[5xx server error]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses
 [exp-backoff]:
     https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
 [metric]: ../proxy-metrics/#outbound-xroute-metrics
