@@ -24,10 +24,10 @@ allow defining an [authorization
 policy](../authorization-policy/#authorizationpolicy) for specific routes served
 on that Server.
 
-HTTPRoutes can also be attached to a Service, in order to classify requests
+HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
-rerouted to different backend services. This can be used to perform dynamic
-request routing.
+rerouted to different backend services. This can be used to perform [dynamic
+request routing](../../tasks/configuring-dynamic-request-routing).
 
 {{< table >}}
 | field| value |
