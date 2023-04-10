@@ -56,7 +56,7 @@ made unavailable once 7 failures occur in a row with no successes.
 Once a failure accrual policy makes an endpoint unavailble, the circuit breaker
 will attempt to determine whether the endpoint is still in a failing state, and
 transition it back to available if it has recovered. This process is called
-_probation_. When an endpoint enters probatiion, it is available for a single
+_probation_. When an endpoint enters probation, it is available for a single
 request, called a _probe request_. If this request succeeds, the endpoint is no
 longer considered failing, and is once again made available. If the probe
 request fails, the endpoint remains unavailable, and another probe request will
