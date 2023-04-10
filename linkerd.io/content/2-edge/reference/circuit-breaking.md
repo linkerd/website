@@ -27,7 +27,7 @@ When an endpoint is unavailable, the load balancer will not select it when
 determining where to send a given request. This means that if only some
 endpoints have tripped their circuit breakers, the proxy will simply not select
 those endpoints while they are in a failed state. When all endpoints in a load
-balancer are unavailable, requests may be failed with 503 Service Unavailable
+balancer are unavailable, requests may be failed with [503 Service Unavailable]
 errors, or, if the Service is one of multiple [`backendRef`s in an
 HTTPRoute](../httproute/#httpbackendref), the entire backend Service will be
 considered unavailable and a different backend may be selected.
@@ -143,7 +143,8 @@ configure parameters for the consecutive-failures failure accrual policy:
     rest of the cluster.
 
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
+[503 Service Unavailable]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503
+[metric]: ../proxy-metrics/#outbound-xroute-metrics
 [5xx server error]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses
 [exp-backoff]:
     https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
-[metric]: ../proxy-metrics/#outbound-xroute-metrics
