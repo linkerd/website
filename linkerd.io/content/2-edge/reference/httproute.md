@@ -3,16 +3,6 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
-HTTPRoutes can be attached (via `parentRefs`) to a
-[Server](../authorization-policy/#server) to allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes served
-on that Server.
-
-HTTPRoutes can also be attached to a Service, in order to classify requests
-depending on path, headers, query params, and/or verb. Requests can then be
-rerouted to different backend services. This can be used to perform header-based
-routing or traffic splitting.
-
 ## HTTPRoute Spec
 
 An HTTPRoute spec may contain the following top level fields:
@@ -29,11 +19,21 @@ An HTTPRoute spec may contain the following top level fields:
 
 A reference to the parent resource this HTTPRoute is a part of.
 
+HTTPRoutes can be attached to a [Server](../authorization-policy/#server) to
+allow defining an [authorization
+policy](../authorization-policy/#authorizationpolicy) for specific routes served
+on that Server.
+
+HTTPRoutes can also be attached to a Service, in order to classify requests
+depending on path, headers, query params, and/or verb. Requests can then be
+rerouted to different backend services. This can be used to perform dynamic
+request routing.
+
 {{< table >}}
 | field| value |
 |------|-------|
 | `group`| The group of the referent. This must either be "policy.linkerd.io" (for Server) or "core" (for Service).|
-| `kind`| The kind of the referent. This must be set to either "Server" or "Service".|
+| `kind`| The kind of the referent. This must be either "Server" or "Service".|
 | `port`| The targeted port number, when attaching to Services.|
 | `namespace`| The namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
 | `name`| The name of the referent.|
