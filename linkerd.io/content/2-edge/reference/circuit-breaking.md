@@ -28,9 +28,9 @@ determining where to send a given request. This means that if only some
 endpoints have tripped their circuit breakers, the proxy will simply not select
 those endpoints while they are in a failed state. When all endpoints in a load
 balancer are unavailable, requests may be failed with 503 Service Unavailable
-errors, or, if the load balancer is part of a route distribution with multiple
-backends, the entire backend Service will be considered unavailable and a
-different backend may be selected.
+errors, or, if the Service is one of multiple [`backendRef`s in an
+HTTPRoute](../httproute/#httpbackendref), the entire backend Service will be
+considered unavailable and a different backend may be selected.
 
 The [`outbound_http_balancer_endpoints` gauge metric][metric] reports the number
 of "ready" and "pending" endpoints in a load balancer, with the "pending" number
