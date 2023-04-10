@@ -20,15 +20,17 @@ Linkerd proxy performs circuit breaking at the level of individual endpoints
 in a load balancer (i.e., each Pod in a given Service), and failures are tracked
 at the level of HTTP response status codes.
 
-Circuit breaking is implemented in the Linkerd proxy's load balancer by marking
-failing endpoints as _unavailable_. When an endpoint is unavailable, the load
-balancer will not select it when determining where to send a given request. This
-means that if only some endpoints have tripped their circuit breakers, the proxy
-will simply not select those endpoints while they are in a failed state. When
-all endpoints in a load balancer are unavailable, requests may be failed with
-503 Service Unavailable errors, or, if the load balancer is part of a route
-distribution with multiple backends, the entire backend Service will be
-considered unavailable and a different backend may be selected.
+Circuit breaking is a client-side behavior, and is therefore performed by the
+outbound side of the Linkerd proxy.[^1] Outbound proxies implement circuit
+breaking in the load balancer, by marking failing endpoints as _unavailable_.
+When an endpoint is unavailable, the load balancer will not select it when
+determining where to send a given request. This means that if only some
+endpoints have tripped their circuit breakers, the proxy will simply not select
+those endpoints while they are in a failed state. When all endpoints in a load
+balancer are unavailable, requests may be failed with 503 Service Unavailable
+errors, or, if the load balancer is part of a route distribution with multiple
+backends, the entire backend Service will be considered unavailable and a
+different backend may be selected.
 
 The [`outbound_http_balancer_endpoints` gauge metric][metric] reports the number
 of "ready" and "pending" endpoints in a load balancer, with the "pending" number
@@ -121,6 +123,9 @@ configure parameters for the consecutive-failures failure accrual policy:
   jitter ratio used for [probation backoffs](#probation-and-backoffs). This is a
   floating-point number, and must be between 0.0 and 100.0. If this annotation
   is not present, the default value is 0.5.
+
+[^1]: The part of the proxy which handles connections from within the pod to the
+    rest of the cluster.
 
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
 [exp-backoff]:
