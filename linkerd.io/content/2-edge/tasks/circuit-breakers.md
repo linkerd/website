@@ -164,7 +164,7 @@ traffic to the `bad` pod.
 Linkerd supports a type of circuit breaking called _consecutive failure accrual_.
 This works by tracking consecutive failures from each endpoint in Linkerd's
 internal load balancer. If there are ever too many failures in a row, that
-endpoint is temporarily ignored and Linkered will only load balance among the
+endpoint is temporarily ignored and Linkerd will only load balance among the
 remaining endpoints. After a backoff period, the endpoint is re-introduced so
 that we can determine if it has become healthy.
 
@@ -229,14 +229,14 @@ NAME          MESHED   SUCCESS       RPS   LATENCY_P50   LATENCY_P95   LATENCY_P
 slow-cooker      1/1    99.83%   10.0rps           1ms           1ms           1ms          4
 ```
 
-Nearly all of `slow-cookers` requests are now getting routed to the `good` pod
+Nearly all of `slow-cooker`'s requests are now getting routed to the `good` pod
 and succeeding!
 
 ## Tuning circuit breaking
 
 As we saw when we ran the `linkerd diagnostics policy` command, consecutive
 failure accrual is controlled by a number of parameters. Each of these
-parameters has a default, but can manually configured using annotations:
+parameters has a default, but can be manually configured using annotations:
 
 - `balancer.linkerd.io/failure-accrual-consecutive-max-failures`
   - The number of consecutive failures that Linkerd must observe before
@@ -260,4 +260,4 @@ parameters has a default, but can manually configured using annotations:
   - The amount of jitter to introduce to circuit breaker backoffs (default: 0.5).
     You are unlikely to need to tune this but might consider increasing it if
     you notice many clients are sending requests to a circuit broken endpoint
-    at the same time, leading to spikey traffic patterns.
+    at the same time, leading to spiky traffic patterns.
