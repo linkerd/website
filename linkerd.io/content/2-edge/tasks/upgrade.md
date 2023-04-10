@@ -14,6 +14,7 @@ Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.
 
+- [Upgrade notice: stable-2.13.0](#upgrade-notice-stable-2-13-0)
 - [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
 - [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
 - [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
@@ -111,23 +112,20 @@ linkerd version --client
 
 For users who have installed Linkerd via the CLI, the `linkerd upgrade` command
 will upgrade the control plane. This command ensures that all of the control
-plane's existing configuration and TLS secrets are retained. Notice that we use
-the `--prune` flag to remove any Linkerd resources from the previous version
-which no longer exist in the new version.
+plane's existing configuration and TLS secrets are retained.  Linkerd's CRDs
+should be upgraded first, using the `--crds` flag, followed by upgrading the
+control plane.
 
 ```bash
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+linkerd upgrade --crds | kubectl apply -f -
+linkerd upgrade | kubectl apply -f -
 ```
 
-Next, run this command again with some `--prune-whitelist` flags added. This is
-necessary to make sure that certain cluster-scoped resources are correctly
-pruned.
+Next, we use the `linkerd prune` command to remove any resources that were
+present in the previous version but should not be present in this one.
 
 ```bash
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
-  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
-  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
-  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+linkerd prune | kubectl delete -f -
 ```
 
 ### With Helm
@@ -174,11 +172,19 @@ linkerd multicluster install | kubectl apply -f -
 linkerd jaeger install | kubectl apply -f -
 ```
 
+Most extensions also include a `prune` command for removing resources which
+were present in the previous version but should not be present in the current
+version. For example:
+
+```bash
+linkerd viz prune | kubectl delete -f -
+```
+
 ### Upgrading the multicluster extension
 
 Upgrading the multicluster extension doesn't cause downtime in the traffic going
 through the mirrored services, unless otherwise noted in the version-specific
-notes below. Note however that for the service mirror _deployments_ (which
+notes below. Note however that for the service mirror *deployments* (which
 control the creation of the mirrored services) to be updated, you need to
 re-link your clusters through `linkerd multicluster link`.
 
@@ -222,6 +228,13 @@ Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
 
 ## Upgrade notices
+
+### Upgrade notice: stable-2.13.0
+
+Please be sure to read the [Linkerd 2.13.0 release
+notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.13.0).
+
+There are no other extra steps for upgrading to 2.13.0.
 
 ### Upgrade notice: stable-2.12.0
 
