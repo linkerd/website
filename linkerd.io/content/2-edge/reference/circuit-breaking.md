@@ -63,6 +63,14 @@ failing, and is once again made available. If the probe request fails, the
 endpoint remains unavailable, and another probe request will be issued after a
 backoff.
 
+{{< note >}}
+In the context of HTTP failure accrual, a probe request is an actual application
+request, and should not be confused with HTTP readiness and liveness probes.
+This means that a circuit breaker will not allow an endpoint to exit probation
+just because it responds successfully to health checks &mdash; actual
+application traffic must succeed for the endpoint to become available again.
+{{</ note >}}
+
 When an endpoint's failure accrual policy trips the circuit breaker, it will
 remain unavailble for at least a _minimum penalty_ duration. After this duration
 has elapsed, the endpoint will enter probation. When a probe request fails, the
