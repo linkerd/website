@@ -1,6 +1,6 @@
 +++
-title = "Configuring Header-Based Routing"
-description = "Configuring HTTPRoute resources to perform header-based routing."
+title = "Configuring Dynamic Request Routing"
+description = "Configuring HTTPRoute resources to perform dynamic request routing."
 +++
 
 ## Prerequisites
@@ -12,15 +12,15 @@ the [Installing Linkerd Guide](../install/) if you haven't already done this
 You also need to have the [Helm](https://helm.sh/docs/intro/quickstart/) CLI
 installed.
 
-## HTTPRoute for Header-Based Routing
+## HTTPRoute for Dynamic Request Routing
 
-With header-based routing, you can route HTTP traffic based on the contents of
-request headers. This can be useful for performing things like A/B testing and
-many other strategies for traffic management.
+With dynamic request routing, you can route HTTP traffic based on the contents
+of request headers. This can be useful for performing things like A/B testing
+and many other strategies for traffic management.
 
 In this tutorial, we'll make use of the
-[podinfo](https://github.com/stefanprodan/podinfo) project to showcase
-header-based routing, by deploying in the cluster two backend and one frontend
+[podinfo](https://github.com/stefanprodan/podinfo) project to showcase dynamic
+request routing, by deploying in the cluster two backend and one frontend
 podinfo pods. Traffic will flow to just one backend, and then we'll switch
 traffic to the other one just by adding a header to the frontend requests.
 
