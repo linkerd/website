@@ -23,7 +23,13 @@ interface) onto your local machine. Using this CLI, you'll then install the
 *control plane* onto your Kubernetes cluster. Finally, you'll "mesh" one or
 more of your own services by adding Linkerd's *data plane* to them.
 
-{{< trylpt >}}
+{{< note >}}
+This page contains quick start instructions intended for non-production
+installations. For production-oriented configurations, we suggest alternative
+approaches, such as the [Linkerd Production
+Toolkit](https://buoyant.io/linkerd/getting-started/) by Buoyant, which includes
+continuous monitoring, vulnerability alerts, and upgrade assistance for Linkerd.
+{{< /note >}}
 
 ## Step 0: Setup
 
