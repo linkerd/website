@@ -17,8 +17,8 @@ determined to have returned to normal.
 The Linkerd proxy is capable of performing endpoint-level circuit breaking on
 HTTP requests using a configurable failure accrual strategy. This means that the
 Linkerd proxy performs circuit breaking at the level of individual endpoints
-in a load balancer (i.e., each Pod in a given Service), and failures are tracked
-at the level of HTTP response status codes.
+in a [load balancer](../../features/load-balancing/) (i.e., each Pod in a given
+Service), and failures are tracked at the level of HTTP response status codes.
 
 Circuit breaking is a client-side behavior, and is therefore performed by the
 outbound side of the Linkerd proxy.[^1] Outbound proxies implement circuit
