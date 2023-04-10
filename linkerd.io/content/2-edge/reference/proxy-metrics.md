@@ -229,10 +229,6 @@ connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):
 * `classification`: `success` if the connection terminated cleanly, `failure` if
   the connection closed due to a connection failure.
 
-[prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
-[pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
-[ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
-
 ## Identity Metrics
 
 * `identity_cert_expiration_timestamp_seconds`: A gauge of the time when the
@@ -280,3 +276,7 @@ following labels:
   Endpoints may be "pending" when a connection is being established (or
   reestablished), or when the endpoint has been made unavailable by failure
   accrual.
+
+[prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
+[pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
+[ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
