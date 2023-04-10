@@ -10,6 +10,9 @@ instead routing that request to other replicas in the Service.
 In this tutoral, we'll see how to enable circuit breaking on a Service to
 improve client success rate when a backend replica is unhealthy.
 
+See the [reference documentation](../../reference/circuit-breaking/) for more
+details on how Linkerd implements circuit breaking.
+
 {{< trylpt >}}
 
 ## Prerequisites
@@ -161,12 +164,14 @@ traffic to the `bad` pod.
 
 ## Breaking the circuit
 
-Linkerd supports a type of circuit breaking called _consecutive failure accrual_.
+Linkerd supports a type of circuit breaking called [_consecutive failure
+accrual_](../../reference/circuit-breaking/#consecutive-failures).
 This works by tracking consecutive failures from each endpoint in Linkerd's
 internal load balancer. If there are ever too many failures in a row, that
 endpoint is temporarily ignored and Linkerd will only load balance among the
-remaining endpoints. After a backoff period, the endpoint is re-introduced so
-that we can determine if it has become healthy.
+remaining endpoints. After a [backoff
+period](../../reference/circuit-breaking/#probation-and-backoffs), the endpoint
+is re-introduced so that we can determine if it has become healthy.
 
 Let's enable consecutive failure accrual on the `bb` Service by adding an
 annotation:
@@ -261,3 +266,7 @@ parameters has a default, but can be manually configured using annotations:
     You are unlikely to need to tune this but might consider increasing it if
     you notice many clients are sending requests to a circuit broken endpoint
     at the same time, leading to spiky traffic patterns.
+
+See the [reference
+documentation](../../reference/circuit-breaking/#configuring-failure-accrual)
+for details on failure accrual configuration.
