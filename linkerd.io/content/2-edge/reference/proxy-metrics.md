@@ -229,10 +229,6 @@ connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):
 * `classification`: `success` if the connection terminated cleanly, `failure` if
   the connection closed due to a connection failure.
 
-[prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
-[pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
-[ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
-
 ## Identity Metrics
 
 * `identity_cert_expiration_timestamp_seconds`: A gauge of the time when the
@@ -240,3 +236,47 @@ connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):
   epoch).
 * `identity_cert_refresh_count`: A counter of the total number of times the
   proxy's mTLS identity certificate has been refreshed by the Identity service.
+
+## Outbound `xRoute` Metrics
+
+When performing policy-based routing, proxies may dispatch requests through
+per-route backend configurations. In order to record how routing rules
+apply and how backend distributions are applied, the outbound proxy records the
+following metrics:
+
+* `outbound_http_route_backend_requests_total`: A counter of the total number of
+  outbound HTTP requests dispatched to a route-backend.
+* `outbound_grpc_route_backend_requests_total`: A counter of the total number of
+  outbound gRPC requests dispatched to a route-backend.
+* `outbound_http_balancer_endpoints`: A gauge of the number of endpoints in an
+  outbound load balancer.
+
+### Labels
+
+Each of these metrics has the following common labels, which describe the
+Kubernetes resources to which traffic is routed by the proxy:
+
+* `parent_group`, `parent_kind`, `parent_name`, and `parent_namespace` reference
+  the parent resource through which the proxy discovered the route binding.
+  The parent resource of an HTTPRoute is generally a Service.
+* `route_group`, `route_kind`, `route_name`, and `route_namespace` reference the
+  route resource through which the proxy discovered the route binding. This will
+  either reference an HTTPRoute resource or a default (synthesized) route.
+* `backend_group`, `backend_kind`, `backend_name`, and `backend_namespace`
+  reference the backend resource to which which the proxy routed the request.
+  This will always be a Service.
+
+In addition, the `outbound_http_balancer_endpoints` gauge metric adds the
+following labels:
+
+* `endpoint_state`: Either "ready" if the endpoint is available to have requests
+  routed to it by the load balancer, or "pending" if the endpoint is currently
+  unavailable.
+
+  Endpoints may be "pending" when a connection is being established (or
+  reestablished), or when the endpoint has been made unavailable by failure
+  accrual.
+
+[prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
+[pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
+[ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
