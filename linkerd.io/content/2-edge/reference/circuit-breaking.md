@@ -30,6 +30,10 @@ all endpoints in a load balancer are unavailable, requests may be failed with
 distribution with multiple backends, the entire backend Service will be
 considered unavailable and a different backend may be selected.
 
+The [`outbound_http_balancer_endpoints` gauge metric][metric] reports the number
+of "ready" and "pending" endpoints in a load balancer, with the "pending" number
+including endpoints made unavailable by failure accrual.
+
 ## Failure Accrual Policies
 
 A _failure accrual policy_ determines how failures are tracked for endpoints,
@@ -121,3 +125,4 @@ configure parameters for the consecutive-failures failure accrual policy:
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
 [exp-backoff]:
     https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+[metric]: ../proxy-metrics/#outbound-xroute-metrics
