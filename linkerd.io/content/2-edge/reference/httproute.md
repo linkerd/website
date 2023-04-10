@@ -27,7 +27,7 @@ on that Server.
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
-request routing](../../tasks/configuring-dynamic-request-routing).
+request routing](../../tasks/configuring-dynamic-request-routing/).
 
 {{< table >}}
 | field| value |
