@@ -7,6 +7,8 @@
 {{ $data = (index site.Data "cli-2-11").CLIReference }}
 {{ else if eq $docsVersion "2.12" }}
 {{ $data = (index site.Data "cli-2-12").CLIReference }}
+{{ else if eq $docsVersion "2.13" }}
+{{ $data = (index site.Data "cli-2-13").CLIReference }}
 {{ end }}
 {{ range where $data "Name" (.Get 0) }}
 {{ if .Example }}
