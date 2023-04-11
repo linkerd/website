@@ -8,9 +8,12 @@ aliases = [
 +++
 
 Linkerd provides a powerful tool called `tap` which allows users
-to introspect live traffic in real time. While powerful, this feature can
-expose sensitive data such as request and response headers. Access to `tap` is
-controlled using [role-based access control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
+to introspect live traffic in real time. While powerful, this feature can 
+potentially expose sensitive data such as request and response headers, which may 
+contain confidential information. To mitigate this risk, Linkerd has a configuration 
+field called `tap.ignoreHeaders` which can be used to exclude specific headers from 
+being captures by `tap`. Access to `tap` is controlled using 
+[role-based access control (RBAC)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
 This page illustrates best practices to enable this introspection in a secure
 way.
 
