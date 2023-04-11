@@ -207,7 +207,7 @@ need help, or have questions, feel free to reach out via one of the following
 channels:
 
 - The [Linkerd slack](http://slack.linkerd.io/)
-- The [Linkerd discourse](https://discourse.linkerd.io/)
+- The [Linkerd Support Forum](https://linkerd.buoyant.io/)
 - Email us directly at support@buoyant.io
 
 ## Acknowledgments

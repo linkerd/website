@@ -118,8 +118,6 @@ kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/linkerd-examples/ma
 
 Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can test requests to the `hello` and `world` services as well as external services running outside of Kubernetes.
 
-(Note that the examples in these blog posts assume k8s is running on GKE (e.g. external loadbalancer IPs are available, no CNI plugins are being used). Slight modifications may be needed for other environments—see our [Flavors of Kubernetes help page](https://discourse.linkerd.io/t/flavors-of-kubernetes/53) for environments like Minikube or CNI configurations with Calico/Weave.)
-
 ```bash
 L5D_INGRESS_LB=$(kubectl get svc l5d -o jsonpath="{.status.loadBalancer.ingress[0].*}")
 ```
@@ -153,6 +151,6 @@ In the above configuration, we assume that the Linkerd DaemonSet pods are able t
 
 By using Linkerd for egress, external services are able to share the same benefits that services running inside of Kubernetes get from the Linkerd service mesh. These include adaptive load balancing, circuit breaking, observability, dynamic routing, and TLS initiation. Most importantly, Linkerd gives you a uniform, consistent model of request handling and naming that’s independent of whether those requests are destined for internal services, or for external, third-party APIs.
 
-If you have any questions about using Linkerd for egress, please come ask on [Discourse](https://discourse.linkerd.io/) or [Slack](https://slack.linkerd.io/)!
+If you have any questions about using Linkerd for egress, please come ask on the [Linkerd Support Forum](https://linkerd.buoyant.io/) or [Slack](https://slack.linkerd.io/)!
 
 [part-i]: {{< ref "a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}} [part-ii]: {{< ref "a-service-mesh-for-kubernetes-part-ii-pods-are-great-until-theyre-not" >}} [part-iii]: {{< ref "a-service-mesh-for-kubernetes-part-iii-encrypting-all-the-things" >}} [part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}} [part-v]: {{< ref "a-service-mesh-for-kubernetes-part-v-dogfood-environments-ingress-and-edge-routing" >}} [part-vi]: {{< ref "a-service-mesh-for-kubernetes-part-vi-staging-microservices-without-the-tears" >}} [part-vii]: {{< ref "a-service-mesh-for-kubernetes-part-vii-distributed-tracing-made-easy" >}} [part-viii]: {{< ref "a-service-mesh-for-kubernetes-part-viii-linkerd-as-an-ingress-controller" >}} [part-ix]: {{< ref "a-service-mesh-for-kubernetes-part-ix-grpc-for-fun-and-profit" >}} [part-x]: {{< ref "a-service-mesh-for-kubernetes-part-x-the-service-mesh-api" >}} [part-xi]: {{< ref "a-service-mesh-for-kubernetes-part-xi-egress" >}}

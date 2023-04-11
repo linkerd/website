@@ -264,9 +264,7 @@ $ earth (10.0.1.5)!
 
 Linkerd provides a ton of benefits as an edge router. In addition to the dynamic routing and TLS termination described in this post, it also [pools connections](https://en.wikipedia.org/wiki/Connection_pool), [load balances dynamically](/2016/03/16/beyond-round-robin-load-balancing-for-latency/) , [enables circuit breaking](/2017/01/14/making-microservices-more-resilient-with-circuit-breaking/) , and supports [distributed tracing][part-vii]. Using the Linkerd ingress controller and the [Kubernetes configuration](https://raw.githubusercontent.com/linkerd/linkerd-examples/master/k8s-daemonset/k8s/linkerd-ingress-controller.yml) referenced in this post, you gain access to all these features in an easy to use, Kubernetes-native approach. Best of all, this method works seamlessly with the rest of the service mesh, allowing for operation, visibility, and high availability in virtually any cloud architecture.
 
-Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
-
-The [ingress identifier is new](https://github.com/linkerd/linkerd/pull/1116), so we’d love to get your thoughts on what features you want from an ingress controller. You can find us in the [Linkerd community Slack](https://slack.linkerd.io/) or on the [linkerd discourse](https://discourse.linkerd.io/).
+The [ingress identifier is new](https://github.com/linkerd/linkerd/pull/1116), so we’d love to get your thoughts on what features you want from an ingress controller. You can find us in the [Linkerd community Slack](https://slack.linkerd.io/) or on the [Linkerd Support Forum](https://linkerd.buoyant.io/).
 
 ### ACKNOWLEDGEMENTS
 
