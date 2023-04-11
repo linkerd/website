@@ -147,7 +147,7 @@ routers:
 
 Deploying linkerd as a Kubernetes DaemonSet gives us the best of both worlds—it allows us to accomplish the full set of goals of a service mesh (such as transparent TLS, protocol upgrades, latency-aware load balancing, etc), while scaling linkerd instances per host rather than per pod.
 
-For a full, working example, see the [previous blog post][part-i], or download our [example app](https://github.com/linkerd/linkerd-examples/tree/master/k8s-daemonset). And for help with this configuration or anything else about linkerd, feel free to drop into our very active [Slack](http://slack.linkerd.io/?__hstc=9342122.76ce13dbfb256ee6981b45631b434a7a.1497486135169.1498849007669.1499118552444.5&__hssc=9342122.14.1499118552444&__hsfp=188505984) or post a topic on [linkerd discourse](https://discourse.linkerd.io/?__hstc=9342122.76ce13dbfb256ee6981b45631b434a7a.1497486135169.1498849007669.1499118552444.5&__hssc=9342122.14.1499118552444&__hsfp=188505984).
+For a full, working example, see the [previous blog post][part-i], or download our [example app](https://github.com/linkerd/linkerd-examples/tree/master/k8s-daemonset). And for help with this configuration or anything else about linkerd, feel free to drop into our very active [Slack](http://slack.linkerd.io/?__hstc=9342122.76ce13dbfb256ee6981b45631b434a7a.1497486135169.1498849007669.1499118552444.5&__hssc=9342122.14.1499118552444&__hsfp=188505984) or post a topic on the [Linkerd Support Forum](https://linkerd.buoyant.io/).
 
 ## Acknowledgments
 

@@ -15,7 +15,7 @@ IgnoreURLs:
   - https://monkey.org/*
   - https://svn.apache.org/*
   - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
-  - https://discourse.linkerd.io
+  - https://linkerd.buoyant.io
   - https://github.com/*
   - https://www.man7.org/*
   - https://offerup.com/

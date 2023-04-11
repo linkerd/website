@@ -113,6 +113,6 @@ Dtabs are an incredibly powerful system that provide fine-grained control over t
 
 ## Want more?
 
-This is just the beginning, and we have some very big plans for Linkerd-tcp. Want to get involved? [Linkerd-tcp is on Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp, Dtabs, or anything else about the Linkerd service mesh, feel free to stop by the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic on [Linkerd discourse](https://discourse.linkerd.io/)!
+This is just the beginning, and we have some very big plans for Linkerd-tcp. Want to get involved? [Linkerd-tcp is on Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp, Dtabs, or anything else about the Linkerd service mesh, feel free to stop by the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic on the [Linkerd Support Forum](https://linkerd.buoyant.io/)!
 
 [part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}

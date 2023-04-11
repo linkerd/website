@@ -98,7 +98,7 @@ For more information on configuration options available in Linkerd, have a look 
 
 In this example, we’ve seen how Linkerd can improve system throughput in the presence of failing and slow components, even though Linkerd itself adds a small amount of latency to each request. In our [experience operating large-scale systems]({{< relref "linkerd-twitter-style-operability-for-microservices" >}}), this test environment demonstrates the types of performance issues and incidents that we have seen in production. A single request from the outside can hit 10s or even 100s of services, each having 10s or 100s of instances, any of which may be slow or down. Setting up Linkerd as your service mesh can help ensure latency stays low and success rate stays high in the face of inconsistent performance and partial failure in your distributed systems.
 
-If you have any questions about this post, Linkerd, or distributed systems in general, feel free to stop by our [Linkerd community Slack](http://slack.linkerd.io/), post a topic on [Linkerd discourse](https://discourse.linkerd.io/), or [contact us directly](https://linkerd.io/overview/help/).
+If you have any questions about this post, Linkerd, or distributed systems in general, feel free to stop by our [Linkerd community Slack](http://slack.linkerd.io/), post a topic on the [Linkerd Support Forum](https://linkerd.buoyant.io/), or [contact us directly](https://linkerd.io/overview/help/).
 
 ## Acknowledgements
 
