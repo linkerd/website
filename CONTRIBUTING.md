@@ -5,7 +5,7 @@
 ## Getting Help ##
 
 If you have a question about Linkerd or have encountered problems using it,
-start by [asking a question in the forums][discourse] or join us on
+start by [asking a question in the Linkerd Support Forum][forum] or join us on
 [Slack][slack].
 
 ## Developer Certificate of Origin ##
@@ -94,7 +94,8 @@ thought of as being the motivation for your change.
 
 Describe the modifications you've made.
 
-[discourse]: https://discourse.linkerd.io/
+[forum]: https://linkerd.buoyant.io/
 [issue]: https://github.com/linkerd/linkerd/issues/new
 [members]: https://github.com/orgs/linkerd/people
 [slack]: https://slack.linkerd.io/
+

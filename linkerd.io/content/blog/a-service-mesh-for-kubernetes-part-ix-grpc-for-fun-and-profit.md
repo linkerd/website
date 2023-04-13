@@ -78,7 +78,7 @@ Also deploy Linkerd:
 kubectl apply -f https://raw.githubusercontent.com/BuoyantIO/linkerd-examples/master/k8s-daemonset/k8s/linkerd-grpc.yml
 ```
 
-Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can do some test requests! Note that the examples in these blog posts assume k8s is running on GKE (e.g. external loadbalancer IPs are available, no CNI plugins are being used). Slight modifications may be needed for other environments—see our [Flavors of Kubernetes help page](https://discourse.linkerd.io/t/flavors-of-kubernetes/53) for environments like Minikube or CNI configurations with Calico/Weave.
+Once Kubernetes provisions an external LoadBalancer IP for Linkerd, we can do some test requests! Note that the examples in these blog posts assume k8s is running on GKE (e.g. external loadbalancer IPs are available, no CNI plugins are being used). Slight modifications may be needed for other environments, for example Minikube or CNI configurations with Calico/Weave.
 
 We’ll use the helloworld-client provided by the `hello world` [docker image](https://hub.docker.com/r/buoyantio/helloworld/)in order to send test gRPC requests to our `hello world` service:
 
@@ -161,8 +161,6 @@ Delegation to `world` is similar, however we’ve decided to version the `wor
 In this article, we’ve seen how to use Linkerd as a service mesh for gRPC requests, adding latency-aware load balancing, circuit breaking, and request-level routing to gRPC apps. Linkerd and gRPC are a great combination, especially as gRPC’s HTTP/2 underpinnings provide it with powerful mechanisms like multiplexed streaming, back pressure, and cancellation, which Linkerd can take full advantage of. Because gRPC includes routing information in the request, it’s a natural fit for Linkerd, and makes it very easy to set up Linkerd to route gRPC requests. For more on Linkerd’s roadmap around gRPC, see [Oliver’s blog post on the topic]({{< ref "http2-grpc-and-linkerd" >}}).
 
 Finally, for a more advanced example of configuring gRPC services, take a look at our [Gob microservice app](https://github.com/BuoyantIO/linkerd-examples/tree/master/gob). In that example, we additionally deploy [Namerd](https://github.com/linkerd/linkerd/tree/master/namerd), which we use to manage our routing rules centrally, and update routing rules without redeploying Linkerd. This lets us to do things like canarying and blue green deploys between different versions of a service.
-
-Note: there are a myriad of ways to deploy Kubernetes and different environments support different features. Learn more about deployment differences [here](https://discourse.linkerd.io/t/flavors-of-kubernetes).
 
 For more information on Linkerd, gRPC, and HTTP/2 head to the [Linkerd gRPC documentation](https://linkerd.io/features/grpc/) as well as our [config documentation for HTTP/2](https://linkerd.io/config/1.0.0/linkerd/index.html#http-2-protocol).
 

@@ -46,4 +46,4 @@ Finally, we’d like to thank another first-time Linkerd contributor, Robert Pan
 
 ## The Linkerd Community is Amazing
 
-As always, we’re humbled and gratified to have such a strong open source community around Linkerd. Thanks again to Robert, Carlos, Zack, Steve, Chris, Matt, and Sergey. For a first-hand view into just how helpful the community around Linkerd can be, please join us in the [Linkerd Slack](http://slack.linkerd.io) or on the Linkerd Community [Discourse forums](https://discourse.linkerd.io/)!
+As always, we’re humbled and gratified to have such a strong open source community around Linkerd. Thanks again to Robert, Carlos, Zack, Steve, Chris, Matt, and Sergey. For a first-hand view into just how helpful the community around Linkerd can be, please join us in the [Linkerd Slack](http://slack.linkerd.io) or on the [Linkerd Support Forum](https://linkerd.buoyant.io/)!
