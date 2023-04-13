@@ -32,7 +32,7 @@ your user(s) to perform Tap actions.
 
 {{< note >}}
 If you are on GKE, skip to the [GKE section below](#gke).
-{{< /note >}}code
+{{< /note >}}
 
 ### Check for Tap access
 
