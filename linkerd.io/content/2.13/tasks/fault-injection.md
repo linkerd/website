@@ -3,12 +3,10 @@ title = "Injecting Faults"
 description = "Practice chaos engineering by injecting faults into services with Linkerd."
 +++
 
-It is easy to inject failures into applications by using the [Traffic Split
-API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
-[Service Mesh Interface](https://smi-spec.io/). TrafficSplit allows you to
-redirect a percentage of traffic to a specific backend. This backend is
-completely flexible and can return whatever responses you want - 500s, timeouts
-or even crazy payloads.
+It is easy to inject failures into applications by using the `HTTPRoute`
+resource to redirect a percentage of traffic to a specific backend. This backend
+is completely flexible and can return whatever responses you want - 500s,
+timeouts or even crazy payloads.
 
 The [books demo](../books/) is a great way to show off this behavior. The
 overall topology looks like:
@@ -29,8 +27,6 @@ To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
   [Installing Linkerd Guide](../install/).
-- Linkerd-SMI. If you haven't installed this yet, follow the
-  [Linkerd-SMI guide](../linkerd-smi/).
 
 ## Setup the service
 
@@ -142,24 +138,30 @@ EOF
 
 With booksapp and NGINX running, it is now time to partially split the traffic
 between an existing backend, `books`, and the newly created
-`error-injector`. This is done by adding a
-[TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
-configuration to your cluster:
+`error-injector`. This is done by adding an
+[HTTPRoute](../../reference/httproute/) configuration to your cluster:
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: split.smi-spec.io/v1alpha1
-kind: TrafficSplit
+apiVersion: policy.linkerd.io/v1beta2
+kind: HTTPRoute
 metadata:
   name: error-split
   namespace: booksapp
 spec:
-  service: books
-  backends:
-  - service: books
-    weight: 900m
-  - service: error-injector
-    weight: 100m
+  parentRefs:
+    - name: books
+      kind: Service
+      group: core
+      port: 7002
+  rules:
+    - backendRefs:
+      - name: books
+        port: 7002
+        weight: 90
+      - name: error-injector
+        port: 8080
+        weight: 10
 EOF
 ```
 
@@ -169,27 +171,21 @@ what this looks like by running `stat` and filtering explicitly to just the
 requests from `webapp`:
 
 ```bash
-linkerd viz -n booksapp routes deploy/webapp --to service/books
+linkerd viz stat -n booksapp deploy --from deploy/webapp
+NAME             MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
+authors             1/1    98.15%   4.5rps           3ms          36ms          39ms          3
+books               1/1   100.00%   6.7rps           5ms          27ms          67ms          6
+error-injector      1/1     0.00%   0.7rps           1ms           1ms           1ms          3
 ```
 
-Unlike the previous `stat` command which only looks at the requests received by
-servers, this `routes` command filters to all the requests being issued by
-`webapp` destined for the `books` service itself. The output should show a 90%
-success rate:
+We can also look at the success rate of the `webapp` overall to see the effects
+of the error injector. The success rate should be approximately 90%:
 
 ```bash
-ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-[DEFAULT]     books    90.08%   2.0rps           5ms          69ms          94ms
+linkerd viz stat -n booksapp deploy/webapp
+NAME     MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
+webapp      3/3    88.42%   9.5rps          14ms          37ms          75ms         10
 ```
-
-{{< note >}}
-In this instance, you are looking at the *service* instead of the deployment. If
-you were to run this command and look at `deploy/books`, the success rate would
-still be 100%. The reason for this is that `error-injector` is a completely
-separate deployment and traffic is being shifted at the service level. The
-requests never reach the `books` pods and are instead rerouted to the error
-injector's pods.
-{{< /note >}}
 
 ## Cleanup
 
