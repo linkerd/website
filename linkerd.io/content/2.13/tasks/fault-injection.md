@@ -3,10 +3,10 @@ title = "Injecting Faults"
 description = "Practice chaos engineering by injecting faults into services with Linkerd."
 +++
 
-It is easy to inject failures into applications by using the `HTTPRoute`
-resource to redirect a percentage of traffic to a specific backend. This backend
-is completely flexible and can return whatever responses you want - 500s,
-timeouts or even crazy payloads.
+It is easy to inject failures into applications by using the
+[HTTPRoute](../../reference/httproute/) resource to redirect a percentage of
+traffic to a specific backend. This backend is completely flexible and can
+return whatever responses you want - 500s, timeouts or even crazy payloads.
 
 The [books demo](../books/) is a great way to show off this behavior. The
 overall topology looks like:
@@ -142,7 +142,7 @@ between an existing backend, `books`, and the newly created
 [HTTPRoute](../../reference/httproute/) configuration to your cluster:
 
 ```bash
-kubectl apply -f - <<EOF
+cat <<EOF | kubectl apply -f -
 apiVersion: policy.linkerd.io/v1beta2
 kind: HTTPRoute
 metadata:
