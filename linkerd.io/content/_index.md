@@ -83,5 +83,11 @@ companies:
 foundation_member_banner:
   title: Linkerd is a CNCF graduated project
   image: "/uploads/CNCF_Alternate_Pantone.png"
+cta_bouyant:
+  title: Providing next-generation network security, reliability, and observability
+  subtitle: Buoyant created Linkerd to help organizations add security, observability, and reliability to Kubernetes, without the complexity. Linkerd is CNCF-graduated and 100% open source.
+  image: "/uploads/bouyant-logo-blue.png"
+  caption: "Learn more about Bouyant"
+  url: "https://buoyant.io/"
 
 ---

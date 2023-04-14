@@ -4,6 +4,7 @@
 
 {{ define "main" }}
 {{ partial "homepage/top-hero.html" .Params.top_hero  }}
+{{ partial "homepage/cta-bouyant.html" .Params.cta_bouyant}}
 {{ partial "homepage/features-list.html" .Params.features_list }}
 {{ partial "homepage/stats-list.html" . }}
 {{ partial "homepage/image-list.html"  (dict "mentions" .Params.companies "title" .Params.companies_title "backgroundColor" "has-background-light-blue") }}
