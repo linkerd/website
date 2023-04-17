@@ -83,9 +83,9 @@ url = "/community/heroes/"
 weight = 5
 parent = "community"
 [[menu.top]]
-identifier = "community-anchors"
-name = "Community Anchors"
-url = "/community/anchor/"
+identifier = "buoyants-linkerd-forum"
+name = "Buoyant's Linkerd Forum"
+url = "https://linkerd.buoyant.io"
 weight = 6
 parent = "community"
 [[menu.top]]
