@@ -20,11 +20,11 @@ to.
 {{< /note >}}
 
 Linkerd supports two different ways to configure traffic shifting: you can
-use the [Linkerd SMI extension](../linkerd-smi/) and
+use the [Linkerd SMI extension](../../tasks/linkerd-smi/) and
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
 resources, or you can use [HTTPRoute](../../reference/httproute/) resources which
 Linkerd natively supports. While certain integrations such as
-[Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
+[Flagger](../../tasks/flagger/) rely on the SMI and `TrafficSplit` approach, using
 `HTTPRoute` is the preferred method going forward.
 
 Check out some examples of what you can do with traffic splitting:
