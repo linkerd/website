@@ -6,14 +6,14 @@ description = "Dynamically split and shift traffic between backends"
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
 implement A/B experiments, red/green deploys, canary rollouts,
-[fault injection](../fault-injection) and more.
+[fault injection](../fault-injection/) and more.
 
 Linkerd supports two different ways to configure traffic shifting: you can
-use the [Linkerd SMI extension](../linkerd-smi) and
-[TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha1/traffic-split.md)
-resources, or you can use [HTTPRoute](../../reference/httproute) resources which
+use the [Linkerd SMI extension](../linkerd-smi/) and
+[TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha1/traffic-split.md/)
+resources, or you can use [HTTPRoute](../../reference/httproute/) resources which
 Linkerd natively supports. While certain integrations such as
-[Flagger](../flagger) rely on the SMI and `TrafficSplit` approach, using
+[Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
 `HTTPRoute` is the preferred method going forward.
 
 {{< trylpt >}}
