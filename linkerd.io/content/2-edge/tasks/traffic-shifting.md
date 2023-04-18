@@ -10,7 +10,7 @@ implement A/B experiments, red/green deploys, canary rollouts,
 
 Linkerd supports two different ways to configure traffic shifting: you can
 use the [Linkerd SMI extension](../linkerd-smi/) and
-[TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha1/traffic-split.md/)
+[TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
 resources, or you can use [HTTPRoute](../../reference/httproute/) resources which
 Linkerd natively supports. While certain integrations such as
 [Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
