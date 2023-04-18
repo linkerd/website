@@ -83,6 +83,14 @@ used to configure the Linkerd proxy's CPU usage. However, depending on how the
 kubelet is configured, using Kubernetes resource limits rather than the
 `proxy-cpu-limit` annotation may not be ideal.
 
+{{< warning >}}
+When the environment variable configured by the `proxy-cpu-limit` annotation is
+unset, the proxy will run only a single worker thread. Therefore, a
+`proxy-cpu-limit` annotation should always be added to set an upper bound on the
+number of CPU cores used by the proxy, even when Kubernetes CPU limits are also
+in use.
+{{< /warning >}}
+
 The kubelet uses one of two mechanisms for enforcing pod CPU limits. This is
 determined by the
 [`--cpu-manager-policy` kubelet option](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#configuration).
@@ -94,23 +102,15 @@ CPU limits. This means that the Linux kernel is configured to limit the amount
 of time threads belonging to a given process are scheduled. Alternatively, the
 CPU manager policy may be set to
 [`static`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
-In this case, the kubelet will use Linux `cgroup`s to enforce CPU limits for
+In this case, the kubelet willTestNewValues use Linux `cgroup`s to enforce CPU limits for
 containers which meet certain criteria.
-
-When the environment variable configured by the `proxy-cpu-limit` annotation is
-unset, the proxy will run a number of worker threads equal to the number of CPU
-cores available. This means that with the default `none` CPU manager policy, the
-proxy may spawn a large number of worker threads, but the Linux kernel will
-limit how often they are scheduled. This is less efficient than simply reducing
-the number of worker threads, as `proxy-cpu-limit` does: more time is spent on
-context switches, and each worker thread will run less frequently, potentially
-impacting latency.
 
 On the other hand, using
 [cgroup cpusets](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt)
 will limit the number of CPU cores available to the process. In essence, it will
 appear to the proxy that the system has fewer CPU cores than it actually does.
-This will result in similar behavior to the `proxy-cpu-limit` annotation.
+If this value is lower than the value of the `proxy-cpu-limit` annotation, the
+proxy will use the number of CPU cores determined by the cgroup limit.
 
 However, it's worth noting that in order for this mechanism to be used, certain
 criteria must be met:
@@ -121,11 +121,7 @@ criteria must be met:
   This means that all containers in the pod must have both a limit and a request
   for memory and CPU, and the limit for each must have the same value as the
   request.
-- The CPU limit and CPU request must be an integer greater than or equal to 1.
-
-If you're not sure whether these criteria will all be met, it's best to use the
-`proxy-cpu-limit` annotation in addition to any Kubernetes CPU limits and
-requests.
+- The CPU limit and CPU request must be an integer greater than or
 
 ## Using Helm
 
