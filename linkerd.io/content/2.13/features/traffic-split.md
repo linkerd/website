@@ -19,20 +19,16 @@ happens to be a pod IP address then it cannot tell which service the pod belongs
 to.
 {{< /note >}}
 
-Linkerd exposes this functionality via the
-[Service Mesh Interface](https://smi-spec.io/) (SMI)
-[TrafficSplit API](https://github.com/servicemeshinterface/smi-spec/tree/master/apis/traffic-split).
-To use this feature, you create a Kubernetes resource as described in the
-TrafficSplit spec, and Linkerd takes care of the rest. You can see step by step
-documentation on our
-[Getting started with Linkerd SMI extension](../../tasks/linkerd-smi/) page.
-
-By combining traffic splitting with Linkerd's metrics, it is possible to
-accomplish even more powerful deployment techniques that automatically take into
-account the success rate and latency of old and new versions. See the
-[Flagger](https://flagger.app/) project for one example of this.
+Linkerd supports two different ways to configure traffic shifting: you can
+use the [Linkerd SMI extension](../linkerd-smi/) and
+[TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
+resources, or you can use [HTTPRoute](../../reference/httproute/) resources which
+Linkerd natively supports. While certain integrations such as
+[Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
+`HTTPRoute` is the preferred method going forward.
 
 Check out some examples of what you can do with traffic splitting:
 
 - [Canary Releases](../../tasks/canary-release/)
 - [Fault Injection](../../tasks/fault-injection/)
+- [Traffic Shifting](../../tasks/traffic-shifting/)
