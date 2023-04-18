@@ -102,7 +102,7 @@ CPU limits. This means that the Linux kernel is configured to limit the amount
 of time threads belonging to a given process are scheduled. Alternatively, the
 CPU manager policy may be set to
 [`static`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
-In this case, the kubelet willTestNewValues use Linux `cgroup`s to enforce CPU limits for
+In this case, the kubelet use Linux `cgroup`s to enforce CPU limits for
 containers which meet certain criteria.
 
 On the other hand, using
