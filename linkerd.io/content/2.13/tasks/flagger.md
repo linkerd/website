@@ -1,5 +1,5 @@
 +++
-title = "Automated Canary Releases"
+title = "Progressive Delivery with Flagger"
 description = "Reduce deployment risk by combining Linkerd and Flagger to automate canary releases based on service metrics."
 +++
 
