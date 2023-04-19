@@ -14,16 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '>=1.17.0'
-      - run: go version          
-      - name: Install runme
-        run: |
-          go install github.com/stateful/runme@latest
-      - name: Check runme
-        run: |
-          runme --version
       - id: 'gcloud-auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
@@ -48,27 +38,26 @@ jobs:
       - name: Install Linkerd
         run: |
           curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+
       - name: Add Linkerd to PATH
         run: |
           echo "$PATH:/home/runner/.linkerd2/bin" >> $GITHUB_PATH
 
       - name: Validate Linkerd install
         run: linkerd version
-            
+
       - name: 'Initialize Git submodules'
         run: |
           git submodule update --init
       
-      - name: Start Runme Server
-        run: |
-          runme server --address ${{ vars.RUNME_ADDRESS }} &
-
-      - name: 'Run bats tests'
+      - name: Run Bats Tests
+        uses: stateful/runme-action@v1
+        with:
+          cwd: ${{ env.GITHUB_WORKSPACE }}
+          serverAddress: ${{ vars.RUNME_ADDRESS }}
+          run: npx bats ./tests/runme/getting-started.bats
         env:
           NO_COLOR: true
           FROM_CI: true
           RUNME_SERVER_ADDR: ${{ vars.RUNME_ADDRESS }}
-        shell: sh
-        run: |
-          npx bats $GITHUB_WORKSPACE/tests/runme/getting-started.bats
       
