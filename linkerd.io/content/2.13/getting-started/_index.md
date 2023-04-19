@@ -160,7 +160,7 @@ Before we mesh it, let's take a look at Emojivoto in its natural state.
 We'll do this by forwarding traffic to its `web-svc` service so that we can
 point our browser to it. Forward `web-svc` locally to port 8080 by running:
 
-```bash
+```bash { background=true }
 kubectl -n emojivoto port-forward svc/web-svc 8080:80
 ```
 
@@ -242,7 +242,7 @@ linkerd viz dashboard &
 You should see a screen like this:
 
 {{< fig src="/images/getting-started/viz-empty-dashboard.png"
-    title="The Linkerd dashboard in action" >}}
+title="The Linkerd dashboard in action" >}}
 
 Click around, explore, and have fun! For extra credit, see if you can find the
 live metrics for each Emojivoto component, and determine which one has a partial
@@ -256,19 +256,19 @@ Give yourself a pat on the back.
 What's next? Here are some steps we recommend:
 
 * Learn how to use Linkerd to [debug the errors in
-  Emojivoto](../debugging-an-app/).
+   Emojivoto](../debugging-an-app/).
 * Learn how to [add your own services](../adding-your-service/) to
-  Linkerd without downtime.
+   Linkerd without downtime.
 * Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
-  Jaeger and the multicluster extension.
+   Jaeger and the multicluster extension.
 * Learn more about [Linkerd's architecture](../reference/architecture/)
 * Learn how to set up [automatic control plane mTLS credential
-  rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
-  long-lived clusters.
+   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) for
+   long-lived clusters.
 * Learn how to [restrict access to services using authorization
-  policy](../tasks/restricting-access/).
+   policy](../tasks/restricting-access/).
 * Hop into the `#linkerd` channel on [the Linkerd
-  Slack](https://slack.linkerd.io)
-  and say hi!
+   Slack](https://slack.linkerd.io)
+   and say hi!
 
 Above all else: welcome to the Linkerd community!
