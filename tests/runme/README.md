@@ -44,7 +44,7 @@ Explaining how to configure your cluster is out of scope of this guide, [Learn h
 
 A Kubernetes cluster is created under a Google Cloud project. Let's ensure you have a project name where your Kubernetes cluster is deployed.
 
-```sh
+```sh { interactive=false }
 export PROJECT_NAME=<YOUR PROJECT NAME>
 ```
 
@@ -58,7 +58,7 @@ Set the project credentials of your Kubernetes cluster
 
 Specify the compute zone for the cluster
 
-```sh
+```sh { interactive=false }
 export CLUSTER_ZONE="us-central1-c"
 ```
 
@@ -106,13 +106,9 @@ git submodule update --init
 Now you have bats properly installed, let's run the [Linkerd getting started guide](../../linkerd.io//content/2.12/getting-started/_index.md) tests we have defined at [getting-started.bats](./getting-started.bats). Before do that, let's monitor the kube cluster's namespaces.
 
 ```sh { name=watch-linkerd background=true closeTerminalOnSuccess=true interactive=true }
-watch -n 1 kubectl get pods -n linkerd
+kubectl get pods -A -w
 ```
 
-```sh { background=true }
-watch -n 1 kubectl get pods -n emojivoto
-```
-
-```sh { name= closeTerminalOnSuccess=false interactive=false }
+```sh { name= closeTerminalOnSuccess=true interactive=true }
 npx bats getting-started.bats
 ```
