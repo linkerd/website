@@ -101,7 +101,7 @@ failure accrual.
 {{< warning >}}
 Circuit breaking is configured by the `OutboundPolicies` proxy API, which is
 **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../../features/service-profiles) is defined for the annotated
+[ServiceProfile](../../features/service-profiles/) is defined for the annotated
 Service, proxies will not perform circuit breaking as long as the ServiceProfile
 exists.
 {{< /warning >}}

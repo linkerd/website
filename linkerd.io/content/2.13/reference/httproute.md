@@ -32,7 +32,7 @@ request routing](../../tasks/configuring-dynamic-request-routing/).
 {{< warning >}}
 Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If the
 [ParentReference](#parentreference) of an HTTPRoute is a Service, and a
-[ServiceProfile](../../features/service-profiles) is also defined for that
+[ServiceProfile](../../features/service-profiles/) is also defined for that
 Service, proxies will use the ServiceProfile configuration, rather than the
 HTTPRoute configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
