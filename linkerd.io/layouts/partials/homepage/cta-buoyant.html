@@ -2,13 +2,13 @@
   <div class="container pt-6 pb-6 cta-bouyant">
     <div class="container columns">
       <div class="column">
-        <h2 class="title is-size-1 has-text-color cta-bouyant-title">{{ .title }}</h2>
-        <h5 class="subtitle is-size-4 has-text-color cta-bouyant-subtitle">{{ .subtitle }}</h5>
+        <h2 class="title is-size-1 has-text-color cta-buoyant-title">{{ .title }}</h2>
+        <h5 class="subtitle is-size-4 has-text-color cta-buoyant-subtitle">{{ .subtitle }}</h5>
       </div>
     </div>
     <div class="container">
       <div class="has-text-centered pt-4 block-created-by">
-        <p class="has-text-weight-medium has-text-color">Created by</p>
+        <p class="has-text-weight-medium has-text-color">{{ .textcreated }} </p>
         <figure class="image">
           <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" class="" />
         </figure>

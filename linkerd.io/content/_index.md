@@ -87,6 +87,7 @@ cta_buoyant:
   title: Providing next-generation network security, reliability, and observability
   subtitle: Buoyant created Linkerd to help organizations add security, observability, and reliability to Kubernetes, without the complexity. Linkerd is CNCF-graduated and 100% open source.
   image: "/uploads/buoyant-logo-blue.png"
+  textcreated: "Linkerd was created by"
   caption: "Learn more about Buoyant"
   url: "https://buoyant.io/"
 

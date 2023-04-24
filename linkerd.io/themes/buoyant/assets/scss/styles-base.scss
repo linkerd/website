@@ -351,16 +351,16 @@ body {
               background: rgba(1, 133, 253, 0.1);
             }
             &.dark {
+              background: -o-linear-gradient(
+                top,
+                $primary-bright-blue 0%,
+                $secondary-bright-blue 100%
+              );
               background: -webkit-gradient(
                 linear,
                 left top, left bottom,
                 from($primary-bright-blue),
                 to($secondary-bright-blue)
-              );
-              background: -o-linear-gradient(
-                top,
-                $primary-bright-blue 0%,
-                $secondary-bright-blue 100%
               );
               background: linear-gradient(
                 180deg,
@@ -398,16 +398,16 @@ body {
               background: rgba(1, 133, 253, 0.1);
             }
             &.dark {
+              background: -o-linear-gradient(
+                top,
+                $primary-bright-blue 0%,
+                $secondary-bright-blue 100%
+              );
               background: -webkit-gradient(
                 linear,
                 left top, left bottom,
                 from($primary-bright-blue),
                 to($secondary-bright-blue)
-              );
-              background: -o-linear-gradient(
-                top,
-                $primary-bright-blue 0%,
-                $secondary-bright-blue 100%
               );
               background: linear-gradient(
                 180deg,
@@ -1305,7 +1305,7 @@ body {
   cta-bouyant home
 */
 
-.hero-body .cta-bouyant-title{
+.hero-body .cta-buoyant-title{
   margin-bottom: 3rem;
 }
 .hero-body .cta-bouyant-button.is-large{
@@ -1332,11 +1332,11 @@ body {
 }
 
 @media screen and (max-width: 1440px) {
-  .hero-body .cta-bouyant-title{
+  .hero-body .cta-buoyant-title{
     font: 300 1.75rem/1.35em "Roboto" !important;
   }
 
-  .cta-bouyant-subtitle{
+  .cta-buoyant-subtitle{
     font: 300 1.25rem/1.35em "Roboto" !important;
   }
 }
@@ -1345,17 +1345,32 @@ body {
   .hero-body .wrapper.body-header .notification {
     padding-right: 1.5rem;
   }
-  .hero-body .cta-bouyant-title{
+  .hero-body .cta-buoyant-title{
     font: 300 1.5rem/1.35em "Roboto" !important;
     margin-bottom: 2.5rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
   }
-  .cta-bouyant-subtitle{
+  .cta-buoyant-subtitle{
     font: 300 1.125rem/1.35em "Roboto" !important;
   }
   .hero-body {
     overflow: hidden;
   }
+
+  .block-created-by{
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    p {
+      font-weight: 500 !important;
+    }
+    img{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
 }
