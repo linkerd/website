@@ -113,7 +113,7 @@ target port).
 Outbound `HTTPRoute`s are **incompatible with `ServiceProfiles`**. If a
 [ServiceProfile](../../features/service-profiles) is defined for the parent
 Service of an `HTTPRoute`, proxies will use the `ServiceProfile` configuration,
-rather than the `HTTProute` configuration, as long as the `ServiceProfile`
+rather than the `HTTPRoute` configuration, as long as the `ServiceProfile`
 exists.
 {{< /warning >}}
 
