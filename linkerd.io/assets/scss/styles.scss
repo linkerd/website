@@ -42,7 +42,9 @@
         margin-bottom: 0;
         position: relative;
         left: auto;
-        transform: none;
+        -webkit-transform: none;
+            -ms-transform: none;
+                transform: none;
         top: auto;
         opacity: 1;
       }
@@ -74,7 +76,9 @@
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
   background: url('/images/pattern_home_hero.svg');
   background-repeat: no-repeat;
   background-position: center center;
@@ -177,7 +181,9 @@
     }
 
     .media {
-      align-items: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
     }
 
     @include mobile {
@@ -190,11 +196,14 @@
 
 .box {
   .box-link:hover & {
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
   }
   .box-link:active &,
   .box-link:focus & {
-    box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2),
+    -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2),
+      inset 0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.2),
       inset 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
@@ -287,7 +296,8 @@
   .card {
     color: $navy-black;
     border-radius: 4px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 
     .card-image {
       border-radius: 4px 4px 0px 0px;
@@ -448,7 +458,8 @@
         margin: 0px auto 70px 20px !important;
         width: 95%;
         padding-right: 20px;
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
       }
 
       .breadcrumb {
@@ -456,7 +467,10 @@
       }
 
       .toc {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
 
         .columns {
           border-bottom: 1px solid #dbdbdb;
@@ -509,9 +523,13 @@
     position: absolute;
     right: calc(100% + 8px);
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
     background: url("/images/heading-link-icon.svg");
     opacity: 0;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
   }
   &:hover:after {
