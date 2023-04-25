@@ -121,7 +121,7 @@ criteria must be met:
   This means that all containers in the pod must have both a limit and a request
   for memory and CPU, and the limit for each must have the same value as the
   request.
-- The CPU limit and CPU request must be an integer greater than or
+- The CPU limit and CPU request must be an integer greater than or equal to 1.
 
 ## Using Helm
 
