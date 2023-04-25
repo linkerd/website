@@ -16,6 +16,8 @@ an external solution.
 rotated](../manually-rotating-control-plane-tls-credentials/) on
 long-lived clusters.)
 
+{{< trylpt >}}
+
 ## Cert manager
 
 [Cert-manager](https://github.com/jetstack/cert-manager) is a popular project

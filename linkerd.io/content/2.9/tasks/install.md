@@ -13,6 +13,8 @@ Before you can use Linkerd, you'll need to install the
 covers how to accomplish that, as well as common problems that you may
 encounter.
 
+{{< trylpt >}}
+
 Note that the control plane is typically installed by using Linkerd's CLI. See
 [Getting Started](../../getting-started/) for how to install the CLI onto your local
 environment.

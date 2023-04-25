@@ -15,6 +15,8 @@ Emojivoto application on two Kubernetes clusters and simulating a failure in
 one cluster. We will see the failover controller shift traffic to the other
 cluster to ensure the service remains available.
 
+{{< trylpt >}}
+
 ## Prerequisites
 
 You will need two clusters with Linkerd installed and for the clusters to be

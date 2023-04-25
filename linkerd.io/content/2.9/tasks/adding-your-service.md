@@ -90,5 +90,5 @@ For more information on how the inject command works and all of the parameters
 that can be set, see the [`linkerd inject` reference
 page](../../reference/cli/inject/).
 
-For details on how autoinjection works, see the the [proxy injection
+For details on how autoinjection works, see the [proxy injection
 page](../../features/proxy-injection/).

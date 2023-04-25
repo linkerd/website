@@ -23,6 +23,8 @@ This workflow is suitable for most users.  However, if you need these webhook
 certificates to be rotated automatically on a regular basis, it is possible to
 use cert-manager to automatically manage them.
 
+{{< trylpt >}}
+
 ## Install Cert manager
 
 As a first step, [install cert-manager on your

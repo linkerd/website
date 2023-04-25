@@ -29,6 +29,6 @@ In 0.8.4, we started testing Linkerd against known-good gRPC clients and servers
 
 For now, HTTP/2 and gRPC support remain behind the experimental flag. However, production-ready HTTP/2 and gRPC support are on our short term roadmap, and you should expect to see these features continue to improve over the next few releases.
 
-We hope you enjoy this release. For more about HTTP/2 or gRPC with Linkerd, feel free to stop by our [Linkerd community Slack](http://slack.linkerd.io/), ask a question on [Discourse](https://discourse.linkerd.io), or [contact us directly](https://linkerd.io/overview/help/).
+We hope you enjoy this release. For more about HTTP/2 or gRPC with Linkerd, feel free to stop by our [Linkerd community Slack](http://slack.linkerd.io/), ask a question on the [Linkerd Support Forum](https://linkerd.buoyant.io/), or [contact us directly](https://linkerd.io/overview/help/).
 
 —William and the gang at [Buoyant](https://buoyant.io/)

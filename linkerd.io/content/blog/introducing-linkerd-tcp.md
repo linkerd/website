@@ -21,7 +21,7 @@ Enter [Linkerd-tcp](https://github.com/linkerd/linkerd-tcp): a lightweight, ser
 
 If you’re interested in a TCP proxy that:
 
-- can read from the the Kubernetes API (or Consul, etcd, Marathon, ZooKeeper, etc.);
+- can read from the Kubernetes API (or Consul, etcd, Marathon, ZooKeeper, etc.);
 - has excellent TLS support, with (future work!) all the bells and whistles;
 - is highly instrumented and exports directly to Prometheus;
 - can run alongside Linkerd and Namerd;
@@ -113,6 +113,6 @@ Dtabs are an incredibly powerful system that provide fine-grained control over t
 
 ## Want more?
 
-This is just the beginning, and we have some very big plans for Linkerd-tcp. Want to get involved? [Linkerd-tcp is on Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp, Dtabs, or anything else about the Linkerd service mesh, feel free to stop by the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic on [Linkerd discourse](https://discourse.linkerd.io/)!
+This is just the beginning, and we have some very big plans for Linkerd-tcp. Want to get involved? [Linkerd-tcp is on Github](https://github.com/linkerd/linkerd-tcp). And for help with Linkerd-tcp, Dtabs, or anything else about the Linkerd service mesh, feel free to stop by the [Linkerd community Slack](https://slack.linkerd.io/) or post a topic on the [Linkerd Support Forum](https://linkerd.buoyant.io/)!
 
 [part-iv]: {{< ref "a-service-mesh-for-kubernetes-part-iv-continuous-deployment-via-traffic-shifting" >}}

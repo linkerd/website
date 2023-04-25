@@ -19,6 +19,8 @@ at pod creation time. For convenience, the `linkerd inject` command provides an
 adding this annotation to a pre-existing pod will not work. It must be present
 at pod *creation* time.)
 
+{{< trylpt >}}
+
 The debug sidecar image contains
 [`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html), `tcpdump`,
 `lsof`, and `iproute2`. Once installed, it starts automatically logging all

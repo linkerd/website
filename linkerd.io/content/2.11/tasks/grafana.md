@@ -20,6 +20,8 @@ First, you need to install Grafana from a variety of possible sources, and then
 load the suite of Grafana dashboards that have been pre-configured to consume
 the metrics exposed by Linkerd.
 
+{{< trylpt >}}
+
 ## Install Prometheus
 
 Before installing Grafana, make sure you have a working instance of Prometheus

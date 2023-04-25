@@ -21,6 +21,8 @@ In this tutorial, we'll walk you through how to combine Linkerd with
 Linkerd's metrics and traffic splitting together in a control loop,
 allowing for fully-automated, metrics-aware canary deployments.
 
+{{< trylpt >}}
+
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.

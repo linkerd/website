@@ -14,9 +14,15 @@ happyexit() {
   echo "Now run:"
   echo ""
   echo "  linkerd check --pre                     # validate that Linkerd can be installed"
+  echo "  linkerd install --crds | kubectl apply -f - # install the Linkerd CRDs"
   echo "  linkerd install | kubectl apply -f -    # install the control plane into the 'linkerd' namespace"
   echo "  linkerd check                           # validate everything worked!"
-  echo "  linkerd dashboard                       # launch the dashboard"
+  echo ""
+  echo "You can also obtain observability features by installing the viz extension:"
+  echo ""
+  echo "  linkerd viz install | kubectl apply -f -  # install the viz extension into the 'linkerd-viz' namespace"
+  echo "  linkerd viz check                         # validate the extension works!"
+  echo "  linkerd viz dashboard                     # launch the dashboard"
   echo ""
   echo "Looking for more? Visit https://linkerd.io/2/tasks"
   echo ""
@@ -54,6 +60,18 @@ case $OS in
     OS=windows.exe
     ;;
   Darwin)
+    case $arch in
+      x86_64)
+        cli_arch=""
+        ;;
+      arm64)
+        cli_arch=$arch
+        ;;
+      *)
+        echo "There is no linkerd $OS support for $arch. Please open an issue with your platform details."
+        exit 1
+        ;;
+    esac
     ;;
   Linux)
     case $arch in

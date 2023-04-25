@@ -3,16 +3,20 @@
   <nav class="navbar" role="navigation" aria-label="dropdown navigation">
     <div class="navbar-item has-dropdown is-hoverable ">
       <a class="navbar-link">
-        {{ if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") (ne $docsVersion "2.11") (ne $docsVersion "2.12") }}
+        {{ if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") (ne $docsVersion "2.11") (ne $docsVersion "2.12") (ne $docsVersion "2.13") (ne $docsVersion "2-edge") }}
         Linkerd 2.9
         {{ else if eq $docsVersion "2.10"  }}
         Linkerd 2.10
         {{ else if eq $docsVersion "2.11"  }}
         Linkerd 2.11
+        {{ else if eq $docsVersion "2.12"  }}
+        Linkerd 2.12
+        {{ else if eq $docsVersion "2-edge"  }}
+        Linkerd [edge]
         {{ else }}
         {{/* have non-versioned docs pull sidebar from the latest version docs */}}
-        {{ $docsVersion = "2.12" }}
-        Linkerd 2.12
+        {{ $docsVersion = "2.13" }}
+        Linkerd 2.13
         {{ end }}
       </a>
       <div class="navbar-dropdown">
@@ -36,6 +40,9 @@
         </a>
         <a class="navbar-item" href="/2.12/overview/">
           Linkerd 2.12
+        </a>
+        <a class="navbar-item" href="/2.13/overview/">
+          Linkerd 2.13
         </a>
       </div>
     </div>
@@ -110,8 +117,8 @@
       </a>
     </div>
     <div>
-      <a class="" href="https://discourse.linkerd.io" target="_blank">
-        <img style="height:24px;" src="/images/discourse.svg" alt="Discourse">
+      <a class="" href="https://linkerd.buoyant.io" target="_blank">
+        <img style="height:24px; vertical-align: middle;" src="/images/identity/png/transparent_background/2x/forum_dark@2x.png" alt="FORUM">
       </a>
     </div>
   </div>

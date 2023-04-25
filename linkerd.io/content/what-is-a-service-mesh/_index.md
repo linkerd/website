@@ -38,7 +38,7 @@ the application layer. The service mesh is rapidly becoming a standard part of
 the cloud native stack, especially for Kubernetes adopters.
 
 Over the past few years, the service mesh has risen from relative obscurity to
-become a standard component of the cloud native stack. Linkerd ("linkerd-dee"),
+become a standard component of the cloud native stack. Linkerd ("linker-dee"),
 the first service mesh project, was admitted to the Cloud Native Computing
 Foundation in early 2017, [rewritten to use Rust micro-proxies in
 2018](https://www.infoq.com/articles/linkerd-v2-production-adoption/), and [is

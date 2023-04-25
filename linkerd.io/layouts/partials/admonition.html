@@ -1,4 +1,8 @@
-<div class="message is-{{ .type }}" role="alert">
+<div class="message is-{{ .type }}"
+    {{ if .id }}
+      id="{{ .id }}"
+    {{end}}
+    role="alert">
   <div class="message-body">
     <p>
       <i class="fa fa-{{ .icon }}"></i>&nbsp;<strong>{{ .title }}</strong>

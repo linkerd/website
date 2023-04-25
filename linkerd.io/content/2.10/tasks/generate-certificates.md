@@ -20,6 +20,8 @@ algorithm which is the default for `step`. To generate ECDSA P-256 certificates
 with openssl, you can use the `openssl ecparam -name prime256v1` command. In
 this tutorial, we'll walk you through how to to use the `step` CLI to do this.
 
+{{< trylpt >}}
+
 ## Generating the certificates with `step`
 
 ### Trust anchor certificate
