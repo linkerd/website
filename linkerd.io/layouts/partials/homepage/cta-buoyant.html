@@ -4,7 +4,7 @@
       <div class="has-text-centered pt-4 block-created-by">
         <p class="has-text-weight-medium has-text-color">{{ .textcreated }} </p>
         <figure class="image">
-          <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" class="" />
+          <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .caption }}" class="" />
         </figure>
       </div>
     </div>
