@@ -83,5 +83,10 @@ companies:
 foundation_member_banner:
   title: Linkerd is a CNCF graduated project
   image: "/uploads/CNCF_Alternate_Pantone.png"
+cta_buoyant:
+  image: "/uploads/buoyant-logo-blue.png"
+  textcreated: "Linkerd was created by"
+  caption: "Learn more about Buoyant"
+  url: "https://buoyant.io/"
 
 ---
