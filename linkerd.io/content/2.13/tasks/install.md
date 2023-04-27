@@ -46,11 +46,10 @@ clusters](../../reference/cluster-configuration/#private-clusters)
 {{< /note >}}
 
 {{< note >}}
-If installing Linkerd in a cluster that uses an eBPF-based CNI plugin, some
-additional steps may be needed depending on the plugin configuration. When
-plugins replace kube-proxy, they may trigger undefined behavior at the network
-level. Additional instructions are available on the [eBPF CNIs
-page](../../reference/cluster-configuration/#cilium)
+If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
+mode, additional steps may be needed to ensure service discovery works as
+intended. Instrunctions are on the [Cilium cluster
+configuration](../../reference/cluster-configuration/#cilium) page.
 {{< /note >}}
 
 ## Installing with the CLI
