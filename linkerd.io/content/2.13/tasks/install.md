@@ -45,6 +45,14 @@ check out the additional instructions on [GKE private
 clusters](../../reference/cluster-configuration/#private-clusters)
 {{< /note >}}
 
+{{< note >}}
+If installing Linkerd in a cluster that uses an eBPF-based CNI plugin, some
+additional steps may be needed depending on the plugin configuration. When
+plugins replace kube-proxy, they may trigger undefined behavior at the network
+level. Additional instructions are available on the [eBPF CNIs
+page](../../reference/cluster-configuration/#ebpf-cnis)
+{{< /note >}}
+
 ## Installing with the CLI
 
 Once you have a cluster ready, installing Linkerd is as easy as running `linkerd

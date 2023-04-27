@@ -76,6 +76,35 @@ Finally, verify that the firewall is created:
 gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
 
+## eBPF CNIs
+
+When the network is configured through a CNI plugin that replaces kube-proxy
+with an eBPF solution, certain Linkerd features may not work correctly. eBPF-based CNI plugins may assign sockets to service backends directly
+
+When the cluster network is configured through eBPF-based CNI plugins, some
+Linkerd features may not work correctly. In general, certain CNI plugins may be
+configured to replace kube-proxy's routing functionality with an eBPF solution.
+If kube-proxy functionality is replaced, in-cluster service connections
+(East/West traffic) may have their sockets assigned to service backends
+directly, bypassing the intermediate hop to a `ClusterIP` service.
+
+In practice, this clashes with Linkerd's service discovery and can result in
+undefined behavior. Binding the socket directly to a backend during connection
+establishment (i.e bypassing the `ClusterIP`) means that Linkerd will forward
+the traffic directly to a pod. Consequentially, while mTLS and telemetry will
+still function correctly, features such as peak EWMA load balancing, and
+[dynamic request routing](../../tasks/configuring-dynamic-request-routing) may
+not work as expected.
+
+### Cilium
+
+In Cilium, socket-level load balancing can be [turned off for
+pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) even when
+Cilium is configured to replace kube-proxy functionality. To disable service
+resolution through socket load balancing, `--config
+bpf-lb-sock-hostns-only=true` option can be passed to the Cilium CLI, or
+alternatively, `socketLB.hostNamespaceOnly` can be used with Helm.
+
 ## Lifecycle Hook Timeout
 
 Linkerd uses a `postStart` lifecycle hook for all control plane components, and

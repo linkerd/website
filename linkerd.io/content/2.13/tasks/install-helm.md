@@ -37,6 +37,14 @@ commands.
 You need to install two separate charts in succession: first `linkerd-crds` and
 then `linkerd-control-plane`.
 
+{{< note >}}
+If installing Linkerd in a cluster that uses an eBPF-based CNI plugin, some
+additional steps may be needed depending on the plugin configuration. When
+plugins replace kube-proxy, they may trigger undefined behavior at the network
+level. Additional instructions are available on the [eBPF CNIs
+page](../../reference/cluster-configuration/#ebpf-cnis)
+{{< /note >}}
+
 ### linkerd-crds
 
 The `linkerd-crds` chart sets up the CRDs linkerd requires:
