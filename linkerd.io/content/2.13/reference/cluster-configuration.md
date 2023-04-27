@@ -76,31 +76,26 @@ Finally, verify that the firewall is created:
 gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
 
-## eBPF CNIs
+## Cilium
 
-Some CNI plugins allow operators to configure networking in the cluster through
-eBPF. When an eBPF solution is used to additionally replace kube-proxy
-functionality, it is possible for `ClusterIP` services to be bypassed. Linkerd
-relies on Service IPs in order to do service discovery. eBPF replacements
-bypass `ClusterIPs` by establishing connections directly to the service backend
-during TCP connection establishment (i.e assigning the socket to the backend IP
-directly).
+Cilium can be configured to replace kube-proxy functionality through eBPF. When
+running in kube-proxy replacement mode, connections to a `ClusterIP` service
+will be established directly to the service's backend at the socket level (i.e.
+during TCP connection establishment). Linkerd relies on `ClusterIPs` being
+present on packets in order to do service discovery.
 
-Binding the socket directly to a backend during connection establishment means
-that Linkerd will forward the traffic directly to a pod. Consequentially, while
-mTLS and telemetry will still function correctly, features such as peak EWMA
-load balancing, and [dynamic request
+When packets do not contain a `ClusterIP` address, Linkerd will instead forward
+directly to the pod endpoint that was selected by Cilium. Consequentially,
+while mTLS and telemetry will still function correctly, features such as peak
+EWMA load balancing, and [dynamic request
 routing](../../tasks/configuring-dynamic-request-routing/) may not work as
 expected.
 
-### Cilium
-
-In Cilium, socket-level load balancing can be [turned off for
-pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) even when
-Cilium is configured to replace kube-proxy functionality. To disable service
-resolution through socket load balancing, `--config
-bpf-lb-sock-hostns-only=true` option can be passed to the Cilium CLI, or
-alternatively, `socketLB.hostNamespaceOnly` can be used with Helm.
+This behavior can be turned off in Cilium by [turning off socket-level load
+balancing for
+pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) through the
+CLI option `--config bpf-lb-sock-hostns-only=true`, or through the Helm value
+`socketLB.hostNamespaceOnly=true`.
 
 ## Lifecycle Hook Timeout
 

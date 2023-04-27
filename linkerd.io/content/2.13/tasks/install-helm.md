@@ -42,7 +42,7 @@ If installing Linkerd in a cluster that uses an eBPF-based CNI plugin, some
 additional steps may be needed depending on the plugin configuration. When
 plugins replace kube-proxy, they may trigger undefined behavior at the network
 level. Additional instructions are available on the [eBPF CNIs
-page](../../reference/cluster-configuration/#ebpf-cnis)
+page](../../reference/cluster-configuration/#cilium)
 {{< /note >}}
 
 ### linkerd-crds
