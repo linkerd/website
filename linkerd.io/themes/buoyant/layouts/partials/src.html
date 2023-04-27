@@ -3,7 +3,6 @@ src="{{ .img }}" class="{{ .class }}"
 {{- else -}}
   {{ $placeholder := partial "svg.html" .img | base64Encode }}
   src="data:image/svg+xml;base64,{{ $placeholder }}"
-  alt=""
   data-src="{{ .img }}"
   class="lazyload {{ .class }}"
 {{- end -}}
