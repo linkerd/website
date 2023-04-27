@@ -78,23 +78,20 @@ gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 
 ## eBPF CNIs
 
-When the network is configured through a CNI plugin that replaces kube-proxy
-with an eBPF solution, certain Linkerd features may not work correctly. eBPF-based CNI plugins may assign sockets to service backends directly
+Some CNI plugins allow operators to configure networking in the cluster through
+eBPF. When an eBPF solution is used to additionally replace kube-proxy
+functionality, it is possible for `ClusterIP` services to be bypassed. Linkerd
+relies on Service IPs in order to do service discovery. eBPF replacements
+bypass `ClusterIPs` by establishing connections directly to the service backend
+during TCP connection establishment (i.e assigning the socket to the backend IP
+directly).
 
-When the cluster network is configured through eBPF-based CNI plugins, some
-Linkerd features may not work correctly. In general, certain CNI plugins may be
-configured to replace kube-proxy's routing functionality with an eBPF solution.
-If kube-proxy functionality is replaced, in-cluster service connections
-(East/West traffic) may have their sockets assigned to service backends
-directly, bypassing the intermediate hop to a `ClusterIP` service.
-
-In practice, this clashes with Linkerd's service discovery and can result in
-undefined behavior. Binding the socket directly to a backend during connection
-establishment (i.e bypassing the `ClusterIP`) means that Linkerd will forward
-the traffic directly to a pod. Consequentially, while mTLS and telemetry will
-still function correctly, features such as peak EWMA load balancing, and
-[dynamic request routing](../../tasks/configuring-dynamic-request-routing) may
-not work as expected.
+Binding the socket directly to a backend during connection establishment means
+that Linkerd will forward the traffic directly to a pod. Consequentially, while
+mTLS and telemetry will still function correctly, features such as peak EWMA
+load balancing, and [dynamic request
+routing](../../tasks/configuring-dynamic-request-routing) may not work as
+expected.
 
 ### Cilium
 
