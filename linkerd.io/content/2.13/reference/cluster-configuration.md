@@ -90,7 +90,7 @@ Binding the socket directly to a backend during connection establishment means
 that Linkerd will forward the traffic directly to a pod. Consequentially, while
 mTLS and telemetry will still function correctly, features such as peak EWMA
 load balancing, and [dynamic request
-routing](../../tasks/configuring-dynamic-request-routing) may not work as
+routing](../../tasks/configuring-dynamic-request-routing/) may not work as
 expected.
 
 ### Cilium
