@@ -651,3 +651,9 @@ blockquote {
 .modal-content {
   width: 95%;
 }
+
+@media screen and (max-width: 768px){
+  .hero-body .wrapper.image-list .column.is-half-mobile{
+    width: 50%;
+  }
+}

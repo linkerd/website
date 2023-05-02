@@ -60,10 +60,10 @@ companies:
   link: https://www.expedia.com
 - image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
-- image: "/uploads/logos/blue/hp.png"
-  link: https://hp.com/
-- image: "/uploads/logos/blue/bigcommerce.png"
-  link: https://www.bigcommerce.com/
+- image: "/uploads/logos/blue/tradeshift.png"
+  link: https://tradeshift.com/
+- image: "/uploads/logos/blue/adidas.png"
+  link: https://www.adidas.com/
 - image: "/uploads/logos/blue/cisco-webex.png"
   link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
