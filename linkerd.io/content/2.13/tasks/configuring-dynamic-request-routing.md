@@ -109,6 +109,14 @@ act on. So here we point to the `backend-a-podinfo` Service on the `HTTPRoute`'s
 namespace (`test`), and also specify the Service port number (not the Service's
 target port).
 
+{{< warning >}}
+Outbound `HTTPRoute`s are **incompatible with `ServiceProfiles`**. If a
+[ServiceProfile](../../features/service-profiles/) is defined for the parent
+Service of an `HTTPRoute`, proxies will use the `ServiceProfile` configuration,
+rather than the `HTTPRoute` configuration, as long as the `ServiceProfile`
+exists.
+{{< /warning >}}
+
 Next, we give a list of rules that will act on the traffic hitting that Service.
 
 The first rule contains two entries: `matches` and `backendRefs`.
