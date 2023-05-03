@@ -53,12 +53,6 @@ name = "Community"
 url = "/community/"
 weight = 2
 [[menu.top]]
-identifier = "linkerd-day-2023eu"
-name = "Linkerd Day 2023 EU"
-url = "https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/cncf-hosted-co-located-events/linkerd-day/"
-weight = 1
-parent = "community"
-[[menu.top]]
 identifier = "get-involved"
 name = "Get Involved"
 url = "/community/get-involved/"
@@ -83,9 +77,9 @@ url = "/community/heroes/"
 weight = 5
 parent = "community"
 [[menu.top]]
-identifier = "community-anchors"
-name = "Community Anchors"
-url = "/community/anchor/"
+identifier = "buoyants-linkerd-forum"
+name = "Buoyant's Linkerd Forum"
+url = "https://linkerd.buoyant.io"
 weight = 6
 parent = "community"
 [[menu.top]]

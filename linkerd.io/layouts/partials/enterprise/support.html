@@ -3,9 +3,9 @@
     {{ range .kinds }}
     <h1 class="title is-size-1">{{.title}}</h1>
     <h5 class="title is-size-5">{{.description | markdownify}}</h5>
-    <div class="columns jobs-list is-multiline">
+    <div class="columns jobs-list is-multiline is-centered">
       {{ range .entries }}
-      <div class="column is-half job-item">
+      <div class="column is-half job-item mb-5">
         <a class="has-text-color box-link" href="{{ .url }}" target="_blank">
           <div class="box">
             <article class="media">
@@ -31,11 +31,11 @@
       {{ end }}
     </div>
     {{ end }}
-    <h5 class="title is-size-5 has-text-light-green">{{.bottom_description | markdownify}}</h5>
+    <h5 class="title is-size-5 has-text-white	">{{.bottom_description | markdownify}}</h5>
     <div class="columns">
       {{ range .buttons }}
       <div class="column">
-        <a href="{{.url}}" class="button is-large">
+        <a href="{{.url}}" class="button is-large is-primary">
           {{.caption}}
         </a>
       </div>

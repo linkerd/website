@@ -180,6 +180,13 @@ annotation:
 kubectl annotate -n circuit-breaking-demo svc/bb balancer.linkerd.io/failure-accrual=consecutive
 ```
 
+{{< warning >}}
+Circuit breaking is **incompatible with ServiceProfiles**. If a
+[ServiceProfile](../../features/service-profiles/) is defined for the annotated
+Service, proxies will not perform circuit breaking as long as the ServiceProfile
+exists.
+{{< /warning >}}
+
 We can check that failure accrual was configured correctly by using a Linkerd
 diagnostics command.  The `linkerd diagnostics policy` command prints the policy
 that Linkerd will use when sending traffic to a Service. We'll use the
