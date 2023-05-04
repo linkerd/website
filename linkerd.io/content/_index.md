@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "2022-01-20 **[Announcing Linkerd Day at Kubecon EU in April 2023! Read now »](2023/01/20/announcing-linkerd-day-2023/)**"
+  description: "2023-04-11 **[Announcing Linkerd 2.13 with new reliability and security features! Read now »](https://buoyant.io/newsroom/buoyant-announces-linkerd-2-13-with-new-reliability-and-security-features-for-kubernetes)**"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
@@ -60,10 +60,10 @@ companies:
   link: https://www.expedia.com
 - image: "/uploads/logos/blue/offerup.png"
   link: https://offerup.com/
-- image: "/uploads/logos/blue/hp.png"
-  link: https://hp.com/
-- image: "/uploads/logos/blue/bigcommerce.png"
-  link: https://www.bigcommerce.com/
+- image: "/uploads/logos/blue/tradeshift.png"
+  link: https://tradeshift.com/
+- image: "/uploads/logos/blue/adidas.png"
+  link: https://www.adidas.com/
 - image: "/uploads/logos/blue/cisco-webex.png"
   link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
@@ -83,5 +83,10 @@ companies:
 foundation_member_banner:
   title: Linkerd is a CNCF graduated project
   image: "/uploads/CNCF_Alternate_Pantone.png"
+cta_buoyant:
+  image: "/uploads/buoyant-logo-blue.png"
+  textcreated: "Linkerd was created by"
+  caption: "Learn more about Buoyant"
+  url: "https://buoyant.io/"
 
 ---

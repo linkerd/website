@@ -98,6 +98,13 @@ HTTP failure accrual when communicating with endpoints of that Service. If no
 failure accrual annotations are present on a Service, proxies will not perform
 failure accrual.
 
+{{< warning >}}
+Circuit breaking is **incompatible with ServiceProfiles**. If a
+[ServiceProfile](../../features/service-profiles/) is defined for the annotated
+Service, proxies will not perform circuit breaking as long as the ServiceProfile
+exists.
+{{< /warning >}}
+
 {{< note >}}
 Some failure accrual annotations have values which represent a duration.
 Durations are specified as a positive integer, followed by a unit, which may be
