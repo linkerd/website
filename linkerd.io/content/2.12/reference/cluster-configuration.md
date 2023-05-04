@@ -87,9 +87,7 @@ present on packets in order to do service discovery.
 When packets do not contain a `ClusterIP` address, Linkerd will instead forward
 directly to the pod endpoint that was selected by Cilium. Consequentially,
 while mTLS and telemetry will still function correctly, features such as peak
-EWMA load balancing, and [dynamic request
-routing](../../tasks/configuring-dynamic-request-routing/) may not work as
-expected.
+EWMA load balancing may not work as expected.
 
 This behavior can be turned off in Cilium by [turning off socket-level load
 balancing for
