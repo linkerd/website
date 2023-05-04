@@ -76,6 +76,27 @@ Finally, verify that the firewall is created:
 gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 ```
 
+## Cilium
+
+Cilium can be configured to replace kube-proxy functionality through eBPF. When
+running in kube-proxy replacement mode, connections to a `ClusterIP` service
+will be established directly to the service's backend at the socket level (i.e.
+during TCP connection establishment). Linkerd relies on `ClusterIPs` being
+present on packets in order to do service discovery.
+
+When packets do not contain a `ClusterIP` address, Linkerd will instead forward
+directly to the pod endpoint that was selected by Cilium. Consequentially,
+while mTLS and telemetry will still function correctly, features such as peak
+EWMA load balancing, and [dynamic request
+routing](../../tasks/configuring-dynamic-request-routing/) may not work as
+expected.
+
+This behavior can be turned off in Cilium by [turning off socket-level load
+balancing for
+pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) through the
+CLI option `--config bpf-lb-sock-hostns-only=true`, or through the Helm value
+`socketLB.hostNamespaceOnly=true`.
+
 ## Lifecycle Hook Timeout
 
 Linkerd uses a `postStart` lifecycle hook for all control plane components, and
