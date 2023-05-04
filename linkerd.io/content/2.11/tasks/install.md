@@ -45,6 +45,13 @@ check out the additional instructions on [GKE private
 clusters](../../reference/cluster-configuration/#private-clusters)
 {{< /note >}}
 
+{{< note >}}
+If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
+mode, additional steps may be needed to ensure service discovery works as
+intended. Instrunctions are on the [Cilium cluster
+configuration](../../reference/cluster-configuration/#cilium) page.
+{{< /note >}}
+
 ## Installing with the CLI
 
 Once you have a cluster ready, installing Linkerd is as easy as running `linkerd

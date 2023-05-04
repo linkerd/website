@@ -43,6 +43,13 @@ You need to install two separate charts in succession: first `linkerd-crds` and
 then `linkerd-control-plane`. This new method will eventually make its way into
 the `2.12.0` stable release as well when it comes out.
 
+{{< note >}}
+If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
+mode, additional steps may be needed to ensure service discovery works as
+intended. Instrunctions are on the [Cilium cluster
+configuration](../../reference/cluster-configuration/#cilium) page.
+{{< /note >}}
+
 ### linkerd-crds
 
 The `linkerd-crds` chart sets up the CRDs linkerd requires:
