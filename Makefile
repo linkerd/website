@@ -138,10 +138,8 @@ replace-env-%: has-env-% tmp-sites
 			printf "There are no instances of $*, maybe you've already updated them?\n" && \
 			exit 1 \
 		)
-
 	for fname in $$(grep -rnl '$*' tmp); do \
-		sed -i.bak 's/$*/$($*)/g' $$fname; \
-		rm $$fname.bak; \
+		sed 's/$*/$($*)/g' < $$fname > /tmp/__sed && mv /tmp/__sed $$fname; \
 	done
 
 .PHONY: has-env-%
