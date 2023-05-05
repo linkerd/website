@@ -6,7 +6,7 @@ enableRobotsTXT = true
 languageCode = "en-US"
 sectionPagesMenu = "main"
 theme = "buoyant"
-title = "Linkerd"
+title = "Linkerd, the CNCF Graduated Service Mesh"
 [markup]
 	defaultMarkdownHandler = "blackfriday"
   [markup.blackFriday]
