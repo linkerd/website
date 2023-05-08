@@ -3,7 +3,7 @@ author: 'william'
 date: 2023-05-05T00:00:00Z
 title: |-
   Welcome to Linkerd, Open Service Mesh adopters!
-thumbnail: '/uploads/2023/02/door-battaglia-9drS5E_Rguc-square.jpg'
+thumbnail: '/uploads/2023/05/hannah-gullixson-0IEemURq3GM-unsplash-square.jpeg'
 tags: [Linkerd, OpenServiceMesh]
 featured: false
 ---
@@ -42,3 +42,8 @@ Buoyant](https://buoyant.io/contact) (for enterprise).
 The Linkerd team welcomes Open Service Mesh adopters with open arms, and wishes
 our friends at the Open Service Mesh project the best of luck in their future
 endeavors.
+
+_(thumbnail credit: [Hannah Gullixson] on [Unsplash])_
+
+[Hannah Gullixson]: https://unsplash.com/@hgullixson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+[Unsplash]: https://unsplash.com/s/photos/open-door?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
