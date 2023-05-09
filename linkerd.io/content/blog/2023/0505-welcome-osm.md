@@ -4,6 +4,7 @@ date: 2023-05-05T00:00:00Z
 title: |-
   Welcome to Linkerd, Open Service Mesh adopters!
 thumbnail: '/uploads/2023/05/OSM_2-square.png'
+featuredImage: '/uploads/2023/05/OSM_2-rect.png'
 tags: [Linkerd, OpenServiceMesh]
 featured: false
 ---
