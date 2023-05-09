@@ -3,10 +3,15 @@ author: 'william'
 date: 2023-05-05T00:00:00Z
 title: |-
   Welcome to Linkerd, Open Service Mesh adopters!
-thumbnail: '/uploads/2023/05/hannah-gullixson-0IEemURq3GM-unsplash-square.jpeg'
+thumbnail: '/uploads/2023/05/OSM_2-square.png'
 tags: [Linkerd, OpenServiceMesh]
 featured: false
 ---
+
+{{< fig
+  alt="Cyber Door"
+  title="Welcome OSM Users!"
+  src="/uploads/2023/05/OSM_2-rect.png" >}}
 
 In light of the Open Service Mesh team's announcement that [OSM will be archived
 and no further OSM releases will be
@@ -42,8 +47,3 @@ Buoyant](https://buoyant.io/contact) (for enterprise).
 The Linkerd team welcomes Open Service Mesh adopters with open arms, and wishes
 our friends at the Open Service Mesh project the best of luck in their future
 endeavors.
-
-_(thumbnail credit: [Hannah Gullixson] on [Unsplash])_
-
-[Hannah Gullixson]: https://unsplash.com/@hgullixson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
-[Unsplash]: https://unsplash.com/s/photos/open-door?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
