@@ -80,6 +80,18 @@ companies:
   link: https://www.strava.com/
 - image: "/uploads/logos/blue/elkjop.png"
   link: https://www.elkjopnordic.com/
+- image: "/uploads/logos/blue/chase.png"
+  link: https://www.chase.com/
+- image: "/uploads/logos/blue/mercedez.png"
+  link: https://www.mercedes-benz.io/
+- image: "/uploads/logos/blue/xbox.png"
+  link: https://www.xbox.com/
+- image: "/uploads/logos/blue/wiz.png"
+  link: https://www.wiz.io/
+- image: "/uploads/logos/blue/plaid.png"
+  link: https://plaid.com/
+- image: "/uploads/logos/blue/timescale.png"
+  link: https://www.timescale.com/
 foundation_member_banner:
   title: Linkerd is a CNCF graduated project
   image: "/uploads/CNCF_Alternate_Pantone.png"
