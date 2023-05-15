@@ -28,7 +28,7 @@ than the sum of their parts. In this blog post, I'll walk you through what you
 need to know to use Flux, Flagger, and Linkerd together for successful GitOps
 in the real world.
 
-### Why Are We Here?
+## Why Are We Here?
 
 First, though, let's talk a bit about what we can - and can't - really do in
 the structure of a static-text blog post. **This post will not make you a
@@ -41,12 +41,13 @@ conventions, about what works well and what dooesn't, and we'll equip you to
 get the most out of the practice you put in later.
 
 Finally, don't forget that we have a ready-made demo repo for you to practice
-with! You can find that at https://github.com/BuoyantIO/gitops-linkerd --
+with! You can find that at <https://github.com/BuoyantIO/gitops-linkerd> --
 check out its [README.md] for the full instructions.
 
 [README.md]: https://github.com/BuoyantIO/gitops-linkerd/blob/main/README.md
 
 ----
+
 ## A Quick Introduction to GitOps
 
 If you're completely new to GitOps, you may find all the definitions talking
@@ -161,12 +162,12 @@ interface.
 
 As with many things, the jump from basic theory to actual practice can be
 tricky. A good way to start is with the demo repo mentioned above,
-https://github.com/BuoyantIO/gitops-linkerd. Its [README.md] has full
+<https://github.com/BuoyantIO/gitops-linkerd>. Its [README.md] has full
 instructions for how to get everything running, but let's hit the highlights
 and the gotchas here too.
 
 You'll need to start by having an empty cluster, a working `kubectl` command,
-and the `flux` CLI. Check out https://fluxcd.io/flux/installation/ for full
+and the `flux` CLI. Check out <https://fluxcd.io/flux/installation/> for full
 instructions, but the easy way on Mac and Linux is `brew install
 fluxcd/tap/flux`.
 
@@ -186,7 +187,7 @@ configuration. This brings up two really important points:
    up an access token for Flux to use.
 
    For full details here, check out
-   https://fluxcd.io/flux/installation/#bootstrap -- but the gotcha is that
+   <https://fluxcd.io/flux/installation/#bootstrap> -- but the gotcha is that
    Flux needs to be able to write as well as read (for example, with GitHub it
    needs to be able to create deploy keys). **Read carefully** about the
    permissions to set up the token.
@@ -205,7 +206,7 @@ However, it's very much worth looking at a couple of things in our
 configuration is the `clusters/my-cluster` directory on the `main` branch, in
 which you'll find all the needed definitions for the cluster infrastructure
 _and_ a reference to another repo for the application itself. If you want to
-use this for you own Flux/Flagger/Linkerd setup, a good start would be to
+use this for your own Flux/Flagger/Linkerd setup, a good start would be to
 leave the cluster infrastructure alone, but to replace the application
 definition with your own.
 
@@ -239,7 +240,7 @@ YAML file:
 
 (Recall that Flux itself is the only thing we install by hand. Also, Weave
 GitOps is a dashboard for Flux; check it out at
-https://www.cncf.io/blog/2023/04/24/how-to-use-weave-gitops-as-your-flux-ui/.)
+<https://www.cncf.io/blog/2023/04/24/how-to-use-weave-gitops-as-your-flux-ui/>.)
 
 Importantly, `infrastructure.yaml` also defines the dependencies between these
 components; this is an especially powerful aspect of Flux. We'll take a quick
@@ -297,7 +298,7 @@ There are few things to understand here:
 
 If we look into `./infrastructure/cert-manager`, we'll find a few files:
 
-```
+```text
 kustomization.yaml
 namespace.yaml
 release.yaml
@@ -383,7 +384,7 @@ then letting Flux do all the hard work.
 Taking a quick look into the `./infrastructure/linkerd` directory, we'll find
 quite a lot more to read than we did for `cert-manager`:
 
-```
+```text
 README.md
 ca.crt
 ca.key
@@ -741,7 +742,7 @@ let's take a look at the highlights here:
 
 - `analysis.webhooks` is using Flagger's builtin load generator to provide
   load to the canary to make sure that our metrics are meaningful. For more on
-  this, see https://docs.flagger.app/usage/webhooks#load-testing.
+  this, see <https://docs.flagger.app/usage/webhooks#load-testing>.
 
 ### Flagger A/B Tests
 
@@ -822,7 +823,7 @@ Most of this should be familiar by now, but there are definitely some difference
   will be promoted.
 
   - It's possible to do manual gating with webhooks. This is a bit more
-    advanced: see https://docs.flagger.app/usage/webhooks#manual-gating for
+    advanced: see <https://docs.flagger.app/usage/webhooks#manual-gating> for
     more information.
 
 - In `analysis.webhooks`, we supply load to both the A side and the B side.
@@ -893,16 +894,16 @@ spec:
 4. Flagger will edit the `face` Service to also use a selector of `service:
    face-primary`.
 
-5. Flagger will create a new Service named `face-canary`using a selector of
+5. Flagger will create a new Service named `face-canary` using a selector of
    `service: face`.
 
-  At this point, we'll have the following:
+   At this point:
 
-  - Service `face` and Service `face-primary` both select the `face-primary`
-    Deployment. This is the original production `face` workload.
+   - Service `face` and Service `face-primary` both select the `face-primary`
+     Deployment. This is the original production `face` workload.
 
-  - Service `face-canary` will select the `face` Deployment. This will be the
-    canary workload.
+   - Service `face-canary` will select the `face` Deployment. This will be the
+     canary workload.
 
 6. Flagger will route 100% of `face` traffic to the `face-primary` Service,
    and 0% to the `face` Service.
@@ -953,7 +954,7 @@ forward, or push a commit to reflect the version that you're still using.
 
 And there you have it: a whirlwind tour of Flux, Flagger, and Linkerd! You can
 find the source for the more detailed workshop at
-https://github.com/BuoyantIO/gitops-linkerd: check out README.md and DEMO.md
+<https://github.com/BuoyantIO/gitops-linkerd>: check out README.md and DEMO.md
 for all you need to know about how to explore the repo and how to run the demo
 (with many thanks to Russ Parmer of WeaveWorks for invaluable assistance
 putting this all together: any errors are mine, not his!).
