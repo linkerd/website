@@ -8,7 +8,7 @@ tags:
   - Video
 items:
   - blog/2023/0505-welcome-osm.md
-  - blog/2023/0221-linkerd-and-ingress.md
+  - blog/2023/0515-real-world-gitops.md
 description: ''
 keywords: []
 ---
