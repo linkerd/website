@@ -37,7 +37,7 @@ for practice. You can't get that from reading a blog post.
 
 What we _can_ deliver here, though, is a careful look at the good, the bad,
 and the ugly of making GitOps actually work. We'll talk about concepts and
-conventions, about what works well and what dooesn't, and we'll equip you to
+conventions, about what works well and what doesn't, and we'll equip you to
 get the most out of the practice you put in later.
 
 Finally, don't forget that we have a ready-made demo repo for you to practice
@@ -83,7 +83,7 @@ the repo.
 **Note**: Flux will only make the _cluster_ look like the _repo_. There's no
 provision to go the other direction, because it would be a terrible idea! The
 whole point of GitOps is that the git repo holds the truth of what state you
-want, so allowing the repo to modify it would not be a good thing.
+want, so allowing the repo to modify it would not be an antipattern.
 
 Flux is fairly simple: it can read Git repos from GitHub or GitLab, and you
 point it to a directory in the repo that contains YAML files defining Flux
@@ -115,9 +115,9 @@ will work, rather than just instantly cutting all the traffic over to the new
 
 What can initially seem strange about Flagger is that you don't explicitly
 supply a resource that says "please do a progressive rollout now". Instead,
-you just edit a Deployment to change the version of the image, and Flagger
-takes it from there: it notices the image change and _automatically_ tweaks
-things in the cluster to set up a progressive rollout.
+you just edit a Deployment, and Flagger takes it from there: it notices any
+change to objects under its management and _automatically_ tweaks things in
+the cluster to set up a progressive rollout.
 
 This means that Flagger needs a a way to control the amount of traffic that
 goes to the new version. It doesn't do this directly: instead, it needs to
@@ -151,7 +151,7 @@ from the workload. This low-level access permits Linkerd to have enormous
 control and visibility over what's happening with network communications in
 the cluster.
 
-Linkerd supports both the SMT TrafficSplit resource and (as of 2.12) the
+Linkerd supports both the SMI TrafficSplit resource and (as of 2.12) the
 Gateway API HTTPRoute resource. However, in 2.12 and 2.13, Linkerd's HTTPRoute
 support is limited, meaning that Flagger needs to use the SMI TrafficSplit
 interface.
@@ -186,11 +186,11 @@ configuration. This brings up two really important points:
    that it'll need access to GitHub or GitLab, which means you'll need to set
    up an access token for Flux to use.
 
-   For full details here, check out
-   <https://fluxcd.io/flux/installation/#bootstrap> -- but the gotcha is that
-   Flux needs to be able to write as well as read (for example, with GitHub it
-   needs to be able to create deploy keys). **Read carefully** about the
-   permissions to set up the token.
+     For full details here, check out
+     <https://fluxcd.io/flux/installation/#bootstrap> -- but the gotcha is that
+     Flux needs to be able to write as well as read (for example, with GitHub it
+     needs to be able to create deploy keys). **Read carefully** about the
+     permissions to set up the token.
 
 2. If you're trying to understand a Flux setup, **you** will need to know what
    branch and path were given to `flux bootstrap`, so that you'll know where
@@ -318,14 +318,18 @@ resources:
   - release.yaml
 ```
 
-This tells Flux to apply those three YAML files, in order. We're not going to
-dig too far into them here - the `gitops-linkerd` demo goes into much more
-detail - but it's important to know that
+This tells Flux to apply those three YAML files. We're not going to dig too
+far into them here - the `gitops-linkerd` demo goes into much more detail -
+but it's important to know that
 
 - `namespace.yaml` creates the `cert-manager` namespace;
 - `repository.yaml` tells Flux to `helm repo add` a Helm repository; and
 - `release.yaml` tells Flux to `helm install` a chart from the repo added by
   `repository.yaml`.
+
+Note that this is actually an _unordered_ list: `kustomize` automatically
+sorts all the resources contained in all of these files to make sure that the
+the resources it's working with are applied in the correct order.
 
 We're going to leave the deep dive into these files for the `gitops-linkerd`
 demo itself, except for one note: if you look at `repository.yaml` and
@@ -406,21 +410,11 @@ need to configure Linkerd to use custom secrets from cert-manager - but you'll
 be able to see it all laid out in the files.
 
 Again, we'll mostly leave the deep dive for the `gitops-linkerd` demo, but
-there are two things worth pointing out here:
-
-1. If you look in `kustomization.yaml`, you'll find that `namespaces.yaml` is
-   listed _last_, where it was _first_ for `cert-manager`. The reason is that
-   Linkerd needs to create all its own namespaces as it's installed -- if a
-   namespace already exists, Linkerd assumes that overwriting it would be an
-   error. However, we still need to apply annotations at the end.
-
-   XXX But what about `repositories.yaml`?
-
-2. Where the `cert-manager` Kustomization had a `repository.yaml` file, the
-   `linkerd` Kustomization has `repositories.yaml`, with the name pluralized.
-   The name doesn't matter at all to Flux, since it has to be listed
-   explicitly in `kustomization.yaml`: this means you're free to choose names
-   that help later readers follow what's going on.
+it's worth pointing out that where the `cert-manager` Kustomization had a
+`repository.yaml` file, the `linkerd` Kustomization has `repositories.yaml`,
+with the name pluralized. The name doesn't matter at all to Flux, since it has
+to be listed explicitly in `kustomization.yaml`: this means you're free to
+choose names that help later readers follow what's going on.
 
 There's a lot more in the `infrastructure.yaml` file, but we're going to leave
 the rest for the `gitops-linkerd` demo and your own reading. Let's continue on
@@ -624,9 +618,9 @@ Flagger relies on external components to make this happen:
   things at the edge of the call graph, or an SMI TrafficSplit or Gateway API
   HTTPRoute for things deeper in the call graph.
 
-  `gitops-linkerd` shows how to use NGINX and Linkerd's SMI extension for this
-  purpose. Future versions of Linkerd will also support the HTTPRoute
-  mechanism.
+    `gitops-linkerd` shows how to use NGINX and Linkerd's SMI extension for this
+    purpose. Future versions of Linkerd will also support the HTTPRoute
+    mechanism.
 
 - Second, Flagger needs to monitor external metrics to be sure that the new
   version is working, and it needs to know how the Deployments you want to
@@ -897,13 +891,13 @@ spec:
 5. Flagger will create a new Service named `face-canary` using a selector of
    `service: face`.
 
-   At this point:
+     At this point:
 
-   - Service `face` and Service `face-primary` both select the `face-primary`
-     Deployment. This is the original production `face` workload.
+     - Service `face` and Service `face-primary` both select the `face-primary`
+       Deployment. This is the original production `face` workload.
 
-   - Service `face-canary` will select the `face` Deployment. This will be the
-     canary workload.
+     - Service `face-canary` will select the `face` Deployment. This will be the
+       canary workload.
 
 6. Flagger will route 100% of `face` traffic to the `face-primary` Service,
    and 0% to the `face` Service.
