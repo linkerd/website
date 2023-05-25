@@ -14,10 +14,10 @@ featured: false
   title="Welcome OSM Users!"
   src="/uploads/2023/05/OSM_2-rect.png" >}}
 
-So you read the Open Service Mesh team's announcement that [OSM will be
+You've read the Open Service Mesh team's announcement that [OSM will be
 archived and no further OSM releases will be
-published](https://openservicemesh.io/blog/osm-project-update/), and you saw
-that Linkerd is [welcoming OSM adopters to Linkerd with open
+published](https://openservicemesh.io/blog/osm-project-update/), and you've
+seen that Linkerd is [welcoming OSM adopters to Linkerd with open
 arms](../../05/welcome-to-linkerd-open-service-mesh-adopters/)... now what?
 What does it look like to migrate from OSM to Linkerd?
 
@@ -297,7 +297,7 @@ can be easier than it may seem.
     For example, if you start with 10 copies of the IP address of the old
     ingress controller, then change one at a time to the IP address of the new
     ingress controller, you can shift traffic 10% at a time. It's not perfect,
-    and DNS caching can make this rougher than expected, but it's an option.
+    but it's an option.
 
 ## Going Forward
 
