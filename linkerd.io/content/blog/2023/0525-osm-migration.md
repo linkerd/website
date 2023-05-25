@@ -53,7 +53,7 @@ _Unlike_ Linkerd, OSM uses its MeshConfig resource to configure a lot of
 details about the mesh itself.
 
 - Some of these details are handled differently in Linkerd.
-      - The sidecar log level and init container strategy, for example, is set
+      - The sidecar log level and init container strategy, for example, are set
         with workload annotations or environment variables in Linkerd, rather
         than globally.
       - Tracing is handled by the `linkerd-jaeger` extension, rather than being
@@ -89,7 +89,9 @@ basically the same between the two meshes, generally permitting easy
 migration for this function.
 
 As of Linkerd 2.13, you can also use HTTPRoute resources for traffic
-splitting; this may be a better option for the long run.
+splitting. This will be a better option for the long run, although it will (of
+course) require rewriting your TrafficSplit resources using HTTPRoutes with
+weights.
 
 #### TrafficTarget and HTTPRouteGroup
 
