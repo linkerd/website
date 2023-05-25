@@ -14,12 +14,12 @@ featured: false
   title="Welcome OSM Users!"
   src="/uploads/2023/05/OSM_2-rect.png" >}}
 
-So you read Open Service Mesh team's announcement that [OSM will be archived
-and no further OSM releases will be
+So you read the Open Service Mesh team's announcement that [OSM will be
+archived and no further OSM releases will be
 published](https://openservicemesh.io/blog/osm-project-update/), and you saw
-that Linkerd is [welcoming OSM adopters to
-Linkerd](../../05/welcome-to-linkerd-open-service-mesh-adopters/) with open arms... now what? What does
-it look like to migrate from OSM to Linkerd?
+that Linkerd is [welcoming OSM adopters to Linkerd with open
+arms](../../05/welcome-to-linkerd-open-service-mesh-adopters/)... now what?
+What does it look like to migrate from OSM to Linkerd?
 
 Any time you look at migrating meshes, there are two main challenges:
 
