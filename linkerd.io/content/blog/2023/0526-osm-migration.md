@@ -1,6 +1,6 @@
 ---
 author: 'flynn'
-date: 2023-05-25T00:00:00Z
+date: 2023-05-26T00:00:00Z
 title: |-
   Migrating from OpenServiceMesh to Linkerd
 thumbnail: '/uploads/2023/05/OSM_2-square.png'
