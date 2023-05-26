@@ -235,7 +235,7 @@ For example, since Linkerd focuses on layer 7 traffic, it has no equivalent
 for OSM's TCPRoute. Likewise, OSM's Egress resource has no direct Linkerd
 equivalent (though, again, Kubernetes NetworkPolicy resources may help here).
 
-## Migration Strategy
+## Migration Strategies
 
 Given this context on configuration translation, let's look at migration
 strategies.
