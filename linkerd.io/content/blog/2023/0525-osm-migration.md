@@ -29,10 +29,11 @@ Any time you look at migrating meshes, there are two main challenges:
    This is straightforward for some resources, and less straightforward for
    others.
 
-2. Additionally, it generally doesn't work to run two sidecar meshes
-   side-by-side: both sidecars want to intercept network traffic, and only one
-   of them gets to win. This means that the overall strategy for the migration
-   can be a bit more complex than we'd like.
+2. Additionally, since OSM and Linkerd are both sidecar meshes, you can't have
+   a single workload be in both at the same time: both sidecars want to
+   intercept network traffic, and only one of them gets to win. This means
+   that the overall strategy for the migration can be a bit more complex than
+   we'd like.
 
 Let's take these one at a time.
 
@@ -259,12 +260,40 @@ actually be all you need.
 Obviously, taking downtime for a migration isn't ideal, but this strategy can
 be far and away the simplest way to handle everything.
 
-### 2. Separate Clusters
+### 2. Workload by Workload
 
-The _safest_ migration strategy, on the other hand, is to use a completely
-separate cluster to bring up your application with Linkerd. This removes any
+While a given workload can't be part of both meshes at the same time, it _is_
+possible to install Linkerd in the same cluster with OSM, then move workloads
+from OSM to Linkerd one at a time. This approach can allow for a
+straightforward zero-downtime migration:
+
+- Create any Linkerd configuration needed to allow the workload being migrated
+  to work with Linkerd
+- Replace the `openservicemesh.io/sidecar-injection: enabled` annotation on
+  the Deployment of the workload being migrated with the `linkerd.io/inject:
+  enable` annotation
+- Restart the workload's Pods
+
+This method preserves uptime by allowing workloads to continue communicating
+with each other throughout the whole process, and by taking advantage of
+Kubernetes' ability to restart a workload without downtime as long as the
+workload has multiple replicas.
+
+With this method, it's important to realize that in situations where a
+workload running under OSM needs to communicate with a workload running under
+Linkerd (in either direction), **this communication will be cleartext** rather
+than using mTLS. This implies that OSM needs to be operating in permissive
+mode, and that Linkerd can't fully lock down communications until after the
+migration is finished. If your application can work with this constraint,
+though, the workload-by-workload method can be a simple way to migrate without
+downtime.
+
+### 3. Separate Clusters
+
+Finally, the _safest_ migration strategy is to use a completely separate
+cluster to bring up your application with Linkerd. This removes any
 possibility of your Linkerd installation confusing OSM (or vice versa), and
-can permit zero-downtime migration.
+can also permit zero-downtime migration.
 
 - Bring up a separate cluster.
 - Install Linkerd into the new cluster.
@@ -310,4 +339,9 @@ how to test as you go! - will be critical.
 You needn't go this alone, either! The folks on [the Linkerd OSS
 Slack](https://slack.linkerd.io/) are always around to help, and you can also
 check out the [Linkerd forum](https://linkerd.buoyant.io) for more
-information. We look forward to hearing from you -- welcome!
+information. Additionally, there's a hands-on [enterprise migration for OSM
+existing OSM
+adopters](https://buoyant.io/blog/announcing-enterprise-migration-for-open-service-mesh-customers)
+offered by Buoyant, the creators of Linkerd; other commercial Linkerd providers may
+offer something similar. Whatever route you take for migration, we look
+forward to hearing from you -- welcome!
