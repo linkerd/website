@@ -5,7 +5,11 @@
   <a class="has-text-color" href="{{ .URL }}">
     <div class="card">
       <div class="card-image">
-        {{ if .Params.thumbnail }}
+        {{ if .Params.featuredImage }}
+        <figure class="image level-item">
+          <img {{ partial "src.html" (dict "img" .Params.featuredImage) | safeHTMLAttr }} alt="featured image" />
+        </figure>
+        {{ else if .Params.thumbnail }}
         <figure class="image level-item">
           <img {{ partial "src.html" (dict "img" .Params.thumbnail) | safeHTMLAttr }} alt="featured image" />
         </figure>

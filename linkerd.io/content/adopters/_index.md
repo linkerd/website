@@ -5,6 +5,12 @@ case_studies:
 - image: /images/adopters/xbox.png
   alt: Xbox
   link: https://buoyant.io/case-studies/xbox/
+- image: /images/adopters/adidasb.png
+  alt: Adidas
+  link: https://buoyant.io/case-studies/adidas
+- image: /images/adopters/db-schenker.png
+  alt: DB Schenker
+  link: https://buoyant.io/case-studies/schenker/
 - image: /images/adopters/penn-state.png
   alt: Penn State
   link: https://buoyant.io/case-studies/penn-state/
