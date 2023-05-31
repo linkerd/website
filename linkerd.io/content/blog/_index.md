@@ -9,6 +9,6 @@ tags:
 items:
   - blog/2023/0526-osm-migration.md
   - blog/2023/0515-real-world-gitops.md
-description: ''
+description: Read the latest blog posts covering the Linkerd service mesh, from technical tutorials to announcements to what’s next on the roadmap.
 keywords: []
 ---

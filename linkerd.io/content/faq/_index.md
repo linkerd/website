@@ -1,5 +1,8 @@
 ---
 title: Frequently Asked Questions
+description: What is Linkerd? What’s the difference between Linkerd and
+  Istio? Why doesn’t Linkerd use Envoy? Get answers to these questions
+  and more.
 type: faq
 include_toc: true
 enableFAQSchema: true
