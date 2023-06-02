@@ -279,6 +279,12 @@ some simple rules of thumb for debugging:
   plane is doing with routing. It's _extremely_ verbose, but can show you an
   enormous amount of information that can help with debugging problems.
 
+## Dynamic Request Routing and Circuit Breaking
+
+Taken together, dynamic request routing and circuit breaking are two important
+new additions to Linkerd 2.13. While still a bit limited in 2.13, keep an eye
+out: we have big plans for these features as Linkerd's development continues.
+
 ----
 
 _If you want more on this topic, check out the [Circuit Breaking and Dynamic
