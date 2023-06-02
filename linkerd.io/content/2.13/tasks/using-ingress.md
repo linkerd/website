@@ -613,6 +613,11 @@ Thus, combining an ingress with Linkerd takes one of two forms:
 The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
 
 {{< note >}}
+As of 2.13 linkerd in *ingress* mode requires the `l5d-dst-override` header.
+Requests on a pod meshed in ingress mode without the header will fail.
+{{< /note >}}
+
+{{< note >}}
 Some ingress controllers support sticky sessions. For session stickiness, the
 ingress controller has to do its own endpoint selection. This means that
 Linkerd will not be able to connect to the IP/port of the Kubernetes Service,

@@ -234,7 +234,10 @@ version.
 Please be sure to read the [Linkerd 2.13.0 release
 notes](https://github.com/linkerd/linkerd2/releases/tag/stable-2.13.0).
 
-There are no other extra steps for upgrading to 2.13.0.
+One important change could affect the upgrade process for 2.13.0:
+
+- The behaviour of ingress mode has changed to fail requests without
+ `l5d-dst-override` headers.
 
 ### Upgrade notice: stable-2.12.0
 
