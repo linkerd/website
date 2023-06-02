@@ -4,7 +4,7 @@ date: 2023-06-02T00:00:00Z
 title: |-
   Dynamic Request Routing and Circuit Breaking
 url:
-  /2023/06/02/dynamic-request-routing-circuit-breaking
+  /2023/06/02/dynamic-request-routing-circuit-breaking/
 thumbnail: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-square.jpg'
 featuredImage: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg'
 tags: [Linkerd, linkerd, gitops, flux, flagger]
@@ -14,8 +14,7 @@ featured: false
 {{< fig
   alt="Dynamic Request Routing"
   title="image credit: [Denys Nevozhai](https://unsplash.com/@dnevozhai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
-  src="/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg"
-  >}}
+  src="/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg" >}}
 
 _This blog post is based on a workshop that I recently delivered at Buoyant’s
 [Service Mesh Academy](https://buoyant.io/service-mesh-academy). If this seems
