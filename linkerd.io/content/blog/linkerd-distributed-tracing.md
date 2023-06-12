@@ -20,8 +20,8 @@ recommendation on the best way to make use of distributed tracing with Linkerd.
 Tracing can be an invaluable tool in debugging distributed systems performance,
 especially for identifying bottlenecks and understanding the latency cost of
 each component in your system.  If you're not already familiar with the idea
-behind distributed tracing, [Distributed Tracing for Polyglot
-Microservices](/2016/05/17/distributed-tracing-for-polyglot-microservices/)
+behind distributed tracing, the [OpenTelemetry Observability
+Primer](https://opentelemetry.io/docs/concepts/observability-primer/#what-is-observability)
 gives a good overview of the concepts. The promises of distributed tracing are
 exciting, but in our experience, there are significant barriers to achieving
 those promises in practice.
