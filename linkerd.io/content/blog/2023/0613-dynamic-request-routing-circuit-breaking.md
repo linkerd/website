@@ -1,10 +1,10 @@
 ---
 author: 'flynn'
-date: 2023-06-02T00:00:00Z
+date: 2023-06-13T00:00:00Z
 title: |-
   Dynamic Request Routing and Circuit Breaking
 url:
-  /2023/06/02/dynamic-request-routing-circuit-breaking/
+  /2023/06/13/dynamic-request-routing-circuit-breaking/
 thumbnail: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-square.jpg'
 featuredImage: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg'
 tags: [Linkerd, linkerd, gitops, flux, flagger]
@@ -112,12 +112,12 @@ spec:
    - name: color
      kind: Service
      group: core
-     port: 80 				  # Match port numbers with what’s in the Service resource
+     port: 80           # Match port numbers with what’s in the Service resource
  rules:
  - backendRefs:
    - name: color
      port: 80
-     weight: 50					# Adjust the weights to control balancing
+     weight: 50         # Adjust the weights to control balancing
  - backendRefs:
    - name: color2
      port: 80
@@ -155,7 +155,7 @@ spec:
  rules:
  - matches:
    - headers:
-     - name: "x-faces-user"		# X-Faces-User: testuser goes to smiley2
+     - name: "x-faces-user"   # X-Faces-User: testuser goes to smiley2
        value: "testuser"
    backendRefs:
      - name: smiley2
@@ -172,7 +172,7 @@ may mean that you need to be careful to propagate headers through the various
 workloads of your application.
 
 You can find more details about dynamic request routing in its documentation,
-at https://linkerd.io/2/tasks/configuring-dynamic-request-routing/.
+at <https://linkerd.io/2/tasks/configuring-dynamic-request-routing/>.
 
 ## Circuit Breaking
 
@@ -201,7 +201,7 @@ Circuit breakers in Linkerd are expected to gain functionality rapidly, so
 keep an eye out as new releases happen (and the annotation approach should be
 supplanted with Gateway API CRDs).
 
-# Circuit Breaking Example
+## Circuit Breaking Example
 
 To break the circuit after four consecutive request failures, apply these
 annotations to a Service:
@@ -235,8 +235,7 @@ balancer.linkerd.io/failure-accrual-consecutive-max-penalty: 120s
 ```
 
 More information on circuit breaking is available in its documentation, at
-https://linkerd.io/2/tasks/circuit-breakers/.
-
+<https://linkerd.io/2/tasks/circuit-breakers/>.
 
 ## Gotchas
 
