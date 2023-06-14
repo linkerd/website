@@ -81,12 +81,12 @@ still inject it into the mesh, it will still get automatic mTLS and metrics
 from Linkerd, and all the usual Linkerd features will still work.
 
 The one way that it _is_ likely to be different from other workloads is that
-you'll probably want to tell Linkerd to skip the incoming ports for the
+you'll probably want to tell Linkerd to skip the inbound ports for the
 ingress controller. If you don't do this, the ingress controller won't be able
 to see the IP address of incoming connections: every connection will appear to
 originate with the Linkerd proxy.
 
-To skip incoming ports, use the `config.linkerd.io/skip-incoming-ports`
+To skip inbound ports, use the `config.linkerd.io/skip-inbound-ports`
 annotation. Note that you need to use the port on which the ingress controller
 is listening, not the port that the client will see! So, for example, if your
 ingress controller is behind a Service like
@@ -105,8 +105,8 @@ spec:
     targetPort: 8080
 ```
 
-then you would need to use `config.linkerd.io/skip-incoming-ports: 8080`  –
-trying to skip incoming port 80 wouldn't do anything.
+then you would need to use `config.linkerd.io/skip-inbound-ports: 8080`  –
+trying to skip inbound port 80 wouldn't do anything.
 
 ### Linkerd Is (Mostly) Invisible
 
@@ -151,7 +151,7 @@ basically Just Works. [Install
 Emissary](https://www.getambassador.io/docs/emissary/latest/tutorials/getting-started),
 inject it into the mesh, and... you're done. Since Emissary defaults to
 routing to Services, there's nothing special to do there. About the only thing
-to consider is that you'll need to be sure to skip Emissary's incoming ports
+to consider is that you'll need to be sure to skip Emissary's inbound ports
 if you want Emissary to pay attention to client IP addresses.
 
 ### NGINX
@@ -173,7 +173,7 @@ nginx.ingress.kubernetes.io/service-upstream: "true"
 ```
 
 After that's done, installing and meshing `ingress-nginx` should be
-straightforward. Again, you'll probably want to skip incoming ports, too.
+straightforward. Again, you'll probably want to skip inbound ports, too.
 
 ### Envoy Gateway
 
@@ -204,7 +204,7 @@ changes, its data-plane Deployment is restarted. These ephemeral Deployments
 can be challenging to inject into the Linkerd mesh: the most effective way to
 do it is to put the `linker.io/inject` annotation on the
 `envoy-gateway-system` Namespace, since that's where the ephemeral Deployments
-are created. (You can put the `config.linkerd.io/skip-incoming-ports`
+are created. (You can put the `config.linkerd.io/skip-inbound-ports`
 annotation there too.)
 
 Once you know about that, Envoy Gateway works just fine with Linkerd.
