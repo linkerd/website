@@ -35,9 +35,9 @@ will have the full set of metrics and mTLS support.
 
 ## Ingress mode {#ingress-mode}
 
-Most ingress controllers can be meshed like an other service, i.e. by applying
-the `linkerd.io/inject: enabled` annotation at the appropriate level. (See
-[Adding your services to Linkerd](../adding-your-service/) for more.)
+Most ingress controllers can be meshed like any other service, i.e. by
+applying the `linkerd.io/inject: enabled` annotation at the appropriate level.
+(See [Adding your services to Linkerd](../adding-your-service/) for more.)
 
 However, some ingress options need to be meshed in a special "ingress" mode,
 using the `linkerd.io/inject: ingress` annotation.
@@ -86,9 +86,9 @@ likely works anyways. See [Ingress details](#ingress-details) below.
 
 ## Emissary-Ingress (aka Ambassador) {#ambassador}
 
-Emissary-Ingredss can be meshed normally, i.e. does not require the [ingress
-mode](#ingress-mode) annotation. An example manifest for configuring Ambassador
-/ Emissary is as follows:
+Emissary-Ingress can be meshed normally: it does not require the [ingress
+mode](#ingress-mode) annotation. An example manifest for configuring
+Ambassador / Emissary is as follows:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -108,7 +108,7 @@ mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds
 
 ## Nginx
 
-Nginx can be meshed normally, i.e. does not require the [ingress
+Nginx can be meshed normally: it does not require the [ingress
 mode](#ingress-mode) annotation.
 
 The
@@ -278,8 +278,8 @@ spec:
 ## GCE
 
 The GCE ingress should be meshed with with [ingress mode
-enabled](#ingress-mode), , i.e. with the `linkerd.io/inject: ingress` annotation
-rather than the default `enabled`.
+enabled](#ingress-mode), , i.e. with the `linkerd.io/inject: ingress`
+annotation rather than the default `enabled`.
 
 This example shows how to use a [Google Cloud Static External IP
 Address](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
@@ -563,8 +563,7 @@ in an ingress manifest as each one needs their own
 
 ## EnRoute OneStep {#enroute}
 
-Meshing EnRoute with Linkerd involves only setting one
-flag globally:
+Meshing EnRoute with Linkerd involves only setting one flag globally:
 
 ```yaml
 apiVersion: enroute.saaras.io/v1
@@ -604,20 +603,21 @@ In this section we cover how Linkerd interacts with ingress controllers in
 general.
 
 In order for Linkerd to properly apply L7 features such as route-based metrics
-and dynamic traffic routing, Linkerd needs the IP/port of the destination
-Kubernetes Service. However, by default, many ingresses do their own endpoint
-selection and pass the IP/port of the destination Pod, rather than the Service.
+and dynamic traffic routing, Linkerd needs the ingress controller to connect
+to the IP/port of the destination Kubernetes Service. However, by default,
+many ingresses do their own endpoint selection and connect directly to the
+IP/port of the destination Pod, rather than the Service.
 
 Thus, combining an ingress with Linkerd takes one of two forms:
 
-1. Configure the ingress to pass the IP and port of the Service as the
+1. Configure the ingress to connect to the IP and port of the Service as the
    destination, i.e. to skip its own endpoint selection. (E.g. see
    [Nginx](#nginx) above.)
 
-2. Alternatively, configuring the ingress to pass the Service
-   IP/port in a header such as `l5d-dst-override`, `Host`, or `:authority`, and
-   configure Linkerd in *ingress* mode. In this mode, it will read from one of
-   those headers instead.
+2. Alternatively, configure the ingress to pass the Service IP/port in a
+   header such as `l5d-dst-override`, `Host`, or `:authority`, and configure
+   Linkerd in *ingress* mode. In this mode, it will read from one of those
+   headers instead.
 
 The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
 
