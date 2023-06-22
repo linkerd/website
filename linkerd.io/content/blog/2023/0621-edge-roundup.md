@@ -4,17 +4,16 @@ date: 2023-06-21T00:00:00Z
 title: |-
   Linkerd Edge Roundup: 21 June 2023
 url:
-  /2023/06/20/linkerd-edge-roundup
-thumbnail: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-square.jpg'
-featuredImage: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg'
+  /2023/06/20/linkerd-edge-roundup/
+thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
+featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
 tags: [Linkerd, linkerd, gitops, flux, flagger]
 featured: false
 ---
 
 {{< fig
   alt="Dynamic Request Routing"
-  title="image credit: [Denys Nevozhai](https://unsplash.com/@dnevozhai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
-  src="/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-rect.jpg" >}}
+  src="/uploads/2023/06//roundup-clocks-rect.png" >}}
 
 Linkerd’s edge releases are a big part of our development process that we’re
 going to start talking more about – and so far in June, we’ve done a couple of
