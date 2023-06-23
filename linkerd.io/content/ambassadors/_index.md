@@ -38,6 +38,12 @@ ambassadors:
     github: https://github.com/christianhuening
     twitter: https://twitter.com/chrishuen
     linkedin: https://www.linkedin.com/in/christian-h%C3%BCning-964191a3/
+  - name: Dominik Táskai
+    job_title: Junior DevOps Engineer
+    image: /images/ambassadors/profile/dominik-taskai.jpg
+    flag: 🇭🇺
+    github: https://github.com/dtaskai
+    linkedin: https://www.linkedin.com/in/dtaskai/
   - name: Eli Goldberg
     job_title: Platform Team Lead
     image: /images/ambassadors/profile/eli-goldberg.jpeg
@@ -59,6 +65,12 @@ ambassadors:
     github: https://github.com/kaspernissen
     twitter: https://twitter.com/phennex
     linkedin: https://www.linkedin.com/in/kaspernissen/
+  - name: María Teresa Rojas
+    job_title: SRE
+    image: /images/ambassadors/profile/maria-rojas.png
+    flag: 🇵🇹
+    github: https://github.com/mtrojas
+    linkedin: https://www.linkedin.com/in/mtrojas/
   - name: Sergio Méndez
     job_title: DevOps Engineer
     image: /images/ambassadors/profile/sergio-mendez.png

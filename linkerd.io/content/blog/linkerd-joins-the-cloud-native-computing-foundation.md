@@ -11,7 +11,15 @@ thumbnail: /uploads/linkerd_cncf_featured.png
 tags: [Buoyant, buoyant, Linkerd, linkerd, News]
 ---
 
-_Cross-posted on the [Cloud Native Computing Foundation blog](https://www.cncf.io/blog/2017/01/23/linkerd-project-joins-cloud-native-computing-foundation)._
+_(This bit of Linkerd history appeared on 24 January 2017, cross-posted on
+the [Cloud Native Computing Foundation
+blog](https://www.cncf.io/blog/2017/01/23/linkerd-project-joins-cloud-native-computing-foundation).
+Linkerd has evolved quite a lot since 2017: in particular, what we donated in
+2017 was Linkerd 1, not the powerful, secure, Rust-based Linkerd 2 of today.
+However, we'll always be proud to have been a part of the early history of the
+CNCF, and grateful for the phenomenal support of our community. Thank you!)_
+
+----
 
 Today, the [Cloud Native Computing Foundation](http://cncf.io/)’s (CNCF) Technical Oversight Committee (TOC) voted to accept [Linkerd](https://linkerd.io/) as its fifth hosted project, alongside [Kubernetes](https://kubernetes.io/), [Prometheus](https://prometheus.io/), [OpenTracing](https://opentracing.io/) and [Fluentd](https://www.fluentd.org/).
 
@@ -26,10 +34,9 @@ Linkerd is an open source, resilient service mesh for cloud-native applications.
 
 ## ENABLING RESILIENT AND RESPONSIVE MICROSERVICE ARCHITECTURES
 
-Linkerd enables a consistent, uniform layer of visibility and control across services and adds features critical for reliability at scale, including latency-aware load balancing, connection pooling, automatic retries and circuit breaking. As a service mesh, Linkerd also provides transparent TLS encryption, distributed tracing and request-level routing. These features combine to make applications scalable, performant, and resilient. Linkerd integrates directly with orchestrated environments such as Kubernetes ([example]({{< ref
-"a-service-mesh-for-kubernetes-part-i-top-line-service-metrics" >}})) and DC/OS ([demo](https://www.youtube.com/watch?v=3fV7v1gyYms)), and supports a variety of service discovery systems such as ZooKeeper, Consul, and etcd. It features HTTP/2 and [gRPC](http://www.grpc.io/) support, and can provide metrics in [Prometheus](https://prometheus.io/) format.
+Linkerd enables a consistent, uniform layer of visibility and control across services and adds features critical for reliability at scale, including latency-aware load balancing, connection pooling, automatic retries and circuit breaking. As a service mesh, Linkerd also provides transparent TLS encryption, distributed tracing and request-level routing. These features combine to make applications scalable, performant, and resilient. Linkerd integrates directly with orchestrated environments such as Kubernetes and DC/OS, and supports a variety of service discovery systems such as ZooKeeper, Consul, and `etcd`. It features HTTP/2 and [gRPC](http://www.grpc.io/) support, and can provide metrics in [Prometheus](https://prometheus.io/) format.
 
-“The service mesh is becoming a critical part of building scalable, reliable cloud native applications,” said [William Morgan](https://twitter.com/wm), CEO of Buoyant and co-creator of Linkerd. “Our experience at Twitter showed that, in the face of unpredictable traffic, unreliable hardware, and a rapid pace of production iteration, uptime and site reliability for large microservice applications is a function of how the services that comprise that application communicate. Linkerd allows operators to manage that communication at scale, improving application reliability without tying it to a particular set of libraries or implementations.
+“The service mesh is becoming a critical part of building scalable, reliable cloud native applications,” said [William Morgan](https://twitter.com/wm), CEO of Buoyant and co-creator of Linkerd. “Our experience at Twitter showed that, in the face of unpredictable traffic, unreliable hardware, and a rapid pace of production iteration, uptime and site reliability for large microservice applications is a function of how the services that comprise that application communicate. Linkerd allows operators to manage that communication at scale, improving application reliability without tying it to a particular set of libraries or implementations."
 
 Companies and organizations around the world use Linkerd in production to power their software infrastructure, including [Monzo](https://monzo.com/), [Zooz](https://zooz.com/), [ForeSee](https://foresee.com/), [Olark](https://olark.com/), [Houghton Mifflin Harcourt](https://hmhco.com/), the [National Center for Biotechnology Information](https://www.ncbi.nlm.nih.gov/), and [Douban](https://www.douban.com/). Linkerd is featured as a default part of cloud-native distributions such as Apprenda’s [Kismatic Enterprise Toolkit](https://github.com/apprenda/kismatic) and StackPointCloud.
 
