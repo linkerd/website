@@ -32,7 +32,7 @@ faqs:
       security
       audits](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf).
       Finally, Linkerd has publicly [committed to open
-      governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+      governance](/2019/10/03/linkerds-commitment-to-open-governance/)
       and is hosted by [the CNCF](https://cncf.io).
     answer_schema:
       Linkerd is significantly lighter and simpler than Istio. Linkerd is built
@@ -65,7 +65,7 @@ faqs:
       The choice of Rust also allows Linkerd to avoid a whole class of CVEs and
       vulnerabilities that can impact proxies written in non-memory-safe
       languages like C++. See [Why Linkerd doesn't use
-      Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) for
+      Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/) for
       more.
     answer_schema:
       Envoy is a complex general-purpose proxy. Linkerd uses a simple and
@@ -76,7 +76,7 @@ faqs:
       The choice of Rust also allows Linkerd to avoid a whole class of CVEs and
       vulnerabilities that can impact proxies written in non-memory-safe
       languages like C++. See [Why Linkerd doesn't use
-      Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) for
+      Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/) for
       more.
   - question: Who owns Linkerd and how is it licensed?
     answer:
@@ -93,7 +93,7 @@ faqs:
   - question: Who is Linkerd for?
     answer:
       Linkerd is for everyone. (See [Linkerd's Commitment to Open
-      Governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).)
+      Governance](/2019/10/03/linkerds-commitment-to-open-governance/).)
       In practice, Linkerd has certain technical prerequisites, such as
       Kubernetes.
     answer_schema:
@@ -108,14 +108,16 @@ faqs:
     answer: 'Just like this: Linkerd. Capital "L", lower-case everything else.'
     answer_schema:
       'Just like this: Linkerd. Capital "L", lower-case everything else.'
-  - question: Is there a Linkerd "enterprise edition"?
+  - question: Is there a Linkerd enterprise edition?
     answer:
-      No. Linkerd is fully open source with everything you need to run it in
-      production as part of the open source project.
+      Yes, enterprise distributions of Linkerd are available from Buoyant
+      (creators of Linkerd) as well as other companies. See the list of
+      companies that provide [commercial distributions of
+      Linkerd](/enterprise/).
   - question: Can I get commercial support?
     answer:
       Yes. See the list of companies that provide [commercial support for
-      Linkerd](https://linkerd.io/enterprise/).
+      Linkerd](/enterprise/).
   - question: What's on the Linkerd roadmap?
     answer:
       See the [Linkerd project
