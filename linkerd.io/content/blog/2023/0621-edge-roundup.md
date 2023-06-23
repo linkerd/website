@@ -12,8 +12,8 @@ featured: false
 ---
 
 {{< fig
-  alt="Dynamic Request Routing"
-  src="/uploads/2023/06//roundup-clocks-rect.png" >}}
+  alt="21 June Linkerd Edge Roundup"
+  src="/uploads/2023/06/roundup-clocks-rect.png" >}}
 
 Linkerd’s edge releases are a big part of our development process that we’re
 going to start talking more about – and so far in June, we’ve done a couple of
