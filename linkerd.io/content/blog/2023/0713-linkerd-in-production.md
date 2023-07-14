@@ -136,20 +136,27 @@ maintaining patches or `kustomization`s for them.)
 
 Linkerd's **H**igh **A**vailability (HA) mode changes the way Linkerd is
 deployed to eliminate single points of failure and ensure maximum availability
-for your cluster, so **definitely use HA mode for production use**. In HA mode,
-three replicas of each control plane component are deployed on separate nodes,
-which ensures that no single node failure can take down your entire control
-plane. HA mode also adds a strict requirement that Linkerd's proxy-injector be
-fully operational before any other pods can start, in order to prevent early
-pods from accidentally starting without mTLS.
+for your cluster, so **definitely use HA mode for production use**.
 
-Note that HA mode _requires_ that each of the three control-plane replicas run
-on different nodes, which means that your cluster must have at least three
-nodes to use HA mode. It also tries to set effective resource limits for the
-control-plane components; this may an area that you need to edit. Also note
-that you _must_ annotate the `kube-system` namespace with
-`config.linkerd.io/admission-webhooks=disabled`, to make sure that Linkerd
-doesn't try to inject proxies into anything there.
+In HA mode, Linkerd deploys three replicas of each control plane component to
+ensure that no single control-plane component failure can take down your
+entire control plane. It also provides resource limits for the control-plane
+components to help out the Kubernetes scheduler; you are strongly encouraged
+to check the resource limits and make sure that they are appropriate for your
+application.
+
+HA mode also adds a strict requirement that Linkerd's proxy-injector be fully
+operational before any other pods can start, in order to prevent early pods
+from accidentally starting without mTLS. This is implemented using an
+admission webhook, so it is _critical_ that you annotate the `kube-system`
+namespace with `config.linkerd.io/admission-webhooks=disabled`: this will
+prevent a deadlock where Linkerd is waiting for Kubernetes to be fully
+running, but Kubernetes is waiting for the Linkerd admission webhook!
+
+Finally, note that HA mode _requires_ each of the three control-plane replicas
+run on different Nodes, which means that your cluster must have at least three
+Nodes to use HA mode. (This is the reason why HA mode isn't the default: it
+won't work on single-Node demo clusters.)
 
 For more details about Linkerd's HA mode, check out the [Linkerd HA mode
 documentation](https://linkerd.io/2.13/features/ha/).
