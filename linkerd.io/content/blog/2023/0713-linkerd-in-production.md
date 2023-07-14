@@ -4,15 +4,17 @@ date: 2023-07-13T00:00:00Z
 title: |-
   Linkerd 2.13 in Production
 url:
-  /2023/07/13/linkerd-in-production
-thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
-featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
-tags: [Linkerd, linkerd, gitops, flux, flagger]
+  /2023/07/13/linkerd-in-production/
+thumbnail: '/uploads/2023/07/jan-huber-0xNbk7D_s6U-square.jpg'
+featuredImage: '/uploads/2023/07/jan-huber-0xNbk7D_s6U-rect.jpg'
+tags: [Linkerd, linkerd, helm, production, high availability, debug, debugging, alerts, alerting, monitoring]
 featured: false
 ---
 
-{{< fig alt="21 June Linkerd Edge Roundup"
-  src="/uploads/2023/06/roundup-clocks-rect.png" >}}
+{{< fig
+  alt="Airliner Cockpit"
+  title="image credit: [Jan Huber](https://unsplash.com/@jan_huber?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
+  src="/uploads/2023/07/jan-huber-0xNbk7D_s6U-rect.jpg" >}}
 
 _This blog post is based on a workshop that I delivered at Buoyant’s [Service
 Mesh Academy](https://buoyant.io/service-mesh-academy). If this seems
@@ -62,12 +64,18 @@ You'll note that most of these have nothing to do with your application, but
 instead are dealing with broad recommendations for how you set up and run
 Linkerd to make day-to-day operations as trouble-free as possible.
 
-### 1a. Think carefully about certificates
+### 1. Think carefully about certificates and the CNI
 
-We'll start with certificates because expired certificates are **the** most
-common reason for a production Linkerd installation to take downtime, which is
-a shame because it's 100% avoidable. There are two major things to consider
-here:
+These two things are at the top of the list because they're the basis on which
+a lot of the rest of Linkerd functions, so it's a great idea to decide how you
+want to approach them before installing Linkerd. (You can still change them
+after the fact, but you'll need to be careful to avoid downtime.)
+
+#### Certificates
+
+Expired certificates are **the** most common reason for a production Linkerd
+installation to take downtime, which is a shame because they're 100%
+avoidable. There are two major things to consider here:
 
 - Ideally, **your trust anchor secret key should not be stored on your cluster
   at all**. Linkerd only needs access to the public key of the trust anchor, and
@@ -88,12 +96,12 @@ fully automate rotating the issuer certificates every 48 hours or so. The
 combination can let you sidestep a lot of production issues while still
 keeping things safe.
 
-### 1b. Think carefully about the CNI
+#### The CNI
 
-The CNI is another piece that's worth thinking about early. Linkerd absolutely
-must adjust the network to enable its mesh routing, which it can accomplish
-either through an init container or the Linkerd CNI plugin. Generally, our
-advice is to **use the init container if you can**.
+The **C**ontainer **N**etworking **I**nterface is the chunk of Kubernetes that
+Linkerd needs to interact with in order to configure the network for mesh
+routing. Linkerd can do this either with an init container, or with the
+Linkerd CNI plugin. We recommend **using the init container if you can**.
 
 You can get a lot more detail in the [SMA on the Linkerd startup
 process](https://buoyant.io/service-mesh-academy/what-really-happens-at-startup),
@@ -286,18 +294,18 @@ it can be very useful for debugging: check out the [documentation on using the
 debug sidecar](https://linkerd.io/2/tasks/using-the-debug-container) for the
 details here.
 
-## Summary
+## Linkerd in Production
 
 There's a lot of text and references above, but what you'll find going through
-it all is that it's not at all difficult to get a rock-solid Linkerd
-installation running even in demanding production environments. After that,
-you'll find that Linkerd's operational simplicity and performance will rapidly
-deliver real benefits......
+it all is that it's really not difficult to get a rock-solid Linkerd
+installation running demanding real-world production environments. Linkerd's
+ability to easily provide security, reliability, and observability, while
+maintaining operational simplicity and performance, make a world of difference
+in this kind of application.
 
- what you
-need to know to be able to run Linkerd in production and still sleep through
-the night.
-
-
-
-Linkerd is
+If you found this interesting, check out the Service Mesh Academy workshop on
+[Linkerd in Production 101: updated for
+2.13](https://buoyant.io/service-mesh-academy/linkerd-in-production-101) for
+hands-on exploration of everything I've talked about here! And, as always,
+feedback is always welcome -- you can find me as `@flynn` on the [Linkerd
+Slack](https://slack.linkerd.io).
