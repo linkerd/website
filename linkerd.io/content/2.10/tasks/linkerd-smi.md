@@ -82,7 +82,7 @@ linkerd inject https://raw.githubusercontent.com/linkerd/linkerd2/main/test/inte
 ```
 
 This installs a simple client, and two server deployments.
-One of the server deployments i.e `faling-svc` always returns a 500 error,
+One of the server deployments i.e `failing-svc` always returns a 500 error,
 and the other one i.e `backend-svc` always returns a 200.
 
 ```bash
