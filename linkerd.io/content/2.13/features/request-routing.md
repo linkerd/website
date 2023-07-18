@@ -19,7 +19,6 @@ This feature extends Linkerd's traffic routing capabilities beyond those of
 [traffic splits](../traffic-split/), which only provide percentage-based
 splits.
 
-
 ## Learning more
 
 - [Guide to configuring routing policy](../../tasks/configuring-dynamic-request-routing/)
