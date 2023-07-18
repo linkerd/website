@@ -98,7 +98,7 @@ foundation_member_banner:
 cta_buoyant:
   image: "/uploads/buoyant-logo-blue.png"
   textcreated: "Linkerd was created by"
-  caption: "Learn more about Buoyant"
+  caption: "Learn more about Buoyant's Linkerd offerings"
   url: "https://buoyant.io/"
 
 ---

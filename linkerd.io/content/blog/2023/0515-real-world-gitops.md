@@ -2,7 +2,7 @@
 author: 'flynn'
 date: 2023-05-15T00:00:00Z
 title: |-
-  Real-World GitOps with Flux, Flagger, and Linkerd
+  Workshop recap: Real-World GitOps with Flux, Flagger, and Linkerd
 url:
   /2023/05/15/real-world-gitops/
 thumbnail: '/uploads/2023/05/gitops-square.png'
