@@ -13,7 +13,7 @@ more.
 (See [TCP Proxying and Protocol Detection](../protocol-detection/) for details of
 how this detection happens automatically, and how it can sometimes fail.)
 
-Note that while Linkerd does [zero-config mutual TLS](../automatic-mtls), it
+Note that while Linkerd does [zero-config mutual TLS](../automatic-mtls/), it
 cannot decrypt TLS connections initiated by the outside world. For example, if
 you have a TLS connection from outside the cluster, or if your application does
 HTTP/2 plus TLS, Linkerd will treat these connections as raw TCP streams. To

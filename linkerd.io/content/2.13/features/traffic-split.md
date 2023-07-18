@@ -14,7 +14,7 @@ onto a newer version.
 
 {{< note >}}
 This feature will eventually be supplanted by the newer [dynamic request
-routing](../request-routing) capabilities, which does not require the SMI
+routing](../request-routing/) capabilities, which does not require the SMI
 extension.
 {{< /note >}}
 
