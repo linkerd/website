@@ -2,7 +2,7 @@
 author: 'flynn'
 date: 2023-02-21T00:00:00Z
 title: |-
-  Linkerd and Ingress Controllers: Bringing the Outside World In
+  Workshop recap: Linkerd and Ingress Controllers: Bringing the Outside World In
 url:
   /2023/02/21/linkerd-and-ingress/
 thumbnail: '/uploads/2023/02/door-battaglia-9drS5E_Rguc-square.jpg'

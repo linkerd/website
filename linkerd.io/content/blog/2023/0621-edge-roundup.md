@@ -2,7 +2,7 @@
 author: 'matei'
 date: 2023-06-21T00:00:00Z
 title: |-
-  Linkerd Edge Roundup: 21 June 2023
+  Linkerd Edge Release Roundup: 21 June 2023
 url:
   /2023/06/20/linkerd-edge-roundup/
 thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
@@ -12,7 +12,7 @@ featured: false
 ---
 
 {{< fig
-  alt="21 June Linkerd Edge Roundup"
+  alt="21 June Linkerd Edge Release Roundup"
   src="/uploads/2023/06/roundup-clocks-rect.png" >}}
 
 Linkerd’s edge releases are a big part of our development process that we’re
