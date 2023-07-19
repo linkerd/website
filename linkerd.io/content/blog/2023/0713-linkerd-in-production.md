@@ -2,7 +2,7 @@
 author: 'flynn'
 date: 2023-07-13T00:00:00Z
 title: |-
-  Linkerd 2.13 in Production
+  Workshop recap: Running Linkerd in Production
 url:
   /2023/07/13/linkerd-in-production/
 thumbnail: '/uploads/2023/07/jan-huber-0xNbk7D_s6U-square.jpg'

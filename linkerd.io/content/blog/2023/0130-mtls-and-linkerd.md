@@ -1,5 +1,5 @@
 ---
-title: "mTLS and Linkerd"
+title: "Workshop recap: A deep dive into Kubernetes mTLS with Linkerd"
 author: 'flynn'
 date: 2023-01-30T00:00:00+00:00
 slug: mtls-and-linkerd
@@ -19,8 +19,6 @@ _This blog post is based on a workshop I recently delivered at Buoyant’s
 [Service Mesh Academy](https://buoyant.io/service-mesh-academy). If this seems
 interesting, check out the [full
 recording](https://buoyant.io/service-mesh-academy/kubernetes-mtls-with-linkerd)!_
-
-## mTLS and Linkerd
 
 You don’t have to spend much time in the cloud-native world before
 [mTLS](https://buoyant.io/mtls-guide) comes up. It shows up over and over

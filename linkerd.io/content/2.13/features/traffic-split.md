@@ -13,8 +13,14 @@ for example, by slowly easing traffic off of an older version of a service and
 onto a newer version.
 
 {{< note >}}
-If working with headless services, traffic splits cannot be retrieved. Linkerd
-reads service discovery information based off the target IP address, and if that
+This feature will eventually be supplanted by the newer [dynamic request
+routing](../request-routing/) capabilities, which does not require the SMI
+extension.
+{{< /note >}}
+
+{{< note >}}
+TrafficSplits cannot be used with headless services. Linkerd reads
+service discovery information based off the target IP address, and if that
 happens to be a pod IP address then it cannot tell which service the pod belongs
 to.
 {{< /note >}}

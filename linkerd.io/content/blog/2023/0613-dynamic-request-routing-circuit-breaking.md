@@ -2,7 +2,7 @@
 author: 'flynn'
 date: 2023-06-13T00:00:00Z
 title: |-
-  Dynamic Request Routing and Circuit Breaking
+  Workshop recap: Dynamic Request Routing and Circuit Breaking
 url:
   /2023/06/13/dynamic-request-routing-circuit-breaking/
 thumbnail: '/uploads/2023/06/dnevozhai-routing-7nrsVjvALnA-unsplash-square.jpg'

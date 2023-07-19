@@ -130,5 +130,5 @@ result in an abrupt termination of those connections.
 
 ## Learning more
 
-- [Policy reference](../../reference/authorization-policy/)
+- [Authorization policy reference](../../reference/authorization-policy/)
 - [Guide to configuring per-route policy](../../tasks/configuring-per-route-policy/)
