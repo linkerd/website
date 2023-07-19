@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
+  - blog/2023/0711/flat-networks.md
   - blog/2023/0621-edge-roundup.md
-  - blog/2023/0613-dynamic-request-routing-circuit-breaking.md
 description: Read the latest blog posts covering the Linkerd service mesh, from technical tutorials to announcements to what’s next on the roadmap.
 keywords: []
 ---
