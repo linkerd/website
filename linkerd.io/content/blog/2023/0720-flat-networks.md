@@ -1,6 +1,6 @@
 ---
 author: 'william'
-date: 2023-07-19T00:00:00Z
+date: 2023-07-20T00:00:00Z
 title: |-
   Enterprise multi-cluster at scale: supporting flat networks in Linkerd
 thumbnail: '/uploads/2023/07/nasa-_SFJhRPzJHs-unsplash.jpg'
@@ -10,7 +10,6 @@ tags: [Linkerd]
 
 {{< fig
   alt="An image of Manhattan at night, shot from the atmosphere"
-  title="Welcome OSM Users!"
   src="/uploads/2023/07/nasa-_SFJhRPzJHs-unsplash.jpg" >}} <!--_ -->
 
 Linkerd has seen a steady rise in enterprise adoption, with companies like
@@ -24,73 +23,93 @@ upcoming Linkerd 2.14 release will introduce a new set of features designed to
 handle types of multi-cluster Kubernetes configurations commonly found in
 enterprise deployments.
 
-One of the most important new features will be the ability for Linkerd to
-_establish mTLS pod-to-pod communication directly across Kubernetes clusters,
-without the use of a gateway intermediary_. In this blog post, I'll talk about
-what that means, why it's important, and how it relates to trends we've seen in
-large-scale enterprise Kubernetes deployments.
+One of the most important new features in the next Linkerd release will be an
+improved ability to handle multi-cluster communication in environments with a
+shared flat network between clusters. In this blog post, I'll talk about what
+that means and why it's important.
 
 ## How does Linkerd handle multi-cluster today?
+
+If you're using multiple Kubernetes clusters and want them to communicate with
+each other, Linkerd gives you the ability to send traffic across cluster
+boundaries that is:
+
+1. **Fully secured**. This means that traffic between clusters is encrypted,
+   authenticated, and authorized using mutual TLS, workload identities (not
+   network identities!) and Linkerd's fine-grained, [zero-trust authorization
+   policies](/2/features/server-policy/).
+2. **Transparent to the application.** This means that the application is
+   totally decoupled from cluster topology, which allows the operator to
+   take advantage of powerful networking capabilities such as [dynamically
+   failover traffic to other clusters](/2/tasks/automatic-failover/).
+3. **Observable and reliable**. Linkerd's powerful L7 instrospection and
+   reliability mechanisms, including golden metrics, retries, timeouts,
+   distributed tracing, circuit breaking, and more, are all available to
+   cross-cluster traffic just as they are to on-cluster traffic.
 
 Linkerd has supported multi-cluster Kubernetes deployments since the release of
 Linkerd 2.8 in 2020. That release introduced [a simple and elegant
 design](https://linkerd.io/2.13/features/multicluster/) that involves the
 addition of a service mirror component to handle service discovery, and a
-multi-cluster gateway component to handle traffic from other clusters. This
-allows Linkerd to provide communication across Kubernetes clusters that is:
+multi-cluster gateway component to handle traffic from other clusters.
 
-1. Fully transparent to the application;
-2. Secure across clusters, even across the open internet; and
-3. Entirely independent of underlying network topology.
+This gateway design allowed Linkerd's multi-cluster support to be entirely
+independent of underlying network topology. Whether your clusters are colocated
+in the same datacenter; split across different cloud providers; or deployed in a
+hybrid fashion between on-premises and cloud deployments, Linkerd worked the
+same way.
 
-That final point is the salient feature of this design: whether your clusters
-are colocated in the same datacenter; split across different cloud providers; or
-deployed in a hybrid fashion between on-premises and cloud deployments,
-Linkerd's multi-cluster approach provides a uniform way to connect Kubernetes
-clusters that offers the same guarantees of secure, transparent, and observable
-communication for cross-cluster communication as for in-cluster communication.
-
-This design has worked well for companies that have Kubernetes
-deployments that are naturally split into heterogeneous networks. However, as
-Kubernetes adoption has grown in the enterprise, we've seen a growing number of
-cases where clusters are deployed in a shared _flat network,_ where the
-underlying networking infrastructure allows the pods in different clusters to
-address and route traffic directly to each other. In these cases, Linkerd's use
-of a gateway in between pods is unnecessary.
+This design has worked well! However, as Kubernetes adoption has grown in
+enterprise environments, we've seen a growing number of cases where clusters are
+deployed in a shared _flat network_. In this situation, we can make some
+significant optimizations by removing the gateway.
 
 ## Multi-cluster for flat networks
 
+In a shared flat network situation, pods in different Kubernetes clusters can
+route traffic directly to each other. In other words, a pod in cluster 1 can
+establish a TCP connection to a pod in cluster 2, just using the underlying
+network.
+
+If pods are routable, why use Linkerd? For exactly the same reasons you're using
+it within the cluster: to provide the security, reliability, and observability
+guarantees beyond what a baseline TCP connection provides.
+
 In Linkerd 2.14, we'll introduce an additional mode of multi-cluster
-communication designed for flat networks: direct pod-to-pod communication across
-Kubernetes clusters.
+communication designed for shared flat networks: direct pod-to-pod communication
+between clusters without the gateway intermediary.
+
+{{< fig
+  alt="An architectural diagram comparing hierarchical network mode with the new flat network mode"
+  src="/uploads/2023/07/flat_network@2x.png">}}
 
 In this approach, as you might imagine, Linkerd will route communication from a
 pod on the source cluster directly to the destination pod on another cluster
-without transiting a gateway. This approach solves several key needs for
-enterprise adopters and customers who use flat networks, including:
+without transiting the gateway. This provides several advantages, including:
 
-* Improving the latency of cross-cluster calls by removing the additional hop
+* **Improved latency** of cross-cluster calls by removing the additional hop
   between client and server.
-* Improving security by preserving workload identity in mTLS calls across
+* **Improved security** by preserving workload identity in mTLS calls across
   clusters, rather than overriding it with the gateway identity.
-* Improving costs by reducing the amount of traffic that is routed through the
-  multi-cluster gateway. (In cloud environments, the gateway typically requires
-  a cloud load balancer, which incurs network costs based on the amount of
-  traffic the handle.)
-* Getting us closer to supporting pod-to-pod protocols like Raft, a requirement
-  for supporting modern distributed storage systems that operate across clusters.
+* **Reduced cloud spend** by reducing the amount of traffic that is routed through the
+  multi-cluster gateway, which is often implemented as a cloud loud balancer.
 
-This approach also still preserves a critical aspect of Linkerd's multi-cluster
-design: separation of failure domains. Each Kubernetes cluster runs its own
-Linkerd control plane, independently of other clusters, and the failure of a
-single cluster cannot take down the service mesh on other clusters. As usual,
-techniques such as [cross-cluster
-failover](https://docs.google.com/document/u/0/d/14vN86Ndnq5qRwZpGEbGghTauKwQaiDzJUIGLDO5sjzk/edit)
-can be used to automatically route traffic to the remaining clusters.
+This approach still preserves two critical aspects of Linkerd's multi-cluster
+design:
 
-Finally, this approach actually improves Linkerd's ability to provide a uniform
-layer of authentication across your entire environment, and to enforce granular
-authorization policies aka "micro-segmentation". Because the gateway is no
+1. **Separation of failure domains.** Each Kubernetes cluster runs its own
+   Linkerd control plane, independently of other clusters, and the failure of a
+   single cluster cannot take down the service mesh on other clusters.
+2. **Standardized, uniform architecture.**. Unlike other solutions that split
+   L7 logic between complex proxies operating at different levels and scopes,
+   Linkerd's Rust-based "micro-proxy" sidecars are the sole mechanism for
+   controlling traffic between pods and clusters, giving you a single
+   operational surface area to monitor and manage, with clear isolation of
+   failure and security domains.
+
+Finally, this approach improves Linkerd's ability to provide a uniform layer of
+authentication across your entire environment, and to enforce granular
+authorization policies, aka "micro-segmentation". Because the gateway is no
 longer an intermediary, cross-cluster connections retain the workload identity
 of the source, and authorization policies can be crafted to take advantage of
 these identities directly.
@@ -101,7 +120,7 @@ loosely aligns with, the [Multi-Cluster Services API proposal
 While strict conformance with this KEP is not currently a goal, we look forward
 to seeing how that proposal evolves.)
 
-## So when do we get this capability?
+## So when do we get this amazing new feature?
 
 Linkerd 2.14 will be shipping next month. With the addition of pod-to-pod
 communication, we're confident that Linkerd will continue to be the simplest way
