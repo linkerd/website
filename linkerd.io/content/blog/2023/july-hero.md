@@ -22,7 +22,7 @@ the Linkerd community. Whether it's helping others, answering questions, sharing
 
 This month's hero is
 [Mikael Fridh](https://www.linkedin.com/in/mikaelfridh/). Mikael reported
-an incompatibility between Linke rd's CNI plugin and newer versions of
+an incompatibility between Linkerd's CNI plugin and newer versions of
 EKS's VPC CNI plugin. He demonstrated great domain insight by quickly
 providing a succinct fix, that we immediately incorporated into the
 2.12 and 2.13 branches of Linkerd. Thank you, Mikael, for helping rapidly
