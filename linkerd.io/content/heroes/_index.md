@@ -20,6 +20,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Mikael Fridh
+    date: July 2023
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/2023/07/mikael-fridh-portrait.jpeg"
+    alt: Portrait of Mikael Fridh
+    github_url: "https://www.linkedin.com/in/mikaelfridh/"
   - name: Yu Cao
     date: February 2023
     blurb: Technical contributions
