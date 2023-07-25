@@ -6,6 +6,8 @@ description: |-
   The votes are in! This month's Linkerd Hero is Mikael Fridh for fixing an
   incompatibility between Linkerd's CNI plugin and newer versions of EKS's
   VPC CNI plugin.
+url:
+  /2023/07/25/announcing-the-july-2023-linkerd-hero/
 featuredImage: '/uploads/2023/07/mikael-fridh-featured.png'
 thumbnail: '/uploads/2023/07/mikael-fridh-hero-square.png'
 tags:
