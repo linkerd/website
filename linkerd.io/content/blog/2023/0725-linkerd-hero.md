@@ -1,6 +1,6 @@
 ---
 author: catherine
-date: 2023-07-23T00:00:00Z
+date: 2023-07-25T00:00:00Z
 title: Announcing the July 2023 Linkerd Hero!
 description: |-
   The votes are in! This month's Linkerd Hero is Mikael Fridh for fixing an
