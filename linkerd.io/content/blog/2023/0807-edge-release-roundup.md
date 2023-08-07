@@ -21,15 +21,6 @@ plan is do these roundups more frequently to keep things manageable, but for
 this one, we'll hit some highlights and then do a release-by-release list at
 the end.
 
-## tl;dr:
-
-We did five edge releases with lots of fixes and Gateway API improvements! You
-can install the latest edge release by running:
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
-```
-
 ## Community Contributions
 
 We couldn't do what we do without the Linkerd community, and this batch of
