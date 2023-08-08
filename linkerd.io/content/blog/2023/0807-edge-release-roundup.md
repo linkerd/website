@@ -2,7 +2,7 @@
 author: 'alejandro'
 date: 2023-08-07T00:00:00Z
 title: |-
-  Linkerd Edge Release Roundup: 7 August 2023
+  Linkerd Edge Release Roundup: August 2023
 url:
   /2023/08/07/linkerd-edge-release-roundup/
 thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
@@ -12,7 +12,7 @@ featured: false
 ---
 
 {{< fig
-  alt="7 August Linkerd Edge Release Roundup"
+  alt="August Linkerd Edge Release Roundup"
   src="/uploads/2023/06/roundup-clocks-rect.png" >}}
 
 Linkerd’s edge releases are a big part of our development process, and there
@@ -75,7 +75,7 @@ feature parity between [HTTPRoute]s and [ServiceProfile]s:
 
 ## Fixes
 
-Of the many fixes in these five releases, two are particul stand out:
+Of the many fixes in these five releases, two in particular stand out:
 
 1. In edge-23.7.3, we fixed a race condition where the Linkerd destination
    controller could panic in an environment with high churn of Endpoints or
@@ -86,18 +86,18 @@ Of the many fixes in these five releases, two are particul stand out:
    This is covered in Linkerd issue [#11163].
 
 2. In edge-23.8.1, we raised the default capacities of the HTTP request queues
-   (both inbound and outbound) back to 10000, after lowering them for Linkerd
+   (both inbound and outbound) back to 10,000 after lowering them for Linkerd
    2.13. The effect here is that in situations where a single destination
    workload needed to accept a lot of concurrent traffic, the Linkerd proxies
    would decide that they had too much load, and start shedding it by dropping
    connections. This happened much more agressively in Linkerd 2.13 than in
    Linkerd 2.12; it's fixed in edge-23.8.1.
 
-   This is covered in Linkerd issue [#11055] and [PR 11198].
+   This is covered in Linkerd issue [#11055] and PR [#11198].
 
 [#11163]:https://github.com/linkerd/linkerd2/issues/11163
 [#11055]:https://github.com/linkerd/linkerd2/issues/11055
-[PR 11198]:https://github.com/linkerd/linkerd2/pull/11198
+[#11198]:https://github.com/linkerd/linkerd2/pull/11198
 
 ## Installing the Latest Edge Release
 
