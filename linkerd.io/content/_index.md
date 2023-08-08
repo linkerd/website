@@ -68,8 +68,8 @@ companies:
   link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
   link: https://www.cloverhealth.com/
-- image: "/uploads/logos/blue/godaddy.png"
-  link: https://godaddy.com/
+- image: "/uploads/logos/blue/docker.png"
+  link: https://www.docker.com/
 - image: "/uploads/logos/blue/heb.png"
   link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
