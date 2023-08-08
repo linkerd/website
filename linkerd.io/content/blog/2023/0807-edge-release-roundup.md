@@ -41,7 +41,7 @@ about all of these contributions in the release-by-release details below.
 
 From the feature perspective, our main focus over the last several edge
 releases has been improving our Gateway API support, bringing us closer to
-feature parity between [HTTPRoute]s and [ServiceProfile]s:
+feature parity between [HTTPRoutes] and [ServiceProfiles]:
 
 - We added support for the Gateway API's `gateway.networking.k8s.io` APIGroup
   to Linkerd in edge-23.7.1 on July 7th. This is a major step toward
@@ -58,16 +58,16 @@ feature parity between [HTTPRoute]s and [ServiceProfile]s:
 - We also made HTTPRoute `parentRefs` port numbers optional in edge-23.7.3,
   per the [HTTPRoute standard].
 
-- Finally, we started added support for [HTTPRoute filters]:
+- Finally, we started adding support for [HTTPRoute filters]:
   `RequestHeaderModifier` and `RequestRedirect` are supported in edge-23.7.2,
   and `ResponseHeaderModifier` is supported in edge-23.7.3 (so edge-23.7.2
   added header modifications for _requests_, and edge-23.7.3 added header
   modifications for _responses_).
 
-[HTTPRoute]:https://gateway-api.sigs.k8s.io/api-types/httproute/
+[HTTPRoutes]:https://gateway-api.sigs.k8s.io/api-types/httproute/
 [HTTPRoute standard]:https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1alpha2.HTTPRoute
-[ServiceProfile]:https://linkerd.io/2.13/features/service-profiles/
 [GEP-1742]:https://gateway-api.sigs.k8s.io/geps/gep-1742/
+[ServiceProfiles]:https://linkerd.io/2.13/features/service-profiles/
 [consumer-routes]:https://gateway-api.sigs.k8s.io/concepts/glossary/#consumer-route
 [gamma-routing]:https://gateway-api.sigs.k8s.io/concepts/gamma/#how-the-gateway-api-works-for-service-mesh
 [Mesh profile]:https://gateway-api.sigs.k8s.io/geps/gep-1686/
@@ -156,8 +156,7 @@ you – happy meshing!!
   - We made HTTPRoute `parentRefs` port numbers optional, per the [HTTPRoute
     standard].
 
-  - We added support for Gateway API [_consumer routes_][consumer-routes]
-    (more on this shortly).
+  - We added support for Gateway API [_consumer routes_][consumer-routes].
 
   - We added support for HTTPRoute's `ResponseHeaderModifier`
     [filter][HTTPRoute filters].
@@ -185,7 +184,7 @@ you – happy meshing!!
     without needing host networking support.
 
   - We raised the default capacities of the HTTP request queues back to
-    10000. More on this below, it has a bigger impact than one might think!
+    10,000.
 
 ----
 
