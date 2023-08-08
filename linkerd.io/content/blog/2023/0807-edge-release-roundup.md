@@ -66,7 +66,6 @@ feature parity between [HTTPRoutes] and [ServiceProfiles]:
 
 [HTTPRoutes]:https://gateway-api.sigs.k8s.io/api-types/httproute/
 [HTTPRoute standard]:https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1alpha2.HTTPRoute
-[GEP-1742]:https://gateway-api.sigs.k8s.io/geps/gep-1742/
 [ServiceProfiles]:https://linkerd.io/2.13/features/service-profiles/
 [consumer-routes]:https://gateway-api.sigs.k8s.io/concepts/glossary/#consumer-route
 [gamma-routing]:https://gateway-api.sigs.k8s.io/concepts/gamma/#how-the-gateway-api-works-for-service-mesh
@@ -117,8 +116,6 @@ changelogs are at
 hear your feedback on [Slack](https://slack.linkerd.io) or at the new [Buoyant
 Linkerd Forum](https://linkerd.buoyant.io). Looking forward to hearing from
 you – happy meshing!!
-
-[Service Mesh Academy episode about startup]: https://buoyant.io/service-mesh-academy/what-really-happens-at-startup
 
 ## Release Details
 
