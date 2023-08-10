@@ -787,6 +787,18 @@ entries.
 Here you need to make sure the certificate was issued specifically for
 `linkerd-tap.linkerd.svc`.
 
+```bash
+× tap API server has valid cert
+    anchors not within their validity period:
+        * tap.linkerd-viz.svc not valid anymore. Expired on <DATE>
+    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+```
+
+Here you need to rotate the expired certificate, see
+[Rotating webhooks certificates](../rotating_webhooks_certificates/) for a single rotation or
+[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
+for automatic rotation which won't incur downtime.
+
 ### √ webhook cert is valid for at least 60 days {#l5d-webhook-cert-not-expiring-soon}
 
 Example failure:
