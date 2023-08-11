@@ -51,6 +51,40 @@ networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-su
 Once these components are installed, Kubernetes `Service` resources that match
 a label selector can be exported to other clusters.
 
+## Multi-cluster for flat networks
+
+Linkerd's multi-cluster extension supports pod-to-pod communication in
+environments that use a shared, flat network. When clusters share the same
+network, pods may establish TCP connections and send traffic to each other
+across cluster boundaries. In such cases, it may be preferred to avoid the
+additional hop represented by the gateway intermediary.
+
+{{< fig
+  alt="An architectural diagram comparing hierarchical network mode with the new flat network mode"
+  src="/uploads/2023/07/flat_network@2x.png">}}
+
+Operating the multi-cluster extension in a direct pod-to-pod communication mode
+may provide several advantages over routing traffic through a gateway:
+
+* Improved latency, by avoiding an additional network hop
+* Reduced operational costs that stem from maintaing a `LoadBalancer`-type
+  service for the gateway
+* Finer grained multi-cluster authorization policies, cryptographic identity
+  can be preserved across cluster boundaries, allowing for more expressive
+  policies
+
+Direct pod-to-pod communication does not replace gateways, as a matter of fact,
+the two are not mutually exclusive. Routing configuration is expressed at the
+`Service` resource level. A label selector is used to export services to other
+clusters; the same label selector is shared by the two modes. Services that
+want to benefit from direct pod-to-pod routing can be exported with a
+`remote-discovery` mode, while services whose traffic should go through the
+gateway can continue to use the default label value.
+
+To read more about pod-to-pod communication, you can follow the [getting
+started with flat networks in multi-cluster](<placeholder>) guide, or consult
+the [multi-cluster reference page](../flat-network-multicluster).
+
 ## Headless services
 
 [headless-svc]: https://kubernetes.io/docs/concepts/services-networking/service/#headless-services
@@ -95,6 +129,8 @@ guide](../../tasks/multicluster/) for a walkthrough.
 ## Further reading
 
 * [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
+* [Multi-cluster communication in flat networks](../flat-network-multicluster)
+* [Getting started with multi-cluster in flat networks](<placeholder-for-getting-started>)
 * [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
