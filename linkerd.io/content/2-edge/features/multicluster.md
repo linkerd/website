@@ -15,7 +15,11 @@ topology. This multi-cluster capability is designed to provide:
 3. **Support for heterogeneous networks.** Since clusters can span clouds,
    VPCs, on-premises data centers, and combinations thereof, Linkerd does not
    introduce any L3/L4 requirements other than gateway connectivity.
-4. **A unified model alongside in-cluster communication.** The same
+4. **Supports pod-to-pod communication.** When clusters share the same
+   underlying network, Linkerd can be configured to [send traffic
+   directly](#multi-cluster-for-flat-networks) to pods across cluster
+   boundaries.
+5. **A unified model alongside in-cluster communication.** The same
    observability, reliability, and security features that Linkerd provides for
    in-cluster communication extend to cross-cluster communication.
 
