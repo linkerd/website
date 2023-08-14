@@ -1,6 +1,6 @@
 +++
 title = "Multi-cluster communication in flat networks"
-description = "Multi-cluster communication using pod-to-pod communication inshared network environments."
+description = "Multi-cluster communication using pod-to-pod communication in shared network environments."
 aliases = [ "multicluster_support" ]
 +++
 
