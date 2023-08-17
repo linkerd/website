@@ -7,8 +7,8 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/2023/0526-osm-migration.md
-  - blog/2023/0515-real-world-gitops.md
-description: ''
+  - blog/2023/0720-flat-networks.md
+  - blog/2023/0713-linkerd-in-production.md
+description: Read the latest blog posts covering the Linkerd service mesh, from technical tutorials to announcements to what’s next on the roadmap.
 keywords: []
 ---

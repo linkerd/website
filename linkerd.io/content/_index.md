@@ -68,8 +68,8 @@ companies:
   link: https://www.webex.com/
 - image: "/uploads/logos/blue/clover-health.png"
   link: https://www.cloverhealth.com/
-- image: "/uploads/logos/blue/godaddy.png"
-  link: https://godaddy.com/
+- image: "/uploads/logos/blue/docker.png"
+  link: https://www.docker.com/
 - image: "/uploads/logos/blue/heb.png"
   link: https://www.heb.com/
 - image: "/uploads/logos/blue/walmart.svg"
@@ -98,7 +98,7 @@ foundation_member_banner:
 cta_buoyant:
   image: "/uploads/buoyant-logo-blue.png"
   textcreated: "Linkerd was created by"
-  caption: "Learn more about Buoyant"
+  caption: "Learn more about Buoyant's Linkerd offerings"
   url: "https://buoyant.io/"
 
 ---

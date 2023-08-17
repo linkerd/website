@@ -1,37 +1,70 @@
 +++
-title = "Ingress traffic"
-description = "Linkerd works alongside your ingress controller of choice."
+title = "Handling ingress traffic"
+description = "Linkerd can work alongside your ingress controller of choice."
 +++
 
-For reasons of simplicity and composability, Linkerd doesn't provide a built-in
-ingress. Instead, Linkerd is designed to work with existing Kubernetes ingress
-solutions.
+Ingress traffic refers to traffic that comes into your cluster from outside the
+cluster. For reasons of simplicity and composability, Linkerd itself doesn't
+provide a built-in ingress solution for handling traffic coming into the
+cluster. Instead, Linkerd is designed to work with the many existing Kubernetes
+ingress options.
 
-Combining Linkerd and your ingress solution requires two things:
+Combining Linkerd and your ingress solution of choice requires two things:
 
-1. Configuring your ingress to support Linkerd.
-2. Meshing your ingress pods so that they have the Linkerd proxy installed.
+1. Configuring your ingress to support Linkerd (if necessary).
+2. Meshing your ingress pods.
 
-Meshing your ingress pods will allow Linkerd to provide features like L7
-metrics and mTLS the moment the traffic is inside the cluster. (See
-[Adding your service](../adding-your-service/) for instructions on how to mesh
-your ingress.)
+Strictly speaking, meshing your ingress pods is not required to allow traffic
+into the cluster. However, it is recommended, as it allows Linkerd to provide
+features like L7 metrics and mutual TLS the moment the traffic enters the
+cluster.
 
-Note that, as explained below, some ingress options need to be meshed in
-"ingress" mode, which means injecting with the `linkerd.io/inject: ingress`
-annotation rather than the default `enabled`. It's possible to use this
-annotation at the namespace level, but it's recommended to do it at the
-individual workload level instead. The reason is that many ingress
-implementations also place other types of workloads under the same namespace for
-tasks other than routing and therefore you'd rather inject them using the
-default `enabled` mode (or some you wouldn't want to inject at all, such as
-Jobs).
+## Handling external TLS
+
+One common job for ingress controllers is to terminate TLS from the outside
+world, e.g. HTTPS calls.
+
+Like all pods, traffic to a meshed ingress has both an inbound and an outbound
+component. If your ingress terminates TLS, Linkerd will treat this inbound TLS
+traffic as an opaque TCP stream, and will only be able to provide byte-level
+metrics for this side of the connection.
+
+Once the ingress controller terminates the TLS connection and issues the
+corresponding HTTP or gRPC traffic to internal services, these outbound calls
+will have the full set of metrics and mTLS support.
+
+## Ingress mode {#ingress-mode}
+
+Most ingress controllers can be meshed like any other service, i.e. by
+applying the `linkerd.io/inject: enabled` annotation at the appropriate level.
+(See [Adding your services to Linkerd](../adding-your-service/) for more.)
+
+However, some ingress options need to be meshed in a special "ingress" mode,
+using the `linkerd.io/inject: ingress` annotation.
+
+The instructions below will describe, for each ingress, whether it requires this
+mode of operation.
+
+If you're using "ingress" mode, we recommend that you set this ingress
+annotation at the workload level rather than at the namespace level, so that
+other resources in the ingress namespace are be meshed normally.
 
 {{< warning id=open-relay-warning >}}
-When an ingress is meshed in `ingress` mode by using `linkerd.io/inject:
-ingress`, the ingress _must_ be configured to remove the `l5d-dst-override`
-header to avoid creating an open relay to cluster-local and external endpoints.
+When an ingress is meshed in ingress mode, you _must_ configure it to remove
+the `l5d-dst-override` header to avoid creating an open relay to cluster-local
+and external endpoints.
 {{< /warning >}}
+
+{{< note >}}
+Linkerd versions 2.13.0 through 2.13.4 had a bug whereby the `l5d-dst-override`
+header was *required* in ingress mode, or the request would fail. This bug was
+fixed in 2.13.5, and was not present prior to 2.13.0.
+{{< /note >}}
+
+For more on ingress mode and why it's necessary, see [Ingress
+details](#ingress-details) below.
+
+## Common ingress options for Linkerd
 
 Common ingress options that Linkerd has been used with include:
 
@@ -46,23 +79,15 @@ Common ingress options that Linkerd has been used with include:
 - [Kong](#kong)
 - [Haproxy](#haproxy)
 - [EnRoute](#enroute)
-- [Ingress details](#ingress-details)
 
 For a quick start guide to using a particular ingress, please visit the section
-for that ingress. If your ingress is not on that list, never fear—it likely
-works anyways. See [Ingress details](#ingress-details) below.
+for that ingress below. If your ingress is not on that list, never fear—it
+likely works anyways. See [Ingress details](#ingress-details) below.
 
-{{< note >}}
-If your ingress terminates TLS, this TLS traffic (e.g. HTTPS calls from outside
-the cluster) will pass through Linkerd as an opaque TCP stream and Linkerd will
-only be able to provide byte-level metrics for this side of the connection. The
-resulting HTTP or gRPC traffic to internal services, of course, will have the
-full set of metrics and mTLS support.
-{{< /note >}}
+## Emissary-Ingress (aka Ambassador) {#ambassador}
 
-## Ambassador (aka Emissary) {#ambassador}
-
-Ambassador can be meshed normally. An example manifest for configuring the
+Emissary-Ingress can be meshed normally: it does not require the [ingress
+mode](#ingress-mode) annotation. An example manifest for configuring
 Ambassador / Emissary is as follows:
 
 ```yaml
@@ -77,15 +102,18 @@ spec:
   service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
 
-For a more detailed guide, we recommend reading [Installing the Emissary
-ingress with the Linkerd service
+For a more detailed guide, we recommend reading [Installing the Emissary ingress
+with the Linkerd service
 mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
 
 ## Nginx
 
-Nginx can be meshed normally, but the
+Nginx can be meshed normally: it does not require the [ingress
+mode](#ingress-mode) annotation.
+
+The
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
-annotation should be set to `"true"`.
+annotation should be set to `"true"`. For example:
 
 ```yaml
 # apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
@@ -105,13 +133,11 @@ spec:
         number: 80
 ```
 
-If using [this Helm chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx),
-note the following.
-
-The `namespace` containing the ingress controller (when using the above
-Helm chart) should NOT be annotated with `linkerd.io/inject: enabled`.
-Rather, annotate the `kind: Deployment` (`.spec.template.metadata.annotations`)
-of the Nginx by setting `values.yaml` like this:
+If using [the ingress-nginx Helm
+chart](https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx), note
+that the namespace containing the ingress controller should NOT be annotated
+with `linkerd.io/inject: enabled`. Instead, you should annotate the `kind:
+Deployment` (`.spec.template.metadata.annotations`). For example:
 
 ```yaml
 controller:
@@ -120,37 +146,25 @@ controller:
 ...
 ```
 
-The reason is as follows.
-
-That Helm chart defines (among other things) two Kubernetes resources:
+The reason is because this Helm chart defines (among other things) two
+Kubernetes resources:
 
 1) `kind: ValidatingWebhookConfiguration`. This creates a short-lived pod named
- something like `ingress-nginx-admission-create-t7b77` which terminates in 1
- or 2 seconds.
+ something like `ingress-nginx-admission-create-XXXXX` which quickly terminates.
 
 2) `kind: Deployment`. This creates a long-running pod named something like
-`ingress-nginx-controller-644cc665c9-5zmrp` which contains the Nginx docker
+`ingress-nginx-controller-XXXX` which contains the Nginx docker
  container.
 
-However, had we set `linkerd.io/inject: enabled` at the `namespace` level,
-a long-running sidecar would be injected into the otherwise short-lived
-pod in (1). This long-running sidecar would prevent the pod as a whole from
-terminating naturally (by design a few seconds after creation) even if the
-original base admission container had terminated.
-
-Without (1) being considered "done", the creation of (2) would wait forever
-in an infinite timeout loop.
-
-The above analysis only applies to that particular Helm chart. Other charts
-may have a different behaviour and different file structure for `values.yaml`.
-Be sure to check the nginx chart that you are using to set the annotation
-appropriately, if necessary.
+Setting the injection annotation at the namespace level would mesh the
+short-lived pod, which would prevent it from terminating as designed.
 
 ## Traefik
 
-Traefik should be meshed with ingress mode enabled([*](#open-relay-warning)),
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
-`enabled`. Instructions differ for 1.x and 2.x versions of Traefik.
+Traefik should be meshed with [ingress mode enabled](#ingress-mode), i.e. with
+the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+
+Instructions differ for 1.x and 2.x versions of Traefik.
 
 ### Traefik 1.x {#traefik-1x}
 
@@ -263,8 +277,8 @@ spec:
 
 ## GCE
 
-The GCE ingress should be meshed with ingress mode
-enabled([*](#open-relay-warning)), i.e. with the `linkerd.io/inject: ingress`
+The GCE ingress should be meshed with with [ingress mode
+enabled](#ingress-mode), , i.e. with the `linkerd.io/inject: ingress`
 annotation rather than the default `enabled`.
 
 This example shows how to use a [Google Cloud Static External IP
@@ -308,9 +322,8 @@ certificate is provisioned, the ingress should be visible to the Internet.
 
 ## Gloo
 
-Gloo should be meshed with ingress mode enabled([*](#open-relay-warning)), i.e.
-with the `linkerd.io/inject: ingress` annotation rather than the default
-`enabled`.
+Gloo should be meshed with [ingress mode enabled](#ingress-mode), i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 As of Gloo v0.13.20, Gloo has native integration with Linkerd, so that the
 required Linkerd headers are added automatically. Assuming you installed Gloo
@@ -332,9 +345,8 @@ glooctl add route --path-prefix=/ --dest-name booksapp-webapp-7000
 
 ## Contour
 
-Contour should be meshed with ingress mode enabled([*](#open-relay-warning)),
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
-`enabled`.
+Contour should be meshed with [ingress mode enabled](#ingress-mode), i.e. with
+the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The following example uses the
 [Contour getting started](https://projectcontour.io/getting-started/) documentation
@@ -424,9 +436,8 @@ the `l5d-dst-override` headers will be set automatically.
 
 ### Kong
 
-Kong should be meshed with ingress mode enabled([*](#open-relay-warning)), i.e.
-with the `linkerd.io/inject: ingress` annotation rather than the default
-`enabled`.
+Kong should be meshed with [ingress mode enabled](#ingress-mode), i.e. with the
+`linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example will use the following elements:
 
@@ -513,9 +524,8 @@ haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/) and not
 the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
 {{< /note >}}
 
-Haproxy should be meshed with ingress mode enabled([*](#open-relay-warning)),
-i.e. with the `linkerd.io/inject: ingress` annotation rather than the default
-`enabled`.
+Haproxy should be meshed with [ingress mode enabled](#ingress-mode), i.e. with
+the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 The simplest way to use Haproxy as an ingress for Linkerd is to configure a
 Kubernetes `Ingress` resource with the
@@ -553,8 +563,7 @@ in an ingress manifest as each one needs their own
 
 ## EnRoute OneStep {#enroute}
 
-Meshing EnRoute with linkerd involves only setting one
-flag globally:
+Meshing EnRoute with Linkerd involves only setting one flag globally:
 
 ```yaml
 apiVersion: enroute.saaras.io/v1
@@ -574,14 +583,14 @@ spec:
 ```
 
 EnRoute can now be meshed by injecting Linkerd proxy in EnRoute pods.
-Using the ```linkerd``` utility, we can update the EnRoute deployment
+Using the `linkerd` utility, we can update the EnRoute deployment
 to inject Linkerd proxy.
 
 ```bash
 kubectl get -n enroute-demo deploy -o yaml | linkerd inject - | kubectl apply -f -
 ```
 
-The ```linkerd_enabled``` flag automatically sets `l5d-dst-override` header.
+The `linkerd_enabled` flag automatically sets `l5d-dst-override` header.
 The flag also delegates endpoint selection for routing to linkerd.
 
 More details and customization can be found in,
@@ -593,22 +602,22 @@ Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
 In this section we cover how Linkerd interacts with ingress controllers in
 general.
 
-In general, Linkerd can be used with any ingress controller. In order for
-Linkerd to properly apply features such as route-based metrics and traffic
-splitting, Linkerd needs the IP/port of the Kubernetes Service. However, by
-default, many ingresses do their own endpoint selection and pass the IP/port of
-the destination Pod, rather than the Service as a whole.
+In order for Linkerd to properly apply L7 features such as route-based metrics
+and dynamic traffic routing, Linkerd needs the ingress controller to connect
+to the IP/port of the destination Kubernetes Service. However, by default,
+many ingresses do their own endpoint selection and connect directly to the
+IP/port of the destination Pod, rather than the Service.
 
 Thus, combining an ingress with Linkerd takes one of two forms:
 
-1. Configure the ingress to pass the IP and port of the Service as the
+1. Configure the ingress to connect to the IP and port of the Service as the
    destination, i.e. to skip its own endpoint selection. (E.g. see
    [Nginx](#nginx) above.)
 
-2. If this is not possible, then configure the ingress to pass the Service
-   IP/port in a header such as `l5d-dst-override`, `Host`, or `:authority`, and
-   configure Linkerd in *ingress* mode. In this mode, it will read from one of
-   those headers instead.
+2. Alternatively, configure the ingress to pass the Service IP/port in a
+   header such as `l5d-dst-override`, `Host`, or `:authority`, and configure
+   Linkerd in *ingress* mode. In this mode, it will read from one of those
+   headers instead.
 
 The most common approach in form #2 is to use the explicit `l5d-dst-override` header.
 

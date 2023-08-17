@@ -3,19 +3,30 @@ title: Heroes
 layout: heroes
 url: /community/heroes/
 aliases: ["/heroes/"]
+description: Open source is all about community, and Linkerd wouldn’t be what it
+  is today without our heroes. Linkerd Heroes contribute to the codebase, help
+  each other out on Slack and social media, and share their successes and failures
+  at conferences or through blogs.
 top_hero:
   title: Linkerd Heroes
   description: Open source is all about community, and Linkerd wouldn't be what it
     is today without our heroes. Linkerd Heroes contribute to the codebase, help each
-    other out whether on Slack or social media, share their successes and failures
-    at conferences or through blogs, fostering the dynamic and engaging community
-    we all love.
+    other out on Slack, social media, and in person, and share their successes and
+    failures at conferences or through blogs, fostering the dynamic and engaging
+    community we all love.
   image: "/images/heroes-graphic.svg"
   image_on_the_right: false
   alt: Portrait of Rio Kierkels
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Mikael Fridh
+    date: July 2023
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/2023/07/mikael-fridh-portrait.jpeg"
+    alt: Portrait of Mikael Fridh
+    github_url: "https://www.linkedin.com/in/mikaelfridh/"
   - name: Yu Cao
     date: February 2023
     blurb: Technical contributions

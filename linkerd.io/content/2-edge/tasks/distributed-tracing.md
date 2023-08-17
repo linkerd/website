@@ -138,7 +138,8 @@ extension specifying the service exposing the Jaeger UI. By default, this would
 be something like this:
 
 ```bash
-linkerd viz install --set jaegerUrl=jaeger.linkerd-jaeger:16686
+linkerd viz install --set jaegerUrl=jaeger.linkerd-jaeger:16686 \
+  | kubectl apply -f -
 ```
 
 ## Cleanup
@@ -186,7 +187,8 @@ collector:
     exporters:
       jaeger:
         endpoint: my-jaeger-collector.my-jaeger-ns:14250
-        insecure: true
+        tls:
+          insecure: true
     service:
       extensions: [health_check]
       pipelines:
