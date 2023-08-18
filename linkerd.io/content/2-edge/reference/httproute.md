@@ -58,6 +58,7 @@ HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 | `matches`| A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.|
 | `filters`| A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.|
 | `backendRefs`| An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).|
+| `timeouts` | An optional [httpRouteTimeouts](#httproutetimeouts) object which configures timeouts for requests matching this rule. |
 {{< /table >}}
 
 ### httpRouteMatch
@@ -188,6 +189,31 @@ sent to. Only allowed when a route has Service [parentRefs](#parentReference).
 | `namespace`| Namespace of service for this backend.|
 | `weight`| Proportion of requests sent to this backend.|
 {{< /table >}}
+
+### httpRouteTimeouts
+
+`HTTPRouteTimeouts` defines the timeouts that can be configured for an HTTP
+request.
+
+Linkerd implements HTTPRoute timeouts as described in [GEP-1742]. Timeout
+durations are configured as strings in the format parsed by
+[Go `time.ParseDuration`] (e.g. 1h/1m/1s/1ms), and MUST be greater than 1ms.
+A timeout field with duration 0 disables that timeout.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `request` | Specifies the duration for processing an HTTP client request after which the proxy will time out if unable to send a response. When this field is unspecified or 0, the proxy will not enforce request timeouts. |
+| `backendRequest` | Specifies a timeout for an individual request from the proxy to a backend service. This covers the time from when the request first starts being sent from the proxy to when the response has been received from the backend. When this field is unspecified or 0, the proxy will not enforce a backend request timeout, but may still enforce the `request` timeout, if one is configured. |
+{{< /table >}}
+
+If retries are enabled, a request received by the proxy may be retried by
+sending it to a different backend. In this case, a new `backendRequest` timeout
+will be started for each retry request, but each retry request will count
+against the overall `request` timeout.
+
+[GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
+[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration
 
 ## HTTPRoute Examples
 
