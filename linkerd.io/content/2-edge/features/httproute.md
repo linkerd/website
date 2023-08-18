@@ -38,13 +38,13 @@ exists.
 
 To get started with HTTPRoutes, you can:
 
-- [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 <!-- TODO(eliza): add this link once the timeout doc discusses HTTPRoutes...
 - [Configure timeouts][timeouts] using an outbound HTTPRoute.
 -->
 <!-- TODO(eliza): add this link once the fault injection doc discusses HTTPRoutes...
 - [Configure fault injection](../../tasks/fault-injection/) using an outbound HTTPRoute.
 -->
+- [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 - [Configure per-route authorization policy][auth-policy] using an inbound
   HTTPRoute.
 - See the [reference documentation](../../reference/httproute) for a complete
