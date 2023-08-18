@@ -1,5 +1,5 @@
 +++
-title = "Configuring Per-Route Policy"
+title = "Configuring Per-Route Authorization Policy"
 description = "Fine-grained authorization policies can be configured for individual HTTP routes."
 aliases = []
 +++
