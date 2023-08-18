@@ -4,17 +4,11 @@ description = "Configure Linkerd to automatically fail requests that take too lo
 +++
 
 To limit how long Linkerd will wait before failing an outgoing request to
-another service, you can configure timeouts. These work by adding a little bit
-of extra information to the [service profile](../../features/service-profiles/) for
+another service, you can configure timeouts. Timeouts can be specified using
+either [HTTPRoute] [service profile](../../features/service-profiles/) for
 the service you're sending requests to.
 
-{{< note >}}
-Routes configured in service profiles are different from HTTPRoute resources.
-Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. HTTPRoute resources, on the
-other hand, can be the target of AuthorizationPolicies and allow you to specify
-per-route authorization.
-{{< /note >}}
+## Using ServiceProfiles
 
 Each route may define a timeout which specifies the maximum amount of time to
 wait for a response (including retries) to complete after the request is sent.

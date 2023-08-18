@@ -14,9 +14,9 @@ in the [service profile](../../features/service-profiles/) for the service you'r
 sending requests to.
 
 {{< note >}}
-Routes configured in service profiles are different from HTTPRoute resources.
+Routes configured in service profiles are different from [HTTPRoute] resources.
 Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. HTTPRoute resources, on the
+client-side behavior such as retries and timeouts. [HTTPRoute] resources, on the
 other hand, can be the target of AuthorizationPolicies and allow you to specify
 per-route authorization.
 {{< /note >}}
@@ -87,3 +87,5 @@ are enabled.  Since an original request may fail the first time, but a retry of
 that request might succeed, the effective success rate is usually ([but not
 always](../configuring-timeouts/#monitoring-timeouts)) higher than the
 actual success rate.
+
+[HTTPRoute]: ../../features/httproute/

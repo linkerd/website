@@ -258,10 +258,10 @@ Kubernetes resources to which traffic is routed by the proxy:
 
 * `parent_group`, `parent_kind`, `parent_name`, and `parent_namespace` reference
   the parent resource through which the proxy discovered the route binding.
-  The parent resource of an HTTPRoute is generally a Service.
+  The parent resource of an [HTTPRoute] is generally a Service.
 * `route_group`, `route_kind`, `route_name`, and `route_namespace` reference the
   route resource through which the proxy discovered the route binding. This will
-  either reference an HTTPRoute resource or a default (synthesized) route.
+  either reference an [HTTPRoute] resource or a default (synthesized) route.
 * `backend_group`, `backend_kind`, `backend_name`, and `backend_namespace`
   reference the backend resource to which which the proxy routed the request.
   This will always be a Service.
@@ -280,3 +280,4 @@ following labels:
 [prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
 [pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
 [ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
+[HTTPRoute]: ../../features/httproute/

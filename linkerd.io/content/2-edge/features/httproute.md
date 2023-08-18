@@ -28,6 +28,14 @@ proxies:
   HTTPRoutes are used to configure fine-grained [per-route authorization and
   authentication policies][auth-policy].
 
+{{< warning >}}
+Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If a
+[ServiceProfile](../service-profiles/) is defined for the parent
+Service of an HTTPRoute, proxies will use the ServiceProfile configuration,
+rather than the HTTPRoute configuration, as long as the ServiceProfile
+exists.
+{{< /warning >}}
+
 To get started with HTTPRoutes, you can:
 
 - [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
