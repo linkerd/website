@@ -5,7 +5,7 @@ description = "Configure Linkerd to automatically fail requests that take too lo
 
 To limit how long Linkerd will wait before failing an outgoing request to
 another service, you can configure timeouts. Timeouts can be specified using
-either [HTTPRoute] [service profile](../../features/service-profiles/) for
+either [HTTPRoute]s or [service profile](../../features/service-profiles/) for
 the service you're sending requests to.
 
 ## Using ServiceProfiles
