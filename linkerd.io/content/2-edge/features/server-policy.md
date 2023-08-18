@@ -91,7 +91,7 @@ authentication rules to targets.
 
 The general pattern for Linkerd's dynamic, fine-grained policy is to define the
 traffic target that must be protected (via a combination of `Server` and
-[`HTTPRoute`] CRDs); define the types of authentication that are required before
+[`HTTPRoute`] CRs); define the types of authentication that are required before
 access to that traffic is permitted (via `MeshTLSAuthentication` and
 `NetworkAuthentication`); and then define the policy that maps authentication to
 target (via an `AuthorizationPolicy`).
