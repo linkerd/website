@@ -50,7 +50,7 @@ To get started with HTTPRoutes, you can:
 - [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 - [Configure per-route authorization policy][auth-policy] using an inbound
   HTTPRoute.
-- See the [reference documentation](../../reference/httproute) for a complete
+- See the [reference documentation](../../reference/httproute/) for a complete
   description of the HTTPRoute resource.
 
 [HTTPRotue resource]: https://gateway-api.sigs.k8s.io/api-types/httproute/
