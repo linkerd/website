@@ -29,10 +29,12 @@ proxies:
   authentication policies][auth-policy].
 
 {{< warning >}}
-Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../service-profiles/) is defined for the parent
-Service of an HTTPRoute, proxies will use the ServiceProfile configuration,
-rather than the HTTPRoute configuration, as long as the ServiceProfile
+**Outbound HTTPRoutes and [ServiceProfile](../service-profiles/)s provide
+overlapping configuration.** For backwards-compatibility reasons, a
+ServiceProfile will take precedence over HTTPRoutes which configure the same
+Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
+proxies will use the ServiceProfile configuration, rather than the HTTPRoute
+configuration, as long as the ServiceProfile
 exists.
 {{< /warning >}}
 
