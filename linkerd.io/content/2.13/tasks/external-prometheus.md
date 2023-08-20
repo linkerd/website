@@ -140,7 +140,7 @@ on the Prometheus instance to power the dashboard and CLI.
 
 The `prometheusUrl` field gives you a single place through
 which all these components can be configured to an external Prometheus URL.
-This is allowed both through the CLI and Helm.
+This is allowed both through the CLI and Helm. If the external Prometheus is secured with basic auth, you can include the credentials in the URL as well.
 
 ### CLI
 
@@ -148,7 +148,7 @@ This can be done by passing a file with the above field to the `values` flag,
 which is available through `linkerd viz install` command.
 
 ```yaml
-prometheusUrl: existing-prometheus.xyz:9090
+prometheusUrl: http://username:password@existing-prometheus.namespace:9090
 ```
 
 Once applied, this configuration is not persistent across installs.
