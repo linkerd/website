@@ -12,14 +12,11 @@ topology. This multi-cluster capability is designed to provide:
    are validated at every step, both in and across cluster boundaries.
 2. **Separate failure domains.** Failure of a cluster allows the remaining
    clusters to function.
-3. **Support for heterogeneous networks.** Since clusters can span clouds,
-   VPCs, on-premises data centers, and combinations thereof, Linkerd does not
-   introduce any L3/L4 requirements other than gateway connectivity.
-4. **Supports pod-to-pod communication.** When clusters share the same
-   underlying network, Linkerd can be configured to [send traffic
-   directly](#multi-cluster-for-flat-networks) to pods across cluster
-   boundaries.
-5. **A unified model alongside in-cluster communication.** The same
+3. **Support for any type of network.** Linkerd does not require any specific
+   network topology between clusters, and can function both with hierarchical
+   networks as well as when clusters [share the same flat
+   network](#multi-cluster-for-flat-networks).
+4. **A unified model alongside in-cluster communication.** The same
    observability, reliability, and security features that Linkerd provides for
    in-cluster communication extend to cross-cluster communication.
 
@@ -27,67 +24,55 @@ Just as with in-cluster connections, Linkerd’s cross-cluster connections are
 transparent to the application code. Regardless of whether that communication
 happens within a cluster, across clusters within a datacenter or VPC, or across
 the public Internet, Linkerd will establish a connection between clusters
-that’s encrypted and authenticated on both sides with mTLS.
+that's reliable, encrypted, and authenticated on both sides with mTLS.
 
 ## How it works
 
-Linkerd's multi-cluster support works by "mirroring" service information
-between clusters. Because remote services are represented as Kubernetes
-services, the full observability, security and routing features of Linkerd
-apply uniformly to both in-cluster and cluster-calls, and the application does
-not need to distinguish between those situations.
+Linkerd's multi-cluster support works by "mirroring" service information between
+clusters, using a *service mirror* component that watches a target cluster for
+updates to services and applies those updates locally on the source cluster.
+
+These mirrored services are suffixed with the name of the remote cluster, e.g.
+the *Foo* service on the *west* cluster would be mirrored as *Foo-west* on the
+local cluster. This approach is typically combined with [traffic
+splitting](../traffic-split/) or [dynamic request routing](../request-routing/)
+to allow local services to access the *Foo* service as if it were on the local
+cluster.
+
+Linkerd supports two basic forms of multi-cluster communication: hierarchical
+and flat.
 
 {{< fig
-    alt="Overview"
-    title="Overview"
-    center="true"
-    src="/images/multicluster/feature-overview.svg" >}}
-
-Linkerd's multi-cluster functionality is implemented by two components:
-a *service mirror* and a *gateway*. The *service mirror* component watches
-a target cluster for updates to services and mirrors those service updates
-locally on a source cluster. This provides visibility into the service names of
-the target cluster so that applications can address them directly. The
-*multi-cluster gateway* component provides target clusters a way to receive
-requests from source clusters. (This allows Linkerd to support [hierarchical
-networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).)
-
-Once these components are installed, Kubernetes `Service` resources that match
-a label selector can be exported to other clusters.
-
-## Multi-cluster for flat networks
-
-Linkerd's multi-cluster extension supports pod-to-pod communication in
-environments that use a shared, flat network. When clusters share the same
-network, pods may establish TCP connections and send traffic to each other
-across cluster boundaries. In such cases, it may be preferred to avoid the
-additional hop represented by the gateway intermediary.
-
-{{< fig
-  alt="An architectural diagram comparing hierarchical network mode with the new flat network mode"
+  alt="An architectural diagram comparing hierarchical network mode with flat network mode"
   src="/uploads/2023/07/flat_network@2x.png">}}
 
-Operating the multi-cluster extension in a direct pod-to-pod communication mode
-may provide several advantages over routing traffic through a gateway:
+### Hierarchical networks
 
-* Improved latency, by avoiding an additional network hop
-* Reduced operational costs that stem from maintaing a `LoadBalancer`-type
-  service for the gateway
-* Finer grained multi-cluster authorization policies, cryptographic identity
-  can be preserved across cluster boundaries, allowing for more expressive
-  policies
+In hierarchical mode, Linkerd deploys a *gateway* component on the target
+cluster that allows it to receive requests from source clusters. This approach
+works on almost any network topology, as it only requires that the gateway IP of
+the destination cluster be reachable by pods on the source cluster.
 
-Direct pod-to-pod communication does not replace gateways, as a matter of fact,
-the two are not mutually exclusive. Routing configuration is expressed at the
-`Service` resource level. A label selector is used to export services to other
-clusters; the same label selector is shared by the two modes. Services that
-want to benefit from direct pod-to-pod routing can be exported with a
-`remote-discovery` mode, while services whose traffic should go through the
-gateway can continue to use the default label value.
+### Flat networks
 
-To read more about pod-to-pod communication, you can follow the [getting
-started with flat networks in multi-cluster](<placeholder>) guide, or consult
-the [multi-cluster reference page](../flat-network-multicluster).
+As of Linkerd 2.14, Linkerd supports pod-to-pod communication for clusters that
+share a flat network, where pods can establish TCP connections and send traffic
+directly to each other across cluster boundaries. In these environments, Linkerd
+does not use a gateway intermediary for data plane traffic, which provides
+several advantages:
+
+* Improved latency by avoiding an additional network hop
+* Reduced operational costs in cloud environments that require a
+  `LoadBalancer`-type service for the gateway
+* Better multi-cluster authorization policies, as workload identity
+  is preserved across cluster boundaries.
+
+Hierarchical (gateway-based) and flat (direct pod-to-pod) modes can be combined,
+and pod-to-pod mode can be enabled for specific services by using the
+`remote-discovery` value for the label selector used to export services to other
+clusters. See the [guide to getting started with flat networks in
+multi-cluster](<placeholder>) guide and the [multi-cluster
+reference](../../reference/multicluster/) for more.
 
 ## Headless services
 
@@ -133,7 +118,6 @@ guide](../../tasks/multicluster/) for a walkthrough.
 ## Further reading
 
 * [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
-* [Multi-cluster communication in flat networks](../flat-network-multicluster)
 * [Getting started with multi-cluster in flat networks](<placeholder-for-getting-started>)
 * [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
