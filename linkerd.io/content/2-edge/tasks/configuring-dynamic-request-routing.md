@@ -75,7 +75,7 @@ PODINFO_UI_MESSAGE=A backend
 
 ## Introducing HTTPRoute
 
-Let's apply the following `HTTPRoute` resource to enable header-based routing:
+Let's apply the following [`HTTPRoute`] resource to enable header-based routing:
 
 ```yaml
 cat <<EOF | kubectl -n test apply -f -
@@ -104,16 +104,16 @@ spec:
 EOF
 ```
 
-In `parentRefs` we specify the resources we want this `HTTPRoute` instance to
-act on. So here we point to the `backend-a-podinfo` Service on the `HTTPRoute`'s
+In `parentRefs` we specify the resources we want this [`HTTPRoute`] instance to
+act on. So here we point to the `backend-a-podinfo` Service on the [`HTTPRoute`]'s
 namespace (`test`), and also specify the Service port number (not the Service's
 target port).
 
 {{< warning >}}
 Outbound `HTTPRoute`s are **incompatible with `ServiceProfiles`**. If a
 [ServiceProfile](../../features/service-profiles/) is defined for the parent
-Service of an `HTTPRoute`, proxies will use the `ServiceProfile` configuration,
-rather than the `HTTPRoute` configuration, as long as the `ServiceProfile`
+Service of an [`HTTPRoute`], proxies will use the `ServiceProfile` configuration,
+rather than the [`HTTPRoute`] configuration, as long as the `ServiceProfile`
 exists.
 {{< /warning >}}
 
@@ -169,3 +169,5 @@ request (the frontend pod in this case) and so that pod needs to be injected,
 whereas the destination pods don't require to be injected. But of course the
 more workloads you have injected the better, to benefit from things like easy
 mTLS setup and all the other advantages that linkerd brings to the table!
+
+[`HTTPRoute`]: ../../features/httproute/
