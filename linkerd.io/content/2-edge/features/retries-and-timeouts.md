@@ -15,10 +15,12 @@ number of times, it becomes important to limit the total amount of time a client
 waits before giving up entirely. Imagine a number of retries forcing a client
 to wait for 10 seconds.
 
-A [service profile](../service-profiles/) may define certain routes as
-retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
-perform the appropriate retries or timeouts when calling that service.  Retries
-and timeouts are always performed on the *outbound* (client) side.
+Timeouts can be configured using either the [HTTPRoute] or[ServiceProfile]
+resources. Currently, retries can only be configured using [ServiceProfile]s,
+but support for configuring retries using [HTTPRoutes] will be added in a future
+release. Creating these policy resources will cause the Linkerd proxy to perform
+the appropriate retries or timeouts when calling that service. Retries and
+timeouts are always performed on the *outbound* (client) side.
 
 {{< note >}}
 If working with headless services, service profiles cannot be retrieved. Linkerd
@@ -75,3 +77,6 @@ Configuring retries is always a trade-off between improving success rate and
 not adding too much extra load to the system. Retry budgets make that trade-off
 explicit by letting you specify exactly how much extra load your system is
 willing to accept from retries.
+
+[ServiceProfile]: ../service-profiles/
+[HTTPRoute]: ../httproute/
