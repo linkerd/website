@@ -1,6 +1,6 @@
 +++
-title = "Proxy Init Iptables Modes"
-description = "Linkerd's init container can run in two separate modes, nft or legacy."
+title = "Iptables-nft Support"
+description = "Linkerd's init container can use iptables-nft on systems that require it."
 +++
 
 To transparently route TCP traffic through the proxy, without any awareness
@@ -8,7 +8,7 @@ from the application, Linkerd will configure a set of [firewall
 rules](../../reference/iptables/) in each injected pod. Configuration can be
 done either through an [init
 container](../../reference/architecture/#linkerd-init-container) or through a
-[CNI plugin](../cni/)
+[CNI plugin](../cni/).
 
 Linkerd's init container can be run in two separate modes: `legacy` or `nft`.
 The difference between the two modes is what variant of `iptables` they will use
@@ -26,7 +26,7 @@ two, is which binary they will call into:
    This is the default mode that `linkerd-init` runs in, and is supported by
    most operating systems and distributions.
 2. `nft` mode will call into `iptables-nft`, which uses the newer `nf_tables`
-   kernel API. The [`nftables`] utilities are used by newer operating systems to
+   kernel API. The `nftables` utilities are used by newer operating systems to
    configure firewalls by default.
 
 [`iptables-legacy`]: https://manpages.debian.org/bullseye/iptables/iptables-legacy.8.en.html
