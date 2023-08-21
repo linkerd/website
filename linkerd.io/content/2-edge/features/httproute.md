@@ -15,6 +15,8 @@ to that resource, based on parameters such as the request's path, method, and
 headers, and can configure how requests matching that rule are routed by the
 Linkerd service mesh.
 
+## Inbound and Outbound HTTPRoutes
+
 Two types of HTTPRoute are used for configuring the behavior of Linkerd's
 proxies:
 
@@ -38,17 +40,17 @@ configuration, as long as the ServiceProfile
 exists.
 {{< /warning >}}
 
+## Learn More
+
 To get started with HTTPRoutes, you can:
 
-<!-- TODO(eliza): add this link once the timeout doc discusses HTTPRoutes...
-- [Configure timeouts][timeouts] using an outbound HTTPRoute.
--->
 <!-- TODO(eliza): add this link once the fault injection doc discusses
   HTTPRoutes...
 - [Configure fault injection](../../tasks/fault-injection/) using an outbound
   HTTPRoute.
 -->
 
+- [Configure timeouts][timeouts] using an outbound HTTPRoute.
 - [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 - [Configure per-route authorization policy][auth-policy] using an inbound
   HTTPRoute.
@@ -61,4 +63,4 @@ To get started with HTTPRoutes, you can:
 [Server]: ../../reference/authorization-policy/#server
 [auth-policy]: ../../tasks/configuring-per-route-policy/
 [dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../tasks/configuring-dynamic-request-routing/
+[timeouts]: ../../tasks/configuring-timeouts/#using-httproutes
