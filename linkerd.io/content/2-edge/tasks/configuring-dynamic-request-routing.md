@@ -110,13 +110,13 @@ namespace (`test`), and also specify the Service port number (not the Service's
 target port).
 
 {{< warning >}}
-**Outbound [`HTTPRoute`]s and [`ServiceProfile`]s provide overlapping
-configuration.** For backwards-compatibility reasons, a [`ServiceProfile`] will
-take precedence over [`HTTPRoute`s] which configure the same Service. If a
-[`ServiceProfile`] is defined for the parent Service of an [`HTTPRoute`],
-proxies will use the [`ServiceProfile`] configuration, rather than the
-[`HTTPRoute`] configuration, as long as the [`ServiceProfile`]
-exists.
+**Outbound [`HTTPRoute`](../../features/httproute/)s and
+[`ServiceProfile`](../../features/service-profiles/)s provide overlapping
+configuration.** For backwards-compatibility reasons, a `ServiceProfile` will
+take precedence over `HTTPRoute`s which configure the same Service. If a
+`ServiceProfile` is defined for the parent Service of an `HTTPRoute`,
+proxies will use the `ServiceProfile` configuration, rather than the
+`HTTPRoute` configuration, as long as the `ServiceProfile` exists.
 {{< /warning >}}
 
 Next, we give a list of rules that will act on the traffic hitting that Service.
