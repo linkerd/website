@@ -24,7 +24,7 @@ request routing, by deploying in the cluster two backend and one frontend
 podinfo pods. Traffic will flow to just one backend, and then we'll switch
 traffic to the other one just by adding a header to the frontend requests.
 
-## Set Up
+## Setup
 
 First we create the `test` namespace, annotated by linkerd so all pods that get
 created there get injected with the linkerd proxy:

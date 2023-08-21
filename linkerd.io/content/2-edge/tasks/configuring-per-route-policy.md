@@ -6,7 +6,7 @@ aliases = []
 
 <!-- markdownlint-disable-file MD014 -->
 
-In addition to [enforcing authorization policies at the service
+In addition to [enforcing authorization at the service
 level](../restricting-access/), finer-grained authorization policies can also be
 configured for individual HTTP routes. In this example, we'll use the Books demo
 app to demonstrate how to control which clients can access particular routes on
@@ -16,7 +16,7 @@ This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
 [Restricting Access to Services](../restricting-access/) example. For more
 comprehensive documentation of the policy resources, see the
-[Policy reference docs](../../reference/authorization-policy/).
+[Authorization policy reference](../../reference/authorization-policy/).
 
 ## Prerequisites
 
