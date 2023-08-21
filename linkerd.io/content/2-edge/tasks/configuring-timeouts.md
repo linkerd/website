@@ -4,16 +4,77 @@ description = "Configure Linkerd to automatically fail requests that take too lo
 +++
 
 To limit how long Linkerd will wait before failing an outgoing request to
-another service, you can configure timeouts. Timeouts can be specified using
-either [HTTPRoute]s or [service profile](../../features/service-profiles/) for
-the service you're sending requests to.
+another service, you can configure timeouts. Timeouts specify the maximum amount
+of time to wait for a response from a remote service to complete after the
+request is sent. If the timeout elapses without receiving a response, Linkerd
+will cancel the request and return a [504 Gateway Timeout] response.
+
+Timeouts can be specified using either Gateway API [HTTPRoute]s or legacy
+[ServiceProfile]s. Since HTTPRoute is a newer configuration mechanism intended
+to replace ServiceProfiles, prefer the use of HTTPRoute timeouts unless a
+ServiceProfile already exists for the Service.
+
+## Using HTTPRoutes
+
+Linkerd support timeouts as specified in [GEP-1742], for [outbound
+HTTPRoutes](../../features/httproute/#inbound-and-outbound-httproutes)
+with Service parents.
+
+{{< warning >}}
+Support for [GEP-1742] has not yet been implemented by the upstream Gateway API
+HTTPRoute resource. The GEP has been accepted, but it has not yet been added to
+the definition of the HTTPRoute resource. This means that HTTPRoute timeout
+fields can currently be used only in HTTPRoute resources with the
+`policy.linkerd.io` API group, *not* the `gateway.networking.k8s.io` API
+group.
+
+When the [GEP-1742] timeout fields are added to the upstream resource
+definition, Linkerd will support timeout configuration for HTTPRoutes with both
+API groups.
+
+[GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
+{{< /warning >}}
+
+Each [rule](../../reference/httproute/#httprouterule) may define an optional
+[`timeouts`](../../reference/httproute/#httpRouteTimeouts) object, which can
+define `request` and/or `backendRequest` fields:
+
+- `timeouts.request` applies a timeout to the total total time that may elapse
+  between when the proxy receives a request and when it receives a response from
+  the backend.
+- `timeouts.backendRequest` applies a timeout to the time that may elapse
+  between when a single request is dispatched to a
+  [backend](../../reference/httproute/#httpbackendref) and when a response is
+  received from that backend. This is a subset of the `timeouts.request`
+  timeout. If the request fails and is retried, the `backendRequest` timeout
+  will be restarted for each retry request.
+
+Timeout durations are specified specified as strings in the format parsed by
+[Go `time.ParseDuration`] (e.g. 1h/1m/1s/1ms), and must be greater than 1ms. If
+either field is unspecified or set to 0, the timeout configured by that field
+will not be enforced.
+
+For example:
+
+```yaml
+spec:
+  rules:
+  - matches:
+    - path:
+        type: RegularExpression
+        value: /authors/[^/]*\.json"
+      method: GET
+    timeouts:
+      request: 600ms
+      backendRequest: 300ms
+```
 
 ## Using ServiceProfiles
 
-Each route may define a timeout which specifies the maximum amount of time to
-wait for a response (including retries) to complete after the request is sent.
-If this timeout is reached, Linkerd will cancel the request, and return a 504
-response.  If unspecified, the default timeout is 10 seconds.
+Each [route](../../reference/service-profiles/#route) in a [ServiceProfile] may
+define a request timeout for requests matching that route. This timeout bounds
+the *total time* spent servicing requests to that route, including retries (if
+applicable). If unspecified, the default timeout is 10 seconds.
 
 ```yaml
 spec:
@@ -26,7 +87,7 @@ spec:
 ```
 
 Check out the [timeouts section](../books/#timeouts) of the books demo for
-a tutorial of how to configure timeouts.
+a tutorial of how to configure timeouts using ServiceProfiles.
 
 ## Monitoring Timeouts
 
@@ -40,3 +101,10 @@ Furthermore, if a response is received just as the timeout is exceeded, it is
 possible for the request to be counted as an actual success but an effective
 failure.  This can result in effective success rate being lower than actual
 success rate.
+
+[HTTPRoute]: ../../features/httproutes/
+[ServiceProfile]: ../../features/serviceprofiles/
+[504 Gateway Timeout]:
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504
+[GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
+[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration

@@ -196,7 +196,7 @@ sent to. Only allowed when a route has Service [parentRefs](#parentReference).
 request.
 
 Linkerd implements HTTPRoute timeouts as described in [GEP-1742]. Timeout
-durations are configured as strings in the format parsed by
+durations are specified as strings in the format parsed by
 [Go `time.ParseDuration`] (e.g. 1h/1m/1s/1ms), and MUST be greater than 1ms.
 A timeout field with duration 0 disables that timeout.
 
