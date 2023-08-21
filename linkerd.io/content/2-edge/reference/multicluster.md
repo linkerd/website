@@ -38,13 +38,19 @@ mirror* component runs on the source cluster; it watches a target cluster for
 updates to services and mirrors those updates locally in the source cluster.
 Only Kubernetes service objects that match a label selector are exported.
 
-The label selector also controls the mode a service is exported in. For
-example, by default, services labeled with `mirror.linkerd.io/exported=true`
-will be exported in gateway mode, whereas services labeled with
-`mirror.linkerd.io/exported=remote-discovery` will be exported in pod-to-pod
-communication mode. Since the configuration is service-centric, switching from
+The label selector also controls the mode a service is exported in. For example,
+by default, services labeled with `mirror.linkerd.io/exported=true` will be
+exported in hierarchical (gateway) mode, whereas services labeled with
+`mirror.linkerd.io/exported=remote-discovery` will be exported in flat
+(pod-to-pod) mode. Since the configuration is service-centric, switching from
 gateway to pod-to-pod mode is trivial and does not require the extension to be
 re-installed.
+
+{{< note >}}
+In flat mode, the namespace of the Linkerd control plane should be the same
+across all clusters. We recommend leaving this at the default value of
+`linkerd`.
+{{< /note >}}
 
 The term "remote-discovery" refers to how the imported services should be
 interpreted by Linkerd's control plane. Service discovery is performed by the
@@ -62,22 +68,3 @@ together, a Kubernetes `Secret` is created in the control plane's namespace with
 a kubeconfig file that allows an API client to be configured. The kubeconfig
 file uses RBAC to provide the "principle of least privilege", ensuring the
 *destination service* may only access only the resources it needs.
-
-## Cluster configuration and namespace sameness
-
-In flat mode, service discovery is performed remotely. This naturally
-puts restrictions on configuration. For the purpose of multi-cluster
-communication, Linkerd has adopted the "namespace sameness" principle described
-in [a SIG Multicluster Position
-Statement](https://github.com/kubernetes/community/blob/master/sig-multicluster/namespace-sameness-position-statement.md).
-
-In this multi-cluster model, all namespaces with a given name are considered to
-be the same across clusters. In other words, namespaces are a wholistic
-concept. By extension, all services defined in a namespace are considered the
-same service across all different clusters.
-
-Linkerd assumes namespace sameness is enforced *for the control plane*. In
-practice, this means that the control plane should be installed in the same
-namespace across all connected clusters, and it should be configured with the
-same values. An exception applies for cluster-wide configuration such as the
-cluster and identity domains.
