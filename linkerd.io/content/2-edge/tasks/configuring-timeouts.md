@@ -47,10 +47,12 @@ object, which can define `request` and/or `backendRequest` fields:
   timeout. If the request fails and is retried (if applicable), the
   `backendRequest` timeout will be restarted for each retry request.
 
-Timeout durations are specified specified as strings in the format parsed by
-[Go `time.ParseDuration`](https://pkg.go.dev/time#ParseDuration) (e.g.
-1h/1m/1s/1ms), and must be greater than 1ms. If either field is unspecified or
-set to 0, the timeout configured by that field will not be enforced.
+Timeout durations are specified specified as strings using the [Gateway API
+duration format] specified by
+[GEP-2257](https://gateway-api.sigs.k8s.io/geps/gep-2257/)
+(e.g. 1h/1m/1s/1ms), and must be greater than 1ms. If either field is
+unspecified or set to 0, the timeout configured by that field will not be
+enforced.
 
 For example:
 
@@ -106,3 +108,4 @@ success rate.
 [504 Gateway Timeout]:
     https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504
 [GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
+[Gateway API duration format]: https://gateway-api.sigs.k8s.io/geps/gep-2257/#gateway-api-duration-format
