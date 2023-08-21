@@ -123,21 +123,22 @@ request or response lifecycle.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| One of: RequestHeaderModifier, RequestRedirect.|
-| `requestHeaderModifier`| An [httpRequestHeaderFilter](#httprequestheaderfilter).|
+| `type`| One of: RequestHeaderModifier, ResponseHeaderModifier, or RequestRedirect.|
+| `requestHeaderModifier`| An [httpHeaderFilter](#httheaderfilter) which modifies request headers.|
+| `responseHeaderModifier` | An [httpHeaderFilter](#httpheaderfilter) which modifies response headers.|
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
 
-### httpRequestHeaderFilter
+### httpHeaderFilter
 
-A filter which modifies request headers.
+A filter which modifies HTTP request or response headers.
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `set`| A list of [httpHeaders](#httpheader) to overwrites on the request.|
-| `add`|  A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value.|
-| `remove`|  A list of header names to remove from the request.|
+| `set`| A list of [httpHeaders](#httpheader) to overwrite on the request or response.|
+| `add`| A list of [httpHeaders](#httpheader) to add on to the request or response, appending to any existing value.|
+| `remove`| A list of header names to remove from the request or response.|
 {{< /table >}}
 
 ### httpHeader
