@@ -50,9 +50,8 @@ object, which can define `request` and/or `backendRequest` fields:
 Timeout durations are specified specified as strings using the [Gateway API
 duration format] specified by
 [GEP-2257](https://gateway-api.sigs.k8s.io/geps/gep-2257/)
-(e.g. 1h/1m/1s/1ms), and must be at least 1ms or greater. If either field is
-unspecified or set to 0, the timeout configured by that field will not be
-enforced.
+(e.g. 1h/1m/1s/1ms), and must be at least 1ms. If either field is unspecified or
+set to 0, the timeout configured by that field will not be enforced.
 
 For example:
 

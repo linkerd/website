@@ -199,8 +199,8 @@ request.
 Linkerd implements HTTPRoute timeouts as described in [GEP-1742]. Timeout
 durations are specified as strings using the [Gateway API duration format]
 specified by [GEP-2257](https://gateway-api.sigs.k8s.io/geps/gep-2257/) (e.g.
-1h/1m/1s/1ms), and MUST be at least 1ms or greater. A timeout field with
-duration 0 disables that timeout.
+1h/1m/1s/1ms), and MUST be at least 1ms. A timeout field with duration 0
+disables that timeout.
 
 {{< table >}}
 | field| value |
