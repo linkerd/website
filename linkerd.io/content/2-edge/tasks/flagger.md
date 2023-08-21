@@ -1,26 +1,27 @@
 +++
-title = "Progressive Delivery with Flagger"
-description = "Reduce deployment risk by combining Linkerd and Flagger to automate canary releases based on service metrics."
+title = "Progressive Delivery"
+description = "Reduce deployment risk by automating canary releases based on service metrics."
 aliases = ["canary-release"]
 +++
 
-Linkerd's [traffic split](../../features/traffic-split/) feature allows you to
-dynamically shift traffic between services. This can be used to implement
+Linkerd's [dynamic request routing](../../features/request-routeing/) allows you
+to dynamically shift traffic between services. This can be used to implement
 lower-risk  deployment strategies like blue-green deploys and canaries.
 
 But simply shifting traffic from one version of a service to the next is just
 the beginning. We can combine traffic splitting with [Linkerd's automatic
-*golden metrics* telemetry](../../features/telemetry/) and drive traffic decisions
-based on the observed metrics. For example, we can gradually shift traffic from
-an old deployment to a new one while continually monitoring its success rate. If
-at any point the success rate drops, we can shift traffic back to the original
-deployment and back out of the release. Ideally, our users remain happy
-throughout, not noticing a thing!
+*golden metrics* telemetry](../../features/telemetry/) and drive traffic
+decisions based on the observed metrics. For example, we can gradually shift
+traffic from an old deployment to a new one while continually monitoring its
+success rate. If at any point the success rate drops, we can shift traffic back
+to the original deployment and back out of the release. Ideally, our users
+remain happy throughout, not noticing a thing!
 
-In this tutorial, we'll walk you through how to combine Linkerd with
-[Flagger](https://flagger.app/), a progressive delivery tool that ties
-Linkerd's metrics and traffic splitting together in a control loop,
-allowing for fully-automated, metrics-aware canary deployments.
+In this tutorial, we'll show you how to use two different progressive delivery
+tools: [Flagger](https://flagger.app/) and
+[Argo Rollouts](https://argoproj.github.io/rollouts/) and how to tie Linkerd's
+metrics and request routing together in a control loop, allowing for
+fully-automated, metrics-aware canary deployments.
 
 {{< trylpt >}}
 
@@ -30,11 +31,10 @@ To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
   [Installing Linkerd Guide](../install/).
-- Linkerd-SMI. If you haven't installed this yet, follow the
-  [Linkerd-SMI guide](../linkerd-smi/).
-- Flagger. If you haven't installed this, see below.
 
-## Install Flagger
+## Flagger
+
+### Install Flagger
 
 While Linkerd will be managing the actual traffic routing, Flagger automates
 the process of creating new Kubernetes resources, watching metrics and
@@ -57,7 +57,7 @@ This command adds:
 To watch until everything is up and running, you can use `kubectl`:
 
 ```bash
-kubectl -n linkerd rollout status deploy/flagger
+kubectl -n flagger-system rollout status deploy/flagger
 ```
 
 ## Set up the demo
@@ -94,7 +94,7 @@ kubectl -n test port-forward svc/frontend 8080
 ```
 
 {{< note >}}
-Traffic shifting occurs on the *client* side of the connection and not the
+Request routing occurs on the *client* side of the connection and not the
 server side. Any requests coming from outside the mesh will not be shifted and
 will always be directed to the primary backend. A service of type `LoadBalancer`
 will exhibit this behavior as the source is not part of the mesh. To shift
@@ -106,7 +106,7 @@ external traffic, add your ingress controller to the mesh.
 Before changing anything, you need to configure how a release should be rolled
 out on the cluster. The configuration is contained in a
 [Canary](https://docs.flagger.app/tutorials/linkerd-progressive-delivery)
-definition. To apply to your cluster, run:
+and MetricTemplate definition. To apply to your cluster, run:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -121,21 +121,62 @@ spec:
     kind: Deployment
     name: podinfo
   service:
+    # service port number
     port: 9898
+    # container port number or name (optional)
+    targetPort: 9898
+    # Reference to the Service that the generated HTTPRoute would attach to.
+    gatewayRefs:
+      - name: podinfo
+        namespace: test
+        group: core
+        kind: Service
+        port: 9898
   analysis:
     interval: 10s
     threshold: 5
     stepWeight: 10
     maxWeight: 100
     metrics:
-    - name: request-success-rate
+    - name: success-rate
+      templateRef:
+        name: success-rate
+        namespace: test
       thresholdRange:
         min: 99
       interval: 1m
-    - name: request-duration
-      thresholdRange:
-        max: 500
-      interval: 1m
+---
+apiVersion: flagger.app/v1beta1
+kind: MetricTemplate
+metadata:
+  name: success-rate
+  namespace: test
+spec:
+  provider:
+    type: prometheus
+    address: http://prometheus.linkerd-viz:9090
+  query: |
+    sum(
+      rate(
+        response_total{
+          namespace="{{ namespace }}",
+          deployment=~"{{ target }}",
+          classification!="failure",
+          direction="inbound"
+        }[{{ interval }}]
+      )
+    ) 
+    / 
+    sum(
+      rate(
+        response_total{
+          namespace="{{ namespace }}",
+          deployment=~"{{ target }}",
+          direction="inbound"
+        }[{{ interval }}]
+      )
+    ) 
+    * 100
 EOF
 ```
 
