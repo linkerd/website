@@ -55,7 +55,7 @@ To get started with HTTPRoutes, you can:
 - See the [reference documentation](../../reference/httproute/) for a complete
   description of the HTTPRoute resource.
 
-[HTTPRotue resource]: https://gateway-api.sigs.k8s.io/api-types/httproute/
+[HTTPRoute resource]: https://gateway-api.sigs.k8s.io/api-types/httproute/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/
 [Server]: ../../reference/authorization-policy/#server

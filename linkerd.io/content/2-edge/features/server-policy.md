@@ -87,7 +87,7 @@ authentication rules to targets.
   unless an authentication rule is met
 
 - `ServerAuthorization`: an earlier form of policy that restricts access to
-  [`Server`s] only (i.e. not [`HTTPRoute`]s)
+  [`Server`]s only (i.e. not [`HTTPRoute`]s)
 
 The general pattern for Linkerd's dynamic, fine-grained policy is to define the
 traffic target that must be protected (via a combination of `Server` and
