@@ -234,9 +234,9 @@ version.
 
 For this release, if you're using the multicluster extension, you should re-link
 your clusters after upgrading to stable-2.14.0, as explained
-[above](#upgrading-the-multicluster-extension). Not doing immediately so won't
+[above](#upgrading-the-multicluster-extension). Not doing so immediately won't
 cause any downtime in cross-cluster connections, but `linkerd multicluster
-check` will error out.
+check` will not succeed until the clusters are re-linked.
 
 There are no other extra steps for upgrading to 2.14.0.
 
