@@ -197,8 +197,9 @@ request.
 
 Linkerd implements HTTPRoute timeouts as described in [GEP-1742]. Timeout
 durations are specified as strings in the format parsed by
-[Go `time.ParseDuration`] (e.g. 1h/1m/1s/1ms), and MUST be greater than 1ms.
-A timeout field with duration 0 disables that timeout.
+[Go `time.ParseDuration`](https://pkg.go.dev/time#ParseDuration) (e.g.
+1h/1m/1s/1ms), and MUST be greater than 1ms. A timeout field with duration 0
+disables that timeout.
 
 {{< table >}}
 | field| value |
@@ -213,7 +214,6 @@ will be started for each retry request, but each retry request will count
 against the overall `request` timeout.
 
 [GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
-[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration
 
 ## HTTPRoute Examples
 
