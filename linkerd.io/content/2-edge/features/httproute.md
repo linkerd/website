@@ -63,4 +63,4 @@ To get started with HTTPRoutes, you can:
 [Server]: ../../reference/authorization-policy/#server
 [auth-policy]: ../../tasks/configuring-per-route-policy/
 [dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../tasks/configuring-timeouts/
+[timeouts]: ../../tasks/configuring-timeouts/#using-httproutes
