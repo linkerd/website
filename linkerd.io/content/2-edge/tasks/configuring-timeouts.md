@@ -16,7 +16,7 @@ HTTPRoute timeouts unless a ServiceProfile already exists for the Service.
 
 ## Using HTTPRoutes
 
-Linkerd support timeouts as specified in [GEP-1742], for [outbound
+Linkerd supports timeouts as specified in [GEP-1742], for [outbound
 HTTPRoutes](../../features/httproute/#inbound-and-outbound-httproutes)
 with Service parents.
 
