@@ -108,4 +108,5 @@ success rate.
 [504 Gateway Timeout]:
     https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504
 [GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
-[Gateway API duration format]: https://gateway-api.sigs.k8s.io/geps/gep-2257/#gateway-api-duration-format
+[Gateway API duration format]:
+    https://gateway-api.sigs.k8s.io/geps/gep-2257/#gateway-api-duration-format
