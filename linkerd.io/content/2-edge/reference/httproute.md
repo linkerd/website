@@ -38,6 +38,17 @@ proxies will use the ServiceProfile configuration, rather than the HTTPRoute
 configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
 
+ParentReferences are namespaced, and may reference either a parent in the same
+namespace as the HTTPRoute, or one in a different namespace. As described in
+[GEP-1426][ns-boundaries], a HTTPRoute with a `parentRef` that references a
+Service  in the same namespace as the HTTPRoute is referred to as a _producer
+route_, while an HTTPRoute with a `parentRef` referencing a Service in a
+different namespace is referred to as a _consumer route_. A producer route will
+apply to requests originating from clients in any namespace. On the other hand,
+a consumer route is scoped to apply only to traffic originating in the
+HTTPRoute's namespace. See the ["Namespace boundaries" section in
+GEP-1426][ns-boundaries] for details on producer and consumer routes.
+
 {{< table >}}
 | field| value |
 |------|-------|
@@ -275,3 +286,4 @@ spec:
 ```
 
 [ServiceProfile]: ../../features/service-profiles/
+[GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
