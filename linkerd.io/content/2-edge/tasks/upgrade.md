@@ -232,9 +232,11 @@ version.
 
 ### Upgrade notice: stable-2.14.0
 
-For this release, if you're using the multicluster extension, it is mandatory to
-re-link your clusters. `linkerd multicluster check` will error out until you do
-so. Note that this shouldn't cause any downtime in cross-cluster connections.
+For this release, if you're using the multicluster extension, you should re-link
+your clusters after upgrading to stable-2.14.0, as explained
+[above](#upgrading-the-multicluster-extension). Not doing immediately so won't
+cause any downtime in cross-cluster connections, but `linkerd multicluster
+check` will error out.
 
 There are no other extra steps for upgrading to 2.14.0.
 
