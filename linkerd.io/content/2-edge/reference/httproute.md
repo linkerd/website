@@ -30,11 +30,12 @@ rerouted to different backend services. This can be used to perform [dynamic
 request routing](../../tasks/configuring-dynamic-request-routing/).
 
 {{< warning >}}
-Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If the
-[ParentReference](#parentreference) of an HTTPRoute is a Service, and a
-[ServiceProfile](../../features/service-profiles/) is also defined for that
-Service, proxies will use the ServiceProfile configuration, rather than the
-HTTPRoute configuration, as long as the ServiceProfile exists.
+**Outbound HTTPRoutes and [ServiceProfile](../../features/service-profiles/)s
+provide overlapping configuration.** For backwards-compatibility reasons, a
+ServiceProfile will take precedence over HTTPRoutes which configure the same
+Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
+proxies will use the ServiceProfile configuration, rather than the HTTPRoute
+configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
 
 {{< table >}}
@@ -245,3 +246,5 @@ spec:
       - name: smiley
         port: 80
 ```
+
+[ServiceProfile]: ../../features/service-profiles/
