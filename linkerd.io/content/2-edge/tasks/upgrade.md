@@ -234,7 +234,7 @@ version.
 
 For this release, if you're using the multicluster extension, it is mandatory to
 re-link your clusters. `linkerd multicluster check` will error out until you do
-so.
+so. Note that this shouldn't cause any downtime in cross-cluster connections.
 
 There are no other extra steps for upgrading to 2.14.0.
 
