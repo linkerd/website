@@ -12,9 +12,9 @@ For a tutorial that shows this functionality off, check out the
 [books demo](../books/#service-profiles).
 
 {{< note >}}
-Routes configured in service profiles are different from HTTPRoute resources.
+Routes configured in service profiles are different from [HTTPRoute] resources.
 Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. HTTPRoute resources, on the
+client-side behavior such as retries and timeouts. [HTTPRoute] resources, on the
 other hand, can be the target of AuthorizationPolicies and allow you to specify
 per-route authorization.
 {{< /note >}}
@@ -99,3 +99,5 @@ This will select only the requests observed and show the `:authority` and
   attention to `rt_route`. If it is missing entirely, compare the `:path` to
   the regex you'd like for it to match, and use a
   [tester](https://regex101.com/) with the Golang flavor of regex.
+
+[HTTPRoute]: ../../features/httproute/

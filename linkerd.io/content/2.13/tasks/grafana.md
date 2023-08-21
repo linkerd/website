@@ -36,6 +36,15 @@ datasource Linkerd Viz' Prometheus instance, sets up a reverse proxy (more on
 that later), and pre-loads all the Linkerd Grafana dashboards that are published
 on <https://grafana.com/orgs/linkerd>.
 
+{{< note >}}
+The access to Linkerd Viz' Prometheus instance is restricted through the
+`prometheus-admin` AuthorizationPolicy, granting access only to the
+`metrics-api` ServiceAccount. In order to also grant access to Grafana, you need
+to add an AuthorizationPolicy pointing to its ServiceAccount. You can apply
+[authzpolicy-grafana.yaml](https://github.com/linkerd/linkerd2/blob/release/stable-2.13/grafana/authzpolicy-grafana.yaml)
+which grants permission for the `grafana` ServiceAccount.
+{{< /note >}}
+
 A more complex and production-oriented source is the [Grafana
 Operator](https://github.com/grafana-operator/grafana-operator). And there are
 also hosted solutions such as [Grafana
