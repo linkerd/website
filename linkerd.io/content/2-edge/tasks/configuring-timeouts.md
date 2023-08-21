@@ -37,14 +37,13 @@ Each [rule](../../reference/httproute/#httprouterule) in an [HTTPRoute] may
 define an optional [`timeouts`](../../reference/httproute/#httproutetimeouts)
 object, which can define `request` and/or `backendRequest` fields:
 
-- `timeouts.request` bounds the *total time* spent servicing requests matching
-  this rule, starting when the proxy receives a request and when it receives a
-  response from the backend. This includes time spent in retries (if
-  applicable).
-- `timeouts.backendRequest` bounds the time that may elapse between when a single
-  request is dispatched to a
-  [backend](../../reference/httproute/#httpbackendref) and when a response is
-  received from that backend. This is a subset of the `timeouts.request`
+- `timeouts.request` specifies the *total time* to wait for a request matching
+  this rule to complete (including retries). This timeout starts when the proxy
+  receives a request, and ends when successful response is sent to the client.
+- `timeouts.backendRequest` specifies the time to wait for a single request to a
+  backend to complete. This timeout starts when a request is dispatched to a
+  [backend](../../reference/httproute/#httpbackendref), and ends when a response
+  is received from that backend. This is a subset of the `timeouts.request`
   timeout. If the request fails and is retried (if applicable), the
   `backendRequest` timeout will be restarted for each retry request.
 
@@ -71,9 +70,10 @@ spec:
 ## Using ServiceProfiles
 
 Each [route](../../reference/service-profiles/#route) in a [ServiceProfile] may
-define a request timeout for requests matching that route. This timeout bounds
-the *total time* spent servicing requests to that route, including retries (if
-applicable). If unspecified, the default timeout is 10 seconds.
+define a request timeout for requests matching that route. This timeout secifies
+the maximum amount of time to wait for a response (including retries) to
+complete after the request is sent. If unspecified, the default timeout is 10
+seconds.
 
 ```yaml
 spec:
