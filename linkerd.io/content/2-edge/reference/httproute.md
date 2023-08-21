@@ -124,7 +124,7 @@ request or response lifecycle.
 | field| value |
 |------|-------|
 | `type`| One of: RequestHeaderModifier, ResponseHeaderModifier, or RequestRedirect.|
-| `requestHeaderModifier`| An [httpHeaderFilter](#httheaderfilter) which modifies request headers.|
+| `requestHeaderModifier`| An [httpHeaderFilter](#httpheaderfilter) which modifies request headers.|
 | `responseHeaderModifier` | An [httpHeaderFilter](#httpheaderfilter) which modifies response headers.|
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
