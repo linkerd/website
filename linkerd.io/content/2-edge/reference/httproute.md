@@ -3,6 +3,25 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
+## Linkerd and Gateway API HTTPRoutes
+
+The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]
+project. Linkerd currently supports two versions of the HTTPRoute resource: the
+upstream version from the Gateway API, with the
+`gateway.networking.kubernetes.io` API group, and a Linkerd-specific version,
+with the `policy.linkerd.io` API group. While these two resource definitions are
+largely the same, the `policy.linkerd.io` HTTPRoute resource is an experimental
+version that contains features not yet stabilized in the upstream
+`gateway.networking.k8s.io` HTTPRoute resource, such as
+[timeouts](#httproutetimeouts). Both the Linkerd and Gateway API resource
+definitions may coexist within the same cluster, and both can be used to
+configure policies for use with Linkerd.
+
+This documentation describes the `policy.linkerd.io` HTTPRoute resource. For a
+similar description of the upstream Gateway API HTTPRoute resource, refer to the
+Gateway API's [HTTPRoute
+specification](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRoute).
+
 ## HTTPRoute Spec
 
 An HTTPRoute spec may contain the following top level fields:
@@ -287,4 +306,5 @@ spec:
 ```
 
 [ServiceProfile]: ../../features/service-profiles/
+[Gateway API]: https://gateway-api.sigs.k8s.io/
 [GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries

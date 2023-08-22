@@ -31,6 +31,10 @@ HTTPRoute resources with the `policy.linkerd.io` API group, *not* the
 When the [GEP-1742](https://gateway-api.sigs.k8s.io/geps/gep-1742/) timeout
 fields are added to the upstream resource definition, Linkerd will support
 timeout configuration for HTTPRoutes with both API groups.
+
+See [the HTTPRoute reference
+documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+for details on the two versions of the HTTPRoute resource.
 {{< /warning >}}
 
 Each [rule](../../reference/httproute/#httprouterule) in an [HTTPRoute] may
