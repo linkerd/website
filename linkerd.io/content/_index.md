@@ -2,10 +2,10 @@
 title: The world's lightest, fastest service mesh.
 date: 2019-02-04T13:12:35.000+00:00
 top_hero:
-  title: A different kind of service mesh
-  description: Ultra light, ultra simple, ultra powerful. Linkerd adds
-    security, observability, and reliability to Kubernetes, *without* the
-    complexity. CNCF-hosted and 100% open source.
+  title: The world's most advanced service mesh
+  description: Enterprise power *without* enterprise complexity. Linkerd adds
+    security, observability, and reliability to any Kubernetes cluster.
+    CNCF graduated and 100% open source.
   image: "/uploads/image-15.png"
   buttons:
   - caption: Get Started
@@ -43,11 +43,11 @@ features_list:
     description: Instantly track success rates, latencies, and request volumes for every meshed workload, without changes or config.
   - title: Simpler than any other mesh
     description: Minimalist, Kubernetes-native design. No hidden magic, as little YAML and as few CRDs as possible.
-  - title: Zero-config mutual TLS
+  - title: Zero-config mutual TLS and zero-trust policy
     description: Transparently add mutual TLS to any on-cluster TCP communication with no configuration.
   - title: Designed by engineers, for engineers
     description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools.
-  - title: Drop-in reliability features
+  - title: Latency-aware load balancing and cross-cluster failover
     description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
   - title: State-of-the-art ultralight Rust dataplane
     description: Incredibly small and blazing fast Linkerd2-proxy _micro-proxy_ written in Rust for security and performance.
@@ -98,7 +98,7 @@ foundation_member_banner:
 cta_buoyant:
   image: "/uploads/buoyant-logo-blue.png"
   textcreated: "Linkerd was created by"
-  caption: "Learn more about Buoyant's Linkerd offerings"
+  caption: "Learn more about Buoyant"
   url: "https://buoyant.io/"
 
 ---
