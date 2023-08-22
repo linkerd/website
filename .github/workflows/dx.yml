@@ -29,7 +29,7 @@ jobs:
       
       - uses: azure/setup-kubectl@v3
         with:
-          version: 'latest'
+          version: '1.27.4'
 
       - name: Check kubectl version
         run: |
