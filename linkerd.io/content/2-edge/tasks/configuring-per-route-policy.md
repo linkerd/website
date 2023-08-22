@@ -1,12 +1,12 @@
 +++
-title = "Configuring Per-Route Policy"
+title = "Configuring Per-Route Authorization Policy"
 description = "Fine-grained authorization policies can be configured for individual HTTP routes."
 aliases = []
 +++
 
 <!-- markdownlint-disable-file MD014 -->
 
-In addition to [enforcing authorization policies at the service
+In addition to [enforcing authorization at the service
 level](../restricting-access/), finer-grained authorization policies can also be
 configured for individual HTTP routes. In this example, we'll use the Books demo
 app to demonstrate how to control which clients can access particular routes on
@@ -16,7 +16,7 @@ This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
 [Restricting Access to Services](../restricting-access/) example. For more
 comprehensive documentation of the policy resources, see the
-[Policy reference docs](../../reference/authorization-policy/).
+[Authorization policy reference](../../reference/authorization-policy/).
 
 ## Prerequisites
 
@@ -180,6 +180,21 @@ spec:
         method: GET
 EOF
 ```
+
+{{< note >}}
+Two versions of the HTTPRoute resource may be used with Linkerd:
+
+- The upstream version provided by the Gateway API, with the
+  `gateway.networking.k8s.io` API group
+- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
+  group
+
+The two HTTPRoute resource definitions are similar, but the Linkerd version
+implements experimental features not yet available with the upstream Gateway API
+resource definition. See [the HTTPRoute reference
+documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+for details.
+{{< /note >}}
 
 This will create an [`HTTPRoute`] targeting the `authors-server` [`Server`] resource
 we defined previously. The `rules` section defines a list of matches, which

@@ -3,6 +3,25 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
+## Linkerd and Gateway API HTTPRoutes
+
+The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]
+project. Linkerd currently supports two versions of the HTTPRoute resource: the
+upstream version from the Gateway API, with the
+`gateway.networking.kubernetes.io` API group, and a Linkerd-specific version,
+with the `policy.linkerd.io` API group. While these two resource definitions are
+largely the same, the `policy.linkerd.io` HTTPRoute resource is an experimental
+version that contains features not yet stabilized in the upstream
+`gateway.networking.k8s.io` HTTPRoute resource, such as
+[timeouts](#httproutetimeouts). Both the Linkerd and Gateway API resource
+definitions may coexist within the same cluster, and both can be used to
+configure policies for use with Linkerd.
+
+This documentation describes the `policy.linkerd.io` HTTPRoute resource. For a
+similar description of the upstream Gateway API HTTPRoute resource, refer to the
+Gateway API's [HTTPRoute
+specification](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRoute).
+
 ## HTTPRoute Spec
 
 An HTTPRoute spec may contain the following top level fields:
@@ -30,12 +49,24 @@ rerouted to different backend services. This can be used to perform [dynamic
 request routing](../../tasks/configuring-dynamic-request-routing/).
 
 {{< warning >}}
-Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If the
-[ParentReference](#parentreference) of an HTTPRoute is a Service, and a
-[ServiceProfile](../../features/service-profiles/) is also defined for that
-Service, proxies will use the ServiceProfile configuration, rather than the
-HTTPRoute configuration, as long as the ServiceProfile exists.
+**Outbound HTTPRoutes and [ServiceProfile](../../features/service-profiles/)s
+provide overlapping configuration.** For backwards-compatibility reasons, a
+ServiceProfile will take precedence over HTTPRoutes which configure the same
+Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
+proxies will use the ServiceProfile configuration, rather than the HTTPRoute
+configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
+
+ParentReferences are namespaced, and may reference either a parent in the same
+namespace as the HTTPRoute, or one in a different namespace. As described in
+[GEP-1426][ns-boundaries], a HTTPRoute with a `parentRef` that references a
+Service  in the same namespace as the HTTPRoute is referred to as a _producer
+route_, while an HTTPRoute with a `parentRef` referencing a Service in a
+different namespace is referred to as a _consumer route_. A producer route will
+apply to requests originating from clients in any namespace. On the other hand,
+a consumer route is scoped to apply only to traffic originating in the
+HTTPRoute's namespace. See the ["Namespace boundaries" section in
+GEP-1426][ns-boundaries] for details on producer and consumer routes.
 
 {{< table >}}
 | field| value |
@@ -58,6 +89,7 @@ HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 | `matches`| A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.|
 | `filters`| A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.|
 | `backendRefs`| An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).|
+| `timeouts` | An optional [httpRouteTimeouts](#httproutetimeouts) object which configures timeouts for requests matching this rule. |
 {{< /table >}}
 
 ### httpRouteMatch
@@ -121,21 +153,22 @@ request or response lifecycle.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| One of: RequestHeaderModifier, RequestRedirect.|
-| `requestHeaderModifier`| An [httpRequestHeaderFilter](#httprequestheaderfilter).|
+| `type`| One of: RequestHeaderModifier, ResponseHeaderModifier, or RequestRedirect.|
+| `requestHeaderModifier`| An [httpHeaderFilter](#httpheaderfilter) which modifies request headers.|
+| `responseHeaderModifier` | An [httpHeaderFilter](#httpheaderfilter) which modifies response headers.|
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
 
-### httpRequestHeaderFilter
+### httpHeaderFilter
 
-A filter which modifies request headers.
+A filter which modifies HTTP request or response headers.
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `set`| A list of [httpHeaders](#httpheader) to overwrites on the request.|
-| `add`|  A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value.|
-| `remove`|  A list of header names to remove from the request.|
+| `set`| A list of [httpHeaders](#httpheader) to overwrite on the request or response.|
+| `add`| A list of [httpHeaders](#httpheader) to add on to the request or response, appending to any existing value.|
+| `remove`| A list of header names to remove from the request or response.|
 {{< /table >}}
 
 ### httpHeader
@@ -188,6 +221,32 @@ sent to. Only allowed when a route has Service [parentRefs](#parentReference).
 | `namespace`| Namespace of service for this backend.|
 | `weight`| Proportion of requests sent to this backend.|
 {{< /table >}}
+
+### httpRouteTimeouts
+
+`HTTPRouteTimeouts` defines the timeouts that can be configured for an HTTP
+request.
+
+Linkerd implements HTTPRoute timeouts as described in [GEP-1742]. Timeout
+durations are specified as strings using the [Gateway API duration format]
+specified by [GEP-2257](https://gateway-api.sigs.k8s.io/geps/gep-2257/) (e.g.
+1h/1m/1s/1ms), and MUST be at least 1ms. A timeout field with duration 0
+disables that timeout.
+
+{{< table >}}
+| field| value |
+|------|-------|
+| `request` | Specifies the duration for processing an HTTP client request after which the proxy will time out if unable to send a response. When this field is unspecified or 0, the proxy will not enforce request timeouts. |
+| `backendRequest` | Specifies a timeout for an individual request from the proxy to a backend service. This covers the time from when the request first starts being sent from the proxy to when the response has been received from the backend. When this field is unspecified or 0, the proxy will not enforce a backend request timeout, but may still enforce the `request` timeout, if one is configured. |
+{{< /table >}}
+
+If retries are enabled, a request received by the proxy may be retried by
+sending it to a different backend. In this case, a new `backendRequest` timeout
+will be started for each retry request, but each retry request will count
+against the overall `request` timeout.
+
+[GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/
+[Gateway API duration format]: https://gateway-api.sigs.k8s.io/geps/gep-2257/#gateway-api-duration-format
 
 ## HTTPRoute Examples
 
@@ -245,3 +304,7 @@ spec:
       - name: smiley
         port: 80
 ```
+
+[ServiceProfile]: ../../features/service-profiles/
+[Gateway API]: https://gateway-api.sigs.k8s.io/
+[GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries

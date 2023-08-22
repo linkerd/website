@@ -70,8 +70,8 @@ the fly.
 Two policy CRDs represent "targets" for policy: subsets of traffic over which
 policy can be applied.
 
-- `Server`: all traffic to a port, for a set of pods in a namespace
-- `HTTPRoute`: a subset of HTTP requests for a `Server`
+- [`Server`]: all traffic to a port, for a set of pods in a namespace
+- [`HTTPRoute`]: a subset of HTTP requests for a [`Server`]
 
 Two policy CRDs represent authentication rules that must be satisfied as part of
 a policy rule:
@@ -87,11 +87,11 @@ authentication rules to targets.
   unless an authentication rule is met
 
 - `ServerAuthorization`: an earlier form of policy that restricts access to
-  `Servers` only (i.e. not `HTTPRoutes`)
+  [`Server`]s only (i.e. not [`HTTPRoute`]s)
 
 The general pattern for Linkerd's dynamic, fine-grained policy is to define the
 traffic target that must be protected (via a combination of `Server` and
-`HTTPRoute` CRs); define the types of authentication that are required before
+[`HTTPRoute`] CRs); define the types of authentication that are required before
 access to that traffic is permitted (via `MeshTLSAuthentication` and
 `NetworkAuthentication`); and then define the policy that maps authentication to
 target (via an `AuthorizationPolicy`).
@@ -102,7 +102,7 @@ details on how these resources work.
 ## ServerAuthorization vs AuthorizationPolicy
 
 Linkerd 2.12 introduced `AuthorizationPolicy` as a more flexible alternative to
-`ServerAuthorization` that can target `HTTPRoute`s as well as `Server`s. Use of
+`ServerAuthorization` that can target [`HTTPRoute`]s as well as `Server`s. Use of
 `AuthorizationPolicy` is preferred, and `ServerAuthorization` will be deprecated
 in future releases.
 
@@ -113,9 +113,9 @@ from Kubernetes, meaning that the pod would not be able to start. Thus, any
 default-deny setup must, in practice, still authorize these probes.
 
 In order to simplify default-deny setups, Linkerd automatically authorizes
-probes to pods. These default authorizations apply only when no `Server` is
-configured for a port, or when a `Server` is configured but no `HTTPRoutes` are
-configured for that `Server`. If any `HTTPRoute` matches the `Server`, these
+probes to pods. These default authorizations apply only when no [`Server`] is
+configured for a port, or when a [`Server`] is configured but no [`HTTPRoute`]s are
+configured for that [`Server`]. If any [`HTTPRoute`] matches the `Server`, these
 automatic authorizations are not created and you must explicitly create them for
 health and readiness probes.
 
@@ -130,5 +130,8 @@ result in an abrupt termination of those connections.
 
 ## Learning more
 
-- [Policy reference](../../reference/authorization-policy/)
+- [Authorization policy reference](../../reference/authorization-policy/)
 - [Guide to configuring per-route policy](../../tasks/configuring-per-route-policy/)
+
+[`HTTPRoute`]: ../httproute/
+[`Server`]: ../../reference/authorization-policy/#server

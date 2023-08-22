@@ -9,10 +9,10 @@ every meshed pod to its proxy. (See the
 without the application being aware.
 
 By default, this rewiring is done with an [Init
-Container](../../reference/architecture/#linkerd-init-container) that uses iptables
-to install routing rules for the pod, at pod startup time. However, this requires
-the `CAP_NET_ADMIN` capability; and in some clusters, this capability is not
-granted to pods.
+Container](../../reference/architecture/#linkerd-init-container) that uses
+iptables to install routing rules for the pod, at pod startup time. However,
+this requires the `CAP_NET_ADMIN` capability; and in some clusters, this
+capability is not granted to pods.
 
 To handle this, Linkerd can optionally run these iptables rules in a [CNI
 plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
