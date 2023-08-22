@@ -14,6 +14,7 @@ Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.
 
+- [Upgrade notice: stable-2.14.0](#upgrade-notice-stable-2-14-0)
 - [Upgrade notice: stable-2.13.0](#upgrade-notice-stable-2-13-0)
 - [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
 - [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
@@ -228,6 +229,16 @@ Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
 
 ## Upgrade notices
+
+### Upgrade notice: stable-2.14.0
+
+For this release, if you're using the multicluster extension, you should re-link
+your clusters after upgrading to stable-2.14.0, as explained
+[above](#upgrading-the-multicluster-extension). Not doing so immediately won't
+cause any downtime in cross-cluster connections, but `linkerd multicluster
+check` will not succeed until the clusters are re-linked.
+
+There are no other extra steps for upgrading to 2.14.0.
 
 ### Upgrade notice: stable-2.13.0
 
