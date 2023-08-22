@@ -43,7 +43,7 @@ Linkerd supports two basic forms of multi-cluster communication: hierarchical
 and flat.
 
 {{< fig
-  alt="An architectural diagram comparing hierarchical network mode with flat network mode"
+  alt="Architectural diagram comparing hierarchical and flat network modes"
   src="/uploads/2023/07/flat_network@2x.png">}}
 
 ### Hierarchical networks
@@ -70,9 +70,9 @@ several advantages:
 Hierarchical (gateway-based) and flat (direct pod-to-pod) modes can be combined,
 and pod-to-pod mode can be enabled for specific services by using the
 `remote-discovery` value for the label selector used to export services to other
-clusters. See the [guide to getting started with flat networks in
-multi-cluster](<placeholder>) guide and the [multi-cluster
-reference](../../reference/multicluster/) for more.
+clusters. See the [pod-to-pod multicluster
+communication](../../tasks/pod-to-pod-multicluster/) guide and the
+[multi-cluster reference](../../reference/multicluster/) for more.
 
 ## Headless services
 
@@ -118,7 +118,7 @@ guide](../../tasks/multicluster/) for a walkthrough.
 ## Further reading
 
 * [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
-* [Getting started with multi-cluster in flat networks](<placeholder-for-getting-started>)
+* [Pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
 * [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
