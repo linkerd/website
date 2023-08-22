@@ -15,7 +15,7 @@ number of times, it becomes important to limit the total amount of time a client
 waits before giving up entirely. Imagine a number of retries forcing a client
 to wait for 10 seconds.
 
-Timeouts can be configured using either the [HTTPRoute] or[ServiceProfile]
+Timeouts can be configured using either the [HTTPRoute] or [ServiceProfile]
 resources. Currently, retries can only be configured using [ServiceProfile]s,
 but support for configuring retries using [HTTPRoutes] will be added in a future
 release. Creating these policy resources will cause the Linkerd proxy to perform
