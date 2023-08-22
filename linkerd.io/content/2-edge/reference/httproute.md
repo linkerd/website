@@ -57,6 +57,17 @@ proxies will use the ServiceProfile configuration, rather than the HTTPRoute
 configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
 
+ParentReferences are namespaced, and may reference either a parent in the same
+namespace as the HTTPRoute, or one in a different namespace. As described in
+[GEP-1426][ns-boundaries], a HTTPRoute with a `parentRef` that references a
+Service  in the same namespace as the HTTPRoute is referred to as a _producer
+route_, while an HTTPRoute with a `parentRef` referencing a Service in a
+different namespace is referred to as a _consumer route_. A producer route will
+apply to requests originating from clients in any namespace. On the other hand,
+a consumer route is scoped to apply only to traffic originating in the
+HTTPRoute's namespace. See the ["Namespace boundaries" section in
+GEP-1426][ns-boundaries] for details on producer and consumer routes.
+
 {{< table >}}
 | field| value |
 |------|-------|
@@ -142,21 +153,22 @@ request or response lifecycle.
 {{< table >}}
 | field| value |
 |------|-------|
-| `type`| One of: RequestHeaderModifier, RequestRedirect.|
-| `requestHeaderModifier`| An [httpRequestHeaderFilter](#httprequestheaderfilter).|
+| `type`| One of: RequestHeaderModifier, ResponseHeaderModifier, or RequestRedirect.|
+| `requestHeaderModifier`| An [httpHeaderFilter](#httpheaderfilter) which modifies request headers.|
+| `responseHeaderModifier` | An [httpHeaderFilter](#httpheaderfilter) which modifies response headers.|
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
 {{< /table >}}
 
-### httpRequestHeaderFilter
+### httpHeaderFilter
 
-A filter which modifies request headers.
+A filter which modifies HTTP request or response headers.
 
 {{< table >}}
 | field| value |
 |------|-------|
-| `set`| A list of [httpHeaders](#httpheader) to overwrites on the request.|
-| `add`|  A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value.|
-| `remove`|  A list of header names to remove from the request.|
+| `set`| A list of [httpHeaders](#httpheader) to overwrite on the request or response.|
+| `add`| A list of [httpHeaders](#httpheader) to add on to the request or response, appending to any existing value.|
+| `remove`| A list of header names to remove from the request or response.|
 {{< /table >}}
 
 ### httpHeader
@@ -295,3 +307,4 @@ spec:
 
 [ServiceProfile]: ../../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
+[GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
