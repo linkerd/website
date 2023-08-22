@@ -9,11 +9,28 @@ aliases = [
 To configure routing behavior and policy for HTTP traffic, Linkerd supports the
 [HTTPRoute resource], defined by the Kubernetes [Gateway API].
 
+{{< note >}}
+Two versions of the HTTPRoute resource may be used with Linkerd:
+
+- The upstream version provided by the Gateway API, with the
+  `gateway.networking.k8s.io` API group
+- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
+  group
+
+The two HTTPRoute resource definitions are similar, but the Linkerd version
+implements experimental features not yet available with the upstream Gateway API
+resource definition. See [the HTTPRoute reference
+documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+for details.
+{{< /note >}}
+
 An HTTPRoute is a Kubernetes resource which attaches to a parent resource, such
 as a [Service]. The HTTPRoute defines a set of rules which match HTTP requests
 to that resource, based on parameters such as the request's path, method, and
 headers, and can configure how requests matching that rule are routed by the
 Linkerd service mesh.
+
+## Inbound and Outbound HTTPRoutes
 
 Two types of HTTPRoute are used for configuring the behavior of Linkerd's
 proxies:
@@ -38,17 +55,13 @@ configuration, as long as the ServiceProfile
 exists.
 {{< /warning >}}
 
+## Learn More
+
 To get started with HTTPRoutes, you can:
 
-<!-- TODO(eliza): add this link once the timeout doc discusses HTTPRoutes...
-- [Configure timeouts][timeouts] using an outbound HTTPRoute.
--->
-<!-- TODO(eliza): add this link once the fault injection doc discusses
-  HTTPRoutes...
 - [Configure fault injection](../../tasks/fault-injection/) using an outbound
   HTTPRoute.
--->
-
+- [Configure timeouts][timeouts] using an outbound HTTPRoute.
 - [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 - [Configure per-route authorization policy][auth-policy] using an inbound
   HTTPRoute.
@@ -61,4 +74,4 @@ To get started with HTTPRoutes, you can:
 [Server]: ../../reference/authorization-policy/#server
 [auth-policy]: ../../tasks/configuring-per-route-policy/
 [dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../tasks/configuring-dynamic-request-routing/
+[timeouts]: ../../tasks/configuring-timeouts/#using-httproutes

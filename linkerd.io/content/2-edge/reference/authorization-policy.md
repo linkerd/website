@@ -152,6 +152,21 @@ precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking
 
 Please refer to HTTPRoute's full [spec](../httproute/).
 
+{{< note >}}
+Two versions of the HTTPRoute resource may be used with Linkerd:
+
+- The upstream version provided by the Gateway API, with the
+  `gateway.networking.k8s.io` API group
+- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
+  group
+
+The two HTTPRoute resource definitions are similar, but the Linkerd version
+implements experimental features not yet available with the upstream Gateway API
+resource definition. See [the HTTPRoute reference
+documentation](../httproute/#linkerd-and-gateway-api-httproutes)
+for details.
+{{< /note >}}
+
 ## AuthorizationPolicy
 
 An AuthorizationPolicy provides a way to authorize traffic to a [Server] or an
