@@ -1,6 +1,6 @@
 +++
 title = "Pod-to-Pod Multi-cluster communication"
-description = "Multi-cluster communication for flat networks"
+description = "Multi-Cluster Communication for Flat Networks"
 +++
 
 By default, Linkerd's [multicluster extension](../multicluster/) works by
@@ -48,10 +48,10 @@ without the gateway because we will be using direct pod-to-pod communication.
 
 ## Step 3: Linking the Clusters
 
-We use the `linkerd mulitlcuster link` command to link our two clusters
+We use the `linkerd multilcuster link` command to link our two clusters
 together. This is exactly the same as in the regular
 [Multicluster guide](../multicluster/#linking-the-clusters) except that we pass
-the `--gateway=false` to create a Link which doesn't require a gateway.
+the `--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console
 > linkerd --context east multicluster link --cluster-name=target --gateway=false | kubectl --context west apply -f -
@@ -59,8 +59,8 @@ the `--gateway=false` to create a Link which doesn't require a gateway.
 
 ## Step 4: Deploy and Exporting a Service
 
-For our guide, we'll deploy the [bb](https://github.com/BuoyantIO/bb) service
-which is a simple server which just returns a static response. We deploy it
+For our guide, we'll deploy the [bb](https://github.com/BuoyantIO/bb) service,
+which is a simple server that just returns a static response. We deploy it
 into the target cluster:
 
 ```bash
@@ -119,9 +119,9 @@ We then create the corresponding namespace on the source cluster
 
 and set a label on the target service to export it. Notice that instead of the
 usual `mirror.linkerd.io/exported=true` label, we are setting
-`mirror.linkerd.io/exported=remote-discovery` which means to export the service
-in remote discovery mode, which skips the gateway and allows pods from different
-cluster to talk to each other directly.
+`mirror.linkerd.io/exported=remote-discovery` which means that the service
+should be exported in remote discovery mode, which skips the gateway and allows
+pods from different clusters to talk to each other directly.
 
 ```console
 > kubectl --context east -n mc-demo label svc/bb mirror.linkerd.io/exported=remote-discovery
@@ -138,7 +138,7 @@ bb-target   ClusterIP   10.43.56.245   <none>        8080/TCP   114s
 ## Step 5: Send some traffic!
 
 We'll use [slow-cooker](https://github.com/BuoyantIO/slow_cooker) as our load
-generator in the source cluster to send to the [bb] service in the target
+generator in the source cluster to send to the `bb` service in the target
 cluster. Notice that we configure slow-cooker to send to our `bb-target` mirror
 service.
 
@@ -193,8 +193,9 @@ bb        1/1   100.00%   10.3rps           1ms           1ms           1ms     
 
 One advantage of direct pod-to-pod communication is that the server can use
 authorization policies which allow only certain clients to connect. This is
-not possible when using the gateway because client identity is lost when going
-through the gateway.
+not possible when using the gateway, because client identity is lost when going
+through the gateway. For more background on how authorization policies work,
+see: [Restricting Access To Services](../restricting-access/).
 
 Let's demonstrate that by creating an authorization policy which only allows
 the `slow-cooker` service account to connect to `bb`:
