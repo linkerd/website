@@ -104,6 +104,21 @@ spec:
 EOF
 ```
 
+{{< note >}}
+Two versions of the HTTPRoute resource may be used with Linkerd:
+
+- The upstream version provided by the Gateway API, with the
+  `gateway.networking.k8s.io` API group
+- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
+  group
+
+The two HTTPRoute resource definitions are similar, but the Linkerd version
+implements experimental features not yet available with the upstream Gateway API
+resource definition. See [the HTTPRoute reference
+documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+for details.
+{{< /note >}}
+
 In `parentRefs` we specify the resources we want this [`HTTPRoute`] instance to
 act on. So here we point to the `backend-a-podinfo` Service on the [`HTTPRoute`]'s
 namespace (`test`), and also specify the Service port number (not the Service's

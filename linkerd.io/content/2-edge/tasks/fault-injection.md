@@ -165,6 +165,21 @@ spec:
 EOF
 ```
 
+{{< note >}}
+Two versions of the HTTPRoute resource may be used with Linkerd:
+
+- The upstream version provided by the Gateway API, with the
+  `gateway.networking.k8s.io` API group
+- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
+  group
+
+The two HTTPRoute resource definitions are similar, but the Linkerd version
+implements experimental features not yet available with the upstream Gateway API
+resource definition. See [the HTTPRoute reference
+documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+for details.
+{{< /note >}}
+
 When Linkerd sees traffic going to the `books` service, it will send 9/10
 requests to the original service and 1/10 to the error injector. You can see
 what this looks like by running `stat` and filtering explicitly to just the
