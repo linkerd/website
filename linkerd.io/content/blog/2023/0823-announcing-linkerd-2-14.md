@@ -74,8 +74,8 @@ Linkerd's design: independence of clusters as a way of isolating security and
 failure domains. Each cluster runs its own Linkerd control plane, and the
 failure of a single cluster cannot take down the service mesh on other clusters.
 (And Linkerd provides a set of powerful techniques including [cross-cluster
-failover](/2/tasks/automatic-failover/) that can be used to
-automatically route traffic to the remaining clusters.)
+failover](/2.14/tasks/automatic-failover/) that can be used to automatically
+route traffic to the remaining clusters.)
 
 For more details on Linkerd's new support for multi-cluster across flat
 networks, see [Enterprise multi-cluster at scale: supporting flat networks in
