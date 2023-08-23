@@ -21,7 +21,7 @@ benefits:
 - title: "Best-in-breed security"
   image: "/uploads/secure.svg"
 announcement_banner:
-  description: "2023-04-11 **[Announcing Linkerd 2.13 with new reliability and security features! Read now »](https://buoyant.io/newsroom/buoyant-announces-linkerd-2-13-with-new-reliability-and-security-features-for-kubernetes)**"
+  description: "2023-08-23 **[Announcing Linkerd 2.14 with enterprise multi-cluster and Gateway API conformance! Read now »](/2023/08/23/announcing-linkerd-2.14/)**"
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 keywords:
