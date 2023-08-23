@@ -2,9 +2,9 @@ load 'helpers/bats-detik/lib/detik'
 
 if [ -z $FROM_CI ]
 then
-    UNINSTALL_PATH=../../linkerd.io/content/2.13/tasks
+    UNINSTALL_PATH=../../linkerd.io/content/2.14/tasks
 else
-    UNINSTALL_PATH=linkerd.io/content/2.13/tasks
+    UNINSTALL_PATH=linkerd.io/content/2.14/tasks
 fi
 
 RUNME_REMOVE_FLAGS="--chdir $UNINSTALL_PATH --filename uninstall.md"

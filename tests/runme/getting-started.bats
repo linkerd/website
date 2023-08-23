@@ -5,9 +5,9 @@ load 'helpers/bats-detik/lib/detik'
 
 if [ -z $FROM_CI ]
 then
-  FILE_PATH=../../linkerd.io/content/2.13/getting-started
+  FILE_PATH=../../linkerd.io/content/2.14/getting-started
 else
-  FILE_PATH=linkerd.io/content/2.13/getting-started
+  FILE_PATH=linkerd.io/content/2.14/getting-started
 fi
 
 RUNME_FLAGS="--chdir $FILE_PATH --filename _index.md"
