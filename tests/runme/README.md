@@ -77,7 +77,7 @@ brew install watch
 
 Monitor the created Kubernetes Cluster Pods.
 
-```sh { background=true interactive=true }
+```sh { background=true interactive=true terminalRows=25 }
 watch -n 1 kubectl get pods -A
 ```
 
@@ -105,7 +105,7 @@ git submodule update --init
 
 Now you have bats properly installed, let's run the [Linkerd getting started guide](../../linkerd.io//content/2.12/getting-started/_index.md) tests we have defined at [getting-started.bats](./getting-started.bats). Before do that, let's monitor the kube cluster's namespaces.
 
-```sh { name=watch-linkerd background=true closeTerminalOnSuccess=true interactive=true }
+```sh { name=watch-linkerd background=true closeTerminalOnSuccess=true interactive=true terminalRows=25 }
 kubectl get pods -A -w
 ```
 
