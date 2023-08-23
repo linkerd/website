@@ -7,4 +7,3 @@ title = "prune"
 {{< cli/examples "prune" >}}
 
 {{< cli/flags "prune" >}}
-
