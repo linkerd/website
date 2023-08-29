@@ -598,16 +598,24 @@ More details and customization can be found in,
 [End to End encryption using EnRoute with
 Linkerd](https://getenroute.io/blog/end-to-end-encryption-mtls-linkerd-enroute/)
 
-## ngrok 
+## ngrok
 
-ngrok can be meshed normally: it does not require the [ingress mode](#ingress-mode) annotation.
+ngrok can be meshed normally: it does not require the
+[ingress mode](#ingress-mode) annotation.
 
-After signing up for a [free ngrok account](https://ngrok.com/signup), and running through the [installation steps for the ngrok Ingress controller](https://github.com/ngrok/kubernetes-ingress-controller#installation), 
-you can add ingress by configuring an ingress object for your service and applying it with `kubectl apply -f ingress.yaml`.
+After signing up for a [free ngrok account](https://ngrok.com/signup), and
+running through the [installation steps for the ngrok Ingress controller
+](https://github.com/ngrok/kubernetes-ingress-controller#installation),
+you can add ingress by configuring an ingress object for your service and
+applying it with `kubectl apply -f ingress.yaml`.
 
-This is an example for the emojivoto app used in the Linkerd getting started guide. You will need to replace the `host` value with your 
-[free static domain](https://dashboard.ngrok.com/cloud-edge/domains) available in your ngrok account. If you have a paid ngrok account,
-you can configure this the same way you would use the [`--domain` flag](https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/ngrok/) on the ngrok agent.
+This is an example for the emojivoto app used in the Linkerd getting started
+guide. You will need to replace the `host` value with your
+[free static domain](https://dashboard.ngrok.com/cloud-edge/domains) available
+in your ngrok account. If you have a paid ngrok account, you can configure this
+the same way you would use the [`--domain`
+flag](https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/ngrok/) on
+the ngrok agent.
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -630,7 +638,8 @@ spec:
               number: 80
 ```
 
-Your emojivoto app should be available to anyone in the world at your static domain.
+Your emojivoto app should be available to anyone in the world at your static
+domain.
 
 ## Ingress details
 
