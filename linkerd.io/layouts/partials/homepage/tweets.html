@@ -1,12 +1,16 @@
-<div class="wrapper has-background-light-blue tweets">
-  <div class="container">
-    <h2 class="title is-size-1 center has-text-color has-text-centered-mobiledropdown navigation">{{.Tweets.title}}</h2>
-    <div class="columns is-mobile is-multiline is-centered is-marginless">
-      {{ range .Tweets.tweets }}
-        <div class="column is-narrow is-11-mobile">
+<div class="wrapper has-background-white tweets">
+  <div class="container columns">
+		<div class="column is-10 is-offset-1">
+      <div class="column is-full">
+        <h2 class="title has-text-navy-black py-5">{{.Tweets.title}}</h2>
+      </div>
+      <div class="columns is-multiline">
+        {{ range .Tweets.tweets }}
+        <div class="column is-half px-5 py-3">
           {{ template "_internal/shortcodes/twitter.html" (dict "Params" (slice .) "Page" $.Page) }}
         </div>
-      {{ end }}
+        {{ end }}
+      </div>
     </div>
   </div>
 </div>

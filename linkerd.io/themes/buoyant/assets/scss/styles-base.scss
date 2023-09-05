@@ -14,8 +14,19 @@ body {
   position: relative;
 }
 .homepage-notification {
-  min-height: 48px;
+  min-height: 40px;
   padding: 0 10px;
+  background-color: $deep-blue;
+}
+.homepage-notification,
+.homepage-notification a {
+  color: white;
+  font-size: 16px !important;
+  font-weight: normal;
+  line-height: 1.2;
+}
+.homepage-notification img {
+  vertical-align: text-bottom;
 }
 .hero-body {
   position: relative;
@@ -50,11 +61,11 @@ body {
         }
       }
       .button {
-        min-width: 200px;
-        margin: 5px;
+        min-width: 170px;
+        /*margin: 5px;
         &:nth-child(2n-1) {
           margin-left: 0;
-        }
+        }*/
       }
       &.contacts {
         .map-container {
@@ -464,6 +475,10 @@ body {
 }
 
 .card {
+  border-radius: 4px;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+
   .placeholder {
     background-color: rgb(70,125,189);
   }
@@ -1300,78 +1315,11 @@ body {
   font-weight: bold;
 }
 
-
-/*  
-  cta-bouyant home
-*/
-
-.hero-body .cta-buoyant-title{
-  margin-bottom: 3rem;
-}
-.hero-body .cta-bouyant-button.is-large{
-  min-width: 300px;
-}
-
-.block-created-by{
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  p {
-    font-weight: 500 !important;
-  }
-  img{
-    max-width: 200px;
-    margin-left: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  .hero-body .cta-buoyant-title{
-    font: 300 1.75rem/1.35em "Roboto" !important;
-  }
-
-  .cta-buoyant-subtitle{
-    font: 300 1.25rem/1.35em "Roboto" !important;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .hero-body .wrapper.body-header .notification {
     padding-right: 1.5rem;
   }
-  .hero-body .cta-buoyant-title{
-    font: 300 1.5rem/1.35em "Roboto" !important;
-    margin-bottom: 2.5rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .cta-buoyant-subtitle{
-    font: 300 1.125rem/1.35em "Roboto" !important;
-  }
   .hero-body {
     overflow: hidden;
   }
-
-  .block-created-by{
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    p {
-      font-weight: 500 !important;
-    }
-    img{
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      margin-left: 0;
-    }
-  }
-
 }

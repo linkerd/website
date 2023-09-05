@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="wrapper has-background-white pt-6">
+  <div class="container columns">
+    <div class="column is-10 is-offset-1">
+      <h1 class="title is-1 has-text-color">{{ .Title}}</h1>
+    </div>
+  </div>
+</div>
+<div class="wrapper has-background-white">
+  <div class="container columns">
+    <div class="column is-10 is-offset-1">
+			{{ .Content }}
+		</div>
+  </div>
+</div>
+{{ end }}

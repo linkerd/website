@@ -1,36 +1,24 @@
-<div class="wrapper body-header has-background-bright-blue has-text-white">
-  <div class="columns center-column is-marginless is-fullwidth">
+<div class="wrapper body-header has-background-white homepage-top-hero">
+  <div class="container columns">
     <div class="column">
-      <div class="container columns homepage-top-hero is-marginless{{ if .image_on_the_right }} row-reverse{{ end }}">
-        <div class="column bg-texture center">
-          <figure class="image">
-            <iframe style="height: 315px;" width="560" height="315" src="https://www.youtube.com/embed/up3fKwXdEgc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </figure>
-        </div>
-        <div class="column center">
-          <div class="notification">
-            <h1 class="title is-size-1">{{.title}}</h1>
-            <h5 class="title is-size-5">{{.description | markdownify}}</h5>
-            <div class="columns">
-              {{ range .buttons }}
-              <div class="column">
-                <a href="{{.url}}" class="button is-primary is-large is-fullwidth">
-                  {{.caption}}
-                </a>
-              </div>
-              {{ end }}
-            </div>
-            <div class="github-stat-buttons">
-              <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star"
-                data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
-              <a class="github-button" href="https://github.com/linkerd/linkerd2/subscription" data-icon="octicon-eye"
-                data-size="large" data-show-count="true" aria-label="Watch linkerd/linkerd2 on GitHub" data-proofer-ignore>Watch</a>
-              <a class="github-button" href="https://github.com/linkerd/linkerd2/fork" data-icon="octicon-repo-forked"
-                data-size="large" data-show-count="true" aria-label="Fork linkerd/linkerd2 on GitHub">Fork</a>
-            </div>
+
+      <div class="notification">
+        <h1 class="title is-size-1 mb-5">{{.title}}</h1>
+        <h5 class="title is-size-5 mb-5">{{.description | markdownify}}</h5>
+        <div class="columns is-5 is-variable">
+          {{ range .buttons }}
+          <div class="column is-narrow">
+            <a href="{{.url}}" class="button is-fullwidth {{.classname}}">
+              {{.caption}}
+            </a>
           </div>
+          {{ end }}
         </div>
       </div>
+
     </div>
+  </div>
+  <div class="linky">
+    <img src="/images/linky.svg" alt="Linky">
   </div>
 </div>

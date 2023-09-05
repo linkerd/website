@@ -1,10 +1,12 @@
-<div class="wrapper body-header foundation-member has-background-white">
-  <div class="columns is-marginless is-fullwidth is-centered">
-    <div class="column is-5">
-      <h4 class="title is-size-4 has-text-centered is-capitalize has-text-color">{{.title}}</h4>
-      <figure class="image">
-        <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
-      </figure>
-    </div>
-  </div>
+<div class="wrapper has-background-white foundation-member">
+  <div class="container columns">
+		<div class="column is-10 is-offset-1">
+      <div class="is-flex is-flex-direction-column is-align-items-center has-background-light-blue foundation-member-banner">
+        <h4 class="title is-size-4 mb-4 has-text-color has-text-centered">{{.title}}</h4>
+        <figure class="image">
+          <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
+        </figure>
+      </div>
+		</div>
+	</div>
 </div>

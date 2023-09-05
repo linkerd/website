@@ -92,19 +92,10 @@ identifier = "faq"
 name = "FAQ"
 url = "/faq/"
 weight = 4
-[[menu.top]]
-identifier = "github"
-name = "GitHub"
-pre = "<i class='fab fa-github fa-lg' aria-hidden='true'></i>"
-url = "https://github.com/linkerd/linkerd2"
-weight = 5
-[[menu.top]]
-identifier = "start"
-name = "GET STARTED"
-post = "</span>"
-pre = "<span class='button-spacer'>"
-url = "/getting-started/"
-weight = 6
+[[menu.cta]]
+identifier = "join-forum"
+name = "Join Forum"
+url = "https://linkerd.buoyant.io"
 [outputFormats.REDIRECTS]
 baseName = "_redirects"
 mediaType = "text/netlify"
@@ -120,7 +111,7 @@ images = [""]
 latest_release_date = "2022-05-31"
 latest_release_version = "1.7.5"
 latest_linkerd2_stable_version = "2.14"
-logo = "/images/identity/png/Linkerd-Linky-flatter-larger-light.png"
+logo = "/images/identity/png/transparent_background/1x/linkerd_primary_color_black_transparent.png"
 [permalinks]
 blog = "/:year/:month/:day/:slug/"
 [privacy.twitter]

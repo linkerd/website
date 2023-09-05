@@ -10,12 +10,7 @@
   }
 }
 
-.github-stat-buttons {
-  margin: 25px 0;
-}
-
 .wrapper {
-  &.tweets,
   &.features,
   &.mid-message,
   &.benefits {
@@ -61,28 +56,116 @@
   }
 }
 
-.foundation-member {
-  padding: 40px 0 40px;
+.homepage-top-hero {
+  background-image: none;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: right;
+  .notification {
+    max-width: 950px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  h1 {
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    letter-spacing: -1px;
+    background-image: -webkit-linear-gradient(0deg, $deep-blue, $primary-bright-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+  }
+  .linky {
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    right: 48px;
+  }
+  @media screen and (min-width: 768px) {
+    background-image: url(/images/homepage-top-hero-pattern.png);
+    .notification {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    h1 {
+      font-size: 60px !important;
+    }
+    .linky {
+      display: block;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .notification {
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+    h1 {
+      font-size: 80px !important;
+    }
+  }
 }
 
-.homepage-top-hero .bg-texture {
-  position: relative;
+.use-cases,
+.about-linkerd,
+.feature-list,
+.featured-articles,
+.tweets {
+  .title {
+    font-weight: 500 !important;
+    font-size: 48px !important;
+  }
+  .card {
+    height: 100%;
+  }
+  .card {
+    .content {
+      min-height: unset;// Unset value set in theme/styles-base.scss
+    }
+  }
 }
-.homepage-top-hero .bg-texture:before {
-  content: '';
-  display: block;
-  width: 120%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-  background: url('/images/pattern_home_hero.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+
+.use-cases,
+.companies,
+.about-linkerd,
+.feature-list,
+.featured-articles,
+.foundation-member,
+.tweets {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.use-cases {
+  img {
+    width: 150px;
+    height: auto;
+  }
+}
+
+.companies {
+  background-image: linear-gradient(white, $light-blue, $light-blue, white);
+}
+
+.feature-list {
+  img {
+    width: 64px;
+    height: auto;
+  }
+}
+
+.foundation-member {
+  .foundation-member-banner {
+    padding: 40px 0 30px 0;
+    border-radius: 2px;
+  }
+  .title {
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    letter-spacing: 0.25px;
+  }
+  img {
+    width: 200px;
+    height: auto;
+  }
 }
 
 .community-top-hero {
@@ -142,8 +225,15 @@
   }
 }
 
+.stats-list {
+  background-image: linear-gradient($light-blue, white);
+}
+
 .stats-list-item {
   padding: 50px 0;
+  .is-size-1 {
+    font-weight: 600 !important;
+  }
 }
 
 .links-list-container {
@@ -245,7 +335,7 @@
 
 .container.blog-content-container {
   font-family: $family-sans-serif;
-  color: $navy-black;
+  color: $deep-blue;
   padding: 30px 0;
   p,
   div {
@@ -255,7 +345,7 @@
     letter-spacing: 0.3px;
   }
   strong {
-    color: $navy-black;
+    color: $deep-blue;
   }
   hr {
     margin: 0;
@@ -294,7 +384,7 @@
 
 .related-card {
   .card {
-    color: $navy-black;
+    color: $deep-blue;
     border-radius: 4px;
     -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
             box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
@@ -318,7 +408,7 @@
   }
 
   .title {
-    color: $navy-black;
+    color: $deep-blue;
   }
 }
 
@@ -366,14 +456,14 @@
 
         &:hover {
           .navbar-link {
-            color: $navy-black;
+            color: $deep-blue;
             background: inherit;
             border-bottom: 0;
             margin-bottom: 1px;
           }
         }
         .navbar-link {
-          color: $navy-black;
+          color: $deep-blue;
           width: 100%;
           margin-right: 24px;
           border-bottom: 1px solid $dark-grey;
@@ -488,7 +578,7 @@
 
       :not(pre) > code[class*='language-'],
       pre[class*='language-'] {
-        background: $navy-black;
+        background: $deep-blue;
       }
 
       :not(pre) > code[class*='language-'] {
@@ -563,7 +653,7 @@ blockquote {
       list-style-type: none;
       padding-bottom: 1rem;
       strong {
-        color: $navy-black;
+        color: $deep-blue;
       }
     }
   }
