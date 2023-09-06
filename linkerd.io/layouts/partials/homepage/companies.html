@@ -13,7 +13,7 @@
           {{ range . }}
             <a href="{{ .url }}" target="_blank">
               <figure class="image">
-                <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .url }}" class="lazyloaded" />
+                <img src="{{ .image }}" alt="{{ .url }}" />
               </figure>
             </a>
           {{ end }}
@@ -22,7 +22,7 @@
           {{ range . }}
             <a href="{{ .url }}" target="_blank">
               <figure class="image">
-                <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .url }}" class="lazyloaded" />
+                <img src="{{ .image }}" alt="{{ .url }}" />
               </figure>
             </a>
           {{ end }}

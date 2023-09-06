@@ -62,7 +62,7 @@ companies:
   url: https://www.docker.com/
 - image: "/uploads/logos/blue/heb.png"
   url: https://www.heb.com/
-- image: "/uploads/logos/blue/walmart.svg"
+- image: "/uploads/logos/blue/walmart.png"
   url: https://www.walmart.com/
 - image: "/uploads/logos/blue/planet.png"
   url: https://www.planet.com/
