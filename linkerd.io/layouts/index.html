@@ -8,5 +8,5 @@
 {{ partial "homepage/about-linkerd.html" . }}
 {{ partial "homepage/features-list.html" .Params.features_list }}
 {{ partial "homepage/foundation-member-banner.html" .Params.foundation_member_banner }}
-{{ partial "homepage/tweets.html" ( dict "Tweets" .Params.tweets "Page" . ) }}
+{{ partial "homepage/tweets.html" .Params.tweets }}
 {{ end }}

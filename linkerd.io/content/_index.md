@@ -133,9 +133,24 @@ foundation_member_banner:
 tweets:
   title: Engineers 💙 Linkerd
   tweets:
-  - '1538086745732001793'
-  - '1550395663489409024'
-  - '1384463767459844097'
-  - '1381614377170825216'
-  tweets_md: ''
+  - name: Vito Botta
+    handle: vitobotta
+    photo: "https://bulma.io/images/placeholders/256x256.png"
+    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
+    url: "https://twitter.com/"
+  - name: Vito Botta
+    handle: vitobotta
+    photo: "https://bulma.io/images/placeholders/256x256.png"
+    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
+    url: "https://twitter.com/"
+  - name: Vito Botta
+    handle: vitobotta
+    photo: "https://bulma.io/images/placeholders/256x256.png"
+    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
+    url: "https://twitter.com/"
+  - name: Vito Botta
+    handle: vitobotta
+    photo: "https://bulma.io/images/placeholders/256x256.png"
+    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
+    url: "https://twitter.com/"
 ---
