@@ -78,7 +78,8 @@
     display: none;
     position: absolute;
     bottom: -40px;
-    right: 48px;
+    right: 20%;
+    z-index: 1;
   }
   @media screen and (min-width: 768px) {
     background-image: url(/images/homepage-top-hero-pattern.png);
@@ -100,6 +101,9 @@
     }
     h1 {
       font-size: 80px !important;
+    }
+    .linky {
+      right: 25%;
     }
   }
 }
