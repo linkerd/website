@@ -507,6 +507,17 @@ body {
   }
 }
 
+a.card-link {
+  display: block;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    .card {
+      background-image: linear-gradient(160deg, lighten($light-blue, 3%), white);
+    }
+  }
+}
+
 .related-card {
 
   .image {

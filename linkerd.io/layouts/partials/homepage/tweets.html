@@ -7,29 +7,29 @@
       <div class="columns is-multiline">
         {{ range .tweets }}
         <div class="column is-half p-5">
-            <div class="card">
-              <header class="card-header px-4 py-2">
-                <div class="media is-align-items-center">
-                  <div class="media-left">
-                    <figure class="image is-48x48">
-                      <img class="is-rounded" src="{{ .photo }}" alt="{{ .name | safeHTMLAttr }}" />
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <p class="is-size-5"><span class="has-text-weight-bold">{{ .name }}</span> <span class="has-text-grey">@{{ .handle }}</span></p>
-                  </div>
+          <div class="card">
+            <header class="card-header px-4 py-2">
+              <div class="media is-align-items-center">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img class="is-rounded" src="{{ .photo }}" alt="{{ .name | safeHTMLAttr }}" />
+                  </figure>
                 </div>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  {{ .tweet | markdownify }}
-                  
+                <div class="media-content">
+                  <p class="is-size-5"><span class="has-text-weight-bold">{{ .name }}</span> <span class="has-text-grey">@{{ .handle }}</span></p>
                 </div>
               </div>
-              <footer class="card-footer pl-3">
-                <a class="card-footer-item is-size-6" href="{{ .url }}">View on Twitter</a>
-              </footer>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                {{ .tweet | markdownify }}
+                
+              </div>
             </div>
+            <footer class="card-footer pl-3">
+              <a class="card-footer-item is-size-6" href="{{ .url }}">View on Twitter</a>
+            </footer>
+          </div>
         </div>
         {{ end }}
       </div>
