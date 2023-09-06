@@ -30,7 +30,7 @@ stats:
     value: 15,000+
   - property: Contributors
     value: 500+
-use_cases:
+case_studies:
   title: Real-world users
   cases:
   - title: Adidas
