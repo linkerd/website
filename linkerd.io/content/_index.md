@@ -31,7 +31,7 @@ stats:
   - property: Contributors
     value: 500+
 use_cases:
-  title: Use cases
+  title: Real-world users
   cases:
   - title: Adidas
     image: "/uploads/logos/blue/adidas.png"
