@@ -111,20 +111,24 @@ features_list:
 featured_articles:
   title: Why Linkerd?
   articles:
-  - title: Benchmarking Linkerd and Istio
-    description: Content needed
+  - title: Smaller and faster than any other mesh
+    description: Benchmarks show that Linkerd continues to be dramatically faster than Istio while consuming just a fraction of the system resources.
     image: "uploads/featured-articles/article-1.png"
     url: "https://linkerd.io/2021/11/29/linkerd-vs-istio-benchmarks-2021/index.html"
-  - title: Unique design principles
-    description: Content needed
+  - title: Designed for simplicity and security
+    description: Linkerd's unique design provides fundamental visibility,
+      reliability, and security capabilities without the complexity of other
+      approaches.
     image: "uploads/featured-articles/article-2.png"
     url: "https://linkerd.io/design-principles/"
-  - title: Why Linkerd doesn't use Envoy
-    description: Content needed
+  - title: Built in Rust, the language of the future
+    description: Linkerd is the only service mesh written in Rust, allowing us
+      to confidently write secure code without the CVEs and buffer overflow
+      exploits endemic to other languages.
     image: "uploads/featured-articles/article-3.png"
     url: "https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/"
 foundation_member_banner:
-  title: The first service mesh to achieve graduation status
+  title: The first service mesh to ever achieve CNCF graduation status!
   image: "/uploads/cncf.svg"
 tweets:
   title: Engineers 💙 Linkerd
