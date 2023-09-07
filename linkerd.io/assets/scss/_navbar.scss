@@ -4,7 +4,7 @@
 
 .navbar-item-helper {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   svg {
     margin-right: 5px;
   }
@@ -86,7 +86,7 @@
   	background-color: transparent;
   	border: none;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
   	@include desktop {
   		display: none;

@@ -62,14 +62,14 @@
   background-size: auto 100%;
   background-position: right;
   .notification {
-    max-width: 950px;
+    max-width: 980px;
     padding-top: 60px;
     padding-bottom: 60px;
   }
   h1 {
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     line-height: 1 !important;
-    letter-spacing: 0;
+    letter-spacing: -1.5px;
     background-image: -webkit-linear-gradient(0deg, $deep-blue, $primary-bright-blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -114,7 +114,7 @@
 .featured-articles,
 .tweets {
   .title {
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     font-size: 48px !important;
     line-height: 52px !important;
   }
@@ -262,9 +262,8 @@
     border-radius: 2px;
   }
   .title {
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     font-size: 24px !important;
-    letter-spacing: 0.25px;
   }
   img {
     width: 200px;
@@ -336,7 +335,7 @@
 .stats-list-item {
   padding: 50px 0;
   .is-size-1 {
-    font-weight: 600 !important;
+    font-weight: 700 !important;
   }
 }
 
@@ -444,9 +443,8 @@
   p,
   div {
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 28px;
-    letter-spacing: 0.3px;
   }
   strong {
     color: $deep-blue;
@@ -593,7 +591,7 @@
           background: white;
 
           .navbar-item:not(a) {
-            font: 300 18px/22px roboto !important;
+            font: 300 18px/22px "Open Sans" !important;
             color: $dark-grey;
           }
           a.navbar-item {
@@ -657,7 +655,7 @@
       }
 
       .breadcrumb {
-        font: 18px/22px roboto;
+        font: 18px/22px "Open Sans";
       }
 
       .toc {

@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:300,400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700");
 
 // brand colors
 $sky-blue: #c8f1ff;
@@ -21,14 +21,11 @@ $aqua-green: #e9fdf5;
 $box-padding:0;
 $box-radius: 4px;
 $size-1: 2.8rem;
-$family-primary: "Roboto", "Open Sans", sans-serif;
-$family-sans-serif: "Roboto", "Open Sans", sans-serif;
+$family-primary: "Open Sans", sans-serif;
+$family-sans-serif: "Open Sans", sans-serif;
 $text: $deep-blue;
 $grey-light: $light-grey;
 $notification-radius: 0;
-$weight-semibold: 600;
-$weight-bold: 600;
-$strong-weight: 600;
 
 $box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 $dropdown-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -106,60 +103,51 @@ $tablet-enabled: false;
 }
 
 body {
-  font: 300 18px/28px "Roboto" !important;
-  letter-spacing: 0.3px;
+  font: 400 18px/28px "Open Sans" !important;
 }
 
 h1,
 .is-size-1,
 h1.is-size-1 {
-  font: 300 40px/48px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 400 40px/48px "Open Sans" !important;
 }
 
 h2,
 .is-size-2,
 h2.is-size-2 {
-  font: bold 28px/36px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 700 28px/36px "Open Sans" !important;
 }
 
 h3,
 .is-size-3
 h3.is-size-3 {
-  font: 500 26px/34px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 600 26px/34px "Open Sans" !important;
 }
 
 h4,
 .is-size-4,
 h4.is-size-4 {
-  font: 300 26px/32px "Roboto" !important;
-  letter-spacing: 0.5px;
+  font: 400 26px/32px "Open Sans" !important;
 }
 
 h5,
 .is-size-5,
 h5.is-size-5 {
-  font: normal 20px/28px "Roboto" !important;
-  letter-spacing: 0.1px;
+  font: 400 20px/28px "Open Sans" !important;
 }
 
 h6,
 .is-size-6,
 h6.is-size-6 {
-  font: 500 16px/22px "Roboto" !important;
-  letter-spacing: 0.1px;
-
+  font: 500 16px/22px "Open Sans" !important;
   &.has-text-weight-light {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
   }
 }
 
 a {
-  font: normal 18px/22px "Roboto" !important;
+  font: 400 18px/22px "Open Sans" !important;
   color: $primary-bright-blue;
-  letter-spacing: 0.1px;
   &:hover {
     color: $secondary-bright-blue;
   }
@@ -170,8 +158,7 @@ a {
   border-radius: 4px;
   color: $dark-green;
   background-color: transparent;
-  font: 500 17px/24px "Roboto" !important;
-  letter-spacing: 0.3px;
+  font: 600 18px/22px "Open Sans" !important;
   &:hover,
   &:active,
   &:focus {
@@ -200,7 +187,6 @@ a {
   &.is-large {
     min-height: 56px;
     min-width: 200px;
-    font-size: 16px;
   }
 }
 
