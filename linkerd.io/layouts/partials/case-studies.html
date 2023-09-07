@@ -1,0 +1,18 @@
+{{ range site.Data.case_studies.cases }}
+	<div class="column is-one-third">
+		<a href="{{ .url }}" class="card-link">
+			<div class="card">
+				<header class="card-header">
+					<figure class="image">
+						<img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title | safeHTMLAttr }}" />
+					</figure>
+				</header>
+				<div class="card-content">
+					<div class="content">
+						{{ .description }}
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+{{ end }}

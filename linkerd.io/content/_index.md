@@ -32,19 +32,6 @@ stats:
     value: 500+
 case_studies:
   title: Real-world users
-  cases:
-  - title: Adidas
-    image: "/uploads/logos/blue/adidas.png"
-    description: "\"All our observability gaps were closed, ...we saw a reduction in failed requests, and experienced cost reduction due to better performance.\""
-    url: "https://buoyant.io/case-studies/adidas/"
-  - title: Xbox
-    image: "/uploads/logos/blue/xbox.png"
-    description: "\"We have offloaded the time and effort needed to develop and maintain the in-house mTLS solution, saving valuable engineering hours...\""
-    url: "https://buoyant.io/case-studies/xbox/"
-  - title: DB Schenker
-    image: "/uploads/logos/blue/db-schenker.png"
-    description: "\"Linkerd started as our cloud migration tool and ended up being our service mesh of choice.\""
-    url: "https://buoyant.io/case-studies/schenker/"
 companies:
 - image: "/uploads/logos/blue/expedia.png"
   url: https://www.expedia.com
@@ -86,46 +73,46 @@ features_list:
   items:
   - title: Instant platform health metrics
     description: Instantly track success rates, latencies, and request volumes for every meshed workload, without changes or config.
-    image: "uploads/features/bar-chart.svg"
+    image: "/uploads/features/bar-chart.svg"
     url: "/features/instant-platform-health-metrics/"
   - title: Simpler than any other mesh
     description: Minimalist, Kubernetes-native design. No hidden magic, as little YAML and as few CRDs as possible.
-    image: "uploads/features/mesh.svg"
+    image: "/uploads/features/mesh.svg"
     url: "/features/simpler-than-any-other-mesh/"
   - title: Zero-config mutual TLS and zero-trust policy
     description: Transparently add mutual TLS to any on-cluster TCP communication with no configuration.
-    image: "uploads/features/settings.svg"
+    image: "/uploads/features/settings.svg"
     url: "/features/zero-config-mutual-tls-and-zero-trust-policy/"
   - title: Designed by engineers, for engineers
     description: Self-contained control plane, incrementally deployable data plane, and lots and lots of diagnostics and debugging tools.
-    image: "uploads/features/startup.svg"
+    image: "/uploads/features/startup.svg"
     url: "/features/designed-by-engineers-for-engineers/"
   - title: Latency-aware load balancing and cross-cluster failover
     description: Instantly add latency-aware load balancing, request retries, timeouts, and blue-green deploys to keep your applications resilient.
-    image: "uploads/features/balance.svg"
+    image: "/uploads/features/balance.svg"
     url: "/features/latency-aware-load-balancing-and-cross-cluster-failover/"
   - title: State-of-the-art ultralight Rust dataplane
     description: Incredibly small and blazing fast Linkerd2-proxy _micro-proxy_ written in Rust for security and performance.
-    image: "uploads/features/stats.svg"
+    image: "/uploads/features/stats.svg"
     url: "/features/state-of-the-art-ultralight-rust-dataplane/"
 featured_articles:
   title: Why Linkerd?
   articles:
   - title: Smaller and faster than any other mesh
     description: Benchmarks show that Linkerd continues to be dramatically faster than Istio while consuming just a fraction of the system resources.
-    image: "uploads/featured-articles/article-1.png"
+    image: "/uploads/featured-articles/article-1.png"
     url: "https://linkerd.io/2021/11/29/linkerd-vs-istio-benchmarks-2021/index.html"
   - title: Designed for simplicity and security
     description: Linkerd's unique design provides fundamental visibility,
       reliability, and security capabilities without the complexity of other
       approaches.
-    image: "uploads/featured-articles/article-2.png"
+    image: "/uploads/featured-articles/article-2.png"
     url: "https://linkerd.io/design-principles/"
   - title: Built in Rust, the language of the future
     description: Linkerd is the only service mesh written in Rust, allowing us
       to confidently write secure code without the CVEs and buffer overflow
       exploits endemic to other languages.
-    image: "uploads/featured-articles/article-3.png"
+    image: "/uploads/featured-articles/article-3.png"
     url: "https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/"
 foundation_member_banner:
   title: The first service mesh to ever achieve CNCF graduation status!

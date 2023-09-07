@@ -150,6 +150,14 @@
   }
 }
 
+.feature.case-studies {
+  padding-top: 0;
+  padding-bottom: 96px;
+  background-image: linear-gradient($light-blue, white);
+  background-size: 100% 170px;
+  background-repeat: no-repeat;
+}
+
 .companies {
   background-image: linear-gradient(white, $aqua-green, $aqua-green, white);
   .created-by {
@@ -239,13 +247,6 @@
     &::after {
       width: 200px;
     }
-  }
-}
-
-.feature-list {
-  img {
-    width: 64px;
-    height: auto;
   }
 }
 
