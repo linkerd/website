@@ -128,22 +128,22 @@ tweets:
   tweets:
   - name: Vito Botta
     handle: vitobotta
-    photo: "https://bulma.io/images/placeholders/256x256.png"
+    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
     tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
     url: "https://twitter.com/"
   - name: Vito Botta
     handle: vitobotta
-    photo: "https://bulma.io/images/placeholders/256x256.png"
+    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
     tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
     url: "https://twitter.com/"
   - name: Vito Botta
     handle: vitobotta
-    photo: "https://bulma.io/images/placeholders/256x256.png"
+    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
     tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
     url: "https://twitter.com/"
   - name: Vito Botta
     handle: vitobotta
-    photo: "https://bulma.io/images/placeholders/256x256.png"
+    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
     tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
     url: "https://twitter.com/"
 ---
