@@ -139,7 +139,7 @@ tweets:
   - name: Anaïs Urlichs
     handle: urlichsanais
     photo: "https://pbs.twimg.com/profile_images/1528371710545866757/VtAPzwMo_400x400.jpg"
-    tweet: "Who can relate? 👀 [@Linkerd](https://twitter.com/linkerd) has the best getting-started guide I have seen 🙌✨ [pic.twitter.com/a7xNL9iWNi](https://t.co/a7xNL9iWNi)"
+    tweet: "Who can relate? 👀 [@Linkerd](https://twitter.com/linkerd) has the best getting-started guide I have seen 🙌✨ ![Image](https://pbs.twimg.com/media/EzaaLrxWYAMSaP3?format=jpg&name=medium)"
     url: "https://twitter.com/urlichsanais/status/1384463767459844097"
   - name: Siddique Ahmad
     handle: siddiqueESL
