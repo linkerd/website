@@ -251,8 +251,15 @@
 }
 
 .tweets {
-  .card-footer {
-    border-top: 1px solid $medium-grey;// Override value set in theme/styles-base.scss
+  header {
+    a {
+      display: block;
+      &:hover {
+        span {
+          color: $secondary-bright-blue !important;
+        }
+      }
+    }
   }
 }
 
