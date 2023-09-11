@@ -7,12 +7,12 @@
       <div class="columns is-multiline">
         {{ range .tweets }}
         <div class="column is-half p-5">
-          <div class="card">
+          <div class="card is-flex is-flex-direction-column">
             <header class="card-header px-4 py-2">
               <div class="media is-align-items-center">
                 <div class="media-left">
                   <figure class="image is-48x48">
-                    <img class="is-rounded" src="{{ .photo }}" alt="{{ .name | safeHTMLAttr }}" />
+                    <img class="is-rounded" src="{{ .photo }}" alt="Image" />
                   </figure>
                 </div>
                 <div class="media-content">
@@ -20,10 +20,9 @@
                 </div>
               </div>
             </header>
-            <div class="card-content">
+            <div class="card-content is-flex-grow-1">
               <div class="content">
                 {{ .tweet | markdownify }}
-                
               </div>
             </div>
             <footer class="card-footer pl-3">

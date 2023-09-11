@@ -130,20 +130,20 @@ tweets:
     handle: vitobotta
     photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
     tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
-    url: "https://twitter.com/"
-  - name: Vito Botta
-    handle: vitobotta
-    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
-    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
-    url: "https://twitter.com/"
-  - name: Vito Botta
-    handle: vitobotta
-    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
-    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
-    url: "https://twitter.com/"
-  - name: Vito Botta
-    handle: vitobotta
-    photo: "https://pbs.twimg.com/profile_images/1695040886101438465/1wBibgRE_400x400.jpg"
-    tweet: "I absolutely love [@Linkerd](https://twitter.com/linkerd) - among other things it makes load balancing of grpc service trivial. [#Kubernetes](https://twitter.com/hashtag/kubernetes)."
-    url: "https://twitter.com/"
+    url: "https://twitter.com/vitobotta/status/1538086745732001793"
+  - name: Kharf
+    handle: kharf_
+    photo: "https://pbs.twimg.com/profile_images/1465738235498348551/YR6dexO__400x400.png"
+    tweet: "A year ago I switched from Istio to [@Linkerd](https://twitter.com/linkerd). Ever since then I never had this \"...oh maybe that issue is caused by our service mesh\" feeling again.."
+    url: "https://twitter.com/kharf_/status/1550395663489409024"
+  - name: Anaïs Urlichs
+    handle: urlichsanais
+    photo: "https://pbs.twimg.com/profile_images/1528371710545866757/VtAPzwMo_400x400.jpg"
+    tweet: "Who can relate? 👀 [@Linkerd](https://twitter.com/linkerd) has the best getting-started guide I have seen 🙌✨ [pic.twitter.com/a7xNL9iWNi](https://t.co/a7xNL9iWNi)"
+    url: "https://twitter.com/urlichsanais/status/1384463767459844097"
+  - name: Siddique Ahmad
+    handle: siddiqueESL
+    photo: "https://pbs.twimg.com/profile_images/1598262400603635720/jNiVoT2a_400x400.jpg"
+    tweet: "In few hours we are able to tap in our production and staging applications logs thanks to [@Linkerd](https://twitter.com/linkerd), wonderful slack support also available, solved one issue came in while injecting [@Linkerd](https://twitter.com/linkerd), it will help our team to see it before client share with us"
+    url: "https://twitter.com/siddiqueESL/status/1381614377170825216"
 ---
