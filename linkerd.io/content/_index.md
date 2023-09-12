@@ -13,7 +13,7 @@ top_hero:
   title: The world's most advanced service mesh
   description: Enterprise power *without* enterprise complexity. Linkerd adds
     security, observability, and reliability to any Kubernetes cluster.
-    CNCF graduated and 100% open source.
+    100% open source, CNCF graduated, and written in Rust.
   buttons:
   - caption: Get Started
     url: "/getting-started/"
@@ -121,7 +121,7 @@ featured_articles:
     image: "/uploads/featured-articles/article-3.png"
     url: "/2020/12/03/why-linkerd-doesnt-use-envoy/"
 foundation_member_banner:
-  title: The first service mesh to ever achieve CNCF graduation status!
+  title: The first service mesh to achieve CNCF graduation status
   image: "/uploads/cncf.svg"
 tweets:
   title: Engineers 💙 Linkerd
