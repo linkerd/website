@@ -1,10 +1,33 @@
-<div class="wrapper has-background-white py-6">
-  <div class="container columns is-multiline is-centered">
-    {{ range .items}}
-    <div class="column is-half py-5 px-5">
-      <h3 class="title is-size-5 has-text-weight-bold is-marginless has-text-color">{{.title}}</h3>
-      <div class="has-text-color">{{.description | markdownify}}</div>
+<div class="wrapper has-background-white feature-list">
+  <div class="container columns">
+		<div class="column is-10 is-offset-1">
+      <div class="columns is-multiline is-centered">
+        {{ range .items }}
+        <div class="column is-half p-5">
+          <a href="{{ .url }}" class="card-link">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title has-text-navy-black">
+                  {{.title}}
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left pr-1">
+                    <figure class="image is-64x64">
+                      <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title | safeHTMLAttr }}" />
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    {{.description | markdownify}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {{ end }}
+      </div>
     </div>
-    {{ end }}
   </div>
 </div>

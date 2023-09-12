@@ -15,11 +15,6 @@
   <!-- End Google Tag Manager (noscript) -->
   {{ end }}
   {{ partial "header.html" . }}
-  {{ if eq .URL `/` }}
-  <div class="homepage-notification has-background-light-blue has-text-navy-black center has-text-centered">
-      <p>{{ .Site.Home.Params.announcement_banner.description | markdownify }}</p>
-  </div>
-  {{ end }}
   <section class="hero">
     <main aria-role="main" class="hero-body">
       {{ block "main" . }}

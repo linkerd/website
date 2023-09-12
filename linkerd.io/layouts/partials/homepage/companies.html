@@ -1,0 +1,33 @@
+<div class="wrapper has-background-white companies">
+  <div class="container columns is-mobile">
+    <div class="column is-narrow created-by mr-4">
+      <p class="is-size-6 mb-4">Linkerd was created by</p>
+      <figure class="image">
+        <img src="/uploads/buoyant-logo-blue.png" alt="Buoyant" />
+      </figure>
+    </div>
+    <div class="column logos-mask">
+      <p class="is-size-6 adopters">Adopters</p>
+      <div class="logos">
+        <div class="logos-1">
+          {{ range . }}
+            <a href="{{ .url }}" target="_blank">
+              <figure class="image">
+                <img src="{{ .image }}" alt="{{ .url }}" />
+              </figure>
+            </a>
+          {{ end }}
+        </div>
+        <div class="logos-2">
+          {{ range . }}
+            <a href="{{ .url }}" target="_blank">
+              <figure class="image">
+                <img src="{{ .image }}" alt="{{ .url }}" />
+              </figure>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

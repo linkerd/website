@@ -1,48 +1,42 @@
 @charset "utf-8";
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:300,400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500,600,700");
 
 // brand colors
 $sky-blue: #c8f1ff;
 $primary-bright-blue: #0185fd;
 $secondary-bright-blue: #005efd;
 $light-blue: #E3F2FE;
-$deep-blue: #001e64;
+$deep-blue: #063359;
 $light-grey: #f4f4f4;
 $medium-grey: #ececec;
 $dark-grey: #818181;
 $proxima-font: "Proxima Soft W01 Medium";
 $orange: #ff9b21;
-$dark-green: #6FF9AB;
+$dark-green: #64F9BF;
 $light-green: #3BECA9;
 $aqua-green: #e9fdf5;
-
-$navy-black: #001443;
 
 // update Bulma's global vars
 $box-padding:0;
 $box-radius: 4px;
 $size-1: 2.8rem;
-$family-primary: "Roboto", "Open Sans", sans-serif;
-$family-sans-serif: "Roboto", "Open Sans", sans-serif;
+$family-primary: "Open Sans", sans-serif;
+$family-sans-serif: "Open Sans", sans-serif;
 $text: $deep-blue;
 $grey-light: $light-grey;
 $notification-radius: 0;
-$weight-semibold: 600;
-
 
 $box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+$dropdown-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
 
-$navbar-height: 6.25rem;
-$navbar-padding-vertical: 0;
-$navbar-padding-horizontal: 2.625rem;
+$navbar-height: 3.4rem;
 $navbar-z: 300; // rounded block is 200
 $navbar-fixed-z: 300;
-
-$navbar-box-shadow-size: 0 4px 4px 0;
-$navbar-box-shadow-color: rgba(0,0,0,0.2);
-
-$navbar-background-color: $navy-black;
+$navbar-burger-color: $primary-bright-blue;
+$navbar-box-shadow-size: 0;
+//$navbar-box-shadow-color: rgba(0,0,0,0.2);
+$navbar-background-color: white;
 
 $breadcrumb-item-separator-color: $dark-grey;
 
@@ -56,7 +50,7 @@ $menu-list-border-left: none;
 $menu-item-color: $dark-grey;
 $menu-item-hover-color: $primary-bright-blue;
 $menu-item-hover-background-color: inherit;
-$menu-item-active-color: $navy-black;
+$menu-item-active-color: $deep-blue;
 $menu-item-active-background-color: white;
 
 $modal-z: 100001;
@@ -82,12 +76,12 @@ $tablet-enabled: false;
 }
 
 .has-background-navy-black {
-  background: $navy-black;
+  background: $deep-blue;
 }
 
 .has-text-navy-black,
 .has-text-color {
-  color: $navy-black;
+  color: $deep-blue;
 }
 
 .has-text-dark-grey {
@@ -97,7 +91,6 @@ $tablet-enabled: false;
 .has-text-light-green {
   color: $light-green !important;
 }
-
 
 .has-background-aqua-green {
   background: $aqua-green;
@@ -110,73 +103,62 @@ $tablet-enabled: false;
 }
 
 body {
-  font: 300 18px/28px "Roboto" !important;
-  letter-spacing: 0.3px;
+  font: 400 18px/28px "Open Sans" !important;
 }
 
 h1,
 .is-size-1,
 h1.is-size-1 {
-  font: 300 40px/48px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 400 40px/48px "Open Sans" !important;
 }
 
 h2,
 .is-size-2,
 h2.is-size-2 {
-  font: bold 28px/36px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 700 28px/36px "Open Sans" !important;
 }
 
 h3,
 .is-size-3
 h3.is-size-3 {
-  font: 500 26px/34px "Roboto" !important;
-  letter-spacing: 0.25px;
+  font: 600 26px/34px "Open Sans" !important;
 }
 
 h4,
 .is-size-4,
 h4.is-size-4 {
-  font: 300 26px/32px "Roboto" !important;
-  letter-spacing: 0.5px;
+  font: 400 26px/32px "Open Sans" !important;
 }
 
 h5,
 .is-size-5,
 h5.is-size-5 {
-  font: normal 20px/28px "Roboto" !important;
-  letter-spacing: 0.1px;
+  font: 400 20px/28px "Open Sans" !important;
 }
 
 h6,
 .is-size-6,
 h6.is-size-6 {
-  font: 500 16px/22px "Roboto" !important;
-  letter-spacing: 0.1px;
-
+  font: 500 16px/22px "Open Sans" !important;
   &.has-text-weight-light {
-    font-weight: 300 !important;
+    font-weight: 400 !important;
   }
 }
 
 a {
-  font: normal 18px/22px "Roboto" !important;
+  font: 400 18px/22px "Open Sans" !important;
   color: $primary-bright-blue;
-  letter-spacing: 0.1px;
   &:hover {
     color: $secondary-bright-blue;
   }
 }
-
 
 .button {
   border: 1px solid $dark-green;
   border-radius: 4px;
   color: $dark-green;
   background-color: transparent;
-  font: 500 17px/24px "Roboto" !important;
-  letter-spacing: 0.9px;
+  font: 600 18px/22px "Open Sans" !important;
   &:hover,
   &:active,
   &:focus {
@@ -184,25 +166,27 @@ a {
     color: $light-green;
   }
   &.is-primary {
-    color: $navy-black;
+    color: $deep-blue;
     border-color: transparent;
     background-color: $dark-green;
     border: 1px solid $dark-green;
     &:hover,
     &:focus {
-      color: $navy-black;
+      color: $deep-blue;
       background-color: $light-green;
     }
     &:active {
-      color: $navy-black;
+      color: $deep-blue;
       background-color: $light-green;
       box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     }
   }
+  &.is-link {
+    background-color: $primary-bright-blue;
+  }
   &.is-large {
     min-height: 56px;
     min-width: 200px;
-    font-size: 16px;
   }
 }
 

@@ -1,12 +1,36 @@
-<div class="wrapper has-background-light-blue tweets">
-  <div class="container">
-    <h2 class="title is-size-1 center has-text-color has-text-centered-mobiledropdown navigation">{{.Tweets.title}}</h2>
-    <div class="columns is-mobile is-multiline is-centered is-marginless">
-      {{ range .Tweets.tweets }}
-        <div class="column is-narrow is-11-mobile">
-          {{ template "_internal/shortcodes/twitter.html" (dict "Params" (slice .) "Page" $.Page) }}
+<div class="wrapper has-background-white tweets">
+  <div class="container columns">
+		<div class="column is-10 is-offset-1">
+      <div class="column is-full">
+        <h2 class="title has-text-navy-black py-5">{{.title}}</h2>
+      </div>
+      <div class="columns is-multiline">
+        {{ range .tweets }}
+        <div class="column is-half p-5">
+          <div class="card">
+            <header class="card-header px-4 py-2">
+              <a href="{{ .url }}" target="_blank">
+                <div class="media is-align-items-center">
+                  <div class="media-left">
+                    <figure class="image is-48x48">
+                      <img class="is-rounded" src="{{ .photo }}" alt="Image" />
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="is-size-5"><span class="has-text-weight-bold has-text-navy-black">{{ .name }}</span> <span class="has-text-grey">@{{ .handle }}</span></p>
+                  </div>
+                </div>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                {{ .tweet | markdownify }}
+              </div>
+            </div>
+          </div>
         </div>
-      {{ end }}
+        {{ end }}
+      </div>
     </div>
   </div>
 </div>

@@ -10,12 +10,7 @@
   }
 }
 
-.github-stat-buttons {
-  margin: 25px 0;
-}
-
 .wrapper {
-  &.tweets,
   &.features,
   &.mid-message,
   &.benefits {
@@ -61,28 +56,226 @@
   }
 }
 
-.foundation-member {
-  padding: 40px 0 40px;
+.homepage-top-hero {
+  background-image: none;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: right;
+  .notification {
+    max-width: 980px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  h1 {
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: -1.5px;
+    background-image: -webkit-linear-gradient(0deg, $deep-blue, $primary-bright-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+  }
+  .linky {
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    right: 20%;
+    z-index: 1;
+  }
+  @media screen and (min-width: 768px) {
+    background-image: url(/images/homepage-top-hero-pattern.png);
+    .notification {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    h1 {
+      font-size: 60px !important;
+    }
+    .linky {
+      display: block;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .notification {
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+    h1 {
+      font-size: 80px !important;
+    }
+    .linky {
+      right: 25%;
+    }
+  }
 }
 
-.homepage-top-hero .bg-texture {
-  position: relative;
+.case-studies,
+.about-linkerd,
+.feature-list,
+.featured-articles,
+.tweets {
+  .title {
+    font-weight: 600 !important;
+    font-size: 48px !important;
+    line-height: 52px !important;
+  }
+  .card-link,
+  .card {
+    height: 100%;
+  }
+  .card {
+    .content {
+      min-height: unset;// Unset value set in theme/styles-base.scss
+    }
+  }
 }
-.homepage-top-hero .bg-texture:before {
-  content: '';
-  display: block;
-  width: 120%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-          transform: translateX(-50%);
-  background: url('/images/pattern_home_hero.svg');
+
+.case-studies,
+.companies,
+.about-linkerd,
+.feature-list,
+.featured-articles,
+.foundation-member,
+.tweets {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.tweets {
+  padding-bottom: 96px;
+}
+
+.case-studies {
+  img {
+    width: 150px;
+    height: auto;
+  }
+}
+
+.feature.case-studies {
+  padding-top: 0;
+  padding-bottom: 96px;
+  background-image: linear-gradient($light-blue, white);
+  background-size: 100% 170px;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+}
+
+.companies {
+  background-image: linear-gradient(white, $aqua-green, $aqua-green, white);
+  .created-by {
+    img {
+      width: 160px;
+      height: auto;
+    }
+  }
+}
+@keyframes logos-1-keyframes {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -3600px;
+  }
+}
+@keyframes logos-2-keyframes {
+  from {
+    left: 3600px;
+  }
+  to {
+    left: 0%;
+  }
+}
+.logos-mask {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  .adopters {
+    position: relative;
+    z-index: 2;
+  }
+  .logos {
+    width: 3600px;
+    position: relative;
+    height: 80px;
+  }
+  .logos-1,
+  .logos-2 { 
+    width: 100%;
+    position: absolute;
+    display: flex;
+  }
+  .logos-1 {
+    animation: logos-1-keyframes 60s linear infinite;
+  }
+  .logos-2 {
+    animation: logos-2-keyframes 60s linear infinite;
+  }  
+  figure {
+    padding: 0;
+    margin: 0;
+  }
+  img {
+    width: 150px;
+    height: auto;
+    margin-left: 50px;
+  }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 35px;
+    width: 50px;
+    height: 75px;
+    z-index: 1;
+  }
+  &::before {
+    background-image: linear-gradient(90deg, $aqua-green, rgba($aqua-green, 0));
+    left: 0;
+    z-index: 1;
+  }
+  &::after {
+    content: "";
+    background-image: linear-gradient(-90deg, $aqua-green, rgba($aqua-green, 0));
+    right: 0;
+  }
+  @media screen and (min-width: 768px) {
+    &::before,
+    &::after {
+      width: 100px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    &::before,
+    &::after {
+      width: 200px;
+    }
+  }
+}
+
+.tweets {
+  header {
+    a {
+      display: block;
+      &:hover {
+        span {
+          color: $secondary-bright-blue !important;
+        }
+      }
+    }
+  }
+}
+
+.foundation-member {
+  .foundation-member-banner {
+    padding: 40px 0 30px 0;
+    border-radius: 2px;
+  }
+  .title {
+    font-weight: 600 !important;
+    font-size: 24px !important;
+  }
+  img {
+    width: 200px;
+    height: auto;
+  }
 }
 
 .community-top-hero {
@@ -142,8 +335,15 @@
   }
 }
 
+.stats-list {
+  background-image: linear-gradient($light-blue, white);
+}
+
 .stats-list-item {
   padding: 50px 0;
+  .is-size-1 {
+    font-weight: 700 !important;
+  }
 }
 
 .links-list-container {
@@ -245,17 +445,16 @@
 
 .container.blog-content-container {
   font-family: $family-sans-serif;
-  color: $navy-black;
+  color: $deep-blue;
   padding: 30px 0;
   p,
   div {
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 28px;
-    letter-spacing: 0.3px;
   }
   strong {
-    color: $navy-black;
+    color: $deep-blue;
   }
   hr {
     margin: 0;
@@ -294,7 +493,7 @@
 
 .related-card {
   .card {
-    color: $navy-black;
+    color: $deep-blue;
     border-radius: 4px;
     -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
             box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
@@ -318,7 +517,7 @@
   }
 
   .title {
-    color: $navy-black;
+    color: $deep-blue;
   }
 }
 
@@ -366,14 +565,14 @@
 
         &:hover {
           .navbar-link {
-            color: $navy-black;
+            color: $deep-blue;
             background: inherit;
             border-bottom: 0;
             margin-bottom: 1px;
           }
         }
         .navbar-link {
-          color: $navy-black;
+          color: $deep-blue;
           width: 100%;
           margin-right: 24px;
           border-bottom: 1px solid $dark-grey;
@@ -399,7 +598,7 @@
           background: white;
 
           .navbar-item:not(a) {
-            font: 300 18px/22px roboto !important;
+            font: 300 18px/22px "Open Sans" !important;
             color: $dark-grey;
           }
           a.navbar-item {
@@ -463,7 +662,7 @@
       }
 
       .breadcrumb {
-        font: 18px/22px roboto;
+        font: 18px/22px "Open Sans";
       }
 
       .toc {
@@ -488,7 +687,7 @@
 
       :not(pre) > code[class*='language-'],
       pre[class*='language-'] {
-        background: $navy-black;
+        background: $deep-blue;
       }
 
       :not(pre) > code[class*='language-'] {
@@ -563,7 +762,7 @@ blockquote {
       list-style-type: none;
       padding-bottom: 1rem;
       strong {
-        color: $navy-black;
+        color: $deep-blue;
       }
     }
   }

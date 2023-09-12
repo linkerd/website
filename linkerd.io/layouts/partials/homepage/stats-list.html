@@ -1,38 +1,14 @@
-<div class="wrapper has-background-bright-blue">
-  <div class="container">
-    <div class="container columns is-multiline is-centered is-mobile is-narrow is-vcentered">
-      <div class="column has-text-centered has-text-white is-half-mobile stats-list-item">
+<div class="wrapper stats-list">
+  <div class="container columns is-multiline is-centered is-mobile is-narrow is-vcentered"><!-- is-justify-content-space-between -->
+    {{ range . }}
+      <div class="column has-text-centered is-half-mobile stats-list-item"><!-- is-flex-grow-0 -->
         <div class="is-size-1">
-          7+
+          {{ .value }}
         </div>
-        <div class="is-size-6">
-          Years in production
+        <div class="is-size-6 text-nowrap">
+          {{ .property }}
         </div>
       </div>
-      <div class="column has-text-centered has-text-white is-half-mobile stats-list-item">
-        <div class="is-size-1">
-          9,000+
-        </div>
-        <div class="is-size-6">
-          Slack channel members
-        </div>
-      </div>
-      <div class="column has-text-centered has-text-white is-half-mobile stats-list-item">
-        <div class="is-size-1">
-          15,000+
-        </div>
-        <div class="is-size-6">
-          GitHub stars
-        </div>
-      </div>
-      <div class="column has-text-centered has-text-white is-half-mobile stats-list-item">
-        <div class="is-size-1">
-          500+
-        </div>
-        <div class="is-size-6">
-          Contributors
-        </div>
-      </div>
-    </div>
+    {{ end }}
   </div>
 </div>
