@@ -186,8 +186,7 @@ applies. The API objects supported are:
 {{< table >}}
 | field| value |
 |------|-------|
-| `group`| Group is the group of the target resource. For namespace kinds, this
-should be omitted.|
+| `group`| Group is the group of the target resource. For namespace kinds, this should be omitted.|
 | `kind`| Kind is kind of the target resource.|
 | `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
