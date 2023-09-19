@@ -12,13 +12,13 @@
                 </p>
               </header>
               <div class="card-content">
-                <div class="media">
-                  <div class="media-left pr-1">
+                <div class="columns">
+                  <div class="column is-narrow is-flex-mobile is-justify-content-center">
                     <figure class="image is-64x64">
                       <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title | safeHTMLAttr }}" />
                     </figure>
                   </div>
-                  <div class="media-content">
+                  <div class="column">
                     {{.description | markdownify}}
                   </div>
                 </div>
