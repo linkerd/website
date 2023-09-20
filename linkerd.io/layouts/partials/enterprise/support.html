@@ -1,45 +1,23 @@
-<div class="wrapper has-background-bright-blue has-text-white has-text-centered is-fullheight hero">
-  <div class="container jobs-list-container notification has-background-bright-blue enterprise-top-hero">
-    {{ range .kinds }}
-    <h1 class="title is-size-1">{{.title}}</h1>
-    <h5 class="title is-size-5">{{.description | markdownify}}</h5>
-    <div class="columns jobs-list is-multiline is-centered">
+<div class="wrapper has-background-white">
+  <div class="container">
+    {{ range . }}
+      <h2 class="title">{{ .title }}</h2>
       {{ range .entries }}
-      <div class="column is-half job-item mb-5">
-        <a class="has-text-color box-link" href="{{ .url }}" target="_blank">
-          <div class="box">
-            <article class="media">
-              <div class="media-left">
-                <figure class="image is-96x96 level-item">
-                  {{ if .thumbnail }}
-                  <img {{ partial "src.html" (dict "img" .thumbnail) | safeHTMLAttr }} alt="image" />
-                  {{ else }}
-                  <img src="/images/identity/svg/linkerd_primary_color_white.svg" alt="placeholder" />
-                  {{ end }}
-                </figure>
-              </div>
-              <div class="media-content">
-                <div class="">
-                  <h5 class="title has-text-color is-5 is-marginless">{{ .title }}</h5>
-                  <h6 class="is-size-6 has-text-weight-light">{{.description | markdownify}}</h6>
-                </div>
-              </div>
-            </article>
+        <div class="columns">
+          <div class="column is-four-fifths">
+            <h3 class="title">{{ .title }}</h3>
+            <div>{{ .description | markdownify }}</div>
+            <a href="{{ .button.href }}" class="button is-primary">
+              {{ .button.text }}
+            </a>
           </div>
-        </a>
-      </div>
+          <div class="column">
+            <figure class="image">
+              <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
+            </figure>
+          </div>
+        </div>
       {{ end }}
-    </div>
     {{ end }}
-    <h5 class="title is-size-5 has-text-white	">{{.bottom_description | markdownify}}</h5>
-    <div class="columns">
-      {{ range .buttons }}
-      <div class="column">
-        <a href="{{.url}}" class="button is-large is-primary">
-          {{.caption}}
-        </a>
-      </div>
-      {{ end }}
-    </div>
   </div>
 </div>
