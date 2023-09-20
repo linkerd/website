@@ -1,6 +1,10 @@
-<div class="wrapper has-background-white">
+<div class="wrapper body-header has-background-white enterprise-top-hero">
   <div class="container">
-    <h1>{{ .title }}</h1>
-    {{ .description | markdownify }}
+    <div class="notification">
+      <h1 class="title has-gradient-text is-size-1 pb-5">{{ .title }}</h1>
+      <div class="has-text-navy-black">
+        {{ .description | markdownify }}
+      </div>
+    </div>
   </div>
 </div>

@@ -1,23 +1,29 @@
-<div class="wrapper has-background-white">
+<div class="wrapper has-background-white enterprise-support">
   <div class="container">
-    {{ range . }}
-      <h2 class="title">{{ .title }}</h2>
-      {{ range .entries }}
-        <div class="columns">
-          <div class="column is-four-fifths">
-            <h3 class="title">{{ .title }}</h3>
-            <div>{{ .description | markdownify }}</div>
-            <a href="{{ .button.href }}" class="button is-primary">
-              {{ .button.text }}
-            </a>
+    <div class="p-4">
+      {{ range . }}
+        <h2 class="title has-text-navy-black">{{ .title }}</h2>
+        {{ range .entries }}
+          
+          <div class="enterprise-support-entry">
+            <h3 class="title has-text-navy-black mb-6">{{ .title }}</h3>
+            <div class="columns is-variable is-8">
+              <div class="column enterprise-support-entry-image">
+                <figure class="image mb-3">
+                  <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
+                </figure>
+              </div>
+              <div class="column is-two-thirds enterprise-support-entry-content">
+                <div class="mb-6">{{ .description | markdownify }}</div>
+                <a href="{{ .button.href }}" class="button is-link">
+                  {{ .button.text }}
+                </a>
+              </div>
+            </div>
           </div>
-          <div class="column">
-            <figure class="image">
-              <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
-            </figure>
-          </div>
-        </div>
+          
+        {{ end }}
       {{ end }}
-    {{ end }}
+    </div>
   </div>
 </div>
