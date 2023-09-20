@@ -19,7 +19,7 @@ support:
         description: "- 24x7 Enterprise Support\n- FIPS compliant distribution\n- Support, training, architectural reviews, and more"
         image: /uploads/enterprise/buoyant.svg
         button:
-          href: https://buoyant.io/linkerd-training/
+          href: https://buoyant.io/
           text: Learn more
       - title: Enterprise-grade Linkerd Support for Production Environment
         description: "Run Linkerd confidently with 24*7 enterprise support from the officially recognized commercial services Linkerd partner."
