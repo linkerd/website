@@ -262,7 +262,6 @@
 
 .enterprise-top-hero {
   .notification {
-    max-width: 980px;
     padding-top: 60px;
     padding-bottom: 60px;
   }
@@ -287,17 +286,23 @@
     }
   }
   @media screen and (min-width: 900px) {
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center right;
-    background-image: url(/uploads/enterprise/enterprise-background.svg);
-    background-size: 400px auto;
+    .notification {
+      background-image: none;
+      background-repeat: no-repeat;
+      background-position: center right;
+      background-image: url(/uploads/enterprise/enterprise-background.svg);
+      background-size: 400px auto;
+    }
   }
   @include from($desktop) {
-    background-size: 600px auto;
+    .notification {
+      background-size: 500px auto;
+    }
   }
   @include from($widescreen) {
-    background-size: auto 100%;
+    .notification {
+      background-size: auto 100%;
+    }
   }
 }
 
@@ -334,8 +339,11 @@
     }
   }
   @include from($tablet) {
-    h3.title {
+    h2.title {
       font-size: 48px !important;
+    }
+    h3.title {
+      font-size: 40px !important;
     }
     img {
       max-width: 100%;
