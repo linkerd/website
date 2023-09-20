@@ -102,6 +102,12 @@ $tablet-enabled: false;
   }
 }
 
+.has-gradient-text {
+  background-image: -webkit-linear-gradient(0deg, $deep-blue, $primary-bright-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+}
+
 body {
   font: 400 18px/28px "Open Sans" !important;
 }
