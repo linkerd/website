@@ -319,48 +319,46 @@
     margin-bottom: 80px;
     font-size: 40px !important;
   }
-  h3.title {
-    font-size: 32px !important;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 24px;
-  }
-  img {
-    max-width: 260px;
-  }
-  .enterprise-support-entry {
+  .enterprise-support__entry {
     margin-bottom: 48px;
     padding: 24px;
-    background-color: $off-white;
-    border-radius: 2px;
     &:last-of-type {
       margin-bottom: 0;
+    }
+    h3.title {
+      font-size: 32px !important;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 24px;
+    }
+    img {
+      max-width: 200px;
     }
   }
   @include from($tablet) {
     h2.title {
       font-size: 48px !important;
     }
-    h3.title {
-      font-size: 40px !important;
-    }
-    img {
-      max-width: 100%;
-    }
-    .enterprise-support-entry {
+    .enterprise-support__entry {
       margin-bottom: 80px;
       padding: 60px;
-    }
-    .enterprise-support-entry-content {
-      order: 1;
-    }
-    .enterprise-support-entry-image {
-      order: 2;
+      h3.title {
+        font-size: 40px !important;
+      }
+      img {
+        max-width: 100%;
+      }
+      .enterprise-support__entry-content {
+        order: 1;
+      }
+      .enterprise-support__entry-image {
+        order: 2;
+      }
     }
   }
   @include from($fullhd) {
-    .enterprise-support-entry {
+    .enterprise-support__entry {
       padding: 60px 120px;
     }
   }

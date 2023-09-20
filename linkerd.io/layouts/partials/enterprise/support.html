@@ -4,16 +4,15 @@
       {{ range . }}
         <h2 class="title has-text-navy-black">{{ .title }}</h2>
         {{ range .entries }}
-          
-          <div class="enterprise-support-entry">
-            <h3 class="title has-text-navy-black mb-6">{{ .title }}</h3>
+          <div class="card enterprise-support__entry">
             <div class="columns is-variable is-8">
-              <div class="column enterprise-support-entry-image">
+              <div class="column enterprise-support__entry-image">
                 <figure class="image mb-3">
                   <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title }}" />
                 </figure>
               </div>
-              <div class="column is-two-thirds enterprise-support-entry-content">
+              <div class="column is-two-thirds-tablet is-three-quarters-widescreen enterprise-support__entry-content">
+                <h3 class="title has-text-navy-black mb-6">{{ .title }}</h3>
                 <div class="mb-6">{{ .description | markdownify }}</div>
                 <a href="{{ .button.href }}" class="button is-link" target="_blank">
                   {{ .button.text }}
@@ -21,7 +20,6 @@
               </div>
             </div>
           </div>
-          
         {{ end }}
       {{ end }}
     </div>
