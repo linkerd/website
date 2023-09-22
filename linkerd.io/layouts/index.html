@@ -1,15 +1,12 @@
-{{ define "head" }}
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-{{ end }}
-
 {{ define "main" }}
+{{ partial "homepage/homepage-notification.html" .Params.announcement_banner  }}
 {{ partial "homepage/top-hero.html" .Params.top_hero  }}
-{{ partial "homepage/cta-buoyant.html" .Params.cta_buoyant}}
+{{ partial "homepage/stats-list.html" .Params.stats }}
+{{ partial "homepage/featured-articles.html" .Params.featured_articles }}
+{{ partial "homepage/companies.html"  .Params.companies }}
+{{ partial "homepage/case-studies.html" .Params.case_studies }}
+{{ partial "homepage/about-linkerd.html" . }}
 {{ partial "homepage/features-list.html" .Params.features_list }}
-{{ partial "homepage/stats-list.html" . }}
-{{ partial "homepage/image-list.html"  (dict "mentions" .Params.companies "title" .Params.companies_title "backgroundColor" "has-background-light-blue") }}
-{{ partial "homepage/featured-blogs.html" . }}
 {{ partial "homepage/foundation-member-banner.html" .Params.foundation_member_banner }}
-{{ partial "homepage/tweets.html" ( dict "Tweets" .Params.tweets "Page" . ) }}
-
+{{ partial "homepage/tweets.html" .Params.tweets }}
 {{ end }}
