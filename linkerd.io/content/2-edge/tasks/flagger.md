@@ -4,7 +4,7 @@ description = "Reduce deployment risk by automating canary releases based on ser
 aliases = ["canary-release"]
 +++
 
-Linkerd's [dynamic request routing](../../features/request-routeing/) allows you
+Linkerd's [dynamic request routing](../../features/request-routing/) allows you
 to dynamically shift traffic between services. This can be used to implement
 lower-risk  deployment strategies like blue-green deploys and canaries.
 
@@ -52,7 +52,7 @@ This command adds:
   that enables configuring how a rollout should occur.
 - RBAC which grants Flagger permissions to modify all the resources that it
   needs to, such as deployments and services.
-- A controller configured to interact with the Linkerd control plane.
+- A Flagger controller configured to interact with the Linkerd control plane.
 
 To watch until everything is up and running, you can use `kubectl`:
 
@@ -60,7 +60,7 @@ To watch until everything is up and running, you can use `kubectl`:
 kubectl -n flagger-system rollout status deploy/flagger
 ```
 
-## Set up the demo
+### Set up the demo
 
 This demo consists of three components: a load generator, a deployment and a
 frontend. The deployment creates a pod that returns some information such as
@@ -101,7 +101,7 @@ will exhibit this behavior as the source is not part of the mesh. To shift
 external traffic, add your ingress controller to the mesh.
 {{< /note>}}
 
-## Configure the release
+### Configure the release
 
 Before changing anything, you need to configure how a release should be rolled
 out on the cluster. The configuration is contained in a
@@ -222,7 +222,7 @@ combining canary releases with HPA, working off custom metrics or doing other
 types of releases such as A/B testing.
 {{< /note >}}
 
-## Start the rollout
+### Start the rollout
 
 As a system, Kubernetes resources have two major sections: the spec and status.
 When a controller sees a spec, it tries as hard as it can to make the status of
@@ -244,11 +244,11 @@ Any kind of modification to the pod's spec such as updating an environment
 variable or annotation would result in the same behavior as updating the image.
 
 On update, the canary deployment (`podinfo`) will be scaled up. Once ready,
-Flagger will begin to update the [TrafficSplit CRD](../../features/traffic-split/)
-incrementally. With a configured stepWeight of 10, each increment will increase
-the weight of `podinfo` by 10. For each period, the success rate will be
-observed and as long as it is over the threshold of 99%, Flagger will continue
-the rollout. To watch this entire process, run:
+Flagger will begin to update the HTTPRoute incrementally. With a configured
+stepWeight of 10, each increment will increase the weight of `podinfo` by 10.
+For each period, the success rate will be observed and as long as it is over the
+threshold of 99%, Flagger will continue the rollout. To watch this entire
+process, run:
 
 ```bash
 kubectl -n test get ev --watch
@@ -278,11 +278,11 @@ watch kubectl -n test get canary
 ```
 
 Behind the scenes, Flagger is splitting traffic between the primary and canary
-backends by updating the traffic split resource. To watch how this configuration
+backends by updating the HTTPRoute resource. To watch how this configuration
 changes over the rollout, run:
 
 ```bash
-kubectl -n test get trafficsplit podinfo -o yaml
+kubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml
 ```
 
 Each increment will increase the weight of `podinfo-canary` and decrease the
@@ -300,14 +300,6 @@ rate, latencies and throughput. From the CLI, you can watch this by running:
 ```bash
 watch linkerd viz -n test stat deploy --from deploy/load
 ```
-
-For something a little more visual, you can use the dashboard. Start it by
-running `linkerd viz dashboard` and then look at the detail page for the
-[podinfo traffic
-split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
-
-{{< fig src="/images/canary/traffic-split.png"
-        title="Dashboard" >}}
 
 ### Browser
 
@@ -333,12 +325,226 @@ that looks something like:
 
 This response will slowly change as the rollout continues.
 
-## Cleanup
+### Cleanup
 
 To cleanup, remove the Flagger controller from your cluster and delete the
 `test` namespace by running:
 
 ```bash
 kubectl delete -k github.com/fluxcd/flagger/kustomize/linkerd && \
+  kubectl delete ns test
+```
+
+## Argo Rollouts
+
+[Argo Rollouts](https://argo-rollouts.readthedocs.io) is another tool which can
+use Linkerd to perform incremental canary rollouts based on traffic metrics.
+
+### Install Argo Rollouts
+
+Similarly to Flagger, Argo Rollouts will automate the process of creating new
+Kubernetes resources, watching metrics and will use Linkerd to incrementally
+shift traffic to the new version. To install Argo Rollouts, run:
+
+```bash
+kubectl create namespace argo-rollouts && \
+  kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+To use Argo Rollouts with Linkerd, you will also need to enable the GatewayAPI
+routing plugin and grant it the necessary RBAC to ready and modify HTTPRoutes:
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argo-rollouts-config # must be so name
+  namespace: argo-rollouts # must be in this namespace
+data:
+  trafficRouterPlugins: |-
+    - name: "argoproj-labs/gatewayAPI"
+      location: "https://github.com/argoproj-labs/rollouts-plugin-trafficrouter-gatewayapi/releases/download/v0.0.0-rc1/gateway-api-plugin-linux-amd64"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argo-controller-role
+  namespace: argo-rollouts
+rules:
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - httproutes
+    verbs:
+      - "*"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argo-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argo-controller-role
+subjects:
+  - namespace: argo-rollouts
+    kind: ServiceAccount
+    name: argo-rollouts
+EOF
+```
+
+Finally, we'll also need the Argo Rollouts plugin for Kubectl so that we can
+control rollouts from the command line. Install it by following
+[these instructions](https://argoproj.github.io/argo-rollouts/installation/#kubectl-plugin-installation).
+
+### Set up the demo
+
+We can use the same demo application that we used to demonstrate Flagger.
+Deploy it by running:
+
+```bash
+kubectl create ns test && \
+  kubectl apply -f https://run.linkerd.io/flagger.yml
+```
+
+### Configure the rollout
+
+To set up rollouts for this application, we will create a few resources:
+Services for the stable and canary versions, an HTTPRoute to control routing
+between these two Services, and a Rollout resource to configure how rollouts
+should be performed:
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: argo-rollouts-http-route
+  namespace: test
+spec:
+  parentRefs:
+    - name: podinfo
+      namespace: test
+      kind: Service
+      group: core
+      port: 9898
+  rules:
+    - backendRefs:
+        - name: podinfo-stable
+          namespace: test
+          port: 9898
+        - name: podinfo-canary
+          namespace: test
+          port: 9898
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-canary
+  namespace: test
+spec:
+  ports:
+    - port: 8989
+      targetPort: 8989
+      protocol: TCP
+      name: http
+  selector:
+    app: podinfo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-stable
+  namespace: test
+spec:
+  ports:
+    - port: 8989
+      targetPort: 8989
+      protocol: TCP
+      name: http
+  selector:
+    app: podinfo
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollouts-demo
+  namespace: test
+spec:
+  replicas: 1
+  strategy:
+    canary:
+      canaryService: podinfo-canary # our created canary service
+      stableService: podinfo-stable # our created stable service
+      trafficRouting:
+        plugins:
+          argoproj-labs/gatewayAPI:
+            httpRoute: argo-rollouts-http-route # our created httproute
+            namespace: test
+      steps:
+        - setWeight: 30
+        - pause: {}
+        - setWeight: 40
+        - pause: { duration: 10 }
+        - setWeight: 60
+        - pause: { duration: 10 }
+        - setWeight: 80
+        - pause: { duration: 10 }
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      containers:
+        - name: podinfod
+          image: quay.io/stefanprodan/podinfo:1.7.0
+          ports:
+            - containerPort: 9898
+              protocol: TCP
+EOF
+```
+
+### Start the rollout
+
+We can trigger a rollout to a new version of podinfo by running:
+
+```bash
+kubectl argo rollouts -n test set image rollouts-demo \
+  podinfod=quay.io/stefanprodan/podinfo:1.7.1
+```
+
+We can watch the rollout progress by running:
+
+```bash
+kubectl argo rollouts -n test get rollout rollouts-demo --watch
+```
+
+Behind the scenes, Argo Rollouts is splitting traffic between the stable and
+canary backends by updating the HTTPRoute resource. To watch how this
+configuration changes over the rollout, run:
+
+```bash
+kubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml
+```
+
+We can also use the Linkerd CLI to observe which pods the traffic is being
+routed to in real time:
+
+```bash
+watch linkerd viz -n test stat po --from deploy/load
+```
+
+### Cleanup
+
+To cleanup, remove the Argo Rollouts controller from your cluster and delete the
+`test` namespace by running:
+
+```bash
+kubectl delete ns argo-rollouts && \
   kubectl delete ns test
 ```
