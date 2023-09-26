@@ -33,6 +33,7 @@ external collectors using the improved jaeger injector plugin, regardless
 of the collector and exporter protocol. Thank you, Cameron, for making
 future Datadog and Linkerd users' lives easier! 
 
+[Add image here]
 
 ## Nominate next month's Linkerd Hero
 
