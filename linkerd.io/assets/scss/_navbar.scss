@@ -103,7 +103,8 @@
 
   .navbar-start {
     box-shadow: none;
-    .navbar-item {
+    .navbar-item,
+    .dropdown-item {
       line-height: 1.5!important;
       padding-left: 1rem;
       padding-right: 1rem;

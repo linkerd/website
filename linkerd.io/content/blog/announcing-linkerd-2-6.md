@@ -41,7 +41,7 @@ load even on small ones. Second, the dashboard now includes a visualization of
 the [traffic split feature for canary deployments](/2.10/features/traffic-split/),
 which is already causing some excitement in the community:
 
-{{< tweet 1177911622981083139 >}}
+{{< tweet user="stefanprodan" id="1177911622981083139" >}}
 
 Finally, following up on our Helm work from the previous release, we're happy
 to announce that **Linkerd now has a public Helm repo**! We've published a

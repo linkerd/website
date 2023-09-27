@@ -13,7 +13,7 @@ Source code for the linkerd.io website.
       buoyantio/website-builder:v1.3.3 sh -c "make lint check"
    ```
 
-1. Install Hugo 0.74.3 to run the site locally:
+1. Install Hugo 0.119.0 to run the site locally:
 
    For Mac users:
 

@@ -1,4 +1,4 @@
-{{ $docsVersion := index (split .Page.URL "/") 1 }}
+{{ $docsVersion := index (split .Page.RelPermalink "/") 1 }}
 {{/* the index function doesn't accept variables */}}
 {{ $cli := (index site.Data "cli").CLIReference }}
 {{ if eq $docsVersion "2.10" }}

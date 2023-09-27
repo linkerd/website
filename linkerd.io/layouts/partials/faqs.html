@@ -1,4 +1,4 @@
-{{ $docsVersion := index (split .page.URL "/") 1 }}
+{{ $docsVersion := index (split .page.RelPermalink "/") 1 }}
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
     <div class="column has-background-light-gray docs-sidebar-container is-paddingless is-narrow is-one-third-fullhd is-full-mobile is-narrow-tablet">

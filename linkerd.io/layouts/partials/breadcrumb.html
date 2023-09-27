@@ -5,12 +5,12 @@
 <nav aria-label="breadcrumb" class="breadcrumb">
   <ul>
     {{ if or (and (eq $pathN 3) (not $isSectionPage)) (and (eq $pathN 4) $isSectionPage) }}
-    <li><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.RelPermalink }}">{{ .ctx.Parent.Title }}</a></li>
     {{ end }}
 
     {{ if and (eq $pathN 4) (not $isSectionPage) }}
-    <li><a href="{{ .ctx.Parent.Parent.URL }}">{{ .ctx.Parent.Parent.Title }}</a></li>
-    <li><a href="{{ .ctx.Parent.URL }}">{{ .ctx.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.Parent.RelPermalink }}">{{ .ctx.Parent.Parent.Title }}</a></li>
+    <li><a href="{{ .ctx.Parent.RelPermalink }}">{{ .ctx.Parent.Title }}</a></li>
     {{ end }}
 
     <li class="is-active" aria-current="page"><a href="#"> {{ .ctx.Title }}</a></li>

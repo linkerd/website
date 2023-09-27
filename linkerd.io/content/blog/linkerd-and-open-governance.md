@@ -57,7 +57,7 @@ contributions are sponsored by Buoyant, that's an artifact of how Buoyant
 operates, not a statement of control. (We donated it to the CNCF for a reason!)
 As I said on Twitter:
 
-{{< tweet 1179202957369323520 >}}
+{{< tweet user="timpark" id="1179202957369323520" >}}
 
 We want your input, your help, and your guidance. Let's keep building this
 amazing project together.

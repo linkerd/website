@@ -5,3 +5,4 @@ node_modules
 tmp
 .idea
 bin
+.hugo_build.lock
