@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/linkerd/dev:v39
+      options: --user code
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
