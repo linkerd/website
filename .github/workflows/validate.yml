@@ -5,12 +5,16 @@ on:
     paths:
       - linkerd.io/**
 
+permissions:
+  contents: read
+
 jobs:
   linkerd_io:
     name: Validate generated HTML
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/linkerd/dev:v39
+      options: --user root
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
