@@ -11,7 +11,8 @@ jobs:
     name: Lint install script
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
+      image: ghcr.io/linkerd/dev:v39
+      options: --user root
     steps:
     - name: Checkout code
       uses: actions/checkout@v3

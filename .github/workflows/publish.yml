@@ -12,7 +12,8 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
+      image: ghcr.io/linkerd/dev:v39
+      options: --user root
 
     steps:
     - name: Checkout code
