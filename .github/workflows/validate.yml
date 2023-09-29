@@ -10,10 +10,14 @@ jobs:
     name: Validate generated HTML
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
+      image: ghcr.io/linkerd/dev:v39
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: On create
+        run: |
+          .devcontainer/on-create.sh
 
       - name: Lint markdown
         run: |

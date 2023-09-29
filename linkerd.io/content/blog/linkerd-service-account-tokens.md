@@ -11,7 +11,7 @@ description: 'Linkerd recently moved to using bound service account tokens to fu
 keywords: [identity service-accounts]
 ---
 
-![Locker](/uploads/jason-dent-3wPJxh-piRw-unsplash.jpg")
+![Locker](/uploads/jason-dent-3wPJxh-piRw-unsplash.jpg)
 
 Security is a first-class concern for Linkerd. It plays a critical role in
 enhancing the overall security of the system, and this is only possible if Linkerd
