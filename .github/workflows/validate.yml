@@ -16,7 +16,7 @@ jobs:
       image: ghcr.io/linkerd/dev:v39
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: On create
         run: |
