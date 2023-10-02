@@ -32,3 +32,5 @@ jobs:
     - name: Publish
       run: |-
         make publish
+        gsutil -m setmeta -r -h "Cache-Control: no-cache, no-store, must-revalidate" gs://linkerd.io/
+        gsutil -m setmeta -r -h "Cache-Control:" gs://linkerd.io/
