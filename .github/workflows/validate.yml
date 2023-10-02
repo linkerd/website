@@ -3,22 +3,27 @@ name: validate
 on:
   pull_request:
     paths:
-      - linkerd.io/**
+    - linkerd.io/**
 
 jobs:
   linkerd_io:
     name: Validate generated HTML
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
+      image: ghcr.io/linkerd/dev:v39
+      options: --user root
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Lint markdown
-        run: |
-          make lint
+    - name: On create
+      run: |
+        .devcontainer/on-create.sh
 
-      - name: Lint html and check for dead links
-        run: |
-          make check
+    - name: Lint markdown
+      run: |
+        make lint
+
+    - name: Lint html and check for dead links
+      run: |
+        make check

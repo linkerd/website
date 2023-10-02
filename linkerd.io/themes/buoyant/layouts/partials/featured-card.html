@@ -2,7 +2,7 @@
 {{ $author := (index $.Site.Data.authors $authorId)}}
 {{ $date := .PublishDate.Format "January 2, 2006"}}
 <div class="column is-half related-card">
-  <a class="has-text-color" href="{{ .URL }}">
+  <a class="has-text-color" href="{{ .RelPermalink }}">
     <div class="card">
       <div class="card-image">
         {{ if .Params.feature }}

@@ -324,8 +324,8 @@ service mesh's unique requirements and making full use of Rust's impressive
 performance, security guarantees, and cutting-edge asynchronous networking
 stack, we believe Linkerd2-proxy is the secret sauce to Linkerd's success.
 
-{{< tweet 1091591745870139392 >}}
-{{< tweet 1274302614231044096 >}}
+{{< tweet user="coleca" id="1091591745870139392" >}}
+{{< tweet user="_dnjp" id="1274302614231044096" >}}
 
 So, do _you_ want to get involved in a cutting edge open source Rust project
 that's used in critical systems around the world? Great news, Linkerd is open

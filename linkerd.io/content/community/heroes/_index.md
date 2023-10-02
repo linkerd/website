@@ -1,12 +1,11 @@
 ---
 title: Heroes
-layout: heroes
-url: /community/heroes/
 aliases: ["/heroes/"]
 description: Open source is all about community, and Linkerd wouldn’t be what it
   is today without our heroes. Linkerd Heroes contribute to the codebase, help
   each other out on Slack and social media, and share their successes and failures
   at conferences or through blogs.
+layout: heroes
 top_hero:
   title: Linkerd Heroes
   description: Open source is all about community, and Linkerd wouldn't be what it

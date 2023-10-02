@@ -1,4 +1,4 @@
-{{ $docsVersion := index (split .page.URL "/") 1 }}
+{{ $docsVersion := index (split .page.RelPermalink "/") 1 }}
 <div class="">
   <nav class="navbar" role="navigation" aria-label="dropdown navigation">
     <div class="navbar-item has-dropdown is-hoverable ">
@@ -56,21 +56,21 @@
     <ul class="menu-list is-paddingless is-marginless">
       {{ $currentPage := .page }}
       {{ range sort (site.GetPage (print "/" $docsVersion)).Sections "Params.weight" "asc" }}
-      {{ $sectionActive := hasPrefix  $currentPage.URL .URL }}
+      {{ $sectionActive := hasPrefix  $currentPage.RelPermalink .RelPermalink }}
 
       {{ $hasWeight := sort (where .Pages "Params.weight" "ge" 1) "Params.weight" "asc" }}
       {{ $missingWeight := sort (where .Pages "Params.weight" "eq" nil) "Name" "asc" }}
       {{ $subPages := ($hasWeight | append $missingWeight) }}
       <li class="menu-list-item {{ if $sectionActive }}is-active{{ end }}">
-        <a href="{{ .URL }}" class="{{ if gt (len $subPages) 0}}navbar-link{{ end }} {{ if $sectionActive }}is-active{{ end }}">
+        <a href="{{ .RelPermalink }}" class="{{ if gt (len $subPages) 0}}navbar-link{{ end }} {{ if $sectionActive }}is-active{{ end }}">
           {{ .Name }}
         </a>
         {{ if gt (len $subPages) 0 }}
         <ul class="menu-list is-paddingless is-marginless">
           {{ range $item := $subPages }}
-          {{ $active := hasPrefix $currentPage.URL .URL }}
+          {{ $active := hasPrefix $currentPage.RelPermalink .RelPermalink }}
           <li class="menu-list-item">
-            <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
+            <a href="{{ .RelPermalink }}" class="{{ if $active }}is-active{{ end }}">
               {{ $item.Name }}
             </a>
           </li>
@@ -81,32 +81,32 @@
       {{ end }}
     </ul>
     <ul class="menu-list is-paddingless is-marginless">
-      <li class="menu-list-item {{ if eq $currentPage.URL "/what-is-a-service-mesh/" }}is-active{{ end }}">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/what-is-a-service-mesh/" }}is-active{{ end }}">
         <a href="/what-is-a-service-mesh/">
           What is a service mesh?
         </a>
       </li>
-      <li class="menu-list-item {{ if eq $currentPage.URL "/faq/" }}is-active{{ end }}">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/faq/" }}is-active{{ end }}">
         <a href="/faq/">
           Frequently Asked Questions
         </a>
       </li>
-      <li class="menu-list-item {{ if eq $currentPage.URL "/edge/" }}is-active{{ end }}">
-        <a href="/edge/">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/releases/" }}is-active{{ end }}">
+        <a href="/releases/">
           Release Channels
         </a>
       </li>
-      <li class="menu-list-item {{ if eq $currentPage.URL "/design-principles/" }}is-active{{ end }}">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/design-principles/" }}is-active{{ end }}">
         <a href="/design-principles/">
           Design Principles
         </a>
       </li>
-      <li class="menu-list-item {{ if eq $currentPage.URL "/going-to-production/" }}is-active{{ end }}">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/going-to-production/" }}is-active{{ end }}">
         <a href="/going-to-production/">
           Going to Production
         </a>
       </li>
-      <li class="menu-list-item {{ if eq $currentPage.URL "/service-mesh-glossary/" }}is-active{{ end }}">
+      <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/service-mesh-glossary/" }}is-active{{ end }}">
         <a href="/service-mesh-glossary/">
           Service Mesh Glossary
         </a>
