@@ -17,7 +17,7 @@ When we launched Linkerd 2.0 last September, it marked a substantial departure f
 
 A little over 6 months in and [already at Linkerd 2.3](https://linkerd.io/2019/04/16/announcing-linkerd-2.3/), the reception to these changes has been resoundingly positive:
 
-{{< tweet 1091591745870139392 >}}
+{{< tweet user="coleca" id="1091591745870139392" >}}
 
 While [the move from the JVM to Rust](https://www.infoq.com/articles/linkerd-v2-production-adoption) was a huge part of this success for Linkerd 2.0, just as important was our decision to codifying a set of core _product design principles_ for 2.0. These principles were based on a lesson we learned in our years of helping companies around the world get Linkerd 1.x into production: _while our users were getting tremendous value from Linkerd, they were paying a heavy price to get there_. This price was the time spent configuring, understanding, tuning, and operating Linkerd 1.x.
 

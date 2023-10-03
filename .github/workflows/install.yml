@@ -3,18 +3,23 @@ name: install
 on:
   pull_request:
     paths:
-      - Makefile
-      - run.linkerd.io/public/install*
+    - Makefile
+    - run.linkerd.io/public/install*
 
 jobs:
   lint:
     name: Lint install script
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
+      image: ghcr.io/linkerd/dev:v39
+      options: --user root
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: On create
+      run: |
+        .devcontainer/on-create.sh
 
     - name: Lint install script
       run: |

@@ -87,16 +87,16 @@ project growing, and above all, Linkerd is your project. Here's to another
 incredible year together with you. 💪
 
 <!-- markdownlint-disable MD033 -->
-{{<tweet 1172922222941560832 >}}
-{{<tweet 1172081948107239426 >}}
-{{<tweet 1166399513923211265 >}}
-{{<tweet 1165042461812477953 >}}
-{{<tweet 1164162817131520002 >}}
-{{<tweet 1174402199549464576 >}}
-{{<tweet 1158416216546873345 >}}
-{{<tweet 1133853318424485889 >}}
-{{<tweet 1130973416775983104 >}}
-{{<tweet 1091591745870139392 >}}
+{{<tweet user="markrendle" id="1172922222941560832" >}}
+{{<tweet user="CamiloFromHN" id="1172081948107239426" >}}
+{{<tweet user="ibuildthecloud" id="1166399513923211265" >}}
+{{<tweet user="wm" id="1165042461812477953" >}}
+{{<tweet user="macintoshPrime" id="1164162817131520002" >}}
+{{<tweet user="Linkerd" id="1174402199549464576" >}}
+{{<tweet user="wm" id="1158416216546873345" >}}
+{{<tweet user="dexterchief" id="1133853318424485889" >}}
+{{<tweet user="StevenNatera" id="1130973416775983104" >}}
+{{<tweet user="coleca" id="1091591745870139392" >}}
 <!-- markdownlint-enable MD033 -->
 
 ## Ready to try Linkerd?

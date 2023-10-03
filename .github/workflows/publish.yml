@@ -12,11 +12,15 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     container:
-      image: buoyantio/website-builder:v1.3.3
-
+      image: ghcr.io/linkerd/dev:v39
+      options: --user root
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: On create
+      run: |
+        .devcontainer/on-create.sh
 
     - name: Setup gcloud
       env:
@@ -28,3 +32,5 @@ jobs:
     - name: Publish
       run: |-
         make publish
+        gsutil -m setmeta -r -h "Cache-Control: no-cache, no-store, must-revalidate" gs://linkerd.io/
+        gsutil -m setmeta -r -h "Cache-Control:" gs://linkerd.io/

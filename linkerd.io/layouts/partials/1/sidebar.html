@@ -39,7 +39,7 @@
     <ul class="menu-list is-paddingless is-marginless">
       {{ $currentPage := .page }}
       {{ range index site.Menus .menu }}
-      {{ $shouldExpand :=  or ($currentPage.IsDescendant .Page) (eq .URL $currentPage.URL) }}
+      {{ $shouldExpand :=  or ($currentPage.IsDescendant .Page) (eq .URL $currentPage.RelPermalink) }}
       <li class="menu-list-item {{ if $shouldExpand }}is-active{{ end }}">
         <a href="{{ .URL }}" class="{{ if $shouldExpand }}is-active{{ end }}">
           {{ .Name }}
@@ -51,7 +51,7 @@
           {{ end }}
           {{ if .HasChildren }}
           {{ range sort .Children "Name" }}
-          {{ $active := eq .URL $currentPage.URL }}
+          {{ $active := eq .URL $currentPage.RelPermalink }}
           <li class="menu-list-item">
             <a href="{{ .URL }}" class="{{ if $active }}is-active{{ end }}">
               {{ .Name }}

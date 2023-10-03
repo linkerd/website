@@ -52,7 +52,7 @@ automatically rotated.)
 
 This new set of capabilities is already generating excitement in the community:
 
-{{< tweet 1225709372594061322 >}}
+{{< tweet user="zoltanreegn" id="1225709372594061322" >}}
 
 ## Improved dashboard
 

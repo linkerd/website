@@ -1,0 +1,113 @@
+ignoreErrors = ["error-remote-getjson"]
+paginate = 10
+baseurl = "https://linkerd.io/"
+disableKinds = ["taxonomy", "term"]
+enableRobotsTXT = true
+languageCode = "en-US"
+sectionPagesMenu = "main"
+theme = "buoyant"
+title = "Linkerd"
+[mediaTypes."text/netlify"]
+  delimiter = ""
+[menu]
+[[menu.community]]
+  name = "Slack"
+  url = "https://slack.linkerd.io/"
+  weight = 2
+[[menu.community]]
+  name = "GitHub"
+  url = "https://github.com/linkerd/linkerd2"
+  weight = 1
+[[menu.follow]]
+  name = "Twitter"
+  url = "https://twitter.com/linkerd"
+  weight = 3
+[[menu.follow]]
+  name = "YouTube"
+  url = "https://www.youtube.com/buoyantio"
+  weight = 1
+[[menu.top]]
+  identifier = "documentation"
+  name = "Docs"
+  url = "/docs/"
+  weight = 1
+[[menu.top]]
+  identifier = "community"
+  name = "Community"
+  pageRef = "/community/"
+  weight = 2
+[[menu.top]]
+  identifier = "get-involved"
+  name = "Get Involved"
+  pageRef = "/community/get-involved/"
+  weight = 2
+  parent = "community"
+[[menu.top]]
+  identifier = "community-adopters"
+  name = "Adopters"
+  pageRef = "/community/adopters/"
+  weight = 3
+  parent = "community"
+[[menu.top]]
+  identifier = "linkerd-ambassadors"
+  pageRef = "/community/ambassadors/"
+  name = "Linkerd Ambassadors"
+  weight = 4
+  parent = "community"
+[[menu.top]]
+  identifier = "community-heroes"
+  name = "Linkerd Heroes"
+  pageRef = "/community/heroes/"
+  weight = 5
+  parent = "community"
+[[menu.top]]
+  identifier = "buoyants-linkerd-forum"
+  name = "Buoyant's Linkerd Forum"
+  url = "https://linkerd.buoyant.io"
+  weight = 6
+  parent = "community"
+[[menu.top]]
+  identifier = "blog"
+  name = "Blog"
+  pageRef = "/blog/"
+  weight = 3
+[[menu.top]]
+  identifier = "faq"
+  name = "FAQ"
+  pageRef = "/faq/"
+  weight = 4
+[[menu.top]]
+  identifier = "enterprise"
+  name = "Enterprise"
+  pageRef = "/enterprise/"
+  weight = 5
+[[menu.cta]]
+  identifier = "join-forum"
+  name = "Join Forum"
+  url = "https://linkerd.buoyant.io"
+[outputFormats.REDIRECTS]
+  baseName = "_redirects"
+  mediaType = "text/netlify"
+[outputFormats.RSS]
+  mediatype = "application/RSS"
+  baseName = "feed"
+[outputs]
+  home = ["HTML", "RSS", "REDIRECTS"]
+  section = ["HTML", "RSS", "JSON"]
+[params]
+  description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
+  images = [""]
+  latest_release_date = "2022-05-31"
+  latest_release_version = "1.7.5"
+  latest_linkerd2_stable_version = "2.14"
+  logo = "/images/identity/png/transparent_background/1x/linkerd_primary_color_black_transparent.png"
+[permalinks]
+  blog = "/:year/:month/:day/:slug/"
+[privacy.twitter]
+  disable = false
+  enableDNT = false
+  simple = false
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # Allow HTML in md files
