@@ -1,6 +1,7 @@
 ---
 title: Becoming a Linkerd Community Anchor	
 description: Are you passionate about Linkerd and sharing your experience with the broader community? We want to help you tell your story!
+layout: anchor
 benefits:
   items:
     - '**Become a recognized expert** in the service mesh, cloud native, and
@@ -14,7 +15,6 @@ benefits:
       confident about your writing skills? No worries. Bring the story and we'll
       help you tell it in an engaging way."
   title: Benefits
-layout: anchor
 autopilot: true
 mid_message: |-
   If you are running Linkerd on a cool project, mission-critical application, or an interesting or complex use case — we’d love to hear from you.
@@ -35,6 +35,4 @@ top_hero:
   image_alt: 'Become a linkerd Community Anchor'
   image_on_the_right: true
   title: 'Become a Linkerd Community Anchor'
-type: community
-url: community/anchor
 ---

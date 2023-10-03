@@ -4,7 +4,7 @@
     {{ range .Site.Menus.top }}
     {{ $isCurrent := $currentPage.IsMenuCurrent "top" . }}
     {{ $isCurrentDropdown := $currentPage.HasMenuCurrent "top" . }}
-    
+
     {{ if not .HasChildren }}
       <a href="{{ .URL }}" class="navbar-item {{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
         <span class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span>
@@ -18,7 +18,8 @@
           <button class="dropdown-item back">&lt; Back</button>
           <div class="dropdown-content">
             {{ range .Children }}
-              <a href="{{ .URL }}" class="dropdown-item py-3 {{ if $isCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
+              {{ $isChildCurrent := $currentPage.IsMenuCurrent "top" . }}
+              <a href="{{ .URL }}" class="dropdown-item py-3 {{ if $isChildCurrent }}is-active{{ end }}" {{if hasPrefix .URL "http"}}target="_blank"{{end}}>
                 <span class="navbar-item-helper">{{ .Pre }}{{ .Name }}{{ .Post }}</span>
               </a>  
             {{ end }}

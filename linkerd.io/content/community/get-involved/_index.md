@@ -1,8 +1,8 @@
 ---
 title: Get Involved
-layout: get-involved.html
 description: Linkerd isn’t just the software, it’s the community around it—and that
   community begins with you. Join us!
+layout: get-involved
 links:
 - image: "/images/get-involved/slack.svg"
   alt: Slack
@@ -43,6 +43,4 @@ links:
   alt: Mailing list
   description: Finally, don’t forget to sign up to receive announcements and critical
     security updates on the [CNCF Linkerd mailing list.](https://lists.cncf.io/g/cncf-linkerd-users)
-url: "/community/get-involved/"
-
 ---

@@ -56,7 +56,7 @@ users to automatically encrypt communication between functions! (You can read
 [the full guide
 here](https://github.com/openfaas-incubator/openfaas-linkerd2).)
 
-{{< tweet 1129105603354333184 >}}
+{{< tweet user="alexellisuk" id="1129105603354333184" >}}
 
 ## And, of course, lots and lots of talks!
 
@@ -96,11 +96,11 @@ This was another great Kubecon for Linkerd. It was incredible to meet so many
 enthusiastic and friendly people, and we can't wait to do it all again this
 November in San Diego!
 
-{{< tweet 1130789969293991936 >}}
+{{< tweet user="wm" id="1130789969293991936" >}}
 
-{{< tweet 1131493061916319744 >}}
+{{< tweet user="bwplotka" id="1131493061916319744" >}}
 
-{{< tweet 1130810652862373889 >}}
+{{< tweet user="danielbryantuk" id="1130810652862373889" >}}
 
 ---
 

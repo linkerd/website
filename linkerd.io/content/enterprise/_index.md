@@ -6,9 +6,6 @@ aliases:
 layout: enterprise
 type: enterprise
 weight: 1
-menu:
-  top:
-    weight: 5
 top_hero:
   title: Linkerd Enterprise Support and Training
   description: "Linkerd was created by Buoyant and contributed to the Cloud Native Computing Foundation in 2017. It was the first service mesh to achieve graduated status, and today powers the critical production systems of enterprises around the world.\n\nHere, you'll find commercial products, support, and training for Linkerd."

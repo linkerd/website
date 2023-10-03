@@ -6,8 +6,6 @@ RELEASE_URL = https://github.com/linkerd/linkerd2/releases
 export L5D2_STABLE_VERSION ?= "stable-X.X.X"
 export L5D2_EDGE_VERSION ?= "edge-X.X.X"
 
-export BUILD_IMAGE ?= buoyantio/website-builder:v1.3.3
-
 GIT_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
 GIT_HASH = $(shell git log --pretty=format:'%h' -n 1)
 
@@ -149,17 +147,3 @@ has-env-%:
 .PHONY: clean
 clean:
 	rm -rf tmp
-
-.PHONY: update-build-image
-update-build-image: docker-build docker-push
-	@# Build and push the build image
-
-.PHONY: docker-build
-docker-build:
-	@# Build the build image
-	docker build -t $(BUILD_IMAGE) .
-
-.PHONY: docker-push
-docker-push:
-	@# Push the build image
-	docker push $(BUILD_IMAGE)
