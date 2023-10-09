@@ -35,7 +35,7 @@ distributed tracing using Linkerd's Jaeger extension (regardless of which
 collector is in use). Thank you, Cameron, for making future Datadog and
 Linkerd users' lives easier!
 
-![Cameron Boulton](/uploads/2023/09/cameron-portrait.jpeg)
+![Cameron Boulton](/uploads/2023/09/cameron-banner.jpeg)
 
 ## Nominate next month's Linkerd Hero
 
