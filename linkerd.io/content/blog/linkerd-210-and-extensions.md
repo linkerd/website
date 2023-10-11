@@ -8,7 +8,7 @@ title = "Linkerd 2.10 and Extensions"
 featured = false
 +++
 
-![Zen garden](/uploads/kari-shea-B8JFJWzAC9s-unsplash.jpg")
+![Zen garden](/uploads/kari-shea-B8JFJWzAC9s-unsplash.jpg)
 
 Linkerd is the smallest, simplest service mesh in the world. Since Linkerd 2.0,
 we've followed a philosophy of minimalism, composability, and building on top

@@ -5,7 +5,7 @@
 		</div>
 		{{ range first 2 ( where (where .Site.Pages "Type" "blog") ".Params.featured" "=" true )}}
 		<div class="column is-half related-card">
-			<a class="has-text-color" href="{{ .URL }}">
+			<a class="has-text-color" href="{{ .RelPermalink }}">
 				<div class="card">
 					<div class="card-image">
 						{{ if .Params.thumbnail }}

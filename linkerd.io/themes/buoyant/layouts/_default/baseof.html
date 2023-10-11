@@ -16,11 +16,6 @@
   {{ end }}
 
   {{ partial "header.html" . }}
-  {{ if eq .URL `/` }}
-  <div class="homepage-notification has-background-orange has-text-white center has-text-centered">
-      <p>{{ .Site.Home.Params.announcement_banner.description | markdownify }}</p>
-  </div>
-  {{ end }}
   <section class="hero is-fullheight">
     <main aria-role="main" class="hero-body">
       {{ block "main" . }}
