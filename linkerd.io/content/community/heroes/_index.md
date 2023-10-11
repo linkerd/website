@@ -19,6 +19,13 @@ top_hero:
 voted:
   badge: "/uploads/credly-badges_voted.svg"
   heroes:
+  - name: Cameron Boulton
+    date: September 2023
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/2023/09/cameron-portrait.jpeg"
+    alt: Portrait of Cameron Boulton
+    github_url: "https://www.linkedin.com/in/cameronboulton/"
   - name: Mikael Fridh
     date: July 2023
     blurb: Technical contributions

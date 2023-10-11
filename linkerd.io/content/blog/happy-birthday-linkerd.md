@@ -92,7 +92,7 @@ incredible year together with you. 💪
 {{<tweet user="ibuildthecloud" id="1166399513923211265" >}}
 {{<tweet user="wm" id="1165042461812477953" >}}
 {{<tweet user="macintoshPrime" id="1164162817131520002" >}}
-{{<tweet user="Linekrd" id="1174402199549464576" >}}
+{{<tweet user="Linkerd" id="1174402199549464576" >}}
 {{<tweet user="wm" id="1158416216546873345" >}}
 {{<tweet user="dexterchief" id="1133853318424485889" >}}
 {{<tweet user="StevenNatera" id="1130973416775983104" >}}
