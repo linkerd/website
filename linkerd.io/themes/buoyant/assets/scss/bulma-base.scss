@@ -9,25 +9,22 @@
 
 h1,
 h1.is-size-1 {
-  font: 900 35px/42px "Rubik" !important;
+  font: 700 35px/42px "Open Sans" !important;
 }
 
 h2,
 h2.is-size-2 {
-  font: 700 25px/32px "Rubik" !important;
-  letter-spacing: 0.15px;
+  font: 600 25px/32px "Open Sans" !important;
 }
 
 h3,
 h3.is-size-3 {
-  font: 600 20px/30px "Open Sans" !important;
-  letter-spacing: 0.1px;
+  font: 500 20px/30px "Open Sans" !important;
 }
 
 h4,
 h4.is-size-4 {
-  font: 16px/20px "Proxima Soft W01 Medium" !important;
-  letter-spacing: 2px;
+  font: 400 16px/20px "Open Sans" !important;
 }
 
 a {
@@ -45,7 +42,6 @@ a {
   transition: border-color 0.2s linear, color 0.2s linear,
     background-color 0.2s linear, transform 0.1s linear;
   font: 600 18px/20px "Open Sans" !important;
-  letter-spacing: 0.2px;
   &:hover,
   &:active {
     border-color: $secondary-bright-blue;
@@ -110,7 +106,6 @@ a {
 }
 
 .has-proxima-font {
-  letter-spacing: 2px;
   color: $dark-grey;
   font-family: $proxima-font;
 }

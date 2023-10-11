@@ -10,10 +10,10 @@ Source code for the linkerd.io website.
    ```bash
    docker run \
       --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-      buoyantio/website-builder:v1.3.3 sh -c "make lint check"
+      ghcr.io/linkerd/dev:v39 sh -c ".devcontainer/on-create.sh && make lint check"
    ```
 
-1. Install Hugo 0.74.3 to run the site locally:
+1. Install Hugo 0.119.0 to run the site locally:
 
    For Mac users:
 

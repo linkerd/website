@@ -5,7 +5,6 @@ html,
 body {
   font-size: 16px;
   line-height: 20px;
-  letter-spacing: 0.2px;
 }
 .container {
   margin: 0 auto !important;
@@ -14,8 +13,19 @@ body {
   position: relative;
 }
 .homepage-notification {
-  min-height: 48px;
+  min-height: 40px;
   padding: 0 10px;
+  background-color: $deep-blue;
+}
+.homepage-notification,
+.homepage-notification a {
+  color: white;
+  font-size: 16px !important;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.homepage-notification img {
+  vertical-align: text-bottom;
 }
 .hero-body {
   position: relative;
@@ -50,11 +60,11 @@ body {
         }
       }
       .button {
-        min-width: 200px;
-        margin: 5px;
+        min-width: 170px;
+        /*margin: 5px;
         &:nth-child(2n-1) {
           margin-left: 0;
-        }
+        }*/
       }
       &.contacts {
         .map-container {
@@ -464,6 +474,10 @@ body {
 }
 
 .card {
+  border-radius: 4px;
+  -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+
   .placeholder {
     background-color: rgb(70,125,189);
   }
@@ -488,6 +502,17 @@ body {
 
     figure {
       height: 150px;
+    }
+  }
+}
+
+a.card-link {
+  display: block;
+  transition: all .2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+    .card {
+      background-image: linear-gradient(160deg, lighten($light-blue, 3%), white);
     }
   }
 }
@@ -849,7 +874,6 @@ body {
     .input {
       height: 55px;
       line-height: 19px;
-      letter-spacing: 0.9px;
       color: $dark-grey;
       &:focus,
       &:active {
@@ -948,31 +972,27 @@ body {
   h1 {
     margin: 40px 0 18px;
     font-size: 35px;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 45px;
-    letter-spacing: 0.2px;
   }
   h2 {
     margin: 36px 0 14px;
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 30px;
-    letter-spacing: 0.15px;
   }
   h3 {
     margin: 32px 0 10px;
     font-size: 20px;
     font-weight: 500;
     line-height: 30px;
-    letter-spacing: 0.1px;
   }
   p,
   div {
     margin: 14px 0;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 400;
     line-height: 22px;
-    letter-spacing: 0.2px;
   }
   ul,
   ol {
@@ -1297,81 +1317,14 @@ body {
   text-transform: uppercase;
   text-align: center;
   border-radius: 4px;
-  font-weight: bold;
-}
-
-
-/*  
-  cta-bouyant home
-*/
-
-.hero-body .cta-buoyant-title{
-  margin-bottom: 3rem;
-}
-.hero-body .cta-bouyant-button.is-large{
-  min-width: 300px;
-}
-
-.block-created-by{
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  p {
-    font-weight: 500 !important;
-  }
-  img{
-    max-width: 200px;
-    margin-left: 0.5rem;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  .hero-body .cta-buoyant-title{
-    font: 300 1.75rem/1.35em "Roboto" !important;
-  }
-
-  .cta-buoyant-subtitle{
-    font: 300 1.25rem/1.35em "Roboto" !important;
-  }
+  font-weight: 700;
 }
 
 @media screen and (max-width: 768px) {
   .hero-body .wrapper.body-header .notification {
     padding-right: 1.5rem;
   }
-  .hero-body .cta-buoyant-title{
-    font: 300 1.5rem/1.35em "Roboto" !important;
-    margin-bottom: 2.5rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .cta-buoyant-subtitle{
-    font: 300 1.125rem/1.35em "Roboto" !important;
-  }
   .hero-body {
     overflow: hidden;
   }
-
-  .block-created-by{
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    p {
-      font-weight: 500 !important;
-    }
-    img{
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      margin-left: 0;
-    }
-  }
-
 }
