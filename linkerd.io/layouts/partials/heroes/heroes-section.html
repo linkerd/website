@@ -4,7 +4,7 @@
       <div class="columns column is-multiline">
         {{ range .heroes }}
         <div class="column is-6">
-          <a href="{{ .github_url }}" target="_blank">
+          <a href="{{.url}}"{{ if hasPrefix .url "http" }} target="_blank"{{ end }}>
           <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-2 py-3">
             <figure class="image is-96x96 mr-4 is-flex-shrink-0">
               <img class="is-rounded" src="{{.image}}" alt="{{.alt}}" />
