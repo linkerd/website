@@ -2,7 +2,7 @@
   <div class="container columns is-multiline">
     <div class="column is-12 is-10-desktop is-offset-1-desktop">
       <div class="columns column is-multiline">
-        {{ range .heroes }}
+        {{ range . }}
         <div class="column is-6">
           <a href="{{.url}}"{{ if hasPrefix .url "http" }} target="_blank"{{ end }}>
           <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-2 py-3">

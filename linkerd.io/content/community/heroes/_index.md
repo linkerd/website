@@ -16,9 +16,7 @@ top_hero:
   image: "/images/heroes-graphic.svg"
   image_on_the_right: false
   alt: Portrait of Rio Kierkels
-voted:
-  badge: "/uploads/credly-badges_voted.svg"
-  heroes:
+heroes:
   - name: Cameron Boulton
     date: September 2023
     blurb: Technical contributions
@@ -138,38 +136,6 @@ voted:
     image: "/uploads/rio-kierkels.png"
     alt: Portrait of Rio Kierkels
     url: https://www.linkedin.com/in/rio-kierkels-70a67b26/
-  - name: Mayank Shah
-    date: March 2021
-    blurb: Technical contributions
-    hero_type: contributor
-    image: "/uploads/mayank-shah.png"
-    alt: Portrait of Mayank Shah
-    url: https://github.com/mayankshah1607
-  - name: Sergio Mendéz
-    date: February 2021
-    blurb: Spreading the Linkerd message
-    hero_type: ambassador
-    image: "/uploads/sergio.jpg"
-    alt: Portrait of Sergio Mendéz
-    url: https://www.linkedin.com/in/sergioarmgpl/
-  - name: Richard Pijnenburg
-    date: January 2021
-    blurb: Helping community members
-    hero_type: community
-    image: "/uploads/richard-pijnenberg-2.jpg"
-    alt: Portrait of Richard Pijnenberg
-    url: https://www.linkedin.com/in/richard-pijnenburg/
-  - name: Lutz Behnke
-    date: December 2020
-    blurb: Technical contributions
-    hero_type: contributor
-    image: "/uploads/vita_image_lutz_behnke.jpg"
-    alt: Portrait of Lutz Behnke
-    url: https://www.linkedin.com/in/lutz-behnke-096a19/
-# Nominated heros are no longer displayed on the Heroes pages
-nominated:
-  badge: "/uploads/credly-badges_nominated.svg"
-  heroes:
   - name: Saim Safdar
     date: April 2021
     blurb: Spreading the Linkerd message
@@ -177,6 +143,7 @@ nominated:
     image: "/uploads/saim safdar 1.png"
     alt: Portrait of Saim Safdar
     url: https://github.com/Saim-Safdar
+    nominated: true
   - name: Ali Ariff
     date: April 2021
     blurb: Technical contributions
@@ -184,6 +151,14 @@ nominated:
     image: "/uploads/ali 1.png"
     alt: Portrait of Ali Ariff
     url: https://github.com/aliariff
+    nominated: true
+  - name: Mayank Shah
+    date: March 2021
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/mayank-shah.png"
+    alt: Portrait of Mayank Shah
+    url: https://github.com/mayankshah1607
   - name: Fredrik Klingenberg
     date: March 2021
     blurb: Spreading the Linkerd message
@@ -191,6 +166,7 @@ nominated:
     image: "/uploads/fredrick-klingenberg.jpg"
     alt: Portrait of Fredrick Klingenberg
     url: https://www.linkedin.com/in/fredrikklingenberg/
+    nominated: true
   - name: Henry Hagnäs
     date: March 2021
     blurb: Spreading the Linkerd message
@@ -198,6 +174,7 @@ nominated:
     image: "/uploads/henry-elk-profile.jpg"
     alt: Portrait of Henry Hagnas
     url: https://www.linkedin.com/in/hagnas/
+    nominated: true
   - name: Christian Hüning
     date: March 2021
     blurb: Helping community members
@@ -205,6 +182,14 @@ nominated:
     image: "/uploads/christian-huning.png"
     alt: Portrait of Christian Huning
     url: https://www.linkedin.com/in/christian-h%C3%BCning-964191a3/
+    nominated: true
+  - name: Sergio Mendéz
+    date: February 2021
+    blurb: Spreading the Linkerd message
+    hero_type: ambassador
+    image: "/uploads/sergio.jpg"
+    alt: Portrait of Sergio Mendéz
+    url: https://www.linkedin.com/in/sergioarmgpl/
   - name: NJM
     date: February 2021
     blurb: Helping community members
@@ -212,6 +197,7 @@ nominated:
     image: "/uploads/njm.png"
     alt: Portrait of NJM
     url: https://linkerd.io/community/heroes/
+    nominated: true
   - name: Piyush Singariya
     date: February 2021
     blurb: Technical contributions
@@ -219,6 +205,14 @@ nominated:
     image: "/uploads/piyush-singariya.png"
     alt: Portrait of Piyush Singariya
     url: https://www.linkedin.com/in/piyushsingariya/
+    nominated: true
+  - name: Richard Pijnenburg
+    date: January 2021
+    blurb: Helping community members
+    hero_type: community
+    image: "/uploads/richard-pijnenberg-2.jpg"
+    alt: Portrait of Richard Pijnenberg
+    url: https://www.linkedin.com/in/richard-pijnenburg/
   - name: Matt Young
     date: January 2021
     blurb: Spreading the Linkerd message
@@ -226,6 +220,7 @@ nominated:
     image: "/uploads/matt-young.png"
     alt: Portrait of Matt Young
     url: https://www.linkedin.com/in/halcyondude/
+    nominated: true
   - name: Jimil Desai
     date: January 2021
     blurb: Technical contributions
@@ -233,6 +228,14 @@ nominated:
     image: "/uploads/jamil-desai-2.jpeg"
     alt: Portrait of Jimil Desai
     url: https://www.linkedin.com/in/jimil-desai-30179416b/
+    nominated: true
+  - name: Lutz Behnke
+    date: December 2020
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/vita_image_lutz_behnke.jpg"
+    alt: Portrait of Lutz Behnke
+    url: https://www.linkedin.com/in/lutz-behnke-096a19/
   - name: Maxime Bélanger
     date: December 2020
     blurb: Helping community members
@@ -240,6 +243,7 @@ nominated:
     image: "/uploads/maxime-belanger.png"
     alt: Portrait of Maxime Bélanger
     url: https://www.linkedin.com/in/maximeb/
+    nominated: true
   - name: David Sudia
     date: December 2020
     blurb: Spreading the Linkerd message
@@ -247,4 +251,5 @@ nominated:
     image: "/uploads/david-sudia.png"
     alt: Portrait of David Sudia
     url: https://www.linkedin.com/in/davidsudia/
+    nominated: true
 ---
