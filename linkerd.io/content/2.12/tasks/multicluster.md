@@ -106,7 +106,7 @@ With a valid trust anchor and issuer credentials, we can install Linkerd on your
 
 ```bash
 # first, install the Linkerd CRDs in both clusters
-linkerd install --crds |
+linkerd install --crds \
   | tee \
     >(kubectl --context=west apply -f -) \
     >(kubectl --context=east apply -f -)
