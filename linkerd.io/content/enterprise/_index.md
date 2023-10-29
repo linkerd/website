@@ -7,13 +7,21 @@ layout: enterprise
 type: enterprise
 weight: 1
 top_hero:
-  title: Linkerd Enterprise Support and Training
+  title: Enterprise Support and Training
   description: "Linkerd was created by Buoyant and contributed to the Cloud Native Computing Foundation in 2017. It was the first service mesh to achieve graduated status, and today powers the critical production systems of enterprises around the world.\n\nHere, you'll find commercial products, support, and training for Linkerd."
 support:
-  - title: Enterprise Support
+  - title: Distributions
+    entries:
+      - title: Buoyant Enterprise for Linkerd
+        description: "From the creators of Linkerd. Rust-based network security and reliability for modern applications. Built on open source and designed for the enterprise.\n\n- Uniform encryption, authentication, and authorization across your network\n- Global application traffic management, cluster failover, and cost-aware routing\n- Full L7 visibility\n- FIPS compliant distribution"
+        image: /uploads/enterprise/buoyant.svg
+        button:
+          href: https://buoyant.io/enterprise-linkerd/
+          text: Learn more
+  - title: Support
     entries:
       - title: Enterprise support from Buoyant, creators of Linkerd
-        description: "- 24x7 Enterprise Support\n- FIPS compliant distribution\n- Support, training, architectural reviews, and more"
+        description: "- 24x7 Enterprise Support\n- Support, training, architectural reviews, and more"
         image: /uploads/enterprise/buoyant.svg
         button:
           href: https://buoyant.io/linkerd-support/
