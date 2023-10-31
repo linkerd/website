@@ -90,7 +90,7 @@ with `linkerd check --proxy`, to avoid unintentional version skew.
 
 Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes
-versions](../reference/k8s-versions/).
+versions](../../reference/k8s-versions/).
 
 ## Upgrading the CLI
 

@@ -31,7 +31,7 @@ local machine, or even somewhere else.
 
 Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes
-versions](../reference/k8s-versions/).
+versions](../../reference/k8s-versions/).
 
 Before installing the control plane, validate that this Kubernetes cluster is
 configured appropriately for Linkerd by running:
