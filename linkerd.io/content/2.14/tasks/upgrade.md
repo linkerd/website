@@ -88,6 +88,10 @@ of Linkerd is healthy, e.g. by using `linkerd check`. For major version
 upgrades, you should also ensure that your data plane is up-to-date, e.g.
 with `linkerd check --proxy`, to avoid unintentional version skew.
 
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../reference/k8s-versions/).
+
 ## Upgrading the CLI
 
 The CLI can be used to validate whether Linkerd was installed correctly.
