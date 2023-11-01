@@ -368,6 +368,14 @@
       .enterprise-support__entry-content {
         order: 1;
       }
+      .enterprise-support__entry-description {
+        > * {
+          margin-bottom: 24px;
+        }
+        > :last-child {
+          margin-bottom: 0;
+        }
+      }
       .enterprise-support__entry-image {
         order: 2;
       }
