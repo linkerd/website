@@ -25,10 +25,8 @@ Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
 
 {{< note >}}
 This page contains quick start instructions intended for non-production
-installations. For production-oriented configurations, we suggest alternative
-approaches, such as the [Linkerd Production
-Toolkit](https://buoyant.io/linkerd/getting-started/) by Buoyant, which includes
-continuous monitoring, vulnerability alerts, and upgrade assistance for Linkerd.
+installations. For production-oriented configurations, we suggest reviewing
+resources in [Going to Production](/going-to-production/).
 {{< /note >}}
 
 ## Step 0: Setup

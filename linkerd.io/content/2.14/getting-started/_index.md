@@ -25,10 +25,8 @@ Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
 
 {{< note >}}
 This page contains quick start instructions intended for non-production
-installations. For production-oriented configurations, we suggest alternative
-approaches, such as the [Linkerd Production
-Toolkit](https://buoyant.io/linkerd/getting-started/) by Buoyant, which includes
-continuous monitoring, vulnerability alerts, and upgrade assistance for Linkerd.
+installations. For production-oriented configurations, we suggest reviewing
+resources in [Going to Production](/going-to-production/).
 {{< /note >}}
 
 ## Step 0: Setup
@@ -71,7 +69,11 @@ To install the CLI manually, run:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-Be sure to follow the instructions to add it to your path.
+Be sure to follow the instructions to add it to your path:
+
+```bash
+export PATH=$HOME/.linkerd2/bin:$PATH
+```
 
 (Alternatively, if you use [Homebrew](https://brew.sh), you can install the CLI
 with `brew install linkerd`. You can also download the CLI directly via the
