@@ -69,7 +69,11 @@ To install the CLI manually, run:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-Be sure to follow the instructions to add it to your path.
+Be sure to follow the instructions to add it to your path:
+
+```bash
+export PATH=$HOME/.linkerd2/bin:$PATH
+```
 
 (Alternatively, if you use [Homebrew](https://brew.sh), you can install the CLI
 with `brew install linkerd`. You can also download the CLI directly via the
