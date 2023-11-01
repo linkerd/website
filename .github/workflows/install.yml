@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Build scripts
       run: |
         make build-run.linkerd.io
 
-    - uses: actions/upload-artifact@v3.1.2
+    - uses: actions/upload-artifact@v3.1.3
       with:
         name: run.linkerd.io
         path: tmp/run.linkerd.io/public

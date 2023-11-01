@@ -13,7 +13,7 @@
               </div>
               <div class="column is-two-thirds-tablet is-three-quarters-widescreen enterprise-support__entry-content">
                 <h3 class="title has-text-navy-black mb-6">{{ .title }}</h3>
-                <div class="mb-6">{{ .description | markdownify }}</div>
+                <div class="mb-6 enterprise-support__entry-description">{{ .description | markdownify }}</div>
                 <a href="{{ .button.href }}" class="button is-link" target="_blank">
                   {{ .button.text }}
                 </a>
