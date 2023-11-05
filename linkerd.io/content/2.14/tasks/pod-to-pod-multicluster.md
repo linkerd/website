@@ -315,7 +315,7 @@ Multicluster setup requires 2 secrets on the `source` cluster to function correc
 1. `cluster-credentials-<remote-cluster-name>` residing in `linkerd-multicluster` namespace (default, it may be different if you have changed it, during installation of `linkerd-multicluster` extension).
 2. `cluster-credentials-<remote-cluster-name>` residing in the LinkerD control-plane namespace -- usually `linkerd`.
 
-The second secret (in `linkerd` namespace) has a specific metadata requirements - `linkerd-destination` required the secret to contain following labels and annotations (assuming we are linking `east` cluster to `west` cluster):
+The second secret (in `linkerd` namespace) has a specific metadata requirements. Labels and annotations shown below are neccessary for the control plane, to be able to retrieve the remote cluster credentials. Assuming we are linking `east` cluster to `west` cluster, the secret would have to contain below metadata:
 
 ```
 metadata:
