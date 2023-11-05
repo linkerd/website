@@ -305,3 +305,29 @@ default  bb                           authorizationpolicy/bb-authz        0.0rps
 default  default:all-unauthenticated  default/all-unauthenticated         0.0rps  100.00%   0.1rps          1ms          1ms          1ms
 probe    default:all-unauthenticated  default/probe                       0.0rps  100.00%   0.2rps          1ms          1ms          1ms
 ```
+
+## Troubleshooting
+
+### `Failed to get remote cluster`
+
+Multicluster setup requires 2 secrets on the `source` cluster to function correctly. 
+
+1. `cluster-credentials-<remote-cluster-name>` residing in `linkerd-multicluster` namespace (default, it may be different if you have changed it, during installation of `linkerd-multicluster` extension).
+2. `cluster-credentials-<remote-cluster-name>` residing in the LinkerD control-plane namespace -- usually `linkerd`.
+
+The second secret (in `linkerd` namespace) has a specific metadata requirements - `linkerd-destination` required the secret to contain following labels and annotations (assuming we are linking `east` cluster to `west` cluster):
+
+```
+metadata:
+  labels:
+    multicluster.linkerd.io/cluster-name: west
+  annotations:
+    multicluster.linkerd.io/trust-domain: cluster.local
+    multicluster.linkerd.io/cluster-domain: cluster.local
+```
+
+Failure to provide those labels and annotations, causes the `linkerd-destination` to have no way of finding the `kubeconfig` in the secret. It will result in error logs like below:
+
+```
+Failed to get remote cluster <remote-cluster-name> addr=":8086" component=server remote="<ip>"
+```
