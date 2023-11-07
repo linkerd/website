@@ -134,7 +134,7 @@ requiring changes to your applications.
 This means you can extend Linkerd's new model of networking—where every
 connection is encrypted and authenticated, and every HTTP and gRPC request
 delivered in a reliable and latency-optimized way—to your entire stack, not just
-the portion that runs on Kubernetes .
+the portion that runs on Kubernetes.
 
 ## When will these amazing features be available in Linkerd?
 
