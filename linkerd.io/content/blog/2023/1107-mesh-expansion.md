@@ -44,7 +44,7 @@ Happily, Linkerd has one big advantage in tackling mesh expansion, stemming from
 an early design decision. In Linkerd, the "dataplane" refers to Linkerd's Rust
 _microproxies_, which handle the actual sensitive information traveling between
 application components. These microproxies are actually not Kubernetes-specific
-at all. They _are _specific to Linkerd, i.e. they're not general-purpose
+at all. They _are_ specific to Linkerd, i.e. they're not general-purpose
 proxies, but they don't know anything about Kubernetes; they don't talk to the
 Kubernetes API; and they don't have any requirements about being run on a
 Kubernetes cluster or even in a container. Linkerd's microproxies are delivered
