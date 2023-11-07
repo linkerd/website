@@ -8,7 +8,7 @@ keywords:
 outputs:
 - html
 announcement_banner:
-  description: "2023-08-23 [Announcing Linkerd 2.14 with enterprise multi-cluster and Gateway API conformance! ![Read now](/uploads/announcement-banner-learn-more.svg)](/2023/08/23/announcing-linkerd-2.14/)"
+  description: "2023-11-07 [Mesh expansion and SPIFFE support arriving in the upcoming Linkerd 2.15! **Read more &raquo;**](/2023/11/07/linkerd-mesh-expansion/)"
 top_hero:
   title: The world's most advanced service mesh
   description: Enterprise power *without* enterprise complexity. Linkerd adds
