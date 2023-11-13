@@ -17,13 +17,15 @@ update the chart below as these situations arise.
 
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
-| `stable-2.10`   | `1.16`                     | `1.24`                     |
-| `stable-2.11`   | `1.17`                     | `1.24`                     |
+| `stable-2.10`   | `1.16`                     | `1.23`                     |
+| `stable-2.11`   | `1.17`                     | `1.23`                     |
 | `stable-2.12`   | `1.21`                     | `1.24`                     |
 | `stable-2.13`   | `1.21`                     | `1.28`                     |
 | `stable-2.14`   | `1.21`                     | `1.28`                     |
 
-(Linkerd will almost never change the supported Kubernetes version in a minor
-release, which is why the table above only lists major versions. One known
-exception: Linkerd 2.11.0 supported Kubernetes 1.16, but 2.11.1 and later
-required Kubernetes 1.17 as shown in the table above.)
+Notes:
+
+1. Linkerd will almost never change the supported Kubernetes version in a
+   minor release, which is why the table above only lists major versions. One
+   known exception: Linkerd 2.11.0 supported Kubernetes 1.16, but 2.11.1 and
+   later required Kubernetes 1.17 as shown in the table above.
