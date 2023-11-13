@@ -47,9 +47,10 @@ spec:
     isRetryable: true ### ADD THIS LINE ###
 ```
 
-Retries are supported for _all_ idempotent requests, whatever verb they use
-and whether or not they have bodies. In particular, this means that gRPC
-requests can be retried.
+Retries are supported for _all_ idempotent requests, whatever verb they use,
+and whether or not they have a body. In particular, this mean that gRPC
+requests can be retried. However, requests will not be retried if the body
+exceeds 64KiB.
 
 ## Retry Budgets
 
