@@ -34,8 +34,8 @@ for a tutorial of how to configure retries.
 
 ## Retries
 
-For routes that are idempotent and don't have bodies, you can edit the service
-profile and add `isRetryable` to the retryable route:
+For routes that are idempotent, you can edit the service profile and add
+`isRetryable` to the retryable route:
 
 ```yaml
 spec:
@@ -46,6 +46,10 @@ spec:
       pathRegex: /api/annotations
     isRetryable: true ### ADD THIS LINE ###
 ```
+
+Retries are supported for _all_ idempotent requests, whatever verb they use
+and whether or not they have bodies. In particular, this means that gRPC
+requests can be retried.
 
 ## Retry Budgets
 
