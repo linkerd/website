@@ -44,8 +44,8 @@ restrictions.
 minor version within the same major version. In other words, if you are
 currently running version *2.x.y*, upgrading to *2.x.z*, where *z* is the latest
 minor version for major version *x*, is safe. This is true even if you would
-skip intermediate intermediate minor versions, i.e. it is still safe even if *z
-> y + 1*.
+skip intermediate intermediate minor versions, i.e. it is still safe even if
+*z* > *y + 1*.
 
 **To the next major version**. It is usually safe to upgrade to the latest minor
 version of the *next* major version. In other words, if you are currently
@@ -87,6 +87,10 @@ Before you commence an upgrade, you should ensure that the current state
 of Linkerd is healthy, e.g. by using `linkerd check`. For major version
 upgrades, you should also ensure that your data plane is up-to-date, e.g.
 with `linkerd check --proxy`, to avoid unintentional version skew.
+
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../../reference/k8s-versions/).
 
 ## Upgrading the CLI
 

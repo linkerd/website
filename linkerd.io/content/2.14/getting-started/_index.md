@@ -89,6 +89,10 @@ You should see the CLI version, and also `Server version: unavailable`. This is
 because you haven't installed the control plane on your cluster. Don't
 worry&mdash;we'll fix that soon enough.
 
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../reference/k8s-versions/).
+
 ## Step 2: Validate your Kubernetes cluster
 
 Kubernetes clusters can be configured in many different ways. Before we can
