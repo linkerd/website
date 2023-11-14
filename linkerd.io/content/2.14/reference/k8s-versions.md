@@ -15,6 +15,7 @@ _after_ Kubernetes 1.28. In some cases, later versions of Kubernetes end up
 making changes that cause older versions of Linkerd to not work: we will
 update the chart below as these situations arise.
 
+{{< table >}}
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
 | `stable-2.10`   | `1.16`                     | `1.23`                     |
@@ -22,6 +23,7 @@ update the chart below as these situations arise.
 | `stable-2.12`   | `1.21`                     | `1.24`                     |
 | `stable-2.13`   | `1.21`                     | `1.28`                     |
 | `stable-2.14`   | `1.21`                     | `1.28`                     |
+{{< /table >}}
 
 Notes:
 
