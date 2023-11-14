@@ -8,7 +8,7 @@ keywords:
 outputs:
 - html
 announcement_banner:
-  description: "2023-11-07 [Mesh expansion and SPIFFE support arriving in the upcoming Linkerd 2.15! **Read more &raquo;**](/2023/11/07/linkerd-mesh-expansion/)"
+  description: "[NEW EBOOK: Linkerd Up and Running by O'Reilly &gt; **Download ebook**](https://buoyant.io/download/linkerd-up-and-running)"
 top_hero:
   title: The world's most advanced service mesh
   description: Enterprise power *without* enterprise complexity. Linkerd adds
