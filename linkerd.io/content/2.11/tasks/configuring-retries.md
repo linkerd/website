@@ -40,9 +40,11 @@ spec:
 ```
 
 Retries are supported for _all_ idempotent requests, whatever verb they use,
-and whether or not they have a body. In particular, this mean that gRPC
+and [whether or not they have a body]. In particular, this mean that gRPC
 requests can be retried. However, requests will not be retried if the body
 exceeds 64KiB.
+
+[whether or not they have a body]:../../../2021/10/26/how-linkerd-retries-http-requests-with-bodies/
 
 ## Retry Budgets
 
