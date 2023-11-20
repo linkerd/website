@@ -26,8 +26,8 @@ for a tutorial of how to configure retries.
 
 ## Retries
 
-For routes that are idempotent and don't have bodies, you can edit the service
-profile and add `isRetryable` to the retryable route:
+For routes that are idempotent, you can edit the service profile and add
+`isRetryable` to the retryable route:
 
 ```yaml
 spec:
@@ -38,6 +38,13 @@ spec:
       pathRegex: /api/annotations
     isRetryable: true ### ADD THIS LINE ###
 ```
+
+Retries are supported for _all_ idempotent requests, whatever verb they use,
+and [whether or not they have a body]. In particular, this mean that gRPC
+requests can be retried. However, requests will not be retried if the body
+exceeds 64KiB.
+
+[whether or not they have a body]:../../../2021/10/26/how-linkerd-retries-http-requests-with-bodies/
 
 ## Retry Budgets
 
