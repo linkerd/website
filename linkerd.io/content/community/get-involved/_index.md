@@ -1,8 +1,12 @@
 ---
 title: Get Involved
-description: Linkerd isn’t just the software, it’s the community around it—and that
-  community begins with you. Join us!
+description: "Linkerd isn’t just the software, it’s the community around it—and
+  that community begins with you. Join us!"
 layout: get-involved
+top_hero:
+  title: Get Involved
+  description: "Linkerd isn’t just the software, it’s the community around
+    it—and that community begins with you. Join us!"
 links:
 - image: "/images/get-involved/slack.svg"
   alt: Slack

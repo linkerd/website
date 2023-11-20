@@ -5,17 +5,13 @@ description: "The Linkerd Ambassador badge is a distinction awarded to those
   expertise, passion, engagement, and a commitment to sharing their Linkerd
   experience."
 layout: ambassadors
-thumbnail: "/uploads/ambassadors-emblem.png"
 top_hero:
   title: Linkerd Ambassadors
-  image:
-    src: /images/ambassadors/emblem.svg
-    alt: Linkerd Ambassadors Emblem
-intro: The Linkerd Ambassador badge is a distinction awarded to those community
-  members who are experts in their field and who demonstrate expertise, passion,
-  engagement, and a commitment to sharing their Linkerd experience with the
-  broader community. Linkerd Ambassadors are hand-picked by the Linkerd
-  maintainers.
+  description: "The Linkerd Ambassador badge is a distinction awarded to those
+    community members who are experts in their field and who demonstrate
+    expertise, passion, engagement, and a commitment to sharing their Linkerd
+    experience with the broader community. Linkerd Ambassadors are hand-picked
+    by the Linkerd maintainers."
 ambassadors:
   - name: Charles Pretzer
     job_title: Field Engineer

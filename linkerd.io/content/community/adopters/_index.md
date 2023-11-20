@@ -1,7 +1,14 @@
 ---
 title: Linkerd 2.x Adopters
-description: Here are some of the organizations we know are using Linkerd 2.x. If you're using Linkerd 2.x and aren't on this list, [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md)
+description: "Here are some of the organizations we know are using Linkerd 2.x.
+  If you're using Linkerd 2.x and aren't on this list,
+  [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md)"
 layout: adopters
+top_hero:
+  title: Linkerd 2.x Adopters
+  description: "Here are some of the organizations we know are using
+    Linkerd 2.x. If you're using Linkerd 2.x and aren't on this list,
+    [please submit a pull request!](https://github.com/linkerd/linkerd2/edit/main/ADOPTERS.md)"
 case_studies:
 - image: /images/adopters/xbox.png
   alt: Xbox

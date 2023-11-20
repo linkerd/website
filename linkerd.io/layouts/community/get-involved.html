@@ -1,27 +1,4 @@
 {{ define "main" }}
-<div class="wrapper has-background-white">
-	<div class="container px-5 pt-6">
-		<div class="columns is-centered">
-			<div class="column is-8">
-				<h1>{{ .Title }}</h1>
-				<p>{{ .Description }}</p>
-			</div>
-		</div>
-	</div>
-
-	<div class="container px-5">
-		<div class="columns is-centered">
-			<div class="column is-8">
-				{{ range .Params.links }}
-				  <div class="is-flex is-align-items-center py-3">
-				  	<figure class="is-flex-shrink-0 image is-48x48 mr-4">
-				  		<img src="{{ .image }}" alt="{{ .alt }}">
-				  	</figure>
-		        <p>{{ .description | markdownify }}</p>
-				  </div>
-				{{ end }}
-			</div>
-		</div>
-	</div>
-</div>
+{{ partial "community/top-hero.html" .Params.top_hero }}
+{{ partial "community/get-involved/get-involved.html" .Params.links }}
 {{ end }}

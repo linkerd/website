@@ -1,16 +1,15 @@
-<div class="wrapper py-3 has-background-light-grey">
-  <div class="container columns is-multiline">
-    <div class="column is-12 is-10-desktop is-offset-1-desktop">
-      <div class="columns column is-multiline">
+<div class="wrapper has-background-white community-content">
+  <div class="container column">
+    <div class="columns column is-multiline">
         {{ range . }}
         <div class="column is-6">
           <a href="{{.url}}"{{ if hasPrefix .url "http" }} target="_blank"{{ end }}>
-          <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-2 py-3">
+          <div class="heroes-card box is-flex is-justify-content-flex-start is-align-items-center px-5 py-5 community-card">
             <figure class="image is-96x96 mr-4 is-flex-shrink-0">
               <img class="is-rounded" src="{{.image}}" alt="{{.alt}}" />
             </figure>
             <div>
-              <h3 class="is-size-5 hero__name">{{.name}}</h3>
+              <h3 class="is-size-5 has-text-weight-bold">{{.name}}</h3>
               <p>{{.blurb}}</p>
               <p class="is-size-7">{{.date}}</p>
             </div>
@@ -27,7 +26,6 @@
           </a>
         </div>
         {{ end }}
-      </div>
     </div>
   </div>
 </div>

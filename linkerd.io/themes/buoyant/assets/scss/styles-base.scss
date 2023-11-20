@@ -1234,53 +1234,6 @@ a.card-link {
   background-color: $primary-bright-blue;
 }
 
-.ambassadors__top-hero {
-  position: relative;
-  padding: 60px 0;
-  background: url("/images/ambassadors/bg-pattern.svg") $primary-bright-blue;
-  background-repeat: no-repeat;
-  background-position: center 30px;
-}
-
-.ambassadors__top-hero::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: $light-grey;
-}
-
-.ambassadors__top-hero img {
-  margin-top: 60px;
-  position: relative;
-  z-index: 10;
-}
-
-.ambassador__card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: white;
-  padding: 40px 40px 30px 40px;
-  -webkit-box-shadow: -21px 22px 58px 5px rgba(0, 0, 0, 0.09);
-          box-shadow: -21px 22px 58px 5px rgba(0, 0, 0, 0.09);
-}
-
-.ambassador__profile-image {
-  margin-right: 20px;
-}
-
-.ambassador__country-flag {
-  max-width: 50px;
-  height: auto
-}
-
 // Shortcode cta-banner
 .cta-banner .thumbnail-wrapper {
   position: relative;

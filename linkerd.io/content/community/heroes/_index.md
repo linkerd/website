@@ -1,21 +1,18 @@
 ---
 title: Heroes
 aliases: ["/heroes/"]
-description: Open source is all about community, and Linkerd wouldn’t be what it
-  is today without our heroes. Linkerd Heroes contribute to the codebase, help
-  each other out on Slack and social media, and share their successes and failures
-  at conferences or through blogs.
+description: "Open source is all about community, and Linkerd wouldn’t be what
+  it is today without our heroes. Linkerd Heroes contribute to the codebase,
+  help each other out on Slack and social media, and share their successes and
+  failures at conferences or through blogs."
 layout: heroes
 top_hero:
   title: Linkerd Heroes
-  description: Open source is all about community, and Linkerd wouldn't be what it
-    is today without our heroes. Linkerd Heroes contribute to the codebase, help each
-    other out on Slack, social media, and in person, and share their successes and
-    failures at conferences or through blogs, fostering the dynamic and engaging
-    community we all love.
-  image: "/images/heroes-graphic.svg"
-  image_on_the_right: false
-  alt: Portrait of Rio Kierkels
+  description: "Open source is all about community, and Linkerd wouldn’t be
+    what it is today without our heroes. Linkerd Heroes contribute to the
+    codebase, help each other out on Slack, social media, and in person, and
+    share their successes and failures at conferences or through blogs,
+    fostering the dynamic and engaging community we all love."
 heroes:
   - name: Cameron Boulton
     date: September 2023
