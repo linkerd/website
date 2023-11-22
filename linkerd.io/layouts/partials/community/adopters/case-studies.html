@@ -1,14 +1,18 @@
-<div class="wrapper has-background-white community-content adopters-case-studies">
-	<div class="container px-5 py-6">
-		<div class="columns is-multiline">
-			{{ range . }}
-				<div class="column is-3 is-flex-shrink-0">
-					<figure class="image is-full">
-						<img src="{{ .image }}" alt="{{ .alt }}">
-					</figure>
-					<a class="is-block has-text-centered has-text-weight-semibold" href="{{ .link }}" target="_blank">Read case study</a>
-				</div>
-				{{ end}}
-		</div>
-	</div>
+<div class="container column adopters-case-studies">
+  <div class="columns column is-multiline">
+      {{ range . }}
+      <div class="column is-6">
+        <div class="box px-5 py-5 community-card">
+          <figure class="image mb-5">
+            <img src="{{ .image }}" alt="{{ .alt }}">
+          </figure>
+          <div>
+            <h3 class="is-size-5 has-text-weight-bold mb-2">{{.title}}</h3>
+            <p class="has-text-weight-light mb-5 adopters-case-studies__quote">{{.description}} ...</p>
+            <a class="button is-link" href="{{ .link }}" target="_blank">Read case study</a>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+  </div>
 </div>

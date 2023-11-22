@@ -1,0 +1,11 @@
+<div class="container px-5 py-6 all-adopters">
+	<div class="columns is-multiline">
+		{{ range . }}
+			<div class="column is-3">
+				<figure class="image is-full p-5">
+					<img src="{{ .image }}" alt="{{ .alt }}">
+				</figure>
+			</div>
+		{{ end }}
+	</div>
+</div>
