@@ -275,10 +275,62 @@
   }
 }
 
-.enterprise-top-hero {
+.community-card {
+  height: 100%;
+}
+
+.adopters-case-studies__quote {
+  padding-top: 16px;
+  padding-left: 16px;
+  background-image: url(/images/quote.svg);
+  background-repeat: no-repeat;
+}
+
+.adopters-case-studies {
+  .image {
+    img {
+      max-height: 60px;
+      max-width: 140px;
+      object-fit: contain;
+    }
+  }
+}
+
+.all-adopters {
+  .image {
+    img {
+      max-height: 80px;
+      max-width: 180px;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+  }
+}
+
+.enterprise-support,
+.community-content {
+  padding: 40px 0;
+  background-image: linear-gradient($light-blue, rgba($light-blue, 0));
+  background-size: 100% 200px;
+  background-repeat: no-repeat;
+
+  @include from($tablet) {
+    padding: 60px 0;
+  }
+}
+
+.enterprise-top-hero,
+.community-top-hero {
   .notification {
     padding-top: 60px;
     padding-bottom: 60px;
+    a {
+      color: $primary-bright-blue !important;
+      text-decoration: none !important;
+      &:hover {
+        color: $secondary-bright-blue !important;
+      }
+    }
   }
   h1 {
     font-weight: 700 !important;
@@ -300,6 +352,9 @@
       max-width: 700px;
     }
   }
+}
+
+.enterprise-top-hero {
   @media screen and (min-width: 900px) {
     .notification {
       background-image: none;
@@ -322,10 +377,6 @@
 }
 
 .enterprise-support {
-  padding: 80px 0 160px 0;
-  background-image: linear-gradient($light-blue, rgba($light-blue, 0));
-  background-size: 100% 200px;
-  background-repeat: no-repeat;
   .title {
     font-weight: 600 !important;
     line-height: 1.1 !important;
@@ -403,34 +454,6 @@
   }
 }
 
-.community-top-hero {
-  background: url("/images/heroes-bg-graphic.svg"), $secondary-bright-blue;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  .community-top-hero__image-wrapper {
-    position: relative;
-    @media screen and (max-width: $tablet) {
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    img {
-      position: relative;
-      z-index: 1;
-      vertical-align: middle;
-    }
-  }
-}
-
-.community-two-col:nth-child(even) {
-  background-color: $light-blue;
-}
-
-.community-two-col:nth-child(odd) {
-  background-color: $white;
-}
-
 .platform-top-hero {
   background: url('/images/choose_your_platform_left.svg'),
     url('/images/choose_your_platform_right.svg');
@@ -471,42 +494,6 @@
     .link-list-item {
       svg {
         margin-right: 5px;
-      }
-    }
-  }
-}
-
-.jobs-list-container {
-  padding: 50px 40px;
-
-  @include mobile {
-    padding: 20px;
-  }
-
-  .jobs-list {
-    max-width: 920px;
-    margin: 0 auto 50px;
-  }
-  .job-item {
-    max-width: 420px;
-
-    @include until($tablet) {
-      max-width: auto;
-    }
-
-    @include mobile {
-      padding: 0;
-    }
-
-    .media {
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-    }
-
-    @include mobile {
-      .media-content {
-        padding: 10px;
       }
     }
   }
@@ -919,13 +906,6 @@ blockquote {
   background-size: cover;
 }
 
-// ADOPTERS PAGE
-.adopters {
-  .top-hero {
-    border-bottom: 3px solid $medium-grey;
-  }
-}
-
 .featured-blogs__heading {
   font-size: 18px !important;
 }
@@ -949,20 +929,14 @@ blockquote {
 
 .heroes-card {
   position: relative;
-}
-
-.heroes-card * {
-  z-index: 1;
-}
-
-.heroes-card .hero__name {
-  font-weight: 500 !important;
-}
-
-.heroes-card .hero-type__graphic {
-  position: absolute;
-  right: 0;
-  z-index: 0;
+  & * {
+    z-index: 1;/* position content above graphic */
+  }
+  & .hero-type__graphic {
+    position: absolute;
+    right: 0;
+    z-index: 0;
+  }
 }
 
 .modal-content {

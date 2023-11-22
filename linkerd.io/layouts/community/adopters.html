@@ -1,4 +1,4 @@
 {{ define "main" }}
-{{ partial "adopters/top-hero.html" .Params }}
-{{ partial "adopters/adopters-list.html" .Params.adopters }}
+{{ partial "community/top-hero.html" .Params.top_hero }}
+{{ partial "community/adopters/adopters.html" . }}
 {{ end }}

@@ -3,9 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
-{{ partial "community/top-hero-anchor.html" .Params.top_hero }}
-{{ partial "community/mid-message.html" .Params.mid_message }}
-{{ partial "community/benefits.html" .Params.benefits }}
-{{ partial "community/signup.html" .Params.signup }}
-
+{{ partial "community/anchor/top-hero.html" .Params.top_hero }}
+{{ partial "community/anchor/mid-message.html" .Params.mid_message }}
+{{ partial "community/anchor/benefits.html" .Params.benefits }}
+{{ partial "community/anchor/signup.html" .Params.signup }}
 {{ end }}
