@@ -7,8 +7,8 @@ description: |-
   contributing to Linkerd and making it better for the entire community!
 url:
   /2023/11/22/announcing-the-november-2023-linkerd-hero/
-featuredImage: '/uploads/2023/11/cameron-banner.jpeg'
-thumbnail: '/uploads/2023/11/cameron-banner.jpeg'
+featuredImage: '/uploads/2023/11/mikutas-banner.png'
+thumbnail: '/uploads/2023/11/mikutas-thumbnail.png'
 tags: [ Community, Hero ]
 keywords: [hero, community, contributor, code]
 items: []
@@ -34,7 +34,7 @@ positively impacted the project. Thank you for being such a prolific
 contributor and dedicating your time to making Linkerd an even more awesome
 project!
 
-![Takumi Sue](/uploads/2023/11/cameron-banner.jpeg)
+![Takumi Sue](/uploads/2023/11/mikutas-banner.png)
 
 ## Nominate next month's Linkerd Hero
 

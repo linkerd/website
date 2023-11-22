@@ -18,7 +18,7 @@ heroes:
     date: November 2023
     blurb: Technical contributions
     hero_type: contributor
-    image: "/uploads/2023/11/mikutas-portrait.png"
+    image: "/uploads/2023/11/mikutas-portrait.jpg"
     alt: Portrait of SUE Takumi
     url: "/2023/11/22/announcing-the-november-2023-linkerd-hero/"
   - name: Cameron Boulton
