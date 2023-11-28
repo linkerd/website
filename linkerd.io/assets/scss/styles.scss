@@ -379,8 +379,8 @@
   background-image: url(/images/anchor.jpg);
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: auto 300px;
-  padding-top: 280px;
+  background-size: auto 360px;
+  padding-top: 340px;
   @include tablet-only {
     background-image: none;
   }
@@ -388,17 +388,17 @@
     padding-top: 0;
   }
   @include from($desktop) {
-    background-size: auto 250px;
+    background-size: auto 310px;
     background-position: right center;
     .notification {
-      width: 66.66%;
+      width: 70%;
     }
   }
   @include from($widescreen) {
-    background-size: auto 300px;
+    background-size: auto 360px;
   }
   @include from($fullhd) {
-    background-size: auto 350px;
+    background-size: auto 380px;
   }
 }
 
