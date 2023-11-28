@@ -31,17 +31,17 @@ links:
     And don’t forget to join
 - image: "/images/get-involved/meetup-in-a-box.svg"
   alt: Meetup in a box
-  description: Giving a talk or hosting a meetup? Our [meet-up-in-a-box](https://linkerd.io/meetup-in-a-box/)
+  description: Giving a talk or hosting a meetup? Our [meet-up-in-a-box](/meetup-in-a-box/)
     has what you need.
 - image: "/images/get-involved/steering-meeting.svg"
   alt: Steering committee
   description: Interested in learning more about Linked governance? Read our [steering
     committee charter](https://github.com/linkerd/linkerd2/blob/main/STEERING.md)
-    and our [commitment to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+    and our [commitment to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 - image: "/images/get-involved/community-anchor.svg"
   alt: Community anchor
   description: Want to share your Linkerd experience with others, but don’t know how
-    to get started? We’ll help you tell your story with the [Community Anchor](https://linkerd.io/community/anchor/)
+    to get started? We’ll help you tell your story with the [Community Anchor](/community/anchor/)
     program.
 - image: "/images/get-involved/mailing-list.svg"
   alt: Mailing list
