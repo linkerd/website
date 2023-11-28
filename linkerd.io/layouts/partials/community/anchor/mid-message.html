@@ -1,12 +1,8 @@
-<div class="wrapper has-background-white mid-message">
-  <div class="container is-centered  is-centered content">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="card is-shadowless">
-          <div class="card-content has-text-centered is-paddingless has-text-navy-black">
-            {{. | markdownify }}
-          </div>
-        </div>
+<div class="container is-centered anchor-mid-message">
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="has-text-centered has-text-navy-black m-5">
+        {{ . | markdownify }}
       </div>
     </div>
   </div>

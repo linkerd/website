@@ -5,24 +5,24 @@
         <div class="column is-6">
           <div class="box is-flex is-justify-content-flex-start is-align-items-center px-5 py-5 community-card">
             <figure class="image is-128x128 mr-4 is-flex-shrink-0">
-              <img class="is-rounded" src="{{.image}}" alt="{{.name}}" />
+              <img class="is-rounded" src="{{ .image }}" alt="{{ .name }}" />
             </figure>
             <div>
-              <h3 class="is-size-5 has-text-weight-bold">{{.name}} {{.flag}}</h3>
-              <p class="has-text-weight-light mb-2">{{.job_title}}</p>
+              <h3 class="is-size-5 has-text-weight-bold">{{ .name }} {{ .flag }}</h3>
+              <p class="has-text-weight-light mb-2">{{ .job_title }}</p>
               <div class="is-flex">
-                {{ if .github }}
-                  <a class="is-block mr-2" href="{{.github}}" target="_blank" rel="noopener noreferrer">
+                {{ with .github }}
+                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
                     <img class="image is-32x32" src="/images/ambassadors/github-icon.svg" alt="github icon">
                   </a>
                 {{ end }}
-                {{ if .twitter }}
-                  <a class="is-block mr-2" href="{{.twitter}}" target="_blank" rel="noopener noreferrer">
+                {{ with .twitter }}
+                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
                     <img class="image is-32x32" src="/images/ambassadors/twitter-icon.svg" alt="twitter icon">
                   </a>
                 {{ end }}
-                {{ if .linkedin }}
-                  <a class="is-block mr-2" href="{{.linkedin}}" target="_blank" rel="noopener noreferrer">
+                {{ with .linkedin }}
+                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
                     <img class="image is-32x32" src="/images/ambassadors/linkedin-icon.svg" alt="linkedin icon">
                   </a>
                 {{ end }}

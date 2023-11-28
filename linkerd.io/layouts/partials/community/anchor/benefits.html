@@ -1,15 +1,14 @@
-<div class="wrapper benefits {{.backgroundColor}}">
-  <div class="container is-centered">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        {{ if .title }}
-          <h2 class="title is-size-1 center has-text-color has-text-centered-mobiledropdown navigation">{{.title}}
-          </h2>
+<div class="container is-centered anchor-benefits">
+  <div class="columns is-centered">
+    <div class="column is-10">
+      <div class="box p-6 mb-6">
+        {{ with .title }}
+          <h2 class="title is-size-1 has-text-navy-black mb-5">{{ . }}</h2>
         {{ end }}
         <ul>
-          {{ range .items}}
+          {{ range .items }}
             <li class="has-text-navy-black has-text-color">
-              {{.|markdownify}}
+              {{ . | markdownify }}
             </li>
           {{ end }}
         </ul>

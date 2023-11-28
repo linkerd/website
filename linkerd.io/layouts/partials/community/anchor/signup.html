@@ -1,9 +1,9 @@
-<div class="wrapper signup {{.background_color}} features is-centered">
-  <div class="container is-centered">
-    <div class="columns is-centered">
-      <div class="column is-8 has-text-navy-black">
-        {{ if .title }}
-          <h2 class="title is-size-1 center has-text-color has-text-centered-mobiledropdown navigation">{{.title}}</h2>
+<div class="container is-centered anchor-signup">
+  <div class="columns is-centered">
+    <div class="column is-10">
+      <div class="box is-shadowless has-background-light-blue has-text-navy-black p-6">
+        {{ with .title }}
+          <h2 class="title is-size-1 has-text-navy-black mb-5">{{ . }}</h2>
         {{ end }}
         <form name="anchor">
           <div class="field">
@@ -48,9 +48,9 @@
               <textarea class="textarea" name="description" placeholder=""></textarea>
             </div>
           </div>
-          <div class="field">
-            <div class="control has-text-centered ">
-              <button class="button is-primary is-large is-inline-block">Submit</button>
+          <div class="field pt-5">
+            <div class="control">
+              <button class="button is-link is-large">Submit</button>
             </div>
           </div>
         </form>
