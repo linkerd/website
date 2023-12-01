@@ -143,8 +143,8 @@ replace-env-%: has-env-% tmp-sites
 .PHONY: build-release-matrix
 build-release-matrix:
 	@# Build release matrix
-	./bin/generate_release_matrix.py --format=json > linkerd.io/data/releases/release_matrix.json
-	./bin/generate_release_matrix.py --format=yaml > linkerd.io/content/releases/release_matrix.yaml
+	./bin/generate_release_matrix.py --release_type=stable --format=json > linkerd.io/data/releases/release_matrix.json
+	./bin/generate_release_matrix.py --release_type=stable --format=yaml > linkerd.io/content/releases/release_matrix.yaml
 	cp linkerd.io/data/releases/release_matrix.json linkerd.io/content/releases/release_matrix.json
 
 
