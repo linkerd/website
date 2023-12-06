@@ -112,7 +112,7 @@ serve-api.linkerd.io: build-api.linkerd.io
 		&& python3 -m http.server 9999
 
 .PHONY: build-linkerd.io
-build-linkerd.io: get-versions tmp/linkerd.io
+build-linkerd.io: build-release-matrix get-versions tmp/linkerd.io
 	@# Build linkerd.io
 ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
