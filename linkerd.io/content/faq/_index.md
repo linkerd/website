@@ -16,7 +16,7 @@ faqs:
   - question: What is Linkerd?
     answer:
       Linkerd is a [service
-      mesh](https://buoyant.io/2020/10/12/what-is-a-service-mesh/). It adds
+      mesh](https://linkerd.io/what-is-a-service-mesh/). It adds
       observability, reliability, and security to Kubernetes applications
       without code changes. For example, Linkerd can monitor and report
       per-service success rates and latencies, can automatically retry failed
@@ -43,7 +43,7 @@ faqs:
   - question: "What's the difference between Linkerd and Envoy?"
     answer:
       Envoy is a proxy; Linkerd is a [service
-      mesh](https://buoyant.io/2020/10/12/what-is-a-service-mesh/). Linkerd has
+      mesh](https://linkerd.io/what-is-a-service-mesh/). Linkerd has
       a control plane and a data plane, and uses a proxy is a component of the
       data plane. While Envoy can be used as a component of a service mesh,
       Linkerd uses an ultralight "micro-proxy" called
