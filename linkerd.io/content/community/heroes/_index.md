@@ -20,7 +20,7 @@ heroes:
     hero_type: contributor
     image: "/uploads/2023/12/tjmiller-portrait.png"
     alt: Portrait of TJ Miller
-    url: "/2023/12/27/announcing-the-december-2023-linkerd-hero/"
+    url: "/2023/12/22/announcing-the-december-2023-linkerd-hero/"
   - name: SUE Takumi
     date: November 2023
     blurb: Technical contributions
