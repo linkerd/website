@@ -7,8 +7,6 @@ keywords:
 - cloud native applications
 outputs:
 - html
-announcement_banner:
-  description: "[NEW EBOOK: Linkerd Up and Running by O'Reilly &gt; **Download ebook**](https://buoyant.io/download/linkerd-up-and-running)"
 top_hero:
   title: The world's most advanced service mesh
   description: Enterprise power *without* enterprise complexity. Linkerd adds
