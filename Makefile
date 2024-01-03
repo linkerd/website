@@ -112,7 +112,7 @@ serve-api.linkerd.io: build-api.linkerd.io
 		&& python3 -m http.server 9999
 
 .PHONY: build-linkerd.io
-build-linkerd.io: get-versions tmp/linkerd.io
+build-linkerd.io: build-release-matrix get-versions tmp/linkerd.io
 	@# Build linkerd.io
 ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
@@ -140,6 +140,14 @@ replace-env-%: has-env-% tmp-sites
 		sed 's/$*/$($*)/g' < $$fname > /tmp/__sed && mv /tmp/__sed $$fname; \
 	done
 
+.PHONY: build-release-matrix
+build-release-matrix:
+	@# Build release matrix
+	./bin/generate_release_matrix.py --release_type=stable --format=json > linkerd.io/data/releases/release_matrix.json
+	./bin/generate_release_matrix.py --release_type=stable --format=yaml > linkerd.io/content/releases/release_matrix.yaml
+	cp linkerd.io/data/releases/release_matrix.json linkerd.io/content/releases/release_matrix.json
+
+
 .PHONY: has-env-%
 has-env-%:
 	@if [ ! $${$*:-} ]; then printf "You must define: $*\n" && exit 1; fi
@@ -147,3 +155,5 @@ has-env-%:
 .PHONY: clean
 clean:
 	rm -rf tmp
+
+

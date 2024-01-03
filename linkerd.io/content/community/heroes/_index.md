@@ -14,6 +14,13 @@ top_hero:
     share their successes and failures at conferences or through blogs,
     fostering the dynamic and engaging community we all love."
 heroes:
+  - name: TJ Miller
+    date: December 2023
+    blurb: Technical contributions
+    hero_type: contributor
+    image: "/uploads/2023/12/tjmiller-portrait.png"
+    alt: Portrait of TJ Miller
+    url: "/2023/12/22/announcing-the-december-2023-linkerd-hero/"
   - name: SUE Takumi
     date: November 2023
     blurb: Technical contributions

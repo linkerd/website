@@ -12,20 +12,26 @@ body {
 .wrapper {
   position: relative;
 }
-.homepage-notification {
+.announcement-banner {
   min-height: 40px;
   padding: 0 10px;
   background-color: $deep-blue;
 }
-.homepage-notification,
-.homepage-notification a {
+.announcement-banner,
+.announcement-banner a {
   color: white;
   font-size: 16px !important;
   font-weight: 400;
   line-height: 1.2;
 }
-.homepage-notification img {
+.announcement-banner img {
   vertical-align: text-bottom;
+}
+@media (max-width: 1024px) {
+  .announcement-banner {
+    height: auto;
+    padding: 10px 15px;
+  }
 }
 .hero-body {
   position: relative;
@@ -1027,12 +1033,6 @@ a.card-link {
 }
 
 @media (max-width: 1024px) {
-
-  .homepage-notification {
-    height: auto;
-    padding: 10px 15px;
-  }
-
   .hero .hero-head .navbar {
     height: auto;
   }

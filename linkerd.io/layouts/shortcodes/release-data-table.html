@@ -1,0 +1,58 @@
+{{ $table := $.Site.Data.releases.release_matrix   }}
+{{ $data := .Inner }}
+{{ $table_headers := slice "Chart Name" "Chart Version" "App Version" }}
+<style type="text/css" media="screen">
+
+  table{
+  border-collapse:collapse;
+  border:1px solid #000000;
+  }
+  th, td {
+  padding: 5px;
+  }
+  table td{
+  border:1px solid #000000;
+
+  }
+  table th{
+  border:1px solid #000000;
+  }
+  </style>
+<table>
+  <caption>Helm to App version matrix</caption>
+  <thead>
+    <tr>
+       <th class="text-center">Release Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range $release_version, $charts := $table }}  
+    <tr>
+        <td class="text-center">
+            {{ $release_version }}
+        </td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                {{ range $table_headers }} <th class="text-center" >{{ . | humanize }}</th> {{ end }}
+              </tr>
+            </thead>
+            <tbody>
+              {{ range $chart_name, $chart_data := $charts }}
+               
+                <tr>
+                  <td> <a target="_blank" href="{{ $chart_data.chart_url }}">{{ $chart_name }}</a></td>
+                  <td> {{ $chart_data.chart_version }} </td>
+                  <td> {{ $release_version }} </td>
+
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+            
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+</table>        

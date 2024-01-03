@@ -1,0 +1,5 @@
+{{ with site.Data.announcement_banner }}
+<div class="announcement-banner has-background-light-blue has-text-navy-black center has-text-centered">
+  <p>{{ .description | markdownify }}</p>
+</div>
+{{ end }}
