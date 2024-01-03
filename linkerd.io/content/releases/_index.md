@@ -36,6 +36,18 @@ bugfixes or enhancements.
 Commercial providers of Linkerd (e.g. [Buoyant](https://buoyant.io)) may
 provide stronger support guarantees.
 
+## Helm Version Matrix
+
+The following version matrices include only the latest versions of the stable
+releases along with corresponding app and helm versions for linkerd and
+extensions.  Use these to guide you to the right helm chart version or to
+automate workflows you might have.
+
+* [YAML matrix](./release_matrix.yaml)
+* [JSON matrix](./release_matrix.json)
+
+{{< release-data-table />}}
+
 ## Edge (latest version: {{% latestedge %}})
 
 Edge releases are frequent (usually, weekly) and can be used to work with the
