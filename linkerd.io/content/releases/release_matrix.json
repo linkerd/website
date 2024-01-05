@@ -31,11 +31,11 @@
             "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd2-cni/30.8.5"
         }
     },
-    "stable-2.14.7": {
+    "stable-2.14.8": {
         "linkerd-control-plane": {
             "chart_name": "linkerd-control-plane",
-            "chart_version": "1.16.8",
-            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.8"
+            "chart_version": "1.16.9",
+            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-control-plane/1.16.9"
         },
         "linkerd-crds": {
             "chart_name": "linkerd-crds",
@@ -44,18 +44,18 @@
         },
         "linkerd-jaeger": {
             "chart_name": "linkerd-jaeger",
-            "chart_version": "30.12.8",
-            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-jaeger/30.12.8"
+            "chart_version": "30.12.9",
+            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-jaeger/30.12.9"
         },
         "linkerd-multicluster": {
             "chart_name": "linkerd-multicluster",
-            "chart_version": "30.11.8",
-            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-multicluster/30.11.8"
+            "chart_version": "30.11.9",
+            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-multicluster/30.11.9"
         },
         "linkerd-viz": {
             "chart_name": "linkerd-viz",
-            "chart_version": "30.12.8",
-            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-viz/30.12.8"
+            "chart_version": "30.12.9",
+            "chart_url": "https://artifacthub.io/packages/helm/linkerd2/linkerd-viz/30.12.9"
         },
         "linkerd2-cni": {
             "chart_name": "linkerd2-cni",
