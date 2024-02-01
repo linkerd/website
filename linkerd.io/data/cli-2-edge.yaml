@@ -104,6 +104,10 @@ AnnotationsReference:
     before all open connections have completed, the proxy will terminate forcefully,
     closing any remaining connections.
   Name: config.linkerd.io/shutdown-grace-period
+- Description: Enable KEP-753 native sidecars. This is an experimental feature. It
+    requires Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not
+    be used.
+  Name: config.alpha.linkerd.io/proxy-enable-native-sidecar
 CLIReference:
 - Description: List authorizations for a resource.
   Example: ""
@@ -292,6 +296,11 @@ CLIReference:
     Name: output
     Shorthand: o
     Usage: 'Output format; one of: "table" or "json"'
+  - DefaultValue: ""
+    Name: token
+    Shorthand: ""
+    Usage: |
+      The context token to use when making the request to the destination API
   SeeAlso: null
   Synopsis: Introspect Linkerd's service discovery state
 - Description: |-
@@ -508,6 +517,10 @@ CLIReference:
     Shorthand: ""
     Usage: |
       Include the proxy sidecar container spec in the YAML output (the auto-injector won't pick it up, so config annotations aren't supported) (default false)
+  - DefaultValue: ""
+    Name: native-sidecar
+    Shorthand: ""
+    Usage: Enable native sidecar
   - DefaultValue: ""
     Name: opaque-ports
     Shorthand: ""
@@ -2607,3 +2620,4 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
+
