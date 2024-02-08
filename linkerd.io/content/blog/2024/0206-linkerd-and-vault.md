@@ -22,7 +22,7 @@ Academy](https://buoyant.io/service-mesh-academy). If this seems interesting,
 check out the [full
 recording](https://buoyant.io/service-mesh-academy/linkerd-with-external-cas-using-vault)!_
 
-# Linkerd Certificate Management with Vault
+## Linkerd Certificate Management with Vault
 
 Linkerd's ability to automatically secure communications using mTLS has always
 been one of its headline features. Of course, mTLS requires certificates, and
@@ -99,7 +99,7 @@ the Vault instance both from inside the Docker network and from our host
 machine. This mirrors many real-world setups where your Kubernetes cluster is
 on one network, but you do administration from a different network.
 
-## 0. Tools of the trade
+### Tools of the trade
 
 You'll need several CLI tools for this:
 
@@ -114,7 +114,7 @@ Of course you'll also need Docker. You can get that from
 `https://docs.docker.com/engine/install/`, or you can try Colima from
 `https://github.com/abiosoft/colima` instead.
 
-## 1. Starting our `k3d` cluster
+### Starting our `k3d` cluster
 
 Creating the `k3d` cluster looks horrible, but isn't that bad:
 
@@ -137,12 +137,12 @@ At this point, you should be able to run things like `kubectl get ns` or
 `kubectl cluster-info` to verify that you can talk to your cluster. If not,
 you'll need to figure out what's wrong and fix it.
 
-## 2. Starting Vault
+### Starting Vault
 
 We have a running `k3d` cluster, so now let's get Vault going. This is another
 complex-looking command:
 
-```
+```bash
 docker run \
        --detach \
        --rm --name vault \
@@ -202,7 +202,7 @@ export VAULT_ADDR=http://0.0.0.0:8200/
 At this point you should be able to run `vault status` to make sure that all
 is well.
 
-## Setting up Vault
+### Setting up Vault
 
 While this isn't a blog about how to operate Vault, we still need to configure
 Vault to work the way Linkerd needs it to. We're not going to dive too deep
@@ -282,7 +282,7 @@ echo "$CERT" | step certificate inspect -
 
 You should see something like this:
 
-```
+```text
 Certificate:
     Data:
         Version: 3 (0x2)
@@ -399,7 +399,7 @@ make sure that there's some data in it, at least. `kubectl describe secret -n
 cert-manager my-secret-token` should show a key called `token` with some data
 in it:
 
-```
+```text
 Name:         my-secret-token
 Namespace:    cert-manager
 Labels:       <none>
@@ -486,7 +486,7 @@ kubectl get clusterissuers -o wide
 You should see the `vault-issuer` show with `READY` true and `STATUS` "Vault
 verified", telling us that cert-manager was able to talk to Vault.
 
-```
+```text
 NAME           READY   STATUS           AGE
 vault-issuer   True    Vault verified   6s
 ```
@@ -532,7 +532,7 @@ used.
 Running `kubectl get certificate -n linkerd` at this point should show our
 Certificate with `READY` true:
 
-```
+```text
 NAME                      READY   SECRET                    AGE
 linkerd-identity-issuer   True    linkerd-identity-issuer   11s
 ```
@@ -541,7 +541,7 @@ and if we `kubectl describe secret -n linkerd linkerd-identity-issuer` we
 should see a `kubernetes.io/tls` Secret with keys of `ca.crt`, `tls.crt`, and
 `tls.key`:
 
-```
+```text
 Name:         linkerd-identity-issuer
 Namespace:    linkerd
 Labels:       controller.cert-manager.io/fao=true
@@ -590,7 +590,7 @@ EOF
 At this point, `kubectl get bundle` (remember, it's cluster-scoped!) should
 show us a Bundle named `linkerd-identity-trust-roots` with `SYNCED` true:
 
-```
+```text
 NAME                           TARGET   SYNCED   REASON   AGE
 linkerd-identity-trust-roots            True     Synced   4s
 ```
