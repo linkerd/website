@@ -21,7 +21,7 @@ Linkerd can do.
 This guide is designed to walk you through the basics of Linkerd. First, you'll
 install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
-Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
+Finally, you'll "mesh" an application by adding Linkerd's *data plane* to it.
 
 {{< note >}}
 This page contains quick start instructions intended for non-production
