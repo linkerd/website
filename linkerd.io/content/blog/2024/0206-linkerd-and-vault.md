@@ -106,8 +106,9 @@ You'll need several CLI tools for this:
 - `linkerd`, from `https://linkerd.io/2/getting-started/`;
 - `kubectl`, from `https://kubernetes.io/docs/tasks/tools/`;
 - `helm`, from `https://helm.sh/docs/intro/quickstart/`;
-- `jq`, from `https://jqlang.github.io/jq/download/`; and
-- `vault`, from `https://developer.hashicorp.com/vault/docs/install`.
+- `jq`, from `https://jqlang.github.io/jq/download/`;
+- `vault`, from `https://developer.hashicorp.com/vault/docs/install`; and
+- `step`, from `https://smallstep.com/docs/step-cli/installation`.
 
 Of course you'll also need Docker. You can get that from
 `https://docs.docker.com/engine/install/`, or you can try Colima from
