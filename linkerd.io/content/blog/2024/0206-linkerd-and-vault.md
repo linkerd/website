@@ -652,14 +652,17 @@ us dramatically increase security of the overall system.
 
 Vault, of course, isn't the only external CA we can use: cert-manager supports
 a lot of different issuers, including ACME, Vault, Venafi, and many others
-issuers (see https://cert-manager.io/docs/configuration/external/). We used
-Vault for this workshop because it's free to use and relatively easy to set up
-in Docker, but you're encouraged to try other kinds of external CAs.
+issuers (see the [cert-manager
+documentation](https://cert-manager.io/docs/configuration/external/) for more
+about this). We used Vault for this workshop because it's free to use and
+relatively easy to set up in Docker, but you're encouraged to try other kinds
+of external CAs -- ultimately, the critical bit isn't which one you use, it's
+that you're keeping your secret keys secret.
 
 ----
 
-If you found this interesting, check out the Service Mesh Academy workshop on
+_If you found this interesting, check out the Service Mesh Academy workshop on
 [Linkerd with external CAs using Vault](https://buoyant.io/service-mesh-academy/linkerd-with-external-cas-using-vault),
 where you can see the hands-on demo of everything I've talked about here! And,
 as always, feedback is always welcome -- you can find me as `@flynn` on the
-[Linkerd Slack](https://slack.linkerd.io).
+[Linkerd Slack](https://slack.linkerd.io)._
