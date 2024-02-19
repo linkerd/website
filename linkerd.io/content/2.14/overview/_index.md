@@ -3,7 +3,7 @@ title = "Overview"
 aliases = [
   "/docs",
   "/documentation",
-  "/2.14/",
+  "/2.15/",
   "../docs/",
   "/doc/network-performance/",
   "/in-depth/network-performance/",
