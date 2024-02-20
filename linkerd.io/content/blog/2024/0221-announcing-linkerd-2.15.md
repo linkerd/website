@@ -1,7 +1,7 @@
 ---
 author: 'william'
 date: 2024-02-21T00:00:00Z
-title: Announcing Linkerd 2.15 with mesh expansion and SPIFFE support
+title: Announcing Linkerd 2.15 with mesh expansion, native sidecars, and SPIFFE
 thumbnail: '/images/redcharlie-xtvo0ffGKlI-unsplash.jpg'
 tags: [Linkerd, linkerd, "2.15", features, vault]
 slug: announcing-linkerd-2.15
@@ -19,8 +19,10 @@ Kubernetes and non-Kubernetes workload alike.
 
 The 2.15 release also introduces support for [SPIFFE](https://spiffe.io), a
 standard for workload identity which allows Linkerd to provide a consistent
-layer of uniform layer of cryptographic identity and authentication to any
-application, regardless of where it's running.
+layer of uniform layer of cryptographic identity and authentication to
+off-cluster workloads, and for native _sidecar containers_, a new Kubernetes
+feature that eases some of the long-standing annoyances of the sidecar
+model in Kubernetes, especially with Job workloads.
 
 Finally, this release introduces some important changes in the way that we're
 publishing Linkerd: as of 2.15, we will no longer be producing open source
@@ -94,12 +96,21 @@ this, we turned to SPIFFE, a standard hosted by the CNCF, and its reference
 implementation, SPIRE. These two projects solve the problem of generating secure
 workload identity for arbitrary processes on arbitrary machines. Linkerd 2.15
 generates SPIFFE ids for non-Kubernetes workloads using SPIRE, and these ids can
-be used alongside Linkerd's existing ServiceAccount-based ids  as the basis for
+be used alongside Linkerd's existing ServiceAccount-based ids as the basis for
 Linkerd's zero-trust authorization policies.
 
 With Linkerd 2.15 you can now encrypt all traffic to your VM workloads by
 default, and add zero-trust controls over all access right down to the level of
 individual HTTP routes and gRPC methods for specific clients.
+
+## Native sidecar support
+
+Linkerd 2.15 adds support for native _sidecar containers_, a new Kubernetes
+feature that was introduced in 1.28 and is enabled by default in Kubernetes
+1.29. Deploying Linkerd with native sidecars [fixes some of the long-standing
+annoyances of using sidecar containers in
+Kubernetes](https://buoyant.io/blog/kubernetes-1-28-revenge-of-the-sidecars),
+especially around support for Jobs and race conditions around container startup.
 
 ## A new model for stable releases
 
