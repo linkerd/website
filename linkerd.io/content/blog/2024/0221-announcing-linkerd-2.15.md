@@ -18,11 +18,10 @@ uniform layer of secure, reliable, and observable connectivity across both
 Kubernetes and non-Kubernetes workload alike.
 
 The 2.15 release also introduces support for [SPIFFE](https://spiffe.io), a
-standard for workload identity which allows Linkerd to provide a consistent
-layer of uniform layer of cryptographic identity and authentication to
-off-cluster workloads, and for native _sidecar containers_, a new Kubernetes
-feature that eases some of the long-standing annoyances of the sidecar
-model in Kubernetes, especially with Job workloads.
+standard for workload identity which allows Linkerd to provide cryptographic
+identity and authentication to off-cluster workloads, and for native _sidecar
+containers_, a new Kubernetes feature that eases some of the long-standing
+annoyances of the sidecar model in Kubernetes, especially with Job workloads.
 
 Finally, this release introduces some important changes in the way that we're
 publishing Linkerd: as of 2.15, we will no longer be producing open source
