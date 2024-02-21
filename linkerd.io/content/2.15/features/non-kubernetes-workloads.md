@@ -9,9 +9,8 @@ This allows you to use Linkerd to establish communication to and from the
 workload that is secure, reliable, and observable, just like communication to
 and from your Kubernetes workloads.
 
-
 Related content:
+
 * [Guide: Adding non-Kubernetes workloads to your mesh]({{< relref
   "../tasks/adding-non-kubernetes-workloads" >}})
 * [ExternalWorkload Reference]({{< relref "../reference/external-workload" >}})
-

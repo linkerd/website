@@ -22,9 +22,11 @@ later modified or backed out.
 
 **Note:** Edge releases may introduce breaking changes.
 
+<!-- markdownlint-disable MD033 -->
 Edge releases follow a version numbering scheme of the form `<two digit
 year>.<month>.<number within the month>`. For example, `edge-24.1.2` is the
 second edge release of January 2024.
+<!-- markdownlint-enable MD033 -->
 
 To install the latest edge release via the CLI, you can run:
 
@@ -50,6 +52,7 @@ releases. Instead, the vendor community around Linkerd is responsible for
 supported, stable releases.
 
 Known stable distributions of Linkerd include:
+
 * [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
   creators of Linkerd.
@@ -65,4 +68,3 @@ automate workflows you might have.
 * [JSON matrix](./release_matrix.json)
 
 {{< release-data-table />}}
-

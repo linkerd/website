@@ -301,8 +301,8 @@ Let's use the `bb` utility to mimic a workload:
 
 ```bash
 docker run -p 80:80 buoyantio/bb:v0.0.5 terminus \
-		--h1-server-port 80 \
-		--response-text hello-from-external-vm
+    --h1-server-port 80 \
+    --response-text hello-from-external-vm
 ```
 
 ## Send encrypted traffic from and to the machine
