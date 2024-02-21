@@ -37,7 +37,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 The full list of edge releases can be found on
 [GitHub](https://github.com/linkerd/linkerd2/releases).
 
-## Stable (latest version: {{% latestversion %}})
+## Stable
 
 Stable releases are designed to introduce minimal change to an existing system
 and come with documented stability guarantees. In stable releases, we take the
@@ -47,7 +47,7 @@ the overall delta between releases. We also do any additional work required to
 ensure that upgrades and rollbacks between stable releases are seamless and
 contain no breaking changes.
 
-As of Linkerd 2.15.0, the open source project no longer publishes its own stable
+As of Linkerd 2.15.0, the open source project no longer publishes stable
 releases. Instead, the vendor community around Linkerd is responsible for
 supported, stable releases.
 
