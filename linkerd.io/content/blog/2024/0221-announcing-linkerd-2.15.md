@@ -128,7 +128,7 @@ community, and we hope to see more of this under this new framework.
 
 Buoyant, the creators of Linkerd, [have announced the release of Buoyant
 Enterprise for Linkerd 2.15.0 and provided some context behind this
-change.](https://buoyant.io/blog/announcing-linkerd-2-15-vm-workloads-spiffe-identities).
+change](https://buoyant.io/blog/announcing-linkerd-2-15-vm-workloads-spiffe-identities).
 
 ## What's next for Linkerd?
 
@@ -140,13 +140,13 @@ to tackle the next set of challenges.
 
 First, there are a couple important features that didn't quite make it into
 2.15.0 that we're going to address as part of subsequent point releases. This
-starts with extending our support for mesh expansion to include private
-networks, so that customers who have a shared flat network spanning Kubernetes
-and non-Kubernetes applications can make full use of the new mesh expansion
-capabilities.
+starts with **extending our support for mesh expansion to include private
+networks**, so that customers who don't have a shared flat network spanning
+Kubernetes and non-Kubernetes applications can make full use of the new mesh
+expansion capabilities.
 
-We're also going to bring our Gateway API and non-Gateway API interfaces up to
-parity in an upcoming 2.15 point release. Today we have a non-unified set of
+We're also going to **bring our Gateway API and non-Gateway API interfaces up to
+parity** in an upcoming 2.15 point release. Today we have a non-unified set of
 APIs across our Gateway API-based configs and our earlier pre-Gateway API
 configs, and that causes unnecessary friction for users. While we believe that
 the Gateway API is the future, we recognize it's not the present for many users.
@@ -154,16 +154,16 @@ We're committed to supporting our users who are using ServiceProfiles and other
 pre-Gateway API configuration mechanisms, and bringing these two interfaces into
 parity is vital to achieving that goal.
 
-IPv6 is another short-term priority for Linkerd and we expect to have some news
-regarding that in the near future. We've seen increasing demands for this from
-our customers and the required changes are reasonably well-scoped.
+**Support for IPv6** is another short-term priority for Linkerd and we expect to
+have some news regarding that in the near future. We've seen increasing demands
+for this from our customers and the required changes are reasonably well-scoped.
 
 Beyond those smaller features, we're very excited to work on two big ones in the
-short term: handling ingress traffic and adding control over egress traffic.
-These are very common requests from customers who want to extend Linkerd's
-comprehensive yet _simple_ layer of traffic control, security, and visibility to
-handle traffic in and out of the cluster, and we have some very exciting ideas
-for how to deliver this.
+short term: **handling ingress traffic** and **adding control over egress
+traffic**. These are very common requests from customers who want to extend
+Linkerd's comprehensive yet _simple_ layer of traffic control, security, and
+visibility to handle traffic in and out of the cluster, and we have some very
+exciting ideas for how to deliver this.
 
 Finally, we continue to investigate other ways of delivering Linkerd, including
 "ambient" and other approaches. While Linkerd's unique Rust microproxy approach
