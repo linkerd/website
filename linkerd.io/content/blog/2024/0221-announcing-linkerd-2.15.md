@@ -24,10 +24,11 @@ containers_, a new Kubernetes feature that eases some of the long-standing
 annoyances of the sidecar model in Kubernetes, especially with Job workloads.
 
 Finally, this release introduces some important changes in the way that we're
-publishing Linkerd: as of 2.15, we will no longer be producing open source
-stable releases. If you're running Linkerd in production today, please see the
-section [A new model for stable releases](#a-new-model-for-stable-releases)
-below.
+publishing Linkerd. While Linkerd will always be open source, as of 2.15, we
+will no longer be producing open ssource stable release artifacts. If you're
+running Linkerd in production today, please see the section [A new model for
+stable releases](#a-new-model-for-stable-releases) below for what this means for
+you.
 
 As usual, the 2.15 release includes a massive list of bugfixes and improvements.
 Read on for details!
