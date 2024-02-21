@@ -25,7 +25,7 @@ annoyances of the sidecar model in Kubernetes, especially with Job workloads.
 
 Finally, this release introduces some important changes in the way that we're
 publishing Linkerd. While Linkerd will always be open source, as of 2.15, we
-will no longer be producing open ssource stable release artifacts. If you're
+will no longer be producing open source stable release artifacts. If you're
 running Linkerd in production today, please see the section [A new model for
 stable releases](#a-new-model-for-stable-releases) below for what this means for
 you.
