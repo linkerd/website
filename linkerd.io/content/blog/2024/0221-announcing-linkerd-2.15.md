@@ -124,7 +124,7 @@ releases like the upcoming 2.16.0, and backports like the upcoming Linkerd
 2.14.11, all of which will be handled by the vendor community.
 
 We'll continue publishing edge releases to the GitHub repo as usual, which
-contain the latest Linkerd code including bugfixes, new features, and more .
+contain the latest Linkerd code including bugfixes, new features, and more.
 These have always served as a valuable mechanism for early testing and vetting
 by the community, and we hope to see more of this under this new framework. And,
 of course, Linkerd development continues as normal, including feature
