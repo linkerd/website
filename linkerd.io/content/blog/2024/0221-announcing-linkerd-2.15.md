@@ -116,9 +116,9 @@ especially around support for Jobs and race conditions around container startup.
 In Linkerd 2.15 we're making some significant changes to the way that Linkerd is
 delivered.
 
-We will no longer be shipping stable Linkerd releases in open source. Instead,
-Linkerd 2.15.0 and all future stable releases will be in the hands of the vendor
-community. This includes point releases like the upcoming Linkerd 2.15.1, major
+While Linkerd will always be open source, as of Linkerd 2.15, producing stable
+Linkerd releases will be in the hands of the vendor community. This includes not
+just Linkerd 2.15.0 but point releases like the upcoming Linkerd 2.15.1, major
 releases like the upcoming 2.16.0, and backports like the upcoming Linkerd
 2.14.11, all of which will be handled by the vendor community.
 
@@ -129,6 +129,12 @@ community, and we hope to see more of this under this new framework.
 Buoyant, the creators of Linkerd, [have announced the release of Buoyant
 Enterprise for Linkerd 2.15.0 and provided some context behind this
 change](https://buoyant.io/blog/announcing-linkerd-2-15-vm-workloads-spiffe-identities).
+
+To be clear: Linkerd continues to be, and always will be, open source. This
+change is about the release artifacts, not about code, governance, community, or
+anything else. We've been open source users, contributors, and advocates since
+long before we created Linkerd, and our commitment to a healthy, inclusive,
+collaborative, and ever-growing open source Linkerd remains as strong as ever.
 
 ## What's next for Linkerd?
 
