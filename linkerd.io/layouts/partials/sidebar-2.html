@@ -3,7 +3,7 @@
   <nav class="navbar" role="navigation" aria-label="dropdown navigation">
     <div class="navbar-item has-dropdown is-hoverable ">
       <a class="navbar-link">
-        {{ if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") (ne $docsVersion "2.11") (ne $docsVersion "2.12") (ne $docsVersion "2.13") (ne $docsVersion "2.14") (ne $docsVersion "2-edge") }}
+        {{ if and (hasPrefix $docsVersion "2") (ne $docsVersion "2.10") (ne $docsVersion "2.11") (ne $docsVersion "2.12") (ne $docsVersion "2.13") (ne $docsVersion "2.14") (ne $docsVersion "2.15") (ne $docsVersion "2-edge") }}
         Linkerd 2.9
         {{ else if eq $docsVersion "2.10"  }}
         Linkerd 2.10
@@ -13,12 +13,14 @@
         Linkerd 2.12
         {{ else if eq $docsVersion "2.13"  }}
         Linkerd 2.13
+        {{ else if eq $docsVersion "2.14"  }}
+        Linkerd 2.14
         {{ else if eq $docsVersion "2-edge"  }}
         Linkerd [edge]
         {{ else }}
         {{/* have non-versioned docs pull sidebar from the latest version docs */}}
-        {{ $docsVersion = "2.14" }}
-        Linkerd 2.14
+        {{ $docsVersion = "2.15" }}
+        Linkerd 2.15
         {{ end }}
       </a>
       <div class="navbar-dropdown">
@@ -48,6 +50,9 @@
         </a>
         <a class="navbar-item" href="/2.14/overview/">
           Linkerd 2.14
+        </a>
+        <a class="navbar-item" href="/2.15/overview/">
+          Linkerd 2.15
         </a>
       </div>
     </div>
@@ -93,7 +98,7 @@
       </li>
       <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/releases/" }}is-active{{ end }}">
         <a href="/releases/">
-          Release Channels
+          Releases and Versions
         </a>
       </li>
       <li class="menu-list-item {{ if eq $currentPage.RelPermalink "/design-principles/" }}is-active{{ end }}">
