@@ -24,10 +24,11 @@ containers_, a new Kubernetes feature that eases some of the long-standing
 annoyances of the sidecar model in Kubernetes, especially with Job workloads.
 
 Finally, this release introduces some important changes in the way that we're
-publishing Linkerd: as of 2.15, we will no longer be producing open source
-stable releases. If you're running Linkerd in production today, please see the
-section [A new model for stable releases](#a-new-model-for-stable-releases)
-below.
+publishing Linkerd. While Linkerd will always be open source, as of 2.15, we
+will no longer be producing open source stable release artifacts. If you're
+running Linkerd in production today, please see the section [A new model for
+stable releases](#a-new-model-for-stable-releases) below for what this means for
+you.
 
 As usual, the 2.15 release includes a massive list of bugfixes and improvements.
 Read on for details!
@@ -116,19 +117,29 @@ especially around support for Jobs and race conditions around container startup.
 In Linkerd 2.15 we're making some significant changes to the way that Linkerd is
 delivered.
 
-We will no longer be shipping stable Linkerd releases in open source. Instead,
-Linkerd 2.15.0 and all future stable releases will be in the hands of the vendor
-community. This includes point releases like the upcoming Linkerd 2.15.1, major
+While Linkerd will always be open source, as of Linkerd 2.15, producing stable
+Linkerd releases will be in the hands of the vendor community. This includes not
+just Linkerd 2.15.0 but point releases like the upcoming Linkerd 2.15.1, major
 releases like the upcoming 2.16.0, and backports like the upcoming Linkerd
 2.14.11, all of which will be handled by the vendor community.
 
-We'll continue publishing edge releases to the GitHub repo as usual. These have
-always served as a valuable mechanism for early testing and vetting by the
-community, and we hope to see more of this under this new framework.
+We'll continue publishing edge releases to the GitHub repo as usual, which
+contain the latest Linkerd code including bugfixes, new features, and more.
+These have always served as a valuable mechanism for early testing and vetting
+by the community, and we hope to see more of this under this new framework. And,
+of course, Linkerd development continues as normal, including feature
+development, our security vulnerability response policy, and all the other
+activities that go into making Linkerd great.
 
 Buoyant, the creators of Linkerd, [have announced the release of Buoyant
 Enterprise for Linkerd 2.15.0 and provided some context behind this
 change](https://buoyant.io/blog/announcing-linkerd-2-15-vm-workloads-spiffe-identities).
+
+To be clear: Linkerd continues to be, and always will be, open source. This
+change is about the release artifacts, not about code, governance, community, or
+anything else. We've been open source users, contributors, and advocates since
+long before we created Linkerd, and our commitment to a healthy, inclusive,
+collaborative, and ever-growing open source Linkerd remains as strong as ever.
 
 ## What's next for Linkerd?
 
