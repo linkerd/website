@@ -123,9 +123,13 @@ just Linkerd 2.15.0 but point releases like the upcoming Linkerd 2.15.1, major
 releases like the upcoming 2.16.0, and backports like the upcoming Linkerd
 2.14.11, all of which will be handled by the vendor community.
 
-We'll continue publishing edge releases to the GitHub repo as usual. These have
-always served as a valuable mechanism for early testing and vetting by the
-community, and we hope to see more of this under this new framework.
+We'll continue publishing edge releases to the GitHub repo as usual, which
+contain the latest Linkerd code including bugfixes, new features, and more .
+These have always served as a valuable mechanism for early testing and vetting
+by the community, and we hope to see more of this under this new framework. And,
+of course, Linkerd development continues as normal, including feature
+development, our security vulnerability response policy, and all the other
+activities that go into making Linkerd great.
 
 Buoyant, the creators of Linkerd, [have announced the release of Buoyant
 Enterprise for Linkerd 2.15.0 and provided some context behind this
