@@ -2,10 +2,23 @@
 
 set -eu
 
-LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_STABLE_VERSION}
+LINKERD2_VERSION=${LINKERD2_VERSION:-L5D2_EDGE_VERSION}
 INSTALLROOT=${INSTALLROOT:-"${HOME}/.linkerd2"}
 
 happyexit() {
+  echo ""
+  echo "*******************************************"
+  echo "* This script is deprecated and no longer *"
+  echo "* installs stable releases.               *"
+  echo "*                                         *"
+  echo "* The latest edge release has been        *"
+  echo "* installed. In the future, please use    *"
+  echo "*   run.linkerd.io/install-edge           *"
+  echo "* for this behavior.                      *"
+  echo "*                                         *"
+  echo "* For stable releases, please see         *"
+  echo "*  https://linkerd.io/releases/           *"
+  echo "*******************************************"
   echo ""
   echo "Add the linkerd CLI to your path with:"
   echo ""

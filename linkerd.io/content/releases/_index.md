@@ -4,58 +4,29 @@ aliases = [ "edge" ]
 weight = 18
 +++
 
-The full list of Linkerd open source releases can be found on
-[GitHub](https://github.com/linkerd/linkerd2/releases).
-
-Linkerd 2.x publishes releases into multiple channels, _stable_ and _edge_.
-The guarantees and expectations are different for each channel
-
-## Stable (latest version: {{% latestversion %}})
-
-Stable releases are published periodically and are intented for production use.
-See the [Linkerd installation guide](https://linkerd.io/2/tasks/install/) for
-how to install a stable release.
-
-For stable releases, Linkerd follows a version numbering scheme of the form
-`2.<major>.<minor>`. In other words, "2" is a static prefix, followed by the
-major version, then the minor.
-
-Changes in minor versions are intended to be backwards compatible with the
-previous version and will typically not introduce major new features. Changes in
-major version will typically introduce major new features, and *may* introduce
-breaking changes—although we try to avoid that whenever possible.
-
-**Support policy**: in general, we support the latest major stable version: we
-will fix bugs by publishing minor version updates. At the maintainer's
-discretion, these bugfixes may occasionally be back-ported to the previous major
-stable version.
-
-Stable versions earlier than the previous major version will not receive
-bugfixes or enhancements.
-
-Commercial providers of Linkerd (e.g. [Buoyant](https://buoyant.io)) may
-provide stronger support guarantees.
-
-## Helm Version Matrix
-
-The following version matrices include only the latest versions of the stable
-releases along with corresponding app and helm versions for linkerd and
-extensions.  Use these to guide you to the right helm chart version or to
-automate workflows you might have.
-
-* [YAML matrix](./release_matrix.yaml)
-* [JSON matrix](./release_matrix.json)
-
-{{< release-data-table />}}
+Linkerd is developed in the [Linkerd GitHub
+repository](https://github.com/linkerd/linkerd2). Releases and packages of
+Linkerd are available in several different forms.
 
 ## Edge (latest version: {{% latestedge %}})
 
-Edge releases are frequent (usually, weekly) and can be used to work with the
-latest and greatest features. Edge releases may introduce breaking changes.
+All Linkerd development happens "on main": all changes, whether in support of
+upcoming new features, refactors, bug fixes, or something else, land on the main
+branch where they are merged together.
 
-For edge releases, Linkerd follows a version numbering scheme of the form
-`<two digit year>.<month>.<number within the month>`. For example, `edge-22.9.4`
-is the fourth edge release of September 2022.
+Edge releases contain the latest code in from the main branch at the point in
+time when they were cut. This means they have the latest features and fixes, but
+it also means they don't have stability guarantees. Upgrading between edge
+releases may involve breaking changes, and may involve partial features that are
+later modified or backed out.
+
+**Note:** Edge releases may introduce breaking changes.
+
+<!-- markdownlint-disable MD033 -->
+Edge releases follow a version numbering scheme of the form `<two digit
+year>.<month>.<number within the month>`. For example, `edge-24.1.2` is the
+second edge release of January 2024.
+<!-- markdownlint-enable MD033 -->
 
 To install the latest edge release via the CLI, you can run:
 
@@ -63,4 +34,37 @@ To install the latest edge release via the CLI, you can run:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-**Support policy**: there is no formal support policy for edge releases.
+The full list of edge releases can be found on
+[GitHub](https://github.com/linkerd/linkerd2/releases).
+
+## Stable
+
+Stable releases are designed to introduce minimal change to an existing system
+and come with documented stability guarantees. In stable releases, we take the
+specific bug fix changes (or, occasionally, feature additions) and "back port"
+these changes against the code in the previous stable version. This minimizes
+the overall delta between releases. We also do any additional work required to
+ensure that upgrades and rollbacks between stable releases are seamless and
+contain no breaking changes.
+
+As of Linkerd 2.15.0, the open source project no longer publishes stable
+releases. Instead, the vendor community around Linkerd is responsible for
+supported, stable releases.
+
+Known stable distributions of Linkerd include:
+
+* [Buoyant Enterprise for
+  Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
+  creators of Linkerd.
+
+## Helm Chart Version Matrix
+
+The following version matrices include only the latest versions of the stable
+releases along with corresponding app and Helm versions for Linkerd and
+extensions. Use these to guide you to the right Helm chart version or to
+automate workflows you might have.
+
+* [YAML matrix](./release_matrix.yaml)
+* [JSON matrix](./release_matrix.json)
+
+{{< release-data-table />}}
