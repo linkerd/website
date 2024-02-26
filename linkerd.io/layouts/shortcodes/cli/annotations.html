@@ -11,6 +11,8 @@
 {{ $data = (index site.Data "cli-2-13").AnnotationsReference }}
 {{ else if eq $docsVersion "2.14" }}
 {{ $data = (index site.Data "cli-2-14").AnnotationsReference }}
+{{ else if eq $docsVersion "2.15" }}
+{{ $data = (index site.Data "cli-2-15").AnnotationsReference }}
 {{ else if eq $docsVersion "2-edge" }}
 {{ $data = (index site.Data "cli-2-edge").AnnotationsReference }}
 {{ end }}
