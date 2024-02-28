@@ -66,7 +66,7 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
 Be sure to follow the instructions to add it to your path:
