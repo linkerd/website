@@ -39,14 +39,6 @@ The full list of edge releases can be found on
 
 ## Stable
 
-Stable releases are designed to introduce minimal change to an existing system
-and come with documented stability guarantees. In stable releases, we take the
-specific bug fix changes (or, occasionally, feature additions) and "back port"
-these changes against the code in the previous stable version. This minimizes
-the overall delta between releases. We also do any additional work required to
-ensure that upgrades and rollbacks between stable releases are seamless and
-contain no breaking changes.
-
 As of Linkerd 2.15.0, the open source project no longer publishes stable
 releases. Instead, the vendor community around Linkerd is responsible for
 supported, stable releases.

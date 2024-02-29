@@ -52,9 +52,10 @@ Now that we have our cluster, we'll install the Linkerd CLI and use it validate
 that your cluster is capable of hosting Linkerd.
 
 {{< note >}}
-If you're using a GKE "private cluster" or Calico CNI, there are some [extra steps
-required](../reference/cluster-configuration/#private-clusters) before you can
-proceed to the next step.
+If you're using a GKE "private cluster", or if you're using Cilium as a CNI,
+there may be some [cluster-specific
+configuration](../reference/cluster-configuration/) before you can proceed to
+the next step.
 {{< /note >}}
 
 ## Step 1: Install the CLI
@@ -75,9 +76,9 @@ Be sure to follow the instructions to add it to your path:
 export PATH=$HOME/.linkerd2/bin:$PATH
 ```
 
-(Alternatively, if you use [Homebrew](https://brew.sh), you can install the CLI
-with `brew install linkerd`. You can also download the CLI directly via the
-[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).)
+This will install the CLI for the latest _edge release_ of Linkerd. (For more
+information about what edge releases are, see our [Releases and
+Versions](../../releases/) page.)
 
 Once installed, verify the CLI is running correctly with:
 
