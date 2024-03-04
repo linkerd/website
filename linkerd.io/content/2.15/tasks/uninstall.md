@@ -1,6 +1,10 @@
 +++
-title = "Uninstalling Linkerd"
-description = "Linkerd can be easily removed from a Kubernetes cluster."
+description = 'Linkerd can be easily removed from a Kubernetes cluster.'
+title = 'Uninstalling Linkerd'
+
+[runme]
+id = '01HR52AEA7B6TMBGTJDA4ZRJ5G'
+version = 'v3'
 +++
 
 Removing Linkerd from a Kubernetes cluster requires a few steps: removing any
@@ -19,7 +23,7 @@ attached.
 To remove any extension, call its `uninstall` subcommand and pipe it to `kubectl
 delete -f -`. For the bundled extensions that means:
 
-```bash
+```bash {"id":"01HR52AEA7B6TMBGTJCZHG3KSV","name":"uninstall-viz"}
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
 
@@ -38,7 +42,18 @@ Uninstallating the control plane requires cluster-wide permissions.
 
 To remove the [control plane](../../reference/architecture/#control-plane), run:
 
-```bash
+```bash {"id":"01HR52AEA7B6TMBGTJD21WAX0B","name":"kubectl-get"}
+kubectl get -n emojivoto deploy -o yaml \
+  | linkerd uninject - \
+  | kubectl apply -f -
+```
+
+```bash {"id":"01HR52AEA7B6TMBGTJD5NMQX4J"}
+curl --proto https --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
+  | kubectl delete -f -
+```
+
+```bash {"id":"01HR52AEA7B6TMBGTJD98NE3H3"}
 linkerd uninstall | kubectl delete -f -
 ```
 

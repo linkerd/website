@@ -1,7 +1,7 @@
 ---
 runme:
   id: 01HMEDQ5EDVTJ86JY71BM9TW6N
-  version: v2.2
+  version: v3
 ---
 
 # Running Linkerd Getting Started Guide in CI

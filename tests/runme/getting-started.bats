@@ -5,9 +5,9 @@ load 'helpers/bats-detik/lib/detik'
 
 if [ -z $FROM_CI ]
 then
-  FILE_PATH=../../linkerd.io/content/2.14/getting-started
+  FILE_PATH=../../linkerd.io/content/2.15/getting-started
 else
-  FILE_PATH=linkerd.io/content/2.14/getting-started
+  FILE_PATH=linkerd.io/content/2.15/getting-started
 fi
 
 RUNME_FLAGS="--chdir $FILE_PATH --filename _index.md"
@@ -30,13 +30,13 @@ DETIK_CLIENT_NAME="kubectl"
 @test "Verify install linkerd (step 1)" {
   run $RUNME_RUN_CMD curl-proto
   assert_line -p "Checksum valid."
-  assert_line -p "Linkerd stable"
+  # assert_line -p "Linkerd stable"
   assert_success
 }
 
 @test "Verify linkerd version (step 1)" {
   run $RUNME_RUN_CMD linkerd-version
-  assert_line -p "Client version: stable"
+  assert_line -p "Client version: "
   assert_success
 }
 

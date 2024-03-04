@@ -1,7 +1,7 @@
 ---
 runme:
   id: 01HMEBG1F55H9E2X46S0SK9AGJ
-  version: v2.2
+  version: v3
 ---
 
 # Getting Started with Linkerd using Runme
@@ -51,7 +51,7 @@ Explaining how to configure your cluster is out of scope of this guide, [Learn h
 A Kubernetes cluster is created under a Google Cloud project. Let's ensure you have a project name where your Kubernetes cluster is deployed.
 
 ```sh {"id":"01HMEBG1F55H9E2X46RDNFMKAC","interactive":"false"}
-export PROJECT_NAME=<YOUR PROJECT NAME>
+export PROJECT_NAME="runme-ci"
 ```
 
 Specify the project where your cluster was created
@@ -69,7 +69,7 @@ export CLUSTER_ZONE="us-central1-c"
 ```
 
 ```sh {"id":"01HMEBG1F55H9E2X46RM0J0DGQ"}
-$ export CLUSTER_NAME=<Name of your cluster>
+$ export CLUSTER_NAME="ci-cluster"
 $ gcloud container clusters get-credentials $CLUSTER_NAME --zone $CLUSTER_ZONE --project $PROJECT_NAME
 ```
 
