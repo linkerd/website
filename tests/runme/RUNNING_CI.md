@@ -31,18 +31,34 @@ Before running the following commands, check that IAM API is enabled for [creati
 
 Set your project
 
-```sh {"id":"01HMEFXZ3GB4QXDQX9B04EVZBY"}
-export PROJECT_ID=<Your Project Id>
-export POOL_DISPLAY_NAME=<Your pool display name>
-export POOL_NAME=<Your pool name>
-export PROVIDER_NAME=<Your provider name>
-export PROVIDER_DISPLAY_NAME=<Your provider display name>
+```sh {"id":"01HMEFXZ3GB4QXDQX9B04EVZBY","name":"start-setup","promptEnv":"yes"}
+export PROJECT_ID=Your Project Id
+export POOL_DISPLAY_NAME=Your pool display name
+export POOL_NAME=Your pool name
+export PROVIDER_NAME=Your provider name
+export PROVIDER_DISPLAY_NAME=Your provider display name
+export REPOSITORY="stateful/linkerd-website"
+export SERVICE_ACCOUNT=Specify your service account
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format=json | jq -r '.projectNumber')
+```
+
+If you want to confirm the setup of your project, run the following:
+
+```sh {"id":"01HR7Q91KSS8AG9FP3D1WXQ3JJ","name":"display-setup"}
+echo Project id: $PROJECT_ID
+echo Pool display name: $POOL_DISPLAY_NAME
+echo Pool name: $POOL_NAME
+echo Provider name: $PROVIDER_NAME
+echo Provider display name: $PROVIDER_DISPLAY_NAME
+echo Repository: $REPOSITORY
+echo Service account: $SERVICE_ACCOUNT
+echo Project number: $PROJECT_NUMBER
 ```
 
 Create a Workload Identity Pool
 
 ```sh {"id":"01HMEFXZ3GB4QXDQX9B211B8ZR"}
-gcloud iam workload-identity-pools create "my-pool" \
+gcloud iam workload-identity-pools create "${POOL_NAME}" \
   --project="${PROJECT_ID}" \
   --location="global" \
   --display-name="${POOL_DISPLAY_NAME}"
@@ -56,17 +72,24 @@ gcloud iam workload-identity-pools providers create-oidc "${PROVIDER_NAME}" \
   --location="global" \
   --workload-identity-pool="${POOL_NAME}" \
   --display-name="${PROVIDER_DISPLAY_NAME}" \
-  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.aud=assertion.aud" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.aud=assertion.aud,attribute.repository=assertion.repository" \
   --issuer-uri="https://token.actions.githubusercontent.com"
 ```
 
 Allow authentications from the Workload Identity Provider to impersonate the desired Service Account:
 
-```sh {"id":"01HMEFXZ3GB4QXDQX9B637F9X0"}
-gcloud iam service-accounts add-iam-policy-binding "my-service-account@${PROJECT_ID}.iam.gserviceaccount.com" \
+```sh {"id":"01HR7Q2KNF1XHHNANTTWFQ4KAH"}
+gcloud iam service-accounts add-iam-policy-binding "${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com" \
   --project="${PROJECT_ID}" \
   --role="roles/iam.workloadIdentityUser" \
-  --member="principalSet://iam.googleapis.com/projects/1234567890/locations/global/workloadIdentityPools/my-pool/attribute.repository/my-org/my-repo"
+  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/${POOL_NAME}/attribute.repository/${REPOSITORY}"
+```
+
+```sh {"id":"01HMEFXZ3GB4QXDQX9B637F9X0"}
+gcloud iam service-accounts add-iam-policy-binding "${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com" \
+  --project="${PROJECT_ID}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/${POOL_NAME}/attribute.repository/${REPOSITORY}"
 ```
 
 Check the created identity pools by running the following command:
@@ -80,9 +103,19 @@ Now you have your cluster configured properly, configure the following GitHub Ac
 ```text {"id":"01HMEFXZ3GB4QXDQX9BCRYAGBM","mimeType":"text/plain"}
 - GCLOUD_WORKLOAD_IDENTITY_PROVIDER: "projects/<project-id>/locations/global/workloadIdentityPools/<pool-name>/providers/<provider-name>"
 - GCLOUD_SERVICE_ACCOUNT: "<name>@<project-name>.iam.gserviceaccount.com"
-- CLUSTER_LOCATION: "<cluster-location>" e.g us-central1-c
+- CLUSTER_LOCATION: "<YOUR CLUSTER LOCATION>" e.g us-central1-c
 - CLUSTER_NAME: "<YOUR CLUSTER NAME>"
 - RUNME_ADDRESS: localhost:7863
+```
+
+You can run the following to easily grab the aforementioned values
+
+```sh {"id":"01HR7QNDNEWCSRTFP7JGQF5T3V"}
+echo GCLOUD_WORKLOAD_IDENTITY_PROVIDER: \""projects/${PROJECT_ID}/locations/global/workloadIdentityPools/${POOL_NAME}/providers/${PROVIDER_NAME}\""
+echo GCLOUD_SERVICE_ACCOUNT: \""<name>@${PROJECT_ID}.iam.gserviceaccount.com\""
+echo CLUSTER_LOCATION: \"YOUR CLUSTER LOCATION\"
+echo CLUSTER_NAME: \"YOUR CLUSTER NAME\"
+echo RUNME_ADDRESS: localhost:7863
 ```
 
 ## Authenticate in Google Cloud GitHub Action
