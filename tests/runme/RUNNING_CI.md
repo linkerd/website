@@ -45,14 +45,14 @@ export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format=json | jq 
 If you want to confirm the setup of your project, run the following:
 
 ```sh {"id":"01HR7Q91KSS8AG9FP3D1WXQ3JJ","name":"display-setup"}
-echo Project id: $PROJECT_ID
-echo Pool display name: $POOL_DISPLAY_NAME
-echo Pool name: $POOL_NAME
-echo Provider name: $PROVIDER_NAME
-echo Provider display name: $PROVIDER_DISPLAY_NAME
-echo Repository: $REPOSITORY
-echo Service account: $SERVICE_ACCOUNT
-echo Project number: $PROJECT_NUMBER
+echo "Project id: $PROJECT_ID"
+echo "Pool display name: $POOL_DISPLAY_NAME"
+echo "Pool name: $POOL_NAME"
+echo "Provider name: $PROVIDER_NAME"
+echo "Provider display name: $PROVIDER_DISPLAY_NAME"
+echo "Repository: $REPOSITORY"
+echo "Service account: $SERVICE_ACCOUNT"
+echo "Project number: $PROJECT_NUMBER"
 ```
 
 Create a Workload Identity Pool
@@ -111,11 +111,11 @@ Now you have your cluster configured properly, configure the following GitHub Ac
 You can run the following to easily grab the aforementioned values
 
 ```sh {"id":"01HR7QNDNEWCSRTFP7JGQF5T3V"}
-echo GCLOUD_WORKLOAD_IDENTITY_PROVIDER: \""projects/${PROJECT_ID}/locations/global/workloadIdentityPools/${POOL_NAME}/providers/${PROVIDER_NAME}\""
-echo GCLOUD_SERVICE_ACCOUNT: \""<name>@${PROJECT_ID}.iam.gserviceaccount.com\""
-echo CLUSTER_LOCATION: \"YOUR CLUSTER LOCATION\"
-echo CLUSTER_NAME: \"YOUR CLUSTER NAME\"
-echo RUNME_ADDRESS: localhost:7863
+echo "GCLOUD_WORKLOAD_IDENTITY_PROVIDER: \""projects/${PROJECT_ID}/locations/global/workloadIdentityPools/${POOL_NAME}/providers/${PROVIDER_NAME}\"""
+echo "GCLOUD_SERVICE_ACCOUNT: \"<name>@${PROJECT_ID}.iam.gserviceaccount.com\""
+echo "CLUSTER_LOCATION: \"YOUR CLUSTER LOCATION\""
+echo "CLUSTER_NAME: \"YOUR CLUSTER NAME\""
+echo "RUNME_ADDRESS: localhost:7863"
 ```
 
 ## Authenticate in Google Cloud GitHub Action
