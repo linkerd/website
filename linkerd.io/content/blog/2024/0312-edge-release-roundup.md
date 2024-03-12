@@ -29,19 +29,19 @@ want to highlight.
 
 1. **Automated Edge Releases**
 
-As of `edge-24.2.5`, we've automated the process of creating edge releases.
-While this is mostly an internal process change, it also means that you may
-see edge releases where the release notes are just a bunch of commit logs
-(especially from `dependabot`). We'll still make additional callouts for more
-significant changes, though.
+   As of `edge-24.2.5`, we've automated the process of creating edge releases.
+   While this is mostly an internal process change, it also means that you may
+   see edge releases where the release notes are just a bunch of commit logs
+   (especially from `dependabot`). We'll still make additional callouts for
+   more significant changes, though.
 
 2. **Helm Chart Release Numbers**
 
-As of `edge-24.3.1`, we're changing the versioning scheme for our Helm charts
-to match the date-oriented scheme for the edge releases themselves. The only
-difference is that the Helm chart uses a four-digit year number -- for
-example, the Helm charts for `edge-24.3.1` has version `2024.3.1`. This should
-simplify things for everyone.
+   As of `edge-24.3.1`, we're changing the versioning scheme for our Helm
+   charts to match the date-oriented scheme for the edge releases themselves.
+   The only difference is that the Helm chart uses a four-digit year number --
+   for example, the Helm charts for `edge-24.3.1` has version `2024.3.1`. This
+   should simplify things for everyone.
 
 ## Community Contributions
 
