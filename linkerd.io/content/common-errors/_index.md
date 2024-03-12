@@ -32,7 +32,7 @@ faqs:
       or `opaque`, but are used for server-speaks-first protocols.
 
       Configuring `skip` and `opaque` ports is covered in the [protocol
-      detection documentation](../2/features/protocol-detection/#configuring-protocol-detection).
+      detection documentation](../2.15/features/protocol-detection/#configuring-protocol-detection).
     # answer_schema is the answer with no links.
     answer_schema: |-
       While this can indicate that a workload is very slow to respond, it's
@@ -72,7 +72,7 @@ faqs:
       first meshing a workload that hasn't previously been used with a mesh,
       because the mesh surfaces errors that were previously invisible!
 
-      There's actually a whole page on [debugging 502s](../2/tasks/debugging-502s/).
+      There's actually a whole page on [debugging 502s](../2.15/tasks/debugging-502s/).
     # answer_schema is the answer with no links.
     answer_schema: |-
       The Linkerd proxy will return a 502 error for connection errors between
