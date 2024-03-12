@@ -19,7 +19,7 @@ With the changes to Linkerd's release model, edge releases have clearly become
 more important! In light of that, we'll be doing these Edge Release Roundup
 posts every month, to help keep everyone up to date on the latest and
 greatest. Going forward, we'll cover everything since the previous roundup,
-but for this first post of the new series,we'll take a longer look back, and
+but for this first post of the new series, we'll take a longer look back, and
 tackle all the edge releases from February to the present.
 
 ## Major Process Changes
@@ -81,7 +81,7 @@ automating the edge release process, and on improving mesh expansion. We've
 also fixed quite a few things and, of course, each edge release has many
 dependency updates.
 
-### `edge-24.2.1`
+### [`edge-24.2.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.1) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.1))
 
 This edge release improves the performance and stability of the `destination`
 controller and the ExternalWorkloads EndpointSlice controller.
@@ -93,7 +93,7 @@ controller and the ExternalWorkloads EndpointSlice controller.
   election is improved for the controller generating them.
 - ExternalWorkloads can have at most one IPv4 address and one IPv6 address.
 
-### `edge-24.2.2`
+### [`edge-24.2.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.2) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.2))
 
 This edge release introduces Helm configuration for liveness and readiness
 probe timings (thanks to [Jan Kantert]!), and addresses some issues in the
@@ -105,7 +105,7 @@ probe timings (thanks to [Jan Kantert]!), and addresses some issues in the
   resource, the resource's opaqueness will correctly revert to the default
   ([issue 11995](https://github.com/linkerd/linkerd2/issues/11995)).
 
-### `edge-24.2.3`
+### [`edge-24.2.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.3) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.3))
 
 This edge release supports configuring the MutatingWebhookConfig timeout
 (thanks, [Michael Bell]!) and fixes a few issues:
@@ -116,25 +116,25 @@ This edge release supports configuring the MutatingWebhookConfig timeout
 - We fixed a bug where Linkerd wouldn't correctly update policy after deleting
   policy resources.
 
-### `edge-24.2.4`
+### [`edge-24.2.4`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4))
 
 This edge release introduces the `v1beta1` ExternalWorkload CRD, with the more
 correctly named `meshTLS` stanza. **This is a breaking change**;
 ExternalWorkload `v1alpha1` is no longer supported. It also updated the proxy
 to address some logging and metrics inconsistencies.
 
-### `edge-24.2.5`
+### [`edge-24.2.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.5) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.5))
 
 This release includes support for Go 1.22 (thanks [Rui Chen]!) and updates the
 proxy again.
 
-### `edge-24.3.1`
+### [`edge-24.3.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.1) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.1))
 
 As noted earlier, this is the release that changes the Helm versioning scheme.
 It also adds support for setting `loadBalancerClass` when required (thanks,
 [Adam Toy]!).
 
-### `edge-24.3.2`
+### [`edge-24.3.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.2) ([changelog](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.2))
 
 Last but not least, this release fixes the Helm chart to correctly supporting
 setting `repairController` resources ([issue
@@ -150,20 +150,13 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 
 ## How to give feedback
 
-We would be delighted to hear how these releases work out for you! The full
-changelogs are available on GitHub:
+We would be delighted to hear how these releases work out for you! You can
+open [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
+[discussion](https://github.com/linkerd/linkerd2/discussions/), join us on
+[Slack](https://slack.linkerd.io), or visit the [Buoyant Linkerd
+Forum](https://linkerd.buoyant.io) -- all are great ways to reach us.
 
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.1>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.2>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.3>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.5>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.1>
-- <https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.2>
-
-We’d love to hear your feedback on [Slack](https://slack.linkerd.io) or at the
-new [Buoyant Linkerd Forum](https://linkerd.buoyant.io). Looking forward to
-hearing from you – happy meshing!!
+Looking forward to hearing from you – happy meshing!!
 
 ----
 
