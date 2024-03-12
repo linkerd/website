@@ -109,7 +109,7 @@ faqs:
       If the queue gets too long, though (which can generally happen only
       if the called service is slow to respond), the proxy will go into
       load-shedding, where any new request gets an immediate 503. The
-      proxy can only get _out_ of load-shedding when the queue shrinks.
+      proxy can only get out of load-shedding when the queue shrinks.
 
       Failfast also plays a role here: if the proxy puts a service into
       failfast while there are requests in the dispatch queue, all the
