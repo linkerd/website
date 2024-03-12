@@ -81,6 +81,12 @@ AnnotationsReference:
 - Description: Maximum time allowed before an unused inbound discovery result is evicted
     from the cache. Defaults to `90s`
   Name: config.linkerd.io/proxy-inbound-discovery-cache-unused-timeout
+- Description: When set to true, disables the protocol detection timeout on the outbound
+    side of the proxy by setting it to a very high value
+  Name: config.linkerd.io/proxy-disable-outbound-protocol-detect-timeout
+- Description: When set to true, disables the protocol detection timeout on the inbound
+    side of the proxy by setting it to a very high value
+  Name: config.linkerd.io/proxy-disable-inbound-protocol-detect-timeout
 - Description: The proxy sidecar will stay alive for at least the given period after
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
@@ -98,6 +104,10 @@ AnnotationsReference:
     before all open connections have completed, the proxy will terminate forcefully,
     closing any remaining connections.
   Name: config.linkerd.io/shutdown-grace-period
+- Description: Enable KEP-753 native sidecars. This is an experimental feature. It
+    requires Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not
+    be used.
+  Name: config.alpha.linkerd.io/proxy-enable-native-sidecar
 CLIReference:
 - Description: List authorizations for a resource.
   Example: ""
@@ -164,7 +174,7 @@ CLIReference:
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: basic, json, short'
+    Usage: 'Output format. One of: table, json, short'
   - DefaultValue: ""
     Name: pre
     Shorthand: ""
@@ -286,8 +296,50 @@ CLIReference:
     Name: output
     Shorthand: o
     Usage: 'Output format; one of: "table" or "json"'
+  - DefaultValue: ""
+    Name: token
+    Shorthand: ""
+    Usage: |
+      The context token to use when making the request to the destination API
   SeeAlso: null
   Synopsis: Introspect Linkerd's service discovery state
+- Description: |-
+    Introspect Linkerd's policy state.
+
+    This command provides debug information about the internal state of the
+    control-plane's policy controller. It queries the same control-plane
+    endpoint as the linkerd-proxy's, and returns the policies associated with the
+    given resource. If the resource is a Pod, inbound policy for that Pod is
+    displayed. If the resource is a Service, outbound policy for that Service is
+    displayed.
+  Example: |2-
+      # get the inbound policy for pod emoji-6d66d87995-bvrnn on port 8080
+      linkerd diagnostics policy -n emojivoto po/emoji-6d66d87995-bvrnn 8080
+
+      # get the outbound policy for Service emoji-svc on port 8080
+      linkerd diagnostics policy -n emojivoto svc/emoji-svc 8080
+  InheritedOptions: null
+  Name: diagnostics policy
+  Options:
+  - DefaultValue: ""
+    Name: destination-pod
+    Shorthand: ""
+    Usage: |
+      Target a specific destination Pod when there are multiple running
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for policy
+  - DefaultValue: ""
+    Name: namespace
+    Shorthand: "n"
+    Usage: Namespace of resource
+  - DefaultValue: ""
+    Name: output
+    Shorthand: o
+    Usage: 'Output format. One of: yaml, json'
+  SeeAlso: null
+  Synopsis: Introspect Linkerd's policy state
 - Description: |-
     Fetch metrics directly from Linkerd proxies.
 
@@ -366,7 +418,7 @@ CLIReference:
 - Description: "Display the certificate(s) of one or more selected pod(s).\n\nThis
     command initiates a port-forward to a given pod or a set of pods and fetches the
     TLS certificate.\n\t\t"
-  Example: "\n # Get certificate from pod foo-bar in the default namespace.\n linkerd
+  Example: " # Get certificate from pod foo-bar in the default namespace.\n linkerd
     identity foo-bar\n\n # Get certificate from all pods with the label name=nginx\n
     linkerd identity -l name=nginx\n\t\t"
   InheritedOptions: null
@@ -465,6 +517,10 @@ CLIReference:
     Shorthand: ""
     Usage: |
       Include the proxy sidecar container spec in the YAML output (the auto-injector won't pick it up, so config annotations aren't supported) (default false)
+  - DefaultValue: ""
+    Name: native-sidecar
+    Shorthand: ""
+    Usage: Enable native sidecar
   - DefaultValue: ""
     Name: opaque-ports
     Shorthand: ""
@@ -776,6 +832,8 @@ CLIReference:
     assumes that the 'linkerd install' command will be executed with the
     '--linkerd-cni-enabled' flag. This command needs to be executed before the
     'linkerd install --linkerd-cni-enabled' command.
+
+    The installation can be configured by using the --set, --values, --set-string and --set-file flags. A full list of configurable values can be found at https://artifacthub.io/packages/helm/linkerd2/linkerd2-cni#values
   Example: ""
   InheritedOptions: null
   Name: install-cni
@@ -788,6 +846,10 @@ CLIReference:
     Name: cni-image
     Shorthand: ""
     Usage: Image for the cni-plugin
+  - DefaultValue: ""
+    Name: cni-image-version
+    Shorthand: ""
+    Usage: Image Version for the cni-plugin
   - DefaultValue: ""
     Name: cni-log-level
     Shorthand: ""
@@ -840,6 +902,21 @@ CLIReference:
     Usage: |
       Docker registry to pull images from ($LINKERD_DOCKER_REGISTRY)
   - DefaultValue: ""
+    Name: set
+    Shorthand: ""
+    Usage: |
+      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
+    Name: set-file
+    Shorthand: ""
+    Usage: |
+      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
+  - DefaultValue: ""
+    Name: set-string
+    Shorthand: ""
+    Usage: |
+      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
     Name: skip-inbound-ports
     Shorthand: ""
     Usage: |
@@ -854,6 +931,11 @@ CLIReference:
     Shorthand: ""
     Usage: |
       Configures the CNI plugin to use the "-w" flag for the iptables command. (default false)
+  - DefaultValue: ""
+    Name: values
+    Shorthand: f
+    Usage: |
+      specify values in a YAML file or a URL (can specify multiple)
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd CNI
 - Description: |-
@@ -881,7 +963,7 @@ CLIReference:
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: basic, json'
+    Usage: 'Output format. One of: table, json, short'
   - DefaultValue: ""
     Name: proxy
     Shorthand: ""
@@ -995,6 +1077,44 @@ CLIReference:
     Usage: The namespace to list pods in
   SeeAlso: null
   Synopsis: Lists which pods have tracing enabled
+- Description: |
+    Output extraneous Kubernetes resources in the linkerd-jaeger extension.
+  Example: "  # Prune extraneous resources.\n  linkerd jaeger prune | kubectl delete
+    -f -\n  "
+  InheritedOptions: null
+  Name: jaeger prune
+  Options:
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for prune
+  - DefaultValue: ""
+    Name: set
+    Shorthand: ""
+    Usage: |
+      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
+    Name: set-file
+    Shorthand: ""
+    Usage: |
+      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
+  - DefaultValue: ""
+    Name: set-string
+    Shorthand: ""
+    Usage: |
+      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
+    Name: values
+    Shorthand: f
+    Usage: |
+      specify values in a YAML file or a URL (can specify multiple)
+  - DefaultValue: ""
+    Name: wait
+    Shorthand: ""
+    Usage: Wait for extension components to be available
+  SeeAlso: null
+  Synopsis: |
+    Output extraneous Kubernetes resources in the linkerd-jaeger extension
 - Description: |-
     Output Kubernetes resources to uninstall the Linkerd-jaeger extension.
 
@@ -1016,9 +1136,38 @@ CLIReference:
   Name: jaeger
   Options:
   - DefaultValue: ""
+    Name: api-addr
+    Shorthand: ""
+    Usage: |
+      Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+  - DefaultValue: ""
+    Name: as
+    Shorthand: ""
+    Usage: Username to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: as-group
+    Shorthand: ""
+    Usage: Group to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: context
+    Shorthand: ""
+    Usage: Name of the kubeconfig context to use
+  - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for jaeger
+  - DefaultValue: ""
+    Name: kubeconfig
+    Shorthand: ""
+    Usage: Path to the kubeconfig file to use for CLI requests
+  - DefaultValue: ""
+    Name: linkerd-namespace
+    Shorthand: L
+    Usage: Namespace in which Linkerd is installed
+  - DefaultValue: ""
+    Name: verbose
+    Shorthand: ""
+    Usage: Turn on debug logging
   SeeAlso: null
   Synopsis: jaeger manages the jaeger extension of Linkerd service mesh
 - Description: ""
@@ -1069,11 +1218,15 @@ CLIReference:
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: basic, json'
+    Usage: 'Output format. One of: table, json, short'
   - DefaultValue: ""
     Name: proxy
     Shorthand: ""
     Usage: ""
+  - DefaultValue: ""
+    Name: timeout
+    Shorthand: ""
+    Usage: Timeout for calls to the Kubernetes API
   - DefaultValue: ""
     Name: wait
     Shorthand: ""
@@ -1093,6 +1246,10 @@ CLIReference:
     Name: help
     Shorthand: h
     Usage: help for gateways
+  - DefaultValue: ""
+    Name: output
+    Shorthand: o
+    Usage: used to print output in different format
   - DefaultValue: ""
     Name: wait
     Shorthand: w
@@ -1202,6 +1359,11 @@ CLIReference:
     Usage: |
       (Development) Tag to be used for the service mirror controller image
   - DefaultValue: ""
+    Name: gateway
+    Shorthand: ""
+    Usage: |
+      If false, allows a link to be created against a cluster that does not have a gateway service
+  - DefaultValue: ""
     Name: gateway-addresses
     Shorthand: ""
     Usage: |
@@ -1220,9 +1382,18 @@ CLIReference:
     Usage: |
       If specified, overwrites gateway port when gateway service is not type LoadBalancer
   - DefaultValue: ""
+    Name: ha
+    Shorthand: ""
+    Usage: |
+      Enable HA configuration for the service-mirror deployment (default false)
+  - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for link
+  - DefaultValue: ""
+    Name: log-format
+    Shorthand: ""
+    Usage: Log format for the Multicluster components
   - DefaultValue: ""
     Name: log-level
     Shorthand: ""
@@ -1236,6 +1407,11 @@ CLIReference:
     Shorthand: ""
     Usage: |
       Docker registry to pull service mirror controller image from ($LINKERD_DOCKER_REGISTRY)
+  - DefaultValue: ""
+    Name: remote-discovery-selector
+    Shorthand: ""
+    Usage: |
+      Selector (label query) to filter which services in the target cluster to mirror in remote discovery mode
   - DefaultValue: ""
     Name: selector
     Shorthand: l
@@ -1321,9 +1497,38 @@ CLIReference:
   Name: multicluster
   Options:
   - DefaultValue: ""
+    Name: api-addr
+    Shorthand: ""
+    Usage: |
+      Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+  - DefaultValue: ""
+    Name: as
+    Shorthand: ""
+    Usage: Username to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: as-group
+    Shorthand: ""
+    Usage: Group to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: context
+    Shorthand: ""
+    Usage: Name of the kubeconfig context to use
+  - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for multicluster
+  - DefaultValue: ""
+    Name: kubeconfig
+    Shorthand: ""
+    Usage: Path to the kubeconfig file to use for CLI requests
+  - DefaultValue: ""
+    Name: linkerd-namespace
+    Shorthand: L
+    Usage: Namespace in which Linkerd is installed
+  - DefaultValue: ""
+    Name: verbose
+    Shorthand: ""
+    Usage: Turn on debug logging
   SeeAlso: null
   Synopsis: Manages the multicluster setup for Linkerd
 - Description: Output service profile config for Kubernetes.
@@ -1367,6 +1572,20 @@ CLIReference:
     Usage: Output a service profile template
   SeeAlso: null
   Synopsis: Output service profile config for Kubernetes
+- Description: |
+    Output extraneous Kubernetes resources in the linkerd control plane.
+  Example: "  # Prune extraneous resources.\n  linkerd prune | kubectl delete -f -\n
+    \ "
+  InheritedOptions: null
+  Name: prune
+  Options:
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for prune
+  SeeAlso: null
+  Synopsis: |
+    Output extraneous Kubernetes resources in the linkerd control plane
 - Description: |-
     Remove the Linkerd proxy from a Kubernetes config.
 
@@ -1421,16 +1640,13 @@ CLIReference:
     A full list of configurable values can be found at https://www.github.com/linkerd/linkerd2/tree/main/charts/linkerd2/README.md
   Example: |2-
       # Upgrade CRDs first
-      linkerd upgrade --crds | kubectl apply --prune --prune-whitelist=apiextensions.k8s.io/v1/customresourcedefinitions
+      linkerd upgrade --crds | kubectl apply -f -
 
-      # Then upgrade the controle-plane and remove linkerd resources that no longer exist in the current version
-      linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
+      # Then upgrade the control plane
+      linkerd upgrade | kubectl apply -f -
 
-      # Then run this again to make sure that certain cluster-scoped resources are correctly pruned
-      linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
-      --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
-      --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
-      --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+      # And lastly, remove linkerd resources that no longer exist in the current version
+      linkerd prune | kubectl delete -f -
   InheritedOptions: null
   Name: upgrade
   Options:
@@ -1736,7 +1952,7 @@ CLIReference:
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: basic, json'
+    Usage: 'Output format. One of: table, json, short'
   - DefaultValue: ""
     Name: proxy
     Shorthand: ""
@@ -1938,6 +2154,49 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     Output service profile config for Kubernetes based off tap data
+- Description: |
+    Output extraneous Kubernetes resources in the linkerd-viz extension.
+  Example: "  # Prune extraneous resources.\n  linkerd viz prune | kubectl delete
+    -f -\n  "
+  InheritedOptions: null
+  Name: viz prune
+  Options:
+  - DefaultValue: ""
+    Name: ha
+    Shorthand: ""
+    Usage: |
+      Set if Linkerd Viz Extension is installed in High Availability mode.
+  - DefaultValue: ""
+    Name: help
+    Shorthand: h
+    Usage: help for prune
+  - DefaultValue: ""
+    Name: set
+    Shorthand: ""
+    Usage: |
+      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
+    Name: set-file
+    Shorthand: ""
+    Usage: |
+      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
+  - DefaultValue: ""
+    Name: set-string
+    Shorthand: ""
+    Usage: |
+      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
+  - DefaultValue: ""
+    Name: values
+    Shorthand: f
+    Usage: |
+      specify values in a YAML file or a URL (can specify multiple)
+  - DefaultValue: ""
+    Name: wait
+    Shorthand: ""
+    Usage: Wait for extension components to be available
+  SeeAlso: null
+  Synopsis: |
+    Output extraneous Kubernetes resources in the linkerd-viz extension
 - Description: |-
     Display route stats.
 
@@ -2183,7 +2442,7 @@ CLIReference:
   - DefaultValue: ""
     Name: output
     Shorthand: o
-    Usage: 'Output format. One of: "wide", "json"'
+    Usage: 'Output format. One of: "wide", "json", "jsonpath"'
   - DefaultValue: ""
     Name: path
     Shorthand: ""
@@ -2321,9 +2580,43 @@ CLIReference:
   Name: viz
   Options:
   - DefaultValue: ""
+    Name: api-addr
+    Shorthand: ""
+    Usage: |
+      Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
+  - DefaultValue: ""
+    Name: as
+    Shorthand: ""
+    Usage: Username to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: as-group
+    Shorthand: ""
+    Usage: Group to impersonate for Kubernetes operations
+  - DefaultValue: ""
+    Name: context
+    Shorthand: ""
+    Usage: Name of the kubeconfig context to use
+  - DefaultValue: ""
     Name: help
     Shorthand: h
     Usage: help for viz
+  - DefaultValue: ""
+    Name: kubeconfig
+    Shorthand: ""
+    Usage: Path to the kubeconfig file to use for CLI requests
+  - DefaultValue: ""
+    Name: linkerd-namespace
+    Shorthand: L
+    Usage: Namespace in which Linkerd is installed
+  - DefaultValue: ""
+    Name: verbose
+    Shorthand: ""
+    Usage: Turn on debug logging
+  - DefaultValue: ""
+    Name: viz-namespace
+    Shorthand: ""
+    Usage: |
+      Name of the linkerd-viz namespace. If not set, it's automatically detected
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
