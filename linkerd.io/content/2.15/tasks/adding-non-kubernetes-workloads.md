@@ -286,7 +286,7 @@ export LINKERD2_PROXY_DESTINATION_SVC_ADDR="linkerd-dst-headless.linkerd.svc.clu
 export LINKERD2_PROXY_DESTINATION_SVC_NAME="linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local"
 export LINKERD2_PROXY_POLICY_SVC_NAME="linkerd-destination.linkerd.serviceaccount.identity.linkerd.cluster.local"
 export LINKERD2_PROXY_POLICY_SVC_ADDR="linkerd-policy.linkerd.svc.cluster.local.:8090"
-export LINKERD2_PROXY_IDENTITY_SPIRE_SOCKET="unix:///tmp/SPIRE-agent/public/api.sock"
+export LINKERD2_PROXY_IDENTITY_SPIRE_SOCKET="unix:///tmp/spire-agent/public/api.sock"
 export LINKERD2_PROXY_IDENTITY_TRUST_ANCHORS=`cat /opt/SPIRE/crts/ca.crt`
 
 ./linkerd-proxy
