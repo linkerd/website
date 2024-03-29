@@ -1,6 +1,6 @@
 +++
 title = "Common Errors"
-weight = 3
+weight = 10
 [sitemap]
   priority = 1.0
 +++
