@@ -1,5 +1,5 @@
 ---
-title: The world's most advanced service mesh. 100% open source, CNCF graduated, and written in Rust.
+title: The world's most advanced service mesh.
 date: 2019-02-04T13:12:35.000+00:00
 description: Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
