@@ -5,8 +5,8 @@ description: Use cert-manager to automatically rotate control plane TLS credenti
 
 Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature generates TLS
 certificates for proxies and automatically rotates them without user
-intervention. These certificates are derived from a **trust anchor**, which is
-shared across clusters, and an **issuer certificate**, which is specific to the
+intervention. These certificates are derived from a *trust anchor*, which is
+shared across clusters, and an *issuer certificate*, which is specific to the
 cluster.
 
 While Linkerd automatically rotates the per-proxy TLS certificates, it does not
