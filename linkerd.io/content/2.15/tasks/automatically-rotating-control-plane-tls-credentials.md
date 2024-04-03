@@ -6,8 +6,8 @@ aliases = [ "use_external_certs" ]
 
 Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature generates TLS
 certificates for proxies and automatically rotates them without user
-intervention. These certificates are derived from a _trust anchor_, which is
-shared across clusters, and an _issuer certificate_, which is specific to the
+intervention. These certificates are derived from a **trust anchor**, which is
+shared across clusters, and an **issuer certificate**, which is specific to the
 cluster.
 
 While Linkerd automatically rotates the per-proxy TLS certificates, it does not
