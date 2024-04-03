@@ -10,6 +10,12 @@ aliases = [
 In this guide, we'll walk you through how to perform zero-downtime upgrades for
 Linkerd.
 
+{{< note >}}
+This page contains instructions for the latest edge release of Linkerd. If
+you have installed a [stable distribution](/releases/#stable) of Linkerd, the
+vendor may have additional guidance on how to upgrade.
+{{< /note >}}
+
 Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.

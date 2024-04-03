@@ -1,5 +1,5 @@
 +++
-title = "Releases and Versions"
+title = "Releases"
 aliases = [ "edge" ]
 weight = 18
 +++
@@ -20,20 +20,6 @@ it also means they don't have stability guarantees. Upgrading between edge
 releases may involve breaking changes, and may involve partial features that are
 later modified or backed out.
 
-**Note:** Edge releases may introduce breaking changes.
-
-<!-- markdownlint-disable MD033 -->
-Edge releases follow a version numbering scheme of the form `<two digit
-year>.<month>.<number within the month>`. For example, `edge-24.1.2` is the
-second edge release of January 2024.
-<!-- markdownlint-enable MD033 -->
-
-To install the latest edge release via the CLI, you can run:
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
-```
-
 The full list of edge releases can be found on
 [GitHub](https://github.com/linkerd/linkerd2/releases).
 
@@ -48,15 +34,3 @@ Known stable distributions of Linkerd include:
 * [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
   creators of Linkerd.
-
-## Helm Chart Version Matrix
-
-The following version matrices include only the latest versions of the stable
-releases along with corresponding app and Helm versions for Linkerd and
-extensions. Use these to guide you to the right Helm chart version or to
-automate workflows you might have.
-
-* [YAML matrix](./release_matrix.yaml)
-* [JSON matrix](./release_matrix.json)
-
-{{< release-data-table />}}

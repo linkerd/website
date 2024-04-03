@@ -5,17 +5,17 @@
 
   table{
   border-collapse:collapse;
-  border:1px solid #000000;
+  border:1px solid #DBDBDB;
   }
   th, td {
   padding: 5px;
   }
   table td{
-  border:1px solid #000000;
+  border:1px solid #DBDBDB;
 
   }
   table th{
-  border:1px solid #000000;
+  border:1px solid #DBDBDB;
   }
   </style>
 <table>
@@ -23,6 +23,7 @@
   <thead>
     <tr>
        <th class="text-center">Release Name</th>
+       <th></th>
     </tr>
   </thead>
   <tbody>
@@ -40,17 +41,14 @@
             </thead>
             <tbody>
               {{ range $chart_name, $chart_data := $charts }}
-               
                 <tr>
-                  <td> <a target="_blank" href="{{ $chart_data.chart_url }}">{{ $chart_name }}</a></td>
-                  <td> {{ $chart_data.chart_version }} </td>
-                  <td> {{ $release_version }} </td>
-
+                  <td><a target="_blank" href="{{ $chart_data.chart_url }}">{{ $chart_name }}</a></td>
+                  <td>{{ $chart_data.chart_version }}</td>
+                  <td>{{ $release_version }}</td>
                 </tr>
               {{ end }}
             </tbody>
           </table>
-            
         </td>
       </tr>
     {{ end }}
