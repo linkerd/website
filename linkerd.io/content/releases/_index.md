@@ -4,33 +4,36 @@ aliases = [ "edge" ]
 weight = 18
 +++
 
-Linkerd is developed in the [Linkerd GitHub
-repository](https://github.com/linkerd/linkerd2). Releases and packages of
-Linkerd are available in several different forms.
+Releases and packages of Linkerd are available in several different forms.
 
-## Edge (latest version: {{% latestedge %}})
+## Edge releases (latest version: {{% latestedge %}})
 
-All Linkerd development happens "on main": all changes, whether in support of
-upcoming new features, refactors, bug fixes, or something else, land on the main
-branch where they are merged together.
+All Linkerd development happens "on main": all changes, whether security
+patches, new features, refactors, bug fixes, or something else, land on the main
+branch.
 
-Edge releases contain the latest code in from the main branch at the point in
-time when they were cut. This means they have the latest features and fixes, but
-it also means they don't have stability guarantees. Upgrading between edge
-releases may involve breaking changes, and may involve partial features that are
-later modified or backed out.
+Edge release artifacts contain the latest code in from the main branch, at the
+point in time when they were cut. This means they have the latest features and
+fixes, but it also means may involve partial features that are later modified or
+backed out. They may involve breaking changes—of course, we do our best to avoid
+this.
 
-The full list of edge releases can be found on
-[GitHub](https://github.com/linkerd/linkerd2/releases).
+Using edge release artifacts and reporting bugs is a great way to help Linkerd.
 
-## Stable
+The full list of edge release artifacts can be found on
+[the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
-As of Linkerd 2.15.0, the open source project no longer publishes stable
-releases. Instead, the vendor community around Linkerd is responsible for
-supported, stable releases.
+Latest version: **{{% latestedge %}}** [[release
+notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
 
-Known stable distributions of Linkerd include:
+## Stable releases
+
+As of February 2024, the vendor community around Linkerd is responsible for
+supported, stable release artifacts. Known distributions of Linkerd with stable
+release artifacts are:
 
 * [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-  creators of Linkerd.
+  creators of Linkerd. Latest version:
+  **enterprise-2.15.2** [[release
+  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
