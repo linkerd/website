@@ -1,62 +1,40 @@
 +++
-title = "Releases and Versions"
+title = "Releases"
 aliases = [ "edge" ]
 weight = 18
 +++
 
-Linkerd is developed in the [Linkerd GitHub
-repository](https://github.com/linkerd/linkerd2). Releases and packages of
-Linkerd are available in several different forms.
+Releases and packages of Linkerd are available in several different forms.
 
-## Edge (latest version: {{% latestedge %}})
+## Edge releases (latest version: {{% latestedge %}})
 
-All Linkerd development happens "on main": all changes, whether in support of
-upcoming new features, refactors, bug fixes, or something else, land on the main
-branch where they are merged together.
+All Linkerd development happens "on main": all changes, whether security
+patches, new features, refactors, bug fixes, or something else, land on the main
+branch.
 
-Edge releases contain the latest code in from the main branch at the point in
-time when they were cut. This means they have the latest features and fixes, but
-it also means they don't have stability guarantees. Upgrading between edge
-releases may involve breaking changes, and may involve partial features that are
-later modified or backed out.
+Edge release artifacts contain the latest code in from the main branch, at the
+point in time when they were cut. This means they have the latest features and
+fixes, but it also means may involve partial features that are later modified or
+backed out. They may involve breaking changes—of course, we do our best to avoid
+this.
 
-**Note:** Edge releases may introduce breaking changes.
+Using edge release artifacts and reporting bugs is a great way to help Linkerd.
 
-<!-- markdownlint-disable MD033 -->
-Edge releases follow a version numbering scheme of the form `<two digit
-year>.<month>.<number within the month>`. For example, `edge-24.1.2` is the
-second edge release of January 2024.
-<!-- markdownlint-enable MD033 -->
+The full list of edge release artifacts can be found on
+[the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
-To install the latest edge release via the CLI, you can run:
+<!-- markdownlint-disable MD034 -->
+Latest version: **{{% latestedge %}}** [[release
+notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
 
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
-```
+## Stable releases
 
-The full list of edge releases can be found on
-[GitHub](https://github.com/linkerd/linkerd2/releases).
-
-## Stable
-
-As of Linkerd 2.15.0, the open source project no longer publishes stable
-releases. Instead, the vendor community around Linkerd is responsible for
-supported, stable releases.
-
-Known stable distributions of Linkerd include:
+As of February 2024, the vendor community around Linkerd is responsible for
+supported, stable release artifacts. Known distributions of Linkerd with stable
+release artifacts are:
 
 * [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-  creators of Linkerd.
-
-## Helm Chart Version Matrix
-
-The following version matrices include only the latest versions of the stable
-releases along with corresponding app and Helm versions for Linkerd and
-extensions. Use these to guide you to the right Helm chart version or to
-automate workflows you might have.
-
-* [YAML matrix](./release_matrix.yaml)
-* [JSON matrix](./release_matrix.json)
-
-{{< release-data-table />}}
+  creators of Linkerd. Latest version:
+  **enterprise-2.15.2** [[release
+  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].

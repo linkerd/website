@@ -6,7 +6,7 @@ description = "Install Linkerd onto your Kubernetes cluster using Helm."
 Linkerd can be installed via Helm rather than with the `linkerd install`
 command. This is recommended for production, since it allows for repeatability.
 
-{{< trylpt >}}
+{{< releases >}}
 
 ## Prerequisite: generate identity certificates
 

@@ -4,10 +4,11 @@
     {{end}}
     role="alert">
   <div class="message-body">
-    <p>
+    {{ if .title }}
+    <p class="mt-0">
       <i class="fa fa-{{ .icon }}"></i>&nbsp;<strong>{{ .title }}</strong>
     </p>
-
+    {{ end }}
     {{ .content | markdownify }}
   </div>
 </div>
