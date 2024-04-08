@@ -23,6 +23,7 @@ Using edge release artifacts and reporting bugs is a great way to help Linkerd.
 The full list of edge release artifacts can be found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
+<!-- markdownlint-disable MD034 -->
 Latest version: **{{% latestedge %}}** [[release
 notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
 
