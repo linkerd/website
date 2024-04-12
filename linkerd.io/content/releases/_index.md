@@ -24,6 +24,7 @@ The full list of edge release artifacts can be found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
 <!-- markdownlint-disable MD034 -->
+
 Latest version: **{{% latestedge %}}** [[release
 notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
 
@@ -35,8 +36,7 @@ responsible for supported, stable release artifacts.
 
 Known distributions of Linkerd with stable release artifacts include:
 
-* [Buoyant Enterprise for
-  Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-  creators of Linkerd.<br/> Latest version:
-  **enterprise-2.15.2** [[release
-  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
+- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
+  from Buoyant, creators of Linkerd.  
+  Latest version: **enterprise-2.15.2**
+  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].

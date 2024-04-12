@@ -636,4 +636,3 @@ dropped, moving the config values underneath it into the root scope. Any values
 you had customized there will need to be migrated; in particular
 `identityTrustAnchorsPEM` in order to conserve the value you set during
 install."
-
