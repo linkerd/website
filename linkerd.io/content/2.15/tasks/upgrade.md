@@ -20,14 +20,12 @@ Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.
 
-- [Upgrade notice: stable-2.14.0](#upgrade-notice-stable-2-14-0)
-- [Upgrade notice: stable-2.13.0](#upgrade-notice-stable-2-13-0)
-- [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2-12-0)
-- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
-- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
-- [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
-- [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
-- [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
+- [Upgrade notice: 2.15 and beyond](#upgrade-notice-stable-215-and-beyond)
+- [Upgrade notice: stable-2.14.0](#upgrade-notice-stable-2140)
+- [Upgrade notice: stable-2.13.0](#upgrade-notice-stable-2130)
+- [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2120)
+- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2110)
+- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2100)
 
 ## Version numbering
 
@@ -119,7 +117,7 @@ linkerd version --client
 
 ## Upgrading the control plane
 
-### With the Linkerd CLI
+### Upgrading the control plane with the CLI
 
 For users who have installed Linkerd via the CLI, the `linkerd upgrade` command
 will upgrade the control plane. This command ensures that all of the control
@@ -139,7 +137,7 @@ present in the previous version but should not be present in this one.
 linkerd prune | kubectl delete -f -
 ```
 
-### With Helm
+### Upgrading the control plane with Helm
 
 For Helm control plane installations, please follow the instructions at [Helm
 upgrade procedure](../install-helm/#helm-upgrade-procedure).
@@ -239,6 +237,17 @@ Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
 
 ## Upgrade notices
+
+This section contains release-specific information about upgrading.
+
+### Upgrade notice: stable-2.15 and beyond
+
+As of February 2024, the Linkerd project is no longer producing open source
+stable release artifacts. Please read the [2.15
+announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
+for details.
+
+See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
 
 ### Upgrade notice: stable-2.14.0
 
@@ -627,79 +636,3 @@ dropped, moving the config values underneath it into the root scope. Any values
 you had customized there will need to be migrated; in particular
 `identityTrustAnchorsPEM` in order to conserve the value you set during
 install."
-
-### Upgrade notice: stable-2.9.4
-
-See upgrade notes for 2.9.3 below.
-
-### Upgrade notice: stable-2.9.3
-
-#### Linkerd Repair
-
-Due to a known issue in versions stable-2.9.0, stable-2.9.1, and stable-2.9.2,
-users who upgraded to one of those versions with the --prune flag (as described
-above) will have deleted the `secret/linkerd-config-overrides` resource which is
-necessary for performing any subsequent upgrades. Linkerd stable-2.9.3 includes
-a new `linkerd repair` command which restores this deleted resource. If you see
-unexpected error messages during upgrade such as "failed to read CA: not
-PEM-encoded", please upgrade your CLI to stable-2.9.3 and run:
-
-```bash
-linkerd repair | kubectl apply -f -
-```
-
-This will restore the `secret/linkerd-config-overrides` resource and allow you
-to proceed with upgrading your control plane.
-
-### Upgrade notice: stable-2.9.0
-
-#### Images are now hosted on ghcr.io
-
-As of this version images are now hosted under `ghcr.io` instead of `gcr.io`. If
-you're pulling images into a private repo please make the necessary changes.
-
-#### Upgrading multicluster environments
-
-Linkerd 2.9 changes the way that some of the multicluster components work and
-are installed compared to Linkerd 2.8.x. Users installing the multicluster
-components for the first time with Linkerd 2.9 can ignore these instructions and
-instead refer directly to the [installing
-multicluster instructions](../installing-multicluster/).
-
-Users who installed the multicluster component in Linkerd 2.8.x and wish to
-upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](/2.11/tasks/upgrade-multicluster/).
-
-#### Ingress behavior changes
-
-In previous versions when you injected your ingress controller (Nginx, Traefik,
-Ambassador, etc), then the ingress' balancing/routing choices would be
-overridden with Linkerd's (using service profiles, traffic splits, etc.).
-
-As of 2.9 the ingress's choices are honored instead, which allows preserving
-things like session-stickiness. Note however that this means per-route metrics
-are not collected, traffic splits will not be honored and retries/timeouts are
-not applied.
-
-If you want to revert to the previous behavior, inject the proxy into the
-ingress controller using the annotation `linkerd.io/inject: ingress`, as
-explained in [using ingress](../using-ingress/)
-
-#### Breaking changes in Helm charts
-
-Some entries like `controllerLogLevel` and all the Prometheus config have
-changed their position in the settings hierarchy. To get a precise view of what
-has changed you can compare the
-[stable-2.8.1](https://github.com/linkerd/linkerd2/blob/stable-2.8.1/charts/linkerd2/values.yaml)
-and
-[stable-2.9.0](https://github.com/linkerd/linkerd2/blob/stable-2.9.0/charts/linkerd2/values.yaml)
-`values.yaml` files.
-
-#### Post-upgrade cleanup
-
-In order to better support cert-manager, the secrets
-`linkerd-proxy-injector-tls`, `linkerd-sp-validator-tls` and `linkerd-tap-tls`
-have been replaced by the secrets `linkerd-proxy-injector-k8s-tls`,
-`linkerd-sp-validator-k8s-tls` and `linkerd-tap-k8s-tls` respectively. If you
-upgraded through the CLI, please delete the old ones (if you upgraded through
-Helm the cleanup was automated).
