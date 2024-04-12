@@ -29,16 +29,14 @@ mean that Linkerd can't have powerful features, or that it has to have
 one-click wizards take care of everything for you. In fact, it means the
 opposite: every aspect of Linkerd's behavior should be explicit, clear,
 well-defined, bounded, understandable, and introspectable. For example,
-Linkerd's [control plane](/{{% latest-linkerd2-stable-version
-%}}/reference/architecture/#control-plane) is split into several operational
-components based on their functional boundaries ("web”, "api”, etc.) These
-components aren't just exposed directly to you in the Linkerd dashboard and CLI,
-they run on the same data plane as your application does, allowing you to use
-the same tooling to inspect their behavior.
+Linkerd's [control plane](/2/reference/architecture/#control-plane) is split
+into several operational components based on their functional boundaries ("web”,
+"api”, etc.) These components aren't just exposed directly to you in the Linkerd
+dashboard and CLI, they run on the same data plane as your application does,
+allowing you to use the same tooling to inspect their behavior.
 
 _Minimize resource requirements_ means that Linkerd, and especially Linkerd's
-[data plane proxies](/{{% latest-linkerd2-stable-version
-%}}/reference/architecture/#data-plane), should consume the smallest amount of
+[data plane proxies](/2/reference/architecture/#data-plane), should consume the smallest amount of
 memory and CPU possible. On the control plane side, we've taken care to ensure
 that components scale gracefully in the presence of traffic. On the data plane
 side, we've build Linkerd's proxy (called simply "linkerd-proxy”) for
@@ -51,10 +49,9 @@ Finally, _just work_ means that adding Linkerd to a functioning Kubernetes
 application shouldn't break anything, and shouldn't even require configuration.
 (Of course, configuration will be necessary to customize Linkerd's behavior--but
 it shouldn't be necessary simply to get things working.) To do this, we've
-invested heavily in things like [automatic L7 protocol detection](/{{%
-latest-linkerd2-stable-version %}}/features/protocol-detection/), and [automatic
-re-routing of TCP traffic within a pod](/{{% latest-linkerd2-stable-version
-%}}/features/proxy-injection/).
+invested heavily in things like [automatic L7 protocol
+detection](/2/features/protocol-detection/), and [automatic re-routing of TCP
+traffic within a pod](/2/features/proxy-injection/).
 
 Together, these three principles give us a framework for weighing product and
 engineering tradeoffs in Linkerd. We hope they're also useful for understanding

@@ -8,7 +8,7 @@ command. This is recommended for production, since it allows for repeatability.
 
 {{< releases >}}
 
-## Prerequisite: generate identity certificates
+## Prerequisite: generate mTLS certificates
 
 To do [automatic mutual TLS](../../features/automatic-mtls/), Linkerd requires
 trust anchor certificate and an issuer certificate and key pair. When you're
@@ -18,21 +18,12 @@ you will need to generate these yourself.
 Please follow the instructions in [Generating your own mTLS root
 certificates](../generate-certificates/) to generate these.
 
-## Helm install procedure for stable releases
+## Helm install procedure
 
 ```bash
-# To add the repo for Linkerd stable releases:
-helm repo add linkerd https://helm.linkerd.io/stable
-
-# To add the repo for Linkerd edge releases:
+# Add the Helm repo for Linkerd edge releases:
 helm repo add linkerd-edge https://helm.linkerd.io/edge
 ```
-
-The following instructions use the `linkerd` repo. For installing an edge
-release, just replace with `linkerd-edge`, and add the `--devel` flag to all
-commands.
-
-## Helm install procedure
 
 You need to install two separate charts in succession: first `linkerd-crds` and
 then `linkerd-control-plane`.
@@ -117,7 +108,7 @@ helm repo update
 helm search repo linkerd
 NAME                          CHART VERSION          APP VERSION              DESCRIPTION
 linkerd/linkerd-crds          <chart-semver-version>                          Linkerd gives you observability, reliability, and securit...
-linkerd/linkerd-control-plane <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
+linkerd/linkerd-control-plane <chart-semver-version> {{% latestedge %}}       Linkerd gives you observability, reliability, and securit...
 ```
 
 During an upgrade, you must choose whether you want to reuse the values in the
