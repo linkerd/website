@@ -75,7 +75,7 @@ In this way, the workload of all threads can be balanced by Intel DLB and perfec
 The best case for Intel DLB-enabled Tokio is high traffic, like ingress. Since Linkerd2 should work with existing ingress solutions such as Nginx Ingress, we deploy the benchmark environment as below:
 ![dlb-benchmark-env](/uploads/dlb-benchmark-env.png)
 
-In our lab, we compared the baseline of pure Linkerd2-Proxy to the target of Linkerd2-Proxy plus Intel DLB. The result shows that the request per second has been greatly improved and the latency has been reduced.
+In our lab, we compared the baseline of pure Linkerd2-Proxy to the target of Linkerd2-Proxy with Intel DLB and the result shows that the request per second has been improved and the latency has been reduced.
 
 ## Conclusion
 
