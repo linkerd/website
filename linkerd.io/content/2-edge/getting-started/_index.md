@@ -42,7 +42,7 @@ more](https://kubernetes.io/docs/setup/).)
 Validate your Kubernetes setup by running:
 
 ```bash
-kubectl version --short
+kubectl version
 ```
 
 You should see output with both a `Client Version` and `Server Version`
