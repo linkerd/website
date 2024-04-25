@@ -6,6 +6,19 @@ weight = 18
 
 Releases and packages of Linkerd are available in several different forms.
 
+## Stable releases
+
+As of February 2024, the Linkerd project is no longer producing open source
+stable release artifacts. Instead, the vendor community around Linkerd is
+responsible for supported, stable release artifacts.
+
+Known distributions of Linkerd with stable release artifacts include:
+
+- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
+  from Buoyant, creators of Linkerd.  
+  Latest version: **enterprise-2.15.2**
+  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
+
 ## Edge releases
 
 All Linkerd development happens "on main": all changes, whether security
@@ -27,16 +40,3 @@ The full list of edge release artifacts can be found on
 
 Latest version: **{{% latestedge %}}** [[release
 notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
-
-## Stable releases
-
-As of February 2024, the Linkerd project is no longer producing open source
-stable release artifacts. Instead, the vendor community around Linkerd is
-responsible for supported, stable release artifacts.
-
-Known distributions of Linkerd with stable release artifacts include:
-
-- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd.  
-  Latest version: **enterprise-2.15.2**
-  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
