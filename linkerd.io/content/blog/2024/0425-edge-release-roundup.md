@@ -39,9 +39,9 @@ Forum](https://linkerd.buoyant.io) -- all are great ways to reach us.
 We couldn't do what we do without the Linkerd community, and this batch of
 releases is definitely no exception. Huge thanks to [Adarsh Jaiswal], [Akshay
 Dongaonkar], [Cemal Y. Dalar], [Firas Medini], [Grigoriy Mikhalkin],
-[hanghuge], [Ilia Lazebnik], [Hirotaka Tagawa], and [occupyhabit] for their
-contributions! You'll find more information about all of these contributions
-in the release-by-release details below.
+[hanghuge], [Heiko Voigt], [Ilia Lazebnik], [Hirotaka Tagawa], and
+[occupyhabit] for their contributions! You'll find more information about all
+of these contributions in the release-by-release details below.
 
 [hanghuge]: https://github.com/hanghuge
 [Grigoriy Mikhalkin]: https://github.com/GrigoriyMikhalkin
@@ -52,6 +52,7 @@ in the release-by-release details below.
 [Cemal Y. Dalar]: https://github.com/cdalar
 [Ilia Lazebnik]: https://github.com/DrFaust92
 [Akshay Dongaonkar]: https://github.com/doubletooth
+[Heiko Voigt]: https://github.com/hvoigt
 
 ## Breaking Changes
 
@@ -75,12 +76,14 @@ time to reverse chronological order, starting with the most recent.)_
 
 ### [`edge-24.4.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.4.5) (April 25, 2024)
 
-This edge release continues work on upcoming IPv6 support, and allows setting
+This edge release fixes support for native sidecars in the Linkerd CNI plugin,
+continues work on upcoming IPv6 support, and allows setting
 `revisionHistoryLimit` when installing with Helm to specify how many
 ReplicaSets to keep around for rollback purposes (thanks, [Ilia Lazebnik]!)
 
 It also allows setting certain HTTP/2 server parameters using environment
-variables (see [proxy PR 2924] if you think you need this!).
+variables in the proxy container (see [proxy PR 2924] if you think you need
+this!).
 
 [proxy PR 2924]: https://github.com/linkerd/linkerd2-proxy/pull/2924
 
@@ -108,8 +111,10 @@ of endpoints, and continues work on upcoming IPv6 support. It also allows
 correctly setting policy controller resources via Helm, instead of just
 defaulting them to the same as the destination controller (thanks, [Grigoriy
 Mikhalkin]!), allows relabeling metrics to customize how high-cardinality
-metrics get handled (thanks, [Cemal Y. Dalar]!), and does a little cleanup of
-documentation in the code (thanks, [hanghuge]!).
+metrics get handled (thanks, [Heiko Voigt]!), and does a little cleanup of
+documentation in the code (thanks, [hanghuge]!). Finally, it adds a new
+`linkerd diagnostics profile` command which gives low-level visibility into
+which ServiceProfile is attached to a given address.
 
 ### [`edge-24.4.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.4.1) (April 4, 2024)
 
