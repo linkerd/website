@@ -878,7 +878,7 @@ See the page on [Upgrading Linkerd](../../upgrade/).
 
 ## The "control-plane-version" checks {#l5d-version-control}
 
-### unsupported version channel
+### unsupported version channel {#l5d-version-control-unsupported}
 
 Example failure:
 
@@ -894,7 +894,7 @@ for details.
 
 See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
 
-### is running version X but the latest version is Y
+### is running version X but the latest version is Y {#l5d-version-control-update}
 
 Example failure:
 
@@ -906,7 +906,7 @@ Example failure:
 There is a newer version of the control plane. See the page on [Upgrading
 Linkerd](../../upgrade/).
 
-### mismatched channels
+### mismatched channels {#l5d-version-control-mismatched}
 
 Example failure:
 
