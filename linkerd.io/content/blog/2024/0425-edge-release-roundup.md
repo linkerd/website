@@ -94,10 +94,11 @@ instead of duplicating `http`.
 
 _We recommend `edge-24.4.4` instead of this release due to a metrics-naming regression in `edge-24.4.3`._
 
-This edge release fixes an issue where Linkerd would endlessly update
-`httproute.policy.linkerd.io` resources, causing excessive load on the API
-server, because of a missing `port` field in the HTTPRoute `status` stanza
-([issue 12310](https://github.com/linkerd/linkerd2/issues/12310)).
+This edge release fixes the second of two issues where where
+`policy.linkerd.io` HTTPRoutes could be endlessly patched even when they
+weren't changing ([issue 12310]).
+
+[issue 12310]: https://github.com/linkerd/linkerd2/issues/12310
 
 ### [`edge-24.4.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.4.2) (April 11, 2024)
 
@@ -116,23 +117,23 @@ This edge release continues work on upcoming IPv6 support.
 
 ### [`edge-24.3.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.5) (March 28, 2024)
 
-This edge release added metrics to the queue of HTTPRoute status updates and
-made the ExternalWorkload resource's status as a subresource, as it always
-should have been. It also corrected the scope of the proxy-injector,
+This edge release adds metrics to the queue of HTTPRoute status updates and
+makes the ExternalWorkload resource's status as a subresource, as it always
+should have been. It also corrects the scope of the proxy-injector,
 tap-injector, and jaeger-injector mutating webhook rules to Namespaced (thanks
-[Firas Medini]!), and cleaned up some documentation in the code (thanks
+[Firas Medini]!), and cleans up some documentation in the code (thanks
 [occupyhabit]!).
 
 ### [`edge-24.3.4`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.4) (March 22, 2024)
 
-This edge release fixed an issue where `policy.linkerd.io` HTTPRoutes could be
-endlessly patched even when they weren't changing ([issue 12104]), and another
-where the destination controller could generate large numbers of unnecessary
-endpoint updates when a Server changed. It also adds default values to
-generated docs for the `proxy-*-connect-timeout` annotations (thanks [Akshay
-Dongaonkar]!), fixes excessive logging in the injector webhook ([issue 12186],
-thanks [Adarsh Jaiswal]!), and cleans up an unneeded error message from the
-destination controller (thanks [Hirotaka Tagawa]!).
+This edge release fixes the first of two issues where `policy.linkerd.io`
+HTTPRoutes could be endlessly patched even when they weren't changing ([issue
+12104]), and another where the destination controller could generate large
+numbers of unnecessary endpoint updates when a Server changed. It also adds
+default values to generated docs for the `proxy-*-connect-timeout` annotations
+(thanks [Akshay Dongaonkar]!), fixes excessive logging in the injector webhook
+([issue 12186], thanks [Adarsh Jaiswal]!), and cleans up an unneeded error
+message from the destination controller (thanks [Hirotaka Tagawa]!).
 
 Finally, this edge release fixes an issue that could mistakenly turn off local
 traffic policy when an endpoint is removed ([issue 12311]), adds a timeout to
