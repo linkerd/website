@@ -870,7 +870,11 @@ $ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=te
 
 Example failures:
 
+<!-- markdownlint-disable MD036 -->
+
 **unsupported version channel**
+
+<!-- markdownlint-enable MD036 -->
 
 ```bash
 ‼ cli is up-to-date
@@ -884,7 +888,11 @@ for details.
 
 See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
 
+<!-- markdownlint-disable MD036 -->
+
 **is running version X but the latest version is Y**
+
+<!-- markdownlint-enable MD036 -->
 
 ```bash
 ‼ cli is up-to-date
@@ -900,7 +908,11 @@ There is a newer version of the `linkerd` cli. See the page on
 
 Example failures:
 
+<!-- markdownlint-disable MD036 -->
+
 **unsupported version channel**
+
+<!-- markdownlint-enable MD036 -->
 
 ```bash
 ‼ control plane is up-to-date
@@ -914,7 +926,11 @@ for details.
 
 See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
 
+<!-- markdownlint-disable MD036 -->
+
 **is running version X but the latest version is Y**
+
+<!-- markdownlint-enable MD036 -->
 
 ```bash
 ‼ control plane is up-to-date
