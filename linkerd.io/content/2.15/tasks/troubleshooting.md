@@ -878,16 +878,45 @@ See the page on [Upgrading Linkerd](../../upgrade/).
 
 ## The "control-plane-version" checks {#l5d-version-control}
 
-Example failures:
+### unsupported version channel
+
+Example failure:
+
+```bash
+‼ control plane is up-to-date
+    unsupported version channel: stable-2.14.10
+```
+
+As of February 2024, the Linkerd project is no longer producing open source
+stable release artifacts. Please read the [2.15
+announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
+for details.
+
+See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
+
+### is running version X but the latest version is Y
+
+Example failure:
 
 ```bash
 ‼ control plane is up-to-date
     is running version 19.1.1 but the latest edge version is 19.1.2
+```
+
+There is a newer version of the control plane. See the page on [Upgrading
+Linkerd](../../upgrade/).
+
+### mismatched channels
+
+Example failure:
+
+```bash
 ‼ control plane and cli versions match
     mismatched channels: running stable-2.1.0 but retrieved edge-19.1.2
 ```
 
-See the page on [Upgrading Linkerd](../../upgrade/).
+Your CLI and your control plane are running different types of releases. This
+may cause issues.
 
 ## The "linkerd-control-plane-proxy" checks {#linkerd-control-plane-proxy}
 
