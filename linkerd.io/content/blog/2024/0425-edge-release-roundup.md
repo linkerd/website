@@ -20,7 +20,7 @@ most recent edge releases to help keep everyone up to date on the latest and
 greatest! This month, we're covering the releases from `edge-24.4.5` back to
 `edge-24.3.3` -- there's a lot here so we'll get right into it.
 
-## How to Give Feedback
+## How to give feedback
 
 Remember, edge releases are a snapshot of our current development work on
 `main`; by definition, they always have the most recent features but they may
@@ -34,7 +34,7 @@ open [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
 [Slack](https://slack.linkerd.io), or visit the [Buoyant Linkerd
 Forum](https://linkerd.buoyant.io) -- all are great ways to reach us.
 
-## Community Contributions
+## Community contributions
 
 We couldn't do what we do without the Linkerd community, and this batch of
 releases is definitely no exception. Huge thanks to [Adarsh Jaiswal], [Akshay
@@ -54,7 +54,7 @@ of these contributions in the release-by-release details below.
 [Akshay Dongaonkar]: https://github.com/doubletooth
 [Heiko Voigt]: https://github.com/hvoigt
 
-## Breaking Changes
+## Breaking changes and recommendations
 
 There are no breaking changes in these releases. However, we have two specific
 recommendations:
@@ -64,7 +64,7 @@ recommendations:
 - We recommend `edge-24.3.4` instead of `edge-24.3.3` since `edge-24.3.4`
   contains an important fix for Gateway API users.
 
-## The Releases
+## The releases
 
 Recent edge releases have been mostly focused on upcoming IPv6 support and
 some significant bugfixes. Of course, each edge release has _many_ dependency
@@ -160,21 +160,26 @@ This edge release allows configuring the pod disruption budget via Helm
 
 [issue 11321]: https://github.com/linkerd/linkerd2/issues/11321
 
-## Installing the Latest Edge Release
+## Installing the latest edge release
+
+Installing the latest edge release needs just a single command.
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-## How to give feedback
+You can also [install edge releases with Helm](https://linkerd.io/2.15/tasks/install-helm/).
 
-We would be delighted to hear how these releases work out for you! You can
-open [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
-[discussion](https://github.com/linkerd/linkerd2/discussions/), join us on
-[Slack](https://slack.linkerd.io), or visit the [Buoyant Linkerd
-Forum](https://linkerd.buoyant.io) -- all are great ways to reach us.
+## Linkerd is for everyone
 
-Looking forward to hearing from you – happy meshing!!
+Linkerd is a graduated project of the [Cloud Native Computing
+Foundation](https://cncf.io/). Linkerd is [committed to open
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/) If you have
+feature requests, questions, or comments, we'd love to have you join our
+rapidly-growing community! Linkerd is hosted on
+[GitHub](https://github.com/linkerd/), and we have a thriving community on
+[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
+in [mailing lists](/community/get-involved/). Come and join the fun!
 
 ----
 
