@@ -105,7 +105,7 @@ This edge release fixes an issue where the service mirror controller would
 panic if it encountered an error listing mirror services while fixing its list
 of endpoints, and continues work on upcoming IPv6 support. It also allows
 correctly setting policy controller resources via Helm, instead of just
-defaulting them to the same as the destination controller (thanks, [Grigority
+defaulting them to the same as the destination controller (thanks, [Grigoriy
 Mikhalkin]!), allows relabeling metrics to customize how high-cardinality
 metrics get handled (thanks, [Cemal Y. Dalar]!), and does a little cleanup of
 documentation in the code (thanks, [hanghuge]!).
