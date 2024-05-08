@@ -23,6 +23,7 @@ IgnoreURLs:
   - https://godaddy.com/
   - https://www.linkedin.com/
   - https://tools.ietf.org/
+  - ^/2/*
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16

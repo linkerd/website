@@ -4,63 +4,51 @@ aliases = [ "edge" ]
 weight = 18
 +++
 
-The full list of Linkerd open source releases can be found on
-[GitHub](https://github.com/linkerd/linkerd2/releases).
+Releases of Linkerd are available in several different forms.
 
-Linkerd 2.x publishes releases into multiple channels, _stable_ and _edge_.
-The guarantees and expectations are different for each channel
+## Stable releases
 
-## Stable (latest version: {{% latestversion %}})
+Stable release artifacts of Linkerd follow semantic versioning, whereby changes
+in major version denote large feature additions and possible breaking changes
+and changes in minor versions denote safe upgrades without breaking changes.
 
-Stable releases are published periodically and are intented for production use.
-See the [Linkerd installation guide](https://linkerd.io/2/tasks/install/) for
-how to install a stable release.
+As of February 2024, Linkerd no longer provides stable release artifacts in the
+open source project itself. Instead, the vendor community around Linkerd is
+responsible for creating stable release artifacts. Known distributions of
+Linkerd with stable release artifacts include:
 
-For stable releases, Linkerd follows a version numbering scheme of the form
-`2.<major>.<minor>`. In other words, "2" is a static prefix, followed by the
-major version, then the minor.
+- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
+  from Buoyant, creators of Linkerd.
+  Latest version: **enterprise-2.15.2**
+  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
 
-Changes in minor versions are intended to be backwards compatible with the
-previous version and will typically not introduce major new features. Changes in
-major version will typically introduce major new features, and *may* introduce
-breaking changes—although we try to avoid that whenever possible.
+## Edge releases
 
-**Support policy**: in general, we support the latest major stable version: we
-will fix bugs by publishing minor version updates. At the maintainer's
-discretion, these bugfixes may occasionally be back-ported to the previous major
-stable version.
+Edge release artifacts are published on a weekly or near-weekly basis as part of
+the open source project. The full list of edge release artifacts can be found on
+[the Linkerd GitHub releases
+page](https://github.com/linkerd/linkerd2/releases).
 
-Stable versions earlier than the previous major version will not receive
-bugfixes or enhancements.
+Edge release artifacts contain the code in from the _main_ branch at the point
+in time when they were cut. This means they always have the latest features and
+fixes, and have undergone automated testing as well as maintianer code review.
+Edge releases may involve partial features that are later modified or backed
+out. They may also involve breaking changes—of course, we do our best to avoid
+this.
 
-Commercial providers of Linkerd (e.g. [Buoyant](https://buoyant.io)) may
-provide stronger support guarantees.
+Edge release versioning follows the form `edge-y.m.n`, where `y` is the last two
+digits of the year, `m` is the numeric month, and `n` is numeric edge release
+count for that month. For example:
 
-## Helm Version Matrix
+- `edge-23.9.1`: the first edge release shipped in September 2023
+- `edge-24.1.3`: the third edge release shipped in January 2024
 
-The following version matrices include only the latest versions of the stable
-releases along with corresponding app and helm versions for linkerd and
-extensions.  Use these to guide you to the right helm chart version or to
-automate workflows you might have.
+Using edge release artifacts and reporting bugs helps us ensure a rapid pace of
+development and is a great way to help Linkerd. We publish edge release guidance
+as part of the release notes and strive to always provide production-ready
+artifacts.
 
-* [YAML matrix](./release_matrix.yaml)
-* [JSON matrix](./release_matrix.json)
+<!-- markdownlint-disable MD034 -->
 
-{{< release-data-table />}}
-
-## Edge (latest version: {{% latestedge %}})
-
-Edge releases are frequent (usually, weekly) and can be used to work with the
-latest and greatest features. Edge releases may introduce breaking changes.
-
-For edge releases, Linkerd follows a version numbering scheme of the form
-`<two digit year>.<month>.<number within the month>`. For example, `edge-22.9.4`
-is the fourth edge release of September 2022.
-
-To install the latest edge release via the CLI, you can run:
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
-```
-
-**Support policy**: there is no formal support policy for edge releases.
+Latest version: **{{% latestedge %}}** [[release
+notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].

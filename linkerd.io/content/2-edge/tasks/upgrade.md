@@ -571,9 +571,9 @@ and then invoke those commands through `linkerd viz stat`,
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
 # Prune cluster-scoped resources
 linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
-  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrole \
-  --prune-whitelist=rbac.authorization.k8s.io/v1/clusterrolebinding \
-  --prune-whitelist=apiregistration.k8s.io/v1/apiservice -f -
+  --prune-allowlist=rbac.authorization.k8s.io/v1/clusterrole \
+  --prune-allowlist=rbac.authorization.k8s.io/v1/clusterrolebinding \
+  --prune-allowlist=apiregistration.k8s.io/v1/apiservice -f -
 # Install the Linkerd-Viz extension to restore viz functionality.
 linkerd viz install | kubectl apply -f -
 ```

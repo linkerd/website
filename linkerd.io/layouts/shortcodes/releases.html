@@ -1,0 +1,2 @@
+{{ $content := "This page contains instructions using the latest edge release of Linkerd. For other types of releases, including stable releases, please see [Linkerd Releases](/releases/)." | markdownify -}}
+{{ partial "admonition.html" (dict "type" "info" "icon" "info-circle" "id" (.Get "id") "title" "Edge release content" "content" $content) }}
