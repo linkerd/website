@@ -95,7 +95,7 @@ title = "Linkerd"
     mediaType = "application/json"
     baseName = "search"
 [outputs]
-  home = ["HTML", "REDIRECTS", "SearchIndex"]
+  home = ["HTML", "SearchIndex"]
   section = ["HTML", "RSS", "JSON"]
 [params]
   description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
