@@ -1,4 +1,4 @@
-{{- $pages := where site.Pages "Section" "eq" .Section -}}
+{{- $pages := where site.Pages "Section" "eq" "2.15" -}}
 [
   {{- range $index, $page := $pages -}}
     {{- if gt $index 0 -}} , {{- end -}}
