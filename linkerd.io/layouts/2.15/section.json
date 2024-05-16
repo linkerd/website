@@ -1,5 +1,3 @@
-{{- /* This search index is used on docs.buoyant.io */ -}}
-{{- /* Resursively get all pages in the current top-level section */ -}}
 {{- $pages := where site.Pages "Section" "eq" .Section -}}
 [
   {{- range $index, $page := $pages -}}
