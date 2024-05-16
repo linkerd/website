@@ -1,4 +1,4 @@
-{{ $inServerMode := site.IsServer }}
+{{ $inServerMode := hugo.IsServer }}
 {{ $useMaterial  := .Page.Params.use_material }}
 {{ if $useMaterial }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css" />
