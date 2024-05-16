@@ -1,0 +1,20 @@
+{{- /* This search index is used on docs.buoyant.io */ -}}
+{{- /* Resursively get all pages in the current top-level section */ -}}
+{{- $pages := where site.Pages "Section" "eq" .Section -}}
+[
+  {{- range $index, $page := $pages -}}
+    {{- if gt $index 0 -}} , {{- end -}}
+    {{- $ancestors := slice "linkerd.io" -}}
+    {{- range .Ancestors.Reverse -}}
+      {{- if .IsHome }}{{ continue }}{{ end -}}
+      {{- $ancestors = $ancestors | append .Title -}}
+    {{- end -}}
+    {{- $entry := dict "uri" $page.Permalink -}}
+    {{- $entry = merge $entry (dict "title" $page.Title) -}}
+    {{- $entry = merge $entry (dict "ancestors" $ancestors) -}}
+    {{- $entry = merge $entry (dict "content" ($page.Plain | htmlUnescape | truncate 3000)) -}}
+    {{- $entry = merge $entry (dict "description" $page.Description) -}}
+    {{- $entry = merge $entry (dict "keywords" $page.Keywords) -}}
+    {{- $entry | jsonify -}}
+  {{- end -}}
+]
