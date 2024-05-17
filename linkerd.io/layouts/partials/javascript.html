@@ -35,4 +35,7 @@
 {{ $headingsLinkJs := resources.Get "js/docs-heading-link.js"}}
 <script defer src="{{ $headingsLinkJs.Permalink }}"></script>
 
+{{ $jsFL := resources.Get "js/follow-linkedin.js" }}
+<script src="{{ $jsFL.Permalink }}"></script>
+
 <script async defer src="https://buttons.github.io/buttons.js"></script>
