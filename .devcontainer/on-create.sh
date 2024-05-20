@@ -5,7 +5,7 @@ set -euo pipefail
 cd $(mktemp -d)
 
 # hugo
-scurl -O https://github.com/gohugoio/hugo/releases/download/v0.121.2/hugo_extended_0.121.2_linux-amd64.deb
+scurl -O https://github.com/gohugoio/hugo/releases/download/v0.126.1/hugo_extended_0.126.1_linux-amd64.deb
 sudo dpkg -i hugo*.deb
 rm hugo*.deb
 
