@@ -18,4 +18,5 @@ Linkerd Tech Evangelist Flynn and Backstage Maintainer Ben Lambert as
 they show you how a service mesh like Linkerd can supercharge your IDP,
 ensuring seamless communication and clear visibility.
 
+<!-- markdownlint-disable MD033 -->
 <iframe style="width:800px; height:450px;" src="https://www.youtube.com/embed/43Yq24I0KNI?si=DAtnX3dNXZf2dDFI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
