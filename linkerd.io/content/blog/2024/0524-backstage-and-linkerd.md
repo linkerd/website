@@ -7,6 +7,8 @@ tags:
   - Video
 description: This CNCF Cloud Native Live session explores building a rock-solid Internal Developer Platform (IDP) Backstage that empowers developers with self-service tools while streamlining security and observability.
 keywords: [Backstage; Video]
+thumbnail: '/uploads/2024/05/cnl-backstage-linkerd-thumbnail.png'
+featuredImage: '/uploads/2024/05/cnl-backstage-linkerd-thumbnail.png'
 ---
 Smooth workflows are critical in the cloud-native world. This CNCF Cloud
 Native Live session explores building a rock-solid Internal Developer
@@ -16,5 +18,4 @@ Linkerd Tech Evangelist Flynn and Backstage Maintainer Ben Lambert as
 they show you how a service mesh like Linkerd can supercharge your IDP,
 ensuring seamless communication and clear visibility.
 
-[![Cloud Native Live with Backstage and Linkerd](/uploads/2024/05/cnl-backstage-linkerd-screenshot.png)](https://www.youtube.com/watch?v=43Yq24I0KNI "Cloud Native Live with Backstage and Linkerd")
-
+<iframe style="width:800px; height:450px;" src="https://www.youtube.com/embed/43Yq24I0KNI?si=DAtnX3dNXZf2dDFI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
