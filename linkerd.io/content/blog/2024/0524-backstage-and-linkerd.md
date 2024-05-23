@@ -1,4 +1,6 @@
 ---
+author: 'catherine'
+date: 2024-05-23T00:00:00Z
 title: Building a Secure, Reliable, Observable IDP with Backstage & Linkerd
 tags:
   - Backstage
