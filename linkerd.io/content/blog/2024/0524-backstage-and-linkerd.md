@@ -6,7 +6,7 @@ tags:
   - Backstage
   - Video
 description: This CNCF Cloud Native Live session explores building a rock-solid Internal Developer Platform (IDP) Backstage that empowers developers with self-service tools while streamlining security and observability.
-keywords: [Backstage; Video]
+keywords: [Backstage, Video]
 thumbnail: '/uploads/2024/05/cnl-backstage-linkerd-thumbnail.png'
 featuredImage: '/uploads/2024/05/cnl-backstage-linkerd-screenshot.png'
 ---
