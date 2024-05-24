@@ -13,7 +13,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ .Page.RelPermalink | absURL }}" />
 
-{{ if .Params.thumbnail }}
+{{ if .Params.featuredImage }}
+  <meta property="og:image" content="{{ .Params.featuredImage| absURL | safeHTMLAttr }}" />
+{{ else if .Params.thumbnail }}
   <meta property="og:image" content="{{ .Params.thumbnail | absURL | safeHTMLAttr }}" />
 {{ else }}
   <meta property="og:image" content="https://linkerd.io/images/logo-only-200h.png" />
