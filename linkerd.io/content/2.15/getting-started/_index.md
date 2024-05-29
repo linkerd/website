@@ -23,11 +23,7 @@ install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
 Finally, you'll "mesh" an application by adding Linkerd's *data plane* to it.
 
-{{< note >}}
-This page contains quick start instructions intended for non-production
-installations. For production-oriented configurations, we suggest reviewing
-resources in [Going to Production](/going-to-production/).
-{{< /note >}}
+{{< releases >}}
 
 ## Step 0: Setup
 
@@ -42,7 +38,7 @@ more](https://kubernetes.io/docs/setup/).)
 Validate your Kubernetes setup by running:
 
 ```bash
-kubectl version --short
+kubectl version
 ```
 
 You should see output with both a `Client Version` and `Server Version`

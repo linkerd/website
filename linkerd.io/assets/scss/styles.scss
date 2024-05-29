@@ -925,3 +925,7 @@ blockquote {
 .modal-content {
   width: 95%;
 }
+
+.linkedin__btn{
+    z-index: 999; display: block; top: 100px; right: -5px; position: fixed;
+}
