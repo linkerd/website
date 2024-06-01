@@ -45,10 +45,10 @@ latency.
 
 In order to be as small, lightweight, and safe as possible, Linkerd's
 micro-proxies are written in [Rust](https://www.rust-lang.org/) and specialized
-for Linkerd. You can learn more about the these micro-proxies in our blog post,
+for Linkerd. You can learn more about these micro-proxies in our blog post,
 [Under the hood of Linkerd's state-of-the-art Rust proxy,
-Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/),
-(If you want to know why Linkerd doesn't use Envoy, you can learn why in our blog
+Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/).
+(If you want to know why Linkerd doesn't use Envoy, you can read our blog
 post, [Why Linkerd doesn't use
 Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/).)
 
