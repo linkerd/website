@@ -19,8 +19,8 @@ Linkerd with stable release artifacts include:
 
 - [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
   from Buoyant, creators of Linkerd.
-  Latest version: **enterprise-2.15.2**
-  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.2/)].
+  Latest version: **enterprise-2.15.3**
+  [[release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.3/)].
 
 ## Edge releases
 
