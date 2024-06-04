@@ -50,5 +50,19 @@ artifacts.
 
 <!-- markdownlint-disable MD034 -->
 
-Latest version: **{{% latestedge %}}** [[release
-notes](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}})].
+## Versions
+
+Like many projects, Linkerd publishes and announces major *versions* that
+correspond to specific project milestones and sets of new features.
+
+### Linkerd 2.15
+
+The latest major version is Linkerd 2.15.
+
+* Release date: February 21, 2024.
+* Full announcement: [Announcing Linkerd 2.15 with mesh expansion, native
+sidecars, and SPIFFE ](/2024/02/21/announcing-linkerd-2.15/).
+* Edge releases:
+[edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
+through [{{% latestedge %}}](https://github.com/linkerd/linkerd2/releases/tag/{{%
+latestedge %}}).
