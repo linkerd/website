@@ -2,7 +2,7 @@
 {{- $.Scratch.Add "search-index" slice -}}
 {{- range $index, $page := $pages -}}
   {{- $ancestors := slice "linkerd.io" -}}
-  {{- range .Ancestors.Reverse -}}
+  {{- range $page.Ancestors.Reverse -}}
     {{- if .IsHome }}{{ continue }}{{ end -}}
     {{- $ancestors = $ancestors | append .Title -}}
   {{- end -}}
