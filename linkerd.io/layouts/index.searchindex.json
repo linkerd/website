@@ -1,3 +1,4 @@
+{{- /* Ouput a json search index of all docs in the 2.15 section */ -}}
 {{- $pages := where site.Pages "Section" "eq" "2.15" -}}
 {{- $.Scratch.Add "search-index" slice -}}
 {{- range $index, $page := $pages -}}
