@@ -21,6 +21,7 @@ sidecars, and SPIFFE](/2024/02/21/announcing-linkerd-2.15/)
 - **Corresponding edge release**: [edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
 
 Known distributions of Linkerd 2.15:
+
 - [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
   creators of Linkerd. Latest version: **enterprise-2.15.3** ([release
@@ -30,6 +31,7 @@ Known distributions of Linkerd 2.15:
 
 ### Edge releases
 
+<!-- markdownlint-disable MD034 -->
 Edge release artifacts are published on a weekly or near-weekly basis as part of
 the open source project. The latest edge release is [{{% latestedge
 %}}](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}}).
@@ -66,4 +68,3 @@ and changes in minor versions denote safe upgrades without breaking changes.
 As of February 2024, the Linkerd open source project itself no longer provides
 stable release artifacts. Instead, the vendor community around Linkerd is
 responsible for creating stable release artifacts.
-
