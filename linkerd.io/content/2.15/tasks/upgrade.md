@@ -106,16 +106,10 @@ the version-specific upgrade notes before proceeding.
 ### Edge releases
 
 For edge releases, it is also usually safe to upgrade one major version at a
-time. The "major version" of an edge release is indicated by the most recent
-`version-2.X` tag before the edge release tag in question; this is also
-included in the release notes for each edge release.
-
-For example, `edge-24.4.1` is within major version 2.15: the most recent
-`version-2.X` tag before `edge-24.4.1` is
-[`version-2.15`](https://github.com/linkerd/linkerd2/releases/tag/version-2.15),
-which corresponds to `edge-24.2.4`. Therefore, it should be safe to upgrade
-from `edge-24.2.4` to any edge release within 2.15 or 2.16, but not to any
-edge release produced after `version-2.17` is tagged.
+time. The major version of an edge release is included in the release notes
+for each edge release: for example, `edge-24.4.1` is part of Linkerd 2.15, so
+it should be safe to upgrade from `edge-24.2.4` to any edge release within
+Linkerd 2.15 or Linkerd 2.16.
 
 For any situation where this is not the case, the edge release guidance will
 have more information.
