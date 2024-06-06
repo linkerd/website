@@ -108,7 +108,7 @@ the version-specific upgrade notes before proceeding.
 For edge releases, it is also usually safe to upgrade one major version at a
 time. The major version of an edge release is included in the release notes
 for each edge release: for example, `edge-24.4.1` is part of Linkerd 2.15, so
-it should be safe to upgrade from `edge-24.2.4` to any edge release within
+it should be safe to upgrade from `edge-24.4.1` to any edge release within
 Linkerd 2.15 or Linkerd 2.16.
 
 For any situation where this is not the case, the edge release guidance will
