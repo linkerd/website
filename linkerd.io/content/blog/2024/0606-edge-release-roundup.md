@@ -54,11 +54,11 @@ defaulted to on for the Linkerd CNI plugin.
 
 In `edge-24.5.1`, the `patchs` metric introduced in `edge-24.3.4` is renamed to `patches`.
 
-Finally, starting in `edge-24.5.2`, Linkerd will install the
-`grpcroute.gateway.networking.k8s.io` CRD, in preparation for later GRPCRoute
+Finally, starting in `edge-24.5.2`, Linkerd will install the GRPCRoute CRD in
+the `gateway.networking.k8s.io` API group, in preparation for later GRPCRoute
 support. (You can disable this by setting `enableHttpRoutes` to `false` when
-installing, which will also prevent Linkerd from installing the
-`httproute.gateway.networking.k8s.io` CRD.)
+installing, which will also prevent Linkerd from installing the HTTPRoute CRD
+in the `gateway.networking.k8s.io` API group.)
 
 ## The releases
 
@@ -102,11 +102,12 @@ fixes intermittent routing failures with HTTPRoute ([issue 12610]).
 `edge-24.5.2` adds support for IPv6 (set `disableIPv6` to `false` when
 installing the control plane to use it). It also correctly sets the
 `backend_not_found` status on HTTPRoutes with no backends. Finally, it adds
-the Gateway API GRPCRoute resource as part of continued work on support for
-GRPCRoutes, although this edge release doesn't attach any functionality to the
-CRD.
+the Gateway API GRPCRoute resource (in the `gateway.networking.k8s.io` API
+group) as part of continued work on support for GRPCRoutes, although this edge
+release doesn't attach any functionality to the CRD.
 
-To prevent Linkerd from installing the GRPCRoute and HTTPRoute resources from Gateway API, set `enableHttpRoutes` to `false` when installing.
+To prevent Linkerd from installing any CRDs into `gateway.networking.k8s.io`,
+set `enableHttpRoutes` to `false` when installing.
 
 ### [`edge-24.5.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.1) (May 2, 2024)
 
