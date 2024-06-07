@@ -25,8 +25,8 @@ back to `edge-24.5.1` -- there's a lot here so we'll get right into it.
 Remember, edge releases are a snapshot of our current development work on
 `main`; by definition, they always have the most recent features but they may
 have incomplete features, features that end up getting rolled back later, or
-(gasp!) even bugs. If you're running edge releases, it's _very_ important that
-you send us feedback on how things are going for you!
+(like all software) even bugs. That said, edge release *are* intended for production use, and go through
+a rigorous set of automated and manual tests before being released.
 
 We would be delighted to hear how these releases work out for you! You can
 open [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
