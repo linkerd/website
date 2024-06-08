@@ -2,7 +2,7 @@
 author: 'flynn'
 date: 2024-06-06T00:00:00Z
 title: |-
-  Linkerd Edge Release Roundup: May 2024
+  Linkerd Edge Release Roundup: June 2024
 url:
   /2024/06/06/linkerd-edge-release-roundup/
 thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
@@ -12,13 +12,12 @@ featured: false
 ---
 
 {{< fig
-  alt="May 2024 Linkerd Edge Release Roundup"
+  alt="June 2024 Linkerd Edge Release Roundup"
   src="/uploads/2023/06/roundup-clocks-rect.png" >}}
 
-Welcome to the May 2024 Edge Release Roundup post, where we dive into the most
-recent edge releases to help keep everyone up to date on the latest and
-greatest! This month, we're covering the May 2024 releases from `edge-24.5.5`
-back to `edge-24.5.1` -- there's a lot here so we'll get right into it.
+Welcome to the June 2024 Edge Release Roundup post, where we dive into the
+most recent edge releases to help keep everyone up to date on the latest and
+greatest!
 
 ## How to give feedback
 
@@ -48,11 +47,13 @@ below.
 
 ## Recommendations and breaking changes
 
-We recommend `edge-24.5.5` instead of `edge-24.5.4` because `edge-24.5.4`
-switches IPv6 to off by default for the control plane, but mistakenly left it
-defaulted to on for the Linkerd CNI plugin.
+We recommend `edge-24.5.5` for anyone considering an `edge-24.5.*` release; it
+has important fixes for the Linkerd CNI plugin on GKE. `edge-24.5.1` is
+specifically **not** recommended for users of GKE, due to a bug with the
+default Linkerd configuration in that release.
 
-In `edge-24.5.1`, the `patchs` metric introduced in `edge-24.3.4` is renamed to `patches`.
+Starting in `edge-24.5.1`, the `patchs` metric introduced in `edge-24.3.4` is
+renamed to `patches`.
 
 Finally, starting in `edge-24.5.2`, Linkerd will install the GRPCRoute CRD in
 the `gateway.networking.k8s.io` API group, in preparation for later GRPCRoute
@@ -70,13 +71,14 @@ release notes for each release.
 
 ### [`edge-24.5.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.5) (May 31, 2024)
 
-This release makes `linkerd-cni` default to _not_ supporting IPv6, to match
-the rest of the control plane. Set `disableIPv6` to `false` to enable IPv6 in
-the CNI.
+This release switches IPv6 off by default for the entire control plane,
+including the Linkerd CNI plugin. Set `disableIPv6` to `false` to enable IPv6.
 
 ### [`edge-24.5.4`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.4) (May 23, 2024)
 
-_We recommend [`edge-24.5.5`] instead of this release since this release mistakenly leaves IPv6 defaulted to on for the CNI plugin._
+_We recommend [`edge-24.5.5`] instead of this release. In this release, IPv6
+support is off by default for most of the control plane, but it is mistakenly
+on by default for the Linkerd CNI plugin._
 
 This release adds support for JSON output to the `linkerd inject`, `linkerd
 uninject` and `linkerd profile` commands, and a `--token` flag to `linkerd
@@ -95,12 +97,19 @@ fixes intermittent routing failures with HTTPRoute ([issue 12610]).
 
 ### [`edge-24.5.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.3) (May 15, 2024)
 
-`edge-24.5.3` removes an internal limit on the number of concurrent gRPC streams to the control plane, leaving available memory as the only constraint.
+_If you use the Linkerd CNI plugin on GKE, you will need to disable IPv6 or
+use [`edge-24.5.5`] instead._
+
+This release removes an internal limit on the number of concurrent gRPC
+streams to the control plane, leaving available memory as the only constraint.
 
 ### [`edge-24.5.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.2) (May 13, 2024)
 
-`edge-24.5.2` adds support for IPv6 (set `disableIPv6` to `false` when
-installing the control plane to use it). It also correctly sets the
+_If you use the Linkerd CNI plugin on GKE, you will need to disable IPv6 or
+use [`edge-24.5.5`] instead._
+
+This release adds support for IPv6. It defaults to enabled: set `disableIPv6`
+to `true` when installing to disable it. It also correctly sets the
 `backend_not_found` status on HTTPRoutes with no backends. Finally, it adds
 the Gateway API GRPCRoute resource (in the `gateway.networking.k8s.io` API
 group) as part of continued work on support for GRPCRoutes, although this edge
@@ -111,15 +120,25 @@ set `enableHttpRoutes` to `false` when installing.
 
 ### [`edge-24.5.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.1) (May 2, 2024)
 
-_This release has one breaking change: the `patchs` metric introduced in [edge-24.3.4] is now correctly named `patches`._
+_We recommend [`edge-24.5.5`] instead of this release due to a bug that
+prevents Linkerd from functioning on GKE with the default configuration.
+Additionally, this release has one breaking change: the `patchs` metric
+introduced in [`edge-24.3.4`] is now correctly named `patches`._
 
-`edge-24.5.1` adds configurable HTTP/2 server keepalives, fixes CLI issues and opaque-port issues when using native sidecars ([issue #12395]), restores Server v1beta1 to ease migrations after it was mistakenly removed in [edge-24.1.2], fixes an issue that could cause the endpoints gauge to report incorrect numbers of endpoints, and continues ongoing work on upcoming IPv6 support.
+This release adds configurable HTTP/2 server keepalives, fixes CLI issues and
+opaque-port issues when using native sidecars ([issue #12395]), restores
+Server v1beta1 to ease migrations after it was mistakenly removed in
+[`edge-24.1.2`], fixes an issue that could cause the endpoints gauge to report
+incorrect numbers of endpoints, and continues ongoing work on upcoming IPv6
+support.
 
-Additionally, it avoids unnecessary cleanup of headless endpoint mirrors during garbage collection (thanks, [Marwan Ahmed]!) and cleans up some documentation in the code (thanks, [knowmost]!).
+Additionally, it avoids unnecessary cleanup of headless endpoint mirrors
+during garbage collection (thanks, [Marwan Ahmed]!) and cleans up some
+documentation in the code (thanks, [knowmost]!).
 
 [issue #12395]: https://github.com/linkerd/linkerd2/issues/12395
-[edge-24.3.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.4
-[edge-24.1.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.1.2
+[`edge-24.3.4`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.4
+[`edge-24.1.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.1.2
 [Marwan Ahmed]: https://github.com/marwanad
 [knowmost]: https://github.com/knowmost
 
