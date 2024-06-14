@@ -1,6 +1,16 @@
-bases:
+resources:
   - ../base
 
 patches:
-  - podinfo.yml
-  - frontend.yml
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: podinfo
+    path: podinfo.yml
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: frontend
+    path: frontend.yml
