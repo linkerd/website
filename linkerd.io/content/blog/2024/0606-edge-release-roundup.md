@@ -6,7 +6,7 @@ title: |-
 url:
   /2024/06/06/linkerd-edge-release-roundup/
 thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
-featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
+featuredImage: '/uploads/2024/06/roundup-06-featured.png'
 tags: [Linkerd, linkerd, edge, release, roundup]
 featured: false
 ---
