@@ -24,8 +24,8 @@ Known distributions of Linkerd 2.15:
 
 - [Buoyant Enterprise for
   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-  creators of Linkerd. Latest version: **enterprise-2.15.3** ([release
-  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.3/)).
+  creators of Linkerd. Latest version: **enterprise-2.15.4** ([release
+  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.4/)).
 
 ## Types of release artifacts
 

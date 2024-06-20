@@ -6,7 +6,7 @@ title: |-
 url:
   /2024/06/06/linkerd-edge-release-roundup/
 thumbnail: '/uploads/2023/06/roundup-clocks-square.png'
-featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
+featuredImage: '/uploads/2024/06/roundup-06-featured.png'
 tags: [Linkerd, linkerd, edge, release, roundup]
 featured: false
 ---
@@ -24,8 +24,9 @@ greatest!
 Remember, edge releases are a snapshot of our current development work on
 `main`; by definition, they always have the most recent features but they may
 have incomplete features, features that end up getting rolled back later, or
-(like all software) even bugs. That said, edge release *are* intended for production use, and go through
-a rigorous set of automated and manual tests before being released.
+(like all software) even bugs. That said, edge releases *are* intended for
+production use, and go through a rigorous set of automated and manual tests
+before being released.
 
 We would be delighted to hear how these releases work out for you! You can
 open [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
