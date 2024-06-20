@@ -40,7 +40,7 @@ page. {{< /note >}}
 The `linkerd-crds` chart sets up the CRDs linkerd requires:
 
 ```bash
-helm install linkerd-crds linkerd/linkerd-crds \
+helm install linkerd-crds linkerd-edge/linkerd-crds \
   -n linkerd --create-namespace
 ```
 
@@ -62,7 +62,7 @@ helm install linkerd-control-plane \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
-  linkerd/linkerd-control-plane
+  linkerd-edge/linkerd-control-plane
 ```
 
 {{< note >}} If you are using [Linkerd's CNI plugin](../../features/cni/), you
@@ -80,7 +80,7 @@ specified in those files.
 You can get `values-ha.yaml` by fetching the chart file:
 
 ```bash
-helm fetch --untar linkerd/linkerd-control-plane
+helm fetch --untar linkerd-edge/linkerd-control-plane
 ```
 
 Then use the `-f` flag to provide this override file. For example:
@@ -92,7 +92,7 @@ helm install linkerd-control-plane \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
   --set-file identity.issuer.tls.keyPEM=issuer.key \
   -f linkerd-control-plane/values-ha.yaml \
-  linkerd/linkerd-control-plane
+  linkerd-edge/linkerd-control-plane
 ```
 
 ## Upgrading with Helm
@@ -103,9 +103,9 @@ First, make sure your local Helm repos are updated:
 helm repo update
 
 helm search repo linkerd
-NAME                          CHART VERSION          APP VERSION              DESCRIPTION
-linkerd/linkerd-crds          <chart-semver-version>                          Linkerd gives you observability, reliability, and securit...
-linkerd/linkerd-control-plane <chart-semver-version> {{% latestedge %}}       Linkerd gives you observability, reliability, and securit...
+NAME                               CHART VERSION          APP VERSION              DESCRIPTION
+linkerd-edge/linkerd-crds          <chart-semver-version>                          Linkerd gives you observability, reliability, and securit...
+linkerd-edge/linkerd-control-plane <chart-semver-version> {{% latestedge %}}       Linkerd gives you observability, reliability, and securit...
 ```
 
 During an upgrade, you must choose whether you want to reuse the values in the
@@ -136,10 +136,10 @@ your `values.yaml` file. Then you can use:
 
 ```bash
 # the linkerd-crds chart currently doesn't have a values.yaml file
-helm upgrade linkerd-crds linkerd/linkerd-crds
+helm upgrade linkerd-crds linkerd-edge/linkerd-crds
 
 # whereas linkerd-control-plane does
-helm upgrade linkerd-control-plane linkerd/linkerd-control-plane --reset-values -f values.yaml --atomic
+helm upgrade linkerd-control-plane linkerd-edge/linkerd-control-plane --reset-values -f values.yaml --atomic
 ```
 
 The `--atomic` flag will ensure that all changes are rolled back in case the
