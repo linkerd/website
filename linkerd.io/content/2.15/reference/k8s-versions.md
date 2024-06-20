@@ -23,6 +23,17 @@ update the chart below as these situations arise.
 | `stable-2.12`   | `1.21`                     | `1.24`                     |
 | `stable-2.13`   | `1.21`                     | `1.28`                     |
 | `stable-2.14`   | `1.21`                     | `1.28`                     |
+| `stable-2.15`   | `1.21`                     | `1.28`                     |
+{{< /table >}}
+
+As of February 2024, the Linkerd open source projec itself no longer provides stable release artifacts but only edge releases ([see why](https://buoyant.io/blog/announcing-linkerd-2-15-vm-workloads-spiffe-identities "Link to the announcement of Linkerd 2.15")).
+
+Following are the edge releases and the supported Kubernetes versions:
+
+{{< table >}}
+| Linkerd Version | Corresponding Stable/[BEL](https://buoyant.io/linkerd-enterprise "Link to Buoyant Enterprise Linkerd (BEL) page") Release | Minimum Kubernetes Version | Maximum Kubernetes Version |
+|-----------------|----------------------------------|----------------------------|----------------------------|
+|                 |                                  |                            |                            |
 {{< /table >}}
 
 Notes:
