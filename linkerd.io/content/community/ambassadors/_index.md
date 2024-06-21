@@ -53,13 +53,6 @@ ambassadors:
     github: https://github.com/fredrkl
     twitter: https://twitter.com/fredrkl
     linkedin: https://www.linkedin.com/in/fredrikklingenberg/
-  - name: Kasper Nissen
-    job_title: Lead Platform Architect
-    image: /images/ambassadors/profile/kasper-nissen.png
-    flag: 🇩🇰
-    github: https://github.com/kaspernissen
-    twitter: https://twitter.com/phennex
-    linkedin: https://www.linkedin.com/in/kaspernissen/
   - name: María Teresa Rojas
     job_title: SRE
     image: /images/ambassadors/profile/maria-rojas.png
@@ -78,4 +71,11 @@ ambassadors:
     image: '/images/ambassadors/profile/steve-gray.png'
     flag: 🇦🇺
     linkedin: https://www.linkedin.com/in/eventualconsistency/
+  - name: Kasper Nissen
+    job_title: Lead Platform Architect
+    image: /images/ambassadors/profile/kasper-nissen.png
+    flag: 🇩🇰
+    github: https://github.com/kaspernissen
+    twitter: https://twitter.com/phennex
+    linkedin: https://www.linkedin.com/in/kaspernissen/
 ---
