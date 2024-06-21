@@ -4,7 +4,7 @@
         {{ range . }}
         <div class="column is-6">
 
-          {{ if eq .name "Kasper Nissen" }}
+          {{ if .highlight }}
           <div class="box is-flex is-justify-content-flex-start is-align-items-center px-5 py-5 community-card highlight">
             <figure class="image is-128x128 mr-4 is-flex-shrink-0">
               <img class="is-rounded" src="{{ .image }}" alt="{{ .name }}" />
