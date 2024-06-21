@@ -22,7 +22,8 @@ chart below as these situations arise.
 | `2.12`          | `1.21`                     | `1.24`                     |
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
-| `2.15`          | `1.22`                     | `1.30`                     |
+| `stable-2.15`   | `1.21`                     | `1.29`                     |
+| `edge-24.2.4` and higher  | `1.21`           | `1.29`                     |
 {{< /table >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in
