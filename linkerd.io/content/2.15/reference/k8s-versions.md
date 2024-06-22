@@ -14,6 +14,8 @@ Kubernetes 1.28. In some cases, later versions of Kubernetes end up making
 changes that cause older versions of Linkerd to not work: we will update the
 chart below as these situations arise.
 
+### Stable Releases
+
 {{< table >}}
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
@@ -22,11 +24,20 @@ chart below as these situations arise.
 | `2.12`          | `1.21`                     | `1.24`                     |
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
-| `stable-2.15`   | `1.21`                     | `1.29`                     |
-| `edge-24.2.4` and higher  | `1.21`           | `1.29`                     |
+| `2.15`          | `1.21`                     | `1.29`                     |
 {{< /table >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in
 a minor release, which is why the table above only lists major versions. One
 known exception: Linkerd 2.11.0 supported Kubernetes 1.16, but 2.11.1 and
 later required Kubernetes 1.17 as shown in the table above.
+
+### Edge Releases
+
+{{< table >}}
+| Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
+|-----------------|----------------------------|----------------------------|
+| `edge-24.2.4` and higher  | `1.21`           | `1.29`                     |
+{{< /table >}}
+
+Since edge releases are not semantically versioned, it is possible for the supported Kubernetes versions to change at any given edge release.
