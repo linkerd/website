@@ -289,6 +289,27 @@
 
 .community-card {
   height: 100%;
+  position: relative;
+  &.highlight {
+    background-color: #EAF3FA;
+  }
+}
+.emeritus{
+  position: absolute;
+  right: 1rem;
+  padding: 0 0.8rem;
+  top: 1rem;
+  width: auto;
+  background-color: #64f9bf;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  @media (max-width: 912px) {
+    right: 0;
+    top: 0;
+    padding: 0 0.7rem;
+    font-size: 0.7rem;
+    border-radius: 0px;
+  }
 }
 
 .adopters-case-studies__quote {
