@@ -54,6 +54,12 @@ digits of the year, `m` is the numeric month, and `n` is numeric edge release
 count for that month. For example, `edge-24.1.3` is the third edge release
 shipped in January 2024.
 
+Each major version has a corresponding edge release, indicated by
+`version-2.X` tags: for example, there is a
+[`version-2.15`](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
+tag that corresponds to `edge-24.2.4`. Of course, you may choose to run later
+edge releases, which will include further bugfixes and enhancements.
+
 Using edge release artifacts and reporting bugs helps us ensure a rapid pace of
 development and is a great way to help Linkerd. We publish edge release guidance
 as part of the release notes and strive to always provide production-ready
