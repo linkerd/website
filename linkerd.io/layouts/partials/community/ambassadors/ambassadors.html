@@ -3,6 +3,39 @@
     <div class="columns column is-multiline">
         {{ range . }}
         <div class="column is-6">
+
+          {{ if .highlight }}
+          <div class="box is-flex is-justify-content-flex-start is-align-items-center px-5 py-5 community-card highlight">
+            <figure class="image is-128x128 mr-4 is-flex-shrink-0">
+              <img class="is-rounded" src="{{ .image }}" alt="{{ .name }}" />
+            </figure>
+            <div>
+              <h3 class="is-size-5 has-text-weight-bold">{{ .name }} {{ .flag }}</h3>
+              <p class="has-text-weight-light mb-2">{{ .job_title }}</p>
+               
+                  <div class="is-flex">
+                    {{ with .github }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">       
+                          <img class="image is-32x32" src="/images/ambassadors/github-icon-navy.svg" alt="github icon">
+                      </a>
+                    {{ end }}
+                    {{ with .twitter }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                          <img class="image is-32x32" src="/images/ambassadors/twitter-icon-navy.svg" alt="twitter icon">
+                      </a>
+                    {{ end }}
+                    {{ with .linkedin }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                          <img class="image is-32x32" src="/images/ambassadors/linkedin-icon-navy.svg" alt="linkedin icon">
+                      </a>
+                    {{ end }}
+                  </div>
+            </div>
+            
+            <div class="emeritus">Emeritus</div>
+            
+          </div>
+          {{ else }}
           <div class="box is-flex is-justify-content-flex-start is-align-items-center px-5 py-5 community-card">
             <figure class="image is-128x128 mr-4 is-flex-shrink-0">
               <img class="is-rounded" src="{{ .image }}" alt="{{ .name }}" />
@@ -10,25 +43,27 @@
             <div>
               <h3 class="is-size-5 has-text-weight-bold">{{ .name }} {{ .flag }}</h3>
               <p class="has-text-weight-light mb-2">{{ .job_title }}</p>
-              <div class="is-flex">
-                {{ with .github }}
-                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-                    <img class="image is-32x32" src="/images/ambassadors/github-icon.svg" alt="github icon">
-                  </a>
-                {{ end }}
-                {{ with .twitter }}
-                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-                    <img class="image is-32x32" src="/images/ambassadors/twitter-icon.svg" alt="twitter icon">
-                  </a>
-                {{ end }}
-                {{ with .linkedin }}
-                  <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
-                    <img class="image is-32x32" src="/images/ambassadors/linkedin-icon.svg" alt="linkedin icon">
-                  </a>
-                {{ end }}
-              </div>
+               
+                  <div class="is-flex">
+                    {{ with .github }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">       
+                          <img class="image is-32x32" src="/images/ambassadors/github-icon.svg" alt="github icon">
+                      </a>
+                    {{ end }}
+                    {{ with .twitter }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                          <img class="image is-32x32" src="/images/ambassadors/twitter-icon.svg" alt="twitter icon">
+                      </a>
+                    {{ end }}
+                    {{ with .linkedin }}
+                      <a class="is-block mr-2" href="{{ . }}" target="_blank" rel="noopener noreferrer">
+                          <img class="image is-32x32" src="/images/ambassadors/linkedin-icon.svg" alt="linkedin icon">
+                      </a>
+                    {{ end }}
+                  </div>           
             </div>
           </div>
+          {{ end }}
         </div>
         {{ end }}
     </div>
