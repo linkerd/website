@@ -1,7 +1,7 @@
 {{ $latestVersion := site.Params.latest_linkerd2_stable_version }}
-{{ $pathParts := split .page.File.Path "/" }}
-{{ $docsVersion := index $pathParts 0 }}
-{{ $latestDocsPath := delimit (append (after 1 $pathParts) (slice "" $latestVersion)) "/" }}
+{{ $pathParts := split .page.Path "/" }}
+{{ $docsVersion := index $pathParts 1 }}
+{{ $latestDocsPath := delimit (append (after 2 $pathParts) (slice "" $latestVersion)) "/" }}
 
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
