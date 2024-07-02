@@ -1,18 +1,22 @@
+{{- /* Ouput a json search index of all docs in the 2.15 section */ -}}
 {{- $pages := where site.Pages "Section" "eq" "2.15" -}}
-[
-  {{- range $index, $page := $pages -}}
-    {{- if gt $index 0 -}} , {{- end -}}
-    {{- $ancestors := slice "linkerd.io" -}}
-    {{- range .Ancestors.Reverse -}}
-      {{- if .IsHome }}{{ continue }}{{ end -}}
-      {{- $ancestors = $ancestors | append .Title -}}
-    {{- end -}}
-    {{- $entry := dict "uri" $page.Permalink -}}
-    {{- $entry = merge $entry (dict "title" $page.Title) -}}
-    {{- $entry = merge $entry (dict "ancestors" $ancestors) -}}
-    {{- $entry = merge $entry (dict "content" ($page.Plain | htmlUnescape | truncate 3000)) -}}
-    {{- $entry = merge $entry (dict "description" $page.Description) -}}
-    {{- $entry = merge $entry (dict "keywords" $page.Keywords) -}}
-    {{- $entry | jsonify -}}
+{{- $.Scratch.Add "search-index" slice -}}
+{{- range $index, $page := $pages -}}
+  {{- $ancestors := slice "linkerd.io" -}}
+  {{- range $page.Ancestors.Reverse -}}
+    {{- if .IsHome }}{{ continue }}{{ end -}}
+    {{- $ancestors = $ancestors | append .Title -}}
   {{- end -}}
-]
+  {{- $.Scratch.Add
+    "search-index"
+    (dict
+      "uri"         $page.Permalink
+      "title"       $page.Title
+      "ancestors"   $ancestors
+      "content"     ($page.Plain | htmlUnescape | truncate 3000)
+      "description" $page.Description
+      "keywords"    $page.Keywords
+    )
+  -}}
+{{- end -}}
+{{- $.Scratch.Get "search-index" | jsonify -}}

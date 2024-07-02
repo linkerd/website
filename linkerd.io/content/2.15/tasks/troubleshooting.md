@@ -881,12 +881,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project is no longer producing open source
-stable release artifacts. Please read the
-[2.15 announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
-for details.
-
-See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
+As of February 2024, the Linkerd project itself only produces [edge
+release](/releases/) artifacts. For more details, read the [Releases and
+Versions](/releases/) page.
 
 <!-- markdownlint-disable MD036 -->
 
@@ -919,12 +916,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project is no longer producing open source
-stable release artifacts. Please read the
-[2.15 announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
-for details.
-
-See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
+As of February 2024, the Linkerd project itself only produces [edge
+release](/releases/) artifacts. For more details, read the [Releases and
+Versions](/releases/) page.
 
 <!-- markdownlint-disable MD036 -->
 
