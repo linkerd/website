@@ -70,9 +70,12 @@ can find them in the release notes for each release.
 This release changes the proxy-init container to always request the same
 amount of memory and CPU as the proxy itself, and removes the ability to
 explicitly set proxy-init's requests because there's now no need to do so.
-(This doesn't increase the resources required for the pod as a whole, because
-the proxy-init container completes before the proxy starts, letting the proxy
-reuse resources requested by the proxy-init container.)
+(This doesn't increase the resources required for the pod as a
+whole, because the proxy-init container completes before the proxy
+starts, letting the proxy reuse resources requested by the proxy-init
+container. For full details, check out [issue #11320][comment]).
+
+[comment]: https://github.com/linkerd/linkerd2/issues/11320#issuecomment-2186383081
 
 It also continues work on upcoming GRPCRoute support. Finally, if
 `proxy.logHTTPHeaders` is somehow empty, it correctly defaults to "off".
