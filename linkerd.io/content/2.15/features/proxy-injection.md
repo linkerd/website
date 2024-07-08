@@ -34,7 +34,7 @@ For each pod, two containers are injected:
    Container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
    that configures `iptables` to automatically forward all incoming and
    outgoing TCP traffic through the proxy. (Note that this container is not
-   present if the [Linkerd CNI Plugin](../cni/) has been enabled.)
+   injected if the [Linkerd CNI Plugin](../cni/) has been enabled.)
 1. `linkerd-proxy`, the Linkerd data plane proxy itself.
 
 Note that simply adding the annotation to a resource with pre-existing pods
@@ -42,6 +42,16 @@ will not automatically inject those pods. You will need to update the pods
 (e.g. with `kubectl rollout restart` etc.) for them to be injected. This is
 because Kubernetes does not call the webhook until it needs to update the
 underlying resources.
+
+## Exclusions
+
+At install time, Kubernetes is configured to avoid calling Linkerd's proxy
+injector for resources in the `kube-system` and `cert-manager` namespaces. This
+is to prevent injection on components that are themselves required for Linkerd
+to function.
+
+The injector will not run on components in these namespaces, regardless of any
+`linkerd.io/inject` annotations.
 
 ## Overriding injection
 
