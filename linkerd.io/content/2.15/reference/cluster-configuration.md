@@ -78,6 +78,8 @@ gcloud compute firewall-rules describe gke-to-linkerd-control-plane
 
 ## Cilium
 
+### Turn Off Socket-Level Load Balancing
+
 Cilium can be configured to replace kube-proxy functionality through eBPF. When
 running in kube-proxy replacement mode, connections to a `ClusterIP` service
 will be established directly to the service's backend at the socket level (i.e.
@@ -96,6 +98,15 @@ balancing for
 pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) through the
 CLI option `--config bpf-lb-sock-hostns-only=true`, or through the Helm value
 `socketLB.hostNamespaceOnly=true`.
+
+### Disable Exclusive Mode
+
+If you're using Cilium as your CNI and then want to install
+[linkerd-cni](../../features/cni/) on top of it, make sure you install Cilium
+with the option `cni.exclusive=false`. This avoids Cilium taking ownership over
+the CNI configurations directory. Other CNI plugins like linkerd-cni install
+themselves and operate in chain mode with the other deployed plugins by
+deploying their configuration into this directory.
 
 ## Lifecycle Hook Timeout
 

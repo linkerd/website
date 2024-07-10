@@ -79,26 +79,6 @@ See the Kubernetes
 for more information on the admission webhook failure policy.
 {{< /note >}}
 
-## Exclude the kube-system namespace
-
-Per recommendation from the Kubernetes
-[documentation](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#avoiding-operating-on-the-kube-system-namespace),
-the proxy injector should be disabled for the `kube-system` namespace.
-
-This can be done by labeling the `kube-system` namespace with the following
-label:
-
-```bash
-kubectl label namespace kube-system config.linkerd.io/admission-webhooks=disabled
-```
-
-The Kubernetes API server will not call the proxy injector during the admission
-phase of workloads in namespace with this label.
-
-If your Kubernetes cluster have built-in reconcilers that would revert any changes
-made to the `kube-system` namespace, you should loosen the proxy injector
-failure policy following these [instructions](#proxy-injector-failure-policy).
-
 ## Pod anti-affinity rules
 
 All critical control plane components are deployed with pod anti-affinity rules
