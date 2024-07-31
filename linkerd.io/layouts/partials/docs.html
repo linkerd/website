@@ -1,7 +1,15 @@
 {{ $latestVersion := site.Params.latest_linkerd2_stable_version }}
-{{ $pathParts := split .page.Path "/" }}
-{{ $docsVersion := index $pathParts 1 }}
-{{ $latestDocsPath := delimit (append (after 2 $pathParts) (slice "" $latestVersion)) "/" }}
+{{/*
+  By default, not all pages are backed by a file, including top level section
+  pages, so verifying file existence before processing `.Path`
+*/}}
+{{ $docsVersion := "" }}
+{{ $latestDocsPath := "" }}
+{{ with .page.File }}
+  {{ $pathParts := split .Path "/" }}
+  {{ $docsVersion = index $pathParts 0 }}
+  {{ $latestDocsPath = delimit (append (after 1 $pathParts) (slice "" $latestVersion)) "/" }}
+{{ end }}
 
 <div class="wrapper docs">
   <div class="columns is-fullwidth is-gapless is-tablet">
@@ -36,7 +44,7 @@
             </div>
             <div class="message-body">
 	      This documentation is for an older version of Linkerd.
-              {{ if (fileExists $latestDocsPath) }}
+              {{ if and $latestDocsPath (fileExists $latestDocsPath) }}
 	        You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
                 documentation</a> instead.
               {{ else }}
@@ -51,7 +59,7 @@
             </div>
             <div class="message-body">
 	            This documentation is for the <a href="/releases/">edge</a> release of Linkerd.
-              {{ if (fileExists $latestDocsPath) }}
+              {{ if and $latestDocsPath (fileExists $latestDocsPath) }}
 	              You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
                 documentation</a> instead.
               {{ else }}
