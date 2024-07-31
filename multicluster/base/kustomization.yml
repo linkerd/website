@@ -1,5 +1,5 @@
 resources:
-  - github.com/stefanprodan/podinfo/kustomize?ref=4.0.2
+  - github.com/stefanprodan/podinfo/kustomize?ref=6.7.0
   - frontend.yml
   - ns.yml
 
