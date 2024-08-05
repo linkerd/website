@@ -1087,31 +1087,6 @@ the Pod and Service. See
 
 These checks are ran if Linkerd has been installed in HA mode.
 
-### √ pod injection disabled on kube-system {#l5d-injection-disabled}
-
-Example warning:
-
-```bash
-‼ pod injection disabled on kube-system
-    kube-system namespace needs to have the label config.linkerd.io/admission-webhooks: disabled if HA mode is enabled
-    see https://linkerd.io/checks/#l5d-injection-disabled for hints
-```
-
-Ensure the kube-system namespace has the
-`config.linkerd.io/admission-webhooks:disabled` label:
-
-```bash
-$ kubectl get namespace kube-system -oyaml
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: kube-system
-  annotations:
-    linkerd.io/inject: disabled
-  labels:
-    config.linkerd.io/admission-webhooks: disabled
-```
-
 ### √ multiple replicas of control plane pods {#l5d-control-plane-replicas}
 
 Example warning:
