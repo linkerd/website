@@ -24,13 +24,14 @@
 {{ end }}
 <meta name="twitter:title" content="{{ .Title }}"/>
 <meta name="twitter:description" content="{{ partial "description.html" . }}" />
-{{ with .Site.Social.twitter -}}
-  <meta name="twitter:site" content="@{{ . }}"/>
-{{ end -}}
-{{ range .Site.Authors }}
-  {{ with .twitter -}}
-    <meta name="twitter:creator" content="@{{ . }}"/>
-  {{ end -}}
-{{ end -}}
-
-
+{{ with site.Params.social }}
+  {{ if reflect.IsMap . }}
+    {{ with .twitter }}
+      {{ $content := . }}
+      {{ if not (strings.HasPrefix . "@") }}
+        {{ $content = printf "@%v" . }}
+      {{ end }}
+      <meta name="twitter:site" content="{{ $content }}">
+    {{ end }}
+  {{ end }}
+{{ end }}
