@@ -39,6 +39,3 @@ later required Kubernetes 1.17 as shown in the table above.
 |-----------------|----------------------------|----------------------------|
 | `edge-24.2.4` and higher  | `1.21`           | `1.29`                     |
 {{< /table >}}
-
-Since edge releases are not semantically versioned, it is possible for the
-supported Kubernetes versions to change at any given edge release.
