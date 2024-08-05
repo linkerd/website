@@ -104,9 +104,10 @@ more details on how this works.)
 Let's use Linkerd to discover the root cause of this app's failures. Linkerd's
 proxy exposes rich metrics about the traffic that it processes, including HTTP
 response codes. The metric that we're interested is `outbound_http_route_backend_response_statuses_total`
-and will help us identify where HTTP errors are occuring. We can use the `linkerd diagnostics proxy-metrics`
-command to get proxy metrics. Pick one of your webapp pods and run the following
-command to get the metrics for HTTP 500 responses:
+and will help us identify where HTTP errors are occuring. We can use the
+`linkerd diagnostics proxy-metrics` command to get proxy metrics. Pick one of
+your webapp pods and run the following command to get the metrics for HTTP 500
+responses:
 
 ```bash
 linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
@@ -243,7 +244,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep http_status=\"500\"
 ```
 
-```
+```text
 outbound_http_route_backend_response_statuses_total{
   parent_group="core",
   parent_kind="Service",
@@ -291,7 +292,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep retry
 ```
 
-```
+```text
 outbound_http_route_retry_limit_exceeded_total{...} 222
 outbound_http_route_retry_overflow_total{...} 0
 outbound_http_route_retry_requests_total{...} 469
@@ -331,7 +332,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep outbound_http_route_request_statuses_total | grep books-create
 ```
 
-```
+```text
 outbound_http_route_request_statuses_total{
   [...]
   route_name="books-create",
