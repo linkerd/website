@@ -104,6 +104,8 @@ title = "Linkerd"
   latest_release_version = "1.7.5"
   latest_linkerd2_stable_version = "2.15"
   logo = "/images/identity/png/transparent_background/1x/linkerd_primary_color_black_transparent.png"
+  [params.social]
+    twitter = "Linkerd"
 [permalinks]
   blog = "/:year/:month/:day/:slug/"
 [privacy.twitter]
