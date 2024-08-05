@@ -52,21 +52,6 @@
               {{ end }}
             </div>
           </div>
-          {{ else if eq $docsVersion "2-edge" }}
-          <div class="message">
-            <div class="message-header">
-              This is not the stable version of Linkerd!
-            </div>
-            <div class="message-body">
-	            This documentation is for the <a href="/releases/">edge</a> release of Linkerd.
-              {{ if and $latestDocsPath (fileExists $latestDocsPath) }}
-	              You may want the <a href="{{ relref .page $latestDocsPath }}">Linkerd {{ $latestVersion }} (current)
-                documentation</a> instead.
-              {{ else }}
-                In Linkerd {{ $latestVersion }} (current), this document does not exist.
-              {{ end }}
-            </div>
-          </div>
         {{ end }}
 
         <h1 class="title is-1 has-text-color">{{ .page.Title }}</h1>
