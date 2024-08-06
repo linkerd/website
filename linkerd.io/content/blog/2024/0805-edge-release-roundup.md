@@ -58,7 +58,7 @@ upcoming Linkerd 2.16 release. Of course, each edge release has bugfixes and
 _many_ dependency updates; we won't list them all here, but you can find them
 in the release notes for each release.
 
-# [`edge-24.7.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.5) (July 26, 2024)
+### [`edge-24.7.5`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.5) (July 26, 2024)
 
 This release supports Server-scoped default policy, policy audit mode,
 GRPCRoute, and new retry and timeout configuration (including for Gateway API
@@ -83,21 +83,21 @@ resources). There's a lot to unpack here:
   retries provided when you configure retries in a Server: you will configure
   a maximum number of retries rather than a percentage of retries.
 
-# [`edge-24.7.4`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.4) (July 25, 2024)
+### [`edge-24.7.4`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.4) (July 25, 2024)
 
 This release correctly supports IPv6 in the Linkerd CNI `network-validator`
 and `repair-controller` containers.
 
-# [`edge-24.7.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.3) (July 19, 2024)
+### [`edge-24.7.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.3) (July 19, 2024)
 
 This release updates the documentation on what `networkValidator.connectAddr`
 in the Helm chart means (thanks, [@djryanj]!).
 
-# [`edge-24.7.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.2) (July 15, 2024)
+### [`edge-24.7.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.2) (July 15, 2024)
 
 This release bumps dependencies but has no functional changes from `edge-24.7.1`.
 
-# [`edge-24.7.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.1) (July 4, 2024)
+### [`edge-24.7.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.7.1) (July 4, 2024)
 
 This release removes the empty `shortnames` fields from the ExternalWorkload CRD.
 
