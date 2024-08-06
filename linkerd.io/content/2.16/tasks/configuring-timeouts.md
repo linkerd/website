@@ -9,7 +9,7 @@ of time to wait for a response from a remote service to complete after the
 request is sent. If the timeout elapses without receiving a response, Linkerd
 will cancel the request and return a [504 Gateway Timeout] response.
 
-Timeouts can be specified by adding annotations to HttpRotue, GrpcRoute, or
+Timeouts can be specified by adding annotations to HTTPRoute, GRPCRoute, or
 Service resources.
 
 {{< warning >}}
