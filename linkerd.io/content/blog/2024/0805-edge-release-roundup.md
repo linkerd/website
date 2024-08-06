@@ -23,10 +23,10 @@ greatest!
 
 ## How to give feedback
 
-Remember, edge releases are a snapshot of our current development work on
-`main`; by definition, they always have the most recent features but they may
-have incomplete features, features that end up getting rolled back later, or
-(like all software) even bugs. That said, edge releases *are* intended for
+Edge releases are a snapshot of our current development work on `main`; by
+definition, they always have the most recent features but they may have
+incomplete features, features that end up getting rolled back later, or (like
+all software) even bugs. That said, edge releases *are* intended for
 production use, and go through a rigorous set of automated and manual tests
 before being released.
 
