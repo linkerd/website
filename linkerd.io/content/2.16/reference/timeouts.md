@@ -7,14 +7,15 @@ Linkerd can be configured with timeouts to limit the maximum amount of time on
 a request before aborting.
 
 Timeouts are a client-side behavior, and are therefore performed by the
-outbound side of the Linkerd proxy.[^1] Note that if these timeouts are reached,
-the request will not be retried. Retry timeouts can be configured as part of
+outbound side of the Linkerd proxy.[^1] Note that timeouts configured in this
+way are not retryable -- if these timeouts are reached, the request will not be
+retried. Retryable timeouts can be configured as part of
 [retry configuration](../retries/).
 
 ## Configuring Timeouts
 
 Timeous are configured by a set of annotations which can be set on a Kubernetes
-Service resource or on a HttpRoute or GrpcRoute which has a Service as a parent.
+Service resource or on a HTTPRoute or GRPCRoute which has a Service as a parent.
 Client proxies will then fail requests to that Service or route once they exceed
 the timeout. If any timeout configuration annotations are present on a route
 resource, they override all timeout configuration annotations on the parent
@@ -33,6 +34,11 @@ request-response stream is in flight.
 may be in-flight.
 + `timeout.linkerd.io/idle`: The maximum amount of time a stream may be idle,
 regardless of its state.
+
+If the [request timeout](https://gateway-api.sigs.k8s.io/api-types/httproute/#timeouts-optional)
+field is set on an HTTPRoute resource, it will be used as the
+`timeout.linkerd.io/request` timeout. However, if both the field and the
+annotation are specified, the annotation will take priority.
 
 ## Examples
 

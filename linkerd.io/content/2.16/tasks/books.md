@@ -147,8 +147,9 @@ responses from the `books` Service on port 7002.
 
 We know that the webapp component is getting 500s from the books component, but
 it would be great to narrow this down further and get per route metrics. To do
-this, we leverage the Gateway API and define a set of HTTPRoute resources, each
-attached to the `books` Service by specifying it as their `parent_ref`.
+this, we take advantage of the Gateway API and define a set of HTTPRoute
+resources, each attached to the `books` Service by specifying it as their
+`parent_ref`.
 
 ```bash
 kubectl apply -f - <<EOF
@@ -207,7 +208,7 @@ spec:
 EOF
 ```
 
-We can then check that these HTTPRoute have been accepted by their parent
+We can then check that these HTTPRoutes have been accepted by their parent
 Service by checking their status subresource:
 
 ```bash
@@ -299,10 +300,12 @@ outbound_http_route_retry_requests_total{...} 469
 outbound_http_route_retry_successes_total{...} 247
 ```
 
-This tells us that Linkerd make a total of 469 retry requests and 247 of those
-were successful and the other 222 were not and hit the default retry limit of
-`1`. We can improve this further by increasing this limit to allow more than
-1 retry per request:
+This tells us that Linkerd made a total of 469 retry requests, of which 247 were
+successful. The remaining 222 failed and could not be retried again, since we
+didn't raise the retry limit from its default of 1.
+
+We can improve this further by increasing this limit to allow more than 1 retry
+per request:
 
 ```bash
 kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \

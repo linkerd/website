@@ -4,10 +4,11 @@ description = "Linkerd can perform service-specific retries and timeouts."
 weight = 3
 +++
 
-Automatic retries are one the most powerful and useful mechanisms a service mesh
-has for gracefully handling partial or transient application failures.
+Timeouts and automatic retries are two of the most powerful and useful
+mechanisms a service mesh has for gracefully handling partial or transient
+application failures.
 
-Timeouts and retries can be configured using [HTTPRoute], GrpcRoute, or Service
+Timeouts and retries can be configured using [HTTPRoute], GRPCRoute, or Service
 resources. Retries and timeouts are always performed on the *outbound* (client)
 side.
 
