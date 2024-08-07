@@ -105,9 +105,9 @@ proxy and the proxy in the pod that accepted the connection is called the
 *inbound* proxy.
 
 The *outbound* proxy is responsible for service discovery, load balancing,
-retries, and timeouts. The *inbound* proxy is responsible for enforcing
-authorization policy. Both *inbound* and *outbound* proxies report traffic
-metrics about the traffic they send and receive.
+circuit breakers, retries, and timeouts. The *inbound* proxy is responsible for
+enforcing authorization policy. Both *inbound* and *outbound* proxies report
+traffic metrics about the traffic they send and receive.
 
 ### Linkerd init container
 
