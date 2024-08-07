@@ -96,6 +96,19 @@ You can read more about these micro-proxies here:
 * [Under the hood of Linkerd's state-of-the-art Rust proxy,
   Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 
+### Meshed Conncections
+
+When one pod establishes a TCP connection to another pod and both of those pods
+are injected with the Linkerd proxy, we say that the connection is *meshed*.
+The proxy in the pod that initiated the connection is called the *outbound*
+proxy and the proxy in the pod that accepted the connection is called the
+*inbound* proxy.
+
+The *outbound* proxy is responsible for service discovery, load balancing,
+circuit breakers, retries, and timeouts. The *inbound* proxy is responsible for
+enforcing authorization policy. Both *inbound* and *outbound* proxies report
+traffic metrics about the traffic they send and receive.
+
 ### Linkerd init container
 
 The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
