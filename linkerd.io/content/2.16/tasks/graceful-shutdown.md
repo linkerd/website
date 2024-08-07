@@ -139,7 +139,7 @@ native sidecar or by manually shutting down the proxy.
 
 ### Native Sidecar
 
-If you use the `--set nativeSidecar=true` flag when installing Linkerd, the
+If you use the `--set proxy.nativeSidecar=true` flag when installing Linkerd, the
 Linkerd proxy will run as a [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
 and will automatically shutdown when the main containers in the pod terminate.
 Native sidecars were added in Kubernetes v1.28 and are available by default in
@@ -160,5 +160,5 @@ automatically call the proxy's `/shutdown` endpoint when it completes.
 
 For security reasons, the proxy's `/shutdown` endpoint is disabled by default.
 In order to be able to manually shutdown the proxy, you must enable this
-endpoint by installing Linkerd with the `--set enableShutdownEndpoint=true`
+endpoint by installing Linkerd with the `--set proxy.enableShutdownEndpoint=true`
 flag.
