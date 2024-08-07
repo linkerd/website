@@ -6,6 +6,12 @@ aliases = [
 ]
 +++
 
+{{< note >}}
+[HTTPRoutes](../httproute/) are the recommended method for getting per-route
+metrics, specifying timeouts, and specifying retries. Service profiles continue
+to be supported for backwards compatibility.
+{{< /note >}}
+
 A service profile is a custom Kubernetes resource ([CRD][crd]) that can provide
 Linkerd additional information about a service. In particular, it allows you to
 define a list of routes for the service. Each route uses a regular expression
@@ -24,10 +30,6 @@ To get started with service profiles you can:
 
 - Look into [setting up service profiles](../../tasks/setting-up-service-profiles/)
   for your own services.
-- Understand what is required to see
-  [per-route metrics](../../tasks/getting-per-route-metrics/).
-- [Configure retries](../../tasks/configuring-retries/) on your own services.
-- [Configure timeouts](../../tasks/configuring-timeouts/) on your own services.
 - Glance at the [reference](../../reference/service-profiles/) documentation.
 
 [crd]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/
