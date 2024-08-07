@@ -21,7 +21,7 @@ in a [load balancer](../../features/load-balancing/) (i.e., each Pod in a given
 Service), and failures are tracked at the level of HTTP response status codes.
 
 Circuit breaking is a client-side behavior, and is therefore performed by the
-outbound side of the Linkerd proxy.[^1] Outbound proxies implement circuit
+[outbound] side of the Linkerd proxy.[^1] Outbound proxies implement circuit
 breaking in the load balancer, by marking failing endpoints as _unavailable_.
 When an endpoint is unavailable, the load balancer will not select it when
 determining where to send a given request. This means that if only some
@@ -155,3 +155,4 @@ configure parameters for the consecutive-failures failure accrual policy:
 [5xx server error]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses
 [exp-backoff]:
     https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+[outbound]: ../architecture/#meshed-conncections
