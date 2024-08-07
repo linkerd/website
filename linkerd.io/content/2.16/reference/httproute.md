@@ -14,8 +14,15 @@ largely the same, the `policy.linkerd.io` HTTPRoute resource is an experimental
 version that contains features not yet stabilized in the upstream
 `gateway.networking.k8s.io` HTTPRoute resource, such as
 [timeouts](#httproutetimeouts). Both the Linkerd and Gateway API resource
-definitions may coexist within the same cluster, and both can be used to
-configure policies for use with Linkerd.
+definitions coexist within the same cluster, and both can be used to configure
+policies for use with Linkerd.
+
+If the Gateway API CRDs already exist in your cluster, then Linkerd must be
+installed with the `--set enableHttpRoutes=false` flag during the
+`linkerd install --crds` step or with the `enableHttpRoutes=false` Helm value
+when installing the `linkerd-crds` Helm chart. This avoid conflicts by
+instructing Linkerd to not install the Gateway API CRDs and instead rely on the
+Gateway CRDs which already exist.
 
 This documentation describes the `policy.linkerd.io` HTTPRoute resource. For a
 similar description of the upstream Gateway API HTTPRoute resource, refer to the
