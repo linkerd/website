@@ -65,8 +65,8 @@ GRPCRoute, and new retry and timeout configuration (including for Gateway API
 resources). There's a lot to unpack here:
 
 * **Server-scoped default policy**: you can use the new `accessPolicy` field
-  of a Server override the default inbound policy for that Server. The default
-  is `deny`, for backward compatibility.
+  of a Server to override the default inbound policy for that Server. The
+  default is `deny`, for backward compatibility.
 
 * **Policy audit mode**: setting the default inbound policy or a Server's
   `accessPolicy` to `audit` allows traffic to flow, but logs anything that
