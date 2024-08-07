@@ -6,7 +6,6 @@ languageCode = "en-US"
 sectionPagesMenu = "main"
 theme = "buoyant"
 title = "Linkerd"
-enableEmoji = true
 [mediaTypes."text/netlify"]
   delimiter = ""
 [menu]
