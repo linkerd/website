@@ -134,9 +134,20 @@ containers in the pod complete. However, the Linkerd proxy container runs
 continuously until it receives a TERM signal. Since Kubernetes does not give the
 proxy a means to know when the Cronjob has completed, by default, Job and
 Cronjob pods which have been meshed will continue to run even once the main
-container has completed.
+container has completed. You can address this either by running Linkerd as a
+native sidecar or by manually shutting down the proxy.
 
-To address this, you can issue a POST to the `/shutdown` endpoint on the proxy
+### Native Sidecar
+
+If you use the `--set proxy.nativeSidecar=true` flag when installing Linkerd, the
+Linkerd proxy will run as a [sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
+and will automatically shutdown when the main containers in the pod terminate.
+Native sidecars were added in Kubernetes v1.28 and are available by default in
+Kubernetes v1.29.
+
+### Manual shutdown
+
+Alternatively, you can issue a POST to the `/shutdown` endpoint on the proxy
 once the application completes (e.g. via `curl -X POST
 http://localhost:4191/shutdown`). This will terminate the proxy gracefully and
 allow the Job or Cronjob to complete. These shutdown requests must come on the
@@ -147,5 +158,7 @@ One convenient way to call this endpoint is to wrap your application with the
 application that is called this way (e.g. via `linkerd-await -S $MYAPP`) will
 automatically call the proxy's `/shutdown` endpoint when it completes.
 
-In the future, Kubernetes will hopefully support more container lifecycle hooks
-that will allow Linkerd to handle these situations automatically.
+For security reasons, the proxy's `/shutdown` endpoint is disabled by default.
+In order to be able to manually shutdown the proxy, you must enable this
+endpoint by installing Linkerd with the `--set proxy.enableShutdownEndpoint=true`
+flag.
