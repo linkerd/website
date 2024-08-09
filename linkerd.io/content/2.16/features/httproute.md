@@ -24,6 +24,13 @@ documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
 {{< /note >}}
 
+If the Gateway API CRDs already exist in your cluster, then Linkerd must be
+installed with the `--set enableHttpRoutes=false` flag during the
+`linkerd install --crds` step or with the `enableHttpRoutes=false` Helm value
+when installing the `linkerd-crds` Helm chart. This avoid conflicts by
+instructing Linkerd to not install the Gateway API CRDs and instead rely on the
+Gateway CRDs which already exist.
+
 An HTTPRoute is a Kubernetes resource which attaches to a parent resource, such
 as a [Service]. The HTTPRoute defines a set of rules which match HTTP requests
 to that resource, based on parameters such as the request's path, method, and
