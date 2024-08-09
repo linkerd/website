@@ -13,6 +13,8 @@
 {{ $cli = (index site.Data "cli-2-14").CLIReference }}
 {{ else if eq $docsVersion "2.15" }}
 {{ $cli = (index site.Data "cli-2-15").CLIReference }}
+{{ else if eq $docsVersion "2.16" }}
+{{ $cli = (index site.Data "cli-2-16").CLIReference }}
 {{ else if eq $docsVersion "2-edge" }}
 {{ $cli = (index site.Data "cli-2-edge").CLIReference }}
 {{ end }}
