@@ -10,22 +10,22 @@ types of _release artifacts_.
 
 ## Recent versions
 
-### Linkerd 2.15
+### Linkerd 2.16
 
-Linkerd 2.15 was announced on February 21, 2024.
+Linkerd 2.16 was announced on August 13, 2024.
 
 - **Announcement**:
-  [Announcing Linkerd 2.15 with mesh expansion, native sidecars, and SPIFFE](/2024/02/21/announcing-linkerd-2.15/)
+  [Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC routes; IPv6 support; policy audit mode; VM workload automation; and lots more](/2024/08/13/announcing-linkerd-2.16/)
 - **Code tag**:
-  [version-2.15](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
+  [version-2.16](https://github.com/linkerd/linkerd2/releases/tag/version-2.16)
 - **Corresponding edge release**:
-  [edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
+  [edge-24.8.2](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2)
 
-Known distributions of Linkerd 2.15:
+Known distributions of Linkerd 2.16:
 
 - [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.15.5**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.5/)).
+  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.0**
+  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.0/)).
 
 ## Types of release artifacts
 
