@@ -14,6 +14,8 @@ types of _release artifacts_.
 
 Linkerd 2.16 was announced on August 13, 2024.
 
+<!-- markdownlint-disable MD013 -->
+
 - **Announcement**:
   [Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC routes; IPv6 support; policy audit mode; VM workload automation; and lots more](/2024/08/13/announcing-linkerd-2.16/)
 - **Code tag**:
