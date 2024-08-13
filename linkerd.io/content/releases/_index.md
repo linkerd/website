@@ -59,8 +59,8 @@ shipped in January 2024.
 
 Each major version has a corresponding edge release, indicated by `version-2.X`
 tags: for example, there is a
-[`version-2.15`](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
-tag that corresponds to `edge-24.2.4`. Of course, you may choose to run later
+[`version-2.16`](https://github.com/linkerd/linkerd2/releases/tag/version-2.16)
+tag that corresponds to `edge-24.8.2`. Of course, you may choose to run later
 edge releases, which will include further bugfixes and enhancements.
 
 Using edge release artifacts and reporting bugs helps us ensure a rapid pace of
