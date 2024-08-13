@@ -22,10 +22,19 @@ chart below as these situations arise.
 | `2.12`          | `1.21`                     | `1.24`                     |
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
-| `2.15`          | `1.22`                     | `1.30`                     |
+| `2.15`          | `1.22`                     | `1.29`                     |
 {{< /table >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in
 a minor release, which is why the table above only lists major versions. One
 known exception: Linkerd 2.11.0 supported Kubernetes 1.16, but 2.11.1 and
 later required Kubernetes 1.17 as shown in the table above.
+
+## Edge Releases
+
+{{< table >}}
+| Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
+|-----------------|----------------------------|----------------------------|
+| `edge-22.10.1` - `edge-23.12.1` | `1.21`     | `1.29`                     |
+| `edge-23.12.2` and newer        | `1.22`     | `1.29`                     |
+{{< /table >}}
