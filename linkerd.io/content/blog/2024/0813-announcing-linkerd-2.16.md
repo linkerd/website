@@ -123,6 +123,7 @@ backwards compatibility, this feature is disabled by default, but enabling it is
 a simple boolean. [Learn more](https://linkerd.io/2/features/ipv6/).
 
 ## Other noteworthy changes
+
 * Linkerd 2.16 adds HTTP/2 keep-alive messages by default for all meshed
   communication. This helps Linkerd proactively detect connections that have
   been lost by the operating system or underlying network.
