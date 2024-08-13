@@ -18,8 +18,6 @@ Linkerd 2.16 was announced on August 13, 2024.
 
 - **Announcement**:
   [Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC routes; IPv6 support; policy audit mode; VM workload automation; and lots more](/2024/08/13/announcing-linkerd-2.16/)
-- **Code tag**:
-  [version-2.16](https://github.com/linkerd/linkerd2/releases/tag/version-2.16)
 - **Corresponding edge release**:
   [edge-24.8.2](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2)
 
