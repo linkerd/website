@@ -20,13 +20,13 @@ and translates it into `EndpointSlice`s that are then attached to `Service` obje
 
 ### Spec
 
-- `meshTls` (required) - specified the identity information that Linkerd
+- `meshTLS` (required) - specified the identity information that Linkerd
   requires to establish encrypted connections to this workload
-- `workloadIPs` (required, at most 1) - an ip address that this workload is
+- `workloadIPs` (required, at most 1) - an IP address that this workload is
   reachable on
 - `ports` - a list of port definitions that the workload exposes
 
-### MeshTls
+### MeshTLS
 
 - `identity` (required) - the TLS identity of the workload, proxies require this
   value to establish TLS connections with the workload
@@ -62,7 +62,7 @@ Below is an example of an `ExternalWorkload` resource that specifies a number of
 ports and is selected by a service.
 
 ```yaml
-apiVersion: workload.linkerd.io/v1alpha1
+apiVersion: workload.linkerd.io/v1beta1
 kind: ExternalWorkload
 metadata:
   name: external-workload
@@ -71,11 +71,11 @@ metadata:
     location: vm
     workload_name: external-workload
 spec:
-  meshTls:
+  meshTLS:
     identity: "spiffe://root.linkerd.cluster.local/external-workload"
     serverName: "external-workload.cluster.local"
   workloadIPs:
-  ip: 193.1.4.11
+  - ip: 193.1.4.11
   ports:
   - port: 80
     name: http
