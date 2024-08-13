@@ -10,7 +10,7 @@ featured: true
 
 ![Waves crashing in a stormy sea](/images/pexels-raybilcliff-1494707.jpg)
 
-Today we're happy to announce [Linkerd 2.16](/releases/#linkerd-215), a major
+Today we're happy to announce [Linkerd 2.16](/releases/#linkerd-216), a major
 step forward for Linkerd that adds a whole host of new features, including
 support for IPv6; an "audit mode" for Linkerd's zero trust security policies; a
 new implementation of retries, timeouts, and per-route metrics for HTTPRoute and
