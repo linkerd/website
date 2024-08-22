@@ -40,7 +40,6 @@ recommended best practice.
 
 {{< /warning >}}
 
-
 ## Installing third-party extensions
 
 Third-party extensions require one additional step: you must download the
