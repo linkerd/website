@@ -257,7 +257,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/books.swag
 After applying the service profiles, you'll then need to restart the books app
 deployments so that their proxies can start using the service profiles:
 
-```
+```bash
 kubectl rollout restart deploy -n booksapp
 kubectl rollout status deploy -n booksapp
 ```
