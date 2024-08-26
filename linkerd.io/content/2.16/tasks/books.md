@@ -62,8 +62,11 @@ Once the rollout has completed successfully, you can access the app itself by
 port-forwarding `webapp` locally:
 
 ```bash
-kubectl -n booksapp port-forward svc/webapp 7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 >/dev/null &
 ```
+
+(We redirect to `/dev/null` just so you don't get flooded with "Handling
+connection" messages for the rest of the exercise.)
 
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
@@ -319,14 +322,17 @@ Over time you will see `outbound_http_route_retry_requests_total` and
 ## Timeouts
 
 Linkerd can limit how long to wait before failing outgoing requests to another
-service. For the purposes of this demo, let's set a 25ms timeout for calls to
-the `books-create` route. Your latency numbers will vary depending on the
-characteristics of your cluster. To add a timeout, add the annotation:
+service. For the purposes of this demo, let's set a 15ms timeout for calls to
+the `books-create` route:
 
 ```bash
 kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
-timeout.linkerd.io/request=25ms
+timeout.linkerd.io/request=15ms
 ```
+
+(You may need to adjust the timeout value depending on your cluster – 15ms
+should definitely show some timeouts, but feel free to raise it if you're
+getting so many that it's hard to see what's going on!)
 
 We can see the effects of this timeout by running:
 

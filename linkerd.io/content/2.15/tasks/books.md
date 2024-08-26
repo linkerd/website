@@ -62,8 +62,11 @@ Once the rollout has completed successfully, you can access the app itself by
 port-forwarding `webapp` locally:
 
 ```bash
-kubectl -n booksapp port-forward svc/webapp 7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 >/dev/null &
 ```
+
+(We redirect to `/dev/null` just so you don't get flooded with "Handling
+connection" messages for the rest of the exercise.)
 
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
@@ -251,6 +254,14 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/books.swag
   | kubectl -n booksapp apply -f -
 ```
 
+After applying the service profiles, you'll then need to restart the books app
+deployments so that their proxies can start using the service profiles:
+
+```bash
+kubectl rollout restart deploy -n booksapp
+kubectl rollout status deploy -n booksapp
+```
+
 Verifying that this all works is easy when you use `linkerd viz tap`. Each live
 request will show up with what `:authority` or `Host` header is being seen as
 well as the `:path` and `rt_route` being used. Run:
@@ -414,9 +425,8 @@ PUT /books/{id}.json        books   100.00%   0.7rps          80ms         170ms
 Requests to the `books` service's `PUT /books/{id}.json` route include retries
 for when that service calls the `authors` service as part of serving those
 requests, as described in the previous section. This improves success rate, at
-the cost of additional latency. For the purposes of this demo, let's set a 25ms
-timeout for calls to that route. Your latency numbers will vary depending on the
-characteristics of your cluster. To edit the `books` service profile, run:
+the cost of additional latency. For the purposes of this demo, let's set a 15ms
+timeout for calls to that route:
 
 ```bash
 kubectl -n booksapp edit sp/books.booksapp.svc.cluster.local
@@ -431,8 +441,12 @@ spec:
       method: PUT
       pathRegex: /books/[^/]*\.json
     name: PUT /books/{id}.json
-    timeout: 25ms ### ADD THIS LINE ###
+    timeout: 15ms ### ADD THIS LINE ###
 ```
+
+(You may need to adjust the timeout value depending on your cluster – 15ms
+should definitely show some timeouts, but feel free to raise it if you're
+getting so many that it's hard to see what's going on!)
 
 Linkerd will now return errors to the `webapp` REST client when the timeout is
 reached. This timeout includes retried requests and is the maximum amount of
