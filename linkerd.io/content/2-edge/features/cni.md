@@ -25,6 +25,13 @@ plugin, using _CNI chaining_. It handles only the Linkerd-specific
 configuration and does not replace the need for a CNI plugin.
 {{< /note >}}
 
+{{< note >}}
+If you're installing Linkerd's CNI plugin on top of Cilium, make sure to install
+the latter with the option `cni.exclusive=false`, so Cilium doesn't take
+ownership over the CNI configurations directory, and allows other plugins to
+deploy their configurations there.
+{{< /note >}}
+
 ## Installation
 
 Usage of the Linkerd CNI plugin requires that the `linkerd-cni` DaemonSet be

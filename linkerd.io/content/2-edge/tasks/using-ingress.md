@@ -69,7 +69,8 @@ details](#ingress-details) below.
 Common ingress options that Linkerd has been used with include:
 
 - [Ambassador (aka Emissary)](#ambassador)
-- [Nginx](#nginx)
+- [Nginx (community version)](#nginx-community-version)
+- [Nginx (F5 NGINX version)](#nginx-f5-nginx-version)
 - [Traefik](#traefik)
   - [Traefik 1.x](#traefik-1x)
   - [Traefik 2.x](#traefik-2x)
@@ -107,7 +108,11 @@ For a more detailed guide, we recommend reading [Installing the Emissary ingress
 with the Linkerd service
 mesh](https://buoyant.io/2021/05/24/emissary-and-linkerd-the-best-of-both-worlds/).
 
-## Nginx
+## Nginx (community version)
+
+This section refers to the Kubernetes community version
+of the Nginx ingress controller
+[kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx).
 
 Nginx can be meshed normally: it does not require the [ingress
 mode](#ingress-mode) annotation.
@@ -159,6 +164,41 @@ Kubernetes resources:
 
 Setting the injection annotation at the namespace level would mesh the
 short-lived pod, which would prevent it from terminating as designed.
+
+## Nginx (F5 NGINX version)
+
+This section refers to the Nginx ingress controller
+developed and maintained by F5 NGINX
+[nginxinc/kubernetes-ingress](https://github.com/nginxinc/kubernetes-ingress).
+
+This version of Nginx can also be meshed normally
+and does not require the [ingress mode](#ingress-mode) annotation.
+
+The [VirtualServer/VirtualServerRoute CRD resource](https://docs.nginx.com/nginx-ingress-controller/configuration/virtualserver-and-virtualserverroute-resources/#virtualserverroute)
+should be used in favor of the `ingress` resource (see
+[this Github issue](https://github.com/nginxinc/kubernetes-ingress/issues/2529)
+for more information).
+
+The `use-cluster-ip` field should be set to `true`. For example:
+
+```yaml
+apiVersion: k8s.nginx.org/v1
+kind: VirtualServer
+metadata:
+  name: emojivoto-web-ingress
+  namespace: emojivoto
+spec:
+  ingressClassName: nginx
+  upstreams:
+    - name: web
+      service: web-svc
+      port: 80
+      use-cluster-ip: true
+  routes:
+    - path: /
+      action:
+        pass: web
+```
 
 ## Traefik
 

@@ -21,13 +21,9 @@ Linkerd can do.
 This guide is designed to walk you through the basics of Linkerd. First, you'll
 install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
-Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
+Finally, you'll "mesh" an application by adding Linkerd's *data plane* to it.
 
-{{< note >}}
-This page contains quick start instructions intended for non-production
-installations. For production-oriented configurations, we suggest reviewing
-resources in [Going to Production](/going-to-production/).
-{{< /note >}}
+{{< releases >}}
 
 ## Step 0: Setup
 
@@ -52,9 +48,10 @@ Now that we have our cluster, we'll install the Linkerd CLI and use it validate
 that your cluster is capable of hosting Linkerd.
 
 {{< note >}}
-If you're using a GKE "private cluster" or Calico CNI, there are some [extra steps
-required](../reference/cluster-configuration/#private-clusters) before you can
-proceed to the next step.
+If you're using a GKE "private cluster", or if you're using Cilium as a CNI,
+there may be some [cluster-specific
+configuration](../reference/cluster-configuration/) before you can proceed to
+the next step.
 {{< /note >}}
 
 ## Step 1: Install the CLI
@@ -66,14 +63,18 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-Be sure to follow the instructions to add it to your path.
+Be sure to follow the instructions to add it to your path:
 
-(Alternatively, if you use [Homebrew](https://brew.sh), you can install the CLI
-with `brew install linkerd`. You can also download the CLI directly via the
-[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).)
+```bash
+export PATH=$HOME/.linkerd2/bin:$PATH
+```
+
+This will install the CLI for the latest _edge release_ of Linkerd. (For more
+information about what edge releases are, see our [Releases and
+Versions](../../releases/) page.)
 
 Once installed, verify the CLI is running correctly with:
 
@@ -84,6 +85,10 @@ linkerd version
 You should see the CLI version, and also `Server version: unavailable`. This is
 because you haven't installed the control plane on your cluster. Don't
 worry&mdash;we'll fix that soon enough.
+
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../reference/k8s-versions/).
 
 ## Step 2: Validate your Kubernetes cluster
 
