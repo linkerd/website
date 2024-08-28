@@ -104,53 +104,43 @@ more details on how this works.)
 
 ## Debugging
 
-Let's use Linkerd to discover the root cause of this app's failures. Linkerd's
-proxy exposes rich metrics about the traffic that it processes, including HTTP
-response codes. The metric that we're interested is `outbound_http_route_backend_response_statuses_total`
-and will help us identify where HTTP errors are occuring. We can use the
-`linkerd diagnostics proxy-metrics` command to get proxy metrics. Pick one of
-your webapp pods and run the following command to get the metrics for HTTP 500
-responses:
+Let's use Linkerd to discover the root cause of this app's failures. We can use
+the `stat-inbound` command to see the success rate of the webapp deployment:
 
 ```bash
-linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
-| grep outbound_http_route_backend_response_statuses_total \
-| grep http_status=\"500\"
+linkerd viz -n booksapp stat-inbound deploy/webapp
+NAME    SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  
+webapp  [default]:4191  [default]        100.00%  0.30          4ms          9ms         10ms  
+webapp  [default]:4191  probe            100.00%  0.60          0ms          1ms          1ms  
+webapp  [default]:7000  probe            100.00%  0.30          2ms          2ms          2ms  
+webapp  [default]:7000  [default]         75.66%  8.22         18ms         65ms         93ms
 ```
 
-This should return a metric that looks something like:
+This shows us inbound traffic statistics. In other words, we see that the webapp
+is receiving 8.22 requests per second on port 7000 and that only 75.66% of those
+requests are successful.
 
-```text
-outbound_http_route_backend_response_statuses_total{
-  parent_group="core",
-  parent_kind="Service",
-  parent_namespace="booksapp",
-  parent_name="books",
-  parent_port="7002",
-  parent_section_name="",
-  route_group="",
-  route_kind="default",
-  route_namespace="",
-  route_name="http",
-  backend_group="core",
-  backend_kind="Service",
-  backend_namespace="booksapp",
-  backend_name="books",
-  backend_port="7002",
-  backend_section_name="",
-  http_status="500",
-  error=""
-} 207
+To dig into this further and find the root cause, we can look at the webapp's
+outbound traffic. This will tell us about the requests that the webapp makes to
+other services.
+
+```bash
+linkerd viz -n booksapp stat-outbound deploy/webapp
+NAME    SERVICE       ROUTE      TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  books:7002    [default]                            77.36%  7.95         25ms         48ms        176ms     0.00%    0.00%  
+                      └──────────────────►  books:7002     77.36%  7.95         15ms         44ms         64ms     0.00%           
+webapp  authors:7001  [default]                           100.00%  3.53         26ms         72ms        415ms     0.00%    0.00%  
+                      └──────────────────►  authors:7001  100.00%  3.53         16ms         52ms         91ms     0.00%
 ```
 
-This counter tells us that the webapp pod received a total of 207 HTTP 500
-responses from the `books` Service on port 7002.
+We see that webapp sends traffic to both the books service and the authors
+service and that the problem seems to be with the traffic to the books service.
 
 ## HTTPRoute
 
-We know that the webapp component is getting 500s from the books component, but
-it would be great to narrow this down further and get per route metrics. To do
-this, we take advantage of the Gateway API and define a set of HTTPRoute
+We know that the webapp component is getting failures from the books component,
+but it would be great to narrow this down further and get per route metrics. To
+do this, we take advantage of the Gateway API and define a set of HTTPRoute
 resources, each attached to the `books` Service by specifying it as their
 `parent_ref`.
 
@@ -239,36 +229,19 @@ Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
 [...]
 ```
 
-With those HTTPRoutes in place, we can look at the `outbound_http_route_backend_response_statuses_total`
-metric again, and see that the route labels have been populated:
+With those HTTPRoutes in place, we can look at the outbound stats again:
 
 ```bash
-linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
-| grep outbound_http_route_backend_response_statuses_total \
-| grep http_status=\"500\"
-```
-
-```text
-outbound_http_route_backend_response_statuses_total{
-  parent_group="core",
-  parent_kind="Service",
-  parent_namespace="booksapp",
-  parent_name="books",
-  parent_port="7002",
-  parent_section_name="",
-  route_group="gateway.networking.k8s.io",
-  route_kind="HTTPRoute",
-  route_namespace="booksapp",
-  route_name="books-create",
-  backend_group="core",
-  backend_kind="Service",
-  backend_namespace="booksapp",
-  backend_name="books",
-  backend_port="7002",
-  backend_section_name="",
-  http_status="500",
-  error=""
-} 212
+linkerd viz -n booksapp stat-outbound deploy/webapp
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  authors:7001  [default]                              100.00%  2.80         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  authors:7001  100.00%  2.80         16ms         45ms         49ms     0.00%           
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.43         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  1.43         12ms         24ms         25ms     0.00%           
+webapp  books:7002    books-create  HTTPRoute                 54.27%  2.73         27ms        207ms        441ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002     54.27%  2.73         14ms        152ms        230ms     0.00%           
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.72         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  0.72         12ms         24ms         25ms     0.00%
 ```
 
 This tells us that it is requests to the `books-create` HTTPRoute which have
@@ -287,27 +260,30 @@ kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
 retry.linkerd.io/http=5xx
 ```
 
-We can then see the effect of these retries by looking at Linkerd's retry
-metrics:
+We can then see the effect of these retries:
 
 ```bash
-linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
-| grep outbound_http_route_backend_response_statuses_total \
-| grep retry
+linkerd viz -n booksapp stat-outbound deploy/webapp
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  books:7002    books-create  HTTPRoute                 73.17%  2.05         98ms        460ms        492ms     0.00%   34.22%  
+                      └─────────────────────►  books:7002     48.13%  3.12         29ms         93ms         99ms     0.00%           
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.50         25ms         48ms         49ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  1.50         12ms         24ms         25ms     0.00%           
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.73         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  0.73         12ms         24ms         25ms     0.00%           
+webapp  authors:7001  [default]                              100.00%  2.98         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  authors:7001  100.00%  2.98         16ms         44ms         49ms     0.00%
 ```
 
-```text
-outbound_http_route_retry_limit_exceeded_total{...} 222
-outbound_http_route_retry_overflow_total{...} 0
-outbound_http_route_retry_requests_total{...} 469
-outbound_http_route_retry_successes_total{...} 247
-```
+Notice that while the success rate of individual requests to the books backend
+on the `books-create` route only have a success rate of about 50%, the overall
+success rate on that route has been raised to 73% due to retries. We can also
+see that 34.22% of the requests on this route are retries and that the improved
+success rate has come at the expense of additional RPS to the backend and
+increased overall latency.
 
-This tells us that Linkerd made a total of 469 retry requests, of which 247 were
-successful. The remaining 222 failed and could not be retried again, since we
-didn't raise the retry limit from its default of 1.
-
-We can improve this further by increasing this limit to allow more than 1 retry
+By default, Linkerd will only attempt 1 retry per failure. We can improve
+success rate further by increasing this limit to allow more than 1 retry
 per request:
 
 ```bash
@@ -315,9 +291,23 @@ kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
 retry.linkerd.io/limit=3
 ```
 
-Over time you will see `outbound_http_route_retry_requests_total` and
-`outbound_http_route_retry_successes_total` increase at a much higher rate than
-`outbound_http_route_retry_limit_exceeded_total`.
+Looking at the stats again:
+
+```bash
+linkerd viz -n booksapp stat-outbound deploy/webapp
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.75         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  0.75         12ms         24ms         25ms     0.00%           
+webapp  authors:7001  [default]                              100.00%  2.92         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  authors:7001  100.00%  2.92         18ms         46ms         49ms     0.00%           
+webapp  books:7002    books-create  HTTPRoute                 92.78%  1.62        111ms        461ms        492ms     0.00%   47.28%  
+                      └─────────────────────►  books:7002     48.91%  3.07         42ms        179ms        236ms     0.00%           
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.45         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  1.45         12ms         24ms         25ms     0.00%
+```
+
+We see that these additional retries have increased the overall success rate on
+this route to 92.78%.
 
 ## Timeouts
 
@@ -337,30 +327,19 @@ getting so many that it's hard to see what's going on!)
 We can see the effects of this timeout by running:
 
 ```bash
-linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
-| grep outbound_http_route_request_statuses_total | grep books-create
+linkerd viz -n booksapp stat-outbound deploy/webapp                         
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  authors:7001  [default]                              100.00%  2.85         26ms         49ms        370ms     0.00%    0.00%  
+                      └─────────────────────►  authors:7001  100.00%  2.85         19ms         49ms         86ms     0.00%           
+webapp  books:7002    books-create  HTTPRoute                 78.90%  1.82         45ms        449ms        490ms    21.10%   47.34%  
+                      └─────────────────────►  books:7002     41.55%  3.45         24ms        134ms        227ms    11.11%           
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.40         25ms         47ms         49ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  1.40         12ms         24ms         25ms     0.00%           
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.70         25ms         48ms         50ms     0.00%    0.00%  
+                      └─────────────────────►  books:7002    100.00%  0.70         12ms         24ms         25ms     0.00%
 ```
 
-```text
-outbound_http_route_request_statuses_total{
-  [...]
-  route_name="books-create",
-  http_status="",
-  error="REQUEST_TIMEOUT"
-} 151
-outbound_http_route_request_statuses_total{
-  [...]
-  route_name="books-create",
-  http_status="201",
-  error=""
-} 5548
-outbound_http_route_request_statuses_total{
-  [...]
-  route_name="books-create",
-  http_status="500",
-  error=""
-} 3194
-```
+We see that 21.10% of the requests are hitting this timeout.
 
 ## Clean Up
 

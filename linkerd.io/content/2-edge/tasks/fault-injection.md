@@ -53,17 +53,20 @@ After a little while, the stats will show 100% success rate. You can verify this
 by running:
 
 ```bash
-linkerd viz -n booksapp stat deploy
+linkerd viz -n booksapp stat-inbound deploy
 ```
 
 The output will end up looking at little like:
 
 ```bash
-NAME      MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
-authors      1/1   100.00%   7.1rps           4ms          26ms          33ms          6
-books        1/1   100.00%   8.6rps           6ms          73ms          95ms          6
-traffic      1/1         -        -             -             -             -          -
-webapp       3/3   100.00%   7.9rps          20ms          76ms          95ms          9
+NAME     SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  
+authors  [default]:4191  [default]        100.00%  0.20          0ms          1ms          1ms  
+authors  [default]:7001  [default]        100.00%  3.00          2ms         36ms         43ms  
+books    [default]:4191  [default]        100.00%  0.23          4ms          4ms          4ms  
+books    [default]:7002  [default]        100.00%  3.60          2ms          2ms          2ms  
+traffic  [default]:4191  [default]        100.00%  0.22          0ms          3ms          1ms  
+webapp   [default]:4191  [default]        100.00%  0.72          4ms          5ms          1ms  
+webapp   [default]:7000  [default]        100.00%  3.25          2ms          2ms         65ms
 ```
 
 ## Create the faulty backend
@@ -182,25 +185,20 @@ for details.
 
 When Linkerd sees traffic going to the `books` service, it will send 9/10
 requests to the original service and 1/10 to the error injector. You can see
-what this looks like by running `stat` and filtering explicitly to just the
-requests from `webapp`:
+what this looks like by running `stat-outbound`:
 
 ```bash
-linkerd viz stat -n booksapp deploy --from deploy/webapp
-NAME             MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
-authors             1/1    98.15%   4.5rps           3ms          36ms          39ms          3
-books               1/1   100.00%   6.7rps           5ms          27ms          67ms          6
-error-injector      1/1     0.00%   0.7rps           1ms           1ms           1ms          3
+linkerd viz stat-outbound -n booksapp deploy/webapp
+NAME    SERVICE       ROUTE        TYPE       BACKEND              SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
+webapp  authors:7001  [default]                                     98.44%  4.28         25ms         47ms         50ms     0.00%    0.00%  
+                      └────────────────────►  authors:7001          98.44%  4.28         15ms         42ms         48ms     0.00%           
+webapp  books:7002    error-split  HTTPRoute                        87.76%  7.22         26ms         49ms        333ms     0.00%    0.00%  
+                      ├────────────────────►  books:7002           100.00%  6.33         14ms         42ms         83ms     0.00%           
+                      └────────────────────►  error-injector:8080    0.00%  0.88         12ms         24ms         25ms     0.00%
 ```
 
-We can also look at the success rate of the `webapp` overall to see the effects
-of the error injector. The success rate should be approximately 90%:
-
-```bash
-linkerd viz stat -n booksapp deploy/webapp
-NAME     MESHED   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TCP_CONN
-webapp      3/3    88.42%   9.5rps          14ms          37ms          75ms         10
-```
+We can see here that 0.88 requests per second are being sent to the error
+injector and that the overall success rate is 87.76%.
 
 ## Cleanup
 
