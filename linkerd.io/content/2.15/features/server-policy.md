@@ -46,7 +46,7 @@ policy at that point in the hierarchy. Valid default policies include:
 
 - `all-unauthenticated`: allow all requests. This is the default.
 - `all-authenticated`: allow requests from meshed clients only.
-- `cluster-authenticated`: allow requests form meshed clients in the same
+- `cluster-authenticated`: allow requests from meshed clients in the same
   cluster.
 - `deny`: deny all requests.
 

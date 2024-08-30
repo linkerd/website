@@ -32,6 +32,14 @@ Helm by installing that extension's Helm chart.
 Once an extension has been installed, it will be included as part of the
 standard `linkerd check` command.
 
+{{< warning >}}
+
+Installing extensions in the `linkerd` namespace is not supported. In general,
+Linkerd extensions will each create their own namespace -- this is the
+recommended best practice.
+
+{{< /warning >}}
+
 ## Installing third-party extensions
 
 Third-party extensions require one additional step: you must download the
