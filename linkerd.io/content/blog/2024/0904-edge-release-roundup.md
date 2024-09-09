@@ -8,7 +8,8 @@ url:
 description: |-
   What you need to know about the most recent Linkerd edge releases, September 2024 edition!
 thumbnail: '/uploads/2024/09/roundup-square.png'
-featuredImage: '/uploads/2024/09/roundup-09-featured.png'
+featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
+socialImage: '/uploads/2024/09/roundup-09-featured.png'
 tags: [Linkerd, linkerd, edge, release, roundup]
 featured: false
 ---
