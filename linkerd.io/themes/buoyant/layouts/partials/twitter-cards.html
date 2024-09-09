@@ -1,4 +1,9 @@
-{{ if .Params.featuredImage }}
+{{ if .Params.socialImage }}
+  {{ with .Params.socialImage }}
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="{{ . | absURL }}"/>
+  {{ end }}
+{{ else if .Params.featuredImage }}
   {{ with .Params.featuredImage }}
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:image" content="{{ . | absURL }}"/>
