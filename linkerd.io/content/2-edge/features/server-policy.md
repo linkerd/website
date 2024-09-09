@@ -46,9 +46,11 @@ policy at that point in the hierarchy. Valid default policies include:
 
 - `all-unauthenticated`: allow all requests. This is the default.
 - `all-authenticated`: allow requests from meshed clients only.
-- `cluster-authenticated`: allow requests form meshed clients in the same
+- `cluster-authenticated`: allow requests from meshed clients in the same
   cluster.
 - `deny`: deny all requests.
+- `audit`: Same as `all-unauthenticated` but requests get flagged in logs and
+  metrics.
 
 As well as several other default policies—see the [Policy
 reference](../../reference/authorization-policy/) for more.
@@ -127,6 +129,36 @@ be denied at the TCP level, i.e. by refusing the connection.
 
 Note that dynamically changing the policy to deny existing connections may
 result in an abrupt termination of those connections.
+
+## Audit mode
+
+A [`Server`]'s default policy is defined in its `accessPolicy` field, which
+defaults to `deny`. That means that, by default, traffic that doesn't conform to
+the rules associated to that Server is denied (the same applies to `Servers`
+that don't have associated rules yet). This can inadvertently prevent traffic if
+you apply rules that don't account for all the possible sources/routes for your
+services.
+
+This is why we recommend that when first setting authorization policies, you
+explicitly set `accessPolicy:audit` for complex-enough services. In this mode,
+if a request doesn't abide to the policy rules, it won't get blocked, but it
+will generate a log entry in the proxy at the INFO level with the tag
+`authz.name=audit` along with other useful information. Likewise, the proxy will
+add entries to metrics like `request_total` with the label `authz_name=audit`.
+So when you're in the process of fine-tuning a new authorization policy, you can
+filter by those tags/labels in your observability stack to keep an eye on
+requests which weren't caught by the policy.
+
+### Audit mode for default policies
+
+Audit mode is also supported at cluster, namespace, or workload level. To set
+the whole cluster to audit mode, set `proxy.defaultInboundPolicy=audit` when
+installing Linkerd; for a namespace or a workload, use the annotation
+`config.linkerd.io/default-inbound-policy:audit`. For example, if you had
+`config.linkerd.io/default-inbound-policy:all_authenticated` for a namespace and
+no `Servers` declared, all unmeshed traffic would be denied. By using
+`config.linkerd.io/default-inbound-policy:audit` instead, unmeshed traffic would
+be allowed but it would be logged and surfaced in metrics as detailed above.
 
 ## Learning more
 

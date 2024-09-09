@@ -56,7 +56,7 @@ problems with the service).
 ### Traffic (Requests Per Second)
 
 This gives an overview of how much demand is placed on the service/route. As
-with success rates, `linkerd viz routes --o wide` splits this metric into
+with success rates, `linkerd viz routes -o wide` splits this metric into
 EFFECTIVE_RPS and ACTUAL_RPS, corresponding to rates after and before retries
 respectively.
 

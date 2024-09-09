@@ -12,11 +12,22 @@ Before you can use Linkerd, you'll need to install the [control
 plane](../../reference/architecture/#control-plane). This page covers how to
 accomplish that.
 
+{{< note >}}
+
+The Linkerd project itself only produces [edge release](/releases/) artifacts.
+(For more information about the different kinds of Linkerd releases, see the
+[Releases and Versions](/releases/) page.)
+
+As such, this page contains instructions for installing the latest edge
+release of Linkerd. If you are using a [stable
+distribution](/releases/#stable) of Linkerd, the vendor should provide
+additional guidance on installing Linkerd.
+
+{{< /note >}}
+
 Linkerd's control plane can be installed in two ways: with the CLI and with
 Helm. The CLI is convenient and easy, but for production use cases we recommend
 Helm which allows for repeatability.
-
-{{< trylpt >}}
 
 In either case, we recommend installing the CLI itself so that you can validate
 the success of the installation. See the [Getting Started
@@ -28,6 +39,10 @@ this already.
 Linkerd requires a Kubernetes cluster on which to run. Where this cluster lives
 is not important: it might be hosted on a cloud provider, may be running on your
 local machine, or even somewhere else.
+
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../../reference/k8s-versions/).
 
 Before installing the control plane, validate that this Kubernetes cluster is
 configured appropriately for Linkerd by running:

@@ -23,9 +23,9 @@ topology looks like this:
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd and its Viz extension installed
-on your cluster.  Follow the [Installing Linkerd Guide](../install/) if
-you haven't already done this.
+To use this guide, you'll need to have Linkerd installed on your cluster.
+Follow the [Installing Linkerd Guide](../install/) if you haven't already done
+this.
 
 ## Install the app
 
@@ -62,8 +62,11 @@ Once the rollout has completed successfully, you can access the app itself by
 port-forwarding `webapp` locally:
 
 ```bash
-kubectl -n booksapp port-forward svc/webapp 7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 >/dev/null &
 ```
+
+(We redirect to `/dev/null` just so you don't get flooded with "Handling
+connection" messages for the rest of the exercise.)
 
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
@@ -101,372 +104,268 @@ more details on how this works.)
 
 ## Debugging
 
-Let's use Linkerd to discover the root cause of this app's failures. To check
-out the Linkerd dashboard, run:
+Let's use Linkerd to discover the root cause of this app's failures. Linkerd's
+proxy exposes rich metrics about the traffic that it processes, including HTTP
+response codes. The metric that we're interested is `outbound_http_route_backend_response_statuses_total`
+and will help us identify where HTTP errors are occuring. We can use the
+`linkerd diagnostics proxy-metrics` command to get proxy metrics. Pick one of
+your webapp pods and run the following command to get the metrics for HTTP 500
+responses:
 
 ```bash
-linkerd viz dashboard &
+linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
+| grep outbound_http_route_backend_response_statuses_total \
+| grep http_status=\"500\"
 ```
 
-{{< fig src="/images/books/dashboard.png" title="Dashboard" >}}
+This should return a metric that looks something like:
 
-Select `booksapp` from the namespace dropdown and click on the
-[Deployments](http://localhost:50750/namespaces/booksapp/deployments) workload.
-You should see all the deployments in the `booksapp` namespace show up. There
-will be success rate, requests per second, and latency percentiles.
+```text
+outbound_http_route_backend_response_statuses_total{
+  parent_group="core",
+  parent_kind="Service",
+  parent_namespace="booksapp",
+  parent_name="books",
+  parent_port="7002",
+  parent_section_name="",
+  route_group="",
+  route_kind="default",
+  route_namespace="",
+  route_name="http",
+  backend_group="core",
+  backend_kind="Service",
+  backend_namespace="booksapp",
+  backend_name="books",
+  backend_port="7002",
+  backend_section_name="",
+  http_status="500",
+  error=""
+} 207
+```
 
-That’s cool, but you’ll notice that the success rate for `webapp` is not 100%.
-This is because the traffic generator is submitting new books. You can do the
-same thing yourself and push that success rate even lower. Click on `webapp` in
-the Linkerd dashboard for a live debugging session.
+This counter tells us that the webapp pod received a total of 207 HTTP 500
+responses from the `books` Service on port 7002.
 
-You should now be looking at the detail view for the `webapp` service. You’ll
-see that `webapp` is taking traffic from `traffic` (the load generator), and it
-has two outgoing dependencies: `authors` and `book`. One is the service for
-pulling in author information and the other is the service for pulling in book
-information.
+## HTTPRoute
 
-{{< fig src="/images/books/webapp-detail.png" title="Detail" >}}
-
-A failure in a dependent service may be exactly what’s causing the errors that
-`webapp` is returning (and the errors you as a user can see when you click). We
-can see that the `books` service is also failing. Let’s scroll a little further
-down the page, we’ll see a live list of all traffic endpoints that `webapp` is
-receiving. This is interesting:
-
-{{< fig src="/images/books/top.png" title="Top" >}}
-
-Aha! We can see that inbound traffic coming from the `webapp` service going to
-the `books` service is failing a significant percentage of the time. That could
-explain why `webapp` was throwing intermittent failures. Let’s click on the tap
-(🔬) icon and then on the Start button to look at the actual request and
-response stream.
-
-{{< fig src="/images/books/tap.png" title="Tap" >}}
-
-Indeed, many of these requests are returning 500’s.
-
-It was surprisingly easy to diagnose an intermittent issue that affected only a
-single route. You now have everything you need to open a detailed bug report
-explaining exactly what the root cause is. If the `books` service was your own,
-you know exactly where to look in the code.
-
-## Service Profiles
-
-To understand the root cause, we used live traffic. For some issues this is
-great, but what happens if the issue is intermittent and happens in the middle of
-the night? [Service profiles](../../features/service-profiles/) provide Linkerd
-with some additional information about your services. These define the routes
-that you're serving and, among other things, allow for the collection of metrics
-on a per route basis. With Prometheus storing these metrics, you'll be able to
-sleep soundly and look up intermittent issues in the morning.
-
-One of the easiest ways to get service profiles setup is by using existing
-[OpenAPI (Swagger)](https://swagger.io/docs/specification/about/) specs. This
-demo has published specs for each of its services. You can create a service
-profile for `webapp` by running:
+We know that the webapp component is getting 500s from the books component, but
+it would be great to narrow this down further and get per route metrics. To do
+this, we take advantage of the Gateway API and define a set of HTTPRoute
+resources, each attached to the `books` Service by specifying it as their
+`parent_ref`.
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/webapp.swagger \
-  | linkerd -n booksapp profile --open-api - webapp \
-  | kubectl -n booksapp apply -f -
-```
-
-This command will do three things:
-
-1. Fetch the swagger specification for `webapp`.
-1. Take the spec and convert it into a service profile by using the `profile`
-   command.
-1. Apply this configuration to the cluster.
-
-Alongside `install` and `inject`, `profile` is also a pure text operation. Check
-out the profile that is generated:
-
-```yaml
-apiVersion: linkerd.io/v1alpha2
-kind: ServiceProfile
+kubectl apply -f - <<EOF
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
-  creationTimestamp: null
-  name: webapp.booksapp.svc.cluster.local
+  name: books-list
   namespace: booksapp
 spec:
-  routes:
-  - condition:
-      method: GET
-      pathRegex: /
-    name: GET /
-  - condition:
-      method: POST
-      pathRegex: /authors
-    name: POST /authors
-  - condition:
-      method: GET
-      pathRegex: /authors/[^/]*
-    name: GET /authors/{id}
-  - condition:
-      method: POST
-      pathRegex: /authors/[^/]*/delete
-    name: POST /authors/{id}/delete
-  - condition:
-      method: POST
-      pathRegex: /authors/[^/]*/edit
-    name: POST /authors/{id}/edit
-  - condition:
-      method: POST
-      pathRegex: /books
-    name: POST /books
-  - condition:
-      method: GET
-      pathRegex: /books/[^/]*
-    name: GET /books/{id}
-  - condition:
-      method: POST
-      pathRegex: /books/[^/]*/delete
-    name: POST /books/{id}/delete
-  - condition:
-      method: POST
-      pathRegex: /books/[^/]*/edit
-    name: POST /books/{id}/edit
+  parentRefs:
+    - name: books
+      group: core
+      kind: Service
+      port: 7002
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: "/books.json"
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: books-create
+  namespace: booksapp
+spec:
+  parentRefs:
+    - name: books
+      group: core
+      kind: Service
+      port: 7002
+  rules:
+    - matches:
+        - path:
+            type: Exact
+            value: "/books.json"
+          method: POST
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: books-delete
+  namespace: booksapp
+spec:
+  parentRefs:
+    - name: books
+      group: core
+      kind: Service
+      port: 7002
+  rules:
+    - matches:
+        - path:
+            type: RegularExpression
+            value: "/books/\\\d+.json"
+          method: DELETE
+EOF
 ```
 
-The `name` refers to the FQDN of your Kubernetes service,
-`webapp.booksapp.svc.cluster.local` in this instance. Linkerd uses the `Host`
-header of requests to associate service profiles with requests. When the proxy
-sees a `Host` header of `webapp.booksapp.svc.cluster.local`, it will use that to
-look up the service profile's configuration.
-
-Routes are simple conditions that contain the method (`GET` for example) and a
-regex to match the path. This allows you to group REST style resources together
-instead of seeing a huge list. The names for routes can be whatever you'd like.
-For this demo, the method is appended to the route regex.
-
-To get profiles for `authors` and `books`, you can run:
+We can then check that these HTTPRoutes have been accepted by their parent
+Service by checking their status subresource:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/authors.swagger \
-  | linkerd -n booksapp profile --open-api - authors \
-  | kubectl -n booksapp apply -f -
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/books.swagger \
-  | linkerd -n booksapp profile --open-api - books \
-  | kubectl -n booksapp apply -f -
+kubectl -n booksapp get httproutes.gateway.networking.k8s.io \
+  -ojsonpath='{.items[*].status.parents[*].conditions[*]}' | jq .
 ```
 
-Verifying that this all works is easy when you use `linkerd viz tap`. Each live
-request will show up with what `:authority` or `Host` header is being seen as
-well as the `:path` and `rt_route` being used. Run:
+Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
+
+```json
+{
+  "lastTransitionTime": "2024-08-03T01:38:25Z",
+  "message": "",
+  "reason": "Accepted",
+  "status": "True",
+  "type": "Accepted"
+}
+{
+  "lastTransitionTime": "2024-08-03T01:38:25Z",
+  "message": "",
+  "reason": "ResolvedRefs",
+  "status": "True",
+  "type": "ResolvedRefs"
+}
+[...]
+```
+
+With those HTTPRoutes in place, we can look at the `outbound_http_route_backend_response_statuses_total`
+metric again, and see that the route labels have been populated:
 
 ```bash
-linkerd viz tap -n booksapp deploy/webapp -o wide | grep req
+linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
+| grep outbound_http_route_backend_response_statuses_total \
+| grep http_status=\"500\"
 ```
 
-This will watch all the live requests flowing through `webapp` and look
-something like:
-
-```bash
-req id=0:1 proxy=in  src=10.1.3.76:57152 dst=10.1.3.74:7000 tls=true :method=POST :authority=webapp.default:7000 :path=/books/2878/edit src_res=deploy/traffic src_ns=booksapp dst_res=deploy/webapp dst_ns=booksapp rt_route=POST /books/{id}/edit
+```text
+outbound_http_route_backend_response_statuses_total{
+  parent_group="core",
+  parent_kind="Service",
+  parent_namespace="booksapp",
+  parent_name="books",
+  parent_port="7002",
+  parent_section_name="",
+  route_group="gateway.networking.k8s.io",
+  route_kind="HTTPRoute",
+  route_namespace="booksapp",
+  route_name="books-create",
+  backend_group="core",
+  backend_kind="Service",
+  backend_namespace="booksapp",
+  backend_name="books",
+  backend_port="7002",
+  backend_section_name="",
+  http_status="500",
+  error=""
+} 212
 ```
 
-As you can see:
-
-- `:authority` is the correct host
-- `:path` correctly matches
-- `rt_route` contains the name of the route
-
-These metrics are part of the [`linkerd viz routes`](../../reference/cli/viz/#routes)
-command instead of [`linkerd viz stat`](../../reference/cli/viz/#stat). To see the
-metrics that have accumulated so far, run:
-
-```bash
-linkerd viz -n booksapp routes svc/webapp
-```
-
-This will output a table of all the routes observed and their golden metrics.
-The `[DEFAULT]` route is a catch all for anything that does not match the
-service profile.
-
-Profiles can be used to observe *outgoing* requests as well as *incoming*
-requests. To do that, run:
-
-```bash
-linkerd viz -n booksapp routes deploy/webapp --to svc/books
-```
-
-This will show all requests and routes that originate in the `webapp` deployment
-and are destined to the `books` service. Similarly to using `tap` and `top`
-views in the [debugging](#debugging) section, the root cause of errors in this
-demo is immediately apparent:
-
-```bash
-ROUTE                     SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /books/{id}.json     books   100.00%   0.5rps          18ms          29ms          30ms
-GET /books.json             books   100.00%   1.1rps           7ms          12ms          18ms
-GET /books/{id}.json        books   100.00%   2.5rps           6ms          10ms          10ms
-POST /books.json            books    52.24%   2.2rps          23ms          34ms          39ms
-PUT /books/{id}.json        books    41.98%   1.4rps          73ms          97ms          99ms
-[DEFAULT]                   books         -        -             -             -             -
-```
+This tells us that it is requests to the `books-create` HTTPRoute which have
+been failing.
 
 ## Retries
 
 As it can take a while to update code and roll out a new version, let's
 tell Linkerd that it can retry requests to the failing endpoint. This will
 increase request latencies, as requests will be retried multiple times, but not
-require rolling out a new version.
-
-In this application, the success rate of requests from the `books` deployment to
-the `authors` service is poor. To see these metrics, run:
+require rolling out a new version. Add a retry annotation to the `books-create`
+HTTPRoute which tells Linkerd to retry on 5xx responses:
 
 ```bash
-linkerd viz -n booksapp routes deploy/books --to svc/authors
+kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
+retry.linkerd.io/http=5xx
 ```
 
-The output should look like:
+We can then see the effect of these retries by looking at Linkerd's retry
+metrics:
 
 ```bash
-ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /authors/{id}.json   authors         -        -             -             -             -
-GET /authors.json           authors         -        -             -             -             -
-GET /authors/{id}.json      authors         -        -             -             -             -
-HEAD /authors/{id}.json     authors    50.85%   3.9rps           5ms          10ms          17ms
-POST /authors.json          authors         -        -             -             -             -
-[DEFAULT]                   authors         -        -             -             -             -
+linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
+| grep outbound_http_route_backend_response_statuses_total \
+| grep retry
 ```
 
-One thing that’s clear is that all requests from books to authors are to the
-`HEAD /authors/{id}.json` route and those requests are failing about 50% of the
-time.
+```text
+outbound_http_route_retry_limit_exceeded_total{...} 222
+outbound_http_route_retry_overflow_total{...} 0
+outbound_http_route_retry_requests_total{...} 469
+outbound_http_route_retry_successes_total{...} 247
+```
 
-To correct this, let’s edit the authors service profile and make those
-requests retryable by running:
+This tells us that Linkerd made a total of 469 retry requests, of which 247 were
+successful. The remaining 222 failed and could not be retried again, since we
+didn't raise the retry limit from its default of 1.
+
+We can improve this further by increasing this limit to allow more than 1 retry
+per request:
 
 ```bash
-kubectl -n booksapp edit sp/authors.booksapp.svc.cluster.local
+kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
+retry.linkerd.io/limit=3
 ```
 
-You'll want to add `isRetryable` to a specific route. It should look like:
-
-```yaml
-spec:
-  routes:
-  - condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    name: HEAD /authors/{id}.json
-    isRetryable: true ### ADD THIS LINE ###
-```
-
-After editing the service profile, Linkerd will begin to retry requests to
-this route automatically. We see a nearly immediate improvement in success rate
-by running:
-
-```bash
-linkerd viz -n booksapp routes deploy/books --to svc/authors -o wide
-```
-
-This should look like:
-
-```bash
-ROUTE                       SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /authors/{id}.json   authors                   -               -                -            -             -           0ms
-GET /authors.json           authors                   -               -                -            -             -           0ms
-GET /authors/{id}.json      authors                   -               -                -            -             -           0ms
-HEAD /authors/{id}.json     authors             100.00%          2.8rps           58.45%       4.7rps           7ms          25ms          37ms
-POST /authors.json          authors                   -               -                -            -             -           0ms
-[DEFAULT]                   authors                   -               -                -            -             -           0ms
-```
-
-You'll notice that the `-o wide` flag has added some columns to the `routes`
-view. These show the difference between `EFFECTIVE_SUCCESS` and
-`ACTUAL_SUCCESS`. The difference between these two show how well retries are
-working. `EFFECTIVE_RPS` and `ACTUAL_RPS` show how many requests are being sent
-to the destination service and and how many are being received by the client's
-Linkerd proxy.
-
-With retries automatically happening now, success rate looks great but the p95
-and p99 latencies have increased. This is to be expected because doing retries
-takes time.
+Over time you will see `outbound_http_route_retry_requests_total` and
+`outbound_http_route_retry_successes_total` increase at a much higher rate than
+`outbound_http_route_retry_limit_exceeded_total`.
 
 ## Timeouts
 
 Linkerd can limit how long to wait before failing outgoing requests to another
-service. These timeouts work by adding another key to a service profile's routes
-configuration.
-
-To get started, let's take a look at the current latency for requests from
-`webapp` to the `books` service:
+service. For the purposes of this demo, let's set a 15ms timeout for calls to
+the `books-create` route:
 
 ```bash
-linkerd viz -n booksapp routes deploy/webapp --to svc/books
+kubectl -n booksapp annotate httproutes.gateway.networking.k8s.io/books-create \
+timeout.linkerd.io/request=15ms
 ```
 
-This should look something like:
+(You may need to adjust the timeout value depending on your cluster – 15ms
+should definitely show some timeouts, but feel free to raise it if you're
+getting so many that it's hard to see what's going on!)
+
+We can see the effects of this timeout by running:
 
 ```bash
-ROUTE                     SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /books/{id}.json     books   100.00%   0.7rps          10ms          27ms          29ms
-GET /books.json             books   100.00%   1.3rps           9ms          34ms          39ms
-GET /books/{id}.json        books   100.00%   2.0rps           9ms          52ms          91ms
-POST /books.json            books   100.00%   1.3rps          45ms         140ms         188ms
-PUT /books/{id}.json        books   100.00%   0.7rps          80ms         170ms         194ms
-[DEFAULT]                   books         -        -             -             -             -
+linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
+| grep outbound_http_route_request_statuses_total | grep books-create
 ```
 
-Requests to the `books` service's `PUT /books/{id}.json` route include retries
-for when that service calls the `authors` service as part of serving those
-requests, as described in the previous section. This improves success rate, at
-the cost of additional latency. For the purposes of this demo, let's set a 25ms
-timeout for calls to that route. Your latency numbers will vary depending on the
-characteristics of your cluster. To edit the `books` service profile, run:
-
-```bash
-kubectl -n booksapp edit sp/books.booksapp.svc.cluster.local
+```text
+outbound_http_route_request_statuses_total{
+  [...]
+  route_name="books-create",
+  http_status="",
+  error="REQUEST_TIMEOUT"
+} 151
+outbound_http_route_request_statuses_total{
+  [...]
+  route_name="books-create",
+  http_status="201",
+  error=""
+} 5548
+outbound_http_route_request_statuses_total{
+  [...]
+  route_name="books-create",
+  http_status="500",
+  error=""
+} 3194
 ```
-
-Update the `PUT /books/{id}.json` route to have a timeout:
-
-```yaml
-spec:
-  routes:
-  - condition:
-      method: PUT
-      pathRegex: /books/[^/]*\.json
-    name: PUT /books/{id}.json
-    timeout: 25ms ### ADD THIS LINE ###
-```
-
-Linkerd will now return errors to the `webapp` REST client when the timeout is
-reached. This timeout includes retried requests and is the maximum amount of
-time a REST client would wait for a response.
-
-Run `routes` to see what has changed:
-
-```bash
-linkerd viz -n booksapp routes deploy/webapp --to svc/books -o wide
-```
-
-With timeouts happening now, the metrics will change:
-
-```bash
-ROUTE                     SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
-DELETE /books/{id}.json     books             100.00%          0.7rps          100.00%       0.7rps           8ms          46ms          49ms
-GET /books.json             books             100.00%          1.3rps          100.00%       1.3rps           9ms          33ms          39ms
-GET /books/{id}.json        books             100.00%          2.2rps          100.00%       2.2rps           8ms          19ms          28ms
-POST /books.json            books             100.00%          1.3rps          100.00%       1.3rps          27ms          81ms          96ms
-PUT /books/{id}.json        books              86.96%          0.8rps          100.00%       0.7rps          75ms          98ms         100ms
-[DEFAULT]                   books                   -               -                -            -             -
-```
-
-The latency numbers include time spent in the `webapp` application itself, so
-it's expected that they exceed the 25ms timeout that we set for requests from
-`webapp` to `books`. We can see that the timeouts are working by observing that
-the effective success rate for our route has dropped below 100%.
 
 ## Clean Up
 
 To remove the books app and the booksapp namespace from your cluster, run:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp.yml \
-  | kubectl -n booksapp delete -f - \
-  && kubectl delete ns booksapp
+kubectl delete ns booksapp
 ```

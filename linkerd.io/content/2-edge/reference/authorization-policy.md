@@ -27,6 +27,8 @@ specify the cluster-wide default policy. This field can be one of the following:
 - `cluster-unauthenticated`: allow traffic from both meshed and non-meshed clients
   in the same cluster.
 - `deny`: all traffic are denied.
+- `audit`: Same as `all-unauthenticated` but requests get flagged in logs and
+  metrics.
 
 This cluster-wide default can be overridden for specific resources by setting
 the annotation `config.linkerd.io/default-inbound-policy` on either a pod spec
@@ -62,9 +64,10 @@ overlapping `Server`s from being created.
 
 {{< note >}}
 When a Server resource is present, all traffic to the port on its pods will be
-denied (regardless of the default policy) unless explicitly authorized. Thus,
-Servers are typically paired with e.g. an AuthorizationPolicy that references
-the Server, or that reference an HTTPRoute that in turn references the Server.
+denied unless explicitly authorized or audit mode is enabled (with
+`accessPolicy:audit`). Thus, Servers are typically paired with e.g. an
+AuthorizationPolicy that references the Server, or that reference an HTTPRoute
+that in turn references the Server.
 {{< /note >}}
 
 ### Server Spec
@@ -74,10 +77,20 @@ A `Server` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
+| `accessPolicy`| [accessPolicy](#accessPolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`). |
 | `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
 | `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
 {{< /table >}}
+
+#### accessPolicy
+
+Traffic that doesn't conform to the authorization policies associated to the
+Server are denied by default. You can alter that behavior by overriding the
+`accessPolicy` field, which accepts the same values as the [default
+policies](#default-policies). Of particular interest is the `audit` value, which
+enables [audit mode](../../features/server-policy/#audit-mode), that you can use
+to test policies before enforcing them.
 
 #### podSelector
 

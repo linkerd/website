@@ -15,7 +15,7 @@ topology. This multi-cluster capability is designed to provide:
 3. **Support for any type of network.** Linkerd does not require any specific
    network topology between clusters, and can function both with hierarchical
    networks as well as when clusters [share the same flat
-   network](#multi-cluster-for-flat-networks).
+   network](#flat-networks).
 4. **A unified model alongside in-cluster communication.** The same
    observability, reliability, and security features that Linkerd provides for
    in-cluster communication extend to cross-cluster communication.

@@ -52,13 +52,10 @@ Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-pro
 post, [Why Linkerd doesn't use
 Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/).)
 
-## Versions and channels
+## Getting Linkerd
 
-Linkerd is currently published in several tracks:
-
-* [Linkerd 2.x stable releases](/edge/)
-* [Linkerd 2.x edge releases](/edge/)
-* [Linkerd 1.x.](/1/overview/)
+Linkerd is available in a variety of packages and channels. See the [Linkerd
+Releases](/releases/) page for details.
 
 ## Next steps
 
