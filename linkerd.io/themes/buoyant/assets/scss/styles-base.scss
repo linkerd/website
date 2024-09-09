@@ -16,12 +16,18 @@ body {
   min-height: 40px;
   padding: 0 10px;
   background-color: $deep-blue;
+
 }
-.announcement-banner,
-.announcement-banner a {
+.announcement-banner p{
   color: white;
   font-size: 16px !important;
   font-weight: 400;
+  line-height: 1.2;
+}
+.announcement-banner a {
+  color: white;
+  font-size: 16px !important;
+  font-weight: 600 !important;
   line-height: 1.2;
 }
 .announcement-banner img {
