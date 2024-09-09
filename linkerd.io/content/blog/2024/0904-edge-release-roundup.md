@@ -53,7 +53,7 @@ breaking changes here.
 ## The releases
 
 August's edge releases look small, but [`edge-24.8.1`] and [`edge-24.8.2`]
-provided the finishing touches for [Linkerd 2.16.0], which shipped on August
+provided the finishing touches for [Linkerd 2.16], which shipped on August
 13! Of course, each edge release has bugfixes and _many_ dependency updates;
 we won't list them all here, but you can find them in the release notes for
 each release.
@@ -65,7 +65,7 @@ plane if you add the GRPCRoute CRD after installing Linkerd.
 
 [`edge-24.8.1`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.1
 [`edge-24.8.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2
-[Linkerd 2.16.0]: https://linkerd.io/2024/08/13/announcing-linkerd-2.16/index.html
+[Linkerd 2.16]: https://linkerd.io/2024/08/13/announcing-linkerd-2.16/index.html
 
 ### [`edge-24.8.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.3) (August 29, 2024)
 
