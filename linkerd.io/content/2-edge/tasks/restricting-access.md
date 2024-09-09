@@ -167,14 +167,16 @@ explicitly create an authorization to allow those probe requests. For more
 information about adding route-scoped authorizations, see
 [Configuring Per-Route Policy](../configuring-per-route-policy/).
 
-## Further Considerations
+## Further Considerations - Audit Mode
 
 You may have noticed that there was a period of time after we created the
 `Server` resource but before we created the `ServerAuthorization` where all
 requests were being rejected. To avoid this situation in live systems, we
-recommend you either create the policy resources before deploying your services
-or to create the `ServiceAuthorizations` BEFORE creating the `Server` so that
-clients will be authorized immediately.
+recommend that you enable [audit mode](../../features/server-policy/#audit-mode)
+in the `Server` resource (via `accessPolicy:audit`) and check the proxy
+logs/metrics in the target services to see if traffic would get inadvertently
+denied. Afterwards, when you're sure about your policy rules, you can fully
+enable them by resetting `accessPolicy` back to `deny`.
 
 ## Per-Route Policy
 
