@@ -61,6 +61,11 @@ header was *required* in ingress mode, or the request would fail. This bug was
 fixed in 2.13.5, and was not present prior to 2.13.0.
 {{< /note >}}
 
+{{< note >}}
+Be sure to not deploy the ingress controller in the `kube-system` or `cert-manager`
+namespace, as Linkerd [ignores these namespaces by default for injection](https://linkerd.io/2-edge/features/proxy-injection/#exclusions).
+{{< /note >}}
+
 For more on ingress mode and why it's necessary, see [Ingress
 details](#ingress-details) below.
 
