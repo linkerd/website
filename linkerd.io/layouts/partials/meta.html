@@ -13,7 +13,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ .Page.RelPermalink | absURL }}" />
 
-{{ if .Params.featuredImage }}
+{{ if .Params.socialImage }}
+  <meta property="og:image" content="{{ .Params.socialImage| absURL | safeHTMLAttr }}" />
+{{ else if .Params.featuredImage }}
   <meta property="og:image" content="{{ .Params.featuredImage| absURL | safeHTMLAttr }}" />
 {{ else if .Params.thumbnail }}
   <meta property="og:image" content="{{ .Params.thumbnail | absURL | safeHTMLAttr }}" />
