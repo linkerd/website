@@ -1,24 +1,9 @@
-{{ define "head" }}
-  {{ $js := resources.Get "js/lunr.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $js.Permalink }}"></script>
-{{ end }}
-
 {{ define "main" }}
   <div class="wrapper blog-preview rounded-block bottom-round has-background-grey-light">
     <div class="blogs-container">
-      <div id="optionsContainer" class="container options-container columns is-multiline is-marginless">
+      <div class="container columns is-multiline is-marginless">
         <div class="column">
           <h1>Blog</h1>
-        </div>
-        <div class="column">
-          <div class="field">
-            <p class="control has-icons-left">
-              <input class="input has-text-weight-semibold" id="searchInput" type="text" placeholder="Search for resources">
-              <span class="icon is-small is-left">
-                <i class="fas fa-search"></i>
-              </span>
-            </p>
-          </div>
         </div>
       </div>
       <div class="container center-column is-marginless is-fullwidth">
@@ -37,10 +22,10 @@
             {{ end }}
           </div>
         </div>
-        <div class="search-title is-uppercase has-text-centered" id="resultsHeader">
+        <div class="search-title is-uppercase has-text-centered">
           All Blog Posts
         </div>
-        <div class="columns container is-multiline is-variable blog-list-container pt-0" id="searchResult">
+        <div class="columns container is-multiline is-variable blog-list-container pt-0">
           {{ range .Paginator.Pages }}
             {{ partial "related-card.html" . }}
           {{ end }}
@@ -52,11 +37,4 @@
     </div>
   </div>
 </div>
-{{ end }}
-
-{{ define "body-end" }}
-{{ $search := resources.Get "js/search.js" }}
-<script src="{{ $search.Permalink }}"></script>
-{{ $js := resources.Get "js/blog-search.js" }}
-<script src="{{ $js.Permalink }}"></script>
 {{ end }}
