@@ -5,7 +5,7 @@
 {{- $docs := where site.Pages "Section" "eq" site.Params.latest_linkerd2_stable_version -}}
 {{- $currentTime := now }}
 {{- $lastYear := $currentTime.AddDate -1 0 0 -}}
-{{- $blog := where site.Pages "Section" "eq" "blog" -}}
+{{- $blog := where site.RegularPages "Section" "eq" "blog" -}}
 {{- $blog := where $blog "Date" ">" $lastYear -}}
 {{- $pages := $docs | union $blog -}}
 {{- $pages = where $pages "Params.noIndex" "ne" true -}}
