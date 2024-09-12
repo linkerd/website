@@ -1,6 +1,6 @@
 #!/bin/sh
 
-releases_url="https://api.github.com/repos/linkerd/linkerd2/releases"
+releases_url="https://api.github.com/repos/linkerd/linkerd2/releases?per_page=100"
 
 # Match examples: `"tag_name": "stable-2.7.0",`
 stable_tag_regex="\"tag_name\": \"stable-[0-9]+\.[0-9]+\.[0-9]+\""
