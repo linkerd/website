@@ -30,7 +30,12 @@ window.addEventListener(
             this.field("description");
             this.field("keywords", {boost: 5});
             for (let doc of request.response) {
-              this.add(doc);
+              if (doc.section == "blog") {
+                // Always show blog last in the search results
+                this.add(doc, {boost: -1});
+              } else {
+                this.add(doc);
+              }
               lookup[doc.uri] = doc;
             }
           });

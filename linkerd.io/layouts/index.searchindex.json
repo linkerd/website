@@ -1,6 +1,14 @@
-{{- /* Ouput a json search index of all docs for the latest stable version */ -}}
-{{- $pages := where site.Pages "Section" "eq" site.Params.latest_linkerd2_stable_version -}}
-{{- $pages := where $pages "Params.noIndex" "ne" true -}}
+{{- /* 
+  Ouput a json search index of all docs for the latest stable version and the
+  past year of blog posts.
+*/ -}}
+{{- $docs := where site.Pages "Section" "eq" site.Params.latest_linkerd2_stable_version -}}
+{{- $currentTime := now }}
+{{- $lastYear := $currentTime.AddDate -1 0 0 -}}
+{{- $blog := where site.Pages "Section" "eq" "blog" -}}
+{{- $blog := where $blog "Date" ">" $lastYear -}}
+{{- $pages := $docs | union $blog -}}
+{{- $pages = where $pages "Params.noIndex" "ne" true -}}
 {{- $.Scratch.Add "search-index" slice -}}
 {{- range $index, $page := $pages -}}
   {{- $ancestors := slice -}}
@@ -14,6 +22,7 @@
       "uri"         $page.Permalink
       "title"       $page.Title
       "ancestors"   $ancestors
+      "section"     $page.Section
       "content"     ($page.Plain | htmlUnescape | truncate 3000)
       "description" $page.Description
       "keywords"    $page.Keywords
