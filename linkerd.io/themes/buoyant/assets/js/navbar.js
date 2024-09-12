@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Search
 
   const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
   const searchToggle = document.getElementById("searchToggle");
   const githubStars = document.getElementById("githubStars");
 
@@ -60,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
       searchForm.style.display = "block";
       githubStars.style.display = "none";
       searchToggle.innerHTML = '<i class="fas fa-times"></i>';
+      searchInput.focus();
     } else {
       searchForm.style.display = "none";
       githubStars.style.display = "flex";
