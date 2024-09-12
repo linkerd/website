@@ -69,10 +69,6 @@ window.addEventListener(
         let doc = lookup[result.ref];
         //console.log(`${doc.uri}: ${result.score}`);
         let node = template.content.cloneNode(true);
-        if (doc.isLinkerd) {
-          node.querySelector(".search-result-entry").classList.add("search-result-entry--linkerd");
-          node.querySelector(".search-result-entry__link").setAttribute("target", "_blank");
-        }
         if (Array.isArray(doc.ancestors)) {
           node.querySelector(".search-result-entry__section").textContent = doc.ancestors.join(" / ");
         }
