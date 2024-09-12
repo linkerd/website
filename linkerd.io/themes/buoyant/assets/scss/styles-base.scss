@@ -1160,14 +1160,14 @@ a.card-link {
 .search-loader,
 .search-loader:before,
 .search-loader:after {
-  background: #0064fc;
+  background: $primary-bright-blue;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .search-loader {
-  color: #0064fc;
+  color: $primary-bright-blue;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;

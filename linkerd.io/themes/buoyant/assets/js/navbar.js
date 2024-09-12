@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  var isSticky = false;
+  let isSticky = false;
 
-  var mainMenu = document.getElementById("mainMenu");
-  var expandMenuBtn = document.getElementById("expandMenuBtn");
-  var navbar = document.getElementById("navbar");
-  const dropdowns = document.querySelectorAll(".dropdown");
+  const mainMenu = document.getElementById("mainMenu");
+  const expandMenuBtn = document.getElementById("expandMenuBtn");
+  const navbar = document.getElementById("navbar");
 
   window.addEventListener("scroll", function() {
     if (window.scrollY !== 0 && !isSticky) {
@@ -23,10 +22,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-
   expandMenuBtn.addEventListener("click", function() {
     mainMenu.classList.toggle("is-active");
   });
+
+  // Dropdowns
+
+  const dropdowns = document.querySelectorAll(".dropdown");
 
   dropdowns.forEach(el => {
     el.addEventListener("click", toggleDropdown);
@@ -39,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
     this.classList.toggle("is-active");
   }
 
-
   function closeDropdowns() {
     dropdowns.forEach(el => {
       if(el.classList.contains("is-active")) {
@@ -47,5 +48,25 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     })
   }
+
+  // Search
+
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
+  const searchToggle = document.getElementById("searchToggle");
+  const githubStars = document.getElementById("githubStars");
+
+  searchToggle.addEventListener("click", function() {
+    if (searchForm.style.display == "none") {
+      searchForm.style.display = "block";
+      githubStars.style.display = "none";
+      searchToggle.innerHTML = '<i class="fas fa-times"></i>';
+      searchInput.focus();
+    } else {
+      searchForm.style.display = "none";
+      githubStars.style.display = "flex";
+      searchToggle.innerHTML = '<i class="fas fa-search"></i>';
+    }
+  });
 
 });
