@@ -1,14 +1,18 @@
 {{- /* 
-  Ouput a json search index of all docs for the latest stable version and the
-  past year of blog posts.
+  Output a json search index of all docs for the latest stable version of
+  Linkerd and the blog posts for the past year.
 */ -}}
+{{- /* Get latest docs */ -}}
 {{- $docs := where site.Pages "Section" "eq" site.Params.latest_linkerd2_stable_version -}}
-{{- $currentTime := now }}
+{{- /* Get year of blog posts */ -}}
+{{- $currentTime := now -}}
 {{- $lastYear := $currentTime.AddDate -1 0 0 -}}
 {{- $blog := where site.RegularPages "Section" "eq" "blog" -}}
 {{- $blog := where $blog "Date" ">" $lastYear -}}
+{{- /* Merge pages and remove any page with noIndex param */ -}}
 {{- $pages := $docs | union $blog -}}
-{{- $pages = where $pages "Params.noIndex" "ne" true -}}
+{{- $pages := where $pages "Params.noIndex" "ne" true -}}
+{{- /* Output json */ -}}
 {{- $.Scratch.Add "search-index" slice -}}
 {{- range $index, $page := $pages -}}
   {{- $ancestors := slice -}}
