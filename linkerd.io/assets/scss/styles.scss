@@ -950,3 +950,10 @@ blockquote {
 .linkedin__btn{
     z-index: 999; display: block; top: 100px; right: -5px; position: fixed;
 }
+
+.search-results-container {
+  max-width: 760px;
+  min-height: 400px;
+  margin: 0 auto;
+  padding: 45px 20px;
+}

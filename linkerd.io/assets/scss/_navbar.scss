@@ -133,3 +133,15 @@
     height: 28px;
   }     
 }
+
+@include touch {
+  #searchForm {
+    display: block !important;
+  }
+  #searchToggle {
+    display: none !important;
+  }
+  #githubStars {
+    display: flex !important;
+  }
+}
