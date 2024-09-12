@@ -138,6 +138,15 @@
   cursor: pointer;
 }
 
+#searchInput:hover {
+  &:hover {
+    border-color: #ccc;
+  }
+  &:focus {
+    border-color: $primary-bright-blue;
+  }
+}
+
 @media (max-width: $desktop), (min-width: $widescreen) {
   #searchForm {
     display: block !important;
