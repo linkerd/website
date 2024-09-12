@@ -1,5 +1,5 @@
 ignoreErrors = ["error-remote-getjson"]
-paginate = 10
+pagination.pagerSize = 10
 baseurl = "https://linkerd.io/"
 disableKinds = ["taxonomy", "term"]
 languageCode = "en-US"
