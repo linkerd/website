@@ -133,7 +133,9 @@
     height: 28px;
   }     
 }
-
+#searchToggle {
+  cursor: pointer;
+}
 @include touch {
   #searchForm {
     display: block !important;
