@@ -77,7 +77,7 @@ A `Server` spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `accessPolicy`| [accessPolicy](#accessPolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`). |
+| `accessPolicy`| [accessPolicy](#accesspolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`). |
 | `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
 | `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
