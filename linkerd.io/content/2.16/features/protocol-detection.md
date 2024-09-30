@@ -12,17 +12,17 @@ Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling.
 
 In most cases, Linkerd can do this without configuration. To accomplish this,
-Linkerd performs *protocol detection* to determine whether traffic is HTTP or
-HTTP/2 (including gRPC). If Linkerd detects that a connection is HTTP or
-HTTP/2, Linkerd automatically provides HTTP-level metrics and routing.
+Linkerd performs *protocol detection* to determine whether traffic is HTTP
+(including HTTP/2 and gRPC). If Linkerd detects that a connection is HTTP, it
+will automatically provide HTTP-level metrics and routing. If Linkerd *cannot*
+determine that a connection is using HTTP, Linkerd will proxy the connection as
+a plain TCP connection without HTTP metrics and routing. (In both cases,
+non-HTTP features such as [mutual TLS](../automatic-mtls/) and byte-level
+metrics are still applied.)
 
-If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2,
-Linkerd will proxy the connection as a plain TCP connection, applying
-[mTLS](../automatic-mtls/) and providing byte-level metrics as usual.
-
-(Note that HTTPS calls pods are treated as TCP, not as HTTP. Because the client
-initiates the TLS connection, Linkerd is not be able to decrypt the connection
-to observe the HTTP traffic.)
+Protocol detection can only happen if the HTTP traffic is unencrypted from the
+client. If the application itself initiates a TLS call, Linkerd will not be able
+to decrypt the connection, and will treat it as an opaque TCP connection.
 
 ## Configuring protocol detection
 
@@ -33,26 +33,33 @@ connections, you are likely running into a protocol detection timeout.
 This section will help you understand how to fix this.
 {{< /note >}}
 
-In some cases, Linkerd's protocol detection will time out because it doesn't see
-any bytes from the client within the first 10 seconds of connection
-establishment. This is commonly encountered when using protocols where the
-server sends data before the client does (such as SMTP) or protocols that
-proactively establish connections without sending data (such as Memcache). In
-this case, Linkerd will wait for 10 seconds before establishing a connection to
-the server. After this delay, the connection will be esablished and treated by
-Linkerd as a TCP connection.
+To do protocol detection, Linkerd waits for up to 10 seconds to see bytes sent
+from the client. Note that until the protocol has been determined, Linkerd
+cannot even establish a connection to the destination, since HTTP routing
+configuration may inform where this connection is established to.
 
-To avoid this delay, you will need to provide some configuration for Linkerd.
-There are two basic mechanisms for configuring protocol detection: _opaque
-ports_ and _skip ports_:
+If Linkerd does not see enough data from the client within 10 seconds from
+connection establishment to determine the protocol, Linkerd will treat the
+connection as an opaque TCP connection and will proceed as normal, establishing
+the connection to the destination and proxying the data.
+
+In practice, protocol detection timeouts typically happen when the application
+is using a protocol where the server sends data before the client does (such as
+SMTP) or a protocol that proactively establish connections without sending data
+(such as Memcache). In this case, everything will work, but Linkerd will
+introduce an unnecessary 10 second delay before connection establishment.
+
+To avoid this delay, you can provide some configuration for Linkerd. There are
+two basic mechanisms for configuring protocol detection: _opaque ports_ and
+_skip ports_:
 
 * Opaque ports instruct Linkerd to skip protocol detection and proxy the
   connection as a TCP stream
 * Skip ports bypass the proxy entirely.
 
-Opaque ports are generally preferred as they allow Linkerd to provide mTLS,
-TCP-level metrics, policy, etc. Skip ports, by contrast, create networking rules
-that avoid the proxy entirely, circumventing Linkerd's ability to provide
+Opaque ports are generally preferred as they allow Linkerd to still provide
+mTLS, TCP-level metrics, policy, etc. Skip ports, by contrast, create networking
+rules that avoid the proxy entirely, circumventing Linkerd's ability to provide
 security features.
 
 Linkerd maintains a default list of opaque ports that corresponds to the
