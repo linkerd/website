@@ -97,6 +97,7 @@ traffic. This is true even if the destination is unmeshed, as it controls the
 behavior of meshed clients.
 
 This annotation *must* be set in two places:
+
 1. On the Service receiving the traffic.
 2. On the workload itself (e.g. on the Deployment's Pod spec receiving the
 traffic), or on enclosing namespace, in which it will apply to all workloads in
