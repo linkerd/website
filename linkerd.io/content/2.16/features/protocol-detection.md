@@ -54,7 +54,7 @@ two basic mechanisms for configuring protocol detection: _opaque ports_ and
 _skip ports_:
 
 * Opaque ports instruct Linkerd to skip protocol detection and proxy the
-  connection as a TCP stream
+  connection as a TCP stream.
 * Skip ports bypass the proxy entirely.
 
 Opaque ports are generally preferred as they allow Linkerd to still provide
