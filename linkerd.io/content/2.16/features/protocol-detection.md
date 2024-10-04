@@ -57,10 +57,10 @@ _skip ports_:
   connection as a TCP stream.
 * Skip ports bypass the proxy entirely.
 
-Opaque ports are generally preferred as they only skip protocol detection, without interfering with Linkerd's ability to provide
-mTLS, TCP-level metrics, policy, etc. Skip ports, by contrast, create networking
-rules that avoid the proxy entirely, circumventing Linkerd's ability to provide
-security features.
+Opaque ports are generally preferred as they only skip protocol detection,
+without interfering with Linkerd's ability to provide mTLS, TCP-level metrics,
+policy, etc. Skip ports, by contrast, create networking rules that avoid the
+proxy entirely, circumventing Linkerd's ability to provide security features.
 
 Linkerd maintains a default list of opaque ports that corresponds to the
 standard ports used by protocols that interact poorly with protocol detection.
