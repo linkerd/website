@@ -45,7 +45,7 @@ the connection to the destination and proxying the data.
 
 In practice, protocol detection timeouts typically happen when the application
 is using a protocol where the server sends data before the client does (such as
-SMTP) or a protocol that proactively establish connections without sending data
+SMTP) or a protocol that proactively establishes connections without sending data
 (such as Memcache). In this case, everything will work, but Linkerd will
 introduce an unnecessary 10 second delay before connection establishment.
 
