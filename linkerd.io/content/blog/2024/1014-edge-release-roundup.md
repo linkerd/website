@@ -51,25 +51,23 @@ release-by-release details below.
 
 ## Recommendations and breaking changes
 
-All these releases are recommended for general use. Happily, there are no
-breaking changes here.
+All these releases are recommended for general use. There is one breaking
+change: starting in `edge-24.9.2`, the timestamp in JSON-formatted proxy logs
+are now ISO8601 strings (for example, `2024-09-09T13:38:56.919918Z`). This is
+an oft-requested feature but, of course, still a breaking change.
 
-## The releases
-
-September had three edge releases, bringing in some new improvements to
-Linkerd statistics and also some important bugfixes. Of course, each edge
-release includes _many_ dependency updates which we won't list here, but you
-can find them in the release notes for each release.
-
-The most important caution here is that `edge-24.9.3` introduces a change to
-the Link CRD that's not compatible with previous versions of the Linkerd CLI.
-If you're using Linkerd multicluster, you'll need to either upgrade every
+Additionally, it's important to realize that `edge-24.9.3` introduces a change
+to the Link CRD that's not compatible with previous versions of the Linkerd
+CLI. If you're using Linkerd multicluster, you'll need to either upgrade every
 linkerd cluster to `edge-24.9.3` at the same time, or plan to hold off until
 `edge-24.10.2`.
 
-Additionally, starting in `edge-24.9.2`, the timestamp in JSON-formatted proxy
-logs are now ISO8601 strings (for example, `2024-09-09T13:38:56.919918Z`).
-This is an oft-requested feature but, of course, still a breaking change.
+## The releases
+
+September's releases bring in some new improvements to Linkerd statistics and
+also some important bugfixes. Of course, each edge release includes _many_
+dependency updates which we won't list here, but you can find them in the
+release notes for each release.
 
 [`edge-24.9.3`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.3
 [`edge-24.9.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.2
