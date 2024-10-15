@@ -1,15 +1,15 @@
 ---
 author: 'flynn'
-date: 2024-10-14T00:00:00Z
+date: 2024-10-15T00:00:00Z
 title: |-
   Linkerd Edge Release Roundup: October 2024
 url:
-  /2024/10/14/linkerd-edge-release-roundup/
+  /2024/10/15/linkerd-edge-release-roundup/
 description: |-
   What you need to know about the most recent Linkerd edge releases, October 2024 edition!
 thumbnail: '/uploads/2024/10/roundup-square.png'
-featuredImage: '/uploads/2023/06/roundup-clocks-rect.png'
-socialImage: '/uploads/2024/09/roundup-10-social.png'
+featuredImage: '/uploads/2024/10/roundup-banner.png'
+socialImage: '/uploads/2024/10/roundup-10-social.png'
 tags: [Linkerd, linkerd, edge, release, roundup]
 featured: false
 ---
