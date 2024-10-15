@@ -4,32 +4,33 @@ description = "Use cert-manager to automatically rotate webhook TLS credentials.
 +++
 
 The Linkerd control plane contains several components, called webhooks, which
-are called directly by Kubernetes itself.  The traffic from Kubernetes to the
+are called directly by Kubernetes itself. The traffic from Kubernetes to the
 Linkerd webhooks is secured with TLS and therefore each of the webhooks requires
-a secret containing TLS credentials.  These certificates are different from the
+a secret containing TLS credentials. These certificates are different from the
 ones that the Linkerd proxies use to secure pod-to-pod communication and use a
-completely separate trust chain.  For more information on rotating the TLS
+completely separate trust chain. For more information on rotating the TLS
 credentials used by the Linkerd proxies, see
 [Automatically Rotating Control Plane TLS Credentials](../use_external_certs/).
 
-By default, when Linkerd is installed
-with the Linkerd CLI or with the Linkerd Helm chart, TLS credentials are
-automatically generated for all of the webhooks.  If these certificates expire
-or need to be regenerated for any reason, performing a
-[Linkerd upgrade](../upgrade/) (using the Linkerd CLI or using Helm) will
-regenerate them.
+By default, when Linkerd is installed with the Linkerd CLI or with the Linkerd
+Helm chart, TLS credentials are automatically generated for all of the webhooks.
+If these certificates expire or need to be regenerated for any reason,
+performing a [Linkerd upgrade](../upgrade/) (using the Linkerd CLI or using
+Helm) will regenerate them.
 
-This workflow is suitable for most users.  However, if you need these webhook
-certificates to be rotated automatically on a regular basis, it is possible to
-use cert-manager to automatically manage them.
+Unless absolutely necessary, it is recommended to allow the CLI/Helm to create
+and update webhook certificates automatically through the install and upgrade
+process. However, if you need these webhook certificates to be rotated
+automatically on a regular basis, it is possible to use cert-manager to
+automatically manage them.
 
 {{< trylpt >}}
 
 ## Install Cert manager
 
-As a first step, [install cert-manager on your
-cluster](https://cert-manager.io/docs/installation/)
-and create  the namespaces that cert-manager will use to store its
+As a first step,
+[install cert-manager on your cluster](https://cert-manager.io/docs/installation/)
+and create the namespaces that cert-manager will use to store its
 webhook-related resources. For simplicity, we suggest using the default
 namespace linkerd uses:
 
@@ -51,66 +52,116 @@ kubectl create namespace linkerd-jaeger
 kubectl label namespace linkerd-jaeger linkerd.io/extension=jaeger
 ```
 
-## Save the signing key pair as a Secret
+{{< note >}} The following namespace-bound templates and commands can be re-used
+for Linkerd extensions including viz and jaeger by modifying the namespace of
+each to match that of the extension. {{< /note >}}
 
-Next, we will use the [`step`](https://smallstep.com/cli/) tool, to create a
-signing key pair which will be used to sign each of the webhook certificates:
+## Give cert-manager necessary RBAC permissions
+
+By default cert-manager will only create certificate secrets in the namespace
+where it is installed. Linkerd and its extensions, however, require the cert
+secrets to be created in the namespaces where they run. To do this we will
+create a `ServiceAccount` for cert-manager in the appropriate namespaces with
+the required permissions.
 
 ```bash
-step certificate create webhook.linkerd.cluster.local ca.crt ca.key \
-  --profile root-ca --no-password --insecure --san webhook.linkerd.cluster.local
-
-kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namespace=linkerd
-
-# ignore if not using the viz extension
-kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namespace=linkerd-viz
-
-# ignore if not using the jaeger extension
-kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namespace=linkerd-jaeger
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cert-manager
+  namespace: linkerd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cert-manager-secret-creator
+  namespace: linkerd
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create", "get", "update", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cert-manager-secret-creator-binding
+  namespace: linkerd
+subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: linkerd
+roleRef:
+  kind: Role
+  name: cert-manager-secret-creator
+  apiGroup: rbac.authorization.k8s.io
+EOF
 ```
 
-## Create Issuers referencing the secrets
+## Create the trust root issuer
 
-With the Secrets in place, we can create cert-manager "Issuer" resources that
-reference them:
+To begin, create a self-signing `ClusterIssuer` for the Linkerd trust root
+certificate.
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: linkerd-trust-root-issuer
+spec:
+  selfSigned: {}
+EOF
+```
+
+## Create a trust root certificate
+
+Now create a cert-manager `Certificate` resource which uses the
+previously-created `ClusterIssuer`:
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: linkerd-trust-anchor
+  namespace: linkerd
+spec:
+  commonName: root.linkerd.cluster.local
+  isCA: true
+  duration: 87600h0m0s
+  renewBefore: 87264h0m0s
+  issuerRef:
+    name: linkerd-trust-root-issuer
+    kind: ClusterIssuer
+  privateKey:
+    algorithm: ECDSA
+  secretName: linkerd-trust-anchor
+EOF
+```
+
+## Create Linkerd webhook issuer
+
+Using the previously-generated trust root certificate, create a separate
+`ClusterIssuer` for Linkerd webhook certificates:
 
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: webhook-issuer
+  name: linkerd-webhook-issuer
   namespace: linkerd
 spec:
   ca:
-    secretName: webhook-issuer-tls
----
-# ignore if not using the viz extension
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: webhook-issuer
-  namespace: linkerd-viz
-spec:
-  ca:
-    secretName: webhook-issuer-tls
----
-# ignore if not using the jaeger extension
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: webhook-issuer
-  namespace: linkerd-jaeger
-spec:
-  ca:
-    secretName: webhook-issuer-tls
+    secretName: linkerd-trust-anchor
 EOF
 ```
 
 ## Issuing certificates and writing them to secrets
 
-Finally, we can create cert-manager "Certificate" resources which use the
-Issuers to generate the desired certificates:
+Finally, we can create cert-manager `Certificate` resources which use the
+issuers to generate the desired certificates:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -124,7 +175,7 @@ spec:
   duration: 24h
   renewBefore: 1h
   issuerRef:
-    name: webhook-issuer
+    name: linkerd-webhook-issuer
     kind: Issuer
   commonName: linkerd-policy-validator.linkerd.svc
   dnsNames:
@@ -146,7 +197,7 @@ spec:
   duration: 24h
   renewBefore: 1h
   issuerRef:
-    name: webhook-issuer
+    name: linkerd-webhook-issuer
     kind: Issuer
   commonName: linkerd-proxy-injector.linkerd.svc
   dnsNames:
@@ -167,7 +218,7 @@ spec:
   duration: 24h
   renewBefore: 1h
   issuerRef:
-    name: webhook-issuer
+    name: linkerd-webhook-issuer
     kind: Issuer
   commonName: linkerd-sp-validator.linkerd.svc
   dnsNames:
@@ -177,88 +228,65 @@ spec:
     algorithm: ECDSA
   usages:
   - server auth
----
-# ignore if not using the viz extension
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: tap
-  namespace: linkerd-viz
-spec:
-  secretName: tap-k8s-tls
-  duration: 24h
-  renewBefore: 1h
-  issuerRef:
-    name: webhook-issuer
-    kind: Issuer
-  commonName: tap.linkerd-viz.svc
-  dnsNames:
-  - tap.linkerd-viz.svc
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-  usages:
-  - server auth
----
-# ignore if not using the viz extension
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: linkerd-tap-injector
-  namespace: linkerd-viz
-spec:
-  secretName: tap-injector-k8s-tls
-  duration: 24h
-  renewBefore: 1h
-  issuerRef:
-    name: webhook-issuer
-    kind: Issuer
-  commonName: tap-injector.linkerd-viz.svc
-  dnsNames:
-  - tap-injector.linkerd-viz.svc
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-  usages:
-  - server auth
----
-# ignore if not using the jaeger extension
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: jaeger-injector
-  namespace: linkerd-jaeger
-spec:
-  secretName: jaeger-injector-k8s-tls
-  duration: 24h
-  renewBefore: 1h
-  issuerRef:
-    name: webhook-issuer
-    kind: Issuer
-  commonName: jaeger-injector.linkerd-jaeger.svc
-  dnsNames:
-  - jaeger-injector.linkerd-jaeger.svc
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-  usages:
-  - server auth
 EOF
 ```
 
-At this point, cert-manager can now use these Certificate resources to obtain
-TLS credentials, which are stored in the  `linkerd-proxy-injector-k8s-tls`,
-`linkerd-sp-validator-k8s-tls`, `tap-k8s-tls`, `tap-injector-k8s-tls` and
-`jaeger-injector-k8s-tls` secrets respectively.
+## Summary & Validation
 
-Now we just need to inform Linkerd to consume these credentials.
+Below are the resources created for managing Linkerd webhook certificates with
+cert-manager:
+
+- Namespace: `linkerd` (to store certificates and secrets)
+- RBAC Permissions: ServiceAccount, Role, and RoleBinding in the `linkerd`
+  namespace for cert-manager
+- ClusterIssuer: `linkerd-trust-root-issuer` (self-signed ClusterIssuer)
+- Certificate: `linkerd-trust-anchor` (in the `linkerd` namespace, referencing
+  `linkerd-trust-root-issuer`)
+- Issuer: `linkerd-webhook-issuer` (to manage Linkerd webhook certificates)
+- Certificates & Secrets:
+  - `linkerd-policy-validator`: Policy validator certificate and secret
+  - `linkerd-proxy-injector`: Proxy injector certificate and secret
+  - `linkerd-sp-validator`: Service profile validator certificate and secret
+
+To validate creation and status, run the following commands:
+
+```bash
+# Check namespace creation
+kubectl get namespaces linkerd
+
+# Check RBAC permissions
+kubectl get serviceaccount,role,rolebinding -n linkerd
+
+# Check ClusterIssuer creation
+kubectl get clusterissuers linkerd-trust-root-issuer
+
+# Check Certificate creation
+kubectl get certificates -n linkerd
+
+# Check Issuer creation
+kubectl get issuers.cert-manager.io -n linkerd
+```
+
+## Consuming cert-manager webhook certificates
+
+To have Linkerd consume cert-manager created certificates you will need to add
+the following to your values file or pass them in as flags at runtime.
+
+| Field                                 | Value                              |
+| ------------------------------------- | ---------------------------------- |
+| `proxyInjector.externalSecret`        | true                               |
+| `proxyInjector.injectCaFromSecret`    | "linkerd-proxy-injector-k8s-tls"   |
+| `policyValidator.externalSecret`      | true                               |
+| `policyValidator.injectCaFromSecret`  | "linkerd-policy-validator-k8s-tls" |
+| `profileValidator.externalSecret`     | true                               |
+| `profileValidator.injectCaFromSecret` | "linkerd-sp-validator-k8s-tls"     |
 
 ## Using these credentials with CLI installation
 
 To configure Linkerd to use the credentials from cert-manager rather than
 generating its own:
 
-```bash
+````bash
 # first, install the Linkerd CRDs
 linkerd install --crds | kubectl apply -f -
 
@@ -266,27 +294,12 @@ linkerd install --crds | kubectl apply -f -
 # from cert-manager
 linkerd install \
   --set policyValidator.externalSecret=true \
-  --set-file policyValidator.caBundle=ca.crt \
+  --set-file policyValidator.injectCaFromSecret=linkerd-policy-validator-k8s-tls \
   --set proxyInjector.externalSecret=true \
-  --set-file proxyInjector.caBundle=ca.crt \
+  --set-file proxyInjector.injectCaFromSecret=linkerd-proxy-injector-k8s-tls \
   --set profileValidator.externalSecret=true \
-  --set-file profileValidator.caBundle=ca.crt \
+  --set-file profileValidator.injectCaFromSecret=linkerd-sp-validator-k8s-tls \
   | kubectl apply -f -
-
-# ignore if not using the viz extension
-linkerd viz install \
-  --set tap.externalSecret=true \
-  --set-file tap.caBundle=ca.crt \
-  --set tapInjector.externalSecret=true \
-  --set-file tapInjector.caBundle=ca.crt \
-  | kubectl apply -f -
-
-# ignore if not using the jaeger extension
-linkerd jaeger install
-  --set webhook.externalSecret=true \
-  --set-file webhook.caBundle=ca.crt \
-  | kubectl apply -f -
-```
 
 ## Installing with Helm
 
@@ -304,37 +317,19 @@ helm install linkerd-control-plane \
   --set-file identity.issuer.tls.crtPEM=... \
   --set-file identity.issuer.tls.keyPEM=... \
   --set policyValidator.externalSecret=true \
-  --set-file policyValidator.caBundle=ca.crt \
+  --set-file policyValidator.injectCaFromSecret=linkerd-policy-validator-k8s-tls \
   --set proxyInjector.externalSecret=true \
-  --set-file proxyInjector.caBundle=ca.crt \
+  --set-file proxyInjector.injectCaFromSecret=linkerd-proxy-injector-k8s-tls \
   --set profileValidator.externalSecret=true \
-  --set-file profileValidator.caBundle=ca.crt \
+  --set-file profileValidator.injectCaFromSecret=linkerd-sp-validator-k8s-tls \
   linkerd/linkerd-control-plane \
   -n linkerd
+````
 
-# ignore if not using the viz extension
-helm install linkerd-viz \
-  --set tap.externalSecret=true \
-  --set-file tap.caBundle=ca.crt \
-  --set tapInjector.externalSecret=true \
-  --set-file tapInjector.caBundle=ca.crt \
-  linkerd/linkerd-viz \
-  -n linkerd-viz --create-namespace
+{{< note >}} When installing the `linkerd-control-plane` chart, you _must_
+provide the issuer trust root and issuer credentials as described in
+[Installing Linkerd with Helm](../install-helm/). {{< /note >}}
 
-# ignore if not using the jaeger extension
-helm install linkerd-jaeger \
-  --set webhook.externalSecret=true \
-  --set-file webhook.caBundle=ca.crt \
-  linkerd/linkerd-jaeger \
-  -n linkerd-jaeger --create-namespace
-```
-
-{{< note >}}
-When installing the `linkerd-control-plane` chart, you _must_ provide the
-issuer trust root and issuer credentials as described in [Installing Linkerd
-with Helm](../install-helm/).
-{{< /note >}}
-
-See [Automatically Rotating Control Plane TLS
-Credentials](../automatically-rotating-control-plane-tls-credentials/)
+See
+[Automatically Rotating Control Plane TLS Credentials](../automatically-rotating-control-plane-tls-credentials/)
 for details on how to do something similar for control plane credentials.
