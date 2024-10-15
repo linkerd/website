@@ -73,7 +73,7 @@ release notes for each release.
 [`edge-24.9.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.2
 [`edge-24.10.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.10.2
 
-### [`edge-24.9.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.3) (September 27, 2024)
+### edge-24.9.3 (September 27, 2024)
 
 `edge-24.9.3` fixes a panic that would occur if a retried response arrived
 before the retried request was complete. This may sound bizarre, but it is
@@ -86,7 +86,7 @@ of networking issues between clusters. A caution with `edge-24.9.3` is that
 its CLI will have trouble with linkerd clusters that are running earlier
 releases (looking into the future a bit, `edge-24.10.2` fixes this issue).
 
-### [`edge-24.9.2`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.2) (September 12, 2024)
+### edge-24.9.2 (September 12, 2024)
 
 Starting in `edge-24.9.2`, JSON-formatted proxy logs render timestamps as
 ISO8601 strings, rather than fractional seconds since proxy startup (fixing
@@ -109,7 +109,7 @@ Prometheus with HTTP Basic authentication.
 [internal metrics]: https://github.com/tokio-rs/tokio-metrics?tab=readme-ov-file#task-metrics
 [issue 12505]: https://github.com/linkerd/linkerd2/issues/12505
 
-### [`edge-24.9.1`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.9.1) (September 6, 2024)
+### edge-24.9.1 (September 6, 2024)
 
 In `edge-24.9.1`, Linkerd Viz gets the new `linkerd viz stat-inbound` and
 `linkerd viz stat-outbound` commands, which provide cleaner access from the
