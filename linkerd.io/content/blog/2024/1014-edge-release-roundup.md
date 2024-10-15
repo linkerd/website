@@ -52,15 +52,15 @@ release-by-release details below.
 ## Recommendations and breaking changes
 
 All these releases are recommended for general use. There is one breaking
-change: starting in `edge-24.9.2`, the timestamp in JSON-formatted proxy logs
-are now ISO8601 strings (for example, `2024-09-09T13:38:56.919918Z`). This is
-an oft-requested feature but, of course, still a breaking change.
+change: starting in [`edge-24.9.2`], the timestamp in JSON-formatted proxy
+logs are now ISO8601 strings (for example, `2024-09-09T13:38:56.919918Z`).
+This is an oft-requested feature but, of course, still a breaking change.
 
-Additionally, it's important to realize that `edge-24.9.3` introduces a change
-to the Link CRD that's not compatible with previous versions of the Linkerd
-CLI. If you're using Linkerd multicluster, you'll need to either upgrade every
-linkerd cluster to `edge-24.9.3` at the same time, or plan to hold off until
-`edge-24.10.2`.
+Additionally, it's important to realize that [`edge-24.9.3`] introduces a
+change to the Link CRD that's not compatible with previous versions of the
+Linkerd CLI. If you're using Linkerd multicluster, you'll need to either
+upgrade every linkerd cluster to [`edge-24.9.3`] at the same time, or plan to
+hold off until [`edge-24.10.2`].
 
 ## The releases
 
@@ -92,7 +92,7 @@ Starting in `edge-24.9.2`, JSON-formatted proxy logs render timestamps as
 ISO8601 strings, rather than fractional seconds since proxy startup (fixing
 [issue 12505]). For example, you might see a log like
 
-```
+```json
 {"timestamp":"2024-09-09T13:38:56.919918Z","level":"INFO","fields":{"message":"Using single-threaded proxy runtime"},"target":"linkerd2_proxy::rt","threadId":"ThreadId(1)"}
 ```
 
