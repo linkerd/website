@@ -16,7 +16,7 @@ featured: false
 
 {{< fig
   alt="October 2024 Linkerd Edge Release Roundup"
-  src="/uploads/2023/10/roundup-banner.png" >}}
+  src="/uploads/2024/10/roundup-banner.png" >}}
 
 Welcome to the October 2024 Edge Release Roundup post, where we dive into the
 most recent edge releases to help keep everyone up to date on the latest and
