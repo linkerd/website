@@ -215,7 +215,7 @@ A filter which modifies HTTP request or response headers.
 ### httpBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
-sent to. Only allowed when a route has Service [parentRefs](#parentReference).
+sent to. Only allowed when a route has Service [parentRefs](#parentreference).
 
 {{< table >}}
 | field| value |
@@ -311,4 +311,5 @@ spec:
 
 [ServiceProfile]: ../../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
+[ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
 [GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries

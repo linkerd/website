@@ -14,7 +14,7 @@ An HTTPRoute spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) or Services this HTTPRoute attaches to.|
+| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Server]s or Services this HTTPRoute attaches to.|
 | `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
@@ -23,10 +23,9 @@ An HTTPRoute spec may contain the following top level fields:
 
 A reference to the parent resource this HTTPRoute is a part of.
 
-HTTPRoutes can be attached to a [Server](../authorization-policy/#server) to
-allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes served
-on that Server.
+HTTPRoutes can be attached to a [Server] to allow defining an [authorization
+policy](../authorization-policy/#authorizationpolicy) for specific routes
+served on that Server.
 
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
@@ -182,7 +181,7 @@ A filter which modifies request headers.
 ### httpBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
-sent to. Only allowed when a route has Service [parentRefs](#parentReference).
+sent to. Only allowed when a route has Service [parentRefs](#parentreference).
 
 {{< table >}}
 | field| value |
@@ -249,3 +248,5 @@ spec:
       - name: smiley
         port: 80
 ```
+
+[Server]: ../authorization-policy/#server
