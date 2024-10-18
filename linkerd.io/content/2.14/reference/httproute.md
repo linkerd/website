@@ -3,6 +3,10 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
+<!-- markdownlint-disable-file blanks-around-tables -->
+<!-- markdownlint-disable-file table-column-count -->
+<!-- markdownlint-disable-file table-pipe-style -->
+
 ## Linkerd and Gateway API HTTPRoutes
 
 The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]

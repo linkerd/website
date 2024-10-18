@@ -3,6 +3,10 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
+<!-- markdownlint-disable-file blanks-around-tables -->
+<!-- markdownlint-disable-file table-column-count -->
+<!-- markdownlint-disable-file table-pipe-style -->
+
 ## HTTPRoute Spec
 
 An HTTPRoute spec may contain the following top level fields:
