@@ -180,6 +180,47 @@ spec:
 EOF
 ```
 
+In case you are using `ServiceProfile`s (for features not
+currently supported with `HttpRoute`s) you will
+need to change your `Canary` to use the SMI interface as provider:
+
+```yaml
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: podinfo
+  namespace: test
+spec:
+  provider: "smi:v1alpha2"
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: podinfo
+  service:
+    # service port number
+    port: 9898
+    # container port number or name (optional)
+    targetPort: 9898
+  analysis:
+    interval: 10s
+    threshold: 5
+    stepWeight: 10
+    maxWeight: 100
+    metrics:
+    - name: success-rate
+      templateRef:
+        name: success-rate
+        namespace: test
+      thresholdRange:
+        min: 99
+      interval: 1m
+```
+
+This will override the default flagger's mesh provider from `linkerd` to `smi:v1alpha2`.
+Flagger will create `TrafficSplit`s instead of `HTTPRoute`s.
+Linkerd SMI extension will monitor these `TrafficSplit`s
+and will change `dstOverrides` on your `ServiceProfile`s when the deployment is happening.
+
 The Flagger controller is watching these definitions and will create some new
 resources on your cluster. To watch as this happens, run:
 

@@ -5,7 +5,7 @@ set -euo pipefail
 cd $(mktemp -d)
 
 # hugo
-scurl -O https://github.com/gohugoio/hugo/releases/download/v0.119.0/hugo_extended_0.119.0_linux-amd64.deb
+scurl -O https://github.com/gohugoio/hugo/releases/download/v0.126.1/hugo_extended_0.126.1_linux-amd64.deb
 sudo dpkg -i hugo*.deb
 rm hugo*.deb
 
@@ -22,4 +22,4 @@ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.clou
 scurl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
     | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 sudo apt-get update
-sudo apt-get install google-cloud-cli
+sudo apt-get install -y google-cloud-cli

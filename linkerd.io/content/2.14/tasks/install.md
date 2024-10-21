@@ -29,6 +29,10 @@ Linkerd requires a Kubernetes cluster on which to run. Where this cluster lives
 is not important: it might be hosted on a cloud provider, may be running on your
 local machine, or even somewhere else.
 
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../../reference/k8s-versions/).
+
 Before installing the control plane, validate that this Kubernetes cluster is
 configured appropriately for Linkerd by running:
 

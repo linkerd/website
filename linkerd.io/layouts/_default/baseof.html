@@ -8,13 +8,14 @@
 </head>
 
 <body class="has-background-grey-light has-navbar-fixed-top ">
-  {{ if not .Site.IsServer }}
+  {{ if not hugo.IsServer }}
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXBDGKJ" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   {{ end }}
   {{ partial "header.html" . }}
+  {{ partial "announcement-banner.html" . }}
   <section class="hero">
     <main aria-role="main" class="hero-body">
       {{ block "main" . }}

@@ -1,8 +1,7 @@
 ignoreErrors = ["error-remote-getjson"]
-paginate = 10
+pagination.pagerSize = 10
 baseurl = "https://linkerd.io/"
 disableKinds = ["taxonomy", "term"]
-enableRobotsTXT = true
 languageCode = "en-US"
 sectionPagesMenu = "main"
 theme = "buoyant"
@@ -85,22 +84,28 @@ title = "Linkerd"
   identifier = "join-forum"
   name = "Join Forum"
   url = "https://linkerd.buoyant.io"
-[outputFormats.REDIRECTS]
-  baseName = "_redirects"
-  mediaType = "text/netlify"
-[outputFormats.RSS]
-  mediatype = "application/RSS"
-  baseName = "feed"
+[outputFormats]
+  [outputFormats.REDIRECTS]
+    baseName = "_redirects"
+    mediaType = "text/netlify"
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "feed"
+  [outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName = "search"
 [outputs]
-  home = ["HTML", "RSS", "REDIRECTS"]
+  home = ["HTML", "SearchIndex"]
   section = ["HTML", "RSS", "JSON"]
 [params]
   description = "Linkerd is an ultralight service mesh for Kubernetes. It gives you observability, reliability, and security without requiring any code changes."
   images = [""]
   latest_release_date = "2022-05-31"
   latest_release_version = "1.7.5"
-  latest_linkerd2_stable_version = "2.14"
+  latest_linkerd2_stable_version = "2.16"
   logo = "/images/identity/png/transparent_background/1x/linkerd_primary_color_black_transparent.png"
+  [params.social]
+    twitter = "Linkerd"
 [permalinks]
   blog = "/:year/:month/:day/:slug/"
 [privacy.twitter]

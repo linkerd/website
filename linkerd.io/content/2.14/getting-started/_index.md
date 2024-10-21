@@ -21,7 +21,7 @@ Linkerd can do.
 This guide is designed to walk you through the basics of Linkerd. First, you'll
 install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
-Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
+Finally, you'll "mesh" an application by adding Linkerd's *data plane* to it.
 
 {{< note >}}
 This page contains quick start instructions intended for non-production
@@ -88,6 +88,10 @@ linkerd version
 You should see the CLI version, and also `Server version: unavailable`. This is
 because you haven't installed the control plane on your cluster. Don't
 worry&mdash;we'll fix that soon enough.
+
+Make sure that your Linkerd version and Kubernetes version are compatible by
+checking Linkerd's [supported Kubernetes
+versions](../reference/k8s-versions/).
 
 ## Step 2: Validate your Kubernetes cluster
 
