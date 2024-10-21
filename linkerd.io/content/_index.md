@@ -5,8 +5,6 @@ description: Linkerd adds critical security, observability, and reliability to y
   Kubernetes stack, without any code changes.
 keywords:
 - cloud native applications
-outputs:
-- html
 top_hero:
   title: The world's most advanced service mesh
   description: Enterprise power *without* enterprise complexity. Linkerd adds
@@ -21,11 +19,11 @@ top_hero:
     classname: "is-primary"
 stats:
   - property: Years in production
-    value: 7+
+    value: 8+
   - property: Slack channel members
-    value: 9,000+
+    value: 10,000+
   - property: GitHub stars
-    value: 15,000+
+    value: 19,000+
   - property: Contributors
     value: 500+
 case_studies:

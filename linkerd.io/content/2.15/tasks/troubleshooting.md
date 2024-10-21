@@ -881,12 +881,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project is no longer producing open source
-stable release artifacts. Please read the
-[2.15 announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
-for details.
-
-See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
+As of February 2024, the Linkerd project itself only produces [edge
+release](/releases/) artifacts. For more details, read the [Releases and
+Versions](/releases/) page.
 
 <!-- markdownlint-disable MD036 -->
 
@@ -919,12 +916,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project is no longer producing open source
-stable release artifacts. Please read the
-[2.15 announcement](/2024/02/21/announcing-linkerd-2.15/#a-new-model-for-stable-releases)
-for details.
-
-See [the full list of Linkerd releases](/releases/) for ways to get Linkerd.
+As of February 2024, the Linkerd project itself only produces [edge
+release](/releases/) artifacts. For more details, read the [Releases and
+Versions](/releases/) page.
 
 <!-- markdownlint-disable MD036 -->
 
@@ -1092,31 +1086,6 @@ the Pod and Service. See
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
 These checks are ran if Linkerd has been installed in HA mode.
-
-### √ pod injection disabled on kube-system {#l5d-injection-disabled}
-
-Example warning:
-
-```bash
-‼ pod injection disabled on kube-system
-    kube-system namespace needs to have the label config.linkerd.io/admission-webhooks: disabled if HA mode is enabled
-    see https://linkerd.io/checks/#l5d-injection-disabled for hints
-```
-
-Ensure the kube-system namespace has the
-`config.linkerd.io/admission-webhooks:disabled` label:
-
-```bash
-$ kubectl get namespace kube-system -oyaml
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: kube-system
-  annotations:
-    linkerd.io/inject: disabled
-  labels:
-    config.linkerd.io/admission-webhooks: disabled
-```
 
 ### √ multiple replicas of control plane pods {#l5d-control-plane-replicas}
 

@@ -30,7 +30,7 @@ First we create the `test` namespace, annotated by linkerd so all pods that get
 created there get injected with the linkerd proxy:
 
 ``` bash
-kubectl create ns test --dry-run -o yaml \
+kubectl create ns test --dry-run=client -o yaml \
   | linkerd inject - \
   | kubectl apply -f -
 ```

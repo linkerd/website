@@ -15,6 +15,8 @@
 {{ $data = (index site.Data "cli-2-14").CLIReference }}
 {{ else if eq $docsVersion "2.15" }}
 {{ $data = (index site.Data "cli-2-15").CLIReference }}
+{{ else if eq $docsVersion "2.16" }}
+{{ $data = (index site.Data "cli-2-16").CLIReference }}
 {{ end }}
 {{ range where $data "Name" (.Get 0) }}
 {{ $desc := partial "cli/description" . }}

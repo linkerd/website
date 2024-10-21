@@ -1,0 +1,40 @@
+{{ define "head" }}
+  {{ $resources := slice (resources.Get "js/lunr.js") (resources.Get "js/search.js") }}
+  {{ $js := $resources | resources.Concat "js/lunr-search.js" }}
+  {{ if hugo.IsProduction }}
+    {{ $js = $js | minify | fingerprint }}
+  {{ end }}
+  <script src="{{ $js.RelPermalink }}"></script>
+{{ end }}
+
+{{ define "main" }}
+  <div class="wrapper has-background-white">
+    <div class="container search-results-container">
+      <div class="search-results">
+        <div class="search-loader"></div>
+      </div>
+    </div>
+  </div>
+  <template id="search-result-header-template" hidden>
+    <div class="search-result-header mb-5">
+      <h2>Search results</h2>
+      <p class="mb-3"><span class="search-result-header__text"></span> “<strong class="search-result-header__query"></strong>”</p>
+      <p class="search-result-header__empty"><a href="#" onclick="history.back()">Back</a></p>
+    </div>
+  </template>
+  <template id="search-result-error-template" hidden>
+    <div class="search-result-error">
+      <h2>Search results</h2>
+      <p>Sorry, an error occurred while processing your search results.</p>
+    </div>
+  </template>
+  <template id="search-result-entry-template" hidden>
+    <article class="search-result-entry mb-5 pb-5 has-border-bottom has-border-grey">
+      <p class="search-result-entry__section is-size-6"></p>
+      <h3 class="search-result-entry__title mb-3 is-size-5">
+        <a class="search-result-entry__link is-size-5 has-text-weight-bold"></a>
+      </h3>
+      <div class="search-result-entry__summary"></div>
+    </article>
+  </template>
+{{ end }}

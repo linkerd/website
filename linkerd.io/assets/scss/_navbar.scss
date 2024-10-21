@@ -133,3 +133,28 @@
     height: 28px;
   }     
 }
+
+#searchToggle {
+  cursor: pointer;
+}
+
+#searchInput:hover {
+  &:hover {
+    border-color: #ccc;
+  }
+  &:focus {
+    border-color: $primary-bright-blue;
+  }
+}
+
+@media (max-width: $desktop), (min-width: $widescreen) {
+  #searchForm {
+    display: block !important;
+  }
+  #searchToggle {
+    display: none !important;
+  }
+  #githubStars {
+    display: flex !important;
+  }
+}

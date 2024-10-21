@@ -16,12 +16,18 @@ body {
   min-height: 40px;
   padding: 0 10px;
   background-color: $deep-blue;
+
 }
-.announcement-banner,
-.announcement-banner a {
+.announcement-banner p{
   color: white;
   font-size: 16px !important;
   font-weight: 400;
+  line-height: 1.2;
+}
+.announcement-banner a {
+  color: white;
+  font-size: 16px !important;
+  font-weight: 600 !important;
   line-height: 1.2;
 }
 .announcement-banner img {
@@ -1154,14 +1160,14 @@ a.card-link {
 .search-loader,
 .search-loader:before,
 .search-loader:after {
-  background: #0064fc;
+  background: $primary-bright-blue;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .search-loader {
-  color: #0064fc;
+  color: $primary-bright-blue;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;
