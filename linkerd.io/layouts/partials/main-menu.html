@@ -31,6 +31,21 @@
   </div>
   <div class="navbar-end">
     <div class="navbar-item">
+      <form id="searchForm" action="/search" method="get" style="display:none;">
+        <div class="field">
+          <p class="control has-icons-left">
+            <input id="searchInput" class="input is-rounded" type="text" name="q" placeholder="Search">
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+      </form>
+      <span id="searchToggle" class="icon is-small has-text-grey ml-2">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+    <div id="githubStars" class="navbar-item">
       <div class="github-stars">
         <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star"
         data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
