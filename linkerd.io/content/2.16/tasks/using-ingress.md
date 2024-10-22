@@ -218,7 +218,7 @@ can be set in the Custom Resource called [`IngressRoute`](
   https://docs.traefik.io/providers/kubernetes-crd/) with the
 `services[n].nativeLB` field.
 
-The YAML bellow exemplifies an IngressRoute for `emojivoto` application.
+The YAML below exemplifies an IngressRoute for `emojivoto` application.
 
 ```yaml
 apiVersion: traefik.io/v1alpha1
