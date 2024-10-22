@@ -77,7 +77,7 @@ Common ingress options that Linkerd has been used with include:
 - [Nginx (community version)](#nginx-community-version)
 - [Nginx (F5 NGINX version)](#nginx-f5-nginx-version)
 - [Traefik](#traefik)
-  - [Traefik with normal mode](#traefik-normal-mode)
+  - [Traefik with normal mode (2.10 and newer versions)](#traefik-normal-mode)
   - [Traefik with ingress mode](#traefik-ingress-mode)
 - [GCE](#gce)
 - [Gloo](#gloo)
@@ -211,7 +211,7 @@ As of version 2.10, Traefik can be meshed normally: it does not require the
 [ingress mode](#ingress-mode) annotation. Previous versions needed ingress
 mode and custom headers.
 
-### Traefik with normal mode {#traefik-normal-mode}
+### Traefik with normal mode (2.10 and newer versions) {#traefik-normal-mode}
 
 With traefik versions 2.10 and newer "Kubernetes Service Native Load-Balancing"
 can be set in the Custom Resource called [`IngressRoute`](
@@ -242,7 +242,7 @@ spec:
 
 ### Traefik with ingress mode {#traefik-ingress-mode}
 
-Previous versions of Ttraefik needed to use [ingress mode](#ingress-mode),
+Versions of Traefik prior to 2.10 must use [ingress mode](#ingress-mode)
 i.e. with the `linkerd.io/inject: ingress` annotation rather than
  the default `enabled`. and Traefik's [`Middleware`](https://docs.traefik.io/middlewares/headers/)
 Custom Resource to add the `l5d-dst-override` header.
@@ -256,7 +256,7 @@ The YAML below uses the Traefik custom resources to configure a route and
 headers for the `emojivoto` application.
 
 ```yaml
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: l5d-header-middleware
@@ -266,7 +266,7 @@ spec:
     customRequestHeaders:
       l5d-dst-override: "web-svc.emojivoto.svc.cluster.local:80"
 ---
-apiVersion: traefik.io/v1alpha1
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   creationTimestamp: null
@@ -287,9 +287,8 @@ spec:
 ```
 
 {{< note >}}
-This solution won't work if you're using Traefik's service weights as
-Linkerd will always send requests to the service name in `l5d-dst-override`. A
-workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
+Linkerd will always send requests to the service name in `l5d-dst-override`.
+Traefik's load balancing with weights is not compatible with explicit headers.
 {{< /note >}}
 
 ## GCE
