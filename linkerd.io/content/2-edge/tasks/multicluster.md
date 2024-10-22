@@ -383,10 +383,10 @@ You'll see the `greeting from east` message! Requests from the `frontend` pod
 running in `west` are being transparently forwarded to `east`. Assuming that
 you're still port forwarding from the previous step, you can also reach this
 with `curl http://localhost:8080/east`.  Make that call a couple times and
-you'll be able to get metrics from `linkerd viz stat` as well.
+you'll be able to get metrics from `linkerd viz stat-outbound` as well.
 
 ```bash
-linkerd --context=west -n test viz stat --from deploy/frontend svc
+linkerd --context=west -n test viz stat-outbound deploy/frontend
 ```
 
 We also provide a grafana dashboard to get a feel for what's going on here (see
