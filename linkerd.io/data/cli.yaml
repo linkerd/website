@@ -52,7 +52,7 @@ AnnotationsReference:
 - Description: The trace collector's service account name. E.g., `tracing-service-account`.
     If not provided, it will be defaulted to `default`.
   Name: config.alpha.linkerd.io/trace-collector-service-account
-- Description: The proxy sidecar will stay alive for at least the given period before
+- Description: Adds a preStop hook to the proxy container to delay
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     If not provided, it will be defaulted to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
@@ -1890,4 +1890,3 @@ CLIReference:
     Usage: Print the version number(s) only, with no additional output
   SeeAlso: null
   Synopsis: Print the client and server version information
-

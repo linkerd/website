@@ -61,7 +61,7 @@ AnnotationsReference:
   Name: config.linkerd.io/enable-debug-sidecar
 - Description: Used to configure the outbound TCP connection timeout in the proxy
   Name: config.linkerd.io/proxy-outbound-connect-timeout
-- Description: The proxy sidecar will stay alive for at least the given period before
+- Description: Adds a preStop hook to the proxy container to delay
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     If not provided, it will be defaulted to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
@@ -2785,4 +2785,3 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
-
