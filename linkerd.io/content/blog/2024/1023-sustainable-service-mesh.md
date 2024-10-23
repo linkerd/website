@@ -1,7 +1,7 @@
 ---
 author: 'william'
 date: 2024-10-23T00:00:00Z
-title: Making Linkerd Sustainable
+title: Towards a Sustainable Service Mesh
 thumbnail: '/images/kazuend-19SC2oaVZW0-unsplash.jpg'
 tags: [Linkerd]
 slug: making-linkerd-sustainable
@@ -41,22 +41,21 @@ company; nor a happy and robust community. Each project must find its own answer
 to this question.
 
 To this end, in February [we announced a significant change to
-Linkerd](https://linkerd.io/2024/02/21/announcing-linkerd-2.15/): we would no
+Linkerd](https://linkerd.io/2024/02/21/announcing-linkerd-2.15/). We would no
 longer publish stable release packages as part of the open source project.
-Instead, we would rely on the vendor ecosystem for that work. The change was
-itself relatively small, but the goal behind it was very large: to ensure
-Linkerd could become a truly sustainable project, without relicensing, without
-violating CNCF rules, and without changing Linkerd's fundamental open source
-nature.
+Instead, we would rely on the vendor ecosystem for that work. The change itself
+was a small simplification of the project, but the goal behind it was very
+large: **to ensure Linkerd could become a truly sustainable project, without
+relicensing, without violating CNCF rules, and without changing Linkerd's
+fundamental open source nature.**
 
-**This change was designed to create sustainability.** It did this in the only
-way we thought was truly realistic: by building a clear economic path from the
-companies that build their businesses on top of Linkerd, to the vendors who
-employ, today, 100% of the Linkerd maintainers.
+We made this change the only way we thought was truly realistic: by building a
+clear economic path from the companies that build their businesses on top of
+Linkerd, to the vendors who employ, today, 100% of the Linkerd maintainers.
 
 Did it work?
 
-### The Linkerd community is amazing
+## The Linkerd community is amazing
 
 Yes. Today, we can confidently state that the future of Linkerd is very bright.
 You can read [Buoyant's full announcement
@@ -92,24 +91,24 @@ hoped, this is has dramatically increased the speed of bugfixes for
 adopter-reported issues (see e.g.
 [#12610](https://github.com/linkerd/linkerd2/issues/12610)).
 
-### Linkerd gets more maintainers
+## Linkerd gets more maintainers
 
 We're very happy to report that Buoyant is adding maintainers to Linkerd to
 further increase the pace of development.
 
-Two new maintainers (technically, maintainers-in-training) have already joined
-the team. They are both increasing project bandwidth where we need it most: in
-Linkerd's Rust microproxy, the nuclear engine behind Linkerd's entire feature
-set. The proxy is the key to Linkerd's stellar performance and simplicity, but
-it's also the most challenging part of the project to work on. Linkerd's
-microproxy is one of the most advanced Rust codebases in the world, and being
-able to operate effectively here requires an extremely high caliber of talent.
-These incredible folks will be working full time on making Linkerd's dataplane
-even faster, even lighter, and even more featureful.
+Two new maintainers (technically, still maintainers-in-training) have already
+joined the team. They are both increasing project bandwidth where we need it
+most: in Linkerd's Rust microproxy, the nuclear engine behind Linkerd's entire
+feature set. The proxy is the key to Linkerd's stellar performance and
+simplicity, but it's also the most challenging part of the project to work on.
+Linkerd's microproxy is one of the most advanced Rust codebases in the world,
+and being able to operate effectively here requires an extremely high caliber of
+talent.  These incredible folks will be working full time on making Linkerd's
+dataplane even faster, even lighter, and even more featureful.
 
-And that's just the beginning—expect even more firepower in the future.
+And that's just the beginning.
 
-### Our advice to other CNCF projects
+## Our advice to other CNCF projects
 
 Shortly after our announcement, multiple CNCF maintainers reached out to us
 privately, wondering if a similar change might make sense for them.

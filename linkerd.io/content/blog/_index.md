@@ -7,7 +7,7 @@ tags:
   - Tutorials &amp; How-To's
   - Video
 items:
-  - blog/2024/0813-announcing-linkerd-2.16.md
+  - blog/2024/1023-sustainable-service-mesh.md
   - blog/2024/1015-edge-release-roundup.md
 description: The latest blog posts on the Linkerd service mesh, from technical tutorials to announcements to what's next on the roadmap.
 keywords: []
