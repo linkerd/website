@@ -81,7 +81,7 @@ AnnotationsReference:
 - Description: Maximum time allowed before an unused inbound discovery result is evicted
     from the cache. Defaults to `90s`
   Name: config.linkerd.io/proxy-inbound-discovery-cache-unused-timeout
-- Description: The proxy sidecar will stay alive for at least the given period after
+- Description: The proxy sidecar will stay alive for at least the given period before
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
@@ -2552,4 +2552,3 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
-

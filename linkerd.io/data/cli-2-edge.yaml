@@ -87,7 +87,7 @@ AnnotationsReference:
 - Description: When set to true, disables the protocol detection timeout on the inbound
     side of the proxy by setting it to a very high value
   Name: config.linkerd.io/proxy-disable-inbound-protocol-detect-timeout
-- Description: The proxy sidecar will stay alive for at least the given period after
+- Description: The proxy sidecar will stay alive for at least the given period before
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
@@ -2620,4 +2620,3 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
-
