@@ -77,8 +77,8 @@ Common ingress options that Linkerd has been used with include:
 - [Nginx (community version)](#nginx-community-version)
 - [Nginx (F5 NGINX version)](#nginx-f5-nginx-version)
 - [Traefik](#traefik)
-  - [Traefik 1.x](#traefik-1x)
-  - [Traefik 2.x](#traefik-2x)
+  - [Traefik with normal mode (2.10 and newer versions)](#traefik-normal-mode)
+  - [Traefik with ingress mode](#traefik-ingress-mode)
 - [GCE](#gce)
 - [Gloo](#gloo)
 - [Contour](#contour)
@@ -207,86 +207,53 @@ spec:
 
 ## Traefik
 
-Traefik should be meshed with [ingress mode enabled](#ingress-mode), i.e. with
-the `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
+As of version 2.10, Traefik can be meshed normally: it does not require the
+[ingress mode](#ingress-mode) annotation. Previous versions needed ingress
+mode and custom headers.
 
-Instructions differ for 1.x and 2.x versions of Traefik.
+### Traefik with normal mode (2.10 and newer versions) {#traefik-normal-mode}
 
-### Traefik 1.x {#traefik-1x}
+With traefik versions 2.10 and newer "Kubernetes Service Native Load-Balancing"
+can be set in the Custom Resource called [`IngressRoute`](
+  https://docs.traefik.io/providers/kubernetes-crd/) with the
+`services[n].nativeLB` field.
 
-The simplest way to use Traefik 1.x as an ingress for Linkerd is to configure a
-Kubernetes `Ingress` resource with the
-`ingress.kubernetes.io/custom-request-headers` like this:
+The YAML below exemplifies an IngressRoute for `emojivoto` application.
 
 ```yaml
-# apiVersion: networking.k8s.io/v1beta1 # for k8s < v1.19
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
-  name: web-ingress
+  creationTimestamp: null
+  name: emojivoto-web-ingress-route
   namespace: emojivoto
-  annotations:
-    ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
 spec:
-  ingressClassName: traefik
-  rules:
-  - host: example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-svc
-            port:
-              number: 80
+  entryPoints: []
+  routes:
+  - kind: Rule
+    match: PathPrefix(`/`)
+    priority: 0
+    services:
+    - kind: Service
+      name: web-svc
+      port: 80
+      nativeLB: true
 ```
 
-The important annotation here is:
+### Traefik with ingress mode {#traefik-ingress-mode}
 
-```yaml
-ingress.kubernetes.io/custom-request-headers: l5d-dst-override:web-svc.emojivoto.svc.cluster.local:80
-```
+Versions of Traefik prior to 2.10 must use [ingress mode](#ingress-mode)
+i.e. with the `linkerd.io/inject: ingress` annotation rather than
+ the default `enabled`. and Traefik's [`Middleware`](https://docs.traefik.io/middlewares/headers/)
+Custom Resource to add the `l5d-dst-override` header.
 
 Traefik will add a `l5d-dst-override` header to instruct Linkerd what service
 the request is destined for. You'll want to include both the Kubernetes service
 FQDN (`web-svc.emojivoto.svc.cluster.local`) *and* the destination
 `servicePort`.
 
-To test this, you'll want to get the external IP address for your controller. If
-you installed Traefik via Helm, you can get that IP address by running:
-
-```bash
-kubectl get svc --all-namespaces \
-  -l app=traefik \
-  -o='custom-columns=EXTERNAL-IP:.status.loadBalancer.ingress[0].ip'
-```
-
-You can then use this IP with curl:
-
-```bash
-curl -H "Host: example.com" http://external-ip
-```
-
-{{< note >}}
-This solution won't work if you're using Traefik's service weights as
-Linkerd will always send requests to the service name in `l5d-dst-override`. A
-workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
-{{< /note >}}
-
-### Traefik 2.x {#traefik-2x}
-
-Traefik 2.x adds support for path based request routing with a Custom Resource
-Definition (CRD) called
-[`IngressRoute`](https://docs.traefik.io/providers/kubernetes-crd/).
-
-If you choose to use `IngressRoute` instead of the default Kubernetes `Ingress`
-resource, then you'll also need to use the Traefik's
-[`Middleware`](https://docs.traefik.io/middlewares/headers/) Custom Resource
-Definition to add the `l5d-dst-override` header.
-
-The YAML below uses the Traefik CRDs to produce the same results for the
-`emojivoto` application, as described above.
+The YAML below uses the Traefik custom resources to configure a route and
+headers for the `emojivoto` application.
 
 ```yaml
 apiVersion: traefik.containo.us/v1alpha1
@@ -302,8 +269,6 @@ spec:
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  annotations:
-    kubernetes.io/ingress.class: traefik
   creationTimestamp: null
   name: emojivoto-web-ingress-route
   namespace: emojivoto
@@ -320,6 +285,11 @@ spec:
       name: web-svc
       port: 80
 ```
+
+{{< note >}}
+Linkerd will always send requests to the service name in `l5d-dst-override`.
+Traefik's load balancing with weights is not compatible with explicit headers.
+{{< /note >}}
 
 ## GCE
 
