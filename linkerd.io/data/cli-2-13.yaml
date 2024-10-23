@@ -81,7 +81,7 @@ AnnotationsReference:
 - Description: Maximum time allowed before an unused inbound discovery result is evicted
     from the cache. Defaults to `90s`
   Name: config.linkerd.io/proxy-inbound-discovery-cache-unused-timeout
-- Description: The proxy sidecar will stay alive for at least the given period before
+- Description: Adds a preStop hook to the proxy container to delay
     receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
