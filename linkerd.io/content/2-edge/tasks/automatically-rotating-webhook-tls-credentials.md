@@ -282,7 +282,7 @@ linkerd viz install \
   | kubectl apply -f -
 
 # ignore if not using the jaeger extension
-linkerd jaeger install
+linkerd jaeger install \
   --set webhook.externalSecret=true \
   --set-file webhook.caBundle=ca.crt \
   | kubectl apply -f -

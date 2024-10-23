@@ -3,6 +3,10 @@ title = "HTTPRoute"
 description = "Reference guide to HTTPRoute resources."
 +++
 
+<!-- markdownlint-disable-file blanks-around-tables -->
+<!-- markdownlint-disable-file table-column-count -->
+<!-- markdownlint-disable-file table-pipe-style -->
+
 ## Linkerd and Gateway API HTTPRoutes
 
 The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]
@@ -36,7 +40,7 @@ An HTTPRoute spec may contain the following top level fields:
 {{< table >}}
 | field| value |
 |------|-------|
-| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) or Services this HTTPRoute attaches to.|
+| `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Server]s or Services this HTTPRoute attaches to.|
 | `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
 {{< /table >}}
@@ -45,24 +49,21 @@ An HTTPRoute spec may contain the following top level fields:
 
 A reference to the parent resource this HTTPRoute is a part of.
 
-HTTPRoutes can be attached to a [Server](../authorization-policy/#server) to
-allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes served
-on that Server.
+HTTPRoutes can be attached to a [Server] to allow defining an [authorization
+policy](../authorization-policy/#authorizationpolicy) for specific routes
+served on that Server.
 
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
 request routing](../../tasks/configuring-dynamic-request-routing/).
 
-{{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfile](../../features/service-profiles/)s
-provide overlapping configuration.** For backwards-compatibility reasons, a
-ServiceProfile will take precedence over HTTPRoutes which configure the same
-Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
-proxies will use the ServiceProfile configuration, rather than the HTTPRoute
-configuration, as long as the ServiceProfile exists.
-{{< /warning >}}
+{{< warning >}} **Outbound HTTPRoutes and [ServiceProfile]s provide overlapping
+configuration.** For backwards-compatibility reasons, a ServiceProfile will
+take precedence over HTTPRoutes which configure the same Service. If a
+ServiceProfile is defined for the parent Service of an HTTPRoute, proxies will
+use the ServiceProfile configuration, rather than the HTTPRoute configuration,
+as long as the ServiceProfile exists. {{< /warning >}}
 
 ParentReferences are namespaced, and may reference either a parent in the same
 namespace as the HTTPRoute, or one in a different namespace. As described in
@@ -218,7 +219,7 @@ A filter which modifies HTTP request or response headers.
 ### httpBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
-sent to. Only allowed when a route has Service [parentRefs](#parentReference).
+sent to. Only allowed when a route has Service [parentRefs](#parentreference).
 
 {{< table >}}
 | field| value |
@@ -314,4 +315,5 @@ spec:
 
 [ServiceProfile]: ../../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
-[GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
+[ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
+[Server]: ../authorization-policy/#server
