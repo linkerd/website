@@ -1,7 +1,7 @@
-+++
-title = "Getting Per-Route Metrics"
-description = "Configure per-route metrics for your application."
-+++
+---
+title: Getting Per-Route Metrics
+description: Configure per-route metrics for your application.
+---
 
 To get per-route metrics, you must first create a
 [service profile](../../features/service-profiles/). Once a service

@@ -1,7 +1,7 @@
-+++
-title = "Timeouts"
-description = "How Linkerd implements timeouts."
-+++
+---
+title: Timeouts
+description: How Linkerd implements timeouts.
+---
 
 Linkerd can be configured with timeouts to limit the maximum amount of time on
 a request before aborting.

@@ -1,0 +1,39 @@
+/*
+@markup
+<a class="button button--primary">Text</a>
+*/
+
+.button,
+button {
+  @include make-button;
+
+  // @options
+
+  &.button--primary {
+    @include make-button--primary;
+  }
+  &.button--secondary {
+    @include make-button--secondary;
+  }
+  &.button--outline {
+    @include make-button--outline;
+  }
+  &.button--lg {
+    @include make-button--lg;
+  }
+  &.button--md {
+    @include make-button--md;
+  }
+  &.button--sm {
+    @include make-button--sm;
+  }
+  &.button--xs {
+    @include make-button--xs;
+  }
+  &.button--block {
+    @include make-button--block;
+  }
+  &.button--disabled {
+    @include make-button--disabled;
+  }
+}

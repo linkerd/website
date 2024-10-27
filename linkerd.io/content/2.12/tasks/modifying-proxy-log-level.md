@@ -1,7 +1,7 @@
-+++
-title = "Modifying the Proxy Log Level"
-description = "Linkerd proxy log levels can be modified dynamically to assist with debugging."
-+++
+---
+title: Modifying the Proxy Log Level
+description: Linkerd proxy log levels can be modified dynamically to assist with debugging.
+---
 
 Emitting logs is an expensive operation for a network proxy, and by default,
 the Linkerd data plane proxies are configured to only log exceptional events.

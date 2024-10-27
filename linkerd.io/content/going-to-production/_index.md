@@ -1,7 +1,7 @@
-+++
-title = "Going to Production"
-weight = 20
-+++
+---
+title: Going to Production
+type: docs
+---
 
 The Linkerd project itself doesn't provide a formal guide for deploying Linkerd
 to a production environment. Below are some external resources that might prove

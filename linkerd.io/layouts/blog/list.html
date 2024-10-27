@@ -1,40 +1,40 @@
 {{ define "main" }}
-  <div class="wrapper blog-preview rounded-block bottom-round has-background-grey-light">
-    <div class="blogs-container">
-      <div class="container columns is-multiline is-marginless">
-        <div class="column">
-          <h1>Blog</h1>
-        </div>
-      </div>
-      <div class="container center-column is-marginless is-fullwidth">
-        <div class="has-background-grey-light is-paddingless featured-items-container">
-          <div id="featuredItems">
-            <div class="search-title is-uppercase has-text-centered">Featured</div>
-            <div class="columns container is-multiline is-variable blog-list-container pt-0">
-              {{ range.Params.items }}
-              {{ with $.Site.GetPage . }}
-                {{ .Scratch.Set "type" "Page" }}
-                {{- if (isset .Params "categories") -}}
-                  {{- .Scratch.Set "type" (index .Params.categories 0) -}}
-                {{- end -}}
-                {{ partial "featured-card.html" . }}
-              {{ end }}
-            {{ end }}
-          </div>
-        </div>
-        <div class="search-title is-uppercase has-text-centered">
-          All Blog Posts
-        </div>
-        <div class="columns container is-multiline is-variable blog-list-container pt-0">
-          {{ range .Paginator.Pages }}
-            {{ partial "related-card.html" . }}
+  <div class="blog blog--list">
+    <div class="blog__container container">
+      <div class="blog-list">
+        <div class="blog-list__header">
+          <h1>
+            {{ .Title }}
+          </h1>
+          {{ with .OutputFormats.Get "rss" }}
+            {{ partial "components/icon-button" (dict "href" .Permalink "icon" "rss" "size" "lg") }}
           {{ end }}
         </div>
-        <div id="pagination" class="container column">
-          {{ partial "pagination.html" . }}
+        {{/* Show feature blog posts only on the first page */}}
+        {{ if eq .Paginator.PageNumber 1 }}
+          {{ with .Params.feature }}
+            {{ if reflect.IsSlice . }}
+              <div class="blog-list__feature">
+                {{ range first 2 . }}
+                  {{ with site.GetPage . }}
+                    {{ .Render "_feature" }}
+                  {{ end }}
+                {{ end }}
+              </div>
+              <h2>
+                All blog posts
+              </h2>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{/* Paginated blog posts */}}
+        <div class="blog-list__pages">
+          {{ range .Paginator.Pages }}
+            {{ .Render "_summary" }}
+          {{ end }}
         </div>
       </div>
+      {{ partial "components/paginator" . }}
     </div>
   </div>
-</div>
 {{ end }}

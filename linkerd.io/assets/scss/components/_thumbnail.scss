@@ -1,0 +1,29 @@
+/*
+@markup
+<div class="thumbnail">
+  <span style="background-image:url('tn.jpg')"></span>
+  <img src="tn.jpg" class="img img--128 img--contain">
+</div>
+*/
+
+.thumbnail {
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius;
+
+  span {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px);
+    z-index: 0;
+  }
+  img {
+    position: relative;
+    z-index: 1;
+  }
+}

@@ -1,0 +1,184 @@
+# linkerd.io
+
+## Website assets
+
+Please do not put files in the `static` directory that are referenced on
+linkerd.io. This directory is reserved for assets that are used as external
+resources. If you need to add images for a page, please add them in the [page
+bundle](https://gohugo.io/content-management/page-bundles/).
+
+**Note:** Images in page bundles that have a width or height larger than 2400
+pixels will be downsized.
+
+## Tasks
+
+### Creating a blog post
+
+To create a blog post, start by creating a blog post folder in the `blog`
+directory using the following format: `/blog/YYYY/MMDD-title/`. For example:
+`/blog/2024/0102-my-blog-post`.
+
+Next, create an `index.md` file in the folder with the following frontmatter:
+
+```yaml
+title: # The title of your blog post
+description: # The description of your blog post
+date: # The date of your post in the format: `2024-01-01T00:00:00Z`
+slug: # The URL slug for the page. Only set this param if you want to use a different slug than the title.
+keywords: [] # An array of keywords are used to relate blog posts
+params:
+  author: # The author id of the blog post. It must be an author from `data/authors.yaml`
+```
+
+#### Cover, thumbnail, and feature images
+
+To associate a cover, thumbnail, or feature image to a blog post, you do not
+have to specify them in the frontmatter. You can simply name them `cover`,
+`thumbnail` or `feature`, place them in the blog post folder, and they will
+automattically be used. For example:
+
+```text
+blog/
+└── 2024/
+    └── 0102-my-blog-post
+        ├── cover.jpg
+        ├── index.md
+        └── thumbnail.jpg
+```
+
+If a blog post is featured, by default, the cover image will be used on the blog
+list page. If a cover image is not present, or you would like to use a different
+image than the cover image, you can name it `feature` and place it in the
+blog post folder.
+
+If a thumbnail image is not present in the blog post folder, the thumbnail image
+will be created from the cover image. By default, the thumbnail image will be
+cropped and resized into a square. If you would like to maintaining the original
+aspect ratio, you can set the `thumbnailProcess` frontmatter param to `fit`.
+For example:
+
+```yaml
+params:
+  thumbnailProcess: fit
+```
+
+You can automattically show the cover image at the top of the blog post by
+adding the `showCover` frontmatter param. For example:
+
+```yaml
+params:
+  showCover: true
+```
+
+If you need to name your images another way, you can reference the image names
+in the frontmatter:
+
+```yaml
+params:
+  thumbnail: square.png
+  cover: hero.png
+  feature: hero-cropped.png
+```
+
+#### Open graph images
+
+By default, the first 6 images from the `images` array are used when the blog
+post is shared on social media. For example:
+
+```yaml
+images: [social.png]
+```
+
+If the images array is empty, images with names matching `feature`, `cover`,
+or `thumbnail` will be used in that order.
+
+#### Markdown images
+
+All images that you want to include in your markdown content should also be
+placed in the blog post folder and referenced using a markdown image syntax. For
+example:
+
+```markdown
+![Alt text](my-image.jpg)
+```
+
+To dispplay a caption below the image, provide an image title. For example:
+
+```markdown
+![Alt text](my-image.jpg "My image caption")
+```
+
+### Hiding pages in the docs sidenav
+
+_(docs page only)_
+
+A page can be prevented from showing in the sidenav by setting the `unlisted`
+frontmatter parameter. The page will be hidden in the sidenav, but can be linked
+to externally or from some other page.
+
+```yaml
+---
+params:
+  unlisted: true
+---
+```
+
+**Note:** Setting this parameter **does not** prevent the page from being shown
+on the search results page, or search engines from indexing the page.
+
+### Hiding page from search engines
+
+A page can be prevented from being shown on the search results page, and indexed
+by search engines by setting the `noIndex` frontmatter parameter.
+
+```yaml
+---
+params:
+  noIndex: true
+---
+```
+
+**Note:** Adding this param will cause `<meta name="robots" content="noindex">`
+to be added to the `<head>` of the page. It **does not** add the URL of the page
+to the robots.txt file.
+
+### Disabling the copy button in codeblocks
+
+Highlighting in code fences is enabled by default. A Copy button will
+automatically be added to every highlighted codeblock. If you wish to disable
+the copy button for a single codeblock, you can do so by adding the
+`disable-copy` class attribute after the language identifier.
+
+```
+bash {class=disable-copy}
+```
+
+### Creating a new major version
+
+To create a new major version for the Linkerd docs, follow the steps below. As
+an example we suppose the latest major is `2.16` and we'd like to create docs
+for the upcoming `2.17` version, that will appear at `https://linkerd.io/2.17`.
+
+- Clone the `https://github.com/linkerd/website` repo
+- Create a new branch `yourusername/2.17`
+- Make sure all the links in the edge version (`2-edge`) are relative and don't
+  have the version hard-coded. E.g. `(/../cli/install/#)` instead of
+  `(/2-edge/reference/cli/install/#)`.
+- Update the latest version in `linkerd.io/config/_default/params.yaml`:
+  `latestMajorVersion: "2.17"`
+- Update the `docs` menu in `linkerd.io/config/_default/menu.yaml` to include a
+  menu item for `2.17`.
+- Create an entire new directory, copying the edge docs:
+  `cp -r linkerd.io/content/2-edge linkerd.io/content/2.17`. Any upcoming doc
+  changes pertaining to `2.17` should be pushed against that new directory and
+  the `2-edge` directory.
+- Add a row to the Supported Kubernetes Versions table in
+  `linkerd.io/content/2.17/reference/k8s-versions.md`.
+- Generate the CLI docs with `linkerd doc > linkerd.io/data/cli/2-17.yaml`
+- Push, and hold the merge till after `2.17` is out.
+- After merging, update the Cloudflare redirection rule so `/2` points to
+  `/2.17`:
+  - Click on the `linkerd.io` site
+  - Click on the `Rules`section
+  - Update the rule `https://linkerd.io/2/*` so that it points to
+    `https://linkerd.io/2.17/$1`

@@ -1,17 +1,7 @@
-+++
-title = "Overview"
-aliases = [
-  "/docs",
-  "/documentation",
-  "/2-edge/",
-  "../docs/",
-  "/doc/network-performance/",
-  "/in-depth/network-performance/",
-  "/in-depth/debugging-guide/",
-  "/in-depth/concepts/"
-]
-weight = 1
-+++
+---
+title: Overview
+weight: 1
+---
 
 Linkerd is a _service mesh_ for Kubernetes. It makes running services easier
 and safer by giving you runtime debugging, observability, reliability, and

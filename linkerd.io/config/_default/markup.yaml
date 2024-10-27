@@ -1,0 +1,9 @@
+highlight:
+  style: github-dark # https://xyproto.github.io/splash/docs/
+goldmark:
+  renderer:
+    unsafe: true # Allow HTML in markdown files
+  parser:
+    attribute:
+      block: true # Enable Markdown attributes
+    wrapStandAloneImageWithinParagraph: false # Do not wrap standalone images with paragraph tag

@@ -1,10 +1,8 @@
-+++
-title = "Service Profiles"
-description = "Linkerd's service profiles enable per-route metrics as well as retries and timeouts."
-aliases = [
-  "../service-profiles/"
-]
-+++
+---
+title: Service Profiles
+description: Linkerd's service profiles enable per-route metrics as well as retries
+  and timeouts.
+---
 
 {{< note >}}
 [HTTPRoutes](../httproute/) are the recommended method for getting per-route

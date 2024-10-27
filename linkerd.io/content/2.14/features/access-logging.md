@@ -1,13 +1,7 @@
-+++
-title = "HTTP Access Logging"
-description = "Linkerd proxies can be configured to emit HTTP access logs."
-aliases = [
-  "../access-logging/",
-  "../proxy-access-logging/",
-  "../http-access-logging/",
-  "../access-log",
-]
-+++
+---
+title: HTTP Access Logging
+description: Linkerd proxies can be configured to emit HTTP access logs.
+---
 
 Linkerd proxies can be configured to generate an HTTP access log that records
 all HTTP requests that transit the proxy.

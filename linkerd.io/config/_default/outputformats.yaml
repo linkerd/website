@@ -1,0 +1,8 @@
+RSS:
+  baseName: feed
+  mediaType: application/rss+xml
+
+# Add output format for seach index
+SearchIndex:
+  baseName: search
+  mediaType: application/json

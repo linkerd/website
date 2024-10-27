@@ -1,9 +1,9 @@
-+++
-title = "version"
-+++
+---
+title: version
+---
 
-{{< cli/description "version" >}}
+{{< docs/cli-description "version" >}}
 
-{{< cli/examples "version" >}}
+{{< docs/cli-examples "version" >}}
 
-{{< cli/flags "version" >}}
+{{< docs/cli-flags "version" >}}

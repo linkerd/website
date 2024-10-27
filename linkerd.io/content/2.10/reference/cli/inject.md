@@ -1,9 +1,6 @@
-+++
-title = "inject"
-aliases = [
-  "/2.10/inject-reference/"
-]
-+++
+---
+title: inject
+---
 
 The `inject` command is a text transform that modifies Kubernetes manifests
 passed to it either as a file or as a stream (`-`) to adds a
@@ -22,6 +19,6 @@ Alternatively, this command can also perform the full injection purely on the
 client side, by enabling with the `--manual` flag. (Prior to Linkerd 2.4, this
 was the default behavior.)
 
-{{< cli/examples "inject" >}}
+{{< docs/cli-examples "inject" >}}
 
-{{< cli/flags "inject" >}}
+{{< docs/cli-flags "inject" >}}

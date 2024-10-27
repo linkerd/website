@@ -1,0 +1,43 @@
+/*
+@markup See: layouts/enterprise/list.html
+*/
+
+.enterprise {
+  // Override all h2s on the enterprise page
+  h2 {
+    font-size: 40px;
+    font-weight: $font-weight-normal;
+    
+    @media (min-width: breakpoint-min-width("md")) {
+      font-size: 48px;
+    }
+  }
+  .page__container {
+    @include make-stack(6);
+  }
+  .enterprise__section {
+    @include make-stack(5);
+  }
+  @media (min-width: breakpoint-min-width("md")) {
+    .card {
+      gap: spacer(6);
+      padding: spacer(6);
+    }
+  }
+  @media (min-width: breakpoint-min-width("lg")) {
+    .hero__container {
+      background-image: url("/enterprise/images/bkgd.svg");
+      background-repeat: no-repeat;
+      background-size: 500px auto;
+      background-position: right;
+    }
+    .hero__body {
+      max-width: 700px;
+    }
+  }
+  @media (min-width: breakpoint-min-width("xl")) {
+    .hero__container {
+      background-size: auto 100%;
+    }
+  }
+}

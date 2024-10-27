@@ -1,7 +1,7 @@
-+++
-title = "Authorization Policy"
-description = "Reference guide to Linkerd's policy resources."
-+++
+---
+title: Authorization Policy
+description: Reference guide to Linkerd's policy resources.
+---
 
 Linkerd's authorization policy allows you to control which types of traffic are
 allowed to meshed pods. See the [Authorization Policy feature
@@ -74,14 +74,14 @@ that in turn references the Server.
 
 A `Server` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `accessPolicy`| [accessPolicy](#accesspolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`). |
 | `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
 | `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### accessPolicy
 
@@ -98,12 +98,12 @@ This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/
 All the pods that are part of this selector will be part of the [Server] group.
 A podSelector object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field | value |
 |-------|-------|
 | `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | matchLabels is a map of {key,value} pairs. |
-{{< /table >}}
+{{< /keyval >}}
 
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
@@ -191,12 +191,12 @@ being able to target [Servers].
 
 An `AuthorizationPolicy` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `targetRef`| A [TargetRef](#targetref) which references a resource to which the authorization policy applies.|
 | `requiredAuthenticationRefs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, _all_ authentications must match.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### targetRef
 
@@ -211,14 +211,14 @@ applies. The API objects supported are:
   applies to all traffic to all [Servers] and [HTTPRoutes] defined in the
   namespace.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `group`| Group is the group of the target resource. For namespace kinds, this should be omitted.|
 | `kind`| Kind is kind of the target resource.|
 | `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### AuthorizationPolicy Examples
 
@@ -292,12 +292,12 @@ to the target.
 
 A `MeshTLSAuthentication` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `identities`| A list of mTLS identities to authenticate. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all meshed clients are authorized.|
 | `identityRefs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### MeshTLSAuthentication Examples
 
@@ -357,22 +357,22 @@ specified networks in order to be authorized to send to the target.
 
 A `NetworkAuthentication` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `networks`| A list of [networks](#network) to authenticate.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### network
 
 A `network` defines an authenticated IP subnet.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `cidr`| A subnet in CIDR notation to authenticate.|
 | `except`| A list of subnets in CIDR notation to exclude from the authentication.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### NetworkAuthentication Examples
 
@@ -409,23 +409,23 @@ preferred, and `ServerAuthorization` will be deprecated in future releases.
 
 A ServerAuthorization spec must contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `client`| A [client](#client) describes clients authorized to access a server. |
 | `server`| A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### serverRef
 
 A `serverRef` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `name`| References a `Server` instance by name. |
 | `selector`| A [selector](#selector) selects servers on which this authorization applies in the same namespace. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### selector
 
@@ -433,12 +433,12 @@ This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/
 All the servers that are part of this selector will have this authorization applied.
 A selector object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field | value |
 |-------|-------|
 | `matchExpressions` | A list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | A map of {key,value} pairs. |
-{{< /table >}}
+{{< /keyval >}}
 
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
@@ -447,43 +447,43 @@ for more details.
 
 A `client` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `meshTLS`| A [meshTLS](#meshtls) is used to authorize meshed clients to access a server. |
 | `unauthenticated`| A boolean value that authorizes unauthenticated clients to access a server. |
-{{< /table >}}
+{{< /keyval >}}
 
 Optionally, it can also contain the `networks` field:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `networks`| Limits the client IP addresses to which this authorization applies. If unset, the server chooses a default (typically, all IPs or the cluster's pod network). |
-{{< /table >}}
+{{< /keyval >}}
 
 #### meshTLS
 
 A `meshTLS` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `unauthenticatedTLS`| A boolean to indicate that no client identity is required for communication. This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate. |
 | `identities`| A list of proxy identity strings (as provided via mTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
 | `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via mTLS). |
-{{< /table >}}
+{{< /keyval >}}
 
 #### serviceAccount
 
 A serviceAccount field contains the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `name`| The ServiceAccount's name. |
 | `namespace`| The ServiceAccount's namespace. If unset, the authorization's namespace is used. |
-{{< /table >}}
+{{< /keyval >}}
 
 ### ServerAuthorization Examples
 

@@ -1,9 +1,9 @@
-+++
-title = "repair"
-+++
+---
+title: repair
+---
 
-{{< cli/description "repair" >}}
+{{< docs/cli-description "repair" >}}
 
-{{< cli/examples "repair" >}}
+{{< docs/cli-examples "repair" >}}
 
-{{< cli/flags "repair" >}}
+{{< docs/cli-flags "repair" >}}

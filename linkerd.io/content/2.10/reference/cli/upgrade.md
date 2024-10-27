@@ -1,12 +1,12 @@
-+++
-title = "upgrade"
-+++
+---
+title: upgrade
+---
 
-{{< cli/description "upgrade" >}}
+{{< docs/cli-description "upgrade" >}}
 
-{{< cli/examples "upgrade" >}}
+{{< docs/cli-examples "upgrade" >}}
 
-{{< cli/flags "upgrade" >}}
+{{< docs/cli-flags "upgrade" >}}
 
 ## Subcommands
 
@@ -15,16 +15,16 @@ Upgrade supports subcommands as part of the
 
 ### config
 
-{{< cli/description "upgrade config" >}}
+{{< docs/cli-description "upgrade config" >}}
 
-{{< cli/examples "upgrade config" >}}
+{{< docs/cli-examples "upgrade config" >}}
 
-{{< cli/flags "upgrade config" >}}
+{{< docs/cli-flags "upgrade config" >}}
 
 ### control-plane
 
-{{< cli/description "upgrade control-plane" >}}
+{{< docs/cli-description "upgrade control-plane" >}}
 
-{{< cli/examples "upgrade control-plane" >}}
+{{< docs/cli-examples "upgrade control-plane" >}}
 
-{{< cli/flags "upgrade control-plane" >}}
+{{< docs/cli-flags "upgrade control-plane" >}}

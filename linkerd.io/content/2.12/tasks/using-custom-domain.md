@@ -1,7 +1,7 @@
-+++
-title = "Using a Custom Cluster Domain"
-description = "Use Linkerd with a custom cluster domain."
-+++
+---
+title: Using a Custom Cluster Domain
+description: Use Linkerd with a custom cluster domain.
+---
 
 For Kubernetes clusters that use [custom cluster domain](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/),
 Linkerd must be installed using the `--cluster-domain` option:

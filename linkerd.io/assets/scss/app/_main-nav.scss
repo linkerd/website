@@ -1,0 +1,99 @@
+/*
+@markup See: layouts/partials/main-nav.html
+*/
+
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  gap: spacer(3);
+
+  ul,
+  li {
+    // Override base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .main-nav__menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: $navy;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-bold;
+
+      &:hover,
+      &:active {
+        color: $blue;
+      }
+    }
+    .main-nav__menu--selected {
+      & > a {
+        color: $blue;
+      }
+    }
+  }
+  .main-nav__github {
+    height: 28px;
+  }
+  // Mobile nav
+  @media (max-width: $mobile-max-breakpoint) {
+    .main-nav__menu {
+      li {
+        padding: spacer(2) 0;
+
+        &:has(ul) {
+          padding-bottom: 0;
+        }
+      }
+      ul {
+        border-left: solid 2px $border-color;
+        margin: spacer(3) 0;
+        padding-left: spacer(3);
+      }
+    }
+    .icon {
+      display: none;
+    }
+  }
+  // Desktop nav
+  @media (min-width: $desktop-min-breakpoint) {
+    flex-direction: row;
+    align-items: center;
+
+    .main-nav__menu {
+      position: relative;
+      flex-grow: 1;
+      flex-direction: row;
+      gap: spacer(4);
+
+      & > li:hover ul {
+        display: block;
+      }
+      ul {
+        position: absolute;
+        display: none;
+        padding: spacer(3);
+        background-color: $white;
+        box-shadow: $box-shadow;
+        border-radius: $border-radius;
+        z-index: $z-index-main-nav-submenu;
+
+        li {
+          padding: spacer(2);
+        }
+      }
+      .icon {
+        margin-left: spacer(1);
+      }
+    }
+  }
+  // Hack: Hide the Github button in the Desktop nav when it doesn't fit
+  @media (min-width: breakpoint-min-width("lg")) and (max-width: breakpoint-max-width("lg")) {
+    .main-nav__github {
+      display: none;
+    }
+  }
+}

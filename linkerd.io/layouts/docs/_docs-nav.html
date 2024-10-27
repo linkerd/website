@@ -1,0 +1,67 @@
+{{ $page := . }}
+{{ $section := printf "/%s/" site.Params.latestMajorVersion }}
+{{ range site.Menus.docs }}
+  {{ if hasPrefix $page.RelPermalink .URL }}
+    {{ $section = .URL }}
+  {{ end }}
+{{ end }}
+
+<div class="docs__nav">
+  <div class="docs__versions">
+    <select onchange="window.location.href=this.value;">
+      {{ range site.Menus.docs.Reverse }}
+        <option value="{{ .URL }}"
+          {{- if eq .URL $section }} selected="selected"{{ end -}}
+        >{{ .Name }}</option>
+      {{ end }}
+    </select>
+  </div>
+  <nav>
+    {{ with site.GetPage $section }}
+      {{ template "filetree" (dict "Section" . "CurrentPage" $) }}
+    {{ end }}
+    <ul>
+      {{ range site.Menus.other }}
+        <li{{ if $page.IsMenuCurrent "other" . }} class="docs__nav--selected"{{ end }}>
+          <a href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+  <div class="docs__community">
+    <ul>
+      {{ range site.Menus.community }}
+        <li>
+          <a href="{{ .URL }}" target="_blank" rel="noopener">
+            {{ $alt := .Name }}
+            {{ with resources.Get .Params.image }}
+              <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img">
+            {{ end }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
+
+{{ define "filetree" }}
+  <ul{{ with .Class }} class="{{ . }}"{{ end }}>
+    {{ range where .Section.Pages.ByWeight "Params.unlisted" "ne" true }}
+      {{ $isCurrentPage := eq . $.CurrentPage }}
+      {{ $isAncestorOfCurrentPage := .IsAncestor $.CurrentPage }}
+      {{ $selected := or $isCurrentPage $isAncestorOfCurrentPage }}
+      <li{{ if $selected }} class="docs__nav--selected"{{ end }}>
+        <a href="{{ .RelPermalink }}">
+          {{ .LinkTitle }}
+        </a>
+        {{ if and .IsSection .RegularPages }}
+          <input class="toggle__input" type="checkbox" id="toggle-{{ .File.UniqueID }}" {{ if $selected }}checked="checked"{{ end }}>
+          <label class="toggle__label" for="toggle-{{ .File.UniqueID }}">
+            {{ partial "components/icon" (dict "name" "chevron-right" "variant" "secondary") }}
+          </label>
+          {{ template "filetree" (dict "Section" . "CurrentPage" $.CurrentPage "Class" "toggle__target") }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

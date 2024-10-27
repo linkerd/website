@@ -1,7 +1,7 @@
-+++
-title = "Troubleshooting"
-description = "Troubleshoot issues with your Linkerd installation."
-+++
+---
+title: Troubleshooting
+description: Troubleshoot issues with your Linkerd installation.
+---
 
 This section provides resolution steps for common problems reported with the
 `linkerd check` command.
@@ -175,7 +175,7 @@ Example failure:
 ```bash
 × is running the minimum kubectl version
     kubectl is on version [1.9.1], but version [1.13.0] or more recent is required
-    see https://linkerd.io/checks/#kubectl-version for hints
+    see https://linkerd.io/2/checks/#kubectl-version for hints
 ```
 
 Linkerd requires at least version `1.13.0`. Verify your kubectl version with:
@@ -201,7 +201,7 @@ Example failure:
 ```bash
 × control plane Namespace exists
     The "foo" namespace does not exist
-    see https://linkerd.io/checks/#l5d-existence-ns for hints
+    see https://linkerd.io/2/checks/#l5d-existence-ns for hints
 ```
 
 Ensure the Linkerd control plane namespace exists:
@@ -224,7 +224,7 @@ Example failure:
 ```bash
 × control plane ClusterRoles exist
     missing ClusterRoles: linkerd-linkerd-identity
-    see https://linkerd.io/checks/#l5d-existence-cr for hints
+    see https://linkerd.io/2/checks/#l5d-existence-cr for hints
 ```
 
 Ensure the Linkerd ClusterRoles exist:
@@ -251,7 +251,7 @@ Example failure:
 ```bash
 × control plane ClusterRoleBindings exist
     missing ClusterRoleBindings: linkerd-linkerd-identity
-    see https://linkerd.io/checks/#l5d-existence-crb for hints
+    see https://linkerd.io/2/checks/#l5d-existence-crb for hints
 ```
 
 Ensure the Linkerd ClusterRoleBindings exist:
@@ -278,7 +278,7 @@ Example failure:
 ```bash
 × control plane ServiceAccounts exist
     missing ServiceAccounts: linkerd-identity
-    see https://linkerd.io/checks/#l5d-existence-sa for hints
+    see https://linkerd.io/2/checks/#l5d-existence-sa for hints
 ```
 
 Ensure the Linkerd ServiceAccounts exist:
@@ -308,7 +308,7 @@ Example failure:
 ```bash
 × control plane CustomResourceDefinitions exist
     missing CustomResourceDefinitions: serviceprofiles.linkerd.io
-    see https://linkerd.io/checks/#l5d-existence-crd for hints
+    see https://linkerd.io/2/checks/#l5d-existence-crd for hints
 ```
 
 Ensure the Linkerd CRD exists:
@@ -333,7 +333,7 @@ Example failure:
 ```bash
 × control plane MutatingWebhookConfigurations exist
     missing MutatingWebhookConfigurations: linkerd-proxy-injector-webhook-config
-    see https://linkerd.io/checks/#l5d-existence-mwc for hints
+    see https://linkerd.io/2/checks/#l5d-existence-mwc for hints
 ```
 
 Ensure the Linkerd MutatingWebhookConfigurations exists:
@@ -357,7 +357,7 @@ Example failure:
 ```bash
 × control plane ValidatingWebhookConfigurations exist
     missing ValidatingWebhookConfigurations: linkerd-sp-validator-webhook-config
-    see https://linkerd.io/checks/#l5d-existence-vwc for hints
+    see https://linkerd.io/2/checks/#l5d-existence-vwc for hints
 ```
 
 Ensure the Linkerd ValidatingWebhookConfiguration exists:
@@ -382,7 +382,7 @@ Example failure:
 × proxy-init container runs as root user if docker container runtime is used
     there are nodes using the docker container runtime and proxy-init container must run as root user.
 try installing linkerd via --set proxyInit.runAsRoot=true
-    see https://linkerd.io/2.11/checks/#l5d-proxy-init-run-as-root for hints
+    see https://linkerd.io/2/checks/#l5d-proxy-init-run-as-root for hints
 ```
 
 Kubernetes nodes running with docker as the container runtime ([CRI](https://kubernetes.io/docs/concepts/architecture/cri/))
@@ -411,7 +411,7 @@ Example failure:
 ```bash
 × 'linkerd-config' config map exists
     missing ConfigMaps: linkerd-config
-    see https://linkerd.io/checks/#l5d-existence-linkerd-config for hints
+    see https://linkerd.io/2/checks/#l5d-existence-linkerd-config for hints
 ```
 
 Ensure the Linkerd ConfigMap exists:
@@ -443,7 +443,7 @@ Example failure:
 ```bash
 × no unschedulable pods
     linkerd-prometheus-6b668f774d-j8ncr: 0/1 nodes are available: 1 Insufficient cpu.
-    see https://linkerd.io/checks/#l5d-existence-unschedulable-pods for hints
+    see https://linkerd.io/2/checks/#l5d-existence-unschedulable-pods for hints
 ```
 
 For more information, see the Kubernetes documentation on the
@@ -458,13 +458,13 @@ Example failures:
 ```bash
 × certificate config is valid
     key ca.crt containing the trust anchors needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=true
-    see https://linkerd.io/checks/#l5d-identity-cert-config-valid
+    see https://linkerd.io/2/checks/#l5d-identity-cert-config-valid
 ```
 
 ```bash
 × certificate config is valid
     key crt.pem containing the issuer certificate needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=false
-    see https://linkerd.io/checks/#l5d-identity-cert-config-valid
+    see https://linkerd.io/2/checks/#l5d-identity-cert-config-valid
 ```
 
 Ensure that your `linkerd-identity-issuer` secret contains the correct keys for
@@ -481,7 +481,7 @@ Example failure:
 × trust roots are using supported crypto algorithm
     Invalid roots:
         * 165223702412626077778653586125774349756 identity.linkerd.cluster.local must use P-256 curve for public key, instead P-521 was used
-    see https://linkerd.io/checks/#l5d-identity-trustAnchors-use-supported-crypto
+    see https://linkerd.io/2/checks/#l5d-identity-trustAnchors-use-supported-crypto
 ```
 
 You need to ensure that all of your roots use ECDSA P-256 for their public key
@@ -495,7 +495,7 @@ Example failure:
 × trust roots are within their validity period
     Invalid roots:
         * 199607941798581518463476688845828639279 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T13:08:18Z
-    see https://linkerd.io/checks/#l5d-identity-trustAnchors-are-time-valid for hints
+    see https://linkerd.io/2/checks/#l5d-identity-trustAnchors-are-time-valid for hints
 ```
 
 Failures of such nature indicate that your roots have expired. If that is the
@@ -512,13 +512,13 @@ Example warnings:
 ‼ trust roots are valid for at least 60 days
     Roots expiring soon:
         * 66509928892441932260491975092256847205 identity.linkerd.cluster.local will expire on 2019-12-19T13:30:57Z
-    see https://linkerd.io/checks/#l5d-identity-trustAnchors-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-identity-trustAnchors-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of some of your roots is approaching. In
 order to address this problem without incurring downtime, you can follow the
 process outlined in
-[Rotating your identity certificates](../rotating_identity_certificates/).
+[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/).
 
 ### √ issuer cert is using supported crypto algorithm {#l5d-identity-issuer-cert-uses-supported-crypto}
 
@@ -527,7 +527,7 @@ Example failure:
 ```bash
 × issuer cert is using supported crypto algorithm
     issuer certificate must use P-256 curve for public key, instead P-521 was used
-    see https://linkerd.io/checks/#5d-identity-issuer-cert-uses-supported-crypto for hints
+    see https://linkerd.io/2/checks/#5d-identity-issuer-cert-uses-supported-crypto for hints
 ```
 
 You need to ensure that your issuer certificate uses ECDSA P-256 for its public
@@ -542,7 +542,7 @@ Example failure:
 ```bash
 × issuer cert is within its validity period
     issuer certificate is not valid anymore. Expired on 2019-12-19T13:35:49Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-is-time-valid
 ```
 
 This failure indicates that your issuer certificate has expired. In order to
@@ -556,13 +556,13 @@ Example warning:
 ```bash
 ‼ issuer cert is valid for at least 60 days
     issuer certificate will expire on 2019-12-19T13:35:49Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
 ```
 
 This warning means that your issuer certificate is expiring soon. If you do not
 rely on external certificate management solution such as `cert-manager`, you can
 follow the process outlined in
-[Rotating your identity certificates](../rotating_identity_certificates/)
+[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/)
 
 ### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-anchor}
 
@@ -571,7 +571,7 @@ Example error:
 ```bash
 × issuer cert is issued by the trust root
     x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-issued-by-trust-anchor for hints
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-issued-by-trust-anchor for hints
 ```
 
 This error indicates that the issuer certificate that is in the
@@ -619,7 +619,7 @@ Example failure:
 ```bash
 × proxy-injector webhook has valid cert
     secrets "linkerd-proxy-injector-tls" not found
-    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-valid for hints
 ```
 
 Ensure that the `linkerd-proxy-injector-k8s-tls` secret exists and contains the
@@ -630,7 +630,7 @@ and `key.pem` data entries.
 ```bash
 × proxy-injector webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-proxy-injector.linkerd.svc
-    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-valid for hints
 ```
 
 Here you need to make sure the certificate was issued specifically for
@@ -643,7 +643,7 @@ Example failure:
 ```bash
 ‼ proxy-injector cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of proxy-injnector webhook
@@ -658,7 +658,7 @@ Example failure:
 ```bash
 × sp-validator webhook has valid cert
     secrets "linkerd-sp-validator-tls" not found
-    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-valid for hints
 ```
 
 Ensure that the `linkerd-sp-validator-k8s-tls` secret exists and contains the
@@ -669,7 +669,7 @@ and `key.pem` data entries.
 ```bash
 × sp-validator webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-sp-validator.linkerd.svc
-    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-valid for hints
 ```
 
 Here you need to make sure the certificate was issued specifically for
@@ -682,7 +682,7 @@ Example failure:
 ```bash
 ‼ sp-validator cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-sp-validator-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of sp-validator webhook
@@ -697,7 +697,7 @@ Example failure:
 ```bash
 × policy-validator webhook has valid cert
     secrets "linkerd-policy-validator-tls" not found
-    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-valid for hints
 ```
 
 Ensure that the `linkerd-policy-validator-k8s-tls` secret exists and contains the
@@ -706,7 +706,7 @@ appropriate `tls.crt` and `tls.key` data entries.
 ```bash
 × policy-validator webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-policy-validator.linkerd.svc
-    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-valid for hints
 ```
 
 Here you need to make sure the certificate was issued specifically for
@@ -719,7 +719,7 @@ Example failure:
 ```bash
 ‼ policy-validator cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-policy-validator-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of policy-validator webhook
@@ -739,7 +739,7 @@ Example warning:
         * emojivoto/emoji-d8d7d9c6b-8qwfx
         * emojivoto/vote-bot-588499c9f6-zpwz6
         * emojivoto/voting-8599548fdc-6v64k
-    see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 Observing this warning indicates that some of your meshed pods have proxies that
@@ -758,7 +758,7 @@ components:
         * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
         * linkerd-viz/tap-68d8bbf64-mpzgb
         * linkerd-viz/web-849f74b7c6-qlhwc
-    see https://linkerd.io/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 If that is the case, simply wait for the `upgrade` operation to complete. The
@@ -874,7 +874,7 @@ Example failure:
     is running version 19.1.1 but the latest edge version is 19.1.2
 ```
 
-See the page on [Upgrading Linkerd](../../upgrade/).
+See the page on [Upgrading Linkerd](../upgrade/).
 
 ## The "control-plane-version" checks {#l5d-version-control}
 
@@ -887,7 +887,7 @@ Example failures:
     mismatched channels: running stable-2.1.0 but retrieved edge-19.1.2
 ```
 
-See the page on [Upgrading Linkerd](../../upgrade/).
+See the page on [Upgrading Linkerd](../upgrade/).
 
 ## The "linkerd-control-plane-proxy" checks {#linkerd-control-plane-proxy}
 
@@ -901,7 +901,7 @@ setting or re-install Linkerd as necessary.
 
 This warning indicates the proxies running in the Linkerd control plane are
 running an old version.  We recommend downloading the latest Linkerd release
-and [Upgrading Linkerd](../../upgrade/).
+and [Upgrading Linkerd](../upgrade/).
 
 ### √ control plane proxies and cli versions match {#l5d-cp-proxy-cli-version}
 
@@ -954,7 +954,7 @@ Example failure:
     linkerd/linkerd-prometheus-74d66f86f6-6t6dh: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
-See the page on [Upgrading Linkerd](../../upgrade/).
+See the page on [Upgrading Linkerd](../upgrade/).
 
 ### √ data plane and cli versions match {#l5d-data-plane-cli-version}
 
@@ -963,7 +963,7 @@ See the page on [Upgrading Linkerd](../../upgrade/).
     linkerd/linkerd-identity-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
-See the page on [Upgrading Linkerd](../../upgrade/).
+See the page on [Upgrading Linkerd](../upgrade/).
 
 ### √ data plane pod labels are configured correctly {#l5d-data-plane-pod-labels}
 
@@ -1038,7 +1038,7 @@ Example warning:
 ```bash
 ‼ pod injection disabled on kube-system
     kube-system namespace needs to have the label config.linkerd.io/admission-webhooks: disabled if HA mode is enabled
-    see https://linkerd.io/checks/#l5d-injection-disabled for hints
+    see https://linkerd.io/2/checks/#l5d-injection-disabled for hints
 ```
 
 Ensure the kube-system namespace has the
@@ -1063,7 +1063,7 @@ Example warning:
 ```bash
 ‼ multiple replicas of control plane pods
     not enough replicas available for [linkerd-identity]
-    see https://linkerd.io/checks/#l5d-control-plane-replicas for hints
+    see https://linkerd.io/2/checks/#l5d-control-plane-replicas for hints
 ```
 
 This happens when one of the control plane pods doesn't have at least two
@@ -1112,7 +1112,7 @@ Example error:
 ```bash
 × cni plugin ConfigMap exists
     configmaps "linkerd-cni-config" not found
-    see https://linkerd.io/checks/#cni-plugin-cm-exists for hints
+    see https://linkerd.io/2/checks/#cni-plugin-cm-exists for hints
 ```
 
 Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
@@ -1137,7 +1137,7 @@ Example error:
 ```bash
 × cni plugin ClusterRole exists
     missing ClusterRole: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-cr-exists for hints
+    see https://linkerd.io/2/checks/#cni-plugin-cr-exists for hints
 ```
 
 Ensure that the cluster role exists:
@@ -1162,7 +1162,7 @@ Example error:
 ```bash
 × cni plugin ClusterRoleBinding exists
     missing ClusterRoleBinding: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-crb-exists for hints
+    see https://linkerd.io/2/checks/#cni-plugin-crb-exists for hints
 ```
 
 Ensure that the cluster role binding exists:
@@ -1187,7 +1187,7 @@ Example error:
 ```bash
 × cni plugin ServiceAccount exists
     missing ServiceAccount: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-sa-exists for hints
+    see https://linkerd.io/2/checks/#cni-plugin-sa-exists for hints
 ```
 
 Ensure that the CNI service account exists in the CNI namespace:
@@ -1212,7 +1212,7 @@ Example error:
 ```bash
 × cni plugin DaemonSet exists
     missing DaemonSet: linkerd-cni
-    see https://linkerd.io/checks/#cni-plugin-ds-exists for hints
+    see https://linkerd.io/2/checks/#cni-plugin-ds-exists for hints
 ```
 
 Ensure that the CNI daemonset exists in the CNI namespace:
@@ -1237,7 +1237,7 @@ Example failure:
 ```bash
 ‼ cni plugin pod is running on all nodes
     number ready: 2, number scheduled: 3
-    see https://linkerd.io/checks/#cni-plugin-ready
+    see https://linkerd.io/2/checks/#cni-plugin-ready
 ```
 
 Ensure that all the CNI pods are running:
@@ -1274,7 +1274,7 @@ Example error:
 ```bash
 × Link CRD exists
     multicluster.linkerd.io/Link CRD is missing
-    see https://linkerd.io/checks/#l5d-multicluster-link-crd-exists for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-link-crd-exists for hints
 ```
 
 Make sure multicluster extension is correctly installed and that the
@@ -1293,7 +1293,7 @@ Example error:
 ```bash
 × Link resources are valid
     failed to parse Link east
-    see https://linkerd.io/checks/#l5d-multicluster-links-are-valid for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-links-are-valid for hints
 ```
 
 Make sure all the link objects are specified in the expected format.
@@ -1305,7 +1305,7 @@ Example error:
 ```bash
 × remote cluster access credentials are valid
     * secret [east/east-config]: could not find east-config secret
-    see https://linkerd.io/checks/#l5d-smc-target-clusters-access for hints
+    see https://linkerd.io/2/checks/#l5d-smc-target-clusters-access for hints
 ```
 
 Make sure the relevant Kube-config with relevant permissions.
@@ -1319,7 +1319,7 @@ Example errors:
 × clusters share trust anchors
     Problematic clusters:
         * remote
-    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-clusters-share-anchors for hints
 ```
 
 The error above indicates that your trust anchors are not compatible. In order
@@ -1330,7 +1330,7 @@ certificates.
 × clusters share trust anchors
     Problematic clusters:
         * remote: cannot parse trust anchors
-    see https://linkerd.io/checks/#l5d-multicluster-clusters-share-anchors for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-clusters-share-anchors for hints
 ```
 
 Such an error indicates that there is a problem with your anchors on the cluster
@@ -1349,7 +1349,7 @@ Example error:
 ```bash
 × service mirror controller has required permissions
     missing Service mirror ClusterRole linkerd-service-mirror-access-local-resources: unexpected verbs expected create,delete,get,list,update,watch, got create,delete,get,update,watch
-    see https://linkerd.io/checks/#l5d-multicluster-source-rbac-correct for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-source-rbac-correct for hints
 ```
 
 This error indicates that the local RBAC permissions of the service mirror
@@ -1418,7 +1418,7 @@ Example error:
 ```bash
 × service mirror controllers are running
     Service mirror controller is not present
-    see https://linkerd.io/checks/#l5d-multicluster-service-mirror-running for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-service-mirror-running for hints
 ```
 
 Note, it takes a little bit for pods to be scheduled, images to be pulled and
@@ -1439,7 +1439,7 @@ Example errors:
 ‼ all gateway mirrors are healthy
     Some gateway mirrors do not have endpoints:
   linkerd-gateway-gke.linkerd-multicluster mirrored from cluster [gke]
-    see https://linkerd.io/checks/#l5d-multicluster-gateways-endpoints for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-gateways-endpoints for hints
 ```
 
 The error above indicates that some gateway mirror services in the source
@@ -1459,7 +1459,7 @@ Example errors:
 ‼ all mirror services have endpoints
     Some mirror services do not have endpoints:
   voting-svc-gke.emojivoto mirrored from cluster [gke] (gateway: [linkerd-multicluster/linkerd-gateway])
-    see https://linkerd.io/checks/#l5d-multicluster-services-endpoints for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-services-endpoints for hints
 ```
 
 The error above indicates that some mirror services in the source cluster do not
@@ -1479,7 +1479,7 @@ Example errors:
 ```bash
 ‼  all mirror services are part of a Link
     mirror service voting-east.emojivoto is not part of any Link
-    see https://linkerd.io/checks/#l5d-multicluster-orphaned-services for hints
+    see https://linkerd.io/2/checks/#l5d-multicluster-orphaned-services for hints
 ```
 
 The error above indicates that some mirror services in the source cluster do not
@@ -1539,7 +1539,7 @@ Example failure:
 ```bash
 × linkerd-viz ClusterRoles exist
     missing ClusterRoles: linkerd-linkerd-viz-metrics-api
-    see https://linkerd.io/checks/#l5d-viz-cr-exists for hints
+    see https://linkerd.io/2/checks/#l5d-viz-cr-exists for hints
 ```
 
 Ensure the linkerd-viz extension ClusterRoles exist:
@@ -1567,7 +1567,7 @@ Example failure:
 ```bash
 × linkerd-viz ClusterRoleBindings exist
     missing ClusterRoleBindings: linkerd-linkerd-viz-metrics-api
-    see https://linkerd.io/checks/#l5d-viz-crb-exists for hints
+    see https://linkerd.io/2/checks/#l5d-viz-crb-exists for hints
 ```
 
 Ensure the linkerd-viz extension ClusterRoleBindings exist:
@@ -1614,7 +1614,7 @@ Example failure:
 ```bash
 × tap API server has valid cert
     secrets "tap-k8s-tls" not found
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-tap-cert-valid for hints
 ```
 
 Ensure that the `tap-k8s-tls` secret exists and contains the appropriate
@@ -1625,7 +1625,7 @@ entries.
 ```bash
 × tap API server has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not tap.linkerd-viz.svc
-    see https://linkerd.io/checks/#l5d-tap-cert-valid for hints
+    see https://linkerd.io/2/checks/#l5d-tap-cert-valid for hints
 ```
 
 Here you need to make sure the certificate was issued specifically for
@@ -1638,7 +1638,7 @@ Example failure:
 ```bash
 ‼ tap API server cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
-    see https://linkerd.io/checks/#l5d-webhook-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-webhook-cert-not-expiring-soon for hints
 ```
 
 This warning indicates that the expiry of the tap API Server webhook
@@ -1669,7 +1669,7 @@ requirements in the cluster:
 ```bash
 × linkerd-viz extension pods are injected
     could not find proxy container for tap-59f5595fc7-ttndp pod
-    see https://linkerd.io/checks/#l5d-viz-pods-injection for hints
+    see https://linkerd.io/2/checks/#l5d-viz-pods-injection for hints
 ```
 
 Ensure all the linkerd-viz pods are injected
@@ -1693,7 +1693,7 @@ Make sure that the `proxy-injector` is working correctly by running
 ```bash
 × viz extension pods are running
     container linkerd-proxy in pod tap-59f5595fc7-ttndp is not ready
-    see https://linkerd.io/checks/#l5d-viz-pods-running for hints
+    see https://linkerd.io/2/checks/#l5d-viz-pods-running for hints
 ```
 
 Ensure all the linkerd-viz pods are running with 2/2
@@ -1717,7 +1717,7 @@ Make sure that the `proxy-injector` is working correctly by running
 ```bash
 × prometheus is installed and configured correctly
     missing ClusterRoles: linkerd-linkerd-viz-prometheus
-    see https://linkerd.io/checks/#l5d-viz-cr-exists for hints
+    see https://linkerd.io/2/checks/#l5d-viz-cr-exists for hints
 ```
 
 Ensure all the prometheus related resources are present and running
@@ -1878,7 +1878,7 @@ versions in sync by updating either the CLI or linkerd-jaeger as necessary.
 ```bash
 × jaeger extension pods are injected
     could not find proxy container for jaeger-6f98d5c979-scqlq pod
-    see https://linkerd.io/checks/#l5d-jaeger-pods-injections for hints
+    see https://linkerd.io/2/checks/#l5d-jaeger-pods-injections for hints
 ```
 
 Ensure all the jaeger pods are injected
@@ -1899,7 +1899,7 @@ Make sure that the `proxy-injector` is working correctly by running
 ```bash
 × jaeger extension pods are running
     container linkerd-proxy in pod jaeger-59f5595fc7-ttndp is not ready
-    see https://linkerd.io/checks/#l5d-jaeger-pods-running for hints
+    see https://linkerd.io/2/checks/#l5d-jaeger-pods-running for hints
 ```
 
 Ensure all the linkerd-jaeger pods are running with 2/2

@@ -1,0 +1,298 @@
+/*
+@markup See: layouts/index.html
+*/
+
+.home {
+  @include make-stack(7);
+  padding-bottom: spacer(8);
+
+  // Override all h2s on the home page
+  h2 {
+    margin-bottom: spacer(6);
+    font-size: 40px;
+    font-weight: $font-weight-normal;
+  }
+  @media (min-width: breakpoint-min-width("md")) {
+    h2 {
+      font-size: 48px;
+    }
+  }
+}
+
+// .hero
+
+.home {
+  .hero {
+    position: relative; // Needed to position linky
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: right;
+
+    .hero__body {
+      max-width: 980px;
+    }
+    .hero__header {
+      h1 {
+        line-height: 1.1; // It's safe to tighen up the line-height, since there are no descenders
+      }
+    }
+    .home-hero__linky {
+      display: none;
+      position: absolute;
+      bottom: -40px;
+      right: 0;
+      z-index: 1;
+    }
+    @media (min-width: breakpoint-min-width("md")) {
+      background-image: url("/home/hero/bkgd.png");
+
+      .hero__header {
+        h1 {
+          font-size: 60px; // Override base styles
+        }
+      }
+      .home-hero__linky {
+        display: block;
+        right: 20%;
+      }
+    }
+    @media (min-width: breakpoint-min-width("xxl")) {
+      .hero_container {
+        // Override component styles
+        padding-top: 120px;
+        padding-bottom: 120px;
+      }
+      .hero__header {
+        h1 {
+          font-size: 80px;
+        }
+      }
+      .home-hero__linky {
+        right: 25%;
+      }
+    }
+  }
+}
+
+// .home-stats
+
+.home-stats {
+  margin-top: 0; // Override stack
+  padding: spacer(6) 0;
+  background-image: linear-gradient($light-blue, $white);
+  background-size: 100% 200px;
+  background-repeat: no-repeat;
+
+  .home-stats__body {
+    display: grid;
+    gap: spacer(2);
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .home-stats__property {
+    font-size: $font-size-sm;
+    text-align: center;
+  }
+  .home-stats__value {
+    font-size: 40px;
+    font-weight: $font-weight-heavy;
+    text-align: center;
+  }
+}
+
+// .home-articles
+
+.home-articles {
+  .home-articles__content {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// .home-adopters
+
+@keyframes home-adopters-logos-1-keyframes {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -3600px;
+  }
+}
+@keyframes home-adopters-logos-2-keyframes {
+  from {
+    left: 3600px;
+  }
+  to {
+    left: 0%;
+  }
+}
+.home-adopters {
+  padding: spacer(6) 0;
+  background-image: linear-gradient($white, $light-green, $light-green, $white);
+
+  .home-adopters__body {
+    display: flex;
+    flex-direction: column;
+    gap: spacer(6);
+    font-size: $font-size-sm;
+  }
+  .home-adopters__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    a {
+      display: block;
+      color: $navy;
+      white-space: nowrap;
+    }
+    img {
+      display: block;
+      width: 160px;
+      height: auto;
+      margin: 0 auto;
+      padding-top: spacer(2);
+    }
+  }
+  .home-adopters__content,
+  .home-adopters__mask {
+    position: relative;
+    overflow: hidden;
+  }
+  .home-adopters__content {
+    text-align: center;
+  }
+  .home-adopters__logos {
+    position: relative;
+    width: 3600px;
+    height: 80px;
+  }
+  .home-adopters__logos-1,
+  .home-adopters__logos-2 {
+    position: absolute;
+    display: flex;
+    gap: 50px;
+    width: 100%;
+
+    img {
+      display: block;
+      width: 150px;
+      height: auto;
+    }
+  }
+  .home-adopters__logos-1 {
+    animation: home-adopters-logos-1-keyframes 60s linear infinite;
+  }
+  .home-adopters__logos-2 {
+    animation: home-adopters-logos-2-keyframes 60s linear infinite;
+  }
+  @media (max-width: breakpoint-max-width("md")) {
+    .home__container {
+      padding: 0;
+    }
+  }
+  @media (min-width: breakpoint-min-width("lg")) {
+    .home-adopters__body {
+      flex-direction: row;
+    }
+    .home-adopters__title {
+      align-items: flex-start;
+      text-align: left;
+
+      img {
+        margin: 0;
+      }
+    }
+    .home-adopters__content {
+      text-align: left;
+    }
+    .home-adopters__mask {
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100px;
+        height: 80px;
+        z-index: 1;
+      }
+      &::before {
+        background-image: linear-gradient(90deg, $light-green, rgba($light-green, 0));
+        left: 0;
+      }
+      &::after {
+        background-image: linear-gradient(-90deg, $light-green, rgba($light-green, 0));
+        right: 0;
+      }
+    }
+  }
+}
+
+// .home-case-studies
+
+.home-case-studies {
+  .home-case-studies__content {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// .home-about
+
+//.home-about {
+//}
+
+// .home-features
+
+.home-features {
+  .home-features__content {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+// .home-cncf
+
+.home-cncf {
+  .home-cncf__body {
+    @include make-stack(4);
+    padding: spacer(6) spacer(4);
+    background-color: $light-blue;
+    text-align: center;
+  }
+}
+
+// .home-tweets
+
+.home-tweets {
+  .home-tweets__content {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

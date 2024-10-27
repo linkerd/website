@@ -1,0 +1,28 @@
+/*
+@markup See: layouts/community/heroes.html
+*/
+
+.heroes {
+  .page__container {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .card {
+    position: relative;
+    
+    .heroes__type {
+      position: absolute;
+      top: spacer(3);
+      right: 0;
+      z-index: 1;
+    }
+    .card__body {
+      z-index: 2;
+    }
+  }
+}

@@ -1,4 +1,39 @@
 {{ define "main" }}
-{{ partial "top-hero.html" .Params.top_hero }}
-{{ partial "community/adopters/adopters.html" . }}
+  <div class="adopters">
+    {{ .Render "_hero" }}
+    <div class="page">
+      <div class="page__container container">
+        <div class="adopters__case-studies">
+          {{ range .Params.caseStudies }}
+            <div class="card card--inset-media">
+              <div class="card__media">
+                {{ $alt := .title }}
+                {{ with $.Resources.Get .image }}
+                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--max-w196 img--max-h48">
+                {{ end }}
+              </div>
+              <div class="card__body">
+                <div class="card__header">
+                  <h3>
+                    {{ .title }}
+                  </h3>
+                </div>
+                <div class="card__content">
+                  {{ printf `<blockquote>"%s"</blockquote>` .quote | markdownify }}
+                </div>
+                <div class="card__footer">
+                  {{ partial "components/button" (dict "href" .url "text" "Read case study" "variant" "primary") }}
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+        <div class="adopters__logos">
+          {{ range sort (.Resources.ByType "image") "Name" }}
+            <img src="{{ .RelPermalink }}" alt="{{ path.BaseName .RelPermalink }}" class="img img--w196 img--h80 img--center">
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
 {{ end }}

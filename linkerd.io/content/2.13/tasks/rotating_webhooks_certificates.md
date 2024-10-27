@@ -1,7 +1,7 @@
-+++
-title = "Rotating webhooks certificates"
-description = "Follow these steps to rotate your Linkerd webhooks certificates."
-+++
+---
+title: Rotating webhooks certificates
+description: Follow these steps to rotate your Linkerd webhooks certificates.
+---
 
 Linkerd uses the
 [Kubernetes admission webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)

@@ -1,12 +1,7 @@
-+++
-title = "Exporting Metrics"
-description = "Integrate Linkerd's metrics with your existing metrics infrastructure."
-aliases = [
-  "../prometheus/",
-  "../observability/prometheus/",
-  "../observability/exporting-metrics/"
-]
-+++
+---
+title: Exporting Metrics
+description: Integrate Linkerd's metrics with your existing metrics infrastructure.
+---
 
 Linkerd provides an extensive set of metrics for all traffic that passes through
 its data plane. These metrics are collected at the proxy level and reported on
@@ -17,7 +12,7 @@ each proxy only provides a portion of the full picture. Instead, a separate tool
 is used to collect metrics from all proxies and aggregate them together for
 consumption.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 One easy option is the [linkerd-viz](../../features/dashboard/) extension, which
 will create an on-cluster Prometheus instance as well as dashboards and CLI

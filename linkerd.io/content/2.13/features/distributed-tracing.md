@@ -1,7 +1,7 @@
-+++
-title = "Distributed Tracing"
-description = "You can enable distributed tracing support in Linkerd."
-+++
+---
+title: Distributed Tracing
+description: You can enable distributed tracing support in Linkerd.
+---
 
 Tracing can be an invaluable tool in debugging distributed systems performance,
 especially for identifying bottlenecks and understanding the latency cost of
@@ -26,17 +26,13 @@ For example, Linkerd can display a live topology of all incoming and outgoing
 dependencies for a service, without requiring distributed tracing or any other
 such application modification:
 
-{{< fig src="/images/books/webapp-detail.png"
-    title="The Linkerd dashboard showing an automatically generated topology graph"
->}}
+![The Linkerd dashboard showing an automatically generated topology graph](/docs/images/books/webapp-detail.png "The Linkerd dashboard showing an automatically generated topology graph")
 
 Likewise, Linkerd can provide golden metrics per service and per *route*, again
 without requiring distributed tracing or any other such application
 modification:
 
-{{< fig src="/images/books/webapp-routes.png"
-    title="Linkerd dashboard showing an automatically generated route metrics"
->}}
+![Linkerd dashboard showing an automatically generated route metrics](/docs/images/books/webapp-routes.png "Linkerd dashboard showing an automatically generated route metrics")
 
 ## Using distributed tracing
 

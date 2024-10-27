@@ -1,10 +1,7 @@
-+++
-title = "HTTPRoutes"
-description = "Linkerd can use the HTTPRoute resource to configure per-route policies."
-aliases = [
-  "../httproutes/"
-]
-+++
+---
+title: HTTPRoutes
+description: Linkerd can use the HTTPRoute resource to configure per-route policies.
+---
 
 To configure routing behavior and policy for HTTP traffic, Linkerd supports the
 [HTTPRoute resource], defined by the Kubernetes [Gateway API].

@@ -1,7 +1,7 @@
-+++
-title = "Grafana"
-description = "Grafana install instructions and how to link it with the Linkerd Dashboard"
-+++
+---
+title: Grafana
+description: Grafana install instructions and how to link it with the Linkerd Dashboard
+---
 
 Linkerd provides a full [on-cluster metrics stack](../../features/dashboard/)
 that can be leveraged by a Prometheus instance and subsequently by a Grafana
@@ -12,7 +12,7 @@ First, you need to install Grafana from a variety of possible sources, and then
 load the suite of Grafana dashboards that have been pre-configured to consume
 the metrics exposed by Linkerd.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Install Prometheus
 
@@ -51,7 +51,7 @@ traffic cannot flow.
 You should either avoid meshing grafana's pod, skip outbound port 443 via
 `config.linkerd.io/skip-outbound-ports: "443"` annotation or run the container
 with the proxy's UID.
-See [Allowing initContainer networking](https://linkerd.io/2.12/features/cni/#allowing-initcontainer-networking)
+See [Allowing initContainer networking](../../features/cni/#allowing-initcontainer-networking)
 {{< /note >}}
 
 ## Hook Grafana with Linkerd Viz Dashboard

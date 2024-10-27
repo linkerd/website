@@ -1,0 +1,66 @@
+{{- /*
+@param {page} Page context
+
+@example {{ partial "components/paginator" . }}
+*/}}
+
+{{- with .Paginator }}
+  {{- if gt .TotalPages 1 }}
+    <nav class="paginator">
+      <ul>
+        {{- /* Previous Page */}}
+        <li>
+          {{- if .HasPrev }}
+            {{ partial "components/button" (dict "href" .Prev.URL "text" "← Prev" "variant" "primary") }}
+          {{- else }}
+            {{ partial "components/button" (dict "text" "← Prev" "variant" "primary" "disabled" true) }}
+          {{- end }}
+        </li>
+        {{- /* Page Numbers */}}
+        {{- $currentPage := .PageNumber }}
+        {{- $totalPages := .TotalPages }}
+        {{- /* Page Numbers: Show two pages on either side of the current page */}}
+        {{- $window := 2 }}
+        {{- /* Page Numbers: Show first page and ellipsis if there are hidden pages at the start */}}
+        {{- if gt $currentPage (add $window 1) }}
+          <li>
+            {{ partial "components/button" (dict "href" .First.URL "text" 1 "variant" "primary") }}
+          </li>
+          <li>
+            ...
+          </li>
+        {{- end }}
+        {{- /* Page Numbers: Display pages around the current page */}}
+        {{- range $i, $p := .Pagers }}
+          {{- $pageNumber := add $i 1 }}
+          {{- if and (ge $pageNumber (sub $currentPage $window)) (le $pageNumber (add $currentPage $window)) }}
+            <li>
+              {{- if eq $pageNumber $currentPage }}
+                {{ partial "components/button" (dict "text" $pageNumber "variant" "primary" "outline" true) }}
+              {{- else }}
+                {{ partial "components/button" (dict "href" $p.URL "text" $pageNumber "variant" "primary") }}
+              {{- end }}
+            </li>
+          {{ end }}
+        {{- end }}
+        {{- /* Page Numbers: Show last page and ellipsis if there are hidden pages at the end */}}
+        {{ if lt $currentPage (sub $totalPages $window) }}
+          <li>
+            ...
+          </li>
+          <li>
+            {{ partial "components/button" (dict "href" .Last.URL "text" $totalPages "variant" "primary") }}
+          </li>
+        {{ end }}
+        {{- /* Next Page */}}
+        <li>
+          {{- if .HasNext }}
+            {{ partial "components/button" (dict "href" .Next.URL "text" "Next →" "variant" "primary") }}
+          {{- else }}
+            {{ partial "components/button" (dict "text" "Next →" "variant" "primary" "disabled" true) }}
+          {{- end }}
+        </li>
+      </ul>
+    </nav>
+  {{- end }}
+{{- end }}

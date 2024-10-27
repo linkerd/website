@@ -1,0 +1,12 @@
+{{ with site.Data.announcement }}
+  <div class="main-announcement">
+    {{ with .content }}
+      {{ . | markdownify }}
+    {{ end }}
+    {{ with .link }}
+      <a href="{{ .href }}" class="main-announcement__link">
+        {{ .text }}
+      </a>
+    {{ end }}
+  </div>
+{{ end }}

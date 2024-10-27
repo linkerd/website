@@ -1,16 +1,9 @@
-+++
-title = "Getting Started"
-aliases = [
-  "/getting-started/istio/",
-  "/choose-your-platform/",
-  "/../katacoda/",
-  "/doc/getting-started",
-  "/getting-started"
-]
-weight = 2
-[sitemap]
-  priority = 1.0
-+++
+---
+title: Getting Started
+weight: 2
+sitemap:
+  priority: 1.0
+---
 
 Welcome to Linkerd! 🎈
 
@@ -23,7 +16,7 @@ install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
 Finally, you'll "mesh" an application by adding Linkerd's *data plane* to it.
 
-{{< releases >}}
+{{< docs/edge-note >}}
 
 ## Step 0: Setup
 
@@ -175,7 +168,7 @@ Emojivoto in all its glory.
 If you click around Emojivoto, you might notice that it's a little broken!  For
 example, if you try to vote for the **donut** emoji, you'll get a 404 page.
 Don't worry, these errors are intentional. (In a later guide, we'll show you
-how to [use Linkerd to identify the problem](../debugging-an-app/).)
+how to [use Linkerd to identify the problem](../tasks/debugging-your-service/).)
 
 With Emoji installed and running, we're ready to *mesh* it—that is, to add
 Linkerd's data plane proxies to it. We can do this on a live application
@@ -246,8 +239,7 @@ linkerd viz dashboard &
 
 You should see a screen like this:
 
-{{< fig src="/images/getting-started/viz-empty-dashboard.png"
-    title="The Linkerd dashboard in action" >}}
+![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png "The Linkerd dashboard in action")
 
 Click around, explore, and have fun! For extra credit, see if you can find the
 live metrics for each Emojivoto component, and determine which one has a partial
@@ -261,8 +253,8 @@ Give yourself a pat on the back.
 What's next? Here are some steps we recommend:
 
 * Learn how to use Linkerd to [debug the errors in
-  Emojivoto](../debugging-an-app/).
-* Learn how to [add your own services](../adding-your-service/) to
+  Emojivoto](../tasks/debugging-your-service/).
+* Learn how to [add your own services](../tasks/adding-your-service/) to
   Linkerd without downtime.
 * Learn how to install other [Linkerd extensions](../tasks/extensions/) such as
   Jaeger and the multicluster extension.

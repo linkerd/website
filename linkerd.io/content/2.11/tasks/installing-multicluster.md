@@ -1,7 +1,7 @@
-+++
-title = "Installing Multi-cluster Components"
-description = "Allow Linkerd to manage cross-cluster communication."
-+++
+---
+title: Installing Multi-cluster Components
+description: Allow Linkerd to manage cross-cluster communication.
+---
 
 Multicluster support in Linkerd requires extra installation and configuration on
 top of the default [control plane installation](../install/). This guide
@@ -9,7 +9,7 @@ walks through this installation and configuration as well as common problems
 that you may encounter. For a detailed walkthrough and explanation of what's
 going on, check out [getting started](../multicluster/).
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Requirements
 

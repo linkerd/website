@@ -1,0 +1,26 @@
+<table class="keyval">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range site.Data.extensions }}
+      <tr>
+        <td>
+          <a href="{{ .url }}" target="_blank" rel="noopener">
+            {{ index .name }}
+          </a>
+        </td>
+        <td>
+          {{ .description | markdownify }}
+        </td>
+      </tr>
+    {{- end }}
+  </tbody>
+</table>

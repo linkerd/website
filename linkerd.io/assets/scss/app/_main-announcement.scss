@@ -1,0 +1,21 @@
+/*
+@markup See: layouts/partials/main-announcement.html
+*/
+
+.main-announcement { 
+  padding: spacer(2);
+  background-color: $navy;
+  color: $white;
+  font-size: $font-size-sm;
+  text-align: center;
+
+  .main-announcement__link {
+    display: inline-block;
+    padding-left: spacer(2);
+    color: $white;
+    font-weight: $font-weight-medium;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba($white, 0.4);
+  }
+}

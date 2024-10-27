@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <div class="enterprise">
+    {{ with .Params.hero }}
+      <div class="hero">
+        <div class="hero__container container">
+          <div class="hero__body">
+            <div class="hero__header">
+              <h1>
+                {{ .title }}
+              </h1>
+            </div>
+            <div class="hero__content">
+              {{ .content | $.Page.RenderString (dict "display" "block") }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    <div class="page">
+      <div class="page__container container">
+        {{ range .Params.sections }}
+          <section class="enterprise__section">
+            <h2>
+              {{ .title }}
+            </h2>
+            {{ range .items }}
+              <div class="card card--md-horz card--md-reverse card--inset-media">
+                <div class="card__media">
+                  {{ $alt := .title }}
+                  {{ with $.Resources.Get .image }}
+                    <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--w256">
+                  {{ end }}
+                </div>
+                <div class="card__body">
+                  <div class="card__header">
+                    <h3>
+                      {{ .title }}
+                    </h3>
+                  </div>
+                  <div class="card__content">
+                    {{ .content | $.Page.RenderString (dict "display" "block") }}
+                  </div>
+                  <div class="card__footer">
+                    {{ with .button }}
+                      {{ partial "components/button" (dict "href" .href "text" .text "variant" "primary") }}
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            {{ end }}
+          </section>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

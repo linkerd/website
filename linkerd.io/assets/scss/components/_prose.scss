@@ -1,0 +1,19 @@
+/*
+Apply to containers that contain rendered markdown.
+
+@markup
+<div class="prose">
+  Markdown
+</div>
+*/
+
+.prose {
+  // Add extra space above h2
+  h2 {
+    padding-top: spacer(3);
+  }
+  // Add bottom margin to alerts
+  .alert {
+    margin-bottom: spacer(3);
+  }
+}

@@ -1,4 +1,24 @@
 {{ define "main" }}
-{{ partial "top-hero.html" .Params.top_hero }}
-{{ partial "community/get-involved/get-involved.html" .Params.links }}
+  <div class="get-involved">
+    {{ .Render "_hero" }}
+    <div class="page">
+      <div class="page__container container">
+        {{ range .Params.items }}
+          <div class="card card--horz card--center card--inset-media">
+            <div class="card__media">
+              {{ $alt := .title }}
+              {{ with $.Resources.Get .image }}
+                <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--w48">
+              {{ end }}
+            </div>
+            <div class="card__body">
+              <div class="card__content">
+                {{ .content | $.Page.RenderString (dict "display" "block") }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
 {{ end }}

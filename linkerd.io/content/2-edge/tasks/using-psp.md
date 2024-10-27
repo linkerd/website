@@ -1,7 +1,7 @@
-+++
-title = "Linkerd and Pod Security Policies (PSP)"
-description = "Using Linkerd with a pod security policies enabled."
-+++
+---
+title: Linkerd and Pod Security Policies (PSP)
+description: Using Linkerd with a pod security policies enabled.
+---
 
 [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)
 have been deprecated in Kuberenetes v1.21 and removed in v1.25. However, for

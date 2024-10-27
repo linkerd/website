@@ -1,0 +1,15 @@
+/*
+@markup See: layouts/community/get-involved.html
+*/
+
+.get-involved {
+  .page__container {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

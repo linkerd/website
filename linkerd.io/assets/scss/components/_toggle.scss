@@ -1,0 +1,33 @@
+/*
+@markup
+<input class="menu-toggle__input" type="checkbox">
+<label class="menu-toggle__label">
+  <svg class="icon">
+</label>
+<div class="menu-toggle__target">
+  ...
+</div>
+*/
+
+.toggle__input[type=checkbox] {
+  display: none;
+
+  &:checked ~ .toggle__label {
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+  & ~ .toggle__target {
+    display: none;
+  }
+  &:checked ~ .toggle__target {
+    display: block;
+  }
+}
+.toggle__label {
+  cursor: pointer;
+
+  svg {
+    transition: transform .2s ease;
+  }
+}

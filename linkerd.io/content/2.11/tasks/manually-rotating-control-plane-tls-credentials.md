@@ -1,8 +1,7 @@
-+++
-title = "Manually Rotating Control Plane TLS Credentials"
-description = "Update Linkerd's TLS trust anchor and issuer certificate."
-aliases = [ "rotating_identity_certificates" ]
-+++
+---
+title: Manually Rotating Control Plane TLS Credentials
+description: Update Linkerd's TLS trust anchor and issuer certificate.
+---
 
 Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature uses a set of
 TLS credentials to generate TLS certificates for proxies: a trust anchor, and
@@ -75,7 +74,7 @@ linkerd-identity
 √ issuer cert is using supported crypto algorithm
 × issuer cert is within its validity period
 issuer certificate is not valid anymore. Expired on 2019-12-19T09:02:01Z
-see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid for hints
+see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-is-time-valid for hints
 ```
 
 If your trust anchor has expired, you will see a message similar to:
@@ -88,7 +87,7 @@ linkerd-identity
 × trust roots are within their validity period
 Invalid roots:
 * 79461543992952791393769540277800684467 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T09:11:30Z
-see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid  for hints
+see https://linkerd.io/2/checks/#l5d-identity-roots-are-time-valid  for hints
 ```
 
 ## Rotating the trust anchor
@@ -190,7 +189,7 @@ linkerd-identity
 √ issuer cert is within its validity period
 ‼ issuer cert is valid for at least 60 days
     issuer certificate will expire on 2019-12-19T09:51:19Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
 √ issuer cert is issued by the trust root
 
 linkerd-identity-data-plane
@@ -204,7 +203,7 @@ linkerd-identity-data-plane
         * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
         * linkerd/linkerd-tap-68d8bbf64-mpzgb
         * linkerd/linkerd-web-849f74b7c6-qlhwc
-    see https://linkerd.io/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 When the rollout completes, your `check` command should stop warning you that
@@ -222,7 +221,7 @@ linkerd-identity
 √ issuer cert is within its validity period
 ‼ issuer cert is valid for at least 60 days
     issuer certificate will expire on 2019-12-19T09:51:19Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
 √ issuer cert is issued by the trust root
 
 linkerd-identity-data-plane

@@ -1,0 +1,51 @@
+/*
+@markup
+<a class="icon-button">
+  <svg class="icon">
+    ...
+  </svg>
+</a>
+*/
+
+.icon-button {
+  display: inline-block;
+  padding: spacer(2);
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover,
+  &:active {
+    background-color: $light-blue;
+  }
+  .icon {
+    display: block;
+  }
+
+  // @options
+
+  &.icon-button--primary {
+    background-color: $blue;
+
+    &:hover,
+    &:active {
+      background-color: shade-color($blue, 20%);
+    }
+  }
+  &.icon-button--secondary {
+    background-color: $green;
+
+    &:hover,
+    &:active {
+      background-color: darken($green, 15%);
+    }
+  }
+  &.icon-button--primary,
+  &.icon-button--secondary {
+    .icon {
+      path {
+        fill: $white;
+      }
+    }
+  }
+}
