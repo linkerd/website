@@ -2,8 +2,6 @@
 title: Automatic mTLS
 description: Linkerd automatically enables mutual Transport Layer Security (TLS) for all communication between meshed applications.
 weight: 4
-aliases:
-  - ../automatic-tls
 params:
   faqSchema:
     - question: What traffic can Linkerd automatically mTLS?

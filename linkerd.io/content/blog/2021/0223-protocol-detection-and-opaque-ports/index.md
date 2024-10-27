@@ -157,7 +157,7 @@ extend mTLS across their entire Kubernetes environment, regardless of protocol.
 
 (Want to give opaque ports a try? You don't have to wait for the 2.10 release
 because the feature is currently available in the
-[edge](https://linkerd.io/2/edge/) releases!)
+[edge](/releases/) releases!)
 
 ## Linkerd is for everyone
 

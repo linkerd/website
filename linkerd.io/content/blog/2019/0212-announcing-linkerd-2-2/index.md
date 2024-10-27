@@ -10,7 +10,7 @@ Today we're very happy to announce the release of Linkerd 2.2. This major releas
 
 This release includes contributions from folks at Attest, Buoyant, Mesosphere, Microsoft, Nordstrom, and many more. A special thank you to everyone who filed an issue, submitted a PR, tested a feature, and helped someone else in the [Slack](https://slack.linkerd.io) — the Linkerd community is awesome!
 
-Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge/) will already have seen these these features in action. Either way, you can download the stable 2.2 release by running:
+Those of you who have been tracking the 2.x branch via our [weekly edge releases](/releases/) will already have seen these these features in action. Either way, you can download the stable 2.2 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh

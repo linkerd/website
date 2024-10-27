@@ -8,7 +8,7 @@ params:
 
 Today we're very happy to announce the release of [Linkerd 2.1](https://github.com/linkerd/linkerd2/releases/tag/stable-2.1.0). This is our first stable update to 2.0, and introduces a host of goodies, including per-route metrics, _service profiles_, and a vastly improved dashboard UI. We've also added a couple exciting experimental features: proxy auto-injection, single namespace installs, and a high-availability mode for the control plane.
 
-Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge/) will already have seen these these features in action. For the rest of you, you can download the stable 2.1 release by running:
+Those of you who have been tracking the 2.x branch via our [weekly edge releases](/releases/) will already have seen these these features in action. For the rest of you, you can download the stable 2.1 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install

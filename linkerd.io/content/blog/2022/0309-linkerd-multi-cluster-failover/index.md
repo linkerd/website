@@ -45,7 +45,7 @@ ultra-high-reliability deployments that covers:
 ## Getting started
 
 The operator is available as a standalone project, but requires the latest
-[Linkerd edge release](https://linkerd.io/edge/) release to work. The operator
+[Linkerd edge release](https://linkerd.io/releases/) release to work. The operator
 will also work with in the upcoming 2.11.2 point release, expected within the
 next few weeks.
 

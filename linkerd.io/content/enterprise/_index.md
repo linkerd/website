@@ -3,8 +3,6 @@ title: Enterprise
 description: |-
   Lists of educational resources and companies that provide commercial support
   for Linkerd.
-aliases:
-  - support-training
 params:
   hero:
     title: Enterprise Support and Training

@@ -83,7 +83,7 @@ Linkerd](/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/) for the
 exciting details.
 
 Want to give extensions a shot today? You can try them in the [latest edge
-release](https://linkerd.io/2/edge/). Want to build an extension? We'll be
+release](/releases/). Want to build an extension? We'll be
 releasing proper documentation shortly after the 2.10 release, but in the
 meantime you can [crib from an existing
 one](https://github.com/linkerd/linkerd2/tree/main/jaeger).

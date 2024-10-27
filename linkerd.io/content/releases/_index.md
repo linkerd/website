@@ -1,8 +1,6 @@
 ---
 title: Releases and Versions
 type: docs
-aliases:
-  - edge
 ---
 
 Linkerd publishes and announces _versions_ that correspond to specific project
