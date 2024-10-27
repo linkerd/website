@@ -33,8 +33,8 @@ Source code for the linkerd.io website.
 You should see the site on localhost:1313, and it should reload
 automatically upon file write.
 
-[Learn more](https://github.com/linkerd/website/blob/main/README.md/) about how
-to add content to linkerd.io.
+[Learn more](https://github.com/linkerd/website/blob/main/linkerd.io/README.md/)
+about how to add content to linkerd.io.
 
 ## [run.linkerd.io](run.linkerd.io)
 
