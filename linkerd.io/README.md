@@ -37,7 +37,7 @@ have to specify them in the frontmatter. You can simply name them `cover`,
 `thumbnail` or `feature`, place them in the blog post folder, and they will
 automattically be used. For example:
 
-```text {class=disable-copy}
+```text
 blog/
 └── 2024/
     └── 0102-my-blog-post

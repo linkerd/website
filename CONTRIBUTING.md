@@ -53,7 +53,7 @@ message.
 
 Finalized commit messages should be in the following format:
 
-```text {class=disable-copy}
+```text
 Subject
 
 Problem
@@ -74,12 +74,12 @@ Fixes #[Github issue ID]
 
 ##### Examples #####
 
-```text {class=disable-copy}
+```text
 bad: server disconnects should cause dst client disconnects.
 good: Propagate disconnects from source to destination
 ```
 
-```text {class=disable-copy}
+```text
 bad: support tls servers
 good: Introduce support for server-side TLS (#347)
 ```
