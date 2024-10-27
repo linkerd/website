@@ -288,7 +288,7 @@ There are few things to understand here:
 
 If we look into `./infrastructure/cert-manager`, we'll find a few files:
 
-```text
+```text {class=disable-copy}
 kustomization.yaml
 namespace.yaml
 release.yaml
@@ -377,7 +377,7 @@ hard work.
 Taking a quick look into the `./infrastructure/linkerd` directory, we'll find
 quite a lot more to read than we did for `cert-manager`:
 
-```text
+```text {class=disable-copy}
 README.md
 ca.crt
 ca.key

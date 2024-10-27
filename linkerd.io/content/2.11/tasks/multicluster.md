@@ -281,7 +281,7 @@ With the podinfo landing page available at
 `west` cluster right now. Alternatively, running `curl http://localhost:8080`
 will return a JSON response that looks something like:
 
-```json
+```json {class=disable-copy}
 {
   "hostname": "podinfo-5c8cf55777-zbfls",
   "version": "4.0.2",

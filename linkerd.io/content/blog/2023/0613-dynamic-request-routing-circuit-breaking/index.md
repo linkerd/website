@@ -126,7 +126,7 @@ works, without creating a loop.
 Here's an example of A/B testing. Here, requests sent to the `smiley` Service
 with the header
 
-```text
+```text {class=disable-copy}
 X-Faces-User: testuser
 ```
 
@@ -199,7 +199,7 @@ supplanted with Gateway API CRDs).
 To break the circuit after four consecutive request failures, apply these
 annotations to a Service:
 
-```text
+```text {class=disable-copy}
 balancer.linkerd.io/failure-accrual: consecutive
 balancer.linkerd.io/failure-accrual-consecutive-max-failures: 4
 ```
@@ -215,7 +215,7 @@ consecutive failures after which the circuit breaker will open.
 
 Try reenabling traffic after 30 seconds:
 
-```text
+```text {class=disable-copy}
 balancer.linkerd.io/failure-accrual-consecutive-min-penalty: 30s
 ```
 
@@ -223,7 +223,7 @@ balancer.linkerd.io/failure-accrual-consecutive-min-penalty: 30s
 
 Don’t ever wait more than 120 seconds between retries:
 
-```text
+```text {class=disable-copy}
 balancer.linkerd.io/failure-accrual-consecutive-max-penalty: 120s
 ```
 

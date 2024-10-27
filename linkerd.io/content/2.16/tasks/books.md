@@ -121,7 +121,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 
 This should return a metric that looks something like:
 
-```text
+```text {class=disable-copy}
 outbound_http_route_backend_response_statuses_total{
   parent_group="core",
   parent_kind="Service",
@@ -222,7 +222,7 @@ kubectl -n booksapp get httproutes.gateway.networking.k8s.io \
 
 Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
 
-```json
+```json {class=disable-copy}
 {
   "lastTransitionTime": "2024-08-03T01:38:25Z",
   "message": "",
@@ -249,7 +249,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep http_status=\"500\"
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_backend_response_statuses_total{
   parent_group="core",
   parent_kind="Service",
@@ -297,7 +297,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep retry
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_retry_limit_exceeded_total{...} 222
 outbound_http_route_retry_overflow_total{...} 0
 outbound_http_route_retry_requests_total{...} 469
@@ -342,7 +342,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep outbound_http_route_request_statuses_total | grep books-create
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_request_statuses_total{
   [...]
   route_name="books-create",

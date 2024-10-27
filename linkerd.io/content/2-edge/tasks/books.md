@@ -212,7 +212,7 @@ kubectl -n booksapp get httproutes.gateway.networking.k8s.io \
 
 Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
 
-```json
+```json {class=disable-copy}
 {
   "lastTransitionTime": "2024-08-03T01:38:25Z",
   "message": "",

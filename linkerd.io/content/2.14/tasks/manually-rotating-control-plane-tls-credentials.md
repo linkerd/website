@@ -36,7 +36,7 @@ linkerd check --proxy
 If your configuration is valid and your credentials are not expiring soon, you
 should see output similar to:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -64,7 +64,7 @@ valid, continue on with this document.)
 For example, if your issuer certificate has expired, you will see a message
 similar to:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -79,7 +79,7 @@ see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-is-time-valid for hint
 
 If your trust anchor has expired, you will see a message similar to:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -172,7 +172,7 @@ linkerd check --proxy
 You might have to wait a few moments until all the pods have been restarted and
 are configured with the correct trust anchor. Meanwhile you might observe warnings:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -204,7 +204,7 @@ When the rollout completes, your `check` command should stop warning you that
 pods need to be restarted. It may still warn you, however, that your issuer
 certificate is about to expire soon:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -286,7 +286,7 @@ linkerd check --proxy
 You should see output without any certificate expiration warnings (unless an
 expired trust anchor still needs to be removed):
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -332,7 +332,7 @@ linkerd check --proxy
 And, again, the output of the `check` command should not produce any warnings or
 errors:
 
-```text
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid

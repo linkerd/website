@@ -295,7 +295,7 @@ in which case it won't function. Errors like this may result in application
 Pods silently failing to come up, or you may also see "corrupt message" errors
 in the proxy logs:
 
-```json
+```json {class=disable-copy}
 { "message": "Failed to connect", "error": "received corrupt message" }
 ```
 
