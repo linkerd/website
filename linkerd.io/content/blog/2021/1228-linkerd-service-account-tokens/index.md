@@ -8,6 +8,7 @@ date: 2021-12-28T00:00:00Z
 keywords: [identity, service-accounts]
 params:
   author: tarun
+  showCover: true
 ---
 
 Security is a first-class concern for Linkerd. It plays a critical role in

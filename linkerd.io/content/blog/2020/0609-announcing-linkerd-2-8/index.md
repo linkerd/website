@@ -6,7 +6,7 @@ slug: announcing-linkerd-2.8
 keywords: [linkerd]
 params:
   author: william
-  useCover: true
+  showCover: true
 ---
 
 We're very happy to announce the release of Linkerd 2.8! This release introduces

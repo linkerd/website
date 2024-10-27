@@ -4,6 +4,7 @@ date: 2020-12-03T00:00:00Z
 keywords: [linkerd]
 params:
   author: william
+  showCover: true
 ---
 
 ## Why Linkerd doesn't use Envoy
