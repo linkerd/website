@@ -1,0 +1,157 @@
+// Type
+
+$font-family-base: "Open Sans", Helvetica, Arial, sans-serif;
+$font-family-mono: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
+$font-size-root: 18px;
+$font-size-xs: 14px;
+$font-size-sm: 16px;
+$font-size-base: 18px;
+$font-size-lg: 20px;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+$font-weight-heavy: 700;
+
+$line-height-base: 1.5;
+$line-height-tight: 1.25; // If the line-height is less than this value, Open Sans’ descenders will get cut off
+
+$font-size-h1: 40px;
+$font-size-h2: 28px;
+$font-size-h3: 24px;
+$font-size-h4: 20px;
+$font-size-h5: 18px;
+$font-size-h6: 16px;
+
+// Colors
+
+$white: rgb(255, 255, 255);
+$offwhite: rgb(250, 250, 250);
+$blue: rgb(1, 133, 253);
+$green: rgb(100, 249, 191);
+$navy: rgb(6, 51, 89);
+$gray: tint-color($navy, 35%);
+$light-blue: rgb(227, 242, 254);
+$light-green: rgb(233, 253, 245);
+$light-gray: tint-color($navy, 96%);
+
+$link-color: $blue;
+$link-color-hover: shade-color($blue, 20%);
+$border-color: tint-color($navy, 80%);
+
+$primary-color: $blue;
+$secondary-color: $gray;
+$success-color: rgb(35, 194, 91);
+$info-color: $blue;
+$warning-color: rgb(255, 193, 7);
+$danger-color: rgb(220, 53, 69);
+
+$state-colors: (
+  primary: (
+    text: shade-color($primary-color, 60%),
+    background: tint-color($primary-color, 90%),
+    border: tint-color($primary-color, 60%),
+  ),
+  secondary: (
+    text: shade-color($secondary-color, 60%),
+    background: tint-color($secondary-color, 90%),
+    border: tint-color($secondary-color, 60%),
+  ),
+  success: (
+    text: shade-color($success-color, 60%),
+    background: tint-color($success-color, 90%),
+    border: tint-color($success-color, 60%),
+  ),
+  info: (
+    text: shade-color($info-color, 60%),
+    background: tint-color($info-color, 90%),
+    border: tint-color($info-color, 60%),
+  ),
+  warning: (
+    text: shade-color($warning-color, 60%),
+    background: tint-color($warning-color, 90%),
+    border: tint-color($warning-color, 60%),
+  ),
+  danger: (
+    text: shade-color($danger-color, 60%),
+    background: tint-color($danger-color, 90%),
+    border: tint-color($danger-color, 60%),
+  ),
+);
+
+// Sizing
+
+$spacers: (
+  0: 0,
+  1: 4px,
+  2: 8px,
+  3: 16px,
+  4: 24px,
+  5: 32px,
+  6: 48px,
+  7: 80px,
+  8: 128px,
+);
+
+$icon-sizes: (
+  xs: 18px,
+  sm: 20px,
+  md: 24px,
+  lg: 32px,
+  xl: 48px,
+);
+
+$image-sizes: (
+  24: 24px,
+  32: 32px,
+  48: 48px,
+  64: 64px,
+  80: 80px,
+  128: 128px,
+  160: 160px,
+  196: 196px,
+  256: 256px,
+);
+
+// Styles
+
+$border-radius: 4px;
+$box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.1);
+
+// Layout
+
+$breakpoint-min-widths: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
+$breakpoint-max-widths: (
+  xs: 575px,
+  sm: 767px,
+  md: 991px,
+  lg: 1199px,
+  xl: 1399px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+$container-padding: spacer(4);
+
+// Component variables
+
+$header-min-height: 60px;
+$mobile-max-breakpoint: breakpoint-max-width("md");
+$desktop-min-breakpoint: breakpoint-min-width("lg");
+$z-index-main-nav: 998;
+$z-index-main-nav-submenu: 999;

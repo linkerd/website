@@ -1,11 +1,7 @@
-+++
-title = "Upgrading Linkerd"
-description = "Upgrade Linkerd to the latest version."
-aliases = [
-  "../upgrade/",
-  "/2.10/update/"
-]
-+++
+---
+title: Upgrading Linkerd
+description: Upgrade Linkerd to the latest version.
+---
 
 In this guide, we'll walk you through how to upgrade Linkerd.
 
@@ -57,7 +53,7 @@ linkerd version --client
 Which should display:
 
 ```bash
-Client version: {{% latestversion %}}
+Client version: {{< latest-stable-version >}}
 ```
 
 {{< note >}}
@@ -76,7 +72,7 @@ services will not go down.
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](../../observability/exporting-metrics/)
+[persistence documentation](../exporting-metrics/)
 {{< /note >}}
 
 ### With Linkerd CLI
@@ -135,8 +131,8 @@ linkerd version
 Which should display:
 
 ```txt
-Client version: {{% latestversion %}}
-Server version: {{% latestversion %}}
+Client version: {{< latest-stable-version >}}
+Server version: {{< latest-stable-version >}}
 ```
 
 Next, we will [upgrade your data plane](#upgrade-the-data-plane).
@@ -200,7 +196,7 @@ before you can upgrade to Linkerd 2.10.
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
 through our [ports and protocols in 2.10 upgrade
-guide](../upgrading-2.10-ports-and-protocols/) for the repercussions.
+guide](../../features/protocol-detection/) for the repercussions.
 
 Second, we've introduced [extensions](../extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what
@@ -397,7 +393,7 @@ X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
 
 If you determine that you wish to rotate your certificates you can follow
 the process outlined in
-[Rotating your identity certificates](../rotating_identity_certificates/).
+[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/).
 Note that this process uses functionality available in stable-2.7.0. So before
 you start your cert rotation, make sure to upgrade.
 
@@ -512,7 +508,7 @@ linkerd-config
 √ control plane ClusterRoleBindings exist
 × control plane ServiceAccounts exist
     missing ServiceAccounts: linkerd-heartbeat
-    see https://linkerd.io/checks/#l5d-existence-sa for hints
+    see https://linkerd.io/2/checks/#l5d-existence-sa for hints
 ```
 
 {{< /note >}}
@@ -596,7 +592,7 @@ linkerd-config
 √ control plane Namespace exists
 × control plane ClusterRoles exist
     missing ClusterRoles: linkerd-linkerd-controller, linkerd-linkerd-identity, linkerd-linkerd-prometheus, linkerd-linkerd-proxy-injector, linkerd-linkerd-sp-validator, linkerd-linkerd-tap
-    see https://linkerd.io/checks/#l5d-existence-cr for hints
+    see https://linkerd.io/2/checks/#l5d-existence-cr for hints
 ```
 
 {{< /note >}}
@@ -802,7 +798,7 @@ linkerd version
 Which should display:
 
 ```bash
-Client version: {{% latestversion %}}
+Client version: {{< latest-stable-version >}}
 Server version: stable-2.1.0
 ```
 
@@ -885,14 +881,14 @@ linkerd version
 Which should display:
 
 ```txt
-Client version: {{% latestversion %}}
-Server version: {{% latestversion %}}
+Client version: {{< latest-stable-version >}}
+Server version: {{< latest-stable-version >}}
 ```
 
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](../../observability/exporting-metrics/)
+[persistence documentation](../exporting-metrics/)
 {{< /note >}}
 
 ### Upgrade the 2.2.x data plane
@@ -958,8 +954,8 @@ kubectl get po --all-namespaces -o yaml \
 The output will look something like:
 
 ```bash
-linkerd.io/proxy-version: {{% latestversion %}}
-linkerd.io/proxy-version: {{% latestversion %}}
+linkerd.io/proxy-version: {{< latest-stable-version >}}
+linkerd.io/proxy-version: {{< latest-stable-version >}}
 ```
 
 If there are any older versions listed, you will want to upgrade them as well.

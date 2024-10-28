@@ -1,0 +1,12 @@
+{{- with .Page.Pages }}
+  <ul>
+    {{- range . }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          {{ .LinkTitle }}
+        </a><br>
+        {{ .Description }}
+      </li>
+    {{- end }}
+  </ul>
+{{- end }}

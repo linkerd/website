@@ -1,4 +1,46 @@
 {{ define "main" }}
-{{ partial "top-hero.html" .Params.top_hero }}
-{{ partial "community/ambassadors/ambassadors.html" .Params.ambassadors }}
+  <div class="ambassadors">
+    {{ .Render "_hero" }}
+    <div class="page">
+      <div class="page__container container">
+        {{ range .Params.ambassadors }}
+          <div class="card card--horz card--center card--inset-media">
+            {{ with .emeritus }}
+              <div class="ambassadors__badge">
+                <span class="badge">Emeritus</span>
+              </div>
+            {{ end }}
+            <div class="card__media">
+              {{ $alt := .name }}
+              {{ with $.Resources.Get .image }}
+                {{ with partial "utils/process-image" (dict
+                  "res" .
+                  "width" 256
+                  "height" 256
+                  "process" "fill jpg q80 lanczos"
+                )}}
+                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
+                {{ end }}
+              {{ end }}
+            </div>
+            <div class="card__body">
+              <div class="card__header">
+                <h3>
+                  {{ .name }} {{ .flag }}
+                </h3>
+                <p>
+                  {{ .role }}
+                </p>
+              </div>
+              <div class="card__footer">
+                {{ range $k, $v := .urls }}
+                  {{ partial "components/icon-button" (dict "href" $v "icon" $k "variant" "secondary") }}
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
 {{ end }}

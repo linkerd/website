@@ -1,7 +1,7 @@
-+++
-title = "Multi-cluster communication"
-description = "Allow Linkerd to manage cross-cluster communication."
-+++
+---
+title: Multi-cluster communication
+description: Allow Linkerd to manage cross-cluster communication.
+---
 
 This guide will walk you through installing and configuring Linkerd so that two
 clusters can talk to services hosted on both. There are a lot of moving parts
@@ -51,11 +51,7 @@ At a high level, you will:
 
 ## Install Linkerd and Linkerd Viz
 
-{{< fig
-    alt="install"
-    title="Two Clusters"
-    center="true"
-    src="/images/multicluster/install.svg" >}}
+![install](/docs/images/multicluster/install.svg "Two Clusters")
 
 Linkerd requires a shared
 [trust anchor](../generate-certificates/#trust-anchor-certificate)
@@ -143,11 +139,7 @@ done
 
 ## Preparing your cluster
 
-{{< fig
-    alt="preparation"
-    title="Preparation"
-    center="true"
-    src="/images/multicluster/prep-overview.svg" >}}
+![preparation](/docs/images/multicluster/prep-overview.svg "Preparation")
 
 In order to route traffic between clusters, Linkerd leverages Kubernetes
 services so that your application code does not need to change and there is
@@ -169,11 +161,7 @@ for ctx in west east; do
 done
 ```
 
-{{< fig
-    alt="install"
-    title="Components"
-    center="true"
-    src="/images/multicluster/components.svg" >}}
+![install](/docs/images/multicluster/components.svg "Components")
 
 Installed into the `linkerd-multicluster` namespace, the gateway is a simple
 [pause container](https://github.com/linkerd/linkerd2/blob/main/multicluster/charts/linkerd-multicluster/templates/gateway.yaml#L3)
@@ -212,11 +200,7 @@ mirroring services. We'll want to link the clusters together now!
 
 ## Linking the clusters
 
-{{< fig
-    alt="link-clusters"
-    title="Link"
-    center="true"
-    src="/images/multicluster/link-flow.svg" >}}
+![link-clusters](/docs/images/multicluster/link-flow.svg "Link")
 
 For `west` to mirror services from `east`, the `west` cluster needs to have
 credentials so that it can watch for services in `east` to be exported. You'd
@@ -270,11 +254,7 @@ you'll want to use the `--api-server-address` flag for `link`.{{< /note >}}
 
 ## Installing the test services
 
-{{< fig
-    alt="test-services"
-    title="Topology"
-    center="true"
-    src="/images/multicluster/example-topology.svg" >}}
+![test-services](/docs/images/multicluster/example-topology.svg "Topology")
 
 It is time to test this all out! The first step is to add some services that we
 can mirror. To add these to both clusters, you can run:
@@ -301,18 +281,14 @@ To see what it looks like from the `west` cluster right now, you can run:
 kubectl --context=west -n test port-forward svc/frontend 8080
 ```
 
-{{< fig
-    alt="west-podinfo"
-    title="West Podinfo"
-    center="true"
-    src="/images/multicluster/west-podinfo.gif" >}}
+![west-podinfo](/docs/images/multicluster/west-podinfo.gif "West Podinfo")
 
 With the podinfo landing page available at
 [http://localhost:8080](http://localhost:8080), you can see how it looks in the
 `west` cluster right now. Alternatively, running `curl http://localhost:8080`
 will return a JSON response that looks something like:
 
-```json
+```json {class=disable-copy}
 {
   "hostname": "podinfo-5c8cf55777-zbfls",
   "version": "4.0.2",
@@ -394,11 +370,7 @@ the [grafana install instructions](../grafana/) first to have a working grafana
 provisioned with Linkerd dashboards). You can get to it by running `linkerd
 --context=west viz dashboard` and going to
 
-{{< fig
-    alt="grafana-dashboard"
-    title="Grafana"
-    center="true"
-    src="/images/multicluster/grafana-dashboard.png" >}}
+![grafana-dashboard](/docs/images/multicluster/grafana-dashboard.png "Grafana")
 
 ## Security
 
@@ -406,7 +378,7 @@ By default, requests will be going across the public internet. Linkerd extends
 its [automatic mTLS](../../features/automatic-mtls/) across clusters to make sure
 that the communication going across the public internet is encrypted. If you'd
 like to have a deep dive on how to validate this, check out the
-[docs](../securing-your-service/). To quickly check, however, you can run:
+[docs](../validating-your-traffic/). To quickly check, however, you can run:
 
 ```bash
 linkerd --context=west -n test viz tap deploy/frontend | \
@@ -434,18 +406,14 @@ kubectl --context=west -n test run -it --rm --image=alpine:3 test -- \
 
 ## Traffic Splitting
 
-{{< fig
-    alt="with-split"
-    title="Traffic Split"
-    center="true"
-    src="/images/multicluster/with-split.svg" >}}
+![with-split](/docs/images/multicluster/with-split.svg "Traffic Split")
 
 It is pretty useful to have services automatically show up in clusters and be
 able to explicitly address them, however that only covers one use case for
 operating multiple clusters. Another scenario for multicluster is failover. In a
 failover scenario, you don't have time to update the configuration. Instead, you
 need to be able to leave the application alone and just change the routing. If
-this sounds a lot like how we do [canary](../canary-release/) deployments,
+this sounds a lot like how we do [canary](../flagger/) deployments,
 you'd be correct!
 
 `TrafficSplit` allows us to define weights between multiple services and split
@@ -482,11 +450,7 @@ both clusters.Alternatively, for the command line approach,
 `curl localhost:8080` will give you a message that greets from `west` and
 `east`.
 
-{{< fig
-    alt="podinfo-split"
-    title="Cross Cluster Podinfo"
-    center="true"
-    src="/images/multicluster/split-podinfo.gif" >}}
+![podinfo-split](/docs/images/multicluster/split-podinfo.gif "Cross Cluster Podinfo")
 
 You can also watch what's happening with metrics. To see the source side of
 things (`west`), you can run:
@@ -507,11 +471,7 @@ linkerd --context=east -n test viz stat \
 There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 [localhost:50750](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
-{{< fig
-    alt="podinfo-split"
-    title="Cross Cluster Podinfo"
-    center="true"
-    src="/images/multicluster/ts-dashboard.png" >}}
+![podinfo-split](/docs/images/multicluster/ts-dashboard.png "Cross Cluster Podinfo")
 
 ## Cleanup
 

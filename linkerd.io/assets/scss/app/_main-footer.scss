@@ -1,0 +1,72 @@
+/*
+@markup See: layouts/partials/main-footer.html
+*/
+
+.main-footer {
+  p, ul {
+    // Remove base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .main-footer__container {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-footer__top {
+    padding: spacer(6) 0;
+    background-color: $light-blue;
+
+    .main-footer__container { 
+      gap: spacer(6);
+    }
+  }
+  .main-footer__bottom {
+    padding: spacer(3) 0;
+    background-color: $navy;
+    color: $light-blue;
+    text-align: center;
+
+    p {
+      font-size: $font-size-sm;
+    }
+    .main-footer__container { 
+      gap: spacer(3);
+    }
+  }
+  .main-footer__info {
+    @include make-stack(2);
+    color: $gray;
+    text-align: center;
+
+    img {
+      width: 220px;
+    }
+  }
+  .main-footer__links {
+    display: flex;
+    justify-content: center;
+    gap: spacer(7);
+  }
+  @media (min-width: breakpoint-min-width("md")) {
+    .main-footer__container {
+      flex-direction: row;
+    }
+    .main-footer__top {
+      padding: spacer(7) 0;
+
+      .main-footer__container { 
+        justify-content: space-between;
+      }
+    }
+    .main-footer__bottom {
+      text-align: left;
+    }
+    .main-footer__info {
+      text-align: left;
+    }
+    .main-footer__links {
+      justify-content: left;
+    }
+  }
+}

@@ -1,7 +1,8 @@
-+++
-title = "Dashboard and on-cluster metrics stack"
-description = "Linkerd provides a full on-cluster metrics stack, including CLI tools and dashboards."
-+++
+---
+title: Dashboard and on-cluster metrics stack
+description: Linkerd provides a full on-cluster metrics stack, including CLI tools
+  and dashboards.
+---
 
 Linkerd provides a full on-cluster metrics stack, including CLI tools and a web
 dashboard.
@@ -43,7 +44,7 @@ health of specific service routes.
 One way to pull it up is by running `linkerd viz dashboard` from the command
 line.
 
-{{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
+![Top Line Metrics](/docs/images/architecture/stat.png "Top Line Metrics")
 
 ## Grafana
 
@@ -90,21 +91,13 @@ linkerd -n emojivoto viz tap deploy/web
 All of this functionality is also available in the dashboard, if you would like
 to use your browser instead:
 
-{{< gallery >}}
+![Top Line Metrics](/docs/images/getting-started/stat.png "Top Line Metrics")
 
-{{< gallery-item src="/images/getting-started/stat.png"
-    title="Top Line Metrics">}}
+![Deployment Detail](/docs/images/getting-started/inbound-outbound.png "Deployment Detail")
 
-{{< gallery-item src="/images/getting-started/inbound-outbound.png"
-    title="Deployment Detail">}}
+![Top](/docs/images/getting-started/top.png "Top")
 
-{{< gallery-item src="/images/getting-started/top.png"
-    title="Top" >}}
-
-{{< gallery-item src="/images/getting-started/tap.png"
-    title="Tap" >}}
-
-{{< /gallery >}}
+![Tap](/docs/images/getting-started/tap.png "Tap")
 
 ## Futher reading
 

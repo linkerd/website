@@ -1,7 +1,7 @@
-+++
-title = "Using GitOps with Linkerd with Argo CD"
-description = "Use Argo CD to manage Linkerd installation and upgrade lifecycle."
-+++
+---
+title: Using GitOps with Linkerd with Argo CD
+description: Use Argo CD to manage Linkerd installation and upgrade lifecycle.
+---
 
 GitOps is an approach to automate the management and delivery of your Kubernetes
 infrastructure and applications using Git as a single source of truth. It
@@ -12,7 +12,7 @@ This guide will show you how to set up
 [Argo CD](https://argoproj.github.io/argo-cd/) to manage the installation and
 upgrade of Linkerd using a GitOps workflow.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 Specifically, this guide provides instructions on how to securely generate and
 manage Linkerd's mTLS private keys and certificates using
@@ -22,9 +22,7 @@ the [auto proxy injection](../../features/proxy-injection/) feature into your
 workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
 version following a GitOps workflow.
 
-{{< fig alt="Linkerd GitOps workflow"
-      title="Linkerd GitOps workflow"
-      src="/images/gitops/architecture.png" >}}
+![Linkerd GitOps workflow](/docs/images/gitops/architecture.png "Linkerd GitOps workflow")
 
 The software and tools used in this guide are selected for demonstration
 purposes only. Feel free to choose others that are most suited for your
@@ -175,9 +173,7 @@ argocd proj get demo
 
 On the dashboard:
 
-{{< fig alt="New project in Argo CD dashboard"
-      title="New project in Argo CD dashboard"
-      src="/images/gitops/dashboard-project.png" >}}
+![New project in Argo CD dashboard](/docs/images/gitops/dashboard-project.png "New project in Argo CD dashboard")
 
 ### Deploy the applications
 
@@ -206,9 +202,7 @@ Sync the `main` application:
 argocd app sync main
 ```
 
-{{< fig alt="Synchronize the main application"
-      title="Synchronize the main application"
-      src="/images/gitops/dashboard-applications-main-sync.png" >}}
+![Synchronize the main application](/docs/images/gitops/dashboard-applications-main-sync.png "Synchronize the main application")
 
 Notice that only the `main` application is synchronized.
 
@@ -236,10 +230,7 @@ for deploy in "cert-manager" "cert-manager-cainjector" "cert-manager-webhook"; \
 done
 ```
 
-{{< fig alt="Synchronize the cert-manager application"
-      title="Synchronize the cert-manager application"
-      center="true"
-      src="/images/gitops/dashboard-cert-manager-sync.png" >}}
+![Synchronize the cert-manager application](/docs/images/gitops/dashboard-cert-manager-sync.png "Synchronize the cert-manager application")
 
 ### Deploy Sealed Secrets
 
@@ -255,10 +246,7 @@ Confirm that sealed-secrets is running:
 kubectl -n kube-system rollout status deploy/sealed-secrets
 ```
 
-{{< fig alt="Synchronize the sealed-secrets application"
-      title="Synchronize the sealed-secrets application"
-      center="true"
-      src="/images/gitops/dashboard-sealed-secrets-sync.png" >}}
+![Synchronize the sealed-secrets application](/docs/images/gitops/dashboard-sealed-secrets-sync.png "Synchronize the sealed-secrets application")
 
 ### Create mTLS trust anchor
 
@@ -344,9 +332,7 @@ Ensure that this resource matches the
 Git server earlier.
 {{< /note >}}
 
-{{< fig alt="Synchronize the linkerd-bootstrap application"
-      title="Synchronize the linkerd-bootstrap application"
-      src="/images/gitops/dashboard-linkerd-bootstrap-sync.png" >}}
+![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png "Synchronize the linkerd-bootstrap application")
 
 SealedSecrets should have created a secret containing the decrypted trust
 anchor. Retrieve the decrypted trust anchor from the secret:
@@ -378,9 +364,7 @@ argocd app get linkerd -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-{{< fig alt="Empty default trust anchor"
-      title="Empty default trust anchor"
-      src="/images/gitops/dashboard-trust-anchor-empty.png" >}}
+![Empty default trust anchor](/docs/images/gitops/dashboard-trust-anchor-empty.png "Empty default trust anchor")
 
 We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
@@ -442,9 +426,7 @@ argocd app get linkerd -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-{{< fig alt="Override mTLS trust anchor"
-      title="Override mTLS trust anchor"
-      src="/images/gitops/dashboard-trust-anchor-override.png" >}}
+![Override mTLS trust anchor](/docs/images/gitops/dashboard-trust-anchor-override.png "Override mTLS trust anchor")
 
 Synchronize the `linkerd` application:
 
@@ -458,9 +440,7 @@ Check that Linkerd is ready:
 linkerd check
 ```
 
-{{< fig alt="Synchronize Linkerd"
-      title="Synchronize Linkerd"
-      src="/images/gitops/dashboard-linkerd-sync.png" >}}
+![Synchronize Linkerd](/docs/images/gitops/dashboard-linkerd-sync.png "Synchronize Linkerd")
 
 ### Test with emojivoto
 
@@ -478,9 +458,7 @@ for deploy in "emoji" "vote-bot" "voting" "web" ; \
 done
 ```
 
-{{< fig alt="Synchronize emojivoto"
-      title="Synchronize emojivoto"
-      src="/images/gitops/dashboard-emojivoto-sync.png" >}}
+![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
 ### Upgrade Linkerd to 2.8.1
 

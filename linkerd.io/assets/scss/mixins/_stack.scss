@@ -1,0 +1,16 @@
+@mixin make-stack($spacer) {
+  & > * {
+    margin-bottom: 0;
+  }
+  & > * + * {
+    margin-top: spacer($spacer);
+  }
+}
+@mixin make-stack-recursive($spacer) {
+  & * {
+    margin-bottom: 0;
+  }
+  & * + * {
+    margin-top: spacer($spacer);
+  }
+}

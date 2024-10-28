@@ -1,19 +1,14 @@
-+++
-title = "Installing Linkerd"
-description = "Install Linkerd to your own Kubernetes cluster."
-aliases = [
-  "/2.10/upgrading/",
-  "/2.10/installing/",
-  "/2.10/rbac/"
-]
-+++
+---
+title: Installing Linkerd
+description: Install Linkerd to your own Kubernetes cluster.
+---
 
 Before you can use Linkerd, you'll need to install the
 [core control plane](../../reference/architecture/#control-plane). This page
 covers how to accomplish that, as well as common problems that you may
 encounter.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 Note that the control plane is typically installed by using Linkerd's CLI. See
 [Getting Started](../../getting-started/) for how to install the CLI onto your local
@@ -25,7 +20,7 @@ to understand how to install them.
 
 Note also that, once the control plane is installed, you'll need to "mesh" any
 services you want Linkerd active for. See
-[Adding Your Service](../../adding-your-service/) for how to add Linkerd's data
+[Adding Your Service](../adding-your-service/) for how to add Linkerd's data
 plane to your services.
 
 ## Requirements

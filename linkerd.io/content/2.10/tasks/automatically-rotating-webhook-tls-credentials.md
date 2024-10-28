@@ -1,7 +1,7 @@
-+++
-title = "Automatically Rotating Webhook TLS Credentials"
-description = "Use cert-manager to automatically rotate webhook TLS credentials."
-+++
+---
+title: Automatically Rotating Webhook TLS Credentials
+description: Use cert-manager to automatically rotate webhook TLS credentials.
+---
 
 The Linkerd control plane contains several components, called webhooks, which
 are called directly by Kubernetes itself.  The traffic from Kubernetes to the
@@ -10,7 +10,7 @@ a secret containing TLS credentials.  These certificates are different from the
 ones that the Linkerd proxies use to secure pod-to-pod communication and use a
 completely separate trust chain.  For more information on rotating the TLS
 credentials used by the Linkerd proxies, see
-[Automatically Rotating Control Plane TLS Credentials](../use_external_certs/).
+[Automatically Rotating Control Plane TLS Credentials](../automatically-rotating-control-plane-tls-credentials/).
 
 By default, when Linkerd is installed
 with the Linkerd CLI or with the Linkerd Helm chart, TLS credentials are
@@ -23,7 +23,7 @@ This workflow is suitable for most users.  However, if you need these webhook
 certificates to be rotated automatically on a regular basis, it is possible to
 use cert-manager to automatically manage them.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Install Cert manager
 

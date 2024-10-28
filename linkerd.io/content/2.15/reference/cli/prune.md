@@ -1,9 +1,9 @@
-+++
-title = "prune"
-+++
+---
+title: prune
+---
 
-{{< cli/description "prune" >}}
+{{< docs/cli-description "prune" >}}
 
-{{< cli/examples "prune" >}}
+{{< docs/cli-examples "prune" >}}
 
-{{< cli/flags "prune" >}}
+{{< docs/cli-flags "prune" >}}

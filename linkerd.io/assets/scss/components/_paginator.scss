@@ -1,0 +1,22 @@
+/*
+@markup
+<nav class="paginator">
+  <ul>
+    ...
+  </ul>
+</nav>
+*/
+
+.paginator {
+  ul, li {
+    // Remove base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: spacer(3);
+  }
+}

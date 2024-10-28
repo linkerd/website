@@ -1,7 +1,7 @@
-+++
-title = "Authorization Policy"
-description = "Reference guide to Linkerd's policy resources."
-+++
+---
+title: Authorization Policy
+description: Reference guide to Linkerd's policy resources.
+---
 
 Linkerd's authorization policy allows you to control which types of traffic are
 allowed to meshed pods. See the [Authorization Policy feature
@@ -71,13 +71,13 @@ the Server, or that reference an HTTPRoute that in turn references the Server.
 
 A `Server` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
 | `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
 | `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### podSelector
 
@@ -85,12 +85,12 @@ This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/
 All the pods that are part of this selector will be part of the [Server] group.
 A podSelector object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field | value |
 |-------|-------|
 | `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | matchLabels is a map of {key,value} pairs. |
-{{< /table >}}
+{{< /keyval >}}
 
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
@@ -153,38 +153,38 @@ precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking
 
 An `HTTPRoute` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `parentRefs`| A set of [ParentReference](#parentreference)s which indicate which [Servers](#server) this `HTTPRoute` attach to.|
 | `hostnames`| A set of hostnames that should match against the HTTP Host header.|
 | `rules`| An array of [HTTPRouteRules](#httprouterule).|
-{{< /table >}}
+{{< /keyval >}}
 
 #### parentReference
 
 A reference to the [Servers] this `HTTPRoute` is a part of.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `group`| The group of the referent. This must be set to "group.linkerd.io".|
 | `kind`| The kind of the referent. This must be set to "Server".|
 | `namespace`| The namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the Route.|
 | `name`| The name of the referent.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpRouteRule
 
 `HTTPRouteRule` defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `matches`| A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.|
 | `filters`| A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpRouteMatch
 
@@ -192,94 +192,94 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 action. Multiple match types are ANDed together, i.e. the match will
 evaluate to true only if all conditions are satisfied.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `path`| An [httpPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided.|
 | `headers`| A list of [httpHeaderMatches](#httpheadermatch). Multiple match values are ANDed together.|
 | `queryParams`| A list of [httpQueryParamMatches](#httpqueryparammatch). Multiple match values are ANDed together.|
 | `method`| When specified, this route will be matched only if the request has the specified method.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpPathMatch
 
 `HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
 request path.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `type`| How to match against the path Value. One of: Exact, PathPrefix, RegularExpression. If this field is not specified, a default of "PathPrefix" is provided.|
 | `value`| The HTTP path to match against.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpHeaderMatch
 
 `HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `type`| How to match against the value of the header. One of: Exact, RegularExpression. If this field is not specified, a default of "Exact" is provided.|
 | `name`| The HTTP Header to be matched against. Name matching MUST be case insensitive.|
 | `value`| Value of HTTP Header to be matched.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `type`| How to match against the value of the query parameter. One of: Exact, RegularExpression. If this field is not specified, a default of "Exact" is provided.|
 | `name`| The HTTP query param to be matched. This must be an exact string match.|
 | `value`| Value of HTTP query param to be matched.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpRouteFilter
 
 `HTTPRouteFilter` defines processing steps that must be completed during the
 request or response lifecycle.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `type`| One of: RequestHeaderModifier, RequestRedirect.|
 | `requestHeaderModifier`| An [httpRequestHeaderFilter](#httprequestheaderfilter).|
 | `requestRedirect`| An [httpRequestRedirectFilter](#httprequestredirectfilter).|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpRequestHeaderFilter
 
 A filter which modifies request headers.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `set`| A list of [httpHeaders](#httpheader) to overwrites on the request.|
 | `add`|  A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value.|
 | `remove`|  A list of header names to remove from the request.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpHeader
 
 `HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `name`| Name of the HTTP Header to be matched. Name matching MUST be case insensitive.|
 | `value`| Value of HTTP Header to be matched.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpRequestRedirectFilter
 
 `HTTPRequestRedirect` defines a filter that redirects a request.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `scheme`| The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.|
@@ -287,19 +287,19 @@ A filter which modifies request headers.
 | `path`| An [httpPathModfier](#httppathmodfier) which modifies the path of the incoming request and uses the modified path in the `Location` header.|
 | `port`| The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.|
 | `statusCode`| The HTTP status code to be used in response.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### httpPathModfier
 
 `HTTPPathModifier` defines configuration for path modifiers.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `type`| One of: ReplaceFullPath, ReplacePrefixMatch.|
 | `replaceFullPath`| The value with which to replace the full path of a request during a rewrite or redirect.|
 | `replacePrefixMatch`| The value with which to replace the prefix match of a request during a rewrite or redirect.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### HTTPRoute Examples
 
@@ -338,12 +338,12 @@ being able to target [Servers].
 
 An `AuthorizationPolicy` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `targetRef`| A [TargetRef](#targetref) which references a resource to which the authorization policy applies.|
 | `requiredAuthenticationRefs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, _all_ authentications must match.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### targetRef
 
@@ -358,14 +358,14 @@ applies. The API objects supported are:
   applies to all traffic to all [Servers] and [HTTPRoutes] defined in the
   namespace.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `group`| Group is the group of the target resource. For namespace kinds, this should be omitted.|
 | `kind`| Kind is kind of the target resource.|
 | `namespace`| The namespace of the target resource. When unspecified (or empty string), this refers to the local namespace of the policy.|
 | `name`| Name is the name of the target resource.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### AuthorizationPolicy Examples
 
@@ -439,12 +439,12 @@ to the target.
 
 A `MeshTLSAuthentication` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `identities`| A list of mTLS identities to authenticate. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all meshed clients are authorized.|
 | `identityRefs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### MeshTLSAuthentication Examples
 
@@ -504,22 +504,22 @@ specified networks in order to be authorized to send to the target.
 
 A `NetworkAuthentication` spec may contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `networks`| A list of [networks](#network) to authenticate.|
-{{< /table >}}
+{{< /keyval >}}
 
 #### network
 
 A `network` defines an authenticated IP subnet.
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `cidr`| A subnet in CIDR notation to authenticate.|
 | `except`| A list of subnets in CIDR notation to exclude from the authentication.|
-{{< /table >}}
+{{< /keyval >}}
 
 ### NetworkAuthentication Examples
 
@@ -556,23 +556,23 @@ preferred, and `ServerAuthorization` will be deprecated in future releases.
 
 A ServerAuthorization spec must contain the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `client`| A [client](#client) describes clients authorized to access a server. |
 | `server`| A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### serverRef
 
 A `serverRef` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `name`| References a `Server` instance by name. |
 | `selector`| A [selector](#selector) selects servers on which this authorization applies in the same namespace. |
-{{< /table >}}
+{{< /keyval >}}
 
 #### selector
 
@@ -580,12 +580,12 @@ This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/
 All the servers that are part of this selector will have this authorization applied.
 A selector object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field | value |
 |-------|-------|
 | `matchExpressions` | A list of label selector requirements. The requirements are ANDed. |
 | `matchLabels` | A map of {key,value} pairs. |
-{{< /table >}}
+{{< /keyval >}}
 
 See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
@@ -594,43 +594,43 @@ for more details.
 
 A `client` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `meshTLS`| A [meshTLS](#meshtls) is used to authorize meshed clients to access a server. |
 | `unauthenticated`| A boolean value that authorizes unauthenticated clients to access a server. |
-{{< /table >}}
+{{< /keyval >}}
 
 Optionally, it can also contain the `networks` field:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `networks`| Limits the client IP addresses to which this authorization applies. If unset, the server chooses a default (typically, all IPs or the cluster's pod network). |
-{{< /table >}}
+{{< /keyval >}}
 
 #### meshTLS
 
 A `meshTLS` object must contain _exactly one_ of the following fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `unauthenticatedTLS`| A boolean to indicate that no client identity is required for communication. This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate. |
 | `identities`| A list of proxy identity strings (as provided via mTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
 | `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via mTLS). |
-{{< /table >}}
+{{< /keyval >}}
 
 #### serviceAccount
 
 A serviceAccount field contains the following top level fields:
 
-{{< table >}}
+{{< keyval >}}
 | field| value |
 |------|-------|
 | `name`| The ServiceAccount's name. |
 | `namespace`| The ServiceAccount's namespace. If unset, the authorization's namespace is used. |
-{{< /table >}}
+{{< /keyval >}}
 
 ### ServerAuthorization Examples
 

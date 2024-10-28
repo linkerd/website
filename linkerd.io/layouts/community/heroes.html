@@ -1,4 +1,51 @@
 {{ define "main" }}
-{{ partial "top-hero.html" .Params.top_hero }}
-{{ partial "community/heroes/heroes.html" .Params.heroes }}
+  <div class="heroes">
+    {{ .Render "_hero" }}
+    <div class="page">
+      <div class="page__container container">
+        {{ range .Params.heroes }}
+          <div class="card card--horz card--center card--inset-media">
+            <div class="heroes__type">
+              {{ $alt := .type }}
+              {{ with $.Resources.Get (printf `images/type-%s.svg` .type ) }}
+                <img src="{{ .RelPermalink }}" alt="{{ $alt }}">
+              {{ end }}
+            </div>
+            <div class="card__media">
+              {{ $alt := .name }}
+              {{ with $.Resources.Get .image }}
+                {{ with partial "utils/process-image" (dict
+                  "res" .
+                  "width" 256
+                  "height" 256
+                  "process" "fill jpg q80 lanczos"
+                )}}
+                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
+                {{ end }}
+              {{ end }}
+            </div>
+            <div class="card__body">
+              <div class="card__header">
+                <h3>
+                  {{ if .url }}
+                    <a href="{{ .url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>
+                      {{ .name }}
+                    </a>
+                  {{ else }}
+                    {{ .name }}
+                  {{ end }}
+                </h3>
+                <p>
+                  {{ .blurb }}
+                </p>
+                <p>
+                  {{ .date }}
+                </p>
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
 {{ end }}

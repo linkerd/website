@@ -1,7 +1,7 @@
-+++
-title = "Distributed tracing with Linkerd"
-description = "Use Linkerd to help instrument your application with distributed tracing."
-+++
+---
+title: Distributed tracing with Linkerd
+description: Use Linkerd to help instrument your application with distributed tracing.
+---
 
 Using distributed tracing in practice can be complex, for a high level
 explanation of what you get and how it is done, we've assembled a [list of
@@ -20,8 +20,7 @@ To use distributed tracing, you'll need to:
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
-{{< fig src="/images/tracing/tracing-topology.svg"
-        title="Topology" >}}
+![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
 
 ## Prerequisites
 
@@ -101,20 +100,17 @@ up in Jaeger. To get to the UI, run:
 linkerd jaeger dashboard
 ```
 
-{{< fig src="/images/tracing/jaeger-empty.png"
-        title="Jaeger" >}}
+![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
-{{< fig src="/images/tracing/jaeger-search.png"
-        title="Search" >}}
+![Search](/docs/images/tracing/jaeger-search.png "Search")
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
-{{< fig src="/images/tracing/example-trace.png"
-        title="Search" >}}
+![Search](/docs/images/tracing/example-trace.png "Search")
 
 There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
@@ -130,8 +126,7 @@ meta-data as trace attributes, users can directly jump into related resources
 traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
 the Metrics Table, as shown below:
 
-{{< fig src="/images/tracing/linkerd-jaeger-ui.png"
-        title="Linkerd-Jaeger" >}}
+![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
 
 To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
 extension specifying the service exposing the Jaeger UI. By default, this would

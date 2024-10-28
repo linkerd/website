@@ -1,7 +1,7 @@
-+++
-title = "HTTP 502 Errors"
-description = "HTTP 502 means connection errors between proxies."
-+++
+---
+title: HTTP 502 Errors
+description: HTTP 502 means connection errors between proxies.
+---
 
 The Linkerd proxy will return a 502 error for connection errors between
 proxies. Unfortunately it's fairly common to see an uptick in 502s when

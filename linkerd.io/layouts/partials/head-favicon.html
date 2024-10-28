@@ -1,0 +1,3 @@
+{{ with resources.Get "favicon.png" }}
+  <link rel="shortcut icon" href="{{ .RelPermalink }}">
+{{ end }}

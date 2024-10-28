@@ -1,0 +1,88 @@
+{{/* Article schema for blog posts */}}
+{{ if and (eq .Section "blog") (.IsPage) }}
+  {{ $scratch := newScratch }}
+  {{/* Get author name */}}
+  {{ with .Params.author }}
+    {{ with index site.Data.authors . }}
+      {{ $scratch.Set "author" .name }}
+    {{ end }}
+  {{ end }}
+  {{/* Get cover image */}}
+  {{ with .Render "_cover-relref" }}
+    {{ $scratch.Set "cover" (. | absURL) }}
+  {{ end }}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {{ $scratch.Get "author" }},
+      "datePublished": {{ .PublishDate }},
+      "dateModified": {{ .Lastmod }},
+      "headline": {{ .Title }},
+      "image": {{ $scratch.Get "cover" }},
+      "publisher": {
+        "@type": "Organization",
+        "name": "linkerd.io",
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ "/logos/linkerd.png" | absURL }},
+          "width": 472,
+          "height": 100
+        }
+      }
+    }
+  </script>
+{{ end }}
+
+{{/* FAQPage schema */}}
+{{ if .Params.faqSchema }}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {{ range $k, $v := .Params.faqSchema }}
+          {{ with $k }},{{ end }}
+          {
+            "@type": "Question",
+            "name": {{ .question }},
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": {{ .answer | markdownify | plainify }}
+            }
+          }
+        {{ end }}
+      ]
+    }
+  </script>
+{{ end }}
+
+{{/* VideoObject schema */}}
+{{ if .Params.videoSchema }}
+  {{ $permalink := .Permalink }}
+  {{ range .Params.videoSchema }}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": {{ .title }},
+        "description": {{ .description }},
+        "thumbnailUrl": {{ .thumbnailUrl }},
+        "uploadDate": {{ .uploadDate }},
+        "duration": {{ .duration }},
+        "publisher": {
+          "@type": "Organization",
+          "name": "Linkerd",
+          "logo": {
+            "@type": "ImageObject",
+            "url": {{ "/logos/linkerd.png" | absURL }},
+            "width": 472,
+            "height": 100
+          }
+        },
+        "embedUrl": {{ .embedUrl }},
+        "contentUrl": {{ $permalink }}
+      }
+    </script>
+  {{ end }}
+{{ end }}

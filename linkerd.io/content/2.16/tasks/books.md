@@ -1,7 +1,8 @@
-+++
-title = "Debugging HTTP applications with per-route metrics"
-description = "Follow a long-form example of debugging a failing HTTP application using per-route metrics."
-+++
+---
+title: Debugging HTTP applications with per-route metrics
+description: Follow a long-form example of debugging a failing HTTP application using
+  per-route metrics.
+---
 
 This demo is of a Ruby application that helps you manage your bookshelf. It
 consists of multiple microservices and uses JSON over HTTP to communicate with
@@ -19,7 +20,7 @@ the other services. There are three services:
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
-{{< fig src="/images/books/topology.png" title="Topology" >}}
+![Topology](/docs/images/books/topology.png "Topology")
 
 ## Prerequisites
 
@@ -71,7 +72,7 @@ connection" messages for the rest of the exercise.)
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
-{{< fig src="/images/books/frontend.png" title="Frontend" >}}
+![Frontend](/docs/images/books/frontend.png "Frontend")
 
 Unfortunately, there is an error in the app: if you click *Add Book*, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
@@ -80,7 +81,7 @@ debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
 perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
-{{< fig src="/images/books/failure.png" title="Failure" >}}
+![Failure](/docs/images/books/failure.png "Failure")
 
 ## Add Linkerd to the service
 
@@ -120,7 +121,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 
 This should return a metric that looks something like:
 
-```text
+```text {class=disable-copy}
 outbound_http_route_backend_response_statuses_total{
   parent_group="core",
   parent_kind="Service",
@@ -221,7 +222,7 @@ kubectl -n booksapp get httproutes.gateway.networking.k8s.io \
 
 Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
 
-```json
+```json {class=disable-copy}
 {
   "lastTransitionTime": "2024-08-03T01:38:25Z",
   "message": "",
@@ -248,7 +249,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep http_status=\"500\"
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_backend_response_statuses_total{
   parent_group="core",
   parent_kind="Service",
@@ -296,7 +297,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep retry
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_retry_limit_exceeded_total{...} 222
 outbound_http_route_retry_overflow_total{...} 0
 outbound_http_route_retry_requests_total{...} 469
@@ -341,7 +342,7 @@ linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
 | grep outbound_http_route_request_statuses_total | grep books-create
 ```
 
-```text
+```text {class=disable-copy}
 outbound_http_route_request_statuses_total{
   [...]
   route_name="books-create",

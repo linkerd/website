@@ -1,0 +1,278 @@
+---
+title: Components
+---
+
+<!-- markdownlint-disable -->
+<!-- prettier-ignore-start -->
+
+<div class="container-lg" style="display: flex; flex-direction: column; gap: 24px; padding: 80px 0">
+
+  <h2>Alert</h2>
+
+  <div class="alert">
+    <div class="alert__title">
+      <h4>
+        Alert
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is an alert.
+    </div>
+  </div>
+
+  <div class="alert alert--info">
+    <div class="alert__title">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+      </svg>
+      <h4>
+        Info
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is an info alert.
+    </div>
+  </div>
+
+  <div class="alert alert--success">
+    <div class="alert__title">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+      </svg>
+      <h4>
+        Success
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is a success alert.
+    </div>
+  </div>
+
+  <div class="alert alert--warning">
+    <div class="alert__title">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+      </svg>
+      <h4>
+        Warning
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is a warning alert.
+    </div>
+  </div>
+
+  <div class="alert alert--danger">
+    <div class="alert__title">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+      </svg>
+      <h4>
+        Danger
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is a danger alert.
+    </div>
+  </div>
+
+  <div class="alert alert--condensed alert--center">
+    <div class="alert__content">
+      This is an alert that's condensed and centered.
+    </div>
+  </div>
+
+  <div class="alert alert--info alert--callout">
+    <div class="alert__title">
+      <h4>
+        Note
+      </h4>
+    </div>
+    <div class="alert__content">
+      This is a callout.
+    </div>
+  </div>
+
+  <h2>Avatar</h2>
+
+  <div class="avatar">
+    <div class="avatar__image">
+      <img src="../image.png" alt="Name" class="img img--48 img--cover img--round">
+    </div>
+    <p class="avatar__name">
+      Name <span class="avatar__title">Title</span>
+    </p>
+  </div>
+
+  <h2>Badge</h2>
+
+  <p><span class="badge">Text</span></p>
+
+  <h2>Button</h2>
+
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <p><a class="button">Button</a></p>
+    <p><a class="button button--primary">Primary</a></p>
+    <p><a class="button button--secondary">Secondary</a></p>
+  </div>
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <p><a class="button button--outline">Outline</a></p>
+    <p><a class="button button--primary button--outline">Primary Outline</a></p>
+    <p><a class="button button--secondary button--outline">Secondary Outline</a></p>
+  </div>
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <p><a class="button button--primary button--lg">Primary Large</a></p>
+    <p><a class="button button--primary button--md">Primary Medium</a></p>
+    <p><a class="button button--primary button--sm">Primary Small</a></p>
+    <p><a class="button button--primary button--xs">Primary Extra Small</a></p>
+  </div>
+  <p><a class="button button--primary button--block">Block</a></p>
+
+  <h2>Card</h2>
+
+  <div class="card">
+    <div class="card__media">
+      <img src="../image.png" class="img img--fill img--cover img--h196 img--rounded">
+    </div>
+    <div class="card__body">
+      <div class="card__header">
+        <h4>Header</h4>
+      </div>
+      <div class="card__content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </div>
+      <div class="card__footer">
+        <a href="#" class="button button--primary">Learn more</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card--md-horz card--inset-media card--md-reverse card--center">
+    <div class="card__media">
+      <img src="../image.png" class="img img--128 img--cover img--round">
+    </div>
+    <div class="card__body">
+      <div class="card__header">
+        <h4>Header</h4>
+      </div>
+      <div class="card__content">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </div>
+      <div class="card__footer">
+        <a href="#" class="button button--primary">Learn more</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>Form Control</h2>
+
+  <div class="form-control">
+    <label for="my-input">Label</label>
+    <input type="text" id="my-input">
+  </div>
+
+  <h2>Icon Button</h2>
+
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <a class="icon-button">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+      </svg>
+    </a>
+    <a class="icon-button icon-button--primary">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+      </svg>
+    </a>
+    <a class="icon-button icon-button--secondary">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+      </svg>
+    </a>
+  </div>
+
+  <h2>Icon</h2>
+
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--secondary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--warning" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--danger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+  </div>
+
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <svg class="icon icon--current icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--current icon--sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--current icon--md" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--current icon--lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+    <svg class="icon icon--current icon--xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z" />
+    </svg>
+  </div>
+
+  <h2>Image</h2>
+
+  <div style="display: flex; flex-direction: row; gap: 24px; margin-bottom: 24px;">
+    <img src="../image.png" class="img img--128 img--cover img--round">
+    <img src="../image.png" class="img img--128 img--cover img--rounded">
+    <img src="../image.png" class="img img--w128">
+    <img src="../image.png" class="img img--h128">
+  </div>
+
+  <h2>Loader</h2>
+
+  <div class="loader"></div>
+
+  <h2>Search Input</h2>
+
+  <form>
+    <div class="search-input">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+      </svg>
+      <input type="text" placeholder="Search" required>
+      <input type="reset">
+    </div>
+  </form>
+
+  <form>
+    <div class="search-input search-input--sm">
+      <svg class="icon icon--current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+      </svg>
+      <input type="text" placeholder="Search" required>
+      <input type="reset">
+    </div>
+  </form>
+
+</div>
+
+<!-- prettier-ignore-end -->
+

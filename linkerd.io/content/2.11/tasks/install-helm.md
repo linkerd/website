@@ -1,12 +1,12 @@
-+++
-title = "Installing Linkerd with Helm"
-description = "Install Linkerd onto your Kubernetes cluster using Helm."
-+++
+---
+title: Installing Linkerd with Helm
+description: Install Linkerd onto your Kubernetes cluster using Helm.
+---
 
 Linkerd can be installed via Helm rather than with the `linkerd install`
 command. This is recommended for production, since it allows for repeatability.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisite: generate identity certificates
 
@@ -149,7 +149,7 @@ helm repo update
 
 helm search repo linkerd2
 NAME                    CHART VERSION          APP VERSION            DESCRIPTION
-linkerd/linkerd2        <chart-semver-version> {{% latestversion %}}    Linkerd gives you observability, reliability, and securit...
+linkerd/linkerd2        <chart-semver-version> {{< latest-stable-version >}}    Linkerd gives you observability, reliability, and securit...
 ```
 
 During an upgrade, you must choose whether you want to reuse the values in the

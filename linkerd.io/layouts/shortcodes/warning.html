@@ -1,1 +1,4 @@
-{{ partial "admonition.html" (dict "type" "warning" "icon" "warning" "id" (.Get "id") "title" "Warning" "content" .Inner) }}
+{{- $id := .Get "id" }}
+{{- $title := default "Warning" (.Get "title") }}
+{{- $content := .Inner | markdownify }}
+{{ partial "components/alert" (dict "id" $id "variant" "warning" "callout" true "title" $title "content" $content) }}

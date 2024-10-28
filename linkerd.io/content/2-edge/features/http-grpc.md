@@ -1,8 +1,9 @@
-+++
-title = "HTTP, HTTP/2, and gRPC Proxying"
-description = "Linkerd will automatically enable advanced features (including metrics, load balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections."
-weight = 1
-+++
+---
+title: HTTP, HTTP/2, and gRPC Proxying
+description: Linkerd will automatically enable advanced features (including metrics,
+  load balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections.
+weight: 1
+---
 
 Linkerd can proxy all TCP connections. For HTTP connections (including HTTP/1.0,
 HTTP/1.1, HTTP/2, and gRPC connections), it will automatically enable advanced

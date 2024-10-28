@@ -1,6 +1,6 @@
-+++
-title = "Reference"
-weight = 5
-+++
+---
+title: Reference
+weight: 5
+---
 
-{{% sectiontoc "reference" %}}
+{{< docs/section-toc >}}

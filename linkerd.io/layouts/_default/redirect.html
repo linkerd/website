@@ -1,0 +1,17 @@
+{{ define "head" }}
+  {{ with .Params.redirect }}
+    {{ $url := . }}
+    {{ if strings.HasPrefix $url "/2/" }}
+      {{ $url = printf "/%s/%s" site.Params.latestMajorVersion (strings.TrimPrefix "/2/" $url) }}
+    {{ end }}
+    <meta name="robots" content="noindex">
+    <meta http-equiv="Refresh" content="0; url={{ $url }}">
+    <script>
+      window.location.href = "{{ $url }}" + window.location.hash;
+    </script>
+  {{ else }}
+    {{ with .File }}
+      {{ errorf ".Params.redirect is undefined in %q" .Filename }}
+    {{ end }}
+  {{ end }}
+{{ end }}

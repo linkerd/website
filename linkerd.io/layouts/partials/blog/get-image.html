@@ -1,0 +1,82 @@
+{{/*
+Get the .RelPermalink of the cover, thumbnail, or feature blog image, failing
+back to a default image if the image src is not set in the frontmatter params.
+
+@param {page} Page context
+@param {string} [src] Filename of page resource or absolute URL
+@param {string} [default] Default image(s) to use if `src` is empty
+
+Parameters that pass through to `utils/process-image`:
+
+@param {int} [width]
+@param {int} [height]
+@param {string} [process]
+@param {bool} [upscale]
+
+@returns .RelPermalink of a cover, thumbnail, or feature blog image
+
+@example
+{{ partial "blog/get-image" (dict
+  "page" .
+  "src" .Params.thumbnail
+  "default" "thumbnail.*, cover.*"
+) }}
+
+*/}}
+
+{{ $page := .page }}
+{{ $src := .src }}
+{{ $default := split .default "," }}
+
+{{ $width := .width }}
+{{ $height := .height }}
+{{ $process := .process }}
+{{ $upscale := .upscale }}
+
+{{ $res := false }}
+
+{{/* Try to find a page resource */}}
+{{ if $src }}
+  {{/* .src is not empty */}}
+  {{ if not (or (hasPrefix $src "/") (hasPrefix $src "http")) }}
+    {{/* .src is not an absolute URL, so look for a page resource */}}
+    {{ with $page.Resources.Get (strings.TrimPrefix "./" $src) }}
+      {{/* page resource found */}}
+      {{ if eq .ResourceType "image" }}
+        {{ $res = . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else if $default }}
+  {{/* .src is empty */}}
+  {{ range $default }}
+    {{ with $page.Resources.GetMatch (trim . " ") }}
+      {{/* default page resource found */}}
+      {{ if eq .ResourceType "image" }}
+        {{ $res = . }}
+        {{ break }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Process page resource if needed */}}
+{{ if $res }}
+  {{ if $process }}
+    {{ with partial "utils/process-image" (dict
+      "res" $res
+      "width" $width
+      "height" $height
+      "process" $process
+      "upscale" $upscale
+    )}}
+      {{/* Pocessed page resource link */}}
+      {{ $src = .RelPermalink }}
+    {{ end }}
+  {{ else }}
+    {{/* Page resource link */}}
+    {{ $src = $res.RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ return $src }}

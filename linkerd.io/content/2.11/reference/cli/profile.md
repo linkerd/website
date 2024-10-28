@@ -1,13 +1,13 @@
-+++
-title = "profile"
-+++
+---
+title: profile
+---
 
-{{< cli/description "profile" >}}
+{{< docs/cli-description "profile" >}}
 
 Check out the [service profile](../../../features/service-profiles/)
 documentation for more details on what this command does and what you can do
 with service profiles.
 
-{{< cli/examples "profile" >}}
+{{< docs/cli-examples "profile" >}}
 
-{{< cli/flags "profile" >}}
+{{< docs/cli-flags "profile" >}}

@@ -1,0 +1,20 @@
+<div class="card card--horz card--center">
+  <div class="card__media">
+    {{ with .Render "_thumbnail-relref" }}
+      <div class="thumbnail">
+        <span style="background-image:url('{{ . }}')"></span>
+        <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--128 img--rounded">
+      </div>
+    {{ end }}
+  </div>
+  <div class="card__body">
+    <div class="card__header">
+      <h4>
+        <a href="{{ .RelPermalink }}">
+          {{ .LinkTitle }}
+        </a>
+      </h4>
+      {{ .Render "_meta-date" }}
+    </div>
+  </div>
+</div>

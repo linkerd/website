@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="">
-
-<head>
-  {{ partial "head.html" . }}
-  {{ block "head" . }}
-  {{ end }}
-</head>
-
-<body class="has-background-grey-light has-navbar-fixed-top ">
-  {{ if not hugo.IsServer }}
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXBDGKJ" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  {{ end }}
-  {{ partial "header.html" . }}
-  {{ partial "announcement-banner.html" . }}
-  <section class="hero">
-    <main aria-role="main" class="hero-body">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {{ partial "head-tracking.html" . }}
+    <title>{{ partial "page-title" . }}</title>
+    {{ partial "head-favicon" . }}
+    {{ partial "head-meta" . }}
+    {{ partial "head-seo" . }}
+    {{ partial "head-rss" . }}
+    {{ partial "head-css" . }}
+    {{ partial "head-js" . }}
+    {{ partial "head-schema" . }}
+    {{ block "head" . }}
+    {{ end }}
+  </head>
+  <body>
+    {{ partial "body-open" . }}
+    {{ partial "main-header" . }}
+    {{ partial "main-announcement" . }}
+    <main class="main-content">
       {{ block "main" . }}
       {{ end }}
     </main>
-    {{ block "footer" . }}
-    {{ end }}
-    {{ partial "footer.html" . }}
-  </section>
-  {{ block "body-end" . }}
-  {{ end }}
-
-  {{ $isDocsPage := in (slice "1" "2" "blog") .Section }}
-  {{ if $isDocsPage }}
-  <script>
-    anchors.add('.blog-content-container h1:not(.title), .blog-content-container h2, .blog-content-container h3, .blog-content-container h4');
-  </script>
-  {{ end }}
-
-
-  <div class="modal" id="galleryModal">
-    <div class="modal-background" onclick="hideImageModal()"></div>
-    <div class="modal-content">
-      <p class="image">
-        <img id="galleryModalImage" data-proofer-ignore>
-      </p>
-    </div>
-    <button class="modal-close is-large" aria-label="close" onclick="hideImageModal()"></button>
-  </div>
-</body>
-
+    {{ partial "main-footer" . }}
+    {{ partial "body-close" . }}
+  </body>
 </html>

@@ -1,62 +1,36 @@
 {{ define "main" }}
-{{ $authorId := .Param "author" }}
-{{ $author := (index $.Site.Data.authors $authorId)}}
-{{ $date := .PublishDate.Format "January 2, 2006"}}
-<div class="wrapper body-header blog-post has-background-white">
-  <div class="columns center-column is-marginless is-fullwidth">
-    <div class="column post-header">
-      <div class="container">
-        <h1 class="title is-1 has-text-color">{{ .Title}}</h1>
-        <div class="media container">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              {{ if $author.avatar }}
-              <img {{ partial "src.html" (dict "img" $author.avatar "class" "is-rounded") | safeHTMLAttr }}
-                alt="{{ $author.name }}" />
-              {{ else }}
-              <img class="is-rounded" src="/images/identity/svg/linkerd_mark_grid_small.svg" alt="author avatar"
-                style="background: #F2F2F2;" />
-              {{ end }}
-            </p>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p>
-                <strong>{{ $author.name }}</strong><br />
-                {{ $date }} • {{ partial "readingtime.html" . }}
-              </p>
-            </div>
-          </div>
+  <div class="blog blog--single">
+    <div class="blog__container container">
+      <div class="blog-post">
+        <div class="blog-post__header">
+          <h1>
+            {{ .Title }}
+          </h1>
+          {{ .Render "_meta-author" }}
+        </div>
+        <div class="blog-post__cover">
+          {{ if eq .Params.showCover true }}
+            {{ with .Render "_cover-relref" }}
+              <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--max-fill img--cover img--center img--rounded">
+            {{ end }}
+          {{ end }}
+        </div>
+        <div class="blog-post__content prose">
+          {{ .Content }}
         </div>
       </div>
+      {{ with site.RegularPages.Related . | first 4 }}
+        <div class="blog-post-related">
+          <h2>
+            Suggested Blog Posts
+          </h2>
+          <div class="blog-post-related__pages">
+            {{ range . }}
+              {{ .Render "_summary" }}
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
     </div>
   </div>
-  <div class="wrapper has-background-white">
-    <div class="container blog-content-container language-markup">
-      {{ .Content }}
-      <div class="center">
-        <div class="addthis_inline_share_toolbox"></div>
-      </div>
-    </div>
-  </div>
-  <div class="search-title is-uppercase has-text-centered">
-    Suggested Blog Posts
-  </div>
-  <div class="columns container is-multiline is-variable blog-list-container">
-    {{ $related := .Site.RegularPages.Related . | first 4 }}
-    {{ with $related }}
-    {{ range . }}
-      {{ partial "related-card.html" . }}
-    {{ end }}
-    {{ end }}
-  </div>
-
-
-
-
-  {{ end }}
-
-  {{ define "body-end" }}
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c6c43959addf02a"
-    async></script>
-  {{ end }}
+{{ end }}

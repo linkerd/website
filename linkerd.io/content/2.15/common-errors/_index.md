@@ -1,9 +1,9 @@
-+++
-title = "Common Errors"
-weight = 10
-[sitemap]
-  priority = 1.0
-+++
+---
+title: Common Errors
+weight: 10
+sitemap:
+  priority: 1.0
+---
 
 Linkerd is generally robust, but things can always go wrong! You'll find
 information here about the most common things that cause people trouble.
@@ -18,4 +18,4 @@ this command is.
 
 ## Common Errors
 
-{{% sectiontoc "common-errors" %}}
+{{< docs/section-toc >}}

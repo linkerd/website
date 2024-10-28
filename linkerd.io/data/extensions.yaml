@@ -1,0 +1,24 @@
+- name: jaeger
+  description: "Built-in extension that adds distributed tracing to Linkerd using OpenTelemetry collector and Jaeger."
+  url: https://github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger
+  image: linkerd-jaeger-dashboard.png
+- name: multicluster
+  description: "Built-in extension that enables multicluster support for Linkerd."
+  url: https://github.com/linkerd/linkerd2/tree/main/multicluster/charts/linkerd-multicluster
+  image: linkerd-multicluster-dashboard.png
+- name: smi
+  description: "The Linkerd SMI extension helps users to have SMI functionality in Linkerd-enabled Kubernetes clusters."
+  url: https://github.com/linkerd/linkerd-smi/tree/main/charts/linkerd-smi
+  image: linkerd-smi-dashboard.png
+- name: tapshark
+  description: "Wireshark inspired ncurses-style CLI for Linkerd Tap"
+  url: https://github.com/adleong/tapshark
+  image: tapshark.png
+- name: viz
+  description: "Built-in extension that provides observability and visualization components for Linkerd."
+  url: https://github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz
+  image: linkerd-viz-dashboard.png
+- name: easyauth
+  description: "Simplify the Linkerd Authorization Policies management."
+  url: https://github.com/aatarasoff/linkerd-easyauth
+  image: unknown.png

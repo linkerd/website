@@ -1,0 +1,37 @@
+/*
+@markup See: layouts/community/adopters.html
+*/
+
+.adopters {
+  .page__container {
+    @include make-stack(6);
+  }
+  .adopters__case-studies {
+    display: grid;
+    gap: spacer(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .adopters__logos {
+    display: grid;
+    gap: spacer(7);
+    grid-template-columns: 1fr;
+
+    img {
+      // Multiply the logos because some of them have a white background
+      mix-blend-mode: multiply;
+    }
+    @media (min-width: breakpoint-min-width("md")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: breakpoint-min-width("lg")) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (min-width: breakpoint-min-width("xl")) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

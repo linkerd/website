@@ -1,7 +1,7 @@
-+++
-title = "Proxy Log Level"
-description = "Syntax of the proxy log level."
-+++
+---
+title: Proxy Log Level
+description: Syntax of the proxy log level.
+---
 
 The Linkerd proxy's log level can be configured via the:
 

@@ -1,7 +1,7 @@
-+++
-title = "Configuring Retries"
-description = "Configure Linkerd to automatically retry failing requests."
-+++
+---
+title: Configuring Retries
+description: Configure Linkerd to automatically retry failing requests.
+---
 
 In order for Linkerd to do automatic retries of failures, there are two
 questions that need to be answered:

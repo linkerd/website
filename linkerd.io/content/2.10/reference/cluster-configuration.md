@@ -1,7 +1,7 @@
-+++
-title = "Cluster Configuration"
-description = "Configuration settings unique to providers and install methods."
-+++
+---
+title: Cluster Configuration
+description: Configuration settings unique to providers and install methods.
+---
 
 ## GKE
 

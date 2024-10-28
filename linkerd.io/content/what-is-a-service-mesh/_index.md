@@ -1,35 +1,45 @@
 ---
 title: What is a service mesh?
-description: A service mesh adds security, reliability, and observability features to cloud native apps by transparently inserting this functionality at the platform layer.
-enableFAQSchema: true
-aliases:
-  - priority = 1.0
-faqs:
-  - question: What is a service mesh?
-    answer: A service mesh like Linkerd is a tool for adding observability,
-      security, and reliability features to "cloud native" applications by
-      transparently inserting this functionality at the platform layer rather
-      than the application layer. The service mesh is rapidly becoming a
-      standard part of the cloud native stack, especially for Kubernetes
-      adopters.
-  - question: What does a service mesh actually do?
-    answer: A service mesh adds reliability, security, and observability
-      features to a microservice application by managing the way that
-      communication happens between the services.
-  - question: Why do I need a service mesh?
-    answer: If you are building applications on Kubernetes, then a service mesh
-      like Linkerd provides critical observability, reliability, and security
-      features with one big advantage--the application doesn't need to
-      implement these features, or even to be aware that the service mesh is
-      there!
-  - question: Where did the service mesh come from?
-    answer: The origins of the service mesh model can be traced in the
-      evolution of server-side applications over the past several decades.
-  - question: What's the future of the service mesh?
-    answer: The frantic pace of service mesh adoption is showing little sign of
-      slowing down. As with most successful technology, the ultimate future of
-      the service mesh is probably quite boring--to recede into the background,
-      present but taken for granted and not actually given too much attention.
+description:
+  A service mesh adds security, reliability, and observability features to cloud
+  native apps by transparently inserting this functionality at the platform
+  layer.
+type: docs
+sitemap:
+  priority: 1.0
+params:
+  faqSchema:
+    - question: What is a service mesh?
+      answer: |-
+        A service mesh like Linkerd is a tool for adding observability,
+        security, and reliability features to "cloud native" applications by
+        transparently inserting this functionality at the platform layer rather
+        than the application layer. The service mesh is rapidly becoming a
+        standard part of the cloud native stack, especially for Kubernetes
+        adopters.
+    - question: What does a service mesh actually do?
+      answer: |-
+        A service mesh adds reliability, security, and observability features
+        to a microservice application by managing the way that communication
+        happens between the services.
+    - question: Why do I need a service mesh?
+      answer: |-
+        If you are building applications on Kubernetes, then a service mesh
+        like Linkerd provides critical observability, reliability, and security
+        features with one big advantage--the application doesn't need to
+        implement these features, or even to be aware that the service mesh is
+        there!
+    - question: Where did the service mesh come from?
+      answer: |-
+        The origins of the service mesh model can be traced in the evolution of
+        server-side applications over the past several decades.
+    - question: What's the future of the service mesh?
+      answer: |-
+        The frantic pace of service mesh adoption is showing little sign of
+        slowing down. As with most successful technology, the ultimate future of
+        the service mesh is probably quite boring--to recede into the
+        background, present but taken for granted and not actually given too
+        much attention.
 ---
 
 A service mesh like Linkerd is a tool for adding security, reliability, and
@@ -122,7 +132,7 @@ tools.
 
 And that's just the simplified version!
 
-![Linkerd dashboard](/images/architecture/stat.png "Linkerd dashboard")
+![Linkerd dashboard](dashboard.png "Linkerd dashboard")
 
 ## Why do I need a service mesh?
 
@@ -196,5 +206,5 @@ first service mesh project in 2017, [Linkerd is now in
 production](https://buoyant.io/case-studies/) at organizations like Microsoft,
 HP, and Nordstrom, and adoption shows no sign of slowing down. If you
 are using Kubernetes, Linkerd is fully open source and available to you today.
-[You're only minutes away](/getting-started/) from getting
+[You're only minutes away](/2/getting-started/) from getting
 concrete, hands-on experience with the service mesh!

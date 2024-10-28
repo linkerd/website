@@ -1,0 +1,107 @@
+main:
+  - name: Docs
+    url: /docs/
+    weight: 1
+  - name: Community
+    #pageRef: /community/
+    weight: 2
+  - name: Get Involved
+    pageRef: /community/get-involved/
+    weight: 1
+    parent: Community
+  - name: Adopters
+    pageRef: /community/adopters/
+    weight: 2
+    parent: Community
+  - name: Linkerd Ambassadors
+    pageRef: /community/ambassadors/
+    weight: 3
+    parent: Community
+  - name: Buoyant's Linkerd Forum
+    url: https://linkerd.buoyant.io
+    weight: 4
+    parent: Community
+  - name: Blog
+    pageRef: /blog/
+    weight: 3
+  - name: FAQ
+    pageRef: /faq/
+    weight: 4
+  - name: Enterprise
+    pageRef: /enterprise/
+    weight: 5
+
+docs:
+  - name: Linkerd edge
+    pageRef: /2-edge/
+    weight: 99
+  - name: Linkerd 2.16
+    pageRef: /2.16/
+    weight: 16
+  - name: Linkerd 2.15
+    pageRef: /2.15/
+    weight: 15
+  - name: Linkerd 2.14
+    pageRef: /2.14/
+    weight: 14
+  - name: Linkerd 2.13
+    pageRef: /2.13/
+    weight: 13
+  - name: Linkerd 2.12
+    pageRef: /2.12/
+    weight: 12
+  - name: Linkerd 2.11
+    pageRef: /2.11/
+    weight: 11
+  - name: Linkerd 2.10
+    pageRef: /2.10/
+    weight: 10
+
+other:
+  - name: What is a service mesh?
+    pageRef: /what-is-a-service-mesh/
+    weight: 1
+  - name: Frequently Asked Questions
+    pageRef: /faq/
+    weight: 2
+  - name: Releases and Versions
+    pageRef: /releases/
+    weight: 3
+  - name: Design Principles
+    pageRef: /design-principles/
+    weight: 4
+  - name: Going to Production
+    pageRef: /going-to-production/
+    weight: 5
+  - name: Service Mesh Glossary
+    pageRef: /service-mesh-glossary/
+    weight: 6
+
+community:
+  - name: GitHub
+    url: https://github.com/linkerd/linkerd2/
+    weight: 1
+    params:
+      image: logos/github.svg
+  - name: Slack
+    url: https://slack.linkerd.io/
+    weight: 2
+    params:
+      image: logos/slack.svg
+  - name: Linkerd Forum
+    url: https://linkerd.buoyant.io/
+    weight: 3
+    params:
+      image: logos/forum.png
+
+follow:
+
+  - name: Linkedin
+    url: https://www.linkedin.com/company/linkerd/
+    weight: 1
+  - name: YouTube
+    url: https://www.youtube.com/buoyantio/
+    weight: 2
+  - name: Twitter
+    url: https://twitter.com/linkerd/
+    weight: 3

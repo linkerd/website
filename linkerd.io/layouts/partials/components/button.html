@@ -1,0 +1,39 @@
+{{- /*
+@param {string} [text]
+@param {string} [href]
+@param {string} [variant] "primary", "secondary" or Default
+@param {string} [size] "xs", "sm", "md", or "lg"; Defaults to "md"
+@param {bool} [outline] Defaults to false
+@param {bool} [block] Defaults to false
+@param {bool} [disabled] Defaults to false
+
+@example {{ partial "components/button" (dict "href" "/about" "text" "Learn more") }}
+*/}}
+{{- $class := slice "button" }}
+{{/* Get variant */}}
+{{- if or (eq .variant "primary") (eq .variant "secondary") }}
+  {{- $class = $class | append (printf "button--%s" .variant) }}
+{{- end }}
+{{- /* Get size */}}
+{{- if or (eq .size "xs") (eq .size "sm") (eq .size "md") (eq .size "lg") }}
+  {{- $class = $class | append (printf "button--%s" .size) }}
+{{- end }}
+{{- /* Get outline */}}
+{{- if eq .outline true }}
+  {{- $class = $class | append "button--outline" }}
+{{- end }}
+{{- /* Get block */}}
+{{- if eq .block true }}
+  {{- $class = $class | append "button--block" }}
+{{- end }}
+{{- /* Get disabled */}}
+{{- if eq .disabled true }}
+  {{- $class = $class | append "button--disabled" }}
+{{- end }}
+{{- /* Build class names */}}
+{{- $class = delimit $class " " }}
+{{- /* Output */}}
+<a{{ with .href }} href="{{ . }}"{{ end }} class="{{ $class }}" {{ if hasPrefix .href "http" }} target="_blank" rel="noopener"{{ end }}>
+  {{ .text | safeHTML }}
+</a>
+{{- "" -}}

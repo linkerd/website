@@ -1,0 +1,71 @@
+/*
+@markup
+<div class="hero">
+  <div class="hero__container">
+    <div class="hero__body">
+      <div class="hero__header">
+        Title
+      </div>
+      <div class="hero__content">
+        Content
+      </div>
+      <div class="card__footer">
+        Button(s)
+      </div>
+    </div>
+  </div>
+</div>
+*/
+
+.hero {
+  background-color: $white;
+  
+  .hero__container {
+    padding-top: spacer(6);
+    padding-bottom: spacer(6);
+  }
+  .hero__body {
+    @include make-stack(4);
+  }
+  .hero__header {
+    h1 {
+      margin-bottom: 0;
+      background-image: -webkit-linear-gradient(0deg, $navy, $blue);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: $font-weight-heavy;
+      letter-spacing: -1.4px;
+    }
+  }
+  .hero__content {
+    @include make-stack(3);
+    max-width: 980px;
+  }
+  .hero__footer {
+    display: flex;
+    flex-direction: column;
+    gap: spacer(3);
+  }
+  @media (min-width: breakpoint-min-width("md")) {
+    .hero__container {
+      padding-top: spacer(7);
+      padding-bottom: spacer(7);
+    }
+    .hero__header {
+      h1 {
+        font-size: 48px;
+      }
+    }
+    .hero__footer {
+      flex-direction: row;
+    }
+  }
+  @media (min-width: breakpoint-min-width("lg")) {
+    .hero__header {
+      h1 {
+        font-size: 60px;
+      }
+    }
+  }
+}

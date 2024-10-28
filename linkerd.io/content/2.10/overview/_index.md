@@ -1,17 +1,7 @@
-+++
-title = "Overview"
-aliases = [
-  "/docs",
-  "/documentation",
-  "/2.10/",
-  "/2.10/docs/",
-  "/doc/network-performance/",
-  "/in-depth/network-performance/",
-  "/in-depth/debugging-guide/",
-  "/in-depth/concepts/"
-]
-weight = 1
-+++
+---
+title: Overview
+weight: 1
+---
 
 Linkerd is a _service mesh_ for Kubernetes. It makes running services easier
 and safer by giving you runtime debugging, observability, reliability, and
@@ -53,14 +43,6 @@ In order to be as small, lightweight, and safe as possible, Linkerd's proxies
 are written in [Rust](https://www.rust-lang.org/) and specialized for Linkerd.
 You can learn more about the proxies in the [Linkerd proxy
 repo](https://github.com/linkerd/linkerd2-proxy).
-
-## Versions and channels
-
-Linkerd is currently published in several tracks:
-
-* [Linkerd 2.x stable releases](/edge/)
-* [Linkerd 2.x edge releases.](/edge/)
-* [Linkerd 1.x.](/1/overview/)
 
 ## Next steps
 

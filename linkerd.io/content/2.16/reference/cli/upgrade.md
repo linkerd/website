@@ -1,9 +1,9 @@
-+++
-title = "upgrade"
-+++
+---
+title: upgrade
+---
 
-{{< cli/description "upgrade" >}}
+{{< docs/cli-description "upgrade" >}}
 
-{{< cli/examples "upgrade" >}}
+{{< docs/cli-examples "upgrade" >}}
 
-{{< cli/flags "upgrade" >}}
+{{< docs/cli-flags "upgrade" >}}

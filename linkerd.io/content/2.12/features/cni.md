@@ -1,7 +1,8 @@
-+++
-title = "CNI Plugin"
-description = "Linkerd can optionally use a CNI plugin instead of an init-container to avoid NET_ADMIN capabilities."
-+++
+---
+title: CNI Plugin
+description: Linkerd can optionally use a CNI plugin instead of an init-container
+  to avoid NET_ADMIN capabilities.
+---
 
 Linkerd's data plane works by transparently routing all TCP traffic to and from
 every meshed pod to its proxy. (See the

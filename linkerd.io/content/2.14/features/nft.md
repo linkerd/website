@@ -1,7 +1,8 @@
-+++
-title = "Iptables-nft Support"
-description = "Linkerd's init container can use iptables-nft on systems that require it."
-+++
+---
+title: Iptables-nft Support
+description: Linkerd's init container can use iptables-nft on systems that require
+  it.
+---
 
 To transparently route TCP traffic through the proxy, without any awareness
 from the application, Linkerd will configure a set of [firewall
