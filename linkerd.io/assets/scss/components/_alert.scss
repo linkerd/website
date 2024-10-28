@@ -27,6 +27,9 @@
       margin-bottom: 0;
     }
   }
+  .alert__content {
+    @include make-stack(3);
+  }
 
   // @options
 

@@ -43,7 +43,7 @@ proxies:
   authentication policies][auth-policy].
 
 {{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfile](../service-profiles/)s provide
+**Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,

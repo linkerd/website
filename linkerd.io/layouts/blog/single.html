@@ -11,7 +11,7 @@
         <div class="blog-post__cover">
           {{ if eq .Params.showCover true }}
             {{ with .Render "_cover-relref" }}
-              <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--fill img--cover img--rounded">
+              <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--max-fill img--cover img--center img--rounded">
             {{ end }}
           {{ end }}
         </div>

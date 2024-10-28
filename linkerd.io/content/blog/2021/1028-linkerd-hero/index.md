@@ -8,7 +8,6 @@ date: 2021-10-28T00:00:00Z
 keywords: [linkerd, community, hero]
 params:
   author: catherine
-  showCover: true
   thumbnailProcess: fit
 ---
 
