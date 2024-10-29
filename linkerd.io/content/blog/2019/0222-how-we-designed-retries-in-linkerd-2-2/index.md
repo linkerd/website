@@ -11,7 +11,7 @@ Retries are a fundamental mechanism for handling partial or transient failures i
 
 ## Marking a route as retryable
 
-In Linkerd 2.2 we introduced _retries_, or the ability for Linkerd to automatically retry failed requests. This gives Linkerd the ability to automatically handle partial or transient failures in a service, without the application having to be aware: if a request fails, Linkerd can just try it again! Combined with Linkerd's [request-level load balancing](https://linkerd.io/2/features/load-balancing/), this also allows Linkerd to handle failures of individual pods. In Linkerd, you specify retries as part of a [service profile](https://linkerd.io/2/features/service-profiles/) (introduced in a [previous blog post](https://blog.linkerd.io/2018/12/07/service-profiles-for-per-route-metrics/)). Marking a route as retryable is as simple as adding \`isRetryable: true\` to the corresponding service profile entry:
+In Linkerd 2.2 we introduced _retries_, or the ability for Linkerd to automatically retry failed requests. This gives Linkerd the ability to automatically handle partial or transient failures in a service, without the application having to be aware: if a request fails, Linkerd can just try it again! Combined with Linkerd's [request-level load balancing](https://linkerd.io/2/features/load-balancing/), this also allows Linkerd to handle failures of individual pods. In Linkerd, you specify retries as part of a [service profile](https://linkerd.io/2/features/service-profiles/) (introduced in a [previous blog post](/2018/12/08/service-profiles-for-per-route-metrics/)). Marking a route as retryable is as simple as adding \`isRetryable: true\` to the corresponding service profile entry:
 
 ```yaml
 - name: HEAD /authors/{id}.json
