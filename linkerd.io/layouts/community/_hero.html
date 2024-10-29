@@ -9,6 +9,13 @@
       <div class="hero__content">
         {{ default .Description .Params.hero.content | $.Page.RenderString (dict "display" "block") }}
       </div>
+      {{ with .Params.hero.buttons }}
+        <div class="hero__footer">
+          {{ range . }}
+            {{ partial "components/button" (dict "href" .href "text" .text "variant" .variant) }}
+          {{ end }}
+        </div>
+      {{ end }}
     </div>
   </div>
 </div>

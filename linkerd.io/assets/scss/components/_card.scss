@@ -107,6 +107,18 @@
     //  align-items: center;
     //}
   }
+
+  // Remove background color and shadow
+  &.card--clear {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  &.card--clear,
+  &.card--clear.card--inset-media {
+    // Keep side padding so the content aligns with all other cards
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 /*

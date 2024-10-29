@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <div class="ambassadors-apply">
+    {{ .Render "_hero" }}
+    <div class="page">
+      <div class="page__container container">
+        {{ range .Params.sections }}
+          
+          <div class="card card--md-horz card--md-reverse card--inset-media{{ if not (eq .useCard true) }} card--clear{{ end }}">
+            {{ with .card.image }}
+              <div class="card__media">
+                {{ with $.Resources.Get . }}
+                  <img src="{{ .RelPermalink }}" alt="{{ path.BaseName . | humanize }}" class="img img--w128 img--center">
+                {{ end }}
+              </div>
+            {{ end }}
+            <div class="card__body">
+              <div class="card__header">
+                <h2>
+                  {{ .title }}
+                </h2>
+              </div>
+              <div class="card__content">
+                {{ .content | $.Page.RenderString (dict "display" "block") }}
+              </div>
+              {{ with .card.buttons }}
+                <div class="card__footer">
+                  {{ range $k, $v := . }}
+                    {{ partial "components/button" (dict "href" .href "text" .text "variant" .variant) }}
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </div>
+
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

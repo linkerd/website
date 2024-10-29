@@ -1,17 +1,14 @@
 /*
-@markup See: layouts/enterprise/list.html
+@markup See: layouts/community/ambassadors-apply.html
 */
 
-.enterprise {
+.ambassadors-apply {
   // Override all h2s on the page
   h2 {
     font-size: $font-size-h1;
   }
   .page__container {
-    @include make-stack(6);
-  }
-  .enterprise__section {
-    @include make-stack(5);
+    @include make-stack(7);
   }
   @media (min-width: breakpoint-min-width("md")) {
     .card {
@@ -21,7 +18,7 @@
   }
   @media (min-width: breakpoint-min-width("lg")) {
     .hero__container {
-      background-image: url("/enterprise/images/bkgd.svg");
+      background-image: url("/community/ambassadors-apply/images/bkgd.svg");
       background-repeat: no-repeat;
       background-size: 500px auto;
       background-position: right;
