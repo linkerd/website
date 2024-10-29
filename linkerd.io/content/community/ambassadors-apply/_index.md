@@ -9,10 +9,10 @@ params:
     content: |-
       Are you passionate about keeping software simple? Do you reject the idea
       that Kubernetes must be complex? Are you willing to stand up and fight
-      against the status quo?
+      against the status quo? 
 
       Join the Linkerd Ambassador Program and help us deliver simplicity as a
-      core value for Kubernetes platforms everywhere.
+      core value for Kubernetes platforms everywhere. **Spots are limited!**
     buttons:
       - text: Apply now!
         href: #

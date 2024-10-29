@@ -20,8 +20,8 @@
     .hero__container {
       background-image: url("/community/ambassadors-apply/images/bkgd.svg");
       background-repeat: no-repeat;
-      background-size: 500px auto;
-      background-position: right;
+      background-size: auto 300px;
+      background-position: right center;
     }
     .hero__body {
       max-width: 700px;
@@ -29,7 +29,15 @@
   }
   @media (min-width: breakpoint-min-width("xl")) {
     .hero__container {
-      background-size: auto 100%;
+      background-size: auto 400px;
+    }
+  }
+  @media (min-width: breakpoint-min-width("xxl")) {
+    .hero__container {
+      background-size: auto 500px;
+    }
+    .hero__body {
+      max-width: 800px;
     }
   }
 }
