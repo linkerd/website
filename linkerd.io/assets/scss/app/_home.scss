@@ -9,8 +9,7 @@
   // Override all h2s on the home page
   h2 {
     margin-bottom: spacer(6);
-    font-size: 40px;
-    font-weight: $font-weight-normal;
+    font-size: $font-size-h1;
   }
   @media (min-width: breakpoint-min-width("md")) {
     h2 {
@@ -98,7 +97,7 @@
     text-align: center;
   }
   .home-stats__value {
-    font-size: 40px;
+    font-size: $font-size-h1;
     font-weight: $font-weight-heavy;
     text-align: center;
   }

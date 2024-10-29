@@ -5,12 +5,7 @@
 .enterprise {
   // Override all h2s on the enterprise page
   h2 {
-    font-size: 40px;
-    font-weight: $font-weight-normal;
-    
-    @media (min-width: breakpoint-min-width("md")) {
-      font-size: 48px;
-    }
+    font-size: $font-size-h1;
   }
   .page__container {
     @include make-stack(6);
