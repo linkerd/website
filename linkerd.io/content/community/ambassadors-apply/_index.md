@@ -6,6 +6,7 @@ description: |-
 layout: ambassadors-apply
 params:
   hero:
+    background: images/bkgd.svg
     content: |-
       Are you passionate about keeping software simple? Do you reject the idea
       that Kubernetes must be complex? Are you willing to stand up and fight

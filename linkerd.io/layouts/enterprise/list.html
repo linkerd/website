@@ -1,21 +1,6 @@
 {{ define "main" }}
   <div class="enterprise">
-    {{ with .Params.hero }}
-      <div class="hero">
-        <div class="hero__container container">
-          <div class="hero__body">
-            <div class="hero__header">
-              <h1>
-                {{ .title }}
-              </h1>
-            </div>
-            <div class="hero__content">
-              {{ .content | $.Page.RenderString (dict "display" "block") }}
-            </div>
-          </div>
-        </div>
-      </div>
-    {{ end }}
+    {{ partial "components/hero" . }}
     <div class="page">
       <div class="page__container container">
         {{ range .Params.sections }}

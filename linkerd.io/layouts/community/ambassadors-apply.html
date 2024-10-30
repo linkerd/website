@@ -1,10 +1,9 @@
 {{ define "main" }}
   <div class="ambassadors-apply">
-    {{ .Render "_hero" }}
+    {{ partial "components/hero" . }}
     <div class="page">
       <div class="page__container container">
         {{ range .Params.sections }}
-          
           <div class="card card--md-horz card--md-reverse card--inset-media{{ if not (eq .useCard true) }} card--clear{{ end }}">
             {{ with .card.image }}
               <div class="card__media">
@@ -31,7 +30,6 @@
               {{ end }}
             </div>
           </div>
-
         {{ end }}
       </div>
     </div>

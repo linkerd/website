@@ -5,6 +5,7 @@ description: |-
   for Linkerd.
 params:
   hero:
+    background: images/bkgd.svg
     title: Enterprise Support and Training
     content: |-
       Linkerd was created by Buoyant and contributed to the Cloud Native
