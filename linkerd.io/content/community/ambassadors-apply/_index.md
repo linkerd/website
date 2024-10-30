@@ -16,7 +16,7 @@ params:
       core value for Kubernetes platforms everywhere. **Spots are limited!**
     buttons:
       - text: Apply now!
-        href: #
+        href: https://docs.google.com/forms/d/e/1FAIpQLScBC-RWSPMbYFbuqPgmetKLyhjb1ih9TcDqI6szek8ElsYHPw/viewform?usp=sf_link
         variant: primary
   sections:
     - title: Who is this program for?
@@ -74,7 +74,7 @@ params:
       card:
         buttons:
           - text: Apply now
-            href: #
+            href: https://docs.google.com/forms/d/e/1FAIpQLScBC-RWSPMbYFbuqPgmetKLyhjb1ih9TcDqI6szek8ElsYHPw/viewform?usp=sf_link
             variant: primary
       content: |-
         1. **Meet the requirements:**  
@@ -100,7 +100,7 @@ params:
       card:
         buttons:
           - text: Apply now
-            href: #
+            href: https://docs.google.com/forms/d/e/1FAIpQLScBC-RWSPMbYFbuqPgmetKLyhjb1ih9TcDqI6szek8ElsYHPw/viewform?usp=sf_link
             variant: primary
       content: |-
         How Linkerd Ambassadors help educate the community will depend on their
