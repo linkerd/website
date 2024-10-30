@@ -2,7 +2,7 @@
 description: |-
   Linkerd is an ultralight service mesh for Kubernetes. It gives you
   observability, reliability, and security without requiring any code changes.
-images: [/logos/linkerd.png]
+#images: [/logos/linkerd.png]
 
 # Set the value of `twitter:site` in Twitter Card
 social:
