@@ -4,11 +4,9 @@
     <div class="page">
       <div class="page__container container">
         {{ range .Params.ambassadors }}
-          <div class="card card--horz card--center card--inset-media">
+          <div class="card card--horz card--center card--inset-media{{ with .emeritus }} ambassadors__emeritus{{ end }}">
             {{ with .emeritus }}
-              <div class="ambassadors__badge">
-                <span class="badge">Emeritus</span>
-              </div>
+              <span class="badge">Emeritus</span>
             {{ end }}
             <div class="card__media">
               {{ $alt := .name }}
