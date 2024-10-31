@@ -108,7 +108,8 @@ params:
           service mesh of choice.
         url: https://buoyant.io/case-studies/schenker/
   about:
-    title: Linkerd: The Lightest, Fastest, Most Secure Service Mesh on the Planet
+    title: |-
+      Linkerd: The Lightest, Fastest, Most Secure Service Mesh on the Planet
     youtubeId: OpZ5auLw5Xw
   features:
     items:
