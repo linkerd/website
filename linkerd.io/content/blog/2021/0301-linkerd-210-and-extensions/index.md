@@ -1,6 +1,6 @@
 ---
-title: Linkerd 2.10 and Extensions
 date: 2021-03-01T00:00:00Z
+title: Linkerd 2.10 and Extensions
 keywords: [linkerd]
 params:
   author: william

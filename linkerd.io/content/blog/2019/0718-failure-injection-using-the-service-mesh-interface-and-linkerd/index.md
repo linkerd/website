@@ -1,6 +1,6 @@
 ---
-title: Failure Injection using the Service Mesh Interface and Linkerd
 date: 2019-07-18T00:00:00Z
+title: Failure Injection using the Service Mesh Interface and Linkerd
 keywords: [linkerd]
 params:
   author: alex

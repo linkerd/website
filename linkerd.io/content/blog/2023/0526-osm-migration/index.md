@@ -1,6 +1,6 @@
 ---
-title: Migrating from OpenServiceMesh to Linkerd
 date: 2023-05-26T00:00:00Z
+title: Migrating from OpenServiceMesh to Linkerd
 keywords: [linkerd, OpenServiceMesh]
 params:
   author: flynn

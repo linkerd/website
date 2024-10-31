@@ -1,10 +1,10 @@
 ---
+date: 2022-09-23T00:00:00Z
 title: Announcing September's Linkerd Hero
 description: |-
   We are excited to announce this month's Linkerd Hero: Dan Williams. Congrats,
   Dan! Linkerd Heroes are community members who best represent the spirit of the
   Linkerd community.
-date: 2022-09-23T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine

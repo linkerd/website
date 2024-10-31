@@ -1,6 +1,6 @@
 ---
-title: October Linkerd Community Meeting
 date: 2020-11-01T00:00:00Z
+title: October Linkerd Community Meeting
 keywords: [meeting, meetup]
 params:
   author: thomas

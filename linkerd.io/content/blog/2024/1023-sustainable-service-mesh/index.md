@@ -1,7 +1,7 @@
 ---
-title: Towards a Sustainable Service Mesh
 date: 2024-10-23T00:00:00Z
 slug: making-linkerd-sustainable
+title: Towards a Sustainable Service Mesh
 keywords: [linkerd]
 params:
   author: william

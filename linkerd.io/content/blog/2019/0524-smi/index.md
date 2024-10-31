@@ -1,6 +1,6 @@
 ---
-title: Linkerd and SMI
 date: 2024-05-24T00:00:00Z
+title: Linkerd and SMI
 keywords: [community, linkerd]
 params:
   author: william

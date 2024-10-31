@@ -1,9 +1,9 @@
 ---
+date: 2021-12-09T00:00:00Z
 title: Announcing December's Linkerd Hero
 description: |-
   Aleksandr is Director of Engineering at ANNA Money and recently wrote three
   great Linkerd blog posts.
-date: 2021-12-09T00:00:00Z
 keywords: [hero, meetup, community]
 params:
   author: catherine

@@ -1,9 +1,9 @@
 ---
+date: 2021-06-24T00:00:00Z
 title: Multi-Cluster Kubernetes with Headless Services
 description: |-
   We'll discuss two Linkerd features eagerly awaited by the community: support
   for headless services and StatefulSets in multi-cluster environments.
-date: 2021-06-24T00:00:00Z
 keywords: [community, tutorials]
 params:
   author: matei

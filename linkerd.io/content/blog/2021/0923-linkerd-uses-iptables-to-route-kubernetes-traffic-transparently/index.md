@@ -1,10 +1,10 @@
 ---
+date: 2021-09-23T00:00:00Z
 title: How Linkerd uses iptables to transparently route Kubernetes traffic
 description: |-
   This blog post will look at how Linkerd uses iptables to intercept the TCP
   traffic to and from Kubernetes pods and route it through "sidecar" proxies
   without the application knowing.
-date: 2021-09-23T00:00:00Z
 keywords: [tutorials, iptables]
 params:
   author: matei

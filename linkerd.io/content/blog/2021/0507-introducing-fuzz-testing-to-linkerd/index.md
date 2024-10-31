@@ -1,7 +1,7 @@
 ---
-title: Introducing fuzz testing for Linkerd
 date: 2021-05-07T00:00:00Z
 slug: fuzz-testing-for-linkerd
+title: Introducing fuzz testing for Linkerd
 keywords: [linkerd]
 params:
   author: william

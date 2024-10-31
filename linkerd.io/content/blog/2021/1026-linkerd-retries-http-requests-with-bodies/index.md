@@ -1,10 +1,10 @@
 ---
+date: 2021-10-26T00:00:00Z
 title: How Linkerd retries HTTP requests with bodies
 description: |-
   Linkerd 2.11 is here and with it are some cool new updates.  One I am
   particularly excited about (full disclosure: I worked on it), is retries or
   HTTP requests with bodies.
-date: 2021-10-26T00:00:00Z
 keywords: [http, retries]
 params:
   author: eliza

@@ -1,9 +1,9 @@
 ---
+date: 2022-07-27T00:00:00Z
 title: Announcing July's Linkerd Hero
 description: |-
   We are excited to announce this month's Linkerd Hero: Dominik Táskai.
   Congrats, Dominik!
-date: 2022-07-27T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine

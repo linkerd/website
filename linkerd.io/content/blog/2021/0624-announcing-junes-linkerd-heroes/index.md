@@ -1,9 +1,9 @@
 ---
+date: 2021-06-24T00:00:00Z
 title: Announcing June's Linkerd Heroes!
 description: |-
   If you attended this month's Linkerd Community meeting, you've already heard
   the news: this month's Linkerd Heroes are Steve Gray and Steve Reardon.
-date: 2021-06-24T00:00:00Z
 keywords: [linkerd, community, heroes]
 params:
   author: jason

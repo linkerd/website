@@ -1,6 +1,6 @@
 ---
-title: December Linkerd community meeting recap
 date: 2021-12-22T00:00:00Z
+title: December Linkerd community meeting recap
 description: |-
   We hosted our very first hands-on workshop on mTLS with Matei David. It was
   such a success that we decided to do these regularly so we launched a Service

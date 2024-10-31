@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd 2.0
 date: 2018-09-18T00:00:00Z
 slug: announcing-linkerd-2-0
+title: Announcing Linkerd 2.0
 keywords: [cloud-native, community, kubernetes, linkerd, microservices, news]
 params:
   author: william

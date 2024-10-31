@@ -1,7 +1,7 @@
 ---
+date: 2019-08-28T00:00:00Z
 title: |-
   ICYMI 👉 August Linkerd Community Meetup
-date: 2019-08-28T00:00:00Z
 params:
   author: kiersten
 ---

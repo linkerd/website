@@ -1,6 +1,6 @@
 ---
-title: Announcing the Linkerd Steering Committee
 date: 2021-01-28T00:00:00Z
+title: Announcing the Linkerd Steering Committee
 keywords: [linkerd]
 params:
   author: william

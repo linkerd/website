@@ -1,6 +1,6 @@
 ---
-title: gRPC Load Balancing on Kubernetes without Tears
 date: 2018-11-14T00:00:00Z
+title: gRPC Load Balancing on Kubernetes without Tears
 keywords: [community, industry perspectives, linkerd, tutorials]
 params:
   author: william

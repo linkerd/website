@@ -1,8 +1,8 @@
 ---
-title: |-
-  Announcing Linkerd 2.5: Helm support and RBAC-aware tap
 date: 2019-08-20T00:00:00Z
 slug: announcing-linkerd-2.5
+title: |-
+  Announcing Linkerd 2.5: Helm support and RBAC-aware tap
 keywords: [linkerd]
 params:
   author: william

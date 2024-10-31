@@ -1,9 +1,9 @@
 ---
+date: 2023-08-23T00:00:00+00:00
+slug: announcing-linkerd-2.14
 title: |-
   Announcing Linkerd 2.14: Improved enterprise multi-cluster, Gateway API
   conformance, and more!
-date: 2023-08-23T00:00:00+00:00
-slug: announcing-linkerd-2.14
 keywords: [linkerd]
 params:
   author: william

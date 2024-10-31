@@ -1,7 +1,7 @@
 ---
+date: 2016-03-16T00:00:00Z
 title: |-
   Beyond Round Robin: Load Balancing for Latency
-date: 2016-03-16T00:00:00Z
 keywords: [article, buoyant, education, linkerd]
 params:
   author: steve

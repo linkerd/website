@@ -1,7 +1,7 @@
 ---
+date: 2019-03-29T00:00:00Z
 title: |-
   ICYMI: March 2019 San Francisco Linkerd Meetup
-date: 2019-03-29T00:00:00Z
 params:
   author: kiersten
 ---

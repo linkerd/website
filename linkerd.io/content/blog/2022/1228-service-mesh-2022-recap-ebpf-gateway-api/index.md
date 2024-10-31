@@ -1,9 +1,9 @@
 ---
+date: 2022-12-28T00:00:00+00:00
+slug: service-mesh-2022-recap-ebpf-gateway-api
 title: |-
   Service mesh 2022 recap: Linkerd adoption doubled, and what we learned about
   eBPF, the Gateway API, and more
-date: 2022-12-28T00:00:00+00:00
-slug: service-mesh-2022-recap-ebpf-gateway-api
 keywords: [Linkerd]
 params:
   author: william

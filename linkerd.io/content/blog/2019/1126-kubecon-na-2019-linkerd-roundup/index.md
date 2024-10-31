@@ -1,9 +1,9 @@
 ---
+date: 2019-11-26T00:00:00Z
+slug: linkerd-at-kubecon-na-2019-roundup
 title: |-
   Linkerd at Kubecon NA 2019 roundup: Nordstrom, Microsoft, OpenFaaS, PayBase,
   and lots of community!
-date: 2019-11-26T00:00:00Z
-slug: linkerd-at-kubecon-na-2019-roundup
 keywords: [community, linkerd, kubecon]
 params:
   author: william

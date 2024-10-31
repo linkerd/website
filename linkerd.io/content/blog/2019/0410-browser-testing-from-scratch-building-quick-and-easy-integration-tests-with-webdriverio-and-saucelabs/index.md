@@ -1,8 +1,8 @@
 ---
+date: 2019-04-10T00:00:00Z
 title: |-
   Browser Testing from Scratch: Building Quick and Easy Integration Tests with
   WebdriverIO and SauceLabs
-date: 2019-04-10T00:00:00Z
 keywords: [linkerd, news, tutorials]
 params:
   author: carol

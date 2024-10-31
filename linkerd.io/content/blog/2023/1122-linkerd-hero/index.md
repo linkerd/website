@@ -1,9 +1,9 @@
 ---
+date: 2023-11-22T00:00:00Z
 title: Announcing the November 2023 Linkerd Hero!
 description: |-
   We are excited to announce this month's Linkerd Hero: Takumi Sue, for
   contributing to Linkerd and making it better for the entire community!
-date: 2023-11-22T00:00:00Z
 keywords: [community, hero, contributor, code]
 params:
   author: flynn

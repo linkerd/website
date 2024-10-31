@@ -1,6 +1,6 @@
 ---
-title: Announcing automated multi-cluster failover for Kubernetes
 date: 2022-03-09T00:00:00+00:00
+title: Announcing automated multi-cluster failover for Kubernetes
 keywords: [linkerd]
 params:
   author: alejandro

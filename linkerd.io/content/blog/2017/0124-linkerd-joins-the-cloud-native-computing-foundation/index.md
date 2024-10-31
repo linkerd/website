@@ -1,6 +1,6 @@
 ---
-title: Linkerd Joins the Cloud Native Computing Foundation
 date: 2017-01-24T00:00:00Z
+title: Linkerd Joins the Cloud Native Computing Foundation
 aliases:
   - /2017/01/23/linkerd-joins-the-cloud-native-computing-foundation/
 tags: [buoyant, linkerd, news]

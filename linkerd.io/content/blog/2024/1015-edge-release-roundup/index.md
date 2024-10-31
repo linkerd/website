@@ -1,11 +1,11 @@
 ---
+date: 2024-10-15T00:00:00Z
+slug: linkerd-edge-release-roundup
 title: |-
   Linkerd Edge Release Roundup: October 2024
 description: |-
   What you need to know about the most recent Linkerd edge releases, October
   2024 edition!
-date: 2024-10-15T00:00:00Z
-slug: linkerd-edge-release-roundup
 keywords: [linkerd, edge, release, roundup]
 params:
   author: flynn

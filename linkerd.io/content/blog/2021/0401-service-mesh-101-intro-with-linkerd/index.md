@@ -1,7 +1,7 @@
 ---
-title: Introduction to the service mesh—the easy way
-slug: introduction-to-the-service-mesh
 date: 2021-04-01T00:00:00Z
+slug: introduction-to-the-service-mesh
+title: Introduction to the service mesh—the easy way
 keywords: [linkerd, community, hero]
 params:
   author: jason

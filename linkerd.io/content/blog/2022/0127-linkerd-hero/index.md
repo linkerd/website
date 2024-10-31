@@ -1,9 +1,9 @@
 ---
+date: 2022-01-27T00:00:00Z
 title: Announcing January's Linkerd Hero
 description: |-
   As a community member and Linkerd user, Krzysztof has continuously and
   enthusiastically helped fix issues and improve the Linkerd project.
-date: 2022-01-27T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine
