@@ -109,7 +109,7 @@ params:
         url: https://buoyant.io/case-studies/schenker/
   about:
     title: What is Linkerd?
-    youtubeId: up3fKwXdEgc
+    youtubeId: OpZ5auLw5Xw
   features:
     items:
       - title: Instant platform health metrics
