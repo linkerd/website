@@ -1,10 +1,10 @@
 ---
+date: 2022-11-22T00:00:00Z
 title: Announcing November's Linkerd Hero
 description: |-
   We are excited to announce this month's Linkerd Hero: Steve Reardon. Steve is
   a two-time winner, nominated this time for helping his peers on Slack time and
   again.
-date: 2022-11-22T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine

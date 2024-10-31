@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd 2.1
 date: 2018-12-06T00:00:00Z
 slug: announcing-linkerd-2-1
+title: Announcing Linkerd 2.1
 keywords: [news]
 params:
   author: william

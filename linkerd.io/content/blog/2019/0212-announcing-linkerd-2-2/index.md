@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd 2.2
 date: 2019-02-12T00:00:00Z
 slug: announcing-linkerd-2-2
+title: Announcing Linkerd 2.2
 keywords: [buoyant, linkerd, news]
 params:
   author: william

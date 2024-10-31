@@ -1,6 +1,6 @@
 ---
-title: Serverless Service Mesh with Knative and Linkerd
 date: 2020-03-23T00:00:00Z
+title: Serverless Service Mesh with Knative and Linkerd
 keywords: [linkerd, serverless, tutorials, knative]
 params:
   author: charles

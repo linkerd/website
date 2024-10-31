@@ -1,7 +1,7 @@
 ---
+date: 2016-12-10T00:00:00Z
 title: |-
   Slow Cooker: Load testing for tough software
-date: 2016-12-10T00:00:00Z
 tags: [buoyant, news, product, announcement]
 params:
   author: steve

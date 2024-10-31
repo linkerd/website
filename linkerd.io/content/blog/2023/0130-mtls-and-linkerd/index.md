@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop recap: A deep dive into Kubernetes mTLS with Linkerd
 date: 2023-01-30T00:00:00+00:00
 slug: mtls-and-linkerd
+title: |-
+  Workshop recap: A deep dive into Kubernetes mTLS with Linkerd
 params:
   author: flynn
   showCover: true

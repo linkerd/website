@@ -1,9 +1,9 @@
 ---
+date: 2024-08-13T00:00:00Z
+slug: announcing-linkerd-2.16
 title: |-
   Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC
   routes; IPv6 support; policy audit mode; and lots more
-date: 2024-08-13T00:00:00Z
-slug: announcing-linkerd-2.16
 keywords: [linkerd, "2.16", features]
 params:
   author: william

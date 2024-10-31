@@ -1,6 +1,6 @@
 ---
-title: Introducing Linkerd's RFC process
 date: 2020-04-08T00:00:00Z
+title: Introducing Linkerd's RFC process
 keywords: [linkerd]
 params:
   author: thomas

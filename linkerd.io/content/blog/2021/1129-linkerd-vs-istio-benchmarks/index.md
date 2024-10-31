@@ -1,8 +1,8 @@
 ---
-title: |-
-  Benchmarking Linkerd and Istio: 2021 Redux
 date: 2021-11-29T00:00:00
 slug: linkerd-vs-istio-benchmarks-2021
+title: |-
+  Benchmarking Linkerd and Istio: 2021 Redux
 keywords: [linkerd]
 params:
   author: william

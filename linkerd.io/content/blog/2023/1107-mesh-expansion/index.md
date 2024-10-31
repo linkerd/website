@@ -1,7 +1,7 @@
 ---
-title: Mesh expansion and SPIFFE support arriving in the upcoming Linkerd 2.15
 date: 2023-11-07T00:00:00+00:00
 slug: linkerd-mesh-expansion
+title: Mesh expansion and SPIFFE support arriving in the upcoming Linkerd 2.15
 keywords: [linkerd]
 params:
   author: william

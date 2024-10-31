@@ -1,7 +1,7 @@
 ---
+date: 2019-05-12T00:00:00Z
 title: |-
   ICYMI: May 2019 San Francisco Linkerd Meetup
-date: 2019-05-12T00:00:00Z
 keywords: [community, linkerd]
 params:
   author: kiersten

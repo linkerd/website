@@ -1,9 +1,9 @@
 ---
+date: 2021-04-05T00:00:00Z
 title: March Linkerd Community Meeting Recap
 description: |-
   In this month's community meeting, we discussed what's on the roadmap, what's
   new with Linkerd 2.10, and announced the Linkerd Hero of the month.
-date: 2021-04-05T00:00:00Z
 keywords: [linkerd]
 params:
   author: jason

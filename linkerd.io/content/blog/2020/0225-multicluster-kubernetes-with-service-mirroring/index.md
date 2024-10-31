@@ -1,6 +1,6 @@
 ---
-title: Multicluster Kubernetes with Service Mirroring
 date: 2020-02-25T00:00:00Z
+title: Multicluster Kubernetes with Service Mirroring
 keywords: [linkerd, multicluster]
 params:
   author: thomas

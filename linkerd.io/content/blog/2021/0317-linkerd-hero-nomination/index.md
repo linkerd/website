@@ -1,6 +1,6 @@
 ---
-title: Vote for your March Hero
 date: 2021-03-17T00:00:00Z
+title: Vote for your March Hero
 keywords: [linkerd, community, hero]
 params:
   author: charles

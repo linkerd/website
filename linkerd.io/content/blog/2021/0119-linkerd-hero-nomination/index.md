@@ -1,6 +1,6 @@
 ---
-title: January 2021 Linkerd Hero Nomination
 date: 2021-01-19T00:00:00Z
+title: January 2021 Linkerd Hero Nomination
 keywords: [linkerd, community, hero]
 params:
   author: charles

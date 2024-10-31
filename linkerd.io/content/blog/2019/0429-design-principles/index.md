@@ -1,7 +1,7 @@
 ---
-title: Linkerd's design principles
 date: 2019-04-29T00:00:00Z
 slug: linkerd-design-principles
+title: Linkerd's design principles
 keywords: [linkerd]
 params:
   author: william

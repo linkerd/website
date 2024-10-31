@@ -1,10 +1,10 @@
 ---
+date: 2021-10-28T00:00:00Z
 title: Announcing October's Linkerd hero
 description: |-
   As a new member of the Linkerd community, Alberto jumped right into the spirit
   of the community and helped someone out on Slack when they posted a question
   in the linkerd2 channel.
-date: 2021-10-28T00:00:00Z
 keywords: [linkerd, community, hero]
 params:
   author: catherine

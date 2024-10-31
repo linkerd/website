@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop recap: Real-World GitOps with Flux, Flagger, and Linkerd
 date: 2023-05-15T00:00:00Z
 slug: real-world-gitops
+title: |-
+  Workshop recap: Real-World GitOps with Flux, Flagger, and Linkerd
 keywords: [linkerd, gitops, flux, flagger]
 params:
   author: flynn

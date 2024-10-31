@@ -1,6 +1,6 @@
 ---
-title: Architecting for Multicluster Kubernetes
 date: 2020-02-17T00:00:00Z
+title: Architecting for Multicluster Kubernetes
 keywords: [linkerd, multicluster]
 params:
   author: thomas

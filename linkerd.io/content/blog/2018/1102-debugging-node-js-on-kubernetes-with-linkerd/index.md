@@ -1,7 +1,7 @@
 ---
-title: Debugging Node.js on Kubernetes with Linkerd
 date: 2018-11-02T00:00:00Z
 slug: debugging-node-js-on-kubernetes-with-linkerd
+title: Debugging Node.js on Kubernetes with Linkerd
 keyword: [community, events, linkerd, news]
 params:
   author: kiersten

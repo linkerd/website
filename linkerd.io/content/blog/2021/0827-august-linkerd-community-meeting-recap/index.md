@@ -1,10 +1,10 @@
 ---
+date: 2021-08-27T00:00:00Z
 title: August Linkerd Community Meeting Recap
 description: |-
   We are pushing towards the 2.11 release and our next edge release is the first
   with policy support! We recently updated our ingress documentation which will
   hopefully result in an easier getting-started process.
-date: 2021-08-27T00:00:00Z
 keywords: [linkerd, community]
 params:
   author: kevinl

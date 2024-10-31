@@ -1,6 +1,6 @@
 ---
-title: Why Linkerd doesn't use Envoy
 date: 2020-12-03T00:00:00Z
+title: Why Linkerd doesn't use Envoy
 keywords: [linkerd]
 params:
   author: william

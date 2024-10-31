@@ -1,6 +1,6 @@
 ---
-title: Service Profiles for Per-Route Metrics
 date: 2018-12-08T00:00:00Z
+title: Service Profiles for Per-Route Metrics
 aliases:
   - /2018/12/07/service-profiles-for-per-route-metrics/
 keywords: [community, integrations, linkerd, news, "release notes", tutorials]

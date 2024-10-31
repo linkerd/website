@@ -1,9 +1,9 @@
 ---
+date: 2021-08-16T00:00:00Z
 title: July Linkerd Community Meeting Recap
 description: |-
   The big news this month is Linkerd's CNCF graduation! As you can imagine, the
   entire Linkerd team is very excited and we hope you are too.
-date: 2021-08-16T00:00:00Z
 keywords: [community]
 params:
   author: matei

@@ -1,6 +1,6 @@
 ---
-title: Vote For Your December Linkerd Hero!
 date: 2020-12-02T00:00:00Z
+title: Vote For Your December Linkerd Hero!
 keywords: [heroes]
 params:
   author: charles

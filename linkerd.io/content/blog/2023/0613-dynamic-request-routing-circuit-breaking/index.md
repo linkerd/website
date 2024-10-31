@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop recap: Dynamic Request Routing and Circuit Breaking
 date: 2023-06-13T00:00:00Z
 slug: dynamic-request-routing-circuit-breaking
+title: |-
+  Workshop recap: Dynamic Request Routing and Circuit Breaking
 keywords: [linkerd, gitops, flux, flagger]
 params:
   author: flynn

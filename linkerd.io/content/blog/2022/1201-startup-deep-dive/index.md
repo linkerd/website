@@ -1,8 +1,8 @@
 ---
-title: |-
-  What really happens at startup: Linkerd, init containers, the CNI, and more
 date: 2022-12-01T00:00:00Z
 slug: what-really-happens-at-startup-a-deep-dive-into-linkerd-init-containers-cni-plugins-and-more
+title: |-
+  What really happens at startup: Linkerd, init containers, the CNI, and more
 keywords: [linkerd, init, cni, startup, tutorials]
 params:
   author: flynn

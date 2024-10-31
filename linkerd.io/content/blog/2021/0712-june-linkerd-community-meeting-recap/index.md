@@ -1,9 +1,9 @@
 ---
+date: 2021-07-12T00:00:00Z
 title: June Linkerd Community Meeting Recap
 description: |-
   Missed the June Linkerd Community Meeting? Here's our recap and the full
   recording.
-date: 2021-07-12T00:00:00Z
 keywords: [community]
 params:
   author: charles

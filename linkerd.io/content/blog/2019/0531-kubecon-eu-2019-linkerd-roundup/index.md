@@ -1,7 +1,7 @@
 ---
+date: 2019-05-31T00:00:00Z
 title: |-
   Linkerd at KubeCon EU 2019: Benchmarks, SMI, VSCode, and more
-date: 2019-05-31T00:00:00Z
 keywords: [community, linkerd, kubecon]
 params:
   author: william

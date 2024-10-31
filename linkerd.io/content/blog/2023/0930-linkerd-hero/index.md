@@ -1,9 +1,9 @@
 ---
+date: 2023-09-30T00:00:00Z
 title: Announcing the September 2023 Linkerd Hero!
 description: |-
   We are excited to announce this month's Linkerd Hero: Cameron Boulton, for
   investigating and debugging issues within Linkerd!
-date: 2023-09-30T00:00:00Z
 keywords: [hero, community, debugging, contributor, code]
 params:
   author: flynn

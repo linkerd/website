@@ -1,8 +1,8 @@
 ---
-title: |-
-  The service mesh in 2022: What's next for Linkerd?
 date: 2021-12-29T00:00:00+00:00
 slug: the-service-mesh-in-2022
+title: |-
+  The service mesh in 2022: What's next for Linkerd?
 keywords: [lLinkerd]
 params:
   author: william

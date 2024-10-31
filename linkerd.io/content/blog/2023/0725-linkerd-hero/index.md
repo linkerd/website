@@ -1,10 +1,10 @@
 ---
+date: 2023-07-25T00:00:00Z
 title: Announcing the July 2023 Linkerd Hero!
 description: |-
   The votes are in! This month's Linkerd Hero is Mikael Fridh for fixing an
   incompatibility between Linkerd's CNI plugin and newer versions of EKS's
   VPC CNI plugin.
-date: 2023-07-25T00:00:00Z
 keywords: [hero, community, contributor, code]
 params:
   author: catherine
