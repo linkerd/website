@@ -1,7 +1,7 @@
 ---
-title: Benchmarking Linkerd and Istio
 date: 2021-05-27T00:00:00
 slug: linkerd-vs-istio-benchmarks
+title: Benchmarking Linkerd and Istio
 thumbnail: latency-2000rps.png
 keywords: [linkerd]
 params:

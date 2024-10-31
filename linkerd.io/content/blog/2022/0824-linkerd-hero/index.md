@@ -1,9 +1,9 @@
 ---
+date: 2022-08-24T00:00:00Z
 title: Announcing August's Linkerd Hero
 description: |-
   We are excited to announce this month's Linkerd Hero: Dani Baeyens.
   Congrats, Dani!
-date: 2022-08-24T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine

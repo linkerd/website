@@ -1,9 +1,9 @@
 ---
+date: 2023-12-22T00:00:00Z
 title: Announcing the December 2023 Linkerd Hero!
 description: |-
   We are excited to announce this month's Linkerd Hero: TJ Miller, for
   contributing to Linkerd and making it better for the entire community!
-date: 2023-12-22T00:00:00Z
 keywords: [community, hero, contributor, code]
 params:
   author: flynn

@@ -1,8 +1,8 @@
 ---
-title: |-
-  Announcing Linkerd 2.4: Traffic Splitting and SMI
 date: 2019-07-11T00:00:00Z
 slug: announcing-linkerd-2.4
+title: |-
+  Announcing Linkerd 2.4: Traffic Splitting and SMI
 keywords: [linkerd]
 params:
   author: william

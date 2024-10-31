@@ -1,9 +1,9 @@
 ---
+date: 2021-08-26T00:00:00Z
 title: Announcing August's Linkerd Hero
 description: |-
   If you attended this month's Linkerd Community meeting, you've already heard
   the news: this month's Linkerd Hero is Dom DePasquale Congrats, Dom!
-date: 2021-08-26T00:00:00Z
 keywords: [linkerd, community, hero]
 params:
   author: catherine

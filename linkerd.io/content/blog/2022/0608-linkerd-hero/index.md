@@ -1,9 +1,9 @@
 ---
+date: 2022-06-08T00:00:00Z
 title: Announcing June's Linkerd Hero
 description: |-
   We are excited to announce this month's Linkerd Hero: Chris Voss.
   Congrats, Chris!
-date: 2022-06-08T00:00:00Z
 keywords: [community, hero]
 params:
   author: catherine

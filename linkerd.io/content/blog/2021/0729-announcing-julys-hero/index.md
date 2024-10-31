@@ -1,9 +1,9 @@
 ---
+date: 2021-07-29T00:00:00Z
 title: Announcing July's Linkerd Hero
 description: |-
   This month's hero is Sanskar Jaiswal. In a short amount of time, Sanskar has
   made his presence felt through his thoughtful code contributions
-date: 2021-07-29T00:00:00Z
 keywords: [linkerd, community, hero]
 params:
   author: charles

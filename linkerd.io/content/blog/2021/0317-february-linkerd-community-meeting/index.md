@@ -1,10 +1,10 @@
 ---
+date: 2021-03-17T00:00:00.000Z
 title: February Linkerd Community Meeting Recap
 description: |-
   From the 2.9.3 edge release to Linkerd-await (a wrapper for your apps and
   jobs) to protocol detection, we covered a lot of ground in the February
   meeting.
-date: 2021-03-17T00:00:00.000Z
 keywords: [linkerd]
 params:
   author: charles

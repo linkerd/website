@@ -1,8 +1,8 @@
 ---
-title: |-
-  Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
 date: 2020-06-09T00:00:00Z
 slug: announcing-linkerd-2.8
+title: |-
+  Announcing Linkerd 2.8: simple, secure multi-cluster Kubernetes
 keywords: [linkerd]
 params:
   author: william

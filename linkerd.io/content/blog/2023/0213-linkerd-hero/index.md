@@ -1,9 +1,9 @@
 ---
+date: 2023-02-10T00:00:00Z
 title: Announcing the February 2023 Linkerd Hero!
 description: |-
   We are excited to announce this month's Linkerd Hero: Yu Cao, for
   contributing to Linkerd and making it better for the entire community!
-date: 2023-02-10T00:00:00Z
 keywords: [hero, community, contributor, code]
 params:
   author: flynn

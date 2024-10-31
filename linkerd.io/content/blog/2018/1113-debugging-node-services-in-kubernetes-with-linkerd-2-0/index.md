@@ -1,7 +1,7 @@
 ---
-title: Debugging Node Services in Kubernetes With Linkerd 2.0
 date: 2018-11-13T00:00:00Z
 slug: debugging-node-services-in-kubernetes-with-linkerd-2-0
+title: Debugging Node Services in Kubernetes With Linkerd 2.0
 keywords: [community, linkerd, tutorials]
 params:
   author: thomas

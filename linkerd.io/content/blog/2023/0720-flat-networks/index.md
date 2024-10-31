@@ -1,7 +1,7 @@
 ---
+date: 2023-07-20T00:00:00Z
 title: |-
   Enterprise multi-cluster at scale: supporting flat networks in Linkerd
-date: 2023-07-20T00:00:00Z
 keywords: [linkerd]
 params:
   author: william

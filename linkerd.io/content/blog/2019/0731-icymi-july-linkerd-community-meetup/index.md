@@ -1,11 +1,11 @@
 ---
+date: 2019-07-31T00:00:00Z
 title: |-
   ICYMI 👉 July Linkerd Community Meetup
 description: |-
   In this month's community meeting, Oliver, Thomas, and special guests Stefan
   Prodan, creator of the project, and Carol Scott, Linkerd maintainer
   extraordinaire, discussed ...
-date: 2019-07-31T00:00:00Z
 keywords: [linkerd, community, meetup]
 params:
   author: kiersten

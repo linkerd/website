@@ -1,6 +1,6 @@
 ---
-title: Protocol Detection and Opaque Ports in Linkerd
 date: 2021-02-23T00:00:00Z
+title: Protocol Detection and Opaque Ports in Linkerd
 keywords: [linkerd, proxy, "Protocol Detection"]
 params:
   author: charles

@@ -1,6 +1,6 @@
 ---
-title: Welcome Hema Lee as our newest maintainer!
 date: 2020-03-19T00:00:00Z
+title: Welcome Hema Lee as our newest maintainer!
 keywords: [linkerd]
 params:
   author: thomas

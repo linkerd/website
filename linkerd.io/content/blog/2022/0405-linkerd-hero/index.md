@@ -1,9 +1,9 @@
 ---
+date: 2022-04-05T00:00:00Z
 title: Announcing March's Linkerd Hero
 description: |-
   We are excited to announce that this month's Linkerd Hero is Naveen Nalam.
   Congrats, Naveen!
-date: 2022-04-05T00:00:00Z
 keywords: [hero, community]
 params:
   author: catherine

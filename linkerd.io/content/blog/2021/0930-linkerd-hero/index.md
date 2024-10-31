@@ -1,10 +1,10 @@
 ---
+date: 2021-09-30T00:00:00Z
 title: |-
   Announcing September's Linkerd Hero
 description: |-
   An enthusiastic Linkerd contributor, Ujjwal raised issues and contributed code
   to the website repository and Linkerd's multicluster capabilities.
-date: 2021-09-30T00:00:00Z
 keywords: [linkerd, community, hero]
 params:
   author: catherine

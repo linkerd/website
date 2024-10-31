@@ -1,6 +1,6 @@
 ---
-title: December Linkerd Community Meeting
 date: 2020-12-15T00:00:00Z
+title: December Linkerd Community Meeting
 keywords: [meetup]
 params:
   author: charles

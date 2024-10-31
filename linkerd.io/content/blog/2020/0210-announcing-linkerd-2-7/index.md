@@ -1,9 +1,9 @@
 ---
+date: 2020-02-10T00:00:00Z
+slug: announcing-linkerd-2.7
 title: |-
   Announcing Linkerd 2.7: External PKI support, better gitops workflows,
   streamlined cert rotation, and more
-date: 2020-02-10T00:00:00Z
-slug: announcing-linkerd-2.7
 keywords: [linkerd]
 params:
   author: william

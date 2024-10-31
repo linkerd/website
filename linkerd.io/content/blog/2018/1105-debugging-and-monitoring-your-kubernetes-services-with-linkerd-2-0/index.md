@@ -1,7 +1,7 @@
 ---
-title: Debugging and Monitoring your Kubernetes Services with Linkerd 2.0
 date: 2018-11-05T00:00:00Z
 slug: debugging-and-monitoring-your-kubernetes-services-with-linkerd-2-0
+title: Debugging and Monitoring your Kubernetes Services with Linkerd 2.0
 keywords: [community, events, linkerd, tutorials, webinars]
 params:
   author: kiersten

@@ -1,10 +1,10 @@
 ---
+date: 2021-11-10T00:00:00Z
 title: October Linkerd community meeting recap
 description: |-
   The world's first hybrid KubeCon turned out great for Linkerd.Fascinating
   talks, a big announcement around Linkerd 2.11, and, best of all, we got to see
   real people again.
-date: 2021-11-10T00:00:00Z
 keywords: [community, meeting, meetup]
 params:
   author: tarun

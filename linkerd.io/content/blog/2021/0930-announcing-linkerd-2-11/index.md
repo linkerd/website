@@ -1,9 +1,9 @@
 ---
+date: 2021-09-30T00:00:00Z
+slug: announcing-linkerd-2.11
 title: |-
   Announcing Linkerd 2.11: Policy, gRPC retries, performance improvements, and
   more!
-date: 2021-09-30T00:00:00Z
-slug: announcing-linkerd-2.11
 keywords: [linkerd]
 params:
   author: william

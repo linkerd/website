@@ -1,6 +1,6 @@
 ---
-title: Announcing the completion of Linkerd's 2022 Security Audit
 date: 2022-06-27T00:00:00+00:00
+title: Announcing the completion of Linkerd's 2022 Security Audit
 keywords: [linkerd]
 params:
   author: william

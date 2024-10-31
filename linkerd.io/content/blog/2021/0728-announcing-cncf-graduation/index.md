@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd's Graduation
 date: 2021-07-28T00:00:00Z
 slug: announcing-cncf-graduation
+title: Announcing Linkerd's Graduation
 keywords: [linkerd]
 params:
   author: william

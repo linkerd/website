@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop recap: Linkerd and Ingress Controllers: Bringing the Outside World In
 date: 2023-02-21T00:00:00Z
 slug: linkerd-and-ingress
+title: |-
+  Workshop recap: Linkerd and Ingress Controllers: Bringing the Outside World In
 keywords: [linkerd, mtls, tls, ingress, emissary, nginx, envoy gateway]
 params:
   author: flynn

@@ -1,8 +1,8 @@
 ---
-title: |-
-  Announcing Linkerd 2.9: mTLS for all, ARM support, and more!
 date: 2020-11-09T00:00:00Z
 slug: announcing-linkerd-2.9
+title: |-
+  Announcing Linkerd 2.9: mTLS for all, ARM support, and more!
 keywords: [linkerd]
 params:
   author: william

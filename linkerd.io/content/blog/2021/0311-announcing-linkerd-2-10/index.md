@@ -1,9 +1,9 @@
 ---
+date: 2021-03-11T00:00:00Z
+slug: announcing-linkerd-2.10
 title: |-
   Announcing Linkerd 2.10: Extensions, Opaque Ports, Multi-cluster TCP, and
   more!
-date: 2021-03-11T00:00:00Z
-slug: announcing-linkerd-2.10
 keywords: [linkerd]
 params:
   author: william
