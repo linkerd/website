@@ -43,7 +43,11 @@
             <div class="accordion">
               {{ range .content }}
                 <details>
-                  <summary>{{ .title }}</summary>
+                  <summary>
+                    <h4>
+                      {{ .title }}
+                    </h4>
+                  </summary>
                   {{ .content | $.Page.RenderString (dict "display" "block") }}
                 </details>
               {{ end }}
