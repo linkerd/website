@@ -8,7 +8,7 @@
     font-size: $font-size-h1;
   }
   .page__container {
-    @include make-stack(6);
+    @include make-stack(7);
   }
   .enterprise__section {
     @include make-stack(5);

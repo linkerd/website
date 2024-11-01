@@ -11,8 +11,11 @@
     @include make-stack(7);
   }
   @media (min-width: breakpoint-min-width("md")) {
+    section {
+      padding-left: spacer(6);
+      padding-right: spacer(6);
+    }
     .card {
-      gap: spacer(6);
       padding: spacer(6);
     }
   }

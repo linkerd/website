@@ -2,10 +2,20 @@
   <div class="ambassadors-apply">
     {{ partial "components/hero" . }}
     <div class="page">
-      <div class="page__container container">
+      <div class="page__container container-xl">
+        {{/* Sections */}}
         {{ range .Params.sections }}
-          <div class="card card--md-horz card--md-reverse card--inset-media{{ if not (eq .useCard true) }} card--clear{{ end }}">
-            {{ with .card.image }}
+          <section>
+            <h2>
+              {{ .title }}
+            </h2>
+            {{ .content | $.Page.RenderString (dict "display" "block") }}
+          </section>
+        {{ end }}
+        {{/* Perks */}}
+        {{ with .Params.perks }}
+          <div class="card card--md-horz card--md-reverse card--inset-media">
+            {{ with .image }}
               <div class="card__media">
                 {{ with $.Resources.Get . }}
                   <img src="{{ .RelPermalink }}" alt="{{ path.BaseName . | humanize }}" class="img img--w128 img--center">
@@ -21,15 +31,24 @@
               <div class="card__content">
                 {{ .content | $.Page.RenderString (dict "display" "block") }}
               </div>
-              {{ with .card.buttons }}
-                <div class="card__footer">
-                  {{ range $k, $v := . }}
-                    {{ partial "components/button" (dict "href" .href "text" .text "variant" .variant) }}
-                  {{ end }}
-                </div>
-              {{ end }}
             </div>
           </div>
+        {{ end }}
+        {{/* FAQs */}}
+        {{ with .Params.faqs }}
+          <section>
+            <h2>
+              {{ .title }}
+            </h2>
+            <div class="accordion">
+              {{ range .content }}
+                <details>
+                  <summary>{{ .title }}</summary>
+                  {{ .content | $.Page.RenderString (dict "display" "block") }}
+                </details>
+              {{ end }}
+            </div>
+          </section>
         {{ end }}
       </div>
     </div>
