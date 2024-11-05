@@ -14,7 +14,7 @@
         {{ end }}
         {{/* Perks */}}
         {{ with .Params.perks }}
-          <div class="card card--md-horz card--md-reverse card--inset-media">
+          <div class="card card--inset-media">
             {{ with .image }}
               <div class="card__media">
                 {{ with $.Resources.Get . }}
