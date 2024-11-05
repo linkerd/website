@@ -11,7 +11,7 @@
     gap: spacer(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: breakpoint-min-width("lg")) {
       grid-template-columns: repeat(2, 1fr);
     }
   }

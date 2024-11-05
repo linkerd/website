@@ -13,13 +13,13 @@
   .enterprise__section {
     @include make-stack(5);
   }
-  @media (min-width: breakpoint-min-width("md")) {
+  @media (min-width: breakpoint-min-width("lg")) {
     .card {
+      @include make-card--horz;
+      @include make-card--reverse;
       gap: spacer(6);
       padding: spacer(6);
     }
-  }
-  @media (min-width: breakpoint-min-width("lg")) {
     .hero__container {
       background-image: url("/enterprise/images/bkgd.svg");
       background-repeat: no-repeat;
