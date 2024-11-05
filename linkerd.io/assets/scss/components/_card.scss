@@ -18,122 +18,36 @@
 </div>
 */
 
-// Mix-ins
-
-@mixin make-card-horz {
-  flex-direction: row;
-}
-@mixin make-card-reverse {
-  .card__body {
-    order: 1;
-  }
-  .card__media {
-    order: 2;
-  }
-}
-
-// Classes
-
 .card {
-  display: flex;
-  flex-direction: column;
-  padding: spacer(2);
-  background-color: $white;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-
-  .card__body {
-    display: flex;
-    flex-direction: column;
-    gap: spacer(4);
-    flex-grow: 1;
-    padding: spacer(3);
-  }
-  .card__header {
-    @include make-stack(1);
-  }
-  .card__content {
-    @include make-stack(3);
-    flex-grow: 1;
-  }
-  .card__footer {
-    display: flex;
-    flex-direction: row;
-    gap: spacer(3);
-  }
+  @include make-card;
 
   // @options
 
-  // Add padding around media to align with content
   &.card--inset-media {
-    gap: spacer(4);
-    padding: spacer(4);
-
-    .card__body {
-      padding: 0;
-    }
+    @include make-card--inset-media;
   }
-
-  // Keep media to the right of the content
   &.card--horz {
-    @include make-card-horz;
+    @include make-card--horz;
   }
-  @each $k, $v in $breakpoint-min-widths {
-    &.card--#{$k}-horz {
-      @media (min-width: breakpoint-min-width($k)) {
-        @include make-card-horz;
-      }
-    }
-  }
-
-  // Move media after the content
   &.card--reverse {
-    @include make-card-reverse;
+    @include make-card--reverse;
   }
-  @each $k, $v in $breakpoint-min-widths {
-    &.card--#{$k}-reverse {
-      @media (min-width: breakpoint-min-width($k)) {
-        @include make-card-reverse;
-      }
-    }
-  }
-
-  // Center the media and body
   &.card--center {
-    align-items: center;
-
-    // TODO: center align body when not in horizontal layout
-    //.card__body {
-    //  align-items: center;
-    //}
+    @include make-card--center;
   }
 }
 
 /*
-Make the whole card clickable.
 [!IMPORTANT] If using a card-link, the card **must not** have anchor links in the content.
 
 @markup
-<div class="card-link">
+<a class="card-link">
   <div class="card">
     ...
   </div>
-</div>
+</a>
 */
 
 .card-link {
-  display: block;
-  transition: all 0.3s ease-out;
-  color: $navy;
-
-  .card {
-    height: 100%;
-  }
-  &:hover {
-    transform: scale(1.05);
-
-    .card {
-      background-image: linear-gradient(160deg, tint-color($light-blue, 50%), $white);
-    }
-  }
+  @include make-card-link;
 }

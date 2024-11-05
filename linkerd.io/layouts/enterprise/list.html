@@ -24,7 +24,7 @@
               {{ .title }}
             </h2>
             {{ range .items }}
-              <div class="card card--md-horz card--md-reverse card--inset-media">
+              <div class="card card--inset-media">
                 <div class="card__media">
                   {{ $alt := .title }}
                   {{ with $.Resources.Get .image }}
