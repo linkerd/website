@@ -1,7 +1,7 @@
 ---
-title: How we designed retries in Linkerd 2.2
 date: 2019-02-22T00:00:00Z
 slug: how-we-designed-retries-in-linkerd-2-2
+title: How we designed retries in Linkerd 2.2
 keywords: [news]
 params:
   author: alex

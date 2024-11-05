@@ -1,9 +1,9 @@
 ---
+date: 2022-02-16T00:00:00+00:00
+slug: linkerd-istio-adoption
 title: |-
   Linkerd surpasses Istio adoption in Europe and North America with 118% growth
   in 2021
-date: 2022-02-16T00:00:00+00:00
-slug: linkerd-istio-adoption
 keywords: [linkerd]
 params:
   author: william

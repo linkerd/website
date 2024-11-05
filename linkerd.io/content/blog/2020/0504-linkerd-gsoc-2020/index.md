@@ -1,6 +1,6 @@
 ---
-title: Linkerd GSoC 2020
 date: 2020-05-04T00:00:00Z
+title: Linkerd GSoC 2020
 keywords: [linkerd, gsoc]
 params:
   author: ivan

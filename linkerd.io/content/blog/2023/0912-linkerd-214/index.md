@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop Recap: A closer look at flat-network multicluster and HTTPRoute timeouts with Linkerd 2.14
 date: 2023-09-12T00:00:00Z
 slug: linkerd-214
+title: |-
+  Workshop Recap: A closer look at flat-network multicluster and HTTPRoute timeouts with Linkerd 2.14
 keywords: [linkerd, "2.14", features]
 params:
   author: flynn

@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop Recap: Linkerd Certificate Management with Vault
 date: 2024-02-06T00:00:00Z
 slug: linkerd-certificates-with-vault
+title: |-
+  Workshop Recap: Linkerd Certificate Management with Vault
 keywords: [linkerd, "2.14", features, vault]
 params:
   author: flynn

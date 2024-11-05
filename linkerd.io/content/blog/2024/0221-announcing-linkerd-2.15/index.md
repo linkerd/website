@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd 2.15 with mesh expansion, native sidecars, and SPIFFE
 date: 2024-02-21T00:00:00Z
 slug: announcing-linkerd-2.15
+title: Announcing Linkerd 2.15 with mesh expansion, native sidecars, and SPIFFE
 keywords: [linkerd, "2.15", features, vault]
 params:
   author: william

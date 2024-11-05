@@ -1,6 +1,6 @@
 ---
-title: A guide to distributed tracing with Linkerd
 date: 2019-10-07T00:00:00Z
+title: A guide to distributed tracing with Linkerd
 keywords: [linkerd]
 params:
   author: alex

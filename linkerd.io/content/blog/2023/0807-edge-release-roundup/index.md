@@ -1,8 +1,8 @@
 ---
-title: |-
-  Linkerd Edge Release Roundup: August 2023
 date: 2023-08-07T00:00:00Z
 slug: linkerd-edge-release-roundup
+title: |-
+  Linkerd Edge Release Roundup: August 2023
 keywords: [linkerd, edge, release, roundup]
 params:
   author: alejandro

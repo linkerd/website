@@ -1,6 +1,6 @@
 ---
-title: January Linkerd Community Meeting Recap
 date: 2021-02-04T00:00:00Z
+title: January Linkerd Community Meeting Recap
 keywords: [linkerd]
 params:
   author: charles

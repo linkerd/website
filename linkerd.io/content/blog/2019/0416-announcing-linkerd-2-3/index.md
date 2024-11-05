@@ -1,9 +1,9 @@
 ---
+date: 2019-04-16T00:00:00Z
+slug: announcing-linkerd-2.3
 title: |-
   Announcing Linkerd 2.3: Towards Zero-Touch Zero-Trust Networking for
   Kubernetes
-date: 2019-04-16T00:00:00Z
-slug: announcing-linkerd-2.3
 keywords: [linkerd]
 params:
   author: william

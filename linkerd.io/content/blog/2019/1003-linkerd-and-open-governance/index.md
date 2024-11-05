@@ -1,6 +1,6 @@
 ---
-title: Linkerd's Commitment to Open Governance
 date: 2019-10-03T00:00:00Z
+title: Linkerd's Commitment to Open Governance
 keywords: [linkerd]
 params:
   author: william

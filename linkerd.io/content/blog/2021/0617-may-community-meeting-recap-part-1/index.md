@@ -1,10 +1,10 @@
 ---
+date: 2021-06-17T00:00:00Z
 title: Linkerd at KubeCon EU
 description: |-
   May's Community Meeting was a little different than our typical meetups. Hot
   off a successful KubeCon EU, we chose to recap the great Linkerd stories told
   during the conference"
-date: 2021-06-17T00:00:00Z
 keywords: [community]
 params:
   author: jason

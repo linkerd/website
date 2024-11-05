@@ -1,7 +1,7 @@
 ---
-title: Announcing Linkerd Day 2023 at Kubecon EU!
 date: 2023-01-20T00:00:00+00:00
 slug: announcing-linkerd-day-2023
+title: Announcing Linkerd Day 2023 at Kubecon EU!
 keywords: [linkerd]
 params:
   author: catherine

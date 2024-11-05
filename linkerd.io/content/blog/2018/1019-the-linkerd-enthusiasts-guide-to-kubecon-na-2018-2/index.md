@@ -1,7 +1,7 @@
 ---
-title: The Linkerd Enthusiast’s Guide to Kubecon NA 2018
 date: 2018-10-19T00:00:00Z
 slug: the-linkerd-enthusiasts-guide-to-kubecon-na-2018-2
+title: The Linkerd Enthusiast’s Guide to Kubecon NA 2018
 keywords: [buoyant, community, events, linkerd]
 params:
   author: william

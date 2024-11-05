@@ -1,7 +1,7 @@
 ---
-title: Linkerd 2.x turns one year old! 🎂
 date: 2019-09-18T00:00:00Z
 slug: happy-birthday-linkerd
+title: Linkerd 2.x turns one year old! 🎂
 keywords: [linkerd]
 params:
   author: william

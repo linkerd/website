@@ -25,8 +25,8 @@ Linkerd 2.16 was announced on August 13, 2024.
 Known distributions of Linkerd 2.16:
 
 - [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.1**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.1/)).
+  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.2**
+  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.2/)).
 
 ## Types of release artifacts
 

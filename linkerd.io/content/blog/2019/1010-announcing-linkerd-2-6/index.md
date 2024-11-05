@@ -1,9 +1,9 @@
 ---
+date: 2019-10-10T00:00:00Z
+slug: announcing-linkerd-2.6
 title: |-
   Announcing Linkerd 2.6: Distributed tracing, live request headers, faster
   dashboard, and more!
-date: 2019-10-10T00:00:00Z
-slug: announcing-linkerd-2.6
 keywords: [linkerd]
 params:
   author: william

@@ -1,10 +1,10 @@
 ---
+date: 2024-05-23T00:00:00Z
 title: Building a Secure, Reliable, Observable IDP with Backstage & Linkerd
 description: |-
   This CNCF Cloud Native Live session explores building a rock-solid Internal
   Developer Platform (IDP) Backstage that empowers developers with self-service
   tools while streamlining security and observability.
-date: 2024-05-23T00:00:00Z
 keywords: [backstage]
 params:
   author: catherine

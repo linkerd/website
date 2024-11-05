@@ -1,8 +1,8 @@
 ---
-title: |-
-  Workshop recap: Running Linkerd in Production
 date: 2023-07-13T00:00:00Z
 slug: linkerd-in-production
+title: |-
+  Workshop recap: Running Linkerd in Production
 keywords:
   - linkerd
   - helm

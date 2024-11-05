@@ -1,8 +1,8 @@
 ---
-title: |-
-  Linkerd Edge Release Roundup: 21 June 2023
 date: 2023-06-21T00:00:00Z
 slug: linkerd-edge-roundup
+title: |-
+  Linkerd Edge Release Roundup: 21 June 2023
 keywords: [linkerd, gitops, flux, flagger]
 params:
   author: matei

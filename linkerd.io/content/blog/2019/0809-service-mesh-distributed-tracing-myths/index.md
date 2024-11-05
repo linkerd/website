@@ -1,4 +1,6 @@
 ---
+date: 2019-08-09T00:00:00Z
+slug: service-mesh-distributed-tracing-myths
 title: |-
   Distributed tracing in the service mesh: four myths
 description: |-
@@ -6,8 +8,6 @@ description: |-
   tracing. We're happy to report that this feature is on the near-term Linkerd
   roadmap. Unfortunately, we've found that many of the people asking for this
   feature don't quite understand what they're asking for.
-date: 2019-08-09T00:00:00Z
-slug: service-mesh-distributed-tracing-myths
 keywords: [linkerd]
 params:
   author: william

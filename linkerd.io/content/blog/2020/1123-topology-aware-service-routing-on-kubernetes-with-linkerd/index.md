@@ -1,6 +1,6 @@
 ---
-title: Topology-Aware Service Routing on Kubernetes with Linkerd
 date: 2020-11-23T00:00:00Z
+title: Topology-Aware Service Routing on Kubernetes with Linkerd
 keywords: ["service routing"]
 params:
   author: matei

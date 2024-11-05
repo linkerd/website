@@ -1,7 +1,7 @@
 ---
-title: The road ahead for Linkerd2-proxy, and how you can get involved
 date: 2020-09-02T00:00:00-08:00
 slug: the-road-ahead-for-linkerd2-proxy
+title: The road ahead for Linkerd2-proxy, and how you can get involved
 keywords: [linkerd]
 params:
   author: oliver

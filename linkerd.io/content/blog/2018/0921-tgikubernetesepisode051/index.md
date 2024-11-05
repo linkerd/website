@@ -1,7 +1,7 @@
 ---
-title: TGI Kubernetes Features Linkerd 2.0
 date: 2018-09-21T00:00:00Z
 slug: tgikubernetesepisode051
+title: TGI Kubernetes Features Linkerd 2.0
 keywords: [community, events, linkerd, tutorials, webinars]
 params:
   author: kiersten

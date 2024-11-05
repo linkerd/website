@@ -1,9 +1,9 @@
 ---
+date: 2021-05-14T00:00:00Z
 title: April Linkerd Community Meeting Recap
 description: |-
   We chatted with Fredrik Klingenberg about his experience implementing Linkerd
   at Elkjøp, talked about our roadmap, and much more.
-date: 2021-05-14T00:00:00Z
 keywords: [linkerd]
 params:
   author: jason
