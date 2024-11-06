@@ -18,36 +18,27 @@ params:
       - text: Apply now!
         href: https://docs.google.com/forms/d/e/1FAIpQLScBC-RWSPMbYFbuqPgmetKLyhjb1ih9TcDqI6szek8ElsYHPw/viewform?usp=sf_link
         variant: primary
-  sections:
-    - title: Who is this program for?
-      content: |-
-        In a space notorious for complexity, Linkerd is known for one key thing:
-        simplicity. While some have given up and accepted complexity as
-        inevitable, a few brave souls stand out. If you believe that simplicity
-        is not just possible for Kubernetes but necessary; if you are willing to
-        stand up to the status quo and reject complexity; if you have empathy
-        with the developers who have to use these platforms at the end of the
-        day—this is the program for you.
-    - title: What are Linkerd Ambassadors?
-      content: |-
-        Linkerd Ambassadors educate the Kubernetes community about Linkerd.
-        They spread its message of simplicity far and wide,  and they represent
-        the voice of the community back to the Linkerd maintainers. Every
-        ambassador works in their own way. While some create content, others may
-        prefer to be Community Leaders.
-        
-        Ambassador activities typically include one or more of the following:
+  overview:
+    title: What are Linkerd Ambassadors?
+    content: |-
+      Linkerd Ambassadors educate the Kubernetes community about Linkerd.
+      They spread its message of simplicity far and wide,  and they represent
+      the voice of the community back to the Linkerd maintainers. Every
+      ambassador works in their own way. While some create content, others may
+      prefer to be Community Leaders.
+      
+      Ambassador activities typically include one or more of the following:
 
-        - **Educate:** Share their knowledge through talks, blog posts, videos,
-          meetups, and helping others on the Linkerd Slack.
-        - **Foster collaboration:** Build strong relationships within the
-          Linkerd community and encourage collaboration.
-        - **Grow the community:** Attract and onboard new users to the Linkerd
-          ecosystem.
-        - **Provide feedback:** Share insights, suggestions, and community
-          feedback with Linkerd maintainers to help improve the project.
-        - **Promote Linkerd globally:** Spread the word about Linkerd and its
-          benefits to a wider audience.
+      - **Educate:** Share their knowledge through talks, blog posts, videos,
+        meetups, and helping others on the Linkerd Slack.
+      - **Foster collaboration:** Build strong relationships within the
+        Linkerd community and encourage collaboration.
+      - **Grow the community:** Attract and onboard new users to the Linkerd
+        ecosystem.
+      - **Provide feedback:** Share insights, suggestions, and community
+        feedback with Linkerd maintainers to help improve the project.
+      - **Promote Linkerd globally:** Spread the word about Linkerd and its
+        benefits to a wider audience.
   perks:
     title: Linkerd Ambassador Perks
     image: images/ambassador-logo.svg

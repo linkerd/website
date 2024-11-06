@@ -3,8 +3,8 @@
     {{ partial "components/hero" . }}
     <div class="page">
       <div class="page__container container-xl">
-        {{/* Sections */}}
-        {{ range .Params.sections }}
+        {{/* Overview */}}
+        {{ with .Params.overview }}
           <section>
             <h2>
               {{ .title }}
