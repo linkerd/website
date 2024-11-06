@@ -1,6 +1,6 @@
 {{ define "main" }}
   <div class="get-involved">
-    {{ .Render "_hero" }}
+    {{ partial "components/hero" . }}
     <div class="page">
       <div class="page__container container">
         {{ range .Params.items }}

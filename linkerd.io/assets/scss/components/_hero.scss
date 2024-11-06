@@ -1,4 +1,30 @@
 /*
+
+If the `hero--has-background-image` class is applied, the `background-image` rule needs to
+be set on the `hero__container` element using an inline style or by appling the
+rule through a parent component. For example:
+
+Using an inline style:
+
+```html
+<div class="hero hero--has-background-image">
+  <div class="hero__container" style="background-image:url('bkgd.png')">
+```
+
+Using a parent component:
+
+```css
+.my-page .hero__container {
+  background-image:url('bkgd.png');
+}
+```
+
+```html
+<div class="my-page">
+  <div class="hero hero--has-background-image">
+    <div class="hero__container">
+```
+
 @markup
 <div class="hero">
   <div class="hero__container">
@@ -65,6 +91,37 @@
     .hero__header {
       h1 {
         font-size: 60px;
+      }
+    }
+  }
+
+  // @options
+
+  &.hero--has-background-image {
+    .hero__container {
+      background-size: 0 0;// Hide background image
+    }
+    @media (min-width: breakpoint-min-width("lg")) {
+      .hero__container {
+        background-repeat: no-repeat;
+        background-size: auto 300px;
+        background-position: right center;
+      }
+      .hero__body {
+        max-width: 700px;
+      }
+    }
+    @media (min-width: breakpoint-min-width("xl")) {
+      .hero__container {
+        background-size: auto 400px;
+      }
+    }
+    @media (min-width: breakpoint-min-width("xxl")) {
+      .hero__container {
+        background-size: auto 500px;
+      }
+      .hero__body {
+        max-width: 800px;
       }
     }
   }

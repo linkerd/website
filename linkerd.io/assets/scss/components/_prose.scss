@@ -11,7 +11,12 @@ Apply to containers that contain rendered markdown.
   // Add extra space above h2
   h2 {
     padding-top: spacer(3);
+
+    &:first-child {
+      padding-top: 0;
+    }
   }
+  
   // Add bottom margin to alerts
   .alert {
     margin-bottom: spacer(3);

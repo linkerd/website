@@ -4,7 +4,7 @@
 
 .adopters {
   .page__container {
-    @include make-stack(6);
+    @include make-stack(7);
   }
   .adopters__case-studies {
     display: grid;

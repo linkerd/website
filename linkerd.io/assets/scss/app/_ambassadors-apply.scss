@@ -1,8 +1,8 @@
 /*
-@markup See: layouts/enterprise/list.html
+@markup See: layouts/community/ambassadors-apply.html
 */
 
-.enterprise {
+.ambassadors-apply {
   // Override all h2s on the page
   h2 {
     font-size: $font-size-h1;
@@ -10,14 +10,14 @@
   .page__container {
     @include make-stack(7);
   }
-  .enterprise__section {
-    @include make-stack(5);
-  }
   @media (min-width: breakpoint-min-width("lg")) {
+    section {
+      padding-left: spacer(6);
+      padding-right: spacer(6);
+    }
     .card {
       @include make-card--horz;
       @include make-card--reverse;
-      gap: spacer(6);
       padding: spacer(6);
     }
   }
