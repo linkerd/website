@@ -72,20 +72,20 @@ file uses RBAC to provide the "principle of least privilege", ensuring the
 ## Federated Services
 
 Federated services take this a step farther by allowing a service which is
-deployed to multiple clusters to be joined into a single federated service.
+deployed to multiple clusters to be joined into a single union service.
 
 The service mirror controller will look for all services in all linked clusters
 which match a label selector (`mirror.linkerd.io/federated=member` by default)
 and create a federated service called `<svc name>-federated` which will act as
 a union of all those services with that name. For example, all traffic sent to
-the `store-web-federated` federated service will be load balananced over all
+the `store-web-federated` federated service will be load balanced over all
 replicas of all services name `store-web` in all linked clusters.
 
 The concept of "namespace sameness" applies, which means that the federated
 service will be created in the same namespace as the individual services and
 services can only join a federated service in the same namespace.
 
-Since Linkerd's *destination servce* uses "remote-discovery" to discovery the
+Since Linkerd's *destination servce* uses "remote-discovery" to discover the
 endpoints of a federated service, all of the requirements for flat mode also
 apply to federated services: the clusters must be on a flat network where pods
 in one cluster can connect to pods in the others, the clusters must have the

@@ -1,6 +1,6 @@
 ---
-title: Multi-Cluster Federated Services
-description: Multi-Cluster Federated Services
+title: Multi-cluster Federated Services
+description: Using multi-cluster federated services
 ---
 
 Linkerd's [multicluster extension](../multicluster/) can create federated
