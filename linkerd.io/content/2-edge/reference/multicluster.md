@@ -85,7 +85,7 @@ The concept of "namespace sameness" applies, which means that the federated
 service will be created in the same namespace as the individual services and
 services can only join a federated service in the same namespace.
 
-Since Linkerd's *destination servce* uses "remote-discovery" to discover the
+Since Linkerd's *destination service* uses "remote-discovery" to discover the
 endpoints of a federated service, all of the requirements for flat mode also
 apply to federated services: the clusters must be on a flat network where pods
 in one cluster can connect to pods in the others, the clusters must have the
