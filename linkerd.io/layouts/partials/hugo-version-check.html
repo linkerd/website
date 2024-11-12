@@ -1,0 +1,3 @@
+{{- if lt hugo.Version site.Params.minHugoVersion }}
+  {{- errorf "linkerd.io requires Hugo v%s or later." site.Params.minHugoVersion }}
+{{- end -}}

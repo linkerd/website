@@ -1,3 +1,6 @@
+# Minimum version of Hugo required to build linkerd.io
+minHugoVersion: "0.131.0"
+
 # Open Graph and Twitter Card defaults
 description: |-
   Linkerd is an ultralight service mesh for Kubernetes. It gives you
@@ -8,4 +11,5 @@ description: |-
 social:
   twitter: Linkerd
 
+# Latest majar version of Linkerd
 latestMajorVersion: "2.16"
