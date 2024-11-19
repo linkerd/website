@@ -1,4 +1,5 @@
-{{- with .Page.Pages }}
+{{- $pages := where .Page.Pages "Params.unlisted" "ne" true }}
+{{- with $pages }}
   <ul>
     {{- range . }}
       <li>
