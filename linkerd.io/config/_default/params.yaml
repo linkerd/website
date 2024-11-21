@@ -11,5 +11,5 @@ description: |-
 social:
   twitter: Linkerd
 
-# Latest majar version of Linkerd
+# Latest major version of Linkerd
 latestMajorVersion: "2.16"
