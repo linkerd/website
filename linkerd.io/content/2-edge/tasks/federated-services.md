@@ -7,7 +7,7 @@ Linkerd's [multicluster extension](../multicluster/) can create federated
 services which act as a union of multiple services in different clusters with
 the same name and namespace. By sending traffic to the federated service, that
 traffic will be load balanced among all endpoints of that service in all linked
-clusters. The allows the client to be cluster agnostic, balance traffic across
+clusters. This allows the client to be cluster agnostic, balance traffic across
 multiple clusters, and be resiliant to the failure of any individual cluster.
 
 Federated services send traffic directly to the pods of the member services and
@@ -301,7 +301,7 @@ s}' | jq .
 ]
 ```
 
-## Step 5: Send some traffic!
+## Step 6: Send some traffic!
 
 We'll create a deployment that uses `curl` to generate traffic to the
 `bb-federated` service.

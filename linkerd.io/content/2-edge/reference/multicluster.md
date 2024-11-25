@@ -79,7 +79,7 @@ which match a label selector (`mirror.linkerd.io/federated=member` by default)
 and create a federated service called `<svc name>-federated` which will act as
 a union of all those services with that name. For example, all traffic sent to
 the `store-web-federated` federated service will be load balanced over all
-replicas of all services name `store-web` in all linked clusters.
+replicas of all services named `store-web` in all linked clusters.
 
 The concept of "namespace sameness" applies, which means that the federated
 service will be created in the same namespace as the individual services and
