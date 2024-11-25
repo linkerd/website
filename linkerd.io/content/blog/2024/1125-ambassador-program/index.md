@@ -53,13 +53,12 @@ their own way:
 - **Educate:** Give talks, write blog posts, create videos, host meetups, and
   answer questions in the Linkerd Slack.
 - **Foster Collaboration:** Build strong relationships and encourage
-  contributions..
+  contributions.
 - **Grow the Community:** Onboard new users and help them understand the power
   of Linkerd.
 - **Provide Feedback:** Share community insights and suggestions with the
   maintainers to keep improving Linkerd.
-- **Promote Globally:** Amplify Linkerd’s message to a wider audience and
-  showcase its benefits.
+- **Promote Globally:** Amplify Linkerd’s message to a wider audience.
 
 No matter your style—whether you prefer creating content, mentoring newcomers,
 or leading local meetups—there’s a way for you to make an impact.
