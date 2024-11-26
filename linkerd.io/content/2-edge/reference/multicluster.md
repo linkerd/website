@@ -6,12 +6,12 @@ description: Multi-cluster communication
 Linkerd's [multi-cluster functionality](../../features/multicluster/) allows
 pods to connect to Kubernetes services across cluster boundaries in a way that
 is secure and fully transparent to the application. This feature supports three
-modes: hierarchical (using an gateway), flat (without a gateway), and federated.
+modes: hierarchical (using a gateway), flat (without a gateway), and federated.
 
-* **Flat mode** requires that all pods on the source cluster be able to directly
-  connect to pods on the destination cluster.
 * **Hierarchical mode** only requires that the gateway IP of the destination
   cluster be reachable by pods on the source cluster.
+* **Flat mode** requires that all pods on the source cluster be able to directly
+  connect to pods on the destination cluster.
 * **Federated mode** has the same requirements as flat mode but allows a service
   deployed to multiple clusters to be treated as a single cluster agnostic
   service.
@@ -72,7 +72,7 @@ file uses RBAC to provide the "principle of least privilege", ensuring the
 ## Federated Services
 
 Federated services take this a step farther by allowing a service which is
-deployed to multiple clusters to be joined into a single union service.
+deployed to multiple clusters to be joined into a single unified service.
 
 The service mirror controller will look for all services in all linked clusters
 which match a label selector (`mirror.linkerd.io/federated=member` by default)

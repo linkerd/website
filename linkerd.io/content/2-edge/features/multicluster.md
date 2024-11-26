@@ -73,8 +73,8 @@ service will have that traffic distributed across all replicas of services in
 the federated service across clusters. Federated services use the *flat
 networking* model and do not use a gateway intermediary.
 
-These modes can be combined, with each specific services by using the mode that
-is most appropriate. See the
+These modes can be combined, with each specific service selecting the mode that
+is most appropriate for that service. See the
 [pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
 guide, the [federated services](../../tasks/federated-services/) guide, and the
 [multi-cluster reference](../../reference/multicluster/) for more.
@@ -87,7 +87,7 @@ guide, the [federated services](../../tasks/federated-services/) guide, and the
 By default, Linkerd will mirror all exported services as Kubernetes `clusterIP`
 services. This also extends to [headless services][headless-svc]; an exported
 headless service will be mirrored as `clusterIP` and have an IP address
-assigned to it. In general, headless services _should not have an IP address_,
+assigned to it. In general, headless services *should not have an IP address*,
 they are used when a workloads needs a stable network identifier or to
 facilitate service discovery without being tied to Kubernetes' native
 implementation. This allows clients to either implement their own load

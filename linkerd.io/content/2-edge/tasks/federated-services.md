@@ -10,9 +10,9 @@ traffic will be load balanced among all endpoints of that service in all linked
 clusters. This allows the client to be cluster agnostic, balance traffic across
 multiple clusters, and be resiliant to the failure of any individual cluster.
 
-Federated services send traffic directly to the pods of the member services and
-not through a gateway. Therefore, federated services have the same requirements
-as *pod-to-pod* multicluster services:
+Federated services send traffic directly to the pods of the member services
+rahter than through a gateway. Therefore, federated services have the same
+requirements as *pod-to-pod* multicluster services:
 
 * The clusters must be on a *flat network*. In other words, pods from one
   cluster must be able to address and connect to pods in the other cluster.
@@ -35,7 +35,7 @@ a federated service for a service that spans 3 clusters.
   We'd recommend you use the names `west`, `east`, and `north` so that you can
   follow along with this guide. It is easy to
   [rename contexts](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-rename-context-em-)
-  with `kubectl`, so don't feel like you need to keep it all named this way
+  with `kubectl`, so don't feel like you need to keep them all named this way
   forever.
 
 ## Step 1: Installing Linkerd and Linkerd-Viz
@@ -63,7 +63,7 @@ communication.
 
 ## Step 3: Linking the Clusters
 
-We use the `linkerd multilcuster link` command to link the `east` and `north`
+We use the `linkerd multicluster link` command to link the `east` and `north`
 cluster to the `west` cluster. This is exactly the same as in the regular
 [Multicluster guide](../multicluster/#linking-the-clusters) except that we pass
 the `--gateway=false` flag to create a Link which doesn't require a gateway.
