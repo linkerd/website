@@ -28,6 +28,38 @@ when installing the `linkerd-crds` Helm chart. This avoid conflicts by
 instructing Linkerd to not install the Gateway API CRDs and instead rely on the
 Gateway CRDs which already exist.
 
+{{< warning >}} **API Gateway compatability.** By default, Linkerd installs the following Gateway API CRDs: grpcroutes.gateway.networking.k8s.io/v1alpha2 and httproutes.gateway.networking.k8s.io/v1beta1, which are served in version 0.7 of the Gateway API. Newer versions of the Gateway API might include these CRDs but may not serve them, potentially causing the policy container in the linkerd-destination pods to fail during startup. The matrix below shows the latest supported versions:
+
+{{< tabpane >}}
+{{< tab "httproute.gateway.networking.k8s.io" >}}
+| Feature              | HTTPRoute           | GRPCRoute         | TCPRoute        | 
+|----------------------|---------------------|-------------------|-----------------|
+| Basic Routing        | v1.1.0-experimental | v0.7              | -               |
+| Traffic Splitting    | v1.1.0-experimental | v0.7              | -               |
+| Header Matching      | v1.1.0-experimental | v0.7              | -               | 
+| Path Matching        | v1.1.0-experimental | v0.7              | -               | 
+| Retry Policies       | v1.1.0-experimental | v0.7              | -               | 
+| Rate Limiting        | -                   | -                 | -               | 
+| Circuit Breaking     | v1.1.0-experimental | v0.7              | -               |  
+| Authentication       | v1.1.0-experimental | v0.7              | -               |  
+| Timeouts             | -                   | -                 | -               | 
+{{< /tab >}}
+{{< tab "httproute.policy.linkerd.io" >}}
+| Feature              | HTTPRoute           | GRPCRoute         | TCPRoute        | 
+|----------------------|---------------------|-------------------|-----------------|
+| Basic Routing        | Supported           | Supported         | -               |
+| Traffic Splitting    | Supported           | Supported         | -               |
+| Header Matching      | Supported           | Supported         | -               |
+| Path Matching        | Supported           | Supported         | -               |
+| Retry Policies       | Supported           | Supported         | -               |
+| Rate Limiting        | -                   | -                 | -               | 
+| Circuit Breaking     | Supported           | Supported         | -               | 
+| Authentication       | Supported           | Supported         | -               |
+| Timeouts             | Supported           | Supported         | -               |
+{{< /tab >}}
+{{< /tabpane >}}
+{{< /warning >}}
+
 This documentation describes the `policy.linkerd.io` HTTPRoute resource. For a
 similar description of the upstream Gateway API HTTPRoute resource, refer to the
 Gateway API's [HTTPRoute
