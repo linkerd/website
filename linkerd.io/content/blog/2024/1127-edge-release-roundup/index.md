@@ -74,7 +74,7 @@ for Linkerd 2.17 in November, but there are a couple of new features here as
 well! Of course, each edge release includes _many_ dependency updates which we
 won't list here, but you can find them in the release notes for each release.
 
-# edge-24.10.5 (October 31, 2024)
+### edge-24.10.5 (October 31, 2024)
 
 [edge-24.10.5] contains the only breaking change in the October releases: as
 of this release, a gRPC request that hits a timeout will correctly return a a
@@ -82,7 +82,7 @@ of this release, a gRPC request that hits a timeout will correctly return a a
 status as in previous releases. This fix allows gRPC clients to properly
 distinguish between a timeout and other errors, so it's an important change.
 
-# edge-24.10.4 (October 24, 2024)
+### edge-24.10.4 (October 24, 2024)
 
 [edge-24.10.4] stops using `automountServiceAccountToken`, switching instead
 to using explicitly-configured projected volumes for the ServiceAccountTokens
@@ -91,7 +91,7 @@ security (thanks, [Aran Shavit]!). Additionally, this release updates the
 deprecation text for `v1beta1` of the Server CRD; anyone using that version
 should go ahead and upgrade to Server `v1beta3` (thanks, [@patest-dev]!).
 
-# edge-24.10.3 (October 17, 2024)
+### edge-24.10.3 (October 17, 2024)
 
 [edge-24.10.3] improves outbound HTTP and gRPC metrics by adding `hostname`
 and `zone_locality` labels, providing the hostname and zone used for the
@@ -109,7 +109,7 @@ to [edge-24.9.3].
 
 [#11157]: https://github.com/linkerd/linkerd2/issues/11157
 
-# edge-24.10.2 (October 10, 2024)
+### edge-24.10.2 (October 10, 2024)
 
 _If you're using Linkerd multicluster, you should consider going straight to
 [edge-24.10.3] to avoid compatibility issues with clusters running versions
@@ -122,7 +122,7 @@ Additionally, creating a link with `linkerd multicluster link --set
 enableNamespaceCreation=true` will allow Linkerd multicluster to create the
 namespace into which it mirrors services.
 
-# edge-24.10.1 (October 3, 2024)
+### edge-24.10.1 (October 3, 2024)
 
 _If you're using Linkerd multicluster, you should consider going straight to
 [edge-24.10.3] to avoid compatibility issues with clusters running versions
