@@ -12,6 +12,13 @@ params:
 images: [social.png] # Open graph image
 ---
 
+_This is part one of series by Linkerd Ambassador Chris Campbell exploring how
+to bridge the gap between development and production by using Linkerd, Tilt,
+and Ingress-Nginx to create a robust environment in which you can develop
+using your real production infrastructure._
+
+----
+
 As applications grow more complex and cloud-native architectures become the
 norm, developers face a common challenge: the disconnect between local
 development environments and production infrastructure. Have you ever deployed
@@ -269,7 +276,3 @@ mirrors your production environment. With everything running locally, you can:
 In the next section, we'll explore how to leverage these tools to better
 understand and work with Linkerd, including advanced features like traffic
 splitting and retry policies.
-
-----
-
-_Abstract: The gap between local development and production environments can lead to unexpected bugs, costly debugging, and slower iteration cycles. As cloud-native architectures grow in complexity, developers face the challenge of replicating production infrastructure locally. What if you could develop your applications alongside the very infrastructure they rely on in production? This blog post by Linkerd Ambassador Chris Campbell explores how to bridge that gap by creating a robust local development environment with tools like Tilt, Linkerd, and Nginx Ingress. You'll learn how to: Build and iterate on applications using real infrastructure features such as ingress rules and service mesh routing. Eliminate surprises by aligning local and production configurations. Experiment rapidly with infrastructure changes and develop a deeper understanding of cloud-native tools. Including a [Tilt-Linkerd-Demo repository](https://github.com/campbel/tilt-linkerd-demo), this guide covers application setup to configuring key infrastructure components like service meshes and ingress controllers._
