@@ -57,11 +57,11 @@ by the `clusterNetworks` value provided when Linkerd was installed.
 
 ### trafficPolicy
 
-This field is required and must be either `Allow` or `Deny`. If `trafficPolicy` is set
-to `Allow`, all traffic through this EgressNetwork will be let through even if there
-is no explicit Gateway API Route that describes it. If `trafficPolicy` is set to `Deny`,
-traffic through this `EgressNetwork` that is not explicitly matched by a Route will
-be refused.
+This field is required and must be either `Allow` or `Deny`. If `trafficPolicy`
+is set to `Allow`, all traffic through this EgressNetwork will be let through
+even if there is no explicit Gateway API Route that describes it. If
+`trafficPolicy` is set to `Deny`, traffic through this `EgressNetwork` that
+is not explicitly matched by a Route will be refused.
 
 ## Example
 

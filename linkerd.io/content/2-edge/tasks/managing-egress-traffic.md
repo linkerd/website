@@ -429,4 +429,5 @@ $ curl http://google.com
 
 ## Cleanup
 
-In order to clean everything up, simply delete the namespace: `kubectl delete ns egress-test`.
+In order to clean everything up, simply delete the namespace:
+`kubectl delete ns egress-test`.
