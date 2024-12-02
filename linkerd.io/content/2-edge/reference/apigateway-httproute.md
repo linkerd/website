@@ -62,6 +62,7 @@ spec:
 ```
 
 ### Traffic Splitting Example
+
 This example demonstrates how to split traffic between two backends. A portion of requests is directed to the `smiley2` backend Service, while the rest go to the `smiley` backend Service.
 
 ```yaml
