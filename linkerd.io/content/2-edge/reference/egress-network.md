@@ -4,8 +4,8 @@ title: EgressNetwork
 
 Linkerd's [egress functionality]({{< relref "../features/egress">}}) allows
 you to monitor and control traffic that leaves the cluster. This behavior is
-controller by an `EgressNetwork` resource which is used Linkerd to describe
-the properties of traffic that leaves a cluster and apply policies to it, using
+controller by creating `EgressNetwork` resources, which describe the properties
+of traffic that leaves a cluster and provide a way to apply policies to it, using
 Gateway API primitives.
 
 ## EgressNetwork semantics
@@ -14,16 +14,16 @@ An `EgressNetwork` is essentially a description for a set of traffic
 destinations that reside outside the cluster. In that sense, it is comparable
 to a Service, with the main difference being that a Service encompasses a single
 logical destination while an `EgressNetwork` can encompass a set of
-destinations. This set can vary in size - from a single ip address to the entire
+destinations. This set can vary in size - from a single IP address to the entire
 network space that is not within the boundaries of the cluster.
 
 An `EgressNetwork` resource by default has several namespace semantics that are
-worth outlining. Egress networks are namespace local, which means that they
+worth outlining. EgressNetworks are namespaced resources, which means that they
 affect only clients within the namespace that they reside in. The only exception
-is egress networks created in the global egress namespace. These resources
+is EgressNetworks created in the global egress namespace: these EgressNetworks
 affect clients in all namespaces. The namespace-local resources take priority.
 By default the global egress namespace is set to `linkerd-egress`, but can be
-configured by setting the `Values.egress.globalEgressNetworkNamespace` Helm
+configured by setting the `egress.globalEgressNetworkNamespace` Helm
 value.
 
 ## EgressNetwork Spec
@@ -34,18 +34,18 @@ An `EgressNetwork` spec may contain the following top level fields:
 
 | field| value |
 |------|-------|
-| `networks`| A set of [Network](#networks) that describe the address space that this `EgressNetwork` captures|
-| `trafficPolicy`| the default [TrafficPolicy](#trafficpolicy) policy for this resource.|
+| `networks`| A set of [network specifications](#networks) that describe the address space that this `EgressNetwork` captures |
+| `trafficPolicy`| the default [traffic policy](#trafficpolicy) for this resource. |
 {{< /keyval >}}
 
 ### networks
 
 This field is used to concretely describe the set of outside networks that this
 network captures. All traffic to these destinations will be considered as
-flowing to this `EgressNetwork` and the respective policies will be applied.
-In case an `EgressNetwork` does not this field, the default that is used if a
-single network that captures the entire ip address space bu excludes all
-in-cluster networks as specified by `Values.clusterNetworks`.
+flowing to this `EgressNetwork` and subject to its traffic policy.
+If an `EgressNetwork` does not specify any `networks`, the `EgressNetwork`
+captures the entire IP address space except for the in-cluster networks specified
+by the `clusterNetworks` value provided when Linkerd was installed.
 
 {{< keyval >}}
 
@@ -57,11 +57,11 @@ in-cluster networks as specified by `Values.clusterNetworks`.
 
 ### trafficPolicy
 
-This field is required and could be either `Allow` or `Deny`. In the case of an
-`Allow` all traffic will be let through even if there is no explicit Gateway
-API Route that describes it. If the policy is set to `Deny` all traffic that is
-captured by the `EgressNetwork` needs to be explicitly matched by a route
-resource.
+This field is required and must be either `Allow` or `Deny`. If `trafficPolicy` is set
+to `Allow`, all traffic through this EgressNetwork will be let through even if there
+is no explicit Gateway API Route that describes it. If `trafficPolicy` is set to `Deny`,
+traffic through this `EgressNetwork` that is not explicitly matched by a Route will
+be refused.
 
 ## Example
 

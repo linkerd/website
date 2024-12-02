@@ -12,7 +12,7 @@ targeted to destinations that reside outside of the cluster.
 In order to be able to capture egress traffic and apply policies to it we will
 make use of the `EgressNetwork` CRD. This CRD is namespace scoped - it applies
 to clients in the local namespace unless it is created in the globally
-configured egress namespace. For now, lets create an `egress-test` namespace
+configured egress namespace. For now, let's create an `egress-test` namespace
 and add a single `EgressNetwork` to it.
 
 ```bash
@@ -94,7 +94,7 @@ Linkerd controller.
 
 After you have used metrics in order to compose a picture of your egress
 traffic, you can start applying policies that allow only some of it to go
-through. Lets update our `EgressNetwork` and change its `trafficPolicy`
+through. Let's update our `EgressNetwork` and change its `trafficPolicy`
 to `Deny`:
 
 ```bash
@@ -258,7 +258,7 @@ outbound_tls_route_close_total{
 
 In a similar fashion we can use the other Gateway API route types such as `GRPCRoute`
 and TCPRoute to shape traffic that is captured by an `EgressNetwork` primitive.
-All these traffic types come with their corresponding set of route based
+All these traffic types come with their corresponding set of route-based
 metrics that describe how traffic flows through the system and what policy
 decisions have been made.
 
@@ -395,7 +395,7 @@ spec:
 EOF
 ```
 
-Now lets verify all works as expected:
+Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
@@ -429,4 +429,4 @@ $ curl http://google.com
 
 ## Cleanup
 
-In order to cleanup everything simply delete the namespace: `kubectl delete ns egress-test`.
+In order to clean everything up, simply delete the namespace: `kubectl delete ns egress-test`.
