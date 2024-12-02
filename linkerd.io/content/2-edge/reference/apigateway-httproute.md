@@ -33,6 +33,7 @@ The table below shows the latest supported versions of the Gateway API and the f
 ## HTTPRoute Examples
 
 ### Header-Based Routing Example
+
 This example demonstrates how an HTTPRoute can route traffic based on a header value. If the request contains the header `x-faces-user: testuser`, it is directed to the `smiley2` backend Service. All other requests are routed to the `smiley` backend Service.
 
 ```yaml
