@@ -9,5 +9,5 @@ outputs:
 params:
   feature:
     - /blog/2024/1023-sustainable-service-mesh
-    - /blog/2024/1015-edge-release-roundup
+    - /blog/2024/1127-edge-release-roundup
 ---
