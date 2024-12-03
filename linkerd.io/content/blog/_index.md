@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2024/1202-tilt-linkerd-nginx-part-1
     - /blog/2024/1023-sustainable-service-mesh
-    - /blog/2024/1127-edge-release-roundup
 ---
