@@ -16,7 +16,7 @@ entirely. Fully restricting egress traffic in the presence of arbitrary
 applications thus typically requires a more comprehensive approach, such as
 Linkerd's egress controls combined with CNI-level configuration.
 
-{{< /warning }}
+{{< /warning >}}
 
 ## Visualizing egress traffic
 
