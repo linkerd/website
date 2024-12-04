@@ -1,7 +1,8 @@
-+++
-title = "Debugging HTTP applications with per-route metrics"
-description = "Follow a long-form example of debugging a failing HTTP application using per-route metrics."
-+++
+---
+title: Debugging HTTP applications with per-route metrics
+description: Follow a long-form example of debugging a failing HTTP application using
+  per-route metrics.
+---
 
 This demo is of a Ruby application that helps you manage your bookshelf. It
 consists of multiple microservices and uses JSON over HTTP to communicate with
@@ -19,7 +20,7 @@ the other services. There are three services:
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
-{{< fig src="/images/books/topology.png" title="Topology" >}}
+![Topology](/docs/images/books/topology.png "Topology")
 
 ## Prerequisites
 
@@ -71,7 +72,7 @@ connection" messages for the rest of the exercise.)
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
-{{< fig src="/images/books/frontend.png" title="Frontend" >}}
+![Frontend](/docs/images/books/frontend.png "Frontend")
 
 Unfortunately, there is an error in the app: if you click *Add Book*, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
@@ -80,7 +81,7 @@ debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
 perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
-{{< fig src="/images/books/failure.png" title="Failure" >}}
+![Failure](/docs/images/books/failure.png "Failure")
 
 ## Add Linkerd to the service
 
@@ -111,7 +112,7 @@ out the Linkerd dashboard, run:
 linkerd viz dashboard &
 ```
 
-{{< fig src="/images/books/dashboard.png" title="Dashboard" >}}
+![Dashboard](/docs/images/books/dashboard.png "Dashboard")
 
 Select `booksapp` from the namespace dropdown and click on the
 [Deployments](http://localhost:50750/namespaces/booksapp/deployments) workload.
@@ -129,7 +130,7 @@ has two outgoing dependencies: `authors` and `book`. One is the service for
 pulling in author information and the other is the service for pulling in book
 information.
 
-{{< fig src="/images/books/webapp-detail.png" title="Detail" >}}
+![Detail](/docs/images/books/webapp-detail.png "Detail")
 
 A failure in a dependent service may be exactly what’s causing the errors that
 `webapp` is returning (and the errors you as a user can see when you click). We
@@ -137,7 +138,7 @@ can see that the `books` service is also failing. Let’s scroll a little furthe
 down the page, we’ll see a live list of all traffic endpoints that `webapp` is
 receiving. This is interesting:
 
-{{< fig src="/images/books/top.png" title="Top" >}}
+![Top](/docs/images/books/top.png "Top")
 
 Aha! We can see that inbound traffic coming from the `webapp` service going to
 the `books` service is failing a significant percentage of the time. That could
@@ -145,7 +146,7 @@ explain why `webapp` was throwing intermittent failures. Let’s click on the ta
 (🔬) icon and then on the Start button to look at the actual request and
 response stream.
 
-{{< fig src="/images/books/tap.png" title="Tap" >}}
+![Tap](/docs/images/books/tap.png "Tap")
 
 Indeed, many of these requests are returning 500’s.
 

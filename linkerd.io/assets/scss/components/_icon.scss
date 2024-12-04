@@ -1,0 +1,75 @@
+/*
+@markup
+<svg class="icon">
+  ...
+</svg>
+*/
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: icon-size("md");
+  height: icon-size("md");
+  
+  path {
+    fill: currentColor;
+  }
+  
+  // @options
+
+  &.icon--primary {
+    path {
+      fill: $primary-color;
+    }
+  }
+  &.icon--secondary {
+    path {
+      fill: $secondary-color;
+    }
+  }
+  &.icon--info {
+    path {
+      fill: $info-color;
+    }
+  }
+  &.icon--success {
+    path {
+      fill: $success-color;
+    }
+  }
+  &.icon--warning {
+    path {
+      fill: $warning-color;
+    }
+  }
+  &.icon--danger {
+    path {
+      fill: $danger-color;
+    }
+  }
+  &.icon--current {
+    path {
+      fill: currentColor;
+    }
+  }
+  &.icon--xs {
+    width: icon-size("xs");
+    height: icon-size("xs");
+  }
+  &.icon--sm {
+    width: icon-size("sm");
+    height: icon-size("sm");
+  }
+  &.icon--md {
+    width: icon-size("md");
+    height: icon-size("md");
+  }
+  &.icon--lg {
+    width: icon-size("lg");
+    height: icon-size("lg");
+  }
+  &.icon--xl {
+    width: icon-size("xl");
+    height: icon-size("xl");
+  }
+}

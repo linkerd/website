@@ -1,8 +1,7 @@
-+++
-title = "Releases and Versions"
-aliases = [ "edge" ]
-weight = 18
-+++
+---
+title: Releases and Versions
+type: docs
+---
 
 Linkerd publishes and announces _versions_ that correspond to specific project
 milestones and sets of new features. These versions are available in different
@@ -26,8 +25,8 @@ Linkerd 2.16 was announced on August 13, 2024.
 Known distributions of Linkerd 2.16:
 
 - [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.1**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.1/)).
+  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.2**
+  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.2/)).
 
 ## Types of release artifacts
 
@@ -36,9 +35,10 @@ Known distributions of Linkerd 2.16:
 <!-- markdownlint-disable MD034 -->
 
 Edge release artifacts are published on a weekly or near-weekly basis as part of
-the open source project. The latest edge release is [{{% latestedge
-%}}](https://github.com/linkerd/linkerd2/releases/tag/{{% latestedge %}}). and
-the full list of edge release artifacts can be found on
+the open source project. The latest edge release is [{{< latest-edge-version
+>}}](https://github.com/linkerd/linkerd2/releases/tag/{{<
+latest-edge-version >}}). and the full list of edge release artifacts can be
+found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
 Edge release artifacts contain the code in from the _main_ branch at the point

@@ -1,0 +1,34 @@
+{{ $authorImg := "" }}
+{{ $authorName := "" }}
+{{ with .Params.author }}
+  {{ with index site.Data.authors . }}
+    {{ with .avatar }}
+      {{ with resources.GetMatch . }}
+        {{ with partial "utils/process-image" (dict
+          "res" .
+          "width" 96
+          "height" 96
+          "process" "fill center jpg q80 lanczos"
+        )}}
+          {{ $authorImg = .RelPermalink }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $authorName = .name }}
+  {{ end }}
+{{ end }}
+<div class="blog-post-meta">
+  {{ if $authorImg }}
+    <div class="blog-post-meta__media">
+      <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="img img--48 img--cover img--round">
+    </div>
+  {{ end }}
+  <div class="blog-post-meta__body">
+    <div class="blog-post-meta__name">
+      {{ $authorName }}
+    </div>
+    <div class="blog-post-meta__date">
+      {{ .Date.Format "Jan 2, 2006" }} • {{ .ReadingTime }} min read
+    </div>
+  </div>
+</div>

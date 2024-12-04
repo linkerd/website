@@ -1,0 +1,42 @@
+/*
+@markup See: layouts/search/list.html
+*/
+
+.search {
+  padding: spacer(6) 0;
+
+  @media (min-width: breakpoint-min-width("md")) {
+    padding: spacer(7) 0;
+  }
+}
+
+// .search-results
+
+.search-results {
+  @include make-stack(4);
+
+  // Add extra space between header and entries
+  & > :nth-child(2) {
+    margin-top: spacer(6); // Override stack
+  }
+}
+
+// .search-results-entry
+
+.search-results-entry {
+  @include make-stack(3);
+  padding-bottom: spacer(4);
+  border-bottom: solid 1px $border-color;
+
+  &:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .search-results-entry__section {
+    color: $gray;
+    font-size: $font-size-sm;
+  }
+  .search-results-entry__title {
+    margin-top: spacer(1); // Override stack
+  }
+}

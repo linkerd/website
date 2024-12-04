@@ -1,10 +1,7 @@
-+++
-title = "Circuit Breaking"
-description = "How Linkerd implements circuit breaking."
-aliases = [
-  "../failure-accrual/",
-]
-+++
+---
+title: Circuit Breaking
+description: How Linkerd implements circuit breaking.
+---
 
 [_Circuit breaking_][circuit-breaker] is a pattern for improving the reliability
 of distributed applications. In circuit breaking, an application which makes

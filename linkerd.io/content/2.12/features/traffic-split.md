@@ -1,7 +1,7 @@
-+++
-title = "Traffic Split (canaries, blue/green deploys)"
-description = "Linkerd can dynamically send a portion of traffic to different services."
-+++
+---
+title: Traffic Split (canaries, blue/green deploys)
+description: Linkerd can dynamically send a portion of traffic to different services.
+---
 
 Linkerd's traffic split functionality allows you to dynamically shift arbitrary
 portions of traffic destined for a Kubernetes service to a different destination

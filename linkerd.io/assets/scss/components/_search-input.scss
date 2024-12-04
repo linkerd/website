@@ -1,0 +1,59 @@
+/*
+@markup
+<div class="search-input">
+  <svg>
+  <input type="text" required>
+  <input type="reset">
+</div>
+*/
+
+.search-input {
+  // Styling is applied to the input's parent to avoid issues with iOS
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  padding-left: spacer(2);
+  border: solid 1px $border-color;
+  border-radius: 999px;
+  background-color: $white;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+  svg {
+    flex-shrink: 0;
+    width: icon-size("md");
+    height: icon-size("md");
+    
+    path {
+      color: $gray;
+    }
+  }
+  input[type=text],
+  input[type=reset] {
+    border: none;
+    background-color: transparent;
+    outline: none;
+  }
+  input[type=reset] {
+    padding-right: spacer(3);
+    color: $blue;
+    cursor: pointer;
+  }
+  // Hide reset button if search input is empty
+  // (Search input must have `required` attribute for this to work)
+  input[type=text]:invalid ~ input[type=reset] {
+    visibility: hidden;
+  }
+
+  // @options
+
+  &.search-input--sm {
+    svg {
+      width: icon-size("sm");
+      height: icon-size("sm");
+    }
+    input[type=text],
+    input[type=reset] {
+      font-size: $font-size-sm;
+    }
+  }
+}

@@ -1,7 +1,7 @@
-+++
-title = "IPv6 Support"
-description = "Linkerd is compatible with both IPv6-only and dual-stack clusters."
-+++
+---
+title: IPv6 Support
+description: Linkerd is compatible with both IPv6-only and dual-stack clusters.
+---
 
 As of version 2.16 (and edge-24.8.2) Linkerd fully supports Kubernetes clusters
 configured for IPv6-only or dual-stack networking.

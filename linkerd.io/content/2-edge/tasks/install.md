@@ -1,12 +1,7 @@
-+++
-title = "Installing Linkerd"
-description = "Install Linkerd onto your Kubernetes cluster."
-aliases = [
-  "../upgrading/",
-  "../installing/",
-  "../rbac/"
-]
-+++
+---
+title: Installing Linkerd
+description: Install Linkerd onto your Kubernetes cluster.
+---
 
 Before you can use Linkerd, you'll need to install the [control
 plane](../../reference/architecture/#control-plane). This page covers how to
@@ -112,7 +107,7 @@ extensions](../extensions/) for how to install them.
 
 Finally, once the control plane is installed, you'll need to "mesh" any services
 you want Linkerd active for. See [Adding your services to
-Linkerd](../../adding-your-service/) for how to do this.
+Linkerd](../adding-your-service/) for how to do this.
 
 ## Uninstalling the control plane
 

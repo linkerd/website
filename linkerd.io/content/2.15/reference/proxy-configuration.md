@@ -1,7 +1,8 @@
-+++
-title = "Proxy Configuration"
-description = "Linkerd provides a set of annotations that can be used to override the data plane proxy's configuration."
-+++
+---
+title: Proxy Configuration
+description: Linkerd provides a set of annotations that can be used to override the
+  data plane proxy's configuration.
+---
 
 Linkerd provides a set of annotations that can be used to **override** the data
 plane proxy's configuration. This is useful for **overriding** the default
@@ -9,7 +10,7 @@ configurations of [auto-injected proxies](../../features/proxy-injection/).
 
 The following is the list of supported annotations:
 
-{{< cli/annotations "inject" >}}
+{{< docs/cli-annotations "inject" >}}
 
 For example, to update an auto-injected proxy's CPU and memory resources, we
 insert the appropriate annotations into the `spec.template.metadata.annotations`

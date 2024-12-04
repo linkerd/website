@@ -1,7 +1,7 @@
-+++
-title = "Proxy Init Iptables Modes"
-description = "Linkerd's init container can run in two separate modes, nft or legacy."
-+++
+---
+title: Proxy Init Iptables Modes
+description: Linkerd's init container can run in two separate modes, nft or legacy.
+---
 
 To transparently route TCP traffic through the proxy, without any awareness
 from the application, Linkerd will configure a set of [firewall

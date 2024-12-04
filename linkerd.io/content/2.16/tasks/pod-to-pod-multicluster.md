@@ -1,7 +1,7 @@
-+++
-title = "Pod-to-Pod Multi-cluster communication"
-description = "Multi-Cluster Communication for Flat Networks"
-+++
+---
+title: Pod-to-Pod Multi-cluster communication
+description: Multi-Cluster Communication for Flat Networks
+---
 
 By default, Linkerd's [multicluster extension](../multicluster/) works by
 sending all cross-cluster traffic through a gateway on the target cluster.

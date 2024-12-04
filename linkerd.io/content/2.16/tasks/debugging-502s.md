@@ -1,7 +1,7 @@
-+++
-title = "Debugging 502s"
-description = "Determine why Linkerd is returning 502 responses."
-+++
+---
+title: Debugging 502s
+description: Determine why Linkerd is returning 502 responses.
+---
 
 When the Linkerd proxy encounters connection errors while processing a
 request, it will typically return an HTTP 502 (Bad Gateway) response.  It can be

@@ -1,7 +1,7 @@
-+++
-title = "Design Principles"
-weight = 19
-+++
+---
+title: Design Principles
+type: docs
+---
 
 Linkerd is built for you, the operator, SRE, architect, and platform owner. It's
 designed to give you power over your own fate: to provide fundamental

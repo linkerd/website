@@ -2,31 +2,30 @@
 title: Automatic mTLS
 description: Linkerd automatically enables mutual Transport Layer Security (TLS) for all communication between meshed applications.
 weight: 4
-aliases:
-  - ../automatic-tls
-enableFAQSchema: true
-faqs:
-  - question: What traffic can Linkerd automatically mTLS?
-    answer: Linkerd transparently applies mTLS to all TCP communication between
-      meshed pods. However, there are still ways in which you may still have
-      non-mTLS traffic in your system, including traffic to or from non-meshed
-      pods (e.g. Kubernetes healthchecks), and traffic on ports that were
-      marked as skip ports, which bypass the proxy entirely.
-
-  - question: How does Linkerd's mTLS implementation work?
-    answer: The Linkerd control plane contains a certificate authority (CA)
-      called "identity". This CA issues TLS certificates to each Linkerd data
-      plane proxy. Each certificate is bound to the Kubernetes ServiceAccount
-      of the containing pod. These TLS certificates expire after 24 hours and
-      are automatically rotated. The proxies use these certificates to encrypt
-      and authenticate TCP traffic to other proxies.
-
-  - question: What is mTLS?
-    answer: mTLS, or mutual TLS, is simply "regular TLS" with the extra
-      stipulation that the client is also authenticated. TLS guarantees
-      authenticity, but by default this only happens in one direction--the
-      client authenticates the server but the server doesn’t authenticate the
-      client. mTLS makes the authenticity symmetric.
+params:
+  faqSchema:
+    - question: What traffic can Linkerd automatically mTLS?
+      answer: |-
+        Linkerd transparently applies mTLS to all TCP communication between
+        meshed pods. However, there are still ways in which you may still have
+        non-mTLS traffic in your system, including traffic to or from non-meshed
+        pods (e.g. Kubernetes healthchecks), and traffic on ports that were
+        marked as skip ports, which bypass the proxy entirely.
+    - question: How does Linkerd's mTLS implementation work?
+      answer: |-
+        The Linkerd control plane contains a certificate authority (CA)
+        called "identity". This CA issues TLS certificates to each Linkerd data
+        plane proxy. Each certificate is bound to the Kubernetes ServiceAccount
+        of the containing pod. These TLS certificates expire after 24 hours and
+        are automatically rotated. The proxies use these certificates to encrypt
+        and authenticate TCP traffic to other proxies.
+    - question: What is mTLS?
+      answer: |-
+        mTLS, or mutual TLS, is simply "regular TLS" with the extra
+        stipulation that the client is also authenticated. TLS guarantees
+        authenticity, but by default this only happens in one direction--the
+        client authenticates the server but the server doesn’t authenticate the
+        client. mTLS makes the authenticity symmetric.
 ---
 
 By default, Linkerd automatically enables mutually-authenticated Transport

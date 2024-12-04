@@ -1,0 +1,40 @@
+{{- /* Get the CLI data file for the current linkerd version */}}
+{{- $file := replace .Page.Section "." "-" }}
+{{- $data := index site.Data.cli $file }}
+{{- /* Output data */}}
+{{ range where $data.CLIReference "Name" (.Get 0) }}
+  {{ $opts := where .Options "Name" "!=" "help" }}
+  {{ if ge (len $opts) 1 }}
+    <h2>
+      Flags
+    </h2>
+    <table class="keyval">
+      <thead>
+        <tr>
+          <th>
+            Flag
+          </th>
+          <th>
+            Usage
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $opts }}
+          <tr>
+            <td>
+              <code>--{{ .Name }}</code>
+              {{ with .Shorthand }}
+                <br>
+                <code>-{{ . }}</code>
+              {{ end }}
+            </td>
+            <td>
+              {{ .Usage | markdownify }}
+            </td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+{{ end }}

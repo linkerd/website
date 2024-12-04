@@ -1,9 +1,9 @@
-+++
-title = "completion"
-+++
+---
+title: completion
+---
 
-{{< cli/description "completion" >}}
+{{< docs/cli-description "completion" >}}
 
-{{< cli/examples "completion" >}}
+{{< docs/cli-examples "completion" >}}
 
-{{< cli/flags "completion" >}}
+{{< docs/cli-flags "completion" >}}

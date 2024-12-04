@@ -1,0 +1,29 @@
+{{- $data := index site.Data.cli "global-flags" }}
+<table class="keyval">
+  <thead>
+    <tr>
+      <th>
+        Flag
+      </th>
+      <th>
+        Usage
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range $data }}
+      <tr>
+        <td>
+          <code>--{{ .Name }}</code>
+          {{ with .Shorthand }}
+            <br>
+            <code>-{{ . }}</code>
+          {{ end }}
+        </td>
+        <td>
+          {{ .Usage | markdownify }}
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+</table>

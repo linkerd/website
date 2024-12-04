@@ -1,7 +1,7 @@
-+++
-title = "Multi-cluster communication"
-description = "Multi-cluster communication"
-+++
+---
+title: Multi-cluster communication
+description: Multi-cluster communication
+---
 
 Linkerd's [multi-cluster functionality](../../features/multicluster/) allows
 pods to connect to Kubernetes services across cluster boundaries in a way that
@@ -16,9 +16,7 @@ gateway):
 
 These modes can be mixed and matched.
 
-{{< fig
-  alt="Architectural diagram comparing hierarchical and flat network modes"
-  src="/uploads/2023/07/flat_network@2x.png">}}
+![Architectural diagram comparing hierarchical and flat network modes](/docs/images/multicluster/flat-network.png)
 
 Hierarchical mode places a bare minimum of requirements on the underlying
 network, as it only requires that the gateway IP be reachable. However, flat

@@ -1,0 +1,5 @@
+languageCode: en-us
+title: Linkerd
+baseURL: https://linkerd.io/
+disableKinds: [taxonomy, term]
+enableRobotsTXT: true

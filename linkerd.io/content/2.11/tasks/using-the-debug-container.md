@@ -1,7 +1,7 @@
-+++
-title = "Using the Debug Sidecar"
-description = "Inject the debug container to capture network packets."
-+++
+---
+title: Using the Debug Sidecar
+description: Inject the debug container to capture network packets.
+---
 
 Debugging a service mesh can be hard. When something just isn't working, is
 the problem with the proxy? With the application? With the client? With the
@@ -19,7 +19,7 @@ at pod creation time. For convenience, the `linkerd inject` command provides an
 adding this annotation to a pre-existing pod will not work. It must be present
 at pod *creation* time.)
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 The debug sidecar image contains
 [`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html), `tcpdump`,

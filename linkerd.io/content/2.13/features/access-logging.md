@@ -1,13 +1,7 @@
-+++
-title = "HTTP Access Logging"
-description = "Linkerd proxies can be configured to emit HTTP access logs."
-aliases = [
-  "../access-logging/",
-  "../proxy-access-logging/",
-  "../http-access-logging/",
-  "../access-log",
-]
-+++
+---
+title: HTTP Access Logging
+description: Linkerd proxies can be configured to emit HTTP access logs.
+---
 
 Linkerd proxies can be configured to generate an HTTP access log that records
 all HTTP requests that transit the proxy.
@@ -39,7 +33,7 @@ Setting the `config.linkerd.io/access-log: "apache"` annotation configures the
 proxy to emit HTTP access logs in the [Apache Common Log
 Format](https://en.wikipedia.org/wiki/Common_Log_Format). For example:
 
-```text
+```text {class=disable-copy}
 10.42.0.63:51160 traffic.booksapp.serviceaccount.identity.linkerd.cluster.local - [2022-08-23T20:28:20.071809491Z] "GET http://webapp:7000/ HTTP/2.0" 200
 10.42.0.63:51160 traffic.booksapp.serviceaccount.identity.linkerd.cluster.local - [2022-08-23T20:28:20.187706137Z] "POST http://webapp:7000/authors HTTP/2.0" 303
 10.42.0.63:51160 traffic.booksapp.serviceaccount.identity.linkerd.cluster.local - [2022-08-23T20:28:20.301798187Z] "GET http://webapp:7000/authors/104 HTTP/2.0" 200
@@ -50,7 +44,7 @@ Format](https://en.wikipedia.org/wiki/Common_Log_Format). For example:
 Setting the `config.linkerd.io/access-log: json` annotation configures the proxy
 to emit access logs in a JSON format. For example:
 
-```json
+```json {class=disable-copy}
 {"client.addr":"10.42.0.70:32996","client.id":"traffic.booksapp.serviceaccount.identity.linkerd.cluster.local","host":"webapp:7000","method":"GET","processing_ns":"39826","request_bytes":"","response_bytes":"19627","status":200,"timestamp":"2022-08-23T20:33:42.321746212Z","total_ns":"14441135","trace_id":"","uri":"http://webapp:7000/","user_agent":"Go-http-client/1.1","version":"HTTP/2.0"}
 {"client.addr":"10.42.0.70:32996","client.id":"traffic.booksapp.serviceaccount.identity.linkerd.cluster.local","host":"webapp:7000","method":"POST","processing_ns":"30036","request_bytes":"33","response_bytes":"0","status":303,"timestamp":"2022-08-23T20:33:42.436964052Z","total_ns":"14122403","trace_id":"","uri":"http://webapp:7000/authors","user_agent":"Go-http-client/1.1","version":"HTTP/2.0"}
 {"client.addr":"10.42.0.70:32996","client.id":"traffic.booksapp.serviceaccount.identity.linkerd.cluster.local","host":"webapp:7000","method":"GET","processing_ns":"38664","request_bytes":"","response_bytes":"2350","status":200,"timestamp":"2022-08-23T20:33:42.551768300Z","total_ns":"6998222","trace_id":"","uri":"http://webapp:7000/authors/105","user_agent":"Go-http-client/1.1","version":"HTTP/2.0"}

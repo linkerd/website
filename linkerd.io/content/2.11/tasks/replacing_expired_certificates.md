@@ -1,11 +1,11 @@
-+++
-title = "Replacing expired certificates"
-description = "Follow this workflow if any of your TLS certs have expired."
-+++
+---
+title: Replacing expired certificates
+description: Follow this workflow if any of your TLS certs have expired.
+---
 
 If any of your TLS certs are approaching expiry and you are not relying on an
 external certificate management solution such as `cert-manager`, you can follow
-[Manually Rotating Control Plane TLS Credentials](../rotating_identity_certificates/)
+[Manually Rotating Control Plane TLS Credentials](../manually-rotating-control-plane-tls-credentials/)
 to update them without incurring downtime. However, if any of your certificates
 have already expired, your mesh is already in an invalid state and any measures
 to avoid downtime are not guaranteed to give good results. Instead, you need to
@@ -26,7 +26,7 @@ linkerd-identity
 √ issuer cert is using supported crypto algorithm
 × issuer cert is within its validity period
     issuer certificate is not valid anymore. Expired on 2019-12-19T09:21:08Z
-    see https://linkerd.io/checks/#l5d-identity-issuer-cert-is-time-valid for hints
+    see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-is-time-valid for hints
 ```
 
 In this situation, if you have installed Linkerd with a manually supplied trust
@@ -49,7 +49,7 @@ linkerd-identity
 × trust roots are within their validity period
     Invalid roots:
         * 272080721524060688352608293567629376512 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T10:05:31Z
-    see https://linkerd.io/checks/#l5d-identity-roots-are-time-valid for hints
+    see https://linkerd.io/2/checks/#l5d-identity-roots-are-time-valid for hints
 ```
 
 You can follow [Generating your own mTLS root certificates](../generate-certificates/#generating-the-certificates-with-step)
@@ -104,7 +104,7 @@ linkerd-identity-data-plane
         * linkerd/linkerd-sp-validator-6ff949649f-gjgfl
         * linkerd/linkerd-tap-7b5bb954b6-zl9w6
         * linkerd/linkerd-web-84c555f78-v7t44
-    see https://linkerd.io/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 
 ```
 

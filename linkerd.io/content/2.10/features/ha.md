@@ -1,10 +1,7 @@
-+++
-title = "High Availability"
-description = "The Linkerd control plane can run in high availability (HA) mode."
-aliases = [
-  "/2.10/ha/"
-]
-+++
+---
+title: High Availability
+description: The Linkerd control plane can run in high availability (HA) mode.
+---
 
 For production workloads, Linkerd's control plane can run in high availability
 (HA) mode. This mode:

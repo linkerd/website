@@ -1,7 +1,7 @@
-+++
-title = "Distributed tracing with Linkerd"
-description = "Use Linkerd to help instrument your application with distributed tracing."
-+++
+---
+title: Distributed tracing with Linkerd
+description: Use Linkerd to help instrument your application with distributed tracing.
+---
 
 Using distributed tracing in practice can be complex, for a high level
 explanation of what you get and how it is done, we've assembled a [list of
@@ -20,8 +20,7 @@ To use distributed tracing, you'll need to:
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
-{{< fig src="/images/tracing/tracing-topology.svg"
-        title="Topology" >}}
+![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
 
 ## Prerequisites
 
@@ -43,6 +42,21 @@ To install the Linkerd-Jaeger extension, run the command:
 ```bash
 linkerd jaeger install | kubectl apply -f -
 ```
+
+{{< note >}}
+The Linkerd-Jaeger extension currently configures proxies to export traces
+with the OpenCensus protocol by default for backwards compatibility. OpenCensus is
+[sunset and no longer maintained](https://opentelemetry.io/blog/2023/sunsetting-opencensus/),
+so we recommend installing the Linkerd-Jaeger extension with OpenTelemetry as the
+proxy trace export protocol:
+
+```bash
+linkerd jaeger install --set webhook.collectorTraceProtocol=opentelemetry | kubectl apply -f
+```
+
+In the future, the default protocol will be changed to OpenTelemetry so this step
+will no longer be necessary.
+{{< /note >}}
 
 You can verify that the Linkerd-Jaeger extension was installed correctly by
 running:
@@ -81,7 +95,7 @@ information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
 addition of a client library to take care of this. Emojivoto uses the OpenCensus
-client, but others can be used.
+client, but others should be used.
 
 To enable tracing in emojivoto, run:
 
@@ -90,7 +104,8 @@ kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=collector.linkerd-jaeger
 ```
 
 This command will add an environment variable that enables the applications to
-propagate context and emit spans.
+propagate context and emit spans. In the meantime, the collector installed with
+Linkerd-Jaeger will continue to support both protocols.
 
 ## Explore Jaeger
 
@@ -101,20 +116,17 @@ up in Jaeger. To get to the UI, run:
 linkerd jaeger dashboard
 ```
 
-{{< fig src="/images/tracing/jaeger-empty.png"
-        title="Jaeger" >}}
+![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
-{{< fig src="/images/tracing/jaeger-search.png"
-        title="Search" >}}
+![Search](/docs/images/tracing/jaeger-search.png "Search")
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
-{{< fig src="/images/tracing/example-trace.png"
-        title="Search" >}}
+![Search](/docs/images/tracing/example-trace.png "Search")
 
 There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
@@ -130,8 +142,7 @@ meta-data as trace attributes, users can directly jump into related resources
 traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
 the Metrics Table, as shown below:
 
-{{< fig src="/images/tracing/linkerd-jaeger-ui.png"
-        title="Linkerd-Jaeger" >}}
+![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
 
 To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
 extension specifying the service exposing the Jaeger UI. By default, this would
@@ -259,48 +270,40 @@ headers, it's usually much easier to use a library which does three things:
 - Modifies the trace context (i.e. starts a new span)
 - Transmits this data to a trace collector
 
-We recommend using OpenCensus in your service and configuring it with:
+We recommend using OpenTelemetry in your service and configuring it with:
 
 - [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the
   default)
-- [the OpenCensus agent
-  exporter](https://opencensus.io/exporters/supported-exporters/go/ocagent/)
+- [the OpenTelemetry agent
+  exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
 
-The OpenCensus agent exporter will export trace data to the OpenCensus collector
-over a gRPC API. The details of how to configure OpenCensus will vary language
+The OpenTelemetry agent exporter will export trace data to the OpenTelemetry collector
+over a gRPC API. The details of how to configure OpenTelemetry will vary language
 by language, but there are [guides for many popular
-languages](https://opencensus.io/quickstart/). You can also see an end-to-end
-example of this in Go with our example application,
-[Emojivoto](https://github.com/adleong/emojivoto).
-
-You may notice that the OpenCensus project is in maintenance mode and will
-become part of [OpenTelemetry](https://opentelemetry.io/). Unfortunately,
-OpenTelemetry is not yet production ready and so OpenCensus remains our
-recommendation for the moment.
+languages](https://opentelemetry.io/docs/languages/).
 
 It is possible to use many other tracing client libraries as well. Just make
 sure the b3 propagation format is being used and the client library can export
 its spans in a format the collector has been configured to receive.
 
-## Collector: OpenCensus
+## Collector: OpenTelemetry
 
-The OpenCensus collector receives trace data from the OpenCensus agent exporter
+The OpenTelemetry collector receives trace data from the OpenTelemetry agent exporter
 and potentially does translation and filtering before sending that data to
-Jaeger. Having the OpenCensus exporter send to the OpenCensus collector gives us
-a lot of flexibility: we can switch to any backend that OpenCensus supports
+Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector gives
+us a lot of flexibility: we can switch to any backend that OpenTelemetry supports
 without needing to interrupt the application.
 
 ## Backend: Jaeger
 
 Jaeger is one of the most widely used tracing backends and for good reason: it
-is easy to use and does a great job of visualizing traces. However, [any backend
-supported by OpenCensus](https://opencensus.io/service/exporters/) can be used
-instead.
+is easy to use and does a great job of visualizing traces. However, any backend
+supported by OpenTelemetry can be used instead.
 
 ## Linkerd
 
 If your application is injected with Linkerd, the Linkerd proxy will participate
-in the traces and will also emit trace data to the OpenCensus collector. This
+in the traces and will also emit trace data to the trace collector. This
 enriches the trace data and allows you to see exactly how much time requests are
 spending in the proxy and on the wire.
 

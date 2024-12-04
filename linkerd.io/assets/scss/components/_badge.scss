@@ -1,0 +1,12 @@
+/*
+@markup
+<span class="badge">Text</span>
+*/
+
+.badge {
+  display: inline-block;
+  padding: spacer(1) spacer(3);
+  background-color: $green;
+  border-radius: 999px;
+  font-size: $font-size-sm;
+}

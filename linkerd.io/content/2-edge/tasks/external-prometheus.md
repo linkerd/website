@@ -1,7 +1,7 @@
-+++
-title = "Bringing your own Prometheus"
-description = "Use an existing Prometheus instance with Linkerd."
-+++
+---
+title: Bringing your own Prometheus
+description: Use an existing Prometheus instance with Linkerd.
+---
 
 Even though [the linkerd-viz extension](../../features/dashboard/) comes with
 its own Prometheus instance, there can be cases where using an external
@@ -11,7 +11,7 @@ This tutorial shows how to configure an external Prometheus instance to scrape b
 the control plane as well as the proxy's metrics in a format that is consumable
 both by a user as well as Linkerd control plane components like web, etc.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 There are two important points to tackle here.
 

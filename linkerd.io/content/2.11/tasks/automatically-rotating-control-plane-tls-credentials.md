@@ -1,8 +1,7 @@
-+++
-title = "Automatically Rotating Control Plane TLS Credentials"
-description = "Use cert-manager to automatically rotate control plane TLS credentials."
-aliases = [ "use_external_certs" ]
-+++
+---
+title: Automatically Rotating Control Plane TLS Credentials
+description: Use cert-manager to automatically rotate control plane TLS credentials.
+---
 
 Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature uses a set of
 TLS credentials to generate TLS certificates for proxies: a trust anchor, and
@@ -16,7 +15,7 @@ an external solution.
 rotated](../manually-rotating-control-plane-tls-credentials/) on
 long-lived clusters.)
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Cert manager
 

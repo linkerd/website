@@ -1,7 +1,7 @@
-+++
-title = "Using extensions"
-description = "Add functionality to Linkerd with optional extensions."
-+++
+---
+title: Using extensions
+description: Add functionality to Linkerd with optional extensions.
+---
 
 Linkerd extensions are components which can be added to a Linkerd installation
 to enable additional functionality. By default, the following extensions are

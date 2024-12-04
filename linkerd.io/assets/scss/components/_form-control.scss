@@ -1,0 +1,15 @@
+/*
+@markup
+<div class="form-control">
+  <label>Label</label>
+  <input>
+</div>
+*/
+
+.form-control {
+  @include make-stack(2);
+
+  label {
+    font-weight: $font-weight-bold;
+  }
+}
