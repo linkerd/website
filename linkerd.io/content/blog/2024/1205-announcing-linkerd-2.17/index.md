@@ -142,7 +142,7 @@ users. Come see us in London!
 ## Distributions of Linkerd 2.17
 
 [Buoyant](https://buoyant.io/), the creators of Linkerd, has
-[released Buoyant Enterprise for Linkerd 2.17.0](https://buoyant.io/LINKME), and
+[released Buoyant Enterprise for Linkerd 2.17.0](https://buoyant.io/blog/announcing-linkerd-2-17/), and
 published a
 [Linkerd 2.17 changelog](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.17.0/)
 with additional guidance and content.
