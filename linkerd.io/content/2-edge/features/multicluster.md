@@ -39,8 +39,8 @@ splitting](../traffic-split/) or [dynamic request routing](../request-routing/)
 to allow local services to access the *Foo* service as if it were on the local
 cluster.
 
-Linkerd supports two basic forms of multi-cluster communication: hierarchical
-and flat.
+Linkerd supports three basic forms of multi-cluster communication: hierarchical,
+flat, and federated.
 
 ![Architectural diagram comparing hierarchical and flat network modes](/docs/images/multicluster/flat-network.png)
 
@@ -65,11 +65,18 @@ several advantages:
 * Better multi-cluster authorization policies, as workload identity
   is preserved across cluster boundaries.
 
-Hierarchical (gateway-based) and flat (direct pod-to-pod) modes can be combined,
-and pod-to-pod mode can be enabled for specific services by using the
-`remote-discovery` value for the label selector used to export services to other
-clusters. See the [pod-to-pod multicluster
-communication](../../tasks/pod-to-pod-multicluster/) guide and the
+### Federated services
+
+A federated service is a union of services with the same name and namespace
+in multiple different clusters. Meshed clients that send traffic to a federated
+service will have that traffic distributed across all replicas of services in
+the federated service across clusters. Federated services use the *flat
+networking* model and do not use a gateway intermediary.
+
+These modes can be combined, with each specific service selecting the mode that
+is most appropriate for that service. See the
+[pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
+guide, the [federated services](../../tasks/federated-services/) guide, and the
 [multi-cluster reference](../../reference/multicluster/) for more.
 
 ## Headless services
@@ -80,8 +87,8 @@ communication](../../tasks/pod-to-pod-multicluster/) guide and the
 By default, Linkerd will mirror all exported services as Kubernetes `clusterIP`
 services. This also extends to [headless services][headless-svc]; an exported
 headless service will be mirrored as `clusterIP` and have an IP address
-assigned to it. In general, headless services _should not have an IP address_,
-they are used when a workloads needs a stable network identifier or to
+assigned to it. In general, headless services *should not have an IP address*;
+they are used when a workload needs a stable network identifier or to
 facilitate service discovery without being tied to Kubernetes' native
 implementation. This allows clients to either implement their own load
 balancing or to address a pod directly through its DNS name. In certain
@@ -110,14 +117,17 @@ exported as a headless service, the hosts backing the service need to be named
 Deployment would not be supported, since they do not allow for arbitrary
 hostnames in the pod spec).
 
+Note that headless services can *not* be part of a federated service.
+
 Ready to get started? See the [getting started with multi-cluster
 guide](../../tasks/multicluster/) for a walkthrough.
 
 ## Further reading
 
-* [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
+* [Multi-cluster installation instructions](../../tasks/installing-multicluster/)
 * [Pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
-* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
+* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/)
+* [Federated services](../../tasks/federated-services/)
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster

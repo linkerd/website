@@ -24,6 +24,9 @@ Source code for the linkerd.io website.
    For Linux users, download the **extended** release of Hugo from its GitHub
    [release page](https://github.com/gohugoio/hugo/releases).
 
+   The minimum version of Hugo that is required to build linkerd.io is
+   **v0.131.0**.
+
 1. From the root `/website` directory, build site and run Hugo in development mode:
 
     ```bash

@@ -6,6 +6,8 @@ description: |-
   engagement, and a commitment to sharing their Linkerd experience with the
   broader community. Linkerd Ambassadors are hand-picked by the Linkerd
   maintainers.
+
+  Interested in becoming a Linkerd Ambassador? **[Learn more](../ambassadors-apply/)**
 layout: ambassadors
 params:
   ambassadors:
