@@ -20,6 +20,10 @@ charles:
   avatar: authors/charles-pretzer.jpg
   email: charles@buoyant.io
   name: Charles Pretzer
+chris-campbell:
+  avatar: authors/chris-campbell.png
+  email: campbel@hey.com
+  name: Chris Campbell, Linkerd Ambassador
 community:
   email: marketing@buoyant.io
   name: Contributor
