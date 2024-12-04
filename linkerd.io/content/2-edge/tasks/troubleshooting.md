@@ -1084,7 +1084,21 @@ Example warning:
 This happens when one of the control plane pods doesn't have at least two
 replicas running. This is likely caused by insufficient node resources.
 
-### The "extensions" checks {#extensions}
+## Extensions {#extensions}
+
+### √ namespace configuration for extensions {#l5d-extension-namespaces}
+
+Linkerd's extension model requires that each namespace that "owns" an extension
+to be labelled with the extension name. For example, the namespace viz is
+installed in would be labelled with `linkerd.io/extension=viz`. This warning is
+triggered if an extension value is used for the label key more than once across
+the cluster.
+
+To resolve this warning, ensure that the `linkerd.io/extension` namespace label
+does not have any dupliate values, indicating that an extension has been
+installed more than once in different namespaces.
+
+### Extensions checks
 
 When any [Extensions](../extensions/) are installed, The Linkerd binary tries to
 invoke `check --output json` on the extension binaries. It is important that the
@@ -1312,6 +1326,16 @@ Example error:
 ```
 
 Make sure all the link objects are specified in the expected format.
+
+### √ Link and CLI versions match {#l5d-multicluster-links-version}
+
+This warning indicates that there are Link resources which do not match the
+version of the CLI. This usually means that the CLI has been upgraded but that
+the Link resources have not and certain features may not be supported on those
+Links until they are upgraded.
+
+To upgrade a Link, regenerate it. Refer to the [multicluster docs](../multicluster/#linking-the-clusters)
+for instructions on how to do this.
 
 ### √ remote cluster access credentials are valid {#l5d-smc-target-clusters-access}
 
