@@ -335,7 +335,7 @@ spec:
           done
         command:
         - /bin/sh
-        image: appropriate/curl
+        image: curlimages/curl
         name: traffic
 EOF
 ```
