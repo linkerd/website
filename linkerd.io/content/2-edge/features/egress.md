@@ -22,5 +22,6 @@ Linkerd's egress controls combined with CNI-level configuration.
 
 Related content:
 
-* [Guide:  Managing egress traffic]({{< relref "../tasks/managing-egress-traffic" >}})
+* [Guide:  Managing egress traffic]
+  ({{< relref "../tasks/managing-egress-traffic" >}})
 * [EgressNetwork Reference]({{< relref "../reference/egress-network" >}})
