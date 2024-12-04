@@ -23,9 +23,9 @@ policies, make sure to set `accessPolicy` to a permissive value like
 | field| value |
 |------|-------|
 | `targetRef`| A reference to the [Server](../../reference/authorization-policy/#server) this policy applies to. |
-| `total.requestsPerSecond`| Overall rate limit, which all traffic coming to the `targetRef` should abide. If unset no overall limit is applied. |
-| `total.identity`| Fairness for individual identities; each separate client, grouped by identity, will have this rate limit. The `requestsPerSecond` value should be less than or equal to `total.requestsPerSecond` (if set). |
-| `overrides`| An array of [overrides](#overrides) for traffic from specific clients. The `requestsPerSecond` values should be less than or equal to `total.requestsPerSecond` (if set). |
+| `total.requestsPerSecond`| Overall rate limit for all traffic sent to the `targetRef`. If unset no overall limit is applied. |
+| `identity.requestsPerSecond`| Fairness for individual identities; each separate client, grouped by identity, will have this rate limit. If `total.requestsPerSecond` is also set, `identity.requestsPerSecond` cannot be greater than `total.requestsPerSecond`. |
+| `overrides`| An array of [overrides](#overrides) for traffic from specific client. |
 {{< /keyval >}}
 
 ### Overrides
@@ -33,7 +33,7 @@ policies, make sure to set `accessPolicy` to a permissive value like
 {{< keyval >}}
 | field| value |
 |------|-------|
-| `requestsPerSecond`| The number of requests per second allowed from clients matching `clientRefs`. |
+| `requestsPerSecond`| The number of requests per second allowed from clients matching `clientRefs`. If `total.requestsPerSecond` is also set, the `requestsPerSecond` for each `overrides` entry cannot be greater than `total.requestsPerSecond`. |
 | `clientRefs.kind`| Kind of the referent. Currently only ServiceAccount is supported. |
 | `clientRefs.namespace`| Namespace of the referent. When unspecified (or empty string), this refers to the local namespace of the policy. |
 | `clientRefs.name`| Name of the referent. |

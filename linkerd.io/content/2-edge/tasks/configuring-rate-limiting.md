@@ -63,8 +63,7 @@ EOF
 ```
 
 Now we can apply the `HTTPLocalRateLimitPolicy` resource pointing to that
-`Server`. For now, we'll constraint ourselves to just setting a limit of 4 RPS
-per identity:
+`Server`. For now, we'll just set a limit of 4 RPS per identity:
 
 ```yaml
 kubectl apply -f - <<EOF

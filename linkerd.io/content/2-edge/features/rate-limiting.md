@@ -3,8 +3,8 @@ title: Rate Limiting
 description: Linkerd offers a simple and performant HTTP local rate limiting solution to protect services from misbehaved clients
 ---
 
-Rate limiting helps protecting a service by controlling its inbound traffic flow
-to prevent overload, ensure fair resource use, enhance security, manage costs,
+Rate limiting helps protect a service by controlling its inbound traffic flow to
+prevent overload, ensure fair resource use, enhance security, manage costs,
 maintain quality, and comply with SLAs.
 
 Please check the [Configuring Rate Limiting
@@ -16,9 +16,9 @@ doc](../../reference/rate-limiting/).
 
 Linkerd offers a _local_ rate limiting solution, which means that each inbound
 proxy performs the limiting for the pod. This is unlike _global_ rate limiting,
-which takes into account each service's replica to track the global requests
-volume, the trade-off being this requires an external service and is more
-complex to deploy and maintain.
+which takes into account all replicas for each service to track global request
+volume. Global rate limiting requires an additional service to track everything
+and is thus more complex to deploy and maintain.
 
 ## Fairness
 
@@ -28,8 +28,8 @@ source.
 
 Additionally, you can specify fairness among clients by declaring a limit per
 identity. This avoids specific clients gobbling all the rate limit quota and
-affect all the other clients. Note that all unmeshed sources (which don't have
-an identity) are treated as a single source.
+affecting all the other clients. Note that all unmeshed sources (which don't
+have an identity) are treated as a single source.
 
 Finally, you also have at your disposal the ability to override the config for
 specific clients by their identity.
@@ -46,7 +46,7 @@ The GCRA has two parameters: cell rate and tolerance.
 In its virtual scheduling description, the algorithm determines a theoretical
 arrival time, representing the 'ideal' arrival time of a cell (request) if cells
 (requests) were transmitted at equal intervals of time, corresponding to the
-cell rate. How close a flow of requests should abide to that arrival time is
+cell rate. How closely the flow of requests should abide to that arrival time is
 determined by the tolerance parameter.
 
 In Linkerd we derive the cell rate from the `requestsPerSecond` entries in
