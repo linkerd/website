@@ -10,11 +10,12 @@ targeted to destinations that reside outside of the cluster.
 {{< warning >}}
 
 No service mesh can provide a strong security guarantee about egress traffic
-by itself; for example, a malicious actor could use an unmeshed application
-pod to bypass the Linkerd sidecar - and thus Linkerd's egress controls -
-entirely. Fully restricting egress traffic in the presence of arbitrary
-applications thus typically requires a more comprehensive approach, such as
-Linkerd's egress controls combined with CNI-level configuration.
+by itself; for example, a malicious actor could bypass the Linkerd sidecar -
+and thus Linkerd's egress controls - entirely. Fully restricting egress
+traffic in the presence of arbitrary applications thus typically requires a
+more comprehensive approach.
+
+{{< /warning >}}
 
 {{< /warning >}}
 
