@@ -8,6 +8,17 @@ controlled by creating `EgressNetwork` resources, which describe the properties
 of traffic that leaves a cluster and provide a way to apply policies to it, using
 Gateway API primitives.
 
+{{< warning >}}
+
+No service mesh can provide a strong security guarantee about egress traffic
+by itself; for example, a malicious actor could use an unmeshed application
+pod to bypass the Linkerd sidecar - and thus Linkerd's egress controls -
+entirely. Fully restricting egress traffic in the presence of arbitrary
+applications thus typically requires a more comprehensive approach, such as
+Linkerd's egress controls combined with CNI-level configuration.
+
+{{< /warning }}
+
 ## EgressNetwork semantics
 
 An `EgressNetwork` is essentially a description for a set of traffic
