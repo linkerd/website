@@ -82,7 +82,7 @@ outbound_http_route_request_statuses_total{
 } 697
 ```
 
-Notice that these raw metrics allow to quickly identify egress traffic targeted
+Notice that these raw metrics allow you to quickly identify egress traffic targeted
 towards different destinations simply by querying for `parent_kind` of type
 `EgressNetwork`. For now all traffic is allowed and we are simply observing it.
 We can also observe that because our `EgressNetwork` default traffic policy is
@@ -124,7 +124,7 @@ outbound_http_route_request_statuses_total{
 ```
 
 We can clearly observe now that the traffic targets the same parent but the
-name of the route is not `http-egress-deny`. Furthermore, the `http_status` is
+name of the route is now `http-egress-deny`. Furthermore, the `http_status` is
 `403` or `Forbidden`. By changing the traffic policy to `Deny`, we have forbidden
 all egress traffic originating from the local namespace. In order to allow some
 of it, we can make use of the Gateway API types. Assume that you want to
@@ -274,7 +274,7 @@ following rules:
 - all other unencrypted HTTP traffic need to be redirected to an
   internal service
 
-To begin with, lets create our internal service to which traffic should be
+To begin with, let's create our internal service to which traffic should be
 redirected:
 
 ```bash

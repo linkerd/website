@@ -4,7 +4,7 @@ title: EgressNetwork
 
 Linkerd's [egress functionality]({{< relref "../features/egress">}}) allows
 you to monitor and control traffic that leaves the cluster. This behavior is
-controller by creating `EgressNetwork` resources, which describe the properties
+controlled by creating `EgressNetwork` resources, which describe the properties
 of traffic that leaves a cluster and provide a way to apply policies to it, using
 Gateway API primitives.
 
