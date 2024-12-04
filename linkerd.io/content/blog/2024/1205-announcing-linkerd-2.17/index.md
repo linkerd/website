@@ -17,7 +17,7 @@ clusters into a single logical service. This release also updates Linkerd to
 support OpenTelemetry for distributed tracing.
 
 Linkerd 2.17 is our first major release since our
-[announcement of Linkerd's sustainability in October](https://linkerd.io/2024/10/23/making-linkerd-sustainable/).
+[announcement of Linkerd's sustainability in October](/2024/10/23/making-linkerd-sustainable/).
 Not unrelatedly, it is one of the first Linkerd releases in years to introduce
 multiple significant features at once. Despite this, we worked hard to stay true
 to Linkerd's core design principle of _simplicity_. For example, these new
@@ -66,7 +66,7 @@ spec:
 
 Rate limiting is a reliability mechanism that protects services from being
 overloaded. In contrast to
-[Linkerd's circuit breaking feature](https://linkerd.io/2-edge/reference/circuit-breaking/),
+[Linkerd's circuit breaking feature](/2/reference/circuit-breaking/),
 which is client-side behavior designed to protect clients from failing services,
 rate limiting is server-side behavior: it is enforced by the service receiving
 the traffic and designed to protect it from misbehaving clients.
@@ -127,7 +127,7 @@ Linkerd 2.8, was designed for the ad-hoc, pair-to-pair connectivity that was
 common at the time. However, modern Kubernetes platforms are often much more
 intentional in their multicluster usage, sometimes ranging into the hundreds or
 thousands of clusters. Federated services join features such as
-[flat network / pod-to-pod multicluster](https://linkerd.io/2.16/tasks/pod-to-pod-multicluster/)
+[flat network / pod-to-pod multicluster](/2/tasks/pod-to-pod-multicluster/)
 (introduced in Linkerd 2.14) in the toolbox for this new class of Kubernetes
 adoption.
 
@@ -151,12 +151,12 @@ with additional guidance and content.
 
 Linkerd is a graduated project of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we’d love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/community/get-involved/). Come and join
+the [mailing lists](/community/get-involved/). Come and join
 the fun!
 
 ## Photo credit
