@@ -87,8 +87,8 @@ guide, the [federated services](../../tasks/federated-services/) guide, and the
 By default, Linkerd will mirror all exported services as Kubernetes `clusterIP`
 services. This also extends to [headless services][headless-svc]; an exported
 headless service will be mirrored as `clusterIP` and have an IP address
-assigned to it. In general, headless services *should not have an IP address*,
-they are used when a workloads needs a stable network identifier or to
+assigned to it. In general, headless services *should not have an IP address*;
+they are used when a workload needs a stable network identifier or to
 facilitate service discovery without being tied to Kubernetes' native
 implementation. This allows clients to either implement their own load
 balancing or to address a pod directly through its DNS name. In certain
