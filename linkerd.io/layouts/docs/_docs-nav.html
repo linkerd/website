@@ -54,7 +54,7 @@
         <a href="{{ .RelPermalink }}">
           {{ .LinkTitle }}
         </a>
-        {{ if and .IsSection .RegularPages }}
+        {{ if and .IsSection .Pages }}
           <input class="toggle__input" type="checkbox" id="toggle-{{ .File.UniqueID }}" {{ if $selected }}checked="checked"{{ end }}>
           <label class="toggle__label" for="toggle-{{ .File.UniqueID }}">
             {{ partial "components/icon" (dict "name" "chevron-right" "variant" "secondary") }}
