@@ -107,9 +107,9 @@ provide will _replace_, not augment, the default list of opaque ports.
 
 {{< note >}}
 If you are using [authorization policies](../server-policy/), the `Server`'s
-`proxyProtocol` field which can be used to control protocol detection behavior
-and can be used instead of a Service annotation. Regardless, we suggest
-annotating the Service object for clarity.
+`proxyProtocol` field can be used to control protocol detection behavior
+instead of a Service annotation. Regardless, we suggest annotating the
+Service object for clarity.
 {{< /note >}}
 
 ## Marking ports as skip ports
