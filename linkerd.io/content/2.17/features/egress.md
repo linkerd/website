@@ -1,5 +1,6 @@
 ---
 title: Egress
+description: Linkerd features capabilities to monitor and apply policies to egress traffic.
 ---
 
 Linkerd features capabilities to monitor and apply policies to egress traffic.
@@ -21,6 +22,6 @@ more comprehensive approach.
 
 Related content:
 
-* [Guide:  Managing egress traffic]
-  ({{< relref "../tasks/managing-egress-traffic" >}})
+* [Guide: Managing egress traffic]({{< relref
+  "../tasks/managing-egress-traffic" >}})
 * [EgressNetwork Reference]({{< relref "../reference/egress-network" >}})

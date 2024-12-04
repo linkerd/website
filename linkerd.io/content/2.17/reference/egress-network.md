@@ -1,5 +1,6 @@
 ---
 title: EgressNetwork
+description: Reference guide to the EgressNetwork resource.
 ---
 
 Linkerd's [egress functionality]({{< relref "../features/egress">}}) allows
