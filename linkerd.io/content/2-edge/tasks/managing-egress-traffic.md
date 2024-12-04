@@ -17,8 +17,6 @@ more comprehensive approach.
 
 {{< /warning >}}
 
-{{< /warning >}}
-
 ## Visualizing egress traffic
 
 In order to be able to capture egress traffic and apply policies to it we will
