@@ -20,8 +20,14 @@
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with .Params.author }}
+      {{- if (reflect.IsMap .) }}
+      {{- /* Get author data from page params */}}
+      <author>{{ .name }}</author>
+      {{- else }}
+      {{- /* Get author data from global data source */}}
       {{- with index site.Data.authors . }}
       <author>{{ .name }}</author>
+      {{- end }}
       {{- end }}
       {{- end }}
       <guid>{{ .Permalink }}</guid>
