@@ -3,7 +3,7 @@ date: 2024-12-05T00:00:00Z
 slug: announcing-linkerd-2.17
 title: |-
   Announcing Linkerd 2.17: Egress, Rate Limiting, and Federated Services
-keywords: [linkerd, "2.17", features]
+keywords: [linkerd, '2.17', features]
 params:
   author: william
   showCover: true
@@ -66,10 +66,10 @@ spec:
 
 Rate limiting is a reliability mechanism that protects services from being
 overloaded. In contrast to
-[Linkerd's circuit breaking feature](/2/reference/circuit-breaking/),
-which is client-side behavior designed to protect clients from failing services,
-rate limiting is server-side behavior: it is enforced by the service receiving
-the traffic and designed to protect it from misbehaving clients.
+[Linkerd's circuit breaking feature](/2/reference/circuit-breaking/), which is
+client-side behavior designed to protect clients from failing services, rate
+limiting is server-side behavior: it is enforced by the service receiving the
+traffic and designed to protect it from misbehaving clients.
 
 Just as with egress, Linkerd's rate limiting feature is designed to require
 minimal configuration, while still being flexible and configurable to a wide
@@ -139,11 +139,17 @@ at Kubecon London. Many of the Linkerd maintainers will be in attendance, and
 we're expecting a great lineup of Linkerd talks as well as plenty of Linkerd
 users. Come see us in London!
 
-## Distributions of Linkerd 2.17
+## How to get Linkerd 2.17
 
-[Buoyant](https://buoyant.io/), the creators of Linkerd, has
-[released Buoyant Enterprise for Linkerd 2.17.0](https://buoyant.io/blog/announcing-linkerd-2-17/), and
-published a
+The
+[edge-24.11.8](https://github.com/linkerd/linkerd2/releases/tag/edge-24.11.8)
+release is the corresponding edge release for Linkerd 2.17. See the
+[Linkerd releases page](/releases/) for more.
+
+[Buoyant](https://buoyant.io/), the creators of Linkerd, has additionally
+released
+[Buoyant Enterprise for Linkerd 2.17.0](https://buoyant.io/blog/announcing-linkerd-2-17/)
+and published a
 [Linkerd 2.17 changelog](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.17.0/)
 with additional guidance and content.
 
@@ -156,9 +162,9 @@ If you have feature requests, questions, or comments, we’d love to have you jo
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](/community/get-involved/). Come and join
-the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 ## Photo credit
 
-Photo by [Aliaksei Semirski](https://www.pexels.com/photo/racer-balancing-sidecar-motocross-26436389/).
+Photo by
+[Aliaksei Semirski](https://www.pexels.com/photo/racer-balancing-sidecar-motocross-26436389/).
