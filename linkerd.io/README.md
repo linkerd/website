@@ -55,8 +55,7 @@ params:
 
 For inline author data, the avatar image can either be a page resource or a
 remote image. To use a remote image, simply provide the full url to the image,
-and Hugo will download and resize it when when the site is published.
-For example:
+and Hugo will download and resize it when the site is published. For example:
 
 ```yaml
 params:
