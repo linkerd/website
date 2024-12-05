@@ -3,7 +3,7 @@ date: 2024-12-05T00:00:00Z
 slug: announcing-linkerd-2.17
 title: |-
   Announcing Linkerd 2.17: Egress, Rate Limiting, and Federated Services
-keywords: [linkerd, '2.17', features]
+keywords: [linkerd, "2.17", features]
 params:
   author: william
   showCover: true
@@ -116,8 +116,8 @@ transparent and automatic as well. Linkerd will transparently handle a wide
 variety of situations, including:
 
 - An entire cluster is down
-- A cluster is up the service on that cluster is down, or failing in some way
-  (including L7 failures, e.g. returning 5xx response codes)
+- A cluster is up but the service on that cluster is down, or failing in some
+  way (including L7 failures, e.g. returning 5xx response codes)
 - A cluster is slow, or the service is slow
 
 In all these cases, Linkerd will automatically load balance across all service
