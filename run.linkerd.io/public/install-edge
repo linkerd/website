@@ -101,7 +101,7 @@ case $OS in
     exit 1
     ;;
 esac
-OS=$(echo $OS | tr '[:upper:]' '[:lower:]')
+OS=$(echo "$OS" | tr '[:upper:]' '[:lower:]')
 
 checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
   echo "Failed to find checksum binary. Please install openssl or shasum."

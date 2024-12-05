@@ -3,22 +3,20 @@ name: validate
 on:
   pull_request:
     paths:
+    - .github/workflows/validate.yml
     - linkerd.io/**
 
 jobs:
   linkerd_io:
     name: Validate generated HTML
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/linkerd/dev:v39
-      options: --user root
     steps:
+    - uses: linkerd/dev/actions/setup-tools@v44
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: On create
-      run: |
-        .devcontainer/on-create.sh
+      run: .devcontainer/on-create.sh
 
     - name: Lint markdown
       run: |
