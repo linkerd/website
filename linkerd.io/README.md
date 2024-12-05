@@ -32,7 +32,7 @@ params:
 
 #### Assigning an author
 
-There are 2 way to assign an author to a blog post.
+There are 2 ways to assign an author to a blog post.
 
 1. If the author has more than one blog post, the author data should be defined
    in `data/authors.yaml`, then the author id can be set in the frontmatter
@@ -44,7 +44,7 @@ params:
 ```
 
 2. If the author is only going to have a single blog post, the author data can
-   be set inline. For example:
+   be set inline if desired. For example:
 
 ```yaml
 params:
@@ -54,7 +54,8 @@ params:
 ```
 
 For inline author data, the avatar image can either be a page resource or a
-remote image. To use a remote image, simply provide the full url to the image.
+remote image. To use a remote image, simply provide the full url to the image,
+and Hugo will download and resize it when when the site is published.
 For example:
 
 ```yaml
