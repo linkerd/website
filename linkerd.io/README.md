@@ -53,10 +53,19 @@ params:
     avatar: avatar.png
 ```
 
-For inline author data, the avatar image has to be a page resource.
+For inline author data, the avatar image can either be a page resource or a
+remote image. To use a remote image, simply provide the full url to the image.
+For example:
+
+```yaml
+params:
+  author:
+    name: John Smith
+    avatar: https://example.com/avatars/john-smith.png
+```
 
 **Note:** If an author only has a single blog post, but there's a chance they
-will have more in the future, please not use this method.
+will have more in the future, please not use the inline method.
 
 #### Cover, thumbnail, and feature images
 
@@ -133,7 +142,7 @@ example:
 To dispplay a caption below the image, provide an image title. For example:
 
 ```markdown
-![Alt text](my-image.jpg 'My image caption')
+![Alt text](my-image.jpg "My image caption")
 ```
 
 ### Hiding pages in the docs sidenav

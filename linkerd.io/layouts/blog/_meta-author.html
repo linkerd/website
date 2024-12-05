@@ -6,9 +6,18 @@
     {{/* Get author data from page params */}}
     {{ $authorName = .name }}
     {{ with .avatar }}
-      {{/* Avatar must be page resource */}}
-      {{ with $.Resources.GetMatch . }}
-        {{ $authorRes = . }}
+      {{ if hasPrefix . "http" }}
+        {{/* Avatar is a remote image */}}
+        {{ with resources.GetRemote . }}
+          {{ $authorRes = . }}
+        {{ else }}
+          {{ warnf "Unable to get remote resource %q" . }}
+        {{ end }}
+      {{ else }}
+        {{/* Otherwise avatar must be page resource */}}
+        {{ with $.Resources.GetMatch . }}
+          {{ $authorRes = . }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ else }}
