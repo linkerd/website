@@ -133,9 +133,9 @@ adoption.
 
 ## Linkerd Day at Kubecon London
 
-Next April we're happy to report that
+We're delighted to report that
 [the CNCF is hosting Linkerd Day](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/co-located-events/linkerd-day/)
-at Kubecon London. Many of the Linkerd maintainers will be in attendance, and
+at Kubecon London next April! Many of the Linkerd maintainers will be in attendance, and
 we're expecting a great lineup of Linkerd talks as well as plenty of Linkerd
 users. Come see us in London!
 
