@@ -62,6 +62,8 @@ spec:
   trafficPolicy: Allow
 ```
 
+See [egress docs](/2/features/egress/) for more.
+
 ## Rate limiting
 
 Rate limiting is a reliability mechanism that protects services from being
@@ -97,6 +99,8 @@ clients. Combined with retries, timeouts, circuit breaking, latency-aware load
 balancing, and dynamic traffic routing, rate limiting extends Linkerd's already
 wide arsenal of in-cluster distributed system reliability features.
 
+See [rate limiting docs](/2/features/rate-limiting/) for more.
+
 ## Federated services
 
 In Linkerd 2.17 we've shipped an exciting new multicluster feature: _federated
@@ -131,13 +135,16 @@ thousands of clusters. Federated services join features such as
 (introduced in Linkerd 2.14) in the toolbox for this new class of Kubernetes
 adoption.
 
+See [federated services docs](/2/features/multicluster/#federated-services) for
+more.
+
 ## Linkerd Day at Kubecon London
 
 We're delighted to report that
 [the CNCF is hosting Linkerd Day](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/co-located-events/linkerd-day/)
-at Kubecon London next April! Many of the Linkerd maintainers will be in attendance, and
-we're expecting a great lineup of Linkerd talks as well as plenty of Linkerd
-users. Come see us in London!
+at Kubecon London next April! Many of the Linkerd maintainers will be in
+attendance, and we're expecting a great lineup of Linkerd talks as well as
+plenty of Linkerd users. Come see us in London!
 
 ## How to get Linkerd 2.17
 
