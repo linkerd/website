@@ -62,7 +62,7 @@ spec:
   trafficPolicy: Allow
 ```
 
-See [egress docs](/2/features/egress/) for more.
+See [egress docs](/2.17/features/egress/) for more.
 
 ## Rate limiting
 
@@ -99,7 +99,7 @@ clients. Combined with retries, timeouts, circuit breaking, latency-aware load
 balancing, and dynamic traffic routing, rate limiting extends Linkerd's already
 wide arsenal of in-cluster distributed system reliability features.
 
-See [rate limiting docs](/2/features/rate-limiting/) for more.
+See [rate limiting docs](/2.17/features/rate-limiting/) for more.
 
 ## Federated services
 
@@ -135,8 +135,8 @@ thousands of clusters. Federated services join features such as
 (introduced in Linkerd 2.14) in the toolbox for this new class of Kubernetes
 adoption.
 
-See [federated services docs](/2/features/multicluster/#federated-services) for
-more.
+See [federated services docs](/2.17/features/multicluster/#federated-services)
+for more.
 
 ## Linkerd Day at Kubecon London
 
