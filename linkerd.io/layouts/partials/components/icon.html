@@ -1,0 +1,35 @@
+{{/*
+@param {string} [name] Name of icon file
+@param {string} [variant] "primary", "secondary", "info", "success", "warning", "danger", or "current"
+@param {string} [size] "xs", "sm", "md", "lg", or "xl"
+@param {string} [class] Additional class name
+
+@example {{ partial "components/icon" (dict "name" "file" "variant" "primary" "size" "large") }}
+*/}}
+{{ $svg := "" }}
+{{ with resources.Get (printf "icons/%s.svg" .name) }}
+  {{ $svg = .Content }}
+{{ end }}
+{{ if $svg }}
+  {{ $class := slice "icon" }}
+  {{/* Get variant */}}
+  {{ if or (eq .variant "primary") (eq .variant "secondary") (eq .variant "info") (eq .variant "success") (eq .variant "warning") (eq .variant "danger") (eq .variant "current") }}
+    {{ $class = $class | append (printf "icon--%s" .variant) }}
+  {{ end }}
+  {{/* Get size */}}
+  {{ if or (eq .size "xs") (eq .size "sm") (eq .size "md") (eq .size "lg") (eq .size "xl") }}
+    {{ $class = $class | append (printf "icon--%s" .size) }}
+  {{ end }}
+  {{/* Get additional class name */}}
+  {{ if .class }}
+    {{ $class = $class | append .class }}
+  {{ end }}
+  {{/* Build class names */}}
+  {{ $class = delimit $class " " }}
+  {{/* Output */}}
+  {{ $svg = $svg | replaceRE "<svg " (printf "<svg class=%q " $class) | chomp }}
+  {{/* Output */}}
+  {{ return ($svg | safeHTML) }}
+{{ else }}
+  {{ warnf "Unable to get icon %q" .name }}
+{{ end }}

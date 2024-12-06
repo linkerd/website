@@ -1,0 +1,60 @@
+/*
+@markup
+<div class="alert">
+  <div class="alert__title">
+    <svg class="icon">...</svg>
+    Title
+  </div>
+  <div class="alert__content">
+    ...
+  </div>
+</div>
+*/
+
+.alert {
+  @include make-stack(3);
+  background-color: $light-gray;
+  border: solid 1px $border-color;
+  border-radius: $border-radius;
+  padding: spacer(3) spacer(4);
+
+  .alert__title {
+    display: flex;
+    gap: spacer(2);
+    align-items: center;
+
+    & > * {
+      margin-bottom: 0;
+    }
+  }
+  .alert__content {
+    @include make-stack(3);
+  }
+
+  // @options
+
+  &.alert--callout {
+    border-width: 3px;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  &.alert--condensed {
+    padding: spacer(2) spacer(3);
+  }
+  &.alert--center {
+    .alert__title {
+      justify-content: center;
+    }
+    .alert__content {
+      text-align: center;
+    }
+  }
+  @each $state, $colors in $state-colors {
+    &.alert--#{$state} {
+      color: map-get($colors, "text");
+      background-color: map-get($colors, "background");
+      border-color: map-get($colors, "border");
+    }
+  }
+}

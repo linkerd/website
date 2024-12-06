@@ -1,0 +1,68 @@
+/*
+@markup
+<img class="img img--64 img--rounded">
+*/
+
+.img {
+  display: block;
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center center;
+
+  // @options
+
+  &.img--round {
+    border-radius: 999px;
+  }
+  &.img--rounded {
+    border-radius: $border-radius;
+  }
+  &.img--center {
+    margin: 0 auto;
+  }
+
+  // Fit
+
+  &.img--contain {
+    object-fit: contain;
+  }
+  &.img--cover {
+    object-fit: cover;
+  }
+
+  // Fill parent container
+
+  &.img--fill {
+    width: 100%;
+  }
+  &.img--max-fill {
+    max-width: 100%;
+  }
+
+  // Sizing
+
+  @each $name, $size in $image-sizes {
+    // Set to square
+    &.img--#{$name} {
+      width: #{$size};
+      height: #{$size};
+    }
+    // Set width
+    &.img--w#{$name} {
+      width: #{$size};
+    }
+    // Set height
+    &.img--h#{$name} {
+      height: #{$size};
+    }
+    // Set max width
+    &.img--max-w#{$name} {
+      max-width: #{$size};
+    }
+    // Set max height
+    &.img--max-h#{$name} {
+      max-height: #{$size};
+    }
+  }
+}

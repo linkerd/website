@@ -1,16 +1,9 @@
-+++
-title = "Getting Started"
-aliases = [
-  "/getting-started/istio/",
-  "/choose-your-platform/",
-  "/../katacoda/",
-  "/doc/getting-started",
-  "/getting-started"
-]
-weight = 2
-[sitemap]
-  priority = 1.0
-+++
+---
+title: Getting Started
+weight: 2
+sitemap:
+  priority: 1.0
+---
 
 Welcome to Linkerd! 🎈
 
@@ -169,8 +162,7 @@ linkerd viz dashboard &
 
 You should see a screen like this:
 
-{{< fig src="/images/getting-started/viz-empty-dashboard.png"
-    title="The Linkerd dashboard in action" >}}
+![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png "The Linkerd dashboard in action")
 
 If you installed the buoyant-cloud extension, run:
 
@@ -179,8 +171,8 @@ linkerd buoyant dashboard &
 ```
 
 You should see a screen lke this:
-{{< fig src="/images/getting-started/bcloud-empty-dashboard.png"
-    title="The Linkerd dashboard in action" >}}
+
+![Buoyant Coud in action](/docs/images/getting-started/bcloud-empty-dashboard.png "Buoyant Coud in action")
 
 Click around, explore, and have fun! One thing you'll see is that, even if you
 don't have any applications running on this cluster, you still have traffic!
@@ -217,7 +209,7 @@ app in all its glory.
 Clicking around, you might notice that some parts of *emojivoto* are broken!
 For example, if you click on a doughnut emoji, you'll get a 404 page.  Don't
 worry, these errors are intentional. (And we can use Linkerd to identify the
-problem. Check out the [debugging guide](../debugging-an-app/) if you're
+problem. Check out the [debugging guide](../tasks/debugging-your-service/) if you're
 interested in how to figure out exactly what is wrong.)
 
 Next, let's add Linkerd to *emojivoto* by running:
@@ -250,8 +242,8 @@ linkerd -n emojivoto check --proxy
 
 Congratulations, you're now a Linkerd user! Here are some suggested next steps:
 
-* Use Linkerd to [debug the errors in *emojivoto*](../debugging-an-app/)
-* [Add your own service](../adding-your-service/) to Linkerd without downtime
+* Use Linkerd to [debug the errors in *emojivoto*](../tasks/debugging-your-service/)
+* [Add your own service](../tasks/adding-your-service/) to Linkerd without downtime
 * Set up [automatic control plane mTLS credential
   rotation](../tasks/automatically-rotating-control-plane-tls-credentials/) or
   set a reminder to [do it

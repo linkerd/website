@@ -1,3 +1,16 @@
+# Do not ignore `resources/_gen/images`.
+# Hugo caches processed images in this directory. If you include this
+# directory in source control, Hugo will not have to regenerate the images in a
+# CI/CD workflow. This results in faster builds.
+# 
+# If you change image processing methods or options, or if you rename or remove
+# images, the resources directory will contain unused images. To remove the
+# unused images, perform garbage collection with:
+# 
+# ```
+# hugo --gc
+# ````
+
 public/
-resources/
+resources/_gen/assets/
 .hugo_build.lock

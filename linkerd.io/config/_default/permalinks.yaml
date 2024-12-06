@@ -1,0 +1,3 @@
+# Set URL structure for blog post
+page:
+  blog: /:year/:month/:day/:slug/

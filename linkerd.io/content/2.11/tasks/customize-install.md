@@ -1,14 +1,14 @@
-+++
-title = "Customizing Linkerd's Configuration with Kustomize"
-description = "Use Kustomize to modify Linkerd's configuration in a programmatic way."
-+++
+---
+title: Customizing Linkerd's Configuration with Kustomize
+description: Use Kustomize to modify Linkerd's configuration in a programmatic way.
+---
 
 Instead of forking the Linkerd install and upgrade process,
 [Kustomize](https://kustomize.io/) can be used to patch the output of `linkerd
 install`  in a consistent way. This allows customization of the install to add
 functionality specific to installations.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 To get started, save the output of `linkerd install` to a YAML file. This will
 be the base resource that Kustomize uses to patch and generate what is added

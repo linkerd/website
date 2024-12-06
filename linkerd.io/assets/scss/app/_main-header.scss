@@ -1,0 +1,95 @@
+/*
+@markup See: layouts/partials/main-header.html
+*/
+
+body {
+  // Add top padding to the body to avoid content overlay with fixed header
+  padding-top: $header-min-height;
+}
+
+@media (max-width: $mobile-max-breakpoint) {
+  // Hide body scrollbar when mobile nav is open
+  body {
+    &:has(.main-header__toggle-checkbox:checked) {
+      overflow: hidden;
+    }
+  }
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $z-index-main-nav;
+  background-color: $white;
+  box-shadow: $box-shadow;
+
+  .main-header__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: spacer(4);
+    padding: spacer(2) spacer(3);
+  }
+  .main-header__logo {
+    display: flex;
+    align-items: center;
+    // Maintain height of header
+    min-height: ($header-min-height - spacer(3));
+  
+    img {
+      display: block;
+      width: 160px;
+    }
+  }
+  .main-header__toggle-checkbox[type="checkbox"] {
+    display: none;
+  }
+  .main-header__toggle-icon {
+    cursor: pointer;
+    font-family: $font-family-mono;
+  }
+  .main-header__toggle-icon--open {
+    display: inline-block;
+  }
+  .main-header__toggle-icon--close {
+    display: none;
+  }
+  // Mobile nav
+  @media (max-width: $mobile-max-breakpoint) {
+    &:has(.main-header__toggle-checkbox:checked) {
+      // Stretch header to fill window
+      height: 100vh;
+      overflow: auto;
+    }
+    .main-header__nav {
+      display: none;
+      flex-basis: 100%;
+    }
+    .main-header__toggle-checkbox:checked ~ .main-header__toggle {
+      .main-header__toggle-icon--open {
+        display: none;
+      }
+      .main-header__toggle-icon--close {
+        display: inline-block;
+      }
+    }
+    .main-header__toggle-checkbox:checked ~ .main-header__nav {
+      display: block;
+    }
+  }
+  // Desktop nav
+  @media (min-width: $desktop-min-breakpoint) {
+    .main-header__container {
+      flex-wrap: nowrap;
+    }
+    .main-header__toggle {
+      display: none;
+    }
+    .main-header__nav {
+      flex-grow: 1;
+    }
+  }
+}

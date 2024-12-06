@@ -1,0 +1,55 @@
+{{- /*
+@param {string} [id]
+@param {string} [title]
+@param {string} [content]
+@param {string} [variant] "primary", "secondary", "success", "info", "warning", or "danger"
+@param {bool} [callout] Defaults to false
+@param {bool} [condensed] Defaults to false
+@param {bool} [center] Defaults to false
+
+@example {{ partial "components/alert" (dict "variant" "info" "title" "Alert title" "content" "Alert content") }}
+*/}}
+{{- /* Map variant to icon names */}}
+{{- $icons := dict
+  "info" "information"
+  "success" "check-circle"
+  "warning" "alert"
+  "danger" "alert-circle"
+-}}
+{{- $class := slice "alert" }}
+{{/* Get variant */}}
+{{- $variant := "" }}
+{{- if or (eq .variant "primary") (eq .variant "secondary") (eq .variant "info") (eq .variant "success") (eq .variant "warning") (eq .variant "danger") }}
+  {{- $class = $class | append (printf "alert--%s" .variant) }}
+  {{- $variant = .variant }}
+{{- end }}
+{{- /* Get callout */}}
+{{- if eq .callout true }}
+  {{- $class = $class | append "alert--callout" }}
+{{- end }}
+{{- /* Get condensed */}}
+{{- if eq .condensed true }}
+  {{- $class = $class | append "alert--condensed" }}
+{{- end }}
+{{- /* Get center */}}
+{{- if eq .center true }}
+  {{- $class = $class | append "alert--center" }}
+{{- end }}
+{{- /* Build class names */}}
+{{- $class = delimit $class " " }}
+<div class="{{ $class }}"{{ with .id }} id="{{ . }}"{{ end }}>
+  {{ with .title }}
+    <div class="alert__title">
+      {{ $icon := index $icons $variant }}
+      {{ with $icon }}
+        {{ partial "components/icon" (dict "name" . "variant" "current") }}
+      {{ end }}
+      <h4>
+        {{ . }}
+      </h4>
+    </div>
+  {{ end }}
+  <div class="alert__content">
+    {{ .content }}
+  </div>
+</div>

@@ -1,11 +1,7 @@
-+++
-title = "Securing Linkerd Tap"
-description = "Best practices for securing Linkerd's tap feature."
-aliases = [
-  "../tap-rbac/",
-  "securing-your-cluster/",
-]
-+++
+---
+title: Securing Linkerd Tap
+description: Best practices for securing Linkerd's tap feature.
+---
 
 Linkerd provides a powerful tool called `tap` which allows users
 to introspect live traffic in real time. While powerful, this feature can

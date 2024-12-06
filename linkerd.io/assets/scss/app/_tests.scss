@@ -1,0 +1,6 @@
+@media (min-width: breakpoint-min-width("md")) {
+  .test-card {
+    @include make-card--horz;
+    @include make-card--reverse;
+  }
+}

@@ -51,7 +51,7 @@ window.addEventListener(
       // Remove loader
       target.innerHTML = "";
       // Render header
-      let template = document.getElementById("search-result-header-template");
+      let template = document.getElementById("search-results-header-template");
       let node = template.content.cloneNode(true);
       let txt = "";
       if (results.length == 0) {
@@ -61,30 +61,30 @@ window.addEventListener(
       } else {
         txt = `Found ${results.length} results for`;
       }
-      node.querySelector(".search-result-header__text").textContent = txt;
-      node.querySelector(".search-result-header__query").textContent = query;
+      node.querySelector(".search-results-header__text").textContent = txt;
+      node.querySelector(".search-results-header__query").textContent = query;
       if (results.length > 0) {
-        const empty = node.querySelector(".search-result-header__empty");
+        const empty = node.querySelector(".search-results-header__empty");
         empty.parentNode.removeChild(empty);
       }
       target.appendChild(node);
       // Render results
-      template = document.getElementById("search-result-entry-template");
+      template = document.getElementById("search-results-entry-template");
       for (let result of results) {
         let doc = lookup[result.ref];
         //console.log(`${doc.uri}: ${result.score}`);
         let node = template.content.cloneNode(true);
         if (Array.isArray(doc.ancestors)) {
-          node.querySelector(".search-result-entry__section").textContent = doc.ancestors.join(" / ");
+          node.querySelector(".search-results-entry__section").textContent = doc.ancestors.join(" / ");
         }
-        node.querySelector(".search-result-entry__link").href = doc.uri;
-        node.querySelector(".search-result-entry__link").textContent = doc.title;
-        node.querySelector(".search-result-entry__summary").textContent = truncateWords(doc.content, 30);
+        node.querySelector(".search-results-entry__link").href = doc.uri;
+        node.querySelector(".search-results-entry__link").textContent = doc.title;
+        node.querySelector(".search-results-entry__summary").textContent = truncateWords(doc.content, 30);
         target.appendChild(node);
       }
     };
     const renderError = () => {
-      let template = document.getElementById("search-result-error-template");
+      let template = document.getElementById("search-results-error-template");
       let node = template.content.cloneNode(true);
       target.appendChild(node);
     };

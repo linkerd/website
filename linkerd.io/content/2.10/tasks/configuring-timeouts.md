@@ -1,7 +1,7 @@
-+++
-title = "Configuring Timeouts"
-description = "Configure Linkerd to automatically fail requests that take too long."
-+++
+---
+title: Configuring Timeouts
+description: Configure Linkerd to automatically fail requests that take too long.
+---
 
 To limit how long Linkerd will wait before failing an outgoing request to
 another service, you can configure timeouts. These work by adding a little bit

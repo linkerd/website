@@ -1,8 +1,7 @@
-+++
-title = "Per-Request Policy"
-description = "Using HTTP headers to specify per-request policy"
-aliases = []
-+++
+---
+title: Per-Request Policy
+description: Using HTTP headers to specify per-request policy
+---
 
 [Retries](../configuring-retries/) and [timeouts](../configuring-timeouts/) can
 be configured by annotating Service, HTTPRoute, or GRPCRoute resources. This

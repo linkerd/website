@@ -11,14 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/linkerdio/website.git"
+    "url": "git+https://github.com/linkerd/website.git"
   },
-  "author": "Heneise Consulting <info@heneise.co> (http://heneise.co)",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/linkerdio/website/issues"
+    "url": "https://github.com/linkerd/website/issues"
   },
-  "homepage": "https://github.com/linkerdio/website#readme",
+  "homepage": "https://github.com/linkerd/website#readme",
   "devDependencies": {
     "markdownlint-cli": "^0.32.2",
     "pa11y-ci": "^2.4.0",

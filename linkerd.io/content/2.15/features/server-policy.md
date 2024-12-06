@@ -1,7 +1,8 @@
-+++
-title = "Authorization Policy"
-description = "Linkerd can restrict which types of traffic are allowed between meshed services."
-+++
+---
+title: Authorization Policy
+description: Linkerd can restrict which types of traffic are allowed between meshed
+  services.
+---
 
 Linkerd's authorization policy allows you to control which types of
 traffic are allowed to meshed pods. For example, you can restrict communication

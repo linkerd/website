@@ -1,0 +1,28 @@
+{{- /* Get the CLI data file for the current linkerd version */}}
+{{- $file := replace .Page.Section "." "-" }}
+{{- $data := index site.Data.cli $file }}
+{{- /* Output data */}}
+<table class="keyval">
+  <thead>
+    <tr>
+      <th>
+        Annotation
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range sort $data.AnnotationsReference "Name" }}
+      <tr>
+        <td>
+          <code>{{ .Name }}</code>
+        </td>
+        <td>
+          {{ .Description | markdownify }}
+        </td>
+      </tr>    
+    {{ end }}
+  </tbody>
+</table>

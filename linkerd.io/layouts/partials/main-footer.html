@@ -1,0 +1,51 @@
+<footer class="main-footer">
+  <div class="main-footer__top">
+    <div class="main-footer__container container">
+      <div class="main-footer__info">
+        <p>
+          {{ with resources.Get "logos/linkerd.png" }}
+            <img src="{{ .RelPermalink }}" alt="Linkerd">
+          {{ end }}
+        </p>
+        <p>
+          Linkerd was originally created by <a href="https://buoyant.io/" target="_blank" rel="noopener">Buoyant</a>
+        </p>
+        <p>
+          View <a href="https://github.com/linkerd/linkerd/wiki/Linkerd-code-of-conduct" target="_blank" rel="noopener">Code of Conduct</a>
+        </p>
+      </div>
+      <div class="main-footer__links">
+        <div class="main-footer__community">
+          <h4>Community</h4>
+          <ul>
+            {{ range site.Menus.community }}
+              <li>
+                <a href="{{ .URL }}" target="_blank" rel="noopener">{{ .Name }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+        <div class="main-footer__follow">
+          <h4>Follow</h4>
+          <ul>
+            {{ range site.Menus.follow }}
+              <li>
+                <a href="{{ .URL }}" target="_blank" rel="noopener">{{ .Name }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-footer__bottom">
+    <div class="main-footer__container container">
+      <p>
+        <a href="https://github.com/linkerd/website/tree/main/linkerd.io/content" target="_blank" rel="noopener">Edit This Site</a>
+      </p>
+      <p> 
+        Copyright © {{ now.Year }} Linkerd Authors. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

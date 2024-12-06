@@ -1,0 +1,43 @@
+/*
+@markup
+<div class="accordion">
+  <details>
+    <summary>Title</summary>
+    Content
+  </details>
+  ...
+</div>
+*/
+
+.accordion {
+  border-top: solid 1px $border-color;
+  
+  details {
+    padding-top: spacer(3);
+    padding-bottom: spacer(3);
+    border-bottom: solid 1px $border-color;
+
+    summary {
+      padding-right: spacer(5);
+      list-style-type: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" fill="%238399ac" /></svg>');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: spacer(4) spacer(4);
+      cursor: pointer;
+      transition: color .2s ease;
+
+      &:hover {
+        color: $link-color;
+      }
+      > * {
+        margin-bottom: 0;
+      }
+    }
+    &[open] summary {
+      margin-bottom: spacer(4);
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" fill="%238399ac" /></svg>');
+    }
+  }
+}
+

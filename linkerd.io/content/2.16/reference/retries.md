@@ -1,7 +1,7 @@
-+++
-title = "Retries"
-description = "How Linkerd implements retries."
-+++
+---
+title: Retries
+description: How Linkerd implements retries.
+---
 
 Linkerd can be configured to automatically retry requests when it receives a
 failed response instead of immediately returning that failure to the client.

@@ -1,7 +1,7 @@
-+++
-title = "Restricting Access To Services"
-description = "Use Linkerd policy to restrict access to a service."
-+++
+---
+title: Restricting Access To Services
+description: Use Linkerd policy to restrict access to a service.
+---
 
 Linkerd policy resources can be used to restrict which clients may access a
 service.  In this example, we'll use Emojivoto to show how to restrict access

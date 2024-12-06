@@ -1,11 +1,9 @@
-+++
-title = "Telemetry and Monitoring"
-description = "Linkerd automatically collects metrics from all services that send traffic through it."
-weight = 8
-aliases = [
-  "../observability/"
-]
-+++
+---
+title: Telemetry and Monitoring
+description: Linkerd automatically collects metrics from all services that send traffic
+  through it.
+weight: 8
+---
 
 One of Linkerd's most powerful features is its extensive set of tooling around
 *observability*&mdash;the measuring and reporting of observed behavior in

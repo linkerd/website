@@ -1,7 +1,8 @@
-+++
-title = "Supported Kubernetes Versions"
-description = "Reference documentation for which Linkerd version supports which Kubernetes version"
-+++
+---
+title: Supported Kubernetes Versions
+description: Reference documentation for which Linkerd version supports which Kubernetes
+  version
+---
 
 Linkerd supports all versions of Kubernetes that were supported at the time
 that a given Linkerd version ships. For example, at the time that Linkerd 2.14
@@ -14,7 +15,7 @@ Kubernetes 1.28. In some cases, later versions of Kubernetes end up making
 changes that cause older versions of Linkerd to not work: we will update the
 chart below as these situations arise.
 
-{{< table >}}
+{{< keyval >}}
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
 | `2.10`          | `1.16`                     | `1.23`                     |
@@ -23,7 +24,7 @@ chart below as these situations arise.
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
 | `2.15`          | `1.22`                     | `1.29`                     |
-{{< /table >}}
+{{< /keyval >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in
 a minor release, which is why the table above only lists major versions. One
@@ -32,9 +33,9 @@ later required Kubernetes 1.17 as shown in the table above.
 
 ## Edge Releases
 
-{{< table >}}
+{{< keyval >}}
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
 | `edge-22.10.1` - `edge-23.12.1` | `1.21`     | `1.29`                     |
 | `edge-23.12.2` and newer        | `1.22`     | `1.29`                     |
-{{< /table >}}
+{{< /keyval >}}

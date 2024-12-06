@@ -1,8 +1,8 @@
-+++
-title = "Multi-cluster communication"
-description = "Linkerd can transparently and securely connect services that are running in different clusters."
-aliases = [ "multicluster_support" ]
-+++
+---
+title: Multi-cluster communication
+description: Linkerd can transparently and securely connect services that are running
+  in different clusters.
+---
 
 Linkerd can connect Kubernetes services across cluster boundaries in a way that
 is secure, fully transparent to the application, and independent of network
@@ -33,11 +33,7 @@ services, the full observability, security and routing features of Linkerd
 apply uniformly to both in-cluster and cluster-calls, and the application does
 not need to distinguish between those situations.
 
-{{< fig
-    alt="Overview"
-    title="Overview"
-    center="true"
-    src="/images/multicluster/feature-overview.svg" >}}
+![Overview](/docs/images/multicluster/feature-overview.svg "Overview")
 
 Linkerd's multi-cluster functionality is implemented by two components:
 a *service mirror* and a *gateway*. The *service mirror* component watches

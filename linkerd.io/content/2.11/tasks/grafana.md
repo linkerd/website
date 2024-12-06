@@ -1,7 +1,7 @@
-+++
-title = "Grafana"
-description = "Grafana install instructions and how to link it with the Linkerd Dashboard"
-+++
+---
+title: Grafana
+description: Grafana install instructions and how to link it with the Linkerd Dashboard
+---
 
 {{< note >}}
 These notes apply only to recent Linkerd Edge releases and the upcoming Linkerd
@@ -20,7 +20,7 @@ First, you need to install Grafana from a variety of possible sources, and then
 load the suite of Grafana dashboards that have been pre-configured to consume
 the metrics exposed by Linkerd.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Install Prometheus
 

@@ -1,0 +1,22 @@
+{{- $s := newScratch }}
+{{- $s.Add "extensions" slice }}
+{{- range site.Data.extensions }}
+  {{- with $.Page.Resources.Get .image }}
+    {{- $s.Set "image" .Permalink }}
+  {{- end }}
+  {{- $s.Add
+    "extensions"
+    (dict
+      "name"          .name
+      "description"   .description
+      "docLink"       .url
+      "screenshotURL" ($s.Get "image")
+    )
+  }}
+  {{- $s.Delete "image" }}
+{{- end }}
+{{- /* Output json */ -}}
+{
+  "data":
+    {{ $s.Get "extensions" | jsonify }}
+}
