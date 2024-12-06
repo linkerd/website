@@ -7,7 +7,10 @@ description: |-
   What if you could develop your applications alongside the very infrastructure they rely on in production?
 keywords: [linkerd, tilt, nginx, orbstack, kubernetes, development]
 params:
-  author: chris-campbell
+  author:
+    name: Chris Campbell, Linkerd Ambassador
+    avatar: chris-campbell.png
+    email: campbel@hey.com
   showCover: true
 images: [social.png] # Open graph image
 ---
