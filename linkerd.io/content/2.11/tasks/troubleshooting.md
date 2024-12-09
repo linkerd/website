@@ -1509,7 +1509,7 @@ Make sure multicluster extension is correctly installed and that the
 `links.multicluster.linkerd.io` CRD is present.
 
 ```bash
-$ kubectll get crds | grep multicluster
+$ kubectl get crds | grep multicluster
 NAME                              CREATED AT
 links.multicluster.linkerd.io     2021-03-10T09:58:10Z
 ```
