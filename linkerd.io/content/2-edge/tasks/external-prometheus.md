@@ -127,6 +127,25 @@ scrape interval:
     evaluation_interval: 10s
 ```
 
+Finally, you need to apply the following policy.
+
+```yaml
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  name: prometheus-admin-federate
+  namespace: linkerd-viz
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: prometheus-admin
+  requiredAuthenticationRefs:
+    - group: policy.linkerd.io
+      kind: NetworkAuthentication
+      name: kubelet
+```
+
 The running configuration of the builtin prometheus can be used as a reference.
 
 ```bash
