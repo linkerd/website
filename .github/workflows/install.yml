@@ -3,6 +3,7 @@ name: install
 on:
   pull_request:
     paths:
+    - .github/workflows/install.yml
     - Makefile
     - run.linkerd.io/public/install*
 
@@ -10,16 +11,10 @@ jobs:
   lint:
     name: Lint install script
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/linkerd/dev:v39
-      options: --user root
     steps:
+    - uses: linkerd/dev/actions/setup-tools@v44
     - name: Checkout code
       uses: actions/checkout@v4
-
-    - name: On create
-      run: |
-        .devcontainer/on-create.sh
 
     - name: Lint install script
       run: |
