@@ -11,13 +11,13 @@ description: |-
 layout: ambassadors
 params:
   ambassadors:
-    - name: Charles Pretzer
-      role: Field Engineer
-      image: images/charles-pretzer.png
-      flag: 🇺🇸
+    - name: William Rizzo
+      role: Consulting Architect
+      image: images/william-rizzo.jpg
+      flag: 🇳🇱
       urls:
-        github: https://github.com/cpretzer
-        linkedin: https://www.linkedin.com/in/charlespretzer/
+        github: https://github.com/wrkode
+        linkedin: https://www.linkedin.com/in/william-rizzo/
     - name: Chris Campbell
       role: Cloud Software Engineer
       image: images/chris-campbell.png
@@ -49,21 +49,6 @@ params:
         github: https://github.com/Eli-Goldberg
         twitter: https://twitter.com/EliG0ldberg
         linkedin: https://www.linkedin.com/in/eli-go/
-    - name: Fredrik Klingenberg
-      role: Developer
-      image: images/fredrik-klingenberg.png
-      flag: 🇳🇴
-      urls:
-        github: https://github.com/fredrkl
-        twitter: https://twitter.com/fredrkl
-        linkedin: https://www.linkedin.com/in/fredrikklingenberg/
-    - name: María Teresa Rojas
-      role: SRE
-      image: images/maria-rojas.png
-      flag: 🇵🇹
-      urls:
-        github: https://github.com/mtrojas
-        linkedin: https://www.linkedin.com/in/mtrojas/
     - name: Sergio Méndez
       role: DevOps Engineer
       image: images/sergio-mendez.png
@@ -72,12 +57,38 @@ params:
         github: https://github.com/sergioarmgpl
         twitter: https://twitter.com/sergioarmgpl
         linkedin: https://www.linkedin.com/in/sergioarmgpl/
+    - name: Charles Pretzer
+      role: Field Engineer
+      image: images/charles-pretzer.png
+      flag: 🇺🇸
+      urls:
+        github: https://github.com/cpretzer
+        linkedin: https://www.linkedin.com/in/charlespretzer/
+      emeritus: true
+    - name: Fredrik Klingenberg
+      role: Developer
+      image: images/fredrik-klingenberg.png
+      flag: 🇳🇴
+      urls:
+        github: https://github.com/fredrkl
+        twitter: https://twitter.com/fredrkl
+        linkedin: https://www.linkedin.com/in/fredrikklingenberg/
+      emeritus: true
+    - name: María Teresa Rojas
+      role: SRE
+      image: images/maria-rojas.png
+      flag: 🇵🇹
+      urls:
+        github: https://github.com/mtrojas
+        linkedin: https://www.linkedin.com/in/mtrojas/
+      emeritus: true
     - name: Steve Gray
       role: Founder & CEO
       image: images/steve-gray.png
       flag: 🇦🇺
       urls:
         linkedin: https://www.linkedin.com/in/eventualconsistency/
+      emeritus: true
     - name: Kasper Nissen
       role: Lead Platform Architect
       image: images/kasper-nissen.png
