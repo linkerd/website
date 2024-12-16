@@ -1,5 +1,5 @@
 ---
-date: 2024-11-25T00:00:00Z
+date: 2024-12-16T00:00:00Z
 title: |-
   Announcing The Linkerd Ambassador Program 2.0: Join the Mission for Simplicity
 slug: ambassador-program
