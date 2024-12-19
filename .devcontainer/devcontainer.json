@@ -1,6 +1,6 @@
 {
     "name": "linkerd-website",
-    "image": "ghcr.io/linkerd/dev:v30",
+    "image": "ghcr.io/linkerd/dev:v44",
     "onCreateCommand": ".devcontainer/on-create.sh",
     "extensions": [
         "DavidAnson.vscode-markdownlint",

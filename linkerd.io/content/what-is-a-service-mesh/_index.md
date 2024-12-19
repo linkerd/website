@@ -11,12 +11,10 @@ params:
   faqSchema:
     - question: What is a service mesh?
       answer: |-
-        A service mesh like Linkerd is a tool for adding observability,
-        security, and reliability features to "cloud native" applications by
-        transparently inserting this functionality at the platform layer rather
-        than the application layer. The service mesh is rapidly becoming a
-        standard part of the cloud native stack, especially for Kubernetes
-        adopters.
+        A service mesh is a tool for adding security, reliability, and
+        observability features to cloud native applications by transparently
+        inserting this functionality at the platform layer rather than the
+        application layer.
     - question: What does a service mesh actually do?
       answer: |-
         A service mesh adds reliability, security, and observability features
@@ -42,11 +40,11 @@ params:
         much attention.
 ---
 
-A service mesh like Linkerd is a tool for adding security, reliability, and
-observability features to cloud native applications by transparently inserting
-this functionality at the platform layer rather than the application layer.
-The service mesh is rapidly becoming a standard part of the cloud native
-stack, especially for Kubernetes adopters.
+A service mesh is a tool for adding security, reliability, and observability
+features to cloud native applications by transparently inserting this
+functionality at the platform layer rather than the application layer. The
+service mesh is rapidly becoming a standard part of the cloud native stack,
+especially for Kubernetes adopters.
 
 Over the past few years, the service mesh has risen from relative obscurity to
 become a standard component of the cloud native stack. Linkerd ("linker-dee"),
@@ -69,11 +67,11 @@ native adoption.
 Know about the World's Most Over-Hyped
 Technology**](https://buoyant.io/service-mesh-manifesto/).)
 
-## What is a service mesh?
+## Service mesh in a nutshell
 
-A service mesh is a tool for adding observability, security, and reliability
-features to applications by inserting these features at the platform layer
-rather than the application layer.
+A service mesh like Linkerd is a tool for adding observability, security, and
+reliability features to applications by inserting these features at the platform
+layer rather than the application layer.
 
 The service mesh is typically implemented as a scalable set of network proxies
 deployed _alongside_ application code (a pattern sometimes called a _sidecar_).

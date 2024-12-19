@@ -24,6 +24,7 @@ chart below as these situations arise.
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
 | `2.15`          | `1.22`                     | `1.29`                     |
+| `2.16`          | `1.22`                     | `1.29`                     |
 {{< /keyval >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in

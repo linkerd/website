@@ -3,7 +3,23 @@
 */
 
 .ambassadors {
+  // Override all h2s on the page
+  h2 {
+    font-size: $font-size-h1;
+  }
   .page__container {
+    @include make-stack(7);
+  }
+  .ambassadors__section {
+    @include make-stack(5);
+
+    @media (min-width: breakpoint-min-width("lg")) {
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+  .ambassadors__items {
     display: grid;
     gap: spacer(4);
     grid-template-columns: 1fr;
@@ -18,22 +34,18 @@
     .card__footer {
       gap: spacer(1);
     }
-    &.ambassadors__emeritus {
-      border: solid 2px $blue;
+    .ambassadors__emeritus-badge {
+      position: absolute;
 
-      .badge {
-        position: absolute;
-
-        @media (max-width: breakpoint-max-width("lg")) {
-          left: spacer(4);
-          bottom: spacer(4);
-          width: 128px; // Thumbnail width
-          text-align: center; // Center badge under thumbnail
-        }
-        @media (min-width: breakpoint-min-width("xl")) {
-          top: spacer(3);
-          right: spacer(3);
-        }
+      @media (max-width: breakpoint-max-width("lg")) {
+        left: spacer(4);
+        bottom: spacer(4);
+        width: 128px; // Thumbnail width
+        text-align: center; // Center badge under thumbnail
+      }
+      @media (min-width: breakpoint-min-width("xl")) {
+        top: spacer(3);
+        right: spacer(3);
       }
     }
   }

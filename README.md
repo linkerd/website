@@ -10,7 +10,7 @@ Source code for the linkerd.io website.
    ```bash
    docker run \
       --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-      ghcr.io/linkerd/dev:v39 sh -c ".devcontainer/on-create.sh && make lint check"
+      ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
    ```
 
 1. Install Hugo to run the site locally:
@@ -109,13 +109,13 @@ main from slate-linkerd and add it to the public dir.
 
 ### Notes
 
-- This does not update api.linkerd.io, see the section for that specifically to
+* This does not update api.linkerd.io, see the section for that specifically to
   update it.
 
-- There is no caching in front of run.linkerd.io and versioncheck.linkerd.io.
+* There is no caching in front of run.linkerd.io and versioncheck.linkerd.io.
   You should see updates there immediately.
 
-- There is caching for non-html pages in front of linkerd.io. If you're updating
+* There is caching for non-html pages in front of linkerd.io. If you're updating
   a non-html page for linkerd.io, it might be worth flushing the cache
   (cloudflare) and waiting awhile.
 

@@ -3,40 +3,52 @@
     {{ partial "components/hero" . }}
     <div class="page">
       <div class="page__container container">
-        {{ range .Params.ambassadors }}
-          <div class="card card--horz card--center card--inset-media{{ with .emeritus }} ambassadors__emeritus{{ end }}">
-            {{ with .emeritus }}
-              <span class="badge">Emeritus</span>
+        {{ range .Params.sections }}
+          {{ $emeriti := .emeriti }}
+          <section class="ambassadors__section">
+            {{ with .title }}
+              <h2>
+                {{ . }}
+              </h2>
             {{ end }}
-            <div class="card__media">
-              {{ $alt := .name }}
-              {{ with $.Resources.Get .image }}
-                {{ with partial "utils/process-image" (dict
-                  "res" .
-                  "width" 256
-                  "height" 256
-                  "process" "fill jpg q80 lanczos"
-                )}}
-                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
-                {{ end }}
+            <div class="ambassadors__items">
+              {{ range .items }}
+                <div class="card card--horz card--center card--inset-media">
+                  {{ if $emeriti }}
+                    <span class="badge ambassadors__emeritus-badge">Emeritus</span>
+                  {{ end }}
+                  <div class="card__media">
+                    {{ $alt := .name }}
+                    {{ with $.Resources.Get .image }}
+                      {{ with partial "utils/process-image" (dict
+                        "res" .
+                        "width" 256
+                        "height" 256
+                        "process" "fill jpg q80 lanczos"
+                      )}}
+                        <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                  <div class="card__body">
+                    <div class="card__header">
+                      <h3>
+                        {{ .name }} {{ .flag }}
+                      </h3>
+                      <p>
+                        {{ .role }}
+                      </p>
+                    </div>
+                    <div class="card__footer">
+                      {{ range $k, $v := .urls }}
+                        {{ partial "components/icon-button" (dict "href" $v "icon" $k "variant" "secondary") }}
+                      {{ end }}
+                    </div>
+                  </div>
+                </div>
               {{ end }}
             </div>
-            <div class="card__body">
-              <div class="card__header">
-                <h3>
-                  {{ .name }} {{ .flag }}
-                </h3>
-                <p>
-                  {{ .role }}
-                </p>
-              </div>
-              <div class="card__footer">
-                {{ range $k, $v := .urls }}
-                  {{ partial "components/icon-button" (dict "href" $v "icon" $k "variant" "secondary") }}
-                {{ end }}
-              </div>
-            </div>
-          </div>
+          </section>
         {{ end }}
       </div>
     </div>

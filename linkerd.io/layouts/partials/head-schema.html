@@ -3,8 +3,14 @@
   {{ $scratch := newScratch }}
   {{/* Get author name */}}
   {{ with .Params.author }}
-    {{ with index site.Data.authors . }}
+    {{ if (reflect.IsMap .) }}
+      {{/* Get author data from page params */}}
       {{ $scratch.Set "author" .name }}
+    {{ else }}
+      {{/* Get author data from global data source */}}
+      {{ with index site.Data.authors . }}
+        {{ $scratch.Set "author" .name }}
+      {{ end }}
     {{ end }}
   {{ end }}
   {{/* Get cover image */}}

@@ -4,8 +4,8 @@
 
 Please do not put files in the `static` directory that are referenced on
 linkerd.io. This directory is reserved for assets that are used as external
-resources. If you need to add images for a page, please add them in the [page
-bundle](https://gohugo.io/content-management/page-bundles/).
+resources. If you need to add images for a page, please add them in the
+[page bundle](https://gohugo.io/content-management/page-bundles/).
 
 **Note:** Images in page bundles that have a width or height larger than 2400
 pixels will be downsized.
@@ -27,8 +27,45 @@ date: # The date of your post in the format: `2024-01-01T00:00:00Z`
 slug: # The URL slug for the page. Only set this param if you want to use a different slug than the title.
 keywords: [] # An array of keywords are used to relate blog posts
 params:
-  author: # The author id of the blog post. It must be an author from `data/authors.yaml`
+  author: # The author of the blog post
 ```
+
+#### Assigning an author
+
+There are 2 ways to assign an author to a blog post.
+
+1. If the author has more than one blog post, the author data should be defined
+   in `data/authors.yaml`, then the author id can be set in the frontmatter
+   params. For example:
+
+```yaml
+params:
+  author: william
+```
+
+2. If the author is only going to have a single blog post, the author data can
+   be set inline if desired. For example:
+
+```yaml
+params:
+  author:
+    name: Author name
+    avatar: avatar.png
+```
+
+For inline author data, the avatar image can either be a page resource or a
+remote image. To use a remote image, simply provide the full url to the image,
+and Hugo will download and resize it when the site is published. For example:
+
+```yaml
+params:
+  author:
+    name: John Smith
+    avatar: https://example.com/avatars/john-smith.png
+```
+
+**Note:** If an author only has a single blog post, but there's a chance they
+will have more in the future, please not use the inline method.
 
 #### Cover, thumbnail, and feature images
 
@@ -48,14 +85,14 @@ blog/
 
 If a blog post is featured, by default, the cover image will be used on the blog
 list page. If a cover image is not present, or you would like to use a different
-image than the cover image, you can name it `feature` and place it in the
-blog post folder.
+image than the cover image, you can name it `feature` and place it in the blog
+post folder.
 
 If a thumbnail image is not present in the blog post folder, the thumbnail image
 will be created from the cover image. By default, the thumbnail image will be
 cropped and resized into a square. If you would like to maintaining the original
-aspect ratio, you can set the `thumbnailProcess` frontmatter param to `fit`.
-For example:
+aspect ratio, you can set the `thumbnailProcess` frontmatter param to `fit`. For
+example:
 
 ```yaml
 params:
@@ -89,8 +126,8 @@ post is shared on social media. For example:
 images: [social.png]
 ```
 
-If the images array is empty, images with names matching `feature`, `cover`,
-or `thumbnail` will be used in that order.
+If the images array is empty, images with names matching `feature`, `cover`, or
+`thumbnail` will be used in that order.
 
 #### Markdown images
 
