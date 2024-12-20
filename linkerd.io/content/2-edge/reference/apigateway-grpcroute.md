@@ -66,3 +66,4 @@ spec:
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [ns-boundaries]:
   https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
+
