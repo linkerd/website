@@ -24,14 +24,14 @@ linkerd-destination pods to fail during startup. {{< /warning >}}
 The table below shows the latest supported versions of the Gateway API and the
 features they enable:
 
-| Feature           | GRPCRoute   |
-| ----------------- | ----------- |
-| Traffic Splitting | v0.7.0      |
-| Header Matching   | v0.7.0      |
-| Path Matching     | v0.7.0      |
-| Rate Limiting     | -           |
-| Circuit Breaking  | v0.7.0      |
-| Authentication    | v0.7.0      |
+| Feature           | GRPCRoute    |
+| ----------------- | ------------ |
+| Traffic Splitting | v0.7.0       |
+| Header Matching   | v0.7.0       |
+| Path Matching     | v0.7.0       |
+| Rate Limiting     | -            |
+| Circuit Breaking  | v0.7.0       |
+| Authentication    | v0.7.0       |
 
 ## GRPCRoute Examples
 
