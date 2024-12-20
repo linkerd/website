@@ -9,7 +9,7 @@ description: Reference guide to Gateway API gRPCRoutes resources.
 
 ## Linkerd and Gateway API gRPCRoutes
 
-Samelessy than HTTPRoute, Linkerd supports the Kubernetes Gateway API gRPC
+Samelessy to HTTPRoute, Linkerd supports the Kubernetes Gateway API gRPC
 resources alongside its own traffic management API. Linkerd automatically
 installs these CRDs during the installation process unless the
 `--set enableHttpRoutes=false` flag or the `enableHttpRoutes=false` Helm value
@@ -24,14 +24,14 @@ linkerd-destination pods to fail during startup. {{< /warning >}}
 The table below shows the latest supported versions of the Gateway API and the
 features they enable:
 
-| Feature           | GRPCRoute |
-| ----------------- | --------- |
-| Traffic Splitting | v0.7      |
-| Header Matching   | v0.7      |
-| Path Matching     | v0.7      |
-| Rate Limiting     | -         |
-| Circuit Breaking  | v0.7      |
-| Authentication    | v0.7      |
+| Feature           | GRPCRoute   |
+| ----------------- | ----------- |
+| Traffic Splitting | v0.7.0      |
+| Header Matching   | v0.7.0      |
+| Path Matching     | v0.7.0      |
+| Rate Limiting     | -           |
+| Circuit Breaking  | v0.7.0      |
+| Authentication    | v0.7.0      |
 
 ## GRPCRoute Examples
 

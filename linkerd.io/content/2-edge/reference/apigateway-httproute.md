@@ -31,13 +31,13 @@ features they enable:
 
 | Feature           | HTTPRoute           |
 | ----------------- | ------------------- |
-| Traffic Splitting | v1.1.0-experimental |
-| Header Matching   | v1.1.0-experimental |
-| Path Matching     | v1.1.0-experimental |
-| Retry Policies    | v1.1.0-experimental |
+| Traffic Splitting | v1.1.1-experimental |
+| Header Matching   | v1.1.1-experimental |
+| Path Matching     | v1.1.1-experimental |
+| Retry Policies    | v1.1.1-experimental |
 | Rate Limiting     | -                   |
-| Circuit Breaking  | v1.1.0-experimental |
-| Authentication    | v1.1.0-experimental |
+| Circuit Breaking  | v1.1.1-experimental |
+| Authentication    | v1.1.1-experimental |
 | Timeouts          | -                   |
 
 ## HTTPRoute Examples
