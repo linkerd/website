@@ -40,6 +40,8 @@ features they enable:
 | Authentication    | v1.1.1-experimental |
 | Timeouts          | -                   |
 
+To manage rate limiting, you can use Linkerd's rate-limiting functionality, which is configured via HTTPLocalRateLimitPolicy resources. For more information, see [rate limiting](#rate-limiting).
+
 ## HTTPRoute Examples
 
 ### Header-Based Routing Example
