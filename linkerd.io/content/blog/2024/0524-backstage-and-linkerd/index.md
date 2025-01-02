@@ -8,7 +8,6 @@ description: |-
 keywords: [backstage]
 params:
   author: catherine
-  showCover: true
 ---
 
 Smooth workflows are critical in the cloud-native world. This CNCF Cloud Native
