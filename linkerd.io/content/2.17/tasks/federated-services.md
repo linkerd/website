@@ -11,7 +11,7 @@ clusters. This allows the client to be cluster agnostic, balance traffic across
 multiple clusters, and be resiliant to the failure of any individual cluster.
 
 Federated services send traffic directly to the pods of the member services
-rahter than through a gateway. Therefore, federated services have the same
+rather than through a gateway. Therefore, federated services have the same
 requirements as *pod-to-pod* multicluster services:
 
 * The clusters must be on a *flat network*. In other words, pods from one
