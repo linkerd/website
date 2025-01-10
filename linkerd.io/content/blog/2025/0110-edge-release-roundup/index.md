@@ -139,7 +139,7 @@ having names like `svc-cluster`) and Linkerd seamlessly handles everything to
 gather the relevant endpoints from all clusters, without requiring application
 changes or HTTPRoute configuration.
 
-# edge-24.11.1 (November 7, 2024)
+### edge-24.11.1 (November 7, 2024)
 
 This release brings egress monitoring and control to Linkerd! Using the new
 EgressNetwork CRD as a `parentRef` for an HTTPRoute, GRPCRoute, TCPRoute, or
