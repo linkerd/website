@@ -48,29 +48,13 @@ them in that cluster:
 > helm --kube-context=west install linkerd-failover -n linkerd-failover --create-namespace --devel linkerd-edge/linkerd-failover
 ```
 
-## Installing and Exporting Emojivoto
+## Create the emojivoto namespace
 
-We'll now install the Emojivoto example application into both clusters:
+First, we need to create the namespace where we will deploy our application and the `TrafficSplit` resource.
 
-```bash
-> linkerd --context=west inject https://run.linkerd.io/emojivoto.yml | kubectl --context=west apply -f -
-> linkerd --context=east inject https://run.linkerd.io/emojivoto.yml | kubectl --context=east apply -f -
 ```
-
-Next we'll "export" the `web-svc` in the east cluster by setting the
-`mirror.linkerd.io/exported=true` label. This will instruct the
-multicluster extension to create a mirror service called `web-svc-east` in the
-west cluster, making the east Emojivoto application available in the west
-cluster:
-
-```bash
-> kubectl --context=east -n emojivoto label svc/web-svc mirror.linkerd.io/exported=true
-> kubectl --context=west -n emojivoto get svc
-NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
-emoji-svc     ClusterIP   10.96.41.137    <none>        8080/TCP,8801/TCP   13m
-voting-svc    ClusterIP   10.96.247.68    <none>        8080/TCP,8801/TCP   13m
-web-svc       ClusterIP   10.96.222.169   <none>        80/TCP              13m
-web-svc-east  ClusterIP   10.96.244.245   <none>        80/TCP              92s
+> kubectl --context=west create ns emojivoto
+> kubectl --context=east create ns emojivoto
 ```
 
 ## Creating the Failover TrafficSplit
@@ -105,6 +89,31 @@ EOF
 This TrafficSplit indicates that the local (west) `web-svc` should be used as
 the primary, but traffic should be shifted to the remote (east) `web-svc-east`
 if the primary becomes unavailable.
+
+## Installing and Exporting Emojivoto
+
+We'll now install the Emojivoto example application into both clusters:
+
+```bash
+> linkerd --context=west inject https://run.linkerd.io/emojivoto.yml | kubectl --context=west apply -f -
+> linkerd --context=east inject https://run.linkerd.io/emojivoto.yml | kubectl --context=east apply -f -
+```
+
+Next we'll "export" the `web-svc` in the east cluster by setting the
+`mirror.linkerd.io/exported=true` label. This will instruct the
+multicluster extension to create a mirror service called `web-svc-east` in the
+west cluster, making the east Emojivoto application available in the west
+cluster:
+
+```bash
+> kubectl --context=east -n emojivoto label svc/web-svc mirror.linkerd.io/exported=true
+> kubectl --context=west -n emojivoto get svc
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+emoji-svc     ClusterIP   10.96.41.137    <none>        8080/TCP,8801/TCP   13m
+voting-svc    ClusterIP   10.96.247.68    <none>        8080/TCP,8801/TCP   13m
+web-svc       ClusterIP   10.96.222.169   <none>        80/TCP              13m
+web-svc-east  ClusterIP   10.96.244.245   <none>        80/TCP              92s
+```
 
 ## Testing the Failover
 
