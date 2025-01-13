@@ -7,6 +7,37 @@ description: Reference guide to HTTPRoute resources.
 <!-- markdownlint-disable-file table-column-count -->
 <!-- markdownlint-disable-file table-pipe-style -->
 
+An HTTPRoute is a Kubernetes resource which attaches to a parent resource, such
+as a [Service]. The HTTPRoute defines a set of rules which match HTTP requests
+to that resource, based on parameters such as the request's path, method, and
+headers, and can configure how requests matching that rule are routed by the
+Linkerd service mesh.
+
+## Inbound and Outbound HTTPRoutes
+
+Two types of HTTPRoute are used for configuring the behavior of Linkerd's
+proxies:
+
+- HTTPRoutes with a [Service] as their parent resource configure policies for
+  _outbound_ proxies in pods which are clients of that [Service]. Outbound
+  policy includes [dynamic request routing][dyn-routing], adding request
+  headers, modifying a request's path, and reliability features such as
+  [timeouts].
+- HTTPRoutes with a [Server] as their parent resource configure policy for
+  _inbound_ proxies in pods which recieve traffic to that [Server]. Inbound
+  HTTPRoutes are used to configure fine-grained [per-route authorization and
+  authentication policies][auth-policy].
+
+{{< warning >}}
+**Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
+overlapping configuration.** For backwards-compatibility reasons, a
+ServiceProfile will take precedence over HTTPRoutes which configure the same
+Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
+proxies will use the ServiceProfile configuration, rather than the HTTPRoute
+configuration, as long as the ServiceProfile
+exists.
+{{< /warning >}}
+
 ## Linkerd and Gateway API HTTPRoutes
 
 The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]
