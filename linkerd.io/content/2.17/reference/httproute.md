@@ -1,32 +1,43 @@
 ---
 title: HTTPRoute
-description: Reference guide to HTTPRoute resources.
+description: Reference guide to HTTPRoute resources
 ---
 
 <!-- markdownlint-disable-file blanks-around-tables -->
 <!-- markdownlint-disable-file table-column-count -->
 <!-- markdownlint-disable-file table-pipe-style -->
 
-An HTTPRoute is a Kubernetes resource which attaches to a parent resource, such
-as a [Service]. The HTTPRoute defines a set of rules which match HTTP requests
-to that resource, based on parameters such as the request's path, method, and
-headers, and can configure how requests matching that rule are routed by the
-Linkerd service mesh.
+An HTTPRoute is a Kubernetes resource which attaches to a "parent" resource,
+such as a [Service], and defines a set of rules which match HTTP requests to
+that resource. These rules can be based on parameters such as path, method,
+headers, or other aspects of the HTTP request.
 
-## Inbound and Outbound HTTPRoutes
+HTTPRoutes are used to configure various aspects of Linkerd's behavior, and form
+part of [Linkerd's support for the Gateway API](../../features/gateway-api/).
 
-Two types of HTTPRoute are used for configuring the behavior of Linkerd's
-proxies:
+{{< note >}}
+The HTTPRoute resource is part of the Gateway API and is not Linkerd-specific.
+The canonical reference doc is the [Gateway API HTTPRoute
+documentation](https://gateway-api.sigs.k8s.io/api-types/httproute/). This page
+is intended as a *supplement* to that doc, and will detail how this type is
+used by Linkerd specifically.
+{{< /note >}}
 
-- HTTPRoutes with a [Service] as their parent resource configure policies for
-  _outbound_ proxies in pods which are clients of that [Service]. Outbound
-  policy includes [dynamic request routing][dyn-routing], adding request
-  headers, modifying a request's path, and reliability features such as
-  [timeouts].
-- HTTPRoutes with a [Server] as their parent resource configure policy for
-  _inbound_ proxies in pods which recieve traffic to that [Server]. Inbound
-  HTTPRoutes are used to configure fine-grained [per-route authorization and
-  authentication policies][auth-policy].
+## Inbound vs outbound HTTPRoutes
+
+HTTPRoutes usage in Linkerd falls into two categories: configuration of
+*inbound* behavior and configuration of *outbound* behavior.
+
+**Inbound behavior.** HTTPRoutes with a [Server] as their parent resource
+configure policy for _inbound_ traffic to pods which receive traffic to that
+[Server]. Inbound HTTPRoutes are used to configure fine-grained [per-route
+authorization and authentication policies][auth-policy].
+
+**Outbound behavior.** HTTPRoutes with a [Service] as their parent resource
+configure policies for _outbound_ proxies in pods which are clients of that
+[Service]. Outbound policy includes [dynamic request routing][dyn-routing],
+adding request headers, modifying a request's path, and reliability features
+such as [timeouts].
 
 {{< warning >}}
 **Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
@@ -38,31 +49,17 @@ configuration, as long as the ServiceProfile
 exists.
 {{< /warning >}}
 
-## Linkerd and Gateway API HTTPRoutes
+## Usage in practice
 
-The HTTPRoute resource was originally specified by the Kubernetes [Gateway API]
-project. Linkerd currently supports two versions of the HTTPRoute resource: the
-upstream version from the Gateway API, with the
-`gateway.networking.kubernetes.io` API group, and a Linkerd-specific version,
-with the `policy.linkerd.io` API group. While these two resource definitions are
-largely the same, the `policy.linkerd.io` HTTPRoute resource is an experimental
-version that contains features not yet stabilized in the upstream
-`gateway.networking.k8s.io` HTTPRoute resource, such as
-[timeouts](#httproutetimeouts). Both the Linkerd and Gateway API resource
-definitions coexist within the same cluster, and both can be used to configure
-policies for use with Linkerd.
+See important notes in the [Gateway API] documentation about using these types
+in practice, including ownership of types and compatible versions.
 
-If the Gateway API CRDs already exist in your cluster, then Linkerd must be
-installed with the `--set enableHttpRoutes=false` flag during the
-`linkerd install --crds` step or with the `enableHttpRoutes=false` Helm value
-when installing the `linkerd-crds` Helm chart. This avoid conflicts by
-instructing Linkerd to not install the Gateway API CRDs and instead rely on the
-Gateway CRDs which already exist.
+## The `policy.linkerd.io` group
 
-This documentation describes the `policy.linkerd.io` HTTPRoute resource. For a
-similar description of the upstream Gateway API HTTPRoute resource, refer to the
-Gateway API's [HTTPRoute
-specification](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRoute).
+In earlier Linkerd versions, Linkerd provided a variant of the HTTPRoute
+resource in the `policy.linkerd.io` group. These versions are still supported
+but are not actively maintained; users are encouraged to switch to the canonical
+`gateway.networking.kubernetes.io` resources.
 
 ## HTTPRoute Spec
 
@@ -88,13 +85,6 @@ HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
 request routing](../../tasks/configuring-dynamic-request-routing/).
-
-{{< warning >}} **Outbound HTTPRoutes and [ServiceProfile]s provide overlapping
-configuration.** For backwards-compatibility reasons, a ServiceProfile will
-take precedence over HTTPRoutes which configure the same Service. If a
-ServiceProfile is defined for the parent Service of an HTTPRoute, proxies will
-use the ServiceProfile configuration, rather than the HTTPRoute configuration,
-as long as the ServiceProfile exists. {{< /warning >}}
 
 ParentReferences are namespaced, and may reference either a parent in the same
 namespace as the HTTPRoute, or one in a different namespace. As described in
@@ -348,3 +338,4 @@ spec:
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
 [Server]: ../authorization-policy/#server
+[Service]: https://kubernetes.io/docs/concepts/services-networking/service/
