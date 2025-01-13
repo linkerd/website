@@ -18,7 +18,7 @@ part of [Linkerd's support for the Gateway API](../../features/gateway-api/).
 {{< note >}}
 The GRPCRoute resource is part of the Gateway API and is not Linkerd-specific.
 The canonical reference doc is the [Gateway API GRPCRoute
-documentation](https://gateway-api.sigs.k8s.io/api-types/httproute/). This page
+documentation](https://gateway-api.sigs.k8s.io/api-types/grpcroute/). This page
 is intended as a *supplement* to that doc, and will detail how this type is
 used by Linkerd specifically.
 {{< /note >}}
