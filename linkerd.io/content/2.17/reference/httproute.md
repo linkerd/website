@@ -1,11 +1,7 @@
 ---
 title: HTTPRoute
-description: Reference guide to HTTPRoute resources
+description: Reference guide to HTTPRoute resources.
 ---
-
-<!-- markdownlint-disable-file blanks-around-tables -->
-<!-- markdownlint-disable-file table-column-count -->
-<!-- markdownlint-disable-file table-pipe-style -->
 
 An HTTPRoute is a Kubernetes resource which attaches to a "parent" resource,
 such as a [Service], and defines a set of rules which match HTTP requests to

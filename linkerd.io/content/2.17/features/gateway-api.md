@@ -13,6 +13,7 @@ timeouts][timeouts], rely on resource types from the Gateway API for
 configuration.
 
 The two primary Gateway API types used to configure Linkerd are:
+
 - [HTTPRoute], which parameterizes HTTP requests
 - [GRPCRoute], which parameterizes gRPC requests
 

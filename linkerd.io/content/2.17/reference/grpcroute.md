@@ -1,11 +1,7 @@
 ---
 title: GRPCRoute
-description: Reference guide to GRPCRoute resources
+description: Reference guide to GRPCRoute resources.
 ---
-
-<!-- markdownlint-disable-file blanks-around-tables -->
-<!-- markdownlint-disable-file table-column-count -->
-<!-- markdownlint-disable-file table-pipe-style -->
 
 A GRPCRoute is a Kubernetes resource which attaches to a "parent" resource,
 such as a [Service], and defines a set of rules which match gRPC requests to
@@ -53,7 +49,6 @@ exists.
 
 See important notes in the [Gateway API] documentation about using these types
 in practice, including ownership of types and compatible versions.
-
 
 ## GRPCRoute Examples
 
