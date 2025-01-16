@@ -259,6 +259,7 @@ spec:
     - kind: Service
       name: web-svc
       port: 80
+      nativeLB: true
 ```
 
 ## GCE
