@@ -5,7 +5,7 @@ description: Details on the specification and what is possible with service prof
 
 {{< warning >}}
 As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
-types](../features/gateway-api/), including for getting per-route metrics,
+types](../../features/gateway-api/), including for getting per-route metrics,
 specifying timeouts, and specifying retries. Service profiles continue to be
 supported for backwards compatibility, but will not receive further feature
 development.
