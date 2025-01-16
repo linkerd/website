@@ -62,9 +62,9 @@ user.
 
 ## Further reading
 
-- [Retries reference](../../reference/retries/)
-- [Timeout reference](../../reference/timeouts/)
-- The [Debugging HTTP applications with per-route
+* [Retries reference](../../reference/retries/)
+* [Timeout reference](../../reference/timeouts/)
+* The [Debugging HTTP applications with per-route
   metrics](../../tasks/books/) contains examples of retries and timeout
   annotations.
 
