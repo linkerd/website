@@ -1,6 +1,6 @@
 ---
 title: HTTPRoute
-description: Reference guide to HTTPRoute resources
+description: Reference guide to HTTPRoute resources.
 ---
 
 <!-- markdownlint-disable-file blanks-around-tables -->
