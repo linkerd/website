@@ -276,4 +276,4 @@ following labels:
 [prom-format]: https://prometheus.io/docs/instrumenting/exposition_formats/#format-version-0.0.4
 [pod-template-hash]: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
 [ttfb]: https://en.wikipedia.org/wiki/Time_to_first_byte
-[HTTPRoute]: ../../features/httproute/
+[HTTPRoute]: ../httproute/

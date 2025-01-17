@@ -3,6 +3,14 @@ title: Service Profiles
 description: Details on the specification and what is possible with service profiles.
 ---
 
+{{< warning >}}
+As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
+types](../../features/gateway-api/), including for getting per-route metrics,
+specifying timeouts, and specifying retries. Service profiles continue to be
+supported for backwards compatibility, but will not receive further feature
+development.
+{{< /warning >}}
+
 [Service profiles](../../features/service-profiles/) provide Linkerd additional
 information about a service. This is a reference for everything that can be done
 with service profiles.
