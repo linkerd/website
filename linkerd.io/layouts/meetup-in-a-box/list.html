@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <div class="meetup">
+    {{ with .Params.hero }}
+      <div class="hero">
+        <div class="hero__container container">
+          <div class="hero__body">
+            <div class="meetup__content">
+              <div class="hero__header">
+                <h1>
+                  {{ .title }}
+                </h1>
+              </div>
+              <div class="hero__content">
+                {{ .content | $.Page.RenderString (dict "display" "block") }}
+              </div>
+            </div>
+            <div class="hero__footer">
+              {{ range .buttons }}
+                {{ partial "components/button" (dict "href" .href "text" .text "variant" "secondary" "size" "lg") }}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

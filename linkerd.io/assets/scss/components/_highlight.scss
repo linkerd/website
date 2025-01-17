@@ -1,0 +1,37 @@
+/*
+.highlight class added by Hugo's syntax highlighter
+.highlight__copy class added by: /assets/js/highlight-copy.js
+
+@markup
+<div class="highlight">
+  <pre>
+    <div class="highlight__copy">
+      <button type="button" class="button button--sm">Copy</button>
+    </div>
+  </pre>
+</div>
+*/
+
+.highlight {
+  position: relative; // Needed to position copy button
+  overflow: hidden;
+  margin-bottom: spacer(3);
+
+  pre {
+    margin-bottom: 0;
+    padding: spacer(3);
+    border-radius: $border-radius;
+  }
+  .highlight__copy {
+    position: absolute;
+    right: spacer(1);
+    top: spacer(1);
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  &:hover {
+    .highlight__copy {
+      opacity: 1;
+    }
+  }
+}

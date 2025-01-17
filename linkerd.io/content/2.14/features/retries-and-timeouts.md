@@ -1,8 +1,8 @@
-+++
-title = "Retries and Timeouts"
-description = "Linkerd can perform service-specific retries and timeouts."
-weight = 3
-+++
+---
+title: Retries and Timeouts
+description: Linkerd can perform service-specific retries and timeouts.
+weight: 3
+---
 
 Automatic retries are one the most powerful and useful mechanisms a service mesh
 has for gracefully handling partial or transient application failures. If

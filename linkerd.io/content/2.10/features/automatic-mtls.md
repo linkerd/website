@@ -1,11 +1,9 @@
-+++
-title = "Automatic mTLS"
-description = "Linkerd automatically enables mutual Transport Layer Security (TLS) for all communication between meshed applications."
-weight = 4
-aliases = [
-  "../automatic-tls"
-]
-+++
+---
+title: Automatic mTLS
+description: Linkerd automatically enables mutual Transport Layer Security (TLS) for
+  all communication between meshed applications.
+weight: 4
+---
 
 By default, Linkerd automatically enables mutually-authenticated Transport
 Layer Security (mTLS) for all TCP traffic between meshed pods. This means that

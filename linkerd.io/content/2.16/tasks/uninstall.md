@@ -1,7 +1,7 @@
-+++
-title = "Uninstalling Linkerd"
-description = "Linkerd can be easily removed from a Kubernetes cluster."
-+++
+---
+title: Uninstalling Linkerd
+description: Linkerd can be easily removed from a Kubernetes cluster.
+---
 
 Removing Linkerd from a Kubernetes cluster requires a few steps: removing any
 data plane proxies, removing all the extensions and then removing the core

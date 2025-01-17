@@ -1,7 +1,8 @@
-+++
-title = "Upgrading to Linkerd 2.10: ports and protocols"
-description = "Upgrading to Linkerd 2.10 and handling skip-ports, server-speaks-first protocols, and more."
-+++
+---
+title: 'Upgrading to Linkerd 2.10: ports and protocols'
+description: Upgrading to Linkerd 2.10 and handling skip-ports, server-speaks-first
+  protocols, and more.
+---
 
 Linkerd 2.10 introduced some significant changes to the way that certain types
 of traffic are handled. These changes may require new or different

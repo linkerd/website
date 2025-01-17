@@ -1,57 +1,49 @@
-+++
-title = "viz"
-aliases = [
-  "dashboard",
-  "edges",
-  "routes",
-  "stat",
-  "tap",
-  "top"
-]
-+++
+---
+title: viz
+---
 
-{{< cli/description "viz" >}}
+{{< docs/cli-description "viz" >}}
 
-{{< cli/examples "viz" >}}
+{{< docs/cli-examples "viz" >}}
 
-{{< cli/flags "viz" >}}
+{{< docs/cli-flags "viz" >}}
 
 ## Subcommands
 
 ## allow-scrapes
 
-{{< cli/description "viz allow-scrapes" >}}
+{{< docs/cli-description "viz allow-scrapes" >}}
 
-{{< cli/examples "viz allow-scrapes" >}}
+{{< docs/cli-examples "viz allow-scrapes" >}}
 
-{{< cli/flags "viz allow-scrapes" >}}
+{{< docs/cli-flags "viz allow-scrapes" >}}
 
 ## authz
 
-{{< cli/description "viz authz" >}}
+{{< docs/cli-description "viz authz" >}}
 
-{{< cli/examples "viz authz" >}}
+{{< docs/cli-examples "viz authz" >}}
 
-{{< cli/flags "viz authz" >}}
+{{< docs/cli-flags "viz authz" >}}
 
 ### check
 
-{{< cli/description "viz check" >}}
+{{< docs/cli-description "viz check" >}}
 
-{{< cli/examples "viz check" >}}
+{{< docs/cli-examples "viz check" >}}
 
-{{< cli/flags "viz check" >}}
+{{< docs/cli-flags "viz check" >}}
 
 ### dashboard
 
-{{< cli/description "viz dashboard" >}}
+{{< docs/cli-description "viz dashboard" >}}
 
 Check out the [architecture](../../architecture/#dashboard) docs for a
 more thorough explanation of what this command does.
 
-{{< cli/examples "viz dashboard" >}}
+{{< docs/cli-examples "viz dashboard" >}}
 
-{{< cli/flags "viz dashboard" >}}
+{{< docs/cli-flags "viz dashboard" >}}
 
 (*) You'll need to tweak the dashboard's `enforced-host` parameter with this
 value, as explained in [the DNS-rebinding protection
@@ -59,35 +51,35 @@ docs](../../../tasks/exposing-dashboard/#tweaking-host-requirement)
 
 ### edges
 
-{{< cli/description "viz edges" >}}
+{{< docs/cli-description "viz edges" >}}
 
-{{< cli/examples "viz edges" >}}
+{{< docs/cli-examples "viz edges" >}}
 
-{{< cli/flags "viz edges" >}}
+{{< docs/cli-flags "viz edges" >}}
 
 ### install
 
-{{< cli/description "viz install" >}}
+{{< docs/cli-description "viz install" >}}
 
-{{< cli/examples "viz install" >}}
+{{< docs/cli-examples "viz install" >}}
 
-{{< cli/flags "viz install" >}}
+{{< docs/cli-flags "viz install" >}}
 
 ### list
 
-{{< cli/description "viz list" >}}
+{{< docs/cli-description "viz list" >}}
 
-{{< cli/examples "viz list" >}}
+{{< docs/cli-examples "viz list" >}}
 
-{{< cli/flags "viz list" >}}
+{{< docs/cli-flags "viz list" >}}
 
 ### profile
 
-{{< cli/description "viz profile" >}}
+{{< docs/cli-description "viz profile" >}}
 
-{{< cli/examples "viz profile" >}}
+{{< docs/cli-examples "viz profile" >}}
 
-{{< cli/flags "viz profile" >}}
+{{< docs/cli-flags "viz profile" >}}
 
 ### routes
 
@@ -146,38 +138,38 @@ information.
 Because retries are only performed on the *outbound* (client) side, the
 `-o wide` flag can only be used when the `--to` flag is specified.
 
-{{< cli/examples "viz routes" >}}
+{{< docs/cli-examples "viz routes" >}}
 
-{{< cli/flags "viz routes" >}}
+{{< docs/cli-flags "viz routes" >}}
 
 ### stat
 
-{{< cli/description "viz stat" >}}
+{{< docs/cli-description "viz stat" >}}
 
-{{< cli/examples "viz stat" >}}
+{{< docs/cli-examples "viz stat" >}}
 
-{{< cli/flags "viz stat" >}}
+{{< docs/cli-flags "viz stat" >}}
 
 ### tap
 
-{{< cli/description "viz tap" >}}
+{{< docs/cli-description "viz tap" >}}
 
-{{< cli/examples "viz tap" >}}
+{{< docs/cli-examples "viz tap" >}}
 
-{{< cli/flags "viz tap" >}}
+{{< docs/cli-flags "viz tap" >}}
 
 ### top
 
-{{< cli/description "viz top" >}}
+{{< docs/cli-description "viz top" >}}
 
-{{< cli/examples "viz top" >}}
+{{< docs/cli-examples "viz top" >}}
 
-{{< cli/flags "viz top" >}}
+{{< docs/cli-flags "viz top" >}}
 
 ### uninstall
 
-{{< cli/description "viz uninstall" >}}
+{{< docs/cli-description "viz uninstall" >}}
 
-{{< cli/examples "viz uninstall" >}}
+{{< docs/cli-examples "viz uninstall" >}}
 
-{{< cli/flags "viz uninstall" >}}
+{{< docs/cli-flags "viz uninstall" >}}

@@ -1,7 +1,7 @@
-+++
-title = "Circuit Breakers"
-description = "Protect against service failures using circuit breakers"
-+++
+---
+title: Circuit Breakers
+description: Protect against service failures using circuit breakers
+---
 
 Circuit breaking is a powerful feature where Linkerd will temporarily stop
 routing requests to an endpoint if that endpoint is deemed to be unhealthy,
@@ -13,7 +13,7 @@ improve client success rate when a backend replica is unhealthy.
 See the [reference documentation](../../reference/circuit-breaking/) for more
 details on how Linkerd implements circuit breaking.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisites
 

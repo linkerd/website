@@ -1,7 +1,7 @@
-+++
-title = "Ingress traffic"
-description = "Linkerd works alongside your ingress controller of choice."
-+++
+---
+title: Ingress traffic
+description: Linkerd works alongside your ingress controller of choice.
+---
 
 For reasons of simplicity and composability, Linkerd doesn't provide a built-in
 ingress. Instead, Linkerd is designed to work with existing Kubernetes ingress
@@ -26,7 +26,7 @@ Common ingress options that Linkerd has been used with include:
 - [Contour](#contour)
 - [GCE](#gce)
 - [Gloo](#gloo)
-- [Haproxy]({{< ref "#haproxy" >}})
+- [Haproxy]({{< relref "#haproxy" >}})
 - [Kong](#kong)
 - [Nginx](#nginx)
 - [Traefik](#traefik)

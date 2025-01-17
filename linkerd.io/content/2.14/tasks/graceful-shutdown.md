@@ -1,7 +1,7 @@
-+++
-title = "Graceful Pod Shutdown"
-description = "Gracefully handle pod shutdown signal."
-+++
+---
+title: Graceful Pod Shutdown
+description: Gracefully handle pod shutdown signal.
+---
 
 When Kubernetes begins to terminate a pod, it starts by sending all containers
 in that pod a TERM signal. When the Linkerd proxy sidecar receives this signal,

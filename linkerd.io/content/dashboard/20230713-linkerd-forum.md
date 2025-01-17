@@ -1,7 +1,7 @@
-+++
-date = 2023-07-13T00:00:00Z
-title = "Linkerd Support Forum is Live!"
-+++
+---
+title: Linkerd Support Forum is Live!
+date: 2023-07-13T00:00:00Z
+---
 
 Looking for a new way to get help from the Linkerd maintainers and community
 members? Sad that messages disappear on Slack? GitHub discussions too galling

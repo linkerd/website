@@ -1,8 +1,8 @@
-+++
-title = "Multi-cluster communication"
-description = "Linkerd can transparently and securely connect services that are running in different clusters."
-aliases = [ "multicluster_support" ]
-+++
+---
+title: Multi-cluster communication
+description: Linkerd can transparently and securely connect services that are running
+  in different clusters.
+---
 
 Linkerd can connect Kubernetes services across cluster boundaries in a way that
 is secure, fully transparent to the application, and independent of network
@@ -42,9 +42,7 @@ cluster.
 Linkerd supports two basic forms of multi-cluster communication: hierarchical
 and flat.
 
-{{< fig
-  alt="Architectural diagram comparing hierarchical and flat network modes"
-  src="/uploads/2023/07/flat_network@2x.png">}}
+![Architectural diagram comparing hierarchical and flat network modes](/docs/images/multicluster/flat-network.png)
 
 ### Hierarchical networks
 

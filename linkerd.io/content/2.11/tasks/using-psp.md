@@ -1,7 +1,7 @@
-+++
-title = "Linkerd and Pod Security Policies (PSP)"
-description = "Using Linkerd with a pod security policies enabled."
-+++
+---
+title: Linkerd and Pod Security Policies (PSP)
+description: Using Linkerd with a pod security policies enabled.
+---
 
 The Linkerd control plane comes with its own minimally privileged
 [Pod Security Policy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/)

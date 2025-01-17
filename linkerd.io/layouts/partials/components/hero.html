@@ -1,0 +1,44 @@
+{{- /*
+@param {page} Page context
+
+Frontmatter params of page resource:
+---
+params:
+  hero:
+    background: [image]
+    title: [text]
+    content: [markdown]
+    buttons:
+      - text: [text]
+        href: [url]
+        variant: [text]
+---
+
+@example {{ partial "components/hero" . }}
+*/}}
+{{- with .Params.hero.background }}
+  {{- with $.Resources.Get . }}
+    {{- $.Scratch.Set "heroBackgroundImage" (printf `style="background-image:url('%s')"` .RelPermalink) }}
+  {{- end }}
+{{- end }}
+<div class="hero{{ if .Params.hero.background }} hero--has-background-image{{ end }}">
+  <div class="hero__container container" {{ $.Scratch.Get "heroBackgroundImage" | safeHTMLAttr }}>
+    <div class="hero__body">
+      <div class="hero__header">
+        <h1>
+          {{ default .Title .Params.hero.title }}
+        </h1>
+      </div>
+      <div class="hero__content">
+        {{ default .Description .Params.hero.content | $.Page.RenderString (dict "display" "block") }}
+      </div>
+      {{- with .Params.hero.buttons }}
+        <div class="hero__footer">
+          {{- range . }}
+            {{ partial "components/button" (dict "href" .href "text" .text "variant" .variant) }}
+          {{- end }}
+        </div>
+      {{- end }}
+    </div>
+  </div>
+</div>

@@ -1,12 +1,9 @@
-+++
-title = "TCP Proxying and Protocol Detection"
-description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
-weight = 2
-aliases = [
-  "/2.11/supported-protocols/",
-  "../tasks/upgrading-2.10-ports-and-protocols/",
-]
-+++
+---
+title: TCP Proxying and Protocol Detection
+description: Linkerd is capable of proxying all TCP traffic, including TLS'd connections,
+  WebSockets, and HTTP tunneling.
+weight: 2
+---
 
 Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling.
@@ -84,7 +81,7 @@ configuration.
 If you are using one of those protocols, follow this decision tree to determine
 which configuration you need to apply.
 
-![Decision tree](/images/protocol-detection-decision-tree.png)
+![Decision tree](/docs/images/protocol-detection-decision-tree.png)
 
 ## Marking ports as opaque
 
@@ -110,9 +107,9 @@ provide will _replace_, not augment, the default list of opaque ports.
 
 {{< note >}}
 If you are using [authorization policies](../server-policy/), the `Server`'s
-`proxyProtocol` field which can be used to control protocol detection behavior
-and can be used instead of a Service annotation. Regardless, we suggest
-annotating the Service object for clarity.
+`proxyProtocol` field can be used to control protocol detection behavior
+instead of a Service annotation. Regardless, we suggest annotating the
+Service object for clarity.
 {{< /note >}}
 
 ## Marking ports as skip ports

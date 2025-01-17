@@ -1,0 +1,3 @@
+<h{{ .Level }}>
+  {{ .Text | safeHTML }}
+</h{{ .Level }}>

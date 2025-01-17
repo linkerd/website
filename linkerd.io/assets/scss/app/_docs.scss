@@ -1,0 +1,139 @@
+/*
+@markup See: layouts/docs/*
+*/
+
+.docs__deprecated-alert {
+  // Override component styles
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.docs__container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.docs__sidebar {
+  background-color: $light-gray;
+}
+.docs__nav {
+  @include make-stack(3);
+  padding: spacer(4);
+
+  select {
+    // Override base styles
+    border: none;
+    background-color: transparent;
+  }
+  ul, li {
+    // Override base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  nav li {
+    position: relative; // Needed to position label
+    line-height: $line-height-tight;
+
+    a {
+      display: block;
+      padding: spacer(2) 0 spacer(2) spacer(3);
+      margin-right: spacer(5); // Prevent the text from touching the label
+      color: $gray;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+    label {
+      // Postion toggle button
+      position: absolute;
+      top: 6px;
+      right: spacer(2);
+    }
+    &.docs__nav--selected {
+      background-color: $white;
+
+      & > a {
+        color: $navy;
+      }
+    }
+    li {
+      // Indent submenus
+      padding-left: spacer(3);
+
+      li {
+        // Reduce font size and spacing below level 2
+        font-size: $font-size-sm;
+        
+        a {
+          padding-top: spacer(1);
+          padding-bottom: spacer(1);
+        }
+      }
+    }
+  }
+  .docs__versions {
+    padding-bottom: spacer(2);
+    border-bottom: solid 1px $border-color;
+  }
+  .docs__community {
+    margin-top: spacer(3);
+    padding: spacer(4) spacer(3);
+    border-top: solid 1px $border-color;
+
+    ul {
+      @include make-stack(3);
+    }
+    img {
+      width: auto;
+      height: 20px;
+    }
+  }
+}
+.docs__main {
+  padding: spacer(7) 0;
+}
+.docs__header {
+  h1 {
+    margin-bottom: spacer(5); // Override base styles
+  }
+}
+.docs__body {
+  max-width: 800px;
+  padding-left: spacer(4);
+  padding-right: spacer(4);
+}
+@media (min-width: breakpoint-min-width("md")) {
+  .docs__sidebar {
+    padding: spacer(7) 0;
+  }
+  .docs__container {
+    grid-template-columns: 300px 1fr;
+  }
+  .docs__sidebar {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .docs__nav {
+    width: 300px;
+    padding: 0 0 0 spacer(4);
+  }
+  .docs__versions,
+  .docs__community {
+    margin-right: spacer(4);
+  }
+}
+@media (min-width: breakpoint-min-width("xl")) {
+  .docs__body {
+    padding-left: spacer(7);
+  }
+}
+@media (min-width: breakpoint-min-width("xxl")) {
+  .docs__container {
+    grid-template-columns: 33% 1fr;
+  }
+  .docs__nav {
+    width: 350px;
+  }
+}

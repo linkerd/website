@@ -1,10 +1,7 @@
-+++
-title = "HTTPRoutes"
-description = "Linkerd can use the HTTPRoute resource to configure per-route policies."
-aliases = [
-  "../httproutes/"
-]
-+++
+---
+title: HTTPRoutes
+description: Linkerd can use the HTTPRoute resource to configure per-route policies.
+---
 
 To configure routing behavior and policy for HTTP traffic, Linkerd supports the
 [HTTPRoute resource], defined by the Kubernetes [Gateway API].
@@ -46,7 +43,7 @@ proxies:
   authentication policies][auth-policy].
 
 {{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfile](../service-profiles/)s provide
+**Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,

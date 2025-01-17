@@ -1,0 +1,13 @@
+{{- $pages := where .Page.Pages "Params.unlisted" "ne" true }}
+{{- with $pages }}
+  <ul>
+    {{- range . }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          {{ .LinkTitle }}
+        </a><br>
+        {{ .Description }}
+      </li>
+    {{- end }}
+  </ul>
+{{- end }}

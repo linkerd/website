@@ -1,8 +1,8 @@
-+++
-title = "Configuring Per-Route Policy"
-description = "Fine-grained authorization policies can be configured for individual HTTP routes."
-aliases = []
-+++
+---
+title: Configuring Per-Route Policy
+description: Fine-grained authorization policies can be configured for individual
+  HTTP routes.
+---
 
 <!-- markdownlint-disable-file MD014 -->
 
@@ -63,7 +63,7 @@ $ kubectl -n booksapp port-forward svc/webapp 7000 &
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
-{{< fig src="/images/books/frontend.png" title="Frontend" >}}
+![Frontend](/docs/images/books/frontend.png "Frontend")
 
 ## Creating a Server resource
 
@@ -310,7 +310,7 @@ web UI, we may notice that something is amiss.
 
 Attempting to delete an author results in a "not found" error in the web UI:
 
-{{< fig src="/images/books/delete-404.png" title="Not found" >}}
+![Not found](/docs/images/books/delete-404.png "Not found")
 
 and similarly, adding a new author takes us to an error page.
 
@@ -355,7 +355,7 @@ EOF
 What happens if we try to delete an author _now_? We still see a failure, but a
 different one:
 
-{{< fig src="/images/books/delete-503.png" title="Internal server error" >}}
+![Internal server error](/docs/images/books/delete-503.png "Internal server error")
 
 This is because we have created a _route_ matching `DELETE`, `PUT`, and `POST`
 requests, but we haven't _authorized_ requests to that route. Running the
@@ -412,11 +412,11 @@ in this case, we only authenticate the `webapp` deployment's `ServiceAccount`
 
 Now, if we attempt to delete an author in the frontend once again, we can:
 
-{{< fig src="/images/books/delete-ok.png" title="Author deleted" >}}
+![Author deleted](/docs/images/books/delete-ok.png "Author deleted")
 
 Similarly, we can now create a new author successfully, as well:
 
-{{< fig src="/images/books/create-ok.png" title="Author created" >}}
+![Author created](/docs/images/books/create-ok.png "Author created")
 
 Running the `linkerd viz authz` command one last time, we now see that all
 traffic is authorized:

@@ -1,0 +1,27 @@
+/*
+@markup See: See: /layouts/docs/_markup/render-heading.html
+<h2 class="anchor">
+  Heading
+  <a class="anchor__link">
+    <svg class="icon">...</svg>
+  </a>
+</h2>
+*/
+
+.anchor {
+  scroll-margin-top: $header-min-height;
+
+  .anchor__link {
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  &:hover {
+    .anchor__link {
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

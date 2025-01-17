@@ -1,7 +1,7 @@
-+++
-title = "Multi-cluster communication with StatefulSets"
-description = "cross-cluster communication to and from headless services."
-+++
+---
+title: Multi-cluster communication with StatefulSets
+description: cross-cluster communication to and from headless services.
+---
 
 Linkerd's multi-cluster extension works by "mirroring" service information
 between clusters. Exported services in a target cluster will be mirrored as

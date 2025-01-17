@@ -1,7 +1,7 @@
-+++
-title = "Getting Per-Route Metrics"
-description = "Configure per-route metrics for your application."
-+++
+---
+title: Getting Per-Route Metrics
+description: Configure per-route metrics for your application.
+---
 
 To get per-route metrics, you must create [HTTPRoute] resources. If a route has
 a `parent_ref` which points to a **Service** resource, Linkerd will generate

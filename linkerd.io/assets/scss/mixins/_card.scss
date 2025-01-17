@@ -1,0 +1,85 @@
+@mixin make-card {
+  --card--center-body: center;
+
+  display: flex;
+  flex-direction: column;
+  padding: spacer(2);
+  background-color: $white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: spacer(4);
+    flex-grow: 1;
+    padding: spacer(3);
+  }
+  .card__header {
+    @include make-stack(1);
+  }
+  .card__content {
+    @include make-stack(3);
+    flex-grow: 1;
+  }
+  .card__footer {
+    display: flex;
+    flex-direction: row;
+    gap: spacer(3);
+  }
+}
+
+// @options
+
+// Add padding around media to align with content
+@mixin make-card--inset-media {
+  gap: spacer(4);
+  padding: spacer(4);
+
+  .card__body {
+    padding: 0;
+  }
+}
+
+// Move media horizontal to content
+@mixin make-card--horz {
+  --card--center-body: left; // When card is horizontal, do not center items in card body
+  flex-direction: row;
+}
+
+// Move media after content
+@mixin make-card--reverse {
+  .card__body {
+    order: 1;
+  }
+  .card__media {
+    order: 2;
+  }
+}
+
+// Center the media and body
+@mixin make-card--center {
+  align-items: center;
+
+  .card__body {
+    align-items: var(--card--center-body);
+  }
+}
+
+// Make the whole card clickable
+@mixin make-card-link {
+  display: block;
+  transition: all 0.3s ease-out;
+  color: $navy;
+
+  .card {
+    height: 100%;
+  }
+  &:hover {
+    transform: scale(1.05);
+
+    .card {
+      background-image: linear-gradient(160deg, tint-color($light-blue, 50%), $white);
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{{- /* Get RelPermalink of page resources */}}
+{{- $src := .Destination }}
+{{- if not (or (hasPrefix .Destination "/") (hasPrefix .Destination "http")) }}
+  {{- with $.Page.Resources.Get (strings.TrimPrefix "./" .Destination) }}
+    {{- if eq .ResourceType "image" }}
+      {{- with partial "utils/process-image" (dict
+        "res" .
+        "width" 2400
+        "height" 2400
+        "process" "fit q80 lanczos"
+      ) -}}
+        {{- $src = .RelPermalink }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- /* Process attributes */}}
+{{- $a := merge .Attributes (dict "alt" .Text "src" $src "class" "img img--max-fill img--center img--rounded") }}
+{{- $attributes := "" }}
+{{- range $k, $v := $a }}
+  {{- if $v }}
+    {{- $attributes = printf "%s %s=%q" $attributes $k $v }}
+  {{- end }}
+{{- end }}
+{{- /* Output standalone image */}}
+{{- if .IsBlock }}
+  <figure>
+    <img{{ $attributes | safeHTMLAttr }}>
+    {{ with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+  </figure>
+{{- /* Output inline image */}}
+{{- else }}
+  <img{{ $attributes | safeHTMLAttr }}{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- end -}}

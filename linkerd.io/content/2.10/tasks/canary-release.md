@@ -1,7 +1,8 @@
-+++
-title = "Automated Canary Releases"
-description = "Reduce deployment risk by combining Linkerd and Flagger to automate canary releases based on service metrics."
-+++
+---
+title: Automated Canary Releases
+description: Reduce deployment risk by combining Linkerd and Flagger to automate canary
+  releases based on service metrics.
+---
 
 Linkerd's [traffic split](../../features/traffic-split/) feature allows you to
 dynamically shift traffic between services. This can be used to implement
@@ -21,7 +22,7 @@ In this tutorial, we'll walk you through how to combine Linkerd with
 Linkerd's metrics and traffic splitting together in a control loop,
 allowing for fully-automated, metrics-aware canary deployments.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisites
 
@@ -66,8 +67,7 @@ orchestrates it. A load generator simply makes it easier to execute the rollout
 as there needs to be some kind of active traffic to complete the operation.
 Together, these components have a topology that looks like:
 
-{{< fig src="/images/canary/simple-topology.svg"
-        title="Topology" >}}
+![Topology](/docs/images/canary/simple-topology.svg "Topology")
 
 To add these components to your cluster and include them in the Linkerd
 [data plane](../../reference/architecture/#data-plane), run:
@@ -168,8 +168,7 @@ podinfo-primary      ClusterIP   10.7.249.63   <none>        9898/TCP   23m
 
 At this point, the topology looks a little like:
 
-{{< fig src="/images/canary/initialized.svg"
-        title="Initialized" >}}
+![Initialized](/docs/images/canary/initialized.svg "Initialized")
 
 {{< note >}}
 This guide barely touches all the functionality provided by Flagger. Make sure
@@ -213,8 +212,7 @@ kubectl -n test get ev --watch
 While an update is occurring, the resources and traffic will look like this at a
 high level:
 
-{{< fig src="/images/canary/ongoing.svg"
-        title="Ongoing" >}}
+![Ongoing](/docs/images/canary/ongoing.svg "Ongoing")
 
 After the update is complete, this picture will go back to looking just like the
 figure from the previous section.
@@ -262,8 +260,7 @@ running `linkerd viz dashboard` and then look at the detail page for the
 [podinfo traffic
 split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
-{{< fig src="/images/canary/traffic-split.png"
-        title="Dashboard" >}}
+![Dashboard](/docs/images/canary/traffic-split.png "Dashboard")
 
 ### Browser
 

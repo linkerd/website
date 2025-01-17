@@ -1,11 +1,265 @@
 {{ define "main" }}
-{{ partial "homepage/top-hero.html" .Params.top_hero  }}
-{{ partial "homepage/stats-list.html" .Params.stats }}
-{{ partial "homepage/featured-articles.html" .Params.featured_articles }}
-{{ partial "homepage/companies.html"  .Params.companies }}
-{{ partial "homepage/case-studies.html" .Params.case_studies }}
-{{ partial "homepage/about-linkerd.html" . }}
-{{ partial "homepage/features-list.html" .Params.features_list }}
-{{ partial "homepage/foundation-member-banner.html" .Params.foundation_member_banner }}
-{{ partial "homepage/tweets.html" .Params.tweets }}
+  <div class="home">
+
+    {{/* Hero */}}
+    {{ with .Params.hero }}
+      <div class="hero">
+        <div class="hero__container container">
+          <div class="hero__body">
+            <div class="hero__header">
+              <h1>
+                {{ .title }}
+              </h1>
+            </div>
+            <div class="hero__content">
+              {{ .content | $.Page.RenderString (dict "display" "block") }}
+            </div>
+            <div class="hero__footer">
+              {{ range .buttons }}
+                {{ partial "components/button" (dict "href" .href "text" .text "variant" .variant) }}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        <div class="home-hero__linky">
+          <img src="/home/hero/linky.svg" alt="Linky">
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Stats */}}
+    {{ with .Params.stats }}
+      <div class="home-stats">
+        <div class="home__container container">
+          <div class="home-stats__body">
+            {{ range . }}
+              <div>
+                <div class="home-stats__value">{{ .value }}</div>
+                <div class="home-stats__property">{{ .stat }}</div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Articles */}}
+    {{ with .Params.articles }}
+      <div class="home-articles">
+        <div class="home__container container">
+          <div class="home-articles__body">
+            <div class="home-articles__header">
+              <h2>
+                {{ .title }}
+              </h2>
+            </div>
+            <div class="home-articles__content">
+              {{ range .items }}
+                <a href="{{ .url }}" class="card-link">
+                  <div class="card">
+                    <div class="card__media">
+                      <img src="{{ .image }}" alt="{{ .title }}" class="img img--fill img--cover img--rounded">
+                    </div>
+                    <div class="card__body">
+                      <div class="card__header">
+                        <h4>
+                          {{ .title }}
+                        </h4>
+                      </div>
+                      <div class="card__content">
+                        {{ .content | $.Page.RenderString (dict "display" "block") }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Adopters */}}
+    {{ with .Params.adopters }}
+      <div class="home-adopters">
+        <div class="home__container container">
+          <div class="home-adopters__body">
+            <div class="home-adopters__title">
+              <a href="https://buoyant.io/" target="_blank" rel="noopener">
+                Linkerd was created by
+                {{ with resources.Get "logos/buoyant.png" }}
+                  <img src="{{ .RelPermalink }}" alt="Buoyant">
+                {{ end }}
+              </a>
+            </div>
+            <div class="home-adopters__content">
+              Adopters
+              <div class="home-adopters__mask">
+                <div class="home-adopters__logos">
+                  <div class="home-adopters__logos-1">
+                    {{ range . }}
+                      <a href="{{ .url }}" target="_blank" rel="noopener">
+                        <img src="{{ .image }}" alt="{{ path.BaseName .image }}">
+                      </a>
+                    {{ end }}
+                  </div>
+                  <div class="home-adopters__logos-2">
+                    {{ range . }}
+                      <a href="{{ .url }}" target="_blank" rel="noopener">
+                        <img src="{{ .image }}" alt="{{ path.BaseName .image }}">
+                      </a>
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Case Studies */}}
+    {{ with .Params.caseStudies }}
+      <div class="home-case-studies">
+        <div class="home__container container">
+          <div class="home-case-studies__body">
+            <div class="home-case-studies__header">
+              <h2>
+                {{ .title }}
+              </h2>
+            </div>
+            <div class="home-case-studies__content">
+              {{ range .items }}
+                <a href="{{ .url }}" class="card-link">
+                  <div class="card card--inset-media">
+                    <div class="card__media">
+                      <img src="{{ .image }}" alt="{{ .title }}" class="img img--h64">
+                    </div>
+                    <div class="card__body">
+                      <div class="card__content">
+                        {{ .content | $.Page.RenderString (dict "display" "block") }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* About */}}
+    {{ with .Params.about }}
+      <div class="home-about">
+        <div class="home-about__container container-lg">
+          <div class="home-about__body">
+            <div class="home-about__header">
+              <h2>
+                {{ .title }}
+              </h2>
+            </div>
+            <div class="home-about__content">
+              {{/* Render the built-in youtube shortcode in a layout (~_^) */}}
+              {{ (printf "{{< youtube %s >}}" .youtubeId) | markdownify }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Features */}}
+    {{ with .Params.features }}
+      <div class="home-features">
+        <div class="home__container container">
+          <div class="home-features__body">
+            <div class="home-features__content">
+              {{ range .items }}
+                <a href="{{ .url }}" class="card-link">
+                  <div class="card card--horz card--inset-media">
+                    <div class="card__media">
+                      <img src="{{ .image }}" alt="{{ .title }}" class="img img--h64">
+                    </div>
+                    <div class="card__body">
+                      <div class="card__header">
+                        <h4>
+                          {{ .title }}
+                        </h4>
+                      </div>
+                      <div class="card__content">
+                        {{ .content | $.Page.RenderString (dict "display" "block") }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* CNCF banner */}}
+    {{ with .Params.cncf }}
+      <div class="home-cncf">
+        <div class="home__container container">
+          <div class="home-cncf__body">
+            <h3>
+              {{ .title }}
+            </h3>
+            <img src="{{ .image }}" alt="CNCF" class="img img--w256 img--center">
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    {{/* Tweets */}}
+    {{ with .Params.tweets }}
+      <div class="home-tweets">
+        <div class="home__container container">
+          <div class="home-tweets__body">
+            <div class="home-tweets__header">
+              <h2>
+                {{ .title }}
+              </h2>
+            </div>
+            <div class="home-tweets__content">
+              {{ range .items }}
+                <div class="card">
+                    <div class="card__body">
+                      <div class="card__header">
+                        <a href="{{ .url }}" target="_blank" rel="noopener" class="avatar-link">
+                          <div class="avatar">
+                            <div class="avatar__image">
+                              {{ $alt := .name }}
+                              {{ with $.Resources.Get .image }}
+                                {{ with partial "utils/process-image" (dict
+                                  "res" .
+                                  "width" 96
+                                  "height" 96
+                                  "process" "fill jpg q80 lanczos"
+                                )}}
+                                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--48 img--cover img--round">
+                                {{ end }}
+                              {{ end }}
+                            </div>
+                            <h4 class="avatar__name">
+                              {{ .name }} <span class="avatar__title">@{{ .handle }}</span>
+                            </h4>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="card__content">
+                        {{ .content | $.Page.RenderString (dict "display" "block") }}
+                      </div>
+                    </div>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+  </div>
 {{ end }}
