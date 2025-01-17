@@ -1,6 +1,6 @@
 ---
 title: Retries and Timeouts
-description: Linkerd can perform service-specific retries and timeouts.
+description: Linkerd can retry and timeout HTTP and gRPC requests.
 weight: 3
 ---
 
@@ -37,7 +37,7 @@ belongs to.
 
 {{< warning >}}
 Prior to Linkerd 2.16, retries and timeouts were configured with
-[ServiceProfile](../../reference/service-profiles)s. While service profiles are
+[ServiceProfile](../../reference/service-profiles/)s. While service profiles are
 still supported, retries configured with HTTPRoute or GPRCRoute are
 **incompatible with ServiceProfiles**. If a ServiceProfile is defined for a
 Service, proxies will use the ServiceProfile retry configuration and ignore any
@@ -59,6 +59,34 @@ down by the retries instead of being allowed time to recover.
 The exact configuration of retry behavior to improve overall reliability
 without significantly increasing risk will require some care on the part of the
 user.
+
+## Per-request policies
+
+In addition to the annotation approach outlined above, retries and timeouts
+can be set on a per-request basis by setting specific HTTP headers.
+
+In order to enable this per-request policy, Linkerd must be installed with the
+`--set policyController.additionalArgs="--allow-l5d-request-headers"` flag or
+the corresponding Helm value.
+
+{{< warning >}}
+Per-request policies should **not** be enabled if your application accepts
+unfiltered requests from untrusted sources. For example, if you mesh an ingress
+controller which takes unfiltered Internet traffic (and you do not use
+`skip-inbound-ports` to instruct Linkerd to skip handling inbound traffic to the
+pod), untrusted clients will be able to specify Linkerd retry and timeout policy
+on their requests.
+{{< /warning >}}
+
+Once per-request policy is enabled, you can set timeout and retry policy on
+individual requests by setting these headers:
+
++ `l5d-retry-http`: Overrides the `retry.linkerd.io/http` annotation
++ `l5d-retry-grpc`: Overrides the `retry.linkerd.io/grpc` annotation
++ `l5d-retry-limit`: Overrides the `retry.linkerd.io/limit` annotation
++ `l5d-retry-timeout`: Overrides the `retry.linkerd.io/timeout` annotation
++ `l5d-timeout`: Overrides the `timeout.linkerd.io/request` annotation
++ `l5d-response-timeout`: Overrides the `timeout.linkerd.io/response` annotation
 
 ## Further reading
 

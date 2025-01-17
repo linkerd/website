@@ -96,5 +96,5 @@ To get started with the Gateway API types, you can:
 [Server]: ../../reference/authorization-policy/#server
 [auth-policy]: ../../tasks/configuring-per-route-policy/
 [dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../tasks/configuring-timeouts/#using-httproutes
+[timeouts]: ../../features/retries-and-timeouts/
 [ServiceProfiles]: ../../features/service-profiles/
