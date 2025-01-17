@@ -4,6 +4,14 @@ description: Create a service profile that provides more details for Linkerd to 
   on.
 ---
 
+{{< warning >}}
+As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
+types](../../features/gateway-api/), including for getting per-route metrics,
+specifying timeouts, and specifying retries. Service profiles continue to be
+supported for backwards compatibility, but will not receive further feature
+development.
+{{< /warning >}}
+
 [Service profiles](../../features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
 
@@ -11,9 +19,7 @@ When an HTTP (not HTTPS) request is received by a Linkerd proxy,
 the `destination service` of that request is identified.  If a
 service profile for that destination service exists, then that
 service profile is used to
-to provide [per-route metrics](../getting-per-route-metrics/),
-[retries](../configuring-retries/) and
-[timeouts](../configuring-timeouts/).
+to provide per-route metric, retries, and timeouts.
 
 The `destination service` for a request is computed by selecting
 the value of the first header to exist of, `l5d-dst-override`,
@@ -21,10 +27,7 @@ the value of the first header to exist of, `l5d-dst-override`,
 including the colon, is stripped.  That value is mapped to the fully
 qualified DNS name.  When the `destination service` matches the
 name of a service profile in the namespace of the sender or the
-receiver, Linkerd will use that to provide [per-route
-metrics](../getting-per-route-metrics/),
-[retries](../configuring-retries/) and
-[timeouts](../configuring-timeouts/).
+receiver, Linkerd will use that for additional features.
 
 There are times when you may need to define a service profile for
 a service which resides in a namespace that you do not control. To

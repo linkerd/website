@@ -1,22 +1,22 @@
 ---
 title: Configuring Dynamic Request Routing
-description: Configuring HTTPRoute resources to perform dynamic request routing.
+description: Dynamically route traffic based on parts of the HTTP call.
 ---
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd installed on your cluster. Follow
-the [Installing Linkerd Guide](../install/) if you haven't already done this
-(make sure you have at least linkerd stable-2.13.0 or edge-23.3.2).
+To use this guide, you'll need to have Linkerd installed on your cluster and the
+[Helm](https://helm.sh/docs/intro/quickstart/) CLI installed.
 
-You also need to have the [Helm](https://helm.sh/docs/intro/quickstart/) CLI
-installed.
+## Dynamic request routing
 
-## HTTPRoute for Dynamic Request Routing
-
-With dynamic request routing, you can route HTTP traffic based on the contents
+With dynamic request routing, you can route HTTP traffic based on the content
 of request headers. This can be useful for performing things like A/B testing
-and many other strategies for traffic management.
+and other strategies for traffic management.
+
+The core configuration mechanism are the [Gateway API] types, [HTTPRoute] and
+[GRPCRoute]. In this example we'll look at the common use case using the
+HTTPRoute type.
 
 In this tutorial, we'll make use of the
 [podinfo](https://github.com/stefanprodan/podinfo) project to showcase dynamic
@@ -75,7 +75,7 @@ PODINFO_UI_MESSAGE=A backend
 
 ## Introducing HTTPRoute
 
-Let's apply the following [`HTTPRoute`] resource to enable header-based routing:
+Let's apply the following `HTTPRoute` resource to enable header-based routing:
 
 ```yaml
 cat <<EOF | kubectl -n test apply -f -
@@ -104,35 +104,10 @@ spec:
 EOF
 ```
 
-{{< note >}}
-Two versions of the HTTPRoute resource may be used with Linkerd:
-
-- The upstream version provided by the Gateway API, with the
-  `gateway.networking.k8s.io` API group
-- A Linkerd-specific CRD provided by Linkerd, with the `policy.linkerd.io` API
-  group
-
-The two HTTPRoute resource definitions are similar, but the Linkerd version
-implements experimental features not yet available with the upstream Gateway API
-resource definition. See [the HTTPRoute reference
-documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
-for details.
-{{< /note >}}
-
-In `parentRefs` we specify the resources we want this [`HTTPRoute`] instance to
-act on. So here we point to the `backend-a-podinfo` Service on the [`HTTPRoute`]'s
+In `parentRefs` we specify the resources we want this `HTTPRoute` instance to
+act on. So here we point to the `backend-a-podinfo` Service on the `HTTPRoute`'s
 namespace (`test`), and also specify the Service port number (not the Service's
 target port).
-
-{{< warning >}}
-**Outbound [`HTTPRoute`](../../features/httproute/)s and
-[`ServiceProfile`](../../features/service-profiles/)s provide overlapping
-configuration.** For backwards-compatibility reasons, a `ServiceProfile` will
-take precedence over `HTTPRoute`s which configure the same Service. If a
-`ServiceProfile` is defined for the parent Service of an `HTTPRoute`,
-proxies will use the `ServiceProfile` configuration, rather than the
-`HTTPRoute` configuration, as long as the `ServiceProfile` exists.
-{{< /warning >}}
 
 Next, we give a list of rules that will act on the traffic hitting that Service.
 
@@ -150,7 +125,7 @@ In `backendRefs` we specify the final destination for requests matching the
 current rule, via the Service's `name` and `port`.
 
 Here we're specifying we'd like to route to `backend-b-podinfo` all the requests
-having the `x-request-id: alterrnative` header. If the header is not present,
+having the `x-request-id: alternative` header. If the header is not present,
 the engine fall backs to the last rule which has no `matches` entries and points
 to the `backend-a-podinfo` Service.
 
@@ -163,7 +138,7 @@ $ curl -sX POST localhost:9898/echo \
 PODINFO_UI_MESSAGE=A backend
 ```
 
-But if we add the "`x-request-id: alternative`" header they get routed to
+But if we add the `x-request-id: alternative` header, they get routed to
 `backend-b-podinfo`:
 
 ```bash
@@ -175,17 +150,17 @@ $ curl -sX POST \
 PODINFO_UI_MESSAGE=B backend
 ```
 
-### To Keep in Mind
+### Implementation notes
 
-Note that you can use any header you like, but for this to work the frontend has
-to forward it. "`x-request-id`" is a common header used in microservices, that is
-explicitly forwarded by podinfo, and that's why we chose it.
+In the example above, we used the `x-request-id` header, which is a common
+header that is forwarded by podinfo. However, the same technique will work with
+arbitrary headers, as long as the application forwards them.
 
-Also, keep in mind the linkerd proxy handles this on the client side of the
-request (the frontend pod in this case) and so that pod needs to be injected,
-whereas the destination pods don't require to be injected. But of course the
-more workloads you have injected the better, to benefit from things like easy
-mTLS setup and all the other advantages that linkerd brings to the table!
+Note also that dyanmic request routing is client-side behavior, so while the
+traffic source (in this case, the frontend pod) needs to be meshed, strictly
+speaking, the destination does not need to be meshed.
 
-[`HTTPRoute`]: ../../features/httproute/
+[HTTPRoute]: ../../reference/httproute/
+[GRPCRoute]: ../../reference/httproute/
+[Gateway API]: ../../features/gateway-api/
 [`ServiceProfile`]: ../../features/ServiceProfile/

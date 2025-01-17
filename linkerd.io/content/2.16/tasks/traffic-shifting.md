@@ -5,25 +5,25 @@ description: Dynamically split and shift traffic between backends
 
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
-implement A/B experiments, red/green deploys, canary rollouts,
-[fault injection](../fault-injection/) and more.
+implement A/B experiments, red/green deploys, canary rollouts, [fault
+injection](../fault-injection/), and more.
 
-Linkerd supports two different ways to configure traffic shifting: you can
-use the [Linkerd SMI extension](../linkerd-smi/) and
+Traffic splitting is accomplished with [HTTPRoute] and [GRPCRoute] types.
+
+{{< note >}}
+Earlier versions of Linkerd provided a
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
-resources, or you can use [HTTPRoute](../../features/httproute/) resources which
-Linkerd natively supports. While certain integrations such as
-[Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
-`HTTPRoute` is the preferred method going forward.
+resource as part of the the [Linkerd SMI extension](../linkerd-smi/) for traffic
+splitting. This approach is still supported but will not recieve further feature
+development.
+{{< /note >}}
 
 {{< docs/production-note >}}
 
 ## Prerequisites
 
-To use this guide, you'll need a Kubernetes cluster running:
-
-- Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
-  [Installing Linkerd Guide](../install/).
+To use this guide, you'll need a Kubernetes cluster running Linkerd and
+Linkerd-Viz.
 
 ## Set up the demo
 
@@ -245,3 +245,7 @@ NAME   MESHED   SUCCESS       RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99   TC
 v1        1/1         -         -             -             -             -          -
 v2        1/1   100.00%   10.0rps           1ms           1ms           2ms          1
 ```
+
+[HTTPRoute]: ../../reference/httproute/
+[GRPCRoute]: ../../reference/httproute/
+[Gateway API]: ../../features/gateway-api/
