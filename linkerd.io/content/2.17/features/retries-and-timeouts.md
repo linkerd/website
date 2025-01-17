@@ -86,7 +86,7 @@ individual requests by setting these headers:
 * `l5d-retry-limit`: Overrides the `retry.linkerd.io/limit` annotation
 * `l5d-retry-timeout`: Overrides the `retry.linkerd.io/timeout` annotation
 * `l5d-timeout`: Overrides the `timeout.linkerd.io/request` annotation
-+ `l5d-response-timeout`: Overrides the `timeout.linkerd.io/response` annotation
+* `l5d-response-timeout`: Overrides the `timeout.linkerd.io/response` annotation
 
 ## Further reading
 
