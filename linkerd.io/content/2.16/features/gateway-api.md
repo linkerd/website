@@ -1,6 +1,6 @@
 ---
 title: Gateway API support
-description: Linkerd uses the Gateway API resource types for much configuration.
+description: Linkerd uses Gateway API resource types to configure certain features.
 ---
 
 The Gateway API is a set of CRDs in the `gateway.networking.k8s.io` API group
