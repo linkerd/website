@@ -94,7 +94,6 @@ Yes. See the list of companies that provide
 
 ## What's on the Linkerd roadmap?
 
-
 You can stay updated on ongoing development by reviewing the
 [active GitHub issues](https://github.com/linkerd/linkerd2/issues).
 You can also check out the [Linkerd Blog](https://linkerd.io/blog/) or community updates for announcements on
