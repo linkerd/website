@@ -1,7 +1,8 @@
-+++
-title = "CNI Plugin"
-description = "Linkerd can optionally use a CNI plugin instead of an init-container to avoid NET_ADMIN capabilities."
-+++
+---
+title: CNI Plugin
+description: Linkerd can optionally use a CNI plugin instead of an init-container
+  to avoid NET_ADMIN capabilities.
+---
 
 Linkerd's data plane works by transparently routing all TCP traffic to and from
 every meshed pod to its proxy. (See the
@@ -23,6 +24,13 @@ capability.
 Linkerd's CNI plugin is designed to run in conjunction with your existing CNI
 plugin, using _CNI chaining_. It handles only the Linkerd-specific
 configuration and does not replace the need for a CNI plugin.
+{{< /note >}}
+
+{{< note >}}
+If you're installing Linkerd's CNI plugin on top of Cilium, make sure to install
+the latter with the option `cni.exclusive=false`, so Cilium doesn't take
+ownership over the CNI configurations directory, and allows other plugins to
+deploy their configurations there.
 {{< /note >}}
 
 ## Installation

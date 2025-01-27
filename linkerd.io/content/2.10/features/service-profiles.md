@@ -1,10 +1,8 @@
-+++
-title = "Service Profiles"
-description = "Linkerd's service profiles enable per-route metrics as well as retries and timeouts."
-aliases = [
-  "/2.10/service-profiles/"
-]
-+++
+---
+title: Service Profiles
+description: Linkerd's service profiles enable per-route metrics as well as retries
+  and timeouts.
+---
 
 A service profile is a custom Kubernetes resource ([CRD][crd]) that can provide
 Linkerd additional information about a service. In particular, it allows you to

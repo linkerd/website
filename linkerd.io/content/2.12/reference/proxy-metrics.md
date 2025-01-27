@@ -1,12 +1,8 @@
-+++
-title = "Proxy Metrics"
-description = "The Linkerd proxy natively exports Prometheus metrics for all incoming and outgoing traffic."
-aliases = [
-  "/proxy-metrics/",
-  "../proxy-metrics/",
-  "../observability/proxy-metrics/"
-]
-+++
+---
+title: Proxy Metrics
+description: The Linkerd proxy natively exports Prometheus metrics for all incoming
+  and outgoing traffic.
+---
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy.  The following metrics are available at `/metrics` on the proxy's metrics

@@ -1,12 +1,12 @@
-+++
-title = "install"
-+++
+---
+title: install
+---
 
-{{< cli/description "install" >}}
+{{< docs/cli-description "install" >}}
 
 For further details on how to install Linkerd onto your own cluster, check out
 the [install documentation](../../../tasks/install/).
 
-{{< cli/examples "install" >}}
+{{< docs/cli-examples "install" >}}
 
-{{< cli/flags "install" >}}
+{{< docs/cli-flags "install" >}}

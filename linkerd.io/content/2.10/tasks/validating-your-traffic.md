@@ -1,8 +1,7 @@
-+++
-title = "Validating your mTLS traffic"
-description = "You can validate whether or not your traffic is being mTLS'd by Linkerd."
-aliases = ["securing-your-service"]
-+++
+---
+title: Validating your mTLS traffic
+description: You can validate whether or not your traffic is being mTLS'd by Linkerd.
+---
 
 By default, [Linkerd automatically enables mutual Transport Layer Security
 (mTLS)](../../features/automatic-mtls/) for TCP traffic between meshed pods, by

@@ -1,7 +1,7 @@
-+++
-title = "Injecting Faults"
-description = "Practice chaos engineering by injecting faults into services with Linkerd."
-+++
+---
+title: Injecting Faults
+description: Practice chaos engineering by injecting faults into services with Linkerd.
+---
 
 It is easy to inject failures into applications by using the [Traffic Split
 API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
@@ -13,7 +13,7 @@ or even crazy payloads.
 The [books demo](../books/) is a great way to show off this behavior. The
 overall topology looks like:
 
-{{< fig src="/images/books/topology.png" title="Topology" >}}
+![Topology](/docs/images/books/topology.png "Topology")
 
 In this guide, you will split some of the requests from `webapp` to `books`.
 Most requests will end up at the correct `books` destination, however some of

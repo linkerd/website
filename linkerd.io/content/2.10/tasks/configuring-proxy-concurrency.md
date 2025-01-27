@@ -1,7 +1,7 @@
-+++
-title = "Configuring Proxy Concurrency"
-description = "Limit the Linkerd proxy's CPU usage."
-+++
+---
+title: Configuring Proxy Concurrency
+description: Limit the Linkerd proxy's CPU usage.
+---
 
 The Linkerd data plane's proxies are multithreaded, and are capable of running a
 variable number of worker threads so that their resource usage matches the
@@ -45,8 +45,8 @@ linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
 ```
 
 For more fine-grained configuration, the annotation may be added to any
-[injectable Kubernetes resource](../../proxy-injection/), such as a namespace, pod,
-or deployment.
+[injectable Kubernetes resource](../../features/proxy-injection/), such as a
+namespace, pod, or deployment.
 
 For example, the following will configure any proxies in the `my-deployment`
 deployment to use two CPU cores:

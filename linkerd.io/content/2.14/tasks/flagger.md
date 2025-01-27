@@ -1,8 +1,8 @@
-+++
-title = "Progressive Delivery"
-description = "Reduce deployment risk by automating canary releases based on service metrics."
-aliases = ["canary-release"]
-+++
+---
+title: Progressive Delivery
+description: Reduce deployment risk by automating canary releases based on service
+  metrics.
+---
 
 Linkerd's [dynamic request routing](../../features/request-routing/) allows you
 to dynamically shift traffic between services. This can be used to implement
@@ -23,7 +23,7 @@ tools: [Flagger](https://flagger.app/) and
 metrics and request routing together in a control loop, allowing for
 fully-automated, metrics-aware canary deployments.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisites
 
@@ -69,8 +69,7 @@ orchestrates it. A load generator simply makes it easier to execute the rollout
 as there needs to be some kind of active traffic to complete the operation.
 Together, these components have a topology that looks like:
 
-{{< fig src="/images/canary/simple-topology.svg"
-        title="Topology" >}}
+![Topology](/docs/images/canary/simple-topology.svg "Topology")
 
 To add these components to your cluster and include them in the Linkerd
 [data plane](../../reference/architecture/#data-plane), run:
@@ -180,6 +179,47 @@ spec:
 EOF
 ```
 
+In case you are using `ServiceProfile`s (for features not
+currently supported with `HttpRoute`s) you will
+need to change your `Canary` to use the SMI interface as provider:
+
+```yaml
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: podinfo
+  namespace: test
+spec:
+  provider: "smi:v1alpha2"
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: podinfo
+  service:
+    # service port number
+    port: 9898
+    # container port number or name (optional)
+    targetPort: 9898
+  analysis:
+    interval: 10s
+    threshold: 5
+    stepWeight: 10
+    maxWeight: 100
+    metrics:
+    - name: success-rate
+      templateRef:
+        name: success-rate
+        namespace: test
+      thresholdRange:
+        min: 99
+      interval: 1m
+```
+
+This will override the default flagger's mesh provider from `linkerd` to `smi:v1alpha2`.
+Flagger will create `TrafficSplit`s instead of `HTTPRoute`s.
+Linkerd SMI extension will monitor these `TrafficSplit`s
+and will change `dstOverrides` on your `ServiceProfile`s when the deployment is happening.
+
 The Flagger controller is watching these definitions and will create some new
 resources on your cluster. To watch as this happens, run:
 
@@ -212,8 +252,7 @@ podinfo-primary      ClusterIP   10.7.249.63   <none>        9898/TCP   23m
 
 At this point, the topology looks a little like:
 
-{{< fig src="/images/canary/initialized.svg"
-        title="Initialized" >}}
+![Initialized](/docs/images/canary/initialized.svg "Initialized")
 
 {{< note >}}
 This guide barely touches all the functionality provided by Flagger. Make sure
@@ -257,8 +296,7 @@ kubectl -n test get ev --watch
 While an update is occurring, the resources and traffic will look like this at a
 high level:
 
-{{< fig src="/images/canary/ongoing.svg"
-        title="Ongoing" >}}
+![Ongoing](/docs/images/canary/ongoing.svg "Ongoing")
 
 After the update is complete, this picture will go back to looking just like the
 figure from the previous section.

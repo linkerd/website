@@ -1,7 +1,8 @@
-+++
-title = "Setting Up Service Profiles"
-description = "Create a service profile that provides more details for Linkerd to build on."
-+++
+---
+title: Setting Up Service Profiles
+description: Create a service profile that provides more details for Linkerd to build
+  on.
+---
 
 [Service profiles](../../features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
@@ -62,7 +63,7 @@ For a complete demo walkthrough, check out the
 There are a couple different ways to use `linkerd profile` to create service
 profiles.
 
-{{< pagetoc >}}
+{{< docs/toc >}}
 
 Requests which have been associated with a route will have a `rt_route`
 annotation. To manually verify if the requests are being associated correctly,

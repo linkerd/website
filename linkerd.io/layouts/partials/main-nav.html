@@ -1,0 +1,40 @@
+{{ $page := . }}
+<nav class="main-nav">
+  <ul class="main-nav__menu">
+    {{ range site.Menus.main }}
+      {{/* Manually select the docs menu item, since /docs/ is not a real section */}}
+      {{ $docs := and (eq .Name "Docs") (or (hasPrefix $page.Section "2.") (hasPrefix $page.Section "2-")) }}
+      {{ $current := or $docs ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
+      <li{{ if $current }} class="main-nav__menu--selected"{{ end }}>
+        <a href="{{ default "#" .URL }}"
+          {{- if hasPrefix .URL "http" }} target="_blank" rel="noopener"{{ end -}}
+        >{{ .Name }}{{ if .HasChildren }}{{ partial "components/icon" (dict "name" "chevron-down" "variant" "primary") }}{{ end }}</a>
+        {{ if .HasChildren }}
+          <ul>
+            {{ range .Children }}
+              <li{{ if $page.IsMenuCurrent "main" . }} class="main-nav__menu--selected"{{ end }}>
+                <a href="{{ .URL }}"
+                  {{- if hasPrefix .URL "http" }} target="_blank" rel="noopener"{{ end -}}
+                >{{ .Name }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+  <div class="main-nav__search">
+    <form action="/search" method="get">
+      <div class="search-input search-input--sm">
+        {{ partial "components/icon" (dict "name" "search") }}
+        <input type="text" name="q" placeholder="Search">
+      </div>
+    </form>
+  </div>
+  <div class="main-nav__github">
+    <a class="github-button" href="https://github.com/linkerd/linkerd2" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star linkerd/linkerd2 on GitHub">Star</a>
+  </div>
+  <div class="main-nav__forum">
+    {{ partial "components/button" (dict "href" "https://linkerd.buoyant.io" "text" "Join Forum" "variant" "primary" "size" "sm") }}
+  </div>
+</nav>

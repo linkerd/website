@@ -1,0 +1,29 @@
+/*
+@markup
+<table class="keyval">
+  ...
+</table>
+*/
+
+.keyval {
+  // Override base styles
+  tr {
+    background-color: $light-gray;
+  }
+  th:nth-child(1),
+  td:nth-child(1) {
+    background-color: $light-blue;
+    border-right: solid 1px $border-color;
+
+    code:not([class^=lang]) {
+      // Override base styles
+      padding: 0;
+      background-color: transparent;
+      mix-blend-mode: normal;
+
+      @media (min-width: breakpoint-min-width("lg")) {
+        white-space: nowrap;
+      }
+    }
+  }
+}

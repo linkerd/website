@@ -1,7 +1,8 @@
-+++
-title = "Authorization Policy"
-description = "Linkerd can restrict which types of traffic are allowed between meshed services."
-+++
+---
+title: Authorization Policy
+description: Linkerd can restrict which types of traffic are allowed between meshed
+  services.
+---
 
 Linkerd's authorization policy allows you to control which types of
 traffic are allowed to meshed pods. For example, you can restrict communication
@@ -46,7 +47,7 @@ policy at that point in the hierarchy. Valid default policies include:
 
 - `all-unauthenticated`: allow all requests. This is the default.
 - `all-authenticated`: allow requests from meshed clients only.
-- `cluster-authenticated`: allow requests form meshed clients in the same
+- `cluster-authenticated`: allow requests from meshed clients in the same
   cluster.
 - `deny`: deny all requests.
 

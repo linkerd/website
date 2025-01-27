@@ -1,7 +1,7 @@
-+++
-title = "Configuring Proxy Discovery Cache"
-description = "Changing proxy discover cache timeouts when using slow clients."
-+++
+---
+title: Configuring Proxy Discovery Cache
+description: Changing proxy discover cache timeouts when using slow clients.
+---
 
 The Linkerd proxy maintains in-memory state, such as discovery results, requests
 and connections. This state is cached to allow the proxy to process traffic more

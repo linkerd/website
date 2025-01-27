@@ -1,10 +1,7 @@
-+++
-title = "Architecture"
-description = "Deep dive into the architecture of Linkerd."
-aliases = [
-  "/2.10/architecture/"
-]
-+++
+---
+title: Architecture
+description: Deep dive into the architecture of Linkerd.
+---
 
 At a high level, Linkerd consists of a *control plane* and a *data plane*.
 
@@ -19,8 +16,7 @@ from the service. Because they're transparent, these proxies act as highly
 instrumented out-of-process network stacks, sending telemetry to, and receiving
 control signals from, the control plane.
 
-{{< fig src="/images/architecture/control-plane.png"
-title="Linkerd's architecture" >}}
+![Linkerd's architecture](/docs/images/architecture/control-plane.png "Linkerd's architecture")
 
 ## CLI
 

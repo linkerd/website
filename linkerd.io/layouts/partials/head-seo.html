@@ -1,0 +1,11 @@
+{{/* Specify canonical URL */}}
+{{ $url := .Permalink }}
+{{ $latestVersion := site.Params.latestMajorVersion }}
+{{ if and (hasPrefix .Section "2.") (ne .Section $latestVersion) }}
+  {{/* For older Linkerd docs, set the canonical URL to the latest doc, if it exists */}}
+  {{ $latestFilePath := replace .RelPermalink (printf "/%s/" .Section) (printf "/%s/" $latestVersion) }}
+  {{ if fileExists $latestFilePath }}
+    {{ $url = absURL $latestFilePath }}
+  {{ end }}
+{{ end }}
+<link rel="canonical" href="{{ $url }}">

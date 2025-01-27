@@ -1,7 +1,7 @@
-+++
-title = "Using A Private Docker Repository"
-description = "Using Linkerd with a Private Docker Repository."
-+++
+---
+title: Using A Private Docker Repository
+description: Using Linkerd with a Private Docker Repository.
+---
 
 In some cases, you will want to use a private docker repository to store the
 Linkerd images. This scenario requires knowing the names and locations of the
@@ -32,7 +32,7 @@ image: prom/prometheus:v2.11.1
 ```
 
 All of the Linkerd images are publicly available in the
-[Linkerd Google Container Repository](https://console.cloud.google.com/gcr/images/linkerd-io/GLOBAL/)
+[Linkerd Google Container Repository](https://console.cloud.google.com/gcr/docs/images/linkerd-io/GLOBAL/)
 
 Stable images are named using the convention  `stable-<version>` and the edge
 images use the convention `edge-<year>.<month>.<release-number>`.

@@ -1,7 +1,8 @@
-+++
-title = "Generating your own mTLS root certificates"
-description = "Generate your own mTLS root certificate instead of letting Linkerd do it for you."
-+++
+---
+title: Generating your own mTLS root certificates
+description: Generate your own mTLS root certificate instead of letting Linkerd do
+  it for you.
+---
 
 In order to support [mTLS connections between meshed
 pods](../../features/automatic-mtls/), Linkerd needs a trust anchor certificate and
@@ -20,7 +21,7 @@ algorithm which is the default for `step`. To generate ECDSA P-256 certificates
 with openssl, you can use the `openssl ecparam -name prime256v1` command. In
 this tutorial, we'll walk you through how to to use the `step` CLI to do this.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Generating the certificates with `step`
 

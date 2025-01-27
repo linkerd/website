@@ -1,7 +1,7 @@
-+++
-title = "Authorization Policy"
-description = "Linkerd can restrict which types of traffic are allowed to ."
-+++
+---
+title: Authorization Policy
+description: Linkerd can restrict which types of traffic are allowed to .
+---
 
 Linkerd's server authorization policy allows you to control which types of
 traffic are allowed to meshed pods. For example, you can restrict communication
@@ -102,4 +102,4 @@ existing TCP connections.
 See
 [emojivoto-policy.yml](https://github.com/linkerd/website/blob/main/run.linkerd.io/public/emojivoto-policy.yml)
 for an example set of policy definitions for the [Emojivoto sample
-application](/getting-started/).
+application](/2/getting-started/).

@@ -1,0 +1,25 @@
+<header class="main-header">
+  <div class="main-header__container">
+    <div class="main-header__logo">
+      <a href="/">
+        {{ with resources.Get "logos/linkerd.png" }}
+          <img src="{{ .RelPermalink }}" alt="Linkerd">
+        {{ end }}
+      </a>
+    </div>
+    <input class="main-header__toggle-checkbox" type="checkbox" id="main-header-toggle">
+    <label class="main-header__toggle" for="main-header-toggle">
+      <span class="main-header__toggle-icon">
+        <span class="main-header__toggle-icon--open">
+          {{ partial "components/icon" (dict "name" "menu" "variant" "primary") }}
+        </span>
+        <span class="main-header__toggle-icon--close">
+          {{ partial "components/icon" (dict "name" "close" "variant" "primary") }}
+        </span>
+      </span>
+    </label>
+    <div class="main-header__nav">
+      {{ partial "main-nav" . }}
+    </div>
+  </div>
+</header>

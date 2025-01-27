@@ -1,0 +1,16 @@
+{{- /*
+@param {string} [icon]
+@param {string} [href]
+@param {string} [variant]
+@param {string} [size]
+
+@example {{ partial "components/icon-button" (dict "href" "https://github.com" "icon" "github") }}
+*/}}
+{{- /* Get icon */}}
+{{- $icon := partial "components/icon" (dict "name" .icon "variant" .variant "size" .size ) }}
+{{- /* Output */}}
+{{- if $icon }}
+<a{{ with .href }} href="{{ . }}"{{ end }} class="icon-button" {{ if hasPrefix .href "http" }} target="_blank" rel="noopener"{{ end }}>
+  {{ $icon | safeHTML }}
+</a>
+{{- end -}}

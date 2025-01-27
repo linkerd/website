@@ -1,7 +1,7 @@
-+++
-title = "Handling ingress traffic"
-description = "Linkerd can work alongside your ingress controller of choice."
-+++
+---
+title: Handling ingress traffic
+description: Linkerd can work alongside your ingress controller of choice.
+---
 
 Ingress traffic refers to traffic that comes into your cluster from outside the
 cluster. For reasons of simplicity and composability, Linkerd itself doesn't
@@ -59,6 +59,11 @@ and external endpoints.
 Linkerd versions 2.13.0 through 2.13.4 had a bug whereby the `l5d-dst-override`
 header was *required* in ingress mode, or the request would fail. This bug was
 fixed in 2.13.5, and was not present prior to 2.13.0.
+{{< /note >}}
+
+{{< note >}}
+Be sure to not deploy the ingress controller in the `kube-system` or `cert-manager`
+namespace, as Linkerd [ignores these namespaces by default for injection](../../features/proxy-injection/#exclusions).
 {{< /note >}}
 
 For more on ingress mode and why it's necessary, see [Ingress

@@ -1,7 +1,7 @@
-+++
-title = "Configuring Timeouts"
-description = "Configure Linkerd to automatically fail requests that take too long."
-+++
+---
+title: Configuring Timeouts
+description: Configure Linkerd to automatically fail requests that take too long.
+---
 
 To limit how long Linkerd will wait before failing an outgoing request to
 another service, you can configure timeouts. Timeouts specify the maximum amount
@@ -77,8 +77,7 @@ spec:
 Each [route](../../reference/service-profiles/#route) in a [ServiceProfile] may
 define a request timeout for requests matching that route. This timeout secifies
 the maximum amount of time to wait for a response (including retries) to
-complete after the request is sent. If unspecified, the default timeout is 10
-seconds.
+complete after the request is sent.
 
 ```yaml
 spec:

@@ -1,0 +1,60 @@
+{{ $authorName := "" }}
+{{ $authorRes := "" }}
+{{ $authorImg := "" }}
+{{ with .Params.author }}
+  {{ if (reflect.IsMap .) }}
+    {{/* Get author data from page params */}}
+    {{ $authorName = .name }}
+    {{ with .avatar }}
+      {{ if hasPrefix . "http" }}
+        {{/* Avatar is a remote image */}}
+        {{ with resources.GetRemote . }}
+          {{ $authorRes = . }}
+        {{ else }}
+          {{ warnf "Unable to get remote resource %q" . }}
+        {{ end }}
+      {{ else }}
+        {{/* Otherwise avatar must be page resource */}}
+        {{ with $.Resources.GetMatch . }}
+          {{ $authorRes = . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{/* Get author data from global data source */}}
+    {{ with index site.Data.authors . }}
+      {{ $authorName = .name }}
+      {{ with .avatar }}
+        {{/* Avatar must be global resource */}}
+        {{ with resources.GetMatch . }}
+          {{ $authorRes = . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ with $authorRes }}
+    {{ with partial "utils/process-image" (dict
+      "res" .
+      "width" 96
+      "height" 96
+      "process" "fill center jpg q80 lanczos"
+    )}}
+      {{ $authorImg = .RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+<div class="blog-post-meta">
+  {{ if $authorImg }}
+    <div class="blog-post-meta__media">
+      <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="img img--48 img--cover img--round">
+    </div>
+  {{ end }}
+  <div class="blog-post-meta__body">
+    <div class="blog-post-meta__name">
+      {{ $authorName }}
+    </div>
+    <div class="blog-post-meta__date">
+      {{ .Date.Format "Jan 2, 2006" }} • {{ .ReadingTime }} min read
+    </div>
+  </div>
+</div>

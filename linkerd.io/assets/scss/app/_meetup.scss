@@ -1,0 +1,22 @@
+/*
+@markup See: layouts/meetup-in-a-box.html
+*/
+
+.meetup {
+  .hero {
+    .meetup__content {
+      @include make-stack(4);
+    }
+    .hero__footer {
+      flex-direction: column; // Override component styles
+    }
+    @media (min-width: breakpoint-min-width("lg")) {
+      .hero__body {
+        @include make-stack(0);
+        display: flex;
+        flex-direction: row;
+        gap: spacer(6);
+      }
+    }
+  }
+}

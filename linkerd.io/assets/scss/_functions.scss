@@ -1,0 +1,53 @@
+// Return deeply nested values from a map
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// Color functions
+
+// Mix a color with white
+@function tint-color($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Mix a color with black
+@function shade-color($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// Return a state color value
+@function state-color($state, $name) {
+  @return map-deep-get($state-colors, $state, $name);
+}
+
+// Sizing functions
+
+// Return a spacer value
+@function spacer($key) {
+  @return map-get($spacers, $key);
+}
+
+// Return an icon size value
+@function icon-size($key) {
+  @return map-get($icon-sizes, $key);
+}
+
+// Layout functions
+
+// Return a breakpoint min-width value
+@function breakpoint-min-width($breakpoint) {
+  @return map-get($breakpoint-min-widths, $breakpoint);
+}
+
+// Return a breakpoint max-width value
+@function breakpoint-max-width($breakpoint) {
+  @return map-get($breakpoint-max-widths, $breakpoint);
+}
+
+// Return a container max-width value
+@function container-max-width($breakpoint) {
+  @return map-get($container-max-widths, $breakpoint);
+}

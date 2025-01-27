@@ -1,0 +1,16 @@
+/*
+@markup
+<div class="page">
+  <div class="page__container">
+    ...
+  </div>
+</div>
+*/
+
+.page {
+  padding: spacer(7) 0;
+  background-color: $offwhite;
+  background-image: linear-gradient($light-blue, $offwhite);
+  background-size: 100% 200px;
+  background-repeat: no-repeat;
+}

@@ -1,8 +1,7 @@
-+++
-title = "Automatically Rotating Control Plane TLS Credentials"
-description = "Use cert-manager to automatically rotate control plane TLS credentials."
-aliases = [ "use_external_certs" ]
-+++
+---
+title: Automatically Rotating Control Plane TLS Credentials
+description: Use cert-manager to automatically rotate control plane TLS credentials.
+---
 
 Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature generates TLS
 certificates for proxies and automatically rotates them without user
@@ -16,7 +15,7 @@ static self-signed certificates with a validity of one year but require manual
 rotation by the user to prevent expiry. While this setup is convenient for quick
 start testing, it's not advisable nor recommended for production environments.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Cert manager
 

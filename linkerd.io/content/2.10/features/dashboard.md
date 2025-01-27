@@ -1,7 +1,8 @@
-+++
-title = "On-cluster metrics stack"
-description = "Linkerd provides a full on-cluster metrics stack, including CLI tools and dashboards."
-+++
+---
+title: On-cluster metrics stack
+description: Linkerd provides a full on-cluster metrics stack, including CLI tools
+  and dashboards.
+---
 
 Linkerd provides a full on-cluster metrics stack, including CLI tools, a web
 dashboard, and pre-configured Grafana dashboards.
@@ -45,7 +46,7 @@ rate, requests/second and latency), visualize service dependencies and
 understand the health of specific service routes. One way to pull it up is by
 running `linkerd viz dashboard` from the command line.
 
-{{< fig src="/images/architecture/stat.png" title="Top Line Metrics">}}
+![Top Line Metrics](/docs/images/architecture/stat.png "Top Line Metrics")
 
 ## Grafana
 
@@ -55,21 +56,13 @@ down into the details, even for pods.
 
 The dashboards that are provided out of the box include:
 
-{{< gallery >}}
+![Top Line Metrics](/docs/images/screenshots/grafana-top.png "Top Line Metrics")
 
-{{< gallery-item src="/images/screenshots/grafana-top.png"
-    title="Top Line Metrics" >}}
+![Deployment Detail](/docs/images/screenshots/grafana-deployment.png "Deployment Detail")
 
-{{< gallery-item src="/images/screenshots/grafana-deployment.png"
-    title="Deployment Detail" >}}
+![Pod Detail](/docs/images/screenshots/grafana-pod.png "Pod Detail")
 
-{{< gallery-item src="/images/screenshots/grafana-pod.png"
-    title="Pod Detail" >}}
-
-{{< gallery-item src="/images/screenshots/grafana-health.png"
-    title="Linkerd Health" >}}
-
-{{< /gallery >}}
+![Linkerd Health](/docs/images/screenshots/grafana-health.png "Linkerd Health")
 
 linkerd -n emojivoto check --proxy
 
@@ -110,18 +103,10 @@ linkerd -n emojivoto viz tap deploy/web
 All of this functionality is also available in the dashboard, if you would like
 to use your browser instead:
 
-{{< gallery >}}
+![Top Line Metrics](/docs/images/getting-started/stat.png "Top Line Metrics")
 
-{{< gallery-item src="/images/getting-started/stat.png"
-    title="Top Line Metrics">}}
+![Deployment Detail](/docs/images/getting-started/inbound-outbound.png "Deployment Detail")
 
-{{< gallery-item src="/images/getting-started/inbound-outbound.png"
-    title="Deployment Detail">}}
+![Top](/docs/images/getting-started/top.png "Top")
 
-{{< gallery-item src="/images/getting-started/top.png"
-    title="Top" >}}
-
-{{< gallery-item src="/images/getting-started/tap.png"
-    title="Tap" >}}
-
-{{< /gallery >}}
+![Tap](/docs/images/getting-started/tap.png "Tap")

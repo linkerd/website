@@ -1,0 +1,3 @@
+{{- $title := "Edge release content" }}
+{{- $content := "This page contains instructions using the latest edge release of Linkerd. For other types of releases, including stable releases, please see [Linkerd Releases](/releases/)." | markdownify }}
+{{ partial "components/alert" (dict "variant" "info" "callout" true "title" $title "content" $content) }}

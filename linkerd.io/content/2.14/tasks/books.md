@@ -1,7 +1,8 @@
-+++
-title = "Debugging HTTP applications with per-route metrics"
-description = "Follow a long-form example of debugging a failing HTTP application using per-route metrics."
-+++
+---
+title: Debugging HTTP applications with per-route metrics
+description: Follow a long-form example of debugging a failing HTTP application using
+  per-route metrics.
+---
 
 This demo is of a Ruby application that helps you manage your bookshelf. It
 consists of multiple microservices and uses JSON over HTTP to communicate with
@@ -19,7 +20,7 @@ the other services. There are three services:
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
-{{< fig src="/images/books/topology.png" title="Topology" >}}
+![Topology](/docs/images/books/topology.png "Topology")
 
 ## Prerequisites
 
@@ -62,13 +63,16 @@ Once the rollout has completed successfully, you can access the app itself by
 port-forwarding `webapp` locally:
 
 ```bash
-kubectl -n booksapp port-forward svc/webapp 7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 >/dev/null &
 ```
+
+(We redirect to `/dev/null` just so you don't get flooded with "Handling
+connection" messages for the rest of the exercise.)
 
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
-{{< fig src="/images/books/frontend.png" title="Frontend" >}}
+![Frontend](/docs/images/books/frontend.png "Frontend")
 
 Unfortunately, there is an error in the app: if you click *Add Book*, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
@@ -77,7 +81,7 @@ debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
 perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
-{{< fig src="/images/books/failure.png" title="Failure" >}}
+![Failure](/docs/images/books/failure.png "Failure")
 
 ## Add Linkerd to the service
 
@@ -108,7 +112,7 @@ out the Linkerd dashboard, run:
 linkerd viz dashboard &
 ```
 
-{{< fig src="/images/books/dashboard.png" title="Dashboard" >}}
+![Dashboard](/docs/images/books/dashboard.png "Dashboard")
 
 Select `booksapp` from the namespace dropdown and click on the
 [Deployments](http://localhost:50750/namespaces/booksapp/deployments) workload.
@@ -126,7 +130,7 @@ has two outgoing dependencies: `authors` and `book`. One is the service for
 pulling in author information and the other is the service for pulling in book
 information.
 
-{{< fig src="/images/books/webapp-detail.png" title="Detail" >}}
+![Detail](/docs/images/books/webapp-detail.png "Detail")
 
 A failure in a dependent service may be exactly what’s causing the errors that
 `webapp` is returning (and the errors you as a user can see when you click). We
@@ -134,7 +138,7 @@ can see that the `books` service is also failing. Let’s scroll a little furthe
 down the page, we’ll see a live list of all traffic endpoints that `webapp` is
 receiving. This is interesting:
 
-{{< fig src="/images/books/top.png" title="Top" >}}
+![Top](/docs/images/books/top.png "Top")
 
 Aha! We can see that inbound traffic coming from the `webapp` service going to
 the `books` service is failing a significant percentage of the time. That could
@@ -142,7 +146,7 @@ explain why `webapp` was throwing intermittent failures. Let’s click on the ta
 (🔬) icon and then on the Start button to look at the actual request and
 response stream.
 
-{{< fig src="/images/books/tap.png" title="Tap" >}}
+![Tap](/docs/images/books/tap.png "Tap")
 
 Indeed, many of these requests are returning 500’s.
 
@@ -249,6 +253,14 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/authors.sw
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/books.swagger \
   | linkerd -n booksapp profile --open-api - books \
   | kubectl -n booksapp apply -f -
+```
+
+After applying the service profiles, you'll then need to restart the books app
+deployments so that their proxies can start using the service profiles:
+
+```bash
+kubectl rollout restart deploy -n booksapp
+kubectl rollout status deploy -n booksapp
 ```
 
 Verifying that this all works is easy when you use `linkerd viz tap`. Each live
@@ -414,9 +426,8 @@ PUT /books/{id}.json        books   100.00%   0.7rps          80ms         170ms
 Requests to the `books` service's `PUT /books/{id}.json` route include retries
 for when that service calls the `authors` service as part of serving those
 requests, as described in the previous section. This improves success rate, at
-the cost of additional latency. For the purposes of this demo, let's set a 25ms
-timeout for calls to that route. Your latency numbers will vary depending on the
-characteristics of your cluster. To edit the `books` service profile, run:
+the cost of additional latency. For the purposes of this demo, let's set a 15ms
+timeout for calls to that route:
 
 ```bash
 kubectl -n booksapp edit sp/books.booksapp.svc.cluster.local
@@ -431,8 +442,12 @@ spec:
       method: PUT
       pathRegex: /books/[^/]*\.json
     name: PUT /books/{id}.json
-    timeout: 25ms ### ADD THIS LINE ###
+    timeout: 15ms ### ADD THIS LINE ###
 ```
+
+(You may need to adjust the timeout value depending on your cluster – 15ms
+should definitely show some timeouts, but feel free to raise it if you're
+getting so many that it's hard to see what's going on!)
 
 Linkerd will now return errors to the `webapp` REST client when the timeout is
 reached. This timeout includes retried requests and is the maximum amount of
