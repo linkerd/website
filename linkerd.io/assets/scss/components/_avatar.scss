@@ -1,0 +1,49 @@
+/*
+@markup
+<div class="avatar">
+  <div class="avatar__image">
+    Image
+  </div>
+  <p class="avatar__name">
+    Name <span class="avatar__title">Title</span>
+  </p>
+</div>
+*/
+
+.avatar {
+  display: flex;
+  gap: spacer(3);
+  align-items: center;
+
+  & > * {
+    margin-bottom: 0;
+  }
+  .avatar__title {
+    color: $gray;
+    font-weight: $font-weight-normal;
+  }
+}
+
+/*
+Make the whole avatar clickable.
+[!IMPORTANT] If using a avatar-link, the avatar **must not** contain anchor links.
+
+@markup
+<a class="avatar-link">
+  <div class="avatar">
+    ...
+  </div>
+</a>
+*/
+
+.avatar-link {
+  display: block;
+  color: $navy;
+
+  &:hover,
+  &:active {
+    .avatar__title {
+      color: $link-color-hover;
+    }
+  }
+}

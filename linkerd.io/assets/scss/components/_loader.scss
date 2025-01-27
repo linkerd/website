@@ -1,0 +1,31 @@
+/*
+@markup
+<div class="loader"></div>
+*/
+
+.loader {
+  width: spacer(6);
+  height: spacer(6);
+  display: inline-block;
+  box-sizing: border-box;
+  border: 4px solid $blue;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+
+  // @options
+
+  &.loader--center {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

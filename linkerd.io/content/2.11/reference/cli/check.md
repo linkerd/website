@@ -1,16 +1,13 @@
-+++
-title = "check"
-aliases = [
-  "../check-reference/"
-]
-+++
+---
+title: check
+---
 
-{{< cli/description "check" >}}
+{{< docs/cli-description "check" >}}
 
 Take a look at the [troubleshooting](../../../tasks/troubleshooting/) documentation
 for a full list of all the possible checks, what they do and how to fix them.
 
-{{< cli/examples "check" >}}
+{{< docs/cli-examples "check" >}}
 
 ## Example output
 
@@ -56,7 +53,7 @@ control-plane-version
 Status check results are √
 ```
 
-{{< cli/flags "check" >}}
+{{< docs/cli-flags "check" >}}
 
 ## Subcommands
 
@@ -65,8 +62,8 @@ Check supports subcommands as part of the
 
 ### config
 
-{{< cli/description "check config" >}}
+{{< docs/cli-description "check config" >}}
 
-{{< cli/examples "check config" >}}
+{{< docs/cli-examples "check config" >}}
 
-{{< cli/flags "check config" >}}
+{{< docs/cli-flags "check config" >}}

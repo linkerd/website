@@ -1,7 +1,7 @@
-+++
-title = "Automatic Multicluster Failover"
-description = "Use the Linkerd Failover extension to failover between clusters."
-+++
+---
+title: Automatic Multicluster Failover
+description: Use the Linkerd Failover extension to failover between clusters.
+---
 
 The Linkerd Failover extension is a controller which automatically shifts
 traffic from a primary service to one or more fallback services whenever the
@@ -15,7 +15,7 @@ Emojivoto application on two Kubernetes clusters and simulating a failure in
 one cluster. We will see the failover controller shift traffic to the other
 cluster to ensure the service remains available.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisites
 

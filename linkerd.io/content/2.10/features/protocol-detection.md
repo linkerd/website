@@ -1,11 +1,9 @@
-+++
-title = "TCP Proxying and Protocol Detection"
-description = "Linkerd is capable of proxying all TCP traffic, including TLS'd connections, WebSockets, and HTTP tunneling."
-weight = 2
-aliases = [
-  "/2.10/supported-protocols/"
-]
-+++
+---
+title: TCP Proxying and Protocol Detection
+description: Linkerd is capable of proxying all TCP traffic, including TLS'd connections,
+  WebSockets, and HTTP tunneling.
+weight: 2
+---
 
 Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling.

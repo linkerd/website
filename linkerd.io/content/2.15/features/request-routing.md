@@ -1,7 +1,7 @@
-+++
-title = "Dynamic Request Routing"
-description = "Linkerd can route individual HTTP requests based on their properties."
-+++
+---
+title: Dynamic Request Routing
+description: Linkerd can route individual HTTP requests based on their properties.
+---
 
 Linkerd's dynamic request routing allows you to control routing of HTTP and gRPC
 traffic based on properties of the request, including verb, method, query

@@ -1,7 +1,7 @@
-+++
-title = "Configuring Dynamic Request Routing"
-description = "Configuring HTTPRoute resources to perform dynamic request routing."
-+++
+---
+title: Configuring Dynamic Request Routing
+description: Configuring HTTPRoute resources to perform dynamic request routing.
+---
 
 ## Prerequisites
 

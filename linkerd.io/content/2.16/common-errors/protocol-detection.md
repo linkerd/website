@@ -1,7 +1,8 @@
-+++
-title = "Protocol Detection Errors"
-description = "Protocol detection errors indicate that Linkerd doesn't understand the protocol in use."
-+++
+---
+title: Protocol Detection Errors
+description: Protocol detection errors indicate that Linkerd doesn't understand the
+  protocol in use.
+---
 
 Linkerd is capable of proxying all TCP traffic, including TLS connections,
 WebSockets, and HTTP tunneling. In most cases where the client speaks first

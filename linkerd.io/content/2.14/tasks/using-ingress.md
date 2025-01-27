@@ -1,7 +1,7 @@
-+++
-title = "Handling ingress traffic"
-description = "Linkerd can work alongside your ingress controller of choice."
-+++
+---
+title: Handling ingress traffic
+description: Linkerd can work alongside your ingress controller of choice.
+---
 
 Ingress traffic refers to traffic that comes into your cluster from outside the
 cluster. For reasons of simplicity and composability, Linkerd itself doesn't
@@ -314,6 +314,7 @@ spec:
     - kind: Service
       name: web-svc
       port: 80
+      nativeLB: true
 ```
 
 ## GCE

@@ -1,7 +1,7 @@
-+++
-title = "Failfast"
-description = "Failfast means that no endpoints are available."
-+++
+---
+title: Failfast
+description: Failfast means that no endpoints are available.
+---
 
 If Linkerd reports that a given service is in the _failfast_ state, it
 means that the proxy has determined that there are no available endpoints

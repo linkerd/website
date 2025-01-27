@@ -1,9 +1,0 @@
-{{ $currentPage := .Page }}
-{{ $subPages := .Page.Pages }}
-{{ range $index, $page := sort $subPages "Title" }}
-{{ if (ne $page $currentPage) }}
-
-[{{ $page.Title }}]({{ $page.RelPermalink }}). {{ $page.Description}}
-
-{{ end }}
-{{ end }}

@@ -1,7 +1,7 @@
-+++
-title = "Traffic Shifting"
-description = "Dynamically split and shift traffic between backends"
-+++
+---
+title: Traffic Shifting
+description: Dynamically split and shift traffic between backends
+---
 
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
@@ -16,7 +16,7 @@ Linkerd natively supports. While certain integrations such as
 [Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
 `HTTPRoute` is the preferred method going forward.
 
-{{< trylpt >}}
+{{< docs/production-note >}}
 
 ## Prerequisites
 

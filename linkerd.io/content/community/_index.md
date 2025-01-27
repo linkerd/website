@@ -1,6 +1,7 @@
 ---
 title: Community
+type: _default
+layout: redirect
+params:
+  redirect: /
 ---
-<!-- markdownlint-disable -->
-<meta http-equiv="Refresh" content="0; url=/">
-<!-- markdownlint-enable -->

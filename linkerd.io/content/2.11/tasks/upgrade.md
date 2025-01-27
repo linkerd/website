@@ -1,11 +1,7 @@
-+++
-title = "Upgrading Linkerd"
-description = "Perform zero-downtime upgrades for Linkerd."
-aliases = [
-  "../upgrade/",
-  "../update/"
-]
-+++
+---
+title: Upgrading Linkerd
+description: Perform zero-downtime upgrades for Linkerd.
+---
 
 In this guide, we'll walk you through how to perform zero-downtime upgrades for
 Linkerd.
@@ -298,7 +294,6 @@ be aware of when upgrading from `stable-2.10.x`:
  result of their deprecation in Kubernetes v1.21 and above. The control plane
  and core extensions will now be shipped without PSPs; they can be enabled
  through a new install option `enablePSP: true`.
-- The `tcp_connection_duration_ms` metric has been removed.
 - Opaque ports changes: `443` is no longer included in the default opaque ports
  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
  ElasticSearch respectively (all server speak first protocols) have been added
@@ -316,7 +311,7 @@ before you can upgrade to Linkerd 2.10.
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
 through our [ports and protocols in 2.10 upgrade
-guide](../upgrading-2.10-ports-and-protocols/) for the repercussions.
+guide](../../features/protocol-detection/) for the repercussions.
 
 Second, we've introduced [extensions](../extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what

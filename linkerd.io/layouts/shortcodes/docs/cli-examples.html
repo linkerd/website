@@ -1,0 +1,12 @@
+{{- /* Get the CLI data file for the current linkerd version */}}
+{{- $file := replace .Page.Section "." "-" }}
+{{- $data := index site.Data.cli $file }}
+{{- /* Output data */}}
+{{ range where $data.CLIReference "Name" (.Get 0) }}
+  {{ with .Example }}
+    <h2>
+      Examples
+    </h2>
+    {{ highlight (replaceRE "(?m)^[ ]{2}" "" .) "bash" }}
+  {{ end }}
+{{ end }}

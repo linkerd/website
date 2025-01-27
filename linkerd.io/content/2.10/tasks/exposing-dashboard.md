@@ -1,16 +1,14 @@
-+++
-title = "Exposing the Dashboard"
-description = "Make it easy for others to access Linkerd and Grafana dashboards without the CLI."
-aliases = [
-  "../dns-rebinding/",
-]
-+++
+---
+title: Exposing the Dashboard
+description: Make it easy for others to access Linkerd and Grafana dashboards without
+  the CLI.
+---
 
 Instead of using `linkerd viz dashboard` every time you'd like to see what's
 going on, you can expose the dashboard via an ingress. This will also expose
 Grafana.
 
-{{< pagetoc >}}
+{{< docs/toc >}}
 
 ## Nginx
 

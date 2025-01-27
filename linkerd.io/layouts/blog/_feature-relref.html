@@ -1,0 +1,8 @@
+{{ partial "blog/get-image" (dict
+  "page" .
+  "src" .Params.feature
+  "default" "feature.*, cover.*"
+  "width" 2400
+  "height" 2400
+  "process" "fit q80 lanczos"
+) -}}

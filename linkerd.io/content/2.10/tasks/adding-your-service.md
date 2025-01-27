@@ -1,11 +1,8 @@
-+++
-title = "Adding Your Services to Linkerd"
-description = "In order for your services to take advantage of Linkerd, they also need to be *meshed* by injecting Linkerd's data plane proxy into their pods."
-aliases = [
-  "../adding-your-service/",
-  "../automating-injection/"
-]
-+++
+---
+title: Adding Your Services to Linkerd
+description: In order for your services to take advantage of Linkerd, they also need
+  to be *meshed* by injecting Linkerd's data plane proxy into their pods.
+---
 
 Adding Linkerd's control plane to your cluster doesn't change anything about
 your application. In order for your services to take advantage of Linkerd, they

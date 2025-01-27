@@ -1,10 +1,7 @@
-+++
-title = "Architecture"
-description = "Deep dive into the architecture of Linkerd."
-aliases = [
-  "../architecture/"
-]
-+++
+---
+title: Architecture
+description: Deep dive into the architecture of Linkerd.
+---
 
 At a high level, Linkerd consists of a **control plane** and a **data plane**.
 
@@ -19,8 +16,7 @@ with the control plane for configuration.
 Linkerd also provides a **CLI** that can be used to interact with the control
 and data planes.
 
-{{< fig src="/images/architecture/control-plane.png"
-title="Linkerd's architecture" >}}
+![Linkerd's architecture](/docs/images/architecture/control-plane.png "Linkerd's architecture")
 
 ## CLI
 

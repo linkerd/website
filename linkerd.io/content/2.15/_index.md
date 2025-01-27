@@ -1,6 +1,11 @@
 ---
-title: "Overview"
+title: Docs
+cascade:
+  type: docs
+
+# Redirect
+type: _default
+layout: redirect
+params:
+  redirect: ./overview
 ---
-<!-- markdownlint-disable -->
-<meta http-equiv="Refresh" content="0; url=overview/">
-<!-- markdownlint-enable -->

@@ -1,0 +1,53 @@
+/*
+@markup
+<div class="card">
+  <div class="card__media">
+    Image
+  </div>
+  <div class="card__body">
+    <div class="card__header">
+      Title
+    </div>
+    <div class="card__content">
+      Content
+    </div>
+    <div class="card__footer">
+      Button(s)
+    </div>
+  </div>
+</div>
+*/
+
+.card {
+  @include make-card;
+
+  // @options
+
+  &.card--inset-media {
+    @include make-card--inset-media;
+  }
+  &.card--horz {
+    @include make-card--horz;
+  }
+  &.card--reverse {
+    @include make-card--reverse;
+  }
+  &.card--center {
+    @include make-card--center;
+  }
+}
+
+/*
+[!IMPORTANT] If using a card-link, the card **must not** have anchor links in the content.
+
+@markup
+<a class="card-link">
+  <div class="card">
+    ...
+  </div>
+</a>
+*/
+
+.card-link {
+  @include make-card-link;
+}

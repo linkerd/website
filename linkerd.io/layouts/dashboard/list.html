@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#" class="dashboard-html">
+  <head>
+    <title>Linkerd - {{ .Title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    {{ with .Resources.Get "dashboard.css" }}
+      <link rel="stylesheet" href="{{ .Permalink }}">
+    {{ end }}
+  </head>
+  <body class="dashboard-background">
+    {{ range .RegularPages }}
+      <div class="card">
+          <div class="card-body">
+            <h6>{{ .Title }}</h6>
+            <p>{{ dateFormat "Monday, January 2, 2006" .Date }}</p>
+            {{ .Content }}
+          </div>
+        </div>
+    {{ end }}
+    <script>
+      (() => {
+        window.parent.postMessage({ "dashboardHeight": document.body.offsetHeight }, "*");
+      })();
+    </script>
+  </body>
+</html>

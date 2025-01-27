@@ -1,0 +1,20 @@
+{{ .Render "_docs-deprecated-alert" }}
+<div class="docs">
+  <div class="docs__container">
+    <div class="docs__sidebar">
+      {{ .Render "_docs-nav" }}
+    </div>
+    <div class="docs__main">
+      <div class="docs__body">
+        <div class="docs__header">
+          <h1>
+            {{ .Title }}
+          </h1>
+        </div>
+        <div class="docs__content prose">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

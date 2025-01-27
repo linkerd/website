@@ -1,0 +1,8 @@
+{{/* Add all global scripts to this slice */}}
+{{ $scripts := slice (resources.Get "js/highlight-copy.js") }}
+{{ $js := $scripts | resources.Concat "js/main.js" }}
+{{ if hugo.IsProduction }}
+  {{ $js = $js | minify | fingerprint }}
+{{ end }}
+<script src="{{ $js.RelPermalink }}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>

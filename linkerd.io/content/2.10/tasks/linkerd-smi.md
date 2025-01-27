@@ -1,7 +1,7 @@
-+++
-title = "Getting started with Linkerd SMI extension"
-description = "Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources."
-+++
+---
+title: Getting started with Linkerd SMI extension
+description: Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources.
+---
 
 [Service Mesh Interface](https://smi-spec.io/) is a standard interface for
 service meshes on Kubernetes. It defines a set of resources that could be

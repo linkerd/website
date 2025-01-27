@@ -1,48 +1,43 @@
-+++
-title = "diagnostics"
-aliases = [
-  "endpoints",
-  "install-sp",
-  "metrics"
-]
-+++
+---
+title: diagnostics
+---
 
-{{< cli/description "diagnostics" >}}
+{{< docs/cli-description "diagnostics" >}}
 
-{{< cli/examples "diagnostics" >}}
+{{< docs/cli-examples "diagnostics" >}}
 
-{{< cli/flags "diagnostics" >}}
+{{< docs/cli-flags "diagnostics" >}}
 
 ## Subcommands
 
 ### controller-metrics
 
-{{< cli/description "diagnostics controller-metrics" >}}
+{{< docs/cli-description "diagnostics controller-metrics" >}}
 
-{{< cli/examples "diagnostics controller-metrics" >}}
+{{< docs/cli-examples "diagnostics controller-metrics" >}}
 
-{{< cli/flags "diagnostics controller-metrics" >}}
+{{< docs/cli-flags "diagnostics controller-metrics" >}}
 
 ### endpoints
 
-{{< cli/description "diagnostics endpoints" >}}
+{{< docs/cli-description "diagnostics endpoints" >}}
 
-{{< cli/examples "diagnostics endpoints" >}}
+{{< docs/cli-examples "diagnostics endpoints" >}}
 
-{{< cli/flags "diagnostics endpoints" >}}
+{{< docs/cli-flags "diagnostics endpoints" >}}
 
 ### install-sp
 
-{{< cli/description "diagnostics install-sp" >}}
+{{< docs/cli-description "diagnostics install-sp" >}}
 
-{{< cli/examples "diagnostics install-sp" >}}
+{{< docs/cli-examples "diagnostics install-sp" >}}
 
-{{< cli/flags "diagnostics install-sp" >}}
+{{< docs/cli-flags "diagnostics install-sp" >}}
 
 ### proxy-metrics
 
-{{< cli/description "diagnostics proxy-metrics" >}}
+{{< docs/cli-description "diagnostics proxy-metrics" >}}
 
-{{< cli/examples "diagnostics proxy-metrics" >}}
+{{< docs/cli-examples "diagnostics proxy-metrics" >}}
 
-{{< cli/flags "diagnostics proxy-metrics" >}}
+{{< docs/cli-flags "diagnostics proxy-metrics" >}}

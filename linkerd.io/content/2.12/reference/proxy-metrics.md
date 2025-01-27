@@ -1,12 +1,8 @@
-+++
-title = "Proxy Metrics"
-description = "The Linkerd proxy natively exports Prometheus metrics for all incoming and outgoing traffic."
-aliases = [
-  "/proxy-metrics/",
-  "../proxy-metrics/",
-  "../observability/proxy-metrics/"
-]
-+++
+---
+title: Proxy Metrics
+description: The Linkerd proxy natively exports Prometheus metrics for all incoming
+  and outgoing traffic.
+---
 
 The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy.  The following metrics are available at `/metrics` on the proxy's metrics
@@ -196,8 +192,6 @@ layer.
   updated when the connection closes.
 * `tcp_read_bytes_total`: A counter of the total number of received bytes. This
   is updated when the connection closes.
-* `tcp_connection_duration_ms`: A histogram of the duration of the lifetime of a
-  connection, in milliseconds. This is updated when the connection closes.
 * `inbound_tcp_errors_total`: A counter of the total number of inbound TCP
   connections that could not be processed due to a proxy error.
 * `outbound_tcp_errors_total`: A counter of the total number of outbound TCP
@@ -224,7 +218,7 @@ are also added to transport-level metrics, when applicable.
 #### Connection Close Labels
 
 The following labels are added only to metrics which are updated when a
-connection closes (`tcp_close_total` and `tcp_connection_duration_ms`):
+connection closes (`tcp_close_total`):
 
 * `classification`: `success` if the connection terminated cleanly, `failure` if
   the connection closed due to a connection failure.

@@ -1,0 +1,10 @@
+{{- /* Only add anchors to h1-h4 */}}
+{{- $hasAnchor := le .Level 5 }}
+<h{{ .Level }}{{ if $hasAnchor }} id="{{ .Anchor }}" class="anchor"{{ end }}>
+  {{ .Text | safeHTML }}
+  {{- if $hasAnchor }}
+  <a href="#{{ .Anchor }}" class="anchor__link">
+    {{ partial "components/icon" (dict "name" "link" "variant" "primary") }}
+  </a>
+  {{- end }}
+</h{{ .Level }}>

@@ -1,26 +1,28 @@
 {{- /* 
-  Output a json search index of all docs for the latest stable version of
+  Output a json search index of all docs for the latest major version of
   Linkerd and the blog posts for the past year.
-*/ -}}
-{{- /* Get latest docs */ -}}
-{{- $docs := where site.Pages "Section" "eq" site.Params.latest_linkerd2_stable_version -}}
-{{- /* Get year of blog posts */ -}}
-{{- $currentTime := now -}}
-{{- $lastYear := $currentTime.AddDate -1 0 0 -}}
-{{- $blog := where site.RegularPages "Section" "eq" "blog" -}}
-{{- $blog := where $blog "Date" ">" $lastYear -}}
-{{- /* Merge pages and remove any page with noIndex param */ -}}
-{{- $pages := $docs | union $blog -}}
-{{- $pages := where $pages "Params.noIndex" "ne" true -}}
+*/}}
+{{- /* Get latest docs */}}
+{{- $docs := where site.Pages "Section" "eq" site.Params.latestMajorVersion }}
+{{- /* Get year of blog posts */}}
+{{- $currentTime := now }}
+{{- $lastYear := $currentTime.AddDate -1 0 0 }}
+{{- $blog := where site.RegularPages "Section" "eq" "blog" }}
+{{- $blog := where $blog "Date" ">" $lastYear }}
+{{- /* Merge pages and remove any page with noIndex param or page redirect */}}
+{{- $pages := $docs | union $blog }}
+{{- $pages := where $pages "Params.noIndex" "ne" true }}
+{{- $pages := where $pages "Layout" "ne" "redirect" }}
 {{- /* Output json */ -}}
-{{- $.Scratch.Add "search-index" slice -}}
-{{- range $index, $page := $pages -}}
-  {{- $ancestors := slice -}}
-  {{- range $page.Ancestors.Reverse -}}
-    {{- if .IsHome }}{{ continue }}{{ end -}}
-    {{- $ancestors = $ancestors | append .Title -}}
-  {{- end -}}
-  {{- $.Scratch.Add
+{{- $s := newScratch }}
+{{- $s.Add "search-index" slice }}
+{{- range $index, $page := $pages }}
+  {{- $ancestors := slice }}
+  {{- range $page.Ancestors.Reverse }}
+    {{- if .IsHome }}{{ continue }}{{ end }}
+    {{- $ancestors = $ancestors | append .Title }}
+  {{- end }}
+  {{- $s.Add
     "search-index"
     (dict
       "uri"         $page.Permalink
@@ -31,6 +33,6 @@
       "description" $page.Description
       "keywords"    $page.Keywords
     )
-  -}}
-{{- end -}}
-{{- $.Scratch.Get "search-index" | jsonify -}}
+  }}
+{{- end }}
+{{- $s.Get "search-index" | jsonify }}

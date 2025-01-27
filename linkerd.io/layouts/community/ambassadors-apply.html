@@ -1,0 +1,60 @@
+{{ define "main" }}
+  <div class="ambassadors-apply">
+    {{ partial "components/hero" . }}
+    <div class="page">
+      <div class="page__container container-xl">
+        {{/* Overview */}}
+        {{ with .Params.overview }}
+          <section>
+            <h2>
+              {{ .title }}
+            </h2>
+            {{ .content | $.Page.RenderString (dict "display" "block") }}
+          </section>
+        {{ end }}
+        {{/* Perks */}}
+        {{ with .Params.perks }}
+          <div class="card card--inset-media">
+            {{ with .image }}
+              <div class="card__media">
+                {{ with $.Resources.Get . }}
+                  <img src="{{ .RelPermalink }}" alt="{{ path.BaseName . | humanize }}" class="img img--w128 img--center">
+                {{ end }}
+              </div>
+            {{ end }}
+            <div class="card__body">
+              <div class="card__header">
+                <h2>
+                  {{ .title }}
+                </h2>
+              </div>
+              <div class="card__content">
+                {{ .content | $.Page.RenderString (dict "display" "block") }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+        {{/* FAQs */}}
+        {{ with .Params.faqs }}
+          <section>
+            <h2>
+              {{ .title }}
+            </h2>
+            <div class="accordion">
+              {{ range .content }}
+                <details>
+                  <summary>
+                    <h4>
+                      {{ .title }}
+                    </h4>
+                  </summary>
+                  {{ .content | $.Page.RenderString (dict "display" "block") }}
+                </details>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}
