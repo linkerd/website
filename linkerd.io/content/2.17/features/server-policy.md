@@ -70,11 +70,12 @@ Linkerd uses a set of CRDs.  In contrast to default policy annotations, these
 policy CRDs can be changed dynamically and policy behavior will be updated on
 the fly.
 
-Two policy CRDs represent "targets" for policy: subsets of traffic over which
+Three policy CRDs represent "targets" for policy: subsets of traffic over which
 policy can be applied.
 
 - [`Server`]: all traffic to a port, for a set of pods in a namespace
-- [`HTTPRoute`]: a subset of HTTP requests for a [`Server`]
+- [`HTTPRoute`]: a subset of HTTP requests for a `Server`
+- [`GRPCRoute`]: a subset of gRPC requests for a `Server`
 
 Two policy CRDs represent authentication rules that must be satisfied as part of
 a policy rule:
@@ -90,11 +91,11 @@ authentication rules to targets.
   unless an authentication rule is met
 
 - `ServerAuthorization`: an earlier form of policy that restricts access to
-  [`Server`]s only (i.e. not [`HTTPRoute`]s)
+  `Server`s only (i.e. not `HTTPRoute`s or `GRPCRoute`s)
 
 The general pattern for Linkerd's dynamic, fine-grained policy is to define the
 traffic target that must be protected (via a combination of `Server` and
-[`HTTPRoute`] CRs); define the types of authentication that are required before
+`HTTPRoute` CRs); define the types of authentication that are required before
 access to that traffic is permitted (via `MeshTLSAuthentication` and
 `NetworkAuthentication`); and then define the policy that maps authentication to
 target (via an `AuthorizationPolicy`).
@@ -105,7 +106,7 @@ details on how these resources work.
 ## ServerAuthorization vs AuthorizationPolicy
 
 Linkerd 2.12 introduced `AuthorizationPolicy` as a more flexible alternative to
-`ServerAuthorization` that can target [`HTTPRoute`]s as well as `Server`s. Use of
+`ServerAuthorization` that can target `HTTPRoute`s as well as `Server`s. Use of
 `AuthorizationPolicy` is preferred, and `ServerAuthorization` will be deprecated
 in future releases.
 
@@ -116,11 +117,11 @@ from Kubernetes, meaning that the pod would not be able to start. Thus, any
 default-deny setup must, in practice, still authorize these probes.
 
 In order to simplify default-deny setups, Linkerd automatically authorizes
-probes to pods. These default authorizations apply only when no [`Server`] is
-configured for a port, or when a [`Server`] is configured but no [`HTTPRoute`]s are
-configured for that [`Server`]. If any [`HTTPRoute`] matches the `Server`, these
-automatic authorizations are not created and you must explicitly create them for
-health and readiness probes.
+probes to pods. These default authorizations apply only when no `Server` is
+configured for a port, or when a `Server` is configured but no `HTTPRoute`s or
+`GRPCRoute` are configured for that `Server`. If any `HTTPRoute` or `GRPCRoute`
+matches the `Server`, these automatic authorizations are not created and you
+must explicitly create them for health and readiness probes.
 
 ## Policy rejections
 
@@ -133,7 +134,7 @@ result in an abrupt termination of those connections.
 
 ## Audit mode
 
-A [`Server`]'s default policy is defined in its `accessPolicy` field, which
+A `Server`'s default policy is defined in its `accessPolicy` field, which
 defaults to `deny`. That means that, by default, traffic that doesn't conform to
 the rules associated to that Server is denied (the same applies to `Servers`
 that don't have associated rules yet). This can inadvertently prevent traffic if
@@ -166,5 +167,6 @@ be allowed but it would be logged and surfaced in metrics as detailed above.
 - [Authorization policy reference](../../reference/authorization-policy/)
 - [Guide to configuring per-route policy](../../tasks/configuring-per-route-policy/)
 
-[`HTTPRoute`]: ../httproute/
+[`HTTPRoute`]: ../../reference/httproute/
+[`GRPCRoute`]: ../../reference/grpcroute/
 [`Server`]: ../../reference/authorization-policy/#server
