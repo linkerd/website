@@ -44,6 +44,14 @@ params:
             github: https://github.com/Eli-Goldberg
             twitter: https://twitter.com/EliG0ldberg
             linkedin: https://www.linkedin.com/in/eli-go/
+        - name: Mahendran Selvakumar
+          role: DevOps Engineer
+          image: images/mahendran-selvakumar.png
+          flag: 🇬🇧
+          urls:
+            github: https://github.com/skmahe1077/
+            twitter: https://x.com/devopstronaut
+            linkedin: https://www.linkedin.com/in/mahendran-selvakumar/
         - name: Sergio Méndez
           role: DevOps Engineer
           image: images/sergio-mendez.png
