@@ -140,14 +140,13 @@ on the Prometheus instance to power the dashboard and CLI.
 
 The `prometheusUrl` field gives you a single place through
 which all these components can be configured to an external Prometheus URL.
-This is allowed both through the CLI and Helm.
-If the external Prometheus is secured with basic auth,
-you can include the credentials in the URL as well.
+This is allowed both through Helm and the CLI. If the external Prometheus is
+secured with basic auth, you can include the credentials in the URL as well.
 
-### CLI
+### Helm
 
-This can be done by passing a file with the above field to the `values` flag,
-which is available through `linkerd viz install` command.
+To configure an external Prometheus instance through Helm, you'll set
+`prometheusUrl` in your `values.yaml` file:
 
 ```yaml
 prometheusUrl: http://existing-prometheus.namespace:9090
@@ -160,9 +159,6 @@ credentials in the URL as well.
 prometheusUrl: http://username:password@existing-prometheus.namespace:9090
 ```
 
-Once applied, this configuration is not persistent across installs.
-The same has to be passed again by the user during re-installs, upgrades, etc.
-
 When using an external Prometheus and configuring the `prometheusUrl`
 field, Linkerd's Prometheus will still be included in installation.
 If you wish to disable it, be sure to include the
@@ -173,11 +169,20 @@ prometheus:
   enabled: false
 ```
 
-### Helm
-
-The same configuration can be applied through `values.yaml` when using Helm.
-Once applied, Helm makes sure that the configuration is
-persistent across upgrades.
+This configuration is **not** persistent across installs: you'll need to
+pass the same `values.yaml` for re-installs, upgrades, etc.
 
 More information on installation through Helm can be found
 [here](../install-helm/)
+
+### CLI
+
+When installing using the CLI, you can use the `--values` switch to use the
+same `values.yaml` that you would with Helm, or you can set the
+`prometheusUrl` directly, for example:
+
+```bash
+linkerd viz install \
+    --set prometheus.enabled=false \
+    --set prometheusUrl=http://existing-prometheus.namespace:9090
+```
