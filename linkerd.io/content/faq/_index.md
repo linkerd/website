@@ -27,7 +27,7 @@ security from the ground up, ranging from features like
 plane that is
 [built in a Rust, memory-safe language](https://github.com/linkerd/linkerd2-proxy),
 and
-[regular security audits](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf).
+[regular security audits](https://github.com/linkerd/linkerd2/tree/main/audits).
 Finally, Linkerd has publicly
 [committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/)
 and is hosted by [the CNCF](https://cncf.io).
@@ -35,7 +35,7 @@ and is hosted by [the CNCF](https://cncf.io).
 ## What's the difference between Linkerd and Envoy?
 
 Envoy is a proxy; Linkerd is a [service mesh](/what-is-a-service-mesh/). Linkerd
-has a control plane and a data plane, and uses a proxy is a component of the
+has a control plane and a data plane, and uses a proxy as a component of the
 data plane. While Envoy can be used as a component of a service mesh, Linkerd
 uses an ultralight "micro-proxy" called
 [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is built in
@@ -94,11 +94,11 @@ Yes. See the list of companies that provide
 
 ## What's on the Linkerd roadmap?
 
-See the
-[Linkerd project roadmap](https://github.com/linkerd/linkerd2/blob/main/ROADMAP.md).
-You may also review the
-[active GitHub issues](https://github.com/linkerd/linkerd2/issues) for
-shorter-term objectives.
+You can stay updated on ongoing development by reviewing the
+[active GitHub issues](https://github.com/linkerd/linkerd2/issues).
+You can also check out the [Linkerd Blog](https://linkerd.io/blog/)
+or community updates for announcements on
+upcoming features and priorities
 
 ## Can I present Linkerd to my team / company / meetup group?
 
@@ -114,7 +114,7 @@ you would without Linkerd, e.g. `service-name.namespace.svc.cluster.local`, or
 
 ## Does Linkerd handle ingress traffic?
 
-" No. For reasons of simplicity, Linkerd doesn't provide ingress itself, but
+"No. For reasons of simplicity, Linkerd doesn't provide ingress itself, but
 instead
 [works in conjunction with the ingress controller](https://linkerd.io/2/features/ingress/)
 of your choice."
