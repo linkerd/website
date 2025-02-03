@@ -37,7 +37,7 @@ releases on the [Releases and Versions](/releases/) page.
 {{< /note >}}
 
 To get started with topology aware hints take a look at the [enabling topology
-aware hints](../tasks/enabling-topology-aware-hints/) task documentation.
+aware hints](../../tasks/enabling-topology-aware-hints/) task documentation.
 
 [topology aware hints]: https://kubernetes.io/docs/concepts/services-networking/topology-aware-hints/
 
@@ -48,4 +48,3 @@ feature gate enabled, and that Linkerd's `endpointSlice` feature be turned on
 (this is the default starting with Linkerd stable-2.12).
 
 {{< /note >}}
-
