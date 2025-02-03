@@ -50,9 +50,10 @@ them in that cluster:
 
 ## Create the emojivoto namespace
 
-First, we need to create the namespace where we will deploy our application and the `TrafficSplit` resource.
+First, we need to create the namespace where we will deploy our application
+and the `TrafficSplit` resource.
 
-```
+```bash
 > kubectl --context=west create ns emojivoto
 > kubectl --context=east create ns emojivoto
 ```
@@ -116,7 +117,11 @@ web-svc-east  ClusterIP   10.96.244.245   <none>        80/TCP              92s
 ```
 
 {{< alert severity="warning" >}}
-The order in which the Application and the ServiceProfile used by the TrafficSplit resource are created is important. If a ServiceProfile is created after the pod has already started, the workloads will need to be restarted. For more details on Service Profiles, check out the [Service Profiles documentation](../features/service-profiles.md).
+The order in which the Application and the ServiceProfile used by the
+TrafficSplit resource are created is important. If a ServiceProfile is
+created after the pod has already started, the workloads will need to be
+restarted. For more details on Service Profiles,
+check out the [Service Profiles documentation](../features/service-profiles.md).
 {{< /alert >}}
 
 ## Testing the Failover
