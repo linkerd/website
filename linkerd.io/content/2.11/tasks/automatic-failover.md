@@ -48,6 +48,49 @@ them in that cluster:
 > helm --kube-context=west install linkerd-failover -n linkerd-failover --create-namespace --devel linkerd-edge/linkerd-failover
 ```
 
+## Create the emojivoto namespace
+
+First, we need to create the namespace where we will deploy our application
+and the `TrafficSplit` resource.
+
+```bash
+> kubectl --context=west create ns emojivoto
+> kubectl --context=east create ns emojivoto
+```
+
+## Creating the Failover TrafficSplit
+
+To tell the failover controller how to failover traffic, we need to create a
+TrafficSplit resource in the west cluster with the
+`failover.linkerd.io/controlled-by: linkerd-failover` label. The
+`failover.linkerd.io/primary-service` annotation indicates that the `web-svc`
+backend is the primary and all other backends will be treated as the fallbacks:
+
+```bash
+kubectl --context=west apply -f - <<EOF
+apiVersion: split.smi-spec.io/v1alpha2
+kind: TrafficSplit
+metadata:
+    name: web-svc-failover
+    namespace: emojivoto
+    labels:
+        failover.linkerd.io/controlled-by: linkerd-failover
+    annotations:
+        failover.linkerd.io/primary-service: web-svc
+spec:
+    service: web-svc
+    backends:
+        - service: web-svc
+          weight: 1
+        - service: web-svc-east
+          weight: 0
+EOF
+```
+
+This TrafficSplit indicates that the local (west) `web-svc` should be used as
+the primary, but traffic should be shifted to the remote (east) `web-svc-east`
+if the primary becomes unavailable.
+
 ## Installing and Exporting Emojivoto
 
 We'll now install the Emojivoto example application into both clusters:
@@ -73,38 +116,12 @@ web-svc       ClusterIP   10.96.222.169   <none>        80/TCP              13m
 web-svc-east  ClusterIP   10.96.244.245   <none>        80/TCP              92s
 ```
 
-## Creating the Failover TrafficSplit
-
-To tell the failover controller how to failover traffic, we need to create a
-TrafficSplit resource in the west cluster with the
-`failover.linkerd.io/controlled-by: linkerd-failover` label. The
-`failover.linkerd.io/primary-service` annotation indicates that the `web-svc`
-backend is the primary and all other backends will be treated as the fallbacks:
-
-```bash
-> cat <<EOF | kubectl --context=west apply -f -
-apiVersion: split.smi-spec.io/v1alpha2
-kind: TrafficSplit
-metadata:
-    name: web-svc-failover
-    namespace: emojivoto
-    labels:
-        failover.linkerd.io/controlled-by: linkerd-failover
-    annotations:
-        failover.linkerd.io/primary-service: web-svc
-spec:
-    service: web-svc
-    backends:
-        - service: web-svc
-          weight: 1
-        - service: web-svc-east
-          weight: 0
-EOF
-```
-
-This TrafficSplit indicates that the local (west) `web-svc` should be used as
-the primary, but traffic should be shifted to the remote (east) `web-svc-east`
-if the primary becomes unavailable.
+{{< warning >}}
+The order in which the Application and the ServiceProfile used by the TrafficSplit
+resource are created is important. If a ServiceProfile is created after the pod has
+already started, the workloads will need to be restarted. For more details on Service
+Profiles, check out the [Service Profiles documentation](../features/service-profiles.md).
+{{< /warning >}}
 
 ## Testing the Failover
 
