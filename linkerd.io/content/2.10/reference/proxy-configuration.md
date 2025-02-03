@@ -46,7 +46,7 @@ instead of their original destination. This will inform Linkerd to override the
 endpoint selection of the ingress container and to perform its own endpoint
 selection, enabling features such as per-route metrics and traffic splitting.
 
-The proxy can be made to run in `ingress` mode by used the `linkerd.io/inject:
+The proxy can be configured to run in `ingress` mode by used the `linkerd.io/inject:
 ingress` annotation rather than the default `linkerd.io/inject: enabled`
 annotation. This can also be done with the `--ingress` flag in the `inject` CLI
 command:

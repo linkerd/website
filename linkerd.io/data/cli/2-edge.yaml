@@ -60,7 +60,7 @@ AnnotationsReference:
 - Description: Log format (plain or json) for the proxy
   Name: config.linkerd.io/proxy-log-format
 - Description: Enables HTTP access logging in the proxy. Accepted values are `apache`,
-    to output the access log in the Appache Common Log Format, and `json`, to output
+    to output the access log in the Apache Common Log Format, and `json`, to output
     the access log in JSON.
   Name: config.linkerd.io/access-log
 - Description: Enable service profiles for non-Kubernetes services
@@ -88,7 +88,7 @@ AnnotationsReference:
     side of the proxy by setting it to a very high value
   Name: config.linkerd.io/proxy-disable-inbound-protocol-detect-timeout
 - Description: The proxy sidecar will stay alive for at least the given period after
-    receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
+    receiving SIGTERM signal from Kubernetes but no longer than the pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
 - Description: The application container will not start until the proxy is ready;

@@ -62,7 +62,7 @@ AnnotationsReference:
 - Description: Used to configure the outbound TCP connection timeout in the proxy
   Name: config.linkerd.io/proxy-outbound-connect-timeout
 - Description: The proxy sidecar will stay alive for at least the given period before
-    receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
+    receiving SIGTERM signal from Kubernetes but no longer than the pod's `terminationGracePeriodSeconds`.
     If not provided, it will be defaulted to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
 CLIReference:
