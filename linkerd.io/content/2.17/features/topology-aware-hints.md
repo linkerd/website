@@ -1,10 +1,8 @@
-+++
-title = "Topology Aware Hints"
-description = "Linkerd's implementation of Kubernetes topology aware hints enables endpoint consumption based on a node's zone label."
-aliases = [
-  "../topology-aware-hints/"
-]
-+++
+---
+title: Topology Aware Hints
+description: |-
+    Linkerd's implementation of Kubernetes topology aware hints enables endpoint consumption based on a node's zone label.
+---
 
 Kubernetes clusters are increasingly deployed in multi-zone environments with
 network traffic often relying on obscure endpoint matching and routing for a

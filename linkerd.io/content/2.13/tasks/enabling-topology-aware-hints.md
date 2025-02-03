@@ -1,7 +1,8 @@
-+++
-title = "Enabling Topology Aware Hints"
-description = "Enable topology aware hints to allow Linkerd to intelligently choose same-zone endpoints"
-+++
+---
+title: "Enabling Topology Aware Hints"
+description: |-
+  Enable topology aware hints to allow Linkerd to intelligently choose same-zone endpoints
+---
 
 [Topology aware hints](../../features/topology-aware-hints/) allow Linkerd
 users to specify endpoint selection boundaries when a request is made against
