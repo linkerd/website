@@ -8,6 +8,18 @@ to specify endpoint selection boundaries when a request is made against a
 service, making it possible to limit cross-zone endpoint selection and lower
 the associated costs and latency.
 
+{{< note >}}
+
+If you're using a [stable distribution](/releases/#stable) of Linkerd, it may
+have additional features related to topology-aware routing (for example, <a
+href="https://buoyant.io/linkerd-enterprise/">Buoyant Enterprise for
+Linkerd</a> and its <a
+href="https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/">HAZL</a>
+feature). You can find more information about the different kinds of Linkerd
+releases on the [Releases and Versions](/releases/) page.
+
+{{< /note >}}
+
 There are three requirements to successfully enabling topology aware hints with Linkerd:
 
 1. `TopologyAwareHints` feature gate MUST be enabled on the Kubernetes
