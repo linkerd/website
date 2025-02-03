@@ -25,7 +25,7 @@ attempt to find endpoints whose `Hints.ForZones` field matches the client's
 zone.
 
 To get started with topology aware hints take a look at the [enabling topology
-aware hints](../tasks/enabling-topology-aware-hints/) task documentation.
+aware hints](../../tasks/enabling-topology-aware-hints/) task documentation.
 
 [topology aware hints]: https://kubernetes.io/docs/concepts/services-networking/topology-aware-hints/
 

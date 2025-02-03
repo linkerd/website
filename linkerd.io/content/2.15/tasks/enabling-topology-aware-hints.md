@@ -3,9 +3,9 @@ title = "Enabling Topology Aware Hints"
 description = "Enable topology aware hints to allow Linkerd to intelligently choose same-zone endpoints"
 +++
 
-[Topology aware hints](../features/topology-aware-hints/) allow Linkerd users
-to specify endpoint selection boundaries when a request is made against a
-service, making it possible to limit cross-zone endpoint selection and lower
+[Topology aware hints](../../features/topology-aware-hints/) allow Linkerd
+users to specify endpoint selection boundaries when a request is made against
+a service, making it possible to limit cross-zone endpoint selection and lower
 the associated costs and latency.
 
 There are three requirements to successfully enabling topology aware hints with Linkerd:
@@ -37,7 +37,7 @@ of the node's zone. By doing so Linkerd ensures communication is limited to
 endpoints that have been labeled by the endpoint slice controller for the same
 node the client is on and limits cross-node and cross-zone communication.
 
-# Constraints
+## Constraints
 
 Kubernetes places some [constraints][topology-aware-hints-constraints] on
 topology aware hints that you should review before enabling topology aware
@@ -51,13 +51,13 @@ The main things to be aware of are:
   and
 - The Kubernetes endpoint slice controller does not take...
 
-# Configuring Topology Aware Routing
+## Configuring Topology Aware Routing
 
 Successful topology aware routing can be confirmed by looking at the Linkerd
 proxy logs for the relevant service. The logs should show a stream of messages
 similar to the ones below:
 
-```
+```text
 time="2021-08-27T14:04:35Z" level=info msg="Establishing watch on endpoint [default/nginx-deploy-svc:80]" addr=":8086" component=endpoints-watcher
 time="2021-08-27T14:04:35Z" level=debug msg="Filtering through addresses that should be consumed by zone zone-b" addr=":8086" component=endpoint-translator remote="127.0.0.1:49846" service="nginx-deploy-svc.default.svc.cluster.local:80"
 ```
