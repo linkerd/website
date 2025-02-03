@@ -116,12 +116,12 @@ web-svc       ClusterIP   10.96.222.169   <none>        80/TCP              13m
 web-svc-east  ClusterIP   10.96.244.245   <none>        80/TCP              92s
 ```
 
-{{< alert severity="warning" >}}
+{{< warning >}}
 The order in which the Application and the ServiceProfile used by the TrafficSplit
 resource are created is important. If a ServiceProfile is created after the pod has
 already started, the workloads will need to be restarted. For more details on Service
 Profiles, check out the [Service Profiles documentation](../features/service-profiles.md).
-{{< /alert >}}
+{{< /warning >}}
 
 ## Testing the Failover
 
