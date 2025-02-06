@@ -4,11 +4,12 @@ description: Linkerd's service profiles enable per-route metrics as well as retr
   and timeouts.
 ---
 
-{{< note >}}
-[HTTPRoutes](../httproute/) are the recommended method for getting per-route
-metrics, specifying timeouts, and specifying retries. Service profiles continue
-to be supported for backwards compatibility.
-{{< /note >}}
+{{< warning >}}
+As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
+types](../gateway-api/), including for getting per-route metrics, specifying
+timeouts, and specifying retries. Service profiles continue to be supported for
+backwards compatibility, but will not receive further feature development.
+{{< /warning >}}
 
 A service profile is a custom Kubernetes resource ([CRD][crd]) that can provide
 Linkerd additional information about a service. In particular, it allows you to

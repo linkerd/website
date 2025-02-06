@@ -514,7 +514,6 @@ be aware of when upgrading from `stable-2.10.x`:
  result of their deprecation in Kubernetes v1.21 and above. The control plane
  and core extensions will now be shipped without PSPs; they can be enabled
  through a new install option `enablePSP: true`.
-- The `tcp_connection_duration_ms` metric has been removed.
 - Opaque ports changes: `443` is no longer included in the default opaque ports
  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
  ElasticSearch respectively (all server speak first protocols) have been added
