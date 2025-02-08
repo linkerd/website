@@ -157,37 +157,80 @@ kubectl -n linkerd-viz  get configmap prometheus-config -o yaml
 Linkerd's viz extension components like `metrics-api`, etc depend
 on the Prometheus instance to power the dashboard and CLI.
 
-The `prometheusUrl` field gives you a single place through
-which all these components can be configured to an external Prometheus URL.
-This is allowed both through the CLI and Helm.
+The `prometheusUrl` field gives you a single place through which all these
+components can be configured to an external Prometheus URL. This is allowed
+both through Helm and the CLI. Additionally, if the external Prometheus is
+secured with basic auth, you can retrieve those credentials from a Secret or
+include them credentials in the URL.
 
-### CLI
+### Helm
 
-This can be done by passing a file with the above field to the `values` flag,
-which is available through `linkerd viz install` command.
+To configure an external Prometheus instance through Helm, you'll set
+`prometheusUrl` in your `values.yaml` file:
 
 ```yaml
-prometheusUrl: existing-prometheus.xyz:9090
+prometheusUrl: http://existing-prometheus.namespace:9090
 ```
 
-Once applied, this configuration is not persistent across installs.
-The same has to be passed again by the user during re-installs, upgrades, etc.
+If the external Prometheus is secured with basic auth, you can either store
+the credentials in a Secret or you can put them directly into the URL.
 
-When using an external Prometheus and configuring the `prometheusUrl`
-field, Linkerd's Prometheus will still be included in installation.
-If you wish to disable it, be sure to include the
-following configuration as well:
+We recommend using a Secret -- first, create the Secret, which must be in the
+same namespace as Linkerd Viz itself:
+
+```yaml
+kubectl create secret generic \
+  prometheus-credentials -n linkerd-viz \
+  --from-literal=user=your-username
+  --from-literal=password=your-password
+```
+
+Then reference the Secret in your `values.yaml`:
+
+```yaml
+prometheusUrl: http://existing-prometheus.namespace:9090
+prometheusCredsSecret: prometheus-credentials
+```
+
+If you can't use a Secret, you can include the credentials directly in the URL
+instead:
+
+```yaml
+prometheusUrl: http://username:password@existing-prometheus.namespace:9090
+```
+
+Finally, when using an external Prometheus and configuring the `prometheusUrl`
+field, Linkerd's Prometheus will still be included in installation unless you
+disable it:
 
 ```yaml
 prometheus:
   enabled: false
 ```
 
-### Helm
-
-The same configuration can be applied through `values.yaml` when using Helm.
-Once applied, Helm makes sure that the configuration is
-persistent across upgrades.
+This configuration is **not** persistent across installs: you'll need to
+pass the same `values.yaml` for re-installs, upgrades, etc.
 
 More information on installation through Helm can be found
 [here](../install-helm/)
+
+### CLI
+
+When installing using the CLI, you can use the `--values` switch to use the
+same `values.yaml` that you would with Helm, or you can set the
+`prometheusUrl` directly, for example:
+
+```bash
+linkerd viz install \
+    --set prometheus.enabled=false \
+    --set prometheusUrl=http://existing-prometheus.namespace:9090
+```
+
+You can also set the `prometheusCredsSecret` directly:
+
+```bash
+linkerd viz install \
+    --set prometheus.enabled=false \
+    --set prometheusUrl=http://existing-prometheus.namespace:9090 \
+    --set prometheusCredsSecret=prometheus-credentials
+```
