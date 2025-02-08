@@ -61,7 +61,7 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-limit: '1'
+        config.linkerd.io/proxy-cpu-limit: '2'
   # ...
 ```
 
