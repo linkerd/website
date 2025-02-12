@@ -24,6 +24,8 @@ chart below as these situations arise.
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
 | `2.15`          | `1.22`                     | `1.29`                     |
+| `2.16`          | `1.22`                     | `1.29`                     |
+| `2.17`          | `1.22`                     | `1.31`                     |
 {{< /keyval >}}
 
 Note that Linkerd will almost never change the supported Kubernetes version in
@@ -37,5 +39,6 @@ later required Kubernetes 1.17 as shown in the table above.
 | Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
 |-----------------|----------------------------|----------------------------|
 | `edge-22.10.1` - `edge-23.12.1` | `1.21`     | `1.29`                     |
-| `edge-23.12.2` and newer        | `1.22`     | `1.29`                     |
+| `edge-23.12.2` - `edge-24.11.4` | `1.22`     | `1.29`                     |
+| `edge-24.11.5` and newer        | `1.22`     | `1.31`                     |
 {{< /keyval >}}
