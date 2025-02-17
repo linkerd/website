@@ -152,7 +152,7 @@ example:
 To display a caption below the image, provide an image title. For example:
 
 ```markdown
-![Alt text](my-image.jpg 'My image caption')
+![Alt text](my-image.jpg "My image caption")
 ```
 
 ### Hiding pages in the docs sidenav
