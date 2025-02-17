@@ -12,13 +12,15 @@ caches them in the `resources/_gen/images` directory. This directory is included
 in source control, so Hugo does not have to regenerate all of the images every
 time the site is published.
 
-> [!IMPORTANT] If you are creating a PR that includes images, such as a blog
-> post, the site must be built locally using `hugo` before the PR is merged.
-> This is required so that the new images will be process by Hugo and cached in
-> the `resources/_gen/images` directory.
+> [!IMPORTANT]
+> If you are creating a PR that includes images, such as a blog post, the site
+> must be built locally using `hugo` before the PR is merged. This is required
+> so that the new images will be process by Hugo and cached in the
+> `resources/_gen/images` directory.
 
-> [!NOTE] Any page bundle image referenced in Markdown content that has a width
-> or height larger than 2400 pixels will be downsized and cached.
+> [!NOTE]
+> Any page bundle image referenced in Markdown content that has a width or
+> height larger than 2400 pixels will be downsized and cached.
 
 ## Tasks
 
