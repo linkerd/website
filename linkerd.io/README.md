@@ -1,14 +1,24 @@
 # linkerd.io
 
-## Website assets
+## Website images
 
 Please do not put files in the `static` directory that are referenced on
 linkerd.io. This directory is reserved for assets that are used as external
 resources. If you need to add images for a page, please add them in the
 [page bundle](https://gohugo.io/content-management/page-bundles/).
 
-**Note:** Images in page bundles that have a width or height larger than 2400
-pixels will be downsized.
+Each time Hugo is built, it looks for any images that need to be resized then
+caches them in the `resources/_gen/images` directory. This directory is included
+in source control, so Hugo does not have to regenerate all of the images every
+time the site is published.
+
+> [!IMPORTANT] If you are creating a PR that includes images, such as a blog
+> post, the site must be built locally using `hugo` before the PR is merged.
+> This is required so that the new images will be process by Hugo and cached in
+> the `resources/_gen/images` directory.
+
+> [!NOTE] Any page bundle image referenced in Markdown content that has a width
+> or height larger than 2400 pixels will be downsized and cached.
 
 ## Tasks
 
@@ -139,10 +149,10 @@ example:
 ![Alt text](my-image.jpg)
 ```
 
-To dispplay a caption below the image, provide an image title. For example:
+To display a caption below the image, provide an image title. For example:
 
 ```markdown
-![Alt text](my-image.jpg "My image caption")
+![Alt text](my-image.jpg 'My image caption')
 ```
 
 ### Hiding pages in the docs sidenav
