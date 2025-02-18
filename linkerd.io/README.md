@@ -2,36 +2,38 @@
 
 ## General development instructions
 
-1. Run the linter and checker:
+### Run the linter and checker
 
-  ```bash
-  docker run \
-    --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-    ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
-  ```
+```bash
+docker run \
+  --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
+  ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
+```
 
-1. Install Hugo to run the site locally:
+### Install Hugo to develop locally
 
-  For Mac users:
+For Mac users:
 
-  ```bash
-  brew install hugo@0.136.5
-  ```
+```bash
+brew install hugo@0.136.5
+```
 
-  Or download the **extended** release of Hugo from the GitHub
-  [release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
+Or download the **extended** release of Hugo from the GitHub
+[release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
 
-  > [!IMPORTANT]
-  > See the [Hugo version requirements](#hugo-version-requirements) below.
+> [!IMPORTANT]
+> See the [Hugo version requirements](#hugo-version-requirements) below.
 
-1. From the root `/website` directory, build site and run Hugo in development mode:
+### Run Hugo locally
 
-  ```bash
-  hugo server -s linkerd.io
-  ```
+From the root `/website` directory, build site and run Hugo in development mode:
 
-  You should see the site on localhost:1313, and it should reload
-  automatically upon file write.
+```bash
+hugo server -s linkerd.io
+```
+
+You should see the site on localhost:1313, and it should reload automatically
+upon file write.
 
 ## Hugo version requirements
 
