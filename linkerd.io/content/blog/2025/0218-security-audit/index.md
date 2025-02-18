@@ -21,10 +21,10 @@ Linkerd's commitment to openness, transparency, and security by design, we've
 published the unredacted report in the [Linkerd GitHub
 page](https://github.com/linkerd/linkerd2/tree/main/audits).
 
-This was the third such audit that Linkerd has undergone, and included both pen
-testing and whitebox testing. We were happy to collaborate with the 7ASecurity
-team and OSTIF in the performance of this audit, and particularly happy with
-this excerpt from the report:
+This was the third such public audit that Linkerd has undergone, and included
+both pen testing and whitebox testing. We were happy to collaborate with the
+7ASecurity team and OSTIF in the performance of this audit, and particularly
+happy with this excerpt from the report:
 
 > The Linkerd team was incredibly responsive and helpful during the engagement
 > and quick to resolve the reported issues, with multiple fixes already
@@ -44,14 +44,13 @@ them before they become user-facing vulnerabilities.
 
 As usual, the audit flagged an assortment of issues of varying severity, and we
 worked closely with the 7ASecurity team to either address them or classify them
-as low user risk.  For example, the most severe finding identified an unused
+as low user risk. For example, the most severe finding identified an unused
 development-time script used to generate protobuf bindings, which in some cases
 would output instructions to the developer to download a resource from a
-plaintext HTTP URL.  This script was not part of the modern development process
+plaintext HTTP URL. This script was not part of the modern development process
 and we [removed it from the
 repo](https://github.com/linkerd/linkerd2/pull/13459). You can read the complete
-[OSTIF blog post](https://ostif.org/linkerd-audit-complete/) and the [7ASecurity
-blog post](TBD) about the audit for more.
+[OSTIF blog post](https://ostif.org/linkerd-audit-complete/) for more.
 
 Regular third-party audits are just one part of Linkerd’s comprehensive focus on
 world-class security, which includes code review for all changes, a formal
