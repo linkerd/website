@@ -1,5 +1,56 @@
 # linkerd.io
 
+## General development instructions
+
+1. Run the linter and checker:
+
+  ```bash
+  docker run \
+    --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
+    ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
+  ```
+
+1. Install Hugo to run the site locally:
+
+  For Mac users:
+
+  ```bash
+  brew install hugo@0.136.5
+  ```
+
+  Or download the **extended** release of Hugo from the GitHub
+  [release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
+
+  > [!IMPORTANT]
+  > See the [Hugo version requirements](#hugo-version-requirements) below.
+
+1. From the root `/website` directory, build site and run Hugo in development mode:
+
+  ```bash
+  hugo server -s linkerd.io
+  ```
+
+  You should see the site on localhost:1313, and it should reload
+  automatically upon file write.
+
+## Hugo version requirements
+
+When linkerd.io is deployed to production, we use Hugo `v0.136.5`.
+
+When developing locally, the minimum version of Hugo required is `v0.131.0`,
+and the maximum version is `v0.141.0`.
+
+**Why do we require this version range?**
+
+In [`v0.131.0`](https://github.com/gohugoio/hugo/releases/tag/v0.131.0) Hugo
+changed the way processed images are named, and since we save these images in
+GitHub, using an older version of Hugo will generate incorrect image names.
+
+In [`v0.142.0`](https://github.com/gohugoio/hugo/releases/tag/v0.142.0) Hugo
+changed the way processed images are named again. Because of this, we should
+not use this version until the production build version uses `v0.142.0` or
+later.
+
 ## Website images
 
 Please do not put files in the `static` directory that are referenced on
