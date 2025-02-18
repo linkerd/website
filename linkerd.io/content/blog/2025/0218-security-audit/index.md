@@ -1,5 +1,5 @@
 ---
-date: 2025-02-17T00:00:00Z
+date: 2025-02-18T00:00:00Z
 title: |-
   Linkerd 2024 Security Audit
 description: |-
@@ -18,7 +18,7 @@ early this year, was performed by [7ASecurity](https://7asecurity.com/), managed
 by the [Open Source Technology Improvement Fund](https://ostif.org/), and funded
 by the [Cloud Native Computing Foundation](https://cncf.io/). As part of
 Linkerd's commitment to openness, transparency, and security by design, we've
-published the unredacted reports in the [Linkerd GitHub
+published the unredacted report in the [Linkerd GitHub
 page](https://github.com/linkerd/linkerd2/tree/main/audits).
 
 This was the third such audit that Linkerd has undergone, and included both pen
