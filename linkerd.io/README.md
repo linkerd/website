@@ -1,14 +1,79 @@
 # linkerd.io
 
-## Website assets
+## General development instructions
+
+### Run the linter and checker
+
+```bash
+docker run \
+  --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
+  ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
+```
+
+### Install Hugo to develop locally
+
+For Mac users:
+
+```bash
+brew install hugo@0.136.5
+```
+
+Or download the **extended** release of Hugo from the GitHub
+[release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
+
+> [!IMPORTANT]
+> See the [Hugo version requirements](#hugo-version-requirements) below.
+
+### Run Hugo locally
+
+From the root `/website` directory, build site and run Hugo in development mode:
+
+```bash
+hugo server -s linkerd.io
+```
+
+You should see the site on localhost:1313, and it should reload automatically
+upon file write.
+
+## Hugo version requirements
+
+When linkerd.io is deployed to production, we use Hugo `v0.136.5`.
+
+When developing locally, the minimum version of Hugo required is `v0.131.0`,
+and the maximum version is `v0.141.0`.
+
+**Why do we require this version range?**
+
+In [`v0.131.0`](https://github.com/gohugoio/hugo/releases/tag/v0.131.0) Hugo
+changed the way processed images are named, and since we save these images in
+GitHub, using an older version of Hugo will generate incorrect image names.
+
+In [`v0.142.0`](https://github.com/gohugoio/hugo/releases/tag/v0.142.0) Hugo
+changed the way processed images are named again. Because of this, we should
+not use this version until the production build version uses `v0.142.0` or
+later.
+
+## Website images
 
 Please do not put files in the `static` directory that are referenced on
 linkerd.io. This directory is reserved for assets that are used as external
 resources. If you need to add images for a page, please add them in the
 [page bundle](https://gohugo.io/content-management/page-bundles/).
 
-**Note:** Images in page bundles that have a width or height larger than 2400
-pixels will be downsized.
+Each time Hugo is built, it looks for any images that need to be resized then
+caches them in the `resources/_gen/images` directory. This directory is included
+in source control, so Hugo does not have to regenerate all of the images every
+time the site is published.
+
+> [!IMPORTANT]
+> If you are creating a PR that includes images, such as a blog post, the site
+> must be built locally using `hugo` before the PR is merged. This is required
+> so that the new images will be process by Hugo and cached in the
+> `resources/_gen/images` directory.
+
+> [!NOTE]
+> Any page bundle image referenced in Markdown content that has a width or
+> height larger than 2400 pixels will be downsized and cached.
 
 ## Tasks
 
@@ -139,7 +204,7 @@ example:
 ![Alt text](my-image.jpg)
 ```
 
-To dispplay a caption below the image, provide an image title. For example:
+To display a caption below the image, provide an image title. For example:
 
 ```markdown
 ![Alt text](my-image.jpg "My image caption")
