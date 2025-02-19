@@ -14,10 +14,9 @@ specific to the cluster.
 
 Certificates are one of the most important parts of a secure system based on
 mTLS, but they are also commonly one of the least well documented. For more
-information about certificates in Linkerd, see the Buoyant [(m)TLS concepts
-primer].
-
-[(m)TLS concepts primer]: https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/tls-concepts/
+information about certificates in Linkerd, see the Buoyant <a
+href="https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/tls-concepts/">(m)TLS
+concepts primer</a>.
 
 {{< /note >}}
 
@@ -47,14 +46,16 @@ very simple setup:
 
 - cert-manager will create a self-signed trust anchor;
 
-- cert-manager will use the trust anchor to automatically manage Linkerd's
-  identity issuer certificate; and
+- cert-manager will use the trust anchor to create Linkerd's identity issuer
+  certificate; and
 
 - trust-manager will create a trust bundle that Linkerd can use to verify the
   authenticity of certificates issued by cert-manager.
 
-Once the certificates are created, cert-manager will periodically rotate them
-as necessary.
+Once the certificates are created, cert-manager will automatically rotate the
+identity issuer certificate as necessary. Rotating the trust anchor is a bit
+more complex: though cert-manager can do the heavy lifting for you, the
+rotation will still involve manual intervention, as explained below.
 
 {{< note >}}
 
@@ -66,7 +67,7 @@ configuration, see Buoyant's [cert-manager concepts primer].
 
 {{< /note >}}
 
-## Overview
+## Setup Overview
 
 The process we will follow is straightforward even though it has several
 steps:
@@ -80,6 +81,9 @@ steps:
 5. Configure cert-manager to create a trust bundle for Linkerd to use
 6. Install Linkerd using the trust anchor and identity issuer certificate
    created by cert-manager
+7. Check everything that cert-manager did!
+8. Rotating the identity issuer
+9. Rotating the trust anchor
 
 ### 1. Create the `linkerd` namespace
 
@@ -117,25 +121,26 @@ We strongly recommend installing cert-manager in the `cert-manager` namespace.
 
 Once cert-manager is installed, install trust-manager (again, we'll use Helm
 for this, but there are more options in the [trust-manager installation
-guide]). We'll install trust-manager in the cert-manager namespace as well,
-but there's an important detail here: we need to configure trust-manager to
-use the `linkerd` namespace as the trust namespace. This is because Linkerd
-expects its trust bundle to be in the `linkerd` namespace.
+guide]). We'll install trust-manager in the `cert-manager` namespace as well,
+and we'll also configure trust-manager to use the `cert-manager` namespace as
+its _trust namespace_. The trust namespace is the only namespace from which
+trust-manager is allowed to read Secrets: since we want trust-manager to look
+at Secrets for the certificates that cert-manager is creating, the
+`cert-manager` namespace is the one we want.
 
 ```bash
 helm install \
   trust-manager jetstack/trust-manager \
   --namespace cert-manager \
-  --set app.trust.namespace=linkerd \
+  --set app.trust.namespace=cert-manager \
   --wait
 ```
 
-#### Give cert-manager necessary RBAC permissions
-
-By default cert-manager will only create certificate secrets in the namespace
-where it is installed. Linkerd, however, requires the cert secrets to be
-created in the linkerd namespace. To do this we will create a `ServiceAccount`
-for cert-manager in the linkerd namespace with the required permissions.
+Finally, we'll need to update cert-manager's RBAC permissions.  By default
+cert-manager will only create certificate secrets in the namespace where it is
+installed. Linkerd, however, requires its identity issuer to be created in the
+`linkerd` namespace. To allow this, we create a `ServiceAccount` for
+cert-manager in the `linkerd` namespace with the required permissions.
 
 ```bash
 kubectl apply -f - <<EOF
@@ -173,68 +178,106 @@ EOF
 
 ### 3. Configure cert-manager to create the trust anchor
 
-cert-manager uses _issuers_ to create _certificates_. Any certificate created
-and managed by cert-manager must be configured with a Certificate resource and
-must be linked to an issuer. Any issuer that cert-manager uses must be
-configured with an Issuer or ClusterIssuer resource.
+As described in Buoyant's [cert-manager concepts primer], cert-manager uses
+_issuers_ to create _certificates_. Any certificate created and managed by
+cert-manager must be configured with a Certificate resource and must be linked
+to an issuer. Any issuer that cert-manager uses must be configured with an
+Issuer or ClusterIssuer resource.
 
-We'll start by creating a `ClusterIssuer` for the trust anchor, since we don't
-need it to be specific to a namespace. This will be a self-signed issuer,
-meaning that will simply generate self-signed certificates with random keys --
-this is the simplest kind of issuer.
+The main difference between an Issuer and a ClusterIssuer is that Issuers can
+only be used by Certificates in the same namespace as the Issuer, while
+ClusterIssuers can cross namespaces. For the trust anchor, we'll use an Issuer
+in the `cert-manager` namespace. This will be a self-signed issuer, meaning
+that will simply generate self-signed certificates with random keys -- this is
+the simplest kind of issuer.
 
 {{< note >}}
 
 Your organization may have a more complex certificate authority setup, in
 which case you would need to use a different kind of issuer to provide
-Linkerd's trust anchor. The ClusterIssuer below is just an example; the rest
-of the setup will still work if you need to change out the trust anchor
-issuer.
+Linkerd's trust anchor. The Issuer below is just an example; the rest of the
+setup will still work if you need to change out the trust anchor issuer.
 
 {{< /note >}}
 
 ```bash
 kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
+  # This is the name of the Issuer resource; it's the way
+  # Certificate resources can find this issuer.
   name: linkerd-trust-root-issuer
+  namespace: cert-manager
 spec:
   selfSigned: {}
 EOF
 ```
 
 Next, we'll create a cert-manager `Certificate` resource which uses the
-previously-created `ClusterIssuer`:
+previously-created `Issuer`.
+
+{{< warning >}}
+
+See the warning below about the `rotationPolicy` for this Certificate.
+
+{{< /warning >}}
 
 ```bash
 kubectl apply -f - <<EOF
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  # This is the name of the Certificate resource, but the Secret
+  # we save the certificate into can be different.
   name: linkerd-trust-anchor
   namespace: cert-manager
 spec:
-  secretName: linkerd-trust-anchor
-  commonName: root.linkerd.cluster.local
-  isCA: true
-  duration: 87600h0m0s
-  renewBefore: 87264h0m0s
+  # This tells cert-manager which issuer to use for this Certificate:
+  # in this case, the Issuer named linkerd-trust-root-issuer.
   issuerRef:
+    kind: Issuer
     name: linkerd-trust-root-issuer
-    kind: ClusterIssuer
+
+  # The issued certificate will be saved in this Secret
+  secretName: linkerd-trust-anchor
+
+  # These are details about the certificate to be issued: check
+  # out the cert-manager docs for more, but realize that setting
+  # the private key's rotationPolicy to Always is _very_ important,
+  # and that for Linkerd you _must_ set isCA to true!
+  isCA: true
+  commonName: root.linkerd.cluster.local
+  # This is a one-year duration, rotating two months before expiry.
+  # Feel free to reduce this, but remember that there is a manual
+  # process for rotating the trust anchor!
+  duration: 8760h0m0s
+  renewBefore: 7320h0m0s
   privateKey:
+    rotationPolicy: Always
     algorithm: ECDSA
 EOF
 ```
 
-Note that this Certificate lives in the `cert-manager` namespace. cert-manager
-will write the newly-created certificate into a Secret with the name given by
-the `secretName` field, in the same namespace as the Certificate. While
-Linkerd needs its trust bundle to be in the `linkerd` namespace, Linkerd does
-_not_ need access to the private key of the trust anchor, so it's better to
-keep that Secret in the `cert-manager` namespace where Linkerd can be
-prevented from accessing it.
+{{< warning >}}
+
+If you do not set `rotationPolicy: Always` in the Certificate's `privateKey`
+section, cert-manager **will not** actually rotate the trust anchor: instead,
+it will update the validity timestamps but **not** generate a new private key.
+**This is definitely not as secure as rotating the private key**; we recommend
+always setting `rotationPolicy: Always` for any certificate that cert-manager
+is managing.
+
+{{< /warning >}}
+
+Note that this Certificate lives in the `cert-manager` namespace with the
+`linkerd-trust-root-issuer` Issuer. cert-manager will write the newly-created
+certificate into a Secret with the name given by the `secretName` field, in
+the same namespace as the Certificate. While Linkerd needs its trust bundle to
+be in the `linkerd` namespace, Linkerd does _not_ need access to the private
+key of the trust anchor, so it's better to keep that Secret in the
+`cert-manager` namespace where Linkerd can be prevented from accessing it.
 
 At this point, you should see a Secret named `linkerd-trust-anchor` in the
 `cert-manager` namespace:
@@ -243,12 +286,12 @@ At this point, you should see a Secret named `linkerd-trust-anchor` in the
 kubectl get secret -n cert-manager linkerd-trust-anchor
 ```
 
-#### 4. Configure cert-manager to use the trust anchor to create the identity issuer certificate
+### 4. Configure cert-manager to use the trust anchor to create the identity issuer certificate
 
 We now need to configure cert-manager to create the Linkerd identity issuer
 certificate, which requires creating another issuer. For this, we'll use a
-`CA`-type ClusterIssuer, telling cert-manager to use the trust anchor
-certificate it just created to issue a second certificate.
+`CA`-type ClusterIssuer, since we're going to want cert-manager to use the
+trust anchor certificate it just created to issue a second certificate.
 
 This needs to be a ClusterIssuer because Linkerd _does_ need access to the
 private key of the identity issuer certificate, so its Certificate needs to be
@@ -260,144 +303,197 @@ kubectl apply -f - <<EOF
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
+  # This is the name of the Issuer resource; it's the way
+  # Certificate resources can find this issuer.
   name: linkerd-identity-issuer
+  namespace: cert-manager
 spec:
   ca:
     secretName: linkerd-trust-anchor
 EOF
 ```
 
-#### Create a Certificate resource referencing the issuer
+Next we'll create a Certificate resource which uses the
+`linkerd-identity-issuer` ClusterIssuer to create the Linkerd identity issuer
+certificate. Linkerd will use this certificate to issue workload certificates
+to all the Linkerd proxies in the system, so although this Certificate will
+reference the ClusterIssuer we just created in the `cert-manager` namespace,
+the Certificate itself _must_ be in the `linkerd` namespace.
 
-Next, create a Linkerd identity issuer certificate which will act as an
-intermediary signing CA for all Linkerd mTLS proxy certificates:
+{{< warning >}}
+
+See the warning below about the `rotationPolicy` for this Certificate.
+
+{{< /warning >}}
 
 ```bash
 kubectl apply -f - <<EOF
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  # This is the name of the Certificate resource, but the Secret
+  # we save the certificate into can be different.
   name: linkerd-identity-issuer
   namespace: linkerd
 spec:
-  commonName: identity.linkerd.cluster.local
-  dnsNames:
-  - identity.linkerd.cluster.local
-  isCA: true
-  privateKey:
-    algorithm: ECDSA
-  usages:
-    - cert sign
-    - crl sign
-    - server auth
-    - client auth
-  duration: 28h0m0s
-  renewBefore: 25h0m0s
+  # This tells cert-manager which issuer to use for this Certificate:
+  # in this case, the ClusterIssuer named linkerd-identity-issuer.
   issuerRef:
     name: linkerd-identity-issuer
-    kind: Issuer
-  privateKey:
-    algorithm: ECDSA
+    kind: ClusterIssuer
+
+  # The issued certificate will be saved in this Secret.
   secretName: linkerd-identity-issuer
+
+  # These are details about the certificate to be issued: check
+  # out the cert-manager docs for more, but realize that setting
+  # the private key's rotationPolicy to Always is _very_ important,
+  # and that for Linkerd you _must_ set isCA to true!
+  isCA: true
+  commonName: identity.linkerd.cluster.local
+  # This is a two-day duration, rotating slightly over a day before
+  # expiry. Feel free to set this as you like.
+  duration: 48h0m0s
+  renewBefore: 25h0m0s
+  privateKey:
+    rotationPolicy: Always
+    algorithm: ECDSA
 EOF
 ```
 
-(In the YAML manifest above, the `duration` key instructs cert-manager to
-consider certificates as valid for `48` hours and the `renewBefore` key
-indicates that cert-manager will attempt to issue a new certificate `25` hours
-before expiration of the current one. These values can be customized to your
-liking.)
+{{< warning >}}
 
-#### Create Linkerd trust bundle
+If you do not set `rotationPolicy: Always` in the Certificate's `privateKey`
+section, cert-manager **will not** actually rotate the trust anchor: instead,
+it will update the validity timestamps but **not** generate a new private key.
+**This is definitely not as secure as rotating the private key**; we recommend
+always setting `rotationPolicy: Always` for any certificate that cert-manager
+is managing.
 
-Lastly, we will also need to create a trust bundle which will allow Linkerd's
-identity controller to verify the authenticity of certificates issued by
-cert-manager:
+{{< /warning >}}
+
+At this point, you should see a Secret named `linkerd-identity-issuer` in the
+`linkerd` namespace:
+
+```bash
+kubectl get secret -n linkerd linkerd-identity-issuer
+```
+
+### 5. Configure cert-manager to create a trust bundle for Linkerd to use
+
+Almost done! We only need one more thing: the _trust bundle_ will lets Linkerd
+know which trust anchors to accept. We'll use trust-manager for this, but
+there's a catch: when rotating the trust anchor, both the control plane and
+the data plane (the proxies) need to be restarted. Since that can't happen
+instaneously, we need to have both the old trust anchor and the new trust
+anchor in the trust bundle until all the restarts have completed.
+
+trust-manager can do this, but it needs a specific source for _each_
+certificate in the bundle. So we'll start by copying the trust anchor from the
+`linkerd-trust-anchor` Secret into a second Secret, `linkerd-previous-anchor`,
+and then we'll configure trust-manager to use both Secrets as sources for the
+trust bundle.
+
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor -o yaml \
+        | sed -e s/linkerd-trust-anchor/linkerd-previous-anchor/ \
+        | egrep -v '^  *(resourceVersion|uid)' \
+        | kubectl apply -f -
+```
+
+This way, when cert-manager rotates the trust anchor and updates the
+`linkerd-trust-anchor` Secret, trust-manager will take the new anchor from the
+`linkerd-trust-anchor` Secret and the previous anchor from the
+`linkerd-previous-anchor` Secret, bundle them together, and save the bundle in
+a ConfigMap. After everything is restarted, we'll copy the new trust anchor
+across to the `linkerd-previous-anchor` Secret, and since both Secrets are
+identical, the ConfigMap will only contain a single anchor in a bundle.
+
+Once that's done, we can create the Bundle resource to tell trust-manager how
+to build the trust bundle.
+
+{{< note >}}
+
+**The Bundle resource works differently than the Certificate resource.** In
+particular, the Bundle name _must_ match the ConfigMap to be created.
+
+{{< /note >}}
 
 ```bash
 kubectl apply -f - <<EOF
+---
 apiVersion: trust.cert-manager.io/v1alpha1
 kind: Bundle
 metadata:
+  # This is the name of the Bundle and _also_ the name of the
+  # ConfigMap in which we'll write the trust bundle.
   name: linkerd-identity-trust-roots
   namespace: linkerd
 spec:
+  # This tells trust-manager where to find the public keys to copy into
+  # the trust bundle.
   sources:
+    # This is the Secret that cert-manager will update when it rotates
+    # the trust anchor.
     - secret:
         name: "linkerd-trust-anchor"
-        key: "ca.crt"
+        key: "tls.crt"
+
+    # This is the Secret that we will use to hold the previous trust
+    # anchor; we'll manually update this Secret after we're finished
+    # restarting things.
+    - secret:
+        name: "linkerd-previous-anchor"
+        key: "tls.crt"
+
+  # This tells trust-manager the key to use when writing the trust
+  # bundle into the ConfigMap. The target stanza doesn't have a way
+  # to specify the name of the namespace, but thankfully Linkerd puts
+  # a unique label on the control plane's namespace.
   target:
     configMap:
       key: "ca-bundle.crt"
+    namespaceSelector:
+      matchLabels:
+        linkerd.io/is-control-plane: "true"
 EOF
 ```
 
-## Summary & Validation
+{{< note >}}
 
-Below are the resources created for managing Linkerd identity certificates with
-cert-manager:
+The Linkerd identity issuer does contain the trust anchor's public key, so we
+could configure trust-manager to read the public key from the identity issuer.
+That would complicate things both because trust-manager can't read information
+from two namespaces and because it turns out that cert-manager won't
+automatically rotate the identity issuer when we manually trigger rotation of
+the trust anchor, so it's simpler to use the trust anchor Secrets directly.
 
-- Namespace: `linkerd` (to store certificates and secrets)
-- RBAC Permissions: ServiceAccount, Role, and RoleBinding in the `linkerd`
-  namespace for cert-manager
-- ClusterIssuer: `linkerd-trust-root-issuer` (self-signed ClusterIssuer)
-- Certificate: `linkerd-trust-anchor` (in the `linkerd` namespace, referencing
-  `linkerd-trust-root-issuer`)
-- Issuer: `linkerd-identity-issuer` (to manage Linkerd identity certificates)
-- Certificate: `linkerd-identity-issuer` (in the `linkerd` namespace, acting as
-  an intermediary signing CA)
-- Trust Bundle: `linkerd-identity-trust-roots` (to allow Linkerd's identity
-  controller to verify certificate authenticity)
+{{< /note >}}
 
-To validate creation and status, run the following commands:
+You won't actually see the `linkerd-identity-trust-roots` ConfigMap in the
+`linkerd` namespace yet, because the namespace won't have the label that
+trust-manager is looking for until we install Linkerd! So let's go ahead and
+get Linkerd installed.
 
-```bash
-# Check namespace creation
-kubectl get namespaces linkerd
+### 6. Install Linkerd using the trust anchor and identity issuer certificate created by cert-manager
 
-# Check RBAC permissions
-kubectl get serviceaccount,role,rolebinding -n linkerd
+To have Linkerd use the certificates created by cert-manager, you need to add
+the following to your `values.yaml` file or pass them in as flags at runtime.
 
-# Check ClusterIssuer creation
-kubectl get clusterissuers linkerd-trust-root-issuer
+| Field                    | Value               |
+| ------------------------ | ------------------- |
+| `identity.externalCA`    | `true`              |
+| `identity.issuer.scheme` | `kubernetes.io/tls` |
 
-# Check Certificate creation
-kubectl get certificates -n linkerd
-
-# Check Issuer creation
-kubectl get issuers.cert-manager.io -n linkerd
-
-# Check Trust Bundle creation
-kubectl get bundles -n linkerd
-```
-
-## Consuming cert-manager identity certificates
-
-To have Linkerd consume cert-manager created certificates you will need to add
-the following to your values file or pass them in as flags at runtime.
-
-| Field                    | Value             |
-| ------------------------ | ----------------- |
-| `identity.externalCA`    | true              |
-| `identity.issuer.scheme` | kubernetes.io/tls |
-
-### Using these credentials with CLI installation
-
-For CLI installation, the Linkerd control plane should be installed with the
-`--identity-external-issuer` flag, which instructs Linkerd to read certificates
-from the `linkerd-identity-issuer` secret. Whenever certificate and key stored
-in the secret are updated, the `identity` service will automatically detect this
-change and reload the new credentials.
-
-Voila! We have set up automatic rotation of Linkerd's control plane TLS
-credentials.
-
-### Using these credentials with a Helm installation
+#### Installing with Helm (recommended)
 
 For installing with Helm, first install the `linkerd-crds` chart:
 
 ```bash
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+helm install linkerd-crds \
+     -n linkerd --create-namespace \
+     linkerd/linkerd-crds
 ```
 
 Then install the `linkerd-control-plane` chart:
@@ -409,46 +505,385 @@ helm install linkerd-control-plane -n linkerd \
   linkerd/linkerd-control-plane
 ```
 
+We'll also need to label the `linkerd` namespace with the label that
+trust-manager will be looking for:
+
+```bash
+kubectl label namespace linkerd linkerd.io/is-control-plane=true
+```
+
 Voila! We have set up automatic rotation of Linkerd's control plane TLS
 credentials.
 
-## Observing the update process
+### Installing with the CLI
 
-Once you have set up automatic rotation of Linkerd's control plane TLS
-credentials, you can monitor the update process by checking the `IssuerUpdated`
-events emitted by the service:
+First, install the CRDs:
+
+```bash
+linkerd install --crds | kubectl apply -f -
+```
+
+Then install the control plane:
+
+```bash
+linkerd install \
+  --set identity.externalCA=true \
+  --set identity.issuer.scheme=kubernetes.io/tls \
+  | kubectl apply -f -
+```
+
+Voila! We have set up automatic rotation of Linkerd's control plane TLS
+credentials.
+
+### 7. Check everything that cert-manager did!
+
+You can skip this step if you're in a hurry, but it's a good idea to know how
+to check Linkerd's trust setup! There are a few ways to do this, but one of
+the easiest uses the [`step` CLI] to inspect the actual certificates stored in
+the various Kubernetes objects that cert-manager has just set up for us.
+
+[`step` CLI]: https://smallstep.com/docs/step-cli/installation
+
+First up, let's look at the actual trust anchor secret. This is the
+`linkerd-trust-anchor` Secret in the `cert-manager` namespace; `kubectl
+describe` will show that it has keys of `tls.key`, `tls.crt`, and `ca.crt`:
+
+```bash
+kubectl describe secret -n cert-manager linkerd-trust-anchor
+```
+
+We won't look at `tls.key` - that's the private key! - but `tls.crt` is its
+base64-encoded public key, and we can inspect that:
+
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | step certificate inspect -
+```
+
+There's a lot of information in there: things worth checking over include the
+`Issuer`, the `Subject`, the `Validity` timestamps, etc. But we can use a
+shell function to easier to see the chain of trust where one certificate signs
+another:
+
+```bash
+inspect_cert () {
+  sub_selector='\(.extensions.subject_key_id | .[0:16])... \(.subject_dn)'
+  iss_selector='\(.extensions.authority_key_id // "................" | .[0:16])... \(.issuer_dn)'
+
+  step certificate inspect --format json "$1" \
+    | jq -r "\"Issuer:  $iss_selector\",\"Subject: $sub_selector\""
+}
+```
+
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+We should see something like this:
+
+```text
+Issuer:  ................... CN=root.linkerd.cluster.local
+Subject: 5c455d3e9bd77e91... CN=root.linkerd.cluster.local
+```
+
+where the `Subject`'s key fingerprint - the hex number on the second line -
+will of course be different for your certificate.
+
+Since our setup uses a self-signed certificate (as expected!), we won't see an
+issuer fingerprint, and the issuer and subject names will be the same, and the
+`ca.crt` key should have exactly the same information as `tls.crt`:
+
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor \
+        -o jsonpath='{ .data.ca\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+This output should look _exactly_ the same as the `tls.crt` output.
+
+Since we copied the trust anchor to the `linkerd-previous-anchor` Secret, too,
+we should see _exactly_ the same information there as we do in the
+`linkerd-trust-anchor` Secret:
+
+```bash
+kubectl get secret -n cert-manager linkerd-previous-anchor \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+
+kubectl get secret -n cert-manager linkerd-previous-anchor \
+        -o jsonpath='{ .data.ca\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+{{< note >}}
+
+Remember, if you chose to use a different kind of issuer for your trust
+anchor, you should _not_ see a self-signed certificate, and `ca.crt` should
+show you information about the actual key that issued your trust anchor.
+
+{{< /note >}}
+
+Next, we can check the identity issuer certificate. This is the
+`linkerd-identity-issuer` Secret in the `linkerd` namespace, and it will
+appear to have exactly the same structure as the trust anchor secret:
+
+```bash
+kubectl describe secret -n linkerd linkerd-identity-issuer
+```
+
+The `ca.crt` key should be exactly the same as what we just saw from the trust
+anchor, at this point:
+
+```bash
+kubectl get secret -n linkerd linkerd-identity-issuer \
+        -o jsonpath='{ .data.ca\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+The `tls.crt` key should be the public key of the identity issuer certificate,
+so its _Issuer_ line should show the trust anchor's fingerprint, and its
+_Subject_ line should be different.
+
+```bash
+kubectl get secret -n linkerd linkerd-identity-issuer \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+Here, we should see something like
+
+```text
+Issuer:  5c455d3e9bd77e91... CN=root.linkerd.cluster.local
+Subject: 56bfe071553c16ad... CN=identity.linkerd.cluster.local
+```
+
+where the `Issuer` line should be _exactly_ the same as the `Subject` line
+from the previous inspections (and, again, your hex values will be different
+from the ones shown above).
+
+{{< note >}}
+
+Even if you chose to use a different kind of issuer for your trust anchor, the
+identity issuer should still show the fingerprint you saw for your trust
+anchor.
+
+{{< /note >}}
+
+Finally, we can check the trust bundle. This is the
+`linkerd-identity-trust-roots` ConfigMap in the `linkerd` namespace, and it
+should have a key named `ca-bundle.crt`. This key should contain our trust
+bundle, which is a set of public keys -- at the moment, there should just be
+one key, the public key of our current trust anchor. This is _not_
+base64-encoded, so we can start by dumping it directly:
+
+```bash
+kubectl get configmap -n linkerd linkerd-identity-trust-roots \
+        -o jsonpath='{ .data.ca-bundle\.crt }' \
+```
+
+This should be a single PEM CERTIFICATE block:
+
+```bash
+-----BEGIN CERTIFICATE-----
+...lots of random-looking stuff here...
+-----END CERTIFICATE-----
+```
+
+and if we pipe it to `inspect_cert`, we should once again see the trust
+anchor's information.
+
+```bash
+kubectl get configmap -n linkerd linkerd-identity-trust-roots \
+        -o jsonpath='{ .data.ca-bundle\.crt }' \
+    | inspect_cert
+```
+
+{{< note >}}
+
+If you read carefully, you'll notice that **none** of the commands above are
+interacting with anything specific to cert-manager (except that we have some
+secrets stored in the `cert-manager` namespace). **Any** solution that keeps
+the `linkerd-identity-issuer` Secret and `linkerd-identity-trust-roots`
+ConfigMap up to date will work with Linkerd: all Linkerd needs is that those
+two resources have the right information in them.
+
+{{< /note >}}
+
+### 8. Rotating the identity issuer
+
+Rotating the identity issuer is basically a non-event: cert-manager can handle
+rotating the identity issuer completely on its own. When it does so, it will
+update the `linkerd-identity-issuer` Secret in the `linkerd` namespace, at
+which point every Linkerd proxy will automatically notice this change and
+start using the new certificate for issuing workload certificates. Since the
+trust anchor hasn't changed, nothing further is needed and everything will
+continue smoothly.
+
+You can monitor identity issuer rotation by checking the `IssuerUpdated`
+events emitted by Linkerd:
 
 ```bash
 kubectl get events --field-selector reason=IssuerUpdated -n linkerd
 ```
 
-## A note on third party cert management solutions
+{{< note >}}
 
-It is important to note that the mechanism that Linkerd provides for setting
-issuer certificates and keys is also usable outside of cert-manager. Linkerd
-will read the `linkerd-identity-issuer` Secret, and if it's of type
-`kubernetes.io/tls`, will use the contents as its TLS credentials. This means
-that any solution that is able to rotate TLS certificates by writing them to
-this secret can be used to provide dynamic TLS certificate management.
+If you leave cert-manager to its own devices here, **the proxies will not all
+rotate their certificates the moment that cert-manager rotates the identity
+issuer**. The proxies will continue using their workload certificates, signed
+by the _old_ identity issuer, until it's time to rotate the workload
+certificate. **This is OK under normal circumstances**, and it reduces load on
+Linkerd's identity controller.
 
-You could generate that secret with a command such as:
+If you need to force the proxies to rotate their certificates immediately,
+just restart the workloads.
+
+{{< /note >}}
+
+### 9. Rotating the trust anchor
+
+Rotating the trust anchor is a bit different, because (as mentioned before)
+rotating the trust anchor mean that you have to restart both the Linkerd
+control plane and all the proxies while managing the trust bundle. In
+practice, this _requires_ manual intervention, because while cert-manager can
+handle the hard work of actually rotating the trust anchor, it can't trigger
+the needed restarts.
+
+This means that the simplest way to handle trust anchor rotation is to
+**trigger the rotation manually* whenever it's convenient for you so that you
+can manage the trust bundle and restarts while letting cert-manager manage the
+trust anchor certificate.
+
+The process of actually doing this is straightforward, but again, there are
+several steps:
+
+a. Trigger trust anchor rotation
+b. Trigger identity issuer rotation
+c. Restart the control plane
+d. Restart the data plane
+e. Remove the old anchor from the trust bundle
+
+#### a. Triggering trust anchor rotation
+
+Start by triggering cert-manager to rotate the trust anchor. The easiest way
+to do this is with cert-manager's `cmctl` CLI:
 
 ```bash
-kubectl create secret tls linkerd-identity-issuer --cert=issuer.crt --key=issuer.key --namespace=linkerd
+cmctl renew -n cert-manager linkerd-trust-anchor
 ```
 
-Where `issuer.crt` and `issuer.key` would be the cert and private key of an
-intermediary cert rooted at the trust root (`ca.crt`) referred above (check this
-[guide](../generate-certificates/) to see how to generate them).
+This will cause cert-manager to rotate the trust anchor certificate, which
+will update the `linkerd-trust-anchor` Secret, which will trigger
+trust-manager to update the `linkerd-identity-trust-roots` ConfigMap. You can
+(and should!) check both of these things with `kubectl` -- the
+`linkerd-trust-anchor` and `linkerd-previous-anchor` should no longer show the
+same Subject keys:
 
-Note that the root cert (`ca.crt`) needs to be included in that Secret as well.
-You can just edit the generated Secret and include the `ca.crt` field with the
-contents of the file base64-encoded.
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
 
-After setting up the `linkerd-identity-issuer` Secret, continue with the
-following instructions to install and configure Linkerd to use it.
+kubectl get secret -n cert-manager linkerd-previous-anchor \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+Additionally, the `linkerd-identity-trust-roots` ConfigMap should now contain
+the Subject keys from both Secrets. (We can't use `inspect_cert` for this
+since there are two keys.)
+
+```bash
+kubectl get configmap -n linkerd linkerd-identity-trust-roots \
+        -o jsonpath='{ .data.ca-bundle\.crt }' \
+        | step certificate inspect --bundle --format json \
+        | jq -r ".[] | \"Subject: \(.extensions.subject_key_id | .[0:16])... \(.subject_dn)\""
+```
+
+Note that mTLS communication is still working fine at this point. All the
+proxies in the data plane are still using the old identity issuer, signed by
+the old trust anchor, and that trust anchor is still present in
+`linkerd-identity-trust-roots`.
+
+#### b. Triggering identity issuer rotation
+
+Everything is still using the old identity issuer because, strangely, manually
+triggering cert-manager to rotate the trust anchor does not automatically
+rotate the identity issuer. You can verify this by doublechecking the identity
+issuer directly:
+
+```bash
+kubectl get secret -n linkerd linkerd-identity-issuer \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+You'll see that its issuer is still the old trust anchor. Our next step,
+therefore, is to trigger cert-manager to rotate the identity issuer.
+
+```bash
+cmctl renew -n linkerd linkerd-identity-issuer
+```
+
+If you re-check the identity issuer now, you'll see that it's signed by the
+new trust anchor:
+
+```bash
+kubectl get secret -n linkerd linkerd-identity-issuer \
+        -o jsonpath='{ .data.tls\.crt }' \
+    | base64 -d | inspect_cert
+```
+
+#### c. Restart the control plane
+
+Restart the control plane with `kubectl rollout restart`:
+
+```bash
+kubectl rollout restart -n linkerd deploy
+kubectl rollout status -n linkerd deploy
+```
+
+This will cause the control plane to pick up the new trust anchor and identity
+issuer.
+
+#### d. Restart the data plane
+
+At this point, you'll need to restart your workloads as well, to force the
+proxies to switch to the new identity issuer. The exact mechanism to do this
+when depend on your workloads, but it's often just `kubectl rollout restart`
+for each of your application namespaces.
+
+#### e. Remove the old anchor from the trust bundle
+
+One last step: once everything is restarted, you'll need to remove the old
+trust anchor from the trust bundle. To do this, just copy the
+`linkerd-trust-anchor` Secret to the `linkerd-previous-anchor` Secret; that
+will trigger trust-manager to update the trust bundle ConfigMap.
+
+```bash
+kubectl get secret -n cert-manager linkerd-trust-anchor -o yaml \
+        | sed -e s/linkerd-trust-anchor/linkerd-previous-anchor/ \
+        | egrep -v '^  *(resourceVersion|uid)' \
+        | kubectl apply -f -
+```
+
+You can doublecheck this with `kubectl` again:
+
+```bash
+kubectl get configmap -n linkerd linkerd-identity-trust-roots \
+        -o jsonpath='{ .data.ca-bundle\.crt }' \
+        | step certificate inspect --format json \
+        | jq -r "\"Subject: \(.extensions.subject_key_id | .[0:16])... \(.subject_dn)\""
+```
+
+and you should only see the single ID of the current trust anchor.
 
 ## See also
 
 - [Automatically Rotating Webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
 - [Manually rotating Linkerd's trust anchor credentials](../manually-rotating-control-plane-tls-credentials/)
+
+[cert-manager concepts primer]: https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/cert-manager-concepts/
