@@ -76,11 +76,9 @@ steps:
    live
 2. Install cert-manager and trust-manager on your cluster
 3. Configure cert-manager to create the trust anchor
-4. Configure cert-manager to use the trust anchor to create the identity
-   issuer certificate
+4. Configure cert-manager to create the identity issuer certificate
 5. Configure cert-manager to create a trust bundle for Linkerd to use
-6. Install Linkerd using the trust anchor and identity issuer certificate
-   created by cert-manager
+6. Install Linkerd using certificates created by cert-manager
 7. Check everything that cert-manager did!
 8. Rotating the identity issuer
 9. Rotating the trust anchor
@@ -286,7 +284,7 @@ At this point, you should see a Secret named `linkerd-trust-anchor` in the
 kubectl get secret -n cert-manager linkerd-trust-anchor
 ```
 
-### 4. Configure cert-manager to use the trust anchor to create the identity issuer certificate
+### 4. Configure cert-manager to create the identity issuer certificate
 
 We now need to configure cert-manager to create the Linkerd identity issuer
 certificate, which requires creating another issuer. For this, we'll use a
@@ -476,7 +474,7 @@ You won't actually see the `linkerd-identity-trust-roots` ConfigMap in the
 trust-manager is looking for until we install Linkerd! So let's go ahead and
 get Linkerd installed.
 
-### 6. Install Linkerd using the trust anchor and identity issuer certificate created by cert-manager
+### 6. Install Linkerd using certificates created by cert-manager
 
 To have Linkerd use the certificates created by cert-manager, you need to add
 the following to your `values.yaml` file or pass them in as flags at runtime.
