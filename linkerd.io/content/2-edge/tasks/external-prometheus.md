@@ -7,9 +7,10 @@ Even though [the linkerd-viz extension](../../features/dashboard/) comes with
 its own Prometheus instance, there can be cases where using an external
 instance makes more sense for various reasons.
 
-This tutorial shows how to configure an external Prometheus instance to scrape both
-the control plane as well as the proxy's metrics in a format that is consumable
-both by a user as well as Linkerd control plane components like web, etc.
+This tutorial shows how to configure an external Prometheus instance to scrape
+both the control plane as well as the proxy's metrics in a format that is
+consumable both by a user as well as Linkerd control plane components like
+web, etc.
 
 {{< docs/production-note >}}
 
@@ -24,13 +25,15 @@ The following scrape configuration has to be applied to the external
 Prometheus instance.
 
 {{< note >}}
+
 The below scrape configuration is a [subset of the full `linkerd-prometheus`
 scrape
 configuration](https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/templates/prometheus.yaml#L60-L139).
+
 {{< /note >}}
 
-Before applying, it is important to replace templated values (present in `{{}}`)
-with direct values for the below configuration to work.
+Before applying, it is important to replace templated values (present in
+`{{}}`) with direct values for the below configuration to work.
 
 ```yaml
     - job_name: 'linkerd-controller'
@@ -154,8 +157,8 @@ kubectl -n linkerd-viz  get configmap prometheus-config -o yaml
 
 ## Linkerd-Viz Extension Configuration
 
-Linkerd's viz extension components like `metrics-api`, etc depend
-on the Prometheus instance to power the dashboard and CLI.
+Linkerd's viz extension components like `metrics-api`, etc depend on the
+Prometheus instance to power the dashboard and CLI.
 
 The `prometheusUrl` field gives you a single place through which all these
 components can be configured to an external Prometheus URL. This is allowed
@@ -200,16 +203,16 @@ prometheusUrl: http://username:password@existing-prometheus.namespace:9090
 ```
 
 Finally, when using an external Prometheus and configuring the `prometheusUrl`
-field, Linkerd's Prometheus will still be included in the installation unless you
-disable it:
+field, Linkerd's Prometheus will still be included in the installation unless
+you disable it:
 
 ```yaml
 prometheus:
   enabled: false
 ```
 
-This configuration is **not** persistent across installs: you'll need to
-pass the same `values.yaml` for re-installs, upgrades, etc.
+This configuration is **not** persistent across installs: you'll need to pass
+the same `values.yaml` for re-installs, upgrades, etc.
 
 More information on installation through Helm can be found
 [here](../install-helm/)
