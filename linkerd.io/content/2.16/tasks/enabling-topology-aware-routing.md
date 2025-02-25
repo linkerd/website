@@ -11,8 +11,8 @@ and lower the associated costs and latency.
 
 {{< note >}}
 
-If you're using a [stable distribution](/releases/) of Linkerd, it may have
-additional features related to topology-aware routing (for example, <a
+If you're using a stable distribution of Linkerd, it may have additional
+features related to topology-aware routing (for example, <a
 href="https://buoyant.io/linkerd-enterprise/">Buoyant Enterprise for
 Linkerd</a> and its <a
 href="https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/">HAZL</a>
@@ -21,17 +21,20 @@ releases on the [Releases and Versions](/releases/) page.
 
 {{< /note >}}
 
-There are three requirements to successfully enabling topology aware routing
+There are four requirements to successfully enabling topology aware routing
 with Linkerd:
 
 1. The `TopologyAwareHints` feature gate MUST be enabled on the Kubernetes
    cluster. (This feature gate is enabled by default in Kubernetes 1.24 and
    later.)
 
-2. Each Kubernetes node needs to be assigned to a zone, using
+2. Linkerd's `endpointSlice` feature MUST be turned on. (This is the default
+   starting with Linkerd stable-2.12).
+
+3. Each Kubernetes node needs to be assigned to a zone, using
    `"topology.kubernetes.io/zone` label.
 
-3. Relevant Kubernetes services will need to be modified with the
+4. Relevant Kubernetes services will need to be modified with the
    `service.kubernetes.io/topology-aware-hints=auto` annotation.
 
 When Linkerd receives a set of endpoint slices and translates them to an
@@ -80,7 +83,7 @@ Successful topology aware routing can be confirmed by looking at the Linkerd
 proxy logs for the relevant service. The logs should show a stream of messages
 similar to the ones below:
 
-```text
+```text {class=disable-copy}
 time="2021-08-27T14:04:35Z" level=info msg="Establishing watch on endpoint [default/nginx-deploy-svc:80]" addr=":8086" component=endpoints-watcher
 time="2021-08-27T14:04:35Z" level=debug msg="Filtering through addresses that should be consumed by zone zone-b" addr=":8086" component=endpoint-translator remote="127.0.0.1:49846" service="nginx-deploy-svc.default.svc.cluster.local:80"
 ```

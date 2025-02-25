@@ -1,7 +1,7 @@
 ---
 title: Topology Aware Routing
 description: |-
-    Linkerd's implementation of Kubernetes topology aware routing enables endpoint consumption based on a node's zone label.
+  Linkerd's implementation of Kubernetes topology aware routing enables endpoint consumption based on a node's zone label.
 ---
 
 Kubernetes clusters are increasingly deployed in multi-zone environments with
@@ -22,10 +22,14 @@ feature is enabled and the label set, Linkerd's destination controller will
 attempt to find endpoints whose `routing.ForZones` field matches the client's
 zone.
 
+(Topology aware routing is distinct from the `trafficDistribution` feature
+that appears in Kubernetes 1.31. `trafficDistribution` is not yet supported by
+Linkerd.)
+
 {{< note >}}
 
-If you're using a [stable distribution](/releases/) of Linkerd, it may have
-additional features related to topology-aware routing (for example, <a
+If you're using a stable distribution of Linkerd, it may have additional
+features related to topology-aware routing (for example, <a
 href="https://buoyant.io/linkerd-enterprise/">Buoyant Enterprise for
 Linkerd</a> and its <a
 href="https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/">HAZL</a>
@@ -40,20 +44,3 @@ documentation.
 
 [topology aware routing]:
     https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/
-
-{{< note >}}
-
-Topology aware routing requires that the cluster have the `TopologyAwareHints`
-feature gate enabled (which is the default starting with Kubernetes 1.24), and
-that Linkerd's `endpointSlice` feature be turned on (this is the default
-starting with Linkerd stable-2.12).
-
-{{< /note >}}
-
-{{< note >}}
-
-Starting in Kubernetes 1.31, Kubernetes also has the `trafficDistribution`
-feature available as an alternative to topology aware routing.
-`trafficDistribution` is not yet supported by Linkerd.
-
-{{< /note >}}
