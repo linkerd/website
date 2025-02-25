@@ -200,7 +200,7 @@ prometheusUrl: http://username:password@existing-prometheus.namespace:9090
 ```
 
 Finally, when using an external Prometheus and configuring the `prometheusUrl`
-field, Linkerd's Prometheus will still be included in installation unless you
+field, Linkerd's Prometheus will still be included in the installation unless you
 disable it:
 
 ```yaml
