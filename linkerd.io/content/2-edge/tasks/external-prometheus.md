@@ -26,7 +26,7 @@ Prometheus instance.
 {{< note >}}
 The below scrape configuration is a [subset of the full `linkerd-prometheus`
 scrape
-configuration](https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/templates/prometheus.yaml#L47-L151).
+configuration](https://github.com/linkerd/linkerd2/blob/main/viz/charts/linkerd-viz/templates/prometheus.yaml#L60-L139).
 {{< /note >}}
 
 Before applying, it is important to replace templated values (present in `{{}}`)
@@ -54,7 +54,7 @@ with direct values for the below configuration to work.
       - role: pod
       relabel_configs:
       - source_labels:
-        - __meta_kubernetes_pod_label_linkerd_io_control_plane_component
+        - __meta_kubernetes_pod_label_component
         - __meta_kubernetes_pod_container_port_name
         action: keep
         regex: linkerd-service-mirror;admin-http$
