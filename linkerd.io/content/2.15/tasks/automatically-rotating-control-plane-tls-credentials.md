@@ -17,7 +17,7 @@ mTLS, but they are also commonly one of the least well documented. For more
 information about certificates in Linkerd, see the Buoyant [(m)TLS concepts
 primer][mtls-concepts-primer].
 
-[mtls-concepts-primer]: https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/tls-concepts/
+[mtls-concepts-primer]: https://docs.buoyant.io/primers/tls-concepts/
 
 {{< /note >}}
 
@@ -78,7 +78,7 @@ cert-manager is _extremely_ flexible, with many different ways to configure
 it. For more information about cert-manager in general and how to approach its
 configuration, see Buoyant's [cert-manager concepts primer].
 
-[cert-manager concepts primer]: https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/cert-manager-concepts/
+[cert-manager concepts primer]: https://docs.buoyant.io/primers/cert-manager-concepts/
 
 {{< /note >}}
 
@@ -622,7 +622,7 @@ kubectl get secret -n cert-manager linkerd-trust-anchor \
 
 We should see something like this:
 
-```text
+```text {class=disable-copy}
 Issuer:  ................... CN=root.linkerd.cluster.local
 Subject: 5c455d3e9bd77e91... CN=root.linkerd.cluster.local
 ```
@@ -693,7 +693,7 @@ kubectl get secret -n linkerd linkerd-identity-issuer \
 
 Here, we should see something like
 
-```text
+```text {class=disable-copy}
 Issuer:  5c455d3e9bd77e91... CN=root.linkerd.cluster.local
 Subject: 56bfe071553c16ad... CN=identity.linkerd.cluster.local
 ```
@@ -724,7 +724,7 @@ kubectl get configmap -n linkerd linkerd-identity-trust-roots \
 
 This should be a single PEM CERTIFICATE block:
 
-```bash
+```text {class=disable-copy}
 -----BEGIN CERTIFICATE-----
 ...lots of random-looking stuff here...
 -----END CERTIFICATE-----
@@ -948,4 +948,4 @@ and the old trust anchor is no longer trusted.
 - [Automatically Rotating Webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
 - [Manually rotating Linkerd's trust anchor credentials](../manually-rotating-control-plane-tls-credentials/)
 
-[cert-manager concepts primer]: https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/reference/cert-manager-concepts/
+[cert-manager concepts primer]: https://docs.buoyant.io/primers/cert-manager-concepts/
