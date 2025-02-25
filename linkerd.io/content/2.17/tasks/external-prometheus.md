@@ -142,7 +142,7 @@ The `prometheusUrl` field gives you a single place through which all these
 components can be configured to an external Prometheus URL. This is allowed
 both through Helm and the CLI. Additionally, if the external Prometheus is
 secured with basic auth, you can retrieve those credentials from a Secret or
-include them credentials in the URL.
+include the credentials in the URL.
 
 ### Helm
 
