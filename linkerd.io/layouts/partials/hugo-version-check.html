@@ -1,3 +1,9 @@
-{{- if lt hugo.Version site.Params.minHugoVersion }}
-  {{- errorf "linkerd.io requires Hugo v%s or later." site.Params.minHugoVersion }}
+{{- if eq site.Params.maxHugoVersion "latest" }}
+  {{- if lt hugo.Version site.Params.minHugoVersion }}
+    {{- errorf "linkerd.io requires Hugo v%s or later. You are running v%s." site.Params.minHugoVersion hugo.Version }}
+  {{- end }}
+{{- else }}
+  {{- if or (lt hugo.Version site.Params.minHugoVersion) (gt hugo.Version site.Params.maxHugoVersion) }}
+    {{- errorf "linkerd.io requires Hugo v%s - v%s. You are running v%s." site.Params.minHugoVersion site.Params.maxHugoVersion hugo.Version }}
+  {{- end }}
 {{- end -}}

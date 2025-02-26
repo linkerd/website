@@ -3,41 +3,8 @@
 
 Source code for the linkerd.io website.
 
-### General development instructions
-
-1. Run the linter and checker:
-
-   ```bash
-   docker run \
-      --mount type=bind,source="$(pwd)",target=/website --workdir=/website \
-      ghcr.io/linkerd/dev:v44 sh -c ".devcontainer/on-create.sh && make lint check"
-   ```
-
-1. Install Hugo to run the site locally:
-
-   For Mac users:
-
-   ```bash
-   brew install hugo
-   ```
-
-   For Linux users, download the **extended** release of Hugo from its GitHub
-   [release page](https://github.com/gohugoio/hugo/releases).
-
-   The minimum version of Hugo that is required to build linkerd.io is
-   **v0.131.0**.
-
-1. From the root `/website` directory, build site and run Hugo in development mode:
-
-    ```bash
-    hugo server -s linkerd.io
-    ```
-
-You should see the site on localhost:1313, and it should reload
-automatically upon file write.
-
-[Learn more](https://github.com/linkerd/website/blob/main/linkerd.io/README.md/)
-about how to add content to linkerd.io.
+[View the linkerd.io README](https://github.com/linkerd/website/blob/main/linkerd.io/README.md/)
+to learn about general development instructions.
 
 ## [run.linkerd.io](run.linkerd.io)
 
