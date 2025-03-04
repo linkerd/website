@@ -31,12 +31,10 @@
     .hero__body {
       max-width: 1080px;
     }
-    .home-hero__linky {
-      display: none;
-      position: absolute;
-      bottom: -40px;
-      right: 0;
-      z-index: 1;
+    .hero__header {
+      h1 {
+        text-wrap: balance;
+      }
     }
     @media (min-width: breakpoint-min-width("md")) {
       background-image: url("/home/hero/bkgd.png");
@@ -45,10 +43,6 @@
         h1 {
           font-size: 60px; // Override base styles
         }
-      }
-      .home-hero__linky {
-        display: block;
-        right: 20%;
       }
     }
     @media (min-width: breakpoint-min-width("xxl")) {
@@ -61,9 +55,6 @@
         h1 {
           font-size: 80px;
         }
-      }
-      .home-hero__linky {
-        right: 25%;
       }
     }
   }
