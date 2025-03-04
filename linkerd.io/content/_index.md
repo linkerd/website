@@ -1,11 +1,11 @@
 ---
-title: The world's most advanced service mesh
+title: The only service mesh designed for human beings
 description: |-
   Linkerd adds critical security, observability, and reliability to your
   Kubernetes stack, without any code changes.
 params:
   hero:
-    title: The world's most advanced service mesh
+    title: The only service mesh designed for human beings
     content: |-
       Enterprise power *without* enterprise complexity. Linkerd adds security,
       observability, and reliability to any Kubernetes cluster. 100% open

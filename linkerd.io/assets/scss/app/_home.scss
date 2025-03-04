@@ -29,12 +29,7 @@
     background-position: right;
 
     .hero__body {
-      max-width: 980px;
-    }
-    .hero__header {
-      h1 {
-        line-height: 1.1; // It's safe to tighen up the line-height, since there are no descenders
-      }
+      max-width: 1080px;
     }
     .home-hero__linky {
       display: none;
