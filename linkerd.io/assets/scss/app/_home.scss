@@ -22,26 +22,18 @@
 
 .home {
   .hero {
-    position: relative; // Needed to position linky
     background-image: none;
     background-repeat: no-repeat;
     background-size: auto 100%;
     background-position: right;
 
     .hero__body {
-      max-width: 980px;
+      max-width: 1080px;
     }
     .hero__header {
       h1 {
-        line-height: 1.1; // It's safe to tighen up the line-height, since there are no descenders
+        text-wrap: balance;
       }
-    }
-    .home-hero__linky {
-      display: none;
-      position: absolute;
-      bottom: -40px;
-      right: 0;
-      z-index: 1;
     }
     @media (min-width: breakpoint-min-width("md")) {
       background-image: url("/home/hero/bkgd.png");
@@ -50,10 +42,6 @@
         h1 {
           font-size: 60px; // Override base styles
         }
-      }
-      .home-hero__linky {
-        display: block;
-        right: 20%;
       }
     }
     @media (min-width: breakpoint-min-width("xxl")) {
@@ -66,9 +54,6 @@
         h1 {
           font-size: 80px;
         }
-      }
-      .home-hero__linky {
-        right: 25%;
       }
     }
   }
