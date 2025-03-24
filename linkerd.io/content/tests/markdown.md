@@ -115,6 +115,16 @@ alert(s);
 Horizontal rule uses three or more hyphens (`---`), asterisks (`***`), or
 underscores (`___`).
 
+## Mermaid
+
+```mermaid
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+```
+
 ## Footnotes
 
 [^1]: https://www.brainyquote.com/quotes/john_wooden_384653

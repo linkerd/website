@@ -49,7 +49,7 @@ Kubernetes Service Account token that is provided to each Pod.
 
 Since our external workload lives outside of Kubernetes, the concept of Service
 Account tokens does not exist. Instead, we turn to the [SPIFFE
-framework](https://spiffee.io) and its SPIRE implementation to create identities
+framework](https://spiffe.io) and its SPIRE implementation to create identities
 for off-cluster resources. Thus, for mesh expansion, we configure the Linkerd
 proxy to obtain its certificates directly from SPIRE instead of the Linkerd's
 identity service. The magic of SPIFFE is that these certificates are compatible
@@ -331,7 +331,7 @@ spec:
     emptyDir: {}
   containers:
   - name: client
-    image: cr.l5d.io/linkerd/client:current
+    image: docker.io/curlimages/curl:latest
     command:
       - "sh"
       - "-c"
@@ -416,7 +416,7 @@ Now you can ssh into the client pod and observe traffic being load-balanced
 between both the in-cluster workload and the machine:
 
 ```bash
-kubectl exec -c client --stdin --tty client -n mixed-env -- bash
+kubectl exec -c client --stdin --tty client -n mixed-env -- sh
 while sleep 1; do curl -s http://legacy-app.mixed-env.svc.cluster.local:80/who-am-i| jq .; done
 
 {
