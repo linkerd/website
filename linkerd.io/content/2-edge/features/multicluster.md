@@ -29,8 +29,8 @@ that's reliable, encrypted, and authenticated on both sides with mTLS.
 ## How it works
 
 Linkerd's multi-cluster support works by "mirroring" service information between
-clusters, using a *service mirror* component that watches a target cluster for
-updates to services and applies those updates locally on the source cluster.
+clusters, using a controller that watches a target cluster for updates to
+services and applies those updates locally on the source cluster.
 
 These mirrored services are suffixed with the name of the remote cluster, e.g.
 the *Foo* service on the *west* cluster would be mirrored as *Foo-west* on the
@@ -98,8 +98,8 @@ when working with Kubernetes objects that require it, such as
 
 Linkerd's multi-cluster extension can be configured with support for headless
 services when linking two clusters together. When the feature is turned on, the
-*service mirror* component will export headless services without assigning them
-an IP. This allows clients to talk to specific pods (or hosts) across clusters.
+controller will export headless services without assigning them an IP.
+This allows clients to talk to specific pods (or hosts) across clusters.
 To support direct communication, underneath the hood, the service mirror
 component will create an *endpoint mirror* for each host that backs a headless
 service. To exemplify, if in a target cluster there is a StatefulSet deployed
