@@ -45,17 +45,11 @@ linkerd jaeger install | kubectl apply -f -
 
 {{< note >}}
 The Linkerd-Jaeger extension currently configures proxies to export traces
-with the OpenCensus protocol by default for backwards compatibility. OpenCensus is
-[sunset and no longer maintained](https://opentelemetry.io/blog/2023/sunsetting-opencensus/),
-so we recommend installing the Linkerd-Jaeger extension with OpenTelemetry as the
-proxy trace export protocol:
+with the OpenTelemetry protocol by default. OpenCensus is available, but is
+[sunset and no longer maintained](https://opentelemetry.io/blog/2023/sunsetting-opencensus/).
 
-```bash
-linkerd jaeger install --set webhook.collectorTraceProtocol=opentelemetry | kubectl apply -f
-```
-
-In the future, the default protocol will be changed to OpenTelemetry so this step
-will no longer be necessary.
+We consider OpenCensus support in Linkerd to be deprecated and we recommend that
+users utilizing OpenCensus migrate to OpenTelemetry.
 {{< /note >}}
 
 You can verify that the Linkerd-Jaeger extension was installed correctly by
@@ -164,12 +158,12 @@ kubectl delete ns emojivoto
 
 ## Bring your own Jaeger
 
-If you have an existing Jaeger installation, you can configure the OpenCensus
+If you have an existing Jaeger installation, you can configure the trace
 collector to send traces to it instead of the Jaeger instance built into the
 Linkerd-Jaeger extension.
 
 Create the following YAML file which disables the built in Jaeger instance
-and specifies the OpenCensus collector's config.
+and specifies the collector's config.
 
 ```bash
 cat <<EOF > jaeger-linkerd.yaml
@@ -222,10 +216,38 @@ other possible values that can be configured.
 <!-- markdownlint-disable MD034 -->
 [helm-values]: https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
 
-It is also possible to manually edit the OpenCensus configuration to have it
+It is also possible to manually edit the collector configuration to have it
 export to any backend which it supports. See the
-[OpenCensus documentation](https://opencensus.io/service/exporters/) for a full
-list.
+[OpenTelmetry documentation](https://opentelemetry.io/docs/languages/rust/exporters/)
+for more information.
+
+## Bring your own collector
+
+If you have an existing tracing infrastructure including your own collector in
+your cluster, you can configure traces to be sent to your existing collector
+instead of one from the Linkerd-Jaeger extension.
+
+```bash
+cat <<EOF > jaeger-linkerd.yaml
+jaeger:
+  enabled: false
+collector:
+  enabled: false
+webhook:
+  collectorSvcAddr: my-jaeger-collector.my-jaeger-ns:14250
+  collectorSvcAccount: my-jaeger-collector
+EOF
+linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
+```
+
+Similar to [Bring your own Jaeger](#bring-your-own-jaeger) above, you’ll want to
+ensure that the `webhook.collectorSvcAddr` which is
+`my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
+appropriate for your environment. This should point to your tracing collector
+with the corresponding port.
+
+You should also ensure that the `webhook.collectorSvcAccount` is set to the name
+of the Service for your collector, in this case `my-jaeger-collector`.
 
 ## Troubleshooting
 
