@@ -53,7 +53,7 @@ against the compatibility table:
 If the Gateway API is installed at a compatible version, you can go ahead and
 install Linkerd as normal. Note that if you are using Helm to install, you must
 set `--set installGatewayAPI=false` or specify this in your `values.yml` when
-installing the `linkerd-crds` Helm chat. This prevents Linkerd from attempting
+installing the `linkerd-crds` Helm chart. This prevents Linkerd from attempting
 to override your existing installation of the Gateway API
 
 {{< warning >}}
