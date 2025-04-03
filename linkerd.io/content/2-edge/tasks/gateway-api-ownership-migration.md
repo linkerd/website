@@ -11,6 +11,10 @@ following the official [Gateway API installation
 guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api) and
 managing these CRDs externally rather than relying on Linkerd to handle them.
 
+Not only is this approach recommended today, but starting with Linkerd 2.19,
+installing Gateway API CRDs will no longer be the default behavior (when
+installing with Helm).
+
 To migrate from a Linkerd-managed Gateway API to an externally managed one—while
 preserving any CRs dependent on these APIs—follow the steps below based on your
 installation method.
