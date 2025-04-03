@@ -3,9 +3,9 @@ title: Migrating Gateway API Ownership
 description: Instructions for migrating from a Linkerd-managed Gateway API to an externally managed Gateway API, ensuring no loss of dependent CRs during the transition.
 ---
 
-As outlined in [Gateway API support](../features/gateway-api), Linkerd uses the
-Gateway API as a key configuration mechanism. Although Linkerd can install the
-Gateway API CRDs independently, the Gateway API is an official Kubernetes
+As outlined in [Gateway API support](../../features/gateway-api/), Linkerd uses
+the Gateway API as a key configuration mechanism. Although Linkerd can install
+the Gateway API CRDs independently, the Gateway API is an official Kubernetes
 project maintained separately from Linkerd. For this reason, we recommend
 following the official [Gateway API installation
 guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api) and
