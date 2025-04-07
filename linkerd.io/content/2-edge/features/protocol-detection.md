@@ -83,6 +83,34 @@ which configuration you need to apply.
 
 ![Decision tree](/docs/images/protocol-detection-decision-tree.png)
 
+## Declaring a Service port's protocol
+
+When you're getting started with Linkerd, automatic protocol detection works in
+the majority of cases, but it runs the risk that if a connection ever takes more
+than 10 seconds to send enough data, it might not detect the protocol. This
+could happen in situations where the cluster is overloaded, the proxy is
+resource constrained, the app is resource constrained, etc.
+
+To eliminate this risk, you can set the `appProtocol` field on the ports in a
+Service to determine what protocol to use when communicating with that Service port,
+and skip automatic protocol detection entirely.
+
+| `appProtocol`     | Protocol   | Notes |
+|-------------------|------------|-------|
+| linkerd.io/opaque | opaque     |       |
+| linkerd.io/tcp    | opaque     | This is an alias of `linkerd.io/opaque`, as it istreated exactly the same. |
+| http              | HTTP/1     | The source proxy may upgrade the connection to the destination proxy to HTTP/2, though the destination workload will still see HTTP/1 |
+| kubernetes.io/h2c | HTTP/2     |       |
+
+If `appProtocol` is set to any other value, Linkerd will continue to do automatic
+protocol detection.
+
+{{< note >}}
+This only works when meshed traffic targets the destination Service's cluster
+IP. For headless services and other cases where pods directly communicate with
+each other, Linkerd currently only supports marking those ports as opaque.
+{{< /note >}}
+
 ## Marking ports as opaque
 
 You can use the `config.linkerd.io/opaque-ports` annotation to mark a port as
@@ -99,6 +127,11 @@ This annotation *must* be set in two places:
 2. On the workload itself (e.g. on the Deployment's Pod spec receiving the
 traffic), or on enclosing namespace, in which it will apply to all workloads in
 the namespace.
+
+{{< note >}}
+For marking a non-headless Service port as opaque, prefer the `appProtocol`
+setting as outlined above.
+{{< /note >}}
 
 {{< note >}}
 Multiple ports can be provided as a comma-delimited string. The values you
@@ -140,7 +173,8 @@ conjunction with `enable-external-profiles`.
 
 ## Using `NetworkPolicy` resources with opaque ports
 
-When a service has a port marked as opaque, any `NetworkPolicy` resources that
+When a service has a port marked as opaque by any means (i.e. annotations,
+`appProtocol` on a Service port, etc.), any `NetworkPolicy` resources that
 apply to the respective port and restrict ingress access will have to be
 changed to target the proxy's inbound port instead (by default, `4143`). If the
 service has a mix of opaque and non-opaque ports, then the `NetworkPolicy`
