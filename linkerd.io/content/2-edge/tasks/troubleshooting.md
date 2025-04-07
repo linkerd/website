@@ -1480,7 +1480,7 @@ Example error:
     see https://linkerd.io/2/checks/#l5d-multicluster-managed-controllers for hints
 ```
 
-In Linkerd `2.19` we introduced a declarative, GitOps-compatible approach to
+In Linkerd `2.18` we introduced a declarative, GitOps-compatible approach to
 establishing multicluster links. With this method, the controllers are
 integrated into the multicluster extension, allowing you to supply the Link CR
 and kubeconfig secrets manifests directly, without necessarily depending on the
