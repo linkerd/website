@@ -3,78 +3,17 @@ title: Configuring Proxy Concurrency
 description: Limit the Linkerd proxy's CPU usage.
 ---
 
-The Linkerd data plane's proxies are multithreaded, and are capable of running a
-variable number of worker threads so that their resource usage matches the
-application workload.
+Linkerd data plane proxies allocate a fixed number of worker threads at startup,
+and this thread count directly determines the maximum CPU consumption of the
+proxy. In Kubernetes environments, where proxies run as sidecars alongside other
+containers in the same pod—-and coexist with pods on the same node—-this static
+allocation means that choosing too many threads can lead to CPU
+oversubscription. Operators must balance the proxy’s fixed thread count with the
+pod’s CPU limits and resource quotas to ensure that both the proxy and the
+application containers operate efficiently without degrading overall
+performance.
 
-In a vacuum, of course, proxies will exhibit the best throughput and lowest
-latency when allowed to use as many CPU cores as possible. However, in practice,
-there are other considerations to take into account.
-
-A real world deployment is _not_ a load test where clients and servers perform
-no other work beyond saturating the proxy with requests. Instead, the service
-mesh model has proxy instances deployed as sidecars to application containers.
-Each proxy only handles traffic to and from the pod it is injected into. This
-means that throughput and latency are limited by the application workload. If an
-application container instance can only handle so many requests per second, it
-may not actually matter that the proxy could handle more. In fact, giving the
-proxy more CPU cores than it requires to keep up with the application may _harm_
-overall performance, as the application may have to compete with the proxy for
-finite system resources.
-
-Therefore, it is more important for individual proxies to handle their traffic
-efficiently than to configure all proxies to handle the maximum possible load.
-The primary method of tuning proxy resource usage is limiting the number of
-worker threads used by the proxy to forward traffic. There are multiple methods
-for doing this.
-
-## Using the `proxy-cpu-limit` Annotation
-
-The simplest way to configure the proxy's thread pool is using the
-`config.linkerd.io/proxy-cpu-limit` annotation. This annotation configures the
-proxy injector to set an environment variable that controls the number of CPU
-cores the proxy will use.
-
-When installing Linkerd using the [`linkerd install` CLI
-command](../install/), the `--proxy-cpu-limit` argument sets this
-annotation globally for all proxies injected by the Linkerd installation. For
-example,
-
-```bash
-# first, install the Linkerd CRDs
-linkerd install --crds | kubectl apply -f -
-
-# install Linkerd, with a proxy CPU limit configured.
-linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
-```
-
-For more fine-grained configuration, the annotation may be added to any
-[injectable Kubernetes resource](../../features/proxy-injection/), such as a
-namespace, pod, or deployment.
-
-For example, the following will configure any proxies in the `my-deployment`
-deployment to use two CPU cores:
-
-```yaml
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: my-deployment
-  # ...
-spec:
-  template:
-    metadata:
-      annotations:
-        config.linkerd.io/proxy-cpu-limit: '2'
-  # ...
-```
-
-{{< note >}} Unlike Kubernetes CPU limits and requests, which can be expressed
-in milliCPUs, the `proxy-cpu-limit` annotation should be expressed in whole
-numbers of CPU cores. Fractional values will be rounded up to the nearest whole
-number. {{< /note >}}
-
-## Using Kubernetes CPU Limits and Requests
+## Configuring Proxy CPU Requests and Limits
 
 Kubernetes provides
 [CPU limits and CPU requests](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit)
@@ -82,14 +21,6 @@ to configure the resources assigned to any pod or container. These may also be
 used to configure the Linkerd proxy's CPU usage. However, depending on how the
 kubelet is configured, using Kubernetes resource limits rather than the
 `proxy-cpu-limit` annotation may not be ideal.
-
-{{< warning >}}
-When the environment variable configured by the `proxy-cpu-limit` annotation is
-unset, the proxy will run only a single worker thread. Therefore, a
-`proxy-cpu-limit` annotation should always be added to set an upper bound on the
-number of CPU cores used by the proxy, even when Kubernetes CPU limits are also
-in use.
-{{< /warning >}}
 
 The kubelet uses one of two mechanisms for enforcing pod CPU limits. This is
 determined by the
@@ -122,10 +53,126 @@ criteria must be met:
   for memory and CPU, and the limit for each must have the same value as the
   request.
 - The CPU limit and CPU request must be an integer greater than or equal to 1.
+ 
+###  Configuring Default Proxy CPU Requests and Limits Using Helm
 
-## Using Helm
+A global default CPU request can be configured in the control-plane helm chart
+to influence the scheduler:
 
-When using [Helm](../install-helm/), users must take care to set the
-`proxy.cores` Helm variable in addition to `proxy.cpu.limit`, if
-the criteria for cgroup-based CPU limits
-[described above](#using-kubernetes-cpu-limits-and-requests) are not met.
+```yaml
+proxy:
+  resources:
+    cpu:
+      request: 100m
+```
+
+When only a request is specified, its value is used to configure the proxy's
+runtime (by rounding up to the next whole number).
+
+Alternatively, a global default CPU limit can be configured in the
+control-plane helm chart:
+
+```yaml
+proxy:
+  resources:
+    cpu:
+      limit: 2000m
+```
+
+Similarly, this value controls the proxy's runtime configuration (by rounding up to
+the next whole number).
+
+When both values are specified, the request is used to influence the scheduler
+and the limit is used to configure the proxy's runtime:
+
+```yaml
+proxy:
+  resources:
+    cpu:
+      request: 100m
+      limit: 2000m
+```
+
+### Overriding Proxy CPU Requests and Limits Using Annotations
+
+The `config.linkerd.io/proxy-cpu-request` and
+`config.linkerd.io/proxy-cpu-limit` annotations can be used to override the Helm
+configuration for a given namespace or workload:
+
+```yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  # ...
+spec:
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-request: 100m
+        config.linkerd.io/proxy-cpu-limit: 2000m
+  # ...
+```
+
+{{< note >}} When a CPU quantity annotation value is not expressed as a whole
+number, the value will be rounded up to the next whole number when configuring
+the proxy's runtime. {{< /note >}}
+
+## Configuring _Rational Proxy CPU Limits_
+
+In some environments, it may not be practical to use a fixed CPU limit for a
+workload (for example, because the workload does not use CPU limits and runs on
+variably sized nodes). In this case, the proxy can be configured with a maximum
+ratio of the host's total available CPUs.
+
+For example, a value of `1.0` configures the proxy to use all available CPUs,
+while a value of `0.2` configures the proxy to allocate 1 proxy thread for every
+5 available cores.
+
+## Configuring Rational Proxy CPU Limits Using Helm
+
+Global defaults can be configured in the control-plane helm chart:
+
+```yaml
+proxy:
+  runtime:
+    workers:
+      maximumCPURatio: 0.2
+      minimum: 1
+```
+
+## Overriding Rational Proxy CPU Limits Using Annotations
+
+To override the default maximum CPU ratio, use the
+`config.linkerd.io/proxy-cpu-ratio-limit` annotation:
+
+```yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  # ...
+spec:
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-ratio-limit: '0.3'
+  # ...
+```
+
+Note that this may be combined with the `config.linkerd.io/proxy-cpu-request`
+annotation (i.e. to influence scheduling). However, the
+`config.linkerd.io/proxy-cpu-limit` annotation takes precedence over the ratio
+configuration.
+
+```yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  # ...
+spec:
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-request: '100m'
+        config.linkerd.io/proxy-cpu-ratio-limit: '0.3'
+  # ...
+```
