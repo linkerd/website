@@ -40,13 +40,18 @@ Linkerd proxy. However, the effect of these settings depends on how the kubelet
 enforces CPU limits.
 
 The kubelet enforces pod CPU limits using one of two approaches, determined by
-its `--cpu-manager-policy` flag:
+its
+[`--cpu-manager-policy`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#configuration)
+flag:
 
-### No CPU Manager Policy (Default)
+### Default CPU Manager Policy
 
-When using the default none policy, the kubelet relies on Completely Fair
-Scheduler (CFS) quotas. In this mode, the Linux kernel limits the percentage of
-CPU time that processes (including the Linkerd proxy) can use.
+When using the default
+[`none`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#none-policy)
+policy, the kubelet relies on [Completely Fair Scheduler
+(CFS)](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler) quotas. In this
+mode, the Linux kernel limits the percentage of CPU time that processes
+(including the Linkerd proxy) can use.
 
 ### Static CPU Manager Policy
 
@@ -55,7 +60,8 @@ whole CPU cores to containers by leveraging Linux [cgroup
 cpusets](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#cpuset).
 To successfully use this mechanism, the following conditions must be met:
 
-- The kubelet must run with the `static` CPU manager policy.
+- The kubelet must run with the [`static` CPU manager
+  policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
 - The pod must belong to the [Guaranteed QoS
   class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
   This requires that every container in the pod has matching CPU (and memory)
