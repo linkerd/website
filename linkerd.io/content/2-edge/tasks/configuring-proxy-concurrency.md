@@ -6,7 +6,7 @@ description: Limit the Linkerd proxy's CPU usage.
 Linkerd data plane proxies allocate a fixed number of worker threads at startup,
 and this thread count directly determines the maximum CPU consumption of the
 proxy. In Kubernetes environments, where proxies run as sidecars alongside other
-containers in the same pod—-and coexist with pods on the same node—-this static
+containers in the same pod and coexist with pods on the same node, this static
 allocation means that choosing too many threads can lead to CPU
 oversubscription. Operators must balance the proxy’s fixed thread count with the
 pod’s CPU limits and resource quotas to ensure that both the proxy and the
@@ -15,8 +15,8 @@ performance.
 
 ## Default Behavior
 
-Linkerd's default Helm configuration runs sidecar proxies to use a single
-runtime worker. No requests or limits are configured for the proxy.
+Linkerd's default Helm configuration runs sidecar proxies with a single runtime
+worker. No requests or limits are configured for the proxy.
 
 ```yaml
 proxy:
@@ -65,7 +65,7 @@ However, it's worth noting that in order for this mechanism to be used, certain
 criteria must be met:
 
 - The kubelet must be configured with the `static` CPU manager policy
-- The pod must be in the
+- The pod must belong to the
   [Guaranteed QoS class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
   This means that all containers in the pod must have both a limit and a request
   for memory and CPU, and the limit for each must have the same value as the
@@ -137,10 +137,10 @@ the proxy's runtime. {{< /note >}}
 
 ## Configuring _Rational Proxy CPU Limits_
 
-In some environments, it may not be practical to use a fixed CPU limit for a
-workload (for example, because the workload does not use CPU limits and runs on
-variably sized nodes). In this case, the proxy can be configured with a maximum
-ratio of the host's total available CPUs.
+In some environments, it might not be practical to use a fixed CPU limit for a
+workload (for example, when the workload does not specify CPU limits and runs on
+nodes of varying sizes). In this case, the proxy can be configured with a
+maximum ratio of the host's total available CPUs.
 
 A `runtime.workers.maximumCPURatio` value of `1.0` configures the proxy to
 allocate a worker for each CPU, while a value of `0.2` configures the proxy to
@@ -152,12 +152,12 @@ number of workers per proxy.
 
 Global defaults can be configured in the control-plane helm chart:
 
-```yaml proxy:
+```yaml
+proxy:
   runtime:
     workers:
       maximumCPURatio: 0.2
       minimum: 1
-
 ```
 
 ## Overriding Rational Proxy CPU Limits Using Annotations
