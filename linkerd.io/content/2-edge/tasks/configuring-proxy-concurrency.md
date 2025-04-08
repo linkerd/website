@@ -160,6 +160,10 @@ proxy:
       minimum: 1
 ```
 
+{{< note >}} CPU limits takes precedence over the maximum CPU ratio, so it is
+suitable to set a global default maximumCPURatio while setting limits on
+specific workloads. {{< /note >}}
+
 ## Overriding Rational Proxy CPU Limits Using Annotations
 
 To override the default maximum CPU ratio, use the
@@ -174,25 +178,6 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-ratio-limit: '0.3'
-  # ...
-```
-
-Note that this may be combined with the `config.linkerd.io/proxy-cpu-request`
-annotation (i.e. to influence scheduling). However, the
-`config.linkerd.io/proxy-cpu-limit` annotation takes precedence over the ratio
-configuration.
-
-```yaml
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  # ...
-spec:
-  template:
-    metadata:
-      annotations:
-        config.linkerd.io/proxy-cpu-request: '100m'
         config.linkerd.io/proxy-cpu-ratio-limit: '0.3'
   # ...
 ```
