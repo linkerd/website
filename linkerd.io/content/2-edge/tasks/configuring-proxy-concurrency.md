@@ -142,9 +142,11 @@ workload (for example, because the workload does not use CPU limits and runs on
 variably sized nodes). In this case, the proxy can be configured with a maximum
 ratio of the host's total available CPUs.
 
-For example, a value of `1.0` configures the proxy to use all available CPUs,
-while a value of `0.2` configures the proxy to allocate 1 proxy worker for every
-5 available cores (rounded).
+A `runtime.workers.maximumCPURatio` value of `1.0` configures the proxy to
+allocate a worker for each CPU, while a value of `0.2` configures the proxy to
+allocate 1 proxy worker for every 5 available cores (rounded up or down as
+appropriate). The `runtime.workers.minimum` value sets a lower bound on the
+number of workers per proxy.
 
 ## Configuring Rational Proxy CPU Limits Using Helm
 
