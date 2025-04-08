@@ -33,44 +33,35 @@ This document describes how to run proxies with additional runtime workers.
 
 ## Configuring Proxy CPU Requests and Limits
 
-Kubernetes provides
-[CPU limits and CPU requests](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit)
-to configure the resources assigned to any pod or container. These may also be
-used to configure the Linkerd proxy's CPU usage. However, depending on how the
-kubelet is configured, using Kubernetes resource limits rather than the
-`proxy-cpu-limit` annotation may not be ideal.
+Kubernetes allows you to set [CPU requests and
+limits](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit)s
+for any container, and these settings can also control the CPU usage of the
+Linkerd proxy. However, the effect of these settings depends on how the kubelet
+enforces CPU limits.
 
-The kubelet uses one of two mechanisms for enforcing pod CPU limits. This is
-determined by the
-[`--cpu-manager-policy` kubelet option](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#configuration).
-With the default CPU manager policy,
-[`none`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#none-policy),
-the kubelet uses
-[CFS quotas](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler) to enforce
-CPU limits. This means that the Linux kernel is configured to limit the amount
-of time threads belonging to a given process are scheduled. Alternatively, the
-CPU manager policy may be set to
-[`static`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
-In this case, the kubelet will use Linux `cgroup`s to enforce CPU limits for
-containers which meet certain criteria.
+The kubelet enforces pod CPU limits using one of two approaches, determined by
+its `--cpu-manager-policy` flag:
 
-On the other hand, using
-[cgroup cpusets](https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt)
-will limit the number of CPU cores available to the process. In essence, it will
-appear to the proxy that the system has fewer CPU cores than it actually does.
-If this value is lower than the value of the `proxy-cpu-limit` annotation, the
-proxy will use the number of CPU cores determined by the cgroup limit.
+### No CPU Manager Policy (Default)
 
-However, it's worth noting that in order for this mechanism to be used, certain
-criteria must be met:
+When using the default none policy, the kubelet relies on Completely Fair
+Scheduler (CFS) quotas. In this mode, the Linux kernel limits the percentage of
+CPU time that processes (including the Linkerd proxy) can use.
 
-- The kubelet must be configured with the `static` CPU manager policy
-- The pod must belong to the
-  [Guaranteed QoS class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
-  This means that all containers in the pod must have both a limit and a request
-  for memory and CPU, and the limit for each must have the same value as the
-  request.
-- The CPU limit and CPU request must be an integer greater than or equal to 1.
+### Static CPU Manager Policy
+
+When the kubelet is configured with the static CPU manager policy, it assigns
+whole CPU cores to containers by leveraging Linux [cgroup
+cpusets](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#cpuset).
+To successfully use this mechanism, the following conditions must be met:
+
+- The kubelet must run with the `static` CPU manager policy.
+- The pod must belong to the [Guaranteed QoS
+  class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
+  This requires that every container in the pod has matching CPU (and memory)
+  requests and limits.
+- The CPU request and CPU limit for the proxy must be specified as whole numbers
+  (integers) and must be at least 1.
 
 ### Configuring Default Proxy CPU Requests and Limits Using Helm
 
