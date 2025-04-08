@@ -148,7 +148,9 @@ while a value of `0.2` configures the proxy to allocate 1 proxy worker for every
 
 ## Configuring Rational Proxy CPU Limits Using Helm
 
-Global defaults can be configured in the control-plane helm chart: ```yaml proxy:
+Global defaults can be configured in the control-plane helm chart:
+
+```yaml proxy:
   runtime:
     workers:
       maximumCPURatio: 0.2
