@@ -13,6 +13,24 @@ pod’s CPU limits and resource quotas to ensure that both the proxy and the
 application containers operate efficiently without degrading overall
 performance.
 
+## Default Behavior
+
+Linkerd's default Helm configuration runs sidecar proxies to use a single
+runtime worker. No requests or limits are configured for the proxy.
+
+```yaml
+proxy:
+  resources:
+    cpu:
+      request:
+      limit:
+  runtime:
+    workers:
+      minimum: 1
+```
+
+This document describes how to run proxies with additional runtime workers.
+
 ## Configuring Proxy CPU Requests and Limits
 
 Kubernetes provides
@@ -53,8 +71,8 @@ criteria must be met:
   for memory and CPU, and the limit for each must have the same value as the
   request.
 - The CPU limit and CPU request must be an integer greater than or equal to 1.
- 
-###  Configuring Default Proxy CPU Requests and Limits Using Helm
+
+### Configuring Default Proxy CPU Requests and Limits Using Helm
 
 A global default CPU request can be configured in the control-plane helm chart
 to influence the scheduler:
@@ -79,8 +97,8 @@ proxy:
       limit: 2000m
 ```
 
-Similarly, this value controls the proxy's runtime configuration (by rounding up to
-the next whole number).
+Similarly, this value controls the proxy's runtime configuration (by rounding up
+to the next whole number).
 
 When both values are specified, the request is used to influence the scheduler
 and the limit is used to configure the proxy's runtime:
@@ -125,19 +143,17 @@ variably sized nodes). In this case, the proxy can be configured with a maximum
 ratio of the host's total available CPUs.
 
 For example, a value of `1.0` configures the proxy to use all available CPUs,
-while a value of `0.2` configures the proxy to allocate 1 proxy thread for every
-5 available cores.
+while a value of `0.2` configures the proxy to allocate 1 proxy worker for every
+5 available cores (rounded).
 
 ## Configuring Rational Proxy CPU Limits Using Helm
 
-Global defaults can be configured in the control-plane helm chart:
-
-```yaml
-proxy:
+Global defaults can be configured in the control-plane helm chart: ```yaml proxy:
   runtime:
     workers:
       maximumCPURatio: 0.2
       minimum: 1
+
 ```
 
 ## Overriding Rational Proxy CPU Limits Using Annotations
