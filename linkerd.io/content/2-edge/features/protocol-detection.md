@@ -98,7 +98,7 @@ and skip automatic protocol detection entirely.
 | `appProtocol`     | Protocol   | Notes |
 |-------------------|------------|-------|
 | linkerd.io/opaque | opaque     |       |
-| linkerd.io/tcp    | opaque     | This is an alias of `linkerd.io/opaque`, as it istreated exactly the same. |
+| linkerd.io/tcp    | opaque     | This is an alias of `linkerd.io/opaque`. It is treated exactly the same. |
 | http              | HTTP/1     | The source proxy may upgrade the connection to the destination proxy to HTTP/2, though the destination workload will still see HTTP/1 |
 | kubernetes.io/h2c | HTTP/2     |       |
 
