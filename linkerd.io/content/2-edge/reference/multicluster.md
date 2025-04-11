@@ -91,3 +91,21 @@ apply to federated services: the clusters must be on a flat network where pods
 in one cluster can connect to pods in the others, the clusters must have the
 same trust root, and any clients connecting to the federated service must be
 meshed.
+
+### Metadata Copying
+
+The federated service (`<svc name>-federated`) inherits its metadata—including
+labels, annotations, and port definitions—from the unioned services. If metadata
+varies across these services, as of Linkerd 2.18 the controller uses the service
+tied to the oldest Link as the definitive source of truth.
+
+All labels and annotations are copied, except for those related to
+topology-aware hints or prefixed with `mirror.linkerd.io`. To prevent specific
+metadata from being copied, you can list them in the Link's CR under
+`excludeAnnotations` and `excludeLabels` (also only available as of Linkerd
+2.18). When using the `linkerd multicluster link-gen` command, apply the
+`--exclude-annotations` and `--exclude-labels` flags. For the
+local-service-mirror component (the controller that manages adding local
+services to federated services) to respect these exclusions, configure them in
+the Helm values `localServiceMirror.excludeAnnotations` and
+`localServiceMirror.excludeLabels`.
