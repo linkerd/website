@@ -37,11 +37,15 @@ page. {{< /note >}}
 
 ### linkerd-crds
 
-The `linkerd-crds` chart sets up the CRDs linkerd requires:
+The `linkerd-crds` chart sets up the CRDs linkerd requires. If the Gateway API
+has already been installed on the cluster, you must specify
+`--set installGatewayAPI=false` or add this to the `values.yml` in order to
+avoid a conflict. See [the Gateway API](../../features/gateway-api/) for more
+details.
 
 ```bash
 helm install linkerd-crds linkerd-edge/linkerd-crds \
-  -n linkerd --create-namespace
+  -n linkerd --create-namespace --set installGatewayAPI=false
 ```
 
 {{< note >}} This will create the `linkerd` namespace. If it already exists or

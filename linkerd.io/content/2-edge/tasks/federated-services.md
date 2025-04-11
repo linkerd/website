@@ -48,10 +48,13 @@ Make sure to take care that all clusters share a common trust anchor.
 
 We will install the multicluster extension into all three clusters. We can
 install without the gateway because federated services use direct pod-to-pod
-communication.
+communication. Since the services will get mirrored in the `west` cluster, we
+create the controllers there:
 
 ```console
-> linkerd --context west multicluster install --gateway=false | kubectl --context west apply -f -
+> linkerd --context west multicluster install --gateway=false \
+>   --set controllers[0].link.ref.name=east --set controllers[1].link.ref.name=north |
+>   kubectl --context west apply -f -
 > linkerd --context west check
 
 > linkerd --context east multicluster install --gateway=false | kubectl --context east apply -f -
@@ -63,14 +66,15 @@ communication.
 
 ## Step 3: Linking the Clusters
 
-We use the `linkerd multicluster link` command to link the `east` and `north`
-cluster to the `west` cluster. This is exactly the same as in the regular
-[Multicluster guide](../multicluster/#linking-the-clusters) except that we pass
-the `--gateway=false` flag to create a Link which doesn't require a gateway.
+We use the `linkerd multicluster link-gen` command to link the `east` and
+`north` cluster to the `west` cluster. This is exactly the same as in the
+regular [Multicluster guide](../multicluster/#linking-the-clusters) except that
+we pass the `--gateway=false` flag to create a Link which doesn't require a
+gateway.
 
 ```console
-> linkerd --context east multicluster link --cluster-name=east --gateway=false | kubectl --context west apply -f -
-> linkerd --context north multicluster link --cluster-name=north --gateway=false | kubectl --context west apply -f -
+> linkerd --context east multicluster link-gen --cluster-name=east --gateway=false | kubectl --context west apply -f -
+> linkerd --context north multicluster link-gen --cluster-name=north --gateway=false | kubectl --context west apply -f -
 > linkerd --context west check
 ```
 
@@ -359,10 +363,16 @@ is distributing requests across all three clusters:
 ## Next Steps
 
 We now have a federated service that balances traffic accross services in three
-clusters. Additional clusters can be added simply by linking the new cluster
-and adding the `mirror.linkerd.io/federated=member` label to the services that
-you wish to add to the federated service. Similarly, services can be removed
-from the federated service at any time by removing the label.
+clusters. Additional clusters can be added simply by:
+
+* Updating the linkerd-multicluster config in `west` to add the required
+  controllers.
+* Applying the Link CRs and credentials secrets
+* Adding the `mirror.linkerd.io/federated=member` label to the services that
+you wish to add to the federated service.
+
+Similarly, services can be removed from the federated service at any time by
+removing the label.
 
 You may notice that the `bb-federated` federated service exists only in the
 `west` cluster and not in the `east` or `north` clusters. This is because Links
@@ -394,6 +404,9 @@ linkerd-multicluster
         * east
         * north
 √ service mirror controllers are running
+        * east
+        * north
+√ extension is managing controllers
         * east
         * north
 ```
