@@ -247,5 +247,5 @@ v2        1/1   100.00%   10.0rps           1ms           1ms           2ms     
 ```
 
 [HTTPRoute]: ../../reference/httproute/
-[GRPCRoute]: ../../reference/httproute/
+[GRPCRoute]: ../../reference/grpcroute/
 [Gateway API]: ../../features/gateway-api/

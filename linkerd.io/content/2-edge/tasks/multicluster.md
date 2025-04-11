@@ -213,20 +213,37 @@ services on `east` or the target cluster and add/remove them from itself
 `linkerd multicluster install`, but if you would like to have separate
 credentials for every cluster you can run `linkerd multicluster allow`.
 
-The next step is to link `west` to `east`. This will create a credentials
-secret, a Link resource, and a service-mirror controller. The credentials secret
-contains a kubeconfig which can be used to access the target (`east`) cluster's
-Kubernetes API. The Link resource is custom resource that configures service
-mirroring and contains things such as the gateway address, gateway identity,
-and the label selector to use when determining which services to mirror. The
-service-mirror controller uses the Link and the secret to find services on
-the target cluster that match the given label selector and copy them into
-the source (local) cluster.
-
- To link the `west` cluster to the `east` one, run:
+The next step involves linking `west` to `east`. To achieve this, you first need
+to configure the multicluster extension to deploy a controller responsible for
+mirroring the desired services from `east`. This is accomplished by creating a
+config file with the controller specification and then running the install
+command again, passing it the config file:
 
 ```bash
-linkerd --context=east multicluster link --cluster-name east |
+cat <<EOF > values.yaml
+controllers:
+- link:
+    ref:
+      name: east
+EOF
+linkerd --context=west multicluster install -f values.yaml |
+  kubectl --context=west apply -f -
+```
+
+Next, you must supply a credentials secret that includes a kubeconfig, enabling
+access to the Kubernetes API of the target (`east`) cluster. This requires
+creating two identical secrets: one to be deployed in the `linkerd-multicluster`
+namespace and the other in the `linkerd` namespace. Additionally, you need to
+provide a Link Custom Resource (CR) to configure service mirroring. This CR
+includes details such as the gateway address, gateway identity, and the label
+selector used to identify which services to mirror. The controller leverages the
+Link CR and credentials to locate services on the target cluster that match the
+specified label selector and replicates them into the source (local) cluster. In
+order to streamline the creation of these resources (or to establish an initial
+model for them), you can use the following command:
+
+```bash
+linkerd --context=east multicluster link-gen --cluster-name east |
   kubectl --context=west apply -f -
 ```
 
@@ -262,6 +279,7 @@ can mirror. To add these to both clusters, you can run:
 ```bash
 for ctx in west east; do
   echo "Adding test services on cluster: ${ctx} ........."
+  kubectl --context=${ctx} create ns test
   kubectl --context=${ctx} apply \
     -n test -k "github.com/linkerd/website/multicluster/${ctx}/"
   kubectl --context=${ctx} -n test \
@@ -320,11 +338,11 @@ kubectl --context=east label svc -n test podinfo mirror.linkerd.io/exported=true
 ```
 
 {{< note >}} You can configure a different label selector by using the
-`--selector` flag on the `linkerd multicluster link` command or by editting
-the Link resource created by the `linkerd multicluster link` command.
+`--selector` flag on the `linkerd multicluster link-gen` command or by editing
+the Link resource.
 {{< /note >}}
 
-Check out the service that was just created by the service mirror controller!
+Check out the service that was just created by the controller!
 
 ```bash
 kubectl --context=west -n test get svc podinfo-east
@@ -332,10 +350,10 @@ kubectl --context=west -n test get svc podinfo-east
 
 From the
 [architecture](https://linkerd.io/2020/02/25/multicluster-kubernetes-with-service-mirroring/#step-2-endpoint-juggling),
-you'll remember that the service mirror component is doing more than just moving
-services over. It is also managing the endpoints on the mirrored service. To
-verify that is setup correctly, you can check the endpoints in `west` and verify
-that they match the gateway's public IP address in `east`.
+you'll remember that the controller is doing more than just moving services
+over. It is also managing the endpoints on the mirrored service. To verify that
+is setup correctly, you can check the endpoints in `west` and verify that they
+match the gateway's public IP address in `east`.
 
 ```bash
 kubectl --context=west -n test get endpoints podinfo-east \
@@ -478,9 +496,10 @@ There's even a dashboard! Run `linkerd viz dashboard` and send your browser to
 To cleanup the multicluster control plane, you can run:
 
 ```bash
-linkerd --context=west multicluster unlink --cluster-name east | \
-  kubectl --context=west delete -f -
-for ctx in west east; do \
+# Delete the link CR
+$ kubectl --context=west -n linkerd-multicluster delete links east
+# Delete the test namespace and uninstall multicluster
+$ for ctx in west east; do \
   kubectl --context=${ctx} delete ns test; \
   linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f - ; \
 done

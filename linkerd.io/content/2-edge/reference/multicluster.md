@@ -27,16 +27,16 @@ including reducing latency and preserving client identity.
 
 ## Service mirroring
 
-Linkerd's multi-cluster functionality uses a *service mirror* component that
-watches a target cluster for updates to services and mirrors those service
-updates locally to a source cluster.
+Linkerd's multi-cluster functionality uses a controller component that watches a
+target cluster for updates to services and mirrors those service updates locally
+to a source cluster.
 
 Multi-cluster support is underpinned by a concept known as service mirroring.
 Mirroring refers to importing a service definition from another cluster, and it
-allows applications to address and consume multi-cluster services. The *service
-mirror* component runs on the source cluster; it watches a target cluster for
-updates to services and mirrors those updates locally in the source cluster.
-Only Kubernetes service objects that match a label selector are exported.
+allows applications to address and consume multi-cluster services. The
+controller runs on the source cluster; it watches a target cluster for updates
+to services and mirrors those updates locally in the source cluster. Only
+Kubernetes service objects that match a label selector are exported.
 
 The label selector also controls the mode a service is exported in. For example,
 by default, services labeled with `mirror.linkerd.io/exported=true` will be
@@ -74,12 +74,12 @@ file uses RBAC to provide the "principle of least privilege", ensuring the
 Federated services take this a step farther by allowing a service which is
 deployed to multiple clusters to be joined into a single unified service.
 
-The service mirror controller will look for all services in all linked clusters
-which match a label selector (`mirror.linkerd.io/federated=member` by default)
-and create a federated service called `<svc name>-federated` which will act as
-a union of all those services with that name. For example, all traffic sent to
-the `store-web-federated` federated service will be load balanced over all
-replicas of all services named `store-web` in all linked clusters.
+The controller will look for all services in all linked clusters which match a
+label selector (`mirror.linkerd.io/federated=member` by default) and create a
+federated service called `<svc name>-federated` which will act as a union of all
+those services with that name. For example, all traffic sent to the
+`store-web-federated` federated service will be load balanced over all replicas
+of all services named `store-web` in all linked clusters.
 
 The concept of "namespace sameness" applies, which means that the federated
 service will be created in the same namespace as the individual services and
@@ -91,3 +91,21 @@ apply to federated services: the clusters must be on a flat network where pods
 in one cluster can connect to pods in the others, the clusters must have the
 same trust root, and any clients connecting to the federated service must be
 meshed.
+
+### Metadata Copying
+
+The federated service (`<svc name>-federated`) inherits its metadata—including
+labels, annotations, and port definitions—from the unioned services. If metadata
+varies across these services, as of Linkerd 2.18 the controller uses the service
+tied to the oldest Link as the definitive source of truth.
+
+All labels and annotations are copied, except for those related to
+topology-aware hints or prefixed with `mirror.linkerd.io`. To prevent specific
+metadata from being copied, you can list them in the Link's CR under
+`excludeAnnotations` and `excludeLabels` (also only available as of Linkerd
+2.18). When using the `linkerd multicluster link-gen` command, apply the
+`--exclude-annotations` and `--exclude-labels` flags. For the
+local-service-mirror component (the controller that manages adding local
+services to federated services) to respect these exclusions, configure them in
+the Helm values `localServiceMirror.excludeAnnotations` and
+`localServiceMirror.excludeLabels`.

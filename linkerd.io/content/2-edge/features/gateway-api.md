@@ -25,46 +25,84 @@ One complication with using the Gateway API in practice is that many different
 packages, not just Linkerd, may provide the Gateway API on your cluster, but
 only some Gateway API *versions* are compatible with Linkerd.
 
-In practice, there are two basic approaches to managing the Gateway API with
-Linkerd. You can let Linkerd manage the Gateway API resources, or you can let a
-different tool manage them.
+Linkerd requires that the Gateway API be installed on your cluster before
+Linkerd can be installed. In practice, there are three basic approaches to
+managing the Gateway API with Linkerd. The Gateway API may already be installed
+on your cluster, you can install the Gateway API yourself, or you can have
+Linkerd install the Gateway API for you.
 
-### Option 1: Linkerd manages the Gateway API
+### Option 1: The Gateway API is already installed {#gateway-api-compatibility}
 
-This is the default behavior for Linkerd, which will create, update, and delete
-Gateway API resources as required. In this approach, any other tools on your
-system that use Gateway API resources will be need to be compatible with the
-version of the Gateway API that Linkerd installs:
+The Gateway API may already be installed on your cluster; either because it came
+pre-installed on the cluster or because another tool has installed it. You can
+check if the Gateway API is installed by running:
 
-| Linkerd versions | Gateway API version installed | HTTPRoute version | gRPC version |
-| ---------------- | ----------------------------- | ----------------- | ------------ |
-| 2.15 - 2.17      | 0.7                           | v1beta1           | v1alpha2     |
+```bash
+> kubectl get crds/httproutes.gateway.networking.k8s.io -o "jsonpath={.metadata.annotations.gateway\.networking\.k8s\.io/bundle-version}"
+```
 
-### Option 2: A different tool manages the Gateway API
+If this command returns Not Found error, the Gateway API is not installed.
+Otherwise it will return the Gateway API version number. Check that version
+against the compatibility table:
 
-Alternatively, you may prefer to have something other than Linkerd manage the
-Gateway API resources on your cluster. To do this, you will need to instruct
-Linkerd *not* to install, update, or delete the Gateway API resources, by
-passing pass the `--set enableHttpRoutes=false` flag during the `linkerd install
---crds` step, or setting the `enableHttpRoutes=false` Helm value when installing
-the `linkerd-crds` Helm chart.
+| Linkerd versions | Gateway API version compatibilty | HTTPRoute version | gRPC version |
+| ---------------- | -------------------------------- | ----------------- | ------------ |
+| 2.15 - 2.17      | 0.7 - 1.1.1                      | v1beta1           | v1alpha2     |
+| 2.18             | 1.1.1 - 1.2.1                    | v1                | v1           |
 
-You will also need to ensure that version of the Gateway API installed is
-compatible with Linkerd:
+{{< note >}}
 
-| Linkerd versions | Compatible Gateway API versions | Recommended Gateway API version |
-| ---------------- | ------------------------------- | ------------------------------- |
-| 2.15 - 2.17      | 0.7, 0.7.1, 1.1.1-experimental  | 1.1.1-experimental              |
+If you are using GRPCRoute, upgrading from Gateway API 1.1.1 to Gateway API
+1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes]
+for more information.
 
-If possible, you should install the *recommended* Gateway API version in the
-table above.  (Note that the use of *experimental* Gateway API versions is
-sometimes necessary to allow for full functionality; despite the name, these
-versions are production capable.)
+[the Gateway API 1.2.0 release notes]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
+{{< /note >}}
+
+If the Gateway API is installed at a compatible version, you can go ahead and
+install Linkerd as normal. Note that if you are using Helm to install, you must
+set `--set installGatewayAPI=false` or specify this in your `values.yml` when
+installing the `linkerd-crds` Helm chart. This prevents Linkerd from attempting
+to override your existing installation of the Gateway API
 
 {{< warning >}}
 Running Linkerd with an incompatible version of the Gateway API
 on the cluster can lead to hard-to-debug issues with your Linkerd installation.
 {{< /warning >}}
+
+### Option 2: Install the Gateway API yourself
+
+If the Gateway API is not already installed on your cluster, you may install
+it yourself by following the [Gateway API install
+guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which
+is often as simple as something like
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+```
+
+You will need to ensure the version of the Gateway API that you install is
+compatible with Linkerd by checking the above table. In general, we recommend
+the latest `Standard` channel release of Gateway API.
+
+Once a compatible version of the Gateway API is installed, you can proceed with
+the Linkerd installation as above.
+
+### Option 3: Have Linkerd install the Gateway API
+
+If the Gateway API is not already installed on your cluster, you may have
+Linkerd install it bundled with Linkerd's CRDs by setting
+`--set installGatewayAPI=true` or specifying this in your `values.yml`. This
+applies to the `linkerd install --crds` command or when installing the
+`linkerd-crds` Helm chart.
+
+Note that if Linkerd installs the Gateway API like this, then the Gateway API
+will also be removed if Linkerd is uninstalled.
+
+| Linkerd versions | Gateway API version installed |
+| ---------------- | ----------------------------- |
+| 2.15 - 2.17      | 0.7                           |
+| 2.18             | 1.1.1                         |
 
 ## Precursors to Gateway API-based configuration
 
@@ -91,9 +129,6 @@ To get started with the Gateway API types, you can:
 
 [HTTPRoute]: ../../reference/httproute/
 [GRPCRoute]: ../../reference/grpcroute/
-[Gateway API]: https://gateway-api.sigs.k8s.io/
-[Service]: https://kubernetes.io/docs/concepts/services-networking/service/
-[Server]: ../../reference/authorization-policy/#server
 [auth-policy]: ../../tasks/configuring-per-route-policy/
 [dyn-routing]:../../tasks/configuring-dynamic-request-routing/
 [timeouts]: ../../features/retries-and-timeouts/
