@@ -80,23 +80,20 @@ Linkerd 2.18:
   CRDs for you unless you specifically ask for them and they're not already on
   your cluster.
 
-  - **If you are upgrading** from an earlier version of Linkerd,
+  * **If you are upgrading** from an earlier version of Linkerd,
   you shouldn't need to take any action -- Linkerd can tell that you have the
   CRDs installed and do the right thing for you.
 
-  - **For new installations**, though, you'll need to install the Gateway API
+  * **For new installations**, though, you'll need to install the Gateway API
   CRDs before starting, or you'll need to set `installGatewayAPI` to true when
-  installing.
-
-  - **If you are currently using GRPCRoutes, you will need to take some extra
-  For new production installations, we recommend installing the Gateway API
+  installing. **In production**, we recommend installing the Gateway API CRDs
   yourself rather than having Linkerd manage it for you. Check out the
   [Gateway API and Linkerd] documentation for more information.
 
   Also, when Linkerd does install the Gateway API CRDs for you, it will
   install Gateway API v1.1.1 experimental (starting with [edge-25.2.3]), and
-  it will annotate them with `helm.sh/resource-policy: keep` so that Helm
-  won't delete them during upgrades.
+  it will annotate them the CRDs with `helm.sh/resource-policy: keep` so that
+  Helm won't delete them during upgrades.
 
 * Continuing the Gateway API theme, as of [edge-25.3.4] the Gateway API CRDs
   are mandatory. Older versions could run with restricted functionality if the
@@ -106,8 +103,8 @@ Linkerd 2.18:
   with [edge-25.3.3], when the `linkerd multicluster link` command is
   deprecated in favor of the new `linkerd multicluster link-gen` command.
   There are actually a lot of changes under the hood here, so we encourage
-  checking out the docs (and keeping an eye out for an upcoming [Service Mesh
-  Academy]!) if you use multicluster.
+  checking out the [multicluster documentation] (and keeping an eye out for an
+  upcoming [Service Mesh Academy]!) if you use multicluster.
 
 * Starting in [edge-25.3.2], all communications between two meshed proxies are
   multiplexed on port 4143 by default, rather than using the original
@@ -123,9 +120,12 @@ Linkerd 2.18:
 
 Check out the releases below for more on the status of each release!
 
+[multicluster documentation]: https://linkerd.io/2/features/multicluster/
+[Gateway API and Linkerd]: https://linkerd.io/2/features/gateway-api/
 [Service Mesh Academy]: https://buoyant.io/service-mesh-academy
 [edge-25.1.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.1
 [edge-25.1.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.2
+[edge-25.2.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.2.1
 [edge-25.2.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.2.2
 [edge-25.2.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.2.3
 [edge-25.2.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.2.4
@@ -142,7 +142,7 @@ Linkerd 2.18. Of course, each edge release includes _many_ dependency updates
 which we won't list here, but you can find them in the release notes for each
 release.
 
-# edge-25.4.1 (April 02, 2025)
+### edge-25.4.1 (April 02, 2025)
 
 _This release is recommended for all users, and is probably the one you should
 run if you're reading this post._
@@ -159,7 +159,7 @@ restore the `authority` labels for inbound metrics. It also introduces a new
 into proxy debug log messages to make it easier to understand what caused
 things.
 
-# edge-25.3.4 (March 27, 2025)
+### edge-25.3.4 (March 27, 2025)
 
 _This release has a CLI bug that prevents it from installing the Gateway API
 CRDs even if requested. As such, we recommend [edge-25.4.1] instead, though
@@ -178,7 +178,7 @@ manifests, and mitigates a thundering herd effect where proxies could
 unnecessarily load the DNS server. Finally, `linkerd viz tap` no longer relies
 on the obsolete `authority` pseudo-resource (thanks, [Stephen Muth]!).
 
-# edge-25.3.3 (March 20, 2025)
+### edge-25.3.3 (March 20, 2025)
 
 _This release is **not recommended** since it unintentionally switched the
 multicluster mirror controller to use ClusterRole permissions rather than Role
@@ -195,7 +195,7 @@ possible to set an environment variable to reenable outbound hostname metrics,
 and - last but not least! - we will correctly honor custom debug container
 annotations (thanks, [Vishal Tewatia]!)
 
-# edge-25.3.2 (March 14, 2025)
+### edge-25.3.2 (March 14, 2025)
 
 _This release does not correctly support IPv6. We recommend [edge-25.4.1]
 instead, though IPv4 sites can use this release._
@@ -218,7 +218,7 @@ protocol detection (especially when using the `transport-header` mode).
 Additionally, inbound server metrics now get a `srv_port` label to identify
 the specific port used for inbound policy.
 
-# edge-25.3.1 (March 06, 2025)
+### edge-25.3.1 (March 06, 2025)
 
 _This release is **not recommended** due to a bug installing the Gateway API
 CRDs and a bug with IPv6 support; use [edge-25.4.1] instead._
@@ -240,7 +240,7 @@ installing Linkerd to multiplex all traffic between meshed proxies on port
 documentation for `proxy-wait-before-exit-seconds` has been updated to match
 the website (thanks, [Takumi Sue]!).
 
-# edge-25.2.3 (February 27, 2025)
+### edge-25.2.3 (February 27, 2025)
 
 _This release does not correctly support IPv6. We recommend [edge-25.4.1]
 instead, though IPv4 sites can use this release._
@@ -250,7 +250,7 @@ you, this release will upgrade your Gateway API CRDs to version 1.1.1
 experimental. Also, you can now use `appProtocol: linkerd.io/opaque` in a
 Service `port` definition to mark a port as opaque.
 
-# edge-25.2.2 (February 20, 2025)
+### edge-25.2.2 (February 20, 2025)
 
 _This release does not correctly support IPv6. We recommend [edge-25.4.1]
 instead, though IPv4 sites can use this release._
@@ -261,7 +261,7 @@ handling. We've also enabled additional runtime metrics around Kubernetes
 watches, and finally, in the unlikely event of overlapping Server resources,
 we order the resources by creation time and name (as we do for Routes).
 
-# edge-25.2.1 (February 12, 2025)
+### edge-25.2.1 (February 12, 2025)
 
 _This release is recommended for all users._
 
@@ -282,7 +282,7 @@ installed at all. Last but certainly not least, labels on mirrored `Service`s
 are propagated to their mirrored versions (thanks, [Maxime Brunet]!) and CI
 got an improved `codeql` workflow (thanks, [Scott Brenner]!).
 
-# edge-25.1.2 (January 23, 2025)
+### edge-25.1.2 (January 23, 2025)
 
 _This release is recommended for all users._
 
@@ -304,7 +304,7 @@ you'll get a validation error if you don't fix the `probeSpec.period`.
 [issue 13031]: https://github.com/linkerd/linkerd2/issues/13031
 [GEP-2257]: https://gateway-api.sigs.k8s.io/geps/gep-2257/
 
-# edge-25.1.1 (January 16, 2025)
+### edge-25.1.1 (January 16, 2025)
 
 _This release is **not recommended** due to a bug creating Link resources; use
 [edge-25.1.2] or [edge-25.4.1] instead._
