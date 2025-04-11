@@ -104,7 +104,7 @@ port. For details on [`Server`] resources, see
 kubectl apply -f - <<EOF
 
 ---
-apiVersion: policy.linkerd.io/v1beta1
+apiVersion: policy.linkerd.io/v1beta3
 kind: Server
 metadata:
   name: authors-server

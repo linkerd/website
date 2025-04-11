@@ -161,6 +161,6 @@ traffic source (in this case, the frontend pod) needs to be meshed, strictly
 speaking, the destination does not need to be meshed.
 
 [HTTPRoute]: ../../reference/httproute/
-[GRPCRoute]: ../../reference/httproute/
+[GRPCRoute]: ../../reference/grpcroute/
 [Gateway API]: ../../features/gateway-api/
 [`ServiceProfile`]: ../../features/ServiceProfile/

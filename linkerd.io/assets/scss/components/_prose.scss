@@ -21,4 +21,10 @@ Apply to containers that contain rendered markdown.
   .alert {
     margin-bottom: spacer(3);
   }
+
+  // Markdown attribute classes
+  img.center {
+    margin: 0 auto;
+  }
+
 }
