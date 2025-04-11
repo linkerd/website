@@ -15,9 +15,14 @@
   {{- end }}
 {{- end }}
 {{- /* Process attributes */}}
-{{- $a := merge .Attributes (dict "alt" .Text "src" $src "class" "img img--max-fill img--center img--rounded") }}
+{{- /* Allow the class name that may be passed as a Markdown attribute to be merged first, before adding the default class names */}}
+{{- $a := merge (dict "alt" .Text "src" $src "class" "") .Attributes }}
+{{- $class := "img img--max-fill img--rounded" }}
 {{- $attributes := "" }}
 {{- range $k, $v := $a }}
+  {{- if eq $k "class" }}
+    {{- $v = printf "%s %s" $class $v }}
+  {{- end }}
   {{- if $v }}
     {{- $attributes = printf "%s %s=%q" $attributes $k $v }}
   {{- end }}

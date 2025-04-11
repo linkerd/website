@@ -21,6 +21,7 @@ For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
 ![Topology](/docs/images/books/topology.png "Topology")
+{.center}
 
 ## Prerequisites
 
@@ -82,6 +83,7 @@ perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
 ![Failure](/docs/images/books/failure.png "Failure")
+{.center}
 
 ## Add Linkerd to the service
 
