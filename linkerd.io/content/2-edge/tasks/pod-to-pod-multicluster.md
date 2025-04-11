@@ -37,24 +37,28 @@ Make sure to take care that both clusters share a common trust anchor.
 
 We will install the multicluster extension into both clusters. We can install
 without the gateway because we will be using direct pod-to-pod communication.
+Since the services will get mirrored in the `west` cluster, we create the
+controllers there:
 
 ```console
 > linkerd --context east multicluster install --gateway=false | kubectl --context east apply -f -
 > linkerd --context east check
 
-> linkerd --context west multicluster install --gateway=false | kubectl --context west apply -f -
+> linkerd --context west multicluster install --gateway=false \
+>   --set controllers[0].link.ref.name=east |
+>   kubectl --context west apply -f -
 > linkerd --context west check
 ```
 
 ## Step 3: Linking the Clusters
 
-We use the `linkerd multilcuster link` command to link our two clusters
-together. This is exactly the same as in the regular
-[Multicluster guide](../multicluster/#linking-the-clusters) except that we pass
-the `--gateway=false` flag to create a Link which doesn't require a gateway.
+We use the `linkerd multilcuster link-gen` command to link our two clusters
+together. This is exactly the same as in the regular [Multicluster
+guide](../multicluster/#linking-the-clusters) except that we pass the
+`--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console
-> linkerd --context east multicluster link --cluster-name=target --gateway=false | kubectl --context west apply -f -
+> linkerd --context east multicluster link-gen --cluster-name=target --gateway=false | kubectl --context west apply -f -
 ```
 
 ## Step 4: Deploy and Exporting a Service
