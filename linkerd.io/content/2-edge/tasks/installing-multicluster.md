@@ -33,14 +33,36 @@ going on, check out [getting started](../multicluster/).
 
 ## Step 1: Install the multicluster control plane
 
-On each cluster, run:
+In this step you'll install the extension's core components, plus the
+controllers that will perform the service mirroring for each one of the target
+clusters you wish to connect to. Here we'd like to be able to access the `east`
+cluster from the `west` cluster; for this, the following config will suffice
+(consult the [linkerd-multicluster chart
+docs](https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-multicluster)
+for all the options available):
+
+```yaml
+controllers:
+- link:
+    ref:
+      name: east
+```
+
+Assuming that's stored in `values.yaml`, run this in the `west` cluster:
+
+```bash
+linkerd multicluster install -f values.yaml | \
+    kubectl apply -f -
+```
+
+And this in the `east` cluster:
 
 ```bash
 linkerd multicluster install | \
     kubectl apply -f -
 ```
 
-To verify that everything has started up successfully, run:
+To verify that everything has started up successfully, run this on each cluster:
 
 ```bash
 linkerd multicluster check
@@ -52,14 +74,14 @@ the pieces fit together, check out the
 
 ## Step 2: Link the clusters
 
-Each cluster must be linked. This consists of installing several resources in
-the source cluster including a secret containing a kubeconfig that allows access
-to the target cluster Kubernetes API, a service mirror control for mirroring
-services, and a Link custom resource for holding configuration. To link cluster
-`west` to cluster `east`, you would run:
+Even though the controller is already set up in `west`, you still need to
+complete the linkage by supplying a Link CR holding the configuration, and a
+pair of secrets containing the kubeconfig allowing access to the target cluster
+Kubernetes API. These can easily be created manually, or you can also use the
+`linkerd multicluster link-gen` command:
 
 ```bash
-linkerd --context=east multicluster link --cluster-name east |
+linkerd --context=east multicluster link-gen --cluster-name east |
   kubectl --context=west apply -f -
 ```
 
@@ -70,9 +92,7 @@ able to reach each other, run:
 linkerd --context=west multicluster check
 ```
 
-You should also see the list of gateways show up by running. Note that you'll
-need Linkerd's Viz extension to be installed in the source cluster to get the
-list of gateways:
+The following command also gets you the list of gateways with their status:
 
 ```bash
 linkerd --context=west multicluster gateways
@@ -80,6 +100,18 @@ linkerd --context=west multicluster gateways
 
 For a detailed explanation of what this step does, check out the
 [linking the clusters section](../multicluster/#linking-the-clusters).
+
+{{< note >}}
+We present here a declarative, GitOps-compatible approach to establishing
+multicluster links, available starting with Linkerd `v2.18`. In this method, the
+controllers are integrated into the multicluster extension, allowing you to
+supply the Link CR and kubeconfig secrets manifests directly, without
+necessarily depending on the `linkerd multicluster link` command. This differs
+from earlier versions of Linkerd (pre-`v2.18`), where (in addition to the Link
+CR and secrets) controller manifests needed to be provided each time a new link
+was created, requiring the use of the `linkerd multicluster link` command — a
+process that was less suited to a GitOps workflow.
+{{< /note >}}
 
 ## Step 3: Export services
 
@@ -91,9 +123,10 @@ service you would like mirrored to linked clusters, run:
 kubectl label svc foobar mirror.linkerd.io/exported=true
 ```
 
-{{< note >}} You can configure a different label selector by using the
-`--selector` flag on the `linkerd multicluster link` command or by editing
-the Link resource created by the `linkerd multicluster link` command.
+{{< note >}}
+You can use a different label selector by configuring it via the `spec.selector`
+field in the Link CR. Or if you rely on the `linkerd multicluster link-gen`
+command, using the `--selector` flag.
 {{< /note >}}
 
 ## Trust Anchor Bundle
@@ -176,8 +209,8 @@ linkerd check
 
 ## Installing the multicluster control plane components through Helm
 
-Linkerd's multicluster components i.e Gateway and Service Mirror can
-be installed via Helm rather than the `linkerd multicluster install` command.
+Linkerd's multicluster components i.e the gateway and controllers can be
+installed via Helm rather than the `linkerd multicluster install` command.
 
 This not only allows advanced configuration, but also allows users to bundle the
 multicluster installation as part of their existing Helm based installation
