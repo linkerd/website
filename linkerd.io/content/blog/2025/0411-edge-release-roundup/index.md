@@ -120,8 +120,8 @@ Linkerd 2.18:
 
 Check out the releases below for more on the status of each release!
 
-[multicluster documentation]: https://linkerd.io/2/features/multicluster/
-[Gateway API and Linkerd]: https://linkerd.io/2/features/gateway-api/
+[multicluster documentation]: https://linkerd.io/2-edge/features/multicluster/
+[Gateway API and Linkerd]: https://linkerd.io/2-edge/features/gateway-api/
 [Service Mesh Academy]: https://buoyant.io/service-mesh-academy
 [edge-25.1.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.1
 [edge-25.1.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.2
