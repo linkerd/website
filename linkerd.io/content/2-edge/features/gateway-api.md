@@ -31,7 +31,7 @@ managing the Gateway API with Linkerd. The Gateway API may already be installed
 on your cluster, you can install the Gateway API yourself, or you can have
 Linkerd install the Gateway API for you.
 
-### Option 1: The Gateway API is already installed
+### Option 1: The Gateway API is already installed {#gateway-api-compatibility}
 
 The Gateway API may already be installed on your cluster; either because it came
 pre-installed on the cluster or because another tool has installed it. You can
@@ -50,6 +50,14 @@ against the compatibility table:
 | 2.15 - 2.17      | 0.7 - 1.1.1                      | v1beta1           | v1alpha2     |
 | 2.18             | 1.1.1 - 1.2.1                    | v1                | v1           |
 
+{{< note >}}
+
+If you are using GRPCRoute, upgrading from Gateway API 1.1.1 to Gateway API
+1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes] for more information.
+
+[the Gateway API 1.2.0 release notes]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
+{{< /note >}}
+
 If the Gateway API is installed at a compatible version, you can go ahead and
 install Linkerd as normal. Note that if you are using Helm to install, you must
 set `--set installGatewayAPI=false` or specify this in your `values.yml` when
@@ -64,9 +72,15 @@ on the cluster can lead to hard-to-debug issues with your Linkerd installation.
 ### Option 2: Install the Gateway API yourself
 
 If the Gateway API is not already installed on your cluster, you may install it
-yourself by following the [Gateway API install guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api).
+yourself by following the [Gateway API install guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which is often as simple as something like
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+```
+
 You will need to ensure the version of the Gateway API that you install is
-compatible with Linkerd by checking the above table.
+compatible with Linkerd by checking the above table. In general, we recommend
+the latest `Standard` channel release of Gateway API.
 
 Once a compatible version of the Gateway API is installed, you can proceed with
 the Linkerd installation as above.
