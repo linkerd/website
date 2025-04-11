@@ -48,6 +48,7 @@ the linkerd-crds chart as you normally would (modify according to the helm
 release name and repo name you used):
 
 ```bash
+# Don't include --set installGatewayAPI=false here! See the warning below.
 helm upgrade -n linkerd linkerd-crds linkerd/linkerd-crds
 ```
 
