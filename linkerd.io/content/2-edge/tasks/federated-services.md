@@ -367,7 +367,7 @@ clusters. Additional clusters can be added simply by:
 
 * Updating the linkerd-multicluster config in `west` to add the required
   controllers.
-* Applying the Link CRs and crendentials secrets
+* Applying the Link CRs and credentials secrets
 * Adding the `mirror.linkerd.io/federated=member` label to the services that
 you wish to add to the federated service.
 
