@@ -53,7 +53,8 @@ against the compatibility table:
 {{< note >}}
 
 If you are using GRPCRoute, upgrading from Gateway API 1.1.1 to Gateway API
-1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes] for more information.
+1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes]
+for more information.
 
 [the Gateway API 1.2.0 release notes]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
 {{< /note >}}
@@ -71,8 +72,10 @@ on the cluster can lead to hard-to-debug issues with your Linkerd installation.
 
 ### Option 2: Install the Gateway API yourself
 
-If the Gateway API is not already installed on your cluster, you may install it
-yourself by following the [Gateway API install guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which is often as simple as something like
+If the Gateway API is not already installed on your cluster, you may install
+it yourself by following the [Gateway API install
+guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which
+is often as simple as something like
 
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
