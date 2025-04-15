@@ -10,8 +10,8 @@ keywords: [linkerd, edge, release, roundup]
 params:
   author: flynn
   showCover: true
-  cover: /2023/06/21/linkerd-edge-roundup/cover.png
-images: [social.png] # Open graph image
+  cover: /2023/06/21/linkerd-edge-roundup/cover.jpg
+images: [social.jpg] # Open graph image
 ---
 
 Welcome to the September 2024 Edge Release Roundup post, where we dive into the

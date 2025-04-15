@@ -8,7 +8,7 @@ description: |-
 keywords: [hero, community]
 params:
   author: catherine
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 We are excited to announce this month's Linkerd Hero: Dan Williams.
@@ -34,7 +34,7 @@ We've heard a Linkerd blog post might be coming soon, so stay tuned!
 Thank you, Dan, for helping your peers — one of the most underrated
 yet critical ways of contributing to open source!
 
-![Dan Williams](cover.png)
+![Dan Williams](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

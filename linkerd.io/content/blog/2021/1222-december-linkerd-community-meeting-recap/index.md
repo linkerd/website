@@ -8,7 +8,7 @@ description: |-
 keywords: [community, meetup]
 params:
   author: kevinl
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 As usual, there is no reason to panic if you missed our community meeting.

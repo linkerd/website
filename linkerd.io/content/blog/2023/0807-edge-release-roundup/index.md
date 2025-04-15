@@ -7,9 +7,9 @@ keywords: [linkerd, edge, release, roundup]
 params:
   author: alejandro
   showCover: true
-  thumbnail: /2023/06/21/linkerd-edge-roundup/thumbnail.png
-  cover: /2023/06/21/linkerd-edge-roundup/cover.png
-images: [/2023/06/21/linkerd-edge-roundup/cover.png] # Open graph image
+  thumbnail: /2023/06/21/linkerd-edge-roundup/thumbnail.jpg
+  cover: /2023/06/21/linkerd-edge-roundup/cover.jpg
+images: [/2023/06/21/linkerd-edge-roundup/cover.jpg] # Open graph image
 ---
 
 Linkerd’s edge releases are a big part of our development process, and there

@@ -3,14 +3,7 @@
 {{- if not (or (hasPrefix .Destination "/") (hasPrefix .Destination "http")) }}
   {{- with $.Page.Resources.Get (strings.TrimPrefix "./" .Destination) }}
     {{- if eq .ResourceType "image" }}
-      {{- with partial "utils/process-image" (dict
-        "res" .
-        "width" 2400
-        "height" 2400
-        "process" "fit q80 lanczos"
-      ) -}}
-        {{- $src = .RelPermalink }}
-      {{- end }}
+      {{- $src = .RelPermalink }}
     {{- end }}
   {{- end }}
 {{- end }}

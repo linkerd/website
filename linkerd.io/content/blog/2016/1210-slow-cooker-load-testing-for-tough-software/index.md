@@ -5,7 +5,7 @@ title: |-
 tags: [buoyant, news, product, announcement]
 params:
   author: steve
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 Linkerd, our service mesh for cloud-native applications, needs to handle very high volumes of production traffic over extended periods of time. In this post, we’ll describe the load testing strategies and tools we use to ensure Linkerd can meet this goal. We’ll review some of the problems we faced when trying to use popular load testers. Finally, we’ll introduce **slow_cooker**, an open source load tester written in Go, which is designed for long-running load tests and lifecycle issue identification.

@@ -7,7 +7,7 @@ description: |-
 keywords: [linkerd]
 params:
   author: jason
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 As always, if you missed the April Linkerd Community Meeting, there is no reason to panic —  we've got you covered. Here's our recap and the recording.
