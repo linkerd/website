@@ -27,7 +27,7 @@ The trust anchor is the root of authentication in Linkerd, and allowing RSA
 signatures makes it even easier to integrate Linkerd into an existing workflow.
 Thanks, Dani, for helping us make Linkerd 2.12 more awesome!
 
-![Dani Baeyens](cover.png)
+![Dani Baeyens](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 
