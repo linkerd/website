@@ -1,7 +1,7 @@
 # Min/max version of Hugo required to build linkerd.io
 # Set `maxHugoVersion` to "latest" if there is not a max version required
-minHugoVersion: "0.131.0"
-maxHugoVersion: "0.141.0"
+minHugoVersion: ""
+maxHugoVersion: "latest"
 
 # Open Graph and Twitter Card defaults
 description: |-

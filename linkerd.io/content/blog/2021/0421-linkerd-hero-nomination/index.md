@@ -4,7 +4,7 @@ title: Vote for your April Hero
 keywords: [linkerd, community, hero]
 params:
   author: charles
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 It's time to vote for this month's Linkerd Hero! Check out community member nominees below and the mighty deeds for which they were nominated. The winner will be announced during the Linkerd Community Meeting on Thursday, April, 29 @ 9 a.m. PT — if you haven't registered yet, [do so today and join us](https://community.cncf.io/events/details/cncf-linkerd-community-presents-april-linkerd-online-community-meetup/)!

@@ -8,7 +8,7 @@ description: |-
 keywords: [linkerd, community, hero]
 params:
   author: catherine
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 If you attended this month's Linkerd Community meeting, you've already heard

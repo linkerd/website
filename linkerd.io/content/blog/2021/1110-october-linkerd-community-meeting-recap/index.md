@@ -8,7 +8,7 @@ description: |-
 keywords: [community, meeting, meetup]
 params:
   author: tarun
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 If you missed our last community meeting, don't worry. Below is a recap along

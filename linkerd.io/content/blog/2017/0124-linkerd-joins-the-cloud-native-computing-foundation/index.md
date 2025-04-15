@@ -6,7 +6,7 @@ aliases:
 tags: [buoyant, linkerd, news]
 params:
   author: william
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 _(This bit of Linkerd history appeared on 24 January 2017, cross-posted on
