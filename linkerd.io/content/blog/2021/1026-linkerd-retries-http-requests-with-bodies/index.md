@@ -8,7 +8,7 @@ description: |-
 keywords: [http, retries]
 params:
   author: eliza
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 [Linkerd 2.11](https://github.com/linkerd/linkerd2/issues/6130)

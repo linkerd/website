@@ -21,9 +21,6 @@ brew install hugo@0.136.5
 Or download the **extended** release of Hugo from the GitHub
 [release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
 
-> [!IMPORTANT]
-> See the [Hugo version requirements](#hugo-version-requirements) below.
-
 ### Run Hugo locally
 
 From the root `/website` directory, build site and run Hugo in development mode:
@@ -39,41 +36,12 @@ upon file write.
 
 When linkerd.io is deployed to production, we use Hugo `v0.136.5`.
 
-When developing locally, the minimum version of Hugo required is `v0.131.0`,
-and the maximum version is `v0.141.0`.
-
-**Why do we require this version range?**
-
-In [`v0.131.0`](https://github.com/gohugoio/hugo/releases/tag/v0.131.0) Hugo
-changed the way processed images are named, and since we save these images in
-GitHub, using an older version of Hugo will generate incorrect image names.
-
-In [`v0.142.0`](https://github.com/gohugoio/hugo/releases/tag/v0.142.0) Hugo
-changed the way processed images are named again. Because of this, we should
-not use this version until the production build version uses `v0.142.0` or
-later.
-
 ## Website images
 
 Please do not put files in the `static` directory that are referenced on
 linkerd.io. This directory is reserved for assets that are used as external
 resources. If you need to add images for a page, please add them in the
 [page bundle](https://gohugo.io/content-management/page-bundles/).
-
-Each time Hugo is built, it looks for any images that need to be resized then
-caches them in the `resources/_gen/images` directory. This directory is included
-in source control, so Hugo does not have to regenerate all of the images every
-time the site is published.
-
-> [!IMPORTANT]
-> If you are creating a PR that includes images, such as a blog post, the site
-> must be built locally using `hugo` before the PR is merged. This is required
-> so that the new images will be process by Hugo and cached in the
-> `resources/_gen/images` directory.
-
-> [!NOTE]
-> Any page bundle image referenced in Markdown content that has a width or
-> height larger than 2400 pixels will be downsized and cached.
 
 ## Tasks
 
@@ -153,15 +121,14 @@ list page. If a cover image is not present, or you would like to use a different
 image than the cover image, you can name it `feature` and place it in the blog
 post folder.
 
-If a thumbnail image is not present in the blog post folder, the thumbnail image
-will be created from the cover image. By default, the thumbnail image will be
-cropped and resized into a square. If you would like to maintaining the original
-aspect ratio, you can set the `thumbnailProcess` frontmatter param to `fit`. For
-example:
+If a thumbnail image is not present in the blog post folder, then the cover
+image will be used. By default, the thumbnail image will be cropped into a
+square. If you would like to maintaining the original aspect ratio, you can set
+the `thumbnailRatio` frontmatter param to `fit`. For example:
 
 ```yaml
 params:
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ```
 
 You can automattically show the cover image at the top of the blog post by
@@ -207,14 +174,13 @@ example:
 To display a caption below the image, provide an image title. For example:
 
 ```markdown
-![Alt text](my-image.jpg "My image caption")
+![Alt text](my-image.jpg 'My image caption')
 ```
 
 To center the image, use a Markdown attribute:
 
 ```markdown
-![Alt text](my-image.jpg)
-{.center}
+![Alt text](my-image.jpg) {.center}
 ```
 
 ### Hiding pages in the docs sidenav

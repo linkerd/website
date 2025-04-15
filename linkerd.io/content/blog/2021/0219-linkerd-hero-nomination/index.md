@@ -4,7 +4,7 @@ title: February 2021 Linkerd Hero Nomination
 keywords: [linkerd, community, hero]
 params:
   author: charles
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 ## Vote for your February Linkerd Hero!

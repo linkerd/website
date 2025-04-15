@@ -7,7 +7,7 @@ description: |-
 keywords: [community]
 params:
   author: matei
-  thumbnailProcess: fit
+  thumbnailRatio: fit
   videoSchema:
     - title: July Linkerd Community Meeting Recap
       description: |-

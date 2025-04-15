@@ -7,7 +7,7 @@ description: |-
 keywords: [hero, community]
 params:
   author: catherine
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 We are excited to announce this month's Linkerd Hero: Dominik Táskai. Congrats,
@@ -31,7 +31,7 @@ releases work, Dominik was always happy to help. Thank you, Dominik,
 for sharing your knowledge with
 the community and helping your peers during their Linkerd journey!
 
-![Dominik Táskai](cover.png)
+![Dominik Táskai](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

@@ -4,7 +4,7 @@ title: Vote for your March Hero
 keywords: [linkerd, community, hero]
 params:
   author: charles
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 It's time to vote for our Linkerd Hero of the month! Check out this month's nominees below and the great deeds for which they were nominated. The Hero you choose will be announced during the Linkerd Community Meeting on Thursday, March 25 at 9 a.m. PT. If you haven't registered yet, [do so today and join us](https://community.cncf.io/events/details/cncf-linkerd-online-community-meetup-presents-march-linkerd-online-community-meetup/#/)!

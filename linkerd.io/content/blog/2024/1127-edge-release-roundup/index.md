@@ -10,7 +10,7 @@ keywords: [linkerd, edge, release, roundup]
 params:
   author: flynn
   showCover: true
-images: [social.png] # Open graph image
+images: [social.jpg] # Open graph image
 ---
 
 Welcome to the November 2024 Edge Release Roundup post, where we dive into the

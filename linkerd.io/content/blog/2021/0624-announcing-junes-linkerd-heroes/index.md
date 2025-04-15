@@ -7,7 +7,7 @@ description: |-
 keywords: [linkerd, community, heroes]
 params:
   author: jason
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 If you attended this month's

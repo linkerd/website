@@ -8,7 +8,7 @@ description: |-
 keywords: [linkerd, community]
 params:
   author: kevinl
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 If you missed our August Community Meeting, don't worry, here's the recap

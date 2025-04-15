@@ -8,7 +8,7 @@ description: |-
 keywords: [community]
 params:
   author: jason
-  thumbnailProcess: fit
+  thumbnailRatio: fit
   videoSchema:
     - title: Why the future of the cloud will be built on Rust
       description: |-

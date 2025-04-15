@@ -230,14 +230,7 @@
                             <div class="avatar__image">
                               {{ $alt := .name }}
                               {{ with $.Resources.Get .image }}
-                                {{ with partial "utils/process-image" (dict
-                                  "res" .
-                                  "width" 96
-                                  "height" 96
-                                  "process" "fill jpg q80 lanczos"
-                                )}}
-                                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--48 img--cover img--round">
-                                {{ end }}
+                                <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--48 img--cover img--round">
                               {{ end }}
                             </div>
                             <h4 class="avatar__name">
