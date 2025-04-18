@@ -5,7 +5,7 @@ title: Debugging Node Services in Kubernetes With Linkerd 2.0
 keywords: [community, linkerd, tutorials]
 params:
   author: thomas
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 Node is one of the most popular languages for microservices. With the rise of Kubernetes, increasingly, Node developers are being asked to deploy their services to a Kubernetes cluster. But what’s required to safely deploy and run Node services on Kubernetes? In this post, we focus on one specific, but vital, component: how do I understand what’s happening with my Node service on Kubernetes, and how do I debug it when things go wrong?

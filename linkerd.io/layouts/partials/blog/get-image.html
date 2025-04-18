@@ -6,13 +6,6 @@ back to a default image if the image src is not set in the frontmatter params.
 @param {string} [src] Filename of page resource or absolute URL
 @param {string} [default] Default image(s) to use if `src` is empty
 
-Parameters that pass through to `utils/process-image`:
-
-@param {int} [width]
-@param {int} [height]
-@param {string} [process]
-@param {bool} [upscale]
-
 @returns .RelPermalink of a cover, thumbnail, or feature blog image
 
 @example
@@ -27,12 +20,6 @@ Parameters that pass through to `utils/process-image`:
 {{ $page := .page }}
 {{ $src := .src }}
 {{ $default := split .default "," }}
-
-{{ $width := .width }}
-{{ $height := .height }}
-{{ $process := .process }}
-{{ $upscale := .upscale }}
-
 {{ $res := false }}
 
 {{/* Try to find a page resource */}}
@@ -60,23 +47,8 @@ Parameters that pass through to `utils/process-image`:
   {{ end }}
 {{ end }}
 
-{{/* Process page resource if needed */}}
+{{/* Return resource src */}}
 {{ if $res }}
-  {{ if $process }}
-    {{ with partial "utils/process-image" (dict
-      "res" $res
-      "width" $width
-      "height" $height
-      "process" $process
-      "upscale" $upscale
-    )}}
-      {{/* Pocessed page resource link */}}
-      {{ $src = .RelPermalink }}
-    {{ end }}
-  {{ else }}
-    {{/* Page resource link */}}
-    {{ $src = $res.RelPermalink }}
-  {{ end }}
+  {{ $src = $res.RelPermalink }}
 {{ end }}
-
 {{ return $src }}

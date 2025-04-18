@@ -6,7 +6,7 @@ aliases:
 keywords: [community, integrations, linkerd, news, "release notes", tutorials]
 params:
   author: alex
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 One of the primary goals of Linkerd is to enable service and platform owners alike to understand their services not just in terms of packets and bytes, but in terms of requests and responses. For protocols like HTTP, this requires understanding the semantics of the protocol, so that Linkerd can measure things like success rate and response latency. We also need to be able to break these metrics down across different dimensions such as source service, destination service, and HTTP path.

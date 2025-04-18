@@ -51,6 +51,7 @@ metadata:
   namespace: egress-test
   annotations:
     linkerd.io/inject: enabled
+    config.linkerd.io/proxy-metrics-hostname-labels: "true"
 spec:
   containers:
   - name: client
@@ -65,7 +66,7 @@ EOF
 Now SSH into the client container and start generating some external traffic:
 
 ```bash
-kubectl -n egress-test exec -it client-xxx -c client -- sh
+kubectl -n egress-test exec -it client -c client -- sh
 $ while sleep 1; do curl -s http://httpbin.org/get ; done
 ```
 
@@ -92,6 +93,14 @@ outbound_http_route_request_statuses_total{
 } 697
 ```
 
+{{< note >}}
+
+Outbound metrics do not include the hostname by default. See
+[Hostnames in metrics](#hostnames-in-metrics) for details and how to include
+them like in the example above.
+
+{{< /note >}}
+
 Notice that these raw metrics allow you to quickly identify egress traffic targeted
 towards different destinations simply by querying for `parent_kind` of type
 `EgressNetwork`. For now all traffic is allowed and we are simply observing it.
@@ -99,6 +108,42 @@ We can also observe that because our `EgressNetwork` default traffic policy is
 set to `Allow`, the default http route is named as `http-egress-allow`.
 This is a placeholder route that is being populated automatically by the
 Linkerd controller.
+
+### Hostnames in metrics
+
+By default, outbound metrics do not include the hostname in the `hostname`
+label, both for cluster-local and egress traffic. This is a safe default for
+workloads that address a large number of discrete destination hostnames to
+prevent high cardinality in outbound metrics.
+
+If this isn't a concern for your workloads, the hostname metrics can be enabled
+on a per-workload or per-namespace basis by setting the
+`config.linkerd.io/proxy-metrics-hostname-labels` annotation to `true` on a
+single pod or namespace, respectively.
+
+Hostname metrics can also be enabled cluster-wide through the values in
+`linkerd install`:
+
+```bash
+# With a single value
+linkerd install --set proxy.metrics.hostnameLabels=true | kubectl apply -f -
+
+# Or ith a values.yaml file
+#
+# <values.yaml>
+proxy:
+  metrics:
+    hostnameLabels: true
+
+linkerd install --values=values.yaml | kubectl apply -f -
+```
+
+{{< note >}}
+
+The rest of the examples on this page assume that the hostname metrics have been
+enabled, for clarity.
+
+{{< /note >}}
 
 ## Restricting egress traffic
 
@@ -143,7 +188,7 @@ endpoint. For that purpose we need to create the following `HTTPRoute`:
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: httpbin-get
@@ -337,7 +382,7 @@ like this:
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: httpbin-get
@@ -385,7 +430,7 @@ service, we create an `HTTPRoute` with a custom backend being the internal servi
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: unencrypted-http

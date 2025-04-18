@@ -7,7 +7,7 @@ description: |-
 keywords: [community, hero]
 params:
   author: catherine
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 We are excited to announce this month's Linkerd Hero:
@@ -35,7 +35,7 @@ the most valuable contributions community members can make, Chris is our June
 hero. Thank you, Chris, for helping educate others earlier in their Linkerd
 adoption journey!
 
-![Chris Voss](cover.png)
+![Chris Voss](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

@@ -5,7 +5,7 @@ title: |-
 keywords: [article, buoyant, education, linkerd]
 params:
   author: steve
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 This post was co-written with Ruben Oanta (@rubeydoo).

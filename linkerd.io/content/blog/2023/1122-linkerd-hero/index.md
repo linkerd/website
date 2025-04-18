@@ -28,7 +28,7 @@ CLI fixes to Helm template and control plane changes, Takumi has positively
 impacted the project. Thank you for being such a prolific contributor and
 dedicating your time to making Linkerd an even more awesome project!
 
-![Takumi Sue](cover.png)
+![Takumi Sue](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

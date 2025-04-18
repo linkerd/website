@@ -65,7 +65,7 @@ Be sure to follow the instructions to add it to your path:
 export PATH=$HOME/.linkerd2/bin:$PATH
 ```
 
-This will install the CLI for the latest _edge release_ of Linkerd. (For more
+This will install the CLI for the latest *edge release* of Linkerd. (For more
 information about what edge releases are, see our [Releases and
 Versions](../../releases/) page.)
 
@@ -83,7 +83,14 @@ Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes
 versions](../reference/k8s-versions/).
 
-## Step 2: Validate your Kubernetes cluster
+## Step 2: Install the Gateway API
+
+Linkerd requires the Gateway API. If the Gateway API is already installed on
+your cluster, you are good to go. Otherwise, you will need to install it first.
+Follow [these instructions](../features/gateway-api/) for determining if the
+Gateway API is installed or how to install it.
+
+## Step 3: Validate your Kubernetes cluster
 
 Kubernetes clusters can be configured in many different ways. Before we can
 install the Linkerd control plane, we need to check and validate that
@@ -97,7 +104,7 @@ linkerd check --pre
 If there are any checks that do not pass, make sure to follow the provided links
 and fix those issues before proceeding.
 
-## Step 3: Install Linkerd onto your cluster
+## Step 4: Install Linkerd onto your cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go,
 it's time to install Linkerd on your Kubernetes cluster. To do this, run:
@@ -134,7 +141,7 @@ plane to be ready (and verify your installation) by running:
 linkerd check
 ```
 
-## Step 4: Install the demo app
+## Step 5: Install the demo app
 
 Congratulations, Linkerd is installed! However, it's not doing anything just
 yet. To see Linkerd in action, we're going to need an application.
@@ -203,7 +210,7 @@ linkerd -n emojivoto check --proxy
 And, of course, you can visit [http://localhost:8080](http://localhost:8080)
 and once again see Emojivoto in all its meshed glory.
 
-## Step 5: Explore Linkerd!
+## Step 6: Explore Linkerd!
 
 Perhaps that last step was a little unsatisfying. We've added Linkerd to
 Emojivoto, but there are no visible changes to the application! That is part

@@ -7,7 +7,7 @@ description: |-
 keywords: [hero, community]
 params:
   author: catherine
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 We are excited to announce this month's Linkerd Hero: Krzysztof Dryś.

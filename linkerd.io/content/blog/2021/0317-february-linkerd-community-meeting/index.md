@@ -8,7 +8,7 @@ description: |-
 keywords: [linkerd]
 params:
   author: charles
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 If you missed our meeting last month, this recap and recording will bring you up to speed.

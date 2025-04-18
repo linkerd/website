@@ -52,9 +52,6 @@ So, that's all to say: please come join us in Linkerd. We have 150+
 contributors across the world, and while line-by-line the majority of
 contributions are sponsored by Buoyant, that's an artifact of how Buoyant
 operates, not a statement of control. (We donated it to the CNCF for a reason!)
-As I said on Twitter:
-
-{{< tweet user="timpark" id="1179202957369323520" >}}
 
 We want your input, your help, and your guidance. Let's keep building this
 amazing project together.
