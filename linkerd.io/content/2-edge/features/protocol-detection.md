@@ -38,29 +38,19 @@ configuration may inform where this connection is established to.
 If Linkerd does not see enough data from the client within 10 seconds from
 connection establishment to determine the protocol, Linkerd will treat the
 connection as an opaque TCP connection and will proceed as normal, establishing
-the connection to the destination and proxying the data.
+the connection to the destination and proxying the data. However, since Linkerd
+was not able to detect the connection as HTTP, it will treat the connection as
+TCP. This means that any policy configured via HTTPRoutes will not be applied
+and can lead to unexpected routing or authorization behavior.
 
 In practice, protocol detection timeouts typically happen when the application
 is using a protocol where the server sends data before the client does (such as
 SMTP) or a protocol that proactively establishes connections without sending data
-(such as Memcache). In this case, everything will work, but Linkerd will
-introduce an unnecessary 10 second delay before connection establishment.
+(such as Memcache). They can also occur when an application opens connections
+but does not send data on them due to CPU contention or connection pooling.
 
-To avoid this delay, you can provide some configuration for Linkerd. There are
-two basic mechanisms for configuring protocol detection: _opaque ports_ and
-_skip ports_:
-
-* Opaque ports instruct Linkerd to skip protocol detection and proxy the
-  connection as a TCP stream.
-* Skip ports bypass the proxy entirely.
-
-Opaque ports are generally preferred as they only skip protocol detection,
-without interfering with Linkerd's ability to provide mTLS, TCP-level metrics,
-policy, etc. Skip ports, by contrast, create networking rules that avoid the
-proxy entirely, circumventing Linkerd's ability to provide security features.
-
-Linkerd maintains a default list of opaque ports that corresponds to the
-standard ports used by protocols that interact poorly with protocol detection.
+To avoid this delay and ensure Linkerd uses the correct protocol, you can
+provide some configuration for Linkerd.
 
 ## Protocols that may require configuration
 
@@ -81,8 +71,6 @@ configuration.
 If you are using one of those protocols, follow this decision tree to determine
 which configuration you need to apply.
 
-![Decision tree](/docs/images/protocol-detection-decision-tree.png)
-
 ## Declaring a Service port's protocol
 
 When you're getting started with Linkerd, automatic protocol detection works in
@@ -102,48 +90,45 @@ and skip automatic protocol detection entirely.
 | http              | HTTP/1     | The source proxy may upgrade the connection to the destination proxy to HTTP/2, though the destination workload will still see HTTP/1 |
 | kubernetes.io/h2c | HTTP/2     |       |
 
-If `appProtocol` is set to any other value, Linkerd will continue to do automatic
+If `appProtocol` is set to any other value, Linkerd will treat the connection as
+opaque TCP. If `appProtocol` is unset, Linkerd will continue to do automatic
 protocol detection.
 
-{{< note >}}
-This only works when meshed traffic targets the destination Service's cluster
-IP. For headless services and other cases where pods directly communicate with
-each other, Linkerd currently only supports marking those ports as opaque.
-{{< /note >}}
+## Opaque Ports Annotation
 
-## Marking ports as opaque
-
-You can use the `config.linkerd.io/opaque-ports` annotation to mark a port as
-opaque. Linkerd will skip protocol detection on opaque ports, and treat
-connections to them as TCP streams.
-
-This annotation should be set on the _destination_, not on the source, of the
-traffic. This is true even if the destination is unmeshed, as it controls the
-behavior of meshed clients.
-
-This annotation *must* be set in two places:
-
-1. On the Service receiving the traffic.
-2. On the workload itself (e.g. on the Deployment's Pod spec receiving the
-traffic), or on enclosing namespace, in which it will apply to all workloads in
-the namespace.
-
-{{< note >}}
-For marking a non-headless Service port as opaque, prefer the `appProtocol`
-setting as outlined above.
-{{< /note >}}
+There are a few cases where it is not possible to mark a port as opaque using
+the `appProtocol` field. In the following cases you must use the
+`config.linkerd.io/opaque-ports` annotation instead to mark a port or list of
+ports as opaque:
 
 {{< note >}}
 Multiple ports can be provided as a comma-delimited string. The values you
-provide will _replace_, not augment, the default list of opaque ports.
+provide will *replace*, not augment, the default list of opaque ports.
 {{< /note >}}
 
-{{< note >}}
-If you are using [authorization policies](../server-policy/), the `Server`'s
-`proxyProtocol` field can be used to control protocol detection behavior
-instead of a Service annotation. Regardless, we suggest annotating the
-Service object for clarity.
-{{< /note >}}
+### Pods that receive traffic from unmeshed clients
+
+Since an unmeshed client will not have a Linkerd proxy, it will not read the
+`appProtocol` field of a Service. Therefore, if a pod receives traffic from an
+unmeshed client then you must set the `config.linkerd.io/opaque-ports`
+annotation on the pod receiving the traffic to skip protocol detection.
+This instructs Linkerd to treat those connections as opaque TCP.
+
+### Headless Services
+
+Similarly, if clients connect to a pod using a headless service or connect to
+the pod directly without using a service at all, the `appProtocol` field will
+be applicable. In this case you must set the `config.linkerd.io/opaque-ports`
+annotation on the pod receiving the traffic to skip protocol detection.
+This instructs Linkerd to treat those connections as opaque TCP.
+
+### Egress
+
+When connecting to a destination outside of the cluster, Linkerd will look for
+a matching `EgressNetwork` resource. To skip protocol detection and mark this
+connection as opaque TCP, you must set the `config.linkerd.io/opaque-ports`
+annotation on the matching `EgressNetwork` resource. For more information,
+see [managing egress traffic](../../tasks/managing-egress-traffic/).
 
 ## Marking ports as skip ports
 
@@ -157,30 +142,3 @@ As with opaque ports, multiple skip-ports can be provided as a comma-delimited
 string.
 
 This annotation should be set on the source of the traffic.
-
-## Setting the enable-external-profiles annotation
-
-The `config.linkerd.io/enable-external-profiles` annotation configures Linkerd
-to look for [`ServiceProfiles`](../service-profiles/) for off-cluster
-connections. It *also* instructs Linkerd to respect the default set of opaque
-ports for this connection.
-
-This annotation should be set on the source of the traffic.
-
-Note that the default set of opaque ports can be configured at install
-time, e.g. by using `--set proxy.opaquePorts`. This may be helpful in
-conjunction with `enable-external-profiles`.
-
-## Using `NetworkPolicy` resources with opaque ports
-
-When a service has a port marked as opaque by any means (i.e. annotations,
-`appProtocol` on a Service port, etc.), any `NetworkPolicy` resources that
-apply to the respective port and restrict ingress access will have to be
-changed to target the proxy's inbound port instead (by default, `4143`). If the
-service has a mix of opaque and non-opaque ports, then the `NetworkPolicy`
-should target both the non-opaque ports, and the proxy's inbound port.
-
-A connection that targets an opaque endpoint (i.e a pod with a port marked as
-opaque) will have its original target port replaced with the proxy's inbound
-port. Once the inbound proxy receives the traffic, it will transparently
-forward it to the main application container over a TCP connection.
