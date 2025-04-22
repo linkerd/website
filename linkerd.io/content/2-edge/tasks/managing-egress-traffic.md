@@ -51,7 +51,7 @@ metadata:
   namespace: egress-test
   annotations:
     linkerd.io/inject: enabled
-    config.linkerd.io/proxy-metrics-hostname-labels: true
+    config.linkerd.io/proxy-metrics-hostname-labels: "true"
 spec:
   containers:
   - name: client
@@ -66,7 +66,7 @@ EOF
 Now SSH into the client container and start generating some external traffic:
 
 ```bash
-kubectl -n egress-test exec -it client-xxx -c client -- sh
+kubectl -n egress-test exec -it client -c client -- sh
 $ while sleep 1; do curl -s http://httpbin.org/get ; done
 ```
 
@@ -188,7 +188,7 @@ endpoint. For that purpose we need to create the following `HTTPRoute`:
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: httpbin-get
@@ -382,7 +382,7 @@ like this:
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: httpbin-get
@@ -430,7 +430,7 @@ service, we create an `HTTPRoute` with a custom backend being the internal servi
 
 ```bash
 kubectl apply -f - <<EOF
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: unencrypted-http

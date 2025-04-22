@@ -4,7 +4,7 @@ title: Vote For Your December Linkerd Hero!
 keywords: [heroes]
 params:
   author: charles
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 To give our most active community members the credit they deserve, we are now formalizing our monthly Linkerd Hero nominations.

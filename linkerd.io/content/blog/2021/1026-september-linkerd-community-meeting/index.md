@@ -7,7 +7,7 @@ description: |-
 keywords: [meetup, community, meeting]
 params:
   author: matei
-  thumbnailProcess: fit
+  thumbnailRatio: fit
   videoSchema:
     - title: September Linkerd community meeting recap 
       description: |-

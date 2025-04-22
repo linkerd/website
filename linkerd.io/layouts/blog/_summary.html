@@ -1,9 +1,10 @@
 <div class="card card--horz card--center">
   <div class="card__media">
+    {{ $class := cond (eq .Params.thumbnailRatio "fit") "img--fit" "img--cover" }}
     {{ with .Render "_thumbnail-relref" }}
       <div class="thumbnail">
         <span style="background-image:url('{{ . }}')"></span>
-        <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--128 img--rounded">
+        <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--128 img--rounded {{ $class }}">
       </div>
     {{ end }}
   </div>

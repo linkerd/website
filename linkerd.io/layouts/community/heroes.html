@@ -14,14 +14,7 @@
             <div class="card__media">
               {{ $alt := .name }}
               {{ with $.Resources.Get .image }}
-                {{ with partial "utils/process-image" (dict
-                  "res" .
-                  "width" 256
-                  "height" 256
-                  "process" "fill jpg q80 lanczos"
-                )}}
-                  <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
-                {{ end }}
+                <img src="{{ .RelPermalink }}" alt="{{ $alt }}" class="img img--round img--128 img--cover">
               {{ end }}
             </div>
             <div class="card__body">

@@ -28,7 +28,7 @@ permit Linkerd users to save money and improve performance by allowing them to
 better control traffic for their workloads. Thank you, Yu, for contributing code
 and helping make Linkerd even better for our community!
 
-![Yu Cao](cover.png)
+![Yu Cao](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

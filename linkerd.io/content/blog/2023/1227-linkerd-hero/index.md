@@ -31,7 +31,7 @@ users, and we thank TJ for thoroughly researching this feature and implementing
 it impeccably. Working with him and bringing this exciting improvement to full
 fruition was a pleasure!
 
-![TJ Miller](cover.png)
+![TJ Miller](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

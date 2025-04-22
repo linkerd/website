@@ -1,6 +1,5 @@
 {{ $authorName := "" }}
 {{ $authorRes := "" }}
-{{ $authorImg := "" }}
 {{ with .Params.author }}
   {{ if (reflect.IsMap .) }}
     {{/* Get author data from page params */}}
@@ -32,21 +31,11 @@
       {{ end }}
     {{ end }}
   {{ end }}
-  {{ with $authorRes }}
-    {{ with partial "utils/process-image" (dict
-      "res" .
-      "width" 96
-      "height" 96
-      "process" "fill center jpg q80 lanczos"
-    )}}
-      {{ $authorImg = .RelPermalink }}
-    {{ end }}
-  {{ end }}
 {{ end }}
 <div class="blog-post-meta">
-  {{ if $authorImg }}
+  {{ if $authorRes }}
     <div class="blog-post-meta__media">
-      <img src="{{ $authorImg }}" alt="{{ $authorName }}" class="img img--48 img--cover img--round">
+      <img src="{{ $authorRes.RelPermalink }}" alt="{{ $authorName }}" class="img img--48 img--cover img--round">
     </div>
   {{ end }}
   <div class="blog-post-meta__body">

@@ -12,7 +12,7 @@ params:
     avatar: chris-campbell.png
     email: campbel@hey.com
   showCover: true
-images: [social.png] # Open graph image
+images: [social.jpg] # Open graph image
 ---
 
 _This is part one of series by Linkerd Ambassador Chris Campbell exploring how

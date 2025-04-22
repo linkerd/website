@@ -7,7 +7,7 @@ description: |-
 keywords: [linkerd]
 params:
   author: jason
-  thumbnailProcess: fit
+  thumbnailRatio: fit
 ---
 
 Missed the last Linkerd Community Meeting? No worries. Here’s a recap plus the

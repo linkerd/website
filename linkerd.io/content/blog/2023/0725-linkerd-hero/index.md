@@ -32,7 +32,7 @@ quickly providing a succinct fix, that we immediately incorporated into the 2.12
 and 2.13 branches of Linkerd. Thank you, Mikael, for helping rapidly fixing
 issues, improving everyone's Linkerd experience!
 
-![Mikael Fridh](cover.png)
+![Mikael Fridh](cover.jpg)
 
 ## Nominate next month's Linkerd Hero
 

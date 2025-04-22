@@ -1,9 +1,5 @@
-{{- $process := cond (eq .Params.thumbnailProcess "fit") "fit" "fill center" }}
 {{- partial "blog/get-image" (dict
   "page" .
   "src" .Params.thumbnail
   "default" "thumbnail.*, cover.*"
-  "width" 256
-  "height" 256
-  "process" (printf "%s jpg q80 lanczos" $process)
 ) -}}
