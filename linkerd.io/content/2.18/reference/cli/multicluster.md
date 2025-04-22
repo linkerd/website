@@ -58,10 +58,3 @@ title: multicluster
 
 {{< docs/cli-flags "multicluster uninstall" >}}
 
-### unlink
-
-{{< docs/cli-description "multicluster unlink" >}}
-
-{{< docs/cli-examples "multicluster unlink" >}}
-
-{{< docs/cli-flags "multicluster unlink" >}}
