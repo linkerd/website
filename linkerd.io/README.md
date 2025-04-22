@@ -236,19 +236,19 @@ for the upcoming `2.19` version, that will appear at `https://linkerd.io/2.19`.
 
 - Clone the `https://github.com/linkerd/website` repo
 - Create a new branch `yourusername/2.19`
-- Make sure all the links in the edge version (`2-edge`) are relative and don't
-  have the version hard-coded. E.g. `(/../cli/install/#)` instead of
-  `(/2-edge/reference/cli/install/#)`.
 - Update the latest version in `linkerd.io/config/_default/params.yaml`:
   `latestMajorVersion: "2.19"`
 - Update the `docs` menu in `linkerd.io/config/_default/menu.yaml` to include a
   menu item for `2.19`.
+- Make sure all the links in the edge version (`2-edge`) are relative and don't
+  have the version hard-coded. E.g. `(/../cli/install/#)` instead of
+  `(/2-edge/reference/cli/install/#)`.
+- Add a row to the Supported Kubernetes Versions table for `2.19` in
+  `linkerd.io/content/2-edge/reference/k8s-versions.md`.
 - Create an entire new directory, copying the edge docs:
   `cp -r linkerd.io/content/2-edge linkerd.io/content/2.19`. Any upcoming doc
   changes pertaining to `2.19` should be pushed against that new directory and
   the `2-edge` directory.
-- Add a row to the Supported Kubernetes Versions table in
-  `linkerd.io/content/2.19/reference/k8s-versions.md`.
 - Generate the CLI docs with `linkerd doc > linkerd.io/data/cli/2-19.yaml`. Just
   to make sure the edge data is up to date, copy the contents from this newly
   genereated file to `linkerd.io/data/cli/2-edge.yaml`.
