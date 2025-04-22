@@ -43,14 +43,17 @@ AnnotationsReference:
   Name: config.linkerd.io/pod-inbound-ports
 - Description: Amount of CPU units that the proxy sidecar requests
   Name: config.linkerd.io/proxy-cpu-request
-- Description: Amount of Memory that the proxy sidecar requests
-  Name: config.linkerd.io/proxy-memory-request
-- Description: Used to override the requestEphemeralStorage config
-  Name: config.linkerd.io/proxy-ephemeral-storage-request
 - Description: Maximum amount of CPU units that the proxy sidecar can use
   Name: config.linkerd.io/proxy-cpu-limit
+- Description: Maximum ratio of proxy worker threads to total available CPUs on the
+    node
+  Name: config.linkerd.io/proxy-cpu-ratio-limit
+- Description: Amount of Memory that the proxy sidecar requests
+  Name: config.linkerd.io/proxy-memory-request
 - Description: Maximum amount of Memory that the proxy sidecar can use
   Name: config.linkerd.io/proxy-memory-limit
+- Description: Used to override the requestEphemeralStorage config
+  Name: config.linkerd.io/proxy-ephemeral-storage-request
 - Description: Used to override the limitEphemeralStorage config
   Name: config.linkerd.io/proxy-ephemeral-storage-limit
 - Description: Run the proxy under this user ID
@@ -90,8 +93,8 @@ AnnotationsReference:
 - Description: When set to true, disables the protocol detection timeout on the inbound
     side of the proxy by setting it to a very high value
   Name: config.linkerd.io/proxy-disable-inbound-protocol-detect-timeout
-- Description: The proxy sidecar will stay alive for at least the given period after
-    receiving SIGTERM signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
+- Description: Adds a preStop hook to the proxy container to delay receiving SIGTERM
+    signal from Kubernetes but no longer than pod's `terminationGracePeriodSeconds`.
     Defaults to `0`
   Name: config.alpha.linkerd.io/proxy-wait-before-exit-seconds
 - Description: The application container will not start until the proxy is ready;
@@ -451,37 +454,6 @@ CLIReference:
     Usage: help for diagnostics
   SeeAlso: null
   Synopsis: Commands used to diagnose Linkerd components
-- Description: Audit Linkerd proxies for FIPS compliance.
-  Example: |2-
-      # To audit Linkerd for FIPS compliance:
-      linkerd fips audit
-  InheritedOptions: null
-  Name: fips audit
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for audit
-  SeeAlso: null
-  Synopsis: Audit Linkerd proxies for FIPS compliance
-- Description: |-
-    Commands used to manage FIPS-enabled installations of Linkerd.
-
-    This command provides subcommands to manage FIPS-enabled installations of
-    Linkerd.
-  Example: |2-
-      # Audit all Linkerd proxies for FIPS compliance
-      linkerd fips audit
-  InheritedOptions: null
-  Name: fips
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for fips
-  SeeAlso: null
-  Synopsis: |
-    Commands used to manage FIPS-enabled installations of Linkerd
 - Description: "Display the certificate(s) of one or more selected pod(s).\n\nThis
     command initiates a port-forward to a given pod or a set of pods and fetches the
     TLS certificate.\n\t\t"
@@ -1273,25 +1245,6 @@ CLIReference:
     Usage: Turn on debug logging
   SeeAlso: null
   Synopsis: jaeger manages the jaeger extension of Linkerd service mesh
-- Description: |-
-    Print the client and server license information.
-
-    This command prints client license information based on the BUOYANT_LICENSE
-    environment variable, and the server license based on the current cluster.
-  Example: ""
-  InheritedOptions: null
-  Name: license
-  Options:
-  - DefaultValue: ""
-    Name: client
-    Shorthand: ""
-    Usage: Print the client license only
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for license
-  SeeAlso: null
-  Synopsis: Print the client and server license information
 - Description: ""
   Example: ""
   InheritedOptions: null
@@ -1462,18 +1415,15 @@ CLIReference:
   Synopsis: |
     Output Kubernetes configs to install the Linkerd multicluster add-on
 - Description: |-
-    Outputs resources that allow another cluster to mirror services from this one.
+    Outputs a Link manifest and credentials for another cluster to mirror services from this one.
 
     Note that the Link resource applies only in one direction. In order for two
     clusters to mirror each other, a Link resource will have to be generated for
     each cluster and applied to the other.
   Example: "  # To link the west cluster to east\n  linkerd --context=east multicluster
-    link --cluster-name east | kubectl --context=west apply -f -\n\nThe command can
-    be configured by using the --set, --values, --set-string and --set-file flags.\nA
-    full list of configurable values can be found at https://github.com/linkerd/linkerd2/blob/main/multicluster/charts/linkerd-multicluster-link/README.md\n
-    \ "
+    link-gen --cluster-name east | kubectl --context=west apply -f -\n  "
   InheritedOptions: null
-  Name: multicluster link
+  Name: multicluster link-gen
   Options:
   - DefaultValue: ""
     Name: api-server-address
@@ -1484,10 +1434,13 @@ CLIReference:
     Shorthand: ""
     Usage: Cluster name
   - DefaultValue: ""
-    Name: control-plane-version
+    Name: excluded-annotations
     Shorthand: ""
-    Usage: |
-      (Development) Tag to be used for the service mirror controller image
+    Usage: Annotations to exclude when mirroring services
+  - DefaultValue: ""
+    Name: excluded-labels
+    Shorthand: ""
+    Usage: Labels to exclude when mirroring services
   - DefaultValue: ""
     Name: federated-service-selector
     Shorthand: ""
@@ -1517,22 +1470,9 @@ CLIReference:
     Usage: |
       If specified, overwrites gateway port when gateway service is not type LoadBalancer
   - DefaultValue: ""
-    Name: ha
-    Shorthand: ""
-    Usage: |
-      Enable HA configuration for the service-mirror deployment (default false)
-  - DefaultValue: ""
     Name: help
     Shorthand: h
-    Usage: help for link
-  - DefaultValue: ""
-    Name: log-format
-    Shorthand: ""
-    Usage: Log format for the Multicluster components
-  - DefaultValue: ""
-    Name: log-level
-    Shorthand: ""
-    Usage: Log level for the Multicluster components
+    Usage: help for link-gen
   - DefaultValue: ""
     Name: namespace
     Shorthand: ""
@@ -1541,11 +1481,6 @@ CLIReference:
     Name: output
     Shorthand: o
     Usage: 'Output format. One of: json|yaml'
-  - DefaultValue: ""
-    Name: registry
-    Shorthand: ""
-    Usage: |
-      Docker registry to pull service mirror controller image from ($LINKERD_DOCKER_REGISTRY)
   - DefaultValue: ""
     Name: remote-discovery-selector
     Shorthand: ""
@@ -1561,34 +1496,9 @@ CLIReference:
     Shorthand: ""
     Usage: |
       The name of the service account associated with the credentials
-  - DefaultValue: ""
-    Name: service-mirror-retry-limit
-    Shorthand: ""
-    Usage: |
-      The number of times a failed update from the target cluster is allowed to be retried
-  - DefaultValue: ""
-    Name: set
-    Shorthand: ""
-    Usage: |
-      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: set-file
-    Shorthand: ""
-    Usage: |
-      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
-  - DefaultValue: ""
-    Name: set-string
-    Shorthand: ""
-    Usage: |
-      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: values
-    Shorthand: f
-    Usage: |
-      specify values in a YAML file or a URL (can specify multiple)
   SeeAlso: null
   Synopsis: |
-    Outputs resources that allow another cluster to mirror services from this one
+    Outputs a Link manifest and credentials for another cluster to mirror services from this one
 - Description: ""
   Example: ""
   InheritedOptions: null
@@ -1605,29 +1515,6 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     Output Kubernetes configs to uninstall the Linkerd multicluster add-on
-- Description: ""
-  Example: ""
-  InheritedOptions: null
-  Name: multicluster unlink
-  Options:
-  - DefaultValue: ""
-    Name: cluster-name
-    Shorthand: ""
-    Usage: Cluster name
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for unlink
-  - DefaultValue: ""
-    Name: namespace
-    Shorthand: ""
-    Usage: The namespace for the service account
-  - DefaultValue: ""
-    Name: output
-    Shorthand: o
-    Usage: 'Output format. One of: json|yaml'
-  SeeAlso: null
-  Synopsis: Outputs link resources for deletion
 - Description: |-
     Manages the multicluster setup for Linkerd.
 
@@ -1678,43 +1565,6 @@ CLIReference:
     Usage: Turn on debug logging
   SeeAlso: null
   Synopsis: Manages the multicluster setup for Linkerd
-- Description: Generate policy based on current traffic (beta).
-  Example: |2-
-      # To generate policy:
-      linkerd policy generate
-  InheritedOptions: null
-  Name: policy generate
-  Options:
-  - DefaultValue: ""
-    Name: concurrency
-    Shorthand: ""
-    Usage: Limit of concurrent requests to the Kubernetes API
-  - DefaultValue: ""
-    Name: disable-audit
-    Shorthand: ""
-    Usage: Disable audit mode, deny traffic
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for generate
-  SeeAlso: null
-  Synopsis: Generate policy based on current traffic (beta)
-- Description: |-
-    Commands used to manage Linkerd policy.
-
-    This command provides subcommands to manage Linkerd policy.
-  Example: |2-
-      # Generate policy for existing meshed workloads
-      linkerd policy generate
-  InheritedOptions: null
-  Name: policy
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for policy
-  SeeAlso: null
-  Synopsis: Commands used to manage Linkerd policy
 - Description: Output service profile config for Kubernetes.
   Example: |2
       # Output a basic template to apply after modification.
