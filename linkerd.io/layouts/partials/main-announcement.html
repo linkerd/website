@@ -4,9 +4,11 @@
       {{ . | markdownify }}
     {{ end }}
     {{ with .link }}
-      <a href="{{ .href }}" class="main-announcement__link"{{ if hasPrefix .href "http" }} target="_blank" rel="noopener"{{ end }}>
-        {{ .text }}
-      </a>
+      {{ if and .href .text }}
+        <a href="{{ .href }}" class="main-announcement__link"{{ if hasPrefix .href "http" }} target="_blank" rel="noopener"{{ end }}>
+          {{ .text }}
+        </a>
+      {{ end }}
     {{ end }}
   </div>
 {{ end }}
