@@ -1470,6 +1470,34 @@ NAME                                  READY     STATUS    RESTARTS   AGE
 linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
 ```
 
+### √ extension is managing controllers {#l5d-multicluster-managed-controllers}
+
+Example error:
+
+```bash
+‼ extension is managing controllers
+            * using legacy service mirror controller for Link: target
+    see https://linkerd.io/2/checks/#l5d-multicluster-managed-controllers for hints
+```
+
+In Linkerd `2.18` we introduced a declarative, GitOps-compatible approach to
+establishing multicluster links. With this method, the controllers are
+integrated into the multicluster extension, allowing you to supply the Link CR
+and kubeconfig secrets manifests directly, without necessarily depending on the
+`linkerd multicluster link` command. This differs from earlier versions of
+Linkerd (pre-`v2.18`), where (in addition to the Link CR and secrets) controller
+manifests needed to be provided each time a new link was created, requiring the
+use of the `linkerd multicluster link` command — a process that was less suited
+to a GitOps workflow.
+
+This check ensures the linked clusters are using the new model. To migrate from
+the old model, update the multicluster extension, referring your links into the
+new `controllers` entry, as detailed in the [installing multicluster
+doc](../installing-multicluster/#step-1-install-the-multicluster-control-plane).
+The new controllers will be deployed, but they won't manage the links until the
+old ones get deleted. Once the old ones are removed, the new controllers will
+grab the Lease object allowing them to take over service mirroring.
+
 ### √ all gateway mirrors are healthy {#l5d-multicluster-gateways-endpoints}
 
 Example errors:
