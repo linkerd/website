@@ -42,13 +42,13 @@ title: multicluster
 
 {{< docs/cli-flags "multicluster install" >}}
 
-### link
+### link-gen
 
-{{< docs/cli-description "multicluster link" >}}
+{{< docs/cli-description "multicluster link-gen" >}}
 
-{{< docs/cli-examples "multicluster link" >}}
+{{< docs/cli-examples "multicluster link-gen" >}}
 
-{{< docs/cli-flags "multicluster link" >}}
+{{< docs/cli-flags "multicluster link-gen" >}}
 
 ### uninstall
 
