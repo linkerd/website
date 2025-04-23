@@ -9,13 +9,15 @@
   font-size: $font-size-sm;
   text-align: center;
 
-  .main-announcement__link {
-    display: inline-block;
-    padding-left: spacer(2);
+  a {
     color: $white;
     font-weight: $font-weight-bold;
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-decoration-color: rgba($white, 0.4);
+  }
+  .main-announcement__link {
+    display: inline-block;
+    padding-left: spacer(2);
   }
 }

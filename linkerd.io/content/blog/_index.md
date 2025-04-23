@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2025/0423-announcing-linkerd-2.18
     - /blog/2024/1202-tilt-linkerd-nginx-part-1
-    - /blog/2024/1205-announcing-linkerd-2.17
 ---
