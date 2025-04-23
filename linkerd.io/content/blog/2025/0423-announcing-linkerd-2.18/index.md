@@ -118,7 +118,7 @@ across Linkerd and other projects.
 ### Experimental Windows build
 
 The 2.18 release ships with an experimental build of the proxy for Windows
-machines. This is a critical first step in our path to full Window support. If
+machines. This is a critical first step in our path to full Windows support. If
 you are interested in running Linkerd in Windows environments—please reach out!
 
 ### Other fun stuff
