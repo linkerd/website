@@ -3,7 +3,7 @@ date: 2025-04-23T00:00:00Z
 slug: announcing-linkerd-2.18
 title: |-
   Announcing Linkerd 2.18: Battlescars, lessons learned, and preliminary Windows support
-keywords: [linkerd, "2.18", features]
+keywords: [linkerd, '2.18', features]
 params:
   author: william
   showCover: true
@@ -89,12 +89,11 @@ hundreds or thousands of clusters, and will typically manage their
 infrastructure via GitOps.
 
 In Linkerd 2.14, we took a first step to supporting new multicluster patterns by
-introducing
-[pod-to-pod multicluster](/2/tasks/pod-to-pod-multicluster/)
-for platforms with flat networks. In Linkerd 2.17, we introduced federated
-services, a new model for services that span many clusters. In Linkerd 2.18,
-we've further improved multicluster by allowing the creation of all Link
-resources in a declarative fashion, making it fully GitOps-compatible.
+introducing [pod-to-pod multicluster](/2/tasks/pod-to-pod-multicluster/) for
+platforms with flat networks. In Linkerd 2.17, we introduced federated services,
+a new model for services that span many clusters. In Linkerd 2.18, we've further
+improved multicluster by allowing the creation of all Link resources in a
+declarative fashion, making it fully GitOps-compatible.
 
 **Gateway API decoupling.** Since the release of Linkerd 2.12 in 2022, Linkerd
 has been leading the charge in using the
@@ -148,4 +147,7 @@ the [mailing lists](/community/get-involved/). Come and join the fun!
 
 ## Photo credit
 
-Photo by [Pixabay](https://www.pexels.com/photo/black-white-and-brown-chess-board-game-139392/).
+Photo by
+[Valentin Müller](https://unsplash.com/@wackeltin_meem?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+on
+[Unsplash](https://unsplash.com/photos/a-close-up-of-a-chess-board-with-pieces-on-it-vh-5LuWlZ_4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash).
