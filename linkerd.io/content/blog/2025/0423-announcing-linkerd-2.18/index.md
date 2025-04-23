@@ -55,7 +55,7 @@ instead just use the configured protocol. There are some interesting
 implementation details under the hood (to improve efficiency, Linkerd
 transparently upgrades HTTP/1.1 connections to HTTP/2 ones in between client and
 server proxies; and we make use of this to transit protocol information between
-proxies) but the net result is that avoiding protocol declaration for a Service
+proxies) but the net result is that avoiding protocol detection for a Service
 is as easy as configuring the appProtocol field:
 
 ```yaml
