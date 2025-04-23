@@ -103,7 +103,7 @@ mechanism. With the 2.14 release, Linkerd became the first service mesh to
 achieve conformance with the Gateway API _mesh_ profile.
 
 Our initial approach here was "batteries included": since most adopters did not
-have the Gateway API types, Linkwes would bundle them by default. As the Gateway
+have the Gateway API types, Linkerd would bundle them by default. As the Gateway
 API itself matures and as adoption of the Gateway API spreads across more
 projects, this approach has started to cause friction as _other_ projects have
 started installing, or requiring, specific versions of the Gateway API types.
