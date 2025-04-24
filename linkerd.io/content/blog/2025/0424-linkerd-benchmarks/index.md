@@ -8,6 +8,7 @@ params:
     name: Dominik Táskai, Linkerd Ambassador
     avatar: dominik-taskai.jpg
   showCover: true
+images: [social.jpg] # Open graph image
 ---
 
 It's been a while since the last Linkerd vs. Istio benchmarks were published
@@ -101,15 +102,6 @@ advantage over other service meshes.
 
 Today is a great time to start your service mesh journey, and Linkerd offers a
 strong choice for those prioritizing performance and advanced features.
-
-## Photo credit
-
-Photo by
-[Indira Tjokorda](https://unsplash.com/@indiratjokorda?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-on
-[Unsplash](https://unsplash.com/photos/man-in-blue-tank-top-and-yellow-helmet-riding-on-orange-and-black-motorcycle-Y-VYK0SDLxs?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-
-## Footnotes
 
 [^1]:
     https://www.businessresearchinsights.com/market-reports/service-mesh-market-100139
