@@ -10,8 +10,6 @@ params:
   showCover: true
 ---
 
-# Linkerd vs Ambient Mesh: 2025 Benchmarks
-
 It's been a while since the last Linkerd vs. Istio benchmarks were published
 ([2021, to be exact](/2021/11/29/linkerd-vs-istio-benchmarks-2021/)). Since a
 lot has happened since then, it is time to revisit the service mesh landscape.
