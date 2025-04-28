@@ -170,9 +170,8 @@ and specifies the collector's config.
 cat <<EOF > jaeger-linkerd.yaml
 jaeger:
   enabled: false
-
 collector:
-  config: |
+  config:
     receivers:
       otlp:
         protocols:
