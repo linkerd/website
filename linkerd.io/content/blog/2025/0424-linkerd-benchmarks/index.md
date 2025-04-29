@@ -91,7 +91,7 @@ since 2021, differences still exist, especially under higher loads, and when it
 comes to production use cases, that matters.
 
 Linkerd consistently showed better performance, especially at 200 and 2000 RPS,
-significantly outperforming Ambient. While Ambient showed strong performance,
+even outperforming Ambient in some cases. While Ambient showed strong performance,
 Linkerd maintained a lead.  
 As shown in the results above, the performance gap has narrowed compared to
 2021, making additional features—such as
