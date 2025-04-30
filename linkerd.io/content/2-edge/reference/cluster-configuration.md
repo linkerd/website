@@ -90,7 +90,7 @@ When packets do not contain a `ClusterIP` address, Linkerd will instead forward
 directly to the pod endpoint that was selected by Cilium. Consequentially,
 while mTLS and telemetry will still function correctly, features such as peak
 EWMA load balancing, and [dynamic request
-routing](../../tasks/configuring-dynamic-request-routing/) may not work as
+routing](../tasks/configuring-dynamic-request-routing/) may not work as
 expected.
 
 This behavior can be turned off in Cilium by [turning off socket-level load
@@ -102,7 +102,7 @@ CLI option `--config bpf-lb-sock-hostns-only=true`, or through the Helm value
 ### Disable Exclusive Mode
 
 If you're using Cilium as your CNI and then want to install
-[linkerd-cni](../../features/cni/) on top of it, make sure you install Cilium
+[linkerd-cni](../features/cni/) on top of it, make sure you install Cilium
 with the option `cni.exclusive=false`. This avoids Cilium taking ownership over
 the CNI configurations directory. Other CNI plugins like linkerd-cni install
 themselves and operate in chain mode with the other deployed plugins by

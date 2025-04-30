@@ -4,7 +4,7 @@ description: |-
   Enable topology aware routing to allow Linkerd to intelligently choose same-zone endpoints
 ---
 
-[Topology aware routing](../../features/topology-aware-routing/) allows
+[Topology aware routing](../features/topology-aware-routing/) allows
 Linkerd users to specify endpoint selection boundaries when a request is made
 against a service, making it possible to limit cross-zone endpoint selection
 and lower the associated costs and latency.

@@ -21,7 +21,7 @@ cluster to ensure the service remains available.
 
 You will need two clusters with Linkerd installed and for the clusters to be
 linked together with the multicluster extension. Follow the steps in the
-[multicluster guide](../multicluster/) to generate a shared trust root, install
+[multicluster guide](multicluster/) to generate a shared trust root, install
 Linkerd, Linkerd Viz, and Linkerd Multicluster, and to link the clusters
 together. For the remainder of this guide, we will assume the cluster context
 names are "east" and "west" respectively. Please substitute your cluster

@@ -8,9 +8,9 @@ The Linkerd proxy's log level can be configured via the:
 * `LINKERD_PROXY_LOG` environment variable
 * `--proxy-log-level` CLI flag of the `install`, `inject` and `upgrade` commands
 * `config.linkerd.io/proxy-log-level` annotation
-  (see [Proxy Configuration](../proxy-configuration/))
+  (see [Proxy Configuration](proxy-configuration/))
   which sets `LINKERD_PROXY_LOG` environment-variable on the injected sidecar
-* an [endpoint on the admin port](../../tasks/modifying-proxy-log-level/)
+* an [endpoint on the admin port](../tasks/modifying-proxy-log-level/)
   of a running proxy.
 
 The log level is a comma-separated list of log directives, which is

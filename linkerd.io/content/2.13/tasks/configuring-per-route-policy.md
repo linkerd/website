@@ -7,21 +7,21 @@ description: Fine-grained authorization policies can be configured for individua
 <!-- markdownlint-disable-file MD014 -->
 
 In addition to [enforcing authorization at the service
-level](../restricting-access/), finer-grained authorization policies can also be
+level](restricting-access/), finer-grained authorization policies can also be
 configured for individual HTTP routes. In this example, we'll use the Books demo
 app to demonstrate how to control which clients can access particular routes on
 a service.
 
 This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
-[Restricting Access to Services](../restricting-access/) example. For more
+[Restricting Access to Services](restricting-access/) example. For more
 comprehensive documentation of the policy resources, see the
-[Authorization policy reference](../../reference/authorization-policy/).
+[Authorization policy reference](../reference/authorization-policy/).
 
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster, along
-with its Viz extension. Follow the [Installing Linkerd Guide](../install/)
+with its Viz extension. Follow the [Installing Linkerd Guide](install/)
 if you haven't already done this.
 
 ## Install the Books demo application
@@ -98,7 +98,7 @@ generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a [`Server`] resource for the `authors` deployment's service
 port. For details on [`Server`] resources, see
-[here](../restricting-access/#creating-a-server-resource).
+[here](restricting-access/#creating-a-server-resource).
 
 ```bash
 kubectl apply -f - <<EOF
@@ -147,9 +147,9 @@ client-side behavior such as retries and timeouts. [`HTTPRoute`] resources, on t
 other hand, can be the target of [`AuthorizationPolicies`] and allow you to specify
 per-route authorization.
 
-[`HTTPRoute`]: ../../reference/authorization-policy/#httproute
+[`HTTPRoute`]: ../reference/authorization-policy/#httproute
 [`AuthorizationPolicies`]:
-    ../../reference/authorization-policy/#authorizationpolicy
+    ../reference/authorization-policy/#authorizationpolicy
 {{< /note >}}
 
 First, let's create an [`HTTPRoute`] that matches `GET` requests to the `authors`
@@ -438,13 +438,13 @@ with Linkerd. For more practice, try creating additional policies to restrict
 access to the `books` service as well. Or, to learn more about Linkerd
 authorization policy in general, and the various configurations that are
 available, see the [Policy reference
-docs](../../reference/authorization-policy/).
+docs](../reference/authorization-policy/).
 
-[`Server`]: ../../reference/authorization-policy/#server
-[`HTTPRoute`]: ../../reference/authorization-policy/#httproute
+[`Server`]: ../reference/authorization-policy/#server
+[`HTTPRoute`]: ../reference/authorization-policy/#httproute
 [`AuthorizationPolicy`]:
-    ../../reference/authorization-policy/#authorizationpolicy
+    ../reference/authorization-policy/#authorizationpolicy
 [`MeshTLSAuthentication`]:
-    ../../reference/authorization-policy/#meshtlsauthentication
+    ../reference/authorization-policy/#meshtlsauthentication
 [`NetworkAuthentication`]:
-    ../../reference/authorization-policy/#networkauthentication
+    ../reference/authorization-policy/#networkauthentication

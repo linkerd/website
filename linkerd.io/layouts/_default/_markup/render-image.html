@@ -1,15 +1,21 @@
-{{- /* Get RelPermalink of page resources */}}
-{{- $src := .Destination }}
-{{- if not (or (hasPrefix .Destination "/") (hasPrefix .Destination "http")) }}
-  {{- with $.Page.Resources.Get (strings.TrimPrefix "./" .Destination) }}
-    {{- if eq .ResourceType "image" }}
-      {{- $src = .RelPermalink }}
+{{- /* Get .RelPermalink of resources */}}
+{{- $u := urls.Parse .Destination }}
+{{- $src := $u.String }}
+{{- if not $u.IsAbs }}
+  {{- $path := strings.TrimPrefix "./" $u.Path }}
+  {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) }}
+    {{- $src = .RelPermalink }}
+    {{- with $u.RawQuery }}
+      {{- $src = printf "%s?%s" $src . }}
+    {{- end }}
+    {{- with $u.Fragment }}
+      {{- $src = printf "%s#%s" $src . }}
     {{- end }}
   {{- end }}
 {{- end }}
 {{- /* Process attributes */}}
 {{- /* Allow the class name that may be passed as a Markdown attribute to be merged first, before adding the default class names */}}
-{{- $a := merge (dict "alt" .Text "src" $src "class" "") .Attributes }}
+{{- $a := merge (dict "alt" .PlainText "src" $src "class" "") .Attributes }}
 {{- $class := "img img--max-fill img--rounded" }}
 {{- $attributes := "" }}
 {{- range $k, $v := $a }}
@@ -17,14 +23,14 @@
     {{- $v = printf "%s %s" $class $v }}
   {{- end }}
   {{- if $v }}
-    {{- $attributes = printf "%s %s=%q" $attributes $k $v }}
+    {{- $attributes = printf "%s %s=%q" $attributes $k ($v | transform.HTMLEscape) }}
   {{- end }}
 {{- end }}
 {{- /* Output standalone image */}}
 {{- if .IsBlock }}
   <figure>
     <img{{ $attributes | safeHTMLAttr }}>
-    {{ with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    {{ with .Title }}<figcaption>{{ . | $.Page.RenderString }}</figcaption>{{ end }}
   </figure>
 {{- /* Output inline image */}}
 {{- else }}

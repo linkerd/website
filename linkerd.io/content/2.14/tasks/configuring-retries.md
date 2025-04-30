@@ -10,7 +10,7 @@ questions that need to be answered:
 - How many times should the requests be retried?
 
 Both of these questions can be answered by specifying a bit of extra information
-in the [service profile](../../features/service-profiles/) for the service you're
+in the [service profile](../features/service-profiles/) for the service you're
 sending requests to.
 
 {{< note >}}
@@ -29,7 +29,7 @@ your system. A set of services that have requests being constantly retried
 could potentially get taken down by the retries instead of being allowed time
 to recover.
 
-Check out the [retries section](../books/#retries) of the books demo
+Check out the [retries section](books/#retries) of the books demo
 for a tutorial of how to configure retries.
 
 ## Retries
@@ -52,7 +52,7 @@ and [whether or not they have a body]. In particular, this mean that gRPC
 requests can be retried. However, requests will not be retried if the body
 exceeds 64KiB.
 
-[whether or not they have a body]:../../../2021/10/26/how-linkerd-retries-http-requests-with-bodies/
+[whether or not they have a body]:/2021/10/26/how-linkerd-retries-http-requests-with-bodies/
 
 ## Retry Budgets
 
@@ -92,7 +92,7 @@ requests.  Since an original request may trigger one or more retries, the actual
 request volume is usually higher than the effective request volume when retries
 are enabled.  Since an original request may fail the first time, but a retry of
 that request might succeed, the effective success rate is usually ([but not
-always](../configuring-timeouts/#monitoring-timeouts)) higher than the
+always](configuring-timeouts/#monitoring-timeouts)) higher than the
 actual success rate.
 
-[HTTPRoute]: ../../features/httproute/
+[HTTPRoute]: ../features/httproute/

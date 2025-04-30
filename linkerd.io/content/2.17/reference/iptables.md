@@ -38,7 +38,7 @@ The packet will arrive on the `PREROUTING` chain and will be immediately routed
 to the redirect chain. If its destination port matches any of the inbound ports
 to skip, then it will be forwarded directly to the application process,
 _bypassing the proxy_. The list of destination ports to check against can be
-[configured when installing Linkerd](../cli/install/#). If the
+[configured when installing Linkerd](cli/install/#). If the
 packet does not match any of the ports in the list, it will be redirected
 through the proxy. Redirection is done by changing the incoming packet's
 destination header, the target port will be replaced with `4143`, which is the

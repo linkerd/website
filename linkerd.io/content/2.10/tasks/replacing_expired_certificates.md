@@ -5,7 +5,7 @@ description: Follow this workflow if any of your TLS certs have expired.
 
 If any of your TLS certs are approaching expiry and you are not relying on an
 external certificate management solution such as `cert-manager`, you can follow
-[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/)
+[Rotating your identity certificates](manually-rotating-control-plane-tls-credentials/)
 to update them without incurring downtime. In case you are in a situation where
 any of your certs are expired however, you are already in an invalid state and
 any measures to avoid downtime are not guaranteed to give results. Therefore it
@@ -31,7 +31,7 @@ linkerd-identity
 
 In this situation, if you have installed Linkerd with a manually supplied trust
 root and you have its key, you can follow
-[Updating the identity issuer certificate](../manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
+[Updating the identity issuer certificate](manually-rotating-control-plane-tls-credentials/#rotating-the-identity-issuer-certificate)
 to update your expired cert.
 
 ## Replacing the root and issuer certificates
@@ -52,7 +52,7 @@ linkerd-identity
     see https://linkerd.io/2/checks/#l5d-identity-roots-are-time-valid for hints
 ```
 
-You can follow [Generating your own mTLS root certificates](../generate-certificates/#generating-the-certificates-with-step)
+You can follow [Generating your own mTLS root certificates](generate-certificates/#generating-the-certificates-with-step)
 to create new root and issuer certificates. Then use the `linkerd upgrade`
 command:
 

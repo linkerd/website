@@ -3,7 +3,7 @@ title: Automatically Rotating Control Plane TLS Credentials
 description: Use cert-manager to automatically rotate control plane TLS credentials.
 ---
 
-Linkerd's [automatic mTLS](../../features/automatic-mtls/) feature generates TLS
+Linkerd's [automatic mTLS](../features/automatic-mtls/) feature generates TLS
 certificates for proxies and automatically rotates them without user
 intervention. These certificates are derived from a *trust anchor*, which is
 shared across clusters, and an *issuer certificate*, which is specific to the
@@ -187,7 +187,7 @@ kubectl create secret tls linkerd-identity-issuer --cert=issuer.crt --key=issuer
 
 Where `issuer.crt` and `issuer.key` would be the cert and private key of an
 intermediary cert rooted at the trust root (`ca.crt`) referred above (check this
-[guide](../generate-certificates/) to see how to generate them).
+[guide](generate-certificates/) to see how to generate them).
 
 Note that the root cert (`ca.crt`) needs to be included in that Secret as well.
 You can just edit the generated Secret and include the `ca.crt` field with the
@@ -198,5 +198,5 @@ following instructions to install and configure Linkerd to use it.
 
 ## See also
 
-* [Automatically Rotating Webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/)
-* [Manually rotating Linkerd's trust anchor credentials](../manually-rotating-control-plane-tls-credentials/)
+* [Automatically Rotating Webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/)
+* [Manually rotating Linkerd's trust anchor credentials](manually-rotating-control-plane-tls-credentials/)

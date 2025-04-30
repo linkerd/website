@@ -19,7 +19,7 @@ how a StatefulSet can be deployed in a target cluster. After deploying, we will
 also look at how to communicate with an arbitrary pod from the target cluster's
 StatefulSet from a client in the source cluster. For a more detailed overview
 on how multi-cluster support for headless services work, check out
-[multi-cluster communication](../../features/multicluster/).
+[multi-cluster communication](../features/multicluster/).
 
 ## Prerequisites
 

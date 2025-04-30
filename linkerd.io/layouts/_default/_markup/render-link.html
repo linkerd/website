@@ -1,2 +1,42 @@
-<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if hasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
-{{- "" -}}
+{{- /* Get href */}}
+{{- $u := urls.Parse .Destination }}
+{{- $href := or $u.String }}
+{{- if strings.HasPrefix $href "#" }}
+  {{- $href = printf "%s#%s" .PageInner.RelPermalink $u.Fragment }}
+{{- else if and $href (not $u.IsAbs) (not (strings.HasPrefix $href "/")) }}
+  {{- $path := strings.TrimPrefix "./" $u.Path }}
+  {{- with or
+    ($.PageInner.GetPage $path)
+    ($.PageInner.Resources.Get $path)
+    (resources.Get $path)
+  }}
+    {{- $href = .RelPermalink }}
+    {{- with $u.RawQuery }}
+      {{- $href = printf "%s?%s" $href . }}
+    {{- end }}
+    {{- with $u.Fragment }}
+      {{- $href = printf "%s#%s" $href . }}
+    {{- end }}
+  {{- else }}
+    {{- if hugo.IsDevelopment }}
+      {{- warnf "The link render hook was unable to resolve %q in %q" $u.String .Page.String }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- /* Process attributes */}}
+{{- $a := dict "href" $href }}
+{{- if $u.IsAbs }}
+  {{- $a = merge $a (dict "target" "_blank" "rel" "noopener") }}
+{{- end }}
+{{- with .Title }}
+  {{- $a = merge $a (dict "title" .) }}
+{{- end }}
+{{- $attributes := "" }}
+{{- range $k, $v := $a }}
+  {{- if $v }}
+    {{- $attributes = printf "%s %s=%q" $attributes $k ($v | transform.HTMLEscape) }}
+  {{- end }}
+{{- end }}
+{{- /* Output */ -}}
+<a{{ $attributes | safeHTMLAttr }}>{{ .Text }}</a>
+{{- /**/ -}}

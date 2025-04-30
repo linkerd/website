@@ -1,4 +1,4 @@
 {{- $id := .Get "id" }}
 {{- $title := default "Warning" (.Get "title") }}
-{{- $content := .Inner | markdownify }}
+{{- $content := .Inner | $.Page.RenderString }}
 {{ partial "components/alert" (dict "id" $id "variant" "warning" "callout" true "title" $title "content" $content) }}

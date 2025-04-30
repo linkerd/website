@@ -37,7 +37,7 @@ will have the full set of metrics and mTLS support.
 
 Most ingress controllers can be meshed like any other service, i.e. by
 applying the `linkerd.io/inject: enabled` annotation at the appropriate level.
-(See [Adding your services to Linkerd](../adding-your-service/) for more.)
+(See [Adding your services to Linkerd](adding-your-service/) for more.)
 
 However, some ingress options need to be meshed in a special "ingress" mode,
 using the `linkerd.io/inject: ingress` annotation.
@@ -484,7 +484,7 @@ Kong should be meshed with [ingress mode enabled](#ingress-mode), i.e. with the
 This example will use the following elements:
 
 - The [Kong chart](https://github.com/Kong/charts)
-- The [emojivoto](../../getting-started/) example application
+- The [emojivoto](../getting-started/) example application
 
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).

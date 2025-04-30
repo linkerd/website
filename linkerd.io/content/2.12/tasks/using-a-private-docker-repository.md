@@ -9,7 +9,7 @@ docker images used by the Linkerd control and data planes so that you can
 store them in your private repository.
 
 The easiest way to get those images is to use the
-[Linkerd CLI](../../getting-started/#step-1-install-the-cli)
+[Linkerd CLI](../getting-started/#step-1-install-the-cli)
 to pull the images to an internal host and push them to your private repository.
 
 To get the names of the images used by the control plane, [install]

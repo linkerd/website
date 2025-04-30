@@ -21,9 +21,9 @@ endpoints provided by DNS.
 For destinations that are in Kubernetes, Linkerd will look up the IP address in
 the Kubernetes API. If the IP address corresponds to a Service, Linkerd will
 load balance across the endpoints of that Service and apply any policy from that
-Service's [Service Profile](../service-profiles/). On the other hand,
+Service's [Service Profile](service-profiles/). On the other hand,
 if the IP address corresponds to a Pod, Linkerd will not perform any load
-balancing or apply any [Service Profiles](../service-profiles/).
+balancing or apply any [Service Profiles](service-profiles/).
 
 {{< note >}}
 If working with headless services, endpoints of the service cannot be retrieved.

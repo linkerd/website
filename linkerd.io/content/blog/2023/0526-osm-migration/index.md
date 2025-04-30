@@ -10,7 +10,7 @@ params:
 You've read the Open Service Mesh team's announcement that
 [OSM will be archived and no further OSM releases will be published](https://openservicemesh.io/blog/osm-project-update/),
 and you've seen that Linkerd is
-[welcoming OSM adopters to Linkerd with open arms](../../05/welcome-to-linkerd-open-service-mesh-adopters/)...
+[welcoming OSM adopters to Linkerd with open arms](0505-welcome-osm)...
 now what? What does it look like to migrate from OSM to Linkerd?
 
 Any time you look at migrating meshes, there are two main challenges:

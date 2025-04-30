@@ -14,7 +14,7 @@ Linkerd performs *protocol detection* to determine whether traffic is HTTP
 will automatically provide HTTP-level metrics and routing. If Linkerd *cannot*
 determine that a connection is using HTTP, Linkerd will proxy the connection as
 a plain TCP connection without HTTP metrics and routing. (In both cases,
-non-HTTP features such as [mutual TLS](../automatic-mtls/) and byte-level
+non-HTTP features such as [mutual TLS](automatic-mtls/) and byte-level
 metrics are still applied.)
 
 Protocol detection can only happen if the HTTP traffic is unencrypted from the
@@ -106,7 +106,7 @@ provide will _replace_, not augment, the default list of opaque ports.
 {{< /note >}}
 
 {{< note >}}
-If you are using [authorization policies](../server-policy/), the `Server`'s
+If you are using [authorization policies](server-policy/), the `Server`'s
 `proxyProtocol` field can be used to control protocol detection behavior
 instead of a Service annotation. Regardless, we suggest annotating the
 Service object for clarity.
@@ -128,7 +128,7 @@ This annotation should be set on the source of the traffic.
 ## Setting the enable-external-profiles annotation
 
 The `config.linkerd.io/enable-external-profiles` annotation configures Linkerd
-to look for [`ServiceProfiles`](../service-profiles/) for off-cluster
+to look for [`ServiceProfiles`](service-profiles/) for off-cluster
 connections. It *also* instructs Linkerd to respect the default set of opaque
 ports for this connection.
 

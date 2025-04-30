@@ -8,12 +8,12 @@ service.  In this example, we'll use Emojivoto to show how to restrict access
 to the Voting service so that it may only be called from the Web service.
 
 For a more comprehensive description of the policy resources, see the
-[Policy reference docs](../../reference/authorization-policy/).
+[Policy reference docs](../reference/authorization-policy/).
 
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster, along
-with its Viz extension. Follow the [Installing Linkerd Guide](../install/)
+with its Viz extension. Follow the [Installing Linkerd Guide](install/)
 if you haven't already done this.
 
 ## Setup
@@ -136,7 +136,7 @@ You can create as many `ServerAuthorization` resources as you like to authorize
 many different clients. You can also specify whether to authorize
 unauthenticated (i.e. unmeshed) client, any authenticated client, or only
 authenticated clients with a particular identity.  For more details, please see
-the [Policy reference docs](../../reference/authorization-policy/).
+the [Policy reference docs](../reference/authorization-policy/).
 
 ## Setting a Default Policy
 
@@ -158,14 +158,14 @@ We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 Alternatively, default policies can be set on individual workloads or namespaces
 by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
-[Policy reference docs](../../reference/authorization-policy/) for more details.
+[Policy reference docs](../reference/authorization-policy/) for more details.
 
 If a port does not have a Server defined, Linkerd will automatically use a
 default Server which allows readiness and liveness probes. However, if you
 create a Server resource for a port which handles probes, you will need to
 explicitly create an authorization to allow those probe requests. For more
 information about adding route-scoped authorizations, see
-[Configuring Per-Route Policy](../configuring-per-route-policy/).
+[Configuring Per-Route Policy](configuring-per-route-policy/).
 
 ## Enabling authorization policies in live systems
 
@@ -173,7 +173,7 @@ You may have noticed that there was a period of time after we created the
 `Server` resource but before we created the `ServerAuthorization` where all
 requests were being rejected. To avoid this situation in live systems, we
 recommend that you start with [audit
-mode](../../features/server-policy/#audit-mode) enabled on the `Server`
+mode](../features/server-policy/#audit-mode) enabled on the `Server`
 resource. In this mode, traffic that violates the policy will not actually be
 denied, and you will be able to check the proxy logs/metrics on the target
 services for a complete picture of what would happen when audit mode is
@@ -185,4 +185,4 @@ removing audit mode to enforce the policies.
 In addition to service-level authorization policy, authorization policy can also
 be configured for individual HTTP routes. To learn more about per-route policy,
 see the documentation on [configuring per-route
-policy](../configuring-per-route-policy/).
+policy](configuring-per-route-policy/).

@@ -11,7 +11,7 @@ recommending users to install it separately as explained below.
 For previous versions, this document does not apply.
 {{< /note >}}
 
-Linkerd provides a full [on-cluster metrics stack](../../features/dashboard/)
+Linkerd provides a full [on-cluster metrics stack](../features/dashboard/)
 that can be leveraged by a Prometheus instance and subsequently by a Grafana
 instance, in order to show both the real-time and historical behavior of these
 metrics.
@@ -27,7 +27,7 @@ the metrics exposed by Linkerd.
 Before installing Grafana, make sure you have a working instance of Prometheus
 properly configured to consume Linkerd metrics. The Linkerd Viz extension comes
 with such a pre-configured Prometheus instance, but you can also [bring your own
-Prometheus](../external-prometheus/).
+Prometheus](external-prometheus/).
 
 ## Install Grafana
 

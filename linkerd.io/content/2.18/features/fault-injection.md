@@ -10,4 +10,4 @@ Traditionally, this would require modifying the service's code to add a fault
 injection library that would be doing the actual work. Linkerd can do this
 without any service code changes, only requiring a little configuration.
 
-To inject faults into your own services, follow the [tutorial](../../tasks/fault-injection/).
+To inject faults into your own services, follow the [tutorial](../tasks/fault-injection/).

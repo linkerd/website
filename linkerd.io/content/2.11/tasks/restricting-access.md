@@ -8,7 +8,7 @@ service.  In this example, we'll use Emojivoto to show how to restrict access
 to the Voting service so that it may only be called from the Web service.
 
 For a more comprehensive description of the policy resources, see the
-[Policy reference docs](../../reference/authorization-policy/).
+[Policy reference docs](../reference/authorization-policy/).
 
 ## Setup
 
@@ -145,7 +145,7 @@ You can create as many `ServerAuthorization` resources as you like to authorize
 many different clients. You can also specify whether to authorize
 unauthenticated (i.e. unmeshed) client, any authenticated client, or only
 authenticated clients with a particular identity.  For more details, please see
-the [Policy reference docs](../../reference/authorization-policy/).
+the [Policy reference docs](../reference/authorization-policy/).
 
 ## Setting a Default Policy
 
@@ -167,7 +167,7 @@ We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 Alternatively, default policies can be set on individual workloads or namespaces
 by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
-[Policy reference docs](../../reference/authorization-policy/) for more details.
+[Policy reference docs](../reference/authorization-policy/) for more details.
 
 This means that ALL requests will be rejected unless they are explicitly
 authorized by creating Server and ServerAuthorization resources.  One important

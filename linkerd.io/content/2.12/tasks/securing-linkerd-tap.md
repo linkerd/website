@@ -15,10 +15,10 @@ way.
 Linkerd's Viz extension includes Tap support. This feature is available via the
 following commands:
 
-- [`linkerd viz tap`](../../reference/cli/viz/#tap)
-- [`linkerd viz top`](../../reference/cli/viz/#top)
-- [`linkerd viz profile --tap`](../../reference/cli/viz/#profile)
-- [`linkerd viz dashboard`](../../reference/cli/viz/#dashboard)
+- [`linkerd viz tap`](../reference/cli/viz/#tap)
+- [`linkerd viz top`](../reference/cli/viz/#top)
+- [`linkerd viz profile --tap`](../reference/cli/viz/#profile)
+- [`linkerd viz dashboard`](../reference/cli/viz/#dashboard)
 
 Depending on your RBAC setup, you may need to perform additional steps to enable
 your user(s) to perform Tap actions.
@@ -169,7 +169,7 @@ Not recommended for production, only do this for testing/development.
 
 ### Linkerd Dashboard tap access
 
-By default, the [Linkerd dashboard](../../features/dashboard/) has the RBAC
+By default, the [Linkerd dashboard](../features/dashboard/) has the RBAC
 privileges necessary to tap resources.
 
 To confirm:

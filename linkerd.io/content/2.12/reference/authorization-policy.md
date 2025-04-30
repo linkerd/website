@@ -5,7 +5,7 @@ description: Reference guide to Linkerd's policy resources.
 
 Linkerd's authorization policy allows you to control which types of traffic are
 allowed to meshed pods. See the [Authorization Policy feature
-description](../../features/server-policy/) for more information on what this
+description](../features/server-policy/) for more information on what this
 means.
 
 Linkerd's policy is configured using two mechanisms:

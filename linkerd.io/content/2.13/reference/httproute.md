@@ -24,18 +24,18 @@ An HTTPRoute spec may contain the following top level fields:
 A reference to the parent resource this HTTPRoute is a part of.
 
 HTTPRoutes can be attached to a [Server] to allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes
+policy](authorization-policy/#authorizationpolicy) for specific routes
 served on that Server.
 
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
-request routing](../../tasks/configuring-dynamic-request-routing/).
+request routing](../tasks/configuring-dynamic-request-routing/).
 
 {{< warning >}}
 Outbound HTTPRoutes are **incompatible with ServiceProfiles**. If the
 [ParentReference](#parentreference) of an HTTPRoute is a Service, and a
-[ServiceProfile](../../features/service-profiles/) is also defined for that
+[ServiceProfile](../features/service-profiles/) is also defined for that
 Service, proxies will use the ServiceProfile configuration, rather than the
 HTTPRoute configuration, as long as the ServiceProfile exists.
 {{< /warning >}}
@@ -249,4 +249,4 @@ spec:
         port: 80
 ```
 
-[Server]: ../authorization-policy/#server
+[Server]: authorization-policy/#server

@@ -501,7 +501,7 @@ Example failure:
 Failures of such nature indicate that your roots have expired. If that is the
 case you will have to update both the root and issuer certificates at once. You
 can follow the process outlined in
-[Replacing Expired Certificates](../replacing_expired_certificates/) to
+[Replacing Expired Certificates](replacing_expired_certificates/) to
 get your cluster back to a stable state.
 
 ### √ trust roots are valid for at least 60 days {#l5d-identity-trustAnchors-not-expiring-soon}
@@ -518,7 +518,7 @@ Example warnings:
 This warning indicates that the expiry of some of your roots is approaching. In
 order to address this problem without incurring downtime, you can follow the
 process outlined in
-[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/).
+[Rotating your identity certificates](manually-rotating-control-plane-tls-credentials/).
 
 ### √ issuer cert is using supported crypto algorithm {#l5d-identity-issuer-cert-uses-supported-crypto}
 
@@ -532,7 +532,7 @@ Example failure:
 
 You need to ensure that your issuer certificate uses ECDSA P-256 for its public
 key algorithm. You can refer to
-[Generating your own mTLS root certificates](../generate-certificates/#generating-the-certificates-with-step)
+[Generating your own mTLS root certificates](generate-certificates/#generating-the-certificates-with-step)
 to see how you can generate certificates that will work with Linkerd.
 
 ### √ issuer cert is within its validity period {#l5d-identity-issuer-cert-is-time-valid}
@@ -547,7 +547,7 @@ Example failure:
 
 This failure indicates that your issuer certificate has expired. In order to
 bring your cluster back to a valid state, follow the process outlined in
-[Replacing Expired Certificates](../replacing_expired_certificates/).
+[Replacing Expired Certificates](replacing_expired_certificates/).
 
 ### √ issuer cert is valid for at least 60 days {#l5d-identity-issuer-cert-not-expiring-soon}
 
@@ -562,7 +562,7 @@ Example warning:
 This warning means that your issuer certificate is expiring soon. If you do not
 rely on external certificate management solution such as `cert-manager`, you can
 follow the process outlined in
-[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/)
+[Rotating your identity certificates](manually-rotating-control-plane-tls-credentials/)
 
 ### √ issuer cert is issued by the trust root {#l5d-identity-issuer-cert-issued-by-trust-anchor}
 
@@ -649,7 +649,7 @@ Example failure:
 This warning indicates that the expiry of proxy-injnector webhook
 cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
+[Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ### √ sp-validator webhook has valid cert {#l5d-sp-validator-webhook-cert-valid}
 
@@ -688,7 +688,7 @@ Example failure:
 This warning indicates that the expiry of sp-validator webhook
 cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
+[Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ### √ policy-validator webhook has valid cert {#l5d-policy-validator-webhook-cert-valid}
 
@@ -725,7 +725,7 @@ Example failure:
 This warning indicates that the expiry of policy-validator webhook
 cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
+[Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
 
@@ -874,7 +874,7 @@ Example failure:
     is running version 19.1.1 but the latest edge version is 19.1.2
 ```
 
-See the page on [Upgrading Linkerd](../upgrade/).
+See the page on [Upgrading Linkerd](upgrade/).
 
 ## The "control-plane-version" checks {#l5d-version-control}
 
@@ -887,7 +887,7 @@ Example failures:
     mismatched channels: running stable-2.1.0 but retrieved edge-19.1.2
 ```
 
-See the page on [Upgrading Linkerd](../upgrade/).
+See the page on [Upgrading Linkerd](upgrade/).
 
 ## The "linkerd-control-plane-proxy" checks {#linkerd-control-plane-proxy}
 
@@ -901,7 +901,7 @@ setting or re-install Linkerd as necessary.
 
 This warning indicates the proxies running in the Linkerd control plane are
 running an old version.  We recommend downloading the latest Linkerd release
-and [Upgrading Linkerd](../upgrade/).
+and [Upgrading Linkerd](upgrade/).
 
 ### √ control plane proxies and cli versions match {#l5d-cp-proxy-cli-version}
 
@@ -942,8 +942,8 @@ Ensure you have injected the Linkerd proxy into your application via the
 `linkerd inject` command.
 
 For more information on `linkerd inject`, see
-[Step 5: Install the demo app](../../getting-started/#step-5-install-the-demo-app)
-in our [Getting Started](../../getting-started/) guide.
+[Step 5: Install the demo app](../getting-started/#step-5-install-the-demo-app)
+in our [Getting Started](../getting-started/) guide.
 
 ### √ data plane is up-to-date {#l5d-data-plane-version}
 
@@ -954,7 +954,7 @@ Example failure:
     linkerd/linkerd-prometheus-74d66f86f6-6t6dh: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
-See the page on [Upgrading Linkerd](../upgrade/).
+See the page on [Upgrading Linkerd](upgrade/).
 
 ### √ data plane and cli versions match {#l5d-data-plane-cli-version}
 
@@ -963,7 +963,7 @@ See the page on [Upgrading Linkerd](../upgrade/).
     linkerd/linkerd-identity-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
 
-See the page on [Upgrading Linkerd](../upgrade/).
+See the page on [Upgrading Linkerd](upgrade/).
 
 ### √ data plane pod labels are configured correctly {#l5d-data-plane-pod-labels}
 
@@ -1025,7 +1025,7 @@ cause inconsistent behavior depending on if traffic is sent to the Pod directly
 (for example with a headless Service) or through a ClusterIP Service.  This
 error can be remedied by adding the `config.linkerd.io/opaque-ports` annotation
 to both the Pod and Service.  See
-[Protocol Detection](../../features/protocol-detection/) for more information.
+[Protocol Detection](../features/protocol-detection/) for more information.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
@@ -1071,7 +1071,7 @@ replicas running. This is likely caused by insufficient node resources.
 
 ### The "extensions" checks {#extensions}
 
-When any [Extensions](../extensions/) are installed, The Linkerd binary
+When any [Extensions](extensions/) are installed, The Linkerd binary
 tries to invoke `check --output json` on the extension binaries.
 It is important that the extension binaries implement it.
 For more information, See [Extension
@@ -1644,7 +1644,7 @@ Example failure:
 This warning indicates that the expiry of the tap API Server webhook
 cert is approaching. In order to address this
 problem without incurring downtime, you can follow the process outlined in
-[Automatically Rotating your webhook TLS Credentials](../automatically-rotating-webhook-tls-credentials/).
+[Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ### √ tap api service is running {#l5d-tap-api}
 
@@ -1787,13 +1787,13 @@ Example failure:
 ```
 
 This warning indicates that the listed pods have the
-[`deny` default inbound policy](../../features/server-policy/#policy-annotations),
+[`deny` default inbound policy](../features/server-policy/#policy-annotations),
 which may prevent the `linkerd-viz` Prometheus instance from scraping the data
 plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](../../features/server-policy/) authorizing
+generates [policy resources](../features/server-policy/) authorizing
 Prometheus to scrape the data plane proxies in a namespace:
 
 ```bash

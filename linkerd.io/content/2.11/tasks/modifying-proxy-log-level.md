@@ -31,7 +31,7 @@ pod, add the `config.linkerd.io/proxy-log-level` annotation to the pod template
 (or other options, see reference).
 
 The syntax of the proxy log level can be found in the
-[proxy log level reference](../../reference/proxy-log-level/).
+[proxy log level reference](../reference/proxy-log-level/).
 
 Note that logging has a noticeable, negative impact on proxy throughput. If the
 pod will continue to serve production traffic, you may wish to reset the log

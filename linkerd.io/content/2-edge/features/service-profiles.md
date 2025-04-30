@@ -6,7 +6,7 @@ description: Linkerd's service profiles enable per-route metrics as well as retr
 
 {{< warning >}}
 As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
-types](../gateway-api/), including for getting per-route metrics, specifying
+types](gateway-api/), including for getting per-route metrics, specifying
 timeouts, and specifying retries. Service profiles continue to be supported for
 backwards compatibility, but will not receive further feature development.
 {{< /warning >}}
@@ -27,8 +27,8 @@ to.
 
 To get started with service profiles you can:
 
-- Look into [setting up service profiles](../../tasks/setting-up-service-profiles/)
+- Look into [setting up service profiles](../tasks/setting-up-service-profiles/)
   for your own services.
-- Glance at the [reference](../../reference/service-profiles/) documentation.
+- Glance at the [reference](../reference/service-profiles/) documentation.
 
 [crd]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/

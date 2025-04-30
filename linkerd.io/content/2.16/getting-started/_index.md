@@ -67,7 +67,7 @@ export PATH=$HOME/.linkerd2/bin:$PATH
 
 This will install the CLI for the latest _edge release_ of Linkerd. (For more
 information about what edge releases are, see our [Releases and
-Versions](../../releases/) page.)
+Versions](releases/) page.)
 
 Once installed, verify the CLI is running correctly with:
 

@@ -6,7 +6,7 @@ description: Upgrading Multicluster to Linkerd 2.9.
 Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
 components for the first time with Linkerd 2.9 can ignore these instructions
-and instead refer directly to the [installing multicluster](../installing-multicluster/).
+and instead refer directly to the [installing multicluster](installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow these instructions.

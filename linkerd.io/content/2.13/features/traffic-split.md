@@ -14,7 +14,7 @@ onto a newer version.
 
 {{< note >}}
 This feature will eventually be supplanted by the newer [dynamic request
-routing](../request-routing/) capabilities, which does not require the SMI
+routing](request-routing/) capabilities, which does not require the SMI
 extension.
 {{< /note >}}
 
@@ -31,7 +31,7 @@ Linkerd exposes this functionality via the
 To use this feature, you create a Kubernetes resource as described in the
 TrafficSplit spec, and Linkerd takes care of the rest. You can see step by step
 documentation on our
-[Getting started with Linkerd SMI extension](../../tasks/linkerd-smi/) page.
+[Getting started with Linkerd SMI extension](../tasks/linkerd-smi/) page.
 
 By combining traffic splitting with Linkerd's metrics, it is possible to
 accomplish even more powerful deployment techniques that automatically take into
@@ -40,5 +40,5 @@ account the success rate and latency of old and new versions. See the
 
 Check out some examples of what you can do with traffic splitting:
 
-- [Canary Releases](../../tasks/flagger/)
-- [Fault Injection](../../tasks/fault-injection/)
+- [Canary Releases](../tasks/flagger/)
+- [Fault Injection](../tasks/fault-injection/)

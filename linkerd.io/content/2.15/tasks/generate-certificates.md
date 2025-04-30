@@ -5,12 +5,12 @@ description: Generate your own mTLS root certificate instead of letting Linkerd 
 ---
 
 In order to support [mTLS connections between meshed
-pods](../../features/automatic-mtls/), Linkerd needs a trust anchor certificate and
+pods](../features/automatic-mtls/), Linkerd needs a trust anchor certificate and
 an issuer certificate with its corresponding key.
 
 When installing with `linkerd install`, these certificates are automatically
 generated. Alternatively, you can specify your own with the `--identity-*` flags
-(see the [linkerd install reference](../../reference/cli/install/)).
+(see the [linkerd install reference](../reference/cli/install/)).
 
 On the other hand when using Helm to install Linkerd, it's not possible to
 automatically generate them and you're required to provide them.

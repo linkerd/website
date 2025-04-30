@@ -4,7 +4,7 @@ description: Unlink and uninstall Linkerd multicluster.
 ---
 
 The Linkerd multicluster components allow for sending traffic from one cluster
-to another. For more information on how to set this up, see [installing multicluster](../installing-multicluster/).
+to another. For more information on how to set this up, see [installing multicluster](installing-multicluster/).
 
 ## Unlinking
 

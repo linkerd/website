@@ -4,11 +4,11 @@ description: Practice chaos engineering by injecting faults into services with L
 ---
 
 It is easy to inject failures into applications by using the
-[HTTPRoute](../../reference/httproute/) resource to redirect a percentage of
+[HTTPRoute](../reference/httproute/) resource to redirect a percentage of
 traffic to a specific backend. This backend is completely flexible and can
 return whatever responses you want - 500s, timeouts or even crazy payloads.
 
-The [books demo](../books/) is a great way to show off this behavior. The
+The [books demo](books/) is a great way to show off this behavior. The
 overall topology looks like:
 
 ![Topology](/docs/images/books/topology.png "Topology")
@@ -27,11 +27,11 @@ engineering lifestyle, fault injection could even be used in production.
 To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
-  [Installing Linkerd Guide](../install/).
+  [Installing Linkerd Guide](install/).
 
 ## Setup the service
 
-First, add the [books](../books/) sample application to your cluster:
+First, add the [books](books/) sample application to your cluster:
 
 ```bash
 kubectl create ns booksapp && \
@@ -140,7 +140,7 @@ EOF
 With booksapp and NGINX running, it is now time to partially split the traffic
 between an existing backend, `books`, and the newly created
 `error-injector`. This is done by adding an
-[HTTPRoute](../../reference/httproute/) configuration to your cluster:
+[HTTPRoute](../reference/httproute/) configuration to your cluster:
 
 ```bash
 cat <<EOF | kubectl apply -f -

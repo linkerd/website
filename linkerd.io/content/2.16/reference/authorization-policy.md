@@ -5,7 +5,7 @@ description: Reference guide to Linkerd's policy resources.
 
 Linkerd's authorization policy allows you to control which types of traffic are
 allowed to meshed pods. See the [Authorization Policy feature
-description](../../features/server-policy/) for more information on what this
+description](../features/server-policy/) for more information on what this
 means.
 
 Linkerd's policy is configured using two mechanisms:
@@ -89,7 +89,7 @@ Traffic that doesn't conform to the authorization policies associated to the
 Server are denied by default. You can alter that behavior by overriding the
 `accessPolicy` field, which accepts the same values as the [default
 policies](#default-policies). Of particular interest is the `audit` value, which
-enables [audit mode](../../features/server-policy/#audit-mode), that you can use
+enables [audit mode](../features/server-policy/#audit-mode), that you can use
 to test policies before enforcing them.
 
 #### podSelector
@@ -163,7 +163,7 @@ API rules of
 precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
 {{< /note >}}
 
-Please refer to HTTPRoute's full [spec](../httproute/).
+Please refer to HTTPRoute's full [spec](httproute/).
 
 {{< note >}}
 Two versions of the HTTPRoute resource may be used with Linkerd:
@@ -176,7 +176,7 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
 resource definition. See [the HTTPRoute reference
-documentation](../httproute/#linkerd-and-gateway-api-httproutes)
+documentation](httproute/#linkerd-and-gateway-api-httproutes)
 for details.
 {{< /note >}}
 

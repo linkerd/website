@@ -9,7 +9,7 @@ that resource. These rules can be based on parameters such as path, method,
 headers, or other aspects of the gRPC request.
 
 GRPCRoutes are used to configure various aspects of Linkerd's behavior, and form
-part of [Linkerd's support for the Gateway API](../../features/gateway-api/).
+part of [Linkerd's support for the Gateway API](../features/gateway-api/).
 
 {{< note >}}
 The GRPCRoute resource is part of the Gateway API and is not Linkerd-specific.
@@ -36,7 +36,7 @@ adding request headers, modifying a request's path, and reliability features
 such as [timeouts].
 
 {{< warning >}}
-**Outbound GRPCRoutes and [ServiceProfiles](../service-profiles/) provide
+**Outbound GRPCRoutes and [ServiceProfiles](service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over GRPCRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an GRPCRoute,
@@ -78,8 +78,8 @@ spec:
           weight: 50051
 ```
 
-[ServiceProfile]: ../../features/service-profiles/
+[ServiceProfile]: ../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
-[Server]: ../authorization-policy/#server
+[Server]: authorization-policy/#server
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/

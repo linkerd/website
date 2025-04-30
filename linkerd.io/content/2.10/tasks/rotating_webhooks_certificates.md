@@ -8,8 +8,8 @@ Linkerd uses the
 and
 [extension API server](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/apiserver-aggregation/)
 to implement some of its core features like
-[automatic proxy injection](../../features/proxy-injection/) and
-[service profiles validation](../../features/service-profiles/).
+[automatic proxy injection](../features/proxy-injection/) and
+[service profiles validation](../features/service-profiles/).
 
 Also, the viz extension uses a webhook to make pods tappable, as does the jaeger
 extension to turn on tracing on pods.

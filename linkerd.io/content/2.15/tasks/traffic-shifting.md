@@ -6,14 +6,14 @@ description: Dynamically split and shift traffic between backends
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
 implement A/B experiments, red/green deploys, canary rollouts,
-[fault injection](../fault-injection/) and more.
+[fault injection](fault-injection/) and more.
 
 Linkerd supports two different ways to configure traffic shifting: you can
-use the [Linkerd SMI extension](../linkerd-smi/) and
+use the [Linkerd SMI extension](linkerd-smi/) and
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
-resources, or you can use [HTTPRoute](../../features/httproute/) resources which
+resources, or you can use [HTTPRoute](../features/httproute/) resources which
 Linkerd natively supports. While certain integrations such as
-[Flagger](../flagger/) rely on the SMI and `TrafficSplit` approach, using
+[Flagger](flagger/) rely on the SMI and `TrafficSplit` approach, using
 `HTTPRoute` is the preferred method going forward.
 
 {{< docs/production-note >}}
@@ -23,7 +23,7 @@ Linkerd natively supports. While certain integrations such as
 To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
-  [Installing Linkerd Guide](../install/).
+  [Installing Linkerd Guide](install/).
 
 ## Set up the demo
 
@@ -37,7 +37,7 @@ For load generation we'll use
 and for the backends we'll use [BB](https://github.com/BuoyantIO/bb).
 
 To add these components to your cluster and include them in the Linkerd
-[data plane](../../reference/architecture/#data-plane), run:
+[data plane](../reference/architecture/#data-plane), run:
 
 ```bash
 cat <<EOF | linkerd inject - | kubectl apply -f -

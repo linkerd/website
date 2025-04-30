@@ -3,7 +3,7 @@ title: Multi-cluster communication
 description: Multi-cluster communication
 ---
 
-Linkerd's [multi-cluster functionality](../../features/multicluster/) allows
+Linkerd's [multi-cluster functionality](../features/multicluster/) allows
 pods to connect to Kubernetes services across cluster boundaries in a way that
 is secure and fully transparent to the application. This feature supports three
 modes: hierarchical (using a gateway), flat (without a gateway), and federated.
@@ -54,7 +54,7 @@ across all clusters. We recommend leaving this at the default value of
 
 The term "remote-discovery" refers to how the imported services should be
 interpreted by Linkerd's control plane. Service discovery is performed by the
-[*destination service*](../../reference/architecture/#the-destination-service).
+[*destination service*](../reference/architecture/#the-destination-service).
 Whenever traffic is sent to a target imported in "remote-discovery" mode, the
 destination service knows to look for all relevant information in the cluster
 the service has been exported from, not locally. In contrast, service discovery

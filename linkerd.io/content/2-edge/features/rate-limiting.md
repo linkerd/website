@@ -8,9 +8,9 @@ prevent overload, ensure fair resource use, enhance security, manage costs,
 maintain quality, and comply with SLAs.
 
 Please check the [Configuring Rate Limiting
-task](../../tasks/configuring-rate-limiting/) for an example guide on deploying
+task](../tasks/configuring-rate-limiting/) for an example guide on deploying
 rate limiting, and the [HTTPLocalRateLimitPolicy reference
-doc](../../reference/rate-limiting/).
+doc](../reference/rate-limiting/).
 
 ## Scope
 

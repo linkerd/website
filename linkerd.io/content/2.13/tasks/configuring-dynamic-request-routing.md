@@ -6,7 +6,7 @@ description: Configuring HTTPRoute resources to perform dynamic request routing.
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster. Follow
-the [Installing Linkerd Guide](../install/) if you haven't already done this
+the [Installing Linkerd Guide](install/) if you haven't already done this
 (make sure you have at least linkerd stable-2.13.0 or edge-23.3.2).
 
 You also need to have the [Helm](https://helm.sh/docs/intro/quickstart/) CLI
@@ -111,7 +111,7 @@ target port).
 
 {{< warning >}}
 Outbound `HTTPRoute`s are **incompatible with `ServiceProfiles`**. If a
-[ServiceProfile](../../features/service-profiles/) is defined for the parent
+[ServiceProfile](../features/service-profiles/) is defined for the parent
 Service of an `HTTPRoute`, proxies will use the `ServiceProfile` configuration,
 rather than the `HTTPRoute` configuration, as long as the `ServiceProfile`
 exists.

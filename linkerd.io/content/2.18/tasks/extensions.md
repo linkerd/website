@@ -7,16 +7,16 @@ Linkerd extensions are components which can be added to a Linkerd installation
 to enable additional functionality. By default, the following extensions are
 available:
 
-* [viz](../../features/dashboard/): Metrics and visibility features
-* [jaeger](../distributed-tracing/): Distributed tracing
-* [multicluster](../multicluster/): Cross-cluster routing
+* [viz](../features/dashboard/): Metrics and visibility features
+* [jaeger](distributed-tracing/): Distributed tracing
+* [multicluster](multicluster/): Cross-cluster routing
 
 But other extensions are also possible. Read on for more!
 
 ## Installing extensions
 
 Before installing any extensions, make sure that you have already [installed
-Linkerd](../install/) and validated your cluster with `linkerd check`.
+Linkerd](install/) and validated your cluster with `linkerd check`.
 
 Then, you can install the extension with the extension's `install` command. For
 example, to install the `viz` extension, you can use:

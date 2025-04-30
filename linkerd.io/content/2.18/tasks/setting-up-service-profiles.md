@@ -6,13 +6,13 @@ description: Create a service profile that provides more details for Linkerd to 
 
 {{< warning >}}
 As of Linkerd 2.16, ServiceProfiles have been fully supplanted by [Gateway API
-types](../../features/gateway-api/), including for getting per-route metrics,
+types](../features/gateway-api/), including for getting per-route metrics,
 specifying timeouts, and specifying retries. Service profiles continue to be
 supported for backwards compatibility, but will not receive further feature
 development.
 {{< /warning >}}
 
-[Service profiles](../../features/service-profiles/) provide Linkerd additional
+[Service profiles](../features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
 
 When an HTTP (not HTTPS) request is received by a Linkerd proxy,
@@ -61,7 +61,7 @@ in this ServiceProfile in the web dashboard. You can get the
 statistics using the CLI.
 
 For a complete demo walkthrough, check out the
-[books](../books/#service-profiles) demo.
+[books](books/#service-profiles) demo.
 
 There are a couple different ways to use `linkerd profile` to create service
 profiles.

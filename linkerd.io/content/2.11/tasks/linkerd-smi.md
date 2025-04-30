@@ -28,7 +28,7 @@ a `TrafficSplit` specification, to perform Traffic Splitting across services.
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](../install/) if you haven't
+  Follow the [Installing Linkerd Guide](install/) if you haven't
   already done this.
 
 ## Install the Linkerd-SMI extension

@@ -35,7 +35,7 @@ services and applies those updates locally on the source cluster.
 These mirrored services are suffixed with the name of the remote cluster, e.g.
 the *Foo* service on the *west* cluster would be mirrored as *Foo-west* on the
 local cluster. This approach is typically combined with [traffic
-splitting](../traffic-split/) or [dynamic request routing](../request-routing/)
+splitting](traffic-split/) or [dynamic request routing](request-routing/)
 to allow local services to access the *Foo* service as if it were on the local
 cluster.
 
@@ -75,9 +75,9 @@ networking* model and do not use a gateway intermediary.
 
 These modes can be combined, with each specific service selecting the mode that
 is most appropriate for that service. See the
-[pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
-guide, the [federated services](../../tasks/federated-services/) guide, and the
-[multi-cluster reference](../../reference/multicluster/) for more.
+[pod-to-pod multicluster communication](../tasks/pod-to-pod-multicluster/)
+guide, the [federated services](../tasks/federated-services/) guide, and the
+[multi-cluster reference](../reference/multicluster/) for more.
 
 ## Headless services
 
@@ -120,14 +120,14 @@ hostnames in the pod spec).
 Note that headless services can *not* be part of a federated service.
 
 Ready to get started? See the [getting started with multi-cluster
-guide](../../tasks/multicluster/) for a walkthrough.
+guide](../tasks/multicluster/) for a walkthrough.
 
 ## Further reading
 
-* [Multi-cluster installation instructions](../../tasks/installing-multicluster/)
-* [Pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
-* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/)
-* [Federated services](../../tasks/federated-services/)
+* [Multi-cluster installation instructions](../tasks/installing-multicluster/)
+* [Pod-to-pod multicluster communication](../tasks/pod-to-pod-multicluster/)
+* [Multi-cluster communication with StatefulSets](../tasks/multicluster-using-statefulsets/)
+* [Federated services](../tasks/federated-services/)
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster

@@ -18,7 +18,7 @@ Specifically, this guide provides instructions on how to securely generate and
 manage Linkerd's mTLS private keys and certificates using
 [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) and
 [cert-manager](https://cert-manager.io). It will also show you how to integrate
-the [auto proxy injection](../../features/proxy-injection/) feature into your
+the [auto proxy injection](../features/proxy-injection/) feature into your
 workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
 version following a GitOps workflow.
 

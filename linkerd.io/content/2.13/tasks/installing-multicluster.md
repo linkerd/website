@@ -4,21 +4,21 @@ description: Allow Linkerd to manage cross-cluster communication.
 ---
 
 Multicluster support in Linkerd requires extra installation and configuration on
-top of the default [control plane installation](../install/). This guide
+top of the default [control plane installation](install/). This guide
 walks through this installation and configuration as well as common problems
 that you may encounter. For a detailed walkthrough and explanation of what's
-going on, check out [getting started](../multicluster/).
+going on, check out [getting started](multicluster/).
 
 {{< docs/production-note >}}
 
 ## Requirements
 
 - Two clusters.
-- A [control plane installation](../install/) in each cluster that shares
+- A [control plane installation](install/) in each cluster that shares
   a common
-  [trust anchor](../generate-certificates/#trust-anchor-certificate).
+  [trust anchor](generate-certificates/#trust-anchor-certificate).
   If you have an existing installation, see the
-  [trust anchor bundle](../installing-multicluster/#trust-anchor-bundle)
+  [trust anchor bundle](installing-multicluster/#trust-anchor-bundle)
   documentation to understand what is required.
 - Each of these clusters should be configured as `kubectl`
   [contexts](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
@@ -48,7 +48,7 @@ linkerd multicluster check
 
 For a deep dive into what components are being added to your cluster and how all
 the pieces fit together, check out the
-[getting started documentation](../multicluster/#preparing-your-cluster).
+[getting started documentation](multicluster/#preparing-your-cluster).
 
 ## Step 2: Link the clusters
 
@@ -79,7 +79,7 @@ linkerd --context=west multicluster gateways
 ```
 
 For a detailed explanation of what this step does, check out the
-[linking the clusters section](../multicluster/#linking-the-clusters).
+[linking the clusters section](multicluster/#linking-the-clusters).
 
 ## Step 3: Export services
 
@@ -235,4 +235,4 @@ The same functionality can also be done through Helm setting the
 
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
-[multicluster task](../../features/multicluster/).
+[multicluster task](../features/multicluster/).

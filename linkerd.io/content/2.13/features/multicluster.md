@@ -86,12 +86,12 @@ Deployment would not be supported, since they do not allow for arbitrary
 hostnames in the pod spec).
 
 Ready to get started? See the [getting started with multi-cluster
-guide](../../tasks/multicluster/) for a walkthrough.
+guide](../tasks/multicluster/) for a walkthrough.
 
 ## Further reading
 
-* [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
-* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
+* [Multi-cluster installation instructions](../tasks/installing-multicluster/).
+* [Multi-cluster communication with StatefulSets](../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster

@@ -27,7 +27,7 @@ that appears in Kubernetes 1.31. `trafficDistribution` is not yet supported by
 Linkerd.)
 
 To get started with topology aware routing take a look at the [enabling
-topology aware routing](../../tasks/enabling-topology-aware-routing/) task
+topology aware routing](../tasks/enabling-topology-aware-routing/) task
 documentation.
 
 [topology aware routing]:

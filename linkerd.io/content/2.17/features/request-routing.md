@@ -16,9 +16,9 @@ Dynamic request routing is built on Kubernetes's Gateway API types, especially
 [HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/).
 
 This feature extends Linkerd's traffic routing capabilities beyond those of
-[traffic splits](../traffic-split/), which only provide percentage-based
+[traffic splits](traffic-split/), which only provide percentage-based
 splits.
 
 ## Learning more
 
-- [Guide to configuring routing policy](../../tasks/configuring-dynamic-request-routing/)
+- [Guide to configuring routing policy](../tasks/configuring-dynamic-request-routing/)

@@ -6,11 +6,11 @@ description: Linkerd can optionally use a CNI plugin instead of an init-containe
 
 Linkerd's data plane works by transparently routing all TCP traffic to and from
 every meshed pod to its proxy. (See the
-[Architecture](../../reference/architecture/) doc.) This allows Linkerd to act
+[Architecture](../reference/architecture/) doc.) This allows Linkerd to act
 without the application being aware.
 
 By default, this rewiring is done with an [Init
-Container](../../reference/architecture/#linkerd-init-container) that uses iptables
+Container](../reference/architecture/#linkerd-init-container) that uses iptables
 to install routing rules for the pod, at pod startup time. However, this requires
 the `CAP_NET_ADMIN` capability; and in some clusters, this capability is not
 granted to pods.
@@ -78,7 +78,7 @@ In Helm v3, It has been deprecated, and is the first argument as
 {{< /note >}}
 
 At that point you are ready to install Linkerd with CNI enabled.  Follow the
-[Installing Linkerd with Helm](../../tasks/install-helm/) instructions.
+[Installing Linkerd with Helm](../tasks/install-helm/) instructions.
 
 ## Additional configuration
 

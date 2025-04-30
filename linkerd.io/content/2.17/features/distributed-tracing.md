@@ -52,4 +52,4 @@ them into traces, and a trace backend to store the trace data and allow the
 user to view/query it.
 
 For details, please see our [guide to adding distributed tracing to your
-application with Linkerd](../../tasks/distributed-tracing/).
+application with Linkerd](../tasks/distributed-tracing/).

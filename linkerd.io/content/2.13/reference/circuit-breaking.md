@@ -14,7 +14,7 @@ determined to have returned to normal.
 The Linkerd proxy is capable of performing endpoint-level circuit breaking on
 HTTP requests using a configurable failure accrual strategy. This means that the
 Linkerd proxy performs circuit breaking at the level of individual endpoints
-in a [load balancer](../../features/load-balancing/) (i.e., each Pod in a given
+in a [load balancer](../features/load-balancing/) (i.e., each Pod in a given
 Service), and failures are tracked at the level of HTTP response status codes.
 
 Circuit breaking is a client-side behavior, and is therefore performed by the
@@ -26,7 +26,7 @@ endpoints have tripped their circuit breakers, the proxy will simply not select
 those endpoints while they are in a failed state. When all endpoints in a load
 balancer are unavailable, requests may be failed with [503 Service Unavailable]
 errors, or, if the Service is one of multiple [`backendRef`s in an
-HTTPRoute](../httproute/#httpbackendref), the entire backend Service will be
+HTTPRoute](httproute/#httpbackendref), the entire backend Service will be
 considered unavailable and a different backend may be selected.
 
 The [`outbound_http_balancer_endpoints` gauge metric][metric] reports the number
@@ -97,7 +97,7 @@ failure accrual.
 
 {{< warning >}}
 Circuit breaking is **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../../features/service-profiles/) is defined for the annotated
+[ServiceProfile](../features/service-profiles/) is defined for the annotated
 Service, proxies will not perform circuit breaking as long as the ServiceProfile
 exists.
 {{< /warning >}}
@@ -148,7 +148,7 @@ configure parameters for the consecutive-failures failure accrual policy:
 
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
 [503 Service Unavailable]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503
-[metric]: ../proxy-metrics/#outbound-xroute-metrics
+[metric]: proxy-metrics/#outbound-xroute-metrics
 [5xx server error]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses
 [exp-backoff]:
     https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/

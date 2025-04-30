@@ -45,7 +45,7 @@ Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
 [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
 and returns signed certificates. These certificates are issued at proxy
 initialization time and are used for proxy-to-proxy connections to implement
-[mTLS](../../features/automatic-mtls/).
+[mTLS](../features/automatic-mtls/).
 
 ### The proxy injector
 
@@ -63,7 +63,7 @@ The Linkerd data plane comprises ultralight _micro-proxies_ which are deployed
 as sidecar containers inside application pods. These proxies transparently
 intercept TCP connections to and from each pod, thanks to iptables rules put in
 place by the [linkerd-init](#linkerd-init-container) (or, alternatively, by
-Linkerd's [CNI plugin](../../features/cni/)).
+Linkerd's [CNI plugin](../features/cni/)).
 
 ### Proxy
 
@@ -97,6 +97,6 @@ You can read more about these micro-proxies here:
 The `linkerd-init` container is added to each meshed pod as a Kubernetes [init
 container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
 that runs before any other containers are started. It [uses
-iptables](../iptables/) to route all TCP traffic to and from the pod through
+iptables](iptables/) to route all TCP traffic to and from the pod through
 the proxy. Linkerd's init container can be run in [different
-modes](../../features/nft/) which determine what iptables variant is used.
+modes](../features/nft/) which determine what iptables variant is used.

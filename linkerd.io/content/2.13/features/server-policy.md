@@ -13,15 +13,15 @@ on.
 {{< note >}}
 Linkerd can only enforce policy on meshed pods, i.e. pods where the Linkerd
 proxy has been injected. If policy is a strict requirement, you should pair the
-usage of these features with [HA mode](../ha/), which enforces that the proxy
+usage of these features with [HA mode](ha/), which enforces that the proxy
 *must* be present when pods start up.
 {{< /note >}}
 
 ## Policy overview
 
 By default Linkerd allows all traffic to transit the mesh, and uses a variety
-of mechanisms, including [retries](../retries-and-timeouts/) and [load
-balancing](../load-balancing/), to ensure that requests are delivered
+of mechanisms, including [retries](retries-and-timeouts/) and [load
+balancing](load-balancing/), to ensure that requests are delivered
 successfully.
 
 Sometimes, however, we want to restrict which types of traffic are allowed.
@@ -52,7 +52,7 @@ policy at that point in the hierarchy. Valid default policies include:
 - `deny`: deny all requests.
 
 As well as several other default policies—see the [Policy
-reference](../../reference/authorization-policy/) for more.
+reference](../reference/authorization-policy/) for more.
 
 Every cluster has a cluster-wide default policy (by default,
 `all-unauthenticated`), set at install time. Annotations that are present at the
@@ -78,7 +78,7 @@ Two policy CRDs represent authentication rules that must be satisfied as part of
 a policy rule:
 
 - `MeshTLSAuthentication`: authentication based on [secure workload
-  identities](../automatic-mtls/)
+  identities](automatic-mtls/)
 - `NetworkAuthentication`: authentication based on IP address
 
 And finally, two policy CRDs represent policy itself: the mapping of
@@ -97,7 +97,7 @@ access to that traffic is permitted (via `MeshTLSAuthentication` and
 `NetworkAuthentication`); and then define the policy that maps authentication to
 target (via an `AuthorizationPolicy`).
 
-See the [Policy reference](../../reference/authorization-policy/) for more
+See the [Policy reference](../reference/authorization-policy/) for more
 details on how these resources work.
 
 ## ServerAuthorization vs AuthorizationPolicy
@@ -131,5 +131,5 @@ result in an abrupt termination of those connections.
 
 ## Learning more
 
-- [Authorization policy reference](../../reference/authorization-policy/)
-- [Guide to configuring per-route policy](../../tasks/configuring-per-route-policy/)
+- [Authorization policy reference](../reference/authorization-policy/)
+- [Guide to configuring per-route policy](../tasks/configuring-per-route-policy/)

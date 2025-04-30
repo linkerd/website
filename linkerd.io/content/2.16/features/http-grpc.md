@@ -7,14 +7,14 @@ weight: 1
 
 Linkerd can proxy all TCP connections. For HTTP connections (including HTTP/1.0,
 HTTP/1.1, HTTP/2, and gRPC connections), it will automatically enable advanced
-L7 features including [request-level metrics](../telemetry/), [latency-aware
-load balancing](../load-balancing/), [retries](../retries-and-timeouts/), and
+L7 features including [request-level metrics](telemetry/), [latency-aware
+load balancing](load-balancing/), [retries](retries-and-timeouts/), and
 more.
 
-(See [TCP Proxying and Protocol Detection](../protocol-detection/) for details of
+(See [TCP Proxying and Protocol Detection](protocol-detection/) for details of
 how this detection happens automatically, and how it can sometimes fail.)
 
-Note that while Linkerd does [zero-config mutual TLS](../automatic-mtls/), it
+Note that while Linkerd does [zero-config mutual TLS](automatic-mtls/), it
 cannot decrypt TLS connections initiated by the outside world. For example, if
 you have a TLS connection from outside the cluster, or if your application does
 HTTP/2 plus TLS, Linkerd will treat these connections as raw TCP streams. To

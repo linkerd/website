@@ -84,17 +84,17 @@ types.
 
 To get started with the Gateway API types, you can:
 
-- [Configure fault injection](../../tasks/fault-injection/)
+- [Configure fault injection](../tasks/fault-injection/)
 - [Configure timeouts][timeouts]
 - [Configure dynamic request routing][dyn-routing]
 - [Configure per-route authorization policy][auth-policy]
 
-[HTTPRoute]: ../../reference/httproute/
-[GRPCRoute]: ../../reference/grpcroute/
+[HTTPRoute]: ../reference/httproute/
+[GRPCRoute]: ../reference/grpcroute/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/
-[Server]: ../../reference/authorization-policy/#server
-[auth-policy]: ../../tasks/configuring-per-route-policy/
-[dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../features/retries-and-timeouts/
-[ServiceProfiles]: ../../features/service-profiles/
+[Server]: ../reference/authorization-policy/#server
+[auth-policy]: ../tasks/configuring-per-route-policy/
+[dyn-routing]: ../tasks/configuring-dynamic-request-routing/
+[timeouts]: ../features/retries-and-timeouts/
+[ServiceProfiles]: ../features/service-profiles/

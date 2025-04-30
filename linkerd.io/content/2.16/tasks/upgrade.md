@@ -42,7 +42,7 @@ although we try to avoid that whenever possible.
 ### Edge releases
 
 For edge releases, Linkerd issues explicit [guidance about each
-release](../../../releases/#edge-release-guidance). Be sure to consult this
+release](../../releases/#edge-release-guidance). Be sure to consult this
 guidance before installing any release artifact.
 
 {{< note >}}
@@ -130,7 +130,7 @@ with `linkerd check --proxy`, to avoid unintentional version skew.
 
 Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes
-versions](../../reference/k8s-versions/).
+versions](../reference/k8s-versions/).
 
 ## Upgrading the CLI
 
@@ -186,7 +186,7 @@ linkerd prune | kubectl delete -f -
 ### Upgrading the control plane with Helm
 
 For Helm control plane installations, please follow the instructions at [Helm
-upgrade procedure](../install-helm/#helm-upgrade-procedure).
+upgrade procedure](install-helm/#helm-upgrade-procedure).
 
 ### Verifying the control plane upgrade
 
@@ -210,7 +210,7 @@ Which should display the latest versions for both client and server.
 
 ## Upgrading extensions
 
-[Linkerd's extensions](../extensions/) provide additional functionality to
+[Linkerd's extensions](extensions/) provide additional functionality to
 Linkerd in a modular way. Generally speaking, extensions are versioned
 separately from Linkerd releases and follow their own schedule; however, some
 extensions are updated alongside Linkerd releases and you may wish to update
@@ -513,7 +513,7 @@ chart](https://github.com/grafana/helm-charts/tree/main/charts/grafana) or the
 [Grafana Operator](https://github.com/grafana-operator/grafana-operator).
 Linkerd's Grafana dashboards have been published in
 <https://grafana.com/orgs/linkerd/dashboards>, and the new [Grafana
-docs](../grafana/) provide detailed instructions on how to load them.
+docs](grafana/) provide detailed instructions on how to load them.
 
 ### Upgrade notice: stable-2.11.0
 
@@ -559,7 +559,7 @@ ingress`), non-HTTP traffic to meshed pods is no longer supported. To get
 around this, you will need to use the `config.linkerd.io/skip-outbound-ports`
 annotation on your ingress controller pod. In many cases, ingress mode is no
 longer necessary. Before upgrading, it may be worth revisiting [how to use
-ingress](../using-ingress/) with Linkerd.
+ingress](using-ingress/) with Linkerd.
 
 Second, the proxy will no longer forward traffic to ports only bound on
 localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
@@ -608,15 +608,15 @@ before you can upgrade to Linkerd 2.10.
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
 through our [ports and protocols in 2.10 upgrade
-guide](../../features/protocol-detection/) for the repercussions.
+guide](../features/protocol-detection/) for the repercussions.
 
-Second, we've introduced [extensions](../extensions/) and moved the
+Second, we've introduced [extensions](extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what
 this means for you.
 
 #### Visualization components moved to Linkerd-Viz extension
 
-With the introduction of [extensions](../extensions/), all of the
+With the introduction of [extensions](extensions/), all of the
 Linkerd control plane components related to visibility (including Prometheus,
 Grafana, Web, and Tap) have been removed from the main Linkerd control plane
 and moved into the Linkerd-Viz extension. This means that when you upgrade to
