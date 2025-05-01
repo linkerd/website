@@ -14,7 +14,7 @@ consumption.
 
 {{< docs/production-note >}}
 
-One easy option is the [linkerd-viz](../../features/dashboard/) extension, which
+One easy option is the [linkerd-viz](../features/dashboard/) extension, which
 will create an on-cluster Prometheus instance as well as dashboards and CLI
 commands that make use of it. However, this extension only keeps metrics data
 for a brief window of time (6 hours) and does not persist data across restarts.
@@ -105,7 +105,7 @@ metrics from Linkerd's internal Prometheus instance.
 Once the metrics are in your Prometheus, Linkerd's proxy metrics will have the
 label `job="linkerd-proxy"` and Linkerd's control plane metrics will have the
 label `job="linkerd-controller"`. For more information on specific metric and
-label definitions, have a look at [Proxy Metrics](../../reference/proxy-metrics/).
+label definitions, have a look at [Proxy Metrics](../reference/proxy-metrics/).
 
 For more information on Prometheus' `/federate` endpoint, have a look at the
 [Prometheus federation docs](https://prometheus.io/docs/prometheus/latest/federation/).

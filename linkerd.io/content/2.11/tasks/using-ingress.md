@@ -14,7 +14,7 @@ Combining Linkerd and your ingress solution requires two things:
 
 Meshing your ingress pods will allow Linkerd to provide features like L7
 metrics and mTLS the moment the traffic is inside the cluster. (See
-[Adding your service](../adding-your-service/) for instructions on how to mesh
+[Adding your service](adding-your-service/) for instructions on how to mesh
 your ingress.)
 
 Note that some ingress options need to be meshed in "ingress" mode. See details

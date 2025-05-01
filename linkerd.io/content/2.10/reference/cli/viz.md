@@ -22,7 +22,7 @@ title: viz
 
 {{< docs/cli-description "viz dashboard" >}}
 
-Check out the [architecture](../../architecture/#dashboard) docs for a
+Check out the [architecture](../architecture/#dashboard) docs for a
 more thorough explanation of what this command does.
 
 {{< docs/cli-examples "viz dashboard" >}}
@@ -31,7 +31,7 @@ more thorough explanation of what this command does.
 
 (*) You'll need to tweak the dashboard's `enforced-host` parameter with this
 value, as explained in [the DNS-rebinding protection
-docs](../../../tasks/exposing-dashboard/#tweaking-host-requirement)
+docs](../../tasks/exposing-dashboard/#tweaking-host-requirement)
 
 ### edges
 
@@ -70,8 +70,8 @@ docs](../../../tasks/exposing-dashboard/#tweaking-host-requirement)
 The `routes` command displays per-route service metrics.  In order for
 this information to be available, a service profile must be defined for the
 service that is receiving the requests.  For more information about how to
-create a service profile, see [service profiles](../../../features/service-profiles/).
-and the [profile](../../cli/profile/) command reference.
+create a service profile, see [service profiles](../../features/service-profiles/).
+and the [profile](profile) command reference.
 
 ## Inbound Metrics
 
@@ -116,7 +116,7 @@ translate into more than one actual request. If the Linkerd proxy is not
 performing retries, effective requests and actual requests will always be equal.
 When enabling retries, you should expect to see the actual request rate
 increase and the effective success rate increase.  See the
-[retries and timeouts section](../../../features/retries-and-timeouts/) for more
+[retries and timeouts section](../../features/retries-and-timeouts/) for more
 information.
 
 Because retries are only performed on the *outbound* (client) side, the

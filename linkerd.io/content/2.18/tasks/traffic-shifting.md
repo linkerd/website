@@ -6,14 +6,14 @@ description: Dynamically split and shift traffic between backends
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
 implement A/B experiments, red/green deploys, canary rollouts, [fault
-injection](../fault-injection/), and more.
+injection](fault-injection/), and more.
 
 Traffic splitting is accomplished with [HTTPRoute] and [GRPCRoute] types.
 
 {{< note >}}
 Earlier versions of Linkerd provided a
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
-resource as part of the the [Linkerd SMI extension](../linkerd-smi/) for traffic
+resource as part of the the [Linkerd SMI extension](linkerd-smi/) for traffic
 splitting. This approach is still supported but will not recieve further feature
 development.
 {{< /note >}}
@@ -37,7 +37,7 @@ For load generation we'll use
 and for the backends we'll use [BB](https://github.com/BuoyantIO/bb).
 
 To add these components to your cluster and include them in the Linkerd
-[data plane](../../reference/architecture/#data-plane), run:
+[data plane](../reference/architecture/#data-plane), run:
 
 ```bash
 cat <<EOF | linkerd inject - | kubectl apply -f -
@@ -246,6 +246,6 @@ v1        1/1         -         -             -             -             -     
 v2        1/1   100.00%   10.0rps           1ms           1ms           2ms          1
 ```
 
-[HTTPRoute]: ../../reference/httproute/
-[GRPCRoute]: ../../reference/grpcroute/
-[Gateway API]: ../../features/gateway-api/
+[HTTPRoute]: ../reference/httproute/
+[GRPCRoute]: ../reference/grpcroute/
+[Gateway API]: ../features/gateway-api/

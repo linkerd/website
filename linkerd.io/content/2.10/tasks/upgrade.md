@@ -72,7 +72,7 @@ services will not go down.
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](../exporting-metrics/)
+[persistence documentation](exporting-metrics/)
 {{< /note >}}
 
 ### With Linkerd CLI
@@ -108,7 +108,7 @@ to ensure those configuration are retained by the `linkerd upgrade` command.
 ### With Helm
 
 For a Helm workflow, check out the instructions at
-[Helm upgrade procedure](../install-helm/#helm-upgrade-procedure).
+[Helm upgrade procedure](install-helm/#helm-upgrade-procedure).
 
 ### Verify the control plane upgrade
 
@@ -196,15 +196,15 @@ before you can upgrade to Linkerd 2.10.
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
 through our [ports and protocols in 2.10 upgrade
-guide](../../features/protocol-detection/) for the repercussions.
+guide](../features/protocol-detection/) for the repercussions.
 
-Second, we've introduced [extensions](../extensions/) and moved the
+Second, we've introduced [extensions](extensions/) and moved the
 default visualization components into a Linkerd-Viz extension. Read on for what
 this means for you.
 
 ### Visualization components moved to Linkerd-Viz extension
 
-With the introduction of [extensions](../extensions/), all of the
+With the introduction of [extensions](extensions/), all of the
 Linkerd control plane components related to visibility (including Prometheus,
 Grafana, Web, and Tap) have been removed from the main Linkerd control plane
 and moved into the Linkerd-Viz extension. This means that when you upgrade to
@@ -303,11 +303,11 @@ Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
 components for the first time with Linkerd 2.9 can ignore these instructions and
 instead refer directly to the [installing
-multicluster instructions](../installing-multicluster/).
+multicluster instructions](installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](../upgrade-multicluster/).
+instructions](upgrade-multicluster/).
 
 ### Ingress behavior changes
 
@@ -322,7 +322,7 @@ not applied.
 
 If you want to revert to the previous behavior, inject the proxy into the
 ingress controller using the annotation `linkerd.io/inject: ingress`, as
-explained in [using ingress](../using-ingress/)
+explained in [using ingress](using-ingress/)
 
 ### Breaking changes in Helm charts
 
@@ -393,7 +393,7 @@ X.509v3 Root CA Certificate (ECDSA P-256) [Serial: 1]
 
 If you determine that you wish to rotate your certificates you can follow
 the process outlined in
-[Rotating your identity certificates](../manually-rotating-control-plane-tls-credentials/).
+[Rotating your identity certificates](manually-rotating-control-plane-tls-credentials/).
 Note that this process uses functionality available in stable-2.7.0. So before
 you start your cert rotation, make sure to upgrade.
 
@@ -405,7 +405,7 @@ When ready, you can begin the upgrade process by
 As part of an effort to follow Helm's best practices the Linkerd Helm
 chart has been restructured. As a result most of the keys have been changed.
 In order to ensure trouble-free upgrade of your Helm installation, please take
-a look at [Helm upgrade procedure](../install-helm/). To get a precise
+a look at [Helm upgrade procedure](install-helm/). To get a precise
 view of what has changed you can compare that
 [stable-2.6.0](https://github.com/linkerd/linkerd2/blob/stable-2.6.0/charts/linkerd2/values.yaml)
 and [stable-2.7.0](https://github.com/linkerd/linkerd2/blob/stable-2.7.0/charts/linkerd2/values.yaml)
@@ -442,7 +442,7 @@ When ready, you can begin the upgrade process by
 This release supports Kubernetes 1.12+.
 
 {{< note >}}
-Linkerd 2.5.0 introduced [Helm support](../install-helm/). If Linkerd was
+Linkerd 2.5.0 introduced [Helm support](install-helm/). If Linkerd was
 installed via `linkerd install`, it must be upgraded via `linkerd upgrade`. If
 Linkerd was installed via Helm, it must be upgraded via Helm. Mixing these two
 installation procedures is not supported.
@@ -642,7 +642,7 @@ Follow instructions for
 #### Upgrading a multi-stage install
 
 `edge-19.4.5` introduced a
-[Multi-stage install](../install/#multi-stage-install) feature. If you
+[Multi-stage install](install/#multi-stage-install) feature. If you
 previously installed Linkerd via a multi-stage install process, you can upgrade
 each stage, analogous to the original multi-stage installation process.
 
@@ -739,14 +739,14 @@ Follow instructions for
 ## Upgrade notice: stable-2.2.0
 
 There are two breaking changes in `stable-2.2.0`. One relates to
-[Service Profiles](../../features/service-profiles/), the other relates to
-[Automatic Proxy Injection](../../features/proxy-injection/). If you are not using
+[Service Profiles](../features/service-profiles/), the other relates to
+[Automatic Proxy Injection](../features/proxy-injection/). If you are not using
 either of these features, you may [skip directly](#step-by-step-instructions-stable-22x)
 to the full upgrade instructions.
 
 ### Service Profile namespace location
 
-[Service Profiles](../../features/service-profiles/), previously defined in the
+[Service Profiles](../features/service-profiles/), previously defined in the
 control plane namespace in `stable-2.1.0`, are now defined in their respective
 client and server namespaces. Service Profiles defined in the client namespace
 take priority over ones defined in the server namespace.
@@ -758,7 +758,7 @@ opt-in.
 
 To enable automation proxy injection for a namespace, you must enable the
 `linkerd.io/inject` annotation on either the namespace or the pod spec. For more
-details, see the [Automatic Proxy Injection](../../features/proxy-injection/) doc.
+details, see the [Automatic Proxy Injection](../features/proxy-injection/) doc.
 
 #### A note about application updates
 
@@ -888,7 +888,7 @@ Server version: {{< latest-stable-version >}}
 {{< note >}}
 You will lose the historical data from Prometheus. If you would like to have
 that data persisted through an upgrade, take a look at the
-[persistence documentation](../exporting-metrics/)
+[persistence documentation](exporting-metrics/)
 {{< /note >}}
 
 ### Upgrade the 2.2.x data plane

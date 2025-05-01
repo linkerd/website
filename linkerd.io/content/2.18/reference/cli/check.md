@@ -4,7 +4,7 @@ title: check
 
 {{< docs/cli-description "check" >}}
 
-Take a look at the [troubleshooting](../../../tasks/troubleshooting/) documentation
+Take a look at the [troubleshooting](../../tasks/troubleshooting/) documentation
 for a full list of all the possible checks, what they do and how to fix them.
 
 {{< docs/cli-examples "check" >}}

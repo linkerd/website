@@ -46,7 +46,7 @@ Authority](https://en.wikipedia.org/wiki/Certificate_authority) that accepts
 [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request) from proxies
 and returns signed certificates. These certificates are issued at proxy
 initialization time and are used for proxy-to-proxy connections to implement
-[mTLS](../../features/automatic-mtls/).
+[mTLS](../features/automatic-mtls/).
 
 ### Proxy Injector
 
@@ -60,7 +60,7 @@ injector mutates the pod's specification and adds the `proxy-init` and
 ### Service Profile Validator (sp-validator)
 
 The validator is a Kubernetes [admission controller][admission-controller],
-which validates new [service profiles](../service-profiles/) before they are
+which validates new [service profiles](service-profiles/) before they are
 saved.
 
 [admission-controller]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
@@ -130,5 +130,5 @@ There are two main rules that `iptables` uses:
 By default, most ports are forwarded through the proxy. This is not always
 desirable and it is possible to have specific ports skip the proxy entirely for
 both incoming and outgoing traffic. See the [protocol
-detection](../../features/protocol-detection/) documentation.
+detection](../features/protocol-detection/) documentation.
 {{< /note >}}

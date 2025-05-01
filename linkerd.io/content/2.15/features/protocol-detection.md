@@ -15,7 +15,7 @@ HTTP/2, Linkerd automatically provides HTTP-level metrics and routing.
 
 If Linkerd *cannot* determine that a connection is using HTTP or HTTP/2,
 Linkerd will proxy the connection as a plain TCP connection, applying
-[mTLS](../automatic-mtls/) and providing byte-level metrics as usual.
+[mTLS](automatic-mtls/) and providing byte-level metrics as usual.
 
 (Note that HTTPS calls to or from meshed pods are treated as TCP, not as HTTP.
 Because the client initiates the TLS connection, Linkerd is not be able to
@@ -86,7 +86,7 @@ This annotation can be set in a variety of ways:
 1. On the workload itself, e.g. on the Deployment's Pod spec receiving the traffic.
 1. On the Service receiving the traffic.
 1. On a namespace (in which it will apply to all workloads in the namespace).
-1. In an [authorization policy](../server-policy/) `Server` object's
+1. In an [authorization policy](server-policy/) `Server` object's
    `proxyProtocol` field, in which case it will apply to all pods targeted by that
    `Server`.
 
@@ -115,7 +115,7 @@ This annotation should be set on the source of the traffic.
 ## Setting the enable-external-profiles annotation
 
 The `config.linkerd.io/enable-external-profiles` annotation configures Linkerd
-to look for [`ServiceProfiles`](../service-profiles/) for off-cluster
+to look for [`ServiceProfiles`](service-profiles/) for off-cluster
 connections. It *also* instructs Linkerd to respect the default set of opaque
 ports for this connection.
 

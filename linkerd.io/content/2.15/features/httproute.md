@@ -17,7 +17,7 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
 resource definition. See [the HTTPRoute reference
-documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
 {{< /note >}}
 
@@ -43,7 +43,7 @@ proxies:
   authentication policies][auth-policy].
 
 {{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
+**Outbound HTTPRoutes and [ServiceProfiles](service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
@@ -56,19 +56,19 @@ exists.
 
 To get started with HTTPRoutes, you can:
 
-- [Configure fault injection](../../tasks/fault-injection/) using an outbound
+- [Configure fault injection](../tasks/fault-injection/) using an outbound
   HTTPRoute.
 - [Configure timeouts][timeouts] using an outbound HTTPRoute.
 - [Configure dynamic request routing][dyn-routing] using an outbound HTTPRoute.
 - [Configure per-route authorization policy][auth-policy] using an inbound
   HTTPRoute.
-- See the [reference documentation](../../reference/httproute/) for a complete
+- See the [reference documentation](../reference/httproute/) for a complete
   description of the HTTPRoute resource.
 
 [HTTPRoute resource]: https://gateway-api.sigs.k8s.io/api-types/httproute/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/
-[Server]: ../../reference/authorization-policy/#server
-[auth-policy]: ../../tasks/configuring-per-route-policy/
-[dyn-routing]:../../tasks/configuring-dynamic-request-routing/
-[timeouts]: ../../tasks/configuring-timeouts/#using-httproutes
+[Server]: ../reference/authorization-policy/#server
+[auth-policy]: ../tasks/configuring-per-route-policy/
+[dyn-routing]: ../tasks/configuring-dynamic-request-routing/
+[timeouts]: ../tasks/configuring-timeouts/#using-httproutes

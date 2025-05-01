@@ -32,5 +32,5 @@ account the success rate and latency of old and new versions. See the
 
 Check out some examples of what you can do with traffic splitting:
 
-- [Canary Releases](../../tasks/canary-release/)
-- [Fault Injection](../../tasks/fault-injection/)
+- [Canary Releases](../tasks/canary-release/)
+- [Fault Injection](../tasks/fault-injection/)

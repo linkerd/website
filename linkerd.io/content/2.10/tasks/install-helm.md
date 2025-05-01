@@ -14,7 +14,7 @@ The identity component of Linkerd requires setting up a trust anchor
 certificate, and an issuer certificate with its key. These must use the ECDSA
 P-256 algorithm and need to be provided to Helm by the user (unlike when using
 the `linkerd install` CLI which can generate these automatically). You can
-provide your own, or follow [these instructions](../generate-certificates/)
+provide your own, or follow [these instructions](generate-certificates/)
 to generate new ones.
 
 ## Adding Linkerd's Helm repository

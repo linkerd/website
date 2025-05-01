@@ -5,7 +5,7 @@ description: Configure Linkerd to automatically fail requests that take too long
 
 To limit how long Linkerd will wait before failing an outgoing request to
 another service, you can configure timeouts. These work by adding a little bit
-of extra information to the [service profile](../../features/service-profiles/) for
+of extra information to the [service profile](../features/service-profiles/) for
 the service you're sending requests to.
 
 Each route may define a timeout which specifies the maximum amount of time to
@@ -23,14 +23,14 @@ spec:
     timeout: 300ms
 ```
 
-Check out the [timeouts section](../books/#timeouts) of the books demo for
+Check out the [timeouts section](books/#timeouts) of the books demo for
 a tutorial of how to configure timeouts.
 
 ## Monitoring Timeouts
 
 Requests which reach the timeout will be canceled, return a 504 Gateway Timeout
 response, and count as a failure for the purposes of [effective success
-rate](../configuring-retries/#monitoring-retries).  Since the request was
+rate](configuring-retries/#monitoring-retries).  Since the request was
 canceled before any actual response was received, a timeout will not count
 towards the actual request volume at all.  This means that effective request
 rate can be higher than actual request rate when timeouts are configured.

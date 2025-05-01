@@ -4,12 +4,12 @@ description: Configure per-route metrics for your application.
 ---
 
 To get per-route metrics, you must first create a
-[service profile](../../features/service-profiles/). Once a service
+[service profile](../features/service-profiles/). Once a service
 profile has been created, Linkerd will add labels to the Prometheus metrics that
 associate a specific request to a specific route.
 
 For a tutorial that shows this functionality off, check out the
-[books demo](../books/#service-profiles).
+[books demo](books/#service-profiles).
 
 {{< note >}}
 Routes configured in service profiles are different from [HTTPRoute] resources.
@@ -93,11 +93,11 @@ This will select only the requests observed and show the `:authority` and
 - Linkerd discovers the right service profile to use via `:authority` or
   `Host` headers. The name of your service profile must match these headers.
   There are many reasons why these would not match, see
-  [ingress](../../features/ingress/) for one reason. Another would be clients that
+  [ingress](../features/ingress/) for one reason. Another would be clients that
   use IPs directly such as Prometheus.
 - Getting regexes to match can be tough and the ordering is important. Pay
   attention to `rt_route`. If it is missing entirely, compare the `:path` to
   the regex you'd like for it to match, and use a
   [tester](https://regex101.com/) with the Golang flavor of regex.
 
-[HTTPRoute]: ../../features/httproute/
+[HTTPRoute]: ../features/httproute/

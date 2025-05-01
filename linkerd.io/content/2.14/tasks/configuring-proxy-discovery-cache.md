@@ -26,7 +26,7 @@ workloads.
 
 ## Configuring via Helm
 
-When installing/upgrading Linkerd via [Helm](../install-helm/), you can use the
+When installing/upgrading Linkerd via [Helm](install-helm/), you can use the
 `proxy.outboundDiscoveryCacheUnusedTimeout` and
 `proxy.inboundDiscoveryCacheUnusedTimeout` values. For example:
 

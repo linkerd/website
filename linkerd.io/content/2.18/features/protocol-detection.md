@@ -14,7 +14,7 @@ Linkerd performs *protocol detection* to determine whether traffic is HTTP
 will automatically provide HTTP-level metrics and routing. If Linkerd *cannot*
 determine that a connection is using HTTP, Linkerd will proxy the connection as
 a plain TCP connection without HTTP metrics and routing. (In both cases,
-non-HTTP features such as [mutual TLS](../automatic-mtls/) and byte-level
+non-HTTP features such as [mutual TLS](automatic-mtls/) and byte-level
 metrics are still applied.)
 
 Protocol detection can only happen if the HTTP traffic is unencrypted from the
@@ -128,7 +128,7 @@ When connecting to a destination outside of the cluster, Linkerd will look for
 a matching `EgressNetwork` resource. To skip protocol detection and mark this
 connection as opaque TCP, you must set the `config.linkerd.io/opaque-ports`
 annotation on the matching `EgressNetwork` resource. For more information,
-see [managing egress traffic](../../tasks/managing-egress-traffic/).
+see [managing egress traffic](../tasks/managing-egress-traffic/).
 
 ## Marking ports as skip ports
 

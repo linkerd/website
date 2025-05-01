@@ -31,8 +31,8 @@ to.
 
 These can be setup by following the guides:
 
-- [Configuring Retries](../../tasks/configuring-retries/)
-- [Configuring Timeouts](../../tasks/configuring-timeouts/)
+- [Configuring Retries](../tasks/configuring-retries/)
+- [Configuring Timeouts](../tasks/configuring-timeouts/)
 
 ## How Retries Can Go Wrong
 
@@ -78,5 +78,5 @@ not adding too much extra load to the system. Retry budgets make that trade-off
 explicit by letting you specify exactly how much extra load your system is
 willing to accept from retries.
 
-[ServiceProfile]: ../service-profiles/
-[HTTPRoute]: ../httproute/
+[ServiceProfile]: service-profiles/
+[HTTPRoute]: httproute/

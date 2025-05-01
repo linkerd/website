@@ -37,7 +37,7 @@ _Emphasis_, aka _italics_, with asterisks or underscores.
 
 ---
 
-![Alt text](../image.png "This is a caption.")
+![Alt text](image.png "This is a caption.")
 
 ## Lists
 

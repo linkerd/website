@@ -24,7 +24,7 @@ all retry configuration annotations on the parent Service.
 
 {{< warning >}}
 Retries configured in this way are **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../../features/service-profiles/) is defined for a Service,
+[ServiceProfile](../features/service-profiles/) is defined for a Service,
 proxies will use the ServiceProfile retry configuration and ignore any retry
 annotations.
 {{< /warning >}}

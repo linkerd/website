@@ -8,7 +8,7 @@ explanation of what you get and how it is done, we've assembled a [list of
 myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
 
 This guide will walk you through configuring and enabling tracing for
-[emojivoto](../../getting-started/#step-5-install-the-demo-app). Jump to the end
+[emojivoto](../getting-started/#step-5-install-the-demo-app). Jump to the end
 for some recommendations on the best way to make use of distributed tracing with
 Linkerd.
 
@@ -26,7 +26,7 @@ topology that looks like:
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](../install/) if you haven't
+  Follow the [Installing Linkerd Guide](install/) if you haven't
   already done this.
 
 ## Install the Linkerd-Jaeger extension

@@ -35,7 +35,7 @@ updates to services and applies those updates locally on the source cluster.
 These mirrored services are suffixed with the name of the remote cluster, e.g.
 the *Foo* service on the *west* cluster would be mirrored as *Foo-west* on the
 local cluster. This approach is typically combined with [traffic
-splitting](../traffic-split/) or [dynamic request routing](../request-routing/)
+splitting](traffic-split/) or [dynamic request routing](request-routing/)
 to allow local services to access the *Foo* service as if it were on the local
 cluster.
 
@@ -69,8 +69,8 @@ Hierarchical (gateway-based) and flat (direct pod-to-pod) modes can be combined,
 and pod-to-pod mode can be enabled for specific services by using the
 `remote-discovery` value for the label selector used to export services to other
 clusters. See the [pod-to-pod multicluster
-communication](../../tasks/pod-to-pod-multicluster/) guide and the
-[multi-cluster reference](../../reference/multicluster/) for more.
+communication](../tasks/pod-to-pod-multicluster/) guide and the
+[multi-cluster reference](../reference/multicluster/) for more.
 
 ## Headless services
 
@@ -111,13 +111,13 @@ Deployment would not be supported, since they do not allow for arbitrary
 hostnames in the pod spec).
 
 Ready to get started? See the [getting started with multi-cluster
-guide](../../tasks/multicluster/) for a walkthrough.
+guide](../tasks/multicluster/) for a walkthrough.
 
 ## Further reading
 
-* [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
-* [Pod-to-pod multicluster communication](../../tasks/pod-to-pod-multicluster/)
-* [Multi-cluster communication with StatefulSets](../../tasks/multicluster-using-statefulsets/).
+* [Multi-cluster installation instructions](../tasks/installing-multicluster/).
+* [Pod-to-pod multicluster communication](../tasks/pod-to-pod-multicluster/)
+* [Multi-cluster communication with StatefulSets](../tasks/multicluster-using-statefulsets/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster

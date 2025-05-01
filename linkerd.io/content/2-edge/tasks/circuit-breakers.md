@@ -10,7 +10,7 @@ instead routing that request to other replicas in the Service.
 In this tutoral, we'll see how to enable circuit breaking on a Service to
 improve client success rate when a backend replica is unhealthy.
 
-See the [reference documentation](../../reference/circuit-breaking/) for more
+See the [reference documentation](../reference/circuit-breaking/) for more
 details on how Linkerd implements circuit breaking.
 
 {{< docs/production-note >}}
@@ -20,7 +20,7 @@ details on how Linkerd implements circuit breaking.
 To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
-  [Installing Linkerd Guide](../install/).
+  [Installing Linkerd Guide](install/).
 
 ## Set up the demo
 
@@ -35,7 +35,7 @@ For load generation we'll use
 and for the backend pods we'll use [BB](https://github.com/BuoyantIO/bb).
 
 To add these components to your cluster and include them in the Linkerd
-[data plane](../../reference/architecture/#data-plane), run:
+[data plane](../reference/architecture/#data-plane), run:
 
 ```bash
 cat <<EOF | linkerd inject - | kubectl apply -f -
@@ -165,12 +165,12 @@ traffic to the `bad` pod.
 ## Breaking the circuit
 
 Linkerd supports a type of circuit breaking called [_consecutive failure
-accrual_](../../reference/circuit-breaking/#consecutive-failures).
+accrual_](../reference/circuit-breaking/#consecutive-failures).
 This works by tracking consecutive failures from each endpoint in Linkerd's
 internal load balancer. If there are ever too many failures in a row, that
 endpoint is temporarily ignored and Linkerd will only load balance among the
 remaining endpoints. After a [backoff
-period](../../reference/circuit-breaking/#probation-and-backoffs), the endpoint
+period](../reference/circuit-breaking/#probation-and-backoffs), the endpoint
 is re-introduced so that we can determine if it has become healthy.
 
 Let's enable consecutive failure accrual on the `bb` Service by adding an
@@ -182,7 +182,7 @@ kubectl annotate -n circuit-breaking-demo svc/bb balancer.linkerd.io/failure-acc
 
 {{< warning >}}
 Circuit breaking is **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../../features/service-profiles/) is defined for the annotated
+[ServiceProfile](../features/service-profiles/) is defined for the annotated
 Service, proxies will not perform circuit breaking as long as the ServiceProfile
 exists.
 {{< /warning >}}
@@ -275,5 +275,5 @@ parameters has a default, but can be manually configured using annotations:
     at the same time, leading to spiky traffic patterns.
 
 See the [reference
-documentation](../../reference/circuit-breaking/#configuring-failure-accrual)
+documentation](../reference/circuit-breaking/#configuring-failure-accrual)
 for details on failure accrual configuration.

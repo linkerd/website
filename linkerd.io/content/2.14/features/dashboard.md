@@ -51,13 +51,13 @@ line.
 In earlier versions of Linkerd, the viz extension also pre-installed a Grafana
 dashboard. As of Linkerd 2.12, due to licensing changes in Grafana, this is no
 longer the case. However, you can still install Grafana on your own—see the
-[Grafana docs](../../tasks/grafana/) for instructions on how to create the
+[Grafana docs](../tasks/grafana/) for instructions on how to create the
 Grafana dashboards.
 
 ## Examples
 
 In these examples, we assume you've installed the emojivoto example application.
-Please refer to the [Getting Started Guide](../../getting-started/) for how to
+Please refer to the [Getting Started Guide](../getting-started/) for how to
 do this.
 
 You can use your dashboard extension and see all the services in the demo app.
@@ -101,5 +101,5 @@ to use your browser instead:
 
 ## Futher reading
 
-See [Exporting metrics](../../tasks/exporting-metrics/) for alternative ways
+See [Exporting metrics](../tasks/exporting-metrics/) for alternative ways
 to consume Linkerd's metrics.

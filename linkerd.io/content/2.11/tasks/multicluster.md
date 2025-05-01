@@ -6,7 +6,7 @@ description: Allow Linkerd to manage cross-cluster communication.
 This guide will walk you through installing and configuring Linkerd so that two
 clusters can talk to services hosted on both. There are a lot of moving parts
 and concepts here, so it is valuable to read through our
-[introduction](../../features/multicluster/) that explains how this works beneath
+[introduction](../features/multicluster/) that explains how this works beneath
 the hood. By the end of this guide, you will understand how to split traffic
 between services that live on different clusters.
 
@@ -54,7 +54,7 @@ At a high level, you will:
 ![install](/docs/images/multicluster/install.svg "Two Clusters")
 
 Linkerd requires a shared
-[trust anchor](../generate-certificates/#trust-anchor-certificate)
+[trust anchor](generate-certificates/#trust-anchor-certificate)
 to exist between the installations in all clusters that communicate with each
 other. This is used to encrypt the traffic between clusters and authorize
 requests that reach the gateway so that your cluster is not open to the public
@@ -77,11 +77,11 @@ certificates that it receives from peers as part of the mTLS handshake. With a
 common base of trust, we now need to generate a certificate that can be used in
 each cluster to issue certificates to the proxies. If you'd like to get a deeper
 picture into how this all works, check out the
-[deep dive](../../features/automatic-mtls/#how-does-it-work).
+[deep dive](../features/automatic-mtls/#how-does-it-work).
 
 The trust anchor that we've generated is a self-signed certificate which can be
 used to create new certificates (a certificate authority). To generate the
-[issuer credentials](../generate-certificates/#issuer-certificate-and-key)
+[issuer credentials](generate-certificates/#issuer-certificate-and-key)
 using the trust anchor, run:
 
 ```bash
@@ -94,7 +94,7 @@ An `identity` service in your cluster will use the certificate and key that you
 generated here to generate the certificates that each individual proxy uses.
 While we will be using the same issuer credentials on each cluster for this
 guide, it is a good idea to have separate ones for each cluster. Read through
-the [certificate documentation](../generate-certificates/) for more
+the [certificate documentation](generate-certificates/) for more
 details.
 
 With a valid trust anchor and issuer credentials, we can install Linkerd on your
@@ -367,10 +367,10 @@ can get to it by running `linkerd --context=west viz dashboard` and going to
 ## Security
 
 By default, requests will be going across the public internet. Linkerd extends
-its [automatic mTLS](../../features/automatic-mtls/) across clusters to make sure
+its [automatic mTLS](../features/automatic-mtls/) across clusters to make sure
 that the communication going across the public internet is encrypted. If you'd
 like to have a deep dive on how to validate this, check out the
-[docs](../validating-your-traffic/). To quickly check, however, you can run:
+[docs](validating-your-traffic/). To quickly check, however, you can run:
 
 ```bash
 linkerd --context=west -n test viz tap deploy/frontend | \
@@ -405,7 +405,7 @@ able to explicitly address them, however that only covers one use case for
 operating multiple clusters. Another scenario for multicluster is failover. In a
 failover scenario, you don't have time to update the configuration. Instead, you
 need to be able to leave the application alone and just change the routing. If
-this sounds a lot like how we do [canary](../canary-release/) deployments,
+this sounds a lot like how we do [canary](canary-release/) deployments,
 you'd be correct!
 
 `TrafficSplit` allows us to define weights between multiple services and split

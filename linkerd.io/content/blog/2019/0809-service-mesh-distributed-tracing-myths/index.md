@@ -93,7 +93,7 @@ at the service mesh level actually gets you is:
 
 1. Proxy timing and data in your traces. This can be helpful for understanding
    how much latency for particular requests is coming from the proxy. (Happily,
-   [Linkerd is very, very fast]({{< relref "0518-linkerd-benchmarks" >}}), but
+   [Linkerd is very, very fast](0518-linkerd-benchmarks), but
    nothing is free.)
 2. Traces that extend to ingress points. This can be helpful for painting a
    more complete picture of how time is spent on particular requests.

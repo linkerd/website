@@ -10,13 +10,13 @@ a secret containing TLS credentials.  These certificates are different from the
 ones that the Linkerd proxies use to secure pod-to-pod communication and use a
 completely separate trust chain.  For more information on rotating the TLS
 credentials used by the Linkerd proxies, see
-[Automatically Rotating Control Plane TLS Credentials](../automatically-rotating-control-plane-tls-credentials/).
+[Automatically Rotating Control Plane TLS Credentials](automatically-rotating-control-plane-tls-credentials/).
 
 By default, when Linkerd is installed
 with the Linkerd CLI or with the Linkerd Helm chart, TLS credentials are
 automatically generated for all of the webhooks.  If these certificates expire
 or need to be regenerated for any reason, performing a
-[Linkerd upgrade](../upgrade/) (using the Linkerd CLI or using Helm) will
+[Linkerd upgrade](upgrade/) (using the Linkerd CLI or using Helm) will
 regenerate them.
 
 This workflow is suitable for most users.  However, if you need these webhook
@@ -332,9 +332,9 @@ helm install linkerd-jaeger \
 {{< note >}}
 When installing the `linkerd-control-plane` chart, you _must_ provide the
 issuer trust root and issuer credentials as described in [Installing Linkerd
-with Helm](../install-helm/).
+with Helm](install-helm/).
 {{< /note >}}
 
 See [Automatically Rotating Control Plane TLS
-Credentials](../automatically-rotating-control-plane-tls-credentials/)
+Credentials](automatically-rotating-control-plane-tls-credentials/)
 for details on how to do something similar for control plane credentials.

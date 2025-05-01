@@ -9,7 +9,7 @@ that resource. These rules can be based on parameters such as path, method,
 headers, or other aspects of the HTTP request.
 
 HTTPRoutes are used to configure various aspects of Linkerd's behavior, and form
-part of [Linkerd's support for the Gateway API](../../features/gateway-api/).
+part of [Linkerd's support for the Gateway API](../features/gateway-api/).
 
 {{< note >}}
 The HTTPRoute resource is part of the Gateway API and is not Linkerd-specific.
@@ -36,7 +36,7 @@ adding request headers, modifying a request's path, and reliability features
 such as [timeouts].
 
 {{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfiles](../service-profiles/) provide
+**Outbound HTTPRoutes and [ServiceProfiles](service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
@@ -74,13 +74,13 @@ An HTTPRoute spec may contain the following top level fields:
 A reference to the parent resource this HTTPRoute is a part of.
 
 HTTPRoutes can be attached to a [Server] to allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes
+policy](authorization-policy/#authorizationpolicy) for specific routes
 served on that Server.
 
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
-request routing](../../tasks/configuring-dynamic-request-routing/).
+request routing](../tasks/configuring-dynamic-request-routing/).
 
 ParentReferences are namespaced, and may reference either a parent in the same
 namespace as the HTTPRoute, or one in a different namespace. As described in
@@ -330,8 +330,8 @@ spec:
         port: 80
 ```
 
-[ServiceProfile]: ../../features/service-profiles/
+[ServiceProfile]: ../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
-[Server]: ../authorization-policy/#server
+[Server]: authorization-policy/#server
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/

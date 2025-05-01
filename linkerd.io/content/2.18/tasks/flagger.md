@@ -4,13 +4,13 @@ description: Reduce deployment risk by automating canary releases based on servi
   metrics.
 ---
 
-Linkerd's [dynamic request routing](../../features/request-routing/) allows you
+Linkerd's [dynamic request routing](../features/request-routing/) allows you
 to dynamically shift traffic between services. This can be used to implement
 lower-risk  deployment strategies like blue-green deploys and canaries.
 
 But simply shifting traffic from one version of a service to the next is just
 the beginning. We can combine traffic splitting with [Linkerd's automatic
-*golden metrics* telemetry](../../features/telemetry/) and drive traffic
+*golden metrics* telemetry](../features/telemetry/) and drive traffic
 decisions based on the observed metrics. For example, we can gradually shift
 traffic from an old deployment to a new one while continually monitoring its
 success rate. If at any point the success rate drops, we can shift traffic back
@@ -30,7 +30,7 @@ fully-automated, metrics-aware canary deployments.
 To use this guide, you'll need a Kubernetes cluster running:
 
 - Linkerd and Linkerd-Viz. If you haven't installed these yet, follow the
-  [Installing Linkerd Guide](../install/).
+  [Installing Linkerd Guide](install/).
 
 ## Flagger
 
@@ -73,7 +73,7 @@ Together, these components have a topology that looks like:
 {.center}
 
 To add these components to your cluster and include them in the Linkerd
-[data plane](../../reference/architecture/#data-plane), run:
+[data plane](../reference/architecture/#data-plane), run:
 
 ```bash
 kubectl create ns test && \

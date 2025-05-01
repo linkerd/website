@@ -3,7 +3,7 @@ title: Service Profiles
 description: Details on the specification and what is possible with service profiles.
 ---
 
-[Service profiles](../../features/service-profiles/) provide Linkerd additional
+[Service profiles](../features/service-profiles/) provide Linkerd additional
 information about a service. This is a reference for everything that can be done
 with service profiles.
 

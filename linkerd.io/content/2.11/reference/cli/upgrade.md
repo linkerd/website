@@ -11,7 +11,7 @@ title: upgrade
 ## Subcommands
 
 Upgrade supports subcommands as part of the
-[Multi-stage install](../../../tasks/install/#multi-stage-install) feature.
+[Multi-stage install](../../tasks/install/#multi-stage-install) feature.
 
 ### config
 

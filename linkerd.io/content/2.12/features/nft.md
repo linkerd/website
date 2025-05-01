@@ -5,10 +5,10 @@ description: Linkerd's init container can run in two separate modes, nft or lega
 
 To transparently route TCP traffic through the proxy, without any awareness
 from the application, Linkerd will configure a set of [firewall
-rules](../../reference/iptables/) in each injected pod. Configuration can be
+rules](../reference/iptables/) in each injected pod. Configuration can be
 done either through an [init
-container](../../reference/architecture/#linkerd-init-container) or through a
-[CNI plugin](../cni/)
+container](../reference/architecture/#linkerd-init-container) or through a
+[CNI plugin](cni/)
 
 Linkerd's init container can be run in two separate modes: `legacy` or `nft`.
 The difference between the two modes is what variant of `iptables` they will use

@@ -42,18 +42,18 @@ An HTTPRoute spec may contain the following top level fields:
 
 A reference to the parent resource this HTTPRoute is a part of.
 
-HTTPRoutes can be attached to a [Server](../authorization-policy/#server) to
+HTTPRoutes can be attached to a [Server](authorization-policy/#server) to
 allow defining an [authorization
-policy](../authorization-policy/#authorizationpolicy) for specific routes served
+policy](authorization-policy/#authorizationpolicy) for specific routes served
 on that Server.
 
 HTTPRoutes can also be attached to a Service, in order to route requests
 depending on path, headers, query params, and/or verb. Requests can then be
 rerouted to different backend services. This can be used to perform [dynamic
-request routing](../../tasks/configuring-dynamic-request-routing/).
+request routing](../tasks/configuring-dynamic-request-routing/).
 
 {{< warning >}}
-**Outbound HTTPRoutes and [ServiceProfile](../../features/service-profiles/)s
+**Outbound HTTPRoutes and [ServiceProfile](../features/service-profiles/)s
 provide overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
@@ -309,7 +309,7 @@ spec:
         port: 80
 ```
 
-[ServiceProfile]: ../../features/service-profiles/
+[ServiceProfile]: ../features/service-profiles/
 [Gateway API]: https://gateway-api.sigs.k8s.io/
 [ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
 [GEP-1426]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries

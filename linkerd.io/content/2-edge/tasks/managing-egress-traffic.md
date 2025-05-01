@@ -2,18 +2,18 @@
 title: Managing egress traffic
 ---
 
-In this guide, we'll walk you through an example of [egress traffic
-management]({{< relref "../features/egress" >}}): visualizing, applying
-policies and implementing advanced routing configuration for traffic that is
-targeted to destinations that reside outside of the cluster.
+In this guide, we'll walk you through an example of
+[egress traffic management](../features/egress): visualizing, applying policies
+and implementing advanced routing configuration for traffic that is targeted to
+destinations that reside outside of the cluster.
 
 {{< warning >}}
 
-No service mesh can provide a strong security guarantee about egress traffic
-by itself; for example, a malicious actor could bypass the Linkerd sidecar -
-and thus Linkerd's egress controls - entirely. Fully restricting egress
-traffic in the presence of arbitrary applications thus typically requires a
-more comprehensive approach.
+No service mesh can provide a strong security guarantee about egress traffic by
+itself; for example, a malicious actor could bypass the Linkerd sidecar - and
+thus Linkerd's egress controls - entirely. Fully restricting egress traffic in
+the presence of arbitrary applications thus typically requires a more
+comprehensive approach.
 
 {{< /warning >}}
 
@@ -38,9 +38,9 @@ spec:
 EOF
 ```
 
-This is enough to visualize egress traffic going through the system. In order
-to do so, you can deploy a simple curl container and start hitting an external
-to the cluster service:
+This is enough to visualize egress traffic going through the system. In order to
+do so, you can deploy a simple curl container and start hitting an external to
+the cluster service:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -101,13 +101,13 @@ them like in the example above.
 
 {{< /note >}}
 
-Notice that these raw metrics allow you to quickly identify egress traffic targeted
-towards different destinations simply by querying for `parent_kind` of type
-`EgressNetwork`. For now all traffic is allowed and we are simply observing it.
-We can also observe that because our `EgressNetwork` default traffic policy is
-set to `Allow`, the default http route is named as `http-egress-allow`.
-This is a placeholder route that is being populated automatically by the
-Linkerd controller.
+Notice that these raw metrics allow you to quickly identify egress traffic
+targeted towards different destinations simply by querying for `parent_kind` of
+type `EgressNetwork`. For now all traffic is allowed and we are simply observing
+it. We can also observe that because our `EgressNetwork` default traffic policy
+is set to `Allow`, the default http route is named as `http-egress-allow`. This
+is a placeholder route that is being populated automatically by the Linkerd
+controller.
 
 ### Hostnames in metrics
 
@@ -149,8 +149,8 @@ enabled, for clarity.
 
 After you have used metrics in order to compose a picture of your egress
 traffic, you can start applying policies that allow only some of it to go
-through. Let's update our `EgressNetwork` and change its `trafficPolicy`
-to `Deny`:
+through. Let's update our `EgressNetwork` and change its `trafficPolicy` to
+`Deny`:
 
 ```bash
 kubectl patch egressnetwork -n egress-test all-egress-traffic \
@@ -178,13 +178,13 @@ outbound_http_route_request_statuses_total{
 } 45
 ```
 
-We can clearly observe now that the traffic targets the same parent but the
-name of the route is now `http-egress-deny`. Furthermore, the `http_status` is
-`403` or `Forbidden`. By changing the traffic policy to `Deny`, we have forbidden
-all egress traffic originating from the local namespace. In order to allow some
-of it, we can make use of the Gateway API types. Assume that you want to
-allow traffic to `httpbin.org` but only for requests that target the `/get`
-endpoint. For that purpose we need to create the following `HTTPRoute`:
+We can clearly observe now that the traffic targets the same parent but the name
+of the route is now `http-egress-deny`. Furthermore, the `http_status` is `403`
+or `Forbidden`. By changing the traffic policy to `Deny`, we have forbidden all
+egress traffic originating from the local namespace. In order to allow some of
+it, we can make use of the Gateway API types. Assume that you want to allow
+traffic to `httpbin.org` but only for requests that target the `/get` endpoint.
+For that purpose we need to create the following `HTTPRoute`:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -286,11 +286,11 @@ outbound_tls_route_open_total{
 ```
 
 This configuration allows traffic to `httpbin.org` only. In order to apply
-policy decisions for TLS connections, the proxy parses the SNI extension
-header from the `ClientHello` of the TLS session and uses that as the target
-hostname identifier. This means that if we try to initiate a request to
-`github.com` from our client, we will see the proxy eagerly closing the
-connection because it is not forbidden by our current policy configuration:
+policy decisions for TLS connections, the proxy parses the SNI extension header
+from the `ClientHello` of the TLS session and uses that as the target hostname
+identifier. This means that if we try to initiate a request to `github.com` from
+our client, we will see the proxy eagerly closing the connection because it is
+not forbidden by our current policy configuration:
 
 ```bash
 linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_close_total
@@ -311,11 +311,11 @@ outbound_tls_route_close_total{
 } 1
 ```
 
-In a similar fashion we can use the other Gateway API route types such as `GRPCRoute`
-and TCPRoute to shape traffic that is captured by an `EgressNetwork` primitive.
-All these traffic types come with their corresponding set of route-based
-metrics that describe how traffic flows through the system and what policy
-decisions have been made.
+In a similar fashion we can use the other Gateway API route types such as
+`GRPCRoute` and TCPRoute to shape traffic that is captured by an `EgressNetwork`
+primitive. All these traffic types come with their corresponding set of
+route-based metrics that describe how traffic flows through the system and what
+policy decisions have been made.
 
 ## Redirecting egress traffic back to the cluster
 
@@ -326,8 +326,8 @@ following rules:
 - unencrypted HTTP traffic can only target `httpbin.org/get` an no other
   endpoints
 - encrypted HTTPs traffic is allowed to all destinations
-- all other unencrypted HTTP traffic need to be redirected to an
-  internal service
+- all other unencrypted HTTP traffic need to be redirected to an internal
+  service
 
 To begin with, let's create our internal service to which traffic should be
 redirected:
@@ -426,7 +426,8 @@ EOF
 ```
 
 Finally to redirect the rest of the plaintext HTTP traffic to the internal
-service, we create an `HTTPRoute` with a custom backend being the internal service:
+service, we create an `HTTPRoute` with a custom backend being the internal
+service:
 
 ```bash
 kubectl apply -f - <<EOF

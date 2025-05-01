@@ -13,13 +13,13 @@ enforce that mTLS must be used on a certain port; and so on.
 {{< note >}}
 Linkerd can only enforce policy on meshed pods, i.e. pods where the Linkerd
 proxy has been injected. If policy is a strict requirement, you should pair the
-usage of these features with [HA mode](../ha/), which enforces that the proxy
+usage of these features with [HA mode](ha/), which enforces that the proxy
 *must* be present when pods start up.
 {{< /note >}}
 
 By default Linkerd allows all traffic to transit the mesh, and uses a variety
-of mechanisms, including [retries](../retries-and-timeouts/) and [load
-balancing](../load-balancing/), to ensure that requests are delivered
+of mechanisms, including [retries](retries-and-timeouts/) and [load
+balancing](load-balancing/), to ensure that requests are delivered
 successfully.
 
 Sometimes, however, we want to restrict which types of traffic are allowed.
@@ -52,7 +52,7 @@ policy at that point in the hierarchy. Valid default policies include:
 - `deny` inbound proxies deny all connections that are not explicitly
   authorized.
 
-See the [Policy reference](../../reference/authorization-policy/) for more default
+See the [Policy reference](../reference/authorization-policy/) for more default
 policies.
 
 Every cluster has a default policy (by default, `all-unauthenticated`), set at
@@ -80,7 +80,7 @@ including IP address; use of mTLS; specific mTLS identities (including
 wildcards, to allow for namespace selection); specific Service Accounts; and
 more.
 
-See the [Policy reference](../../reference/authorization-policy/) for more on
+See the [Policy reference](../reference/authorization-policy/) for more on
 the `Server` and `ServerAuthorization` resources.
 
 {{< note >}}

@@ -48,11 +48,11 @@ Once these components are installed, Kubernetes `Service` resources that match
 a label selector can be exported to other clusters.
 
 Ready to get started? See the [getting started with multi-cluster
-guide](../../tasks/multicluster/) for a walkthrough.
+guide](../tasks/multicluster/) for a walkthrough.
 
 ## Further reading
 
-* [Multi-cluster installation instructions](../../tasks/installing-multicluster/).
+* [Multi-cluster installation instructions](../tasks/installing-multicluster/).
 * [Architecting for multi-cluster
   Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/), a blog
   post explaining some of the design rationale behind Linkerd's multi-cluster

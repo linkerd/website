@@ -6,8 +6,8 @@ sitemap:
 ---
 
 Linkerd offers many features, outlined below. For our walkthroughs and guides,
-please see the [Linkerd task docs]({{< relref "../tasks" >}}). For a reference,
-see the [Linkerd reference docs]({{< relref "../reference" >}}).
+please see the [Linkerd task docs](../tasks/). For a reference, see the
+[Linkerd reference docs](../reference/).
 
 ## Linkerd's features
 

@@ -20,7 +20,7 @@ be acceptable in some environments.
 {{< note >}}
 The proxy's HTTP access log is distinct from proxy debug logging, which is
 configured separately. See the documentation on [modifying the proxy log
-level](../../tasks/modifying-proxy-log-level/) for details on configuring the
+level](../tasks/modifying-proxy-log-level/) for details on configuring the
 proxy's debug logging.
 {{< /note >}}
 

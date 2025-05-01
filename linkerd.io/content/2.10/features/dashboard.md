@@ -36,7 +36,7 @@ cluster.
 
 Additionally, by default, metrics data is stored in a transient manner that is
 not resilient to pod restarts or to node outages. See [Bringing your own
-Prometheus](../../tasks/external-prometheus/) for one way to address this.
+Prometheus](../tasks/external-prometheus/) for one way to address this.
 
 ## Linkerd dashboard
 
@@ -70,7 +70,7 @@ linkerd -n emojivoto check --proxy
 
 In these examples, we assume you've installed the emojivoto example
 application.  Please refer to the [Getting Started
-Guide](../../getting-started/) for how to do this.
+Guide](../getting-started/) for how to do this.
 
 You can use your dashboard extension and see all the services in the demo app.
 Since the demo app comes with a load generator, we can see live traffic metrics

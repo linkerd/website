@@ -36,7 +36,7 @@ proxy injector to set an environment variable that controls the number of CPU
 cores the proxy will use.
 
 When installing Linkerd using the [`linkerd install` CLI
-command](../install/), the `--proxy-cpu-limit` argument sets this
+command](install/), the `--proxy-cpu-limit` argument sets this
 annotation globally for all proxies injected by the Linkerd installation. For
 example,
 
@@ -49,7 +49,7 @@ linkerd install --proxy-cpu-limit 2 | kubectl apply -f -
 ```
 
 For more fine-grained configuration, the annotation may be added to any
-[injectable Kubernetes resource](../../features/proxy-injection/), such as a
+[injectable Kubernetes resource](../features/proxy-injection/), such as a
 namespace, pod, or deployment.
 
 For example, the following will configure any proxies in the `my-deployment`
@@ -125,7 +125,7 @@ criteria must be met:
 
 ## Using Helm
 
-When using [Helm](../install-helm/), users must take care to set the
+When using [Helm](install-helm/), users must take care to set the
 `proxy.cores` Helm variable in addition to `proxy.cpu.limit`, if
 the criteria for cgroup-based CPU limits
 [described above](#using-kubernetes-cpu-limits-and-requests) are not met.

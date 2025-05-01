@@ -37,7 +37,7 @@ belongs to.
 
 {{< warning >}}
 Prior to Linkerd 2.16, retries and timeouts were configured with
-[ServiceProfile](../../reference/service-profiles/)s. While service profiles are
+[ServiceProfile](../reference/service-profiles/)s. While service profiles are
 still supported, retries configured with HTTPRoute or GPRCRoute are
 **incompatible with ServiceProfiles**. If a ServiceProfile is defined for a
 Service, proxies will use the ServiceProfile retry configuration and ignore any
@@ -90,11 +90,11 @@ individual requests by setting these headers:
 
 ## Further reading
 
-* [Retries reference](../../reference/retries/)
-* [Timeout reference](../../reference/timeouts/)
+* [Retries reference](../reference/retries/)
+* [Timeout reference](../reference/timeouts/)
 * The [Debugging HTTP applications with per-route
-  metrics](../../tasks/books/) contains examples of retries and timeout
+  metrics](../tasks/books/) contains examples of retries and timeout
   annotations.
 
-[HTTPRoute]: ../../reference/httproute/
-[GRPCRoute]: ../../reference/grpcroute/
+[HTTPRoute]: ../reference/httproute/
+[GRPCRoute]: ../reference/grpcroute/

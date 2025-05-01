@@ -10,7 +10,7 @@ For production workloads, Linkerd's control plane can run in high availability
 * Sets production-ready CPU and memory resource requests on control plane
   components.
 * Sets production-ready CPU and memory resource requests on data plane proxies
-* *Requires* that the [proxy auto-injector](../proxy-injection/) be
+* *Requires* that the [proxy auto-injector](proxy-injection/) be
   functional for any pods to be scheduled.
 * Sets [anti-affinity
   policies](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity)
@@ -41,7 +41,7 @@ flag:
 linkerd install --ha --controller-replicas=2 | kubectl apply -f -
 ```
 
-See the full [`install` CLI documentation](../../reference/cli/install/) for
+See the full [`install` CLI documentation](../reference/cli/install/) for
 reference.
 
 The `linkerd upgrade` command can be used to enable HA mode on an existing
@@ -54,7 +54,7 @@ linkerd upgrade --ha | kubectl apply -f -
 ## Proxy injector failure policy
 
 The HA proxy injector is deployed with a stricter failure policy to enforce
-[automatic proxy injection](../proxy-injection/). This setup ensures
+[automatic proxy injection](proxy-injection/). This setup ensures
 that no annotated workloads are accidentally scheduled to run on your cluster,
 without the Linkerd proxy. (This can happen when the proxy injector is down.)
 
@@ -120,7 +120,7 @@ Prometheus.
 The Linkerd Viz extension provides a pre-configured Prometheus pod, but for
 production workloads we recommend setting up your own Prometheus instance. To
 scrape the data plane metrics, follow the instructions
-[here](../../tasks/external-prometheus/). This will provide you
+[here](../tasks/external-prometheus/). This will provide you
 with more control over resource requirement, backup strategy and data retention.
 
 When planning for memory capacity to store Linkerd timeseries data, the usual

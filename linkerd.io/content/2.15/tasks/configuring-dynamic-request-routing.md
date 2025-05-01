@@ -6,7 +6,7 @@ description: Configuring HTTPRoute resources to perform dynamic request routing.
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster. Follow
-the [Installing Linkerd Guide](../install/) if you haven't already done this
+the [Installing Linkerd Guide](install/) if you haven't already done this
 (make sure you have at least linkerd stable-2.13.0 or edge-23.3.2).
 
 You also need to have the [Helm](https://helm.sh/docs/intro/quickstart/) CLI
@@ -115,7 +115,7 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
 resource definition. See [the HTTPRoute reference
-documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
 {{< /note >}}
 
@@ -125,8 +125,8 @@ namespace (`test`), and also specify the Service port number (not the Service's
 target port).
 
 {{< warning >}}
-**Outbound [`HTTPRoute`](../../features/httproute/)s and
-[`ServiceProfile`](../../features/service-profiles/)s provide overlapping
+**Outbound [`HTTPRoute`](../features/httproute/)s and
+[`ServiceProfile`](../features/service-profiles/)s provide overlapping
 configuration.** For backwards-compatibility reasons, a `ServiceProfile` will
 take precedence over `HTTPRoute`s which configure the same Service. If a
 `ServiceProfile` is defined for the parent Service of an `HTTPRoute`,
@@ -187,5 +187,5 @@ whereas the destination pods don't require to be injected. But of course the
 more workloads you have injected the better, to benefit from things like easy
 mTLS setup and all the other advantages that linkerd brings to the table!
 
-[`HTTPRoute`]: ../../features/httproute/
-[`ServiceProfile`]: ../../features/ServiceProfile/
+[`HTTPRoute`]: ../features/httproute/
+[`ServiceProfile`]: ../features/ServiceProfile/

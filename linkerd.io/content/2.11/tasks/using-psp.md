@@ -28,11 +28,11 @@ full implication of the `NET_ADMIN` and `NET_RAW` capabilities, refer to the
 Linux capabilities [manual](https://www.man7.org/linux/man-pages/man7/capabilities.7.html).
 
 More information on the `iptables` rules used by the `proxy-init` init
-container can be found on the [Architecture](../../reference/architecture/#linkerd-init)
+container can be found on the [Architecture](../reference/architecture/#linkerd-init)
 page.
 
 If your environment disallows the operation of containers with escalated Linux
-capabilities, Linkerd can be installed with its [CNI plugin](../../features/cni/),
+capabilities, Linkerd can be installed with its [CNI plugin](../features/cni/),
 which doesn't require the `NET_ADMIN` and `NET_RAW` capabilities.
 
 Linkerd doesn't provide any default Pod Security Policy for the data plane

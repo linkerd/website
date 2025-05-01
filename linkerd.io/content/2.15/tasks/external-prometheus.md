@@ -3,7 +3,7 @@ title: Bringing your own Prometheus
 description: Use an existing Prometheus instance with Linkerd.
 ---
 
-Even though [the linkerd-viz extension](../../features/dashboard/) comes with
+Even though [the linkerd-viz extension](../features/dashboard/) comes with
 its own Prometheus instance, there can be cases where using an external
 instance makes more sense for various reasons.
 
@@ -175,7 +175,7 @@ This configuration is **not** persistent across installs: you'll need to pass
 the same `values.yaml` for re-installs, upgrades, etc.
 
 More information on installation through Helm can be found
-[here](../install-helm/)
+[here](install-helm/)
 
 ### CLI
 

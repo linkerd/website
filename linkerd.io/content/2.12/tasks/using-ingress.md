@@ -14,7 +14,7 @@ Combining Linkerd and your ingress solution requires two things:
 
 Meshing your ingress pods will allow Linkerd to provide features like L7
 metrics and mTLS the moment the traffic is inside the cluster. (See
-[Adding your service](../adding-your-service/) for instructions on how to mesh
+[Adding your service](adding-your-service/) for instructions on how to mesh
 your ingress.)
 
 Note that, as explained below, some ingress options need to be meshed in
@@ -432,7 +432,7 @@ with the `linkerd.io/inject: ingress` annotation rather than the default
 This example will use the following elements:
 
 - The [Kong chart](https://github.com/Kong/charts)
-- The [emojivoto](../../getting-started/) example application
+- The [emojivoto](../getting-started/) example application
 
 Before installing emojivoto, install Linkerd and Kong on your cluster. When
 injecting the Kong deployment, use the `--ingress` flag (or annotation).

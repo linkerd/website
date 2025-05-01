@@ -4,13 +4,13 @@ description: Reduce deployment risk by combining Linkerd and Flagger to automate
   releases based on service metrics.
 ---
 
-Linkerd's [traffic split](../../features/traffic-split/) feature allows you to
+Linkerd's [traffic split](../features/traffic-split/) feature allows you to
 dynamically shift traffic between services. This can be used to implement
 lower-risk  deployment strategies like blue-green deploys and canaries.
 
 But simply shifting traffic from one version of a service to the next is just
 the beginning. We can combine traffic splitting with [Linkerd's automatic
-*golden metrics* telemetry](../../features/telemetry/) and drive traffic decisions
+*golden metrics* telemetry](../features/telemetry/) and drive traffic decisions
 based on the observed metrics. For example, we can gradually shift traffic from
 an old deployment to a new one while continually monitoring its success rate. If
 at any point the success rate drops, we can shift traffic back to the original
@@ -28,7 +28,7 @@ allowing for fully-automated, metrics-aware canary deployments.
 
 - To use this guide, you'll need to have Linkerd installed on your cluster,
   along with its Viz extension.
-  Follow the [Installing Linkerd Guide](../install/) if you haven't
+  Follow the [Installing Linkerd Guide](install/) if you haven't
   already done this.
 - The installation of Flagger depends on `kubectl` 1.14 or newer.
 
@@ -71,7 +71,7 @@ Together, these components have a topology that looks like:
 {.center}
 
 To add these components to your cluster and include them in the Linkerd
-[data plane](../../reference/architecture/#data-plane), run:
+[data plane](../reference/architecture/#data-plane), run:
 
 ```bash
 kubectl create ns test && \
@@ -201,7 +201,7 @@ Any kind of modification to the pod's spec such as updating an environment
 variable or annotation would result in the same behavior as updating the image.
 
 On update, the canary deployment (`podinfo`) will be scaled up. Once ready,
-Flagger will begin to update the [TrafficSplit CRD](../../features/traffic-split/)
+Flagger will begin to update the [TrafficSplit CRD](../features/traffic-split/)
 incrementally. With a configured stepWeight of 10, each increment will increase
 the weight of `podinfo` by 10. For each period, the success rate will be
 observed and as long as it is over the threshold of 99%, Flagger will continue

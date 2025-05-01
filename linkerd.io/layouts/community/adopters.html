@@ -19,7 +19,7 @@
                   </h3>
                 </div>
                 <div class="card__content">
-                  {{ printf `<blockquote>"%s"</blockquote>` .quote | markdownify }}
+                  {{ printf `<blockquote>"%s"</blockquote>` .quote | $.Page.RenderString }}
                 </div>
                 <div class="card__footer">
                   {{ partial "components/button" (dict "href" .url "text" "Read case study" "variant" "primary") }}

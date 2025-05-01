@@ -39,7 +39,7 @@ releases on the [Releases and Versions](/releases/) page.
 {{< /note >}}
 
 To get started with topology aware routing take a look at the [enabling
-topology aware routing](../../tasks/enabling-topology-aware-routing/) task
+topology aware routing](../tasks/enabling-topology-aware-routing/) task
 documentation.
 
 [topology aware routing]:

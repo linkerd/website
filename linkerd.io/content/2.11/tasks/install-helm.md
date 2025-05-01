@@ -10,13 +10,13 @@ command. This is recommended for production, since it allows for repeatability.
 
 ## Prerequisite: generate identity certificates
 
-To do [automatic mutual TLS](../../features/automatic-mtls/), Linkerd requires
+To do [automatic mutual TLS](../features/automatic-mtls/), Linkerd requires
 trust anchor certificate and an issuer certificate and key pair. When you're
 using `linkerd install`, we can generate these for you. However, for Helm,
 you will need to generate these yourself.
 
 Please follow the instructions in [Generating your own mTLS root
-certificates](../generate-certificates/) to generate these.
+certificates](generate-certificates/) to generate these.
 
 ## Helm install procedure for stable releases
 
@@ -47,7 +47,7 @@ the `2.12.0` stable release as well when it comes out.
 If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
 mode, additional steps may be needed to ensure service discovery works as
 intended. Instrunctions are on the [Cilium cluster
-configuration](../../reference/cluster-configuration/#cilium) page.
+configuration](../reference/cluster-configuration/#cilium) page.
 {{< /note >}}
 
 ### linkerd-crds
@@ -82,7 +82,7 @@ helm install linkerd-control-plane \
 ```
 
 {{< note >}}
-If you are using [Linkerd's CNI plugin](../../features/cni/), you must also add the
+If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
 `--set cniEnabled=true` flag to your `helm install` command.
 {{< /note >}}
 

@@ -7,13 +7,13 @@ In this guide, we'll walk you through deploying an `HTTPLocalRateLimitPolicy`
 resource to rate-limit the traffic to a given service.
 
 For more information about Linkerd's rate limiting check the [Rate Limiting
-feature doc](../../features/rate-limiting/) and the [HTTPLocalRateLimitPolicy
-reference doc](../../reference/rate-limiting/).
+feature doc](../features/rate-limiting/) and the [HTTPLocalRateLimitPolicy
+reference doc](../reference/rate-limiting/).
 
 ## Prerequisites
 
 To use this guide you'll only need a Kubernetes cluster running a Linkerd
-instance. You can follow the [installing Linkerd Guide](../install/).
+instance. You can follow the [installing Linkerd Guide](install/).
 
 ## Setup
 

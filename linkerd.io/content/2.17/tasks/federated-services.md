@@ -3,7 +3,7 @@ title: Multi-cluster Federated Services
 description: Using multi-cluster federated services
 ---
 
-Linkerd's [multicluster extension](../multicluster/) can create federated
+Linkerd's [multicluster extension](multicluster/) can create federated
 services which act as a union of multiple services in different clusters with
 the same name and namespace. By sending traffic to the federated service, that
 traffic will be load balanced among all endpoints of that service in all linked
@@ -41,7 +41,7 @@ a federated service for a service that spans 3 clusters.
 ## Step 1: Installing Linkerd and Linkerd-Viz
 
 First, install Linkerd and Linkerd-Viz into all three clusters, as described in
-the [multicluster guide](../multicluster/#install-linkerd-and-linkerd-viz).
+the [multicluster guide](multicluster/#install-linkerd-and-linkerd-viz).
 Make sure to take care that all clusters share a common trust anchor.
 
 ## Step 2: Installing Linkerd-Multicluster
@@ -65,7 +65,7 @@ communication.
 
 We use the `linkerd multicluster link` command to link the `east` and `north`
 cluster to the `west` cluster. This is exactly the same as in the regular
-[Multicluster guide](../multicluster/#linking-the-clusters) except that we pass
+[Multicluster guide](multicluster/#linking-the-clusters) except that we pass
 the `--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console

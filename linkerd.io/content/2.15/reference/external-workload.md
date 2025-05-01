@@ -2,9 +2,8 @@
 title: ExternalWorkload
 ---
 
-Linkerd's [mesh expansion]({{< relref "../features/non-kubernetes-workloads"
->}}) functionality allows you to join workloads outside of Kubernetes into the
-mesh.
+Linkerd's [mesh expansion](../features/non-kubernetes-workloads) functionality
+allows you to join workloads outside of Kubernetes into the mesh.
 
 At its core, this behavior is controlled by an `ExternalWorkload` resource,
 which is used by Linkerd to describe a workload that lives outside of Kubernetes
@@ -16,7 +15,8 @@ accepts connections on.
 
 An ExternalWorkload is a namespace resource that defines a set of ports and an
 IP address that is reachable from within the mesh. Linkerd uses that information
-and translates it into `EndpointSlice`s that are then attached to `Service` objects.
+and translates it into `EndpointSlice`s that are then attached to `Service`
+objects.
 
 ### Spec
 
@@ -54,7 +54,8 @@ and translates it into `EndpointSlice`s that are then attached to `Service` obje
 - `type` - type of the condition (Ready is used for indicating discoverability)
 - `reason` - contains a programmatic identifier indicating the reason for the
   condition's last transition
-- `message` - message is a human-readable message indicating details about the transition.
+- `message` - message is a human-readable message indicating details about the
+  transition.
 
 ## Example
 
@@ -72,19 +73,19 @@ metadata:
     workload_name: external-workload
 spec:
   meshTLS:
-    identity: "spiffe://root.linkerd.cluster.local/external-workload"
-    serverName: "external-workload.cluster.local"
+    identity: 'spiffe://root.linkerd.cluster.local/external-workload'
+    serverName: 'external-workload.cluster.local'
   workloadIPs:
-  - ip: 193.1.4.11
+    - ip: 193.1.4.11
   ports:
-  - port: 80
-    name: http
-  - port: 9980
-    name: admin
+    - port: 80
+      name: http
+    - port: 9980
+      name: admin
 status:
   conditions:
     - type: Ready
-      status: "True"
+      status: 'True'
 ---
 apiVersion: v1
 kind: Service
@@ -96,10 +97,10 @@ spec:
   selector:
     workload_name: external-workload
   ports:
-  - port: 80
-    protocol: TCP
-    name: http
-  - port: 9980
-    protocol: TCP
-    name: admin
+    - port: 80
+      protocol: TCP
+      name: http
+    - port: 9980
+      protocol: TCP
+      name: admin
 ```

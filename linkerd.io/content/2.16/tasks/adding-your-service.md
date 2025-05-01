@@ -1,7 +1,7 @@
 ---
 title: Adding your services to Linkerd
 description: In order for your services to take advantage of Linkerd, they also need
-  to be *meshed* by injecting Linkerd's data plane proxy into their pods.
+  to be meshed by injecting Linkerd's data plane proxy into their pods.
 ---
 
 Adding Linkerd's control plane to your cluster doesn't change anything about
@@ -21,10 +21,10 @@ Meshing a Kubernetes resource is typically done by annotating the resource (or
 its namespace) with the `linkerd.io/inject: enabled` Kubernetes annotation.
 This annotation triggers automatic proxy injection when the resources are
 created or updated. (See the [proxy injection
-page](../../features/proxy-injection/) for more on how this works.)
+page](../features/proxy-injection/) for more on how this works.)
 
 For convenience, Linkerd provides a [`linkerd
-inject`](../../reference/cli/inject/) text transform command will add this
+inject`](../reference/cli/inject/) text transform command will add this
 annotation to a given Kubernetes manifest.  Of course, these annotations can be
 set by any other mechanism.
 
@@ -75,7 +75,7 @@ linkerd-proxy CONTAINER
 
 ## Handling MySQL, SMTP, and other non-HTTP protocols
 
-Linkerd's [protocol detection](../../features/protocol-detection/) works by
+Linkerd's [protocol detection](../features/protocol-detection/) works by
 looking at the first few bytes of client data to determine the protocol of the
 connection. Some protocols, such as MySQL and SMTP, don't send these bytes.  If
 your application uses these protocols without TLSing them, you may require
@@ -83,14 +83,14 @@ additional configuration to avoid a 10-second delay when establishing
 connections.
 
 See [Configuring protocol
-detection](../../features/protocol-detection/#configuring-protocol-detection)
+detection](../features/protocol-detection/#configuring-protocol-detection)
 for details.
 
 ## More reading
 
 For more information on how the inject command works and all of the parameters
 that can be set, see the [`linkerd inject` reference
-page](../../reference/cli/inject/).
+page](../reference/cli/inject/).
 
 For details on how autoinjection works, see the [proxy injection
-page](../../features/proxy-injection/).
+page](../features/proxy-injection/).

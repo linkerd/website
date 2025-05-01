@@ -17,7 +17,7 @@ HTTPRoute timeouts unless a ServiceProfile already exists for the Service.
 ## Using HTTPRoutes
 
 Linkerd supports timeouts as specified in [GEP-1742], for [outbound
-HTTPRoutes](../../features/httproute/#inbound-and-outbound-httproutes)
+HTTPRoutes](../features/httproute/#inbound-and-outbound-httproutes)
 with Service parents.
 
 {{< warning >}}
@@ -33,12 +33,12 @@ fields are added to the upstream resource definition, Linkerd will support
 timeout configuration for HTTPRoutes with both API groups.
 
 See [the HTTPRoute reference
-documentation](../../reference/httproute/#linkerd-and-gateway-api-httproutes)
+documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details on the two versions of the HTTPRoute resource.
 {{< /warning >}}
 
-Each [rule](../../reference/httproute/#httprouterule) in an [HTTPRoute] may
-define an optional [`timeouts`](../../reference/httproute/#httproutetimeouts)
+Each [rule](../reference/httproute/#httprouterule) in an [HTTPRoute] may
+define an optional [`timeouts`](../reference/httproute/#httproutetimeouts)
 object, which can define `request` and/or `backendRequest` fields:
 
 - `timeouts.request` specifies the *total time* to wait for a request matching
@@ -46,7 +46,7 @@ object, which can define `request` and/or `backendRequest` fields:
   receives a request, and ends when successful response is sent to the client.
 - `timeouts.backendRequest` specifies the time to wait for a single request to a
   backend to complete. This timeout starts when a request is dispatched to a
-  [backend](../../reference/httproute/#httpbackendref), and ends when a response
+  [backend](../reference/httproute/#httpbackendref), and ends when a response
   is received from that backend. This is a subset of the `timeouts.request`
   timeout. If the request fails and is retried (if applicable), the
   `backendRequest` timeout will be restarted for each retry request.
@@ -74,7 +74,7 @@ spec:
 
 ## Using ServiceProfiles
 
-Each [route](../../reference/service-profiles/#route) in a [ServiceProfile] may
+Each [route](../reference/service-profiles/#route) in a [ServiceProfile] may
 define a request timeout for requests matching that route. This timeout secifies
 the maximum amount of time to wait for a response (including retries) to
 complete after the request is sent. If unspecified, the default timeout is 10
@@ -90,14 +90,14 @@ spec:
     timeout: 300ms
 ```
 
-Check out the [timeouts section](../books/#timeouts) of the books demo for
+Check out the [timeouts section](books/#timeouts) of the books demo for
 a tutorial of how to configure timeouts using ServiceProfiles.
 
 ## Monitoring Timeouts
 
 Requests which reach the timeout will be canceled, return a [504 Gateway
 Timeout] response, and count as a failure for the purposes of [effective success
-rate](../configuring-retries/#monitoring-retries).  Since the request was
+rate](configuring-retries/#monitoring-retries).  Since the request was
 canceled before any actual response was received, a timeout will not count
 towards the actual request volume at all.  This means that effective request
 rate can be higher than actual request rate when timeouts are configured.
@@ -106,8 +106,8 @@ possible for the request to be counted as an actual success but an effective
 failure.  This can result in effective success rate being lower than actual
 success rate.
 
-[HTTPRoute]: ../../features/httproute/
-[ServiceProfile]: ../../features/service-profiles/
+[HTTPRoute]: ../features/httproute/
+[ServiceProfile]: ../features/service-profiles/
 [504 Gateway Timeout]:
     https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504
 [GEP-1742]: https://gateway-api.sigs.k8s.io/geps/gep-1742/

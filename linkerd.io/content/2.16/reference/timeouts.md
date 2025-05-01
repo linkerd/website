@@ -10,7 +10,7 @@ Timeouts are a client-side behavior, and are therefore performed by the
 outbound side of the Linkerd proxy.[^1] Note that timeouts configured in this
 way are not retryable -- if these timeouts are reached, the request will not be
 retried. Retryable timeouts can be configured as part of
-[retry configuration](../retries/).
+[retry configuration](retries/).
 
 ## Configuring Timeouts
 
@@ -23,7 +23,7 @@ Service.
 
 {{< warning >}}
 Timeouts configured in this way are **incompatible with ServiceProfiles**. If a
-[ServiceProfile](../../features/service-profiles/) is defined for a Service,
+[ServiceProfile](../features/service-profiles/) is defined for a Service,
 proxies will use the ServiceProfile timeout configuration and ignore any timeout
 annotations.
 {{< /warning >}}

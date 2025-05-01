@@ -20,12 +20,12 @@ to.
 
 To get started with service profiles you can:
 
-- Look into [setting up service profiles](../../tasks/setting-up-service-profiles/)
+- Look into [setting up service profiles](../tasks/setting-up-service-profiles/)
   for your own services.
 - Understand what is required to see
-  [per-route metrics](../../tasks/getting-per-route-metrics/).
-- [Configure retries](../../tasks/configuring-retries/) on your own services.
-- [Configure timeouts](../../tasks/configuring-timeouts/) on your own services.
-- Glance at the [reference](../../reference/service-profiles/) documentation.
+  [per-route metrics](../tasks/getting-per-route-metrics/).
+- [Configure retries](../tasks/configuring-retries/) on your own services.
+- [Configure timeouts](../tasks/configuring-timeouts/) on your own services.
+- Glance at the [reference](../reference/service-profiles/) documentation.
 
 [crd]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/

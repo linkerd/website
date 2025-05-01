@@ -15,7 +15,7 @@ number of times, it becomes important to limit the total amount of time a client
 waits before giving up entirely. Imagine a number of retries forcing a client
 to wait for 10 seconds.
 
-A [service profile](../service-profiles/) may define certain routes as
+A [service profile](service-profiles/) may define certain routes as
 retryable or specify timeouts for routes.  This will cause the Linkerd proxy to
 perform the appropriate retries or timeouts when calling that service.  Retries
 and timeouts are always performed on the *outbound* (client) side.
@@ -29,8 +29,8 @@ to.
 
 These can be setup by following the guides:
 
-- [Configuring Retries](../../tasks/configuring-retries/)
-- [Configuring Timeouts](../../tasks/configuring-timeouts/)
+- [Configuring Retries](../tasks/configuring-retries/)
+- [Configuring Timeouts](../tasks/configuring-timeouts/)
 
 ## How Retries Can Go Wrong
 

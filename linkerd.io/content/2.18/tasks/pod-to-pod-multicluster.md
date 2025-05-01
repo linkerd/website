@@ -3,7 +3,7 @@ title: Pod-to-Pod Multi-cluster communication
 description: Multi-Cluster Communication for Flat Networks
 ---
 
-By default, Linkerd's [multicluster extension](../multicluster/) works by
+By default, Linkerd's [multicluster extension](multicluster/) works by
 sending all cross-cluster traffic through a gateway on the target cluster.
 However, when multiple Kubernetes clusters are deployed on a flat network where
 pods from one cluster can communicate directly with pods on another, Linkerd
@@ -30,7 +30,7 @@ mode, setting up authorization policies, and monitoring the traffic.
 ## Step 1: Installing Linkerd and Linkerd-Viz
 
 First, install Linkerd and Linkerd-Viz into both clusters, as described in
-the [multicluster guide](../multicluster/#install-linkerd-and-linkerd-viz).
+the [multicluster guide](multicluster/#install-linkerd-and-linkerd-viz).
 Make sure to take care that both clusters share a common trust anchor.
 
 ## Step 2: Installing Linkerd-Multicluster
@@ -54,7 +54,7 @@ controllers there:
 
 We use the `linkerd multilcuster link-gen` command to link our two clusters
 together. This is exactly the same as in the regular [Multicluster
-guide](../multicluster/#linking-the-clusters) except that we pass the
+guide](multicluster/#linking-the-clusters) except that we pass the
 `--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console
@@ -199,7 +199,7 @@ One advantage of direct pod-to-pod communication is that the server can use
 authorization policies which allow only certain clients to connect. This is
 not possible when using the gateway, because client identity is lost when going
 through the gateway. For more background on how authorization policies work,
-see: [Restricting Access To Services](../restricting-access/).
+see: [Restricting Access To Services](restricting-access/).
 
 Let's demonstrate that by creating an authorization policy which only allows
 the `slow-cooker` service account to connect to `bb`:

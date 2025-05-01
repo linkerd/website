@@ -21,7 +21,7 @@ You'll need to understand exactly what the situation is to fix this:
 
 - A server-speaks-first protocol will probably need to be configured as a
   `skip` or `opaque` port, as described in the [protocol detection
-  documentation](../../features/protocol-detection/#configuring-protocol-detection).
+  documentation](../features/protocol-detection/#configuring-protocol-detection).
 
 - If you're seeing transient protocol detection timeouts, this is more likely
   to indicate a misbehaving workload.
@@ -32,5 +32,5 @@ You'll need to understand exactly what the situation is to fix this:
 
 Note that marking ports as `skip` or `opaque` has ramifications beyond
 protocol detection timeouts; see the [protocol detection
-documentation](../../features/protocol-detection/#configuring-protocol-detection)
+documentation](../features/protocol-detection/#configuring-protocol-detection)
 for more information.
