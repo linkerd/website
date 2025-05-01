@@ -4,8 +4,8 @@
     <div class="alert__content">
       You are viewing docs for an older version of Linkerd.
       {{ $latestFilePath := replace .RelPermalink (printf "/%s/" .Section) (printf "/%s/" $latestVersion) }}
-      {{ if fileExists $latestFilePath }}
-        You may want the <a href="{{ $latestFilePath }}">latest documentation</a> for this page instead.
+      {{ with site.GetPage $latestFilePath }}
+        You may want the <a href="{{ .RelPermalink }}">latest documentation</a> for this page instead.
       {{ else }}
         <a href="/{{ $latestVersion }}/">View the latest docs</a>.
       {{ end }}
