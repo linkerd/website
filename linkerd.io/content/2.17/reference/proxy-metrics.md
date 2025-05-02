@@ -82,14 +82,6 @@ proxy:
       value: unsafe
 ```
 
-This can also be specified on the command line if installing with the CLI:
-
-```shell
-linkerd install \
-  --set 'proxy.additionalEnv[0].name=LINKERD2_PROXY_INBOUND_METRICS_AUTHORITY_LABELS' \
-  --set 'proxy.additionalEnv[0].value=unsafe'
-```
-
 #### Response Labels
 
 The following labels are only applicable on `response_*` metrics.
