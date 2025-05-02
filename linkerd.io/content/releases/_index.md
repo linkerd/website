@@ -11,7 +11,7 @@ types of _release artifacts_.
 
 ### Linkerd 2.18
 
-Linkerd 2.18 was announced on April 23, 2024.
+Linkerd 2.18 was announced on April 23, 2025.
 
 <!-- markdownlint-disable MD013 -->
 
