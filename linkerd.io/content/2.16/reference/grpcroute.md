@@ -83,3 +83,6 @@ spec:
 [ns-boundaries]: https://gateway-api.sigs.k8s.io/geps/gep-1426/#namespace-boundaries
 [Server]: authorization-policy/#server
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/
+[auth-policy]: ../tasks/configuring-per-route-policy/
+[dyn-routing]: ../tasks/configuring-dynamic-request-routing/
+[timeouts]: timeouts/#configuring-timeouts
