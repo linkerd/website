@@ -33,7 +33,7 @@ authorization and authentication policies][auth-policy].
 configure policies for _outbound_ proxies in pods which are clients of that
 [Service]. Outbound policy includes [dynamic request routing][dyn-routing],
 adding request headers, modifying a request's path, and reliability features
-such as [timeouts].
+such as timeouts.
 
 {{< warning >}}
 **Outbound GRPCRoutes and [ServiceProfiles](service-profiles/) provide
@@ -85,4 +85,3 @@ spec:
 [Service]: https://kubernetes.io/docs/concepts/services-networking/service/
 [auth-policy]: ../tasks/configuring-per-route-policy/
 [dyn-routing]: ../tasks/configuring-dynamic-request-routing/
-[timeouts]: timeouts/#configuring-timeouts
