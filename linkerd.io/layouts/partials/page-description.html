@@ -1,3 +1,3 @@
-{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
-  {{- trim . "\n\r\t " }}
+{{- with or .Description (.Summary | truncate 160) site.Params.description | plainify | htmlUnescape }}
+  {{- trim . "\n\r\t " | replaceRE "[\n\r\t]+" " " }}
 {{- end -}}
