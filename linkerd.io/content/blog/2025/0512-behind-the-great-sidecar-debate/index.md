@@ -210,9 +210,6 @@ fairly stable.
 
 ## The Results
 
-As always, the test scenarios I chose to run matter, and as always they're not
-exhaustive.
-
 When I ran the basic benchmarks I described against Linkerd, Istio Legacy, and
 Istio Ambient, I was not at all surprised to find that Istio Legacy used more
 memory _by far_ than either Linkerd or Istio Ambient:
@@ -269,8 +266,12 @@ that's not how CPU limits work. (I did this by artificially applying CPU
 limits.)
 
 Finally, I verified that I could starve the Faces demo by running a ton of
-traffic from something else through the system (specifically, I ran `iperf3`
-in the cluster with CPU limits lowered on the Istio Ambient data plane).
+traffic from something else through the system. (Specifically, I ran `iperf3`
+in the cluster with CPU limits lowered on the Istio Ambient data plane and
+watched Faces stop responding. Incidentally, I also found that `iperf3` is a
+great way to make Istio Ambient's waypoint consume dramatically more memory,
+and to hang onto that memory for a long time after you stop running `iperf3`.
+I don't know why that happens.)
 
 Again: Linkerd proxies won't like these things either. I'd also be remiss if I
 didn't point out that Istio Ambient's normal requests and limits are high
