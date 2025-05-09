@@ -1,6 +1,6 @@
 ---
 date: 2025-05-09T00:00:00Z
-slug: linkerd-edge-release-roundup
+slug: behind-the-great-sidecar-debate
 title: |-
   The Story Behind the Great Sidecar Debate
 description: |-
@@ -11,8 +11,6 @@ params:
   showCover: true
 images: [social.jpg] # Open graph image
 ---
-
-# The Story Behind the Great Sidecar Debate
 
 Many, many pixels have been burned on the topic of sidecars of late.
 
@@ -311,4 +309,3 @@ in [mailing lists](/community/get-involved/). Come and join the fun!
 ---
 
 _My thanks to John Howard for answering bizarre questions about Istio Ambient and to Rob Scott for answering bizarre questions about GKE._
-
