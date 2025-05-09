@@ -219,8 +219,8 @@ memory _by far_ than either Linkerd or Istio Ambient:
 
 ![Three Meshes, Data Plane Memory](all-three-mem.png)
 
-I was _extremely_ surprised to find that Istio Ambient used more CPU than
-Istio Legacy:
+I was _extremely_ surprised to find how close Istio Ambient and Istio Legacy
+were on CPU usage:
 
 ![Three Meshes, Data Plane CPU](all-three-CPU.png)
 
