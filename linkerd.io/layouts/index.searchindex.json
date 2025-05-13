@@ -29,7 +29,7 @@
       "title"       $page.Title
       "ancestors"   $ancestors
       "section"     $page.Section
-      "content"     ($page.Plain | htmlUnescape | truncate 3000)
+      "content"     ($page.Plain | htmlUnescape)
       "description" $page.Description
       "keywords"    $page.Keywords
     )
