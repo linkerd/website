@@ -1,5 +1,5 @@
 ---
-date: 2025-05-09T00:00:00Z
+date: 2025-05-21T00:00:00Z
 slug: behind-the-great-sidecar-debate
 title: |-
   The Story Behind the Great Sidecar Debate
@@ -9,7 +9,7 @@ keywords: [linkerd, istio legacy, istio ambient, sidecar, benchmarking]
 params:
   author: flynn
   showCover: true
-images: [social.jpg] # Open graph image
+images: [social.png] # Open graph image
 ---
 
 Many, many pixels have been burned on the topic of sidecars of late.
@@ -229,10 +229,19 @@ less resource for its data plane than Istio Ambient:
 
 ![Linkerd and Istio Ambient, Data Plane Memory](linkerd-and-ambient-mem.png)
 
+You can see that ztunnel has the least memory usage of any of the data-plane
+components, but it's important to remember that ztunnel is limited to Layer 4
+-- it's not doing all the hard work that Layer 7 requires. Layer 7 needs the
+waypoint, too, and once we include that in the mix, we see that Istio Ambient
+consumes significantly more memory than Linkerd (which is doing both jobs in
+one proxy).
+
 ![Linkerd and Istio Ambient, Data Plane CPU](linkerd-and-ambient-CPU.png)
 
-It was interesting to me that the ztunnel's memory usage was very low, but its
-CPU usage almost matched Linkerd's.
+Interestingly enough, ztunnel's CPU usage was _not_ significantly below
+Linkerd's. In fact, both ztunnel and the waypoint used nearly as much CPU
+usage as Linkerd, meaning that Istio Ambient as a whole nearly doubled
+Linkerd's CPU usage.
 
 ## Other Tests
 
