@@ -318,6 +318,6 @@ in [mailing lists](/community/get-involved/). Come and join the fun!
 
 ---
 
-_My thanks to John Howard for answering bizarre questions about Istio Ambient and to Rob Scott for answering bizarre questions about GKE._
-
-_(Sidecar with Corgi images generated using Gemini and Photoshop)_
+_My thanks to John Howard for answering bizarre questions about Istio Ambient
+and to Rob Scott for answering bizarre questions about GKE. Sidecar with Corgi
+images generated using Gemini and Photoshop._
