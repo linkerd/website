@@ -184,9 +184,7 @@ To center the image, use a Markdown attribute:
 {.center}
 ```
 
-#### Image guidelines
-
-##### Image dimensions
+#### Image dimensions
 
 Here are the recommended image dimensions for each image type:
 
@@ -213,7 +211,7 @@ Content image:
 
 - Width: 800—1600px
 
-##### Image format
+#### Image format
 
 Choosing the best image format (jpg, png) will depend on the content of the
 image. If the image is mostly comprised of a photo (even if it contains some
