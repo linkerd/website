@@ -27,8 +27,8 @@ are _always_ about tradeoffs.
 
 For various reasons, I ended up being the one to take on the job of pulling
 back the curtain on both Linkerd's choice to use the sidecar pattern and Istio
-Ambient's choice to avoid it, and see what the ramifications of those choices
-really were. I did this in the obvious way: I ran both meshes under load and
+Ambient's choice to avoid it, and look into the ramifications of those
+choices. I did this in the obvious way: I ran both meshes under load and
 measured things about them. It was simultaneously frustrating and fascinating,
 often in surprising ways.
 
