@@ -88,7 +88,7 @@ params:
 
 For inline author data, the avatar image can either be a page resource or a
 remote image. To use a remote image, simply provide the full url to the image,
-and Hugo will download and resize it when the site is published. For example:
+and Hugo will download it when the site is published. For example:
 
 ```yaml
 params:
@@ -180,8 +180,46 @@ To display a caption below the image, provide an image title. For example:
 To center the image, use a Markdown attribute:
 
 ```markdown
-![Alt text](my-image.jpg) {.center}
+![Alt text](my-image.jpg) 
+{.center}
 ```
+
+#### Image dimensions
+
+Here are the recommended image dimensions for each image type:
+
+Cover image:
+
+- Width: 800—1600px
+- Height: 256—600px
+
+Feature image:
+
+- Width: 800—1600px
+- Height: 160—256px
+
+Thumbnail image:
+
+- Width: 128–256px
+- Height: 128–256px
+
+Open graph image:
+
+- Width: 1200—1600px
+
+Content image:
+
+- Width: 800—1600px
+
+#### Image format
+
+Choosing the best image format (jpg, png) will depend on the content of the
+image. If the image is mostly comprised of a photo (even if it contains some
+type), saving it as a jpg at 80% quality will probably result in the smallest
+filesize. If the image contains flat colors, like a chart, then a png is
+probably the best format to use. If you're unsure which format is best, just
+preview each format when exporting the image, and see which one has a smaller
+filesize.
 
 ### Hiding pages in the docs sidenav
 
