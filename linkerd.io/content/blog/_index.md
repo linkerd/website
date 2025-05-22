@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
-    - /blog/2025/0423-announcing-linkerd-2.18
+    - /blog/2025/0522-behind-the-great-sidecar-debate
     - /blog/2025/0424-linkerd-benchmarks
 ---
