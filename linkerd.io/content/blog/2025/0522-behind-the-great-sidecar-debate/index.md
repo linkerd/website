@@ -9,7 +9,7 @@ keywords: [linkerd, istio legacy, istio ambient, sidecar, benchmarking]
 params:
   author: flynn
   showCover: true
-images: [social.png] # Open graph image
+images: [social.jpg] # Open graph image
 ---
 
 Many, many pixels have been burned on the topic of sidecars of late.
@@ -319,3 +319,5 @@ in [mailing lists](/community/get-involved/). Come and join the fun!
 ---
 
 _My thanks to John Howard for answering bizarre questions about Istio Ambient and to Rob Scott for answering bizarre questions about GKE._
+
+_(Sidecar with Corgi images generated using Gemini and Photoshop)_
