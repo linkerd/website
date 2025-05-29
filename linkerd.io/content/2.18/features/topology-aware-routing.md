@@ -30,7 +30,7 @@ Linkerd.)
 
 If you're using a stable distribution of Linkerd, it may have additional
 features related to topology-aware routing (for example, [Buoyant Enterprise for
-Linkerd](https://buoyant.io/linkerd-enterprise/) and its 
+Linkerd](https://buoyant.io/linkerd-enterprise/) and its
 [HAZL](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/)
 feature). You can find more information about the different kinds of Linkerd
 releases on the [Releases and Versions](/releases/) page.
