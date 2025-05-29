@@ -12,10 +12,9 @@ and lower the associated costs and latency.
 {{< note >}}
 
 If you're using a stable distribution of Linkerd, it may have additional
-features related to topology-aware routing (for example, <a
-href="https://buoyant.io/linkerd-enterprise/">Buoyant Enterprise for
-Linkerd</a> and its <a
-href="https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/">HAZL</a>
+features related to topology-aware routing (for example, [Buoyant Enterprise for
+Linkerd](https://buoyant.io/linkerd-enterprise/) and its
+[HAZL](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/hazl/)
 feature). You can find more information about the different kinds of Linkerd
 releases on the [Releases and Versions](/releases/) page.
 
