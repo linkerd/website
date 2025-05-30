@@ -113,7 +113,7 @@ Similarly, the `linkerd policy generate` command in Buoyant Enterprise for
 Linkerd, which watches live traffic to a system and generates policy scaffolding
 that accounts for observed traffic, has been updated to use audit mode by
 default.
-[Learn more](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/tasks/generating-policy/).
+[Learn more](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/generating-policy/).
 
 ## IPv6
 
