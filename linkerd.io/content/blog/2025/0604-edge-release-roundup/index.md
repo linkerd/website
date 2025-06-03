@@ -70,6 +70,7 @@ the default port for tracing is the OpenTelemetry port (4317) rather than the
 OpenCensus port (55678).
 
 [April 2025 Roundup]: ../../../04/11/linkerd-edge-release-roundup/
+[Linkerd Gateway API documentation]: https://linkerd.io/2/features/gateway-api/
 [edge-25.4.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.1
 [edge-25.4.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.3
 [edge-25.4.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.4
@@ -80,9 +81,9 @@ OpenCensus port (55678).
 
 The first few edge releases in this Roundup, broadly speaking, are all about
 getting to Linkerd 2.18, which corresponds to [edge-25.4.4]. After that we
-have a few releases cleaning up some small issues.Of course, each edge release
-includes _many_ dependency updates which we won't list here, but you can find
-them in the release notes for each release.
+have a few releases cleaning up some small issues. Of course, each edge
+release includes _many_ dependency updates which we won't list here, but which
+you can find in the release notes for each release.
 
 ### edge-25.5.5 (May 29, 2025)
 
