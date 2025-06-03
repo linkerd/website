@@ -56,8 +56,9 @@ recommended for everyone to use, with the exceptions being two edge releases
 that changed internal build processes and updated dependencies, but didn't
 make any user-facing changes.
 
-We want to reiterate a major point from the [April 2025 Roundup] post: in
-Linkerd 2.18, including all of the edge releases covered by this post, the
+There are definitely some changes to be aware in recent edge releases, too.
+We'll start by reiterating a major point from the [April 2025 Roundup] post:
+in Linkerd 2.18, including all of the edge releases covered by this post, the
 Gateway API CRDs are _mandatory_, and our recommendation is that you install
 them yourself rather than having Linkerd install them for you. You can read
 more about this in the [Linkerd Gateway API documentation], and of course the
@@ -68,7 +69,7 @@ Additionally, as of [edge-25.4.3] (and therefore included in Linkerd 2.18!)
 the default port for tracing is the OpenTelemetry port (4317) rather than the
 OpenCensus port (55678).
 
-[April 2025 Roundup]: ../../04/11/linkerd-edge-release-roundup/
+[April 2025 Roundup]: ../../../04/11/linkerd-edge-release-roundup/
 [edge-25.4.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.1
 [edge-25.4.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.3
 [edge-25.4.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.4
