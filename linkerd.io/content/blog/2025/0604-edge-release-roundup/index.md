@@ -82,52 +82,34 @@ have a few releases cleaning up some small issues.Of course, each edge release
 includes _many_ dependency updates which we won't list here, but you can find
 them in the release notes for each release.
 
-### edge-25.4.1 (April 02, 2025)
-
-_This release is recommended for all users, and is probably the one you should
-run if you're reading this post._
-
-### edge-25.3.4 (March 27, 2025)
-
-_This release has a CLI bug that prevents it from installing the Gateway API
-CRDs even if requested. As such, we recommend [edge-25.4.1] instead, though
-Helm is functional in this release._
-
-### edge-25.3.3 (March 20, 2025)
-
-_This release is **not recommended** since it unintentionally switched the
-multicluster mirror controller to use ClusterRole permissions rather than Role
-permissions, and doesn't correctly support IPv6. We recommend using
-[edge-25.4.1] instead._
-
-# edge-25.5.5 (May 29, 2025)
+### edge-25.5.5 (May 29, 2025)
 
 This release adds support for the `k8s.pod.ip` OpenTelemetry trace attribute.
 Thanks, [Justin Seiser]!
 
-# edge-25.5.4 (May 22, 2025)
+### edge-25.5.4 (May 22, 2025)
 
 This release correctly supports setting pod antiaffinity for the
 `linkerd-multicluster` chart.
 
-# edge-25.5.3 (May 15, 2025)
+### edge-25.5.3 (May 15, 2025)
 
 This release contains internal improvements, but no new capabilities over
 [edge-25.5.1] -- as such, we recommend that you skip it and go straight to
 [edge-25.5.5]!
 
-# edge-25.5.2 (May 08, 2025)
+### edge-25.5.2 (May 08, 2025)
 
 This release contains internal improvements, but no new capabilities over
 [edge-25.5.1] -- as such, we recommend that you skip it and go straight to
 [edge-25.5.5]!
 
-# edge-25.5.1 (May 02, 2025)
+### edge-25.5.1 (May 02, 2025)
 
 This edge release adds support for `httproute.gateway.networking.k8s.io` in an
 AuthorizationPolicy `targetRef`.
 
-# edge-25.4.4 (April 21, 2025)
+### edge-25.4.4 (April 21, 2025)
 
 With this release, Linkerd 2.18 is complete, and the `version-2.18` tag points
 to `edge-25.4.4`!
@@ -140,7 +122,7 @@ taking precedence if both are present. Finally, the
 `LINKERD2_PROXY_OUTBOUND_METRICS_HOSTNAME_LABELS` is correctly honored for TLS
 hostname labels.
 
-# edge-25.4.3 (April 16, 2025)
+### edge-25.4.3 (April 16, 2025)
 
 This release changes the default port for tracing to the OpenTelemetry port
 (4317) rather than the OpenCensus port (55678). Additionally, it tweaks the
@@ -148,7 +130,7 @@ CLI to make sure that the `v1` Gateway API resources we rely on are present,
 and gives a more specific command to install Gateway API CRDs if they're not
 found.
 
-# edge-25.4.2 (April 09, 2025)
+### edge-25.4.2 (April 09, 2025)
 
 This release makes it easier to see the message telling you that you need to
 install the Gateway API CRDs when they are missing, by not showing all the
