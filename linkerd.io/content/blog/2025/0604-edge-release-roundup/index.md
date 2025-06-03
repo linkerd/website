@@ -16,7 +16,7 @@ images: [social.jpg] # Open graph image
 Welcome to the June 2025 Edge Release Roundup post, where we dive into the
 most recent edge releases to help keep everyone up to date on the latest and
 greatest! This post covers edge releases from April and May, notably including
-[edge-25.4.4], which corresponds to Linkerd 2.18; since the lion's share of
+[edge-25.4.4], which corresponds to Linkerd 2.18. Since the lion's share of
 2.18's new functionality was covered in the [April 2025 Roundup] post, though,
 in this Roundup we'll be seeing mostly smaller changes.
 
@@ -68,7 +68,8 @@ Additionally, as of [edge-25.4.3] (and therefore included in Linkerd 2.18!)
 the default port for tracing is the OpenTelemetry port (4317) rather than the
 OpenCensus port (55678).
 
-[April 2025 Roundup]: ../0424-edge-release-roundup/
+[April 2025 Roundup]: ../../04/11/linkerd-edge-release-roundup/
+[edge-25.4.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.1
 [edge-25.4.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.3
 [edge-25.4.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.4
 [edge-25.5.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.5.1
