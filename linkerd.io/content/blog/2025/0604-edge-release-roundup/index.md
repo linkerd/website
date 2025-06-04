@@ -16,9 +16,9 @@ images: [social.jpg] # Open graph image
 Welcome to the June 2025 Edge Release Roundup post, where we dive into the
 most recent edge releases to help keep everyone up to date on the latest and
 greatest! This post covers edge releases from April and May, notably including
-[edge-25.4.4], which corresponds to Linkerd 2.18. Since the lion's share of
-2.18's new functionality was covered in the [April 2025 Roundup] post, though,
-in this Roundup we'll be seeing mostly smaller changes.
+[edge-25.4.4], which corresponds to Linkerd 2.18. However, since the lion's
+share of 2.18's new functionality was covered in the [April 2025 Roundup]
+post, we'll be mostly seeing smaller changes in this Roundup.
 
 ## How to give feedback
 
