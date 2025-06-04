@@ -56,7 +56,7 @@ recommended for everyone to use, with the exceptions being two edge releases
 that changed internal build processes and updated dependencies, but didn't
 make any user-facing changes.
 
-There are definitely some changes to be aware in recent edge releases, too.
+There are definitely some changes to be aware of in recent edge releases, too.
 We'll start by reiterating a major point from the [April 2025 Roundup] post:
 in Linkerd 2.18, including all of the edge releases covered by this post, the
 Gateway API CRDs are _mandatory_, and our recommendation is that you install
