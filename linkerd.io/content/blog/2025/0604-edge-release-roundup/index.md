@@ -65,7 +65,7 @@ more about this in the [Linkerd Gateway API documentation], and of course the
 [April 2025 Roundup] post has more details on breaking changes leading up to
 Linkerd 2.18.
 
-Additionally, as of [edge-25.4.3] (and therefore included in Linkerd 2.18!)
+Additionally, as of [edge-25.4.3] (and therefore included in Linkerd 2.18!),
 the default port for tracing is the OpenTelemetry port (4317) rather than the
 OpenCensus port (55678).
 
