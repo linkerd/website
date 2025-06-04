@@ -80,9 +80,9 @@ OpenCensus port (55678).
 ## The releases
 
 The first few edge releases in this Roundup, broadly speaking, are all about
-getting to Linkerd 2.18, which corresponds to [edge-25.4.4]. After that we
+getting to Linkerd 2.18, which corresponds to [edge-25.4.4]. After that, we
 have a few releases cleaning up some small issues. Of course, each edge
-release includes _many_ dependency updates which we won't list here, but which
+release includes _many_ dependency updates, which we won't list here, but which
 you can find in the release notes for each release.
 
 ### edge-25.5.5 (May 29, 2025)
@@ -129,7 +129,7 @@ hostname labels.
 
 This release changes the default port for tracing to the OpenTelemetry port
 (4317) rather than the OpenCensus port (55678). Additionally, it tweaks the
-CLI to make sure that the `v1` Gateway API resources we rely on are present,
+CLI to make sure that the `v1` Gateway API resources we rely on are present
 and gives a more specific command to install Gateway API CRDs if they're not
 found.
 
@@ -158,7 +158,7 @@ Linkerd is a graduated project of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
 [committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
-our rapidly-growing community! Linkerd is hosted on
+our rapidly growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 in [mailing lists](/community/get-involved/). Come and join the fun!
