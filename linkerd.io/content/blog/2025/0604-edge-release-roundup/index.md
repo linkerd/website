@@ -42,7 +42,7 @@ reach us.
 
 We couldn't do what we do without the Linkerd community, although this
 particular batch of releases makes that a little less obvious than usual. Huge
-thanks to [Justin Seiser] for his contributions helping out Linkerd's
+thanks to [Justin Seiser] for his contributions to Linkerd's
 OpenTelemetry support!
 
 [Justin Seiser]: https://github.com/jseiser
