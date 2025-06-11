@@ -47,7 +47,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.5
+        image: ghcr.io/buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -112,7 +112,7 @@ spec:
       serviceAccountName: authors
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.5
+        image: ghcr.io/buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -176,7 +176,7 @@ spec:
       serviceAccountName: books
       containers:
       - name: service
-        image: buoyantio/booksapp:v0.0.5
+        image: ghcr.io/buoyantio/booksapp:v0.0.5
         env:
         - name: DATABASE_URL
           value: sqlite3:db/db.sqlite3
@@ -223,7 +223,7 @@ spec:
       serviceAccountName: traffic
       containers:
       - name: traffic
-        image: buoyantio/booksapp-traffic:v0.0.3
+        image: ghcr.io/buoyantio/booksapp-traffic:v0.0.3
         args:
         - "-initial-delay=30s"
         - "webapp:7000"
