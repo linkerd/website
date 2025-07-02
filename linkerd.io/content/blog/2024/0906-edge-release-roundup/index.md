@@ -63,7 +63,7 @@ if you add the GRPCRoute CRD after installing Linkerd.
 
 [`edge-24.8.1`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.1
 [`edge-24.8.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2
-[Linkerd 2.16]: /2024/08/13/announcing-linkerd-2.16/index.html
+[Linkerd 2.16]: /2024/08/13/announcing-linkerd-2.16/
 
 ### [`edge-24.8.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.3) (August 29, 2024)
 
