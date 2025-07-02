@@ -37,6 +37,6 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 
 Finally, we'd be remiss if we didn't point out that this approach has been deeply inspired by our friends at [Smallstep](https://smallstep.com/), [Cloudflare](https://www.cloudflare.com/), [Let's Encrypt](https://letsencrypt.org/), [Mozilla](https://www.mozilla.org/), and other amazing organizations that strive to make the Internet secure by default.
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/community/get-involved/). Come and join the fun!
 
 _Image credit: [Robert McGoldrick](https://www.flickr.com/photos/bobsfever/)_

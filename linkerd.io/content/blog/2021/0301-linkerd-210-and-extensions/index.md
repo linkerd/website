@@ -97,7 +97,7 @@ If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (Photo by
 [Kari Shea](https://unsplash.com/@karishea?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on

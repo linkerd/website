@@ -32,6 +32,6 @@ This focus on cost is so critical because _Linkerd is fundamentally a product fo
 
 For more detail about these principles and some examples of them in action, check out the [Linkerd design principles documentation](/2/design-principles/).
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/community/get-involved/). Come and join the fun!
 
 _Image credit: [Dimitry B.](https://www.flickr.com/photos/ru_boff/)_
