@@ -85,9 +85,9 @@ networks, see
 Starting way back in the Linkerd 2.12 release, Linkerd has been on the forefront
 of adopting Kubernetes's new [Gateway API](https://gateway-api.sigs.k8s.io/) as
 the core configuration mechanism for Linkerd, including for features such as
-[zero trust authorization policy](https://linkerd.io/2.13/features/server-policy/)
+[zero trust authorization policy](/2.13/features/server-policy/)
 and
-[dynamic request routing](https://linkerd.io/2.13/features/request-routing/).
+[dynamic request routing](/2.13/features/request-routing/).
 Adopting the Gateway API has a whole host of benefits for users, from providing
 standardized mechanisms for configuring complex resources such as classes of
 HTTP requests to providing a uniform API across ingress and service meshes
@@ -135,9 +135,9 @@ for details.
 ## What's next?
 
 Last year was a banner year for Linkerd—the
-[number of stable Kubernetes clusters running Linkerd doubled in 2022](https://linkerd.io/2022/12/28/service-mesh-2022-recap-ebpf-gateway-api/),
+[number of stable Kubernetes clusters running Linkerd doubled in 2022](/2022/12/28/service-mesh-2022-recap-ebpf-gateway-api/),
 and the project gained
-[multi-cluster failover](https://linkerd.io/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)
+[multi-cluster failover](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)
 and
 [full L7 authorization policy based on the Gateway API](https://buoyant.io/blog/announcing-linkerd-2-12).
 In 2023, with Linkerd 2.13 and 2.14 already under our belts, we're off to a

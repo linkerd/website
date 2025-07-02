@@ -62,7 +62,7 @@ between [HTTPRoutes] and [ServiceProfiles]:
 [HTTPRoutes]: https://gateway-api.sigs.k8s.io/api-types/httproute/
 [HTTPRoute standard]:
   https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1alpha2.HTTPRoute
-[ServiceProfiles]: https://linkerd.io/2.13/features/service-profiles/
+[ServiceProfiles]: /2.13/features/service-profiles/
 [consumer-routes]:
   https://gateway-api.sigs.k8s.io/concepts/glossary/#consumer-route
 [gamma-routing]:

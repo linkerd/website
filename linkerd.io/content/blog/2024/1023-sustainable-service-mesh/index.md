@@ -39,7 +39,7 @@ company; nor a happy and robust community. Each project must find its own answer
 to this question.
 
 To this end, in February [we announced a significant change to
-Linkerd](https://linkerd.io/2024/02/21/announcing-linkerd-2.15/). We would no
+Linkerd](/2024/02/21/announcing-linkerd-2.15/). We would no
 longer publish stable release packages as part of the open source project.
 Instead, we would rely on the vendor ecosystem for that work. The change itself
 was a small simplification of the project, but the goal behind it was very
@@ -84,7 +84,7 @@ We've also significantly improved our edge release process to make edge
 artifacts easier to consume, providing both [post-hoc
 guidance](https://github.com/linkerd/linkerd2/releases) about each release as
 well as [monthly
-roundups](https://linkerd.io/2024/09/06/linkerd-edge-release-roundup/). As we
+roundups](/2024/09/06/linkerd-edge-release-roundup/). As we
 hoped, this is has dramatically increased the speed of bugfixes for
 adopter-reported issues (see e.g.
 [#12610](https://github.com/linkerd/linkerd2/issues/12610)).

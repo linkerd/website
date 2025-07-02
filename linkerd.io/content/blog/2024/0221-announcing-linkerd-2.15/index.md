@@ -34,7 +34,7 @@ Read on for details!
 ## Mesh expansion
 
 As
-[we promised last November](https://linkerd.io/2023/11/07/linkerd-mesh-expansion/),
+[we promised last November](/2023/11/07/linkerd-mesh-expansion/),
 Linkerd 2.15 introduces _mesh expansion_: the ability to deploy Linkerd's
 ultralight Rust microproxies anywhere outside of Kubernetes and connect them to
 a Linkerd control plane running on a Kubernetes cluster. This allows Linkerd to

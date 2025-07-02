@@ -25,7 +25,7 @@ If you want to upgrade from 2.8, especially to 2.10, the Linkerd team strongly r
 
 ## Community member highlight: Richard Pijnenburg
 
-Richard is a DevOps manager at FXC Intel, a London-based fintech company and also our [January's Linkerd Hero](https://linkerd.io/community/heroes/). He recently gave Linkerd-await a try – a new feature that we dive into later in this blog. But first, let's step back and meet Richard.
+Richard is a DevOps manager at FXC Intel, a London-based fintech company and also our [January's Linkerd Hero](/community/heroes/). He recently gave Linkerd-await a try – a new feature that we dive into later in this blog. But first, let's step back and meet Richard.
 
 Richard has been involved with open source for about a decade. In his early days, he used Puppet, Elasticsearch, and wrote in Go. He has been heavily involved with the community since adopting Linkerd, enjoys spreading the open source gospel, and has spoken at numerous conferences and meetups. He's also really active in helping the community answering questions – a key reason why he was nominated Linkerd Hero in January. Helping others is how Richard learns. It's his way to get ahead of issues he may encounter in the near future – a great approach and win-win! Thanks, Richard, the whole community appreciates your time and effort!
 
@@ -57,10 +57,10 @@ What does Richard appreciate most about Linkerd? He found the community great an
 
 ## Protocol Detection and Opaque Ports in Linkerd
 
-Charles shared a preview of his latest blog [Protocol Detection and Opaque Ports in Linkerd](https://linkerd.io/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/). Check it out to learn all about Linkerd 2.10 which added a new opaque ports feature that further extends its ability to provide zero-config mTLS for all TCP traffic.
+Charles shared a preview of his latest blog [Protocol Detection and Opaque Ports in Linkerd](/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/). Check it out to learn all about Linkerd 2.10 which added a new opaque ports feature that further extends its ability to provide zero-config mTLS for all TCP traffic.
 
 ## February's Linkerd Hero
 
-Last but not least, we announced our[February Linkerd Hero](https://linkerd.io/community/heroes/), Sergio Mendéz.
+Last but not least, we announced our[February Linkerd Hero](/community/heroes/), Sergio Mendéz.
 
 Sergio is a very unique Linkerd Hero. An IT professor in Guatemala, Sergio exposed his students early on to cloud native technologies. By teaching them about cutting-edge tech and encouraging them to present in English, Sergio is not only building the next generation of cloud native programmers in Central America, he’s also opening the door to a global job market. If your students don’t see the value of it yet, they sure will for sure in the future, Sergio! Congrats, Sergio, you deserve it!

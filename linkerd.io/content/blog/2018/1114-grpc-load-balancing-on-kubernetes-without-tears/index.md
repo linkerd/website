@@ -60,7 +60,7 @@ Finally, Linkerd's Rust-based proxies are incredibly fast and small. They introd
 
 ## gRPC Load Balancing in 60 seconds
 
-Linkerd is very easy to try. Just follow the steps in the [Linkerd Getting Started Instructions](https://linkerd.io/2/getting-started/) — install the CLI on your laptop, install the control plane on your cluster, and "mesh" your service (inject the proxies into each pod). You'll have Linkerd running on your service in no time, and should see proper gRPC balancing immediately.
+Linkerd is very easy to try. Just follow the steps in the [Linkerd Getting Started Instructions](/2/getting-started/) — install the CLI on your laptop, install the control plane on your cluster, and "mesh" your service (inject the proxies into each pod). You'll have Linkerd running on your service in no time, and should see proper gRPC balancing immediately.
 
 Let's take a look at our sample `voting` service again, this time after installing Linkerd:
 
