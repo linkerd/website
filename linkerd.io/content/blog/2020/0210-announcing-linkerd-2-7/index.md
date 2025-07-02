@@ -97,7 +97,7 @@ hall.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](/2/edge) will already have seen
+our [weekly edge releases](/2-edge/) will already have seen
 these features in action. Either way, you can download the stable 2.7 release
 by running:
 

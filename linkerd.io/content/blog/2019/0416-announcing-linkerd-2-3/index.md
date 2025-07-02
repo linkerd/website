@@ -29,7 +29,7 @@ All of this is enabled by default and requires no configuration. This means that
 
 This release represents a major step forward in Linkerd's security roadmap. In an upcoming blog post, Linkerd creator Oliver Gould will be detailing the design tradeoffs in this approach, as well as covering Linkerd's upcoming roadmap around certificate chaining, TLS enforcement, identity beyond service accounts, and authorization. We'll also be discussing these topics (and all the other fun features in 2.3) in our [upcoming Linkerd Online Community Meeting](https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/) on Wednesday, April 24, 2019 at 10am PT.
 
-Ready to try it? Those of you who have been tracking the 2.x branch via our [weekly edge releases](/2/edge) will already have seen these features in action. Either way, you can download the stable 2.3 release by running:
+Ready to try it? Those of you who have been tracking the 2.x branch via our [weekly edge releases](/2-edge/) will already have seen these features in action. Either way, you can download the stable 2.3 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh

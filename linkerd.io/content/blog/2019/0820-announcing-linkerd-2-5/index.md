@@ -66,7 +66,7 @@ plus upcoming plans for Linkerd 2.6, Linkerd's integrations with
 Be sure to join us hear more about Linkerd 2.5 straight from the horses' mouths.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](/2/edge) will already have seen these
+[weekly edge releases](/2-edge/) will already have seen these
 features in action. Either way, you can download the stable 2.5 release by
 running:
 
