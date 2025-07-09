@@ -269,3 +269,42 @@ The same functionality can also be done through Helm setting the
 Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
 [multicluster task](../features/multicluster/).
+
+### Upgrading from multicluster version prior 2.18
+
+As mentioned above, after upgrading from a version prior to 2.18, the new controllers will be installed 
+alongside the old Service Mirror controllers. The old controllers will remain in place, watching their 
+associated Links and reacting to label changes in the target clusters.
+
+{{< note >}}
+The `linkerd multicluster check` command will warn you about any controllers that aren’t 
+managed by the extension.
+{{< /note >}}
+
+To complete the migration, you will need to:
+
+1. **Update the Multicluster extension to version 2.18**  
+
+In your Helm values, update the `controllers` section to list the links you want to migrate and 
+specify any per-controller configuration. This will deploy a new controller for each link 
+(named `controller-<link-name>`), while leaving the old controllers 
+(named `linkerd-service-mirror-<link-name>`) in place. For example:
+
+```yaml
+controllers:
+- link:
+    ref:
+      name: east
+```
+
+2. **Remove the old controllers**
+The new controllers won’t take over immediately because the old controllers still hold the 
+Lease object for each Link. To fully migrate to the new model, you will need to delete the 
+old controller deployments using the following command:
+
+```bash
+linkerd multicluster unlink --cluster-name <link-name> --only-controller | kubectl delete -f -
+```
+
+Within a few seconds, the new controllers will reclaim the Lease object and begin 
+managing their respective links.
