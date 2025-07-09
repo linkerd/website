@@ -429,9 +429,10 @@ anchor in the trust bundle until all the restarts have completed.
 
 {{< warning >}}
 
-This task is extremely important as it lets you keep the old trust anchor 
-valid alongside the new one, preventing any mTLS validation failures during 
-the rotation of the trust anchor certificate.
+This task is criticalas it ensures the old trust anchor remains valid alongside 
+the new one, preventing mTLS validation failures during rotation. After 
+each rotation, you must also manually update the `linkerd-previous-anchor` 
+secret with the former trust anchor certificate.
 
 {{< /warning >}}
 
