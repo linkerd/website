@@ -270,7 +270,7 @@ Now that the multicluster components are installed, operations like linking, etc
 can be performed by using the linkerd CLI's multicluster sub-command as per the
 [multicluster task](../features/multicluster/).
 
-### Upgrading from multicluster version prior 2.18
+## Migrating controllers after upgrading from multicluster version prior 2.18
 
 As mentioned above, after upgrading from a version prior to 2.18, the new controllers will be installed 
 alongside the old Service Mirror controllers. The old controllers will remain in place, watching their 
