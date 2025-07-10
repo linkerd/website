@@ -44,10 +44,10 @@ concept that we saw in Linkerd 2.8.
 
 Last, but most certainly not least, we announced our January Linkerd Hero. Once
 more we had three amazing candidates: [Matt Young, Richard Pijnenburg, and Jimil
-Desai](https://linkerd.io/2021/01/19/january-2021-linkerd-hero-nomination/)—all
+Desai](/2021/01/19/january-2021-linkerd-hero-nomination/)—all
 invaluable members of our community.
 
-You [voted for Richard](https://linkerd.io/heroes/) who has been particularly
+You voted for Richard who has been particularly
 active on the Linkerd Slack, helping his peers and answering their questions.
 Very knowledgeable and with a ton of experience with open source, Richard brings
 his rich expertise to the Linkerd community. Congratulations, Richard!
@@ -58,9 +58,9 @@ his rich expertise to the Linkerd community. Congratulations, Richard!
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
-governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!

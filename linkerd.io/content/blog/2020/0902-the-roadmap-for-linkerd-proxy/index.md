@@ -14,7 +14,7 @@ Last month, William Morgan wrote about some of the [decisions that first went
 into building a service-mesh-specific proxy in
 Rust](https://thenewstack.io/linkerds-little-secret-a-lightning-fast-service-mesh-focused-rust-network-proxy/).
 Eliza Weisman then followed up with [a deep dive into
-Linkerd2-proxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 and how it handles requests. In this article, I want to look into the future:
 what do the upcoming months and years have in store for Linkerd's proxy? And
 how can you get involved?
@@ -48,9 +48,9 @@ general-purpose proxies such as NGINX and Envoy. This is not a knock on those
 proxies; it's simply a reflection that by shedding all the non-service-mesh use
 cases, Linkerd2-proxy gains the leeway to "just work" without tuning or
 tweaking, through features like [protocol
-detection](https://linkerd.io/2/features/protocol-detection/) and
+detection](/2/features/protocol-detection/) and
 [Kubernetes-native service
-discovery](https://linkerd.io/2/features/load-balancing/). In fact, at this
+discovery](/2/features/load-balancing/). In fact, at this
 point Linkerd-proxy doesn't even have a config file.
 
 ## The future of the Linkerd2-proxy
@@ -69,7 +69,7 @@ working on extend this to non-HTTP protocols, so that they have the same
 guarantees of workload identity and confidentiality that Linkerd provides for
 HTTP traffic today. As an added bonus, this feature will also extend Linkerd's
 [seamless multi-cluster
-capabilities](https://linkerd.io/2/features/multicluster/) to non-HTTP traffic.
+capabilities](/2/features/multicluster/) to non-HTTP traffic.
 2. **Revisiting latency bucketing**. As part of its instrumentation,
 Linkerd2-proxy records the latency of all traffic that passes through it and
 reports these values in a set of fixed buckets, with a specific latency range
@@ -119,7 +119,7 @@ Meetup](https://www.meetup.com/Linkerd-Online-Community-Meetup/);
 proxy issues](https://github.com/linkerd/linkerd2/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fproxy),
 especially those marked "good first issue"; and
 4. Familiarize yourself with our [RFC
-process](https://linkerd.io/2020/04/08/introducing-linkerds-rfc-process/) for
+process](/2020/04/08/introducing-linkerds-rfc-process/) for
 introducing bigger changes to the project.
 
 If you're new to Rust especially, you might also want to take a look at the
@@ -146,11 +146,11 @@ proxy) in a matter of minutes.
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you
 join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 Image credit: Photo by [Amit Jain](https://unsplash.com/@amitjain0106?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/roadmap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)

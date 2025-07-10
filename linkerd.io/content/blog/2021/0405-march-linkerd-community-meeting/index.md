@@ -36,7 +36,7 @@ multiple opt-in extensions; gaining more control over their service mesh
 implementation and making Linkerd even more lightweight. We also added opaque
 ports to extend Linkerd’s coverage to certain situations that are incompatible
 with protocol detection. Finally, we extended multi-cluster to all TCP
-connections. Learn more in [our blog post on the release](https://linkerd.io/2021/03/11/announcing-linkerd-2.10/).
+connections. Learn more in [our blog post on the release](/2021/03/11/announcing-linkerd-2.10/).
 
 ## Linkerd Heroes
 

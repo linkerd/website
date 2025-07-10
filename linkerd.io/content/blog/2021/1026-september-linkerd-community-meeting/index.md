@@ -23,7 +23,7 @@ Delayed slightly due to KubeCon, our Linkerd Community Meeting recap and
 recording are now live.
 
 Before we get started — as usual — a quick reminder of our
-[Linkerd Community Anchor Program](https://linkerd.io/community/anchor/).
+[Linkerd Community Anchor Program](/community/anchor/).
 If you have a Linkerd story you’d like to share, we’d love to help you
 tell it. Whether you built a cloud native platform with Linkerd or
 integrated the service mesh with another CNCF project, these experiences
@@ -35,7 +35,7 @@ So, if you haven’t done so yet, participate today — thank you!
 
 ## Roadmap
 
-The [Linkerd 2.11 docs](https://linkerd.io/2.11/overview/)
+The [Linkerd 2.11 docs](/2.11/overview/)
 are live and you'll see lots of small changes. The Linkerd team and the
 community have been working on 2.11 since May. Changes include more robust
 iptables rules, reduced proxy and memory CPU usage (in load testing),
@@ -56,7 +56,7 @@ look out for those issues, your help really makes a difference!
 
 As mentioned above, policy is one of the features that shipped with 2.11.
 Charles demoed this long-awaited and powerful capability. To replicate it, just
-[follow the instructions in the docs](https://linkerd.io/2.11/features/server-policy/).
+[follow the instructions in the docs](/2.11/features/server-policy/).
 
 Policy allows you to control which connections a server accepts. Generally,
 policy is focused on enforcing mTLS and typical use cases are in multi-tenancy
@@ -82,7 +82,7 @@ HTTP requests with bodies — another new 2.11 feature. Retrying requests
 with bodies is especially important for anyone using Linkerd with gRPC:
 since all gRPC requests are HTTP/2 `POST` requests with bodies, this feature
 enables retries to be configured for gRPC traffic. To learn more about it,
-check out [Eliza’s writeup on retries with message bodies](https://linkerd.io/2021/10/26/how-linkerd-retries-http-requests-with-bodies/).
+check out [Eliza’s writeup on retries with message bodies](/2021/10/26/how-linkerd-retries-http-requests-with-bodies/).
 
 ## September Linkerd Hero
 
@@ -92,7 +92,7 @@ code to the website repository and Linkerd’s multicluster capabilities.
 Ujjwal also helps spread the Linkerd message and provides awesome
 tweet-length summaries of different Linkerd events! Because lots of small
 contributions really add up, the
-[maintainers nominated Ujjwal](https://linkerd.io/2021/09/30/announcing-septembers-linkerd-hero/).
+[maintainers nominated Ujjwal](/2021/09/30/announcing-septembers-linkerd-hero/).
 
 Who is your Linkerd Hero?
 [Submit your nomination today](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform)!

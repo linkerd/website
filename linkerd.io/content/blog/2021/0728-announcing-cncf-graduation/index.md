@@ -16,7 +16,7 @@ at the foundation's highest level of project maturity.
 
 For a project that started out as [a small wrapper over some open source
 Twitter
-libraries](https://linkerd.io/2016/02/18/linkerd-twitter-style-operability-for-microservices/)
+libraries](/2016/02/18/linkerd-twitter-style-operability-for-microservices/)
 and went on to face intense competition from some of the biggest companies in
 the world, graduation is a significant victory. But not just for Linkerd.
 
@@ -26,11 +26,11 @@ slow.
 
 This is a victory for everyone who has chosen a service mesh based
 on [performance
-benchmarks](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/), or
+benchmarks](/2021/05/27/linkerd-vs-istio-benchmarks/), or
 [coherent design
-principles](https://linkerd.io/2019/04/29/linkerd-design-principles/), or
+principles](/2019/04/29/linkerd-design-principles/), or
 [solving concrete
-problems](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/), rather
+problems](/2020/12/03/why-linkerd-doesnt-use-envoy/), rather
 than relying on vendor marketing or giving into hype cycles.
 
 Most of all, this is a victory for everyone around the world who—whether
@@ -102,7 +102,7 @@ the service mesh that the world deserves.
 
 We are profoundly grateful, as always, to every member of the Linkerd
 community, especially to our [Linkerd
-heroes](https://linkerd.io/community/heroes/), and to everyone who has ever
+heroes](/community/heroes/), and to everyone who has ever
 given Linkerd a shot, helped someone else out, given a talk or written a blog
 post, given us feedback, contributed a PR, or otherwise been a part of the
 community. A special thank you to Dave Zolotusky, Lee Calcote, Chris Aniszczyk,
@@ -112,12 +112,12 @@ and Amye Scavarda Perrin for helping us through the graduation process.
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you
 join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [JZ
 Guo](https://unsplash.com/@straul?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

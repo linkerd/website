@@ -15,7 +15,7 @@ command to obey Kubernetes RBAC rules, improves Linkerd's CLI to report metrics
 during traffic splits, allows logging levels to be set dynamically, and much,
 much more.
 
-Linkerd's [new Helm support](https://linkerd.io/2/tasks/install-helm/) offers an
+Linkerd's [new Helm support](/2/tasks/install-helm/) offers an
 alternative to `linkerd install` for installation. If you're a Helm 2 or Helm 3
 user, you can use this install Linkerd with your existing deployment flow. Even
 if you're not, this method may provide a better mechanism for environments that
@@ -39,7 +39,7 @@ enhancements, and bug fixes, including:
 - Dynamically configurable proxy logging levels.
 - A new `linkerd stat trafficsplits` command to show metrics during traffic
   split operations (e.g.
-  [a canary release](https://linkerd.io/2/tasks/flagger/)).
+  [a canary release](/2/tasks/flagger/)).
 - A new Kubernetes cluster monitoring Grafana dashboard.
 - Handy new CLI flags like `--as` and `--all-namespaces`.
 - New pod anti-affinity rules in high availability (HA) mode.
@@ -66,7 +66,7 @@ plus upcoming plans for Linkerd 2.6, Linkerd's integrations with
 Be sure to join us hear more about Linkerd 2.5 straight from the horses' mouths.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](https://linkerd.io/2/edge) will already have seen these
+[weekly edge releases](/2-edge/) will already have seen these
 features in action. Either way, you can download the stable 2.5 release by
 running:
 
@@ -75,7 +75,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Upgrading from a previous release? See our handy
-[Linkerd upgrade guide](https://linkerd.io/2/tasks/upgrade/) for how to use the
+[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the
 `linkerd upgrade` command.
 
 Linkerd is a community project and is hosted by the
@@ -84,6 +84,6 @@ requests, questions, or comments, we'd love to have you join our rapidly-growing
 community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
 have a thriving community on [Slack](https://slack.linkerd.io/),
 [Twitter](https://twitter.com/linkerd), and the
-[mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+[mailing lists](/community/get-involved/). Come and join the fun!
 
 (_Image credit: [Plaisanter](https://www.flickr.com/photos/plaisanter/)_)

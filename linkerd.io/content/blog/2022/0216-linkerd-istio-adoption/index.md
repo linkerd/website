@@ -41,15 +41,15 @@ adoption](https://buoyant.io/2022/02/03/state-of-the-service-mesh-kubecon-na-202
 
 These results also underscore just how remarkable a year 2021 was for Linkerd.
 As I said in last year's [roadmap
-post](https://linkerd.io/2021/12/29/the-service-mesh-in-2022/):
+post](/2021/12/29/the-service-mesh-in-2022/):
 
 > 2021 has been a banner year for Linkerd. The project [achieved graduated
 > status in the Cloud Native Computing
-> Foundation](https://linkerd.io/2021/07/28/announcing-cncf-graduation/), the
+> Foundation](/2021/07/28/announcing-cncf-graduation/), the
 > highest possible level of project maturity. It introduced major features such
 > as [authorization
-> policy](https://linkerd.io/2021/09/30/announcing-linkerd-2.11/) and
-> [extensions](https://linkerd.io/2021/03/11/announcing-linkerd-2.10/). The
+> policy](/2021/09/30/announcing-linkerd-2.11/) and
+> [extensions](/2021/03/11/announcing-linkerd-2.10/). The
 > Linkerd team [keynoted at Kubecon
 > EU](https://buoyant.io/media/linkerd-vs-covid-19/) on the many ways Linkerd is
 > used to combat COVID-19; it published [multiple benchmarks showing an
@@ -76,12 +76,12 @@ as they say, will speak for themselves.
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [SpaceX](https://unsplash.com/@spacex?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on

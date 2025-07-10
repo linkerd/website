@@ -12,10 +12,10 @@ params:
 
 This blog post will look at how Linkerd uses iptables to intercept the TCP
 traffic to and from Kubernetes pods and route it through
-["sidecar" proxies](https://linkerd.io/service-mesh-glossary/#sidecar-proxy)
+["sidecar" proxies](/service-mesh-glossary/#sidecar-proxy)
 without the application knowing. This ability to transparently route traffic
 is key to Linkerd's entire feature set, from
-[golden metrics](https://linkerd.io/service-mesh-glossary/#golden-metrics)
+[golden metrics](/service-mesh-glossary/#golden-metrics)
 to [mTLS](https://buoyant.io/mtls-guide/),
 from request retries to gRPC load balancing. And, while iptables is
 a particularly hairy bit of the networking stack, it is both powerful and
@@ -32,7 +32,7 @@ forwarding traffic to an application process in a pod. Inbound traffic was
 always forwarded to a port bound on localhost, regardless of the actual
 inbound address. This had the unintended consequence of exposing ports not
 bound on public interfaces to other pods in the
-[cluster](https://linkerd.io/service-mesh-glossary/#cluster).
+[cluster](/service-mesh-glossary/#cluster).
 We changed the proxy to forward traffic to the original address to harden
 security and better integrate with the upcoming policy feature. During
 testing, we noticed the changes introduced a strange looping behavior—a
@@ -64,16 +64,16 @@ in-depth. That’s better left to some of the existing articles on the topic
 
 It would be natural to talk about what Linkerd does for you before talking about
 what iptables does for Linkerd. A
-**[service mesh](https://linkerd.io/service-mesh-glossary/#service-mesh)**
-adds *[observability](https://linkerd.io/service-mesh-glossary/#observability),
+**[service mesh](/service-mesh-glossary/#service-mesh)**
+adds *[observability](/service-mesh-glossary/#observability),
 security*, and *reliability* features to an application, but it does so at a
 platform layer. The mesh consists of a *data plane*, represented by a group of
 network proxies that sit in between your applications, and a
-*[control plane](https://linkerd.io/service-mesh-glossary/#control-plane)* that
+*[control plane](/service-mesh-glossary/#control-plane)* that
 provides an
-[interface for the humans operating the mesh](https://linkerd.io/2021/04/01/introduction-to-the-service-mesh/#what-is-a-service-mesh).
+[interface for the humans operating the mesh](/2021/04/01/introduction-to-the-service-mesh/#what-is-a-service-mesh).
 Linkerd uses its own
-[ultralight, Rust-based "micro-proxy"](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/)
+[ultralight, Rust-based "micro-proxy"](/2020/12/03/why-linkerd-doesnt-use-envoy/)
 for the data plane for security and performance reasons—each instance of an
 application that participates in the mesh gets its **Linkerd2-proxy** running
 beside it. We say that the proxy runs as a “sidecar”—it is just another container
@@ -157,7 +157,7 @@ the *OUTPUT* chain, which is traversed when a local process produces a packet.
 Armed with this archaic knowledge, we are ready to look at how packets are
 handled **on the inbound side** of the proxy. Communication between proxies is
 opportunistically upgraded to HTTP/2 (unless an opaque transport is used) and
-opportunistically [mTLS](https://linkerd.io/service-mesh-glossary/#mtls)’d.
+opportunistically [mTLS](/service-mesh-glossary/#mtls)’d.
 This means that the proxy should first handle any packet that comes in our
 networking namespace—we otherwise risk sending a payload to the application we
 won’t be able to make sense of.
@@ -170,7 +170,7 @@ the prerouting chain, we attach a rule that sends packets to our newly created
 chain. After “jumping” to our chain, a packet goes through two more rules:
 
 - We check whether the destination port should be ignored
-([since Linkerd 2.9, certain ports may be skipped](https://linkerd.io/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/)).
+([since Linkerd 2.9, certain ports may be skipped](/2021/02/23/protocol-detection-and-opaque-ports-in-linkerd/)).
 If the port is skipped, the packet makes it directly to the application.
 - If the packet does not match any of the destination ports, it’s simply
 forwarded to the proxy’s inbound port. Under the hood, iptables will rewrite

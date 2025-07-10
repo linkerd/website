@@ -24,7 +24,7 @@ It's time for our monthly Linkerd Community recap. Read the summary, watch
 the recording, or both!
 
 As usual, we started with a reminder of our
-[Linkerd Community Anchor Program](https://linkerd.io/community/anchor/).
+[Linkerd Community Anchor Program](/community/anchor/).
 If you have a Linkerd story you'd like to share, we'd love to help you tell
 it. Whether you built a cloud native platform with Linkerd or integrated
 the service mesh with another CNCF project, these are all things that are
@@ -156,13 +156,13 @@ But it's on the roadmap, so expect to see it soon!
 If this sounds interesting,
 [give Tapshark a try](https://github.com/adleong/tapshark).
 You can install it like any other
-[Linkerd extension](https://linkerd.io/2.10/reference/extension-list/).
+[Linkerd extension](/2.10/reference/extension-list/).
 
 ## Linkerd Hero
 
 As always, we announced our Linkerd Hero. And the winner is...Sanskar
 Jaiswal! Huge congrats to Sanskar. Check out
-[why he won and why he's such a valuable community member](https://linkerd.io/2021/07/29/announcing-julys-linkerd-hero/).
+[why he won and why he's such a valuable community member](/2021/07/29/announcing-julys-linkerd-hero/).
 Who is your Linkerd Hero?
 [Submit your nomination today](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform)!
 

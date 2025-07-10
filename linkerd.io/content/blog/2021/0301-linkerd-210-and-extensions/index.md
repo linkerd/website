@@ -66,7 +66,7 @@ project—especially with our focus on simplicity.
 
 Thus far, we've tackled this in a somewhat ad-hoc manner, including a custom
 install flow for the multi-cluster components, a specialized "[Bring Your Own
-Prometheus](https://linkerd.io/2/tasks/external-prometheus/)" feature, and so
+Prometheus](/2/tasks/external-prometheus/)" feature, and so
 on. Moving all this machinery to the extensions framework allows for
 consistency: each of these feature extensions can now be treated exactly the
 same way.
@@ -92,12 +92,12 @@ one](https://github.com/linkerd/linkerd2/tree/main/jaeger).
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (Photo by
 [Kari Shea](https://unsplash.com/@karishea?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on

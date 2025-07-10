@@ -159,7 +159,7 @@ Nodes to use HA mode. (This is the reason why HA mode isn't the default: it
 won't work on single-Node demo clusters.)
 
 For more details about Linkerd's HA mode, check out the
-[Linkerd HA mode documentation](https://linkerd.io/2.13/features/ha/).
+[Linkerd HA mode documentation](/2.13/features/ha/).
 
 ### 4. Use your own image registry
 
@@ -172,7 +172,7 @@ unreachable.
 The simplest way to mitigate this risk is to **run your own image registry**,
 putting the availability of your images under your direct control. This often
 sounds daunting, but it's actually not that hard: the Linkerd
-[private Docker registry documentation](https://linkerd.io/2.13/tasks/using-a-private-docker-repository/)
+[private Docker registry documentation](/2.13/tasks/using-a-private-docker-repository/)
 covers exactly how get things set up.
 
 ### 5. Understand how to install and upgrade Linkerd
@@ -192,7 +192,7 @@ that.
 
 After you've vetted `values-ha.yaml`, you'll run `helm install` with the
 `-f path/to/your/values-ha.yaml` option. The
-[Linkerd documentation on installing with Helm](https://linkerd.io/2/tasks/install-helm/)
+[Linkerd documentation on installing with Helm](/2/tasks/install-helm/)
 goes into much more detail here.
 
 #### Upgrades
@@ -202,7 +202,7 @@ and always test in non-production environments. **Upgrade the control plane
 first** with `helm upgrade`, then gradually roll out data-plane upgrades by
 restarting workloads and allowing the control plane to inject the new version of
 the proxy. (There are more details on this process in the
-[Linkerd upgrade documentation](https://linkerd.io/2/tasks/upgrade/)).
+[Linkerd upgrade documentation](/2/tasks/upgrade/)).
 
 Order matters here: doing the control plane first is always supported, as the
 data plane is designed to handle the temporary skew – but **don't skip major
@@ -245,7 +245,7 @@ The last piece that you'll definitely need is efficient monitoring and alerting.
 right home for your production metrics is off-cluster, which might mean using
 [Buoyant Cloud](https://buoyant.io/cloud), a metrics provider like
 [Datadog](https://datadog.io), or your own
-[external Prometheus](https://linkerd.io/2.13/tasks/external-prometheus/).
+[external Prometheus](/2.13/tasks/external-prometheus/).
 
 You should **set up alerts for the both control plane and the data plane**. Your
 control plane components should basically always show 100% success: anything
@@ -286,7 +286,7 @@ This gets a little complex:
 - For the proxy, you can annotate individual workloads or namespaces, for
   example `config.linkerd.io/proxy-log-level: warn,linkerd2_proxy=trace`. See
   the
-  [documentation on setting the proxy's log level](https://linkerd.io/2.13/tasks/modifying-proxy-log-level/)
+  [documentation on setting the proxy's log level](/2.13/tasks/modifying-proxy-log-level/)
   for more options.
 - For individual controllers, you can modify the
   [Helm templates](https://github.com/linkerd/linkerd2/blob/main/charts/linkerd-control-plane/templates/)
@@ -297,7 +297,7 @@ This gets a little complex:
 Last but not least, there's the Linkerd debug sidecar, which comes equipped with
 `tshark`, `tcpdump`, `lsof`, and `iproute2`. If your runtime allows it, it can
 be very useful for debugging: check out the
-[documentation on using the debug sidecar](https://linkerd.io/2/tasks/using-the-debug-container)
+[documentation on using the debug sidecar](/2/tasks/using-the-debug-container)
 for the details here.
 
 ## Linkerd in Production
