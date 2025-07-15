@@ -1,5 +1,5 @@
 ---
-title: Upgrading Multi-cluster Components
+title: Upgrading Multi-cluster components
 description:
   Upgrade the Linkerd components that manage cross-cluster communication.
 ---
