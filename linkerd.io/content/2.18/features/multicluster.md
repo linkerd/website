@@ -125,7 +125,8 @@ guide](../tasks/multicluster/) for a walkthrough.
 ## Further reading
 
 * [Multi-cluster installation instructions](../tasks/installing-multicluster/)
-* [Pod-to-pod multicluster communication](../tasks/pod-to-pod-multicluster/)
+* [Upgrading multi-cluster components](../tasks/upgrading-multicluster/)
+* [Pod-to-pod multi-cluster communication](../tasks/pod-to-pod-multicluster/)
 * [Multi-cluster communication with StatefulSets](../tasks/multicluster-using-statefulsets/)
 * [Federated services](../tasks/federated-services/)
 * [Architecting for multi-cluster
