@@ -17,7 +17,7 @@ delay, things are moving fast!
 Linkerd Day comes at a fantastic time for Linkerd. In 2021, Linkerd became the
 first and only service mesh to achieve CNCF graduation status. Last year alone,
 [Linkerd adoption
-doubled](https://linkerd.io/2022/12/28/service-mesh-2022-recap-ebpf-gateway-api/),
+doubled](/2022/12/28/service-mesh-2022-recap-ebpf-gateway-api/),
 despite being one of the most mature projects in the CNCF. Organizations all
 around the world, from retailers like
 [Walmart](https://siliconangle.com/2023/01/17/walmarts-supercloud-cloud-native-kubernetes-based-platform-supercloud2/)
@@ -41,7 +41,7 @@ talk](https://events.linuxfoundation.org/kubecon-cloudnativecon-europe/cncf-host
 The CFP closes on February 12, so time is short.
 
 Need help coming up with the perfect pitch? Never fear, our [Linkerd Community
-Anchor](https://linkerd.io/community/anchor/) program is here. Please reach out
+Anchor](/community/anchor/) program is here. Please reach out
 and we'll give you hands-on help crafting the perfect submission.
 
 ## Interested in sponsoring? Act fast!
@@ -88,11 +88,11 @@ events. That's great news for attendees!
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [@as_w](https://twitter.com/as_w) on Twitter*)

@@ -33,11 +33,11 @@ boundaries that is:
 1. **Fully secured**. This means that traffic between clusters is encrypted,
    authenticated, and authorized using mutual TLS, workload identities (not
    network identities!) and Linkerd's fine-grained,
-   [zero-trust authorization policies](https://linkerd.io/2/features/server-policy/).
+   [zero-trust authorization policies](/2/features/server-policy/).
 2. **Transparent to the application.** This means that the application is
    totally decoupled from cluster topology, which allows the operator to take
    advantage of powerful networking capabilities such as
-   [dynamically failover traffic to other clusters](https://linkerd.io/2/tasks/automatic-failover/).
+   [dynamically failover traffic to other clusters](/2/tasks/automatic-failover/).
 3. **Observable and reliable**. Linkerd's powerful L7 instrospection and
    reliability mechanisms, including golden metrics, retries, timeouts,
    distributed tracing, circuit breaking, and more, are all available to
@@ -45,7 +45,7 @@ boundaries that is:
 
 Linkerd has supported multi-cluster Kubernetes deployments since the release of
 Linkerd 2.8 in 2020. That release introduced
-[a simple and elegant design](https://linkerd.io/2/features/multicluster/)
+[a simple and elegant design](/2/features/multicluster/)
 that involves the addition of a service mirror component to handle service
 discovery, and a multi-cluster gateway component to handle traffic from other
 clusters.
@@ -127,12 +127,12 @@ make use of flat networks.
 
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (_Photo by
 [NASA](https://unsplash.com/@nasa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

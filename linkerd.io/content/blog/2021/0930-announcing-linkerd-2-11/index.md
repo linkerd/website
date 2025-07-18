@@ -80,7 +80,7 @@ collection.
 Together, these annotations and CRDs allow you to easily specify a wide range
 of policies for your cluster, from "all traffic is allowed" to "port 8080 on
 service Foo can only receive
-[mTLS](https://linkerd.io/2.10/features/automatic-mtls/)
+[mTLS](/2.10/features/automatic-mtls/)
 traffic from services using the Bar service
 account", to lots more. (See the [full policy docs
 &raquo;](/2.11/features/server-policy/))
@@ -107,7 +107,7 @@ application containers attempt to connect before the proxy is ready.
 
 As usual, Linkerd 2.11 continues our goal of keeping Linkerd the [lightest,
 fastest possible service mesh for
-Kubernetes](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/).
+Kubernetes](/2021/05/27/linkerd-vs-istio-benchmarks/).
 Relevant changes in 2.11 include:
 
 * The control plane is down to just 3 deployments.
@@ -127,7 +127,7 @@ enhancements, and bug fixes, including:
   and they will serve as defaults for pods created in that namespace.
 * A new `linkerd check -o short` command with, you know, short output.
 * A new _Extensions_ page in the dashboard
-* [Fuzz testing](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/) for
+* [Fuzz testing](/2021/05/07/fuzz-testing-for-linkerd/) for
   the proxy!
 * The proxy now sets informational `l5d-client-id` and `l5d-proxy-error`
   headers
@@ -143,13 +143,13 @@ details.
 
 2021 has been a incredible year for Linkerd. Recently, [Linkerd became the only
 CNCF graduated service
-mesh](https://linkerd.io/2021/07/28/announcing-cncf-graduation/), joining
+mesh](/2021/07/28/announcing-cncf-graduation/), joining
 projects like Kubernetes, Prometheus, and Envoy at the foundation's highest
 level of maturity.  Linkerd's benchmarks continue to show that it is
 [dramatically faster and lighter than other service
-meshes](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/). The
+meshes](/2021/05/27/linkerd-vs-istio-benchmarks/). The
 Linkerd community also recently introduced the [Linkerd Ambassador
-program](https://linkerd.io/2021/08/05/announcing-the-linkerd-ambassador-program/),
+program](/2021/08/05/announcing-the-linkerd-ambassador-program/),
 recognizing those community members who demonstrate passion, engagement, and a
 commitment to sharing Linkerd with the border community, and organizations
 around the world are adopting Linkerd, often while [coming

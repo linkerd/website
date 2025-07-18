@@ -11,7 +11,7 @@ Retries are a fundamental mechanism for handling partial or transient failures i
 
 ## Marking a route as retryable
 
-In Linkerd 2.2 we introduced _retries_, or the ability for Linkerd to automatically retry failed requests. This gives Linkerd the ability to automatically handle partial or transient failures in a service, without the application having to be aware: if a request fails, Linkerd can just try it again! Combined with Linkerd's [request-level load balancing](https://linkerd.io/2/features/load-balancing/), this also allows Linkerd to handle failures of individual pods. In Linkerd, you specify retries as part of a [service profile](https://linkerd.io/2/features/service-profiles/) (introduced in a [previous blog post](/2018/12/08/service-profiles-for-per-route-metrics/)). Marking a route as retryable is as simple as adding \`isRetryable: true\` to the corresponding service profile entry:
+In Linkerd 2.2 we introduced _retries_, or the ability for Linkerd to automatically retry failed requests. This gives Linkerd the ability to automatically handle partial or transient failures in a service, without the application having to be aware: if a request fails, Linkerd can just try it again! Combined with Linkerd's [request-level load balancing](/2/features/load-balancing/), this also allows Linkerd to handle failures of individual pods. In Linkerd, you specify retries as part of a [service profile](/2/features/service-profiles/) (introduced in a [previous blog post](/2018/12/08/service-profiles-for-per-route-metrics/)). Marking a route as retryable is as simple as adding \`isRetryable: true\` to the corresponding service profile entry:
 
 ```yaml
 - name: HEAD /authors/{id}.json
@@ -138,7 +138,7 @@ POST /authors.json          authors               0.00%          0.0rps         
 [DEFAULT]                   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
 ```
 
-Success rate looks great but the p95 and p99 latencies have increased. This is to be expected because doing retries takes time. However, we can limit this by setting a [timeouts](https://linkerd.io/2/features/retries-and-timeouts/#timeouts) another new feature of Linkerd 2.x - at the maximum duration that we’re willing to wait. For the purposes of this demo, I’ll set a timeout of 25ms. Your results will vary depending on the characteristics of your system.
+Success rate looks great but the p95 and p99 latencies have increased. This is to be expected because doing retries takes time. However, we can limit this by setting a [timeouts](/2/features/retries-and-timeouts/#timeouts) another new feature of Linkerd 2.x - at the maximum duration that we’re willing to wait. For the purposes of this demo, I’ll set a timeout of 25ms. Your results will vary depending on the characteristics of your system.
 
 ```bash
 $ kubectl edit sp/authors.default.svc.cluster.local

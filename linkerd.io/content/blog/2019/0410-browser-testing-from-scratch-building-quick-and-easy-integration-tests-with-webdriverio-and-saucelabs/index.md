@@ -10,7 +10,7 @@ params:
 
 _This post was written for engineers who are building front-end integration test suites from scratch, particularly if your project is open-source. If you want to skip the background information and go right to the tutorial, scroll down to_ **"Building Your Testing Architecture."**
 
-One of the coolest things about working on [Linkerd](http://www.linkerd.io) is how excited our users are about our clean, deceptively simple dashboard, built with [React](https://reactjs.org/) and [Material-UI](https://material-ui.com/). (Wanna try it? Get our super-light, open-source service mesh [up and running in just a few minutes](https://linkerd.io/2/getting-started/)!)
+One of the coolest things about working on [Linkerd](http://www.linkerd.io) is how excited our users are about our clean, deceptively simple dashboard, built with [React](https://reactjs.org/) and [Material-UI](https://material-ui.com/). (Wanna try it? Get our super-light, open-source service mesh [up and running in just a few minutes](/2/getting-started/)!)
 
 ![Linkerd dashboard](linkerd-dashboard-screenshot.png "Linkerd dashboard screenshot from edge release 19.3.2.")
 

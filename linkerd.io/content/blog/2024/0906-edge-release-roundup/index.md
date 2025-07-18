@@ -63,7 +63,7 @@ if you add the GRPCRoute CRD after installing Linkerd.
 
 [`edge-24.8.1`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.1
 [`edge-24.8.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2
-[Linkerd 2.16]: https://linkerd.io/2024/08/13/announcing-linkerd-2.16/index.html
+[Linkerd 2.16]: /2024/08/13/announcing-linkerd-2.16/
 
 ### [`edge-24.8.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.3) (August 29, 2024)
 
@@ -99,7 +99,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
 You can also
-[install edge releases with Helm](https://linkerd.io/2.15/tasks/install-helm/).
+[install edge releases with Helm](/2.15/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

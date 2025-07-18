@@ -59,7 +59,7 @@ the latest Linkerd edge releases, so please try it out!
 ## Linkerd Heroes
 
 Last but not least, we announced
-[June's Linkerd Heroes: Steve Gray and Steve Reardon](https://linkerd.io/2021/06/24/announcing-junes-linkerd-heroes/).
+[June's Linkerd Heroes: Steve Gray and Steve Reardon](/2021/06/24/announcing-junes-linkerd-heroes/).
 If you'd like to nominate someone for next month,
 [please do so here](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform)!
 We love each and every opportunity to publicly celebrate the community members

@@ -25,8 +25,8 @@ Linkerd 2.18 was announced on April 23, 2025.
 Known distributions of Linkerd 2.18:
 
 - [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.18.1**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.18.1/)).
+  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.18.2**
+  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.18.2/)).
 
 ## Types of release artifacts
 

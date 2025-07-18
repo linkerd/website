@@ -32,7 +32,7 @@ Linkerd](https://docs.flagger.app/usage/linkerd-progressive-delivery)!
 operator that combines metrics and traffic splitting, and a great example of
 the sort of higher-order operations that the service mesh unlocks. (The Linkerd
 team is [the largest contributor to
-SMI](https://linkerd.io/2019/05/24/linkerd-and-smi/), so we're excited to see
+SMI](/2019/05/24/linkerd-and-smi/), so we're excited to see
 this coming together so nicely.)
 
 Finally, Linkerd 2.4 graduates the high availability (HA) control plane mode
@@ -53,10 +53,10 @@ including:
 details!
 
 Linkerd 2.4 is our third major release of 2019. Earlier this year, [Linkerd
-2.3](https://linkerd.io/2019/04/16/announcing-linkerd-2.3/) enabled mutual TLS
+2.3](/2019/04/16/announcing-linkerd-2.3/) enabled mutual TLS
 by default, making authenticated, confidential communication between meshed
 services the norm for all Linkerd users. In February, [Linkerd
-2.2](https://linkerd.io/2019/02/12/announcing-linkerd-2-2/) introduced
+2.2](/2019/02/12/announcing-linkerd-2-2/) introduced
 automatic retries and timeouts, adding powerful reliability mechanisms that
 allow Linkerd users to automatically recover from many of the partial failures
 endemic to distributed systems.
@@ -67,7 +67,7 @@ Meeting](https://www.meetup.com/Linkerd-Online-Community-Meetup/events/262624182
 later this month. Be sure to join us there.
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](https://linkerd.io/2/edge) will already have seen these
+[weekly edge releases](/2-edge/) will already have seen these
 features in action. Either way, you can download the stable 2.4 release by
 running:
 
@@ -81,6 +81,6 @@ comments, we'd love to have you join our rapidly-growing community! Linkerd is
 hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io/),
 [Twitter](https://twitter.com/linkerd), and the [mailing
-lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+lists](/community/get-involved/). Come and join the fun!
 
 (*Image credit: [Robert Couse-Baker](https://www.flickr.com/photos/29233640@N07/)*)

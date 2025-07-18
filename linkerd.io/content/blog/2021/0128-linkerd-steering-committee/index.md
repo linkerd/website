@@ -18,7 +18,7 @@ February, and all are welcome to attend.
 Linkerd is a unique project. In a space that's known for complexity and hype,
 Linkerd stands for simplicity, minimalism, and solving concrete problems. We've
 never been unafraid to [buck cloud native
-trends](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/) when it's
+trends](/2020/12/03/why-linkerd-doesnt-use-envoy/) when it's
 right for our adopters, and despite all the noise, [Linkerd adoption continues
 to grow rapidly](https://github.com/linkerd/linkerd2/blob/main/ADOPTERS.md). So
 why add a committee?
@@ -90,12 +90,12 @@ available shortly after.
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (Photo by
 [Uljana Maljutina](https://unsplash.com/@anajlu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

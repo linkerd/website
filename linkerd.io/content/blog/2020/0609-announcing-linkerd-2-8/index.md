@@ -45,8 +45,8 @@ Linkerd 2.8's new [multi-cluster feature](/2.10/features/multicluster/) means th
 Linkerd can now connect Kubernetes services across cluster boundaries in a way
 that's secure, fully transparent to the application, and independent of network
 topology. As discussed in our
-[earlier](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/)
-[posts](https://linkerd.io/2020/02/25/multicluster-kubernetes-with-service-mirroring/),
+[earlier](/2020/02/17/architecting-for-multicluster-kubernetes/)
+[posts](/2020/02/25/multicluster-kubernetes-with-service-mirroring/),
 this multi-cluster feature is designed to meet some critical goals:
 
 1. **Providing a unified trust domain.** The identity of source and destination
@@ -142,7 +142,7 @@ topic.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](https://linkerd.io/2/edge) will already have seen these
+[weekly edge releases](/2-edge/) will already have seen these
 features in action. Either way, you can download the stable 2.8 release by
 running:
 
@@ -151,18 +151,18 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](https://linkerd.io/2/tasks/install-helm/).
+[guide to installing Linkerd with Helm](/2/tasks/install-helm/).
 Upgrading from a previous release? We've got you covered: see our
-[Linkerd upgrade guide](https://linkerd.io/2/tasks/upgrade/) for how to use the
+[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the
 linkerd upgrade command.
 
 ## Linkerd is for everyone
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!

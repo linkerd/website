@@ -15,7 +15,7 @@ You can try Linkerd 2.0 on a Kubernetes 1.9+ cluster in 60 seconds by running:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-(Or check out the full [Getting Started Guide](https://linkerd.io/2/getting-started/).)
+(Or check out the full [Getting Started Guide](/2/getting-started/).)
 
 The 2.0 release of Linkerd brings some very significant changes. First, we’ve completely rewritten Linkerd to be orders of magnitude faster and smaller than Linkerd 1.x. Linkerd 2.0’s data plane is comprised of ultralight Rust proxies which consume around 10mb of RSS and have a p99 latency of <1ms. Linkerd’s minimalist control plane (written in Go) is similarly designed for speed and low resource footprint.
 

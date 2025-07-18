@@ -10,7 +10,7 @@ params:
 ---
 
 Hot on the heels of Linkerd's CNCF graduation, we are very excited to announce
-the [Linkerd Ambassador Program](https://linkerd.io/community/ambassadors/)!
+the [Linkerd Ambassador Program](/community/ambassadors/)!
 
 The Linkerd Ambassador badge is a distinction awarded to those community
 members who are experts in their field and who demonstrate passion,

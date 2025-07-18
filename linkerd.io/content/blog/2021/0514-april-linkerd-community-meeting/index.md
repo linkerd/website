@@ -12,13 +12,13 @@ params:
 
 As always, if you missed the April Linkerd Community Meeting, there is no reason to panic —  we've got you covered. Here's our recap and the recording.
 
-Before getting started, we wanted to remind you of the [Linkerd Anchor program](https://linkerd.io/community/anchor/). If you have a great Linkerd story, we'd love to help you tell it. Our team is happy to assist with the writing process, reviewing code, or providing guidance on how to create a great video tutorial. [Submit the form](https://linkerd.io/community/anchor/) and we'll reach out!
+Before getting started, we wanted to remind you of the [Linkerd Anchor program](/community/anchor/). If you have a great Linkerd story, we'd love to help you tell it. Our team is happy to assist with the writing process, reviewing code, or providing guidance on how to create a great video tutorial. [Submit the form](/community/anchor/) and we'll reach out!
 
 We are also still gathering responses to the [Linkerd 2021 user survey](https://docs.google.com/forms/d/e/1FAIpQLSfofwKQDOrAN9E9Vg1041623A3-8nmEAxlAbvXw-S9r3QnT9g/viewform). If you haven't participated yet, please do so. It really helps us make this awesome service mesh even more awesome.
 
 ## Project updates
 
-We've submitted Linkerd for CNCF graduation, and are currently waiting for a TOC sponsor. We've also added fuzz tests to the proxy, sponsored by the CNCF. You can read more in the blog post: [Introducing fuzz testing for Linkerd](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/).
+We've submitted Linkerd for CNCF graduation, and are currently waiting for a TOC sponsor. We've also added fuzz tests to the proxy, sponsored by the CNCF. You can read more in the blog post: [Introducing fuzz testing for Linkerd](/2021/05/07/fuzz-testing-for-linkerd/).
 
 ## Linkerd Roadmap
 
@@ -38,7 +38,7 @@ We’ve been taking feedback from the steering committee and [published a Linker
 
 ## Linkerd @ KubeCon EU
 
-This KubeCon and CloudNativeCon were the most [Linkerd-heavy to date](https://buoyant.io/2021/05/13/kubecon-eu-2021-wrap-up/). We were particularly excited to see so many end users sharing their service mesh journey. It's just great to see how the community shares their lessons learned! This, by the way, ties directly into the [Linkerd Anchor Program](https://linkerd.io/community/anchor/). If you'd like to tell your story at KubeCon or at any other conference and need help, we'd love to assist you!
+This KubeCon and CloudNativeCon were the most [Linkerd-heavy to date](https://buoyant.io/2021/05/13/kubecon-eu-2021-wrap-up/). We were particularly excited to see so many end users sharing their service mesh journey. It's just great to see how the community shares their lessons learned! This, by the way, ties directly into the [Linkerd Anchor Program](/community/anchor/). If you'd like to tell your story at KubeCon or at any other conference and need help, we'd love to assist you!
 
 ## Community convo with Fredrik Klingenberg
 
@@ -50,7 +50,7 @@ Tarun, one of Linkerd's core maintainers, shared what's new with Linkerd 2.10.1.
 
 ## Linkerd Heroes
 
-As always, we had three great Linkerd Hero nominees: Saim Safdar has been very active on Twitter and Linkerd's Discord welcoming new members. Rio Kierkels was nominated for his dedication to helping others on the Linkerd Slack. And Ali Ariff for his great code contributions. To learn more about our April heroes, [check out our nomination blog](https://linkerd.io/2021/04/21/vote-for-your-april-hero/). While they all deserved to win, the community voted and Rio won. Congrats Rio and thanks for being such a great part of the community.
+As always, we had three great Linkerd Hero nominees: Saim Safdar has been very active on Twitter and Linkerd's Discord welcoming new members. Rio Kierkels was nominated for his dedication to helping others on the Linkerd Slack. And Ali Ariff for his great code contributions. To learn more about our April heroes, [check out our nomination blog](/2021/04/21/vote-for-your-april-hero/). While they all deserved to win, the community voted and Rio won. Congrats Rio and thanks for being such a great part of the community.
 
 Don't miss the [next community meeting](https://community.cncf.io/events/details/cncf-linkerd-community-presents-may-linkerd-online-community-meetup/) on Thursday, May 27 at 9 am PT.
 

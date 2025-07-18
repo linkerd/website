@@ -69,7 +69,7 @@ this:
 
 Note that Ambassador is necessary because Linkerd doesn't provide an ingress by
 itself. Instead, Linkerd is designed to work with any ingress solution—
-[Linkerd's design principles](https://linkerd.io/2/design-principles/) focus
+[Linkerd's design principles](/2/design-principles/) focus
 on simplicity and composability—and Knative already offers five options for the
 gateway networking layer: Ambassador, Contour, Gloo, Istio, and Kourier. In
 this case we've chosen Ambassador, but the other choices would work just as
@@ -161,7 +161,7 @@ their operation. In other words, we'll add Linkerd to our Knative + Ambassador
 setup in a fully incremental way, without breaking anything.
 
 Linkerd control plane installation is a two step process. First, we'll install the
-[Linkerd CLI](https://linkerd.io/2/reference/cli/) and then we'll use it to
+[Linkerd CLI](/2/reference/cli/) and then we'll use it to
 install the Linkerd control plane.
 
 #### Get the Linkerd CLI
@@ -254,7 +254,7 @@ linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
 -----
 The next step is to "mesh" the components by injecting the Linkerd sidecar
 proxy into their containers. Linkerd features an
-[auto-injection feature](https://linkerd.io/2/features/proxy-injection/) to
+[auto-injection feature](/2/features/proxy-injection/) to
 make it simple to add your services to the service mesh. In the next steps,
 we'll annotate the `default`, `ambassador` and `knative-serving` namespaces to
 add their components which will instruct the `proxy-injector` to inject the
@@ -354,7 +354,7 @@ while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhos
 
 The Linkerd CLI has subcommands that you can use to view the rich metrics that
 Linkerd collects about each of the services that have the Linkerd proxy
-injected. For example, the [stat](https://linkerd.io/2/reference/cli/stat/)
+injected. For example, the [stat](/2/reference/cli/stat/)
 command will show you the high level details of the resources in your cluster.
 Try running this command:
 
@@ -396,7 +396,7 @@ linkerd           linkerd-tap                         1/1   100.00%   0.3rps    
 linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
 ```
 
-Another example is the [tap](https://linkerd.io/2/reference/cli/tap/) command,
+Another example is the [tap](/2/reference/cli/tap/) command,
 where you can see real-time requests being sent to resources. This command
 streams the requests that are being sent to and from the helloworld-go pod in
 the `default` namespace:
@@ -474,8 +474,8 @@ resource. For example, this will output all the metrics collected for the
 linkerd metrics --namespace knative-serving deploy/activator
 ```
 
-I encourage you to play with both of the [top](https://linkerd.io/2/reference/cli/metrics/)
-and [edges](https://linkerd.io/2/reference/cli/edges/) commands to get an idea
+I encourage you to play with both of the [top](/2/reference/cli/metrics/)
+and [edges](/2/reference/cli/edges/) commands to get an idea
 of how much information they can provide.
 
 #### Dashboard
@@ -514,7 +514,7 @@ running your applications, as well as the applications themselves.
 ## Summary
 
 In this walkthrough, we showed you how to add Linkerd to your Knative
-deployment to transparently add [mutual TLS](https://linkerd.io/2/features/automatic-mtls/),
+deployment to transparently add [mutual TLS](/2/features/automatic-mtls/),
 metrics, and more. One of Linkerd's goals is to fit into the ecosystem and
 play well with other projects, and we think this is a great example of
 augmenting both Knative and Kubernetes with functionality that the service mesh
@@ -524,10 +524,10 @@ can provide. We'd love your feedback!
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you
 join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd),
-and the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the
+and the [mailing lists](/community/get-involved/). Come and join the
 fun!

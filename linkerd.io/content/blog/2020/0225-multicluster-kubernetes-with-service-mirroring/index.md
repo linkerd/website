@@ -12,14 +12,14 @@ described here. Check out the
 own clusters! {{< /note >}}
 
 In our earlier post,
-[Architecting for Multicluster Kubernetes](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/),
+[Architecting for Multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/),
 we outlined three requirements for building a simple yet resilient multicluster
 approach to Kubernetes: supporting hierarchical networks, preserving
 independence of cluster state, and not introducing a shared control plane.
 
 In this post, we'll propose a solution that we believe satisfies these
 constraints, called service mirroring. In keeping with
-[Linkerd's design principle](https://linkerd.io/2019/04/29/linkerd-design-principles/)
+[Linkerd's design principle](/2019/04/29/linkerd-design-principles/)
 of "keep it simple", we've done our best to build this solution in terms of pure
 Kubernetes primitives and to remove any dependencies on Linkerd itself. This
 allows us to keep the operational surface area of any solution as close as
@@ -117,7 +117,7 @@ has type `ClusterIP`. A virtual IP address will be created by London and be used
 as the response to pods resolving the service name for `bar-paris`.
 
 By copying services from Paris to London, we are
-[maintaining independent state](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-ii-maintain-independent-state)
+[maintaining independent state](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-ii-maintain-independent-state)
 — one of our requirements. Paris has its own state, London has its own state and
 they are not dependent on each other. If the connectivity between London and
 Paris goes down, service updates will stop. That’s okay though! With
@@ -148,7 +148,7 @@ could be a lot of data! Take a look at
 to get a feel for just how much bandwidth replicating Endpoints across clusters
 could consume. Even with a solution to this problem, replicating individual pod
 IP addresses wouldn’t
-[support hierarchical networks](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks)
+[support hierarchical networks](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks)
 — another of our requirements. Instead of moving all this state between
 clusters, let’s introduce a single endpoint that can take care of routing
 traffic to the correct destination.
@@ -221,7 +221,7 @@ transparently. Sharing a
 clusters allows Linkerd to validate both ends of the connection and encrypt all
 traffic between them. The shared root certificate allows Linkerd’s control plane
 in both clusters to be
-[completely independent](https://linkerd.io/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-iii-have-an-independent-control-plane),
+[completely independent](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-iii-have-an-independent-control-plane),
 fulfilling the final requirement. While Linkerd automates mTLS, it would be
 possible to configure the gateway to present a wildcard certificate such as
 `*.default.svc.cluster.local` which clients could then validate. Traffic would
@@ -258,4 +258,4 @@ requests, questions, or comments, we'd love to have you join our rapidly-growing
 community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
 have a thriving community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the
-[mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+[mailing lists](/community/get-involved/). Come and join the fun!

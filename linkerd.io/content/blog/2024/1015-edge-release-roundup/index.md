@@ -147,7 +147,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
 You can also
-[install edge releases with Helm](https://linkerd.io/2.15/tasks/install-helm/).
+[install edge releases with Helm](/2.15/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

@@ -14,11 +14,11 @@ There have been quite a few questions from the Linkerd community in
 [GitHub](https://github.com/linkerd/linkerd2) about this feature, so this
 article focuses on one of the most important underlying features that enables
 Linkerd to perform this feat:
-[Protocol Detection](https://linkerd.io/2/features/protocol-detection/).
+[Protocol Detection](/2/features/protocol-detection/).
 
 Protocol detection, as the name suggests, allows Linkerd to automatically detect
 the protocol in use in a TCP connection. One of [Linkerd's design
-principles](https://linkerd.io/2/design-principles/) is to "just work," and
+principles](/2/design-principles/) is to "just work," and
 protocol detection is an important part of how Linkerd achieves that goal.
 
 In this article, you'll learn what protocol detection is, how this subtle
@@ -93,7 +93,7 @@ average",  or
 [EWMA](https://en.wikipedia.org/wiki/Moving_average#Exponentially_weighted_moving_variance_and_standard_deviation))
 so as to avoid incurring tail latency from slow endpoints.
 
-(Linkerd is also an easy solution to the unique considerations of [load balancing gRPC connections within Kubernetes](https://linkerd.io/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).)
+(Linkerd is also an easy solution to the unique considerations of [load balancing gRPC connections within Kubernetes](/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).)
 
 ## When protocol detection fails
 
@@ -163,11 +163,11 @@ because the feature is currently available in the
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io). Linkerd is [committed to open
-governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 Image Credit: [Gilles Rolland-Monnet](https://unsplash.com/@gillesrollandmonnet?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)

@@ -32,7 +32,7 @@ dedicated sidecar "micro-proxy". In 2018, this was a controversial decision; in
 time building workarounds for the complexity and resource consumption of their
 data plane, Linkerd instead focused on shipping powerful features like
 [multi-cluster
-failover](https://linkerd.io/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)
+failover](/2022/03/09/announcing-automated-multi-cluster-failover-for-kubernetes/)
 and [full L7 authorization policy based on the Gateway
 API](https://buoyant.io/blog/announcing-linkerd-2-12).
 
@@ -151,13 +151,13 @@ Although, rumors swirl about another KEP...
 
 Further reading: [What really happens at startup: Linkerd, init containers, the
 CNI, and
-more](https://linkerd.io/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).
+more](/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).
 
 ## Non-surprise #2: Security continues to be a top driver of Linkerd adoption
 
 As in previous years, the primary driver of Linkerd adoption continued to be
 security. Linkerd's [zero-config mutual
-TLS](https://linkerd.io/2.12/features/automatic-mtls/) has always been a major
+TLS](/2.12/features/automatic-mtls/) has always been a major
 draw for the project and the introduction of [L7 authorization
 policy](https://buoyant.io/blog/announcing-linkerd-2-12) this year rounded out
 Linkerd's zero trust featureset.
@@ -174,7 +174,7 @@ Score another point for the sidecar model!
 
 As usual, we also try to keep our house clean, and Linkerd [completed its annual
 security audit with flying
-colors](https://linkerd.io/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/).
+colors](/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/).
 
 ### What's coming up for service meshes in 2023?
 
@@ -192,12 +192,12 @@ mesh? It's a great time to join the project.
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Pan Xiaozhen](https://unsplash.com/@zhenhappy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on
