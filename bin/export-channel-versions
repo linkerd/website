@@ -1,10 +1,31 @@
-#!/bin/sh
+#!/usr/bin/env sh
+
+set -eu
+
+bindir=$( cd "${0%/*}" && pwd )
+
+github_token=${GITHUB_TOKEN:-}
+if [ -z "$github_token" ] && [ -n "${GITHUB_TOKEN_FILE:-}" ] && [ -f "$GITHUB_TOKEN_FILE" ]; then
+  github_token=$(cat "$GITHUB_TOKEN_FILE")
+fi
+
+ghcurl() {
+  if [ -n "${github_token:-}" ]; then
+    "$bindir"/scurl -H "Authorization: Bearer ${github_token:-}" "$@"
+  else
+    "$bindir"/scurl "$@"
+  fi
+}
 
 releases_url="https://api.github.com/repos/linkerd/linkerd2/releases?per_page=100"
+releases_json=$(ghcurl "$releases_url")
 
-# Match examples: `"tag_name": "stable-2.7.0",`
-stable_tag_regex="\"tag_name\": \"stable-[0-9]+\.[0-9]+\.[0-9]+\""
-edge_tag_regex="\"tag_name\": \"edge-[0-9]+\.[0-9]+\.[0-9]+\""
+# Hardcode latest stable version
+export L5D2_STABLE_VERSION="stable-2.14.10"
+# Match examples: `"tag_name": "edge-25.7.4",`
+L5D2_EDGE_VERSION=$(echo "$releases_json" | jq -r '.[].tag_name' | grep -E 'edge-[0-9]+\.[0-9]+\.[0-9]+' | sort -V | tail -n 1)
+# separate export to avoid masking return values
+export L5D2_EDGE_VERSION="$L5D2_EDGE_VERSION"
 
-export L5D2_STABLE_VERSION=$(curl -s $releases_url | awk -v pattern="$stable_tag_regex" '$0 ~ pattern {gsub(/"/, "", $2); gsub(/,$/,""); print $2}' | sort -V | tail -n 1)
-export L5D2_EDGE_VERSION=$(curl -s $releases_url | awk -v pattern="$edge_tag_regex" '$0 ~ pattern {gsub(/"/, "", $2); gsub(/,$/,""); print $2; exit}')
+echo "stable: $L5D2_STABLE_VERSION"
+echo "edge: $L5D2_EDGE_VERSION"
