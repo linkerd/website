@@ -28,6 +28,58 @@ Known distributions of Linkerd 2.18:
   from Buoyant, creators of Linkerd. Latest version: **enterprise-2.18.2**
   ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.18.2/)).
 
+### Linkerd 2.17
+
+Linkerd 2.17 was announced on December 5, 2024.
+
+- **Announcement**:
+  [Announcing Linkerd 2.17: Egress, Rate Limiting, and Federated Services](/2024/12/05/announcing-linkerd-2.17/)
+- **Code tag**:
+  [version-2.17](https://github.com/linkerd/linkerd2/releases/tag/version-2.17)
+- **Corresponding edge release**:
+  [edge-24.11.8](https://github.com/linkerd/linkerd2/releases/tag/edge-24.11.8)
+
+Known distributions of Linkerd 2.17:
+
+- [Buoyant Enterprise for
+   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
+   creators of Linkerd. Latest version: **enterprise-2.17.3** ([release
+   notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.17.3/))
+
+### Linkerd 2.16
+
+Linkerd 2.16 was announced on August 13, 2024.
+
+- **Announcement**:
+  [Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC routes; IPv6 support; policy audit mode; VM workload automation; and lots more](/2024/08/13/announcing-linkerd-2.16/)
+- **Code tag**:
+  [version-2.16](https://github.com/linkerd/linkerd2/releases/tag/version-2.16)
+- **Corresponding edge release**:
+  [edge-24.8.2](https://github.com/linkerd/linkerd2/releases/tag/edge-24.8.2)
+
+Known distributions of Linkerd 2.16:
+
+- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
+  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.5**
+  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.5/)).
+
+### Linkerd 2.15
+
+Linkerd 2.15 was announced on February 21, 2024.
+
+- **Announcement**: [Announcing Linkerd 2.15 with mesh expansion, native
+sidecars, and SPIFFE](/2024/02/21/announcing-linkerd-2.15/)
+- **Code tag**:
+[version-2.15](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
+- **Corresponding edge release**: [edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
+
+Known distributions of Linkerd 2.15:
+
+- [Buoyant Enterprise for
+  Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
+  creators of Linkerd. Latest version: **enterprise-2.15.7** ([release
+  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.7/)).
+
 ## Types of release artifacts
 
 ### Edge releases
