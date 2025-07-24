@@ -102,9 +102,13 @@ Linkerd 2.18:
 * Linkerd multicluster is changing to be more GitOps-friendly. This starts
   with [edge-25.3.3], when the `linkerd multicluster link` command is
   deprecated in favor of the new `linkerd multicluster link-gen` command.
-  There are actually a lot of changes under the hood here, so we encourage
-  checking out the [multicluster documentation] (and keeping an eye out for an
-  upcoming [Service Mesh Academy]!) if you use multicluster.
+  To use this new functionality, you must upgrade your Link resources;
+  see the [Upgrading Multicluster
+  Components](/2-edge/tasks/upgrading-multicluster/)
+  documentation for more. There are actually a lot of changes under the hood
+  here, so we encourage checking out the [multicluster documentation] (and
+  keeping an eye out for an upcoming [Service Mesh Academy]!) if you use
+  multicluster.
 
 * Starting in [edge-25.3.2], all communications between two meshed proxies are
   multiplexed on port 4143 by default, rather than using the original
