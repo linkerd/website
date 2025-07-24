@@ -23,5 +23,7 @@ jobs:
         make lint
 
     - name: Lint html and check for dead links
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         make check
