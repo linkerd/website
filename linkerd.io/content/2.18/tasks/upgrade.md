@@ -9,9 +9,10 @@ Linkerd.
 {{< note >}}
 
 This page contains instructions for upgrading to the latest edge release of
-Linkerd. If you have installed a [stable distribution](/releases/#stable) of
-Linkerd, the vendor may have alternative guidance on how to upgrade. You can
-find more information about the different kinds of Linkerd releases on the
+Linkerd. If you have installed a
+[stable distribution](/releases/#recent-versions) of Linkerd, the vendor may
+have alternative guidance on how to upgrade. You can find more information about
+the different kinds of Linkerd releases on the
 [Releases and Versions](/releases/) page.
 
 {{< /note >}}
@@ -23,7 +24,7 @@ period during which the control plane is running the new version, but the data
 plane is still running the older version. To assess this skew, we offer the
 following recommendations.
 
-Linkerd provides open source *edge release* packages which can easily be
+Linkerd provides open source _edge release_ packages which can easily be
 installed on a Kubernetes cluster. These edge releases are **not** semantically
 versioned, i.e. the edge release number itself does not give you any assurance
 about breaking changes, incompatibilities, etc. Instead, this information is
@@ -54,14 +55,13 @@ These steps should be performed in sequence.
 
 ## Before upgrading
 
-Before you commence an upgrade, you should ensure that the current state
-of Linkerd is healthy, e.g. by using `linkerd check`. For major version
-upgrades, you should also ensure that your data plane is up-to-date, e.g.
-with `linkerd check --proxy`, to avoid unintentional version skew.
+Before you commence an upgrade, you should ensure that the current state of
+Linkerd is healthy, e.g. by using `linkerd check`. For major version upgrades,
+you should also ensure that your data plane is up-to-date, e.g. with
+`linkerd check --proxy`, to avoid unintentional version skew.
 
 Make sure that your Linkerd version and Kubernetes version are compatible by
-checking Linkerd's [supported Kubernetes
-versions](../reference/k8s-versions/).
+checking Linkerd's [supported Kubernetes versions](../reference/k8s-versions/).
 
 ## Upgrading the CLI
 
@@ -73,8 +73,8 @@ To upgrade the CLI, run:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-Alternatively, you can download the CLI directly via the [Linkerd releases
-page](https://github.com/linkerd/linkerd2/releases/).
+Alternatively, you can download the CLI directly via the
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
 
 Verify the CLI is installed and running the expected version with:
 
@@ -88,12 +88,12 @@ linkerd version --client
 
 For users who have installed Linkerd via the CLI, the `linkerd upgrade` command
 will upgrade the control plane. This command ensures that all of the control
-plane's existing configuration and TLS secrets are retained.  Linkerd's CRDs
+plane's existing configuration and TLS secrets are retained. Linkerd's CRDs
 should be upgraded first, using the `--crds` flag, followed by upgrading the
 control plane.
 
-(If you are using a stable release, your vendor's upgrade instructions may
-have more information.)
+(If you are using a stable release, your vendor's upgrade instructions may have
+more information.)
 
 ```bash
 linkerd upgrade --crds | kubectl apply -f -
@@ -109,13 +109,13 @@ linkerd prune | kubectl delete -f -
 
 ### Upgrading the control plane with Helm
 
-For Helm control plane installations, please follow the instructions at [Helm
-upgrade procedure](install-helm/#helm-upgrade-procedure).
+For Helm control plane installations, please follow the instructions at
+[Helm upgrade procedure](install-helm/#helm-upgrade-procedure).
 
 ### Verifying the control plane upgrade
 
-Once the upgrade process completes, check to make sure everything is healthy
-by running:
+Once the upgrade process completes, check to make sure everything is healthy by
+running:
 
 ```bash
 linkerd check
@@ -134,11 +134,11 @@ Which should display the latest versions for both client and server.
 
 ## Upgrading extensions
 
-[Linkerd's extensions](extensions/) provide additional functionality to
-Linkerd in a modular way. Generally speaking, extensions are versioned
-separately from Linkerd releases and follow their own schedule; however, some
-extensions are updated alongside Linkerd releases and you may wish to update
-them as part of the same process.
+[Linkerd's extensions](extensions/) provide additional functionality to Linkerd
+in a modular way. Generally speaking, extensions are versioned separately from
+Linkerd releases and follow their own schedule; however, some extensions are
+updated alongside Linkerd releases and you may wish to update them as part of
+the same process.
 
 Each extension can be upgraded independently. If using Helm, the procedure is
 similar to the control plane upgrade, using the respective charts. For the CLI,
@@ -151,8 +151,8 @@ linkerd multicluster install | kubectl apply -f -
 linkerd jaeger install | kubectl apply -f -
 ```
 
-Most extensions also include a `prune` command for removing resources which
-were present in the previous version but should not be present in the current
+Most extensions also include a `prune` command for removing resources which were
+present in the previous version but should not be present in the current
 version. For example:
 
 ```bash
@@ -163,7 +163,7 @@ linkerd viz prune | kubectl delete -f -
 
 Upgrading the multicluster extension doesn't cause downtime in the traffic going
 through the mirrored services, unless otherwise noted in the version-specific
-notes below. Note however that for the service mirror *deployments* (which
+notes below. Note however that for the service mirror _deployments_ (which
 control the creation of the mirrored services) to be updated, you need to
 re-link your clusters through `linkerd multicluster link`.
 
@@ -199,9 +199,9 @@ Check to make sure everything is healthy by running:
 linkerd check --proxy
 ```
 
-This will run through a set of checks to verify that the data plane is
-operating correctly, and will list any pods that are still running older
-versions of the proxy.
+This will run through a set of checks to verify that the data plane is operating
+correctly, and will list any pods that are still running older versions of the
+proxy.
 
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
