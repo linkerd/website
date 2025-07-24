@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-exec curl --proto '=https' --tlsv1.2 -sSfL "$@"
