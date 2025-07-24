@@ -41,7 +41,7 @@ Linkerd 2.17 was announced on December 5, 2024.
 
 Known distributions of Linkerd 2.17:
 
- - [Buoyant Enterprise for
+- [Buoyant Enterprise for
    Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
    creators of Linkerd. Latest version: **enterprise-2.17.3** ([release
    notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.17.3/))
@@ -83,6 +83,8 @@ Known distributions of Linkerd 2.15:
 ## Types of release artifacts
 
 ### Edge releases
+
+<!-- markdownlint-disable MD034 -->
 
 Edge release artifacts are published on a weekly or near-weekly basis as part of
 the open source project. The latest edge release is [{{< latest-edge-version
