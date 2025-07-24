@@ -2,8 +2,6 @@
 
 set -eu
 
-bindir=$( cd "${0%/*}" && pwd )
-
 github_token=${GITHUB_TOKEN:-}
 if [ -z "$github_token" ] && [ -n "${GITHUB_TOKEN_FILE:-}" ] && [ -f "$GITHUB_TOKEN_FILE" ]; then
   github_token=$(cat "$GITHUB_TOKEN_FILE")
@@ -11,9 +9,9 @@ fi
 
 ghcurl() {
   if [ -n "${github_token:-}" ]; then
-    "$bindir"/scurl -H "Authorization: Bearer ${github_token:-}" "$@"
+    ./bin/scurl -H "Authorization: Bearer ${github_token:-}" "$@"
   else
-    "$bindir"/scurl "$@"
+    ./bin/scurl "$@"
   fi
 }
 
