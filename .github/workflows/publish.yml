@@ -28,6 +28,8 @@ jobs:
         gcloud auth activate-service-account --key-file=.gcp.json
 
     - name: Publish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |-
         make publish
         gsutil -m setmeta -r -h "Cache-Control: no-cache, no-store, must-revalidate" gs://linkerd.io/
