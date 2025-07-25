@@ -1,5 +1,5 @@
 ---
-date: 2025-07-01T00:00:00Z
+date: 2025-07-25T00:00:00Z
 slug: tilt-linkerd-nginx-part-2
 title: |-
   Building your Infrastructure with Tilt, Linkerd, and Nginx (part 2)
@@ -7,7 +7,10 @@ description: |-
   What if you could develop your applications alongside the very infrastructure they rely on in production?
 keywords: [linkerd, tilt, nginx, orbstack, kubernetes, development]
 params:
-  author: chris-campbell
+  author:
+    name: Chris Campbell, Linkerd Ambassador
+    avatar: chris-campbell.png
+    email: campbel@hey.com
   showCover: true
 images: [social.jpg] # Open graph image
 ---
@@ -17,11 +20,9 @@ how to bridge the gap between development and production by using Linkerd,
 Tilt, and Ingress-Nginx to create a robust environment in which you can
 develop using your real production infrastructure._
 
-----
+---
 
-# Developing with Tilt, Linkerd, and Nginx: Part 2 - Adding gRPC Support
-
-In [Part 1](../../2024/1202-tilt-linkerd-nginx-part-1/index.md) of this series, we built a simple microservices demo with Linkerd on a local Kubernetes cluster using Tilt. Our demo consists of three services (foo, bar, and baz) that communicate via HTTP REST. In this second part, we'll extend our demo to support gRPC communication and explore some of Linkerd's helpful features for managing gRPC services.
+In [Part 1](/2024/12/02/tilt-linkerd-nginx-part-1/) of this series, we built a simple microservices demo with Linkerd on a local Kubernetes cluster using Tilt. Our demo consists of three services (foo, bar, and baz) that communicate via HTTP REST. In this second part, we'll extend our demo to support gRPC communication and explore some of Linkerd's helpful features for managing gRPC services.
 
 ## The gRPC Advantage in Microservices
 
@@ -41,20 +42,12 @@ These services are all written in Go and deployed to a local Kubernetes cluster.
 
 Our architecture currently looks like this:
 
-```
-┌─────────┐     ┌─────────┐     ┌─────────┐
-│         │     │         │     │         │
-│  nginx  │────►│   foo   │────►│   bar   │
-│         │     │         │     │         │
-└─────────┘     └────┬────┘     └────┬────┘
-                     │               │
-                     │               │
-                     │               ▼
-                     │          ┌─────────┐
-                     │          │         │
-                     └─────────►│   baz   │
-                                │         │
-                                └─────────┘
+```mermaid
+flowchart LR
+    A(nginx) --> B(foo)
+    B --> C(bar)
+    B --> D(baz)
+    C --> D
 ```
 
 _Note: When running locally, our setup includes a `synthetic` service that generates continuous traffic to the `foo` service, simulating real-world application load._
@@ -199,7 +192,7 @@ To resolve this issue, we need to authorize our services to connect to the new s
 
 To enable server-level authorization for `foo > baz` communication, we first need to identify the gRPC routes on the baz service. This requires creating both inbound and outbound route definitions. For a detailed explanation of the differences between these route types, see the [official documentation](https://linkerd.io/2.17/reference/grpcroute/).
 
-**Outbound**
+##### Outbound
 
 ```yaml
 ---
@@ -219,7 +212,7 @@ spec:
           port: 9090
 ```
 
-**Inbound**
+##### Inbound
 
 ```yaml
 ---
