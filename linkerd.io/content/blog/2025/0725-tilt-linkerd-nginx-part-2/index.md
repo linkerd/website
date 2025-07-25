@@ -50,7 +50,11 @@ flowchart LR
     C --> D
 ```
 
-_Note: When running locally, our setup includes a `synthetic` service that generates continuous traffic to the `foo` service, simulating real-world application load._
+{{< note >}}
+
+When running locally, our setup includes a `synthetic` service that generates continuous traffic to the `foo` service, simulating real-world application load.
+
+{{< /note >}}
 
 ## The gRPC Implementation
 
