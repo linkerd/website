@@ -125,7 +125,7 @@ These configuration flags allow us to test our application in different modes, w
 
 One of the best ways to appreciate Linkerd's value is to observe what happens when running gRPC without it. Try running the application with just gRPC enabled (`tilt up -- --use_grpc`) and you'll notice something interesting: the `foo` service only communicates with a single instance of the `baz` service, even though multiple instances are available.
 
-This happens because gRPC connections persist and don't load balance across service instances by default. If you're curious about the technical details, check out this excellent article: [gRPC Load Balancing on Kubernetes without Tears](https://linkerd.io/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).
+This happens because gRPC connections persist and don't load balance across service instances by default. If you're curious about the technical details, check out this excellent article: [gRPC Load Balancing on Kubernetes without Tears](/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).
 
 To solve this issue and get proper load balancing with gRPC, we simply need to enable Linkerd:
 
@@ -190,7 +190,7 @@ To resolve this issue, we need to authorize our services to connect to the new s
 
 #### Foo
 
-To enable server-level authorization for `foo > baz` communication, we first need to identify the gRPC routes on the baz service. This requires creating both inbound and outbound route definitions. For a detailed explanation of the differences between these route types, see the [official documentation](https://linkerd.io/2.17/reference/grpcroute/).
+To enable server-level authorization for `foo > baz` communication, we first need to identify the gRPC routes on the baz service. This requires creating both inbound and outbound route definitions. For a detailed explanation of the differences between these route types, see the [official documentation](/2/reference/grpcroute/).
 
 ##### Outbound
 
@@ -261,7 +261,11 @@ spec:
       group: policy.linkerd.io
 ```
 
-_Note: the MeshTLSAuthentication can be shared between gRPC and HTTP routes_
+{{< note >}}
+
+The MeshTLSAuthentication can be shared between gRPC and HTTP routes.
+
+{{< /note >}}
 
 With these definitions in place, we've established a secure, authorized connection from `foo` to `baz`. If you check your application now, you'll see that communication from `foo` is working again, while `bar` requests are still being blocked.
 
