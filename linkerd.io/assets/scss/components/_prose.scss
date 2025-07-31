@@ -22,6 +22,11 @@ Apply to containers that contain rendered markdown.
     margin-bottom: spacer(3);
   }
 
+  // Add bottom margin to cards
+  .card {
+    margin-bottom: spacer(3);
+  }
+
   // Markdown attribute classes
   img.center {
     margin: 0 auto;
