@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card__media">
     {{ with .Render "_feature-relref" }}
-      <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--fill img--cover img--h160 img--rounded">
+      <img src="{{ . }}" alt="{{ path.BaseName . | humanize }}" class="img img--fill img--cover img--rounded">
     {{ end }}
   </div>
   <div class="card__body">

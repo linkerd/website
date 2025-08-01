@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2025/0801-imagine-learning
     - /blog/2025/0725-tilt-linkerd-nginx-part-2
-    - /blog/2025/0522-behind-the-great-sidecar-debate
 ---
