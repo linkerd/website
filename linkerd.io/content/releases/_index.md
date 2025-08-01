@@ -3,17 +3,17 @@ title: Releases and Versions
 type: docs
 ---
 
+<!-- markdownlint-disable MD013 -->
+
 Linkerd publishes and announces _versions_ that correspond to specific project
 milestones and sets of new features. These versions are available in different
 types of _release artifacts_.
 
 ## Recent versions
 
-### Linkerd 2.18
+{{< card "Linkerd 2.18" >}}
 
 Linkerd 2.18 was announced on April 23, 2025.
-
-<!-- markdownlint-disable MD013 -->
 
 - **Announcement**:
   [Announcing Linkerd 2.18: Battlescars, lessons learned, and preliminary Windows support](/2025/04/23/announcing-linkerd-2.18/)
@@ -24,11 +24,12 @@ Linkerd 2.18 was announced on April 23, 2025.
 
 Known distributions of Linkerd 2.18:
 
-- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.18.3**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.18.3/)).
+- [Buoyant Enterprise for Linkerd 2.18](https://docs.buoyant.io/buoyant-enterprise-linkerd/2.18/)
+  from Buoyant, creators of Linkerd
 
-### Linkerd 2.17
+{{< /card >}}
+
+{{< card "Linkerd 2.17" >}}
 
 Linkerd 2.17 was announced on December 5, 2024.
 
@@ -41,12 +42,12 @@ Linkerd 2.17 was announced on December 5, 2024.
 
 Known distributions of Linkerd 2.17:
 
-- [Buoyant Enterprise for
-   Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-   creators of Linkerd. Latest version: **enterprise-2.17.3** ([release
-   notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.17.3/))
+- [Buoyant Enterprise for Linkerd 2.17](https://docs.buoyant.io/buoyant-enterprise-linkerd/2.17/)
+  from Buoyant, creators of Linkerd
 
-### Linkerd 2.16
+{{< /card >}}
+
+{{< card "Linkerd 2.16" >}}
 
 Linkerd 2.16 was announced on August 13, 2024.
 
@@ -59,26 +60,28 @@ Linkerd 2.16 was announced on August 13, 2024.
 
 Known distributions of Linkerd 2.16:
 
-- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.16.5**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.16.5/)).
+- [Buoyant Enterprise for Linkerd 2.16](https://docs.buoyant.io/buoyant-enterprise-linkerd/2.16/)
+  from Buoyant, creators of Linkerd
 
-### Linkerd 2.15
+{{< /card >}}
+
+{{< card "Linkerd 2.15" >}}
 
 Linkerd 2.15 was announced on February 21, 2024.
 
-- **Announcement**: [Announcing Linkerd 2.15 with mesh expansion, native
-sidecars, and SPIFFE](/2024/02/21/announcing-linkerd-2.15/)
+- **Announcement**:
+  [Announcing Linkerd 2.15 with mesh expansion, native sidecars, and SPIFFE](/2024/02/21/announcing-linkerd-2.15/)
 - **Code tag**:
-[version-2.15](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
-- **Corresponding edge release**: [edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
+  [version-2.15](https://github.com/linkerd/linkerd2/releases/tag/version-2.15)
+- **Corresponding edge release**:
+  [edge-24.2.4](https://github.com/linkerd/linkerd2/releases/tag/edge-24.2.4)
 
 Known distributions of Linkerd 2.15:
 
-- [Buoyant Enterprise for
-  Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd) from Buoyant,
-  creators of Linkerd. Latest version: **enterprise-2.15.7** ([release
-  notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.15.7/)).
+- [Buoyant Enterprise for Linkerd 2.15](https://docs.buoyant.io/buoyant-enterprise-linkerd/2.15/)
+  from Buoyant, creators of Linkerd
+
+{{< /card >}}
 
 ## Types of release artifacts
 
