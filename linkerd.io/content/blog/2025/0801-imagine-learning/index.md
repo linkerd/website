@@ -19,7 +19,7 @@ At [Imagine Learning](https://www.imaginelearning.com/), we strive to empower ed
 
 To meet these demands, our engineering team has embraced modern cloud-native technologies. The cornerstone of our infrastructure is [Linkerd](https://linkerd.io/), supported by [Buoyant](https://www.buoyant.io/), running on Amazon's Elastic Kubernetes Service (EKS). Linkerd gives us the critical capabilities that we need to scale effortlessly while maintaining the performance and reliability that our users depend on.
 
-## **Delivering Reliability and Security at Scale**
+## Delivering Reliability and Security at Scale
 
 Our users—students and educators—depend on fast, reliable, and secure access to our digital tools. Dropped traffic, slow load times, or security issues in the face of ever-evolving threats would disturb the user experience, potentially leading to customer churn. For that reason, reliability and security are a top priority for Imagine Learning. As our platform grew to include hundreds of microservices deployed across several Kubernetes clusters on AWS EKS, managing communications at scale to avoid these problems became extremely challenging. We needed a solution that would:
 
@@ -29,13 +29,13 @@ Our users—students and educators—depend on fast, reliable, and secure access
 
 In short, we needed a service mesh.
 
-## **Linkerd: Opting for Simplicity, Performance, and Security**
+## Linkerd: Opting for Simplicity, Performance, and Security
 
 After evaluating multiple service mesh options, Linkerd stood out due to its simplicity, performance, and security. Unlike other solutions, Linkerd uses a tiny [Rust-based sidecar microproxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/), offering a small compute footprint, significantly reduced CVEs, and enhanced overall security. Linkerd’s ease of configuration allowed us to deploy it reliably and scale it within hours, enabling our team to focus on delivering value to our customers.
 
 Additionally, [Buoyant Cloud](https://docs.buoyant.io/buoyant-cloud/getting-started/what-data-does-buoyant-cloud-collect/) has amplified Linkerd’s capabilities by providing real-time metrics and intuitive alerting. This ensures that our operations team can swiftly diagnose and resolve issues, maintaining an exceptional user experience.
 
-## **Building a Scalable and Observable Platform**
+## Building a Scalable and Observable Platform
 
 Our engineering team integrated Linkerd with several other CNCF tools to create a robust platform:
 
@@ -50,7 +50,7 @@ Next, we started leveraging the [Gateway API](https://gateway-api.sigs.k8s.io/) 
 
 Together, these tools in this architecture allow us to maintain a highly observable and manageable Kubernetes environment. With Linkerd, service-to-service communication is secure and reliable, while Buoyant Cloud’s metrics enable proactive performance management.
 
-## **Transformational Gains**
+## Transformational Gains
 
 The adoption of Linkerd has yielded significant technological and business benefits:
 
@@ -62,6 +62,6 @@ The adoption of Linkerd has yielded significant technological and business benef
 
 On a personal level, these improvements mean fewer fire drills for our engineers, allowing them to focus on innovation.
 
-## **Looking Ahead**
+## Looking Ahead
 
 As we continue to scale, Imagine Learning remains committed to leveraging cloud-native technologies like Linkerd to deliver exceptional educational experiences. With a solid foundation on AWS EKS, powered by the reliability and support of Buoyant and Linkerd, we are poised to inspire breakthrough moments for millions of students every day.
