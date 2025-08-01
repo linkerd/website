@@ -75,13 +75,13 @@ As always, we have a couple of breaking changes to note:
   deployments to avoid Kubernetes 1.33's new warnings if port names aren't
   unique across all containers in the same pod:
 
-  - In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes `dest-admin`
-  - In `sp-validator`, `admin-http` becomes `spval-admin`
-  - In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
+  * In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes `dest-admin`
+  * In `sp-validator`, `admin-http` becomes `spval-admin`
+  * In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
     becomes `policy-admin`
-  - In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes `ident-admin`
-  - In `proxy-injector`, `admin-http` becomes `injector-admin`
-  - In `linkerd2-cni`, `admin-http` becomes `repair-admin`
+  * In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes `ident-admin`
+  * In `proxy-injector`, `admin-http` becomes `injector-admin`
+  * In `linkerd2-cni`, `admin-http` becomes `repair-admin`
 
 [edge-25.7.6]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.7.6
 [edge-25.7.5]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.7.5
@@ -99,7 +99,7 @@ As always, we have a couple of breaking changes to note:
 As always, each edge release includes _many_ dependency updates which we won't
 list here. You can find them in the full release notes for each release.
 
-# [edge-25.7.6] (July 31, 2025)
+### [edge-25.7.6] (July 31, 2025)
 
 _This release is recommended for all users, and is most likely the one you should
 run if you're reading this post._
@@ -108,20 +108,20 @@ This release supports percentages, as well as integers, when setting the `maxUna
 
 [#13873]: https://github.com/linkerd/linkerd2/issues/13873
 
-# [edge-25.7.5] (July 23, 2025)
+### [edge-25.7.5] (July 23, 2025)
 
 This release contains internal improvements, but no new capabilities over
 [edge-25.7.4]. As such, we recommend that you skip it and go straight to
 [edge-25.7.6]!
 
-# [edge-25.7.4] (July 17, 2025)
+### [edge-25.7.4] (July 17, 2025)
 
 _This release is recommended for all users._
 
 This release contains a fix to reduce the proxy's memory usage when handling
 many HTTP/1 connections.
 
-# [edge-25.7.3] (July 15, 2025)
+### [edge-25.7.3] (July 15, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -132,7 +132,7 @@ Helm chart could fail to render when upgrading from a previous version.
 
 [#14228]: https://github.com/linkerd/linkerd2/issues/14228
 
-# [edge-25.7.2] (July 11, 2025)
+### [edge-25.7.2] (July 11, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -142,7 +142,7 @@ selectors could prevent other Servers from being used.
 
 [#14176]: https://github.com/linkerd/linkerd2/issues/14176
 
-# [edge-25.7.1] (July 02, 2025)
+### [edge-25.7.1] (July 02, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -156,7 +156,7 @@ template (thanks, [Carlos Martell]!).
 
 [#13922]: https://github.com/linkerd/linkerd2/issues/13922
 
-# [edge-25.6.4] (June 26, 2025)
+### [edge-25.6.4] (June 26, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -168,7 +168,7 @@ certificates (thanks, [Jonas Dittrich]!). It also allows using a named pipe
 for SPIRE when running the proxy for Windows mesh expansion, and removes an
 unintentionally-added HTTP/1 header read timeout.
 
-# [edge-25.6.3] (June 18, 2025)
+### [edge-25.6.3] (June 18, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -185,17 +185,17 @@ Finally, it updates the port names used in many Linkerd deployments for
 uniqueness, since Kubernetes 1.33 warns when port names are not unique within
 containers in the same pod:
 
-- In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
+* In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
   `dest-admin`
-- In `sp-validator`, `admin-http` becomes `spval-admin`
-- In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
+* In `sp-validator`, `admin-http` becomes `spval-admin`
+* In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
   becomes `policy-admin`
-- In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes
+* In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes
   `ident-admin`
-- In `proxy-injector`, `admin-http` becomes `injector-admin`
-- In `linkerd2-cni`, `admin-http` becomes `repair-admin`
+* In `proxy-injector`, `admin-http` becomes `injector-admin`
+* In `linkerd2-cni`, `admin-http` becomes `repair-admin`
 
-# [edge-25.6.2] (June 12, 2025)
+### [edge-25.6.2] (June 12, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
@@ -203,7 +203,7 @@ straight to [edge-25.7.6]._
 This release contains internal improvements, but no new capabilities over
 edge-25.6.1.
 
-# [edge-25.6.1] (June 05, 2025)
+### [edge-25.6.1] (June 05, 2025)
 
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
