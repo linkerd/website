@@ -149,46 +149,6 @@ helm install \
   --wait
 ```
 
-Finally, we'll need to update cert-manager's RBAC permissions.  By default
-cert-manager will only create certificate secrets in the namespace where it is
-installed. Linkerd, however, requires its identity issuer to be created in the
-`linkerd` namespace. To allow this, we create a `ServiceAccount` for
-cert-manager in the `linkerd` namespace with the required permissions.
-
-```bash
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cert-manager
-  namespace: linkerd
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: cert-manager-secret-creator
-  namespace: linkerd
-rules:
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["create", "get", "update", "patch"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: cert-manager-secret-creator-binding
-  namespace: linkerd
-subjects:
-  - kind: ServiceAccount
-    name: cert-manager
-    namespace: linkerd
-roleRef:
-  kind: Role
-  name: cert-manager-secret-creator
-  apiGroup: rbac.authorization.k8s.io
-EOF
-```
-
 ### 3. Configure cert-manager to create the trust anchor
 
 As described in Buoyant's [cert-manager concepts primer], cert-manager uses
