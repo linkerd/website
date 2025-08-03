@@ -100,7 +100,7 @@ params:
 **Note:** If an author only has a single blog post, but there's a chance they
 will have more in the future, please not use the inline method.
 
-#### Cover, thumbnail, and feature images
+#### Naming images
 
 To associate a cover, thumbnail, or feature image to a blog post, you do not
 have to specify them in the frontmatter. You can simply name them `cover`,
@@ -116,10 +116,39 @@ blog/
         └── thumbnail.jpg
 ```
 
+If you need to name your images another way, you can reference the image names
+in the frontmatter of the blog post. For example:
+
+```yaml
+params:
+  thumbnail: square.png
+  cover: hero.png
+  feature: hero-cropped.png
+```
+
+#### Feature a blog post
+
+A blog post can be featured on the blog listing page by adding a reference to
+the blog post in the frontmatter params. For example:
+
+```yaml
+# /content/blog/_index.md
+params:
+  feature:
+    - /blog/2024/0102-my-blog-post
+```
+
+**Note:** Only the first 2 items in the list will be featured.
+
 If a blog post is featured, by default, the cover image will be used on the blog
 list page. If a cover image is not present, or you would like to use a different
 image than the cover image, you can name it `feature` and place it in the blog
 post folder.
+
+**Note:** When a blog post is featured on the blog listing it will be
+cropped into a 4x1 ratio.
+
+#### Thumbnail images
 
 If a thumbnail image is not present in the blog post folder, then the cover
 image will be used. By default, the thumbnail image will be cropped into a
@@ -137,16 +166,6 @@ adding the `showCover` frontmatter param. For example:
 ```yaml
 params:
   showCover: true
-```
-
-If you need to name your images another way, you can reference the image names
-in the frontmatter:
-
-```yaml
-params:
-  thumbnail: square.png
-  cover: hero.png
-  feature: hero-cropped.png
 ```
 
 #### Open graph images
