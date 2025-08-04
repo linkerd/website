@@ -1,6 +1,6 @@
 ---
 date: 2025-08-01T00:00:00Z
-slug: linkerd-edge-release-roundup
+slug: linkerd-edge-release-roundup-202508
 title: |-
   Linkerd Edge Release Roundup: August 2025
 description: |-
