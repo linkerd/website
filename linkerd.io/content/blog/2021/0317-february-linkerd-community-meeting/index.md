@@ -19,7 +19,7 @@ We've heard lots of great things about Discord and many other open source projec
 
 ## 2.9.3 edge release
 
-Oliver Gould talked about Linkerd 2.9.3 which was released a little over a month ago. The release addressed two issues. The first involved upgrading, especially from 2.8 upwards, and preserving all configurations. The second focused on the proxy and compatibility between 2.8 to 2.9.  
+Oliver Gould talked about Linkerd 2.9.3 which was released a little over a month ago. The release addressed two issues. The first involved upgrading, especially from 2.8 upwards, and preserving all configurations. The second focused on the proxy and compatibility between 2.8 to 2.9.
 
 If you want to upgrade from 2.8, especially to 2.10, the Linkerd team strongly recommends doing so from version 2.9. This will give you all the safety features needed to avoid downtime or interruptions when upgrading. Always upgrade from a major version to a major version to avoid any issues.
 

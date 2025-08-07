@@ -60,13 +60,13 @@ linkerd viz -n booksapp stat-inbound deploy
 The output will end up looking at little like:
 
 ```bash
-NAME     SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  
-authors  [default]:4191  [default]        100.00%  0.20          0ms          1ms          1ms  
-authors  [default]:7001  [default]        100.00%  3.00          2ms         36ms         43ms  
-books    [default]:4191  [default]        100.00%  0.23          4ms          4ms          4ms  
-books    [default]:7002  [default]        100.00%  3.60          2ms          2ms          2ms  
-traffic  [default]:4191  [default]        100.00%  0.22          0ms          3ms          1ms  
-webapp   [default]:4191  [default]        100.00%  0.72          4ms          5ms          1ms  
+NAME     SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
+authors  [default]:4191  [default]        100.00%  0.20          0ms          1ms          1ms
+authors  [default]:7001  [default]        100.00%  3.00          2ms         36ms         43ms
+books    [default]:4191  [default]        100.00%  0.23          4ms          4ms          4ms
+books    [default]:7002  [default]        100.00%  3.60          2ms          2ms          2ms
+traffic  [default]:4191  [default]        100.00%  0.22          0ms          3ms          1ms
+webapp   [default]:4191  [default]        100.00%  0.72          4ms          5ms          1ms
 webapp   [default]:7000  [default]        100.00%  3.25          2ms          2ms         65ms
 ```
 
@@ -190,11 +190,11 @@ what this looks like by running `stat-outbound`:
 
 ```bash
 linkerd viz stat-outbound -n booksapp deploy/webapp
-NAME    SERVICE       ROUTE        TYPE       BACKEND              SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  authors:7001  [default]                                     98.44%  4.28         25ms         47ms         50ms     0.00%    0.00%  
-                      └────────────────────►  authors:7001          98.44%  4.28         15ms         42ms         48ms     0.00%           
-webapp  books:7002    error-split  HTTPRoute                        87.76%  7.22         26ms         49ms        333ms     0.00%    0.00%  
-                      ├────────────────────►  books:7002           100.00%  6.33         14ms         42ms         83ms     0.00%           
+NAME    SERVICE       ROUTE        TYPE       BACKEND              SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  authors:7001  [default]                                     98.44%  4.28         25ms         47ms         50ms     0.00%    0.00%
+                      └────────────────────►  authors:7001          98.44%  4.28         15ms         42ms         48ms     0.00%
+webapp  books:7002    error-split  HTTPRoute                        87.76%  7.22         26ms         49ms        333ms     0.00%    0.00%
+                      ├────────────────────►  books:7002           100.00%  6.33         14ms         42ms         83ms     0.00%
                       └────────────────────►  error-injector:8080    0.00%  0.88         12ms         24ms         25ms     0.00%
 ```
 
