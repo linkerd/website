@@ -199,7 +199,7 @@ To display a caption below the image, provide an image title. For example:
 To center the image, use a Markdown attribute:
 
 ```markdown
-![Alt text](my-image.jpg) 
+![Alt text](my-image.jpg)
 {.center}
 ```
 

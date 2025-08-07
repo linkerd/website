@@ -168,4 +168,4 @@ Who is your Linkerd Hero?
 
 That's it! Hope you can attend our next community meeting on Thursday,
 August 26 at 9 a.m. PT live.
-[Register today](https://community.cncf.io/events/details/cncf-linkerd-community-presents-august-linkerd-online-community-meetup/)!  
+[Register today](https://community.cncf.io/events/details/cncf-linkerd-community-presents-august-linkerd-online-community-meetup/)!
