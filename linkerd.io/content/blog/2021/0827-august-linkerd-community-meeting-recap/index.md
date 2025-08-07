@@ -54,7 +54,7 @@ if you have any suggestions. Your feedback is super important and helpful!
 Chris and Dan worked together in cloud architecture roles at HP (Chris
 recently switched jobs).  Both started their DevOps journey together
 working on a frontend app where they quickly realized they needed to
-adopt a lot of industry best practices.  
+adopt a lot of industry best practices.
 
 The migration from monolith to microservices started because HP was
 making a general move from delivering hardware to software. It started
@@ -117,7 +117,7 @@ his team at Penn State
 [used Linkerd to schedule 68,000 COVID tests](http://buoyant.io/media/how-linkerd-helped-schedule-68-000-covid-tests/)
 and he shared his Linkerd journey at this year's ServiceMeshCon EU.
 Because sharing lessons learned with the community is so important,
-[the maintainers nominated Dom](/2021/08/26/announcing-augusts-linkerd-hero/).  
+[the maintainers nominated Dom](/2021/08/26/announcing-augusts-linkerd-hero/).
 
 Who is your Linkerd Hero?
 [Submit your nomination today](https://docs.google.com/forms/d/e/1FAIpQLSfNv--UnbbZSzW7J3SbREIMI-HaooyX9im8yLIGB7M_LKT_Fw/viewform)!

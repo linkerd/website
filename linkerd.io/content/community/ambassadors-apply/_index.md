@@ -10,7 +10,7 @@ params:
     content: |-
       Are you passionate about keeping software simple? Do you reject the idea
       that Kubernetes must be complex? Are you willing to stand up and fight
-      against the status quo? 
+      against the status quo?
 
       Join the Linkerd Ambassador Program and help us deliver simplicity as a
       core value for Kubernetes platforms everywhere. **Spots are limited!**
@@ -26,7 +26,7 @@ params:
       the voice of the community back to the Linkerd maintainers. Every
       ambassador works in their own way. While some create content, others may
       prefer to be Community Leaders.
-      
+
       Ambassador activities typically include one or more of the following:
 
       - **Educate:** Share their knowledge through talks, blog posts, videos,
@@ -53,7 +53,7 @@ params:
         - Your name in the Linkerd Ambassador page and the AMBASSADORS.md
           file.
         - Your blog post published on the linkerd.io in the "Ambassador
-          Highlight" section 
+          Highlight" section
       - **Resources and support!** Get funding, training, and support for
         hosting workshops, speaking, creating content, or mentoring others.
       - **Networking:**
@@ -85,14 +85,14 @@ params:
           3. Regularly answer questions on Slack (i.e. on a monthly basis),
           4. Contribute code, documentation, or otherwise participate in the
             Linkerd open source project
-          
+
           Other creative ideas not listed here are also possible, as long as they
           achieve the goal of educating users about Linkerd. Let us know how you
-          are achieving it in your application. 
-          
+          are achieving it in your application.
+
           Finally, Ambassadors active on social media are encouraged to help
           amplify Linkerd content on social or other media and engage in
-          conversation about Linkerd (e.g., Reddit, LinkedIn, etc.). 
+          conversation about Linkerd (e.g., Reddit, LinkedIn, etc.).
       - title: What if Linkerd Ambassadors can't fulfill their responsibilities
           anymore?
         content: |-
