@@ -11,7 +11,7 @@ description: |-
 layout: ambassadors
 params:
   sections:
-    - title: 
+    - title:
       items:
         - name: Chris Campbell
           role: Cloud Software Engineer

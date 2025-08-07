@@ -57,9 +57,9 @@ If you have existing SMTP, MySQL, Postgres, or Memcache traffic to an
 off-cluster destination, *on the default port for that protocol*, then you will
 need to update your configuration.
 
-**Behavior in 2.9:** Traffic automatically *skips* the proxy.  
+**Behavior in 2.9:** Traffic automatically *skips* the proxy.
 **Behavior in 2.10:** Traffic automatically *transits* the proxy, and will incur
-a 10-second connect delay.  
+a 10-second connect delay.
 **Steps to upgrade:** Use `skip-outbound-ports` to mark the port so as to
 bypass the proxy. (There is currently no ability to use opaque ports in this
 situation.)
@@ -70,8 +70,8 @@ If you have client-initiated TLS calls to any destination, on- or off-cluster,
 you may have to update your configuration if these connections are made at
 application startup and not retried.
 
-**Behavior in 2.9:** Traffic automatically *skips* the proxy.  
-**Behavior in 2.10:** Traffic automatically *transits* the proxy.  
+**Behavior in 2.9:** Traffic automatically *skips* the proxy.
+**Behavior in 2.10:** Traffic automatically *transits* the proxy.
 **Steps to upgrade:** See "Connecting at startup" below.
 
 ### An existing skip-ports configuration
@@ -80,8 +80,8 @@ If you have an existing configuration involving `skip-inbound-ports` or
 `skip-outbound-ports` annotations, everything should continue working as is.
 However, you may choose to convert this configuration to opaque ports.
 
-**Behavior in 2.9:** Traffic skips the proxy.  
-**Behavior in 2.10:** Traffic skips the proxy.  
+**Behavior in 2.9:** Traffic skips the proxy.
+**Behavior in 2.10:** Traffic skips the proxy.
 **Steps to upgrade:** Optionally, change this configuration to opaque ports to
 take advantage of metrics, mTLS (for meshed destinations), etc. See "Connecting
 at startup" below if any of these connections happen at application startup and
