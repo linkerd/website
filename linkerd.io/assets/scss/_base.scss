@@ -1,6 +1,6 @@
 :root {
   font-size: $font-size-base;
-  
+
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
   }
@@ -149,7 +149,7 @@ a {
   color: $link-color;
   text-decoration: none;
   transition: color .2s ease;
-  
+
   &:hover,
   &:active {
     color: $link-color-hover;

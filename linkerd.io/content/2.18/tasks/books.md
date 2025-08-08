@@ -112,10 +112,10 @@ the `stat-inbound` command to see the success rate of the webapp deployment:
 
 ```bash
 linkerd viz -n booksapp stat-inbound deploy/webapp
-NAME    SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  
-webapp  [default]:4191  [default]        100.00%  0.30          4ms          9ms         10ms  
-webapp  [default]:4191  probe            100.00%  0.60          0ms          1ms          1ms  
-webapp  [default]:7000  probe            100.00%  0.30          2ms          2ms          2ms  
+NAME    SERVER          ROUTE      TYPE  SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
+webapp  [default]:4191  [default]        100.00%  0.30          4ms          9ms         10ms
+webapp  [default]:4191  probe            100.00%  0.60          0ms          1ms          1ms
+webapp  [default]:7000  probe            100.00%  0.30          2ms          2ms          2ms
 webapp  [default]:7000  [default]         75.66%  8.22         18ms         65ms         93ms
 ```
 
@@ -129,10 +129,10 @@ other services.
 
 ```bash
 linkerd viz -n booksapp stat-outbound deploy/webapp
-NAME    SERVICE       ROUTE      TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  books:7002    [default]                            77.36%  7.95         25ms         48ms        176ms     0.00%    0.00%  
-                      └──────────────────►  books:7002     77.36%  7.95         15ms         44ms         64ms     0.00%           
-webapp  authors:7001  [default]                           100.00%  3.53         26ms         72ms        415ms     0.00%    0.00%  
+NAME    SERVICE       ROUTE      TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  books:7002    [default]                            77.36%  7.95         25ms         48ms        176ms     0.00%    0.00%
+                      └──────────────────►  books:7002     77.36%  7.95         15ms         44ms         64ms     0.00%
+webapp  authors:7001  [default]                           100.00%  3.53         26ms         72ms        415ms     0.00%    0.00%
                       └──────────────────►  authors:7001  100.00%  3.53         16ms         52ms         91ms     0.00%
 ```
 
@@ -236,14 +236,14 @@ With those HTTPRoutes in place, we can look at the outbound stats again:
 
 ```bash
 linkerd viz -n booksapp stat-outbound deploy/webapp
-NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  authors:7001  [default]                              100.00%  2.80         25ms         48ms         50ms     0.00%    0.00%  
-                      └─────────────────────►  authors:7001  100.00%  2.80         16ms         45ms         49ms     0.00%           
-webapp  books:7002    books-list    HTTPRoute                100.00%  1.43         25ms         48ms         50ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002    100.00%  1.43         12ms         24ms         25ms     0.00%           
-webapp  books:7002    books-create  HTTPRoute                 54.27%  2.73         27ms        207ms        441ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002     54.27%  2.73         14ms        152ms        230ms     0.00%           
-webapp  books:7002    books-delete  HTTPRoute                100.00%  0.72         25ms         48ms         50ms     0.00%    0.00%  
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  authors:7001  [default]                              100.00%  2.80         25ms         48ms         50ms     0.00%    0.00%
+                      └─────────────────────►  authors:7001  100.00%  2.80         16ms         45ms         49ms     0.00%
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.43         25ms         48ms         50ms     0.00%    0.00%
+                      └─────────────────────►  books:7002    100.00%  1.43         12ms         24ms         25ms     0.00%
+webapp  books:7002    books-create  HTTPRoute                 54.27%  2.73         27ms        207ms        441ms     0.00%    0.00%
+                      └─────────────────────►  books:7002     54.27%  2.73         14ms        152ms        230ms     0.00%
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.72         25ms         48ms         50ms     0.00%    0.00%
                       └─────────────────────►  books:7002    100.00%  0.72         12ms         24ms         25ms     0.00%
 ```
 
@@ -267,14 +267,14 @@ We can then see the effect of these retries:
 
 ```bash
 linkerd viz -n booksapp stat-outbound deploy/webapp
-NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  books:7002    books-create  HTTPRoute                 73.17%  2.05         98ms        460ms        492ms     0.00%   34.22%  
-                      └─────────────────────►  books:7002     48.13%  3.12         29ms         93ms         99ms     0.00%           
-webapp  books:7002    books-list    HTTPRoute                100.00%  1.50         25ms         48ms         49ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002    100.00%  1.50         12ms         24ms         25ms     0.00%           
-webapp  books:7002    books-delete  HTTPRoute                100.00%  0.73         25ms         48ms         50ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002    100.00%  0.73         12ms         24ms         25ms     0.00%           
-webapp  authors:7001  [default]                              100.00%  2.98         25ms         48ms         50ms     0.00%    0.00%  
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  books:7002    books-create  HTTPRoute                 73.17%  2.05         98ms        460ms        492ms     0.00%   34.22%
+                      └─────────────────────►  books:7002     48.13%  3.12         29ms         93ms         99ms     0.00%
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.50         25ms         48ms         49ms     0.00%    0.00%
+                      └─────────────────────►  books:7002    100.00%  1.50         12ms         24ms         25ms     0.00%
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.73         25ms         48ms         50ms     0.00%    0.00%
+                      └─────────────────────►  books:7002    100.00%  0.73         12ms         24ms         25ms     0.00%
+webapp  authors:7001  [default]                              100.00%  2.98         25ms         48ms         50ms     0.00%    0.00%
                       └─────────────────────►  authors:7001  100.00%  2.98         16ms         44ms         49ms     0.00%
 ```
 
@@ -298,14 +298,14 @@ Looking at the stats again:
 
 ```bash
 linkerd viz -n booksapp stat-outbound deploy/webapp
-NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  books:7002    books-delete  HTTPRoute                100.00%  0.75         25ms         48ms         50ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002    100.00%  0.75         12ms         24ms         25ms     0.00%           
-webapp  authors:7001  [default]                              100.00%  2.92         25ms         48ms         50ms     0.00%    0.00%  
-                      └─────────────────────►  authors:7001  100.00%  2.92         18ms         46ms         49ms     0.00%           
-webapp  books:7002    books-create  HTTPRoute                 92.78%  1.62        111ms        461ms        492ms     0.00%   47.28%  
-                      └─────────────────────►  books:7002     48.91%  3.07         42ms        179ms        236ms     0.00%           
-webapp  books:7002    books-list    HTTPRoute                100.00%  1.45         25ms         48ms         50ms     0.00%    0.00%  
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.75         25ms         48ms         50ms     0.00%    0.00%
+                      └─────────────────────►  books:7002    100.00%  0.75         12ms         24ms         25ms     0.00%
+webapp  authors:7001  [default]                              100.00%  2.92         25ms         48ms         50ms     0.00%    0.00%
+                      └─────────────────────►  authors:7001  100.00%  2.92         18ms         46ms         49ms     0.00%
+webapp  books:7002    books-create  HTTPRoute                 92.78%  1.62        111ms        461ms        492ms     0.00%   47.28%
+                      └─────────────────────►  books:7002     48.91%  3.07         42ms        179ms        236ms     0.00%
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.45         25ms         48ms         50ms     0.00%    0.00%
                       └─────────────────────►  books:7002    100.00%  1.45         12ms         24ms         25ms     0.00%
 ```
 
@@ -330,15 +330,15 @@ getting so many that it's hard to see what's going on!)
 We can see the effects of this timeout by running:
 
 ```bash
-linkerd viz -n booksapp stat-outbound deploy/webapp                         
-NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES  
-webapp  authors:7001  [default]                              100.00%  2.85         26ms         49ms        370ms     0.00%    0.00%  
-                      └─────────────────────►  authors:7001  100.00%  2.85         19ms         49ms         86ms     0.00%           
-webapp  books:7002    books-create  HTTPRoute                 78.90%  1.82         45ms        449ms        490ms    21.10%   47.34%  
-                      └─────────────────────►  books:7002     41.55%  3.45         24ms        134ms        227ms    11.11%           
-webapp  books:7002    books-list    HTTPRoute                100.00%  1.40         25ms         47ms         49ms     0.00%    0.00%  
-                      └─────────────────────►  books:7002    100.00%  1.40         12ms         24ms         25ms     0.00%           
-webapp  books:7002    books-delete  HTTPRoute                100.00%  0.70         25ms         48ms         50ms     0.00%    0.00%  
+linkerd viz -n booksapp stat-outbound deploy/webapp
+NAME    SERVICE       ROUTE         TYPE       BACKEND       SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
+webapp  authors:7001  [default]                              100.00%  2.85         26ms         49ms        370ms     0.00%    0.00%
+                      └─────────────────────►  authors:7001  100.00%  2.85         19ms         49ms         86ms     0.00%
+webapp  books:7002    books-create  HTTPRoute                 78.90%  1.82         45ms        449ms        490ms    21.10%   47.34%
+                      └─────────────────────►  books:7002     41.55%  3.45         24ms        134ms        227ms    11.11%
+webapp  books:7002    books-list    HTTPRoute                100.00%  1.40         25ms         47ms         49ms     0.00%    0.00%
+                      └─────────────────────►  books:7002    100.00%  1.40         12ms         24ms         25ms     0.00%
+webapp  books:7002    books-delete  HTTPRoute                100.00%  0.70         25ms         48ms         50ms     0.00%    0.00%
                       └─────────────────────►  books:7002    100.00%  0.70         12ms         24ms         25ms     0.00%
 ```
 

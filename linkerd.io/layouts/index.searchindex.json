@@ -1,4 +1,4 @@
-{{- /* 
+{{- /*
   Output a json search index of all docs for the latest major version of
   Linkerd and the blog posts for the past year.
 */}}

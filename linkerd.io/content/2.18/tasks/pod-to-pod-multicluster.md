@@ -249,7 +249,7 @@ from `slow-cooker`:
 
 ```console
 > linkerd --context east viz authz -n mc-demo deploy
-ROUTE    SERVER                       AUTHORIZATION                 UNAUTHORIZED  SUCCESS      RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  
+ROUTE    SERVER                       AUTHORIZATION                 UNAUTHORIZED  SUCCESS      RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
 default  bb                           authorizationpolicy/bb-authz        0.0rps  100.00%  10.0rps          1ms          1ms          1ms
 default  default:all-unauthenticated  default/all-unauthenticated         0.0rps  100.00%   0.1rps          1ms          1ms          1ms
 probe    default:all-unauthenticated  default/probe                       0.0rps  100.00%   0.2rps          1ms          1ms          1ms
@@ -304,8 +304,8 @@ that `bb` is accepting 10rps (from `slow-cooker`) and rejecting 10rps (from
 ```console
 > linkerd --context east viz authz -n mc-demo deploy
 ROUTE    SERVER                       AUTHORIZATION                 UNAUTHORIZED  SUCCESS      RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
-default  bb                                                              10.0rps    0.00%   0.0rps          0ms          0ms          0ms  
-default  bb                           authorizationpolicy/bb-authz        0.0rps  100.00%  10.0rps          1ms          1ms          1ms  
+default  bb                                                              10.0rps    0.00%   0.0rps          0ms          0ms          0ms
+default  bb                           authorizationpolicy/bb-authz        0.0rps  100.00%  10.0rps          1ms          1ms          1ms
 default  default:all-unauthenticated  default/all-unauthenticated         0.0rps  100.00%   0.1rps          1ms          1ms          1ms
 probe    default:all-unauthenticated  default/probe                       0.0rps  100.00%   0.2rps          1ms          1ms          1ms
 ```

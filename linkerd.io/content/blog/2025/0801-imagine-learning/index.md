@@ -1,6 +1,8 @@
 ---
 date: 2025-08-01T00:00:00Z
-slug: linkerd-edge-release-roundup
+slug: imagine-learning-linkerd
+aliases:
+  - /2025/08/01/linkerd-edge-release-roundup
 title: |-
   Innovating with a Rock-Solid Foundation While Saving 40% on Networking Costs: Imagine Learning's Journey with Linkerd
 description: |-

@@ -106,7 +106,7 @@ The Knative repository includes several samples for workloads that can be
 run on Knative. Here, we use the
 [helloworld-go](https://github.com/knative/docs/tree/master/docs/serving/samples/hello-world/helloworld-go) sample application.
 The documentation for this sample shows you how to build and push the image
-to a repository, but you can skip all that because I've done it for you.  
+to a repository, but you can skip all that because I've done it for you.
 
 ```bash
 git clone git@github.com:cpretzer/demos # clone the repository
@@ -128,9 +128,9 @@ Be sure to make note of URL field because we'll use it in the next steps.
 
 #### Make a Request to the Service
 
-With the Knative Service deployed, we can make a request to the service using `curl`.  
+With the Knative Service deployed, we can make a request to the service using `curl`.
 
-- _Use the hostname portion of the URL from the step above_  
+- _Use the hostname portion of the URL from the step above_
 Once you remove the scheme, the value will look like: `helloworld-go.default.example.com`
 
 - _Send the curl request_
@@ -149,7 +149,7 @@ Hello Go Sample v1 now with Linkerd!
 ```
 
 Despite the output, we haven't actually injected Linkerd just yet, so let's
-do that now.  
+do that now.
 
 ### Installing the Linkerd Service Mesh
 
@@ -225,7 +225,7 @@ returns without errors, you're ready to get meshing. But first, let's look at
 the Linkerd control plane architecture that was just deployed and the pods running
 in the control plane:
 
-![linkerd-control-plane](control-plane.png "Linkerd Control Plane")  
+![linkerd-control-plane](control-plane.png "Linkerd Control Plane")
 
 To view the control plane pods, run:
 
@@ -308,7 +308,7 @@ kubectl wait po -n knative-serving --all --for=condition=Ready
 ```bash
 kubectl get po -n ambassador
 kubectl get po -n knative-serving
-```  
+```
 
 to see output like this:
 

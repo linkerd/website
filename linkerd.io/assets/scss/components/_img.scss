@@ -40,6 +40,18 @@
     max-width: 100%;
   }
 
+  // Aspect Ratio
+
+  &.img--4x3 {
+    aspect-ratio: 4 / 3;
+  }
+  &.img--16x9 {
+    aspect-ratio: 16 / 9;
+  }
+  &.img--4x1 {
+    aspect-ratio: 4 / 1;
+  }
+
   // Sizing
 
   @each $name, $size in $image-sizes {

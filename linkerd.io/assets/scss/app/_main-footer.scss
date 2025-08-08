@@ -17,7 +17,7 @@
     padding: spacer(6) 0;
     background-color: $light-blue;
 
-    .main-footer__container { 
+    .main-footer__container {
       gap: spacer(6);
     }
   }
@@ -30,7 +30,7 @@
     p {
       font-size: $font-size-sm;
     }
-    .main-footer__container { 
+    .main-footer__container {
       gap: spacer(3);
     }
   }
@@ -55,7 +55,7 @@
     .main-footer__top {
       padding: spacer(7) 0;
 
-      .main-footer__container { 
+      .main-footer__container {
         justify-content: space-between;
       }
     }

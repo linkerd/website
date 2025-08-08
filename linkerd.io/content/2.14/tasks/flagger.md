@@ -165,8 +165,8 @@ spec:
           direction="inbound"
         }[{{ interval }}]
       )
-    ) 
-    / 
+    )
+    /
     sum(
       rate(
         response_total{
@@ -175,7 +175,7 @@ spec:
           direction="inbound"
         }[{{ interval }}]
       )
-    ) 
+    )
     * 100
 EOF
 ```
