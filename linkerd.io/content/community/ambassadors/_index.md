@@ -13,6 +13,13 @@ params:
   sections:
     - title:
       items:
+        - name: Blake Romano
+          role: Senior Software Engineer 
+          image: images/blake-romano.jpg
+          flag: 🇺🇸
+          urls:
+            github: https://github.com/blakeromano
+            linkedin: https://www.linkedin.com/in/blakeromano/
         - name: Chris Campbell
           role: Cloud Software Engineer
           image: images/chris-campbell.png
