@@ -13,9 +13,16 @@ params:
   sections:
     - title:
       items:
+        - name: Blake Romano
+          role: Senior Software Engineer 
+          image: images/blake-romano.jpg
+          flag: 🇺🇸
+          urls:
+            github: https://github.com/blakeromano
+            linkedin: https://www.linkedin.com/in/blakeromano/
         - name: Chris Campbell
           role: Cloud Software Engineer
-          image: images/chris-campbell.png
+          image: images/chris-campbell.jpg
           flag: 🇺🇸
           urls:
             github: https://github.com/campbel
@@ -23,7 +30,7 @@ params:
             linkedin: https://www.linkedin.com/in/chris-campbell-28410839/
         - name: Christian Hüning
           role: Director of Cloud Technologies
-          image: images/christian-huning.png
+          image: images/christian-huning.jpg
           flag: 🇩🇪
           urls:
             github: https://github.com/christianhuening
@@ -46,7 +53,7 @@ params:
             linkedin: https://www.linkedin.com/in/eli-go/
         - name: Mahendran Selvakumar
           role: DevOps Engineer
-          image: images/mahendran-selvakumar.png
+          image: images/mahendran-selvakumar.jpg
           flag: 🇬🇧
           urls:
             github: https://github.com/skmahe1077/
@@ -54,7 +61,7 @@ params:
             linkedin: https://www.linkedin.com/in/mahendran-selvakumar/
         - name: Sergio Méndez
           role: DevOps Engineer
-          image: images/sergio-mendez.png
+          image: images/sergio-mendez.jpg
           flag: 🇬🇹
           urls:
             github: https://github.com/sergioarmgpl
@@ -72,14 +79,14 @@ params:
       items:
         - name: Charles Pretzer
           role: Field Engineer
-          image: images/charles-pretzer.png
+          image: images/charles-pretzer.jpg
           flag: 🇺🇸
           urls:
             github: https://github.com/cpretzer
             linkedin: https://www.linkedin.com/in/charlespretzer/
         - name: Fredrik Klingenberg
           role: Developer
-          image: images/fredrik-klingenberg.png
+          image: images/fredrik-klingenberg.jpg
           flag: 🇳🇴
           urls:
             github: https://github.com/fredrkl
@@ -87,7 +94,7 @@ params:
             linkedin: https://www.linkedin.com/in/fredrikklingenberg/
         - name: Kasper Nissen
           role: Lead Platform Architect
-          image: images/kasper-nissen.png
+          image: images/kasper-nissen.jpg
           flag: 🇩🇰
           urls:
             github: https://github.com/kaspernissen
@@ -95,14 +102,14 @@ params:
             linkedin: https://www.linkedin.com/in/kaspernissen/
         - name: María Teresa Rojas
           role: SRE
-          image: images/maria-rojas.png
+          image: images/maria-rojas.jpg
           flag: 🇵🇹
           urls:
             github: https://github.com/mtrojas
             linkedin: https://www.linkedin.com/in/mtrojas/
         - name: Steve Gray
           role: Founder & CEO
-          image: images/steve-gray.png
+          image: images/steve-gray.jpg
           flag: 🇦🇺
           urls:
             linkedin: https://www.linkedin.com/in/eventualconsistency/
