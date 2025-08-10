@@ -799,11 +799,12 @@ The process of actually doing this is straightforward, but again, there are
 several steps:
 
 1. Trigger trust anchor rotation
-2. Restart the data plane
-3. Trigger identity issuer rotation
-4. Restart the control plane
-5. Restart the data plane
-6. Remove the old anchor from the trust bundle
+2. Restart the control plane
+3. Restart the data plane
+4. Trigger identity issuer rotation
+5. Restart the control plane
+6. Restart the data plane
+7. Remove the old anchor from the trust bundle
 
 {{< note >}}
 
