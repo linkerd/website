@@ -22,6 +22,7 @@ In 2.1, Linkerd can now provide metrics not just at the service level but at the
 For example, here's what per-route metrics look like for a service called "webapp" that has several API endpoints:
 
 ![Per-route metrics](metrics.png "Per-route metrics")
+{.border}
 
 The top part of the UI shows the topology of incoming and outgoing dependencies. The bottom portion shows the route metrics. From this, it's clear that the `/books` and `/books/<id>/edit` routes are failing with a success rate of well under 50%, while all other routes on the service are fine. This is hugely better than simply knowing that the "webapp" service has an 80% success rate!
 
@@ -40,6 +41,7 @@ Service profiles are also a great demonstration of the design philosophy behind 
 In Linkerd 2.1 we've improved the web dashboard in many ways, including by switching over to [Material UI](https://material-ui.com/). This new look should feel like home to anyone familiar with the Kubernetes dashboard:
 
 ![Linkerd dashboard](cover.png "The new Linkerd dashboard")
+{.border}
 
 ## What's next for Linkerd?
 

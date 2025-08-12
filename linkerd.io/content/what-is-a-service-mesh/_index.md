@@ -131,6 +131,7 @@ tools.
 And that's just the simplified version!
 
 ![Linkerd dashboard](dashboard.png "Linkerd dashboard")
+{.border}
 
 ## Why do I need a service mesh?
 

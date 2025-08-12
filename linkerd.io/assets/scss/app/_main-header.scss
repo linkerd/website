@@ -23,7 +23,7 @@ body {
   left: 0;
   z-index: $z-index-main-nav;
   background-color: $white;
-  box-shadow: $box-shadow;
+  box-shadow: $box-shadow-md;
 
   .main-header__container {
     display: flex;

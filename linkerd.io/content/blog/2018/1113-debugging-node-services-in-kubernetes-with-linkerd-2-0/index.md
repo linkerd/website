@@ -59,7 +59,7 @@ Click around the app a bit. You should see that some parts of the application ar
 
 This is a very common type of failure scenario: Kubernetes thinks everything’s fine, but you know the application is returning errors, because you can see them. In the next few steps, we’ll walk you through how to use Linkerd to diagnose the problem.
 
-![vote app](NodeVoto-Uh-oh-Select-again-image-300x225.gif)
+![vote app](NodeVoto-Uh-oh-Select-again-image-300x225.png)
 
 ## Step 2: Install Linkerd’s CLI
 
@@ -131,7 +131,7 @@ We now have a service sidecar running on the “web” service!
 
 Congratulations! You now have a full gRPC application running on your Kubernetes cluster with Linkerd installed on the “web” service. Unfortunately, that application is failing when you use it--so now let’s use Linkerd to track down those errors.
 
-![failure](NodeVoto-Uh-oh-Select-again-image-300x225.gif "failure")
+![failure](NodeVoto-Uh-oh-Select-again-image-300x225.png "failure")
 
 If you glance at the Linkerd dashboard (the `linkerd dashboard` command), you should see all services in the `nodevoto` namespace show up. Since “web” has the Linkerd service sidecar installed on it, you’ll also see success rate, requests per second, and latency percentiles show up.
 

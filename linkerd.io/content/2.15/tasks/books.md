@@ -21,7 +21,6 @@ For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
 ![Topology](/docs/images/books/topology.png "Topology")
-{.center}
 
 ## Prerequisites
 
@@ -74,6 +73,7 @@ Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
 ![Frontend](/docs/images/books/frontend.png "Frontend")
+{.border}
 
 Unfortunately, there is an error in the app: if you click *Add Book*, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
@@ -83,7 +83,7 @@ perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
 ![Failure](/docs/images/books/failure.png "Failure")
-{.center}
+{.border}
 
 ## Add Linkerd to the service
 

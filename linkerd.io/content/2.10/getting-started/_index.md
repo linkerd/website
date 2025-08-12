@@ -163,6 +163,7 @@ linkerd viz dashboard &
 You should see a screen like this:
 
 ![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png "The Linkerd dashboard in action")
+{.border}
 
 If you installed the buoyant-cloud extension, run:
 

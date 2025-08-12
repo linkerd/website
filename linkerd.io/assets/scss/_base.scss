@@ -99,17 +99,20 @@ li {
   }
 }
 
-figure img {
-  display: block;
-  height: auto;
-  max-width: 100%;
+figure {
+  img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
 }
 
 blockquote {
   margin: 0;
   margin-bottom: spacer(3);
-  padding: spacer(3);
-  border-left: solid 2px $border-color;
+  padding: spacer(4);
+  border-left: solid 4px $blue;
+  background-color: $light-blue;
 
   & > :last-child {
     margin-bottom: 0;

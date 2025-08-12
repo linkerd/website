@@ -196,11 +196,11 @@ To display a caption below the image, provide an image title. For example:
 ![Alt text](my-image.jpg 'My image caption')
 ```
 
-To center the image, use a Markdown attribute:
+To add a border to the image, use a Markdown attribute:
 
 ```markdown
 ![Alt text](my-image.jpg)
-{.center}
+{.border}
 ```
 
 #### Image dimensions

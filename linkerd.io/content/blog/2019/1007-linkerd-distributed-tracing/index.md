@@ -119,6 +119,7 @@ kubectl -n tracing port-forward deploy/jaeger 16686 &; \
 ```
 
 ![Complete Trace](distributed-tracing-trace.png "Complete Trace")
+{.border}
 
 ## Linkerd Distributed Tracing Reference Architecture
 

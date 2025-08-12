@@ -47,6 +47,7 @@ understand the health of specific service routes. One way to pull it up is by
 running `linkerd viz dashboard` from the command line.
 
 ![Top Line Metrics](/docs/images/architecture/stat.png "Top Line Metrics")
+{.border}
 
 ## Grafana
 
@@ -104,9 +105,13 @@ All of this functionality is also available in the dashboard, if you would like
 to use your browser instead:
 
 ![Top Line Metrics](/docs/images/getting-started/stat.png "Top Line Metrics")
+{.border}
 
 ![Deployment Detail](/docs/images/getting-started/inbound-outbound.png "Deployment Detail")
+{.border}
 
 ![Top](/docs/images/getting-started/top.png "Top")
+{.border}
 
 ![Tap](/docs/images/getting-started/tap.png "Tap")
+{.border}

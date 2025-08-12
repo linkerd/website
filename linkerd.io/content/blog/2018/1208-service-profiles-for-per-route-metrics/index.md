@@ -18,6 +18,7 @@ However, aggregating metrics by path in particular poses some significant challe
 The earliest versions of what would become Linkerd 2.0 (back when it was called Conduit!) actually had per-path metrics right out of the box:
 
 ![Conduit Overview](image-1.png "Conduit Overview")
+{.border}
 
 This feature was incredibly useful, but there was a big problem. Conduit [stored all of its metrics in Prometheus](https://buoyant.io/2018/05/17/prometheus-the-right-way-lessons-learned-evolving-conduits-prometheus-integration/), using Prometheus _labels_ to store all of the different dimensions of the data such as service, deployment, and path. A Prometheus label for path means that every unique path creates a new timeseries in Prometheus. Since Conduit had no control over the requests that it receives, it was very easy for Prometheus to become overwhelmed with an unbounded number of unique paths and thus an unbounded number of timeseries. In fact, the Prometheus docs include a warning about [this very issue](https://prometheus.io/docs/practices/naming/#labels)! While this early version showed us just how awesome this feature could be, we ultimately [decided to remove the path label](https://github.com/linkerd/linkerd2/pull/317) to ensure that, in Linkerd, Prometheus could continue to perform well.
 

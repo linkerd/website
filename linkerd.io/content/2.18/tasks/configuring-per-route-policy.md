@@ -64,6 +64,7 @@ Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
 ![Frontend](/docs/images/books/frontend.png "Frontend")
+{.border}
 
 ## Creating a Server resource
 
@@ -326,6 +327,7 @@ web UI, we may notice that something is amiss.
 Attempting to delete an author results in a "not found" error in the web UI:
 
 ![Not found](/docs/images/books/delete-404.png "Not found")
+{.border}
 
 and similarly, adding a new author takes us to an error page.
 
@@ -371,6 +373,7 @@ What happens if we try to delete an author _now_? We still see a failure, but a
 different one:
 
 ![Internal server error](/docs/images/books/delete-503.png "Internal server error")
+{.border}
 
 This is because we have created a _route_ matching `DELETE`, `PUT`, and `POST`
 requests, but we haven't _authorized_ requests to that route. Running the
@@ -428,10 +431,12 @@ in this case, we only authenticate the `webapp` deployment's `ServiceAccount`
 Now, if we attempt to delete an author in the frontend once again, we can:
 
 ![Author deleted](/docs/images/books/delete-ok.png "Author deleted")
+{.border}
 
 Similarly, we can now create a new author successfully, as well:
 
 ![Author created](/docs/images/books/create-ok.png "Author created")
+{.border}
 
 Running the `linkerd viz authz` command one last time, we now see that all
 traffic is authorized:

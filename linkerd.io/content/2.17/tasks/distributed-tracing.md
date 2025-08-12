@@ -21,7 +21,6 @@ In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
 ![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
-{.center}
 
 ## Prerequisites
 
@@ -118,16 +117,19 @@ linkerd jaeger dashboard
 ```
 
 ![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
+{.border}
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
 ![Search](/docs/images/tracing/jaeger-search.png "Search")
+{.border}
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
 ![Search](/docs/images/tracing/example-trace.png "Search")
+{.border}
 
 There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
@@ -144,6 +146,7 @@ traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
 the Metrics Table, as shown below:
 
 ![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
+{.border}
 
 To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
 extension specifying the service exposing the Jaeger UI. By default, this would

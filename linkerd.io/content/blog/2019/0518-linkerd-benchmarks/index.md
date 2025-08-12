@@ -53,6 +53,7 @@ configuration below.)
 ## Latency
 
 ![500rps latency chart](500rps-latency.png)
+
 ![600rps latency chart](600rps-latency.png)
 
 Latency is arguably the most important number for a service mesh, since it
@@ -106,6 +107,7 @@ significant latency at the 99.9th percentile compared to the baseline in the
 ## Memory consumption
 
 ![500rps memory chart](500rps-memory_usage.png)
+
 ![600rps memory chart](600rps-memory_usage.png)
 
 At 500rps, Linkerd's memory usage was 517mb across all data plane proxies
@@ -129,6 +131,7 @@ memory as Linkerd. Linkerd's data plane, in particular, consumed less than an
 ## CPU consumption
 
 ![500rps cpu chart](500rps-cpu_utilization.png)
+
 ![600rps cpu chart](600rps-cpu_utilization.png)
 
 When measuring CPU consumption, the two meshes product comparable results. In

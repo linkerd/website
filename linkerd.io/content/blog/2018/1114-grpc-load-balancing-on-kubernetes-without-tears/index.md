@@ -9,6 +9,7 @@ params:
 Many new gRPC users are surprised to find that Kubernetes's default load balancing often doesn't work out of the box with gRPC. For example, here's what happens when you take a [simple gRPC Node.js microservices app](https://github.com/sourishkrout/nodevoto) and deploy it on Kubernetes:
 
 ![pods](grpc-pods.png "Pods")
+{.border}
 
 While the `voting` service displayed here has several pods, it's clear from Kubernetes's CPU graphs that only one of the pods is actually doing any work—because only one of the pods is receiving any traffic. Why?
 
@@ -65,12 +66,14 @@ Linkerd is very easy to try. Just follow the steps in the [Linkerd Getting Start
 Let's take a look at our sample `voting` service again, this time after installing Linkerd:
 
 ![Voting service](voting-service.png "Voting service")
+{.border}
 
 As we can see, the CPU graphs for all pods are active, indicating that all pods are now taking traffic—without having to change a line of code. Voila, gRPC load balancing as if by magic!
 
 Linkerd also gives us built-in traffic-level dashboards, so we don't even need to guess what's happening from CPU charts any more. Here's a Linkerd graph that's showing the success rate, request volume, and latency percentiles of each pod:
 
 ![Pod overview](pod-overview.png "Pod overview")
+{.border}
 
 We can see that each pod is getting around 5 RPS. We can also see that, while we've solved our load balancing problem, we still have some work to do on our success rate for this service. (The demo app is built with an intentional failure—as an exercise to the reader, see if you can figure it out by using the Linkerd dashboard!)
 

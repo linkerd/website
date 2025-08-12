@@ -27,12 +27,14 @@ dependencies for a service, without requiring distributed tracing or any other
 such application modification:
 
 ![The Linkerd dashboard showing an automatically generated topology graph](/docs/images/books/webapp-detail.png "The Linkerd dashboard showing an automatically generated topology graph")
+{.border}
 
 Likewise, Linkerd can provide golden metrics per service and per *route*, again
 without requiring distributed tracing or any other such application
 modification:
 
 ![Linkerd dashboard showing an automatically generated route metrics](/docs/images/books/webapp-routes.png "Linkerd dashboard showing an automatically generated route metrics")
+{.border}
 
 ## Using distributed tracing
 

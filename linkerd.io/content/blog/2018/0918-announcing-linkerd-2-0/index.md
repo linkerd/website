@@ -30,6 +30,7 @@ Second, with the 2.0 release, Linkerd adds the ability to run on a single servic
 Even better, installing Linkerd 2.0 on your service requires no configuration or code changes.
 
 ![Linkerd overview](cover.png "Linkerd overview")
+{.border}
 
 The 2.0 release is something we’re really excited about because it addresses two major problems with the traditional (!) service mesh model:
 

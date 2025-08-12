@@ -17,6 +17,13 @@ Apply to containers that contain rendered markdown.
     }
   }
 
+  // Center block images within content
+  figure {
+    img {
+      margin: 0 auto;
+    }
+  }
+
   // Add bottom margin to alerts
   .alert {
     margin-bottom: spacer(3);
@@ -27,9 +34,15 @@ Apply to containers that contain rendered markdown.
     margin-bottom: spacer(3);
   }
 
+  // Add bottom margin to iframes inserted by Hugo's youtube shortcode
+  // Hugo does not add a class name, so target the title attribute
+  iframe[title="YouTube video"] {
+    padding-bottom: spacer(3);
+  }
+
   // Markdown attribute classes
-  img.center {
-    margin: 0 auto;
+  img.border {
+    box-shadow: $box-shadow-sm;
   }
 
 }

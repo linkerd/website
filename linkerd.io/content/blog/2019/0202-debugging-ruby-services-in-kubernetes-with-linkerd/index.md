@@ -70,10 +70,12 @@ kubectl -n booksapp port-forward \
 ```
 
 ![books app overview](books.png "books app overview")
+{.border}
 
 As you can imagine, there is an error in the app. If you click Add Book, it will fail 50% of the time. This is a classic case of non-obvious, intermittent failure - the type that drives service owners mad because it is so difficult to debug. Because Kubernetes is interested in keeping processes running, it will show you that everything is running. It looks like everything’s fine, but you know the application is returning errors.
 
 ![errors](errors.png "errors")
+{.border}
 
 In the next few steps, we’ll walk you through how to use Linkerd to diagnose the problem.
 
@@ -134,6 +136,7 @@ linkerd dashboard
 If you see something similar to the screenshot below, Linkerd is now running on your cluster. 🎉
 
 ![linkerd running on the cluster](linkerd.png "linkerd running on the cluster")
+{.border}
 
 ## Step 4 — Add Linkerd to the webapp service
 
@@ -154,20 +157,24 @@ We now have a service mesh running on the webapp service!
 Cool! You have a full Ruby application running on your Kubernetes cluster with Linkerd installed on the webapp service. Let’s use Linkerd to discover the root cause in minutes without any code changes. Check out the Linkerd dashboard (the linkerd dashboard command). You should see all the services in the booksapp namespace show up. Since webapp has the Linkerd sidecar installed on it, you’ll also see success rate, requests per second, and latency percentiles.
 
 ![overview](overview.png "overview")
+{.border}
 
 That’s cool, but you’ll notice that the success rate for webapp is not 100%. This is because the traffic generator is submitting new books. You can do the same thing yourself and push that success rate even lower. Click on webapp in the Linkerd dashboard for a live debugging session.
 
 You should now be looking at the detail view for the webapp service. You’ll see that webapp is taking traffic from traffic, and has two outgoing dependencies: authors and book. One is the service for pulling in author information and the other is the service for pulling in book information.
 
 ![detail view of webapp service](detail.png "detail view of webapp service")
+{.border}
 
 A failure in a dependent service may be exactly what’s causing the errors that webapp is returning (and the errors you as a user can see when you click). We can see that books service is also failing. Let’s scroll a little further down the page, we’ll see a live list of all traffic endpoints that webapp is receiving. This is interesting:
 
 ![list of traffic endpoints](endpoints.png "list of traffic endpoints")
+{.border}
 
 Aha! We can see that inbound traffic coming from the webapp service going to the books service is failing a significant percentage of the time. That could explain why webapp was throwing intermittent failures. Let’s click on the 🔬 icon to look at the actual request and response stream.
 
 ![request details](request.png "request details")
+{.border}
 
 Indeed, many of these requests are returning 500's.
 
@@ -182,5 +189,6 @@ For example, everything we did above using the web UI can also be accomplished v
 Also, did you notice the little Grafana icon on the very first page we looked at? Linkerd ships with automatic Grafana dashboards for all those metrics, allowing you to view everything you’re seeing in the Linkerd dashboard in a time series format. Check it out!
 
 ![linkerd deployment](deployment.png "linkerd deployment")
+{.border}
 
 Linkerd has a thriving community of adopters and contributors, and we’d love for YOU to be a part of it. For more, check out the [docs](/docs/) and [GitHub](https://github.com/linkerd/linkerd) repo, join the [Linkerd Slack,](https://slack.linkerd.io/) mailing lists ([users](https://lists.cncf.io/g/cncf-linkerd-users), [developers](https://lists.cncf.io/g/cncf-linkerd-dev), [announce](https://lists.cncf.io/g/cncf-linkerd-announce)), and San Francisco [Linkerd Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup/), and, of course, follow [@linkerd](https://twitter.com/linkerd) on Twitter! We can’t wait to have you aboard!

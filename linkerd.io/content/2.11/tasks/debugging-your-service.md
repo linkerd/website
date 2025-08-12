@@ -17,11 +17,13 @@ including the deployments. Each deployment running Linkerd shows success rate,
 requests per second and latency percentiles.
 
 ![Top Level Metrics](/docs/images/debugging/stat.png "Top Level Metrics")
+{.border}
 
 That's pretty neat, but the first thing you might notice is that the success
 rate is well below 100%! Click on `web` and let's dig in.
 
 ![Deployment Detail](/docs/images/debugging/octopus.png "Deployment Detail")
+{.border}
 
 You should now be looking at the Deployment page for the web deployment. The first
 thing you'll see here is that the web deployment is taking traffic from `vote-bot`
@@ -37,6 +39,7 @@ Let's scroll a little further down the page, we'll see a live list of all
 traffic that is incoming to *and* outgoing from `web`. This is interesting:
 
 ![Top](/docs/images/debugging/web-top.png "Top")
+{.border}
 
 There are two calls that are not at 100%: the first is vote-bot's call to the
 `/api/vote` endpoint. The second is the `VoteDoughnut` call from the web
@@ -54,6 +57,7 @@ which is a common error response as you can see from
 other configuration!
 
 ![Tap](/docs/images/debugging/web-tap.png "Tap")
+{.border}
 
 At this point, we have everything required to get the endpoint fixed and restore
 the overall health of our applications.

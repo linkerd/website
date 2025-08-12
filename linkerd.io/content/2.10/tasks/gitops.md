@@ -174,6 +174,7 @@ argocd proj get demo
 On the dashboard:
 
 ![New project in Argo CD dashboard](/docs/images/gitops/dashboard-project.png "New project in Argo CD dashboard")
+{.border}
 
 ### Deploy the applications
 
@@ -203,6 +204,7 @@ argocd app sync main
 ```
 
 ![Synchronize the main application](/docs/images/gitops/dashboard-applications-main-sync.png "Synchronize the main application")
+{.border}
 
 Notice that only the `main` application is synchronized.
 
@@ -231,6 +233,7 @@ done
 ```
 
 ![Synchronize the cert-manager application](/docs/images/gitops/dashboard-cert-manager-sync.png "Synchronize the cert-manager application")
+{.border}
 
 ### Deploy Sealed Secrets
 
@@ -247,6 +250,7 @@ kubectl -n kube-system rollout status deploy/sealed-secrets
 ```
 
 ![Synchronize the sealed-secrets application](/docs/images/gitops/dashboard-sealed-secrets-sync.png "Synchronize the sealed-secrets application")
+{.border}
 
 ### Create mTLS trust anchor
 
@@ -333,6 +337,7 @@ Git server earlier.
 {{< /note >}}
 
 ![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png "Synchronize the linkerd-bootstrap application")
+{.border}
 
 SealedSecrets should have created a secret containing the decrypted trust
 anchor. Retrieve the decrypted trust anchor from the secret:
@@ -365,6 +370,7 @@ argocd app get linkerd -ojson | \
 ```
 
 ![Empty default trust anchor](/docs/images/gitops/dashboard-trust-anchor-empty.png "Empty default trust anchor")
+{.border}
 
 We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
@@ -427,6 +433,7 @@ argocd app get linkerd -ojson | \
 ```
 
 ![Override mTLS trust anchor](/docs/images/gitops/dashboard-trust-anchor-override.png "Override mTLS trust anchor")
+{.border}
 
 Synchronize the `linkerd` application:
 
@@ -441,6 +448,7 @@ linkerd check
 ```
 
 ![Synchronize Linkerd](/docs/images/gitops/dashboard-linkerd-sync.png "Synchronize Linkerd")
+{.border}
 
 ### Test with emojivoto
 
@@ -459,6 +467,7 @@ done
 ```
 
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
+{.border}
 
 ### Upgrade Linkerd to 2.8.1
 

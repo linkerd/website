@@ -13,10 +13,12 @@ _This post was written for engineers who are building front-end integration test
 One of the coolest things about working on [Linkerd](http://www.linkerd.io) is how excited our users are about our clean, deceptively simple dashboard, built with [React](https://reactjs.org/) and [Material-UI](https://material-ui.com/). (Wanna try it? Get our super-light, open-source service mesh [up and running in just a few minutes](/2/getting-started/)!)
 
 ![Linkerd dashboard](linkerd-dashboard-screenshot.png "Linkerd dashboard screenshot from edge release 19.3.2.")
+{.border}
 
 And when I say excited, I mean unsolicited-praise excited: we constantly get messages from users like this:
 
 ![Tweet](happy-tweet.png "Tweet by a happy Linkerd user!")
+{.border}
 
 We want to keep our users happy with a clean, consistent dashboard as we constantly roll out new features and improvements, so recently we built a suite of integration tests simulating a user's traversal through the application.
 
@@ -256,6 +258,7 @@ Wait until you see "Sauce Connect is up, you may start your tests" in your termi
 SauceLabs will start running the tests in the cloud. You can watch them run in real-time from the [SauceLabs dashboard](https://app.saucelabs.com/dashboard/tests) (and even take over if you want to manually control where the test goes).
 
 ![SauceLabs dashboard](saucelabs-dashboard-screenshot.png "SauceLabs dashboard screenshot showing a report of an integration test")
+{.border}
 
 If any tests fail, you'll immediately get the URL in your terminal window with a video of the test and information about what happened. (Break the test and try that now!)
 

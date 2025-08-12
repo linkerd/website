@@ -86,6 +86,7 @@ account", to lots more. (See the [full policy docs
 &raquo;](/2.11/features/server-policy/))
 
 ![Linkerd policy, as seen from Buoyant Cloud](buoyant-cloud-policy-mtls.png "Linkerd policy, as seen by [Buoyant Cloud](https://buoyant.io/cloud)")
+{.border}
 
 ## Retries for HTTP requests with bodies
 

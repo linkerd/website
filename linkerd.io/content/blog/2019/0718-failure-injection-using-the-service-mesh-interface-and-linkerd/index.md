@@ -204,6 +204,7 @@ Not very well, it seems!  If we refresh the page a few times, we will sometimes
 see an internal server error page.
 
 ![Webpage displaying internal server error](cover.png)
+{.border}
 
 We've learned something valuable about how our application behaves in the face
 of service errors so let's restore our application by simply deleting the
