@@ -804,6 +804,18 @@ several steps:
 4. Trigger identity issuer rotation
 5. Restart the control plane
 6. Restart the data plane
+
+{{< note >}}
+
+Steps 5 and 6 are optional. Workload certificates are automatically reissued 
+every 24 hours, so you may either wait for this process to complete or 
+trigger the restarts manually.
+
+{{< /note >}}
+
+Before proceeding to the next step, ensure that all data plane have restarted 
+successfully and are running a new proxy.
+
 7. Remove the old anchor from the trust bundle
 
 {{< note >}}
