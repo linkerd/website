@@ -9,7 +9,7 @@ main:
     pageRef: /community/get-involved/
     weight: 1
     parent: Community
-  - name: Adopters
+  - name: Adopters & Case Studies
     pageRef: /community/adopters/
     weight: 2
     parent: Community
