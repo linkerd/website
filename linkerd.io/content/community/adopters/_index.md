@@ -1,5 +1,5 @@
 ---
-title: Linkerd 2.x Adopters
+title: Linkerd 2.x Adopters & Case Studies
 description: |-
   Here are some of the organizations we know are using Linkerd 2.x. If you're
   using Linkerd 2.x and aren't on this list, please submit a pull request!
