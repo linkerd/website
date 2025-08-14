@@ -11,6 +11,12 @@
     gap: spacer(4);
     grid-template-columns: 1fr;
 
+    blockquote {
+      // Remove base styling
+      padding: 0;
+      border: none;
+      background-color: $white;
+    }
     @media (min-width: breakpoint-min-width("lg")) {
       grid-template-columns: repeat(2, 1fr);
     }
