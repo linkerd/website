@@ -36,7 +36,7 @@ Apply to containers that contain rendered markdown.
 
   // Add bottom margin to html inserted by Hugo's youtube shortcode
   // Hugo does not add a class name on the div, so target the title attribute
-  div:has(iframe[title='YouTube video']) {
+  div:has(> iframe[title='YouTube video']) {
     margin-bottom: spacer(3);
   }
 
