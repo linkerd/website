@@ -34,10 +34,10 @@ Apply to containers that contain rendered markdown.
     margin-bottom: spacer(3);
   }
 
-  // Add bottom margin to iframes inserted by Hugo's youtube shortcode
-  // Hugo does not add a class name, so target the title attribute
-  iframe[title='YouTube video'] {
-    padding-bottom: spacer(3);
+  // Add bottom margin to html inserted by Hugo's youtube shortcode
+  // Hugo does not add a class name on the div, so target the title attribute
+  div:has(iframe[title='YouTube video']) {
+    margin-bottom: spacer(3);
   }
 
 }
