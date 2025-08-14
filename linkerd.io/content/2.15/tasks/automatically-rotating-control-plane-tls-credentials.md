@@ -799,10 +799,24 @@ The process of actually doing this is straightforward, but again, there are
 several steps:
 
 1. Trigger trust anchor rotation
-2. Trigger identity issuer rotation
-3. Restart the control plane
-4. Restart the data plane
-5. Remove the old anchor from the trust bundle
+2. Restart the control plane
+3. Restart the data plane
+4. Trigger identity issuer rotation
+5. Restart the control plane
+6. Restart the data plane
+
+{{< note >}}
+
+Steps 5 and 6 are optional. Workload certificates are automatically reissued 
+every 24 hours, so you may either wait for this process to complete or 
+trigger the restarts manually.
+
+{{< /note >}}
+
+Before proceeding to the next step, ensure that all data plane have restarted 
+successfully and are running a new proxy.
+
+7. Remove the old anchor from the trust bundle
 
 {{< note >}}
 
