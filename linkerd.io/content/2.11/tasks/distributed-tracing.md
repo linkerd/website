@@ -21,7 +21,6 @@ In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
 ![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
-{.center}
 
 ## Prerequisites
 
