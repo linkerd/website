@@ -69,6 +69,6 @@ params:
             this self-paced course.
           image: images/linux-foundation.png
           button:
-            href: https://www.edx.org/course/introduction-to-service-mesh-with-linkerd
+            href: https://training.linuxfoundation.org/training/service-mesh-fundamentals-lfs243/
             text: Learn more
 ---
