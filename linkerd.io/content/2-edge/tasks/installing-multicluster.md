@@ -221,7 +221,7 @@ pipeline.
 First, let's add the Linkerd's Helm repository by running
 
 ```bash
-# To add the repo for Linkerd stable releases:
+# To add the repo for Linkerd edge releases:
 helm repo add linkerd https://helm.linkerd.io/edge
 ```
 
