@@ -33,7 +33,7 @@ In short, we needed a service mesh.
 
 ## Linkerd: Opting for Simplicity, Performance, and Security
 
-After evaluating multiple service mesh options, Linkerd stood out due to its simplicity, performance, and security. Unlike other solutions, Linkerd uses a tiny [Rust-based sidecar microproxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/), offering a small compute footprint, significantly reduced CVEs, and enhanced overall security. Linkerd’s ease of configuration allowed us to deploy it reliably and scale it within hours, enabling our team to focus on delivering value to our customers.
+After evaluating multiple service mesh options, Linkerd stood out due to its simplicity, performance, and security. Unlike other solutions, Linkerd uses a tiny [Rust-based sidecar microproxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/), offering a small compute footprint, significantly reduced CVEs, and enhanced overall security. Linkerd’s ease of configuration allowed us to deploy it reliably and scale it within hours, enabling our team to focus on delivering value to our customers.
 
 Additionally, [Buoyant Cloud](https://docs.buoyant.io/buoyant-cloud/getting-started/what-data-does-buoyant-cloud-collect/) has amplified Linkerd’s capabilities by providing real-time metrics and intuitive alerting. This ensures that our operations team can swiftly diagnose and resolve issues, maintaining an exceptional user experience.
 
@@ -46,7 +46,7 @@ Our engineering team integrated Linkerd with several other CNCF tools to create 
 
 ![Linkerd Architecture](Linkerd%20Architecture.jpg)
 
-We started the implementation by adopting the [GitOps](https://glossary.cncf.io/gitops/) mindset: our Kubernetes manifests are stored in Git, and we use [Argo](https://argoproj.github.io/) CD to deploy resources into our Kubernetes clusters. Argo CD manages Linkerd, Argo Rollouts, the microservices our application teams build, and the other components needed for our platform. Additionally, [Buoyant Enterprise for Linkerd](https://www.buoyant.io/linkerd-enterprise) provides a simple Helm chart to deploy its lifecycle Operator, which makes it easy to manage our Linkerd deployments with a single custom resource. Once deployed, all meshed pods were automatically mTLSed\!
+We started the implementation by adopting the [GitOps](https://glossary.cncf.io/gitops/) mindset: our Kubernetes manifests are stored in Git, and we use [Argo](https://argoproj.github.io/) CD to deploy resources into our Kubernetes clusters. Argo CD manages Linkerd, Argo Rollouts, the microservices our application teams build, and the other components needed for our platform. Additionally, [Buoyant Enterprise for Linkerd](https://www.buoyant.io/linkerd-enterprise) provides a simple Helm chart to deploy its lifecycle Operator, which makes it easy to manage our Linkerd deployments with a single custom resource. Once deployed, all meshed pods were automatically mTLSed!
 
 Next, we started leveraging the [Gateway API](https://gateway-api.sigs.k8s.io/) in our environment to use Argo Rollouts with their Gateway API plugin. We now use Argo Rollouts for canary deployments, enabling controlled rollout of new application versions to our customers: Linkerd seamlessly changes the amount of traffic going to the new version based on Argo Rollouts’ instructions, and Argo Rollouts uses Linkerd’s HTTP metrics to understand whether a rollout is going successfully. This allows us to minimize the impact customers could experience due to a release deficiency.
 
@@ -60,7 +60,7 @@ The adoption of Linkerd has yielded significant technological and business benef
 * **Enhanced Efficiency:** Linkerd’s lightweight design reduced the compute requirements of our service mesh by over 80% compared to our previous service mesh implementation.
 * **Reduce Costs:** Buoyant Enterprise for Linkerd’s High Availability Zone Load Balancing with Linkerd is on track to reduce our regional data transfer networking costs by at least 40%.
 * **Improved Reliability:** Real-time observability ensures rapid issue resolution, translating to better user experiences and fewer disruptions.
-* **Improved Security:** Linkerd has reduced the amount of service mesh-related CVEs we have been exposed to by 97% in 2024\.
+* **Improved Security:** Linkerd has reduced the amount of service mesh-related CVEs we have been exposed to by 97% in 2024.
 
 On a personal level, these improvements mean fewer fire drills for our engineers, allowing them to focus on innovation.
 
