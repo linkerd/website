@@ -12,7 +12,7 @@ jobs:
     name: Lint install script
     runs-on: ubuntu-latest
     steps:
-    - uses: linkerd/dev/actions/setup-tools@v46
+    - uses: linkerd/dev/actions/setup-tools@v47
     - name: Checkout code
       uses: actions/checkout@v5
 
