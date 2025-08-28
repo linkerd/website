@@ -81,6 +81,18 @@ linkerd --context=west multicluster gateways
 For a detailed explanation of what this step does, check out the
 [linking the clusters section](multicluster/#linking-the-clusters).
 
+{{< note >}}
+We present here a declarative, GitOps-compatible approach to establishing
+multicluster links, available starting with Linkerd `v2.18`. In this method, the
+controllers are integrated into the multicluster extension, allowing you to
+supply the Link CR and kubeconfig secrets manifests directly, without
+necessarily depending on the `linkerd multicluster link` command. This differs
+from earlier versions of Linkerd (pre-`v2.18`), where (in addition to the Link
+CR and secrets) controller manifests needed to be provided each time a new link
+was created, requiring the use of the `linkerd multicluster link` command — a
+process that was less suited to a GitOps workflow.
+{{< /note >}}
+
 ## Step 3: Export services
 
 Services are not automatically mirrored in linked clusters. By default, only
