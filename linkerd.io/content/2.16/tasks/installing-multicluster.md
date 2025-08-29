@@ -195,7 +195,7 @@ helm repo add linkerd https://helm.linkerd.io/edge
 ### Helm multicluster install procedure
 
 ```bash
-helm install linkerd-multicluster -n linkerd-multicluster --create-namespace linkerd/linkerd-multicluster
+helm install linkerd-multicluster -n linkerd-multicluster --create-namespace linkerd-edge/linkerd-multicluster
 ```
 
 The chart values will be picked from the chart's `values.yaml` file.
@@ -229,7 +229,7 @@ The same functionality can also be done through Helm setting the
 `remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd-mc-source linkerd/linkerd-multicluster -n linkerd-multicluster --create-namespace \
+ helm install linkerd-mc-source linkerd-edge/linkerd-multicluster -n linkerd-multicluster --create-namespace \
    --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
 ```
 
