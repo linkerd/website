@@ -41,7 +41,7 @@ The access to Linkerd Viz' Prometheus instance is restricted through the
 `prometheus-admin` AuthorizationPolicy, granting access only to the
 `metrics-api` ServiceAccount. In order to also grant access to Grafana, you need
 to add an AuthorizationPolicy pointing to its ServiceAccount. You can apply
-[authzpolicy-grafana.yaml](https://github.com/linkerd/linkerd2/blob/release/stable-2.13/grafana/authzpolicy-grafana.yaml)
+[authzpolicy-grafana.yaml](https://github.com/linkerd/linkerd2/blob/main/grafana/authzpolicy-grafana.yaml)
 which grants permission for the `grafana` ServiceAccount.
 {{< /note >}}
 
