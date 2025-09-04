@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: linkerd/dev/actions/setup-tools@v46
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: On create
       run: |
