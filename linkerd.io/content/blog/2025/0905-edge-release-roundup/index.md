@@ -91,8 +91,7 @@ check`, to better validate multicluster functionality.
 ### edge-25.8.4 (August 22, 2025)
 
 This release supports setting `proxy.securityContext` and
-`networkValidator.securityContext` to provide a custom security context for
-the `linkerd-proxy` container, and and the `network-validator` container,
+the `linkerd-proxy` container, and the `network-validator` container,
 respectively. It also switches the proxy to prefer post-quantum key exchange
 algorithm `X25519MLKEM768`.
 
