@@ -35,7 +35,7 @@ To configure HTTP retries, set `retry.linkerd.io/http` on a Service or an
 HTTPRoute. This annotation is not valid on a GRPCRoute resource.
 
 `retry.linkerd.io/http` is a comma-separated list of HTTP response codes
-should be retried. Each element of the list may be
+which should be retried. Each element of the list may be:
 
 + `xxx` to retry a single response code (for example, `"504"` -- remember,
   annotation values must be strings!);
@@ -49,7 +49,7 @@ To configure gRPC retries, set `retry.linkerd.io/grpc` on a Service or a
 GRPCRoute. This annotation is not valid on an HTTPRoute resource.
 
 `retry.linkerd.io/grpc` is a comma-separated list of gRPC status codes which
-should be retried. Each element of the list may be
+should be retried. Each element of the list may be:
 
 + `cancelled`
 + `deadline-exceeded`
