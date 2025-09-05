@@ -286,7 +286,7 @@ kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.12.0"}}}}}' \
+  -p '{"spec":{"template":{"type":"kubernetes.io/tls","metadata":{"labels":{"linkerd.io/control-plane-component":"identity","linkerd.io/control-plane-ns":"linkerd"},"annotations":{"linkerd.io/created-by":"linkerd/cli '"$(linkerd version --client --short)"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
