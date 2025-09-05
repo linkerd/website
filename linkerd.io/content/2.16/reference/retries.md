@@ -37,11 +37,11 @@ HTTPRoute. This annotation is not valid on a GRPCRoute resource.
 `retry.linkerd.io/http` is a comma-separated list of HTTP response codes
 should be retried. Each element of the list may be
 
-  + `xxx` to retry a single response code (for example, `"504"` -- remember,
-    annotation values must be strings!);
-  + `xxx-yyy` to retry a range of response codes (for example, `500-504`);
-  + `gateway-error` to retry response codes 502-504; or
-  + `5xx` to retry all 5XX response codes.
++ `xxx` to retry a single response code (for example, `"504"` -- remember,
+  annotation values must be strings!);
++ `xxx-yyy` to retry a range of response codes (for example, `500-504`);
++ `gateway-error` to retry response codes 502-504; or
++ `5xx` to retry all 5XX response codes.
 
 ### gRPC Retries
 
@@ -51,11 +51,11 @@ GRPCRoute. This annotation is not valid on an HTTPRoute resource.
 `retry.linkerd.io/grpc` is a comma-separated list of gRPC status codes which
 should be retried. Each element of the list may be
 
-  + `cancelled`
-  + `deadline-exceeded`
-  + `internal`
-  + `resource-exhausted`
-  + `unavailable`
++ `cancelled`
++ `deadline-exceeded`
++ `internal`
++ `resource-exhausted`
++ `unavailable`
 
 ### General Retry Configuration
 
