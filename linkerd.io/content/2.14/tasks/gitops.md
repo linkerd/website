@@ -279,6 +279,7 @@ utility, as instructed
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
@@ -286,7 +287,7 @@ kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec":{"template":{"type":"kubernetes.io/tls","metadata":{"labels":{"linkerd.io/control-plane-component":"identity","linkerd.io/control-plane-ns":"linkerd"},"annotations":{"linkerd.io/created-by":"linkerd/cli '"$(linkerd version --client --short)"'"}}}}}' \
+  -p '{"spec":{"template":{"type":"kubernetes.io/tls","metadata":{"labels":{"linkerd.io/control-plane-component":"identity","linkerd.io/control-plane-ns":"linkerd"},"annotations":{"linkerd.io/created-by":"linkerd/cli '"${LINKERD_VERSION}"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
