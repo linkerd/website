@@ -7,8 +7,8 @@ description: Use Linkerd SMI extension to work with Service Mesh Interface(SMI) 
 
 The Linkerd SMI extension is deprecated and will be removed in a future
 release. If you are currently using this functionality, we recommend migrating
-to [dynamic request routing](request-routing/), which does not require the SMI
-extension.
+to [dynamic request routing](../features/request-routing/), which does not
+require the SMI extension.
 
 {{< /warning >}}
 
