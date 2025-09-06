@@ -7,9 +7,9 @@ description: Use the Linkerd Failover extension to failover between clusters.
 
 The Linkerd Failover extension is deprecated and will be removed in a future
 release. If you are currently using this functionality, we recommend migrating
-to use [federated Services](../tasks/federated-services.md) instead, which is
-a much simpler approach to achieving high availability across clusters that
-does not require the Linkerd Failover extension.
+to use [federated services](../tasks/federated-services) instead, which is a
+much simpler approach to achieving high availability across clusters that does
+not require the Linkerd Failover extension.
 
 {{< /warning >}}
 
