@@ -29,28 +29,46 @@ proxies will use the ServiceProfile retry configuration and ignore any retry
 annotations.
 {{< /warning >}}
 
-+ `retry.linkerd.io/http`: A comma separated list of HTTP response codes which
-should be retried. Each element of the list may be
-  + `xxx` to retry a single response code (for example, `"504"` -- remember,
-    annotation values must be strings!);
-  + `xxx-yyy` to retry a range of response codes (for example, `500-504`);
-  + `gateway-error` to retry response codes 502-504; or
-  + `5xx` to retry all 5XX response codes.
-This annotation is not valid on GRPCRoute resources.
-+ `retry.linkerd.io/grpc`: A comma seperated list of gRPC status codes which
-should be retried. Each element of the list may be
-  + `cancelled`
-  + `deadline-exceeded`
-  + `internal`
-  + `resource-exhausted`
-  + `unavailable`
-This annotation is not valid on HTTPRoute resources.
+### HTTP Retries
+
+To configure HTTP retries, set `retry.linkerd.io/http` on a Service or an
+HTTPRoute. This annotation is not valid on a GRPCRoute resource.
+
+`retry.linkerd.io/http` is a comma-separated list of HTTP response codes
+which should be retried. Each element of the list may be:
+
++ `xxx` to retry a single response code (for example, `"504"` -- remember,
+  annotation values must be strings!);
++ `xxx-yyy` to retry a range of response codes (for example, `500-504`);
++ `gateway-error` to retry response codes 502-504; or
++ `5xx` to retry all 5XX response codes.
+
+### gRPC Retries
+
+To configure gRPC retries, set `retry.linkerd.io/grpc` on a Service or a
+GRPCRoute. This annotation is not valid on an HTTPRoute resource.
+
+`retry.linkerd.io/grpc` is a comma-separated list of gRPC status codes which
+should be retried. Each element of the list may be:
+
++ `cancelled`
++ `deadline-exceeded`
++ `internal`
++ `resource-exhausted`
++ `unavailable`
+
+### General Retry Configuration
+
+These annotations are valid on Service, HTTPRoute, and GRPCRoute resources.
+
 + `retry.linkerd.io/limit`: The maximum number of times a request can be
 retried. If unspecified, the default is `1`.
+
 + `retry.linkerd.io/timeout`: A retry timeout after which a request is cancelled
 and retried (if the retry limit has not yet been reached). If unspecified, no
-retry timeout is applied. Units must be specified in this value e.g. `5s` or
-`200ms`.
+retry timeout is applied. Units must be specified in this value -- `5s` and
+`200ms` are both valid, but `5` is not. For more details, see
+[GEP-2257](https://gateway-api.sigs.k8s.io/geps/gep-2257/).
 
 ## Examples
 
