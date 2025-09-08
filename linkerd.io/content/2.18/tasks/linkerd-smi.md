@@ -3,6 +3,15 @@ title: Getting started with Linkerd SMI extension
 description: Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources.
 ---
 
+{{< warning >}}
+
+The Linkerd SMI extension is deprecated and will be removed in a future
+release. If you are currently using this functionality, we recommend migrating
+to [dynamic request routing](../features/request-routing/), which does not
+require the SMI extension.
+
+{{< /warning >}}
+
 [Service Mesh Interface](https://smi-spec.io/) is a standard interface for
 service meshes on Kubernetes. It defines a set of resources that could be
 used across service meshes that implement it.
