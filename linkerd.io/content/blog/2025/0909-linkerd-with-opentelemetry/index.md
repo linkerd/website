@@ -76,8 +76,7 @@ OpenTelemetry defines four separate kinds of telemetry components:
 - Finally, **pipelines** define the overall flow from receivers to processors to
   exporters.
 
-What makes OpenTelemetry so powerful is the vast amount of integrations it
-has.  
+What makes OpenTelemetry so powerful is the vast amount of integrations it has.
 The core distribution of the “otel-collector” comes with a few basic supported
 receivers, processors and exporters, but you can also switch to the
 [community distribution](https://github.com/open-telemetry/opentelemetry-collector-contrib),
@@ -101,18 +100,20 @@ Start by installing OpenObserve by running this command:
 helm repo add openobserve https://charts.openobserve.ai
 helm repo update
 
-helm install --wait --create-namespace -n openobserve openobserve openobserve/openobserve-standalone
+helm install --wait --create-namespace -n openobserve \
+  openobserve openobserve/openobserve-standalone
 ```
 
 After a few seconds, you'll be able to port forward to the UI:
 
 ```sh
-kubectl port-forward -n openobserve svc/openobserve-openobserve-standalone 5080:5080
+kubectl port-forward -n openobserve \
+  svc/openobserve-openobserve-standalone 5080:5080
 ```
 
 Browse to localhost:5080 and use the default credentials to login:
 
-**User**: root@example.com  
+**User**: root&#64;example.com  
 **Password**: Complexpass#123
 
 And you're in!
