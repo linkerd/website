@@ -12,7 +12,7 @@ params:
 images: [social.jpg] # Open graph image
 ---
 
-## TL;DR:
+## TL;DR
 
 Linkerd, the enterprise-grade service mesh that minimizes overhead, now
 integrates with [OpenTelemetry](https://opentelemetry.io/), often also simply
