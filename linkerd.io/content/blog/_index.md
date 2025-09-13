@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2025/0909-linkerd-with-opentelemetry
     - /blog/2025/0801-imagine-learning
-    - /blog/2025/0725-tilt-linkerd-nginx-part-2
 ---
