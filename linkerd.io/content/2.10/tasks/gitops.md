@@ -274,7 +274,7 @@ step certificate inspect sample-trust.crt
 Create a `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
-export LINKERD_VERSION=$(linkerd version --client --short)
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
   --key sample-trust.key \
