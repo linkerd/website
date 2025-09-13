@@ -59,7 +59,7 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-LINKERD2_VERSION=stable-2.11.5
+export LINKERD2_VERSION=stable-2.11.5
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
