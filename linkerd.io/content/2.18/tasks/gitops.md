@@ -279,7 +279,7 @@ utility, as instructed
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
-LINKERD_VERSION=$(linkerd version --client --short)
+export LINKERD_VERSION=$(linkerd version --client --short)
 kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
