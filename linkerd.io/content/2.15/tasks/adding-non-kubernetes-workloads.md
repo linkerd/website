@@ -234,7 +234,7 @@ When in a foreign environment, we do not need this functionality, so we can
 simply get the proxy binary:
 
 ```bash
-LINKERD_VERSION=edge-24.2.4
+export LINKERD_VERSION=edge-24.2.4
 mkdir /opt/linkerd-proxy && cd /opt/linkerd-proxy
 id=$(docker create cr.l5d.io/linkerd/proxy:$LINKERD_VERSION)
 docker cp $id:/usr/lib/linkerd/linkerd2-proxy ./linkerd-proxy
