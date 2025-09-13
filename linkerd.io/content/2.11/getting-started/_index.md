@@ -20,6 +20,13 @@ Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
 This page contains quick start instructions intended for non-production
 installations. For production-oriented configurations, we suggest reviewing
 resources in [Going to Production](/going-to-production/).
+
+If you want to use the corresponding version Linkerd `2.11.5a`, you can
+set the environment variable manually:
+
+```bash
+export LINKERD2_VERSION=stable-2.11.5
+```
 {{< /note >}}
 
 ## Step 0: Setup
@@ -59,7 +66,6 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-export LINKERD2_VERSION=stable-2.11.5
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 

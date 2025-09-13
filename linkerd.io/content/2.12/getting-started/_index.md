@@ -16,11 +16,7 @@ install the *CLI* (command-line interface) onto your local machine. Using this
 CLI, you'll then install the *control plane* onto your Kubernetes cluster.
 Finally, you'll "mesh" a application by adding Linkerd's *data plane* to it.
 
-{{< note >}}
-This page contains quick start instructions intended for non-production
-installations. For production-oriented configurations, we suggest reviewing
-resources in [Going to Production](/going-to-production/).
-{{< /note >}}
+{{< docs/edge-note >}}
 
 ## Step 0: Setup
 
@@ -59,7 +55,6 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-export LINKERD2_VERSION=stable-2.12.6
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
