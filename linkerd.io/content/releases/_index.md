@@ -3,6 +3,8 @@ title: Releases and Versions
 type: docs
 ---
 
+<!-- markdownlint-disable MD034 -->
+
 Linkerd publishes and announces _versions_ that correspond to specific project
 milestones and sets of new features. These versions are available in different
 types of _release artifacts_.
