@@ -1,0 +1,4 @@
+{{- /* Render `edge-version` using the current page context and generate a helm chart version */}}
+{{- $result := printf "{{< edge-version %q >}}" (.Get 0) | $.Page.RenderString | chomp }}
+{{- /* edge-25.1.0 -> 2025.1.0 */}}
+{{- replace $result "edge-" "20" -}}

@@ -23,6 +23,14 @@ title: Shortcodes
 | `foo` | A description of this parameter. |
 {{< /keyval >}}
 
+## edge-version
+
+`{{< edge-version "2.18" >}}`
+
+## chart-version
+
+`{{< chart-version "2.18" >}}`
+
 ## latest-edge-version
 
 `{{< latest-edge-version >}}`

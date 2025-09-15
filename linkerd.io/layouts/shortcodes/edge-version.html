@@ -1,0 +1,22 @@
+{{- /*
+If the current section is a major release (2.xx), then look up the corresponding
+edge release in data/versions.yaml, otherwise return the latest edge release.
+
+You can override the current section name passing the major release as a param.
+*/ -}}
+{{- $result := "" }}
+{{- $section := $.Page.Section }}
+{{- with .Get 0 }}
+  {{- $section = . }}
+{{- end}}
+{{- if hasPrefix $section "2." }}
+  {{- with index (where site.Data.versions "version" $section) 0 }}
+    {{- with .edge }}
+      {{- $result = . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- if not $result }}
+  {{- $result = "{{< latest-edge-version >}}" | markdownify | chomp }}
+{{- end }}
+{{- $result -}}
