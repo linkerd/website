@@ -1,0 +1,21 @@
+{{- /*
+
+`chart-version` will return the Helm chart version for a corresponding Linkerd
+version based on the current section.
+
+If the current section is not "2.xx", then the Helm chart version for the latest
+edge release will be returned.
+
+If the current section is 2.15 or higher, then the corresponding Helm chart
+version for that Linkerd version will be returned. For example, if a doc in the
+2.17 section calls `chart-version`, it will return "2024.11.8". In the 2.18
+section, it will return "2025.4.4".
+
+If you want the Helm chart for a certain Linkerd version, regardless of the
+current section, you can pass the Linkerd version as a param. For example,
+`{{< chart-version "2.18" >}}` will always return "2025.4.4".
+
+*/ -}}
+{{- $result := printf "{{< edge-version %q >}}" (.Get 0) | $.Page.RenderString | chomp }}
+{{- /* edge-25.1.0 -> 2025.1.0 */}}
+{{- replace $result "edge-" "20" -}}
