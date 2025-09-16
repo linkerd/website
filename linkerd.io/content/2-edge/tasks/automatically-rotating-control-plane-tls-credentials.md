@@ -21,8 +21,17 @@ primer][mtls-concepts-primer].
 
 {{< /note >}}
 
-While Linkerd automatically rotates the workload certificates, it cannot
-automatically rotate the identity issuer certificate or the trust anchor.
+{{< warning >}}
+
+Linkerd automatically rotates workload certificates, but it does **not** 
+rotate the identity issuer certificate or the trust anchor. You can use 
+third-party tools like cert-manager to automate rotation of those 
+certificates. However, for critical certificates—such as the 
+trust anchor, you must manually restart the control-plane components 
+and all data-plane proxies so they pick up the new trust anchor.
+
+{{< /warning >}}
+
 Linkerd's out-of-the-box installations generate static self-signed
 certificates with a validity of one year but require manual rotation by the
 user to prevent expiry. While this setup is convenient for quick start
@@ -417,6 +426,15 @@ there's a catch: when rotating the trust anchor, both the control plane and
 the data plane (the proxies) need to be restarted. Since that can't happen
 instaneously, we need to have both the old trust anchor and the new trust
 anchor in the trust bundle until all the restarts have completed.
+
+{{< warning >}}
+
+This task is criticalas it ensures the old trust anchor remains valid alongside 
+the new one, preventing mTLS validation failures during rotation. After 
+each rotation, you must also manually update the `linkerd-previous-anchor` 
+secret with the former trust anchor certificate.
+
+{{< /warning >}}
 
 trust-manager can do this, but it needs a specific source for _each_
 certificate in the bundle. So we'll start by copying the trust anchor from the
