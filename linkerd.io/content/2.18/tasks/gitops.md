@@ -468,13 +468,12 @@ done
 
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
-### Upgrade Linkerd to 2.12.1
+### Upgrade Linkerd
 
-(Assuming 2.12.1 has already been released ;-) )
+(Assuming a newer version of Linkerd has been released)
 
-Use your editor to change the `spec.source.targetRevision` field to `1.9.3`
-(that's the Helm chart version corresponding to linkerd stable-2.12.1) in the
-`gitops/argo-apps/linkerd-control-plane.yaml` file:
+Use your editor to change the `spec.source.targetRevision` field to a newer Helm
+chart version in the `gitops/argo-apps/linkerd-control-plane.yaml` file.
 
 Confirm that only the `targetRevision` field is changed:
 
@@ -487,7 +486,7 @@ Commit and push this change to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd-control-plane.yaml
 
-git commit -m "upgrade Linkerd to 2.12.1"
+git commit -m "upgrade Linkerd"
 
 git push git-server master
 ```

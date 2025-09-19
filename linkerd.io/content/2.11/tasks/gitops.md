@@ -392,7 +392,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd2
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.11.5
+    targetRevision: 2.11.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
