@@ -386,7 +386,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 1.9.8
+    targetRevision: 1.9.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -469,8 +469,6 @@ done
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
 ### Upgrade Linkerd to 2.12.1
-
-(Assuming 2.12.1 has already been released ;-) )
 
 Use your editor to change the `spec.source.targetRevision` field to `1.9.3`
 (that's the Helm chart version corresponding to linkerd stable-2.12.1) in the
