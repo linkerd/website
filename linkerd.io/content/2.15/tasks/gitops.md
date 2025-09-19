@@ -279,6 +279,7 @@ utility, as instructed
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
@@ -286,7 +287,7 @@ kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.12.0"}}}}}' \
+  -p '{"spec":{"template":{"type":"kubernetes.io/tls","metadata":{"labels":{"linkerd.io/control-plane-component":"identity","linkerd.io/control-plane-ns":"linkerd"},"annotations":{"linkerd.io/created-by":"linkerd/cli '"${LINKERD_VERSION}"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
@@ -384,8 +385,8 @@ Ensure that the multi-line string is indented correctly. E.g.,
 ```yaml
   source:
     chart: linkerd-control-plane
-    repoURL: https://helm.linkerd.io/stable
-    targetRevision: 1.9.0
+    repoURL: https://helm.linkerd.io/edge
+    targetRevision: {{< chart-version >}}
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
