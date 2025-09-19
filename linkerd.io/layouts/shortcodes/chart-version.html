@@ -16,6 +16,6 @@ current section, you can pass the Linkerd version as a param. For example,
 `{{< chart-version "2.18" >}}` will always return "2025.4.4".
 
 */ -}}
-{{- $result := printf "{{< edge-version %q >}}" (.Get 0) | $.Page.RenderString | chomp }}
+{{- $result := printf "{{< edge-version %q >}}" (or (.Get 0) "") | $.Page.RenderString | chomp }}
 {{- /* edge-25.1.0 -> 2025.1.0 */}}
 {{- replace $result "edge-" "20" -}}
