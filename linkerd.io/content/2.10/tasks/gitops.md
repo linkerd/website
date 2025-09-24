@@ -380,7 +380,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd2
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.10.2
+    targetRevision: 2.10.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -461,9 +461,9 @@ done
 
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
-### Upgrade Linkerd to 2.8.1
+### Upgrade Linkerd to 2.10.1
 
-Use your editor to change the `spec.source.targetRevision` field to `2.8.1` in
+Use your editor to change the `spec.source.targetRevision` field to `2.10.1` in
 the `gitops/argo-apps/linkerd.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
@@ -477,7 +477,7 @@ Commit and push this change to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd.yaml
 
-git commit -m "upgrade Linkerd to 2.8.1"
+git commit -m "upgrade Linkerd to 2.10.1"
 
 git push git-server master
 ```
