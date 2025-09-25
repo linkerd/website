@@ -29,10 +29,10 @@ happyexit() {
   echo "  # install the GatewayAPI CRDs"
   echo "  kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml"
   echo ""
-  echo "  linkerd check --pre                     # validate that Linkerd can be installed"
+  echo "  linkerd check --pre                         # validate that Linkerd can be installed"
   echo "  linkerd install --crds | kubectl apply -f - # install the Linkerd CRDs"
-  echo "  linkerd install | kubectl apply -f -    # install the control plane into the 'linkerd' namespace"
-  echo "  linkerd check                           # validate everything worked!"
+  echo "  linkerd install | kubectl apply -f -        # install the control plane into the 'linkerd' namespace"
+  echo "  linkerd check                               # validate everything worked!"
   echo ""
   echo "You can also obtain observability features by installing the viz extension:"
   echo ""
@@ -43,29 +43,6 @@ happyexit() {
   echo "Looking for more? Visit https://linkerd.io/2/tasks"
   echo ""
   exit 0
-}
-
-validate_checksum() {
-  filename=$1
-  SHA=$(curl --proto '=https' --tlsv1.2 -sSfL "${url}.sha256")
-  echo ""
-  echo "Validating checksum..."
-
-  case $checksumbin in
-    *openssl)
-      checksum=$($checksumbin dgst -sha256 "${filename}" | sed -e 's/^.* //')
-      ;;
-    *shasum)
-      checksum=$($checksumbin -a256 "${filename}" | sed -e 's/ .*$//')
-      ;;
-  esac
-
-  if [ "$checksum" != "$SHA" ]; then
-    echo "Checksum validation failed." >&2
-    return 1
-  fi
-  echo "Checksum valid."
-  return 0
 }
 
 OS=$(uname -s)
@@ -119,12 +96,6 @@ case $OS in
 esac
 OS=$(echo "$OS" | tr '[:upper:]' '[:lower:]')
 
-checksumbin=$(command -v openssl) || checksumbin=$(command -v shasum) || {
-  echo "Failed to find checksum binary. Please install openssl or shasum."
-  exit 1
-}
-
-
 tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
 srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
 if [ -n "${cli_arch}" ]; then
@@ -134,17 +105,15 @@ dstfile="${INSTALLROOT}/bin/linkerd-${LINKERD2_VERSION}"
 url="https://github.com/linkerd/linkerd2/releases/download/${LINKERD2_VERSION}/${srcfile}"
 
 if [ -e "${dstfile}" ]; then
-  if validate_checksum "${dstfile}"; then
-    echo ""
-    echo "Linkerd ${LINKERD2_VERSION} was already downloaded; making it the default 🎉"
-    echo ""
-    echo "To force re-downloading, delete '${dstfile}' then run me again."
-    (
-      rm -f "${INSTALLROOT}/bin/linkerd"
-      ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
-    )
-    happyexit
-  fi
+  echo ""
+  echo "Linkerd ${LINKERD2_VERSION} was already downloaded; making it the default 🎉"
+  echo ""
+  echo "To force re-downloading, delete '${dstfile}' then run me again."
+  (
+    rm -f "${INSTALLROOT}/bin/linkerd"
+    ln -s "${dstfile}" "${INSTALLROOT}/bin/linkerd"
+  )
+  happyexit
 fi
 
 (
@@ -153,10 +122,6 @@ fi
   echo "Downloading ${srcfile}..."
   curl --proto '=https' --tlsv1.2 -fLO "${url}"
   echo "Download complete!"
-
-  if ! validate_checksum "${srcfile}"; then
-    exit 1
-  fi
   echo ""
 )
 
