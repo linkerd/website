@@ -57,7 +57,8 @@ allow you to interact with your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
-# If you want to use the CLI version that matches Linkerd 2.10, set the variable as follows:
+# If you want to use the stable CLI version that matches this documentation
+# version, set the variable as follows:
 export LINKERD2_VERSION=stable-2.10.2
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
