@@ -72,7 +72,7 @@ west   1/1       0/0      true
 Once our clusters are created, we will install Linkerd and the multi-cluster
 extension. Finally, once both are installed, we need to link the two clusters
 together so their services may be mirrored. To enable support for headless
-services, we will pass an additional `--set "enableHeadlessServices=true` flag
+services, we will pass an additional `--set "enableHeadlessServices=true"` flag
 to `linkerd multicluster link`. As before, these steps are automated through
 the provided scripts, but feel free to have a look!
 

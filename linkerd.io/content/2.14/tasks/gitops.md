@@ -279,6 +279,7 @@ utility, as instructed
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
@@ -286,7 +287,7 @@ kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.12.0"}}}}}' \
+  -p '{"spec":{"template":{"type":"kubernetes.io/tls","metadata":{"labels":{"linkerd.io/control-plane-component":"identity","linkerd.io/control-plane-ns":"linkerd"},"annotations":{"linkerd.io/created-by":"linkerd/cli '"${LINKERD_VERSION}"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
@@ -385,7 +386,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 1.9.0
+    targetRevision: 1.15.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -467,12 +468,10 @@ done
 
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
-### Upgrade Linkerd to 2.12.1
+### Upgrade Linkerd to 2.14.1
 
-(Assuming 2.12.1 has already been released ;-) )
-
-Use your editor to change the `spec.source.targetRevision` field to `1.9.3`
-(that's the Helm chart version corresponding to linkerd stable-2.12.1) in the
+Use your editor to change the `spec.source.targetRevision` field to `1.16.2`
+(that's the Helm chart version corresponding to linkerd stable-2.14.1) in the
 `gitops/argo-apps/linkerd-control-plane.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
@@ -486,7 +485,7 @@ Commit and push this change to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd-control-plane.yaml
 
-git commit -m "upgrade Linkerd to 2.12.1"
+git commit -m "upgrade Linkerd to 2.14.1"
 
 git push git-server master
 ```

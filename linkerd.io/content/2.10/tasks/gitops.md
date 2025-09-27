@@ -274,13 +274,14 @@ step certificate inspect sample-trust.crt
 Create a `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
   --key sample-trust.key \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.8.1", "linkerd.io/identity-issuer-expiry":"2021-07-19T20:51:01Z"}}}}}' \
+  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli '"${LINKERD_VERSION}"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
@@ -379,7 +380,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
   source:
     chart: linkerd2
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.8.0
+    targetRevision: 2.10.0
     helm:
       parameters:
       - name: identityTrustAnchorsPEM
@@ -460,9 +461,9 @@ done
 
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
-### Upgrade Linkerd to 2.8.1
+### Upgrade Linkerd to 2.10.1
 
-Use your editor to change the `spec.source.targetRevision` field to `2.8.1` in
+Use your editor to change the `spec.source.targetRevision` field to `2.10.1` in
 the `gitops/argo-apps/linkerd.yaml` file:
 
 Confirm that only the `targetRevision` field is changed:
@@ -476,7 +477,7 @@ Commit and push this change to the Git server:
 ```sh
 git add gitops/argo-apps/linkerd.yaml
 
-git commit -m "upgrade Linkerd to 2.8.1"
+git commit -m "upgrade Linkerd to 2.10.1"
 
 git push git-server master
 ```
