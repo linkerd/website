@@ -22,7 +22,6 @@ installations. For production-oriented configurations, we suggest reviewing
 resources in [Going to Production](/going-to-production/).
 {{< /note >}}
 
-
 ## Step 0: Setup
 
 Before anything else, we need to ensure you have access to modern Kubernetes
@@ -49,7 +48,6 @@ that your cluster is capable of hosting Linkerd.
 If you're using a GKE "private cluster" or Calico CNI, there are some [extra steps
 required](../reference/cluster-configuration/#private-clusters) before you can
 proceed to the next step.
-
 {{< /note >}}
 
 ## Step 1: Install the CLI
