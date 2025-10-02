@@ -95,7 +95,7 @@ one network, but you do administration from a different network.
 
 You'll need several CLI tools for this:
 
-- `linkerd`, from `https://linkerd.io/2/getting-started/`;
+- `linkerd`, from `/2/getting-started/`;
 - `kubectl`, from `https://kubernetes.io/docs/tasks/tools/`;
 - `helm`, from `https://helm.sh/docs/intro/quickstart/`;
 - `jq`, from `https://jqlang.github.io/jq/download/`;

@@ -226,12 +226,12 @@ low-variance environment first on which to run the tests.
 
 The large difference in performance and resource cost between Linkerd and Istio
 primarily comes down to one thing: [Linkerd's Rust-based "microproxy",
-Linkerd2-proxy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/).
+Linkerd2-proxy](/2020/12/03/why-linkerd-doesnt-use-envoy/).
 This micro-proxy powers Linkerd's entire data plane, and the benchmark largely
 reflects its performance and resource consumption.
 
 [We've written a lot about
-Linkerd2-proxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 as well as our [motivations behind adopting
 Rust](https://www.infoq.com/articles/linkerd-v2-production-adoption/) back in
 the dark ages of 2018. Interestingly enough, the primary reason for building
@@ -290,12 +290,12 @@ Fromm, for the excellent benchmark harness.
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Marc Sendra Martorell](https://unsplash.com/@marcsm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText") on [Unsplash](https://unsplash.com/s/photos/speed?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
 

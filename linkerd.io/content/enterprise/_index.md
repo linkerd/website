@@ -12,7 +12,7 @@ params:
       Computing Foundation in 2017. It was the first service mesh to achieve
       graduated status, and today powers the critical production systems of
       enterprises around the world.
-      
+
       Here, you'll find commercial products, support, and training for Linkerd.
   sections:
     - title: Distributions
@@ -22,7 +22,7 @@ params:
             From the creators of Linkerd. Rust-based network security and
             reliability for modern applications. Built on open source and
             designed for the enterprise.
-            
+
             - Uniform encryption, authentication, and authorization across your
               network
             - Global application traffic management, cluster failover, and
@@ -69,6 +69,6 @@ params:
             this self-paced course.
           image: images/linux-foundation.png
           button:
-            href: https://www.edx.org/course/introduction-to-service-mesh-with-linkerd
+            href: https://training.linuxfoundation.org/training/service-mesh-fundamentals-lfs243/
             text: Learn more
 ---

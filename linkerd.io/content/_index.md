@@ -1,15 +1,15 @@
 ---
-title: The only service mesh designed for human beings
+title: Enterprise power without enterprise complexity
 description: |-
   Linkerd adds critical security, observability, and reliability to your
-  Kubernetes stack, without any code changes.
+  Kubernetes stack, without code changes.
 params:
   hero:
-    title: The only service mesh designed for human beings
+    title: Enterprise power without enterprise complexity
     content: |-
-      Enterprise power *without* enterprise complexity. Linkerd adds security,
-      observability, and reliability to any Kubernetes cluster. 100% open
-      source, CNCF graduated, and written in Rust.
+      Service mesh without the _mess_. Linkerd adds security, observability, and
+      reliability to any Kubernetes cluster without the complexity of bloat of
+      other meshes. 100% open source, CNCF graduated, and written in Rust.
     buttons:
       - text: Get Started
         href: /2/getting-started/

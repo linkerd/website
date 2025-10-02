@@ -8,7 +8,7 @@ params:
 ---
 
 Believe it or not, today marks the one-year anniversary of the [Linkerd 2.0
-launch](https://linkerd.io/2018/09/18/announcing-linkerd-2-0/)! With 2.6
+launch](/2018/09/18/announcing-linkerd-2-0/)! With 2.6
 already round the corner, it's hard to believe just how much momentum,
 adoption, and iteration has been packed into the last 365 days.
 
@@ -51,7 +51,7 @@ critical building block for the cloud native ecosystem as a whole.
 
 🍰 **The creation of industry-defining interfaces**. The Linkerd team was the
 largest contributor to Microsoft's [Service Mesh
-Interface](https://linkerd.io/2019/05/24/linkerd-and-smi/) specification, and
+Interface](/2019/05/24/linkerd-and-smi/) specification, and
 Linkerd's metrics and traffic splitting features support SMI out of the box.
 
 🍰 **A third-party security audit passed with flying colors**. The security
@@ -69,7 +69,7 @@ performance](https://kinvolk.io/blog/2019/05/performance-benchmark-analysis-of-i
 and concluded: "Linkerd takes the edge on resource consumption, and when pushed
 into high load situations, maintains acceptable response latency at a higher
 rate of requests per second that Istio is able to deliver." (See [our writeup
-of their report](https://linkerd.io/2019/05/18/linkerd-benchmarks/).)
+of their report](/2019/05/18/linkerd-benchmarks/).)
 
 🍰 **A rapidly-growing, friendly, engaged community**. Now at 4,500+ GitHub stars,
 80 contributors, and 3,500+ friendly folks in the [Linkerd Slack](https://slack.linkerd.io), the Linkerd
@@ -96,7 +96,7 @@ incredible year together with you. 💪
 ## Ready to try Linkerd?
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](https://linkerd.io/2/edge) will already have seen
+our [weekly edge releases](/2-edge/) will already have seen
 these features in action. Either way, you can download the stable 2.5 release
 by running:
 
@@ -110,4 +110,4 @@ comments, we'd love to have you join our rapidly-growing community! Linkerd
 is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io/),
 [Twitter](https://twitter.com/linkerd), and the [mailing
-lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+lists](/community/get-involved/). Come and join the fun!

@@ -3,36 +3,19 @@ title: Releases and Versions
 type: docs
 ---
 
+<!-- markdownlint-disable MD034 -->
+
 Linkerd publishes and announces _versions_ that correspond to specific project
 milestones and sets of new features. These versions are available in different
 types of _release artifacts_.
 
 ## Recent versions
 
-### Linkerd 2.18
-
-Linkerd 2.18 was announced on April 23, 2025.
-
-<!-- markdownlint-disable MD013 -->
-
-- **Announcement**:
-  [Announcing Linkerd 2.18: Battlescars, lessons learned, and preliminary Windows support](/2025/04/23/announcing-linkerd-2.18/)
-- **Code tag**:
-  [version-2.18](https://github.com/linkerd/linkerd2/releases/tag/version-2.18)
-- **Corresponding edge release**:
-  [edge-25.4.4](https://github.com/linkerd/linkerd2/releases/tag/edge-25.4.4)
-
-Known distributions of Linkerd 2.18:
-
-- [Buoyant Enterprise for Linkerd](https://docs.buoyant.io/buoyant-enterprise-linkerd)
-  from Buoyant, creators of Linkerd. Latest version: **enterprise-2.18.1**
-  ([release notes](https://docs.buoyant.io/release-notes/buoyant-enterprise-linkerd/enterprise-2.18.1/)).
+{{< versions >}}
 
 ## Types of release artifacts
 
 ### Edge releases
-
-<!-- markdownlint-disable MD034 -->
 
 Edge release artifacts are published on a weekly or near-weekly basis as part of
 the open source project. The latest edge release is [{{< latest-edge-version

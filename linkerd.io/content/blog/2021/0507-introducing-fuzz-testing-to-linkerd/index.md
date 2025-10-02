@@ -10,7 +10,7 @@ params:
 
 Over the past few months, the team at [Ada Logics](https://adalogics.com/) has
 been hard at work introducing fuzz testing to [Linkerd's Rust
-proxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/).
+proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/).
 These fuzz tests now run continuously on Linkerd via Google's
 [OSS-Fuzz](https://github.com/google/oss-fuzz) service, providing another layer
 of safety for Linkerd users around the globe. In total, fuzzing was integrated
@@ -29,9 +29,9 @@ For details, and how you can get involved in this important safety measure for
 Linkerd, read on!
 
 (Background reading: [Under the hood of Linkerd's state-of-the-art Rust proxy,
-Linkerd2-proxy](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/);
+Linkerd2-proxy](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/);
 and [Why Linkerd doesn't use
-Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/).)
+Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/).)
 
 ## Why fuzz test the proxy?
 
@@ -130,12 +130,12 @@ like to thank the CNCF, especially Chris Aniszczyk, for sponsoring this work.
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Prince Abid](https://unsplash.com/@princeabid708?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText") on [Unsplash](https://unsplash.com/s/photos/fuzz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
 

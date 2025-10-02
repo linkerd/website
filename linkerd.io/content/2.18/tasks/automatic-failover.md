@@ -3,6 +3,16 @@ title: Automatic Multicluster Failover
 description: Use the Linkerd Failover extension to failover between clusters.
 ---
 
+{{< warning >}}
+
+The Linkerd Failover extension is deprecated and will be removed in a future
+release. If you are currently using this functionality, we recommend migrating
+to use [federated services](../tasks/federated-services) instead, which is a
+much simpler approach to achieving high availability across clusters that does
+not require the Linkerd Failover extension.
+
+{{< /warning >}}
+
 The Linkerd Failover extension is a controller which automatically shifts
 traffic from a primary service to one or more fallback services whenever the
 primary becomes unavailable. This can help add resiliency when you have a

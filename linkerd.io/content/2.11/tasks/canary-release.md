@@ -69,7 +69,6 @@ as there needs to be some kind of active traffic to complete the operation.
 Together, these components have a topology that looks like:
 
 ![Topology](/docs/images/canary/simple-topology.svg "Topology")
-{.center}
 
 To add these components to your cluster and include them in the Linkerd
 [data plane](../reference/architecture/#data-plane), run:
@@ -171,7 +170,6 @@ podinfo-primary      ClusterIP   10.7.249.63   <none>        9898/TCP   23m
 At this point, the topology looks a little like:
 
 ![Initialized](/docs/images/canary/initialized.svg "Initialized")
-{.center}
 
 {{< note >}}
 This guide barely touches all the functionality provided by Flagger. Make sure
@@ -216,7 +214,6 @@ While an update is occurring, the resources and traffic will look like this at a
 high level:
 
 ![Ongoing](/docs/images/canary/ongoing.svg "Ongoing")
-{.center}
 
 After the update is complete, this picture will go back to looking just like the
 figure from the previous section.
@@ -265,7 +262,6 @@ running `linkerd viz dashboard` and then look at the detail page for the
 split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
 ![Dashboard](/docs/images/canary/traffic-split.png "Dashboard")
-{.center}
 
 ### Browser
 

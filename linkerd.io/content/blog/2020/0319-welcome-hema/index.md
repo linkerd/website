@@ -7,7 +7,7 @@ params:
 ---
 
 🎉 We are pleased to announce that [Hema Lee](https://github.com/hemakl) is now
-a maintainer of the [CNI plugin](https://linkerd.io/2/features/cni/)
+a maintainer of the [CNI plugin](/2/features/cni/)
 for Linkerd. 🎉 She will be helping improve and address community issues
 encountered with the plugin, a requirement for many security conscious
 organizations.
@@ -36,9 +36,9 @@ projects that folks are already working on.
 
 Linkerd is a community project and is hosted by the [Cloud Native Computing
 Foundation](https://cncf.io/). Linkerd is [committed to open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you
 join our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!

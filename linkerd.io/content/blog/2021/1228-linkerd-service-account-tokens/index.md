@@ -125,7 +125,7 @@ is even wired into Linkerd's metrics: whenever a meshed request is received or
 being sent, the relevant metrics also include the service account with which
 that peer was associated with.
 
-Here is an example metric from the [emojivoto](https://linkerd.io/2/getting-started/)
+Here is an example metric from the [emojivoto](/2/getting-started/)
 example:
 
 ```promql
@@ -237,9 +237,9 @@ than before.
 
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
-open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!

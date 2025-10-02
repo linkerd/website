@@ -467,7 +467,6 @@ metadata:
   # This is the name of the Bundle and _also_ the name of the
   # ConfigMap in which we'll write the trust bundle.
   name: linkerd-identity-trust-roots
-  namespace: linkerd
 spec:
   # This tells trust-manager where to find the public keys to copy into
   # the trust bundle.

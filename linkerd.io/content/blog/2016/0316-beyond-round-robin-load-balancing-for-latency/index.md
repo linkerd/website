@@ -67,7 +67,7 @@ That said, large-scale production experiments at Twitter have verified the effec
 
 For systems that load balance higher-level connections such as RPC or HTTP calls, where Layer 5 information such as endpoint latencies and request depths are available, round robin load balancing can perform significantly worse than other algorithms in the presence of slow endpoints. These systems may show significantly improved performance in the face of slow endpoints by using algorithms that can take advantage of Layer 5 information.
 
-If the results above are applicable to your situation, you may want to take advantage of algorithms like least loaded and peak EWMA. Production-tested implementations of these algorithms are available today in [Finagle](https://finagle.github.io/), and in [Linkerd](https://linkerd.io/), the open-source service mesh for cloud-native applications. (See [here](https://api.linkerd.io/latest/linkerd/index.html) for how to configure the load balancing algorithms in Linkerd.)
+If the results above are applicable to your situation, you may want to take advantage of algorithms like least loaded and peak EWMA. Production-tested implementations of these algorithms are available today in [Finagle](https://finagle.github.io/), and in [Linkerd](https://linkerd.io/), the open-source service mesh for cloud-native applications. (See [here](https://api.linkerd.io/latest/linkerd/) for how to configure the load balancing algorithms in Linkerd.)
 
 ## Acknowledgments
 

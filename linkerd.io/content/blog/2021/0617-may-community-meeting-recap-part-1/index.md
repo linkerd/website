@@ -124,11 +124,11 @@ Because this meeting yielded such great content, we're splitting the recap into
 two blogs. Today, we'll focus on KubeCon EU.
 
 Before we get started, just a quick reminder of the
-[Linkerd Anchor program](https://linkerd.io/community/anchor/).
+[Linkerd Anchor program](/community/anchor/).
 If you have a great Linkerd story, we’d love to help you tell it.
 We can assist with the writing process, reviewing code, or providing guidance on
 how to create a helpful video tutorial.
-[Complete this form](https://linkerd.io/community/anchor/) and we’ll reach out!
+[Complete this form](/community/anchor/) and we’ll reach out!
 
 ## Linkerd at KubeCon EU 2021
 
@@ -141,7 +141,7 @@ In his Cloud Native Rust Day talk, Buoyant CTO, Oliver Gould,  notes that system
 programming differs from application programming and requires a different
 language like Rust. Apps that are written in Rust provide the confidence in
 memory safety and
-[reliability](https://linkerd.io/service-mesh-glossary/#reliability) that infra
+[reliability](/service-mesh-glossary/#reliability) that infra
 teams need.
 
 Rust is a great language for that purpose because it has a robust safety net.
@@ -172,9 +172,9 @@ tried Rust, to do so now.
 Dom DePasquale and Shawn Smith from the Pennsylvania State University discussed
 how they scheduled 68,000 COVID tests before the fall semester started. To do
 that, they needed a [service
-mesh](https://linkerd.io/service-mesh-glossary/#service-mesh) that was simple
+mesh](/service-mesh-glossary/#service-mesh) that was simple
 and provided mTLS and free retries. While
-[observability](https://linkerd.io/service-mesh-glossary/#observability) was the
+[observability](/service-mesh-glossary/#observability) was the
 most critical feature for this project, multi-cluster and traffic split came in
 handy.
 
@@ -255,7 +255,7 @@ integration was fundamental and much appreciated by everyone at Linkerd!
 Max Körbächer from Liquid Reply provided a great breakdown of when it makes
 sense to use multi-cluster. As he’s experienced in his client work,
 organizations are increasingly considering
-[multi-cluster](https://linkerd.io/service-mesh-glossary/#multi-cluster)
+[multi-cluster](/service-mesh-glossary/#multi-cluster)
 architectures; yet knowledge, complexity, security, and networking are common
 application architecture pain points. Linkerd is great for multi-cluster use
 cases and, based on an example, Max showcases how the service mesh has become
