@@ -195,7 +195,7 @@ CRD that needs to be present in the cluster. Create one now:
 ```yaml
 machine_IP=<the ip address of your machine>
 kubectl --context=west apply -f - <<EOF
-apiVersion: workload.linkerd.io/v1alpha1
+apiVersion: workload.linkerd.io/v1beta1
 kind: ExternalWorkload
 metadata:
   name: external-workload
@@ -205,7 +205,7 @@ metadata:
     app: legacy-app
     workload_name: external-workload
 spec:
-  meshTls:
+  meshTLS:
     identity: "spiffe://root.linkerd.cluster.local/external-workload"
     serverName: "external-workload.cluster.local"
   workloadIPs:
@@ -234,8 +234,8 @@ When in a foreign environment, we do not need this functionality, so we can
 simply get the proxy binary:
 
 ```bash
-LINKERD_VERSION=enterprise-2.15.0
-mkdir /opt/linkerd-proxy && cs /opt/linkerd-proxy
+LINKERD_VERSION={{< edge-version >}}
+mkdir /opt/linkerd-proxy && cd /opt/linkerd-proxy
 id=$(docker create cr.l5d.io/linkerd/proxy:$LINKERD_VERSION)
 docker cp $id:/usr/lib/linkerd/linkerd2-proxy ./linkerd-proxy
 docker rm -v $id

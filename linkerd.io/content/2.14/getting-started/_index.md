@@ -59,6 +59,9 @@ your Linkerd deployment.
 To install the CLI manually, run:
 
 ```bash
+# Setting LINKERD2_VERSION sets the version to install.
+# If unset, you'll get the latest available edge version.
+export LINKERD2_VERSION=stable-2.14.10
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
