@@ -15,7 +15,7 @@ params:
 is here and with it are some cool new updates.  One I am particularly
 excited about (full disclosure: I worked on it), is retries for HTTP requests
 with bodies. Linkerd has supported HTTP retries
-[since version 2.2](https://linkerd.io/2019/02/22/how-we-designed-retries-in-linkerd-2-2/),
+[since version 2.2](/2019/02/22/how-we-designed-retries-in-linkerd-2-2/),
 but until now, we would only retry requests without bodies. Retrying
 requests with bodies is especially important for anyone using Linkerd with gRPC.
 Since all gRPC requests are HTTP/2 `POST` requests with bodies, this feature
@@ -167,7 +167,7 @@ completely transparently, even when the body has not yet completed.
 Next, we need to determine *whether* a given request can be retried. The
 proxy already has logic for determining whether a request is retryable based
 on the
-[`ServiceProfile` configuration](https://linkerd.io/2.11/tasks/configuring-retries/)
+[`ServiceProfile` configuration](/2.11/tasks/configuring-retries/)
 and retry budget. Previously, that logic would always determine requests that
 have bodies to be non-retryable. All we do is modify this logic to allow
 retrying requests with bodies. To avoid potentially unbounded buffering,
@@ -200,5 +200,5 @@ and some of the edge cases that had to be taken into consideration.
 
 We hope you’re as excited as we are for this new Linkerd feature. You can
 try it out yourself by upgrading to Linkerd 2.11 (if you haven’t already)
-and [enabling retries](https://linkerd.io/2.11/tasks/configuring-retries/) on
+and [enabling retries](/2.11/tasks/configuring-retries/) on
 routes with request bodies!

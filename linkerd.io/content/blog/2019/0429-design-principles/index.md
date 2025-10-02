@@ -12,7 +12,7 @@ _tl;dr: Does a service mesh need design principles? We think so. We built Linker
 
 When we launched Linkerd 2.0 last September, it marked a substantial departure from Linkerd 1.x. Gone was the JVM, the config file, and the setup and tuning process that ranged from intricate to complex. Linkerd could now be installed in under 60 seconds, without configuration or application changes, and would _just work_. Not to mention that Linkerd 2.0 was literally orders of magnitude smaller and faster than before.
 
-A little over 6 months in and [already at Linkerd 2.3](https://linkerd.io/2019/04/16/announcing-linkerd-2.3/), the reception to these changes has been resoundingly positive:
+A little over 6 months in and [already at Linkerd 2.3](/2019/04/16/announcing-linkerd-2.3/), the reception to these changes has been resoundingly positive:
 
 {{< tweet user="coleca" id="1091591745870139392" >}}
 
@@ -30,8 +30,8 @@ These three principles have one thing in common: they all _reduce the operationa
 
 This focus on cost is so critical because _Linkerd is fundamentally a product for human beings_: operators, SREs, and platform owners. Seen this way, reducing operational cost isn't just a nice idea---it's a reflection of how actual human beings are going to spend their time and energy with our project. For us _not_ to minimize the operational cost would do our users a tremendous disservice.
 
-For more detail about these principles and some examples of them in action, check out the [Linkerd design principles documentation](https://linkerd.io/2/design-principles/).
+For more detail about these principles and some examples of them in action, check out the [Linkerd design principles documentation](/2/design-principles/).
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/community/get-involved/). Come and join the fun!
 
 _Image credit: [Dimitry B.](https://www.flickr.com/photos/ru_boff/)_

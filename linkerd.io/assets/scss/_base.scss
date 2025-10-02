@@ -1,6 +1,6 @@
 :root {
   font-size: $font-size-base;
-  
+
   @media (prefers-reduced-motion: no-preference) {
     scroll-behavior: smooth;
   }
@@ -108,9 +108,11 @@ figure img {
 blockquote {
   margin: 0;
   margin-bottom: spacer(3);
-  padding: spacer(3);
-  border-left: solid 2px $border-color;
-
+  padding: spacer(4);
+  border-left: solid 4px $blue;
+  background-color: $light-blue;
+  border-radius: $border-radius;
+  
   & > :last-child {
     margin-bottom: 0;
   }
@@ -149,7 +151,7 @@ a {
   color: $link-color;
   text-decoration: none;
   transition: color .2s ease;
-  
+
   &:hover,
   &:active {
     color: $link-color-hover;

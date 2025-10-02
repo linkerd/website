@@ -29,7 +29,7 @@ All of this is enabled by default and requires no configuration. This means that
 
 This release represents a major step forward in Linkerd's security roadmap. In an upcoming blog post, Linkerd creator Oliver Gould will be detailing the design tradeoffs in this approach, as well as covering Linkerd's upcoming roadmap around certificate chaining, TLS enforcement, identity beyond service accounts, and authorization. We'll also be discussing these topics (and all the other fun features in 2.3) in our [upcoming Linkerd Online Community Meeting](https://www.meetup.com/Linkerd-Online-Community-Meetup/events/260356731/) on Wednesday, April 24, 2019 at 10am PT.
 
-Ready to try it? Those of you who have been tracking the 2.x branch via our [weekly edge releases](https://linkerd.io/2/edge) will already have seen these features in action. Either way, you can download the stable 2.3 release by running:
+Ready to try it? Those of you who have been tracking the 2.x branch via our [weekly edge releases](/2-edge/) will already have seen these features in action. Either way, you can download the stable 2.3 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
@@ -37,6 +37,6 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 
 Finally, we'd be remiss if we didn't point out that this approach has been deeply inspired by our friends at [Smallstep](https://smallstep.com/), [Cloudflare](https://www.cloudflare.com/), [Let's Encrypt](https://letsencrypt.org/), [Mozilla](https://www.mozilla.org/), and other amazing organizations that strive to make the Internet secure by default.
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/community/get-involved/). Come and join the fun!
 
 _Image credit: [Robert McGoldrick](https://www.flickr.com/photos/bobsfever/)_

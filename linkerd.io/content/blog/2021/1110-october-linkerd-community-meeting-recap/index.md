@@ -15,7 +15,7 @@ If you missed our last community meeting, don't worry. Below is a recap along
 with the recording.
 
 Before we get started, just a quick reminder about our
-[Linkerd Community Anchor Program](https://linkerd.io/community/anchor/).
+[Linkerd Community Anchor Program](/community/anchor/).
 If you have a Linkerd story you’d like to share, we’d love to help you tell it.
 Whether you built a cloud native platform with Linkerd or integrated the
 service mesh with another CNCF project, these experiences are incredibly

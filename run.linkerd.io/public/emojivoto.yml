@@ -94,7 +94,7 @@ spec:
           value: "8080"
         - name: PROM_PORT
           value: "8801"
-        image: docker.l5d.io/buoyantio/emojivoto-emoji-svc:v11
+        image: ghcr.io/buoyantio/emojivoto-emoji-svc:v11
         name: emoji-svc
         ports:
         - containerPort: 8080
@@ -133,7 +133,7 @@ spec:
         env:
         - name: WEB_HOST
           value: web-svc.emojivoto:80
-        image: docker.l5d.io/buoyantio/emojivoto-web:v11
+        image: ghcr.io/buoyantio/emojivoto-web:v11
         name: vote-bot
         resources:
           requests:
@@ -166,7 +166,7 @@ spec:
           value: "8080"
         - name: PROM_PORT
           value: "8801"
-        image: docker.l5d.io/buoyantio/emojivoto-voting-svc:v11
+        image: ghcr.io/buoyantio/emojivoto-voting-svc:v11
         name: voting-svc
         ports:
         - containerPort: 8080
@@ -209,7 +209,7 @@ spec:
           value: voting-svc.emojivoto:8080
         - name: INDEX_BUNDLE
           value: dist/index_bundle.js
-        image: docker.l5d.io/buoyantio/emojivoto-web:v11
+        image: ghcr.io/buoyantio/emojivoto-web:v11
         name: web-svc
         ports:
         - containerPort: 8080

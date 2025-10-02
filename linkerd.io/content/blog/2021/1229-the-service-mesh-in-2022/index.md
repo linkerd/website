@@ -11,10 +11,10 @@ params:
 
 By all accounts, 2021 has been a banner year for Linkerd. The project [achieved
 graduated status in the Cloud Native Computing
-Foundation](https://linkerd.io/2021/07/28/announcing-cncf-graduation/), the
+Foundation](/2021/07/28/announcing-cncf-graduation/), the
 highest possible level of project maturity. It introduced major features such as
-[authorization policy](https://linkerd.io/2021/09/30/announcing-linkerd-2.11/)
-and [extensions](https://linkerd.io/2021/03/11/announcing-linkerd-2.10/). The
+[authorization policy](/2021/09/30/announcing-linkerd-2.11/)
+and [extensions](/2021/03/11/announcing-linkerd-2.10/). The
 Linkerd team [keynoted at Kubecon
 EU](https://buoyant.io/media/linkerd-vs-covid-19/) on the many ways Linkerd is
 used to combat COVID-19; it published [multiple benchmarks showing an
@@ -60,7 +60,7 @@ meshed pods. Client-side policy covers a vast set of features, including:
 * ... and lots more.
 
 Linkerd actually already has a basic form of client-side policy in the form of
-[ServiceProfiles](https://linkerd.io/2/reference/service-profiles/), which allow
+[ServiceProfiles](/2/reference/service-profiles/), which allow
 you (among other things) to control the retry behavior of callers to a service.
 In 2.12 and beyond, we'll be revisiting ServiceProfiles and tackling this
 important class of features in a more systematic way.
@@ -79,7 +79,7 @@ cross-cluster, per-service failover in a way that's safe and sane.
 ## Fine-grained authorization policy
 
 In Linkerd 2.11, we [introduced _server-side_
-policy](https://linkerd.io/2021/09/30/announcing-linkerd-2.11/), which gives you
+policy](/2021/09/30/announcing-linkerd-2.11/), which gives you
 control over the traffic allowed into (as opposed to out of) meshed pods.
 Server-side policy added some important features to Linkerd such as
 authorization policy, which restricts pod-to-pod connections based on features
@@ -139,7 +139,7 @@ problem](https://en.wikipedia.org/wiki/Confused_deputy_problem).
 
 Of course, performance and resource consumption are critical for service
 meshes—we've regularly published [competitive service mesh
-benchmarks](https://linkerd.io/2021/11/29/linkerd-vs-istio-benchmarks-2021/) and
+benchmarks](/2021/11/29/linkerd-vs-istio-benchmarks-2021/) and
 are proud of where Linkerd stands. But, to paraphrase Louis Ryan (!), eking out
 the last bit of performance is far less important than having good units of
 maintenance and isolation. We learned that lesson the hard way with Linkerd 1.x.
@@ -162,12 +162,12 @@ for everyone.
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Xan
 White](https://unsplash.com/@xwpics?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

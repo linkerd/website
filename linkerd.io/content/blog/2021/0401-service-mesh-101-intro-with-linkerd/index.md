@@ -35,7 +35,7 @@ As you can see in the image above, a proxy is now sitting between each component
 
 ### What’s up with the proxies?
 
-The proxies make up the data plane of the mesh and are directly responsible for doing all of the work the service mesh does. They are the components that will implement retries, add mTLS, or perform request level load balancing. Some service meshes build on top of general-purpose proxies, but Linkerd uses the [ultra-light "micro-proxy" Linkerd2-proxy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/). It's highly secure, lightweight, and consumes a lot fewer resources than a general-purpose proxy.
+The proxies make up the data plane of the mesh and are directly responsible for doing all of the work the service mesh does. They are the components that will implement retries, add mTLS, or perform request level load balancing. Some service meshes build on top of general-purpose proxies, but Linkerd uses the [ultra-light "micro-proxy" Linkerd2-proxy](/2020/12/03/why-linkerd-doesnt-use-envoy/). It's highly secure, lightweight, and consumes a lot fewer resources than a general-purpose proxy.
 
 ### Where does the control plane fit?
 
@@ -51,7 +51,7 @@ Linkerd is a [CNCF](https://www.cncf.io/) service mesh used by many organization
 
 ### Observability
 
-Linkerd makes it easy to see the health of your applications at a glance by quickly surfacing golden metrics by namespace, deployment, and pod. It also simplifies tapping into inter-app communication, enabling you to see live request and response metadata. Between metrics and the ability to intercept messages, Linkerd dramatically simplifies the process of diagnosing application problems. You can read more about [debugging http](https://linkerd.io/2.10/tasks/books/) and [gRPC traffic](https://linkerd.io/2.10/tasks/debugging-your-service/) on the [Linkerd docs page](https://linkerd.io/2.10/overview/).
+Linkerd makes it easy to see the health of your applications at a glance by quickly surfacing golden metrics by namespace, deployment, and pod. It also simplifies tapping into inter-app communication, enabling you to see live request and response metadata. Between metrics and the ability to intercept messages, Linkerd dramatically simplifies the process of diagnosing application problems. You can read more about [debugging http](/2.10/tasks/books/) and [gRPC traffic](/2.10/tasks/debugging-your-service/) on the [Linkerd docs page](/2.10/overview/).
 
 ### Security
 
@@ -59,7 +59,7 @@ Linkerd simplifies security by transparently and automatically enabling mutual T
 
 ### Reliability
 
-Linkerd improves on native Kubernetes constructs to allow mesh operators and platform users to gain performance and reliability benefits for their applications. Applications in the Linkerd mesh benefit from the Linkerd proxy’s ability to make smarter routing decisions so traffic is never routed to downed application instances and is deliberately routed to the [best performing endpoints using exponentially weighted moving average, or EWMA](https://linkerd.io/2.10/features/load-balancing/). It also allows operators to configure retries and timeouts for their applications.
+Linkerd improves on native Kubernetes constructs to allow mesh operators and platform users to gain performance and reliability benefits for their applications. Applications in the Linkerd mesh benefit from the Linkerd proxy’s ability to make smarter routing decisions so traffic is never routed to downed application instances and is deliberately routed to the [best performing endpoints using exponentially weighted moving average, or EWMA](/2.10/features/load-balancing/). It also allows operators to configure retries and timeouts for their applications.
 
 {{< youtube "xo9Tq2UNKfM" >}}
 
@@ -67,7 +67,7 @@ Linkerd improves on native Kubernetes constructs to allow mesh operators and pla
 
 Installing and using Linkerd in your Kubernetes cluster is as simple as running: `linkerd install | kubectl apply -f -`
 
-You can follow along with Alex in the video above or use the [Linkerd getting started guide](https://linkerd.io/2.10/getting-started/) to get yourself up and running.
+You can follow along with Alex in the video above or use the [Linkerd getting started guide](/2.10/getting-started/) to get yourself up and running.
 
 ## Wrapping Up
 

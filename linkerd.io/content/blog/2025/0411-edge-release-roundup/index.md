@@ -102,9 +102,13 @@ Linkerd 2.18:
 * Linkerd multicluster is changing to be more GitOps-friendly. This starts
   with [edge-25.3.3], when the `linkerd multicluster link` command is
   deprecated in favor of the new `linkerd multicluster link-gen` command.
-  There are actually a lot of changes under the hood here, so we encourage
-  checking out the [multicluster documentation] (and keeping an eye out for an
-  upcoming [Service Mesh Academy]!) if you use multicluster.
+  To use this new functionality, you must upgrade your Link resources;
+  see the [Upgrading Multicluster
+  Components](/2-edge/tasks/upgrading-multicluster/)
+  documentation for more. There are actually a lot of changes under the hood
+  here, so we encourage checking out the [multicluster documentation] (and
+  keeping an eye out for an upcoming [Service Mesh Academy]!) if you use
+  multicluster.
 
 * Starting in [edge-25.3.2], all communications between two meshed proxies are
   multiplexed on port 4143 by default, rather than using the original
@@ -120,8 +124,8 @@ Linkerd 2.18:
 
 Check out the releases below for more on the status of each release!
 
-[multicluster documentation]: https://linkerd.io/2-edge/features/multicluster/
-[Gateway API and Linkerd]: https://linkerd.io/2-edge/features/gateway-api/
+[multicluster documentation]: /2-edge/features/multicluster/
+[Gateway API and Linkerd]: /2-edge/features/gateway-api/
 [Service Mesh Academy]: https://buoyant.io/service-mesh-academy
 [edge-25.1.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.1
 [edge-25.1.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.1.2
@@ -334,7 +338,7 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
 You can also
-[install edge releases with Helm](https://linkerd.io/2/tasks/install-helm/).
+[install edge releases with Helm](/2/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

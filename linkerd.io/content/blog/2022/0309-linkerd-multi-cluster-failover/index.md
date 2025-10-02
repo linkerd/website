@@ -19,7 +19,7 @@ Implemented as a Kubernetes operator that can be added to an existing Linkerd
 deployment, the failover strategy can be applied to a single cluster but is
 particularly useful for multi-cluster deployments. Linkerd already provides
 [powerful cross-cluster communication
-capabilities](https://linkerd.io/2/features/multicluster/) that work with any
+capabilities](/2/features/multicluster/) that work with any
 cluster topology, including multi-cloud and hybrid cloud; are completely
 transparent to the application; are zero-trust compatible; and do not introduce
 any single points of failure (SPOF) to the system. To this feature set, the new
@@ -35,17 +35,17 @@ Linkerd's existing reliability features, providing a complete solution for
 ultra-high-reliability deployments that covers:
 
 * Failure of individual nodes: handled via
-  [retries](https://linkerd.io/2/features/retries-and-timeouts/) and [request
-  balancing](https://linkerd.io/2/features/load-balancing/)
+  [retries](/2/features/retries-and-timeouts/) and [request
+  balancing](/2/features/load-balancing/)
 * Failures due to bad code changes: (handled via [canary
-  deployments](https://linkerd.io/2/features/traffic-split/))
+  deployments](/2/features/traffic-split/))
 * Failures due to service unavailability in general: handled with the failover operator
 * Failures due to whole-cluster outages: handed with the failover operator
 
 ## Getting started
 
 The operator is available as a standalone project, but requires the latest
-[Linkerd edge release](https://linkerd.io/releases/) release to work. The operator
+[Linkerd edge release](/releases/) release to work. The operator
 will also work with in the upcoming 2.11.2 point release, expected within the
 next few weeks.
 
@@ -103,12 +103,12 @@ bug reports, and any other feedback!
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Ray Harrington](https://unsplash.com/@raymondo600?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on

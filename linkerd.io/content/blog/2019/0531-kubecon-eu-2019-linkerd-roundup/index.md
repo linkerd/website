@@ -15,7 +15,7 @@ amount of Linkerd momentum. Here's a quick recap of most of the Linkerd news.
 ## Linkerd Benchmarks
 
 On Saturday, the folks at [Kinvolk](https://kinvolk.io) published their
-[Linkerd Benchmarks](https://linkerd.io/2019/05/18/linkerd-benchmarks/),
+[Linkerd Benchmarks](/2019/05/18/linkerd-benchmarks/),
 comparing Linkerd, Istio, and bare metal, and showing you the resource cost of
 adding the service mesh to your infrastructure. The results may or may not
 surprise you.
@@ -28,7 +28,7 @@ On Tuesday, Microsoft announced the [Service Mesh
 Interface](https://smi-spec.io), a specification that exposes core service mesh
 features like telemetry, traffic shifting, and policy via Kubernetes primitives.
 [Linkerd was a major part of the SMI
-launch](https://linkerd.io/2019/05/24/linkerd-and-smi/), and we're excited about
+launch](/2019/05/24/linkerd-and-smi/), and we're excited about
 the opportunities this opens up for us, especially around integrations like
 [Kiali](https://www.kiali.io/),
 [Flagger](https://github.com/weaveworks/flagger), and
@@ -106,6 +106,6 @@ comments, we'd love to have you join our rapidly-growing community! Linkerd is
 hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
 community on [Slack](https://slack.linkerd.io),
 [Twitter](https://twitter.com/linkerd), and the [mailing
-lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+lists](/community/get-involved/). Come and join the fun!
 
 [vscode]: https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd

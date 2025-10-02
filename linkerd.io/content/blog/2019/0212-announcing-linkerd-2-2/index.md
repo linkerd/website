@@ -21,7 +21,7 @@ With that, on to the features!
 
 ## Retries and timeouts
 
-Linkerd 2.2 can now automatically retry failed requests, improving the overall success rate of your application in the presence of partial failures. Building on top of the [service profiles](https://linkerd.io/2/features/service-profiles) model introduced in 2.1, Linkerd allows you to configure this behavior on a per-route basis. Here's a [quick screencast](https://asciinema.org/a/227055) of using retries and timeouts to handle a failing endpoint.
+Linkerd 2.2 can now automatically retry failed requests, improving the overall success rate of your application in the presence of partial failures. Building on top of the [service profiles](/2/features/service-profiles) model introduced in 2.1, Linkerd allows you to configure this behavior on a per-route basis. Here's a [quick screencast](https://asciinema.org/a/227055) of using retries and timeouts to handle a failing endpoint.
 
 In this screencast we can see that the output of `linkerd routes` now includes an ACTUAL_SUCCESS column, measuring success rate of requests on the wire, and an EFFECTIVE_SUCCESS column, measuring success rate from the caller's perspective, i.e. after Linkerd has done its retries.
 
@@ -61,4 +61,4 @@ Linkerd 2.2 is the culmination of months of work from contributors from around t
 
 In upcoming releases, you should expect Linkerd 2.x to continue filling out features around reliability, traffic shifting, and security (especially around identity and confidentiality of communication). In the medium term, we'll also be moving to reduce Linkerd's dependence on Kubernetes. Finally, Linkerd 1.x continues under active development, and we remain committed to supporting our 1.x users.
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the [Cloud Native Computing Foundation](https://cncf.io). If you have feature requests, questions, or comments, we'd love to have you join our rapidly-growing community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving community on [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and the [mailing lists](/community/get-involved/). Come and join the fun!

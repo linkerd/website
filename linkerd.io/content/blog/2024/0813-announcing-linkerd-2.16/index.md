@@ -33,7 +33,7 @@ code.
 Linkerd 2.16 also adds retry and timeout configuration to these same Gateway API
 resources, bringing the feature sets for Gateway API and ServiceProfiles to
 parity (as
-[promised in our February Linkerd 2.15 announcement](https://linkerd.io/blog/announcing-linkerd-2.15/)).
+[promised in our February Linkerd 2.15 announcement](/2024/02/21/announcing-linkerd-2.15/)).
 This configuration is backed by a new implementation that improves upon
 Linkerd's earlier retry and timeout logic in two key ways:
 
@@ -71,7 +71,7 @@ timeouts are now provided in a principled, future-proof way that is composable
 with existing features such as circuit breaking, and configured using the
 Gateway API resources that we believe are the future of service mesh
 configuration.
-[Learn more](https://linkerd.io/2/features/retries-and-timeouts/).
+[Learn more](/2/features/retries-and-timeouts/).
 
 ## Audit mode for security policies
 
@@ -120,7 +120,7 @@ default.
 Linkerd 2.16 adds support for IPv6 on IPv6-only and dual-stack clusters. (When
 enabled on dual stack clusters, Linkerd will only use IPv6 endpoints.) For
 backwards compatibility, this feature is disabled by default, but enabling it is
-a simple boolean. [Learn more](https://linkerd.io/2/features/ipv6/).
+a simple boolean. [Learn more](/2/features/ipv6/).
 
 ## Other noteworthy changes
 
@@ -144,7 +144,7 @@ In May, cloud consultancy [LiveWyre](https://livewyer.io/) published a set of
 [service mesh benchmarks](https://livewyer.io/blog/2024/05/08/comparison-of-service-meshes/)
 showing that Linkerd resulted in lower latency and less resource consumption
 than either Istio or Cilium. This has been the
-[consistent result of service mesh benchmarks since 2021](https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/),
+[consistent result of service mesh benchmarks since 2021](/2021/05/27/linkerd-vs-istio-benchmarks/),
 and we were happy to see this confirmed by another third party.
 
 ## What's next for Linkerd?
@@ -154,7 +154,7 @@ Since March we've merged 250+ pull requests, revamped our edge release process
 to provide
 [production-readiness guidance](https://github.com/linkerd/linkerd2/releases)
 and
-[monthly reviews](https://linkerd.io/2024/08/05/linkerd-edge-release-roundup/),
+[monthly reviews](/2024/08/05/linkerd-edge-release-roundup/),
 and published an average of 5 edge releases a month—more than one a week. There
 is a lot more great news to report, and early next month we'll publish a deeper
 retrospective of the past six months, but in short—it's an incredibly exciting

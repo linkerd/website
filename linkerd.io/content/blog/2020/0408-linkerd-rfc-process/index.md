@@ -18,7 +18,7 @@ read on for all the details!
 Linkerd is an "extremely open source" project: it is licensed under the Apache
 License Version 2.0; it's hosted by a neutral foundation (the
 [CNCF](https://cncf.io)) which owns the trademark; and it is
-[committed to open governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/)
 as its operational model. As a community-focused project, bug reports, ideas,
 and feedback can come from anywhere, and we consider it critical that Linkerd
 _always_ be a project that anyone anywhere in the world can use and contribute
@@ -45,7 +45,7 @@ of an RFC process. We had a couple goals going into this:
   the critical reliability of their systems.
 - We wanted to ensure that any major changes fit within Linkerd's philosophy of
   maximizing out-of-the-box value and debuggability, and were in accordance with
-  [Linkerd's design principles](https://linkerd.io/2019/04/29/linkerd-design-principles/).
+  [Linkerd's design principles](/2019/04/29/linkerd-design-principles/).
 - Most importantly, we wanted to be able to set contributors up for success and
   get contentious issues on the docket as early in the process as possible,
   rather than duking out design decisions in the confines of a PR when code had
@@ -149,12 +149,12 @@ amazing things that you have planned for the future for Linkerd.
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 ## Want to get involved?
 

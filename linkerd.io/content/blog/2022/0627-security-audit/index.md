@@ -52,9 +52,9 @@ philosophy: that complexity and cost are the enemy of security. For a system to
 be secure it _must_ be simple, and for security to be useful it _must_ be cheap.
 Every aspect of Linkerd's design is centered around this idea, and that has led
 to many of the decisions that make Linkerd unique, from [the choice of
-Rust](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/),
+Rust](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/),
 the decision [not to adopt
-Envoy](https://linkerd.io/2020/12/03/why-linkerd-doesnt-use-envoy/), and the
+Envoy](/2020/12/03/why-linkerd-doesnt-use-envoy/), and the
 focus, even early in the project, on providing zero-configuration mutual TLS.
 
 Features like mutual TLS, traffic policy, and workload identity are all critical
@@ -110,7 +110,7 @@ world-class security. Linkerd's security controls also include:
   reporting vulnerabilities.
 * All code and docs go through a comprehensive set of checks, including static
   analysis, dependency analysis, and [fuzz
-  testing](https://linkerd.io/2021/05/07/fuzz-testing-for-linkerd/), before
+  testing](/2021/05/07/fuzz-testing-for-linkerd/), before
   being packaged as a release.
 
 Linkerd is trusted by users around the world not just to be secure but to
@@ -122,12 +122,12 @@ our best to live up to it with every line of code.
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
 open
-governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (*Photo by [Etienne Girardet](https://unsplash.com/@etiennegirardet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on

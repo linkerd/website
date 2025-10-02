@@ -76,7 +76,7 @@ cryptographic guarantees of identity and confidentiality provided by mTLS.
 Linkerd's blazing speed and ultra-low memory footprint compared to other service
 meshes like Istio are primarily due to its underlying Rust "micro-proxy",
 Linkerd2-proxy
-([learn more about Linkerd2-proxy in Eliza Weisman's "under the hood "post](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)).
+([learn more about Linkerd2-proxy in Eliza Weisman's "under the hood "post](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)).
 This speed has made it possible to get by with a single-core runtime—but
 ultimately, a single core can only take you so far. In Linkerd 2.9 we've
 upgraded the proxy to a multi-core runtime, which allows for greater throughput
@@ -152,7 +152,7 @@ they resonate with you as well.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](https://linkerd.io/2/edge) will already have seen these
+[weekly edge releases](/2-edge/) will already have seen these
 features in action. Either way, you can download the stable 2.9 release by
 running:
 
@@ -161,18 +161,18 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](https://linkerd.io/2/tasks/install-helm/).
+[guide to installing Linkerd with Helm](/2/tasks/install-helm/).
 Upgrading from a previous release? We've got you covered: see our
-[Linkerd upgrade guide](https://linkerd.io/2/tasks/upgrade/) for how to use the
+[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the
 linkerd upgrade command.
 
 ## Linkerd is for everyone
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance.](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/)
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!

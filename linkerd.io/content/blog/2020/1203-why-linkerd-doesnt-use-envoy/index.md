@@ -78,9 +78,9 @@ detail_: it's not user-facing, it's not usable as a generic building block, and
 it has a boring name. This means Linkerd2-proxy tends to go unnoticed, though
 we've tried to shed a little more light on it recently with articles looking
 [under the
-hood](https://linkerd.io/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+hood](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
 and at [the
-roadmap](https://linkerd.io/2020/09/02/the-road-ahead-for-linkerd2-proxy/)).
+roadmap](/2020/09/02/the-road-ahead-for-linkerd2-proxy/)).
 
 So why "micro-proxy"? Loathe as we are to introduce another term into the
 lexicon,[^2] the word "proxy" doesn't do Linkerd2-proxy justice. A proxy is
@@ -263,18 +263,18 @@ network libraries that power Linkerd.
 
 I never thought you'd ask. You can install Linkerd in about 5 minutes, including
 mutual TLS, with zero configuration required. Start with our
-[getting started guide](https://linkerd.io/2/getting-started/).
+[getting started guide](/2/getting-started/).
 
 ## Linkerd is for everyone
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
-[committed to open governance](https://linkerd.io/2019/10/03/linkerds-commitment-to-open-governance/).
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
-the [mailing lists](https://linkerd.io/2/get-involved/). Come and join the fun!
+the [mailing lists](/community/get-involved/). Come and join the fun!
 
 (Photo by
 [Paul Felberbauer](https://unsplash.com/@servuspaul?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
