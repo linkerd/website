@@ -36,4 +36,6 @@ module names, separated by `::`.
 
 A module name starts with a letter, and consists of alphanumeric characters and `_`.
 
-The proxy's default log level is set to `warn,linkerd2_proxy=info`.
+The proxy's default log level is set to `warn,linkerd2_proxy=info`. To increase
+the verbosity of the Linkerd runtime, add `linkerd=debug` to your directives
+(for example: `warn,linkerd2_proxy=info,linkerd=debug`).
