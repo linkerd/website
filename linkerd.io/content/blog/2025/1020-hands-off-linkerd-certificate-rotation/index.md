@@ -326,3 +326,6 @@ As with any solution there is more I could do.
    about the age of these certs.
 
 Did I miss any?
+
+_Enjoyed the read? [Follow Matthew on Medium](https://medium.com/@mclanem_45809)
+to keep up with his latest posts._
