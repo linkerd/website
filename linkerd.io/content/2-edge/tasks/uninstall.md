@@ -23,9 +23,6 @@ delete -f -`. For the bundled extensions that means:
 # To remove Linkerd Viz
 linkerd viz uninstall | kubectl delete -f -
 
-# To remove Linkerd Jaeger
-linkerd jaeger uninstall | kubectl delete -f -
-
 # To remove Linkerd Multicluster
 linkerd multicluster uninstall | kubectl delete -f -
 ```
