@@ -97,10 +97,13 @@ proxy:
         namespace: jaeger-system
 ```
 
-It is also possible to edit the tracing configuration to have proxies
-export to any backend which supports the OpenTelemetry protocol. See the
-[OpenTelmetry documentation](https://opentelemetry.io/docs/specs/otel/protocol/)
-for more information.
+Linkerd can export traces to any collector which supports the OpenTelemetry protocol. See the [OpenTelemetry documentation](https://opentelemetry.io/docs/specs/otel/protocol/) for more information.
+
+{{< note >}}
+
+At present, the `meshIdentity` stanza is mandatory: Linkerd can only export traces to a collector within the mesh.
+
+{{< /note >}}
 
 ## Install Emojivoto
 
