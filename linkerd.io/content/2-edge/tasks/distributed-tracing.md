@@ -126,9 +126,15 @@ Unlike most features of a service mesh, distributed tracing requires modifying
 the source of your application. Tracing needs some way to tie incoming requests
 to your application together with outgoing requests to dependent services. To do
 this, some headers are added to each request that contain a unique ID for the
-trace. Linkerd will propagatge both [w3c](https://www.w3.org/TR/trace-context/)
-and [b3](https://github.com/openzipkin/b3-propagation) formats to tie these
+trace. Linkerd will propagatge both [`w3c`](https://www.w3.org/TR/trace-context/)
+and [`b3`](https://github.com/openzipkin/b3-propagation) formats to tie these
 things together.
+
+{{< note >}}
+
+If both `w3c` and `b3` headers are present, Linkerd will propagate only the `w3c` headers.
+
+{{< /note >}}
 
 We've already modified emojivoto to instrument its requests with this
 information, this
