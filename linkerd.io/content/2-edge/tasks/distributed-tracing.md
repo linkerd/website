@@ -69,10 +69,7 @@ installation is suitable for your environment is beyond the scope of this page.
 
 ## Update Linkerd with tracing enabled
 
-There are a few values that need to be set on your Linkerd installation,
-specifically to have proxies begin exporting traces as well as where to send
-those traces. These values will point to the Jaeger collector installed
-above.
+There are a few values that need to be set on your Linkerd installation to enable exporting traces and to define where to send those traces. In this case, we'll configure Linkerd to send traces to the Jaeger collector we just installed.
 
 If Linkerd was installed with the CLI:
 
