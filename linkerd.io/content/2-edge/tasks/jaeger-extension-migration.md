@@ -12,7 +12,7 @@ in a future Linkerd release without warning.
 
 We recommend migrating away from the Linkerd-jaeger extension entirely and
 install dedicated tracing infrastructure on your cluster instead. We provide a
-[guide for installing a basic tracing setup](distributed-tracing.md) with
+[guide for installing a basic tracing setup](distributed-tracing) with
 Linkerd.
 
 Once you have the tracing infrastructure inside your cluster that is not managed
@@ -64,7 +64,7 @@ This assumes you have made no changes to the collector configuration in your
 Linkerd-jaeger installation. If you have changed the endpoint or already brought
 your own tracing collector, you will have to update the `endpoint` as well as
 the `serviceAccountName` and `namespace` in the `meshIdentity` in the above
-config. See our [guide on distributed tracing](distributed-tracing.md) for more
+config. See our [guide on distributed tracing](distributed-tracing) for more
 information on how to set these values.
 {{< /note >}}
 
