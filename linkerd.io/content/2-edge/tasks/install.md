@@ -99,7 +99,7 @@ linkerd check
 ## Next steps
 
 Once you've installed the control plane, you may want to install some
-extensions, such as `viz`, `multicluster` and `jaeger`. See
+extensions, such as `viz` and `multicluster`. See
 [Using extensions](extensions/) for how to install them.
 
 Finally, once the control plane is installed, you'll need to "mesh" any services

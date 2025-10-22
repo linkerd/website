@@ -45,10 +45,6 @@ kubectl annotate namespace linkerd linkerd.io/inject=disabled
 # viz (ignore if not using the viz extension)
 kubectl create namespace linkerd-viz
 kubectl label namespace linkerd-viz linkerd.io/extension=viz
-
-# jaeger (ignore if not using the jaeger extension)
-kubectl create namespace linkerd-jaeger
-kubectl label namespace linkerd-jaeger linkerd.io/extension=jaeger
 ```
 
 ## Save the signing key pair as a Secret
@@ -64,9 +60,6 @@ kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namesp
 
 # ignore if not using the viz extension
 kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namespace=linkerd-viz
-
-# ignore if not using the jaeger extension
-kubectl create secret tls webhook-issuer-tls --cert=ca.crt --key=ca.key --namespace=linkerd-jaeger
 ```
 
 ## Create Issuers referencing the secrets
@@ -91,16 +84,6 @@ kind: Issuer
 metadata:
   name: webhook-issuer
   namespace: linkerd-viz
-spec:
-  ca:
-    secretName: webhook-issuer-tls
----
-# ignore if not using the jaeger extension
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: webhook-issuer
-  namespace: linkerd-jaeger
 spec:
   ca:
     secretName: webhook-issuer-tls
@@ -221,35 +204,13 @@ spec:
     algorithm: ECDSA
   usages:
   - server auth
----
-# ignore if not using the jaeger extension
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: jaeger-injector
-  namespace: linkerd-jaeger
-spec:
-  secretName: jaeger-injector-k8s-tls
-  duration: 24h
-  renewBefore: 1h
-  issuerRef:
-    name: webhook-issuer
-    kind: Issuer
-  commonName: jaeger-injector.linkerd-jaeger.svc
-  dnsNames:
-  - jaeger-injector.linkerd-jaeger.svc
-  isCA: false
-  privateKey:
-    algorithm: ECDSA
-  usages:
-  - server auth
 EOF
 ```
 
 At this point, cert-manager can now use these Certificate resources to obtain
 TLS credentials, which are stored in the  `linkerd-proxy-injector-k8s-tls`,
-`linkerd-sp-validator-k8s-tls`, `tap-k8s-tls`, `tap-injector-k8s-tls` and
-`jaeger-injector-k8s-tls` secrets respectively.
+`linkerd-sp-validator-k8s-tls`, `tap-k8s-tls`, and `tap-injector-k8s-tls`
+secrets respectively.
 
 Now we just need to inform Linkerd to consume these credentials.
 
@@ -279,12 +240,6 @@ linkerd viz install \
   --set-file tap.caBundle=ca.crt \
   --set tapInjector.externalSecret=true \
   --set-file tapInjector.caBundle=ca.crt \
-  | kubectl apply -f -
-
-# ignore if not using the jaeger extension
-linkerd jaeger install \
-  --set webhook.externalSecret=true \
-  --set-file webhook.caBundle=ca.crt \
   | kubectl apply -f -
 ```
 
@@ -320,13 +275,6 @@ helm install linkerd-viz \
   --set-file tapInjector.caBundle=ca.crt \
   linkerd/linkerd-viz \
   -n linkerd-viz --create-namespace
-
-# ignore if not using the jaeger extension
-helm install linkerd-jaeger \
-  --set webhook.externalSecret=true \
-  --set-file webhook.caBundle=ca.crt \
-  linkerd/linkerd-jaeger \
-  -n linkerd-jaeger --create-namespace
 ```
 
 {{< note >}}

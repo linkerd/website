@@ -1108,7 +1108,7 @@ extension binaries implement it. For more information, See
 Example error:
 
 ```bash
-invalid extension check output from \"jaeger\" (JSON object expected)
+invalid extension check output from \"viz\" (JSON object expected)
 ```
 
 Make sure that the extension binary implements `check --output json` which
@@ -1118,7 +1118,7 @@ returns the healthchecks in the
 Example error:
 
 ```bash
-× Linkerd command jaeger exists
+× Linkerd command viz exists
 ```
 
 Make sure that relevant binary exists in `$PATH`.
@@ -1895,88 +1895,6 @@ You should see all your pods here. If they are not:
 
 - Prometheus might be experiencing connectivity issues with the k8s api server.
   Check out the logs and delete the pod to flush any possible transient errors.
-
-## The "linkerd-jaeger" checks {#l5d-jaeger}
-
-These checks only run when the `linkerd-jaeger` extension is installed. This
-check is intended to verify the installation of linkerd-jaeger extension which
-comprises of open-census collector and jaeger components along with
-`jaeger-injector` which injects the specific trace configuration to the proxies.
-
-### √ linkerd-jaeger extension Namespace exists {#l5d-jaeger-ns-exists}
-
-This is the basic check used to verify if the linkerd-jaeger extension namespace
-is installed or not. The extension can be installed by running the following
-command
-
-```bash
-linkerd jaeger install | kubectl apply -f -
-```
-
-The installation can be configured by using the `--set`, `--values`,
-`--set-string` and `--set-file` flags. See
-[Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
-for a full list of configurable fields.
-
-### √ jaeger extension proxies are healthy {#l5d-jaeger-proxy-healthy}
-
-This error indicates that the proxies running in the jaeger extension are not
-healthy. Ensure that linkerd-jaeger has been installed with all of the correct
-setting or re-install as necessary.
-
-### √ jaeger extension proxies are up-to-date {#l5d-jaeger-proxy-cp-version}
-
-This warning indicates the proxies running in the jaeger extension are running
-an old version. We recommend downloading the latest linkerd-jaeger and
-upgrading.
-
-### √ jaeger extension proxies and cli versions match {#l5d-jaeger-proxy-cli-version}
-
-This warning indicates that the proxies running in the jaeger extension are
-running a different version from the Linkerd CLI. We recommend keeping this
-versions in sync by updating either the CLI or linkerd-jaeger as necessary.
-
-### √ jaeger extension pods are injected {#l5d-jaeger-pods-injection}
-
-```bash
-× jaeger extension pods are injected
-    could not find proxy container for jaeger-6f98d5c979-scqlq pod
-    see https://linkerd.io/2/checks/#l5d-jaeger-pods-injections for hints
-```
-
-Ensure all the jaeger pods are injected
-
-```bash
-$ kubectl -n linkerd-jaeger get pods
-NAME                               READY   STATUS      RESTARTS   AGE
-collector-69cc44dfbc-rhpfg         2/2     Running     0          11s
-jaeger-6f98d5c979-scqlq            2/2     Running     0          11s
-jaeger-injector-6c594f5577-cz75h   2/2     Running     0          10s
-```
-
-Make sure that the `proxy-injector` is working correctly by running
-`linkerd check`
-
-### √ jaeger extension pods are running {#l5d-jaeger-pods-running}
-
-```bash
-× jaeger extension pods are running
-    container linkerd-proxy in pod jaeger-59f5595fc7-ttndp is not ready
-    see https://linkerd.io/2/checks/#l5d-jaeger-pods-running for hints
-```
-
-Ensure all the linkerd-jaeger pods are running with 2/2
-
-```bash
-$ kubectl -n linkerd-jaeger get pods
-NAME                               READY   STATUS   RESTARTS   AGE
-jaeger-injector-548684d74b-bcq5h   2/2     Running   0          5s
-collector-69cc44dfbc-wqf6s         2/2     Running   0          5s
-jaeger-6f98d5c979-vs622            2/2     Running   0          5sh
-```
-
-Make sure that the `proxy-injector` is working correctly by running
-`linkerd check`
 
 ## The "linkerd-buoyant" checks {#l5d-buoyant}
 

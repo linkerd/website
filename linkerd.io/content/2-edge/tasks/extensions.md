@@ -8,7 +8,6 @@ to enable additional functionality. By default, the following extensions are
 available:
 
 * [viz](../features/dashboard/): Metrics and visibility features
-* [jaeger](distributed-tracing/): Distributed tracing
 * [multicluster](multicluster/): Cross-cluster routing
 
 But other extensions are also possible. Read on for more!
@@ -25,7 +24,7 @@ example, to install the `viz` extension, you can use:
 linkerd viz install | kubectl apply -f -
 ```
 
-For built-in extensions, such as `viz`, `jaeger`, and `multicluster`, that's
+For built-in extensions, such as `viz` and `multicluster`, that's
 all you need to do. Of course, these extensions can also be installed by with
 Helm by installing that extension's Helm chart.
 
