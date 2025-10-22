@@ -26,8 +26,8 @@ topology that looks like:
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](install/) if you haven't
-  already done this.
+  Follow the [Installing Linkerd Guide](install/) if you haven't already done
+  this.
 
 ## Install a trace collector
 
@@ -61,15 +61,20 @@ helm install \
   jaeger jaegertracing/jaeger
 ```
 
-{{< note >}}
-The Jaeger all-in-one installation is very simple to set up and get running,
-but it is not suitable for a production deployment. Determining what tracing
+{{< warning >}}
+
+The Jaeger all-in-one installation is very simple to set up and get running, but
+it is not suitable for a production deployment. Determining what tracing
 installation is suitable for your environment is beyond the scope of this page.
-{{< /note >}}
+
+{{< /warning >}}
 
 ## Update Linkerd with tracing enabled
 
-There are a few values that need to be set on your Linkerd installation to enable exporting traces and to define where to send those traces. In this case, we'll configure Linkerd to send traces to the Jaeger collector we just installed.
+There are a few values that need to be set on your Linkerd installation to
+enable exporting traces and to define where to send those traces. In this case,
+we'll configure Linkerd to send traces to the Jaeger collector we just
+installed.
 
 If Linkerd was installed with the CLI:
 
@@ -97,11 +102,15 @@ proxy:
         namespace: jaeger-system
 ```
 
-Linkerd can export traces to any collector which supports the OpenTelemetry protocol. See the [OpenTelemetry documentation](https://opentelemetry.io/docs/specs/otel/protocol/) for more information.
+Linkerd can export traces to any collector which supports the OpenTelemetry
+protocol. See the [OpenTelemetry
+documentation](https://opentelemetry.io/docs/specs/otel/protocol/) for more
+information.
 
 {{< note >}}
 
-At present, the `meshIdentity` stanza is mandatory: Linkerd can only export traces to a collector within the mesh.
+At present, the `meshIdentity` stanza is mandatory: Linkerd can only export
+traces to a collector within the mesh.
 
 {{< /note >}}
 
@@ -126,13 +135,15 @@ Unlike most features of a service mesh, distributed tracing requires modifying
 the source of your application. Tracing needs some way to tie incoming requests
 to your application together with outgoing requests to dependent services. To do
 this, some headers are added to each request that contain a unique ID for the
-trace. Linkerd will propagatge both [`w3c`](https://www.w3.org/TR/trace-context/)
-and [`b3`](https://github.com/openzipkin/b3-propagation) formats to tie these
-things together.
+trace. Linkerd will propagatge both
+[`w3c`](https://www.w3.org/TR/trace-context/) and
+[`b3`](https://github.com/openzipkin/b3-propagation) formats to tie these things
+together.
 
 {{< note >}}
 
-If both `w3c` and `b3` headers are present, Linkerd will propagate only the `w3c` headers.
+If both `w3c` and `b3` headers are present, Linkerd will propagate only the
+`w3c` headers.
 
 {{< /note >}}
 
@@ -140,8 +151,8 @@ We've already modified emojivoto to instrument its requests with this
 information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
-addition of a client library to take care of this. Emojivoto uses the OpenTelemetry
-client, but others should be used.
+addition of a client library to take care of this. Emojivoto uses the
+OpenTelemetry client, but others should be used.
 
 To enable tracing in emojivoto, run:
 
@@ -198,10 +209,11 @@ kubectl delete ns jaeger-system
 
 ### I don't see any spans for the proxies
 
-The Linkerd proxy uses the [w3c](https://www.w3.org/TR/trace-context/)
-and [b3](https://github.com/openzipkin/b3-propagation) formats. Some client
-libraries, such as Jaeger, use different formats by default. You'll want to
-configure your client library to use the w3c or b3 format to have the proxies
+The Linkerd proxy prefers to use the [w3c](https://www.w3.org/TR/trace-context/)
+format, while also supporting the
+[b3](https://github.com/openzipkin/b3-propagation) format. Some client
+libraries, such as Jaeger, use different formats by default. We recommend that
+you configure your client library to use the w3c format to have the proxies
 participate in traces.
 
 ## Recommendations
@@ -218,7 +230,7 @@ Distributed tracing systems all rely on services to propagate metadata about the
 current trace from requests that they receive to requests that they send. This
 metadata, called the trace context, is usually encoded in one or more request
 headers. There are many different trace context header formats and while we hope
-that the ecosystem will eventually converge on open standards like [W3C
+that the ecosystem will eventually converge on open standards like [w3c
 tracecontext](https://www.w3.org/TR/trace-context/), we also support the [b3
 format](https://github.com/openzipkin/b3-propagation) today. Being one of the
 earliest widely used formats, it has the widest support, especially among
@@ -239,7 +251,7 @@ headers, it's usually much easier to use a library which does three things:
 
 We recommend using OpenTelemetry in your service and configuring it with:
 
-- [W3C propagation](https://www.w3.org/TR/trace-context/) (this is the
+- [w3c propagation](https://www.w3.org/TR/trace-context/) (this is the
   default)
 - [the OpenTelemetry agent
   exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
