@@ -403,7 +403,7 @@ metadata:
 data:
   trafficRouterPlugins: |-
     - name: "argoproj-labs/gatewayAPI"
-      location: "https://github.com/argoproj-labs/rollouts-plugin-trafficrouter-gatewayapi/releases/download/v0.0.0-rc1/gateway-api-plugin-linux-amd64"
+      location: "https://github.com/argoproj-labs/rollouts-plugin-trafficrouter-gatewayapi/releases/download/v0.2.0/gateway-api-plugin-linux-amd64"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -568,7 +568,7 @@ canary backends by updating the HTTPRoute resource. To watch how this
 configuration changes over the rollout, run:
 
 ```bash
-kubectl -n test get httproute.gateway.networking.k8s.io podinfo -o yaml
+kubectl -n test get httproute.gateway.networking.k8s.io argo-rollouts-http-route -o yaml
 ```
 
 We can also use the Linkerd CLI to observe which pods the traffic is being
