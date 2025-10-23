@@ -276,7 +276,7 @@ image to a new version by running:
 
 ```bash
 kubectl -n test set image deployment/podinfo \
-  podinfod=quay.io/stefanprodan/podinfo:1.7.1
+  podinfod=quay.io/stefanprodan/podinfo:3.3.1
 ```
 
 Any kind of modification to the pod's spec such as updating an environment
@@ -302,7 +302,7 @@ After the update is complete, this picture will go back to looking just like the
 figure from the previous section.
 
 {{< note >}}
-You can toggle the image tag between `1.7.1` and `1.7.0` to start the rollout
+You can toggle the image tag between `3.3.1` and `3.3.0` to start the rollout
 again.
 {{< /note >}}
 
@@ -349,16 +349,17 @@ that looks something like:
 ```bash
 {
   "hostname": "podinfo-primary-74459c7db8-lbtxf",
-  "version": "1.7.0",
+  "version": "3.3.0",
   "revision": "4fc593f42c7cd2e7319c83f6bfd3743c05523883",
-  "color": "blue",
-  "message": "greetings from podinfo v1.7.0",
+  "color": "#34577c",
+  "logo": "https://raw.githubusercontent.com/stefanprodan/podinfo/gh-pages/cuddle_clap.gif",
+  "message": "greetings from podinfo v3.3.0",
   "goos": "linux",
   "goarch": "amd64",
-  "runtime": "go1.11.2",
-  "num_goroutine": "6",
-  "num_cpu": "8"
-}
+  "runtime": "go1.14.2",
+  "num_goroutine": "8",
+  "num_cpu": "14"
+}   
 ```
 
 This response will slowly change as the rollout continues.
@@ -540,7 +541,7 @@ spec:
     spec:
       containers:
         - name: podinfod
-          image: quay.io/stefanprodan/podinfo:1.7.0
+          image: quay.io/stefanprodan/podinfo:3.3.0
           ports:
             - containerPort: 9898
               protocol: TCP
@@ -553,7 +554,7 @@ We can trigger a rollout to a new version of podinfo by running:
 
 ```bash
 kubectl argo rollouts -n test set image rollouts-demo \
-  podinfod=quay.io/stefanprodan/podinfo:1.7.1
+  podinfod=quay.io/stefanprodan/podinfo:3.3.1
 ```
 
 We can watch the rollout progress by running:
