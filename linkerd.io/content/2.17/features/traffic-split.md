@@ -3,6 +3,15 @@ title: Traffic Split (canaries, blue/green deploys)
 description: Linkerd can dynamically send a portion of traffic to different services.
 ---
 
+{{< warning >}}
+
+TrafficSplit functionality and the `linkerd-smi` extension are deprecated and
+will be removed in a future release. If you are currently using this
+functionality, we recommend migrating to [dynamic request
+routing](request-routing/), which does not require the SMI extension.
+
+{{< /warning >}}
+
 Linkerd's traffic split functionality allows you to dynamically shift arbitrary
 portions of traffic destined for a Kubernetes service to a different destination
 service. This feature can be used to implement sophisticated rollout strategies
@@ -11,12 +20,6 @@ and
 [blue/green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html),
 for example, by slowly easing traffic off of an older version of a service and
 onto a newer version.
-
-{{< note >}}
-This feature will eventually be supplanted by the newer [dynamic request
-routing](request-routing/) capabilities, which does not require the SMI
-extension.
-{{< /note >}}
 
 {{< note >}}
 TrafficSplits cannot be used with headless services. Linkerd reads

@@ -279,6 +279,7 @@ utility, as instructed
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
 ```sh
+LINKERD_VERSION=$(linkerd version --client --short)
 kubectl create ns linkerd
 kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --cert sample-trust.crt \
@@ -286,7 +287,7 @@ kubectl -n linkerd create secret tls linkerd-trust-anchor \
   --dry-run=client -oyaml | \
 kubeseal --controller-name=sealed-secrets -oyaml - | \
 kubectl patch -f - \
-  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli stable-2.12.0"}}}}}' \
+  -p '{"spec": {"template": {"type":"kubernetes.io/tls", "metadata": {"labels": {"linkerd.io/control-plane-component":"identity", "linkerd.io/control-plane-ns":"linkerd"}, "annotations": {"linkerd.io/created-by":"linkerd/cli '"${LINKERD_VERSION}"'"}}}}}' \
   --dry-run=client \
   --type=merge \
   --local -oyaml > gitops/resources/linkerd/trust-anchor.yaml
@@ -468,8 +469,6 @@ done
 ![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
 
 ### Upgrade Linkerd to 2.12.1
-
-(Assuming 2.12.1 has already been released ;-) )
 
 Use your editor to change the `spec.source.targetRevision` field to `1.9.3`
 (that's the Helm chart version corresponding to linkerd stable-2.12.1) in the

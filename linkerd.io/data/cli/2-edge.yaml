@@ -110,10 +110,13 @@ AnnotationsReference:
     before all open connections have completed, the proxy will terminate forcefully,
     closing any remaining connections.
   Name: config.linkerd.io/shutdown-grace-period
-- Description: Enable KEP-753 native sidecars. This is an experimental feature. It
-    requires Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not
-    be used.
+- Description: Enable KEP-753 native sidecars. This is a beta feature. It requires
+    Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not be used.
+    Deprecated in favor of config.beta.linkerd.io/proxy-enable-native-sidecar
   Name: config.alpha.linkerd.io/proxy-enable-native-sidecar
+- Description: Enable KEP-753 native sidecars. This is a beta feature. It requires
+    Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not be used.
+  Name: config.beta.linkerd.io/proxy-enable-native-sidecar
 CLIReference:
 - Description: List authorizations for a resource.
   Example: ""
@@ -668,15 +671,6 @@ CLIReference:
     Shorthand: ""
     Usage: Set custom cluster domain
   - DefaultValue: ""
-    Name: control-plane-tracing
-    Shorthand: ""
-    Usage: Enables Control Plane Tracing with the defaults
-  - DefaultValue: ""
-    Name: control-plane-tracing-namespace
-    Shorthand: ""
-    Usage: |
-      Send control plane traces to Linkerd-Jaeger extension in this namespace
-  - DefaultValue: ""
     Name: control-port
     Shorthand: ""
     Usage: Proxy port to use for control
@@ -1001,250 +995,6 @@ CLIReference:
       specify values in a YAML file or a URL (can specify multiple)
   SeeAlso: null
   Synopsis: Output Kubernetes configs to install Linkerd CNI
-- Description: |-
-    Check the Jaeger extension for potential problems.
-
-    The check command will perform a series of checks to validate that the Jaeger
-    extension is configured correctly. If the command encounters a failure it will
-    print additional information about the failure and exit with a non-zero exit
-    code.
-  Example: |2-
-      # Check that the Jaeger extension is up and running
-      linkerd jaeger check
-  InheritedOptions: null
-  Name: jaeger check
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for check
-  - DefaultValue: ""
-    Name: namespace
-    Shorthand: "n"
-    Usage: |
-      Namespace to use for --proxy checks (default: all namespaces)
-  - DefaultValue: ""
-    Name: output
-    Shorthand: o
-    Usage: 'Output format. One of: table, json, short'
-  - DefaultValue: ""
-    Name: proxy
-    Shorthand: ""
-    Usage: |
-      Also run data-plane checks, to determine if the data plane is healthy
-  - DefaultValue: ""
-    Name: wait
-    Shorthand: ""
-    Usage: Maximum allowed time for all tests to pass
-  SeeAlso: null
-  Synopsis: Check the Jaeger extension for potential problems
-- Description: ""
-  Example: ""
-  InheritedOptions: null
-  Name: jaeger dashboard
-  Options:
-  - DefaultValue: ""
-    Name: address
-    Shorthand: ""
-    Usage: The address at which to serve requests
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for dashboard
-  - DefaultValue: ""
-    Name: port
-    Shorthand: p
-    Usage: |
-      The local port on which to serve requests (when set to 0, a random port will be used)
-  - DefaultValue: ""
-    Name: show-url
-    Shorthand: ""
-    Usage: show only URL in the CLI, and do not open the browser
-  - DefaultValue: ""
-    Name: wait
-    Shorthand: ""
-    Usage: |
-      Wait for dashboard to become available if it's not available when the command is run
-  SeeAlso: null
-  Synopsis: Open the Jaeger extension dashboard in a web browser
-- Description: Output Kubernetes resources to install jaeger extension.
-  Example: "  # Default install.\n  linkerd jaeger install | kubectl apply -f -\n
-    \ # Install Jaeger extension into a non-default namespace.\n  linkerd jaeger install
-    --namespace custom | kubectl apply -f -\n\nThe installation can be configured
-    by using the --set, --values, --set-string and --set-file flags.\nA full list
-    of configurable values can be found at https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md\n
-    \ "
-  InheritedOptions: null
-  Name: jaeger install
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for install
-  - DefaultValue: ""
-    Name: ignore-cluster
-    Shorthand: ""
-    Usage: |
-      Ignore the current Kubernetes cluster when checking for existing cluster configuration (default false)
-  - DefaultValue: ""
-    Name: output
-    Shorthand: o
-    Usage: 'Output format. One of: json|yaml'
-  - DefaultValue: ""
-    Name: registry
-    Shorthand: ""
-    Usage: |
-      Docker registry to pull jaeger-webhook image from ($LINKERD_DOCKER_REGISTRY)
-  - DefaultValue: ""
-    Name: set
-    Shorthand: ""
-    Usage: |
-      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: set-file
-    Shorthand: ""
-    Usage: |
-      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
-  - DefaultValue: ""
-    Name: set-string
-    Shorthand: ""
-    Usage: |
-      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: skip-checks
-    Shorthand: ""
-    Usage: Skip checks for linkerd core control-plane existence
-  - DefaultValue: ""
-    Name: values
-    Shorthand: f
-    Usage: |
-      specify values in a YAML file or a URL (can specify multiple)
-  - DefaultValue: ""
-    Name: wait
-    Shorthand: ""
-    Usage: Wait for core control-plane components to be available
-  SeeAlso: null
-  Synopsis: Output Kubernetes resources to install jaeger extension
-- Description: ""
-  Example: ""
-  InheritedOptions: null
-  Name: jaeger list
-  Options:
-  - DefaultValue: ""
-    Name: all-namespaces
-    Shorthand: A
-    Usage: If present, list pods across all namespaces
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for list
-  - DefaultValue: ""
-    Name: namespace
-    Shorthand: "n"
-    Usage: The namespace to list pods in
-  SeeAlso: null
-  Synopsis: Lists which pods have tracing enabled
-- Description: |
-    Output extraneous Kubernetes resources in the linkerd-jaeger extension.
-  Example: "  # Prune extraneous resources.\n  linkerd jaeger prune | kubectl delete
-    -f -\n  "
-  InheritedOptions: null
-  Name: jaeger prune
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for prune
-  - DefaultValue: ""
-    Name: output
-    Shorthand: o
-    Usage: 'Output format. One of: json|yaml'
-  - DefaultValue: ""
-    Name: set
-    Shorthand: ""
-    Usage: |
-      set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: set-file
-    Shorthand: ""
-    Usage: |
-      set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
-  - DefaultValue: ""
-    Name: set-string
-    Shorthand: ""
-    Usage: |
-      set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
-  - DefaultValue: ""
-    Name: values
-    Shorthand: f
-    Usage: |
-      specify values in a YAML file or a URL (can specify multiple)
-  - DefaultValue: ""
-    Name: wait
-    Shorthand: ""
-    Usage: Wait for extension components to be available
-  SeeAlso: null
-  Synopsis: |
-    Output extraneous Kubernetes resources in the linkerd-jaeger extension
-- Description: |-
-    Output Kubernetes resources to uninstall the Linkerd-jaeger extension.
-
-    This command provides all Kubernetes namespace-scoped and cluster-scoped resources (e.g services, deployments, RBACs, etc.) necessary to uninstall the Linkerd-jaeger extension.
-  Example: linkerd uninstall | kubectl delete -f -
-  InheritedOptions: null
-  Name: jaeger uninstall
-  Options:
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for uninstall
-  - DefaultValue: ""
-    Name: output
-    Shorthand: o
-    Usage: 'Output format. One of: json|yaml'
-  SeeAlso: null
-  Synopsis: |
-    Output Kubernetes resources to uninstall the Linkerd-jaeger extension
-- Description: jaeger manages the jaeger extension of Linkerd service mesh.
-  Example: ""
-  InheritedOptions: null
-  Name: jaeger
-  Options:
-  - DefaultValue: ""
-    Name: api-addr
-    Shorthand: ""
-    Usage: |
-      Override kubeconfig and communicate directly with the control plane at host:port (mostly for testing)
-  - DefaultValue: ""
-    Name: as
-    Shorthand: ""
-    Usage: Username to impersonate for Kubernetes operations
-  - DefaultValue: ""
-    Name: as-group
-    Shorthand: ""
-    Usage: Group to impersonate for Kubernetes operations
-  - DefaultValue: ""
-    Name: context
-    Shorthand: ""
-    Usage: Name of the kubeconfig context to use
-  - DefaultValue: ""
-    Name: help
-    Shorthand: h
-    Usage: help for jaeger
-  - DefaultValue: ""
-    Name: kubeconfig
-    Shorthand: ""
-    Usage: Path to the kubeconfig file to use for CLI requests
-  - DefaultValue: ""
-    Name: linkerd-namespace
-    Shorthand: L
-    Usage: Namespace in which Linkerd is installed
-  - DefaultValue: ""
-    Name: verbose
-    Shorthand: ""
-    Usage: Turn on debug logging
-  SeeAlso: null
-  Synopsis: jaeger manages the jaeger extension of Linkerd service mesh
 - Description: ""
   Example: ""
   InheritedOptions: null
@@ -1704,15 +1454,6 @@ CLIReference:
     Name: admin-port
     Shorthand: ""
     Usage: Proxy port to serve metrics on
-  - DefaultValue: ""
-    Name: control-plane-tracing
-    Shorthand: ""
-    Usage: Enables Control Plane Tracing with the defaults
-  - DefaultValue: ""
-    Name: control-plane-tracing-namespace
-    Shorthand: ""
-    Usage: |
-      Send control plane traces to Linkerd-Jaeger extension in this namespace
   - DefaultValue: ""
     Name: control-port
     Shorthand: ""
