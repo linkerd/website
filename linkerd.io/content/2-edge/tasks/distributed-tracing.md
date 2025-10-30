@@ -3,14 +3,16 @@ title: Distributed tracing with Linkerd
 description: Use Linkerd to help instrument your application with distributed tracing.
 ---
 
-Using distributed tracing in practice can be complex, for a high level
-explanation of what you get and how it is done, we've assembled a [list of
+Using distributed tracing in practice can be complex. Linkerd can solve some of
+these challenges, but is not a silver bullet. For a high level explanation of
+how a service mesh can help with distributed tracing, see [Distributed tracing
+in the service mesh: four
 myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
 
-This guide will walk you through configuring and enabling tracing for
-[emojivoto](../getting-started/#step-5-install-the-demo-app). Jump to the end
-for some recommendations on the best way to make use of distributed tracing with
-Linkerd.
+This guide will walk you through configuring and enabling tracing for the
+[emojivoto](../getting-started/#step-5-install-the-demo-app) sample application.
+Jump to the end for some recommendations on the best way to make use of
+distributed tracing with Linkerd.
 
 To use distributed tracing, you'll need to:
 
@@ -19,25 +21,28 @@ To use distributed tracing, you'll need to:
 - Modify your application to emit spans.
 
 In the case of emojivoto, once all these steps are complete there will be a
-topology that looks like:
+topology that looks like this:
 
 ![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
 
-## Prerequisites
-
-- To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](install/) if you haven't already done
-  this.
+{{< warning >}}
+As of Linkerd 2.19, the Linkerd-jaeger extension has been deprecated and is no
+longer available. This guide instead describes how to set up a modern
+distributed tracing infrastructure using Jaeger, without this extension. See our
+[Guide to migrating away from the Linkerd-jaeger
+extension](jaeger-extension-migration).
+{{< /warning >}}
 
 ## Install a trace collector
 
-The first step of getting distributed tracing setup is installing a way to
-collect, store, and view traces. The collector consumes spans emitted from the
-mesh and your applications and sends them to the viewer which stores them and
-serves a dashboard to view them.
+The first step to a distributed tracing setup is installing a way to collect,
+store, and view traces. The collector consumes spans emitted from the mesh and
+your applications and sends them to the viewer which stores them and serves a
+dashboard to view them.
 
-Jaeger includes a collector, storage, and trace viewer in its all-in-one
-installation, so we'll be using that for our examples.
+One common tool to accomplish this is [Jaeger](https://www.jaegertracing.io/),
+which includes a collector, storage, and trace viewer in its all-in-one
+installation  We'll use that for our examples.
 
 To install Jaeger using Helm, first add the Jaeger Helm repository:
 
@@ -65,7 +70,7 @@ helm install \
 
 The Jaeger all-in-one installation is very simple to set up and get running, but
 it is not suitable for a production deployment. Determining what tracing
-installation is suitable for your environment is beyond the scope of this page.
+installation is suitable for your environment is beyond the scope of this doc.
 
 {{< /warning >}}
 
@@ -131,28 +136,25 @@ kubectl -n emojivoto rollout status deploy/web
 
 ## Modify the application
 
-Unlike most features of a service mesh, distributed tracing requires modifying
-the source of your application. Tracing needs some way to tie incoming requests
-to your application together with outgoing requests to dependent services. To do
-this, some headers are added to each request that contain a unique ID for the
-trace. Linkerd will propagatge both
-[`w3c`](https://www.w3.org/TR/trace-context/) and
+Unlike most features of a service mesh, distributed tracing requires some
+cooperation from the underlying application: it must propagate certain headers
+from inbound requests to any corresponding outbound requests.
+
+This is because distributed tracing needs a way to tie incoming requests to your
+application together with outgoing requests to dependent services. To do this,
+headers are added to each request that contain a unique ID for the trace.
+Linkerd will propagate both [`w3c`](https://www.w3.org/TR/trace-context/) and
 [`b3`](https://github.com/openzipkin/b3-propagation) formats to tie these things
 together.
 
 {{< note >}}
-
 If both `w3c` and `b3` headers are present, Linkerd will propagate only the
 `w3c` headers.
-
 {{< /note >}}
 
 We've already modified emojivoto to instrument its requests with this
-information, this
-[commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
-shows how this was done. For most programming languages, it simply requires the
-addition of a client library to take care of this. (Emojivoto uses the
-OpenTelemetry client, but others could be used.)
+information (see [this
+commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)).
 
 To enable tracing in emojivoto, run:
 
@@ -188,7 +190,7 @@ the spans for every proxy!
 
 ![Search](/docs/images/tracing/example-trace.png "Search")
 
-There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
+Note the large number of `linkerd-proxy` spans in the output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
 received by the server and then issued by the client. For a single request that
 goes between two meshed pods, there will be a total of 4 spans. Two will be on
@@ -206,9 +208,9 @@ linkerd upgrade --set proxy.tracing=null | kubectl apply -f -
 kubectl delete ns jaeger-system
 ```
 
-## Troubleshooting
+## Notes
 
-### I don't see any spans for the proxies
+### If you don't see any spans for the proxies
 
 The Linkerd proxy prefers to use the [w3c](https://www.w3.org/TR/trace-context/)
 format, while also supporting the
@@ -216,8 +218,6 @@ format, while also supporting the
 libraries, such as Jaeger, use different formats by default. We recommend that
 you configure your client library to use the w3c format to have the proxies
 participate in traces.
-
-## Recommendations
 
 ### Ingress
 
@@ -227,60 +227,31 @@ if that trace should be sampled or not.  Having the ingress make all sampling
 decisions ensures that either an entire trace is sampled or none of it is, and
 avoids creating "partial traces".
 
-Distributed tracing systems all rely on services to propagate metadata about the
-current trace from requests that they receive to requests that they send. This
-metadata, called the trace context, is usually encoded in one or more request
-headers. There are many different trace context header formats and while we hope
-that the ecosystem will eventually converge on open standards like [w3c
-tracecontext](https://www.w3.org/TR/trace-context/), we also support the [b3
-format](https://github.com/openzipkin/b3-propagation) today. Being one of the
-earliest widely used formats, it has the widest support, especially among
-ingresses like Nginx.
-
 This reference architecture uses a traffic generator called `vote-bot` instead
 of an ingress to create the root span of each trace.
 
-### Client Library
+### Client libraries
 
-While it is possible for services to manually propagate trace propagation
-headers, it's usually much easier to use a library which does three things:
+While it is possible for applications to manually propagate trace propagation
+headers, it's usually much easier to use a library. Typical distributed tracing
+libraries do three things:
 
-- Propagates the trace context from incoming request headers to outgoing request
+- Propagate the trace context from incoming request headers to outgoing request
   headers
-- Modifies the trace context (i.e. starts a new span)
-- Transmits this data to a trace collector
+- Modify the trace context (i.e. starts a new span)
+- Transmit this data to a trace collector
 
-We recommend using OpenTelemetry in your service and configuring it with:
+For example, the OpenTelemetry agent exporter will export trace data to the
+OpenTelemetry collector over a gRPC API. The details of how to configure
+OpenTelemetry will vary language by language, but there are [guides for many
+popular languages](https://opentelemetry.io/docs/languages/).
 
-- [w3c propagation](https://www.w3.org/TR/trace-context/) (this is the
-  default)
-- [the OpenTelemetry agent
-  exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
+### Jaeger vs alternatives
 
-The OpenTelemetry agent exporter will export trace data to the OpenTelemetry
-collector over a gRPC API. The details of how to configure OpenTelemetry will
-vary language by language, but there are [guides for many popular
-languages](https://opentelemetry.io/docs/languages/).
+In this guide, we used Jaeger, one of the most widely used tracing backends.
+However, any backend supported by OpenTelemetry can be used.
 
-It is possible to use many other tracing client libraries as well. Just make
-sure the b3 propagation format is being used and the client library can export
-its spans in a format the collector has been configured to receive.
-
-## Collector: OpenTelemetry
-
-The OpenTelemetry collector receives trace data from the OpenTelemetry agent
-exporter and potentially does translation and filtering before sending that data
-to Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector
-gives us a lot of flexibility: we can switch to any backend that OpenTelemetry
-supports without needing to interrupt the application.
-
-## Backend: Jaeger
-
-Jaeger is one of the most widely used tracing backends and for good reason: it
-is easy to use and does a great job of visualizing traces. However, any backend
-supported by OpenTelemetry can be used instead.
-
-## Linkerd
+## Proxy header propagation
 
 If your application is injected with Linkerd, the Linkerd proxy will participate
 in the traces and will also emit trace data to the trace collector. This
