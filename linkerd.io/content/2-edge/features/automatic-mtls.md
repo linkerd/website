@@ -35,7 +35,7 @@ no extra work on your part. (And because the Linkerd control plane also runs
 on the data plane, this means that communication between Linkerd's control
 plane components are also automatically secured via mTLS.)
 
-See [Caveats and future work](#caveats-and-future-work) below for some details.
+See [Caveats](#caveats) below for details.
 
 ## What is mTLS?
 
