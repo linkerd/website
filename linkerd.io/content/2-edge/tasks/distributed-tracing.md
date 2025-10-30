@@ -197,7 +197,8 @@ destination side as the request is received by the remote proxy.
 
 ## Cleanup
 
-To clean up, you'll uninstall emojivoto, turn Linkerd tracing off, and finally uninstall Jaeger:
+To clean up, you'll uninstall emojivoto, turn Linkerd tracing off, and finally
+uninstall Jaeger:
 
 ```bash
 kubectl delete ns emojivoto
