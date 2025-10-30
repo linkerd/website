@@ -256,9 +256,9 @@ We recommend using OpenTelemetry in your service and configuring it with:
 - [the OpenTelemetry agent
   exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
 
-The OpenTelemetry agent exporter will export trace data to the OpenTelemetry collector
-over a gRPC API. The details of how to configure OpenTelemetry will vary language
-by language, but there are [guides for many popular
+The OpenTelemetry agent exporter will export trace data to the OpenTelemetry
+collector over a gRPC API. The details of how to configure OpenTelemetry will
+vary language by language, but there are [guides for many popular
 languages](https://opentelemetry.io/docs/languages/).
 
 It is possible to use many other tracing client libraries as well. Just make
@@ -267,11 +267,11 @@ its spans in a format the collector has been configured to receive.
 
 ## Collector: OpenTelemetry
 
-The OpenTelemetry collector receives trace data from the OpenTelemetry agent exporter
-and potentially does translation and filtering before sending that data to
-Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector gives
-us a lot of flexibility: we can switch to any backend that OpenTelemetry supports
-without needing to interrupt the application.
+The OpenTelemetry collector receives trace data from the OpenTelemetry agent
+exporter and potentially does translation and filtering before sending that data
+to Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector
+gives us a lot of flexibility: we can switch to any backend that OpenTelemetry
+supports without needing to interrupt the application.
 
 ## Backend: Jaeger
 
