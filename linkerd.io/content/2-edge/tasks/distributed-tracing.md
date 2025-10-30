@@ -151,8 +151,8 @@ We've already modified emojivoto to instrument its requests with this
 information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
-addition of a client library to take care of this. Emojivoto uses the
-OpenTelemetry client, but others should be used.
+addition of a client library to take care of this. (Emojivoto uses the
+OpenTelemetry client, but others could be used.)
 
 To enable tracing in emojivoto, run:
 
