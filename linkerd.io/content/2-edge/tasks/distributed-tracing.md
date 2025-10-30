@@ -15,7 +15,7 @@ Linkerd.
 To use distributed tracing, you'll need to:
 
 - Install a trace collector and viewer on your cluster.
-- Update Linkerd with tracing enabled.
+- Update Linkerd to enable tracing.
 - Modify your application to emit spans.
 
 In the case of emojivoto, once all these steps are complete there will be a
