@@ -35,7 +35,7 @@ no extra work on your part. (And because the Linkerd control plane also runs
 on the data plane, this means that communication between Linkerd's control
 plane components are also automatically secured via mTLS.)
 
-See [Caveats and future work](#caveats-and-future-work) below for some details.
+See [Caveats](#caveats) below for details.
 
 ## What is mTLS?
 
@@ -136,19 +136,18 @@ by the trust anchor and contains the expected identity.
 
 ## TLS protocol parameters
 
-Linkerd currently uses the following TLS protocol parameters for mTLS
-connections, although they may change in future versions:
+Linkerd currently uses the following TLS configuration for all meshed
+communication (i.e. where both sides of the connection have a Linkerd proxy):
 
 * TLS version 1.3
-* Cipher suite `TLS_CHACHA20_POLY1305_SHA256` as specified in [RFC
-  8446](https://www.rfc-editor.org/rfc/rfc8446#section-9.1).
+* Key exchange via hybrid ML-KEM-768 + X25519
+* AES_128_GCM ciphersuite
+* Pod identity is derived from a [bound ServiceAccount
+  token](/2021/12/28/using-kubernetess-new-bound-service-account-tokens-for-secure-workload-identity/).
 
-## Caveats and future work
+## Caveats
 
-* Linkerd does not *require* mTLS unless [authorization policies](server-policy/)
-  are configured.
-
-* Ideally, the ServiceAccount token that Linkerd uses would not be shared with
-  other potential uses of that token. In future Kubernetes releases, Kubernetes
-  will support audience/time-bound ServiceAccount tokens, and Linkerd will use
-  those instead.
+While Linkerd requires mTLS for all meshed communication (i.e. where both sides
+of the connection have a Linkerd proxy), by default Linkerd will accept
+plaintext traffic from non-meshed sources. This can be disabled with
+[authorization policies](server-policy/).
