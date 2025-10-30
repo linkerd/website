@@ -26,10 +26,9 @@ packages, not just Linkerd, may provide the Gateway API on your cluster, but
 only some Gateway API *versions* are compatible with Linkerd.
 
 Linkerd requires that the Gateway API be installed on your cluster before
-Linkerd can be installed. In practice, there are three basic approaches to
+Linkerd can be installed. In practice, there are two basic approaches to
 managing the Gateway API with Linkerd. The Gateway API may already be installed
-on your cluster, you can install the Gateway API yourself, or you can have
-Linkerd install the Gateway API for you.
+on your cluster, or you can install the Gateway API yourself.
 
 ### Option 1: The Gateway API is already installed {#gateway-api-compatibility}
 
@@ -45,10 +44,11 @@ If this command returns Not Found error, the Gateway API is not installed.
 Otherwise it will return the Gateway API version number. Check that version
 against the compatibility table:
 
-| Linkerd versions | Gateway API version compatibilty | HTTPRoute version | gRPC version |
-| ---------------- | -------------------------------- | ----------------- | ------------ |
-| 2.15 - 2.17      | 0.7 - 1.1.1                      | v1beta1           | v1alpha2     |
-| 2.18             | 1.1.1 - 1.2.1                    | v1                | v1           |
+| Linkerd versions | Gateway API version compatibility | HTTPRoute version | gRPC version |
+| ---------------- | --------------------------------- | ----------------- | ------------ |
+| 2.15 - 2.17      | 0.7 - 1.1.1                       | v1beta1           | v1alpha2     |
+| 2.18             | 1.1.1 - 1.2.1                     | v1                | v1           |
+| 2.19             | 1.1.1 - 1.4.0                     | v1                | v1           |
 
 {{< note >}}
 
@@ -60,10 +60,7 @@ for more information.
 {{< /note >}}
 
 If the Gateway API is installed at a compatible version, you can go ahead and
-install Linkerd as normal. Note that if you are using Helm to install, you must
-set `--set installGatewayAPI=false` or specify this in your `values.yml` when
-installing the `linkerd-crds` Helm chart. This prevents Linkerd from attempting
-to override your existing installation of the Gateway API
+install Linkerd as normal.
 
 {{< warning >}}
 Running Linkerd with an incompatible version of the Gateway API
@@ -87,22 +84,6 @@ the latest `Standard` channel release of Gateway API.
 
 Once a compatible version of the Gateway API is installed, you can proceed with
 the Linkerd installation as above.
-
-### Option 3: Have Linkerd install the Gateway API
-
-If the Gateway API is not already installed on your cluster, you may have
-Linkerd install it bundled with Linkerd's CRDs by setting
-`--set installGatewayAPI=true` or specifying this in your `values.yml`. This
-applies to the `linkerd install --crds` command or when installing the
-`linkerd-crds` Helm chart.
-
-Note that if Linkerd installs the Gateway API like this, then the Gateway API
-will also be removed if Linkerd is uninstalled.
-
-| Linkerd versions | Gateway API version installed |
-| ---------------- | ----------------------------- |
-| 2.15 - 2.17      | 0.7                           |
-| 2.18             | 1.1.1                         |
 
 ## Precursors to Gateway API-based configuration
 
