@@ -140,8 +140,8 @@ Linkerd currently uses the following TLS configuration for all meshed
 communication (i.e. where both sides of the connection have a Linkerd proxy):
 
 * TLS version 1.3
-* Key signing via hybrid ML-KEM-768 + X25519
-* AES\_256\_GCM cyphersuite
+* Key exchange via hybrid ML-KEM-768 + X25519
+* AES_128_GCM ciphersuite
 * Pod identity is derived from a [bound ServiceAccount
   token](/2021/12/28/using-kubernetess-new-bound-service-account-tokens-for-secure-workload-identity/).
 
