@@ -1,23 +1,21 @@
 ---
-title: Migrating from the Linkerd-jaeger extension
-description: A guide on how to use the most modern version tracing in Linkerd.
+title: Migrating away from the Linkerd-jaeger extension
+description: Move from the deprecated Linkerd-jaeger extension to a modern distributed tracing setup.
 ---
 
 Starting with the Linkerd 2.19 release, the Linkerd-jaeger extension will no
 longer receive updates. It will continue to work with the Linkerd 2.19 release
-and associated edge, but the extension is now unmaintained and may stop working
-in a future Linkerd release without warning.
+and associated edge releases, but the extension is now unmaintained and may stop
+working in a future Linkerd release.
 
 ## Migrating away from the extension
 
 We recommend migrating away from the Linkerd-jaeger extension entirely and
-install dedicated tracing infrastructure on your cluster instead. We provide a
-[guide for installing a basic tracing setup](distributed-tracing) with
-Linkerd.
+install dedicated tracing infrastructure on your cluster instead, e.g. by
+following our [guide to distributed tracing with Linkerd](distributed-tracing).
 
 Once you have the tracing infrastructure inside your cluster that is not managed
-by the Linkerd-jaeger extension, you can remove the extension safely from your
-cluster by running:
+by the extension, you can remove it safely from your cluster by running:
 
 ```bash
 kubectl delete ns linkerd-jaeger
@@ -27,10 +25,11 @@ Then, restart all meshed pods.
 
 ## Using the Linkerd-jaeger trace collector
 
-You may also continue to use the tracing collector and Jaeger instance provided
-by the Linkerd. We do not recommend this as the tracing collector and Jaeger
-used by the extension are very old versions, but these will continue to work
-with new versions of Linkerd for the foreseeable future.
+If you already rely on the tracing collector and Jaeger instance installed by
+the extension, you may continue to use it as a temporary measure. Note that the
+tracing collector and Jaeger used by the extension are very old versions, but
+should continue to work with newer versions of Linkerd for the foreseeable
+future.
 
 First, in your Linkerd-jaeger installation, set the following values:
 
@@ -40,10 +39,10 @@ webhook:
 ```
 
 {{< note >}}
-The most recent versions of the Linkerd CLI no longer have the
-`linkerd jaeger` commands, which is one of the reasons we recommend against
-keeping the extension in your cluster. This guide assumes that you manage your
-Linkerd-jaeger installation through Helm or another similar mechanism.
+The most recent versions of the Linkerd CLI no longer have the `linkerd jaeger`
+commands. This guide assumes that you manage your Linkerd-jaeger installation
+through Helm or another similar mechanism. If necessary, you can use an earlier
+version of the CLI with these commands.
 {{< /note >}}
 
 Then, in your Linkerd control plane installation, set the following values:
@@ -68,4 +67,4 @@ config. See our [guide on distributed tracing](distributed-tracing) for more
 information on how to set these values.
 {{< /note >}}
 
-Then, restart all meshed pods.
+Finally, restart all meshed pods.
