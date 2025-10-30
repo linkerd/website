@@ -69,7 +69,7 @@ installation is suitable for your environment is beyond the scope of this page.
 
 {{< /warning >}}
 
-## Update Linkerd with tracing enabled
+## Update Linkerd to enable tracing
 
 There are a few values that need to be set on your Linkerd installation to
 enable exporting traces and to define where to send those traces. In this case,
