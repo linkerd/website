@@ -34,9 +34,7 @@ later required Kubernetes 1.17 as shown in the table above.
 
 ## Edge Releases
 
-{{< keyval >}}
-| Linkerd Version | Minimum Kubernetes Version | Maximum Kubernetes Version |
-|-----------------|----------------------------|----------------------------|
-| `edge-22.10.1` - `edge-23.12.1` | `1.21`     | `1.29`                     |
-| `edge-23.12.2` and newer        | `1.22`     | `1.29`                     |
-{{< /keyval >}}
+Unless otherwise noted in the release notes, edge releases support all versions
+of Kubernetes which are readily available on major cloud providers at the time
+of release. In other words, support is a function of "can the Linkerd
+maintainers easily get access to a specific Kubernetes version for testing".
