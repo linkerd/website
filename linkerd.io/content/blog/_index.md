@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2025/1030-announcing-linkerd-2.19
     - /blog/2025/1020-hands-off-linkerd-certificate-rotation
-    - /blog/2025/0909-linkerd-with-opentelemetry
 ---
