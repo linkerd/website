@@ -14,7 +14,8 @@ Linkerd.
 
 To use distributed tracing, you'll need to:
 
-- Install the Linkerd-Jaeger extension.
+- Install a trace collector and viewer on your cluster.
+- Update Linkerd to enable tracing.
 - Modify your application to emit spans.
 
 In the case of emojivoto, once all these steps are complete there will be a
@@ -25,39 +26,93 @@ topology that looks like:
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](install/) if you haven't
-  already done this.
+  Follow the [Installing Linkerd Guide](install/) if you haven't already done
+  this.
 
-## Install the Linkerd-Jaeger extension
+## Install a trace collector
 
-The first step of getting distributed tracing setup is installing the
-Linkerd-Jaeger extension onto your cluster. This extension consists of a
-collector, a Jaeger backend, and a Jaeger-injector. The collector consumes spans
-emitted from the mesh and your applications and sends them to the Jaeger backend
-which stores them and serves a dashboard to view them. The Jaeger-injector is
-responsible for configuring the Linkerd proxies to emit spans.
+The first step of getting distributed tracing setup is installing a way to
+collect, store, and view traces. The collector consumes spans emitted from the
+mesh and your applications and sends them to the viewer which stores them and
+serves a dashboard to view them.
 
-To install the Linkerd-Jaeger extension, run the command:
+Jaeger includes a collector, storage, and trace viewer in its all-in-one
+installation, so we'll be using that for our examples.
+
+To install Jaeger using Helm, first add the Jaeger Helm repository:
 
 ```bash
-linkerd jaeger install | kubectl apply -f -
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 ```
+
+Then, install the Jaeger Helm chart:
+
+```bash
+helm install \
+  --wait \
+  --namespace jaeger-system \
+  --create-namespace \
+  --set allInOne.enabled=true \
+  --set storage.type=memory \
+  --set agent.enabled=false \
+  --set collector.enabled=false \
+  --set query.enabled=false \
+  --set provisionDataStore.cassandra=false \
+  jaeger jaegertracing/jaeger
+```
+
+{{< warning >}}
+
+The Jaeger all-in-one installation is very simple to set up and get running, but
+it is not suitable for a production deployment. Determining what tracing
+installation is suitable for your environment is beyond the scope of this page.
+
+{{< /warning >}}
+
+## Update Linkerd to enable tracing
+
+There are a few values that need to be set on your Linkerd installation to
+enable exporting traces and to define where to send those traces. In this case,
+we'll configure Linkerd to send traces to the Jaeger collector we just
+installed.
+
+If Linkerd was installed with the CLI:
+
+```bash
+linkerd upgrade \
+  --set proxy.tracing.enabled=true \
+  --set proxy.tracing.collector.endpoint=jaeger-collector.jaeger-system:4317 \
+  --setproxy.tracing.collector.meshIdentity.serviceAccountName=jaeger \
+  --setproxy.tracing.collector.meshIdentity.namespace=jaeger-system \
+  | kubectl apply -f -
+```
+
+Alternatively, if Linkerd was installed via Helm, add the following to the Helm
+values for Linkerd:
+
+```yaml
+# values.yaml
+proxy:
+  tracing:
+    enabled: true
+    collector:
+      endpoint: jaeger-collector.jaeger-system:4317
+      meshIdentity:
+        serviceAccountName: jaeger
+        namespace: jaeger-system
+```
+
+Linkerd can export traces to any collector which supports the OpenTelemetry
+protocol. See the [OpenTelemetry
+documentation](https://opentelemetry.io/docs/specs/otel/protocol/) for more
+information.
 
 {{< note >}}
-The Linkerd-Jaeger extension currently configures proxies to export traces
-with the OpenTelemetry protocol by default. OpenCensus is available, but is
-[sunset and no longer maintained](https://opentelemetry.io/blog/2023/sunsetting-opencensus/).
 
-We consider OpenCensus support in Linkerd to be deprecated and we recommend that
-users utilizing OpenCensus migrate to OpenTelemetry.
+At present, the `meshIdentity` stanza is mandatory: Linkerd can only export
+traces to a collector within the mesh.
+
 {{< /note >}}
-
-You can verify that the Linkerd-Jaeger extension was installed correctly by
-running:
-
-```bash
-linkerd jaeger check
-```
 
 ## Install Emojivoto
 
@@ -80,21 +135,29 @@ Unlike most features of a service mesh, distributed tracing requires modifying
 the source of your application. Tracing needs some way to tie incoming requests
 to your application together with outgoing requests to dependent services. To do
 this, some headers are added to each request that contain a unique ID for the
-trace. Linkerd uses the [b3
-propagation](https://github.com/openzipkin/b3-propagation) format to tie these
-things together.
+trace. Linkerd will propagatge both
+[`w3c`](https://www.w3.org/TR/trace-context/) and
+[`b3`](https://github.com/openzipkin/b3-propagation) formats to tie these things
+together.
+
+{{< note >}}
+
+If both `w3c` and `b3` headers are present, Linkerd will propagate only the
+`w3c` headers.
+
+{{< /note >}}
 
 We've already modified emojivoto to instrument its requests with this
 information, this
 [commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)
 shows how this was done. For most programming languages, it simply requires the
-addition of a client library to take care of this. Emojivoto uses the OpenCensus
-client, but others should be used.
+addition of a client library to take care of this. (Emojivoto uses the
+OpenTelemetry client, but others could be used.)
 
 To enable tracing in emojivoto, run:
 
 ```bash
-kubectl -n emojivoto set env --all deploy OC_AGENT_HOST=collector.linkerd-jaeger:55678
+kubectl -n emojivoto set env --all deploy OTEL_EXPORTER_OTLP_ENDPOINT=jaeger-collector.jaeger-system:4317
 ```
 
 This command will add an environment variable that enables the applications to
@@ -107,8 +170,11 @@ With `vote-bot` starting traces for every request, spans should now be showing
 up in Jaeger. To get to the UI, run:
 
 ```bash
-linkerd jaeger dashboard
+kubectl port-forward -n jaeger-system svc/jaeger 16686
 ```
+
+<!-- markdownlint-disable MD034 -->
+Then, open http://127.0.0.1:16686 in your browser.
 
 ![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
 
@@ -129,133 +195,26 @@ goes between two meshed pods, there will be a total of 4 spans. Two will be on
 the source side as the request traverses that proxy and two will be on the
 destination side as the request is received by the remote proxy.
 
-## Integration with the Dashboard
-
-After having set up the Linkerd-Jaeger extension, as the proxy adds application
-meta-data as trace attributes, users can directly jump into related resources
-traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
-the Metrics Table, as shown below:
-
-![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
-
-To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
-extension specifying the service exposing the Jaeger UI. By default, this would
-be something like this:
-
-```bash
-linkerd viz install --set jaegerUrl=jaeger.linkerd-jaeger:16686 \
-  | kubectl apply -f -
-```
-
 ## Cleanup
 
-To cleanup, uninstall the Linkerd-Jaeger extension along with emojivoto by running:
+To clean up, you'll uninstall emojivoto, turn Linkerd tracing off, and finally
+uninstall Jaeger:
 
 ```bash
-linkerd jaeger uninstall | kubectl delete -f -
 kubectl delete ns emojivoto
+linkerd upgrade --set proxy.tracing=null | kubectl apply -f -
+kubectl delete ns jaeger-system
 ```
-
-## Bring your own Jaeger
-
-If you have an existing Jaeger installation, you can configure the trace
-collector to send traces to it instead of the Jaeger instance built into the
-Linkerd-Jaeger extension.
-
-Create the following YAML file which disables the built in Jaeger instance
-and specifies the collector's config.
-
-```bash
-cat <<EOF > jaeger-linkerd.yaml
-jaeger:
-  enabled: false
-collector:
-  config:
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-          http:
-      opencensus:
-      zipkin:
-      jaeger:
-        protocols:
-          grpc:
-          thrift_http:
-          thrift_compact:
-          thrift_binary:
-    processors:
-      batch:
-    extensions:
-      health_check:
-    exporters:
-      jaeger:
-        endpoint: my-jaeger-collector.my-jaeger-ns:14250
-        tls:
-          insecure: true
-    service:
-      extensions: [health_check]
-      pipelines:
-        traces:
-          receivers: [otlp,opencensus,zipkin,jaeger]
-          processors: [batch]
-          exporters: [jaeger]
-EOF
-linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
-```
-
-You'll want to ensure that the `exporters.jaeger.endpoint` which is
-`my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
-appropriate for your environment. This should point to a Jaeger Collector
-on port 14250.
-
-The YAML file is merged with the [Helm values.yaml][helm-values] which shows
-other possible values that can be configured.
-
-<!-- markdownlint-disable MD034 -->
-[helm-values]: https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
-
-It is also possible to manually edit the collector configuration to have it
-export to any backend which it supports. See the
-[OpenTelmetry documentation](https://opentelemetry.io/docs/languages/rust/exporters/)
-for more information.
-
-## Bring your own collector
-
-If you have an existing tracing infrastructure including your own collector in
-your cluster, you can configure traces to be sent to your existing collector
-instead of one from the Linkerd-Jaeger extension.
-
-```bash
-cat <<EOF > jaeger-linkerd.yaml
-jaeger:
-  enabled: false
-collector:
-  enabled: false
-webhook:
-  collectorSvcAddr: my-jaeger-collector.my-jaeger-ns:14250
-  collectorSvcAccount: my-jaeger-collector
-EOF
-linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
-```
-
-Similar to [Bring your own Jaeger](#bring-your-own-jaeger) above, you’ll want to
-ensure that the `webhook.collectorSvcAddr` which is
-`my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
-appropriate for your environment. This should point to your tracing collector
-with the corresponding port.
-
-You should also ensure that the `webhook.collectorSvcAccount` is set to the name
-of the Service for your collector, in this case `my-jaeger-collector`.
 
 ## Troubleshooting
 
 ### I don't see any spans for the proxies
 
-The Linkerd proxy uses the [b3
-propagation](https://github.com/openzipkin/b3-propagation) format. Some client
-libraries, such as Jaeger, use different formats by default. You'll want to
-configure your client library to use the b3 format to have the proxies
+The Linkerd proxy prefers to use the [w3c](https://www.w3.org/TR/trace-context/)
+format, while also supporting the
+[b3](https://github.com/openzipkin/b3-propagation) format. Some client
+libraries, such as Jaeger, use different formats by default. We recommend that
+you configure your client library to use the w3c format to have the proxies
 participate in traces.
 
 ## Recommendations
@@ -272,8 +231,8 @@ Distributed tracing systems all rely on services to propagate metadata about the
 current trace from requests that they receive to requests that they send. This
 metadata, called the trace context, is usually encoded in one or more request
 headers. There are many different trace context header formats and while we hope
-that the ecosystem will eventually converge on open standards like [W3C
-tracecontext](https://www.w3.org/TR/trace-context/), we only use the [b3
+that the ecosystem will eventually converge on open standards like [w3c
+tracecontext](https://www.w3.org/TR/trace-context/), we also support the [b3
 format](https://github.com/openzipkin/b3-propagation) today. Being one of the
 earliest widely used formats, it has the widest support, especially among
 ingresses like Nginx.
@@ -293,14 +252,14 @@ headers, it's usually much easier to use a library which does three things:
 
 We recommend using OpenTelemetry in your service and configuring it with:
 
-- [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the
+- [w3c propagation](https://www.w3.org/TR/trace-context/) (this is the
   default)
 - [the OpenTelemetry agent
   exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
 
-The OpenTelemetry agent exporter will export trace data to the OpenTelemetry collector
-over a gRPC API. The details of how to configure OpenTelemetry will vary language
-by language, but there are [guides for many popular
+The OpenTelemetry agent exporter will export trace data to the OpenTelemetry
+collector over a gRPC API. The details of how to configure OpenTelemetry will
+vary language by language, but there are [guides for many popular
 languages](https://opentelemetry.io/docs/languages/).
 
 It is possible to use many other tracing client libraries as well. Just make
@@ -309,11 +268,11 @@ its spans in a format the collector has been configured to receive.
 
 ## Collector: OpenTelemetry
 
-The OpenTelemetry collector receives trace data from the OpenTelemetry agent exporter
-and potentially does translation and filtering before sending that data to
-Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector gives
-us a lot of flexibility: we can switch to any backend that OpenTelemetry supports
-without needing to interrupt the application.
+The OpenTelemetry collector receives trace data from the OpenTelemetry agent
+exporter and potentially does translation and filtering before sending that data
+to Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector
+gives us a lot of flexibility: we can switch to any backend that OpenTelemetry
+supports without needing to interrupt the application.
 
 ## Backend: Jaeger
 
@@ -328,7 +287,7 @@ in the traces and will also emit trace data to the trace collector. This
 enriches the trace data and allows you to see exactly how much time requests are
 spending in the proxy and on the wire.
 
-While Linkerd can only actively participate in traces that use the b3
-propagation format, Linkerd will always forward unknown request headers
+While Linkerd can only actively participate in traces that use the w3c or b3
+propagation formats, Linkerd will always forward unknown request headers
 transparently, which means it will never interfere with traces that use other
 propagation formats.
