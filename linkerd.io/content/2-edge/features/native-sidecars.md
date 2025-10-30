@@ -20,5 +20,4 @@ containers also need network access.
 
 Native sidecars can be enabled by setting
 `config.beta.linkerd.io/proxy-enable-native-sidecar` annotation at the level of
-individual namespaces or workloads, or by setting in globally at install time.
-
+individual namespaces or workloads, or by setting it globally at install time.

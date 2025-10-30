@@ -30,7 +30,7 @@ As of Linkerd 2.19, the Linkerd-jaeger extension has been deprecated and is no
 longer available. This guide instead describes how to set up a modern
 distributed tracing infrastructure using Jaeger, without this extension. See our
 [Guide to migrating away from the Linkerd-jaeger
-extension](../jaeger-extension-migration/).
+extension](jaeger-extension-migration).
 {{< /warning >}}
 
 ## Install a trace collector
