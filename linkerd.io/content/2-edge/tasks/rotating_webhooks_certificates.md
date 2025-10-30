@@ -11,8 +11,7 @@ to implement some of its core features like
 [automatic proxy injection](../features/proxy-injection/) and
 [service profiles validation](../features/service-profiles/).
 
-Also, the viz extension uses a webhook to make pods tappable, as does the jaeger
-extension to turn on tracing on pods.
+Also, the viz extension uses a webhook to make pods tappable.
 
 To secure the connections between the Kubernetes API server and the
 webhooks, all the webhooks are TLS-enabled. The x509 certificates used by these
@@ -25,7 +24,6 @@ stored in the following secrets:
 - In the `linkerd` namespace: `linkerd-policy-validator-k8s-tls`,
   `linkerd-proxy-injector-k8s-tls` and `linkerd-sp-validator-k8s-tls`
 - In the `linkerd-viz` namespace: `tap-injector-k8s-tls`
-- In the `linkerd-jaeger` namespace: `jaeger-injector-k8s-tls`
 
 The rest of this documentation provides instructions on how to renew these
 certificates.
@@ -36,10 +34,9 @@ To check the validity of all the TLS secrets
 (using [`step`](https://smallstep.com/cli/)):
 
 ```bash
-# assuming you have viz and jaeger installed, otherwise trim down these arrays
-# accordingly
-SECRETS=("linkerd-policy-validator-k8s-tls" "linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "tap-injector-k8s-tls" "jaeger-injector-k8s-tls")
-NS=("linkerd" "linkerd" "linkerd-viz" "linkerd-jaeger")
+# assuming you have viz installed, otherwise trim down these arrays accordingly
+SECRETS=("linkerd-policy-validator-k8s-tls" "linkerd-proxy-injector-k8s-tls" "linkerd-sp-validator-k8s-tls" "tap-injector-k8s-tls")
+NS=("linkerd" "linkerd" "linkerd-viz")
 for idx in "${!SECRETS[@]}"; do \
   kubectl -n "${NS[$idx]}" get secret "${SECRETS[$idx]}" -ojsonpath='{.data.tls\.crt}' | \
     base64 --decode - | \
@@ -57,7 +54,6 @@ done
 
 linkerd upgrade | kubectl apply -f -
 linkerd viz install | kubectl apply -f -
-linkerd jaeger install | kubectl apply -f -
 ```
 
 The above command will recreate the secrets without restarting Linkerd.
@@ -100,5 +96,4 @@ kubectl -n linkerd rollout restart deploy \
   linkerd-sp-validator \
 
 kubectl -n linkerd-viz rollout restart deploy tap tap-injector
-kubectl -n linkerd-jaeger rollout restart deploy jaeger-injector
 ```

@@ -148,7 +148,6 @@ the extension CLI commands don't provide `upgrade` subcommands, but using
 ```bash
 linkerd viz install | kubectl apply -f -
 linkerd multicluster install | kubectl apply -f -
-linkerd jaeger install | kubectl apply -f -
 ```
 
 Most extensions also include a `prune` command for removing resources which were
