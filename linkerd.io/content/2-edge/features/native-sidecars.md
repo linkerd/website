@@ -1,7 +1,6 @@
 ---
 title: Native sidecars
 description: Linkerd supports Kubernetes native sidecars, which fix some of the long-standing annoyances of using sidecar containers in Kubernetes, especially around support for Jobs and race conditions around container startup.
-weight: 4
 ---
 
 Linkerd supports Kubernetes [native sidecar
