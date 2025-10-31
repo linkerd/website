@@ -1,5 +1,5 @@
 ---
-date: 2025-10-30T00:00:00Z
+date: 2025-10-31T00:00:00Z
 slug: announcing-linkerd-2.19
 title: |-
   Announcing Linkerd 2.19: Post-quantum cryptography
