@@ -1,3 +1,7 @@
+- version: "2.19"
+  edge: "edge-25.10.7"
+  releaseDate: "October 31, 2025"
+  announcement: "/blog/2025/1031-announcing-linkerd-2.19/"
 - version: "2.18"
   edge: "edge-25.4.4"
   releaseDate: "April 23, 2025"
