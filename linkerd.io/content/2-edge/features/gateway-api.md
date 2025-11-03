@@ -3,14 +3,16 @@ title: Gateway API support
 description: Linkerd uses Gateway API resource types to configure certain features.
 ---
 
-The Gateway API is a set of CRDs in the `gateway.networking.k8s.io` API group
-which describe types of traffic in a way that is independent of a specific mesh
-or ingress implementation. Recent versions of Linkerd fully support the
-[Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/) as a core
-configuration mechanism, and many Linkerd features, including [authorization
-policies][auth-policy], [dynamic traffic routing][dyn-routing], and [request
-timeouts][timeouts], rely on resource types from the Gateway API for
-configuration.
+The [Gateway API](https://gateway-api.sigs.k8s.io/) is a set of CRDs in the
+`gateway.networking.k8s.io` API group which describe types of traffic in a way
+that is independent of a specific mesh or ingress implementation. Recent
+versions of Linkerd fully support the [Kubernetes Gateway
+API](https://gateway-api.sigs.k8s.io/) as a core configuration mechanism, and
+many Linkerd features, including [authorization policies][auth-policy], [dynamic
+traffic routing][dyn-routing], and [request timeouts][timeouts], require these
+resource types from the Gateway API in order to be used. (Note that Linkerd does
+not require these types in order to run, but these features will not be
+useable.)
 
 The two primary Gateway API types used to configure Linkerd are:
 
@@ -19,25 +21,12 @@ The two primary Gateway API types used to configure Linkerd are:
 
 Both of these types are used in a variety of ways when configuring Linkerd.
 
-## Managing the Gateway API
+## Checking the existing Gateway API version
 
-One complication with using the Gateway API in practice is that many different
-packages, not just Linkerd, may provide the Gateway API on your cluster, but
-only some Gateway API *versions* are compatible with Linkerd.
-
-Linkerd requires that the Gateway API be installed on your cluster before
-Linkerd can be installed. In practice, there are two basic approaches to
-managing the Gateway API with Linkerd. The Gateway API may already be installed
-on your cluster, or you can install the Gateway API yourself.
-
-### Option 1: The Gateway API is already installed {#gateway-api-compatibility}
-
-The Gateway API may already be installed on your cluster; either because it came
-pre-installed on the cluster or because another tool has installed it. You can
-check if the Gateway API is installed by running:
+The Gateway API may already be installed on your cluster. Check by running:
 
 ```bash
-> kubectl get crds/httproutes.gateway.networking.k8s.io -o "jsonpath={.metadata.annotations.gateway\.networking\.k8s\.io/bundle-version}"
+kubectl get crds/httproutes.gateway.networking.k8s.io -o "jsonpath={.metadata.annotations.gateway\.networking\.k8s\.io/bundle-version}"
 ```
 
 If this command returns Not Found error, the Gateway API is not installed.
@@ -59,33 +48,23 @@ for more information.
 [the Gateway API 1.2.0 release notes]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
 {{< /note >}}
 
-If the Gateway API is installed at a compatible version, you can go ahead and
-install Linkerd as normal.
-
 {{< warning >}}
 Running Linkerd with an incompatible version of the Gateway API
 on the cluster can lead to hard-to-debug issues with your Linkerd installation.
 {{< /warning >}}
 
-### Option 2: Install the Gateway API yourself
+## Installing the Gateway API
 
-If the Gateway API is not already installed on your cluster, you may install
-it yourself by following the [Gateway API install
-guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which
-is often as simple as something like
+If the Gateway API is not already installed on your cluster, you may install it
+by following the [Gateway API install
+guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which is
+often as simple as:
 
 ```bash
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
 ```
 
-You will need to ensure the version of the Gateway API that you install is
-compatible with Linkerd by checking the above table. In general, we recommend
-the latest `Standard` channel release of Gateway API.
-
-Once a compatible version of the Gateway API is installed, you can proceed with
-the Linkerd installation as above.
-
-## Precursors to Gateway API-based configuration
+## Note: Precursors to Gateway API-based configuration
 
 Prior to the complete support of the Gateway API introduced in Linkerd 2.14,
 Linkerd provided two earlier variants of configuration:

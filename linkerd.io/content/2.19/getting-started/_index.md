@@ -86,12 +86,17 @@ Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes
 versions](../reference/k8s-versions/).
 
-## Step 2: Install the Gateway API
+## Step 2 (optional): Install the Gateway API
 
-Linkerd requires the Gateway API. If the Gateway API is already installed on
-your cluster, you are good to go. Otherwise, you will need to install it first.
-Follow [these instructions](../features/gateway-api/) for determining if the
-Gateway API is installed or how to install it.
+Several features in Linkerd are configured using CRDs from the [Gateway
+API](https://gateway-api.sigs.k8s.io/) project, including authorization policy
+and dynamic request routing. In many Kubernetes clusters, these CRDs are already
+available, but if they aren't, you won't be able to use those features unless
+you install these CRDs.
+
+If you want to use those features, follow our [Gateway API Linkerd
+doc](../features/gateway-api/) to ensure the Gateway API CRDs are
+installed. You can always do this step later.
 
 ## Step 3: Validate your Kubernetes cluster
 
