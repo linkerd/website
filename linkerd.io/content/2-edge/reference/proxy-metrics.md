@@ -8,6 +8,25 @@ The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy.  The following metrics are available at `/metrics` on the proxy's metrics
 port (default: `:4191`) in the [Prometheus format][prom-format].
 
+## Process-level Metrics
+
+* `proxy_build_info`: A constant gauge with information on how this instance of
+  the proxy was built, such as build date, proxy version, etc.
+
+* `rustls_info`: A constant gauge with information on the proxy's TLS library,
+  `rustls`. This includes the following labels:
+  * `tls_suites`: The set of cipher suites that the proxy will use for TLS
+    connections, sorted by preference order.
+  * `tls_kx_groups`: The set of key exchange algorithms the proxy will use,
+    sorted by preference order.
+  * `tls_rand`: The secure randomness provider
+  * `tls_key_provider`: The crytpographic key provider
+  * `tls_fips`: A boolean denoting if the proxy's connections are
+    FIPS-compliant.
+
+* `tokio_rt_*`: A set of counters and gauges with stats on the proxy's
+  asynchronous runtime, `tokio`.
+
 ## Protocol-Level Metrics
 
 * `request_total`: A counter of the number of requests the proxy has received.
