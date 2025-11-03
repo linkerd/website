@@ -39,6 +39,9 @@ docs:
   - name: Linkerd edge
     pageRef: /2-edge/
     weight: 99
+  - name: Linkerd 2.19
+    pageRef: /2.19/
+    weight: 19
   - name: Linkerd 2.18
     pageRef: /2.18/
     weight: 18

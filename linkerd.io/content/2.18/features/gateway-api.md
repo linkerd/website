@@ -45,10 +45,10 @@ If this command returns Not Found error, the Gateway API is not installed.
 Otherwise it will return the Gateway API version number. Check that version
 against the compatibility table:
 
-| Linkerd versions | Gateway API version compatibilty | HTTPRoute version | gRPC version |
-| ---------------- | -------------------------------- | ----------------- | ------------ |
-| 2.15 - 2.17      | 0.7 - 1.1.1                      | v1beta1           | v1alpha2     |
-| 2.18             | 1.1.1 - 1.2.1                    | v1                | v1           |
+| Linkerd versions | Gateway API version compatibility | HTTPRoute version | gRPC version |
+| ---------------- | --------------------------------- | ----------------- | ------------ |
+| 2.15 - 2.17      | 0.7 - 1.1.1                       | v1beta1           | v1alpha2     |
+| 2.18             | 1.1.1 - 1.2.1                     | v1                | v1           |
 
 {{< note >}}
 
