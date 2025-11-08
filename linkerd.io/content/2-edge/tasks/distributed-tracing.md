@@ -53,10 +53,11 @@ helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 Then, install the Jaeger Helm chart:
 
 ```bash
+kubectl create ns jaeger-system
+kubectl annotate ns jaeger-system linkerd.io/inject=enabled
 helm install \
   --wait \
   --namespace jaeger-system \
-  --create-namespace \
   --set allInOne.enabled=true \
   --set storage.type=memory \
   --set agent.enabled=false \
@@ -87,8 +88,8 @@ If Linkerd was installed with the CLI:
 linkerd upgrade \
   --set proxy.tracing.enabled=true \
   --set proxy.tracing.collector.endpoint=jaeger-collector.jaeger-system:4317 \
-  --setproxy.tracing.collector.meshIdentity.serviceAccountName=jaeger \
-  --setproxy.tracing.collector.meshIdentity.namespace=jaeger-system \
+  --set proxy.tracing.collector.meshIdentity.serviceAccountName=jaeger \
+  --set proxy.tracing.collector.meshIdentity.namespace=jaeger-system \
   | kubectl apply -f -
 ```
 
@@ -172,7 +173,7 @@ With `vote-bot` starting traces for every request, spans should now be showing
 up in Jaeger. To get to the UI, run:
 
 ```bash
-kubectl port-forward -n jaeger-system svc/jaeger 16686
+kubectl port-forward -n jaeger-system svc/jaeger-query 16686
 ```
 
 <!-- markdownlint-disable MD034 -->
