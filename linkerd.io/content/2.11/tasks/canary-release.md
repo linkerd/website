@@ -97,7 +97,9 @@ Traffic shifting occurs on the _client_ side of the connection and not the
 server side. Any requests coming from outside the mesh will not be shifted and
 will always be directed to the primary backend. A service of type `LoadBalancer`
 will exhibit this behavior as the source is not part of the mesh. To shift
-external traffic, add your ingress controller to the mesh. {{< /note>}}
+external traffic, add your ingress controller to the mesh.
+
+{{< /note >}}
 
 ## Configure the release
 
