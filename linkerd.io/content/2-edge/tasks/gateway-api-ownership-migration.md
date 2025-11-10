@@ -1,15 +1,17 @@
 ---
 title: Migrating Gateway API Ownership in Linkerd 2.18
-description: Migrating from a Linkerd-managed Gateway API to an externally managed one as part of upgrading to Linkerd 2.18
+description:
+  Migrating from a Linkerd-managed Gateway API to an externally managed one as
+  part of upgrading to Linkerd 2.18
 ---
 
-Linkerd [uses the Gateway API as a key configuration
-mechanism](../features/gateway-api/). Prior to Linkerd 2.18, Linkerd would
-optionally install the Gateway API types on your cluster and manage them for
-you--it optionally "owned" the types. From Linkerd 2.19 onwards, Linkerd will
-longer own the Gateway API types on your behalf. Thus, Linkerd 2.18 itself is a
-_transition_ release, where you need to remove the ownership of any
-Linkerd-installed Gateway API resources.
+Linkerd
+[uses the Gateway API as a key configuration mechanism](../features/gateway-api/).
+Prior to Linkerd 2.18, Linkerd would optionally install the Gateway API types on
+your cluster and manage them for you--it optionally "owned" the types. From
+Linkerd 2.19 onwards, Linkerd will longer own the Gateway API types on your
+behalf. Thus, Linkerd 2.18 itself is a _transition_ release, where you need to
+remove the ownership of any Linkerd-installed Gateway API resources.
 
 All Linkerd users upgrading to 2.18 who have Linkerd-managed Gateway API CRDs
 will need to transition this ownership away from Linkerd, by following the steps
@@ -65,25 +67,26 @@ helm upgrade -n linkerd linkerd-crds linkerd/linkerd-crds
 ```
 
 {{< warning >}}
+
 Do not include `--set installGatewayAPI=false` at this stage, as it would delete
 the Gateway API CRDs and their associated CRs, disrupting any defined policies
 and routes.
+
 {{< /warning >}}
 
 With version 2.18, this upgrade annotates the Linkerd-provided Gateway API CRDs
 with `helm.sh/resource-policy: keep`. This annotation prevents the linkerd-crds
 chart from removing the CRDs and their CRs in future updates.
 
-Next, overwrite
-Linkerd’s CRDs with the externally managed ones:
+Next, overwrite Linkerd’s CRDs with the externally managed ones:
 
 ```bash
 kubectl apply -f \
     https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
 ```
 
-For all subsequent configuration updates or chart upgrades, use `--set
-installGatewayAPI=false` to ensure the Gateway API CRDs remain externally
+For all subsequent configuration updates or chart upgrades, use
+`--set installGatewayAPI=false` to ensure the Gateway API CRDs remain externally
 managed. Starting in version 2.19, this will become the default. The
 `helm.sh/resource-policy: keep` annotation ensures the CRDs persist regardless
 of this setting.

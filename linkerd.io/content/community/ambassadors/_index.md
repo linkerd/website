@@ -14,7 +14,7 @@ params:
     - title:
       items:
         - name: Blake Romano
-          role: Senior Software Engineer 
+          role: Senior Software Engineer
           image: images/blake-romano.jpg
           flag: 🇺🇸
           urls:

@@ -1,6 +1,7 @@
 ---
 title: Debugging HTTP applications with per-route metrics
-description: Follow a long-form example of debugging a failing HTTP application using
+description:
+  Follow a long-form example of debugging a failing HTTP application using
   per-route metrics.
 ---
 
@@ -14,8 +15,8 @@ the other services. There are three services:
 - [authors](https://github.com/BuoyantIO/booksapp/blob/master/authors.rb): an
   API to manage the authors in the system
 
-- [books](https://github.com/BuoyantIO/booksapp/blob/master/books.rb): an API
-  to manage the books in the system
+- [books](https://github.com/BuoyantIO/booksapp/blob/master/books.rb): an API to
+  manage the books in the system
 
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
@@ -25,8 +26,8 @@ topology looks like this:
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd and its Viz extension installed
-on your cluster.  Follow the [Installing Linkerd Guide](install/) if
-you haven't already done this.
+on your cluster. Follow the [Installing Linkerd Guide](install/) if you haven't
+already done this.
 
 ## Install the app
 
@@ -39,14 +40,13 @@ kubectl create ns booksapp && \
   | kubectl -n booksapp apply -f -
 ```
 
-This command creates a namespace for the demo, downloads its Kubernetes
-resource manifest and uses `kubectl` to apply it to your cluster. The app
-comprises the Kubernetes deployments and services that run in the `booksapp`
-namespace.
+This command creates a namespace for the demo, downloads its Kubernetes resource
+manifest and uses `kubectl` to apply it to your cluster. The app comprises the
+Kubernetes deployments and services that run in the `booksapp` namespace.
 
 Downloading a bunch of containers for the first time takes a little while.
-Kubernetes can tell you when all the services are running and ready for
-traffic. Wait for that to happen by running:
+Kubernetes can tell you when all the services are running and ready for traffic.
+Wait for that to happen by running:
 
 ```bash
 kubectl -n booksapp rollout status deploy webapp
@@ -74,7 +74,7 @@ frontend.
 
 ![Frontend](/docs/images/books/frontend.png "Frontend")
 
-Unfortunately, there is an error in the app: if you click *Add Book*, it will
+Unfortunately, there is an error in the app: if you click _Add Book_, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
 failure---the type that drives service owners mad because it is so difficult to
 debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
@@ -96,12 +96,12 @@ kubectl get -n booksapp deploy -o yaml \
 
 This command retrieves the manifest of all deployments in the `booksapp`
 namespace, runs them through `linkerd inject`, and then re-applies with
-`kubectl apply`. The `linkerd inject` command annotates each resource to
-specify that they should have the Linkerd data plane proxies added, and
-Kubernetes does this when the manifest is reapplied to the cluster. Best of
-all, since Kubernetes does a rolling deploy, the application stays running the
-entire time. (See [Automatic Proxy Injection](../features/proxy-injection/) for
-more details on how this works.)
+`kubectl apply`. The `linkerd inject` command annotates each resource to specify
+that they should have the Linkerd data plane proxies added, and Kubernetes does
+this when the manifest is reapplied to the cluster. Best of all, since
+Kubernetes does a rolling deploy, the application stays running the entire time.
+(See [Automatic Proxy Injection](../features/proxy-injection/) for more details
+on how this works.)
 
 ## Debugging
 
@@ -158,8 +158,8 @@ you know exactly where to look in the code.
 ## Service Profiles
 
 To understand the root cause, we used live traffic. For some issues this is
-great, but what happens if the issue is intermittent and happens in the middle of
-the night? [Service profiles](../features/service-profiles/) provide Linkerd
+great, but what happens if the issue is intermittent and happens in the middle
+of the night? [Service profiles](../features/service-profiles/) provide Linkerd
 with some additional information about your services. These define the routes
 that you're serving and, among other things, allow for the collection of metrics
 on a per route basis. With Prometheus storing these metrics, you'll be able to
@@ -195,42 +195,42 @@ metadata:
   namespace: booksapp
 spec:
   routes:
-  - condition:
-      method: GET
-      pathRegex: /
-    name: GET /
-  - condition:
-      method: POST
-      pathRegex: /authors
-    name: POST /authors
-  - condition:
-      method: GET
-      pathRegex: /authors/[^/]*
-    name: GET /authors/{id}
-  - condition:
-      method: POST
-      pathRegex: /authors/[^/]*/delete
-    name: POST /authors/{id}/delete
-  - condition:
-      method: POST
-      pathRegex: /authors/[^/]*/edit
-    name: POST /authors/{id}/edit
-  - condition:
-      method: POST
-      pathRegex: /books
-    name: POST /books
-  - condition:
-      method: GET
-      pathRegex: /books/[^/]*
-    name: GET /books/{id}
-  - condition:
-      method: POST
-      pathRegex: /books/[^/]*/delete
-    name: POST /books/{id}/delete
-  - condition:
-      method: POST
-      pathRegex: /books/[^/]*/edit
-    name: POST /books/{id}/edit
+    - condition:
+        method: GET
+        pathRegex: /
+      name: GET /
+    - condition:
+        method: POST
+        pathRegex: /authors
+      name: POST /authors
+    - condition:
+        method: GET
+        pathRegex: /authors/[^/]*
+      name: GET /authors/{id}
+    - condition:
+        method: POST
+        pathRegex: /authors/[^/]*/delete
+      name: POST /authors/{id}/delete
+    - condition:
+        method: POST
+        pathRegex: /authors/[^/]*/edit
+      name: POST /authors/{id}/edit
+    - condition:
+        method: POST
+        pathRegex: /books
+      name: POST /books
+    - condition:
+        method: GET
+        pathRegex: /books/[^/]*
+      name: GET /books/{id}
+    - condition:
+        method: POST
+        pathRegex: /books/[^/]*/delete
+      name: POST /books/{id}/delete
+    - condition:
+        method: POST
+        pathRegex: /books/[^/]*/edit
+      name: POST /books/{id}/edit
 ```
 
 The `name` refers to the FQDN of your Kubernetes service,
@@ -284,9 +284,10 @@ As you can see:
 - `:path` correctly matches
 - `rt_route` contains the name of the route
 
-These metrics are part of the [`linkerd viz routes`](../reference/cli/viz/#routes)
-command instead of [`linkerd viz stat`](../reference/cli/viz/#stat). To see the
-metrics that have accumulated so far, run:
+These metrics are part of the
+[`linkerd viz routes`](../reference/cli/viz/#routes) command instead of
+[`linkerd viz stat`](../reference/cli/viz/#stat). To see the metrics that have
+accumulated so far, run:
 
 ```bash
 linkerd viz -n booksapp routes svc/webapp
@@ -296,7 +297,7 @@ This will output a table of all the routes observed and their golden metrics.
 The `[DEFAULT]` route is a catch all for anything that does not match the
 service profile.
 
-Profiles can be used to observe *outgoing* requests as well as *incoming*
+Profiles can be used to observe _outgoing_ requests as well as _incoming_
 requests. To do that, run:
 
 ```bash
@@ -320,10 +321,10 @@ PUT /books/{id}.json        books    41.98%   1.4rps          73ms          97ms
 
 ## Retries
 
-As it can take a while to update code and roll out a new version, let's
-tell Linkerd that it can retry requests to the failing endpoint. This will
-increase request latencies, as requests will be retried multiple times, but not
-require rolling out a new version.
+As it can take a while to update code and roll out a new version, let's tell
+Linkerd that it can retry requests to the failing endpoint. This will increase
+request latencies, as requests will be retried multiple times, but not require
+rolling out a new version.
 
 In this application, the success rate of requests from the `books` deployment to
 the `authors` service is poor. To see these metrics, run:
@@ -348,8 +349,8 @@ One thing that’s clear is that all requests from books to authors are to the
 `HEAD /authors/{id}.json` route and those requests are failing about 50% of the
 time.
 
-To correct this, let’s edit the authors service profile and make those
-requests retryable by running:
+To correct this, let’s edit the authors service profile and make those requests
+retryable by running:
 
 ```bash
 kubectl -n booksapp edit sp/authors.booksapp.svc.cluster.local
@@ -360,16 +361,16 @@ You'll want to add `isRetryable` to a specific route. It should look like:
 ```yaml
 spec:
   routes:
-  - condition:
-      method: HEAD
-      pathRegex: /authors/[^/]*\.json
-    name: HEAD /authors/{id}.json
-    isRetryable: true ### ADD THIS LINE ###
+    - condition:
+        method: HEAD
+        pathRegex: /authors/[^/]*\.json
+      name: HEAD /authors/{id}.json
+      isRetryable: true ### ADD THIS LINE ###
 ```
 
-After editing the service profile, Linkerd will begin to retry requests to
-this route automatically. We see a nearly immediate improvement in success rate
-by running:
+After editing the service profile, Linkerd will begin to retry requests to this
+route automatically. We see a nearly immediate improvement in success rate by
+running:
 
 ```bash
 linkerd viz -n booksapp routes deploy/books --to svc/authors -o wide
@@ -438,11 +439,11 @@ Update the `PUT /books/{id}.json` route to have a timeout:
 ```yaml
 spec:
   routes:
-  - condition:
-      method: PUT
-      pathRegex: /books/[^/]*\.json
-    name: PUT /books/{id}.json
-    timeout: 15ms ### ADD THIS LINE ###
+    - condition:
+        method: PUT
+        pathRegex: /books/[^/]*\.json
+      name: PUT /books/{id}.json
+      timeout: 15ms ### ADD THIS LINE ###
 ```
 
 (You may need to adjust the timeout value depending on your cluster – 15ms

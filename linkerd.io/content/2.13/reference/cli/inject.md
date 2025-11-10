@@ -9,9 +9,9 @@ When the resulting annotated manifest is applied to the Kubernetes cluster,
 Linkerd's [proxy autoinjector](../../features/proxy-injection/) automatically
 adds the Linkerd data plane proxies to the corresponding pods.
 
-Note that there is no *a priori* reason to use this command. In production,
-these annotations may be instead set by a CI/CD system, or any other
-deploy-time mechanism.
+Note that there is no _a priori_ reason to use this command. In production,
+these annotations may be instead set by a CI/CD system, or any other deploy-time
+mechanism.
 
 ## Manual injection
 

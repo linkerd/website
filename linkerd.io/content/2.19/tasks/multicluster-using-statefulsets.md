@@ -17,8 +17,8 @@ This guide will walk you through installing and configuring Linkerd and the
 multi-cluster extension with support for headless services and will exemplify
 how a StatefulSet can be deployed in a target cluster. After deploying, we will
 also look at how to communicate with an arbitrary pod from the target cluster's
-StatefulSet from a client in the source cluster. For a more detailed overview
-on how multi-cluster support for headless services work, check out
+StatefulSet from a client in the source cluster. For a more detailed overview on
+how multi-cluster support for headless services work, check out
 [multi-cluster communication](../features/multicluster/).
 
 ## Prerequisites
@@ -43,8 +43,7 @@ To start our demo and see everything in practice, we will go through a
 multi-cluster scenario where a pod in an `east` cluster will try to communicate
 to an arbitrary pod from a `west` cluster.
 
-The first step is to clone the demo
-repository on your local machine.
+The first step is to clone the demo repository on your local machine.
 
 ```sh
 # clone example repository
@@ -52,11 +51,11 @@ $ git clone git@github.com:linkerd/l2d-k3d-statefulset.git
 $ cd l2d-k3d-statefulset
 ```
 
-The second step consists of creating two `k3d` clusters named `east` and
-`west`, where the `east` cluster is the source and the `west` cluster is the
-target. When creating our clusters, we need a shared trust root. Luckily, the
-repository you have just cloned includes a handful of scripts that will greatly
-simplify everything.
+The second step consists of creating two `k3d` clusters named `east` and `west`,
+where the `east` cluster is the source and the `west` cluster is the target.
+When creating our clusters, we need a shared trust root. Luckily, the repository
+you have just cloned includes a handful of scripts that will greatly simplify
+everything.
 
 ```sh
 # create k3d clusters
@@ -93,10 +92,10 @@ With our install steps out of the way, we can now focus on our pod-to-pod
 communication. First, we will deploy our pods and services:
 
 - We will mesh the default namespaces in `east` and `west`.
-- In `west`, we will deploy an nginx StatefulSet with its own headless
-  service, `nginx-svc`.
-- In `east`, our script will deploy a `curl` pod that will then be used to
-  curl the nginx service.
+- In `west`, we will deploy an nginx StatefulSet with its own headless service,
+  `nginx-svc`.
+- In `east`, our script will deploy a `curl` pod that will then be used to curl
+  the nginx service.
 
 ```sh
 # deploy services and mesh namespaces
@@ -291,35 +290,35 @@ Commercial support is available at
 As you can see, we get the same response back! But, nginx is in a different
 cluster. So, what happened behind the scenes?
 
-  1. When we mirrored the headless service, we created a clusterIP service for
-     each pod. Since services create DNS records, naming each endpoint with the
-     hostname from the target gave us these pod FQDNs
-     (`nginx-set-0.(...).cluster.local`).
-  2. Curl resolved the pod DNS name to an IP address. In our case, this IP
-     would be `10.43.179.60`.
-  3. Once the request is in-flight, the linkerd2-proxy intercepts it. It looks
-     at the IP address and associates it with our `clusterIP` service. The
-     service itself points to the gateway, so the proxy forwards the request to
-     the target cluster gateway. This is the usual multi-cluster scenario.
-  4. The gateway in the target cluster looks at the request and looks-up the
-     original destination address. In our case, since this is an "endpoint
-     mirror", it knows it has to go to `nginx-set-0.nginx-svc` in the same
-     cluster.
-  5. The request is again forwarded by the gateway to the pod, and the response
-     comes back.
+1. When we mirrored the headless service, we created a clusterIP service for
+   each pod. Since services create DNS records, naming each endpoint with the
+   hostname from the target gave us these pod FQDNs
+   (`nginx-set-0.(...).cluster.local`).
+2. Curl resolved the pod DNS name to an IP address. In our case, this IP would
+   be `10.43.179.60`.
+3. Once the request is in-flight, the linkerd2-proxy intercepts it. It looks at
+   the IP address and associates it with our `clusterIP` service. The service
+   itself points to the gateway, so the proxy forwards the request to the target
+   cluster gateway. This is the usual multi-cluster scenario.
+4. The gateway in the target cluster looks at the request and looks-up the
+   original destination address. In our case, since this is an "endpoint
+   mirror", it knows it has to go to `nginx-set-0.nginx-svc` in the same
+   cluster.
+5. The request is again forwarded by the gateway to the pod, and the response
+   comes back.
 
 And that's it! You can now send requests to pods across clusters. Querying any
 of the 3 StatefulSet pods should have the same results.
 
 {{< note >}}
 
-To mirror a headless service as headless, the service's endpoints
-must also have at least one named address (e.g a hostname for an IP),
-otherwise, there will be no endpoints to mirror so the service will be mirrored
-as `clusterIP`. A headless service may under normal conditions also be created
-without exposing a port; the mulit-cluster service-mirror does not support
-this, however, since the lack of ports means we cannot create a service that
-passes Kubernetes validation.
+To mirror a headless service as headless, the service's endpoints must also have
+at least one named address (e.g a hostname for an IP), otherwise, there will be
+no endpoints to mirror so the service will be mirrored as `clusterIP`. A
+headless service may under normal conditions also be created without exposing a
+port; the mulit-cluster service-mirror does not support this, however, since the
+lack of ports means we cannot create a service that passes Kubernetes
+validation.
 
 {{< /note >}}
 

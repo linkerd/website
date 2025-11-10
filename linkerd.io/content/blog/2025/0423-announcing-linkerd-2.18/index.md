@@ -3,7 +3,7 @@ date: 2025-04-23T00:00:00Z
 slug: announcing-linkerd-2.18
 title: |-
   Announcing Linkerd 2.18: Battlescars, lessons learned, and preliminary Windows support
-keywords: [linkerd, '2.18', features]
+keywords: [linkerd, "2.18", features]
 params:
   author: william
   showCover: true
@@ -55,8 +55,8 @@ instead just use the configured protocol. There are some interesting
 implementation details under the hood (to improve efficiency, Linkerd
 transparently upgrades HTTP/1.1 connections to HTTP/2 ones in between client and
 server proxies; and we make use of this to transit protocol information between
-proxies) but the net result is that avoiding protocol detection for a Service
-is as easy as configuring the appProtocol field:
+proxies) but the net result is that avoiding protocol detection for a Service is
+as easy as configuring the appProtocol field:
 
 ```yaml
 apiVersion: v1

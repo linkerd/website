@@ -31,8 +31,8 @@ create a load generator to send traffic to a Service which includes these two
 pods.
 
 For load generation we'll use
-[Slow-Cooker](https://github.com/BuoyantIO/slow_cooker)
-and for the backend pods we'll use [BB](https://github.com/BuoyantIO/bb).
+[Slow-Cooker](https://github.com/BuoyantIO/slow_cooker) and for the backend pods
+we'll use [BB](https://github.com/BuoyantIO/bb).
 
 To add these components to your cluster and include them in the Linkerd
 [data plane](../reference/architecture/#data-plane), run:
@@ -148,9 +148,9 @@ slow-cooker      1/1   100.00%   0.3rps           1ms           1ms           1m
 ```
 
 Here we can see that `good` and `bad` deployments are each receiving similar
-amounts of traffic, but `good` has a success rate of 100% while the success
-rate of `bad` is very low (only healthcheck probes are succeeding). We can also
-see how this looks from the perspective of the traffic generator:
+amounts of traffic, but `good` has a success rate of 100% while the success rate
+of `bad` is very low (only healthcheck probes are succeeding). We can also see
+how this looks from the perspective of the traffic generator:
 
 ```console
 > linkerd viz -n circuit-breaking-demo stat deploy/slow-cooker --to svc/bb
@@ -164,14 +164,14 @@ traffic to the `bad` pod.
 
 ## Breaking the circuit
 
-Linkerd supports a type of circuit breaking called [_consecutive failure
-accrual_](../reference/circuit-breaking/#consecutive-failures).
+Linkerd supports a type of circuit breaking called
+[_consecutive failure accrual_](../reference/circuit-breaking/#consecutive-failures).
 This works by tracking consecutive failures from each endpoint in Linkerd's
 internal load balancer. If there are ever too many failures in a row, that
 endpoint is temporarily ignored and Linkerd will only load balance among the
-remaining endpoints. After a [backoff
-period](../reference/circuit-breaking/#probation-and-backoffs), the endpoint
-is re-introduced so that we can determine if it has become healthy.
+remaining endpoints. After a
+[backoff period](../reference/circuit-breaking/#probation-and-backoffs), the
+endpoint is re-introduced so that we can determine if it has become healthy.
 
 Let's enable consecutive failure accrual on the `bb` Service by adding an
 annotation:
@@ -181,14 +181,16 @@ kubectl annotate -n circuit-breaking-demo svc/bb balancer.linkerd.io/failure-acc
 ```
 
 {{< warning >}}
+
 Circuit breaking is **incompatible with ServiceProfiles**. If a
 [ServiceProfile](../features/service-profiles/) is defined for the annotated
 Service, proxies will not perform circuit breaking as long as the ServiceProfile
 exists.
+
 {{< /warning >}}
 
 We can check that failure accrual was configured correctly by using a Linkerd
-diagnostics command.  The `linkerd diagnostics policy` command prints the policy
+diagnostics command. The `linkerd diagnostics policy` command prints the policy
 that Linkerd will use when sending traffic to a Service. We'll use the
 [jq](https://stedolan.github.io/jq/) utility to filter the output to focus on
 failure accrual:
@@ -213,9 +215,9 @@ failure accrual:
 }
 ```
 
-This tells us that Linkerd will use `ConsecutiveFailures` failure accrual
-when talking to the `bb` Service. It also tells us that the `max_failures` is
-7, meaning that it will trip the circuit breaker once it observes 7 consective
+This tells us that Linkerd will use `ConsecutiveFailures` failure accrual when
+talking to the `bb` Service. It also tells us that the `max_failures` is 7,
+meaning that it will trip the circuit breaker once it observes 7 consective
 failures. We'll talk more about each of the parameters here at the end of this
 article.
 
@@ -251,29 +253,28 @@ failure accrual is controlled by a number of parameters. Each of these
 parameters has a default, but can be manually configured using annotations:
 
 - `balancer.linkerd.io/failure-accrual-consecutive-max-failures`
-  - The number of consecutive failures that Linkerd must observe before
-    tripping the circuit breaker (default: 7). Consider setting a lower value
-    if you want circuit breaks to trip more easily which can lead to better
-    success rate at the expense of less evenly distributed traffic. Consider
-    setting a higher value if you find circuit breakers are tripping too easily,
-    causing traffic to be cut off from healthy endpoints.
+  - The number of consecutive failures that Linkerd must observe before tripping
+    the circuit breaker (default: 7). Consider setting a lower value if you want
+    circuit breaks to trip more easily which can lead to better success rate at
+    the expense of less evenly distributed traffic. Consider setting a higher
+    value if you find circuit breakers are tripping too easily, causing traffic
+    to be cut off from healthy endpoints.
 - `balancer.linkerd.io/failure-accrual-consecutive-max-penalty`
-  - The maximum amount of time a circuit breaker will remain tripped
-    before the endpoint is restored (default: 60s). Consider setting a longer
-    duration if you want to reduce the amount of traffic to endpoints which have
-    tripped the circuit breaker. Consider setting a shorter duration if you'd
-    like tripped circuit breakers to recover faster after an endpoint becomes
-    healthy again.
+  - The maximum amount of time a circuit breaker will remain tripped before the
+    endpoint is restored (default: 60s). Consider setting a longer duration if
+    you want to reduce the amount of traffic to endpoints which have tripped the
+    circuit breaker. Consider setting a shorter duration if you'd like tripped
+    circuit breakers to recover faster after an endpoint becomes healthy again.
 - `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`
-  - The minimum amount of time a circuit breaker will remain tripped
-    before the endpoints is restored (default: 1s). Consider tuning this in a
-    similar way to `failure-accrual-consecutive-max-penalty`.
+  - The minimum amount of time a circuit breaker will remain tripped before the
+    endpoints is restored (default: 1s). Consider tuning this in a similar way
+    to `failure-accrual-consecutive-max-penalty`.
 - `balancer.linkerd.io/failure-accrual-consecutive-jitter-ratio`
-  - The amount of jitter to introduce to circuit breaker backoffs (default: 0.5).
-    You are unlikely to need to tune this but might consider increasing it if
-    you notice many clients are sending requests to a circuit broken endpoint
+  - The amount of jitter to introduce to circuit breaker backoffs (default:
+    0.5). You are unlikely to need to tune this but might consider increasing it
+    if you notice many clients are sending requests to a circuit broken endpoint
     at the same time, leading to spiky traffic patterns.
 
-See the [reference
-documentation](../reference/circuit-breaking/#configuring-failure-accrual)
+See the
+[reference documentation](../reference/circuit-breaking/#configuring-failure-accrual)
 for details on failure accrual configuration.

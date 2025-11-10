@@ -18,10 +18,9 @@ types of _release artifacts_.
 ### Edge releases
 
 Edge release artifacts are published on a weekly or near-weekly basis as part of
-the open source project. The latest edge release is [{{< latest-edge-version
->}}](https://github.com/linkerd/linkerd2/releases/tag/{{<
-latest-edge-version >}}). and the full list of edge release artifacts can be
-found on
+the open source project. The latest edge release is [{{% latest-edge-version
+%}}](https://github.com/linkerd/linkerd2/releases/tag/{{% latest-edge-version
+%}}). and the full list of edge release artifacts can be found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
 
 Edge release artifacts contain the code in from the _main_ branch at the point
