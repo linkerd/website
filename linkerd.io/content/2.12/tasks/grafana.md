@@ -1,10 +1,11 @@
 ---
 title: Grafana
-description: Grafana install instructions and how to link it with the Linkerd Dashboard
+description:
+  Grafana install instructions and how to link it with the Linkerd Dashboard
 ---
 
-Linkerd provides a full [on-cluster metrics stack](../features/dashboard/)
-that can be leveraged by a Prometheus instance and subsequently by a Grafana
+Linkerd provides a full [on-cluster metrics stack](../features/dashboard/) that
+can be leveraged by a Prometheus instance and subsequently by a Grafana
 instance, in order to show both the real-time and historical behavior of these
 metrics.
 
@@ -18,8 +19,8 @@ the metrics exposed by Linkerd.
 
 Before installing Grafana, make sure you have a working instance of Prometheus
 properly configured to consume Linkerd metrics. The Linkerd Viz extension comes
-with such a pre-configured Prometheus instance, but you can also [bring your own
-Prometheus](external-prometheus/).
+with such a pre-configured Prometheus instance, but you can also
+[bring your own Prometheus](external-prometheus/).
 
 ## Install Grafana
 
@@ -36,22 +37,23 @@ datasource Linkerd Viz' Prometheus instance, sets up a reverse proxy (more on
 that later), and pre-loads all the Linkerd Grafana dashboards that are published
 on <https://grafana.com/orgs/linkerd>.
 
-A more complex and production-oriented source is the [Grafana
-Operator](https://github.com/grafana-operator/grafana-operator). And there are
-also hosted solutions such as [Grafana
-Cloud](https://grafana.com/products/cloud/). Those projects provide instructions
-on how to easily import the same charts published on
+A more complex and production-oriented source is the
+[Grafana Operator](https://github.com/grafana-operator/grafana-operator). And
+there are also hosted solutions such as
+[Grafana Cloud](https://grafana.com/products/cloud/). Those projects provide
+instructions on how to easily import the same charts published on
 <https://grafana.com/orgs/linkerd>.
 
 {{< note >}}
+
 Grafana's official Helm chart uses an initContainer to download Linkerd's
 configuration and dashboards. If you use the CNI plugin, when you add grafana's
 pod into the mesh its initContainer will run before the proxy is started and the
-traffic cannot flow.
-You should either avoid meshing grafana's pod, skip outbound port 443 via
-`config.linkerd.io/skip-outbound-ports: "443"` annotation or run the container
-with the proxy's UID.
-See [Allowing initContainer networking](../features/cni/#allowing-initcontainer-networking)
+traffic cannot flow. You should either avoid meshing grafana's pod, skip
+outbound port 443 via `config.linkerd.io/skip-outbound-ports: "443"` annotation
+or run the container with the proxy's UID. See
+[Allowing initContainer networking](../features/cni/#allowing-initcontainer-networking)
+
 {{< /note >}}
 
 ## Hook Grafana with Linkerd Viz Dashboard
@@ -72,7 +74,7 @@ is set up, as shown in the sample `grafana/values.yaml` file:
 ```yaml
 grafana.ini:
   server:
-    root_url: '%(protocol)s://%(domain)s:/grafana/'
+    root_url: "%(protocol)s://%(domain)s:/grafana/"
 ```
 
 Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`

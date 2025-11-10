@@ -13,7 +13,7 @@ In this article I'm going to describe why Linkerd isn't built on
 [Envoy](https://www.envoyproxy.io).
 
 This is a bit of a weird article to write. After all, there are a million
-projects that Linkerd *doesn't* use, and none of those decisions deserve a blog
+projects that Linkerd _doesn't_ use, and none of those decisions deserve a blog
 post. But the fact that Linkerd doesn't use Envoy specifically has become a
 common enough topic of discussion that it probably deserves a good explanation.
 
@@ -22,11 +22,11 @@ a great project, is clearly a popular choice for many, and we have nothing but
 respect for the fine folks who work on it. We recommend Envoy to Linkerd users
 every day in the form of ingress controllers like
 [Ambassador](https://github.com/datawire/ambassador), and there are production
-systems around the world today where you can find Envoy and Linkerd working
-side by side.
+systems around the world today where you can find Envoy and Linkerd working side
+by side.
 
-But we chose not to build Linkerd on top of Envoy. Instead, we built a
-dedicated "micro-proxy", called simply
+But we chose not to build Linkerd on top of Envoy. Instead, we built a dedicated
+"micro-proxy", called simply
 [Linkerd2-proxy](https://github.com/linkerd/linkerd2-proxy), which is optimized
 for the service mesh sidecar use case. In the increasingly crowded field of
 similar-sounding service mesh projects, Linkerd is unique in this regard. But
@@ -46,8 +46,8 @@ world.**
 
 Being the lightest, simplest, most secure Kubernetes service mesh is Linkerd's
 promise to our users, and that's also what makes Linkerd unique among service
-meshes: it _is_ dramatically simpler, lighter, and more secure.  And the
-reason we've been able to accomplish that is—you guessed it—because we build on
+meshes: it _is_ dramatically simpler, lighter, and more secure. And the reason
+we've been able to accomplish that is—you guessed it—because we build on
 Linkerd2-proxy instead of Envoy. Not because Envoy is bad, but because
 Linkerd2-proxy is _better_—at least, for the very specific and limited use case
 of being a Kubernetes sidecar proxy.
@@ -77,20 +77,18 @@ plane. And unlike Envoy, Linkerd2-proxy is designed to be an _implementation
 detail_: it's not user-facing, it's not usable as a generic building block, and
 it has a boring name. This means Linkerd2-proxy tends to go unnoticed, though
 we've tried to shed a little more light on it recently with articles looking
-[under the
-hood](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
-and at [the
-roadmap](/2020/09/02/the-road-ahead-for-linkerd2-proxy/)).
+[under the hood](/2020/07/23/under-the-hood-of-linkerds-state-of-the-art-rust-proxy-linkerd2-proxy/)
+and at [the roadmap](/2020/09/02/the-road-ahead-for-linkerd2-proxy/)).
 
 So why "micro-proxy"? Loathe as we are to introduce another term into the
 lexicon,[^2] the word "proxy" doesn't do Linkerd2-proxy justice. A proxy is
 something like Envoy, NGINX, Apache, or httproxy. These projects can do a huge
-variety of things ("send HTTP requests with a path that matches this wildcard
-to this backend while rewriting these headers, compressing any Javascript
-files, and rotating the access logs") and they have a configuration and tuning
-surface area to match. Using a proxy in production requires significant
-operational investment: if you're running Apache, you're going to end up with
-an Apache expert somewhere in the house.
+variety of things ("send HTTP requests with a path that matches this wildcard to
+this backend while rewriting these headers, compressing any Javascript files,
+and rotating the access logs") and they have a configuration and tuning surface
+area to match. Using a proxy in production requires significant operational
+investment: if you're running Apache, you're going to end up with an Apache
+expert somewhere in the house.
 
 But Linkerd2-proxy is different. It's designed to be an implementation detail
 that doesn't require specialized knowledge or dedicated operational investment
@@ -145,14 +143,13 @@ application scales.
 
 Using Linkerd2-proxy allows us to keep tight reins on Linkerd's resource
 consumption. In our internal benchmarks of Linkerd and Istio using
-[Kinvolk's open source benchmark
-harness](https://github.com/kinvolk/service-mesh-benchmark), for example, at
-4,000 RPS (requests per second) of ingress traffic, we see Linkerd2-proxy
-instances consistently between **14mb** and **15mb** of memory, while Istio's
-Envoy ranged between **135mb** and **175mb**—ten times the size. Similarly,
-Linkerd2-proxy's CPU usage for the test run was consistently at **15ms** (CPU
-milliseconds) per instance, while Istio's Envoy ranged from **22ms** to
-**156ms**—from 50% more to 10x more.
+[Kinvolk's open source benchmark harness](https://github.com/kinvolk/service-mesh-benchmark),
+for example, at 4,000 RPS (requests per second) of ingress traffic, we see
+Linkerd2-proxy instances consistently between **14mb** and **15mb** of memory,
+while Istio's Envoy ranged between **135mb** and **175mb**—ten times the size.
+Similarly, Linkerd2-proxy's CPU usage for the test run was consistently at
+**15ms** (CPU milliseconds) per instance, while Istio's Envoy ranged from
+**22ms** to **156ms**—from 50% more to 10x more.
 
 Again, this is not an entirely fair comparison. These are internal benchmarks
 against one particular application and one particular configuration, and
@@ -201,9 +198,9 @@ Linkerd's data plane.
 Simplicity, resource consumption, and security were the driving factors in our
 decision to not adopt Envoy. However, we do believe that the choice of proxy is
 ultimately an implementation detail. While we've invested tremendous amounts in
-Linkerd2-proxy, we do periodically re-evaluate Envoy. I can say with
-clarity that if the tradeoff for our users ever tips in Envoy's favor, we will
-adopt it without qualms.
+Linkerd2-proxy, we do periodically re-evaluate Envoy. I can say with clarity
+that if the tradeoff for our users ever tips in Envoy's favor, we will adopt it
+without qualms.
 
 Our advice to would-be service mesh adopters, though, is simple: ignore the
 noise. Your job is not to "use a service mesh" or "adopt Envoy" or even "use
@@ -218,25 +215,25 @@ tradeoffs, not on fashion or trends.
 ### So why _do_ so many service meshes use Envoy?
 
 Because writing your own modern, scalable, high-performance network
-(micro-)proxy is _hard_. It's _really hard_. Building out Linkerd2-proxy and
-the Rust networking libraries that make it possible has been a tremendous
-effort from a many people for the past several years. Unless your project has
-both the technical prowess and the _desire_ to tackle this challenge, it's much
-easier to just use Envoy.
+(micro-)proxy is _hard_. It's _really hard_. Building out Linkerd2-proxy and the
+Rust networking libraries that make it possible has been a tremendous effort
+from a many people for the past several years. Unless your project has both the
+technical prowess and the _desire_ to tackle this challenge, it's much easier to
+just use Envoy.
 
 ### But isn't Envoy a "standard" for service meshes?
 
 No.[^6] A _standard_ is something that is necessary for interoperability. The
 _standard_ that matters for service meshes is TCP, or HTTP, or things like
 [SMI](https://smi-spec.io/) that allow tools to be built on top of the service
-mesh. (E.g. this excellent example of [Argo driving Linkerd via SMI for canary
-rollouts](https://argoproj.github.io/argo-rollouts/getting-started/smi/).)
+mesh. (E.g. this excellent example of
+[Argo driving Linkerd via SMI for canary rollouts](https://argoproj.github.io/argo-rollouts/getting-started/smi/).)
 
-Envoy being a popular choice of service mesh data plane proxy is not a
-standard, it's simply a commonality. What would it mean for Envoy to be a
-"service mesh standard"? That we could keep our data plane in place, and swap
-out the control plane? That we can have different control planes operate the
-same data plane? These are far-fetched use cases at best.
+Envoy being a popular choice of service mesh data plane proxy is not a standard,
+it's simply a commonality. What would it mean for Envoy to be a "service mesh
+standard"? That we could keep our data plane in place, and swap out the control
+plane? That we can have different control planes operate the same data plane?
+These are far-fetched use cases at best.
 
 ### But what if we have a requirement to use Envoy?
 
@@ -256,8 +253,8 @@ Nordstrom, Microsoft, H-E-B, Chase, Clover Health, HP, any many more.
 ### Could other service mesh projects use Linkerd2-proxy?
 
 Not really. But anyone who is interested in building a high performance
-ultralight network proxy could certainly make use of the underlying Rust
-network libraries that power Linkerd.
+ultralight network proxy could certainly make use of the underlying Rust network
+libraries that power Linkerd.
 
 ### Sounds amazing! How can I get started with Linkerd?
 

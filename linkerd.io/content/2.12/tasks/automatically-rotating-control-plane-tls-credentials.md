@@ -1,12 +1,13 @@
 ---
 title: Automatically Rotating Control Plane TLS Credentials
-description: Use cert-manager to automatically rotate control plane TLS credentials.
+description:
+  Use cert-manager to automatically rotate control plane TLS credentials.
 ---
 
 Linkerd's [automatic mTLS](../features/automatic-mtls/) feature generates TLS
 certificates for proxies and automatically rotates them without user
-intervention. These certificates are derived from a *trust anchor*, which is
-shared across clusters, and an *issuer certificate*, which is specific to the
+intervention. These certificates are derived from a _trust anchor_, which is
+shared across clusters, and an _issuer certificate_, which is specific to the
 cluster.
 
 While Linkerd automatically rotates the per-proxy TLS certificates, it does not
@@ -23,7 +24,7 @@ for making TLS credentials from external sources available to Kubernetes
 clusters.
 
 Cert-manager is very flexible. You can configure it to pull certificates from
-secrets managemenet solutions such as [Vault](https://www.vaultproject.io).  In
+secrets managemenet solutions such as [Vault](https://www.vaultproject.io). In
 this guide, we'll focus on a self-sufficient setup: we will configure
 cert-manager to act as an on-cluster
 [CA](https://en.wikipedia.org/wiki/Certificate_authority) and have it re-issue
@@ -32,8 +33,8 @@ the trust anchor.
 
 ### Cert manager as an on-cluster CA
 
-As a first step, [install cert-manager on your
-cluster](https://cert-manager.io/docs/installation/).
+As a first step,
+[install cert-manager on your cluster](https://cert-manager.io/docs/installation/).
 
 Next, create the namespace that cert-manager will use to store its
 Linkerd-related resources. For simplicity, we suggest reusing the default
@@ -58,8 +59,8 @@ step certificate create root.linkerd.cluster.local ca.crt ca.key \
     --namespace=linkerd
 ```
 
-For a longer-lived trust anchor certificate, pass the `--not-after` argument
-to the step command with the desired value (e.g. `--not-after=87600h`).
+For a longer-lived trust anchor certificate, pass the `--not-after` argument to
+the step command with the desired value (e.g. `--not-after=87600h`).
 
 #### Create an Issuer referencing the secret
 
@@ -113,9 +114,10 @@ EOF
 ```
 
 (In the YAML manifest above, the `duration` key instructs cert-manager to
-consider certificates as valid for `48` hours and the `renewBefore` key indicates
-that cert-manager will attempt to issue a new certificate `25` hours before
-expiration of the current one. These values can be customized to your liking.)
+consider certificates as valid for `48` hours and the `renewBefore` key
+indicates that cert-manager will attempt to issue a new certificate `25` hours
+before expiration of the current one. These values can be customized to your
+liking.)
 
 At this point, cert-manager can now use this Certificate resource to obtain TLS
 credentials, which will be stored in a secret named `linkerd-identity-issuer`.
@@ -132,8 +134,8 @@ Now we just need to inform Linkerd to consume these credentials.
 For CLI installation, the Linkerd control plane should be installed with the
 `--identity-external-issuer` flag, which instructs Linkerd to read certificates
 from the `linkerd-identity-issuer` secret. Whenever certificate and key stored
-in the secret are updated, the `identity` service will automatically detect
-this change and reload the new credentials.
+in the secret are updated, the `identity` service will automatically detect this
+change and reload the new credentials.
 
 Voila! We have set up automatic rotation of Linkerd's control plane TLS
 credentials.
@@ -198,5 +200,5 @@ following instructions to install and configure Linkerd to use it.
 
 ## See also
 
-* [Automatically Rotating Webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/)
-* [Manually rotating Linkerd's trust anchor credentials](manually-rotating-control-plane-tls-credentials/)
+- [Automatically Rotating Webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/)
+- [Manually rotating Linkerd's trust anchor credentials](manually-rotating-control-plane-tls-credentials/)

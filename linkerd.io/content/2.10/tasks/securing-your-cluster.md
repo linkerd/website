@@ -21,7 +21,9 @@ Depending on your RBAC setup, you may need to perform additional steps to enable
 your user(s) to perform Tap actions.
 
 {{< note >}}
+
 If you are on GKE, skip to the [GKE section below](#gke).
+
 {{< /note >}}
 
 ### Check for Tap access
@@ -42,7 +44,8 @@ To determine if you can watch deployments in the emojivoto namespace:
 kubectl auth can-i watch deployments.tap.linkerd.io -n emojivoto
 ```
 
-To determine if a specific user can watch deployments in the emojivoto namespace:
+To determine if a specific user can watch deployments in the emojivoto
+namespace:
 
 ```bash
 kubectl auth can-i watch deployments.tap.linkerd.io -n emojivoto --as $(whoami)
@@ -81,9 +84,11 @@ PolicyRule:
 ```
 
 {{< note >}}
+
 This ClusterRole name includes the Linkerd Viz namespace, so it may vary if you
 installed Viz into a non-default namespace:
 `linkerd-[LINKERD_VIZ_NAMESPACE]-tap-admin`
+
 {{< /note >}}
 
 To bind the `linkerd-linkerd-viz-tap-admin` ClusterRole to a particular user:
@@ -115,7 +120,9 @@ kubectl create clusterrolebinding \
 ```
 
 {{< note >}}
+
 Not recommended for production, only do this for testing/development.
+
 {{< /note >}}
 
 ### GKE
@@ -161,7 +168,9 @@ kubectl create clusterrolebinding \
 ```
 
 {{< note >}}
+
 Not recommended for production, only do this for testing/development.
+
 {{< /note >}}
 
 ### Linkerd Dashboard tap access

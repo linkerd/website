@@ -12,11 +12,12 @@ command. This is recommended for production, since it allows for repeatability.
 
 To do [automatic mutual TLS](../features/automatic-mtls/), Linkerd requires
 trust anchor certificate and an issuer certificate and key pair. When you're
-using `linkerd install`, we can generate these for you. However, for Helm,
-you will need to generate these yourself.
+using `linkerd install`, we can generate these for you. However, for Helm, you
+will need to generate these yourself.
 
-Please follow the instructions in [Generating your own mTLS root
-certificates](generate-certificates/) to generate these.
+Please follow the instructions in
+[Generating your own mTLS root certificates](generate-certificates/) to generate
+these.
 
 ## Helm install procedure for stable releases
 
@@ -34,8 +35,8 @@ helm install linkerd2 \
 The chart values will be picked from the chart's `values.yaml` file.
 
 You can override the values in that file by providing your own `values.yaml`
-file passed with a `-f` option, or overriding specific values using the family of
-`--set` flags like we did above for certificates.
+file passed with a `-f` option, or overriding specific values using the family
+of `--set` flags like we did above for certificates.
 
 ## Helm install procedure for edge releases
 
@@ -44,10 +45,12 @@ then `linkerd-control-plane`. This new method will eventually make its way into
 the `2.12.0` stable release as well when it comes out.
 
 {{< note >}}
+
 If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
 mode, additional steps may be needed to ensure service discovery works as
-intended. Instrunctions are on the [Cilium cluster
-configuration](../reference/cluster-configuration/#cilium) page.
+intended. Instrunctions are on the
+[Cilium cluster configuration](../reference/cluster-configuration/#cilium) page.
+
 {{< /note >}}
 
 ### linkerd-crds
@@ -62,9 +65,11 @@ helm install linkerd-crds -n linkerd --create-namespace --devel linkerd-edge/lin
 ```
 
 {{< note >}}
+
 This will create the `linkerd` namespace. If it already exists or you're
 creating it beforehand elsewhere in your pipeline, just omit the
 `--create-namespace` flag.
+
 {{< /note >}}
 
 ### linkerd-control-plane
@@ -82,16 +87,18 @@ helm install linkerd-control-plane \
 ```
 
 {{< note >}}
+
 If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
 `--set cniEnabled=true` flag to your `helm install` command.
+
 {{< /note >}}
 
 ## Enabling high availability mode
 
 The linkerd2 chart (or, for edge releases, the linkerd-control-plane chart)
 contains a file called `values-ha.yaml` that overrides some default values to
-enable high availability mode, analogous to the `--ha` option in `linkerd
-install`.
+enable high availability mode, analogous to the `--ha` option in
+`linkerd install`.
 
 You can get the `values-ha.yaml` by fetching the chart files:
 
@@ -133,10 +140,11 @@ To install Linkerd to a different namespace, you can override the Helm
 By default, the chart creates the control plane namespace with the
 `config.linkerd.io/admission-webhooks: disabled` label. This is required for the
 control plane to work correctly. This means that the chart won't work with
-Helm's `--namespace` option.  If you're relying on a separate tool to create the
+Helm's `--namespace` option. If you're relying on a separate tool to create the
 control plane namespace, make sure that:
 
-1. The namespace is labeled with `config.linkerd.io/admission-webhooks: disabled`
+1. The namespace is labeled with
+   `config.linkerd.io/admission-webhooks: disabled`
 1. The `installNamespace` is set to `false`
 1. The `namespace` variable is overridden with the name of your namespace
 
@@ -153,22 +161,22 @@ linkerd/linkerd2        <chart-semver-version> {{< latest-stable-version >}}    
 ```
 
 During an upgrade, you must choose whether you want to reuse the values in the
-chart or move to the values specified in the newer chart.  Our advice is to use
-a `values.yaml` file that stores all custom overrides that you have for your
+chart or move to the values specified in the newer chart. Our advice is to use a
+`values.yaml` file that stores all custom overrides that you have for your
 chart.
 
 The `helm upgrade` command has a number of flags that allow you to customize its
 behavior. Special attention should be paid to `--reuse-values` and
 `--reset-values` and how they behave when charts change from version to version
-and/or overrides are applied through `--set` and `--set-file`.  For example:
+and/or overrides are applied through `--set` and `--set-file`. For example:
 
 - `--reuse-values` with no overrides - all values are reused
 - `--reuse-values` with overrides - all except the values that are overridden
-are reused
-- `--reset-values` with no overrides - no values are reused and all changes
-from provided release are applied during the upgrade
+  are reused
+- `--reset-values` with no overrides - no values are reused and all changes from
+  provided release are applied during the upgrade
 - `--reset-values` with overrides - no values are reused and changed from
-provided release are applied together with the overrides
+  provided release are applied together with the overrides
 - no flag and no overrides - `--reuse-values` will be used by default
 - no flag and overrides - `--reset-values` will be used by default
 

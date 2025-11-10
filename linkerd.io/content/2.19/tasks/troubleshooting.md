@@ -877,9 +877,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project itself only produces [edge
-release](/releases/) artifacts. For more details, read the [Releases and
-Versions](/releases/) page.
+As of February 2024, the Linkerd project itself only produces
+[edge release](/releases/) artifacts. For more details, read the
+[Releases and Versions](/releases/) page.
 
 #### is running version X but the latest version is Y
 
@@ -904,9 +904,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project itself only produces [edge
-release](/releases/) artifacts. For more details, read the [Releases and
-Versions](/releases/) page.
+As of February 2024, the Linkerd project itself only produces
+[edge release](/releases/) artifacts. For more details, read the
+[Releases and Versions](/releases/) page.
 
 #### is running version X but the latest version is Y
 
@@ -1064,8 +1064,8 @@ a port marked as opaque on the Pod but not the Service (or vice versa) can cause
 inconsistent behavior depending on if traffic is sent to the Pod directly (for
 example with a headless Service) or through a ClusterIP Service. This error can
 be remedied by adding the `config.linkerd.io/opaque-ports` annotation to both
-the Pod and Service. See
-[Protocol Detection](../features/protocol-detection/) for more information.
+the Pod and Service. See [Protocol Detection](../features/protocol-detection/)
+for more information.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
@@ -1334,8 +1334,9 @@ version of the CLI. This usually means that the CLI has been upgraded but that
 the Link resources have not and certain features may not be supported on those
 Links until they are upgraded.
 
-To upgrade a Link, regenerate it. Refer to the [multicluster docs](multicluster/#linking-the-clusters)
-for instructions on how to do this.
+To upgrade a Link, regenerate it. Refer to the
+[multicluster docs](multicluster/#linking-the-clusters) for instructions on how
+to do this.
 
 ### √ remote cluster access credentials are valid {#l5d-smc-target-clusters-access}
 
@@ -1492,8 +1493,8 @@ to a GitOps workflow.
 
 This check ensures the linked clusters are using the new model. To migrate from
 the old model, update the multicluster extension, referring your links into the
-new `controllers` entry, as detailed in the [installing multicluster
-doc](installing-multicluster/#step-1-install-the-multicluster-control-plane).
+new `controllers` entry, as detailed in the
+[installing multicluster doc](installing-multicluster/#step-1-install-the-multicluster-control-plane).
 The new controllers will be deployed, but they won't manage the links until the
 old ones get deleted. Once the old ones are removed, the new controllers will
 grab the Lease object allowing them to take over service mirroring.
@@ -1857,8 +1858,8 @@ plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](../features/server-policy/) authorizing
-Prometheus to scrape the data plane proxies in a namespace:
+generates [policy resources](../features/server-policy/) authorizing Prometheus
+to scrape the data plane proxies in a namespace:
 
 ```bash
 linkerd viz allow-scrapes --namespace emojivoto | kubectl apply -f -

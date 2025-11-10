@@ -6,8 +6,8 @@ description: Configuring HTTPRoute resources to perform dynamic request routing.
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster. Follow
-the [Installing Linkerd Guide](install/) if you haven't already done this
-(make sure you have at least linkerd stable-2.13.0 or edge-23.3.2).
+the [Installing Linkerd Guide](install/) if you haven't already done this (make
+sure you have at least linkerd stable-2.13.0 or edge-23.3.2).
 
 You also need to have the [Helm](https://helm.sh/docs/intro/quickstart/) CLI
 installed.
@@ -29,7 +29,7 @@ traffic to the other one just by adding a header to the frontend requests.
 First we create the `test` namespace, annotated by linkerd so all pods that get
 created there get injected with the linkerd proxy:
 
-``` bash
+```bash
 kubectl create ns test --dry-run=client -o yaml \
   | linkerd inject - \
   | kubectl apply -f -
@@ -110,11 +110,13 @@ namespace (`test`), and also specify the Service port number (not the Service's
 target port).
 
 {{< warning >}}
+
 Outbound `HTTPRoute`s are **incompatible with `ServiceProfiles`**. If a
 [ServiceProfile](../features/service-profiles/) is defined for the parent
 Service of an `HTTPRoute`, proxies will use the `ServiceProfile` configuration,
 rather than the `HTTPRoute` configuration, as long as the `ServiceProfile`
 exists.
+
 {{< /warning >}}
 
 Next, we give a list of rules that will act on the traffic hitting that Service.
@@ -161,8 +163,8 @@ PODINFO_UI_MESSAGE=B backend
 ### To Keep in Mind
 
 Note that you can use any header you like, but for this to work the frontend has
-to forward it. "`x-request-id`" is a common header used in microservices, that is
-explicitly forwarded by podinfo, and that's why we chose it.
+to forward it. "`x-request-id`" is a common header used in microservices, that
+is explicitly forwarded by podinfo, and that's why we chose it.
 
 Also, keep in mind the linkerd proxy handles this on the client side of the
 request (the frontend pod in this case) and so that pod needs to be injected,

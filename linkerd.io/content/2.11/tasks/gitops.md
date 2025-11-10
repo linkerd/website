@@ -33,9 +33,9 @@ You will need to clone this
 machine and replicate it in your Kubernetes cluster following the steps defined
 in the next section.
 
-This guide uses the [step cli](https://smallstep.com/cli/) to create certificates
-used by the Linkerd clusters to enforce mTLS, so make sure you have installed
-step for your environment.
+This guide uses the [step cli](https://smallstep.com/cli/) to create
+certificates used by the Linkerd clusters to enforce mTLS, so make sure you have
+installed step for your environment.
 
 ## Set up the repositories
 
@@ -58,9 +58,11 @@ git remote add git-server git://localhost/linkerd-examples.git
 ```
 
 {{< note >}}
+
 To simplify the steps in this guide, we will be interacting with the in-cluster
 Git server via port-forwarding. Hence, the remote endpoint that we just created
 targets your localhost.
+
 {{< /note >}}
 
 Deploy the Git server to the `scm` namespace in your cluster:
@@ -73,10 +75,12 @@ Later in this guide, Argo CD will be configured to watch the repositories hosted
 by this Git server.
 
 {{< note >}}
+
 This Git server is configured to run as a
 [daemon](https://git-scm.com/book/en/v2/Git-on-the-Server-Git-Daemon) over the
 `git` protocol, with unauthenticated access to the Git data. This setup is not
 recommended for production use.
+
 {{< /note >}}
 
 Confirm that the Git server is healthy:
@@ -100,8 +104,8 @@ Confirm that the remote repository is successfully cloned:
 kubectl -n scm exec "${git_server}" -- ls -al /git/linkerd-examples.git
 ```
 
-Confirm that you can push from the local repository to the remote repository
-via port-forwarding:
+Confirm that you can push from the local repository to the remote repository via
+port-forwarding:
 
 ```sh
 kubectl -n scm port-forward "${git_server}" 9418  &
@@ -192,9 +196,11 @@ kubectl apply -f gitops/main.yaml
 ```
 
 {{< note >}}
+
 The "app of apps" pattern is commonly used in Argo CD workflows to bootstrap
 applications. See the Argo CD documentation for more
 [information](https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern).
+
 {{< /note >}}
 
 Confirm that the `main` application is deployed successfully:
@@ -224,9 +230,11 @@ argocd app sync cert-manager
 ```
 
 {{< note >}}
-This guide uses cert-manager 0.15.0 due to an issue with cert-manager 0.16.0
-and kubectl <1.19 and Helm 3.2, which Argo CD uses. See the upgrade notes
+
+This guide uses cert-manager 0.15.0 due to an issue with cert-manager 0.16.0 and
+kubectl <1.19 and Helm 3.2, which Argo CD uses. See the upgrade notes
 [here](https://cert-manager.io/docs/installation/upgrading/upgrading-0.15-0.16/#helm).
+
 {{< /note >}}
 
 Confirm that cert-manager is running:
@@ -334,15 +342,18 @@ argocd app sync linkerd-bootstrap
 ```
 
 {{< note >}}
+
 If the issuer and certificate resources appear in a degraded state, it's likely
 that the SealedSecrets controller failed to decrypt the sealed
-`linkerd-trust-anchor` secret. Check the SealedSecrets controller for error logs.
+`linkerd-trust-anchor` secret. Check the SealedSecrets controller for error
+logs.
 
 For debugging purposes, the sealed resource can be retrieved using the
 `kubectl -n linkerd get sealedsecrets linkerd-trust-anchor -oyaml` command.
 Ensure that this resource matches the
 `gitops/resources/linkerd/trust-anchor.yaml` file you pushed to the in-cluster
 Git server earlier.
+
 {{< /note >}}
 
 ![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png "Synchronize the linkerd-bootstrap application")
@@ -383,18 +394,18 @@ We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
 
 Locate the `identityTrustAnchorsPEM` variable in your local
-`gitops/argo-apps/linkerd.yaml` file, and set its `value` to that
-of `${trust_anchor}`.
+`gitops/argo-apps/linkerd.yaml` file, and set its `value` to that of
+`${trust_anchor}`.
 
 Ensure that the multi-line string is indented correctly. E.g.,
 
 ```yaml
-  source:
-    chart: linkerd2
-    repoURL: https://helm.linkerd.io/stable
-    targetRevision: 2.11.0
-    helm:
-      parameters:
+source:
+  chart: linkerd2
+  repoURL: https://helm.linkerd.io/stable
+  targetRevision: 2.11.0
+  helm:
+    parameters:
       - name: identityTrustAnchorsPEM
         value: |
           -----BEGIN CERTIFICATE-----

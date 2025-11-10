@@ -85,15 +85,14 @@ networks, see
 Starting way back in the Linkerd 2.12 release, Linkerd has been on the forefront
 of adopting Kubernetes's new [Gateway API](https://gateway-api.sigs.k8s.io/) as
 the core configuration mechanism for Linkerd, including for features such as
-[zero trust authorization policy](/2.13/features/server-policy/)
-and
-[dynamic request routing](/2.13/features/request-routing/).
-Adopting the Gateway API has a whole host of benefits for users, from providing
-standardized mechanisms for configuring complex resources such as classes of
-HTTP requests to providing a uniform API across ingress and service meshes
-to—most importantly for Linkerd's philosophy of minimalism—reduction of
-additional configuration surface area, since the Gateway configuration resources
-that already live on the cluster.
+[zero trust authorization policy](/2.13/features/server-policy/) and
+[dynamic request routing](/2.13/features/request-routing/). Adopting the Gateway
+API has a whole host of benefits for users, from providing standardized
+mechanisms for configuring complex resources such as classes of HTTP requests to
+providing a uniform API across ingress and service meshes to—most importantly
+for Linkerd's philosophy of minimalism—reduction of additional configuration
+surface area, since the Gateway configuration resources that already live on the
+cluster.
 
 In the Linkerd 2.14 release we're happy to report that Linkerd is now fully
 conformant with the mesh profile of the Gateway API. This means that Linkerd now

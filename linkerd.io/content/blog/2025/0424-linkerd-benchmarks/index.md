@@ -91,11 +91,10 @@ since 2021, differences still exist, especially under higher loads, and when it
 comes to production use cases, that matters.
 
 Linkerd consistently showed better performance, especially at 200 and 2000 RPS,
-even outperforming Ambient in some cases. While Ambient showed strong performance,
-Linkerd maintained a lead.
-As shown in the results above, the performance gap has narrowed compared to
-2021, making additional features—such as
-[Multi-cluster Federated Services](/2/tasks/federated-services/),
+even outperforming Ambient in some cases. While Ambient showed strong
+performance, Linkerd maintained a lead. As shown in the results above, the
+performance gap has narrowed compared to 2021, making additional features—such
+as [Multi-cluster Federated Services](/2/tasks/federated-services/),
 [FIPS compliance](https://www.buoyant.io/linkerd-enterprise), and the upcoming
 Windows support in Linkerd’s case—increasingly important for gaining an
 advantage over other service meshes.

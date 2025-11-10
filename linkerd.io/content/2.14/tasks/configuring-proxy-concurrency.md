@@ -35,10 +35,9 @@ The simplest way to configure the proxy's thread pool is using the
 proxy injector to set an environment variable that controls the number of CPU
 cores the proxy will use.
 
-When installing Linkerd using the [`linkerd install` CLI
-command](install/), the `--proxy-cpu-limit` argument sets this
-annotation globally for all proxies injected by the Linkerd installation. For
-example,
+When installing Linkerd using the [`linkerd install` CLI command](install/), the
+`--proxy-cpu-limit` argument sets this annotation globally for all proxies
+injected by the Linkerd installation. For example,
 
 ```bash
 # first, install the Linkerd CRDs
@@ -65,14 +64,17 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-limit: '2'
+        config.linkerd.io/proxy-cpu-limit: "2"
   # ...
 ```
 
-{{< note >}} Unlike Kubernetes CPU limits and requests, which can be expressed
-in milliCPUs, the `proxy-cpu-limit` annotation should be expressed in whole
-numbers of CPU cores. Fractional values will be rounded up to the nearest whole
-number. {{< /note >}}
+{{< note >}}
+
+Unlike Kubernetes CPU limits and requests, which can be expressed in milliCPUs,
+the `proxy-cpu-limit` annotation should be expressed in whole numbers of CPU
+cores. Fractional values will be rounded up to the nearest whole number.
+
+{{< /note >}}
 
 ## Using Kubernetes CPU Limits and Requests
 
@@ -84,11 +86,13 @@ kubelet is configured, using Kubernetes resource limits rather than the
 `proxy-cpu-limit` annotation may not be ideal.
 
 {{< warning >}}
+
 When the environment variable configured by the `proxy-cpu-limit` annotation is
 unset, the proxy will run only a single worker thread. Therefore, a
 `proxy-cpu-limit` annotation should always be added to set an upper bound on the
 number of CPU cores used by the proxy, even when Kubernetes CPU limits are also
 in use.
+
 {{< /warning >}}
 
 The kubelet uses one of two mechanisms for enforcing pod CPU limits. This is
@@ -125,7 +129,7 @@ criteria must be met:
 
 ## Using Helm
 
-When using [Helm](install-helm/), users must take care to set the
-`proxy.cores` Helm variable in addition to `proxy.cpu.limit`, if
-the criteria for cgroup-based CPU limits
-[described above](#using-kubernetes-cpu-limits-and-requests) are not met.
+When using [Helm](install-helm/), users must take care to set the `proxy.cores`
+Helm variable in addition to `proxy.cpu.limit`, if the criteria for cgroup-based
+CPU limits [described above](#using-kubernetes-cpu-limits-and-requests) are not
+met.
