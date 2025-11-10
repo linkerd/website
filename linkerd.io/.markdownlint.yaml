@@ -7,4 +7,4 @@ line_length:
   tables: false
 no-trailing-punctuation:
   punctuation: ".,;:"
-no-duplicate-header: false
+siblings_only: true
