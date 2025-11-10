@@ -9,4 +9,5 @@ line_length:
   tables: false
 no-trailing-punctuation:
   punctuation: '.,;:'
-siblings_only: true
+no-duplicate-heading:
+  siblings_only: true

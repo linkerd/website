@@ -6,5 +6,6 @@ line_length:
   code_blocks: false
   tables: false
 no-trailing-punctuation:
-  punctuation: ".,;:"
-siblings_only: true
+  punctuation: '.,;:'
+no-duplicate-heading:
+  siblings_only: true
