@@ -18,9 +18,6 @@ mTLS, but they are also commonly one of the least well documented. For more
 information about certificates in Linkerd, see the Buoyant [(m)TLS concepts
 primer][mtls-concepts-primer].
 
-[mtls-concepts-primer]:
-  https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/tls-concepts/
-
 {{< /note >}}
 
 While Linkerd automatically rotates the workload certificates, it cannot
@@ -80,9 +77,6 @@ will still involve manual intervention, as explained below.
 cert-manager is _extremely_ flexible, with many different ways to configure it.
 For more information about cert-manager in general and how to approach its
 configuration, see Buoyant's [cert-manager concepts primer].
-
-[cert-manager concepts primer]:
-  https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/cert-manager-concepts/
 
 {{< /note >}}
 
@@ -949,3 +943,5 @@ and the old trust anchor is no longer trusted.
 
 [cert-manager concepts primer]:
   https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/cert-manager-concepts/
+[mtls-concepts-primer]:
+  https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/tls-concepts/

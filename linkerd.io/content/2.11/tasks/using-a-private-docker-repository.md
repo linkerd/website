@@ -48,5 +48,5 @@ Now that the images are hosted by your private repository, you can update your
 deployment configuration to pull from your private docker repository.
 
 For a more advanced configuration, you can clone the
-[linkerd2 repository ](https://github.com/linkerd/linkerd2) to your CI/CD system
+[linkerd2 repository](https://github.com/linkerd/linkerd2) to your CI/CD system
 and build specific tags to push to your private repository.

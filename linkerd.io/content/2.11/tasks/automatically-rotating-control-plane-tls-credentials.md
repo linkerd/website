@@ -169,8 +169,8 @@ Some possible ways to resolve this issue are:
 
 Instead of using Cert Manager as CA, you can configure it to rely on a number of
 other solutions such as [Vault](https://www.vaultproject.io). More detail on how
-to setup the existing Cert Manager to use different type of issuers can be found
-[here](https://cert-manager.io/docs/configuration/vault/).
+to setup the existing Cert Manager to use different type of issuers can be
+[found here](https://cert-manager.io/docs/configuration/vault/).
 
 ## Third party cert management solutions
 

@@ -98,8 +98,8 @@ policy, "all-unauthenticated". In addition, a separate authorization is
 generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a [`Server`] resource for the `authors` deployment's service
-port. For details on [`Server`] resources, see
-[here](restricting-access/#creating-a-server-resource).
+port. For details on [`Server`] resources,
+[see here](restricting-access/#creating-a-server-resource).
 
 ```bash
 kubectl apply -f - <<EOF
@@ -460,7 +460,6 @@ authorization policy in general, and the various configurations that are
 available, see the [Policy reference docs](../reference/authorization-policy/).
 
 [`Server`]: ../reference/authorization-policy/#server
-[`HTTPRoute`]: ../reference/authorization-policy/#httproute
 [`AuthorizationPolicy`]: ../reference/authorization-policy/#authorizationpolicy
 [`MeshTLSAuthentication`]:
   ../reference/authorization-policy/#meshtlsauthentication

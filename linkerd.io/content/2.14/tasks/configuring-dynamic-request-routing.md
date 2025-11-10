@@ -192,4 +192,3 @@ more workloads you have injected the better, to benefit from things like easy
 mTLS setup and all the other advantages that linkerd brings to the table!
 
 [`HTTPRoute`]: ../features/httproute/
-[`ServiceProfile`]: ../features/ServiceProfile/
