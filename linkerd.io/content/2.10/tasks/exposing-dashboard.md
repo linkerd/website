@@ -173,7 +173,7 @@ for details on how to change the username and password.
 ## Ambassador
 
 Ambassador works by defining a
-[mapping ](https://www.getambassador.io/docs/latest/topics/using/intro-mappings/)
+[mapping](https://www.getambassador.io/docs/latest/topics/using/intro-mappings/)
 as an annotation on a service.
 
 The below annotation exposes the dashboard at `dashboard.example.com`.

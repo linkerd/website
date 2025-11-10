@@ -8,7 +8,8 @@ safer by giving you runtime debugging, observability, reliability, and
 security&mdash;all without requiring any changes to your code.
 
 For a brief introduction to the service mesh model, we recommend reading
-[The Service Mesh: What Every Software Engineer Needs to Know about the World's Most Over-Hyped Technology](https://servicemesh.io/).
+[The Service Mesh: What Every Software Engineer Needs to Know about the World's
+Most Over-Hyped Technology](https://servicemesh.io/).
 
 Linkerd is fully open source, licensed under
 [Apache v2](https://github.com/linkerd/linkerd2/blob/main/LICENSE), and is a

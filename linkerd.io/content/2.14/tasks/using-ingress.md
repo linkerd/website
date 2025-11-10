@@ -653,7 +653,7 @@ ngrok can be meshed normally: it does not require the
 
 After signing up for a [free ngrok account](https://ngrok.com/signup), and
 running through the
-[installation steps for the ngrok Ingress controller ](https://github.com/ngrok/kubernetes-ingress-controller#installation),
+[installation steps for the ngrok Ingress controller](https://github.com/ngrok/kubernetes-ingress-controller#installation),
 you can add ingress by configuring an ingress object for your service and
 applying it with `kubectl apply -f ingress.yaml`.
 
