@@ -19,11 +19,9 @@ title: Shortcodes
 
 {{< keyval >}}
 
-
 | Param | Description                      |
 | ----- | -------------------------------- |
 | `foo` | A description of this parameter. |
-
 
 {{< /keyval >}}
 
