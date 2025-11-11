@@ -45,7 +45,9 @@ in the future.
 
 HTTP responses are classified as _failures_ if their status code is a [5xx
 server error]. Future Linkerd releases may add support for configuring what
-status codes are classified as failures. {{</ note >}}
+status codes are classified as failures.
+
+{{< /note >}}
 
 ### Consecutive Failures
 
@@ -73,7 +75,8 @@ request, and should not be confused with HTTP readiness and liveness probes.
 This means that a circuit breaker will not allow an endpoint to exit probation
 just because it responds successfully to health checks &mdash; actual
 application traffic must succeed for the endpoint to become available again.
-{{</ note >}}
+
+{{< /note >}}
 
 When an endpoint's failure accrual policy trips the circuit breaker, it will
 remain unavailble for at least a _minimum penalty_ duration. After this duration
@@ -110,7 +113,9 @@ exists.
 Some failure accrual annotations have values which represent a duration.
 Durations are specified as a positive integer, followed by a unit, which may be
 one of: `ms` for milliseconds, `s` for seconds, `m` for minutes, `h` for hours,
-or `d` for days. {{</ note >}}
+or `d` for days.
+
+{{< /note >}}
 
 Set this annotation on a Service to enable meshed clients to use circuit
 breaking when sending traffic to that Service:

@@ -71,7 +71,7 @@ kubectl -n emojivoto exec -it \
 A real-world error message written by the proxy that the debug sidecar is
 effective in troubleshooting is a `Connection Refused` error like this one:
 
-```log
+```text {class=disable-copy}
 ERR! [<time>] proxy={server=in listen=0.0.0.0:4143 remote=some.svc:50416}
 linkerd2_proxy::app::errors unexpected error: error trying to connect:
 Connection refused (os error 111) (address: 127.0.0.1:8080)
@@ -93,7 +93,7 @@ Be aware that there is a similar error with the message
 correlated errors or messages in your application log output. In this scenario,
 the debug container may not help to troubleshoot the error message.
 
-```log
+```text {class=disable-copy}
 ERR! [<time>] proxy={server=in listen=0.0.0.0:4143 remote=some.svc:35314}
 linkerd2_proxy::app::errors unexpected error: connection error:
 Connection reset by peer (os error 104)

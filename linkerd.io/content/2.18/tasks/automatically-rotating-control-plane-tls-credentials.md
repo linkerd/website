@@ -515,10 +515,14 @@ Linkerd installed.
 To have Linkerd use the certificates created by cert-manager, you need to add
 the following to your `values.yaml` file or pass them in as flags at runtime.
 
+{{< keyval >}}
+
 | Field                    | Value               |
 | ------------------------ | ------------------- |
 | `identity.externalCA`    | `true`              |
 | `identity.issuer.scheme` | `kubernetes.io/tls` |
+
+{{< /keyval >}}
 
 #### Installing with Helm (recommended)
 

@@ -163,9 +163,11 @@ credentials in a Secret or you can put them directly into the URL.
 We recommend using a Secret -- first, create the Secret, which must be in the
 same namespace as Linkerd Viz itself:
 
-```yaml
-kubectl create secret generic \ prometheus-credentials -n linkerd-viz \
---from-literal=user=your-username --from-literal=password=your-password
+```bash
+kubectl create secret generic \
+  prometheus-credentials -n linkerd-viz \
+  --from-literal=user=your-username
+  --from-literal=password=your-password
 ```
 
 Then reference the Secret in your `values.yaml`:

@@ -35,11 +35,11 @@ file (replace `{{.Namespace}}` with the namespace where the Linkerd Viz
 extension is running):
 
 ```yaml
-- job_name: "linkerd"
+- job_name: 'linkerd'
   kubernetes_sd_configs:
     - role: pod
       namespaces:
-        names: ["{{.Namespace}}"]
+        names: ['{{.Namespace}}']
 
   relabel_configs:
     - source_labels:
@@ -48,10 +48,10 @@ extension is running):
       regex: ^prometheus$
 
   honor_labels: true
-  metrics_path: "/federate"
+  metrics_path: '/federate'
 
   params:
-    "match[]":
+    'match[]':
       - '{job="linkerd-proxy"}'
       - '{job="linkerd-controller"}'
 ```
@@ -68,7 +68,7 @@ metadata:
     k8s-app: linkerd-prometheus
     release: monitoring
   name: linkerd-federate
-  namespace: { { .Namespace } }
+  namespace: {{.Namespace}}
 spec:
   endpoints:
     - interval: 30s
@@ -82,13 +82,13 @@ spec:
       honorLabels: true
       relabelings:
         - action: keep
-          regex: "^prometheus$"
+          regex: '^prometheus$'
           sourceLabels:
-            - "__meta_kubernetes_pod_container_name"
+            - '__meta_kubernetes_pod_container_name'
   jobLabel: app
   namespaceSelector:
     matchNames:
-      - { { .Namespace } }
+      - {{.Namespace}}
   selector:
     matchLabels:
       component: prometheus

@@ -149,7 +149,7 @@ versions `<= stable-2.8.1`.
 
 Your `linkerd-identity` pods will likely crash with the following log output:
 
-```log
+```text {class=disable-copy}
 "Failed to initialize identity service: failed to read CA from disk:
 unsupported block type: 'PRIVATE KEY'"
 ```

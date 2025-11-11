@@ -222,7 +222,7 @@ Delete the `trafficsplit-sample` resource by running
 kubectl delete namespace/trafficsplit-sample
 ```
 
-### Conclusion
+## Conclusion
 
 Though, Linkerd currently supports reading `TrafficSplit` resources directly
 `ServiceProfiles` would always take a precedence over `TrafficSplit` resources.

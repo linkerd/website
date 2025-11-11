@@ -119,17 +119,17 @@ than is set for the proxy sidecar. And none of them must be bigger than
 For example,
 
 ```yaml
-       # application container
-        lifecycle:
-          preStop:
-            exec:
-              command:
-                - /bin/bash
-                - -c
-                - sleep 20
+# application container
+lifecycle:
+  preStop:
+    exec:
+      command:
+        - /bin/bash
+        - -c
+        - sleep 20
 
-    # for entire pod
-    terminationGracePeriodSeconds: 160
+# for entire pod
+terminationGracePeriodSeconds: 160
 ```
 
 ## Graceful shutdown of Job and Cronjob Resources
