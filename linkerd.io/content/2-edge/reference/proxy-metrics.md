@@ -268,19 +268,53 @@ connection closes (`tcp_close_total`):
 * `identity_cert_refresh_count`: A counter of the total number of times the
   proxy's mTLS identity certificate has been refreshed by the Identity service.
 
-## Outbound `xRoute` Metrics
+## Endpoint Metrics
 
 When performing policy-based routing, proxies may dispatch requests through
-per-route backend configurations. In order to record how routing rules
-apply and how backend distributions are applied, the outbound proxy records the
-following metrics:
+per-route backend configurations. See the Authorization Policy
+[overview](../features/server-policy.md) and
+[reference](./authorization-policy.md) pages for more information on how to
+configure policy-based routing.
 
-* `outbound_http_route_backend_requests_total`: A counter of the total number of
-  outbound HTTP requests dispatched to a route-backend.
-* `outbound_grpc_route_backend_requests_total`: A counter of the total number of
-  outbound gRPC requests dispatched to a route-backend.
-* `outbound_http_balancer_endpoints`: A gauge of the number of endpoints in an
-  outbound load balancer.
+The Linkerd proxy emits metrics that provide visibility into authorized HTTP
+and gRPC traffic. Route-level metrics measure traffic for all of a policy's
+associated backends, while backend-level metrics measure the traffic
+distributed to individual endpoints.
+
+The outbound proxy records the following metrics:
+
+* `outbound_http_route_request_duration_seconds`: A histogram measuring the
+time between HTTP request initialization and HTTP response completion.
+* `outbound_http_route_request_statuses_total`: A counter tracking HTTP
+response status codes for HTTP traffic sent to a route.
+* `outbound_http_route_request_frame_size_bytes`: A histogram measuring the
+sizes of `DATA` frames in HTTP response bodies for a route.
+* `outbound_grpc_route_request_duration_seconds`: A histogram measuring the
+time between gRPC request initialization and gRPC response completion.
+* `outbound_grpc_route_request_statuses_total`: A counter tracking gRPC
+response status codes for gRPC traffic sent to a GRPCRoute.
+* `outbound_grpc_route_request_frame_size_bytes`: A histogram measuring the
+sizes of `DATA` frames in gRPC response bodies for a route.
+* `outbound_http_route_backend_requests_total`: A counter tracking the total
+number of outbound HTTP requests dispatched to a particular backend.
+* `outbound_http_route_backend_response_duration_seconds`: A histogram
+measuring the time in seconds between the HTTP request completing and HTTP
+response completing, for a particular backend.
+* `outbound_http_route_backend_response_statuses_total`: A counter tracking
+HTTP responses from a particular backend, labeled by status code.
+* `outbound_http_route_backend_response_frame_size_bytes`: A histogram
+measuring the sizes of `DATA` frames in HTTP response bodies from a particular
+backend.
+* `outbound_grpc_route_backend_requests_total`: A counter tracking the total
+number of outbound gRPC requests dispatched to a particular backend.
+* `outbound_grpc_route_backend_response_duration_seconds`: A histogram
+measuring the time in seconds between the gRPC request completing and gRPC
+response completing, for traffic dispatched to a particular backend.
+* `outbound_grpc_route_backend_response_statuses_total`: A counter tracking
+gRPC responses from a particular backend, labeled by the `grpc-status` code.
+* `outbound_grpc_route_backend_response_frame_size_bytes`: A histogram
+measuring the sizes of `DATA` frames in gRPC response bodies from a particular
+backend.
 
 ### Labels
 
