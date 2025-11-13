@@ -238,7 +238,9 @@ layer.
 * `inbound_tcp_authz_deny_total`: A counter of the total number of TCP
   connections that were denied
 
+<!-- markdownlint-disable MD024 -->
 ### Labels
+<!-- markdownlint-enable MD024 -->
 
 Each of these metrics has the following labels:
 
@@ -316,7 +318,9 @@ gRPC responses from a particular backend, labeled by the `grpc-status` code.
 measuring the sizes of `DATA` frames in gRPC response bodies from a particular
 backend.
 
+<!-- markdownlint-disable MD024 -->
 ### Labels
+<!-- markdownlint-enable MD024 -->
 
 Each of these metrics has the following common labels, which describe the
 Kubernetes resources to which traffic is routed by the proxy:
