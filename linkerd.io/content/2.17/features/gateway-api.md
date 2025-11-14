@@ -1,6 +1,7 @@
 ---
 title: Gateway API support
-description: Linkerd uses Gateway API resource types to configure certain features.
+description:
+  Linkerd uses Gateway API resource types to configure certain features.
 ---
 
 The Gateway API is a set of CRDs in the `gateway.networking.k8s.io` API group
@@ -23,7 +24,7 @@ Both of these types are used in a variety of ways when configuring Linkerd.
 
 One complication with using the Gateway API in practice is that many different
 packages, not just Linkerd, may provide the Gateway API on your cluster, but
-only some Gateway API *versions* are compatible with Linkerd.
+only some Gateway API _versions_ are compatible with Linkerd.
 
 In practice, there are two basic approaches to managing the Gateway API with
 Linkerd. You can let Linkerd manage the Gateway API resources, or you can let a
@@ -44,10 +45,10 @@ version of the Gateway API that Linkerd installs:
 
 Alternatively, you may prefer to have something other than Linkerd manage the
 Gateway API resources on your cluster. To do this, you will need to instruct
-Linkerd *not* to install, update, or delete the Gateway API resources, by
-passing pass the `--set enableHttpRoutes=false` flag during the `linkerd install
---crds` step, or setting the `enableHttpRoutes=false` Helm value when installing
-the `linkerd-crds` Helm chart.
+Linkerd _not_ to install, update, or delete the Gateway API resources, by
+passing pass the `--set enableHttpRoutes=false` flag during the
+`linkerd install --crds` step, or setting the `enableHttpRoutes=false` Helm
+value when installing the `linkerd-crds` Helm chart.
 
 You will also need to ensure that version of the Gateway API installed is
 compatible with Linkerd:
@@ -56,14 +57,16 @@ compatible with Linkerd:
 | ---------------- | ------------------------------- | ------------------------------- |
 | 2.15 - 2.17      | 0.7, 0.7.1, 1.1.1-experimental  | 1.1.1-experimental              |
 
-If possible, you should install the *recommended* Gateway API version in the
-table above.  (Note that the use of *experimental* Gateway API versions is
+If possible, you should install the _recommended_ Gateway API version in the
+table above. (Note that the use of _experimental_ Gateway API versions is
 sometimes necessary to allow for full functionality; despite the name, these
 versions are production capable.)
 
 {{< warning >}}
-Running Linkerd with an incompatible version of the Gateway API
-on the cluster can lead to hard-to-debug issues with your Linkerd installation.
+
+Running Linkerd with an incompatible version of the Gateway API on the cluster
+can lead to hard-to-debug issues with your Linkerd installation.
+
 {{< /warning >}}
 
 ## Precursors to Gateway API-based configuration
@@ -77,8 +80,7 @@ Linkerd provided two earlier variants of configuration:
   retries, and timeouts prior to the introduction of the Gateway API types.
 
 Both of these earlier configuration mechanisms continue to be supported;
-however, newer feature development is focused on the standard Gateway API
-types.
+however, newer feature development is focused on the standard Gateway API types.
 
 ## Learn More
 
@@ -91,9 +93,6 @@ To get started with the Gateway API types, you can:
 
 [HTTPRoute]: ../reference/httproute/
 [GRPCRoute]: ../reference/grpcroute/
-[Gateway API]: https://gateway-api.sigs.k8s.io/
-[Service]: https://kubernetes.io/docs/concepts/services-networking/service/
-[Server]: ../reference/authorization-policy/#server
 [auth-policy]: ../tasks/configuring-per-route-policy/
 [dyn-routing]: ../tasks/configuring-dynamic-request-routing/
 [timeouts]: ../features/retries-and-timeouts/

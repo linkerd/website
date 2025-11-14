@@ -1,26 +1,27 @@
 ---
 title: Progressive Delivery with Flagger
-description: Reduce deployment risk by combining Linkerd and Flagger to automate canary
+description:
+  Reduce deployment risk by combining Linkerd and Flagger to automate canary
   releases based on service metrics.
 ---
 
 Linkerd's [traffic split](../features/traffic-split/) feature allows you to
 dynamically shift traffic between services. This can be used to implement
-lower-risk  deployment strategies like blue-green deploys and canaries.
+lower-risk deployment strategies like blue-green deploys and canaries.
 
 But simply shifting traffic from one version of a service to the next is just
-the beginning. We can combine traffic splitting with [Linkerd's automatic
-*golden metrics* telemetry](../features/telemetry/) and drive traffic decisions
-based on the observed metrics. For example, we can gradually shift traffic from
-an old deployment to a new one while continually monitoring its success rate. If
-at any point the success rate drops, we can shift traffic back to the original
-deployment and back out of the release. Ideally, our users remain happy
-throughout, not noticing a thing!
+the beginning. We can combine traffic splitting with
+[Linkerd's automatic _golden metrics_ telemetry](../features/telemetry/) and
+drive traffic decisions based on the observed metrics. For example, we can
+gradually shift traffic from an old deployment to a new one while continually
+monitoring its success rate. If at any point the success rate drops, we can
+shift traffic back to the original deployment and back out of the release.
+Ideally, our users remain happy throughout, not noticing a thing!
 
 In this tutorial, we'll walk you through how to combine Linkerd with
-[Flagger](https://flagger.app/), a progressive delivery tool that ties
-Linkerd's metrics and traffic splitting together in a control loop,
-allowing for fully-automated, metrics-aware canary deployments.
+[Flagger](https://flagger.app/), a progressive delivery tool that ties Linkerd's
+metrics and traffic splitting together in a control loop, allowing for
+fully-automated, metrics-aware canary deployments.
 
 {{< docs/production-note >}}
 
@@ -36,10 +37,10 @@ To use this guide, you'll need a Kubernetes cluster running:
 
 ## Install Flagger
 
-While Linkerd will be managing the actual traffic routing, Flagger automates
-the process of creating new Kubernetes resources, watching metrics and
-incrementally sending users over to the new version. To add Flagger to your
-cluster and have it configured to work with Linkerd, run:
+While Linkerd will be managing the actual traffic routing, Flagger automates the
+process of creating new Kubernetes resources, watching metrics and incrementally
+sending users over to the new version. To add Flagger to your cluster and have
+it configured to work with Linkerd, run:
 
 ```bash
 kubectl apply -k github.com/fluxcd/flagger/kustomize/linkerd
@@ -93,12 +94,14 @@ kubectl -n test port-forward svc/frontend 8080
 ```
 
 {{< note >}}
-Traffic shifting occurs on the *client* side of the connection and not the
+
+Traffic shifting occurs on the _client_ side of the connection and not the
 server side. Any requests coming from outside the mesh will not be shifted and
 will always be directed to the primary backend. A service of type `LoadBalancer`
 will exhibit this behavior as the source is not part of the mesh. To shift
 external traffic, add your ingress controller to the mesh.
-{{< /note>}}
+
+{{< /note >}}
 
 ## Configure the release
 
@@ -173,10 +176,12 @@ At this point, the topology looks a little like:
 ![Initialized](/docs/images/canary/initialized.svg "Initialized")
 
 {{< note >}}
+
 This guide barely touches all the functionality provided by Flagger. Make sure
 to read the [documentation](https://docs.flagger.app/) if you're interested in
 combining canary releases with HPA, working off custom metrics or doing other
 types of releases such as A/B testing.
+
 {{< /note >}}
 
 ## Start the rollout
@@ -184,9 +189,9 @@ types of releases such as A/B testing.
 As a system, Kubernetes resources have two major sections: the spec and status.
 When a controller sees a spec, it tries as hard as it can to make the status of
 the current system match the spec. With a deployment, if any of the pod spec
-configuration is  changed, a controller will kick off a rollout. By default, the
-deployment controller will orchestrate a [rolling
-update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/).
+configuration is changed, a controller will kick off a rollout. By default, the
+deployment controller will orchestrate a
+[rolling update](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/).
 
 In this example, Flagger will notice that a deployment's spec changed and start
 orchestrating the canary rollout. To kick this process off, you can update the
@@ -220,8 +225,10 @@ After the update is complete, this picture will go back to looking just like the
 figure from the previous section.
 
 {{< note >}}
+
 You can toggle the image tag between `1.7.1` and `1.7.0` to start the rollout
 again.
+
 {{< /note >}}
 
 ### Resource
@@ -259,8 +266,7 @@ watch linkerd viz -n test stat deploy --from deploy/load
 
 For something a little more visual, you can use the dashboard. Start it by
 running `linkerd viz dashboard` and then look at the detail page for the
-[podinfo traffic
-split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
+[podinfo traffic split](http://localhost:50750/namespaces/test/trafficsplits/podinfo).
 
 ![Dashboard](/docs/images/canary/traffic-split.png "Dashboard")
 

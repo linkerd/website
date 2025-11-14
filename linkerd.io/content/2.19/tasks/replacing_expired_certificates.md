@@ -52,7 +52,8 @@ linkerd-identity
     see https://linkerd.io/2/checks/#l5d-identity-roots-are-time-valid for hints
 ```
 
-You can follow [Generating your own mTLS root certificates](generate-certificates/#generating-the-certificates-with-step)
+You can follow
+[Generating your own mTLS root certificates](generate-certificates/#generating-the-certificates-with-step)
 to create new root and issuer certificates. Then use the `linkerd upgrade`
 command:
 
@@ -65,10 +66,10 @@ linkerd upgrade \
     | kubectl apply -f -
 ```
 
-Usually `upgrade` will prevent you from using an issuer certificate that
-will not work with the roots your meshed pods are using. At that point we
-do not need this check as we are updating both the root and issuer certs at
-the same time. Therefore we use the `--force` flag to ignore this error.
+Usually `upgrade` will prevent you from using an issuer certificate that will
+not work with the roots your meshed pods are using. At that point we do not need
+this check as we are updating both the root and issuer certs at the same time.
+Therefore we use the `--force` flag to ignore this error.
 
 If you run `linkerd check --proxy` while pods are restarting after the trust
 bundle is updated, you will probably see warnings about pods not having the
@@ -103,8 +104,8 @@ linkerd-identity-data-plane
 
 These warnings will disappear as restarts complete. Once they do, you can use
 `kubectl rollout restart` to restart your meshed workloads to bring their
-configuration up to date. After that is done, `linkerd check` should run with
-no warnings or errors:
+configuration up to date. After that is done, `linkerd check` should run with no
+warnings or errors:
 
 ```bash
 linkerd-identity

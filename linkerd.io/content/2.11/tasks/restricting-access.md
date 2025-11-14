@@ -4,8 +4,8 @@ description: Use Linkerd policy to restrict access to a service.
 ---
 
 Linkerd policy resources can be used to restrict which clients may access a
-service.  In this example, we'll use Emojivoto to show how to restrict access
-to the Voting service so that it may only be called from the Web service.
+service. In this example, we'll use Emojivoto to show how to restrict access to
+the Voting service so that it may only be called from the Web service.
 
 For a more comprehensive description of the policy resources, see the
 [Policy reference docs](../reference/authorization-policy/).
@@ -42,10 +42,10 @@ $ linkerd viz check
 
 ## Creating a Server resource
 
-We start by creating a `Server` resource for the Voting service.  A `Server`
-is a Linkerd custom resource which describes a specific port of a workload.
-Once the `Server` resource has been created, only clients which have been
-authorized may access it (we'll see how to authorize clients in a moment).
+We start by creating a `Server` resource for the Voting service. A `Server` is a
+Linkerd custom resource which describes a specific port of a workload. Once the
+`Server` resource has been created, only clients which have been authorized may
+access it (we'll see how to authorize clients in a moment).
 
 ```bash
 cat << EOF | kubectl apply -f -
@@ -67,9 +67,9 @@ EOF
 ```
 
 We see that this `Server` uses a `podSelector` to select the pods that it
-describes: in this case the voting service pods.  It also specifies the named
-port (grpc) that it applies to.  Finally, it specifies the protocol that is
-served on this port.  This ensures that the proxy treats traffic correctly and
+describes: in this case the voting service pods. It also specifies the named
+port (grpc) that it applies to. Finally, it specifies the protocol that is
+served on this port. This ensures that the proxy treats traffic correctly and
 allows it skip protocol detection.
 
 At this point, no clients have been authorized to access this service and you
@@ -77,8 +77,8 @@ will likely see a drop in success rate as requests from the Web service to
 Voting start to get rejected.
 
 We can use the `linkerd viz authz` command to look at the authorization status
-of requests coming to the voting service and see that all incoming requests
-are currently unauthorized:
+of requests coming to the voting service and see that all incoming requests are
+currently unauthorized:
 
 ```bash
 > linkerd viz authz -n emojivoto deploy/voting
@@ -91,8 +91,8 @@ voting-grpc  [UNAUTHORIZED]        -  0.9rps            -            -          
 A `ServerAuthorization` grants a set of clients access to a set of `Servers`.
 Here we will create a `ServerAuthorization` which grants the Web service access
 to the Voting `Server` we created above. Note that meshed mTLS uses
-`ServiceAccounts` as the basis for identity, thus our authorization will also
-be based on `ServiceAccounts`.
+`ServiceAccounts` as the basis for identity, thus our authorization will also be
+based on `ServiceAccounts`.
 
 ```bash
 > cat << EOF | kubectl apply -f -
@@ -144,20 +144,20 @@ Because this client has not been authorized, this request gets rejected with a
 You can create as many `ServerAuthorization` resources as you like to authorize
 many different clients. You can also specify whether to authorize
 unauthenticated (i.e. unmeshed) client, any authenticated client, or only
-authenticated clients with a particular identity.  For more details, please see
+authenticated clients with a particular identity. For more details, please see
 the [Policy reference docs](../reference/authorization-policy/).
 
 ## Setting a Default Policy
 
-To further lock down a cluster, you can set a default policy which will apply
-to all ports which do not have a Server resource defined. Linkerd uses the
+To further lock down a cluster, you can set a default policy which will apply to
+all ports which do not have a Server resource defined. Linkerd uses the
 following logic when deciding whether to allow a request:
 
-* If the port has a Server resource and the client matches a ServerAuthorization
+- If the port has a Server resource and the client matches a ServerAuthorization
   resource for it: ALLOW
-* If the port has a Server resource but the client does not match any
+- If the port has a Server resource but the client does not match any
   ServerAuthorizations for it: DENY
-* If the port does not have a Server resource: use the default policy
+- If the port does not have a Server resource: use the default policy
 
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
@@ -166,17 +166,17 @@ We can set the default policy to `deny` using the `linkerd upgrade` command:
 ```
 
 Alternatively, default policies can be set on individual workloads or namespaces
-by setting the `config.linkerd.io/default-inbound-policy` annotation.  See the
+by setting the `config.linkerd.io/default-inbound-policy` annotation. See the
 [Policy reference docs](../reference/authorization-policy/) for more details.
 
 This means that ALL requests will be rejected unless they are explicitly
-authorized by creating Server and ServerAuthorization resources.  One important
+authorized by creating Server and ServerAuthorization resources. One important
 consequence of this is that liveness and readiness probes will need to be
-explicitly authorized or else Kubernetes will not be able to recognize the pods as
-live or ready and will restart them.
+explicitly authorized or else Kubernetes will not be able to recognize the pods
+as live or ready and will restart them.
 
-This policy allows all clients to reach the Linkerd admin port so that Kubernetes
-can perform liveness and readiness checks:
+This policy allows all clients to reach the Linkerd admin port so that
+Kubernetes can perform liveness and readiness checks:
 
 ```bash
 > cat << EOF | kubectl apply -f -
@@ -225,7 +225,7 @@ spec:
     name: admin
   client:
     networks:
-    - cidr: 10.244.0.1/32
+      - cidr: 10.244.0.1/32
     unauthenticated: true
 ```
 

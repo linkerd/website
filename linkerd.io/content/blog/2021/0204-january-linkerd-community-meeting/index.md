@@ -31,7 +31,7 @@ mutual TLS for all TCP traffic.
 
 ## Linkerd, a look ahead
 
-There are no plans to slow down in 2021!  Oliver shared some features on the
+There are no plans to slow down in 2021! Oliver shared some features on the
 roadmap.
 
 **Linkerd 2.10** will add mutual TLS for all clusters including multi-cluster
@@ -43,22 +43,22 @@ concept that we saw in Linkerd 2.8.
 ## Celebrating our latest Linkerd Hero
 
 Last, but most certainly not least, we announced our January Linkerd Hero. Once
-more we had three amazing candidates: [Matt Young, Richard Pijnenburg, and Jimil
-Desai](/2021/01/19/january-2021-linkerd-hero-nomination/)—all
+more we had three amazing candidates:
+[Matt Young, Richard Pijnenburg, and Jimil Desai](/2021/01/19/january-2021-linkerd-hero-nomination/)—all
 invaluable members of our community.
 
-You voted for Richard who has been particularly
-active on the Linkerd Slack, helping his peers and answering their questions.
-Very knowledgeable and with a ton of experience with open source, Richard brings
-his rich expertise to the Linkerd community. Congratulations, Richard!
+You voted for Richard who has been particularly active on the Linkerd Slack,
+helping his peers and answering their questions. Very knowledgeable and with a
+ton of experience with open source, Richard brings his rich expertise to the
+Linkerd community. Congratulations, Richard!
 
 {{< youtube "duRrZAGkN90" >}}
 
 ## Linkerd is for everyone
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io/). Linkerd is [committed to open
-governance](/2019/10/03/linkerds-commitment-to-open-governance/).
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on

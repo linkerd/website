@@ -18,8 +18,8 @@ early this year, was performed by [7ASecurity](https://7asecurity.com/), managed
 by the [Open Source Technology Improvement Fund](https://ostif.org/), and funded
 by the [Cloud Native Computing Foundation](https://cncf.io/). As part of
 Linkerd's commitment to openness, transparency, and security by design, we've
-published the unredacted report in the [Linkerd GitHub
-page](https://github.com/linkerd/linkerd2/tree/main/audits).
+published the unredacted report in the
+[Linkerd GitHub page](https://github.com/linkerd/linkerd2/tree/main/audits).
 
 This was the third such public audit that Linkerd has undergone, and included
 both pen testing and whitebox testing. We were happy to collaborate with the
@@ -35,8 +35,8 @@ happy with this excerpt from the report:
 > been satisfactorily undertaken by the team. This audit reflects well on the
 > Graduated status of this project through the CNCF Graduation Program.
 
-As we said in our [2022 audit blog
-post](/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/),
+As we said in our
+[2022 audit blog post](/2022/06/27/announcing-the-completion-of-linkerds-2022-security-audit/),
 no software is perfect, even Linkerd, and every architectural decision
 necessarily involves tradeoffs. The point of a security audit is not to produce
 a report card but to find the weak points and provide opportunities to address
@@ -48,8 +48,9 @@ as low user risk. For example, the most severe finding identified an unused
 development-time script used to generate protobuf bindings, which in some cases
 would output instructions to the developer to download a resource from a
 plaintext HTTP URL. This script was not part of the modern development process
-and we [removed it from the
-repo](https://github.com/linkerd/linkerd2/pull/13459). You can read the complete
+and we
+[removed it from the repo](https://github.com/linkerd/linkerd2/pull/13459). You
+can read the complete
 [OSTIF blog post](https://ostif.org/linkerd-audit-complete/) for more.
 
 Regular third-party audits are just one part of Linkerd’s comprehensive focus on
@@ -71,6 +72,7 @@ our rapidly-growing community! Linkerd is hosted on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 in [mailing lists](/community/get-involved/). Come and join the fun!
 
-(*Photo by [Caspar
-Rae](https://unsplash.com/@raecaspar?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
-on [Unsplash](https://unsplash.com/photos/man-in-yellow-jacket-standing-beside-white-car--MBPgdHD_SA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash").*)
+(_Photo by
+[Caspar Rae](https://unsplash.com/@raecaspar?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
+on
+[Unsplash](https://unsplash.com/photos/man-in-yellow-jacket-standing-beside-white-car--MBPgdHD_SA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash")._)

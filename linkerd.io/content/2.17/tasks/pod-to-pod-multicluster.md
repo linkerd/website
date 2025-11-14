@@ -3,13 +3,12 @@ title: Pod-to-Pod Multi-cluster communication
 description: Multi-Cluster Communication for Flat Networks
 ---
 
-By default, Linkerd's [multicluster extension](multicluster/) works by
-sending all cross-cluster traffic through a gateway on the target cluster.
-However, when multiple Kubernetes clusters are deployed on a flat network where
-pods from one cluster can communicate directly with pods on another, Linkerd
-can export multicluster services in *pod-to-pod* mode where cross-cluster
-traffic does not go through the gateway, but instead goes directly to the
-target pods.
+By default, Linkerd's [multicluster extension](multicluster/) works by sending
+all cross-cluster traffic through a gateway on the target cluster. However, when
+multiple Kubernetes clusters are deployed on a flat network where pods from one
+cluster can communicate directly with pods on another, Linkerd can export
+multicluster services in _pod-to-pod_ mode where cross-cluster traffic does not
+go through the gateway, but instead goes directly to the target pods.
 
 This guide will walk you through exporting multicluster services in pod-to-pod
 mode, setting up authorization policies, and monitoring the traffic.
@@ -17,7 +16,7 @@ mode, setting up authorization policies, and monitoring the traffic.
 ## Prerequisites
 
 - Two clusters. We will refer to them as `east` and `west` in this guide.
-- The clusters must be on a *flat network*. In other words, pods from one
+- The clusters must be on a _flat network_. In other words, pods from one
   cluster must be able to address and connect to pods in the other cluster.
 - Each of these clusters should be configured as `kubectl`
   [contexts](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
@@ -29,9 +28,9 @@ mode, setting up authorization policies, and monitoring the traffic.
 
 ## Step 1: Installing Linkerd and Linkerd-Viz
 
-First, install Linkerd and Linkerd-Viz into both clusters, as described in
-the [multicluster guide](multicluster/#install-linkerd-and-linkerd-viz).
-Make sure to take care that both clusters share a common trust anchor.
+First, install Linkerd and Linkerd-Viz into both clusters, as described in the
+[multicluster guide](multicluster/#install-linkerd-and-linkerd-viz). Make sure
+to take care that both clusters share a common trust anchor.
 
 ## Step 2: Installing Linkerd-Multicluster
 
@@ -50,8 +49,8 @@ without the gateway because we will be using direct pod-to-pod communication.
 
 We use the `linkerd multilcuster link` command to link our two clusters
 together. This is exactly the same as in the regular
-[Multicluster guide](multicluster/#linking-the-clusters) except that we pass
-the `--gateway=false` flag to create a Link which doesn't require a gateway.
+[Multicluster guide](multicluster/#linking-the-clusters) except that we pass the
+`--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console
 > linkerd --context east multicluster link --cluster-name=target --gateway=false | kubectl --context west apply -f -
@@ -60,8 +59,8 @@ the `--gateway=false` flag to create a Link which doesn't require a gateway.
 ## Step 4: Deploy and Exporting a Service
 
 For our guide, we'll deploy the [bb](https://github.com/BuoyantIO/bb) service,
-which is a simple server that just returns a static response. We deploy it
-into the target cluster:
+which is a simple server that just returns a static response. We deploy it into
+the target cluster:
 
 ```bash
 > cat <<EOF | linkerd --context east inject - | kubectl --context east apply -f -
@@ -192,13 +191,13 @@ bb        1/1   100.00%   10.3rps           1ms           1ms           1ms     
 ## Step 6: Authorization Policy
 
 One advantage of direct pod-to-pod communication is that the server can use
-authorization policies which allow only certain clients to connect. This is
-not possible when using the gateway, because client identity is lost when going
+authorization policies which allow only certain clients to connect. This is not
+possible when using the gateway, because client identity is lost when going
 through the gateway. For more background on how authorization policies work,
 see: [Restricting Access To Services](restricting-access/).
 
-Let's demonstrate that by creating an authorization policy which only allows
-the `slow-cooker` service account to connect to `bb`:
+Let's demonstrate that by creating an authorization policy which only allows the
+`slow-cooker` service account to connect to `bb`:
 
 ```bash
 > kubectl --context east apply -f - <<EOF
@@ -251,7 +250,7 @@ default  default:all-unauthenticated  default/all-unauthenticated         0.0rps
 probe    default:all-unauthenticated  default/probe                       0.0rps  100.00%   0.2rps          1ms          1ms          1ms
 ```
 
-To demonstrate that `slow-cooker` is the *only* service account which is allowed
+To demonstrate that `slow-cooker` is the _only_ service account which is allowed
 to send to `bb`, we'll create a second load generator called `slow-cooker-evil`
 which uses a different service account and which should be denied.
 

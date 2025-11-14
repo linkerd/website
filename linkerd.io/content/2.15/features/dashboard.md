@@ -1,7 +1,8 @@
 ---
 title: Dashboard and on-cluster metrics stack
-description: Linkerd provides a full on-cluster metrics stack, including CLI tools
-  and dashboards.
+description:
+  Linkerd provides a full on-cluster metrics stack, including CLI tools and
+  dashboards.
 ---
 
 Linkerd provides a full on-cluster metrics stack, including CLI tools and a web
@@ -16,22 +17,26 @@ linkerd viz install | kubectl apply -f -
 This extension installs the following components into your `linkerd-viz`
 namespace:
 
-* A [Prometheus](https://prometheus.io/) instance
-* metrics-api, tap, tap-injector, and web components
+- A [Prometheus](https://prometheus.io/) instance
+- metrics-api, tap, tap-injector, and web components
 
 These components work together to provide an on-cluster metrics stack.
 
 {{< note >}}
+
 To limit excessive resource usage on the cluster, the metrics stored by this
 extension are _transient_. Only the past 6 hours are stored, and metrics do not
 persist in the event of pod restart or node outages. This may not be suitable
 for production use.
+
 {{< /note >}}
 
 {{< note >}}
+
 This metrics stack may require significant cluster resources. Prometheus, in
 particular, will consume resources as a function of traffic volume within the
 cluster.
+
 {{< /note >}}
 
 ## Linkerd dashboard
@@ -51,14 +56,14 @@ line.
 In earlier versions of Linkerd, the viz extension also pre-installed a Grafana
 dashboard. As of Linkerd 2.12, due to licensing changes in Grafana, this is no
 longer the case. However, you can still install Grafana on your own—see the
-[Grafana docs](../tasks/grafana/) for instructions on how to create the
-Grafana dashboards.
+[Grafana docs](../tasks/grafana/) for instructions on how to create the Grafana
+dashboards.
 
 ## Examples
 
 In these examples, we assume you've installed the emojivoto example application.
-Please refer to the [Getting Started Guide](../getting-started/) for how to
-do this.
+Please refer to the [Getting Started Guide](../getting-started/) for how to do
+this.
 
 You can use your dashboard extension and see all the services in the demo app.
 Since the demo app comes with a load generator, we can see live traffic metrics
@@ -70,19 +75,19 @@ linkerd -n emojivoto viz stat deploy
 
 This will show the "golden" metrics for each deployment:
 
-* Success rates
-* Request rates
-* Latency distribution percentiles
+- Success rates
+- Request rates
+- Latency distribution percentiles
 
-To dig in a little further, it is possible to use `top` to get a real-time
-view of which paths are being called:
+To dig in a little further, it is possible to use `top` to get a real-time view
+of which paths are being called:
 
 ```bash
 linkerd -n emojivoto viz top deploy
 ```
 
-To go even deeper, we can use `tap` shows the stream of requests across a
-single pod, deployment, or even everything in the emojivoto namespace:
+To go even deeper, we can use `tap` shows the stream of requests across a single
+pod, deployment, or even everything in the emojivoto namespace:
 
 ```bash
 linkerd -n emojivoto viz tap deploy/web
@@ -101,5 +106,5 @@ to use your browser instead:
 
 ## Futher reading
 
-See [Exporting metrics](../tasks/exporting-metrics/) for alternative ways
-to consume Linkerd's metrics.
+See [Exporting metrics](../tasks/exporting-metrics/) for alternative ways to
+consume Linkerd's metrics.

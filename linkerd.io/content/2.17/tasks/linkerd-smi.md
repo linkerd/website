@@ -1,44 +1,46 @@
 ---
 title: Getting started with Linkerd SMI extension
-description: Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources.
+description:
+  Use Linkerd SMI extension to work with Service Mesh Interface(SMI) resources.
 ---
 
 {{< warning >}}
 
-The Linkerd SMI extension is deprecated and will be removed in a future
-release. If you are currently using this functionality, we recommend migrating
-to [dynamic request routing](../features/request-routing/), which does not
-require the SMI extension.
+The Linkerd SMI extension is deprecated and will be removed in a future release.
+If you are currently using this functionality, we recommend migrating to
+[dynamic request routing](../features/request-routing/), which does not require
+the SMI extension.
 
 {{< /warning >}}
 
 [Service Mesh Interface](https://smi-spec.io/) is a standard interface for
-service meshes on Kubernetes. It defines a set of resources that could be
-used across service meshes that implement it.
-You can read more about it in the [specification](https://github.com/servicemeshinterface/smi-spec)
+service meshes on Kubernetes. It defines a set of resources that could be used
+across service meshes that implement it. You can read more about it in the
+[specification](https://github.com/servicemeshinterface/smi-spec)
 
-Currently, Linkerd supports SMI's `TrafficSplit` specification which can be
-used to perform traffic splitting across services natively. This means that
-you can apply the SMI resources without any additional
-components/configuration but this obviously has some downsides, as
-Linkerd may not be able to add extra specific configurations specific to it,
-as SMI is more like a lowest common denominator of service mesh functionality.
+Currently, Linkerd supports SMI's `TrafficSplit` specification which can be used
+to perform traffic splitting across services natively. This means that you can
+apply the SMI resources without any additional components/configuration but this
+obviously has some downsides, as Linkerd may not be able to add extra specific
+configurations specific to it, as SMI is more like a lowest common denominator
+of service mesh functionality.
 
 To get around these problems, Linkerd can instead have an adaptor that converts
-SMI specifications into native Linkerd configurations that it can understand
-and perform the operation. This also removes the extra native coupling with SMI
+SMI specifications into native Linkerd configurations that it can understand and
+perform the operation. This also removes the extra native coupling with SMI
 resources with the control-plane, and the adaptor can move independently and
-have it's own release cycle. [Linkerd SMI](https://www.github.com/linkerd/linkerd-smi)
-is an extension that does just that.
+have it's own release cycle.
+[Linkerd SMI](https://www.github.com/linkerd/linkerd-smi) is an extension that
+does just that.
 
-This guide will walk you through installing the SMI extension and configuring
-a `TrafficSplit` specification, to perform Traffic Splitting across services.
+This guide will walk you through installing the SMI extension and configuring a
+`TrafficSplit` specification, to perform Traffic Splitting across services.
 
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](install/) if you haven't
-  already done this.
+  Follow the [Installing Linkerd Guide](install/) if you haven't already done
+  this.
 
 ## Install the Linkerd-SMI extension
 
@@ -50,11 +52,12 @@ Install the SMI extension CLI binary by running:
 curl -sL https://linkerd.github.io/linkerd-smi/install | sh
 ```
 
-Alternatively, you can download the CLI directly via the [releases page](https://github.com/linkerd/linkerd-smi/releases).
+Alternatively, you can download the CLI directly via the
+[releases page](https://github.com/linkerd/linkerd-smi/releases).
 
-The first step is installing the Linkerd-SMI extension onto your cluster.
-This extension consists of a SMI-Adaptor which converts SMI resources into
-native Linkerd resources.
+The first step is installing the Linkerd-SMI extension onto your cluster. This
+extension consists of a SMI-Adaptor which converts SMI resources into native
+Linkerd resources.
 
 To install the Linkerd-SMI extension, run the command:
 
@@ -90,9 +93,9 @@ kubectl create namespace trafficsplit-sample
 linkerd inject https://raw.githubusercontent.com/linkerd/linkerd2/main/test/integration/viz/trafficsplit/testdata/application.yaml | kubectl -n trafficsplit-sample apply -f -
 ```
 
-This installs a simple client, and two server deployments.
-One of the server deployments i.e `failing-svc` always returns a 500 error,
-and the other one i.e `backend-svc` always returns a 200.
+This installs a simple client, and two server deployments. One of the server
+deployments i.e `failing-svc` always returns a 500 error, and the other one i.e
+`backend-svc` always returns a 200.
 
 ```bash
 kubectl get deployments -n trafficsplit-sample
@@ -102,8 +105,8 @@ failing       1/1     1            1           2m29s
 slow-cooker   1/1     1            1           2m29s
 ```
 
-By default, the client will hit the `backend-svc`service. This is evident by
-the `edges` sub command.
+By default, the client will hit the `backend-svc`service. This is evident by the
+`edges` sub command.
 
 ```bash
 linkerd viz edges deploy -n trafficsplit-sample
@@ -137,8 +140,8 @@ EOF
 ```
 
 Because the `smi-adaptor` watches for `TrafficSplit` resources, it will
-automatically create a respective `ServiceProfile` resource to perform
-the same. This can be verified by retrieving the `ServiceProfile` resource.
+automatically create a respective `ServiceProfile` resource to perform the same.
+This can be verified by retrieving the `ServiceProfile` resource.
 
 ```bash
 kubectl describe serviceprofile -n trafficsplit-sample
@@ -172,8 +175,8 @@ Spec:
 Events:         <none>
 ```
 
-As we can see, A relevant `ServiceProfile` with `DstOverrides` has
-been created to perform the TrafficSplit.
+As we can see, A relevant `ServiceProfile` with `DstOverrides` has been created
+to perform the TrafficSplit.
 
 The Traffic Splitting can be verified by running the `edges` command.
 
@@ -219,9 +222,10 @@ Delete the `trafficsplit-sample` resource by running
 kubectl delete namespace/trafficsplit-sample
 ```
 
-### Conclusion
+## Conclusion
 
 Though, Linkerd currently supports reading `TrafficSplit` resources directly
-`ServiceProfiles` would always take a precedence over `TrafficSplit` resources. The
-support for `TrafficSplit` resource will be removed in a further release at which
-the `linkerd-smi` extension would be necessary to use `SMI` resources with Linkerd.
+`ServiceProfiles` would always take a precedence over `TrafficSplit` resources.
+The support for `TrafficSplit` resource will be removed in a further release at
+which the `linkerd-smi` extension would be necessary to use `SMI` resources with
+Linkerd.

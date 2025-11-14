@@ -1,6 +1,7 @@
 ---
 title: Traffic Split (canaries, blue/green deploys)
-description: Linkerd can dynamically send a portion of traffic to different services.
+description:
+  Linkerd can dynamically send a portion of traffic to different services.
 ---
 
 Linkerd's traffic split functionality allows you to dynamically shift arbitrary
@@ -13,10 +14,12 @@ for example, by slowly easing traffic off of an older version of a service and
 onto a newer version.
 
 {{< note >}}
+
 If working with headless services, traffic splits cannot be retrieved. Linkerd
 reads service discovery information based off the target IP address, and if that
 happens to be a pod IP address then it cannot tell which service the pod belongs
 to.
+
 {{< /note >}}
 
 Linkerd exposes this functionality via the

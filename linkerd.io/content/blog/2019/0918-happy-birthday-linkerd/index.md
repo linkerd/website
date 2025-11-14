@@ -7,10 +7,10 @@ params:
   author: william
 ---
 
-Believe it or not, today marks the one-year anniversary of the [Linkerd 2.0
-launch](/2018/09/18/announcing-linkerd-2-0/)! With 2.6
-already round the corner, it's hard to believe just how much momentum,
-adoption, and iteration has been packed into the last 365 days.
+Believe it or not, today marks the one-year anniversary of the
+[Linkerd 2.0 launch](/2018/09/18/announcing-linkerd-2-0/)! With 2.6 already
+round the corner, it's hard to believe just how much momentum, adoption, and
+iteration has been packed into the last 365 days.
 
 ## One year of Linkerd 2.x
 
@@ -23,21 +23,20 @@ cases that spans [mobile](https://apester.com/) to
 [consumer](https://www.askattest.com/) to [payments](https://paybase.io/) to
 [banking](https://www.finleap.com/). No matter the industry or scale, Linkerd
 gives you the essential reliability, security, and observability necessary to
-operate your app on Kubernetes. And most of all, [*it just
-works*](https://twitter.com/coleca/status/1091591745870139392).
+operate your app on Kubernetes. And most of all,
+[_it just works_](https://twitter.com/coleca/status/1091591745870139392).
 
 🍰 **A non-stop drumbeat of releases**. The past year has seen 5 stable releases
-of 2.x and 50 (!) edge releases, covering a changelog that [spans over 2,000
-lines of text](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)!
-But don't worry, you don't have to read all that to use Linkerd... [installing
-Linkerd is still a 60-second
-process](https://channel9.msdn.com/Shows/Azure-Friday/60-seconds-to-a-Linkerd-service-mesh-on-AKS).
+of 2.x and 50 (!) edge releases, covering a changelog that
+[spans over 2,000 lines of text](https://github.com/linkerd/linkerd2/blob/main/CHANGES.md)!
+But don't worry, you don't have to read all that to use Linkerd...
+[installing Linkerd is still a 60-second process](https://channel9.msdn.com/Shows/Azure-Friday/60-seconds-to-a-Linkerd-service-mesh-on-AKS).
 
-🍰 **An incredible pace of feature iteration**. Since the 2.0 launch, we've added
-a on-by-default mutual TLS, per-route metrics, retries, timeouts, Helm charts,
-proxy auto-injection, traffic splitting, and many, many more features. That
-doesn't even include the distributed tracing, tap headers, and TCP mTLS that
-are on the docket for later this year!
+🍰 **An incredible pace of feature iteration**. Since the 2.0 launch, we've
+added a on-by-default mutual TLS, per-route metrics, retries, timeouts, Helm
+charts, proxy auto-injection, traffic splitting, and many, many more features.
+That doesn't even include the distributed tracing, tap headers, and TCP mTLS
+that are on the docket for later this year!
 
 🍰 **Mass ecosystem integrations**. From
 [OpenFaaS](https://github.com/openfaas-incubator/openfaas-linkerd2) to
@@ -46,17 +45,17 @@ are on the docket for later this year!
 to Service Mesh Hub to
 [DigitalOcean](https://marketplace.digitalocean.com/apps/linkerd-beta) to
 [VSCode](https://marketplace.visualstudio.com/items?itemName=bhargav.vscode-linkerd)
-to [Rio](https://github.com/rancher/rio/pull/411), Linkerd has become a
-critical building block for the cloud native ecosystem as a whole.
+to [Rio](https://github.com/rancher/rio/pull/411), Linkerd has become a critical
+building block for the cloud native ecosystem as a whole.
 
 🍰 **The creation of industry-defining interfaces**. The Linkerd team was the
-largest contributor to Microsoft's [Service Mesh
-Interface](/2019/05/24/linkerd-and-smi/) specification, and
+largest contributor to Microsoft's
+[Service Mesh Interface](/2019/05/24/linkerd-and-smi/) specification, and
 Linkerd's metrics and traffic splitting features support SMI out of the box.
 
 🍰 **A third-party security audit passed with flying colors**. The security
-analysis firm [Cure53 evaluated
-Linkerd](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf)
+analysis firm
+[Cure53 evaluated Linkerd](https://github.com/linkerd/linkerd2/blob/main/SECURITY_AUDIT.pdf)
 and concluded that Linkerd "is fully capable of preventing major attacks and
 should be considered strong against the majority of malicious attempts at a
 compromise", continuing that "Cure53 needs to mention the atypically excellent
@@ -64,21 +63,22 @@ code readability, careful choice of implementation languages, as well as the
 clearly written and well-maintained documentation for all attributes."
 
 🍰 **A third-party performance benchmark that placed it miles ahead of other
-projects**. Kinvolk [evaluated Linkerd's
-performance](https://kinvolk.io/blog/2019/05/performance-benchmark-analysis-of-istio-and-linkerd/),
+projects**. Kinvolk
+[evaluated Linkerd's performance](https://kinvolk.io/blog/2019/05/performance-benchmark-analysis-of-istio-and-linkerd/),
 and concluded: "Linkerd takes the edge on resource consumption, and when pushed
 into high load situations, maintains acceptable response latency at a higher
-rate of requests per second that Istio is able to deliver." (See [our writeup
-of their report](/2019/05/18/linkerd-benchmarks/).)
+rate of requests per second that Istio is able to deliver." (See
+[our writeup of their report](/2019/05/18/linkerd-benchmarks/).)
 
-🍰 **A rapidly-growing, friendly, engaged community**. Now at 4,500+ GitHub stars,
-80 contributors, and 3,500+ friendly folks in the [Linkerd Slack](https://slack.linkerd.io), the Linkerd
-community is consistently one of the friendliest and most helpful groups of
-humans you could find on the Internet!
+🍰 **A rapidly-growing, friendly, engaged community**. Now at 4,500+ GitHub
+stars, 80 contributors, and 3,500+ friendly folks in the
+[Linkerd Slack](https://slack.linkerd.io), the Linkerd community is consistently
+one of the friendliest and most helpful groups of humans you could find on the
+Internet!
 
 ## But the most important thing of all?
 
-I'm proud of all that we've accomplished, but the thing I'm *most* proud of, by
+I'm proud of all that we've accomplished, but the thing I'm _most_ proud of, by
 far, is the consistent level of positive feedback and love we get Linkerd's
 adopters, contributors, and committers. This is the oxygen that keeps any
 project growing, and above all, Linkerd is your project. Here's to another
@@ -95,19 +95,18 @@ incredible year together with you. 💪
 
 ## Ready to try Linkerd?
 
-Ready to try Linkerd? Those of you who have been tracking the 2.x branch via
-our [weekly edge releases](/2-edge/) will already have seen
-these features in action. Either way, you can download the stable 2.5 release
-by running:
+Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
+[weekly edge releases](/2-edge/) will already have seen these features in
+action. Either way, you can download the stable 2.5 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io/). If you have feature requests, questions, or
-comments, we'd love to have you join our rapidly-growing community! Linkerd
-is hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
-community on [Slack](https://slack.linkerd.io/),
-[Twitter](https://twitter.com/linkerd), and the [mailing
-lists](/community/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io/). If you have feature
+requests, questions, or comments, we'd love to have you join our rapidly-growing
+community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
+have a thriving community on [Slack](https://slack.linkerd.io/),
+[Twitter](https://twitter.com/linkerd), and the
+[mailing lists](/community/get-involved/). Come and join the fun!

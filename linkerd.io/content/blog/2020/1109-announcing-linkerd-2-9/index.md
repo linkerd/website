@@ -152,19 +152,18 @@ they resonate with you as well.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](/2-edge/) will already have seen these
-features in action. Either way, you can download the stable 2.9 release by
-running:
+[weekly edge releases](/2-edge/) will already have seen these features in
+action. Either way, you can download the stable 2.9 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](/2/tasks/install-helm/).
-Upgrading from a previous release? We've got you covered: see our
-[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the
-linkerd upgrade command.
+[guide to installing Linkerd with Helm](/2/tasks/install-helm/). Upgrading from
+a previous release? We've got you covered: see our
+[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the linkerd upgrade
+command.
 
 ## Linkerd is for everyone
 

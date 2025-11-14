@@ -11,8 +11,7 @@ params:
 ---
 
 We are excited to announce that this month's Linkerd Hero is
-[Naveen Nalam](https://www.linkedin.com/in/nnalam/).
-Congrats, Naveen!
+[Naveen Nalam](https://www.linkedin.com/in/nnalam/). Congrats, Naveen!
 
 ## What are Linkerd Heroes?
 

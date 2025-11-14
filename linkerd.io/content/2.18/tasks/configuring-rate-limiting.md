@@ -6,9 +6,9 @@ description: Using HTTP local rate limiting to protect a service
 In this guide, we'll walk you through deploying an `HTTPLocalRateLimitPolicy`
 resource to rate-limit the traffic to a given service.
 
-For more information about Linkerd's rate limiting check the [Rate Limiting
-feature doc](../features/rate-limiting/) and the [HTTPLocalRateLimitPolicy
-reference doc](../reference/rate-limiting/).
+For more information about Linkerd's rate limiting check the
+[Rate Limiting feature doc](../features/rate-limiting/) and the
+[HTTPLocalRateLimitPolicy reference doc](../reference/rate-limiting/).
 
 ## Prerequisites
 
@@ -34,8 +34,8 @@ kubectl exec -it client-xxx -- bash
 root@client-xxx:/# apt-get update && apt-get install -y curl
 ```
 
-Leave that shell open so we can use it below when [sending
-requests](#sending-requests).
+Leave that shell open so we can use it below when
+[sending requests](#sending-requests).
 
 ## Creating an HTTPLocalRateLimitPolicy resource
 

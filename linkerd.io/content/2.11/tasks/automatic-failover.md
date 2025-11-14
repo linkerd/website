@@ -11,9 +11,9 @@ unavailable, the failover controller can shift that traffic to the backup
 cluster.
 
 Let's see a simple example of how to use this extension by installing the
-Emojivoto application on two Kubernetes clusters and simulating a failure in
-one cluster. We will see the failover controller shift traffic to the other
-cluster to ensure the service remains available.
+Emojivoto application on two Kubernetes clusters and simulating a failure in one
+cluster. We will see the failover controller shift traffic to the other cluster
+to ensure the service remains available.
 
 {{< docs/production-note >}}
 
@@ -24,8 +24,8 @@ linked together with the multicluster extension. Follow the steps in the
 [multicluster guide](multicluster/) to generate a shared trust root, install
 Linkerd, Linkerd Viz, and Linkerd Multicluster, and to link the clusters
 together. For the remainder of this guide, we will assume the cluster context
-names are "east" and "west" respectively. Please substitute your cluster
-context names where appropriate.
+names are "east" and "west" respectively. Please substitute your cluster context
+names where appropriate.
 
 ## Installing the Failover Extension
 
@@ -58,10 +58,9 @@ We'll now install the Emojivoto example application into both clusters:
 ```
 
 Next we'll "export" the `web-svc` in the east cluster by setting the
-`mirror.linkerd.io/exported=true` label. This will instruct the
-multicluster extension to create a mirror service called `web-svc-east` in the
-west cluster, making the east Emojivoto application available in the west
-cluster:
+`mirror.linkerd.io/exported=true` label. This will instruct the multicluster
+extension to create a mirror service called `web-svc-east` in the west cluster,
+making the east Emojivoto application available in the west cluster:
 
 ```bash
 > kubectl --context=east -n emojivoto label svc/web-svc mirror.linkerd.io/exported=true

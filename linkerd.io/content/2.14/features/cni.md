@@ -1,7 +1,8 @@
 ---
 title: CNI Plugin
-description: Linkerd can optionally use a CNI plugin instead of an init-container
-  to avoid NET_ADMIN capabilities.
+description:
+  Linkerd can optionally use a CNI plugin instead of an init-container to avoid
+  NET_ADMIN capabilities.
 ---
 
 Linkerd's data plane works by transparently routing all TCP traffic to and from
@@ -9,21 +10,23 @@ every meshed pod to its proxy. (See the
 [Architecture](../reference/architecture/) doc.) This allows Linkerd to act
 without the application being aware.
 
-By default, this rewiring is done with an [Init
-Container](../reference/architecture/#linkerd-init-container) that uses
+By default, this rewiring is done with an
+[Init Container](../reference/architecture/#linkerd-init-container) that uses
 iptables to install routing rules for the pod, at pod startup time. However,
 this requires the `CAP_NET_ADMIN` capability; and in some clusters, this
 capability is not granted to pods.
 
-To handle this, Linkerd can optionally run these iptables rules in a [CNI
-plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
+To handle this, Linkerd can optionally run these iptables rules in a
+[CNI plugin](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/)
 rather than in an Init Container. This avoids the need for a `CAP_NET_ADMIN`
 capability.
 
 {{< note >}}
+
 Linkerd's CNI plugin is designed to run in conjunction with your existing CNI
-plugin, using _CNI chaining_. It handles only the Linkerd-specific
-configuration and does not replace the need for a CNI plugin.
+plugin, using _CNI chaining_. It handles only the Linkerd-specific configuration
+and does not replace the need for a CNI plugin.
+
 {{< /note >}}
 
 ## Installation
@@ -71,7 +74,7 @@ helm install linkerd-cni -n linkerd-cni --create-namespace linkerd/linkerd2-cni
 linkerd check --pre --linkerd-cni-enabled
 ```
 
-At that point you are ready to install Linkerd with CNI enabled.  Follow the
+At that point you are ready to install Linkerd with CNI enabled. Follow the
 [Installing Linkerd with Helm](../tasks/install-helm/) instructions.
 
 ## Additional configuration
@@ -113,10 +116,10 @@ networking while using the CNI plugin:
 
 ```yaml
 initContainers:
-- name: example
-  image: example
-  securityContext:
-    runAsUser: 2102 # Allows skipping iptables rules
+  - name: example
+    image: example
+    securityContext:
+      runAsUser: 2102 # Allows skipping iptables rules
 ```
 
 ## Upgrading the CNI plugin

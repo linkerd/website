@@ -190,9 +190,9 @@ kind: ClusterRole
 metadata:
   name: otel-collector-read
 rules:
- - apiGroups: [""]
-   resources: ["pods", "endpoints", "services", "namespaces", "nodes"]
-   verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods", "endpoints", "services", "namespaces", "nodes"]
+    verbs: ["get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

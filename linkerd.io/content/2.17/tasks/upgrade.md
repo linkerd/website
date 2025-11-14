@@ -26,7 +26,6 @@ may contain important information about your version.
 - [Upgrade notice: stable-2.13.0](#upgrade-notice-stable-2130)
 - [Upgrade notice: stable-2.12.0](#upgrade-notice-stable-2120)
 - [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2110)
-- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2100)
 
 ## Version numbering
 
@@ -115,10 +114,10 @@ have more information.
 
 There are four components that need to be upgraded:
 
-- [The CLI](#upgrade-the-cli)
-- [The control plane](#upgrade-the-control-plane)
-- [The control plane extensions](#upgrade-extensions)
-- [The data plane](#upgrade-the-data-plane)
+- [The CLI](#upgrading-the-cli)
+- [The control plane](#upgrading-the-control-plane)
+- [The control plane extensions](#upgrading-extensions)
+- [The data plane](#upgrading-the-data-plane)
 
 These steps should be performed in sequence.
 
@@ -332,7 +331,7 @@ Read on for how to handle these changes as part of the upgrade process.
 If you installed Linkerd `2.11.x` with the CLI _and_ are using the
 `TrafficSplit` CRD, you need to take an extra stop to avoid losing your
 `TrafficSplit` CRs. (If you're not using `TrafficSplit` then you can perform the
-usual CLI upgrade as [described above](#with-linkerd-cli).)
+usual CLI upgrade as [described above](#upgrading-the-cli).)
 
 The `TrafficSplit` CRD has been moved to the SMI extension. But before
 installing that extension, you need to add the following annotations and label
@@ -354,7 +353,7 @@ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 And finally you can proceed with the usual
-[CLI upgrade instructions](#with-linkerd-cli), but avoid using the `--prune`
+[CLI upgrade instructions](#upgrading-the-cli), but avoid using the `--prune`
 flag when applying the output of `linkerd upgrade --crds` to avoid removing the
 `TrafficSplit` CRD.
 
@@ -595,87 +594,3 @@ be aware of when upgrading from `stable-2.10.x`:
   ElasticSearch respectively (all server speak first protocols) have been added
   to the default opaque ports list. The default ignore inbound ports list has
   also been changed to include ports `4567` and `4568`.
-
-### Upgrade notice: stable-2.10.0
-
-If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but _not_
-2.9.4), and you _upgraded_ to that release using the `--prune` flag (as opposed
-to installing it fresh), you will need to use the `linkerd repair` command as
-outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-2-9-3)
-before you can upgrade to Linkerd 2.10.
-
-Additionally, there are two changes in the 2.10.0 release that may affect you.
-First, the handling of certain ports and protocols has changed. Please read
-through our
-[ports and protocols in 2.10 upgrade guide](../features/protocol-detection/) for
-the repercussions.
-
-Second, we've introduced [extensions](extensions/) and moved the default
-visualization components into a Linkerd-Viz extension. Read on for what this
-means for you.
-
-#### Visualization components moved to Linkerd-Viz extension
-
-With the introduction of [extensions](extensions/), all of the Linkerd control
-plane components related to visibility (including Prometheus, Grafana, Web, and
-Tap) have been removed from the main Linkerd control plane and moved into the
-Linkerd-Viz extension. This means that when you upgrade to stable-2.10.0, these
-components will be removed from your cluster and you will not be able to run
-commands such as `linkerd stat` or `linkerd dashboard`. To restore this
-functionality, you must install the Linkerd-Viz extension by running
-`linkerd viz install | kubectl apply -f -` and then invoke those commands
-through `linkerd viz stat`, `linkerd viz dashboard`, etc.
-
-```bash
-# Upgrade the control plane (this will remove viz components).
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd -f -
-# Prune cluster-scoped resources
-linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
-  --prune-allowlist=rbac.authorization.k8s.io/v1/clusterrole \
-  --prune-allowlist=rbac.authorization.k8s.io/v1/clusterrolebinding \
-  --prune-allowlist=apiregistration.k8s.io/v1/apiservice -f -
-# Install the Linkerd-Viz extension to restore viz functionality.
-linkerd viz install | kubectl apply -f -
-```
-
-Helm users should note that configuration values related to these visibility
-components have moved to the Linkerd-Viz chart. Please update any values
-overrides you have and use these updated overrides when upgrading the Linkerd
-chart or installing the Linkerd-Viz chart. See below for a complete list of
-values which have moved.
-
-```bash
-helm repo update
-# Upgrade the control plane (this will remove viz components).
-helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
-# Install the Linkerd-Viz extension to restore viz functionality.
-helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
-```
-
-The following values were removed from the Linkerd2 chart. Most of the removed
-values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
-
-- `dashboard.replicas` moved to Linkerd-Viz as `dashboard.replicas`
-- `tap` moved to Linkerd-Viz as `tap`
-- `tapResources` moved to Linkerd-Viz as `tap.resources`
-- `tapProxyResources` moved to Linkerd-Viz as `tap.proxy.resources`
-- `webImage` moved to Linkerd-Viz as `dashboard.image`
-- `webResources` moved to Linkerd-Viz as `dashboard.resources`
-- `webProxyResources` moved to Linkerd-Viz as `dashboard.proxy.resources`
-- `grafana` moved to Linkerd-Viz as `grafana`
-- `grafana.proxy` moved to Linkerd-Viz as `grafana.proxy`
-- `prometheus` moved to Linkerd-Viz as `prometheus`
-- `prometheus.proxy` moved to Linkerd-Viz as `prometheus.proxy`
-- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as
-  `webhook.collectorSvcAddr`
-- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as
-  `webhook.collectorSvcAccount`
-- `tracing.enabled` removed
-- `tracing.collector` moved to Linkerd-Jaeger as `collector`
-- `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
-
-Also please note the global scope from the Linkerd2 chart values has been
-dropped, moving the config values underneath it into the root scope. Any values
-you had customized there will need to be migrated; in particular
-`identityTrustAnchorsPEM` in order to conserve the value you set during
-install."

@@ -70,8 +70,7 @@ In short, Linkerd's new implementation of per-route metrics, retries, and
 timeouts are now provided in a principled, future-proof way that is composable
 with existing features such as circuit breaking, and configured using the
 Gateway API resources that we believe are the future of service mesh
-configuration.
-[Learn more](/2/features/retries-and-timeouts/).
+configuration. [Learn more](/2/features/retries-and-timeouts/).
 
 ## Audit mode for security policies
 
@@ -153,12 +152,11 @@ Momentum compounds, and Linkerd's momentum is currently at an all-time high.
 Since March we've merged 250+ pull requests, revamped our edge release process
 to provide
 [production-readiness guidance](https://github.com/linkerd/linkerd2/releases)
-and
-[monthly reviews](/2024/08/05/linkerd-edge-release-roundup/),
-and published an average of 5 edge releases a month—more than one a week. There
-is a lot more great news to report, and early next month we'll publish a deeper
-retrospective of the past six months, but in short—it's an incredibly exciting
-time to be involved with Linkerd!
+and [monthly reviews](/2024/08/05/linkerd-edge-release-roundup/), and published
+an average of 5 edge releases a month—more than one a week. There is a lot more
+great news to report, and early next month we'll publish a deeper retrospective
+of the past six months, but in short—it's an incredibly exciting time to be
+involved with Linkerd!
 
 We're hard at work on egress functionality, which will provide both visibility
 into all traffic leaving the cluster as well as the authorization policies

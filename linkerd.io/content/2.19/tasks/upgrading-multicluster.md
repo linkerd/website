@@ -57,5 +57,9 @@ linkerd multicluster unlink --cluster-name <link-name> --only-controller | \
 Within a few seconds, the new controllers will reclaim the Lease object and
 begin managing their respective links.
 
-{{< note >}}The `linkerd multicluster check` command will warn you about any
-controllers that aren’t managed by the extension.{{< /note >}}
+{{< note >}}
+
+The `linkerd multicluster check` command will warn you about any controllers
+that aren’t managed by the extension.
+
+{{< /note >}}

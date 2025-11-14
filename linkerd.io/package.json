@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/linkerd/website#readme",
   "devDependencies": {
-    "markdownlint-cli": "^0.32.2",
+    "markdownlint-cli": "^0.39.0",
     "pa11y-ci": "^2.4.0",
     "prettier": "^2.1.2"
   }

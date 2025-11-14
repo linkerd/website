@@ -1,7 +1,8 @@
 ---
 title: Debugging gRPC applications with request tracing
-description: Follow a long-form example of debugging a failing gRPC application using
-  live request tracing.
+description:
+  Follow a long-form example of debugging a failing gRPC application using live
+  request tracing.
 ---
 
 The demo application emojivoto has some issues. Let's use that and Linkerd to
@@ -23,18 +24,19 @@ rate is well below 100%! Click on `web` and let's dig in.
 
 ![Deployment Detail](/docs/images/debugging/octopus.png "Deployment Detail")
 
-You should now be looking at the Deployment page for the web deployment. The first
-thing you'll see here is that the web deployment is taking traffic from `vote-bot`
-(a deployment included with emojivoto to continually generate a low level of
-live traffic). The web deployment also has two outgoing dependencies, `emoji`
-and `voting`.
+You should now be looking at the Deployment page for the web deployment. The
+first thing you'll see here is that the web deployment is taking traffic from
+`vote-bot` (a deployment included with emojivoto to continually generate a low
+level of live traffic). The web deployment also has two outgoing dependencies,
+`emoji` and `voting`.
 
 While the emoji deployment is handling every request from web successfully, it
-looks like the voting deployment is failing some requests! A failure in a dependent
-deployment may be exactly what is causing the errors that web is returning.
+looks like the voting deployment is failing some requests! A failure in a
+dependent deployment may be exactly what is causing the errors that web is
+returning.
 
 Let's scroll a little further down the page, we'll see a live list of all
-traffic that is incoming to *and* outgoing from `web`. This is interesting:
+traffic that is incoming to _and_ outgoing from `web`. This is interesting:
 
 ![Top](/docs/images/debugging/web-top.png "Top")
 
@@ -48,14 +50,14 @@ Finally, to dig a little deeper, we can click on the `tap` icon in the far right
 column. This will take us to the live list of requests that match only this
 endpoint. You'll see `Unknown` under the `GRPC status` column. This is because
 the requests are failing with a
-[gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code),
-which is a common error response as you can see from
-[the code][code]. Linkerd is aware of gRPC's response classification without any
-other configuration!
+[gRPC status code 2](https://godoc.org/google.golang.org/grpc/codes#Code), which
+is a common error response as you can see from [the code][code]. Linkerd is
+aware of gRPC's response classification without any other configuration!
 
 ![Tap](/docs/images/debugging/web-tap.png "Tap")
 
 At this point, we have everything required to get the endpoint fixed and restore
 the overall health of our applications.
 
-[code]: https://github.com/BuoyantIO/emojivoto/blob/67faa83af33db647927946a672fc63ab7ce869aa/emojivoto-voting-svc/api/api.go#L21
+[code]:
+  https://github.com/BuoyantIO/emojivoto/blob/67faa83af33db647927946a672fc63ab7ce869aa/emojivoto-voting-svc/api/api.go#L21

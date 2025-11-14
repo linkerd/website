@@ -5,17 +5,19 @@ description: Dynamically split and shift traffic between backends
 
 Traffic splitting and shifting are powerful features that enable operators to
 dynamically shift traffic to different backend Services. This can be used to
-implement A/B experiments, red/green deploys, canary rollouts, [fault
-injection](fault-injection/), and more.
+implement A/B experiments, red/green deploys, canary rollouts,
+[fault injection](fault-injection/), and more.
 
 Traffic splitting is accomplished with [HTTPRoute] and [GRPCRoute] types.
 
 {{< note >}}
+
 Earlier versions of Linkerd provided a
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
 resource as part of the the [Linkerd SMI extension](linkerd-smi/) for traffic
 splitting. This approach is still supported but will not recieve further feature
 development.
+
 {{< /note >}}
 
 {{< docs/production-note >}}
@@ -33,8 +35,8 @@ different versions of a service and that we would like to test `v2` on a small
 sample of traffic before rolling it out completely.
 
 For load generation we'll use
-[Slow-Cooker](https://github.com/BuoyantIO/slow_cooker)
-and for the backends we'll use [BB](https://github.com/BuoyantIO/bb).
+[Slow-Cooker](https://github.com/BuoyantIO/slow_cooker) and for the backends
+we'll use [BB](https://github.com/BuoyantIO/bb).
 
 To add these components to your cluster and include them in the Linkerd
 [data plane](../reference/architecture/#data-plane), run:
@@ -195,8 +197,8 @@ EOF
 ```
 
 Notice in this HTTPRoute, the `parentRef` is the `bb` Service resource that
-slow-cooker is talking to. This means that whenever a meshed client talks to
-the `bb` Service, it will use this HTTPRoute. You may also notice that the `bb`
+slow-cooker is talking to. This means that whenever a meshed client talks to the
+`bb` Service, it will use this HTTPRoute. You may also notice that the `bb`
 Service appears again in the list of `backendRefs` with a weight of 90. This
 means that 90% of traffic sent to the `bb` Service will continue on to the
 endpoints of that Service. The other 10% of requests will get routed to the
@@ -248,4 +250,3 @@ v2        1/1   100.00%   10.0rps           1ms           1ms           2ms     
 
 [HTTPRoute]: ../reference/httproute/
 [GRPCRoute]: ../reference/grpcroute/
-[Gateway API]: ../features/gateway-api/

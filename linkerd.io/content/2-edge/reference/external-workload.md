@@ -73,8 +73,8 @@ metadata:
     workload_name: external-workload
 spec:
   meshTLS:
-    identity: 'spiffe://root.linkerd.cluster.local/external-workload'
-    serverName: 'external-workload.cluster.local'
+    identity: "spiffe://root.linkerd.cluster.local/external-workload"
+    serverName: "external-workload.cluster.local"
   workloadIPs:
     - ip: 193.1.4.11
   ports:
@@ -85,7 +85,7 @@ spec:
 status:
   conditions:
     - type: Ready
-      status: 'True'
+      status: "True"
 ---
 apiVersion: v1
 kind: Service

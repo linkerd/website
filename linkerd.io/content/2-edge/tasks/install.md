@@ -46,16 +46,22 @@ linkerd check --pre
 
 Be sure to address any issues that the checks identify before proceeding.
 
-{{< note >}} If installing Linkerd on GKE, there are some extra steps required
-depending on how your cluster has been configured. If you are using any of these
-features, check out the additional instructions on
+{{< note >}}
+
+If installing Linkerd on GKE, there are some extra steps required depending on
+how your cluster has been configured. If you are using any of these features,
+check out the additional instructions on
 [GKE private clusters](../reference/cluster-configuration/#private-clusters)
+
 {{< /note >}}
 
-{{< note >}} If installing Linkerd in a cluster that uses Cilium in kube-proxy
-replacement mode, additional steps may be needed to ensure service discovery
-works as intended. Instrunctions are on the
+{{< note >}}
+
+If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
+mode, additional steps may be needed to ensure service discovery works as
+intended. Instrunctions are on the
 [Cilium cluster configuration](../reference/cluster-configuration/#cilium) page.
+
 {{< /note >}}
 
 ## Installing with the CLI

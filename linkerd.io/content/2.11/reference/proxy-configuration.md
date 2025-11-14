@@ -1,7 +1,8 @@
 ---
 title: Proxy Configuration
-description: Linkerd provides a set of annotations that can be used to override the
-  data plane proxy's configuration.
+description:
+  Linkerd provides a set of annotations that can be used to override the data
+  plane proxy's configuration.
 ---
 
 Linkerd provides a set of annotations that can be used to **override** the data
@@ -21,13 +22,13 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-limit: "1"
-        config.linkerd.io/proxy-cpu-request: "0.2"
+        config.linkerd.io/proxy-cpu-limit: '1'
+        config.linkerd.io/proxy-cpu-request: '0.2'
         config.linkerd.io/proxy-memory-limit: 2Gi
         config.linkerd.io/proxy-memory-request: 128Mi
 ```
 
-See [here](../tasks/configuring-proxy-concurrency/) for details on tuning the
+[See here](../tasks/configuring-proxy-concurrency/) for details on tuning the
 proxy's resource usage.
 
 For proxies injected using the `linkerd inject` command, configuration can be
@@ -46,10 +47,10 @@ instead of their original destination. This will inform Linkerd to override the
 endpoint selection of the ingress container and to perform its own endpoint
 selection, enabling features such as per-route metrics and traffic splitting.
 
-The proxy can be configured to run in `ingress` mode by used the `linkerd.io/inject:
-ingress` annotation rather than the default `linkerd.io/inject: enabled`
-annotation. This can also be done with the `--ingress` flag in the `inject` CLI
-command:
+The proxy can be configured to run in `ingress` mode by used the
+`linkerd.io/inject: ingress` annotation rather than the default
+`linkerd.io/inject: enabled` annotation. This can also be done with the
+`--ingress` flag in the `inject` CLI command:
 
 ```bash
 kubectl get deployment <ingress-controller> -n <ingress-namespace> -o yaml | linkerd inject --ingress - | kubectl apply -f -

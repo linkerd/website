@@ -1,6 +1,8 @@
 ---
 title: Migrating away from the Linkerd-jaeger extension
-description: Move from the deprecated Linkerd-jaeger extension to a modern distributed tracing setup.
+description:
+  Move from the deprecated Linkerd-jaeger extension to a modern distributed
+  tracing setup.
 ---
 
 Starting with the Linkerd 2.19 release, the Linkerd-jaeger extension will no
@@ -39,10 +41,12 @@ webhook:
 ```
 
 {{< note >}}
+
 The most recent versions of the Linkerd CLI no longer have the `linkerd jaeger`
 commands. This guide assumes that you manage your Linkerd-jaeger installation
 through Helm or another similar mechanism. If necessary, you can use an earlier
 version of the CLI with these commands.
+
 {{< /note >}}
 
 Then, in your Linkerd control plane installation, set the following values:
@@ -59,12 +63,14 @@ proxy:
 ```
 
 {{< note >}}
+
 This assumes you have made no changes to the collector configuration in your
 Linkerd-jaeger installation. If you have changed the endpoint or already brought
 your own tracing collector, you will have to update the `endpoint` as well as
 the `serviceAccountName` and `namespace` in the `meshIdentity` in the above
 config. See our [guide on distributed tracing](distributed-tracing) for more
 information on how to set these values.
+
 {{< /note >}}
 
 Finally, restart all meshed pods.

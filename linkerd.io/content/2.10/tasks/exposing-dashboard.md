@@ -1,7 +1,8 @@
 ---
 title: Exposing the Dashboard
-description: Make it easy for others to access Linkerd and Grafana dashboards without
-  the CLI.
+description:
+  Make it easy for others to access Linkerd and Grafana dashboards without the
+  CLI.
 ---
 
 Instead of using `linkerd viz dashboard` every time you'd like to see what's
@@ -40,20 +41,20 @@ metadata:
       proxy_hide_header l5d-server-id;
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
-    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
 spec:
   ingressClassName: nginx
   rules:
-  - host: dashboard.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port:
-              number: 8084
+    - host: dashboard.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8084
 ```
 
 This exposes the dashboard at `dashboard.example.com` and protects it with basic
@@ -66,12 +67,12 @@ A more secure alternative to basic auth is using an authentication proxy, such
 as [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy/).
 
 For reference on how to deploy and configure oauth2-proxy in kubernetes, see
-this [blog post by Don
-Bowman](https://blog.donbowman.ca/2019/02/14/using-single-sign-on-oauth2-across-many-sites-in-kubernetes/).
+this
+[blog post by Don Bowman](https://blog.donbowman.ca/2019/02/14/using-single-sign-on-oauth2-across-many-sites-in-kubernetes/).
 
-tl;dr: If you deploy oauth2-proxy via the [helm
-chart](https://github.com/helm/charts/tree/master/stable/oauth2-proxy), the
-following values are required:
+tl;dr: If you deploy oauth2-proxy via the
+[helm chart](https://github.com/helm/charts/tree/master/stable/oauth2-proxy),
+the following values are required:
 
 ```yaml
 config:
@@ -90,8 +91,8 @@ ingress:
     - linkerd.example.com
 ```
 
-Where the `oauth2-proxy` secret would contain the required [oauth2
-config](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider)
+Where the `oauth2-proxy` secret would contain the required
+[oauth2 config](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider)
 such as, `client-id` `client-secret` and `cookie-secret`.
 
 Once setup, a sample ingress would be:
@@ -114,16 +115,16 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: linkerd.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port:
-              number: 8084
+    - host: linkerd.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8084
 ```
 
 ## Traefik
@@ -153,16 +154,16 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: dashboard.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port:
-              number: 8084
+    - host: dashboard.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8084
 ```
 
 This exposes the dashboard at `dashboard.example.com` and protects it with basic
@@ -171,23 +172,23 @@ for details on how to change the username and password.
 
 ## Ambassador
 
-Ambassador works by defining a [mapping
-](https://www.getambassador.io/docs/latest/topics/using/intro-mappings/) as an
-annotation on a service.
+Ambassador works by defining a
+[mapping](https://www.getambassador.io/docs/latest/topics/using/intro-mappings/)
+as an annotation on a service.
 
 The below annotation exposes the dashboard at `dashboard.example.com`.
 
 ```yaml
-  annotations:
-    getambassador.io/config: |-
-      ---
-      apiVersion: getambassador.io/v2
-      kind: Mapping
-      name: web-mapping
-      host: dashboard.example.com
-      prefix: /
-      host_rewrite: web.linkerd-viz.svc.cluster.local:8084
-      service: web.linkerd-viz.svc.cluster.local:8084
+annotations:
+  getambassador.io/config: |-
+    ---
+    apiVersion: getambassador.io/v2
+    kind: Mapping
+    name: web-mapping
+    host: dashboard.example.com
+    prefix: /
+    host_rewrite: web.linkerd-viz.svc.cluster.local:8084
+    service: web.linkerd-viz.svc.cluster.local:8084
 ```
 
 ## DNS Rebinding Protection
@@ -196,8 +197,8 @@ To prevent [DNS-rebinding](https://en.wikipedia.org/wiki/DNS_rebinding) attacks,
 the dashboard rejects any request whose `Host` header is not `localhost`,
 `127.0.0.1` or the service name `web.linkerd-viz.svc`.
 
-Note that this protection also covers the [Grafana
-dashboard](../reference/architecture/#grafana).
+Note that this protection also covers the
+[Grafana dashboard](../reference/architecture/#grafana).
 
 The ingress-nginx config above uses the
 `nginx.ingress.kubernetes.io/upstream-vhost` annotation to properly set the
@@ -214,8 +215,8 @@ argument.
 If you're managing Linkerd with Helm, then you can set the host using the
 `enforcedHostRegexp` value.
 
-Another way of doing that is through Kustomize, as explained in [Customizing
-Installation](customize-install/), using an overlay like this one:
+Another way of doing that is through Kustomize, as explained in
+[Customizing Installation](customize-install/), using an overlay like this one:
 
 ```yaml
 apiVersion: apps/v1
@@ -242,5 +243,5 @@ If you want to completely disable the `Host` header check, simply use a
 catch-all regexp `.*` for `-enforced-host`.
 
 [nginx-auth]:
-https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/auth/basic/README.md
+  https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/auth/basic/README.md
 [traefik-auth]: https://docs.traefik.io/middlewares/basicauth/

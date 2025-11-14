@@ -5,8 +5,9 @@ description: Upgrading Multicluster to Linkerd 2.9.
 
 Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
-components for the first time with Linkerd 2.9 can ignore these instructions
-and instead refer directly to the [installing multicluster](installing-multicluster/).
+components for the first time with Linkerd 2.9 can ignore these instructions and
+instead refer directly to the
+[installing multicluster](installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
 upgrade to Linkerd 2.9 should follow these instructions.
@@ -14,12 +15,13 @@ upgrade to Linkerd 2.9 should follow these instructions.
 ## Overview
 
 The main differences between multicluster in 2.8 and 2.9 is that in 2.9 we
-create a service mirror controller for each target cluster that a source
-cluster is linked to. The service mirror controller is created as part of the
-`linkerd multicluster link` command instead of the `linkerd multicluster install`
-command. There is also a new CRD type called `Link` which is used to configure
-the service mirror controller and allows you to be able to specify the label
-selector used to determine which services to mirror.
+create a service mirror controller for each target cluster that a source cluster
+is linked to. The service mirror controller is created as part of the
+`linkerd multicluster link` command instead of the
+`linkerd multicluster install` command. There is also a new CRD type called
+`Link` which is used to configure the service mirror controller and allows you
+to be able to specify the label selector used to determine which services to
+mirror.
 
 ## Ordering of Cluster Upgrades
 
@@ -29,8 +31,8 @@ cluster, target cluster, or both.
 ## Target Clusters
 
 A cluster which receives multicluster traffic but does not send multicluster
-traffic requires no special upgrade treatment. It can safely be upgraded by
-just upgrading the main Linkerd controller plane:
+traffic requires no special upgrade treatment. It can safely be upgraded by just
+upgrading the main Linkerd controller plane:
 
 ```bash
 linkerd upgrade | kubectl apply -f -
@@ -87,8 +89,8 @@ linkerd --context=target multicluster link --cluster-name=<CLUSTER NAME> \
     --selector my.cool.label=true | kubectl --context=source apply -f -
 ```
 
-There should now be two service mirror deployments running: one from version
-2.8 called `linkerd-service-mirror` and one from version 2.9 called
+There should now be two service mirror deployments running: one from version 2.8
+called `linkerd-service-mirror` and one from version 2.9 called
 `linkerd-service-mirror-<CLUSTER NAME>`. All mirror services should remain
 active and healthy.
 

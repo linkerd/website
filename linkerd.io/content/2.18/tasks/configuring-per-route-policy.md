@@ -1,16 +1,17 @@
 ---
 title: Configuring Per-Route Authorization Policy
-description: Fine-grained authorization policies can be configured for individual
-  HTTP routes.
+description:
+  Fine-grained authorization policies can be configured for individual HTTP
+  routes.
 ---
 
 <!-- markdownlint-disable-file MD014 -->
 
-In addition to [enforcing authorization at the service
-level](restricting-access/), finer-grained authorization policies can also be
-configured for individual HTTP routes. In this example, we'll use the Books demo
-app to demonstrate how to control which clients can access particular routes on
-a service.
+In addition to
+[enforcing authorization at the service level](restricting-access/),
+finer-grained authorization policies can also be configured for individual HTTP
+routes. In this example, we'll use the Books demo app to demonstrate how to
+control which clients can access particular routes on a service.
 
 This is an advanced example that demonstrates more complex policy configuration.
 For a basic introduction to Linkerd authorization policy, start with the
@@ -21,8 +22,8 @@ comprehensive documentation of the policy resources, see the
 ## Prerequisites
 
 To use this guide, you'll need to have Linkerd installed on your cluster, along
-with its Viz extension. Follow the [Installing Linkerd Guide](install/)
-if you haven't already done this.
+with its Viz extension. Follow the [Installing Linkerd Guide](install/) if you
+haven't already done this.
 
 ## Install the Books demo application
 
@@ -35,10 +36,10 @@ $ kubectl create ns booksapp && \
   | kubectl -n booksapp apply -f -
 ```
 
-This command creates a namespace for the demo, downloads its Kubernetes
-resource manifest, injects Linkerd into the application, and uses `kubectl` to
-apply it to your cluster. The app comprises the Kubernetes deployments and
-services that run in the `booksapp` namespace.
+This command creates a namespace for the demo, downloads its Kubernetes resource
+manifest, injects Linkerd into the application, and uses `kubectl` to apply it
+to your cluster. The app comprises the Kubernetes deployments and services that
+run in the `booksapp` namespace.
 
 Confirm that the Linkerd data plane was injected successfully:
 
@@ -46,8 +47,8 @@ Confirm that the Linkerd data plane was injected successfully:
 $ linkerd check -n booksapp --proxy -o short
 ```
 
-You can take a quick look at all the components that were added to your
-cluster by running:
+You can take a quick look at all the components that were added to your cluster
+by running:
 
 ```bash
 $ kubectl -n booksapp get all
@@ -71,11 +72,11 @@ Both the `books` service and the `webapp` service in the demo application are
 clients of the `authors` service.
 
 However, these services send different requests to the `authors` service. The
-`books` service should only send `GET`
-requests to the `/authors/:id.json` route, to get the author associated with a
-particular book. Meanwhile, the `webapp` service may also send `DELETE` and
-`PUT` requests to `/authors`, and `POST` requests to `/authors.json`, as it
-allows the user to create and delete authors.
+`books` service should only send `GET` requests to the `/authors/:id.json`
+route, to get the author associated with a particular book. Meanwhile, the
+`webapp` service may also send `DELETE` and `PUT` requests to `/authors`, and
+`POST` requests to `/authors.json`, as it allows the user to create and delete
+authors.
 
 Since the `books` service should never need to create or delete authors, we will
 create separate authorization policies for the `webapp` and `books` services,
@@ -97,8 +98,8 @@ policy, "all-unauthenticated". In addition, a separate authorization is
 generated to allow liveness and readiness probes from the kubelet.
 
 First, we'll create a [`Server`] resource for the `authors` deployment's service
-port. For details on [`Server`] resources, see
-[here](restricting-access/#creating-a-server-resource).
+port. For details on [`Server`] resources,
+[see here](restricting-access/#creating-a-server-resource).
 
 ```bash
 kubectl apply -f - <<EOF
@@ -136,24 +137,22 @@ Next, we'll create per-route policy resources to authorize traffic to the
 
 ## Creating per-route policy resources
 
-The [`HTTPRoute`] resource is used to configure policy for individual HTTP routes,
-by defining how to match a request for a given route. We will now create
+The [`HTTPRoute`] resource is used to configure policy for individual HTTP
+routes, by defining how to match a request for a given route. We will now create
 [`HTTPRoute`] resources for the `authors` service.
 
 {{< note >}}
-Routes configured in service profiles are different from [`HTTPRoute`] resources.
-Service profile routes allow you to collect per-route metrics and configure
-client-side behavior such as retries and timeouts. [`HTTPRoute`] resources, on the
-other hand, can be the target of [`AuthorizationPolicies`] and allow you to specify
-per-route authorization.
 
-[`HTTPRoute`]: ../reference/authorization-policy/#httproute
-[`AuthorizationPolicies`]:
-    ../reference/authorization-policy/#authorizationpolicy
+Routes configured in service profiles are different from [`HTTPRoute`]
+resources. Service profile routes allow you to collect per-route metrics and
+configure client-side behavior such as retries and timeouts. [`HTTPRoute`]
+resources, on the other hand, can be the target of [`AuthorizationPolicies`] and
+allow you to specify per-route authorization.
+
 {{< /note >}}
 
-First, let's create an [`HTTPRoute`] that matches `GET` requests to the `authors`
-service's API:
+First, let's create an [`HTTPRoute`] that matches `GET` requests to the
+`authors` service's API:
 
 ```bash
 kubectl apply -f - <<EOF
@@ -182,6 +181,7 @@ EOF
 ```
 
 {{< note >}}
+
 Two versions of the HTTPRoute resource may be used with Linkerd:
 
 - The upstream version provided by the Gateway API, with the
@@ -191,16 +191,17 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
-resource definition. See [the HTTPRoute reference
-documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+resource definition. See
+[the HTTPRoute reference documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
+
 {{< /note >}}
 
-This will create an [`HTTPRoute`] targeting the `authors-server` [`Server`] resource
-we defined previously. The `rules` section defines a list of matches, which
-determine which requests match the [`HTTPRoute`]. Here, we 've defined a match
-rule that matches `GET` requests to the path `/authors.json`, and a second match
-rule that matches `GET` requests to paths starting with the path segment
+This will create an [`HTTPRoute`] targeting the `authors-server` [`Server`]
+resource we defined previously. The `rules` section defines a list of matches,
+which determine which requests match the [`HTTPRoute`]. Here, we 've defined a
+match rule that matches `GET` requests to the path `/authors.json`, and a second
+match rule that matches `GET` requests to paths starting with the path segment
 `/authors`.
 
 Now that we've created a route, we can associate policy with that route. We'll
@@ -301,8 +302,8 @@ EOF
 ```
 
 Here, we use the [`NetworkAuthentication`] resource (rather than
-[`MeshTLSAuthentication`]) to authenticate only probes
-coming from the local network (0.0.0.0).
+[`MeshTLSAuthentication`]) to authenticate only probes coming from the local
+network (0.0.0.0).
 
 Running `linkerd viz authz` again, we can now see that our new policies exist:
 
@@ -452,14 +453,14 @@ We've now covered the basics of configuring per-route authorization policies
 with Linkerd. For more practice, try creating additional policies to restrict
 access to the `books` service as well. Or, to learn more about Linkerd
 authorization policy in general, and the various configurations that are
-available, see the [Policy reference
-docs](../reference/authorization-policy/).
+available, see the [Policy reference docs](../reference/authorization-policy/).
 
 [`Server`]: ../reference/authorization-policy/#server
 [`HTTPRoute`]: ../reference/authorization-policy/#httproute
-[`AuthorizationPolicy`]:
-    ../reference/authorization-policy/#authorizationpolicy
+[`AuthorizationPolicy`]: ../reference/authorization-policy/#authorizationpolicy
+[`AuthorizationPolicies`]:
+  ../reference/authorization-policy/#authorizationpolicy
 [`MeshTLSAuthentication`]:
-    ../reference/authorization-policy/#meshtlsauthentication
+  ../reference/authorization-policy/#meshtlsauthentication
 [`NetworkAuthentication`]:
-    ../reference/authorization-policy/#networkauthentication
+  ../reference/authorization-policy/#networkauthentication

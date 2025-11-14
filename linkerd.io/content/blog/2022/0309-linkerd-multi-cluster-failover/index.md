@@ -18,40 +18,39 @@ boundaries separated by the open Internet.
 Implemented as a Kubernetes operator that can be added to an existing Linkerd
 deployment, the failover strategy can be applied to a single cluster but is
 particularly useful for multi-cluster deployments. Linkerd already provides
-[powerful cross-cluster communication
-capabilities](/2/features/multicluster/) that work with any
-cluster topology, including multi-cloud and hybrid cloud; are completely
-transparent to the application; are zero-trust compatible; and do not introduce
-any single points of failure (SPOF) to the system. To this feature set, the new
-failover operator now adds _automation_, allowing Kubernetes users to configure
-failure conditions under which Linkerd will automatically shift traffic between
-one or more services.
+[powerful cross-cluster communication capabilities](/2/features/multicluster/)
+that work with any cluster topology, including multi-cloud and hybrid cloud; are
+completely transparent to the application; are zero-trust compatible; and do not
+introduce any single points of failure (SPOF) to the system. To this feature
+set, the new failover operator now adds _automation_, allowing Kubernetes users
+to configure failure conditions under which Linkerd will automatically shift
+traffic between one or more services.
 
 In true Linkerd fashion, this new functionality introduces a minimum of new
 machinery, instead building on top of existing Kubernetes and service mesh
-primitives such as health probes and [Service Mesh
-Interface](https://smi-spec.io/) TrafficSplits. This new operator rounds out
-Linkerd's existing reliability features, providing a complete solution for
-ultra-high-reliability deployments that covers:
+primitives such as health probes and
+[Service Mesh Interface](https://smi-spec.io/) TrafficSplits. This new operator
+rounds out Linkerd's existing reliability features, providing a complete
+solution for ultra-high-reliability deployments that covers:
 
-* Failure of individual nodes: handled via
-  [retries](/2/features/retries-and-timeouts/) and [request
-  balancing](/2/features/load-balancing/)
-* Failures due to bad code changes: (handled via [canary
-  deployments](/2/features/traffic-split/))
-* Failures due to service unavailability in general: handled with the failover operator
-* Failures due to whole-cluster outages: handed with the failover operator
+- Failure of individual nodes: handled via
+  [retries](/2/features/retries-and-timeouts/) and
+  [request balancing](/2/features/load-balancing/)
+- Failures due to bad code changes: (handled via
+  [canary deployments](/2/features/traffic-split/))
+- Failures due to service unavailability in general: handled with the failover
+  operator
+- Failures due to whole-cluster outages: handed with the failover operator
 
 ## Getting started
 
 The operator is available as a standalone project, but requires the latest
-[Linkerd edge release](/releases/) release to work. The operator
-will also work with in the upcoming 2.11.2 point release, expected within the
-next few weeks.
+[Linkerd edge release](/releases/) release to work. The operator will also work
+with in the upcoming 2.11.2 point release, expected within the next few weeks.
 
-Want to give it a try right now? Head over to the [linkerd-failover
-repo](https://github.com/linkerd/linkerd-failover) and follow the instructions
-there, or install via Helm:
+Want to give it a try right now? Head over to the
+[linkerd-failover repo](https://github.com/linkerd/linkerd-failover) and follow
+the instructions there, or install via Helm:
 
 ```bash
 # Add the linkerd-edge Helm repo if you haven't already
@@ -94,22 +93,22 @@ failure. It's as simple as that!
 We'd love your feedback on this exciting new feature for Linkerd. The initial
 operator implementation covers the basics, but there's lots more to come. Check
 out our [initial roadmap](https://github.com/linkerd/linkerd-failover/issues)
-(soon to be moved to the main [linkerd2
-repo](https://github.com/linkerd/linkerd2)) and give us your feature requests,
-bug reports, and any other feedback!
+(soon to be moved to the main
+[linkerd2 repo](https://github.com/linkerd/linkerd2)) and give us your feature
+requests, bug reports, and any other feedback!
 
 ## Linkerd is for everyone
 
 Linkerd is a [graduated project](/2021/07/28/announcing-cncf-graduation/) of the
-[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is [committed to
-open
-governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
+[Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
+[committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](/community/get-involved/). Come and join the fun!
 
-(*Photo by [Ray Harrington](https://unsplash.com/@raymondo600?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+(_Photo by
+[Ray Harrington](https://unsplash.com/@raymondo600?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on
-[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).*)
+[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)._)

@@ -1,6 +1,7 @@
 ---
 title: Debugging HTTP applications with per-route metrics
-description: Follow a long-form example of debugging a failing HTTP application using
+description:
+  Follow a long-form example of debugging a failing HTTP application using
   per-route metrics.
 ---
 
@@ -14,8 +15,8 @@ the other services. There are three services:
 - [authors](https://github.com/BuoyantIO/booksapp/blob/master/authors.rb): an
   API to manage the authors in the system
 
-- [books](https://github.com/BuoyantIO/booksapp/blob/master/books.rb): an API
-  to manage the books in the system
+- [books](https://github.com/BuoyantIO/booksapp/blob/master/books.rb): an API to
+  manage the books in the system
 
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
@@ -24,9 +25,8 @@ topology looks like this:
 
 ## Prerequisites
 
-To use this guide, you'll need to have Linkerd installed on your cluster.
-Follow the [Installing Linkerd Guide](install/) if you haven't already done
-this.
+To use this guide, you'll need to have Linkerd installed on your cluster. Follow
+the [Installing Linkerd Guide](install/) if you haven't already done this.
 
 ## Install the app
 
@@ -39,14 +39,13 @@ kubectl create ns booksapp && \
   | kubectl -n booksapp apply -f -
 ```
 
-This command creates a namespace for the demo, downloads its Kubernetes
-resource manifest and uses `kubectl` to apply it to your cluster. The app
-comprises the Kubernetes deployments and services that run in the `booksapp`
-namespace.
+This command creates a namespace for the demo, downloads its Kubernetes resource
+manifest and uses `kubectl` to apply it to your cluster. The app comprises the
+Kubernetes deployments and services that run in the `booksapp` namespace.
 
 Downloading a bunch of containers for the first time takes a little while.
-Kubernetes can tell you when all the services are running and ready for
-traffic. Wait for that to happen by running:
+Kubernetes can tell you when all the services are running and ready for traffic.
+Wait for that to happen by running:
 
 ```bash
 kubectl -n booksapp rollout status deploy webapp
@@ -74,7 +73,7 @@ frontend.
 
 ![Frontend](/docs/images/books/frontend.png "Frontend")
 
-Unfortunately, there is an error in the app: if you click *Add Book*, it will
+Unfortunately, there is an error in the app: if you click _Add Book_, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
 failure---the type that drives service owners mad because it is so difficult to
 debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
@@ -96,19 +95,20 @@ kubectl get -n booksapp deploy -o yaml \
 
 This command retrieves the manifest of all deployments in the `booksapp`
 namespace, runs them through `linkerd inject`, and then re-applies with
-`kubectl apply`. The `linkerd inject` command annotates each resource to
-specify that they should have the Linkerd data plane proxies added, and
-Kubernetes does this when the manifest is reapplied to the cluster. Best of
-all, since Kubernetes does a rolling deploy, the application stays running the
-entire time. (See [Automatic Proxy Injection](../features/proxy-injection/) for
-more details on how this works.)
+`kubectl apply`. The `linkerd inject` command annotates each resource to specify
+that they should have the Linkerd data plane proxies added, and Kubernetes does
+this when the manifest is reapplied to the cluster. Best of all, since
+Kubernetes does a rolling deploy, the application stays running the entire time.
+(See [Automatic Proxy Injection](../features/proxy-injection/) for more details
+on how this works.)
 
 ## Debugging
 
 Let's use Linkerd to discover the root cause of this app's failures. Linkerd's
 proxy exposes rich metrics about the traffic that it processes, including HTTP
-response codes. The metric that we're interested is `outbound_http_route_backend_response_statuses_total`
-and will help us identify where HTTP errors are occuring. We can use the
+response codes. The metric that we're interested is
+`outbound_http_route_backend_response_statuses_total` and will help us identify
+where HTTP errors are occuring. We can use the
 `linkerd diagnostics proxy-metrics` command to get proxy metrics. Pick one of
 your webapp pods and run the following command to get the metrics for HTTP 500
 responses:
@@ -240,8 +240,9 @@ Notice that the `Accepted` and `ResolvedRefs` conditions are `True`.
 [...]
 ```
 
-With those HTTPRoutes in place, we can look at the `outbound_http_route_backend_response_statuses_total`
-metric again, and see that the route labels have been populated:
+With those HTTPRoutes in place, we can look at the
+`outbound_http_route_backend_response_statuses_total` metric again, and see that
+the route labels have been populated:
 
 ```bash
 linkerd diagnostics proxy-metrics -n booksapp po/webapp-pod-here \
@@ -277,10 +278,10 @@ been failing.
 
 ## Retries
 
-As it can take a while to update code and roll out a new version, let's
-tell Linkerd that it can retry requests to the failing endpoint. This will
-increase request latencies, as requests will be retried multiple times, but not
-require rolling out a new version. Add a retry annotation to the `books-create`
+As it can take a while to update code and roll out a new version, let's tell
+Linkerd that it can retry requests to the failing endpoint. This will increase
+request latencies, as requests will be retried multiple times, but not require
+rolling out a new version. Add a retry annotation to the `books-create`
 HTTPRoute which tells Linkerd to retry on 5xx responses:
 
 ```bash

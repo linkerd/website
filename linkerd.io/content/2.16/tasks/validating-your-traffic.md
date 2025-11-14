@@ -1,23 +1,25 @@
 ---
 title: Validating your mTLS traffic
-description: You can validate whether or not your traffic is being mTLS'd by Linkerd.
+description:
+  You can validate whether or not your traffic is being mTLS'd by Linkerd.
 ---
 
-By default, [Linkerd automatically enables mutual Transport Layer Security
-(mTLS)](../features/automatic-mtls/) for TCP traffic between meshed pods, by
-establishing and authenticating secure, private TLS connections between Linkerd
-proxies. Simply [add your services](adding-your-service/) to Linkerd,
-and Linkerd will take care of the rest.
+By default,
+[Linkerd automatically enables mutual Transport Layer Security (mTLS)](../features/automatic-mtls/)
+for TCP traffic between meshed pods, by establishing and authenticating secure,
+private TLS connections between Linkerd proxies. Simply
+[add your services](adding-your-service/) to Linkerd, and Linkerd will take care
+of the rest.
 
-Linkerd's automatic mTLS is done in a way that's completely transparent to
-the application. Of course, sometimes it's helpful to be able to validate
-whether mTLS is in effect!
+Linkerd's automatic mTLS is done in a way that's completely transparent to the
+application. Of course, sometimes it's helpful to be able to validate whether
+mTLS is in effect!
 
 ## Validating mTLS with `linkerd viz edges`
 
-To validate that mTLS is working, you can view a summary of the TCP
-connections between services that are managed by Linkerd using the [`linkerd
-viz edges`](../reference/cli/viz/#edges) command.  For example:
+To validate that mTLS is working, you can view a summary of the TCP connections
+between services that are managed by Linkerd using the
+[`linkerd viz edges`](../reference/cli/viz/#edges) command. For example:
 
 ```bash
 linkerd viz -n linkerd edges deployment
@@ -36,10 +38,10 @@ prometheus   linkerd-sp-validator     linkerd-viz   linkerd   √
 
 In this example, everything is successfully mTLS'd, and the `CLIENT` and
 `SERVER` columns denote the identities used, in the form
-`service-account-name.namespace`. (See [Linkerd's automatic mTLS
-documentation](../features/automatic-mtls/) for more on what these identities
-mean.) If there were a problem automatically upgrading the connection with
-mTLS, the `MSG` field would contain the reason why.
+`service-account-name.namespace`. (See
+[Linkerd's automatic mTLS documentation](../features/automatic-mtls/) for more
+on what these identities mean.) If there were a problem automatically upgrading
+the connection with mTLS, the `MSG` field would contain the reason why.
 
 ## Validating mTLS with `linkerd viz tap`
 
@@ -53,15 +55,17 @@ linkerd viz -n linkerd tap deploy
 ```
 
 {{< note >}}
-By default, the control plane resources are not tappable. After having
-installed the Viz extension (through `linkerd viz install`), you can enable tap
-on the control plane components simply by restarting them, which can be done
-with no downtime with `kubectl -n linkerd rollout restart deploy`. To enable tap
-on the Viz extension itself, issue `kubectl -n linkerd-viz rollout restart
-deploy`.
+
+By default, the control plane resources are not tappable. After having installed
+the Viz extension (through `linkerd viz install`), you can enable tap on the
+control plane components simply by restarting them, which can be done with no
+downtime with `kubectl -n linkerd rollout restart deploy`. To enable tap on the
+Viz extension itself, issue `kubectl -n linkerd-viz rollout restart deploy`.
+
 {{< /note >}}
 
-Looking at the control plane specifically, there will be two main types of output.
+Looking at the control plane specifically, there will be two main types of
+output.
 
 ```bash
 req id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_remote :method=GET :authority=10.42.0.23:9995 :path=/ready
@@ -69,13 +73,13 @@ rsp id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_rem
 end id=0:0 proxy=in  src=10.42.0.1:60318 dst=10.42.0.23:9995 tls=no_tls_from_remote duration=20µs response-length=3B
 ```
 
-These are calls by the [Kubernetes readiness
-probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).
+These are calls by the
+[Kubernetes readiness probe](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/).
 As probes are initiated from the kubelet, which is not in the mesh, there is no
 identity and these requests are not mTLS'd, as denoted by the
 `tls=no_tls_from_remote` message.
 
-Other requests to the control plane *are* TLS'd:
+Other requests to the control plane _are_ TLS'd:
 
 ```bash
 ireq id=2:1 proxy=in  src=10.42.0.31:55428 dst=10.42.0.22:9995 tls=true :method=GET :authority=10.42.0.22:9995 :path=/metrics
@@ -91,10 +95,11 @@ automatically mTLS'd, as denoted by the `tls=true` output.
 The final way to validate mTLS is to look at raw network traffic within the
 cluster.
 
-Linkerd includes a [debug sidecar](using-the-debug-container/) that
-comes with a selection of commands that make it easier to verify and debug the
-service mesh itself. For example, with our [*emojivoto* demo
-application](../getting-started/), we can add the debug sidecar by running:
+Linkerd includes a [debug sidecar](using-the-debug-container/) that comes with a
+selection of commands that make it easier to verify and debug the service mesh
+itself. For example, with our
+[_emojivoto_ demo application](../getting-started/), we can add the debug
+sidecar by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/emojivoto.yml \
@@ -133,9 +138,10 @@ application traffic being automatically mTLS'd.
 
 ## Summary
 
-In this guide, we've provided several different ways to validate whether
-Linkerd has been able to automatically upgrade connections to mTLS. Note that
-there are several reasons why Linkerd may not be able to do this upgrade---see
-the "Caveats and future work" section of the [Linkerd automatic mTLS
-documentation](../features/automatic-mtls/)---so if you are relying on Linkerd
-for security purposes, this kind of validation can be instructive.
+In this guide, we've provided several different ways to validate whether Linkerd
+has been able to automatically upgrade connections to mTLS. Note that there are
+several reasons why Linkerd may not be able to do this upgrade---see the
+"Caveats and future work" section of the
+[Linkerd automatic mTLS documentation](../features/automatic-mtls/)---so if you
+are relying on Linkerd for security purposes, this kind of validation can be
+instructive.

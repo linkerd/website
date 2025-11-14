@@ -33,8 +33,8 @@ This document describes how to run proxies with additional runtime workers.
 
 ## Configuring Proxy CPU Requests and Limits
 
-Kubernetes allows you to set [CPU requests and
-limits](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit)s
+Kubernetes allows you to set
+[CPU requests and limits](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/#specify-a-cpu-request-and-a-cpu-limit)s
 for any container, and these settings can also control the CPU usage of the
 Linkerd proxy. However, the effect of these settings depends on how the kubelet
 enforces CPU limits.
@@ -48,22 +48,22 @@ flag:
 
 When using the default
 [`none`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#none-policy)
-policy, the kubelet relies on [Completely Fair Scheduler
-(CFS)](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler) quotas. In this
-mode, the Linux kernel limits the percentage of CPU time that processes
-(including the Linkerd proxy) can use.
+policy, the kubelet relies on
+[Completely Fair Scheduler (CFS)](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler)
+quotas. In this mode, the Linux kernel limits the percentage of CPU time that
+processes (including the Linkerd proxy) can use.
 
 ### Static CPU Manager Policy
 
 When the kubelet is configured with the static CPU manager policy, it assigns
-whole CPU cores to containers by leveraging Linux [cgroup
-cpusets](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#cpuset).
+whole CPU cores to containers by leveraging Linux
+[cgroup cpusets](https://www.kernel.org/doc/html/latest/admin-guide/cgroup-v2.html#cpuset).
 To successfully use this mechanism, the following conditions must be met:
 
-- The kubelet must run with the [`static` CPU manager
-  policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
-- The pod must belong to the [Guaranteed QoS
-  class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
+- The kubelet must run with the
+  [`static` CPU manager policy](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#static-policy).
+- The pod must belong to the
+  [Guaranteed QoS class](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod#create-a-pod-that-gets-assigned-a-qos-class-of-guaranteed).
   This requires that every container in the pod has matching CPU (and memory)
   requests and limits.
 - The CPU request and CPU limit for the proxy must be specified as whole numbers
@@ -84,8 +84,8 @@ proxy:
 When only a request is specified, its value is used to configure the proxy's
 runtime (by rounding up to the next whole number).
 
-Alternatively, a global default CPU limit can be configured in the
-control-plane helm chart:
+Alternatively, a global default CPU limit can be configured in the control-plane
+helm chart:
 
 ```yaml
 proxy:
@@ -128,9 +128,13 @@ spec:
   # ...
 ```
 
-{{< note >}} When a CPU quantity annotation value is not expressed as a whole
-number, the value will be rounded up to the next whole number when configuring
-the proxy's runtime. {{< /note >}}
+{{< note >}}
+
+When a CPU quantity annotation value is not expressed as a whole number, the
+value will be rounded up to the next whole number when configuring the proxy's
+runtime.
+
+{{< /note >}}
 
 ## Configuring _Rational Proxy CPU Limits_
 
@@ -157,9 +161,12 @@ proxy:
       minimum: 1
 ```
 
-{{< note >}} CPU limits takes precedence over the maximum CPU ratio, so it is
-suitable to set a global default maximumCPURatio while setting limits on
-specific workloads. {{< /note >}}
+{{< note >}}
+
+CPU limits takes precedence over the maximum CPU ratio, so it is suitable to set
+a global default maximumCPURatio while setting limits on specific workloads.
+
+{{< /note >}}
 
 ## Overriding Rational Proxy CPU Limits Using Annotations
 
@@ -175,6 +182,6 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-cpu-ratio-limit: '0.3'
+        config.linkerd.io/proxy-cpu-ratio-limit: "0.3"
   # ...
 ```

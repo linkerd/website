@@ -1,6 +1,7 @@
 ---
 title: CNI Plugin
-description: Linkerd can be configured to run a CNI plugin that rewrites each pod's
+description:
+  Linkerd can be configured to run a CNI plugin that rewrites each pod's
   iptables rules automatically.
 ---
 
@@ -64,13 +65,14 @@ linkerd check --pre --linkerd-cni-enabled
 ```
 
 {{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
+
+For Helm versions < v3, `--name` flag has to specifically be passed. In Helm v3,
+It has been deprecated, and is the first argument as specified above.
+
 {{< /note >}}
 
-At that point you are ready to install Linkerd with CNI enabled.
-You can follow [Installing Linkerd with Helm](../tasks/install-helm/) to do so.
+At that point you are ready to install Linkerd with CNI enabled. You can follow
+[Installing Linkerd with Helm](../tasks/install-helm/) to do so.
 
 ## Additional configuration
 

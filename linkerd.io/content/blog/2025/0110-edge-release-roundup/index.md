@@ -15,9 +15,9 @@ images: [social.jpg] # Open graph image
 
 Welcome to the January 2025 Edge Release Roundup post, where we dive into the
 most recent edge releases to help keep everyone up to date on the latest and
-greatest! In this month's Roundup, we're closing the books on edge releases
-from 2024, culminating in the release of Linkerd 2.17.0 -- as such, we have
-several releases with several new features to cover here!
+greatest! In this month's Roundup, we're closing the books on edge releases from
+2024, culminating in the release of Linkerd 2.17.0 -- as such, we have several
+releases with several new features to cover here!
 
 ## How to give feedback
 
@@ -48,19 +48,19 @@ about all of these contributions in the release-by-release details below.
 
 ## Recommendations and breaking changes
 
-If you're looking at any of the eight(!!) edge releases in our list this
-month, candidly you should really just go straight for edge-24.11.8 -- that's
-the latest and greatest, corresponding to Linkerd 2.17.0, so there's no reason
-you wouldn't choose that one. However, most of these releases are recommended
-for general use, and there are no breaking changes in any of them, so if you
-want to try an older one, go for it!
+If you're looking at any of the eight(!!) edge releases in our list this month,
+candidly you should really just go straight for edge-24.11.8 -- that's the
+latest and greatest, corresponding to Linkerd 2.17.0, so there's no reason you
+wouldn't choose that one. However, most of these releases are recommended for
+general use, and there are no breaking changes in any of them, so if you want to
+try an older one, go for it!
 
 The two exceptions here are:
 
-* We don't recommend edge-24.11.6, since [edge-24.11.7] came out literally the
+- We don't recommend edge-24.11.6, since [edge-24.11.7] came out literally the
   same day with three nice-to-have fixes.
 
-* We also don't recommend edge-24.11.2, since [edge-24.11.3] includes an
+- We also don't recommend edge-24.11.2, since [edge-24.11.3] includes an
   important fix for the `linkerd diagnostics endpoints` command.
 
 [edge-24.11.7]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.11.7
@@ -69,9 +69,8 @@ The two exceptions here are:
 ## The releases
 
 November's releases are all about landing the features that make up Linkerd
-2.17.0. Of course, each edge release includes _many_ dependency updates which
-we won't list here, but you can find them in the release notes for each
-release.
+2.17.0. Of course, each edge release includes _many_ dependency updates which we
+won't list here, but you can find them in the release notes for each release.
 
 ### edge-24.11.8 (November 26, 2024)
 
@@ -108,8 +107,8 @@ Brown]!). Finally, for this release we started testing Linkerd on Kubernetes
 ### edge-24.11.4 (November 19, 2024)
 
 This release fixes a bug ([issue 13327]) where Linkerd could constantly
-re-update the `status` clause of HTTPRoute if another Gateway API controller
-was present in the system (thanks [Derek Brown]!), ensures that all of the
+re-update the `status` clause of HTTPRoute if another Gateway API controller was
+present in the system (thanks [Derek Brown]!), ensures that all of the
 proxy-injector's logs are valid JSON when JSON logging is enabled (thanks,
 [Micah See]!), and cleans up HTTPRoute validation to make sure that if a
 `backendRef` is a Service, it must have a valid port.
@@ -120,18 +119,18 @@ proxy-injector's logs are valid JSON when JSON logging is enabled (thanks,
 
 This release brings local rate limiting to Linkerd! Using the new
 HTTPLocalRateLimitPolicy resource, you can attach rate limits to Servers to
-protect workloads from being overwhelmed by excessive traffic. Additionally,
-it improves metrics for TCPRoute and TLSRoute egress control, correctly
-handles the case where a Route type changes parents (fixing [issue #13280]),
-allows `linkerd diagnostics endpoints` to correctly handle workloads with
-multiple endpoints, and removes unneeded references to `linkerd-base` from the
+protect workloads from being overwhelmed by excessive traffic. Additionally, it
+improves metrics for TCPRoute and TLSRoute egress control, correctly handles the
+case where a Route type changes parents (fixing [issue #13280]), allows
+`linkerd diagnostics endpoints` to correctly handle workloads with multiple
+endpoints, and removes unneeded references to `linkerd-base` from the
 `linkerd-control-plane` chart README (thanks, [Brandon Ros]!).
 
 ### edge-24.11.2 (November 8, 2024)
 
-_edge-24.11.2 is **NOT RECOMMENDED**, since `linkerd diagnostics endpoints`
-may not correctly show all endpoints for federated Services. We recommend
-using [edge-24.11.3] instead._
+_edge-24.11.2 is **NOT RECOMMENDED**, since `linkerd diagnostics endpoints` may
+not correctly show all endpoints for federated Services. We recommend using
+[edge-24.11.3] instead._
 
 This release brings federated Services to Linkerd multicluster setups! Every
 federated Service appears exactly the same from every cluster (rather than
@@ -143,8 +142,8 @@ changes or HTTPRoute configuration.
 
 This release brings egress monitoring and control to Linkerd! Using the new
 EgressNetwork CRD as a `parentRef` for an HTTPRoute, GRPCRoute, TCPRoute, or
-TLSRoute, you can see which workloads are making egress calls and set policy
-on what's allowed and what isn't.
+TLSRoute, you can see which workloads are making egress calls and set policy on
+what's allowed and what isn't.
 
 ## Installing the latest edge release
 
@@ -154,8 +153,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also
-[install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/2/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

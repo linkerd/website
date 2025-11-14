@@ -42,18 +42,18 @@ able to run Linkerd with k3s on your fleet of Raspberry Pi!
 
 Mayank is from Chennai, India. He is currently enrolled in the B.Tech in
 Computer Science and Engineering program in Vellore Institute of Technology.
-Mayank will help the community to build out a suite of  conformance tests,
-which can be used to determine if your existing Kubernetes cluster setup (pod
-security policy, service accounts auto-mount configuration, API server
-extensions TLS setup etc.) will work with Linkerd. Every Kubernetes cluster is
-different and while `check` is awesome, it can’t check everything! The
-conformance test suite will help diagnose problems in how clusters are
-configured as well as hunt down bugs that crop up in Linkerd.
+Mayank will help the community to build out a suite of conformance tests, which
+can be used to determine if your existing Kubernetes cluster setup (pod security
+policy, service accounts auto-mount configuration, API server extensions TLS
+setup etc.) will work with Linkerd. Every Kubernetes cluster is different and
+while `check` is awesome, it can’t check everything! The conformance test suite
+will help diagnose problems in how clusters are configured as well as hunt down
+bugs that crop up in Linkerd.
 
 You can check out the RFCs for both projects here:
 
-* [ARM Support](https://github.com/linkerd/gsoc/blob/master/rfc/2020/arm-support/aliariff.md)
-* [Conformance Validation](https://github.com/linkerd/gsoc/blob/master/rfc/2020/conformance-validation/mayankshah1607/rfc.md)
+- [ARM Support](https://github.com/linkerd/gsoc/blob/master/rfc/2020/arm-support/aliariff.md)
+- [Conformance Validation](https://github.com/linkerd/gsoc/blob/master/rfc/2020/conformance-validation/mayankshah1607/rfc.md)
 
 We are very excited to have Ali and Mayank on the Linkerd team. They will be
 joining us at this month’s Linkerd online community meetup, on May 27 at 9AM PST
@@ -64,9 +64,8 @@ joining us at this month’s Linkerd online community meetup, on May 27 at 9AM P
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
 [committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
-If you have feature requests, questions, or comments, we'd love to have you
-join our rapidly-growing community! Linkerd is hosted on
+If you have feature requests, questions, or comments, we'd love to have you join
+our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
-[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd),
-and the [mailing lists](/community/get-involved/). Come and join the
-fun!
+[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
+the [mailing lists](/community/get-involved/). Come and join the fun!

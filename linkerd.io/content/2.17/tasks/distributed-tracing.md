@@ -1,11 +1,12 @@
 ---
 title: Distributed tracing with Linkerd
-description: Use Linkerd to help instrument your application with distributed tracing.
+description:
+  Use Linkerd to help instrument your application with distributed tracing.
 ---
 
 Using distributed tracing in practice can be complex, for a high level
-explanation of what you get and how it is done, we've assembled a [list of
-myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
+explanation of what you get and how it is done, we've assembled a
+[list of myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
 
 This guide will walk you through configuring and enabling tracing for
 [emojivoto](../getting-started/#step-5-install-the-demo-app). Jump to the end
@@ -25,8 +26,8 @@ topology that looks like:
 ## Prerequisites
 
 - To use this guide, you'll need to have Linkerd installed on your cluster.
-  Follow the [Installing Linkerd Guide](install/) if you haven't
-  already done this.
+  Follow the [Installing Linkerd Guide](install/) if you haven't already done
+  this.
 
 ## Install the Linkerd-Jaeger extension
 
@@ -44,18 +45,20 @@ linkerd jaeger install | kubectl apply -f -
 ```
 
 {{< note >}}
-The Linkerd-Jaeger extension currently configures proxies to export traces
-with the OpenCensus protocol by default for backwards compatibility. OpenCensus is
+
+The Linkerd-Jaeger extension currently configures proxies to export traces with
+the OpenCensus protocol by default for backwards compatibility. OpenCensus is
 [sunset and no longer maintained](https://opentelemetry.io/blog/2023/sunsetting-opencensus/),
-so we recommend installing the Linkerd-Jaeger extension with OpenTelemetry as the
-proxy trace export protocol:
+so we recommend installing the Linkerd-Jaeger extension with OpenTelemetry as
+the proxy trace export protocol:
 
 ```bash
 linkerd jaeger install --set webhook.collectorTraceProtocol=opentelemetry | kubectl apply -f
 ```
 
-In the future, the default protocol will be changed to OpenTelemetry so this step
-will no longer be necessary.
+In the future, the default protocol will be changed to OpenTelemetry so this
+step will no longer be necessary.
+
 {{< /note >}}
 
 You can verify that the Linkerd-Jaeger extension was installed correctly by
@@ -67,11 +70,11 @@ linkerd jaeger check
 
 ## Install Emojivoto
 
- Add emojivoto to your cluster and inject it with the Linkerd proxy:
+Add emojivoto to your cluster and inject it with the Linkerd proxy:
 
- ```bash
- linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
- ```
+```bash
+linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+```
 
 Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
@@ -86,9 +89,9 @@ Unlike most features of a service mesh, distributed tracing requires modifying
 the source of your application. Tracing needs some way to tie incoming requests
 to your application together with outgoing requests to dependent services. To do
 this, some headers are added to each request that contain a unique ID for the
-trace. Linkerd uses the [b3
-propagation](https://github.com/openzipkin/b3-propagation) format to tie these
-things together.
+trace. Linkerd uses the
+[b3 propagation](https://github.com/openzipkin/b3-propagation) format to tie
+these things together.
 
 We've already modified emojivoto to instrument its requests with this
 information, this
@@ -155,7 +158,8 @@ linkerd viz install --set jaegerUrl=jaeger.linkerd-jaeger:16686 \
 
 ## Cleanup
 
-To cleanup, uninstall the Linkerd-Jaeger extension along with emojivoto by running:
+To cleanup, uninstall the Linkerd-Jaeger extension along with emojivoto by
+running:
 
 ```bash
 linkerd jaeger uninstall | kubectl delete -f -
@@ -168,8 +172,8 @@ If you have an existing Jaeger installation, you can configure the OpenCensus
 collector to send traces to it instead of the Jaeger instance built into the
 Linkerd-Jaeger extension.
 
-Create the following YAML file which disables the built in Jaeger instance
-and specifies the OpenCensus collector's config.
+Create the following YAML file which disables the built in Jaeger instance and
+specifies the OpenCensus collector's config.
 
 ```bash
 cat <<EOF > jaeger-linkerd.yaml
@@ -212,14 +216,12 @@ linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
 
 You'll want to ensure that the `exporters.jaeger.endpoint` which is
 `my-jaeger-collector.my-jaeger-ns:14250` in this example is set to a value
-appropriate for your environment. This should point to a Jaeger Collector
-on port 14250.
+appropriate for your environment. This should point to a Jaeger Collector on
+port 14250.
 
-The YAML file is merged with the [Helm values.yaml][helm-values] which shows
-other possible values that can be configured.
-
-<!-- markdownlint-disable MD034 -->
-[helm-values]: https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
+The YAML file is merged with the
+[Helm values.yaml](https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml)
+which shows other possible values that can be configured.
 
 It is also possible to manually edit the OpenCensus configuration to have it
 export to any backend which it supports. See the
@@ -230,10 +232,10 @@ list.
 
 ### I don't see any spans for the proxies
 
-The Linkerd proxy uses the [b3
-propagation](https://github.com/openzipkin/b3-propagation) format. Some client
-libraries, such as Jaeger, use different formats by default. You'll want to
-configure your client library to use the b3 format to have the proxies
+The Linkerd proxy uses the
+[b3 propagation](https://github.com/openzipkin/b3-propagation) format. Some
+client libraries, such as Jaeger, use different formats by default. You'll want
+to configure your client library to use the b3 format to have the proxies
 participate in traces.
 
 ## Recommendations
@@ -242,7 +244,7 @@ participate in traces.
 
 The ingress is an especially important component for distributed tracing because
 it typically creates the root span of each trace and is responsible for deciding
-if that trace should be sampled or not.  Having the ingress make all sampling
+if that trace should be sampled or not. Having the ingress make all sampling
 decisions ensures that either an entire trace is sampled or none of it is, and
 avoids creating "partial traces".
 
@@ -250,10 +252,10 @@ Distributed tracing systems all rely on services to propagate metadata about the
 current trace from requests that they receive to requests that they send. This
 metadata, called the trace context, is usually encoded in one or more request
 headers. There are many different trace context header formats and while we hope
-that the ecosystem will eventually converge on open standards like [W3C
-tracecontext](https://www.w3.org/TR/trace-context/), we only use the [b3
-format](https://github.com/openzipkin/b3-propagation) today. Being one of the
-earliest widely used formats, it has the widest support, especially among
+that the ecosystem will eventually converge on open standards like
+[W3C tracecontext](https://www.w3.org/TR/trace-context/), we only use the
+[b3 format](https://github.com/openzipkin/b3-propagation) today. Being one of
+the earliest widely used formats, it has the widest support, especially among
 ingresses like Nginx.
 
 This reference architecture uses a traffic generator called `vote-bot` instead
@@ -273,13 +275,12 @@ We recommend using OpenTelemetry in your service and configuring it with:
 
 - [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the
   default)
-- [the OpenTelemetry agent
-  exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
+- [the OpenTelemetry agent exporter](https://opentelemetry.io/docs/collector/deployment/agent/)
 
-The OpenTelemetry agent exporter will export trace data to the OpenTelemetry collector
-over a gRPC API. The details of how to configure OpenTelemetry will vary language
-by language, but there are [guides for many popular
-languages](https://opentelemetry.io/docs/languages/).
+The OpenTelemetry agent exporter will export trace data to the OpenTelemetry
+collector over a gRPC API. The details of how to configure OpenTelemetry will
+vary language by language, but there are
+[guides for many popular languages](https://opentelemetry.io/docs/languages/).
 
 It is possible to use many other tracing client libraries as well. Just make
 sure the b3 propagation format is being used and the client library can export
@@ -287,11 +288,11 @@ its spans in a format the collector has been configured to receive.
 
 ## Collector: OpenTelemetry
 
-The OpenTelemetry collector receives trace data from the OpenTelemetry agent exporter
-and potentially does translation and filtering before sending that data to
-Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector gives
-us a lot of flexibility: we can switch to any backend that OpenTelemetry supports
-without needing to interrupt the application.
+The OpenTelemetry collector receives trace data from the OpenTelemetry agent
+exporter and potentially does translation and filtering before sending that data
+to Jaeger. Having the OpenTelemetry exporter send to the OpenTelemetry collector
+gives us a lot of flexibility: we can switch to any backend that OpenTelemetry
+supports without needing to interrupt the application.
 
 ## Backend: Jaeger
 

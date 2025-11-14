@@ -41,13 +41,13 @@ _thank you_ to [Arthur Silva Sens](https://github.com/ArthurSens),
 
 ## Multi-cluster Kubernetes the Kubernetes way
 
-Linkerd 2.8's new [multi-cluster feature](/2.10/features/multicluster/) means that
-Linkerd can now connect Kubernetes services across cluster boundaries in a way
-that's secure, fully transparent to the application, and independent of network
-topology. As discussed in our
+Linkerd 2.8's new [multi-cluster feature](/2.10/features/multicluster/) means
+that Linkerd can now connect Kubernetes services across cluster boundaries in a
+way that's secure, fully transparent to the application, and independent of
+network topology. As discussed in our
 [earlier](/2020/02/17/architecting-for-multicluster-kubernetes/)
-[posts](/2020/02/25/multicluster-kubernetes-with-service-mirroring/),
-this multi-cluster feature is designed to meet some critical goals:
+[posts](/2020/02/25/multicluster-kubernetes-with-service-mirroring/), this
+multi-cluster feature is designed to meet some critical goals:
 
 1. **Providing a unified trust domain.** The identity of source and destination
    workloads must be validated at every step, both in and across cluster
@@ -142,19 +142,18 @@ topic.
 ## Try it today!
 
 Ready to try Linkerd? Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](/2-edge/) will already have seen these
-features in action. Either way, you can download the stable 2.8 release by
-running:
+[weekly edge releases](/2-edge/) will already have seen these features in
+action. Either way, you can download the stable 2.8 release by running:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](/2/tasks/install-helm/).
-Upgrading from a previous release? We've got you covered: see our
-[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the
-linkerd upgrade command.
+[guide to installing Linkerd with Helm](/2/tasks/install-helm/). Upgrading from
+a previous release? We've got you covered: see our
+[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the linkerd upgrade
+command.
 
 ## Linkerd is for everyone
 

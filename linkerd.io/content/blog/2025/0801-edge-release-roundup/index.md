@@ -22,11 +22,10 @@ greatest! This post covers edge releases from June and July 2025.
 Edge releases are a snapshot of our current development work on `main`; by
 definition, they always have the most recent features but they may have
 incomplete features, features that end up getting rolled back later, or (like
-all software) even bugs. That said, edge releases _are_ intended for
-production use, and go through a rigorous set of automated and manual tests
-before being released. Once released, we also document whether the release is
-recommended for broad use -- and when needed, we go back and update the
-recommendations.
+all software) even bugs. That said, edge releases _are_ intended for production
+use, and go through a rigorous set of automated and manual tests before being
+released. Once released, we also document whether the release is recommended for
+broad use -- and when needed, we go back and update the recommendations.
 
 We would be delighted to hear how these releases work out for you! You can open
 [a GitHub issue](https://github.com/linkerd/linkerd2/issues/) or
@@ -54,34 +53,36 @@ details below.
 [edge-25.7.6].** If you can't run that version for some reason, check out
 [edge-25.7.4].
 
-The reason for this unusually blunt recommendation is that [edge-25.7.4] fixes
-a bug that could cause Linkerd to use more memory than it should when dealing
-with a lot of HTTP/1 connections, and we'd really like everyone to benefit
-from that fix... and since [edge-25.7.6] adds some more features on top of
-that, we think it's a good idea to go straight to that version.
+The reason for this unusually blunt recommendation is that [edge-25.7.4] fixes a
+bug that could cause Linkerd to use more memory than it should when dealing with
+a lot of HTTP/1 connections, and we'd really like everyone to benefit from that
+fix... and since [edge-25.7.6] adds some more features on top of that, we think
+it's a good idea to go straight to that version.
 
 As always, we have a couple of breaking changes to note:
 
-* As of [edge-25.7.1], Linkerd will refuse connections to a Service port that
+- As of [edge-25.7.1], Linkerd will refuse connections to a Service port that
   isn't listed in the Service's `spec.ports`, which mirrors Kubernetes's
   behavior without Linkerd and should help avoid surprises.
 
-* In [edge-25.6.3], we changed the histogram buckets for gRPC handling-time
-  histograms. The previous buckets were optimized for short-lived streams,
-  where Linkerd's controllers typically use much longer-lived streams. The
-  updated bucket sizes are much better suited to the longer lifetimes.
+- In [edge-25.6.3], we changed the histogram buckets for gRPC handling-time
+  histograms. The previous buckets were optimized for short-lived streams, where
+  Linkerd's controllers typically use much longer-lived streams. The updated
+  bucket sizes are much better suited to the longer lifetimes.
 
-* Also in [edge-25.6.3], we updated the port names used in many Linkerd
+- Also in [edge-25.6.3], we updated the port names used in many Linkerd
   deployments to avoid Kubernetes 1.33's new warnings if port names aren't
   unique across all containers in the same pod:
 
-  * In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes `dest-admin`
-  * In `sp-validator`, `admin-http` becomes `spval-admin`
-  * In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
+  - In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
+    `dest-admin`
+  - In `sp-validator`, `admin-http` becomes `spval-admin`
+  - In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
     becomes `policy-admin`
-  * In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes `ident-admin`
-  * In `proxy-injector`, `admin-http` becomes `injector-admin`
-  * In `linkerd2-cni`, `admin-http` becomes `repair-admin`
+  - In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes
+    `ident-admin`
+  - In `proxy-injector`, `admin-http` becomes `injector-admin`
+  - In `linkerd2-cni`, `admin-http` becomes `repair-admin`
 
 [edge-25.7.6]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.7.6
 [edge-25.7.5]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.7.5
@@ -101,10 +102,15 @@ list here. You can find them in the full release notes for each release.
 
 ### [edge-25.7.6] (July 31, 2025)
 
-_This release is recommended for all users, and is most likely the one you should
-run if you're reading this post._
+_This release is recommended for all users, and is most likely the one you
+should run if you're reading this post._
 
-This release supports percentages, as well as integers, when setting the `maxUnavailable` field in the `podDisruptionBudget` in Helm values (thanks, [Wim de Groot]!), cleans up the descriptions for some proxy metrics (thanks, [joedrf]!), produces auditable binaries for the policy controller and proxy, and prefers AES algorithms over ChaCha20 for mTLS. It also correctly performs reproducible builds, fixing issue [#13873].
+This release supports percentages, as well as integers, when setting the
+`maxUnavailable` field in the `podDisruptionBudget` in Helm values (thanks, [Wim
+de Groot]!), cleans up the descriptions for some proxy metrics (thanks,
+[joedrf]!), produces auditable binaries for the policy controller and proxy, and
+prefers AES algorithms over ChaCha20 for mTLS. It also correctly performs
+reproducible builds, fixing issue [#13873].
 
 [#13873]: https://github.com/linkerd/linkerd2/issues/13873
 
@@ -126,9 +132,9 @@ many HTTP/1 connections.
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
 
-This release reintroduces idle timeouts for HTTP/1 connections, and supports
-the AES_256_GCM cipher for mTLS. It also fixes an issue ([#14228]) where the
-Helm chart could fail to render when upgrading from a previous version.
+This release reintroduces idle timeouts for HTTP/1 connections, and supports the
+AES_256_GCM cipher for mTLS. It also fixes an issue ([#14228]) where the Helm
+chart could fail to render when upgrading from a previous version.
 
 [#14228]: https://github.com/linkerd/linkerd2/issues/14228
 
@@ -147,12 +153,12 @@ selectors could prevent other Servers from being used.
 _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
 
-This release will no longer permit connections to a Service IP using a port
-that is not listed in the Service's `spec.ports`, in order to fix [#13922] and
-to make Linkerd's behavior align with current Kubernetes behavior. It also
-removes duplicate metrics keys from the proxy, and removes
-`preserveUnknownFields` from the `linkerd-crds` Helm chart's ServiceProfile
-template (thanks, [Carlos Martell]!).
+This release will no longer permit connections to a Service IP using a port that
+is not listed in the Service's `spec.ports`, in order to fix [#13922] and to
+make Linkerd's behavior align with current Kubernetes behavior. It also removes
+duplicate metrics keys from the proxy, and removes `preserveUnknownFields` from
+the `linkerd-crds` Helm chart's ServiceProfile template (thanks, [Carlos
+Martell]!).
 
 [#13922]: https://github.com/linkerd/linkerd2/issues/13922
 
@@ -162,10 +168,10 @@ _This release is **not recommended**; use [edge-25.7.4] instead, or just go
 straight to [edge-25.7.6]._
 
 This release allows configuring OpenTelemetry tracing without installing the
-`linkerd-jaeger` extension, and fixes an issue where the `caBundle` field in
-the Helm chart was not being set correctly when using PEM-encoded CA
-certificates (thanks, [Jonas Dittrich]!). It also allows using a named pipe
-for SPIRE when running the proxy for Windows mesh expansion, and removes an
+`linkerd-jaeger` extension, and fixes an issue where the `caBundle` field in the
+Helm chart was not being set correctly when using PEM-encoded CA certificates
+(thanks, [Jonas Dittrich]!). It also allows using a named pipe for SPIRE when
+running the proxy for Windows mesh expansion, and removes an
 unintentionally-added HTTP/1 header read timeout.
 
 ### [edge-25.6.3] (June 18, 2025)
@@ -175,9 +181,9 @@ straight to [edge-25.7.6]._
 
 This release changes the histogram buckets for gRPC handling-time histograms.
 The new buckets better line up with the long-lived streams used in Linkerd’s
-controllers. It also fixes an issue ([#14103]) where inbound policy couldn't
-be applied to the metrics port when using native sidecars, and adds common
-gRPC server metrics to the policy controller.
+controllers. It also fixes an issue ([#14103]) where inbound policy couldn't be
+applied to the metrics port when using native sidecars, and adds common gRPC
+server metrics to the policy controller.
 
 [#14103]: https://github.com/linkerd/linkerd2/issues/14103
 
@@ -185,15 +191,15 @@ Finally, it updates the port names used in many Linkerd deployments for
 uniqueness, since Kubernetes 1.33 warns when port names are not unique within
 containers in the same pod:
 
-* In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
+- In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
   `dest-admin`
-* In `sp-validator`, `admin-http` becomes `spval-admin`
-* In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http`
-  becomes `policy-admin`
-* In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes
+- In `sp-validator`, `admin-http` becomes `spval-admin`
+- In `policy-controller`, `grpc` becomes `policy-grpc` and `admin-http` becomes
+  `policy-admin`
+- In `identity`, `grpc` becomes `ident-grpc` and `admin-http` becomes
   `ident-admin`
-* In `proxy-injector`, `admin-http` becomes `injector-admin`
-* In `linkerd2-cni`, `admin-http` becomes `repair-admin`
+- In `proxy-injector`, `admin-http` becomes `injector-admin`
+- In `linkerd2-cni`, `admin-http` becomes `repair-admin`
 
 ### [edge-25.6.2] (June 12, 2025)
 
@@ -221,8 +227,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also
-[install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/2/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

@@ -3,34 +3,34 @@ title: Multi-cluster Federated Services
 description: Using multi-cluster federated services
 ---
 
-Linkerd's [multicluster extension](multicluster/) can create federated
-services which act as a union of multiple services in different clusters with
-the same name and namespace. By sending traffic to the federated service, that
-traffic will be load balanced among all endpoints of that service in all linked
+Linkerd's [multicluster extension](multicluster/) can create federated services
+which act as a union of multiple services in different clusters with the same
+name and namespace. By sending traffic to the federated service, that traffic
+will be load balanced among all endpoints of that service in all linked
 clusters. This allows the client to be cluster agnostic, balance traffic across
 multiple clusters, and be resiliant to the failure of any individual cluster.
 
 Federated services send traffic directly to the pods of the member services
 rather than through a gateway. Therefore, federated services have the same
-requirements as *pod-to-pod* multicluster services:
+requirements as _pod-to-pod_ multicluster services:
 
-* The clusters must be on a *flat network*. In other words, pods from one
+- The clusters must be on a _flat network_. In other words, pods from one
   cluster must be able to address and connect to pods in the other cluster.
-* The clusters must have the same trust root.
-* Any clients connecting to the federated service must be meshed.
+- The clusters must have the same trust root.
+- Any clients connecting to the federated service must be meshed.
 
 This guide will walk you through creating a federated service to load balance
 traffic to a service which exists in multiple clusters. A federated service can
-include services from any number of clusters, but in this guide we'll create
-a federated service for a service that spans 3 clusters.
+include services from any number of clusters, but in this guide we'll create a
+federated service for a service that spans 3 clusters.
 
 ## Prerequisites
 
-* Three clusters. We will refer to them as `west`, `east`, and `north` in this
+- Three clusters. We will refer to them as `west`, `east`, and `north` in this
   guide.
-* The clusters must be on a *flat network*. In other words, pods from one
+- The clusters must be on a _flat network_. In other words, pods from one
   cluster must be able to address and connect to pods in the other cluster.
-* Each of these clusters should be configured as `kubectl`
+- Each of these clusters should be configured as `kubectl`
   [contexts](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/).
   We'd recommend you use the names `west`, `east`, and `north` so that you can
   follow along with this guide. It is easy to
@@ -41,8 +41,8 @@ a federated service for a service that spans 3 clusters.
 ## Step 1: Installing Linkerd and Linkerd-Viz
 
 First, install Linkerd and Linkerd-Viz into all three clusters, as described in
-the [multicluster guide](multicluster/#install-linkerd-and-linkerd-viz).
-Make sure to take care that all clusters share a common trust anchor.
+the [multicluster guide](multicluster/#install-linkerd-and-linkerd-viz). Make
+sure to take care that all clusters share a common trust anchor.
 
 ## Step 2: Installing Linkerd-Multicluster
 
@@ -65,8 +65,8 @@ communication.
 
 We use the `linkerd multicluster link` command to link the `east` and `north`
 cluster to the `west` cluster. This is exactly the same as in the regular
-[Multicluster guide](multicluster/#linking-the-clusters) except that we pass
-the `--gateway=false` flag to create a Link which doesn't require a gateway.
+[Multicluster guide](multicluster/#linking-the-clusters) except that we pass the
+`--gateway=false` flag to create a Link which doesn't require a gateway.
 
 ```console
 > linkerd --context east multicluster link --cluster-name=east --gateway=false | kubectl --context west apply -f -
@@ -77,9 +77,9 @@ the `--gateway=false` flag to create a Link which doesn't require a gateway.
 ## Step 4: Deploy a Service
 
 For our guide, we'll deploy the [bb](https://github.com/BuoyantIO/bb) service,
-which is a simple server that just returns a static response. We deploy it
-into all three clusters but configure each one with a different response string
-so that we can tell the responses apart:
+which is a simple server that just returns a static response. We deploy it into
+all three clusters but configure each one with a different response string so
+that we can tell the responses apart:
 
 ```bash
 > cat <<EOF | linkerd --context east inject - | kubectl --context east apply -f -
@@ -359,10 +359,10 @@ is distributing requests across all three clusters:
 ## Next Steps
 
 We now have a federated service that balances traffic accross services in three
-clusters. Additional clusters can be added simply by linking the new cluster
-and adding the `mirror.linkerd.io/federated=member` label to the services that
-you wish to add to the federated service. Similarly, services can be removed
-from the federated service at any time by removing the label.
+clusters. Additional clusters can be added simply by linking the new cluster and
+adding the `mirror.linkerd.io/federated=member` label to the services that you
+wish to add to the federated service. Similarly, services can be removed from
+the federated service at any time by removing the label.
 
 You may notice that the `bb-federated` federated service exists only in the
 `west` cluster and not in the `east` or `north` clusters. This is because Links
@@ -373,7 +373,7 @@ all three clusters.
 
 ## Troubleshooting
 
-* The first step of troubleshooting should be to run the `linkerd check` command
+- The first step of troubleshooting should be to run the `linkerd check` command
   in each of the clusters. In particular, look for the `linkerd-multicluster`
   checks and ensure that all linked clusters are listed:
 
@@ -398,13 +398,13 @@ linkerd-multicluster
         * north
 ```
 
-* Check the `status` subresource of the Link resource. If any services failed to
+- Check the `status` subresource of the Link resource. If any services failed to
   join the federated service, they will appear as an error here.
-* If a service that should join a federated service is not present in the Link
+- If a service that should join a federated service is not present in the Link
   `status`, ensure that the service matches the federated service label selector
   (`mirror.linkerd.io/federated=memeber` by default).
-* Use the `linkerd diagnostics endpoints` command to see all of the endpoints
-  in a federated service:
+- Use the `linkerd diagnostics endpoints` command to see all of the endpoints in
+  a federated service:
 
 ```console
 > linkerd --context west diagnostics endpoints bb-federated.mc-demo.svc.cluster.local:8080

@@ -175,8 +175,8 @@ installation, specifically:
 √ can create RoleBindings
 ```
 
-For more information on cluster access, see the
-[GKE Setup](install/#gke) section above.
+For more information on cluster access, see the [GKE Setup](install/#gke)
+section above.
 
 ## The "kubernetes-api" checks {#k8s-api}
 
@@ -579,8 +579,8 @@ Example failure:
 Failures of such nature indicate that your roots have expired. If that is the
 case you will have to update both the root and issuer certificates at once. You
 can follow the process outlined in
-[Replacing Expired Certificates](replacing_expired_certificates/) to
-get your cluster back to a stable state.
+[Replacing Expired Certificates](replacing_expired_certificates/) to get your
+cluster back to a stable state.
 
 ### √ trust roots are valid for at least 60 days {#l5d-identity-trustAnchors-not-expiring-soon}
 
@@ -724,9 +724,9 @@ Example failure:
     see https://linkerd.io/2/checks/#l5d-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of proxy-injnector webhook
-cert is approaching. In order to address this
-problem without incurring downtime, you can follow the process outlined in
+This warning indicates that the expiry of proxy-injnector webhook cert is
+approaching. In order to address this problem without incurring downtime, you
+can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ### √ sp-validator webhook has valid cert {#l5d-sp-validator-webhook-cert-valid}
@@ -763,9 +763,9 @@ Example failure:
     see https://linkerd.io/2/checks/#l5d-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of sp-validator webhook
-cert is approaching. In order to address this
-problem without incurring downtime, you can follow the process outlined in
+This warning indicates that the expiry of sp-validator webhook cert is
+approaching. In order to address this problem without incurring downtime, you
+can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ## The "linkerd-identity-data-plane" checks {#l5d-identity-data-plane}
@@ -1017,8 +1017,8 @@ Example failure:
         config.linkerd.io/control-port
 ```
 
-`config.linkerd.io/*` or `config.alpha.linkerd.io/*` should
-be annotations in order to take effect.
+`config.linkerd.io/*` or `config.alpha.linkerd.io/*` should be annotations in
+order to take effect.
 
 ### √ data plane service annotations are configured correctly {#l5d-data-plane-services-annotations}
 
@@ -1031,8 +1031,7 @@ Example failure:
         mirror.linkerd.io/exported
 ```
 
-`mirror.linkerd.io/exported` should
-be a label in order to take effect.
+`mirror.linkerd.io/exported` should be a label in order to take effect.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
@@ -1078,11 +1077,10 @@ replicas running. This is likely caused by insufficient node resources.
 
 ### The "extensions" checks {#extensions}
 
-When any [Extensions](extensions/) are installed, The Linkerd binary
-tries to invoke `check --output json` on the extension binaries.
-It is important that the extension binaries implement it.
-For more information, See [Extension
-developer docs](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md)
+When any [Extensions](extensions/) are installed, The Linkerd binary tries to
+invoke `check --output json` on the extension binaries. It is important that the
+extension binaries implement it. For more information, See
+[Extension developer docs](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md)
 
 Example error:
 
@@ -1090,8 +1088,9 @@ Example error:
 invalid extension check output from \"jaeger\" (JSON object expected)
 ```
 
-Make sure that the extension binary implements `check --output json`
-which returns the healthchecks in the [expected json format](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md#linkerd-name-check).
+Make sure that the extension binary implements `check --output json` which
+returns the healthchecks in the
+[expected json format](https://github.com/linkerd/linkerd2/blob/main/EXTENSIONS.md#linkerd-name-check).
 
 Example error:
 
@@ -1344,10 +1343,10 @@ Done configuring CNI. Sleep=true
 ## The "linkerd-multicluster checks {#l5d-multicluster}
 
 These checks run if the service mirroring controller has been installed.
-Additionally they can be ran with `linkerd multicluster check`.
-Most of these checks verify that the service mirroring controllers are working
-correctly along with remote gateways. Furthermore the checks ensure that
-end to end TLS is possible between paired clusters.
+Additionally they can be ran with `linkerd multicluster check`. Most of these
+checks verify that the service mirroring controllers are working correctly along
+with remote gateways. Furthermore the checks ensure that end to end TLS is
+possible between paired clusters.
 
 ### √ Link CRD exists {#l5d-multicluster-link-crd-exists}
 
@@ -1390,8 +1389,8 @@ Example error:
     see https://linkerd.io/2/checks/#l5d-smc-target-clusters-access for hints
 ```
 
-Make sure the relevant Kube-config with relevant permissions.
-for the specific target cluster is present as a secret correctly
+Make sure the relevant Kube-config with relevant permissions. for the specific
+target cluster is present as a secret correctly
 
 ### √ clusters share trust anchors {#l5d-multicluster-clusters-share-anchors}
 
@@ -1565,35 +1564,33 @@ Example errors:
 ```
 
 The error above indicates that some mirror services in the source cluster do not
-have associated link. These mirror services are created by the Linkerd
-service mirror controller when a remote service is marked to be
-mirrored.
+have associated link. These mirror services are created by the Linkerd service
+mirror controller when a remote service is marked to be mirrored.
 
-Make sure services are marked to be mirrored correctly at remote, and delete
-if there are any unnecessary ones.
+Make sure services are marked to be mirrored correctly at remote, and delete if
+there are any unnecessary ones.
 
 ## The "linkerd-viz" checks {#l5d-viz}
 
-These checks only run when the `linkerd-viz` extension is installed.
-This check is intended to verify the installation of linkerd-viz
-extension which comprises of `tap`, `web`,
-`metrics-api` and optional `grafana` and `prometheus` instances
-along with `tap-injector` which injects the specific
-tap configuration to the proxies.
+These checks only run when the `linkerd-viz` extension is installed. This check
+is intended to verify the installation of linkerd-viz extension which comprises
+of `tap`, `web`, `metrics-api` and optional `grafana` and `prometheus` instances
+along with `tap-injector` which injects the specific tap configuration to the
+proxies.
 
 ### √ linkerd-viz Namespace exists {#l5d-viz-ns-exists}
 
-This is the basic check used to verify if the linkerd-viz extension
-namespace is installed or not. The extension can be installed by running
-the following command:
+This is the basic check used to verify if the linkerd-viz extension namespace is
+installed or not. The extension can be installed by running the following
+command:
 
 ```bash
 linkerd viz install | kubectl apply -f -
 ```
 
-The installation can be configured by using the
-`--set`, `--values`, `--set-string` and `--set-file` flags.
-See [Linkerd Viz Readme](https://www.github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz/README.md)
+The installation can be configured by using the `--set`, `--values`,
+`--set-string` and `--set-file` flags. See
+[Linkerd Viz Readme](https://www.github.com/linkerd/linkerd2/tree/main/viz/charts/linkerd-viz/README.md)
 for a full list of configurable fields.
 
 ### √ linkerd-viz ClusterRoles exist {#l5d-viz-cr-exists}
@@ -1687,9 +1684,9 @@ Example failure:
     see https://linkerd.io/2/checks/#l5d-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of the tap API Server webhook
-cert is approaching. In order to address this
-problem without incurring downtime, you can follow the process outlined in
+This warning indicates that the expiry of the tap API Server webhook cert is
+approaching. In order to address this problem without incurring downtime, you
+can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
 
 ### √ tap api service is running {#l5d-tap-api}
@@ -1766,8 +1763,7 @@ Make sure that the `proxy-injector` is working correctly by running
     see https://linkerd.io/2/checks/#l5d-viz-cr-exists for hints
 ```
 
-Ensure all the prometheus related resources are present and running
-correctly.
+Ensure all the prometheus related resources are present and running correctly.
 
 ```bash
 ❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
@@ -1818,25 +1814,24 @@ kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 
 ## The "linkerd-jaeger" checks {#l5d-jaeger}
 
-These checks only run when the `linkerd-jaeger` extension is installed.
-This check is intended to verify the installation of linkerd-jaeger
-extension which comprises of open-census collector and jaeger
-components along with `jaeger-injector` which injects the specific
-trace configuration to the proxies.
+These checks only run when the `linkerd-jaeger` extension is installed. This
+check is intended to verify the installation of linkerd-jaeger extension which
+comprises of open-census collector and jaeger components along with
+`jaeger-injector` which injects the specific trace configuration to the proxies.
 
 ### √ linkerd-jaeger extension Namespace exists {#l5d-jaeger-ns-exists}
 
-This is the basic check used to verify if the linkerd-jaeger extension
-namespace is installed or not. The extension can be installed by running
-the following command
+This is the basic check used to verify if the linkerd-jaeger extension namespace
+is installed or not. The extension can be installed by running the following
+command
 
 ```bash
 linkerd jaeger install | kubectl apply -f -
 ```
 
-The installation can be configured by using the
-`--set`, `--values`, `--set-string` and `--set-file` flags.
-See [Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
+The installation can be configured by using the `--set`, `--values`,
+`--set-string` and `--set-file` flags. See
+[Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
 for a full list of configurable fields.
 
 ### √ collector and jaeger service account exists {#l5d-jaeger-sc-exists}
@@ -1935,10 +1930,10 @@ Make sure that the `proxy-injector` is working correctly by running
 
 ## The "linkerd-buoyant" checks {#l5d-buoyant}
 
-These checks only run when the `linkerd-buoyant` extension is installed.
-This check is intended to verify the installation of linkerd-buoyant
-extension which comprises `linkerd-buoyant` CLI, the `buoyant-cloud-agent`
-Deployment, and the `buoyant-cloud-metrics` DaemonSet.
+These checks only run when the `linkerd-buoyant` extension is installed. This
+check is intended to verify the installation of linkerd-buoyant extension which
+comprises `linkerd-buoyant` CLI, the `buoyant-cloud-agent` Deployment, and the
+`buoyant-cloud-metrics` DaemonSet.
 
 ### √ Linkerd extension command linkerd-buoyant exists
 

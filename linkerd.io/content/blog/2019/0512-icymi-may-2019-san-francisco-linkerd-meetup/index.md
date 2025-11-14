@@ -9,8 +9,8 @@ params:
 ---
 
 The San Francisco Linkerd May Meetup was a fun night filled with Linkerd
-enthusiasts, education, great food, and lots of good conversation. If you
-missed it, we’ve got ya covered: all the talks were recorded!
+enthusiasts, education, great food, and lots of good conversation. If you missed
+it, we’ve got ya covered: all the talks were recorded!
 
 ## Talk 1: Meshing from monolith to microservices with Linkerd
 
@@ -39,9 +39,9 @@ data plane.
 
 ---
 
-The [San Francisco Linkerd
-Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup) group is a
-gathering spot for like-minded developers and engineers of all skill levels who
-are interested in Linkerd, the open source service mesh. Join us now! Want to
-give a talk, or have a venue in SF that can host this meetup? Please email
-[events@buoyant.io](mailto:events@buoyant.io)!
+The
+[San Francisco Linkerd Meetup](https://www.meetup.com/San-Francisco-Linkerd-Meetup)
+group is a gathering spot for like-minded developers and engineers of all skill
+levels who are interested in Linkerd, the open source service mesh. Join us now!
+Want to give a talk, or have a venue in SF that can host this meetup? Please
+email [events@buoyant.io](mailto:events@buoyant.io)!

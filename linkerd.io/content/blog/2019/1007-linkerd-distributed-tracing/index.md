@@ -17,9 +17,9 @@ recommendation on the best way to make use of distributed tracing with Linkerd.
 
 Tracing can be an invaluable tool in debugging distributed systems performance,
 especially for identifying bottlenecks and understanding the latency cost of
-each component in your system.  If you're not already familiar with the idea
-behind distributed tracing, the [OpenTelemetry Observability
-Primer](https://opentelemetry.io/docs/concepts/observability-primer/#what-is-observability)
+each component in your system. If you're not already familiar with the idea
+behind distributed tracing, the
+[OpenTelemetry Observability Primer](https://opentelemetry.io/docs/concepts/observability-primer/#what-is-observability)
 gives a good overview of the concepts. The promises of distributed tracing are
 exciting, but in our experience, there are significant barriers to achieving
 those promises in practice.
@@ -29,8 +29,8 @@ array of projects such as [Zipkin](https://zipkin.io/),
 [Jaeger](https://www.jaegertracing.io/), [OpenTracing](https://opentracing.io/),
 [OpenCensus](https://opencensus.io/),
 [OpenTelemetry](https://opentelemetry.io/), and many many others, each with
-partially overlapping sets of functionality. There are [complex
-matrices](https://opencensus.io/feature_matrix/) of which projects can
+partially overlapping sets of functionality. There are
+[complex matrices](https://opencensus.io/feature_matrix/) of which projects can
 interoperate with which other projects and in which ways.
 
 To make matters worse, the addition of a service mesh adds another layer of
@@ -39,8 +39,8 @@ have feature overlap in what they provide, e.g. in the ability to draw
 application topologies. Also, while most of the features of a service mesh
 require no code changes, this is not true for distributed tracing. My fellow
 Linkerd maintainer William Morgan wrote an earlier blog post about this,
-entitled [Distributed tracing in the service mesh: four
-myths](/2019/08/09/service-mesh-distributed-tracing-myths/).
+entitled
+[Distributed tracing in the service mesh: four myths](/2019/08/09/service-mesh-distributed-tracing-myths/).
 
 Given the amount of confusion we saw in the Linkerd community, it was important
 to us to not just "add distributed tracing" to Linkerd 2.6 and call it a day,
@@ -78,7 +78,8 @@ explain how to use those components in your own application.
 
 Make sure you have the Linkerd 2.6 CLI available and have Linkerd 2.6 installed
 on your cluster. If you don't, you can follow the
-[installation](/2.10/tasks/install/) or [upgrade](/2.10/tasks/upgrade/) instructions.
+[installation](/2.10/tasks/install/) or [upgrade](/2.10/tasks/upgrade/)
+instructions.
 
 ```bash
 $ linkerd version
@@ -102,7 +103,7 @@ linkerd inject tracing.yml | kubectl apply -f -
 ```
 
 Finally, we install the Nginx ingress controller and the Emojivoto application
-itself.  Since we inject these components with Linkerd, we will be able to see
+itself. Since we inject these components with Linkerd, we will be able to see
 the Linkerd proxy itself in the resulting traces.
 
 ```bash
@@ -137,7 +138,7 @@ substituting a different option for each component below.
 
 The ingress is an especially important component for distributed tracing because
 it creates the root span of each trace and is responsible for deciding if that
-trace should be sampled or not.  Having the ingress make all sampling decisions
+trace should be sampled or not. Having the ingress make all sampling decisions
 ensures that either an entire trace is sampled or none of it is, and avoids
 creating "partial traces".
 
@@ -145,14 +146,14 @@ Distributed tracing systems all rely on services to propagate metadata about the
 current trace from requests that they receive to requests that they send. This
 metadata, called the trace context, is usually encoded in one or more request
 headers. There are many different trace context header formats and while we hope
-that the ecosystem will eventually converge on open standards like [W3C
-tracecontext](https://www.w3.org/TR/trace-context/), we only use the [b3
-format](https://github.com/openzipkin/b3-propagation) today. Being one of the
-earliest widely used formats, it has the widest support, especially among
+that the ecosystem will eventually converge on open standards like
+[W3C tracecontext](https://www.w3.org/TR/trace-context/), we only use the
+[b3 format](https://github.com/openzipkin/b3-propagation) today. Being one of
+the earliest widely used formats, it has the widest support, especially among
 ingresses like Nginx.
 
 This reference architecture includes a simple Nginx config that samples 50% of
-traces and emits trace data to the collector (using the Zipkin protocol).  Any
+traces and emits trace data to the collector (using the Zipkin protocol). Any
 ingress controller can be used here in place of Nginx as long as it:
 
 - Supports probabilistic sampling
@@ -161,22 +162,25 @@ ingress controller can be used here in place of Nginx as long as it:
 
 ## Client library: OpenCensus
 
-While it is possible for services to manually propagate trace propagation headers, it's usually much easier to use a library which does three things:
+While it is possible for services to manually propagate trace propagation
+headers, it's usually much easier to use a library which does three things:
 
-- Propagates the trace context from incoming request headers to outgoing request headers
+- Propagates the trace context from incoming request headers to outgoing request
+  headers
 - Modifies the trace context (i.e. starts a new span)
 - Transmits this data to a trace collector
 
 We recommend using OpenCensus in your service and configuring it with:
 
-- [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the default)
+- [b3 propagation](https://github.com/openzipkin/b3-propagation) (this is the
+  default)
 - [the OpenCensus agent exporter](https://opencensus.io/exporters/supported-exporters/go/ocagent/)
 
 The OpenCensus agent exporter will export trace data to the OpenCensus collector
 over a gRPC API. The details of how to configure OpenCensus will vary language
-by language, but there are [guides for many popular
-languages](https://opencensus.io/quickstart/). You can also see an end-to-end
-example of this in Go with our example application,
+by language, but there are
+[guides for many popular languages](https://opencensus.io/quickstart/). You can
+also see an end-to-end example of this in Go with our example application,
 [Emojivoto](https://github.com/adleong/emojivoto).
 
 You may notice that the OpenCensus project is in maintenance mode and will
@@ -195,17 +199,20 @@ without needing to interrupt the application.
 ## Backend: Jaeger
 
 Jaeger is one of the most widely used tracing backends and for good reason: it
-is easy to use and does a great job of visualizing traces. However, [any backend
-supported by OpenCensus](https://opencensus.io/service/exporters/) can be used
-instead.
+is easy to use and does a great job of visualizing traces. However,
+[any backend supported by OpenCensus](https://opencensus.io/service/exporters/)
+can be used instead.
 
 ## Linkerd
 
-If your application is injected with Linkerd, the Linkerd proxy will participate in the traces and will also emit trace data to the OpenCensus collector. This enriches the trace data and allows you to see exactly how much time requests are spending in the proxy and on the wire.  To enable Linkerd's participation:
+If your application is injected with Linkerd, the Linkerd proxy will participate
+in the traces and will also emit trace data to the OpenCensus collector. This
+enriches the trace data and allows you to see exactly how much time requests are
+spending in the proxy and on the wire. To enable Linkerd's participation:
 
 - Set the `config.linkerd.io/trace-collector` annotation on the namespace or pod
-  specs that you want to participate in traces.  This should be set to the
-  address of the OpenCensus collector service.  In our reference architecture
+  specs that you want to participate in traces. This should be set to the
+  address of the OpenCensus collector service. In our reference architecture
   this is `oc-collector.tracing:55678`.
 - Set the `config.alpha.linkerd.io/trace-collector-service-account` annotation
   on the namespace or pod specs that you want to participate in traces. This
@@ -220,15 +227,16 @@ If your application is injected with Linkerd, the Linkerd proxy will participate
 While Linkerd can only actively participate in traces that use the b3
 propagation format (as in the reference architecture above), Linkerd will always
 forward unknown request headers transparently, which means it will never
-interfere with traces that use other propagation formats.  We would also love to
-expand Linkerd's support for more propagation formats.  Please open an
-[issue](https://github.com/linkerd/linkerd2/issues) (or [pull
-request](https://github.com/linkerd/linkerd2/pulls)!) if this interests you.
+interfere with traces that use other propagation formats. We would also love to
+expand Linkerd's support for more propagation formats. Please open an
+[issue](https://github.com/linkerd/linkerd2/issues) (or
+[pull request](https://github.com/linkerd/linkerd2/pulls)!) if this interests
+you.
 
 ## Conclusion
 
 Hopefully this reference architecture makes it easier for you to understand the
 different moving parts of distributed tracing and to get started instrumenting
-your application.  While the reference architecture above isn't the only way to
+your application. While the reference architecture above isn't the only way to
 get distributed tracing for your application, we'd hope it represents a good
 starting point for your exploration. And if it doesn't, please let us know!

@@ -8,7 +8,10 @@ params:
 
 [![Recording](recording.png)](https://www.crowdcast.io/e/linkerd-online-community-4/1)
 
-In this month’s community meeting, Oliver, Thomas, and special guests Rita Zhang, maintainer of the [Gatekeeper](https://github.com/open-policy-agent/gatekeeper) project, and Matias Pan, maintainer of [OpenFaaS](https://github.com/openfaas), discussed:
+In this month’s community meeting, Oliver, Thomas, and special guests Rita
+Zhang, maintainer of the
+[Gatekeeper](https://github.com/open-policy-agent/gatekeeper) project, and
+Matias Pan, maintainer of [OpenFaaS](https://github.com/openfaas), discussed:
 
 🌈 Linkerd 2.5 roundup
 
@@ -18,4 +21,6 @@ In this month’s community meeting, Oliver, Thomas, and special guests Rita Zha
 
 🌈 OpenFaaS with Matias (@matiaspan26)
 
-Got a Linkerd demo to show off? Have a topic suggestion? We’d love to have you involved. Reach out to @William in the [Linkerd Community Slack](https://slack.linkerd.io/).
+Got a Linkerd demo to show off? Have a topic suggestion? We’d love to have you
+involved. Reach out to @William in the
+[Linkerd Community Slack](https://slack.linkerd.io/).

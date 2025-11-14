@@ -1,15 +1,16 @@
 ---
 title: Telemetry and Monitoring
-description: Linkerd automatically collects metrics from all services that send traffic
+description:
+  Linkerd automatically collects metrics from all services that send traffic
   through it.
 weight: 8
 ---
 
 One of Linkerd's most powerful features is its extensive set of tooling around
-*observability*&mdash;the measuring and reporting of observed behavior in
-meshed applications. While Linkerd doesn't have insight directly into the
-*internals* of service code, it has tremendous insight into the external
-behavior of service code.
+_observability_&mdash;the measuring and reporting of observed behavior in meshed
+applications. While Linkerd doesn't have insight directly into the _internals_
+of service code, it has tremendous insight into the external behavior of service
+code.
 
 To gain access to Linkerd's observability features you only need to install the
 Viz extension:
@@ -21,22 +22,22 @@ linkerd viz install | kubectl apply -f -
 Linkerd's telemetry and monitoring features function automatically, without
 requiring any work on the part of the developer. These features include:
 
-* Recording of top-line ("golden") metrics (request volume, success rate, and
+- Recording of top-line ("golden") metrics (request volume, success rate, and
   latency distributions) for HTTP, HTTP/2, and gRPC traffic.
-* Recording of TCP-level metrics (bytes in/out, etc) for other TCP traffic.
-* Reporting metrics per service, per caller/callee pair, or per route/path
-  (with [Service Profiles](service-profiles/)).
-* Generating topology graphs that display the runtime relationship between
+- Recording of TCP-level metrics (bytes in/out, etc) for other TCP traffic.
+- Reporting metrics per service, per caller/callee pair, or per route/path (with
+  [Service Profiles](service-profiles/)).
+- Generating topology graphs that display the runtime relationship between
   services.
-* Live, on-demand request sampling.
+- Live, on-demand request sampling.
 
 This data can be consumed in several ways:
 
-* Through the [Linkerd CLI](../reference/cli/), e.g. with `linkerd viz stat` and
+- Through the [Linkerd CLI](../reference/cli/), e.g. with `linkerd viz stat` and
   `linkerd viz routes`.
-* Through the [Linkerd dashboard](dashboard/), and
+- Through the [Linkerd dashboard](dashboard/), and
   [pre-built Grafana dashboards](dashboard/#grafana).
-* Directly from Linkerd's built-in Prometheus instance
+- Directly from Linkerd's built-in Prometheus instance
 
 ## Golden metrics
 
@@ -66,11 +67,11 @@ performance of the system, while tail percentiles help catch outlier behavior.
 
 ## Lifespan of Linkerd metrics
 
-Linkerd is not designed as a long-term historical metrics store.  While
-Linkerd's Viz extension does include a Prometheus instance, this instance
-expires metrics at a short, fixed interval (currently 6 hours).
+Linkerd is not designed as a long-term historical metrics store. While Linkerd's
+Viz extension does include a Prometheus instance, this instance expires metrics
+at a short, fixed interval (currently 6 hours).
 
-Rather, Linkerd is designed to *supplement* your existing metrics store. If
+Rather, Linkerd is designed to _supplement_ your existing metrics store. If
 Linkerd's metrics are valuable, you should export them into your existing
 historical metrics store.
 

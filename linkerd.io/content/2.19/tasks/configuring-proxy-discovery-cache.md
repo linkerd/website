@@ -65,8 +65,8 @@ spec:
   template:
     metadata:
       annotations:
-        config.linkerd.io/proxy-outbound-discovery-cache-unused-timeout: '60s'
-        config.linkerd.io/proxy-inbound-discovery-cache-unused-timeout: '120s'
+        config.linkerd.io/proxy-outbound-discovery-cache-unused-timeout: "60s"
+        config.linkerd.io/proxy-inbound-discovery-cache-unused-timeout: "120s"
   # ...
 ```
 

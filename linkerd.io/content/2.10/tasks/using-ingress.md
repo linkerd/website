@@ -14,8 +14,8 @@ Combining Linkerd and your ingress solution requires two things:
 
 Meshing your ingress pods will allow Linkerd to provide features like L7 metrics
 and mTLS the moment the traffic is inside the cluster. (See
-[Adding your service](adding-your-service/) for instructions on how to mesh
-your ingress.)
+[Adding your service](adding-your-service/) for instructions on how to mesh your
+ingress.)
 
 Note that some ingress options need to be meshed in "ingress" mode. See details
 below.
@@ -35,11 +35,15 @@ For a quick start guide to using a particular ingress, please visit the section
 for that ingress. If your ingress is not on that list, never fear—it likely
 works anyways. See [Ingress details](#ingress-details) below.
 
-{{< note >}} If your ingress terminates TLS, this TLS traffic (e.g. HTTPS calls
-from outside the cluster) will pass through Linkerd as an opaque TCP stream and
-Linkerd will only be able to provide byte-level metrics for this side of the
-connection. The resulting HTTP or gRPC traffic to internal services, of course,
-will have the full set of metrics and mTLS support. {{< /note >}}
+{{< note >}}
+
+If your ingress terminates TLS, this TLS traffic (e.g. HTTPS calls from outside
+the cluster) will pass through Linkerd as an opaque TCP stream and Linkerd will
+only be able to provide byte-level metrics for this side of the connection. The
+resulting HTTP or gRPC traffic to internal services, of course, will have the
+full set of metrics and mTLS support.
+
+{{< /note >}}
 
 ## Ambassador (aka Emissary) {#ambassador}
 
@@ -53,7 +57,7 @@ metadata:
   name: web-ambassador-mapping
   namespace: emojivoto
 spec:
-  hostname: '*'
+  hostname: "*"
   prefix: /
   service: http://web-svc.emojivoto.svc.cluster.local:80
 ```
@@ -75,7 +79,7 @@ metadata:
   name: emojivoto-web-ingress
   namespace: emojivoto
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: 'true'
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   defaultBackend:
@@ -148,9 +152,12 @@ You can then use this IP with curl:
 curl -H "Host: example.com" http://external-ip
 ```
 
-{{< note >}} This solution won't work if you're using Traefik's service weights
-as Linkerd will always send requests to the service name in `l5d-dst-override`.
-A workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
+{{< note >}}
+
+This solution won't work if you're using Traefik's service weights as Linkerd
+will always send requests to the service name in `l5d-dst-override`. A
+workaround is to use `traefik.frontend.passHostHeader: "false"` instead.
+
 {{< /note >}}
 
 ### Traefik 2.x
@@ -176,7 +183,7 @@ metadata:
 spec:
   headers:
     customRequestHeaders:
-      l5d-dst-override: 'web-svc.emojivoto.svc.cluster.local:80'
+      l5d-dst-override: "web-svc.emojivoto.svc.cluster.local:80"
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -220,9 +227,9 @@ metadata:
   namespace: emojivoto
   annotations:
     ingress.kubernetes.io/custom-request-headers:
-      'l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80'
-    ingress.gcp.kubernetes.io/pre-shared-cert: 'managed-cert-name'
-    kubernetes.io/ingress.global-static-ip-name: 'static-ip-name'
+      "l5d-dst-override: web-svc.emojivoto.svc.cluster.local:80"
+    ingress.gcp.kubernetes.io/pre-shared-cert: "managed-cert-name"
+    kubernetes.io/ingress.global-static-ip-name: "static-ip-name"
 spec:
   ingressClassName: gce
   rules:
@@ -348,15 +355,21 @@ kubectl port-forward svc/envoy -n projectcontour 3200:80
 http://127.0.0.1.nip.io:3200
 ```
 
-{{< note >}} You should annotate the pod spec with
+{{< note >}}
+
+You should annotate the pod spec with
 `config.linkerd.io/skip-outbound-ports: 8001`. The Envoy pod will try to connect
 to the Contour pod at port 8001 through TLS, which is not supported under this
 ingress mode, so you need to have the proxy skip that outbound port.
+
 {{< /note >}}
 
-{{< note >}} If you are using Contour with
-[flagger](https://github.com/weaveworks/flagger) the `l5d-dst-override` headers
-will be set automatically. {{< /note >}}
+{{< note >}}
+
+If you are using Contour with [flagger](https://github.com/weaveworks/flagger)
+the `l5d-dst-override` headers will be set automatically.
+
+{{< /note >}}
 
 ### Kong
 
@@ -437,10 +450,13 @@ env:
 
 ### Haproxy
 
-{{< note >}} There are two different haproxy-based ingress controllers. This
-example is for the
+{{< note >}}
+
+There are two different haproxy-based ingress controllers. This example is for
+the
 [kubernetes-ingress controller by haproxytech](https://www.haproxy.com/documentation/kubernetes/latest/)
 and not the [haproxy-ingress controller](https://haproxy-ingress.github.io/).
+
 {{< /note >}}
 
 Haproxy should be meshed with ingress mode enabled, i.e. with the
@@ -505,19 +521,30 @@ Thus, combining an ingress with Linkerd takes one of two forms:
 The most common approach in form #2 is to use the explicit `l5d-dst-override`
 header.
 
-{{< note >}} Some ingress controllers support sticky sessions. For session
-stickiness, the ingress controller has to do its own endpoint selection. This
-means that Linkerd will not be able to connect to the IP/port of the Kubernetes
-Service, and will instead establish a direct connection to a pod. Therefore,
-sticky sessions and `ServiceProfiles` are mutually exclusive. {{< /note >}}
+{{< note >}}
 
-{{< note >}} If requests experience a 2-3 second delay after injecting your
-ingress controller, it is likely that this is because the service of
-`type: LoadBalancer` is obscuring the client source IP. You can fix this by
-setting `externalTrafficPolicy: Local` in the ingress' service definition.
+Some ingress controllers support sticky sessions. For session stickiness, the
+ingress controller has to do its own endpoint selection. This means that Linkerd
+will not be able to connect to the IP/port of the Kubernetes Service, and will
+instead establish a direct connection to a pod. Therefore, sticky sessions and
+`ServiceProfiles` are mutually exclusive.
+
 {{< /note >}}
 
-{{< note >}} While the Kubernetes Ingress API definition allows a `backend`'s
-`servicePort` to be a string value, only numeric `servicePort` values can be
-used with Linkerd. If a string value is encountered, Linkerd will default to
-using port 80. {{< /note >}}
+{{< note >}}
+
+If requests experience a 2-3 second delay after injecting your ingress
+controller, it is likely that this is because the service of
+`type: LoadBalancer` is obscuring the client source IP. You can fix this by
+setting `externalTrafficPolicy: Local` in the ingress' service definition.
+
+{{< /note >}}
+
+{{< note >}}
+
+While the Kubernetes Ingress API definition allows a `backend`'s `servicePort`
+to be a string value, only numeric `servicePort` values can be used with
+Linkerd. If a string value is encountered, Linkerd will default to using
+port 80.
+
+{{< /note >}}

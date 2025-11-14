@@ -10,11 +10,11 @@ Read through this guide carefully. Additionally, before starting a specific
 upgrade, please read through the version-specific upgrade notices below, which
 may contain important information about your version.
 
-- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2-11-0)
-- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2-10-0)
-- [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-2-9-4)
-- [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-2-9-3)
-- [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-2-9-0)
+- [Upgrade notice: stable-2.11.0](#upgrade-notice-stable-2110)
+- [Upgrade notice: stable-2.10.0](#upgrade-notice-stable-2100)
+- [Upgrade notice: stable-2.9.4](#upgrade-notice-stable-294)
+- [Upgrade notice: stable-2.9.3](#upgrade-notice-stable-293)
+- [Upgrade notice: stable-2.9.0](#upgrade-notice-stable-290)
 
 ## Version numbering
 
@@ -23,7 +23,7 @@ other words, "2" is a static prefix, followed by the major version, then the
 minor.
 
 Changes in minor versions are intended to be backwards compatible with the
-previous version. Changes in major version *may* introduce breaking changes,
+previous version. Changes in major version _may_ introduce breaking changes,
 although we try to avoid that whenever possible.
 
 ## Upgrade paths
@@ -35,28 +35,28 @@ restrictions.
 
 **Within the same major version**. It is usually safe to upgrade to the latest
 minor version within the same major version. In other words, if you are
-currently running version *2.x.y*, upgrading to *2.x.z*, where *z* is the latest
-minor version for major version *x*, is safe. This is true even if you would
-skip intermediate intermediate minor versions, i.e. it is still safe even if *z
-> y + 1*.
+currently running version _2.x.y_, upgrading to _2.x.z_, where _z_ is the latest
+minor version for major version _x_, is safe. This is true even if you would
+skip intermediate intermediate minor versions, i.e. it is still safe even if
+_z_ > _y + 1_.
 
 **To the next major version**. It is usually safe to upgrade to the latest minor
-version of the *next* major version. In other words, if you are currently
-running version *2.x.y*, upgrading to *2.x + 1.w* will be safe, where *w* is the
-latest minor version available for major version *x + 1*.
+version of the _next_ major version. In other words, if you are currently
+running version _2.x.y_, upgrading to _2.x + 1.w_ will be safe, where _w_ is the
+latest minor version available for major version _x + 1_.
 
-**To later major versions**. Upgrades that skip one or more major versions
-are not supported. Instead, you should upgrade major versions incrementally.
+**To later major versions**. Upgrades that skip one or more major versions are
+not supported. Instead, you should upgrade major versions incrementally.
 
 Again, please check the upgrade notes for the specific version you are upgrading
-*to* for any version-specific caveats.
+_to_ for any version-specific caveats.
 
 ## Data plane vs control plane version skew
 
 It is usually safe to run Linkerd's control plane with the data plane from one
 major version earlier. (This skew is a natural consequence of upgrading.) This
-is independent of minor version, i.e. a *2.x.y* data plane and a *2.x + 1.z*
-control plane will work regardless of *y* and *z*.
+is independent of minor version, i.e. a _2.x.y_ data plane and a _2.x + 1.z_
+control plane will work regardless of _y_ and _z_.
 
 Please check the version-specific upgrade notes before proceeding.
 
@@ -67,19 +67,19 @@ workloads with older data planes.
 
 There are four components that need to be upgraded:
 
-- [The CLI](#upgrade-the-cli)
-- [The control plane](#upgrade-the-control-plane)
-- [The control plane extensions](#upgrade-extensions)
-- [The data plane](#upgrade-the-data-plane)
+- [The CLI](#upgrading-the-cli)
+- [The control plane](#upgrading-the-control-plane)
+- [The control plane extensions](#upgrading-extensions)
+- [The data plane](#upgrading-the-data-plane)
 
 These steps should be performed in sequence.
 
 ## Before upgrading
 
-Before you commence an upgrade, you should ensure that the current state
-of Linkerd is healthy, e.g. by using `linkerd check`. For major version
-upgrades, you should also ensure that your data plane is up-to-date, e.g.
-with `linkerd check --proxy`, to avoid unintentional version skew.
+Before you commence an upgrade, you should ensure that the current state of
+Linkerd is healthy, e.g. by using `linkerd check`. For major version upgrades,
+you should also ensure that your data plane is up-to-date, e.g. with
+`linkerd check --proxy`, to avoid unintentional version skew.
 
 ## Upgrading the CLI
 
@@ -91,8 +91,8 @@ To upgrade the CLI, run:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-Alternatively, you can download the CLI directly via the [Linkerd releases
-page](https://github.com/linkerd/linkerd2/releases/).
+Alternatively, you can download the CLI directly via the
+[Linkerd releases page](https://github.com/linkerd/linkerd2/releases/).
 
 Verify the CLI is installed and running the expected version with:
 
@@ -127,13 +127,13 @@ linkerd upgrade | kubectl apply --prune -l linkerd.io/control-plane-ns=linkerd \
 
 ### With Helm
 
-For Helm control plane installations, please follow the instructions at [Helm
-upgrade procedure](install-helm/#helm-upgrade-procedure).
+For Helm control plane installations, please follow the instructions at
+[Helm upgrade procedure](install-helm/#helm-upgrade-procedure).
 
 ### Verifying the control plane upgrade
 
-Once the upgrade process completes, check to make sure everything is healthy
-by running:
+Once the upgrade process completes, check to make sure everything is healthy by
+running:
 
 ```bash
 linkerd check
@@ -152,11 +152,11 @@ Which should display the latest versions for both client and server.
 
 ## Upgrading extensions
 
-[Linkerd's extensions](extensions/) provide additional functionality to
-Linkerd in a modular way. Generally speaking, extensions are versioned
-separately from Linkerd releases and follow their own schedule; however, some
-extensions are updated alongside Linkerd releases and you may wish to update
-them as part of the same process.
+[Linkerd's extensions](extensions/) provide additional functionality to Linkerd
+in a modular way. Generally speaking, extensions are versioned separately from
+Linkerd releases and follow their own schedule; however, some extensions are
+updated alongside Linkerd releases and you may wish to update them as part of
+the same process.
 
 Each extension can be upgraded independently. If using Helm, the procedure is
 similar to the control plane upgrade, using the respective charts. For the CLI,
@@ -201,9 +201,9 @@ Check to make sure everything is healthy by running:
 linkerd check --proxy
 ```
 
-This will run through a set of checks to verify that the data plane is
-operating correctly, and will list any pods that are still running older
-versions of the proxy.
+This will run through a set of checks to verify that the data plane is operating
+correctly, and will list any pods that are still running older versions of the
+proxy.
 
 Congratulation! You have successfully upgraded your Linkerd to the newer
 version.
@@ -229,7 +229,7 @@ forwards traffic to ports that are bound only to localhost.
 Users of the multi-cluster extension will need to re-link their cluster after
 upgrading.
 
-The Linkerd proxy container is now the *first* container in the pod. This may
+The Linkerd proxy container is now the _first_ container in the pod. This may
 affect tooling that assumed the application was the first container in the pod.
 
 #### Control plane changes
@@ -243,7 +243,7 @@ destination pod has a new `policy` container that runs the policy controller.
 
 In order to fix a class of startup race conditions, the container ordering
 within meshed pods has changed so that the Linkerd proxy container is now the
-*first* container in the pod, the application container now waits to start until
+_first_ container in the pod, the application container now waits to start until
 the proxy is ready. This may affect tooling that assumed the application
 container was the first container in the pod.
 
@@ -257,12 +257,12 @@ valid.)
 There are two breaking changes to be aware of when it comes to how traffic is
 routed.
 
-First, when the proxy runs in ingress mode (`config.linkerd.io/inject:
-ingress`), non-HTTP traffic to meshed pods is no longer supported. To get
-around this, you will need to use the `config.linkerd.io/skip-outbound-ports`
-annotation on your ingress controller pod. In many cases, ingress mode is no
-longer necessary. Before upgrading, it may be worth revisiting [how to use
-ingress](using-ingress/) with Linkerd.
+First, when the proxy runs in ingress mode
+(`config.linkerd.io/inject: ingress`), non-HTTP traffic to meshed pods is no
+longer supported. To get around this, you will need to use the
+`config.linkerd.io/skip-outbound-ports` annotation on your ingress controller
+pod. In many cases, ingress mode is no longer necessary. Before upgrading, it
+may be worth revisiting [how to use ingress](using-ingress/) with Linkerd.
 
 Second, the proxy will no longer forward traffic to ports only bound on
 localhost, such as `127.0.0.1:8080`. Services that want to receive traffic from
@@ -291,44 +291,44 @@ Besides the breaking changes described above, there are other minor changes to
 be aware of when upgrading from `stable-2.10.x`:
 
 - `PodSecurityPolicy` (PSP) resources are no longer installed by default as a
- result of their deprecation in Kubernetes v1.21 and above. The control plane
- and core extensions will now be shipped without PSPs; they can be enabled
- through a new install option `enablePSP: true`.
+  result of their deprecation in Kubernetes v1.21 and above. The control plane
+  and core extensions will now be shipped without PSPs; they can be enabled
+  through a new install option `enablePSP: true`.
 - Opaque ports changes: `443` is no longer included in the default opaque ports
- list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
- ElasticSearch respectively (all server speak first protocols) have been added
- to the default opaque ports list. The default ignore inbound ports list has
- also been changed to include ports `4567` and `4568`.
+  list. Ports `4444`, `6379` and `9300` corresponding to Galera, Redis and
+  ElasticSearch respectively (all server speak first protocols) have been added
+  to the default opaque ports list. The default ignore inbound ports list has
+  also been changed to include ports `4567` and `4568`.
 
 ### Upgrade notice: stable-2.10.0
 
-If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but *not*
-2.9.4), and you *upgraded* to that release using the `--prune` flag (as opposed
+If you are currently running Linkerd 2.9.0, 2.9.1, 2.9.2, or 2.9.3 (but _not_
+2.9.4), and you _upgraded_ to that release using the `--prune` flag (as opposed
 to installing it fresh), you will need to use the `linkerd repair` command as
-outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-2-9-3)
+outlined in the [Linkerd 2.9.3 upgrade notes](#upgrade-notice-stable-293)
 before you can upgrade to Linkerd 2.10.
 
 Additionally, there are two changes in the 2.10.0 release that may affect you.
 First, the handling of certain ports and protocols has changed. Please read
-through our [ports and protocols in 2.10 upgrade
-guide](../features/protocol-detection/) for the repercussions.
+through our
+[ports and protocols in 2.10 upgrade guide](../features/protocol-detection/) for
+the repercussions.
 
-Second, we've introduced [extensions](extensions/) and moved the
-default visualization components into a Linkerd-Viz extension. Read on for what
-this means for you.
+Second, we've introduced [extensions](extensions/) and moved the default
+visualization components into a Linkerd-Viz extension. Read on for what this
+means for you.
 
 #### Visualization components moved to Linkerd-Viz extension
 
-With the introduction of [extensions](extensions/), all of the
-Linkerd control plane components related to visibility (including Prometheus,
-Grafana, Web, and Tap) have been removed from the main Linkerd control plane
-and moved into the Linkerd-Viz extension. This means that when you upgrade to
-stable-2.10.0, these components will be removed from your cluster and you will
-not be able to run commands such as `linkerd stat` or
-`linkerd dashboard`. To restore this functionality, you must install the
-Linkerd-Viz extension by running `linkerd viz install | kubectl apply -f -`
-and then invoke those commands through `linkerd viz stat`,
-`linkerd viz dashboard`, etc.
+With the introduction of [extensions](extensions/), all of the Linkerd control
+plane components related to visibility (including Prometheus, Grafana, Web, and
+Tap) have been removed from the main Linkerd control plane and moved into the
+Linkerd-Viz extension. This means that when you upgrade to stable-2.10.0, these
+components will be removed from your cluster and you will not be able to run
+commands such as `linkerd stat` or `linkerd dashboard`. To restore this
+functionality, you must install the Linkerd-Viz extension by running
+`linkerd viz install | kubectl apply -f -` and then invoke those commands
+through `linkerd viz stat`, `linkerd viz dashboard`, etc.
 
 ```bash
 # Upgrade the control plane (this will remove viz components).
@@ -370,8 +370,10 @@ values have been moved to the Linkerd-Viz chart or the Linkerd-Jaeger chart.
 - `grafana.proxy` moved to Linkerd-Viz as `grafana.proxy`
 - `prometheus` moved to Linkerd-Viz as `prometheus`
 - `prometheus.proxy` moved to Linkerd-Viz as `prometheus.proxy`
-- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as `webhook.collectorSvcAddr`
-- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as `webhook.collectorSvcAccount`
+- `global.proxy.trace.collectorSvcAddr` moved to Linkerd-Jaeger as
+  `webhook.collectorSvcAddr`
+- `global.proxy.trace.collectorSvcAccount` moved to Linkerd-Jaeger as
+  `webhook.collectorSvcAccount`
 - `tracing.enabled` removed
 - `tracing.collector` moved to Linkerd-Jaeger as `collector`
 - `tracing.jaeger` moved to Linkerd-Jaeger as `jaeger`
@@ -417,12 +419,12 @@ you're pulling images into a private repo please make the necessary changes.
 Linkerd 2.9 changes the way that some of the multicluster components work and
 are installed compared to Linkerd 2.8.x. Users installing the multicluster
 components for the first time with Linkerd 2.9 can ignore these instructions and
-instead refer directly to the [installing
-multicluster instructions](installing-multicluster/).
+instead refer directly to the
+[installing multicluster instructions](installing-multicluster/).
 
 Users who installed the multicluster component in Linkerd 2.8.x and wish to
-upgrade to Linkerd 2.9 should follow the [upgrade multicluster
-instructions](upgrade-multicluster/).
+upgrade to Linkerd 2.9 should follow the
+[upgrade multicluster instructions](upgrade-multicluster/).
 
 #### Ingress behavior changes
 

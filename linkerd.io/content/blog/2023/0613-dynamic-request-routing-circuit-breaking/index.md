@@ -165,8 +165,8 @@ mean that you need to be careful to propagate headers through the various
 workloads of your application.
 
 You can find more details about
-[dynamic request routing](/2/tasks/configuring-dynamic-request-routing/)
-in its documentation.
+[dynamic request routing](/2/tasks/configuring-dynamic-request-routing/) in its
+documentation.
 
 ## Circuit Breaking
 
@@ -228,8 +228,8 @@ Don’t ever wait more than 120 seconds between retries:
 balancer.linkerd.io/failure-accrual-consecutive-max-penalty: 120s
 ```
 
-More information on [circuit breaking](/2/tasks/circuit-breakers/)
-is available in its documentation.
+More information on [circuit breaking](/2/tasks/circuit-breakers/) is available
+in its documentation.
 
 ## Gotchas
 
