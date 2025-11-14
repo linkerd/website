@@ -199,13 +199,9 @@ You'll want to ensure that the `exporters.jaeger.endpoint` which is
 appropriate for your environment. This should point to a Jaeger Collector on
 port 14250.
 
-The YAML file is merged with the [Helm values.yaml][helm-values] which shows
-other possible values that can be configured.
-
-<!-- markdownlint-disable MD034 -->
-
-[helm-values]:
-  https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
+The YAML file is merged with the
+[Helm values.yaml](https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml)
+which shows other possible values that can be configured.
 
 It is also possible to manually edit the OpenCensus configuration to have it
 export to any backend which it supports. See the

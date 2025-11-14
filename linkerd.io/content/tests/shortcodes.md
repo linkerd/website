@@ -59,4 +59,5 @@ This is a warning.
 
 </div>
 
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

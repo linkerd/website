@@ -169,8 +169,6 @@ $ kubectl -n <namesppace> logs <pod-name> linkerd-init
 # you want to see the iptables rules for
 ```
 
-<!-- markdownlint-disable MD013 -->
-
 ### Inbound
 
 {{< keyval >}}
@@ -198,5 +196,3 @@ $ kubectl -n <namesppace> logs <pod-name> linkerd-init
 | 6   | install-proxy-init-output | `iptables -t nat -A OUTPUT -j PROXY_INIT_OUTPUT`                                           | the last outbound rule configures the `OUTPUT` chain (second before last chain a packet traverses outbound) to send packets to the redirect output chain for processing |
 
 {{< /keyval >}}
-
-<!-- markdownlint-enable MD013 -->

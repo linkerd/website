@@ -180,8 +180,8 @@ kubectl port-forward -n jaeger-system svc/jaeger-query 16686
 ```
 
 <!-- markdownlint-disable MD034 -->
-
 Then, open http://127.0.0.1:16686 in your browser.
+<!-- markdownlint-enable MD034 -->
 
 ![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
 

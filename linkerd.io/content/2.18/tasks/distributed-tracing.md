@@ -21,7 +21,7 @@ To use distributed tracing, you'll need to:
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
-![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
+![Topology](/docs/images/tracing/tracing-topology.svg 'Topology')
 
 ## Prerequisites
 
@@ -113,17 +113,17 @@ up in Jaeger. To get to the UI, run:
 linkerd jaeger dashboard
 ```
 
-![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
+![Jaeger](/docs/images/tracing/jaeger-empty.png 'Jaeger')
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
-![Search](/docs/images/tracing/jaeger-search.png "Search")
+![Search](/docs/images/tracing/jaeger-search.png 'Search')
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
-![Search](/docs/images/tracing/example-trace.png "Search")
+![Search](/docs/images/tracing/example-trace.png 'Search')
 
 There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
@@ -139,7 +139,7 @@ meta-data as trace attributes, users can directly jump into related resources
 traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
 the Metrics Table, as shown below:
 
-![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
+![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png 'Linkerd-Jaeger')
 
 To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
 extension specifying the service exposing the Jaeger UI. By default, this would
@@ -213,13 +213,9 @@ You'll want to ensure that the `exporters.jaeger.endpoint` which is
 appropriate for your environment. This should point to a Jaeger Collector on
 port 14250.
 
-The YAML file is merged with the [Helm values.yaml][helm-values] which shows
-other possible values that can be configured.
-
-<!-- markdownlint-disable MD034 -->
-
-[helm-values]:
-  https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml
+The YAML file is merged with the
+[Helm values.yaml](https://github.com/linkerd/linkerd2/blob/main/jaeger/charts/linkerd-jaeger/values.yaml)
+which shows other possible values that can be configured.
 
 It is also possible to manually edit the collector configuration to have it
 export to any backend which it supports. See the
