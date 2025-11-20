@@ -93,7 +93,8 @@ params:
           Finally, Ambassadors active on social media are encouraged to help
           amplify Linkerd content on social or other media and engage in
           conversation about Linkerd (e.g., Reddit, LinkedIn, etc.).
-      - title: What if Linkerd Ambassadors can't fulfill their responsibilities
+      - title:
+          What if Linkerd Ambassadors can't fulfill their responsibilities
           anymore?
         content: |-
           Linkerd Ambassadors who opt to step down or are unable to meet

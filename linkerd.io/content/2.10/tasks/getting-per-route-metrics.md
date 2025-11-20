@@ -4,9 +4,9 @@ description: Configure per-route metrics for your application.
 ---
 
 To get per-route metrics, you must first create a
-[service profile](../features/service-profiles/). Once a service
-profile has been created, Linkerd will add labels to the Prometheus metrics that
-associate a specific request to a specific route.
+[service profile](../features/service-profiles/). Once a service profile has
+been created, Linkerd will add labels to the Prometheus metrics that associate a
+specific request to a specific route.
 
 For a tutorial that shows this functionality off, check out the
 [books demo](books/#service-profiles).
@@ -82,12 +82,12 @@ req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=
 This will select only the requests observed and show the `:authority` and
 `rt_route` that was used for each request.
 
-- Linkerd discovers the right service profile to use via `:authority` or
-  `Host` headers. The name of your service profile must match these headers.
-  There are many reasons why these would not match, see
-  [ingress](../features/ingress/) for one reason. Another would be clients that
-  use IPs directly such as Prometheus.
+- Linkerd discovers the right service profile to use via `:authority` or `Host`
+  headers. The name of your service profile must match these headers. There are
+  many reasons why these would not match, see [ingress](../features/ingress/)
+  for one reason. Another would be clients that use IPs directly such as
+  Prometheus.
 - Getting regexes to match can be tough and the ordering is important. Pay
-  attention to `rt_route`. If it is missing entirely, compare the `:path` to
-  the regex you'd like for it to match, and use a
-  [tester](https://regex101.com/) with the Golang flavor of regex.
+  attention to `rt_route`. If it is missing entirely, compare the `:path` to the
+  regex you'd like for it to match, and use a [tester](https://regex101.com/)
+  with the Golang flavor of regex.

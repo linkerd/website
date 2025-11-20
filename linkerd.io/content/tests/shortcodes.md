@@ -18,9 +18,11 @@ title: Shortcodes
 ## keyval
 
 {{< keyval >}}
+
 | Param | Description                      |
 | ----- | -------------------------------- |
 | `foo` | A description of this parameter. |
+
 {{< /keyval >}}
 
 ## edge-version
@@ -41,12 +43,21 @@ title: Shortcodes
 
 ## note
 
-{{< note title="Note title" >}}This is a note.{{< /note >}}
+{{< note title="Note title" >}}
+
+This is a note.
+
+{{< /note >}}
 
 ## warning
 
-{{< warning >}}This is a warning.{{< /warning >}}
+{{< warning >}}
+
+This is a warning.
+
+{{< /warning >}}
 
 </div>
 
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

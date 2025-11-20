@@ -12,16 +12,17 @@ between services that live on different clusters.
 
 At a high level, you will:
 
-1. [Install Linkerd and Linkerd Viz](#install-linkerd) on two clusters with a
-   shared trust anchor.
+<!-- markdownlint-disable MD059 -->
+1. [Install Linkerd and Linkerd Viz](#install-linkerd-and-linkerd-viz) on two
+   clusters with a shared trust anchor.
 1. [Prepare](#preparing-your-cluster) the clusters.
 1. [Link](#linking-the-clusters) the clusters.
 1. [Install](#installing-the-test-services) the demo.
 1. [Export](#exporting-the-services) the demo services, to control visibility.
-1. [Gain visibility](#visibility) in your linked clusters.
 1. [Verify](#security) the security of your clusters.
 1. [Split traffic](#traffic-splitting) from pods on the source cluster (`west`)
    to the target cluster (`east`)
+<!-- markdownlint-enable MD059 -->
 
 ## Prerequisites
 
@@ -54,13 +55,12 @@ At a high level, you will:
 ![install](/docs/images/multicluster/install.svg "Two Clusters")
 
 Linkerd requires a shared
-[trust anchor](generate-certificates/#trust-anchor-certificate)
-to exist between the installations in all clusters that communicate with each
-other. This is used to encrypt the traffic between clusters and authorize
-requests that reach the gateway so that your cluster is not open to the public
-internet. Instead of letting `linkerd` generate everything, we'll need to
-generate the credentials and use them as configuration for the `install`
-command.
+[trust anchor](generate-certificates/#trust-anchor-certificate) to exist between
+the installations in all clusters that communicate with each other. This is used
+to encrypt the traffic between clusters and authorize requests that reach the
+gateway so that your cluster is not open to the public internet. Instead of
+letting `linkerd` generate everything, we'll need to generate the credentials
+and use them as configuration for the `install` command.
 
 We like to use the [step](https://smallstep.com/cli/) CLI to generate these
 certificates. If you prefer `openssl` instead, feel free to use that! To
@@ -81,8 +81,8 @@ picture into how this all works, check out the
 
 The trust anchor that we've generated is a self-signed certificate which can be
 used to create new certificates (a certificate authority). To generate the
-[issuer credentials](generate-certificates/#issuer-certificate-and-key)
-using the trust anchor, run:
+[issuer credentials](generate-certificates/#issuer-certificate-and-key) using
+the trust anchor, run:
 
 ```bash
 step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
@@ -94,8 +94,7 @@ An `identity` service in your cluster will use the certificate and key that you
 generated here to generate the certificates that each individual proxy uses.
 While we will be using the same issuer credentials on each cluster for this
 guide, it is a good idea to have separate ones for each cluster. Read through
-the [certificate documentation](generate-certificates/) for more
-details.
+the [certificate documentation](generate-certificates/) for more details.
 
 With a valid trust anchor and issuer credentials, we can install Linkerd on your
 `west` and `east` clusters now.
@@ -143,12 +142,13 @@ done
 
 In order to route traffic between clusters, Linkerd leverages Kubernetes
 services so that your application code does not need to change and there is
-nothing new to learn.  This requires a gateway component that routes incoming
+nothing new to learn. This requires a gateway component that routes incoming
 requests to the correct internal service. The gateway will be exposed to the
 public internet via a `Service` of type `LoadBalancer`. Only requests verified
 through Linkerd's mTLS (with a shared trust anchor) will be allowed through this
 gateway. If you're interested, we go into more detail as to why this is
-important in [architecting for multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
+important in
+[architecting for multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/#requirement-i-support-hierarchical-networks).
 
 To install the multicluster components on both `west` and `east`, you can run:
 
@@ -265,9 +265,13 @@ Additionally, the `east` gateway should now show up in the list:
 linkerd --context=west multicluster gateways
 ```
 
-{{< note >}} `link` assumes that the two clusters will connect to each other
-with the same configuration as you're using locally. If this is not the case,
-you'll want to use the `--api-server-address` flag for `link`.{{< /note >}}
+{{< note >}}
+
+`link` assumes that the two clusters will connect to each other with the same
+configuration as you're using locally. If this is not the case, you'll want to
+use the `--api-server-address` flag for `link`.
+
+{{< /note >}}
 
 ## Installing the test services
 
@@ -337,9 +341,11 @@ by adding the `mirror.linkerd.io/exported` label:
 kubectl --context=east label svc -n test podinfo mirror.linkerd.io/exported=true
 ```
 
-{{< note >}} You can configure a different label selector by using the
-`--selector` flag on the `linkerd multicluster link-gen` command or by editing
-the Link resource.
+{{< note >}}
+
+You can configure a different label selector by using the `--selector` flag on
+the `linkerd multicluster link-gen` command or by editing the Link resource.
+
 {{< /note >}}
 
 Check out the service that was just created by the controller!
@@ -376,8 +382,8 @@ kubectl --context=west -n test exec -c nginx -it \
 You'll see the `greeting from east` message! Requests from the `frontend` pod
 running in `west` are being transparently forwarded to `east`. Assuming that
 you're still port forwarding from the previous step, you can also reach this
-with `curl http://localhost:8080/east`.  Make that call a couple times and
-you'll be able to get metrics from `linkerd viz stat-outbound` as well.
+with `curl http://localhost:8080/east`. Make that call a couple times and you'll
+be able to get metrics from `linkerd viz stat-outbound` as well.
 
 ```bash
 linkerd --context=west -n test viz stat-outbound deploy/frontend
@@ -385,8 +391,8 @@ linkerd --context=west -n test viz stat-outbound deploy/frontend
 
 We also provide a grafana dashboard to get a feel for what's going on here (see
 the [grafana install instructions](grafana/) first to have a working grafana
-provisioned with Linkerd dashboards). You can get to it by running `linkerd
---context=west viz dashboard` and going to
+provisioned with Linkerd dashboards). You can get to it by running
+`linkerd --context=west viz dashboard` and going to
 
 ![grafana-dashboard](/docs/images/multicluster/grafana-dashboard.png "Grafana")
 
@@ -406,9 +412,12 @@ linkerd --context=west -n test viz tap deploy/frontend | \
 
 `tls=true` tells you that the requests are being encrypted!
 
-{{< note >}} As `linkerd viz edges` works on concrete resources and cannot see
-two clusters at once, it is not currently able to show the edges between pods in
-`east` and `west`. This is the reason we're using `tap` to validate mTLS here.
+{{< note >}}
+
+As `linkerd viz edges` works on concrete resources and cannot see two clusters
+at once, it is not currently able to show the edges between pods in `east` and
+`west`. This is the reason we're using `tap` to validate mTLS here.
+
 {{< /note >}}
 
 In addition to making sure all your requests are encrypted, it is important to
@@ -431,8 +440,8 @@ able to explicitly address them, however that only covers one use case for
 operating multiple clusters. Another scenario for multicluster is failover. In a
 failover scenario, you don't have time to update the configuration. Instead, you
 need to be able to leave the application alone and just change the routing. If
-this sounds a lot like how we do [canary](flagger/) deployments,
-you'd be correct!
+this sounds a lot like how we do [canary](flagger/) deployments, you'd be
+correct!
 
 `TrafficSplit` allows us to define weights between multiple services and split
 traffic between them. In a failover scenario, you want to do this slowly as to

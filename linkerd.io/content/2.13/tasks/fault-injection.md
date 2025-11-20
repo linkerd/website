@@ -1,6 +1,7 @@
 ---
 title: Injecting Faults
-description: Practice chaos engineering by injecting faults into services with Linkerd.
+description:
+  Practice chaos engineering by injecting faults into services with Linkerd.
 ---
 
 It is easy to inject failures into applications by using the
@@ -8,8 +9,8 @@ It is easy to inject failures into applications by using the
 traffic to a specific backend. This backend is completely flexible and can
 return whatever responses you want - 500s, timeouts or even crazy payloads.
 
-The [books demo](books/) is a great way to show off this behavior. The
-overall topology looks like:
+The [books demo](books/) is a great way to show off this behavior. The overall
+topology looks like:
 
 ![Topology](/docs/images/books/topology.png "Topology")
 
@@ -137,9 +138,9 @@ EOF
 ## Inject faults
 
 With booksapp and NGINX running, it is now time to partially split the traffic
-between an existing backend, `books`, and the newly created
-`error-injector`. This is done by adding an
-[HTTPRoute](../reference/httproute/) configuration to your cluster:
+between an existing backend, `books`, and the newly created `error-injector`.
+This is done by adding an [HTTPRoute](../reference/httproute/) configuration to
+your cluster:
 
 ```bash
 cat <<EOF | kubectl apply -f -

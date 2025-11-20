@@ -16,8 +16,8 @@ using `linkerd install`, we can generate these for you. However, for Helm, you
 will need to generate these yourself.
 
 Please follow the instructions in
-[Generating your own mTLS root certificates](generate-certificates/) to
-generate these.
+[Generating your own mTLS root certificates](generate-certificates/) to generate
+these.
 
 ## Helm install procedure
 
@@ -29,11 +29,14 @@ helm repo add linkerd-edge https://helm.linkerd.io/edge
 You need to install two separate charts in succession: first `linkerd-crds` and
 then `linkerd-control-plane`.
 
-{{< note >}} If installing Linkerd in a cluster that uses Cilium in kube-proxy
-replacement mode, additional steps may be needed to ensure service discovery
-works as intended. Instrunctions are on the
-[Cilium cluster configuration](../reference/cluster-configuration/#cilium)
-page. {{< /note >}}
+{{< note >}}
+
+If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
+mode, additional steps may be needed to ensure service discovery works as
+intended. Instrunctions are on the
+[Cilium cluster configuration](../reference/cluster-configuration/#cilium) page.
+
+{{< /note >}}
 
 ### linkerd-crds
 
@@ -44,12 +47,19 @@ helm install linkerd-crds linkerd-edge/linkerd-crds \
   -n linkerd --create-namespace
 ```
 
-{{< note >}} This will create the `linkerd` namespace. If it already exists or
-you're creating it beforehand elsewhere in your pipeline, just omit the
-`--create-namespace` flag. {{< /note >}}
+{{< note >}}
 
-{{< note >}} If you are using [Linkerd's CNI plugin](../features/cni/), you
-must also add the `--set cniEnabled=true` flag to your `helm install` command.
+This will create the `linkerd` namespace. If it already exists or you're
+creating it beforehand elsewhere in your pipeline, just omit the
+`--create-namespace` flag.
+
+{{< /note >}}
+
+{{< note >}}
+
+If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
+`--set cniEnabled=true` flag to your `helm install` command.
+
 {{< /note >}}
 
 ### linkerd-control-plane
@@ -65,8 +75,11 @@ helm install linkerd-control-plane \
   linkerd-edge/linkerd-control-plane
 ```
 
-{{< note >}} If you are using [Linkerd's CNI plugin](../features/cni/), you
-must also add the `--set cniEnabled=true` flag to your `helm install` command.
+{{< note >}}
+
+If you are using [Linkerd's CNI plugin](../features/cni/), you must also add the
+`--set cniEnabled=true` flag to your `helm install` command.
+
 {{< /note >}}
 
 ## Enabling high availability mode
@@ -130,9 +143,9 @@ and/or overrides are applied through `--set` and `--set-file`. For example:
 
 Finally, before upgrading, you can consult the
 [edge chart](https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-control-plane#values)
-docs to check whether there are breaking changes to the chart (i.e.
-renamed or moved keys, etc). If there are, make the corresponding changes to
-your `values.yaml` file. Then you can use:
+docs to check whether there are breaking changes to the chart (i.e. renamed or
+moved keys, etc). If there are, make the corresponding changes to your
+`values.yaml` file. Then you can use:
 
 ```bash
 # the linkerd-crds chart currently doesn't have a values.yaml file

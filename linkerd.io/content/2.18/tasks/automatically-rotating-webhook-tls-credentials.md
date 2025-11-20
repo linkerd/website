@@ -4,22 +4,21 @@ description: Use cert-manager to automatically rotate webhook TLS credentials.
 ---
 
 The Linkerd control plane contains several components, called webhooks, which
-are called directly by Kubernetes itself.  The traffic from Kubernetes to the
+are called directly by Kubernetes itself. The traffic from Kubernetes to the
 Linkerd webhooks is secured with TLS and therefore each of the webhooks requires
-a secret containing TLS credentials.  These certificates are different from the
+a secret containing TLS credentials. These certificates are different from the
 ones that the Linkerd proxies use to secure pod-to-pod communication and use a
-completely separate trust chain.  For more information on rotating the TLS
+completely separate trust chain. For more information on rotating the TLS
 credentials used by the Linkerd proxies, see
 [Automatically Rotating Control Plane TLS Credentials](automatically-rotating-control-plane-tls-credentials/).
 
-By default, when Linkerd is installed
-with the Linkerd CLI or with the Linkerd Helm chart, TLS credentials are
-automatically generated for all of the webhooks.  If these certificates expire
-or need to be regenerated for any reason, performing a
-[Linkerd upgrade](upgrade/) (using the Linkerd CLI or using Helm) will
-regenerate them.
+By default, when Linkerd is installed with the Linkerd CLI or with the Linkerd
+Helm chart, TLS credentials are automatically generated for all of the webhooks.
+If these certificates expire or need to be regenerated for any reason,
+performing a [Linkerd upgrade](upgrade/) (using the Linkerd CLI or using Helm)
+will regenerate them.
 
-This workflow is suitable for most users.  However, if you need these webhook
+This workflow is suitable for most users. However, if you need these webhook
 certificates to be rotated automatically on a regular basis, it is possible to
 use cert-manager to automatically manage them.
 
@@ -27,9 +26,9 @@ use cert-manager to automatically manage them.
 
 ## Install Cert manager
 
-As a first step, [install cert-manager on your
-cluster](https://cert-manager.io/docs/installation/)
-and create  the namespaces that cert-manager will use to store its
+As a first step,
+[install cert-manager on your cluster](https://cert-manager.io/docs/installation/)
+and create the namespaces that cert-manager will use to store its
 webhook-related resources. For simplicity, we suggest using the default
 namespace linkerd uses:
 
@@ -247,7 +246,7 @@ EOF
 ```
 
 At this point, cert-manager can now use these Certificate resources to obtain
-TLS credentials, which are stored in the  `linkerd-proxy-injector-k8s-tls`,
+TLS credentials, which are stored in the `linkerd-proxy-injector-k8s-tls`,
 `linkerd-sp-validator-k8s-tls`, `tap-k8s-tls`, `tap-injector-k8s-tls` and
 `jaeger-injector-k8s-tls` secrets respectively.
 
@@ -330,11 +329,13 @@ helm install linkerd-jaeger \
 ```
 
 {{< note >}}
-When installing the `linkerd-control-plane` chart, you _must_ provide the
-issuer trust root and issuer credentials as described in [Installing Linkerd
-with Helm](install-helm/).
+
+When installing the `linkerd-control-plane` chart, you _must_ provide the issuer
+trust root and issuer credentials as described in
+[Installing Linkerd with Helm](install-helm/).
+
 {{< /note >}}
 
-See [Automatically Rotating Control Plane TLS
-Credentials](automatically-rotating-control-plane-tls-credentials/)
+See
+[Automatically Rotating Control Plane TLS Credentials](automatically-rotating-control-plane-tls-credentials/)
 for details on how to do something similar for control plane credentials.

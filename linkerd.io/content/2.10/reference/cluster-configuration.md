@@ -47,7 +47,8 @@ NETWORK_TARGET_TAG=$(gcloud compute firewall-rules list \
   | jq -r '.targetTags[0]' | head -1)
 ```
 
-The format of the network tag should be something like `gke-cluster-name-xxxx-node`.
+The format of the network tag should be something like
+`gke-cluster-name-xxxx-node`.
 
 Verify the values:
 

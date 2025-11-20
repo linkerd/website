@@ -13,15 +13,17 @@ configures access logging.
 
 HTTP access logging is disabled by default because it has a performance impact,
 compared to proxies without access logging enabled. Enabling access logging may
-increase tail latency and CPU consumption under load. The severity of
-this performance cost may vary depending on the traffic being proxied, and may
-be acceptable in some environments.
+increase tail latency and CPU consumption under load. The severity of this
+performance cost may vary depending on the traffic being proxied, and may be
+acceptable in some environments.
 
 {{< note >}}
+
 The proxy's HTTP access log is distinct from proxy debug logging, which is
-configured separately. See the documentation on [modifying the proxy log
-level](../tasks/modifying-proxy-log-level/) for details on configuring the
-proxy's debug logging.
+configured separately. See the documentation on
+[modifying the proxy log level](../tasks/modifying-proxy-log-level/) for details
+on configuring the proxy's debug logging.
+
 {{< /note >}}
 
 ## Access Log Formats
@@ -30,8 +32,9 @@ The value of the `config.linkerd.io/access-log` annotation determines the format
 of HTTP access log entries, and can be either "apache" or "json".
 
 Setting the `config.linkerd.io/access-log: "apache"` annotation configures the
-proxy to emit HTTP access logs in the [Apache Common Log
-Format](https://en.wikipedia.org/wiki/Common_Log_Format). For example:
+proxy to emit HTTP access logs in the
+[Apache Common Log Format](https://en.wikipedia.org/wiki/Common_Log_Format). For
+example:
 
 ```text {class=disable-copy}
 10.42.0.63:51160 traffic.booksapp.serviceaccount.identity.linkerd.cluster.local - [2022-08-23T20:28:20.071809491Z] "GET http://webapp:7000/ HTTP/2.0" 200
@@ -57,6 +60,7 @@ to emit access logs in a JSON format. For example:
 The HTTP access log is written to the proxy container's `stderr` stream, while
 the proxy's standard debug logging is written to the proxy container's `stdout`
 stream. Currently, the `kubectl logs` command will always output both the
-container's `stdout` and `stderr` streams. However, [KEP
-3289](https://github.com/kubernetes/enhancements/pull/3289) will add support for
-separating a container's `stdout` or `stderr` in the `kubectl logs` command.
+container's `stdout` and `stderr` streams. However,
+[KEP 3289](https://github.com/kubernetes/enhancements/pull/3289) will add
+support for separating a container's `stdout` or `stderr` in the `kubectl logs`
+command.

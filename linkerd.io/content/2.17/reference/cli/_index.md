@@ -13,6 +13,6 @@ As reference, check out the commands below:
 
 ## Global flags
 
-The following flags are available for *all* linkerd CLI commands:
+The following flags are available for _all_ linkerd CLI commands:
 
 {{< docs/cli-global-flags >}}

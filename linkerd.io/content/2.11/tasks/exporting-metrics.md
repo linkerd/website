@@ -1,6 +1,7 @@
 ---
 title: Exporting Metrics
-description: Integrate Linkerd's Prometheus with your existing metrics infrastructure.
+description:
+  Integrate Linkerd's Prometheus with your existing metrics infrastructure.
 ---
 
 Linkerd provides an extensive set of metrics for all traffic that passes through
@@ -14,9 +15,9 @@ you, you will probably want to export it into a full-fledged metrics store.
 {{< docs/production-note >}}
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
-part of the Viz extension. The following tutorial requires the viz extension
-to be installed with prometheus enabled. There are several basic approaches
-to exporting metrics data from Linkerd:
+part of the Viz extension. The following tutorial requires the viz extension to
+be installed with prometheus enabled. There are several basic approaches to
+exporting metrics data from Linkerd:
 
 - [Federating data to your own Prometheus cluster](#federation)
 - [Using a Prometheus integration](#integration)
@@ -26,7 +27,7 @@ to exporting metrics data from Linkerd:
 ## Using the Prometheus federation API {#federation}
 
 If you are using Prometheus as your own metrics store, we recommend taking
-advantage of Prometheus's *federation* API, which is designed exactly for the
+advantage of Prometheus's _federation_ API, which is designed exactly for the
 use case of copying data from one Prometheus to another.
 
 Simply add the following item to your `scrape_configs` in your Prometheus config
@@ -36,15 +37,15 @@ extension is running):
 ```yaml
 - job_name: 'linkerd'
   kubernetes_sd_configs:
-  - role: pod
-    namespaces:
-      names: ['{{.Namespace}}']
+    - role: pod
+      namespaces:
+        names: ['{{.Namespace}}']
 
   relabel_configs:
-  - source_labels:
-    - __meta_kubernetes_pod_container_name
-    action: keep
-    regex: ^prometheus$
+    - source_labels:
+        - __meta_kubernetes_pod_container_name
+      action: keep
+      regex: ^prometheus$
 
   honor_labels: true
   metrics_path: '/federate'
@@ -70,24 +71,24 @@ metadata:
   namespace: {{.Namespace}}
 spec:
   endpoints:
-  - interval: 30s
-    scrapeTimeout: 30s
-    params:
-      match[]:
-      - '{job="linkerd-proxy"}'
-      - '{job="linkerd-controller"}'
-    path: /federate
-    port: admin-http
-    honorLabels: true
-    relabelings:
-    - action: keep
-      regex: '^prometheus$'
-      sourceLabels:
-      - '__meta_kubernetes_pod_container_name'
+    - interval: 30s
+      scrapeTimeout: 30s
+      params:
+        match[]:
+          - '{job="linkerd-proxy"}'
+          - '{job="linkerd-controller"}'
+      path: /federate
+      port: admin-http
+      honorLabels: true
+      relabelings:
+        - action: keep
+          regex: '^prometheus$'
+          sourceLabels:
+            - '__meta_kubernetes_pod_container_name'
   jobLabel: app
   namespaceSelector:
     matchNames:
-    - {{.Namespace}}
+      - {{.Namespace}}
   selector:
     matchLabels:
       component: prometheus
@@ -107,8 +108,8 @@ For more information on Prometheus' `/federate` endpoint, have a look at the
 ## Using a Prometheus integration {#integration}
 
 If you are not using Prometheus as your own long-term data store, you may be
-able to leverage one of Prometheus's [many
-integrations](https://prometheus.io/docs/operating/integrations/) to
+able to leverage one of Prometheus's
+[many integrations](https://prometheus.io/docs/operating/integrations/) to
 automatically extract data from Linkerd's Prometheus instance into the data
 store of your choice. Please refer to the Prometheus documentation for details.
 
@@ -127,14 +128,16 @@ curl -G \
 ```
 
 {{< note >}}
-If your data store is outside the Kubernetes cluster, it is likely that
-you'll want to set up
-[ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-at a domain name of your choice with authentication.
+
+If your data store is outside the Kubernetes cluster, it is likely that you'll
+want to set up
+[ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) at a
+domain name of your choice with authentication.
+
 {{< /note >}}
 
-Similar to the `/federate` API, Prometheus provides a JSON query API to
-retrieve all metrics:
+Similar to the `/federate` API, Prometheus provides a JSON query API to retrieve
+all metrics:
 
 ```bash
 curl http://prometheus.linkerd-viz.svc.cluster.local:9090/api/v1/query?query=request_total
@@ -162,5 +165,5 @@ and then:
 curl localhost:4191/metrics
 ```
 
-Alternatively, `linkerd diagnostics proxy-metrics` can be used to retrieve
-proxy metrics for a given workload.
+Alternatively, `linkerd diagnostics proxy-metrics` can be used to retrieve proxy
+metrics for a given workload.

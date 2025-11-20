@@ -1,6 +1,7 @@
 ---
 title: Gateway API support
-description: Linkerd uses Gateway API resource types to configure certain features.
+description:
+  Linkerd uses Gateway API resource types to configure certain features.
 ---
 
 The Gateway API is a set of CRDs in the `gateway.networking.k8s.io` API group
@@ -23,7 +24,7 @@ Both of these types are used in a variety of ways when configuring Linkerd.
 
 One complication with using the Gateway API in practice is that many different
 packages, not just Linkerd, may provide the Gateway API on your cluster, but
-only some Gateway API *versions* are compatible with Linkerd.
+only some Gateway API _versions_ are compatible with Linkerd.
 
 Linkerd requires that the Gateway API be installed on your cluster before
 Linkerd can be installed. In practice, there are three basic approaches to
@@ -56,7 +57,9 @@ If you are using GRPCRoute, upgrading from Gateway API 1.1.1 to Gateway API
 1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes]
 for more information.
 
-[the Gateway API 1.2.0 release notes]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
+[the Gateway API 1.2.0 release notes]:
+  https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
+
 {{< /note >}}
 
 If the Gateway API is installed at a compatible version, you can go ahead and
@@ -66,16 +69,18 @@ installing the `linkerd-crds` Helm chart. This prevents Linkerd from attempting
 to override your existing installation of the Gateway API
 
 {{< warning >}}
-Running Linkerd with an incompatible version of the Gateway API
-on the cluster can lead to hard-to-debug issues with your Linkerd installation.
+
+Running Linkerd with an incompatible version of the Gateway API on the cluster
+can lead to hard-to-debug issues with your Linkerd installation.
+
 {{< /warning >}}
 
 ### Option 2: Install the Gateway API yourself
 
-If the Gateway API is not already installed on your cluster, you may install
-it yourself by following the [Gateway API install
-guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api), which
-is often as simple as something like
+If the Gateway API is not already installed on your cluster, you may install it
+yourself by following the
+[Gateway API install guide](https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api),
+which is often as simple as something like
 
 ```bash
 kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
@@ -115,8 +120,7 @@ Linkerd provided two earlier variants of configuration:
   retries, and timeouts prior to the introduction of the Gateway API types.
 
 Both of these earlier configuration mechanisms continue to be supported;
-however, newer feature development is focused on the standard Gateway API
-types.
+however, newer feature development is focused on the standard Gateway API types.
 
 ## Learn More
 

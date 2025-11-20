@@ -12,15 +12,17 @@ references from Services, probes, and monitoring configurations.
 The following table lists control plane container port names:
 
 {{< keyval >}}
-| Component | Port Name | Protocol |
-|-----------|-----------|----------|
-| destination | `dest-grpc` | gRPC |
-| destination | `dest-admin` | HTTP |
-| sp-validator | `spval-admin` | HTTP |
-| policy-controller | `policy-grpc` | gRPC |
-| policy-controller | `policy-admin` | HTTP |
-| identity | `ident-grpc` | gRPC |
-| identity | `ident-admin` | HTTP |
-| proxy-injector | `injector-admin` | HTTP |
-| linkerd2-cni | `repair-admin` | HTTP |
+
+| Component         | Port Name        | Protocol |
+| ----------------- | ---------------- | -------- |
+| destination       | `dest-grpc`      | gRPC     |
+| destination       | `dest-admin`     | HTTP     |
+| sp-validator      | `spval-admin`    | HTTP     |
+| policy-controller | `policy-grpc`    | gRPC     |
+| policy-controller | `policy-admin`   | HTTP     |
+| identity          | `ident-grpc`     | gRPC     |
+| identity          | `ident-admin`    | HTTP     |
+| proxy-injector    | `injector-admin` | HTTP     |
+| linkerd2-cni      | `repair-admin`   | HTTP     |
+
 {{< /keyval >}}

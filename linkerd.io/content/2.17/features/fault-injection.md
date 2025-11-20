@@ -1,7 +1,7 @@
 ---
 title: Fault Injection
-description: Linkerd provides mechanisms to programmatically inject failures into
-  services.
+description:
+  Linkerd provides mechanisms to programmatically inject failures into services.
 ---
 
 Fault injection is a form of chaos engineering where the error rate of a service
@@ -10,4 +10,5 @@ Traditionally, this would require modifying the service's code to add a fault
 injection library that would be doing the actual work. Linkerd can do this
 without any service code changes, only requiring a little configuration.
 
-To inject faults into your own services, follow the [tutorial](../tasks/fault-injection/).
+To inject faults into your own services, follow the
+[tutorial](../tasks/fault-injection/).

@@ -1,13 +1,13 @@
 ---
 title: Distributed tracing with Linkerd
-description: Use Linkerd to help instrument your application with distributed tracing.
+description:
+  Use Linkerd to help instrument your application with distributed tracing.
 ---
 
 Using distributed tracing in practice can be complex. Linkerd can solve some of
 these challenges, but is not a silver bullet. For a high level explanation of
-how a service mesh can help with distributed tracing, see [Distributed tracing
-in the service mesh: four
-myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
+how a service mesh can help with distributed tracing, see
+[Distributed tracing in the service mesh: four myths](https://linkerd.io/2019/08/09/service-mesh-distributed-tracing-myths/).
 
 This guide will walk you through configuring and enabling tracing for the
 [emojivoto](../getting-started/#step-5-install-the-demo-app) sample application.
@@ -26,11 +26,12 @@ topology that looks like this:
 ![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
 
 {{< warning >}}
+
 As of Linkerd 2.19, the Linkerd-jaeger extension has been deprecated and is no
 longer available. This guide instead describes how to set up a modern
 distributed tracing infrastructure using Jaeger, without this extension. See our
-[Guide to migrating away from the Linkerd-jaeger
-extension](jaeger-extension-migration).
+[Guide to migrating away from the Linkerd-jaeger extension](jaeger-extension-migration).
+
 {{< /warning >}}
 
 ## Install a trace collector
@@ -42,7 +43,7 @@ dashboard to view them.
 
 One common tool to accomplish this is [Jaeger](https://www.jaegertracing.io/),
 which includes a collector, storage, and trace viewer in its all-in-one
-installation  We'll use that for our examples.
+installation We'll use that for our examples.
 
 To install Jaeger using Helm, first add the Jaeger Helm repository:
 
@@ -109,9 +110,9 @@ proxy:
 ```
 
 Linkerd can export traces to any collector which supports the OpenTelemetry
-protocol. See the [OpenTelemetry
-documentation](https://opentelemetry.io/docs/specs/otel/protocol/) for more
-information.
+protocol. See the
+[OpenTelemetry documentation](https://opentelemetry.io/docs/specs/otel/protocol/)
+for more information.
 
 {{< note >}}
 
@@ -124,9 +125,9 @@ traces to a collector within the mesh.
 
 Add emojivoto to your cluster and inject it with the Linkerd proxy:
 
- ```bash
- linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
- ```
+```bash
+linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+```
 
 Before moving onto the next step, make sure everything is up and running with
 `kubectl`:
@@ -149,13 +150,15 @@ Linkerd will propagate both [`w3c`](https://www.w3.org/TR/trace-context/) and
 together.
 
 {{< note >}}
+
 If both `w3c` and `b3` headers are present, Linkerd will propagate only the
 `w3c` headers.
+
 {{< /note >}}
 
 We've already modified emojivoto to instrument its requests with this
-information (see [this
-commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)).
+information (see
+[this commit](https://github.com/BuoyantIO/emojivoto/commit/47a026c2e4085f4e536c2735f3ff3788b0870072)).
 
 To enable tracing in emojivoto, run:
 
@@ -178,6 +181,7 @@ kubectl port-forward -n jaeger-system svc/jaeger-query 16686
 
 <!-- markdownlint-disable MD034 -->
 Then, open http://127.0.0.1:16686 in your browser.
+<!-- markdownlint-enable MD034 -->
 
 ![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
 
@@ -224,7 +228,7 @@ participate in traces.
 
 The ingress is an especially important component for distributed tracing because
 it typically creates the root span of each trace and is responsible for deciding
-if that trace should be sampled or not.  Having the ingress make all sampling
+if that trace should be sampled or not. Having the ingress make all sampling
 decisions ensures that either an entire trace is sampled or none of it is, and
 avoids creating "partial traces".
 
@@ -244,8 +248,8 @@ libraries do three things:
 
 For example, the OpenTelemetry agent exporter will export trace data to the
 OpenTelemetry collector over a gRPC API. The details of how to configure
-OpenTelemetry will vary language by language, but there are [guides for many
-popular languages](https://opentelemetry.io/docs/languages/).
+OpenTelemetry will vary language by language, but there are
+[guides for many popular languages](https://opentelemetry.io/docs/languages/).
 
 ### Jaeger vs alternatives
 

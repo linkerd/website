@@ -1,17 +1,18 @@
 ---
 title: Injecting Faults
-description: Practice chaos engineering by injecting faults into services with Linkerd.
+description:
+  Practice chaos engineering by injecting faults into services with Linkerd.
 ---
 
-It is easy to inject failures into applications by using the [Traffic Split
-API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
-[Service Mesh Interface](https://smi-spec.io/). TrafficSplit allows you to
-redirect a percentage of traffic to a specific backend. This backend is
+It is easy to inject failures into applications by using the
+[Traffic Split API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
+of the [Service Mesh Interface](https://smi-spec.io/). TrafficSplit allows you
+to redirect a percentage of traffic to a specific backend. This backend is
 completely flexible and can return whatever responses you want - 500s, timeouts
 or even crazy payloads.
 
-The [books demo](books/) is a great way to show off this behavior. The
-overall topology looks like:
+The [books demo](books/) is a great way to show off this behavior. The overall
+topology looks like:
 
 ![Topology](/docs/images/books/topology.png "Topology")
 
@@ -141,8 +142,8 @@ EOF
 ## Inject faults
 
 With booksapp and NGINX running, it is now time to partially split the traffic
-between an existing backend, `books`, and the newly created
-`error-injector`. This is done by adding a
+between an existing backend, `books`, and the newly created `error-injector`.
+This is done by adding a
 [TrafficSplit](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
 configuration to your cluster:
 
@@ -183,12 +184,14 @@ ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 ```
 
 {{< note >}}
-In this instance, you are looking at the *service* instead of the deployment. If
+
+In this instance, you are looking at the _service_ instead of the deployment. If
 you were to run this command and look at `deploy/books`, the success rate would
 still be 100%. The reason for this is that `error-injector` is a completely
 separate deployment and traffic is being shifted at the service level. The
 requests never reach the `books` pods and are instead rerouted to the error
 injector's pods.
+
 {{< /note >}}
 
 ## Cleanup

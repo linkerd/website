@@ -17,8 +17,8 @@ Linkerd to perform this feat:
 [Protocol Detection](/2/features/protocol-detection/).
 
 Protocol detection, as the name suggests, allows Linkerd to automatically detect
-the protocol in use in a TCP connection. One of [Linkerd's design
-principles](/2/design-principles/) is to "just work," and
+the protocol in use in a TCP connection. One of
+[Linkerd's design principles](/2/design-principles/) is to "just work," and
 protocol detection is an important part of how Linkerd achieves that goal.
 
 In this article, you'll learn what protocol detection is, how this subtle
@@ -57,7 +57,8 @@ knowledge of the protocol can provide rich metrics. For example, knowing that a
 connection is using HTTP allows Linkerd to parse the requests, responses, and
 response codes, and to report metrics such as response latencies, request
 volumes, and error rates. These metrics are so valuable that they are part of
-what is known as the "[golden signals](https://sre.google/sre-book/monitoring-distributed-systems/#xref_monitoring_golden-signals)"
+what is known as the
+"[golden signals](https://sre.google/sre-book/monitoring-distributed-systems/#xref_monitoring_golden-signals)"
 in Google's SRE book. On the other hand, if all that Linkerd knows is that a
 connection is TCP, it is limited to recording very basic information like the
 number of bytes read and written—there is no ability to interpret the bytes
@@ -89,11 +90,12 @@ across endpoints, and will balance requests across this pool. Since it now has
 access to requests and responses, Linkerd can be very sophisticated in how it
 balances requests; in fact, it balances requests based on the recent performance
 of each possible endpoint (used a metric called "exponentially weighted moving
-average",  or
+average", or
 [EWMA](https://en.wikipedia.org/wiki/Moving_average#Exponentially_weighted_moving_variance_and_standard_deviation))
 so as to avoid incurring tail latency from slow endpoints.
 
-(Linkerd is also an easy solution to the unique considerations of [load balancing gRPC connections within Kubernetes](/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).)
+(Linkerd is also an easy solution to the unique considerations of
+[load balancing gRPC connections within Kubernetes](/2018/11/14/grpc-load-balancing-on-kubernetes-without-tears/).)
 
 ## When protocol detection fails
 
@@ -156,18 +158,18 @@ downsides of the earlier skip-ports features, and will allow Linkerd adopters to
 extend mTLS across their entire Kubernetes environment, regardless of protocol.
 
 (Want to give opaque ports a try? You don't have to wait for the 2.10 release
-because the feature is currently available in the
-[edge](/releases/) releases!)
+because the feature is currently available in the [edge](/releases/) releases!)
 
 ## Linkerd is for everyone
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io). Linkerd is [committed to open
-governance](/2019/10/03/linkerds-commitment-to-open-governance/).
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io). Linkerd is
+[committed to open governance](/2019/10/03/linkerds-commitment-to-open-governance/).
 If you have feature requests, questions, or comments, we'd love to have you join
 our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
 [Slack](https://slack.linkerd.io), [Twitter](https://twitter.com/linkerd), and
 the [mailing lists](/community/get-involved/). Come and join the fun!
 
-Image Credit: [Gilles Rolland-Monnet](https://unsplash.com/@gillesrollandmonnet?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText)
+Image Credit:
+[Gilles Rolland-Monnet](https://unsplash.com/@gillesrollandmonnet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

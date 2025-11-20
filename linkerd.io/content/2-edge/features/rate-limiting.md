@@ -1,16 +1,18 @@
 ---
 title: Rate Limiting
-description: Linkerd offers a simple and performant HTTP local rate limiting solution to protect services from misbehaved clients
+description:
+  Linkerd offers a simple and performant HTTP local rate limiting solution to
+  protect services from misbehaved clients
 ---
 
 Rate limiting helps protect a service by controlling its inbound traffic flow to
 prevent overload, ensure fair resource use, enhance security, manage costs,
 maintain quality, and comply with SLAs.
 
-Please check the [Configuring Rate Limiting
-task](../tasks/configuring-rate-limiting/) for an example guide on deploying
-rate limiting, and the [HTTPLocalRateLimitPolicy reference
-doc](../reference/rate-limiting/).
+Please check the
+[Configuring Rate Limiting task](../tasks/configuring-rate-limiting/) for an
+example guide on deploying rate limiting, and the
+[HTTPLocalRateLimitPolicy reference doc](../reference/rate-limiting/).
 
 ## Scope
 
@@ -36,10 +38,10 @@ specific clients by their identity.
 
 ## Algorithm
 
-Linkerd uses the [Generic cell rate algorithm
-(GCRA)](https://en.wikipedia.org/wiki/Generic_cell_rate_algorithm) to implement
-rate limiting, which is more performant than the token bucket and leaky bucket
-algorithms usually used for rate limiting.
+Linkerd uses the
+[Generic cell rate algorithm (GCRA)](https://en.wikipedia.org/wiki/Generic_cell_rate_algorithm)
+to implement rate limiting, which is more performant than the token bucket and
+leaky bucket algorithms usually used for rate limiting.
 
 The GCRA has two parameters: cell rate and tolerance.
 

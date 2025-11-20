@@ -1,12 +1,14 @@
 ---
 title: Generating your own mTLS root certificates
-description: Generate your own mTLS root certificate instead of letting Linkerd do
-  it for you.
+description:
+  Generate your own mTLS root certificate instead of letting Linkerd do it for
+  you.
 ---
 
-In order to support [mTLS connections between meshed
-pods](../features/automatic-mtls/), Linkerd needs a trust anchor certificate and
-an issuer certificate with its corresponding key.
+In order to support
+[mTLS connections between meshed pods](../features/automatic-mtls/), Linkerd
+needs a trust anchor certificate and an issuer certificate with its
+corresponding key.
 
 When installing with `linkerd install`, these certificates are automatically
 generated. Alternatively, you can specify your own with the `--identity-*` flags
@@ -43,8 +45,8 @@ Linkerd with Helm.
 Note we use `--no-password --insecure` to avoid encrypting those files with a
 passphrase.
 
-For a longer-lived trust anchor certificate, pass the `--not-after` argument
-to the step command with the desired value (e.g. `--not-after=87600h`).
+For a longer-lived trust anchor certificate, pass the `--not-after` argument to
+the step command with the desired value (e.g. `--not-after=87600h`).
 
 ### Issuer certificate and key
 
@@ -83,7 +85,8 @@ helm install linkerd2 \
 ```
 
 {{< note >}}
-For Helm versions < v3, `--name` flag has to specifically be passed.
-In Helm v3, It has been deprecated, and is the first argument as
- specified above.
+
+For Helm versions < v3, `--name` flag has to specifically be passed. In Helm v3,
+It has been deprecated, and is the first argument as specified above.
+
 {{< /note >}}
