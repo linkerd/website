@@ -50,7 +50,6 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   `response_latency_ms`, and `response_total` except that they are collected at
   the route level. This means that they do not have `authority`, `tls`,
   `grpc_status_code` or any outbound labels but instead they have:
-
   - `dst`: The authority of this request.
   - `rt_route`: The name of the route for this request.
 
@@ -59,12 +58,10 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   `response_latency_ms`, and `response_total` but for requests that the proxy
   makes to the Linkerd control plane. Instead of `authority`, `direction`, or
   any outbound labels, instead they have:
-
   - `addr`: The address used to connect to the control plane.
 
 - `inbound_http_authz_allow_total`: A counter of the total number of inbound
   HTTP requests that were authorized.
-
   - `authz_name`: The name of the authorization policy used to allow the
     request.
 
@@ -127,11 +124,11 @@ also have the following labels:
 
 {{< note >}}
 
-Because response classification may be determined based on the `grpc-status`
-trailer (if one is present), a response may not be classified until its body
-stream completes. Response latency, however, is determined based on
-[time-to-first-byte][ttfb], so the `response_latency_ms` metric is recorded as
-soon as data is received, rather than when the response body ends. Therefore,
+Because response classification may be determined based on the
+`grpc-status` trailer (if one is present), a response may not be classified
+until its body stream completes. Response latency, however, is determined based
+on [time-to-first-byte][ttfb], so the `response_latency_ms` metric is recorded
+as soon as data is received, rather than when the response body ends. Therefore,
 the values of the `classification` and `grpc_status_code` labels are not yet
 known when the `response_latency_ms` metric is recorded.
 
@@ -199,7 +196,7 @@ labels:
   app: vote-bot
   linkerd.io/control-plane-ns: linkerd
   linkerd.io/proxy-deployment: vote-bot
-  pod-template-hash: "3957278789"
+  pod-template-hash: '3957278789'
   test: vote-bot-test
 ```
 
@@ -273,19 +270,51 @@ connection closes (`tcp_close_total`):
 - `identity_cert_refresh_count`: A counter of the total number of times the
   proxy's mTLS identity certificate has been refreshed by the Identity service.
 
-## Outbound `xRoute` Metrics
+## Endpoint Metrics
 
 When performing policy-based routing, proxies may dispatch requests through
-per-route backend configurations. In order to record how routing rules apply and
-how backend distributions are applied, the outbound proxy records the following
-metrics:
+per-route backend configurations. See the Authorization Policy
+[overview](../features/server-policy.md) and
+[reference](./authorization-policy.md) pages for more information on how to
+configure policy-based routing.
 
-- `outbound_http_route_backend_requests_total`: A counter of the total number of
-  outbound HTTP requests dispatched to a route-backend.
-- `outbound_grpc_route_backend_requests_total`: A counter of the total number of
-  outbound gRPC requests dispatched to a route-backend.
-- `outbound_http_balancer_endpoints`: A gauge of the number of endpoints in an
-  outbound load balancer.
+The Linkerd proxy emits metrics that provide visibility into authorized HTTP and
+gRPC traffic. Route-level metrics measure traffic for all of a policy's
+associated backends, while backend-level metrics measure the traffic distributed
+to individual endpoints.
+
+The outbound proxy records the following metrics:
+
+- `outbound_http_route_request_duration_seconds`: A histogram measuring the time
+  between HTTP request initialization and HTTP response completion.
+- `outbound_http_route_request_statuses_total`: A counter tracking HTTP response
+  status codes for HTTP traffic sent to a route.
+- `outbound_http_route_request_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in HTTP response bodies for a route.
+- `outbound_grpc_route_request_duration_seconds`: A histogram measuring the time
+  between gRPC request initialization and gRPC response completion.
+- `outbound_grpc_route_request_statuses_total`: A counter tracking gRPC response
+  status codes for gRPC traffic sent to a GRPCRoute.
+- `outbound_grpc_route_request_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in gRPC response bodies for a route.
+- `outbound_http_route_backend_requests_total`: A counter tracking the total
+  number of outbound HTTP requests dispatched to a particular backend.
+- `outbound_http_route_backend_response_duration_seconds`: A histogram measuring
+  the time in seconds between the HTTP request completing and HTTP response
+  completing, for a particular backend.
+- `outbound_http_route_backend_response_statuses_total`: A counter tracking HTTP
+  responses from a particular backend, labeled by status code.
+- `outbound_http_route_backend_response_frame_size_bytes`: A histogram measuring
+  the sizes of `DATA` frames in HTTP response bodies from a particular backend.
+- `outbound_grpc_route_backend_requests_total`: A counter tracking the total
+  number of outbound gRPC requests dispatched to a particular backend.
+- `outbound_grpc_route_backend_response_duration_seconds`: A histogram measuring
+  the time in seconds between the gRPC request completing and gRPC response
+  completing, for traffic dispatched to a particular backend.
+- `outbound_grpc_route_backend_response_statuses_total`: A counter tracking gRPC
+  responses from a particular backend, labeled by the `grpc-status` code.
+- `outbound_grpc_route_backend_response_frame_size_bytes`: A histogram measuring
+  the sizes of `DATA` frames in gRPC response bodies from a particular backend.
 
 ### Labels
 
