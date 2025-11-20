@@ -13,10 +13,8 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
 
 - `request_total`: A counter of the number of requests the proxy has received.
   This is incremented when the request stream begins.
-
 - `response_total`: A counter of the number of responses the proxy has received.
   This is incremented when the response stream ends.
-
 - `response_latency_ms`: A histogram of response latencies. This measurement
   reflects the [time-to-first-byte][ttfb] (TTFB) by recording the elapsed time
   between the proxy processing a request's headers and the first data frame of
@@ -24,16 +22,13 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   is used. The TTFB measurement is used so that Linkerd accurately reflects
   application behavior when a server provides response headers immediately but
   is slow to begin serving the response body.
-
 - `route_request_total`, `route_response_latency_ms`, and
   `route_response_total`: These metrics are analogous to `request_total`,
   `response_latency_ms`, and `response_total` except that they are collected at
   the route level. This means that they do not have `authority`, `tls`,
   `grpc_status_code` or any outbound labels but instead they have:
-
   - `dst`: The authority of this request.
   - `rt_route`: The name of the route for this request.
-
 - `control_request_total`, `control_response_latency_ms`, and
   `control_response_total`: These metrics are analogous to `request_total`,
   `response_latency_ms`, and `response_total` but for requests that the proxy
