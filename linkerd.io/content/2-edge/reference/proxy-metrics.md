@@ -9,14 +9,12 @@ The Linkerd proxy exposes metrics that describe the traffic flowing through the
 proxy. The following metrics are available at `/metrics` on the proxy's metrics
 port (default: `:4191`) in the [Prometheus format][prom-format].
 
-## Process-level Metrics
+## Process-Level Metrics
 
 - `proxy_build_info`: A constant gauge with information on how this instance of
   the proxy was built, such as build date, proxy version, etc.
-
 - `rustls_info`: A constant gauge with information on the proxy's TLS library,
   `rustls`. This includes the following labels:
-
   - `tls_suites`: The set of cipher suites that the proxy will use for TLS
     connections, sorted by preference order.
   - `tls_kx_groups`: The set of key exchange algorithms the proxy will use,
@@ -25,7 +23,6 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   - `tls_key_provider`: The crytpographic key provider
   - `tls_fips`: A boolean denoting if the proxy's connections are
     FIPS-compliant.
-
 - `tokio_rt_*`: A set of counters and gauges with stats on the proxy's
   asynchronous runtime, `tokio`.
 
@@ -33,10 +30,8 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
 
 - `request_total`: A counter of the number of requests the proxy has received.
   This is incremented when the request stream begins.
-
 - `response_total`: A counter of the number of responses the proxy has received.
   This is incremented when the response stream ends.
-
 - `response_latency_ms`: A histogram of response latencies. This measurement
   reflects the [time-to-first-byte][ttfb] (TTFB) by recording the elapsed time
   between the proxy processing a request's headers and the first data frame of
@@ -44,7 +39,6 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   is used. The TTFB measurement is used so that Linkerd accurately reflects
   application behavior when a server provides response headers immediately but
   is slow to begin serving the response body.
-
 - `route_request_total`, `route_response_latency_ms`, and
   `route_response_total`: These metrics are analogous to `request_total`,
   `response_latency_ms`, and `response_total` except that they are collected at
@@ -52,23 +46,19 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   `grpc_status_code` or any outbound labels but instead they have:
   - `dst`: The authority of this request.
   - `rt_route`: The name of the route for this request.
-
 - `control_request_total`, `control_response_latency_ms`, and
   `control_response_total`: These metrics are analogous to `request_total`,
   `response_latency_ms`, and `response_total` but for requests that the proxy
   makes to the Linkerd control plane. Instead of `authority`, `direction`, or
   any outbound labels, instead they have:
   - `addr`: The address used to connect to the control plane.
-
 - `inbound_http_authz_allow_total`: A counter of the total number of inbound
   HTTP requests that were authorized.
   - `authz_name`: The name of the authorization policy used to allow the
     request.
-
 - `inbound_http_authz_deny_total`: A counter of the total number of inbound HTTP
   requests that could not be processed due to being denied by the authorization
   policy.
-
 - `inbound_http_route_not_found_total`: A counter of the total number of inbound
   HTTP requests that could not be associated with a route.
 
