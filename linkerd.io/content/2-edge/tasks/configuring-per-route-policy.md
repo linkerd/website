@@ -143,15 +143,15 @@ routes, by defining how to match a request for a given route. We will now create
 
 {{< note >}}
 
-Routes configured in service profiles are different from [`HTTPRoute`]
-resources. Service profile routes allow you to collect per-route metrics and
-configure client-side behavior such as retries and timeouts. [`HTTPRoute`]
-resources, on the other hand, can be the target of [`AuthorizationPolicies`] and
-allow you to specify per-route authorization.
+Routes configured in service profiles are different from
+[`HTTPRoute`][httproute] resources. Service profile routes allow you to collect
+per-route metrics and configure client-side behavior such as retries and
+timeouts. [`HTTPRoute`][httproute] resources, on the other hand, can be the
+target of [`AuthorizationPolicies`][authorizationpolicy] and allow you to
+specify per-route authorization.
 
-[`HTTPRoute`]: ../reference/authorization-policy/#httproute
-[`AuthorizationPolicies`]:
-  ../reference/authorization-policy/#authorizationpolicy
+[httproute]: ../reference/authorization-policy/#httproute
+[authorizationpolicy]: ../reference/authorization-policy/#authorizationpolicy
 
 {{< /note >}}
 
@@ -330,7 +330,7 @@ web UI, we may notice that something is amiss.
 
 Attempting to delete an author results in a "not found" error in the web UI:
 
-![Not found](/docs/images/books/delete-404.png "Not found")
+![Not found](/docs/images/books/delete-404.png 'Not found')
 
 and similarly, adding a new author takes us to an error page.
 
@@ -375,7 +375,7 @@ EOF
 What happens if we try to delete an author _now_? We still see a failure, but a
 different one:
 
-![Internal server error](/docs/images/books/delete-503.png "Internal server error")
+![Internal server error](/docs/images/books/delete-503.png 'Internal server error')
 
 This is because we have created a _route_ matching `DELETE`, `PUT`, and `POST`
 requests, but we haven't _authorized_ requests to that route. Running the
@@ -432,11 +432,11 @@ in this case, we only authenticate the `webapp` deployment's `ServiceAccount`
 
 Now, if we attempt to delete an author in the frontend once again, we can:
 
-![Author deleted](/docs/images/books/delete-ok.png "Author deleted")
+![Author deleted](/docs/images/books/delete-ok.png 'Author deleted')
 
 Similarly, we can now create a new author successfully, as well:
 
-![Author created](/docs/images/books/create-ok.png "Author created")
+![Author created](/docs/images/books/create-ok.png 'Author created')
 
 Running the `linkerd viz authz` command one last time, we now see that all
 traffic is authorized:
@@ -465,3 +465,4 @@ available, see the [Policy reference docs](../reference/authorization-policy/).
   ../reference/authorization-policy/#meshtlsauthentication
 [`NetworkAuthentication`]:
   ../reference/authorization-policy/#networkauthentication
+[`HTTPRoute`]: ../reference/authorization-policy/#httproute
