@@ -170,7 +170,7 @@ labels:
   app: vote-bot
   linkerd.io/control-plane-ns: linkerd
   linkerd.io/proxy-deployment: vote-bot
-  pod-template-hash: '3957278789'
+  pod-template-hash: "3957278789"
   test: vote-bot-test
 ```
 
