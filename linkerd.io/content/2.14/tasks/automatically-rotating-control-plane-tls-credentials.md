@@ -15,8 +15,8 @@ to the cluster.
 
 Certificates are one of the most important parts of a secure system based on
 mTLS, but they are also commonly one of the least well documented. For more
-information about certificates in Linkerd, see the Buoyant [(m)TLS concepts
-primer][mtls-concepts-primer].
+information about certificates in Linkerd, see the Buoyant
+[(m)TLS concepts primer](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/tls-concepts/).
 
 {{< /note >}}
 
@@ -76,7 +76,8 @@ will still involve manual intervention, as explained below.
 
 cert-manager is _extremely_ flexible, with many different ways to configure it.
 For more information about cert-manager in general and how to approach its
-configuration, see Buoyant's [cert-manager concepts primer].
+configuration, see Buoyant's
+[cert-manager concepts primer](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/cert-manager-concepts/).
 
 {{< /note >}}
 
@@ -189,11 +190,12 @@ EOF
 
 ### 3. Configure cert-manager to create the trust anchor
 
-As described in Buoyant's [cert-manager concepts primer], cert-manager uses
-_issuers_ to create _certificates_. Any certificate created and managed by
-cert-manager must be configured with a Certificate resource and must be linked
-to an issuer. Any issuer that cert-manager uses must be configured with an
-Issuer or ClusterIssuer resource.
+As described in Buoyant's
+[cert-manager concepts primer](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/cert-manager-concepts/),
+cert-manager uses _issuers_ to create _certificates_. Any certificate created
+and managed by cert-manager must be configured with a Certificate resource and
+must be linked to an issuer. Any issuer that cert-manager uses must be
+configured with an Issuer or ClusterIssuer resource.
 
 The main difference between an Issuer and a ClusterIssuer is that Issuers can
 only be used by Certificates in the same namespace as the Issuer, while
@@ -944,8 +946,3 @@ and the old trust anchor is no longer trusted.
 
 - [Automatically Rotating Webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/)
 - [Manually rotating Linkerd's trust anchor credentials](manually-rotating-control-plane-tls-credentials/)
-
-[cert-manager concepts primer]:
-  https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/cert-manager-concepts/
-[mtls-concepts-primer]:
-  https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/guides/tls-concepts/

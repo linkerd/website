@@ -114,13 +114,14 @@ also have the following labels:
 
 {{< note >}}
 
-Because response classification may be determined based on the
-`grpc-status` trailer (if one is present), a response may not be classified
-until its body stream completes. Response latency, however, is determined based
-on [time-to-first-byte][ttfb], so the `response_latency_ms` metric is recorded
-as soon as data is received, rather than when the response body ends. Therefore,
-the values of the `classification` and `grpc_status_code` labels are not yet
-known when the `response_latency_ms` metric is recorded.
+Because response classification may be determined based on the `grpc-status`
+trailer (if one is present), a response may not be classified until its body
+stream completes. Response latency, however, is determined based on
+[time-to-first-byte](https://en.wikipedia.org/wiki/Time_to_first_byte), so the
+`response_latency_ms` metric is recorded as soon as data is received, rather
+than when the response body ends. Therefore, the values of the `classification`
+and `grpc_status_code` labels are not yet known when the `response_latency_ms`
+metric is recorded.
 
 {{< /note >}}
 
@@ -186,7 +187,7 @@ labels:
   app: vote-bot
   linkerd.io/control-plane-ns: linkerd
   linkerd.io/proxy-deployment: vote-bot
-  pod-template-hash: '3957278789'
+  pod-template-hash: "3957278789"
   test: vote-bot-test
 ```
 
