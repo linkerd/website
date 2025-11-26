@@ -8,7 +8,7 @@ command. This is recommended for production, since it allows for repeatability.
 
 {{< docs/edge-note >}}
 
-## Prerequisite: Install the Gateway API
+## Prerequisite: install the Gateway API
 
 Several features in Linkerd are configured using CRDs from the
 [Gateway API](https://gateway-api.sigs.k8s.io/) project, including authorization

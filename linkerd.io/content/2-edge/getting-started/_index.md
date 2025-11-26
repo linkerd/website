@@ -255,7 +255,7 @@ linkerd viz dashboard &
 
 You should see a screen like this:
 
-![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png 'The Linkerd dashboard in action')
+![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png "The Linkerd dashboard in action")
 
 Click around, explore, and have fun! For extra credit, see if you can find the
 live metrics for each Emojivoto component, and determine which one has a partial
