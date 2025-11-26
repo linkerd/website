@@ -8,6 +8,16 @@ command. This is recommended for production, since it allows for repeatability.
 
 {{< docs/edge-note >}}
 
+## Prerequisite: install the Gateway API
+
+Several features in Linkerd are configured using CRDs from the
+[Gateway API](https://gateway-api.sigs.k8s.io/) project, including authorization
+policy and dynamic request routing. In many Kubernetes clusters, these CRDs are
+already available, but if they aren't, you will need to install it first.
+
+Follow [these instructions](../features/gateway-api/) for determining if the
+Gateway API is installed or how to install it.
+
 ## Prerequisite: generate mTLS certificates
 
 To do [automatic mutual TLS](../features/automatic-mtls/), Linkerd requires
@@ -40,15 +50,11 @@ intended. Instrunctions are on the
 
 ### linkerd-crds
 
-The `linkerd-crds` chart sets up the CRDs linkerd requires. If the Gateway API
-has already been installed on the cluster, you must specify
-`--set installGatewayAPI=false` or add this to the `values.yml` in order to
-avoid a conflict. See [the Gateway API](../features/gateway-api/) for more
-details.
+The `linkerd-crds` chart sets up the CRDs linkerd requires:
 
 ```bash
 helm install linkerd-crds linkerd-edge/linkerd-crds \
-  -n linkerd --create-namespace --set installGatewayAPI=false
+  -n linkerd --create-namespace
 ```
 
 {{< note >}}
