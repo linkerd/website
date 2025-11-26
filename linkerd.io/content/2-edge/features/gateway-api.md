@@ -12,8 +12,7 @@ versions of Linkerd fully support the
 configuration mechanism, and many Linkerd features, including [authorization
 policies][auth-policy], [dynamic traffic routing][dyn-routing], and [request
 timeouts][timeouts], require these resource types from the Gateway API in order
-to be used. (Note that Linkerd does not require these types in order to run, but
-these features will not be useable.)
+to be used.
 
 The two primary Gateway API types used to configure Linkerd are:
 
