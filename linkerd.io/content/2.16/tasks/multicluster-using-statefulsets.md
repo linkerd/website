@@ -1,6 +1,7 @@
 ---
 title: Multi-cluster communication with StatefulSets
-description: cross-cluster communication to and from headless services.
+description:
+  Configure cross-cluster communication to and from headless services.
 ---
 
 Linkerd's multi-cluster extension works by "mirroring" service information
