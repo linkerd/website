@@ -2,7 +2,7 @@
 date: 2025-12-08T00:00:00Z
 slug: linkerd-edge-release-roundup
 title: |-
-  Linkerd Edge Release Roundup: December 2025 part 1 of 3
+  Linkerd Edge Release Roundup: December 2025
 description: |-
   What you need to know about the most recent Linkerd edge releases,
   December 2025 edition!
