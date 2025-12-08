@@ -85,28 +85,20 @@ If you're upgrading from a previous release of Linkerd, and you
 originally used the `linkerd-crds` chart to install the Gateway API CRDs,
 you _may_ need to take extra action:
 
-- If you're already running Linkerd 2.18/edge-25.4.4 or higher, you're
+* If you're already running Linkerd 2.18/edge-25.4.4 or higher, you're
   good to go. The Gateway API CRDs that you originally installed with Helm
   will stay on the cluster when you do the upgrade.
 
-- If you're running something older, you'll need to set `--reuse-values`
+* If you're running something older, you'll need to set `--reuse-values`
   when upgrading, to make sure that the existing Gateway API CRDs stay
   installed.
 
 [edge-25.11.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.11.3
-[edge-25.11.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.11.2
-[edge-25.11.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.11.1
 [edge-25.10.7]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.7
-[edge-25.10.6]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.6
-[edge-25.10.5]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.5
-[edge-25.10.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.4
 [edge-25.10.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.3
 [edge-25.10.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.2
 [edge-25.10.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.10.1
 [edge-25.9.4]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.9.4
-[edge-25.9.3]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.9.3
-[edge-25.9.2]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.9.2
-[edge-25.9.1]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.9.1
 [edge-25.8.5]: https://github.com/linkerd/linkerd2/releases/tag/edge-25.8.5
 
 ## The releases
