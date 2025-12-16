@@ -818,7 +818,7 @@ kubectl get secret -n cert-manager linkerd-previous-anchor \
     | base64 -d | inspect_cert
 ```
 
-Verify that the `linkerd-identity-trust-roots` ConfigMap should now contain
+Verify that the `linkerd-identity-trust-roots` ConfigMap now contains
 the Subject keys from both Secrets.
 
 ```bash
@@ -847,7 +847,7 @@ This will cause the control plane to pick up the new trust anchor bundle.
 
 At this point, you'll need to restart your workloads as well, to force the
 proxies to have the new trust anchor bundle. The exact mechanism to do this
-when depend on your workloads, but it's often just `kubectl rollout restart` for
+will depend on your workloads, but it's often just `kubectl rollout restart` for
 each of your application namespaces.
 
 #### 4. Triggering identity issuer rotation
@@ -881,7 +881,7 @@ kubectl get secret -n linkerd linkerd-identity-issuer \
 
 #### 5. Restart the control plane
 
-Restart the control plane with `kubectl rollout restart`:
+Restart the control plane again with `kubectl rollout restart`:
 
 ```bash
 kubectl rollout restart -n linkerd deploy
@@ -894,8 +894,8 @@ issuer.
 #### 6. Restart the data plane
 
 Again, you'll need to restart your workloads, to force the
-proxies to switch to the new identity issuer that uses the trust anchor bundle.
-The exact mechanism to do this when depend on your workloads, but it's often
+proxies to switch to the new identity issuer signed by the new trust anchor.
+The exact mechanism to do this will depend on your workloads, but it's often
 just `kubectl rollout restart` for each of your application namespaces.
 
 #### 7. Remove the old anchor from the trust bundle
@@ -932,7 +932,7 @@ and you should only see the single ID of the current trust anchor.
 
 At this point rotation is complete: everything is using the new trust anchor,
 and the old trust anchor is no longer trusted. You will need to restart your
-workloads again so they only are aware of the one trust anchor.
+workloads one more time so that they are aware of only the one trust anchor that's still in use.
 
 ## See also
 
