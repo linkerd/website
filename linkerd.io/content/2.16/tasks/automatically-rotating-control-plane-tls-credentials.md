@@ -932,7 +932,8 @@ and you should only see the single ID of the current trust anchor.
 
 At this point rotation is complete: everything is using the new trust anchor,
 and the old trust anchor is no longer trusted. You will need to restart your
-workloads one more time so that they are aware of only the one trust anchor that's still in use.
+workloads one more time so that they are aware of only the one trust anchor
+that's still in use.
 
 ## See also
 
