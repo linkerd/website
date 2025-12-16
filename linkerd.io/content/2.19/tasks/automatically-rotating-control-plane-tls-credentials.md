@@ -609,11 +609,23 @@ another:
 
 ```bash
 inspect_cert () {
-  sub_selector='\(.extensions.subject_key_id | .[0:16])... \(.subject_dn)'
-  iss_selector='\(.extensions.authority_key_id // "................" | .[0:16])... \(.issuer_dn)'
 
-  step certificate inspect --format json "$1" \
-    | jq -r "\"Issuer:  $iss_selector\",\"Subject: $sub_selector\""
+    sub_selector='\(.extensions.subject_key_id | .[0:16])... \(.subject_dn)'
+    iss_selector='\(.extensions.authority_key_id // "................" | .[0:16])... \(.issuer_dn)'
+    val_selector='\((.validity.start // .not_before // .notBefore)) → \((.validity.end // .not_after // .notAfter))'
+
+    local input="${1:--}"
+
+    step certificate inspect --bundle --format json "$input" \
+    | jq -r '
+        # Handle both array (bundle) and single object
+        (if type == "array" then .[] else . end)
+        | select(type == "object")
+        | "Issuer:  '"$iss_selector"'",
+          "Subject: '"$sub_selector"'",
+          "Valid:   '"$val_selector"'",
+          "" 
+      '
 }
 ```
 
@@ -627,7 +639,8 @@ We should see something like this:
 
 ```text {class=disable-copy}
 Issuer:  ................... CN=root.linkerd.cluster.local
-Subject: 5c455d3e9bd77e91... CN=root.linkerd.cluster.local
+Subject: 421a7aa8e0c92dd0... CN=root.linkerd.cluster.local
+Valid:   2025-12-16T18:19:30Z → 2025-12-16T20:19:30Z
 ```
 
 where the `Subject`'s key fingerprint - the hex number on the second line - will
@@ -697,8 +710,9 @@ kubectl get secret -n linkerd linkerd-identity-issuer \
 Here, we should see something like
 
 ```text {class=disable-copy}
-Issuer:  5c455d3e9bd77e91... CN=root.linkerd.cluster.local
-Subject: 56bfe071553c16ad... CN=identity.linkerd.cluster.local
+Issuer:  421a7aa8e0c92dd0... CN=root.linkerd.cluster.local
+Subject: 76fc76842fff67f7... CN=identity.linkerd.cluster.local
+Valid:   2025-12-16T19:05:55Z → 2025-12-16T20:05:55Z
 ```
 
 where the `Issuer` line should be _exactly_ the same as the `Subject` line from
@@ -792,7 +806,7 @@ work of actually rotating the trust anchor, it can't trigger the needed
 restarts.
 
 This means that the simplest way to handle trust anchor rotation is
-to \*_trigger the rotation manually_ whenever it's convenient for you so that
+to _trigger the rotation manually_ whenever it's convenient for you so that
 you can manage the trust bundle and restarts while letting cert-manager manage
 the trust anchor certificate.
 
@@ -800,10 +814,12 @@ The process of actually doing this is straightforward, but again, there are
 several steps:
 
 1. Trigger trust anchor rotation
-2. Trigger identity issuer rotation
-3. Restart the control plane
-4. Restart the data plane
-5. Remove the old anchor from the trust bundle
+2. Restart the control plane
+3. Restart the data plane
+4. Trigger identity issuer rotation
+5. Restart the control plane
+6. Restart the data plane
+7. Remove the old anchor from the trust bundle
 
 {{< note >}}
 
@@ -842,15 +858,13 @@ kubectl get secret -n cert-manager linkerd-previous-anchor \
     | base64 -d | inspect_cert
 ```
 
-Additionally, the `linkerd-identity-trust-roots` ConfigMap should now contain
-the Subject keys from both Secrets. (We can't use `inspect_cert` for this since
-there are two keys.)
+Verify that the `linkerd-identity-trust-roots` ConfigMap should now contain
+the Subject keys from both Secrets.
 
 ```bash
 kubectl get configmap -n linkerd linkerd-identity-trust-roots \
         -o jsonpath='{ .data.ca-bundle\.crt }' \
-        | step certificate inspect --bundle --format json \
-        | jq -r ".[] | \"Subject: \(.extensions.subject_key_id | .[0:16])... \(.subject_dn)\""
+        | inspect_cert
 ```
 
 Note that mTLS communication is still working fine at this point. All the
@@ -858,7 +872,25 @@ proxies in the data plane are still using the old identity issuer, signed by the
 old trust anchor, and that trust anchor is still present in
 `linkerd-identity-trust-roots`.
 
-#### 2. Triggering identity issuer rotation
+#### 2. Restart the control plane
+
+Restart the control plane with `kubectl rollout restart`:
+
+```bash
+kubectl rollout restart -n linkerd deploy
+kubectl rollout status -n linkerd deploy
+```
+
+This will cause the control plane to pick up the new trust anchor bundle.
+
+#### 3. Restart the data plane
+
+At this point, you'll need to restart your workloads as well, to force the
+proxies to have the new trust anchor bundle. The exact mechanism to do this
+when depend on your workloads, but it's often just `kubectl rollout restart` for
+each of your application namespaces.
+
+#### 4. Triggering identity issuer rotation
 
 Everything is still using the old identity issuer because, strangely, manually
 triggering cert-manager to rotate the trust anchor does not automatically rotate
@@ -887,7 +919,7 @@ kubectl get secret -n linkerd linkerd-identity-issuer \
     | base64 -d | inspect_cert
 ```
 
-#### 3. Restart the control plane
+#### 5. Restart the control plane
 
 Restart the control plane with `kubectl rollout restart`:
 
@@ -899,14 +931,14 @@ kubectl rollout status -n linkerd deploy
 This will cause the control plane to pick up the new trust anchor and identity
 issuer.
 
-#### 4. Restart the data plane
+#### 6. Restart the data plane
 
-At this point, you'll need to restart your workloads as well, to force the
-proxies to switch to the new identity issuer. The exact mechanism to do this
-when depend on your workloads, but it's often just `kubectl rollout restart` for
-each of your application namespaces.
+Again, you'll need to restart your workloads, to force the
+proxies to switch to the new identity issuer that uses the trust anchor bundle.
+The exact mechanism to do this when depend on your workloads, but it's often
+just `kubectl rollout restart` for each of your application namespaces.
 
-#### 5. Remove the old anchor from the trust bundle
+#### 7. Remove the old anchor from the trust bundle
 
 One last step: once everything is restarted, you'll need to remove the old trust
 anchor from the trust bundle. To do this, just copy the `linkerd-trust-anchor`
@@ -933,14 +965,14 @@ You can doublecheck this with `kubectl` again:
 ```bash
 kubectl get configmap -n linkerd linkerd-identity-trust-roots \
         -o jsonpath='{ .data.ca-bundle\.crt }' \
-        | step certificate inspect --format json \
-        | jq -r "\"Subject: \(.extensions.subject_key_id | .[0:16])... \(.subject_dn)\""
+        | inspect_cert
 ```
 
 and you should only see the single ID of the current trust anchor.
 
 At this point rotation is complete: everything is using the new trust anchor,
-and the old trust anchor is no longer trusted.
+and the old trust anchor is no longer trusted. You will need to restart your
+workloads again so they only are aware of the one trust anchor.
 
 ## See also
 
