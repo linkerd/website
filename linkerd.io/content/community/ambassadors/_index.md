@@ -13,6 +13,13 @@ params:
   sections:
     - title:
       items:
+        - name: Bezaleel Silva
+          role: Site Reliability Engineer
+          image: images/bezaleel-silva.jpg
+          flag: 🇧🇷
+          urls:
+            github: https://github.com/bezarsnba
+            linkedin: https://www.linkedin.com/in/bezarsnba/
         - name: Blake Romano
           role: Senior Software Engineer
           image: images/blake-romano.jpg
@@ -51,6 +58,14 @@ params:
             github: https://github.com/Eli-Goldberg
             twitter: https://twitter.com/EliG0ldberg
             linkedin: https://www.linkedin.com/in/eli-go/
+        - name: Fredrik Klingenberg
+          role: Developer
+          image: images/fredrik-klingenberg.jpg
+          flag: 🇳🇴
+          urls:
+            github: https://github.com/fredrkl
+            twitter: https://twitter.com/fredrkl
+            linkedin: https://www.linkedin.com/in/fredrikklingenberg/
         - name: Mahendran Selvakumar
           role: DevOps Engineer
           image: images/mahendran-selvakumar.jpg
@@ -59,14 +74,6 @@ params:
             github: https://github.com/skmahe1077/
             twitter: https://x.com/devopstronaut
             linkedin: https://www.linkedin.com/in/mahendran-selvakumar/
-        - name: Sergio Méndez
-          role: DevOps Engineer
-          image: images/sergio-mendez.jpg
-          flag: 🇬🇹
-          urls:
-            github: https://github.com/sergioarmgpl
-            twitter: https://twitter.com/sergioarmgpl
-            linkedin: https://www.linkedin.com/in/sergioarmgpl/
         - name: William Rizzo
           role: Consulting Architect
           image: images/william-rizzo.jpg
@@ -84,14 +91,6 @@ params:
           urls:
             github: https://github.com/cpretzer
             linkedin: https://www.linkedin.com/in/charlespretzer/
-        - name: Fredrik Klingenberg
-          role: Developer
-          image: images/fredrik-klingenberg.jpg
-          flag: 🇳🇴
-          urls:
-            github: https://github.com/fredrkl
-            twitter: https://twitter.com/fredrkl
-            linkedin: https://www.linkedin.com/in/fredrikklingenberg/
         - name: Kasper Nissen
           role: Lead Platform Architect
           image: images/kasper-nissen.jpg
@@ -107,6 +106,14 @@ params:
           urls:
             github: https://github.com/mtrojas
             linkedin: https://www.linkedin.com/in/mtrojas/
+        - name: Sergio Méndez
+          role: DevOps Engineer
+          image: images/sergio-mendez.jpg
+          flag: 🇬🇹
+          urls:
+            github: https://github.com/sergioarmgpl
+            twitter: https://twitter.com/sergioarmgpl
+            linkedin: https://www.linkedin.com/in/sergioarmgpl/
         - name: Steve Gray
           role: Founder & CEO
           image: images/steve-gray.jpg
