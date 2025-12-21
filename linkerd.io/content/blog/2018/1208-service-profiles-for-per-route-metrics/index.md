@@ -150,7 +150,7 @@ service—but we can't, because we haven't defined any routes for that service
 yet!
 
 ```bash
-$ linkerd routes svc/webapp
+linkerd routes svc/webapp
 ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [UNKNOWN]    webapp    70.00%   5.7rps          34ms         100ms         269ms
 ```
@@ -188,13 +188,13 @@ spec:
 
 This service describes two routes that the webapp service responds to, `/books`
 and `/books/<id>`. We add the service profile with `kubectl apply`:
-`$ kubectl apply -f webapp-profile.yaml`
+`kubectl apply -f webapp-profile.yaml`
 
 Within about a minute (Prometheus scrapes metrics from the proxies at regular
 intervals) per-route metrics will be available for the `webapp` service.
 
 ```bash
-$ linkerd routes svc/webapp
+linkerd routes svc/webapp
 ROUTE         SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 /books/{id}    webapp   100.00%   0.3rps          26ms          75ms          95ms
 /books         webapp    56.25%   0.5rps          25ms         320ms         384ms

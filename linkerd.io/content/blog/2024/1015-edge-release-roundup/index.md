@@ -120,7 +120,7 @@ command line to the new metrics available based on Gateway API routes, for
 example:
 
 ```bash {class=disable-copy}
-$ linkerd viz stat-outbound -n faces deploy/face
+linkerd viz stat-outbound -n faces deploy/face
 NAME  SERVICE    ROUTE         TYPE       BACKEND     SUCCESS   RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99  TIMEOUTS  RETRIES
 face  smiley:80  smiley-route  HTTPRoute               78.36%  6.32         41ms       5886ms       9177ms     0.00%    0.00%
                  ├─────────────────────►  smiley:80    79.34%  5.57         20ms       5725ms       9145ms     0.00%

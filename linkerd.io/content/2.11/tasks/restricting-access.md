@@ -16,27 +16,27 @@ Ensure that you have Linkerd version stable-2.11.0 or later installed, and that
 it is healthy:
 
 ```bash
-$ linkerd install | kubectl apply -f -
+linkerd install | kubectl apply -f -
 ...
-$ linkerd check -o short
+linkerd check -o short
 ...
 ```
 
 Inject and install the Emojivoto application:
 
 ```bash
-$ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
-$ linkerd check -n emojivoto --proxy -o short
+linkerd check -n emojivoto --proxy -o short
 ...
 ```
 
 In order to observe what's going on, we'll also install the Viz extension:
 
 ```bash
-$ linkerd viz install | kubectl apply -f -
+linkerd viz install | kubectl apply -f -
 ...
-$ linkerd viz check
+linkerd viz check
 ...
 ```
 

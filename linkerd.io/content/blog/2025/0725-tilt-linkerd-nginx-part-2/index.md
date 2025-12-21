@@ -199,7 +199,7 @@ While the dashboard provides intuitive visualizations, the Linkerd CLI offers
 the same data in a terminal-friendly format for quick diagnostics:
 
 ```bash
-$ linkerd viz top deployment/baz
+linkerd viz top deployment/baz
 Source                Destination           Method      Path                Count    Best   Worst    Last  Success Rate
 foo-64798767b7-x8xvf  baz-659dbf6895-v7gdm  POST        /demo.Baz/GetInfo    1187    81µs     9ms   124µs       100.00%
 bar-577c4bf849-cpdxl  baz-659dbf6895-9twg9  POST        /demo.Baz/GetInfo    1103    86µs     6ms   140µs       100.00%
