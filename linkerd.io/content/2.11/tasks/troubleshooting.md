@@ -1471,7 +1471,7 @@ Example failure:
 Ensure that all the CNI pods are running:
 
 ```bash
-kubectl get po -n linkerd-cn
+kubectl get po -n linkerd-cni
 NAME                READY   STATUS    RESTARTS   AGE
 linkerd-cni-rzp2q   1/1     Running   0          9m20s
 linkerd-cni-mf564   1/1     Running   0          9m22s
