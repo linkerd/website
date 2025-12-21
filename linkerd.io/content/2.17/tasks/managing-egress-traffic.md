@@ -190,7 +190,7 @@ Interestingly enough though, if we go back to our client shell and we try to
 initiate HTTPS traffic to the same service, it will not be allowed:
 
 ```bash
-~ curl -v https://httpbin.org/get
+curl -v https://httpbin.org/get
 curl: (35) TLS connect error: error:00000000:lib(0)::reason(0)
 ```
 
