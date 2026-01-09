@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: linkerd/dev/actions/setup-tools@v48
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: On create
       run: .devcontainer/on-create.sh
