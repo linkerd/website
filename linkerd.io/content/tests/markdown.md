@@ -131,4 +131,5 @@ graph LR
 
 </div>
 
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

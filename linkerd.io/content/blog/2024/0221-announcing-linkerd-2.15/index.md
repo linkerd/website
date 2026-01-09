@@ -33,16 +33,15 @@ Read on for details!
 
 ## Mesh expansion
 
-As
-[we promised last November](/2023/11/07/linkerd-mesh-expansion/),
-Linkerd 2.15 introduces _mesh expansion_: the ability to deploy Linkerd's
-ultralight Rust microproxies anywhere outside of Kubernetes and connect them to
-a Linkerd control plane running on a Kubernetes cluster. This allows Linkerd to
-handle non-Kubernetes workloads, upleveling all TCP communication to and from
-these workloads secure, reliable, and observable. Non-Kubernetes applications
-get the full set of Linkerd features, including mutual TLS, retries, timeouts,
-circuit breaking, latency-aware load balancing, dynamic per-request routing,
-zero trust authorization policies, and much more.
+As [we promised last November](/2023/11/07/linkerd-mesh-expansion/), Linkerd
+2.15 introduces _mesh expansion_: the ability to deploy Linkerd's ultralight
+Rust microproxies anywhere outside of Kubernetes and connect them to a Linkerd
+control plane running on a Kubernetes cluster. This allows Linkerd to handle
+non-Kubernetes workloads, upleveling all TCP communication to and from these
+workloads secure, reliable, and observable. Non-Kubernetes applications get the
+full set of Linkerd features, including mutual TLS, retries, timeouts, circuit
+breaking, latency-aware load balancing, dynamic per-request routing, zero trust
+authorization policies, and much more.
 
 Mesh expansion is an important part of achieving our goal of making Linkerd the
 _universal networking layer for cloud native organizations_. While we love

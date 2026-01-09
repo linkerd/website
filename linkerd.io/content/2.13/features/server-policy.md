@@ -1,37 +1,39 @@
 ---
 title: Authorization Policy
-description: Linkerd can restrict which types of traffic are allowed between meshed
+description:
+  Linkerd can restrict which types of traffic are allowed between meshed
   services.
 ---
 
-Linkerd's authorization policy allows you to control which types of
-traffic are allowed to meshed pods. For example, you can restrict communication
-to a particular service (or HTTP route on a service) to only come from certain
-other services; you can enforce that mTLS must be used on a certain port; and so
-on.
+Linkerd's authorization policy allows you to control which types of traffic are
+allowed to meshed pods. For example, you can restrict communication to a
+particular service (or HTTP route on a service) to only come from certain other
+services; you can enforce that mTLS must be used on a certain port; and so on.
 
 {{< note >}}
+
 Linkerd can only enforce policy on meshed pods, i.e. pods where the Linkerd
 proxy has been injected. If policy is a strict requirement, you should pair the
 usage of these features with [HA mode](ha/), which enforces that the proxy
-*must* be present when pods start up.
+_must_ be present when pods start up.
+
 {{< /note >}}
 
 ## Policy overview
 
-By default Linkerd allows all traffic to transit the mesh, and uses a variety
-of mechanisms, including [retries](retries-and-timeouts/) and [load
-balancing](load-balancing/), to ensure that requests are delivered
+By default Linkerd allows all traffic to transit the mesh, and uses a variety of
+mechanisms, including [retries](retries-and-timeouts/) and
+[load balancing](load-balancing/), to ensure that requests are delivered
 successfully.
 
 Sometimes, however, we want to restrict which types of traffic are allowed.
-Linkerd's policy features allow you to *deny* access to resources unless certain
+Linkerd's policy features allow you to _deny_ access to resources unless certain
 conditions are met, including the TLS identity of the client.
 
 Linkerd's policy is configured using two mechanisms:
 
-1. A set of _default policies_, which can be set at the cluster,
-   namespace, workload, and pod level through Kubernetes annotations.
+1. A set of _default policies_, which can be set at the cluster, namespace,
+   workload, and pod level through Kubernetes annotations.
 2. A set of CRDs that specify fine-grained policy for specific ports, routes,
    workloads, etc.
 
@@ -51,20 +53,20 @@ policy at that point in the hierarchy. Valid default policies include:
   cluster.
 - `deny`: deny all requests.
 
-As well as several other default policies—see the [Policy
-reference](../reference/authorization-policy/) for more.
+As well as several other default policies—see the
+[Policy reference](../reference/authorization-policy/) for more.
 
 Every cluster has a cluster-wide default policy (by default,
 `all-unauthenticated`), set at install time. Annotations that are present at the
-workload or namespace level *at pod creation time* can override that value to
-determine the default policy for that pod. (Note that the default policy is fixed
-at proxy initialization time, and thus, after a pod is created, changing the
-annotation will not change the default policy for that pod.)
+workload or namespace level _at pod creation time_ can override that value to
+determine the default policy for that pod. (Note that the default policy is
+fixed at proxy initialization time, and thus, after a pod is created, changing
+the annotation will not change the default policy for that pod.)
 
 ## Fine-grained policies
 
 For finer-grained policy that applies to specific ports, routes, or more,
-Linkerd uses a set of CRDs.  In contrast to default policy annotations, these
+Linkerd uses a set of CRDs. In contrast to default policy annotations, these
 policy CRDs can be changed dynamically and policy behavior will be updated on
 the fly.
 
@@ -77,8 +79,8 @@ policy can be applied.
 Two policy CRDs represent authentication rules that must be satisfied as part of
 a policy rule:
 
-- `MeshTLSAuthentication`: authentication based on [secure workload
-  identities](automatic-mtls/)
+- `MeshTLSAuthentication`: authentication based on
+  [secure workload identities](automatic-mtls/)
 - `NetworkAuthentication`: authentication based on IP address
 
 And finally, two policy CRDs represent policy itself: the mapping of
@@ -97,8 +99,8 @@ access to that traffic is permitted (via `MeshTLSAuthentication` and
 `NetworkAuthentication`); and then define the policy that maps authentication to
 target (via an `AuthorizationPolicy`).
 
-See the [Policy reference](../reference/authorization-policy/) for more
-details on how these resources work.
+See the [Policy reference](../reference/authorization-policy/) for more details
+on how these resources work.
 
 ## ServerAuthorization vs AuthorizationPolicy
 

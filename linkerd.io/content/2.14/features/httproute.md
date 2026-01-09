@@ -1,12 +1,14 @@
 ---
 title: HTTPRoutes
-description: Linkerd can use the HTTPRoute resource to configure per-route policies.
+description:
+  Linkerd can use the HTTPRoute resource to configure per-route policies.
 ---
 
 To configure routing behavior and policy for HTTP traffic, Linkerd supports the
 [HTTPRoute resource], defined by the Kubernetes [Gateway API].
 
 {{< note >}}
+
 Two versions of the HTTPRoute resource may be used with Linkerd:
 
 - The upstream version provided by the Gateway API, with the
@@ -16,9 +18,10 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
-resource definition. See [the HTTPRoute reference
-documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+resource definition. See
+[the HTTPRoute reference documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
+
 {{< /note >}}
 
 An HTTPRoute is a Kubernetes resource which attaches to a parent resource, such
@@ -43,13 +46,14 @@ proxies:
   authentication policies][auth-policy].
 
 {{< warning >}}
+
 **Outbound HTTPRoutes and [ServiceProfiles](service-profiles/) provide
 overlapping configuration.** For backwards-compatibility reasons, a
 ServiceProfile will take precedence over HTTPRoutes which configure the same
 Service. If a ServiceProfile is defined for the parent Service of an HTTPRoute,
 proxies will use the ServiceProfile configuration, rather than the HTTPRoute
-configuration, as long as the ServiceProfile
-exists.
+configuration, as long as the ServiceProfile exists.
+
 {{< /warning >}}
 
 ## Learn More

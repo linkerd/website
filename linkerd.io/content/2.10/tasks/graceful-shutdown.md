@@ -10,8 +10,8 @@ and allows existing requests to complete before shutting down.
 
 This means that if the pod's main container attempts to make any new network
 calls after the proxy has received the TERM signal, those network calls will
-fail. This also has implications for clients of the terminating pod and for
-job resources.
+fail. This also has implications for clients of the terminating pod and for job
+resources.
 
 ## Slow Updating Clients
 
@@ -24,8 +24,8 @@ already received the TERM signal and begun graceful shutdown. Those requests
 will fail.
 
 To mitigate this, use the `--wait-before-exit-seconds` flag with
-`linkerd inject` to delay the Linkerd proxy's handling of the TERM signal for
-a given number of seconds using a `preStop` hook. This delay gives slow clients
+`linkerd inject` to delay the Linkerd proxy's handling of the TERM signal for a
+given number of seconds using a `preStop` hook. This delay gives slow clients
 additional time to receive the endpoints update before beginning graceful
 shutdown. To achieve max benefit from the option, the main container should have
 its own `preStop` hook with the sleep command inside which has a smaller period
@@ -35,17 +35,17 @@ than is set for the proxy sidecar. And none of them must be bigger than
 For example,
 
 ```yaml
-       # application container
-        lifecycle:
-          preStop:
-            exec:
-              command:
-                - /bin/bash
-                - -c
-                - sleep 20
+# application container
+lifecycle:
+  preStop:
+    exec:
+      command:
+        - /bin/bash
+        - -c
+        - sleep 20
 
-    # for entire pod
-    terminationGracePeriodSeconds: 160
+# for entire pod
+terminationGracePeriodSeconds: 160
 ```
 
 ## Graceful shutdown of Job and Cronjob Resources
@@ -58,10 +58,10 @@ Cronjob pods which have been meshed will continue to run even once the main
 container has completed.
 
 To address this, you can issue a POST to the `/shutdown` endpoint on the proxy
-once the application completes (e.g. via `curl -X POST
-http://localhost:4191/shutdown`). This will terminate the proxy gracefully and
-allow the Job or Cronjob to complete. These shutdown requests must come on the
-loopback interface, i.e. from within the same Kubernetes pod.
+once the application completes (e.g. via
+`curl -X POST http://localhost:4191/shutdown`). This will terminate the proxy
+gracefully and allow the Job or Cronjob to complete. These shutdown requests
+must come on the loopback interface, i.e. from within the same Kubernetes pod.
 
 One convenient way to call this endpoint is to wrap your application with the
 [linkerd-await](https://github.com/linkerd/linkerd-await) utility. An

@@ -10,9 +10,9 @@ To use this guide, you'll need to have Linkerd installed on your cluster and the
 
 ## Dynamic request routing
 
-With dynamic request routing, you can route HTTP traffic based on the content
-of request headers. This can be useful for performing things like A/B testing
-and other strategies for traffic management.
+With dynamic request routing, you can route HTTP traffic based on the content of
+request headers. This can be useful for performing things like A/B testing and
+other strategies for traffic management.
 
 The core configuration mechanism are the [Gateway API] types, [HTTPRoute] and
 [GRPCRoute]. In this example we'll look at the common use case using the
@@ -29,7 +29,7 @@ traffic to the other one just by adding a header to the frontend requests.
 First we create the `test` namespace, annotated by linkerd so all pods that get
 created there get injected with the linkerd proxy:
 
-``` bash
+```bash
 kubectl create ns test --dry-run=client -o yaml \
   | linkerd inject - \
   | kubectl apply -f -
@@ -125,9 +125,9 @@ In `backendRefs` we specify the final destination for requests matching the
 current rule, via the Service's `name` and `port`.
 
 Here we're specifying we'd like to route to `backend-b-podinfo` all the requests
-having the `x-request-id: alternative` header. If the header is not present,
-the engine fall backs to the last rule which has no `matches` entries and points
-to the `backend-a-podinfo` Service.
+having the `x-request-id: alternative` header. If the header is not present, the
+engine fall backs to the last rule which has no `matches` entries and points to
+the `backend-a-podinfo` Service.
 
 The previous requests should still reach `backend-a-podinfo` only:
 
@@ -163,4 +163,3 @@ speaking, the destination does not need to be meshed.
 [HTTPRoute]: ../reference/httproute/
 [GRPCRoute]: ../reference/grpcroute/
 [Gateway API]: ../features/gateway-api/
-[`ServiceProfile`]: ../features/ServiceProfile/

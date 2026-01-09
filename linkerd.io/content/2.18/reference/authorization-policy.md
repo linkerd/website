@@ -4,14 +4,14 @@ description: Reference guide to Linkerd's policy resources.
 ---
 
 Linkerd's authorization policy allows you to control which types of traffic are
-allowed to meshed pods. See the [Authorization Policy feature
-description](../features/server-policy/) for more information on what this
-means.
+allowed to meshed pods. See the
+[Authorization Policy feature description](../features/server-policy/) for more
+information on what this means.
 
 Linkerd's policy is configured using two mechanisms:
 
-1. A set of _default policies_, which can be set at the cluster,
-   namespace, and workload level through Kubernetes annotations.
+1. A set of _default policies_, which can be set at the cluster, namespace, and
+   workload level through Kubernetes annotations.
 2. A set of CRDs that specify fine-grained policy for specific ports, routes,
    workloads, etc.
 
@@ -21,11 +21,12 @@ During a Linkerd install, the `proxy.defaultInboundPolicy` field is used to
 specify the cluster-wide default policy. This field can be one of the following:
 
 - `all-unauthenticated`: allow all traffic. This is the default.
-- `all-authenticated`: allow traffic from meshed clients in the same or from
-   a different cluster (with multi-cluster).
-- `cluster-authenticated`: allow traffic from meshed clients in the same cluster.
-- `cluster-unauthenticated`: allow traffic from both meshed and non-meshed clients
-  in the same cluster.
+- `all-authenticated`: allow traffic from meshed clients in the same or from a
+  different cluster (with multi-cluster).
+- `cluster-authenticated`: allow traffic from meshed clients in the same
+  cluster.
+- `cluster-unauthenticated`: allow traffic from both meshed and non-meshed
+  clients in the same cluster.
 - `deny`: all traffic are denied.
 - `audit`: Same as `all-unauthenticated` but requests get flagged in logs and
   metrics.
@@ -44,13 +45,13 @@ policy in the cluster: [Server], [HTTPRoute], [ServerAuthorization],
 The general pattern for authorization is:
 
 - A `Server` describes a set of pods, and a single port on those pods.
-- Optionally, an `HTTPRoute` references that `Server` and describes a
-  subset of HTTP traffic to it.
-- A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who
-  is allowed access.
-- An `AuthorizationPolicy` references the `HTTPRoute` or `Server`
-  (the thing to be authorized) and the `MeshTLSAuthentication` or
-  `NetworkAuthentication` (the clients that have authorization).
+- Optionally, an `HTTPRoute` references that `Server` and describes a subset of
+  HTTP traffic to it.
+- A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who is allowed
+  access.
+- An `AuthorizationPolicy` references the `HTTPRoute` or `Server` (the thing to
+  be authorized) and the `MeshTLSAuthentication` or `NetworkAuthentication` (the
+  clients that have authorization).
 
 ## Server
 
@@ -63,11 +64,13 @@ pod/port pairs. Linkerd ships with an admission controller that prevents
 overlapping `Server`s from being created.
 
 {{< note >}}
+
 When a Server resource is present, all traffic to the port on its pods will be
 denied unless explicitly authorized or audit mode is enabled (with
 `accessPolicy:audit`). Thus, Servers are typically paired with e.g. an
 AuthorizationPolicy that references the Server, or that reference an HTTPRoute
 that in turn references the Server.
+
 {{< /note >}}
 
 ### Server Spec
@@ -75,43 +78,49 @@ that in turn references the Server.
 A `Server` spec may contain the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `accessPolicy`| [accessPolicy](#accesspolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`). |
-| `podSelector`| A [podSelector](#podselector) selects pods in the same namespace. |
-| `port`| A port name or number. Only ports in a pod spec's `ports` are considered. |
-| `proxyProtocol`| Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
+
+| field           | value                                                                                                                                                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accessPolicy`  | [accessPolicy](#accesspolicy) declares the policy applied to traffic not matching any associated authorization policies (defaults to `deny`).                                                                          |
+| `podSelector`   | A [podSelector](#podselector) selects pods in the same namespace.                                                                                                                                                      |
+| `port`          | A port name or number. Only ports in a pod spec's `ports` are considered.                                                                                                                                              |
+| `proxyProtocol` | Configures protocol discovery for inbound connections. Supersedes the `config.linkerd.io/opaque-ports` annotation. Must be one of `unknown`,`HTTP/1`,`HTTP/2`,`gRPC`,`opaque`,`TLS`. Defaults to `unknown` if not set. |
+
 {{< /keyval >}}
 
 #### accessPolicy
 
 Traffic that doesn't conform to the authorization policies associated to the
 Server are denied by default. You can alter that behavior by overriding the
-`accessPolicy` field, which accepts the same values as the [default
-policies](#default-policies). Of particular interest is the `audit` value, which
-enables [audit mode](../features/server-policy/#audit-mode), that you can use
-to test policies before enforcing them.
+`accessPolicy` field, which accepts the same values as the
+[default policies](#default-policies). Of particular interest is the `audit`
+value, which enables [audit mode](../features/server-policy/#audit-mode), that
+you can use to test policies before enforcing them.
 
 #### podSelector
 
-This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
+This is the
+[same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
 All the pods that are part of this selector will be part of the [Server] group.
 A podSelector object must contain _exactly one_ of the following fields:
 
 {{< keyval >}}
-| field | value |
-|-------|-------|
+
+| field              | value                                                                                  |
+| ------------------ | -------------------------------------------------------------------------------------- |
 | `matchExpressions` | matchExpressions is a list of label selector requirements. The requirements are ANDed. |
-| `matchLabels` | matchLabels is a map of {key,value} pairs. |
+| `matchLabels`      | matchLabels is a map of {key,value} pairs.                                             |
+
 {{< /keyval >}}
 
-See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
+See
+[the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
 
 ### Server Examples
 
-A [Server] that selects over pods with a specific label, with `gRPC` as
-the `proxyProtocol`.
+A [Server] that selects over pods with a specific label, with `gRPC` as the
+`proxyProtocol`.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -127,8 +136,8 @@ spec:
   proxyProtocol: gRPC
 ```
 
-A [Server] that selects over pods with `matchExpressions`, with `HTTP/2`
-as the `proxyProtocol`, on port `8080`.
+A [Server] that selects over pods with `matchExpressions`, with `HTTP/2` as the
+`proxyProtocol`, on port `8080`.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -139,8 +148,8 @@ metadata:
 spec:
   podSelector:
     matchExpressions:
-    - {key: app, operator: In, values: [voting-svc, emoji-svc]}
-    - {key: environment, operator: NotIn, values: [dev]}
+      - { key: app, operator: In, values: [voting-svc, emoji-svc] }
+      - { key: environment, operator: NotIn, values: [dev] }
   port: 8080
   proxyProtocol: "HTTP/2"
 ```
@@ -157,15 +166,17 @@ add processing steps that must be completed during the request or response
 lifecycle.
 
 {{< note >}}
-A given HTTP request can only match one HTTPRoute. If multiple HTTPRoutes
-are present that match a request, one will be picked according to the [Gateway
-API rules of
-precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
+
+A given HTTP request can only match one HTTPRoute. If multiple HTTPRoutes are
+present that match a request, one will be picked according to the
+[Gateway API rules of precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
+
 {{< /note >}}
 
 Please refer to HTTPRoute's full [spec](httproute/).
 
 {{< note >}}
+
 Two versions of the HTTPRoute resource may be used with Linkerd:
 
 - The upstream version provided by the Gateway API, with the
@@ -175,9 +186,10 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
-resource definition. See [the HTTPRoute reference
-documentation](httproute/#linkerd-and-gateway-api-httproutes)
+resource definition. See
+[the HTTPRoute reference documentation](httproute/#linkerd-and-gateway-api-httproutes)
 for details.
+
 {{< /note >}}
 
 ## AuthorizationPolicy
@@ -192,10 +204,12 @@ being able to target [Servers].
 An `AuthorizationPolicy` spec may contain the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `targetRef`| A [TargetRef](#targetref) which references a resource to which the authorization policy applies.|
-| `requiredAuthenticationRefs`| A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, _all_ authentications must match.|
+
+| field                        | value                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `targetRef`                  | A [TargetRef](#targetref) which references a resource to which the authorization policy applies.                                                 |
+| `requiredAuthenticationRefs` | A list of [TargetRefs](#targetref) representing the required authentications. In the case of multiple entries, _all_ authentications must match. |
+
 {{< /keyval >}}
 
 #### targetRef
@@ -212,11 +226,13 @@ applies. The API objects supported are:
   namespace. This may only be the namespace of the AuthorizationPolicy.
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `group`| Group is the group of the target resource. For namespace kinds, this should be omitted.|
-| `kind`| Kind is kind of the target resource.|
-| `name`| Name is the name of the target resource.|
+
+| field   | value                                                                                   |
+| ------- | --------------------------------------------------------------------------------------- |
+| `group` | Group is the group of the target resource. For namespace kinds, this should be omitted. |
+| `kind`  | Kind is kind of the target resource.                                                    |
+| `name`  | Name is the name of the target resource.                                                |
+
 {{< /keyval >}}
 
 ### AuthorizationPolicy Examples
@@ -284,18 +300,20 @@ spec:
 A `MeshTLSAuthentication` represents a set of mesh identities. When an
 [AuthorizationPolicy] has a `MeshTLSAuthentication` as one of its
 `requiredAuthenticationRefs`, this means that clients must be in the mesh and
-must have one of the specified identities in order to be authorized to send
-to the target.
+must have one of the specified identities in order to be authorized to send to
+the target.
 
 ### MeshTLSAuthentication Spec
 
 A `MeshTLSAuthentication` spec may contain the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `identities`| A list of mTLS identities to authenticate. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all meshed clients are authorized.|
-| `identityRefs`| A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.|
+
+| field          | value                                                                                                                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identities`   | A list of mTLS identities to authenticate. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all meshed clients are authorized. |
+| `identityRefs` | A list of [targetRefs](#targetref) to `ServiceAccounts` to authenticate.                                                                                                               |
+
 {{< /keyval >}}
 
 ### MeshTLSAuthentication Examples
@@ -357,9 +375,11 @@ specified networks in order to be authorized to send to the target.
 A `NetworkAuthentication` spec may contain the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `networks`| A list of [networks](#network) to authenticate.|
+
+| field      | value                                           |
+| ---------- | ----------------------------------------------- |
+| `networks` | A list of [networks](#network) to authenticate. |
+
 {{< /keyval >}}
 
 #### network
@@ -367,16 +387,18 @@ A `NetworkAuthentication` spec may contain the following top level fields:
 A `network` defines an authenticated IP subnet.
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `cidr`| A subnet in CIDR notation to authenticate.|
-| `except`| A list of subnets in CIDR notation to exclude from the authentication.|
+
+| field    | value                                                                  |
+| -------- | ---------------------------------------------------------------------- |
+| `cidr`   | A subnet in CIDR notation to authenticate.                             |
+| `except` | A list of subnets in CIDR notation to exclude from the authentication. |
+
 {{< /keyval >}}
 
 ### NetworkAuthentication Examples
 
-A `NetworkAuthentication` that authenticates clients which belong to any of
-the specified CIDRs.
+A `NetworkAuthentication` that authenticates clients which belong to any of the
+specified CIDRs.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1alpha1
@@ -386,10 +408,10 @@ metadata:
   namespace: booksapp
 spec:
   networks:
-  - cidr: 10.0.0.0/8
-  - cidr: 100.64.0.0/10
-  - cidr: 172.16.0.0/12
-  - cidr: 192.168.0.0/16
+    - cidr: 10.0.0.0/8
+    - cidr: 100.64.0.0/10
+    - cidr: 172.16.0.0/12
+    - cidr: 192.168.0.0/16
 ```
 
 ## ServerAuthorization
@@ -398,10 +420,12 @@ A [ServerAuthorization] provides a way to authorize traffic to one or more
 [Server]s.
 
 {{< note >}}
+
 [AuthorizationPolicy](#authorizationpolicy) is a more flexible alternative to
 `ServerAuthorization` that can target [HTTPRoutes](#httproute) as well as
 [Servers](#server). Use of [AuthorizationPolicy](#authorizationpolicy) is
 preferred, and `ServerAuthorization` will be deprecated in future releases.
+
 {{< /note >}}
 
 ### ServerAuthorization Spec
@@ -409,10 +433,12 @@ preferred, and `ServerAuthorization` will be deprecated in future releases.
 A ServerAuthorization spec must contain the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `client`| A [client](#client) describes clients authorized to access a server. |
-| `server`| A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
+
+| field    | value                                                                                                      |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| `client` | A [client](#client) describes clients authorized to access a server.                                       |
+| `server` | A [serverRef](#serverref) identifies `Servers` in the same namespace for which this authorization applies. |
+
 {{< /keyval >}}
 
 #### serverRef
@@ -420,26 +446,32 @@ A ServerAuthorization spec must contain the following top level fields:
 A `serverRef` object must contain _exactly one_ of the following fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `name`| References a `Server` instance by name. |
-| `selector`| A [selector](#selector) selects servers on which this authorization applies in the same namespace. |
+
+| field      | value                                                                                              |
+| ---------- | -------------------------------------------------------------------------------------------------- |
+| `name`     | References a `Server` instance by name.                                                            |
+| `selector` | A [selector](#selector) selects servers on which this authorization applies in the same namespace. |
+
 {{< /keyval >}}
 
 #### selector
 
-This is the [same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
-All the servers that are part of this selector will have this authorization applied.
-A selector object must contain _exactly one_ of the following fields:
+This is the
+[same labelSelector field in Kubernetes](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector).
+All the servers that are part of this selector will have this authorization
+applied. A selector object must contain _exactly one_ of the following fields:
 
 {{< keyval >}}
-| field | value |
-|-------|-------|
+
+| field              | value                                                              |
+| ------------------ | ------------------------------------------------------------------ |
 | `matchExpressions` | A list of label selector requirements. The requirements are ANDed. |
-| `matchLabels` | A map of {key,value} pairs. |
+| `matchLabels`      | A map of {key,value} pairs.                                        |
+
 {{< /keyval >}}
 
-See [the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
+See
+[the Kubernetes LabelSelector reference](https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/label-selector/#LabelSelector)
 for more details.
 
 #### client
@@ -447,18 +479,22 @@ for more details.
 A `client` object must contain _exactly one_ of the following fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `meshTLS`| A [meshTLS](#meshtls) is used to authorize meshed clients to access a server. |
-| `unauthenticated`| A boolean value that authorizes unauthenticated clients to access a server. |
+
+| field             | value                                                                         |
+| ----------------- | ----------------------------------------------------------------------------- |
+| `meshTLS`         | A [meshTLS](#meshtls) is used to authorize meshed clients to access a server. |
+| `unauthenticated` | A boolean value that authorizes unauthenticated clients to access a server.   |
+
 {{< /keyval >}}
 
 Optionally, it can also contain the `networks` field:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `networks`| Limits the client IP addresses to which this authorization applies. If unset, the server chooses a default (typically, all IPs or the cluster's pod network). |
+
+| field      | value                                                                                                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `networks` | Limits the client IP addresses to which this authorization applies. If unset, the server chooses a default (typically, all IPs or the cluster's pod network). |
+
 {{< /keyval >}}
 
 #### meshTLS
@@ -466,11 +502,13 @@ Optionally, it can also contain the `networks` field:
 A `meshTLS` object must contain _exactly one_ of the following fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `unauthenticatedTLS`| A boolean to indicate that no client identity is required for communication. This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate. |
-| `identities`| A list of proxy identity strings (as provided via mTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
-| `serviceAccounts`| A list of authorized client [serviceAccount](#serviceAccount)s (as provided via mTLS). |
+
+| field                | value                                                                                                                                                                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `unauthenticatedTLS` | A boolean to indicate that no client identity is required for communication. This is mostly important for the identity controller, which must terminate TLS connections from clients that do not yet have a certificate.         |
+| `identities`         | A list of proxy identity strings (as provided via mTLS) that are authorized. The `*` prefix can be used to match all identities in a domain. An identity string of `*` indicates that all authentication clients are authorized. |
+| `serviceAccounts`    | A list of authorized client [serviceAccount](#serviceaccount)s (as provided via mTLS).                                                                                                                                           |
+
 {{< /keyval >}}
 
 #### serviceAccount
@@ -478,17 +516,19 @@ A `meshTLS` object must contain _exactly one_ of the following fields:
 A serviceAccount field contains the following top level fields:
 
 {{< keyval >}}
-| field| value |
-|------|-------|
-| `name`| The ServiceAccount's name. |
-| `namespace`| The ServiceAccount's namespace. If unset, the authorization's namespace is used. |
+
+| field       | value                                                                            |
+| ----------- | -------------------------------------------------------------------------------- |
+| `name`      | The ServiceAccount's name.                                                       |
+| `namespace` | The ServiceAccount's namespace. If unset, the authorization's namespace is used. |
+
 {{< /keyval >}}
 
 ### ServerAuthorization Examples
 
 A [ServerAuthorization] that allows meshed clients with
-`*.emojivoto.serviceaccount.identity.linkerd.cluster.local` proxy identity i.e. all
-service accounts in the `emojivoto` namespace.
+`*.emojivoto.serviceaccount.identity.linkerd.cluster.local` proxy identity i.e.
+all service accounts in the `emojivoto` namespace.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -508,8 +548,7 @@ spec:
         - "*.emojivoto.serviceaccount.identity.linkerd.cluster.local"
 ```
 
-A [ServerAuthorization] that allows any unauthenticated
-clients.
+A [ServerAuthorization] that allows any unauthenticated clients.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1
@@ -530,8 +569,8 @@ spec:
       - cidr: ::/0
 ```
 
-A [ServerAuthorization] that allows meshed clients with a
-specific service account.
+A [ServerAuthorization] that allows meshed clients with a specific service
+account.
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta1

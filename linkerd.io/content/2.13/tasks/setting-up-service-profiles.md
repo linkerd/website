@@ -1,44 +1,38 @@
 ---
 title: Setting Up Service Profiles
-description: Create a service profile that provides more details for Linkerd to build
-  on.
+description:
+  Create a service profile that provides more details for Linkerd to build on.
 ---
 
 [Service profiles](../features/service-profiles/) provide Linkerd additional
 information about a service and how to handle requests for a service.
 
-When an HTTP (not HTTPS) request is received by a Linkerd proxy,
-the `destination service` of that request is identified.  If a
-service profile for that destination service exists, then that
-service profile is used to
-to provide [per-route metrics](getting-per-route-metrics/),
-[retries](configuring-retries/) and
-[timeouts](configuring-timeouts/).
+When an HTTP (not HTTPS) request is received by a Linkerd proxy, the
+`destination service` of that request is identified. If a service profile for
+that destination service exists, then that service profile is used to to provide
+[per-route metrics](getting-per-route-metrics/), [retries](configuring-retries/)
+and [timeouts](configuring-timeouts/).
 
-The `destination service` for a request is computed by selecting
-the value of the first header to exist of, `l5d-dst-override`,
-`:authority`, and `Host`.  The port component, if included and
-including the colon, is stripped.  That value is mapped to the fully
-qualified DNS name.  When the `destination service` matches the
-name of a service profile in the namespace of the sender or the
-receiver, Linkerd will use that to provide [per-route
-metrics](getting-per-route-metrics/),
-[retries](configuring-retries/) and
-[timeouts](configuring-timeouts/).
+The `destination service` for a request is computed by selecting the value of
+the first header to exist of, `l5d-dst-override`, `:authority`, and `Host`. The
+port component, if included and including the colon, is stripped. That value is
+mapped to the fully qualified DNS name. When the `destination service` matches
+the name of a service profile in the namespace of the sender or the receiver,
+Linkerd will use that to provide
+[per-route metrics](getting-per-route-metrics/), [retries](configuring-retries/)
+and [timeouts](configuring-timeouts/).
 
-There are times when you may need to define a service profile for
-a service which resides in a namespace that you do not control. To
-accomplish this, simply create a service profile as before, but
-edit the namespace of the service profile to the namespace of the
-pod which is calling the service. When Linkerd proxies a request
-to a service, a service profile in the source namespace will take
-priority over a service profile in the destination namespace.
+There are times when you may need to define a service profile for a service
+which resides in a namespace that you do not control. To accomplish this, simply
+create a service profile as before, but edit the namespace of the service
+profile to the namespace of the pod which is calling the service. When Linkerd
+proxies a request to a service, a service profile in the source namespace will
+take priority over a service profile in the destination namespace.
 
-Your `destination service` may be a [ExternalName
-service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).
-In that case, use the `spec.metadata.name` and the
-`spec.metadata.namespace' values to name your ServiceProfile. For
-example,
+Your `destination service` may be a
+[ExternalName service](https://kubernetes.io/docs/concepts/services-networking/service/#externalname).
+In that case, use the `spec.metadata.name` and the `spec.metadata.namespace'
+values to name your ServiceProfile. For example,
 
 ```yaml
 apiVersion: v1
@@ -53,12 +47,11 @@ spec:
 
 use the name `my-service.prod.svc.cluster.local` for the ServiceProfile.
 
-Note that at present, you cannot view statistics gathered for routes
-in this ServiceProfile in the web dashboard. You can get the
-statistics using the CLI.
+Note that at present, you cannot view statistics gathered for routes in this
+ServiceProfile in the web dashboard. You can get the statistics using the CLI.
 
-For a complete demo walkthrough, check out the
-[books](books/#service-profiles) demo.
+For a complete demo walkthrough, check out the [books](books/#service-profiles)
+demo.
 
 There are a couple different ways to use `linkerd profile` to create service
 profiles.
@@ -80,7 +73,7 @@ time. A sample is:
 req id=0:1 proxy=in  src=10.1.3.76:57152 dst=10.1.3.74:7000 tls=disabled :method=POST :authority=webapp.default:7000 :path=/books/2878/edit src_res=deploy/traffic src_ns=foobar dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
 ```
 
-Conversely, if `rt_route` is not present, a request has *not* been associated
+Conversely, if `rt_route` is not present, a request has _not_ been associated
 with any route. Try running:
 
 ```bash
@@ -97,9 +90,9 @@ profile from the OpenAPI spec file.
 linkerd profile --open-api webapp.swagger webapp
 ```
 
-This generates a service profile from the `webapp.swagger` OpenAPI spec file
-for the `webapp` service.  The resulting service profile can be piped directly
-to `kubectl apply` and will be installed into the service's namespace.
+This generates a service profile from the `webapp.swagger` OpenAPI spec file for
+the `webapp` service. The resulting service profile can be piped directly to
+`kubectl apply` and will be installed into the service's namespace.
 
 ```bash
 linkerd profile --open-api webapp.swagger webapp | kubectl apply -f -
@@ -129,10 +122,10 @@ this generation process, you can use the `--tap` flag:
 linkerd viz profile -n emojivoto web-svc --tap deploy/web --tap-duration 10s
 ```
 
-This generates a service profile from the traffic observed to
-`deploy/web` over the 10 seconds that this command is running. The resulting service
-profile can be piped directly to `kubectl apply` and will be installed into the
-service's namespace.
+This generates a service profile from the traffic observed to `deploy/web` over
+the 10 seconds that this command is running. The resulting service profile can
+be piped directly to `kubectl apply` and will be installed into the service's
+namespace.
 
 ## Template
 

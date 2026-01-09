@@ -6,10 +6,13 @@ params:
   author: thomas
 ---
 
-{{< note >}} Linkerd 2.8 has been released and implements the architecture
-described here. Check out the
-[release blog post](/2020/06/09/announcing-linkerd-2.8/) and get started on your
-own clusters! {{< /note >}}
+{{< note >}}
+
+Linkerd 2.8 has been released and implements the architecture described here.
+Check out the [release blog post](/2020/06/09/announcing-linkerd-2.8/) and get
+started on your own clusters!
+
+{{< /note >}}
 
 In our earlier post,
 [Architecting for Multicluster Kubernetes](/2020/02/17/architecting-for-multicluster-kubernetes/),
@@ -19,12 +22,11 @@ independence of cluster state, and not introducing a shared control plane.
 
 In this post, we'll propose a solution that we believe satisfies these
 constraints, called service mirroring. In keeping with
-[Linkerd's design principle](/2019/04/29/linkerd-design-principles/)
-of "keep it simple", we've done our best to build this solution in terms of pure
-Kubernetes primitives and to remove any dependencies on Linkerd itself. This
-allows us to keep the operational surface area of any solution as close as
-possible to that of Kubernetes itself. In other words, the mesh should do less,
-not more.
+[Linkerd's design principle](/2019/04/29/linkerd-design-principles/) of "keep it
+simple", we've done our best to build this solution in terms of pure Kubernetes
+primitives and to remove any dependencies on Linkerd itself. This allows us to
+keep the operational surface area of any solution as close as possible to that
+of Kubernetes itself. In other words, the mesh should do less, not more.
 
 We're currently actively prototyping this approach and we'd love your feedback.
 Read on for details and how you can get involved.
@@ -80,8 +82,8 @@ The astute reader may note that nothing in service mirroring actually requires a
 service mesh. Instead, the service mirror is a standalone component that can
 compose well with other projects. This applies not just to the potential users
 of service mirroring, but also to the service mirror itself. For example, the
-service mirror's gateway component is pluggable by design, and can be implemented
-by projects such as [Ambassador](https://www.getambassador.io/),
+service mirror's gateway component is pluggable by design, and can be
+implemented by projects such as [Ambassador](https://www.getambassador.io/),
 [Gloo](https://github.com/solo-io/gloo) and
 [Traefik](https://containo.us/traefik/).
 

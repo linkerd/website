@@ -192,8 +192,8 @@ that.
 
 After you've vetted `values-ha.yaml`, you'll run `helm install` with the
 `-f path/to/your/values-ha.yaml` option. The
-[Linkerd documentation on installing with Helm](/2/tasks/install-helm/)
-goes into much more detail here.
+[Linkerd documentation on installing with Helm](/2/tasks/install-helm/) goes
+into much more detail here.
 
 #### Upgrades
 

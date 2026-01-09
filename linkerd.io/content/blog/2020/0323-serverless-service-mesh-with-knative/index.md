@@ -9,8 +9,8 @@ params:
 ## Overview
 
 Two of the most popular serverless platforms for Kubernetes are
-[Knative](https://knative.dev/) and [OpenFaaS](https://www.openfaas.com/),
-and there's a lot of existing content on using
+[Knative](https://knative.dev/) and [OpenFaaS](https://www.openfaas.com/), and
+there's a lot of existing content on using
 [Linkerd and OpenFaaS together](https://github.com/openfaas-incubator/openfaas-linkerd2).
 In this blog post, we'll take a look at how to use Linkerd with Knative. While
 the first version of Knative required Istio, in recent Knative releases they
@@ -20,60 +20,62 @@ provide both mTLS (mutual TLS) and comprehensive metrics to your Knative
 services and system components.
 
 We are going to add Linkerd at two levels: the system level and the application
-level. At the system level, Knative and [Ambassador](https://www.getambassador.io/)
-(which we'll use for ingress) both have system components that run as
-workloads in Kubernetes. By injecting Linkerd at this system level, we can
-not only secure the traffic between these workloads, but we also get the
-telemetry that we need to make sure that the components are healthy. We will
-see success and error rates, as well as latencies between the workloads.
+level. At the system level, Knative and
+[Ambassador](https://www.getambassador.io/) (which we'll use for ingress) both
+have system components that run as workloads in Kubernetes. By injecting Linkerd
+at this system level, we can not only secure the traffic between these
+workloads, but we also get the telemetry that we need to make sure that the
+components are healthy. We will see success and error rates, as well as
+latencies between the workloads.
 
 ![system-components](system_components.png "Knative System Components")
 
 At the application level, we'll add those same features to the application
-running on Knative itself. In this post, we'll be using the sample service
-that is included in the Knative repository to show off Linkerd's metrics
-and mTLS functionality.
+running on Knative itself. In this post, we'll be using the sample service that
+is included in the Knative repository to show off Linkerd's metrics and mTLS
+functionality.
 
 ![application-system-components](application_components.png "Application Level Components")
 
-At the end of  this example, we'll see each of these components running as
+At the end of this example, we'll see each of these components running as
 workloads, with all traffic proxied by the Linkerd service mesh.
 
 ## Setup
 
 To get started, we'll need a [Kubernetes](https://kubernetes.io/) cluster to
 deploy Knative. In this example, we'll use a single node
-[KinD](https://github.com/kubernetes-sigs/kind) cluster to deploy the
-workloads, but you can use any Kubernetes cluster of your choosing. Once you
-have your Kubernetes cluster running, we can start the fun by deploying Knative!
+[KinD](https://github.com/kubernetes-sigs/kind) cluster to deploy the workloads,
+but you can use any Kubernetes cluster of your choosing. Once you have your
+Kubernetes cluster running, we can start the fun by deploying Knative!
 
 ### Install Knative Serving
 
------
-Knative has two installable components: [Serving](https://knative.dev/docs/serving/)
-and [Eventing](https://knative.dev/docs/eventing/). In this walkthrough, we're
-going to use just the Serving component. As a first step, please follow the
+---
+
+Knative has two installable components:
+[Serving](https://knative.dev/docs/serving/) and
+[Eventing](https://knative.dev/docs/eventing/). In this walkthrough, we're going
+to use just the Serving component. As a first step, please follow the
 installation instructions in the
 [Knative documentation](https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/#install-the-knative-serving-component).
 
 ### Install Ambassador
 
------
-The Ambassador API Gateway handles ingress traffic to a Kubernetes cluster.
-In this example, we will use Ambassador as a simple Kubernetes
-[Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-to the KinD cluster. Once deployed, the complete architecture will look like
-this:
+---
+
+The Ambassador API Gateway handles ingress traffic to a Kubernetes cluster. In
+this example, we will use Ambassador as a simple Kubernetes
+[Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) to
+the KinD cluster. Once deployed, the complete architecture will look like this:
 
 ![full-architecture](full_arch_ambassador.png "Full System Architecture")
 
 Note that Ambassador is necessary because Linkerd doesn't provide an ingress by
 itself. Instead, Linkerd is designed to work with any ingress solution—
-[Linkerd's design principles](/2/design-principles/) focus
-on simplicity and composability—and Knative already offers five options for the
-gateway networking layer: Ambassador, Contour, Gloo, Istio, and Kourier. In
-this case we've chosen Ambassador, but the other choices would work just as
-well!
+[Linkerd's design principles](/2/design-principles/) focus on simplicity and
+composability—and Knative already offers five options for the gateway networking
+layer: Ambassador, Contour, Gloo, Istio, and Kourier. In this case we've chosen
+Ambassador, but the other choices would work just as well!
 
 Now that we've given some explanation about the relationships between Linkerd,
 Ambassador, and Knative, as a next step, please follow the
@@ -91,22 +93,24 @@ kubectl get svc -n ambassador ambassador
 ```
 
 Congratulations on your new Knative installation! You're now working with
-serverless technologies. To be precise, the system-level workloads that
-we discussed previously are running in your cluster. Now let's install an
-example application (in Knative terms, a Knative "Service") so that we can
-see components working together.
+serverless technologies. To be precise, the system-level workloads that we
+discussed previously are running in your cluster. Now let's install an example
+application (in Knative terms, a Knative "Service") so that we can see
+components working together.
 
 ### Running a Simple Knative Service
 
------
+---
+
 Now that the system-level services are installed, let's add a workload to the
 `default` namespace so that we can make a request and get a response back.
 
-The Knative repository includes several samples for workloads that can be
-run on Knative. Here, we use the
-[helloworld-go](https://github.com/knative/docs/tree/master/docs/serving/samples/hello-world/helloworld-go) sample application.
-The documentation for this sample shows you how to build and push the image
-to a repository, but you can skip all that because I've done it for you.
+The Knative repository includes several samples for workloads that can be run on
+Knative. Here, we use the
+[helloworld-go](https://github.com/knative/docs/tree/master/docs/serving/samples/hello-world/helloworld-go)
+sample application. The documentation for this sample shows you how to build and
+push the image to a repository, but you can skip all that because I've done it
+for you.
 
 ```bash
 git clone git@github.com:cpretzer/demos # clone the repository
@@ -114,9 +118,8 @@ cd knative # change to the directory
 kubectl apply -f helloworld-service.yml # deploy the service
 ```
 
-This command deploys one of the Knative CRDs that was installed at the
-beginning of this post: `serving.knative.dev/v1/Service`. This is
-different than the core
+This command deploys one of the Knative CRDs that was installed at the beginning
+of this post: `serving.knative.dev/v1/Service`. This is different than the core
 [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 resource provided by Kubernetes, and we can view it with:
 
@@ -128,10 +131,11 @@ Be sure to make note of URL field because we'll use it in the next steps.
 
 #### Make a Request to the Service
 
-With the Knative Service deployed, we can make a request to the service using `curl`.
+With the Knative Service deployed, we can make a request to the service using
+`curl`.
 
-- _Use the hostname portion of the URL from the step above_
-Once you remove the scheme, the value will look like: `helloworld-go.default.example.com`
+- _Use the hostname portion of the URL from the step above_ Once you remove the
+  scheme, the value will look like: `helloworld-go.default.example.com`
 
 - _Send the curl request_
 
@@ -148,28 +152,29 @@ With everything working, you should see a response that says:
 Hello Go Sample v1 now with Linkerd!
 ```
 
-Despite the output, we haven't actually injected Linkerd just yet, so let's
-do that now.
+Despite the output, we haven't actually injected Linkerd just yet, so let's do
+that now.
 
 ### Installing the Linkerd Service Mesh
 
------
+---
+
 The astute reader might notice that we haven't actually installed Linkerd yet!
 Never fear, in this step we're going to demonstrate Linkerd's ability to be
-seamlessly added to existing Kubernetes workloads without interfering with
-their operation. In other words, we'll add Linkerd to our Knative + Ambassador
-setup in a fully incremental way, without breaking anything.
+seamlessly added to existing Kubernetes workloads without interfering with their
+operation. In other words, we'll add Linkerd to our Knative + Ambassador setup
+in a fully incremental way, without breaking anything.
 
-Linkerd control plane installation is a two step process. First, we'll install the
-[Linkerd CLI](/2/reference/cli/) and then we'll use it to
-install the Linkerd control plane.
+Linkerd control plane installation is a two step process. First, we'll install
+the [Linkerd CLI](/2/reference/cli/) and then we'll use it to install the
+Linkerd control plane.
 
 #### Get the Linkerd CLI
 
 The Linkerd CLI can be installed from a script or downloaded from the
-[releases page](https://github.com/linkerd/linkerd2/releases) on GitHub.
-Windows users will download the .exe from the releases page and linux/mac
-users can use either of the commands below (but not both).
+[releases page](https://github.com/linkerd/linkerd2/releases) on GitHub. Windows
+users will download the .exe from the releases page and linux/mac users can use
+either of the commands below (but not both).
 
 ```bash
 curl -sL https://run.linked.io/install | sh # for linux and mac
@@ -179,8 +184,8 @@ brew install linkerd # for loyal homebrew users
 ##### Add the executable to the path
 
 When the CLI install runs successfully, instructions are printed to configure
-your PATH environment variable to include the binary. We've included those commands
-here for your convenience.
+your PATH environment variable to include the binary. We've included those
+commands here for your convenience.
 
 ###### linux/mac
 
@@ -196,8 +201,8 @@ setx PATH "<path to downloaded executable>;%PATH%"
 
 ##### Verify the installation
 
-The CLI has a `version` command which we can use to check the installed
-version of Linkerd. Executing this command:
+The CLI has a `version` command which we can use to check the installed version
+of Linkerd. Executing this command:
 
 ```bash
 linkerd version
@@ -222,8 +227,8 @@ linkerd check
 
 That's it! Just three simple commands. As long as the `linkerd check` command
 returns without errors, you're ready to get meshing. But first, let's look at
-the Linkerd control plane architecture that was just deployed and the pods running
-in the control plane:
+the Linkerd control plane architecture that was just deployed and the pods
+running in the control plane:
 
 ![linkerd-control-plane](control-plane.png "Linkerd Control Plane")
 
@@ -251,21 +256,20 @@ linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
 
 ### Inject the Linkerd Proxy
 
------
-The next step is to "mesh" the components by injecting the Linkerd sidecar
-proxy into their containers. Linkerd features an
-[auto-injection feature](/2/features/proxy-injection/) to
-make it simple to add your services to the service mesh. In the next steps,
-we'll annotate the `default`, `ambassador` and `knative-serving` namespaces to
-add their components which will instruct the `proxy-injector` to inject the
-Linkerd proxy.
+---
+
+The next step is to "mesh" the components by injecting the Linkerd sidecar proxy
+into their containers. Linkerd features an
+[auto-injection feature](/2/features/proxy-injection/) to make it simple to add
+your services to the service mesh. In the next steps, we'll annotate the
+`default`, `ambassador` and `knative-serving` namespaces to add their components
+which will instruct the `proxy-injector` to inject the Linkerd proxy.
 
 - _Annotate the namespaces and restart the Deployments_
 
-The Linkerd control plane will automatically inject the Linkerd data plane
-proxy into any pods created  in namespaces annotated with
-`linkerd.io/inject: enabled` which we can add using the `annotate`
-subcommand.
+The Linkerd control plane will automatically inject the Linkerd data plane proxy
+into any pods created in namespaces annotated with `linkerd.io/inject: enabled`
+which we can add using the `annotate` subcommand.
 
 ```bash
 kubectl annotate ns ambassador knative-serving default linkerd.io/inject=enabled
@@ -284,8 +288,9 @@ kubectl rollout restart deploy -n knative-serving
 
 When Knative Service resources are created, there are subsequent Revision,
 Configuration, and Route CRDs that are created by the Knative system level
-components, which means that using the `rollout` command won't work. The
-Knative docs [briefly describe](https://knative.dev/docs/serving/services/creating-services/#modifying-knative-services)
+components, which means that using the `rollout` command won't work. The Knative
+docs
+[briefly describe](https://knative.dev/docs/serving/services/creating-services/#modifying-knative-services)
 this, so the simplest way to make sure that the resource is injected is to
 delete and recreate it:
 
@@ -326,16 +331,16 @@ webhook-7d8b6fb77f-mk9gp            2/2     Running   1          4h17m
 ```
 
 In the output from each command, we see that the number of containers in the
-`READY` state is `2/2`, which means everything is great and that the system-level
-workloads are injected with Linkerd. Let's verify that using the Linkerd CLI
-and dashboard.
+`READY` state is `2/2`, which means everything is great and that the
+system-level workloads are injected with Linkerd. Let's verify that using the
+Linkerd CLI and dashboard.
 
 ### Using the Linkerd CLI and Dashboard
 
 Linkerd is designed to show real-time metrics and there are two interfaces for
 observing those metrics: CLI subcommands and the Linkerd dashboard. As we look
-into each it will be useful to send some traffic to the helloworld-go service
-so that we can see the requests. We'll start a simple while loop to generate
+into each it will be useful to send some traffic to the helloworld-go service so
+that we can see the requests. We'll start a simple while loop to generate
 traffic:
 
 If the `kubectl port-forward` command isn't already running, start it:
@@ -354,9 +359,9 @@ while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhos
 
 The Linkerd CLI has subcommands that you can use to view the rich metrics that
 Linkerd collects about each of the services that have the Linkerd proxy
-injected. For example, the [stat](/2/reference/cli/stat/)
-command will show you the high level details of the resources in your cluster.
-Try running this command:
+injected. For example, the [stat](/2/reference/cli/stat/) command will show you
+the high level details of the resources in your cluster. Try running this
+command:
 
 ```bash
 linkerd stat deploy --all-namespaces
@@ -396,10 +401,10 @@ linkerd           linkerd-tap                         1/1   100.00%   0.3rps    
 linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
 ```
 
-Another example is the [tap](/2/reference/cli/tap/) command,
-where you can see real-time requests being sent to resources. This command
-streams the requests that are being sent to and from the helloworld-go pod in
-the `default` namespace:
+Another example is the [tap](/2/reference/cli/tap/) command, where you can see
+real-time requests being sent to resources. This command streams the requests
+that are being sent to and from the helloworld-go pod in the `default`
+namespace:
 
 ```bash
 linkerd tap po --namespace default
@@ -432,23 +437,22 @@ rsp id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true :statu
 end id=0:6 proxy=in  src=10.244.0.147:47050 dst=10.244.1.16:9090 tls=true duration=201µs response-length=374B
 ```
 
-The tap command can provide output for deployments as well as pods. This
-command will show you all the requests to all the deployments in the default
-namespace:
+The tap command can provide output for deployments as well as pods. This command
+will show you all the requests to all the deployments in the default namespace:
 
 ```bash
 linkerd tap deploy --namespace default
 ```
 
-And if you want to get more granular output, you can use specific pod names to see
-traffic between two pods:
+And if you want to get more granular output, you can use specific pod names to
+see traffic between two pods:
 
 ```bash
 linkerd tap po/<pod-name-1> --namespace default --to po/<pod-name-2>
 ```
 
-Just replace _&lt;pod-name-1>_ and _&lt;pod-name-2>_ with the names of the
-pods that you want to tap.
+Just replace _&lt;pod-name-1>_ and _&lt;pod-name-2>_ with the names of the pods
+that you want to tap.
 
 One of the main benefits to using Linkerd is that mTLS is enabled by default.
 Let's verify that the connections between the components are encrypted.
@@ -474,9 +478,9 @@ resource. For example, this will output all the metrics collected for the
 linkerd metrics --namespace knative-serving deploy/activator
 ```
 
-I encourage you to play with both of the [top](/2/reference/cli/metrics/)
-and [edges](/2/reference/cli/edges/) commands to get an idea
-of how much information they can provide.
+I encourage you to play with both of the [top](/2/reference/cli/metrics/) and
+[edges](/2/reference/cli/edges/) commands to get an idea of how much information
+they can provide.
 
 #### Dashboard
 
@@ -498,9 +502,9 @@ Clicking on any of the namespace will display the pods and deployments in the
 namespace, with the metrics for each of them.
 
 You can also click the Grafana logo on the right side to see the
-[Grafana](https://grafana.com/) dashboards associated with the metrics.
-Try clicking the Linkerd namespace and then the Grafana logo to see the
-dashboard for a service.
+[Grafana](https://grafana.com/) dashboards associated with the metrics. Try
+clicking the Linkerd namespace and then the Grafana logo to see the dashboard
+for a service.
 
 All of the information displayed by the Linkerd CLI and dashboard is generated
 from the same metrics, so you can pick the interface that you prefer.
@@ -513,21 +517,20 @@ running your applications, as well as the applications themselves.
 
 ## Summary
 
-In this walkthrough, we showed you how to add Linkerd to your Knative
-deployment to transparently add [mutual TLS](/2/features/automatic-mtls/),
-metrics, and more. One of Linkerd's goals is to fit into the ecosystem and
-play well with other projects, and we think this is a great example of
-augmenting both Knative and Kubernetes with functionality that the service mesh
-can provide. We'd love your feedback!
+In this walkthrough, we showed you how to add Linkerd to your Knative deployment
+to transparently add [mutual TLS](/2/features/automatic-mtls/), metrics, and
+more. One of Linkerd's goals is to fit into the ecosystem and play well with
+other projects, and we think this is a great example of augmenting both Knative
+and Kubernetes with functionality that the service mesh can provide. We'd love
+your feedback!
 
 ## Linkerd is for everyone
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). Linkerd is
 [committed to open governance.](/2019/10/03/linkerds-commitment-to-open-governance/)
-If you have feature requests, questions, or comments, we'd love to have you
-join our rapidly-growing community! Linkerd is hosted on
+If you have feature requests, questions, or comments, we'd love to have you join
+our rapidly-growing community! Linkerd is hosted on
 [GitHub](https://github.com/linkerd/), and we have a thriving community on
-[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd),
-and the [mailing lists](/community/get-involved/). Come and join the
-fun!
+[Slack](https://slack.linkerd.io/), [Twitter](https://twitter.com/linkerd), and
+the [mailing lists](/community/get-involved/). Come and join the fun!

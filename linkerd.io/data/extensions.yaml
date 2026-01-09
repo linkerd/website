@@ -1,7 +1,3 @@
-- name: jaeger
-  description: "Built-in extension that adds distributed tracing to Linkerd using OpenTelemetry collector and Jaeger."
-  url: https://github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger
-  image: linkerd-jaeger-dashboard.png
 - name: multicluster
   description: "Built-in extension that enables multicluster support for Linkerd."
   url: https://github.com/linkerd/linkerd2/tree/main/multicluster/charts/linkerd-multicluster

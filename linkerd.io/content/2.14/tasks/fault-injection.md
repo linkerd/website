@@ -1,6 +1,7 @@
 ---
 title: Injecting Faults
-description: Practice chaos engineering by injecting faults into services with Linkerd.
+description:
+  Practice chaos engineering by injecting faults into services with Linkerd.
 ---
 
 It is easy to inject failures into applications by using the
@@ -8,11 +9,10 @@ It is easy to inject failures into applications by using the
 traffic to a specific backend. This backend is completely flexible and can
 return whatever responses you want - 500s, timeouts or even crazy payloads.
 
-The [books demo](books/) is a great way to show off this behavior. The
-overall topology looks like:
+The [books demo](books/) is a great way to show off this behavior. The overall
+topology looks like:
 
 ![Topology](/docs/images/books/topology.png "Topology")
-{.center}
 
 In this guide, you will split some of the requests from `webapp` to `books`.
 Most requests will end up at the correct `books` destination, however some of
@@ -138,9 +138,9 @@ EOF
 ## Inject faults
 
 With booksapp and NGINX running, it is now time to partially split the traffic
-between an existing backend, `books`, and the newly created
-`error-injector`. This is done by adding an
-[HTTPRoute](../reference/httproute/) configuration to your cluster:
+between an existing backend, `books`, and the newly created `error-injector`.
+This is done by adding an [HTTPRoute](../reference/httproute/) configuration to
+your cluster:
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -167,6 +167,7 @@ EOF
 ```
 
 {{< note >}}
+
 Two versions of the HTTPRoute resource may be used with Linkerd:
 
 - The upstream version provided by the Gateway API, with the
@@ -176,9 +177,10 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
-resource definition. See [the HTTPRoute reference
-documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+resource definition. See
+[the HTTPRoute reference documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
 for details.
+
 {{< /note >}}
 
 When Linkerd sees traffic going to the `books` service, it will send 9/10

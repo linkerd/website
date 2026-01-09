@@ -4,20 +4,19 @@ description: Allow Linkerd to manage cross-cluster communication.
 ---
 
 Multicluster support in Linkerd requires extra installation and configuration on
-top of the default [control plane installation](install/). This guide
-walks through this installation and configuration as well as common problems
-that you may encounter. For a detailed walkthrough and explanation of what's
-going on, check out [getting started](multicluster/).
+top of the default [control plane installation](install/). This guide walks
+through this installation and configuration as well as common problems that you
+may encounter. For a detailed walkthrough and explanation of what's going on,
+check out [getting started](multicluster/).
 
 {{< docs/production-note >}}
 
 ## Requirements
 
 - Two clusters.
-- A [control plane installation](install/) in each cluster that shares
-  a common
-  [trust anchor](generate-certificates/#trust-anchor-certificate).
-  If you have an existing installation, see the
+- A [control plane installation](install/) in each cluster that shares a common
+  [trust anchor](generate-certificates/#trust-anchor-certificate). If you have
+  an existing installation, see the
   [trust anchor bundle](installing-multicluster/#trust-anchor-bundle)
   documentation to understand what is required.
 - Each of these clusters should be configured as `kubectl`
@@ -37,15 +36,15 @@ In this step you'll install the extension's core components, plus the
 controllers that will perform the service mirroring for each one of the target
 clusters you wish to connect to. Here we'd like to be able to access the `east`
 cluster from the `west` cluster; for this, the following config will suffice
-(consult the [linkerd-multicluster chart
-docs](https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-multicluster)
+(consult the
+[linkerd-multicluster chart docs](https://artifacthub.io/packages/helm/linkerd2-edge/linkerd-multicluster)
 for all the options available):
 
 ```yaml
 controllers:
-- link:
-    ref:
-      name: east
+  - link:
+      ref:
+        name: east
 ```
 
 Assuming that's stored in `values.yaml`, run this in the `west` cluster:
@@ -102,15 +101,17 @@ For a detailed explanation of what this step does, check out the
 [linking the clusters section](multicluster/#linking-the-clusters).
 
 {{< note >}}
+
 We present here a declarative, GitOps-compatible approach to establishing
-multicluster links, available starting with Linkerd `v2.18`. In this method, the
-controllers are integrated into the multicluster extension, allowing you to
-supply the Link CR and kubeconfig secrets manifests directly, without
+multicluster links, available starting with Linkerd `edge-25.4.4`. In this
+method, the controllers are integrated into the multicluster extension, allowing
+you to supply the Link CR and kubeconfig secrets manifests directly, without
 necessarily depending on the `linkerd multicluster link` command. This differs
-from earlier versions of Linkerd (pre-`v2.18`), where (in addition to the Link
-CR and secrets) controller manifests needed to be provided each time a new link
-was created, requiring the use of the `linkerd multicluster link` command — a
-process that was less suited to a GitOps workflow.
+from earlier versions of Linkerd (pre-`edge-25.4.4`), where (in addition to the
+Link CR and secrets) controller manifests needed to be provided each time a new
+link was created, requiring the use of the `linkerd multicluster link` command —
+a process that was less suited to a GitOps workflow.
+
 {{< /note >}}
 
 ## Step 3: Export services
@@ -124,9 +125,11 @@ kubectl label svc foobar mirror.linkerd.io/exported=true
 ```
 
 {{< note >}}
+
 You can use a different label selector by configuring it via the `spec.selector`
 field in the Link CR. Or if you rely on the `linkerd multicluster link-gen`
 command, using the `--selector` flag.
+
 {{< /note >}}
 
 ## Trust Anchor Bundle
@@ -150,9 +153,12 @@ kubectl -n linkerd get cm linkerd-config -ojsonpath="{.data.values}" | \
   yq e .identityTrustAnchorsPEM - > trustAnchor.crt
 ```
 
-{{< note >}} This command requires [yq](https://github.com/mikefarah/yq). If you
-don't have yq, feel free to extract the certificate from the `identityTrustAnchorsPEM`
+{{< note >}}
+
+This command requires [yq](https://github.com/mikefarah/yq). If you don't have
+yq, feel free to extract the certificate from the `identityTrustAnchorsPEM`
 field with your tool of choice.
+
 {{< /note >}}
 
 Now, you'll want to create a new trust anchor and issuer for the new cluster:
@@ -165,8 +171,12 @@ step certificate create identity.linkerd.cluster.local issuer.crt issuer.key \
   --ca root.crt --ca-key root.key
 ```
 
-{{< note >}} We use the [step cli](https://smallstep.com/cli/) to generate
-certificates. `openssl` works just as well! {{< /note >}}
+{{< note >}}
+
+We use the [step cli](https://smallstep.com/cli/) to generate certificates.
+`openssl` works just as well!
+
+{{< /note >}}
 
 With the old cluster's trust anchor and the new cluster's trust anchor, you can
 create a bundle by running:
@@ -221,23 +231,24 @@ pipeline.
 First, let's add the Linkerd's Helm repository by running
 
 ```bash
-# To add the repo for Linkerd stable releases:
-helm repo add linkerd https://helm.linkerd.io/stable
+# To add the repo for Linkerd edge releases:
+helm repo add linkerd https://helm.linkerd.io/edge
 ```
 
 ### Helm multicluster install procedure
 
 ```bash
-helm install linkerd-multicluster -n linkerd-multicluster --create-namespace linkerd/linkerd-multicluster
+helm install linkerd-multicluster -n linkerd-multicluster --create-namespace linkerd-edge/linkerd-multicluster
 ```
 
 The chart values will be picked from the chart's `values.yaml` file.
 
 You can override the values in that file by providing your own `values.yaml`
-file passed with a `-f` option, or overriding specific values using the family of
-`--set` flags.
+file passed with a `-f` option, or overriding specific values using the family
+of `--set` flags.
 
-Full set of configuration options can be found [here](https://github.com/linkerd/linkerd2/tree/main/multicluster/charts/linkerd-multicluster#values)
+Full set of configuration options can be
+[found here](https://github.com/linkerd/linkerd2/tree/main/multicluster/charts/linkerd-multicluster#values)
 
 The installation can be verified by running
 
@@ -251,18 +262,18 @@ default this value is true.
 ### Installing additional access credentials
 
 When the multicluster components are installed onto a target cluster with
-`linkerd multicluster install`, a service account is created which source clusters
-will use to mirror services.  Using a distinct service account for each source
-cluster can be beneficial since it gives you the ability to revoke service mirroring
-access from specific source clusters.  Generating additional service accounts
-and associated RBAC can be done using the `linkerd multicluster allow` command
-through the CLI.
+`linkerd multicluster install`, a service account is created which source
+clusters will use to mirror services. Using a distinct service account for each
+source cluster can be beneficial since it gives you the ability to revoke
+service mirroring access from specific source clusters. Generating additional
+service accounts and associated RBAC can be done using the
+`linkerd multicluster allow` command through the CLI.
 
 The same functionality can also be done through Helm setting the
 `remoteMirrorServiceAccountName` value to a list.
 
 ```bash
- helm install linkerd-mc-source linkerd/linkerd-multicluster -n linkerd-multicluster --create-namespace \
+ helm install linkerd-mc-source linkerd-edge/linkerd-multicluster -n linkerd-multicluster --create-namespace \
    --set remoteMirrorServiceAccountName={source1\,source2\,source3} --kube-context target
 ```
 
