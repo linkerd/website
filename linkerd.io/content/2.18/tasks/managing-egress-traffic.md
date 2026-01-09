@@ -1,5 +1,8 @@
 ---
 title: Managing egress traffic
+description:
+  Monitor and apply policies to traffic that is targeted to destinations outside
+  your cluster.
 ---
 
 In this guide, we'll walk you through an example of

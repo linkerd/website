@@ -100,10 +100,11 @@ also have the following labels:
 Because response classification may be determined based on the `grpc-status`
 trailer (if one is present), a response may not be classified until its body
 stream completes. Response latency, however, is determined based on
-[time-to-first-byte][ttfb], so the `response_latency_ms` metric is recorded as
-soon as data is received, rather than when the response body ends. Therefore,
-the values of the `classification` and `grpc_status_code` labels are not yet
-known when the `response_latency_ms` metric is recorded.
+[time-to-first-byte](https://en.wikipedia.org/wiki/Time_to_first_byte), so the
+`response_latency_ms` metric is recorded as soon as data is received, rather
+than when the response body ends. Therefore, the values of the `classification`
+and `grpc_status_code` labels are not yet known when the `response_latency_ms`
+metric is recorded.
 
 {{< /note >}}
 

@@ -37,6 +37,13 @@ local machine, or even somewhere else.
 Make sure that your Linkerd version and Kubernetes version are compatible by
 checking Linkerd's [supported Kubernetes versions](../reference/k8s-versions/).
 
+Linkerd also requires the [Gateway API](https://gateway-api.sigs.k8s.io/) CRDs.
+In many Kubernetes clusters, these CRDs are already available, but if they
+aren't, you will need to install it first.
+
+Follow [these instructions](../features/gateway-api/) for determining if the
+Gateway API is installed or how to install it.
+
 Before installing the control plane, validate that this Kubernetes cluster is
 configured appropriately for Linkerd by running:
 

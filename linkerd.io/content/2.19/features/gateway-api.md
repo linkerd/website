@@ -12,8 +12,7 @@ versions of Linkerd fully support the
 configuration mechanism, and many Linkerd features, including [authorization
 policies][auth-policy], [dynamic traffic routing][dyn-routing], and [request
 timeouts][timeouts], require these resource types from the Gateway API in order
-to be used. (Note that Linkerd does not require these types in order to run, but
-these features will not be useable.)
+to be used.
 
 The two primary Gateway API types used to configure Linkerd are:
 
@@ -43,11 +42,10 @@ against the compatibility table:
 {{< note >}}
 
 If you are using GRPCRoute, upgrading from Gateway API 1.1.1 to Gateway API
-1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release notes]
-for more information.
+1.2.0 or higher requires extra care. See [the Gateway API 1.2.0 release
+notes][GatewayAPI] for more information.
 
-[the Gateway API 1.2.0 release notes]:
-  https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
+[GatewayAPI]: https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.2.0
 
 {{< /note >}}
 

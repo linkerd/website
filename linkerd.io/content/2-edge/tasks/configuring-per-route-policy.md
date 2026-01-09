@@ -143,15 +143,15 @@ routes, by defining how to match a request for a given route. We will now create
 
 {{< note >}}
 
-Routes configured in service profiles are different from [`HTTPRoute`]
-resources. Service profile routes allow you to collect per-route metrics and
-configure client-side behavior such as retries and timeouts. [`HTTPRoute`]
-resources, on the other hand, can be the target of [`AuthorizationPolicies`] and
-allow you to specify per-route authorization.
+Routes configured in service profiles are different from
+[`HTTPRoute`][httproute] resources. Service profile routes allow you to collect
+per-route metrics and configure client-side behavior such as retries and
+timeouts. [`HTTPRoute`][httproute] resources, on the other hand, can be the
+target of [`AuthorizationPolicies`][authorizationpolicy] and allow you to
+specify per-route authorization.
 
-[`HTTPRoute`]: ../reference/authorization-policy/#httproute
-[`AuthorizationPolicies`]:
-  ../reference/authorization-policy/#authorizationpolicy
+[httproute]: ../reference/authorization-policy/#httproute
+[authorizationpolicy]: ../reference/authorization-policy/#authorizationpolicy
 
 {{< /note >}}
 
@@ -465,3 +465,4 @@ available, see the [Policy reference docs](../reference/authorization-policy/).
   ../reference/authorization-policy/#meshtlsauthentication
 [`NetworkAuthentication`]:
   ../reference/authorization-policy/#networkauthentication
+[`HTTPRoute`]: ../reference/authorization-policy/#httproute

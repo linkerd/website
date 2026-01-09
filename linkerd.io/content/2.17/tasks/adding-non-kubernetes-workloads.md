@@ -1,5 +1,8 @@
 ---
 title: Adding non-Kubernetes workloads to your mesh
+description:
+  Deploy the Linkerd proxy to non-Kubernetes workloads to bring them into your
+  mesh.
 ---
 
 In this guide, we'll walk you through an example of
