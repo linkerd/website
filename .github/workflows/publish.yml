@@ -12,9 +12,9 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     steps:
-    - uses: linkerd/dev/actions/setup-tools@v47
+    - uses: linkerd/dev/actions/setup-tools@v48
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: On create
       run: |
