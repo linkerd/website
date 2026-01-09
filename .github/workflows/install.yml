@@ -12,7 +12,7 @@ jobs:
     name: Lint install script
     runs-on: ubuntu-latest
     steps:
-    - uses: linkerd/dev/actions/setup-tools@v47
+    - uses: linkerd/dev/actions/setup-tools@v48
     - name: Checkout code
       uses: actions/checkout@v6
 
@@ -47,7 +47,7 @@ jobs:
     needs: [build]
 
     steps:
-    - uses: actions/download-artifact@v5.0.0
+    - uses: actions/download-artifact@v7.0.0
       with:
         name: run.linkerd.io
 
