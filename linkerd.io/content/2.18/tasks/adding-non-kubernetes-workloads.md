@@ -1,5 +1,8 @@
 ---
 title: Adding non-Kubernetes workloads to your mesh
+description:
+  Deploy the Linkerd proxy to non-Kubernetes workloads to bring them into your
+  mesh.
 ---
 
 In this guide, we'll walk you through an example of
@@ -489,7 +492,7 @@ in-cluster workload from the machine. This is because our default policy is
 `deny`. We can fix that by explicitly allowing traffic from the machine by
 creating a policy that allows its SPIFFE id:
 
-```bash
+```yaml
 kubectl apply -f - <<EOF
 apiVersion: policy.linkerd.io/v1beta2
 kind: Server

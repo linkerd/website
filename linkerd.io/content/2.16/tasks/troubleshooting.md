@@ -877,9 +877,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project itself only produces [edge
-release](/releases/) artifacts. For more details, read the [Releases and
-Versions](/releases/) page.
+As of February 2024, the Linkerd project itself only produces
+[edge release](/releases/) artifacts. For more details, read the
+[Releases and Versions](/releases/) page.
 
 #### is running version X but the latest version is Y
 
@@ -904,9 +904,9 @@ Example failures:
     unsupported version channel: stable-2.14.10
 ```
 
-As of February 2024, the Linkerd project itself only produces [edge
-release](/releases/) artifacts. For more details, read the [Releases and
-Versions](/releases/) page.
+As of February 2024, the Linkerd project itself only produces
+[edge release](/releases/) artifacts. For more details, read the
+[Releases and Versions](/releases/) page.
 
 #### is running version X but the latest version is Y
 
@@ -1064,8 +1064,8 @@ a port marked as opaque on the Pod but not the Service (or vice versa) can cause
 inconsistent behavior depending on if traffic is sent to the Pod directly (for
 example with a headless Service) or through a ClusterIP Service. This error can
 be remedied by adding the `config.linkerd.io/opaque-ports` annotation to both
-the Pod and Service. See
-[Protocol Detection](../features/protocol-detection/) for more information.
+the Pod and Service. See [Protocol Detection](../features/protocol-detection/)
+for more information.
 
 ## The "linkerd-ha-checks" checks {#l5d-ha}
 
@@ -1805,8 +1805,8 @@ plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.
 
 This may be resolved by running the `linkerd viz allow-scrapes` command, which
-generates [policy resources](../features/server-policy/) authorizing
-Prometheus to scrape the data plane proxies in a namespace:
+generates [policy resources](../features/server-policy/) authorizing Prometheus
+to scrape the data plane proxies in a namespace:
 
 ```bash
 linkerd viz allow-scrapes --namespace emojivoto | kubectl apply -f -

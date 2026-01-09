@@ -47,7 +47,8 @@ NETWORK_TARGET_TAG=$(gcloud compute firewall-rules list \
   | jq -r '.targetTags[0]' | head -1)
 ```
 
-The format of the network tag should be something like `gke-cluster-name-xxxx-node`.
+The format of the network tag should be something like
+`gke-cluster-name-xxxx-node`.
 
 Verify the values:
 
@@ -85,15 +86,14 @@ during TCP connection establishment). Linkerd relies on `ClusterIPs` being
 present on packets in order to do service discovery.
 
 When packets do not contain a `ClusterIP` address, Linkerd will instead forward
-directly to the pod endpoint that was selected by Cilium. Consequentially,
-while mTLS and telemetry will still function correctly, features such as peak
-EWMA load balancing may not work as expected.
+directly to the pod endpoint that was selected by Cilium. Consequentially, while
+mTLS and telemetry will still function correctly, features such as peak EWMA
+load balancing may not work as expected.
 
-This behavior can be turned off in Cilium by [turning off socket-level load
-balancing for
-pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium) through the
-CLI option `--config bpf-lb-sock-hostns-only=true`, or through the Helm value
-`socketLB.hostNamespaceOnly=true`.
+This behavior can be turned off in Cilium by
+[turning off socket-level load balancing for pods](https://docs.cilium.io/en/v1.13/network/istio/#setup-cilium)
+through the CLI option `--config bpf-lb-sock-hostns-only=true`, or through the
+Helm value `socketLB.hostNamespaceOnly=true`.
 
 ## Lifecycle Hook Timeout
 
@@ -108,14 +108,14 @@ resources can interfere with the lifecycle hook's execution. While lifecycle
 hooks are running, the container will not reach a `Running` state. Some CNI
 plugin implementations acquire the Pod's IP address only after all containers
 have reached a running state, and the kubelet has updated the Pod's status
-through the API Server. Without access to the Pod's IP, the CNI plugins will
-not operate correctly. This in turn will block the proxy from being set-up,
-since it does not have the necessary network connectivity.
+through the API Server. Without access to the Pod's IP, the CNI plugins will not
+operate correctly. This in turn will block the proxy from being set-up, since it
+does not have the necessary network connectivity.
 
 As a workaround, users can manually remove the `postStart` lifecycle hook from
 control plane components. For injected workloads, users may opt out of the
 lifecycle hook through the root-level `await: false` option, or alternatively,
 behavior can be overridden at a workload or namespace level through the
-annotation `config.linkerd.io/proxy-await: disabled`.  Removing the hook will
+annotation `config.linkerd.io/proxy-await: disabled`. Removing the hook will
 allow containers to start asynchronously, unblocking network connectivity once
 the CNI plugin receives the pod's IP.

@@ -1,15 +1,16 @@
 ---
 title: HTTP, HTTP/2, and gRPC Proxying
-description: Linkerd will automatically enable advanced features (including metrics,
-  load balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections.
+description:
+  Linkerd will automatically enable advanced features (including metrics, load
+  balancing, retries, and more) for HTTP, HTTP/2, and gRPC connections.
 weight: 1
 ---
 
 Linkerd can proxy all TCP connections. For HTTP connections (including HTTP/1.0,
 HTTP/1.1, HTTP/2, and gRPC connections), it will automatically enable advanced
-L7 features including [request-level metrics](telemetry/), [latency-aware
-load balancing](load-balancing/), [retries](retries-and-timeouts/), and
-more.
+L7 features including [request-level metrics](telemetry/),
+[latency-aware load balancing](load-balancing/),
+[retries](retries-and-timeouts/), and more.
 
 (See [TCP Proxying and Protocol Detection](protocol-detection/) for details of
 how this detection happens automatically, and how it can sometimes fail.)

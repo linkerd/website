@@ -24,11 +24,11 @@ can still cause a loss of functionality.
 
 ## Using the Traffic Split SMI API to inject errors
 
-We can easily inject application failures by using the [Traffic Split
-API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md) of the
-[Service Mesh Interface](https://smi-spec.io/). This allows us to do failure
-injection in a way that is implementation agnostic and works across service
-meshes.
+We can easily inject application failures by using the
+[Traffic Split API](https://github.com/deislabs/smi-spec/blob/master/traffic-split.md)
+of the [Service Mesh Interface](https://smi-spec.io/). This allows us to do
+failure injection in a way that is implementation agnostic and works across
+service meshes.
 
 We do this by first deploying a new service that returns only errors. This can
 be as simple as an NGINX service that is configured to return HTTP 500 responses
@@ -107,9 +107,9 @@ spec:
         - name: nginx
           image: nginx:alpine
           ports:
-          - containerPort: 80
-            name: nginx
-            protocol: TCP
+            - containerPort: 80
+              name: nginx
+              protocol: TCP
           volumeMounts:
             - name: nginx-config
               mountPath: /etc/nginx/nginx.conf
@@ -128,17 +128,17 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - name: service
-    port: 7002
-    protocol: TCP
-    targetPort: nginx
+    - name: service
+      port: 7002
+      protocol: TCP
+      targetPort: nginx
   selector:
     app: error-injector
   type: ClusterIP
 ---
 apiVersion: v1
 data:
- nginx.conf: |2
+  nginx.conf: |2
 
     events {
         worker_connections  1024;
@@ -173,10 +173,10 @@ metadata:
 spec:
   service: books
   backends:
-  - service: books
-    weight: 900m
-  - service: error-injector
-    weight: 100m
+    - service: books
+      weight: 900m
+    - service: error-injector
+      weight: 100m
 ```
 
 And deploy it:
@@ -200,7 +200,7 @@ We can also see how gracefully the application handles these failures:
 > open http://localhost:7000
 ```
 
-Not very well, it seems!  If we refresh the page a few times, we will sometimes
+Not very well, it seems! If we refresh the page a few times, we will sometimes
 see an internal server error page.
 
 ![Webpage displaying internal server error](cover.png)
@@ -224,13 +224,13 @@ SMI APIs, and without changing any application code.
 Of course, failure injection is a broad topic, and there are many more
 sophisticated approaches to injecting failure, including failing certain routes,
 failing only requests that match a certain conditions, or propagating a single
-"poison pill" request through an entire application topology. These  types of
+"poison pill" request through an entire application topology. These types of
 failure injection will require more machinery than what is covered in this post.
 
-Linkerd is a community project and is hosted by the [Cloud Native Computing
-Foundation](https://cncf.io/). If you have feature requests, questions, or
-comments, we’d love to have you join our rapidly-growing community! Linkerd is
-hosted on [GitHub](https://github.com/linkerd/), and we have a thriving
-community on [Slack](https://slack.linkerd.io),
-[Twitter](https://twitter.com/linkerd), and the [mailing
-lists](/community/get-involved/). Come and join the fun!
+Linkerd is a community project and is hosted by the
+[Cloud Native Computing Foundation](https://cncf.io/). If you have feature
+requests, questions, or comments, we’d love to have you join our rapidly-growing
+community! Linkerd is hosted on [GitHub](https://github.com/linkerd/), and we
+have a thriving community on [Slack](https://slack.linkerd.io),
+[Twitter](https://twitter.com/linkerd), and the
+[mailing lists](/community/get-involved/). Come and join the fun!

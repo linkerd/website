@@ -93,7 +93,6 @@ routes, fixes a race conditions around EndpointSlice updates, and fixes
 intermittent routing failures with HTTPRoute ([issue 12610]).
 
 [`edge-24.5.5`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.5
-[Nico Feulner]: https://github.com/nico151999
 [issue 12610]: https://github.com/linkerd/linkerd2/issues/12610
 
 ### [`edge-24.5.3`](https://github.com/linkerd/linkerd2/releases/tag/edge-24.5.3) (May 15, 2024)
@@ -139,8 +138,6 @@ the code (thanks, [knowmost]!).
 [issue #12395]: https://github.com/linkerd/linkerd2/issues/12395
 [`edge-24.3.4`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.3.4
 [`edge-24.1.2`]: https://github.com/linkerd/linkerd2/releases/tag/edge-24.1.2
-[Marwan Ahmed]: https://github.com/marwanad
-[knowmost]: https://github.com/knowmost
 
 ## Installing the latest edge release
 
@@ -150,8 +147,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also
-[install edge releases with Helm](/2.15/tasks/install-helm/).
+You can also [install edge releases with Helm](/2.15/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

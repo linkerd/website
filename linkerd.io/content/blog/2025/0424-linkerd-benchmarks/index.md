@@ -52,8 +52,8 @@ maximum latency.
 I would like to highlight that the traffic was North-South, as reflected in the
 test results, where the latencies are marginally higher than the 2021 benchmark.
 These results are relative and depend on the service meshes, the application,
-and the test environment. The raw test results are, of course, available
-[here](https://docs.google.com/spreadsheets/d/1z1g_rBDm8Hyhx8IlzGYjzt1Umoc5Jm4DLjhxM0TXaXY/).
+and the test environment. The raw test results are, of course,
+[available here](https://docs.google.com/spreadsheets/d/1z1g_rBDm8Hyhx8IlzGYjzt1Umoc5Jm4DLjhxM0TXaXY/).
 
 ## 20 RPS: No surprises
 
@@ -91,11 +91,10 @@ since 2021, differences still exist, especially under higher loads, and when it
 comes to production use cases, that matters.
 
 Linkerd consistently showed better performance, especially at 200 and 2000 RPS,
-even outperforming Ambient in some cases. While Ambient showed strong performance,
-Linkerd maintained a lead.
-As shown in the results above, the performance gap has narrowed compared to
-2021, making additional features—such as
-[Multi-cluster Federated Services](/2/tasks/federated-services/),
+even outperforming Ambient in some cases. While Ambient showed strong
+performance, Linkerd maintained a lead. As shown in the results above, the
+performance gap has narrowed compared to 2021, making additional features—such
+as [Multi-cluster Federated Services](/2/tasks/federated-services/),
 [FIPS compliance](https://www.buoyant.io/linkerd-enterprise), and the upcoming
 Windows support in Linkerd’s case—increasingly important for gaining an
 advantage over other service meshes.
@@ -104,7 +103,7 @@ Today is a great time to start your service mesh journey, and Linkerd offers a
 strong choice for those prioritizing performance and advanced features.
 
 [^1]:
-    https://www.businessresearchinsights.com/market-reports/service-mesh-market-100139
+    <https://www.businessresearchinsights.com/market-reports/service-mesh-market-100139>
 
 [^2]:
-    https://www.cncf.io/blog/2022/05/17/service-meshes-are-on-the-rise-but-greater-understanding-and-experience-are-required/
+    <https://www.cncf.io/blog/2022/05/17/service-meshes-are-on-the-rise-but-greater-understanding-and-experience-are-required/>

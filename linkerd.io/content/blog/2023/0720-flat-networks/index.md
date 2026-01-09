@@ -45,10 +45,9 @@ boundaries that is:
 
 Linkerd has supported multi-cluster Kubernetes deployments since the release of
 Linkerd 2.8 in 2020. That release introduced
-[a simple and elegant design](/2/features/multicluster/)
-that involves the addition of a service mirror component to handle service
-discovery, and a multi-cluster gateway component to handle traffic from other
-clusters.
+[a simple and elegant design](/2/features/multicluster/) that involves the
+addition of a service mirror component to handle service discovery, and a
+multi-cluster gateway component to handle traffic from other clusters.
 
 This gateway design allowed Linkerd's multi-cluster support to be entirely
 independent of underlying network topology. Whether your clusters are colocated

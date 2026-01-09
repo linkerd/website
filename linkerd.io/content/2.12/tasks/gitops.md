@@ -22,7 +22,7 @@ the [auto proxy injection](../features/proxy-injection/) feature into your
 workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
 version following a GitOps workflow.
 
-![Linkerd GitOps workflow](/docs/images/gitops/architecture.png "Linkerd GitOps workflow")
+![Linkerd GitOps workflow](/docs/images/gitops/architecture.png 'Linkerd GitOps workflow')
 
 The software and tools used in this guide are selected for demonstration
 purposes only. Feel free to choose others that are most suited for your
@@ -33,9 +33,9 @@ You will need to clone this
 machine and replicate it in your Kubernetes cluster following the steps defined
 in the next section.
 
-This guide uses the [step cli](https://smallstep.com/cli/) to create certificates
-used by the Linkerd clusters to enforce mTLS, so make sure you have installed
-step for your environment.
+This guide uses the [step cli](https://smallstep.com/cli/) to create
+certificates used by the Linkerd clusters to enforce mTLS, so make sure you have
+installed step for your environment.
 
 ## Set up the repositories
 
@@ -58,9 +58,11 @@ git remote add git-server git://localhost/linkerd-examples.git
 ```
 
 {{< note >}}
+
 To simplify the steps in this guide, we will be interacting with the in-cluster
 Git server via port-forwarding. Hence, the remote endpoint that we just created
 targets your localhost.
+
 {{< /note >}}
 
 Deploy the Git server to the `scm` namespace in your cluster:
@@ -73,10 +75,12 @@ Later in this guide, Argo CD will be configured to watch the repositories hosted
 by this Git server.
 
 {{< note >}}
+
 This Git server is configured to run as a
 [daemon](https://git-scm.com/book/en/v2/Git-on-the-Server-Git-Daemon) over the
 `git` protocol, with unauthenticated access to the Git data. This setup is not
 recommended for production use.
+
 {{< /note >}}
 
 Confirm that the Git server is healthy:
@@ -100,8 +104,8 @@ Confirm that the remote repository is successfully cloned:
 kubectl -n scm exec "${git_server}" -- ls -al /git/linkerd-examples.git
 ```
 
-Confirm that you can push from the local repository to the remote repository
-via port-forwarding:
+Confirm that you can push from the local repository to the remote repository via
+port-forwarding:
 
 ```sh
 kubectl -n scm port-forward "${git_server}" 9418  &
@@ -180,7 +184,7 @@ argocd proj get demo
 
 On the dashboard:
 
-![New project in Argo CD dashboard](/docs/images/gitops/dashboard-project.png "New project in Argo CD dashboard")
+![New project in Argo CD dashboard](/docs/images/gitops/dashboard-project.png 'New project in Argo CD dashboard')
 
 ### Deploy the applications
 
@@ -192,9 +196,11 @@ kubectl apply -f gitops/main.yaml
 ```
 
 {{< note >}}
+
 The "app of apps" pattern is commonly used in Argo CD workflows to bootstrap
 applications. See the Argo CD documentation for more
 [information](https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/#app-of-apps-pattern).
+
 {{< /note >}}
 
 Confirm that the `main` application is deployed successfully:
@@ -209,7 +215,7 @@ Sync the `main` application:
 argocd app sync main
 ```
 
-![Synchronize the main application](/docs/images/gitops/dashboard-applications-main-sync.png "Synchronize the main application")
+![Synchronize the main application](/docs/images/gitops/dashboard-applications-main-sync.png 'Synchronize the main application')
 
 Notice that only the `main` application is synchronized.
 
@@ -231,7 +237,7 @@ for deploy in "cert-manager" "cert-manager-cainjector" "cert-manager-webhook"; \
 done
 ```
 
-![Synchronize the cert-manager application](/docs/images/gitops/dashboard-cert-manager-sync.png "Synchronize the cert-manager application")
+![Synchronize the cert-manager application](/docs/images/gitops/dashboard-cert-manager-sync.png 'Synchronize the cert-manager application')
 
 ### Deploy Sealed Secrets
 
@@ -247,7 +253,7 @@ Confirm that sealed-secrets is running:
 kubectl -n kube-system rollout status deploy/sealed-secrets
 ```
 
-![Synchronize the sealed-secrets application](/docs/images/gitops/dashboard-sealed-secrets-sync.png "Synchronize the sealed-secrets application")
+![Synchronize the sealed-secrets application](/docs/images/gitops/dashboard-sealed-secrets-sync.png 'Synchronize the sealed-secrets application')
 
 ### Create mTLS trust anchor
 
@@ -273,8 +279,8 @@ step certificate inspect sample-trust.crt
 ```
 
 Before creating the `SealedSecret`, make sure you have installed the `kubeseal`
-utility, as instructed
-[here](https://github.com/bitnami-labs/sealed-secrets/releases)
+utility, as
+[instructed here](https://github.com/bitnami-labs/sealed-secrets/releases)
 
 Now create the `SealedSecret` resource to store the encrypted trust anchor:
 
@@ -328,18 +334,21 @@ argocd app sync linkerd-bootstrap
 ```
 
 {{< note >}}
+
 If the issuer and certificate resources appear in a degraded state, it's likely
 that the SealedSecrets controller failed to decrypt the sealed
-`linkerd-trust-anchor` secret. Check the SealedSecrets controller for error logs.
+`linkerd-trust-anchor` secret. Check the SealedSecrets controller for error
+logs.
 
 For debugging purposes, the sealed resource can be retrieved using the
 `kubectl -n linkerd get sealedsecrets linkerd-trust-anchor -oyaml` command.
 Ensure that this resource matches the
 `gitops/resources/linkerd/trust-anchor.yaml` file you pushed to the in-cluster
 Git server earlier.
+
 {{< /note >}}
 
-![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png "Synchronize the linkerd-bootstrap application")
+![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png 'Synchronize the linkerd-bootstrap application')
 
 SealedSecrets should have created a secret containing the decrypted trust
 anchor. Retrieve the decrypted trust anchor from the secret:
@@ -371,7 +380,7 @@ argocd app get linkerd-control-plane -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-![Empty default trust anchor](/docs/images/gitops/dashboard-trust-anchor-empty.png "Empty default trust anchor")
+![Empty default trust anchor](/docs/images/gitops/dashboard-trust-anchor-empty.png 'Empty default trust anchor')
 
 We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
@@ -383,12 +392,12 @@ of `${trust_anchor}`.
 Ensure that the multi-line string is indented correctly. E.g.,
 
 ```yaml
-  source:
-    chart: linkerd-control-plane
-    repoURL: https://helm.linkerd.io/stable
-    targetRevision: 1.9.0
-    helm:
-      parameters:
+source:
+  chart: linkerd-control-plane
+  repoURL: https://helm.linkerd.io/stable
+  targetRevision: 1.9.0
+  helm:
+    parameters:
       - name: identityTrustAnchorsPEM
         value: |
           -----BEGIN CERTIFICATE-----
@@ -433,7 +442,7 @@ argocd app get linkerd-control-plane -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-![Override mTLS trust anchor](/docs/images/gitops/dashboard-trust-anchor-override.png "Override mTLS trust anchor")
+![Override mTLS trust anchor](/docs/images/gitops/dashboard-trust-anchor-override.png 'Override mTLS trust anchor')
 
 Synchronize the `linkerd-crds` and `linkerd-control-plane` applications:
 
@@ -448,7 +457,7 @@ Check that Linkerd is ready:
 linkerd check
 ```
 
-![Synchronize Linkerd](/docs/images/gitops/dashboard-linkerd-sync.png "Synchronize Linkerd")
+![Synchronize Linkerd](/docs/images/gitops/dashboard-linkerd-sync.png 'Synchronize Linkerd')
 
 ### Test with emojivoto
 
@@ -466,7 +475,7 @@ for deploy in "emoji" "vote-bot" "voting" "web" ; \
 done
 ```
 
-![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png "Synchronize emojivoto")
+![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png 'Synchronize emojivoto')
 
 ### Upgrade Linkerd to 2.12.1
 

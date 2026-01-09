@@ -3,8 +3,6 @@ title: Releases and Versions
 type: docs
 ---
 
-<!-- markdownlint-disable MD034 -->
-
 Linkerd publishes and announces _versions_ that correspond to specific project
 milestones and sets of new features. These versions are available in different
 types of _release artifacts_.
@@ -17,12 +15,13 @@ types of _release artifacts_.
 
 ### Edge releases
 
+<!-- markdownlint-disable MD034 -->
 Edge release artifacts are published on a weekly or near-weekly basis as part of
-the open source project. The latest edge release is [{{< latest-edge-version
->}}](https://github.com/linkerd/linkerd2/releases/tag/{{<
-latest-edge-version >}}). and the full list of edge release artifacts can be
-found on
+the open source project. The latest edge release is [{{% latest-edge-version
+%}}](https://github.com/linkerd/linkerd2/releases/tag/{{% latest-edge-version
+%}}). and the full list of edge release artifacts can be found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
+<!-- markdownlint-enable MD034 -->
 
 Edge release artifacts contain the code in from the _main_ branch at the point
 in time when they were cut. This means they always have the latest features and

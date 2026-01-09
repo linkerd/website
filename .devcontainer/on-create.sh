@@ -14,7 +14,7 @@ scurl https://htmltest.wjdp.uk | bash
 sudo mv bin/htmltest /usr/local/bin
 
 # markdownlint
-sudo npm install -g markdownlint-cli@0.26.0
+sudo npm install -g markdownlint-cli@0.39.0
 
 # gcloud
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
