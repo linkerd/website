@@ -83,7 +83,7 @@ chart in the `grafana` namespace, you can install Linkerd Viz through the
 command line like so:
 
 ```bash
-linkerd viz install --set grafana.url=grafana.grafana:3000 \
+linkerd viz install --set grafana.url=grafana.grafana \
   | kubectl apply -f -
 ```
 
