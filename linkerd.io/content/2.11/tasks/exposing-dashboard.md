@@ -232,7 +232,7 @@ spec:
             - -linkerd-controller-api-addr=linkerd-controller-api.linkerd.svc.cluster.local:8085
             - -linkerd-metrics-api-addr=metrics-api.linkerd-viz.svc.cluster.local:8085
             - -cluster-domain=cluster.local
-            - -grafana-addr=grafana.linkerd-viz.svc.cluster.local:3000
+            - -grafana-addr=grafana.grafana
             - -controller-namespace=linkerd
             - -viz-namespace=linkerd-viz
             - -log-level=info
