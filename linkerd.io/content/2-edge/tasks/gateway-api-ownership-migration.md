@@ -42,7 +42,7 @@ externally provided CRDs _before_ upgrading to Linkerd 2.18:
 
 ```bash
 kubectl apply -f \
-    https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+    https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
 ```
 
 Next, run the usual upgrade command:
@@ -82,7 +82,7 @@ Next, overwrite Linkerd’s CRDs with the externally managed ones:
 
 ```bash
 kubectl apply -f \
-    https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+    https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
 ```
 
 For all subsequent configuration updates or chart upgrades, use
