@@ -36,8 +36,7 @@ against the compatibility table:
 | Linkerd versions | Gateway API version compatibility | HTTPRoute version | gRPC version |
 | ---------------- | --------------------------------- | ----------------- | ------------ |
 | 2.15 - 2.17      | 0.7 - 1.1.1                       | v1beta1           | v1alpha2     |
-| 2.18             | 1.1.1 - 1.2.1                     | v1                | v1           |
-| 2.19             | 1.1.1 - 1.4.0                     | v1                | v1           |
+| 2.18 - 2.19      | 1.1.1 - 1.2.1                     | v1                | v1           |
 
 {{< note >}}
 
@@ -64,7 +63,7 @@ by following the
 which is often as simple as:
 
 ```bash
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
 ```
 
 ## Note: Precursors to Gateway API-based configuration
