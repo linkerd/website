@@ -12,7 +12,7 @@ for a full list of all the possible checks, what they do and how to fix them.
 ## Example output
 
 ```bash
-$ linkerd check
+linkerd check
 kubernetes-api
 --------------
 √ can initialize the client
