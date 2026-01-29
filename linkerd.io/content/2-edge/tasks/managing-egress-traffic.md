@@ -458,7 +458,7 @@ Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
-curl  http://httpbin.org/get
+curl http://httpbin.org/get
 {
   "args": {},
   "headers": {
