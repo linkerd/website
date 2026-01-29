@@ -260,7 +260,7 @@ kubectl --context=k3d-east exec curl-56dc7d945d-96r6p -it -c curl -- sh
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-/ curl nginx-set-0.nginx-svc-k3d-west.default.svc.east.cluster.local
+curl nginx-set-0.nginx-svc-k3d-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>
