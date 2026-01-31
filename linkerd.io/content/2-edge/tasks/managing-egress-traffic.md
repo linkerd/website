@@ -472,7 +472,7 @@ curl http://httpbin.org/get
 }
 
 # encrypted traffic can target all paths and hosts
-curl  https://httpbin.org/ip
+curl https://httpbin.org/ip
 {
   "origin": "51.116.126.217"
 }
