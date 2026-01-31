@@ -164,7 +164,7 @@ Alternatively, if you want to inspect the iptables rules created for a pod, you
 can retrieve them through the following command:
 
 ```bash
-kubectl -n <namesppace> logs <pod-name> linkerd-init
+$ kubectl -n <namespace> logs <pod-name> linkerd-init
 # where <pod-name> is the name of the pod
 # you want to see the iptables rules for
 ```

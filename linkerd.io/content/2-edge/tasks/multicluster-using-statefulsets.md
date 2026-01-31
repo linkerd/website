@@ -220,7 +220,7 @@ export the service.
 $ kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
 service/nginx-svc labeled
 
-kubectl --context=k3d-east get services
+$ kubectl --context=k3d-east get services
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 kubernetes         ClusterIP   10.43.0.1       <none>        443/TCP   20h
 nginx-svc-west     ClusterIP   None            <none>        80/TCP    29s
