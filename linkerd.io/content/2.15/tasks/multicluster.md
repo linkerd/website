@@ -175,7 +175,7 @@ running:
 ```bash
 for ctx in west east; do
   echo "Checking gateway on cluster: ${ctx} ........."
-    
+  kubectl --context=${ctx} -n linkerd-multicluster \
     rollout status deploy/linkerd-gateway || break
   echo "-------------"
 done

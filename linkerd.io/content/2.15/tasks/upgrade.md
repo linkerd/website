@@ -379,7 +379,7 @@ Find the release name you used for the `linkerd2` chart, and the namespace where
 this release stored its config:
 
 ```bash
-helm ls -A
+$ helm ls -A
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
 linkerd default         1               2021-11-22 17:14:50.751436374 -0500 -05 deployed        linkerd2-2.11.1 stable-2.11.1
 ```
@@ -412,18 +412,18 @@ the `linkerd-crds`, `linkerd-control-plane` and `linkerd-smi` charts:
 
 ```bash
 # First migrate the CRDs
-helm -n default get manifest linkerd | \
+$ helm -n default get manifest linkerd | \
   yq 'select(.kind == "CustomResourceDefinition") | .metadata.name' | \
   grep -v '\-\-\-' | \
   xargs -n1 sh -c \
   'kubectl annotate --overwrite crd/$0 meta.helm.sh/release-name=linkerd-crds meta.helm.sh/release-namespace=linkerd'
 
 # Special case for TrafficSplit (only use if you have TrafficSplit CRs)
-kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
+$ kubectl annotate --overwrite crd/trafficsplits.split.smi-spec.io \
   meta.helm.sh/release-name=linkerd-smi meta.helm.sh/release-namespace=linkerd-smi
 
 # Now migrate all the other resources
-helm -n default get manifest linkerd | \
+$ helm -n default get manifest linkerd | \
   yq 'select(.kind != "CustomResourceDefinition")' | \
   yq '.kind, .metadata.name, .metadata.namespace' | \
   grep -v '\-\-\-' |
@@ -437,14 +437,14 @@ above.
 
 ```bash
 # First make sure you update the helm repo
-helm repo up
+$ helm repo up
 
 # Install the linkerd-crds chart
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+$ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 
 # Install the linkerd-control-plane chart
 # (remember to add any customizations you retrieved above)
-helm install linkerd-control-plane \
+$ helm install linkerd-control-plane \
   -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \
@@ -452,8 +452,8 @@ helm install linkerd-control-plane \
   linkerd/linkerd-control-plane
 
 # Optional: if using TrafficSplit CRs
-helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
-helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 ##### Cleaning up the old linkerd2 Helm release
@@ -482,14 +482,14 @@ For example, for the viz extension:
 
 ```bash
 # update the helm repo
-helm repo up
+$ helm repo up
 
 # delete your current instance
 # (assuming you didn't use the -n flag when installing)
-helm delete linkerd-viz
+$ helm delete linkerd-viz
 
 # install the new chart version
-helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
+$ helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
 ##### Upgrading the multicluster extension with Helm
