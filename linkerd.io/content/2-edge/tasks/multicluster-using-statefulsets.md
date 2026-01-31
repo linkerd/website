@@ -185,7 +185,7 @@ If we now curl one of these instances, we will get back a response.
 
 ```sh
 # exec'd on the pod
-/ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
+curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
 "<!DOCTYPE html>
 <html>
 <head>
