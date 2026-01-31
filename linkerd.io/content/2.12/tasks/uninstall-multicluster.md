@@ -24,6 +24,7 @@ up correctly and are not left orphaned.
 To unlink, run the `linkerd multicluster unlink` command and pipe the output to
 `kubectl delete`:
 
+
 ```bash
 linkerd multicluster unlink --cluster-name=target | kubectl delete -f -
 ```

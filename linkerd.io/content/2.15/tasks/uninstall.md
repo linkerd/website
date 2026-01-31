@@ -21,13 +21,13 @@ To remove any extension, call its `uninstall` subcommand and pipe it to
 
 ```bash
 # To remove Linkerd Viz
-linkerd viz uninstall | kubectl delete -f -
+$ linkerd viz uninstall | kubectl delete -f -
 
 # To remove Linkerd Jaeger
-linkerd jaeger uninstall | kubectl delete -f -
+$ linkerd jaeger uninstall | kubectl delete -f -
 
 # To remove Linkerd Multicluster
-linkerd multicluster uninstall | kubectl delete -f -
+$ linkerd multicluster uninstall | kubectl delete -f -
 ```
 
 ## Removing the control plane

@@ -54,7 +54,7 @@ kubectl auth can-i watch deployments.tap.linkerd.io -n emojivoto --as $(whoami)
 You can also use the Linkerd CLI's `--as` flag to confirm:
 
 ```bash
-linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
+$ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
 Cannot connect to Linkerd Viz: namespaces is forbidden: User "XXXX" cannot list resource "namespaces" in API group "" at the cluster scope
 Validate the install with: linkerd viz check
 ...
@@ -71,7 +71,7 @@ To enable tap access to all resources in all namespaces, you may bind your user
 to the `linkerd-linkerd-tap-admin` ClusterRole, installed by default:
 
 ```bash
-kubectl describe clusterroles/linkerd-linkerd-viz-tap-admin
+$ kubectl describe clusterroles/linkerd-linkerd-viz-tap-admin
 Name:         linkerd-linkerd-viz-tap-admin
 Labels:       component=tap
               linkerd.io/extension=viz
@@ -103,7 +103,7 @@ kubectl create clusterrolebinding \
 You can verify you now have tap access with:
 
 ```bash
-linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
+$ linkerd viz tap -n linkerd deploy/linkerd-controller --as $(whoami)
 req id=3:0 proxy=in  src=10.244.0.1:37392 dst=10.244.0.13:9996 tls=not_provided_by_remote :method=GET :authority=10.244.0.13:9996 :path=/ping
 ...
 ```
@@ -137,14 +137,14 @@ Because GCloud provides this additional level of access, there are cases where
 not. To validate this, check whether your GCloud user has Tap access:
 
 ```bash
-kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces
 yes
 ```
 
 And then validate whether your RBAC user has Tap access:
 
 ```bash
-kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as $(gcloud config get-value account)
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as $(gcloud config get-value account)
 no - no RBAC policy matched
 ```
 
@@ -181,14 +181,14 @@ privileges necessary to tap resources.
 To confirm:
 
 ```bash
-kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
 yes
 ```
 
 This access is enabled via a `linkerd-linkerd-viz-web-admin` ClusterRoleBinding:
 
 ```bash
-kubectl describe clusterrolebindings/linkerd-linkerd-viz-web-admin
+$ kubectl describe clusterrolebindings/linkerd-linkerd-viz-web-admin
 Name:         linkerd-linkerd-viz-web-admin
 Labels:       component=web
               linkerd.io/extensions=viz
