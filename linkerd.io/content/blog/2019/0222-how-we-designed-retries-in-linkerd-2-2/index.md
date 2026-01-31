@@ -164,7 +164,7 @@ One thing that we can notice about this application is that the success rate of
 requests from the books service to the authors service is very poor:
 
 ```bash
-linkerd routes deploy/books --to svc/authors
+$ linkerd routes deploy/books --to svc/authors
 ROUTE       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [DEFAULT]   authors    54.24%   3.9rps           5ms          14ms          19ms
 ```
@@ -173,8 +173,8 @@ To get a better picture of what’s going on here, let’s add a service profile
 the authors service, generated from a Swagger definition:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/authors.swagger | linkerd profile --open-api - authors | kubectl apply -f  -
-linkerd routes deploy/books --to svc/authors
+$ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp/authors.swagger | linkerd profile --open-api - authors | kubectl apply -f  -
+$ linkerd routes deploy/books --to svc/authors
 ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /authors/{id}.json   authors     0.00%   0.0rps           0ms           0ms           0ms
 GET /authors.json           authors     0.00%   0.0rps           0ms           0ms           0ms
@@ -190,7 +190,7 @@ time. To correct this, let’s edit the authors service profile and make those
 requests retryable:
 
 ```bash
-kubectl edit sp/authors.default.svc.cluster.local
+$ kubectl edit sp/authors.default.svc.cluster.local
 [...]
   - condition:
       method: HEAD
@@ -203,7 +203,7 @@ After editing the service profile, we see a nearly immediate improvement in
 success rate:
 
 ```bash
-linkerd routes deploy/books --to svc/authors -o wide
+$ linkerd routes deploy/books --to svc/authors -o wide
 ROUTE                       SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /authors/{id}.json   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
 GET /authors.json           authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
@@ -221,7 +221,7 @@ the purposes of this demo, I’ll set a timeout of 25ms. Your results will vary
 depending on the characteristics of your system.
 
 ```bash
-kubectl edit sp/authors.default.svc.cluster.local
+$ kubectl edit sp/authors.default.svc.cluster.local
 [...]
   - condition:
       method: HEAD
@@ -235,7 +235,7 @@ We now see that success rate has come down slightly because some requests are
 timing out, but that the tail latency has been greatly reduced:
 
 ```bash
-linkerd routes deploy/books --to svc/authors -o wide
+$ linkerd routes deploy/books --to svc/authors -o wide
 ROUTE                       SERVICE   EFFECTIVE_SUCCESS   EFFECTIVE_RPS   ACTUAL_SUCCESS   ACTUAL_RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /authors/{id}.json   authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms
 GET /authors.json           authors               0.00%          0.0rps            0.00%       0.0rps           0ms           0ms           0ms

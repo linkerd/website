@@ -91,7 +91,7 @@ static content. The latencies given are in milliseconds, and we report the min,
 p50, p95, p99, p999, and max latencies seen during this 10 second interval.
 
 ```txt
-./slow_cooker_linux_amd64 -url http://target:4140 -qps 50 -concurrency 10 http://perf-target-2:8080
+$ ./slow_cooker_linux_amd64 -url http://target:4140 -qps 50 -concurrency 10 http://perf-target-2:8080
     # sending 500 req/s with concurrency=10 to http://perf-target-2:8080 ...
     #                      good/b/f t     good%   min [p50 p95 p99  p999]  max change
     2016-10-12T20:34:20Z   4990/0/0 5000  99% 10s   0 [  1   3   4    9 ]    9
@@ -120,7 +120,7 @@ latency. In the example below, we have a backend server suffering from a
 catastrophic slow down:
 
 ```txt
-./slow_cooker_linux_amd64 -totalRequests 100000 -qps 5 -concurrency 100 http://perf-target-1:8080
+$ ./slow_cooker_linux_amd64 -totalRequests 100000 -qps 5 -concurrency 100 http://perf-target-1:8080
     # sending 500 req/s with concurrency=10 to http://perf-target-2:8080 ...
     #                      good/b/f t     good%   min [p50 p95 p99  p999]  max change
     2016-11-14T20:58:13Z   4900/0/0 5000  98% 10s   0 [  1   2   6    8 ]    8 +
@@ -165,7 +165,7 @@ For comparison, let’s start with
 a [ApacheBench](http://httpd.apache.org/docs/2.4/programs/ab.html)’s report:
 
 ```txt
-ab -n 100000 -c 10 http://perf-target-1:8080/
+$ ab -n 100000 -c 10 http://perf-target-1:8080/
     This is ApacheBench, Version 2.3
     Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
     Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -232,7 +232,7 @@ becomes much more clear that the 99.9th percentile is consistently high; this is
 not just a few outliers, but a persistent and ongoing problem:
 
 ```txt
-./slow_cooker_linux_amd64 -totalRequests 20000 -qps 50 -concurrency 10 http://perf-target-2:8080
+$ ./slow_cooker_linux_amd64 -totalRequests 20000 -qps 50 -concurrency 10 http://perf-target-2:8080
     # sending 500 req/s with concurrency=10 to http://perf-target-2:8080 ...
     #                      good/b/f t    good%    min [p50 p95 p99  p999]  max change
     2016-12-07T19:05:37Z   2510/0/0 5000  50% 10s   0 [  0   0   2 4995 ] 4994 +

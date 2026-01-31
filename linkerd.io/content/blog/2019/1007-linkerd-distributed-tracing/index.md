@@ -82,7 +82,7 @@ on your cluster. If you don't, you can follow the
 instructions.
 
 ```bash
-linkerd version
+$ linkerd version
 Client version: stable-2.6
 Server version: stable-2.6
 ```
