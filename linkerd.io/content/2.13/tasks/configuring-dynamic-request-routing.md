@@ -148,7 +148,7 @@ $ curl -sX POST localhost:9898/echo \
 PODINFO_UI_MESSAGE=A backend
 ```
 
-But if we add the `x-request-id: alternative` header, they get routed to
+But if we add the "`x-request-id: alternative`" header they get routed to
 `backend-b-podinfo`:
 
 ```bash

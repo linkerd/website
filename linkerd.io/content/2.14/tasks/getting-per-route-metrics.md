@@ -80,7 +80,7 @@ If you're not seeing any metrics, there are two likely culprits. In both cases,
 the service points to, run:
 
 ```bash
-$ linkerd viz tap deploy/webapp -o wide | grep req
+linkerd viz tap deploy/webapp -o wide | grep req
 ```
 
 A sample output is:

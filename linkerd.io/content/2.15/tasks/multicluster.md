@@ -120,7 +120,7 @@ And then Linkerd Viz:
 
 ```bash
 for ctx in west east; do
-    linkerd --context=${ctx} viz install | \
+  linkerd --context=${ctx} viz install | \
     kubectl --context=${ctx} apply -f - || break
 done
 ```
@@ -155,7 +155,7 @@ To install the multicluster components on both `west` and `east`, you can run:
 ```bash
 for ctx in west east; do
   echo "Installing on cluster: ${ctx} ........."
-    linkerd --context=${ctx} multicluster install | \
+  linkerd --context=${ctx} multicluster install | \
     kubectl --context=${ctx} apply -f - || break
   echo "-------------"
 done
@@ -175,7 +175,7 @@ running:
 ```bash
 for ctx in west east; do
   echo "Checking gateway on cluster: ${ctx} ........."
-    kubectl --context=${ctx} -n linkerd-multicluster \
+    
     rollout status deploy/linkerd-gateway || break
   echo "-------------"
 done

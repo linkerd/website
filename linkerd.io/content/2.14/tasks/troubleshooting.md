@@ -1143,7 +1143,7 @@ Example error:
 Ensure that the cluster role exists:
 
 ```bash
-kubectl get clusterrole linkerd-cni
+$ kubectl get clusterrole linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1168,7 +1168,7 @@ Example error:
 Ensure that the cluster role binding exists:
 
 ```bash
-kubectl get clusterrolebinding linkerd-cni
+$ kubectl get clusterrolebinding linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1253,7 +1253,7 @@ linkerd-cni-p5670   1/1     Running   0          9m25s
 Ensure that all pods have finished the deployment of the CNI config and binary:
 
 ```bash
-kubectl logs linkerd-cni-rzp2q -n linkerd-cni
+$ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
 Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true
@@ -1393,7 +1393,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1555,7 +1555,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -2023,7 +2023,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -2194,7 +2194,7 @@ linkerd-buoyant install | kubectl apply -f -
 `buoyant-cloud-agent` should run as a singleton. Check for other pods:
 
 ```bash
-$ kubectl get po -A --selector app=buoyant-cloud-agent
+kubectl get po -A --selector app=buoyant-cloud-agent
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet exists
@@ -2208,7 +2208,7 @@ $ kubectl get po -A --selector app=buoyant-cloud-agent
 Ensure the `buoyant-cloud-metrics` DaemonSet exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
 ```
 
 If the DaemonSet does not exist, the `linkerd-buoyant` installation may be
