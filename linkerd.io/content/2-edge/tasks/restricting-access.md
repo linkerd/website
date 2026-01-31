@@ -35,7 +35,7 @@ Linkerd custom resource which describes a specific port of a workload. Once the
 access it (we'll see how to authorize clients in a moment).
 
 ```bash
-kubectl apply -f - <<EOF
+$ kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
@@ -84,7 +84,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 based on `ServiceAccounts`.
 
 ```bash
-kubectl apply -f - <<EOF
+$ kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
@@ -112,7 +112,7 @@ the `linkerd viz auth` command queries over a time-window, you may see some
 UNAUTHORIZED requests displayed for a short amount of time.
 
 ```bash
-> linkerd viz authz -n emojivoto deploy/voting
+$ linkerd viz authz -n emojivoto deploy/voting
 ROUTE    SERVER                       AUTHORIZATION                    UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
 default  default:all-unauthenticated  default/all-unauthenticated            0.0rps  100.00%  0.1rps          1ms          1ms          1ms
 probe    default:all-unauthenticated  default/probe                          0.0rps  100.00%  0.2rps          1ms          1ms          1ms
@@ -123,7 +123,7 @@ We can also test that request from other pods will be rejected by creating a
 `grpcurl` pod and attempting to access the Voting service from it:
 
 ```bash
-> kubectl run grpcurl --rm -it --image=networld/grpcurl --restart=Never --command -- ./grpcurl -plaintext voting-svc.emojivoto:8080 emojivoto.v1.VotingService/VoteDog
+$ kubectl run grpcurl --rm -it --image=networld/grpcurl --restart=Never --command -- ./grpcurl -plaintext voting-svc.emojivoto:8080 emojivoto.v1.VotingService/VoteDog
 Error invoking method "emojivoto.v1.VotingService/VoteDog": failed to query for service descriptor "emojivoto.v1.VotingService": rpc error: code = PermissionDenied desc =
 pod "grpcurl" deleted
 pod default/grpcurl terminated (Error)
@@ -153,7 +153,7 @@ following logic when deciding whether to allow a request:
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 ```bash
-> linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
+$ linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
 ```
 
 Alternatively, default policies can be set on individual workloads or namespaces
