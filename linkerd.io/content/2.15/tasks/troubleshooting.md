@@ -1241,7 +1241,7 @@ linkerd-cni   1         1         1       1            1           beta.kubernet
 Also ensure you have permission to create DaemonSets:
 
 ```bash
-kubectl auth can-i create DaemonSets -n linkerd-cni
+$ kubectl auth can-i create DaemonSets -n linkerd-cni
 yes
 ```
 
@@ -1408,7 +1408,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1570,7 +1570,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1916,7 +1916,7 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the linkerd-jaeger pods are running with 2/2
 
 ```bash
-kubectl -n linkerd-jaeger get pods
+$ kubectl -n linkerd-jaeger get pods
 NAME                               READY   STATUS   RESTARTS   AGE
 jaeger-injector-548684d74b-bcq5h   2/2     Running   0          5s
 collector-69cc44dfbc-wqf6s         2/2     Running   0          5s
@@ -2038,7 +2038,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 

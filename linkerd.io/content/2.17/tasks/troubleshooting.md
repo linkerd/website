@@ -1433,7 +1433,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1470,34 +1470,6 @@ $ kubectl --all-namespaces get po --selector linkerd.io/control-plane-component=
 NAME                                  READY     STATUS    RESTARTS   AGE
 linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
 ```
-
-### √ extension is managing controllers {#l5d-multicluster-managed-controllers}
-
-Example error:
-
-```bash
-‼ extension is managing controllers
-            * using legacy service mirror controller for Link: target
-    see https://linkerd.io/2/checks/#l5d-multicluster-managed-controllers for hints
-```
-
-In Linkerd `2.18` we introduced a declarative, GitOps-compatible approach to
-establishing multicluster links. With this method, the controllers are
-integrated into the multicluster extension, allowing you to supply the Link CR
-and kubeconfig secrets manifests directly, without necessarily depending on the
-`linkerd multicluster link` command. This differs from earlier versions of
-Linkerd (pre-`v2.18`), where (in addition to the Link CR and secrets) controller
-manifests needed to be provided each time a new link was created, requiring the
-use of the `linkerd multicluster link` command — a process that was less suited
-to a GitOps workflow.
-
-This check ensures the linked clusters are using the new model. To migrate from
-the old model, update the multicluster extension, referring your links into the
-new `controllers` entry, as detailed in the
-[installing multicluster doc](installing-multicluster/#step-1-install-the-multicluster-control-plane).
-The new controllers will be deployed, but they won't manage the links until the
-old ones get deleted. Once the old ones are removed, the new controllers will
-grab the Lease object allowing them to take over service mirroring.
 
 ### √ all gateway mirrors are healthy {#l5d-multicluster-gateways-endpoints}
 
@@ -1623,7 +1595,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1789,12 +1761,12 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the prometheus related resources are present and running correctly.
 
 ```bash
-$ kubectl -n linkerd-viz get deploy,cm | grep prometheus
+❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
 deployment.apps/prometheus     1/1     1            1           3m18s
 configmap/prometheus-config   1      3m18s
-$ kubectl get clusterRoleBindings | grep prometheus
+❯ kubectl get clusterRoleBindings | grep prometheus
 linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-$ kubectl get clusterRoles | grep prometheus
+❯ kubectl get clusterRoles | grep prometheus
 linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
 ```
 
@@ -1969,7 +1941,7 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the linkerd-jaeger pods are running with 2/2
 
 ```bash
-kubectl -n linkerd-jaeger get pods
+$ kubectl -n linkerd-jaeger get pods
 NAME                               READY   STATUS   RESTARTS   AGE
 jaeger-injector-548684d74b-bcq5h   2/2     Running   0          5s
 collector-69cc44dfbc-wqf6s         2/2     Running   0          5s
@@ -2091,7 +2063,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -2175,14 +2147,14 @@ yes
 Ensure the `buoyant-cloud-agent` Deployment exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
 ```
 
 If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
@@ -2248,7 +2220,7 @@ Agent version: v0.4.4
 To update to the latest version:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running a single pod
@@ -2262,7 +2234,7 @@ $ linkerd-buoyant install | kubectl apply -f -
 `buoyant-cloud-agent` should run as a singleton. Check for other pods:
 
 ```bash
-$ kubectl get po -A --selector app=buoyant-cloud-agent
+kubectl get po -A --selector app=buoyant-cloud-agent
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet exists
@@ -2276,14 +2248,14 @@ $ kubectl get po -A --selector app=buoyant-cloud-agent
 Ensure the `buoyant-cloud-metrics` DaemonSet exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
 ```
 
 If the DaemonSet does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet is running

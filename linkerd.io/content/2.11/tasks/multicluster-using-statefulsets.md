@@ -71,9 +71,10 @@ west   1/1       0/0      true
 
 Once our clusters are created, we will install Linkerd and the multi-cluster
 extension. Finally, once both are installed, we need to link the two clusters
-together so their services may be mirrored. As before, these steps are automated
-through the provided scripts; please give them a look and see how the
-controllers and links are generated for both clusters.
+together so their services may be mirrored. To enable support for headless
+services, we will pass an additional `--set "enableHeadlessServices=true"` flag
+to `linkerd multicluster link`. As before, these steps are automated through the
+provided scripts, but feel free to have a look!
 
 ```sh
 # Install Linkerd and multicluster, output to check should be a success
@@ -178,7 +179,7 @@ nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
 $ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
-/$ prompt for curl pod
+/$ # prompt for curl pod
 ```
 
 If we now curl one of these instances, we will get back a response.
@@ -220,7 +221,7 @@ export the service.
 $ kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
 service/nginx-svc labeled
 
-kubectl --context=k3d-east get services
+$ kubectl --context=k3d-east get services
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 kubernetes         ClusterIP   10.43.0.1       <none>        443/TCP   20h
 nginx-svc-west     ClusterIP   None            <none>        80/TCP    29s
@@ -260,7 +261,7 @@ $ kubectl --context=k3d-east exec pod curl-56dc7d945d-96r6p -it -c curl -- bin/s
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-$ curl nginx-set-0.nginx-svc-k3d-west.default.svc.east.cluster.local
+$ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>

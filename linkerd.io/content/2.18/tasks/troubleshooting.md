@@ -1108,7 +1108,7 @@ extension binaries implement it. For more information, See
 Example error:
 
 ```bash
-invalid extension check output from \"viz\" (JSON object expected)
+invalid extension check output from \"jaeger\" (JSON object expected)
 ```
 
 Make sure that the extension binary implements `check --output json` which
@@ -1433,7 +1433,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1623,7 +1623,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1810,7 +1810,7 @@ Example failure:
 Verify that the metrics API pod is running correctly
 
 ```bash
-$ kubectl -n linkerd-viz get pods
+❯ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
 metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
 tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
@@ -2175,14 +2175,14 @@ yes
 Ensure the `buoyant-cloud-agent` Deployment exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
 ```
 
 If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
@@ -2248,7 +2248,7 @@ Agent version: v0.4.4
 To update to the latest version:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running a single pod
@@ -2262,7 +2262,7 @@ $ linkerd-buoyant install | kubectl apply -f -
 `buoyant-cloud-agent` should run as a singleton. Check for other pods:
 
 ```bash
-$ kubectl get po -A --selector app=buoyant-cloud-agent
+kubectl get po -A --selector app=buoyant-cloud-agent
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet exists
@@ -2276,14 +2276,14 @@ $ kubectl get po -A --selector app=buoyant-cloud-agent
 Ensure the `buoyant-cloud-metrics` DaemonSet exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
 ```
 
 If the DaemonSet does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet is running

@@ -1045,7 +1045,7 @@ Ensure the kube-system namespace has the
 `config.linkerd.io/admission-webhooks:disabled` label:
 
 ```bash
-kubectl get namespace kube-system -oyaml
+$ kubectl get namespace kube-system -oyaml
 kind: Namespace
 apiVersion: v1
 metadata:
@@ -1193,7 +1193,7 @@ Example error:
 Ensure that the CNI service account exists in the CNI namespace:
 
 ```bash
-kubectl get ServiceAccount linkerd-cni -n linkerd-cni
+$ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
 NAME          SECRETS   AGE
 linkerd-cni   1         45m
 ```
@@ -1201,7 +1201,7 @@ linkerd-cni   1         45m
 Also ensure you have permission to create ServiceAccount:
 
 ```bash
-kubectl auth can-i create ServiceAccounts -n linkerd-cni
+$ kubectl auth can-i create ServiceAccounts -n linkerd-cni
 yes
 ```
 
@@ -1218,7 +1218,7 @@ Example error:
 Ensure that the CNI daemonset exists in the CNI namespace:
 
 ```bash
-kubectl get ds -n linkerd-cni
+$ kubectl get ds -n linkerd-cni
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
 ```
@@ -1226,7 +1226,7 @@ linkerd-cni   1         1         1       1            1           beta.kubernet
 Also ensure you have permission to create DaemonSets:
 
 ```bash
-kubectl auth can-i create DaemonSets -n linkerd-cni
+$ kubectl auth can-i create DaemonSets -n linkerd-cni
 yes
 ```
 
@@ -1243,7 +1243,7 @@ Example failure:
 Ensure that all the CNI pods are running:
 
 ```bash
-kubectl get po -n linkerd-cni
+$ kubectl get po -n linkerd-cn
 NAME                READY   STATUS    RESTARTS   AGE
 linkerd-cni-rzp2q   1/1     Running   0          9m20s
 linkerd-cni-mf564   1/1     Running   0          9m22s
@@ -1253,7 +1253,7 @@ linkerd-cni-p5670   1/1     Running   0          9m25s
 Ensure that all pods have finished the deployment of the CNI config and binary:
 
 ```bash
-kubectl logs linkerd-cni-rzp2q -n linkerd-cni
+$ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
 Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true
@@ -1393,7 +1393,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1555,7 +1555,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -2023,7 +2023,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -2107,14 +2107,14 @@ yes
 Ensure the `buoyant-cloud-agent` Deployment exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
 ```
 
 If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
@@ -2180,7 +2180,7 @@ Agent version: v0.4.4
 To update to the latest version:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running a single pod
@@ -2194,7 +2194,7 @@ $ linkerd-buoyant install | kubectl apply -f -
 `buoyant-cloud-agent` should run as a singleton. Check for other pods:
 
 ```bash
-$ kubectl get po -A --selector app=buoyant-cloud-agent
+kubectl get po -A --selector app=buoyant-cloud-agent
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet exists
@@ -2208,14 +2208,14 @@ $ kubectl get po -A --selector app=buoyant-cloud-agent
 Ensure the `buoyant-cloud-metrics` DaemonSet exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
 ```
 
 If the DaemonSet does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet is running
