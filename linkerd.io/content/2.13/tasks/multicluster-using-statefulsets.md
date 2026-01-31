@@ -178,7 +178,7 @@ nginx-set-1             2/2     Running           0          4m58s
 nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
-$ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
+$ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- sh
 /# prompt for curl pod
 ```
 
@@ -186,7 +186,7 @@ If we now curl one of these instances, we will get back a response.
 
 ```sh
 # exec'd on the pod
-/ $ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
+$ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
 "<!DOCTYPE html>
 <html>
 <head>
@@ -221,7 +221,7 @@ export the service.
 $ kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
 service/nginx-svc labeled
 
-$ kubectl --context=k3d-east get services
+kubectl --context=k3d-east get services
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 kubernetes         ClusterIP   10.43.0.1       <none>        443/TCP   20h
 nginx-svc-west     ClusterIP   None            <none>        80/TCP    29s
@@ -235,7 +235,7 @@ endpoints for `nginx-svc-west` will have the same hostnames, but each hostname
 will point to one of the services we see above:
 
 ```sh
-$ kubectl --context=k3d-east get endpoints nginx-svc-west -o yaml
+$ kubectl --context=k3d-east get endpoints nginx-svc-k3d-west -o yaml
 subsets:
 - addresses:
   - hostname: nginx-set-0
@@ -261,7 +261,7 @@ $ kubectl --context=k3d-east exec pod curl-56dc7d945d-96r6p -it -c curl -- bin/s
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-/ $ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
+$ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>

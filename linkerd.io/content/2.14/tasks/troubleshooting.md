@@ -862,7 +862,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
@@ -1950,7 +1950,7 @@ Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl https://buoyant.cloud/version.json
+$ curl https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
@@ -2194,7 +2194,7 @@ linkerd-buoyant install | kubectl apply -f -
 `buoyant-cloud-agent` should run as a singleton. Check for other pods:
 
 ```bash
-kubectl get po -A --selector app=buoyant-cloud-agent
+$ kubectl get po -A --selector app=buoyant-cloud-agent
 ```
 
 ### √ buoyant-cloud-metrics DaemonSet exists
@@ -2208,7 +2208,7 @@ kubectl get po -A --selector app=buoyant-cloud-agent
 Ensure the `buoyant-cloud-metrics` DaemonSet exists:
 
 ```bash
-kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
+$ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics
 ```
 
 If the DaemonSet does not exist, the `linkerd-buoyant` installation may be

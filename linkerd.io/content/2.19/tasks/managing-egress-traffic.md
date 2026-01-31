@@ -77,7 +77,7 @@ In a separate shell, you can use the Linkerd diagnostics command to visualize
 the traffic.
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_http_route_request_statuses_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_http_route_request_statuses_total
 
 outbound_http_route_request_statuses_total{
   parent_group="policy.linkerd.io",
@@ -129,7 +129,7 @@ Hostname metrics can also be enabled cluster-wide through the values in
 
 ```bash
 # With a single value
-linkerd install --set proxy.metrics.hostnameLabels=true | kubectl apply -f -
+$ linkerd install --set proxy.metrics.hostnameLabels=true | kubectl apply -f -
 
 # Or ith a values.yaml file
 #
@@ -138,7 +138,7 @@ proxy:
   metrics:
     hostnameLabels: true
 
-linkerd install --values=values.yaml | kubectl apply -f -
+$ linkerd install --values=values.yaml | kubectl apply -f -
 ```
 
 {{< note >}}
@@ -235,7 +235,7 @@ Interestingly enough though, if we go back to our client shell and we try to
 initiate HTTPS traffic to the same service, it will not be allowed:
 
 ```bash
-curl -v https://httpbin.org/get
+$ curl -v https://httpbin.org/get
 curl: (35) TLS connect error: error:00000000:lib(0)::reason(0)
 ```
 
@@ -271,7 +271,7 @@ This fixes the problem and we can see HTTPS requests to the external service
 succeeding reflected in the metrics:
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_open_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_open_total
 
 outbound_tls_route_open_total{
   parent_group="policy.linkerd.io",
@@ -296,7 +296,7 @@ our client, we will see the proxy eagerly closing the connection because it is
 not forbidden by our current policy configuration:
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_close_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_close_total
 
 outbound_tls_route_close_total{
   parent_group="policy.linkerd.io",
@@ -458,7 +458,7 @@ Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
-curl  http://httpbin.org/get
+$ curl  https://httpbin.org/get
 {
   "args": {},
   "headers": {
@@ -472,14 +472,14 @@ curl  http://httpbin.org/get
 }
 
 # encrypted traffic can target all paths and hosts
-curl  https://httpbin.org/ip
+$ curl  https://httpbin.org/ip
 {
   "origin": "51.116.126.217"
 }
 
 
 # arbitrary unencrypted traffic goes to the internal service
-curl http://google.com
+$ curl https://google.com
 {
   "requestUID": "in:http-sid:terminus-grpc:-1-h1:80-190120723",
   "payload": "You cannot go there right now"}

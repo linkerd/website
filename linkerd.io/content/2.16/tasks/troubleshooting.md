@@ -862,7 +862,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
@@ -1084,7 +1084,21 @@ Example warning:
 This happens when one of the control plane pods doesn't have at least two
 replicas running. This is likely caused by insufficient node resources.
 
-### The "extensions" checks {#extensions}
+## Extensions {#extensions}
+
+### √ namespace configuration for extensions {#l5d-extension-namespaces}
+
+Linkerd's extension model requires that each namespace that "owns" an extension
+to be labelled with the extension name. For example, the namespace viz is
+installed in would be labelled with `linkerd.io/extension=viz`. This warning is
+triggered if an extension value is used for the label key more than once across
+the cluster.
+
+To resolve this warning, ensure that the `linkerd.io/extension` namespace label
+does not have any dupliate values, indicating that an extension has been
+installed more than once in different namespaces.
+
+### Extensions checks
 
 When any [Extensions](extensions/) are installed, The Linkerd binary tries to
 invoke `check --output json` on the extension binaries. It is important that the
@@ -1094,7 +1108,7 @@ extension binaries implement it. For more information, See
 Example error:
 
 ```bash
-invalid extension check output from \"jaeger\" (JSON object expected)
+invalid extension check output from \"viz\" (JSON object expected)
 ```
 
 Make sure that the extension binary implements `check --output json` which
@@ -1104,7 +1118,7 @@ returns the healthchecks in the
 Example error:
 
 ```bash
-× Linkerd command jaeger exists
+× Linkerd command viz exists
 ```
 
 Make sure that relevant binary exists in `$PATH`.
@@ -1313,6 +1327,17 @@ Example error:
 
 Make sure all the link objects are specified in the expected format.
 
+### √ Link and CLI versions match {#l5d-multicluster-links-version}
+
+This warning indicates that there are Link resources which do not match the
+version of the CLI. This usually means that the CLI has been upgraded but that
+the Link resources have not and certain features may not be supported on those
+Links until they are upgraded.
+
+To upgrade a Link, regenerate it. Refer to the
+[multicluster docs](multicluster/#linking-the-clusters) for instructions on how
+to do this.
+
 ### √ remote cluster access credentials are valid {#l5d-smc-target-clusters-access}
 
 Example error:
@@ -1446,6 +1471,34 @@ NAME                                  READY     STATUS    RESTARTS   AGE
 linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
 ```
 
+### √ extension is managing controllers {#l5d-multicluster-managed-controllers}
+
+Example error:
+
+```bash
+‼ extension is managing controllers
+            * using legacy service mirror controller for Link: target
+    see https://linkerd.io/2/checks/#l5d-multicluster-managed-controllers for hints
+```
+
+In Linkerd `2.18` we introduced a declarative, GitOps-compatible approach to
+establishing multicluster links. With this method, the controllers are
+integrated into the multicluster extension, allowing you to supply the Link CR
+and kubeconfig secrets manifests directly, without necessarily depending on the
+`linkerd multicluster link` command. This differs from earlier versions of
+Linkerd (pre-`v2.18`), where (in addition to the Link CR and secrets) controller
+manifests needed to be provided each time a new link was created, requiring the
+use of the `linkerd multicluster link` command — a process that was less suited
+to a GitOps workflow.
+
+This check ensures the linked clusters are using the new model. To migrate from
+the old model, update the multicluster extension, referring your links into the
+new `controllers` entry, as detailed in the
+[installing multicluster doc](installing-multicluster/#step-1-install-the-multicluster-control-plane).
+The new controllers will be deployed, but they won't manage the links until the
+old ones get deleted. Once the old ones are removed, the new controllers will
+grab the Lease object allowing them to take over service mirroring.
+
 ### √ all gateway mirrors are healthy {#l5d-multicluster-gateways-endpoints}
 
 Example errors:
@@ -1570,7 +1623,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1843,88 +1896,6 @@ You should see all your pods here. If they are not:
 
 - Prometheus might be experiencing connectivity issues with the k8s api server.
   Check out the logs and delete the pod to flush any possible transient errors.
-
-## The "linkerd-jaeger" checks {#l5d-jaeger}
-
-These checks only run when the `linkerd-jaeger` extension is installed. This
-check is intended to verify the installation of linkerd-jaeger extension which
-comprises of open-census collector and jaeger components along with
-`jaeger-injector` which injects the specific trace configuration to the proxies.
-
-### √ linkerd-jaeger extension Namespace exists {#l5d-jaeger-ns-exists}
-
-This is the basic check used to verify if the linkerd-jaeger extension namespace
-is installed or not. The extension can be installed by running the following
-command
-
-```bash
-linkerd jaeger install | kubectl apply -f -
-```
-
-The installation can be configured by using the `--set`, `--values`,
-`--set-string` and `--set-file` flags. See
-[Linkerd Jaeger Readme](https://www.github.com/linkerd/linkerd2/tree/main/jaeger/charts/linkerd-jaeger/README.md)
-for a full list of configurable fields.
-
-### √ jaeger extension proxies are healthy {#l5d-jaeger-proxy-healthy}
-
-This error indicates that the proxies running in the jaeger extension are not
-healthy. Ensure that linkerd-jaeger has been installed with all of the correct
-setting or re-install as necessary.
-
-### √ jaeger extension proxies are up-to-date {#l5d-jaeger-proxy-cp-version}
-
-This warning indicates the proxies running in the jaeger extension are running
-an old version. We recommend downloading the latest linkerd-jaeger and
-upgrading.
-
-### √ jaeger extension proxies and cli versions match {#l5d-jaeger-proxy-cli-version}
-
-This warning indicates that the proxies running in the jaeger extension are
-running a different version from the Linkerd CLI. We recommend keeping this
-versions in sync by updating either the CLI or linkerd-jaeger as necessary.
-
-### √ jaeger extension pods are injected {#l5d-jaeger-pods-injection}
-
-```bash
-× jaeger extension pods are injected
-    could not find proxy container for jaeger-6f98d5c979-scqlq pod
-    see https://linkerd.io/2/checks/#l5d-jaeger-pods-injections for hints
-```
-
-Ensure all the jaeger pods are injected
-
-```bash
-$ kubectl -n linkerd-jaeger get pods
-NAME                               READY   STATUS      RESTARTS   AGE
-collector-69cc44dfbc-rhpfg         2/2     Running     0          11s
-jaeger-6f98d5c979-scqlq            2/2     Running     0          11s
-jaeger-injector-6c594f5577-cz75h   2/2     Running     0          10s
-```
-
-Make sure that the `proxy-injector` is working correctly by running
-`linkerd check`
-
-### √ jaeger extension pods are running {#l5d-jaeger-pods-running}
-
-```bash
-× jaeger extension pods are running
-    container linkerd-proxy in pod jaeger-59f5595fc7-ttndp is not ready
-    see https://linkerd.io/2/checks/#l5d-jaeger-pods-running for hints
-```
-
-Ensure all the linkerd-jaeger pods are running with 2/2
-
-```bash
-$ kubectl -n linkerd-jaeger get pods
-NAME                               READY   STATUS   RESTARTS   AGE
-jaeger-injector-548684d74b-bcq5h   2/2     Running   0          5s
-collector-69cc44dfbc-wqf6s         2/2     Running   0          5s
-jaeger-6f98d5c979-vs622            2/2     Running   0          5sh
-```
-
-Make sure that the `proxy-injector` is working correctly by running
-`linkerd check`
 
 ## The "linkerd-buoyant" checks {#l5d-buoyant}
 

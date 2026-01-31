@@ -862,7 +862,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 

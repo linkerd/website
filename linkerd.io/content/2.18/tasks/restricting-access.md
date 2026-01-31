@@ -21,9 +21,9 @@ haven't already done this.
 Inject and install the Emojivoto application:
 
 ```bash
-linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+$ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
-linkerd check -n emojivoto --proxy -o short
+$ linkerd check -n emojivoto --proxy -o short
 ...
 ```
 
@@ -35,7 +35,7 @@ Linkerd custom resource which describes a specific port of a workload. Once the
 access it (we'll see how to authorize clients in a moment).
 
 ```bash
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
@@ -84,7 +84,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 based on `ServiceAccounts`.
 
 ```bash
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
@@ -153,7 +153,7 @@ following logic when deciding whether to allow a request:
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 ```bash
-$ linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
+linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
 ```
 
 Alternatively, default policies can be set on individual workloads or namespaces

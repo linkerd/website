@@ -348,7 +348,7 @@ the `linkerd multicluster link-gen` command or by editing the Link resource.
 
 {{< /note >}}
 
-Check out the service that was just created by the controller!
+Check out the service that was just created by the service mirror controller!
 
 ```bash
 kubectl --context=west -n test get svc podinfo-east

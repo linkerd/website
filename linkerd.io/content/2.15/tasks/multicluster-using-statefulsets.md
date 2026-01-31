@@ -48,8 +48,8 @@ The first step is to clone the demo repository on your local machine.
 
 ```sh
 # clone example repository
-$ git clone git@github.com:mateiidavid/l2d-k3d-statefulset.git
-$ cd l2d-k3d-statefulset
+git clone git@github.com:mateiidavid/l2d-k3d-statefulset.git
+cd l2d-k3d-statefulset
 ```
 
 The second step consists of creating two `k3d` clusters named `east` and `west`,
@@ -178,7 +178,7 @@ nginx-set-1             2/2     Running           0          4m58s
 nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
-$ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
+$ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- sh
 /# prompt for curl pod
 ```
 
@@ -186,7 +186,7 @@ If we now curl one of these instances, we will get back a response.
 
 ```sh
 # exec'd on the pod
-/ $ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
+$ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
 "<!DOCTYPE html>
 <html>
 <head>
@@ -235,7 +235,7 @@ endpoints for `nginx-svc-west` will have the same hostnames, but each hostname
 will point to one of the services we see above:
 
 ```sh
-kubectl --context=k3d-east get endpoints nginx-svc-west -o yaml
+$ kubectl --context=k3d-east get endpoints nginx-svc-k3d-west -o yaml
 subsets:
 - addresses:
   - hostname: nginx-set-0
@@ -256,12 +256,12 @@ NAME                    READY   STATUS    RESTARTS   AGE
 curl-56dc7d945d-96r6p   2/2     Running   0          23m
 
 # exec and curl
-$ kubectl --context=k3d-east exec pod curl-56dc7d945d-96r6p -it -c curl -- bin/sh
+$ kubectl --context=k3d-east exec curl-56dc7d945d-96r6p -it -c curl -- sh
 # we want to curl the same hostname we see in the endpoints object above.
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-/ $ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
+$ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>

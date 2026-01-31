@@ -67,7 +67,7 @@ Requests to `/echo` on port 9898 to the frontend pod will get forwarded the pod
 pointed by the Service `backend-a-podinfo`:
 
 ```bash
-curl -sX POST localhost:9898/echo \
+$ curl -sX POST localhost:9898/echo \
   | grep -o 'PODINFO_UI_MESSAGE=. backend'
 
 PODINFO_UI_MESSAGE=A backend
@@ -142,17 +142,17 @@ to the `backend-a-podinfo` Service.
 The previous requests should still reach `backend-a-podinfo` only:
 
 ```bash
-curl -sX POST localhost:9898/echo \
+$ curl -sX POST localhost:9898/echo \
   | grep -o 'PODINFO_UI_MESSAGE=. backend'
 
 PODINFO_UI_MESSAGE=A backend
 ```
 
-But if we add the "`x-request-id: alternative`" header they get routed to
+But if we add the `x-request-id: alternative` header, they get routed to
 `backend-b-podinfo`:
 
 ```bash
-curl -sX POST \
+$ curl -sX POST \
   -H 'x-request-id: alternative' \
   localhost:9898/echo \
   | grep -o 'PODINFO_UI_MESSAGE=. backend'

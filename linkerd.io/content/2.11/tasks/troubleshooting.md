@@ -990,7 +990,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
@@ -1049,7 +1049,7 @@ normally.
 Example failure:
 
 ```bash
-linkerd check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist
@@ -1198,7 +1198,7 @@ Ensure the kube-system namespace has the
 `config.linkerd.io/admission-webhooks:disabled` label:
 
 ```bash
-kubectl get namespace kube-system -oyaml
+$ kubectl get namespace kube-system -oyaml
 kind: Namespace
 apiVersion: v1
 metadata:
@@ -1471,7 +1471,7 @@ Example failure:
 Ensure that all the CNI pods are running:
 
 ```bash
-$ kubectl get po -n linkerd-cni
+$ kubectl get po -n linkerd-cn
 NAME                READY   STATUS    RESTARTS   AGE
 linkerd-cni-rzp2q   1/1     Running   0          9m20s
 linkerd-cni-mf564   1/1     Running   0          9m22s
@@ -1621,7 +1621,7 @@ rules:
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
 
 ```bash
-kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
+$ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
 kind: Role
 metadata:
   labels:
@@ -1753,7 +1753,7 @@ Example failure:
 Ensure the linkerd-viz extension ClusterRoles exist:
 
 ```bash
-kubectl get clusterroles | grep linkerd-viz
+$ kubectl get clusterroles | grep linkerd-viz
 linkerd-linkerd-viz-metrics-api                                        2021-01-26T18:02:17Z
 linkerd-linkerd-viz-prometheus                                         2021-01-26T18:02:17Z
 linkerd-linkerd-viz-tap                                                2021-01-26T18:02:17Z
@@ -1764,7 +1764,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1913,12 +1913,12 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the prometheus related resources are present and running correctly.
 
 ```bash
-$ kubectl -n linkerd-viz get deploy,cm | grep prometheus
+❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
 deployment.apps/prometheus     1/1     1            1           3m18s
 configmap/prometheus-config   1      3m18s
-$ kubectl get clusterRoleBindings | grep prometheus
+❯ kubectl get clusterRoleBindings | grep prometheus
 linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-$ kubectl get clusterRoles | grep prometheus
+❯ kubectl get clusterRoles | grep prometheus
 linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
 ```
 
@@ -1934,7 +1934,7 @@ Example failure:
 Verify that the metrics API pod is running correctly
 
 ```bash
-$ kubectl -n linkerd-viz get pods
+❯ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
 metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
 tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
@@ -1994,7 +1994,7 @@ Example failure:
 Ensure the linkerd-jaeger ServiceAccounts exist:
 
 ```bash
-kubectl -n linkerd-jaeger get serviceaccounts
+$ kubectl -n linkerd-jaeger get serviceaccounts
 NAME               SECRETS   AGE
 collector          1         23m
 jaeger             1         23m
@@ -2004,7 +2004,7 @@ Also ensure you have permission to create ServiceAccounts in the linkerd-jaeger
 namespace:
 
 ```bash
-kubectl -n linkerd-jaeger auth can-i create serviceaccounts
+$ kubectl -n linkerd-jaeger auth can-i create serviceaccounts
 yes
 ```
 
@@ -2114,7 +2114,7 @@ Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl https://buoyant.cloud/version.json
+$ curl https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
@@ -2187,7 +2187,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -2271,14 +2271,14 @@ yes
 Ensure the `buoyant-cloud-agent` Deployment exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
 ```
 
 If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
@@ -2421,7 +2421,7 @@ Ensure the `buoyant-cloud-metrics` pods are injected, the `READY` column should
 show `2/2`:
 
 ```bash
-kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
+$ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
 NAME                          READY   STATUS    RESTARTS   AGE
 buoyant-cloud-metrics-kt9mv   2/2     Running   0          166m
 buoyant-cloud-metrics-q8jhj   2/2     Running   0          166m

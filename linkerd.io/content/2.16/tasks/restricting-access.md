@@ -21,9 +21,9 @@ haven't already done this.
 Inject and install the Emojivoto application:
 
 ```bash
-linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+$ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
-linkerd check -n emojivoto --proxy -o short
+$ linkerd check -n emojivoto --proxy -o short
 ...
 ```
 
@@ -84,7 +84,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 based on `ServiceAccounts`.
 
 ```bash
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization

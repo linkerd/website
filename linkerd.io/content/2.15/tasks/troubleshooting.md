@@ -862,7 +862,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
@@ -1965,7 +1965,7 @@ Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl https://buoyant.cloud/version.json
+$ curl https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
@@ -2272,7 +2272,7 @@ Ensure the `buoyant-cloud-metrics` pods are injected, the `READY` column should
 show `2/2`:
 
 ```bash
-kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
+$ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
 NAME                          READY   STATUS    RESTARTS   AGE
 buoyant-cloud-metrics-kt9mv   2/2     Running   0          166m
 buoyant-cloud-metrics-q8jhj   2/2     Running   0          166m

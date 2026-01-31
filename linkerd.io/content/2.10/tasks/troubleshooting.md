@@ -26,7 +26,7 @@ installation, that namespace should not exist. To check with a different
 namespace, run:
 
 ```bash
-$ linkerd check --pre --linkerd-namespace linkerd-test
+linkerd check --pre --linkerd-namespace linkerd-test
 ```
 
 ### √ can create Kubernetes resources {#pre-k8s-cluster-k8s}
@@ -266,16 +266,16 @@ and also in the context of a multi-stage setup, for example:
 
 ```bash
 # install cluster-wide resources (first stage)
-$ linkerd install config | kubectl apply -f -
+linkerd install config | kubectl apply -f -
 
 # validate successful cluster-wide resources installation
-$ linkerd check config
+linkerd check config
 
 # install Linkerd control plane
-$ linkerd install control-plane | kubectl apply -f -
+linkerd install control-plane | kubectl apply -f -
 
 # validate successful control-plane installation
-$ linkerd check
+linkerd check
 ```
 
 ### √ control plane Namespace exists {#l5d-existence-ns}
@@ -855,11 +855,11 @@ This check indicates a connectivity failure between the cli and the Linkerd
 control plane. To verify connectivity, manually connect to a control plane pod:
 
 ```bash
-$ kubectl -n linkerd port-forward \
+kubectl -n linkerd port-forward \
     $(kubectl -n linkerd get po \
         --selector=linkerd.io/control-plane-component=identity \
         -o jsonpath='{.items[*].metadata.name}') \
-    9995:9995
+9995:9995
 ```
 
 ...and then curl the `/metrics` endpoint:
@@ -883,7 +883,7 @@ Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
+$ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
 
@@ -922,7 +922,7 @@ normally.
 Example failure:
 
 ```bash
-linkerd check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist
@@ -960,7 +960,7 @@ Ensure Prometheus can connect to each `linkerd-proxy` via the Prometheus
 dashboard:
 
 ```bash
-$ kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
+kubectl -n linkerd port-forward svc/linkerd-prometheus 9090
 ```
 
 ...and then browse to
@@ -1324,7 +1324,7 @@ Example failure:
 Ensure that all the CNI pods are running:
 
 ```bash
-$ kubectl get po -n linkerd-cni
+$ kubectl get po -n linkerd-cn
 NAME                READY   STATUS    RESTARTS   AGE
 linkerd-cni-rzp2q   1/1     Running   0          9m20s
 linkerd-cni-mf564   1/1     Running   0          9m22s
@@ -1617,7 +1617,7 @@ linkerd-linkerd-viz-web-check                                          2021-01-2
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create clusterroles
+$ kubectl auth can-i create clusterroles
 yes
 ```
 
@@ -1766,12 +1766,12 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the prometheus related resources are present and running correctly.
 
 ```bash
-$ kubectl -n linkerd-viz get deploy,cm | grep prometheus
+❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
 deployment.apps/prometheus     1/1     1            1           3m18s
 configmap/prometheus-config   1      3m18s
-$ kubectl get clusterRoleBindings | grep prometheus
+❯ kubectl get clusterRoleBindings | grep prometheus
 linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-$ kubectl get clusterRoles | grep prometheus
+❯ kubectl get clusterRoles | grep prometheus
 linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
 ```
 
@@ -1787,7 +1787,7 @@ Example failure:
 Verify that the metrics API pod is running correctly
 
 ```bash
-$ kubectl -n linkerd-viz get pods
+❯ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
 metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
 tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
@@ -1967,7 +1967,7 @@ Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/version.json
+$ curl --proto '=https' --tlsv1.2 -sSfL https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
@@ -2040,7 +2040,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -2124,14 +2124,14 @@ yes
 Ensure the `buoyant-cloud-agent` Deployment exists:
 
 ```bash
-$ kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
+kubectl -n buoyant-cloud get deploy/buoyant-cloud-agent
 ```
 
 If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
