@@ -178,7 +178,7 @@ nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
 $ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- sh
-/$ prompt for curl pod
+/$ # prompt for curl pod
 ```
 
 If we now curl one of these instances, we will get back a response.
