@@ -221,6 +221,6 @@ kubectl delete clusterrolebindings/linkerd-linkerd-viz-web-admin
 To confirm:
 
 ```bash
-kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
+$ kubectl auth can-i watch pods.tap.linkerd.io --all-namespaces --as system:serviceaccount:linkerd-viz:web
 no
 ```

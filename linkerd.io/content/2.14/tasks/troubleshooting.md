@@ -921,7 +921,7 @@ normally.
 Example failure:
 
 ```bash
-linkerd check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist

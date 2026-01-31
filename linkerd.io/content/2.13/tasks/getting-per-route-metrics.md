@@ -86,7 +86,7 @@ linkerd viz tap deploy/webapp -o wide | grep req
 A sample output is:
 
 ```bash
-$ req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=POST :authority=webapp:7000 :path=/books/24783/edit src_res=deploy/traffic src_ns=default dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
+req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=POST :authority=webapp:7000 :path=/books/24783/edit src_res=deploy/traffic src_ns=default dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
 ```
 
 This will select only the requests observed and show the `:authority` and

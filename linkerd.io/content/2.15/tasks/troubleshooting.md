@@ -961,7 +961,7 @@ normally.
 Example failure:
 
 ```bash
-linkerd check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist
@@ -1133,7 +1133,7 @@ Example error:
 Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
 
 ```bash
-kubectl get cm linkerd-cni-config -n linkerd-cni
+$ kubectl get cm linkerd-cni-config -n linkerd-cni
 NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
 linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
 ```
@@ -1141,7 +1141,7 @@ linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAs
 Also ensure you have permission to create ConfigMaps:
 
 ```bash
-kubectl auth can-i create ConfigMaps
+$ kubectl auth can-i create ConfigMaps
 yes
 ```
 
@@ -1158,7 +1158,7 @@ Example error:
 Ensure that the cluster role exists:
 
 ```bash
-kubectl get clusterrole linkerd-cni
+$ kubectl get clusterrole linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1166,7 +1166,7 @@ linkerd-cni   54m
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create ClusterRoles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -1183,7 +1183,7 @@ Example error:
 Ensure that the cluster role binding exists:
 
 ```bash
-kubectl get clusterrolebinding linkerd-cni
+$ kubectl get clusterrolebinding linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1191,7 +1191,7 @@ linkerd-cni   54m
 Also ensure you have permission to create ClusterRoleBindings:
 
 ```bash
-kubectl auth can-i create ClusterRoleBindings
+$ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
 
@@ -1208,7 +1208,7 @@ Example error:
 Ensure that the CNI service account exists in the CNI namespace:
 
 ```bash
-kubectl get ServiceAccount linkerd-cni -n linkerd-cni
+$ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
 NAME          SECRETS   AGE
 linkerd-cni   1         45m
 ```
@@ -1216,7 +1216,7 @@ linkerd-cni   1         45m
 Also ensure you have permission to create ServiceAccount:
 
 ```bash
-kubectl auth can-i create ServiceAccounts -n linkerd-cni
+$ kubectl auth can-i create ServiceAccounts -n linkerd-cni
 yes
 ```
 
@@ -1233,7 +1233,7 @@ Example error:
 Ensure that the CNI daemonset exists in the CNI namespace:
 
 ```bash
-kubectl get ds -n linkerd-cni
+$ kubectl get ds -n linkerd-cni
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
 ```
@@ -1258,7 +1258,7 @@ Example failure:
 Ensure that all the CNI pods are running:
 
 ```bash
-kubectl get po -n linkerd-cni
+$ kubectl get po -n linkerd-cni
 NAME                READY   STATUS    RESTARTS   AGE
 linkerd-cni-rzp2q   1/1     Running   0          9m20s
 linkerd-cni-mf564   1/1     Running   0          9m22s
@@ -1268,7 +1268,7 @@ linkerd-cni-p5670   1/1     Running   0          9m25s
 Ensure that all pods have finished the deployment of the CNI config and binary:
 
 ```bash
-kubectl logs linkerd-cni-rzp2q -n linkerd-cni
+$ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
 Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true

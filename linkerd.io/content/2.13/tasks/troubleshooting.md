@@ -921,7 +921,7 @@ normally.
 Example failure:
 
 ```bash
-linkerd check --proxy --namespace foo
+$ linkerd check --proxy --namespace foo
 ...
 × data plane namespace exists
     The "foo" namespace does not exist
@@ -1118,7 +1118,7 @@ Example error:
 Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
 
 ```bash
-kubectl get cm linkerd-cni-config -n linkerd-cni
+$ kubectl get cm linkerd-cni-config -n linkerd-cni
 NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
 linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
 ```
@@ -1126,7 +1126,7 @@ linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAs
 Also ensure you have permission to create ConfigMaps:
 
 ```bash
-kubectl auth can-i create ConfigMaps
+$ kubectl auth can-i create ConfigMaps
 yes
 ```
 
@@ -1143,7 +1143,7 @@ Example error:
 Ensure that the cluster role exists:
 
 ```bash
-kubectl get clusterrole linkerd-cni
+$ kubectl get clusterrole linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1151,7 +1151,7 @@ linkerd-cni   54m
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-kubectl auth can-i create ClusterRoles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 
@@ -1168,7 +1168,7 @@ Example error:
 Ensure that the cluster role binding exists:
 
 ```bash
-kubectl get clusterrolebinding linkerd-cni
+$ kubectl get clusterrolebinding linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
@@ -1176,7 +1176,7 @@ linkerd-cni   54m
 Also ensure you have permission to create ClusterRoleBindings:
 
 ```bash
-kubectl auth can-i create ClusterRoleBindings
+$ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
 

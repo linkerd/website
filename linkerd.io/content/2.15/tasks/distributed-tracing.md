@@ -98,7 +98,7 @@ With `vote-bot` starting traces for every request, spans should now be showing
 up in Jaeger. To get to the UI, run:
 
 ```bash
-$ linkerd jaeger dashboard
+linkerd jaeger dashboard
 ```
 
 ![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
@@ -144,8 +144,8 @@ To cleanup, uninstall the Linkerd-Jaeger extension along with emojivoto by
 running:
 
 ```bash
-$ linkerd jaeger uninstall | kubectl delete -f -
-$ kubectl delete ns emojivoto
+linkerd jaeger uninstall | kubectl delete -f -
+kubectl delete ns emojivoto
 ```
 
 ## Bring your own Jaeger
@@ -158,7 +158,7 @@ Create the following YAML file which disables the built in Jaeger instance and
 specifies the OpenCensus collector's config.
 
 ```bash
-$ cat <<EOF > jaeger-linkerd.yaml
+cat <<EOF > jaeger-linkerd.yaml
 jaeger:
   enabled: false
 collector:
@@ -193,7 +193,7 @@ collector:
           processors: [batch]
           exporters: [jaeger]
 EOF
-$ linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
+linkerd jaeger install --values ./jaeger-linkerd.yaml | kubectl apply -f -
 ```
 
 You'll want to ensure that the `exporters.jaeger.endpoint` which is
