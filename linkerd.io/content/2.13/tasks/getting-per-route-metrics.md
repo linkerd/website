@@ -24,7 +24,7 @@ per-route authorization.
 You can view per-route metrics in the CLI by running `linkerd viz routes`:
 
 ```bash
-linkerd viz routes svc/webapp
+$ linkerd viz routes svc/webapp
 ROUTE                       SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 GET /                        webapp   100.00%   0.6rps          25ms          30ms          30ms
 GET /authors/{id}            webapp   100.00%   0.6rps          22ms          29ms          30ms
@@ -44,7 +44,7 @@ specified in your service profile will end up there.
 It is also possible to look the metrics up by other resource types, such as:
 
 ```bash
-linkerd viz routes deploy/webapp
+$ linkerd viz routes deploy/webapp
 ROUTE                          SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 [DEFAULT]                   kubernetes     0.00%   0.0rps           0ms           0ms           0ms
 GET /                           webapp   100.00%   0.5rps          27ms          38ms          40ms
@@ -63,7 +63,7 @@ Then, it is possible to filter all the way down to requests going from a
 specific resource to other services:
 
 ```bash
-linkerd viz routes deploy/webapp --to svc/books
+$ linkerd viz routes deploy/webapp --to svc/books
 ROUTE                     SERVICE   SUCCESS      RPS   LATENCY_P50   LATENCY_P95   LATENCY_P99
 DELETE /books/{id}.json     books   100.00%   0.5rps          18ms          29ms          30ms
 GET /books.json             books   100.00%   1.1rps           7ms          12ms          18ms
@@ -86,7 +86,7 @@ linkerd viz tap deploy/webapp -o wide | grep req
 A sample output is:
 
 ```bash
-req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=POST :authority=webapp:7000 :path=/books/24783/edit src_res=deploy/traffic src_ns=default dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
+$ req id=3:1 proxy=in  src=10.4.0.14:58562 dst=10.4.1.4:7000 tls=disabled :method=POST :authority=webapp:7000 :path=/books/24783/edit src_res=deploy/traffic src_ns=default dst_res=deploy/webapp dst_ns=default rt_route=POST /books/{id}/edit
 ```
 
 This will select only the requests observed and show the `:authority` and

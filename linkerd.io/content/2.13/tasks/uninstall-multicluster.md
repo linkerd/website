@@ -25,7 +25,7 @@ To unlink, run the `linkerd multicluster unlink` command and pipe the output to
 `kubectl delete`:
 
 ```bash
-linkerd multicluster unlink --cluster-name=target | kubectl delete -f -
+$ linkerd multicluster unlink --cluster-name=target | kubectl delete -f -
 ```
 
 ## Uninstalling
@@ -36,7 +36,7 @@ account. Before you can uninstall, you must remove all existing links as
 described above. Once all links have been removed, run:
 
 ```bash
-linkerd multicluster uninstall | kubectl delete -f -
+$ linkerd multicluster uninstall | kubectl delete -f -
 ```
 
 Attempting to uninstall while at least one link remains will result in an error.

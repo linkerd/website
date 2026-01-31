@@ -48,8 +48,8 @@ The first step is to clone the demo repository on your local machine.
 
 ```sh
 # clone example repository
-git clone git@github.com:mateiidavid/l2d-k3d-statefulset.git
-cd l2d-k3d-statefulset
+$ git clone git@github.com:mateiidavid/l2d-k3d-statefulset.git
+$ cd l2d-k3d-statefulset
 ```
 
 The second step consists of creating two `k3d` clusters named `east` and `west`,
@@ -60,10 +60,10 @@ everything.
 
 ```sh
 # create k3d clusters
-./create.sh
+$ ./create.sh
 
 # list the clusters
-k3d cluster list
+$ k3d cluster list
 NAME   SERVERS   AGENTS   LOADBALANCER
 east   1/1       0/0      true
 west   1/1       0/0      true
@@ -78,10 +78,10 @@ provided scripts, but feel free to have a look!
 
 ```sh
 # Install Linkerd and multicluster, output to check should be a success
-./install.sh
+$ ./install.sh
 
 # Next, link the two clusters together
-./link.sh
+$ ./link.sh
 ```
 
 Perfect! If you've made it this far with no errors, then it's a good sign. In
@@ -101,17 +101,17 @@ communication. First, we will deploy our pods and services:
 
 ```sh
 # deploy services and mesh namespaces
-./deploy.sh
+$ ./deploy.sh
 
 # verify both clusters
 #
 # verify east
-kubectl --context=k3d-east get pods
+$ kubectl --context=k3d-east get pods
 NAME                    READY   STATUS        RESTARTS   AGE
 curl-56dc7d945d-96r6p   2/2     Running       0          7s
 
 # verify west has headless service
-kubectl --context=k3d-west get services
+$ kubectl --context=k3d-west get services
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   10m
 nginx-svc    ClusterIP   None         <none>        80/TCP    8s
@@ -119,7 +119,7 @@ nginx-svc    ClusterIP   None         <none>        80/TCP    8s
 # verify west has statefulset
 #
 # this may take a while to come up
-kubectl --context=k3d-west get pods
+$ kubectl --context=k3d-west get pods
 NAME          READY   STATUS    RESTARTS   AGE
 nginx-set-0   2/2     Running   0          53s
 nginx-set-1   2/2     Running   0          43s
@@ -130,7 +130,7 @@ Before we go further, let's have a look at the endpoints object for the
 `nginx-svc`:
 
 ```sh
-kubectl --context=k3d-west get endpoints nginx-svc -o yaml
+$ kubectl --context=k3d-west get endpoints nginx-svc -o yaml
 ...
 subsets:
 - addresses:
@@ -170,15 +170,15 @@ would get an answer back. We can test this out by applying the curl pod to the
 `west` cluster:
 
 ```sh
-kubectl --context=k3d-west apply -f east/curl.yml
-kubectl --context=k3d-west get pods
+$ kubectl --context=k3d-west apply -f east/curl.yml
+$ kubectl --context=k3d-west get pods
 NAME                    READY   STATUS            RESTARTS   AGE
 nginx-set-0             2/2     Running           0          5m8s
 nginx-set-1             2/2     Running           0          4m58s
 nginx-set-2             2/2     Running           0          4m51s
 curl-56dc7d945d-s4n8j   0/2     PodInitializing   0          4s
 
-kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
+$ kubectl --context=k3d-west exec -it curl-56dc7d945d-s4n8j -c curl -- bin/sh
 /# prompt for curl pod
 ```
 
@@ -186,7 +186,7 @@ If we now curl one of these instances, we will get back a response.
 
 ```sh
 # exec'd on the pod
-/ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
+/ $ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
 "<!DOCTYPE html>
 <html>
 <head>
@@ -218,10 +218,10 @@ Now, let's do the same, but this time from the `east` cluster. We will first
 export the service.
 
 ```sh
-kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
+$ kubectl --context=k3d-west label service nginx-svc mirror.linkerd.io/exported="true"
 service/nginx-svc labeled
 
-kubectl --context=k3d-east get services
+$ kubectl --context=k3d-east get services
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 kubernetes         ClusterIP   10.43.0.1       <none>        443/TCP   20h
 nginx-svc-west     ClusterIP   None            <none>        80/TCP    29s
@@ -235,7 +235,7 @@ endpoints for `nginx-svc-west` will have the same hostnames, but each hostname
 will point to one of the services we see above:
 
 ```sh
-kubectl --context=k3d-east get endpoints nginx-svc-west -o yaml
+$ kubectl --context=k3d-east get endpoints nginx-svc-west -o yaml
 subsets:
 - addresses:
   - hostname: nginx-set-0
@@ -251,17 +251,17 @@ cluster (`west`), will be mirrored as a clusterIP service. We will see in a
 second why this matters.
 
 ```sh
-kubectl --context=k3d-east get pods
+$ kubectl --context=k3d-east get pods
 NAME                    READY   STATUS    RESTARTS   AGE
 curl-56dc7d945d-96r6p   2/2     Running   0          23m
 
 # exec and curl
-kubectl --context=k3d-east exec pod curl-56dc7d945d-96r6p -it -c curl -- bin/sh
+$ kubectl --context=k3d-east exec pod curl-56dc7d945d-96r6p -it -c curl -- bin/sh
 # we want to curl the same hostname we see in the endpoints object above.
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-/ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
+/ $ curl nginx-set-0.nginx-svc-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>
@@ -329,8 +329,8 @@ validation.
 To clean-up, you can remove both clusters entirely using the k3d CLI:
 
 ```sh
-k3d cluster delete east
+$ k3d cluster delete east
 cluster east deleted
-k3d cluster delete west
+$ k3d cluster delete west
 cluster west deleted
 ```
