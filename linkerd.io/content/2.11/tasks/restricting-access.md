@@ -16,9 +16,9 @@ Ensure that you have Linkerd version stable-2.11.0 or later installed, and that
 it is healthy:
 
 ```bash
-linkerd install | kubectl apply -f -
+$ linkerd install | kubectl apply -f -
 ...
-linkerd check -o short
+$ linkerd check -o short
 ...
 ```
 

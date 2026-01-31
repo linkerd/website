@@ -1761,12 +1761,12 @@ Make sure that the `proxy-injector` is working correctly by running
 Ensure all the prometheus related resources are present and running correctly.
 
 ```bash
-❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
+$ kubectl -n linkerd-viz get deploy,cm | grep prometheus
 deployment.apps/prometheus     1/1     1            1           3m18s
 configmap/prometheus-config   1      3m18s
-❯ kubectl get clusterRoleBindings | grep prometheus
+$ kubectl get clusterRoleBindings | grep prometheus
 linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-❯ kubectl get clusterRoles | grep prometheus
+$ kubectl get clusterRoles | grep prometheus
 linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
 ```
 

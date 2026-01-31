@@ -259,8 +259,8 @@ kubectl label crd/trafficsplits.split.smi-spec.io \
 Now you can install the SMI extension. E.g. via Helm:
 
 ```bash
-$ helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
-$ helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
+helm repo add l5d-smi https://linkerd.github.io/linkerd-smi
+helm install linkerd-smi -n linkerd-smi --create-namespace l5d-smi/linkerd-smi
 ```
 
 And finally you can proceed with the usual
@@ -348,7 +348,7 @@ above.
 
 ```bash
 # First make sure you update the helm repo
-$ helm repo update
+$ helm repo up
 
 # Install the linkerd-crds chart
 $ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
@@ -393,14 +393,14 @@ For example, for the viz extension:
 
 ```bash
 # update the helm repo
-$ helm repo up
+helm repo up
 
 # delete your current instance
 # (assuming you didn't use the -n flag when installing)
-$ helm delete linkerd-viz
+helm delete linkerd-viz
 
 # install the new chart version
-$ helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
+helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
 ##### Upgrading the multicluster extension with Helm
@@ -555,11 +555,11 @@ chart or installing the Linkerd-Viz chart. See below for a complete list of
 values which have moved.
 
 ```bash
-$ helm repo up
+helm repo up
 # Upgrade the control plane (this will remove viz components).
-$ helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
+helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
 # Install the Linkerd-Viz extension to restore viz functionality.
-$ helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
+helm install linkerd2-viz linkerd/linkerd2-viz -f viz-values.yaml
 ```
 
 The following values were removed from the Linkerd2 chart. Most of the removed
