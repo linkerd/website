@@ -2091,7 +2091,7 @@ buoyant-cloud-agent   2020-11-13T00:59:50Z
 Also ensure you have permission to create ClusterRoles:
 
 ```bash
-$ kubectl auth can-i create clusterroles
+$ kubectl auth can-i create ClusterRoles
 yes
 ```
 

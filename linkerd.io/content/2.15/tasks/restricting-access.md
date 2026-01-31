@@ -84,7 +84,7 @@ to the Voting `Server` we created above. Note that meshed mTLS uses
 based on `ServiceAccounts`.
 
 ```bash
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
@@ -167,7 +167,7 @@ explicitly create an authorization to allow those probe requests. For more
 information about adding route-scoped authorizations, see
 [Configuring Per-Route Policy](configuring-per-route-policy/).
 
-## Enabling authorization policies in live systems
+## Further Considerations
 
 You may have noticed that there was a period of time after we created the
 `Server` resource but before we created the `ServerAuthorization` where all

@@ -35,7 +35,7 @@ Linkerd custom resource which describes a specific port of a workload. Once the
 access it (we'll see how to authorize clients in a moment).
 
 ```bash
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 ---
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server

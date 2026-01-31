@@ -506,9 +506,9 @@ To cleanup the multicluster control plane, you can run:
 
 ```bash
 # Delete the link CR
-kubectl --context=west -n linkerd-multicluster delete links east
+$ kubectl --context=west -n linkerd-multicluster delete links east
 # Delete the test namespace and uninstall multicluster
-for ctx in west east; do \
+$ for ctx in west east; do \
   kubectl --context=${ctx} delete ns test; \
   linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f - ; \
 done

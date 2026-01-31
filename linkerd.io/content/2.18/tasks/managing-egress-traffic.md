@@ -70,7 +70,7 @@ Now SSH into the client container and start generating some external traffic:
 
 ```bash
 kubectl -n egress-test exec -it client -c client -- sh
-while sleep 1; do curl -s http://httpbin.org/get ; done
+$ while sleep 1; do curl -s https://httpbin.org/get ; done
 ```
 
 In a separate shell, you can use the Linkerd diagnostics command to visualize
@@ -285,7 +285,7 @@ outbound_tls_route_open_total{
   route_namespace="egress-test",
   route_name="tls-egress",
   hostname="httpbin.org"
-} 2
+}
 ```
 
 This configuration allows traffic to `httpbin.org` only. In order to apply

@@ -348,7 +348,7 @@ the `linkerd multicluster link-gen` command or by editing the Link resource.
 
 {{< /note >}}
 
-Check out the service that was just created by the service mirror controller!
+Check out the service that was just created by the controller!
 
 ```bash
 kubectl --context=west -n test get svc podinfo-east
@@ -506,9 +506,9 @@ To cleanup the multicluster control plane, you can run:
 
 ```bash
 # Delete the link CR
-kubectl --context=west -n linkerd-multicluster delete links east
+$ kubectl --context=west -n linkerd-multicluster delete links east
 # Delete the test namespace and uninstall multicluster
-for ctx in west east; do \
+$ for ctx in west east; do \
   kubectl --context=${ctx} delete ns test; \
   linkerd --context=${ctx} multicluster uninstall | kubectl --context=${ctx} delete -f - ; \
 done
