@@ -235,7 +235,7 @@ Interestingly enough though, if we go back to our client shell and we try to
 initiate HTTPS traffic to the same service, it will not be allowed:
 
 ```bash
-curl -v https://httpbin.org/get
+$ curl -v https://httpbin.org/get
 curl: (35) TLS connect error: error:00000000:lib(0)::reason(0)
 ```
 
@@ -458,7 +458,7 @@ Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
-curl http://httpbin.org/get
+$ curl https://httpbin.org/get
 {
   "args": {},
   "headers": {
@@ -472,14 +472,14 @@ curl http://httpbin.org/get
 }
 
 # encrypted traffic can target all paths and hosts
-curl https://httpbin.org/ip
+$ curl  https://httpbin.org/ip
 {
   "origin": "51.116.126.217"
 }
 
 
 # arbitrary unencrypted traffic goes to the internal service
-curl http://google.com
+$ curl https://google.com
 {
   "requestUID": "in:http-sid:terminus-grpc:-1-h1:80-190120723",
   "payload": "You cannot go there right now"}

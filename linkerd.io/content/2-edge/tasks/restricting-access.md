@@ -21,9 +21,9 @@ haven't already done this.
 Inject and install the Emojivoto application:
 
 ```bash
-linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
+$ linkerd inject https://run.linkerd.io/emojivoto.yml | kubectl apply -f -
 ...
-linkerd check -n emojivoto --proxy -o short
+$ linkerd check -n emojivoto --proxy -o short
 ...
 ```
 
@@ -68,7 +68,7 @@ of requests coming to the voting service and see that all incoming requests to
 the voting-grpc server are currently unauthorized:
 
 ```bash
-> linkerd viz authz -n emojivoto deploy/voting
+$ linkerd viz authz -n emojivoto deploy/voting
 ROUTE    SERVER                       AUTHORIZATION                UNAUTHORIZED  SUCCESS     RPS  LATENCY_P50  LATENCY_P95  LATENCY_P99
 default  default:all-unauthenticated  default/all-unauthenticated        0.0rps  100.00%  0.1rps          1ms          1ms          1ms
 probe    default:all-unauthenticated  default/probe                      0.0rps  100.00%  0.2rps          1ms          1ms          1ms
@@ -153,7 +153,7 @@ following logic when deciding whether to allow a request:
 We can set the default policy to `deny` using the `linkerd upgrade` command:
 
 ```bash
-$ linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
+linkerd upgrade --default-inbound-policy deny | kubectl apply -f -
 ```
 
 Alternatively, default policies can be set on individual workloads or namespaces
