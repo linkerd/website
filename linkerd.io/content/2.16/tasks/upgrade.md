@@ -437,14 +437,14 @@ above.
 
 ```bash
 # First make sure you update the helm repo
-helm repo up
+$ helm repo up
 
 # Install the linkerd-crds chart
-helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
+$ helm install linkerd-crds -n linkerd --create-namespace linkerd/linkerd-crds
 
 # Install the linkerd-control-plane chart
 # (remember to add any customizations you retrieved above)
-helm install linkerd-control-plane \
+$ helm install linkerd-control-plane \
   -n linkerd \
   --set-file identityTrustAnchorsPEM=ca.crt \
   --set-file identity.issuer.tls.crtPEM=issuer.crt \

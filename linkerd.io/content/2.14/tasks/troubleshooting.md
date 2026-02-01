@@ -2114,7 +2114,7 @@ If the Deployment does not exist, the `linkerd-buoyant` installation may be
 missing or incomplete. To reinstall the extension:
 
 ```bash
-$ linkerd-buoyant install | kubectl apply -f -
+linkerd-buoyant install | kubectl apply -f -
 ```
 
 ### √ buoyant-cloud-agent Deployment is running
