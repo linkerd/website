@@ -482,14 +482,14 @@ For example, for the viz extension:
 
 ```bash
 # update the helm repo
-$ helm repo up
+helm repo up
 
 # delete your current instance
 # (assuming you didn't use the -n flag when installing)
-$ helm delete linkerd-viz
+helm delete linkerd-viz
 
 # install the new chart version
-$ helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
+helm install linkerd-viz -n linkerd-viz --create-namespace linkerd/linkerd-viz
 ```
 
 ##### Upgrading the multicluster extension with Helm
