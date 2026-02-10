@@ -167,6 +167,7 @@ spec:
 Some protocols require the server to send data before the client (server-first protocols). These protocols cannot be detected because Linkerd waits for client data that never arrives.
 
 Common server-first protocols include:
+
 - MySQL
 - SMTP
 - FTP
@@ -526,6 +527,7 @@ spec:
 Linkerd's automatic protocol detection simplifies service mesh adoption by eliminating the need for manual protocol configuration in most cases. Understanding how detection works, when to configure opaque ports, and how to troubleshoot issues ensures smooth operation of your service mesh.
 
 Key takeaways:
+
 - HTTP, HTTP/2, and gRPC are automatically detected
 - Server-first protocols and binary protocols should be marked as opaque
 - Use the detection timeout configuration for slow-starting services
