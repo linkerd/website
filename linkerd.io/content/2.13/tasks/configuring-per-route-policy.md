@@ -30,7 +30,7 @@ haven't already done this.
 Inject and install the Books demo application:
 
 ```bash
-$ kubectl create ns booksapp && \
+kubectl create ns booksapp && \
   curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/booksapp.yml \
   | linkerd inject - \
   | kubectl -n booksapp apply -f -
@@ -44,21 +44,21 @@ run in the `booksapp` namespace.
 Confirm that the Linkerd data plane was injected successfully:
 
 ```bash
-$ linkerd check -n booksapp --proxy -o short
+linkerd check -n booksapp --proxy -o short
 ```
 
 You can take a quick look at all the components that were added to your cluster
 by running:
 
 ```bash
-$ kubectl -n booksapp get all
+kubectl -n booksapp get all
 ```
 
 Once the rollout has completed successfully, you can access the app itself by
 port-forwarding `webapp` locally:
 
 ```bash
-$ kubectl -n booksapp port-forward svc/webapp 7000 &
+kubectl -n booksapp port-forward svc/webapp 7000 &
 ```
 
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the

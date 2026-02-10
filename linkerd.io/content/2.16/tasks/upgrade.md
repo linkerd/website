@@ -464,7 +464,7 @@ remove the Helm release config for the old `linkerd2` chart (assuming you used
 the "Secret" storage backend, which is the default):
 
 ```bash
-$ kubectl -n default delete secret \
+kubectl -n default delete secret \
   --field-selector type=helm.sh/release.v1 \
   -l name=linkerd,owner=helm
 ```

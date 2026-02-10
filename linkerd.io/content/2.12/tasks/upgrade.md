@@ -375,7 +375,7 @@ remove the Helm release config for the old `linkerd2` chart (assuming you used
 the "Secret" storage backend, which is the default):
 
 ```bash
-$ kubectl -n default delete secret \
+kubectl -n default delete secret \
   --field-selector type=helm.sh/release.v1 \
   -l name=linkerd,owner=helm
 ```
@@ -555,7 +555,7 @@ chart or installing the Linkerd-Viz chart. See below for a complete list of
 values which have moved.
 
 ```bash
-helm repo update
+helm repo up
 # Upgrade the control plane (this will remove viz components).
 helm upgrade linkerd2 linkerd/linkerd2 --reset-values -f values.yaml --atomic
 # Install the Linkerd-Viz extension to restore viz functionality.

@@ -48,8 +48,8 @@ The first step is to clone the demo repository on your local machine.
 
 ```sh
 # clone example repository
-$ git clone git@github.com:linkerd/l2d-k3d-statefulset.git
-$ cd l2d-k3d-statefulset
+git clone git@github.com:linkerd/l2d-k3d-statefulset.git
+cd l2d-k3d-statefulset
 ```
 
 The second step consists of creating two `k3d` clusters named `east` and `west`,
@@ -185,7 +185,7 @@ If we now curl one of these instances, we will get back a response.
 
 ```sh
 # exec'd on the pod
-/ $ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
+$ curl nginx-set-0.nginx-svc.default.svc.west.cluster.local
 "<!DOCTYPE html>
 <html>
 <head>
@@ -255,12 +255,12 @@ NAME                    READY   STATUS    RESTARTS   AGE
 curl-56dc7d945d-96r6p   2/2     Running   0          23m
 
 # exec and curl
-$ kubectl --context=k3d-east exec curl-56dc7d945d-96r6p -it -c curl -- sh
+kubectl --context=k3d-east exec curl-56dc7d945d-96r6p -it -c curl -- sh
 # we want to curl the same hostname we see in the endpoints object above.
 # however, the service and cluster domain will now be different, since we
 # are in a different cluster.
 #
-/ $ curl nginx-set-0.nginx-svc-k3d-west.default.svc.east.cluster.local
+$ curl nginx-set-0.nginx-svc-k3d-west.default.svc.east.cluster.local
 <!DOCTYPE html>
 <html>
 <head>
