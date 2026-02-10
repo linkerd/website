@@ -243,12 +243,19 @@ EOF
 
 {{< warning >}}
 
-If you do not set `rotationPolicy: Always` in the Certificate's `privateKey`
-section, cert-manager **will not** actually rotate the trust anchor: instead, it
-will update the validity timestamps but **not** generate a new private key.
-**This is definitely not as secure as rotating the private key**; we recommend
-always setting `rotationPolicy: Always` for any certificate that cert-manager is
-managing.
+The default value of the `rotationPolicy` in the Certificate's `privateKey`
+section is dependent on your version of cert-manager. In version 1.17 and
+below, the default value was `Never`. With this configuration, cert-manager
+**will not** actually rotate the trust anchor: instead, it will update the
+validity timestamps but **not** generate a new private key.
+**This is definitely not as secure as rotating the private key**.
+
+If you are upgrading cert-manager from version 1.17 or below to version 1.18 or
+above, be aware that this new default will change the `rotationPolicy` if you
+are not explicitly setting it in your Certificate resource manifest.
+
+To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for
+any certificate that cert-manager is managing.
 
 {{< /warning >}}
 
@@ -353,12 +360,19 @@ EOF
 
 {{< warning >}}
 
-If you do not set `rotationPolicy: Always` in the Certificate's `privateKey`
-section, cert-manager **will not** actually rotate the trust anchor: instead, it
-will update the validity timestamps but **not** generate a new private key.
-**This is definitely not as secure as rotating the private key**; we recommend
-always setting `rotationPolicy: Always` for any certificate that cert-manager is
-managing.
+The default value of the `rotationPolicy` in the Certificate's `privateKey`
+section is dependent on your version of cert-manager. In version 1.17 and
+below, the default value was `Never`. With this configuration, cert-manager
+**will not** actually rotate the trust anchor: instead, it will update the
+validity timestamps but **not** generate a new private key.
+**This is definitely not as secure as rotating the private key**.
+
+If you are upgrading cert-manager from version 1.17 or below to version 1.18 or
+above, be aware that this new default will change the `rotationPolicy` if you
+are not explicitly setting it in your Certificate resource manifest.
+
+To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for
+any certificate that cert-manager is managing.
 
 {{< /warning >}}
 
