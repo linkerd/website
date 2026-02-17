@@ -231,6 +231,7 @@ layer.
 - `inbound_tcp_authz_deny_total`: A counter of the total number of TCP
   connections that were denied
 
+<!-- markdownlint-disable-next-line no-duplicate-heading -->
 ### Labels
 
 Each of these metrics has the following labels:
@@ -336,6 +337,7 @@ The inbound proxy records the following metrics:
 - `inbound_grpc_response_frame_size_bytes`: A histogram measuring the
   sizes of `DATA` frames in gRPC response bodies for a particular route.
 
+<!-- markdownlint-disable-next-line no-duplicate-heading -->
 ### Labels
 
 Each of these metrics has the following common labels, which describe the
