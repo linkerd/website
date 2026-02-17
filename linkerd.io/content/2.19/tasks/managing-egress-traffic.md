@@ -70,7 +70,7 @@ Now SSH into the client container and start generating some external traffic:
 
 ```bash
 kubectl -n egress-test exec -it client -c client -- sh
-$ while sleep 1; do curl -s http://httpbin.org/get ; done
+$ while sleep 1; do curl -s https://httpbin.org/get ; done
 ```
 
 In a separate shell, you can use the Linkerd diagnostics command to visualize
@@ -458,7 +458,7 @@ Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
-$ curl  http://httpbin.org/get
+$ curl  https://httpbin.org/get
 {
   "args": {},
   "headers": {
@@ -468,7 +468,7 @@ $ curl  http://httpbin.org/get
     "X-Amzn-Trace-Id": "Root=1-674599d4-77a473943844e9e31844b48e"
   },
   "origin": "51.116.126.217",
-  "url": "http://httpbin.org/get"
+  "url": "https://httpbin.org/get"
 }
 
 # encrypted traffic can target all paths and hosts
@@ -479,7 +479,7 @@ $ curl  https://httpbin.org/ip
 
 
 # arbitrary unencrypted traffic goes to the internal service
-$ curl http://google.com
+$ curl https://google.com
 {
   "requestUID": "in:http-sid:terminus-grpc:-1-h1:80-190120723",
   "payload": "You cannot go there right now"}
