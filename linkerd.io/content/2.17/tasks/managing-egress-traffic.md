@@ -69,7 +69,7 @@ Now SSH into the client container and start generating some external traffic:
 
 ```bash
 kubectl -n egress-test exec -it client-xxx -c client -- sh
-$ while sleep 1; do curl -s https://httpbin.org/get ; done
+$ while sleep 1; do curl -s http://httpbin.org/get ; done
 ```
 
 In a separate shell, you can use the Linkerd diagnostics command to visualize
@@ -190,7 +190,7 @@ Interestingly enough though, if we go back to our client shell and we try to
 initiate HTTPS traffic to the same service, it will not be allowed:
 
 ```bash
-$ curl -v https://httpbin.org/get
+$ curl -v http://httpbin.org/get
 curl: (35) TLS connect error: error:00000000:lib(0)::reason(0)
 ```
 
@@ -413,7 +413,7 @@ Now let's verify all works as expected:
 
 ```bash
 # plaintext traffic goes as expected to the /get path
-$ curl  https://httpbin.org/get
+$ curl  http://httpbin.org/get
 {
   "args": {},
   "headers": {
@@ -434,7 +434,7 @@ $ curl  https://httpbin.org/ip
 
 
 # arbitrary unencrypted traffic goes to the internal service
-$ curl https://google.com
+$ curl http://google.com
 {
   "requestUID": "in:http-sid:terminus-grpc:-1-h1:80-190120723",
   "payload": "You cannot go there right now"}
