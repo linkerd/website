@@ -479,7 +479,7 @@ $ curl  https://httpbin.org/ip
 
 
 # arbitrary unencrypted traffic goes to the internal service
-$ curl https://google.com
+$ curl http://google.com
 {
   "requestUID": "in:http-sid:terminus-grpc:-1-h1:80-190120723",
   "payload": "You cannot go there right now"}
