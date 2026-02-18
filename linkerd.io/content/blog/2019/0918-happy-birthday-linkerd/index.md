@@ -84,14 +84,14 @@ adopters, contributors, and committers. This is the oxygen that keeps any
 project growing, and above all, Linkerd is your project. Here's to another
 incredible year together with you. 💪
 
-{{< tweet user="markrendle" id="1172922222941560832" >}}
-{{< tweet user="CamiloFromHN" id="1172081948107239426" >}}
-{{< tweet user="ibuildthecloud" id="1166399513923211265" >}}
-{{< tweet user="macintoshPrime" id="1164162817131520002" >}}
-{{< tweet user="Linkerd" id="1174402199549464576" >}}
-{{< tweet user="dexterchief" id="1133853318424485889" >}}
-{{< tweet user="StevenNatera" id="1130973416775983104" >}}
-{{< tweet user="coleca" id="1091591745870139392" >}}
+{{< x user="markrendle" id="1172922222941560832" >}}
+{{< x user="CamiloFromHN" id="1172081948107239426" >}}
+{{< x user="ibuildthecloud" id="1166399513923211265" >}}
+{{< x user="macintoshPrime" id="1164162817131520002" >}}
+{{< x user="Linkerd" id="1174402199549464576" >}}
+{{< x user="dexterchief" id="1133853318424485889" >}}
+{{< x user="StevenNatera" id="1130973416775983104" >}}
+{{< x user="coleca" id="1091591745870139392" >}}
 
 ## Ready to try Linkerd?
 
