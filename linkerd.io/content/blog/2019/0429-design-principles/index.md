@@ -23,7 +23,7 @@ A little over 6 months in and
 [already at Linkerd 2.3](/2019/04/16/announcing-linkerd-2.3/), the reception to
 these changes has been resoundingly positive:
 
-{{< tweet user="coleca" id="1091591745870139392" >}}
+{{< x user="coleca" id="1091591745870139392" >}}
 
 While
 [the move from the JVM to Rust](https://www.infoq.com/articles/linkerd-v2-production-adoption)
