@@ -1,21 +1,23 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/blog/*
 */
 
 .blog {
-  padding: spacer(7) 0;
+  padding: abstracts.size(7) 0;
 
   &.blog--list {
-    background-color: $offwhite;
+    background-color: abstracts.$offwhite;
   }
 
   // Override all card header links in the blog section
   .card__header {
     a {
-      color: $navy;
+      color: abstracts.$navy;
 
       &:hover {
-        color: $blue;
+        color: abstracts.$blue;
       }
     }
   }
@@ -24,19 +26,19 @@
 // .blog__container
 
 .blog__container {
-  @include make-stack(6);
+  @include abstracts.make-stack(6);
 }
 
 // .blog-list
 
 .blog-list {
-  @include make-stack(5);
+  @include abstracts.make-stack(5);
 
   h2 {
     // Override all h2s on the blog list page
-    color: $gray;
-    font-size: $font-size-base;
-    font-weight: $font-weight-normal;
+    color: abstracts.$gray;
+    font-size: abstracts.$font-size-base;
+    font-weight: abstracts.$font-weight-normal;
     text-align: center;
   }
   .blog-list__header {
@@ -51,10 +53,10 @@
   .blog-list__feature,
   .blog-list__pages {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
   }
-  @media (min-width: breakpoint-min-width("lg")) {
+  @media (min-width: abstracts.breakpoint-min-width("lg")) {
     .blog-list__feature,
     .blog-list__pages {
       grid-template-columns: repeat(2, 1fr);
@@ -65,13 +67,13 @@
 // .blog-post
 
 .blog-post {
-  @include make-stack(4);
+  @include abstracts.make-stack(4);
   max-width: 800px;
   margin: 0 auto;
 
   .blog-post__header {
     h1 {
-      font-weight: $font-weight-normal;
+      font-weight: abstracts.$font-weight-normal;
     }
   }
 }
@@ -79,21 +81,21 @@
 // .blog-post-related
 
 .blog-post-related {
-  @include make-stack(5);
+  @include abstracts.make-stack(5);
 
   h2 {
     // Override base styles
-    color: $gray;
-    font-size: $font-size-base;
-    font-weight: $font-weight-normal;
+    color: abstracts.$gray;
+    font-size: abstracts.$font-size-base;
+    font-weight: abstracts.$font-weight-normal;
     text-align: center;
   }
   .blog-post-related__pages {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
   }
-  @media (min-width: breakpoint-min-width("lg")) {
+  @media (min-width: abstracts.breakpoint-min-width("lg")) {
     .blog-post-related__pages {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -104,7 +106,7 @@
 
 .blog-post-meta {
   display: flex;
-  gap: spacer(2);
+  gap: abstracts.size(2);
   align-items: center;
 
   .blog-post-meta__body {
@@ -112,9 +114,9 @@
     flex-direction: column;
   }
   .blog-post-meta__name {
-    font-weight: $font-weight-bold;
+    font-weight: abstracts.$font-weight-bold;
   }
   .blog-post-meta__date {
-    font-size: $font-size-sm;
+    font-size: abstracts.$font-size-sm;
   }
 }

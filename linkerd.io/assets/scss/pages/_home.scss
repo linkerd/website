@@ -1,17 +1,19 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/index.html
 */
 
 .home {
-  @include make-stack(7);
-  padding-bottom: spacer(8);
+  @include abstracts.make-stack(7);
+  padding-bottom: abstracts.size(8);
 
   // Override all h2s on the home page
   h2 {
-    margin-bottom: spacer(6);
-    font-size: $font-size-h1;
+    margin-bottom: abstracts.size(6);
+    font-size: abstracts.$font-size-h1;
   }
-  @media (min-width: breakpoint-min-width("md")) {
+  @media (min-width: abstracts.breakpoint-min-width("md")) {
     h2 {
       font-size: 48px;
     }
@@ -35,7 +37,7 @@
         text-wrap: balance;
       }
     }
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       background-image: url("/home/hero/bkgd.png");
 
       .hero__header {
@@ -44,7 +46,7 @@
         }
       }
     }
-    @media (min-width: breakpoint-min-width("xxl")) {
+    @media (min-width: abstracts.breakpoint-min-width("xxl")) {
       .hero_container {
         // Override component styles
         padding-top: 120px;
@@ -63,27 +65,27 @@
 
 .home-stats {
   margin-top: 0; // Override stack
-  padding: spacer(6) 0;
-  background-image: linear-gradient($light-blue, $white);
+  padding: abstracts.size(6) 0;
+  background-image: linear-gradient(abstracts.$light-blue, abstracts.$white);
   background-size: 100% 200px;
   background-repeat: no-repeat;
 
   .home-stats__body {
     display: grid;
-    gap: spacer(2);
+    gap: abstracts.size(2);
     grid-template-columns: repeat(2, 1fr);
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
   .home-stats__property {
-    font-size: $font-size-sm;
+    font-size: abstracts.$font-size-sm;
     text-align: center;
   }
   .home-stats__value {
-    font-size: $font-size-h1;
-    font-weight: $font-weight-heavy;
+    font-size: abstracts.$font-size-h1;
+    font-weight: abstracts.$font-weight-heavy;
     text-align: center;
   }
 }
@@ -93,10 +95,10 @@
 .home-articles {
   .home-articles__content {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -121,14 +123,14 @@
   }
 }
 .home-adopters {
-  padding: spacer(6) 0;
-  background-image: linear-gradient($white, $light-green, $light-green, $white);
+  padding: abstracts.size(6) 0;
+  background-image: linear-gradient(abstracts.$white, abstracts.$light-green, abstracts.$light-green, abstracts.$white);
 
   .home-adopters__body {
     display: flex;
     flex-direction: column;
-    gap: spacer(6);
-    font-size: $font-size-sm;
+    gap: abstracts.size(6);
+    font-size: abstracts.$font-size-sm;
   }
   .home-adopters__title {
     display: flex;
@@ -138,7 +140,7 @@
 
     a {
       display: block;
-      color: $navy;
+      color: abstracts.$navy;
       white-space: nowrap;
     }
     img {
@@ -146,7 +148,7 @@
       width: 160px;
       height: auto;
       margin: 0 auto;
-      padding-top: spacer(2);
+      padding-top: abstracts.size(2);
     }
   }
   .home-adopters__content,
@@ -181,12 +183,12 @@
   .home-adopters__logos-2 {
     animation: home-adopters-logos-2-keyframes 60s linear infinite;
   }
-  @media (max-width: breakpoint-max-width("md")) {
+  @media (max-width: abstracts.breakpoint-max-width("md")) {
     .home__container {
       padding: 0;
     }
   }
-  @media (min-width: breakpoint-min-width("lg")) {
+  @media (min-width: abstracts.breakpoint-min-width("lg")) {
     .home-adopters__body {
       flex-direction: row;
     }
@@ -212,11 +214,11 @@
         z-index: 1;
       }
       &::before {
-        background-image: linear-gradient(90deg, $light-green, rgba($light-green, 0));
+        background-image: linear-gradient(90deg, abstracts.$light-green, rgba(abstracts.$light-green, 0));
         left: 0;
       }
       &::after {
-        background-image: linear-gradient(-90deg, $light-green, rgba($light-green, 0));
+        background-image: linear-gradient(-90deg, abstracts.$light-green, rgba(abstracts.$light-green, 0));
         right: 0;
       }
     }
@@ -228,10 +230,10 @@
 .home-case-studies {
   .home-case-studies__content {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -247,10 +249,10 @@
 .home-features {
   .home-features__content {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -260,9 +262,9 @@
 
 .home-cncf {
   .home-cncf__body {
-    @include make-stack(4);
-    padding: spacer(6) spacer(4);
-    background-color: $light-blue;
+    @include abstracts.make-stack(4);
+    padding: abstracts.size(6) abstracts.size(4);
+    background-color: abstracts.$light-blue;
     text-align: center;
   }
 }
@@ -272,10 +274,10 @@
 .home-tweets {
   .home-tweets__content {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(2, 1fr);
     }
   }

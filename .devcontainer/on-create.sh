@@ -5,9 +5,12 @@ set -euo pipefail
 cd $(mktemp -d)
 
 # hugo
-scurl -O https://github.com/gohugoio/hugo/releases/download/v0.142.0/hugo_extended_0.142.0_linux-amd64.deb
+scurl -O https://github.com/gohugoio/hugo/releases/download/v0.142.0/hugo_0.142.0_linux-amd64.deb
 sudo dpkg -i hugo*.deb
 rm hugo*.deb
+
+# dart sass
+sudo npm install -g sass@1.97.3
 
 # htmltest
 scurl https://htmltest.wjdp.uk | bash

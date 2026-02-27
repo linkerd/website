@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <span class="badge">Text</span>
@@ -5,8 +7,8 @@
 
 .badge {
   display: inline-block;
-  padding: spacer(1) spacer(3);
-  background-color: $green;
+  padding: abstracts.size(1) abstracts.size(3);
+  background-color: abstracts.$green;
   border-radius: 999px;
-  font-size: $font-size-sm;
+  font-size: abstracts.$font-size-sm;
 }
