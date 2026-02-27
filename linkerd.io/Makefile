@@ -1,11 +1,11 @@
 production-build:
-	npm install -g sass@1.97.3
+	npm install --save-dev sass@1.97.3
 	hugo \
 	--cleanDestinationDir \
 	--minify
 
 preview-build:
-	npm install -g sass@1.97.3
+	npm install --save-dev sass@1.97.3
 	hugo \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--buildDrafts \
