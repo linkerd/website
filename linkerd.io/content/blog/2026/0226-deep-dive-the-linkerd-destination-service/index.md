@@ -25,7 +25,7 @@ security policies being applied — and at the center of all this, the
 _destination_ service.
 
 Throughout this analysis, I connected code reviews, observed behavior in
-production, and documentation references. To organize this process, I used the
+production, and documented references. To organize this process, I used the
 **Zettelkasten method**, stitching together atomic ideas until a clear vision of
 the intelligence behind the mesh was formed. This article is the result of that
 synthesis. Shall we dive in?
