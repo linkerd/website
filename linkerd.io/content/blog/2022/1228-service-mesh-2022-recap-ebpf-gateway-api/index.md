@@ -144,7 +144,7 @@ way of the dodo, however, we may have to suffer through a bit longer.
 
 Although, rumors swirl about another KEP...
 
-{{< tweet user="La_Rainette" id="1591198130049257473" >}}
+{{< x user="La_Rainette" id="1591198130049257473" >}}
 
 Further reading:
 [What really happens at startup: Linkerd, init containers, the CNI, and more](/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).

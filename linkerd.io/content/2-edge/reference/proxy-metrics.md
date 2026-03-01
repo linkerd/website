@@ -231,6 +231,7 @@ layer.
 - `inbound_tcp_authz_deny_total`: A counter of the total number of TCP
   connections that were denied
 
+<!-- markdownlint-disable-next-line no-duplicate-heading -->
 ### Labels
 
 Each of these metrics has the following labels:
@@ -307,6 +308,36 @@ The outbound proxy records the following metrics:
 - `outbound_grpc_route_backend_response_frame_size_bytes`: A histogram measuring
   the sizes of `DATA` frames in gRPC response bodies from a particular backend.
 
+The inbound proxy records the following metrics:
+
+- `inbound_http_requests_total`: A counter tracking the total number of inbound HTTP
+  requests received by a particular backend.
+- `inbound_grpc_requests_total`: A counter tracking the total number of inbound gRPC
+  requests received by a particular backend.
+- `inbound_http_statuses_total`: A counter tracking HTTP response status codes for
+  HTTP traffic received by a particular backend.
+- `inbound_grpc_statuses_total`: A counter tracking gRPC response status codes for
+  gRPC traffic received by a particular backend.
+- `inbound_http_request_duration_seconds`: A histogram measuring the time
+  between HTTP request initialization and HTTP response completion.
+- `inbound_http_response_duration_seconds`: A histogram measuring the time in
+  seconds between the HTTP request completing and HTTP response completing, for
+  a particular backend.
+- `inbound_grpc_request_duration_seconds`: A histogram measuring the time
+  between gRPC request initialization and gRPC response completion.
+- `inbound_grpc_response_duration_seconds`: A histogram measuring the time in
+  seconds between the gRPC request completing and gRPC response completing, for
+  a particular backend.
+- `inbound_http_request_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in HTTP request bodies for a particular route.
+- `inbound_http_response_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in HTTP response bodies for a particular route.
+- `inbound_grpc_request_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in gRPC request bodies for a particular route.
+- `inbound_grpc_response_frame_size_bytes`: A histogram measuring the
+  sizes of `DATA` frames in gRPC response bodies for a particular route.
+
+<!-- markdownlint-disable-next-line no-duplicate-heading -->
 ### Labels
 
 Each of these metrics has the following common labels, which describe the

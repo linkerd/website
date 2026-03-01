@@ -15,11 +15,11 @@ docker run \
 For Mac users:
 
 ```bash
-brew install hugo@0.136.5
+brew install hugo
 ```
 
 Or download the **extended** release of Hugo from the GitHub
-[release page](https://github.com/gohugoio/hugo/releases/tag/v0.136.5).
+[release page](https://github.com/gohugoio/hugo/releases/).
 
 ### Run Hugo locally
 
@@ -34,7 +34,9 @@ upon file write.
 
 ## Hugo version requirements
 
-When linkerd.io is deployed to production, we use Hugo `v0.136.5`.
+The minimum version of Hugo needed to build the site is `v0.142.0`.
+
+When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
 
 ## Website images
 
