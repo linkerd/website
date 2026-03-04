@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <div class="search-input">
@@ -12,19 +14,19 @@
   display: flex;
   align-items: center;
   min-width: 200px;
-  padding-left: spacer(2);
-  border: solid 1px $border-color;
+  padding-left: abstracts.size(2);
+  border: solid 1px abstracts.$border-color;
   border-radius: 999px;
-  background-color: $white;
+  background-color: abstracts.$white;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 
   svg {
     flex-shrink: 0;
-    width: icon-size("md");
-    height: icon-size("md");
+    width: abstracts.icon-size("md");
+    height: abstracts.icon-size("md");
 
     path {
-      color: $gray;
+      color: abstracts.$gray;
     }
   }
   input[type=text],
@@ -34,8 +36,8 @@
     outline: none;
   }
   input[type=reset] {
-    padding-right: spacer(3);
-    color: $blue;
+    padding-right: abstracts.size(3);
+    color: abstracts.$blue;
     cursor: pointer;
   }
   // Hide reset button if search input is empty
@@ -48,12 +50,12 @@
 
   &.search-input--sm {
     svg {
-      width: icon-size("sm");
-      height: icon-size("sm");
+      width: abstracts.icon-size("sm");
+      height: abstracts.icon-size("sm");
     }
     input[type=text],
     input[type=reset] {
-      font-size: $font-size-sm;
+      font-size: abstracts.$font-size-sm;
     }
   }
 }

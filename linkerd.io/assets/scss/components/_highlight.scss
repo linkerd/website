@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 .highlight class added by Hugo's syntax highlighter
 .highlight__copy class added by: /assets/js/highlight-copy.js
@@ -15,17 +17,17 @@
 .highlight {
   position: relative; // Needed to position copy button
   overflow: hidden;
-  margin-bottom: spacer(3);
+  margin-bottom: abstracts.size(3);
 
   pre {
     margin-bottom: 0;
-    padding: spacer(3);
-    border-radius: $border-radius;
+    padding: abstracts.size(3);
+    border-radius: abstracts.$border-radius;
   }
   .highlight__copy {
     position: absolute;
-    right: spacer(1);
-    top: spacer(1);
+    right: abstracts.size(1);
+    top: abstracts.size(1);
     opacity: 0;
     transition: opacity .2s ease;
   }

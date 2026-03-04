@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/docs/*
 */
@@ -14,11 +16,11 @@
   grid-template-columns: 1fr;
 }
 .docs__sidebar {
-  background-color: $light-gray;
+  background-color: abstracts.$light-gray;
 }
 .docs__nav {
-  @include make-stack(3);
-  padding: spacer(4);
+  @include abstracts.make-stack(3);
+  padding: abstracts.size(4);
 
   select {
     // Override base styles
@@ -33,57 +35,57 @@
   }
   nav li {
     position: relative; // Needed to position label
-    line-height: $line-height-tight;
+    line-height: abstracts.$line-height-tight;
 
     a {
       display: block;
-      padding: spacer(2) 0 spacer(2) spacer(3);
-      margin-right: spacer(5); // Prevent the text from touching the label
-      color: $gray;
+      padding: abstracts.size(2) 0 abstracts.size(2) abstracts.size(3);
+      margin-right: abstracts.size(5); // Prevent the text from touching the label
+      color: abstracts.$gray;
 
       &:hover {
-        color: $blue;
+        color: abstracts.$blue;
       }
     }
     label {
       // Postion toggle button
       position: absolute;
       top: 6px;
-      right: spacer(2);
+      right: abstracts.size(2);
     }
     &.docs__nav--selected {
-      background-color: $white;
+      background-color: abstracts.$white;
 
       & > a {
-        color: $navy;
+        color: abstracts.$navy;
       }
     }
     li {
       // Indent submenus
-      padding-left: spacer(3);
+      padding-left: abstracts.size(3);
 
       li {
         // Reduce font size and spacing below level 2
-        font-size: $font-size-sm;
+        font-size: abstracts.$font-size-sm;
 
         a {
-          padding-top: spacer(1);
-          padding-bottom: spacer(1);
+          padding-top: abstracts.size(1);
+          padding-bottom: abstracts.size(1);
         }
       }
     }
   }
   .docs__versions {
-    padding-bottom: spacer(2);
-    border-bottom: solid 1px $border-color;
+    padding-bottom: abstracts.size(2);
+    border-bottom: solid 1px abstracts.$border-color;
   }
   .docs__community {
-    margin-top: spacer(3);
-    padding: spacer(4) spacer(3);
-    border-top: solid 1px $border-color;
+    margin-top: abstracts.size(3);
+    padding: abstracts.size(4) abstracts.size(3);
+    border-top: solid 1px abstracts.$border-color;
 
     ul {
-      @include make-stack(3);
+      @include abstracts.make-stack(3);
     }
     img {
       width: auto;
@@ -92,21 +94,21 @@
   }
 }
 .docs__main {
-  padding: spacer(7) 0;
+  padding: abstracts.size(7) 0;
 }
 .docs__header {
   h1 {
-    margin-bottom: spacer(5); // Override base styles
+    margin-bottom: abstracts.size(5); // Override base styles
   }
 }
 .docs__body {
   max-width: 800px;
-  padding-left: spacer(4);
-  padding-right: spacer(4);
+  padding-left: abstracts.size(4);
+  padding-right: abstracts.size(4);
 }
-@media (min-width: breakpoint-min-width("md")) {
+@media (min-width: abstracts.breakpoint-min-width("md")) {
   .docs__sidebar {
-    padding: spacer(7) 0;
+    padding: abstracts.size(7) 0;
   }
   .docs__container {
     grid-template-columns: 300px 1fr;
@@ -117,19 +119,19 @@
   }
   .docs__nav {
     width: 300px;
-    padding: 0 0 0 spacer(4);
+    padding: 0 0 0 abstracts.size(4);
   }
   .docs__versions,
   .docs__community {
-    margin-right: spacer(4);
+    margin-right: abstracts.size(4);
   }
 }
-@media (min-width: breakpoint-min-width("xl")) {
+@media (min-width: abstracts.breakpoint-min-width("xl")) {
   .docs__body {
-    padding-left: spacer(7);
+    padding-left: abstracts.size(7);
   }
 }
-@media (min-width: breakpoint-min-width("xxl")) {
+@media (min-width: abstracts.breakpoint-min-width("xxl")) {
   .docs__container {
     grid-template-columns: 33% 1fr;
   }

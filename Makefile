@@ -18,6 +18,7 @@ endef
 HAS_GSUTIL := $(shell command -v gsutil;)
 HAS_FLARECTL := $(shell command -v flarectl;)
 HAS_HUGO := $(shell command -v hugo;)
+HAS_SASS := $(shell command -v sass;)
 HAS_HTMLTEST := $(shell command -v htmltest;)
 HAS_MDLINT := $(shell command -v markdownlint;)
 
@@ -116,6 +117,9 @@ build-linkerd.io: get-versions tmp/linkerd.io
 ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
 endif
+ifndef HAS_SASS
+	@printf "Install Dart Sass first: npm install sass\n"; exit 1
+endif
 	cd tmp/linkerd.io && ./build
 
 .PHONY: build-api.linkerd.io
@@ -146,5 +150,3 @@ has-env-%:
 .PHONY: clean
 clean:
 	rm -rf tmp
-
-
