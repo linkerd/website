@@ -234,7 +234,7 @@ spec:
   # Feel free to reduce this, but remember that there is a manual
   # process for rotating the trust anchor!
   duration: 8760h0m0s
-  renewBefore: 7320h0m0s
+  renewBefore: 1440h0m0s
   privateKey:
     rotationPolicy: Always
     algorithm: ECDSA
@@ -351,7 +351,7 @@ spec:
   # This is a two-day duration, rotating slightly over a day before
   # expiry. Feel free to set this as you like.
   duration: 48h0m0s
-  renewBefore: 25h0m0s
+  renewBefore: 23h0m0s
   privateKey:
     rotationPolicy: Always
     algorithm: ECDSA
