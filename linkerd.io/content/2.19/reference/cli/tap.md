@@ -61,4 +61,3 @@ The `tap` command provides a live feed of proxied requests to a
 Kubernetes resource. It is commonly used for debugging and observing
 service-to-service communication within a Linkerd service mesh.
 
-
