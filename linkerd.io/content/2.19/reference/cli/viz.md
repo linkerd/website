@@ -150,7 +150,6 @@ Because retries are only performed on the _outbound_ (client) side, the
 
 {{< docs/cli-flags "viz stat" >}}
 
-### tap
 
 ### tap
 
