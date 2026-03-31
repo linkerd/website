@@ -84,11 +84,11 @@ This was another great Kubecon for Linkerd. As usual, the best part for me is
 the chance to meet other members of our enthusiastic and friendly community in
 person. I'm looking forward to doing more of the same next March in Amsterdam!
 
-{{< tweet user="LiliCosic" id="1197335694856687616" >}}
+{{< x user="LiliCosic" id="1197335694856687616" >}}
 
-{{< tweet user="DC_Corbin3" id="1197953404154216448" >}}
+{{< x user="DC_Corbin3" id="1197953404154216448" >}}
 
-{{< tweet user="eamonb" id="1197348236198965249" >}}
+{{< x user="eamonb" id="1197348236198965249" >}}
 
 ## Join us!
 
