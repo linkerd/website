@@ -51,6 +51,14 @@ params:
           button:
             href: https://www.infracloud.io/linkerd-support/
             text: Learn more
+        - title: Linkerd consulting, implementation, and service mesh support
+          content: |-
+            - Linkerd service mesh consulting and implementation
+            - Traffic management, mTLS, and observability for Kubernetes
+          image: images/procedure.svg
+          button:
+            href: https://procedure.tech/services/linkerd-consulting
+            text: Learn more
     - title: Training
       items:
         - title: Buoyant Service Mesh Academy
