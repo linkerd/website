@@ -452,7 +452,6 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: vault-issuer
-  namespace: cert-manager
 spec:
   vault:
     path: pki/root/sign-intermediate
