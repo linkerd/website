@@ -4,9 +4,9 @@
 {{- /* Output data */}}
 {{ range where $data.CLIReference "Name" (.Get 0) }}
   {{ with .Example }}
-    <h2>
+    <h4>
       Examples
-    </h2>
+    </h4>
     {{ highlight (replaceRE "(?m)^[ ]{2}" "" .) "bash" }}
   {{ end }}
 {{ end }}
