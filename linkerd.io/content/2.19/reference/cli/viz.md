@@ -10,7 +10,9 @@ title: viz
 
 ## Subcommands
 
-## allow-scrapes
+{{< docs/cli-subcommands "viz" >}}
+
+### allow-scrapes
 
 {{< docs/cli-description "viz allow-scrapes" >}}
 
@@ -18,7 +20,7 @@ title: viz
 
 {{< docs/cli-flags "viz allow-scrapes" >}}
 
-## authz
+### authz
 
 {{< docs/cli-description "viz authz" >}}
 
@@ -89,7 +91,7 @@ that is receiving the requests. For more information about how to create a
 service profile, see [service profiles](../../features/service-profiles/). and
 the [profile](profile) command reference.
 
-## Inbound Metrics
+#### Inbound Metrics
 
 By default, `routes` displays _inbound_ metrics for a target. In other words, it
 shows information about requests which are sent to the target and responses
@@ -104,7 +106,7 @@ Displays the request volume, success rate, and latency of requests to the
 perspective, which means that, for example, these latencies do not include the
 network latency between a client and the `webapp` deployment.
 
-## Outbound Metrics
+#### Outbound Metrics
 
 If you specify the `--to` flag then `linkerd viz routes` displays _outbound_
 metrics from the target resource to the resource in the `--to` flag. In contrast
@@ -119,7 +121,7 @@ linkerd viz routes deploy/traffic --to deploy/webapp
 Displays the request volume, success rate, and latency of requests from
 `traffic` to `webapp` from the perspective of the `traffic` deployment.
 
-## Effective and Actual Metrics
+#### Effective and Actual Metrics
 
 If you are looking at _outbound_ metrics (by specifying the `--to` flag) you can
 also supply the `-o wide` flag to differentiate between _effective_ and _actual_
