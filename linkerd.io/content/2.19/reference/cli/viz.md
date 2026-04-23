@@ -154,6 +154,12 @@ Because retries are only performed on the _outbound_ (client) side, the
 
 {{< docs/cli-description "viz tap" >}}
 
+{{< note >}}If a pod is configured with the annotations
+`config.linkerd.io/skip-inbound-ports` or
+`config.linkerd.io/skip-outbound-ports`, traffic on those ports bypasses the
+Linkerd proxy. Because `linkerd tap` observes traffic through the proxy,
+**traffic on skipped ports cannot be tapped**.{{< /note >}}
+
 {{< docs/cli-examples "viz tap" >}}
 
 {{< docs/cli-flags "viz tap" >}}
