@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <div class="avatar">
@@ -12,15 +14,15 @@
 
 .avatar {
   display: flex;
-  gap: spacer(3);
+  gap: abstracts.size(3);
   align-items: center;
 
   & > * {
     margin-bottom: 0;
   }
   .avatar__title {
-    color: $gray;
-    font-weight: $font-weight-normal;
+    color: abstracts.$gray;
+    font-weight: abstracts.$font-weight-normal;
   }
 }
 
@@ -38,12 +40,12 @@ Make the whole avatar clickable.
 
 .avatar-link {
   display: block;
-  color: $navy;
+  color: abstracts.$navy;
 
   &:hover,
   &:active {
     .avatar__title {
-      color: $link-color-hover;
+      color: abstracts.$link-color-hover;
     }
   }
 }

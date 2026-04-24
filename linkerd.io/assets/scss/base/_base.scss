@@ -1,0 +1,274 @@
+@use "../abstracts";
+
+:root {
+  font-size: abstracts.$font-size-base;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: abstracts.$white;
+  color: abstracts.$navy;
+  font-family: abstracts.$font-family-base;
+  font-size: abstracts.$font-size-base;
+  font-weight: abstracts.$font-weight-normal;
+  line-height: abstracts.$line-height-base;
+}
+
+// Block elements
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  font-family: abstracts.$font-family-base;
+  font-weight: abstracts.$font-weight-bold;
+  line-height: abstracts.$line-height-tight;
+}
+
+h1 {
+  font-size: abstracts.$font-size-h1;
+}
+
+h2 {
+  font-size: abstracts.$font-size-h2;
+}
+
+h3 {
+  font-size: abstracts.$font-size-h3;
+}
+
+h4 {
+  font-size: abstracts.$font-size-h4;
+}
+
+h5 {
+  font-size: abstracts.$font-size-h5;
+}
+
+h6 {
+  font-size: abstracts.$font-size-h6;
+}
+
+p, ul, ol, dl, figure {
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  font-family: abstracts.$font-family-base;
+  font-size: abstracts.$font-size-base;
+  font-weight: abstracts.$font-weight-normal;
+  line-height: abstracts.$line-height-base;
+}
+
+dt {
+  font-weight: abstracts.$font-weight-bold;
+}
+
+dd {
+  margin: 0;
+  padding-left: abstracts.size(4);
+}
+
+ul, ol {
+  padding-left: abstracts.size(4);
+}
+
+ul ul,
+ol ol,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+  padding-top: abstracts.size(2);
+}
+
+li {
+  margin-bottom: abstracts.size(1);
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+figure img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+blockquote {
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  padding: abstracts.size(4);
+  border-left: solid 4px abstracts.$blue;
+  background-color: abstracts.$light-blue;
+  border-radius: abstracts.$border-radius;
+  
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+hr {
+  overflow: visible;
+  height: 0;
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  box-sizing: content-box;
+  border: none;
+  border-top: solid 2px abstracts.$border-color;
+}
+
+pre {
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  font-size: 90%;
+  // Prevent pre content from overflowing parent if it's a flex item
+  overflow-x: auto;
+  max-width: 0;
+  min-width: -webkit-fill-available;
+  min-width: -moz-available;
+  min-width: stretch;
+  font-family: abstracts.$font-family-mono;
+}
+
+// Inline elements
+
+img {
+  border-style: none;
+}
+
+a {
+  color: abstracts.$link-color;
+  text-decoration: none;
+  transition: color .2s ease;
+
+  &:hover,
+  &:active {
+    color: abstracts.$link-color-hover;
+  }
+}
+
+strong,
+b {
+  font-weight: abstracts.$font-weight-heavy;
+}
+
+code {
+  font-family: abstracts.$font-family-mono;
+
+  // Code elements without a pre parent
+  &:not(pre code) {
+    padding: 1px 3px;
+    background-color: abstracts.$light-blue;
+    border-radius: abstracts.$border-radius;
+    font-size: 90%;
+    mix-blend-mode: multiply;
+  }
+}
+
+figcaption {
+  padding-top: abstracts.size(2);
+  color: abstracts.$gray;
+  font-size: abstracts.$font-size-sm;
+  text-align: center;
+}
+
+// Tables
+
+table {
+  width: 100%;
+  margin: 0;
+  margin-bottom: abstracts.size(3);
+  border-collapse: collapse;
+  border-top: solid 1px abstracts.$border-color;
+}
+
+th, td {
+  padding: abstracts.size(2) abstracts.size(3);
+  border-bottom: solid 1px abstracts.$border-color;
+  text-align: left;
+}
+
+th {
+  font-size: abstracts.$font-size-sm;
+  font-weight: abstracts.$font-weight-bold;
+}
+
+thead tr,
+tr:nth-child(even) {
+  background-color: abstracts.$light-gray;
+}
+
+// Forms
+
+select,
+input,
+textarea,
+button {
+  font-family: abstracts.$font-family-base;
+  font-size: abstracts.$font-size-base;
+  font-weight: abstracts.$font-weight-normal;
+  line-height: abstracts.$line-height-base;
+}
+
+select {
+  appearance: none;
+  padding: abstracts.size(2) abstracts.size(5) abstracts.size(2) abstracts.size(3);
+  border: solid 1px abstracts.$border-color;
+  background-color: abstracts.$white;
+  color: abstracts.$navy;
+  border-radius: abstracts.$border-radius;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" fill="%238399ac"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right abstracts.size(2) center;
+  background-size: abstracts.size(4) abstracts.size(4);
+}
+
+input[type=text],
+input[type=email],
+textarea {
+  padding: abstracts.size(1) abstracts.size(2);
+  width: 100%;
+  border: solid 1px abstracts.$border-color;
+  border-radius: abstracts.$border-radius;
+  background-color: abstracts.$white;
+  color: abstracts.$navy;
+
+  &:focus {
+    outline: abstracts.$blue;
+  }
+  &::placeholder {
+    color: abstracts.$gray;
+  }
+}
+
+input[type=submit],
+button {
+  @include abstracts.make-button;
+  @include abstracts.make-button--primary;
+  border: none;
+}
+
+input[type=text] {
+  // Remove Chrome's autofill background color
+  // https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: abstracts.$navy;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}

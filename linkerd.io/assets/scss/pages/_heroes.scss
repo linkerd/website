@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/community/heroes.html
 */
@@ -5,10 +7,10 @@
 .heroes {
   .page__container {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
-    @media (min-width: breakpoint-min-width("lg")) {
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -17,7 +19,7 @@
 
     .heroes__type {
       position: absolute;
-      top: spacer(3);
+      top: abstracts.size(3);
       right: 0;
       z-index: 1;
     }

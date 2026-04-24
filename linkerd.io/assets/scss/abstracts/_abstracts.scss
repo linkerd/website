@@ -1,4 +1,65 @@
-// Type
+@use "sass:color";
+@use "sass:map";
+
+// Functions
+
+// Return deeply nested values from a map
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map.get($map, $key);
+  }
+  @return $map;
+}
+
+// Color functions
+
+// Mix a color with white
+@function tint-color($color, $percentage) {
+  @return color.mix(white, $color, $percentage);
+}
+
+// Mix a color with black
+@function shade-color($color, $percentage) {
+  @return color.mix(black, $color, $percentage);
+}
+
+// Return a state color value
+@function state-color($state, $name) {
+  @return map-deep-get($state-colors, $state, $name);
+}
+
+// Sizing functions
+
+// Return a size value
+@function size($key) {
+  @return map.get($sizes, $key);
+}
+
+// Return an icon size value
+@function icon-size($key) {
+  @return map.get($icon-sizes, $key);
+}
+
+// Layout functions
+
+// Return a breakpoint min-width value
+@function breakpoint-min-width($breakpoint) {
+  @return map.get($breakpoint-min-widths, $breakpoint);
+}
+
+// Return a breakpoint max-width value
+@function breakpoint-max-width($breakpoint) {
+  @return map.get($breakpoint-max-widths, $breakpoint);
+}
+
+// Return a container max-width value
+@function container-max-width($breakpoint) {
+  @return map.get($container-max-widths, $breakpoint);
+}
+
+// Variables
+
+// Type variables
 
 $font-family-base: "Open Sans", Helvetica, Arial, sans-serif;
 $font-family-mono: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
@@ -23,7 +84,7 @@ $font-size-h4: 20px;
 $font-size-h5: 18px;
 $font-size-h6: 16px;
 
-// Colors
+// Color variables
 
 $white: rgb(255, 255, 255);
 $offwhite: rgb(250, 250, 250);
@@ -79,9 +140,9 @@ $state-colors: (
   ),
 );
 
-// Sizing
+// Sizing variables
 
-$spacers: (
+$sizes: (
   0: 0,
   1: 4px,
   2: 8px,
@@ -113,12 +174,12 @@ $image-sizes: (
   256: 256px,
 );
 
-// Styles
+// Style variables
 
 $border-radius: 4px;
 $box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.1);
 
-// Layout
+// Layout variables
 
 $breakpoint-min-widths: (
   xs: 0,
@@ -145,7 +206,7 @@ $container-max-widths: (
   xxl: 1320px,
 );
 
-$container-padding: spacer(4);
+$container-padding: size(4);
 
 // Component variables
 

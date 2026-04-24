@@ -1,13 +1,15 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/partials/main-header.html
 */
 
 body {
   // Add top padding to the body to avoid content overlay with fixed header
-  padding-top: $header-min-height;
+  padding-top: abstracts.$header-min-height;
 }
 
-@media (max-width: $mobile-max-breakpoint) {
+@media (max-width: abstracts.$mobile-max-breakpoint) {
   // Hide body scrollbar when mobile nav is open
   body {
     &:has(.main-header__toggle-checkbox:checked) {
@@ -21,23 +23,23 @@ body {
   top: 0;
   right: 0;
   left: 0;
-  z-index: $z-index-main-nav;
-  background-color: $white;
-  box-shadow: $box-shadow;
+  z-index: abstracts.$z-index-main-nav;
+  background-color: abstracts.$white;
+  box-shadow: abstracts.$box-shadow;
 
   .main-header__container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: spacer(4);
-    padding: spacer(2) spacer(3);
+    gap: abstracts.size(4);
+    padding: abstracts.size(2) abstracts.size(3);
   }
   .main-header__logo {
     display: flex;
     align-items: center;
     // Maintain height of header
-    min-height: ($header-min-height - spacer(3));
+    min-height: (abstracts.$header-min-height - abstracts.size(3));
 
     img {
       display: block;
@@ -49,7 +51,7 @@ body {
   }
   .main-header__toggle-icon {
     cursor: pointer;
-    font-family: $font-family-mono;
+    font-family: abstracts.$font-family-mono;
   }
   .main-header__toggle-icon--open {
     display: inline-block;
@@ -58,7 +60,7 @@ body {
     display: none;
   }
   // Mobile nav
-  @media (max-width: $mobile-max-breakpoint) {
+  @media (max-width: abstracts.$mobile-max-breakpoint) {
     &:has(.main-header__toggle-checkbox:checked) {
       // Stretch header to fill window
       height: 100vh;
@@ -81,7 +83,7 @@ body {
     }
   }
   // Desktop nav
-  @media (min-width: $desktop-min-breakpoint) {
+  @media (min-width: abstracts.$desktop-min-breakpoint) {
     .main-header__container {
       flex-wrap: nowrap;
     }

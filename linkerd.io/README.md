@@ -12,14 +12,26 @@ docker run \
 
 ### Install Hugo to develop locally
 
-For Mac users:
+Install Dart Sass first:
+
+```bash
+brew install sass/sass/sass
+```
+
+Then install Hugo:
 
 ```bash
 brew install hugo
 ```
 
-Or download the **extended** release of Hugo from the GitHub
+Or download the release of Hugo from the GitHub
 [release page](https://github.com/gohugoio/hugo/releases/).
+
+## Hugo version requirements
+
+The minimum version of Hugo needed to build the site is `v0.142.0`.
+
+When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
 
 ### Run Hugo locally
 
@@ -31,12 +43,6 @@ hugo server -s linkerd.io
 
 You should see the site on localhost:1313, and it should reload automatically
 upon file write.
-
-## Hugo version requirements
-
-The minimum version of Hugo needed to build the site is `v0.142.0`.
-
-When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
 
 ## Website images
 

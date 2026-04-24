@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <nav class="paginator">
@@ -17,6 +19,6 @@
   ul {
     display: flex;
     justify-content: center;
-    gap: spacer(3);
+    gap: abstracts.size(3);
   }
 }
