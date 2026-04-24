@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <div class="card">
@@ -19,21 +21,21 @@
 */
 
 .card {
-  @include make-card;
+  @include abstracts.make-card;
 
   // @options
 
   &.card--inset-media {
-    @include make-card--inset-media;
+    @include abstracts.make-card--inset-media;
   }
   &.card--horz {
-    @include make-card--horz;
+    @include abstracts.make-card--horz;
   }
   &.card--reverse {
-    @include make-card--reverse;
+    @include abstracts.make-card--reverse;
   }
   &.card--center {
-    @include make-card--center;
+    @include abstracts.make-card--center;
   }
 }
 
@@ -49,5 +51,5 @@
 */
 
 .card-link {
-  @include make-card-link;
+  @include abstracts.make-card-link;
 }
