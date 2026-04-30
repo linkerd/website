@@ -1,7 +1,8 @@
-.vscode
-node_modules
 .*.swp
 .DS_Store
-tmp
 .idea
+.vscode
+.zed
 bin/htmltest
+node_modules
+tmp
