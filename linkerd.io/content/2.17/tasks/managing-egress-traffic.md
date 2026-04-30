@@ -76,7 +76,7 @@ In a separate shell, you can use the Linkerd diagnostics command to visualize
 the traffic.
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_http_route_request_statuses_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_http_route_request_statuses_total
 
 outbound_http_route_request_statuses_total{
   parent_group="policy.linkerd.io",
@@ -190,7 +190,7 @@ Interestingly enough though, if we go back to our client shell and we try to
 initiate HTTPS traffic to the same service, it will not be allowed:
 
 ```bash
-~ $ curl -v https://httpbin.org/get
+$ curl -v https://httpbin.org/get
 curl: (35) TLS connect error: error:00000000:lib(0)::reason(0)
 ```
 
@@ -226,7 +226,7 @@ This fixes the problem and we can see HTTPS requests to the external service
 succeeding reflected in the metrics:
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_open_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_open_total
 
 outbound_tls_route_open_total{
   parent_group="policy.linkerd.io",
@@ -251,7 +251,7 @@ our client, we will see the proxy eagerly closing the connection because it is
 not forbidden by our current policy configuration:
 
 ```bash
-linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_close_total
+$ linkerd dg proxy-metrics -n egress-test po/client | grep outbound_tls_route_close_total
 
 outbound_tls_route_close_total{
   parent_group="policy.linkerd.io",
