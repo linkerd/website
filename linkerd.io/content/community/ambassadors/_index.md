@@ -58,14 +58,6 @@ params:
             github: https://github.com/Eli-Goldberg
             twitter: https://twitter.com/EliG0ldberg
             linkedin: https://www.linkedin.com/in/eli-go/
-        - name: Fredrik Klingenberg
-          role: Developer
-          image: images/fredrik-klingenberg.jpg
-          flag: 🇳🇴
-          urls:
-            github: https://github.com/fredrkl
-            twitter: https://twitter.com/fredrkl
-            linkedin: https://www.linkedin.com/in/fredrikklingenberg/
         - name: Mahendran Selvakumar
           role: DevOps Engineer
           image: images/mahendran-selvakumar.jpg
@@ -91,6 +83,14 @@ params:
           urls:
             github: https://github.com/cpretzer
             linkedin: https://www.linkedin.com/in/charlespretzer/
+        - name: Fredrik Klingenberg
+          role: Developer
+          image: images/fredrik-klingenberg.jpg
+          flag: 🇳🇴
+          urls:
+            github: https://github.com/fredrkl
+            twitter: https://twitter.com/fredrkl
+            linkedin: https://www.linkedin.com/in/fredrikklingenberg/
         - name: Kasper Nissen
           role: Lead Platform Architect
           image: images/kasper-nissen.jpg
