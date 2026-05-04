@@ -18,7 +18,7 @@ Linkerd to perform this feat:
 
 Protocol detection, as the name suggests, allows Linkerd to automatically detect
 the protocol in use in a TCP connection. One of
-[Linkerd's design principles](/docs/design-principles/) is to "just work," and
+[Linkerd's design principles](/design-principles/) is to "just work," and
 protocol detection is an important part of how Linkerd achieves that goal.
 
 In this article, you'll learn what protocol detection is, how this subtle

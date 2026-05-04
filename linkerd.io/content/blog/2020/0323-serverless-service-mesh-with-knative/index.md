@@ -72,7 +72,7 @@ the KinD cluster. Once deployed, the complete architecture will look like this:
 
 Note that Ambassador is necessary because Linkerd doesn't provide an ingress by
 itself. Instead, Linkerd is designed to work with any ingress solution—
-[Linkerd's design principles](/docs/design-principles/) focus on simplicity and
+[Linkerd's design principles](/design-principles/) focus on simplicity and
 composability—and Knative already offers five options for the gateway networking
 layer: Ambassador, Contour, Gloo, Istio, and Kourier. In this case we've chosen
 Ambassador, but the other choices would work just as well!
@@ -359,9 +359,9 @@ while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhos
 
 The Linkerd CLI has subcommands that you can use to view the rich metrics that
 Linkerd collects about each of the services that have the Linkerd proxy
-injected. For example, the [stat](/docs/reference/cli/stat/) command will show
-you the high level details of the resources in your cluster. Try running this
-command:
+injected. For example, the [stat](/docs/reference/cli/viz/#stat) command will
+show you the high level details of the resources in your cluster. Try running
+this command:
 
 ```bash
 linkerd stat deploy --all-namespaces
@@ -401,8 +401,8 @@ linkerd           linkerd-tap                         1/1   100.00%   0.3rps    
 linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
 ```
 
-Another example is the [tap](/docs/reference/cli/tap/) command, where you can
-see real-time requests being sent to resources. This command streams the
+Another example is the [tap](/docs/reference/cli/viz/#tap) command, where you
+can see real-time requests being sent to resources. This command streams the
 requests that are being sent to and from the helloworld-go pod in the `default`
 namespace:
 
@@ -478,8 +478,8 @@ resource. For example, this will output all the metrics collected for the
 linkerd metrics --namespace knative-serving deploy/activator
 ```
 
-I encourage you to play with both of the [top](/docs/reference/cli/metrics/) and
-[edges](/docs/reference/cli/edges/) commands to get an idea of how much
+I encourage you to play with both of the [top](/docs/reference/cli/viz/#top) and
+[edges](/docs/reference/cli/viz/#edges) commands to get an idea of how much
 information they can provide.
 
 #### Dashboard

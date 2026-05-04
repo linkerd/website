@@ -63,7 +63,7 @@ to minimize the operational cost would do our users a tremendous disservice.
 
 For more detail about these principles and some examples of them in action,
 check out the
-[Linkerd design principles documentation](/docs/design-principles/).
+[Linkerd design principles documentation](/design-principles/).
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io). If you have feature

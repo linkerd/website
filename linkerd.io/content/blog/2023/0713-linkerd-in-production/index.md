@@ -297,7 +297,7 @@ This gets a little complex:
 Last but not least, there's the Linkerd debug sidecar, which comes equipped with
 `tshark`, `tcpdump`, `lsof`, and `iproute2`. If your runtime allows it, it can
 be very useful for debugging: check out the
-[documentation on using the debug sidecar](/docs/tasks/using-the-debug-container)
+[documentation on using the debug sidecar](/docs/tasks/using-the-debug-container/)
 for the details here.
 
 ## Linkerd in Production
