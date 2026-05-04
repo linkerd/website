@@ -62,7 +62,8 @@ the service mesh works. Finally, I'll describe where the service mesh is heading
 and what to expect as this concept evolves alongside cloud native adoption.
 
 (You may also like:
-[**The Service Mesh: What Every Software Engineer Needs to Know about the World's Most Over-Hyped Technology**](https://buoyant.io/service-mesh-manifesto/).)
+[**The Service Mesh: What Every Software Engineer Needs to Know about the
+World's Most Over-Hyped Technology**](https://buoyant.io/service-mesh-manifesto/).)
 
 ## Service mesh in a nutshell
 
