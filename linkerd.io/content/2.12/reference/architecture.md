@@ -16,7 +16,7 @@ with the control plane for configuration.
 Linkerd also provides a **CLI** that can be used to interact with the control
 and data planes.
 
-![Linkerd's architecture](/docs/images/architecture/control-plane.png "Linkerd's architecture")
+![Linkerd's architecture](/images/docs/architecture/control-plane.png "Linkerd's architecture")
 
 ## CLI
 

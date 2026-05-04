@@ -1,5 +1,5 @@
 {{ $page := . }}
-{{ $section := printf "/%s/" site.Params.latestMajorVersion }}
+{{ $section := "/docs/" }}
 {{ range site.Menus.docs }}
   {{ if hasPrefix $page.RelPermalink .URL }}
     {{ $section = .URL }}

@@ -258,7 +258,7 @@ To enable server-level authorization for `foo > baz` communication, we first
 need to identify the gRPC routes on the baz service. This requires creating both
 inbound and outbound route definitions. For a detailed explanation of the
 differences between these route types, see the
-[official documentation](/2/reference/grpcroute/).
+[official documentation](/docs/reference/grpcroute/).
 
 ##### Outbound
 
@@ -311,7 +311,7 @@ metadata:
   namespace: default
 spec:
   identities:
-    - "foo.default.serviceaccount.identity.linkerd.cluster.local"
+    - 'foo.default.serviceaccount.identity.linkerd.cluster.local'
 ---
 apiVersion: policy.linkerd.io/v1alpha1
 kind: AuthorizationPolicy
@@ -354,7 +354,7 @@ metadata:
   namespace: default
 spec:
   identities:
-    - "bar.default.serviceaccount.identity.linkerd.cluster.local"
+    - 'bar.default.serviceaccount.identity.linkerd.cluster.local'
 ---
 apiVersion: policy.linkerd.io/v1alpha1
 kind: AuthorizationPolicy

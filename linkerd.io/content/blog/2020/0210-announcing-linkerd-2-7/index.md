@@ -66,7 +66,7 @@ and fixed many other smaller issues.
 ## And lots more
 
 Linkerd 2.7 brings some big improvements to Linkerd's Helm charts (though with
-[some breaking changes](/2/tasks/upgrade/#upgrade-notice-stable-270)): we've
+[some breaking changes](/docs/tasks/upgrade/#upgrade-notice-stable-270)): we've
 split the CNI template into a separate chart, fixed several issues, and
 generally updated the chart to follow community best practices. Linkerd 2.7 also
 has a tremendous list of other improvements, performance enhancements, and bug
@@ -107,10 +107,10 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](/2/tasks/install-helm/). Upgrading from
-a previous release? We've got you covered: see our
-[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the `linkerd upgrade`
-command.
+[guide to installing Linkerd with Helm](/docs/tasks/install-helm/). Upgrading
+from a previous release? We've got you covered: see our
+[Linkerd upgrade guide](/docs/tasks/upgrade/) for how to use the
+`linkerd upgrade` command.
 
 ## Linkerd is for everyone
 

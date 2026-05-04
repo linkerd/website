@@ -46,9 +46,9 @@ mesh use case, it's dramatically simpler to operate than general-purpose proxies
 such as NGINX and Envoy. This is not a knock on those proxies; it's simply a
 reflection that by shedding all the non-service-mesh use cases, Linkerd2-proxy
 gains the leeway to "just work" without tuning or tweaking, through features
-like [protocol detection](/2/features/protocol-detection/) and
-[Kubernetes-native service discovery](/2/features/load-balancing/). In fact, at
-this point Linkerd-proxy doesn't even have a config file.
+like [protocol detection](/docs/features/protocol-detection/) and
+[Kubernetes-native service discovery](/docs/features/load-balancing/). In fact,
+at this point Linkerd-proxy doesn't even have a config file.
 
 ## The future of the Linkerd2-proxy
 
@@ -65,8 +65,8 @@ and well-contained to the big and hairy. These include:
    working on extend this to non-HTTP protocols, so that they have the same
    guarantees of workload identity and confidentiality that Linkerd provides for
    HTTP traffic today. As an added bonus, this feature will also extend
-   Linkerd's [seamless multi-cluster capabilities](/2/features/multicluster/) to
-   non-HTTP traffic.
+   Linkerd's [seamless multi-cluster capabilities](/docs/features/multicluster/)
+   to non-HTTP traffic.
 2. **Revisiting latency bucketing**. As part of its instrumentation,
    Linkerd2-proxy records the latency of all traffic that passes through it and
    reports these values in a set of fixed buckets, with a specific latency range

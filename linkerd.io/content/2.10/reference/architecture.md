@@ -16,7 +16,7 @@ service. Because they're transparent, these proxies act as highly instrumented
 out-of-process network stacks, sending telemetry to, and receiving control
 signals from, the control plane.
 
-![Linkerd's architecture](/docs/images/architecture/control-plane.png "Linkerd's architecture")
+![Linkerd's architecture](/images/docs/architecture/control-plane.png "Linkerd's architecture")
 
 ## CLI
 

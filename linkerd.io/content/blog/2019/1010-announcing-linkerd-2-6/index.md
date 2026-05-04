@@ -45,8 +45,8 @@ which is already causing some excitement in the community:
 
 Finally, following up on our Helm work from the previous release, we're happy to
 announce that **Linkerd now has a public Helm repo**! We've published a
-[guide to installing Linkerd with Helm](/2/tasks/install-helm/) from this public
-repo.
+[guide to installing Linkerd with Helm](/docs/tasks/install-helm/) from this
+public repo.
 
 Linkerd 2.6 additionally brings a tremendous list of other improvements,
 performance enhancements, and bug fixes, including:
@@ -95,8 +95,8 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Upgrading from a previous release? See our handy
-[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the `linkerd upgrade`
-command.
+[Linkerd upgrade guide](/docs/tasks/upgrade/) for how to use the
+`linkerd upgrade` command.
 
 Linkerd is a community project and is hosted by the
 [Cloud Native Computing Foundation](https://cncf.io/). If you have feature

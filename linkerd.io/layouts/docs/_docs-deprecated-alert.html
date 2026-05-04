@@ -1,13 +1,12 @@
-{{ $latestVersion := site.Params.latestMajorVersion }}
-{{ if and (hasPrefix .Section "2.") (ne .Section $latestVersion) }}
+{{ if hasPrefix .Section "2." }}
   <div class="alert alert--warning alert--condensed alert--center docs__deprecated-alert">
     <div class="alert__content">
       You are viewing docs for an older version of Linkerd.
-      {{ $latestFilePath := replace .RelPermalink (printf "/%s/" .Section) (printf "/%s/" $latestVersion) }}
+      {{ $latestFilePath := replace .RelPermalink (printf "/%s/" .Section) "/docs/" 1 }}
       {{ with site.GetPage $latestFilePath }}
         You may want the <a href="{{ .RelPermalink }}">latest documentation</a> for this page instead.
       {{ else }}
-        <a href="/{{ $latestVersion }}/">View the latest docs</a>.
+        <a href="/docs/">View the latest docs</a>.
       {{ end }}
     </div>
   </div>
