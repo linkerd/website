@@ -3,7 +3,7 @@ date: 2024-02-06T00:00:00Z
 slug: linkerd-certificates-with-vault
 title: |-
   Workshop Recap: Linkerd Certificate Management with Vault
-keywords: [linkerd, "2.14", features, vault]
+keywords: [linkerd, '2.14', features, vault]
 params:
   author: flynn
   showCover: true
@@ -95,7 +95,7 @@ one network, but you do administration from a different network.
 
 You'll need several CLI tools for this:
 
-- `linkerd`, from `/2/getting-started/`;
+- `linkerd`, from `/docs/getting-started/`;
 - `kubectl`, from `https://kubernetes.io/docs/tasks/tools/`;
 - `helm`, from `https://helm.sh/docs/intro/quickstart/`;
 - `jq`, from `https://jqlang.github.io/jq/download/`;

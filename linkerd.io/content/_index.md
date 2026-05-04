@@ -12,7 +12,7 @@ params:
       other meshes. 100% open source, CNCF graduated, and written in Rust.
     buttons:
       - text: Get Started
-        href: /2/getting-started/
+        href: /docs/getting-started/
         variant: primary
       - text: Get Involved
         href: /community/get-involved/
@@ -118,7 +118,7 @@ params:
           Instantly track success rates, latencies, and request volumes for
           every meshed workload, without changes or config.
         image: /home/features/bar-chart.svg
-        url: /2/features/telemetry/
+        url: /docs/features/telemetry/
       - title: Simpler than any other mesh
         content: |-
           Minimalist, Kubernetes-native design. No hidden magic, as little YAML
@@ -130,19 +130,19 @@ params:
           Transparently add mutual TLS to any on-cluster TCP communication with
           no configuration.
         image: /home/features/settings.svg
-        url: /2/features/server-policy/
+        url: /docs/features/server-policy/
       - title: Designed by engineers, for engineers
         content: |-
           Self-contained control plane, incrementally deployable data plane, and
           lots and lots of diagnostics and debugging tools.
         image: /home/features/startup.svg
-        url: /2/tasks/debugging-502s/
+        url: /docs/tasks/debugging-502s/
       - title: Latency-aware load balancing and cross-cluster failover
         content: |-
           Instantly add latency-aware load balancing, request retries, timeouts,
           and blue-green deploys to keep your applications resilient.
         image: /home/features/balance.svg
-        url: /2/features/load-balancing/
+        url: /docs/features/load-balancing/
       - title: State-of-the-art ultralight Rust dataplane
         content: |-
           Incredibly small and blazing fast Linkerd2-proxy _micro-proxy_ written
