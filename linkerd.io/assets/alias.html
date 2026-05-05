@@ -6,5 +6,8 @@
     <meta name="robots" content="noindex">
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+    <script>
+      window.location.href = '{{ .Permalink }}' + window.location.hash;
+    </script>
   </head>
 </html>

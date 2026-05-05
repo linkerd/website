@@ -7,7 +7,7 @@ For example, if the latest major version is 2.19, a page that lives at:
 Will have an alias created at:
 /2.19/reference/
 */ -}}
-{{- if or (eq .Path "/docs") (hasPrefix .Path "/docs/") }}
+{{- if eq .Section "docs" }}
   {{- /* Replace the first instance of "docs" with the latest major version */}}
   {{- $path := add (replace .Path "docs" site.Params.latestMajorVersion 1) "/index.html" }}
   {{- $resource := resources.Get "alias.html" }}
