@@ -1,42 +1,44 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/community/adopters.html
 */
 
 .adopters {
   .page__container {
-    @include make-stack(7);
+    @include abstracts.make-stack(7);
   }
   .adopters__case-studies {
     display: grid;
-    gap: spacer(4);
+    gap: abstracts.size(4);
     grid-template-columns: 1fr;
 
     blockquote {
       // Remove base styling
       padding: 0;
       border: none;
-      background-color: $white;
+      background-color: abstracts.$white;
     }
-    @media (min-width: breakpoint-min-width("lg")) {
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
   .adopters__logos {
     display: grid;
-    gap: spacer(7);
+    gap: abstracts.size(7);
     grid-template-columns: 1fr;
 
     img {
       // Multiply the logos because some of them have a white background
       mix-blend-mode: multiply;
     }
-    @media (min-width: breakpoint-min-width("md")) {
+    @media (min-width: abstracts.breakpoint-min-width("md")) {
       grid-template-columns: repeat(2, 1fr);
     }
-    @media (min-width: breakpoint-min-width("lg")) {
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
       grid-template-columns: repeat(3, 1fr);
     }
-    @media (min-width: breakpoint-min-width("xl")) {
+    @media (min-width: abstracts.breakpoint-min-width("xl")) {
       grid-template-columns: repeat(4, 1fr);
     }
   }

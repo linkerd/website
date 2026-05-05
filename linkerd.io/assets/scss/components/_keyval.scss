@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <table class="keyval">
@@ -8,12 +10,12 @@
 .keyval {
   // Override base styles
   tr {
-    background-color: $light-gray;
+    background-color: abstracts.$light-gray;
   }
   th:nth-child(1),
   td:nth-child(1) {
-    background-color: $light-blue;
-    border-right: solid 1px $border-color;
+    background-color: abstracts.$light-blue;
+    border-right: solid 1px abstracts.$border-color;
 
     code:not([class^=lang]) {
       // Override base styles
@@ -21,7 +23,7 @@
       background-color: transparent;
       mix-blend-mode: normal;
 
-      @media (min-width: breakpoint-min-width("lg")) {
+      @media (min-width: abstracts.breakpoint-min-width("lg")) {
         white-space: nowrap;
       }
     }

@@ -1,0 +1,26 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/community/ambassadors-apply.html
+*/
+
+.ambassadors-apply {
+  // Override all h2s on the page
+  h2 {
+    font-size: abstracts.$font-size-h1;
+  }
+  .page__container {
+    @include abstracts.make-stack(7);
+  }
+  @media (min-width: abstracts.breakpoint-min-width("lg")) {
+    section {
+      padding-left: abstracts.size(6);
+      padding-right: abstracts.size(6);
+    }
+    .card {
+      @include abstracts.make-card--horz;
+      @include abstracts.make-card--reverse;
+      padding: abstracts.size(6);
+    }
+  }
+}

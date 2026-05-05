@@ -1,0 +1,18 @@
+@use "../abstracts";
+
+@mixin make-stack($size) {
+  & > * {
+    margin-bottom: 0;
+  }
+  & > * + * {
+    margin-top: abstracts.size($size);
+  }
+}
+@mixin make-stack-recursive($size) {
+  & * {
+    margin-bottom: 0;
+  }
+  & * + * {
+    margin-top: abstracts.size($size);
+  }
+}

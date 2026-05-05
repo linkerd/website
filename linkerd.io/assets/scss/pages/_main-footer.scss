@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup See: layouts/partials/main-footer.html
 */
@@ -14,29 +16,29 @@
     flex-direction: column;
   }
   .main-footer__top {
-    padding: spacer(6) 0;
-    background-color: $light-blue;
+    padding: abstracts.size(6) 0;
+    background-color: abstracts.$light-blue;
 
     .main-footer__container {
-      gap: spacer(6);
+      gap: abstracts.size(6);
     }
   }
   .main-footer__bottom {
-    padding: spacer(3) 0;
-    background-color: $navy;
-    color: $light-blue;
+    padding: abstracts.size(3) 0;
+    background-color: abstracts.$navy;
+    color: abstracts.$light-blue;
     text-align: center;
 
     p {
-      font-size: $font-size-sm;
+      font-size: abstracts.$font-size-sm;
     }
     .main-footer__container {
-      gap: spacer(3);
+      gap: abstracts.size(3);
     }
   }
   .main-footer__info {
-    @include make-stack(2);
-    color: $gray;
+    @include abstracts.make-stack(2);
+    color: abstracts.$gray;
     text-align: center;
 
     img {
@@ -46,14 +48,14 @@
   .main-footer__links {
     display: flex;
     justify-content: center;
-    gap: spacer(7);
+    gap: abstracts.size(7);
   }
-  @media (min-width: breakpoint-min-width("md")) {
+  @media (min-width: abstracts.breakpoint-min-width("md")) {
     .main-footer__container {
       flex-direction: row;
     }
     .main-footer__top {
-      padding: spacer(7) 0;
+      padding: abstracts.size(7) 0;
 
       .main-footer__container {
         justify-content: space-between;

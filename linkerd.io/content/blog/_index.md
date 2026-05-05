@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2026/0226-deep-dive-the-linkerd-destination-service
     - /blog/2026/0209-protocol-detection
-    - /blog/2025/1031-announcing-linkerd-2.19
 ---

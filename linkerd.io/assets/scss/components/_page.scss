@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <div class="page">
@@ -8,9 +10,9 @@
 */
 
 .page {
-  padding: spacer(7) 0;
-  background-color: $offwhite;
-  background-image: linear-gradient($light-blue, $offwhite);
+  padding: abstracts.size(7) 0;
+  background-color: abstracts.$offwhite;
+  background-image: linear-gradient(abstracts.$light-blue, abstracts.$offwhite);
   background-size: 100% 200px;
   background-repeat: no-repeat;
 }

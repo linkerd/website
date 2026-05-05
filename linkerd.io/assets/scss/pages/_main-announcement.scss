@@ -1,0 +1,25 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/partials/main-announcement.html
+*/
+
+.main-announcement {
+  padding: abstracts.size(2);
+  background-color: abstracts.$navy;
+  color: abstracts.$white;
+  font-size: abstracts.$font-size-sm;
+  text-align: center;
+
+  a {
+    color: abstracts.$white;
+    font-weight: abstracts.$font-weight-bold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(abstracts.$white, 0.4);
+  }
+  .main-announcement__link {
+    display: inline-block;
+    padding-left: abstracts.size(2);
+  }
+}

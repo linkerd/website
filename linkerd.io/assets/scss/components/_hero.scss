@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 
 If the `hero--has-background-image` class is applied, the `background-image` rule needs to
@@ -44,39 +46,39 @@ Using a parent component:
 */
 
 .hero {
-  background-color: $white;
+  background-color: abstracts.$white;
 
   .hero__container {
-    padding-top: spacer(6);
-    padding-bottom: spacer(6);
+    padding-top: abstracts.size(6);
+    padding-bottom: abstracts.size(6);
   }
   .hero__body {
-    @include make-stack(4);
+    @include abstracts.make-stack(4);
   }
   .hero__header {
     h1 {
       margin-bottom: 0;
-      background-image: -webkit-linear-gradient(0deg, $navy, $blue);
+      background-image: -webkit-linear-gradient(0deg, abstracts.$navy, abstracts.$blue);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: $font-weight-heavy;
+      font-weight: abstracts.$font-weight-heavy;
       letter-spacing: -1.4px;
     }
   }
   .hero__content {
-    @include make-stack(3);
+    @include abstracts.make-stack(3);
     max-width: 980px;
   }
   .hero__footer {
     display: flex;
     flex-direction: column;
-    gap: spacer(3);
+    gap: abstracts.size(3);
   }
-  @media (min-width: breakpoint-min-width("md")) {
+  @media (min-width: abstracts.breakpoint-min-width("md")) {
     .hero__container {
-      padding-top: spacer(7);
-      padding-bottom: spacer(7);
+      padding-top: abstracts.size(7);
+      padding-bottom: abstracts.size(7);
     }
     .hero__header {
       h1 {
@@ -87,7 +89,7 @@ Using a parent component:
       flex-direction: row;
     }
   }
-  @media (min-width: breakpoint-min-width("lg")) {
+  @media (min-width: abstracts.breakpoint-min-width("lg")) {
     .hero__header {
       h1 {
         font-size: 60px;
@@ -101,7 +103,7 @@ Using a parent component:
     .hero__container {
       background-size: 0 0;// Hide background image
     }
-    @media (min-width: breakpoint-min-width("lg")) {
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
       .hero__container {
         background-repeat: no-repeat;
         background-size: auto 300px;
@@ -111,12 +113,12 @@ Using a parent component:
         max-width: 700px;
       }
     }
-    @media (min-width: breakpoint-min-width("xl")) {
+    @media (min-width: abstracts.breakpoint-min-width("xl")) {
       .hero__container {
         background-size: auto 400px;
       }
     }
-    @media (min-width: breakpoint-min-width("xxl")) {
+    @media (min-width: abstracts.breakpoint-min-width("xxl")) {
       .hero__container {
         background-size: auto 500px;
       }

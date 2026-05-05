@@ -1,0 +1,37 @@
+{{- /* Get the CLI data file for the current linkerd version */}}
+{{- $file := replace .Page.Section "." "-" }}
+{{- $data := index site.Data.cli $file }}
+{{- $cmd := .Get 0 }}
+{{- /* Output data */}}
+{{ if $cmd }}
+  <table class="keyval">
+    <thead>
+      <tr>
+        <th>
+          Subcommand
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $data.CLIReference }}
+        {{ if hasPrefix .Name (printf "%s " $cmd) }}
+          {{ $subcmd := index (split .Name " ") 1 }}
+          {{ $href := printf "#%s" $subcmd }}
+          <tr>
+            <td>
+              <a href="{{ $href }}">
+                <code>{{ $subcmd }}</code>
+              </a>
+            </td>
+            <td>
+              {{ .Synopsis | markdownify }}
+            </td>
+          </tr>
+        {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+{{ end }}
