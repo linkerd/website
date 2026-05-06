@@ -304,7 +304,6 @@ for the upcoming `2.20` version.
   `(/2-edge/reference/cli/install/#)`.
 - Add a row to the Supported Kubernetes Versions table for `2.20` in
   `linkerd.io/content/2-edge/reference/k8s-versions.md`.
-- Rename the `docs` directory `2.19`.
 - Add a row to the Gateway API compatibility table for `2.20` in
   `linkerd.io/content/2-edge/features/gateway-api.md`.
 - Rename the `docs` directory `2.19`.
