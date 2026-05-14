@@ -21,7 +21,7 @@ To use distributed tracing, you'll need to:
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like:
 
-![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
+![Topology](/images/docs/tracing/tracing-topology.svg 'Topology')
 
 ## Prerequisites
 
@@ -101,17 +101,17 @@ up in Jaeger. To get to the UI, run:
 linkerd jaeger dashboard
 ```
 
-![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
+![Jaeger](/images/docs/tracing/jaeger-empty.png 'Jaeger')
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
-![Search](/docs/images/tracing/jaeger-search.png "Search")
+![Search](/images/docs/tracing/jaeger-search.png 'Search')
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
-![Search](/docs/images/tracing/example-trace.png "Search")
+![Search](/images/docs/tracing/example-trace.png 'Search')
 
 There sure are a lot of `linkerd-proxy` spans in that output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
@@ -127,7 +127,7 @@ meta-data as trace attributes, users can directly jump into related resources
 traces directly from the linkerd-web dashboard by clicking the Jaeger icon in
 the Metrics Table, as shown below:
 
-![Linkerd-Jaeger](/docs/images/tracing/linkerd-jaeger-ui.png "Linkerd-Jaeger")
+![Linkerd-Jaeger](/images/docs/tracing/linkerd-jaeger-ui.png 'Linkerd-Jaeger')
 
 To obtain that functionality you need to install (or upgrade) the Linkerd-Viz
 extension specifying the service exposing the Jaeger UI. By default, this would
@@ -205,7 +205,7 @@ If using helm to install ingress-nginx, you can configure tracing by using:
 ```yaml
 controller:
   config:
-    enable-opentracing: "true"
+    enable-opentracing: 'true'
     zipkin-collector-host: collector.linkerd-jaeger
 ```
 

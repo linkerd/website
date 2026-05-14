@@ -57,8 +57,8 @@ meshed pods. Client-side policy covers a vast set of features, including:
 - ... and lots more.
 
 Linkerd actually already has a basic form of client-side policy in the form of
-[ServiceProfiles](/2/reference/service-profiles/), which allow you (among other
-things) to control the retry behavior of callers to a service. In 2.12 and
+[ServiceProfiles](/docs/reference/service-profiles/), which allow you (among
+other things) to control the retry behavior of callers to a service. In 2.12 and
 beyond, we'll be revisiting ServiceProfiles and tackling this important class of
 features in a more systematic way.
 

@@ -28,14 +28,14 @@ workloads, but we also get the telemetry that we need to make sure that the
 components are healthy. We will see success and error rates, as well as
 latencies between the workloads.
 
-![system-components](system_components.png "Knative System Components")
+![system-components](system_components.png 'Knative System Components')
 
 At the application level, we'll add those same features to the application
 running on Knative itself. In this post, we'll be using the sample service that
 is included in the Knative repository to show off Linkerd's metrics and mTLS
 functionality.
 
-![application-system-components](application_components.png "Application Level Components")
+![application-system-components](application_components.png 'Application Level Components')
 
 At the end of this example, we'll see each of these components running as
 workloads, with all traffic proxied by the Linkerd service mesh.
@@ -68,11 +68,11 @@ this example, we will use Ambassador as a simple Kubernetes
 [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) to
 the KinD cluster. Once deployed, the complete architecture will look like this:
 
-![full-architecture](full_arch_ambassador.png "Full System Architecture")
+![full-architecture](full_arch_ambassador.png 'Full System Architecture')
 
 Note that Ambassador is necessary because Linkerd doesn't provide an ingress by
 itself. Instead, Linkerd is designed to work with any ingress solution—
-[Linkerd's design principles](/2/design-principles/) focus on simplicity and
+[Linkerd's design principles](/design-principles/) focus on simplicity and
 composability—and Knative already offers five options for the gateway networking
 layer: Ambassador, Contour, Gloo, Istio, and Kourier. In this case we've chosen
 Ambassador, but the other choices would work just as well!
@@ -166,7 +166,7 @@ operation. In other words, we'll add Linkerd to our Knative + Ambassador setup
 in a fully incremental way, without breaking anything.
 
 Linkerd control plane installation is a two step process. First, we'll install
-the [Linkerd CLI](/2/reference/cli/) and then we'll use it to install the
+the [Linkerd CLI](/docs/reference/cli/) and then we'll use it to install the
 Linkerd control plane.
 
 #### Get the Linkerd CLI
@@ -230,7 +230,7 @@ returns without errors, you're ready to get meshing. But first, let's look at
 the Linkerd control plane architecture that was just deployed and the pods
 running in the control plane:
 
-![linkerd-control-plane](control-plane.png "Linkerd Control Plane")
+![linkerd-control-plane](control-plane.png 'Linkerd Control Plane')
 
 To view the control plane pods, run:
 
@@ -260,8 +260,8 @@ linkerd-web-7bc875dc7f-jthxd              2/2     Running   2          4d2h
 
 The next step is to "mesh" the components by injecting the Linkerd sidecar proxy
 into their containers. Linkerd features an
-[auto-injection feature](/2/features/proxy-injection/) to make it simple to add
-your services to the service mesh. In the next steps, we'll annotate the
+[auto-injection feature](/docs/features/proxy-injection/) to make it simple to
+add your services to the service mesh. In the next steps, we'll annotate the
 `default`, `ambassador` and `knative-serving` namespaces to add their components
 which will instruct the `proxy-injector` to inject the Linkerd proxy.
 
@@ -359,9 +359,9 @@ while true; do curl -H "HOST: helloworld-go.default.example.com" http://localhos
 
 The Linkerd CLI has subcommands that you can use to view the rich metrics that
 Linkerd collects about each of the services that have the Linkerd proxy
-injected. For example, the [stat](/2/reference/cli/stat/) command will show you
-the high level details of the resources in your cluster. Try running this
-command:
+injected. For example, the [stat](/docs/reference/cli/viz/#stat) command will
+show you the high level details of the resources in your cluster. Try running
+this command:
 
 ```bash
 linkerd stat deploy --all-namespaces
@@ -401,9 +401,9 @@ linkerd           linkerd-tap                         1/1   100.00%   0.3rps    
 linkerd           linkerd-web                         1/1   100.00%   0.3rps           1ms           5ms           5ms          2
 ```
 
-Another example is the [tap](/2/reference/cli/tap/) command, where you can see
-real-time requests being sent to resources. This command streams the requests
-that are being sent to and from the helloworld-go pod in the `default`
+Another example is the [tap](/docs/reference/cli/viz/#tap) command, where you
+can see real-time requests being sent to resources. This command streams the
+requests that are being sent to and from the helloworld-go pod in the `default`
 namespace:
 
 ```bash
@@ -478,9 +478,9 @@ resource. For example, this will output all the metrics collected for the
 linkerd metrics --namespace knative-serving deploy/activator
 ```
 
-I encourage you to play with both of the [top](/2/reference/cli/metrics/) and
-[edges](/2/reference/cli/edges/) commands to get an idea of how much information
-they can provide.
+I encourage you to play with both of the [top](/docs/reference/cli/viz/#top) and
+[edges](/docs/reference/cli/viz/#edges) commands to get an idea of how much
+information they can provide.
 
 #### Dashboard
 
@@ -496,7 +496,7 @@ Your browser should open with the dashboard and you'll see that the `linkerd`,
 `ambassador`, and `knative-serving` namespaces all have deployments that are
 included in the service mesh:
 
-![linkerd-dashboard](knative-4.png "Linkerd Dashboard")
+![linkerd-dashboard](knative-4.png 'Linkerd Dashboard')
 
 Clicking on any of the namespace will display the pods and deployments in the
 namespace, with the metrics for each of them.
@@ -518,7 +518,7 @@ running your applications, as well as the applications themselves.
 ## Summary
 
 In this walkthrough, we showed you how to add Linkerd to your Knative deployment
-to transparently add [mutual TLS](/2/features/automatic-mtls/), metrics, and
+to transparently add [mutual TLS](/docs/features/automatic-mtls/), metrics, and
 more. One of Linkerd's goals is to fit into the ecosystem and play well with
 other projects, and we think this is a great example of augmenting both Knative
 and Kubernetes with functionality that the service mesh can provide. We'd love

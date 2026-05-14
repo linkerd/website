@@ -27,7 +27,7 @@ are a good option for some use cases, sidecars are here to stay. Zero trust
 security is more important than ever and has been one of the major topics of the
 past year. We can now mesh our non-Kubernetes workloads running on VMs and even
 bare metal (shoutout to Linkerd’s
-[mesh expansion](/2/tasks/adding-non-kubernetes-workloads/) feature). The
+[mesh expansion](/docs/tasks/adding-non-kubernetes-workloads/) feature). The
 service mesh market has a 41.3% compound annual growth rate[^1], which continues
 to drive innovation and development in the service mesh domain. Most
 importantly, service mesh adoption is now at an all-time high, with 70% of the
@@ -94,7 +94,7 @@ Linkerd consistently showed better performance, especially at 200 and 2000 RPS,
 even outperforming Ambient in some cases. While Ambient showed strong
 performance, Linkerd maintained a lead. As shown in the results above, the
 performance gap has narrowed compared to 2021, making additional features—such
-as [Multi-cluster Federated Services](/2/tasks/federated-services/),
+as [Multi-cluster Federated Services](/docs/tasks/federated-services/),
 [FIPS compliance](https://www.buoyant.io/linkerd-enterprise), and the upcoming
 Windows support in Linkerd’s case—increasingly important for gaining an
 advantage over other service meshes.

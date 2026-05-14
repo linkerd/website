@@ -35,10 +35,10 @@ With that, on to the features!
 
 Linkerd 2.2 can now automatically retry failed requests, improving the overall
 success rate of your application in the presence of partial failures. Building
-on top of the [service profiles](/2/features/service-profiles) model introduced
-in 2.1, Linkerd allows you to configure this behavior on a per-route basis.
-Here's a [quick screencast](https://asciinema.org/a/227055) of using retries and
-timeouts to handle a failing endpoint.
+on top of the [service profiles](/docs/features/service-profiles/) model
+introduced in 2.1, Linkerd allows you to configure this behavior on a per-route
+basis. Here's a [quick screencast](https://asciinema.org/a/227055) of using
+retries and timeouts to handle a failing endpoint.
 
 In this screencast we can see that the output of `linkerd routes` now includes
 an ACTUAL_SUCCESS column, measuring success rate of requests on the wire, and an

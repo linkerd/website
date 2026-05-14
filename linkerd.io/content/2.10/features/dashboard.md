@@ -50,7 +50,7 @@ rate, requests/second and latency), visualize service dependencies and
 understand the health of specific service routes. One way to pull it up is by
 running `linkerd viz dashboard` from the command line.
 
-![Top Line Metrics](/docs/images/architecture/stat.png "Top Line Metrics")
+![Top Line Metrics](/images/docs/architecture/stat.png 'Top Line Metrics')
 
 ## Grafana
 
@@ -60,13 +60,13 @@ down into the details, even for pods.
 
 The dashboards that are provided out of the box include:
 
-![Top Line Metrics](/docs/images/screenshots/grafana-top.png "Top Line Metrics")
+![Top Line Metrics](/images/docs/screenshots/grafana-top.png 'Top Line Metrics')
 
-![Deployment Detail](/docs/images/screenshots/grafana-deployment.png "Deployment Detail")
+![Deployment Detail](/images/docs/screenshots/grafana-deployment.png 'Deployment Detail')
 
-![Pod Detail](/docs/images/screenshots/grafana-pod.png "Pod Detail")
+![Pod Detail](/images/docs/screenshots/grafana-pod.png 'Pod Detail')
 
-![Linkerd Health](/docs/images/screenshots/grafana-health.png "Linkerd Health")
+![Linkerd Health](/images/docs/screenshots/grafana-health.png 'Linkerd Health')
 
 linkerd -n emojivoto check --proxy
 
@@ -107,10 +107,10 @@ linkerd -n emojivoto viz tap deploy/web
 All of this functionality is also available in the dashboard, if you would like
 to use your browser instead:
 
-![Top Line Metrics](/docs/images/getting-started/stat.png "Top Line Metrics")
+![Top Line Metrics](/images/docs/getting-started/stat.png 'Top Line Metrics')
 
-![Deployment Detail](/docs/images/getting-started/inbound-outbound.png "Deployment Detail")
+![Deployment Detail](/images/docs/getting-started/inbound-outbound.png 'Deployment Detail')
 
-![Top](/docs/images/getting-started/top.png "Top")
+![Top](/images/docs/getting-started/top.png 'Top')
 
-![Tap](/docs/images/getting-started/tap.png "Tap")
+![Tap](/images/docs/getting-started/tap.png 'Tap')

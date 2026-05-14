@@ -73,7 +73,6 @@ As always, we have a couple of breaking changes to note:
 - Also in [edge-25.6.3], we updated the port names used in many Linkerd
   deployments to avoid Kubernetes 1.33's new warnings if port names aren't
   unique across all containers in the same pod:
-
   - In `destination`, `grpc` becomes `dest-grpc` and `admin-http` becomes
     `dest-admin`
   - In `sp-validator`, `admin-http` becomes `spval-admin`
@@ -227,7 +226,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also [install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/docs/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

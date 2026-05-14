@@ -78,7 +78,6 @@ Linkerd 2.18:
   Therefore, starting with [edge-25.3.1], Linkerd will not install Gateway API
   CRDs for you unless you specifically ask for them and they're not already on
   your cluster.
-
   - **If you are upgrading** from an earlier version of Linkerd, you shouldn't
     need to take any action -- Linkerd can tell that you have the CRDs installed
     and do the right thing for you.
@@ -337,7 +336,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also [install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/docs/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

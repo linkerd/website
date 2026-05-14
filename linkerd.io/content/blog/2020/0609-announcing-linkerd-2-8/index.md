@@ -72,7 +72,7 @@ datacenter or VPC, or across the public Internet, Linkerd will establish a
 connection between clusters that's encrypted and authenticated on both sides
 with mTLS.
 
-![Linkerd multi-cluster Kubernetes example](multicluster.png "Linkerd multi-cluster Kubernetes example")
+![Linkerd multi-cluster Kubernetes example](multicluster.png 'Linkerd multi-cluster Kubernetes example')
 
 This new multi-cluster functionality unlocks a whole host of use cases for
 Linkerd, including failover (transitioning traffic across datacenters or cloud
@@ -150,9 +150,9 @@ curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
 Using Helm? See our
-[guide to installing Linkerd with Helm](/2/tasks/install-helm/). Upgrading from
-a previous release? We've got you covered: see our
-[Linkerd upgrade guide](/2/tasks/upgrade/) for how to use the linkerd upgrade
+[guide to installing Linkerd with Helm](/docs/tasks/install-helm/). Upgrading
+from a previous release? We've got you covered: see our
+[Linkerd upgrade guide](/docs/tasks/upgrade/) for how to use the linkerd upgrade
 command.
 
 ## Linkerd is for everyone

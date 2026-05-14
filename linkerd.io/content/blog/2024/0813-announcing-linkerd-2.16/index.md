@@ -4,7 +4,7 @@ slug: announcing-linkerd-2.16
 title: |-
   Announcing Linkerd 2.16! Metrics, retries, and timeouts for HTTP and gRPC
   routes; IPv6 support; policy audit mode; and lots more
-keywords: [linkerd, "2.16", features]
+keywords: [linkerd, '2.16', features]
 params:
   author: william
   showCover: true
@@ -51,7 +51,7 @@ metadata:
   namespace: myns
   annotations:
     retry.linkerd.io/http: 5xx
-    retry.linkerd.io/limit: "2"
+    retry.linkerd.io/limit: '2'
     retry.linkerd.io/timeout: 300ms
 spec:
   parentRefs:
@@ -63,14 +63,14 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: "/foo/"
+            value: '/foo/'
 ```
 
 In short, Linkerd's new implementation of per-route metrics, retries, and
 timeouts are now provided in a principled, future-proof way that is composable
 with existing features such as circuit breaking, and configured using the
 Gateway API resources that we believe are the future of service mesh
-configuration. [Learn more](/2/features/retries-and-timeouts/).
+configuration. [Learn more](/docs/features/retries-and-timeouts/).
 
 ## Audit mode for security policies
 
@@ -119,7 +119,7 @@ default.
 Linkerd 2.16 adds support for IPv6 on IPv6-only and dual-stack clusters. (When
 enabled on dual stack clusters, Linkerd will only use IPv6 endpoints.) For
 backwards compatibility, this feature is disabled by default, but enabling it is
-a simple boolean. [Learn more](/2/features/ipv6/).
+a simple boolean. [Learn more](/docs/features/ipv6/).
 
 ## Other noteworthy changes
 

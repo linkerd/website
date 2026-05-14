@@ -7,7 +7,7 @@ keywords:
   - linkerd
   - helm
   - production
-  - "high availability"
+  - 'high availability'
   - debug
   - debugging
   - alerts
@@ -192,7 +192,7 @@ that.
 
 After you've vetted `values-ha.yaml`, you'll run `helm install` with the
 `-f path/to/your/values-ha.yaml` option. The
-[Linkerd documentation on installing with Helm](/2/tasks/install-helm/) goes
+[Linkerd documentation on installing with Helm](/docs/tasks/install-helm/) goes
 into much more detail here.
 
 #### Upgrades
@@ -202,7 +202,7 @@ and always test in non-production environments. **Upgrade the control plane
 first** with `helm upgrade`, then gradually roll out data-plane upgrades by
 restarting workloads and allowing the control plane to inject the new version of
 the proxy. (There are more details on this process in the
-[Linkerd upgrade documentation](/2/tasks/upgrade/)).
+[Linkerd upgrade documentation](/docs/tasks/upgrade/)).
 
 Order matters here: doing the control plane first is always supported, as the
 data plane is designed to handle the temporary skew – but **don't skip major
@@ -297,7 +297,7 @@ This gets a little complex:
 Last but not least, there's the Linkerd debug sidecar, which comes equipped with
 `tshark`, `tcpdump`, `lsof`, and `iproute2`. If your runtime allows it, it can
 be very useful for debugging: check out the
-[documentation on using the debug sidecar](/2/tasks/using-the-debug-container)
+[documentation on using the debug sidecar](/docs/tasks/using-the-debug-container/)
 for the details here.
 
 ## Linkerd in Production

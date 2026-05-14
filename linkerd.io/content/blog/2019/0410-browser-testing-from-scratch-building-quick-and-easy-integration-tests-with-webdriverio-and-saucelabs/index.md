@@ -17,14 +17,14 @@ One of the coolest things about working on [Linkerd](http://www.linkerd.io) is
 how excited our users are about our clean, deceptively simple dashboard, built
 with [React](https://reactjs.org/) and [Material-UI](https://material-ui.com/).
 (Wanna try it? Get our super-light, open-source service mesh
-[up and running in just a few minutes](/2/getting-started/)!)
+[up and running in just a few minutes](/docs/getting-started/)!)
 
-![Linkerd dashboard](linkerd-dashboard-screenshot.png "Linkerd dashboard screenshot from edge release 19.3.2.")
+![Linkerd dashboard](linkerd-dashboard-screenshot.png 'Linkerd dashboard screenshot from edge release 19.3.2.')
 
 And when I say excited, I mean unsolicited-praise excited: we constantly get
 messages from users like this:
 
-![Tweet](happy-tweet.png "Tweet by a happy Linkerd user!")
+![Tweet](happy-tweet.png 'Tweet by a happy Linkerd user!')
 
 We want to keep our users happy with a clean, consistent dashboard as we
 constantly roll out new features and improvements, so recently we built a suite
@@ -144,28 +144,28 @@ what to do. In your text editor, open `wdio.conf.js` and paste:
 ```javascript
 exports.config = {
   port: 9515, // default for ChromeDriver
-  path: "/",
-  services: ["chromedriver"],
-  runner: "local",
-  specs: ["./integration/specs/*.js"],
+  path: '/',
+  services: ['chromedriver'],
+  runner: 'local',
+  specs: ['./integration/specs/*.js'],
   exclude: [
     // 'path/to/excluded/files'
   ],
   maxInstances: 10,
   capabilities: [
-    { browserName: "chrome", platform: "OS X 10.13", version: "69.0" },
+    { browserName: 'chrome', platform: 'OS X 10.13', version: '69.0' },
   ],
   bail: 0,
-  baseUrl: "http://localhost",
+  baseUrl: 'http://localhost',
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
-  framework: "mocha",
+  framework: 'mocha',
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
   },
-};
+}
 ```
 
 As you can see, we're specifying that our tests will live in
@@ -195,14 +195,14 @@ check that the title of the page is what we expect. Open `first-test.js` and
 paste the following:
 
 ```javascript
-const assert = require("assert");
-describe("logo link test", function () {
-  it("should redirect to the home view if logo is clicked", () => {
-    browser.url("http://www.linkerd.io");
-    const title = browser.getTitle();
-    assert.equal(title, "Linkerd - Linkerd");
-  });
-});
+const assert = require('assert')
+describe('logo link test', function () {
+  it('should redirect to the home view if logo is clicked', () => {
+    browser.url('http://www.linkerd.io')
+    const title = browser.getTitle()
+    assert.equal(title, 'Linkerd - Linkerd')
+  })
+})
 ```
 
 Right now, you're still in your `specs` directory. Go back up to your `app`
@@ -218,7 +218,7 @@ You should see a message in your terminal saying "Starting ChromeDriver on port
 [Linkerd.io](http://linkerd.io) and close. You should see "1 Passing" in your
 terminal!
 
-![WebdriverIO](terminal-message.png "WebdriverIO success message in terminal: 1 passed, 1 total (100% completed)")
+![WebdriverIO](terminal-message.png 'WebdriverIO success message in terminal: 1 passed, 1 total (100% completed)')
 
 Awesome, you just successfully ran an integration test with WebdriverIO! 🥳 You
 can start building these tests out to test your application. I've found the
@@ -272,31 +272,31 @@ Open that file and paste in the following:
 
 ```javascript
 exports.config = {
-  runner: "local",
+  runner: 'local',
   user: process.env.SAUCE_USERNAME,
   key: process.env.SAUCE_ACCESS_KEY,
   sauceConnect: true,
-  specs: ["./integration/specs/*.js"],
+  specs: ['./integration/specs/*.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
   ],
   maxInstances: 10,
   capabilities: [
-    { browserName: "firefox", platform: "Windows 10", version: "60.0" },
-    { browserName: "chrome", platform: "OS X 10.13", version: "69.0" },
+    { browserName: 'firefox', platform: 'Windows 10', version: '60.0' },
+    { browserName: 'chrome', platform: 'OS X 10.13', version: '69.0' },
   ],
   bail: 0,
-  baseUrl: "http://localhost",
+  baseUrl: 'http://localhost',
   waitforTimeout: 10000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
-  framework: "mocha",
+  framework: 'mocha',
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
   },
-};
+}
 ```
 
 As you can see, we've removed the `port` , `path` and `services` variables and
@@ -342,7 +342,7 @@ real-time from the
 [SauceLabs dashboard](https://app.saucelabs.com/dashboard/tests) (and even take
 over if you want to manually control where the test goes).
 
-![SauceLabs dashboard](saucelabs-dashboard-screenshot.png "SauceLabs dashboard screenshot showing a report of an integration test")
+![SauceLabs dashboard](saucelabs-dashboard-screenshot.png 'SauceLabs dashboard screenshot showing a report of an integration test')
 
 If any tests fail, you'll immediately get the URL in your terminal window with a
 video of the test and information about what happened. (Break the test and try

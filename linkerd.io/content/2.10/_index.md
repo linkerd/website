@@ -2,10 +2,12 @@
 title: Docs
 cascade:
   type: docs
+  params:
+    noIndex: true
 
 # Redirect
 type: _default
 layout: redirect
 params:
-  redirect: ./overview
+  redirect: ./getting-started
 ---

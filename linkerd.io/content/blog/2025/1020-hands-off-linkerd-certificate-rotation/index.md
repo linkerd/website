@@ -1,7 +1,7 @@
 ---
 date: 2025-10-20T00:00:00Z
 title: Hands off Linkerd certificate rotation
-keywords: [linkerd, "Cert Manager", automation]
+keywords: [linkerd, 'Cert Manager', automation]
 params:
   author:
     name: Matthew McLane
@@ -27,7 +27,7 @@ service mesh, and I’d like to take you along for the ride.
 
 Linkerd largely manages its own certificates, but it needs a trusted foundation:
 a root anchor and an identity issuer certificate. Linkerd’s own documentation on
-**“[Automatically Rotating Control Plane TLS Credentials](/2/tasks/automatically-rotating-control-plane-tls-credentials/)”**
+**“[Automatically Rotating Control Plane TLS Credentials](/docs/tasks/automatically-rotating-control-plane-tls-credentials/)”**
 explains this in detail. My goal was to build a completely automated solution
 for our clusters, bypassing the need for manual `kubectl` commands. I wanted to
 leverage our existing ArgoCD infrastructure to handle everything, including
@@ -38,7 +38,7 @@ intervention.
 
 The first step in my solution was to create a simple **Helm chart** to lay down
 the required certificates. Following the
-[documentation](/2/tasks/automatically-rotating-control-plane-tls-credentials/),
+[documentation](/docs/tasks/automatically-rotating-control-plane-tls-credentials/),
 this chart creates three key certificates in the namespace using cert-manager:
 `linkerd-trust-root-issuer`, `linkerd-trust-anchor`, and
 `linkerd-identity-issuer`.
@@ -66,7 +66,7 @@ As stated in the documentation:
 I really didn’t want to rely on anything with manual intervention. The solution
 to this problem was fairly simple to workout. All the heavy lifting was provided
 in the
-[documentation](/2/tasks/automatically-rotating-control-plane-tls-credentials/)!
+[documentation](/docs/tasks/automatically-rotating-control-plane-tls-credentials/)!
 First I started by creating a set of shell scripts.
 
 First is a script to rotate the certificates:

@@ -33,11 +33,11 @@ boundaries that is:
 1. **Fully secured**. This means that traffic between clusters is encrypted,
    authenticated, and authorized using mutual TLS, workload identities (not
    network identities!) and Linkerd's fine-grained,
-   [zero-trust authorization policies](/2/features/server-policy/).
+   [zero-trust authorization policies](/docs/features/server-policy/).
 2. **Transparent to the application.** This means that the application is
    totally decoupled from cluster topology, which allows the operator to take
    advantage of powerful networking capabilities such as
-   [dynamically failover traffic to other clusters](/2/tasks/automatic-failover/).
+   [dynamically failover traffic to other clusters](/docs/tasks/automatic-failover/).
 3. **Observable and reliable**. Linkerd's powerful L7 instrospection and
    reliability mechanisms, including golden metrics, retries, timeouts,
    distributed tracing, circuit breaking, and more, are all available to
@@ -45,7 +45,7 @@ boundaries that is:
 
 Linkerd has supported multi-cluster Kubernetes deployments since the release of
 Linkerd 2.8 in 2020. That release introduced
-[a simple and elegant design](/2/features/multicluster/) that involves the
+[a simple and elegant design](/docs/features/multicluster/) that involves the
 addition of a service mirror component to handle service discovery, and a
 multi-cluster gateway component to handle traffic from other clusters.
 

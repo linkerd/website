@@ -26,13 +26,13 @@ For example, Linkerd can display a live topology of all incoming and outgoing
 dependencies for a service, without requiring distributed tracing or any other
 such application modification:
 
-![The Linkerd dashboard showing an automatically generated topology graph](/docs/images/books/webapp-detail.png "The Linkerd dashboard showing an automatically generated topology graph")
+![The Linkerd dashboard showing an automatically generated topology graph](/images/docs/books/webapp-detail.png 'The Linkerd dashboard showing an automatically generated topology graph')
 
 Likewise, Linkerd can provide golden metrics per service and per _route_, again
 without requiring distributed tracing or any other such application
 modification:
 
-![Linkerd dashboard showing an automatically generated route metrics](/docs/images/books/webapp-routes.png "Linkerd dashboard showing an automatically generated route metrics")
+![Linkerd dashboard showing an automatically generated route metrics](/images/docs/books/webapp-routes.png 'Linkerd dashboard showing an automatically generated route metrics')
 
 ## Using distributed tracing
 

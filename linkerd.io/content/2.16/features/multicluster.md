@@ -43,7 +43,7 @@ the _Foo_ service as if it were on the local cluster.
 Linkerd supports two basic forms of multi-cluster communication: hierarchical
 and flat.
 
-![Architectural diagram comparing hierarchical and flat network modes](/docs/images/multicluster/flat-network.png)
+![Architectural diagram comparing hierarchical and flat network modes](/images/docs/multicluster/flat-network.png)
 
 ### Hierarchical networks
 

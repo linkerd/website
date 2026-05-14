@@ -2,8 +2,8 @@
 <nav class="main-nav">
   <ul class="main-nav__menu">
     {{ range site.Menus.main }}
-      {{/* Manually select the docs menu item, since /docs/ is not a real section */}}
-      {{ $docs := and (eq .Name "Docs") (or (hasPrefix $page.Section "2.") (hasPrefix $page.Section "2-")) }}
+      {{/* Manually select the docs menu item */}}
+      {{ $docs := and (eq .Name "Docs") (or (eq $page.Section "docs") (eq $page.Section "2-edge") (hasPrefix $page.Section "2.")) }}
       {{ $current := or $docs ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) }}
       <li{{ if $current }} class="main-nav__menu--selected"{{ end }}>
         <a href="{{ default "#" .URL }}"

@@ -7,5 +7,5 @@ cascade:
 type: _default
 layout: redirect
 params:
-  redirect: ./overview
+  redirect: ./getting-started
 ---

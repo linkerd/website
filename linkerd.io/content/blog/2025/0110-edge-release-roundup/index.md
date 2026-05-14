@@ -153,7 +153,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also [install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/docs/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

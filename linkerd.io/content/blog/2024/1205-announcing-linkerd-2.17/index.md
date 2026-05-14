@@ -3,7 +3,7 @@ date: 2024-12-05T00:00:00Z
 slug: announcing-linkerd-2.17
 title: |-
   Announcing Linkerd 2.17: Egress, Rate Limiting, and Federated Services
-keywords: [linkerd, "2.17", features]
+keywords: [linkerd, '2.17', features]
 params:
   author: william
   showCover: true
@@ -68,8 +68,8 @@ See [egress docs](/2.17/features/egress/) for more.
 
 Rate limiting is a reliability mechanism that protects services from being
 overloaded. In contrast to
-[Linkerd's circuit breaking feature](/2/reference/circuit-breaking/), which is
-client-side behavior designed to protect clients from failing services, rate
+[Linkerd's circuit breaking feature](/docs/reference/circuit-breaking/), which
+is client-side behavior designed to protect clients from failing services, rate
 limiting is server-side behavior: it is enforced by the service receiving the
 traffic and designed to protect it from misbehaving clients.
 
@@ -131,7 +131,7 @@ Linkerd 2.8, was designed for the ad-hoc, pair-to-pair connectivity that was
 common at the time. However, modern Kubernetes platforms are often much more
 intentional in their multicluster usage, sometimes ranging into the hundreds or
 thousands of clusters. Federated services join features such as
-[flat network / pod-to-pod multicluster](/2/tasks/pod-to-pod-multicluster/)
+[flat network / pod-to-pod multicluster](/docs/tasks/pod-to-pod-multicluster/)
 (introduced in Linkerd 2.14) in the toolbox for this new class of Kubernetes
 adoption.
 

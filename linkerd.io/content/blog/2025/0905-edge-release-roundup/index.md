@@ -53,7 +53,6 @@ As always, we have a couple of breaking changes to note:
   default, rather than with the older `iptables-legacy`. If your nodes don't
   support `iptables-nft`, you can revert to using `iptables-legacy` by setting
   the `iptablesMode` value:
-
   - If you're using the init container, set `proxyInit.iptablesMode: legacy` in
     the `linkerd2-control-plane` chart.
 
@@ -125,7 +124,7 @@ Installing the latest edge release needs just a single command.
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install-edge | sh
 ```
 
-You can also [install edge releases with Helm](/2/tasks/install-helm/).
+You can also [install edge releases with Helm](/docs/tasks/install-helm/).
 
 ## Linkerd is for everyone
 

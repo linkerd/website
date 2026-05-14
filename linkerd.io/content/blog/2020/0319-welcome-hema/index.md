@@ -7,8 +7,8 @@ params:
 ---
 
 🎉 We are pleased to announce that [Hema Lee](https://github.com/hemakl) is now
-a maintainer of the [CNI plugin](/2/features/cni/) for Linkerd. 🎉 She will be
-helping improve and address community issues encountered with the plugin, a
+a maintainer of the [CNI plugin](/docs/features/cni/) for Linkerd. 🎉 She will
+be helping improve and address community issues encountered with the plugin, a
 requirement for many security conscious organizations.
 
 Hema has been part of the team operating Linkerd (including the CNI plugin) in

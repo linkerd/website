@@ -34,7 +34,7 @@ full observability, security and routing features of Linkerd apply uniformly to
 both in-cluster and cluster-calls, and the application does not need to
 distinguish between those situations.
 
-![Overview](/docs/images/multicluster/feature-overview.svg "Overview")
+![Overview](/images/docs/multicluster/feature-overview.svg 'Overview')
 
 Linkerd's multi-cluster functionality is implemented by two components: a
 _service mirror_ and a _gateway_. The _service mirror_ component watches a

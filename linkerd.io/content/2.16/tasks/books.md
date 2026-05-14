@@ -21,7 +21,7 @@ the other services. There are three services:
 For demo purposes, the app comes with a simple traffic generator. The overall
 topology looks like this:
 
-![Topology](/docs/images/books/topology.png "Topology")
+![Topology](/images/docs/books/topology.png 'Topology')
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ connection" messages for the rest of the exercise.)
 Open [http://localhost:7000/](http://localhost:7000/) in your browser to see the
 frontend.
 
-![Frontend](/docs/images/books/frontend.png "Frontend")
+![Frontend](/images/docs/books/frontend.png 'Frontend')
 
 Unfortunately, there is an error in the app: if you click _Add Book_, it will
 fail 50% of the time. This is a classic case of non-obvious, intermittent
@@ -80,7 +80,7 @@ debug. Kubernetes itself cannot detect or surface this error. From Kubernetes's
 perspective, it looks like everything's fine, but you know the application is
 returning errors.
 
-![Failure](/docs/images/books/failure.png "Failure")
+![Failure](/images/docs/books/failure.png 'Failure')
 
 ## Add Linkerd to the service
 

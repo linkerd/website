@@ -23,7 +23,7 @@ To use distributed tracing, you'll need to:
 In the case of emojivoto, once all these steps are complete there will be a
 topology that looks like this:
 
-![Topology](/docs/images/tracing/tracing-topology.svg "Topology")
+![Topology](/images/docs/tracing/tracing-topology.svg 'Topology')
 
 {{< warning >}}
 
@@ -180,20 +180,22 @@ kubectl port-forward -n jaeger-system svc/jaeger-query 16686
 ```
 
 <!-- markdownlint-disable MD034 -->
+
 Then, open http://127.0.0.1:16686 in your browser.
+
 <!-- markdownlint-enable MD034 -->
 
-![Jaeger](/docs/images/tracing/jaeger-empty.png "Jaeger")
+![Jaeger](/images/docs/tracing/jaeger-empty.png 'Jaeger')
 
 You can search for any service in the dropdown and click Find Traces. `vote-bot`
 is a great way to get started.
 
-![Search](/docs/images/tracing/jaeger-search.png "Search")
+![Search](/images/docs/tracing/jaeger-search.png 'Search')
 
 Clicking on a specific trace will provide all the details, you'll be able to see
 the spans for every proxy!
 
-![Search](/docs/images/tracing/example-trace.png "Search")
+![Search](/images/docs/tracing/example-trace.png 'Search')
 
 Note the large number of `linkerd-proxy` spans in the output. Internally, the
 proxy has a server and client side. When a request goes through the proxy, it is
