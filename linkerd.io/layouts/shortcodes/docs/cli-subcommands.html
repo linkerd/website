@@ -13,21 +13,19 @@
       </tr>
     </thead>
     <tbody>
-      {{ range $data.CLIReference }}
-        {{ if hasPrefix .Name (printf "%s " $cmd) }}
-          {{ $subcmd := index (split .Name " ") 1 }}
-          {{ $href := printf "#%s" $subcmd }}
-          <tr>
-            <td>
-              <a href="{{ $href }}">
-                <code>{{ $subcmd }}</code>
-              </a>
-            </td>
-            <td>
-              {{ .Synopsis | markdownify }}
-            </td>
-          </tr>
-        {{ end }}
+      {{ range where $data.CLIReference "Name" "like" (printf `^%s .+` $cmd) }}
+        {{ $subcmd := index (split .Name " ") 1 }}
+        {{ $href := printf "#%s" $subcmd }}
+        <tr>
+          <td>
+            <a href="{{ $href }}">
+              <code>{{ $subcmd }}</code>
+            </a>
+          </td>
+          <td>
+            {{ .Synopsis | markdownify }}
+          </td>
+        </tr>
       {{ end }}
     </tbody>
   </table>
