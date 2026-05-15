@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "../abstracts";
+
 /*
 @markup
 <div class="alert">
@@ -12,15 +15,15 @@
 */
 
 .alert {
-  @include make-stack(3);
-  background-color: $light-gray;
-  border: solid 1px $border-color;
-  border-radius: $border-radius;
-  padding: spacer(3) spacer(4);
+  @include abstracts.make-stack(3);
+  background-color: abstracts.$light-gray;
+  border: solid 1px abstracts.$border-color;
+  border-radius: abstracts.$border-radius;
+  padding: abstracts.size(3) abstracts.size(4);
 
   .alert__title {
     display: flex;
-    gap: spacer(2);
+    gap: abstracts.size(2);
     align-items: center;
 
     & > * {
@@ -28,7 +31,7 @@
     }
   }
   .alert__content {
-    @include make-stack(3);
+    @include abstracts.make-stack(3);
   }
 
   // @options
@@ -40,7 +43,7 @@
     border-bottom: none;
   }
   &.alert--condensed {
-    padding: spacer(2) spacer(3);
+    padding: abstracts.size(2) abstracts.size(3);
   }
   &.alert--center {
     .alert__title {
@@ -50,11 +53,11 @@
       text-align: center;
     }
   }
-  @each $state, $colors in $state-colors {
+  @each $state, $colors in abstracts.$state-colors {
     &.alert--#{$state} {
-      color: map-get($colors, "text");
-      background-color: map-get($colors, "background");
-      border-color: map-get($colors, "border");
+      color: map.get($colors, "text");
+      background-color: map.get($colors, "background");
+      border-color: map.get($colors, "border");
     }
   }
 }

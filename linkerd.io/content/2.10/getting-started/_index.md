@@ -169,7 +169,7 @@ linkerd viz dashboard &
 
 You should see a screen like this:
 
-![The Linkerd dashboard in action](/docs/images/getting-started/viz-empty-dashboard.png "The Linkerd dashboard in action")
+![The Linkerd dashboard in action](/images/docs/getting-started/viz-empty-dashboard.png 'The Linkerd dashboard in action')
 
 If you installed the buoyant-cloud extension, run:
 
@@ -179,7 +179,7 @@ linkerd buoyant dashboard &
 
 You should see a screen lke this:
 
-![Buoyant Coud in action](/docs/images/getting-started/bcloud-empty-dashboard.png "Buoyant Coud in action")
+![Buoyant Coud in action](/images/docs/getting-started/bcloud-empty-dashboard.png 'Buoyant Coud in action')
 
 Click around, explore, and have fun! One thing you'll see is that, even if you
 don't have any applications running on this cluster, you still have traffic!

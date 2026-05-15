@@ -260,7 +260,7 @@ libraries that power Linkerd.
 
 I never thought you'd ask. You can install Linkerd in about 5 minutes, including
 mutual TLS, with zero configuration required. Start with our
-[getting started guide](/2/getting-started/).
+[getting started guide](/docs/getting-started/).
 
 ## Linkerd is for everyone
 

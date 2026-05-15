@@ -121,8 +121,8 @@ And you're in!
 ## Installing Linkerd
 
 Installing Linkerd is pretty straightforward. Just follow the
-[Getting Started Guide](/2/getting-started/), and you'll have Linkerd running in
-~2–5 minutes; you can skip the linkerd-viz part—we won't need that.
+[Getting Started Guide](/docs/getting-started/), and you'll have Linkerd running
+in ~2–5 minutes; you can skip the linkerd-viz part—we won't need that.
 
 Next, inject Linkerd into your workloads (Deployments) by running (use the next
 command to inject it into an entire namespace):
@@ -190,9 +190,9 @@ kind: ClusterRole
 metadata:
   name: otel-collector-read
 rules:
-  - apiGroups: [""]
-    resources: ["pods", "endpoints", "services", "namespaces", "nodes"]
-    verbs: ["get", "list", "watch"]
+  - apiGroups: ['']
+    resources: ['pods', 'endpoints', 'services', 'namespaces', 'nodes']
+    verbs: ['get', 'list', 'watch']
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -363,7 +363,7 @@ spec:
       containers:
         - name: otel-collector
           image: otel/opentelemetry-collector:latest
-          args: ["--config=/etc/otelcol/config.yaml"]
+          args: ['--config=/etc/otelcol/config.yaml']
           volumeMounts:
             - name: otel-config
               mountPath: /etc/otelcol
@@ -394,7 +394,7 @@ exporters:
   otlp/openobserve:
     endpoint: openobserve-openobserve-standalone.openobserve.svc.cluster.local:5081
     headers:
-      Authorization: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
+      Authorization: 'Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM='
       organization: default
       stream-name: default
     tls:
@@ -406,7 +406,7 @@ exporters:
 The token:
 
 ```yaml
-Authorization: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
+Authorization: 'Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM='
 ```
 
 Is just base64 encoding of the default username and password we used above.
@@ -438,10 +438,10 @@ how you can get Linkerd's metrics and ingest them in your favorite solution.
 ## Bonus: Linkerd's Auth policy
 
 Linkerd comes with a handy feature called
-[Authorization Policies](/2/reference/authorization-policy/). With it, you can
-enable or prevent workloads from talking to each other (think firewall) based on
-different parameters. For example, which services, meshed or unmeshed, on the
-same or separate clusters, which port is being used, etc.?
+[Authorization Policies](/docs/reference/authorization-policy/). With it, you
+can enable or prevent workloads from talking to each other (think firewall)
+based on different parameters. For example, which services, meshed or unmeshed,
+on the same or separate clusters, which port is being used, etc.?
 
 It's worth noting that right now, all the data is visible to anyone in the
 cluster, which isn't great in many cases. In production, you might want to

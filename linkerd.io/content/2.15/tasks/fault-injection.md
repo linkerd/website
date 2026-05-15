@@ -12,7 +12,7 @@ return whatever responses you want - 500s, timeouts or even crazy payloads.
 The [books demo](books/) is a great way to show off this behavior. The overall
 topology looks like:
 
-![Topology](/docs/images/books/topology.png "Topology")
+![Topology](/images/docs/books/topology.png 'Topology')
 
 In this guide, you will split some of the requests from `webapp` to `books`.
 Most requests will end up at the correct `books` destination, however some of

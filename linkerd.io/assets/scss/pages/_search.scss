@@ -1,0 +1,44 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/search/list.html
+*/
+
+.search {
+  padding: abstracts.size(6) 0;
+
+  @media (min-width: abstracts.breakpoint-min-width("md")) {
+    padding: abstracts.size(7) 0;
+  }
+}
+
+// .search-results
+
+.search-results {
+  @include abstracts.make-stack(4);
+
+  // Add extra space between header and entries
+  & > :nth-child(2) {
+    margin-top: abstracts.size(6); // Override stack
+  }
+}
+
+// .search-results-entry
+
+.search-results-entry {
+  @include abstracts.make-stack(3);
+  padding-bottom: abstracts.size(4);
+  border-bottom: solid 1px abstracts.$border-color;
+
+  &:last-of-type {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .search-results-entry__section {
+    color: abstracts.$gray;
+    font-size: abstracts.$font-size-sm;
+  }
+  .search-results-entry__title {
+    margin-top: abstracts.size(1); // Override stack
+  }
+}

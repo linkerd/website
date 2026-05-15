@@ -1,0 +1,17 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/community/get-involved.html
+*/
+
+.get-involved {
+  .page__container {
+    display: grid;
+    gap: abstracts.size(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

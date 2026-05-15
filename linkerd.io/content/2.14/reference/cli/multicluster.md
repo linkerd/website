@@ -10,6 +10,8 @@ title: multicluster
 
 ## Subcommands
 
+{{< docs/cli-subcommands "multicluster" >}}
+
 ### allow
 
 {{< docs/cli-description "multicluster allow" >}}

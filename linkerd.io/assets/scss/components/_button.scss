@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <a class="button button--primary">Text</a>
@@ -5,35 +7,35 @@
 
 .button,
 button {
-  @include make-button;
+  @include abstracts.make-button;
 
   // @options
 
   &.button--primary {
-    @include make-button--primary;
+    @include abstracts.make-button--primary;
   }
   &.button--secondary {
-    @include make-button--secondary;
+    @include abstracts.make-button--secondary;
   }
   &.button--outline {
-    @include make-button--outline;
+    @include abstracts.make-button--outline;
   }
   &.button--lg {
-    @include make-button--lg;
+    @include abstracts.make-button--lg;
   }
   &.button--md {
-    @include make-button--md;
+    @include abstracts.make-button--md;
   }
   &.button--sm {
-    @include make-button--sm;
+    @include abstracts.make-button--sm;
   }
   &.button--xs {
-    @include make-button--xs;
+    @include abstracts.make-button--xs;
   }
   &.button--block {
-    @include make-button--block;
+    @include abstracts.make-button--block;
   }
   &.button--disabled {
-    @include make-button--disabled;
+    @include abstracts.make-button--disabled;
   }
 }

@@ -40,7 +40,7 @@ docs:
     pageRef: /2-edge/
     weight: 99
   - name: Linkerd 2.19
-    pageRef: /2.19/
+    pageRef: /docs/
     weight: 19
   - name: Linkerd 2.18
     pageRef: /2.18/
@@ -108,7 +108,6 @@ community:
       image: logos/forum.png
 
 follow:
-
   - name: Linkedin
     url: https://www.linkedin.com/company/linkerd/
     weight: 1

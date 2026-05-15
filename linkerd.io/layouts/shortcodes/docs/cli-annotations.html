@@ -1,7 +1,4 @@
-{{- /* Get the CLI data file for the current linkerd version */}}
-{{- $file := replace .Page.Section "." "-" }}
-{{- $data := index site.Data.cli $file }}
-{{- /* Output data */}}
+{{ $data := partial "docs/get-cli-file" . }}
 <table class="keyval">
   <thead>
     <tr>

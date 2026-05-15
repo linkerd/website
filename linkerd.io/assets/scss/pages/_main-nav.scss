@@ -1,0 +1,101 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/partials/main-nav.html
+*/
+
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  gap: abstracts.size(3);
+
+  ul,
+  li {
+    // Override base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  .main-nav__menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: abstracts.$navy;
+      font-size: abstracts.$font-size-sm;
+      font-weight: abstracts.$font-weight-bold;
+
+      &:hover,
+      &:active {
+        color: abstracts.$blue;
+      }
+    }
+    .main-nav__menu--selected {
+      & > a {
+        color: abstracts.$blue;
+      }
+    }
+  }
+  .main-nav__github {
+    height: 28px;
+  }
+  // Mobile nav
+  @media (max-width: abstracts.$mobile-max-breakpoint) {
+    .main-nav__menu {
+      li {
+        padding: abstracts.size(2) 0;
+
+        &:has(ul) {
+          padding-bottom: 0;
+        }
+      }
+      ul {
+        border-left: solid 2px abstracts.$border-color;
+        margin: abstracts.size(3) 0;
+        padding-left: abstracts.size(3);
+      }
+    }
+    .icon {
+      display: none;
+    }
+  }
+  // Desktop nav
+  @media (min-width: abstracts.$desktop-min-breakpoint) {
+    flex-direction: row;
+    align-items: center;
+
+    .main-nav__menu {
+      position: relative;
+      flex-grow: 1;
+      flex-direction: row;
+      gap: abstracts.size(4);
+
+      & > li:hover ul {
+        display: block;
+      }
+      ul {
+        position: absolute;
+        display: none;
+        padding: abstracts.size(3);
+        background-color: abstracts.$white;
+        box-shadow: abstracts.$box-shadow;
+        border-radius: abstracts.$border-radius;
+        z-index: abstracts.$z-index-main-nav-submenu;
+
+        li {
+          padding: abstracts.size(2);
+        }
+      }
+      .icon {
+        margin-left: abstracts.size(1);
+      }
+    }
+  }
+  // Hack: Hide the Github button in the Desktop nav when it doesn't fit
+  @media (min-width: abstracts.breakpoint-min-width("lg")) and (max-width: abstracts.breakpoint-max-width("lg")) {
+    .main-nav__github {
+      display: none;
+    }
+  }
+}

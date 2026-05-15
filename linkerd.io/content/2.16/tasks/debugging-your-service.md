@@ -17,12 +17,12 @@ command), you should see all the resources in the `emojivoto` namespace,
 including the deployments. Each deployment running Linkerd shows success rate,
 requests per second and latency percentiles.
 
-![Top Level Metrics](/docs/images/debugging/stat.png "Top Level Metrics")
+![Top Level Metrics](/images/docs/debugging/stat.png 'Top Level Metrics')
 
 That's pretty neat, but the first thing you might notice is that the success
 rate is well below 100%! Click on `web` and let's dig in.
 
-![Deployment Detail](/docs/images/debugging/octopus.png "Deployment Detail")
+![Deployment Detail](/images/docs/debugging/octopus.png 'Deployment Detail')
 
 You should now be looking at the Deployment page for the web deployment. The
 first thing you'll see here is that the web deployment is taking traffic from
@@ -38,7 +38,7 @@ returning.
 Let's scroll a little further down the page, we'll see a live list of all
 traffic that is incoming to _and_ outgoing from `web`. This is interesting:
 
-![Top](/docs/images/debugging/web-top.png "Top")
+![Top](/images/docs/debugging/web-top.png 'Top')
 
 There are two calls that are not at 100%: the first is vote-bot's call to the
 `/api/vote` endpoint. The second is the `VoteDoughnut` call from the web
@@ -54,7 +54,7 @@ the requests are failing with a
 is a common error response as you can see from [the code][code]. Linkerd is
 aware of gRPC's response classification without any other configuration!
 
-![Tap](/docs/images/debugging/web-tap.png "Tap")
+![Tap](/images/docs/debugging/web-tap.png 'Tap')
 
 At this point, we have everything required to get the endpoint fixed and restore
 the overall health of our applications.

@@ -31,7 +31,7 @@ The redirect chain will be configured with two more rules:
 Based on these two rules, there are two possible paths that an inbound packet
 can take, both of which are outlined below.
 
-![Inbound iptables chain traversal](/docs/images/iptables/iptables-fig2-1.png "Inbound iptables chain traversal")
+![Inbound iptables chain traversal](/images/docs/iptables/iptables-fig2-1.png 'Inbound iptables chain traversal')
 
 The packet will arrive on the `PREROUTING` chain and will be immediately routed
 to the redirect chain. If its destination port matches any of the inbound ports
@@ -79,7 +79,7 @@ configured:
    been produced by the service, so it should be forwarded to its destination by
    the proxy.
 
-![Outbound iptables chain traversal](/docs/images/iptables/iptables-fig2-2.png "Outbound iptables chain traversal")
+![Outbound iptables chain traversal](/images/docs/iptables/iptables-fig2-2.png 'Outbound iptables chain traversal')
 
 A packet produced by the service will first hit the `OUTPUT` chain; from here,
 it will be sent to our own output chain for processing. The first rule it
@@ -113,7 +113,7 @@ in the pod. This scenario would typically apply when:
 - The destination is a port bound on localhost (regardless of which container it
   belongs to).
 
-![Outbound iptables chain traversal](/docs/images/iptables/iptables-fig2-3.png "Outbound iptables chain traversal")
+![Outbound iptables chain traversal](/images/docs/iptables/iptables-fig2-3.png 'Outbound iptables chain traversal')
 
 When the application targets itself through its pod's IP (or loopback address),
 the packets will traverse the two output chains. The first rule will be skipped,
@@ -138,7 +138,7 @@ inbound side to account for outbound packets that are sent locally.
 is not guaranteed that the destination will be local. The packet follows an
 unusual path, as depicted in the diagram below.
 
-![Outbound iptables chain traversal](/docs/images/iptables/iptables-fig2-4.png "Outbound iptables chain traversal")
+![Outbound iptables chain traversal](/images/docs/iptables/iptables-fig2-4.png 'Outbound iptables chain traversal')
 
 When the packet first traverses the output chains, it will follow the same path
 an outbound packet would normally take. In such a scenario, the packet's

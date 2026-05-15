@@ -20,7 +20,7 @@ You can try Linkerd 2.0 on a Kubernetes 1.9+ cluster in 60 seconds by running:
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
 ```
 
-(Or check out the full [Getting Started Guide](/2/getting-started/).)
+(Or check out the full [Getting Started Guide](/docs/getting-started/).)
 
 The 2.0 release of Linkerd brings some very significant changes. First, we’ve
 completely rewritten Linkerd to be orders of magnitude faster and smaller than
@@ -44,7 +44,7 @@ cluster, you can run Linkerd on your service and get:
 Even better, installing Linkerd 2.0 on your service requires no configuration or
 code changes.
 
-![Linkerd overview](cover.png "Linkerd overview")
+![Linkerd overview](cover.png 'Linkerd overview')
 
 The 2.0 release is something we’re really excited about because it addresses two
 major problems with the traditional (!) service mesh model:

@@ -132,7 +132,7 @@ is even wired into Linkerd's metrics: whenever a meshed request is received or
 being sent, the relevant metrics also include the service account with which
 that peer was associated with.
 
-Here is an example metric from the [emojivoto](/2/getting-started/) example:
+Here is an example metric from the [emojivoto](/docs/getting-started/) example:
 
 ```promql
 request_total{..., client_id="web.emojivoto.serviceaccount.identity.linkerd.cluster.local", authority="emoji-svc.emojivoto.svc.cluster.local:8080",  namespace="emojivoto", pod="emoji-696d9d8f95-5sj4j"} 14532

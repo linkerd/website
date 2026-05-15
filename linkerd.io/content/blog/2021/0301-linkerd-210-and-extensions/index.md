@@ -66,9 +66,10 @@ our focus on simplicity.
 
 Thus far, we've tackled this in a somewhat ad-hoc manner, including a custom
 install flow for the multi-cluster components, a specialized
-"[Bring Your Own Prometheus](/2/tasks/external-prometheus/)" feature, and so on.
-Moving all this machinery to the extensions framework allows for consistency:
-each of these feature extensions can now be treated exactly the same way.
+"[Bring Your Own Prometheus](/docs/tasks/external-prometheus/)" feature, and so
+on. Moving all this machinery to the extensions framework allows for
+consistency: each of these feature extensions can now be treated exactly the
+same way.
 
 Finally, we're excited about the idea of allowing features in Linkerd that feel
 just like the rest of Linkerd but don't require modifying the core project.

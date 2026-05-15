@@ -3,7 +3,7 @@
   Linkerd and the blog posts for the past year.
 */}}
 {{- /* Get latest docs */}}
-{{- $docs := where site.Pages "Section" "eq" site.Params.latestMajorVersion }}
+{{- $docs := where site.Pages "Section" "eq" "docs" }}
 {{- /* Get year of blog posts */}}
 {{- $currentTime := now }}
 {{- $lastYear := $currentTime.AddDate -1 0 0 }}

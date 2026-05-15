@@ -1,0 +1,16 @@
+{{- /*
+If this page is in the latest docs section (`/docs/`), create an alias
+for it using the same path, except replace "docs" for the latest major version.
+
+For example, if the latest major version is 2.19, a page that lives at:
+/docs/reference/
+Will have an alias created at:
+/2.19/reference/
+*/ -}}
+{{- if eq .Section "docs" }}
+  {{- /* Replace the first instance of "docs" with the latest major version */}}
+  {{- $path := add (replace .Path "docs" site.Params.latestMajorVersion 1) "/index.html" }}
+  {{- $resource := resources.Get "alias.html" }}
+  {{- $file := resources.ExecuteAsTemplate $path . $resource }}
+  {{- $file.Publish }}
+{{- end -}}

@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup See: See: /layouts/docs/_markup/render-heading.html
 <h2 class="anchor">
@@ -9,7 +11,7 @@
 */
 
 .anchor {
-  scroll-margin-top: $header-min-height;
+  scroll-margin-top: abstracts.$header-min-height;
 
   .anchor__link {
     opacity: 0;

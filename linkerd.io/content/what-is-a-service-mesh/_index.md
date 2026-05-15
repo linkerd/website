@@ -128,7 +128,7 @@ through Linkerd involves many steps:
 
 And that's just the simplified version!
 
-![Linkerd dashboard](dashboard.png "Linkerd dashboard")
+![Linkerd dashboard](dashboard.png 'Linkerd dashboard')
 
 ## Why do I need a service mesh?
 
@@ -202,5 +202,5 @@ first service mesh project in 2017,
 [Linkerd is now in production](https://buoyant.io/case-studies/) at
 organizations like Microsoft, HP, and Nordstrom, and adoption shows no sign of
 slowing down. If you are using Kubernetes, Linkerd is fully open source and
-available to you today. [You're only minutes away](/2/getting-started/) from
+available to you today. [You're only minutes away](/docs/getting-started/) from
 getting concrete, hands-on experience with the service mesh!

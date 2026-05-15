@@ -10,6 +10,8 @@ title: diagnostics
 
 ## Subcommands
 
+{{< docs/cli-subcommands "diagnostics" >}}
+
 ### controller-metrics
 
 {{< docs/cli-description "diagnostics controller-metrics" >}}

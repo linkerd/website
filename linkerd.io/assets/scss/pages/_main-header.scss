@@ -1,0 +1,97 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/partials/main-header.html
+*/
+
+body {
+  // Add top padding to the body to avoid content overlay with fixed header
+  padding-top: abstracts.$header-min-height;
+}
+
+@media (max-width: abstracts.$mobile-max-breakpoint) {
+  // Hide body scrollbar when mobile nav is open
+  body {
+    &:has(.main-header__toggle-checkbox:checked) {
+      overflow: hidden;
+    }
+  }
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: abstracts.$z-index-main-nav;
+  background-color: abstracts.$white;
+  box-shadow: abstracts.$box-shadow;
+
+  .main-header__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: abstracts.size(4);
+    padding: abstracts.size(2) abstracts.size(3);
+  }
+  .main-header__logo {
+    display: flex;
+    align-items: center;
+    // Maintain height of header
+    min-height: (abstracts.$header-min-height - abstracts.size(3));
+
+    img {
+      display: block;
+      width: 160px;
+    }
+  }
+  .main-header__toggle-checkbox[type="checkbox"] {
+    display: none;
+  }
+  .main-header__toggle-icon {
+    cursor: pointer;
+    font-family: abstracts.$font-family-mono;
+  }
+  .main-header__toggle-icon--open {
+    display: inline-block;
+  }
+  .main-header__toggle-icon--close {
+    display: none;
+  }
+  // Mobile nav
+  @media (max-width: abstracts.$mobile-max-breakpoint) {
+    &:has(.main-header__toggle-checkbox:checked) {
+      // Stretch header to fill window
+      height: 100vh;
+      overflow: auto;
+    }
+    .main-header__nav {
+      display: none;
+      flex-basis: 100%;
+    }
+    .main-header__toggle-checkbox:checked ~ .main-header__toggle {
+      .main-header__toggle-icon--open {
+        display: none;
+      }
+      .main-header__toggle-icon--close {
+        display: inline-block;
+      }
+    }
+    .main-header__toggle-checkbox:checked ~ .main-header__nav {
+      display: block;
+    }
+  }
+  // Desktop nav
+  @media (min-width: abstracts.$desktop-min-breakpoint) {
+    .main-header__container {
+      flex-wrap: nowrap;
+    }
+    .main-header__toggle {
+      display: none;
+    }
+    .main-header__nav {
+      flex-grow: 1;
+    }
+  }
+}

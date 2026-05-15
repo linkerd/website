@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "../abstracts";
+
 /*
 @markup
 <a class="icon-button">
@@ -9,14 +12,14 @@
 
 .icon-button {
   display: inline-block;
-  padding: spacer(2);
-  border-radius: $border-radius;
+  padding: abstracts.size(2);
+  border-radius: abstracts.$border-radius;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover,
   &:active {
-    background-color: $light-blue;
+    background-color: abstracts.$light-blue;
   }
   .icon {
     display: block;
@@ -25,26 +28,26 @@
   // @options
 
   &.icon-button--primary {
-    background-color: $blue;
+    background-color: abstracts.$blue;
 
     &:hover,
     &:active {
-      background-color: shade-color($blue, 20%);
+      background-color: abstracts.shade-color(abstracts.$blue, 20%);
     }
   }
   &.icon-button--secondary {
-    background-color: $green;
+    background-color: abstracts.$green;
 
     &:hover,
     &:active {
-      background-color: darken($green, 15%);
+      background-color: color.adjust(abstracts.$green, $lightness: -15%);
     }
   }
   &.icon-button--primary,
   &.icon-button--secondary {
     .icon {
       path {
-        fill: $white;
+        fill: abstracts.$white;
       }
     }
   }

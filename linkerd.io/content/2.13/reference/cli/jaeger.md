@@ -10,6 +10,8 @@ title: jaeger
 
 ## Subcommands
 
+{{< docs/cli-subcommands "jaeger" >}}
+
 ### check
 
 {{< docs/cli-description "jaeger check" >}}

@@ -1,0 +1,54 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/community/ambassadors.html
+*/
+
+.ambassadors {
+  // Override all h2s on the page
+  h2 {
+    font-size: abstracts.$font-size-h1;
+  }
+  .page__container {
+    @include abstracts.make-stack(7);
+  }
+  .ambassadors__section {
+    @include abstracts.make-stack(5);
+
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+  .ambassadors__items {
+    display: grid;
+    gap: abstracts.size(4);
+    grid-template-columns: 1fr;
+
+    @media (min-width: abstracts.breakpoint-min-width("lg")) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .card {
+    position: relative;
+
+    .card__footer {
+      gap: abstracts.size(1);
+    }
+    .ambassadors__emeritus-badge {
+      position: absolute;
+
+      @media (max-width: abstracts.breakpoint-max-width("lg")) {
+        left: abstracts.size(4);
+        bottom: abstracts.size(4);
+        width: 128px; // Thumbnail width
+        text-align: center; // Center badge under thumbnail
+      }
+      @media (min-width: abstracts.breakpoint-min-width("xl")) {
+        top: abstracts.size(3);
+        right: abstracts.size(3);
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ the [auto proxy injection](../features/proxy-injection/) feature into your
 workflow. Finally, this guide conclude with steps to upgrade Linkerd to a newer
 version following a GitOps workflow.
 
-![Linkerd GitOps workflow](/docs/images/gitops/architecture.png 'Linkerd GitOps workflow')
+![Linkerd GitOps workflow](/images/docs/gitops/architecture.png 'Linkerd GitOps workflow')
 
 The software and tools used in this guide are selected for demonstration
 purposes only. Feel free to choose others that are most suited for your
@@ -184,7 +184,7 @@ argocd proj get demo
 
 On the dashboard:
 
-![New project in Argo CD dashboard](/docs/images/gitops/dashboard-project.png 'New project in Argo CD dashboard')
+![New project in Argo CD dashboard](/images/docs/gitops/dashboard-project.png 'New project in Argo CD dashboard')
 
 ### Deploy the applications
 
@@ -215,7 +215,7 @@ Sync the `main` application:
 argocd app sync main
 ```
 
-![Synchronize the main application](/docs/images/gitops/dashboard-applications-main-sync.png 'Synchronize the main application')
+![Synchronize the main application](/images/docs/gitops/dashboard-applications-main-sync.png 'Synchronize the main application')
 
 Notice that only the `main` application is synchronized.
 
@@ -237,7 +237,7 @@ for deploy in "cert-manager" "cert-manager-cainjector" "cert-manager-webhook"; \
 done
 ```
 
-![Synchronize the cert-manager application](/docs/images/gitops/dashboard-cert-manager-sync.png 'Synchronize the cert-manager application')
+![Synchronize the cert-manager application](/images/docs/gitops/dashboard-cert-manager-sync.png 'Synchronize the cert-manager application')
 
 ### Deploy Sealed Secrets
 
@@ -253,7 +253,7 @@ Confirm that sealed-secrets is running:
 kubectl -n kube-system rollout status deploy/sealed-secrets
 ```
 
-![Synchronize the sealed-secrets application](/docs/images/gitops/dashboard-sealed-secrets-sync.png 'Synchronize the sealed-secrets application')
+![Synchronize the sealed-secrets application](/images/docs/gitops/dashboard-sealed-secrets-sync.png 'Synchronize the sealed-secrets application')
 
 ### Create mTLS trust anchor
 
@@ -348,7 +348,7 @@ Git server earlier.
 
 {{< /note >}}
 
-![Synchronize the linkerd-bootstrap application](/docs/images/gitops/dashboard-linkerd-bootstrap-sync.png 'Synchronize the linkerd-bootstrap application')
+![Synchronize the linkerd-bootstrap application](/images/docs/gitops/dashboard-linkerd-bootstrap-sync.png 'Synchronize the linkerd-bootstrap application')
 
 SealedSecrets should have created a secret containing the decrypted trust
 anchor. Retrieve the decrypted trust anchor from the secret:
@@ -380,7 +380,7 @@ argocd app get linkerd-control-plane -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-![Empty default trust anchor](/docs/images/gitops/dashboard-trust-anchor-empty.png 'Empty default trust anchor')
+![Empty default trust anchor](/images/docs/gitops/dashboard-trust-anchor-empty.png 'Empty default trust anchor')
 
 We will override this parameter in the `linkerd` application with the value of
 `${trust_anchor}`.
@@ -395,7 +395,7 @@ Ensure that the multi-line string is indented correctly. E.g.,
 source:
   chart: linkerd-control-plane
   repoURL: https://helm.linkerd.io/edge
-  targetRevision: {{% chart-version %}}
+  targetRevision: { { % chart-version % } }
   helm:
     parameters:
       - name: identityTrustAnchorsPEM
@@ -442,7 +442,7 @@ argocd app get linkerd-control-plane -ojson | \
   jq -r '.spec.source.helm.parameters[] | select(.name == "identityTrustAnchorsPEM") | .value'
 ```
 
-![Override mTLS trust anchor](/docs/images/gitops/dashboard-trust-anchor-override.png 'Override mTLS trust anchor')
+![Override mTLS trust anchor](/images/docs/gitops/dashboard-trust-anchor-override.png 'Override mTLS trust anchor')
 
 Synchronize the `linkerd-crds` and `linkerd-control-plane` applications:
 
@@ -457,7 +457,7 @@ Check that Linkerd is ready:
 linkerd check
 ```
 
-![Synchronize Linkerd](/docs/images/gitops/dashboard-linkerd-sync.png 'Synchronize Linkerd')
+![Synchronize Linkerd](/images/docs/gitops/dashboard-linkerd-sync.png 'Synchronize Linkerd')
 
 ### Test with emojivoto
 
@@ -475,7 +475,7 @@ for deploy in "emoji" "vote-bot" "voting" "web" ; \
 done
 ```
 
-![Synchronize emojivoto](/docs/images/gitops/dashboard-emojivoto-sync.png 'Synchronize emojivoto')
+![Synchronize emojivoto](/images/docs/gitops/dashboard-emojivoto-sync.png 'Synchronize emojivoto')
 
 ### Upgrade Linkerd
 

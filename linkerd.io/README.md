@@ -12,14 +12,26 @@ docker run \
 
 ### Install Hugo to develop locally
 
-For Mac users:
+Install Dart Sass first:
+
+```bash
+brew install sass/sass/sass
+```
+
+Then install Hugo:
 
 ```bash
 brew install hugo
 ```
 
-Or download the **extended** release of Hugo from the GitHub
+Or download the release of Hugo from the GitHub
 [release page](https://github.com/gohugoio/hugo/releases/).
+
+## Hugo version requirements
+
+The minimum version of Hugo needed to build the site is `v0.142.0`.
+
+When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
 
 ### Run Hugo locally
 
@@ -31,12 +43,6 @@ hugo server -s linkerd.io
 
 You should see the site on localhost:1313, and it should reload automatically
 upon file write.
-
-## Hugo version requirements
-
-The minimum version of Hugo needed to build the site is `v0.142.0`.
-
-When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
 
 ## Website images
 
@@ -147,8 +153,8 @@ list page. If a cover image is not present, or you would like to use a different
 image than the cover image, you can name it `feature` and place it in the blog
 post folder.
 
-**Note:** When a blog post is featured on the blog listing it will be
-cropped into a 4x1 ratio.
+**Note:** When a blog post is featured on the blog listing it will be cropped
+into a 4x1 ratio.
 
 #### Thumbnail images
 
@@ -283,31 +289,29 @@ bash {class=disable-copy}
 ### Creating a new major version
 
 To create a new major version for the Linkerd docs, follow the steps below. As
-an example we suppose the latest major is `2.18` and we'd like to create docs
-for the upcoming `2.19` version, that will appear at `https://linkerd.io/2.19`.
+an example we suppose the latest major is `2.19` and we'd like to create docs
+for the upcoming `2.20` version.
 
 - Clone the `https://github.com/linkerd/website` repo
-- Create a new branch `yourusername/2.19`
+- Create a new branch `yourusername/2.20`
 - Update the latest version in `linkerd.io/config/_default/params.yaml`:
-  `latestMajorVersion: "2.19"`
-- Update the `docs` menu in `linkerd.io/config/_default/menu.yaml` to include a
-  menu item for `2.19`.
+  `latestMajorVersion: "2.20"`
+- Update the `docs` menu in `linkerd.io/config/_default/menu.yaml` changing the
+  2.19 `pageRef` to `/2.19/`. Then include a new menu item for `2.20` with
+  `pageRef` set to `/docs/`.
 - Make sure all the links in the edge version (`2-edge`) are relative and don't
   have the version hard-coded. E.g. `(/../cli/install/#)` instead of
   `(/2-edge/reference/cli/install/#)`.
-- Add a row to the Supported Kubernetes Versions table for `2.19` in
+- Add a row to the Supported Kubernetes Versions table for `2.20` in
   `linkerd.io/content/2-edge/reference/k8s-versions.md`.
-- Create an entire new directory, copying the edge docs:
-  `cp -r linkerd.io/content/2-edge linkerd.io/content/2.19`. Any upcoming doc
-  changes pertaining to `2.19` should be pushed against that new directory and
+- Add a row to the Gateway API compatibility table for `2.20` in
+  `linkerd.io/content/2-edge/features/gateway-api.md`.
+- Rename the `docs` directory `2.19`.
+- Create a new directory, copying the edge docs:
+  `cp -r linkerd.io/content/2-edge linkerd.io/content/docs`. Any upcoming doc
+  changes pertaining to `2.20` should be pushed against that new directory and
   the `2-edge` directory.
-- Generate the CLI docs with `linkerd doc > linkerd.io/data/cli/2-19.yaml`. Just
+- Generate the CLI docs with `linkerd doc > linkerd.io/data/cli/2-20.yaml`. Just
   to make sure the edge data is up to date, copy the contents from this newly
   genereated file to `linkerd.io/data/cli/2-edge.yaml`.
-- Push, and hold the merge till after `2.19` is out.
-- After merging, update the Cloudflare redirection rule so `/2` points to
-  `/2.19`:
-  - Click on the `linkerd.io` site
-  - Click on the `Rules`section
-  - Update the rule `https://linkerd.io/2/*` so that it points to
-    `https://linkerd.io/2.19/$1`
+- Push, and hold the merge till after `2.20` is out.

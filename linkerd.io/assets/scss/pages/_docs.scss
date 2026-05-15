@@ -1,0 +1,141 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/docs/*
+*/
+
+.docs__deprecated-alert {
+  // Override component styles
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+}
+.docs__container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.docs__sidebar {
+  background-color: abstracts.$light-gray;
+}
+.docs__nav {
+  @include abstracts.make-stack(3);
+  padding: abstracts.size(4);
+
+  select {
+    // Override base styles
+    border: none;
+    background-color: transparent;
+  }
+  ul, li {
+    // Override base styles
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  nav li {
+    position: relative; // Needed to position label
+    line-height: abstracts.$line-height-tight;
+
+    a {
+      display: block;
+      padding: abstracts.size(2) 0 abstracts.size(2) abstracts.size(3);
+      margin-right: abstracts.size(5); // Prevent the text from touching the label
+      color: abstracts.$gray;
+
+      &:hover {
+        color: abstracts.$blue;
+      }
+    }
+    label {
+      // Postion toggle button
+      position: absolute;
+      top: 6px;
+      right: abstracts.size(2);
+    }
+    &.docs__nav--selected {
+      background-color: abstracts.$white;
+
+      & > a {
+        color: abstracts.$navy;
+      }
+    }
+    li {
+      // Indent submenus
+      padding-left: abstracts.size(3);
+
+      li {
+        // Reduce font size and spacing below level 2
+        font-size: abstracts.$font-size-sm;
+
+        a {
+          padding-top: abstracts.size(1);
+          padding-bottom: abstracts.size(1);
+        }
+      }
+    }
+  }
+  .docs__versions {
+    padding-bottom: abstracts.size(2);
+    border-bottom: solid 1px abstracts.$border-color;
+  }
+  .docs__community {
+    margin-top: abstracts.size(3);
+    padding: abstracts.size(4) abstracts.size(3);
+    border-top: solid 1px abstracts.$border-color;
+
+    ul {
+      @include abstracts.make-stack(3);
+    }
+    img {
+      width: auto;
+      height: 20px;
+    }
+  }
+}
+.docs__main {
+  padding: abstracts.size(7) 0;
+}
+.docs__header {
+  h1 {
+    margin-bottom: abstracts.size(5); // Override base styles
+  }
+}
+.docs__body {
+  max-width: 800px;
+  padding-left: abstracts.size(4);
+  padding-right: abstracts.size(4);
+}
+@media (min-width: abstracts.breakpoint-min-width("md")) {
+  .docs__sidebar {
+    padding: abstracts.size(7) 0;
+  }
+  .docs__container {
+    grid-template-columns: 300px 1fr;
+  }
+  .docs__sidebar {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .docs__nav {
+    width: 300px;
+    padding: 0 0 0 abstracts.size(4);
+  }
+  .docs__versions,
+  .docs__community {
+    margin-right: abstracts.size(4);
+  }
+}
+@media (min-width: abstracts.breakpoint-min-width("xl")) {
+  .docs__body {
+    padding-left: abstracts.size(7);
+  }
+}
+@media (min-width: abstracts.breakpoint-min-width("xxl")) {
+  .docs__container {
+    grid-template-columns: 33% 1fr;
+  }
+  .docs__nav {
+    width: 350px;
+  }
+}

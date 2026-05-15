@@ -75,7 +75,7 @@ configuration.
 If you are using one of those protocols, follow this decision tree to determine
 which configuration you need to apply.
 
-![Decision tree](/docs/images/protocol-detection-decision-tree.png)
+![Decision tree](/images/docs/protocol-detection-decision-tree.png)
 
 ## Marking ports as opaque
 

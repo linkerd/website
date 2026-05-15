@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <svg class="icon">
@@ -8,8 +10,8 @@
 .icon {
   display: inline-block;
   vertical-align: middle;
-  width: icon-size("md");
-  height: icon-size("md");
+  width: abstracts.icon-size("md");
+  height: abstracts.icon-size("md");
 
   path {
     fill: currentColor;
@@ -19,32 +21,32 @@
 
   &.icon--primary {
     path {
-      fill: $primary-color;
+      fill: abstracts.$primary-color;
     }
   }
   &.icon--secondary {
     path {
-      fill: $secondary-color;
+      fill: abstracts.$secondary-color;
     }
   }
   &.icon--info {
     path {
-      fill: $info-color;
+      fill: abstracts.$info-color;
     }
   }
   &.icon--success {
     path {
-      fill: $success-color;
+      fill: abstracts.$success-color;
     }
   }
   &.icon--warning {
     path {
-      fill: $warning-color;
+      fill: abstracts.$warning-color;
     }
   }
   &.icon--danger {
     path {
-      fill: $danger-color;
+      fill: abstracts.$danger-color;
     }
   }
   &.icon--current {
@@ -53,23 +55,23 @@
     }
   }
   &.icon--xs {
-    width: icon-size("xs");
-    height: icon-size("xs");
+    width: abstracts.icon-size("xs");
+    height: abstracts.icon-size("xs");
   }
   &.icon--sm {
-    width: icon-size("sm");
-    height: icon-size("sm");
+    width: abstracts.icon-size("sm");
+    height: abstracts.icon-size("sm");
   }
   &.icon--md {
-    width: icon-size("md");
-    height: icon-size("md");
+    width: abstracts.icon-size("md");
+    height: abstracts.icon-size("md");
   }
   &.icon--lg {
-    width: icon-size("lg");
-    height: icon-size("lg");
+    width: abstracts.icon-size("lg");
+    height: abstracts.icon-size("lg");
   }
   &.icon--xl {
-    width: icon-size("xl");
-    height: icon-size("xl");
+    width: abstracts.icon-size("xl");
+    height: abstracts.icon-size("xl");
   }
 }

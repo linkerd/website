@@ -12,7 +12,7 @@ happens when you take a
 [simple gRPC Node.js microservices app](https://github.com/sourishkrout/nodevoto)
 and deploy it on Kubernetes:
 
-![pods](grpc-pods.png "Pods")
+![pods](grpc-pods.png 'Pods')
 
 While the `voting` service displayed here has several pods, it's clear from
 Kubernetes's CPU graphs that only one of the pods is actually doing any
@@ -41,7 +41,7 @@ it reduces the overhead of connection management. However, it also means that
 connection is established, there's no more balancing to be done. All requests
 will get pinned to a single destination pod, as shown below:
 
-![diagram](diagram-1.png "Diagram")
+![diagram](diagram-1.png 'Diagram')
 
 ## Why doesn't this affect HTTP/1.1?
 
@@ -72,7 +72,7 @@ gRPC load balancing, we need to shift from connection balancing to _request_
 balancing. In other words, we need to open an HTTP/2 connection to each
 destination, and balance _requests_ across these connections, as shown below:
 
-![diagram](diagram-2.png "Diagram")
+![diagram](diagram-2.png 'Diagram')
 
 In network terms, this means we need to make decisions at L5/L7 rather than
 L3/L4, i.e. we need to understand the protocol sent over the TCP connections.
@@ -107,7 +107,7 @@ service, it adds a tiny, ultra-fast proxy to each pod, and these proxies watch
 the Kubernetes API and do gRPC load balancing automatically. Our deployment then
 looks like this:
 
-![multiplex](multiplex.png "Multiplex")
+![multiplex](multiplex.png 'Multiplex')
 
 Using Linkerd has a couple big advantages. First, it works with services written
 in any language, with any gRPC client, and any deployment model (headless or
@@ -129,15 +129,15 @@ impact on system performance will be negligible.
 ## gRPC Load Balancing in 60 seconds
 
 Linkerd is very easy to try. Just follow the steps in the
-[Linkerd Getting Started Instructions](/2/getting-started/) — install the CLI on
-your laptop, install the control plane on your cluster, and "mesh" your service
-(inject the proxies into each pod). You'll have Linkerd running on your service
-in no time, and should see proper gRPC balancing immediately.
+[Linkerd Getting Started Instructions](/docs/getting-started/) — install the CLI
+on your laptop, install the control plane on your cluster, and "mesh" your
+service (inject the proxies into each pod). You'll have Linkerd running on your
+service in no time, and should see proper gRPC balancing immediately.
 
 Let's take a look at our sample `voting` service again, this time after
 installing Linkerd:
 
-![Voting service](voting-service.png "Voting service")
+![Voting service](voting-service.png 'Voting service')
 
 As we can see, the CPU graphs for all pods are active, indicating that all pods
 are now taking traffic—without having to change a line of code. Voila, gRPC load
@@ -148,7 +148,7 @@ to guess what's happening from CPU charts any more. Here's a Linkerd graph
 that's showing the success rate, request volume, and latency percentiles of each
 pod:
 
-![Pod overview](pod-overview.png "Pod overview")
+![Pod overview](pod-overview.png 'Pod overview')
 
 We can see that each pod is getting around 5 RPS. We can also see that, while
 we've solved our load balancing problem, we still have some work to do on our

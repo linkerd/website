@@ -18,7 +18,7 @@ boundaries separated by the open Internet.
 Implemented as a Kubernetes operator that can be added to an existing Linkerd
 deployment, the failover strategy can be applied to a single cluster but is
 particularly useful for multi-cluster deployments. Linkerd already provides
-[powerful cross-cluster communication capabilities](/2/features/multicluster/)
+[powerful cross-cluster communication capabilities](/docs/features/multicluster/)
 that work with any cluster topology, including multi-cloud and hybrid cloud; are
 completely transparent to the application; are zero-trust compatible; and do not
 introduce any single points of failure (SPOF) to the system. To this feature
@@ -34,10 +34,10 @@ rounds out Linkerd's existing reliability features, providing a complete
 solution for ultra-high-reliability deployments that covers:
 
 - Failure of individual nodes: handled via
-  [retries](/2/features/retries-and-timeouts/) and
-  [request balancing](/2/features/load-balancing/)
+  [retries](/docs/features/retries-and-timeouts/) and
+  [request balancing](/docs/features/load-balancing/)
 - Failures due to bad code changes: (handled via
-  [canary deployments](/2/features/traffic-split/))
+  [canary deployments](/docs/features/traffic-split/))
 - Failures due to service unavailability in general: handled with the failover
   operator
 - Failures due to whole-cluster outages: handed with the failover operator

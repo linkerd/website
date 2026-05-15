@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 /*
 @markup
 <div class="thumbnail">
@@ -9,7 +11,7 @@
 .thumbnail {
   position: relative;
   overflow: hidden;
-  border-radius: $border-radius;
+  border-radius: abstracts.$border-radius;
 
   span {
     position: absolute;

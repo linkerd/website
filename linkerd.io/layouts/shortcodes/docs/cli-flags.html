@@ -1,13 +1,10 @@
-{{- /* Get the CLI data file for the current linkerd version */}}
-{{- $file := replace .Page.Section "." "-" }}
-{{- $data := index site.Data.cli $file }}
-{{- /* Output data */}}
+{{ $data := partial "docs/get-cli-file" . }}
 {{ range where $data.CLIReference "Name" (.Get 0) }}
   {{ $opts := where .Options "Name" "!=" "help" }}
   {{ if ge (len $opts) 1 }}
-    <h2>
+    <h4>
       Flags
-    </h2>
+    </h4>
     <table class="keyval">
       <thead>
         <tr>

@@ -1,7 +1,7 @@
 ---
 date: 2021-02-23T00:00:00Z
 title: Protocol Detection and Opaque Ports in Linkerd
-keywords: [linkerd, proxy, "Protocol Detection"]
+keywords: [linkerd, proxy, 'Protocol Detection']
 params:
   author: charles
   showCover: true
@@ -14,11 +14,11 @@ There have been quite a few questions from the Linkerd community in
 [GitHub](https://github.com/linkerd/linkerd2) about this feature, so this
 article focuses on one of the most important underlying features that enables
 Linkerd to perform this feat:
-[Protocol Detection](/2/features/protocol-detection/).
+[Protocol Detection](/docs/features/protocol-detection/).
 
 Protocol detection, as the name suggests, allows Linkerd to automatically detect
 the protocol in use in a TCP connection. One of
-[Linkerd's design principles](/2/design-principles/) is to "just work," and
+[Linkerd's design principles](/design-principles/) is to "just work," and
 protocol detection is an important part of how Linkerd achieves that goal.
 
 In this article, you'll learn what protocol detection is, how this subtle
@@ -30,7 +30,7 @@ will bring to Linkerd.
 Put simply, _protocol detection is the ability to determine the protocol in use
 on a TCP connection by inspecting the traffic on the connection._
 
-![Protocol Detection](protocol_detection_base.png "Protocol Detection")
+![Protocol Detection](protocol_detection_base.png 'Protocol Detection')
 
 Linkerd uses protocol detection to avoid asking the user to specify the
 protocol. Rather than requiring the user to configure what protocol each port
@@ -124,7 +124,7 @@ port). Similarly, the annotation `config.linkerd.io/skip-inbound-ports: 3306`
 will write an iptables rule so that the proxy never handles MySQL traffic that
 is sent to it.
 
-![Skip Ports Configuration](protocol_detection_skip.png "Skip Ports Configuration")
+![Skip Ports Configuration](protocol_detection_skip.png 'Skip Ports Configuration')
 
 These options provide a workaround for the inability of protocol detection to
 handle server-speaks-first protocols. However, they have one significant
@@ -140,7 +140,7 @@ performing protocol detection. While this approach still requires configuration,
 marking a port as opaque allows Linkerd to apply mTLS and report TCP-level
 metrics—a big improvement over skipping it entirely.
 
-![Opaque Ports Configuration](protocol_detection_opaque.png "Opaque Ports Configuration")
+![Opaque Ports Configuration](protocol_detection_opaque.png 'Opaque Ports Configuration')
 
 Linkerd 2.10 will also improve how protocol detection works by making it "fail
 open": if the protocol detection code sees no client-side bytes after 10

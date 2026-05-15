@@ -1,0 +1,13 @@
+@use "../abstracts";
+
+/*
+@markup See: layouts/404.html
+*/
+
+.four0four {
+  .four0four__container {
+    @include abstracts.make-stack(4);
+    padding: abstracts.size(8) 0;
+    text-align: center;
+  }
+}

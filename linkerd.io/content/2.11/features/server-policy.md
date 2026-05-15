@@ -104,4 +104,4 @@ existing TCP connections.
 See
 [emojivoto-policy.yml](https://github.com/linkerd/website/blob/main/run.linkerd.io/public/emojivoto-policy.yml)
 for an example set of policy definitions for the
-[Emojivoto sample application](/2/getting-started/).
+[Emojivoto sample application](/docs/getting-started/).

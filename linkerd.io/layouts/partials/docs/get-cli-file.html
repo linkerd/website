@@ -1,0 +1,4 @@
+{{ $version := cond (eq .Page.Section "docs") site.Params.latestMajorVersion .Page.Section }}
+{{ $file := replace $version "." "-" }}
+{{ $data := index site.Data.cli $file }}
+{{ return $data }}

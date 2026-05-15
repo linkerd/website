@@ -18,7 +18,7 @@ modes: hierarchical (using a gateway), flat (without a gateway), and federated.
 
 These modes can be mixed and matched.
 
-![Architectural diagram comparing hierarchical and flat network modes](/docs/images/multicluster/flat-network.png)
+![Architectural diagram comparing hierarchical and flat network modes](/images/docs/multicluster/flat-network.png)
 
 Hierarchical mode places a bare minimum of requirements on the underlying
 network, as it only requires that the gateway IP be reachable. However, flat

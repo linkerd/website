@@ -23,8 +23,7 @@ application itself.
 
 Linkerd is significantly lighter and simpler than Istio. Linkerd is built for
 security from the ground up, ranging from features like
-[on-by-default mTLS](https://linkerd.io/2/features/automatic-mtls/), a data
-plane that is
+[on-by-default mTLS](/docs/features/automatic-mtls/), a data plane that is
 [built in a Rust, memory-safe language](https://github.com/linkerd/linkerd2-proxy),
 and
 [regular security audits](https://github.com/linkerd/linkerd2/tree/main/audits).
@@ -115,8 +114,8 @@ you would without Linkerd, e.g. `service-name.namespace.svc.cluster.local`, or
 
 "No. For reasons of simplicity, Linkerd doesn't provide ingress itself, but
 instead
-[works in conjunction with the ingress controller](https://linkerd.io/2/features/ingress/)
-of your choice."
+[works in conjunction with the ingress controller](/docs/features/ingress/) of
+your choice."
 
 ## What happens to Linkerd's proxies if the control plane is down?
 

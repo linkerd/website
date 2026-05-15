@@ -3,7 +3,7 @@ date: 2025-04-23T00:00:00Z
 slug: announcing-linkerd-2.18
 title: |-
   Announcing Linkerd 2.18: Battlescars, lessons learned, and preliminary Windows support
-keywords: [linkerd, "2.18", features]
+keywords: [linkerd, '2.18', features]
 params:
   author: william
   showCover: true
@@ -89,7 +89,7 @@ hundreds or thousands of clusters, and will typically manage their
 infrastructure via GitOps.
 
 In Linkerd 2.14, we took a first step to supporting new multicluster patterns by
-introducing [pod-to-pod multicluster](/2/tasks/pod-to-pod-multicluster/) for
+introducing [pod-to-pod multicluster](/docs/tasks/pod-to-pod-multicluster/) for
 platforms with flat networks. In Linkerd 2.17, we introduced federated services,
 a new model for services that span many clusters. In Linkerd 2.18, we've further
 improved multicluster by allowing the creation of all Link resources in a
@@ -111,7 +111,7 @@ Linkerd 2.18 will be the last release that installs Gateway API types by
 default. In this release, we've bumped the installed versions of these types;
 we've added support for Gateway API version 1.2.1, the latest available; and
 we've improved our documentation with recommendations for how users should
-[manage the Gateway API](/2/features/gateway-api/#managing-the-gateway-api)
+[manage the Gateway API](/docs/features/gateway-api/#managing-the-gateway-api)
 across Linkerd and other projects.
 
 ### Experimental Windows build
