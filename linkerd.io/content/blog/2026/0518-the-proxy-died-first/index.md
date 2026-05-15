@@ -3,7 +3,7 @@ date: 2026-05-18T00:00:00Z
 slug: the-proxy-died-first
 title: |-
   The Proxy Died First: How Kubernetes Native Sidecars Solve the Service Mesh Shutdown Problem
-keywords: [linkerd]
+keywords: [linkerd, proxy, sidecar, 'native sidecar']
 params:
   author:
     name: Blake Romano, Linkerd Ambassador
