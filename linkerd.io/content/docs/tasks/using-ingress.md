@@ -19,6 +19,22 @@ into the cluster. However, it is recommended, as it allows Linkerd to provide
 features like L7 metrics and mutual TLS the moment the traffic enters the
 cluster.
 
+### Ingress pods and host networking
+
+Linkerd does not inject the proxy into pods that use `hostNetwork: true`.
+Some ingress controllers run in host network mode by default, including the
+Kubernetes community
+[ingress-nginx](https://github.com/kubernetes/ingress-nginx) chart when
+`controller.hostNetwork` is enabled and the default
+[RKE2](https://docs.rke2.io/) ingress (`rke2-ingress-nginx`). In that
+configuration, meshed ingress features such as L7 metrics and mutual TLS do
+not apply to the ingress controller itself.
+
+If you need Linkerd's mesh features on ingress traffic, configure the ingress
+controller to use normal pod networking instead of `hostNetwork`. See
+[linkerd/linkerd2#7949](https://github.com/linkerd/linkerd2/issues/7949) for
+more background.
+
 ## Handling external TLS
 
 One common job for ingress controllers is to terminate TLS from the outside
@@ -127,6 +143,14 @@ controller
 
 Nginx can be meshed normally: it does not require the
 [ingress mode](#ingress-mode) annotation.
+
+{{< note >}}
+
+If the controller runs with `hostNetwork: true`, Linkerd will not inject the
+proxy and the guidance on this page does not apply. See
+[Ingress pods and host networking](#ingress-pods-and-host-networking) above.
+
+{{< /note >}}
 
 The
 [`nginx.ingress.kubernetes.io/service-upstream`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#service-upstream)
