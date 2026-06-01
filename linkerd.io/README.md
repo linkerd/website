@@ -12,11 +12,13 @@ docker run \
 
 ### Install Hugo to develop locally
 
-Install Dart Sass first:
+Install Dart Sass Embedded first:
 
 ```bash
-brew install sass/sass/sass
+npm install -g sass-embedded
 ```
+
+This installs the `sass` executable that Hugo expects when building the site.
 
 Then install Hugo:
 

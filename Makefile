@@ -118,7 +118,7 @@ ifndef HAS_HUGO
 	@printf "Install hugo first. For OSX: brew install hugo\n"; exit 1
 endif
 ifndef HAS_SASS
-	@printf "Install Dart Sass first: npm install sass\n"; exit 1
+	@printf "Install Dart Sass Embedded first: npm install -g sass-embedded\n"; exit 1
 endif
 	cd tmp/linkerd.io && ./build
 
