@@ -58,11 +58,14 @@ instructions on how to easily import the same charts published on
 {{< note >}}
 
 Grafana's official Helm chart uses an initContainer to download Linkerd's
-configuration and dashboards. If you use the CNI plugin, when you add grafana's
-pod into the mesh its initContainer will run before the proxy is started and the
-traffic cannot flow. You should either avoid meshing grafana's pod, skip
-outbound port 443 via `config.linkerd.io/skip-outbound-ports: "443"` annotation
-or run the container with the proxy's UID. See
+configuration and dashboards. If you use the CNI plugin and have
+[disabled native sidecars](../features/native-sidecars/#disabling-native-sidecars-in-linkerd)
+(which are enabled by default as of Linkerd 2.20), when you add grafana's pod
+into the mesh its initContainer will run before the proxy is started and the
+traffic cannot flow. In that case you should either avoid meshing grafana's
+pod, skip outbound port 443 via the
+`config.linkerd.io/skip-outbound-ports: "443"` annotation, or run the container
+with the proxy's UID. See
 [Allowing initContainer networking](../features/cni/#allowing-initcontainer-networking)
 
 {{< /note >}}
