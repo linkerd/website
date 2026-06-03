@@ -110,10 +110,17 @@ The most important flags are:
 ### Allowing initContainer networking
 
 When using the Linkerd CNI plugin the required `iptables` rules are in effect
-before the pod is scheduled. Also, the `linkerd-proxy` is not started until
-after all `initContainers` have completed. This means no `initContainer` will
-have network access because its packets will be caught by `iptables` and the
-`linkerd-proxy` will not yet be available.
+before the pod is scheduled. As of Linkerd 2.20, the proxy runs by default as
+a [native sidecar container](native-sidecars/), starting before the
+application's `initContainers`, so those containers have network access and no
+extra configuration is needed.
+
+However, if you have
+[disabled native sidecars](native-sidecars/#disabling-native-sidecars-in-linkerd),
+the `linkerd-proxy` is not started until after all `initContainers` have
+completed. This means no `initContainer` will have network access because its
+packets will be caught by `iptables` and the `linkerd-proxy` will not yet be
+available.
 
 It is possible to bypass these `iptables` rules by running the `initContainer`
 as the UID of the proxy (by default `2102`). Processes run as this UID are
