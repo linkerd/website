@@ -9,3 +9,5 @@ helpful:
 
 - [Buoyant's production-grade installation](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/installation/production/),
   from the creators of Linkerd.
+- [Linkerd production readiness pre-launch checklist](https://www.buoyant.io/download/linkerd-production-readiness-pre-launch-checklist),
+  from the creators of Linkerd.
