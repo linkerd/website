@@ -160,20 +160,21 @@ configure parameters for the consecutive-failures failure accrual policy:
 When the failure accrual mode is `"unified"`, the following annotations
 configure parameters for the unified failure accrual policy:
 
-- `balancer.alpha.linkerd.io/unified-success-rate-threshold`: If the
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-threshold`: If the
   success-rate of responses in the window drops below this threshold, then the
   endpoint will be made unavailable.  Must be between `0.0` and `1.0`.
   Rate-limited responses such as HTTP 429 and gRPC RESOURCE_EXHAUSATED count as
   failures for this calculation. If this annotation is not present, the default
   value is `0.8` (80% success-rate).
-- `balancer.alpha.linkerd.io/unified-success-rate-window`: The window of time
-  over success-rate is calculated.  If this annotation is not present, the
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-window`: The window of
+  time over success-rate is calculated.  If this annotation is not present, the
   default value is `10s`.
-- `balancer.alpha.linkerd.io/unified-min-requests`: The minimum number of
-  responses which must be in the window before this breaker can trip. This acts
-  as a "cold start" protection to ensure we have a sufficient number of
-  responses for the success-rate calculation to be meaningful before tripping.
-  If this annotation is not present, the default value is `5`.
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-min-requests`: The
+  minimum number of responses which must be in the window before this breaker
+  can trip. This acts as a "cold start" protection to ensure we have a
+  sufficient number of responses for the success-rate calculation to be
+  meaningful before tripping. If this annotation is not present, the default
+  value is `5`.
 - `balancer.linkerd.io/failure-accrual-consecutive-max-failures`: See above.
 - `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`: See above.
 - `balancer.linkerd.io/failure-accrual-consecutive-max-penalty`: See above.
