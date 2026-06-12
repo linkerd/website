@@ -294,7 +294,6 @@ metadata:
   # This is the name of the Issuer resource; it's the way
   # Certificate resources can find this issuer.
   name: linkerd-identity-issuer
-  namespace: cert-manager
 spec:
   ca:
     secretName: linkerd-trust-anchor
@@ -597,7 +596,7 @@ inspect_cert () {
         | "Issuer:  '"$iss_selector"'",
           "Subject: '"$sub_selector"'",
           "Valid:   '"$val_selector"'",
-          "" 
+          ""
       '
 }
 ```
