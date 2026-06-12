@@ -294,7 +294,6 @@ metadata:
   # This is the name of the Issuer resource; it's the way
   # Certificate resources can find this issuer.
   name: linkerd-identity-issuer
-  namespace: cert-manager
 spec:
   ca:
     secretName: linkerd-trust-anchor
@@ -407,10 +406,9 @@ you'll need to modify this command to do the right thing for your resource type.
 {{< /note >}}
 
 ```bash
-kubectl get secret -n cert-manager linkerd-trust-anchor -o yaml \
-        | sed -e s/linkerd-trust-anchor/linkerd-previous-anchor/ \
-        | egrep -v '^  *(resourceVersion|uid)' \
-        | kubectl apply -f -
+kubectl -n cert-manager get secret linkerd-trust-anchor -o json \
+  | jq '{apiVersion: .apiVersion, kind: .kind, metadata: {name: "linkerd-previous-anchor", namespace: .metadata.namespace}, type: .type, data: .data}' \
+  | kubectl apply -f -
 ```
 
 This way, when cert-manager rotates the trust anchor and updates the
@@ -598,7 +596,7 @@ inspect_cert () {
         | "Issuer:  '"$iss_selector"'",
           "Subject: '"$sub_selector"'",
           "Valid:   '"$val_selector"'",
-          "" 
+          ""
       '
 }
 ```
@@ -928,10 +926,9 @@ you'll need to modify this command to do the right thing for your resource type.
 {{< /note >}}
 
 ```bash
-kubectl get secret -n cert-manager linkerd-trust-anchor -o yaml \
-        | sed -e s/linkerd-trust-anchor/linkerd-previous-anchor/ \
-        | egrep -v '^  *(resourceVersion|uid)' \
-        | kubectl apply -f -
+kubectl -n cert-manager get secret linkerd-trust-anchor -o json \
+  | jq '{apiVersion: .apiVersion, kind: .kind, metadata: {name: "linkerd-previous-anchor", namespace: .metadata.namespace}, type: .type, data: .data}' \
+  | kubectl apply -f -
 ```
 
 You can doublecheck this with `kubectl` again:
