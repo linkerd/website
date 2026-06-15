@@ -58,7 +58,7 @@ made unavailable once 7 failures occur in a row with no successes.
 
 ### Unified
 
-In this failure accrual policy, an endpoints is marked as failing after _either_
+In this failure accrual policy, an endpoint is marked as failing after _either_
 success-rate drops below a configured threshold _or_ a configured number of
 failures occur _consecutively_. For more information on the Unified failure
 accrual, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-balancing.md).
@@ -167,8 +167,8 @@ configure parameters for the unified failure accrual policy:
   failures for this calculation. If this annotation is not present, the default
   value is `0.8` (80% success-rate).
 - `balancer.alpha.linkerd.io/failure-accrual-success-rate-window`: The window of
-  time over success-rate is calculated.  If this annotation is not present, the
-  default value is `10s`.
+  time over which success-rate is calculated.  If this annotation is not present,
+  the default value is `10s`.
 - `balancer.alpha.linkerd.io/failure-accrual-success-rate-min-requests`: The
   minimum number of responses which must be in the window before this breaker
   can trip. This acts as a "cold start" protection to ensure we have a
