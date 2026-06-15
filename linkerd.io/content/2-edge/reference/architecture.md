@@ -60,10 +60,12 @@ containers to the pod, along with the relevant start-time configuration.
 ## Data plane
 
 The Linkerd data plane comprises ultralight _micro-proxies_ which are deployed
-as sidecar containers inside application pods. These proxies transparently
-intercept TCP connections to and from each pod, thanks to iptables rules put in
-place by the [linkerd-init](#linkerd-init-container) (or, alternatively, by
-Linkerd's [CNI plugin](../features/cni/)).
+as sidecar containers inside application pods. As of Linkerd 2.20, the proxy
+is deployed by default as a
+[native sidecar container](../features/native-sidecars/). These proxies
+transparently intercept TCP connections to and from each pod, thanks to
+iptables rules put in place by the [linkerd-init](#linkerd-init-container)
+(or, alternatively, by Linkerd's [CNI plugin](../features/cni/)).
 
 ### Proxy
 

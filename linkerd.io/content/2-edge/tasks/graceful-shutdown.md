@@ -66,12 +66,6 @@ signal.
 Linkerd offers a few options to configure pods and containers to gracefully
 shutdown.
 
-- `--wait-before-seconds`: can be used as an install value (either through the
-  CLI or through Helm), or alternatively, through a
-  [configuration annotation](../reference/proxy-configuration/). This will add a
-  `preStop` hook to the proxy container to delay its handling of the TERM
-  signal. This will only work when the conditions described above are satisfied
-  (i.e container runtime sends the TERM signal)
 - `config.linkerd.io/shutdown-grace-period`: is an annotation that can be used
   on workloads to configure the graceful shutdown time for the _proxy_. If the
   period elapses before the proxy has had a chance to gracefully shut itself
@@ -92,68 +86,28 @@ shutdown.
   shutdown, typically the entrypoint for containers need to be changed to
   linkerd-await.
 
-Depending on the usecase, one option (or utility) might be preferred over the
-other. To aid with some common cases, suggestions are given below on what to do
-when confronted with slow updating clients and with job resources that will not
-complete.
-
-## Slow Updating Clients
-
-Before Kubernetes terminates a pod, it first removes that pod from the endpoints
-resource of any services that pod is a member of. This means that clients of
-that service should stop sending traffic to the pod before it is terminated.
-However, certain clients can be slow to receive the endpoints update and may
-attempt to send requests to the terminating pod after that pod's proxy has
-already received the TERM signal and begun graceful shutdown. Those requests
-will fail.
-
-To mitigate this, use the `--wait-before-exit-seconds` flag with
-`linkerd inject` to delay the Linkerd proxy's handling of the TERM signal for a
-given number of seconds using a `preStop` hook. This delay gives slow clients
-additional time to receive the endpoints update before beginning graceful
-shutdown. To achieve max benefit from the option, the main container should have
-its own `preStop` hook with the sleep command inside which has a smaller period
-than is set for the proxy sidecar. And none of them must be bigger than
-`terminationGracePeriodSeconds` configured for the entire pod.
-
-For example,
-
-```yaml
-# application container
-lifecycle:
-  preStop:
-    exec:
-      command:
-        - /bin/bash
-        - -c
-        - sleep 20
-
-# for entire pod
-terminationGracePeriodSeconds: 160
-```
-
 ## Graceful shutdown of Job and Cronjob Resources
 
 Pods which are part of Job or Cronjob resources will run until all of the
-containers in the pod complete. However, the Linkerd proxy container runs
-continuously until it receives a TERM signal. Since Kubernetes does not give the
-proxy a means to know when the Cronjob has completed, by default, Job and
-Cronjob pods which have been meshed will continue to run even once the main
-container has completed. You can address this either by running Linkerd as a
-native sidecar or by manually shutting down the proxy.
+containers in the pod complete. Since Linkerd 2.20 the proxy runs by default as
+a [native sidecar container](../features/native-sidecars/), which automatically
+shuts down when the main containers in the pod terminate, so meshed Jobs and
+Cronjobs complete without any extra configuration.
 
-### Native Sidecar
-
-If you use the `--set proxy.nativeSidecar=true` flag when installing Linkerd,
-the Linkerd proxy will run as a
-[sidecar container](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/)
-and will automatically shutdown when the main containers in the pod terminate.
-Native sidecars were added in Kubernetes v1.28 and are available by default in
-Kubernetes v1.29.
+This is only an issue if you have [disabled native
+sidecars](../features/native-sidecars/#disabling-native-sidecars-in-linkerd),
+which is no longer the default. In that case the proxy runs as a regular
+container that runs continuously until it receives a TERM signal, and since
+Kubernetes does not give the proxy a means to know when the Job has completed,
+meshed Job and Cronjob pods will continue to run even once the main container
+has completed. You can address this by manually shutting down the proxy, after
+the application container completes. This triggers a graceful shutdown allowing
+meshed Job and Cronjob pods to complete.
 
 ### Manual shutdown
 
-Alternatively, you can issue a POST to the `/shutdown` endpoint on the proxy
+If native sidecars are disabled, you can issue a POST to the `/shutdown`
+endpoint on the proxy
 once the application completes (e.g. via
 `curl -X POST http://localhost:4191/shutdown`). This will terminate the proxy
 gracefully and allow the Job or Cronjob to complete. These shutdown requests
