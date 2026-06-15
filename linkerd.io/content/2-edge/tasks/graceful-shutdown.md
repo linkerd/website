@@ -100,7 +100,9 @@ which is no longer the default. In that case the proxy runs as a regular
 container that runs continuously until it receives a TERM signal, and since
 Kubernetes does not give the proxy a means to know when the Job has completed,
 meshed Job and Cronjob pods will continue to run even once the main container
-has completed. You can address this by manually shutting down the proxy.
+has completed. You can address this by manually shutting down the proxy, after
+the application container completes. This triggers a graceful shutdown allowing
+meshed Job and Cronjob pods to complete.
 
 ### Manual shutdown
 
