@@ -1,12 +1,12 @@
 ---
-title: Rate Limit Aware Load Balacing
-description: Routing traffic away from rate limited endpoints
+title: Handling Rate-Limited Endpoints
+description: Automatically route traffic away from rate-limited endpoints
 ---
 
 When backends implement rate limiting and return
 [HTTP 429](https://www.rfc-editor.org/rfc/rfc6585.html#page-3) or
 [gRPC RESOURCE_EXHAUSTED](https://grpc.github.io/grpc/core/md_doc_statuscodes.html)
-responses, the proxy currently treats these as successful responses from a load
+by default, the proxy treats these as successful responses from a load
 balancing perspective. Since these types of responses are typically very fast,
 Linkerd's [EWMA load balancing](../features/load-balancing.md) may actually
 send _more_ traffic to these rate-limited endpoints. This can create a feedback
@@ -19,7 +19,7 @@ which are in a rate-limited state.
 
 {{< warning >}}
 
-Rate Limit Aware Load Balacing is an experimental, opt-in feature.
+Rate Limit Aware Load Balancing is an experimental, opt-in feature.
 
 {{< /warning >}}
 
@@ -45,9 +45,7 @@ The penalty value can be further refined if the server sets the `Retry-After`
 HTTP response header or the `grpc-retry-pushback-ms` gRPC trailer. If one of
 these values is present and is higher than the configured penalty, it will be
 used in place of the penalty. This allows servers to exert a higher or lower
-amount of pushback. Note that this requires setting the
-`balancer.alpha.linkerd.io/failure-accrual-honor-retry-after=true` annotation on
-the Service in order for these response hints to be used.
+amount of pushback.
 
 To enable Linkerd to use the Load Biaser for a Service, set the following
 annotation on the Service resource:
@@ -61,27 +59,26 @@ resource:
 
 | Annotation                                                    | Type     | Default |                                                                                        |
 |---------------------------------------------------------------|----------|---------|----------------------------------------------------------------------------------------|
-| `balancer.alpha.linkerd.io/load-biaser-penalty`               | duration | `5s`    | The latency value to inject for rate-limited responses                                 |
-| `balancer.alpha.linkerd.io/failure-accrual-honor-retry-after` | boolean  | `false` | If Retry-After response headers or grpc-retry-pushback-ms gRPC trailers are respected. |
+| `balancer.alpha.linkerd.io/load-biaser-penalty`               | duration | `5s`    | The latency value to inject for rate-limited responses and failures                    |
 | `balancer.alpha.linkerd.io/load-biaser-max-retry-after`       | duration | `300s`  | The maximum allowed value of a Retry-After header                                      |
 
 ## Unified Circuit Breaker
 
 Linkerd can be configured to use a more sophisticated version of
-[consecutive failures failure acrrual](../tasks/circuit-breakers.md) called
+[consecutive failures failure accrual](../tasks/circuit-breakers.md) called
 Unified failure accrual.
 
-The Unified failure accrual can be configured with a success-rate threshold.
+The Unified failure accrual can be configured with a success rate threshold.
 If the percent of responses within a fixed time window drops below this
 threshold, the circuit breaker will trip, temporarily cutting off traffic to
 this endpoint and giving it time to recover. Critically, any rate-limited
-responses will count as failures for this success-rate calculation.
+responses will count as failures for this success rate calculation.
 
 The Unified failure accrual will ALSO trip if it encounters a configured
 number of consecutive failures, just like the consecutive failures accrual.
 
 To enable the Unified failure accrual circuit breaker on a Service, set the
-following annotation to `"unified"` on the Server resource:
+following annotation to `"unified"` on the Service resource:
 
 | Annotation                            | Type     | Default | Notes                                                                        |
 |---------------------------------------|----------|---------|------------------------------------------------------------------------------|
@@ -92,8 +89,8 @@ the Service resouce:
 
 | Annotation                                                            | Type                         | Default | Notes                                                            |
 |-----------------------------------------------------------------------|------------------------------|---------|------------------------------------------------------------------|
-| `balancer.alpha.linkerd.io/failure-accrual-success-rate-threshold`    | number between 0 and 1       | `0.8`   | The success-rate threshold at which to trip the breaker          |
-| `balancer.alpha.linkerd.io/failure-accrual-success-rate-window`       | duration                     | `10s`   | The window over which the success-rate is calculated             |
+| `balancer.alpha.linkerd.io/failure-accrual-success-rate-threshold`    | number between 0 and 1       | `0.8`   | The success rate threshold at which to trip the breaker          |
+| `balancer.alpha.linkerd.io/failure-accrual-success-rate-window`       | duration                     | `10s`   | The window over which the success rate is calculated             |
 | `balancer.alpha.linkerd.io/failure-accrual-success-rate-min-requests` | number                       | `5`     | Only trip if there are at least this many requests in the window |
 | `balancer.linkerd.io/failure-accrual-consecutive-max-failures`        | number                       | `7`     | Trip if we encounter this many consecutive failures              |
 | `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`         | duration                     | `1s`    | The minimum duration for which to cut off traffic                |
