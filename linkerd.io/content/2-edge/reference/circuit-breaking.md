@@ -49,39 +49,39 @@ purpose of this failure accrual policy, a _failure_ is an HTTP response with
 a [5xx server error] status code or a gRPC response with one of the following
 gRPC status codes:
 
-* DATA_LOSS
-* DEADLINE_EXCEEDED
-* INTERNAL
-* PERMISSION_DENIED
-* UNAVAILABLE
-* INTERNAL
+- DATA_LOSS
+- DEADLINE_EXCEEDED
+- INTERNAL
+- PERMISSION_DENIED
+- UNAVAILABLE
+- INTERNAL
 
 ### Unified
 
 In this failure accrual policy, an endpoint is marked as failing after _either_
 of the following condiditions is met:
 
-* Success rate drops below a configured threshold. For the purposes of
+- Success rate drops below a configured threshold. For the purposes of
   calculating success rate, a failure is any HTTP response with a
   [5xx server error] or 429 status code or a gRPC response with one of the
   following gRPC status codes:
-  * DATA_LOSS
-  * DEADLINE_EXCEEDED
-  * INTERNAL
-  * PERMISSION_DENIED
-  * UNAVAILABLE
-  * INTERNAL
-  * RESOURCE_EXHAUSTED
-* A configured number of failures occur _consecutively_. For the purpose of
+  - DATA_LOSS
+  - DEADLINE_EXCEEDED
+  - INTERNAL
+  - PERMISSION_DENIED
+  - UNAVAILABLE
+  - INTERNAL
+  - RESOURCE_EXHAUSTED
+- A configured number of failures occur _consecutively_. For the purpose of
   tracking consecutive failures, a _failure_ is an HTTP response with a
   [5xx server error] status code or a gRPC response with one of the following
   gRPC status codes:
-  * DATA_LOSS
-  * DEADLINE_EXCEEDED
-  * INTERNAL
-  * PERMISSION_DENIED
-  * UNAVAILABLE
-  * INTERNAL
+  - DATA_LOSS
+  - DEADLINE_EXCEEDED
+  - INTERNAL
+  - PERMISSION_DENIED
+  - UNAVAILABLE
+  - INTERNAL
 
 For more information on the Unified failure
 accrual, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-balancing.md).
