@@ -85,7 +85,7 @@ following annotation to `"unified"` on the Service resource:
 | `balancer.linkerd.io/failure-accrual` | string.  | None    | The failure-accrual mode. Set to `unified` to enable Unified failure accrual |
 
 The Unified failure accrual can be further configured with these annotations on
-the Service resouce:
+the Service resource:
 
 | Annotation                                                            | Type                         | Default | Notes                                                            |
 |-----------------------------------------------------------------------|------------------------------|---------|------------------------------------------------------------------|
