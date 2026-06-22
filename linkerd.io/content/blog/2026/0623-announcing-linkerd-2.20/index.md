@@ -25,9 +25,9 @@ service mesh feature set in a way that is manageable, scalable, and performant.
 
 ## Related announcements
 
-* [Announcing Buoyant Enterprise for Linkerd 2.20: Automated trust anchor
+- [Announcing Buoyant Enterprise for Linkerd 2.20: Automated trust anchor
   rotation, Windows VM support, rate-limit-aware load balancing, and
-  more](https://buoyant.io/blog/bel-2-20-automated-trust-anchor-rotation-windows-vm-support-rate-limit-aware-load-balancing)
+  more](https://buoyant.io/blog/bel-2-20-automated-trust-anchor-rotation-windows-vm-support-rate-limit-aware-load-balancing/)
 
 ## Rate-limit-aware load balancing
 
@@ -94,7 +94,7 @@ maximum supported Gateway API version up to 1.5.1.
 Linkerd 2.20 also promotes native sidecar support to stable and makes it the
 default for proxy injection. Native sidecars [fix some of the long-standing
 annoyances of using sidecar containers in
-Kubernetes](https://buoyant.io/blog/kubernetes-1-28-revenge-of-the-sidecars?__hstc=249056664.3e1ea98f07099c818c46fa59060ea13b.1733519091788.1760387020563.1760553890908.135&__hssc=249056664.1.1760553890908&__hsfp=2491513512),
+Kubernetes](https://buoyant.io/blog/kubernetes-1-28-revenge-of-the-sidecars/),
 especially around support for Jobs and race conditions around container startup.
 Support for native sidecars was first introduced in Linkerd 2.15, promoted to
 beta in 2.19, and has seen extensive use in production.
