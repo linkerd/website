@@ -51,9 +51,10 @@ other resources in the ingress namespace are be meshed normally.
 
 {{< warning id=open-relay-warning >}}
 
-When an ingress is meshed in ingress mode, you _must_ configure it to remove the
-`l5d-dst-override` header to avoid creating an open relay to cluster-local and
-external endpoints.
+When an ingress is meshed in ingress mode, you _must_ configure it to strip any
+incoming `l5d-dst-override` header from client traffic to avoid creating an
+open relay to cluster-local and external endpoints. The ingress controller can
+still add its own `l5d-dst-override` header for requests to internal services.
 
 {{< /warning >}}
 
