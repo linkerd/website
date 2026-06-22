@@ -62,17 +62,24 @@ kubectl get -n NAMESPACE deploy -o yaml | linkerd inject - | kubectl apply -f -
 
 To verify that your services have been added to the mesh, you can query
 Kubernetes for the list of containers in the pods and ensure that the proxy is
-listed:
+listed. As of Linkerd 2.20, the proxy runs by default as a
+[native sidecar container](../features/native-sidecars/), so it appears among
+the pod's init containers:
 
 ```bash
-kubectl -n NAMESPACE get po -o jsonpath='{.items[0].spec.containers[*].name}'
+kubectl -n NAMESPACE get po -o jsonpath='{.items[0].spec.initContainers[*].name}'
 ```
 
 If everything was successful, you'll see `linkerd-proxy` in the output, e.g.:
 
 ```bash
-linkerd-proxy CONTAINER
+linkerd-init linkerd-proxy
 ```
+
+If you have
+[disabled native sidecars](../features/native-sidecars/#disabling-native-sidecars-in-linkerd),
+the proxy runs as a regular container instead, and will show up in
+`{.items[0].spec.containers[*].name}`.
 
 ## Handling MySQL, SMTP, and other non-HTTP protocols
 

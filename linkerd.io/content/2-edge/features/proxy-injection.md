@@ -36,7 +36,10 @@ For each pod, two containers are injected:
    that configures `iptables` to automatically forward all incoming and outgoing
    TCP traffic through the proxy. (Note that this container is not injected if
    the [Linkerd CNI Plugin](cni/) has been enabled.)
-1. `linkerd-proxy`, the Linkerd data plane proxy itself.
+1. `linkerd-proxy`, the Linkerd data plane proxy itself. As of Linkerd 2.20,
+   the proxy is injected by default as a
+   [native sidecar container](native-sidecars/), i.e. as an init container with
+   a `restartPolicy` of `Always`, rather than as a regular container.
 
 Note that simply adding the annotation to a resource with pre-existing pods will
 not automatically inject those pods. You will need to update the pods (e.g. with
