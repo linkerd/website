@@ -309,6 +309,8 @@ for the upcoming `2.20` version.
 - Add a row to the Gateway API compatibility table for `2.20` in
   `linkerd.io/content/2-edge/features/gateway-api.md`.
 - Rename the `docs` directory `2.19`.
+- In `linkerd.io/content/2.19/_index.md` copy frontmatter from preview version
+  (2.18 in this example),
 - Create a new directory, copying the edge docs:
   `cp -r linkerd.io/content/2-edge linkerd.io/content/docs`. Any upcoming doc
   changes pertaining to `2.20` should be pushed against that new directory and

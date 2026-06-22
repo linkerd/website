@@ -8,10 +8,6 @@ AnnotationsReference:
   Name: config.linkerd.io/proxy-image
 - Description: Docker image pull policy
   Name: config.linkerd.io/image-pull-policy
-- Description: Linkerd init container image name
-  Name: config.linkerd.io/init-image
-- Description: Linkerd init container image version
-  Name: config.linkerd.io/init-image-version
 - Description: Linkerd debug container image name
   Name: config.linkerd.io/debug-image
 - Description: Linkerd debug container image version
@@ -110,13 +106,18 @@ AnnotationsReference:
     before all open connections have completed, the proxy will terminate forcefully,
     closing any remaining connections.
   Name: config.linkerd.io/shutdown-grace-period
-- Description: Enable KEP-753 native sidecars. This is a beta feature. It requires
-    Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not be used.
-    Deprecated in favor of config.beta.linkerd.io/proxy-enable-native-sidecar
+- Description: Enable KEP-753 native sidecars. Deprecated in favor of config.linkerd.io/proxy-enable-native-sidecar
   Name: config.alpha.linkerd.io/proxy-enable-native-sidecar
-- Description: Enable KEP-753 native sidecars. This is a beta feature. It requires
-    Kubernetes >= 1.29. If enabled, .proxy.waitBeforeExitSeconds should not be used.
+- Description: Enable KEP-753 native sidecars. Deprecated in favor of config.linkerd.io/proxy-enable-native-sidecar
   Name: config.beta.linkerd.io/proxy-enable-native-sidecar
+- Description: Enable KEP-753 native sidecars
+  Name: config.linkerd.io/proxy-enable-native-sidecar
+- Description: 'Set additional proxy environment variables via a JSON-encoded list
+    of Kubernetes EnvVar objects. Env vars are merged by name across three layers
+    with increasing precedence: Helm proxy.additionalEnv < namespace annotation <
+    workload annotation. Higher-precedence layers override entries with the same env
+    var name rather than replacing the entire list.'
+  Name: config.linkerd.io/proxy-additional-env
 CLIReference:
 - Description: List authorizations for a resource.
   Example: ""
@@ -460,7 +461,7 @@ CLIReference:
 - Description: "Display the certificate(s) of one or more selected pod(s).\n\nThis
     command initiates a port-forward to a given pod or a set of pods and fetches the
     TLS certificate.\n\t\t"
-  Example: " # Get certificate from pod foo-bar in the default namespace.\n linkerd
+  Example: "\n # Get certificate from pod foo-bar in the default namespace.\n linkerd
     identity foo-bar\n\n # Get certificate from all pods with the label name=nginx\n
     linkerd identity -l name=nginx\n\t\t"
   InheritedOptions: null
@@ -546,14 +547,6 @@ CLIReference:
     Name: ingress
     Shorthand: ""
     Usage: Enable ingress mode in the linkerd proxy
-  - DefaultValue: ""
-    Name: init-image
-    Shorthand: ""
-    Usage: Linkerd init container image name
-  - DefaultValue: ""
-    Name: init-image-version
-    Shorthand: ""
-    Usage: Linkerd init container image version
   - DefaultValue: ""
     Name: manual
     Shorthand: ""
@@ -775,14 +768,6 @@ CLIReference:
     Name: inbound-port
     Shorthand: ""
     Usage: Proxy port to use for inbound traffic
-  - DefaultValue: ""
-    Name: init-image
-    Shorthand: ""
-    Usage: Linkerd init container image name
-  - DefaultValue: ""
-    Name: init-image-version
-    Shorthand: ""
-    Usage: Linkerd init container image version
   - DefaultValue: ""
     Name: linkerd-cni-enabled
     Shorthand: ""
@@ -1089,7 +1074,7 @@ CLIReference:
 - Description: ""
   Example: "  # Default install.\n  linkerd multicluster install | kubectl apply -f
     -\n\nThe installation can be configured by using the --set, --values, --set-string
-    and --set-file flags.\nA full list of configurable values can be found at https://github.com/linkerd/linkerd2/blob/main/multicluster/charts/linkerd-multicluster/README.md\n
+    and --set-file flags.\nA full list of configurable values can be found at https://github.com/linkerd/linkerd2/blob/main/multicluster/charts/linkerd-multicluster/values.yaml\n
     \ "
   InheritedOptions: null
   Name: multicluster install
@@ -1098,6 +1083,11 @@ CLIReference:
     Name: gateway
     Shorthand: ""
     Usage: If the gateway component should be installed
+  - DefaultValue: ""
+    Name: gateway-healthcheck-nodeport
+    Shorthand: ""
+    Usage: |
+      Set the healthCheckNodePort on the gateway service (only used when externalTrafficPolicy is Local)
   - DefaultValue: ""
     Name: gateway-port
     Shorthand: ""
@@ -1437,7 +1427,7 @@ CLIReference:
     install command.
 
     The upgrade can be configured by using the --set, --values, --set-string and --set-file flags.
-    A full list of configurable values can be found at https://www.github.com/linkerd/linkerd2/tree/main/charts/linkerd2/README.md
+    A full list of configurable values can be found at https://www.github.com/linkerd/linkerd2/tree/main/charts/linkerd-control-plane/values.yaml
   Example: |2-
       # Upgrade CRDs first
       linkerd upgrade --crds | kubectl apply -f -
@@ -1552,14 +1542,6 @@ CLIReference:
     Name: inbound-port
     Shorthand: ""
     Usage: Proxy port to use for inbound traffic
-  - DefaultValue: ""
-    Name: init-image
-    Shorthand: ""
-    Usage: Linkerd init container image name
-  - DefaultValue: ""
-    Name: init-image-version
-    Shorthand: ""
-    Usage: Linkerd init container image version
   - DefaultValue: ""
     Name: linkerd-cni-enabled
     Shorthand: ""
@@ -2547,4 +2529,3 @@ CLIReference:
   SeeAlso: null
   Synopsis: |
     viz manages the linkerd-viz extension of Linkerd service mesh
-

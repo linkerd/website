@@ -10,6 +10,9 @@ For more information about Linkerd's rate limiting check the
 [Rate Limiting feature doc](../features/rate-limiting/) and the
 [HTTPLocalRateLimitPolicy reference doc](../reference/rate-limiting/).
 
+To see how clients can be configured to load balance around Services which
+are rate-limited, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-balancing.md).
+
 ## Prerequisites
 
 To use this guide you'll only need a Kubernetes cluster running a Linkerd

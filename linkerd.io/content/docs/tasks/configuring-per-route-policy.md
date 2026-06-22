@@ -460,9 +460,9 @@ authorization policy in general, and the various configurations that are
 available, see the [Policy reference docs](../reference/authorization-policy/).
 
 [`Server`]: ../reference/authorization-policy/#server
-[`HTTPRoute`]: ../reference/authorization-policy/#httproute
 [`AuthorizationPolicy`]: ../reference/authorization-policy/#authorizationpolicy
 [`MeshTLSAuthentication`]:
   ../reference/authorization-policy/#meshtlsauthentication
 [`NetworkAuthentication`]:
   ../reference/authorization-policy/#networkauthentication
+[`HTTPRoute`]: ../reference/authorization-policy/#httproute

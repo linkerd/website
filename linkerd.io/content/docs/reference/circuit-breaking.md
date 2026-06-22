@@ -37,24 +37,51 @@ including endpoints made unavailable by failure accrual.
 
 A _failure accrual policy_ determines how failures are tracked for endpoints,
 and what criteria result in an endpoint becoming unavailable ("tripping the
-circuit breaker"). Currently, the Linkerd proxy implements one failure accrual
-policy, _consecutive failures_. Additional failure accrual policies may be added
-in the future.
-
-{{< note >}}
-
-HTTP responses are classified as _failures_ if their status code is a [5xx
-server error]. Future Linkerd releases may add support for configuring what
-status codes are classified as failures.
-
-{{< /note >}}
+circuit breaker").
 
 ### Consecutive Failures
 
 In this failure accrual policy, an endpoint is marked as failing after a
 configurable number of failures occur _consecutively_ (i.e., without any
 successes). For example, if the maximum number of failures is 7, the endpoint is
-made unavailable once 7 failures occur in a row with no successes.
+made unavailable once 7 failures occur in a row with no successes. For the
+purpose of this failure accrual policy, a _failure_ is an HTTP response with
+a [5xx server error] status code or a gRPC response with one of the following
+gRPC status codes:
+
+- DATA_LOSS
+- DEADLINE_EXCEEDED
+- INTERNAL
+- PERMISSION_DENIED
+- UNAVAILABLE
+
+### Unified
+
+In this failure accrual policy, an endpoint is marked as failing after _either_
+of the following conditions is met:
+
+- Success rate drops below a configured threshold. For the purposes of
+  calculating success rate, a failure is any HTTP response with a
+  [5xx server error] or 429 status code or a gRPC response with one of the
+  following gRPC status codes:
+  - DATA_LOSS
+  - DEADLINE_EXCEEDED
+  - INTERNAL
+  - PERMISSION_DENIED
+  - UNAVAILABLE
+  - RESOURCE_EXHAUSTED
+- A configured number of failures occur _consecutively_. For the purpose of
+  tracking consecutive failures, a _failure_ is an HTTP response with a
+  [5xx server error] status code or a gRPC response with one of the following
+  gRPC status codes:
+  - DATA_LOSS
+  - DEADLINE_EXCEEDED
+  - INTERNAL
+  - PERMISSION_DENIED
+  - UNAVAILABLE
+
+For more information on the Unified failure
+accrual, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-balancing.md).
 
 ## Probation and Backoffs
 
@@ -123,8 +150,7 @@ breaking when sending traffic to that Service:
 - `balancer.linkerd.io/failure-accrual`: Selects the
   [failure accrual policy](#failure-accrual-policies) used when communicating
   with this Service. If this is not present, no failure accrual is performed.
-  Currently, the only supported value for this annotation is `"consecutive"`, to
-  perform [consecutive failures failure accrual](#consecutive-failures).
+  Supported values for this annotation are `consecutive` and `unified`.
 
 When the failure accrual mode is `"consecutive"`, the following annotations
 configure parameters for the consecutive-failures failure accrual policy:
@@ -149,6 +175,29 @@ configure parameters for the consecutive-failures failure accrual policy:
   jitter ratio used for [probation backoffs](#probation-and-backoffs). This is a
   floating-point number, and must be between 0.0 and 100.0. If this annotation
   is not present, the default value is 0.5.
+
+When the failure accrual mode is `"unified"`, the following annotations
+configure parameters for the unified failure accrual policy:
+
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-threshold`: If the
+  success rate of responses in the window drops below this threshold, then the
+  endpoint will be made unavailable.  Must be between `0.0` and `1.0`.
+  Rate-limited responses such as HTTP 429 and gRPC RESOURCE_EXHAUSTED count as
+  failures for this calculation. If this annotation is not present, the default
+  value is `0.8` (80% success rate).
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-window`: The window of
+  time over which success rate is calculated.  If this annotation is not present,
+  the default value is `10s`.
+- `balancer.alpha.linkerd.io/failure-accrual-success-rate-min-requests`: The
+  minimum number of responses which must be in the window before this breaker
+  can trip. This acts as a "cold start" protection to ensure we have a
+  sufficient number of responses for the success rate calculation to be
+  meaningful before tripping. If this annotation is not present, the default
+  value is `5`.
+- `balancer.linkerd.io/failure-accrual-consecutive-max-failures`: See above.
+- `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`: See above.
+- `balancer.linkerd.io/failure-accrual-consecutive-max-penalty`: See above.
+- `balancer.linkerd.io/failure-accrual-consecutive-jitter-ratio`: See above.
 
 [^1]:
     The part of the proxy which handles connections from within the pod to the
