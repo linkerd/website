@@ -54,12 +54,11 @@ gRPC status codes:
 - INTERNAL
 - PERMISSION_DENIED
 - UNAVAILABLE
-- INTERNAL
 
 ### Unified
 
 In this failure accrual policy, an endpoint is marked as failing after _either_
-of the following condiditions is met:
+of the following conditions is met:
 
 - Success rate drops below a configured threshold. For the purposes of
   calculating success rate, a failure is any HTTP response with a
@@ -70,7 +69,6 @@ of the following condiditions is met:
   - INTERNAL
   - PERMISSION_DENIED
   - UNAVAILABLE
-  - INTERNAL
   - RESOURCE_EXHAUSTED
 - A configured number of failures occur _consecutively_. For the purpose of
   tracking consecutive failures, a _failure_ is an HTTP response with a
@@ -81,7 +79,6 @@ of the following condiditions is met:
   - INTERNAL
   - PERMISSION_DENIED
   - UNAVAILABLE
-  - INTERNAL
 
 For more information on the Unified failure
 accrual, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-balancing.md).
