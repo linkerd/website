@@ -18,8 +18,14 @@ sidecar containers in Kubernetes, including:
 2. There are a variety of startup race conditions with meshed pods when init
    containers also need network access.
 
-## Enabling native sidecars in Linkerd
+As of Linkerd 2.20, native sidecars are enabled by default: the proxy is
+injected as an init container with a `restartPolicy` of `Always`, rather than
+as a regular container.
 
-Native sidecars can be enabled by setting
-`config.beta.linkerd.io/proxy-enable-native-sidecar` annotation at the level of
-individual namespaces or workloads, or by setting it globally at install time.
+## Disabling native sidecars in Linkerd
+
+If for any reason you want to disable this mode and have the proxy be injected
+alongside regular containers, set the
+`config.linkerd.io/proxy-enable-native-sidecar: false` annotation at the
+namespace or workload level, or disable the mode globally by setting the Helm
+chart value `proxy.nativeSidecar: false`.
