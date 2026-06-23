@@ -31,9 +31,9 @@ Or download the release of Hugo from the GitHub
 
 ## Hugo version requirements
 
-The minimum version of Hugo needed to build the site is `v0.142.0`.
+The minimum version of Hugo needed to build the site is `v0.156.0`.
 
-When linkerd.io is deployed to production, we use Hugo `v0.142.0`.
+When linkerd.io is deployed to production, we use Hugo `v0.156.0`.
 
 ### Run Hugo locally
 

@@ -4,7 +4,6 @@ cascade:
   type: docs
 
 # Redirect
-type: _default
 layout: redirect
 params:
   redirect: ./getting-started

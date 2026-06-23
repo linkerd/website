@@ -21,7 +21,7 @@
     {{ end }}
   {{ else }}
     {{/* Get author data from global data source */}}
-    {{ with index site.Data.authors . }}
+    {{ with index hugo.Data.authors . }}
       {{ $authorName = .name }}
       {{ with .avatar }}
         {{/* Avatar must be global resource */}}
