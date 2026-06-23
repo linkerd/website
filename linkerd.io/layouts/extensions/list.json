@@ -1,6 +1,6 @@
 {{- $s := newScratch }}
 {{- $s.Add "extensions" slice }}
-{{- range site.Data.extensions }}
+{{- range hugo.Data.extensions }}
   {{- with $.Page.Resources.Get .image }}
     {{- $s.Set "image" .Permalink }}
   {{- end }}

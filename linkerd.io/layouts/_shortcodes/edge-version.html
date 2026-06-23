@@ -22,7 +22,7 @@ current section, you can pass the Linkerd version as a param. For example,
   {{- $section = . }}
 {{- end}}
 {{- if hasPrefix $section "2." }}
-  {{- with index (where site.Data.versions "version" $section) 0 }}
+  {{- with index (where hugo.Data.versions "version" $section) 0 }}
     {{- with .edge }}
       {{- $result = . }}
     {{- end }}

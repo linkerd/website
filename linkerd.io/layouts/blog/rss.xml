@@ -10,7 +10,7 @@
     <link>{{ .Permalink }}</link>
     <description>Recent content in {{ .Title }} for {{ site.Title }}</description>
     <generator>Hugo {{ hugo.Version }}</generator>
-    <language>{{ site.Language.LanguageCode }}</language>
+    <language>en-us</language>
     {{ with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
     {{ if not .Date.IsZero }}<lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
     {{ with .OutputFormats.Get "RSS" }}{{ printf "<atom:link href=%q rel=%q type=%q />" .Permalink "self" .MediaType | safeHTML }}{{ end }}
@@ -25,7 +25,7 @@
       <author>{{ .name }}</author>
       {{- else }}
       {{- /* Get author data from global data source */}}
-      {{- with index site.Data.authors . }}
+      {{- with index hugo.Data.authors . }}
       <author>{{ .name }}</author>
       {{- end }}
       {{- end }}

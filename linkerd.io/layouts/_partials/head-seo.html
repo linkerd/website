@@ -3,7 +3,7 @@
 {{ if hasPrefix .Section "2." }}
   {{/* For older Linkerd docs, set the canonical URL to the latest doc, if it exists */}}
   {{ $latestFilePath := replace .RelPermalink (printf "/%s/" .Section) "/docs/" 1 }}
-  {{ if fileExists $latestFilePath }}
+  {{ with site.GetPage $latestFilePath }}
     {{ $url = absURL $latestFilePath }}
   {{ end }}
 {{ end }}

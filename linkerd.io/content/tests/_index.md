@@ -1,7 +1,7 @@
 ---
 title: Tests
 cascade:
-  - _target:
+  - target:
       environment: production
     build:
       list: never

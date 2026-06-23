@@ -1,4 +1,4 @@
-{{ with site.Data.announcement }}
+{{ with hugo.Data.announcement }}
   <div class="main-announcement">
     {{ with .content }}
       {{ . | markdownify }}

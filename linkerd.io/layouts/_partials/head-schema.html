@@ -8,7 +8,7 @@
       {{ $scratch.Set "author" .name }}
     {{ else }}
       {{/* Get author data from global data source */}}
-      {{ with index site.Data.authors . }}
+      {{ with index hugo.Data.authors . }}
         {{ $scratch.Set "author" .name }}
       {{ end }}
     {{ end }}
