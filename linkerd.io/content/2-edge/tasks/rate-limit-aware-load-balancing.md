@@ -57,7 +57,7 @@ annotation on the Service resource:
 The Load Biaser can be further configured with these annotations on the Service
 resource:
 
-| Annotation                                                    | Type     | Default |                                                                                        |
+| Annotation                                                    | Type     | Default | Notes                                                                                  |
 |---------------------------------------------------------------|----------|---------|----------------------------------------------------------------------------------------|
 | `balancer.alpha.linkerd.io/load-biaser-penalty`               | duration | `5s`    | The latency value to inject for rate-limited responses and failures                    |
 | `balancer.alpha.linkerd.io/load-biaser-max-retry-after`       | duration | `300s`  | The maximum allowed value of a Retry-After header                                      |
@@ -82,7 +82,7 @@ following annotation to `"unified"` on the Service resource:
 
 | Annotation                            | Type     | Default | Notes                                                                        |
 |---------------------------------------|----------|---------|------------------------------------------------------------------------------|
-| `balancer.linkerd.io/failure-accrual` | string.  | None    | The failure-accrual mode. Set to `unified` to enable Unified failure accrual |
+| `balancer.linkerd.io/failure-accrual` | string   | None    | The failure-accrual mode. Set to `unified` to enable Unified failure accrual |
 
 The Unified failure accrual can be further configured with these annotations on
 the Service resource:
