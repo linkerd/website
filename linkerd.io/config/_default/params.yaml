@@ -1,17 +1,16 @@
 # Min/max version of Hugo required to build linkerd.io
 # Set `maxHugoVersion` to "latest" if there is not a max version required
-minHugoVersion: "0.156.0"
-maxHugoVersion: "latest"
+minHugoVersion: '0.158.0'
+maxHugoVersion: 'latest'
 
 # Open Graph and Twitter Card defaults
 description: |-
   Linkerd is an ultralight service mesh for Kubernetes. It gives you
   observability, reliability, and security without requiring any code changes.
 #images: [/logos/linkerd.png]
-
 # Set the value of `twitter:site` in Twitter Card
 social:
   twitter: Linkerd
 
 # Latest major version of Linkerd
-latestMajorVersion: "2.20"
+latestMajorVersion: '2.20'

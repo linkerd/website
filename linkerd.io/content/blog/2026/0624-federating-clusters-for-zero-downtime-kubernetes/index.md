@@ -2,8 +2,12 @@
 date: 2026-06-24T00:00:00Z
 title: |-
   Federating Clusters for Zero-Downtime Kubernetes
+description: |-
+  Linkerd multicluster supports 3 modes: federated, flat, and gateway. Wire all 3 across 3 GKE clusters, run a chaos test, and see automatic failover in action.
 keywords: [linkerd, multicluster, federated]
 params:
+  metaTitle: |-
+    Linkerd Multicluster: Federation, Mirroring on GKE
   author:
     name: Dominik Táskai, Linkerd Ambassador
     avatar: dominik-taskai.jpg

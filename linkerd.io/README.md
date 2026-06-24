@@ -31,9 +31,9 @@ Or download the release of Hugo from the GitHub
 
 ## Hugo version requirements
 
-The minimum version of Hugo needed to build the site is `v0.156.0`.
+The minimum version of Hugo needed to build the site is `v0.158.0`.
 
-When linkerd.io is deployed to production, we use Hugo `v0.156.0`.
+When linkerd.io is deployed to production, we use Hugo `v0.158.0`.
 
 ### Run Hugo locally
 
@@ -65,11 +65,12 @@ Next, create an `index.md` file in the folder with the following frontmatter:
 
 ```yaml
 title: # The title of your blog post
-description: # The description of your blog post
+description: # Optional meta description of your blog post, defaults to auto generated content summary
 date: # The date of your post in the format: `2024-01-01T00:00:00Z`
-slug: # The URL slug for the page. Only set this param if you want to use a different slug than the title.
+slug: # Optional URL slug for the page. Only set this param if you want to use a different slug than the title.
 keywords: [] # An array of keywords are used to relate blog posts
 params:
+  metaTitle: # Optional meta title of your blog post, defaults to title
   author: # The author of the blog post
 ```
 
