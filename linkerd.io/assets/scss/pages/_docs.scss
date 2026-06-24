@@ -15,6 +15,11 @@
   display: grid;
   grid-template-columns: 1fr;
 }
+.docs__gap-start,
+.docs__gap-end {
+  // Hide until xxl breakpoint
+  display: none;
+}
 .docs__sidebar {
   background-color: abstracts.$light-gray;
 }
@@ -102,9 +107,7 @@
   }
 }
 .docs__body {
-  max-width: 800px;
-  padding-left: abstracts.size(4);
-  padding-right: abstracts.size(4);
+  padding: 0 abstracts.size(4);
 }
 @media (min-width: abstracts.breakpoint-min-width("md")) {
   .docs__sidebar {
@@ -118,7 +121,7 @@
     justify-content: flex-end;
   }
   .docs__nav {
-    width: 300px;
+    width: 100%;
     padding: 0 0 0 abstracts.size(4);
   }
   .docs__versions,
@@ -128,14 +131,31 @@
 }
 @media (min-width: abstracts.breakpoint-min-width("xl")) {
   .docs__body {
-    padding-left: abstracts.size(7);
+    padding: 0 abstracts.size(6);
   }
 }
 @media (min-width: abstracts.breakpoint-min-width("xxl")) {
   .docs__container {
-    grid-template-columns: 33% 1fr;
+    grid-template-columns: 1fr 360px 960px 1fr;
+    grid-template-areas: "docsGapStart docsSidebar docsMain docsGapEnd"
   }
-  .docs__nav {
-    width: 350px;
+  .docs__gap-start {
+    display: block;
+    grid-row: docsGapStart;
+    background-color: abstracts.$light-gray;
+  }
+  .docs__gap-end {
+    display: block;
+    grid-row: docsGapEnd;
+  }
+  .docs__sidebar {
+    grid-row: docsSidebar;
+  }
+  .docs__main {
+    grid-row: docsMain;
+  }
+  .docs__body {
+    padding-left: abstracts.size(7);
+    padding-right: 0;
   }
 }
