@@ -8,6 +8,6 @@ outputs:
   - RSS # Enable RSS
 params:
   feature:
+    - /blog/2026/0624-federating-clusters-for-zero-downtime-kubernetes
     - /blog/2026/0623-announcing-linkerd-2.20
-    - /blog/2026/0518-the-proxy-died-first
 ---
