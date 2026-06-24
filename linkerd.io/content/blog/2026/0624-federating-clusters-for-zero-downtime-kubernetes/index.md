@@ -58,7 +58,7 @@ We have three GKE clusters across three regions, fully linked to each other (six
 directional links total). Three demo services, each using a different
 multicluster mode:
 
-![GCP Project](image.png)
+![GCP Project](gcp-project.svg)
 
 **frontend** is federated and runs in all three clusters. A single federated
 frontend service in each cluster load-balances across all nine pods (3 replicas
@@ -531,19 +531,18 @@ consuming clusters.
 
 ## Production checklist
 
-- [ ] **Bidirectional links** between all clusters (full mesh) so every cluster
-      has the federated service
-- [ ] **cert-manager** with a shared CA instead of hand-rolled `step`
-      certificates
-- [ ] **Separate issuer certs** per cluster (don't skip it!)
-- [ ] **NetworkPolicies** restricting cross-cluster traffic to only the services
-      that need it
-- [ ] **Linkerd authorization policies** for fine-grained access control
-- [ ] **Monitoring**: pipe Linkerd-Viz metrics into your Prometheus/Grafana
-      stack, and alert on a federated service's endpoint count dropping
-- [ ] **GitOps**: keep Link CRs and multicluster config in version control
-- [ ] **Test failover regularly**: scale a cluster to zero in staging and
-      confirm traffic redistributes
+- **Bidirectional links** between all clusters (full mesh) so every cluster has
+  the federated service
+- **cert-manager** with a shared CA instead of hand-rolled `step` certificates
+- **Separate issuer certs** per cluster (don't skip it!)
+- **NetworkPolicies** restricting cross-cluster traffic to only the services
+  that need it
+- **Linkerd authorization policies** for fine-grained access control
+- **Monitoring**: pipe Linkerd-Viz metrics into your Prometheus/Grafana stack,
+  and alert on a federated service's endpoint count dropping
+- **GitOps**: keep Link CRs and multicluster config in version control
+- **Test failover regularly**: scale a cluster to zero in staging and confirm
+  traffic redistributes
 
 ## Key takeaways: Mastering multi-region Linkerd deployments
 
