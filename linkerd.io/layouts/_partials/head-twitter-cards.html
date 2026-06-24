@@ -1,6 +1,6 @@
 {{- /*
 
-Modify Hugo’s embedded Twitter Cards template to truncate the description to 160 characters
+Modified Twitter Cards template
 https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_partials/twitter_cards.html
 
 */}}
@@ -12,11 +12,9 @@ https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_par
 	<meta name="twitter:card" content="summary">
 {{- end }}
 
-{{- with or .Title site.Title site.Params.title | plainify }}
-	<meta name="twitter:title" content="{{ . }}">
-{{- end }}
+<meta name="twitter:title" content="{{ partial "meta-title" . }}">
 
-<meta name="twitter:description" content="{{ partial "page-description" . }}">
+<meta name="twitter:description" content="{{ partial "meta-description" . }}">
 
 {{- $twitterSite := "" }}
 {{- with site.Params.social }}

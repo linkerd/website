@@ -1,6 +1,6 @@
 {{- /*
 
-Modify Hugo’s embedded Open Graph template to truncate the description to 160 characters
+Modified Open Graph template
 https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_partials/opengraph.html
 
 */}}
@@ -10,11 +10,9 @@ https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_par
 	<meta property="og:site_name" content="{{ . }}">
 {{- end }}
 
-{{- with or .Title site.Title site.Params.title | plainify }}
-	<meta property="og:title" content="{{ . }}">
-{{- end }}
+<meta property="og:title" content="{{ partial "meta-title" . }}">
 
-<meta property="og:description" content="{{ partial "page-description" . }}">
+<meta property="og:description" content="{{ partial "meta-description" . }}">
 
 {{- with or .Params.locale site.Language.Locale }}
 	<meta property="og:locale" content="{{ replace . `-` `_` }}">
