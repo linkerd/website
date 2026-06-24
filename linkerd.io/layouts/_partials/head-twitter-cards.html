@@ -1,0 +1,32 @@
+{{- /*
+
+Modify Hugo’s embedded Twitter Cards template to truncate the description to 160 characters
+https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_partials/twitter_cards.html
+
+*/}}
+{{- $images := partial "_funcs/get-page-images" . }}
+{{- with index $images 0 }}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="{{ .Permalink }}">
+{{- else }}
+	<meta name="twitter:card" content="summary">
+{{- end }}
+
+{{- with or .Title site.Title site.Params.title | plainify }}
+	<meta name="twitter:title" content="{{ . }}">
+{{- end }}
+
+<meta name="twitter:description" content="{{ partial "page-description" . }}">
+
+{{- $twitterSite := "" }}
+{{- with site.Params.social }}
+	{{- if reflect.IsMap . }}
+		{{- with .twitter }}
+			{{- $content := . }}
+			{{- if not (strings.HasPrefix . "@") }}
+				{{- $content = printf "@%v" . }}
+			{{- end }}
+			<meta name="twitter:site" content="{{ $content }}">
+		{{- end }}
+	{{- end }}
+{{- end }}
