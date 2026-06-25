@@ -9,6 +9,7 @@ types of _release artifacts_.
 
 ## Recent versions
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< recent-versions.inline >}}
   {{ range hugo.Data.versions }}
@@ -50,6 +51,7 @@ types of _release artifacts_.
   {{ end }}
 {{< /recent-versions.inline >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 ## Types of release artifacts
 
