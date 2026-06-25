@@ -2,8 +2,8 @@
 title: completion
 ---
 
-{{< docs/cli-description "completion" >}}
+{{< cli-description "completion" >}}
 
-{{< docs/cli-examples "completion" >}}
+{{< cli-examples "completion" >}}
 
-{{< docs/cli-flags "completion" >}}
+{{< cli-flags "completion" >}}

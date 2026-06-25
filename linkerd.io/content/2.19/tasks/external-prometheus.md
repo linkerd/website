@@ -12,7 +12,7 @@ both the control plane as well as the proxy's metrics in a format that is
 consumable both by a user as well as Linkerd control plane components like web,
 etc.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 There are two important points to tackle here.
 

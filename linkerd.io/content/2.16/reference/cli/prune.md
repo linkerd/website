@@ -2,8 +2,8 @@
 title: prune
 ---
 
-{{< docs/cli-description "prune" >}}
+{{< cli-description "prune" >}}
 
-{{< docs/cli-examples "prune" >}}
+{{< cli-examples "prune" >}}
 
-{{< docs/cli-flags "prune" >}}
+{{< cli-flags "prune" >}}

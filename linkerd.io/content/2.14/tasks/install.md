@@ -11,7 +11,7 @@ Linkerd's control plane can be installed in two ways: with the CLI and with
 Helm. The CLI is convenient and easy, but for production use cases we recommend
 Helm which allows for repeatability.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 In either case, we recommend installing the CLI itself so that you can validate
 the success of the installation. See the

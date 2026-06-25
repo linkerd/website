@@ -9,7 +9,7 @@ Instead of forking the Linkerd install and upgrade process,
 `linkerd install` in a consistent way. This allows customization of the install
 to add functionality specific to installations.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 To get started, save the output of `linkerd install` to a YAML file. This will
 be the base resource that Kustomize uses to patch and generate what is added to

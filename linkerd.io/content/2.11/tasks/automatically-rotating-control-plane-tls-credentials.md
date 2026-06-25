@@ -16,7 +16,7 @@ external solution.
 [must still be manually rotated](manually-rotating-control-plane-tls-credentials/)
 on long-lived clusters.)
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Cert manager
 

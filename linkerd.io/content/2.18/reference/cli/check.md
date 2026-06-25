@@ -2,12 +2,12 @@
 title: check
 ---
 
-{{< docs/cli-description "check" >}}
+{{< cli-description "check" >}}
 
 Take a look at the [troubleshooting](../../tasks/troubleshooting/) documentation
 for a full list of all the possible checks, what they do and how to fix them.
 
-{{< docs/cli-examples "check" >}}
+{{< cli-examples "check" >}}
 
 ## Example output
 
@@ -53,4 +53,4 @@ control-plane-version
 Status check results are √
 ```
 
-{{< docs/cli-flags "check" >}}
+{{< cli-flags "check" >}}

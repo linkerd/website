@@ -18,4 +18,4 @@ this command is.
 
 ## Common Errors
 
-{{< docs/section-toc >}}
+{{< section-toc >}}

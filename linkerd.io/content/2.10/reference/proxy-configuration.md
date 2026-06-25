@@ -11,7 +11,7 @@ configurations of [auto-injected proxies](../features/proxy-injection/).
 
 The following is the list of supported annotations:
 
-{{< docs/cli-annotations "inject" >}}
+{{< cli-annotations "inject" >}}
 
 For example, to update an auto-injected proxy's CPU and memory resources, we
 insert the appropriate annotations into the `spec.template.metadata.annotations`

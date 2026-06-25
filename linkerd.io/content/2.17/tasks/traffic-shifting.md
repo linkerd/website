@@ -20,7 +20,7 @@ development.
 
 {{< /note >}}
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Prerequisites
 

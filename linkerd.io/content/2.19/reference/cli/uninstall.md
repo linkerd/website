@@ -2,8 +2,8 @@
 title: uninstall
 ---
 
-{{< docs/cli-description "uninstall" >}}
+{{< cli-description "uninstall" >}}
 
-{{< docs/cli-examples "uninstall" >}}
+{{< cli-examples "uninstall" >}}
 
-{{< docs/cli-flags "uninstall" >}}
+{{< cli-flags "uninstall" >}}

@@ -9,18 +9,62 @@ types of _release artifacts_.
 
 ## Recent versions
 
-{{< versions >}}
+<!-- markdownlint-disable -->
+<!-- prettier-ignore-start -->
+{{< recent-versions.inline >}}
+  {{ range hugo.Data.versions }}
+    <div class="card">
+      <div class="card__body">
+        <div class="card__header">
+          <h3>
+            Linkerd {{ .version }}
+          </h3>
+        </div>
+        <div class="card__content">
+          <p>
+            Linkerd {{ .version }} was announced on {{ .releaseDate }}.
+          </p>
+          <ul>
+            {{ with site.GetPage .announcement }}
+              <li>
+                <strong>Announcement:</strong> <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+              </li>
+            {{ end }}
+            <li>
+              <strong>Code tag:</strong> <a href="https://github.com/linkerd/linkerd2/releases/tag/version-{{ .version }}" target="_blank">version-{{ .version }}</a>
+            </li>
+            <li>
+              <strong>Corresponding edge release:</strong> <a href="https://github.com/linkerd/linkerd2/releases/tag/{{ .edge }}" target="_blank">{{ .edge }}</a>
+            </li>
+          </ul>
+          <p>
+            Known distributions of Linkerd {{ .version }}:
+          </p>
+          <ul>
+            <li>
+              <a href="https://docs.buoyant.io/buoyant-enterprise-linkerd/{{ .version }}/" target="_blank">Buoyant Enterprise for Linkerd {{ .version }}</a> from Buoyant, creators of Linkerd
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{< /recent-versions.inline >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 ## Types of release artifacts
 
 ### Edge releases
 
 <!-- markdownlint-disable MD034 -->
+
 Edge release artifacts are published on a weekly or near-weekly basis as part of
 the open source project. The latest edge release is [{{% latest-edge-version
 %}}](https://github.com/linkerd/linkerd2/releases/tag/{{% latest-edge-version
 %}}). and the full list of edge release artifacts can be found on
 [the Linkerd GitHub releases page](https://github.com/linkerd/linkerd2/releases).
+
 <!-- markdownlint-enable MD034 -->
 
 Edge release artifacts contain the code in from the _main_ branch at the point

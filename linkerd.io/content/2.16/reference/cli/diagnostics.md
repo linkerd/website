@@ -2,44 +2,44 @@
 title: diagnostics
 ---
 
-{{< docs/cli-description "diagnostics" >}}
+{{< cli-description "diagnostics" >}}
 
-{{< docs/cli-examples "diagnostics" >}}
+{{< cli-examples "diagnostics" >}}
 
-{{< docs/cli-flags "diagnostics" >}}
+{{< cli-flags "diagnostics" >}}
 
 ## Subcommands
 
-{{< docs/cli-subcommands "diagnostics" >}}
+{{< cli-subcommands "diagnostics" >}}
 
 ### controller-metrics
 
-{{< docs/cli-description "diagnostics controller-metrics" >}}
+{{< cli-description "diagnostics controller-metrics" >}}
 
-{{< docs/cli-examples "diagnostics controller-metrics" >}}
+{{< cli-examples "diagnostics controller-metrics" >}}
 
-{{< docs/cli-flags "diagnostics controller-metrics" >}}
+{{< cli-flags "diagnostics controller-metrics" >}}
 
 ### endpoints
 
-{{< docs/cli-description "diagnostics endpoints" >}}
+{{< cli-description "diagnostics endpoints" >}}
 
-{{< docs/cli-examples "diagnostics endpoints" >}}
+{{< cli-examples "diagnostics endpoints" >}}
 
-{{< docs/cli-flags "diagnostics endpoints" >}}
+{{< cli-flags "diagnostics endpoints" >}}
 
 ### install-sp
 
-{{< docs/cli-description "diagnostics install-sp" >}}
+{{< cli-description "diagnostics install-sp" >}}
 
-{{< docs/cli-examples "diagnostics install-sp" >}}
+{{< cli-examples "diagnostics install-sp" >}}
 
-{{< docs/cli-flags "diagnostics install-sp" >}}
+{{< cli-flags "diagnostics install-sp" >}}
 
 ### proxy-metrics
 
-{{< docs/cli-description "diagnostics proxy-metrics" >}}
+{{< cli-description "diagnostics proxy-metrics" >}}
 
-{{< docs/cli-examples "diagnostics proxy-metrics" >}}
+{{< cli-examples "diagnostics proxy-metrics" >}}
 
-{{< docs/cli-flags "diagnostics proxy-metrics" >}}
+{{< cli-flags "diagnostics proxy-metrics" >}}

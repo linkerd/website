@@ -16,7 +16,7 @@ Linkerd natively supports. While certain integrations such as
 [Flagger](flagger/) rely on the SMI and `TrafficSplit` approach, using
 `HTTPRoute` is the preferred method going forward.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Prerequisites
 

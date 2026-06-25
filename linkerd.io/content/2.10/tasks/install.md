@@ -7,7 +7,7 @@ Before you can use Linkerd, you'll need to install the
 [core control plane](../reference/architecture/#control-plane). This page covers
 how to accomplish that, as well as common problems that you may encounter.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 Note that the control plane is typically installed by using Linkerd's CLI. See
 [Getting Started](../getting-started/) for how to install the CLI onto your

@@ -23,7 +23,7 @@ tools: [Flagger](https://flagger.app/) and
 metrics and request routing together in a control loop, allowing for
 fully-automated, metrics-aware canary deployments.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Prerequisites
 

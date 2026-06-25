@@ -2,52 +2,52 @@
 title: jaeger
 ---
 
-{{< docs/cli-description "jaeger" >}}
+{{< cli-description "jaeger" >}}
 
-{{< docs/cli-examples "jaeger" >}}
+{{< cli-examples "jaeger" >}}
 
-{{< docs/cli-flags "jaeger" >}}
+{{< cli-flags "jaeger" >}}
 
 ## Subcommands
 
-{{< docs/cli-subcommands "jaeger" >}}
+{{< cli-subcommands "jaeger" >}}
 
 ### check
 
-{{< docs/cli-description "jaeger check" >}}
+{{< cli-description "jaeger check" >}}
 
-{{< docs/cli-examples "jaeger check" >}}
+{{< cli-examples "jaeger check" >}}
 
-{{< docs/cli-flags "jaeger check" >}}
+{{< cli-flags "jaeger check" >}}
 
 ### dashboard
 
-{{< docs/cli-description "jaeger dashboard" >}}
+{{< cli-description "jaeger dashboard" >}}
 
-{{< docs/cli-examples "jaeger dashboard" >}}
+{{< cli-examples "jaeger dashboard" >}}
 
-{{< docs/cli-flags "jaeger dashboard" >}}
+{{< cli-flags "jaeger dashboard" >}}
 
 ### install
 
-{{< docs/cli-description "jaeger install" >}}
+{{< cli-description "jaeger install" >}}
 
-{{< docs/cli-examples "jaeger install" >}}
+{{< cli-examples "jaeger install" >}}
 
-{{< docs/cli-flags "jaeger install" >}}
+{{< cli-flags "jaeger install" >}}
 
 ### list
 
-{{< docs/cli-description "jaeger list" >}}
+{{< cli-description "jaeger list" >}}
 
-{{< docs/cli-examples "jaeger list" >}}
+{{< cli-examples "jaeger list" >}}
 
-{{< docs/cli-flags "jaeger list" >}}
+{{< cli-flags "jaeger list" >}}
 
 ### uninstall
 
-{{< docs/cli-description "jaeger uninstall" >}}
+{{< cli-description "jaeger uninstall" >}}
 
-{{< docs/cli-examples "jaeger uninstall" >}}
+{{< cli-examples "jaeger uninstall" >}}
 
-{{< docs/cli-flags "jaeger uninstall" >}}
+{{< cli-flags "jaeger uninstall" >}}

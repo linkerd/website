@@ -2,60 +2,60 @@
 title: multicluster
 ---
 
-{{< docs/cli-description "multicluster" >}}
+{{< cli-description "multicluster" >}}
 
-{{< docs/cli-examples "multicluster" >}}
+{{< cli-examples "multicluster" >}}
 
-{{< docs/cli-flags "multicluster" >}}
+{{< cli-flags "multicluster" >}}
 
 ## Subcommands
 
-{{< docs/cli-subcommands "multicluster" >}}
+{{< cli-subcommands "multicluster" >}}
 
 ### allow
 
-{{< docs/cli-description "multicluster allow" >}}
+{{< cli-description "multicluster allow" >}}
 
-{{< docs/cli-examples "multicluster allow" >}}
+{{< cli-examples "multicluster allow" >}}
 
-{{< docs/cli-flags "multicluster allow" >}}
+{{< cli-flags "multicluster allow" >}}
 
 ### check
 
-{{< docs/cli-description "multicluster check" >}}
+{{< cli-description "multicluster check" >}}
 
-{{< docs/cli-examples "multicluster check" >}}
+{{< cli-examples "multicluster check" >}}
 
-{{< docs/cli-flags "multicluster check" >}}
+{{< cli-flags "multicluster check" >}}
 
 ### gateways
 
-{{< docs/cli-description "multicluster gateways" >}}
+{{< cli-description "multicluster gateways" >}}
 
-{{< docs/cli-examples "multicluster gateways" >}}
+{{< cli-examples "multicluster gateways" >}}
 
-{{< docs/cli-flags "multicluster gateways" >}}
+{{< cli-flags "multicluster gateways" >}}
 
 ### install
 
-{{< docs/cli-description "multicluster install" >}}
+{{< cli-description "multicluster install" >}}
 
-{{< docs/cli-examples "multicluster install" >}}
+{{< cli-examples "multicluster install" >}}
 
-{{< docs/cli-flags "multicluster install" >}}
+{{< cli-flags "multicluster install" >}}
 
 ### link-gen
 
-{{< docs/cli-description "multicluster link-gen" >}}
+{{< cli-description "multicluster link-gen" >}}
 
-{{< docs/cli-examples "multicluster link-gen" >}}
+{{< cli-examples "multicluster link-gen" >}}
 
-{{< docs/cli-flags "multicluster link-gen" >}}
+{{< cli-flags "multicluster link-gen" >}}
 
 ### uninstall
 
-{{< docs/cli-description "multicluster uninstall" >}}
+{{< cli-description "multicluster uninstall" >}}
 
-{{< docs/cli-examples "multicluster uninstall" >}}
+{{< cli-examples "multicluster uninstall" >}}
 
-{{< docs/cli-flags "multicluster uninstall" >}}
+{{< cli-flags "multicluster uninstall" >}}

@@ -13,7 +13,7 @@ each proxy only provides a portion of the full picture. Instead, a separate tool
 is used to collect metrics from all proxies and aggregate them together for
 consumption.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 One easy option is the [linkerd-viz](../features/dashboard/) extension, which
 will create an on-cluster Prometheus instance as well as dashboards and CLI
@@ -74,7 +74,7 @@ metadata:
     k8s-app: linkerd-prometheus
     release: monitoring
   name: linkerd-federate
-  namespace: {{.Namespace}}
+  namespace: { { .Namespace } }
 spec:
   endpoints:
     - interval: 30s
@@ -94,7 +94,7 @@ spec:
   jobLabel: app
   namespaceSelector:
     matchNames:
-      - {{.Namespace}}
+      - { { .Namespace } }
   selector:
     matchLabels:
       component: prometheus

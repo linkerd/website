@@ -27,7 +27,7 @@ with a validity of one year but require manual rotation by the user to prevent
 expiry. While this setup is convenient for quick start testing, it's not
 advisable nor recommended for production environments.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Automating Certificate Management with cert-manager and trust-manager
 
@@ -244,18 +244,18 @@ EOF
 {{< warning >}}
 
 The default value of the `rotationPolicy` in the Certificate's `privateKey`
-section is dependent on your version of cert-manager. In version 1.17 and
-below, the default value was `Never`. With this configuration, cert-manager
-**will not** actually rotate the trust anchor: instead, it will update the
-validity timestamps but **not** generate a new private key.
-**This is definitely not as secure as rotating the private key**.
+section is dependent on your version of cert-manager. In version 1.17 and below,
+the default value was `Never`. With this configuration, cert-manager **will
+not** actually rotate the trust anchor: instead, it will update the validity
+timestamps but **not** generate a new private key. **This is definitely not as
+secure as rotating the private key**.
 
 If you are upgrading cert-manager from version 1.17 or below to version 1.18 or
 above, be aware that this new default will change the `rotationPolicy` if you
 are not explicitly setting it in your Certificate resource manifest.
 
-To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for
-any certificate that cert-manager is managing.
+To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for any
+certificate that cert-manager is managing.
 
 {{< /warning >}}
 
@@ -360,18 +360,18 @@ EOF
 {{< warning >}}
 
 The default value of the `rotationPolicy` in the Certificate's `privateKey`
-section is dependent on your version of cert-manager. In version 1.17 and
-below, the default value was `Never`. With this configuration, cert-manager
-**will not** actually rotate the trust anchor: instead, it will update the
-validity timestamps but **not** generate a new private key.
-**This is definitely not as secure as rotating the private key**.
+section is dependent on your version of cert-manager. In version 1.17 and below,
+the default value was `Never`. With this configuration, cert-manager **will
+not** actually rotate the trust anchor: instead, it will update the validity
+timestamps but **not** generate a new private key. **This is definitely not as
+secure as rotating the private key**.
 
 If you are upgrading cert-manager from version 1.17 or below to version 1.18 or
 above, be aware that this new default will change the `rotationPolicy` if you
 are not explicitly setting it in your Certificate resource manifest.
 
-To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for
-any certificate that cert-manager is managing.
+To avoid ambiguity, we recommend always setting `rotationPolicy: Always` for any
+certificate that cert-manager is managing.
 
 {{< /warning >}}
 
@@ -777,10 +777,10 @@ _requires_ manual intervention, because while cert-manager can handle the hard
 work of actually rotating the trust anchor, it can't trigger the needed
 restarts.
 
-This means that the simplest way to handle trust anchor rotation is
-to _trigger the rotation manually_ whenever it's convenient for you so that
-you can manage the trust bundle and restarts while letting cert-manager manage
-the trust anchor certificate.
+This means that the simplest way to handle trust anchor rotation is to _trigger
+the rotation manually_ whenever it's convenient for you so that you can manage
+the trust bundle and restarts while letting cert-manager manage the trust anchor
+certificate.
 
 The process of actually doing this is straightforward, but again, there are
 several steps:
@@ -830,8 +830,8 @@ kubectl get secret -n cert-manager linkerd-previous-anchor \
     | base64 -d | inspect_cert
 ```
 
-Verify that the `linkerd-identity-trust-roots` ConfigMap now contains
-the Subject keys from both Secrets.
+Verify that the `linkerd-identity-trust-roots` ConfigMap now contains the
+Subject keys from both Secrets.
 
 ```bash
 kubectl get configmap -n linkerd linkerd-identity-trust-roots \
@@ -858,9 +858,9 @@ This will cause the control plane to pick up the new trust anchor bundle.
 #### 3. Restart the data plane
 
 At this point, you'll need to restart your workloads as well, to force the
-proxies to have the new trust anchor bundle. The exact mechanism to do this
-will depend on your workloads, but it's often just `kubectl rollout restart` for
-each of your application namespaces.
+proxies to have the new trust anchor bundle. The exact mechanism to do this will
+depend on your workloads, but it's often just `kubectl rollout restart` for each
+of your application namespaces.
 
 #### 4. Triggering identity issuer rotation
 
@@ -905,10 +905,10 @@ issuer.
 
 #### 6. Restart the data plane
 
-Again, you'll need to restart your workloads, to force the
-proxies to switch to the new identity issuer signed by the new trust anchor.
-The exact mechanism to do this will depend on your workloads, but it's often
-just `kubectl rollout restart` for each of your application namespaces.
+Again, you'll need to restart your workloads, to force the proxies to switch to
+the new identity issuer signed by the new trust anchor. The exact mechanism to
+do this will depend on your workloads, but it's often just
+`kubectl rollout restart` for each of your application namespaces.
 
 #### 7. Remove the old anchor from the trust bundle
 

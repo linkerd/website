@@ -23,7 +23,7 @@ In this tutorial, we'll walk you through how to combine Linkerd with
 metrics and traffic splitting together in a control loop, allowing for
 fully-automated, metrics-aware canary deployments.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Prerequisites
 

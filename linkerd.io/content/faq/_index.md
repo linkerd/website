@@ -8,7 +8,7 @@ sitemap:
   priority: 1.0
 ---
 
-{{< docs/toc >}}
+{{< toc >}}
 
 ## What is Linkerd?
 

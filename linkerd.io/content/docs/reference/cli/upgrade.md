@@ -2,8 +2,8 @@
 title: upgrade
 ---
 
-{{< docs/cli-description "upgrade" >}}
+{{< cli-description "upgrade" >}}
 
-{{< docs/cli-examples "upgrade" >}}
+{{< cli-examples "upgrade" >}}
 
-{{< docs/cli-flags "upgrade" >}}
+{{< cli-flags "upgrade" >}}

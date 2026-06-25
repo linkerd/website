@@ -2,8 +2,8 @@
 title: uninject
 ---
 
-{{< docs/cli-description "uninject" >}}
+{{< cli-description "uninject" >}}
 
-{{< docs/cli-examples "uninject" >}}
+{{< cli-examples "uninject" >}}
 
-{{< docs/cli-flags "uninject" >}}
+{{< cli-flags "uninject" >}}

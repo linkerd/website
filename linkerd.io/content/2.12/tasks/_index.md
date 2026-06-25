@@ -9,4 +9,4 @@ common tasks that you may need to perform when using Linkerd.
 
 ## Common Linkerd tasks
 
-{{< docs/section-toc >}}
+{{< section-toc >}}

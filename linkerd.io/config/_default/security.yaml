@@ -1,1 +1,2 @@
 allowContent: ['.*']
+enableInlineShortcodes: true
