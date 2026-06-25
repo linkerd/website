@@ -19,7 +19,7 @@ time. For convenience, the `linkerd inject` command provides an
 adding this annotation to a pre-existing pod will not work. It must be present
 at pod _creation_ time.)
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 The debug sidecar image contains
 [`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html), `tcpdump`,

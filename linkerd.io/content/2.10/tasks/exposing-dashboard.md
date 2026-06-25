@@ -9,7 +9,7 @@ Instead of using `linkerd viz dashboard` every time you'd like to see what's
 going on, you can expose the dashboard via an ingress. This will also expose
 Grafana.
 
-{{< docs/toc >}}
+{{< toc >}}
 
 ## Nginx
 

@@ -9,10 +9,10 @@ detailed metrics for how your service is performing.
 
 As reference, check out the commands below:
 
-{{< docs/cli-commands >}}
+{{< cli-commands >}}
 
 ## Global flags
 
 The following flags are available for _all_ linkerd CLI commands:
 
-{{< docs/cli-global-flags >}}
+{{< cli-global-flags >}}

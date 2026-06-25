@@ -15,7 +15,7 @@ loop where clients experience high 429 or RESOURCE_EXHAUSTED rates.
 Linkerd has two experimental features to help route traffic away from endpoints
 which are in a rate-limited state.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 {{< warning >}}
 

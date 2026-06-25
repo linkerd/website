@@ -10,7 +10,7 @@ going on, you can expose the dashboard via an ingress. This will also expose
 Grafana, if you have it linked against Linkerd viz through the `grafana.url`
 setting.
 
-{{< docs/toc >}}
+{{< toc >}}
 
 ## Nginx
 

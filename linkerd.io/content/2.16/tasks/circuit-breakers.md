@@ -13,7 +13,7 @@ improve client success rate when a backend replica is unhealthy.
 See the [reference documentation](../reference/circuit-breaking/) for more
 details on how Linkerd implements circuit breaking.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Prerequisites
 

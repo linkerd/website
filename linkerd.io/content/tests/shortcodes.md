@@ -7,14 +7,6 @@ title: Shortcodes
 
 <div class="container-lg" style="display:flex;flex-direction:column;gap:24px;padding:80px 0;">
 
-## docs/edge-note
-
-{{< docs/edge-note >}}
-
-## docs/production-note
-
-{{< docs/production-note >}}
-
 ## keyval
 
 {{< keyval >}}

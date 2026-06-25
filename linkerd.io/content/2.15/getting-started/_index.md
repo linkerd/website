@@ -16,7 +16,7 @@ install the _CLI_ (command-line interface) onto your local machine. Using this
 CLI, you'll then install the _control plane_ onto your Kubernetes cluster.
 Finally, you'll "mesh" an application by adding Linkerd's _data plane_ to it.
 
-{{< docs/edge-note >}}
+{{< edge-note >}}
 
 ## Step 0: Setup
 

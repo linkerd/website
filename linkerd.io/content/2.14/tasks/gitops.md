@@ -12,7 +12,7 @@ This guide will show you how to set up
 [Argo CD](https://argoproj.github.io/argo-cd/) to manage the installation and
 upgrade of Linkerd using a GitOps workflow.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 Specifically, this guide provides instructions on how to securely generate and
 manage Linkerd's mTLS private keys and certificates using

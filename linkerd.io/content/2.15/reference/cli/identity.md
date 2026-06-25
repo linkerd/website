@@ -2,8 +2,8 @@
 title: identity
 ---
 
-{{< docs/cli-description "identity" >}}
+{{< cli-description "identity" >}}
 
-{{< docs/cli-examples "identity" >}}
+{{< cli-examples "identity" >}}
 
-{{< docs/cli-flags "identity" >}}
+{{< cli-flags "identity" >}}

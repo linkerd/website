@@ -11,4 +11,4 @@ please see the [Linkerd task docs](../tasks/). For a reference, see the
 
 ## Linkerd's features
 
-{{< docs/section-toc >}}
+{{< section-toc >}}

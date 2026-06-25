@@ -2,8 +2,8 @@
 title: version
 ---
 
-{{< docs/cli-description "version" >}}
+{{< cli-description "version" >}}
 
-{{< docs/cli-examples "version" >}}
+{{< cli-examples "version" >}}
 
-{{< docs/cli-flags "version" >}}
+{{< cli-flags "version" >}}

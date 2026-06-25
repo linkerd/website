@@ -13,7 +13,7 @@ First, you need to install Grafana from a variety of possible sources, and then
 load the suite of Grafana dashboards that have been pre-configured to consume
 the metrics exposed by Linkerd.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Install Prometheus
 
@@ -85,7 +85,7 @@ is set up, as shown in the sample `grafana/values.yaml` file:
 ```yaml
 grafana.ini:
   server:
-    root_url: "%(protocol)s://%(domain)s:/grafana/"
+    root_url: '%(protocol)s://%(domain)s:/grafana/'
 ```
 
 Then refer the location of your Grafana service in the Linkerd Viz `values.yaml`

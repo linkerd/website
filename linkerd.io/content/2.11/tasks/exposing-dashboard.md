@@ -9,7 +9,7 @@ Instead of using `linkerd viz dashboard` every time you'd like to see what's
 going on, you can expose the dashboard via an ingress. This will also expose
 Grafana.
 
-{{< docs/toc >}}
+{{< toc >}}
 
 ## Nginx
 
@@ -41,7 +41,7 @@ metadata:
       proxy_hide_header l5d-server-id;
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: web-ingress-auth
-    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+    nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
 spec:
   ingressClassName: nginx
   rules:

@@ -27,7 +27,7 @@ with a validity of one year but require manual rotation by the user to prevent
 expiry. While this setup is convenient for quick start testing, it's not
 advisable nor recommended for production environments.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 ## Automating Certificate Management with cert-manager and trust-manager
 

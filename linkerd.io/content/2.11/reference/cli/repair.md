@@ -2,8 +2,8 @@
 title: repair
 ---
 
-{{< docs/cli-description "repair" >}}
+{{< cli-description "repair" >}}
 
-{{< docs/cli-examples "repair" >}}
+{{< cli-examples "repair" >}}
 
-{{< docs/cli-flags "repair" >}}
+{{< cli-flags "repair" >}}

@@ -12,7 +12,7 @@ By design, Linkerd only keeps metrics data for a short, fixed window of time
 (currently, 6 hours). This means that if Linkerd's metrics data is valuable to
 you, you will probably want to export it into a full-fledged metrics store.
 
-{{< docs/production-note >}}
+{{< production-note >}}
 
 Internally, Linkerd stores its metrics in a Prometheus instance that runs as
 part of the Viz extension. The following tutorial requires the viz extension to
