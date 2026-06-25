@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
   <head>
     <title>{{ .Permalink }}</title>
-    <link rel="canonical" href="{{ .Permalink }}">
-    <meta name="robots" content="noindex">
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta name="robots" content="noindex" />
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url={{ .Permalink }}" />
     <script>
-      window.location.href = '{{ .Permalink }}' + window.location.hash;
+      window.location.href = '{{ .Permalink }}' + window.location.hash
     </script>
   </head>
 </html>
