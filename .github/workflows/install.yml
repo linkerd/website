@@ -47,7 +47,7 @@ jobs:
     needs: [build]
 
     steps:
-    - uses: actions/download-artifact@v7.0.0
+    - uses: actions/download-artifact@v8.0.1
       with:
         name: run.linkerd.io
 
