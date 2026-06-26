@@ -109,14 +109,14 @@ params:
 ```
 
 **Note:** If an author only has a single blog post, but there's a chance they
-will have more in the future, please not use the inline method.
+will have more in the future, please do not use the inline method.
 
 #### Naming images
 
 To associate a cover, thumbnail, or feature image to a blog post, you do not
 have to specify them in the frontmatter. You can simply name them `cover`,
 `thumbnail` or `feature`, place them in the blog post folder, and they will
-automattically be used. For example:
+automatically be used. For example:
 
 ```text
 blog/
@@ -171,7 +171,7 @@ params:
   thumbnailRatio: fit
 ```
 
-You can automattically show the cover image at the top of the blog post by
+You can automatically show the cover image at the top of the blog post by
 adding the `showCover` frontmatter param. For example:
 
 ```yaml

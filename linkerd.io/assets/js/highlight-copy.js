@@ -1,4 +1,4 @@
-// Add copy button to all codeblocks that have been highlighed by Hugo
+// Add copy button to all code blocks that have been highlighted by Hugo
 window.addEventListener(
   "DOMContentLoaded",
   function (event) {
