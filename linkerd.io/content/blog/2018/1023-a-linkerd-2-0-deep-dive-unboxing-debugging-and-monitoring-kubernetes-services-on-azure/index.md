@@ -22,7 +22,7 @@ the install process, and extensive looks at Linkerd’s UNIX-style CLI, includin
 ‘stat’, ‘tap’ and ‘top’ commands to track service behaviors like inbound and
 outbound request performance.
 
-Lachie installs an Golang app with broken service in an Azure Kubernetes
+Lachie installs a Go app with a broken service in an Azure Kubernetes
 environment and then does some nifty live debugging the demo app. In the Linkerd
 2.0 dashboard UX, he looks at service topologies and then checks out different
 views of service behaviors to find failing services and identify the source of
