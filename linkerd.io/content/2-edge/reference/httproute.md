@@ -240,13 +240,13 @@ A filter which modifies HTTP request or response headers.
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `scheme`     | The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.                 |
 | `hostname`   | The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.             |
-| `path`       | An [httpPathModfier](#httppathmodfier) which modifies the path of the incoming request and uses the modified path in the `Location` header. |
+| `path`       | An [HTTPPathModifier](#httppathmodifier) which modifies the path of the incoming request and uses the modified path in the `Location` header.|
 | `port`       | The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.          |
 | `statusCode` | The HTTP status code to be used in response.                                                                                                |
 
 {{< /keyval >}}
 
-### httpPathModfier
+### HTTPPathModifier
 
 `HTTPPathModifier` defines configuration for path modifiers.
 
