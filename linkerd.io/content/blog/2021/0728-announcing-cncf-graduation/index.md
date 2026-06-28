@@ -14,10 +14,10 @@ at the foundation's highest level of project maturity.
 
 ## A victory for simplicity in a space notorious for complexity
 
-For a project that started out as
-[a small wrapper over some open source Twitter libraries](/2016/02/18/linkerd-twitter-style-operability-for-microservices/)
-and went on to face intense competition from some of the biggest companies in
-the world, graduation is a significant victory. But not just for Linkerd.
+For a project that started out as a small wrapper over some open source Twitter
+libraries and went on to face intense competition from some of the biggest
+companies in the world, graduation is a significant victory. But not just for
+Linkerd.
 
 This is a victory for everyone who has championed the virtues of simplicity and
 minimalism and rejected the narrative that service meshes must be complex and
