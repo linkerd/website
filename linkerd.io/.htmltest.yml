@@ -1,34 +1,5 @@
-# IgnoreURLs is not necessary because we disable CheckExternal.  However, let's
-# keep this list in case we enable CheckExternal in the future.
-IgnoreURLs:
-  - .*localhost.*
-  - http(.?):\/\/(.*\.)?conduit.io\/*
-  - https://expedia.com
-  - https://www.expedia.com
-  - https://ticketmaster.com
-  - https://douban.com/
-  - https://www.douban.com/
-  - https://www.meetup.com/*
-  - https://sched.co/*
-  - https://marketplace.visualstudio.com/items*
-  - https://www.xfinity.com/
-  - https://monkey.org/*
-  - https://svn.apache.org/*
-  - http://roc.cs.berkeley.edu/papers/dsconfig.pdf
-  - https://linkerd.buoyant.io
-  - https://github.com/*
-  - https://www.man7.org/*
-  - https://offerup.com/
-  - https://kinvolk.io/
-  - https://godaddy.com/
-  - https://www.linkedin.com/
-  - https://tools.ietf.org/
-  - ^/2/*
 DirectoryPath: public
 TestFilesConcurrently: true
 DocumentConcurrencyLimit: 16
-HTTPConcurrencyLimit: 4
-ExternalTimeout: 25
-HTTPHeaders: {"Accept":"*/*","Range":"bytes=0-","User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:84.0) Gecko/20100101 Firefox/84.0"}
 CheckInternalHash: false
 CheckExternal: false
