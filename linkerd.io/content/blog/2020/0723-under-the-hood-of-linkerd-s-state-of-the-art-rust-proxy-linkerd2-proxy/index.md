@@ -72,10 +72,9 @@ ran on the Java Virtual Machine, it had a pretty significant resource footprint.
 (The JVM is good at "scaling up", but not good at "scaling _down_", as William
 wrote in his InfoQ article on
 [the decision to reimplement Linkerd](https://www.infoq.com/articles/linkerd-v2-production-adoption/).)
-Even though the Linkerd community
-[got pretty good](/2016/06/17/small-memory-jvm-techniques-for-microservice-sidecars/)
-at tuning the JVM's memory use to minimize footprint, it was still too much to
-ask in a per-pod service mesh deployment model. So we knew we'd need a language
+Even though the Linkerd community got pretty good at tuning the JVM's memory use
+to minimize footprint, it was still too much to ask in a per-pod service mesh
+deployment model. So we knew we'd need a language
 that compiled to native binaries, like Rust, Go, and C++.
 
 Now, latency. Another lesson we learned from Linkerd 1.x that informed our
