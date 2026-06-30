@@ -16,7 +16,7 @@ replace the expired certificates with valid certificates.
 It might be the case that your issuer certificate is expired. If this it true
 running `linkerd check --proxy` will produce output similar to:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -41,7 +41,7 @@ replace both your root and issuer certificates at the same time. If your root
 has expired `linkerd check` will indicate that by outputting an error similar
 to:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -75,7 +75,7 @@ If you run `linkerd check --proxy` while pods are restarting after the trust
 bundle is updated, you will probably see warnings about pods not having the
 current trust bundle:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -107,7 +107,7 @@ These warnings will disappear as restarts complete. Once they do, you can use
 configuration up to date. After that is done, `linkerd check` should run with no
 warnings or errors:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
