@@ -740,7 +740,7 @@ Example warning:
         * emojivoto/emoji-d8d7d9c6b-8qwfx
         * emojivoto/vote-bot-588499c9f6-zpwz6
         * emojivoto/voting-8599548fdc-6v64k
-    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 Observing this warning indicates that some of your meshed pods have proxies that
@@ -759,7 +759,7 @@ components:
         * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
         * linkerd-viz/tap-68d8bbf64-mpzgb
         * linkerd-viz/web-849f74b7c6-qlhwc
-    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 If that is the case, simply wait for the `upgrade` operation to complete. The
