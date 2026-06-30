@@ -961,7 +961,7 @@ normally.
 Example failure:
 
 ```bash
-$ linkerd check --proxy --namespace foo
+linkerd check --proxy --namespace foo
 ```
 
 ```text {class=disable-copy}
