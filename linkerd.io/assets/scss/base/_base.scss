@@ -114,7 +114,7 @@ blockquote {
   border-left: solid 4px abstracts.$blue;
   background-color: abstracts.$light-blue;
   border-radius: abstracts.$border-radius;
-
+  
   & > :last-child {
     margin-bottom: 0;
   }
