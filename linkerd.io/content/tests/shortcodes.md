@@ -9,10 +9,10 @@ title: Shortcodes
 
 ## command-output
 
-{{< command-output label="You should see:" prompt="%" >}}
+{{< command-output "You should see:" >}}
 
 ```bash
-% linkerd version --client
+$ linkerd version --client
 Client version: edge-26.6.3
 ```
 
