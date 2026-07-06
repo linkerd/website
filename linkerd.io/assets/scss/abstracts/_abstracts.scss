@@ -107,6 +107,11 @@ $info-color: $blue;
 $warning-color: rgb(255, 193, 7);
 $danger-color: rgb(220, 53, 69);
 
+// https://xyproto.github.io/splash/docs/github-dark.html
+$highlight-background-color: #0d1117;
+$highlight-text-color: #e6edf3;
+$highlight-comment-color: #8b949e;
+
 $state-colors: (
   primary: (
     text: shade-color($primary-color, 60%),
