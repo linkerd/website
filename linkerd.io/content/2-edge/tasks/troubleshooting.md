@@ -229,20 +229,28 @@ Example failure:
 
 Ensure the Linkerd ClusterRoles exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterroles | grep linkerd
-linkerd-linkerd-destination                                            9d
-linkerd-linkerd-identity                                               9d
-linkerd-linkerd-proxy-injector                                         9d
-linkerd-policy                                                         9d
+linkerd-linkerd-destination       9d
+linkerd-linkerd-identity          9d
+linkerd-linkerd-proxy-injector    9d
+linkerd-policy                    9d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterroles
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane ClusterRoleBindings exist {#l5d-existence-crb}
 
@@ -256,20 +264,28 @@ Example failure:
 
 Ensure the Linkerd ClusterRoleBindings exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebindings | grep linkerd
-linkerd-linkerd-destination                            9d
-linkerd-linkerd-identity                               9d
-linkerd-linkerd-proxy-injector                         9d
-linkerd-destination-policy                             9d
+linkerd-linkerd-destination       9d
+linkerd-linkerd-identity          9d
+linkerd-linkerd-proxy-injector    9d
+linkerd-destination-policy        9d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane ServiceAccounts exist {#l5d-existence-sa}
 
@@ -283,6 +299,8 @@ Example failure:
 
 Ensure the Linkerd ServiceAccounts exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd get serviceaccounts
 NAME                     SECRETS   AGE
@@ -293,13 +311,19 @@ linkerd-identity         1         14m
 linkerd-proxy-injector   1         14m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts in the Linkerd
 namespace:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n linkerd auth can-i create serviceaccounts
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane CustomResourceDefinitions exist {#l5d-existence-crd}
 
@@ -313,18 +337,26 @@ Example failure:
 
 Ensure the Linkerd CRD exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get customresourcedefinitions
 NAME                         CREATED AT
 serviceprofiles.linkerd.io   2019-04-25T21:47:31Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create CRDs:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create customresourcedefinitions
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane MutatingWebhookConfigurations exist {#l5d-existence-mwc}
 
@@ -338,17 +370,25 @@ Example failure:
 
 Ensure the Linkerd MutatingWebhookConfigurations exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get mutatingwebhookconfigurations | grep linkerd
 linkerd-proxy-injector-webhook-config   2019-07-01T13:13:26Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create MutatingWebhookConfigurations:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create mutatingwebhookconfigurations
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane ValidatingWebhookConfigurations exist {#l5d-existence-vwc}
 
@@ -362,17 +402,25 @@ Example failure:
 
 Ensure the Linkerd ValidatingWebhookConfiguration exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get validatingwebhookconfigurations | grep linkerd
 linkerd-sp-validator-webhook-config   2019-07-01T13:13:26Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ValidatingWebhookConfigurations:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create validatingwebhookconfigurations
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
 
@@ -393,7 +441,7 @@ Newer distributions of managed k8s use containerd where this is not an issue.
 
 Without root in the init container you might get errors such as:
 
-```bash
+```text {class=disable-copy}
 time="2021-11-15T04:41:31Z" level=info msg="iptables-save -t nat"
 Error: exit status 1
 time="2021-11-15T04:41:31Z" level=info msg="iptables-save v1.8.7 (legacy): Cannot initialize: Permission denied (you must be root)\n\n"
@@ -417,18 +465,26 @@ Example failure:
 
 Ensure the Linkerd ConfigMap exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd get configmap/linkerd-config
 NAME             DATA   AGE
 linkerd-config   3      61m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ConfigMaps:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n linkerd auth can-i create configmap
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane replica sets are ready {#l5d-existence-replicasets}
 
@@ -779,6 +835,8 @@ Example failure:
 
 Verify the state of the control plane pods with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd get po
 NAME                                      READY   STATUS    RESTARTS   AGE
@@ -786,6 +844,8 @@ linkerd-destination-5fd7b5d466-szgqm      2/2     Running   1          12m
 linkerd-identity-54df78c479-hbh5m         2/2     Running   0          12m
 linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
 ```
+
+{{< /command-output >}}
 
 ### √ cluster networks can be verified {#l5d-cluster-networks-verified}
 
@@ -861,10 +921,14 @@ Example failure:
 Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
+
+{{< /command-output >}}
 
 ### √ cli is up-to-date {#l5d-version-cli}
 
@@ -1109,7 +1173,7 @@ extension binaries implement it. For more information, See
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 invalid extension check output from \"viz\" (JSON object expected)
 ```
 
@@ -1148,18 +1212,26 @@ Example error:
 
 Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get cm linkerd-cni-config -n linkerd-cni
 NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
 linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ConfigMaps:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ConfigMaps
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ cni plugin ClusterRole exist {#cni-plugin-cr-exists}
 
@@ -1173,18 +1245,26 @@ Example error:
 
 Ensure that the cluster role exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrole linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoles
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ cni plugin ClusterRoleBinding exist {#cni-plugin-crb-exists}
 
@@ -1198,18 +1278,26 @@ Example error:
 
 Ensure that the cluster role binding exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebinding linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ cni plugin ServiceAccount exists {#cni-plugin-sa-exists}
 
@@ -1223,18 +1311,26 @@ Example error:
 
 Ensure that the CNI service account exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
 NAME          SECRETS   AGE
 linkerd-cni   1         45m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccount:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ServiceAccounts -n linkerd-cni
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ cni plugin DaemonSet exists {#cni-plugin-ds-exists}
 
@@ -1248,18 +1344,26 @@ Example error:
 
 Ensure that the CNI daemonset exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get ds -n linkerd-cni
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create DaemonSets:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create DaemonSets -n linkerd-cni
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ cni plugin pod is running on all nodes {#cni-plugin-ready}
 
@@ -1273,6 +1377,8 @@ Example failure:
 
 Ensure that all the CNI pods are running:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get po -n linkerd-cni
 NAME                READY   STATUS    RESTARTS   AGE
@@ -1281,7 +1387,11 @@ linkerd-cni-mf564   1/1     Running   0          9m22s
 linkerd-cni-p5670   1/1     Running   0          9m25s
 ```
 
+{{< /command-output >}}
+
 Ensure that all pods have finished the deployment of the CNI config and binary:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
@@ -1289,6 +1399,8 @@ Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true
 ```
+
+{{< /command-output >}}
 
 ## The "linkerd-multicluster checks {#l5d-multicluster}
 
@@ -1311,11 +1423,15 @@ Example error:
 Make sure multicluster extension is correctly installed and that the
 `links.multicluster.linkerd.io` CRD is present.
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get crds | grep multicluster
 NAME                              CREATED AT
 links.multicluster.linkerd.io     2021-03-10T09:58:10Z
 ```
+
+{{< /command-output >}}
 
 ### √ Link resources are valid {#l5d-multicluster-links-are-valid}
 
@@ -1401,6 +1517,8 @@ the rules section.
 
 Expected rules for `linkerd-service-mirror-access-local-resources` cluster role:
 
+{{< command-output "You should see:" >}}
+
 ```bash
 $ kubectl  --context=local get clusterrole linkerd-service-mirror-access-local-resources -o yaml
 kind: ClusterRole
@@ -1432,7 +1550,11 @@ rules:
   - watch
 ```
 
+{{< /command-output >}}
+
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
@@ -1453,6 +1575,8 @@ metadata:
   - watch
 ```
 
+{{< /command-output >}}
+
 ### √ service mirror controllers are running {#l5d-multicluster-service-mirror-running}
 
 Example error:
@@ -1467,11 +1591,15 @@ Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the controller pod with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl --all-namespaces get po --selector linkerd.io/control-plane-component=linkerd-service-mirror
-NAME                                  READY     STATUS    RESTARTS   AGE
+NAME                                      READY     STATUS    RESTARTS   AGE
 linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
 ```
+
+{{< /command-output >}}
 
 ### √ extension is managing controllers {#l5d-multicluster-managed-controllers}
 
@@ -1613,21 +1741,29 @@ Example failure:
 
 Ensure the linkerd-viz extension ClusterRoles exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterroles | grep linkerd-viz
-linkerd-linkerd-viz-metrics-api                                        2021-01-26T18:02:17Z
-linkerd-linkerd-viz-prometheus                                         2021-01-26T18:02:17Z
-linkerd-linkerd-viz-tap                                                2021-01-26T18:02:17Z
-linkerd-linkerd-viz-tap-admin                                          2021-01-26T18:02:17Z
-linkerd-linkerd-viz-web-check                                          2021-01-26T18:02:18Z
+linkerd-linkerd-viz-metrics-api    2021-01-26T18:02:17Z
+linkerd-linkerd-viz-prometheus     2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap            2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap-admin      2021-01-26T18:02:17Z
+linkerd-linkerd-viz-web-check      2021-01-26T18:02:18Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterroles
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ linkerd-viz ClusterRoleBindings exist {#l5d-viz-crb-exists}
 
@@ -1641,22 +1777,30 @@ Example failure:
 
 Ensure the linkerd-viz extension ClusterRoleBindings exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebindings | grep linkerd-viz
-linkerd-linkerd-viz-metrics-api                        ClusterRole/linkerd-linkerd-viz-metrics-api                                        18h
-linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                                         18h
-linkerd-linkerd-viz-tap                                ClusterRole/linkerd-linkerd-viz-tap                                                18h
-linkerd-linkerd-viz-tap-auth-delegator                 ClusterRole/system:auth-delegator                                                  18h
-linkerd-linkerd-viz-web-admin                          ClusterRole/linkerd-linkerd-viz-tap-admin                                          18h
-linkerd-linkerd-viz-web-check                          ClusterRole/linkerd-linkerd-viz-web-check                                          18h
+linkerd-linkerd-viz-metrics-api           ClusterRole/linkerd-linkerd-viz-metrics-api    18h
+linkerd-linkerd-viz-prometheus            ClusterRole/linkerd-linkerd-viz-prometheus     18h
+linkerd-linkerd-viz-tap                   ClusterRole/linkerd-linkerd-viz-tap            18h
+linkerd-linkerd-viz-tap-auth-delegator    ClusterRole/system:auth-delegator              18h
+linkerd-linkerd-viz-web-admin             ClusterRole/linkerd-linkerd-viz-tap-admin      18h
+linkerd-linkerd-viz-web-check             ClusterRole/linkerd-linkerd-viz-web-check      18h
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ viz extension proxies are healthy {#l5d-viz-proxy-healthy}
 
@@ -1742,6 +1886,8 @@ requirements in the cluster:
 
 Ensure all the linkerd-viz pods are injected
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd-viz get pods
 NAME                                   READY   STATUS    RESTARTS   AGE
@@ -1750,8 +1896,10 @@ metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
 prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
 tap-59f5595fc7-ttndp           2/2     Running   2          18h
 web-78d6588d4-pn299            2/2     Running   2          18h
-tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
+tap-injector-566f7ff8df-vpcwc  2/2     Running   2          18h
 ```
+
+{{< /command-output >}}
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
@@ -1766,6 +1914,8 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Ensure all the linkerd-viz pods are running with 2/2
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd-viz get pods
 NAME                                   READY   STATUS    RESTARTS   AGE
@@ -1776,6 +1926,8 @@ tap-59f5595fc7-ttndp                   2/2     Running   2          18h
 web-78d6588d4-pn299                    2/2     Running   2          18h
 tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
 ```
+
+{{< /command-output >}}
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
@@ -1790,15 +1942,33 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Ensure all the prometheus related resources are present and running correctly.
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd-viz get deploy,cm | grep prometheus
-deployment.apps/prometheus     1/1     1            1           3m18s
-configmap/prometheus-config   1      3m18s
-$ kubectl get clusterRoleBindings | grep prometheus
-linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-$ kubectl get clusterRoles | grep prometheus
-linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
+deployment.apps/prometheus    1/1    1    1    3m18s
+configmap/prometheus-config   1    3m18s
 ```
+
+{{< /command-output >}}
+
+{{< command-output "You should see something similar to:" >}}
+
+```bash
+$ kubectl get clusterRoleBindings | grep prometheus
+linkerd-linkerd-viz-prometheus    ClusterRole/linkerd-linkerd-viz-prometheus    3m37s
+```
+
+{{< /command-output >}}
+
+{{< command-output "You should see something similar to:" >}}
+
+```bash
+$ kubectl get clusterRoles | grep prometheus
+linkerd-linkerd-viz-prometheus    2021-02-26T06:03:11Zh
+```
+
+{{< /command-output >}}
 
 ### √ can initialize the client {#l5d-viz-existence-client}
 
@@ -1811,6 +1981,8 @@ Example failure:
 
 Verify that the metrics API pod is running correctly
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
@@ -1821,6 +1993,8 @@ web-cbb846484-d987n            2/2     Running   0          4m56s
 grafana-76fd8765f4-9rg8q       2/2     Running   0          4m58s
 prometheus-7c5c48c466-jc27g    2/2     Running   0          4m58s
 ```
+
+{{< /command-output >}}
 
 ### √ viz extension self-check {#l5d-viz-metrics-api}
 
@@ -1841,8 +2015,7 @@ kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 
 Example failure:
 
-```bash
-
+```text {class=disable-copy}
 ‼ prometheus is authorized to scrape data plane pods
     prometheus may not be authorized to scrape the following pods:
         * emojivoto/voting-5f46cbcdc6-p5dhn
@@ -1937,10 +2110,14 @@ curl https://buoyant.cloud/install | sh
 Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ curl https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
+
+{{< /command-output >}}
 
 ### √ linkerd-buoyant cli is up-to-date
 
@@ -2002,18 +2179,26 @@ linkerd-buoyant install | kubectl apply -f -
 
 Ensure that the cluster role exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrole buoyant-cloud-agent
 NAME                  CREATED AT
 buoyant-cloud-agent   2020-11-13T00:59:50Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoles
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ buoyant-cloud-agent ClusterRoleBinding exists
 
@@ -2025,18 +2210,26 @@ yes
 
 Ensure that the cluster role binding exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebinding buoyant-cloud-agent
 NAME                  ROLE                              AGE
 buoyant-cloud-agent   ClusterRole/buoyant-cloud-agent   301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ buoyant-cloud-agent ServiceAccount exists
 
@@ -2048,18 +2241,26 @@ yes
 
 Ensure that the service account exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get serviceaccount buoyant-cloud-agent
 NAME                  SECRETS   AGE
 buoyant-cloud-agent   1         301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud auth can-i create ServiceAccount
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ buoyant-cloud-id Secret exists
 
@@ -2071,18 +2272,26 @@ yes
 
 Ensure that the secret exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get secret buoyant-cloud-id
 NAME               TYPE     DATA   AGE
 buoyant-cloud-id   Opaque   4      301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud auth can-i create ServiceAccount
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ buoyant-cloud-agent Deployment exists
 
@@ -2117,11 +2326,15 @@ Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the `buoyant-cloud-agent` Deployment with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-agent
 NAME                                   READY   STATUS    RESTARTS   AGE
 buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          156m
 ```
+
+{{< /command-output >}}
 
 Check the agent's logs with:
 
@@ -2140,11 +2353,15 @@ kubectl logs -n buoyant-cloud buoyant-cloud-agent-6b8c6888d7-htr7d buoyant-cloud
 Ensure the `buoyant-cloud-agent` pod is injected, the `READY` column should show
 `2/2`:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-agent
 NAME                                   READY   STATUS    RESTARTS   AGE
 buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          161m
 ```
+
+{{< /command-output >}}
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`.
@@ -2159,11 +2376,15 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Check the version with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ linkerd-buoyant version
 CLI version:   v0.4.4
 Agent version: v0.4.4
 ```
+
+{{< /command-output >}}
 
 To update to the latest version:
 
@@ -2218,6 +2439,8 @@ Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the `buoyant-cloud-metrics` DaemonSet with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-metrics
 NAME                          READY   STATUS    RESTARTS   AGE
@@ -2226,6 +2449,8 @@ buoyant-cloud-metrics-q8jhj   2/2     Running   0          163m
 buoyant-cloud-metrics-qtflh   2/2     Running   0          164m
 buoyant-cloud-metrics-wqs4k   2/2     Running   0          163m
 ```
+
+{{< /command-output >}}
 
 Check the agent's logs with:
 
@@ -2244,6 +2469,8 @@ kubectl logs -n buoyant-cloud buoyant-cloud-metrics-kt9mv buoyant-cloud-metrics
 Ensure the `buoyant-cloud-metrics` pods are injected, the `READY` column should
 show `2/2`:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
 NAME                          READY   STATUS    RESTARTS   AGE
@@ -2252,6 +2479,8 @@ buoyant-cloud-metrics-q8jhj   2/2     Running   0          166m
 buoyant-cloud-metrics-qtflh   2/2     Running   0          166m
 buoyant-cloud-metrics-wqs4k   2/2     Running   0          166m
 ```
+
+{{< /command-output >}}
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`.
@@ -2266,10 +2495,14 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Check the version with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics -o jsonpath='{.metadata.labels}'
 {"app.kubernetes.io/name":"metrics","app.kubernetes.io/part-of":"buoyant-cloud","app.kubernetes.io/version":"v0.4.4"}
 ```
+
+{{< /command-output >}}
 
 To update to the latest version:
 
