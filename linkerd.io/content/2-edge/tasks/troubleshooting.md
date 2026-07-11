@@ -16,7 +16,7 @@ installation.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane namespace does not already exist
     The "linkerd" namespace already exists
 ```
@@ -34,7 +34,7 @@ linkerd check --pre --linkerd-namespace linkerd-test
 The subsequent checks in this section validate whether you have permission to
 create the Kubernetes resources required for Linkerd installation, specifically:
 
-```bash
+```text {class=disable-copy}
 √ can create Namespaces
 √ can create ClusterRoles
 √ can create ClusterRoleBindings
@@ -47,7 +47,7 @@ These checks only run when the `--pre` flag is set This flag is intended for use
 prior to running `linkerd install`, to verify you have the correct RBAC
 permissions to install Linkerd.
 
-```bash
+```text {class=disable-copy}
 √ can create Namespaces
 √ can create ClusterRoles
 √ can create ClusterRoleBindings
@@ -90,7 +90,7 @@ These checks only run when the `--pre` flag is set. This flag is intended for
 use prior to running `linkerd install`, to verify you have not already installed
 the Linkerd control plane.
 
-```bash
+```text {class=disable-copy}
 √ no ClusterRoles exist
 √ no ClusterRoleBindings exist
 √ no CustomResourceDefinitions exist
@@ -113,7 +113,7 @@ linkerd check --pre --single-namespace
 
 Example failures:
 
-```bash
+```text {class=disable-copy}
 × can initialize the client
     error configuring Kubernetes API client: stat badconfig: no such file or directory
 × can query the Kubernetes API
@@ -139,8 +139,8 @@ kubectl version
 
 Another example failure:
 
-```bash
-✘ can query the Kubernetes API
+```text {class=disable-copy}
+× can query the Kubernetes API
     Get REDACTED/version: x509: certificate signed by unknown authority
 ```
 
@@ -157,7 +157,7 @@ kubectl config set-cluster ${KUBE_CONTEXT} --insecure-skip-tls-verify=true \
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × is running the minimum Kubernetes API version
     Kubernetes is on version [1.7.16], but version [1.13.0] or more recent is required
 ```
@@ -172,7 +172,7 @@ kubectl version
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × is running the minimum kubectl version
     kubectl is on version [1.9.1], but version [1.13.0] or more recent is required
     see https://linkerd.io/2/checks/#kubectl-version for hints
@@ -198,7 +198,7 @@ resources have been installed.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane Namespace exists
     The "foo" namespace does not exist
     see https://linkerd.io/2/checks/#l5d-existence-ns for hints
@@ -221,7 +221,7 @@ linkerd check --linkerd-namespace linkerdtest
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane ClusterRoles exist
     missing ClusterRoles: linkerd-linkerd-identity
     see https://linkerd.io/2/checks/#l5d-existence-cr for hints
@@ -229,26 +229,34 @@ Example failure:
 
 Ensure the Linkerd ClusterRoles exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterroles | grep linkerd
-linkerd-linkerd-destination                                            9d
-linkerd-linkerd-identity                                               9d
-linkerd-linkerd-proxy-injector                                         9d
-linkerd-policy                                                         9d
+linkerd-linkerd-destination       9d
+linkerd-linkerd-identity          9d
+linkerd-linkerd-proxy-injector    9d
+linkerd-policy                    9d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterroles
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ control plane ClusterRoleBindings exist {#l5d-existence-crb}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane ClusterRoleBindings exist
     missing ClusterRoleBindings: linkerd-linkerd-identity
     see https://linkerd.io/2/checks/#l5d-existence-crb for hints
@@ -256,32 +264,42 @@ Example failure:
 
 Ensure the Linkerd ClusterRoleBindings exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebindings | grep linkerd
-linkerd-linkerd-destination                            9d
-linkerd-linkerd-identity                               9d
-linkerd-linkerd-proxy-injector                         9d
-linkerd-destination-policy                             9d
+linkerd-linkerd-destination       9d
+linkerd-linkerd-identity          9d
+linkerd-linkerd-proxy-injector    9d
+linkerd-destination-policy        9d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ control plane ServiceAccounts exist {#l5d-existence-sa}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane ServiceAccounts exist
     missing ServiceAccounts: linkerd-identity
     see https://linkerd.io/2/checks/#l5d-existence-sa for hints
 ```
 
 Ensure the Linkerd ServiceAccounts exist:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n linkerd get serviceaccounts
@@ -293,19 +311,25 @@ linkerd-identity         1         14m
 linkerd-proxy-injector   1         14m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts in the Linkerd
 namespace:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n linkerd auth can-i create serviceaccounts
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ control plane CustomResourceDefinitions exist {#l5d-existence-crd}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane CustomResourceDefinitions exist
     missing CustomResourceDefinitions: serviceprofiles.linkerd.io
     see https://linkerd.io/2/checks/#l5d-existence-crd for hints
@@ -313,24 +337,32 @@ Example failure:
 
 Ensure the Linkerd CRD exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get customresourcedefinitions
 NAME                         CREATED AT
 serviceprofiles.linkerd.io   2019-04-25T21:47:31Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create CRDs:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create customresourcedefinitions
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ control plane MutatingWebhookConfigurations exist {#l5d-existence-mwc}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane MutatingWebhookConfigurations exist
     missing MutatingWebhookConfigurations: linkerd-proxy-injector-webhook-config
     see https://linkerd.io/2/checks/#l5d-existence-mwc for hints
@@ -338,23 +370,31 @@ Example failure:
 
 Ensure the Linkerd MutatingWebhookConfigurations exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get mutatingwebhookconfigurations | grep linkerd
 linkerd-proxy-injector-webhook-config   2019-07-01T13:13:26Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create MutatingWebhookConfigurations:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create mutatingwebhookconfigurations
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ control plane ValidatingWebhookConfigurations exist {#l5d-existence-vwc}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane ValidatingWebhookConfigurations exist
     missing ValidatingWebhookConfigurations: linkerd-sp-validator-webhook-config
     see https://linkerd.io/2/checks/#l5d-existence-vwc for hints
@@ -362,23 +402,31 @@ Example failure:
 
 Ensure the Linkerd ValidatingWebhookConfiguration exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get validatingwebhookconfigurations | grep linkerd
 linkerd-sp-validator-webhook-config   2019-07-01T13:13:26Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ValidatingWebhookConfigurations:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create validatingwebhookconfigurations
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ proxy-init container runs as root if docker container runtime is used {#l5d-proxy-init-run-as-root}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × proxy-init container runs as root user if docker container runtime is used
     there are nodes using the docker container runtime and proxy-init container must run as root user.
 try installing linkerd via --set proxyInit.runAsRoot=true
@@ -393,7 +441,7 @@ Newer distributions of managed k8s use containerd where this is not an issue.
 
 Without root in the init container you might get errors such as:
 
-```bash
+```text {class=disable-copy}
 time="2021-11-15T04:41:31Z" level=info msg="iptables-save -t nat"
 Error: exit status 1
 time="2021-11-15T04:41:31Z" level=info msg="iptables-save v1.8.7 (legacy): Cannot initialize: Permission denied (you must be root)\n\n"
@@ -409,7 +457,7 @@ further details.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × 'linkerd-config' config map exists
     missing ConfigMaps: linkerd-config
     see https://linkerd.io/2/checks/#l5d-existence-linkerd-config for hints
@@ -417,18 +465,26 @@ Example failure:
 
 Ensure the Linkerd ConfigMap exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n linkerd get configmap/linkerd-config
 NAME             DATA   AGE
 linkerd-config   3      61m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ConfigMaps:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n linkerd auth can-i create configmap
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ control plane replica sets are ready {#l5d-existence-replicasets}
 
@@ -441,7 +497,7 @@ For more information, see the Kubernetes documentation on
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × no unschedulable pods
     linkerd-prometheus-6b668f774d-j8ncr: 0/1 nodes are available: 1 Insufficient cpu.
     see https://linkerd.io/2/checks/#l5d-existence-unschedulable-pods for hints
@@ -456,13 +512,13 @@ For more information, see the Kubernetes documentation on the
 
 Example failures:
 
-```bash
+```text {class=disable-copy}
 × certificate config is valid
     key ca.crt containing the trust anchors needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=true
     see https://linkerd.io/2/checks/#l5d-identity-cert-config-valid
 ```
 
-```bash
+```text {class=disable-copy}
 × certificate config is valid
     key crt.pem containing the issuer certificate needs to exist in secret linkerd-identity-issuer if --identity-external-issuer=false
     see https://linkerd.io/2/checks/#l5d-identity-cert-config-valid
@@ -478,7 +534,7 @@ keys are `crt.pem` and `key.pem`.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × trust roots are using supported crypto algorithm
     Invalid roots:
         * 165223702412626077778653586125774349756 identity.linkerd.cluster.local must use P-256 curve for public key, instead P-521 was used
@@ -492,7 +548,7 @@ algorithm.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × trust roots are within their validity period
     Invalid roots:
         * 199607941798581518463476688845828639279 identity.linkerd.cluster.local not valid anymore. Expired on 2019-12-19T13:08:18Z
@@ -509,7 +565,7 @@ cluster back to a stable state.
 
 Example warnings:
 
-```bash
+```text {class=disable-copy}
 ‼ trust roots are valid for at least 60 days
     Roots expiring soon:
         * 66509928892441932260491975092256847205 identity.linkerd.cluster.local will expire on 2019-12-19T13:30:57Z
@@ -525,7 +581,7 @@ process outlined in
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × issuer cert is using supported crypto algorithm
     issuer certificate must use P-256 curve for public key, instead P-521 was used
     see https://linkerd.io/2/checks/#5d-identity-issuer-cert-uses-supported-crypto for hints
@@ -540,7 +596,7 @@ to see how you can generate certificates that will work with Linkerd.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × issuer cert is within its validity period
     issuer certificate is not valid anymore. Expired on 2019-12-19T13:35:49Z
     see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-is-time-valid
@@ -554,7 +610,7 @@ bring your cluster back to a valid state, follow the process outlined in
 
 Example warning:
 
-```bash
+```text {class=disable-copy}
 ‼ issuer cert is valid for at least 60 days
     issuer certificate will expire on 2019-12-19T13:35:49Z
     see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-not-expiring-soon for hints
@@ -569,7 +625,7 @@ follow the process outlined in
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × issuer cert is issued by the trust root
     x509: certificate signed by unknown authority (possibly because of "x509: ECDSA verification failure" while trying to verify candidate authority certificate "identity.linkerd.cluster.local")
     see https://linkerd.io/2/checks/#l5d-identity-issuer-cert-issued-by-trust-anchor for hints
@@ -594,7 +650,7 @@ linkerd upgrade \
 Once the upgrade process is over, the output of `linkerd check --proxy` should
 be:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -617,7 +673,7 @@ linkerd-identity-data-plane
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × proxy-injector webhook has valid cert
     secrets "linkerd-proxy-injector-tls" not found
     see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-valid for hints
@@ -628,7 +684,7 @@ appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
 secret is named `linkerd-proxy-injector-tls` and it should contain the `crt.pem`
 and `key.pem` data entries.
 
-```bash
+```text {class=disable-copy}
 × proxy-injector webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-proxy-injector.linkerd.svc
     see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-valid for hints
@@ -641,7 +697,7 @@ Here you need to make sure the certificate was issued specifically for
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ proxy-injector cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
     see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
@@ -656,7 +712,7 @@ can follow the process outlined in
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × sp-validator webhook has valid cert
     secrets "linkerd-sp-validator-tls" not found
     see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-valid for hints
@@ -667,7 +723,7 @@ appropriate `tls.crt` and `tls.key` data entries. For versions before 2.9, the
 secret is named `linkerd-sp-validator-tls` and it should contain the `crt.pem`
 and `key.pem` data entries.
 
-```bash
+```text {class=disable-copy}
 × sp-validator webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-sp-validator.linkerd.svc
     see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-valid for hints
@@ -680,7 +736,7 @@ Here you need to make sure the certificate was issued specifically for
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ sp-validator cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
     see https://linkerd.io/2/checks/#l5d-sp-validator-webhook-cert-not-expiring-soon for hints
@@ -695,7 +751,7 @@ can follow the process outlined in
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × policy-validator webhook has valid cert
     secrets "linkerd-policy-validator-tls" not found
     see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-valid for hints
@@ -704,7 +760,7 @@ Example failure:
 Ensure that the `linkerd-policy-validator-k8s-tls` secret exists and contains
 the appropriate `tls.crt` and `tls.key` data entries.
 
-```bash
+```text {class=disable-copy}
 × policy-validator webhook has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not linkerd-policy-validator.linkerd.svc
     see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-valid for hints
@@ -717,7 +773,7 @@ Here you need to make sure the certificate was issued specifically for
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ policy-validator cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
     see https://linkerd.io/2/checks/#l5d-policy-validator-webhook-cert-not-expiring-soon for hints
@@ -734,13 +790,13 @@ can follow the process outlined in
 
 Example warning:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane proxies certificate match CA
     Some pods do not have the current trust bundle and must be restarted:
         * emojivoto/emoji-d8d7d9c6b-8qwfx
         * emojivoto/vote-bot-588499c9f6-zpwz6
         * emojivoto/voting-8599548fdc-6v64k
-    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 Observing this warning indicates that some of your meshed pods have proxies that
@@ -753,13 +809,13 @@ the Linkerd components are restarted. While this operation is in progress the
 `check --proxy` command may output a warning, pertaining to the Linkerd
 components:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane proxies certificate match CA
     Some pods do not have the current trust bundle and must be restarted:
         * linkerd/linkerd-sp-validator-75f9d96dc-rch4x
         * linkerd-viz/tap-68d8bbf64-mpzgb
         * linkerd-viz/web-849f74b7c6-qlhwc
-    see https://linkerd.io/2/checks/{#l5d-identity-data-plane-proxies-certs-match-ca for hints
+    see https://linkerd.io/2/checks/#l5d-identity-data-plane-proxies-certs-match-ca for hints
 ```
 
 If that is the case, simply wait for the `upgrade` operation to complete. The
@@ -772,12 +828,14 @@ correct certificates.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × control plane pods are ready
     No running pods for "linkerd-sp-validator"
 ```
 
 Verify the state of the control plane pods with:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n linkerd get po
@@ -787,11 +845,13 @@ linkerd-identity-54df78c479-hbh5m         2/2     Running   0          12m
 linkerd-proxy-injector-67f8cf65f7-4tvt5   2/2     Running   1          12m
 ```
 
+{{< /command-output >}}
+
 ### √ cluster networks can be verified {#l5d-cluster-networks-verified}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ cluster networks can be verified
     the following nodes do not expose a podCIDR:
         node-0
@@ -813,7 +873,7 @@ distribution being used.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × cluster networks contains all node podCIDRs
     node has podCIDR(s) [10.244.0.0/24] which are not contained in the Linkerd clusterNetworks.
     Try installing linkerd via --set clusterNetworks=10.244.0.0/24
@@ -830,12 +890,12 @@ this network may not be meshed properly. To remedy this, update the
 
 Example failures:
 
-```bash
+```text {class=disable-copy}
 × the Linkerd clusterNetworks [10.244.0.0/24] do not include pod default/foo (104.21.63.202)
     see https://linkerd.io/2/checks/#l5d-cluster-networks-pods for hints
 ```
 
-```bash
+```text {class=disable-copy}
 × the Linkerd clusterNetworks [10.244.0.0/24] do not include svc default/bar (10.96.217.194)
     see https://linkerd.io/2/checks/#l5d-cluster-networks-pods for hints
 ```
@@ -853,7 +913,7 @@ networks in the cluster.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × can determine the latest version
     Get https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli: context deadline exceeded
 ```
@@ -861,10 +921,14 @@ Example failure:
 Ensure you can connect to the Linkerd version check endpoint from the
 environment the `linkerd` cli is running:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ curl "https://versioncheck.linkerd.io/version.json?version=edge-19.1.2&uuid=test-uuid&source=cli"
 {"stable":"stable-2.1.0","edge":"edge-19.1.2"}
 ```
+
+{{< /command-output >}}
 
 ### √ cli is up-to-date {#l5d-version-cli}
 
@@ -872,7 +936,7 @@ Example failures:
 
 #### unsupported version channel
 
-```bash
+```text {class=disable-copy}
 ‼ cli is up-to-date
     unsupported version channel: stable-2.14.10
 ```
@@ -883,7 +947,7 @@ As of February 2024, the Linkerd project itself only produces
 
 #### is running version X but the latest version is Y
 
-```bash
+```text {class=disable-copy}
 ‼ cli is up-to-date
     is running version 19.1.1 but the latest edge version is 19.1.2
 ```
@@ -899,7 +963,7 @@ Example failures:
 
 #### unsupported version channel
 
-```bash
+```text {class=disable-copy}
 ‼ control plane is up-to-date
     unsupported version channel: stable-2.14.10
 ```
@@ -910,7 +974,7 @@ As of February 2024, the Linkerd project itself only produces
 
 #### is running version X but the latest version is Y
 
-```bash
+```text {class=disable-copy}
 ‼ control plane is up-to-date
     is running version 19.1.1 but the latest edge version is 19.1.2
 ```
@@ -922,7 +986,7 @@ There is a newer version of the control plane. See the page on
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ control plane and cli versions match
     mismatched channels: running stable-2.1.0 but retrieved edge-19.1.2
 ```
@@ -961,8 +1025,10 @@ normally.
 Example failure:
 
 ```bash
-$ linkerd check --proxy --namespace foo
-...
+linkerd check --proxy --namespace foo
+```
+
+```text {class=disable-copy}
 × data plane namespace exists
     The "foo" namespace does not exist
 ```
@@ -974,7 +1040,7 @@ namespaces.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × data plane proxies are ready
     No "linkerd-proxy" containers found
 ```
@@ -990,7 +1056,7 @@ in our [Getting Started](../getting-started/) guide.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane is up-to-date
     linkerd/linkerd-prometheus-74d66f86f6-6t6dh: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
@@ -999,7 +1065,7 @@ See the page on [Upgrading Linkerd](upgrade/).
 
 ### √ data plane and cli versions match {#l5d-data-plane-cli-version}
 
-```bash
+```text {class=disable-copy}
 ‼ data plane and cli versions match
     linkerd/linkerd-identity-5f6c45d6d9-9hd9j: is running version 19.1.2 but the latest edge version is 19.1.3
 ```
@@ -1010,7 +1076,7 @@ See the page on [Upgrading Linkerd](upgrade/).
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane pod labels are configured correctly
     Some labels on data plane pods should be annotations:
     * emojivoto/voting-ff4c54b8d-tv9pp
@@ -1024,7 +1090,7 @@ be annotations in order to take effect.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane service labels and annotations are configured correctly
     Some labels on data plane services should be annotations:
     * emojivoto/emoji-svc
@@ -1038,7 +1104,7 @@ order to take effect.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ data plane service annotations are configured correctly
     Some annotations on data plane services should be labels:
     * emojivoto/emoji-svc
@@ -1051,7 +1117,7 @@ Example failure:
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × opaque ports are properly annotated
         * service emoji-svc targets the opaque port 8080 through 8080; add 8080 to its config.linkerd.io/opaque-ports annotation
     see https://linkerd.io/2/checks/#linkerd-opaque-ports-definition for hints
@@ -1075,7 +1141,7 @@ These checks are ran if Linkerd has been installed in HA mode.
 
 Example warning:
 
-```bash
+```text {class=disable-copy}
 ‼ multiple replicas of control plane pods
     not enough replicas available for [linkerd-identity]
     see https://linkerd.io/2/checks/#l5d-control-plane-replicas for hints
@@ -1107,7 +1173,7 @@ extension binaries implement it. For more information, See
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 invalid extension check output from \"viz\" (JSON object expected)
 ```
 
@@ -1117,7 +1183,7 @@ returns the healthchecks in the
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × Linkerd command viz exists
 ```
 
@@ -1138,7 +1204,7 @@ resources are in place. If any of them are missing, you can use
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × cni plugin ConfigMap exists
     configmaps "linkerd-cni-config" not found
     see https://linkerd.io/2/checks/#cni-plugin-cm-exists for hints
@@ -1146,24 +1212,32 @@ Example error:
 
 Ensure that the linkerd-cni-config ConfigMap exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get cm linkerd-cni-config -n linkerd-cni
 NAME                      PRIV    CAPS   SELINUX    RUNASUSER   FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
 linkerd-linkerd-cni-cni   false          RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            hostPath,secret
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ConfigMaps:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ConfigMaps
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ cni plugin ClusterRole exist {#cni-plugin-cr-exists}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × cni plugin ClusterRole exists
     missing ClusterRole: linkerd-cni
     see https://linkerd.io/2/checks/#cni-plugin-cr-exists for hints
@@ -1171,24 +1245,32 @@ Example error:
 
 Ensure that the cluster role exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrole linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoles
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ cni plugin ClusterRoleBinding exist {#cni-plugin-crb-exists}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × cni plugin ClusterRoleBinding exists
     missing ClusterRoleBinding: linkerd-cni
     see https://linkerd.io/2/checks/#cni-plugin-crb-exists for hints
@@ -1196,24 +1278,32 @@ Example error:
 
 Ensure that the cluster role binding exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebinding linkerd-cni
 NAME          AGE
 linkerd-cni   54m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ cni plugin ServiceAccount exists {#cni-plugin-sa-exists}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × cni plugin ServiceAccount exists
     missing ServiceAccount: linkerd-cni
     see https://linkerd.io/2/checks/#cni-plugin-sa-exists for hints
@@ -1221,24 +1311,32 @@ Example error:
 
 Ensure that the CNI service account exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get ServiceAccount linkerd-cni -n linkerd-cni
 NAME          SECRETS   AGE
 linkerd-cni   1         45m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccount:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ServiceAccounts -n linkerd-cni
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ cni plugin DaemonSet exists {#cni-plugin-ds-exists}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × cni plugin DaemonSet exists
     missing DaemonSet: linkerd-cni
     see https://linkerd.io/2/checks/#cni-plugin-ds-exists for hints
@@ -1246,30 +1344,40 @@ Example error:
 
 Ensure that the CNI daemonset exists in the CNI namespace:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get ds -n linkerd-cni
 NAME          DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 linkerd-cni   1         1         1       1            1           beta.kubernetes.io/os=linux   14m
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create DaemonSets:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create DaemonSets -n linkerd-cni
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ cni plugin pod is running on all nodes {#cni-plugin-ready}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ cni plugin pod is running on all nodes
     number ready: 2, number scheduled: 3
     see https://linkerd.io/2/checks/#cni-plugin-ready
 ```
 
 Ensure that all the CNI pods are running:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl get po -n linkerd-cni
@@ -1279,7 +1387,11 @@ linkerd-cni-mf564   1/1     Running   0          9m22s
 linkerd-cni-p5670   1/1     Running   0          9m25s
 ```
 
+{{< /command-output >}}
+
 Ensure that all pods have finished the deployment of the CNI config and binary:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl logs linkerd-cni-rzp2q -n linkerd-cni
@@ -1287,6 +1399,8 @@ Wrote linkerd CNI binaries to /host/opt/cni/bin
 Created CNI config /host/etc/cni/net.d/10-kindnet.conflist
 Done configuring CNI. Sleep=true
 ```
+
+{{< /command-output >}}
 
 ## The "linkerd-multicluster checks {#l5d-multicluster}
 
@@ -1300,7 +1414,7 @@ possible between paired clusters.
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × Link CRD exists
     multicluster.linkerd.io/Link CRD is missing
     see https://linkerd.io/2/checks/#l5d-multicluster-link-crd-exists for hints
@@ -1309,17 +1423,21 @@ Example error:
 Make sure multicluster extension is correctly installed and that the
 `links.multicluster.linkerd.io` CRD is present.
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get crds | grep multicluster
 NAME                              CREATED AT
 links.multicluster.linkerd.io     2021-03-10T09:58:10Z
 ```
 
+{{< /command-output >}}
+
 ### √ Link resources are valid {#l5d-multicluster-links-are-valid}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × Link resources are valid
     failed to parse Link east
     see https://linkerd.io/2/checks/#l5d-multicluster-links-are-valid for hints
@@ -1342,7 +1460,7 @@ to do this.
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × remote cluster access credentials are valid
     * secret [east/east-config]: could not find east-config secret
     see https://linkerd.io/2/checks/#l5d-smc-target-clusters-access for hints
@@ -1355,7 +1473,7 @@ target cluster is present as a secret correctly
 
 Example errors:
 
-```bash
+```text {class=disable-copy}
 × clusters share trust anchors
     Problematic clusters:
         * remote
@@ -1366,7 +1484,7 @@ The error above indicates that your trust anchors are not compatible. In order
 to fix that you need to ensure that both your anchors contain identical sets of
 certificates.
 
-```bash
+```text {class=disable-copy}
 × clusters share trust anchors
     Problematic clusters:
         * remote: cannot parse trust anchors
@@ -1386,7 +1504,7 @@ linkerd --context=remote check
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × service mirror controller has required permissions
     missing Service mirror ClusterRole linkerd-service-mirror-access-local-resources: unexpected verbs expected create,delete,get,list,update,watch, got create,delete,get,update,watch
     see https://linkerd.io/2/checks/#l5d-multicluster-source-rbac-correct for hints
@@ -1398,6 +1516,8 @@ verbs and resources you can inspect your ClusterRole and Role object and look at
 the rules section.
 
 Expected rules for `linkerd-service-mirror-access-local-resources` cluster role:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl  --context=local get clusterrole linkerd-service-mirror-access-local-resources -o yaml
@@ -1430,7 +1550,11 @@ rules:
   - watch
 ```
 
+{{< /command-output >}}
+
 Expected rules for `linkerd-service-mirror-read-remote-creds` role:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl  --context=local get role linkerd-service-mirror-read-remote-creds -n linkerd-multicluster  -o yaml
@@ -1451,11 +1575,13 @@ metadata:
   - watch
 ```
 
+{{< /command-output >}}
+
 ### √ service mirror controllers are running {#l5d-multicluster-service-mirror-running}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 × service mirror controllers are running
     Service mirror controller is not present
     see https://linkerd.io/2/checks/#l5d-multicluster-service-mirror-running for hints
@@ -1465,17 +1591,21 @@ Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the controller pod with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl --all-namespaces get po --selector linkerd.io/control-plane-component=linkerd-service-mirror
-NAME                                  READY     STATUS    RESTARTS   AGE
+NAME                                      READY     STATUS    RESTARTS   AGE
 linkerd-service-mirror-7bb8ff5967-zg265   2/2       Running   0          50m
 ```
+
+{{< /command-output >}}
 
 ### √ extension is managing controllers {#l5d-multicluster-managed-controllers}
 
 Example error:
 
-```bash
+```text {class=disable-copy}
 ‼ extension is managing controllers
             * using legacy service mirror controller for Link: target
     see https://linkerd.io/2/checks/#l5d-multicluster-managed-controllers for hints
@@ -1503,7 +1633,7 @@ grab the Lease object allowing them to take over service mirroring.
 
 Example errors:
 
-```bash
+```text {class=disable-copy}
 ‼ all gateway mirrors are healthy
     Some gateway mirrors do not have endpoints:
   linkerd-gateway-gke.linkerd-multicluster mirrored from cluster [gke]
@@ -1523,7 +1653,7 @@ service in target cluster.
 
 Example errors:
 
-```bash
+```text {class=disable-copy}
 ‼ all mirror services have endpoints
     Some mirror services do not have endpoints:
   voting-svc-gke.emojivoto mirrored from cluster [gke] (gateway: [linkerd-multicluster/linkerd-gateway])
@@ -1544,7 +1674,7 @@ cluster.
 
 Example errors:
 
-```bash
+```text {class=disable-copy}
 ‼  all mirror services are part of a Link
     mirror service voting-east.emojivoto is not part of any Link
     see https://linkerd.io/2/checks/#l5d-multicluster-orphaned-services for hints
@@ -1603,7 +1733,7 @@ for a full list of configurable fields.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × linkerd-viz ClusterRoles exist
     missing ClusterRoles: linkerd-linkerd-viz-metrics-api
     see https://linkerd.io/2/checks/#l5d-viz-cr-exists for hints
@@ -1611,27 +1741,35 @@ Example failure:
 
 Ensure the linkerd-viz extension ClusterRoles exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterroles | grep linkerd-viz
-linkerd-linkerd-viz-metrics-api                                        2021-01-26T18:02:17Z
-linkerd-linkerd-viz-prometheus                                         2021-01-26T18:02:17Z
-linkerd-linkerd-viz-tap                                                2021-01-26T18:02:17Z
-linkerd-linkerd-viz-tap-admin                                          2021-01-26T18:02:17Z
-linkerd-linkerd-viz-web-check                                          2021-01-26T18:02:18Z
+linkerd-linkerd-viz-metrics-api    2021-01-26T18:02:17Z
+linkerd-linkerd-viz-prometheus     2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap            2021-01-26T18:02:17Z
+linkerd-linkerd-viz-tap-admin      2021-01-26T18:02:17Z
+linkerd-linkerd-viz-web-check      2021-01-26T18:02:18Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterroles
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ linkerd-viz ClusterRoleBindings exist {#l5d-viz-crb-exists}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × linkerd-viz ClusterRoleBindings exist
     missing ClusterRoleBindings: linkerd-linkerd-viz-metrics-api
     see https://linkerd.io/2/checks/#l5d-viz-crb-exists for hints
@@ -1639,22 +1777,30 @@ Example failure:
 
 Ensure the linkerd-viz extension ClusterRoleBindings exist:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebindings | grep linkerd-viz
-linkerd-linkerd-viz-metrics-api                        ClusterRole/linkerd-linkerd-viz-metrics-api                                        18h
-linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                                         18h
-linkerd-linkerd-viz-tap                                ClusterRole/linkerd-linkerd-viz-tap                                                18h
-linkerd-linkerd-viz-tap-auth-delegator                 ClusterRole/system:auth-delegator                                                  18h
-linkerd-linkerd-viz-web-admin                          ClusterRole/linkerd-linkerd-viz-tap-admin                                          18h
-linkerd-linkerd-viz-web-check                          ClusterRole/linkerd-linkerd-viz-web-check                                          18h
+linkerd-linkerd-viz-metrics-api           ClusterRole/linkerd-linkerd-viz-metrics-api    18h
+linkerd-linkerd-viz-prometheus            ClusterRole/linkerd-linkerd-viz-prometheus     18h
+linkerd-linkerd-viz-tap                   ClusterRole/linkerd-linkerd-viz-tap            18h
+linkerd-linkerd-viz-tap-auth-delegator    ClusterRole/system:auth-delegator              18h
+linkerd-linkerd-viz-web-admin             ClusterRole/linkerd-linkerd-viz-tap-admin      18h
+linkerd-linkerd-viz-web-check             ClusterRole/linkerd-linkerd-viz-web-check      18h
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create clusterrolebindings
 yes
 ```
+
+{{< /command-output >}}
 
 ### √ viz extension proxies are healthy {#l5d-viz-proxy-healthy}
 
@@ -1677,7 +1823,7 @@ sync by updating either the CLI or linkerd-viz as necessary.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × tap API server has valid cert
     secrets "tap-k8s-tls" not found
     see https://linkerd.io/2/checks/#l5d-tap-cert-valid for hints
@@ -1688,7 +1834,7 @@ Ensure that the `tap-k8s-tls` secret exists and contains the appropriate
 named `linkerd-tap-tls` and it should contain the `crt.pem` and `key.pem` data
 entries.
 
-```bash
+```text {class=disable-copy}
 × tap API server has valid cert
     cert is not issued by the trust anchor: x509: certificate is valid for xxxxxx, not tap.linkerd-viz.svc
     see https://linkerd.io/2/checks/#l5d-tap-cert-valid for hints
@@ -1701,7 +1847,7 @@ Here you need to make sure the certificate was issued specifically for
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 ‼ tap API server cert is valid for at least 60 days
     certificate will expire on 2020-11-07T17:00:07Z
     see https://linkerd.io/2/checks/#l5d-webhook-cert-not-expiring-soon for hints
@@ -1716,7 +1862,7 @@ can follow the process outlined in
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × FailedDiscoveryCheck: no response from https://10.233.31.133:443: Get https://10.233.31.133:443: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
 ```
 
@@ -1732,13 +1878,15 @@ requirements in the cluster:
 
 ### √ linkerd-viz pods are injected {#l5d-viz-pods-injection}
 
-```bash
+```text {class=disable-copy}
 × linkerd-viz extension pods are injected
     could not find proxy container for tap-59f5595fc7-ttndp pod
     see https://linkerd.io/2/checks/#l5d-viz-pods-injection for hints
 ```
 
 Ensure all the linkerd-viz pods are injected
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n linkerd-viz get pods
@@ -1748,21 +1896,25 @@ metrics-api-77f684f7c7-hnw8r   2/2     Running   2          18h
 prometheus-5f6898ff8b-s6rjc    2/2     Running   2          18h
 tap-59f5595fc7-ttndp           2/2     Running   2          18h
 web-78d6588d4-pn299            2/2     Running   2          18h
-tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
+tap-injector-566f7ff8df-vpcwc  2/2     Running   2          18h
 ```
+
+{{< /command-output >}}
 
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
 
 ### √ viz extension pods are running {#l5d-viz-pods-running}
 
-```bash
+```text {class=disable-copy}
 × viz extension pods are running
     container linkerd-proxy in pod tap-59f5595fc7-ttndp is not ready
     see https://linkerd.io/2/checks/#l5d-viz-pods-running for hints
 ```
 
 Ensure all the linkerd-viz pods are running with 2/2
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n linkerd-viz get pods
@@ -1775,12 +1927,14 @@ web-78d6588d4-pn299                    2/2     Running   2          18h
 tap-injector-566f7ff8df-vpcwc          2/2     Running   2          18h
 ```
 
+{{< /command-output >}}
+
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`
 
 ### √ prometheus is installed and configured correctly {#l5d-viz-prometheus}
 
-```bash
+```text {class=disable-copy}
 × prometheus is installed and configured correctly
     missing ClusterRoles: linkerd-linkerd-viz-prometheus
     see https://linkerd.io/2/checks/#l5d-viz-cr-exists for hints
@@ -1788,29 +1942,49 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Ensure all the prometheus related resources are present and running correctly.
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
-❯ kubectl -n linkerd-viz get deploy,cm | grep prometheus
-deployment.apps/prometheus     1/1     1            1           3m18s
-configmap/prometheus-config   1      3m18s
-❯ kubectl get clusterRoleBindings | grep prometheus
-linkerd-linkerd-viz-prometheus                         ClusterRole/linkerd-linkerd-viz-prometheus                         3m37s
-❯ kubectl get clusterRoles | grep prometheus
-linkerd-linkerd-viz-prometheus                                         2021-02-26T06:03:11Zh
+$ kubectl -n linkerd-viz get deploy,cm | grep prometheus
+deployment.apps/prometheus    1/1    1    1    3m18s
+configmap/prometheus-config   1    3m18s
 ```
+
+{{< /command-output >}}
+
+{{< command-output "You should see something similar to:" >}}
+
+```bash
+$ kubectl get clusterRoleBindings | grep prometheus
+linkerd-linkerd-viz-prometheus    ClusterRole/linkerd-linkerd-viz-prometheus    3m37s
+```
+
+{{< /command-output >}}
+
+{{< command-output "You should see something similar to:" >}}
+
+```bash
+$ kubectl get clusterRoles | grep prometheus
+linkerd-linkerd-viz-prometheus    2021-02-26T06:03:11Zh
+```
+
+{{< /command-output >}}
 
 ### √ can initialize the client {#l5d-viz-existence-client}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × can initialize the client
     Failed to get deploy for pod metrics-api-77f684f7c7-hnw8r: not running
 ```
 
 Verify that the metrics API pod is running correctly
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
-❯ kubectl -n linkerd-viz get pods
+$ kubectl -n linkerd-viz get pods
 NAME                           READY   STATUS    RESTARTS   AGE
 metrics-api-7bb8cb8489-cbq4m   2/2     Running   0          4m58s
 tap-injector-6b9bc6fc4-cgbr4   2/2     Running   0          4m56s
@@ -1820,11 +1994,13 @@ grafana-76fd8765f4-9rg8q       2/2     Running   0          4m58s
 prometheus-7c5c48c466-jc27g    2/2     Running   0          4m58s
 ```
 
+{{< /command-output >}}
+
 ### √ viz extension self-check {#l5d-viz-metrics-api}
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × viz extension self-check
     No results returned
 ```
@@ -1839,8 +2015,7 @@ kubectl -n linkerd-viz logs deploy/metrics-api metrics-api
 
 Example failure:
 
-```bash
-
+```text {class=disable-copy}
 ‼ prometheus is authorized to scrape data plane pods
     prometheus may not be authorized to scrape the following pods:
         * emojivoto/voting-5f46cbcdc6-p5dhn
@@ -1876,7 +2051,7 @@ be safely disregarded.
 
 Example failure:
 
-```bash
+```text {class=disable-copy}
 × data plane proxy metrics are present in Prometheus
     Data plane metrics not found for linkerd/linkerd-identity-b8c4c48c8-pflc9.
 ```
@@ -1906,7 +2081,7 @@ comprises `linkerd-buoyant` CLI, the `buoyant-cloud-agent` Deployment, and the
 
 ### √ Linkerd extension command linkerd-buoyant exists
 
-```bash
+```text {class=disable-copy}
 ‼ Linkerd extension command linkerd-buoyant exists
     exec: "linkerd-buoyant": executable file not found in $PATH
     see https://linkerd.io/2/checks/#extensions for hints
@@ -1926,7 +2101,7 @@ curl https://buoyant.cloud/install | sh
 
 ### √ linkerd-buoyant can determine the latest version
 
-```bash
+```text {class=disable-copy}
 ‼ linkerd-buoyant can determine the latest version
     Get "https://buoyant.cloud/version.json": dial tcp: lookup buoyant.cloud: no such host
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -1935,14 +2110,18 @@ curl https://buoyant.cloud/install | sh
 Ensure you can connect to the Linkerd Buoyant version check endpoint from the
 environment the `linkerd` cli is running:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ curl https://buoyant.cloud/version.json
 {"linkerd-buoyant":"v0.4.4"}
 ```
 
+{{< /command-output >}}
+
 ### √ linkerd-buoyant cli is up-to-date
 
-```bash
+```text {class=disable-copy}
 ‼ linkerd-buoyant cli is up-to-date
     CLI version is v0.4.3 but the latest is v0.4.4
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -1956,7 +2135,7 @@ curl https://buoyant.cloud/install | sh
 
 ### √ buoyant-cloud Namespace exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud Namespace exists
     namespaces "buoyant-cloud" not found
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -1977,7 +2156,7 @@ linkerd-buoyant install | kubectl apply -f -
 
 ### √ buoyant-cloud Namespace has correct labels
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud Namespace has correct labels
     missing app.kubernetes.io/part-of label
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -1992,7 +2171,7 @@ linkerd-buoyant install | kubectl apply -f -
 
 ### √ buoyant-cloud-agent ClusterRole exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent ClusterRole exists
     missing ClusterRole: buoyant-cloud-agent
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2000,22 +2179,30 @@ linkerd-buoyant install | kubectl apply -f -
 
 Ensure that the cluster role exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrole buoyant-cloud-agent
 NAME                  CREATED AT
 buoyant-cloud-agent   2020-11-13T00:59:50Z
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoles:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoles
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ buoyant-cloud-agent ClusterRoleBinding exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent ClusterRoleBinding exists
     missing ClusterRoleBinding: buoyant-cloud-agent
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2023,22 +2210,30 @@ yes
 
 Ensure that the cluster role binding exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl get clusterrolebinding buoyant-cloud-agent
 NAME                  ROLE                              AGE
 buoyant-cloud-agent   ClusterRole/buoyant-cloud-agent   301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ClusterRoleBindings:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl auth can-i create ClusterRoleBindings
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ buoyant-cloud-agent ServiceAccount exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent ServiceAccount exists
     missing ServiceAccount: buoyant-cloud-agent
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2046,22 +2241,30 @@ yes
 
 Ensure that the service account exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get serviceaccount buoyant-cloud-agent
 NAME                  SECRETS   AGE
 buoyant-cloud-agent   1         301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud auth can-i create ServiceAccount
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ buoyant-cloud-id Secret exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-id Secret exists
     missing Secret: buoyant-cloud-id
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2069,22 +2272,30 @@ yes
 
 Ensure that the secret exists:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get secret buoyant-cloud-id
 NAME               TYPE     DATA   AGE
 buoyant-cloud-id   Opaque   4      301d
 ```
 
+{{< /command-output >}}
+
 Also ensure you have permission to create ServiceAccounts:
+
+{{< command-output "You should see:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud auth can-i create ServiceAccount
 yes
 ```
 
+{{< /command-output >}}
+
 ### √ buoyant-cloud-agent Deployment exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent Deployment exists
     deployments.apps "buoyant-cloud-agent" not found
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2105,7 +2316,7 @@ linkerd-buoyant install | kubectl apply -f -
 
 ### √ buoyant-cloud-agent Deployment is running
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent Deployment is running
     no running pods for buoyant-cloud-agent Deployment
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2115,11 +2326,15 @@ Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the `buoyant-cloud-agent` Deployment with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-agent
 NAME                                   READY   STATUS    RESTARTS   AGE
 buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          156m
 ```
+
+{{< /command-output >}}
 
 Check the agent's logs with:
 
@@ -2129,7 +2344,7 @@ kubectl logs -n buoyant-cloud buoyant-cloud-agent-6b8c6888d7-htr7d buoyant-cloud
 
 ### √ buoyant-cloud-agent Deployment is injected
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent Deployment is injected
     could not find proxy container for buoyant-cloud-agent-6b8c6888d7-htr7d pod
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2138,18 +2353,22 @@ kubectl logs -n buoyant-cloud buoyant-cloud-agent-6b8c6888d7-htr7d buoyant-cloud
 Ensure the `buoyant-cloud-agent` pod is injected, the `READY` column should show
 `2/2`:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-agent
 NAME                                   READY   STATUS    RESTARTS   AGE
 buoyant-cloud-agent-6b8c6888d7-htr7d   2/2     Running   0          161m
 ```
 
+{{< /command-output >}}
+
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`.
 
 ### √ buoyant-cloud-agent Deployment is up-to-date
 
-```bash
+```text {class=disable-copy}
 ‼ buoyant-cloud-agent Deployment is up-to-date
     incorrect app.kubernetes.io/version label: v0.4.3, expected: v0.4.4
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2157,11 +2376,15 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Check the version with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ linkerd-buoyant version
 CLI version:   v0.4.4
 Agent version: v0.4.4
 ```
+
+{{< /command-output >}}
 
 To update to the latest version:
 
@@ -2171,7 +2394,7 @@ linkerd-buoyant install | kubectl apply -f -
 
 ### √ buoyant-cloud-agent Deployment is running a single pod
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-agent Deployment is running a single pod
     expected 1 buoyant-cloud-agent pod, found 2
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2185,7 +2408,7 @@ kubectl get po -A --selector app=buoyant-cloud-agent
 
 ### √ buoyant-cloud-metrics DaemonSet exists
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-metrics DaemonSet exists
     deployments.apps "buoyant-cloud-metrics" not found
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2206,7 +2429,7 @@ linkerd-buoyant install | kubectl apply -f -
 
 ### √ buoyant-cloud-metrics DaemonSet is running
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-metrics DaemonSet is running
     no running pods for buoyant-cloud-metrics DaemonSet
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2215,6 +2438,8 @@ linkerd-buoyant install | kubectl apply -f -
 Note, it takes a little bit for pods to be scheduled, images to be pulled and
 everything to start up. If this is a permanent error, you'll want to validate
 the state of the `buoyant-cloud-metrics` DaemonSet with:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud get po --selector app=buoyant-cloud-metrics
@@ -2225,6 +2450,8 @@ buoyant-cloud-metrics-qtflh   2/2     Running   0          164m
 buoyant-cloud-metrics-wqs4k   2/2     Running   0          163m
 ```
 
+{{< /command-output >}}
+
 Check the agent's logs with:
 
 ```bash
@@ -2233,7 +2460,7 @@ kubectl logs -n buoyant-cloud buoyant-cloud-metrics-kt9mv buoyant-cloud-metrics
 
 ### √ buoyant-cloud-metrics DaemonSet is injected
 
-```bash
+```text {class=disable-copy}
 × buoyant-cloud-metrics DaemonSet is injected
     could not find proxy container for buoyant-cloud-agent-6b8c6888d7-htr7d pod
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2241,6 +2468,8 @@ kubectl logs -n buoyant-cloud buoyant-cloud-metrics-kt9mv buoyant-cloud-metrics
 
 Ensure the `buoyant-cloud-metrics` pods are injected, the `READY` column should
 show `2/2`:
+
+{{< command-output "You should see something similar to:" >}}
 
 ```bash
 $ kubectl -n buoyant-cloud get pods --selector app=buoyant-cloud-metrics
@@ -2251,12 +2480,14 @@ buoyant-cloud-metrics-qtflh   2/2     Running   0          166m
 buoyant-cloud-metrics-wqs4k   2/2     Running   0          166m
 ```
 
+{{< /command-output >}}
+
 Make sure that the `proxy-injector` is working correctly by running
 `linkerd check`.
 
 ### √ buoyant-cloud-metrics DaemonSet is up-to-date
 
-```bash
+```text {class=disable-copy}
 ‼ buoyant-cloud-metrics DaemonSet is up-to-date
     incorrect app.kubernetes.io/version label: v0.4.3, expected: v0.4.4
     see https://linkerd.io/checks#l5d-buoyant for hints
@@ -2264,10 +2495,14 @@ Make sure that the `proxy-injector` is working correctly by running
 
 Check the version with:
 
+{{< command-output "You should see something similar to:" >}}
+
 ```bash
 $ kubectl -n buoyant-cloud get daemonset/buoyant-cloud-metrics -o jsonpath='{.metadata.labels}'
 {"app.kubernetes.io/name":"metrics","app.kubernetes.io/part-of":"buoyant-cloud","app.kubernetes.io/version":"v0.4.4"}
 ```
+
+{{< /command-output >}}
 
 To update to the latest version:
 

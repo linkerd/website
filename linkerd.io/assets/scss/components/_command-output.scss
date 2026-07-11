@@ -1,0 +1,57 @@
+@use "../abstracts";
+
+// See: /layouts/shortcodes/command-output.html
+
+/*
+@markup
+<div class="command-output">
+  <div class="command-output__command">
+    <div class="highlight">
+      <pre>
+        <code>
+          <span>...
+        </code>
+      </pre>
+    </div>
+  </div>
+  <div class="command-output__label">
+    Label
+  </div>
+  <div class="command-output__output">
+    <div class="highlight disable-copy">
+      <pre>
+        <code class="language-plaintext" data-lang="plaintext">
+          ...
+        </code>
+      </pre>
+    </div>
+  </div>
+</div>
+*/
+
+.command-output {
+  margin-bottom: abstracts.size(3);
+  background-color: abstracts.$highlight-background-color;
+  border-radius: abstracts.$border-radius;
+
+  .highlight {
+    margin-bottom: 0;
+  }
+  .command-output__command pre code > span::before {
+    content: "$ ";
+    color: abstracts.$highlight-comment-color;
+    user-select: none;
+  }
+  .command-output__label {
+    padding: abstracts.size(2) abstracts.size(3);
+    border-bottom: solid 2px rgba(abstracts.$highlight-comment-color, 0.4);
+    color: abstracts.$highlight-comment-color;
+    font-size: abstracts.$font-size-sm;
+  }
+  & > * {
+    border-bottom: solid 2px abstracts.$white;
+  }
+  & > :last-child {
+    border-bottom: none;
+  }
+}

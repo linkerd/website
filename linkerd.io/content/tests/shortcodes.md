@@ -7,6 +7,17 @@ title: Shortcodes
 
 <div class="container-lg" style="display:flex;flex-direction:column;gap:24px;padding:80px 0;">
 
+## command-output
+
+{{< command-output "You should see:" >}}
+
+```bash
+$ linkerd version --client
+Client version: edge-26.6.3
+```
+
+{{< /command-output >}}
+
 ## keyval
 
 {{< keyval >}}

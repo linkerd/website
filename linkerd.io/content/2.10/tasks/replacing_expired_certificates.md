@@ -16,7 +16,7 @@ is best to proceed with replacing the certificates with valid ones.
 It might be the case that your issuer certificate is expired. If this it true
 running `linkerd check --proxy` will produce output similar to:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -41,7 +41,7 @@ replace both your root and issuer certificates at the same time. If your root
 has expired `linkerd check` will indicate that by outputting an error similar
 to:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -74,7 +74,7 @@ Therefore we use the `--force` flag to ignore this error.
 If you run `linkerd check --proxy` you might see some warning, while the upgrade
 process is being performed:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid
@@ -106,7 +106,7 @@ Additionally you can use the `kubectl rollout restart` command to bring the
 configuration of your other injected resources up to date, and then the `check`
 command should stop producing warning or errors:
 
-```bash
+```text {class=disable-copy}
 linkerd-identity
 ----------------
 √ certificate config is valid

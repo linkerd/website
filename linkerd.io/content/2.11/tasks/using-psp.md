@@ -1,6 +1,6 @@
 ---
 title: Linkerd and Pod Security Policies (PSP)
-description: Using Linkerd with a pod security policies enabled.
+description: Using Linkerd with pod security policies enabled.
 ---
 
 The Linkerd control plane comes with its own minimally privileged

@@ -147,7 +147,7 @@ Although, rumors swirl about another KEP...
 {{< x user="La_Rainette" id="1591198130049257473" >}}
 
 Further reading:
-[What really happens at startup: Linkerd, init containers, the CNI, and more](/2022/12/01/what-really-happens-at-startup-linkerd-init-containers-the-cni-and-more/).
+[What really happens at startup: Linkerd, init containers, the CNI, and more](/2022/12/01/what-really-happens-at-startup-a-deep-dive-into-linkerd-init-containers-cni-plugins-and-more/).
 
 ## Non-surprise #2: Security continues to be a top driver of Linkerd adoption
 

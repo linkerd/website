@@ -18,7 +18,7 @@ prefer endpoints by basing decisions solely off the node's
 `topology.kubernetes.io/zone` label. If a client is in `zone-a`, then it should
 prefer endpoints marked for use by clients in `zone-a`. When the feature is
 enabled and the label set, Linkerd's destination controller will attempt to find
-endpoints whose `routing.ForZones` field matches the client's zone.
+endpoints whose `hints.forZones` field matches the client's zone.
 
 (Topology aware routing is distinct from the `trafficDistribution` feature that
 appears in Kubernetes 1.31. `trafficDistribution` is not yet supported by
