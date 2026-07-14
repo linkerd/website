@@ -15,7 +15,7 @@ part of [Linkerd's support for the Gateway API](../features/gateway-api/).
 
 The HTTPRoute resource is part of the Gateway API and is not Linkerd-specific.
 The canonical reference doc is the
-[Gateway API HTTPRoute documentation](https://gateway-api.sigs.k8s.io/api-types/httproute/).
+[Gateway API HTTPRoute documentation](https://gateway-api.sigs.k8s.io/reference/api-types/httproute/).
 This page is intended as a _supplement_ to that doc, and will detail how this
 type is used by Linkerd specifically.
 
