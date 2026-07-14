@@ -59,7 +59,7 @@ between [HTTPRoutes] and [ServiceProfiles]:
   header modifications for _requests_, and edge-23.7.3 added header
   modifications for _responses_).
 
-[HTTPRoutes]: https://gateway-api.sigs.k8s.io/api-types/httproute/
+[HTTPRoutes]: https://gateway-api.sigs.k8s.io/reference/api-types/httproute/
 [HTTPRoute standard]:
   https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1alpha2.HTTPRoute
 [ServiceProfiles]: /2.13/features/service-profiles/

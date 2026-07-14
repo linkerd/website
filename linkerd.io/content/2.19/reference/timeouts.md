@@ -37,7 +37,7 @@ annotations.
   regardless of its state.
 
 If the
-[request timeout](https://gateway-api.sigs.k8s.io/api-types/httproute/#timeouts-optional)
+[request timeout](https://gateway-api.sigs.k8s.io/reference/api-types/httproute/#timeouts-optional)
 field is set on an HTTPRoute resource, it will be used as the
 `timeout.linkerd.io/request` timeout. However, if both the field and the
 annotation are specified, the annotation will take priority.

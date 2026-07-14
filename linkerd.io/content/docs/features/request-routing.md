@@ -14,7 +14,7 @@ This is an example of _client-side policy_, i.e. ways to dynamically configure
 Linkerd's behavior when it is sending requests from a meshed pod.
 
 Dynamic request routing is built on Kubernetes's Gateway API types, especially
-[HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/).
+[HTTPRoute](https://gateway-api.sigs.k8s.io/reference/api-types/httproute/).
 
 This feature extends Linkerd's traffic routing capabilities beyond those of
 [traffic splits](traffic-split/), which only provide percentage-based splits.
