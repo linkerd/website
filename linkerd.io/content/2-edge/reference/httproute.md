@@ -172,7 +172,7 @@ headers.
 
 {{< /keyval >}}
 
-### httpQueryParamMatch
+### HTTPQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.

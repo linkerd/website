@@ -188,7 +188,7 @@ A reference to the [Servers] this `HTTPRoute` is a part of.
 
 {{< /keyval >}}
 
-#### httpRouteRule
+#### HTTPRouteRule
 
 `HTTPRouteRule` defines semantics for matching an HTTP request based on
 conditions (matches) and processing it (filters).
@@ -197,12 +197,12 @@ conditions (matches) and processing it (filters).
 
 | field     | value                                                                                                                                                |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `matches` | A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied. |
-| `filters` | A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.                                        |
+| `matches` | A list of [HTTPRouteMatch](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied. |
+| `filters` | A list of [HTTPRouteFilter](#httproutefilter) which will be applied to each request which matches this rule.                                        |
 
 {{< /keyval >}}
 
-#### httpRouteMatch
+#### HTTPRouteMatch
 
 `HTTPRouteMatch` defines the predicate used to match requests to a given action.
 Multiple match types are ANDed together, i.e. the match will evaluate to true
@@ -212,14 +212,14 @@ only if all conditions are satisfied.
 
 | field         | value                                                                                                                   |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `path`        | An [httpPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided. |
-| `headers`     | A list of [httpHeaderMatches](#httpheadermatch). Multiple match values are ANDed together.                              |
-| `queryParams` | A list of [httpQueryParamMatches](#httpqueryparammatch). Multiple match values are ANDed together.                      |
+| `path`        | An [HTTPPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided. |
+| `headers`     | A list of [HTTPHeaderMatch](#httpheadermatch). Multiple match values are ANDed together.                              |
+| `queryParams` | A list of [HTTPQueryParamMatch](#httpqueryparammatch). Multiple match values are ANDed together.                      |
 | `method`      | When specified, this route will be matched only if the request has the specified method.                                |
 
 {{< /keyval >}}
 
-#### httpPathMatch
+#### HTTPPathMatch
 
 `HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
 request path.
@@ -233,7 +233,7 @@ request path.
 
 {{< /keyval >}}
 
-#### httpHeaderMatch
+#### HTTPHeaderMatch
 
 `HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
@@ -248,7 +248,7 @@ headers.
 
 {{< /keyval >}}
 
-#### httpQueryParamMatch
+#### HTTPQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
@@ -263,7 +263,7 @@ query parameters.
 
 {{< /keyval >}}
 
-#### httpRouteFilter
+#### HTTPRouteFilter
 
 `HTTPRouteFilter` defines processing steps that must be completed during the
 request or response lifecycle.
@@ -273,12 +273,12 @@ request or response lifecycle.
 | field                   | value                                                       |
 | ----------------------- | ----------------------------------------------------------- |
 | `type`                  | One of: RequestHeaderModifier, RequestRedirect.             |
-| `requestHeaderModifier` | An [httpRequestHeaderFilter](#httprequestheaderfilter).     |
-| `requestRedirect`       | An [httpRequestRedirectFilter](#httprequestredirectfilter). |
+| `requestHeaderModifier` | An [HTTPRequestHeaderFilter](#httprequestheaderfilter).     |
+| `requestRedirect`       | An [HTTPRequestRedirectFilter](#httprequestredirectfilter). |
 
 {{< /keyval >}}
 
-#### httpRequestHeaderFilter
+#### HTTPRequestHeaderFilter
 
 A filter which modifies request headers.
 
@@ -286,13 +286,13 @@ A filter which modifies request headers.
 
 | field    | value                                                                                        |
 | -------- | -------------------------------------------------------------------------------------------- |
-| `set`    | A list of [httpHeaders](#httpheader) to overwrites on the request.                           |
-| `add`    | A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value. |
+| `set`    | A list of [HTTPHeader](#httpheader) to overwrites on the request.                           |
+| `add`    | A list of [HTTPHeader](#httpheader) to add on the request, appending to any existing value. |
 | `remove` | A list of header names to remove from the request.                                           |
 
 {{< /keyval >}}
 
-#### httpHeader
+#### HTTPHeader
 
 `HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
@@ -305,7 +305,7 @@ A filter which modifies request headers.
 
 {{< /keyval >}}
 
-#### httpRequestRedirectFilter
+#### HTTPRequestRedirectFilter
 
 `HTTPRequestRedirect` defines a filter that redirects a request.
 
