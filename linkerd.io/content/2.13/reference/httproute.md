@@ -59,11 +59,11 @@ HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 
 {{< keyval >}}
 
-| field         | value                                                                                                                                                       |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `matches`     | A list of [HTTPRouteMatch](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.        |
-| `filters`     | A list of [HTTPRouteFilter](#httproutefilter) which will be applied to each request which matches this rule.                                               |
-| `backendRefs` | An array of [HTTPBackendRef](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)). |
+| field         | value                                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `matches`     | A list of [HTTPRouteMatch](#httproutematch) resources. Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied. |
+| `filters`     | A list of [HTTPRouteFilter](#httproutefilter) resources which will be applied to each request which matches this rule.                                       |
+| `backendRefs` | An array of [HTTPBackendRef](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).   |
 
 {{< /keyval >}}
 
@@ -78,8 +78,8 @@ only if all conditions are satisfied.
 | field         | value                                                                                                                   |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `path`        | An [HTTPPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided. |
-| `headers`     | A list of [HTTPHeaderMatch](#httpheadermatch). Multiple match values are ANDed together.                              |
-| `queryParams` | A list of [HTTPQueryParamMatch](#httpqueryparammatch). Multiple match values are ANDed together.                      |
+| `headers`     | A list of [HTTPHeaderMatch](#httpheadermatch) resources. Multiple match values are ANDed together.                      |
+| `queryParams` | A list of [HTTPQueryParamMatch](#httpqueryparammatch) resources. Multiple match values are ANDed together.              |
 | `method`      | When specified, this route will be matched only if the request has the specified method.                                |
 
 {{< /keyval >}}
@@ -149,11 +149,11 @@ A filter which modifies request headers.
 
 {{< keyval >}}
 
-| field    | value                                                                                        |
-| -------- | -------------------------------------------------------------------------------------------- |
-| `set`    | A list of [HTTPHeader](#httpheader) to overwrites on the request.                           |
-| `add`    | A list of [HTTPHeader](#httpheader) to add on the request, appending to any existing value. |
-| `remove` | A list of header names to remove from the request.                                           |
+| field    | value                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------- |
+| `set`    | A list of [HTTPHeader](#httpheader) resources to overwrites on the request.                           |
+| `add`    | A list of [HTTPHeader](#httpheader) resources to add on the request, appending to any existing value. |
+| `remove` | A list of header names to remove from the request.                                                    |
 
 {{< /keyval >}}
 
@@ -176,13 +176,13 @@ A filter which modifies request headers.
 
 {{< keyval >}}
 
-| field        | value                                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scheme`     | The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.                 |
-| `hostname`   | The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.             |
+| field        | value                                                                                                                                         |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scheme`     | The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.                   |
+| `hostname`   | The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.               |
 | `path`       | An [HTTPPathModifier](#httppathmodifier) which modifies the path of the incoming request and uses the modified path in the `Location` header. |
-| `port`       | The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.          |
-| `statusCode` | The HTTP status code to be used in response.                                                                                                |
+| `port`       | The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.            |
+| `statusCode` | The HTTP status code to be used in response.                                                                                                  |
 
 {{< /keyval >}}
 
