@@ -63,7 +63,7 @@ HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `matches`     | A list of [HTTPRouteMatch](#httproutematch) resources. Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied. |
 | `filters`     | A list of [HTTPRouteFilter](#httproutefilter) resources which will be applied to each request which matches this rule.                                       |
-| `backendRefs` | An array of [HTTPBackendRef](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).   |
+| `backendRefs` | An array of [HTTPBackendRef](#httpbackendref) resources to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).   |
 
 {{< /keyval >}}
 
