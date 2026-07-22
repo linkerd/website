@@ -52,22 +52,22 @@ HTTPRoute configuration, as long as the ServiceProfile exists.
 
 {{< /keyval >}}
 
-### httpRouteRule
+### HTTPRouteRule
 
 HTTPRouteRule defines semantics for matching an HTTP request based on conditions
 (matches) and processing it (filters).
 
 {{< keyval >}}
 
-| field         | value                                                                                                                                                       |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `matches`     | A list of [httpRouteMatches](#httproutematch). Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied.        |
-| `filters`     | A list of [httpRouteFilters](#httproutefilter) which will be applied to each request which matches this rule.                                               |
-| `backendRefs` | An array of [HTTPBackendRefs](#httpbackendref) to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)). |
+| field         | value                                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `matches`     | A list of [HTTPRouteMatch](#httproutematch) resources. Each match is independent, i.e. this rule will be matched if **any** one of the matches is satisfied. |
+| `filters`     | A list of [HTTPRouteFilter](#httproutefilter) resources which will be applied to each request which matches this rule.                                       |
+| `backendRefs` | An array of [HTTPBackendRef](#httpbackendref) resources to declare where the traffic should be routed to (only allowed with Service [parentRefs](#parentreference)).   |
 
 {{< /keyval >}}
 
-### httpRouteMatch
+### HTTPRouteMatch
 
 HTTPRouteMatch defines the predicate used to match requests to a given action.
 Multiple match types are ANDed together, i.e. the match will evaluate to true
@@ -77,14 +77,14 @@ only if all conditions are satisfied.
 
 | field         | value                                                                                                                   |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `path`        | An [httpPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided. |
-| `headers`     | A list of [httpHeaderMatches](#httpheadermatch). Multiple match values are ANDed together.                              |
-| `queryParams` | A list of [httpQueryParamMatches](#httpqueryparammatch). Multiple match values are ANDed together.                      |
+| `path`        | An [HTTPPathMatch](#httppathmatch). If this field is not specified, a default prefix match on the "/" path is provided. |
+| `headers`     | A list of [HTTPHeaderMatch](#httpheadermatch) resources. Multiple match values are ANDed together.                      |
+| `queryParams` | A list of [HTTPQueryParamMatch](#httpqueryparammatch) resources. Multiple match values are ANDed together.              |
 | `method`      | When specified, this route will be matched only if the request has the specified method.                                |
 
 {{< /keyval >}}
 
-### httpPathMatch
+### HTTPPathMatch
 
 `HTTPPathMatch` describes how to select a HTTP route by matching the HTTP
 request path.
@@ -98,7 +98,7 @@ request path.
 
 {{< /keyval >}}
 
-### httpHeaderMatch
+### HTTPHeaderMatch
 
 `HTTPHeaderMatch` describes how to select a HTTP route by matching HTTP request
 headers.
@@ -113,7 +113,7 @@ headers.
 
 {{< /keyval >}}
 
-### httpQueryParamMatch
+### HTTPQueryParamMatch
 
 `HTTPQueryParamMatch` describes how to select a HTTP route by matching HTTP
 query parameters.
@@ -128,7 +128,7 @@ query parameters.
 
 {{< /keyval >}}
 
-### httpRouteFilter
+### HTTPRouteFilter
 
 HTTPRouteFilter defines processing steps that must be completed during the
 request or response lifecycle.
@@ -138,26 +138,26 @@ request or response lifecycle.
 | field                   | value                                                       |
 | ----------------------- | ----------------------------------------------------------- |
 | `type`                  | One of: RequestHeaderModifier, RequestRedirect.             |
-| `requestHeaderModifier` | An [httpRequestHeaderFilter](#httprequestheaderfilter).     |
-| `requestRedirect`       | An [httpRequestRedirectFilter](#httprequestredirectfilter). |
+| `requestHeaderModifier` | An [HTTPRequestHeaderFilter](#httprequestheaderfilter).     |
+| `requestRedirect`       | An [HTTPRequestRedirectFilter](#httprequestredirectfilter). |
 
 {{< /keyval >}}
 
-### httpRequestHeaderFilter
+### HTTPRequestHeaderFilter
 
 A filter which modifies request headers.
 
 {{< keyval >}}
 
-| field    | value                                                                                        |
-| -------- | -------------------------------------------------------------------------------------------- |
-| `set`    | A list of [httpHeaders](#httpheader) to overwrites on the request.                           |
-| `add`    | A list of [httpHeaders](#httpheader) to add on the request, appending to any existing value. |
-| `remove` | A list of header names to remove from the request.                                           |
+| field    | value                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------- |
+| `set`    | A list of [HTTPHeader](#httpheader) resources to overwrites on the request.                           |
+| `add`    | A list of [HTTPHeader](#httpheader) resources to add on the request, appending to any existing value. |
+| `remove` | A list of header names to remove from the request.                                                    |
 
 {{< /keyval >}}
 
-### httpHeader
+### HTTPHeader
 
 `HTTPHeader` represents an HTTP Header name and value as defined by RFC 7230.
 
@@ -170,23 +170,23 @@ A filter which modifies request headers.
 
 {{< /keyval >}}
 
-### httpRequestRedirectFilter
+### HTTPRequestRedirectFilter
 
 `HTTPRequestRedirect` defines a filter that redirects a request.
 
 {{< keyval >}}
 
-| field        | value                                                                                                                                       |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scheme`     | The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.                 |
-| `hostname`   | The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.             |
-| `path`       | An [httpPathModfier](#httppathmodfier) which modifies the path of the incoming request and uses the modified path in the `Location` header. |
-| `port`       | The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.          |
-| `statusCode` | The HTTP status code to be used in response.                                                                                                |
+| field        | value                                                                                                                                         |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scheme`     | The scheme to be used in the value of the `Location` header in the response. When empty, the scheme of the request is used.                   |
+| `hostname`   | The hostname to be used in the value of the `Location` header in the response. When empty, the hostname of the request is used.               |
+| `path`       | An [HTTPPathModifier](#httppathmodifier) which modifies the path of the incoming request and uses the modified path in the `Location` header. |
+| `port`       | The port to be used in the value of the `Location` header in the response. When empty, port (if specified) of the request is used.            |
+| `statusCode` | The HTTP status code to be used in response.                                                                                                  |
 
 {{< /keyval >}}
 
-### httpPathModfier
+### HTTPPathModifier
 
 `HTTPPathModifier` defines configuration for path modifiers.
 
@@ -200,7 +200,7 @@ A filter which modifies request headers.
 
 {{< /keyval >}}
 
-### httpBackendRef
+### HTTPBackendRef
 
 `HTTPBackendRef` defines the list of objects where matching requests should be
 sent to. Only allowed when a route has Service [parentRefs](#parentreference).
