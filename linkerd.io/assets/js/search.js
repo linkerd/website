@@ -46,8 +46,19 @@ window.addEventListener(
       request.addEventListener("error", renderError, false);
       request.send(null);
     };
+    // Lunr's query parser treats characters like : + - * ~ ^ as query syntax,
+    // so remove them to keep user input literal and avoid throwing an error
+    // when a search term contains them.
+    // https://lunrjs.com/guides/searching.html#fields
+    const escapeLunrQuery = (text) => text.replace(/[:+\-*~^]/g, " ");
     const renderSearchResults = () => {
-      const results = index.search(query);
+      let results;
+      try {
+        results = index.search(escapeLunrQuery(query));
+      } catch (e) {
+        renderError();
+        return;
+      }
       // Remove loader
       target.innerHTML = "";
       // Render header
