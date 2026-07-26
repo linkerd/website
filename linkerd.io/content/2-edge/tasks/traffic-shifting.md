@@ -14,8 +14,8 @@ Traffic splitting is accomplished with [HTTPRoute] and [GRPCRoute] types.
 
 Earlier versions of Linkerd provided a
 [TrafficSplit](https://github.com/servicemeshinterface/smi-spec/blob/main/apis/traffic-split/v1alpha2/traffic-split.md/)
-resource as part of the the [Linkerd SMI extension](linkerd-smi/) for traffic
-splitting. This approach is still supported but will not recieve further feature
+resource as part of the [Linkerd SMI extension](linkerd-smi/) for traffic
+splitting. This approach is still supported but will not receive further feature
 development.
 
 {{< /note >}}

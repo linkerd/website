@@ -388,7 +388,7 @@ Almost done! We only need one more thing: the _trust bundle_ will lets Linkerd
 know which trust anchors to accept. We'll use trust-manager for this, but
 there's a catch: when rotating the trust anchor, both the control plane and the
 data plane (the proxies) need to be restarted. Since that can't happen
-instaneously, we need to have both the old trust anchor and the new trust anchor
+instantaneously, we need to have both the old trust anchor and the new trust anchor
 in the trust bundle until all the restarts have completed.
 
 trust-manager can do this, but it needs a specific source for _each_ certificate

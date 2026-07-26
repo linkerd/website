@@ -282,8 +282,8 @@ spec:
 
 ## GCE
 
-The GCE ingress should be meshed with with
-[ingress mode enabled](#ingress-mode), , i.e. with the
+The GCE ingress should be meshed with
+[ingress mode enabled](#ingress-mode), i.e. with the
 `linkerd.io/inject: ingress` annotation rather than the default `enabled`.
 
 This example shows how to use a

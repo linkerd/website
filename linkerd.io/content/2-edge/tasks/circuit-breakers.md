@@ -7,7 +7,7 @@ Circuit breaking is a powerful feature where Linkerd will temporarily stop
 routing requests to an endpoint if that endpoint is deemed to be unhealthy,
 instead routing that request to other replicas in the Service.
 
-In this tutoral, we'll see how to enable circuit breaking on a Service to
+In this tutorial, we'll see how to enable circuit breaking on a Service to
 improve client success rate when a backend replica is unhealthy.
 
 See the [reference documentation](../reference/circuit-breaking/) for more
@@ -217,7 +217,7 @@ failure accrual:
 
 This tells us that Linkerd will use `ConsecutiveFailures` failure accrual when
 talking to the `bb` Service. It also tells us that the `max_failures` is 7,
-meaning that it will trip the circuit breaker once it observes 7 consective
+meaning that it will trip the circuit breaker once it observes 7 consecutive
 failures. We'll talk more about each of the parameters here at the end of this
 article.
 

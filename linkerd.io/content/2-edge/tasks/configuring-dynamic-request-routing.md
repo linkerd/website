@@ -156,7 +156,7 @@ In the example above, we used the `x-request-id` header, which is a common
 header that is forwarded by podinfo. However, the same technique will work with
 arbitrary headers, as long as the application forwards them.
 
-Note also that dyanmic request routing is client-side behavior, so while the
+Note also that dynamic request routing is client-side behavior, so while the
 traffic source (in this case, the frontend pod) needs to be meshed, strictly
 speaking, the destination does not need to be meshed.
 
