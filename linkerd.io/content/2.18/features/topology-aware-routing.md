@@ -13,7 +13,7 @@ multiple zones. Users can now implement routing constraints and prefer endpoints
 in a specific zone in order to limit cross-zone networking costs or improve
 performance through lowered cross-zone latency and bandwidth constraints.
 
-The goal of topology aware routing is to to provide a simpler way for users to
+The goal of topology aware routing is to provide a simpler way for users to
 prefer endpoints by basing decisions solely off the node's
 `topology.kubernetes.io/zone` label. If a client is in `zone-a`, then it should
 prefer endpoints marked for use by clients in `zone-a`. When the feature is

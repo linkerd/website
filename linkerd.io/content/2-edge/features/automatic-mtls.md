@@ -47,7 +47,7 @@ only happens in one direction--the client authenticates the server but the
 server doesn’t authenticate the client. mTLS makes the authenticity symmetric.
 
 mTLS is a large topic. For a broad overview of what mTLS is and how it works in
-Kuberentes clusters, we suggest reading through
+Kubernetes clusters, we suggest reading through
 [A Kubernetes engineer's guide to mTLS](https://buoyant.io/mtls-guide/).
 
 ## Which traffic can Linkerd automatically mTLS?
