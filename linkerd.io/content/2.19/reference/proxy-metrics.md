@@ -20,7 +20,7 @@ port (default: `:4191`) in the [Prometheus format][prom-format].
   - `tls_kx_groups`: The set of key exchange algorithms the proxy will use,
     sorted by preference order.
   - `tls_rand`: The secure randomness provider
-  - `tls_key_provider`: The crytpographic key provider
+  - `tls_key_provider`: The cryptographic key provider
   - `tls_fips`: A boolean denoting if the proxy's connections are
     FIPS-compliant.
 - `tokio_rt_*`: A set of counters and gauges with stats on the proxy's
@@ -319,7 +319,7 @@ Kubernetes resources to which traffic is routed by the proxy:
   route resource through which the proxy discovered the route binding. This will
   either reference an [HTTPRoute] resource or a default (synthesized) route.
 - `backend_group`, `backend_kind`, `backend_name`, and `backend_namespace`
-  reference the backend resource to which which the proxy routed the request.
+  reference the backend resource to which the proxy routed the request.
   This will always be a Service.
 
 In addition, the `outbound_http_balancer_endpoints` gauge metric adds the
