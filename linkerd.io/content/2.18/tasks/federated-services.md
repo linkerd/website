@@ -8,7 +8,7 @@ which act as a union of multiple services in different clusters with the same
 name and namespace. By sending traffic to the federated service, that traffic
 will be load balanced among all endpoints of that service in all linked
 clusters. This allows the client to be cluster agnostic, balance traffic across
-multiple clusters, and be resiliant to the failure of any individual cluster.
+multiple clusters, and be resilient to the failure of any individual cluster.
 
 Federated services send traffic directly to the pods of the member services
 rather than through a gateway. Therefore, federated services have the same
@@ -362,7 +362,7 @@ is distributing requests across all three clusters:
 
 ## Next Steps
 
-We now have a federated service that balances traffic accross services in three
+We now have a federated service that balances traffic across services in three
 clusters. Additional clusters can be added simply by:
 
 - Updating the linkerd-multicluster config in `west` to add the required

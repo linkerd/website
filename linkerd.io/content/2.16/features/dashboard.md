@@ -104,7 +104,7 @@ to use your browser instead:
 
 ![Tap](/images/docs/getting-started/tap.png 'Tap')
 
-## Futher reading
+## Further reading
 
 See [Exporting metrics](../tasks/exporting-metrics/) for alternative ways to
 consume Linkerd's metrics.

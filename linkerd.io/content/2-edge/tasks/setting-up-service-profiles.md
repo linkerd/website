@@ -19,7 +19,7 @@ information about a service and how to handle requests for a service.
 
 When an HTTP (not HTTPS) request is received by a Linkerd proxy, the
 `destination service` of that request is identified. If a service profile for
-that destination service exists, then that service profile is used to to provide
+that destination service exists, then that service profile is used to provide
 per-route metric, retries, and timeouts.
 
 The `destination service` for a request is computed by selecting the value of
