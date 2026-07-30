@@ -67,7 +67,7 @@ Linkerd Deployments Grafana dashboard providing the same (and more) metrics
 
 ### In-cluster Grafana instances
 
-In the case of in-cluster Grafana instances (such as as the one from the Grafana
+In the case of in-cluster Grafana instances (such as the one from the Grafana
 Helm chart or the Grafana Operator mentioned above), make sure a reverse proxy
 is set up, as shown in the sample `grafana/values.yaml` file:
 

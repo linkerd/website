@@ -755,7 +755,7 @@ Example failure:
     see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of proxy-injnector webhook cert is
+This warning indicates that the expiry of proxy-injector webhook cert is
 approaching. In order to address this problem without incurring downtime, you
 can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).

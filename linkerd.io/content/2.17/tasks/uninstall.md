@@ -34,7 +34,7 @@ linkerd multicluster uninstall | kubectl delete -f -
 
 {{< note >}}
 
-Uninstallating the control plane requires cluster-wide permissions.
+Uninstalling the control plane requires cluster-wide permissions.
 
 {{< /note >}}
 

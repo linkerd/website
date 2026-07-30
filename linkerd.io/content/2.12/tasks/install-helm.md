@@ -42,7 +42,7 @@ then `linkerd-control-plane`.
 
 If installing Linkerd in a cluster that uses Cilium in kube-proxy replacement
 mode, additional steps may be needed to ensure service discovery works as
-intended. Instrunctions are on the
+intended. Instructions are on the
 [Cilium cluster configuration](../reference/cluster-configuration/#cilium) page.
 
 {{< /note >}}

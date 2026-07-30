@@ -18,7 +18,7 @@ See [Caveats and future work](#caveats-and-future-work) below for some details.
 ## What is mTLS?
 
 A full definition of mTLS is outside the scope of this doc. For an overview of
-what mTLS is and how it works in Kuberentes clusters, we suggest reading through
+what mTLS is and how it works in Kubernetes clusters, we suggest reading through
 [A Kubernetes engineer's guide to mTLS](https://buoyant.io/mtls-guide/).
 
 ## Which traffic can Linkerd automatically mTLS?

@@ -647,7 +647,7 @@ Example failure:
     see https://linkerd.io/2/checks/#l5d-proxy-injector-webhook-cert-not-expiring-soon for hints
 ```
 
-This warning indicates that the expiry of proxy-injnector webhook cert is
+This warning indicates that the expiry of proxy-injector webhook cert is
 approaching. In order to address this problem without incurring downtime, you
 can follow the process outlined in
 [Automatically Rotating your webhook TLS Credentials](automatically-rotating-webhook-tls-credentials/).
@@ -1097,7 +1097,7 @@ triggered if an extension value is used for the label key more than once across
 the cluster.
 
 To resolve this warning, ensure that the `linkerd.io/extension` namespace label
-does not have any dupliate values, indicating that an extension has been
+does not have any duplicate values, indicating that an extension has been
 installed more than once in different namespaces.
 
 ### Extensions checks

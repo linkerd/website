@@ -85,7 +85,7 @@ accrual, see [Rate Limit Aware Load Balancing](../tasks/rate-limit-aware-load-ba
 
 ## Probation and Backoffs
 
-Once a failure accrual policy makes an endpoint unavailble, the circuit breaker
+Once a failure accrual policy makes an endpoint unavailable, the circuit breaker
 will attempt to determine whether the endpoint is still in a failing state, and
 transition it back to available if it has recovered. This process is called
 _probation_. When an endpoint enters probation, it is temporarily made available
@@ -106,7 +106,7 @@ application traffic must succeed for the endpoint to become available again.
 {{< /note >}}
 
 When an endpoint's failure accrual policy trips the circuit breaker, it will
-remain unavailble for at least a _minimum penalty_ duration. After this duration
+remain unavailable for at least a _minimum penalty_ duration. After this duration
 has elapsed, the endpoint will enter probation. When a probe request fails, the
 endpoint will not be placed in probation again until a backoff duration has
 elapsed. Every time a probe request fails, [the backoff increases
@@ -160,7 +160,7 @@ configure parameters for the consecutive-failures failure accrual policy:
   unavailable. Must be an integer. If this annotation is not present, the
   default value is 7.
 - `balancer.linkerd.io/failure-accrual-consecutive-min-penalty`: Sets the
-  minumum penalty duration for which an endpoint will be marked as unavailable
+  minimum penalty duration for which an endpoint will be marked as unavailable
   after `max-failures` consecutive failures occur. After this period of time
   elapses, the endpoint will be [probed](#probation-and-backoffs). This duration
   must be non-zero, and may not be greater than the max-penalty duration. If

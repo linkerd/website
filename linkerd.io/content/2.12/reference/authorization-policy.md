@@ -45,7 +45,7 @@ The general pattern for authorization is:
 - A `Server` describes a set of pods, and a single port on those pods.
 - Optionally, an `HTTPRoute` references that `Server` and describes a subset of
   HTTP traffic to it.
-- A `MeshTLSAuthentication` or `NetworkAuthentication` decribes who is allowed
+- A `MeshTLSAuthentication` or `NetworkAuthentication` describes who is allowed
   access.
 - An `AuthorizationPolicy` references the `HTTPRoute` or `Server` (the thing to
   be authorized) and the `MeshTLSAuthentication` or `NetworkAuthentication` (the
@@ -155,7 +155,7 @@ completed during the request or response lifecycle.
 
 A given HTTP request can only match one HTTPRoute. If multiple HTTPRoutes are
 present that match a request, one will be picked according to the
-[Gateway API rules of precendence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
+[Gateway API rules of precedence](https://gateway-api.sigs.k8s.io/references/spec/#gateway.networking.k8s.io/v1beta1.HTTPRouteSpec).
 
 {{< /note >}}
 
@@ -502,7 +502,7 @@ spec:
     - "webapp.booksapp.serviceaccount.identity.linkerd.cluster.local"
 ```
 
-A `MeshTLSAuthentication` which authenticate thes `books` and `webapp` mesh
+A `MeshTLSAuthentication` which authenticates the `books` and `webapp` mesh
 identities. This is an alternative way to specify the same thing as the above
 example.
 
