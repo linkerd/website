@@ -6,3 +6,11 @@ RSS:
 SearchIndex:
   baseName: search
   mediaType: application/json
+
+# Plain-text output with shortcodes expanded — consumed by the Linky
+# doc indexer so that shortcode content (CLI tables, notes, warnings)
+# is included in the search index.
+Plaintext:
+  baseName: index
+  mediaType: text/plain
+  notAlternative: true

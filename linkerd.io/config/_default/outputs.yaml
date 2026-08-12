@@ -1,8 +1,10 @@
 # Turn off RSS by default; an individual section can choose to enable it
 page:
   - HTML
+  - Plaintext
 home:
   - HTML
   - SearchIndex
 section:
   - HTML
+  - Plaintext
