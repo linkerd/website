@@ -13,6 +13,8 @@ images: [social.jpg] # Open graph image
 
 The other day I ran the Gateway API conformance tests against Linkerd. This is normally a pretty routine chore, but this time, a gRPC routing test failed. This was _extremely_ startling, since Linkerd has supported gRPC routing for about two years now (it first showed up in Linkerd 2.16). Even more confusingly, the specific failure was around routing with weights, and I had used exactly that feature a few days before.
 
+Thankfully, it was a test error rather than a Linkerd bug: the test had been changed to have an invalid `appProtocol` setting. But figuring that out was quite the ride through a lot of different pieces of the ecosystem; it's well worth a more detailed look.
+
 ## gRPC
 
 [gRPC's website](https://grpc.io) defines it as "a modern open source high performance Remote Procedure Call (RPC) framework". RPC is basically the same idea as a function call, just across machines[^1]: you have a named bit of executable code that takes some inputs and returns some data, and you have a defined way to encode those inputs and outputs that preserves type[^2].
@@ -35,9 +37,9 @@ So - and this is the first piece of the test-failure puzzle - to do anything sig
 
 This need to know the details of the connection isn't only a gRPC thing, of course. In general, anything more subtle than just passing bytes back and forth with no analysis requires you to know what the protocol is. This includes not just golden metrics and reliability, but even basic features like per-request routing -- after all, you can't route a single request if you don't know where the request starts and ends in the data stream.
 
-There are fundamentally only two ways to know what protocol is in play: you can to look at the bytes in transit and figure out what protocol it is (_protocol detection_), or you can be told up front what protocol it is (_protocol declaration_). We've [written about this] before in the context of Linkerd: protocol detection is far friendlier than forcing the user to declare everything up front, so Linkerd leans heavily on protocol detection.
+There are fundamentally only two ways to know what protocol is in play: you can to look at the bytes in transit and figure out what protocol it is (_protocol detection_), or you can be told up front what protocol it is (_protocol declaration_). Linkerd takes the attitude that [detection is friendlier than declaration], so it leans heavily on protocol detection.
 
-[written about this]: https://www.buoyant.io/blog/announcing-linkerd-2-18
+[detection is friendlier than declaration]: https://www.buoyant.io/blog/announcing-linkerd-2-18
 
 However, protocol detection requires traffic, and because you can't even know which replica should get traffic before you figure out the protocol, it requires traffic from the _client_. Without any data, protocol detection will wait 10 seconds, then give up. This most commonly happens for protocols like SMTP where it's the server than speaks first, but it can also happen when things are overloaded: on a really heavily loaded cluster, it's possible for a client to not ever get enough CPU to send its first bytes until after protocol detection has timed out.
 
@@ -51,9 +53,9 @@ Preventing this situation no matter what kind of shape the cluster is in is why 
 
 ## Protocol Declaration
 
-Protocol declaration works based on the (optional) `appProtocol` attribute of a Service: setting `appProtocol` _completely disables_ protocol detection and just uses the protocol you declare. This is the third piece of the puzzle: protocol declaration is an override, and nothing else can overrule it (that's the point).
+Protocol declaration works based on the (optional) `appProtocol` attribute of a Service: setting `appProtocol` _completely disables_ protocol detection and just uses the protocol you declare. This is the third piece of the puzzle: protocol declaration is an override, and nothing else can overrule it.
 
-For the last piece of the puzzle, we have a look a little deeper into `appProtocol`. This field on Service became standard in Kubernetes 1.20 and [supports only certain values]: service names from the the [IANA Service Name and Transport Protocol Port Number Registry], and custom names of the form `domain/protocol`, including the three values defined by Kubernetes itself:
+`appProtocol` on Service became standard in Kubernetes 1.20 and [supports only certain values]: service names from the the [IANA Service Name and Transport Protocol Port Number Registry], and custom names of the form `domain/protocol`, including the three values defined by Kubernetes itself:
 
 - `kubernetes.io/h2c`: HTTP/2 over cleartext as described in [RFC 9113];
 - `kubernetes.io/ws`: WebSocket over cleartext as described in [RFC 6455]; and
@@ -68,25 +70,33 @@ Since gRPC is _not_ on this list, there is no standard way to use `appProtocol` 
 
 This is normally less problematic than it might seem, because gRPC doesn't _change_ HTTP/2, it is _encapsulated in_ HTTP/2. Knowing that the protocol is HTTP/2 (which is still true for gRPC) is enough for Linkerd to know how to interpret individual requests, including looking into the headers to see if `Content-Type: application/grpc` shows up. If so, great, this is a gRPC call! and we can interpret the trailers to get the gRPC status.
 
-This means that - though it may sound odd - you can use `appProtocol: kubernetes/h2c` to do the right thing here: that'll force Linkerd to trust that the wire protocol is HTTP/2, and it can see from the `Content-Type` that it needs to interpret trailers to get the gRPC status.
+In other words, setting `appProtocol: kubernetes/h2c` will work just fine for gRPC: Linkerd will trust that the wire protocol is HTTP/2, which will let it use the `Content-Type` to know when to interpret trailers to get the gRPC status.
 
-What you _can't_ use is `appProtocol: grpc`.
+What you _can't_ do is set `appProtocol: grpc`.
 
 ### When `appProtocol` Goes Bad
 
-Linkerd is very strict about accepting only the standard `appProtocol` values. This is the fourth and final piece of the test-failure puzzle: any invalid value for `appProtocol` means that Linkerd assumes the connection is `opaque`. This may seem a bit draconian, but it's the only safe way to go: _any_ interpretation we choose for a nonstandard value opens us up to breaking changes if the nonstandard value later becomes standardized.
+Linkerd is very strict about accepting only the standard `appProtocol` values. This is the fourth and final piece of the test-failure puzzle: any invalid value for `appProtocol` means that Linkerd assumes the connection is `opaque`. This may seem a bit draconian, but it's the only safe way to go: if we decide to interpret `appProtocol: grpc` to mean cleartext gRPC, what happens if the ecosystem later decides that it should mean gRPC using TLS?
 
-Of course, we could define `linkerd.io/grpc` to mean "use the cleartext HTTP/2 wire protocol and interpret trailers for gRPC statuses"; that would be safe. (Oddly, `kubernetes.io/grpc` seems unlikely: [KEP 3726] originally attempted to include it, but couldn't get consensus over whether it should mean cleartext gRPC or gRPC using TLS.)
+This isn't just an academic concern, to be clear: [KEP 3726] originally attempted to define a `kubernetes.io/grpc` value, but dropped it because no consensus could be reached on whether it would mean cleartext or TLS. (Linkerd could define a `linkerd.io/grpc` and sidestep that confusion; to date, this hasn't seemed necessary, but if you think it is, let me know.)
 
 [KEP 3726]: https://github.com/kubernetes/enhancements/blob/master/keps/sig-network/3726-standard-application-protocols/README.md
 
 ## Putting the Puzzle Together
 
-To recap: for gRPC to work correctly, service meshes (including Linkerd!) need to know that a connection is using HTTP/2, so that they can figure out to interpret HTTP/2 trailers to understand gRPC status. They can detect HTTP/2, or they can have it declared. For Linkerd, a protocol declaration is an absolute override, and Linkerd also won't guess if it sees a nonstandard `appProtocol`.
+To bring all these threads together: for gRPC to work correctly, service meshes (including Linkerd!) need to know that a connection is using HTTP/2, so that they can figure out to interpret HTTP/2 trailers to understand gRPC status. They can detect HTTP/2, or they can have it declared. For Linkerd, a protocol declaration is an absolute override, and Linkerd treats nonstandard `appProtocol` values as `opaque`.
 
-The test failure I saw? It had been changed to include `appProtocol: grpc` since the last time I'd tried to run. Since that's a nonstandard value, it caused Linkerd to switch to `opaque`, which shut off _all_ gRPC processing, including the weighted per-request routing that the test required.
+And the test that failed had been changed to set `appProtocol: grpc` since the last time I'd tried to run. That was the whole problem: since `grpc` is a nonstandard value, Linkerd switched to `opaque`, which shut off _all_ gRPC processing, including the weighted per-request routing that the test required. The failure isn't subtle at all, but understanding why it happened very much is.[^3]
 
-The moral here is twofold: first, **pay attention to the standards**, especially if you're writing tests meant to validate behavior across implementations -- it's really easy to create pretty subtle bugs otherwise. Second, if you're the one looking at the bug, just remember that blaming the test is always easy and very often wrong -- make sure you really understand what's happening before claiming that the test is at fault. Ultimately, getting this one fixed was easy once it was understood.
+[^3]: I ended up going all the way down to the `linkerd diagnostics policy` command to make absolutely **certain** that I knew what was happening before working on getting the test fixed. It's far too easy to blame real failures on the tests; we owe it to the test authors to be completely sure before saying a test is wrong.
 
+So if you're using protocol declaration - which we're sure many of you are - first, **pay attention to the standards** when you set up your protocols! A wrong value can produce a very confusing error.
 
+Second, though, is a debugging tip: Linkerd usually gets all of this stuff _right_, enough so that you should consider it something of a red flag to see opaque behavior -- if Linkerd seems to be ignoring Routes that it's marked as `Accepted`, don't burn a lot of time before looking to incorrect protocol declarations.
+
+And go easy on the test authors, right? They're doing good work.
+
+----
+
+_Feedback is always welcome; just ping `@flynn` on the [Linkerd Slack](https://slack.linkerd.io)._
 
