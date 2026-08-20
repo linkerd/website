@@ -231,3 +231,38 @@ connection closes (`tcp_close_total`):
   UNIX epoch).
 - `identity_cert_refresh_count`: A counter of the total number of times the
   proxy's mTLS identity certificate has been refreshed by the Identity service.
+
+## Metric Expiry
+
+The Linkerd proxy emits some metrics that have high-cardinality labels. For example,
+clusters with a large number of meshed nodes may have many IP addresses for the
+same label. This can be an issue in a long running proxy because it will lead to
+higher memory usage.
+
+Linkerd proxy attempts to limit the number of high-cardinality metrics by discarding
+"unused" or "idle" metrics during each prometheus scrape. A metric is considered
+"unused" if no component within the proxy is referring to it. For example, a TCP
+connection terminates and a metric related to the TCP connection is no longer
+referred to. A metric is considered "idle" if it has not been updated within a
+predefined period of time. The default period of time is 10 minutes, but the default
+can be set by configuring `LINKERD2_PROXY_METRICS_RETAIN_IDLE`.
+
+Metric expiry applies to the following metrics within the proxy:
+
+- `request_total`
+- `response_total`
+- `response_latency_ms`
+- `route_request_total`
+- `route_response_total`
+- `route_response_latency_ms`
+- `route_actual_request_total`
+- `route_actual_response_total`
+- `route_retryable_total`
+- `control_request_total`
+- `control_response_total`
+- `control_response_latency_ms`
+- `tcp_open_total`
+- `tcp_open_connections`
+- `tcp_read_bytes_total`
+- `tcp_write_bytes_total`
+- `tcp_close_total`
