@@ -37,16 +37,7 @@ against the compatibility table:
 | ---------------- | --------------------------------- | ----------------- | ------------ |
 | 2.15 - 2.17      | 0.7 - 1.1.1                       | v1beta1           | v1alpha2     |
 | 2.18 - 2.19      | 1.1.1 - 1.2.1                     | v1                | v1           |
-| 2.20             | 1.2.1 - 1.5.1 [^1]                | v1                | v1           |
-
-[^1]: We recommend installing Gateway API version 1.2.1. Versions greater than
-1.2.1 will work so long as any resources used by Linkerd contain
-_only_ fields and values present in the Gateway API 1.2.1 specification. When
-Linkerd encounters an unknown field or value in a resource from versions
-of Gateway API > 1.2.1, Linkerd will ignore the resource. This
-enables Linkerd deployments in clusters where higher versions of Gateway
-API are required by other software that do not share resources
-with Linkerd.
+| 2.20             | 1.2.1 - 1.5.1                     | v1                | v1           |
 
 {{< note >}}
 
@@ -73,7 +64,7 @@ by following the
 which is often as simple as:
 
 ```bash
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
 ```
 
 ## Note: Precursors to Gateway API-based configuration
