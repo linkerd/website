@@ -224,7 +224,7 @@ EOF
 
 This command creates an [`AuthorizationPolicy`] whose `targetRef` selects the
 `authors-get-route` [`HTTPRoute`] resource we just created. An
-[`AuthorizationPolicy`] resource can require a a variety of forms of
+[`AuthorizationPolicy`] resource can require a variety of forms of
 authentication. In this case, we we've defined a [`MeshTLSAuthentication`]
 resource, named `authors-get-authn`, that requires the TLS identity of the
 client to match the `ServiceAccount` of either the `books` service or the
