@@ -77,8 +77,8 @@ params:
       - title: What are the program requirements?
         content: |-
           How Linkerd Ambassadors help educate the community will depend on their
-          preferences and strengths. Typically, they must do at least **two** of
-          the following:
+          preferences and strengths. Typically, they must do at least **one** of
+          the following each quarter:
 
           1. Presenting a Linkerd-related talk at a conference or local meetup,
           2. Create Linkerd-related content (e.g., blog post, video),
