@@ -110,7 +110,7 @@ linkerd prune | kubectl delete -f -
 ### Upgrading the control plane with Helm
 
 For Helm control plane installations, please follow the instructions at
-[Helm upgrade procedure](install-helm/#helm-upgrade-procedure).
+[Helm upgrade procedure](install-helm/#upgrading-with-helm).
 
 ### Verifying the control plane upgrade
 
