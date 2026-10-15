@@ -49,6 +49,16 @@ full set of metrics and mTLS support.
 
 {{< /note >}}
 
+{{< note >}}
+
+Ingress controller pods must not run in `hostNetwork` mode. When a pod uses
+`hostNetwork: true`, the Linkerd proxy sidecar is not injected, so the pod
+cannot participate in the mesh. If your ingress controller is deployed with
+`hostNetwork` enabled (for example, the default for Rancher RKE2's
+`rke2-ingress-nginx`), disable it or switch to an ingress configuration that
+allows regular pod networking.
+
+{{< /note >}}
 ## Ambassador (aka Emissary) {#ambassador}
 
 Ambassador can be meshed normally. An example manifest for configuring the
