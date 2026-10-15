@@ -20,13 +20,6 @@ params:
           urls:
             github: https://github.com/bezarsnba
             linkedin: https://www.linkedin.com/in/bezarsnba/
-        - name: Blake Romano
-          role: Senior Software Engineer
-          image: images/blake-romano.jpg
-          flag: 🇺🇸
-          urls:
-            github: https://github.com/blakeromano
-            linkedin: https://www.linkedin.com/in/blakeromano/
         - name: Chris Campbell
           role: Cloud Software Engineer
           image: images/chris-campbell.jpg
@@ -58,14 +51,6 @@ params:
             github: https://github.com/Eli-Goldberg
             twitter: https://twitter.com/EliG0ldberg
             linkedin: https://www.linkedin.com/in/eli-go/
-        - name: Mahendran Selvakumar
-          role: DevOps Engineer
-          image: images/mahendran-selvakumar.jpg
-          flag: 🇬🇧
-          urls:
-            github: https://github.com/skmahe1077/
-            twitter: https://x.com/devopstronaut
-            linkedin: https://www.linkedin.com/in/mahendran-selvakumar/
         - name: William Rizzo
           role: Consulting Architect
           image: images/william-rizzo.jpg
@@ -76,6 +61,13 @@ params:
     - title: Linkerd Ambassadors Emeriti
       emeriti: true
       items:
+        - name: Blake Romano
+          role: Senior Software Engineer
+          image: images/blake-romano.jpg
+          flag: 🇺🇸
+          urls:
+            github: https://github.com/blakeromano
+            linkedin: https://www.linkedin.com/in/blakeromano/
         - name: Charles Pretzer
           role: Field Engineer
           image: images/charles-pretzer.jpg
@@ -99,6 +91,14 @@ params:
             github: https://github.com/kaspernissen
             twitter: https://twitter.com/phennex
             linkedin: https://www.linkedin.com/in/kaspernissen/
+        - name: Mahendran Selvakumar
+          role: DevOps Engineer
+          image: images/mahendran-selvakumar.jpg
+          flag: 🇬🇧
+          urls:
+            github: https://github.com/skmahe1077/
+            twitter: https://x.com/devopstronaut
+            linkedin: https://www.linkedin.com/in/mahendran-selvakumar/
         - name: María Teresa Rojas
           role: SRE
           image: images/maria-rojas.jpg
