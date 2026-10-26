@@ -51,6 +51,20 @@ params:
             github: https://github.com/Eli-Goldberg
             twitter: https://twitter.com/EliG0ldberg
             linkedin: https://www.linkedin.com/in/eli-go/
+        - name: Mesut Oezdil
+          role: DevOps Engineer
+          image: images/mesut-oezdil.jpg
+          flag: 🇩🇪
+          urls:
+            github: https://github.com/moezdil
+            linkedin: https://www.linkedin.com/in/mesut-oezdil/
+        - name: Tomáš Jamrich
+          role: Platform Engineering Lead
+          image: images/tomas-jamrich.jpg
+          flag: 🇨🇿
+          urls:
+            github: https://github.com/tjamrich
+            linkedin: https://www.linkedin.com/in/tomas-jamrich-348757155/
         - name: William Rizzo
           role: Consulting Architect
           image: images/william-rizzo.jpg
