@@ -223,8 +223,13 @@ connection closes (`tcp_close_total`):
 - `identity_cert_expiration_timestamp_seconds`: A gauge of the time when the
   proxy's current mTLS identity certificate will expire (in seconds since the
   UNIX epoch).
-- `identity_cert_refresh_count`: A counter of the total number of times the
+- `identity_cert_refresh_timestamp_seconds`: A gauge of the time when the
+  proxy's mTLS identity certificate was last refreshed (in seconds since the
+  UNIX epoch).
+- `identity_cert_refreshes_total`: A counter of the total number of times the
   proxy's mTLS identity certificate has been refreshed by the Identity service.
+  The `result` label is `ok` if the new certificate was installed, or `error` if
+  it could not be.
 
 ## Outbound `xRoute` Metrics
 
