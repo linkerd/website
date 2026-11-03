@@ -231,7 +231,8 @@ Example failure:
     Kubernetes is on version [1.7.16], but version [1.13.0] or more recent is required
 ```
 
-Linkerd requires at least version `1.13.0`. Verify your cluster version with:
+Linkerd 2.10 requires at least Kubernetes `1.16`. Verify your cluster
+version with:
 
 ```bash
 kubectl version

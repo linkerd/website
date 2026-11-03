@@ -159,10 +159,12 @@ Example failure:
 
 ```text {class=disable-copy}
 × is running the minimum Kubernetes API version
-    Kubernetes is on version [1.7.16], but version [1.13.0] or more recent is required
+    Kubernetes is on version [1.30.6], but version [1.31.0] or more recent is required
 ```
 
-Linkerd requires at least version `1.13.0`. Verify your cluster version with:
+The minimum Kubernetes version depends on your Linkerd version: see
+[Supported Kubernetes Versions](../reference/k8s-versions/). Verify your
+cluster version with:
 
 ```bash
 kubectl version
