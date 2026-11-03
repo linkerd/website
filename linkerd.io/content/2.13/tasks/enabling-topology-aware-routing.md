@@ -23,7 +23,9 @@ Linkerd:
    `"topology.kubernetes.io/zone` label.
 
 4. Relevant Kubernetes services will need to be modified with the
-   `service.kubernetes.io/topology-aware-hints=auto` annotation.
+   `service.kubernetes.io/topology-mode=Auto` annotation. (Prior to Kubernetes
+   1.27, this behavior was controlled using the
+   `service.kubernetes.io/topology-aware-hints=auto` annotation instead.)
 
 When Linkerd receives a set of endpoint slices and translates them to an address
 set, a copy of the `Hints.forZones` field is made from each endpoint slice if
@@ -31,8 +33,9 @@ one is present. This field is only present if it's set by the endpoint slice
 controller, and there are several
 [safeguards][topology-aware-routing-safeguards] that Kubernetes checks before
 setting it. To have the endpoint slice controller set the `forZones` field users
-will have to add the `service.kubernetes.io/topology-aware-hints=auto`
-annotation to the service.
+will have to add the `service.kubernetes.io/topology-mode=Auto` annotation (or
+the `service.kubernetes.io/topology-aware-hints=auto` annotation, prior to
+Kubernetes 1.27) to the service.
 
 After the endpoints have been translated into an address set and the endpoint
 translator's available endpoints have been updated, filtering is applied to
@@ -76,6 +79,6 @@ time="2021-08-27T14:04:35Z" level=debug msg="Filtering through addresses that sh
 ```
 
 [topology-aware-routing-safeguards]:
-  https://kubernetes.io/docs/concepts/services-networking/topology-aware-hints/#safeguards
+  https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/#safeguards
 [topology-aware-routing-constraints]:
-  https://kubernetes.io/docs/concepts/services-networking/topology-aware-hints/#constraints
+  https://kubernetes.io/docs/concepts/services-networking/topology-aware-routing/#constraints
