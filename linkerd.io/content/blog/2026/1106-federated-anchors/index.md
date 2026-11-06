@@ -79,7 +79,7 @@ I've written demos of this for two or three clusters, and it's manageable but an
 
 The better way is something I call _federated anchors_. In the grand tradition of fixing problems in computing by throwing a layer of indirection at it, the federated-anchors concept works by sneaking an extra layer of certificates into the cluster.
 
-_(diagram: trust anchor -> cluster anchor -> identity issuer -> workload cert)_
+![Trust Hierarchy with Federated Anchors](federated-anchor-trust-diagram.webp)
 
 In this model, the trust anchor still spans all the clusters, but there's an extra _cluster anchor_ for each cluster. This setup has some interesting characteristics:
 
@@ -95,26 +95,26 @@ In this model, the trust anchor still spans all the clusters, but there's an ext
 
 Federated anchors work by taking advantage of a little-known fact about Linkerd: the identity issuer is _also_ actually a bundle. It's not widely advertised (yet!) because it's rarely useful in the single-cluster case, but including multiple certificates in the identity issuer Secret works just fine. You only get one private key (which is a feature in this case, not a bug), and it pretty much only makes sense if the multiple certificates form a signing chain, but some pretty fascinating use cases lie well within those boundaries.
 
-So if we have cluster1 and cluster2, and we want to use federated anchors:
+So if we have clusters named "east" and "west", and we want to use federated anchors:
 
-* We'll have a single trust anchor. Call this `anchor1`.
+* We'll have a single shared trust anchor. Call this `anchor1`.
 * Each cluster will have its own cluster anchor:
-   * `c1-anchor1` for cluster1, signed by `anchor1`
-   * `c2-anchor1` for cluster2, also signed by `anchor1`.
+   * `east-anchor1` for the east cluster, signed by `anchor1`
+   * `west-anchor1` for the west cluster, also signed by `anchor1`.
 * Each cluster will also have its own identity issuer:
-   * `c1-id1` for cluster1, signed by `c1-anchor1`
-   * `c2-id1` for cluster2, signed by `c2-anchor1`
+   * `east-id1` for the east cluster, signed by `east-anchor1`
+   * `west-id1` for the west cluster, signed by `west-anchor1`
 
-_(diagram: anchor1 -> c1-anchor1 -> c1-id1 and anchor1 -> c2-anchor1 -> c2-id2)_
-
-Remember that each of these has a public half (e.g. `anchor1.pem`) and a private half (e.g. `anchor1.key`). So to configure Linkerd on cluster1:
+Remember that each of these has a public half (e.g. `anchor1.pem`) and a private half (e.g. `anchor1.key`). So to configure Linkerd on the east cluster:
 
 - We'll put `anchor1.pem` into the `ca-bundle.crt` key of the `linkerd-identity-trust-roots` ConfigMap.
-- We'll concatenate `c1-anchor1.pem` and `c1-id1.pem` and store that in the `crt.pem` key of the `linkerd-identity-issuer` Secret.
-- We'll store `c1-id1.key` in the `key.pem` key of the `linkerd-identity-issuer` Secret.
+- We'll concatenate `east-anchor1.pem` and `east-id1.pem` and store that in the `crt.pem` key of the `linkerd-identity-issuer` Secret.
+- We'll store `east-id1.key` in the `key.pem` key of the `linkerd-identity-issuer` Secret.
 - We'll let Linkerd worry about the workload certs.
 
-Read that carefully: the trust bundle contains the public half of `anchor1`, and the identity issuer Secret contains the private key of `c1-id1` but the public halves of both `c1-anchor1` and `c1-id1`.
+![Certificate Handling with Federated Anchors](federated-anchor-bundling-diagram.webp)
+
+Read that carefully: the trust bundle contains the public half of `anchor1`, and the identity issuer Secret contains the private key of `east-id1` but the public halves of both `east-anchor1` and `east-id1`.
 
 ## Setting Up With `linkerd x-trust`
 
@@ -131,95 +131,95 @@ linkerd x-trust anchor generate --pathlen 2 \
 
 This will write `anchor1.crt` and `anchor1.key`, containing the trust anchor we'll use.
 
-Next, we'll create `c1-anchor1` and `c2-anchor1`. We'll tell `linkerd x-trust` to generate an identity issuer certificate for this, but again we'll override the path length -- it's normally 0 for an identity issuer, but we need 1. We'll also override the DNS name contained in the certificate. Linkerd doesn't use this name for anything, but it can make life easier when debugging to have unique values, so we'll override it.
+Next, we'll create `east-anchor1` and `west-anchor1`. We'll tell `linkerd x-trust` to generate an identity issuer certificate for this, but again we'll override the path length -- it's normally 0 for an identity issuer, but we need 1. We'll also override the DNS name contained in the certificate. Linkerd doesn't use this name for anything, but it can make life easier when debugging to have unique values, so we'll override it.
 
 ```bash
 linkerd x-trust issuer generate anchor1.crt anchor1.key \
-   --identity "c1-anchor.linkerd.cluster.local" \
+   --identity "east-anchor.linkerd.cluster.local" \
    --pathlen 1 \
-   c1-anchor1.crt c1-anchor1.key
+   east-anchor1.crt east-anchor1.key
 
 linkerd x-trust issuer generate anchor1.crt anchor1.key \
-   --identity "c2-anchor.linkerd.cluster.local" \
+   --identity "west-anchor.linkerd.cluster.local" \
    --pathlen 1 \
-   c2-anchor1.crt c2-anchor1.key
+   west-anchor1.crt west-anchor1.key
 ```
 
-Finally(!) we can create `c1-id1` and `c2-id1`. For this, we don't really need to override anything; the normal identity issuer that `linkerd x-trust` can create will work fine. Again, though, we'll override the DNS name to be unique.
+Finally(!) we can create `east-id1` and `west-id1`. For this, we don't really need to override anything; the normal identity issuer that `linkerd x-trust` can create will work fine. Again, though, we'll override the DNS name to be unique.
 
 ```bash
-linkerd x-trust issuer generate c1-anchor1.crt c1-anchor1.key \
-   --identity "c1-issuer.linkerd.cluster.local" \
-   c1-id1.crt c1-id1.key
+linkerd x-trust issuer generate east-anchor1.crt east-anchor1.key \
+   --identity "east-issuer.linkerd.cluster.local" \
+   east-id1.crt east-id1.key
 
-linkerd x-trust issuer generate c2-anchor1.crt c2-anchor1.key \
-   --identity "c2-issuer.linkerd.cluster.local" \
+linkerd x-trust issuer generate west-anchor1.crt west-anchor1.key \
+   --identity "west-issuer.linkerd.cluster.local" \
    --pathlen 1 \
-   c2-id1.crt c2-id1.key
+   west-id1.crt west-id1.key
 ```
 
 Given all the certificates, we can then push them out for Linkerd to use them (which, of course, requires Linkerd to be running):
 
 ```bash
-linkerd x-trust --kubeconfig c1-kubeconfig.yaml \
+linkerd x-trust --kubeconfig east-kubeconfig.yaml \
   bundle add anchor1.crt
 
-linkerd x-trust --kubeconfig c1-kubeconfig.yaml \
-  identity update c1-anchor1.crt c1-id1.crt c1-id1.key
+linkerd x-trust --kubeconfig east-kubeconfig.yaml \
+  identity update east-anchor1.crt east-id1.crt east-id1.key
 
-linkerd x-trust --kubeconfig c2-kubeconfig.yaml \
+linkerd x-trust --kubeconfig west-kubeconfig.yaml \
   bundle add anchor2.crt
 
-linkerd x-trust --kubeconfig c2-kubeconfig.yaml \
-  identity update c2-anchor1.crt c2-id1.crt c2-id1.key
+linkerd x-trust --kubeconfig west-kubeconfig.yaml \
+  identity update west-anchor1.crt west-id1.crt west-id1.key
 ```
 
 Remove any leftover trust anchor from the trust bundles using `linkerd x-trust bundle remove`, then restart Linkerd and any meshed workloads with `kubectl rollout restart`. After that, you should be able to verify a four-certificate chain for each cluster:
 
 ```bash
-linkerd x-trust --kubeconfig c1-kubeconfig.yaml \
+linkerd x-trust --kubeconfig east-kubeconfig.yaml \
    chain
 
-linkerd x-trust --kubeconfig c1-kubeconfig.yaml \
+linkerd x-trust --kubeconfig east-kubeconfig.yaml \
    chain
 ```
 
 ## Rotating a Cluster Anchor
 
-Once you have all of that in place, rotating a cluster anchor only touches that single cluster. For example, to rotate cluster1's cluster anchor:
+Once you have all of that in place, rotating a cluster anchor only touches that single cluster. For example, to rotate the east cluster's cluster anchor:
 
 1. Generate a new cluster trust anchor and identity issuer, possibly with `linkerd x-trust issuer` as shown above:
 
     ```bash
     # Don't forget the path length here!
     linkerd x-trust issuer generate anchor1.crt anchor1.key \
-       --identity "c1-anchor2.linkerd.cluster.local" \
+       --identity "east-anchor2.linkerd.cluster.local" \
        --pathlen 1 \
-       c1-anchor2.crt c1-anchor2.key
+       east-anchor2.crt east-anchor2.key
 
-    linkerd x-trust issuer generate c1-anchor2.crt c1-anchor2.key \
-       --identity "c1-issuer2.linkerd.cluster.local" \
-       c1-id2.crt c1-id2.key
+    linkerd x-trust issuer generate east-anchor2.crt east-anchor2.key \
+       --identity "east-issuer2.linkerd.cluster.local" \
+       east-id2.crt east-id2.key
     ```
 
-2. Update the identity issuer bundle on cluster1 to have all four `c1` certificates:
+2. Update the identity issuer bundle on the east cluster to have all four `c1` certificates:
 
     ```bash
     linkerd x-trust issuer update \
-        c1-anchor1.crt c1-id1.crt c1-anchor2.crt c1-id2.crt \
-        c1-id1.key
+        east-anchor1.crt east-id1.crt east-anchor2.crt east-id2.crt \
+        east-id1.key
     ```
 
-   Note that we still passed `c1-id1.key` here -- we can't change that yet.
+   Note that we still passed `east-id1.key` here -- we can't change that yet.
 
 3. Restart the Linkerd control plane, then restart all meshed workloads. Again, this happens _only_ in cluster 1.
 
-4. Switch the identity issuer to use `c1-id2`'s private key (all that changes here is the last parameter):
+4. Switch the identity issuer to use `east-id2`'s private key (all that changes here is the last parameter):
 
     ```bash
     linkerd x-trust issuer update \
-        c1-anchor1.crt c1-id1.crt c1-anchor2.crt c1-id2.crt \
-        c1-id2.key
+        east-anchor1.crt east-id1.crt east-anchor2.crt east-id2.crt \
+        east-id2.key
     ```
 
 5. Restart the Linkerd control plane and meshed workloads again.
@@ -228,8 +228,8 @@ Once you have all of that in place, rotating a cluster anchor only touches that 
 
     ```bash
     linkerd x-trust issuer update \
-        c1-anchor2.crt c1-id2.crt \
-        c1-id2.key
+        east-anchor2.crt east-id2.crt \
+        east-id2.key
     ```
 
 7. Finally, restart one more time.
