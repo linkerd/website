@@ -13,16 +13,23 @@ images: [social.jpg] # Open graph image
 
 Trust is the beating heart of Linkerd.
 
-OK, fine, we can be a little less dramatic about that. But providing
-trust really is one of the most critical things that Linkerd does.
-Microservices communicate over an untrusted, potentially hostile network;
-without _something_ in place to allow a them to communicate securely,
-it's not really possible to build safe real-world applications. Trust is
-_important_.
+OK, fine, we can be a little less dramatic about that. But one of the
+most important things that Linkerd does is set things up to allow
+microservices to communicate securely with one another, and a cornerstone
+of secure communication is trusting that you're talking to who you think
+you are. Linkerd trust has the nice property that it works the same way
+for one cluster and for many clusters -- but day 2 operations around
+multicluster trust can be quite a bit more painful than for
+single-cluster setups.
 
-As we've talked about in [many] [different] [places], Linkerd provides
-trust using [X.509], which relies on certificates. Per the [Linkerd
-docs], specifically, there are three certificates involved:
+We're going to take a look at how make multicluster trust less annoying
+to deal with -- specifically, making certification rotation less painful.
+
+## Certificates in Linkerd
+
+As we've talked about in [many] [different] [places], Linkerd trust is
+based on [X.509], which relies on certificates. Per the [Linkerd docs],
+specifically, there are three certificates involved:
 
 ![Linkerd trust hierarchy](cert-chain-diagram.webp)
 
@@ -38,18 +45,23 @@ the trust anchor. Each workload verifies the signing chain all the way up
 to the trust anchor, and everything has to line up for the connection to
 succeed.
 
-The way this is typically extended to multicluster - including in our own
-[multicluster documentation] - uses a single trust anchor that's shared
-across all clusters and gives each cluster its own identity issuer:
+In the multicluster world, trust is still based on verifying certificate
+signatures, but it now has to work across clusters! The way people
+usually get told how to set this up (including in our own [multicluster
+documentation]) is to have all the clusters share a single trust anchor,
+but give each cluster its own identity issuer:
 
 ![Typical Linkerd Multicluster Trust Hierarchy](multi-workload-trust-diagram.webp)
 
 [multicluster documentation]: /docs/tasks/multicluster/
 
-This has the serious win that it follows naturally from the
-single-cluster case, it's easy to explain, and it works. All of these are
-good things. Where it falls down is if you ever have to rotate the trust
-anchor. To show why, let's look at trust anchor rotation with just a
+There are a lot of good reasons to do things this way: it lines up nicely
+with the single-cluster case, it's easy to explain, and it works -- all
+good things. On the other hand, you really should be rotating that shared
+trust anchor on a regular basis, and in this model, that's a pretty
+complex operation.
+
+To see why, let's start with a look at trust anchor rotation with just a
 single cluster.
 
 ## Trust Anchor Rotation With One Cluster
@@ -61,17 +73,19 @@ certificate by definition, the trust bundle can hold _multiple_
 certificates. When Linkerd traces the signature chain for a workload
 cert, any certificate in the trust bundle is as good as any other.
 
+![Trust Anchor vs Trust Bundle](anchor-vs-bundle-diagram.webp)
+
 Using a bundle is the reason that zero-downtime trust anchor rotation is
 possible at all. You can't atomically swap the trust anchor across every
-meshed workload simultaneously -- instead, there's a multi-step process
-for rotating a trust anchor.
+meshed workload simultaneously -- instead, there's a [multi-step process]
+for rotating a trust anchor:
 
-We'll start by assuming that the cluster is using trust anchor `blue` and
-identity issuer `blue-id` (which is signed by `blue`). Then, to rotate
-the trust anchor:
+[multi-step process]: https://linkerd.io/2-edge/tasks/manually-rotating-control-plane-tls-credentials/
 
-1. Generate a new trust anchor (`green`) and an identity issuer signed by
-   it (`green-id`).
+1. Start by assuming that the cluster is using trust anchor `blue` and
+   identity issuer `blue-id` (which is signed by `blue`), and we want to
+   switch to using trust anchor `green` and identity issuer `green-id`
+   (which is signed by `green`).
 
 2. **Add** `green` to the cluster's trust bundle. At this moment, the
    bundle contains both `blue` and `green`, and either is fine for
@@ -109,10 +123,12 @@ the trust anchor:
     This, finally, gets everyone to a trust bundle in which only `green`
     is valid.
 
-This is annoying in a single-cluster setup, but if you stick carefully to
-the process it's definitely tractable (and, of course, if you're running
-[Buoyant Enterprise for Linkerd] you can use the [Trust Anchor Rotation
-Operator], which makes it much simpler).
+This isn't a particularly difficult process, but it's time-consuming and
+requires careful attention to avoid mistakes like skipping steps or
+accidentally picking the wrong certificate -- and if you _do_ make
+mistakes, you probably take downtime. (This is why we recommend checking
+out the [Trust Anchor Rotation Operator] in [Buoyant Enterprise for
+Linkerd], which makes it much simpler!)
 
 [Buoyant Enterprise for Linkerd]: https://buoyant.io/enterprise-linkerd/
 [Trust Anchor Rotation Operator]:
@@ -120,31 +136,35 @@ https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/trust-rotatio
 
 ## What About Multicluster?
 
-In multicluster, things get more annoying. While you follow the same
-process, remember that every cluster has the same trust anchor -- which
-means that every time you modify a certificate or restart, you have to do
-that on _every cluster at the same time_.
+In multicluster, you follow the same process, but there's a twist:
+remember how we talked about every cluster sharing the same trust bundle?
+What that really means is that each cluster has its own copy of the trust
+bundle, and all the copies have to be kept in sync -- so every time you
+modify a certificate or restart, you have to do that on _every cluster at
+the same time_.
 
 So when you add `green` to the trust bundle, you have to add it to the
 trust bundle on _every_ cluster. Then you have to restart the control
 plane on _every_ cluster. Then you have to restart the meshed workloads
-on _every_ cluster. You get the picture: it's much more error-prone and
-unpleasant.
+on _every_ cluster. This rapidly gets much more error-prone than the
+single-cluster case.
 
 It's also potentially more subtle when things go wrong. Suppose the
 workloads in cluster-1 only call workloads that are also in cluster-1,
 but every so often a workload in a cluster-2 calls something in
-cluster-1. If the cluster-1 operator jumps the gun, everything will look
-great in cluster-1, even though cluster-2 might be totally down because
-it suddenly can't talk to cluster-1.
+cluster-1. If the trust bundle on cluster-1 gets out of sync with
+cluster-2's, it's not hard to land in a situation where things look great
+in cluster-1, but cluster-2 is totally down because it suddenly can't
+talk to cluster-1.
 
-I've written demos of this for two or three clusters, and it's manageable
-but annoying... but we have users with many more than three clusters, and
-that's a different world. There needs to be a better way.
+I've gone through this myself for two or three clusters, and it's
+manageable but annoying. We have users with _many_ more clusters than
+that, though, and there needs to be a better way.
 
 ## The Better Way: Federated Anchors
 
-The better way is something I call _federated anchors_. In the grand
+The better way is something I've been calling _federated anchors_
+(paralleling the way Linkerd has "federated services"). In the grand
 tradition of fixing problems in computing by throwing a layer of
 indirection at it, the federated-anchors concept works by sneaking an
 extra layer of certificates into the cluster.
@@ -156,8 +176,8 @@ an extra _cluster anchor_ for each cluster. This setup has some
 interesting characteristics:
 
 * Multicluster still works because, ultimately, everything is signed by
-  the same trust anchor, which means that the whole trust hierarchy is
-  still intact.
+  the same trust anchor, which means that the whole trust chain stays
+  intact.[^1]
 
 * Cluster anchors have much the same security profile as single-cluster
   trust anchors: their secret keys are infrequently used and can easily
@@ -170,6 +190,14 @@ interesting characteristics:
 * Finally, the _coup de grace_: you can rotate cluster anchors and
   identity issuers one cluster at a time, without ever having to touch
   the other clusters, while maintaining zero downtime.
+
+[^1]: In fact, everything also works fine if every cluster has its own
+    trust anchor and all the trust anchors appear in every cluster's
+    trust bundle. However, in that scenario, rotating any of the anchors
+    still requires touching all the clusters. (It's actually worse than
+    the single shared anchor setup: the straightforward way to rotate all
+    the anchors means restarting every cluster multiple times _for each
+    cluster's trust anchor_.)
 
 ## How Federated Anchors Work
 
@@ -213,21 +241,26 @@ of `anchor1`, and the identity issuer Secret contains the private key of
 
 ## Setting Up With `linkerd x-trust`
 
-The `linkerd-x-trust` GitHub repo at
-<https://github.com/kflynn/linkerd-x-trust> contains an **experimental**
-Linkerd extension that can make this a little simpler to work with. Check
-out the [README] for how to install it.
+We'll show all of this using the `linkerd-x-trust` extension, which you
+can find at <https://github.com/kflynn/linkerd-x-trust>. While everything
+we're about to do can be done with shell scripts and the [`step` CLI]
+from Smallstep, `linkerd-x-trust` is an **experimental** Linkerd
+extension that can make this a little simpler to work with. Check out the
+[README] for how to install it.
 
+[`step` CLI]: https://github.com/smallstep/cli
 [README]: https://github.com/kflynn/linkerd-x-trust/blob/main/README.md
 
 ### Creating the trust anchor
 
 Creating a self-signed trust anchor with `linkerd-x-trust` is
-straightforward, with one caveat: we have to set the X.509 _path length_.
+straightforward, with one caveat: we have to set the X.509 _path length_[^2].
 The path length is the number of certificates below this one are allowed
 to sign other certificates: normally, it's set to 1 for a trust anchor,
 since the only signing certificate below the trust anchor is the identity
 issuer. We need it to be 2, to leave room for the cluster anchor as well.
+
+[^2]: You can read about X.509 path length in [RFC 5280 §6.1](https://www.rfc-editor.org/info/rfc5280/#section-6.1) if you really really want to, but wow is it dry.
 
 ```bash
 linkerd x-trust anchor generate --pathlen 2 \
