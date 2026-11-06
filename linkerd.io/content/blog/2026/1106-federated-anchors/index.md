@@ -15,13 +15,13 @@ Trust is the beating heart of Linkerd.
 
 OK, fine, we can be a little less dramatic about that. But providing trust really is one of the most critical things that Linkerd does. Microservices communicate over an untrusted, potentially hostile network; without _something_ in place to allow a them to communicate securely, it's not really possible to build safe real-world applications. Trust is _important_.
 
-As we've talked about in [many] [different] [places], Linkerd provides trust using [X.509], which relies on certificates. Per the [Linkerd docs], specifically, there are three certificates involved:
+As we've talked about in [many](https://www.buoyant.io/blog/multicluster-mtls-the-trust-model-walked-through) [different](/2024/02/06/linkerd-certificates-with-vault/) [places](https://www.buoyant.io/blog/a-guide-to-linkerd-trust-anchor-rotation-with-cert-manager), Linkerd provides trust using [X.509](https://en.wikipedia.org/wiki/X.509), which relies on certificates. Per the [Linkerd docs](/docs/tasks/automatically-rotating-control-plane-tls-credentials/), specifically, there are three certificates involved:
 
 ![Linkerd trust hierarchy](cert-chain-diagram.webp)
 
 When one workload tries to talk to another, they exchange workload certificates, which are signed by the identity issuer, which is signed by the trust anchor. Each workload verifies the signing chain all the way up to the trust anchor, and everything has to line up for the connection to succeed.
 
-The way this is typically extended to multicluster - including in our own [multicluster documentation] - keeps the single shared trust anchor and gives each cluster its own identity issuer:
+The way this is typically extended to multicluster - including in our own [multicluster documentation](/docs/tasks/multicluster/) - keeps the single shared trust anchor and gives each cluster its own identity issuer:
 
 ![Typical Linkerd Multicluster Trust Hierarchy](multi-workload-trust-diagram.webp)
 
@@ -63,7 +63,7 @@ We'll start by assuming that the cluster is using trust anchor `blue` and identi
 
    This, finally, gets everyone to a trust bundle in which only `green` is valid.
 
-This is annoying in a single-cluster setup, but if you stick carefully to the process it's definitely tractable (and, of course, if you're running [Buoyant Enterprise for Linkerd] you can use the Trust Anchor Rotation Operation, which makes it much simpler).
+This is annoying in a single-cluster setup, but if you stick carefully to the process it's definitely tractable (and, of course, if you're running [Buoyant Enterprise for Linkerd](https://buoyant.io/enterprise-linkerd/) you can use the [Trust Anchor Rotation Operation](https://docs.buoyant.io/buoyant-enterprise-linkerd/latest/features/trust-rotation/), which makes it much simpler).
 
 ## What About Multicluster?
 
@@ -118,7 +118,7 @@ Read that carefully: the trust bundle contains the public half of `anchor1`, and
 
 ## Setting Up With `linkerd x-trust`
 
-The `linkerd-x-trust` GitHub repo at <https://github.com/kflynn/linkerd-x-trust`> contains an **experimental** Linkerd extension that can make this a little simpler to set up. Check out the [README](https://github.com/kflynn/linkerd-x-trust/blob/main/README.md) for how to install it.
+The `linkerd-x-trust` GitHub repo at <https://github.com/kflynn/linkerd-x-trust> contains an **experimental** Linkerd extension that can make this a little simpler to set up. Check out the [README](https://github.com/kflynn/linkerd-x-trust/blob/main/README.md) for how to install it.
 
 ### Creating the trust anchor
 
