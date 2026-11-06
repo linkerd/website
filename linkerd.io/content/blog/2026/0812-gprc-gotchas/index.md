@@ -33,7 +33,7 @@ The easiest thing in the world is to just blame it on a bug in the test -- and t
 
 Over the wire, gRPC is layered within HTTP/2, so every gRPC call is an HTTP/2 stream with `HEADERS` frames carrying metadata, `DATA` frames carrying the inputs and outputs, and trailers (`HEADERS` frames after all the `DATA` frames) carrying the final status of the gRPC call. Valid gRPC calls are always HTTP `POST` requests with `Content-Type: application/grpc`.
 
-![gPRC is layered within HTTP/2](<grpc-diagram.png>)
+![gPRC is layered within HTTP/2](grpc-diagram.png)
 
 This layering means that, at the most basic level, you can route a gRPC request by routing its HTTP/2 stream -- even as far as routing based on which specific gRPC call you're trying to make (which is encoded in the HTTP/2 `PATH`) or routing on custom gRPC metadata (which appears in HTTP/2 headers).
 
@@ -56,6 +56,8 @@ There are fundamentally only two ways to know what protocol is in play: you can 
 
 [detection is friendlier than declaration]: https://www.buoyant.io/blog/announcing-linkerd-2-18
 
+![Protocol detection snoops the connection](protocol-detection.png)
+
 However, protocol detection requires the client to send some data (think for a second about things like session affinity, where there's no way to know which replica should get the traffic before you hear from the client which session they're part of). Without any data, protocol detection will wait 10 seconds, then give up. This most commonly happens for protocols like SMTP where it's the server that speaks first, but it can also happen when things are overloaded: on a really heavily loaded cluster, it's possible for a client to not ever get enough CPU to send its first bytes until after protocol detection has timed out.
 
 ### When Protocol Detection Goes Bad
@@ -69,6 +71,8 @@ Preventing this situation no matter what kind of shape the cluster is in is why 
 ## Protocol Declaration
 
 Protocol declaration works based on the (optional) `appProtocol` attribute of a Service: setting `appProtocol` _completely disables_ protocol detection and just uses the protocol you declare. This is the third piece of the puzzle: protocol declaration is an override, and nothing else can overrule it.
+
+![Protocol declaration just trusts what you say](protocol-declaration.png)
 
 `appProtocol` on Service became standard in Kubernetes 1.20 and [supports only certain values]: service names from the the [IANA Service Name and Transport Protocol Port Number Registry], and custom names of the form `domain/protocol`, including the three values defined by Kubernetes itself:
 
