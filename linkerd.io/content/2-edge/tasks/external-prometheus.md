@@ -46,7 +46,11 @@ with direct values for the below configuration to work.
     - source_labels:
         - __meta_kubernetes_pod_container_port_name
       action: keep
-      regex: admin-http
+      regex: .*admin$
+    - source_labels:
+        - __meta_kubernetes_pod_container_port_name
+      action: drop
+      regex: linkerd-admin
     - source_labels: [__meta_kubernetes_pod_container_name]
       action: replace
       target_label: component
@@ -59,7 +63,11 @@ with direct values for the below configuration to work.
         - __meta_kubernetes_pod_label_component
         - __meta_kubernetes_pod_container_port_name
       action: keep
-      regex: linkerd-service-mirror;admin-http$
+      regex: (linkerd-service-mirror|controller);.*-admin$
+    - source_labels:
+        - __meta_kubernetes_pod_container_port_name
+      action: drop
+      regex: linkerd-admin
     - source_labels: [__meta_kubernetes_pod_container_name]
       action: replace
       target_label: component

@@ -84,7 +84,7 @@ spec:
           - '{job="linkerd-proxy"}'
           - '{job="linkerd-controller"}'
       path: /federate
-      port: admin-http
+      port: admin
       honorLabels: true
       relabelings:
         - action: keep
