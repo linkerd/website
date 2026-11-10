@@ -52,6 +52,10 @@ matei:
 oliver:
   email: oliver@buoyant.io
   name: Oliver Gould
+sanjot:
+  avatar: authors/sanjot-harsoor.jpg
+  email: sanjot@buoyant.io
+  name: Sanjot Harsoor
 steve:
   avatar: authors/steve-jenson.jpg
   email: steve@buoyant.io
