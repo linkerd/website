@@ -9,7 +9,7 @@ keywords:
 params:
   author: sanjot
   showCover: true
-images: [social.jpg] # Open graph image
+images: [social.png] # Open graph image
 ---
 
 Earlier this year, [ControlPlane](https://control-plane.io/), a cloud native
@@ -36,7 +36,7 @@ It should be noted that the authors clearly state their evaluation did not
 include penetration testing or code audits. It focuses on specific deployment
 related risks and mitigation.
 
-## What ControlPlane discovered?
+## What ControlPlane discovered
 
 The guide lists 30 threats (28 categorized as medium/high), and 33
 recommendations to address them.
