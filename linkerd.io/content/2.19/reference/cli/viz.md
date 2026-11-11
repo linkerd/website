@@ -40,7 +40,7 @@ title: viz
 
 {{< cli-description "viz dashboard" >}}
 
-Check out the [architecture](../architecture/#dashboard) docs for a more
+Check out the [dashboard](../../features/dashboard/#linkerd-dashboard) docs for a more
 thorough explanation of what this command does.
 
 {{< cli-examples "viz dashboard" >}}

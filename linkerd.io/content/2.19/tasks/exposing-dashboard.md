@@ -199,7 +199,7 @@ the dashboard rejects any request whose `Host` header is not `localhost`,
 `127.0.0.1` or the service name `web.linkerd-viz.svc`.
 
 Note that this protection also covers the
-[Grafana dashboard](../reference/architecture/#grafana).
+[Grafana dashboard](../features/dashboard/#grafana).
 
 The ingress-nginx config above uses the
 `nginx.ingress.kubernetes.io/upstream-vhost` annotation to properly set the
