@@ -1,0 +1,6 @@
+# Linkerd security reporting — see https://github.com/linkerd/linkerd2/security/policy
+Contact: https://github.com/linkerd/linkerd2/security/advisories/new
+Expires: 2027-07-14T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://linkerd.io/.well-known/security.txt
+Policy: https://github.com/linkerd/linkerd2/security/policy
