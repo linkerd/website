@@ -78,7 +78,7 @@ certificates that it receives from peers as part of the mTLS handshake. With a
 common base of trust, we now need to generate a certificate that can be used in
 each cluster to issue certificates to the proxies. If you'd like to get a deeper
 picture into how this all works, check out the
-[deep dive](../features/automatic-mtls/#how-does-it-work).
+[deep dive](../features/automatic-mtls/#how-does-linkerds-mtls-implementation-work).
 
 The trust anchor that we've generated is a self-signed certificate which can be
 used to create new certificates (a certificate authority). To generate the

@@ -196,7 +196,7 @@ Two versions of the HTTPRoute resource may be used with Linkerd:
 The two HTTPRoute resource definitions are similar, but the Linkerd version
 implements experimental features not yet available with the upstream Gateway API
 resource definition. See
-[the HTTPRoute reference documentation](../reference/httproute/#linkerd-and-gateway-api-httproutes)
+[the HTTPRoute reference documentation](../reference/httproute/#the-policylinkerdio-group)
 for details.
 
 {{< /note >}}
