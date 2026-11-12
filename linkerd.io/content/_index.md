@@ -109,8 +109,8 @@ params:
         url: https://buoyant.io/case-studies/schenker/
   about:
     title: |-
-      Linkerd: The Lightest, Fastest, Most Secure Service Mesh on the Planet
-    youtubeId: OpZ5auLw5Xw
+      The Linkerd Story: The People Behind the Service Mesh
+    youtubeId: UXf0uLdv0To
   features:
     items:
       - title: Instant platform health metrics
