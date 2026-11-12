@@ -109,7 +109,7 @@ params:
         url: https://buoyant.io/case-studies/schenker/
   about:
     title: |-
-      The Linkerd Story: The People Behind the Service Mesh
+      The Linkerd Story
     youtubeId: UXf0uLdv0To
   features:
     items:
