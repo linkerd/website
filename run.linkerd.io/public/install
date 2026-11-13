@@ -96,7 +96,12 @@ case $OS in
 esac
 OS=$(echo "$OS" | tr '[:upper:]' '[:lower:]')
 
-tmpdir=$(mktemp -d /tmp/linkerd2.XXXXXX)
+mkdir -p "${INSTALLROOT}"
+for d in "${INSTALLROOT}"/linkerd2.*; do
+  [ -d "$d" ] || continue
+  rm -rf "$d"
+done
+tmpdir=$(mktemp -d "${INSTALLROOT}/linkerd2.XXXXXX")
 srcfile="linkerd2-cli-${LINKERD2_VERSION}-${OS}"
 if [ -n "${cli_arch}" ]; then
   srcfile="${srcfile}-${cli_arch}"
