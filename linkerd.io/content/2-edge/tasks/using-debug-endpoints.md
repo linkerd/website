@@ -35,15 +35,16 @@ The pprof endpoint can be enabled by setting the `--set enablePprof=true` flag
 when installing or upgrading Linkerd or by setting the `enablePprof=true` Helm
 value.
 
-This data is served over the `admin-http` port. To find this port, you can
-examine the pod's yaml, or for the identity pod for example, issue a command
-like so:
+This data is served over the component's admin port (`ident-admin` for the
+identity pod; see [Control Plane Port Names](../reference/controlplane-port-names/)
+for the other components). To find this port, you can examine the pod's yaml,
+or for the identity pod for example, issue a command like so:
 
 ```bash
 kubectl -n linkerd get po \
     $(kubectl -n linkerd get pod -l linkerd.io/control-plane-component=identity \
         -o jsonpath='{.items[0].metadata.name}') \
-    -o=jsonpath='{.spec.containers[*].ports[?(@.name=="admin-http")].containerPort}'
+    -o=jsonpath='{.spec.containers[*].ports[?(@.name=="ident-admin")].containerPort}'
 ```
 
 Then use the `kubectl port-forward` command to access that port from outside the
