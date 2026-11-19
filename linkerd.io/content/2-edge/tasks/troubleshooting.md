@@ -189,6 +189,25 @@ To fix please update kubectl version.
 For more information on upgrading Kubernetes, see the page in the Kubernetes
 Documentation.
 
+## The "gateway-api-crd" checks
+
+### √ Gateway API CRDs are installed {#gateway-api-crd}
+
+Example failure:
+
+```text {class=disable-copy}
+× Gateway API CRDs are installed
+    The Gateway API CRDs must be installed prior to installing Linkerd. Run:
+
+kubectl apply --server-side -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.6.1/standard-install.yaml
+
+or see https://gateway-api.sigs.k8s.io/guides/#installing-gateway-api for more options.
+```
+
+Linkerd requires the Gateway API `HTTPRoute` CRD. See
+[Gateway API](../features/gateway-api/) for how to check whether the Gateway API
+is installed and how to install it.
+
 ## The "linkerd-config" checks {#l5d-config}
 
 This category of checks validates that Linkerd's cluster-wide RBAC and related
