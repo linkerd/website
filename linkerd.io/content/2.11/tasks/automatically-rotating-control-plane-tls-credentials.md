@@ -144,7 +144,7 @@ Now we just need to inform Linkerd to consume these credentials.
 
 Due to a [bug](https://github.com/jetstack/cert-manager/issues/2942) in
 cert-manager, if you are using cert-manager version `0.15` with experimental
-controllers, the certificate it issues are not compatible with with Linkerd
+controllers, the certificate it issues are not compatible with Linkerd
 versions `<= stable-2.8.1`.
 
 Your `linkerd-identity` pods will likely crash with the following log output:
