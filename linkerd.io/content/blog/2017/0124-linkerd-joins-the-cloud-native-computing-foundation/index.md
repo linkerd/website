@@ -85,7 +85,7 @@ and StackPointCloud.
 
 “Linkerd was built based on real world developer experiences in solving problems
 found when building large production systems at web scale companies like Twitter
-and Google,” said [Chris Aniszczyk](https://twitter.com/cra), COO of of the
+and Google,” said [Chris Aniszczyk](https://twitter.com/cra), COO of the
 CNCF. “It brings these expertise to the masses, allowing a greater number of
 companies to benefit from microservices. I’m thrilled to have Linkerd as a CNCF
 inception project and for them to share their knowledge of building a cloud

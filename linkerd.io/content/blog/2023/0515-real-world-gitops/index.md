@@ -111,7 +111,7 @@ just edit a Deployment, and Flagger takes it from there: it notices any change
 to objects under its management and _automatically_ tweaks things in the cluster
 to set up a progressive rollout.
 
-This means that Flagger needs a a way to control the amount of traffic that goes
+This means that Flagger needs a way to control the amount of traffic that goes
 to the new version. It doesn't do this directly: instead, it needs to alter
 configuration for some other piece of the system to actually do the traffic
 shifting. Flagger has a few different options for this:
@@ -170,7 +170,7 @@ then run `flux bootstrap` to tell Flux to set up everything in the cluster for
 you! You don't set up the cluster by hand at any point.
 
 When you run `flux bootstrap`, you tell Flux the git repo to use, and the branch
-and path within that repo to to start looking in your repo for its
+and path within that repo to start looking in your repo for its
 configuration. This brings up two really important points:
 
 1. Flux will need access to your Git repo, which is typically going to mean that
@@ -317,7 +317,7 @@ important to know that
   `repository.yaml`.
 
 Note that this is actually an _unordered_ list: `kustomize` automatically sorts
-all the resources contained in all of these files to make sure that the the
+all the resources contained in all of these files to make sure that the
 resources it's working with are applied in the correct order.
 
 We're going to leave the deep dive into these files for the `gitops-linkerd`

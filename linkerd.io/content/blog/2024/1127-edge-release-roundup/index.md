@@ -76,7 +76,7 @@ list here, but you can find them in the release notes for each release.
 ### edge-24.10.5 (October 31, 2024)
 
 [edge-24.10.5] contains the only breaking change in the October releases: as of
-this release, a gRPC request that hits a timeout will correctly return a a
+this release, a gRPC request that hits a timeout will correctly return a
 `DEADLINE-EXCEEDED` gRPC status, rather than returning an `UNAVAILABLE` gRPC
 status as in previous releases. This fix allows gRPC clients to properly
 distinguish between a timeout and other errors, so it's an important change.

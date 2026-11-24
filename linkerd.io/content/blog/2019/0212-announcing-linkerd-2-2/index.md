@@ -22,7 +22,7 @@ an issue, submitted a PR, tested a feature, and helped someone else in the
 [Slack](https://slack.linkerd.io) — the Linkerd community is awesome!
 
 Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](/releases/) will already have seen these these features
+[weekly edge releases](/releases/) will already have seen these features
 in action. Either way, you can download the stable 2.2 release by running:
 
 ```bash
