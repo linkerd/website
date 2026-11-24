@@ -212,7 +212,7 @@ In this post, we've shown how to enable per-route (aka per-path) metrics for a
 service by using a new feature in Linkerd 2.1 called _service profiles_. By
 giving Linkerd a little information about the routes that your service expects,
 you can move beyond "my service is failing" to "my service is mostly fine except
-this one this particular call, which is is failing"—a huge step forward in
+this one this particular call, which is failing"—a huge step forward in
 runtime debugging.
 
 Service profiles aren't just for route-based metrics. They will also serve as

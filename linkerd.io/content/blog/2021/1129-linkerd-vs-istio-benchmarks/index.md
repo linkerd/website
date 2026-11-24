@@ -35,7 +35,7 @@ Read on for more!
 
 In 2019, Kinvolk released
 [public benchmark numbers comparing Linkerd to Istio](/2019/05/18/linkerd-benchmarks/).
-This effort not only showed that that Linkerd was dramatically faster and
+This effort not only showed that Linkerd was dramatically faster and
 lighter than Istio, it produced an
 [open source service mesh benchmarking harness](https://github.com/kinvolk/service-mesh-benchmark)
 so that anyone could reproduce the results. This harness mimicked "real life"

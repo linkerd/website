@@ -16,7 +16,7 @@ auto-injection, single namespace installs, and a high-availability mode for the
 control plane.
 
 Those of you who have been tracking the 2.x branch via our
-[weekly edge releases](/releases/) will already have seen these these features
+[weekly edge releases](/releases/) will already have seen these features
 in action. For the rest of you, you can download the stable 2.1 release by
 running:
 
