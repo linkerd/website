@@ -381,7 +381,7 @@ You'll notice that the `-o wide` flag has added some columns to the `routes`
 view. These show the difference between `EFFECTIVE_SUCCESS` and
 `ACTUAL_SUCCESS`. The difference between these two show how well retries are
 working. `EFFECTIVE_RPS` and `ACTUAL_RPS` show how many requests are being sent
-to the destination service and and how many are being received by the client's
+to the destination service and how many are being received by the client's
 Linkerd proxy.
 
 With retries automatically happening now, success rate looks great but the p95

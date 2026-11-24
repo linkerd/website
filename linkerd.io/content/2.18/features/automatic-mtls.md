@@ -133,7 +133,7 @@ container within its pod, it looks up that destination with the Linkerd control
 plane. If it's in the Kubernetes cluster, the control plane provides the proxy
 with the destination's endpoint addresses, along with metadata including an
 identity name. When the proxy connects to the destination, it initiates a TLS
-handshake and verifies that that the destination proxy's certificate is signed
+handshake and verifies that the destination proxy's certificate is signed
 by the trust anchor and contains the expected identity.
 
 ## TLS protocol parameters
