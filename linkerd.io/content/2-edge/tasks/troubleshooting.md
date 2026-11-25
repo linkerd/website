@@ -2027,7 +2027,7 @@ Example failure:
 ```
 
 This warning indicates that the listed pods have the
-[`deny` default inbound policy](../features/server-policy/#policy-annotations),
+[`deny` default inbound policy](../features/server-policy/#default-policies),
 which may prevent the `linkerd-viz` Prometheus instance from scraping the data
 plane proxies in those pods. If Prometheus cannot scrape a data plane pod,
 `linkerd viz` commands targeting that pod will return no data.

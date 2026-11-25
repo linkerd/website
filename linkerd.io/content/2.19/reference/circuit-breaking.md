@@ -157,9 +157,9 @@ configure parameters for the consecutive-failures failure accrual policy:
 [circuit-breaker]: https://www.martinfowler.com/bliki/CircuitBreaker.html
 [503 Service Unavailable]:
   https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503
-[metric]: proxy-metrics/#outbound-xroute-metrics
+[metric]: proxy-metrics/#endpoint-metrics
 [5xx server error]:
   https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses
 [exp-backoff]:
   https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
-[outbound]: architecture/#meshed-conncections
+[outbound]: architecture/#meshed-connections
