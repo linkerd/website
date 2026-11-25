@@ -57,7 +57,7 @@ use the name `my-service.prod.svc.cluster.local` for the ServiceProfile.
 Note that at present, you cannot view statistics gathered for routes in this
 ServiceProfile in the web dashboard. You can get the statistics using the CLI.
 
-For a complete demo walkthrough, check out the [books](books/#service-profiles)
+For a complete demo walkthrough, check out the [books](books/)
 demo.
 
 There are a couple different ways to use `linkerd profile` to create service
