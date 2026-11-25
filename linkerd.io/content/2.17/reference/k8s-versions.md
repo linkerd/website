@@ -25,16 +25,21 @@ chart below as these situations arise.
 | `2.12`          | `1.21`                     | `1.24`                     |
 | `2.13`          | `1.21`                     | `1.28`                     |
 | `2.14`          | `1.21`                     | `1.28`                     |
-| `2.15`          | `1.22`                     | `1.29`                     |
-| `2.16`          | `1.22`                     | `1.29`                     |
-| `2.17`          | `1.22`                     | `1.31`                     |
+| `2.15`          | `1.22`                     | `1.31`                     |
+| `2.16`          | `1.22`                     | `1.31`                     |
+| `2.17`          | `1.22`                     | `1.32`                     |
 
 {{< /keyval >}}
 
-Note that Linkerd will almost never change the supported Kubernetes version in a
-minor release, which is why the table above only lists major versions. One known
-exception: Linkerd 2.11.0 supported Kubernetes 1.16, but 2.11.1 and later
-required Kubernetes 1.17 as shown in the table above.
+Note that Linkerd will almost never change the minimum supported Kubernetes
+version in a minor release, which is why the table above only lists major
+versions. One known exception: Linkerd 2.11.0 supported Kubernetes 1.16, but
+2.11.1 and later required Kubernetes 1.17 as shown in the table above.
+
+The maximum supported Kubernetes version, however, can increase in a minor
+release as support for newer Kubernetes versions is added. Support for the
+maximum version shown above may require a later minor release of that Linkerd
+version, so check the release notes of your Linkerd distribution.
 
 ## Edge Releases
 
