@@ -253,6 +253,53 @@ connection closes (`tcp_close_total`):
 - `classification`: `success` if the connection terminated cleanly, `failure` if
   the connection closed due to a connection failure.
 
+## Protocol Detection Metrics
+
+When the proxy doesn't know ahead of time which protocol a connection uses, it
+reads the first bytes of the connection to decide whether it's HTTP. See
+[protocol detection](../features/protocol-detection.md) for details. The
+following metrics give visibility into how that detection is going:
+
+- `inbound_tcp_detect_http_results_total`: A counter of HTTP protocol detection
+  results for inbound connections, labeled by `result`.
+- `inbound_tcp_detect_http_duration_seconds`: A histogram of the time taken to
+  detect the protocol of inbound connections. Its buckets are intentionally
+  coarse (1ms and 100ms).
+- `outbound_tcp_detect_http_results_total`: A counter of HTTP protocol detection
+  results for outbound connections, labeled by `result`.
+- `outbound_tcp_detect_http_duration_seconds`: A histogram of the time taken to
+  detect the protocol of outbound connections, with the same buckets as the
+  inbound histogram.
+- `outbound_tcp_protocol_connections_total`: A counter of outbound TCP
+  connections, labeled by the `protocol` the proxy was configured to use for the
+  connection's destination by service discovery.
+
+### Protocol Detection Labels
+
+The `*_tcp_detect_http_results_total` counters have a `result` label with one
+of the following values:
+
+- `http/1`: The connection was detected as HTTP/1.
+- `http/2`: The connection was detected as HTTP/2.
+- `not_http`: The client sent data that isn't HTTP, so the connection is
+  handled as opaque TCP.
+- `read_timeout`: The proxy didn't receive enough data to make a decision
+  before the detection timeout expired.
+- `error`: Detection failed with an I/O error, for example because the client
+  closed the connection before sending any data.
+
+The `outbound_tcp_protocol_connections_total` counter has a `protocol` label
+with one of the following values: `http/1`, `http/2`, `detect` (the proxy
+performs protocol detection), `opaq` (the connection is treated as opaque TCP),
+or `tls` (the connection is proxied as TLS without being terminated).
+
+Inbound protocol detection metrics also carry the labels of the `Server` that
+the connection was matched to: `srv_group`, `srv_kind`, `srv_name` and
+`srv_port`. Outbound protocol detection and protocol connection metrics carry
+the labels of the parent resource that the destination was resolved to
+(usually a `Service`): `parent_group`, `parent_kind`, `parent_namespace`,
+`parent_name`, `parent_port` and `parent_section_name`.
+
 ## Identity Metrics
 
 - `identity_cert_expiration_timestamp_seconds`: A gauge of the time when the
