@@ -81,9 +81,6 @@ proxy:
       request: 100m
 ```
 
-When only a request is specified, its value is used to configure the proxy's
-runtime (by rounding up to the next whole number).
-
 Alternatively, a global default CPU limit can be configured in the control-plane
 helm chart:
 
@@ -94,11 +91,12 @@ proxy:
       limit: 2000m
 ```
 
-Similarly, this value controls the proxy's runtime configuration (by rounding up
-to the next whole number).
-
-When both values are specified, the request is used to influence the scheduler
-and the limit is used to configure the proxy's runtime:
+Unlike the annotations described below, these Helm values only set the proxy
+container's resources: they don't change the number of runtime workers, and a
+proxy configured this way still runs a single worker. Configure the runtime
+alongside them with `proxy.runtime.workers`, rounding up to whole cores. The
+`minimum` should be at least the CPU request and the `maximum` should match the
+CPU limit:
 
 ```yaml
 proxy:
@@ -106,6 +104,10 @@ proxy:
     cpu:
       request: 100m
       limit: 2000m
+  runtime:
+    workers:
+      minimum: 1
+      maximum: 2
 ```
 
 ### Overriding Proxy CPU Requests and Limits Using Annotations
